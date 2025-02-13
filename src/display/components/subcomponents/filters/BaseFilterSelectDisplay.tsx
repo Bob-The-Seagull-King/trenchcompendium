@@ -82,8 +82,8 @@ const BaseFilterSelectDisplay = (prop: any) => {
 
             <Modal data-theme={theme} show={show} contentClassName="basestructure colordefault" dialogClassName="" size="lg" onHide={handleClose} keyboard={true}  centered>
                 
-                <h1 className={'titleShape titlebody backgrounddefault'}>Select Filters</h1>
-                <Modal.Body className="backgroundOffWhite">
+                <h1 className={'titleShape titlebody font-default backgrounddefault'}>Select Filters</h1>
+                <Modal.Body className="backgroundOffWhite font-default">
                     <div className="row p-3 overflow-auto flex-grow-1">
                         <div className="height70">
                             {DisplayPage.returnFilterSelect(FilterManager, RunUpdate, handleClose)}

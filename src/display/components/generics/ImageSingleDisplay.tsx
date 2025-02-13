@@ -30,7 +30,7 @@ const ImageSingleDisplay = (props: any) => {
           <Image src={ObjectImages.Src} thumbnail fluid  onClick={handleShow}/>
           
           {ObjectImages.Caption.length > 0 &&
-            <div style={{padding:"1rem", justifyContent:"center",paddingBottom:"0rem"}}>
+            <div className="font-default" style={{padding:"1rem", justifyContent:"center",paddingBottom:"0rem"}}>
             <p style={{justifyContent:"center",textAlign:"center"}}>{ObjectImages.Caption}</p>
           </div>}
           </div>

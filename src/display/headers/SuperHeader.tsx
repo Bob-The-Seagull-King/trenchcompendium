@@ -53,7 +53,12 @@ const SuperHeader: React.FC = () => {
                     <Route path={ROUTES.HOME_ROUTE} element={<MenuHeader />} />
                 </Routes>
             </div>
-            <div style={{height:stateheight}} className="backgroundOffWhite"/>
+                <Routes>
+                    <Route path={ROUTES.COMPENDIUM_ROUTE}  element={
+            <div style={{height:stateheight}} className="backgroundOfferWhite"/>} />
+                    <Route path={ROUTES.TOOLS_ROUTE} element={
+            <div style={{height:stateheight}} className="backgroundOfferWhite"/>} />
+                </Routes>
             </div>
         </ErrorBoundary>
     )

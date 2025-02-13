@@ -1,8 +1,8 @@
 // Palletes
 
 :root {
-  --colour_default_main: #f08d2d;
-  --colour_default_secondary: #ca6806;
+  --colour_default_main: #BE2D26;
+  --colour_default_secondary: #D89C9C;
 
   --colour_red_main: #EE220C;
   --colour_green_main: #61D836;
@@ -24,8 +24,8 @@
 }
 
 [data-theme='light'] {
-  --colour_default_main: #f08d2d;
-  --colour_default_secondary: #ca6806;
+  --colour_default_main: #BE2D26;
+  --colour_default_secondary: #D89C9C;
 
   --colour_red_main: #EE220C;
   --colour_green_main: #61D836;
@@ -52,8 +52,8 @@
 }
 
 [data-theme='dark'] {
-  --colour_default_main: #a35d18;
-  --colour_default_secondary: #ca6806;
+  --colour_default_main: #BE2D26;
+  --colour_default_secondary: #790000;
 
   --colour_red_main: #EE220C;
   --colour_green_main: #61D836;
@@ -83,7 +83,7 @@
 // Web Background
   
 .backgroundBaseColour {
-  background-color: var(--colour_offwhite);
+  background-color: var(--colour_offerwhite);
   min-height: 100vh;
   height: 100%;
   color: var(--colour_basic_text);
@@ -153,6 +153,10 @@ Sets of Colours
 .backgroundOffWhite { background-color: var(--colour_offwhite) !important;  }
 .colorOffWhite { color: var(--colour_offwhite) !important;  }
 .borderOffWhite { border-color: var(--colour_offwhite) !important;  }
+
+.backgroundOfferWhite { background-color: var(--colour_offerwhite) !important;  }
+.colorOfferWhite { color: var(--colour_offerwhite) !important;  }
+.borderOfferWhite { border-color: var(--colour_offerwhite) !important;  }
 
 // White
 .backgroundWhite { background-color: var(--colour_white) !important;  }

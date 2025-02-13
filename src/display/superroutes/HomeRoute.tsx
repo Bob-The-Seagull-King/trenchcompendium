@@ -14,7 +14,7 @@ import logo from '../../resources/images/compendium.png'
 // Font Awesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faList } from '@fortawesome/free-solid-svg-icons'
-import { faFileLines } from '@fortawesome/free-solid-svg-icons'
+import { faFileLines, faCoins, faCross } from '@fortawesome/free-solid-svg-icons'
 
 // TEST
 import { TestStaticFeature } from '../../classes/feature/teststatic/TestStaticFeature';
@@ -73,18 +73,19 @@ const HomeRoute: React.FC = () => {
     return (
         
         <ErrorBoundary fallback={<div>Something went wrong with HomeRoute.tsx</div>}>
-        <div className="backgroundBaseColour" data-theme={theme}>
+        <div className="backgroundBaseColour font-default" data-theme={theme}>
         <div>
             <div className="row justify-content-center m-0 p-0">
-                <div className="col-lg-7 col-md-12 col-sm-12 col-xs-12 col-12">
+                <div className="col-lg-10 col-md-12 col-sm-12 col-xs-12 col-12">
                     <div className="row">
+                    <div className="verticalspacerbig"/>
                         <img src={logo} />
                     </div>
                     <div className='row'><div className='col'><br/></div></div>
                     <div className="row">
                         <div className="separator"><h3 className="complextext">Content</h3></div>
                     </div>
-                    <div className="row row-cols-lg-2 row-cols-md-2 row-cols-sx-1 row-cols-xs-1 row-cols-1">
+                    <div className="row row-cols-lg-3 row-cols-md-3 row-cols-sx-1 row-cols-xs-1 row-cols-1">
                         <div className="col softpad">
                             <div className="basestructure pageaccessbox borderstyler subborderdefault hovermouse" onClick={() => NavigateHome("compendium/glossary/")}>
                                 <FontAwesomeIcon icon={faList} className="pageaccestext"/>
@@ -114,6 +115,27 @@ const HomeRoute: React.FC = () => {
                                 </h1>
                             </div>
                         </div>
+                    </div>
+                    <div className="row">
+                        <div className="separator"><h3 className="complextext">Content</h3></div>
+                    </div>
+                    <div className="row row-cols-lg-2 row-cols-md-2 row-cols-sx-1 row-cols-xs-1 row-cols-1">
+                    <div className="col mb-2">
+                                <div className="pageaccessbox borderstyler subborderdefault hovermouse" onClick={()=>window.open('https://www.trenchcrusade.com/','_blank', 'rel=noopener noreferrer')}>
+                                    <FontAwesomeIcon icon={faCross} className="pageaccestext"/>
+                                    <h1 className="pageaccestext">
+                                        OFFICIAL WEBSITE
+                                    </h1>
+                                </div>
+                            </div>
+                            <div className="col mb-2">
+                                <div className="pageaccessbox borderstyler subborderdefault hovermouse" onClick={()=>window.open('https://www.patreon.com/bobtheseagullking/','_blank', 'rel=noopener noreferrer')}>
+                                    <FontAwesomeIcon icon={faCoins} className="pageaccestext"/>
+                                    <h1 className="pageaccestext">
+                                        SUPPORT THE APP
+                                    </h1>
+                                </div>
+                            </div>
                     </div>
                     <div className="row">
                         <div className="separator"></div>

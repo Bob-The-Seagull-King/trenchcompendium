@@ -30,7 +30,7 @@ const CompendiumRoute: React.FC<IControllerProp> = (prop) => {
     // Return result -----------------------------
     return (
         <ErrorBoundary fallback={<div>Something went wrong with CompendiumRoute.tsx</div>}>
-            <div className="backgroundBaseColour" data-theme={theme}>
+            <div className="backgroundBaseColour font-default" data-theme={theme}>
             <Routes>
                 <Route path={ROUTES.COMPENDIUM_GLOSSARY_ROUTE} element={<BaseDisplayCompendium controller={prop.controller.GlossaryCollectionController}/>} />
             </Routes>

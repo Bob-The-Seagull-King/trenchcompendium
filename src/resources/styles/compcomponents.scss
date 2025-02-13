@@ -36,7 +36,7 @@
 }
 
 .filterbuttonitem {
-    border-radius: 0.4em 0.4em 0.4em 0.4em !important;
+    border-radius: 0em 0em 0em 0em !important;
     color: var(--colour_white);
     font-weight: 600 ;
     font-size: 1.25rem;
@@ -50,17 +50,17 @@
     justify-content: center;
     display: flex; /* make element size relative to content */
     align-items: center;
-    border-radius: 0.2rem;
+    border-radius: 0rem;
     height: 100%;
     width: fit-content;
     padding-left: 0.5rem;
     padding-right: 0.5rem;
-}
+} 
 
 .abilityStructure {
     border-radius: 0em 0em 0em 0rem;
     width: 100%;
-    background-color: var(--colour_offwhite);
+    background-color: var(--colour_offerwhite);
 }
 
 .abilityInternalStructure {
@@ -73,13 +73,13 @@
     justify-content: center;
     display: flex; /* make element size relative to content */
     align-items: center;
-    border-radius: 0.2rem;
+    border-radius: 0rem;
     padding: 0.5rem;
 }
 
 .emptyboxStructure {
     width: 100%;
-    border-radius: 0.25rem;
+    border-radius: 0rem;
     padding:20%;
     padding-top: 35%;
     padding-bottom: 35%;
@@ -89,7 +89,7 @@
 // Body Elements ----------------------------------------------------
 
 .popupBody {
-    background: var(--colour_offwhite);
+    background: var(--colour_offerwhite);
     width: fit-content;
 }
 
@@ -113,7 +113,7 @@
 // Bootstrap overrides ----------------------------------------------- 
 
 .table td:nth-child(odd), .table th:nth-child(odd) {
-    background-color: var(--colour_offwhite);
+    background-color: var(--colour_offerwhite);
 }
     
 .table td:nth-child(even), .table th:nth-child(even) {
@@ -121,7 +121,7 @@
 }
 
 .table tr:nth-child(odd) {
-    background-color: var(--colour_offwhite);
+    background-color: var(--colour_offerwhite);
 }
 
 .table tr:nth-child(even) {

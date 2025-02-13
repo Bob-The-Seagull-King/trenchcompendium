@@ -28,10 +28,12 @@ const App: React.FC = () => {
     const mastercontroller = new ControllerController();
     const toolcontroller = new ToolsController();
 
+
     return (
+        <div className="font-default">
         <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}>
-                <Router>
+                <Router >
                     <SuperHeader />
                     <Routes>
                         <Route path={ROUTES.COMPENDIUM_ROUTE} element={<CompendiumRoute controller={mastercontroller} />} />
@@ -41,6 +43,7 @@ const App: React.FC = () => {
                 </Router>
             </PersistGate>
         </Provider>
+        </div>
     )
 }
 

@@ -31,7 +31,7 @@ const GenericPanel = (prop: any) => {
             </div>
             <Modal data-theme={theme}  show={show}  contentClassName="basestructure abilityStructure borderstyler colordefault" dialogClassName="" onHide={handleClose} keyboard={true}  centered>
                 
-                <h1 className={'titleShape titlebody backgrounddefault'}>
+                <h1 className={'titleShape titlebody backgrounddefault font-default'}>
                     {panelType.id}
                     <div className="row float-end">
                         <div className='col-12 float-end'>

@@ -59,6 +59,7 @@ margin-left: .25em;
   color: var(--colour_white);
   font-size: 200%;
   font-weight: bolder;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .contentpacklabel {
@@ -89,6 +90,7 @@ margin-left: .25em;
 
 .packtitlebase {
   margin: 0.25em;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 // Text Alignment ----------------------------------------------------
@@ -121,7 +123,7 @@ margin-left: .25em;
 }
 
 .complextext {
-  font-family: "Libre Baskerville"
+  font-family: "Libre Baskerville" !important;
 }
 
 .bodytext {
@@ -137,7 +139,8 @@ margin-left: .25em;
 
 .packtitlelarge {
   font-size: 1.75rem;
-  font-weight: 700;
+  font-weight: 700;  
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
 }
 
 .packtitlesmall {

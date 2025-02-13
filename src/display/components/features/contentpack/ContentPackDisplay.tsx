@@ -180,7 +180,7 @@ const ContentPackDisplay = (props: any) => {
             <Modal data-theme={theme}  size="lg" show={show}  contentClassName="overcomeBackground" dialogClassName="" onHide={handleClose} keyboard={true}  centered>    
                 
                 <Modal.Body >
-                <div className={'basestructure abilityStructure subborderstyler borderdefault'}>
+                <div className={'basestructure abilityStructure subborderstyler borderdefault font-default'}>
                     <h1 className={'titleShape titlebody backgrounddefault'}>
                     {PackItem.Name}
                         

@@ -38,7 +38,7 @@ const GenericPopup = (props: any) => {
           <Modal data-theme={theme} show={show} size="lg" contentClassName="overcomeBackground" dialogClassName=""  onHide={handleClose} keyboard={true}  centered>
               <Modal.Body > 
                 
-                <div className={'basestructure abilityStructure borderstyler ' + DisplayType + 'border'+getColour(DisplayColour)}>
+                <div className={'basestructure font-default abilityStructure borderstyler ' + DisplayType + 'border'+getColour(DisplayColour)}>
                     <h1 className={'titleShape titlebody ' + DisplayType + 'background'+getColour(DisplayColour)}>
                         {DisplayName || ""}
                         
