@@ -1,0 +1,136 @@
+@import './_variables';
+
+// Spacing and Padding --------------------------------------
+
+.addonbox {
+    padding: 1rem;
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+}
+
+.no-margin
+{
+    margin: 0px !important;
+}
+
+.no-padding
+{
+    padding: 0px !important;
+}
+
+.verticalspacerbig {
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.tagItem {
+    padding-right: 1rem;
+    margin: 0rem;
+}
+
+.small-side-margin {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}
+
+.tagboxpad {
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+}
+
+.tagpad {
+    margin-left: 0.5rem;
+}
+
+.quartermargin {
+    margin : 0.25rem;
+}
+
+.droppaddingleft {
+    padding-left: 0 !important;
+}
+
+.softpad {
+  padding: 0.25em !important
+}
+
+.floatingButton {
+    margin: 1rem;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    width: fit-content;
+}
+
+.titleShape {
+  padding: 0%;
+  margin: 0%;
+  text-align: left;
+}
+
+// Alignment and Flex -----------------------------------------
+
+.centerPosition {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.justify-center {    
+    justify-content: center;
+}
+
+.packvrbox {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.filterbox {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.tagboxtitle {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.topbarCompendiumStructure {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.contentpackcontainer {
+    justify-content: space-between;
+}
+
+.contentpackbasecontainer {    
+    align-items: center;
+    align-content: center;
+    border-radius: 0rem;
+    width: 100%;
+    position: relative;
+    padding: 0.75rem;
+}
+
+.contentsubnamecontainer {
+    display: flex; /* make element size relative to content */
+    align-items: center;
+    align-content: center;
+    width: fit-content;
+}
+
+.topbarStructure {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.flex-with-space {
+    display: flex;
+    justify-content: space-between;
+}

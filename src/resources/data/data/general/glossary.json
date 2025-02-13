@@ -1,0 +1,37 @@
+[
+    {
+        "id": "gl_default",
+        "source": "core",
+        "tags": {
+            "category" : "default"
+        },
+        "name": "Default",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "This is a default test item."
+            },
+            {
+            "tags": {"desc_type" : "table", "id_val" : "tb_default"}
+            }
+        ]
+    },
+    {
+        "id": "gl_defaulttest",
+        "source": "core",
+        "tags": {
+            "category" : "default"
+        },
+        "name": "DefaultTest",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "This is a default test item.",
+            "glossary": [{"val": "default", "id": "gl_default"}]
+            },
+            {
+            "tags": {"desc_type" : "table", "id_val" : "tb_default"}
+            }
+        ]
+    }
+]

@@ -1,0 +1,78 @@
+[
+    {
+        "id": "ts_testitem_a",
+        "source": "core",
+        "tags": {
+            "category" : "default"
+        },
+        "name": "TestA",
+        "teststatic" : 1,
+        "contextdata": {"option_search_viable" : {}},
+        "options": [
+            {
+                "ref_id" : "ot_testitemset_a",
+                "name" : "TestOptionSet",
+                "description" : [],
+                "category" : "type",
+                "type" : "text",
+                "strictness" : "strict",
+                "predefined_options" : ["Preset_A"],
+                "option_context" : {"basic_option_default":{}},
+                "data_search" : {
+                    "searchtype": "file",
+                    "searchparam": {
+                        "type": "glossary",
+                        "data": []
+                    }
+                }
+            },
+            {
+                "ref_id" : "ot_testitemset_b",
+                "name" : "TestOptionSet",
+                "description" : [],
+                "category" : "contextobject",
+                "parent_level" : 3,
+                "question_name" : "optionSearchEvent",
+                "question" : {
+                    "classes": ["TestBasicFeature"],
+                    "questions": [
+                        {
+                            
+                            "tagq": { "category" : "default"},
+                            "propertyq": {"teststatic":1}
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "id": "ts_testitem_b",
+        "source": "core",
+        "tags": {
+            "category" : "default"
+        },
+        "name": "TestB",
+        "teststatic" : 2,
+        "contextdata": {"option_search_viable" : {}},
+        "options": [
+            {
+                "ref_id" : "ot_testitemset_b",
+                "name" : "TestOptionSet",
+                "description" : [],
+                "category" : "contextobject",
+                "parent_level" : 3,
+                "question_name" : "optionSearchEvent",
+                "question" : {
+                    "classes": ["TestStaticInContextFeature"],
+                    "questions": [
+                        {
+                            
+                            "tagq": { "category" : "default"}
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+]
