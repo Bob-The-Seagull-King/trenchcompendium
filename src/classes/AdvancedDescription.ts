@@ -32,16 +32,13 @@ class AdvancedDescription extends DescriptionItem {
     }
 
     public LoadData() {
-        console.log(this.Tags)
         if (this.Tags['desc_type']) {
 
             // Build Table
             if (this.Tags['desc_type'] == 'table') {
                 const default_val = this.Tags['id_val'];
-                console.log(default_val)
                 if ((default_val != null) && (default_val != undefined) && (typeof default_val === 'string')) {
                     const NewTable = TableFactory.CreateNewTable(default_val);
-                    console.log(NewTable)
                     this.DisplayData = NewTable;
                 }
             }

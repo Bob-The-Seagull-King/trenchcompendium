@@ -15,6 +15,7 @@ import AdvancedDescriptionItemDisplay from '../display/components/subcomponents/
 import GlossaryDisplay from '../display/components/features/glossary/GlossaryDisplay';
 import { makestringpresentable } from './functions';
 import { ObjectTag } from '../classes/CompendiumItem';
+import { GlossaryRuleFactory } from '../factories/features/GlossaryFactory';
 
 /**
  * Takes a string, and an array of string:glossary_id pairs, and turns
@@ -71,8 +72,7 @@ function ArrayItemIntoHtml(content: string, delim: any) {
         let i = 0;
         for (i = 0; i < delim.length; i ++) {
             if (content == delim[i].val) {
-                const GlossaryData: IGlossaryRule = Requester.MakeRequest( {searchtype: "id", searchparam: {type: "glossary", id: delim[i].id}} ) as IGlossaryRule                
-                const GlossaryObject = new GlossaryRule(GlossaryData)
+                const GlossaryObject = GlossaryRuleFactory.CreateNewGlossaryRule(delim[i].id)
                 return (<GenericHover d_colour={'default'} d_name={content} titlename={GlossaryObject.Name} d_type={""} d_method={() => <GlossaryDisplay data={GlossaryObject} />}/>)
             }
         }
