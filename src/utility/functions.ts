@@ -232,3 +232,21 @@ export function ImageBuilder(source_obj : CompendiumItem) {
 
     return ImageList;
 }
+
+
+export function MergeLists(add_lists : string[][], remove_lists : string[][]) {
+    let FinalArray : string[] = []
+
+    add_lists.forEach( _list => {
+        FinalArray = FinalArray.concat(_list)
+    })
+
+    remove_lists.forEach( _list => {
+        FinalArray = FinalArray.filter(item => !(_list.includes(item)))
+    })
+    
+    FinalArray = FinalArray.filter((item, index) => FinalArray.indexOf(item) === index);
+    FinalArray.sort((one, two) => (one > two ? -1 : 1));
+
+    return FinalArray;
+}

@@ -6,6 +6,8 @@ import { IGlossaryRule, GlossaryRule } from "../../feature/glossary/Glossary";
 import { GlossaryRuleFactory } from "../../../factories/features/GlossaryFactory";
 import { IKeyword } from "../../feature/glossary/Keyword";
 import { KeywordFactory } from "../../../factories/features/KeywordFactory";
+import { IModel } from "../../feature/model/Model";
+import { ModelFactory } from "../../../factories/features/ModelFactory";
 
 export interface CollectionType {
     searchId      : string,
@@ -44,6 +46,22 @@ export const CollectionDataDex : CollectionDataTable = {
             model.dataresults.sort(byPropertiesOf<IKeyword>(["name", "id"]))
             for (i = 0; i < model.dataresults.length; i++) {
                 const summonNew = KeywordFactory.CreateKeyword(model.dataresults[i], null);
+                const ItemNew = new ViewTableItem(summonNew, getColour('default'));
+                model.itemcollection.push(ItemNew);
+            }
+        }
+    },
+    model: {
+        searchId: 'model', 
+        pageName: 'model',
+        sort: ["name", "id"],
+        postSearch(model : ViewCollectionsModel) {
+            model.CleanupItems();
+            model.CleanupCollection();
+            let i = 0;
+            model.dataresults.sort(byPropertiesOf<IModel>(["name", "id"]))
+            for (i = 0; i < model.dataresults.length; i++) {
+                const summonNew = ModelFactory.CreateModelCollection(model.dataresults[i], null);
                 const ItemNew = new ViewTableItem(summonNew, getColour('default'));
                 model.itemcollection.push(ItemNew);
             }

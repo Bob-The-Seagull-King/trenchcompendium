@@ -78,6 +78,15 @@ class DataResponder {
             case "keyword": {
                 return RelevantSet.keyworddata.concat(data)
             }
+            case "ability": {
+                return RelevantSet.abilitydata.concat(data)
+            }
+            case "model": {
+                return RelevantSet.modeldata.concat(data)
+            }
+            case "modelvariant": {
+                return RelevantSet.modelvariantdata.concat(data)
+            }
             case "testdynamicfeature": {
                 return RelevantSet.testdynamicdata.concat(data)
             }
@@ -104,6 +113,7 @@ class DataResponder {
      */
     public static GetResponse(request: any, search_type : string, language_set : string) {
         request.language = language_set;
+        
         switch(search_type) {
             case "id": {
                 return DataResponder.GetSingleEntry(request);
@@ -272,6 +282,7 @@ class DataResponder {
     public static ValidateBySearch(term: IDataRequestSearchTerm, data: any) {
         if (!term.istag) {
             const dynamicKey = term.item as keyof (typeof data);
+            
             let isvalid = false;
             if (term.isrange) {
                 if (data[dynamicKey] != undefined) {

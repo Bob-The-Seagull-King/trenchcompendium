@@ -9,14 +9,17 @@ class ControllerController {
    
     GlossaryCollectionController;
     KeywordCollectionController;
+    ModelCollectionController;
 
     /**
      * Initializes all controllers, this also means all searching
      * is done at once on the page load.
      */
     constructor () {
-        this.GlossaryCollectionController = new CollectionsListPage('glossary')
-        this.KeywordCollectionController = new CollectionsListPage('keyword')
+        this.GlossaryCollectionController = new CollectionsListPage('glossary');
+        this.KeywordCollectionController = new CollectionsListPage('keyword');
+        this.ModelCollectionController = new CollectionsListPage('model');
+        this.ModelCollectionController.initCollection();
     }
 }
 

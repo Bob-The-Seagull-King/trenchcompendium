@@ -2,6 +2,9 @@ import { TableBody } from "../feature/table/tablebody";
 import { CompendiumItem } from "../CompendiumItem";
 import { GlossaryRule } from "../feature/glossary/Glossary"
 import { Keyword } from "../feature/glossary/Keyword";
+import { ModelCollection } from "../feature/model/ModelCollection";
+import { Model } from "../feature/model/Model";
+import { Ability } from "../feature/ability/Ability";
 
 /**
  * Contains the Controller objects for 'Tools' pages.
@@ -15,6 +18,9 @@ class StaticDataCache {
     public GlossaryCache :  {[tokenid: string]: GlossaryRule} = {};
     public TableCache :  {[tokenid: string]: TableBody} = {};
     public KeywordCache :  {[tokenid: string]: Keyword} = {};
+    public ModelCollectionCache :  {[tokenid: string]: ModelCollection} = {};
+    public ModelCache :  {[tokenid: string]: Model} = {};
+    public AbilityCache :  {[tokenid: string]: Ability} = {};
 
     public CheckID(cachename : string, id_val : string) {
         switch (cachename) {
@@ -24,6 +30,12 @@ class StaticDataCache {
                 return (this.TableCache[id_val] == null)
             case 'keyword': 
                 return (this.KeywordCache[id_val] == null)
+            case 'modelcollection': 
+                return (this.ModelCollectionCache[id_val] == null)
+            case 'model': 
+                return (this.ModelCache[id_val] == null)
+            case 'ability': 
+                return (this.AbilityCache[id_val] == null)
             default: return false;
         }
     }
@@ -43,6 +55,21 @@ class StaticDataCache {
             case 'keyword': 
                 if (this.KeywordCache[obj.ID] == null) {
                     this.KeywordCache[obj.ID] = obj as Keyword;
+                }
+                return;
+            case 'modelcollection': 
+                if (this.ModelCollectionCache[obj.ID] == null) {
+                    this.ModelCollectionCache[obj.ID] = obj as ModelCollection;
+                }
+                return;
+            case 'model':   
+                if (this.ModelCache[obj.ID] == null) {
+                    this.ModelCache[obj.ID] = obj as Model;
+                }
+                return;
+            case 'ability':   
+                if (this.AbilityCache[obj.ID] == null) {
+                    this.AbilityCache[obj.ID] = obj as Ability;
                 }
                 return;
             default: return;

@@ -1,0 +1,30 @@
+[
+    {
+        "id": "ab_countercharge",
+        "name": "Counter-Charge",
+        "source": "core",
+        "tags": {"trait": true, "modifier": true},
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "If the first ACTION a Janissary makes during their Activation is a Charge, they can add +1 DICE to their subsequent Melee Attack ACTIONS during this Activation.",
+                "glossary": [{"val": "ACTIONS", "id": "kw_action"},{"val": "ACTION", "id": "kw_action"},{"val": "+1 DICE", "id": "kw_plusdice"}]
+            }
+        ]
+    },
+    {
+        "id": "ab_whirlingdervishes",
+        "name": "Whirling Dervishes",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The ritual Dance of the Dervishes is hypnotic to witness, and it is as graceful as it is deadly. All Ranged attacks against Dervishes suffer -1 DICE penalty. Dervishes do not suffer the normal -1 DICE to hit for fighting with an Off-Hand weapon.",
+                "glossary": [{"val": "-1 DICE", "id": "kw_minusdice"}]
+            }
+        ]
+    }
+]

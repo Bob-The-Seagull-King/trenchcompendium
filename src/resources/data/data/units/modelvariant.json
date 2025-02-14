@@ -1,0 +1,23 @@
+[
+    {
+        "id": "md_janissaries_mv_dervish",
+        "name": "Dervish",
+        "source": "core",
+        "tags": {},
+        "contextdata": {},
+        "base_id": "md_janissaries",
+        "variant_name": "Alamut",
+        "lore": [     
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Alamut is also a home to a renegade sect of Ismaili Dervishes, warrior monks sworn to poverty and a lethal way of fighting. They accompany the Assassins on their secret missions as an act of piety and payment for their shelter, and their whirling dance of death has been the end of many a disbeliever."
+            }
+        ],
+        "team": "faithful",
+        "stats" : {},
+        "cut_keywords" : ["kw_strong"],
+        "new_keywords" : [],
+        "cut_abilities" : [],
+        "new_abilities" : ["ab_whirlingdervishes"]
+    }
+]

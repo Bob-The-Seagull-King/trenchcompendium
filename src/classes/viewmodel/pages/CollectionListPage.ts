@@ -30,6 +30,7 @@ class CollectionsListPage {
         
             this.Collection.UpdateSearchParams({searchtype: "file", searchparam: {type: this.Collection.CollectionType.searchId}});
             this.Collection.RunSearch();
+            console.log(this.Collection.itemcollection)
         }
     }
 

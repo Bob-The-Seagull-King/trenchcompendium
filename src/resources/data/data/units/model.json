@@ -1,0 +1,35 @@
+[
+    {
+        "id": "md_janissaries",
+        "name": "Janissary",
+        "source": "core",
+        "tags": {},
+        "contextdata": {},
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Janissaries can be equipped with any weapon, armour and equipment from the Iron Sultanate Armoury.",
+                "glossary": [{"val": "Iron Sultanate", "id": "kw_sultanate"}]
+            }
+        ],
+        "lore": [      
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "The janissaries are the Sultanate’s elite warriors, raised from childhood in the arts of war. Captured during raids upon the desolate northern and eastern marches beyond the Iron Wall, they are subjected to rigorous martial training and indoctrination from an early age. On the battlefield, Janissaries excel at devastating counter-charges, crushing the enemy elite formations and acting as the bodyguard for high-ranking individuals."
+            }
+        ],
+        "team": "faithful",
+        "stats" : {            
+            "movement": 6,
+            "melee": 1,
+            "ranged": 1,
+            "base": [32],
+            "armor": 0,
+            "movetype": 0,
+            "potential": 0,
+            "mercenary": false
+        },
+        "keywords" : ["kw_sultanate","kw_strong"],
+        "abilities" : ["ab_countercharge"]
+    }
+]
