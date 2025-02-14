@@ -11,21 +11,21 @@ interface ModelStatistics {
 export function MergeTwoStats(baseList: ModelStatistics, addonList : ModelStatistics) {
     const MergedList : ModelStatistics = {}
     
-    if (baseList.movement) {MergedList.movement = baseList.movement}
-    if (baseList.melee) {MergedList.melee = baseList.melee}
-    if (baseList.ranged) {MergedList.ranged = baseList.ranged}
-    if (baseList.base) {MergedList.base = baseList.base}
-    if (baseList.armor) {MergedList.armor = baseList.armor}
-    if (baseList.movetype) {MergedList.movetype = baseList.movetype}
-    if (baseList.potential) {MergedList.potential = baseList.potential}
+    if (baseList.movement != undefined) {MergedList.movement = baseList.movement}
+    if (baseList.melee != undefined) {MergedList.melee = baseList.melee}
+    if (baseList.ranged != undefined) {MergedList.ranged = baseList.ranged}
+    if (baseList.base != undefined) {MergedList.base = baseList.base}
+    if (baseList.armor != undefined) {MergedList.armor = baseList.armor}
+    if (baseList.movetype != undefined) {MergedList.movetype = baseList.movetype}
+    if (baseList.potential != undefined) {MergedList.potential = baseList.potential}
     
-    if (addonList.movement) {MergedList.movement = addonList.movement}
-    if (addonList.melee) {MergedList.melee = addonList.melee}
-    if (addonList.ranged) {MergedList.ranged = addonList.ranged}
-    if (addonList.base) {MergedList.base = addonList.base}
-    if (addonList.armor) {MergedList.armor = addonList.armor}
-    if (addonList.movetype) {MergedList.movetype = addonList.movetype}
-    if (addonList.potential) {MergedList.potential = addonList.potential}
+    if (addonList.movement != undefined) {MergedList.movement = addonList.movement}
+    if (addonList.melee != undefined) {MergedList.melee = addonList.melee}
+    if (addonList.ranged != undefined) {MergedList.ranged = addonList.ranged}
+    if (addonList.base != undefined) {MergedList.base = addonList.base}
+    if (addonList.armor != undefined) {MergedList.armor = addonList.armor}
+    if (addonList.movetype != undefined) {MergedList.movetype = addonList.movetype}
+    if (addonList.potential != undefined) {MergedList.potential = addonList.potential}
 
     return MergedList
 }
