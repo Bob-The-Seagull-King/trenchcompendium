@@ -15,7 +15,8 @@ interface IModelUpgradeRelationship {
     cost : number,
     cost_type : number,
     restricted_upgrades : ModelUpgradeRestriction[],
-    warband_limit : number
+    warband_limit : number,
+    faction_mask : string[]
 }
 
 interface ModelUpgradeRestriction {
@@ -25,12 +26,12 @@ interface ModelUpgradeRestriction {
 
 class ModelUpgradeRelationship {
     public ID : string;
-    public ModelSets: Model[] = []
     public UpgradeObject : Upgrade;
     public Cost : number;
     public CostType : number;
     public WarbandLimit : number
     public Retrictions : ModelUpgradeRestriction[]
+    public FactionMask : string[]
     /**
      * Assigns parameters and creates a series of description
      * objects with DescriptionFactory
@@ -43,6 +44,7 @@ class ModelUpgradeRelationship {
         this.CostType = data.cost_type;
         this.WarbandLimit = data.warband_limit;
         this.Retrictions = data.restricted_upgrades;
+        this.FactionMask = data.faction_mask;
         this.UpgradeObject = UpgradeFactory.CreateNewUpgrade(data.upgrade_id, null);
     }
 

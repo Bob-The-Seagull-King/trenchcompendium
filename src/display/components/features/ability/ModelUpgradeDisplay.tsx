@@ -22,7 +22,11 @@ const ModelUpgradeDisplay = (props: any) => {
                     <div className='abilityInternalStructure sidepadsonly'>
                         <div className="row">
                             <span className="colordefault bodytext complextext">
-                                {abilityObject.Cost + " " + getCostType(abilityObject.CostType) + (abilityObject.WarbandLimit != 0? (" " + "(Limit " + abilityObject.WarbandLimit + ")") : "")}
+                                {
+                                    abilityObject.Cost + " " + 
+                                    getCostType(abilityObject.CostType) + 
+                                    (abilityObject.WarbandLimit != 0? (" " + "(Limit " + abilityObject.WarbandLimit + ")") : "") + 
+                                    (abilityObject.FactionMask.length > 0? (" " + "(" + abilityObject.FactionMask.join(" ") + " Only)") : "")}
                             </span>
                         </div>
                         <div className='verticalspacerbig'/>

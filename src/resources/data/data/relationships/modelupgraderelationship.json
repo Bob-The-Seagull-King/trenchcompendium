@@ -7,7 +7,8 @@
         "cost_type": 0,
         "restricted_upgrades": [
         ],
-        "warband_limit": 0
+        "warband_limit": 0,
+        "faction_mask":[]
     },
     {
         "id": "rel_md_up_meleeboost5",
@@ -17,6 +18,7 @@
         "cost_type": 0,
         "restricted_upgrades": [
         ],
-        "warband_limit": 3
+        "warband_limit": 3,
+        "faction_mask":[]
     }
 ]
