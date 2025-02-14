@@ -30,5 +30,37 @@
         },
         "keywords" : ["kw_sultanate","kw_strong"],
         "abilities" : ["ab_countercharge"]
+    },
+    {
+        "id": "md_azeb",
+        "name": "Azeb",
+        "source": "core",
+        "tags": {},
+        "contextdata": {},
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Azebs can be equipped with any weapon, armour and equipment from the Iron Sultanate Armoury.",
+                "glossary": [{"val": "Iron Sultanate", "id": "kw_sultanate"}]
+            }
+        ],
+        "lore": [      
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Azebs are soldiers recruited from the multitude of provinces of the sultanate, where every house in twenty is required to equip and provide a warrior to serve the Prince of Those Who Believe. They are often used by their superiors as light skirmishers to harass and tie down the enemies while the heavier troops close in for the kill."
+            }
+        ],
+        "team": "faithful",
+        "stats" : {            
+            "movement": 6,
+            "melee": -1,
+            "ranged": 0,
+            "base": [25],
+            "armor": 0,
+            "movetype": 0,
+            "potential": 0
+        },
+        "keywords" : ["kw_sultanate"],
+        "abilities" : []
     }
 ]

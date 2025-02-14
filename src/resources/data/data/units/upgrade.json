@@ -1,0 +1,32 @@
+[
+    {
+        "id": "up_skirmisher",
+        "name": "Skirmisher",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {"keyword_mod": {"type": "add", "value": "kw_skirmisher"}},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The model is converted to a SKIRMISHER. Unless engaged in melee, when an enemy model declares a charge against any SKIRMISHER, they can immediately move D3” in any direction they wish (except within 1” of any enemy or out of the battlefield). After this manoeuvre, the charging model is moved as normal. This may lead to the charger being unable to enter melee. This move cannot be taken by a model that is Down.",
+                "glossary": [{"val": "SKIRMISHER", "id": "kw_skirmisher"}]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_meleemight",
+        "name": "Melee Might",
+        "source": "core",
+        "tags": {"trait": true, "modifier": true},
+        "contextdata": {"upgrade_stat": {"stat": "melee", "value": 1}},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The model increases their Melee characteristic by +1 DICE.",
+                "glossary": [{"val": "+1 DICE", "id": "kw_plusdice"}]
+            }
+        ],
+        "options": []
+    }
+]

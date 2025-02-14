@@ -13,6 +13,7 @@ import KeywordDisplay from '../glossary/KeywordDisplay';
 import ItemStat from '../../subcomponents/description/ItemStat';
 import { ModelStatistics } from '../../../../classes/feature/model/ModelStats';
 import { getBaseSize, getMoveType, getPotential } from '../../../../utility/functions';
+import ModelUpgradeDisplay from '../ability/ModelUpgradeDisplay';
 
 const ModelDisplay = (props: any) => {
     const modelcollectionObject: Model = props.data
@@ -70,12 +71,26 @@ const ModelDisplay = (props: any) => {
                 </div>
                 {modelcollectionObject.Abilities.length > 0 &&
                     <>
-                        <div className='separator tagboxpad colordefault'></div>
+                        <div className='separator bodytext tagboxpad colordefault'>Abilities</div>
                         <div className="verticalspacerbig"/>
                         <div className="row">
                             {modelcollectionObject.Abilities.map((item) => ( 
                                 <div key={"model_ability_"+modelcollectionObject.ID+"_ability_id_"+item.ID}>
                                     <GenericDisplay  d_colour={modelcollectionObject.Team} d_name={item.Name} d_type={"sub"} d_method={() => <AbilityDisplay data={item} />}/>
+                                    <div className="verticalspacerbig"/>
+                                </div>
+                            )) /* Abilities */}
+                        </div>
+                    </>
+                }
+                {modelcollectionObject.UpgradeList.length > 0 &&
+                    <>
+                        <div className='separator bodytext tagboxpad colordefault'>Upgrades</div>
+                        <div className="verticalspacerbig"/>
+                        <div className="row">
+                            {modelcollectionObject.UpgradeList.map((item) => ( 
+                                <div key={"model_ability_"+modelcollectionObject.ID+"_ability_id_"+item.ID}>
+                                    <GenericDisplay  d_colour={modelcollectionObject.Team} d_name={item.UpgradeObject.Name} d_type={"sub"} d_method={() => <ModelUpgradeDisplay data={item} />}/>
                                     <div className="verticalspacerbig"/>
                                 </div>
                             )) /* Abilities */}

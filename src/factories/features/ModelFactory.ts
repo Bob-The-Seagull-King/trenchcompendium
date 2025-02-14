@@ -34,6 +34,9 @@ class ModelFactory {
         const cache = StaticDataCache.getInstance();
         const isValid = (cache.CheckID('model', _rule.id))
         if (isValid == false) {
+            if (cache.ModelCache[_rule.id].MyContext == null) {
+                cache.ModelCache[_rule.id].MyContext = parent;
+            }
             return cache.ModelCache[_rule.id];
         }
         const rule = new Model(_rule, parent)
@@ -45,6 +48,9 @@ class ModelFactory {
         const cache = StaticDataCache.getInstance();
         const isValid = (cache.CheckID('model', _val))
         if (isValid == false) {
+            if (cache.ModelCache[_val].MyContext == null) {
+                cache.ModelCache[_val].MyContext = parent;
+            }
             return cache.ModelCache[_val];
         }
         const ruledata = Requester.MakeRequest({searchtype: "id", searchparam: {type: "model", id: _val}}) as IModel

@@ -1,0 +1,22 @@
+[
+    {
+        "id": "rel_md_up_azebskirmisher",
+        "model_id_set": ["md_azeb"],
+        "upgrade_id": "up_skirmisher",
+        "cost": 5,
+        "cost_type": 0,
+        "restricted_upgrades": [
+        ],
+        "warband_limit": 0
+    },
+    {
+        "id": "rel_md_up_meleeboost5",
+        "model_id_set": ["md_azeb_mv_kavass"],
+        "upgrade_id": "up_meleemight",
+        "cost": 5,
+        "cost_type": 0,
+        "restricted_upgrades": [
+        ],
+        "warband_limit": 3
+    }
+]

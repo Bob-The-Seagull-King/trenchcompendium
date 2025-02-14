@@ -87,6 +87,12 @@ class DataResponder {
             case "modelvariant": {
                 return RelevantSet.modelvariantdata.concat(data)
             }
+            case "upgrade": {
+                return RelevantSet.upgradedata.concat(data)
+            }
+            case "modelupgraderelationship": {
+                return RelevantSet.modelupgraderelationship.concat(data)
+            }
             case "testdynamicfeature": {
                 return RelevantSet.testdynamicdata.concat(data)
             }

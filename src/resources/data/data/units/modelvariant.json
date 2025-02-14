@@ -19,5 +19,26 @@
         "keywords" : [],
         "cut_abilities" : [],
         "new_abilities" : ["ab_whirlingdervishes"]
+    },
+    {
+        "id": "md_azeb_mv_kavass",
+        "name": "Kavass",
+        "source": "core",
+        "tags": {},
+        "contextdata": {},
+        "base_id": "md_azeb",
+        "variant_name": "House_Of_Wisdom",
+        "lore": [     
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Many noble Fāris warriors have taken oaths to protect these scholars in their journeys, as well as their own Kavass bodyguards sworn to fight and die in defence of their Masters. Kavass are sworn guardians of the House of Wisdom. "
+            }
+        ],
+        "team": "faithful",
+        "stats" : {},
+        "cut_keywords" : [],
+        "keywords" : [],
+        "cut_abilities" : [],
+        "new_abilities" : []
     }
 ]

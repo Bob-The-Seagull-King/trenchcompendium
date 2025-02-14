@@ -5,6 +5,8 @@ import { Keyword } from "../feature/glossary/Keyword";
 import { ModelCollection } from "../feature/model/ModelCollection";
 import { Model } from "../feature/model/Model";
 import { Ability } from "../feature/ability/Ability";
+import { Upgrade } from "../feature/ability/Upgrade";
+import { ModelUpgradeRelationship } from "../relationship/model/ModelUpgradeRelationship";
 
 /**
  * Contains the Controller objects for 'Tools' pages.
@@ -21,6 +23,8 @@ class StaticDataCache {
     public ModelCollectionCache :  {[tokenid: string]: ModelCollection} = {};
     public ModelCache :  {[tokenid: string]: Model} = {};
     public AbilityCache :  {[tokenid: string]: Ability} = {};
+    public UpgradeCache :  {[tokenid: string]: Upgrade} = {};
+    public ModelUpgradeCache :  {[tokenid: string]: ModelUpgradeRelationship} = {};
 
     public CheckID(cachename : string, id_val : string) {
         switch (cachename) {
@@ -36,11 +40,15 @@ class StaticDataCache {
                 return (this.ModelCache[id_val] == null)
             case 'ability': 
                 return (this.AbilityCache[id_val] == null)
+            case 'upgrade': 
+                return (this.UpgradeCache[id_val] == null)
+            case 'modelupgrade': 
+                return (this.ModelUpgradeCache[id_val] == null)
             default: return false;
         }
     }
 
-    public AddToCache(cachename : string, obj : CompendiumItem) {
+    public AddToCache(cachename : string, obj : any) {
         switch (cachename) {
             case 'glossary': 
                 if (this.GlossaryCache[obj.ID] == null) {
@@ -70,6 +78,16 @@ class StaticDataCache {
             case 'ability':   
                 if (this.AbilityCache[obj.ID] == null) {
                     this.AbilityCache[obj.ID] = obj as Ability;
+                }
+                return;
+            case 'upgrade':   
+                if (this.UpgradeCache[obj.ID] == null) {
+                    this.UpgradeCache[obj.ID] = obj as Upgrade;
+                }
+                return;
+            case 'modelupgrade':   
+                if (this.ModelUpgradeCache[obj.ID] == null) {
+                    this.ModelUpgradeCache[obj.ID] = obj as ModelUpgradeRelationship;
                 }
                 return;
             default: return;

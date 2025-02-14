@@ -79,6 +79,24 @@ export function getPotential(type : number) {
     }
 }
 
+export function getCostType(type : number) {
+    if (type === undefined) {
+        return 'Ducats'
+    }
+
+    switch (type) {
+        case 0: {
+            return "Ducats"
+        }
+        case 1: {
+            return "Glory"
+        }
+        default: {
+            return "Ducats"
+        }
+    }
+}
+
 export function getBaseSize(size : number[]) {
     return size.join('x') + "mm";
 }
