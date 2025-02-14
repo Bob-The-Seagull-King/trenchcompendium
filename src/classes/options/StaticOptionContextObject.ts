@@ -1,4 +1,4 @@
-import { IContextObject } from "../contextevent/contextobject";
+import { ContextObject, IContextObject } from "../contextevent/contextobject";
 import { StaticOptionFactory } from "../../factories/features/StaticOptionFactory";
 import { StaticContextObject } from "../contextevent/staticcontextobject";
 import { IStaticOption, StaticOption } from "./StaticOption";
@@ -18,7 +18,7 @@ use this object to grab the relevant context source for event handling.
 class StaticOptionContextObject extends StaticContextObject {
     public MyOptions : StaticOption[];
 
-    public constructor(data : IStaticOptionContextObject, parent : DynamicContextObject | null) {
+    public constructor(data : IStaticOptionContextObject, parent : ContextObject | null) {
         super(data, parent)
 
         this.MyOptions = this.BuildOptions(data.options)
