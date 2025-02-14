@@ -2,7 +2,6 @@ import { BaseContextCallTable } from "../../resources/staticcontext/BaseContextT
 import { CallEventTable, ContextEventVals } from "../../resources/staticcontext/contexteventtypes";
 import { CompendiumItem, ICompendiumItemData } from "../CompendiumItem";
 import { ContextPackage } from "./contextpackage";
-import { DynamicContextObject } from "./dynamiccontextobject";
 
 interface IContextObject extends ICompendiumItemData {
     contextdata : ContextEventVals; // ContextEvent keys used for when events are run through the object
@@ -13,9 +12,9 @@ class ContextObject extends CompendiumItem {
     public ContextKeys : ContextEventVals = {}
     public ContextData : CallEventTable | undefined; // The table searched through in Events
 
-    public MyContext : DynamicContextObject | null = null; // The parent object, if any
+    public MyContext : ContextObject | null = null; // The parent object, if any
 
-    public constructor(data : IContextObject, parent : DynamicContextObject | null) {
+    public constructor(data : IContextObject, parent : ContextObject | null) {
         super(data);
         this.MyContext = parent;
         this.ContextKeys = data.contextdata;        

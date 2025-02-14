@@ -75,6 +75,9 @@ class DataResponder {
             case "images": {
                 return RelevantSet.imagedata.concat(data)
             }
+            case "keyword": {
+                return RelevantSet.keyworddata.concat(data)
+            }
             case "testdynamicfeature": {
                 return RelevantSet.testdynamicdata.concat(data)
             }

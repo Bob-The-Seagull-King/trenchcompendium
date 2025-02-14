@@ -16,6 +16,8 @@ import GlossaryDisplay from '../display/components/features/glossary/GlossaryDis
 import { makestringpresentable } from './functions';
 import { ObjectTag } from '../classes/CompendiumItem';
 import { GlossaryRuleFactory } from '../factories/features/GlossaryFactory';
+import { KeywordFactory } from '../factories/features/KeywordFactory';
+import KeywordDisplay from '../display/components/features/glossary/KeywordDisplay';
 
 /**
  * Takes a string, and an array of string:glossary_id pairs, and turns
@@ -73,7 +75,13 @@ function ArrayItemIntoHtml(content: string, delim: any) {
         for (i = 0; i < delim.length; i ++) {
             if (content == delim[i].val) {
                 const GlossaryObject = GlossaryRuleFactory.CreateNewGlossaryRule(delim[i].id)
-                return (<GenericHover d_colour={'default'} d_name={content} titlename={GlossaryObject.Name} d_type={""} d_method={() => <GlossaryDisplay data={GlossaryObject} />}/>)
+                if (GlossaryObject == null) {
+                    const KeywordObject = KeywordFactory.CreateNewKeyword(delim[i].id, null)
+                    return (<GenericHover d_colour={'default'} d_name={content} titlename={KeywordObject.Name} d_type={""} d_method={() => <KeywordDisplay data={KeywordObject} />}/>)
+                } else {
+                    return (<GenericHover d_colour={'default'} d_name={content} titlename={GlossaryObject.Name} d_type={""} d_method={() => <GlossaryDisplay data={GlossaryObject} />}/>)
+                }
+                
             }
         }
         

@@ -1,6 +1,7 @@
 import { TableBody } from "../feature/table/tablebody";
 import { CompendiumItem } from "../CompendiumItem";
 import { GlossaryRule } from "../feature/glossary/Glossary"
+import { Keyword } from "../feature/glossary/Keyword";
 
 /**
  * Contains the Controller objects for 'Tools' pages.
@@ -13,6 +14,7 @@ class StaticDataCache {
     
     public GlossaryCache :  {[tokenid: string]: GlossaryRule} = {};
     public TableCache :  {[tokenid: string]: TableBody} = {};
+    public KeywordCache :  {[tokenid: string]: Keyword} = {};
 
     public CheckID(cachename : string, id_val : string) {
         switch (cachename) {
@@ -20,6 +22,8 @@ class StaticDataCache {
                 return (this.GlossaryCache[id_val] == null)
             case 'table': 
                 return (this.TableCache[id_val] == null)
+            case 'keyword': 
+                return (this.KeywordCache[id_val] == null)
             default: return false;
         }
     }
@@ -34,6 +38,11 @@ class StaticDataCache {
             case 'table': 
                 if (this.TableCache[obj.ID] == null) {
                     this.TableCache[obj.ID] = obj as TableBody;
+                }
+                return;
+            case 'keyword': 
+                if (this.KeywordCache[obj.ID] == null) {
+                    this.KeywordCache[obj.ID] = obj as Keyword;
                 }
                 return;
             default: return;

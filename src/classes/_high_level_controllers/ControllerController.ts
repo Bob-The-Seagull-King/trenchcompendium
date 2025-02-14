@@ -8,6 +8,7 @@ import { CollectionsListPage } from "./../viewmodel/pages/CollectionListPage"
 class ControllerController {
    
     GlossaryCollectionController;
+    KeywordCollectionController;
 
     /**
      * Initializes all controllers, this also means all searching
@@ -15,6 +16,7 @@ class ControllerController {
      */
     constructor () {
         this.GlossaryCollectionController = new CollectionsListPage('glossary')
+        this.KeywordCollectionController = new CollectionsListPage('keyword')
     }
 }
 

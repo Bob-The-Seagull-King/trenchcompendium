@@ -5,6 +5,7 @@
 import en_glossarydata from '../data/general/glossary.json'
 import en_tabledata from '../data/general/table.json'
 import en_imagedata from '../data/general/images.json'
+import en_keyworddata from '../data/general/keyword.json'
 
 import en_testdynamic from '../data/testitemscontext/testitemdynamic.json'
 import en_teststatic from '../data/testitemscontext/testitemstatic.json'
@@ -21,6 +22,7 @@ export interface DataSetTC {
     glossarydata : any,
     tabledata : any,
     imagedata : any,
+    keyworddata : any,
     testdynamicdata : any,
     teststaticdata : any,
     testbasicdata : any
@@ -31,6 +33,7 @@ export const DataByLanguageTable : LanguageDataTable = {
         glossarydata : en_glossarydata,
         tabledata : en_tabledata,
         imagedata : en_imagedata,
+        keyworddata : en_keyworddata,
         testdynamicdata : en_testdynamic,
         teststaticdata : en_teststatic,
         testbasicdata : en_testbasic

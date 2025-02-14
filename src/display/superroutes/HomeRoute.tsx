@@ -13,7 +13,7 @@ import logo from '../../resources/images/compendium.png'
 
 // Font Awesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faList } from '@fortawesome/free-solid-svg-icons'
+import { faKey, faList } from '@fortawesome/free-solid-svg-icons'
 import { faFileLines, faCoins, faCross } from '@fortawesome/free-solid-svg-icons'
 
 // TEST
@@ -69,10 +69,18 @@ const HomeRoute: React.FC = () => {
                     </div>
                     <div className="row row-cols-lg-3 row-cols-md-3 row-cols-sx-1 row-cols-xs-1 row-cols-1">
                         <div className="col softpad">
-                            <div className="basestructure pageaccessbox borderstyler subborderdefault hovermouse" onClick={() => NavigateHome("compendium/glossary/")}>
+                        <div className="basestructure pageaccessbox borderstyler subborderdefault hovermouse" onClick={() => NavigateHome("compendium/glossary/")}>
                                 <FontAwesomeIcon icon={faList} className="pageaccestext"/>
                                 <h1 className="pageaccestext">
                                     GLOSSARY
+                                </h1>
+                            </div>
+                        </div>
+                        <div className="col softpad">
+                            <div className="basestructure pageaccessbox borderstyler subborderdefault hovermouse" onClick={() => NavigateHome("compendium/keyword/")}>
+                                <FontAwesomeIcon icon={faKey} className="pageaccestext"/>
+                                <h1 className="pageaccestext">
+                                    KEYWORDS
                                 </h1>
                             </div>
                         </div>

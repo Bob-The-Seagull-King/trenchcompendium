@@ -8,7 +8,7 @@ interface ContextPackage {
     self        : ContextObject;      // The origin object of the event function
     callback    : any;      // The function that will be called as a part of this event.
     callbackdict: ContextEventEntry;     // Any additional information that comes with the function
-    dyncontext  : DynamicContextObject | null;     // The event function origin's parent context (or null)
+    dyncontext  : ContextObject | null;     // The event function origin's parent context (or null)
 }
 
 export {ContextPackage}

@@ -26,9 +26,13 @@ class GlossaryRuleFactory {
         if (isValid == false) {
             return cache.GlossaryCache[_val];
         }
-        const ruledata = Requester.MakeRequest({searchtype: "id", searchparam: {type: "glossary", id: _val}}) as IGlossaryRule
-        const rulenew = GlossaryRuleFactory.CreateGlossaryRule(ruledata)
-        return rulenew;
+        try {
+            const ruledata = Requester.MakeRequest({searchtype: "id", searchparam: {type: "glossary", id: _val}}) as IGlossaryRule
+            const rulenew = GlossaryRuleFactory.CreateGlossaryRule(ruledata)
+            return rulenew;
+        } catch (e) {
+            return null;
+        }
     }
 
 }
