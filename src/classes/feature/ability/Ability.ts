@@ -13,7 +13,7 @@ interface IAbility extends IContextObject {
 }
 
 class Ability extends StaticContextObject {
-    
+    public Description;
     /**
      * Assigns parameters and creates a series of description
      * objects with DescriptionFactory
@@ -22,6 +22,7 @@ class Ability extends StaticContextObject {
     public constructor(data: IAbility, parent : ContextObject | null)
     {
         super(data, parent)
+        this.Description = DescriptionFactory(data.description, this);
     }
 
 }

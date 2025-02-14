@@ -58,6 +58,12 @@ export function getColour(name: string){
         case "yellow": {
             return "yellow"
         }
+        case "faithful": {
+            return "yellow"
+        }
+        case "hell": {
+            return "red"
+        }
         case "red": {
             return "red"
         }

@@ -22,7 +22,7 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
     const description: AdvancedDescription = props.data
     const parentItem = description.Parent;
 
-    let colour = getParentValue('Class');
+    let colour = getParentValue('Team');
     if (colour == null) { colour = "default"}
 
     /**

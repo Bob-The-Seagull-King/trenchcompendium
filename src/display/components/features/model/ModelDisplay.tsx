@@ -16,6 +16,7 @@ const ModelDisplay = (props: any) => {
         <ErrorBoundary fallback={<div>Something went wrong with ModelDisplay.tsx</div>}>
             <div className='abilityInternalStructure'>
                 <div>
+                    {modelcollectionObject.Name}
                 </div>
             </div>
         </ErrorBoundary>

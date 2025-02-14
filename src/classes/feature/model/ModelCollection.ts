@@ -34,6 +34,7 @@ class ModelCollection extends StaticContextObject {
     
     public ModelDataList: IModel[] = [];
     public SubModelsList: ModelVar[] = []
+    public Team : string;
 
     /**
      * Assigns parameters and creates a series of description
@@ -44,6 +45,7 @@ class ModelCollection extends StaticContextObject {
     {
         super(data, parent)
 
+        this.Team = data.team;
         this.GatherLists(data);
         this.ConstructModels();
     }

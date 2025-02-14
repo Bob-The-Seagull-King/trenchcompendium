@@ -62,7 +62,7 @@ export const CollectionDataDex : CollectionDataTable = {
             model.dataresults.sort(byPropertiesOf<IModel>(["name", "id"]))
             for (i = 0; i < model.dataresults.length; i++) {
                 const summonNew = ModelFactory.CreateModelCollection(model.dataresults[i], null);
-                const ItemNew = new ViewTableItem(summonNew, getColour('default'));
+                const ItemNew = new ViewTableItem(summonNew, getColour(summonNew.Team));
                 model.itemcollection.push(ItemNew);
             }
         }
