@@ -72,12 +72,12 @@ class ModelCollection extends StaticContextObject {
         ) as IVariantModel[]
 
         for (let i = 0; i < ModelVariantList.length; i++) {
-            const BasedModelData : IModel = this.MergeModels(data, ModelVariantList[i]);
+            const BasedModelData : IModel = ModelCollection.MergeModels(data, ModelVariantList[i]);
             this.ModelDataList.push(BasedModelData);
         }
     }
 
-    public MergeModels(base: IModel, variant : IVariantModel) {
+    public static MergeModels(base: IModel, variant : IVariantModel) {
 
         const keywords_final : string[] = MergeLists([base.keywords, variant.new_keywords], [variant.cut_keywords])
         const abilities_final : string[] = MergeLists([base.abilities, variant.new_abilities], [variant.cut_abilities])
