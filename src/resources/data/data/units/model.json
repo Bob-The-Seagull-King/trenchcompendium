@@ -26,8 +26,7 @@
             "base": [32],
             "armor": 0,
             "movetype": 0,
-            "potential": 0,
-            "mercenary": false
+            "potential": 0
         },
         "keywords" : ["kw_sultanate","kw_strong"],
         "abilities" : ["ab_countercharge"]

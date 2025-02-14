@@ -43,6 +43,46 @@ export function makestringpresentable(stringVal: string) {
     return stringreturned;
 }
 
+export function getMoveType(type : number) {
+    if (type === undefined) {
+        return 'Infantry'
+    }
+
+    switch (type) {
+        case 0: {
+            return "Infantry"
+        }
+        case 1: {
+            return "Flying"
+        }
+        default: {
+            return "default"
+        }
+    }
+}
+
+export function getPotential(type : number) {
+    if (type === undefined) {
+        return 'Standard'
+    }
+
+    switch (type) {
+        case 0: {
+            return "Standard"
+        }
+        case 1: {
+            return "Limited"
+        }
+        default: {
+            return "None"
+        }
+    }
+}
+
+export function getBaseSize(size : number[]) {
+    return size.join('x') + "mm";
+}
+
 /**
  * Returns the class-colour based on the provided name
  * @param name The job or class of the given item

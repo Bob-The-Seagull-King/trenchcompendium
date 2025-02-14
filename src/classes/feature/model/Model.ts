@@ -53,6 +53,8 @@ class Model extends StaticContextObject {
         if (data.variant_name) {
             this.Variant = data.variant_name
         } else { this.Variant = "base" }
+        this.BuildKeywords(data.keywords);
+        this.BuildAbilities(data.abilities);
     }
 
     public BuildKeywords(keywords : string[]) {

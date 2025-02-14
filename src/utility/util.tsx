@@ -53,7 +53,7 @@ export function ConvertContentWithGlossary(glossary: any[] | undefined, content:
         return (
             <span>
                 {splitSet.map((item) => (
-                    <span key='glossarysplititem'>
+                    <span key='glossarysplititem' >
                         {ArrayItemIntoHtml(item, glossary)}
                     </span>
                 ))}
