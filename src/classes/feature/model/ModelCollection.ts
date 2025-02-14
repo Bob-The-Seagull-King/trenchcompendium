@@ -20,7 +20,7 @@ interface IVariantModel extends IContextObject {
     variant_name: string;
     stats : ModelStatistics;
     cut_keywords : string[];
-    new_keywords : string[];
+    keywords : string[];
     cut_abilities : string[]
     new_abilities : string[]
 }
@@ -79,7 +79,7 @@ class ModelCollection extends StaticContextObject {
 
     public static MergeModels(base: IModel, variant : IVariantModel) {
 
-        const keywords_final : string[] = MergeLists([base.keywords, variant.new_keywords], [variant.cut_keywords])
+        const keywords_final : string[] = MergeLists([base.keywords, variant.keywords], [variant.cut_keywords])
         const abilities_final : string[] = MergeLists([base.abilities, variant.new_abilities], [variant.cut_abilities])
 
         const NewModel : IModel = {

@@ -16,7 +16,7 @@
         "team": "faithful",
         "stats" : {},
         "cut_keywords" : ["kw_strong"],
-        "new_keywords" : [],
+        "keywords" : [],
         "cut_abilities" : [],
         "new_abilities" : ["ab_whirlingdervishes"]
     }

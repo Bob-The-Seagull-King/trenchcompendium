@@ -99,7 +99,7 @@ export const FitlerDataDex : FilterDataTable = {
             const foundTags = (Requester.MakeRequest({ searchtype: 'tags', searchparam: { type: 'model' } })).sort();
             const foundTagsVariant = (Requester.MakeRequest({ searchtype: 'tags', searchparam: { type: 'modelvariant' } })).sort();
     
-            const allTags = foundTags.concat(foundTagsVariant)
+            const allTags = Array.from(new Set([...foundTags, ...foundTagsVariant]));
 
             let i = 0;
             for (i = 0; i < allTags.length; i++) {
@@ -121,8 +121,19 @@ export const FitlerDataDex : FilterDataTable = {
             for (i = 0; i < keytypes.length; i ++) {
                 const foundVals = Requester.MakeRequest({ searchtype: 'keyvalues', searchparam: { type: 'model' , id: keytypes[i]} }).sort();
                 const foundValsVariant = Requester.MakeRequest({ searchtype: 'keyvalues', searchparam: { type: 'modelvariant' , id: keytypes[i]} }).sort();
-                const allVals = foundVals.concat(foundValsVariant);
+                let allVals = Array.from(new Set([...foundVals, ...foundValsVariant]));
                 
+                if (keytypes[i] == "keywords") {
+                    const tempallVals = []
+                    for (let j = 0; j < allVals.length; j++) {
+                        for (let k = 0; k < allVals[j].length; k++) {
+                            tempallVals.push(allVals[j][k])
+                        }
+                    }
+
+                    allVals = tempallVals;
+                }
+
                 let j = 0;
                 for (j = 0; j < allVals.length; j++) {
                     const tempItemObject: IFilterItem = { group: keytypes[i], isactive: false, doinclude: false, name: allVals[j]}

@@ -293,7 +293,11 @@ class DataResponder {
             } else {
                 if (term.strict) {
                     if (data[dynamicKey] != undefined) {
-                        isvalid = data[dynamicKey].toString().toLowerCase() == term.value.toString().toLowerCase()
+                        if (Array.isArray(data[dynamicKey])) {
+                            isvalid = (data[dynamicKey].includes(term.value.toString().toLowerCase()))
+                        } else {
+                            isvalid = (data[dynamicKey].toString().toLowerCase() == term.value.toString().toLowerCase())
+                        }
 
                     }
                 } else {

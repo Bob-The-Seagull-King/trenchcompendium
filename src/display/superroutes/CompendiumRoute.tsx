@@ -34,6 +34,7 @@ const CompendiumRoute: React.FC<IControllerProp> = (prop) => {
             <Routes>
             <Route path={ROUTES.COMPENDIUM_GLOSSARY_ROUTE} element={<BaseDisplayCompendium controller={prop.controller.GlossaryCollectionController}/>} />
             <Route path={ROUTES.COMPENDIUM_KEYWORD_ROUTE} element={<BaseDisplayCompendium controller={prop.controller.KeywordCollectionController}/>} />
+            <Route path={ROUTES.COMPENDIUM_MODEL_ROUTE} element={<BaseDisplayCompendium controller={prop.controller.ModelCollectionController}/>} />
             </Routes>
             </div>
         </ErrorBoundary>
