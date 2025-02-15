@@ -94,5 +94,38 @@
         },
         "keywords" : ["kw_sultanate"],
         "abilities" : ["ab_minesetting","ab_demine","ab_forwardpositions","ab_fortify"]
+    },
+    {
+        "id": "md_brazenbull",
+        "name": "Brazen Bull",
+        "source": "core",
+        "tags": {},
+        "contextdata": {},
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "A Brazen Bull can be equipped with any weapon, armour and equipment from the Iron Sultanate Armoury. Due to its vast strength and size it can only use weapons with the Keyword HEAVY – it will simply crush weapons of normal size by accident. It can carry up to two Brazen Bull Only weapons.",
+                "glossary": [
+                    {"val": "HEAVY", "id": "kw_heavy"}
+                ]
+            }
+        ],
+        "lore": [      
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "The Brazen Bull is a monstrous being of immense power and vitality, capable of tearing even the bastard child of a devil clean in half. The Sultan’s armourers equip the Bulls with heavy artillery that even the superhuman Janissaries cannot lift, let alone use in battle: flame cannons, volley guns and holy blades blessed by the Word of the Great Protector."
+            }
+        ],
+        "team": "faithful",
+        "stats" : {            
+            "movement": 6,
+            "melee": 2,
+            "ranged": 0,
+            "armor": 0,
+            "movetype": 0,
+            "potential": 1
+        },
+        "keywords" : ["kw_sultanate","kw_strong","kw_tough","kw_fear"],
+        "abilities" : ["ab_artificialbody","ab_trample"]
     }
 ]

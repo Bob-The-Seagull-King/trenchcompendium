@@ -99,5 +99,39 @@
             }
         ],
         "options": []
+    },
+    {
+        "id": "ab_artificialbody",
+        "name": "Artificial Body",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {"self_defense_injury" : {"type": "dice", "val": -1}},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Created through the Jabirean alchemy, the model has no vital organs and they must be dismembered in order to kill them. All injury rolls against the model are made with -1 DICE.",
+                "glossary": [
+                    {"val": "-1 DICE", "id": "kw_minusdice"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_trample",
+        "name": "Trample",
+        "source": "core",
+        "tags": {"action": true, "attack": true},
+        "contextdata": {"custom_attack_type": {"range": 0}, "armor_ignore": {}},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Once during its Activation, the Brazen Bull may make an extra Melee Attack ACTION against a Downed enemy model on a 32mm or smaller base. Resolve the attack as if the Brazen Bull was armed with a Trench Club. This attack ignores armour as the Brazen Bull stomps their enemies into a pulp.",
+                "glossary": [
+                    {"val": "ACTION", "id": "kw_action"}
+                ]
+            }
+        ],
+        "options": []
     }
 ]
