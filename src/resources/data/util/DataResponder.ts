@@ -96,6 +96,9 @@ class DataResponder {
             case "equipment": {
                 return RelevantSet.equipmentdata.concat(data)
             }
+            case "modelequipmentrelationship": {
+                return RelevantSet.modelequipmentrelationship.concat(data)
+            }
             case "testdynamicfeature": {
                 return RelevantSet.testdynamicdata.concat(data)
             }

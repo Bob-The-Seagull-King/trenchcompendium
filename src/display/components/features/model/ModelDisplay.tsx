@@ -90,7 +90,7 @@ const ModelDisplay = (props: any) => {
                         <div className="row">
                             {modelcollectionObject.UpgradeList.map((item) => ( 
                                 <div key={"model_ability_"+modelcollectionObject.ID+"_ability_id_"+item.ID}>
-                                    <GenericDisplay  d_colour={modelcollectionObject.Team} d_name={item.UpgradeObject.Name} d_type={"sub"} d_method={() => <ModelUpgradeDisplay data={item} />}/>
+                                    <GenericDisplay d_state={false}  d_colour={modelcollectionObject.Team} d_name={item.UpgradeObject.Name} d_type={"sub"} d_method={() => <ModelUpgradeDisplay data={item} />}/>
                                     <div className="verticalspacerbig"/>
                                 </div>
                             )) /* Abilities */}

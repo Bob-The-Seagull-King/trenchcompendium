@@ -62,5 +62,37 @@
         },
         "keywords" : ["kw_sultanate"],
         "abilities" : []
+    },
+    {
+        "id": "md_sultanatesapper",
+        "name": "Sultanate Sapper",
+        "source": "core",
+        "tags": {},
+        "contextdata": {},
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Sappers can be equipped with any weapon, armour and equipment from the Iron Sultanate Armoury.",
+                "glossary": [{"val": "Iron Sultanate", "id": "kw_sultanate"}]
+            }
+        ],
+        "lore": [      
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "The Sultan’s Sappers are highly respected and valued specialists in the Sultan’s army. They are expected to man the great cannons of the Iron Wall no matter what the enemies throw at them, and since their mighty artillery is prone to overheating, they are easily identified by the terrible burns all over their bodies."
+            }
+        ],
+        "team": "faithful",
+        "stats" : {            
+            "movement": 6,
+            "melee": 0,
+            "ranged": 1,
+            "base": [25],
+            "armor": 0,
+            "movetype": 0,
+            "potential": 0
+        },
+        "keywords" : ["kw_sultanate"],
+        "abilities" : ["ab_minesetting","ab_demine","ab_forwardpositions","ab_fortify"]
     }
 ]

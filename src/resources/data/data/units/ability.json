@@ -28,5 +28,76 @@
             }
         ],
         "options": []
+    },
+    {
+        "id": "ab_minesetting",
+        "name": "Mine-Setting",
+        "source": "core",
+        "tags": {"action": true},
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "As an ACTION with +2 DICE, the Sapper can mine a piece of terrain they alone are touching, no bigger than 8” x 8” (an 8” section of trench, a wall, a tree, a building etc). If successful, the terrain piece is now mined.",
+                "glossary": [{"val": "ACTION", "id": "kw_action"},{"val": "+2 DICE", "id": "kw_plusdice"}]
+            },  
+            { "tags": {"desc_type": "gap"} },        
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Any model (except the Sapper who set the mine) who moves into contact with the terrain piece will trigger the mine. Roll on the Injury Chart to see what happens to the model. The mine has the Keyword SHRAPNEL. After this, the terrain piece is no longer mined.",
+                "glossary": [{"val": "SHRAPNEL", "id": "kw_shrapnel"}]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_demine",
+        "name": "De-Mine",
+        "source": "core",
+        "tags": {"action": true},
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "As a RISKY ACTION the Sapper can disable any mine (see Scenarios) they move in contact with. If they fail, the mine blows causing damage as per the rules.",
+                "glossary": [{"val": "RISKY ACTION", "id": "kw_riskyaction"}]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_forwardpositions",
+        "name": "Forward Positions",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {"infiltrator_scenario": {}},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "When the Sapper is set up during standard deployment, it can be placed up to 6” away from its player’s Deployment Zone. If deployed in this way, it must be in contact with a piece of scenery. This ability cannot be used if playing a scenario that does not allow the use of INFILTRATORS.",
+                "glossary": [{"val": "INFILTRATORS", "id": "kw_infiltrator"}]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_fortify",
+        "name": "Fortify",
+        "source": "core",
+        "tags": {"action": true, "risky": true},
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "During their Activation, a Sapper can take a RISKY ACTION with +1 DICE. If successful, the Sapper is considered to be in Cover until the model moves. This ACTION cannot be used if the model is in melee combat.",
+                "glossary": [
+                    {"val": "RISKY ACTION", "id": "kw_riskyaction"},
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "ACTION", "id": "kw_action"},
+                    {"val": "Cover", "id": "gl_cover"}
+                ]
+            }
+        ],
+        "options": []
     }
 ]

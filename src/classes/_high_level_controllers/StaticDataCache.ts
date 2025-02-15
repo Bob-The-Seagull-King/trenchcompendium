@@ -8,6 +8,7 @@ import { Ability } from "../feature/ability/Ability";
 import { Upgrade } from "../feature/ability/Upgrade";
 import { ModelUpgradeRelationship } from "../relationship/model/ModelUpgradeRelationship";
 import { Equipment } from "../feature/equipment/Equipment";
+import { ModelEquipmentRelationship } from "../relationship/model/ModelEquipmentRelationship";
 
 /**
  * Contains the Controller objects for 'Tools' pages.
@@ -27,6 +28,7 @@ class StaticDataCache {
     public UpgradeCache :  {[tokenid: string]: Upgrade} = {};
     public ModelUpgradeCache :  {[tokenid: string]: ModelUpgradeRelationship} = {};
     public EquipmentCache :  {[tokenid: string]: Equipment} = {};
+    public ModelEquipmentCache :  {[tokenid: string]: ModelEquipmentRelationship} = {};
 
     public CheckID(cachename : string, id_val : string) {
         switch (cachename) {
@@ -48,6 +50,8 @@ class StaticDataCache {
                 return (this.ModelUpgradeCache[id_val] == null)
             case 'equipment': 
                 return (this.EquipmentCache[id_val] == null)
+            case 'modelequipment': 
+                return (this.ModelEquipmentCache[id_val] == null)
             default: return false;
         }
     }
@@ -97,6 +101,11 @@ class StaticDataCache {
             case 'equipment':   
                 if (this.EquipmentCache[obj.ID] == null) {
                     this.EquipmentCache[obj.ID] = obj as Equipment;
+                }
+                return;
+            case 'modelequipment':   
+                if (this.ModelEquipmentCache[obj.ID] == null) {
+                    this.ModelEquipmentCache[obj.ID] = obj as ModelEquipmentRelationship;
                 }
                 return;
             default: return;

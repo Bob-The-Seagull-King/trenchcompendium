@@ -15,6 +15,8 @@ import { IKeyword, Keyword } from '../glossary/Keyword';
 import { ModelStatistics } from './ModelStats';
 import { Requester } from '../../../factories/Requester';
 import { UpgradeFactory } from '../../../factories/features/UpgradeFactory';
+import { IModelEquipmentRelationship, ModelEquipmentRelationship } from '../../relationship/model/ModelEquipmentRelationship';
+import { EquipmentFactory } from '../../../factories/features/EquipmentFactory';
 
 interface IModel extends IContextObject {
     description: [];
@@ -41,6 +43,7 @@ class Model extends StaticContextObject {
     public Abilities : Ability[] = [];
     public Variant : string;
     public UpgradeList : ModelUpgradeRelationship[] = []
+    public EquipmentList : ModelEquipmentRelationship[] = []
     
     /**
      * Assigns parameters and creates a series of description
@@ -77,7 +80,6 @@ class Model extends StaticContextObject {
     }
     
     public BuildModelUpgrades(id : string) {
-        console.log(id);
         const UpgradeList = Requester.MakeRequest(
             {
                 searchtype: "complex", 
@@ -101,6 +103,33 @@ class Model extends StaticContextObject {
 
         for (let i = 0; i < UpgradeList.length; i++) {
             this.UpgradeList.push(UpgradeFactory.CreateModelUpgrade(UpgradeList[i]))
+        }
+    }
+    
+    public BuildModelEquipment(id : string) {
+        const EquipmentList = Requester.MakeRequest(
+            {
+                searchtype: "complex", 
+                searchparam: {
+                    type: "modelequipmentrelationship",
+                    request: {
+                        operator: 'and',
+                        terms: [
+                            {
+                                item: "model_id",
+                                value: id,
+                                equals: true,
+                                strict: true
+                            }
+                        ],
+                        subparams: []
+                    }
+                }
+            }
+        ) as IModelEquipmentRelationship[]
+
+        for (let i = 0; i < EquipmentList.length; i++) {
+            this.EquipmentList.push(EquipmentFactory.CreateModelEquipment(EquipmentList[i], this))
         }
     }
 

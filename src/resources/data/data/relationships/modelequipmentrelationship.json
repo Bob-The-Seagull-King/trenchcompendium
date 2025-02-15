@@ -1,0 +1,13 @@
+[
+    {
+        "id": "rel_md_eq_sultanatesapper",
+        "source": "core",
+        "tags": {},
+        "name": "Sultanate Sapper Equipment",
+        "contextdata": {},
+        "options": [],
+        "model_id": ["md_sultanatesapper"],
+        "mandatory_equipment": ["eq_shovel"],
+        "removable": false
+    }
+]

@@ -15,6 +15,7 @@ import en_upgradedata from '../data/units/upgrade.json'
 import en_equipmentdata from '../data/collectable/equipment.json'
 
 import en_modelupgraderelationship from '../data/relationships/modelupgraderelationship.json'
+import en_modelequipmentrelationship from '../data/relationships/modelequipmentrelationship.json'
 
 import en_testdynamic from '../data/testitemscontext/testitemdynamic.json'
 import en_teststatic from '../data/testitemscontext/testitemstatic.json'
@@ -38,6 +39,7 @@ export interface DataSetTC {
     upgradedata : any,
     modelupgraderelationship : any,
     equipmentdata : any,
+    modelequipmentrelationship : any,
     testdynamicdata : any,
     teststaticdata : any,
     testbasicdata : any
@@ -55,6 +57,7 @@ export const DataByLanguageTable : LanguageDataTable = {
         upgradedata : en_upgradedata,
         modelupgraderelationship : en_modelupgraderelationship,  
         equipmentdata : en_equipmentdata,  
+        modelequipmentrelationship : en_modelequipmentrelationship,
         testdynamicdata : en_testdynamic,
         teststaticdata : en_teststatic,
         testbasicdata : en_testbasic
