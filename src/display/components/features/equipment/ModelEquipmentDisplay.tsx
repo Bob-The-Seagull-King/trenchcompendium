@@ -13,87 +13,65 @@ import { Equipment, EquipmentStats } from '../../../../classes/feature/equipment
 import GenericHover from '../../../components/generics/GenericHover';
 import KeywordDisplay from '../glossary/KeywordDisplay';
 import ItemStat from '../../../components/subcomponents/description/ItemStat';
-import { makestringpresentable } from '../../../../utility/functions';
+import { getColour, makestringpresentable } from '../../../../utility/functions';
+import { ModelEquipmentRelationship } from '../../../../classes/relationship/model/ModelEquipmentRelationship';
+import GenericDisplay from '../../../components/generics/GenericDisplay';
+import AbilityDisplay from '../ability/AbilityDisplay';
+import EquipmentDisplay from './EquipmentDisplay';
 
-const EquipmentDisplay = (props: any) => {
-    const abilityObject: Equipment = props.data
+const ModelEquipmentDisplay = (props: any) => {
+    const abilityObject: ModelEquipmentRelationship = props.data
+    const team_color : string = props.team_col;
 
-    function ReturnStats(statlist : EquipmentStats, baseequip : Equipment) {
-
-        /** Range */
-        let RangeVal = ""
-        if (baseequip.Distance > 0) {RangeVal += baseequip.Distance.toString() + "\""}
-        if (statlist.melee == true) {RangeVal += "Melee"}
-        if (RangeVal == "") { RangeVal = "N/A" }
-
-        /** Hands */
-        let HandValMelee = ""
-        if (statlist.hands_melee != undefined) {HandValMelee += statlist.hands_melee.toString() + " Hands"}
-        if (HandValMelee == "") { HandValMelee = "N/A" }
-        
-        let HandValRange = ""
-        if (statlist.hands_ranged != undefined) {HandValRange += statlist.hands_ranged.toString() + " Hands"}
-        if (HandValRange == "") { HandValRange = "N/A" }
-
+    function ReturnEquipment(item : Equipment, obj : ModelEquipmentRelationship) {
         return (
             <>
-            <div>
-                <div className="verticalspacerbig"/>
-                <div className="row row-cols-sm-7 row-cols-xs-4 justify-content-center">
-                    <ItemStat title={"Category"} value={makestringpresentable(baseequip.Category)}/>
-                    <ItemStat title={"Range"} value={(RangeVal)}/>
-                    <ItemStat title={"Hands (Melee)"} value={(HandValMelee)}/>
-                    <ItemStat title={"Hands (Ranged)"} value={(HandValRange)}/>
+                <EquipmentDisplay data={item} />
+                <div className="row abilityInternalStructure">
+                    <span className="colordefault bodytext complextext">
+                        {
+                            obj.Removable == true? "Removable" : "Cannot Be Removed"
+                        }
+                    </span>
                 </div>
-                <div className="verticalspacerbig"/>
-            </div>
             </>
         )
     }
 
     return (
-        <ErrorBoundary fallback={<div>Something went wrong with EquipmentDisplay.tsx</div>}>
-            <div className='abilityInternalStructure'>
-                <div className="row">
-                    {returnDescription(abilityObject, abilityObject.Lore)}
-                </div>
-                {abilityObject.Modifiers.length > 0 &&
-                    <>
+        <ErrorBoundary fallback={<div>Something went wrong with ModelEquipmentDisplay.tsx</div>}>
+           
+            <div>
+                {abilityObject.EquipmentItems.map((item) => ( 
+                    <div key={"model_equipment_"+abilityObject.ID+"_equipment_id_"+item.ID}>
+                        <GenericDisplay  d_colour={'default'} d_state={false}  d_name={item.Name} d_type={"sub"} d_method={() => ReturnEquipment(item, abilityObject) }/>
                         <div className="verticalspacerbig"/>
-                        <div className="row">
-                            <span>
-                                {abilityObject.Modifiers.map((item) => ( 
-                                    <span className='tagItem' key={"equipment_modifier_"+abilityObject.ID+"_modifier_id_"+item}>
-                                        <span className='glossaryMain'>{item}</span>
-                                    </span>
-                                )) /* Keywords */}
-                            </span>
+                    </div>
+                )) /* Abilities */}
+            </div>
+            <div className="verticalspacerbig"/>
+            <div>
+                {abilityObject.MyOptions.map((item) => ( 
+                    <div key={"model_equipment_"+abilityObject.ID+"_equipment_id_option_"+item.RefID}>
+                        <div className={"borderstyler subborder"+getColour(team_color)}>
+                        <div className={'titleShape hovermouse titlebody subbackground'+getColour(team_color)}>Choose One Of The Following</div>
+                        <div className="row abilityInternalStructure">
+                                {item.Selections.map((subitem) => ( 
+                                    <div key={"model_equipment_"+abilityObject.ID+"_equipment_id_"+subitem.value.ID}>
+                                        <ModelEquipmentDisplay data={subitem.value} team_col={team_color}/>
+                                        <div className="verticalspacerbig"/>
+                                    </div>
+                                )) /* Abilities */}
+                                {item.Selections.length > 1 &&                                     
+                                    <div className={'separator bodytext tagboxpad color'+getColour(team_color)}></div>
+                                }
+                            </div>
                         </div>
-                    </>
-                }
-                <div className="row">
-                    {ReturnStats(abilityObject.Stats, abilityObject)  /* Stats */}
-                </div>
-                <div className="row">
-                    {returnDescription(abilityObject, abilityObject.Description)}
-                </div>
-                {abilityObject.KeyWord.length > 0 &&
-                    <>
-                        <div className='separator tagboxpad colordefault'></div>
-                        <div className="row">
-                            <span>
-                                {abilityObject.KeyWord.map((item) => ( 
-                                    <span className='tagItem' key={"equipment_keyword_"+abilityObject.ID+"_keyword_id_"+item.ID}>
-                                        <GenericHover  d_colour={'default'} titlename={item.Name} d_name={item.Name} d_type={""} d_method={() => <KeywordDisplay data={item} />}/>
-                                    </span>
-                                )) /* Keywords */}
-                            </span>
-                        </div>
-                    </>
-                }
+                    </div>
+                )) /* Abilities */}
             </div>
         </ErrorBoundary>
     )
 }
 
-export default EquipmentDisplay;
+export default ModelEquipmentDisplay;

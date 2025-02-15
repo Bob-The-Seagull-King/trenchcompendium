@@ -14,11 +14,12 @@ import ItemStat from '../../subcomponents/description/ItemStat';
 import { ModelStatistics } from '../../../../classes/feature/model/ModelStats';
 import { getBaseSize, getMoveType, getPotential } from '../../../../utility/functions';
 import ModelUpgradeDisplay from '../ability/ModelUpgradeDisplay';
+import { Equipment } from '../../../../classes/feature/equipment/Equipment';
+import { IChoice } from '../../../../classes/options/StaticOption';
+import ModelEquipmentDisplay from '../equipment/ModelEquipmentDisplay';
 
 const ModelDisplay = (props: any) => {
     const modelcollectionObject: Model = props.data
-
-
 
     function ReturnStats(statlist : ModelStatistics) {
         return (
@@ -69,6 +70,25 @@ const ModelDisplay = (props: any) => {
                 <div className="row">
                 {returnDescription(modelcollectionObject, modelcollectionObject.Description) /* Description */}
                 </div>
+                {modelcollectionObject.EquipmentList.length > 0 &&
+                    <>
+                        <div className='separator bodytext tagboxpad colordefault'>Equipment</div>
+                        <div className="verticalspacerbig"/>
+                        <div className="row">
+                            {modelcollectionObject.EquipmentList.map((item) => ( 
+                                <>
+                                <div key={"model_equipment_"+modelcollectionObject.ID+"_equipment_id_"+item.ID}>
+                                    <ModelEquipmentDisplay team_col={modelcollectionObject.Team} data={item} />
+                                    <div className="verticalspacerbig"/>
+                                </div>
+                                {modelcollectionObject.EquipmentList.length > 1 &&                                     
+                                    <div className='separator bodytext tagboxpad colordefault'></div>
+                                }
+                                </>
+                            )) /* Abilities */}
+                        </div>
+                    </>
+                }
                 {modelcollectionObject.Abilities.length > 0 &&
                     <>
                         <div className='separator bodytext tagboxpad colordefault'>Abilities</div>

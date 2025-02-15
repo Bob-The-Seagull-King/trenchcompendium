@@ -63,6 +63,7 @@ class Model extends StaticContextObject {
         this.BuildKeywords(data.keywords);
         this.BuildAbilities(data.abilities);
         this.BuildModelUpgrades(data.id);
+        this.BuildModelEquipment(data.id);
     }
 
     public BuildKeywords(keywords : string[]) {

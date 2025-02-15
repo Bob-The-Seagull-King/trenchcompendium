@@ -23,12 +23,32 @@ class ModelEquipmentRelationship extends StaticOptionContextObject {
         super(data, parent)
         this.Removable = data.removable;
         this.BuildEquipment(data.mandatory_equipment);
+        this.BuildOptionEquipment();
     }
 
     public BuildEquipment(equipment : string[]) {
         for (let i = 0; i < equipment.length; i++) {
             const EquipObj = EquipmentFactory.CreateNewEquipment(equipment[i], this);
             this.EquipmentItems.push(EquipObj);
+        }
+    }
+
+    public BuildOptionEquipment() {
+        for (let i = 0; i < this.MyOptions.length; i++) {
+            for (let j = 0; j < this.MyOptions[i].Selections.length; j++) {
+                this.MyOptions[i].Selections[j].value = EquipmentFactory.CreateModelEquipment(this.MyOptions[i].Selections[j].value, this);
+            }
+        }
+    }
+
+    
+    /**
+     * Have all options search for potential selections
+     * to choose from.
+     */
+    public async ReloadOptions() {
+        for (let i = 0; i < this.MyOptions.length; i++) {
+            await this.MyOptions[i].FindChoices();
         }
     }
 
