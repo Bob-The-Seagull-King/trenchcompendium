@@ -3,9 +3,11 @@ import { CallEventTable, ContextEventEntry } from "./contexteventtypes";
 import { EventRunner } from "../../classes/contextevent/contexteventhandler";
 import { ContextObject } from "../../classes/contextevent/contextobject";
 import { QuestionBase, StaticOptionContextObjectQuestion } from "../../classes/options/StaticOption";
-import { containsTag } from "../../utility/functions";
+import { containsTag, makestringpresentable } from "../../utility/functions";
 import { getTagValue } from "../../utility/functions";
 import { EquipmentLimit, EquipmentRestriction } from "../../classes/feature/equipment/Equipment";
+import { Keyword } from "../../classes/feature/glossary/Keyword";
+import { KeywordFactory } from "../../factories/features/KeywordFactory";
 
 export const BaseContextCallTable : CallEventTable = {
     option_search_viable: {
@@ -114,7 +116,41 @@ export const BaseContextCallTable : CallEventTable = {
         event_priotity: 0,        
         getEquipmentRestrictionPresentable(this: EventRunner, eventSource : any, relayVar : any, trackVal : EquipmentRestriction[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) 
         {
-            return relayVar;
+            const RemoveCollection : string[] = []
+            const AddedCollection : string[] = []
+            const RestrictCollection : string[] = []
+
+            for (let i = 0; i < trackVal.length; i++) {
+                const EquipList : EquipmentRestriction = trackVal[i]
+
+                if (EquipList.required) {
+                    for (let j = 0; j < EquipList.required.length; j++) {
+                        const Requirement = EquipList.required[j]
+                        const NewStringParts = []
+                        NewStringParts.push("RESTRICTION: Equipment")
+
+                        if (Requirement.category) {
+                            NewStringParts.push("in category "+makestringpresentable(Requirement.category))
+                        }
+                        if (Requirement.tag) {
+                            NewStringParts.push("with tag "+makestringpresentable(Requirement.tag))
+                        }
+
+                        if (Requirement.res_type == "keyword") {
+                            const ValKey : Keyword = KeywordFactory.CreateNewKeyword(Requirement.value, null)
+                            NewStringParts.push("must be "+makestringpresentable(ValKey.Name? ValKey.Name : ""))
+                        }
+                        
+
+                        RestrictCollection.push(NewStringParts.join(' '));
+                    }
+                }
+            }
+
+            const StringCollection : string[] = RemoveCollection.concat(AddedCollection).concat(RestrictCollection)
+
+
+            return relayVar.concat(StringCollection);
         },
         getEquipmentRestriction(this: EventRunner, eventSource : any, relayVar : any, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) { 
             relayVar.push(context_func as EquipmentRestriction)
@@ -124,7 +160,40 @@ export const BaseContextCallTable : CallEventTable = {
     model_equipment_limit : {
         event_priotity: 1,
         getEquipmentLimitPresentable(this: EventRunner, eventSource : any, relayVar : any, trackVal : EquipmentLimit[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
-            return relayVar;
+            
+            const MaximumCollection : string[] = []
+            const MinimumCollection : string[] = []
+
+            for (let i = 0; i < trackVal.length; i++) {
+                const EquipList : EquipmentLimit = trackVal[i]
+
+                if (EquipList.maximum) {
+                    for (let j = 0; j < EquipList.maximum.length; j++) {
+                        const Requirement = EquipList.maximum[j]
+                        const NewStringParts = []
+                        NewStringParts.push("MAXIMUM: Equipment")
+
+                        if (Requirement.category) {
+                            NewStringParts.push("in category "+makestringpresentable(Requirement.category))
+                        }
+                        if (Requirement.tag) {
+                            NewStringParts.push("with tag "+makestringpresentable(Requirement.tag))
+                        }
+                        
+                        if (Requirement.res_type == "tag") {
+                            NewStringParts.push("that have tag "+makestringpresentable(Requirement.value.toString()))
+                        }
+
+                        NewStringParts.push("have a limit of "+makestringpresentable(Requirement.limit.toString()))
+                        
+                        MaximumCollection.push(NewStringParts.join(' '));
+                    }
+                }
+            }
+
+            const StringCollection : string[] = MaximumCollection.concat(MinimumCollection)
+
+            return relayVar.concat(StringCollection);
         },
         getEquipmentLimit(this: EventRunner, eventSource : any, relayVar : any, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
             relayVar.push(context_func as EquipmentLimit)

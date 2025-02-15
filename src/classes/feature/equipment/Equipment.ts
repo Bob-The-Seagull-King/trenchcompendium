@@ -28,9 +28,9 @@ interface EquipmentStats {
 }
 
 interface EquipmentRestriction {
-    required: RestrictionSingle[],
-    removed: RestrictionSingle[],
-    added: RestrictionSingle[],
+    required?: RestrictionSingle[],
+    removed?: RestrictionSingle[],
+    added?: RestrictionSingle[],
 }
 
 interface RestrictionSingle {
@@ -41,8 +41,8 @@ interface RestrictionSingle {
 }
 
 interface EquipmentLimit {
-    maximum: RestrictionSingle[],
-    minimum: RestrictionSingle[]
+    maximum?: LimitSingle[],
+    minimum?: LimitSingle[]
 }
 
 interface LimitSingle {

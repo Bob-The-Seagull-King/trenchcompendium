@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.css'
 import '../../../../resources/styles/_mainstylesource.scss'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { ErrorBoundary } from "react-error-boundary";
 
 // Classes
@@ -17,9 +17,83 @@ import ModelUpgradeDisplay from '../ability/ModelUpgradeDisplay';
 import { Equipment } from '../../../../classes/feature/equipment/Equipment';
 import { IChoice } from '../../../../classes/options/StaticOption';
 import ModelEquipmentDisplay from '../equipment/ModelEquipmentDisplay';
+import { EventRunner } from '../../../../classes/contextevent/contexteventhandler';
 
 const ModelDisplay = (props: any) => {
     const modelcollectionObject: Model = props.data
+
+    const [equiprestrictions, setEquipRestrictions] = useState([])
+    const [equiplimits, setEquipLimits] = useState([])
+    const [_keyvar, setkeyvar] = useState(0);
+
+
+    useEffect(() => {
+        async function SetEquipmentContent() {
+            const EventProc: EventRunner = new EventRunner();
+    
+            if (modelcollectionObject.RestrictedEquipment != null) {
+                const result_presentation = await EventProc.runEvent(
+                    "getEquipmentRestrictionPresentable",
+                    modelcollectionObject,
+                    [],
+                    [],
+                    modelcollectionObject.RestrictedEquipment
+                );
+                setEquipRestrictions(result_presentation);
+                setkeyvar((prev) => prev + 1);
+            } else {
+                const result = await EventProc.runEvent(
+                    "getEquipmentRestriction",
+                    modelcollectionObject,
+                    [],
+                    [],
+                    null
+                );
+                modelcollectionObject.RestrictedEquipment = result;
+                const result_presentation = await EventProc.runEvent(
+                    "getEquipmentRestrictionPresentable",
+                    modelcollectionObject,
+                    [],
+                    [],
+                    modelcollectionObject.RestrictedEquipment
+                );
+                setEquipRestrictions(result_presentation);
+                setkeyvar((prev) => prev + 1);
+            }
+    
+            if (modelcollectionObject.LimitedEquipment != null) {
+                const result_presentation = await EventProc.runEvent(
+                    "getEquipmentLimitPresentable",
+                    modelcollectionObject,
+                    [],
+                    [],
+                    modelcollectionObject.LimitedEquipment
+                );
+                setEquipLimits(result_presentation);
+                setkeyvar((prev) => prev + 1);
+            } else {
+                const result = await EventProc.runEvent(
+                    "getEquipmentLimit",
+                    modelcollectionObject,
+                    [],
+                    [],
+                    null
+                );
+                modelcollectionObject.LimitedEquipment = result;
+                const result_presentation = await EventProc.runEvent(
+                    "getEquipmentLimitPresentable",
+                    modelcollectionObject,
+                    [],
+                    [],
+                    modelcollectionObject.LimitedEquipment
+                );
+                setEquipLimits(result_presentation);
+                setkeyvar((prev) => prev + 1);
+            }
+        }
+    
+        SetEquipmentContent();
+    }, []);
 
     function ReturnStats(statlist : ModelStatistics) {
         return (
@@ -70,25 +144,51 @@ const ModelDisplay = (props: any) => {
                 <div className="row">
                 {returnDescription(modelcollectionObject, modelcollectionObject.Description) /* Description */}
                 </div>
-                {modelcollectionObject.EquipmentList.length > 0 &&
+                <div key={_keyvar}>
+                {((modelcollectionObject.EquipmentList.length > 0) || (equiprestrictions.length > 0) || (equiplimits.length > 0)) &&
                     <>
                         <div className='separator bodytext tagboxpad colordefault'>Equipment</div>
-                        <div className="verticalspacerbig"/>
-                        <div className="row">
-                            {modelcollectionObject.EquipmentList.map((item) => ( 
-                                <>
-                                <div key={"model_equipment_"+modelcollectionObject.ID+"_equipment_id_"+item.ID}>
-                                    <ModelEquipmentDisplay team_col={modelcollectionObject.Team} data={item} />
-                                    <div className="verticalspacerbig"/>
+                        {((equiprestrictions.length > 0) || (equiplimits.length > 0)) && 
+                            <div>
+                                <div className="row abilityInternalStructure">
+                                    {equiprestrictions.map((item) => ( 
+                                        <span key={item} className="colordefault bodytext complextext">
+                                            {
+                                                item
+                                            }
+                                        </span>
+                                    ))}  
+                                    {equiplimits.map((item) => ( 
+                                        <span key={item} className="colordefault bodytext complextext">
+                                            {
+                                                item
+                                            }
+                                        </span>
+                                    ))}                                   
                                 </div>
-                                {modelcollectionObject.EquipmentList.length > 1 &&                                     
-                                    <div className='separator bodytext tagboxpad colordefault'></div>
-                                }
-                                </>
-                            )) /* Abilities */}
-                        </div>
+                            </div>
+                        }
+                        {(modelcollectionObject.EquipmentList.length > 0) &&
+                            <>
+                                <div className="verticalspacerbig"/>
+                                <div className="row">
+                                    {modelcollectionObject.EquipmentList.map((item) => ( 
+                                        <>
+                                        <div key={"model_equipment_"+modelcollectionObject.ID+"_equipment_id_"+item.ID}>
+                                            <ModelEquipmentDisplay team_col={modelcollectionObject.Team} data={item} />
+                                            <div className="verticalspacerbig"/>
+                                        </div>
+                                        {modelcollectionObject.EquipmentList.length > 1 &&                                     
+                                            <div className='separator bodytext tagboxpad colordefault'></div>
+                                        }
+                                        </>
+                                    )) /* Abilities */}
+                                </div>
+                            </>
+                        }
                     </>
                 }
+                </div>
                 {modelcollectionObject.Abilities.length > 0 &&
                     <>
                         <div className='separator bodytext tagboxpad colordefault'>Abilities</div>

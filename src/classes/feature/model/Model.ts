@@ -19,6 +19,7 @@ import { IModelEquipmentRelationship, ModelEquipmentRelationship } from '../../r
 import { EquipmentFactory } from '../../../factories/features/EquipmentFactory';
 import { ContextPackage } from '../../contextevent/contextpackage';
 import { EventRunner } from '../../contextevent/contexteventhandler';
+import { EquipmentLimit, EquipmentRestriction } from '../equipment/Equipment';
 
 interface IModel extends IContextObject {
     description: [];
@@ -46,6 +47,9 @@ class Model extends StaticContextObject {
     public Variant : string;
     public UpgradeList : ModelUpgradeRelationship[] = []
     public EquipmentList : ModelEquipmentRelationship[] = []
+
+    public RestrictedEquipment : EquipmentRestriction[] | null = null;
+    public LimitedEquipment : EquipmentLimit[] | null = null;
     
     /**
      * Assigns parameters and creates a series of description
@@ -81,16 +85,7 @@ class Model extends StaticContextObject {
             [],
             null
         ).then(result => {
-            console.log(result)
-            EventProc.runEvent(
-                "getEquipmentRestrictionPresentable",
-                this,
-                [],
-                [],
-                result
-            ).then (result_2 => {
-                console.log(result_2)
-            })
+            this.RestrictedEquipment = result;
         });
     }
 
@@ -104,16 +99,7 @@ class Model extends StaticContextObject {
             [],
             null
         ).then(result => {
-            console.log(result)
-            EventProc.runEvent(
-                "getEquipmentLimitPresentable",
-                this,
-                [],
-                [],
-                result
-            ).then (result_2 => {
-                console.log(result_2)
-            })
+            this.LimitedEquipment = result;
         });
     }
 
