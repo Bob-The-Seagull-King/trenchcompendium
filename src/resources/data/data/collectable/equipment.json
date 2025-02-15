@@ -3,7 +3,7 @@
         "id": "eq_shovel",
         "name": "Shovel",
         "source": "core",
-        "tags": {"trait": true, "action": true},
+        "tags": {"trait": true, "action": true, "weapon": true},
         "category": "equipment",
         "distance": null,
         "stats": {

@@ -17,6 +17,8 @@ import { Requester } from '../../../factories/Requester';
 import { UpgradeFactory } from '../../../factories/features/UpgradeFactory';
 import { IModelEquipmentRelationship, ModelEquipmentRelationship } from '../../relationship/model/ModelEquipmentRelationship';
 import { EquipmentFactory } from '../../../factories/features/EquipmentFactory';
+import { ContextPackage } from '../../contextevent/contextpackage';
+import { EventRunner } from '../../contextevent/contexteventhandler';
 
 interface IModel extends IContextObject {
     description: [];
@@ -64,6 +66,55 @@ class Model extends StaticContextObject {
         this.BuildAbilities(data.abilities);
         this.BuildModelUpgrades(data.id);
         this.BuildModelEquipment(data.id);
+
+        this.RunEquipmentRestriction();
+        this.RunEquipmentLimit();
+    }
+
+    public RunEquipmentRestriction() {
+        const EventProc : EventRunner = new EventRunner();
+
+        EventProc.runEvent(
+            "getEquipmentRestriction",
+            this,
+            [],
+            [],
+            null
+        ).then(result => {
+            console.log(result)
+            EventProc.runEvent(
+                "getEquipmentRestrictionPresentable",
+                this,
+                [],
+                [],
+                result
+            ).then (result_2 => {
+                console.log(result_2)
+            })
+        });
+    }
+
+    public RunEquipmentLimit() {
+        const EventProc : EventRunner = new EventRunner();
+
+        EventProc.runEvent(
+            "getEquipmentLimit",
+            this,
+            [],
+            [],
+            null
+        ).then(result => {
+            console.log(result)
+            EventProc.runEvent(
+                "getEquipmentLimitPresentable",
+                this,
+                [],
+                [],
+                result
+            ).then (result_2 => {
+                console.log(result_2)
+            })
+        });
     }
 
     public BuildKeywords(keywords : string[]) {

@@ -100,7 +100,27 @@
         "name": "Brazen Bull",
         "source": "core",
         "tags": {},
-        "contextdata": {},
+        "contextdata": {
+            "model_equipment_restriction": {
+                "required": [
+                    {
+                        "tag": "weapon",
+                        "res_type": "keyword",
+                        "value": "kw_heavy"
+                    }
+                ]
+            },
+            "model_equipment_limit": {
+                "maximum": [
+                    {
+                        "tag": "weapon",
+                        "res_type": "tag",
+                        "value": "brazen_bull",
+                        "limit": 2
+                    }
+                ]
+            }
+        },
         "description": [
             {
                 "tags": {"desc_type" : "default"},

@@ -5,6 +5,7 @@ import { ContextObject } from "../../classes/contextevent/contextobject";
 import { QuestionBase, StaticOptionContextObjectQuestion } from "../../classes/options/StaticOption";
 import { containsTag } from "../../utility/functions";
 import { getTagValue } from "../../utility/functions";
+import { EquipmentLimit, EquipmentRestriction } from "../../classes/feature/equipment/Equipment";
 
 export const BaseContextCallTable : CallEventTable = {
     option_search_viable: {
@@ -107,6 +108,27 @@ export const BaseContextCallTable : CallEventTable = {
             if (RangeVal > 0) {RangePresentation += RangeVal.toString()}
             
             return { "melee" : MeleePresentation, "range" : RangePresentation};
+        }
+    },
+    model_equipment_restriction : {
+        event_priotity: 0,        
+        getEquipmentRestrictionPresentable(this: EventRunner, eventSource : any, relayVar : any, trackVal : EquipmentRestriction[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) 
+        {
+            return relayVar;
+        },
+        getEquipmentRestriction(this: EventRunner, eventSource : any, relayVar : any, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) { 
+            relayVar.push(context_func as EquipmentRestriction)
+            return relayVar;
+        }
+    },
+    model_equipment_limit : {
+        event_priotity: 1,
+        getEquipmentLimitPresentable(this: EventRunner, eventSource : any, relayVar : any, trackVal : EquipmentLimit[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            return relayVar;
+        },
+        getEquipmentLimit(this: EventRunner, eventSource : any, relayVar : any, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            relayVar.push(context_func as EquipmentLimit)
+            return relayVar;
         }
     }
 }

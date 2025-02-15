@@ -27,6 +27,32 @@ interface EquipmentStats {
     ranged?: boolean
 }
 
+interface EquipmentRestriction {
+    required: RestrictionSingle[],
+    removed: RestrictionSingle[],
+    added: RestrictionSingle[],
+}
+
+interface RestrictionSingle {
+    category? : string,
+    tag? : string,
+    res_type : string,
+    value : string
+}
+
+interface EquipmentLimit {
+    maximum: RestrictionSingle[],
+    minimum: RestrictionSingle[]
+}
+
+interface LimitSingle {
+    category? : string,
+    tag? : string,
+    res_type : string,
+    value : string,
+    limit: number
+}
+
 class Equipment extends StaticOptionContextObject {
     public Description;
     public Lore;
@@ -63,5 +89,5 @@ class Equipment extends StaticOptionContextObject {
 
 }
 
-export {IEquipment, Equipment, EquipmentStats}
+export {IEquipment, Equipment, EquipmentStats, EquipmentRestriction, EquipmentLimit, RestrictionSingle, LimitSingle}
 
