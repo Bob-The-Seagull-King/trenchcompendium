@@ -147,5 +147,55 @@
         },
         "keywords" : ["kw_sultanate","kw_strong","kw_tough","kw_fear"],
         "abilities" : ["ab_artificialbody","ab_trample"]
+    },
+    {
+        "id": "md_lionofjabir",
+        "name": "Lion of Jabir",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "model_equipment_restriction": {
+                "removed": [
+                    {
+                        "category": "equipment",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "tag": "shield",
+                        "res_type": "all",
+                        "value": ""
+                    }
+                ],
+                "added": [
+                    {
+                        "res_type": "id",
+                        "value": "eq_windamulet"
+                    }
+                ]
+            }
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Lions can be equipped with armour (except shields) and Wind Amulets. They cannot be equipped with any other items. They do not suffer penalties for fighting unarmed. You can mount the Lion on two different base sizes as indicated in the profile due to the variance of their shape and size."
+            }
+        ],
+        "lore": [      
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Named after the deadly hunters of the plains, the Lions of Jabir can take many forms, not all of them leonine. Each one is a unique masterwork, grown according to the skills and artistry of the Jabirean scientist that created them. The speed and ferocity of the Lions is nearly unmatched, and some even have strange powers granted by their alchemical birth."
+            }
+        ],
+        "team": "faithful",
+        "stats" : {            
+            "movement": 8,
+            "melee": 1,
+            "armor": 0,
+            "movetype": 0,
+            "potential": 2
+        },
+        "keywords" : ["kw_sultanate"],
+        "abilities" : ["ab_artificialbody","ab_mauling","ab_lionsgrace"]
     }
 ]

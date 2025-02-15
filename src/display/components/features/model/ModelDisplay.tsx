@@ -150,7 +150,7 @@ const ModelDisplay = (props: any) => {
                         <div className='separator bodytext tagboxpad colordefault'>Equipment</div>
                         {((equiprestrictions.length > 0) || (equiplimits.length > 0)) && 
                             <div>
-                                <div className="row abilityInternalStructure">
+                                <div className="row">
                                     {equiprestrictions.map((item) => ( 
                                         <span key={item} className="colordefault bodytext complextext">
                                             {

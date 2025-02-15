@@ -32,5 +32,31 @@
         "options": [],
         "keywords": [],
         "modifiers": ["Wielding is Optional"]
+    },
+    {
+        "id": "eq_windamulet",
+        "name": "Wind Amulet",
+        "source": "core",
+        "tags": {"trait": true, "limited": 1, "movement": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {"activated_stat": {"stat": "movement", "value": 3}},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Once per battle, you may add +3” to the Movement characteristic of this model once during the activation. Declare this when the model is Activated."
+            }
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Amulet created by the Jabirean Alchemists, capturing the essence of the Element of Wind within it."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
     }
 ]

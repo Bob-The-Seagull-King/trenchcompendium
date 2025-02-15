@@ -20,5 +20,16 @@
         ],
         "warband_limit": 3,
         "faction_mask":[]
+    },
+    {
+        "id": "rel_md_up_fierceandbrave5",
+        "model_id_set": ["md_lionofjabir"],
+        "upgrade_id": "up_fierceandbrave",
+        "cost": 5,
+        "cost_type": 0,
+        "restricted_upgrades": [
+        ],
+        "warband_limit": 0,
+        "faction_mask":[]
     }
 ]

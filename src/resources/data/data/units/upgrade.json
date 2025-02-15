@@ -28,5 +28,20 @@
             }
         ],
         "options": []
+    },
+    {
+        "id": "up_fierceandbrave",
+        "name": "Fierce and Brave",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {"keyword_ignore": {"value": "kw_fear"}},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The model is not affected by the keyword FEAR.",
+                "glossary": [{"val": "FEAR", "id": "kw_fear"}]
+            }
+        ],
+        "options": []
     }
 ]

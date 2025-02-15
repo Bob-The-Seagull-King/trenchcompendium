@@ -133,5 +133,37 @@
             }
         ],
         "options": []
+    },
+    {
+        "id": "ab_mauling",
+        "name": "Mauling",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"}, 
+                "content": "A Downed opponent cannot stand up if it is in melee combat with a Lion of Jabir (even if the Lion is Down itself ), unless it is on a 40mm or larger base."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_lionsgrace",
+        "name": "Lion's Grace",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"}, 
+                "content": "Lions of Jabir may take any Dash/Jump/Climb/Diving Charge ACTION with a +1 DICE bonus.",
+                "glossary": [
+                    {"val": "ACTION", "id": "kw_action"},
+                    {"val": "+1 DICE", "id": "kw_plusdice"}
+                ]
+            }
+        ],
+        "options": []
     }
 ]

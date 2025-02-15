@@ -5,9 +5,10 @@ import { ContextObject } from "../../classes/contextevent/contextobject";
 import { QuestionBase, StaticOptionContextObjectQuestion } from "../../classes/options/StaticOption";
 import { containsTag, makestringpresentable } from "../../utility/functions";
 import { getTagValue } from "../../utility/functions";
-import { EquipmentLimit, EquipmentRestriction } from "../../classes/feature/equipment/Equipment";
+import { Equipment, EquipmentLimit, EquipmentRestriction } from "../../classes/feature/equipment/Equipment";
 import { Keyword } from "../../classes/feature/glossary/Keyword";
 import { KeywordFactory } from "../../factories/features/KeywordFactory";
+import { EquipmentFactory } from "../../factories/features/EquipmentFactory";
 
 export const BaseContextCallTable : CallEventTable = {
     option_search_viable: {
@@ -127,7 +128,29 @@ export const BaseContextCallTable : CallEventTable = {
                     for (let j = 0; j < EquipList.required.length; j++) {
                         const Requirement = EquipList.required[j]
                         const NewStringParts = []
-                        NewStringParts.push("RESTRICTION: Equipment")
+                        NewStringParts.push("RESTRICTION: Items")
+
+                        if (Requirement.category) {
+                            NewStringParts.push("in category "+makestringpresentable(Requirement.category))
+                        }
+                        if (Requirement.tag) {
+                            NewStringParts.push("with tag "+makestringpresentable(Requirement.tag))
+                        }
+
+                        if (Requirement.res_type == "keyword") {
+                            const ValKey : Keyword = KeywordFactory.CreateNewKeyword(Requirement.value, null)
+                            NewStringParts.push("must be "+makestringpresentable(ValKey.Name? ValKey.Name : ""))
+                        }                  
+
+                        RestrictCollection.push(NewStringParts.join(' '));
+                    }
+                }
+                
+                if (EquipList.removed) {
+                    for (let j = 0; j < EquipList.removed.length; j++) {
+                        const Requirement = EquipList.removed[j]
+                        const NewStringParts = []
+                        NewStringParts.push("REMOVED: Items")
 
                         if (Requirement.category) {
                             NewStringParts.push("in category "+makestringpresentable(Requirement.category))
@@ -140,9 +163,45 @@ export const BaseContextCallTable : CallEventTable = {
                             const ValKey : Keyword = KeywordFactory.CreateNewKeyword(Requirement.value, null)
                             NewStringParts.push("must be "+makestringpresentable(ValKey.Name? ValKey.Name : ""))
                         }
+
+                        if (Requirement.res_type == "all") {
+                            NewStringParts.push("cannot be equipped")
+                        }
                         
 
-                        RestrictCollection.push(NewStringParts.join(' '));
+                        RemoveCollection.push(NewStringParts.join(' '));
+                    }
+                }
+
+                if (EquipList.added) {
+                    for (let j = 0; j < EquipList.added.length; j++) {
+                        const Requirement = EquipList.added[j]
+                        const NewStringParts = []
+                        NewStringParts.push("ADDED: Items")
+
+                        if (Requirement.category) {
+                            NewStringParts.push("in category "+makestringpresentable(Requirement.category))
+                        }
+                        if (Requirement.tag) {
+                            NewStringParts.push("with tag "+makestringpresentable(Requirement.tag))
+                        }
+
+                        if (Requirement.res_type == "keyword") {
+                            const ValKey : Keyword = KeywordFactory.CreateNewKeyword(Requirement.value, null)
+                            NewStringParts.push("must be "+makestringpresentable(ValKey.Name? ValKey.Name : ""))
+                        }
+
+                        if (Requirement.res_type == "all") {
+                            NewStringParts.push("can be equipped")
+                        }
+
+                        /*if (Requirement.res_type == "id") {
+                            const ValKey : Equipment = EquipmentFactory.CreateNewEquipment(Requirement.value, null)
+                            NewStringParts.push("with name "+makestringpresentable(ValKey.Name? ValKey.Name : "") + "can be equipped")
+                        }*/
+                        
+
+                        AddedCollection.push(NewStringParts.join(' '));
                     }
                 }
             }
