@@ -91,9 +91,9 @@
                 "tags": {"desc_type" : "default"},
                 "content": "During their Activation, a Sapper can take a RISKY ACTION with +1 DICE. If successful, the Sapper is considered to be in Cover until the model moves. This ACTION cannot be used if the model is in melee combat.",
                 "glossary": [
+                    {"val": "ACTION", "id": "kw_action"},
                     {"val": "RISKY ACTION", "id": "kw_riskyaction"},
                     {"val": "+1 DICE", "id": "kw_plusdice"},
-                    {"val": "ACTION", "id": "kw_action"},
                     {"val": "Cover", "id": "gl_cover"}
                 ]
             }
