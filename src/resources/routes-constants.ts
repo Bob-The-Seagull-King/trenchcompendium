@@ -8,6 +8,7 @@ export const ROUTES = {
     COMPENDIUM_GLOSSARY_ROUTE: '/glossary/*',
     COMPENDIUM_KEYWORD_ROUTE: '/keyword/*',
     COMPENDIUM_MODEL_ROUTE: '/model/*',
+    COMPENDIUM_EQUIPMENT_ROUTE: '/equipment/*',
     
     TOOLS_CONTENT_UPLOAD_ROUTE: '/content/*',
     TOOLS_CONTENT_SAVE_ITEM: '/saveitem/*'

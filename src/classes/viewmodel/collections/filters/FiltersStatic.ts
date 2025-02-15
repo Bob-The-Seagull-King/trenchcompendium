@@ -147,5 +147,66 @@ export const FitlerDataDex : FilterDataTable = {
         findText() {
             return [new FilterText({group: "name", val: "", isstrict: false})]
         }
+    },
+    equipment: {
+        searchId: 'equipment',
+        findTags() {
+            const tempTags: FilterTag[] = []
+    
+            const allTags = (Requester.MakeRequest({ searchtype: 'tags', searchparam: { type: 'equipment' } })).sort();
+
+            let i = 0;
+            for (i = 0; i < allTags.length; i++) {
+                const tempTagText: IFilterText = { group: "tags", val: "", isstrict: false}
+                const tempTagObject: IFilterItem = { group: "tags", isactive: false, doinclude: false, name: allTags[i]}
+                const tempTagInterface: IFilterTag = { group: "tags", tagtype: tempTagObject, tagval: tempTagText }
+                const tempTagConstructed = new FilterTag(tempTagInterface);
+                tempTags.push(tempTagConstructed);
+            }
+    
+            return tempTags;
+        },
+        findMisc() {
+            const tempMisc: FilterItem[] = []
+            const keytypes = ["source","category","keywords"]
+            keytypes.sort();
+    
+            let i = 0;
+            for (i = 0; i < keytypes.length; i ++) {
+                let allVals = Requester.MakeRequest({ searchtype: 'keyvalues', searchparam: { type: 'equipment' , id: keytypes[i]} }).sort();
+                
+                if (keytypes[i] == "keywords") {
+                    const tempallVals = []
+                    for (let j = 0; j < allVals.length; j++) {
+                        for (let k = 0; k < allVals[j].length; k++) {
+                            tempallVals.push(allVals[j][k])
+                        }
+                    }
+
+                    allVals = tempallVals;
+                }
+
+                let j = 0;
+                for (j = 0; j < allVals.length; j++) {
+                    const tempItemObject: IFilterItem = { group: keytypes[i], isactive: false, doinclude: false, name: allVals[j]}
+                    const tempItemConstructed = new FilterItem(tempItemObject);
+                    tempMisc.push(tempItemConstructed);
+                }
+            }
+    
+            return tempMisc;
+        },
+        findText() {
+            return [new FilterText({group: "name", val: "", isstrict: false})]
+        },
+        findRange() {
+            return [new FilterRange(
+                {   set_lower: 0,
+                    set_upper: 100,
+                    lower: 0,
+                    upper: 100,
+                    group: "distance"
+                })]
+        }
     }
 }

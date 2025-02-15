@@ -1,36 +1,17 @@
 [
     {
-        "id": "gl_default",
+        "id": "gl_cover",
         "source": "core",
         "tags": {
-            "category" : "default"
+            "category" : "attack",
+            "attack": "ranged"
         },
-        "name": "Default",
+        "name": "Cover",
         "description":  [
             {
             "tags": {"desc_type" : "default"},
-            "content": "This is a default test item."
-            },
-            {
-            "tags": {"desc_type" : "table", "id_val" : "tb_default"}
-            }
-        ]
-    },
-    {
-        "id": "gl_defaulttest",
-        "source": "core",
-        "tags": {
-            "category" : "default"
-        },
-        "name": "DefaultTest",
-        "description":  [
-            {
-            "tags": {"desc_type" : "default"},
-            "content": "This is a default test item.",
-            "glossary": [{"val": "default", "id": "gl_default"}]
-            },
-            {
-            "tags": {"desc_type" : "table", "id_val" : "tb_default"}
+            "content": "Add -1 DICE to the roll. A model is in cover whenever it is in contact with a piece of scenery that is at least as long as the model’s base. If an attacker can see a model in its entirety, this penalty does not apply. A model cannot gain cover merely from being obscured due to angles, distant scenery or the surface that they are standing on (such as when standing on top of a building).",
+            "glossary": [{"val": "-1 DICE", "id": "kw_minusdice"}]
             }
         ]
     }

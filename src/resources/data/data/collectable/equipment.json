@@ -1,0 +1,36 @@
+[
+    {
+        "id": "eq_shovel",
+        "name": "Shovel",
+        "source": "core",
+        "tags": {"trait": true, "action": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+            "hands_melee": 2,
+            "melee": true
+        },
+        "contextdata": {"get_weapon": {}, "find_hands": {"required": false}},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "A model equipped with a shovel always starts the game in cover if deployed on ground level, even if placed in open terrain. As soon as the model moves, it is no longer in cover. A model that is covered in this way retains the benefit of Cover even if the attacking model has an unobstructed view of it.",
+                "glossary": [{"val": "cover", "id": "gl_cover"}]
+            },      
+            { "tags": {"desc_type" : "gap"} },      
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "If a model equipped with a shovel has two hands free, it can use it in Melee Combat as if it were a Trench Club."
+            }
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Battlefield shovel allows troops to dig in and fight from cover in virtually any battlefield."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": ["Wielding is Optional"]
+    }
+]

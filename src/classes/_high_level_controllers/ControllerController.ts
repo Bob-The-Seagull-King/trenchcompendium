@@ -10,6 +10,7 @@ class ControllerController {
     GlossaryCollectionController;
     KeywordCollectionController;
     ModelCollectionController;
+    EquipmentCollectionController;
 
     /**
      * Initializes all controllers, this also means all searching
@@ -19,6 +20,7 @@ class ControllerController {
         this.GlossaryCollectionController = new CollectionsListPage('glossary');
         this.KeywordCollectionController = new CollectionsListPage('keyword');
         this.ModelCollectionController = new CollectionsListPage('model');
+        this.EquipmentCollectionController = new CollectionsListPage('equipment');
     }
 }
 

@@ -93,5 +93,20 @@ export const BaseContextCallTable : CallEventTable = {
             return relayVar
         }
     
+    },
+    find_hands : {
+        event_priotity: 0,
+        getPresentationHandeddness(this: EventRunner, eventSource : any, relayVar : any, trackVal : any, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            
+            const MeleeVal = trackVal[0]
+            let MeleePresentation = ""
+            if (MeleeVal > 0) {MeleePresentation += MeleeVal.toString()}
+            
+            const RangeVal = trackVal[1]
+            let RangePresentation = ""
+            if (RangeVal > 0) {RangePresentation += RangeVal.toString()}
+            
+            return { "melee" : MeleePresentation, "range" : RangePresentation};
+        }
     }
 }
