@@ -88,7 +88,7 @@
         "name": "Alchemical Ammunication",
         "source": "core",
         "tags": {"trait": true},
-        "category": "ranged",
+        "category": "equipment",
         "distance": null,
         "stats": {
         },
