@@ -131,7 +131,7 @@ export const FitlerDataDex : FilterDataTable = {
                         }
                     }
 
-                    allVals = tempallVals;
+                    allVals = Array.from(new Set([...tempallVals]));
                 }
 
                 let j = 0;
