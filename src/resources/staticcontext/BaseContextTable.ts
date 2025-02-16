@@ -277,9 +277,9 @@ export const BaseContextCallTable : CallEventTable = {
                     }
                 }
                 
-                if (EquipList.maximum) {
-                    for (let j = 0; j < EquipList.maximum.length; j++) {
-                        const Requirement = EquipList.maximum[j]
+                if (EquipList.minimum) {
+                    for (let j = 0; j < EquipList.minimum.length; j++) {
+                        const Requirement = EquipList.minimum[j]
                         const NewStringParts = []
                         NewStringParts.push("MINIMUM: Items")
 
