@@ -203,7 +203,7 @@
         ],
         "team": "faithful",
         "stats" : {
-            "promotion": 0,
+            "potential": 0,
             "mercenary": false
         },
         "cut_keywords" : [],
