@@ -161,17 +161,16 @@
             }
         },
         "base_id": "md_yuzbasicaptain",
-        "variant_name": "Fidai_Of_Alamut",
-        "lore": [     
+        "variant_name": "Defenders_Of_The_Iron_Wall",
+        "lore": [   
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Military expeditions over the Great Iron Wall into No Man’s Land carry many risks, and their commanders are field officers known as Yüzbaşı. They are expected to lead from the front and their selection is solely on merit, with no consideration given to family pedigree or wealth."
+            },
+            { "tags": {"desc_type": "gap"} },      
             {
                 "tags": {"desc_type" : "italic"},
                 "content": "The commanders of the Iron Wall units come from amongst the personal bodyguards of the Sultan known as Silahdar."
-            },
-            { "tags": {"desc_type": "gap"}},
-            {
-                "tags": {"desc_type" : "default"},
-                "content": "Yüzbaşı can be equipped with any weapon, armour and equipment from the Iron Sultanate Equipment List.",
-                "glossary": [{"val": "Iron Sultanate", "id": "kw_sultanate"}]
             }
         ],
         "description": [    
