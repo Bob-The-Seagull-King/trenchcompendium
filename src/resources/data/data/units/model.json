@@ -155,6 +155,7 @@
         "source": "core",
         "tags": {},
         "contextdata": {
+            "unarmed_penalty_remove": { },
             "stat_options": { 
                 "options": [
                     [
@@ -312,5 +313,46 @@
         },
         "keywords" : ["kw_sultanate","kw_elite", "kw_infiltrator"],
         "abilities" : ["ab_timeslip","ab_temporalassassin"]
+    },
+    {
+        "id": "md_mamlukfaris",
+        "name": "Mamluk Faris",
+        "source": "core",
+        "tags": {},
+        "contextdata": {},
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "A Mamluk carries a Jezzail with Alchemical Ammunition. They wear a Helmet and Reinforced Armour. In addition, before each battle, you may choose one of several loadouts from their personal armoury"
+            }
+        ],
+        "lore": [      
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Mamluks are an echo of a bygone age, last members of the warrior-elite that once ruled a great empire in Northern Africa. They suffered grievous losses at the earliest stages of the Great War when the Legions of demon Zalambuer emerged from the Hellgate. The Fatimids led their Mamluk forces in a desperate campaign to reclaim the Levant, but of their fate there is no tale. Instead of returning victorious warriors, the slaves of Jahannam rushed through Sinai like an evil wind, razing Alexandria and Cairo to the ground. The remaining Mamluks fought bitterly to protect their homes, but to no avail. Too proud to leave their ancestral homes at the mercy of evil, some of the last Mamluks did not heed the call to migrate beyond the Iron Wall, and instead dispersed throughout the lands they once ruled to fight on – a fight that has never ceased since those dark days."
+            },  
+            {"tags": {"desc_type" : "gap"}},  
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "To this day the Mamluk knights play a deadly game of ambush and sudden raids on the Aegyptian front against Mammon’s legions, making their living as swords for hire, waging an endless war against the Heretics and composing poems of lamentation in memory of their lost and devastated homelands. Generations of war have hardened the Mamluks into peerless warriors, for parents pass on the secrets of Furūsiyya, the martial skills and ethical conduct of the Arabian Knights, to their children. Too few in numbers to wage open war, the Mamluks instead fight alongside any of the Peoples of the Book, making their living by offering their swords to the highest bidder, as long as such a leader promises to fight the forces of Shaytan. They respect noble character and martial prowess above all, and often bond by sharing their way of the sword with an ally they respect."
+            },  
+            {"tags": {"desc_type" : "gap"}},  
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Only a few of the famed artificial heavy warhorses of the Mamluks remain, and they are not risked in open combat unless they are used directly to defend the last few hidden abodes the Mamluks still inhabit in the vast deserts that stretch beyond the Nile delta. However, these tireless steeds are used to take the heavy Mamluk warriors into advanced positions where they can disrupt the enemy’s plans and surprise exposed enemy units."
+            }
+        ],
+        "team": "faithful",
+        "stats" : {            
+            "movement": 6,
+            "melee": 1,
+            "ranged": 1,
+            "base": [32],
+            "armor": 0,
+            "movetype": 0,
+            "mercenary": true
+        },
+        "keywords" : [],
+        "abilities" : ["ab_swornsword","ab_martialprowess","ab_arabiandestrier"]
     }
 ]

@@ -59,8 +59,8 @@
         "variant_name": "Defenders_Of_The_Iron_Wall",
         "team": "faithful",
         "stats" : {},
-        "cut_keywords" : ["kw_elite"],
-        "keywords" : [],
+        "cut_keywords" : [],
+        "keywords" : ["kw_elite"],
         "cut_abilities" : [],
         "new_abilities" : []
     },
@@ -165,7 +165,20 @@
         "lore": [     
             {
                 "tags": {"desc_type" : "italic"},
-                "content": "These warbands are known as Fida’i (which means ‘Sacrifice’), dedicated to completing their mission and returning to Alamut to receive rewards said to be able to match those of Paradise itself. They are led by a Master Assassin: one of the deadly Hands of Alamut, with two fully-trained members of the Order. A number of trainee acolytes will serve them during the mission, eager to prove their mettle and be initiated into the Order of Assassins."
+                "content": "The commanders of the Iron Wall units come from amongst the personal bodyguards of the Sultan known as Silahdar."
+            },
+            { "tags": {"desc_type": "gap"}},
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Yüzbaşı can be equipped with any weapon, armour and equipment from the Iron Sultanate Equipment List.",
+                "glossary": [{"val": "Iron Sultanate", "id": "kw_sultanate"}]
+            }
+        ],
+        "description": [    
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Yüzbaşı can be equipped with any weapon, armour and equipment from the Iron Sultanate Equipment List and can use any Sapper Only choices from the Armoury.",
+                "glossary": [{"val": "Iron Sultanate", "id": "kw_sultanate"}]
             }
         ],
         "team": "faithful",

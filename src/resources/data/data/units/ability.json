@@ -283,5 +283,84 @@
             }
         ],
         "options": []
+    },
+    {
+        "id": "ab_swornsword",
+        "name": "Sworn Sword",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {
+            "form_fireteam": {
+                "restriction": [
+                    {
+                        "rest_type": "keyword",
+                        "value": "kw_elite"
+                    }
+                ]
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"}, 
+                "content": "Mamluks can form a FIRETEAM with any one ELITE model in the Warband they are part of. This FIRETEAM is always in addition to any other FIRETEAM(s) the Warband is allowed to form. If a Mamluk joins a New Antioch FIRETEAM, the model benefits from the Co-ordinated Fireteam special rules.",
+                "glossary": [
+                    {"val": "FIRETEAM", "id": "kw_fireteam"},
+                    {"val": "ELITE", "id": "kw_elite"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_martialprowess",
+        "name": "Martial Prowess",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {
+            "offhand_fighting": {
+                "type": "melee"
+            },
+            "equipment_add_keyword": {
+                "equip_check": [
+                    {
+                        "check_type": "tag",
+                        "value": "eq_jezzail"
+                    }
+                ],
+                "additions": [
+                    "kw_assault",
+                    "kw_shieldcombo"
+                ]
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"}, 
+                "content": "Mamluks are disciples of Furūsiyya, the Knightly Discipline passed on through generations, they practice ceaselessly and have few equals. This gives their Jezzails the Keyword ASSAULT as well as the Shield Combo ability. Additionally, they suffer no penalties for fighting with off-hand weapons in melee.",
+                "glossary": [
+                    {"val": "ASSAULT", "id": "kw_assault"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_arabiandestrier",
+        "name": "Arabian Destrier",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {
+            "infiltrator_scenario": {}
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"}, 
+                "content": "Unless the scenario prohibits use of the special deployment of INFILTRATORS, you may deploy the Mamluk on any table edge as long as they are at least 8” away from any enemy model after INFILTRATORS are deployed. Mamluks can also be deployed in your own deployment zone as standard.",
+                "glossary": [
+                    {"val": "INFILTRATORS", "id": "kw_infiltrator"}
+                ]
+            }
+        ],
+        "options": []
     }
 ]

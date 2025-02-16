@@ -98,6 +98,22 @@
         ]
     },
     {
+        "id": "kw_shieldcombo",
+        "source": "core",
+        "tags": {
+            "category": "equipment",
+            "equipment": "weapon"
+        },
+        "name": "SHIELD COMBO",
+        "contextdata": {"option_search_viable" : {}},
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "For the purposes of wielding a 2-handed weapon with the ‘Shield Combo’ indicator, the Trench Shield does not take a hand to wield but still functions as normal."
+            }
+        ]
+    },
+    {
         "id": "kw_blackgrail",
         "source": "core",
         "tags": {
