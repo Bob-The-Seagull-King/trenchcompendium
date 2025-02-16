@@ -1,5 +1,6 @@
 import { Requester, IRequest } from '../../../factories/Requester'
 import { CollectionDataDex, CollectionType } from './CollectionsStatic';
+import { VariantSearch } from './filters/FiltersStatic';
 
 class ViewCollectionsModel {
 
@@ -34,6 +35,66 @@ class ViewCollectionsModel {
         if (this.dataresults.length == undefined) {
             this.dataresults = [this.dataresults]
         }
+        if (this.CollectionType) {
+            this.CollectionType.postSearch(this);
+        }
+    }
+
+    public RunMultiUnitSearch( variantsearchparams : VariantSearch) {
+        this.dataresults = Requester.MakeRequest(this.searchParam as IRequest);
+        if (this.dataresults.length == undefined) {
+            this.dataresults = [this.dataresults]
+        }
+
+        const VariantParam = this.searchParam
+        VariantParam.searchparam.type = variantsearchparams.item_type;
+
+        const VariantResults = Requester.MakeRequest(VariantParam as IRequest)
+        const RelevantResults : string[] = []
+        const ExtantVariants : string[] = []
+
+        for (let i = 0; i < this.dataresults.length; i++){
+            ExtantVariants.push(this.dataresults[i].id)
+        }
+        for (let i = 0; i < VariantResults.length; i++){
+            const Result = VariantResults[i]
+            const dynamicKey = variantsearchparams.base_var_key as keyof (typeof Result);
+            if (Result[dynamicKey] != undefined) {
+                if (!ExtantVariants.includes(VariantResults[i][dynamicKey])) {
+                    RelevantResults.push(Result[dynamicKey])
+                }
+            }
+        }
+
+        console.log(ExtantVariants)
+        console.log(RelevantResults)
+        const ResultsToAdd = Array.from(new Set([...RelevantResults]))
+
+        for (let i = 0; i < ResultsToAdd.length; i++) {
+            const NewSearch = {      
+                searchtype: "complex",
+                searchparam:    {
+                    type: variantsearchparams.base_var_type,
+                    request:    {
+                        operator: "or",
+                        terms: [
+                            {             
+                                item: "id",
+                                value: ResultsToAdd[i],
+                                equals: true,
+                                strict: true
+                            }
+                        ],
+                        subparams: []
+                    }
+                }  
+            } 
+            const AddedItem = Requester.MakeRequest(NewSearch as IRequest)
+            for (let j = 0; j < AddedItem.length; j++) {
+                this.dataresults.push(AddedItem[j])
+            }
+        }
+
         if (this.CollectionType) {
             this.CollectionType.postSearch(this);
         }

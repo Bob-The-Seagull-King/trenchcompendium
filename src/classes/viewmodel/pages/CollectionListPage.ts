@@ -42,7 +42,11 @@ class CollectionsListPage {
         const newfilter = ConvertFiltersToRequest(this.FilterManager, this.Collection.CollectionType.searchId, this.Collection.CollectionType.sort)
         if (!(JSON.stringify(newfilter) == JSON.stringify(this.Collection.searchParam))) {
             this.Collection.UpdateSearchParams(newfilter);
-            this.Collection.RunSearch();
+            if (this.FilterManager.MyFilters.variantSearch) {
+                this.Collection.RunMultiUnitSearch(this.FilterManager.MyFilters.variantSearch);
+            } else {
+                this.Collection.RunSearch();
+            }
         }
     }
     

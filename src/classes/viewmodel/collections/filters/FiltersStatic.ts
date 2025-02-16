@@ -1,12 +1,20 @@
 import { FilterItem, FilterRange, FilterTag, FilterText, IFilterItem, IFilterRange, IFilterTag, IFilterText } from "./FilterInterfaces";
 import { Requester } from "../../../../factories/Requester";
+import { ModelFactory } from "../../../../factories/features/ModelFactory";
 
 export interface FilterType {
     searchId      : string,
+    variantSearch?: VariantSearch,
     findText?: () => FilterText[],
     findMisc?: () => FilterItem[],
     findTags?: () => FilterTag[],
     findRange?: () => FilterRange[]
+}
+
+export interface VariantSearch {
+    item_type : string,
+    base_var_key : string,
+    base_var_type : string
 }
 
 export interface FilterDataTable {[moveid: Lowercase<string>]: FilterType}
@@ -94,6 +102,11 @@ export const FitlerDataDex : FilterDataTable = {
     },
     model: {
         searchId: 'model',
+        variantSearch: {
+            item_type : "modelvariant",
+            base_var_key : "base_id",
+            base_var_type : "model"
+        },
         findTags() {
             const tempTags: FilterTag[] = []
             const foundTags = (Requester.MakeRequest({ searchtype: 'tags', searchparam: { type: 'model' } })).sort();
