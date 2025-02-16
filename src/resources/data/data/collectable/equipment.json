@@ -186,5 +186,200 @@
         "options": [],
         "keywords": [],
         "modifiers": []
+    },
+    {
+        "id": "eq_trenchpolearm",
+        "name": "Trench Polearm",
+        "source": "core",
+        "tags": {"action": true, "weapon": true, "trait": true},
+        "category": "melee",
+        "distance": null,
+        "stats": {
+            "hands_melee": 2,
+            "melee": true
+        },
+        "contextdata": {
+            "get_weapon": {}
+        },
+        "description": [       
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Polearms take two hands to use. Melee attacks made against this model are made with -1 DICE if the attacking model Charged this turn.",
+                "glossary": [
+                    {"val": "-1 DICE", "id": "kw_minusdice"}
+                ]
+            } 
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Trench pikes, billhooks, spears and other long polearms are excellent defensive weapons, but are cumbersome and heavy. They are often used to deal with barbed wire."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_cumbersome", "kw_shieldcombo"],
+        "modifiers": ["-1D to hit for Chargers"]
+    },
+    {
+        "id": "eq_trenchshield",
+        "name": "Trench Shield",
+        "source": "core",
+        "tags": {"trait": true, "shield": true},
+        "category": "armor",
+        "distance": null,
+        "stats": {
+            "hands_melee": 1,
+            "hands_ranged": 1
+        },
+        "contextdata": {
+            "upgrade_stat": {"stat": "armor", "value": -1},
+            "find_hands": { "required": true, "both_kits": true }
+        },
+        "description": [       
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Always takes one hand to use in both melee and in ranged combat, and cannot be switched out. Grants -1 to all injury rolls against the model. This bonus stacks with any armour the model wears, unless otherwise indicated. For the purposes of wielding a 2-handed weapon with the ‘Shield Combo’ indicator, the Trench Shield does not take a hand to wield but still functions as normal.",
+                "glossary": [
+                    {"val": "Shield Combo", "id": "kw_shieldcombo"}
+                ]
+            } 
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Shields used in trench warfare are made of steel reinforced with Orichalcum to allow them to withstand even high-calibre bullets, or from metal mined from Infernal bedrock and shaped in the armouries of Pandæmonium, the Capital of Hell."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_swordaxe",
+        "name": "Sword / Axe",
+        "source": "core",
+        "tags": {"action": true, "weapon": true},
+        "category": "melee",
+        "distance": null,
+        "stats": {
+            "hands_melee": 1,
+            "melee": true
+        },
+        "contextdata": {
+            "get_weapon": {}
+        },
+        "description": [     
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Because of the martial traditions of many proud nations and due to the advances in armour technology, swords and axes are extremely popular, especially amongst elite units and officers. They are supremely useful for finishing off downed opponents and causing profusely bleeding wounds."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_critical"],
+        "modifiers": []
+    },
+    {
+        "id": "eq_pistolrevolver",
+        "name": "Pistol / Revolver",
+        "source": "core",
+        "tags": {"action": true, "weapon": true},
+        "category": "ranged",
+        "distance": 12,
+        "stats": {
+            "hands_melee": 1,
+            "hands_ranged": 1,
+            "ranged": true,
+            "melee": true
+        },
+        "contextdata": {
+            "get_weapon": {},
+            "off_hand_functional": {},
+            "used_special_characteristic": {"character": "ranged"}
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "A model armed with a pistol can use it in melee as well as ranged combat (using Ranged Characteristic), including as an off-hand weapon to execute an additional melee attack."
+            }  
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Pistols come in a staggering variety, ranging from revolvers to semi-automatic pistols. Heretic forges produce their own, often highly elaborate sidearms. They see extensive use in close-quarter combat."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_greatswordaxe",
+        "name": "Greatsword / Greataxe",
+        "source": "core",
+        "tags": {"action": true, "weapon": true},
+        "category": "melee",
+        "distance": null,
+        "stats": {
+            "hands_melee": 2,
+            "melee": true
+        },
+        "contextdata": {
+            "get_weapon": {},
+            "injury_bonus": {"type": "dice", "value": 1}
+        },
+        "description": [    
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Rolls all injuries with +1 DICE.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"}
+                ]
+            }   
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Claymore, Zweihanders and even huge battle axes are used in the trenches when bullets fail to stop quick or well-armoured targets. The strikes from these weapons can easily lop off limbs and heads."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_critical","kw_heavy"],
+        "modifiers": []
+    },
+    {
+        "id": "eq_mamlukgreatsword",
+        "name": "Mamluk Greatsword",
+        "source": "core",
+        "tags": {"action": true, "weapon": true},
+        "category": "melee",
+        "distance": null,
+        "stats": {
+            "hands_melee": 2,
+            "melee": true
+        },
+        "contextdata": {
+            "get_weapon": {},
+            "injury_bonus": {"type": "dice", "value": 1}
+        },
+        "description": [    
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Rolls all injuries with +1 DICE.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"}
+                ]
+            }   
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Claymore, Zweihanders and even huge battle axes are used in the trenches when bullets fail to stop quick or well-armoured targets. The strikes from these weapons can easily lop off limbs and heads."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_critical"],
+        "modifiers": []
     }
 ]

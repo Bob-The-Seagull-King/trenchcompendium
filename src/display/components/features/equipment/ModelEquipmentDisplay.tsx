@@ -45,10 +45,14 @@ const ModelEquipmentDisplay = (props: any) => {
                 {abilityObject.EquipmentItems.map((item) => ( 
                     <div key={"model_equipment_"+abilityObject.ID+"_equipment_id_"+item.ID}>
                         <GenericDisplay  d_colour={'default'} d_state={false}  d_name={item.Name} d_type={"sub"} d_method={() => ReturnEquipment(item, abilityObject) }/>
-                        <div className="verticalspacerbig"/>
+                        {((abilityObject.EquipmentItems.length > 0) && (abilityObject.EquipmentItems.indexOf(item) != abilityObject.EquipmentItems.length-1)) &&
+                            <div className="verticalspacerbig"/>
+                        }
                     </div>
                 )) /* Abilities */}
             </div>
+            {abilityObject.MyOptions.length > 0 &&
+            <>
             <div className="verticalspacerbig"/>
             <div>
                 {abilityObject.MyOptions.map((item) => ( 
@@ -58,18 +62,21 @@ const ModelEquipmentDisplay = (props: any) => {
                         <div className="row abilityInternalStructure">
                                 {item.Selections.map((subitem) => ( 
                                     <div key={"model_equipment_"+abilityObject.ID+"_equipment_id_"+subitem.value.ID}>
-                                        <ModelEquipmentDisplay data={subitem.value} team_col={team_color}/>
+                                        
+                                        <div className={"borderstyler subborder"+getColour(team_color)}>
+                                            <div className="abilityInternalStructure">
+                                                <ModelEquipmentDisplay data={subitem.value} team_col={team_color}/>
+                                            </div>
+                                        </div>
                                         <div className="verticalspacerbig"/>
                                     </div>
                                 )) /* Abilities */}
-                                {item.Selections.length > 1 &&                                     
-                                    <div className={'separator bodytext tagboxpad color'+getColour(team_color)}></div>
-                                }
-                            </div>
+                                </div>
                         </div>
                     </div>
                 )) /* Abilities */}
             </div>
+            </>}
         </ErrorBoundary>
     )
 }

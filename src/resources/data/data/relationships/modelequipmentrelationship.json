@@ -16,9 +16,83 @@
         "tags": {},
         "name": "Mamluk Faris Equipment",
         "contextdata": {},
-        "options": [],
+        "options": [
+            {
+                "ref_id" : "ot_mamlukequipmentpackages",
+                "name" : "Mamluk Faris Loadouts",
+                "description" : [],
+                "category" : "type",
+                "type" : "text",
+                "strictness" : "strict",
+                "predefined_options" : [],
+                "option_context" : {"basic_option_default":{}},
+                "data_search" : {      
+                    "searchtype": "complex",
+                    "searchparam":    {
+                        "type": "modelequipmentrelationship",
+                        "request":    {
+                            "operator": "or",
+                            "terms": [
+                                {             
+                                    "item": "id",
+                                    "value": "rel_md_eq_mamlukpackage_1",
+                                    "equals": true,
+                                    "strict": true
+                                },
+                                {             
+                                    "item": "id",
+                                    "value": "rel_md_eq_mamlukpackage_2",
+                                    "equals": true,
+                                    "strict": true
+                                },
+                                {             
+                                    "item": "id",
+                                    "value": "rel_md_eq_mamlukpackage_3",
+                                    "equals": true,
+                                    "strict": true
+                                }
+                            ],
+                            "subparams": []
+                        }
+                    }                        
+                }
+            }
+        ],
         "model_id": ["md_mamlukfaris","md_mamlukfaris_mv_sipahi"],
         "mandatory_equipment": ["eq_jezzail","eq_alchemicalammunition","eq_reinforcedarmor","eq_combathelmet"],
+        "removable": false
+    },
+    {
+        "id": "rel_md_eq_mamlukpackage_1",
+        "source": "core",
+        "tags": {},
+        "name": "Polearm and Shield",
+        "contextdata": {},
+        "options": [],
+        "model_id": [],
+        "mandatory_equipment": ["eq_trenchpolearm","eq_trenchshield"],
+        "removable": false
+    },
+    {
+        "id": "rel_md_eq_mamlukpackage_2",
+        "source": "core",
+        "tags": {},
+        "name": "Sword and Pistol",
+        "contextdata": {},
+        "options": [],
+        "model_id": [],
+        "mandatory_equipment": ["eq_swordaxe","eq_pistolrevolver"],
+        "removable": false
+    },
+    {
+        "id": "rel_md_eq_mamlukpackage_3",
+        "source": "core",
+        "tags": {},
+        "name": "Two-Handed Sword",
+        "contextdata": {},
+        "options": [],
+        "model_id": [],
+        "mandatory_equipment": ["eq_mamlukgreatsword"],
         "removable": false
     }
 ]
