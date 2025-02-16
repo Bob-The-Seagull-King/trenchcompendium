@@ -157,18 +157,24 @@
             "model_equipment_restriction": {
                 "removed": [
                     {
-                        "category": "equipment",
+                        "tag": "shield",
                         "res_type": "all",
                         "value": ""
                     },
                     {
-                        "tag": "shield",
+                        "category": "melee",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "ranged",
                         "res_type": "all",
                         "value": ""
                     }
                 ],
-                "added": [
+                "required": [
                     {
+                        "category": "equipment",
                         "res_type": "id",
                         "value": "eq_windamulet"
                     }

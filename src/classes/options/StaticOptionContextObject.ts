@@ -2,7 +2,6 @@ import { ContextObject, IContextObject } from "../contextevent/contextobject";
 import { StaticOptionFactory } from "../../factories/features/StaticOptionFactory";
 import { StaticContextObject } from "../contextevent/staticcontextobject";
 import { IStaticOption, StaticOption } from "./StaticOption";
-import { DynamicContextObject } from "../contextevent/dynamiccontextobject";
 
 interface IStaticOptionContextObject extends IContextObject {
     options : IStaticOption[]

@@ -8,7 +8,6 @@ import { getTagValue } from "../../utility/functions";
 import { Equipment, EquipmentLimit, EquipmentRestriction } from "../../classes/feature/equipment/Equipment";
 import { Keyword } from "../../classes/feature/glossary/Keyword";
 import { KeywordFactory } from "../../factories/features/KeywordFactory";
-import { EquipmentFactory } from "../../factories/features/EquipmentFactory";
 
 export const BaseContextCallTable : CallEventTable = {
     option_search_viable: {
@@ -115,8 +114,11 @@ export const BaseContextCallTable : CallEventTable = {
     },
     model_equipment_restriction : {
         event_priotity: 0,        
-        getEquipmentRestrictionPresentable(this: EventRunner, eventSource : any, relayVar : any, trackVal : EquipmentRestriction[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) 
+        async getEquipmentRestrictionPresentable(this: EventRunner, eventSource : any, relayVar : any, trackVal : EquipmentRestriction[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) 
         {
+            
+            const { EquipmentFactory } = await import("../../factories/features/EquipmentFactory");
+
             const RemoveCollection : string[] = []
             const AddedCollection : string[] = []
             const RestrictCollection : string[] = []
@@ -140,6 +142,11 @@ export const BaseContextCallTable : CallEventTable = {
                         if (Requirement.res_type == "keyword") {
                             const ValKey : Keyword = KeywordFactory.CreateNewKeyword(Requirement.value, null)
                             NewStringParts.push("must be "+makestringpresentable(ValKey.Name? ValKey.Name : ""))
+                        }  
+
+                        if (Requirement.res_type == "id") {
+                            const EquipmentItem = EquipmentFactory.CreateNewEquipment(Requirement.value, null)
+                            NewStringParts.push("must be "+(EquipmentItem.Name))
                         }                  
 
                         RestrictCollection.push(NewStringParts.join(' '));
@@ -167,6 +174,11 @@ export const BaseContextCallTable : CallEventTable = {
                         if (Requirement.res_type == "all") {
                             NewStringParts.push("cannot be equipped")
                         }
+
+                        if (Requirement.res_type == "id") {
+                            const EquipmentItem = EquipmentFactory.CreateNewEquipment(Requirement.value, null)
+                            NewStringParts.push("cannot be "+(EquipmentItem.Name))
+                        }        
                         
 
                         RemoveCollection.push(NewStringParts.join(' '));
@@ -195,10 +207,10 @@ export const BaseContextCallTable : CallEventTable = {
                             NewStringParts.push("can be equipped")
                         }
 
-                        /*if (Requirement.res_type == "id") {
-                            const ValKey : Equipment = EquipmentFactory.CreateNewEquipment(Requirement.value, null)
-                            NewStringParts.push("with name "+makestringpresentable(ValKey.Name? ValKey.Name : "") + "can be equipped")
-                        }*/
+                        if (Requirement.res_type == "id") {
+                            const EquipmentItem = EquipmentFactory.CreateNewEquipment(Requirement.value, null)
+                            NewStringParts.push("can be "+(EquipmentItem.Name))
+                        }        
                         
 
                         AddedCollection.push(NewStringParts.join(' '));
@@ -218,8 +230,10 @@ export const BaseContextCallTable : CallEventTable = {
     },
     model_equipment_limit : {
         event_priotity: 1,
-        getEquipmentLimitPresentable(this: EventRunner, eventSource : any, relayVar : any, trackVal : EquipmentLimit[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+        async getEquipmentLimitPresentable(this: EventRunner, eventSource : any, relayVar : any, trackVal : EquipmentLimit[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
             
+            const { EquipmentFactory } = await import("../../factories/features/EquipmentFactory");
+
             const MaximumCollection : string[] = []
             const MinimumCollection : string[] = []
 
@@ -230,7 +244,7 @@ export const BaseContextCallTable : CallEventTable = {
                     for (let j = 0; j < EquipList.maximum.length; j++) {
                         const Requirement = EquipList.maximum[j]
                         const NewStringParts = []
-                        NewStringParts.push("MAXIMUM: Equipment")
+                        NewStringParts.push("MAXIMUM: Items")
 
                         if (Requirement.category) {
                             NewStringParts.push("in category "+makestringpresentable(Requirement.category))
@@ -242,10 +256,61 @@ export const BaseContextCallTable : CallEventTable = {
                         if (Requirement.res_type == "tag") {
                             NewStringParts.push("that have tag "+makestringpresentable(Requirement.value.toString()))
                         }
+                        
+                        if (Requirement.res_type == "keyword") {
+                            const ValKey : Keyword = KeywordFactory.CreateNewKeyword(Requirement.value, null)
+                            NewStringParts.push("with the keyword "+makestringpresentable(ValKey.Name? ValKey.Name : ""))
+                        }
+
+                        if (Requirement.res_type == "all") {
+                            NewStringParts.push("")
+                        }
+
+                        if (Requirement.res_type == "id") {
+                            const EquipmentItem = EquipmentFactory.CreateNewEquipment(Requirement.value, null)
+                            NewStringParts.push("with the name "+(EquipmentItem.Name))
+                        }     
 
                         NewStringParts.push("have a limit of "+makestringpresentable(Requirement.limit.toString()))
                         
                         MaximumCollection.push(NewStringParts.join(' '));
+                    }
+                }
+                
+                if (EquipList.maximum) {
+                    for (let j = 0; j < EquipList.maximum.length; j++) {
+                        const Requirement = EquipList.maximum[j]
+                        const NewStringParts = []
+                        NewStringParts.push("MINIMUM: Items")
+
+                        if (Requirement.category) {
+                            NewStringParts.push("in category "+makestringpresentable(Requirement.category))
+                        }
+                        if (Requirement.tag) {
+                            NewStringParts.push("with tag "+makestringpresentable(Requirement.tag))
+                        }
+                        
+                        if (Requirement.res_type == "tag") {
+                            NewStringParts.push("that have tag "+makestringpresentable(Requirement.value.toString()))
+                        }
+                        
+                        if (Requirement.res_type == "keyword") {
+                            const ValKey : Keyword = KeywordFactory.CreateNewKeyword(Requirement.value, null)
+                            NewStringParts.push("with the keyword "+makestringpresentable(ValKey.Name? ValKey.Name : ""))
+                        }
+
+                        if (Requirement.res_type == "all") {
+                            NewStringParts.push("")
+                        }
+
+                        if (Requirement.res_type == "id") {
+                            const EquipmentItem = EquipmentFactory.CreateNewEquipment(Requirement.value, null)
+                            NewStringParts.push("with the name "+(EquipmentItem.Name))
+                        }     
+
+                        NewStringParts.push("must have at least "+makestringpresentable(Requirement.limit.toString()))
+                        
+                        MinimumCollection.push(NewStringParts.join(' '));
                     }
                 }
             }
