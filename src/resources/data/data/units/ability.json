@@ -165,5 +165,57 @@
             }
         ],
         "options": []
+    },
+    {
+        "id": "ab_masteryoftheelements",
+        "name": "Mastery of the Elements",
+        "source": "core",
+        "tags": {"trait": true, "selection": true, "action_choose": true, "deployment_choose": true},
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"}, 
+                "content": "At the beginning of a battle, all ranged and melee weapons that an Alchemist has been equipped with may be assigned one of the following Keywords: SHRAPNEL, FIRE or GAS added to them. All the weapons the Alchemist has will share the same Keyword. With a RISKY ACTION with +1 DICE, the Alchemist can change this Keyword into one of the others.",
+                "glossary": [
+                    {"val": "SHRAPNEL", "id": "kw_shrapnel"},
+                    {"val": "FIRE", "id": "kw_fire"},
+                    {"val": "GAS", "id": "kw_gas"},
+                    {"val": "RISKY ACTION", "id": "kw_riskyaction"},
+                    {"val": "+1 DICE", "id": "kw_plusdice"}
+                ]
+            }
+        ],
+        "options": [
+            {
+                "ref_id" : "ot_masteryoftheelements",
+                "name" : "Elements",
+                "description" : [],
+                "category" : "type",
+                "type" : "text",
+                "strictness" : "strict",
+                "predefined_options" : [],
+                "option_context" : {"basic_option_default":{}},
+                "data_search" : {      
+                    "searchtype": "complex",
+                    "searchparam":    {
+                        "type": "keyword",
+                        "request":    {
+                            "operator": "and",
+                            "terms": [
+                                {             
+                                    "item": "tags",
+                                    "value": "category",
+                                    "equals": true,
+                                    "strict": true,
+                                    "istag": true,
+                                    "tagvalue": "element"
+                                }
+                            ],
+                            "subparams": []
+                        }
+                    }                        
+                }
+            }
+        ]
     }
 ]

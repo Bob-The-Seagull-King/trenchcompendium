@@ -9,6 +9,7 @@ import { returnDescription } from '../../../../utility/util'
 import { ModelCollection } from '../../../../classes/feature/model/ModelCollection';
 import { Model } from '../../../../classes/feature/model/Model';
 import { Ability } from '../../../../classes/feature/ability/Ability';
+import OptionSetStaticDisplay from '../../subcomponents/description/OptionSetStaticDisplay';
 
 const AbilityDisplay = (props: any) => {
     const abilityObject: Ability = props.data
@@ -16,8 +17,13 @@ const AbilityDisplay = (props: any) => {
     return (
         <ErrorBoundary fallback={<div>Something went wrong with AbilityDisplay.tsx</div>}>
             <div className='abilityInternalStructure'>
-                <div>
+                <div className='row'>
                     {returnDescription(abilityObject, abilityObject.Description)}
+                </div>
+                <div className='row'>
+                    {
+                        <OptionSetStaticDisplay data={abilityObject.MyOptions} />
+                    }
                 </div>
             </div>
         </ErrorBoundary>

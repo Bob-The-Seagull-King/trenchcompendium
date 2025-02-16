@@ -216,5 +216,37 @@
         },
         "keywords" : ["kw_sultanate"],
         "abilities" : ["ab_artificialbody","ab_mauling","ab_lionsgrace"]
+    },
+    {
+        "id": "md_jabireanalchemist",
+        "name": "Jabirean Alchemist",
+        "source": "core",
+        "tags": {},
+        "contextdata": {},
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Alchemist can be equipped with any weapon, armour and equipment from the Iron Sultanate Armoury.",
+                "glossary": [{"val": "Iron Sultanate", "id": "kw_sultanate"}]
+            }
+        ],
+        "lore": [      
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "The Jabirean Alchemist is a master of esoteric powers, able to control fire and ice, metal and liquid; capable of creating intricate mechanical devices and artificial life as well as weapons of calamitous potency. In exchange for the freedom to practise their arts, the Alchemists supply the Sultanate with the peerless Jabirean battle lions, and serve on the front lines where their devastating alchemical compounds melt the flesh from the bones of the Unbelievers, or dissolve through even the toughest enemy armour."
+            }
+        ],
+        "team": "faithful",
+        "stats" : {            
+            "movement": 6,
+            "melee": 1,
+            "ranged": 2,
+            "base": [32],
+            "armor": 0,
+            "movetype": 0,
+            "potential": 0
+        },
+        "keywords" : ["kw_sultanate","kw_elite"],
+        "abilities" : ["ab_masteryoftheelements"]
     }
 ]
