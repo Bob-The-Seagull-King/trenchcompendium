@@ -17,7 +17,7 @@
         "name": "Mamluk Faris Equipment",
         "contextdata": {},
         "options": [],
-        "model_id": ["md_mamlukfaris"],
+        "model_id": ["md_mamlukfaris","md_mamlukfaris_mv_sipahi"],
         "mandatory_equipment": ["eq_jezzail","eq_alchemicalammunition","eq_reinforcedarmor","eq_combathelmet"],
         "removable": false
     }
