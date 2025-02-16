@@ -58,5 +58,131 @@
         "options": [],
         "keywords": [],
         "modifiers": []
+    },
+    {
+        "id": "eq_jezzail",
+        "name": "Jezzail",
+        "source": "core",
+        "tags": {"action": true},
+        "category": "ranged",
+        "distance": 18,
+        "stats": {
+        },
+        "contextdata": {},
+        "description": [   
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "These long arms are by far the most common weapons carried by the soldiers of the Sultanate of the Great Iron Wall. Their barrels are smoothbore which limits their accuracy at range, but this is more than made up for by the fact that this allows them to be loaded with different types of alchemical ammunition made by the Jabirean Alchemists."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_alchemicalammunition",
+        "name": "Alchemical Ammunication",
+        "source": "core",
+        "tags": {"trait": true},
+        "category": "ranged",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {
+            "equipment_add_to": {
+                "equip_check": [
+                    {
+                        "check_type": "tag",
+                        "value": "eq_alchemicalammunition"
+                    }
+                ]
+            },
+            "ranged_bonus_conditional" : { 
+                "condition" : [
+                    {
+                        "bonus_type": "dice",
+                        "value": 1
+                    }
+                ]
+            }
+        },
+        "description": [       
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Adds +1 DICE to Ranged Attack rolls on the Action Success Chart. Can only be used with Jezzails, Alaybozan, Halberd-Guns and Siege Jezzails.",
+                "glossary": [{"val": "+1 DICE", "id": "kw_plusdice"}]
+            } 
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Jabirean Alchemists craft these Jezzail bullets from the slivers of the Iron Wall. Each such shot is carved the Seal of Solomon, guiding them during their path through the air."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_reinforcedarmor",
+        "name": "Reinforced Armor",
+        "source": "core",
+        "tags": {"trait": true},
+        "category": "armor",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {
+            "upgrade_stat": {"stat": "armor", "value": -2}
+        },
+        "description": [       
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Grants a -2 modifier to all injury rolls against the model wearing this armour."
+            } 
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Reinforced armour is a master-crafted suit made individually for the most important and elite troops. Each one is richly decorated and often carries the personal device of the warrior who wears it."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_combathelmet",
+        "name": "Combat Helmet",
+        "source": "core",
+        "tags": {"trait": true, "headgear": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {
+            "ignore_element": {"element": "kw_shrapnel"}
+        },
+        "description": [       
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Ignores additional BLOOD MARKERS caused by the Keyword SHRAPNEL.",
+                "glossary": [
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"},
+                    {"val": "SHRAPNEL", "id": "kw_shrapnel"}
+                ]
+            } 
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "The simple combat helmet has proven its value on the battlefield time and again."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
     }
 ]

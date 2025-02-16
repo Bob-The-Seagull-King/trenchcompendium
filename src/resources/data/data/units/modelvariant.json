@@ -186,5 +186,29 @@
         "keywords" : ["kw_strong"],
         "cut_abilities" : ["ab_mubarizun"],
         "new_abilities" : []
+    },
+    {
+        "id": "md_mamlukfaris_mv_sipahi",
+        "name": "Silahdar",
+        "source": "core",
+        "tags": {},
+        "contextdata": {},
+        "base_id": "md_mamlukfaris",
+        "variant_name": "Defenders_Of_The_Iron_Wall",
+        "lore": [   
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Sipahi Automaton Cavalry often serves as infantry in the Iron Wall units to reinforce areas under severe pressure."
+            }
+        ],
+        "team": "faithful",
+        "stats" : {
+            "promotion": 0,
+            "mercenary": false
+        },
+        "cut_keywords" : [],
+        "keywords" : [],
+        "cut_abilities" : [],
+        "new_abilities" : []
     }
 ]
