@@ -89,6 +89,8 @@
         "category": "ranged",
         "distance": null,
         "stats": {
+            "hands_melee": 2,
+            "melee": true
         },
         "contextdata": {
             "equipment_add_to": {
