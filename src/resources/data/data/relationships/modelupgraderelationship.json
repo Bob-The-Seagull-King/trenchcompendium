@@ -11,6 +11,17 @@
         "faction_mask":[]
     },
     {
+        "id": "rel_md_up_infiltrator10",
+        "model_id_set": ["md_azeb_mv_acolyte"],
+        "upgrade_id": "up_infiltrator",
+        "cost": 10,
+        "cost_type": 0,
+        "restricted_upgrades": [
+        ],
+        "warband_limit": 0,
+        "faction_mask":[]
+    },
+    {
         "id": "rel_md_up_meleeboost5",
         "model_id_set": ["md_azeb_mv_kavass"],
         "upgrade_id": "up_meleemight",

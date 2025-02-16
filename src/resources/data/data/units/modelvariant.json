@@ -6,7 +6,7 @@
         "tags": {},
         "contextdata": {},
         "base_id": "md_janissaries",
-        "variant_name": "Alamut",
+        "variant_name": "Fidai_Of_Alamut",
         "lore": [     
             {
                 "tags": {"desc_type" : "italic"},
@@ -21,11 +21,63 @@
         "new_abilities" : ["ab_whirlingdervishes"]
     },
     {
+        "id": "md_janissaries_mv_faris",
+        "name": "Fāris",
+        "source": "core",
+        "tags": {},
+        "contextdata": {},
+        "base_id": "md_janissaries",
+        "variant_name": "House_Of_Wisdom",
+        "lore": [     
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Each Alchemist dispatched on such a journey is an irreplaceable loss, and since they operate under their own authority, they cannot expect direct support from the Sultan’s forces. Many noble Fāris warriors have taken oaths to protect these scholars in their journeys, as well as their own Kavass bodyguards sworn to fight and die in defence of their Masters."
+            }
+        ],
+        "team": "faithful",
+        "stats" : {},
+        "cut_keywords" : [],
+        "keywords" : ["kw_elite"],
+        "cut_abilities" : [],
+        "new_abilities" : []
+    },
+    {
+        "id": "md_janissaries_mv_officer",
+        "name": "Janissary Officer",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_janissaries"
+                    }
+                ]
+            }},
+        "base_id": "md_janissaries",
+        "variant_name": "Defenders_Of_The_Iron_Wall",
+        "team": "faithful",
+        "stats" : {},
+        "cut_keywords" : ["kw_elite"],
+        "keywords" : [],
+        "cut_abilities" : [],
+        "new_abilities" : []
+    },
+    {
         "id": "md_azeb_mv_kavass",
         "name": "Kavass",
         "source": "core",
         "tags": {},
-        "contextdata": {},
+        "contextdata": {
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_azeb"
+                    }
+                ]
+            }},
         "base_id": "md_azeb",
         "variant_name": "House_Of_Wisdom",
         "lore": [     
@@ -39,6 +91,88 @@
         "cut_keywords" : [],
         "keywords" : [],
         "cut_abilities" : [],
+        "new_abilities" : []
+    },
+    {
+        "id": "md_sultanateassassin_mv_masterassassin",
+        "name": "Master Assassin",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_sultanateassassin"
+                    }
+                ]
+            }},
+        "base_id": "md_sultanateassassin",
+        "variant_name": "Fidai_Of_Alamut",
+        "team": "faithful",
+        "stats" : {},
+        "cut_keywords" : [],
+        "keywords" : ["kw_tough"],
+        "cut_abilities" : [],
+        "new_abilities" : []
+    },
+    {
+        "id": "md_azeb_mv_acolyte",
+        "name": "Assassin Acolyte",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_azeb"
+                    }
+                ]
+            }},
+        "base_id": "md_azeb",
+        "variant_name": "Fidai_Of_Alamut",
+        "lore": [     
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "These warbands are known as Fida’i (which means ‘Sacrifice’), dedicated to completing their mission and returning to Alamut to receive rewards said to be able to match those of Paradise itself. They are led by a Master Assassin: one of the deadly Hands of Alamut, with two fully-trained members of the Order. A number of trainee acolytes will serve them during the mission, eager to prove their mettle and be initiated into the Order of Assassins."
+            }
+        ],
+        "team": "faithful",
+        "stats" : {},
+        "cut_keywords" : [],
+        "keywords" : [],
+        "cut_abilities" : [],
+        "new_abilities" : []
+    },
+    {
+        "id": "md_yuzbasicaptain_mv_silahdar",
+        "name": "Silahdar",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_sultanatesapper"
+                    }
+                ]
+            }
+        },
+        "base_id": "md_yuzbasicaptain",
+        "variant_name": "Fidai_Of_Alamut",
+        "lore": [     
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "These warbands are known as Fida’i (which means ‘Sacrifice’), dedicated to completing their mission and returning to Alamut to receive rewards said to be able to match those of Paradise itself. They are led by a Master Assassin: one of the deadly Hands of Alamut, with two fully-trained members of the Order. A number of trainee acolytes will serve them during the mission, eager to prove their mettle and be initiated into the Order of Assassins."
+            }
+        ],
+        "team": "faithful",
+        "stats" : {},
+        "cut_keywords" : [],
+        "keywords" : ["kw_strong"],
+        "cut_abilities" : ["ab_mubarizun"],
         "new_abilities" : []
     }
 ]

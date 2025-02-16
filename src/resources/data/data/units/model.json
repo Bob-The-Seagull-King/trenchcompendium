@@ -248,5 +248,69 @@
         },
         "keywords" : ["kw_sultanate","kw_elite"],
         "abilities" : ["ab_masteryoftheelements"]
+    },
+    {
+        "id": "md_yuzbasicaptain",
+        "name": "Yüzbaşı Captain",
+        "source": "core",
+        "tags": {},
+        "contextdata": {},
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Yüzbaşı can be equipped with any weapon, armour and equipment from the Iron Sultanate Equipment List.",
+                "glossary": [{"val": "Iron Sultanate", "id": "kw_sultanate"}]
+            }
+        ],
+        "lore": [      
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Military expeditions over the Great Iron Wall into No Man’s Land carry many risks, and their commanders are field officers known as Yüzbaşı. They are expected to lead from the front and their selection is solely on merit, with no consideration given to family pedigree or wealth."
+            }
+        ],
+        "team": "faithful",
+        "stats" : {            
+            "movement": 6,
+            "melee": 2,
+            "ranged": 2,
+            "base": [32],
+            "armor": 0,
+            "movetype": 0,
+            "potential": 0
+        },
+        "keywords" : ["kw_sultanate","kw_elite", "kw_tough"],
+        "abilities" : ["ab_mubarizun"]
+    },
+    {
+        "id": "md_sultanateassassin",
+        "name": "Sultanate Assassin",
+        "source": "core",
+        "tags": {},
+        "contextdata": {},
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Assassin can be equipped with any weapon, armour and equipment from the Iron Sultanate Equipment List.",
+                "glossary": [{"val": "Iron Sultanate", "id": "kw_sultanate"}]
+            }
+        ],
+        "lore": [      
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Assassins are a legendary order of mystic warriors, whispered about the world over for their secrecy and ruthlessness. Assassins are able to bend space and time using the sacred rituals and powerful hallucinogens discovered by magi of the order. With this esoteric power they prowl behind enemy lines, hunting their targets with merciless efficiency. They can seemingly appear in two places simultaneously, strike a foe with startling speed and then travel back into time to a moment a few heartbeats before, safe from any retaliation."
+            }
+        ],
+        "team": "faithful",
+        "stats" : {            
+            "movement": 6,
+            "melee": 2,
+            "ranged": 1,
+            "base": [32],
+            "armor": 0,
+            "movetype": 0,
+            "potential": 0
+        },
+        "keywords" : ["kw_sultanate","kw_elite", "kw_infiltrator"],
+        "abilities" : ["ab_timeslip","ab_temporalassassin"]
     }
 ]

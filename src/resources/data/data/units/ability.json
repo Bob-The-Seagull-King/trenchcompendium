@@ -217,5 +217,71 @@
                 }
             }
         ]
+    },
+    {
+        "id": "ab_mubarizun",
+        "name": "Mubarizon",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {
+            "keyword_ignore": { "value": "kw_fear" },
+            "injury_bonus_conditional" : { 
+                "condition" : [
+                    {
+                        "bonus_type": "dice",
+                        "value": 1,
+                        "target": "foe",
+                        "keyword": "kw_tough"
+                    }
+                ]
+            }},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"}, 
+                "content": "Yüzbaşı is expected to face the mightiest of their enemies in personal combat, inspiring the troops to victory with their personal prowess. Yüzbaşı are immune to the effects of the Keyword FEAR and add +1 DICE to injury rolls against TOUGH opponents.",
+                "glossary": [
+                    {"val": "FEAR", "id": "kw_fear"},
+                    {"val": "TOUGH", "id": "kw_tough"},
+                    {"val": "+1 DICE", "id": "kw_plusdice"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_timeslip",
+        "name": "Time Slip",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"}, 
+                "content": "If any type of attack (melee, ranged, mine etc.) misses the Assassin, they may slip into a moment in the future. The Assassin can move into any unoccupied space within 6”, though they cannot be moved within 1” of any enemy model or leave the gaming table. If moving out of melee this way, enemies do not get free attacks."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_temporalassassin",
+        "name": "Temporal Assassin",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"}, 
+                "content": "After the Assassin makes a Charge Roll, but before it moves toward its target, you may instead choose to have the Assassin split itself through time if it has not already taken a Melee Attack ACTION this Activation. ",
+                "glossary": [
+                    {"val": "ACTION", "id": "kw_action"}
+                ]
+            },                
+            { "tags": {"desc_type" : "gap"} },  
+            {
+                "tags": {"desc_type" : "default"}, 
+                "content": "Choose up to two enemy models within the charging distance of the Assassin. Then, place the Assassin into base contact with each enemy model, one after the other. It may make a Melee Attack against each one with a single melee weapon that it is equipped with. After the attacks (and any resulting effects) have been resolved, place the Assassin at either location. The Assassin cannot make any further melee attacks during this Activation."
+            }
+        ],
+        "options": []
     }
 ]
