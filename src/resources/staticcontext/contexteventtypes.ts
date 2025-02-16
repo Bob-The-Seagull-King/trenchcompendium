@@ -3,6 +3,7 @@ import { EventRunner } from "../../classes/contextevent/contexteventhandler";
 import { DynamicContextObject } from "../../classes/contextevent/dynamiccontextobject";
 import { ContextObject } from "../../classes/contextevent/contextobject";
 import { EquipmentLimit, EquipmentRestriction } from "../../classes/feature/equipment/Equipment";
+import { ModelStatistics } from "../../classes/feature/model/ModelStats";
 
 /**
  * Events that can be called by the runEvent method,
@@ -18,6 +19,7 @@ export interface CallEvents {
     getEquipmentRestriction? : (this: EventRunner, eventSource : any, relayVar : any, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => EquipmentRestriction[]; 
     getEquipmentLimitPresentable? : (this: EventRunner, eventSource : any, relayVar : any, trackVal : EquipmentLimit[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<string[]>; 
     getEquipmentLimit? : (this: EventRunner, eventSource : any, relayVar : any, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => EquipmentLimit[]; 
+    getModelStatOptions? : (this: EventRunner, eventSource : any, relayVar : ModelStatistics[][], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => ModelStatistics[][]; 
 }
 
 /**

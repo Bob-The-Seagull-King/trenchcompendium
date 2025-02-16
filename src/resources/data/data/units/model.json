@@ -143,7 +143,8 @@
             "ranged": 0,
             "armor": 0,
             "movetype": 0,
-            "potential": 1
+            "potential": 1,
+            "base": [60]
         },
         "keywords" : ["kw_sultanate","kw_strong","kw_tough","kw_fear"],
         "abilities" : ["ab_artificialbody","ab_trample"]
@@ -154,6 +155,18 @@
         "source": "core",
         "tags": {},
         "contextdata": {
+            "stat_options": { 
+                "options": [
+                    [
+                        {
+                            "base": [50]
+                        },
+                        {
+                            "base": [30,60]
+                        }
+                    ]
+                ]
+            },
             "model_equipment_restriction": {
                 "removed": [
                     {

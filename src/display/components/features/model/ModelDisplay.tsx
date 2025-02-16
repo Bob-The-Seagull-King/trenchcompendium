@@ -12,25 +12,30 @@ import GenericHover from '../../generics/GenericHover';
 import KeywordDisplay from '../glossary/KeywordDisplay';
 import ItemStat from '../../subcomponents/description/ItemStat';
 import { ModelStatistics } from '../../../../classes/feature/model/ModelStats';
-import { getBaseSize, getMoveType, getPotential } from '../../../../utility/functions';
+import { getBaseSize, getColour, getMoveType, getPotential } from '../../../../utility/functions';
 import ModelUpgradeDisplay from '../ability/ModelUpgradeDisplay';
 import { Equipment } from '../../../../classes/feature/equipment/Equipment';
 import { IChoice } from '../../../../classes/options/StaticOption';
 import ModelEquipmentDisplay from '../equipment/ModelEquipmentDisplay';
 import { EventRunner } from '../../../../classes/contextevent/contexteventhandler';
+import { Form } from 'react-bootstrap';
 
 const ModelDisplay = (props: any) => {
     const modelcollectionObject: Model = props.data
 
     const [equiprestrictions, setEquipRestrictions] = useState([])
     const [equiplimits, setEquipLimits] = useState([])
+    const [statchoices, setstatchoices] = useState([])
     const [_keyvar, setkeyvar] = useState(0);
 
 
     useEffect(() => {
-        async function SetEquipmentContent() {
+        async function SetModelOptions() {
             const EventProc: EventRunner = new EventRunner();
     
+            /**
+             * MODEL EQUIPMENT RESTRICTIONS
+             */
             if (modelcollectionObject.RestrictedEquipment != null) {
                 const result_presentation = await EventProc.runEvent(
                     "getEquipmentRestrictionPresentable",
@@ -61,6 +66,9 @@ const ModelDisplay = (props: any) => {
                 setkeyvar((prev) => prev + 1);
             }
     
+            /**
+             * MODEL EQUIPMENT LIMITS
+             */
             if (modelcollectionObject.LimitedEquipment != null) {
                 const result_presentation = await EventProc.runEvent(
                     "getEquipmentLimitPresentable",
@@ -90,10 +98,67 @@ const ModelDisplay = (props: any) => {
                 setEquipLimits(result_presentation);
                 setkeyvar((prev) => prev + 1);
             }
+    
+            /**
+             * MODEL STAT CHOICES
+             */
+            if (modelcollectionObject.StatChoices != null) {
+                setstatchoices(modelcollectionObject.StatChoices as any);
+                setkeyvar((prev) => prev + 1);
+            } else {
+                const result = await EventProc.runEvent(
+                    "getModelStatOptions",
+                    modelcollectionObject,
+                    [],
+                    [],
+                    null
+                );
+                setstatchoices(result);
+                setkeyvar((prev) => prev + 1);
+            }
         }
     
-        SetEquipmentContent();
+        SetModelOptions();
     }, []);
+
+    function ReturnStatOption(statchoice : ModelStatistics[]) {
+        return (
+            <>
+            <Form.Control className={"borderstyler subborder" + getColour('default') } as="select" aria-label="Default select example"  placeholder="Member Type" >
+                {statchoice.map((item) => ( 
+                    <option key={"modeloption"+(statchoice.indexOf(item).toString())} >{ReturnStatProfileAsString(item)}</option> 
+                ))}
+            </Form.Control>
+            </>
+        )
+    }
+
+    function ReturnStatProfileAsString(stats : ModelStatistics) {
+        const ProfileString : string[] = []
+        if (stats.movement != undefined) {
+            ProfileString.push( "Movement:" + (stats.movement?.toString() || "") + "\"" )
+        }
+        if (stats.movetype != undefined) {
+            ProfileString.push("Move-Type:" + stats.movetype? getMoveType(stats.movetype) : "Infantry")
+        }
+        if (stats.melee != undefined) {
+            ProfileString.push("Melee:" + (stats.melee? (stats.melee > 0? "+": "") : "") + (stats.melee?.toString() || ""))
+        }
+        if (stats.ranged != undefined) {
+            ProfileString.push("Ranged:" + (stats.ranged? (stats.ranged > 0? "+": "") : "") + (stats.ranged?.toString() || ""))
+        }
+        if (stats.armor != undefined) {
+            ProfileString.push("Armor:" + (stats.armor?.toString() || ""))
+        }
+        if (stats.potential != undefined) {
+            ProfileString.push("Potential:" + (stats.potential? getPotential(stats.potential) : "Standard"))
+        }
+        if (stats.base != undefined) {
+            ProfileString.push("Base:" + (stats.base? getBaseSize(stats.base) : "25mm"))
+        }
+        
+        return ProfileString.join(' ')
+    }
 
     function ReturnStats(statlist : ModelStatistics) {
         return (
@@ -144,6 +209,31 @@ const ModelDisplay = (props: any) => {
                 <div className="row">
                 {returnDescription(modelcollectionObject, modelcollectionObject.Description) /* Description */}
                 </div>
+                {statchoices.length > 0 &&
+                <div>
+                    <div className="row">
+                        {statchoices.map((item) => ( 
+                            <>
+                            
+                                <div className="verticalspacerbig"/>
+
+                                <div className="colordefault bodytext complextext">
+                                    {
+                                        "Choose from the following stat profiles"
+                                    }
+                                </div>
+                                
+                                <span key={item} className="colordefault bodytext complextext">
+                                    {
+                                        ReturnStatOption(item)
+                                    }
+                                </span>
+                            </>
+                        ))} 
+                    </div>
+                </div>
+                }
+                 
                 <div key={_keyvar}>
                 {((modelcollectionObject.EquipmentList.length > 0) || (equiprestrictions.length > 0) || (equiplimits.length > 0)) &&
                     <>

@@ -50,6 +50,7 @@ class Model extends StaticContextObject {
 
     public RestrictedEquipment : EquipmentRestriction[] | null = null;
     public LimitedEquipment : EquipmentLimit[] | null = null;
+    public StatChoices : ModelStatistics[][] | null = null;
     
     /**
      * Assigns parameters and creates a series of description
@@ -73,6 +74,21 @@ class Model extends StaticContextObject {
 
         this.RunEquipmentRestriction();
         this.RunEquipmentLimit();
+        this.RunStatOptions();
+    }
+
+    public RunStatOptions() {
+        const EventProc : EventRunner = new EventRunner();
+
+        EventProc.runEvent(
+            "getModelStatOptions",
+            this,
+            [],
+            [],
+            null
+        ).then(result => {
+            this.StatChoices = result;
+        });
     }
 
     public RunEquipmentRestriction() {

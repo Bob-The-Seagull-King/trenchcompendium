@@ -8,6 +8,7 @@ import { getTagValue } from "../../utility/functions";
 import { Equipment, EquipmentLimit, EquipmentRestriction } from "../../classes/feature/equipment/Equipment";
 import { Keyword } from "../../classes/feature/glossary/Keyword";
 import { KeywordFactory } from "../../factories/features/KeywordFactory";
+import { ModelStatistics } from "../../classes/feature/model/ModelStats";
 
 export const BaseContextCallTable : CallEventTable = {
     option_search_viable: {
@@ -322,6 +323,21 @@ export const BaseContextCallTable : CallEventTable = {
         getEquipmentLimit(this: EventRunner, eventSource : any, relayVar : any, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
             relayVar.push(context_func as EquipmentLimit)
             return relayVar;
+        },
+        
+    },
+    stat_options: {
+        event_priotity: 1,
+        getModelStatOptions(this: EventRunner, eventSource : any, relayVar : ModelStatistics[][], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) 
+        {
+            const StatOptionList: ModelStatistics[][] = []
+
+            if (context_func["options"]) {
+                for (let i = 0; i < context_func["options"].length; i++) {
+                    StatOptionList.push(context_func["options"][i])
+                }
+            }
+            return relayVar.concat(StatOptionList);
         }
     }
 }
