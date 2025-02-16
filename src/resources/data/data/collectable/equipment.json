@@ -67,6 +67,8 @@
         "category": "ranged",
         "distance": 18,
         "stats": {
+            "hands_ranged": 2,
+            "ranged": true
         },
         "contextdata": {},
         "description": [   
@@ -89,8 +91,6 @@
         "category": "ranged",
         "distance": null,
         "stats": {
-            "hands_ranged": 2,
-            "ranged": true
         },
         "contextdata": {
             "equipment_add_to": {
