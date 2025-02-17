@@ -22,14 +22,24 @@ import { Form } from 'react-bootstrap';
 import { Faction } from '../../../../classes/feature/faction/Faction';
 import RuleDisplay from './RuleDisplay';
 import OptionSetStaticDisplay from '../../subcomponents/description/OptionSetStaticDisplay';
+import FactionModelDisplay from '../model/FactionModelDisplay';
 
 const FactionDisplay = (props: any) => {
     const factionObject: Faction = props.data
 
+    function ModelIsElite(model : Model) {
+        for (let i = 0; i < model.KeyWord.length; i++) {
+            if (model.KeyWord[i].ID == "kw_elite") {
+                return true;
+            }
+        }
+
+        return false
+    }
 
     return (
         <ErrorBoundary fallback={<div>Something went wrong with FactionDisplay.tsx</div>}>
-            <div className=''>
+            <div>
                 <div className="row">
                     <span className="colordefault contentpacklabel complextext">
                         {factionObject.Name  /* Name */}
@@ -57,6 +67,69 @@ const FactionDisplay = (props: any) => {
                         <OptionSetStaticDisplay data={factionObject.MyOptions} />
                     }
                 </div>
+                {factionObject.Models.length > 0 &&
+                    <>
+                        <div className='separator tagboxpad colordefault'>Models</div>
+                        <div className="verticalspacerbig"/>
+                        {factionObject.Models.filter((item) => (item.Captain == true && item.Mercenary == false)).length > 0 &&
+                            <>
+                        <div className='separator bodytext tagboxpad colordefault'>Captains</div>
+                        <div className="verticalspacerbig"/>
+                        <div className="row">
+                            {factionObject.Models.filter((item) => (item.Captain == true && item.Mercenary == false)).map((item) => ( 
+                                <div key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID}>
+                                    <FactionModelDisplay data={item} />
+                                    <div className="verticalspacerbig"/>
+                                </div>
+                            )) /* Abilities */}
+                        </div>
+                        
+                        </>
+                        }
+                        {factionObject.Models.filter((item) => (item.Captain == false && item.Mercenary == false && (ModelIsElite(item.Model) == true))).length > 0 &&
+                        <>
+                            <div className='separator bodytext tagboxpad colordefault'>Elite</div>
+                            <div className="verticalspacerbig"/>
+                            <div className="row">
+                                {factionObject.Models.filter((item) => (item.Captain == false && item.Mercenary == false && (ModelIsElite(item.Model) == true))).map((item) => ( 
+                                    <div key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID}>
+                                        <FactionModelDisplay data={item} />
+                                        <div className="verticalspacerbig"/>
+                                    </div>
+                                )) /* Abilities */}
+                            </div>
+                        </>
+                        }
+                        {factionObject.Models.filter((item) => (item.Captain == false && item.Mercenary == false && (ModelIsElite(item.Model) == false))).length > 0 &&
+                        <>
+                        <div className='separator bodytext tagboxpad colordefault'>Infantry</div>
+                        <div className="verticalspacerbig"/>
+                        <div className="row">
+                            {factionObject.Models.filter((item) => (item.Captain == false && item.Mercenary == false && (ModelIsElite(item.Model) == false))).map((item) => ( 
+                                <div key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID}>
+                                    <FactionModelDisplay data={item} />
+                                    <div className="verticalspacerbig"/>
+                                </div>
+                            )) /* Abilities */}
+                        </div>
+                        </>
+                        }
+                        {factionObject.Models.filter((item) => (item.Mercenary == true)).length > 0 &&
+                            <>
+                            <div className='separator bodytext tagboxpad colordefault'>Mercenaries</div>
+                            <div className="verticalspacerbig"/>
+                            <div className="row">
+                                {factionObject.Models.filter((item) => (item.Mercenary == true)).map((item) => ( 
+                                    <div key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID}>
+                                        <FactionModelDisplay data={item} />
+                                        <div className="verticalspacerbig"/>
+                                    </div>
+                                )) /* Abilities */}
+                            </div>
+                        </>
+                        }
+                    </>
+                }
             </div>
         </ErrorBoundary>
     )

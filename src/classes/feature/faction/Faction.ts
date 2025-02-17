@@ -16,6 +16,8 @@ import { EquipmentLimit, EquipmentRestriction } from '../equipment/Equipment';
 import { IStaticOptionContextObject, StaticOptionContextObject } from '../../options/StaticOptionContextObject';
 import { IRule, Rule } from './Rule';
 import { RuleFactory } from '../../../factories/features/RuleFactory';
+import { FactionModelRelationship, IFactionModelRelationship } from '../../relationship/faction/FactionModelRelationship';
+import { ModelFactory } from '../../../factories/features/ModelFactory';
 
 
 interface IFaction extends IStaticOptionContextObject {
@@ -32,6 +34,8 @@ class Faction extends StaticOptionContextObject {
     public Rules : Rule[] = [];
     public Variant : string;
 
+    public Models : FactionModelRelationship[] = []
+
     /**
      * Assigns parameters and creates a series of description
      * objects with DescriptionFactory
@@ -47,10 +51,37 @@ class Faction extends StaticOptionContextObject {
             this.Variant = data.variant_name
         } else { this.Variant = "base" }
 
+        this.BuildFactionModels(data.id);
         this.BuildRules(data.rules)
     }
-
     
+    public BuildFactionModels(id : string) {
+        const ModelList = Requester.MakeRequest(
+            {
+                searchtype: "complex", 
+                searchparam: {
+                    type: "factionmodelrelationship",
+                    request: {
+                        operator: 'and',
+                        terms: [
+                            {
+                                item: "faction_id",
+                                value: id,
+                                equals: true,
+                                strict: true
+                            }
+                        ],
+                        subparams: []
+                    }
+                }
+            }
+        ) as IFactionModelRelationship[]
+
+        for (let i = 0; i < ModelList.length; i++) {
+            this.Models.push(ModelFactory.CreateFactionModel(ModelList[i], null))
+        }
+    }
+
     public BuildRules(rules : string[]) {
         for (let i = 0; i < rules.length; i++) {
             const RuleObj = RuleFactory.CreateNewRule(rules[i], this);

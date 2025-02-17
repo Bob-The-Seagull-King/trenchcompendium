@@ -108,6 +108,9 @@ class DataResponder {
             case "factionrule": {
                 return RelevantSet.factionruledata.concat(data)
             }
+            case "factionmodelrelationship": {
+                return RelevantSet.factionmodelrelationship.concat(data)
+            }
             case "testdynamicfeature": {
                 return RelevantSet.testdynamicdata.concat(data)
             }

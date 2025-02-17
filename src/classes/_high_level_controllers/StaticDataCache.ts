@@ -12,6 +12,8 @@ import { ModelEquipmentRelationship } from "../relationship/model/ModelEquipment
 import { Faction } from "../feature/faction/Faction";
 import { FactionCollection } from "../feature/faction/FactionCollection";
 import { Rule } from "../feature/faction/Rule";
+import { FactionModelRelationship } from "../relationship/faction/FactionModelRelationship";
+import { Requester } from "../../factories/Requester";
 
 /**
  * Contains the Controller objects for 'Tools' pages.
@@ -35,6 +37,7 @@ class StaticDataCache {
     public FactionCollectionCache :  {[tokenid: string]: FactionCollection} = {};
     public FactionCache :  {[tokenid: string]: Faction} = {};
     public RuleCache :  {[tokenid: string]: Rule} = {};
+    public FactionModelCache :  {[tokenid: string]: FactionModelRelationship} = {};
 
     public CheckID(cachename : string, id_val : string) {
         switch (cachename) {
@@ -64,6 +67,8 @@ class StaticDataCache {
                 return (this.FactionCache[id_val] == null)
             case 'rule': 
                 return (this.RuleCache[id_val] == null)
+            case 'factionmodel': 
+                return (this.FactionModelCache[id_val] == null)
             default: return false;
         }
     }
@@ -135,9 +140,15 @@ class StaticDataCache {
                     this.RuleCache[obj.ID] = obj as Rule;
                 }
                 return;
+            case 'factionmodel':   
+                if (this.FactionModelCache[obj.ID] == null) {
+                    this.FactionModelCache[obj.ID] = obj as FactionModelRelationship;
+                }
+                return;
             default: return;
         }
     } 
+
 
     public static getInstance(): StaticDataCache {
         if (!StaticDataCache.instance) {

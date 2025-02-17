@@ -4,6 +4,7 @@ import { IKeyword, Keyword } from '../../classes/feature/glossary/Keyword';
 import { ContextObject } from '../../classes/contextevent/contextobject';
 import { IModel, Model } from '../../classes/feature/model/Model';
 import { IVariantModel, ModelCollection } from '../../classes/feature/model/ModelCollection';
+import { FactionModelRelationship, IFactionModelRelationship } from '../../classes/relationship/faction/FactionModelRelationship';
 
 class ModelFactory {
 
@@ -54,8 +55,12 @@ class ModelFactory {
             return cache.ModelCache[_val];
         }
         const ruledata = Requester.MakeRequest({searchtype: "id", searchparam: {type: "model", id: _val}}) as IModel
-        const rulenew = ModelFactory.CreateModel(ruledata, parent)
-        return rulenew;
+        if (ruledata == null || ruledata == undefined || ruledata.id == undefined) {
+            return ModelFactory.CreateNewVariantModel(_val, parent);
+        } else {
+            const rulenew = ModelFactory.CreateModel(ruledata, parent)
+            return rulenew;
+        }
     }
 
     static CreateVariantModel(_base: IModel, varaint: IVariantModel, parent : ContextObject | null) {
@@ -79,6 +84,28 @@ class ModelFactory {
         const vardata = Requester.MakeRequest({searchtype: "id", searchparam: {type: "modelvariant", id: _val}}) as IVariantModel
         const basedata = Requester.MakeRequest({searchtype: "id", searchparam: {type: "model", id: vardata.base_id}}) as IModel
         const rulenew = ModelFactory.CreateVariantModel(basedata, vardata, parent)
+        return rulenew;
+    }
+
+    static CreateFactionModel(_rule: IFactionModelRelationship, parent : ContextObject | null) {
+        const cache = StaticDataCache.getInstance();
+        const isValid = (cache.CheckID('factionmodel', _rule.id))
+        if (isValid == false) {
+            return cache.FactionModelCache[_rule.id];
+        }
+        const rule = new FactionModelRelationship(_rule, parent)
+        cache.AddToCache('factionmodel', rule);
+        return rule;
+    }
+
+    static CreateNewFactionModel(_val : string, parent : ContextObject | null) {
+        const cache = StaticDataCache.getInstance();
+        const isValid = (cache.CheckID('factionmodel', _val))
+        if (isValid == false) {
+            return cache.FactionModelCache[_val];
+        }
+        const ruledata = Requester.MakeRequest({searchtype: "id", searchparam: {type: "factionmodelrelationship", id: _val}}) as IFactionModelRelationship
+        const rulenew = ModelFactory.CreateFactionModel(ruledata, parent)
         return rulenew;
     }
 

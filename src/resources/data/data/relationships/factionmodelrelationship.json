@@ -1,0 +1,36 @@
+[
+    {
+        "id": "rel_fc_md_yuzbasicaptain",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {},
+        "options": [],
+        "faction_id" : ["fc_ironsultanate"],
+        "model_id" : "md_yuzbasicaptain",
+        "captain" : true,
+        "mercenary": false,
+        "cost" : 70,
+        "cost_type" : 0,
+        "restricted_models" : [],
+        "warband_minimum" : 0,
+        "warband_maximum" : 0
+    },
+    {
+        "id": "rel_fc_md_sultanateassassin_mv_masterassassin",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {},
+        "options": [],
+        "faction_id" : ["fc_ironsultanate_fv_fidaiofalamut"],
+        "model_id" : "md_sultanateassassin_mv_masterassassin",
+        "captain" : true,
+        "mercenary": false,
+        "cost" : 95,
+        "cost_type" : 0,
+        "restricted_models" : [],
+        "warband_minimum" : 0,
+        "warband_maximum" : 0
+    }
+]
