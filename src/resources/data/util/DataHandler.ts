@@ -14,6 +14,10 @@ import en_upgradedata from '../data/units/upgrade.json'
 
 import en_equipmentdata from '../data/collectable/equipment.json'
 
+import en_factiondata from '../data/faction/faction.json'
+import en_factionvariantdata from '../data/faction/factionvariant.json'
+import en_factionruledata from '../data/faction/rule.json'
+
 import en_modelupgraderelationship from '../data/relationships/modelupgraderelationship.json'
 import en_modelequipmentrelationship from '../data/relationships/modelequipmentrelationship.json'
 
@@ -40,6 +44,9 @@ export interface DataSetTC {
     modelupgraderelationship : any,
     equipmentdata : any,
     modelequipmentrelationship : any,
+    factiondata : any,
+    factionvariantdata : any,
+    factionruledata : any,
     testdynamicdata : any,
     teststaticdata : any,
     testbasicdata : any
@@ -58,6 +65,9 @@ export const DataByLanguageTable : LanguageDataTable = {
         modelupgraderelationship : en_modelupgraderelationship,  
         equipmentdata : en_equipmentdata,  
         modelequipmentrelationship : en_modelequipmentrelationship,
+        factiondata : en_factiondata,
+        factionvariantdata : en_factionvariantdata,
+        factionruledata : en_factionruledata,
         testdynamicdata : en_testdynamic,
         teststaticdata : en_teststatic,
         testbasicdata : en_testbasic
