@@ -6,6 +6,7 @@ import GlossaryDisplay from "../components/features/glossary/GlossaryDisplay"
 import KeywordDisplay from "../components/features/glossary/KeywordDisplay";
 import ModelCollectionDisplay from "../components/features/model/ModelCollectionDisplay";
 import EquipmentDisplay from "../components/features/equipment/EquipmentDisplay";
+import FactionCollectionDisplay from "../components/features/faction/FactionCollectionDisplay";
 
 export interface DisplayCollectionType {
     searchId      : string,
@@ -133,7 +134,6 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
             )
         },
         returnFilterSelect(manager : FilterManager, update : NoneToNoneFunction, close : NoneToNoneFunction) {
-            console.log(manager.ReturnMiscFilters().filter((value) => (value.Group == "variant_name")))
             return (
                 
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
@@ -249,6 +249,58 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
                             <div className='filterbox centerPosition'>
                                 {manager.ReturnRangeFilters().filter((value) => (value.Group == "distance")).map((item) => (
                                     <FilterRangeItem key={"miscsource"+item.Group} data={item} />
+                                ))}
+                            </div>
+                        </div>
+                            
+                        <div className='separator tagboxpad'></div>
+                        <div className="row float-end">
+                            <div className='col-12 float-end'>
+                                <div className='hovermouse filterbuttonitem basestructure bordergrey backgroundgrey' onClick={() => {close()}}>CONFIRM</div>
+                            </div>
+                        </div>
+                    </div>
+                </ErrorBoundary>
+            )
+        }
+    },
+    faction: {
+        searchId: 'faction',
+        width: 8,
+        returnDisplay(item: any) {
+            return (
+                
+                <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
+                    <GenericDisplay  d_colour={item.Team} d_name={item.Name} d_type={""} d_method={() => <FactionCollectionDisplay data={item} />}/>
+                </ErrorBoundary>
+            )
+        },
+        returnFilterSelect(manager : FilterManager, update : NoneToNoneFunction, close : NoneToNoneFunction) {
+            return (
+                
+                <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
+                    <div className="col-12">
+                        <div className="separator"><h3>NAME</h3></div>
+                        <div className="row">
+                            {manager.ReturnTextFilters().map((item) => (
+                                <FilterTextItem data={item} key="name"/>
+                            ))}
+                        </div>
+
+                        <div className="separator"><h3>SOURCES</h3></div>
+                        <div className="row">
+                            <div className='filterbox centerPosition'>
+                                {manager.ReturnMiscFilters().filter((value) => (value.Group == "source")).map((item) => (
+                                    <FilterMiscItem key={"miscsource"+item.Name} data={item} />
+                                ))}
+                            </div>
+                        </div>
+
+                        <div className="separator"><h3>TEAM</h3></div>
+                        <div className="row">
+                            <div className='filterbox centerPosition'>
+                                {manager.ReturnMiscFilters().filter((value) => (value.Group == "team")).map((item) => (
+                                    <FilterMiscItem key={"miscsource"+item.Name} data={item} />
                                 ))}
                             </div>
                         </div>

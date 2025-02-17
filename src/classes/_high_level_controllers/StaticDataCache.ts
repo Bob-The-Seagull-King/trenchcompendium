@@ -9,6 +9,9 @@ import { Upgrade } from "../feature/ability/Upgrade";
 import { ModelUpgradeRelationship } from "../relationship/model/ModelUpgradeRelationship";
 import { Equipment } from "../feature/equipment/Equipment";
 import { ModelEquipmentRelationship } from "../relationship/model/ModelEquipmentRelationship";
+import { Faction } from "../feature/faction/Faction";
+import { FactionCollection } from "../feature/faction/FactionCollection";
+import { Rule } from "../feature/faction/Rule";
 
 /**
  * Contains the Controller objects for 'Tools' pages.
@@ -29,6 +32,9 @@ class StaticDataCache {
     public ModelUpgradeCache :  {[tokenid: string]: ModelUpgradeRelationship} = {};
     public EquipmentCache :  {[tokenid: string]: Equipment} = {};
     public ModelEquipmentCache :  {[tokenid: string]: ModelEquipmentRelationship} = {};
+    public FactionCollectionCache :  {[tokenid: string]: FactionCollection} = {};
+    public FactionCache :  {[tokenid: string]: Faction} = {};
+    public RuleCache :  {[tokenid: string]: Rule} = {};
 
     public CheckID(cachename : string, id_val : string) {
         switch (cachename) {
@@ -52,6 +58,12 @@ class StaticDataCache {
                 return (this.EquipmentCache[id_val] == null)
             case 'modelequipment': 
                 return (this.ModelEquipmentCache[id_val] == null)
+            case 'factioncollection': 
+                return (this.FactionCollectionCache[id_val] == null)
+            case 'faction': 
+                return (this.FactionCache[id_val] == null)
+            case 'rule': 
+                return (this.RuleCache[id_val] == null)
             default: return false;
         }
     }
@@ -106,6 +118,21 @@ class StaticDataCache {
             case 'modelequipment':   
                 if (this.ModelEquipmentCache[obj.ID] == null) {
                     this.ModelEquipmentCache[obj.ID] = obj as ModelEquipmentRelationship;
+                }
+                return;
+            case 'factioncollection': 
+                if (this.FactionCollectionCache[obj.ID] == null) {
+                    this.FactionCollectionCache[obj.ID] = obj as FactionCollection;
+                }
+                return;
+            case 'faction':   
+                if (this.FactionCache[obj.ID] == null) {
+                    this.FactionCache[obj.ID] = obj as Faction;
+                }
+                return;
+            case 'rule':   
+                if (this.RuleCache[obj.ID] == null) {
+                    this.RuleCache[obj.ID] = obj as Rule;
                 }
                 return;
             default: return;

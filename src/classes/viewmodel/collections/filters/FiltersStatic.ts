@@ -221,5 +221,55 @@ export const FitlerDataDex : FilterDataTable = {
                     group: "distance"
                 })]
         }
+    },
+    faction: {
+        searchId: 'faction',
+        variantSearch: {
+            item_type : "factionvariant",
+            base_var_key : "base_id",
+            base_var_type : "faction"
+        },
+        findTags() {
+            const tempTags: FilterTag[] = []
+            const foundTags = (Requester.MakeRequest({ searchtype: 'tags', searchparam: { type: 'faction' } })).sort();
+            const foundTagsVariant = (Requester.MakeRequest({ searchtype: 'tags', searchparam: { type: 'factionvariant' } })).sort();
+    
+            const allTags = Array.from(new Set([...foundTags, ...foundTagsVariant]));
+
+            let i = 0;
+            for (i = 0; i < allTags.length; i++) {
+                const tempTagText: IFilterText = { group: "tags", val: "", isstrict: false}
+                const tempTagObject: IFilterItem = { group: "tags", isactive: false, doinclude: false, name: allTags[i]}
+                const tempTagInterface: IFilterTag = { group: "tags", tagtype: tempTagObject, tagval: tempTagText }
+                const tempTagConstructed = new FilterTag(tempTagInterface);
+                tempTags.push(tempTagConstructed);
+            }
+    
+            return tempTags;
+        },
+        findMisc() {
+            const tempMisc: FilterItem[] = []
+            const keytypes = ["source","team"]
+            keytypes.sort();
+    
+            let i = 0;
+            for (i = 0; i < keytypes.length; i ++) {
+                const foundVals = Requester.MakeRequest({ searchtype: 'keyvalues', searchparam: { type: 'faction' , id: keytypes[i]} }).sort();
+                const foundValsVariant = Requester.MakeRequest({ searchtype: 'keyvalues', searchparam: { type: 'factionvariant' , id: keytypes[i]} }).sort();
+                const allVals = Array.from(new Set([...foundVals, ...foundValsVariant]));
+
+                let j = 0;
+                for (j = 0; j < allVals.length; j++) {
+                    const tempItemObject: IFilterItem = { group: keytypes[i], isactive: false, doinclude: false, name: allVals[j]}
+                    const tempItemConstructed = new FilterItem(tempItemObject);
+                    tempMisc.push(tempItemConstructed);
+                }
+            }
+    
+            return tempMisc;
+        },
+        findText() {
+            return [new FilterText({group: "name", val: "", isstrict: false})]
+        }
     }
 }

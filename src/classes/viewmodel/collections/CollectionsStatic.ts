@@ -10,6 +10,8 @@ import { IModel } from "../../feature/model/Model";
 import { ModelFactory } from "../../../factories/features/ModelFactory";
 import { IEquipment } from "../../feature/equipment/Equipment";
 import { EquipmentFactory } from "../../../factories/features/EquipmentFactory";
+import { IFaction } from "../../feature/faction/Faction";
+import { FactionFactory } from "../../../factories/features/FactionFactory";
 
 export interface CollectionType {
     searchId      : string,
@@ -81,6 +83,22 @@ export const CollectionDataDex : CollectionDataTable = {
             for (i = 0; i < model.dataresults.length; i++) {
                 const summonNew = EquipmentFactory.CreateEquipment(model.dataresults[i], null);
                 const ItemNew = new ViewTableItem(summonNew, getColour('default'));
+                model.itemcollection.push(ItemNew);
+            }
+        }
+    },
+    faction: {
+        searchId: 'faction', 
+        pageName: 'faction',
+        sort: ["name", "id"],
+        postSearch(model : ViewCollectionsModel) {
+            model.CleanupItems();
+            model.CleanupCollection();
+            let i = 0;
+            model.dataresults.sort(byPropertiesOf<IFaction>(["name", "id"]))
+            for (i = 0; i < model.dataresults.length; i++) {
+                const summonNew = FactionFactory.CreateFactionCollection(model.dataresults[i], null);
+                const ItemNew = new ViewTableItem(summonNew, getColour(summonNew.Team));
                 model.itemcollection.push(ItemNew);
             }
         }
