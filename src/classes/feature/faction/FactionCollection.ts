@@ -12,6 +12,11 @@ import { StaticContextObject } from '../../contextevent/staticcontextobject';
 import { IFaction, Faction } from './Faction';
 
 interface IVariantModel extends IContextObject {
+    team: string,
+    description: [],
+    rules: string[],
+    cut_rules: string[],
+    base_id: string
 }
 
 interface FactionVar {

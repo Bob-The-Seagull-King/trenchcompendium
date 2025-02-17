@@ -14,10 +14,13 @@ import { ContextPackage } from '../../contextevent/contextpackage';
 import { EventRunner } from '../../contextevent/contexteventhandler';
 import { EquipmentLimit, EquipmentRestriction } from '../equipment/Equipment';
 import { IStaticOptionContextObject, StaticOptionContextObject } from '../../options/StaticOptionContextObject';
+import { IRule } from './Rule';
 
 
 interface IFaction extends IStaticOptionContextObject {
-    team: string
+    team: string,
+    description: [],
+    rules: string[]
 }
 
 class Faction extends StaticOptionContextObject {

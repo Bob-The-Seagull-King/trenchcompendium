@@ -17,10 +17,13 @@ import { IStaticOptionContextObject, StaticOptionContextObject } from '../../opt
 
 
 interface IRule extends IStaticOptionContextObject {
+    description : []
 }
 
 class Rule extends StaticOptionContextObject {
     
+    public Description;
+
     /**
      * Assigns parameters and creates a series of description
      * objects with DescriptionFactory
@@ -29,6 +32,7 @@ class Rule extends StaticOptionContextObject {
     public constructor(data: IRule, parent : ContextObject | null)
     {
         super(data, parent)
+        this.Description = DescriptionFactory(data.description, this);
     }
 
 

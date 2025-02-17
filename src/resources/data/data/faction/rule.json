@@ -1,3 +1,92 @@
 [
-    
+    {
+        "id": "rl_flockofassassins",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Flock of Assassins",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "The Fida’i of Alamut can have up to three Assassins. The warband must include a Master Assassin that counts as one of the three."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_masterassassin",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Master Assassin",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "A Master Assassin has the Keyword TOUGH. The Master Assassin costs 95 ducats.",
+            "glossary": [{"val": "TOUGH", "id": "kw_tough"}]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_assassinacolytes",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Assassin Acolytes",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Up to three Azebs of the warband can have the Keyword INFILTRATOR at the cost of +10 ducats per model.",
+            "glossary": [{"val": "INFILTRATOR", "id": "kw_infiltrator"}]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_alamutalone",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Alamut Alone",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "The warband may not include Yüzbaşı, Alchemist, Janissaries, Lions of Jabir or Brazen Bulls."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_killingsquad",
+        "source": "core",
+        "tags": { },
+        "contextdata": {
+            "add_fireteam_warband" : { "type": "standard", "count": 1 }
+         },
+        "name": "Killing Squad",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Your warband may have a single Fireteam. These Fireteams may consist of any two models from your warband. Models in Fireteams gain the Keyword FIRETEAM.",
+            "glossary": [{"val": "FIRETEAM", "id": "kw_fireteam"}]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_dervishes",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Dervishes",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "The warband may include up to four Dervishes (use Janissary statistics including Armoury selection, but they cannot use Reinforced Armour). These troops have the Whirling Dervishes special rule instead of the Keyword STRONG.",
+            "glossary": [{"val": "STRONG", "id": "kw_strong"}]
+            }
+        ],
+        "options": []
+    }
 ]

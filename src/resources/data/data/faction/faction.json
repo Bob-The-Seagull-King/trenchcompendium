@@ -1,3 +1,41 @@
 [
-    
+    {
+        "id": "fc_ironsultanate",
+        "source": "core",
+        "tags": {
+        },
+        "contextdata": {
+            "faction_keyword": {"name": "kw_sultanate"}
+        },
+        "name": "Iron Sultanate",
+        "team": "faithful",
+        "description":  [
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "When the Infidels opened the thrice-cursed Gate to Jahannam, releasing Gog and Magog upon those who believe, it seemed that all was lost and Shaytan would emerge victorious over Dunya. But the Creator of the Universe came to the aid of the Faithful, and as had been written, the great Iron Wall of Dhu al-Qarnayn manifested itself in the lands ruled by the Sultan of Rûm. A call was sent to those who believe righteously and, over the coming decades, the migration of the Faithful took place across Europa, Asia and Africa. Millions perished on the road and at sea, for the Heretics and their Shaytan lords swarmed them as locusts swarm fields of ripe sesame, devouring them and building vile monuments from their limbs and heads, so they could not be buried as is decreed in the Holy texts. But once all those who survived the journey had come, the mighty Gates of al-Qarnayn were closed and the Great Sultanate of the Invincible Iron Wall of the Two Horns That Pierce the Sky was formed."
+            },
+            { "tags": {"desc_type" : "gap"} },
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "The assaults of the slaves of Jahannam against the Sultanate have never ceased since that day, and each day new martyrs are mourned as they defend the Wall and confront the heretics who have overcome its defences. But within the walls, the lost knowledge flourishes and from mosques of white marble and gold the muezzin call the faithful to pray for the success of the Sultan’s army as it struggles to protect their lands and defend the caravan trails that provide the Sultanate with vital trade goods."
+            },
+            { "tags": {"desc_type" : "gap"} },
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "The Iron Wall is the greatest defensive work in the world, a mighty bulwark festooned with the famed artillery of the Sultan. Azeb sharpshooters stand at ready, ever watchful for surprise attacks, and the elite Janissary regiments have barracks at set intervals near the wall so they can react to any attack at speed. During a more serious incursion a full muster of Azebs is called, the House of Wisdom unleashes its terrifying takwin creations upon the foe, and if the need is desperate, the Sultan himself comes forth and his Janissaries march with him to do battle, carrying their green flag before them."
+            },
+            { "tags": {"desc_type" : "gap"} },
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Thus the protection of the Iron Wall has had an extensive influence on the Sultanate Way of war. The conscripted Azebs are experts at feigned flight and skirmish, while the loping Lions of Jabir harass the enemy’s flanks. All the while the superb artillery of the Sultan bombards the enemy as they make their tortuous journey across the battlefield littered with traps set by skilled Sappers. When they reach the ranks of the faithful, the Janissaries, Sultan’s elite household troops, close in and finish the enemy with their devastating counter-charge led by their iron-willed officers. Dreaded Assassins from Alamut prowl in the winds of time, striking the enemy elites and leaders, while the Alchemists of the House of Wisdom unleash devastating weapons made deadly by their elemental mastery, capable of overcoming the defences of virtually any foe."
+            },
+            { "tags": {"desc_type" : "gap"} },
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Beyond the Iron Wall forces of the Sultan operate in small, mobile companies, each with a particular mission to accomplish. They hunt down apostates that have gone to serve Shaytans, look for the relics from the time of the Prophets, or seek to recover lost treasures and books of knowledge from the ruins of the fallen Caliphates. Though an understanding between the Church and the Sultanate on being co-belligerents against Jahannam exists, the commanders of these expeditions will tolerate no interference and do not hesitate to crush those who would hinder their mission. Resentment against the infidels who unleashed Gog and Magog runs deep in the Sultanate, and matters of honour are swiftly resolved with duels to the death. Woe to those who dare to hinder the mission of Those Who Believe."
+            }
+        ],
+        "rules": [],
+        "options": []
+    }
 ]

@@ -4,7 +4,17 @@
         "name": "Dervish",
         "source": "core",
         "tags": {},
-        "contextdata": {},
+        "contextdata": {
+            "model_equipment_restriction": {
+                "removed": [
+                    {
+                        "category": "armor",
+                        "res_type": "id",
+                        "value": "eq_reinforcedarmor"
+                    }
+                ]
+            }
+        },
         "base_id": "md_janissaries",
         "variant_name": "Fidai_Of_Alamut",
         "lore": [     
