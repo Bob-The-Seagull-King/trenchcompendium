@@ -127,12 +127,12 @@ export const FitlerDataDex : FilterDataTable = {
         },
         findMisc() {
             const tempMisc: FilterItem[] = []
-            const keytypes = ["source","team","keywords"]
+            const keytypes = ["source","team","keywords","variant_name"]
             keytypes.sort();
     
             let i = 0;
             for (i = 0; i < keytypes.length; i ++) {
-                const foundVals = Requester.MakeRequest({ searchtype: 'keyvalues', searchparam: { type: 'model' , id: keytypes[i]} }).sort();
+                const foundVals = (keytypes[i] == "variant_name")? [] : Requester.MakeRequest({ searchtype: 'keyvalues', searchparam: { type: 'model' , id: keytypes[i]} }).sort();
                 const foundValsVariant = Requester.MakeRequest({ searchtype: 'keyvalues', searchparam: { type: 'modelvariant' , id: keytypes[i]} }).sort();
                 let allVals = Array.from(new Set([...foundVals, ...foundValsVariant]));
                 

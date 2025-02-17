@@ -80,7 +80,7 @@ const BaseFilterSelectDisplay = (prop: any) => {
                 }
             </div>
 
-            <Modal data-theme={theme} show={show} contentClassName="basestructure colordefault" dialogClassName="" size="lg" onHide={handleClose} keyboard={true}  centered>
+            <Modal data-theme={theme} show={show} contentClassName="basestructure colordefault" dialogClassName="" size="xl" onHide={handleClose} keyboard={true}  centered>
                 
                 <h1 className={'titleShape titlebody font-default backgrounddefault'}>Select Filters</h1>
                 <Modal.Body className="backgroundOffWhite font-default">

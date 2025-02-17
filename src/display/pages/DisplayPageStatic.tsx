@@ -133,6 +133,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
             )
         },
         returnFilterSelect(manager : FilterManager, update : NoneToNoneFunction, close : NoneToNoneFunction) {
+            console.log(manager.ReturnMiscFilters().filter((value) => (value.Group == "variant_name")))
             return (
                 
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
@@ -143,6 +144,17 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
                                 <FilterTextItem data={item} key="name"/>
                             ))}
                         </div>
+
+
+                        <div className="separator"><h3>VARIANT</h3></div>
+                        <div className="row">
+                            <div className='filterbox centerPosition'>
+                                {manager.ReturnMiscFilters().filter((value) => (value.Group == "variant_name")).map((item) => (
+                                    <FilterMiscItem key={"miscsource"+item.Name} data={item} />
+                                ))}
+                            </div>
+                        </div>
+
                         <div className="separator"><h3>SOURCES</h3></div>
                         <div className="row">
                             <div className='filterbox centerPosition'>
