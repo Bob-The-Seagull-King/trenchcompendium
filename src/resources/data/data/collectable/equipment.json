@@ -63,14 +63,15 @@
         "id": "eq_jezzail",
         "name": "Jezzail",
         "source": "core",
-        "tags": {"action": true},
+        "tags": {"action": true, "weapon": true, "eq_alchemicalammunition": true},
         "category": "ranged",
         "distance": 18,
         "stats": {
             "hands_ranged": 2,
             "ranged": true
         },
-        "contextdata": {},
+        "contextdata": {
+            "get_weapon": {}},
         "description": [   
         ],
         "lore": [            
@@ -380,6 +381,132 @@
         ],
         "options": [],
         "keywords": ["kw_critical"],
+        "modifiers": ["+1D to Injuries"]
+    },
+    {
+        "id": "eq_siegejezzail",
+        "name": "Siege Jezzail",
+        "source": "core",
+        "tags": {"action": true, "weapon": true, "eq_alchemicalammunition": true},
+        "category": "ranged",
+        "distance": 30,
+        "stats": {
+            "hands_ranged": 2,
+            "ranged": true
+        },
+        "contextdata": {
+            "get_weapon": {},
+            "injury_bonus": {"type": "dice", "value": 1}},
+        "description": [ 
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Rolls all injuries with +1 DICE.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"}
+                ]
+            }  
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Heavier version of the standard Jezzail. It is a large, cumbersome weapon with a shot of lead or iron weighing as much as four pounds, designed to take out even the most powerful enemies with a single shot. Azebs armed with these weapons use tripod stakes when firing them, but the mighty Janissaries often use them as their standard service gun."
+            }
+        ],
+        "options": [],
+        "keywords": ["hw_heavy"],
+        "modifiers": ["+1D to Injuries"]
+    },
+    {
+        "id": "eq_musket",
+        "name": "Musket",
+        "source": "core",
+        "tags": {"action": true, "weapon": true},
+        "category": "ranged",
+        "distance": 18,
+        "stats": {
+            "hands_ranged": 2,
+            "ranged": true
+        },
+        "contextdata": {
+            "get_weapon": {},
+            "injury_bonus": {"type": "dice", "value": -1}},
+        "description": [ 
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Due to its low power, add -1 DICE for all Injury Chart rolls with the musket.",
+                "glossary": [
+                    {"val": "-1 DICE", "id": "kw_minusdice"}
+                ]
+            }  
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "A primitive weapon from a bygone age, the musket is a smooth bore long rifle that shoots lead balls. It still sees widespread use due to its simple construction and low price."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_bayonetlug"],
+        "modifiers": ["-1D to Injuries"]
+    },
+    {
+        "id": "eq_shotgun",
+        "name": "Shotgun",
+        "source": "core",
+        "tags": {"action": true, "weapon": true},
+        "category": "ranged",
+        "distance": 12,
+        "stats": {
+            "hands_ranged": 2,
+            "ranged": true
+        },
+        "contextdata": {
+            "get_weapon": {},
+            "injury_bonus": {"type": "dice", "value": -1, "condition_type": "range", "condition_value": "long"},
+            "hit_bonus": {"type": "dice", "value": 1, "condition_type": "range", "condition_value": "long"}},
+        "description": [ 
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Owing to its high accuracy, add +1 DICE to all rolls to hit and ignore the penalty to hit rolls when attacking at long range. However, injuries are rolled with -1 DICE at long range due to the low penetration power.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "-1 DICE", "id": "kw_minusdice"}
+                ]
+            }  
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Short-barrelled pump action shotgun loaded with six rounds containing antimony hardened 00 buckshot, the combat shotgun is ideal for short-range engagements, clearing trenches and taking out lightly-armoured infantry. Often featuring stocks made of walnut or other rare wood, it is a custom of the troops to decorate these arms with carvings and inscriptions."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_bayonetlug","kw_shieldcombo"],
+        "modifiers": ["+1D to Hit"]
+    },
+    {
+        "id": "eq_alaybozan",
+        "name": "Alaybozan",
+        "source": "core",
+        "tags": {"action": true, "weapon": true, "eq_alchemicalammunition": true},
+        "category": "ranged",
+        "distance": 12,
+        "stats": {
+            "hands_ranged": 2,
+            "ranged": true
+        },
+        "contextdata": {
+            "get_weapon": {}},
+        "description": [   
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "The design of this blunderbuss is based on the traditional design of tribal warriors but thoroughly modernised by the foundries of the Sultanate. It has proven its worth as the preferred weapon of the Sapper corps who must often fight in close quarters. It shoots a hail of lead bullets and iron shrapnel."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_shrapnel","kw_shieldcombo"],
         "modifiers": []
     }
 ]

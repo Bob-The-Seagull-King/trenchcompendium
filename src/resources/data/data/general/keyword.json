@@ -544,5 +544,20 @@
                 "content": "If a TOUGH model would be taken Out Of Action, it is knocked Down instead. After a TOUGH model has been knocked Down in this way once, it can be taken Out of Action as normal."
             }
         ]
+    },
+    {
+        "id": "kw_bayonetlug",
+        "source": "core",
+        "tags": {
+            "category": "equipment"
+        },
+        "name": "BAYONET LUG",
+        "contextdata": {"option_search_viable" : {}},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Bayonets can only be attached to weapons fitted with a ‘Bayonet lug’. They do not count towards the maximum melee weapons a model can carry."
+            }
+        ]
     }
 ]
