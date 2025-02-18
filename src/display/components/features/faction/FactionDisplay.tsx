@@ -69,17 +69,13 @@ const FactionDisplay = (props: any) => {
                 </div>
                 {factionObject.Models.length > 0 &&
                     <>
-                        <div className='separator tagboxpad colordefault'>Models</div>
-                        <div className="verticalspacerbig"/>
                         {factionObject.Models.filter((item) => (item.Captain == true && item.Mercenary == false)).length > 0 &&
                             <>
                         <div className='separator bodytext tagboxpad colordefault'>Captains</div>
-                        <div className="verticalspacerbig"/>
-                        <div className="row">
+                        <div className="row textmaxwidth">
                             {factionObject.Models.filter((item) => (item.Captain == true && item.Mercenary == false)).map((item) => ( 
-                                <div key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID}>
+                                <div key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID} className="textmaxwidth">
                                     <FactionModelDisplay data={item} />
-                                    <div className="verticalspacerbig"/>
                                 </div>
                             )) /* Abilities */}
                         </div>
@@ -88,13 +84,14 @@ const FactionDisplay = (props: any) => {
                         }
                         {factionObject.Models.filter((item) => (item.Captain == false && item.Mercenary == false && (ModelIsElite(item.Model) == true))).length > 0 &&
                         <>
-                            <div className='separator bodytext tagboxpad colordefault'>Elite</div>
-                            <div className="verticalspacerbig"/>
-                            <div className="row">
+                        
+                            <div className="separator bodytext tagboxpad colordefault">
+                                Elite
+                            </div>
+                            <div className="row textmaxwidth">
                                 {factionObject.Models.filter((item) => (item.Captain == false && item.Mercenary == false && (ModelIsElite(item.Model) == true))).map((item) => ( 
-                                    <div key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID}>
+                                    <div key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID} className="textmaxwidth">
                                         <FactionModelDisplay data={item} />
-                                        <div className="verticalspacerbig"/>
                                     </div>
                                 )) /* Abilities */}
                             </div>
@@ -103,12 +100,10 @@ const FactionDisplay = (props: any) => {
                         {factionObject.Models.filter((item) => (item.Captain == false && item.Mercenary == false && (ModelIsElite(item.Model) == false))).length > 0 &&
                         <>
                         <div className='separator bodytext tagboxpad colordefault'>Infantry</div>
-                        <div className="verticalspacerbig"/>
-                        <div className="row">
+                        <div className="row textmaxwidth">
                             {factionObject.Models.filter((item) => (item.Captain == false && item.Mercenary == false && (ModelIsElite(item.Model) == false))).map((item) => ( 
-                                <div key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID}>
+                                <div key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID} className="textmaxwidth">
                                     <FactionModelDisplay data={item} />
-                                    <div className="verticalspacerbig"/>
                                 </div>
                             )) /* Abilities */}
                         </div>
@@ -117,12 +112,10 @@ const FactionDisplay = (props: any) => {
                         {factionObject.Models.filter((item) => (item.Mercenary == true)).length > 0 &&
                             <>
                             <div className='separator bodytext tagboxpad colordefault'>Mercenaries</div>
-                            <div className="verticalspacerbig"/>
-                            <div className="row">
+                            <div className="row textmaxwidth">
                                 {factionObject.Models.filter((item) => (item.Mercenary == true)).map((item) => ( 
-                                    <div key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID}>
+                                    <div key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID} className="textmaxwidth">
                                         <FactionModelDisplay data={item} />
-                                        <div className="verticalspacerbig"/>
                                     </div>
                                 )) /* Abilities */}
                             </div>
