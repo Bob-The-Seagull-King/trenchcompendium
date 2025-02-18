@@ -243,7 +243,8 @@
         "description": [            
             {
                 "tags": {"desc_type" : "default"},
-                "content": "This model is part of the Court of the Seven Headed Serpent faction."
+                "content": "This model is part of the Court of the Seven Headed Serpent faction. Due to their infernal origins, models with the Keyword DEMONIC negate additional BLOOD MARKERS caused by the Keyword FIRE.",
+                "glossary": [{"val": "BLOOD MARKERS", "id": "kw_bloodmarker"},{"val": "FIRE", "id": "kw_fire"}]
             }
         ]
     },

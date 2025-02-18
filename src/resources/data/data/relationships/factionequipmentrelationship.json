@@ -1,0 +1,14 @@
+[
+    {
+        "id": "rel_fc_eq_jezzail",
+        "source": "core",
+        "tags": {},
+        "name": "Jezzail",
+        "contextdata": {},
+        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_fidaiofalamut"],
+        "equipment_id": "eq_jezzail",
+        "cost": 7,
+        "costtype": 0,
+        "limit": 0
+    }
+]

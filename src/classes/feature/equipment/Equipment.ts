@@ -31,6 +31,8 @@ interface EquipmentRestriction {
     required?: RestrictionSingle[],
     removed?: RestrictionSingle[],
     added?: RestrictionSingle[],
+    permitted?: RestrictionSingle[],
+    banned?: RestrictionSingle[]
 }
 
 interface RestrictionSingle {

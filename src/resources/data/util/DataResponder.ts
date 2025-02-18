@@ -111,6 +111,9 @@ class DataResponder {
             case "factionmodelrelationship": {
                 return RelevantSet.factionmodelrelationship.concat(data)
             }
+            case "factionequipmentrelationship": {
+                return RelevantSet.factionequipmentrelationship.concat(data)
+            }
             case "testdynamicfeature": {
                 return RelevantSet.testdynamicdata.concat(data)
             }

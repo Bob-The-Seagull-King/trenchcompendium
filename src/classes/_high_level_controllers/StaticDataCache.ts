@@ -14,6 +14,7 @@ import { FactionCollection } from "../feature/faction/FactionCollection";
 import { Rule } from "../feature/faction/Rule";
 import { FactionModelRelationship } from "../relationship/faction/FactionModelRelationship";
 import { Requester } from "../../factories/Requester";
+import { FactionEquipmentRelationship } from "../relationship/faction/FactionEquipmentRelationship";
 
 /**
  * Contains the Controller objects for 'Tools' pages.
@@ -34,6 +35,7 @@ class StaticDataCache {
     public ModelUpgradeCache :  {[tokenid: string]: ModelUpgradeRelationship} = {};
     public EquipmentCache :  {[tokenid: string]: Equipment} = {};
     public ModelEquipmentCache :  {[tokenid: string]: ModelEquipmentRelationship} = {};
+    public FactionEquipmentCache :  {[tokenid: string]: FactionEquipmentRelationship} = {};
     public FactionCollectionCache :  {[tokenid: string]: FactionCollection} = {};
     public FactionCache :  {[tokenid: string]: Faction} = {};
     public RuleCache :  {[tokenid: string]: Rule} = {};
@@ -61,6 +63,8 @@ class StaticDataCache {
                 return (this.EquipmentCache[id_val] == null)
             case 'modelequipment': 
                 return (this.ModelEquipmentCache[id_val] == null)
+            case 'factionequipment': 
+                return (this.FactionEquipmentCache[id_val] == null)
             case 'factioncollection': 
                 return (this.FactionCollectionCache[id_val] == null)
             case 'faction': 
@@ -123,6 +127,11 @@ class StaticDataCache {
             case 'modelequipment':   
                 if (this.ModelEquipmentCache[obj.ID] == null) {
                     this.ModelEquipmentCache[obj.ID] = obj as ModelEquipmentRelationship;
+                }
+                return;
+            case 'factionequipment':   
+                if (this.FactionEquipmentCache[obj.ID] == null) {
+                    this.FactionEquipmentCache[obj.ID] = obj as FactionEquipmentRelationship;
                 }
                 return;
             case 'factioncollection': 

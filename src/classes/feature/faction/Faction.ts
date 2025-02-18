@@ -18,6 +18,7 @@ import { IRule, Rule } from './Rule';
 import { RuleFactory } from '../../../factories/features/RuleFactory';
 import { FactionModelRelationship, IFactionModelRelationship } from '../../relationship/faction/FactionModelRelationship';
 import { ModelFactory } from '../../../factories/features/ModelFactory';
+import { FactionEquipmentRelationship, IFactionEquipmentRelationship } from '../../relationship/faction/FactionEquipmentRelationship';
 
 
 interface IFaction extends IStaticOptionContextObject {
@@ -35,6 +36,7 @@ class Faction extends StaticOptionContextObject {
     public Variant : string;
 
     public Models : FactionModelRelationship[] = []
+    public EquipmentItems : FactionEquipmentRelationship[] = []
 
     /**
      * Assigns parameters and creates a series of description
@@ -53,6 +55,9 @@ class Faction extends StaticOptionContextObject {
 
         this.BuildFactionModels(data.id);
         this.BuildRules(data.rules)
+        this.BuildFactionEquipment(data.id)
+
+        console.log(this);
     }
     
     public BuildFactionModels(id : string) {
@@ -86,6 +91,33 @@ class Faction extends StaticOptionContextObject {
         for (let i = 0; i < rules.length; i++) {
             const RuleObj = RuleFactory.CreateNewRule(rules[i], this);
             this.Rules.push(RuleObj);
+        }
+    }
+    
+    public BuildFactionEquipment(id : string) {
+        const EquipmentList = Requester.MakeRequest(
+            {
+                searchtype: "complex", 
+                searchparam: {
+                    type: "factionequipmentrelationship",
+                    request: {
+                        operator: 'and',
+                        terms: [
+                            {
+                                item: "faction_id",
+                                value: id,
+                                equals: true,
+                                strict: true
+                            }
+                        ],
+                        subparams: []
+                    }
+                }
+            }
+        ) as IFactionEquipmentRelationship[]
+
+        for (let i = 0; i < EquipmentList.length; i++) {
+            this.EquipmentItems.push(EquipmentFactory.CreateFactionEquipment(EquipmentList[i], this))
         }
     }
 

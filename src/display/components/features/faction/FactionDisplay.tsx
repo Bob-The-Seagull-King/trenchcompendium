@@ -23,6 +23,7 @@ import { Faction } from '../../../../classes/feature/faction/Faction';
 import RuleDisplay from './RuleDisplay';
 import OptionSetStaticDisplay from '../../subcomponents/description/OptionSetStaticDisplay';
 import FactionModelDisplay from '../model/FactionModelDisplay';
+import FactionEquipmentDisplay from '../equipment/FactionEquipmentDisplay';
 
 const FactionDisplay = (props: any) => {
     const factionObject: Faction = props.data
@@ -68,7 +69,15 @@ const FactionDisplay = (props: any) => {
                     }
                 </div>
                 {factionObject.Models.length > 0 &&
-                    <>
+                    <>                    
+                        <div className="row">
+                            <div className="verticalspacerbig"/>
+                        </div>
+                        <div className="row">
+                            <span className="colordefault contentpacklabel complextext">
+                                {"Models"}
+                            </span>
+                        </div>
                         {factionObject.Models.filter((item) => (item.Captain == true && item.Mercenary == false)).length > 0 &&
                             <>
                         <div className='separator bodytext tagboxpad colordefault'>Captains</div>
@@ -120,6 +129,66 @@ const FactionDisplay = (props: any) => {
                                 )) /* Abilities */}
                             </div>
                         </>
+                        }
+                    </>
+                }
+                {factionObject.EquipmentItems.length > 0 &&
+                    <>
+                        <div className="row">
+                            <div className="verticalspacerbig"/>
+                        </div>
+                        <div className="row">
+                            <span className="colordefault contentpacklabel complextext">
+                                {"Armoury"}
+                            </span>
+                        </div>
+                        {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "melee")).length > 0 &&
+                            <>
+                                <div className='separator bodytext tagboxpad colordefault'>Melee</div>
+                                <div className="row textmaxwidth">
+                                    {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "melee")).map((item) => ( 
+                                        <div key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID} className="textmaxwidth">
+                                            <FactionEquipmentDisplay data={item} />
+                                        </div>
+                                    )) /* Abilities */}
+                                </div>
+                            </>
+                        }
+                        {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "ranged")).length > 0 &&
+                            <>
+                                <div className='separator bodytext tagboxpad colordefault'>Ranged</div>
+                                <div className="row textmaxwidth">
+                                    {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "ranged")).map((item) => ( 
+                                        <div key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID} className="textmaxwidth">
+                                            <FactionEquipmentDisplay data={item} />
+                                        </div>
+                                    )) /* Abilities */}
+                                </div>
+                            </>
+                        }
+                        {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "armor")).length > 0 &&
+                            <>
+                                <div className='separator bodytext tagboxpad colordefault'>Armor</div>
+                                <div className="row textmaxwidth">
+                                    {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "armor")).map((item) => ( 
+                                        <div key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID} className="textmaxwidth">
+                                            <FactionEquipmentDisplay data={item} />
+                                        </div>
+                                    )) /* Abilities */}
+                                </div>
+                            </>
+                        }
+                        {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "equipment")).length > 0 &&
+                            <>
+                                <div className='separator bodytext tagboxpad colordefault'>Equipment</div>
+                                <div className="row textmaxwidth">
+                                    {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "equipment")).map((item) => ( 
+                                        <div key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID} className="textmaxwidth">
+                                            <FactionEquipmentDisplay data={item} />
+                                        </div>
+                                    )) /* Abilities */}
+                                </div>
+                            </>
                         }
                     </>
                 }

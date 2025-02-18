@@ -5,6 +5,8 @@ import { ContextObject } from '../../classes/contextevent/contextobject';
 import { Ability, IAbility } from '../../classes/feature/ability/Ability';
 import { Equipment, IEquipment } from '../../classes/feature/equipment/Equipment';
 import { IModelEquipmentRelationship, ModelEquipmentRelationship } from '../../classes/relationship/model/ModelEquipmentRelationship';
+import { IFactionEquipmentRelationship, FactionEquipmentRelationship } from '../../classes/relationship/faction/FactionEquipmentRelationship';
+
 
 class EquipmentFactory {
 
@@ -54,6 +56,28 @@ class EquipmentFactory {
         }
         const ruledata = Requester.MakeRequest({searchtype: "id", searchparam: {type: "modelequipmentrelationship", id: _val}}) as IModelEquipmentRelationship
         const rulenew = EquipmentFactory.CreateModelEquipment(ruledata, parent)
+        return rulenew;
+    }
+
+    static CreateFactionEquipment(_rule: IFactionEquipmentRelationship, parent : ContextObject | null) {
+        const cache = StaticDataCache.getInstance();
+        const isValid = (cache.CheckID('factionequipment', _rule.id))
+        if (isValid == false) {
+            return cache.FactionEquipmentCache[_rule.id];
+        }
+        const rule = new FactionEquipmentRelationship(_rule, parent)
+        cache.AddToCache('factionequipment', rule);
+        return rule;
+    }
+
+    static CreateNewFactionEquipment(_val : string, parent : ContextObject | null) {
+        const cache = StaticDataCache.getInstance();
+        const isValid = (cache.CheckID('factionequipment', _val))
+        if (isValid == false) {
+            return cache.FactionEquipmentCache[_val];
+        }
+        const ruledata = Requester.MakeRequest({searchtype: "id", searchparam: {type: "factionequipmentrelationship", id: _val}}) as IFactionEquipmentRelationship
+        const rulenew = EquipmentFactory.CreateFactionEquipment(ruledata, parent)
         return rulenew;
     }
 

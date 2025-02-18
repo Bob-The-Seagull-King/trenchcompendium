@@ -383,5 +383,68 @@ export const BaseContextCallTable : CallEventTable = {
 
             return relayVar;
         }
+    },
+    faction_eq_restriction: {
+        event_priotity: 0,        
+        async getEquipmentRestrictionPresentable(this: EventRunner, eventSource : any, relayVar : any, trackVal : EquipmentRestriction[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) 
+        {
+            
+            const { ModelFactory } = await import("../../factories/features/ModelFactory");
+
+            const PermittedCollection : string[] = []
+            const BannedCollection : string[] = []
+
+            for (let i = 0; i < trackVal.length; i++) {
+                const EquipList : EquipmentRestriction = trackVal[i]
+
+                if (EquipList.permitted) {
+                    for (let j = 0; j < EquipList.permitted.length; j++) {
+                        const Requirement = EquipList.permitted[j]
+                        const NewStringParts = []
+                        NewStringParts.push("")
+
+                        if (Requirement.res_type == "keyword") {
+                            const ValKey : Keyword = KeywordFactory.CreateNewKeyword(Requirement.value, null)
+                            NewStringParts.push(makestringpresentable(ValKey.Name? ValKey.Name : ""))
+                        }  
+
+                        if (Requirement.res_type == "id") {
+                            const ModelItem = ModelFactory.CreateNewModel(Requirement.value, null)
+                            NewStringParts.push(""+(ModelItem.Name))
+                        }                  
+
+                        PermittedCollection.push(NewStringParts.join(' '));
+                    }
+                }
+                if (EquipList.banned) {
+                    for (let j = 0; j < EquipList.banned.length; j++) {
+                        const Requirement = EquipList.banned[j]
+                        const NewStringParts = []
+                        NewStringParts.push("")
+
+                        if (Requirement.res_type == "keyword") {
+                            const ValKey : Keyword = KeywordFactory.CreateNewKeyword(Requirement.value, null)
+                            NewStringParts.push("Not " + makestringpresentable(ValKey.Name? ValKey.Name : ""))
+                        }  
+
+                        if (Requirement.res_type == "id") {
+                            const ModelItem = ModelFactory.CreateNewModel(Requirement.value, null)
+                            NewStringParts.push("Not "+(ModelItem.Name))
+                        }                  
+
+                        PermittedCollection.push(NewStringParts.join(' '));
+                    }
+                }
+            }
+
+            const StringCollection : string[] = PermittedCollection.concat(BannedCollection)
+
+
+            return relayVar.concat(StringCollection);
+        },
+        getEquipmentRestriction(this: EventRunner, eventSource : any, relayVar : any, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) { 
+            relayVar.push(context_func as EquipmentRestriction)
+            return relayVar;
+        }
     }
 }

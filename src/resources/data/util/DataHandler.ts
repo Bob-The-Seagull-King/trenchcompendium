@@ -21,6 +21,7 @@ import en_factionruledata from '../data/faction/rule.json'
 import en_modelupgraderelationship from '../data/relationships/modelupgraderelationship.json'
 import en_modelequipmentrelationship from '../data/relationships/modelequipmentrelationship.json'
 import en_factionmodelrelationship from '../data/relationships/factionmodelrelationship.json'
+import en_factionequipmentrelationship from '../data/relationships/factionequipmentrelationship.json'
 
 import en_testdynamic from '../data/testitemscontext/testitemdynamic.json'
 import en_teststatic from '../data/testitemscontext/testitemstatic.json'
@@ -49,6 +50,7 @@ export interface DataSetTC {
     factionvariantdata : any,
     factionruledata : any,
     factionmodelrelationship : any,
+    factionequipmentrelationship : any,
     testdynamicdata : any,
     teststaticdata : any,
     testbasicdata : any
@@ -71,6 +73,7 @@ export const DataByLanguageTable : LanguageDataTable = {
         factionvariantdata : en_factionvariantdata,
         factionruledata : en_factionruledata,
         factionmodelrelationship : en_factionmodelrelationship,
+        factionequipmentrelationship : en_factionequipmentrelationship,
         testdynamicdata : en_testdynamic,
         teststaticdata : en_teststatic,
         testbasicdata : en_testbasic
