@@ -13,8 +13,8 @@
         "cost" : 70,
         "cost_type" : 0,
         "restricted_models" : [],
-        "warband_minimum" : 0,
-        "warband_maximum" : 0
+        "warband_minimum" : 1,
+        "warband_maximum" : 1
     },
     {
         "id": "rel_fc_md_sultanateassassin_mv_masterassassin",
@@ -30,8 +30,8 @@
         "cost" : 95,
         "cost_type" : 0,
         "restricted_models" : [],
-        "warband_minimum" : 0,
-        "warband_maximum" : 0
+        "warband_minimum" : 1,
+        "warband_maximum" : 1
     },
     {
         "id": "rel_fc_md_jabireanalchemist",

@@ -88,5 +88,24 @@
             }
         ],
         "options": []
+    },
+    {
+        "id": "rl_artofassassination",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            "faction_add_upgrades": {
+                "model_key": "rl_artofassassination",
+                "models_id": ["md_sultanateassassin","md_sultanateassassin_mv_masterassassin"]
+            }
+        },
+        "name": "Art of Assassination",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Any Assassin of the warband may buy any one of several abilities at the cost indicated. There cannot be any duplicates in the warband and you can only buy one for each Assassin."
+            }
+        ],
+        "options": []
     }
 ]

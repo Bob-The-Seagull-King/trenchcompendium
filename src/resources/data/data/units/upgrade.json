@@ -58,5 +58,20 @@
             }
         ],
         "options": []
+    },
+    {
+        "id": "up_hallucinogendisguise",
+        "name": "Hallucinogen Disguise",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": { "infiltrator_scenario": {}},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "An INFILTRATOR with this ability can be deployed anywhere on the battlefield, including the enemy Deployment Zone, as long as the model is at least 8” away from any enemy models. The model does not have to be out of Line of Sight. Binoculars or Guard Dogs have no effect on this ability.",
+                "glossary": [{"val": "INFILTRATOR", "id": "kw_infiltrator"}]
+            }
+        ],
+        "options": []
     }
 ]

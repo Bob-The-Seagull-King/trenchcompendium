@@ -9,6 +9,9 @@ import { Equipment, EquipmentLimit, EquipmentRestriction } from "../../classes/f
 import { Keyword } from "../../classes/feature/glossary/Keyword";
 import { KeywordFactory } from "../../factories/features/KeywordFactory";
 import { ModelStatistics } from "../../classes/feature/model/ModelStats";
+import { IModelUpgradeRelationship, ModelUpgradeRelationship } from "../../classes/relationship/model/ModelUpgradeRelationship";
+import { Requester } from "../../factories/Requester";
+import { UpgradeFactory } from "../../factories/features/UpgradeFactory";
 
 export const BaseContextCallTable : CallEventTable = {
     option_search_viable: {
@@ -338,6 +341,47 @@ export const BaseContextCallTable : CallEventTable = {
                 }
             }
             return relayVar.concat(StatOptionList);
+        }
+    },
+    faction_model_count_special: {
+        event_priotity: 0,
+        getModelLimitPresentation(this: EventRunner, eventSource : any, relayVar : string[], trackVal : boolean, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            return relayVar;
+        }
+    },
+    faction_add_upgrades : {
+        event_priotity: 0,
+        async getFactionRuleUpgrades(this: EventRunner, eventSource : any, relayVar : ModelUpgradeRelationship[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            
+            const { UpgradeFactory } = await import("../../factories/features/UpgradeFactory");
+
+            const UpgradeList = Requester.MakeRequest(
+                {
+                    searchtype: "complex", 
+                    searchparam: {
+                        type: "modelupgraderelationship",
+                        request: {
+                            operator: 'and',
+                            terms: [
+                                {
+                                    item: "model_id_set",
+                                    value: context_func["model_key"],
+                                    equals: true,
+                                    strict: true
+                                }
+                            ],
+                            subparams: []
+                        }
+                    }
+                }
+            ) as IModelUpgradeRelationship[]
+            
+            for (let i = 0; i < UpgradeList.length; i++) {
+                UpgradeList[i].model_id_set = context_func["models_id"]
+                relayVar.push(UpgradeFactory.CreateModelUpgrade(UpgradeList[i]))
+            }
+
+            return relayVar;
         }
     }
 }

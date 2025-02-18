@@ -26,17 +26,49 @@ import GenericPopup from '../../../components/generics/GenericPopup';
 const FactionModelDisplay = (props: any) => {
     const factionmodelObject: FactionModelRelationship = props.data
 
+    const [minimum, setminimum] = useState("")
+    const [maximum, setmaximum] = useState("")
+    const [_keyvar, setkeyvar] = useState(0);
+
+    
+        useEffect(() => {
+            async function SetModelOptions() {
+                const EventProc: EventRunner = new EventRunner();
+                
+                const result = await EventProc.runEvent(
+                    "getModelLimitPresentation",
+                    factionmodelObject,
+                    [],
+                    [factionmodelObject.Maximum.toString()],
+                    true
+                );
+                setmaximum(result.join(", "));
+                setkeyvar((prev) => prev + 1);
+
+                const result_min = await EventProc.runEvent(
+                    "getModelLimitPresentation",
+                    factionmodelObject,
+                    [],
+                    [factionmodelObject.Minimum.toString()],
+                    false
+                );
+                setminimum(result_min.join(", "));
+                setkeyvar((prev) => prev + 1);
+            }
+        
+            SetModelOptions();
+        }, []);
 
     return (
         <ErrorBoundary fallback={<div>Something went wrong with FactionModelDisplay.tsx</div>}>
-            <div className='textmaxwidth row'>
-                <div className="col-3">
+            <div className='textmaxwidth row' key={_keyvar}>
+                <div className="col-4">
                     <GenericPopup  d_colour={factionmodelObject.Model.Team} titlename={factionmodelObject.Model.Name} d_name={factionmodelObject.Model.Name} d_type={""} d_method={() => 
                         <div className="abilityInternalStructure">
                             <ModelDisplay data={factionmodelObject.Model} />
                         </div>}/>
                 </div>
-                <div className="col-2">
+                <div className="col-3">
                     <span className=" bodytext complextext">
                         {
                             factionmodelObject.Cost + " " + 
@@ -44,11 +76,29 @@ const FactionModelDisplay = (props: any) => {
                         }
                     </span>
                 </div>
-                <div className="col-4">
-
-                </div>
-                <div className="col-3">
-
+                <div className="col-5">
+                    {minimum == maximum &&
+                        <>
+                        <span className=" bodytext complextext">
+                            {minimum != "0" &&
+                                <>
+                                {
+                                    minimum
+                                }
+                                </>
+                            }
+                        </span>
+                        </>
+                    }
+                    {minimum != maximum &&
+                        <>
+                            <span className=" bodytext complextext">
+                                {
+                                    minimum + " - " + maximum
+                                }
+                            </span>
+                        </>
+                    }
                 </div>
             </div>
         </ErrorBoundary>

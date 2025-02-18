@@ -4,6 +4,7 @@ import { DynamicContextObject } from "../../classes/contextevent/dynamiccontexto
 import { ContextObject } from "../../classes/contextevent/contextobject";
 import { EquipmentLimit, EquipmentRestriction } from "../../classes/feature/equipment/Equipment";
 import { ModelStatistics } from "../../classes/feature/model/ModelStats";
+import { ModelUpgradeRelationship } from "../../classes/relationship/model/ModelUpgradeRelationship";
 
 /**
  * Events that can be called by the runEvent method,
@@ -20,6 +21,8 @@ export interface CallEvents {
     getEquipmentLimitPresentable? : (this: EventRunner, eventSource : any, relayVar : any, trackVal : EquipmentLimit[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<string[]>; 
     getEquipmentLimit? : (this: EventRunner, eventSource : any, relayVar : any, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => EquipmentLimit[]; 
     getModelStatOptions? : (this: EventRunner, eventSource : any, relayVar : ModelStatistics[][], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => ModelStatistics[][]; 
+    getModelLimitPresentation? : (this: EventRunner, eventSource : any, relayVar : string[], trackVal : boolean, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => string[]; 
+    getFactionRuleUpgrades? : (this: EventRunner, eventSource : any, relayVar : ModelUpgradeRelationship[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<ModelUpgradeRelationship[]>; 
 }
 
 /**

@@ -24,6 +24,8 @@ class Rule extends StaticOptionContextObject {
     
     public Description;
 
+    public BonusUpgrades: ModelUpgradeRelationship[] | null = null;
+
     /**
      * Assigns parameters and creates a series of description
      * objects with DescriptionFactory
@@ -33,6 +35,22 @@ class Rule extends StaticOptionContextObject {
     {
         super(data, parent)
         this.Description = DescriptionFactory(data.description, this);
+        this.RunUpgradeOptions();
+    }
+    
+
+    public RunUpgradeOptions() {
+        const EventProc : EventRunner = new EventRunner();
+
+        EventProc.runEvent(
+            "getFactionRuleUpgrades",
+            this,
+            [],
+            [],
+            null
+        ).then(result => {
+            this.BonusUpgrades = result;
+        });
     }
 
 

@@ -42,5 +42,16 @@
         ],
         "warband_limit": 0,
         "faction_mask":[]
+    },
+    {
+        "id": "rel_factionrule_artofassassination_hallucinogendisguise",
+        "model_id_set": ["rl_artofassassination"],
+        "upgrade_id": "up_hallucinogendisguise",
+        "cost": 20,
+        "cost_type": 0,
+        "restricted_upgrades": [
+        ],
+        "warband_limit": 1,
+        "faction_mask":[]
     }
 ]

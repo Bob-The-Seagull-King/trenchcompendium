@@ -26,7 +26,7 @@
         ],
         "team": "faithful",
         "cut_rules" : [],
-        "rules" : ["rl_flockofassassins","rl_masterassassin","rl_assassinacolytes","rl_alamutalone","rl_killingsquad","rl_dervishes"],
+        "rules" : ["rl_flockofassassins","rl_masterassassin","rl_assassinacolytes","rl_alamutalone","rl_killingsquad","rl_dervishes","rl_artofassassination"],
         "options": []
     }
 ]
