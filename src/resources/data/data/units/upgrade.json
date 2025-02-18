@@ -73,5 +73,54 @@
             }
         ],
         "options": []
+    },
+    {
+        "id": "up_thunderboltofalamut",
+        "name": "Thunderbolt of Alamut",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {"upgrade_stat": {"stat": "movement", "value": 2}},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The model has +2” movement and +1 DICE on its Dash ACTIONS.",
+                "glossary": [{"val": "ACTIONS", "id": "kw_action"},{"val": "+1 DICE", "id": "kw_plusdice"}]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_mirageoftime",
+        "name": "Mirage of Time",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {"self_defense_hit" : {"type": "dice", "val": -1}},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Both Ranged and Melee attacks against the Assassin suffer -1 DICE penalty when determining if they hit.",
+                "glossary": [{"val": "-1 DICE", "id": "kw_minusdice"}]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_secretpaths",
+        "name": "Secret Paths",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {"self_defense_hit" : {"type": "dice", "val": -1}},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "At the start of the battle, right before the first model is set up, declare whether or not this model will be set up by using Secret Paths. A model using the Secret Paths is not set up on the battlefield at the start of the battle and it may not be activated normally during the first turn."
+            },          
+            { "tags": {"desc_type" : "gap"} },          
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Starting in the second turn, you may activate these models. When you do, set up the model in contact with an edge of the battlefield but more than 8” away from all enemy models at the start of its activation. If both players have such models, the starting player declares whether one of their models is deployed or not first, followed by the other player. Alternate as normal until all such models have been declared as using Secret Paths or not."
+            }
+        ],
+        "options": []
     }
 ]
