@@ -73,7 +73,7 @@ const FactionEquipmentDisplay = (props: any) => {
     return (
         <ErrorBoundary fallback={<div>Something went wrong with FactionModelDisplay.tsx</div>}>
             <div className='textmaxwidth row' key={_keyvar}>
-                <div className="col-4">
+                <div className="col-3">
                     <GenericPopup  d_colour={"default"} titlename={factionequipmentObject.EquipmentItem.Name} d_name={factionequipmentObject.EquipmentItem.Name} d_type={""} d_method={() => 
                         <EquipmentDisplay data={factionequipmentObject.EquipmentItem} />}/>
                 </div>
@@ -96,7 +96,7 @@ const FactionEquipmentDisplay = (props: any) => {
                         </>
                     }
                 </div>
-                <div className="col-4">
+                <div className="col-5">
                     <span className="colorgrey bodytext complextext">
                         {
                             equiprestrictions.join(', ') 

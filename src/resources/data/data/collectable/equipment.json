@@ -42,7 +42,7 @@
         "distance": null,
         "stats": {
         },
-        "contextdata": {"activated_stat": {"stat": "movement", "value": 3}},
+        "contextdata": {"activated_stat": {"stat": "movement", "value": 3}, "activated": {}},
         "description": [            
             {
                 "tags": {"desc_type" : "default"},
@@ -1028,6 +1028,285 @@
             {
                 "tags": {"desc_type" : "italic"},
                 "content": "uit of armour which protects against almost all harm. This is an essential tool of Alchemists’ craft, festooned with the Seals of Solomon which enables them to bend the elements of Creation to their will and shields them even from the devices of Hell."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_gasmask",
+        "name": "Gas Mask",
+        "source": "core",
+        "tags": {"trait": true, "headgear": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {
+            "ignore_element": {"element": ["kw_gas"]}
+        },
+        "description": [       
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Ignores additional BLOOD MARKERS caused by the Keyword GAS. Any such attacks suffer -1 DICE penalty to all injury rolls.",
+                "glossary": [
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"},
+                    {"val": "GAS", "id": "kw_gas"},
+                    {"val": "-1 DICE", "id": "kw_minusdice"}
+                ]
+            } 
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Mustard Gas, phosgene, chlorine as well as noxious fumes from the bolgias of Hell plague the battlefield. The Gas Mask allows soldiers to withstand such attacks."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_maridshovel",
+        "name": "Marid Shovel",
+        "source": "core",
+        "tags": {"trait": true, "action": true, "weapon": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+            "hands_melee": 2,
+            "melee": true
+        },
+        "contextdata": {"get_weapon": {}, "find_hands": {"required": false}},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "A model equipped with a shovel always starts the game in cover if deployed on ground level, even if placed in open terrain. As soon as the model moves, it is no longer in cover. A model that is covered in this way retains the benefit of Cover even if the attacking model has an unobstructed view of it.",
+                "glossary": [{"val": "cover", "id": "gl_cover"}]
+            },      
+            { "tags": {"desc_type" : "gap"} },      
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "If a model equipped with a shovel has two hands free, it can use it in Melee Combat as if it were a Trench Club."
+            }
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "You can buy this enormous shovel made from alchemical bronze which makes it almost indestructible. Brazen bulls use it for public works (such as digging canals, foundations of buildings and mining) during peacetime, while at war it is used for digging trenches, ditches and bunkers."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_heavy"],
+        "modifiers": ["Wielding is Optional"]
+    },
+    {
+        "id": "eq_mountaineerkit",
+        "name": "Mountaineer Kit",
+        "source": "core",
+        "tags": {"trait": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "A model with this kit adds +1 DICE to any Climbing ACTION rolls.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "ACTION", "id": "kw_action"}
+                ]
+            }
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "This kit includes ropes, carabiners, slings, mountaineering harness and pitons to aid a soldier in overcoming almost any vertical obstacle."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_medikit",
+        "name": "Medi-Kit",
+        "source": "core",
+        "tags": {"action": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Models with a Medi-kit can take a RISKY ACTION to remove one BLOOD MARKER from any one friendly model (including themselves) within 1” range or allow one friendly model (including themselves) that is Down to regain their footing.",
+                "glossary": [
+                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"},
+                    {"val": "RISKY ACTION", "id": "kw_riskyaction"}
+                ]
+            }
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Battlefield first aid has brought many soldiers back from the brink of death. Blessed ointments can seal fatal wounds completely, while the black blood of demons used by twisted heretic medics allows mangled troops to return to the fray."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_musicalinstrument",
+        "name": "Musical Instrument",
+        "source": "core",
+        "tags": {"trait": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+            "hands_melee": 1,
+            "hands_ranged": 1
+        },
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Any friendly models within 4” of the musician who is not Down can add +1 DICE to their Dash ACTIONS. Musical Instruments take one hand to use at all times as if it were a weapon.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "ACTIONS", "id": "kw_action"}
+                ]
+            }
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Horns, drums, trumpets, whistles, bagpipes and many other types of instruments are used extensively in the battles of the Great War. They can bolster the hearts of those facing the horrors of Hell – or they can recite terrifying hymns praising the lords of the Inferno!"
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_cloakofalamut",
+        "name": "Cloak of Alamut",
+        "source": "core",
+        "tags": {"trait": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "All ranged attacks against a model that is in cover suffer -2 DICE penalty instead of -1 DICE. All the normal rules for cover apply otherwise.",
+                "glossary": [
+                    {"val": "-1 DICE", "id": "kw_minusdice"},
+                    {"val": "-2 DICE", "id": "kw_minusdice"}
+                ]
+            }
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Created by the secret arts of the Assassin’s sect aeons ago, this cloak bends the light so that its wearer looks almost indistinguishable against any surface when they are still. It is this masterwork of Alamut that has led to the tales of the fabled Cloak of Invisibility in the legends of the Sultanate."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_troopflag",
+        "name": "Troop Flag",
+        "source": "core",
+        "tags": {"trait": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {"warband_wide": {}},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Grants +1 DICE for all Morale tests as long as the model with the flag is not Down or Out of Action. Requires one hand to use.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"}
+                ]
+            }
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Most warbands and units carry banners, flags, standards, pennants or other symbols to rally the troops."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_binoculars",
+        "name": "Binoculars",
+        "source": "core",
+        "tags": {"trait": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {"warband_wide": {}},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Any enemy Infiltrator cannot be placed closer than 16” of this model.",
+                "glossary": [
+                    {"val": "Infiltrator", "id": "kw_infiltrator"}
+                ]
+            }
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "It is quite common for officers to carry finely-crafted battlefield binoculars with them on the battlefield to survey the land ahead, spot hidden enemy troops and observe any sign of movement."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_holyrelic",
+        "name": "Binoculars",
+        "source": "core",
+        "tags": {"trait": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {
+            "warband_wide": {},
+            "battle_start": {"blessing":1}
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This model starts each game with +1 BLESSING MARKER.",
+                "glossary": [
+                    {"val": "BLESSING MARKER", "id": "kw_blessingmarker"}
+                ]
+            }
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Due to the threat to all Creation, the churches, cathedrals and basilicas have emptied their reliquaries and distributed their relics to the frontline troops to aid them in their battle against the damned."
             }
         ],
         "options": [],

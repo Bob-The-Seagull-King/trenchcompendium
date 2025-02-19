@@ -432,5 +432,234 @@
         "cost": 10,
         "costtype": 0,
         "limit": 0
+    },
+    {
+        "id": "rel_fc_eq_combathelmet",
+        "source": "core",
+        "tags": {},
+        "name": "Combat Helmet",
+        "contextdata": {   
+        },
+        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_fidaiofalamut"],
+        "equipment_id": "eq_combathelmet",
+        "cost": 5,
+        "costtype": 0,
+        "limit": 0
+    },
+    {
+        "id": "rel_fc_eq_gasmask",
+        "source": "core",
+        "tags": {},
+        "name": "Gas Mask",
+        "contextdata": {   
+        },
+        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_fidaiofalamut"],
+        "equipment_id": "eq_gasmask",
+        "cost": 5,
+        "costtype": 0,
+        "limit": 0
+    },
+    {
+        "id": "rel_fc_eq_shovel",
+        "source": "core",
+        "tags": {},
+        "name": "Shovel",
+        "contextdata": {   
+        },
+        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_fidaiofalamut"],
+        "equipment_id": "eq_shovel",
+        "cost": 5,
+        "costtype": 0,
+        "limit": 0
+    },
+    {
+        "id": "rel_fc_eq_maridshovel",
+        "source": "core",
+        "tags": {},
+        "name": "Marid Shovel",
+        "contextdata": {      
+            "faction_eq_restriction": {
+                "permitted": [
+                    {
+                        "res_type": "id",
+                        "value": "md_brazenbull"
+                    }
+                ]
+            }  
+        },
+        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_fidaiofalamut"],
+        "equipment_id": "eq_maridshovel",
+        "cost": 15,
+        "costtype": 0,
+        "limit": 0
+    },
+    {
+        "id": "rel_fc_eq_mountaineerkit",
+        "source": "core",
+        "tags": {},
+        "name": "Mountaineer Kit",
+        "contextdata": {       
+        },
+        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_fidaiofalamut"],
+        "equipment_id": "eq_mountaineerkit",
+        "cost": 3,
+        "costtype": 0,
+        "limit": 2
+    },
+    {
+        "id": "rel_fc_eq_medikit",
+        "source": "core",
+        "tags": {},
+        "name": "Medi-Kit",
+        "contextdata": {       
+        },
+        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_fidaiofalamut"],
+        "equipment_id": "eq_medikit",
+        "cost": 5,
+        "costtype": 0,
+        "limit": 0
+    },
+    {
+        "id": "rel_fc_eq_alchemicalammunition",
+        "source": "core",
+        "tags": {},
+        "name": "Alchemical Ammunication",
+        "contextdata": { 
+            "faction_eq_restriction": {
+                "permitted": [
+                    {
+                        "res_type": "equipment",
+                        "value": "eq_jezzail"
+                    },
+                    {
+                        "res_type": "equipment",
+                        "value": "eq_siegejezzail"
+                    },
+                    {
+                        "res_type": "equipment",
+                        "value": "eq_alaybozan"
+                    },
+                    {
+                        "res_type": "equipment",
+                        "value": "eq_halberdgun"
+                    }
+                ]
+            }        
+        },
+        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_fidaiofalamut"],
+        "equipment_id": "eq_alchemicalammunition",
+        "cost": 3,
+        "costtype": 0,
+        "limit": 0
+    },
+    {
+        "id": "rel_fc_eq_musicalinstrument",
+        "source": "core",
+        "tags": {},
+        "name": "Musical Instrument",
+        "contextdata": { 
+            "faction_eq_restriction": {
+                "banned": [
+                    {
+                        "res_type": "keyword",
+                        "value": "kw_elite"
+                    }
+                ]
+            }        
+        },
+        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_fidaiofalamut"],
+        "equipment_id": "eq_musicalinstrument",
+        "cost": 15,
+        "costtype": 0,
+        "limit": 0
+    },
+    {
+        "id": "rel_fc_eq_cloakofalamut",
+        "source": "core",
+        "tags": {},
+        "name": "Cloak of Alamut",
+        "contextdata": { 
+            "faction_eq_restriction": {
+                "permitted": [
+                    {
+                        "res_type": "keyword",
+                        "value": "kw_elite"
+                    }
+                ]
+            }        
+        },
+        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_fidaiofalamut"],
+        "equipment_id": "eq_cloakofalamut",
+        "cost": 25,
+        "costtype": 0,
+        "limit": 1
+    },
+    {
+        "id": "rel_fc_eq_windamulet",
+        "source": "core",
+        "tags": {},
+        "name": "Wind Amulet",
+        "contextdata": {        
+        },
+        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_fidaiofalamut"],
+        "equipment_id": "eq_windamulet",
+        "cost": 10,
+        "costtype": 0,
+        "limit": 2
+    },
+    {
+        "id": "rel_fc_eq_troopflag",
+        "source": "core",
+        "tags": {},
+        "name": "Troop Flag",
+        "contextdata": {        
+        },
+        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_fidaiofalamut"],
+        "equipment_id": "eq_troopflag",
+        "cost": 1,
+        "costtype": 1,
+        "limit": 1
+    },
+    {
+        "id": "rel_fc_eq_binoculars",
+        "source": "core",
+        "tags": {},
+        "name": "Binoculars",
+        "contextdata": {           
+            "faction_eq_restriction": {
+                "permitted": [
+                    {
+                        "res_type": "keyword",
+                        "value": "kw_elite"
+                    }
+                ]
+            }      
+        },
+        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_fidaiofalamut"],
+        "equipment_id": "eq_binoculars",
+        "cost": 10,
+        "costtype": 0,
+        "limit": 0
+    },
+    {
+        "id": "rel_fc_eq_holyrelic",
+        "source": "core",
+        "tags": {},
+        "name": "Holy Relic",
+        "contextdata": {           
+            "faction_eq_restriction": {
+                "permitted": [
+                    {
+                        "res_type": "keyword",
+                        "value": "kw_elite"
+                    }
+                ]
+            }      
+        },
+        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_fidaiofalamut"],
+        "equipment_id": "eq_holyrelic",
+        "cost": 2,
+        "costtype": 1,
+        "limit": 0
     }
 ]

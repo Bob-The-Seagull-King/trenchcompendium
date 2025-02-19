@@ -390,6 +390,7 @@ export const BaseContextCallTable : CallEventTable = {
         {
             
             const { ModelFactory } = await import("../../factories/features/ModelFactory");
+            const { EquipmentFactory } = await import("../../factories/features/EquipmentFactory");
 
             const PermittedCollection : string[] = []
             const BannedCollection : string[] = []
@@ -411,6 +412,11 @@ export const BaseContextCallTable : CallEventTable = {
                         if (Requirement.res_type == "id") {
                             const ModelItem = ModelFactory.CreateNewModel(Requirement.value, null)
                             NewStringParts.push(""+(ModelItem.Name))
+                        }   
+
+                        if (Requirement.res_type == "equipment") {
+                            const EquipItem = EquipmentFactory.CreateNewEquipment(Requirement.value, null)
+                            NewStringParts.push(""+(EquipItem.Name))
                         }                  
 
                         PermittedCollection.push(NewStringParts.join(' '));
