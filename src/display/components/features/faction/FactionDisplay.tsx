@@ -12,7 +12,7 @@ import GenericHover from '../../generics/GenericHover';
 import KeywordDisplay from '../glossary/KeywordDisplay';
 import ItemStat from '../../subcomponents/description/ItemStat';
 import { ModelStatistics } from '../../../../classes/feature/model/ModelStats';
-import { getBaseSize, getColour, getMoveType, getPotential } from '../../../../utility/functions';
+import { containsTag, getBaseSize, getColour, getMoveType, getPotential } from '../../../../utility/functions';
 import ModelUpgradeDisplay from '../ability/ModelUpgradeDisplay';
 import { Equipment } from '../../../../classes/feature/equipment/Equipment';
 import { IChoice } from '../../../../classes/options/StaticOption';
@@ -148,11 +148,11 @@ const FactionDisplay = (props: any) => {
                         </div>
                         
                     <div className='abilityInternalStructure'>
-                        {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "melee")).length > 0 &&
+                        {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "melee" && (containsTag(item.Tags, "exploration_only") == false))).length > 0 &&
                             <>
                                 <div className='separator bodytext tagboxpad colordefault'>Melee</div>
                                 <div className="row textmaxwidth">
-                                    {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "melee")).map((item) => ( 
+                                    {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "melee" && (containsTag(item.Tags, "exploration_only") == false))).map((item) => ( 
                                         <div key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID} className="textmaxwidth">
                                             <FactionEquipmentDisplay data={item} />
                                         </div>
@@ -160,11 +160,11 @@ const FactionDisplay = (props: any) => {
                                 </div>
                             </>
                         }
-                        {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "ranged")).length > 0 &&
+                        {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "ranged" && (containsTag(item.Tags, "exploration_only") == false))).length > 0 &&
                             <>
                                 <div className='separator bodytext tagboxpad colordefault'>Ranged</div>
                                 <div className="row textmaxwidth">
-                                    {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "ranged")).map((item) => ( 
+                                    {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "ranged" && (containsTag(item.Tags, "exploration_only") == false))).map((item) => ( 
                                         <div key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID} className="textmaxwidth">
                                             <FactionEquipmentDisplay data={item} />
                                         </div>
@@ -172,11 +172,11 @@ const FactionDisplay = (props: any) => {
                                 </div>
                             </>
                         }
-                        {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "armor")).length > 0 &&
+                        {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "armor" && (containsTag(item.Tags, "exploration_only") == false))).length > 0 &&
                             <>
                                 <div className='separator bodytext tagboxpad colordefault'>Armor</div>
                                 <div className="row textmaxwidth">
-                                    {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "armor")).map((item) => ( 
+                                    {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "armor" && (containsTag(item.Tags, "exploration_only") == false))).map((item) => ( 
                                         <div key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID} className="textmaxwidth">
                                             <FactionEquipmentDisplay data={item} />
                                         </div>
@@ -184,11 +184,23 @@ const FactionDisplay = (props: any) => {
                                 </div>
                             </>
                         }
-                        {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "equipment")).length > 0 &&
+                        {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "equipment" && (containsTag(item.Tags, "exploration_only") == false))).length > 0 &&
                             <>
                                 <div className='separator bodytext tagboxpad colordefault'>Equipment</div>
                                 <div className="row textmaxwidth">
-                                    {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "equipment")).map((item) => ( 
+                                    {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "equipment" && (containsTag(item.Tags, "exploration_only") == false))).map((item) => ( 
+                                        <div key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID} className="textmaxwidth">
+                                            <FactionEquipmentDisplay data={item} />
+                                        </div>
+                                    )) /* Abilities */}
+                                </div>
+                            </>
+                        }
+                        {factionObject.EquipmentItems.filter((item) => ((containsTag(item.Tags, "exploration_only") == true))).length > 0 &&
+                            <>
+                                <div className='separator bodytext tagboxpad colordefault'>Exploration Only</div>
+                                <div className="row textmaxwidth">
+                                    {factionObject.EquipmentItems.filter((item) => ( (containsTag(item.Tags, "exploration_only") == true))).map((item) => ( 
                                         <div key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID} className="textmaxwidth">
                                             <FactionEquipmentDisplay data={item} />
                                         </div>

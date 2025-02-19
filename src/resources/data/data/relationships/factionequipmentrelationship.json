@@ -180,7 +180,7 @@
                 ]
             }  
         },
-        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_ironsultanate"],
         "equipment_id": "eq_muradbombard",
         "cost": 50,
         "costtype": 0,
@@ -201,7 +201,7 @@
                 ]
             }  
         },
-        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_ironsultanate"],
         "equipment_id": "eq_flamecannon",
         "cost": 60,
         "costtype": 0,
@@ -334,7 +334,7 @@
                 ]
             }
         },
-        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_ironsultanate"],
         "equipment_id": "eq_titanzulfiqar",
         "cost": 30,
         "costtype": 0,
@@ -487,7 +487,7 @@
                 ]
             }  
         },
-        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_ironsultanate"],
         "equipment_id": "eq_maridshovel",
         "cost": 15,
         "costtype": 0,
@@ -724,5 +724,165 @@
         "cost": 5,
         "costtype": 0,
         "limit": 4
+    },
+    {
+        "id": "rel_fc_eq_sniperscope",
+        "source": "core",
+        "tags": {
+            "exploration_only": true
+        },
+        "name": "Sniper Scope",
+        "contextdata": {     
+        },
+        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_fidaiofalamut"],
+        "equipment_id": "eq_sniperscope",
+        "cost": 2,
+        "costtype": 1,
+        "limit": 2
+    },
+    {
+        "id": "rel_fc_eq_kilij",
+        "source": "core",
+        "tags": {
+            "exploration_only": true
+        },
+        "name": "Kilij",
+        "contextdata": {         
+            "faction_eq_restriction": {
+                "permitted": [
+                    {
+                        "res_type": "keyword",
+                        "value": "kw_elite"
+                    }
+                ]
+            }   
+        },
+        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_fidaiofalamut"],
+        "equipment_id": "eq_kilij",
+        "cost": 2,
+        "costtype": 1,
+        "limit": 2
+    },
+    {
+        "id": "rel_fc_eq_rocketpropelledgrenade_sultanate",
+        "source": "core",
+        "tags": {
+            "exploration_only": true
+        },
+        "name": "Rocket-Propelled Grenade",
+        "contextdata": {     
+        },
+        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_fidaiofalamut"],
+        "equipment_id": "eq_rocketpropelledgrenade",
+        "cost": 2,
+        "costtype": 1,
+        "limit": 3
+    },
+    {
+        "id": "rel_fc_eq_masterworksjezzail",
+        "source": "core",
+        "tags": {
+            "exploration_only": true
+        },
+        "name": "Masterworks Jezzail",
+        "contextdata": {         
+            "faction_eq_restriction": {
+                "permitted": [
+                    {
+                        "res_type": "keyword",
+                        "value": "kw_elite"
+                    }
+                ]
+            }   
+        },
+        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_fidaiofalamut"],
+        "equipment_id": "eq_masterworksjezzail",
+        "cost": 4,
+        "costtype": 1,
+        "limit": 1
+    },
+    {
+        "id": "rel_fc_eq_damascusarmor",
+        "source": "core",
+        "tags": {
+            "exploration_only": true
+        },
+        "name": "Damascus Armor",
+        "contextdata": {         
+            "faction_eq_restriction": {
+                "permitted": [
+                    {
+                        "res_type": "keyword",
+                        "value": "kw_elite"
+                    }
+                ]
+            }   
+        },
+        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_fidaiofalamut"],
+        "equipment_id": "eq_damascusarmor",
+        "cost": 5,
+        "costtype": 1,
+        "limit": 1
+    },
+    {
+        "id": "rel_fc_eq_knighthood",
+        "source": "core",
+        "tags": {
+            "exploration_only": true
+        },
+        "name": "Knighthood",
+        "contextdata": {         
+            "faction_eq_restriction": {
+                "permitted": [
+                    {
+                        "res_type": "keyword",
+                        "value": "kw_elite"
+                    }
+                ]
+            }   
+        },
+        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_fidaiofalamut"],
+        "equipment_id": "eq_knighthood",
+        "cost": 5,
+        "costtype": 1,
+        "limit": 1
+    },
+    {
+        "id": "rel_fc_eq_fieldhospital",
+        "source": "core",
+        "tags": {
+            "exploration_only": true
+        },
+        "name": "Field Hospital",
+        "contextdata": {    
+        },
+        "faction_id": ["fc_ironsultanate"],
+        "equipment_id": "eq_fieldhospital",
+        "cost": 10,
+        "costtype": 1,
+        "limit": 1
+    },
+    {
+        "id": "rel_fc_eq_sultanategrandcannon",
+        "source": "core",
+        "tags": {
+            "exploration_only": true
+        },
+        "name": "Sultanate Grand Cannon",
+        "contextdata": {      
+            "faction_eq_restriction": {
+                "permitted": [
+                    {
+                        "res_type": "id",
+                        "value": "md_brazenbull"
+                    }
+                ]
+            } 
+        },
+        "faction_id": ["fc_ironsultanate"],
+        "equipment_id": "eq_sultanategrandcannon",
+        "cost": 12,
+        "costtype": 1,
+        "limit": 0
     }
 ]

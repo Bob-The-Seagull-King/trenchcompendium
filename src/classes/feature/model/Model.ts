@@ -7,7 +7,7 @@
 import { IModelUpgradeRelationship, ModelUpgradeRelationship } from '../../relationship/model/ModelUpgradeRelationship';
 import { AbilityFactory } from '../../../factories/features/AbilityFactory';
 import { KeywordFactory } from '../../../factories/features/KeywordFactory';
-import { DescriptionFactory } from '../../../utility/functions';
+import { byPropertiesOf, DescriptionFactory } from '../../../utility/functions';
 import { ContextObject, IContextObject } from '../../contextevent/contextobject';
 import { StaticContextObject } from '../../contextevent/staticcontextobject';
 import { Ability } from '../ability/Ability';
@@ -154,6 +154,8 @@ class Model extends StaticContextObject {
                 }
             }
         ) as IModelUpgradeRelationship[]
+        
+        UpgradeList.sort(byPropertiesOf<IModelUpgradeRelationship>(["upgrade_id"]))
 
         for (let i = 0; i < UpgradeList.length; i++) {
             this.UpgradeList.push(UpgradeFactory.CreateModelUpgrade(UpgradeList[i]))
@@ -181,6 +183,8 @@ class Model extends StaticContextObject {
                 }
             }
         ) as IModelEquipmentRelationship[]
+        
+        EquipmentList.sort(byPropertiesOf<IModelEquipmentRelationship>(["name", "id"]))
 
         for (let i = 0; i < EquipmentList.length; i++) {
             this.EquipmentList.push(EquipmentFactory.CreateModelEquipment(EquipmentList[i], this))
