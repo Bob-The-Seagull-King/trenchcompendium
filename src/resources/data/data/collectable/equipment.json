@@ -750,5 +750,225 @@
         "options": [],
         "keywords": ["kw_heavy","kw_fire"],
         "modifiers": []
+    },
+    {
+        "id": "eq_knifedagger",
+        "name": "Knife / Dagger",
+        "source": "core",
+        "tags": {"action": true, "weapon": true},
+        "category": "melee",
+        "distance": null,
+        "stats": {
+            "hands_melee": 1,
+            "melee": true
+        },
+        "contextdata": {
+            "get_weapon": {},
+            "hit_bonus": {"type": "dice", "value": -1}
+        },
+        "description": [   
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Add -1 DICE every time you use a knife to see if the attack hits.",
+                "glossary": [
+                    {"val": "-1 DICE", "id": "kw_minusdice"}
+                ]
+            }  
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Virtually all soldiers carry a trench knife, dagger or other kind of blade for close quarter engagements. It may lack the devastating power of a great maul or other heavier melee weapons, but this humble weapon has taken countless lives during the Great War."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": ["-1D to Hit"]
+    },
+    {
+        "id": "eq_bayonet",
+        "name": "Bayonet",
+        "source": "core",
+        "tags": {"action": true, "weapon": true, "bayonet_lug": true},
+        "category": "melee",
+        "distance": null,
+        "stats": {
+            "hands_melee": 2,
+            "melee": true
+        },
+        "contextdata": {
+            "get_weapon": {},
+            "ignore_count": {}
+        },
+        "description": [   
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Bayonets can only be attached to weapons fitted with a ‘Bayonet lug’ (indicated in each Warband’s Armoury). They do not count towards the maximum melee weapons a model can carry.",
+                "glossary": [
+                    {"val": "-1 DICE", "id": "kw_minusdice"}
+                ]
+            }  
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Bayonets are blades in the form of spikes or daggers that can be fixed to the tip of a firearm and used in melee combat."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_cumbersome","kw_shieldcombo"],
+        "modifiers": []
+    },
+    {
+        "id": "eq_trenchclub",
+        "name": "Trench Club",
+        "source": "core",
+        "tags": {"action": true, "weapon": true},
+        "category": "melee",
+        "distance": null,
+        "stats": {
+            "hands_melee": 1,
+            "melee": true
+        },
+        "contextdata": {
+            "get_weapon": {}
+        },
+        "description": [   
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Trench Clubs are one of the most common weapons of the Great War, as melee combat is frequent and brutal. Usually made of wood with a metal tip from iron, lead or steel, trench clubs often feature spikes and hobnails. Most designs have some form of cord or leather strap at the end to wrap around the user’s wrist."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_doublehandedbluntweapon",
+        "name": "Double-Handed Blunt Weapon",
+        "source": "core",
+        "tags": {"action": true, "weapon": true},
+        "category": "melee",
+        "distance": null,
+        "stats": {
+            "hands_melee": 2,
+            "melee": true
+        },
+        "contextdata": {
+            "get_weapon": {},
+            "injury_bonus": {"type": "flat", "value": 1}
+        },
+        "description": [   
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Mauls, clubs, maces… these are large, cumbersome weapons, often made from sturdy wood with a metal tip of steel, lead or Iron of Tartarus. It takes great strength to fight with it for any length of time. They are especially suited for attacking armoured targets."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_heavy"],
+        "modifiers": ["+1 to Injuries"]
+    },
+    {
+        "id": "eq_halberdgun",
+        "name": "Halberd-Gun",
+        "source": "core",
+        "tags": {"action": true, "weapon": true, "eq_alchemicalammunition": true},
+        "category": "ranged",
+        "distance": 24,
+        "stats": {
+            "hands_ranged": 2,
+            "hands_melee": 2,
+            "ranged": true,
+            "melee": true
+        },
+        "contextdata": {
+            "get_weapon": {}},
+        "description": [   
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Enemies charging a model equipped with a Halberd-gun add -1 DICE in melee combat when rolling to hit. This only applies when a model attacks after a charge, not on subsequent rounds of melee.",
+                "glossary": [
+                    {"val": "-1 DICE", "id": "kw_minusdice"}
+                ]
+            }  
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Invention of the House of Wisdom, this weapon acts both as a symbol of high rank and an excellent weapon in combat."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_assault","kw_cumbersome"],
+        "modifiers": []
+    },
+    {
+        "id": "eq_titanzulfiqar",
+        "name": "Titan Zulfiqar",
+        "source": "core",
+        "tags": {"action": true, "weapon": true, "brazen_bull": true},
+        "category": "melee",
+        "distance": null,
+        "stats": {
+            "hands_melee": 1,
+            "melee": true
+        },
+        "contextdata": {
+            "get_weapon": {},
+            "injury_bonus": {"type": "flat", "value": 2}
+        },
+        "description": [ 
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Add +2 to the result of all injuries caused by this weapon (i.e. a roll of 7 on the Injury Chart becomes 9)."
+            }    
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "This twin-tongued greatsword can weigh up to 300 pounds – only the mighty Brazen Bulls can even lift this monstrous blade, let alone wield it in combat. It sheer weight and mono-molecule sharpness cuts through even the thickest armour when swung by the superhuman strength of the takwin monstrosity."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_heavy","kw_critical"],
+        "modifiers": ["+2 to Injuries"]
+    },
+    {
+        "id": "eq_assassinsdagger",
+        "name": "Assassin's Dagger",
+        "source": "core",
+        "tags": {"action": true, "weapon": true},
+        "category": "melee",
+        "distance": null,
+        "stats": {
+            "hands_melee": 1,
+            "melee": true
+        },
+        "contextdata": {
+            "get_weapon": {},
+            "injury_bonus": {"type": "flat", "value": 1}
+        },
+        "description": [ 
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Adds +1 to injury rolls (i.e. a roll of 7 on the Injury Chart becomes 8). If the Assassin hits an enemy and causes at least one BLOOD MARKER, the Assassin can move away from combat during this Activation. Note that this move does not grant enemies free attacks. Assassins can use both normal and Dash move to do this, though this may not be used for charging.",
+                "glossary": [
+                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"}
+                ]
+            }    
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "The blades of the Assassins are imbued with the Supreme Poison. In chambers deep below the surface, generations of young assassins are raised in the dark; fed a diet of scorpions, frogs, deadly mushrooms and even stranger, more noxious things, and generation by generation their tolerance grows. The poisonous blood of these willing vessels is drawn and smelted into a poisonous iron. The iron is forged into blades and deadly spells of slaying layered into each fold of the envenomed metal. Thus the blood of the first generation of Assassins lives to this day, growing more potent with each generation."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_critical"],
+        "modifiers": ["+1 to Injuries"]
     }
 ]

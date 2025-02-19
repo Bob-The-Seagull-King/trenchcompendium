@@ -206,5 +206,159 @@
         "cost": 60,
         "costtype": 0,
         "limit": 1
+    },
+    {
+        "id": "rel_fc_eq_knifedagger",
+        "source": "core",
+        "tags": {   },
+        "name": "Knife",
+        "contextdata": {    
+        },
+        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_fidaiofalamut"],
+        "equipment_id": "eq_knifedagger",
+        "cost": 1,
+        "costtype": 0,
+        "limit": 0
+    },
+    {
+        "id": "rel_fc_eq_bayonet",
+        "source": "core",
+        "tags": {   },
+        "name": "Bayonet",
+        "contextdata": {    
+        },
+        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_fidaiofalamut"],
+        "equipment_id": "eq_bayonet",
+        "cost": 2,
+        "costtype": 0,
+        "limit": 0
+    },
+    {
+        "id": "rel_fc_eq_trenchclub",
+        "source": "core",
+        "tags": {   },
+        "name": "Trench Club",
+        "contextdata": {    
+        },
+        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_fidaiofalamut"],
+        "equipment_id": "eq_trenchclub",
+        "cost": 3,
+        "costtype": 0,
+        "limit": 0
+    },
+    {
+        "id": "rel_fc_eq_swordaxe",
+        "source": "core",
+        "tags": {   },
+        "name": "Sword/Axe",
+        "contextdata": {    
+        },
+        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_fidaiofalamut"],
+        "equipment_id": "eq_swordaxe",
+        "cost": 4,
+        "costtype": 0,
+        "limit": 0
+    },
+    {
+        "id": "rel_fc_eq_trenchpolearm",
+        "source": "core",
+        "tags": {   },
+        "name": "Polearm",
+        "contextdata": {    
+        },
+        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_fidaiofalamut"],
+        "equipment_id": "eq_trenchpolearm",
+        "cost": 7,
+        "costtype": 0,
+        "limit": 0
+    },
+    {
+        "id": "rel_fc_eq_doublehandedbluntweapon",
+        "source": "core",
+        "tags": {   },
+        "name": "Great-Hammer/Maul",
+        "contextdata": {    
+        },
+        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_fidaiofalamut"],
+        "equipment_id": "eq_doublehandedbluntweapon",
+        "cost": 10,
+        "costtype": 0,
+        "limit": 0
+    },
+    {
+        "id": "rel_fc_eq_greatswordaxe",
+        "source": "core",
+        "tags": {   },
+        "name": "Great-Sword/Axe",
+        "contextdata": {    
+        },
+        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_fidaiofalamut"],
+        "equipment_id": "eq_greatswordaxe",
+        "cost": 12,
+        "costtype": 0,
+        "limit": 0
+    },
+    {
+        "id": "rel_fc_eq_halberdgun",
+        "source": "core",
+        "tags": {   },
+        "name": "Halberd-Gun",
+        "contextdata": {         
+            "faction_eq_restriction": {
+                "permitted": [
+                    {
+                        "res_type": "keyword",
+                        "value": "kw_elite"
+                    }
+                ]
+            }
+        },
+        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_fidaiofalamut"],
+        "equipment_id": "eq_halberdgun",
+        "cost": 20,
+        "costtype": 0,
+        "limit": 0
+    },
+    {
+        "id": "rel_fc_eq_titanzulfiqar",
+        "source": "core",
+        "tags": {   },
+        "name": "Titan Zulfiqar",
+        "contextdata": {         
+            "faction_eq_restriction": {
+                "permitted": [
+                    {
+                        "res_type": "id",
+                        "value": "md_brazenbull"
+                    }
+                ]
+            }
+        },
+        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_fidaiofalamut"],
+        "equipment_id": "eq_titanzulfiqar",
+        "cost": 30,
+        "costtype": 0,
+        "limit": 0
+    },
+    {
+        "id": "rel_fc_eq_assassinsdagger",
+        "source": "core",
+        "tags": {   },
+        "name": "Assassins Dagger",
+        "contextdata": {         
+            "faction_eq_restriction": {
+                "permitted": [
+                    {
+                        "res_type": "id",
+                        "value": "md_sultanateassassin"
+                    }
+                ]
+            }
+        },
+        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_fidaiofalamut"],
+        "equipment_id": "eq_assassinsdagger",
+        "cost": 15,
+        "costtype": 0,
+        "limit": 0
     }
 ]

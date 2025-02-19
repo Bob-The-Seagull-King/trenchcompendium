@@ -48,11 +48,11 @@ const FactionCollectionDisplay = (props: any) => {
                         ))}
                     </Form.Control>
                 </div>
-                <div className="verticalspacerbig"/>
-                <div className="row">
-                    <div key={_keyvar}>
-                        <FactionDisplay data={selectedModel.faction}/>
-                    </div>
+                
+            </div>
+            <div className="row">
+                <div key={_keyvar}>
+                    <FactionDisplay data={selectedModel.faction}/>
                 </div>
             </div>
         </ErrorBoundary>
