@@ -79,5 +79,132 @@
         "cost": 9,
         "costtype": 0,
         "limit": 0
+    },
+    {
+        "id": "rel_fc_eq_sniperrifle",
+        "source": "core",
+        "tags": {},
+        "name": "Sniper Rifle",
+        "contextdata": {            
+            "faction_eq_restriction": {
+                "permitted": [
+                    {
+                        "res_type": "id",
+                        "value": "md_janissaries"
+                    },
+                    {
+                        "res_type": "keyword",
+                        "value": "kw_elite"
+                    }
+                ]
+            }
+        },
+        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_fidaiofalamut"],
+        "equipment_id": "eq_sniperrifle",
+        "cost": 35,
+        "costtype": 0,
+        "limit": 2
+    },
+    {
+        "id": "rel_fc_eq_grenades",
+        "source": "core",
+        "tags": {},
+        "name": "Grenades",
+        "contextdata": {  
+        },
+        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_fidaiofalamut"],
+        "equipment_id": "eq_grenades",
+        "cost": 7,
+        "costtype": 0,
+        "limit": 0
+    },
+    {
+        "id": "rel_fc_eq_incendiarygrenades",
+        "source": "core",
+        "tags": {   },
+        "name": "Incendiary Grenades",
+        "contextdata": {      
+            "faction_eq_restriction": {
+                "permitted": [
+                    {
+                        "res_type": "id",
+                        "value": "md_jabireanalchemist"
+                    }
+                ]
+            }  
+        },
+        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_fidaiofalamut"],
+        "equipment_id": "eq_incendiarygrenades",
+        "cost": 15,
+        "costtype": 0,
+        "limit": 0
+    },
+    {
+        "id": "rel_fc_eq_machinegun",
+        "source": "core",
+        "tags": {     },
+        "name": "Machine Gun",
+        "contextdata": {  
+        },
+        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_fidaiofalamut"],
+        "equipment_id": "eq_machinegun",
+        "cost": 50,
+        "costtype": 0,
+        "limit": 1
+    },
+    {
+        "id": "rel_fc_eq_flamethrower",
+        "source": "core",
+        "tags": {     },
+        "name": "Flamethrower",
+        "contextdata": {  
+        },
+        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_fidaiofalamut"],
+        "equipment_id": "eq_flamethrower",
+        "cost": 30,
+        "costtype": 0,
+        "limit": 3
+    },
+    {
+        "id": "rel_fc_eq_muradbombard",
+        "source": "core",
+        "tags": {   },
+        "name": "MURAD Bombard",
+        "contextdata": {      
+            "faction_eq_restriction": {
+                "permitted": [
+                    {
+                        "res_type": "id",
+                        "value": "md_brazenbull"
+                    }
+                ]
+            }  
+        },
+        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_fidaiofalamut"],
+        "equipment_id": "eq_muradbombard",
+        "cost": 50,
+        "costtype": 0,
+        "limit": 1
+    },
+    {
+        "id": "rel_fc_eq_flamecannon",
+        "source": "core",
+        "tags": {   },
+        "name": "Flame Cannon",
+        "contextdata": {      
+            "faction_eq_restriction": {
+                "permitted": [
+                    {
+                        "res_type": "id",
+                        "value": "md_brazenbull"
+                    }
+                ]
+            }  
+        },
+        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_fidaiofalamut"],
+        "equipment_id": "eq_flamecannon",
+        "cost": 60,
+        "costtype": 0,
+        "limit": 1
     }
 ]

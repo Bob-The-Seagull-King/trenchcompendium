@@ -13,6 +13,14 @@
                         "value": "eq_reinforcedarmor"
                     }
                 ]
+            },
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_janissaries"
+                    }
+                ]
             }
         },
         "base_id": "md_janissaries",
@@ -35,7 +43,15 @@
         "name": "Fāris",
         "source": "core",
         "tags": {},
-        "contextdata": {},
+        "contextdata": {
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_janissaries"
+                    }
+                ]
+            }},
         "base_id": "md_janissaries",
         "variant_name": "House_Of_Wisdom",
         "lore": [     

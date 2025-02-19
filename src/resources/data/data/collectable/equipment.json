@@ -508,5 +508,247 @@
         "options": [],
         "keywords": ["kw_shrapnel","kw_shieldcombo"],
         "modifiers": []
+    },
+    {
+        "id": "eq_sniperrifle",
+        "name": "Sniper Rifle",
+        "source": "core",
+        "tags": {"action": true, "weapon": true},
+        "category": "ranged",
+        "distance": 48,
+        "stats": {
+            "hands_ranged": 2,
+            "ranged": true
+        },
+        "contextdata": {
+            "get_weapon": {},
+            "hit_bonus": {"type": "dice", "value": 1}},
+        "description": [ 
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This weapon rolls attacks with +1 DICE. On a Critical attack roll, this weapon ignores armour. If this model is equipped with a Scope, this weapon ignores the penalty for Long Range.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"}
+                ]
+            }  
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "A sniper rifle is a high-precision, long-range rifle, widely used in the trenches to pick off high value targets such as officers, sappers and artillery crews. Expensive and rare, they are commonly given to the best marksmen and sharpshooters of the warband."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_riskyaction","kw_critical"],
+        "modifiers": ["+1D to Hit"]
+    },
+    {
+        "id": "eq_grenades",
+        "name": "Grenades",
+        "source": "core",
+        "tags": {"action": true, "weapon": true},
+        "category": "ranged",
+        "distance": 8,
+        "stats": {
+            "ranged": true
+        },
+        "contextdata": {
+            "get_weapon": {}},
+        "description": [ 
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Grenades have BLAST 2” – all models within 2” of a model are hit but models other than the original target roll Injuries with -1 DICE.",
+                "glossary": [
+                    {"val": "-1 DICE", "id": "kw_minusdice"},
+                    {"val": "BLAST 2”", "id": "kw_blast"}
+                ]
+            }  
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Grenades or hand bombs are a staple of trench warfare. Grenades can kill the enemy underground or behind cover. They can also force the enemy into the open, providing targets for rifle and machine gun fire."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_grenade","kw_assault","kw_shrapnel","kw_blast"],
+        "modifiers": []
+    },
+    {
+        "id": "eq_incendiarygrenades",
+        "name": "Incendiary Grenades",
+        "source": "core",
+        "tags": {"action": true, "weapon": true},
+        "category": "ranged",
+        "distance": 8,
+        "stats": {
+            "ranged": true
+        },
+        "contextdata": {
+            "get_weapon": {}},
+        "description": [ 
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Incendiary Grenades cause +1 BLOOD MARKER upon a hit due their FIRE Keyword. The incendiary grenades ignore armour on a Critical Hit (12+ to hit).",
+                "glossary": [
+                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"},
+                    {"val": "FIRE", "id": "kw_fire"}
+                ]
+            }  
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Incendiary grenades can set their target alight with sulphur, phosphorous or flammable gas captured from the Lake of Fire in the 7th Circle of Hell."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_grenade","kw_assault"],
+        "modifiers": []
+    },
+    {
+        "id": "eq_machinegun",
+        "name": "Machine Gun",
+        "source": "core",
+        "tags": {"action": true, "weapon": true},
+        "category": "ranged",
+        "distance": 36,
+        "stats": {
+            "hands_ranged": 2,
+            "ranged": true
+        },
+        "contextdata": {
+            "get_weapon": {},
+            "extra_attack": {"value": 2}},
+        "description": [ 
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Machine Guns can make three Attack Actions instead of one. They can target separate models with each attack, as long as all targets are within 6” of each other. After taking all three attacks the Activation of the model is over regardless of any remaining ACTIONS the model might have.",
+                "glossary": [
+                    {"val": "ACTIONS", "id": "kw_action"}
+                ]
+            }  
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Machine Guns are lethal fully-automatic firearms, capable of mowing down entire ranks of infantry from afar. The firing rate depends on the lock assembly used but averages 500 rounds per minute."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_heavy"],
+        "modifiers": ["3 Attacks"]
+    },
+    {
+        "id": "eq_flamethrower",
+        "name": "Flamethrower",
+        "source": "core",
+        "tags": {"action": true, "weapon": true},
+        "category": "ranged",
+        "distance": 8,
+        "stats": {
+            "hands_ranged": 2,
+            "ranged": true
+        },
+        "contextdata": {
+            "get_weapon": {},
+            "injury_bonus": {"type": "dice", "value": -1, "condition_type": "range", "condition_value": "long"},
+            "ignore_armor": {},
+            "auto_hit": {}},
+        "description": [ 
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "A Flamethrower hits one model within range automatically with its Attack ACTION. Ignores Armour. Injuries caused by a Flamethrower are rolled with an additional -1 DICE. It also has the Keyword FIRE, so it causes an additional +1 BLOOD MARKER on enemies it hits, even if no other damage is caused.",
+                "glossary": [
+                    {"val": "ACTION", "id": "kw_action"},
+                    {"val": "-1 DICE", "id": "kw_minusdice"},
+                    {"val": "FIRE", "id": "kw_fire"}
+                ]
+            }  
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "A flamethrower is a terrifying weapon capable of projecting great streams of fire and flammable liquids at a distance. It is ideal for clearing bunkers, trenches and other fortifications, killing in a most horrific way. Consequently, it is greatly favoured by the Heretic forces."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_fire"],
+        "modifiers": ["-1D to Injuries", "Ignore Armor"]
+    },
+    {
+        "id": "eq_muradbombard",
+        "name": "MURAD Bombard",
+        "source": "core",
+        "tags": {"action": true, "weapon": true, "brazen_bull": true},
+        "category": "ranged",
+        "distance": 36,
+        "stats": {
+            "hands_ranged": 1,
+            "ranged": true
+        },
+        "contextdata": {
+            "get_weapon": {},
+            "added_dice": {"value": 1}},
+        "description": [ 
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Specify a point on the battlefield within 36” (must be in line of sight) that you want to target. Next, take a Ranged Attack ACTION. If the roll fails (i.e. you roll 6 or less), the bomb lands 1” away from its intended location, multiplied by the number representing the degree of failure (for example, if you rolled 5, the bombard shot lands 2” away, as 7-5=2). The direction is decided by your opponent.",
+                "glossary": [
+                    {"val": "ACTION", "id": "kw_action"}
+                ]
+            }  ,
+            { "tags": {"desc_type" : "gap"} }  ,
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "All models within 3” of the landing 1x1mm landing spot are hit as the bomb explodes – no roll to hit is needed. If the bomb lands directly on top of any model, roll with 3D6 on the Injury Chart and add the dice together to see what happens! Other models hit by the bombard suffer a Down result due the booming shockwave, but do not incur any BLOOD MARKERS or other effects from this attack.",
+                "glossary": [
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"}
+                ]
+            }  
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Named after the great Sultan who commissioned the first of these weapons to defend the Iron Wall, this mighty bombard is used to disrupt advancing enemy formations. The echo of its blast recites the 99 names of Allah, throwing even the greatest of warriors to ground like chaff."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_heavy","kw_blast"],
+        "modifiers": []
+    },
+    {
+        "id": "eq_flamecannon",
+        "name": "Flame Cannon",
+        "source": "core",
+        "tags": {"action": true, "weapon": true, "brazen_bull": true},
+        "category": "ranged",
+        "distance": 12,
+        "stats": {
+            "hands_ranged": 1,
+            "ranged": true
+        },
+        "contextdata": {
+            "get_weapon": {},
+            "auto_hit": {}},
+        "description": [ 
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "When shot in ranged combat, draw a straight 12” line that is 1mm wide from the Brazen Bull. All models along the path of the line are automatically hit – roll for their injuries immediately. Armour does not protect against the Flame Cannon. Due to the Keyword FIRE, its hits cause an additional +1 BLOOD MARKER. This is applied after rolling for injuries.",
+                "glossary": [
+                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"},
+                    {"val": "FIRE", "id": "kw_fire"}
+                ]
+            }  
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "A great cannon that shoots a stream of alchemical fire with tremendous force. It has a tendency to overheat and ignite the skin of its artillery crew, but the mighty Brazen Bulls use them as mere handguns. The secret formula used for the fuel of the Flame Cannons was gleaned from the lost Byzantine ruins, and is commonly known as Greek Fire."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_heavy","kw_fire"],
+        "modifiers": []
     }
 ]
