@@ -77,7 +77,7 @@ const FactionEquipmentDisplay = (props: any) => {
                     <GenericPopup  d_colour={"default"} titlename={factionequipmentObject.EquipmentItem.Name} d_name={factionequipmentObject.EquipmentItem.Name} d_type={""} d_method={() => 
                         <EquipmentDisplay data={factionequipmentObject.EquipmentItem} />}/>
                 </div>
-                <div className="col-3">
+                <div className="col-2">
                     <span className=" bodytext complextext">
                         {
                             factionequipmentObject.Cost + " " + 
@@ -85,7 +85,7 @@ const FactionEquipmentDisplay = (props: any) => {
                         }
                     </span>
                 </div>
-                <div className="col-3">
+                <div className="col-2">
                     {factionequipmentObject.Limit != 0 &&
                         <>
                         <span className=" bodytext complextext">
@@ -97,13 +97,11 @@ const FactionEquipmentDisplay = (props: any) => {
                     }
                 </div>
                 <div className="col-4">
-                    {equiprestrictions.map((item) => ( 
-                        <span key={item} className="colordefault bodytext complextext">
-                            {
-                                item
-                            }
-                        </span>
-                    ))}  
+                    <span className="colorgrey bodytext complextext">
+                        {
+                            equiprestrictions.join(', ') 
+                        }
+                    </span> 
                 </div>
             </div>
         </ErrorBoundary>
