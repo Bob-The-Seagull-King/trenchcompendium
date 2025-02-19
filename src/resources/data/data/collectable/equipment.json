@@ -166,7 +166,7 @@
         "stats": {
         },
         "contextdata": {
-            "ignore_element": {"element": "kw_shrapnel"}
+            "ignore_element": {"element": ["kw_shrapnel"]}
         },
         "description": [       
             {
@@ -970,5 +970,68 @@
         "options": [],
         "keywords": ["kw_critical"],
         "modifiers": ["+1 to Injuries"]
+    },
+    {
+        "id": "eq_standardarmor",
+        "name": "Standard Armor",
+        "source": "core",
+        "tags": {"trait": true},
+        "category": "armor",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {
+            "upgrade_stat": {"stat": "armor", "value": -1}
+        },
+        "description": [       
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "-1 to all Injury Chart rolls against the model. Can be combined with any shield."
+            } 
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "With the advancements in metallurgy and technology, both Faithful and Heretic armies are well-equipped with suits of alloy armour that can withstand an impact from a bullet or turn aside the sharpest of blades. Standard armour is usually mass-produced, but highly effective even against high-calibre weapons."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_alchemistarmor",
+        "name": "Alchemist Armor",
+        "source": "core",
+        "tags": {"trait": true},
+        "category": "armor",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {
+            "upgrade_stat": {"stat": "armor", "value": -2},
+            "ignore_element": {"element": ["kw_gas","kw_fire"]}
+        },
+        "description": [       
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Counts as Reinforced Armour and therefore grants a -2 modifier to all injury rolls made against the model wearing it. All attacks with the Keyword FIRE and/or GAS suffer a -1 DICE penalty to injure this model. Additionally, this model does not suffer additional BLOOD MARKERS caused by the Keywords FIRE and/or GAS.",
+                "glossary": [
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"},
+                    {"val": "FIRE", "id": "kw_fire"},
+                    {"val": "GAS", "id": "kw_gas"},
+                    {"val": "-1 DICE", "id": "kw_minusdice"}
+                ]
+            } 
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "uit of armour which protects against almost all harm. This is an essential tool of Alchemists’ craft, festooned with the Seals of Solomon which enables them to bend the elements of Creation to their will and shields them even from the devices of Hell."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
     }
 ]

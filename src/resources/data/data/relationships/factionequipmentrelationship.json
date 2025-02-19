@@ -360,5 +360,77 @@
         "cost": 15,
         "costtype": 0,
         "limit": 0
+    },
+    {
+        "id": "rel_fc_eq_standardarmor",
+        "source": "core",
+        "tags": {   },
+        "name": "Standard Armor",
+        "contextdata": {    
+        },
+        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_fidaiofalamut"],
+        "equipment_id": "eq_standardarmor",
+        "cost": 15,
+        "costtype": 0,
+        "limit": 0
+    },
+    {
+        "id": "rel_fc_eq_reinforcedarmor",
+        "source": "core",
+        "tags": {},
+        "name": "Reinforced Armor",
+        "contextdata": {            
+            "faction_eq_restriction": {
+                "permitted": [
+                    {
+                        "res_type": "id",
+                        "value": "md_janissaries"
+                    },
+                    {
+                        "res_type": "keyword",
+                        "value": "kw_elite"
+                    }
+                ]
+            }
+        },
+        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_fidaiofalamut"],
+        "equipment_id": "eq_reinforcedarmor",
+        "cost": 40,
+        "costtype": 0,
+        "limit": 0
+    },
+    {
+        "id": "rel_fc_eq_alchemistarmor",
+        "source": "core",
+        "tags": {},
+        "name": "Alchemist Armor",
+        "contextdata": {            
+            "faction_eq_restriction": {
+                "permitted": [
+                    {
+                        "res_type": "keyword",
+                        "value": "kw_elite"
+                    }
+                ]
+            }
+        },
+        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_fidaiofalamut"],
+        "equipment_id": "eq_alchemistarmor",
+        "cost": 50,
+        "costtype": 0,
+        "limit": 1
+    },
+    {
+        "id": "rel_fc_eq_trenchshield",
+        "source": "core",
+        "tags": {},
+        "name": "Trench Shield",
+        "contextdata": {   
+        },
+        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_fidaiofalamut"],
+        "equipment_id": "eq_trenchshield",
+        "cost": 10,
+        "costtype": 0,
+        "limit": 0
     }
 ]
