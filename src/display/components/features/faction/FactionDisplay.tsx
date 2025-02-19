@@ -72,12 +72,11 @@ const FactionDisplay = (props: any) => {
                     <>                    
                         <div className="row">
                             <div className="verticalspacerbig"/>
+                            <div className="verticalspacerbig"/>
                         </div>
-                        <div className="row">
-                            <span className="colordefault contentpacklabel complextext">
-                                {"Models"}
-                            </span>
-                        </div>
+                        <div  className={'titleShape titlebody subbackground'+getColour(factionObject.Team)}>
+                                {"Units"}
+                            </div>
                         {factionObject.Models.filter((item) => (item.Captain == true && item.Mercenary == false)).length > 0 &&
                             <>
                         <div className='separator bodytext tagboxpad colordefault'>Captains</div>
@@ -135,12 +134,11 @@ const FactionDisplay = (props: any) => {
                 {factionObject.EquipmentItems.length > 0 &&
                     <>
                         <div className="row">
-                            <div className="verticalspacerbig"/>
+                        <div className="verticalspacerbig"/>
+                        <div className="verticalspacerbig"/>
                         </div>
-                        <div className="row">
-                            <span className="colordefault contentpacklabel complextext">
-                                {"Armoury"}
-                            </span>
+                        <div  className={'titleShape titlebody subbackground'+getColour(factionObject.Team)}>
+                            {"Armoury"}
                         </div>
                         {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "melee")).length > 0 &&
                             <>
