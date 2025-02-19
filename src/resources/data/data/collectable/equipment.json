@@ -1261,7 +1261,7 @@
         "distance": null,
         "stats": {
         },
-        "contextdata": {"warband_wide": {}},
+        "contextdata": {},
         "description": [            
             {
                 "tags": {"desc_type" : "default"},
@@ -1283,7 +1283,7 @@
     },
     {
         "id": "eq_holyrelic",
-        "name": "Binoculars",
+        "name": "Holy Relic",
         "source": "core",
         "tags": {"trait": true},
         "category": "equipment",
@@ -1291,7 +1291,6 @@
         "stats": {
         },
         "contextdata": {
-            "warband_wide": {},
             "battle_start": {"blessing":1}
         },
         "description": [            
@@ -1311,6 +1310,111 @@
         ],
         "options": [],
         "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_goldenkhanjar",
+        "name": "Golden Khanjar",
+        "source": "core",
+        "tags": {"action": true, "weapon": true},
+        "category": "melee",
+        "distance": null,
+        "stats": {
+            "hands_melee": 1,
+            "melee": true
+        },
+        "contextdata": {
+            "get_weapon": {},
+            "injury_bonus": {"type": "flat", "value": 1},
+            "extra_attack": {"value": 2}
+        },
+        "description": [ 
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Adds +1 to injury rolls (i.e. a roll of 7 on the Injury Chart becomes 8). A model armed with a Golden Khanjar can make two attacks instead of one in melee with one Melee Attack ACTION. This effect also applies to a Golden Khanjar wielded off-hand.",
+                "glossary": [
+                    {"val": "ACTION", "id": "kw_action"}
+                ]
+            }    
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Placed on a hand of an especially favoured killer by the Old Man of the Mountain himself, these wickedly curved daggers gleam as if they were made of gold, but instead they are crystallised poison, and allow their wielder to attack twice in the same instance of time. Only the Master of Alamut himself knows the secret of making these blades."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_critical"],
+        "modifiers": ["+1 to Injuries","2 Attacks"]
+    },
+    {
+        "id": "eq_bowofalamut",
+        "name": "Bow of Alamut",
+        "source": "core",
+        "tags": {"action": true, "weapon": true},
+        "category": "ranged",
+        "distance": 40,
+        "stats": {
+            "hands_ranged": 2,
+            "ranged": true
+        },
+        "contextdata": {
+            "get_weapon": {},
+            "ignore_armor": {}},
+        "description": [ 
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Ignores Armour. If the Assassin hits a model and causes at least one BLOOD MARKER, the Assassin may instantly place itself into Melee Combat with that model if there is a legal space that the Assassin could occupy within 1” of that model, regardless of the distance to the target or any interposing models/obstacles. The Assassin is considered to have charged that model, although it does not count as a Charge ACTION and therefore the Assassin can take the Move ACTION at a later point on this turn, if it hasn’t already. Note that if the bow takes the target Out of Action, no BLOOD MARKERS are caused and this movement cannot be made.",
+                "glossary": [
+                    {"val": "ACTION", "id": "kw_action"},
+                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"}
+                ]
+            }  
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "This terrifying double-stringed bow shoots its deadly barbs through both time and space. Its arrows can reach impossible distances and pass through armour by flickering through time. It leaves behind a temporal slipstream that the Assassin can travel through in an eyeblink."
+            },         
+            { "tags": {"desc_type" : "gap"} },         
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Made from wood taken from trees planted in the skulls of ancient assassins in the Garden of Alamut so that they might absorb mystic powers of their former owners, these bows are some of the greatest treasures of the Old Man of the Mountain for it is said that only six now remain in his secret armouries."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_critical"],
+        "modifiers": [ "Ignore Armor"]
+    },
+    {
+        "id": "eq_hashashinleaf",
+        "name": "Hashashin Leaf",
+        "source": "core",
+        "tags": {"trait": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {
+            "keyword_add": {"value": ["kw_strong"]}
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Before the battle begins, a model may use this item to gain the Keyword STRONG until the end of a battle.",
+                "glossary": [
+                    {"val": "STRONG", "id": "kw_strong"}
+                ]
+            }
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "These leaves from the secret Garden of Alamut enhance the strength of anyone who eats them threefold. Once the effect wears off the subject will suffer from agonising muscle tears and ripping of ligaments, but many of the Order of Assassins feel that this is a small price to pay for being able to use deadlier weapons."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_consumable"],
         "modifiers": []
     }
 ]

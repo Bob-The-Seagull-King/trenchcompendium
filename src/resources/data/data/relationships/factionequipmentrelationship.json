@@ -661,5 +661,68 @@
         "cost": 2,
         "costtype": 1,
         "limit": 0
+    },
+    {
+        "id": "rel_fc_eq_goldenkhanjar",
+        "source": "core",
+        "tags": {},
+        "name": "Golden Khanjar",
+        "contextdata": {           
+            "faction_eq_restriction": {
+                "permitted": [
+                    {
+                        "res_type": "id",
+                        "value": "md_sultanateassassin"
+                    }
+                ]
+            }      
+        },
+        "faction_id": ["fc_ironsultanate_fv_fidaiofalamut"],
+        "equipment_id": "eq_goldenkhanjar",
+        "cost": 20,
+        "costtype": 0,
+        "limit": 2
+    },
+    {
+        "id": "rel_fc_eq_bowofalamut",
+        "source": "core",
+        "tags": {},
+        "name": "Bow of Alamut",
+        "contextdata": {           
+            "faction_eq_restriction": {
+                "permitted": [
+                    {
+                        "res_type": "id",
+                        "value": "md_sultanateassassin"
+                    }
+                ]
+            }      
+        },
+        "faction_id": ["fc_ironsultanate_fv_fidaiofalamut"],
+        "equipment_id": "eq_bowofalamut",
+        "cost": 50,
+        "costtype": 0,
+        "limit": 1
+    },
+    {
+        "id": "rel_fc_eq_hashashinleaf",
+        "source": "core",
+        "tags": {},
+        "name": "Hashashin Leaf",
+        "contextdata": {           
+            "faction_eq_restriction": {
+                "permitted": [
+                    {
+                        "res_type": "id",
+                        "value": "md_sultanateassassin"
+                    }
+                ]
+            }      
+        },
+        "faction_id": ["fc_ironsultanate_fv_fidaiofalamut"],
+        "equipment_id": "eq_hashashinleaf",
+        "cost": 5,
+        "costtype": 0,
+        "limit": 4
     }
 ]
