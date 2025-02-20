@@ -24,6 +24,7 @@ import RuleDisplay from './RuleDisplay';
 import OptionSetStaticDisplay from '../../subcomponents/description/OptionSetStaticDisplay';
 import FactionModelDisplay from '../model/FactionModelDisplay';
 import FactionEquipmentDisplay from '../equipment/FactionEquipmentDisplay';
+import FactionEquipmentWideDisplay from '../equipment/FactionEquipmentWideDisplay';
 
 const FactionDisplay = (props: any) => {
     const factionObject: Faction = props.data
@@ -148,7 +149,7 @@ const FactionDisplay = (props: any) => {
                         </div>
                         
                     <div className='abilityInternalStructure'>
-                    <div className="row row-cols-md-1 row-cols-sm-1">
+                    <div className="row row-cols-md-2 row-cols-sm-1">
                         <div className="col">
                         {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "melee" && (containsTag(item.Tags, "exploration_only") == false))).length > 0 &&
                             <>
@@ -209,7 +210,7 @@ const FactionDisplay = (props: any) => {
                                 <div className="row textmaxwidth">
                                     {factionObject.EquipmentItems.filter((item) => ( (containsTag(item.Tags, "exploration_only") == true))).map((item) => ( 
                                         <div key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID} className="textmaxwidth">
-                                            <FactionEquipmentDisplay data={item} />
+                                            <FactionEquipmentWideDisplay data={item} />
                                         </div>
                                     )) /* Abilities */}
                                 </div>

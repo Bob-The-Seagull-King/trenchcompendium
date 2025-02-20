@@ -24,7 +24,7 @@ import EquipmentDisplay from './EquipmentDisplay';
 import GenericPopup from '../../../components/generics/GenericPopup';
 import { FactionEquipmentRelationship } from '../../../../classes/relationship/faction/FactionEquipmentRelationship';
 
-const FactionEquipmentDisplay = (props: any) => {
+const FactionEquipmenWideDisplay = (props: any) => {
     const factionequipmentObject: FactionEquipmentRelationship = props.data
 
     const [equiprestrictions, setEquipRestrictions] = useState([])
@@ -74,11 +74,11 @@ const FactionEquipmentDisplay = (props: any) => {
         <ErrorBoundary fallback={<div>Something went wrong with FactionModelDisplay.tsx</div>}>
             <div key={_keyvar}>
             <div className='textmaxwidth row'>
-                <div className="col-8">
+                <div className="col-md-4 col-sm-8">
                     <GenericPopup  d_colour={"default"} titlename={factionequipmentObject.EquipmentItem.Name} d_name={factionequipmentObject.EquipmentItem.Name} d_type={""} d_method={() => 
                         <EquipmentDisplay data={factionequipmentObject.EquipmentItem} />}/>
                 </div>
-                <div className="col-4">
+                <div className="col-md-2 col-sm-4">
                     <span className=" headersubtext boldtext colourgrey">
                         {
                             factionequipmentObject.Cost + " " + 
@@ -87,7 +87,7 @@ const FactionEquipmentDisplay = (props: any) => {
                     </span>
                 </div>
                 
-                <div className="col-12" key={_keyvar}>
+                <div className="col-md-6 col-sm-12" key={_keyvar}>
                     {factionequipmentObject.Limit != 0 &&
                         <>
                         <span className="headersubtext boldtext colourgrey">
@@ -104,4 +104,4 @@ const FactionEquipmentDisplay = (props: any) => {
     )
 }
 
-export default FactionEquipmentDisplay;
+export default FactionEquipmenWideDisplay;

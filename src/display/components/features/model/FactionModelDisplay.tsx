@@ -62,13 +62,13 @@ const FactionModelDisplay = (props: any) => {
     return (
         <ErrorBoundary fallback={<div>Something went wrong with FactionModelDisplay.tsx</div>}>
             <div className='textmaxwidth row' key={_keyvar}>
-                <div className="col-6">
+                <div className="col-4">
                     <GenericPopup  d_colour={factionmodelObject.Model.Team} titlename={factionmodelObject.Model.Name} d_name={factionmodelObject.Model.Name} d_type={""} d_method={() => 
                         <div className="abilityInternalStructure">
                             <ModelDisplay data={factionmodelObject.Model} />
                     </div>}/>
                 </div>
-                <div className="col-3">
+                <div className="col-2">
                     <span className=" headersubtext boldtext colourgrey">
                         {
                             factionmodelObject.Cost + " " + 
@@ -76,7 +76,7 @@ const FactionModelDisplay = (props: any) => {
                         }
                     </span>
                 </div>
-                <div className="col-3">
+                <div className="col-6">
                     {minimum == maximum &&
                         <>
                         <span className=" headersubtext boldtext colourgrey">
