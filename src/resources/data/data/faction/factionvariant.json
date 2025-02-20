@@ -28,5 +28,45 @@
         "cut_rules" : [],
         "rules" : ["rl_flockofassassins","rl_masterassassin","rl_assassinacolytes","rl_alamutalone","rl_killingsquad","rl_dervishes","rl_artofassassination"],
         "options": []
+    },
+    {
+        "id": "fc_ironsultanate_fv_houseofwisdom",
+        "name": "House of Wisdom",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "faction_keyword": {"name": "kw_sultanate"}
+        },
+        "base_id": "fc_ironsultanate",
+        "description": [     
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "The House of Wisdom is the pre-eminent centre of learning within the Iron Sultanate. Its libraries, workshops, forges, gardens of exotic and wondrous plants, hospitals and observatories are unmatched. Within its halls are mechanical marvels and weapons from far-off lands, as well as trophies captured by the Sultan’s forces and brought to be examined by the learned scholars of the House of Wisdom. Philosophers and theologists debate in its chambers; ghanzal and qasīda poets compose verses describing the beauty and pain of life. Thus it is no wonder that the House attracts the greatest minds of the age to study in its hallowed halls, from within the Sultanate and far beyond the Iron Wall."
+            },
+            { "tags": {"desc_type" : "gap"} },
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "In its laboratories guarded by the faithful Kavass, the Jabirean Alchemists dissect and study the War Beasts of Shaitan so their weaknesses can be laid bare and exploited by the Believers. At such times, their roars of rage and pain echo through the porphyry corridors of the House."
+            },
+            { "tags": {"desc_type" : "gap"} },
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "To maintain a degree of independence, regardless of the royal funding, the House of Wisdom performs many services for the Sultan’s armies. Their best alchemists work with the Sultanate foundries where the Great Cannons of the Iron Wall are cast. Takwin creations are provided to bolster the army of Those Who Believe, as are suits of armour and alchemical ammunition. The House of Wisdom also maintains the Sultanate fleet of airships, which both guard the realms of Those Who Believe against enemy air forces and maintain vigil over lands under darkness. They make regular excursions deep into enemy territory to witness whether the Great Sandstorm still covers the Two Holy Places, reporting any news back to the Sultan."
+            },
+            { "tags": {"desc_type" : "gap"} },
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "In exchange, the masters of the House of Wisdom have freedom to despatch their own excursions and expeditions into the lands beyond the wall, to seek tomes of knowledge lost in the dark and terrible days when the forces of Jahannam overran much of the Levant and great cities fell like blossoms of a Jasmine flower in fiery heat. Sometimes they are journeys to capture an especially ferocious beast of the enemy. At other times they seek to capture or kill Heretic Alchemists which they see as both an offence to their craft and a threat to the entire world."
+            },
+            { "tags": {"desc_type" : "gap"} },
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "These journeys are exceedingly dangerous and they are not undertaken lightly. Each Alchemist dispatched on such a journey is an irreplaceable loss, and since they operate under their own authority, they cannot expect direct support from the Sultan’s forces. Many noble Fāris warriors have taken oaths to protect these scholars in their journeys, as well as their own Kavass bodyguards sworn to fight and die in defence of their Masters."
+            }
+        ],
+        "team": "faithful",
+        "cut_rules" : [],
+        "rules" : ["rl_alchemists","rl_prideofjabir","rl_privateventure","rl_nobleguardians","rl_kavass","rl_secretsofthehouseofwisdom"],
+        "options": []
     }
 ]

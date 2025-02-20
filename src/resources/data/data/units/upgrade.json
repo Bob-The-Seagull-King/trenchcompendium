@@ -480,5 +480,114 @@
             }
         ],
         "options": []
+    },
+    {
+        "id": "up_secrets_medicine",
+        "name": "Medicine",
+        "source": "core",
+        "tags": {"action": true},
+        "contextdata": {
+            "override_equipment_restriction": {
+                "removed": [
+                    {
+                        "res_type": "id",
+                        "value": "eq_medikit"
+                    }
+                ]
+            }
+        },
+        "description": [           
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This Alchemist is a student of Ibn Sina’s School of Medicine. The model is equipped with tools for healing from the House of Wisdom. The Alchemist can take an ACTION with +1 DICE to remove up to two BLOOD MARKERS or a single INFECTION MARKER from any one friendly model (including themselves) within 1” range or allow one friendly model (including themselves) who is Down to regain their footing. This training and these tools are an improvement upon the standard Medi-Kit and therefore a model with this Secret cannot carry a Medi-Kit.",
+                "glossary": [
+                    {"val": "ACTION", "id": "kw_action"},
+                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"},
+                    {"val": "INFECTION MARKER", "id": "kw_infectionmarker"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_secrets_cartographyandgeography",
+        "name": "Cartography and Geography",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {
+            "keyword_add": {"value": ["kw_infiltrator"]},
+            "model_attatch": {"restrictions": []},
+            "warband_wide": {}
+        },
+        "description": [           
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Alchemist has studied long and hard the sciences of cartography and geometry. At the beginning of each battle, immediately before any models are deployed, up to two models in your warband gain the Keyword INFILTRATOR, This ability cannot affect an Alchemist or a model with a base larger than 32mm. In addition, the warband may re-roll one Exploration dice in the Exploration phase if you wish. The second result stands.",
+                "glossary": [
+                    {"val": "INFILTRATOR", "id": "kw_infiltrator"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_secrets_secretsoftakwin",
+        "name": "Secrets of Takwin",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {
+            "model_attatch": {"restrictions": [{"type": "id", "value": "md_takwincreation"}]}
+        },
+        "description": [           
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Alchemist has bound their Takwin creature to themselves with unbreakable bonds. If the Alchemist is hit by an attack while within 1” of their Homunculus, you may redirect the hit to the Homunculi instead. Determine the injuries and additional effects exactly as if the weapon just hit the Homunculi."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_secrets_chemistryandalchemy",
+        "name": "Chemistry and Alchemy",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {
+            "warband_wide": {}
+        },
+        "description": [           
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Before the battle starts, but after all models (including INFILTRATORS) are deployed, you may place a rectangular elemental obstacle 2” wide and 6” long. It counts both as Difficult Terrain and Dangerous Terrain, and damage it causes has the Keyword FIRE, GAS or SHRAPNEL (chosen when the obstacle is placed). It cannot be placed within 6” of any model or on top of any other Terrain.",
+                "glossary": [
+                    {"val": "INFILTRATORS", "id": "kw_infiltrator"},
+                    {"val": "FIRE", "id": "kw_fire"},
+                    {"val": "GAS", "id": "kw_gas"},
+                    {"val": "SHRAPNEL", "id": "kw_shrapnel"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_secrets_philosophypoetrytheology",
+        "name": "Philosophy Poetry and Theology",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {
+            "keyword_add": {"value": ["kw_fear"]},
+            "model_attatch": {"restrictions": []},
+            "warband_wide": {}
+        },
+        "description": [           
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Alchemist is well-versed in the hidden truths of the universe and of the Divine, and has a calm and clear mind. The warband gains +1 DICE to all Morale Rolls, cannot become Shaken and the Alchemist plus another model of your choice is immune to the effects of the Keyword FEAR.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "FEAR", "id": "kw_fear"}
+                ]
+            }
+        ],
+        "options": []
     }
 ]

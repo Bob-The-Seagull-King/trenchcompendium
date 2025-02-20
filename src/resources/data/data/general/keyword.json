@@ -185,6 +185,23 @@
         ]
     },
     {
+        "id": "kw_infectionmarker",
+        "source": "core",
+        "tags": {
+            "category": "marker",
+            "negative": true
+        },
+        "name": "INFECTION MARKER",
+        "contextdata": {"option_search_viable" : {}},
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "INFECTION MARKERS can be used to modify dice rolls exactly like BLOOD MARKERS (i.e. ACTION rolls and injury rolls and used in Bloodbaths). A model may have up to six INFECTION MARKERS and six BLOOD MARKERS at the same time. If a model activates with one or more INFECTION MARKERS, it gains +1 INFECTION MARKER to the maximum of 6.",
+                "glossary": [{"val": "ACTION", "id": "kw_action"},{"val": "BLOOD MARKERS", "id": "kw_bloodmarker"}]
+            }
+        ]
+    },
+    {
         "id": "kw_consumable",
         "source": "core",
         "tags": {

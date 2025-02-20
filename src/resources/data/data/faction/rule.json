@@ -107,5 +107,105 @@
             }
         ],
         "options": []
+    },
+    {
+        "id": "rl_alchemists",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Alchemists",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "The House of Wisdom warband may have up to two Alchemists and must include at least one. This warband treats Alchemist Armour as if they had a LIMIT of 2.",
+            "glossary": [{"val": "LIMIT", "id": "kw_limit"}]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_prideofjabir",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Pride of Jabir",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "The warband may include up to three Lions of Jabir." 
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_privateventure",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Private Venture",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "The warband may not include any Azebs, Janissaries, Yüzbaşi or Assassins." 
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_nobleguardians",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Noble Guardians",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "The warband may include up to two Fāris – noble warriors sworn to protect the House of Wisdom. They use the Janissary stats but gain the Keyword ELITE.",
+            "glossary": [{"val": "ELITE", "id": "kw_elite"}]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_kavass",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Kavass",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Kavass are sworn guardians of the House of Wisdom. They use Azebs stats but cannot buy the Keyword SKIRMISHER. Instead, up to three Kavass can increase their Melee Characteristic by +1 DICE (to +0D) at the cost of +5 ducats per model.",
+            "glossary": [
+                {"val": "SKIRMISHER", "id": "kw_skirmisher"},
+                {"val": "+1 DICE", "id": "kw_plusdice"}
+            ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_secretsofthehouseofwisdom",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            "faction_add_upgrades": {
+                "model_key": "rl_secretsofthehouseofwisdom",
+                "models_id": ["md_jabireanalchemist"]
+            }
+        },
+        "name": "Secrets of the House of Wisdom",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Any Alchemist of the warband may buy any one of these Abilities at the cost indicated below. You cannot have duplicates of these abilities in the Warband, as the House of Wisdom does not want to risk depleting the number of their scholars in a single discipline."
+            }
+        ],
+        "options": []
     }
 ]

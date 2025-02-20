@@ -50,6 +50,7 @@
         "cost": 20,
         "cost_type": 0,
         "restricted_upgrades": [
+            "up_secretpaths","up_mirageoftime","up_thunderboltofalamut"
         ],
         "warband_limit": 1,
         "required_upgrades":[]
@@ -61,6 +62,7 @@
         "cost": 20,
         "cost_type": 0,
         "restricted_upgrades": [
+            "up_secretpaths","up_mirageoftime","up_hallucinogendisguise"
         ],
         "warband_limit": 1,
         "required_upgrades":[]
@@ -72,6 +74,7 @@
         "cost": 15,
         "cost_type": 0,
         "restricted_upgrades": [
+            "up_secretpaths","up_thunderboltofalamut","up_hallucinogendisguise"
         ],
         "warband_limit": 1,
         "required_upgrades":[]
@@ -83,6 +86,7 @@
         "cost": 10,
         "cost_type": 0,
         "restricted_upgrades": [
+            "up_mirageoftime","up_thunderboltofalamut","up_hallucinogendisguise"
         ],
         "warband_limit": 1,
         "required_upgrades":[]
@@ -256,6 +260,71 @@
         "restricted_upgrades": [
         ],
         "warband_limit": 0,
+        "required_upgrades":[
+        ]
+    },
+    {
+        "id": "rel_factionrule_secrets_up_secrets_medicine",
+        "model_id_set": ["rl_secretsofthehouseofwisdom"],
+        "upgrade_id": "up_secrets_medicine",
+        "cost": 15,
+        "cost_type": 0,
+        "restricted_upgrades": [
+            "up_secrets_cartographyandgeography","up_secrets_secretsoftakwin","up_secrets_chemistryandalchemy","up_secrets_philosophypoetrytheology"
+        ],
+        "warband_limit": 1,
+        "required_upgrades":[
+        ]
+    },
+    {
+        "id": "rel_factionrule_secrets_up_secrets_cartographyandgeography",
+        "model_id_set": ["rl_secretsofthehouseofwisdom"],
+        "upgrade_id": "up_secrets_cartographyandgeography",
+        "cost": 20,
+        "cost_type": 0,
+        "restricted_upgrades": [
+            "up_secrets_medicine","up_secrets_secretsoftakwin","up_secrets_chemistryandalchemy","up_secrets_philosophypoetrytheology"
+        ],
+        "warband_limit": 1,
+        "required_upgrades":[
+        ]
+    },
+    {
+        "id": "rel_factionrule_secrets_up_secrets_secretsoftakwin",
+        "model_id_set": ["rl_secretsofthehouseofwisdom"],
+        "upgrade_id": "up_secrets_secretsoftakwin",
+        "cost": 20,
+        "cost_type": 0,
+        "restricted_upgrades": [
+            "up_secrets_medicine","up_secrets_cartographyandgeography","up_secrets_chemistryandalchemy","up_secrets_philosophypoetrytheology"
+        ],
+        "warband_limit": 1,
+        "required_upgrades":[
+        ]
+    },
+    {
+        "id": "rel_factionrule_secrets_up_secrets_chemistryandalchemy",
+        "model_id_set": ["rl_secretsofthehouseofwisdom"],
+        "upgrade_id": "up_secrets_chemistryandalchemy",
+        "cost": 25,
+        "cost_type": 0,
+        "restricted_upgrades": [
+            "up_secrets_medicine","up_secrets_cartographyandgeography","up_secrets_secretsoftakwin","up_secrets_philosophypoetrytheology"
+        ],
+        "warband_limit": 1,
+        "required_upgrades":[
+        ]
+    },
+    {
+        "id": "rel_factionrule_secrets_up_secrets_philosophypoetrytheology",
+        "model_id_set": ["rl_secretsofthehouseofwisdom"],
+        "upgrade_id": "up_secrets_philosophypoetrytheology",
+        "cost": 20,
+        "cost_type": 0,
+        "restricted_upgrades": [
+            "up_secrets_medicine","up_secrets_cartographyandgeography","up_secrets_secretsoftakwin","up_secrets_chemistryandalchemy"
+        ],
+        "warband_limit": 1,
         "required_upgrades":[
         ]
     }
