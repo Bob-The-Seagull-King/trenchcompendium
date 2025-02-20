@@ -203,6 +203,21 @@ const ModelDisplay = (props: any) => {
                 <div className="row">
                     {returnDescription(modelcollectionObject, modelcollectionObject.Lore) /* Lore */}
                 </div>
+                {modelcollectionObject.KeyWord.length > 0 &&
+                <>
+                    <div className="verticalspacerbig"/>
+                    <div className="row">
+                        <span className="">
+                            <span className='bodytext colordefault'>{"Keywords: "}</span>
+                            {modelcollectionObject.KeyWord.map((item) => ( 
+                                <span className='tagItem' key={"model_keyword_"+modelcollectionObject.ID+"_keyword_id_"+item.ID}>
+                                    <GenericHover  d_colour={modelcollectionObject.Team} titlename={item.Name} d_name={item.Name} d_type={""} d_method={() => <KeywordDisplay data={item} />}/>
+                                </span>
+                            )) /* Keywords */}
+                        </span>
+                    </div>
+                </>
+                }
                 <div className="row">
                     {ReturnStats(modelcollectionObject.Stats)  /* Stats */}
                 </div>
@@ -307,16 +322,6 @@ const ModelDisplay = (props: any) => {
                         </div>
                     </>
                 }
-                <div className='separator tagboxpad colordefault'></div>
-                <div className="row">
-                    <span>
-                        {modelcollectionObject.KeyWord.map((item) => ( 
-                            <span className='tagItem' key={"model_keyword_"+modelcollectionObject.ID+"_keyword_id_"+item.ID}>
-                                <GenericHover  d_colour={modelcollectionObject.Team} titlename={item.Name} d_name={item.Name} d_type={""} d_method={() => <KeywordDisplay data={item} />}/>
-                            </span>
-                        )) /* Keywords */}
-                    </span>
-                </div>
             </div>
         </ErrorBoundary>
     )

@@ -62,28 +62,28 @@ const FactionModelDisplay = (props: any) => {
     return (
         <ErrorBoundary fallback={<div>Something went wrong with FactionModelDisplay.tsx</div>}>
             <div className='textmaxwidth row' key={_keyvar}>
-                <div className="col-3">
+                <div className="col-6">
                     <GenericPopup  d_colour={factionmodelObject.Model.Team} titlename={factionmodelObject.Model.Name} d_name={factionmodelObject.Model.Name} d_type={""} d_method={() => 
                         <div className="abilityInternalStructure">
                             <ModelDisplay data={factionmodelObject.Model} />
-                        </div>}/>
+                    </div>}/>
                 </div>
-                <div className="col-2">
-                    <span className=" bodytext complextext">
+                <div className="col-3">
+                    <span className=" headersubtext boldtext colourgrey">
                         {
                             factionmodelObject.Cost + " " + 
                             getCostType(factionmodelObject.CostType)
                         }
                     </span>
                 </div>
-                <div className="col-2">
+                <div className="col-3">
                     {minimum == maximum &&
                         <>
-                        <span className=" bodytext complextext">
+                        <span className=" headersubtext boldtext colourgrey">
                             {minimum != "0" &&
                                 <>
                                 {
-                                    minimum
+                                    "LIMIT: " + minimum
                                 }
                                 </>
                             }
@@ -92,20 +92,13 @@ const FactionModelDisplay = (props: any) => {
                     }
                     {minimum != maximum &&
                         <>
-                            <span className=" bodytext complextext">
+                            <span className="headersubtext boldtext colourgrey">
                                 {
-                                    minimum + " - " + maximum
+                                    "LIMIT: " + minimum + " - " + maximum
                                 }
                             </span>
                         </>
                     }
-                </div>
-                <div className="col-5">
-                        {factionmodelObject.Model.KeyWord.map((item) => ( 
-                            <span className='tagItem' key={"model_keyword_"+factionmodelObject.Model.ID+"_keyword_id_"+item.ID}>
-                                <GenericHover  d_colour={"default"} titlename={item.Name} d_name={item.Name} d_type={""} d_method={() => <KeywordDisplay data={item} />}/>
-                            </span>
-                        )) /* Keywords */}
                 </div>
             </div>
         </ErrorBoundary>

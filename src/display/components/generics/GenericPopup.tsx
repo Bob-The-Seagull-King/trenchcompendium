@@ -31,9 +31,9 @@ const GenericPopup = (props: any) => {
 
     return (
       <>
-          <span>
-            <span className='glossaryMain hovermouse' onClick={() => handleShow()}>{ruleName}</span>                
-          </span>
+         
+            <span className='headersubtext glossaryMain hovermouse' onClick={() => handleShow()}>{ruleName}</span>                
+         
 
           <Modal data-theme={theme} show={show} size="lg" contentClassName="overcomeBackground" dialogClassName=""  onHide={handleClose} keyboard={true}  centered>
               <Modal.Body > 

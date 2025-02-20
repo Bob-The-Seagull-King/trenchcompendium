@@ -124,7 +124,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
     },
     model: {
         searchId: 'model',
-        width: 7,
+        width: 9,
         returnDisplay(item: any) {
             return (
                 
@@ -266,7 +266,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
     },
     faction: {
         searchId: 'faction',
-        width: 8,
+        width: 9,
         returnDisplay(item: any) {
             return (
                 

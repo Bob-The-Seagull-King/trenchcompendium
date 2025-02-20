@@ -72,36 +72,32 @@ const FactionEquipmentDisplay = (props: any) => {
 
     return (
         <ErrorBoundary fallback={<div>Something went wrong with FactionModelDisplay.tsx</div>}>
-            <div className='textmaxwidth row' key={_keyvar}>
+            <div key={_keyvar}>
+            <div className='textmaxwidth row'>
                 <div className="col-3">
                     <GenericPopup  d_colour={"default"} titlename={factionequipmentObject.EquipmentItem.Name} d_name={factionequipmentObject.EquipmentItem.Name} d_type={""} d_method={() => 
                         <EquipmentDisplay data={factionequipmentObject.EquipmentItem} />}/>
                 </div>
                 <div className="col-2">
-                    <span className=" bodytext complextext">
+                    <span className=" headersubtext boldtext colourgrey">
                         {
                             factionequipmentObject.Cost + " " + 
                             getCostType(factionequipmentObject.CostType)
                         }
                     </span>
                 </div>
-                <div className="col-2">
+                
+                <div className="col-7" key={_keyvar}>
                     {factionequipmentObject.Limit != 0 &&
                         <>
-                        <span className=" bodytext complextext">
+                        <span className="headersubtext boldtext colourgrey">
                             {
-                                   "LIMIT: " +  factionequipmentObject.Limit
+                                   "LIMIT: " +  factionequipmentObject.Limit + " " +  equiprestrictions.join(', ') 
                             }
                         </span>
                         </>
                     }
                 </div>
-                <div className="col-5">
-                    <span className="colorgrey bodytext complextext">
-                        {
-                            equiprestrictions.join(', ') 
-                        }
-                    </span> 
                 </div>
             </div>
         </ErrorBoundary>

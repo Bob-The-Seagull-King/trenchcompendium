@@ -71,17 +71,12 @@ const EquipmentDisplay = (props: any) => {
                         </div>
                     </>
                 }
-                <div className="row">
-                    {ReturnStats(abilityObject.Stats, abilityObject)  /* Stats */}
-                </div>
-                <div className="row">
-                    {returnDescription(abilityObject, abilityObject.Description)}
-                </div>
                 {abilityObject.KeyWord.length > 0 &&
                     <>
-                        <div className='separator tagboxpad colordefault'></div>
+                    <div className="verticalspacerbig"/>
                         <div className="row">
                             <span>
+                                <span className='bodytext colordefault'>{"Keywords: "}</span>
                                 {abilityObject.KeyWord.map((item) => ( 
                                     <span className='tagItem' key={"equipment_keyword_"+abilityObject.ID+"_keyword_id_"+item.ID}>
                                         <GenericHover  d_colour={'default'} titlename={item.Name} d_name={item.Name} d_type={""} d_method={() => <KeywordDisplay data={item} />}/>
@@ -91,6 +86,13 @@ const EquipmentDisplay = (props: any) => {
                         </div>
                     </>
                 }
+                <div className="row">
+                    {ReturnStats(abilityObject.Stats, abilityObject)  /* Stats */}
+                </div>
+                <div className="row">
+                    {returnDescription(abilityObject, abilityObject.Description)}
+                </div>
+                
             </div>
         </ErrorBoundary>
     )

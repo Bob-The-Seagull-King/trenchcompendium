@@ -148,6 +148,8 @@ const FactionDisplay = (props: any) => {
                         </div>
                         
                     <div className='abilityInternalStructure'>
+                    <div className="row row-cols-md-1 row-cols-sm-1">
+                        <div className="col">
                         {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "melee" && (containsTag(item.Tags, "exploration_only") == false))).length > 0 &&
                             <>
                                 <div className='separator bodytext tagboxpad colordefault'>Melee</div>
@@ -172,6 +174,9 @@ const FactionDisplay = (props: any) => {
                                 </div>
                             </>
                         }
+                        </div>
+                        
+                        <div className="col">
                         {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "armor" && (containsTag(item.Tags, "exploration_only") == false))).length > 0 &&
                             <>
                                 <div className='separator bodytext tagboxpad colordefault'>Armor</div>
@@ -196,6 +201,8 @@ const FactionDisplay = (props: any) => {
                                 </div>
                             </>
                         }
+                        </div>
+                        </div>
                         {factionObject.EquipmentItems.filter((item) => ((containsTag(item.Tags, "exploration_only") == true))).length > 0 &&
                             <>
                                 <div className='separator bodytext tagboxpad colordefault'>Exploration Only</div>
