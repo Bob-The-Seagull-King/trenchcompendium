@@ -34,7 +34,7 @@
         "name": "Melee Might",
         "source": "core",
         "tags": {"trait": true, "modifier": true},
-        "contextdata": {"upgrade_stat": {"stat": "melee", "value": 1}},
+        "contextdata": {"upgrade_stat": { "upgrades": [{"stat": "melee", "value": 1}]}},
         "description": [            
             {
                 "tags": {"desc_type" : "default"},
@@ -79,7 +79,7 @@
         "name": "Thunderbolt of Alamut",
         "source": "core",
         "tags": {"trait": true},
-        "contextdata": {"upgrade_stat": {"stat": "movement", "value": 2}},
+        "contextdata": {"upgrade_stat": { "upgrades" : [{"stat": "movement", "value": 2}]}},
         "description": [            
             {
                 "tags": {"desc_type" : "default"},
@@ -119,6 +119,364 @@
             {
                 "tags": {"desc_type" : "default"},
                 "content": "Starting in the second turn, you may activate these models. When you do, set up the model in contact with an edge of the battlefield but more than 8” away from all enemy models at the start of its activation. If both players have such models, the starting player declares whether one of their models is deployed or not first, followed by the other player. Alternate as normal until all such models have been declared as using Secret Paths or not."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_alchemicalformulae_wings",
+        "name": "Wings",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {
+            "set_stat": { "upgrades" : [
+                {"stat": "movement", "value": 8},
+                {"stat": "movetype", "value": 1}
+                ]}
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Homunculus gains a new movement mode: 8”/Flying."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_alchemicalformulae_elementalresistance",
+        "name": "Elemental Resistance",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {
+            "ignore_element": {"element": ["kw_fire","kw_gas"]}
+        },
+        "description": [           
+            {
+                "tags": {"desc_type" : "default"},
+                "content": " Attacks made against the Homunculus that have the Keywords FIRE and/or GAS suffer a -1 DICE penalty to injure it. Also the Homunculus does not suffer additional BLOOD MARKERS from attacks with Keywords FIRE and/or GAS.",
+                "glossary": [
+                    {"val": "FIRE", "id": "kw_fire"},
+                    {"val": "GAS", "id": "kw_gas"},
+                    {"val": "-1 DICE", "id": "kw_minusdice"},
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_alchemicalformulae_massive_size",
+        "name": "Massive Size",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {
+            "set_stat": { "upgrades" : [
+                {"stat": "base", "value": [50]}
+                ]},
+            "keyword_add": {"value": ["kw_tough"]}
+        },
+        "description": [           
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Homunculus’ size is increased to huge proportions. It now has a base size of 50mm and it gains the Keyword TOUGH. This formula cannot be combined with the Wings formula.",
+                "glossary": [
+                    {"val": "TOUGH", "id": "kw_tough"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_alchemicalformulae_enslavedmind",
+        "name": "Enslaved Mind",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {
+            "add_fireteam_model" : { "type": "standard", "count": 1 }
+        },
+        "description": [           
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Homunculus gains the Keyword FIRETEAM along with one model of your choice in the Warband. The other model can only form a Fireteam with this Homunculi, not with any other models.",
+                "glossary": [
+                    {"val": "FIRETEAM", "id": "kw_fireteam"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_alchemicalformulae_humanhands",
+        "name": "Human Hands",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {
+            "override_equipment_restriction": {
+                "added": [
+                    {
+                        "category": "melee",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "ranged",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "res_type": "id",
+                        "value": "eq_trenchshield"
+                    },
+                    {
+                        "res_type": "id",
+                        "value": "eq_fireshield"
+                    }
+                ]
+            }
+        },
+        "description": [           
+            {
+                "tags": {"desc_type" : "default"},
+                "content": " The Homunculus can buy and wield any weapon allowed in the Iron Sultanate warband or House of Wisdom list, though they cannot select ELITE only items, grenades or items limited to specific units (such as Assassins). They can also carry a Trench Shield or a Fire Shield. This will apply to the Additional Arms formula as well. Cannot be combined with the Wings formula.",
+                "glossary": [
+                    {"val": "ELITE", "id": "kw_elite"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_alchemicalformulae_inhumanstrength",
+        "name": "Inhuman Strength",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {
+            "set_stat": { "upgrades" : [
+                {"stat": "base", "value": [32]}
+                ]},
+            "upgrade_stat": { "upgrades": [{"stat": "melee", "value": 1}]},
+            "keyword_add": {"value": ["kw_strong"]}
+        },
+        "description": [           
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The musculature of the Homunculus is reinforced, replaced and strengthened. It now has a base size of 32mm (or 50mm if it also has Massive size). The Homunculus gains +1 DICE to its Melee characteristic and the Keyword STRONG.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "STRONG", "id": "kw_strong"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_alchemicalformulae_terrifyingappearance",
+        "name": "Terrifying Appearance",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {
+            "keyword_add": {"value": ["kw_fear"]}
+        },
+        "description": [           
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Whether by captivating beauty or a terrifying appearance, this Homunculus gains the Keyword FEAR.",
+                "glossary": [
+                    {"val": "FEAR", "id": "kw_fear"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_alchemicalformulae_additionalarm",
+        "name": "Additional Arm",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {
+            "add_arms": {"ranged": 1, "melee": 1}
+        },
+        "description": [           
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Homunculus can perform an additional attack ACTION in Melee or Ranged combat without any penalty. Therefore, if making attacks with three melee weapons, only a single weapon would need to be declared an Off-Hand weapon (suffering the appropriate penalties). ",
+                "glossary": [
+                    {"val": "ACTION", "id": "kw_action"}
+                ]
+            },        
+            { "tags": {"desc_type" : "gap"} },        
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "It has three hands to carry weapons if combined with Human Hands, and may equip weapons and a shield in any combination, as long as it has hands free to do so. In this case the Homunculi can make up to two Ranged Attack ACTIONS (if it has sufficient weapons and number of hands to carry them), and up to three Melee Attack ACTIONS (if armed with three one-handed weapons); or one Melee Attack ACTION with a two-handed weapon and one Melee Attack ACTION with a one-handed weapon.",
+                "glossary": [
+                    {"val": "ACTION", "id": "kw_action"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_alchemicalformulae_twoheads",
+        "name": "Two Heads",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {
+            "override_upgrade_restriction": {
+                "added": [
+                    "up_alchemicalformulae_hypnoticeyes",
+                    "up_alchemicalformulae_hawkeyes"
+                ]
+            }
+        },
+        "description": [           
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Homunculus has two heads and therefore can have two sets of eyes via Alchemical Formula."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_alchemicalformulae_hypnoticeyes",
+        "name": "Hypnotic Eyes",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {
+        },
+        "description": [           
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Enemies suffer -1 DICE to hit the Homunculus in Melee. Does not affect Sniper Priests or enemies with the keyword BLACK GRAIL. Cannot be combined with Hawk Eyes without Two Heads.",
+                "glossary": [
+                    {"val": "-1 DICE", "id": "kw_minusdice"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_alchemicalformulae_hawkeyes",
+        "name": "Hawk Eyes",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {
+            "upgrade_stat": { "upgrades": [{"stat": "ranged", "value": 1}]}
+        },
+        "description": [           
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The eyesight of the Homunculus is based on that of a predatory bird. It can add +1 DICE to its Ranged Attack characteristic. Cannot be combined with Hypnotic Eyes without Two Heads.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_alchemicalformulae_startlingspeed",
+        "name": "Startling Speed",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {
+        },
+        "description": [           
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Homunculus adds +1 DICE to its Dash ACTIONS.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "ACTIONS", "id": "kw_action"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_alchemicalformulae_sealofsolomon",
+        "name": "Seal of Solomon",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {
+            "override_equipment_restriction": {
+                "added": [
+                    {
+                        "category": "equipment",
+                        "res_type": "all",
+                        "value": ""
+                    }
+                ],
+                "removed": [
+                    {
+                        "category": "equipment",
+                        "res_type": "id",
+                        "value": "eq_exlixerofalkhidr"
+                    }
+                ]
+            }
+        },
+        "description": [           
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This Formula greatly enhances the intelligence of the Homunculus and makes it painfully aware of its artificial existence. It can now buy and use Equipment from the Sultanate Warband Armoury as long as it is not limited to ELITE models. Note that one helmet protects a Homunculus with two heads normally and the Two Heads Formula does not allow the purchase of two different kinds of headgear.",
+                "glossary": [
+                    {"val": "ELITE", "id": "kw_elite"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_alchemicalformulae_gargantuansize",
+        "name": "Gargantuan Size",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {
+            "set_stat": { "upgrades" : [
+                {"stat": "base", "value": [60]}
+                ]},
+            "override_equipment_restriction": {
+                "added": [
+                    {
+                        "tag": "brazen_bull",
+                        "res_type": "",
+                        "value": ""
+                    }
+                ]
+            },
+            "model_equipment_limit": {
+                "maximum": [
+                    {
+                        "tag": "weapon",
+                        "res_type": "tag",
+                        "value": "brazen_bull",
+                        "limit": 1
+                    }
+                ]
+            }
+        },
+        "description": [           
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Can only be bought if the Homunculus already has the Human Hands, Inhuman Strength and Massive Size Formulas. The Homunculus now has a Base Size of 60mm and it can now use one Brazen Bull Only weapon."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_alchemicalformulae_regenerativetissue",
+        "name": "Regenerative Tissue",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {
+        },
+        "description": [           
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Homunculus has an astonishing healing factor and can remove one BLOOD MARKER every time it is Activated, if it has any.",
+                "glossary": [
+                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"}
+                ]
             }
         ],
         "options": []

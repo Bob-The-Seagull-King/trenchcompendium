@@ -108,6 +108,13 @@
                         "res_type": "keyword",
                         "value": "kw_heavy"
                     }
+                ],
+                "removed": [
+                    {
+                        "category": "equipment",
+                        "res_type": "id",
+                        "value": "eq_exlixerofalkhidr"
+                    }
                 ]
             },
             "model_equipment_limit": {
@@ -354,5 +361,72 @@
         },
         "keywords" : [],
         "abilities" : ["ab_swornsword","ab_martialprowess","ab_arabiandestrier"]
+    },
+    {
+        "id": "md_takwincreation",
+        "name": "Takwin Homunculus",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            
+            "model_equipment_restriction": {
+                "removed": [
+                    {
+                        "category": "equipment",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "melee",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "ranged",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "armor",
+                        "res_type": "all",
+                        "value": ""
+                    }
+                ]
+            }
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The homunculus cannot be equipped with any weapons, armour or equipment. It can fight in melee without any penalty."
+            },
+            { "tags": {"desc_type" : "gap"} },
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You can bring one Takwin creature for each Alchemist in your warband. Each Takwin creature must be associated with an Alchemist in your warband. If a Takwin creature’s associated Alchemist is killed (typically by acquiring three scars), that Takwin creature cannot be fielded, its equipment cannot be changed and no Alchemical Formulae may be applied to it. When you acquire a new Alchemist, if you have any unallocated Takwin creatures, you must allocate that new Alchemist with one of your unallocated Takwin creatures. Instead of using Glory, you must buy them with ducats as indicated on the list below."
+            }
+        ],
+        "lore": [      
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "To become an Alchemist is no easy task: they undergo many trials on their path to mastery. The second is to create a takwin servant, a Homunculus creature of artificial life and intellect. If the candidate manages to follow the complex formula, as well as the intricate timing and temperature requirements, the creature will emerge after forty days of toil. It will act as the Alchemist’s living tool of creation, for their hands have fine motor skills well beyond even the nimblest craftsman. "
+            },  
+            {"tags": {"desc_type" : "gap"}},  
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Vaguely shaped like a small human, it canchange the consistency of its body to an almost liquid-like slime to squeeze into alchemical chambers to do their master’s bidding in extreme temperatures and in the fog of poisonous chemical fumes. Many aspirants fail here and their creation emerges from its golden celestial sphere a deformed monstrosity, filled with hatred towards its creator. It burrows itself into the Alchemist’s body to consume it from within, wearing its would-be master as a skin."
+            }
+        ],
+        "team": "faithful",
+        "stats" : {            
+            "movement": 6,
+            "melee": 0,
+            "ranged": 0,
+            "base": [25],
+            "armor": 0,
+            "movetype": 0,
+            "potential": 2
+        },
+        "keywords" : [],
+        "abilities" : ["ab_artificialbody","ab_recreation"]
     }
 ]

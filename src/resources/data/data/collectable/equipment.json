@@ -1675,5 +1675,73 @@
         "options": [],
         "keywords": ["kw_heavy"],
         "modifiers": ["+2D to Injuries","Ignore Armor"]
+    },
+    {
+        "id": "eq_fireshield",
+        "name": "Fire Shield",
+        "source": "core",
+        "tags": {"trait": true, "shield": true},
+        "category": "armor",
+        "distance": null,
+        "stats": {
+            "hands_melee": 1,
+            "hands_ranged": 1
+        },
+        "contextdata": {
+            "upgrade_stat": {"stat": "armor", "value": -1},
+            "find_hands": { "required": true, "both_kits": true },
+            "ignore_element": {"element": ["kw_fire"]}
+        },
+        "description": [       
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Always takes one hand to use in both melee and in ranged combat. Grants -1 to all injury rolls against the model. This bonus stacks with any armour the model wears, unless otherwise indicated. Any attack against this model that has the Keyword FIRE will suffer -1 DICE on injury rolls and will not cause an additional BLOOD MARKER.",
+                "glossary": [
+                    {"val": "FIRE", "id": "kw_fire"},
+                    {"val": "-1 DICE", "id": "kw_minusdice"},
+                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"}
+                ]
+            } 
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "An Invention of the al-Jazari school of engineering within the House of Wisdom, this shield is treated with an Alchemical formula, making it highly resistant to fire weapons. It has proven its value in many desperate battles against the flame-wielding Heretics."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_exlixerofalkhidr",
+        "name": "Elixer of Al-Khidr",
+        "source": "core",
+        "tags": {"trait": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {
+            "keyword_add": {"value": ["kw_tough"]}
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Gives the model consuming the Elixir Keyword TOUGH for the duration of a single battle. It cannot be given to Lions of Jabir, Brazen Bulls or Homunculi.",
+                "glossary": [
+                    {"val": "TOUGH", "id": "kw_tough"}
+                ]
+            }
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "An extraordinary creation of the House of Wisdom. It is said that within its Gardens is the hidden Fountain of Life that is used as an ingredient of this powerful Alchemical formula."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_consumable"],
+        "modifiers": []
     }
 ]

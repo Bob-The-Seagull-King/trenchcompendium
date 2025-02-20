@@ -8,7 +8,7 @@
         "restricted_upgrades": [
         ],
         "warband_limit": 0,
-        "faction_mask":[]
+        "required_upgrades":[]
     },
     {
         "id": "rel_md_up_infiltrator10",
@@ -19,7 +19,7 @@
         "restricted_upgrades": [
         ],
         "warband_limit": 0,
-        "faction_mask":[]
+        "required_upgrades":[]
     },
     {
         "id": "rel_md_up_meleeboost5",
@@ -30,7 +30,7 @@
         "restricted_upgrades": [
         ],
         "warband_limit": 3,
-        "faction_mask":[]
+        "required_upgrades":[]
     },
     {
         "id": "rel_md_up_fierceandbrave5",
@@ -41,7 +41,7 @@
         "restricted_upgrades": [
         ],
         "warband_limit": 0,
-        "faction_mask":[]
+        "required_upgrades":[]
     },
     {
         "id": "rel_factionrule_artofassassination_hallucinogendisguise",
@@ -52,7 +52,7 @@
         "restricted_upgrades": [
         ],
         "warband_limit": 1,
-        "faction_mask":[]
+        "required_upgrades":[]
     },
     {
         "id": "rel_factionrule_artofassassination_thunderboltofalamut",
@@ -63,7 +63,7 @@
         "restricted_upgrades": [
         ],
         "warband_limit": 1,
-        "faction_mask":[]
+        "required_upgrades":[]
     },
     {
         "id": "rel_factionrule_artofassassination_mirageoftime",
@@ -74,7 +74,7 @@
         "restricted_upgrades": [
         ],
         "warband_limit": 1,
-        "faction_mask":[]
+        "required_upgrades":[]
     },
     {
         "id": "rel_factionrule_artofassassination_secretpaths",
@@ -85,6 +85,178 @@
         "restricted_upgrades": [
         ],
         "warband_limit": 1,
-        "faction_mask":[]
+        "required_upgrades":[]
+    },
+    {
+        "id": "rel_md_up_alchemicalformulae_wings",
+        "model_id_set": ["md_takwincreation"],
+        "upgrade_id": "up_alchemicalformulae_wings",
+        "cost": 30,
+        "cost_type": 0,
+        "restricted_upgrades": [
+        ],
+        "warband_limit": 0,
+        "required_upgrades":[]
+    },
+    {
+        "id": "rel_md_up_alchemicalformulae_elementalresistance",
+        "model_id_set": ["md_takwincreation"],
+        "upgrade_id": "up_alchemicalformulae_elementalresistance",
+        "cost": 40,
+        "cost_type": 0,
+        "restricted_upgrades": [
+        ],
+        "warband_limit": 0,
+        "required_upgrades":[]
+    },
+    {
+        "id": "rel_md_up_alchemicalformulae_massive_size",
+        "model_id_set": ["md_takwincreation"],
+        "upgrade_id": "up_alchemicalformulae_massive_size",
+        "cost": 30,
+        "cost_type": 0,
+        "restricted_upgrades": [
+            "up_alchemicalformulae_wings"
+        ],
+        "warband_limit": 0,
+        "required_upgrades":[]
+    },
+    {
+        "id": "rel_md_up_alchemicalformulae_enslavedmind",
+        "model_id_set": ["md_takwincreation"],
+        "upgrade_id": "up_alchemicalformulae_enslavedmind",
+        "cost": 10,
+        "cost_type": 0,
+        "restricted_upgrades": [
+        ],
+        "warband_limit": 0,
+        "required_upgrades":[]
+    },
+    {
+        "id": "rel_md_up_alchemicalformulae_humanhands",
+        "model_id_set": ["md_takwincreation"],
+        "upgrade_id": "up_alchemicalformulae_humanhands",
+        "cost": 10,
+        "cost_type": 0,
+        "restricted_upgrades": [
+            "up_alchemicalformulae_wings"
+        ],
+        "warband_limit": 0,
+        "required_upgrades":[]
+    },
+    {
+        "id": "rel_md_up_alchemicalformulae_inhumanstrength",
+        "model_id_set": ["md_takwincreation"],
+        "upgrade_id": "up_alchemicalformulae_inhumanstrength",
+        "cost": 15,
+        "cost_type": 0,
+        "restricted_upgrades": [
+        ],
+        "warband_limit": 0,
+        "required_upgrades":[]
+    },
+    {
+        "id": "rel_md_up_alchemicalformulae_terrifyingappearance",
+        "model_id_set": ["md_takwincreation"],
+        "upgrade_id": "up_alchemicalformulae_terrifyingappearance",
+        "cost": 10,
+        "cost_type": 0,
+        "restricted_upgrades": [
+        ],
+        "warband_limit": 0,
+        "required_upgrades":[]
+    },
+    {
+        "id": "rel_md_up_alchemicalformulae_additionalarm",
+        "model_id_set": ["md_takwincreation"],
+        "upgrade_id": "up_alchemicalformulae_additionalarm",
+        "cost": 15,
+        "cost_type": 0,
+        "restricted_upgrades": [
+        ],
+        "warband_limit": 0,
+        "required_upgrades":[]
+    },
+    {
+        "id": "rel_md_up_alchemicalformulae_twoheads",
+        "model_id_set": ["md_takwincreation"],
+        "upgrade_id": "up_alchemicalformulae_twoheads",
+        "cost": 5,
+        "cost_type": 0,
+        "restricted_upgrades": [
+        ],
+        "warband_limit": 0,
+        "required_upgrades":[]
+    },
+    {
+        "id": "rel_md_up_alchemicalformulae_hypnoticeyes",
+        "model_id_set": ["md_takwincreation"],
+        "upgrade_id": "up_alchemicalformulae_hypnoticeyes",
+        "cost": 15,
+        "cost_type": 0,
+        "restricted_upgrades": [
+        ],
+        "warband_limit": 0,
+        "required_upgrades":[]
+    },
+    {
+        "id": "rel_md_up_alchemicalformulae_hawkeyes",
+        "model_id_set": ["md_takwincreation"],
+        "upgrade_id": "up_alchemicalformulae_hawkeyes",
+        "cost": 10,
+        "cost_type": 0,
+        "restricted_upgrades": [
+        ],
+        "warband_limit": 0,
+        "required_upgrades":[]
+    },
+    {
+        "id": "rel_md_up_alchemicalformulae_startlingspeed",
+        "model_id_set": ["md_takwincreation"],
+        "upgrade_id": "up_alchemicalformulae_startlingspeed",
+        "cost": 10,
+        "cost_type": 0,
+        "restricted_upgrades": [
+        ],
+        "warband_limit": 0,
+        "required_upgrades":[]
+    },
+    {
+        "id": "rel_md_up_alchemicalformulae_sealofsolomon",
+        "model_id_set": ["md_takwincreation"],
+        "upgrade_id": "up_alchemicalformulae_sealofsolomon",
+        "cost": 10,
+        "cost_type": 0,
+        "restricted_upgrades": [
+        ],
+        "warband_limit": 0,
+        "required_upgrades":[]
+    },
+    {
+        "id": "rel_md_up_alchemicalformulae_gargantuansize",
+        "model_id_set": ["md_takwincreation"],
+        "upgrade_id": "up_alchemicalformulae_gargantuansize",
+        "cost": 20,
+        "cost_type": 0,
+        "restricted_upgrades": [
+        ],
+        "warband_limit": 0,
+        "required_upgrades":[
+            "up_alchemicalformulae_humanhands",
+            "up_alchemicalformulae_massive_size",
+            "up_alchemicalformulae_inhumanstrength"
+        ]
+    },
+    {
+        "id": "rel_md_up_alchemicalformulae_regenerativetissue",
+        "model_id_set": ["md_takwincreation"],
+        "upgrade_id": "up_alchemicalformulae_regenerativetissue",
+        "cost": 25,
+        "cost_type": 0,
+        "restricted_upgrades": [
+        ],
+        "warband_limit": 0,
+        "required_upgrades":[
+        ]
     }
 ]

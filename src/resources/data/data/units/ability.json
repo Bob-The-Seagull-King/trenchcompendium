@@ -362,5 +362,20 @@
             }
         ],
         "options": []
+    },
+    {
+        "id": "ab_recreation",
+        "name": "Recreation",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"}, 
+                "content": "If the Homunculus is taken Out of Action during battle, and is deemed to have been killed in the post-battle sequence, you do not have to remove it from your roster. Instead, you can spend 40 ducats at any time between battles to bring it back to life with all of its weapons and abilities."
+            }
+        ],
+        "options": []
     }
 ]
