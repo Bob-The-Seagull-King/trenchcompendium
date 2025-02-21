@@ -13,7 +13,7 @@ import logo from '../../resources/images/compendium.png'
 
 // Font Awesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faGun, faKey, faList, faPeopleGroup, faPersonMilitaryRifle } from '@fortawesome/free-solid-svg-icons'
+import { faGun, faKey, faList, faPeopleGroup, faPersonMilitaryRifle, faSquare } from '@fortawesome/free-solid-svg-icons'
 import { faFileLines, faCoins, faCross } from '@fortawesome/free-solid-svg-icons'
 
 // TEST
@@ -68,22 +68,7 @@ const HomeRoute: React.FC = () => {
                         <div className="separator"><h3 className="complextext">Content</h3></div>
                     </div>
                     <div className="row row-cols-lg-3 row-cols-md-3 row-cols-sx-1 row-cols-xs-1 row-cols-1">
-                        <div className="col softpad">
-                        <div className="basestructure pageaccessbox borderstyler subborderdefault hovermouse" onClick={() => NavigateHome("compendium/glossary/")}>
-                                <FontAwesomeIcon icon={faList} className="pageaccestext"/>
-                                <h1 className="pageaccestext">
-                                    GLOSSARY
-                                </h1>
-                            </div>
-                        </div>
-                        <div className="col softpad">
-                            <div className="basestructure pageaccessbox borderstyler subborderdefault hovermouse" onClick={() => NavigateHome("compendium/keyword/")}>
-                                <FontAwesomeIcon icon={faKey} className="pageaccestext"/>
-                                <h1 className="pageaccestext">
-                                    KEYWORDS
-                                </h1>
-                            </div>
-                        </div>
+                        
                         <div className="col softpad">
                             <div className="basestructure pageaccessbox borderstyler subborderdefault hovermouse" onClick={() => NavigateHome("compendium/model/")}>
                                 <FontAwesomeIcon icon={faPersonMilitaryRifle} className="pageaccestext"/>
@@ -108,6 +93,88 @@ const HomeRoute: React.FC = () => {
                                 </h1>
                             </div>
                         </div>
+                        
+                        <div className="col softpad">
+                            <div className="basestructure pageaccessbox borderstyler subborderdefault hovermouse" onClick={() => NavigateHome("")}>
+                                <FontAwesomeIcon icon={faSquare} className="pageaccestext"/>
+                                <h1 className="pageaccestext">
+                                    SCENARIOS
+                                </h1>
+                            </div>
+                        </div>
+                        
+                        <div className="col softpad">
+                            <div className="basestructure pageaccessbox borderstyler subborderdefault hovermouse" onClick={() => NavigateHome("")}>
+                                <FontAwesomeIcon icon={faSquare} className="pageaccestext"/>
+                                <h1 className="pageaccestext">
+                                    GAME RULES
+                                </h1>
+                            </div>
+                        </div>
+                        <div className="col softpad">
+                            <div className="basestructure pageaccessbox borderstyler subborderdefault hovermouse" onClick={() => NavigateHome("compendium/keyword/")}>
+                                <FontAwesomeIcon icon={faKey} className="pageaccestext"/>
+                                <h1 className="pageaccestext">
+                                    KEYWORDS
+                                </h1>
+                            </div>
+                        </div>
+                    </div><div className="row">
+                        <div className="separator"><h3 className="complextext">Content</h3></div>
+                    </div>
+                    <div className="row row-cols-lg-3 row-cols-md-3 row-cols-sx-1 row-cols-xs-1 row-cols-1">
+                        
+                        
+                        
+                        <div className="col softpad">
+                            <div className="basestructure pageaccessbox borderstyler subborderdefault hovermouse" onClick={() => NavigateHome("")}>
+                                <FontAwesomeIcon icon={faSquare} className="pageaccestext"/>
+                                <h1 className="pageaccestext">
+                                    CAMPAIGN RULES
+                                </h1>
+                            </div>
+                        </div>
+                        <div className="col softpad">
+                            <div className="basestructure pageaccessbox borderstyler subborderdefault hovermouse" onClick={() => NavigateHome("")}>
+                                <FontAwesomeIcon icon={faSquare} className="pageaccestext"/>
+                                <h1 className="pageaccestext">
+                                    EXPLORATION
+                                </h1>
+                            </div>
+                        </div>
+                        <div className="col softpad">
+                            <div className="basestructure pageaccessbox borderstyler subborderdefault hovermouse" onClick={() => NavigateHome("")}>
+                                <FontAwesomeIcon icon={faSquare} className="pageaccestext"/>
+                                <h1 className="pageaccestext">
+                                    INJURIES
+                                </h1>
+                            </div>
+                        </div>
+                        <div className="col softpad">
+                            <div className="basestructure pageaccessbox borderstyler subborderdefault hovermouse" onClick={() => NavigateHome("")}>
+                                <FontAwesomeIcon icon={faSquare} className="pageaccestext"/>
+                                <h1 className="pageaccestext">
+                                    SKILL TABLES
+                                </h1>
+                            </div>
+                        </div>
+                        <div className="col softpad">
+                            <div className="basestructure pageaccessbox borderstyler subborderdefault hovermouse" onClick={() => NavigateHome("")}>
+                                <FontAwesomeIcon icon={faSquare} className="pageaccestext"/>
+                                <h1 className="pageaccestext">
+                                    PATRONS
+                                </h1>
+                            </div>
+                        </div>
+                        
+                        <div className="col softpad">
+                        <div className="basestructure pageaccessbox borderstyler subborderdefault hovermouse" onClick={() => NavigateHome("compendium/glossary/")}>
+                                <FontAwesomeIcon icon={faList} className="pageaccestext"/>
+                                <h1 className="pageaccestext">
+                                    GLOSSARY
+                                </h1>
+                            </div>
+                        </div>
                     </div>
                     <div className="row">
                         <div className="separator"><h3 className="complextext">Tools</h3></div>
@@ -125,7 +192,15 @@ const HomeRoute: React.FC = () => {
                             <div className="basestructure pageaccessbox borderstyler subborderdefault hovermouse" onClick={() => NavigateHome("tools/saveitem/")}>
                                 <FontAwesomeIcon icon={faFileLines} className="pageaccestext"/>
                                 <h1 className="pageaccestext">
-                                    SAVE ITEM
+                                    WARBAND MANAGER
+                                </h1>
+                            </div>
+                        </div>
+                        <div className="col softpad">
+                            <div className="basestructure pageaccessbox borderstyler subborderdefault hovermouse" onClick={() => NavigateHome("")}>
+                                <FontAwesomeIcon icon={faSquare} className="pageaccestext"/>
+                                <h1 className="pageaccestext">
+                                    RANDOM SCENARIO
                                 </h1>
                             </div>
                         </div>
