@@ -294,12 +294,11 @@
         "tags": {},
         "name": "",
         "contextdata": {
-            "special_limit": {
+            "faction_model_count_special": {
                 "match": [
                     {
                         "type": "model",
-                        "value" : "md_jabireanalchemist",
-                        "match_type": "equal"
+                        "value" : "md_jabireanalchemist"
                     }
                 ]
             }

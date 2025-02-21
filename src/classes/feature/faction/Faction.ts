@@ -56,8 +56,6 @@ class Faction extends StaticOptionContextObject {
         this.BuildFactionModels(data.id);
         this.BuildRules(data.rules)
         this.BuildFactionEquipment(data.id)
-
-        console.log(this);
     }
     
     public BuildFactionModels(id : string) {

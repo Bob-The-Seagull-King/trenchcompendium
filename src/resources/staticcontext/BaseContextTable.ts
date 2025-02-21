@@ -345,7 +345,18 @@ export const BaseContextCallTable : CallEventTable = {
     },
     faction_model_count_special: {
         event_priotity: 0,
-        getModelLimitPresentation(this: EventRunner, eventSource : any, relayVar : string[], trackVal : boolean, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+        async getModelLimitPresentation(this: EventRunner, eventSource : any, relayVar : string[], trackVal : boolean, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            
+            const { ModelFactory } = await import("../../factories/features/ModelFactory");
+            if (trackVal == true) {
+                if (context_func["match"]) {
+                    if (context_func["match"][0]["type"] == "model") {
+                        const ModelItem = ModelFactory.CreateNewModel(context_func["match"][0]["value"], null)
+                        return ["Number of " + ModelItem.Name]
+                    }
+                }
+            }
+            
             return relayVar;
         }
     },

@@ -66,8 +66,6 @@ class ViewCollectionsModel {
             }
         }
 
-        console.log(ExtantVariants)
-        console.log(RelevantResults)
         const ResultsToAdd = Array.from(new Set([...RelevantResults]))
 
         for (let i = 0; i < ResultsToAdd.length; i++) {
