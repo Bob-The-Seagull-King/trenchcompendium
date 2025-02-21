@@ -68,5 +68,40 @@
         "cut_rules" : [],
         "rules" : ["rl_alchemists","rl_prideofjabir","rl_privateventure","rl_nobleguardians","rl_kavass","rl_secretsofthehouseofwisdom","rl_weaponcollections"],
         "options": []
+    },
+    {
+        "id": "fc_ironsultanate_fv_defendersoftheironwall",
+        "name": "Defender's of the Iron Wall",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "faction_keyword": {"name": "kw_sultanate"}
+        },
+        "base_id": "fc_ironsultanate",
+        "description": [     
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "\"Whosoever fears defeat always remains defeated. Do you truly think the Iron Wall alone protects Those Who Believe? For its iron extends into the very hearts of our warriors wherever their duties take them.\""
+            },
+            { "tags": {"desc_type" : "gap"} },
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Since assuming the throne in the year 1902, Sultan Malik (affectionately nicknamed the ‘Lion Padishah’’ by his troops) has demonstrated a more aggressive policy in waging the Great War. On an ocassion, even detachments from the the million-strong garrison of the Iron Wall are sent on missions beyond the Wall, for the Sultanate has never relinquished the claim to the muslim lands lost to the Heretics. Though the Great Wall still comes under continuous attacks as the forces of Shaitan ceaslessly test the defenses of the Believers, the Sultan refuses to sit idle and fight passively only in defense. Thus the regular troops defending the Iron Wall have sent into missions far more regularly than in the past, hardening the raw recruits into veterans."
+            },
+            { "tags": {"desc_type" : "gap"} },
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "When the Defenders of the Iron Wall go into an expedition into No Man’s Land, they utilize their unique way of war to its fullest extent. All warriors have been drilled ceaslessly in marksmanship that takes advantage of elevated positions and using Siege Jezzails in two-man teams. These skills are honed into perfection, and it is almost impossible to dislodge these troops from a well-prepared high ground. Mighty Brazen Bulls form a lynchpin of the defense in close quarters, and can push back even the greatest of enemy champions."
+            },
+            { "tags": {"desc_type" : "gap"} },
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "The core of any such warband is often formed around the Sultanate Sappers: experts at demolition, mine-setting and veterans of the bitter battles above and below the Wall. They are superb in the transportation and use of the Field Artillery, erecting defensive positions at a speed that borders on supernatural, and using explosive charges to frustrate their enemies who will be whittled into nothing before they reach the lines of Sultanate’s defenders finish them off with ruthless efficiency."
+            }
+        ],
+        "team": "faithful",
+        "cut_rules" : [],
+        "rules" : ["rl_silahdar","rl_farfromthesublimegate","rl_sipahi","rl_janissaryofficers","rl_sappercorps","rl_siegejezzailteams","rl_marksmanshipoftheironwall"],
+        "options": []
     }
 ]

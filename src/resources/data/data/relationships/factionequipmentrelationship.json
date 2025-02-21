@@ -5,7 +5,7 @@
         "tags": {},
         "name": "Jezzail",
         "contextdata": {},
-        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_jezzail",
         "cost": 7,
         "costtype": 0,
@@ -17,7 +17,7 @@
         "tags": {},
         "name": "Siege Jezzail",
         "contextdata": {},
-        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_siegejezzail",
         "cost": 30,
         "costtype": 0,
@@ -29,7 +29,7 @@
         "tags": {},
         "name": "Musket",
         "contextdata": {},
-        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_musket",
         "cost": 5,
         "costtype": 0,
@@ -41,7 +41,7 @@
         "tags": {},
         "name": "Pistol",
         "contextdata": {},
-        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_pistolrevolver",
         "cost": 6,
         "costtype": 0,
@@ -53,7 +53,7 @@
         "tags": {},
         "name": "Shotgun",
         "contextdata": {},
-        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut","fc_trenchpilgrim","fc_newantioch"],
+        "faction_id": ["fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut","fc_trenchpilgrim","fc_newantioch"],
         "equipment_id": "eq_shotgun",
         "cost": 10,
         "costtype": 0,
@@ -74,7 +74,7 @@
                 ]
             }
         },
-        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_alaybozan",
         "cost": 9,
         "costtype": 0,
@@ -99,7 +99,7 @@
                 ]
             }
         },
-        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_sniperrifle",
         "cost": 35,
         "costtype": 0,
@@ -112,7 +112,7 @@
         "name": "Grenades",
         "contextdata": {  
         },
-        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_grenades",
         "cost": 7,
         "costtype": 0,
@@ -133,7 +133,7 @@
                 ]
             }  
         },
-        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom"],
+        "faction_id": ["fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom"],
         "equipment_id": "eq_incendiarygrenades",
         "cost": 15,
         "costtype": 0,
@@ -146,7 +146,7 @@
         "name": "Machine Gun",
         "contextdata": {  
         },
-        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_machinegun",
         "cost": 50,
         "costtype": 0,
@@ -159,7 +159,7 @@
         "name": "Flamethrower",
         "contextdata": {  
         },
-        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_flamethrower",
         "cost": 30,
         "costtype": 0,
@@ -180,7 +180,7 @@
                 ]
             }  
         },
-        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom"],
+        "faction_id": ["fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom"],
         "equipment_id": "eq_muradbombard",
         "cost": 50,
         "costtype": 0,
@@ -201,7 +201,7 @@
                 ]
             }  
         },
-        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom"],
+        "faction_id": ["fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom"],
         "equipment_id": "eq_flamecannon",
         "cost": 60,
         "costtype": 0,
@@ -214,7 +214,7 @@
         "name": "Knife",
         "contextdata": {    
         },
-        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_knifedagger",
         "cost": 1,
         "costtype": 0,
@@ -227,7 +227,7 @@
         "name": "Bayonet",
         "contextdata": {    
         },
-        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_bayonet",
         "cost": 2,
         "costtype": 0,
@@ -240,7 +240,7 @@
         "name": "Trench Club",
         "contextdata": {    
         },
-        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_trenchclub",
         "cost": 3,
         "costtype": 0,
@@ -253,7 +253,7 @@
         "name": "Sword/Axe",
         "contextdata": {    
         },
-        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_swordaxe",
         "cost": 4,
         "costtype": 0,
@@ -266,7 +266,7 @@
         "name": "Polearm",
         "contextdata": {    
         },
-        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_trenchpolearm",
         "cost": 7,
         "costtype": 0,
@@ -279,7 +279,7 @@
         "name": "Great-Hammer/Maul",
         "contextdata": {    
         },
-        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_doublehandedbluntweapon",
         "cost": 10,
         "costtype": 0,
@@ -292,7 +292,7 @@
         "name": "Great-Sword/Axe",
         "contextdata": {    
         },
-        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_greatswordaxe",
         "cost": 12,
         "costtype": 0,
@@ -313,7 +313,7 @@
                 ]
             }
         },
-        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_halberdgun",
         "cost": 20,
         "costtype": 0,
@@ -334,7 +334,7 @@
                 ]
             }
         },
-        "faction_id": ["fc_ironsultanate"],
+        "faction_id": ["fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate"],
         "equipment_id": "eq_titanzulfiqar",
         "cost": 30,
         "costtype": 0,
@@ -368,7 +368,7 @@
         "name": "Standard Armor",
         "contextdata": {    
         },
-        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_standardarmor",
         "cost": 15,
         "costtype": 0,
@@ -393,7 +393,7 @@
                 ]
             }
         },
-        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_reinforcedarmor",
         "cost": 40,
         "costtype": 0,
@@ -414,7 +414,7 @@
                 ]
             }
         },
-        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_alchemistarmor",
         "cost": 50,
         "costtype": 0,
@@ -427,7 +427,7 @@
         "name": "Trench Shield",
         "contextdata": {   
         },
-        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_trenchshield",
         "cost": 10,
         "costtype": 0,
@@ -440,7 +440,7 @@
         "name": "Combat Helmet",
         "contextdata": {   
         },
-        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_combathelmet",
         "cost": 5,
         "costtype": 0,
@@ -453,7 +453,7 @@
         "name": "Gas Mask",
         "contextdata": {   
         },
-        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_gasmask",
         "cost": 5,
         "costtype": 0,
@@ -466,7 +466,7 @@
         "name": "Shovel",
         "contextdata": {   
         },
-        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_shovel",
         "cost": 5,
         "costtype": 0,
@@ -487,7 +487,7 @@
                 ]
             }  
         },
-        "faction_id": ["fc_ironsultanate"],
+        "faction_id": ["fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate"],
         "equipment_id": "eq_maridshovel",
         "cost": 15,
         "costtype": 0,
@@ -500,7 +500,7 @@
         "name": "Mountaineer Kit",
         "contextdata": {       
         },
-        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_mountaineerkit",
         "cost": 3,
         "costtype": 0,
@@ -513,7 +513,7 @@
         "name": "Medi-Kit",
         "contextdata": {       
         },
-        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_medikit",
         "cost": 5,
         "costtype": 0,
@@ -546,7 +546,7 @@
                 ]
             }        
         },
-        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_alchemicalammunition",
         "cost": 3,
         "costtype": 0,
@@ -567,7 +567,7 @@
                 ]
             }        
         },
-        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_musicalinstrument",
         "cost": 15,
         "costtype": 0,
@@ -614,7 +614,7 @@
         "name": "Troop Flag",
         "contextdata": {        
         },
-        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_troopflag",
         "cost": 1,
         "costtype": 1,
@@ -635,7 +635,7 @@
                 ]
             }      
         },
-        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_binoculars",
         "cost": 10,
         "costtype": 0,
@@ -656,7 +656,7 @@
                 ]
             }      
         },
-        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_holyrelic",
         "cost": 2,
         "costtype": 1,
@@ -734,7 +734,7 @@
         "name": "Sniper Scope",
         "contextdata": {     
         },
-        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_sniperscope",
         "cost": 2,
         "costtype": 1,
@@ -757,7 +757,7 @@
                 ]
             }   
         },
-        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_kilij",
         "cost": 2,
         "costtype": 1,
@@ -772,7 +772,7 @@
         "name": "Rocket-Propelled Grenade",
         "contextdata": {     
         },
-        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_rocketpropelledgrenade",
         "cost": 2,
         "costtype": 1,
@@ -795,7 +795,7 @@
                 ]
             }   
         },
-        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_masterworksjezzail",
         "cost": 4,
         "costtype": 1,
@@ -818,7 +818,7 @@
                 ]
             }   
         },
-        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_damascusarmor",
         "cost": 5,
         "costtype": 1,
@@ -841,7 +841,7 @@
                 ]
             }   
         },
-        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_knighthood",
         "cost": 5,
         "costtype": 1,
@@ -856,7 +856,7 @@
         "name": "Field Hospital",
         "contextdata": {    
         },
-        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom"],
+        "faction_id": ["fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom"],
         "equipment_id": "eq_fieldhospital",
         "cost": 10,
         "costtype": 1,
@@ -879,7 +879,7 @@
                 ]
             } 
         },
-        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom"],
+        "faction_id": ["fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom"],
         "equipment_id": "eq_sultanategrandcannon",
         "cost": 12,
         "costtype": 1,
@@ -954,5 +954,107 @@
         "cost": 20,
         "costtype": 0,
         "limit": 2
+    },
+    {
+        "id": "rel_fc_eq_ironwallkalkan",
+        "source": "core",
+        "tags": {   
+            "faction_eq_restriction": {
+                "permitted": [
+                    {
+                        "res_type": "id",
+                        "value": "md_brazenbull"
+                    }
+                ]
+            } 
+        },
+        "name": "Iron Wall Kalkan",
+        "contextdata": {  
+        },
+        "faction_id": ["fc_ironsultanate_fv_defendersoftheironwall"],
+        "equipment_id": "eq_ironwallkalkan",
+        "cost": 30,
+        "costtype": 0,
+        "limit": 1
+    },
+    {
+        "id": "rel_fc_eq_bannerofdesertwind",
+        "source": "core",
+        "tags": {
+        },
+        "name": "Banner of Desert Wind",
+        "contextdata": {  
+        },
+        "faction_id": ["fc_ironsultanate_fv_defendersoftheironwall"],
+        "equipment_id": "eq_bannerofdesertwind",
+        "cost": 30,
+        "costtype": 0,
+        "limit": 1
+    },
+    {
+        "id": "rel_fc_eq_sultanategrandcannon",
+        "source": "core",
+        "tags": {   
+            "faction_eq_restriction": {
+                "permitted": [
+                    {
+                        "res_type": "id",
+                        "value": "md_brazenbull"
+                    }
+                ]
+            } 
+        },
+        "name": "Sultanate Grand Cannon",
+        "contextdata": {  
+        },
+        "faction_id": ["fc_ironsultanate_fv_defendersoftheironwall"],
+        "equipment_id": "eq_sultanategrandcannon",
+        "cost": 60,
+        "costtype": 0,
+        "limit": 2
+    },
+    {
+        "id": "rel_fc_eq_explosivecharges",
+        "source": "core",
+        "tags": {   
+            "faction_eq_restriction": {
+                "permitted": [
+                    {
+                        "res_type": "id",
+                        "value": "md_sultanatesapper"
+                    }
+                ]
+            } 
+        },
+        "name": "Explosive Charges",
+        "contextdata": {  
+        },
+        "faction_id": ["fc_ironsultanate_fv_defendersoftheironwall"],
+        "equipment_id": "eq_explosivecharges",
+        "cost": 35,
+        "costtype": 0,
+        "limit": 1
+    },
+    {
+        "id": "rel_fc_eq_anqaguard",
+        "source": "core",
+        "tags": {   
+            "faction_eq_restriction": {
+                "permitted": [
+                    {
+                        "res_type": "id",
+                        "value": "md_sultanatesapper"
+                    }
+                ]
+            } 
+        },
+        "name": "Anqa Guard",
+        "contextdata": {  
+        },
+        "faction_id": ["fc_ironsultanate_fv_defendersoftheironwall"],
+        "equipment_id": "eq_anqaguard",
+        "cost": 10,
+        "costtype": 0,
+        "limit": 0
     }
 ]

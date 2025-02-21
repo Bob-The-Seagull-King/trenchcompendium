@@ -1231,6 +1231,7 @@
         "category": "equipment",
         "distance": null,
         "stats": {
+            "hands_melee": 1
         },
         "contextdata": {"warband_wide": {}},
         "description": [            
@@ -1654,8 +1655,9 @@
         },
         "contextdata": {
             "get_weapon": {},
-            "injury_bonus": {"type": "dice", "value": 1},
-            "ignore_armor": {}
+            "injury_bonus": {"type": "dice", "value": 2},
+            "ignore_armor": {},
+            "stationary": {}
         },
         "description": [ 
             {
@@ -1664,6 +1666,11 @@
                 "glossary": [
                     {"val": "+2 DICE", "id": "kw_plusdice"}
                 ]
+            },
+            { "tags": {"desc_type" : "gap"} },
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "If the Cannon is placed as a Stationary object on the battlefield, it is deployed separately as one of your standard units on a 50mm base in your own Deployment Zone or Table Edge. It is immobile and cannot be damaged. Any model in the Defenders of the Iron Wall warband can shoot it during their Activation as long as they are not in Melee combat, are within 1” of the Cannon, and do not move in any way during their Activation. Alchemist Abilty Mastery of the Elements does apply to the Cannon. As with any other Ranged Weapon, each Grand Cannon can only be fired once per Turn. The Cannon cannot be lost as a casuality unless carried by a Brazen Bull."
             } 
         ],
         "lore": [            
@@ -1844,5 +1851,134 @@
         "options": [],
         "keywords": ["kw_shieldcombo","kw_heavy"],
         "modifiers": ["+1D to Hit","+2D to Injuries at Short Range"]
+    },
+    {
+        "id": "eq_ironwallkalkan",
+        "name": "Iron Wall Kalkan",
+        "source": "core",
+        "tags": {"trait": true, "brazen_bull": true},
+        "category": "armor",
+        "distance": null,
+        "stats": {
+            "hands_melee": 1,
+            "hands_ranged": 1
+        },
+        "contextdata": {
+            "find_hands": { "required": true, "both_kits": true }
+        },
+        "description": [       
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Takes always one hand to use in both melee and in ranged combat and cannot be switched out. The target is always considered to be in Cover when shot, and counts as fighting behind a defended obstacle when an enemy charges them. In addition, when the Brazen bull is Activated and it is in combat with only 1 model on a 40mm or smaller base, the Bull can Move normally (though not Charge or Dash), pushing its opponent in the same direction as the Bull is moving and travelling the same distance as the Bull moves if it moves directly towards the enemy that is in front half of its base. This can push the enemies so they fall as per Falling rules), and if the Bull pushes the opponent against a terrain piece higher than 2”, both models stop and the opponent immediately rolls on the injury table."
+            } 
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "It is rare that even the greatest artillery bombardments manage to even dent the Invincible Iron Wall, but sometimes when the most powerful of enemy Sorcerers Such shards and slivers of the divine metal are carefully gathered by the Alchemists and incorporated into mighty shields of the Brazen Bulls, to be used solely by the defenders of the Iron Wall."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_bannerofdesertwind",
+        "name": "Banner of Desert Wind",
+        "source": "core",
+        "tags": {"trait": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+            "hands_melee": 1,
+            "hands_ranged": 1
+        },
+        "contextdata": {"warband_wide": {}},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Grants +1 DICE for all Morale tests as long as the model with the flag is not Down or Out of Action. Requires one hand to use. In addition, as long as the model carrying this banner is not Down or Out of Action, all enemies with 24” have to reduce their Movement Characteristic of by 1”.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"}
+                ]
+            }
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "“This, then, is the parable of those who are bent on denying their Sustainer: all their works are as ashes which the wind blows about fiercely on a stormy day: they cannot achieve any benefit whatever from all that they may have wrought: for this is indeed the farthest one can go astray.”"
+            },        
+            { "tags": {"desc_type" : "gap"} },        
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "The alchemical compounds woven into this banner attract desert winds that make it impossible for flying machines or winged creatures to overcome the Iron Wall."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_explosivecharges",
+        "name": "Explosive Charges",
+        "source": "core",
+        "tags": {"action": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {"warband_wide": {}},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Sultanate Sapper Corps are experts at using explosive charges to overcome defended enemy positions such as walls, bunkers, casemates and pillboxes. Experts at timing the fuses of their bombs, many a battle has been turned thanks to a well-timed blast.",
+                "glossary": [
+                    {"val": "SHRAPNEL", "id": "kw_shrapnel"}
+                ]
+            }
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Sultanate Sapper Corps are experts at using explosive charges to overcome defended enemy positions such as walls, bunkers, casemates and pillboxes. Experts at timing the fuses of their bombs, many a battle has been turned thanks to a well-timed blast."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_consumable"],
+        "modifiers": []
+    },
+    {
+        "id": "eq_anqaguard",
+        "name": "Anqa Guard",
+        "source": "core",
+        "tags": {"action": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+            
+        },
+        "contextdata": {
+            "warband_wide": {}
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This transportable fortification is represented by a 1” high standing shield on 40mm base. They can either be placed anywhere within your own deployment zone after all other models are deployed. Alternatively, a sapper may carry one on their back, and then deploy it with a +2 DICE RISKY ACTION during their Activation as long as the Sapper is not in Melee combat. In this case, it must be placed within 1” of the Sapper. In either case, they count as both Cover and a Defended Obstacle once deployed.",
+                "glossary": [
+                    {"val": "+2 DICE", "id": "kw_plusdice"},
+                    {"val": "RISKY ACTION", "id": "kw_riskyaction"},
+                    {"val": "Cover", "id": "gl_cover"}
+                ]
+            }
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Shaped into a likeness of the wondrous Anqā bird, and Created by the Imperial School of Military Engineering in association with the House of Wisdom, these movable defensive walls are light and extraordinarily resistant to all damage thanks to a richly-decorated ceramic layer on their outer surface and a secret compound of aramic and alchemical steel at its core. A Sapper can carry one on their back to battle, and with a single press of a button the guard unfolds by spreading its metalling wings and revealing a face of beautiful yet frightening countenance."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_heavy"],
+        "modifiers": []
     }
 ]

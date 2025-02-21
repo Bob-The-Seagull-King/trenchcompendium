@@ -313,5 +313,123 @@
                 }
             }
         ]
+    },
+    {
+        "id": "rl_silahdar",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Silahdar",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "The commanders of the Iron Wall units come from amongst the personal bodyguards of the Sultan known as Silahdar. Each Warband must contain one Silahdrar when it is created. They use the Yüzbaşı characteristics, do not have the Mubarizun Ability. Instead they have the Keyword STRONG and can use any Sapper Only choices from the Armoury. They cost 70 ducats.",
+            "glossary": [
+                {"val": "STRONG", "id": "kw_strong"}
+            ]
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_farfromthesublimegate",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Far from the Sublime Gate",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "The Warband may not include any Lions of Jabir, Yüzbaşi or Assassins. They cannot buy the Cloak of Alamut or the Wind Amulet."
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_sipahi",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Sipahi",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Sipahi Automaton Cavalry often serves as infantry in the Iron Wall units to reinforce areas under severe pressure. They use characteristics of Mamluk Faris Mercenary. They cost 110 ducats. You cannot modify their equipment in any way. You can have up to 1 Sipahi. Note that this does not stop you from recruiting a Mamluk as a mercenary as well. Sipahi can be promoted as any other non-ELITE model.",
+            "glossary": [
+                {"val": "ELITE", "id": "kw_elite"}
+            ]
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_janissaryofficers",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Janissary Officers",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "The Warband may include up to 2 Janissaries acting as officers. They have Keyword ELITE. The Warband may not have any other Janissaries.",
+            "glossary": [
+                {"val": "ELITE", "id": "kw_elite"}
+            ]
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_sappercorps",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Sapper Corps",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "The standard divisions assigned to the Iron wall have double-strength Sapper detachment. This Warband may include up to 4 Sappers."
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_siegejezzailteams",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            "add_to_model": {}
+        },
+        "name": "Siege Jezzail Teams",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "All the members of the Warband are trained to use the Siege Jezzails in pairs. When any model of this Warband shoots a Siege Jezzail and they are within 1” of another member of the Warband, they add +1 DICE to their Ranged Attack to hit roll with the Siege Jezzai.",
+            "glossary": [
+                {"val": "+1 DICE", "id": "kw_plusdice"}
+            ]
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_marksmanshipoftheironwall",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            "add_to_model": {}
+        },
+        "name": "Marksmanship of the Iron Wall",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "All the members of the Warband practise marksmanship from the dizzying heights of the Iron Wall against targets on the ground below. The Elevated position Ranged bonus for this Warband is +2 DICE instead of the usual +1 DICE.",
+            "glossary": [
+                {"val": "+1 DICE", "id": "kw_plusdice"},
+                {"val": "+2 DICE", "id": "kw_plusdice"}
+            ]
+        }
+        ],
+        "options": []
     }
 ]
