@@ -149,7 +149,7 @@ const FactionDisplay = (props: any) => {
                         </div>
                         
                     <div className='abilityInternalStructure'>
-                    <div className="row row-cols-md-2 row-cols-sm-1">
+                    <div className="row row-cols-md-2 row-cols-1">
                         <div className="col">
                         {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "melee" && (containsTag(item.Tags, "exploration_only") == false))).length > 0 &&
                             <>

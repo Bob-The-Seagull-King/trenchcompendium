@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.css'
 import '../../resources/styles/_mainstylesource.scss'
 import React, { useEffect, useRef, useState } from 'react'
+import { Collapse } from "react-bootstrap";
 import { ErrorBoundary } from "react-error-boundary";
 
 // Classes
@@ -26,8 +27,9 @@ const BaseDisplayCompendium = (prop: any) => {
     const [_keyval, updatekey] = useState(1);
     
     const [stateWidth, setWidth] = useState(window.innerWidth);
-
     
+    const [open, setOpen]   = useState(true);
+
     const ref = useRef<HTMLDivElement>(null);
     useEffect(() => {
         const setContentPackWidth = () => {
@@ -76,38 +78,38 @@ const BaseDisplayCompendium = (prop: any) => {
     function returnFilterDOM() {
         return (
             <>
-            <div className="col-12">
-                                <div className="row">
-                                    <div className='col-12'>
+                <div className="col-12">
+                    <div className="row">
+                        <div className='col-12'>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className='col-12'>
+                            <BaseFilterSelectDisplay controller={ViewPageController} runfunction={UpdateSearch}/>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className='col-12'>
+                            <br/>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className='col-12'>
+                            <div className='borderstyler borderdefault no-padding '>
+                                {_foundItems.length == 0 && 
+                                    <div className="">
+                                        <h1 className="subtletext">No {ViewPageController.Collection.CollectionType.pageName} Found</h1>
                                     </div>
-                                </div>
-                                <div className="row">
-                                    <div className='col-12'>
-                                        <BaseFilterSelectDisplay controller={ViewPageController} runfunction={UpdateSearch}/>
+                                }
+                                {_foundItems.map((item) => (
+                                    <div className="col-12 my-0 py-0 no-margin" key={"tableItemDisplay"+item.HeldItem.ID+(_keyval.toString())}>
+                                        <ViewTableItemDisplay key={"tableItemDisplay"+item.HeldItem.ID+(_keyval.toString())} data={item} parent={CollectionController} statefunction={ItemRecall} positionid={getcolor}/>
                                     </div>
-                                </div>
-                                <div className="row">
-                                    <div className='col-12'>
-                                        <br/>
-                                    </div>
-                                </div>
-                                <div className="row">
-                                    <div className='col-12'>
-                                        <div className='borderstyler borderdefault no-padding '>
-                                            {_foundItems.length == 0 && 
-                                                <div className="">
-                                                    <h1 className="subtletext">No {ViewPageController.Collection.CollectionType.pageName} Found</h1>
-                                                </div>
-                                            }
-                                            {_foundItems.map((item) => (
-                                                <div className="col-12 my-0 py-0 no-margin" key={"tableItemDisplay"+item.HeldItem.ID+(_keyval.toString())}>
-                                                    <ViewTableItemDisplay key={"tableItemDisplay"+item.HeldItem.ID+(_keyval.toString())} data={item} parent={CollectionController} statefunction={ItemRecall} positionid={getcolor}/>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </div>
-                                </div>
+                                ))}
                             </div>
+                        </div>
+                    </div>
+                </div>
             </>
         )
     }
@@ -148,11 +150,45 @@ const BaseDisplayCompendium = (prop: any) => {
     return (
         <ErrorBoundary fallback={<div>Something went wrong with BaseDisplayCompendium.tsx</div>}>
         <div className="container" ref={ref} key={_keyval} style={{maxWidth:"100%"}}>
+            
+            
+            <Collapse in={!open}>
+                <div className="row">
+                    <div className={"col-lg-" + (12 + (open? -DisplayPage.width : 0)) + " col-md-" +  (open? -DisplayPage.width : 0) + " col-sm-12 col-xs-12 col-12 my-0 py-0"}>
+                        <div className="row sidebarriers">
+                            <div className="col">
+                                <div className="row sidebarriers">
+                                    <div className="col">
+                                        <div onClick={() => (setOpen(!open))}className='borderstyler backgrounddefault borderdefault hovermouse softpad colorWhite tagText centerPosition'>Reveal/Collapse Search</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </Collapse>
             <div className="row">
                 {/* Display the filters and abilities which match the filters, if any. */}
-                <div className={"col-lg-" + (12-DisplayPage.width) + " col-md-" + (12-DisplayPage.width) + " col-sm-12 col-xs-12 col-12 my-0 py-0"}>
+                
+                
+                            
+            <Collapse in={open}>
+                <div className={"col-lg-" + (12 + (open? -DisplayPage.width : 0)) + " col-md-" +  (open? -DisplayPage.width : 0) + " col-sm-12 col-xs-12 col-12 my-0 py-0"}>
+                    
+            
+                    <div className="row sidebarriers">
+                        <div className="col">
+                            <div className="row sidebarriers">
+                                <div className="col">
+                                    <div onClick={() => (setOpen(!open))}className='borderstyler backgrounddefault borderdefault hovermouse softpad colorWhite tagText centerPosition'>Reveal/Collapse Search</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     {stateWidth > 700 &&
+                    
                         <div className="row p-3 overflow-auto flex-grow-1">
+                            
                             <div className="height80">
                             {returnFilterDOM()}
                             </div>
@@ -164,6 +200,7 @@ const BaseDisplayCompendium = (prop: any) => {
                         </div>
                     }
                 </div>
+                </Collapse>
                 {stateWidth <= 700 &&
                     <>
                         <div className="verticalspacerbig"/>
@@ -173,7 +210,7 @@ const BaseDisplayCompendium = (prop: any) => {
                     </>
                 }
                 {/* Display the selected abilities, if any */}
-                <div className={"col-lg-" + (DisplayPage.width) + " col-md-" + (DisplayPage.width) + " col-sm-12 col-xs-12 col-12"}>
+                <div className={"col-lg-" + (DisplayPage.width+(open? 0 : (12-DisplayPage.width))) + " col-md-" + (DisplayPage.width+(open? 0 : (12-DisplayPage.width))) + " col-sm-12 col-xs-12 col-12"}>
                     
                 {stateWidth > 700 &&
                     <div className="row p-3 overflow-auto flex-grow-1">
