@@ -64,8 +64,8 @@ const HomeRoute: React.FC = () => {
                         <img src={logo} />
                     </div>
                     <div className='row'><div className='col'><br/></div></div>
-                    <div className="row">
-                        <div className="separator"><h3 className="complextext">Content</h3></div>
+                    <div className="row">  
+                        <div className="separator"><h3 className="complextext">Battle</h3></div>
                     </div>
                     <div className="row row-cols-lg-3 row-cols-md-3 row-cols-sx-1 row-cols-xs-1 row-cols-1">
                         
@@ -120,7 +120,7 @@ const HomeRoute: React.FC = () => {
                             </div>
                         </div>
                     </div><div className="row">
-                        <div className="separator"><h3 className="complextext">Content</h3></div>
+                        <div className="separator"><h3 className="complextext">Campaign</h3></div>
                     </div>
                     <div className="row row-cols-lg-3 row-cols-md-3 row-cols-sx-1 row-cols-xs-1 row-cols-1">
                         
