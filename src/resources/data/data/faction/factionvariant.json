@@ -66,7 +66,7 @@
         ],
         "team": "faithful",
         "cut_rules" : [],
-        "rules" : ["rl_alchemists","rl_prideofjabir","rl_privateventure","rl_nobleguardians","rl_kavass","rl_secretsofthehouseofwisdom"],
+        "rules" : ["rl_alchemists","rl_prideofjabir","rl_privateventure","rl_nobleguardians","rl_kavass","rl_secretsofthehouseofwisdom","rl_weaponcollections"],
         "options": []
     }
 ]

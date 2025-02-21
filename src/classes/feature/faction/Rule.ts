@@ -36,6 +36,32 @@ class Rule extends StaticOptionContextObject {
         super(data, parent)
         this.Description = DescriptionFactory(data.description, this);
         this.RunUpgradeOptions();
+        this.RunOptionsParse();
+    }
+
+    public RunOptionsParse() {
+        
+        const EventProc : EventRunner = new EventRunner();
+        for (let i = 0; i < this.MyOptions.length; i++) {
+            EventProc.runEvent(
+                "parseOptionFilterDown",
+                this,
+                [],
+                this.MyOptions[i].Selections,
+                null
+            ).then(result => {
+                this.MyOptions[i].Selections = result;
+                EventProc.runEvent(
+                    "parseOptionsIntoRelevantType",
+                    this,
+                    [],
+                    this.MyOptions[i].Selections,
+                    null
+                ).then(result => {
+                    this.MyOptions[i].Selections = result;
+                });
+            });
+        }
     }
     
 

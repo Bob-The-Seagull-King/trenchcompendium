@@ -1743,5 +1743,106 @@
         "options": [],
         "keywords": ["kw_consumable"],
         "modifiers": []
+    },
+    {
+        "id": "eq_ironcapriote",
+        "name": "Iron Capriote",
+        "source": "core",
+        "tags": {"trait": true, "headgear": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {
+            "ignore_element": {"element": ["kw_shrapnel"]},
+            "keyword_ignore": {"value": "kw_fear"}
+        },
+        "description": [       
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Negates the additional BLOOD MARKERS from weapons with Keyword SHRAPNEL. Makes the model immune to the effects of FEAR.",
+                "glossary": [
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"},
+                    {"val": "SHRAPNEL", "id": "kw_shrapnel"},
+                    {"val": "FEAR", "id": "kw_fear"}
+                ]
+            } 
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "A conical helmet reminiscent of the headgear of the penitents. Blessed by the Church and often containing a fragment of a relic, Iron Capirotes shield their wearers from the psychological horror of war, enabling them to face creatures from the pits of Hell unflinchingly."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_molotovcocktail",
+        "name": "Molotov Cocktail",
+        "source": "core",
+        "tags": {"action": true, "weapon": true},
+        "category": "ranged",
+        "distance": 6,
+        "stats": {
+            "ranged": true
+        },
+        "contextdata": {
+            "get_weapon": {},
+            "injury_bonus": {"type": "dice", "value": -1}},
+        "description": [ 
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "-1 DICE on injury rolls. Molotov Cocktails ignore all penalties for terrain/cover, as well as ignoring all armour on a Critical Attack roll.",
+                "glossary": [
+                    {"val": "-1 DICE", "id": "kw_minusdice"}
+                ]
+            }  
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Developed on the desperate Finnish battle frontier against the Ice Demons, this improvised weapon consists of a glass bottle containing a flammable substance such as gasoline, alcohol or a napalm-like mixture plus a source of ignition."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_fire","kw_assault"],
+        "modifiers": ["-1D to Injuries"]
+    },
+    {
+        "id": "eq_heavyshotgun",
+        "name": "Heavy Shotgun",
+        "source": "core",
+        "tags": {"action": true, "weapon": true},
+        "category": "ranged",
+        "distance": 12,
+        "stats": {
+            "hands_ranged": 2,
+            "ranged": true
+        },
+        "contextdata": {
+            "get_weapon": {},
+            "injury_bonus": {"type": "dice", "value": 2, "condition_type": "range", "condition_value": "short"},
+            "hit_bonus": {"type": "dice", "value": 1}},
+        "description": [ 
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This weapon rolls attacks with +1 DICE and rolls injuries at Short Range with +2 DICE",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "+2 DICE", "id": "kw_plusdice"}
+                ]
+            }  
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Mostly used by Mechanized Heavy Infantry, this massive 8 bore shotgun is used to take down extremely powerful and large opponents at short range. It is known as a “Wolf-Killer” in New Antioch as it is the weapon favoured by the soldiery of the Duke to take down the Heretic War Wolf assault beasts. Heavy Shotguns use tungsten-orichalcum alloy shot which explains their enormous stopping power at short ranges."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_shieldcombo","kw_heavy"],
+        "modifiers": ["+1D to Hit","+2D to Injuries at Short Range"]
     }
 ]

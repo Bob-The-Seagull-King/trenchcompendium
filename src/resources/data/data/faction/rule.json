@@ -207,5 +207,111 @@
             }
         ],
         "options": []
+    },
+    {
+        "id": "rl_weaponcollections",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            "faction_choose_equipment": {
+                "additions": [
+                    {
+                        "list": "fc_trenchpilgrim",
+                        "count": 1,
+                        "option_id": 0,
+                        "restriction": [
+                            { "category": "melee" },
+                            { "category": "ranged" }
+                        ]
+                    },
+                    {
+                        "list": "fc_newantioch",
+                        "count": 1,
+                        "option_id": 1,
+                        "restriction": [
+                            { "category": "melee" },
+                            { "category": "ranged" }
+                        ]
+                    }
+                ]
+            }
+        },
+        "name": "Weapon Collections",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "When you create this warband, choose two weapons. These weapons must be found in either the Armouries of New Antioch or the Trench Pilgrims. These weapons must not already be present in the Iron Sultanate Armoury. Your warband may acquire one from New Antioch and one from the Trench Pilgrim armoury, following all of the same limitations and costs of the original lists. Only one weapon can be picked from this list. If lost in battle, it can be repurchased by paying the indicated cost."
+            }
+        ],
+        "options": [
+            {
+                "ref_id" : "ot_trenchpilgrim",
+                "name" : "Trench Pilgrim Items",
+                "description" : [],
+                "category" : "type",
+                "type" : "text",
+                "strictness" : "strict",
+                "predefined_options" : [],
+                "option_context" : {"basic_option_default":{}},
+                "data_search" : {      
+                    "searchtype": "complex",
+                    "searchparam":    {
+                        "type": "factionequipmentrelationship",
+                        "request":    {
+                            "operator": "and",
+                            "terms": [
+                                {             
+                                    "item": "faction_id",
+                                    "value": "fc_trenchpilgrim",
+                                    "equals": true,
+                                    "strict": true
+                                },
+                                {             
+                                    "item": "faction_id",
+                                    "value": "fc_ironsultanate",
+                                    "equals": false,
+                                    "strict": true
+                                }
+                            ],
+                            "subparams": []
+                        }
+                    }                        
+                }
+            },
+            {
+                "ref_id" : "ot_newantioch",
+                "name" : "New Antioch Items",
+                "description" : [],
+                "category" : "type",
+                "type" : "text",
+                "strictness" : "strict",
+                "predefined_options" : [],
+                "option_context" : {"basic_option_default":{}},
+                "data_search" : {      
+                    "searchtype": "complex",
+                    "searchparam":    {
+                        "type": "factionequipmentrelationship",
+                        "request":    {
+                            "operator": "and",
+                            "terms": [
+                                {             
+                                    "item": "faction_id",
+                                    "value": "fc_newantioch",
+                                    "equals": true,
+                                    "strict": true
+                                },
+                                {             
+                                    "item": "faction_id",
+                                    "value": "fc_ironsultanate",
+                                    "equals": false,
+                                    "strict": true
+                                }
+                            ],
+                            "subparams": []
+                        }
+                    }                        
+                }
+            }
+        ]
     }
 ]

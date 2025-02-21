@@ -53,7 +53,7 @@
         "tags": {},
         "name": "Shotgun",
         "contextdata": {},
-        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut","fc_trenchpilgrim","fc_newantioch"],
         "equipment_id": "eq_shotgun",
         "cost": 10,
         "costtype": 0,
@@ -909,6 +909,48 @@
         },
         "faction_id": ["fc_ironsultanate_fv_houseofwisdom"],
         "equipment_id": "eq_fireshield",
+        "cost": 20,
+        "costtype": 0,
+        "limit": 2
+    },
+    {
+        "id": "rel_fc_eq_ironcapriote",
+        "source": "core",
+        "tags": {
+        },
+        "name": "Iron Capriote",
+        "contextdata": {  
+        },
+        "faction_id": ["fc_trenchpilgrim"],
+        "equipment_id": "eq_ironcapriote",
+        "cost": 7,
+        "costtype": 0,
+        "limit": 0
+    },
+    {
+        "id": "rel_fc_eq_molotovcocktail",
+        "source": "core",
+        "tags": {
+        },
+        "name": "Molotov Cocktail",
+        "contextdata": {  
+        },
+        "faction_id": ["fc_trenchpilgrim"],
+        "equipment_id": "eq_molotovcocktail",
+        "cost": 5,
+        "costtype": 0,
+        "limit": 0
+    },
+    {
+        "id": "rel_fc_eq_heavyshotgun",
+        "source": "core",
+        "tags": {
+        },
+        "name": "Heavy Shotgun",
+        "contextdata": {  
+        },
+        "faction_id": ["fc_newantioch"],
+        "equipment_id": "eq_heavyshotgun",
         "cost": 20,
         "costtype": 0,
         "limit": 2

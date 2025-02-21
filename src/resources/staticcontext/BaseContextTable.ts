@@ -2,7 +2,7 @@ import { DynamicContextObject } from "../../classes/contextevent/dynamiccontexto
 import { CallEventTable, ContextEventEntry } from "./contexteventtypes";
 import { EventRunner } from "../../classes/contextevent/contexteventhandler";
 import { ContextObject } from "../../classes/contextevent/contextobject";
-import { QuestionBase, StaticOptionContextObjectQuestion } from "../../classes/options/StaticOption";
+import { IChoice, QuestionBase, StaticOptionContextObjectQuestion } from "../../classes/options/StaticOption";
 import { containsTag, makestringpresentable } from "../../utility/functions";
 import { getTagValue } from "../../utility/functions";
 import { Equipment, EquipmentLimit, EquipmentRestriction } from "../../classes/feature/equipment/Equipment";
@@ -462,6 +462,15 @@ export const BaseContextCallTable : CallEventTable = {
         getEquipmentRestriction(this: EventRunner, eventSource : any, relayVar : any, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) { 
             relayVar.push(context_func as EquipmentRestriction)
             return relayVar;
+        }
+    },
+    faction_choose_equipment: {
+        event_priotity: 0,
+        async parseOptionsIntoRelevantType(this: EventRunner, eventSource : any, relayVar : IChoice[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null){
+            return relayVar
+        },
+        async parseOptionFilterDown(this: EventRunner, eventSource : any, relayVar : IChoice[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            return relayVar
         }
     }
 }
