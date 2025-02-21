@@ -992,7 +992,7 @@
         "limit": 1
     },
     {
-        "id": "rel_fc_eq_sultanategrandcannon",
+        "id": "rel_fc_eq_sultanategrandcannon_defenders",
         "source": "core",
         "tags": {   
             "faction_eq_restriction": {
