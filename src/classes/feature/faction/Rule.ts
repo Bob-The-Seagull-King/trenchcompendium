@@ -48,7 +48,7 @@ class Rule extends StaticOptionContextObject {
                 this,
                 [],
                 this.MyOptions[i].Selections,
-                null
+                i
             ).then(result => {
                 this.MyOptions[i].Selections = result;
                 EventProc.runEvent(
@@ -56,7 +56,7 @@ class Rule extends StaticOptionContextObject {
                     this,
                     [],
                     this.MyOptions[i].Selections,
-                    null
+                    i
                 ).then(result => {
                     this.MyOptions[i].Selections = result;
                 });

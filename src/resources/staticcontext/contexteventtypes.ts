@@ -23,8 +23,8 @@ export interface CallEvents {
     getModelStatOptions? : (this: EventRunner, eventSource : any, relayVar : ModelStatistics[][], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => ModelStatistics[][]; 
     getModelLimitPresentation? : (this: EventRunner, eventSource : any, relayVar : string[], trackVal : boolean, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<string[]>; 
     getFactionRuleUpgrades? : (this: EventRunner, eventSource : any, relayVar : ModelUpgradeRelationship[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<ModelUpgradeRelationship[]>; 
-    parseOptionsIntoRelevantType? : (this: EventRunner, eventSource : any, relayVar : IChoice[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<IChoice[]>;
-    parseOptionFilterDown? : (this: EventRunner, eventSource : any, relayVar : IChoice[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<IChoice[]>; 
+    parseOptionsIntoRelevantType? : (this: EventRunner, eventSource : any, relayVar : IChoice[], trackVal : number,  context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<IChoice[]>;
+    parseOptionFilterDown? : (this: EventRunner, eventSource : any, relayVar : IChoice[],  trackVal : number, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<IChoice[]>; 
 }
 
 /**
