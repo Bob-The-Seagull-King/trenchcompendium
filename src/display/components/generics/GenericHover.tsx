@@ -27,7 +27,7 @@ const GenericHover = (props: any) => {
       <>
         <OverlayTrigger placement={'auto'} 
           overlay={
-          <Popover.Body className="fit-to-content overcomeTooltip" id="tooltip">
+          <Popover.Body className="fit-to-content overcomeTooltip popover" id="tooltip">
             <div data-theme={theme} className='fit-to-content popupBody font-default'>
               <div className={' fit-to-content modelStructure borderstyler ' + DisplayType + 'border'+getColour(DisplayColour)}>
                   <h1 className={'titleShape titlebody titlestyler ' + DisplayType + 'background'+getColour(DisplayColour)}>
