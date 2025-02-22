@@ -73,7 +73,7 @@ const FactionEquipmenWideDisplay = (props: any) => {
     return (
         <ErrorBoundary fallback={<div>Something went wrong with FactionModelDisplay.tsx</div>}>
             <div key={_keyvar}>
-            <div className='textmaxwidth row'>
+            <div className='textmaxwidth row alignleft'>
                 <div className="col-md-4 col-8">
                     <GenericPopup  d_colour={"default"} titlename={factionequipmentObject.EquipmentItem.Name} d_name={factionequipmentObject.EquipmentItem.Name} d_type={""} d_method={() => 
                         <EquipmentDisplay data={factionequipmentObject.EquipmentItem} />}/>
