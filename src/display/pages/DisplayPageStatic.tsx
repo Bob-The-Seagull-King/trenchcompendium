@@ -339,6 +339,16 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
                                 <FilterTextItem data={item} key="name"/>
                             ))}
                         </div>
+                        
+                        <div className="separator"><h3>TAGS</h3></div>
+                        <div className='tagboxpad'></div>
+                        <div className="row">
+                            <div className="filterbox centerPosition">
+                                {manager.ReturnTagFilters().map((item) => (
+                                    <FilterTagItem key={"tag"+item.TagType.Name} data={item}/>
+                                ))}
+                            </div>
+                        </div>
 
                         <div className="separator"><h3>SOURCES</h3></div>
                         <div className="row">
