@@ -1,10 +1,10 @@
 [
     {
-        "id": "",
+        "id": "sr_test",
         "source": "core",
         "tags": { },
         "contextdata": { },
-        "name": "",
+        "name": "Default Rule",
         "description":  [
             {
             "tags": {"desc_type" : "default"},

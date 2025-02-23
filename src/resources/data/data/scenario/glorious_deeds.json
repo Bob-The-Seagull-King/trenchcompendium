@@ -1,14 +1,94 @@
 [
     {
-        "id": "",
+        "id": "gd_sniper",
         "source": "core",
         "tags": { },
         "contextdata": { },
-        "name": "",
+        "name": "Sniper",
         "description":  [
             {
             "tags": {"desc_type" : "default"},
-            "content": ""
+            "content": "Take out an enemy ELITE in Cover with a shooting attack at Long Range.",
+            "glossary": [{"val": "ELITE", "id": "kw_elite"},{"val": "Cover", "id": "gl_cover"}]
+            }
+        ]
+    },
+    {
+        "id": "gd_lordofwar",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Lord of War",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Take two or more enemy models Out of Action in a single turn with melee attacks with one of your own models."
+            }
+        ]
+    },
+    {
+        "id": "gd_castthemdown",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Cast Them Down",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Make an enemy fall from a height of 3” or more thanks to your action (shooting, melee, Supernatural Power etc.)."
+            }
+        ]
+    },
+    {
+        "id": "gd_bloodletting",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Bloodletting",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Make one of your enemies suffer a sixth BLOOD MARKER with an attack from one of your models.",
+            "glossary": [{"val": "BLOOD MARKER", "id": "kw_bloodmarker"}]
+            }
+        ]
+    },
+    {
+        "id": "gd_holdyourground",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Hold Your Ground",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Pass a Morale Test."
+            }
+        ]
+    },
+    {
+        "id": "gd_suicidalbravery",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Suicidal Bravery",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Charge two enemy models with one of yours during a single Activation."
+            }
+        ]
+    },
+    {
+        "id": "gd_resistandbite",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Resist and Bite",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Take out an enemy with a model that is Down."
             }
         ]
     }
