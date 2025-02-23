@@ -34,6 +34,17 @@ class RuleFactory {
         return rulenew;
     }
 
+    static CreateNewScenarioRule(_val : string, parent : ContextObject | null) {
+        const cache = StaticDataCache.getInstance();
+        const isValid = (cache.CheckID('rule', _val))
+        if (isValid == false) {
+            return cache.RuleCache[_val];
+        }
+        const ruledata = Requester.MakeRequest({searchtype: "id", searchparam: {type: "scenariorule", id: _val}}) as IRule
+        const rulenew = RuleFactory.CreateRule(ruledata, parent)
+        return rulenew;
+    }
+
 }
 
 export {RuleFactory}

@@ -12,6 +12,8 @@ import { IEquipment } from "../../feature/equipment/Equipment";
 import { EquipmentFactory } from "../../../factories/features/EquipmentFactory";
 import { IFaction } from "../../feature/faction/Faction";
 import { FactionFactory } from "../../../factories/features/FactionFactory";
+import { IScenario } from "../../feature/scenario/Scenario";
+import { ScenarioFactory } from "../../../factories/features/ScenarioFactory";
 
 export interface CollectionType {
     searchId      : string,
@@ -99,6 +101,22 @@ export const CollectionDataDex : CollectionDataTable = {
             for (i = 0; i < model.dataresults.length; i++) {
                 const summonNew = FactionFactory.CreateFactionCollection(model.dataresults[i], null);
                 const ItemNew = new ViewTableItem(summonNew, getColour(summonNew.Team));
+                model.itemcollection.push(ItemNew);
+            }
+        }
+    },
+    scenario: {
+        searchId: 'scenario', 
+        pageName: 'scenario',
+        sort: ["name", "id"],
+        postSearch(model : ViewCollectionsModel) {
+            model.CleanupItems();
+            model.CleanupCollection();
+            let i = 0;
+            model.dataresults.sort(byPropertiesOf<IScenario>(["name", "id"]))
+            for (i = 0; i < model.dataresults.length; i++) {
+                const summonNew = ScenarioFactory.CreateScenario(model.dataresults[i], null);
+                const ItemNew = new ViewTableItem(summonNew, getColour('default'));
                 model.itemcollection.push(ItemNew);
             }
         }

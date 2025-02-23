@@ -1,14 +1,14 @@
 [
     {
-        "id": "",
+        "id": "sc_testid",
         "source": "core",
         "tags": {},
         "name": "",
+        "img_link": "",
         "description":  [
             {
             "tags": {"desc_type" : "default"},
-            "content": "",
-            "glossary": [{"val": "", "id": ""}]
+            "content": ""   
             }
         ],
         "forces": {

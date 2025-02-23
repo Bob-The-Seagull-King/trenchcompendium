@@ -114,6 +114,15 @@ class DataResponder {
             case "factionequipmentrelationship": {
                 return RelevantSet.factionequipmentrelationship.concat(data)
             }
+            case "scenario": {
+                return RelevantSet.scenario.concat(data)
+            }
+            case "gloriousdeed": {
+                return RelevantSet.gloriousdeeds.concat(data)
+            }
+            case "scenariorule": {
+                return RelevantSet.scenariorule.concat(data)
+            }
             case "testdynamicfeature": {
                 return RelevantSet.testdynamicdata.concat(data)
             }

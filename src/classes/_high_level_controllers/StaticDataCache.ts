@@ -15,6 +15,8 @@ import { Rule } from "../feature/faction/Rule";
 import { FactionModelRelationship } from "../relationship/faction/FactionModelRelationship";
 import { Requester } from "../../factories/Requester";
 import { FactionEquipmentRelationship } from "../relationship/faction/FactionEquipmentRelationship";
+import { Scenario } from "../feature/scenario/Scenario";
+import { GloriousDeed } from "../feature/scenario/GloriousDeed";
 
 /**
  * Contains the Controller objects for 'Tools' pages.
@@ -40,6 +42,9 @@ class StaticDataCache {
     public FactionCache :  {[tokenid: string]: Faction} = {};
     public RuleCache :  {[tokenid: string]: Rule} = {};
     public FactionModelCache :  {[tokenid: string]: FactionModelRelationship} = {};
+    public ScenarioCache :  {[tokenid: string]: Scenario} = {};
+    public GloriousDeedCache :  {[tokenid: string]: GloriousDeed} = {};
+
 
     public CheckID(cachename : string, id_val : string) {
         switch (cachename) {
@@ -73,6 +78,10 @@ class StaticDataCache {
                 return (this.RuleCache[id_val] == null)
             case 'factionmodel': 
                 return (this.FactionModelCache[id_val] == null)
+            case 'scenario': 
+                return (this.ScenarioCache[id_val] == null)
+            case 'gloriousdeed': 
+                return (this.GloriousDeedCache[id_val] == null)
             default: return false;
         }
     }
@@ -152,6 +161,16 @@ class StaticDataCache {
             case 'factionmodel':   
                 if (this.FactionModelCache[obj.ID] == null) {
                     this.FactionModelCache[obj.ID] = obj as FactionModelRelationship;
+                }
+                return;
+            case 'scenario':   
+                if (this.ScenarioCache[obj.ID] == null) {
+                    this.ScenarioCache[obj.ID] = obj as Scenario;
+                }
+                return;
+            case 'gloriousdeed':   
+                if (this.GloriousDeedCache[obj.ID] == null) {
+                    this.GloriousDeedCache[obj.ID] = obj as GloriousDeed;
                 }
                 return;
             default: return;
