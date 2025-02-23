@@ -1,0 +1,38 @@
+[
+    {
+        "id": "",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "infiltrators": { 
+            "allowed": "",
+            "description": [
+                {
+                    "tags": {"desc_type" : "default"},
+                    "content": "",
+                    "glossary": [{"val": "", "id": ""}]
+                }
+            ]
+        },
+        "deployment": {
+            "description": [
+                {
+                    "tags": {"desc_type" : "default"},
+                    "content": "",
+                    "glossary": [{"val": "", "id": ""}]
+                }
+            ]
+        },
+        "battle_length": { 
+            "min": 0,
+            "max": 0,
+            "description": [
+                {
+                    "tags": {"desc_type" : "default"},
+                    "content": "",
+                    "glossary": [{"val": "", "id": ""}]
+                }
+            ]
+        }
+    }
+]

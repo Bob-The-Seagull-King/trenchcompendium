@@ -1,0 +1,91 @@
+[
+    {
+        "id": "",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "",
+            "glossary": [{"val": "", "id": ""}]
+            }
+        ],
+        "forces": {
+            "even_match": true,
+            "description": [
+                {
+                    "tags": {"desc_type" : "default"},
+                    "content": "",
+                    "glossary": [{"val": "", "id": ""}]
+                }
+            ]
+        },
+        "battlefield": {
+            "field_size":  [
+                {
+                    "tags": {"desc_type" : "default"},
+                    "content": "",
+                    "glossary": [{"val": "", "id": ""}]
+                }
+            ],
+            "standard_terrain": true,
+            "extra_features":  [
+                {
+                    "tags": {"desc_type" : "default"},
+                    "content": "",
+                    "glossary": [{"val": "", "id": ""}]
+                }
+            ]
+         },
+        "infiltrators": { 
+            "allowed": "",
+            "description": [
+                {
+                    "tags": {"desc_type" : "default"},
+                    "content": "",
+                    "glossary": [{"val": "", "id": ""}]
+                }
+            ]
+        },
+        "deployment": {
+            "description": [
+                {
+                    "tags": {"desc_type" : "default"},
+                    "content": "",
+                    "glossary": [{"val": "", "id": ""}]
+                }
+            ]
+        },
+        "battle_length": { 
+            "min": 0,
+            "max": 0,
+            "description": [
+                {
+                    "tags": {"desc_type" : "default"},
+                    "content": "",
+                    "glossary": [{"val": "", "id": ""}]
+                }
+            ]
+        },
+        "victory_conditions": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "",
+                "glossary": [{"val": "", "id": ""}]
+            }
+        ],
+        "glorious_deeds": { 
+            "description": [
+                {
+                    "tags": {"desc_type" : "default"},
+                    "content": "",
+                    "glossary": [{"val": "", "id": ""}]
+                }
+            ],
+            "deeds": [],
+            "optional_deeds": []
+        },
+        "special_rules": [ ]
+    }
+]
