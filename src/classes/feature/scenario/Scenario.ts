@@ -31,11 +31,12 @@ interface BattlefieldData {
 }
 
 interface InfiltratorData {
-    infil_type: number, // 0 = No, 1 = Yes, 2 = Special
+    allowed: number, // 0 = No, 1 = Yes, 2 = Special
     description: []
 }
 
 interface DeploymentData {
+    staggered: boolean,
     description: []
 }
 
@@ -70,6 +71,7 @@ class Scenario extends StaticContextObject {
     public InfiltratorDesc;
 
     public DeploymentDesc;
+    public StaggeredDeployment : boolean;
 
     public VictoryDesc;
 
@@ -101,9 +103,10 @@ class Scenario extends StaticContextObject {
         this.BattlefieldSize = DescriptionFactory(data.battlefield.field_size, this);
         this.BattlefieldExtra = DescriptionFactory(data.battlefield.extra_features, this);
 
-        this.InfiltratorType = data.infiltrators.infil_type;
+        this.InfiltratorType = data.infiltrators.allowed;
         this.InfiltratorDesc = DescriptionFactory(data.infiltrators.description, this);
         
+        this.StaggeredDeployment = data.deployment.staggered;
         this.DeploymentDesc = DescriptionFactory(data.deployment.description, this);
         
         this.VictoryDesc = DescriptionFactory(data.victory_conditions.description, this);

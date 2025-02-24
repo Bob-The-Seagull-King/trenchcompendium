@@ -35,6 +35,7 @@
             "description": []
         },
         "deployment": {
+            "staggered": false,
             "description": [
                 {
                     "tags": {"desc_type" : "default"},
