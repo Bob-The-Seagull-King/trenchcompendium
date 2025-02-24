@@ -66,6 +66,7 @@ class Scenario extends StaticContextObject {
     public StandardTerrain : boolean;
     public BattlefieldSize;
     public BattlefieldExtra;
+    public BattlefieldTerrainStandard : any[] = []
 
     public InfiltratorType : number;
     public InfiltratorDesc;
@@ -85,6 +86,55 @@ class Scenario extends StaticContextObject {
 
     public SpecialRules : Rule[] = [];
 
+    private StandardTerrainData = [
+        {
+            tags: {desc_type : "default"},
+            content: "The player with the lower number of models in their force can place one of the following terrain pieces on the table:"
+        },
+        {
+            tags: {desc_type : "list"},
+            content: "",
+            subcontent:  [
+                {
+                    tags: {desc_type : "default"},
+                    content: "One Building (a tower, house etc.)"
+                },
+                {
+                    tags: {desc_type : "default"},
+                    content: "One Piece of Dangerous Terrain (swamp, barbed wire etc.)"
+                },
+                {
+                    tags: {desc_type : "default"},
+                    content: "One Piece of Difficult Terrain (forest, rocky ground)"
+                },
+                {
+                    tags: {desc_type : "default"},
+                    content: "One Piece of Impassable terrain (12” river with a bridge or ford, sheer cliffs etc.) Maximum two pieces per battle"
+                },
+                {
+                    tags: {desc_type : "default"},
+                    content: "One Hill"
+                },
+                {
+                    tags: {desc_type : "default"},
+                    content: "One Fence/wall/other defendable terrain piece (max one per player)"
+                },
+                {
+                    tags: {desc_type : "default"},
+                    content: "6” Section of a Trench"
+                }
+            ]
+        },
+        {
+            tags: {desc_type : "default"},
+            content: "Each building must be placed at least 8” away from any table edge and at least 6” away from the nearest building terrain piece."
+        },
+        {
+            tags: {desc_type : "default"},
+            content: "In addition, both players should add six smaller terrain pieces like boxes, sandbags, bomb craters, wells, fountains etc. anywhere on the table to create cover."
+        }
+    ]
+
     /**
      * Assigns parameters and creates a series of description
      * objects with DescriptionFactory
@@ -102,6 +152,7 @@ class Scenario extends StaticContextObject {
         this.StandardTerrain = data.battlefield.standard_terrain;
         this.BattlefieldSize = DescriptionFactory(data.battlefield.field_size, this);
         this.BattlefieldExtra = DescriptionFactory(data.battlefield.extra_features, this);
+        this.BattlefieldTerrainStandard = DescriptionFactory(this.StandardTerrainData, this);
 
         this.InfiltratorType = data.infiltrators.allowed;
         this.InfiltratorDesc = DescriptionFactory(data.infiltrators.description, this);

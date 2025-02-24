@@ -32,7 +32,12 @@
          },
         "infiltrators": { 
             "allowed": 0,
-            "description": []
+            "description": [                
+                {
+                    "tags": {"desc_type" : "default"},
+                    "content": "Infiltrators cannot be used in this Scenario."
+                }
+            ]
         },
         "deployment": {
             "staggered": false,
@@ -56,7 +61,12 @@
         "battle_length": { 
             "min": 4,
             "max": 4,
-            "description": [ ]
+            "description": [                            
+                {
+                    "tags": {"desc_type" : "default"},
+                    "content": "The battle lasts for four turns."
+                }
+            ]
         },
         "victory_conditions":{ "description": [
             {

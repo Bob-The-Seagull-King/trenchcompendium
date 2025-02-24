@@ -21,7 +21,6 @@ import { getMoveType, getPotential, getBaseSize } from '../../../../utility/func
 const ScenarioDisplay = (props: any) => {
     const scenarioObject: Scenario = props.data
 
-    
     function ReturnStats(statlist : Scenario) {
         return (
             <div>
@@ -40,69 +39,145 @@ const ScenarioDisplay = (props: any) => {
 
     return (
         <ErrorBoundary fallback={<div>Something went wrong with ScenarioDisplay.tsx</div>}>
-            <div className='abilityInternalStructure'>
+            
+            <div>
+                <div className='abilityInternalStructure'>
+                    
+                    <div className='row row-cols-md-2 row-cols-1'>
+                        <div className='col'>
+                            <img src={scenarioObject.ImgLink} style={{width:"100%"}}/>
+                        </div>
+                        <div className='col'>
+                            <div className='row'>
+                                {ReturnStats(scenarioObject)}
+                            </div>
+                            <div className='separator bodytext tagboxpad colordefault'>Glorious Deeds</div>
+                            <div className="row">
+                                {returnDescription(scenarioObject, scenarioObject.DeedsDesc)}
+
+                                {scenarioObject.Deeds.map((item) => ( 
+                                    <span key={"faction_rule_"+scenarioObject.ID+"_rule_id_"+item.ID}>
+                                        <GenericPopup titlename={item.Name}  d_colour={"default"} d_name={item.Name} d_type={""} d_method={() => <GloriousDeedDisplay data={item} />}/>
+                                    </span>
+                                )) }
+
+                                {scenarioObject.OptionalDeeds.length > 0 &&
+                                <div>
+                                    {"If agreed by the players prior to starting the game, you may replace one of the Glory Deeds above for one of the following options:"}
+                                </div>
+                                }
+                                
+                                {scenarioObject.OptionalDeeds.map((item) => ( 
+                                    <div key={"faction_rule_"+scenarioObject.ID+"_rule_id_"+item.ID}>
+                                        <GenericPopup titlename={item.Name}  d_colour={"default"}  d_name={item.Name} d_type={"sub"} d_method={() => <GloriousDeedDisplay data={item} />}/>
+                                        <div className="verticalspacerbig"/>
+                                    </div>
+                                )) }
+                            </div>
+                        </div>
+                    </div>                        
+                    <div className='row'>
+                        {returnDescription(scenarioObject, scenarioObject.Description)}
+                    </div>                    
+                </div>
                 
-                <div className='row row-cols-md-2 row-cols-1'>
-                    <div className='col'>
-                        <img src={scenarioObject.ImgLink} style={{width:"100%"}}/>
+                <div>                    
+                    <div className="row">
+                        <div className="verticalspacerbig"/>
+                        <div className="verticalspacerbig"/>
                     </div>
-                    <div className='col'>
+                    <div  className={'titleShape titlebody backgrounddefault'}>
+                            {"Terrain and Setup"}
+                        </div>
+                        
+                    <div className='abilityInternalStructure'>
+                        
+                        <div className='row row-cols-md-2 row-cols-1'>
+                            
+                            <div className='col'>                                
+                                <div className='separator bodytext tagboxpad colordefault'>Forces</div>
+                                {returnDescription(scenarioObject, scenarioObject.ForcesDesc)}
+                            </div>
+                            <div className='col'>                                
+                                <div className='separator bodytext tagboxpad colordefault'>Infiltrators</div>
+                                {returnDescription(scenarioObject, scenarioObject.InfiltratorDesc)}
+                            </div>
+                        </div>
                         
                         <div className='row'>
-                            {returnDescription(scenarioObject, scenarioObject.Description)}
+                            <div className="verticalspacerbig"/>
                         </div>
-                        <div className='row'>
-                            {ReturnStats(scenarioObject)}
-                        </div>
-                        <div className='separator bodytext tagboxpad colordefault'>Glorious Deeds</div>
-                        <div className="row">
-                            {returnDescription(scenarioObject, scenarioObject.DeedsDesc)}
-
-                            {scenarioObject.Deeds.map((item) => ( 
-                                <span key={"faction_rule_"+scenarioObject.ID+"_rule_id_"+item.ID}>
-                                    <GenericPopup titlename={item.Name}  d_colour={"default"} d_name={item.Name} d_type={""} d_method={() => <GloriousDeedDisplay data={item} />}/>
-                                </span>
-                            )) }
-
-                            {scenarioObject.OptionalDeeds.length > 0 &&
-                            <div>
-                                {"If agreed by the players prior to starting the game, you may replace one of the Glory Deeds above for one of the following options:"}
-                            </div>
-                            }
+                        <div className='row row-cols-md-2 row-cols-1'>
                             
-                            {scenarioObject.OptionalDeeds.map((item) => ( 
-                                <div key={"faction_rule_"+scenarioObject.ID+"_rule_id_"+item.ID}>
-                                    <GenericPopup titlename={item.Name}  d_colour={"default"}  d_name={item.Name} d_type={"sub"} d_method={() => <GloriousDeedDisplay data={item} />}/>
-                                    <div className="verticalspacerbig"/>
-                                </div>
-                            )) }
+                            <div className='col'>                                
+                                <div className='separator bodytext tagboxpad colordefault'>Battlefield</div>
+                                {returnDescription(scenarioObject, scenarioObject.BattlefieldSize)}
+                                <div className="verticalspacerbig"/>
+                                {returnDescription(scenarioObject, scenarioObject.BattlefieldExtra)}
+                                {scenarioObject.StandardTerrain == true &&
+                                    <>
+                                        <div className="verticalspacerbig"/>
+                                        {returnDescription(scenarioObject, scenarioObject.BattlefieldTerrainStandard)}
+                                    </>
+                                }
+                            </div>
+                            <div className='col'>                                
+                                <div className='separator bodytext tagboxpad colordefault'>Deployment</div>
+                                {returnDescription(scenarioObject, scenarioObject.DeploymentDesc)}
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div className='row'>
-                    {"Forces and Infiltrators"}
-                </div>
-                <div className='row'>
-                    {"Battlefield and Deployment"}
-                </div>
-                <div className='row'>
-                    {"Victory and Battle Length"}
+
+                <div>                    
+                    <div className="row">
+                        <div className="verticalspacerbig"/>
+                        <div className="verticalspacerbig"/>
+                    </div>
+                    <div  className={'titleShape titlebody backgrounddefault'}>
+                            {"Playing the Game"}
+                        </div>
+                        
+                    <div className='abilityInternalStructure'>
+                        
+                        <div className='row'>
+                            <div className='separator bodytext tagboxpad colordefault'>Battle Length</div>
+                            {returnDescription(scenarioObject, scenarioObject.BattlelengthDesc)}
+                        </div>
+                        
+                        <div className='row'>
+                            <div className="verticalspacerbig"/>
+                        </div>
+                        <div className='row'>
+                            <div className='separator bodytext tagboxpad colordefault'>Victory Conditions</div>
+                            {returnDescription(scenarioObject, scenarioObject.VictoryDesc)}
+                        </div>
+                    </div>
                 </div>
                 {scenarioObject.SpecialRules.length > 0 &&
-                    <>
-                        <div className='separator bodytext tagboxpad colordefault'>Special Rules</div>
-                        <div className="verticalspacerbig"/>
+                    
+                    <div>                    
                         <div className="row">
-                            {scenarioObject.SpecialRules.map((item) => ( 
-                                <div key={"faction_rule_"+scenarioObject.ID+"_rule_id_"+item.ID}>
-                                    <GenericDisplay  d_colour={"default"} d_name={item.Name} d_type={"sub"} d_method={() => <RuleDisplay data={item} />}/>
-                                    <div className="verticalspacerbig"/>
-                                </div>
-                            )) }
+                            <div className="verticalspacerbig"/>
+                            <div className="verticalspacerbig"/>
                         </div>
-                    </>
+                        <div  className={'titleShape titlebody backgrounddefault'}>
+                                {"Special Rules"}
+                            </div>
+                            
+                        <div className='abilityInternalStructure'>
+                            <div className="row">
+                                
+                                {scenarioObject.SpecialRules.map((item) => ( 
+                                    <div key={"faction_rule_"+scenarioObject.ID+"_rule_id_"+item.ID}>
+                                        <GenericDisplay  d_colour={"default"} d_name={item.Name} d_type={"sub"} d_method={() => <RuleDisplay data={item} />}/>
+                                        <div className="verticalspacerbig"/>
+                                    </div>
+                                )) }
+                            </div>
+                        </div>
+                    </div>
                 }
-                
             </div>
         </ErrorBoundary>
     )
