@@ -26,6 +26,8 @@ import en_factionequipmentrelationship from '../data/relationships/factionequipm
 import en_scenario from '../data/scenario/scenarios.json'
 import en_gloriousdeeds from '../data/scenario/glorious_deeds.json'
 import en_scenariorule from '../data/scenario/scenario_rule.json'
+import en_scenarioobjectives from '../data/scenario/gen_scenarios_objective.json'
+import en_scenariodeployments from '../data/scenario/gen_scenarios_deployment.json'
 
 import en_testdynamic from '../data/testitemscontext/testitemdynamic.json'
 import en_teststatic from '../data/testitemscontext/testitemstatic.json'
@@ -58,6 +60,8 @@ export interface DataSetTC {
     scenario : any,
     gloriousdeeds : any,
     scenariorule : any,
+    scenarioobjectives : any,
+    scenariodeployments : any,
     testdynamicdata : any,
     teststaticdata : any,
     testbasicdata : any
@@ -84,6 +88,8 @@ export const DataByLanguageTable : LanguageDataTable = {
         scenario : en_scenario,
         gloriousdeeds : en_gloriousdeeds,
         scenariorule : en_scenariorule,
+        scenarioobjectives : en_scenarioobjectives,
+        scenariodeployments : en_scenariodeployments,
         testdynamicdata : en_testdynamic,
         teststaticdata : en_teststatic,
         testbasicdata : en_testbasic

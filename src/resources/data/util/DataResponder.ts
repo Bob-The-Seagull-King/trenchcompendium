@@ -123,6 +123,12 @@ class DataResponder {
             case "scenariorule": {
                 return RelevantSet.scenariorule.concat(data)
             }
+            case "scenarioobjective": {
+                return RelevantSet.scenarioobjectives.concat(data)
+            }
+            case "scenariodeployment": {
+                return RelevantSet.scenariodeployments.concat(data)
+            }
             case "testdynamicfeature": {
                 return RelevantSet.testdynamicdata.concat(data)
             }

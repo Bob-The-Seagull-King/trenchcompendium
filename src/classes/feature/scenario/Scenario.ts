@@ -32,7 +32,7 @@ interface BattlefieldData {
 
 interface InfiltratorData {
     allowed: number, // 0 = No, 1 = Yes, 2 = Special
-    description: []
+    description: any[]
 }
 
 interface DeploymentData {
@@ -47,13 +47,13 @@ interface VictoryData {
 interface BattleLengthData {
     min : number,
     max : number,
-    description: []
+    description: any[]
 }
 
 interface GloriousDeedData {
     deeds : string[],
     optional_deeds : string[],
-    description: []
+    description: any[]
 }
 
 class Scenario extends StaticContextObject {
