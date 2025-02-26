@@ -4,7 +4,7 @@
         "source": "core",
         "tags": {},
         "name": "Chance Encounter",
-        "img_link": "https://i.imgur.com/jYKeLrM.png",
+        "img_link": "https://i.imgur.com/DcDF3g3.png",
         "deployment": {
             "description": [
                 {
@@ -30,7 +30,7 @@
         "source": "core",
         "tags": {},
         "name": "Standard Deployment",
-        "img_link": "https://i.imgur.com/jYKeLrM.png",
+        "img_link": "https://i.imgur.com/Mg5oEpE.png",
         "deployment": {
             "description": [
                 {
@@ -46,7 +46,7 @@
         "source": "core",
         "tags": {},
         "name": "Flank Attack",
-        "img_link": "https://i.imgur.com/jYKeLrM.png",
+        "img_link": "https://i.imgur.com/umrbcTw.png",
         "deployment": {
             "description": [
                 {
@@ -62,7 +62,7 @@
         "source": "core",
         "tags": {},
         "name": "Long Distance Battle",
-        "img_link": "https://i.imgur.com/jYKeLrM.png",
+        "img_link": "https://i.imgur.com/kDUcXVa.png",
         "deployment": {
             "description": [
                 {
@@ -78,7 +78,7 @@
         "source": "core",
         "tags": {},
         "name": "Tunnels",
-        "img_link": "https://i.imgur.com/jYKeLrM.png",
+        "img_link": "https://i.imgur.com/YGGcpEu.png",
         "infiltrators": { 
             "allowed": 1,
             "description": [
@@ -108,7 +108,7 @@
         "source": "core",
         "tags": {},
         "name": "Fog of War",
-        "img_link": "https://i.imgur.com/jYKeLrM.png",
+        "img_link": "https://i.imgur.com/SPpR57V.png",
         "deployment": {
             "description": [
                 {

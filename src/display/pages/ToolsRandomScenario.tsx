@@ -27,15 +27,17 @@ const ToolsRandomScenario = (prop: any) => {
     // Return result -----------------------------
     return (
         <ErrorBoundary fallback={<div>Something went wrong with ToolsRandomScenario.tsx</div>}>
-            <div className="abilityInternalStructure">
-                <div className="row">
-                    <div onClick={() => (newScenario())}className='borderstyler backgrounddefault borderdefault hovermouse softpad colorWhite tagText centerPosition'>New Scenario</div>
-                </div>
-                <div className="row">
-                    <div className="verticalspacerbig"/>
-                </div>
-                <div className="row">
-                    <GenericDisplay  d_colour={"default"} d_name={_currentItem.Name} d_type={""} d_method={() => <ScenarioDisplay data={_currentItem} />}/>
+            <div className="row justify-center">
+                <div className="col-md-10 col-sm-12">
+                    <div className="">
+                        <div onClick={() => (newScenario())}className='borderstyler backgrounddefault borderdefault hovermouse softpad colorWhite tagText centerPosition'>New Scenario</div>
+                    </div>
+                    <div className="row">
+                        <div className="verticalspacerbig"/>
+                    </div>
+                    <div className="">
+                        <GenericDisplay  d_colour={"default"} d_name={_currentItem.Name} d_type={""} d_method={() => <ScenarioDisplay data={_currentItem} />}/>
+                    </div>
                 </div>
             </div>
         </ErrorBoundary>

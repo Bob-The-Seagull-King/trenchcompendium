@@ -34,7 +34,7 @@ class ScenarioGenerator {
     public ListOfDeedsGroupB : GloriousDeed[] = [];
     public ListOfDeedsGroupC : GloriousDeed[] = [];
 
-    public CurrentScenario : Scenario = ScenarioFactory.CreateNewScenario("sc_claimnomansland", null);
+    public CurrentScenario : Scenario;
     
     /**
      * Assigns parameters and creates a series of description
@@ -45,10 +45,10 @@ class ScenarioGenerator {
     {
         this.GatherObjectives();
         this.GatherDeployments();
-        this.BuildDeeds(0, this.ListOfDeedsGroupA);
+        this.BuildDeeds(3, this.ListOfDeedsGroupA);
         this.BuildDeeds(1, this.ListOfDeedsGroupB);
         this.BuildDeeds(2, this.ListOfDeedsGroupC);
-        //this.CurrentScenario = this.ConstructNewScenario();
+        this.CurrentScenario = this.ConstructNewScenario();
     }
 
     public ResetScenario() {
@@ -76,7 +76,7 @@ class ScenarioGenerator {
             {
                 searchtype: "complex", 
                 searchparam: {
-                    type: "factionequipmentrelationship",
+                    type: "gloriousdeed",
                     request: {
                         operator: 'and',
                         terms: [
@@ -104,16 +104,18 @@ class ScenarioGenerator {
     public ConstructNewScenario() {
         if (this.ListOfObjectives.length === 0) throw new Error("No objectives available.");
         if (this.ListOfDeedsGroupC.length === 0) throw new Error("No deeds available in Group C.");
-
+        
+        
         const ChosenObjective : GenerateObjective = this.ListOfObjectives[Math.floor(Math.random() * this.ListOfObjectives.length)]
         const FilteredDeploymentList : GenerateDeployment[] = this.ListOfDeployments.filter((item) => (!ChosenObjective.banned_deployments.includes(item.id)))
         if (FilteredDeploymentList.length === 0) throw new Error("No valid deployments available.");
+        
         const ChosenDeployment : GenerateDeployment = FilteredDeploymentList[Math.floor(Math.random() * FilteredDeploymentList.length)]
-
+        
         const DeedsGroupA : GloriousDeed[] = this.getTwoRandomElements(this.ListOfDeedsGroupA);
         const DeedsGroupB : GloriousDeed[] = this.getTwoRandomElements(this.ListOfDeedsGroupB);
         const DeedsGroupC : GloriousDeed[] = [this.ListOfDeedsGroupC[Math.floor(Math.random() * this.ListOfDeedsGroupC.length)]]
-
+        
         const AllDeedsCombined : string[] = []
         for (let i = 0; i < DeedsGroupA.length; i++) {AllDeedsCombined.push(DeedsGroupA[i].ID)}
         for (let i = 0; i < DeedsGroupB.length; i++) {AllDeedsCombined.push(DeedsGroupB[i].ID)}
@@ -164,14 +166,15 @@ class ScenarioGenerator {
         }
 
         return ScenarioFactory.CreateScenario(NewScenarioJson, null);
+        
     }
 
-    public getTwoRandomElements<T>(arr: T[]): [T, T] {      
+    public getTwoRandomElements<T>(arr: any[]) {      
         const index1 = Math.floor(Math.random() * arr.length);
-        let index2;
-        do {
+        let index2 = index1;
+        while (index2 === index1) {
             index2 = Math.floor(Math.random() * arr.length);
-        } while (index2 === index1);
+        }
         
         return [arr[index1], arr[index2]];
     }

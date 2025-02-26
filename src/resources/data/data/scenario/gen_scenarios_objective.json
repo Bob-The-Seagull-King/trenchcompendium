@@ -33,12 +33,12 @@
                 }
             ]
         },
-        "victory_conditions": [
+        "victory_conditions":{ "description": [
             {
                 "tags": {"desc_type" : "default"},
                 "content": "At the end of the game, each player totals up the ducat value of their enemy models that they have taken Out of Action and divides the number by 100, rounding any fractions up to find the number of Victory Points each player has scored. Troops bought with Glory Points are worth 30 ducats per Glory Point for this calculation. The highest scoring player wins. You gain +1 Victory Point for each enemy you kill on the opposing half of the table from your own."
             }
-        ],
+        ]},
         "special_rules": [ ],
         "banned_deployments": [ ]
     },
@@ -80,7 +80,7 @@
                 }
             ]
         },
-        "victory_conditions": [
+        "victory_conditions":{ "description": [
             {
                 "tags": {"desc_type" : "default"},
                 "content": "To hold an objective, a player must have a model within 3” of the marker and there must be no enemy models at all within 3” of the same marker. If either of these conditions is not met, that objective is not held by any player."
@@ -90,7 +90,7 @@
                 "tags": {"desc_type" : "default"},
                 "content": "After the game ends, the players determine how many objectives they control. The player with the most objective markers wins. If they hold the same number of objectives, the game is a draw."
             }
-        ],
+        ]},
         "special_rules": [ ],
         "banned_deployments": [ ]
     },
@@ -132,7 +132,7 @@
                 }
             ]
         },
-        "victory_conditions": [
+        "victory_conditions":{ "description": [
             {
                 "tags": {"desc_type" : "default"},
                 "content": "The players roll-off and the winner decides to be the attacker or defender. During the game, the attacker can destroy the objectives by planting mines/demolition charges or other explosives on them."
@@ -147,7 +147,7 @@
                 "tags": {"desc_type" : "default"},
                 "content": "After the game ends, if the attacker has destroyed more objectives than their opponent, the Attacker wins. If less, then the Attacker loses. If both players have destroyed exactly the same number of the objectives, the game is adraw."
             }
-        ],
+        ]},
         "special_rules": [ ],
         "banned_deployments": [ ]
     },
@@ -184,7 +184,7 @@
                 }
             ]
         },
-        "victory_conditions": [
+        "victory_conditions":{ "description": [
             {
                 "tags": {"desc_type" : "default"},
                 "content": "After rolling for setup type, and just before starting the Setup Warbands step, the players roll off and the winner picks any of the four table edges for their opponent to escape from. Then the opponent does the same, but they cannot pick the same table edge picked by the first player."
@@ -199,7 +199,7 @@
                 "tags": {"desc_type" : "default"},
                 "content": "At the end of the game, each player totals up the ducat value of their own models that have escaped the battlefield and divides the number by 100, rounding any fractions up to find the number of Victory Points each player has scored. Troops bought with Glory Points are worth 30 ducats per Glory Point for this calculation. The highest scoring player wins."
             }
-        ],
+        ]},
         "special_rules": [ ],
         "banned_deployments": [ ]
     },
@@ -241,7 +241,7 @@
                 }
             ]
         },
-        "victory_conditions": [
+        "victory_conditions":{ "description": [
             {
                 "tags": {"desc_type" : "default"},
                 "content": "During the game, any model that ends its move in contact with the marker picks it up. That model is now carrying the object and will carry it until it leaves the table or is destroyed. As long as it is carrying the object, the model cannot Attack and cannot Dash and no other method of movement (teleportation, Puppet Master etc.) can be used to move the model due the mystical effect of the relic! At the end of its activation, the model can pass the object to any friendly model within 1” range, as long as neither model is in melee combat with an enemy. The model receiving the object is considered to have ended their Activation this turn, if it has not have done so yet."
@@ -261,7 +261,7 @@
                 "tags": {"desc_type" : "default"},
                 "content": "If the game ends while a model is carrying the object, the players roll off with D6 one last time. If the player controlling the model carrying the objective wins the roll-off, they win the game. In any other case, the game is a draw."
             }
-        ],
+        ]},
         "special_rules": [ ],
         "banned_deployments": [ ]
     },
@@ -303,12 +303,12 @@
                 }
             ]
         },
-        "victory_conditions": [
+        "victory_conditions":{ "description": [
             {
                 "tags": {"desc_type" : "default"},
                 "content": "At the end of the battle, players score 1 Victory Point for each of their own trenches they hold where there are no enemy models in the same trench section. They gain 1 Victory Point for each enemy trench they have that has at least one of their own models and 2 VPs if there are no enemy models in the trench."
             }
-        ],
+        ]},
         "special_rules": [ ],
         "banned_deployments": ["sd_chanceencounter" ]
     }

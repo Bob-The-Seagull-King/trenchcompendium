@@ -42,7 +42,7 @@
     {
         "id": "gd_bloodletting",
         "source": "core",
-        "tags": { "random_gen_group": 0 },
+        "tags": { "random_gen_group": 3 },
         "contextdata": { },
         "name": "Bloodletting",
         "description":  [
@@ -95,7 +95,7 @@
     {
         "id": "gd_reaper",
         "source": "core",
-        "tags": { "random_gen_group": 0 },
+        "tags": { "random_gen_group": 3 },
         "contextdata": { },
         "name": "Reaper",
         "description":  [
@@ -109,7 +109,7 @@
     {
         "id": "gd_sharpshooter",
         "source": "core",
-        "tags": { "random_gen_group": 0 },
+        "tags": { "random_gen_group": 3 },
         "contextdata": { },
         "name": "Sharpshooter",
         "description":  [
@@ -123,7 +123,7 @@
     {
         "id": "gd_feignedretreat",
         "source": "core",
-        "tags": { "random_gen_group": 0 },
+        "tags": { "random_gen_group": 3 },
         "contextdata": { },
         "name": "Feigned Retreat",
         "description":  [
@@ -136,7 +136,7 @@
     {
         "id": "gd_fickleluck",
         "source": "core",
-        "tags": { "random_gen_group": 0 },
+        "tags": { "random_gen_group": 3 },
         "contextdata": { },
         "name": "Fickle Luck",
         "description":  [
@@ -154,7 +154,7 @@
     {
         "id": "gd_headhunter",
         "source": "core",
-        "tags": { "random_gen_group": 0 },
+        "tags": { "random_gen_group": 3 },
         "contextdata": { },
         "name": "Head Hunter",
         "description":  [
