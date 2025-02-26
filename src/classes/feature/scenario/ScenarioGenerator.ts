@@ -20,7 +20,7 @@ interface GenerateObjective extends IContextObject {
 
 interface GenerateDeployment extends IContextObject {
     img_link : string,
-    infiltrators : InfiltratorData,
+    infiltrators? : InfiltratorData,
     deployment : DeploymentData,
     battle_length? : BattleLengthData,
     special_rules : string[]
@@ -34,7 +34,7 @@ class ScenarioGenerator {
     public ListOfDeedsGroupB : GloriousDeed[] = [];
     public ListOfDeedsGroupC : GloriousDeed[] = [];
 
-    public CurrentScenario : Scenario;
+    public CurrentScenario : Scenario = ScenarioFactory.CreateNewScenario("sc_claimnomansland", null);
     
     /**
      * Assigns parameters and creates a series of description
@@ -48,8 +48,7 @@ class ScenarioGenerator {
         this.BuildDeeds(0, this.ListOfDeedsGroupA);
         this.BuildDeeds(1, this.ListOfDeedsGroupB);
         this.BuildDeeds(2, this.ListOfDeedsGroupC);
-
-        this.CurrentScenario = this.ConstructNewScenario();
+        //this.CurrentScenario = this.ConstructNewScenario();
     }
 
     public ResetScenario() {
@@ -117,9 +116,9 @@ class ScenarioGenerator {
         for (let i = 0; i << DeedsGroupC.length; i++) {AllDeedsCombined.push(DeedsGroupC[i].ID)}
 
         const NewScenarioJson : IScenario = {
-            id: "",
-            name: "",
-            source: "", 
+            id: ChosenObjective.id+"_"+ChosenDeployment.id,
+            name: ChosenObjective.name+" | "+ChosenDeployment.name,
+            source: "core", 
             tags: {},
             contextdata : {},
             description: [],
@@ -127,8 +126,13 @@ class ScenarioGenerator {
             forces : ChosenObjective.forces,
             battlefield : ChosenObjective.battlefield,
             infiltrators : {
-                allowed: (ChosenObjective.infiltrators? ChosenObjective.infiltrators.allowed : ChosenDeployment.infiltrators.allowed),
-                description: (ChosenObjective.infiltrators? ChosenObjective.infiltrators.description.concat(ChosenDeployment.infiltrators.description) : ChosenDeployment.infiltrators.description)
+                allowed: (ChosenDeployment.infiltrators? ChosenDeployment.infiltrators.allowed : ChosenObjective.infiltrators? ChosenObjective.infiltrators.allowed : 0),
+                description: (ChosenDeployment.infiltrators? ChosenDeployment.infiltrators.description : ChosenObjective.infiltrators? ChosenObjective.infiltrators.description : [
+                    {
+                        tags: {desc_type : "default"},
+                        content: "Infiltrators can be deployed."
+                    }
+                ])
             },
             deployment : ChosenDeployment.deployment,
             battle_length : (ChosenDeployment.battle_length? ChosenDeployment.battle_length : { 

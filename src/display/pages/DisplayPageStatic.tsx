@@ -318,7 +318,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         }
     },
     scenario: {
-        searchId: 'model',
+        searchId: 'scenario',
         width: 9,
         returnDisplay(item: any) {
             return (

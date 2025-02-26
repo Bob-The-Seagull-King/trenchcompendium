@@ -13,7 +13,7 @@ import logo from '../../resources/images/compendium.png'
 
 // Font Awesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChess, faGun, faKey, faList, faPeopleGroup, faPersonMilitaryRifle, faSquare } from '@fortawesome/free-solid-svg-icons'
+import { faChess, faGun, faKey, faList, faPeopleGroup, faPersonMilitaryRifle, faQuestion, faSquare } from '@fortawesome/free-solid-svg-icons'
 import { faFileLines, faCoins, faCross } from '@fortawesome/free-solid-svg-icons'
 
 // TEST
@@ -197,8 +197,8 @@ const HomeRoute: React.FC = () => {
                             </div>
                         </div>
                         <div className="col softpad">
-                            <div className="basestructure pageaccessbox borderstyler subborderdefault hovermouse" onClick={() => NavigateHome("")}>
-                                <FontAwesomeIcon icon={faSquare} className="pageaccestext"/>
+                            <div className="basestructure pageaccessbox borderstyler subborderdefault hovermouse" onClick={() => NavigateHome("tools/randomscenario/")}>
+                                <FontAwesomeIcon icon={faQuestion} className="pageaccestext"/>
                                 <h1 className="pageaccestext">
                                     RANDOM SCENARIO
                                 </h1>

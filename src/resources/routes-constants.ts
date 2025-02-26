@@ -13,6 +13,7 @@ export const ROUTES = {
     COMPENDIUM_SCENARIO_ROUTE: '/scenario/*',
     
     TOOLS_CONTENT_UPLOAD_ROUTE: '/content/*',
-    TOOLS_CONTENT_SAVE_ITEM: '/saveitem/*'
+    TOOLS_CONTENT_SAVE_ITEM: '/saveitem/*',
+    TOOLS_SCENARIO_GENERATOR: '/randomscenario/*'
 
 }

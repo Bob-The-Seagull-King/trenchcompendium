@@ -1,5 +1,6 @@
 import { ItemManager } from '../saveitems/itemmanager';
 import { ContentPackManager } from '../contentpacks/contentmanager'
+import { ScenarioGenerator } from '../feature/scenario/ScenarioGenerator';
 
 /**
  * Contains the Controller objects for 'Tools' pages.
@@ -10,6 +11,7 @@ class ToolsController {
    
     ContentManager;
     SaveItemManager;
+    RandomScenarioManager;
 
     /**
      * Initializes all controllers, this also means all initialization
@@ -18,6 +20,7 @@ class ToolsController {
     constructor () {
         this.ContentManager = new ContentPackManager()
         this.SaveItemManager = new ItemManager();
+        this.RandomScenarioManager = new ScenarioGenerator();
     }
 
 }

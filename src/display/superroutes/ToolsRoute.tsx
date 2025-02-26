@@ -12,6 +12,7 @@ import ToolsSavedItem from '../../display/pages/ToolsSaveItem'
 
 import { useGlobalState } from './../../utility/globalstate'
 import { ToolsController } from '../../classes/_high_level_controllers/ToolsController'
+import ToolsRandomScenario from '../pages/ToolsRandomScenario';
 
 interface IControllerProp {
     controller : ToolsController; // The controller being inserted
@@ -35,6 +36,7 @@ const ToolsRoute: React.FC<IControllerProp> = (prop) => {
                 <Routes>
                     <Route path={ROUTES.TOOLS_CONTENT_UPLOAD_ROUTE} element={<ToolsContentManager manager={prop.controller.ContentManager}/>} />
                     <Route path={ROUTES.TOOLS_CONTENT_SAVE_ITEM} element={<ToolsSavedItem manager={prop.controller.SaveItemManager}/>} />
+                    <Route path={ROUTES.TOOLS_SCENARIO_GENERATOR} element={<ToolsRandomScenario manager={prop.controller.RandomScenarioManager}/>} />
                 </Routes>
             </div>
         </ErrorBoundary>

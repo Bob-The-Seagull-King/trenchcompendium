@@ -1,17 +1,90 @@
 [
     {
-        "id": "",
+        "id": "sd_chanceencounter",
         "source": "core",
         "tags": {},
-        "name": "",
-        "img_link": "",
-        "infiltrators": { 
-            "allowed": "",
+        "name": "Chance Encounter",
+        "img_link": "https://i.imgur.com/jYKeLrM.png",
+        "deployment": {
             "description": [
                 {
                     "tags": {"desc_type" : "default"},
-                    "content": "",
-                    "glossary": [{"val": "", "id": ""}]
+                    "content": "The players roll-off and the winner chooses which long table side belongs to them (or any edge if you are playing on a square area). The opponent gets the opposite table edge (see diagram). Models are not set up on the table at the start of the game. Instead, on the first turn of the game, half of the warband (selected by each player) enters the battlefield. When one of the models is activated, it starts its move onto the table from any point along the player’s table edge, though it cannot be deployed directly into melee combat. In turn two, the rest of the warband is deployed exactly the same way."
+                }
+            ]
+        },
+        "battle_length": { 
+            "min": 6,
+            "max": 6,
+            "description": [
+                {
+                    "tags": {"desc_type" : "default"},
+                    "content": "The battle lasts for 6 turns."
+                }
+            ]
+        },
+        "special_rules": [ ]
+    },
+    {
+        "id": "sd_standarddeployment",
+        "source": "core",
+        "tags": {},
+        "name": "Standard Deployment",
+        "img_link": "https://i.imgur.com/jYKeLrM.png",
+        "deployment": {
+            "description": [
+                {
+                    "tags": {"desc_type" : "default"},
+                    "content": "The players roll-off and the winner chooses which table edge belongs to them. The opponent gets the opposite table edge."
+                }
+            ]
+        },
+        "special_rules": [ ]
+    },
+    {
+        "id": "sd_flankattack",
+        "source": "core",
+        "tags": {},
+        "name": "Flank Attack",
+        "img_link": "https://i.imgur.com/jYKeLrM.png",
+        "deployment": {
+            "description": [
+                {
+                    "tags": {"desc_type" : "default"},
+                    "content": "Use the Flank Attack Deployment Map below. The winner of the roll-off then places one model anywhere within their Deployment Zone (see diagram). The opponent does the same. Then the first player places another model and the two keep alternating until all models have been set up."
+                }
+            ]
+        },
+        "special_rules": [ ]
+    },
+    {
+        "id": "sd_longdistancebattle",
+        "source": "core",
+        "tags": {},
+        "name": "Long Distance Battle",
+        "img_link": "https://i.imgur.com/jYKeLrM.png",
+        "deployment": {
+            "description": [
+                {
+                    "tags": {"desc_type" : "default"},
+                    "content": "The players roll-off and the winner chooses which corner of the table belongs to them. The opponent gets the opposite corner. The winner of the roll-off then places one model anywhere within 12” of their table corner (see diagram). The opponent does the same. Then the first player places another model and the two keep alternating until all models have been set up. Battles with this deployment last a minimum of six Turns."
+                }
+            ]
+        },
+        "special_rules": [ ]
+    },
+    {
+        "id": "sd_tunnels",
+        "source": "core",
+        "tags": {},
+        "name": "Tunnels",
+        "img_link": "https://i.imgur.com/jYKeLrM.png",
+        "infiltrators": { 
+            "allowed": 1,
+            "description": [
+                {
+                    "tags": {"desc_type" : "default"},
+                    "content": "Infiltrators must be deployed at normal troops."
                 }
             ]
         },
@@ -19,21 +92,103 @@
             "description": [
                 {
                     "tags": {"desc_type" : "default"},
-                    "content": "",
-                    "glossary": [{"val": "", "id": ""}]
+                    "content": "The players roll-off and the winner places a 1” Tunnel Marker anywhere that is more than 6” from the table’s middle line (see diagram), though not on Impassable Terrain. Their opponent does the same on the opposite side of the table’s middle line."
+                },
+                { "tags": {"desc_type" : "gap"} },
+                {
+                    "tags": {"desc_type" : "default"},
+                    "content": "Not all models are set up on the table at the start of the game. Players must leave half of their models in reserve (rounding down). On the first turn of the game, the remaining models enter the battle through tunnels – when one of these models is Activated, it is placed anywhere within 6” of its Tunnel Marker, though not in melee combat. Models that enter the battlefield this way cannot Dash in the first turn of the game."
                 }
             ]
         },
-        "battle_length": { 
-            "min": 0,
-            "max": 0,
+        "special_rules": [ ]
+    },
+    {
+        "id": "sd_fogofwar",
+        "source": "core",
+        "tags": {},
+        "name": "Fog of War",
+        "img_link": "https://i.imgur.com/jYKeLrM.png",
+        "deployment": {
             "description": [
                 {
                     "tags": {"desc_type" : "default"},
+                    "content": "The players roll-off and the winner chooses which table side belongs to them. Their opponent gets the opposite table edge (see diagram) and both deploy normally. Not all models are set up on the table at the start of the game. Players must leave half of their models in reserve (rounding down)."
+                },
+                { "tags": {"desc_type" : "gap"} },
+                {
+                    "tags": {"desc_type" : "default"},
+                    "content": "On the first turn of the game, the remaining models enter the battle at random locations – when one of these models is Activated, the player rolls a D6 and consults the Fog of War Chart below. The chart details from which table edge the model enters. Models entering the battle cannot be placed directly into melee combat."
+                },
+                { "tags": {"desc_type" : "gap"} },
+                {
+                    "tags": {"desc_type" : "list"},
                     "content": "",
-                    "glossary": [{"val": "", "id": ""}]
+                    "subcontent": [
+                        {
+                            "tags": {"desc_type" : "bold"},
+                            "content": "1: ",
+                            "subcontent": [
+                                {
+                                    "tags": {"desc_type" : "default"},
+                                    "content": "Your opponent chooses one of the results below."
+                                }
+                            ]
+                        },
+                        {
+                            "tags": {"desc_type" : "bold"},
+                            "content": "2: ",
+                            "subcontent": [
+                                {
+                                    "tags": {"desc_type" : "default"},
+                                    "content": "Enter from the centre of the North edge."
+                                }
+                            ]
+                        },
+                        {
+                            "tags": {"desc_type" : "bold"},
+                            "content": "3: ",
+                            "subcontent": [
+                                {
+                                    "tags": {"desc_type" : "default"},
+                                    "content": "Enter from the centre of the East edge."
+                                }
+                            ]
+                        },
+                        {
+                            "tags": {"desc_type" : "bold"},
+                            "content": "4: ",
+                            "subcontent": [
+                                {
+                                    "tags": {"desc_type" : "default"},
+                                    "content": "Enter from the centre of the South edge."
+                                }
+                            ]
+                        },
+                        {
+                            "tags": {"desc_type" : "bold"},
+                            "content": "5: ",
+                            "subcontent": [
+                                {
+                                    "tags": {"desc_type" : "default"},
+                                    "content": "Enter from the centre of the West edge."
+                                }
+                            ]
+                        },
+                        {
+                            "tags": {"desc_type" : "bold"},
+                            "content": "6: ",
+                            "subcontent": [
+                                {
+                                    "tags": {"desc_type" : "default"},
+                                    "content": "You choose one of the results above."
+                                }
+                            ]
+                        }
+                    ]
                 }
             ]
-        }
+        },
+        "special_rules": [ ]
     }
 ]
