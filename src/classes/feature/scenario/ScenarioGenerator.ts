@@ -48,7 +48,7 @@ class ScenarioGenerator {
         this.BuildDeeds(0, this.ListOfDeedsGroupA);
         this.BuildDeeds(1, this.ListOfDeedsGroupB);
         this.BuildDeeds(2, this.ListOfDeedsGroupC);
-        this.CurrentScenario = this.ConstructNewScenario();
+        //this.CurrentScenario = this.ConstructNewScenario();
     }
 
     public ResetScenario() {
