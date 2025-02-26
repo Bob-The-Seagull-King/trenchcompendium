@@ -48,7 +48,7 @@ class ScenarioGenerator {
         this.BuildDeeds(0, this.ListOfDeedsGroupA);
         this.BuildDeeds(1, this.ListOfDeedsGroupB);
         this.BuildDeeds(2, this.ListOfDeedsGroupC);
-        //this.CurrentScenario = this.ConstructNewScenario();
+        this.CurrentScenario = this.ConstructNewScenario();
     }
 
     public ResetScenario() {
@@ -102,8 +102,12 @@ class ScenarioGenerator {
     }
 
     public ConstructNewScenario() {
+        if (this.ListOfObjectives.length === 0) throw new Error("No objectives available.");
+        if (this.ListOfDeedsGroupC.length === 0) throw new Error("No deeds available in Group C.");
+
         const ChosenObjective : GenerateObjective = this.ListOfObjectives[Math.floor(Math.random() * this.ListOfObjectives.length)]
         const FilteredDeploymentList : GenerateDeployment[] = this.ListOfDeployments.filter((item) => (!ChosenObjective.banned_deployments.includes(item.id)))
+        if (FilteredDeploymentList.length === 0) throw new Error("No valid deployments available.");
         const ChosenDeployment : GenerateDeployment = FilteredDeploymentList[Math.floor(Math.random() * FilteredDeploymentList.length)]
 
         const DeedsGroupA : GloriousDeed[] = this.getTwoRandomElements(this.ListOfDeedsGroupA);
@@ -111,9 +115,9 @@ class ScenarioGenerator {
         const DeedsGroupC : GloriousDeed[] = [this.ListOfDeedsGroupC[Math.floor(Math.random() * this.ListOfDeedsGroupC.length)]]
 
         const AllDeedsCombined : string[] = []
-        for (let i = 0; i << DeedsGroupA.length; i++) {AllDeedsCombined.push(DeedsGroupA[i].ID)}
-        for (let i = 0; i << DeedsGroupB.length; i++) {AllDeedsCombined.push(DeedsGroupB[i].ID)}
-        for (let i = 0; i << DeedsGroupC.length; i++) {AllDeedsCombined.push(DeedsGroupC[i].ID)}
+        for (let i = 0; i < DeedsGroupA.length; i++) {AllDeedsCombined.push(DeedsGroupA[i].ID)}
+        for (let i = 0; i < DeedsGroupB.length; i++) {AllDeedsCombined.push(DeedsGroupB[i].ID)}
+        for (let i = 0; i < DeedsGroupC.length; i++) {AllDeedsCombined.push(DeedsGroupC[i].ID)}
 
         const NewScenarioJson : IScenario = {
             id: ChosenObjective.id+"_"+ChosenDeployment.id,
@@ -156,7 +160,7 @@ class ScenarioGenerator {
                     }
                 ]
             },
-            special_rules : ChosenObjective.special_rules.concat(ChosenDeployment.special_rules)
+            special_rules : (ChosenObjective.special_rules || []).concat(ChosenDeployment.special_rules || [])
         }
 
         return ScenarioFactory.CreateScenario(NewScenarioJson, null);
