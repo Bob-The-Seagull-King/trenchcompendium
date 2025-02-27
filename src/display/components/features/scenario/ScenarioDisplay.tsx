@@ -57,7 +57,7 @@ const ScenarioDisplay = (props: any) => {
 
                                 {scenarioObject.Deeds.map((item) => ( 
                                     <span key={"faction_rule_"+scenarioObject.ID+"_rule_id_"+item.ID}>
-                                        <GenericPopup titlename={item.Name}  d_colour={"default"} d_name={item.Name} d_type={""} d_method={() => <GloriousDeedDisplay data={item} />}/>
+                                        <GenericPopup titlename={item.Name}  d_colour={"default"} d_name={item.Name} d_type={"sub"} d_method={() => <GloriousDeedDisplay data={item} />}/>
                                     </span>
                                 )) }
 
@@ -69,8 +69,7 @@ const ScenarioDisplay = (props: any) => {
                                 
                                 {scenarioObject.OptionalDeeds.map((item) => ( 
                                     <div key={"faction_rule_"+scenarioObject.ID+"_rule_id_"+item.ID}>
-                                        <GenericPopup titlename={item.Name}  d_colour={"default"}  d_name={item.Name} d_type={"sub"} d_method={() => <GloriousDeedDisplay data={item} />}/>
-                                        <div className="verticalspacerbig"/>
+                                        <GenericPopup titlename={item.Name}  d_colour={"default"}  d_name={item.Name} d_type={""} d_method={() => <GloriousDeedDisplay data={item} />}/>
                                     </div>
                                 )) }
                             </div>
@@ -178,6 +177,41 @@ const ScenarioDisplay = (props: any) => {
                         </div>
                     </div>
                 }
+                <div>                    
+                        <div className="row">
+                            <div className="verticalspacerbig"/>
+                            <div className="verticalspacerbig"/>
+                        </div>
+                        <div  className={'titleShape titlebody backgrounddefault'}>
+                                {"Glorious Deeds"}
+                            </div>
+                            
+                        <div className='abilityInternalStructure'>
+                        <div className="row">
+                                {returnDescription(scenarioObject, scenarioObject.DeedsDesc)}
+
+                                {scenarioObject.Deeds.map((item) => ( 
+                                    <span key={"faction_rule_"+scenarioObject.ID+"_rule_id_"+item.ID}>
+                                        <GenericDisplay titlename={item.Name}  d_colour={"default"} d_name={item.Name} d_type={"sub"} d_method={() => <GloriousDeedDisplay data={item} />}/>
+                                        <div className="verticalspacerbig"/>
+                                    </span>
+                                )) }
+
+                                {scenarioObject.OptionalDeeds.length > 0 &&
+                                <div>
+                                    {"If agreed by the players prior to starting the game, you may replace one of the Glory Deeds above for one of the following options:"}
+                                </div>
+                                }
+                                
+                                {scenarioObject.OptionalDeeds.map((item) => ( 
+                                    <div key={"faction_rule_"+scenarioObject.ID+"_rule_id_"+item.ID}>
+                                        <GenericDisplay titlename={item.Name}  d_colour={"default"}  d_name={item.Name} d_type={"sub"} d_method={() => <GloriousDeedDisplay data={item} />}/>
+                                        <div className="verticalspacerbig"/>
+                                    </div>
+                                )) }
+                            </div>
+                        </div>
+                    </div>
             </div>
         </ErrorBoundary>
     )
