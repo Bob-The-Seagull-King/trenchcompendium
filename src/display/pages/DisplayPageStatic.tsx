@@ -390,5 +390,25 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
                 </ErrorBoundary>
             )
         }
+    },
+    campaignrule: {
+        searchId: 'campaignrule',
+        width: 9 ,
+        returnDisplay(item: any) {
+            return (
+                
+                <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
+                    <GenericDisplay  d_colour={item.Team} d_name={item.Name} d_type={""} d_method={() => <BookRuleDisplay data={item} />}/>
+                </ErrorBoundary>
+            )
+        },
+        returnFilterSelect(manager : FilterManager, update : NoneToNoneFunction, close : NoneToNoneFunction) {
+            return (
+                
+                <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
+                    
+                </ErrorBoundary>
+            )
+        }
     }
 }

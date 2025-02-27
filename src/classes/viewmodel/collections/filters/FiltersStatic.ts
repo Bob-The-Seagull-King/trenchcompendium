@@ -327,5 +327,19 @@ export const FitlerDataDex : FilterDataTable = {
         findText() {
             return []
         }
+    },
+    campaignrule: {
+        searchId: 'campaignrule',
+        findTags() {
+            const tempTags: FilterTag[] = []
+            return tempTags;
+        },
+        findMisc() {
+            const tempMisc: FilterItem[] = []
+            return tempMisc;
+        },
+        findText() {
+            return []
+        }
     }
 }

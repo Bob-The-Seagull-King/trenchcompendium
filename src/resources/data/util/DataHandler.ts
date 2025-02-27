@@ -7,6 +7,7 @@ import en_tabledata from '../data/general/table.json'
 import en_imagedata from '../data/general/images.json'
 import en_keyworddata from '../data/general/keyword.json'
 import en_gameruledata from '../data/general/game_rules.json'
+import en_campaignruledata from '../data/general/book_rules.json'
 
 import en_abilitydata from '../data/units/ability.json'
 import en_modeldata from '../data/units/model.json'
@@ -47,6 +48,7 @@ export interface DataSetTC {
     imagedata : any,
     keyworddata : any,
     gameruledata : any,
+    campaignruledata : any,
     abilitydata : any,
     modeldata : any,
     modelvariantdata : any,
@@ -76,6 +78,7 @@ export const DataByLanguageTable : LanguageDataTable = {
         imagedata : en_imagedata,
         keyworddata : en_keyworddata,
         gameruledata : en_gameruledata,
+        campaignruledata : en_campaignruledata,
         abilitydata : en_abilitydata,
         modeldata : en_modeldata,
         modelvariantdata : en_modelvariantdata,    

@@ -138,5 +138,21 @@ export const CollectionDataDex : CollectionDataTable = {
                 model.itemcollection.push(ItemNew);
             }
         }
+    },
+    campaignrule: {
+        searchId: 'campaignrule', 
+        pageName: 'campaignrule',
+        sort: ["item_index"],
+        postSearch(model : ViewCollectionsModel) {
+            model.CleanupItems();
+            model.CleanupCollection();
+            let i = 0;
+            model.dataresults.sort(byPropertiesOf<IBookRule>(["item_index"]))
+            for (i = 0; i < model.dataresults.length; i++) {
+                const summonNew = BookRuleFactory.CreateBookRule(model.dataresults[i], null);
+                const ItemNew = new ViewTableItem(summonNew, getColour('default'));
+                model.itemcollection.push(ItemNew);
+            }
+        }
     }
 }

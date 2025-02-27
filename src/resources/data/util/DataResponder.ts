@@ -81,6 +81,9 @@ class DataResponder {
             case "gamerule": {
                 return RelevantSet.gameruledata.concat(data)
             }
+            case "campaignrule": {
+                return RelevantSet.campaignruledata.concat(data)
+            }
             case "ability": {
                 return RelevantSet.abilitydata.concat(data)
             }

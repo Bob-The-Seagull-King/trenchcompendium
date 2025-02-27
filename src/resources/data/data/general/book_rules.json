@@ -1,0 +1,33 @@
+[
+    {
+        "id": "br_introduction",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Campaigns",
+        "item_index": 0,
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "These rules govern playing a series of linked games with your friends. A minimum number of two players are required to complete a campaign, but the more players you can muster, the better! You can also play games against players who are not part of the campaign. Rules on how to do this are explained below."
+            }
+        ],
+        "sections": [
+            {
+                "title": "Beginning the Campaign",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": "At the beginning of a Campaign, your warband’s Threshold Value is 700 ducats. This is the maximum combined ducat value of models, items, upgrades and so on that you can field in a single battle. It will increase with each battle you fight during your campaign. You begin with an equal amount of ducats in your warband’s pay chest. This is a reserve of wealth that you will use to recruit and arm your models. Whenever you make a purchase, you must deduct the cost from your pay chest and you must have enough to cover the entire cost."
+                    },
+                    { "tags": {"desc_type" : "gap"} },
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": "Some warbands begin campaigns with a higher or lower threshold value and pay chest. This will be clearly outlined in each relevant warband’s section."
+                    }
+                 ],
+                "content": [ ]
+            }
+        ]
+    }
+]

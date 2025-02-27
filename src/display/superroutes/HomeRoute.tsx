@@ -13,7 +13,7 @@ import logo from '../../resources/images/compendium.png'
 
 // Font Awesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChess, faGun, faKey, faList, faPeopleGroup, faPersonMilitaryRifle, faQuestion, faRuler, faSquare } from '@fortawesome/free-solid-svg-icons'
+import { faBook, faChess, faGun, faKey, faList, faPeopleGroup, faPersonMilitaryRifle, faQuestion, faRuler, faSquare } from '@fortawesome/free-solid-svg-icons'
 import { faFileLines, faCoins, faCross } from '@fortawesome/free-solid-svg-icons'
 
 // TEST
@@ -127,8 +127,8 @@ const HomeRoute: React.FC = () => {
                         
                         
                         <div className="col softpad">
-                            <div className="basestructure pageaccessbox borderstyler subborderdefault hovermouse" onClick={() => NavigateHome("")}>
-                                <FontAwesomeIcon icon={faSquare} className="pageaccestext"/>
+                            <div className="basestructure pageaccessbox borderstyler subborderdefault hovermouse" onClick={() => NavigateHome("compendium/campaign/")}>
+                                <FontAwesomeIcon icon={faBook} className="pageaccestext"/>
                                 <h1 className="pageaccestext">
                                     CAMPAIGN RULES
                                 </h1>
