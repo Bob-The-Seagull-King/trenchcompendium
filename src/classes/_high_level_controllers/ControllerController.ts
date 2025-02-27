@@ -13,6 +13,7 @@ class ControllerController {
     EquipmentCollectionController;
     FactionCollectionController;
     ScenarioCollectionController;
+    GameRulesCollectionController;
 
     /**
      * Initializes all controllers, this also means all searching
@@ -25,6 +26,7 @@ class ControllerController {
         this.EquipmentCollectionController = new CollectionsListPage('equipment');
         this.FactionCollectionController = new CollectionsListPage('faction');
         this.ScenarioCollectionController = new CollectionsListPage('scenario');
+        this.GameRulesCollectionController = new CollectionsListPage('gamerule');
     }
 }
 

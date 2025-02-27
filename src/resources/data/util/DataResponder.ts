@@ -78,6 +78,9 @@ class DataResponder {
             case "keyword": {
                 return RelevantSet.keyworddata.concat(data)
             }
+            case "gamerule": {
+                return RelevantSet.gameruledata.concat(data)
+            }
             case "ability": {
                 return RelevantSet.abilitydata.concat(data)
             }

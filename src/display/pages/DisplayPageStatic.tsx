@@ -8,6 +8,7 @@ import ModelCollectionDisplay from "../components/features/model/ModelCollection
 import EquipmentDisplay from "../components/features/equipment/EquipmentDisplay";
 import FactionCollectionDisplay from "../components/features/faction/FactionCollectionDisplay";
 import ScenarioDisplay from "../components/features/scenario/ScenarioDisplay";
+import BookRuleDisplay from "../components/features/glossary/BookRuleDisplay";
 
 export interface DisplayCollectionType {
     searchId      : string,
@@ -366,6 +367,26 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
                             </div>
                         </div>
                     </div>
+                </ErrorBoundary>
+            )
+        }
+    },
+    gamerule: {
+        searchId: 'gamerule',
+        width: 9 ,
+        returnDisplay(item: any) {
+            return (
+                
+                <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
+                    <GenericDisplay  d_colour={item.Team} d_name={item.Name} d_type={""} d_method={() => <BookRuleDisplay data={item} />}/>
+                </ErrorBoundary>
+            )
+        },
+        returnFilterSelect(manager : FilterManager, update : NoneToNoneFunction, close : NoneToNoneFunction) {
+            return (
+                
+                <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
+                    
                 </ErrorBoundary>
             )
         }

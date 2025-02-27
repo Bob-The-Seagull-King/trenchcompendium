@@ -313,5 +313,19 @@ export const FitlerDataDex : FilterDataTable = {
         findText() {
             return [new FilterText({group: "name", val: "", isstrict: false})]
         }
+    },
+    gamerule: {
+        searchId: 'gamerule',
+        findTags() {
+            const tempTags: FilterTag[] = []
+            return tempTags;
+        },
+        findMisc() {
+            const tempMisc: FilterItem[] = []
+            return tempMisc;
+        },
+        findText() {
+            return []
+        }
     }
 }

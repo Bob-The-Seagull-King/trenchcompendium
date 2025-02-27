@@ -12,6 +12,7 @@ import BaseDisplayCompendium from '../pages/BaseDisplayCompendium'
 // Classes
 import { ControllerController } from '../../classes/_high_level_controllers/ControllerController'
 import { useGlobalState } from './../../utility/globalstate'
+import NoFilterDisplayCompendium from '../pages/NoFilterDisplayCompendium';
 
 interface IControllerProp {
     controller : ControllerController; // The controller being passed through
@@ -38,6 +39,7 @@ const CompendiumRoute: React.FC<IControllerProp> = (prop) => {
             <Route path={ROUTES.COMPENDIUM_EQUIPMENT_ROUTE} element={<BaseDisplayCompendium controller={prop.controller.EquipmentCollectionController}/>} />
             <Route path={ROUTES.COMPENDIUM_FACTION_ROUTE} element={<BaseDisplayCompendium controller={prop.controller.FactionCollectionController}/>} />
             <Route path={ROUTES.COMPENDIUM_SCENARIO_ROUTE} element={<BaseDisplayCompendium controller={prop.controller.ScenarioCollectionController}/>} />
+            <Route path={ROUTES.COMPENDIUM_GAMERULE_ROUTE} element={<NoFilterDisplayCompendium controller={prop.controller.GameRulesCollectionController}/>} />
             </Routes>
             </div>
         </ErrorBoundary>

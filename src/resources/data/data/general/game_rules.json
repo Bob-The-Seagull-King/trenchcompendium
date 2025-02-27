@@ -1,0 +1,97 @@
+[
+    {
+        "id": "gr_introduction",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Trench Crusade",
+        "item_index": 0,
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Trench Crusade is a skirmish-scale tabletop miniature game that will plunge players deep into a horrifying alternate timeline. During the Crusades a heretical band of Templars dared defy the Almighty. Casting aside their sacred vows they unleashed the forces of Hell upon the Earth."
+            },
+            { "tags": {"desc_type" : "gap"} },
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Over 800 years later, in the Year of Our Lord 1914, this brutal, merciless war between the forces of Heaven and Hell rages on. This is not merely a fight for survival – it is a cataclysmic struggle that will decide the very fate of humanity’s soul."
+            },
+            { "tags": {"desc_type" : "gap"} },
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "The following rules will immerse you in the trenches, guiding your warband through fierce skirmish battles as you vie for supremacy in No Man’s Land."
+            }
+        ],
+        "sections": [
+            {
+                "title": "What You Need To Play",
+                "description":  [ ],
+                "content": [
+
+                    {
+                        "title": "Miniatures",
+                        "description":  [
+                            {
+                            "tags": {"desc_type" : "default"},
+                            "content": "Each player commands a Warband, which typically consists of 6-20 models. While there is no ironclad rule on the scale of models, the heroic 32mm scale is what we use in our games. If you prefer another scale, do not worry – Witchburners will not be dispatched to cleanse you for your lack of scale purity!"
+                            }
+                        ]
+                    },
+
+                    {
+                        "title": "Tabletop",
+                        "description":  [
+                            {
+                            "tags": {"desc_type" : "default"},
+                            "content": "You will also need a gaming surface to play on. We suggest two surface sizes for games: 48” x 48” or 36” x 36”. This allows the game to be played on a typical kitchen table."
+                            }
+                        ]
+                    },
+
+                    {
+                        "title": "Terrain",
+                        "description":  [
+                            {
+                            "tags": {"desc_type" : "default"},
+                            "content": "Terrain is also necessary, and the more you have of it, the better! Trench Crusade is a game of position and tactics, so different types of elevation, cover and varied terrain pieces will all enhance your gaming experience."
+                            }
+                        ]
+                    },
+
+                    {
+                        "title": "Measuring Tool",
+                        "description":  [
+                            {
+                            "tags": {"desc_type" : "default"},
+                            "content": "To measure distances, you will need a tape measure or measuring stick. Trench Crusade uses the Imperial measurement system which means movement is measured in inches."
+                            }
+                        ]
+                    },
+
+                    {
+                        "title": "Dice",
+                        "description":  [
+                            {
+                            "tags": {"desc_type" : "default"},
+                            "content": "Next, you will require dice. Each player should have ight 6-sided dice (D6s) in their own distinct colours."
+                            }
+                        ]
+                    },
+
+                    {
+                        "title": "Blood Marker Dice",
+                        "description":  [
+                            {
+                            "tags": {"desc_type" : "default"},
+                            "content": "Finally, you will need a few red 6-sided dice to represent BLOOD MARKERS (explained in the rules below).",
+                            "glossary": [
+                                {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"}
+                            ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

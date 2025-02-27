@@ -14,6 +14,8 @@ import { IFaction } from "../../feature/faction/Faction";
 import { FactionFactory } from "../../../factories/features/FactionFactory";
 import { IScenario } from "../../feature/scenario/Scenario";
 import { ScenarioFactory } from "../../../factories/features/ScenarioFactory";
+import { IBookRule } from "../../feature/bookrules/BookRule";
+import { BookRuleFactory } from "../../../factories/features/BookRuleFactory";
 
 export interface CollectionType {
     searchId      : string,
@@ -116,6 +118,22 @@ export const CollectionDataDex : CollectionDataTable = {
             model.dataresults.sort(byPropertiesOf<IScenario>(["name", "id"]))
             for (i = 0; i < model.dataresults.length; i++) {
                 const summonNew = ScenarioFactory.CreateScenario(model.dataresults[i], null);
+                const ItemNew = new ViewTableItem(summonNew, getColour('default'));
+                model.itemcollection.push(ItemNew);
+            }
+        }
+    },
+    gamerule: {
+        searchId: 'gamerule', 
+        pageName: 'gamerule',
+        sort: ["item_index"],
+        postSearch(model : ViewCollectionsModel) {
+            model.CleanupItems();
+            model.CleanupCollection();
+            let i = 0;
+            model.dataresults.sort(byPropertiesOf<IBookRule>(["item_index"]))
+            for (i = 0; i < model.dataresults.length; i++) {
+                const summonNew = BookRuleFactory.CreateBookRule(model.dataresults[i], null);
                 const ItemNew = new ViewTableItem(summonNew, getColour('default'));
                 model.itemcollection.push(ItemNew);
             }

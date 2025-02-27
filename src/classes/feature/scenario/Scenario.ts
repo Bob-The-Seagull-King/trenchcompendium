@@ -143,7 +143,6 @@ class Scenario extends StaticContextObject {
     public constructor(data: IScenario, parent : ContextObject | null)
     {
         super(data, parent)
-        console.log(data);
         this.Description = DescriptionFactory(data.description, this);
         this.ImgLink = data.img_link;
 

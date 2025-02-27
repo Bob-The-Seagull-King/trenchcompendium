@@ -17,6 +17,7 @@ import { Requester } from "../../factories/Requester";
 import { FactionEquipmentRelationship } from "../relationship/faction/FactionEquipmentRelationship";
 import { Scenario } from "../feature/scenario/Scenario";
 import { GloriousDeed } from "../feature/scenario/GloriousDeed";
+import { BookRule } from "../feature/bookrules/BookRule";
 
 /**
  * Contains the Controller objects for 'Tools' pages.
@@ -44,6 +45,7 @@ class StaticDataCache {
     public FactionModelCache :  {[tokenid: string]: FactionModelRelationship} = {};
     public ScenarioCache :  {[tokenid: string]: Scenario} = {};
     public GloriousDeedCache :  {[tokenid: string]: GloriousDeed} = {};
+    public GameRulesCache :  {[tokenid: string]: BookRule} = {};
 
 
     public CheckID(cachename : string, id_val : string) {
@@ -54,6 +56,8 @@ class StaticDataCache {
                 return (this.TableCache[id_val] == null)
             case 'keyword': 
                 return (this.KeywordCache[id_val] == null)
+            case 'gamerule': 
+                return (this.GameRulesCache[id_val] == null)
             case 'modelcollection': 
                 return (this.ModelCollectionCache[id_val] == null)
             case 'model': 
@@ -101,6 +105,11 @@ class StaticDataCache {
             case 'keyword': 
                 if (this.KeywordCache[obj.ID] == null) {
                     this.KeywordCache[obj.ID] = obj as Keyword;
+                }
+                return;
+            case 'gamerule': 
+                if (this.GameRulesCache[obj.ID] == null) {
+                    this.GameRulesCache[obj.ID] = obj as BookRule;
                 }
                 return;
             case 'modelcollection': 
