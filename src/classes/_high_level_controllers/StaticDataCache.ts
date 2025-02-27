@@ -18,6 +18,9 @@ import { FactionEquipmentRelationship } from "../relationship/faction/FactionEqu
 import { Scenario } from "../feature/scenario/Scenario";
 import { GloriousDeed } from "../feature/scenario/GloriousDeed";
 import { BookRule } from "../feature/bookrules/BookRule";
+import { ExplorationTable } from "../feature/exploration/ExplorationTable";
+import { ExplorationLocation } from "../feature/exploration/ExplorationLocation";
+import { ExplorationSkill } from "../feature/exploration/ExplorationSkill";
 
 /**
  * Contains the Controller objects for 'Tools' pages.
@@ -46,6 +49,9 @@ class StaticDataCache {
     public ScenarioCache :  {[tokenid: string]: Scenario} = {};
     public GloriousDeedCache :  {[tokenid: string]: GloriousDeed} = {};
     public GameRulesCache :  {[tokenid: string]: BookRule} = {};
+    public ExplorationTableCache :  {[tokenid: string]: ExplorationTable} = {};
+    public ExplorationLocationCache :  {[tokenid: string]: ExplorationLocation} = {};
+    public ExplorationSkillCache :  {[tokenid: string]: ExplorationSkill} = {};
 
 
     public CheckID(cachename : string, id_val : string) {
@@ -86,6 +92,12 @@ class StaticDataCache {
                 return (this.ScenarioCache[id_val] == null)
             case 'gloriousdeed': 
                 return (this.GloriousDeedCache[id_val] == null)
+            case 'explorationtable': 
+                return (this.ExplorationTableCache[id_val] == null)
+            case 'explorationskill': 
+                return (this.ExplorationSkillCache[id_val] == null)
+            case 'explorationlocation': 
+                return (this.ExplorationLocationCache[id_val] == null)
             default: return false;
         }
     }
@@ -180,6 +192,21 @@ class StaticDataCache {
             case 'gloriousdeed':   
                 if (this.GloriousDeedCache[obj.ID] == null) {
                     this.GloriousDeedCache[obj.ID] = obj as GloriousDeed;
+                }
+                return;
+            case 'explorationtable':   
+                if (this.ExplorationTableCache[obj.ID] == null) {
+                    this.ExplorationTableCache[obj.ID] = obj as ExplorationTable;
+                }
+                return;
+            case 'explorationskill':   
+                if (this.ExplorationSkillCache[obj.ID] == null) {
+                    this.ExplorationSkillCache[obj.ID] = obj as ExplorationSkill;
+                }
+                return;
+            case 'explorationlocation':   
+                if (this.ExplorationLocationCache[obj.ID] == null) {
+                    this.ExplorationLocationCache[obj.ID] = obj as ExplorationLocation;
                 }
                 return;
             default: return;

@@ -341,5 +341,19 @@ export const FitlerDataDex : FilterDataTable = {
         findText() {
             return []
         }
+    },
+    explorationtable: {
+        searchId: 'explorationtable',
+        findTags() {
+            const tempTags: FilterTag[] = []
+            return tempTags;
+        },
+        findMisc() {
+            const tempMisc: FilterItem[] = []
+            return tempMisc;
+        },
+        findText() {
+            return []
+        }
     }
 }

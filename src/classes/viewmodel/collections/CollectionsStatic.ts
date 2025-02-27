@@ -16,6 +16,8 @@ import { IScenario } from "../../feature/scenario/Scenario";
 import { ScenarioFactory } from "../../../factories/features/ScenarioFactory";
 import { IBookRule } from "../../feature/bookrules/BookRule";
 import { BookRuleFactory } from "../../../factories/features/BookRuleFactory";
+import { ExplorationFactory } from "../../../factories/features/ExplorationFactory";
+import { IContextObject } from "../../contextevent/contextobject";
 
 export interface CollectionType {
     searchId      : string,
@@ -150,6 +152,22 @@ export const CollectionDataDex : CollectionDataTable = {
             model.dataresults.sort(byPropertiesOf<IBookRule>(["item_index"]))
             for (i = 0; i < model.dataresults.length; i++) {
                 const summonNew = BookRuleFactory.CreateBookRule(model.dataresults[i], null);
+                const ItemNew = new ViewTableItem(summonNew, getColour('default'));
+                model.itemcollection.push(ItemNew);
+            }
+        }
+    },
+    explorationtable: {
+        searchId: 'explorationtable', 
+        pageName: 'explorationtable',
+        sort: ["id"],
+        postSearch(model : ViewCollectionsModel) {
+            model.CleanupItems();
+            model.CleanupCollection();
+            let i = 0;
+            model.dataresults.sort(byPropertiesOf<IContextObject>(["id"]))
+            for (i = 0; i < model.dataresults.length; i++) {
+                const summonNew = ExplorationFactory.CreateExplorationTable(model.dataresults[i], null);
                 const ItemNew = new ViewTableItem(summonNew, getColour('default'));
                 model.itemcollection.push(ItemNew);
             }

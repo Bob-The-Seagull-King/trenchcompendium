@@ -1,0 +1,16 @@
+[
+    {
+        "id": "es_reroll",
+        "name": "Reroll",
+        "source": "core",
+        "tags": {},
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Re-roll any Exploration Dice once.",
+                "glossary": [{"val": "Exploration Dice", "id": "gl_explorationdice"}]
+            }
+        ]
+    }
+]

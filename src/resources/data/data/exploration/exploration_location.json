@@ -1,0 +1,101 @@
+[
+    {
+        "id": "el_moonshinestash",
+        "name": "Moonshine Stash",
+        "source": "core",
+        "tags": {
+            "exploration_table": "et_commonlocations"
+        },
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You find a hidden stash of strong distilled alcohol of uncertain origin. Choose one."
+            }
+        ],
+        "location_value": 4,
+        "options": [{
+            "ref_id" : "ot_moonshinestash",
+            "name" : "Moonshine Stash Options",
+            "description" : [],
+            "category" : "type",
+            "type" : "text",
+            "strictness" : "strict",
+            "predefined_options" : [],
+            "option_context" : {"basic_option_default":{}},
+            "data_search" : {      
+                "searchtype": "complex",
+                "searchparam":    {
+                    "type": "keyword",
+                    "request":    {
+                        "operator": "and",
+                        "terms": [
+                            {             
+                                "item": "tags",
+                                "value": "location_option",
+                                "equals": true,
+                                "strict": true,
+                                "istag": true,
+                                "tagvalue": "el_moonshinestash"
+                            }
+                        ],
+                        "subparams": []
+                    }
+                }                        
+            }
+        }]
+    },
+    {
+        "id": "el_moonshinestash_distribute",
+        "name": "Distribute",
+        "source": "core",
+        "tags": {
+            "location_option": "el_moonshinestash"
+        },
+        "contextdata": {
+            "validate_location": {
+                "allowed": [
+                    {
+                        "type": "faction",
+                        "value": ["fc_trenchpilgrim","fc_newantioch"]
+                    }
+                ]
+            },
+            "consumable": {}
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "During the next battle, your warband rolls Morale checks with +2 DICE.",
+                "glossary": [{"val": "+2 DICE", "id": "kw_plusdice"}]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "el_moonshinestash_destroy",
+        "name": "Destroy",
+        "source": "core",
+        "tags": {
+            "location_option": "el_moonshinestash"
+        },
+        "contextdata": {
+            "validate_location": {
+                "allowed": [
+                    {
+                        "type": "faction",
+                        "value": ["fc_ironsultanate","fc_trenchpilgrim","fc_newantioch"]
+                    }
+                ]
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Up to two of your ELITES each gain +1 Experience Point.",
+                "glossary": [{"val": "ELITES", "id": "kw_elite"}]
+            }
+        ],
+        "options": []
+    }
+]

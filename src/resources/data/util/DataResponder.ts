@@ -135,6 +135,15 @@ class DataResponder {
             case "scenariodeployment": {
                 return RelevantSet.scenariodeployments.concat(data)
             }
+            case "explorationlocation": {
+                return RelevantSet.explorationlocation.concat(data)
+            }
+            case "explorationskill": {
+                return RelevantSet.explorationskill.concat(data)
+            }
+            case "explorationtable": {
+                return RelevantSet.explorationtable.concat(data)
+            }
             case "testdynamicfeature": {
                 return RelevantSet.testdynamicdata.concat(data)
             }

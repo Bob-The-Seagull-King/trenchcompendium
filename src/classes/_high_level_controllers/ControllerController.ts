@@ -15,6 +15,7 @@ class ControllerController {
     ScenarioCollectionController;
     GameRulesCollectionController;
     CampaignRulesCollectionController;
+    ExplorationTableCollectionController;
 
     /**
      * Initializes all controllers, this also means all searching
@@ -29,6 +30,7 @@ class ControllerController {
         this.ScenarioCollectionController = new CollectionsListPage('scenario');
         this.GameRulesCollectionController = new CollectionsListPage('gamerule');
         this.CampaignRulesCollectionController = new CollectionsListPage('campaignrule');
+        this.ExplorationTableCollectionController = new CollectionsListPage('explorationtable');
     }
 }
 

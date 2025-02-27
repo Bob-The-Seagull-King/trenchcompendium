@@ -14,5 +14,20 @@
             "glossary": [{"val": "-1 DICE", "id": "kw_minusdice"}]
             }
         ]
+    },
+    {
+        "id": "gl_explorationdice",
+        "source": "core",
+        "tags": {
+            "category" : "campaign",
+            "exploration": true
+        },
+        "name": "Exploration Dice",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "After the battle, both players are allocated Exploration Dice. Once the players have determined the number of Exploration Dice, each rolls their dice and consults the result by adding the numbers together to get your Exploration Score. For example, if a player rolls three Exploration Dice and the results are 3, 5 and 6, the combined Exploration Score is 14."
+            }
+        ]
     }
 ]
