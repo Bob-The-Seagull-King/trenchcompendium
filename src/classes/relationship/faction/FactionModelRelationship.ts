@@ -6,6 +6,8 @@ import { Model } from '../../feature/model/Model';
 import { ModelFactory } from '../../../factories/features/ModelFactory';
 import { Equipment } from '../../feature/equipment/Equipment';
 import { EquipmentFactory } from '../../../factories/features/EquipmentFactory';
+import { Faction } from '../../feature/faction/Faction';
+import { FactionFactory } from '../../../factories/features/FactionFactory';
 
 interface IFactionModelRelationship extends IStaticOptionContextObject {
     faction_id : string[],
@@ -36,6 +38,8 @@ class FactionModelRelationship extends StaticOptionContextObject {
     public Minimum : number;
     public Maximum : number;
     
+    public Factions : Faction[] = [];
+    
     public constructor(data: IFactionModelRelationship, parent : ContextObject | null)
     {
         super(data, parent)
@@ -48,6 +52,12 @@ class FactionModelRelationship extends StaticOptionContextObject {
         this.Maximum = data.warband_maximum;
         this.Model = ModelFactory.CreateNewModel(data.model_id, null);
         this.BuildOptionModel();
+    }
+
+    public GetFactions(data : string[]) {
+        for (let i = 0; i < data.length; i++) {
+            this.Factions.push(FactionFactory.CreateNewFaction(data[i], null))
+        }
     }
 
     public BuildOptionModel() {

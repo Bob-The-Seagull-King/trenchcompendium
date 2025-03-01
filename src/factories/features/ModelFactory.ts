@@ -97,6 +97,7 @@ class ModelFactory {
         }
         const rule = new FactionModelRelationship(_rule, parent)
         cache.AddToCache('factionmodel', rule);
+        rule.GetFactions(_rule.faction_id)
         return rule;
     }
 
