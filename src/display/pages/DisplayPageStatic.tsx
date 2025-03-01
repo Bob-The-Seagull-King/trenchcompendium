@@ -198,7 +198,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
     },
     equipment: {
         searchId: 'equipment',
-        width: 7,
+        width: 8,
         returnDisplay(item: any) {
             return (
                 

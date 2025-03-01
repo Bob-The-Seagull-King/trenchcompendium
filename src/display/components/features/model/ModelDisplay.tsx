@@ -19,6 +19,7 @@ import { IChoice } from '../../../../classes/options/StaticOption';
 import ModelEquipmentDisplay from '../equipment/ModelEquipmentDisplay';
 import { EventRunner } from '../../../../classes/contextevent/contexteventhandler';
 import { Form } from 'react-bootstrap';
+import DisplayFactionModelDisplay from './DisplayFactionModelDisplay';
 
 const ModelDisplay = (props: any) => {
     const modelcollectionObject: Model = props.data
@@ -322,6 +323,17 @@ const ModelDisplay = (props: any) => {
                         </div>
                     </>
                 }
+                <div className="row">
+                    <div className='separator bodytext tagboxpad colordefault'>Found In</div>
+                            <div className="row textmaxwidth">
+                                {modelcollectionObject.Models.map((item) => ( 
+                                    <div key={"faction_rule_"+modelcollectionObject.ID+"_rule_id_"+item.ID} className="textmaxwidth">
+                                        <DisplayFactionModelDisplay data={item} />
+                                    </div>
+                                )) /* Abilities */}
+                            </div>
+                        
+                </div>
             </div>
         </ErrorBoundary>
     )

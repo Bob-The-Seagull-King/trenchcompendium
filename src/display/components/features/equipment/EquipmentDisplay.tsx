@@ -14,6 +14,7 @@ import GenericHover from '../../../components/generics/GenericHover';
 import KeywordDisplay from '../glossary/KeywordDisplay';
 import ItemStat from '../../../components/subcomponents/description/ItemStat';
 import { makestringpresentable } from '../../../../utility/functions';
+import DisplayFactionEquipmenWideDisplay from './DisplayFactionEquipmentWideDisplay';
 
 const EquipmentDisplay = (props: any) => {
     const abilityObject: Equipment = props.data
@@ -91,6 +92,17 @@ const EquipmentDisplay = (props: any) => {
                 </div>
                 <div className="row">
                     {returnDescription(abilityObject, abilityObject.Description)}
+                </div>
+                <div className="row">
+                    <div className='separator bodytext tagboxpad colordefault'>Found In</div>
+                            <div className="row textmaxwidth">
+                                {abilityObject.EquipmentItems.map((item) => ( 
+                                    <div key={"faction_rule_"+abilityObject.ID+"_rule_id_"+item.ID} className="textmaxwidth">
+                                        <DisplayFactionEquipmenWideDisplay data={item} />
+                                    </div>
+                                )) /* Abilities */}
+                            </div>
+                        
                 </div>
                 
             </div>

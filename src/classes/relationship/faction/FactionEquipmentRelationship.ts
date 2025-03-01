@@ -44,6 +44,7 @@ class FactionEquipmentRelationship extends StaticContextObject {
     }
 
     public GetFactions(data : string[]) {
+        data.sort()
         for (let i = 0; i < data.length; i++) {
             this.Factions.push(FactionFactory.CreateNewFaction(data[i], null))
         }
