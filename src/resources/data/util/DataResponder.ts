@@ -138,8 +138,8 @@ class DataResponder {
             case "explorationlocation": {
                 return RelevantSet.explorationlocation.concat(data)
             }
-            case "explorationskill": {
-                return RelevantSet.explorationskill.concat(data)
+            case "skill": {
+                return RelevantSet.skilldata.concat(data)
             }
             case "explorationtable": {
                 return RelevantSet.explorationtable.concat(data)

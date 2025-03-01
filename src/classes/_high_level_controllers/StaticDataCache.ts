@@ -20,7 +20,7 @@ import { GloriousDeed } from "../feature/scenario/GloriousDeed";
 import { BookRule } from "../feature/bookrules/BookRule";
 import { ExplorationTable } from "../feature/exploration/ExplorationTable";
 import { ExplorationLocation } from "../feature/exploration/ExplorationLocation";
-import { ExplorationSkill } from "../feature/exploration/ExplorationSkill";
+import { Skill } from "../feature/skill/Skill";
 
 /**
  * Contains the Controller objects for 'Tools' pages.
@@ -51,7 +51,7 @@ class StaticDataCache {
     public GameRulesCache :  {[tokenid: string]: BookRule} = {};
     public ExplorationTableCache :  {[tokenid: string]: ExplorationTable} = {};
     public ExplorationLocationCache :  {[tokenid: string]: ExplorationLocation} = {};
-    public ExplorationSkillCache :  {[tokenid: string]: ExplorationSkill} = {};
+    public SkillCache :  {[tokenid: string]: Skill} = {};
 
 
     public CheckID(cachename : string, id_val : string) {
@@ -94,8 +94,8 @@ class StaticDataCache {
                 return (this.GloriousDeedCache[id_val] == null)
             case 'explorationtable': 
                 return (this.ExplorationTableCache[id_val] == null)
-            case 'explorationskill': 
-                return (this.ExplorationSkillCache[id_val] == null)
+            case 'skill': 
+                return (this.SkillCache[id_val] == null)
             case 'explorationlocation': 
                 return (this.ExplorationLocationCache[id_val] == null)
             default: return false;
@@ -199,9 +199,9 @@ class StaticDataCache {
                     this.ExplorationTableCache[obj.ID] = obj as ExplorationTable;
                 }
                 return;
-            case 'explorationskill':   
-                if (this.ExplorationSkillCache[obj.ID] == null) {
-                    this.ExplorationSkillCache[obj.ID] = obj as ExplorationSkill;
+            case 'skill':   
+                if (this.SkillCache[obj.ID] == null) {
+                    this.SkillCache[obj.ID] = obj as Skill;
                 }
                 return;
             case 'explorationlocation':   

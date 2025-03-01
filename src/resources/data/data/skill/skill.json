@@ -3,8 +3,10 @@
         "id": "es_reroll",
         "name": "Reroll",
         "source": "core",
-        "tags": {},
-        "contextdata": {},
+        "tags": {
+            "category": "exploration"
+        },
+        "contextdata": { },
         "description": [            
             {
                 "tags": {"desc_type" : "default"},
