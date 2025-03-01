@@ -34,7 +34,7 @@ class ExplorationTable extends StaticContextObject {
                         operator: 'and',
                         terms: [
                             {
-                                item: "tag",
+                                item: "tags",
                                 value: "exploration_table",
                                 equals: true,
                                 strict: true,

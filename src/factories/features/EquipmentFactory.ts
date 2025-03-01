@@ -23,6 +23,7 @@ class EquipmentFactory {
         }
         const rule = new Equipment(_rule, parent)
         cache.AddToCache('equipment', rule);
+        rule.BuildFactionEquipment(_rule.id);
         return rule;
     }
 

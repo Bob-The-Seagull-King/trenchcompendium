@@ -11,6 +11,7 @@ import { Model } from '../../../../classes/feature/model/Model';
 import { Ability } from '../../../../classes/feature/ability/Ability';
 import OptionSetStaticDisplay from '../../subcomponents/description/OptionSetStaticDisplay';
 import { ExplorationTable } from '../../../../classes/feature/exploration/ExplorationTable';
+import ExplorationLocationDisplay from './ExplorationLocationDisplay';
 
 const ExplorationTableDisplay = (props: any) => {
     const explorationTableObject: ExplorationTable = props.data
@@ -18,6 +19,14 @@ const ExplorationTableDisplay = (props: any) => {
     return (
         <ErrorBoundary fallback={<div>Something went wrong with ExplorationTableDisplay.tsx</div>}>
             <div className='abilityInternalStructure'>
+                {explorationTableObject.ExplorationLocations.map((item) => (
+                    <div key={item.ID}>
+                    <div className='abilityInternalStructure'>
+                        {"Exploration Score: " + item.TableValue + " - " + item.Name  /* Name */}
+                    </div>
+                    <ExplorationLocationDisplay data={item}/>
+                    </div>
+                ))}
             </div>
         </ErrorBoundary>
     )

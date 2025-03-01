@@ -37,5 +37,118 @@
         ],
         "rules": [],
         "options": []
+    },
+    {
+        "id": "fc_newantioch",
+        "source": "core",
+        "tags": {
+        },
+        "contextdata": {
+            "faction_keyword": {"name": "kw_antioch"}
+        },
+        "name": "The Prinicpality of New Antioch",
+        "team": "faithful",
+        "description":  [
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "For three hundred years the Principality of New Antioch has stood defiantly as the focal point of the Church and the Faithful at the very edge of the shadow cast by the Gate of Hell. It is the Home of All Our Hopes, the bulwark against Heretic forces and the first line of defence against the devil’s might. Should New Antioch fall, the Levant will be lost and the path to heartlands of the Church will be wide open."
+            },
+            { "tags": {"desc_type" : "gap"} },
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "War has never left this corner of the world. The ancient city of Antioch was destroyed by a mysterious demonic weapon in the year 1545, but the Faithful never gave up their positions in the ruins. Despite the lethal demonic essence emanating from the crater that was left behind, the garrison held on, even as mighty Constantinople fell to the legions of Kimaris, Marquis of Hell."
+            },
+            { "tags": {"desc_type" : "gap"} },
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Before it was destroyed, the ancient city of Antioch was always the first line of defence to be put to test. Thus it is no wonder that in the year 1559 the Sword Congress of Vienna agreed to rebuild and fortify the city, and that a yearly tithe is to be sent to New Antioch by all the Faithful nations, though this levy is rarely in form of coin. Instead, endless supply trains of foodstuffs, tools, ammunition, weaponry, machinery and skilled workers and engineers come from across Europa and the Mediterranean Sea, as well as the African dominions."
+            },
+            { "tags": {"desc_type" : "gap"} },
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Since those days New Antioch has grown to be the most important fortress-city in the world, the Sword and the Shield of Europa and Africa. All the princes of the Church and heads of the various states and domains who oppose Hell understand that it is better to fight their battles against the Heretics as far away from their heartlands as possible. To this day New Antioch has withstood eight great sieges and its famed walls, with their seventy-seven mighty towers, have never been breached. This is partly due to hundreds of anchorites, metallic battle shrines with devotees entombed within them, that are embedded into the walls, keeping a vigilant watch over the walls day and night."
+            },
+            { "tags": {"desc_type" : "gap"} },
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "More than anything else, it is the volunteers who come to serve under the Banner of Christ that ensure the continuous existence of the Principality. Thus in the streets of the city one can hear hundreds of languages and dialects. One might observe hussars of the Polish-Lithuanian commonwealth brushing shoulders with the last remnants of the Varangian Guard, or hear the sermons of a street preacher from Eire extolling the soldiery of Ethiopia to lay down their lives for the holy cause. Perhaps they might even witness the Church Engineers procession taking their latest invention to be tested in the front lines."
+            },
+            { "tags": {"desc_type" : "gap"} },
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "As the nominal supreme commander of all the Faithful armed forces, the Duke of New Antioch is a title of unrivalled prestige and honour. But despite swearing fealty to the Duke, in reality most of the troops from across all of Christendom who come to do battle against Hell operate in units of their own, taking commands from their leaders and making their own strategic decisions."
+            },
+            { "tags": {"desc_type" : "gap"} },
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Still, some soldiers do indeed renounce their citizenship and take up the cross, and come to serve under Duke Constantine alone. Thus the standing army of the Principality is the greatest single fighting force the Faithful can muster, and those who serve on the walls of the Home of Hopes are rightfully proud of their livery."
+            },
+            { "tags": {"desc_type" : "gap"} },
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "In recent years the Duke has despatched small forces into No Man’s Land to gather intelligence, look for artefacts of power, conduct raids on Heretic forces, secure strategic strongpoints and loot the battlefields for the wealth of coin and weaponry scattered across the tortured landscape that stretches between New Antioch and the Heretic domains over the centuries. These warbands are simply given commission by the Duke, and have to raise their own coin and muster their own forces. However, holy relics, great wealth and fame across all the Christendom ensures that there is a steady supply of ambitious leaders who are willing to risk all in the crucible of war. Competition for loot, supplies, artefacts and information is fierce, and these warbands often come to blows, not just with Heretical forces, but with competing rivals and crazed Trench Pilgrims."
+            }
+        ],
+        "rules": ["rl_newantiochfireteam"],
+        "options": []
+    },
+    {
+        "id": "fc_trenchpilgrim",
+        "source": "core",
+        "tags": {
+        },
+        "contextdata": {
+            "faction_keyword": {"name": "kw_pilgrim"}
+        },
+        "name": "Trench Pilgrims",
+        "team": "faithful",
+        "description":  [
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "As the war rages against the minions of Hell, strange visions torment the faithful across the globe. Men and women touched by Heaven are granted visions and Revelations are made by the messengers of God. Sisters of the Holy Orders are marked by Stigmata and take up the sword and the cross as instructed by angels. Those who have transgressed seek to atone for their sins by taking as many followers of the Devil with them to the afterlife."
+            },
+            { "tags": {"desc_type" : "gap"} },
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "So they come, the mad and the maimed, the God-touched and the guilt-ridden – all gathering around Prophets and Prophetesses, forming Trench Pilgrim Processions. These disorganised groups arm themselves and follow the prophets of the Lord unto the front lines. They fight with unrivalled zeal, hurling themselves against the Heretics, arming themselves with anything they can get their hands on from the oldest muskets to scourges and Molotov Cocktails."
+            },
+            { "tags": {"desc_type" : "gap"} },
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Pilgrims are not officially sanctioned by the Holy See of New Antioch, but the Church still blesses the crusades of the faithful. Thus the Pilgrim Processions are a common sight on the battlefields, often crossing No Man’s Land in suicidal assaults upon the Heretics, directed by the visions of their Prophets and Prophetesses who lead them, urged on by the whips of Castigators who are charged with instilling the Fear of God in their troops."
+            },
+            { "tags": {"desc_type" : "gap"} },
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "The bulk of the Pilgrims are men and women with little military training, but when they don the Iron Capirote of a Trench Pilgrim, they can face even a demon from the deepest Bolgias of Hell unflinchingly. Nor is death necessarily an end to their mission: sometimes the Seventh Meta-Christ will deem a fallen pilgrim worthy and bring them back as Martyr-Penitents: warriors half-way between Heaven and Earth, able to fight once more and feel no pain from bullet or bayonet thrust."
+            },
+            { "tags": {"desc_type" : "gap"} },
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Rarer and more dangerous are the Stigmatic Nuns, Holy Sisters who manifest wounds to match those of the Third Meta-Christ whom they venerate. They excel in close quarter combat, for each bleeding wound that they suffer makes them stronger, not weaker, as their devotion to suffering as their Lord once did gives them strength and endurance not found in common mortals. Armed with swords and pistols, they cross No Man’s Land heedless of any danger, praying to sustain wounds for the Redeemer which in turn will transform them into the very Vengeance of the Lord."
+            },
+            { "tags": {"desc_type" : "gap"} },
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "In front of the Trench Pilgrims are driven the Ecclesiastic Prisoners – either captured enemies of the True Faith or volunteer sinners. Each is strapped with a high explosive which is detonated once they reach enemy lines. They dash across the killing grounds, hoping to somehow survive the blast and escape, or take as many followers of Lucifer with them as they can, depending on their convictions."
+            },
+            { "tags": {"desc_type" : "gap"} },
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "The most puissant of Pilgrim Processions will be accompanied by a Shrine Anchorite, a metal behemoth some twelve feet tall, a living altar of war almost completely immune to any damage. The interior of the Anchorite is covered in spikes and barbed hooks so that the monk pilot is in a constant state of torment, rejoicing in their pain so they can suffer as their Lord once did. In combat they wield Adamantine Catherine Wheels of massive proportions which they use to crush sinners and heretics into a pulp, stringing them upon the wheel as a warning to others."
+            },
+            { "tags": {"desc_type" : "gap"} },
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "There are a bewildering number and variety of Trench Pilgrim Processions: The Path of Pious Revenge swears in the name of St. Olga and uses flamethrowers, burning grenades and incendiary ammunition to assail the Heretics. The Pilgrims of the Iron Path follow St. Rita of Cascia and go to battle with hammers, mauls, maces and cudgels, and hammer nails into their heads in the memory of the saint they venerate. The Theban Legion of Rome carries the heads of the heretics upon their standards in the memory of their patron, St. Marice. They fight with swords and other blades, competing with each other for the number of heretic heads they amass."
+            },
+            { "tags": {"desc_type" : "gap"} },
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Trench Pilgrims of the Procession of the Sacred Affliction are known for their zeal in close quarter combat, their armour decorated with icons and shields adorned with the depictions of the Saints, which despite appearances can withstand machine gun bullets. The millstones they carry upon their backs are used to tie about the necks of sinners before drowning them in the mud and blood of No Man’s Land."
+            }
+        ],
+        "rules": [],
+        "options": []
     }
 ]

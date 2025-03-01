@@ -19,7 +19,6 @@ class StaticOptionContextObject extends StaticContextObject {
 
     public constructor(data : IStaticOptionContextObject, parent : ContextObject | null) {
         super(data, parent)
-
         this.MyOptions = this.BuildOptions(data.options)
     }
 

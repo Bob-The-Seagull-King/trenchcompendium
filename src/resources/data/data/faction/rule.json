@@ -431,5 +431,55 @@
         }
         ],
         "options": []
+    },
+    {
+        "id": "rl_newantiochfireteam",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+
+            "add_fireteam_warband" : { "type": "antioch", "count": 2 }
+        },
+        "name": "New Antioch Fireteams",
+        "description":  [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Your warband may have up to two Fireteams. These Fireteams may consist of any two models from your warband. Models in Fireteams gain the Keyword FIRETEAM. Fireteams gain the Concentrated Attack rule:",
+                "glossary": [
+                    {"val": "FIRETEAM", "id": "kw_fireteam"}
+                ]
+            },
+            { "tags": {"desc_type" : "gap"} },
+            {
+                "tags": {"desc_type" : "bold"},
+                "content": "FIRETEAM: ",
+                "subcontent": [
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": "This model is part of a FIRETEAM made up of two models. All models that are part of the same FIRETEAM can be activated at the same time without the opponent getting their turn in between and can take their ACTIONS in any order they wish, switching between the two models. Note that if the Activation of either member of the FIRETEAM forcefully ends (due to a failed RISKY ACTION for example), it ends both Activations. Allies cannot be part of a FIRETEAM.",
+                        "glossary": [
+                            {"val": "FIRETEAM", "id": "kw_fireteam"}
+                        ]
+                    }
+                ]
+            },
+            { "tags": {"desc_type" : "gap"} },
+            {
+                "tags": {"desc_type" : "bold"},
+                "content": "Concentrated Attack: ",
+                "subcontent": [
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": "If a model in the FIRETEAM makes any kind of Attack ACTION (ranged or melee) against an opponent, where the other member of their FIRETEAM has already hit it with an attack ACTION during the same activation, the cost of a Bloodbath is reduced to three BLOOD MARKERS against this opponent, whether the model is standing or Down.",
+                        "glossary": [
+                            {"val": "FIRETEAM", "id": "kw_fireteam"},
+                            {"val": "ACTION", "id": "kw_action"},
+                            {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"}
+                        ]
+                    }
+                ]
+            }
+        ],
+        "options": []
     }
 ]

@@ -33,6 +33,7 @@ class FactionFactory {
     static CreateFaction(_rule: IFaction, parent : ContextObject | null) {
         const cache = StaticDataCache.getInstance();
         const isValid = (cache.CheckID('faction', _rule.id))
+        
         if (isValid == false) {
             if (cache.FactionCache[_rule.id].MyContext == null) {
                 cache.FactionCache[_rule.id].MyContext = parent;
@@ -41,6 +42,8 @@ class FactionFactory {
         }
         const rule = new Faction(_rule, parent)
         cache.AddToCache('faction', rule);
+        rule.BuildFactionModels(_rule.id);
+        rule.BuildFactionEquipment(_rule.id)
         return rule;
     }
 
@@ -54,6 +57,9 @@ class FactionFactory {
             return cache.FactionCache[_val];
         }
         const ruledata = Requester.MakeRequest({searchtype: "id", searchparam: {type: "faction", id: _val}}) as IFaction
+        if (ruledata.id == undefined) {
+            return FactionFactory.CreateNewVariantFaction(_val, parent);
+        }
         const rulenew = FactionFactory.CreateFaction(ruledata, parent)
         return rulenew;
     }
@@ -67,6 +73,8 @@ class FactionFactory {
         const BasedFactionData : IFaction = FactionCollection.MergeFactions(_base, varaint);
         const rule = new Faction(BasedFactionData, parent)
         cache.AddToCache('faction', rule);
+        rule.BuildFactionModels(BasedFactionData.id);
+        rule.BuildFactionEquipment(BasedFactionData.id)
         return rule;
     }
 

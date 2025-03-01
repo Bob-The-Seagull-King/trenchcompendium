@@ -20,6 +20,8 @@ import { EquipmentFactory } from '../../../factories/features/EquipmentFactory';
 import { ContextPackage } from '../../contextevent/contextpackage';
 import { EventRunner } from '../../contextevent/contexteventhandler';
 import { EquipmentLimit, EquipmentRestriction } from '../equipment/Equipment';
+import { FactionModelRelationship, IFactionModelRelationship } from '../../relationship/faction/FactionModelRelationship';
+import { ModelFactory } from '../../../factories/features/ModelFactory';
 
 interface IModel extends IContextObject {
     description: [];
@@ -51,6 +53,7 @@ class Model extends StaticContextObject {
     public RestrictedEquipment : EquipmentRestriction[] | null = null;
     public LimitedEquipment : EquipmentLimit[] | null = null;
     public StatChoices : ModelStatistics[][] | null = null;
+    public Models : FactionModelRelationship[] = []
     
     /**
      * Assigns parameters and creates a series of description
@@ -76,6 +79,36 @@ class Model extends StaticContextObject {
         this.RunEquipmentLimit();
         this.RunStatOptions();
     }
+    
+    public BuildFactionModels(id : string) {
+        const ModelList = Requester.MakeRequest(
+            {
+                searchtype: "complex", 
+                searchparam: {
+                    type: "factionmodelrelationship",
+                    request: {
+                        operator: 'and',
+                        terms: [
+                            {
+                                item: "model_id",
+                                value: id,
+                                equals: true,
+                                strict: true
+                            }
+                        ],
+                        subparams: []
+                    }
+                }
+            }
+        ) as IFactionModelRelationship[]
+        
+        ModelList.sort(byPropertiesOf<IFactionModelRelationship>(["name", "id"]))
+
+        for (let i = 0; i < ModelList.length; i++) {
+            this.Models.push(ModelFactory.CreateFactionModel(ModelList[i], null))
+        }
+    }
+
 
     public RunStatOptions() {
         const EventProc : EventRunner = new EventRunner();

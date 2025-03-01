@@ -42,6 +42,7 @@ class ModelFactory {
         }
         const rule = new Model(_rule, parent)
         cache.AddToCache('model', rule);
+        rule.BuildFactionModels(_rule.id);
         return rule;
     }
 
@@ -72,6 +73,7 @@ class ModelFactory {
         const BasedModelData : IModel = ModelCollection.MergeModels(_base, varaint);
         const rule = new Model(BasedModelData, parent)
         cache.AddToCache('model', rule);
+        rule.BuildFactionModels(BasedModelData.id);
         return rule;
     }
 
