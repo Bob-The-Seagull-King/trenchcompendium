@@ -4,6 +4,7 @@
 import { IStaticOptionContextObject, StaticOptionContextObject } from '../../options/StaticOptionContextObject';
 import { DescriptionFactory } from '../../../utility/functions';
 import { ContextObject, IContextObject } from '../../contextevent/contextobject';
+import { EventRunner } from '../../contextevent/contexteventhandler';
 
 interface IExplorationLocation extends IStaticOptionContextObject {
     description: [],
@@ -23,6 +24,24 @@ class ExplorationLocation extends StaticOptionContextObject {
         super(data, parent)
         this.Description = DescriptionFactory(data.description, this);
         this.TableValue = data.location_value;
+        this.RunOptionsParse();
+    }
+    
+    public RunOptionsParse() {
+        
+        const EventProc : EventRunner = new EventRunner();
+        for (let i = 0; i < this.MyOptions.length; i++) {
+            EventProc.runEvent(
+                "parseOptionsIntoRelevantType",
+                this,
+                [],
+                this.MyOptions[i].Selections,
+                i
+            ).then(result => {
+                this.MyOptions[i].Selections = result;
+                console.log(this);
+            });
+        }
     }
 
 }

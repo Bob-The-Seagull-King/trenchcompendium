@@ -6,7 +6,7 @@
         "tags": {
             "exploration_table": "et_commonlocations"
         },
-        "contextdata": {},
+        "contextdata": {"location_rule_option": {}},
         "description": [            
             {
                 "tags": {"desc_type" : "default"},
@@ -26,7 +26,7 @@
             "data_search" : {      
                 "searchtype": "complex",
                 "searchparam":    {
-                    "type": "keyword",
+                    "type": "explorationlocation",
                     "request":    {
                         "operator": "and",
                         "terms": [

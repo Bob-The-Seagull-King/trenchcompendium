@@ -501,5 +501,21 @@ export const BaseContextCallTable : CallEventTable = {
 
             return NewChoices
         }
+    },
+    location_rule_option: {
+        event_priotity: 0,
+        async parseOptionsIntoRelevantType(this: EventRunner, eventSource : any, relayVar : IChoice[],  trackVal : number, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null){
+            
+            const { ExplorationFactory } = await import("../../factories/features/ExplorationFactory");
+
+            for (let i = 0; i < relayVar.length; i++) {
+                console.log(relayVar[i])
+                const ModelItem = ExplorationFactory.CreateExplorationLocation(relayVar[i].value, null)
+                relayVar[i].value = ModelItem;
+                relayVar[i].display_str = ModelItem.Name? ModelItem.Name : "";
+            }
+
+            return relayVar
+        }
     }
 }
