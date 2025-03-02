@@ -5,6 +5,7 @@ import { ContextObject } from "../../classes/contextevent/contextobject";
 import { EquipmentLimit, EquipmentRestriction } from "../../classes/feature/equipment/Equipment";
 import { ModelStatistics } from "../../classes/feature/model/ModelStats";
 import { ModelUpgradeRelationship } from "../../classes/relationship/model/ModelUpgradeRelationship";
+import { LocationRestriction } from "../../classes/feature/exploration/ExplorationLocation";
 
 /**
  * Events that can be called by the runEvent method,
@@ -25,6 +26,9 @@ export interface CallEvents {
     getFactionRuleUpgrades? : (this: EventRunner, eventSource : any, relayVar : ModelUpgradeRelationship[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<ModelUpgradeRelationship[]>; 
     parseOptionsIntoRelevantType? : (this: EventRunner, eventSource : any, relayVar : IChoice[], trackVal : number,  context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<IChoice[]>;
     parseOptionFilterDown? : (this: EventRunner, eventSource : any, relayVar : IChoice[],  trackVal : number, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<IChoice[]>; 
+    returnOptionDisplay? : (this: EventRunner, eventSource : any, relayVar : IChoice, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => JSX.Element;
+    getLocationRestrictions? : (this: EventRunner, eventSource : any, relayVar : any, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => LocationRestriction[]; 
+    getLocationRestrictionsPresentable? : (this: EventRunner, eventSource : any, relayVar : any, trackVal : LocationRestriction[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<string[]>; 
 }
 
 /**

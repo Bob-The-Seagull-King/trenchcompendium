@@ -12,6 +12,10 @@ import { ModelStatistics } from "../../classes/feature/model/ModelStats";
 import { IModelUpgradeRelationship, ModelUpgradeRelationship } from "../../classes/relationship/model/ModelUpgradeRelationship";
 import { Requester } from "../../factories/Requester";
 import { UpgradeFactory } from "../../factories/features/UpgradeFactory";
+import { ErrorBoundary } from "react-error-boundary";
+import GenericDisplay from "../../display/components/generics/GenericDisplay"
+import ExplorationLocationDisplay from "../../display/components/features/exploration/ExplorationLocationDisplay";
+import { LocationRestriction } from "../../classes/feature/exploration/ExplorationLocation";
 
 export const BaseContextCallTable : CallEventTable = {
     option_search_viable: {
@@ -509,13 +513,35 @@ export const BaseContextCallTable : CallEventTable = {
             const { ExplorationFactory } = await import("../../factories/features/ExplorationFactory");
 
             for (let i = 0; i < relayVar.length; i++) {
-                console.log(relayVar[i])
                 const ModelItem = ExplorationFactory.CreateExplorationLocation(relayVar[i].value, null)
                 relayVar[i].value = ModelItem;
                 relayVar[i].display_str = ModelItem.Name? ModelItem.Name : "";
             }
 
             return relayVar
+        },
+        returnOptionDisplay(this: EventRunner, eventSource : any, relayVar : IChoice, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null){
+            return ( 
+            
+                <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
+                    <div className="row">
+                        <div className="verticalspacerbig" />
+                        <div className="col">
+                            <GenericDisplay  d_colour={'default'} d_name={relayVar.value.Name} d_type={"sub"} d_method={() => <ExplorationLocationDisplay data={relayVar.value} />}/>
+                        </div>
+                    </div>
+                </ErrorBoundary>
+            )
+        }
+    },
+    validate_location : {
+        event_priotity: 0,        
+        getLocationRestrictions(this: EventRunner, eventSource : any, relayVar : any, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            relayVar.push(context_func as LocationRestriction)
+            return relayVar;
+        },
+        async getLocationRestrictionsPresentable(this: EventRunner, eventSource : any, relayVar : any, trackVal : LocationRestriction[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            return ["TEST", "TEST 2"]
         }
     }
 }

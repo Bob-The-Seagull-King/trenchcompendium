@@ -11,9 +11,26 @@ interface IExplorationLocation extends IStaticOptionContextObject {
     location_value : number
 }
 
+interface LocationRestriction {
+    allowed?: RestrictionSingle[],
+    removed?: RestrictionSingle[],
+    restricted?: RestrictionSingle[],
+    permitted?: RestrictionSingle[],
+    banned?: RestrictionSingle[]
+}
+
+interface RestrictionSingle {
+    tag? : string,
+    type : string,
+    value : string[]
+}
+
 class ExplorationLocation extends StaticOptionContextObject {
     public Description;
     public TableValue : number;
+
+    public RestrictedSelection : LocationRestriction[] | null = null;
+
     /**
      * Assigns parameters and creates a series of description
      * objects with DescriptionFactory
@@ -25,8 +42,24 @@ class ExplorationLocation extends StaticOptionContextObject {
         this.Description = DescriptionFactory(data.description, this);
         this.TableValue = data.location_value;
         this.RunOptionsParse();
+        this.RunRestrictions();
     }
     
+    
+    public RunRestrictions() {
+        const EventProc : EventRunner = new EventRunner();
+
+        EventProc.runEvent(
+            "getLocationRestrictions",
+            this,
+            [],
+            [],
+            null
+        ).then(result => {
+            this.RestrictedSelection = result;
+        });
+    }
+
     public RunOptionsParse() {
         
         const EventProc : EventRunner = new EventRunner();
@@ -39,12 +72,12 @@ class ExplorationLocation extends StaticOptionContextObject {
                 i
             ).then(result => {
                 this.MyOptions[i].Selections = result;
-                console.log(this);
+                
             });
         }
     }
 
 }
 
-export {IExplorationLocation, ExplorationLocation}
+export {IExplorationLocation, ExplorationLocation, LocationRestriction}
 
