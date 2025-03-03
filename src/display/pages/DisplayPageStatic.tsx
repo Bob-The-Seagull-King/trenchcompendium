@@ -419,7 +419,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
             return (
                 
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    <GenericDisplay  d_colour={item.Team} d_name={item.Name} d_type={"sub"} d_method={() => <ExplorationTableDisplay data={item} />}/>
+                    <GenericDisplay  d_colour={item.Team} d_name={item.Name} d_type={""} d_method={() => <ExplorationTableDisplay data={item} />}/>
                 </ErrorBoundary>
             )
         },
