@@ -82,6 +82,23 @@
   text-align: left;
 }
 
+.titleShapeDual {
+    display: flex;
+    align-items: center; /* Align items vertically */
+    justify-content: space-between; /* Ensures elements are spaced */
+    width: 100%;
+}
+
+.titlebodyDual:first-child {
+  margin-left: auto; /* Pushes the first div to the right */
+  text-align: right;
+}
+
+.titlebodyDual:last-child {
+  flex: 1; /* Makes the second div take available space */
+  text-align: center;
+}
+
 // Alignment and Flex -----------------------------------------
 
 .centerPosition {

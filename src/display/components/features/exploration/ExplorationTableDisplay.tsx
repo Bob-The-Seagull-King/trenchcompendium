@@ -12,6 +12,7 @@ import { Ability } from '../../../../classes/feature/ability/Ability';
 import OptionSetStaticDisplay from '../../subcomponents/description/OptionSetStaticDisplay';
 import { ExplorationTable } from '../../../../classes/feature/exploration/ExplorationTable';
 import ExplorationLocationDisplay from './ExplorationLocationDisplay';
+import GenericTableItemDisplay from '../../../components/generics/GenericTableItemDisplay';
 
 const ExplorationTableDisplay = (props: any) => {
     const explorationTableObject: ExplorationTable = props.data
@@ -21,10 +22,7 @@ const ExplorationTableDisplay = (props: any) => {
             <div className='abilityInternalStructure'>
                 {explorationTableObject.ExplorationLocations.map((item) => (
                     <div key={item.ID}>
-                    <div className='abilityInternalStructure'>
-                        {"Exploration Score: " + item.TableValue + " - " + item.Name  /* Name */}
-                    </div>
-                    <ExplorationLocationDisplay data={item}/>
+                        <GenericTableItemDisplay d_value={item.TableValue} d_colour={'default'} d_valuetitle={"Score: "} d_name={item.Name} d_type={""} d_method={() => <ExplorationLocationDisplay data={item} />}/>
                     </div>
                 ))}
             </div>

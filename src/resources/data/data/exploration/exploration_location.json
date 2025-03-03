@@ -97,5 +97,110 @@
             }
         ],
         "options": []
+    },
+    {
+        "id": "el_heavyweaponscache",
+        "name": "Heavy Weapons Cache",
+        "source": "core",
+        "tags": {
+            "exploration_table": "et_commonlocations"
+        },
+        "contextdata": {"location_rule_option": {}},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You find a hidden cache of Heavy Weapons. Choose one."
+            }
+        ],
+        "location_value": 5,
+        "options": [{
+            "ref_id" : "ot_heavyweaponscache",
+            "name" : "Heavy Weapons Cache Options",
+            "description" : [],
+            "category" : "type",
+            "type" : "text",
+            "strictness" : "strict",
+            "predefined_options" : [],
+            "option_context" : {"basic_option_default":{}},
+            "data_search" : {      
+                "searchtype": "complex",
+                "searchparam":    {
+                    "type": "explorationlocation",
+                    "request":    {
+                        "operator": "and",
+                        "terms": [
+                            {             
+                                "item": "tags",
+                                "value": "location_option",
+                                "equals": true,
+                                "strict": true,
+                                "istag": true,
+                                "tagvalue": "el_heavyweaponscache"
+                            }
+                        ],
+                        "subparams": []
+                    }
+                }                        
+            }
+        } ]
+    },
+    {
+        "id": "el_heavyweaponscache_surplus",
+        "name": "Surplus",
+        "source": "core",
+        "tags": {
+            "location_option": "el_heavyweaponscache"
+        },
+        "contextdata": {
+            "gain_new_item": {
+                "count": 1,
+                "obey_restriction": true,
+                "obey_faction": true,
+                "limitations": {
+                    "required": [
+                        {
+                            "category": "melee",
+                            "res_type": "keyword",
+                            "value": "kw_heavy"
+                        },
+                        {
+                            "category": "ranged",
+                            "res_type": "keyword",
+                            "value": "kw_heavy"
+                        }
+                    ]
+                }
+            }
+
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Choose one HEAVY weapon in your warband’s armoury. Add one of those weapons to your warband’s roster for free. You cannot exceed the LIMIT on a weapon in this way.",
+                "glossary": [{"val": "HEAVY", "id": "kw_heavy"}]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "el_heavyweaponscache_specialise",
+        "name": "Specialise",
+        "source": "core",
+        "tags": {
+            "location_option": "el_heavyweaponscache"
+        },
+        "contextdata": {
+            "single_exploration_glory_item": {
+                "cost": 5
+            }
+
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You may purchase a Glory Item that costs 5 Glory or less and is allowed by your warband."
+            }
+        ],
+        "options": []
     }
 ]

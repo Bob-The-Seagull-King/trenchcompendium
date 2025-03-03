@@ -16,6 +16,7 @@ import { ErrorBoundary } from "react-error-boundary";
 import GenericDisplay from "../../display/components/generics/GenericDisplay"
 import ExplorationLocationDisplay from "../../display/components/features/exploration/ExplorationLocationDisplay";
 import { LocationRestriction } from "../../classes/feature/exploration/ExplorationLocation";
+import { Faction } from "../../classes/feature/faction/Faction";
 
 export const BaseContextCallTable : CallEventTable = {
     option_search_viable: {
@@ -541,7 +542,35 @@ export const BaseContextCallTable : CallEventTable = {
             return relayVar;
         },
         async getLocationRestrictionsPresentable(this: EventRunner, eventSource : any, relayVar : any, trackVal : LocationRestriction[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
-            return ["TEST", "TEST 2"]
+                        
+            const { FactionFactory } = await import("../../factories/features/FactionFactory");
+
+            const AddedCollection : string[] = []
+
+            for (let i = 0; i < trackVal.length; i++) {
+                const LocationList : LocationRestriction = trackVal[i]
+
+                if (LocationList.allowed) {
+                    for (let j = 0; j < LocationList.allowed.length; j++) {
+                        const Requirement = LocationList.allowed[j]
+                        const NewStringParts = []
+                        NewStringParts.push("Faction: ")
+
+                        if (Requirement.type == "faction") {
+                            for (let k = 0; k < Requirement.value.length; k++) {
+                                const ValKey : Faction = FactionFactory.CreateNewFaction(Requirement.value[k], null)
+                                NewStringParts.push(makestringpresentable(ValKey.Name? ValKey.Name : ""))
+                            }
+                        }              
+
+                        AddedCollection.push(NewStringParts.join(' '));
+                    }
+                }
+            }
+
+            const StringCollection : string[] = AddedCollection;
+
+            return relayVar.concat(StringCollection);
         }
     }
 }
