@@ -7,13 +7,13 @@
 import { IStaticOptionContextObject, StaticOptionContextObject } from '../../options/StaticOptionContextObject';
 import { DescriptionFactory } from '../../../utility/functions';
 import { ContextObject, IContextObject } from '../../contextevent/contextobject';
+import { BaseAddon, IBaseAddon } from './BaseAddon';
 
-interface IAbility extends IStaticOptionContextObject {
-    description: []
+interface IAbility extends IBaseAddon {
+    ability_category? : string
 }
 
-class Ability extends StaticOptionContextObject {
-    public Description;
+class Ability extends BaseAddon {
     /**
      * Assigns parameters and creates a series of description
      * objects with DescriptionFactory
@@ -22,7 +22,6 @@ class Ability extends StaticOptionContextObject {
     public constructor(data: IAbility, parent : ContextObject | null)
     {
         super(data, parent)
-        this.Description = DescriptionFactory(data.description, this);
     }
 
 }
