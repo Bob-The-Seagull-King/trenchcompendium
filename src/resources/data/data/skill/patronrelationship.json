@@ -1,0 +1,10 @@
+[
+    {
+        "id": "pt_sublimegate",
+        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_fidaiofalamut","fc_ironsultanate_fv_houseofwisdom"]
+    },
+    {
+        "id": "pt_sublimegate",
+        "faction_id": ["fc_ironsultanate_fv_defendersoftheironwall"]
+    }
+]

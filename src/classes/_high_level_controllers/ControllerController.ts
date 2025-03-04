@@ -18,6 +18,7 @@ class ControllerController {
     ExplorationTableCollectionController;
     InjuryCollectionController;
     SkillGroupCollectionController;
+    PatronCollectionController;
 
     /**
      * Initializes all controllers, this also means all searching
@@ -35,6 +36,7 @@ class ControllerController {
         this.ExplorationTableCollectionController = new CollectionsListPage('explorationtable');
         this.InjuryCollectionController = new CollectionsListPage('injury');
         this.SkillGroupCollectionController = new CollectionsListPage('skillgroup');
+        this.PatronCollectionController = new CollectionsListPage('patron');
     }
 }
 

@@ -19,7 +19,7 @@
         "id": "sk_patronskill",
         "name": "Patron Skill",
         "source": "core",
-        "tags": { },
+        "tags": { "patron": true },
         "contextdata": { },
         "description": [            
             {
@@ -35,7 +35,7 @@
         "id": "sk_patronskill_end",
         "name": "Patron Skill",
         "source": "core",
-        "tags": { },
+        "tags": { "patron": true },
         "contextdata": { },
         "description": [            
             {
@@ -205,5 +205,192 @@
         "options": [],
         "table_val": 11,
         "skill_group": ["sg_meleeandstrength"]
+    },
+    {
+        "id": "sk_swordofallah",
+        "name": "Sword of Allah",
+        "source": "core",
+        "tags": { },
+        "contextdata": {"skill_option": {} },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Select any skill you want from the Melee & Strength Skills."
+            }
+        ],
+        "options": [{
+            "ref_id" : "ot_swordofallah",
+            "name" : "Melee Skills",
+            "description" : [],
+            "category" : "type",
+            "type" : "text",
+            "strictness" : "strict",
+            "predefined_options" : [],
+            "option_context" : {"basic_option_default":{}},
+            "data_search" : {      
+                "searchtype": "complex",
+                "searchparam":    {
+                    "type": "skill",
+                    "request":    {
+                        "operator": "and",
+                        "terms": [
+                            {             
+                                "item": "skill_group",
+                                "value": "sg_meleeandstrength",
+                                "equals": true,
+                                "strict": true
+                            },
+                            {
+                                "item": "tags",
+                                "value": "patron",
+                                "equals": false,
+                                "strict": true,
+                                "istag" : true,
+                                "tagvalue": ""
+                            }
+                        ],
+                        "subparams": []
+                    }
+                }                        
+            }
+        } ],
+        "skill_group": ["pt_sublimegate"]
+    },
+    {
+        "id": "sk_exoticwares",
+        "name": "Exotic Wares",
+        "source": "core",
+        "tags": { },
+        "contextdata": {"additions": [
+                    {
+                        "list": "fc_newantioch",
+                        "count": 1,
+                        "option_id": 0,
+                        "restriction": [
+                            { "category": "melee" },
+                            { "category": "ranged" },
+                            { "category": "armor" }
+                        ]
+                    }
+                ] },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This model may buy, at the given cost, any one weapon or armour from the New Antioch Armoury. No other model in the warband may use this item."
+            }
+        ],
+        "options": [{
+            "ref_id" : "ot_newantioch",
+            "name" : "New Antioch Items",
+            "description" : [],
+            "category" : "type",
+            "type" : "text",
+            "strictness" : "strict",
+            "predefined_options" : [],
+            "option_context" : {"basic_option_default":{}},
+            "data_search" : {      
+                "searchtype": "complex",
+                "searchparam":    {
+                    "type": "factionequipmentrelationship",
+                    "request":    {
+                        "operator": "and",
+                        "terms": [
+                            {             
+                                "item": "faction_id",
+                                "value": "fc_newantioch",
+                                "equals": true,
+                                "strict": true
+                            }
+                        ],
+                        "subparams": []
+                    }
+                }                        
+            }
+        } ],
+        "skill_group": ["pt_sublimegate"]
+    },
+    {
+        "id": "sk_janissarytraining",
+        "name": "Jannisary Training",
+        "source": "core",
+        "tags": { "trait": true },
+        "contextdata": { "enhance_action" : { "category": ["melee"], "tag": ["melee"]} },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "During any Activation where the model has Charged, it gains +1 DICE to hit with melee attacks. Additionally, this model ignores any penalties for using an Off-Hand Weapon.",
+                "glossary": [
+                {"val": "+1 DICE", "id": "kw_plusdice"}
+            ]
+            }
+        ],
+        "options": [],
+        "skill_group": ["pt_sublimegate"]
+    },
+    {
+        "id": "sk_gures",
+        "name": "Güreş",
+        "source": "core",
+        "tags": { "trait": true },
+        "contextdata": {  },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This model ignores the penalties to ACTION rolls from being Down. Additionally, this model gains +1 DICE to hit and injure Downed enemy models with melee attacks.",
+                "glossary": [
+                    {"val": "ACTION", "id": "kw_action"},
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "Downed", "id": "gl_down"},
+                    {"val": "Down", "id": "gl_down"}
+            ]
+            }
+        ],
+        "options": [],
+        "skill_group": ["pt_sublimegate"]
+    },
+    {
+        "id": "sk_rightfullyguided",
+        "name": "Rightfully Guided",
+        "source": "core",
+        "tags": { "trait": true },
+        "contextdata": { "activated": {} },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "At the beginning of the battle, select any one ACTION (aside from a Charge or a standard melee/ranged Attack) by any enemy model. This ACTION cannot target, affect or damage the Rightfully Guided model in any way.",
+                "glossary": [
+                    {"val": "ACTION", "id": "kw_action"}
+            ]
+            }
+        ],
+        "options": [],
+        "skill_group": ["pt_sublimegate"]
+    },
+    {
+        "id": "sk_sultanfavour",
+        "name": "Sultan's Favour",
+        "source": "core",
+        "tags": { "trait": true },
+        "contextdata": { 
+        "warband_wide": {}, "add_extra_model": {
+            "count": 1,
+            "restriction": [
+                {
+                    "res_type": "keyword",
+                    "val": "kw_ELITE"
+                }
+            ]
+        } },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You can increase the number of models that are normally limited (such as Janissaries) by one. This does not include ELITE models.",
+                "glossary": [
+                    {"val": "ELITE", "id": "kw_elite"}
+            ]
+            }
+        ],
+        "options": [],
+        "skill_group": ["pt_sublimegate"]
     }
 ]

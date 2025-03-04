@@ -21,6 +21,7 @@ import { IContextObject } from "../../contextevent/contextobject";
 import { IInjury } from "../../feature/ability/Injury";
 import { InjuryFactory } from "../../../factories/features/InjuryFactory";
 import { SkillFactory } from "../../../factories/features/SkillFactory";
+import { IPatron } from "../../feature/skillgroup/Patron";
 
 export interface CollectionType {
     searchId      : string,
@@ -203,6 +204,22 @@ export const CollectionDataDex : CollectionDataTable = {
             model.dataresults.sort(byPropertiesOf<IContextObject>(["name", "id"]))
             for (i = 0; i < model.dataresults.length; i++) {
                 const summonNew = SkillFactory.CreateSkillGroup(model.dataresults[i], null);
+                const ItemNew = new ViewTableItem(summonNew, getColour("default"));
+                model.itemcollection.push(ItemNew);
+            }
+        }
+    },
+    patron: {
+        searchId: 'patron', 
+        pageName: 'patron',
+        sort: ["name", "id"],
+        postSearch(model : ViewCollectionsModel) {
+            model.CleanupItems();
+            model.CleanupCollection();
+            let i = 0;
+            model.dataresults.sort(byPropertiesOf<IPatron>(["name", "id"]))
+            for (i = 0; i < model.dataresults.length; i++) {
+                const summonNew = SkillFactory.CreatePatron(model.dataresults[i], null);
                 const ItemNew = new ViewTableItem(summonNew, getColour("default"));
                 model.itemcollection.push(ItemNew);
             }

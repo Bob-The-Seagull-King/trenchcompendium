@@ -14,7 +14,7 @@ import { Skill } from '../../../../classes/feature/ability/Skill';
 
 const SkillDisplay = (props: any) => {
     const skillObject: Skill = props.data
-
+    
     return (
         <ErrorBoundary fallback={<div>Something went wrong with SkillDisplay.tsx</div>}>
             <div className='abilityInternalStructure'>

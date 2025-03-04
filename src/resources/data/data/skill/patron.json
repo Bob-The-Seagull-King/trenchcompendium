@@ -1,0 +1,15 @@
+[
+    {
+        "id": "pt_sublimegate",
+        "name": "Sublime Gate",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Your patron is one of the high-ranking nobles of the Sultanate: an Emir, Pasha, Vizier or even the Sultan himself."
+            }
+        ]
+    }
+]

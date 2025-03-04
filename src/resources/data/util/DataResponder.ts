@@ -144,6 +144,12 @@ class DataResponder {
             case "skillgroup": {
                 return RelevantSet.skillgroup.concat(data)
             }
+            case "patron": {
+                return RelevantSet.patrondata.concat(data)
+            }
+            case "patronrelationship": {
+                return RelevantSet.patronrelationship.concat(data)
+            }
             case "explorationtable": {
                 return RelevantSet.explorationtable.concat(data)
             }
@@ -343,6 +349,7 @@ class DataResponder {
      * @returns boolean if the data object matches the search term
      */
     public static ValidateBySearch(term: IDataRequestSearchTerm, data: any) {
+
         if (!term.istag) {
             const dynamicKey = term.item as keyof (typeof data);
             
@@ -376,7 +383,6 @@ class DataResponder {
             }
         } else {
             const dynamicKey = term.item as keyof (typeof data);
-            
             if (data[dynamicKey] != undefined) {
                 if (data[dynamicKey][term.value]) {
                     if (term.tagvalue === "") {
