@@ -30,5 +30,180 @@
         "options": [],
         "table_val": 2,
         "skill_group": ["sg_meleeandstrength"]
+    },
+    {
+        "id": "sk_patronskill_end",
+        "name": "Patron Skill",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Pick one of the Skills offered by your patron."
+            }
+        ],
+        "options": [],
+        "table_val": 12,
+        "skill_group": ["sg_meleeandstrength"]
+    },
+    {
+        "id": "sk_standfirm",
+        "name": "Stand Firm",
+        "source": "core",
+        "tags": { "trait": true },
+        "contextdata": { "activated": {} },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This model treats the first Down result it suffers each battle as a Minor Hit.",
+                "glossary": [{"val": "Down", "id": "gl_down"}]
+            }
+        ],
+        "options": [],
+        "table_val": 3,
+        "skill_group": ["sg_meleeandstrength"]
+    },
+    {
+        "id": "sk_parry",
+        "name": "Parry",
+        "source": "core",
+        "tags": {"trait": true },
+        "contextdata": { },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Enemy models suffer -1 DICE to hit this model with melee attacks.",
+                "glossary": [{"val": "-1 DICE", "id": "kw_minusdice"}]
+            }
+        ],
+        "options": [],
+        "table_val": 4,
+        "skill_group": ["sg_meleeandstrength"]
+    },
+    {
+        "id": "sk_closequartercombat",
+        "name": "Close Quarter Combat",
+        "source": "core",
+        "tags": {"trait": true },
+        "contextdata": {"enhance_action" : { "category": ["melee"], "tag": ["melee"]} },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "When this model is touching a piece of terrain, it gains +1 DICE to hit and injure with melee attacks",
+                "glossary": [{"val": "+1 DICE", "id": "kw_plusdice"}]
+            }
+        ],
+        "options": [],
+        "table_val": 5,
+        "skill_group": ["sg_meleeandstrength"]
+    },
+    {
+        "id": "sk_relentlesscharge",
+        "name": "Relentless Charge",
+        "source": "core",
+        "tags": { "trait": true},
+        "contextdata": {"enhance_action" : { "category": ["melee"], "tag": ["melee"]} },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "During any Activation where this model has Charged, it gains +1 DICE to hit with melee attacks.",
+                "glossary": [{"val": "+1 DICE", "id": "kw_plusdice"}]
+            }
+        ],
+        "options": [],
+        "table_val": 6,
+        "skill_group": ["sg_meleeandstrength"]
+    },
+    {
+        "id": "sk_meleeproficiency",
+        "name": "Melee Proficiency",
+        "source": "core",
+        "tags": {"trait": true },
+        "contextdata": {
+            "upgrade_stat": { "upgrades": [{"stat": "melee", "value": 1}]} },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Add +1 DICE to the Melee Characteristic of this model.",
+                "glossary": [{"val": "+1 DICE", "id": "kw_plusdice"}]
+            }
+        ],
+        "options": [],
+        "table_val": 7,
+        "skill_group": ["sg_meleeandstrength"]
+    },
+    {
+        "id": "sk_strengthofsamson",
+        "name": "Strength of Samson",
+        "source": "core",
+        "tags": { "trait": true },
+        "contextdata": { 
+            "enhance_action" : { "category": ["melee"], "tag": ["melee"]},
+            "keyword_mod": {"type": "add", "value": "kw_strong"}
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This model gains the Keyword STRONG and +1 DICE to injure with melee attacks.",
+                "glossary": [{"val": "STRONG", "id": "kw_strong"},{"val": "+1 DICE", "id": "kw_plusdice"}]
+            }
+        ],
+        "options": [],
+        "table_val": 8,
+        "skill_group": ["sg_meleeandstrength"]
+    },
+    {
+        "id": "sk_hardasnails",
+        "name": "Hard as Nails",
+        "source": "core",
+        "tags": {"trait": true },
+        "contextdata": { "activated": {} },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This model ignores the first Down result in each battle. If this model is TOUGH, it can instead ignore the Down condition gained when it negates being taken Out of Action using the Keyword TOUGH. Regardless of how this ability is used, it can only be used once per battle.",
+                "glossary": [
+                    {"val": "TOUGH", "id": "kw_tough"},
+                    {"val": "Down", "id": "gl_down"}
+                ]
+            }
+        ],
+        "options": [],
+        "table_val": 9,
+        "skill_group": ["sg_meleeandstrength"]
+    },
+    {
+        "id": "sk_champion",
+        "name": "Champion",
+        "source": "core",
+        "tags": { "trait": true},
+        "contextdata": { },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "When this model makes a melee attack, it can make an additional melee attack ACTION with a -1 DICE penalty to hit, using a single melee weapon it is equipped with.",
+                "glossary": [{"val": "ACTION", "id": "kw_action"},{"val": "-1 DICE", "id": "kw_minusdice"}]
+            }
+        ],
+        "options": [],
+        "table_val": 10,
+        "skill_group": ["sg_meleeandstrength"]
+    },
+    {
+        "id": "sk_surgicalstrike",
+        "name": "Surgical Strike",
+        "source": "core",
+        "tags": { "trait": true },
+        "contextdata": { "enhance_action" : { "category": ["melee"], "tag": ["melee"]} },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "One of the melee attacks of this model ignores all armour once per Activation."
+            }
+        ],
+        "options": [],
+        "table_val": 11,
+        "skill_group": ["sg_meleeandstrength"]
     }
 ]
