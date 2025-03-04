@@ -23,7 +23,7 @@ const SkillGroupDisplay = (props: any) => {
             <div className=''>
                 {skillgroupObject.Skills.map((item) => (
                     <div key={item.ID}>
-                        <GenericTableItemDisplay d_value={item.TableVal} d_colour={'default'} d_valuetitle={"Result: "} d_name={item.Name} d_type={""} d_method={() => <SkillDisplay data={item} />}/>
+                        <GenericTableItemDisplay d_value={item.TableVal >= 0 ? item.TableVal : "Choose"} d_colour={'default'} d_valuetitle={"Result: "} d_name={item.Name} d_type={""} d_method={() => <SkillDisplay data={item} />}/>
                     </div>
                 ))}
             </div>
