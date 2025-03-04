@@ -144,6 +144,9 @@ class DataResponder {
             case "explorationtable": {
                 return RelevantSet.explorationtable.concat(data)
             }
+            case "injury": {
+                return RelevantSet.injurydata.concat(data)
+            }
             case "testdynamicfeature": {
                 return RelevantSet.testdynamicdata.concat(data)
             }

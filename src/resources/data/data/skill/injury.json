@@ -1,0 +1,39 @@
+[
+    {
+        "id": "in_dead",
+        "name": "Dead",
+        "source": "core",
+        "tags": {
+        },
+        "contextdata": {
+            "kill_character": {}
+         },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The wound proved to be fatal. The character is permanently lost even if this was not the third Battle Scar it sustained."
+            }
+        ],
+        "table_val": 11,
+        "options": []
+    },
+    {
+        "id": "in_captured",
+        "name": "Captured",
+        "source": "core",
+        "tags": {
+        },
+        "contextdata": {
+            "remove_character": {},
+            "strip_equipment": {}
+         },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The enemy captures the character. Players can negotiate a ransom price in ducats for the release of the character. For as long as this is not paid, the character remains in the hands of the opposing player. Otherwise, treat this result as Full Recovery. Any equipment belonging to the character is lost in either case."
+            }
+        ],
+        "table_val": 12,
+        "options": []
+    }
+]

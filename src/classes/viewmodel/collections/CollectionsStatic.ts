@@ -18,6 +18,8 @@ import { IBookRule } from "../../feature/bookrules/BookRule";
 import { BookRuleFactory } from "../../../factories/features/BookRuleFactory";
 import { ExplorationFactory } from "../../../factories/features/ExplorationFactory";
 import { IContextObject } from "../../contextevent/contextobject";
+import { IInjury } from "../../feature/ability/Injury";
+import { InjuryFactory } from "../../../factories/features/InjuryFactory";
 
 export interface CollectionType {
     searchId      : string,
@@ -168,6 +170,22 @@ export const CollectionDataDex : CollectionDataTable = {
             model.dataresults.sort(byPropertiesOf<IContextObject>(["id"]))
             for (i = 0; i < model.dataresults.length; i++) {
                 const summonNew = ExplorationFactory.CreateExplorationTable(model.dataresults[i], null);
+                const ItemNew = new ViewTableItem(summonNew, getColour('default'));
+                model.itemcollection.push(ItemNew);
+            }
+        }
+    },
+    injury: {
+        searchId: 'injury', 
+        pageName: 'injury',
+        sort: ["table_val"],
+        postSearch(model : ViewCollectionsModel) {
+            model.CleanupItems();
+            model.CleanupCollection();
+            let i = 0;
+            model.dataresults.sort(byPropertiesOf<IInjury>(["table_val"]))
+            for (i = 0; i < model.dataresults.length; i++) {
+                const summonNew = InjuryFactory.CreateInjury(model.dataresults[i], null);
                 const ItemNew = new ViewTableItem(summonNew, getColour('default'));
                 model.itemcollection.push(ItemNew);
             }

@@ -14,6 +14,7 @@ export const ROUTES = {
     COMPENDIUM_GAMERULE_ROUTE: '/gamerule/*',
     COMPENDIUM_CAMPAIGNRULE_ROUTE: '/campaign/*',
     COMPENDIUM_EXPLORATION_ROUTE: '/exploration/*',
+    COMPENDIUM_INJURY_ROUTE: '/injury/*',
     
     TOOLS_CONTENT_UPLOAD_ROUTE: '/content/*',
     TOOLS_CONTENT_SAVE_ITEM: '/saveitem/*',

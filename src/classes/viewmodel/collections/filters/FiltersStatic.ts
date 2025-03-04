@@ -355,5 +355,19 @@ export const FitlerDataDex : FilterDataTable = {
         findText() {
             return []
         }
+    },
+    injury: {
+        searchId: 'injury',
+        findTags() {
+            const tempTags: FilterTag[] = []
+            return tempTags;
+        },
+        findMisc() {
+            const tempMisc: FilterItem[] = []
+            return tempMisc;
+        },
+        findText() {
+            return []
+        }
     }
 }

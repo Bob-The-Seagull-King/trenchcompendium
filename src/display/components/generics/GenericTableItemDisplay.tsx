@@ -21,7 +21,7 @@ const GenericTableItemDisplay = (props: any) => {
         <div className={'basestructurenoshadow abilityStructure borderstyler ' + DisplayType + 'border'+getColour(DisplayColour)}>
             <div onClick={() => {setOpen(!open)}} className={'titleShapeDual hovermouse titlebodyDual ' + DisplayType + 'background'+getColour(DisplayColour)}>
                 <div className="">
-                    {DisplayValueTitle + (DisplayValue.length > 1? DisplayValue : "0"+DisplayValue)}
+                    {DisplayValueTitle + (DisplayValue.toString().length > 1? DisplayValue : "0"+DisplayValue)}
                 </div>
                 <div className="titlebodyMainTitle">
                     {DisplayName || ""}

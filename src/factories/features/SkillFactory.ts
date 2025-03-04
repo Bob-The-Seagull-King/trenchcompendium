@@ -1,7 +1,7 @@
 import { Requester } from '../Requester';
 import { StaticDataCache } from '../../classes/_high_level_controllers/StaticDataCache';
 import { ContextObject, IContextObject } from '../../classes/contextevent/contextobject';
-import { ISkill, Skill} from '../../classes/feature/skill/Skill';
+import { ISkill, Skill} from '../../classes/feature/ability/Skill';
 
 class SkillFactory {
 

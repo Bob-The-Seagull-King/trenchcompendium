@@ -10,6 +10,8 @@ import FactionCollectionDisplay from "../components/features/faction/FactionColl
 import ScenarioDisplay from "../components/features/scenario/ScenarioDisplay";
 import BookRuleDisplay from "../components/features/glossary/BookRuleDisplay";
 import ExplorationTableDisplay from "../components/features/exploration/ExplorationTableDisplay";
+import InjuryDisplay from "../components/features/ability/InjuryDisplay";
+import GenericTableItemDisplay from "../components/generics/GenericTableItemDisplay";
 
 export interface DisplayCollectionType {
     searchId      : string,
@@ -420,6 +422,26 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
                 
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
                     <GenericDisplay  d_colour={item.Team} d_name={item.Name} d_type={""} d_method={() => <ExplorationTableDisplay data={item} />}/>
+                </ErrorBoundary>
+            )
+        },
+        returnFilterSelect(manager : FilterManager, update : NoneToNoneFunction, close : NoneToNoneFunction) {
+            return (
+                
+                <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
+                    
+                </ErrorBoundary>
+            )
+        }
+    },
+    injury: {
+        searchId: 'injury',
+        width: 10 ,
+        returnDisplay(item: any) {
+            return (
+                
+                <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
+                        <GenericTableItemDisplay d_value={item.HeldItem.TableVal} d_colour={'default'} d_valuetitle={"Result: "} d_name={item.HeldItem.Name} d_type={""} d_method={() => <InjuryDisplay data={item.HeldItem} />}/>
                 </ErrorBoundary>
             )
         },
