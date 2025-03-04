@@ -22,6 +22,7 @@ import { ExplorationTable } from "../feature/exploration/ExplorationTable";
 import { ExplorationLocation } from "../feature/exploration/ExplorationLocation";
 import { Skill } from "../feature/ability/Skill";
 import { Injury } from "../feature/ability/Injury";
+import { SkillGroup } from "../feature/skillgroup/SkillGroup";
 
 /**
  * Contains the Controller objects for 'Tools' pages.
@@ -54,6 +55,7 @@ class StaticDataCache {
     public ExplorationLocationCache :  {[tokenid: string]: ExplorationLocation} = {};
     public SkillCache :  {[tokenid: string]: Skill} = {};
     public InjuryCache :  {[tokenid: string]: Injury} = {};
+    public SkillGroupCache :  {[tokenid: string]: SkillGroup} = {};
 
 
     public CheckID(cachename : string, id_val : string) {
@@ -102,6 +104,8 @@ class StaticDataCache {
                 return (this.ExplorationLocationCache[id_val] == null)
             case 'injury': 
                 return (this.InjuryCache[id_val] == null)
+            case 'skillgroup': 
+                return (this.SkillGroupCache[id_val] == null)
             default: return false;
         }
     }
@@ -216,6 +220,11 @@ class StaticDataCache {
             case 'injury':   
                 if (this.InjuryCache[obj.ID] == null) {
                     this.InjuryCache[obj.ID] = obj as Injury;
+                }
+                return;
+            case 'skillgroup':   
+                if (this.SkillGroupCache[obj.ID] == null) {
+                    this.SkillGroupCache[obj.ID] = obj as SkillGroup;
                 }
                 return;
             default: return;

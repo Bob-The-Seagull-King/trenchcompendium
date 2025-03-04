@@ -141,6 +141,9 @@ class DataResponder {
             case "skill": {
                 return RelevantSet.skilldata.concat(data)
             }
+            case "skillgroup": {
+                return RelevantSet.skillgroup.concat(data)
+            }
             case "explorationtable": {
                 return RelevantSet.explorationtable.concat(data)
             }

@@ -3,9 +3,7 @@
         "id": "es_reroll",
         "name": "Reroll",
         "source": "core",
-        "tags": {
-            "category": "exploration"
-        },
+        "tags": { },
         "contextdata": { },
         "description": [            
             {
@@ -14,6 +12,23 @@
                 "glossary": [{"val": "Exploration Dice", "id": "gl_explorationdice"}]
             }
         ],
-        "options": []
+        "options": [],
+        "skill_group": ["sg_exploration"]
+    },
+    {
+        "id": "sk_patronskill",
+        "name": "Patron Skill",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Pick one of the Skills offered by your patron."
+            }
+        ],
+        "options": [],
+        "table_val": 2,
+        "skill_group": ["sg_meleeandstrength"]
     }
 ]

@@ -20,6 +20,7 @@ import { ExplorationFactory } from "../../../factories/features/ExplorationFacto
 import { IContextObject } from "../../contextevent/contextobject";
 import { IInjury } from "../../feature/ability/Injury";
 import { InjuryFactory } from "../../../factories/features/InjuryFactory";
+import { SkillFactory } from "../../../factories/features/SkillFactory";
 
 export interface CollectionType {
     searchId      : string,
@@ -187,6 +188,22 @@ export const CollectionDataDex : CollectionDataTable = {
             for (i = 0; i < model.dataresults.length; i++) {
                 const summonNew = InjuryFactory.CreateInjury(model.dataresults[i], null);
                 const ItemNew = new ViewTableItem(summonNew, getColour('default'));
+                model.itemcollection.push(ItemNew);
+            }
+        }
+    },
+    skillgroup: {
+        searchId: 'skillgroup', 
+        pageName: 'skillgroup',
+        sort: ["name", "id"],
+        postSearch(model : ViewCollectionsModel) {
+            model.CleanupItems();
+            model.CleanupCollection();
+            let i = 0;
+            model.dataresults.sort(byPropertiesOf<IContextObject>(["name", "id"]))
+            for (i = 0; i < model.dataresults.length; i++) {
+                const summonNew = SkillFactory.CreateSkillGroup(model.dataresults[i], null);
+                const ItemNew = new ViewTableItem(summonNew, getColour("default"));
                 model.itemcollection.push(ItemNew);
             }
         }

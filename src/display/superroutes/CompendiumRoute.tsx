@@ -44,6 +44,7 @@ const CompendiumRoute: React.FC<IControllerProp> = (prop) => {
             <Route path={ROUTES.COMPENDIUM_CAMPAIGNRULE_ROUTE} element={<NoFilterDisplayCompendium controller={prop.controller.CampaignRulesCollectionController}/>} />
             <Route path={ROUTES.COMPENDIUM_EXPLORATION_ROUTE} element={<NoFilterDisplayCompendium controller={prop.controller.ExplorationTableCollectionController}/>} />
             <Route path={ROUTES.COMPENDIUM_INJURY_ROUTE} element={<AllDisplayNoFilterCompendium controller={prop.controller.InjuryCollectionController}/>} />
+            <Route path={ROUTES.COMPENDIUM_SKILL_ROUTE} element={<BaseDisplayCompendium controller={prop.controller.SkillGroupCollectionController}/>} />
             </Routes>
             </div>
         </ErrorBoundary>

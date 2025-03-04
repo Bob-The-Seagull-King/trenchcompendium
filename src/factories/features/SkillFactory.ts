@@ -2,6 +2,7 @@ import { Requester } from '../Requester';
 import { StaticDataCache } from '../../classes/_high_level_controllers/StaticDataCache';
 import { ContextObject, IContextObject } from '../../classes/contextevent/contextobject';
 import { ISkill, Skill} from '../../classes/feature/ability/Skill';
+import { SkillGroup } from '../../classes/feature/skillgroup/SkillGroup';
 
 class SkillFactory {
 
@@ -29,6 +30,33 @@ class SkillFactory {
         }
         const ruledata = Requester.MakeRequest({searchtype: "id", searchparam: {type: "skill", id: _val}}) as ISkill
         const rulenew = SkillFactory.CreateSkill(ruledata, parent)
+        return rulenew;
+    }
+    
+    /**
+     * Creates an ability based on provided data
+     * @param _ability The data in IPlayerAbility format describing the ability
+     * @returns A newly created ability
+     */
+    static CreateSkillGroup(_rule: IContextObject, parent : ContextObject | null) {
+        const cache = StaticDataCache.getInstance();
+        const isValid = (cache.CheckID('skillgroup', _rule.id))
+        if (isValid == false) {
+            return cache.SkillGroupCache[_rule.id];
+        }
+        const rule = new SkillGroup(_rule, parent)
+        cache.AddToCache('skillgroup', rule);
+        return rule;
+    }
+
+    static CreateNewSkillGroup(_val : string, parent : ContextObject | null) {
+        const cache = StaticDataCache.getInstance();
+        const isValid = (cache.CheckID('skillgroup', _val))
+        if (isValid == false) {
+            return cache.SkillGroupCache[_val];
+        }
+        const ruledata = Requester.MakeRequest({searchtype: "id", searchparam: {type: "group", id: _val}}) as IContextObject
+        const rulenew = SkillFactory.CreateSkillGroup(ruledata, parent)
         return rulenew;
     }
 

@@ -36,6 +36,7 @@ import en_explorationtable from '../data/exploration/exploration_table.json'
 
 import en_skill from '../data/skill/skill.json'
 import en_injury from '../data/skill/injury.json'
+import en_skillgroup from '../data/skill/skillgroup.json'
 
 import en_testdynamic from '../data/testitemscontext/testitemdynamic.json'
 import en_teststatic from '../data/testitemscontext/testitemstatic.json'
@@ -75,6 +76,7 @@ export interface DataSetTC {
     explorationlocation : any,
     explorationtable : any,
     skilldata : any,
+    skillgroup : any,
     injurydata : any,
     testdynamicdata : any,
     teststaticdata : any,
@@ -108,6 +110,7 @@ export const DataByLanguageTable : LanguageDataTable = {
         scenariodeployments : en_scenariodeployments,
         explorationlocation : en_explorationlocation,
         skilldata : en_skill,
+        skillgroup : en_skillgroup,
         injurydata : en_injury,
         explorationtable : en_explorationtable,
         testdynamicdata : en_testdynamic,

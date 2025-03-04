@@ -8,10 +8,14 @@ import { StaticContextObject } from '../../contextevent/staticcontextobject';
 import { BaseAddon, IBaseAddon } from './BaseAddon';
 
 interface ISkill extends IBaseAddon {
-    skill_category? : string
+    table_val? : number,
+    skill_group: string[]
 }
 
 class Skill extends BaseAddon {
+    public TableVal : number;
+    public SkillGroups : string[];
+
     /**
      * Assigns parameters and creates a series of description
      * objects with DescriptionFactory
@@ -20,6 +24,14 @@ class Skill extends BaseAddon {
     public constructor(data: ISkill, parent : ContextObject | null)
     {
         super(data, parent)
+
+        this.SkillGroups = data.skill_group;
+
+        if (data.table_val) {
+            this.TableVal = data.table_val
+        } else {
+            this.TableVal = -1;
+        }
     }
 
 }

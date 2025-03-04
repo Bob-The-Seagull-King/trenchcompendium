@@ -1,0 +1,20 @@
+[
+    {
+        "id": "sg_meleeandstrength",
+        "name": "Melee and Strength Skills",
+        "source": "core",
+        "tags": {
+            "category": "model"
+        },
+        "contextdata": { }
+    },
+    {
+        "id": "sg_exploration",
+        "name": "Exploration Skills",
+        "source": "core",
+        "tags": {
+            "category": "exploration"
+        },
+        "contextdata": { }
+    }
+]

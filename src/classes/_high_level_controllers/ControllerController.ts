@@ -17,6 +17,7 @@ class ControllerController {
     CampaignRulesCollectionController;
     ExplorationTableCollectionController;
     InjuryCollectionController;
+    SkillGroupCollectionController;
 
     /**
      * Initializes all controllers, this also means all searching
@@ -33,6 +34,7 @@ class ControllerController {
         this.CampaignRulesCollectionController = new CollectionsListPage('campaignrule');
         this.ExplorationTableCollectionController = new CollectionsListPage('explorationtable');
         this.InjuryCollectionController = new CollectionsListPage('injury');
+        this.SkillGroupCollectionController = new CollectionsListPage('skillgroup');
     }
 }
 
