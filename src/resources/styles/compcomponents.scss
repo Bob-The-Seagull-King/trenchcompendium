@@ -33,11 +33,11 @@
 // Box Structures ----------------------------------------------------
 
 .basestructure {
-    box-shadow: 0 0 5px 1px var(--colour_grey_secondary);
+    box-shadow: 0 0 5px 1px var(--colour_hoverwhite);
     text-align: justify;
     
     &:hover {
-        box-shadow: 0 0 10px 2px var(--colour_grey_secondary);
+        box-shadow: 0 0 10px 2px var(--colour_hoverwhite);
     }
 }
 
@@ -108,10 +108,10 @@
     background: var(--colour_default_main);
     height: 100%;
 
-    box-shadow: 0 0 5px 1px var(--colour_grey_secondary);
+    box-shadow: 0 0 5px 1px var(--colour_hoverwhite);
 
     &:hover {
-        box-shadow: 0 0 10px 2px var(--colour_grey_secondary);
+        box-shadow: 0 0 10px 2px var(--colour_hoverwhite);
     }
 }
 
