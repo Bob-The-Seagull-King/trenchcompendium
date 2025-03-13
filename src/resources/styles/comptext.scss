@@ -1,183 +1,28 @@
 @import './_variables';
 
-// Separator ----------------------------------------------------
-
-.separator {
-  display: flex;
-  align-items: center;
-  text-align: center;
-  color: var(--colour_grey_secondary);
-  font-weight: bolder;
-  font-size: 2rem;
-} 
-
-.separator::before,
-.separator::after {
-content: '';
-flex: 1;
-border-bottom: 1px solid var(--colour_grey_secondary);
+@font-face {
+  font-family: 'Carol Gothic W10 Regular';
+  src: URL('/src/resources/fonts/Carol_Gothic_W10_Regular.ttf') format('truetype');
 }
 
-.separator:not(:empty)::before {
-margin-right: .25em;
+@font-face {
+  font-family: 'Garamond Premier Pro';
+  src: URL('/src/resources/fonts/Garamond_Premier_Pro_Regular.ttf') format('truetype');
 }
 
-.separator:not(:empty)::after {
-margin-left: .25em;
+@font-face {
+  font-family: 'Artisan 12';
+  src: URL('/src/resources/fonts/artisan12.otf') format('truetype');
 }
 
-// Table ----------------------------------------------------
-
-.tableText {
-  color: var(--colour_basic_text) !important;    
-  text-justify: center;
-  display: table-cell;
-  vertical-align: middle;
-  align-content: center !important;
+.font-default {  
+  font-family: "Artisan 12";
 }
 
-.tablecontent {
-  margin: auto;
-  width: 100%;
-  display: flex;
+.font-seriftext {  
+  font-family: "Garamond Premier Pro" ;
 }
 
-// Font Style ----------------------------------------------------
-
-.tagText {
-  font-weight: bolder;
-}
-
-.alignleft {
-  text-align: left;
-}
-
-.titlebody {
-  padding-left: 0.25em;
-  padding-right: 0.25em;
-  padding-bottom: 0.25em;
-  margin: 0em;
-  border-radius: 0em;
-  width: 100%;
-  text-align: center;
-  color: var(--colour_white);
-  font-size: 150%;
-  font-weight: bolder;
-  //font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.titlebodyDual {
-  padding-left: 0.25em;
-  padding-right: 0.25em;
-  padding-bottom: 0.25em;
-  margin: 0em;
-  border-radius: 0em;
-  width: 100%;
-  text-align: center;
-  color: var(--colour_white);
-  font-size: 150%;
-  font-weight: bolder;
-  //font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.titlebodyMainTitle {
-  margin: 0em;
-  
-  text-align: center;
-}
-
-.contentpacklabel {
-  font-size: 2rem;
-}
-
-.glossaryMain {
-    color: var(--colour_default_main);
-    font-weight: bold;
-}
-
-.boldtext {
-  
-  font-weight: bold;
-}
-
-.subtletext {
-    text-align: center;
-    color: var(--colour_grey_secondary);
-    font-size: 200%;
-    font-weight: bolder;
-}
-
-.headertext {
-  font-weight: 700;
-  font-size: 1.5rem;
-}
-
-.headersubtext {
-  font-size: 1rem;
-  font-weight: 400;
-}
-
-.packtitlebase {
-  margin: 0.25em;
- // font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-// Text Alignment ----------------------------------------------------
-
-.statbody {
-  width: 100%;
-  font-weight: 600;
-  text-align: center;
-} 
-
-.widecentertext {
-  text-align: center;
-  width: 100%;
-}  
-
-.tallcentertext {
-  text-align: center;
-  height: 100%;
-}
-
-.stattitle {
-  width: 100%;
-  font-weight: 400;
-  text-align: center;
-}
-
-.itemlisttext {
-  font-size: 125%;
-  text-align: left;
-}
-
-.complextext {
-  font-family: "Libre Baskerville" !important;
-}
-
-.bodytext {
-  font-size: 0.85rem;
-}
-
-.pageaccestext {
-  font-size: 1.75rem;
-  font-weight: 700;
-  color: var(--colour_default_main);
-  margin: 0.1em;
-}
-
-.packtitlelarge {
-  font-size: 1.75rem;
-  font-weight: 700;  
- // font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
-}
-
-.packtitlesmall {
-  font-size: 1.25rem;
-  font-weight: 400;
-}
-
-.largefonttext {
-  font-size: 4rem;
-  font-weight: 700;
+.font-ornamental {  
+  font-family: "Carol Gothic W10 Regular";
 }

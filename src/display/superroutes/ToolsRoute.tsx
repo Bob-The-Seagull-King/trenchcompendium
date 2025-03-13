@@ -33,11 +33,6 @@ const ToolsRoute: React.FC<IControllerProp> = (prop) => {
         
         <ErrorBoundary fallback={<div>Something went wrong with ToolsRoute.tsx</div>}>
             <div className="backgroundBaseColour font-default" data-theme={theme}>
-                <Routes>
-                    <Route path={ROUTES.TOOLS_CONTENT_UPLOAD_ROUTE} element={<ToolsContentManager manager={prop.controller.ContentManager}/>} />
-                    <Route path={ROUTES.TOOLS_CONTENT_SAVE_ITEM} element={<ToolsSavedItem manager={prop.controller.SaveItemManager}/>} />
-                    <Route path={ROUTES.TOOLS_SCENARIO_GENERATOR} element={<ToolsRandomScenario manager={prop.controller.RandomScenarioManager}/>} />
-                </Routes>
             </div>
         </ErrorBoundary>
     )

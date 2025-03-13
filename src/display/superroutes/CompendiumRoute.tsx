@@ -33,20 +33,6 @@ const CompendiumRoute: React.FC<IControllerProp> = (prop) => {
     return (
         <ErrorBoundary fallback={<div>Something went wrong with CompendiumRoute.tsx</div>}>
             <div className="backgroundBaseColour font-default" data-theme={theme}>
-            <Routes>
-            <Route path={ROUTES.COMPENDIUM_GLOSSARY_ROUTE} element={<BaseDisplayCompendium controller={prop.controller.GlossaryCollectionController}/>} />
-            <Route path={ROUTES.COMPENDIUM_KEYWORD_ROUTE} element={<BaseDisplayCompendium controller={prop.controller.KeywordCollectionController}/>} />
-            <Route path={ROUTES.COMPENDIUM_MODEL_ROUTE} element={<BaseDisplayCompendium controller={prop.controller.ModelCollectionController}/>} />
-            <Route path={ROUTES.COMPENDIUM_EQUIPMENT_ROUTE} element={<BaseDisplayCompendium controller={prop.controller.EquipmentCollectionController}/>} />
-            <Route path={ROUTES.COMPENDIUM_FACTION_ROUTE} element={<BaseDisplayCompendium controller={prop.controller.FactionCollectionController}/>} />
-            <Route path={ROUTES.COMPENDIUM_SCENARIO_ROUTE} element={<BaseDisplayCompendium controller={prop.controller.ScenarioCollectionController}/>} />
-            <Route path={ROUTES.COMPENDIUM_GAMERULE_ROUTE} element={<NoFilterDisplayCompendium controller={prop.controller.GameRulesCollectionController}/>} />
-            <Route path={ROUTES.COMPENDIUM_CAMPAIGNRULE_ROUTE} element={<NoFilterDisplayCompendium controller={prop.controller.CampaignRulesCollectionController}/>} />
-            <Route path={ROUTES.COMPENDIUM_EXPLORATION_ROUTE} element={<NoFilterDisplayCompendium controller={prop.controller.ExplorationTableCollectionController}/>} />
-            <Route path={ROUTES.COMPENDIUM_INJURY_ROUTE} element={<AllDisplayNoFilterCompendium controller={prop.controller.InjuryCollectionController}/>} />
-            <Route path={ROUTES.COMPENDIUM_SKILL_ROUTE} element={<BaseDisplayCompendium controller={prop.controller.SkillGroupCollectionController}/>} />
-            <Route path={ROUTES.COMPENDIUM_PATRON_ROUTE} element={<BaseDisplayCompendium controller={prop.controller.PatronCollectionController}/>} />
-            </Routes>
             </div>
         </ErrorBoundary>
     )

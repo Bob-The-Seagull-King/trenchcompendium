@@ -25,7 +25,7 @@ function InitTheme() {
     if (theme != null) {
         return theme
     }
-    return 'light'
+    return 'dark'
 }
 
 export {useGlobalState, InitTheme};

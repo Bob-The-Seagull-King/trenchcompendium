@@ -128,6 +128,18 @@ export function getColour(name: string){
         case "grey": {
             return "grey"
         }
+        case "bgbase": {
+            return "BgBase"
+        }
+        case "bgcard": {
+            return "BgCard"
+        }
+        case "basictext": {
+            return "BasicText"
+        }
+        case "highlighttext": {
+            return "HighlightText"
+        }
         default: {
             return "default"
         }
