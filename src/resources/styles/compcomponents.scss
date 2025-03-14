@@ -1,1 +1,11 @@
 @import './_variables';
+
+.borderstyler {
+    border-style: solid;
+    border-width: 2px !important;
+}
+
+.basestructure {
+    box-shadow: 0 0 5px 1px var(--colour_hoverwhite);    
+    &:hover { box-shadow: 0 0 10px 2px var(--colour_hoverwhite); }
+}

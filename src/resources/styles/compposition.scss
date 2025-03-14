@@ -1,1 +1,43 @@
 @import './_variables';
+
+.inner-content-middle {
+    justify-content: center;
+}
+
+.centered-div {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+}
+
+.width-content {
+    width: fit-content;
+}
+
+.titleShape {
+    display: flex;
+    align-items: center; /* Align items vertically */
+    justify-content: center; /* Center both elements together */
+    gap: 0.5em; /* Adjust spacing between elements */
+}
+  
+.titlebody {
+    text-align: center;
+    white-space: nowrap; /* Prevents breaking into new lines */
+}
+
+.titlebody:last-child {
+    white-space: normal; /* Allows multi-line text */
+}
+
+.heightlargeboxfixed {
+    min-height: 16rem;
+}
+
+.heightmediumboxfixed {
+    min-height: 8rem;
+}
+
+.verticalspacermed {
+    padding-top: 1rem;
+}
