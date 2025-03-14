@@ -22,7 +22,7 @@ const HomeRoute: React.FC = () => {
 
     // Default to the light theme
     if ((theme == "" ) || (theme == null)) {
-        setTheme('light');
+        setTheme('dark');
     }
 
     /* TEST */

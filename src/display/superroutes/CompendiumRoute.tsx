@@ -26,7 +26,7 @@ const CompendiumRoute: React.FC<IControllerProp> = (prop) => {
 
     // Default to the light theme
     if ((theme == "" ) || (theme == null)) {
-        setTheme('light');
+        setTheme('dark');
     }
 
     // Return result -----------------------------

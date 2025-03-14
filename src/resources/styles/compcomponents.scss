@@ -9,3 +9,10 @@
     box-shadow: 0 0 5px 1px var(--colour_hoverwhite);    
     &:hover { box-shadow: 0 0 10px 2px var(--colour_hoverwhite); }
 }
+
+.topbarStructure {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}

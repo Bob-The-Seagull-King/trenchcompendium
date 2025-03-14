@@ -19,7 +19,7 @@ const SuperHeader: React.FC = () => {
     const [theme, setTheme] = useGlobalState('theme');
 
     if ((theme == "" ) || (theme == null)) { // Default theme to light
-        setTheme('light');
+        setTheme('dark');
     }
 
     const [stateheight, setHeight] = useState(0);
@@ -55,9 +55,9 @@ const SuperHeader: React.FC = () => {
             </div>
                 <Routes>
                     <Route path={ROUTES.COMPENDIUM_ROUTE}  element={
-            <div style={{height:stateheight}} className="backgroundOfferWhite"/>} />
+                        <div style={{height:stateheight}} className="backgroundBgBase"/>} />
                     <Route path={ROUTES.TOOLS_ROUTE} element={
-            <div style={{height:stateheight}} className="backgroundOfferWhite"/>} />
+                        <div style={{height:stateheight}} className="backgroundBgBase"/>} />
                 </Routes>
             </div>
         </ErrorBoundary>

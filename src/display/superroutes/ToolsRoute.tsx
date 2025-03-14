@@ -25,7 +25,7 @@ const ToolsRoute: React.FC<IControllerProp> = (prop) => {
 
     // If no theme provided, default to light
     if ((theme == "" ) || (theme == null)) {
-        setTheme('light');
+        setTheme('dark');
     }
 
     // Return result -----------------------------
