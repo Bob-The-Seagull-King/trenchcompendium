@@ -6,7 +6,7 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 
 // Font Aesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBurger, faGripLines, faHouse } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faGripLines } from '@fortawesome/free-solid-svg-icons'
 
 // Components
 import PalleteSwap from './components/PalleteSwap';
@@ -21,18 +21,18 @@ const MenuHeader = (prop: any) => {const [show, setShow] = useState(false);
     return (
       
         <ErrorBoundary fallback={<div>Something went wrong with MenuHeader.tsx</div>}>
-            <Button bsPrefix="empty" onClick={handleShow}>
-                <FontAwesomeIcon icon={faGripLines} className=" colourWhite"/>
+            <Button bsPrefix="empty" className="lonebutton totalmarginmed borderdefault backgroundBgCard borderstyler" onClick={handleShow}>
+                <FontAwesomeIcon icon={faBars} className="totalmarginsml size-section colordefault"/>
             </Button>
     
             <Offcanvas show={show} onHide={handleClose}>
-            <Offcanvas.Header closeButton>
-                <Offcanvas.Title>Main Menu</Offcanvas.Title>
-            </Offcanvas.Header>
-            <Offcanvas.Body>
-                Some text as placeholder. In real life you can have the elements you
-                have chosen. Like, text, images, lists, etc.
-            </Offcanvas.Body>
+                <Offcanvas.Header closeButton>
+                    <Offcanvas.Title>Main Menu</Offcanvas.Title>
+                </Offcanvas.Header>
+                <Offcanvas.Body>
+                    Some text as placeholder. In real life you can have the elements you
+                    have chosen. Like, text, images, lists, etc.
+                </Offcanvas.Body>
             </Offcanvas>
         </ErrorBoundary>
     );
