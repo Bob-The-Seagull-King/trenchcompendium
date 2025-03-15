@@ -48,17 +48,9 @@ const SuperHeader: React.FC = () => {
             <div data-theme={theme}>
             <div id="topbarbody" ref={ref} className="topbarStructure">
                 <Routes>
-                    <Route path={ROUTES.COMPENDIUM_ROUTE}  element={<BaseHeader />} />
-                    <Route path={ROUTES.TOOLS_ROUTE} element={<BaseHeader />} />
                     <Route path={ROUTES.HOME_ROUTE} element={<MenuHeader />} />
                 </Routes>
             </div>
-                <Routes>
-                    <Route path={ROUTES.COMPENDIUM_ROUTE}  element={
-                        <div style={{height:stateheight}} className="backgroundBgBase"/>} />
-                    <Route path={ROUTES.TOOLS_ROUTE} element={
-                        <div style={{height:stateheight}} className="backgroundBgBase"/>} />
-                </Routes>
             </div>
         </ErrorBoundary>
     )

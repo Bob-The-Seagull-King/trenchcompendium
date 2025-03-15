@@ -12,8 +12,11 @@ import { faBars, faGripLines } from '@fortawesome/free-solid-svg-icons'
 import PalleteSwap from './components/PalleteSwap';
 import LanguageSwap from './components/LanguageSwap';
 import { Button } from 'react-bootstrap';
+import OffcanvasMenu from './components/OffCanvasMenu';
 
-const MenuHeader = (prop: any) => {const [show, setShow] = useState(false);
+const MenuHeader = (prop: any) => {
+    
+    const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -24,16 +27,8 @@ const MenuHeader = (prop: any) => {const [show, setShow] = useState(false);
             <Button bsPrefix="empty" className="lonebutton totalmarginmed borderdefault backgroundBgCard borderstyler" onClick={handleShow}>
                 <FontAwesomeIcon icon={faBars} className="totalmarginsml size-section colordefault"/>
             </Button>
-    
-            <Offcanvas show={show} onHide={handleClose}>
-                <Offcanvas.Header closeButton>
-                    <Offcanvas.Title>Trench Compendium v0.2.1</Offcanvas.Title>
-                </Offcanvas.Header>
-                <Offcanvas.Body>
-                    Some text as placeholder. In real life you can have the elements you
-                    have chosen. Like, text, images, lists, etc.
-                </Offcanvas.Body>
-            </Offcanvas>
+
+            <OffcanvasMenu closeFunc={handleClose} showState={show}/>
         </ErrorBoundary>
     );
     // -------------------------------------------
