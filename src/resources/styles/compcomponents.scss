@@ -5,6 +5,11 @@
     border-width: 2px !important;
 }
 
+.borderthin {
+    border-style: solid;
+    border-width: 1px !important;
+}
+
 .basestructure {
     box-shadow: 0 0 5px 1px var(--colour_hoverwhite);    
     &:hover { box-shadow: 0 0 10px 2px var(--colour_hoverwhite); }

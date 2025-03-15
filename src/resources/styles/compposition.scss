@@ -10,6 +10,12 @@
     align-items: center; 
 }
 
+.align-left-right {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
 .width-content {
     width: fit-content;
 }
@@ -48,4 +54,9 @@
 
 .totalmarginsml {
     margin: 0.5rem;
+}
+
+.fillspace {
+    height: 100% !important;
+    width: 100% !important;
 }
