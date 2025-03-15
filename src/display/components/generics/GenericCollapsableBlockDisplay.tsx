@@ -19,12 +19,12 @@ const GenericCollapsableBlockDisplay = (props: any) => {
 
     return (
         <div >
-            <div onClick={() => {setOpen(!open)}} className={'align-left-right size-strongtext font-default hovermouse colorBaseText centered-div backgroundBgBase borderthin border'+getColour(DisplayColour)}>
+            <div onClick={() => {setOpen(!open)}} className={'align-left-right size-strongtext font-default hovermouse colorBasicText centered-div backgroundBgBase borderthin border'+getColour(DisplayColour)}>
                 <div className='totalmarginmed'>
                     {DisplayName || ""}
                 </div>
                 <div className='totalmarginmed'>
-                    <FontAwesomeIcon icon={open? faChevronDown : faChevronUp} className="colorBaseText"/>
+                    <FontAwesomeIcon icon={open? faChevronDown : faChevronUp} className="colorBasicText"/>
                 </div>
             </div>
             <Collapse in={open}>

@@ -21,3 +21,29 @@
     width: 100%;
     z-index: 1000;
 }
+
+
+// Separator ----------------------------------------------------
+
+.separator {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    font-weight: bolder;
+    font-size: 2rem;
+  } 
+  
+  .separator::before,
+  .separator::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid;
+  }
+  
+  .separator:not(:empty)::before {
+  margin-right: .25em;
+  }
+  
+  .separator:not(:empty)::after {
+  margin-left: .25em;
+  }

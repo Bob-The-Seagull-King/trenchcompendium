@@ -12,6 +12,8 @@ import { faSun } from '@fortawesome/free-solid-svg-icons'
 import { faMoon } from '@fortawesome/free-solid-svg-icons'
 import { useGlobalState } from '../../../utility/globalstate'
 import GenericCollapsableBlockDisplay from '../../components/generics/GenericCollapsableBlockDisplay';
+import PalleteSwap from './PalleteSwap';
+import LanguageSwap from './LanguageSwap';
 
 const OffcanvasMenu = (prop: any) => {
 
@@ -32,7 +34,7 @@ const OffcanvasMenu = (prop: any) => {
             <Offcanvas className="borderthin bordergrey" data-theme={theme} show={show} onHide={handleClose}>
                 <Offcanvas.Header className="borderthin bordergrey backgroundBgBase font-default " closeButton>
                     <Offcanvas.Title className="size-subtitle ">
-                        <div className="colorBaseText">
+                        <div className="colorBasicText">
                             Trench Compendium v2.2
                         </div>
                     </Offcanvas.Title>
@@ -42,12 +44,12 @@ const OffcanvasMenu = (prop: any) => {
                         d_name={"Pallete"} 
                         d_colour={"grey"} 
                         d_state={false}  
-                        d_method={() => <div>PALLETE HERE</div>} />
+                        d_method={() => <PalleteSwap/>} />
                     <GenericCollapsableBlockDisplay 
                         d_name={"Language"} 
                         d_colour={"grey"} 
                         d_state={false}  
-                        d_method={() => <div>LANGUAGE HERE</div>} />
+                        d_method={() => <LanguageSwap/>} />
 
                     <div className="borderthin bordergrey fillspace"/>
                 </Offcanvas.Body>
