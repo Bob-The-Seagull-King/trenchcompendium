@@ -36,8 +36,6 @@ const App: React.FC = () => {
                 <Router >
                     <SuperHeader />
                     <Routes>
-                        <Route path={ROUTES.COMPENDIUM_ROUTE} element={<CompendiumRoute controller={mastercontroller} />} />
-                        <Route path={ROUTES.TOOLS_ROUTE} element={<ToolsRoute controller={toolcontroller} />} />
                         <Route path={ROUTES.HOME_ROUTE} element={<HomeRoute />} />
                     </Routes>
                 </Router>

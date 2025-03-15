@@ -27,7 +27,7 @@ const MenuHeader = (prop: any) => {const [show, setShow] = useState(false);
     
             <Offcanvas show={show} onHide={handleClose}>
                 <Offcanvas.Header closeButton>
-                    <Offcanvas.Title>Main Menu</Offcanvas.Title>
+                    <Offcanvas.Title>Trench Compendium v0.2.1</Offcanvas.Title>
                 </Offcanvas.Header>
                 <Offcanvas.Body>
                     Some text as placeholder. In real life you can have the elements you
