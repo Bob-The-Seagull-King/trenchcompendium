@@ -17,13 +17,22 @@ const OffcanvasMenu = (prop: any) => {
     const handleClose = prop.closeFunc;
     const show = prop.showState
 
+    
+    // State
+    const [theme, setTheme] = useGlobalState('theme');
+
+    if ((theme == "" ) || (theme == null)) { // Default theme to light
+        setTheme('dark');
+    }
+    
+
     return (
         <ErrorBoundary fallback={<div>Something went wrong with PalleteSwap.tsx</div>}>  
-            <Offcanvas show={show} onHide={handleClose}>
-                <Offcanvas.Header closeButton>
-                    <Offcanvas.Title>Trench Compendium v0.2.1</Offcanvas.Title>
+            <Offcanvas  data-theme={theme} show={show} onHide={handleClose}>
+                <Offcanvas.Header className="backgroundBgBase font-ornamental colordefault" closeButton>
+                    <Offcanvas.Title className="size-subtitle">Trench Compendium v0.2.1</Offcanvas.Title>
                 </Offcanvas.Header>
-                <Offcanvas.Body>
+                <Offcanvas.Body className="backgroundBgBase">
                     Some text as placeholder. In real life you can have the elements you
                     have chosen. Like, text, images, lists, etc.
                 </Offcanvas.Body>
