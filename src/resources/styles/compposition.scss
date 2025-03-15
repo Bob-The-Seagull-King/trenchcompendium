@@ -60,3 +60,18 @@
     height: 100% !important;
     width: 100% !important;
 }
+
+
+.container {
+    display: flex;
+    padding: 0 !important;
+    margin: 0;
+}
+  
+.bar {
+    width: 0.75rem; /* Adjust thickness */
+}
+
+.content {
+    flex: 1; /* Fills remaining space */
+}

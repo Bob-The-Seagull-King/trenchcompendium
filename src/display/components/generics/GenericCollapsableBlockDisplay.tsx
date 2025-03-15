@@ -28,8 +28,11 @@ const GenericCollapsableBlockDisplay = (props: any) => {
                 </div>
             </div>
             <Collapse in={open}>
-                <div className={'borderthin border'+getColour(DisplayColour)}>
-                    {displayMethod()}
+                <div className={'container borderthin border'+getColour(DisplayColour)}>
+                    <div className={"bar backgroundgrey"} />
+                    <div className="content">                    
+                        {displayMethod()}
+                    </div>
                 </div>
             </Collapse>
         </div>
