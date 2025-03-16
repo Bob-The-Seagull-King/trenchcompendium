@@ -11,7 +11,7 @@ const MenuOutLink = (props: any) => {
         <ErrorBoundary fallback={<div>Something went wrong with MenuDisplay.tsx</div>}>
             <div className="hovermouse font-seriftext bordergrey borderstyler backgroundBgCard" onClick={()=>window.open(Link,'_blank', 'rel=noopener noreferrer')}>
                 <div className="centered-div titleShape titleShape heightmediumboxfixed">
-                    <h1 className="size-section titlebody align-center colordefault width-content">
+                    <h1 className="size-section titlebody align-center colorBasicText width-content">
                         {Title}
                     </h1>
                 </div>
