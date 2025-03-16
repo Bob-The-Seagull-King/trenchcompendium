@@ -47,3 +47,8 @@
   .separator:not(:empty)::after {
   margin-left: .25em;
   }
+
+  .scrollingoffmenu { 
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch
+  }

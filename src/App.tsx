@@ -25,7 +25,7 @@ const App: React.FC = () => {
     const InitializeContentState = useContentPackStore((state) => state.SetFromCookies)
     InitializeContentState();
 
-    const mastercontroller = new ControllerController();
+    const compendiumcontroller = new ControllerController();
     const toolcontroller = new ToolsController();
 
 
@@ -34,7 +34,7 @@ const App: React.FC = () => {
         <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}>
                 <Router >
-                    <SuperHeader />
+                    <SuperHeader controller={compendiumcontroller}/>
                     <Routes>
                         <Route path={ROUTES.HOME_ROUTE} element={<HomeRoute />} />
                     </Routes>

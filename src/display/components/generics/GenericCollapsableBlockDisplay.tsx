@@ -14,6 +14,7 @@ const GenericCollapsableBlockDisplay = (props: any) => {
     const DisplayName : string = props.d_name;
     const displayMethod = props.d_method
     const DefaultState = props.d_state
+    const ShowBorder = props.d_border != undefined? props.d_border : true;
 
     const [open, setOpen]   = useState((DefaultState != undefined)? DefaultState : true);
 
@@ -29,7 +30,7 @@ const GenericCollapsableBlockDisplay = (props: any) => {
             </div>
             <Collapse in={open}>
                 <div className={'container borderthin border'+getColour(DisplayColour)}>
-                    <div className={"bar backgroundgrey"} />
+                    {ShowBorder == true && <div className={"bar backgroundgrey"} />}
                     <div className="content">                    
                         {displayMethod()}
                     </div>

@@ -13,8 +13,13 @@ import PalleteSwap from './components/PalleteSwap';
 import LanguageSwap from './components/LanguageSwap';
 import { Button } from 'react-bootstrap';
 import OffcanvasMenu from './components/OffCanvasMenu';
+import { ControllerController } from '../../classes/_high_level_controllers/ControllerController';
 
-const MenuHeader = (prop: any) => {
+interface IControllerProp {
+    controller : ControllerController; // The controller being passed through
+}
+
+const MenuHeader: React.FC<IControllerProp> = (prop) => {
     
     const [show, setShow] = useState(false);
 
@@ -28,7 +33,7 @@ const MenuHeader = (prop: any) => {
                 <FontAwesomeIcon icon={faBars} className="totalmarginsml size-section colordefault"/>
             </Button>
 
-            <OffcanvasMenu closeFunc={handleClose} showState={show}/>
+            <OffcanvasMenu controller={prop.controller} closeFunc={handleClose} showState={show}/>
         </ErrorBoundary>
     );
     // -------------------------------------------

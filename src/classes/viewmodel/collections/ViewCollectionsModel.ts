@@ -11,6 +11,8 @@ class ViewCollectionsModel {
     ObjectList: any[] = [];
     CollectionType: CollectionType;
 
+    TargetItem : any = null;
+
     /**
      * Empty constructor
      */

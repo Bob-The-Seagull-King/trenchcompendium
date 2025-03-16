@@ -13,7 +13,13 @@ import { useGlobalState } from './../../utility/globalstate'
 import BaseHeader from './BaseHeader'
 import MenuHeader from './MenuHeader'
 
-const SuperHeader: React.FC = () => {
+import { ControllerController } from '../../classes/_high_level_controllers/ControllerController';
+
+interface IControllerProp {
+    controller : ControllerController; // The controller being passed through
+}
+
+const SuperHeader: React.FC<IControllerProp> = (prop) => {
 
     // State
     const [theme, setTheme] = useGlobalState('theme');
@@ -48,7 +54,7 @@ const SuperHeader: React.FC = () => {
             <div data-theme={theme}>
             <div id="topbarbody" ref={ref} className="topbarStructure">
                 <Routes>
-                    <Route path={ROUTES.HOME_ROUTE} element={<MenuHeader />} />
+                    <Route path={ROUTES.HOME_ROUTE} element={<MenuHeader controller={prop.controller} />} />
                 </Routes>
             </div>
             </div>

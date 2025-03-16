@@ -17,7 +17,9 @@ import PatronDisplay from "../components/features/skill/PatronDisplay";
 
 export interface DisplayCollectionType {
     searchId      : string,
+    titlename     : string,
     width         : number,
+    menushowitems : boolean,
     returnDisplay: (item: any) => JSX.Element
     returnFilterSelect: (manager : FilterManager, update : NoneToNoneFunction, close : NoneToNoneFunction) => JSX.Element
 }
@@ -27,9 +29,33 @@ export interface DisplayCollectionDataTable {[moveid: Lowercase<string>]: Displa
 type NoneToNoneFunction = () => void;
 
 export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
+    gamerule: {
+        searchId: 'gamerule',
+        width: 9 ,
+        titlename : 'Game Rules',
+        menushowitems: true,
+        returnDisplay(item: any) {
+            return (
+                
+                <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
+                    <GenericDisplay  d_colour={item.Team} d_name={item.Name} d_type={""} d_method={() => <BookRuleDisplay data={item} />}/>
+                </ErrorBoundary>
+            )
+        },
+        returnFilterSelect(manager : FilterManager, update : NoneToNoneFunction, close : NoneToNoneFunction) {
+            return (
+                
+                <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
+                    
+                </ErrorBoundary>
+            )
+        }
+    },
     glossary: {
         searchId: 'glossary',
         width: 7,
+        titlename : '',
+        menushowitems: false,
         returnDisplay(item: any) {
             return (
                 
@@ -81,6 +107,8 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
     keyword: {
         searchId: 'keyword',
         width: 7,
+        titlename : 'Keywords',
+        menushowitems: false,
         returnDisplay(item: any) {
             return (
                 
@@ -132,6 +160,8 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
     model: {
         searchId: 'model',
         width: 9,
+        titlename : '',
+        menushowitems: false,
         returnDisplay(item: any) {
             return (
                 
@@ -203,6 +233,8 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
     equipment: {
         searchId: 'equipment',
         width: 8,
+        titlename : '',
+        menushowitems: false,
         returnDisplay(item: any) {
             return (
                 
@@ -274,6 +306,8 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
     faction: {
         searchId: 'faction',
         width: 9,
+        titlename : '',
+        menushowitems: false,
         returnDisplay(item: any) {
             return (
                 
@@ -326,6 +360,8 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
     scenario: {
         searchId: 'scenario',
         width: 9,
+        titlename : '',
+        menushowitems: false,
         returnDisplay(item: any) {
             return (
                 
@@ -376,29 +412,11 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
             )
         }
     },
-    gamerule: {
-        searchId: 'gamerule',
-        width: 9 ,
-        returnDisplay(item: any) {
-            return (
-                
-                <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    <GenericDisplay  d_colour={item.Team} d_name={item.Name} d_type={""} d_method={() => <BookRuleDisplay data={item} />}/>
-                </ErrorBoundary>
-            )
-        },
-        returnFilterSelect(manager : FilterManager, update : NoneToNoneFunction, close : NoneToNoneFunction) {
-            return (
-                
-                <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    
-                </ErrorBoundary>
-            )
-        }
-    },
     campaignrule: {
         searchId: 'campaignrule',
         width: 9 ,
+        titlename : 'Campaign Rules',
+        menushowitems: true,
         returnDisplay(item: any) {
             return (
                 
@@ -419,6 +437,8 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
     explorationtable: {
         searchId: 'explorationtable',
         width: 9 ,
+        titlename : '',
+        menushowitems: false,
         returnDisplay(item: any) {
             return (
                 
@@ -439,6 +459,8 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
     injury: {
         searchId: 'injury',
         width: 10 ,
+        titlename : '',
+        menushowitems: false,
         returnDisplay(item: any) {
             return (
                 
@@ -459,6 +481,8 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
     skillgroup: {
         searchId: 'skillgroup',
         width: 9,
+        titlename : '',
+        menushowitems: false,
         returnDisplay(item: any) {
             return (
                 
@@ -512,6 +536,8 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
     patron: {
         searchId: 'patron',
         width: 9,
+        titlename : '',
+        menushowitems: false,
         returnDisplay(item: any) {
             return (
                 
