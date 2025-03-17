@@ -11,6 +11,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSun } from '@fortawesome/free-solid-svg-icons'
 import { faMoon } from '@fortawesome/free-solid-svg-icons'
 import { useGlobalState } from '../../../utility/globalstate'
+import { useNavigate } from 'react-router-dom';
 import GenericCollapsableBlockDisplay from '../../components/generics/GenericCollapsableBlockDisplay';
 import PalleteSwap from './PalleteSwap';
 import LanguageSwap from './LanguageSwap';
@@ -33,6 +34,17 @@ const OffcanvasMenu: React.FC<IControllerProp> = (prop) => {
 
     if ((theme == "" ) || (theme == null)) { // Default theme to light
         setTheme('dark');
+    }
+        
+    // Navigation
+    const navigate = useNavigate(); 
+    
+    /**
+     * Navigate to a page
+     * @param dir The page to navigate to
+     */
+    function NavigateOut() {
+        navigate('/');
     }
 
     function returnCompendiumMenu() {
@@ -72,6 +84,11 @@ const OffcanvasMenu: React.FC<IControllerProp> = (prop) => {
                         d_colour={"grey"} 
                         d_state={false}  
                         d_method={() => <LanguageSwap/>} />
+                    <div onClick={() => NavigateOut()} className={'align-left-right size-strongtext font-default hovermouse colorBasicText centered-div backgroundBgBase borderthin bordergrey'}>
+                        <div className='totalmarginmed'>
+                            {"Home"}
+                        </div>
+                    </div>
                     <GenericCollapsableBlockDisplay 
                         d_name={"Compendium"} 
                         d_colour={"grey"} 
