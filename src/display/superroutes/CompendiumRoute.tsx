@@ -45,11 +45,6 @@ const CompendiumRoute: React.FC<IControllerProp> = (prop) => {
             <div className="backgroundBaseColour font-default" data-theme={theme}>
                 <div className="row justify-content-center m-0 p-0">
                     <div className="col-lg-8 col-md-12">
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/>
                         {GetContentsTable()}
                     </div>
                 </div>

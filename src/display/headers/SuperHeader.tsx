@@ -52,11 +52,15 @@ const SuperHeader: React.FC<IControllerProp> = (prop) => {
     return (    
         <ErrorBoundary fallback={<div>Something went wrong with SuperHeader.tsx</div>}>
             <div data-theme={theme}>
-            <div id="topbarbody" ref={ref} className="topbarStructure">
-                <Routes>
-                    <Route path={ROUTES.HOME_ROUTE} element={<MenuHeader controller={prop.controller} />} />
-                </Routes>
-            </div>
+                <div id="topbarbody" ref={ref} className="topbarStructure">
+                    <Routes>
+                        <Route path={ROUTES.COMPENDIUM_ROUTE} element={<BaseHeader controller={prop.controller} />} />
+                        <Route path={ROUTES.HOME_ROUTE} element={<MenuHeader controller={prop.controller} />} />
+                    </Routes>
+                </div>
+            <Routes>
+                <Route path={ROUTES.COMPENDIUM_ROUTE} element={<div style={{height:stateheight}} className="backgroundBgBase"/>} />
+            </Routes>
             </div>
         </ErrorBoundary>
     )

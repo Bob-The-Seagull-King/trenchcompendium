@@ -10,6 +10,10 @@
     border-width: 1px !important;
 }
 
+.borderremove {
+    border-width: 0px !important;
+}
+
 .basestructure {
     box-shadow: 0 0 5px 1px var(--colour_hoverwhite);    
     &:hover { box-shadow: 0 0 10px 2px var(--colour_hoverwhite); }
