@@ -16,6 +16,7 @@ import MenuHeader from './MenuHeader'
 
 import { ControllerController } from '../../classes/_high_level_controllers/ControllerController';
 import OffcanvasMenu from './components/OffCanvasMenu';
+import OncanvasMenu from '../components/subcomponents/informationpanel/OnCanvasMenu';
 
 interface IControllerProp {
     controller : ControllerController; // The controller being passed through
@@ -67,7 +68,7 @@ const SuperHeader: React.FC<IControllerProp> = (prop) => {
     return (    
         <ErrorBoundary fallback={<div>Something went wrong with SuperHeader.tsx</div>}>
             <div data-theme={theme}>
-                <div id="topbarbody" ref={ref} className="topbarStructure">
+                <div id="topbarbody" ref={ref} className="overlaystructure topbarStructure">
                     <Routes>
                         <Route path={ROUTES.COMPENDIUM_ROUTE} element={<BaseHeader showstate={handleShow} controller={prop.controller} />} />
                         <Route path={ROUTES.HOME_ROUTE} element={<MenuHeader showstate={handleShow} controller={prop.controller} />} />
@@ -77,7 +78,14 @@ const SuperHeader: React.FC<IControllerProp> = (prop) => {
                     <Route path={ROUTES.COMPENDIUM_ROUTE} element={<div style={{height:stateheight}} className="backgroundBgBase"/>} />
                 </Routes>
                 <Routes>
-                    <Route path={ROUTES.HOME_ROUTE} element={<OffcanvasMenu controller={prop.controller} closeFunc={handleClose} responseshow='' showState={show}/>} />
+                    <Route path={ROUTES.COMPENDIUM_ROUTE} element={
+                        <div className="overlaystructure menustructure d-none d-lg-block " style={{height:window.innerHeight-stateheight}}>
+                            <div style={{height:stateheight-10}}/>
+                            <div className="scrollingoffmenu menuheight">
+                                <OncanvasMenu controller={prop.controller} closeFunc={handleClose} responseshow='md' showState={show}/>
+                            </div>
+                        </div>
+                        } />
                 </Routes>
             </div>
         </ErrorBoundary>

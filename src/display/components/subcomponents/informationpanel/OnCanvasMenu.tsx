@@ -48,7 +48,7 @@ const OncanvasMenu: React.FC<IControllerProp> = (prop) => {
     
     return (
         <ErrorBoundary fallback={<div>Something went wrong with PalleteSwap.tsx</div>}>  
-            <div className="borderthin bordergrey" data-theme={theme}>
+            <div className="borderthin bordergrey" data-theme={theme} >
                 <MenuBody controller={prop.controller} closeFunc={prop.closeFunc} responseshow={prop.responseshow} showState={prop.showState}/>
             </div>
         </ErrorBoundary>

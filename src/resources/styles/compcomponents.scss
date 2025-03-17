@@ -34,11 +34,21 @@
     &:hover { box-shadow: 0 0 10px 2px var(--colour_hoverwhite); }
 }
 
-.topbarStructure {
+.overlaystructure {
     position: fixed;
     top: 0;
     width: 100%;
+
+}
+
+.topbarStructure {
+    width: 100%;
     z-index: 1000;
+}
+
+.menustructure {
+    width: 25%;
+    z-index: 999;
 }
 
 

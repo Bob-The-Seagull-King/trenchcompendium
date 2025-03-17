@@ -51,14 +51,9 @@ const CompendiumRoute: React.FC<IControllerProp> = (prop) => {
         <ErrorBoundary fallback={<div>Something went wrong with CompendiumRoute.tsx</div>}>
             <div className="backgroundBaseColour font-default" data-theme={theme}>
                 <div className="row justify-content-center m-0 p-0">
-                    <div className="col-3 d-none d-lg-block">
-                        <OncanvasMenu controller={prop.controller} closeFunc={handleClose} responseshow='md' showState={show}/>
-                    </div>
+                    
                     <div className="col-lg-6 col-md-12">
                         {GetContentsTable()}
-                    </div>
-                    <div className="col-3">
-
                     </div>
                 </div>
             </div>
