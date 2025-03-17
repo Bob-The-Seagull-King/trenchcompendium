@@ -17,11 +17,13 @@ import PalleteSwap from './PalleteSwap';
 import LanguageSwap from './LanguageSwap';
 import { ControllerController } from '../../../classes/_high_level_controllers/ControllerController';
 import CompendiumMenuItem from './CompendiumMenuItem';
+import MenuBody from '../../components/subcomponents/MenuBody';
 
 interface IControllerProp {
     controller : ControllerController; // The controller being passed through
     closeFunc : any;
     showState : any;
+    responseshow : string;
 }
 
 const OffcanvasMenu: React.FC<IControllerProp> = (prop) => {
@@ -47,25 +49,10 @@ const OffcanvasMenu: React.FC<IControllerProp> = (prop) => {
         navigate('/');
     }
 
-    function returnCompendiumMenu() {
-        return (
-            <>
-                <GenericCollapsableBlockDisplay 
-                    d_name={"Rules"} 
-                    d_colour={"grey"} 
-                    d_state={false}  
-                    d_method={() => <>
-                        <CompendiumMenuItem controller={prop.controller.GameRulesCollectionController}/>
-                        <CompendiumMenuItem controller={prop.controller.KeywordCollectionController}/>
-                        <CompendiumMenuItem controller={prop.controller.CampaignRulesCollectionController}/>
-                    </>} />
-            </>
-        )
-    }
     
     return (
         <ErrorBoundary fallback={<div>Something went wrong with PalleteSwap.tsx</div>}>  
-            <Offcanvas className="borderthin bordergrey" data-theme={theme} show={show} onHide={handleClose}>
+            <Offcanvas className="borderthin bordergrey" data-theme={theme} show={show} onHide={handleClose} responsive={prop.responseshow}>
                 <Offcanvas.Header className="borderthin bordergrey backgroundBgBase font-default " closeButton>
                     <Offcanvas.Title className="size-subtitle ">
                         <div className="colorBasicText">
@@ -73,28 +60,21 @@ const OffcanvasMenu: React.FC<IControllerProp> = (prop) => {
                         </div>
                     </Offcanvas.Title>
                 </Offcanvas.Header>
-                <Offcanvas.Body bsPrefix="empty" className="scrollingoffmenu fillspace backgroundBgBase">
+                <Offcanvas.Body bsPrefix="empty" className="scrollingoffmenu fillspace backgroundBgBase">                    
+                    
                     <GenericCollapsableBlockDisplay 
                         d_name={"Pallete"} 
                         d_colour={"grey"} 
                         d_state={false}  
-                        d_method={() => <PalleteSwap/>} />
+                        bordertype={0}
+                        d_method={() => <div className="borderthin bordergrey" ><PalleteSwap/></div>} />
                     <GenericCollapsableBlockDisplay 
                         d_name={"Language"} 
                         d_colour={"grey"} 
                         d_state={false}  
-                        d_method={() => <LanguageSwap/>} />
-                    <div onClick={() => NavigateOut()} className={'align-left-right size-strongtext font-default hovermouse colorBasicText centered-div backgroundBgBase borderthin bordergrey'}>
-                        <div className='totalmarginmed'>
-                            {"Home"}
-                        </div>
-                    </div>
-                    <GenericCollapsableBlockDisplay 
-                        d_name={"Compendium"} 
-                        d_colour={"grey"} 
-                        d_state={false}  
-                        d_method={() => returnCompendiumMenu()} />
-
+                        bordertype={0}
+                        d_method={() => <div className="borderthin bordergrey" ><LanguageSwap/></div>} />
+                    <MenuBody controller={prop.controller} closeFunc={prop.closeFunc} responseshow={prop.responseshow} showState={prop.showState}/>
                     <div className="borderthin bordergrey fillspace"/>
                 </Offcanvas.Body>
             </Offcanvas>

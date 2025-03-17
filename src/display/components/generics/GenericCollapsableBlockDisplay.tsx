@@ -13,14 +13,15 @@ const GenericCollapsableBlockDisplay = (props: any) => {
     const DisplayColour : string = props.d_colour;
     const DisplayName : string = props.d_name;
     const displayMethod = props.d_method
-    const DefaultState = props.d_state
+    const DefaultState = props.d_state    
+    const StyleType : number = props.bordertype;
     const ShowBorder = props.d_border != undefined? props.d_border : true;
 
     const [open, setOpen]   = useState((DefaultState != undefined)? DefaultState : true);
 
     return (
         <div >
-            <div onClick={() => {setOpen(!open)}} className={'align-left-right size-strongtext font-default hovermouse colorBasicText centered-div backgroundBgBase borderthin border'+getColour(DisplayColour)}>
+            <div onClick={() => {setOpen(!open)}} className={'align-left-right size-strongtext font-default hovermouse colorBasicText centered-div backgroundBgBase border'+getColour(DisplayColour) + " " + (StyleType == 0? "borderthin" : StyleType == 1? "borderthinnosides" : StyleType == 2? "borderthintop" : StyleType == 3? "borderthinbottom" : "borderremove")}>
                 <div className='totalmarginmed'>
                     {DisplayName || ""}
                 </div>
@@ -29,7 +30,7 @@ const GenericCollapsableBlockDisplay = (props: any) => {
                 </div>
             </div>
             <Collapse in={open}>
-                <div className={'container borderthin border'+getColour(DisplayColour)}>
+                <div className={'container border'+getColour(DisplayColour)}>
                     {ShowBorder == true && <div className={"bar backgroundgrey"} />}
                     <div className="content">                    
                         {displayMethod()}

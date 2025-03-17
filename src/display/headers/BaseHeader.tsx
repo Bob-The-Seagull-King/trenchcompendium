@@ -13,7 +13,7 @@ import { getRouteName } from "../../utility/functions"
 
 // Font Aesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars, faHouse } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faHouse, faSquare } from '@fortawesome/free-solid-svg-icons'
 
 // Component
 import PalleteSwap from './components/PalleteSwap';
@@ -23,20 +23,12 @@ import { ControllerController } from '../../classes/_high_level_controllers/Cont
 
 interface IControllerProp {
     controller : ControllerController; // The controller being passed through
+    showstate : any;
 }
 
 const BaseHeader: React.FC<IControllerProp> = (prop: any) => {
-
-    // Navigation
-    const navigate = useNavigate();
-    function NavigateHome() {
-        navigate("/");
-    }
         
-    const [show, setShow] = useState(false);
-
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const handleShow = () => prop.showstate();
 
     // Return result -----------------------------
     return (
@@ -51,12 +43,10 @@ const BaseHeader: React.FC<IControllerProp> = (prop: any) => {
                         <div className="size-section d-xl-flex d-lg-flex d-md-flex d-none">{"Trench Crusade"}</div>
                         <div className="size-subtitle d-flex d-lg-none d-md-none d-xl-none">{"Trench Crusade"}</div>
                     </div>
-                    <Button bsPrefix="empty" className="borderremove backgroundBgCard lonebutton" onClick={() => NavigateHome()}>
-                        <FontAwesomeIcon icon={faHouse} className="size-section colordefault"/>
-                    </Button>
+                    <div className="backgroundBgCard">
+                        <FontAwesomeIcon icon={faSquare} className="size-section colorBgCard"/>
+                    </div>
                 </div>
-                
-                <OffcanvasMenu controller={prop.controller} closeFunc={handleClose} showState={show}/>
             </div>
         </ErrorBoundary>
 

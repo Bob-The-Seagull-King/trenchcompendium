@@ -10,6 +10,21 @@
     border-width: 1px !important;
 }
 
+.borderthinnosides {
+    border-style: solid;
+    border-width: 1px 0px 1px 0px !important;
+}
+
+.borderthintop {
+    border-style: solid;
+    border-width: 1px 0px 0px 0px !important;
+}
+
+.borderthinbottom {
+    border-style: solid;
+    border-width: 0px 0px 1px 0px !important;
+}
+
 .borderremove {
     border-width: 0px !important;
 }

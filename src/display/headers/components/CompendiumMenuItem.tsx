@@ -21,6 +21,7 @@ import PalleteSwap from './PalleteSwap';
 const CompendiumMenuItem = (prop: any) => {
     
     const ViewPageController: CollectionsListPage = prop.controller
+    const StyleType : number = prop.bordertype;
 
     const CollectionController: ViewCollectionsModel = ViewPageController.Collection;
     const DisplayPage: DisplayCollectionType = DisplayCollectionDataDex[ViewPageController.TypeName]
@@ -55,8 +56,9 @@ const CompendiumMenuItem = (prop: any) => {
                 d_colour={"grey"} 
                 d_state={false}  
                 d_border={false}
+                bordertype={0}
                 d_method={() => (
-                    <div className="backgroundBgBase">
+                    <div className={"backgroundBgBase borderthin bordergrey"}>
                     {CollectionController.itemcollection.map((item) => (
                         <div key={item.HeldItem.ID} onClick={() => SpecificNavigtateOut(item.HeldItem.ID)} className={'align-left-right font-default hovermouse colorBasicText centered-div '}>
                             <div className='totalmarginsml horizontalspacermed'>
@@ -69,7 +71,7 @@ const CompendiumMenuItem = (prop: any) => {
                 )} />
             }
             {DisplayPage.menushowitems == false &&
-                <div onClick={() => NavigateOut()} className={'align-left-right size-strongtext font-default hovermouse colorBasicText centered-div backgroundBgBase borderthin bordergrey'}>
+                <div onClick={() => NavigateOut()} className={'align-left-right size-strongtext font-default hovermouse colorBasicText centered-div backgroundBgBase bordergrey borderthin'}>
                     <div className='totalmarginmed'>
                         {DisplayPage.titlename}
                     </div>

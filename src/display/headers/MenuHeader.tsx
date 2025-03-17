@@ -17,14 +17,12 @@ import { ControllerController } from '../../classes/_high_level_controllers/Cont
 
 interface IControllerProp {
     controller : ControllerController; // The controller being passed through
+    showstate : any;
 }
 
 const MenuHeader: React.FC<IControllerProp> = (prop) => {
-    
-    const [show, setShow] = useState(false);
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const handleShow = () => prop.showstate();
   
     return (
       
@@ -32,8 +30,6 @@ const MenuHeader: React.FC<IControllerProp> = (prop) => {
             <Button bsPrefix="empty" className="lonebutton totalmarginmed borderdefault backgroundBgCard borderstyler" onClick={handleShow}>
                 <FontAwesomeIcon icon={faBars} className="totalmarginsml size-section colordefault"/>
             </Button>
-
-            <OffcanvasMenu controller={prop.controller} closeFunc={handleClose} showState={show}/>
         </ErrorBoundary>
     );
     // -------------------------------------------

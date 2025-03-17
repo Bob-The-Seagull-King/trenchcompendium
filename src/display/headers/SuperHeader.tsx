@@ -8,12 +8,14 @@ import { ROUTES } from '../../resources/routes-constants'
 
 // Classes
 import { useGlobalState } from './../../utility/globalstate'
+import { useNavigate } from "react-router-dom";
 
 // Components
 import BaseHeader from './BaseHeader'
 import MenuHeader from './MenuHeader'
 
 import { ControllerController } from '../../classes/_high_level_controllers/ControllerController';
+import OffcanvasMenu from './components/OffCanvasMenu';
 
 interface IControllerProp {
     controller : ControllerController; // The controller being passed through
@@ -48,19 +50,35 @@ const SuperHeader: React.FC<IControllerProp> = (prop) => {
         setNavHeight();
     }, [location])
 
+    
+        // Navigation
+        const navigate = useNavigate();
+
+    function NavigateHome() {
+        navigate("/");
+    }
+        
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
     // Return result -----------------------------
     return (    
         <ErrorBoundary fallback={<div>Something went wrong with SuperHeader.tsx</div>}>
             <div data-theme={theme}>
                 <div id="topbarbody" ref={ref} className="topbarStructure">
                     <Routes>
-                        <Route path={ROUTES.COMPENDIUM_ROUTE} element={<BaseHeader controller={prop.controller} />} />
-                        <Route path={ROUTES.HOME_ROUTE} element={<MenuHeader controller={prop.controller} />} />
+                        <Route path={ROUTES.COMPENDIUM_ROUTE} element={<BaseHeader showstate={handleShow} controller={prop.controller} />} />
+                        <Route path={ROUTES.HOME_ROUTE} element={<MenuHeader showstate={handleShow} controller={prop.controller} />} />
                     </Routes>
                 </div>
-            <Routes>
-                <Route path={ROUTES.COMPENDIUM_ROUTE} element={<div style={{height:stateheight}} className="backgroundBgBase"/>} />
-            </Routes>
+                <Routes>
+                    <Route path={ROUTES.COMPENDIUM_ROUTE} element={<div style={{height:stateheight}} className="backgroundBgBase"/>} />
+                </Routes>
+                <Routes>
+                    <Route path={ROUTES.HOME_ROUTE} element={<OffcanvasMenu controller={prop.controller} closeFunc={handleClose} responseshow='' showState={show}/>} />
+                </Routes>
             </div>
         </ErrorBoundary>
     )
