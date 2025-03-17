@@ -12,8 +12,8 @@ import BaseDisplayCompendium from '../pages/BaseDisplayCompendium'
 // Classes
 import { ControllerController } from '../../classes/_high_level_controllers/ControllerController'
 import { useGlobalState } from './../../utility/globalstate'
-import NoFilterDisplayCompendium from '../pages/NoFilterDisplayCompendium';
-import AllDisplayNoFilterCompendium from '../pages/AllDisplayNoFilterCompendium';
+import ContentsComponentLink from '../components/subcomponents/informationpanel/ContentsComponentLink';
+import { ContentsLink } from '../components/subcomponents/informationpanel/ContentsComponentLink';
 
 interface IControllerProp {
     controller : ControllerController; // The controller being passed through
@@ -29,10 +29,30 @@ const CompendiumRoute: React.FC<IControllerProp> = (prop) => {
         setTheme('dark');
     }
 
+    function GetContentsTable() {
+        const ContentsList : ContentsLink[] = [];
+
+        ContentsList.push({ name: "Game Rules", route: "rules"})
+        ContentsList.push({ name: "Keywords", route: "keywords"})
+        ContentsList.push({ name: "Campaigns", route: "campaign"})
+
+        return ( <ContentsComponentLink listofcontents={ContentsList}/> )
+    }
+
     // Return result -----------------------------
     return (
         <ErrorBoundary fallback={<div>Something went wrong with CompendiumRoute.tsx</div>}>
             <div className="backgroundBaseColour font-default" data-theme={theme}>
+                <div className="row justify-content-center m-0 p-0">
+                    <div className="col-lg-8 col-md-12">
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        {GetContentsTable()}
+                    </div>
+                </div>
             </div>
         </ErrorBoundary>
     )
