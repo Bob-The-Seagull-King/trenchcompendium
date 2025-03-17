@@ -47,8 +47,9 @@ const BaseHeader: React.FC<IControllerProp> = (prop: any) => {
                     <Button bsPrefix="empty" className="borderremove backgroundBgCard lonebutton" onClick={handleShow}>
                         <FontAwesomeIcon icon={faBars} className="size-section colordefault"/>
                     </Button>
-                    <div className="font-ornamental colordefault size-section">
-                        {"Trench Crusade"}
+                    <div className="font-ornamental colordefault">
+                        <div className="size-section d-xl-flex d-lg-flex d-md-flex d-none">{"Trench Crusade"}</div>
+                        <div className="size-subtitle d-flex d-lg-none d-md-none d-xl-none">{"Trench Crusade"}</div>
                     </div>
                     <Button bsPrefix="empty" className="borderremove backgroundBgCard lonebutton" onClick={() => NavigateHome()}>
                         <FontAwesomeIcon icon={faHouse} className="size-section colordefault"/>
