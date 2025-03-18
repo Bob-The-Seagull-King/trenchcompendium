@@ -38,7 +38,16 @@
     position: fixed;
     top: 0;
     width: 100%;
+}
 
+.removeoverflowbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.removeoverflowbar::-webkit-scrollbar {
+    width: 0;
+    height: 0;
 }
 
 .topbarStructure {

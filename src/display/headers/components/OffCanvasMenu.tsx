@@ -60,7 +60,7 @@ const OffcanvasMenu: React.FC<IControllerProp> = (prop) => {
                         </div>
                     </Offcanvas.Title>
                 </Offcanvas.Header>
-                <Offcanvas.Body bsPrefix="empty" className="scrollingoffmenu fillspace backgroundBgBase">                    
+                <Offcanvas.Body bsPrefix="empty" className="scrollingoffmenu removeoverflowbar fillspace backgroundBgBase">                    
                     
                     <GenericCollapsableBlockDisplay 
                         d_name={"Pallete"} 

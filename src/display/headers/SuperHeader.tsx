@@ -81,7 +81,7 @@ const SuperHeader: React.FC<IControllerProp> = (prop) => {
                     <Route path={ROUTES.COMPENDIUM_ROUTE} element={
                         <div className="overlaystructure menustructure d-none d-lg-block " style={{height:window.innerHeight-stateheight}}>
                             <div style={{height:stateheight-10}}/>
-                            <div className="scrollingoffmenu menuheight">
+                            <div className="scrollingoffmenu menuheight removeoverflowbar">
                                 <OncanvasMenu controller={prop.controller} closeFunc={handleClose} responseshow='md' showState={show}/>
                             </div>
                         </div>
