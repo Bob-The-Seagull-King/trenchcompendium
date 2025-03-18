@@ -55,7 +55,7 @@ const ContentsComponentLink: React.FC<ContentsCollection> = (props: any) => {
                 <GenericCollapsableBlockDisplay 
                     d_name={"Contents"} 
                     d_colour={"grey"} 
-                    d_state={false}  
+                    d_state={true}  
                     bordertype={0}
                     d_border={false}
                     d_col={"BgCard"}
