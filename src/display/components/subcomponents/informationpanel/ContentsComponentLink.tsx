@@ -13,6 +13,7 @@ export interface ContentsLink {
 export interface ContentsCollection {
     listofcontents: ContentsLink[];
     showheader : boolean;
+    title : string;
 }
 
 const ContentsComponentLink: React.FC<ContentsCollection> = (props: any) => {
@@ -53,7 +54,7 @@ const ContentsComponentLink: React.FC<ContentsCollection> = (props: any) => {
             {props.showheader == true &&      
             <div className="bordergrey borderthin">     
                 <GenericCollapsableBlockDisplay 
-                    d_name={"Contents"} 
+                    d_name={props.title} 
                     d_colour={"grey"} 
                     d_state={true}  
                     bordertype={0}

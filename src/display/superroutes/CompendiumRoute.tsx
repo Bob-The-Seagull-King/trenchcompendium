@@ -15,6 +15,7 @@ import { useGlobalState } from './../../utility/globalstate'
 import ContentsComponentLink from '../components/subcomponents/informationpanel/ContentsComponentLink';
 import { ContentsLink } from '../components/subcomponents/informationpanel/ContentsComponentLink';
 import OncanvasMenu from '../components/subcomponents/informationpanel/OnCanvasMenu';
+import CompendiumBasePage from '../pages/CompendiumBasePage';
 
 interface IControllerProp {
     controller : ControllerController; // The controller being passed through
@@ -30,25 +31,6 @@ const CompendiumRoute: React.FC<IControllerProp> = (prop) => {
         setTheme('dark');
     }
 
-    function GetContentsTable() {
-        const ContentsList : ContentsLink[] = [];
-
-        ContentsList.push({ name: "Campaigns", route: "campaign"})
-        ContentsList.push({ name: "Game Rules", route: "rules"})
-        ContentsList.push({ name: "Glossary", route: "glossary"})
-        ContentsList.push({ name: "Keywords", route: "keyword"})
-        ContentsList.push({ name: "Equipment & Weapons", route: "equipment"})
-        ContentsList.push({ name: "Factions", route: "faction"})
-        ContentsList.push({ name: "Models", route: "model"})
-        ContentsList.push({ name: "Scenarios", route: "scenario"})
-        ContentsList.push({ name: "Exploration", route: "exploration"})
-        ContentsList.push({ name: "Injuries", route: "injury"})
-        ContentsList.push({ name: "Patrons", route: "patron"})
-        ContentsList.push({ name: "Skills", route: "skill"})
-
-        return ( <ContentsComponentLink showheader={true} listofcontents={ContentsList}/> )
-    }
-
     
         const [show, setShow] = useState(true);
     
@@ -60,10 +42,9 @@ const CompendiumRoute: React.FC<IControllerProp> = (prop) => {
         <ErrorBoundary fallback={<div>Something went wrong with CompendiumRoute.tsx</div>}>
             <div className="backgroundBaseColour font-default" data-theme={theme}>
                 <div className="row justify-content-center m-0 p-0">
-                    
-                    <div className="col-lg-6 col-md-12">
-                        {GetContentsTable()}
-                    </div>
+                    <Routes>
+                        <Route path={ROUTES.HOME_ROUTE} element={<CompendiumBasePage controller={prop.controller} />} />
+                    </Routes>
                 </div>
             </div>
         </ErrorBoundary>

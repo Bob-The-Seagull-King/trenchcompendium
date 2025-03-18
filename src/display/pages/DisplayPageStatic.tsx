@@ -18,6 +18,7 @@ import PatronDisplay from "../components/features/skill/PatronDisplay";
 export interface DisplayCollectionType {
     searchId      : string,
     titlename     : string,
+    laconic       : string,
     width         : number,
     menushowitems : boolean,
     returnDisplay: (item: any) => JSX.Element
@@ -33,6 +34,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         searchId: 'gamerule',
         width: 9 ,
         titlename : 'Game Rules',
+        laconic: "How to play a game of Trench Crusade",
         menushowitems: true,
         returnDisplay(item: any) {
             return (
@@ -55,6 +57,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         searchId: 'glossary',
         width: 7,
         titlename : 'Glossary',
+        laconic: "Commonly used terms & mechanics",
         menushowitems: false,
         returnDisplay(item: any) {
             return (
@@ -108,6 +111,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         searchId: 'keyword',
         width: 7,
         titlename : 'Keywords',
+        laconic: "Shared definitions that describe game rules.",
         menushowitems: false,
         returnDisplay(item: any) {
             return (
@@ -161,6 +165,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         searchId: 'model',
         width: 9,
         titlename : 'Models',
+        laconic: "Who and what partake in battles",
         menushowitems: false,
         returnDisplay(item: any) {
             return (
@@ -234,6 +239,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         searchId: 'equipment',
         width: 8,
         titlename : 'Weapons & Equipment',
+        laconic: "Items you can find in the armoury",
         menushowitems: false,
         returnDisplay(item: any) {
             return (
@@ -307,6 +313,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         searchId: 'faction',
         width: 9,
         titlename : 'Factions',
+        laconic: "Assorted groups and nations participating in the war",
         menushowitems: true,
         returnDisplay(item: any) {
             return (
@@ -361,6 +368,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         searchId: 'scenario',
         width: 9,
         titlename : 'Scenarios',
+        laconic: "Unfortunate situations a warband can find itself in",
         menushowitems: false,
         returnDisplay(item: any) {
             return (
@@ -416,6 +424,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         searchId: 'campaignrule',
         width: 9 ,
         titlename : 'Campaign Rules',
+        laconic: "Rules for playing an extended campaign",
         menushowitems: true,
         returnDisplay(item: any) {
             return (
@@ -438,6 +447,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         searchId: 'explorationtable',
         width: 9 ,
         titlename : 'Exploration',
+        laconic: "Locations you can find during a campaign",
         menushowitems: false,
         returnDisplay(item: any) {
             return (
@@ -460,6 +470,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         searchId: 'injury',
         width: 10 ,
         titlename : 'Injuries',
+        laconic: "Wounds suffered after a battle",
         menushowitems: false,
         returnDisplay(item: any) {
             return (
@@ -482,6 +493,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         searchId: 'skillgroup',
         width: 9,
         titlename : 'Skills',
+        laconic: "Unique abilities and talents a model can gain",
         menushowitems: false,
         returnDisplay(item: any) {
             return (
@@ -537,6 +549,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         searchId: 'patron',
         width: 9,
         titlename : 'Patrons',
+        laconic: "Forces a warband must appease in campaigns",
         menushowitems: false,
         returnDisplay(item: any) {
             return (
