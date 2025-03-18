@@ -16,22 +16,24 @@ const GenericCollapsableBlockDisplay = (props: any) => {
     const DefaultState = props.d_state    
     const StyleType : number = props.bordertype;
     const ShowBorder = props.d_border != undefined? props.d_border : true;
+    const BgCol = props.d_col != undefined? props.d_col : "BgBase";
+    const MarginSize = props.d_margin != undefined? props.d_margin : "med";
 
     const [open, setOpen]   = useState((DefaultState != undefined)? DefaultState : true);
 
     return (
         <div >
-            <div onClick={() => {setOpen(!open)}} className={'align-left-right size-strongtext font-default hovermouse colorBasicText centered-div backgroundBgBase border'+getColour(DisplayColour) + " " + (StyleType == 0? "borderthin" : StyleType == 1? "borderthinnosides" : StyleType == 2? "borderthintop" : StyleType == 3? "borderthinbottom" : "borderremove")}>
-                <div className='totalmarginmed'>
+            <div onClick={() => {setOpen(!open)}} className={'align-left-right size-strongtext font-default hovermouse colorBasicText centered-div border'+getColour(DisplayColour) + " " + (StyleType == 0? "borderthin" : StyleType == 1? "borderthinnosides" : StyleType == 2? "borderthintop" : StyleType == 3? "borderthinbottom" : "borderremove") + " background"+BgCol}>
+                <div className={'totalmargin'+MarginSize}>
                     {DisplayName || ""}
                 </div>
-                <div className='totalmarginmed'>
+                <div className={'totalmargin'+MarginSize}>
                     <FontAwesomeIcon icon={open? faChevronDown : faChevronUp} className="colorBasicText"/>
                 </div>
             </div>
             <Collapse in={open}>
                 <div className={'container border'+getColour(DisplayColour)}>
-                    {ShowBorder == true && <div className={"bar backgroundgrey"} />}
+                    {ShowBorder == true && <div className={"bar background"+getColour(DisplayColour)} />}
                     <div className="content">                    
                         {displayMethod()}
                     </div>

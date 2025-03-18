@@ -37,7 +37,7 @@ const CompendiumRoute: React.FC<IControllerProp> = (prop) => {
         ContentsList.push({ name: "Keywords", route: "keywords"})
         ContentsList.push({ name: "Campaigns", route: "campaign"})
 
-        return ( <ContentsComponentLink listofcontents={ContentsList}/> )
+        return ( <ContentsComponentLink showheader={true} listofcontents={ContentsList}/> )
     }
 
     

@@ -3,6 +3,7 @@ import '../../../../resources/styles/_mainstylesource.scss'
 import React from 'react'
 import { ErrorBoundary } from "react-error-boundary";
 import { useNavigate } from 'react-router-dom';
+import GenericCollapsableBlockDisplay from '../../../components/generics/GenericCollapsableBlockDisplay';
 
 export interface ContentsLink {
     name: string,
@@ -11,6 +12,7 @@ export interface ContentsLink {
 
 export interface ContentsCollection {
     listofcontents: ContentsLink[];
+    showheader : boolean;
 }
 
 const ContentsComponentLink: React.FC<ContentsCollection> = (props: any) => {
@@ -30,18 +32,46 @@ const ContentsComponentLink: React.FC<ContentsCollection> = (props: any) => {
     function ReturnItemLink(_obj : ContentsLink) {
         return (
             <div className="hovermouse" onClick={() => NavigateHome(_obj.route)}>
-                {_obj.name}
+                {"- " + _obj.name}
             </div>
         )
     }
 
     return (
         <ErrorBoundary fallback={<div>Something went wrong with MenuDisplay.tsx</div>}>
-            <div className="font-default bordergrey borderstyler backgroundBgCard">
-                {props.listofcontents.map((item : ContentsLink) => 
-                    <div key={item.route}>
-                        {ReturnItemLink(item)}
-                    </div>)}
+            <div>
+            {props.showheader == false &&
+                <div className="font-default bordergrey borderstyler backgroundBgCard">
+                    <div className="totalmarginsml">
+                        {props.listofcontents.map((item : ContentsLink) => 
+                            <div key={item.route}>
+                                {ReturnItemLink(item)}
+                            </div>)}
+                    </div>
+                </div>
+            }
+            {props.showheader == true &&      
+            <div className="bordergrey borderthin">     
+                <GenericCollapsableBlockDisplay 
+                    d_name={"Contents"} 
+                    d_colour={"grey"} 
+                    d_state={false}  
+                    bordertype={0}
+                    d_border={false}
+                    d_col={"BgCard"}
+                    d_margin={"sml"}
+                    d_method={() => 
+                    <div className="bordergrey borderthin">
+                        <div className="totalmarginsml">
+                        {props.listofcontents.map((item : ContentsLink) => 
+                            <div key={item.route}>
+                                {ReturnItemLink(item)}
+                            </div>)}
+                        </div>
+                    </div>} 
+                    />
+                </div>
+            }
             </div>
         </ErrorBoundary>
     )
