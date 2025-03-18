@@ -33,9 +33,18 @@ const CompendiumRoute: React.FC<IControllerProp> = (prop) => {
     function GetContentsTable() {
         const ContentsList : ContentsLink[] = [];
 
-        ContentsList.push({ name: "Game Rules", route: "rules"})
-        ContentsList.push({ name: "Keywords", route: "keywords"})
         ContentsList.push({ name: "Campaigns", route: "campaign"})
+        ContentsList.push({ name: "Game Rules", route: "rules"})
+        ContentsList.push({ name: "Glossary", route: "glossary"})
+        ContentsList.push({ name: "Keywords", route: "keyword"})
+        ContentsList.push({ name: "Equipment & Weapons", route: "equipment"})
+        ContentsList.push({ name: "Factions", route: "faction"})
+        ContentsList.push({ name: "Models", route: "model"})
+        ContentsList.push({ name: "Scenarios", route: "scenario"})
+        ContentsList.push({ name: "Exploration", route: "exploration"})
+        ContentsList.push({ name: "Injuries", route: "injury"})
+        ContentsList.push({ name: "Patrons", route: "patron"})
+        ContentsList.push({ name: "Skills", route: "skill"})
 
         return ( <ContentsComponentLink showheader={true} listofcontents={ContentsList}/> )
     }

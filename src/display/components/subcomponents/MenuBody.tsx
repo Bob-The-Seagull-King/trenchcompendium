@@ -54,9 +54,32 @@ const MenuBody: React.FC<IControllerProp> = (prop) => {
                     d_state={false}  
                     bordertype={0}
                     d_method={() => <>
-                        <CompendiumMenuItem bordertype={0} controller={prop.controller.GameRulesCollectionController}/>
-                        <CompendiumMenuItem bordertype={0} controller={prop.controller.KeywordCollectionController}/>
                         <CompendiumMenuItem bordertype={0} controller={prop.controller.CampaignRulesCollectionController}/>
+                        <CompendiumMenuItem bordertype={0} controller={prop.controller.GameRulesCollectionController}/>
+                        <CompendiumMenuItem bordertype={0} controller={prop.controller.GlossaryCollectionController}/>
+                        <CompendiumMenuItem bordertype={0} controller={prop.controller.KeywordCollectionController}/>
+                    </>} />
+                <GenericCollapsableBlockDisplay 
+                    d_name={"Warbands"} 
+                    d_colour={"grey"} 
+                    d_state={false}  
+                    bordertype={0}
+                    d_method={() => <>
+                        <CompendiumMenuItem bordertype={0} controller={prop.controller.EquipmentCollectionController}/>
+                        <CompendiumMenuItem bordertype={0} controller={prop.controller.FactionCollectionController}/>
+                        <CompendiumMenuItem bordertype={0} controller={prop.controller.ModelCollectionController}/>
+                    </>} />
+                <CompendiumMenuItem bordertype={0} controller={prop.controller.ScenarioCollectionController}/>
+                <GenericCollapsableBlockDisplay 
+                    d_name={"Campaigns"} 
+                    d_colour={"grey"} 
+                    d_state={false}  
+                    bordertype={0}
+                    d_method={() => <>
+                        <CompendiumMenuItem bordertype={0} controller={prop.controller.ExplorationTableCollectionController}/>
+                        <CompendiumMenuItem bordertype={0} controller={prop.controller.InjuryCollectionController}/>
+                        <CompendiumMenuItem bordertype={0} controller={prop.controller.PatronCollectionController}/>
+                        <CompendiumMenuItem bordertype={0} controller={prop.controller.SkillGroupCollectionController}/>
                     </>} />
             </>
         )

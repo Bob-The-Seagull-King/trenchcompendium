@@ -54,7 +54,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
     glossary: {
         searchId: 'glossary',
         width: 7,
-        titlename : '',
+        titlename : 'Glossary',
         menushowitems: false,
         returnDisplay(item: any) {
             return (
@@ -160,7 +160,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
     model: {
         searchId: 'model',
         width: 9,
-        titlename : '',
+        titlename : 'Models',
         menushowitems: false,
         returnDisplay(item: any) {
             return (
@@ -233,7 +233,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
     equipment: {
         searchId: 'equipment',
         width: 8,
-        titlename : '',
+        titlename : 'Weapons & Equipment',
         menushowitems: false,
         returnDisplay(item: any) {
             return (
@@ -306,7 +306,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
     faction: {
         searchId: 'faction',
         width: 9,
-        titlename : '',
+        titlename : 'Factions',
         menushowitems: false,
         returnDisplay(item: any) {
             return (
@@ -360,7 +360,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
     scenario: {
         searchId: 'scenario',
         width: 9,
-        titlename : '',
+        titlename : 'Scenarios',
         menushowitems: false,
         returnDisplay(item: any) {
             return (
@@ -437,7 +437,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
     explorationtable: {
         searchId: 'explorationtable',
         width: 9 ,
-        titlename : '',
+        titlename : 'Exploration',
         menushowitems: false,
         returnDisplay(item: any) {
             return (
@@ -459,7 +459,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
     injury: {
         searchId: 'injury',
         width: 10 ,
-        titlename : '',
+        titlename : 'Injuries',
         menushowitems: false,
         returnDisplay(item: any) {
             return (
@@ -481,7 +481,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
     skillgroup: {
         searchId: 'skillgroup',
         width: 9,
-        titlename : '',
+        titlename : 'Skills',
         menushowitems: false,
         returnDisplay(item: any) {
             return (
@@ -536,7 +536,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
     patron: {
         searchId: 'patron',
         width: 9,
-        titlename : '',
+        titlename : 'Patrons',
         menushowitems: false,
         returnDisplay(item: any) {
             return (
