@@ -307,7 +307,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         searchId: 'faction',
         width: 9,
         titlename : 'Factions',
-        menushowitems: false,
+        menushowitems: true,
         returnDisplay(item: any) {
             return (
                 
