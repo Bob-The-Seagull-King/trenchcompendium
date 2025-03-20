@@ -38,11 +38,6 @@ const FilterableCompendiumDisplay = (prop: any) => {
         <ErrorBoundary fallback={<div>Something went wrong with FilteredDisplayCompendium.tsx</div>}>
             <div className="col-lg-6 col-md-12" key={_keyval}>
                 <div>
-                    <div className="colourdefault font-seriftext size-section">
-                        {DisplayPage.titlename}
-                    </div>
-                </div>
-                <div>
                     <div className="verticalspacermed"/>
                     {((_curItems == undefined) || (_curItems == null) || (_curItems.length == 0)) &&
                         <div className="">

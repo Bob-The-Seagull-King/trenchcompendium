@@ -118,11 +118,6 @@ const PagedCompendiumDisplay = (prop: any) => {
         <ErrorBoundary fallback={<div>Something went wrong with PagedDisplayCompendium.tsx</div>}>
             <div className="col-lg-6 col-md-12" key={_keyval}>
                 <div>
-                    <div className="colourdefault font-seriftext size-section">
-                        {DisplayPage.titlename}
-                    </div>
-                </div>
-                <div>
                     <div className="verticalspacermed"/>
                     <div className="align-left-right">
                         <div className="col-5">

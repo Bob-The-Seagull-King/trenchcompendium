@@ -40,8 +40,8 @@ const BaseHeader: React.FC<IControllerProp> = (prop: any) => {
                         <FontAwesomeIcon icon={faBars} className="size-section colordefault"/>
                     </Button>
                     <div className="font-ornamental colordefault">
-                        <div className="size-section d-xl-flex d-lg-flex d-md-flex d-none">{"Trench Crusade"}</div>
-                        <div className="size-subtitle d-flex d-lg-none d-md-none d-xl-none">{"Trench Crusade"}</div>
+                        <div className="size-section d-xl-flex d-lg-flex d-md-flex d-none">{getRouteName(useLocation().pathname)}</div>
+                        <div className="size-subtitle d-flex d-lg-none d-md-none d-xl-none">{getRouteName(useLocation().pathname)}</div>
                     </div>
                     <div className="backgroundBgCard">
                         <FontAwesomeIcon icon={faSquare} className="size-section colorBgCard"/>

@@ -212,10 +212,15 @@ export function GetObjectTagSpecialActionVal(tag: ObjectTag) {
  * @returns A string name for the route endpoint.
  */
 export function getRouteName(_route: string) {
-    if (_route.includes("tools/content")) {
-        return "Content Manager"
+    console.log(_route)
+    switch (_route) {
+        case '/compendium/gamerule': return "Game Rules";
+        case '/compendium/campaignrule': return "Campaign Rules";
+        case '/compendium/keyword': return "Keywords";
+        case '/compendium/glossary': return "Glossary";
+        case '/compendium/faction': return "Factions";
+        default: return "Trench Crusade"
     }
-    return ""
 }
 
 type sortArg<T> = keyof T | `-${string & keyof T}`
