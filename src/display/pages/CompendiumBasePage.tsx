@@ -27,7 +27,7 @@ const CompendiumBasePage: React.FC<IControllerProp> = (prop: any) => {
             const ContentsList : ContentsLink[] = [];
     
             ContentsList.push({ name: "Campaigns", route: "campaign"})
-            ContentsList.push({ name: "Game Rules", route: "rules"})
+            ContentsList.push({ name: "Game Rules", route: "gamerule"})
             ContentsList.push({ name: "Glossary", route: "glossary"})
             ContentsList.push({ name: "Keywords", route: "keyword"})
     

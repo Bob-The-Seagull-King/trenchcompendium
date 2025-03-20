@@ -42,11 +42,11 @@ const CompendiumMenuItem = (prop: any) => {
     }
 
     function SpecificNavigtateOut(item : any) {
-        CollectionController.TargetItem = item;
+        CollectionController.UpdateTargetItem(item);
+        navigate('/compendium/')
         navigate('/compendium/' + DisplayPage.searchId);
     }
     
-    console.log(CollectionController.itemcollection);
     return (
         <ErrorBoundary fallback={<div>Something went wrong with PalleteSwap.tsx</div>}>
             <>
@@ -60,7 +60,7 @@ const CompendiumMenuItem = (prop: any) => {
                 d_method={() => (
                     <div className={"backgroundBgBase borderthin bordergrey"}>
                     {CollectionController.itemcollection.map((item) => (
-                        <div key={item.HeldItem.ID} onClick={() => SpecificNavigtateOut(item.HeldItem.ID)} className={'align-left-right font-default hovermouse colorBasicText centered-div '}>
+                        <div key={item.HeldItem.ID} onClick={() => SpecificNavigtateOut(item)} className={'align-left-right font-default hovermouse colorBasicText centered-div '}>
                             <div className='totalmarginsml horizontalspacermed'>
                                 {item.HeldItem.Name}
                             </div>

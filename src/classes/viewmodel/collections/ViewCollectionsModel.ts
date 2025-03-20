@@ -21,6 +21,11 @@ class ViewCollectionsModel {
         this.CollectionType = CollectionDataDex[type]
     }
 
+    public UpdateTargetItem(item : any) {
+        console.log(item);
+        this.TargetItem = item;
+    }
+
     /**
      * Updates the searchParam value
      * @param request The IRequest formatted searchParam

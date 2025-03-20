@@ -4,6 +4,9 @@ export const ROUTES = {
     TOOLS_ROUTE: '/tools/*',
     HOME_ROUTE: '*',
 
-    // Page Routes //
+    // Compendium Routes //
+
+    // Rules //
+    COMP_RULES_GAMERULES : '/gamerule/*'
 
 }
