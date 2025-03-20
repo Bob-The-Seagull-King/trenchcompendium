@@ -43,8 +43,7 @@ const CompendiumMenuItem = (prop: any) => {
 
     function SpecificNavigtateOut(item : any) {
         CollectionController.UpdateTargetItem(item);
-        navigate('/compendium/')
-        navigate('/compendium/' + DisplayPage.searchId);
+        navigate('/compendium/' + DisplayPage.searchId, {state: item.HeldItem.ID});
     }
     
     return (

@@ -3,7 +3,7 @@ import { CollectionDataDex, CollectionType } from './CollectionsStatic';
 import { VariantSearch } from './filters/FiltersStatic';
 
 class ViewCollectionsModel {
-
+    
     searchParam: any = {};
     dataresults: any = [];
     itemcollection: any[] = [];
@@ -22,7 +22,6 @@ class ViewCollectionsModel {
     }
 
     public UpdateTargetItem(item : any) {
-        console.log(item);
         this.TargetItem = item;
     }
 

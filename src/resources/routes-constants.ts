@@ -7,6 +7,10 @@ export const ROUTES = {
     // Compendium Routes //
 
     // Rules //
-    COMP_RULES_GAMERULES : '/gamerule/*'
+    COMP_RULES_GAMERULES : '/gamerule/*',
+    COMP_RULES_CAMPAIGNRULES : '/campaignrule/*',
+    
+    // Warbands //
+    COMP_WARBAND_FACTIONS : '/faction/*'
 
 }

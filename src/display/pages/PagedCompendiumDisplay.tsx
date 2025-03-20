@@ -11,6 +11,7 @@ import { CollectionsListPage } from '../../classes/viewmodel/pages/CollectionLis
 // Components
 import { DisplayCollectionDataDex, DisplayCollectionType } from './DisplayPageStatic'
 import BasicButton from '../components/subcomponents/interactables/BasicButton';
+import { useLocation } from 'react-router-dom';
 
 const PagedCompendiumDisplay = (prop: any) => {
     // Initialize controllers and managers
@@ -25,6 +26,15 @@ const PagedCompendiumDisplay = (prop: any) => {
     const [_keyval, setKeyVal] = useState(0);
     const [_canprev, setCanPrev] = useState(SetPrevButtonActive());
     const [_cannext, setCanNext] = useState(SetNextButtonActive());
+    const { state } = useLocation();
+
+    useEffect(() => {
+        console.log("HKJHKJH")
+        setCurItem(GetCurrentItem())
+        const IndexOfCur : number = CollectionController.itemcollection.indexOf(GetCurrentItem());
+        SetButtonActive(IndexOfCur);
+        setKeyVal(_keyval+1)
+    }, [state]);
 
     function InitStateSet() {
         const SetItem = GetCurrentItem()

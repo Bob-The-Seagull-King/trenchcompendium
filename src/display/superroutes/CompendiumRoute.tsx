@@ -39,6 +39,8 @@ const CompendiumRoute: React.FC<IControllerProp> = (prop) => {
                 <div className="row justify-content-center m-0 p-0">
                     <Routes>                        
                         <Route path={ROUTES.COMP_RULES_GAMERULES} element={<PagedCompendiumDisplay controller={prop.controller.GameRulesCollectionController} />} />
+                        <Route path={ROUTES.COMP_RULES_CAMPAIGNRULES} element={<PagedCompendiumDisplay controller={prop.controller.CampaignRulesCollectionController} />} />
+                        <Route path={ROUTES.COMP_WARBAND_FACTIONS} element={<PagedCompendiumDisplay controller={prop.controller.FactionCollectionController} />} />
                         <Route path={ROUTES.HOME_ROUTE} element={<CompendiumBasePage controller={prop.controller} />} />
                     </Routes>
                 </div>
