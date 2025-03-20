@@ -29,7 +29,6 @@ const PagedCompendiumDisplay = (prop: any) => {
     const { state } = useLocation();
 
     useEffect(() => {
-        console.log("HKJHKJH")
         setCurItem(GetCurrentItem())
         const IndexOfCur : number = CollectionController.itemcollection.indexOf(GetCurrentItem());
         SetButtonActive(IndexOfCur);
@@ -118,8 +117,12 @@ const PagedCompendiumDisplay = (prop: any) => {
                 <div>
                     <div className="verticalspacermed"/>
                     <div className="align-left-right">
-                        <BasicButton btn_title={"Previous"} btn_state={_canprev} btn_press={GrabPrevItem}/>
-                        <BasicButton btn_title={"Next"} btn_state={_cannext} btn_press={GrabNextItem}/>
+                        <div className="col-lg-3 col-5">
+                            <BasicButton btn_title={"Previous"} btn_state={_canprev} btn_press={GrabPrevItem}/>
+                        </div>
+                        <div className="col-lg-3 col-5">
+                            <BasicButton btn_title={"Next"} btn_state={_cannext} btn_press={GrabNextItem}/>
+                        </div>
                     </div>
                     <div className="verticalspacermed"/>
                 </div>

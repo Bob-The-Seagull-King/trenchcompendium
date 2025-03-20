@@ -19,7 +19,7 @@ const BasicButton = (props: any) => {
 
     return (
         <ErrorBoundary fallback={<div>Something went wrong with TagDisplay.tsx</div>}>
-            <div key={active.toString()} onClick={() => RunPressFunc()} className={"borderstyler " + (active? "bordergrey backgroundBgCard hovermouse" : "borderBgCard backgroundBgBase")}>
+            <div key={active.toString()} onClick={() => RunPressFunc()} className={"centered-div borderstyler " + (active? "bordergrey backgroundBgCard hovermouse" : "borderBgCard backgroundBgBase")}>
                 <div className={"totalmarginsml " + (active? "colorBasicText" : "colorBgCard")}>
                     {title}
                 </div>
