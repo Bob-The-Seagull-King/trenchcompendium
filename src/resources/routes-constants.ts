@@ -9,6 +9,8 @@ export const ROUTES = {
     // Rules //
     COMP_RULES_GAMERULES : '/gamerule/*',
     COMP_RULES_CAMPAIGNRULES : '/campaignrule/*',
+    COMP_RULES_KEYWORDS: '/keyword/*',
+    COMP_RULES_GLOSSARY: '/glossary/*',
     
     // Warbands //
     COMP_WARBAND_FACTIONS : '/faction/*'

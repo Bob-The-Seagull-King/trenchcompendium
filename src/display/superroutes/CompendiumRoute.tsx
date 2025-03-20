@@ -11,6 +11,7 @@ import { ControllerController } from '../../classes/_high_level_controllers/Cont
 import { useGlobalState } from './../../utility/globalstate'
 import CompendiumBasePage from '../pages/CompendiumBasePage';
 import PagedCompendiumDisplay from '../pages/PagedCompendiumDisplay';
+import FilterableCompendiumDisplay from '../pages/FilterableCompendiumDisplay';
 
 interface IControllerProp {
     controller : ControllerController; // The controller being passed through
@@ -41,6 +42,7 @@ const CompendiumRoute: React.FC<IControllerProp> = (prop) => {
                         <Route path={ROUTES.COMP_RULES_GAMERULES} element={<PagedCompendiumDisplay controller={prop.controller.GameRulesCollectionController} />} />
                         <Route path={ROUTES.COMP_RULES_CAMPAIGNRULES} element={<PagedCompendiumDisplay controller={prop.controller.CampaignRulesCollectionController} />} />
                         <Route path={ROUTES.COMP_WARBAND_FACTIONS} element={<PagedCompendiumDisplay controller={prop.controller.FactionCollectionController} />} />
+                        <Route path={ROUTES.COMP_RULES_KEYWORDS} element={<FilterableCompendiumDisplay controller={prop.controller.KeywordCollectionController} />} />
                         <Route path={ROUTES.HOME_ROUTE} element={<CompendiumBasePage controller={prop.controller} />} />
                     </Routes>
                 </div>

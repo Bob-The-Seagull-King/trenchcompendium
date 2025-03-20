@@ -63,7 +63,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
             return (
                 
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    <GenericDisplay  d_colour={item.ID} d_name={item.Name} d_type={""} d_method={() => <GlossaryDisplay data={item} />}/>
+                    <GenericDisplay  d_colour={item.ID} d_state={false} d_name={item.Name} d_type={""} d_method={() => <GlossaryDisplay data={item} />}/>
                 </ErrorBoundary>
             )
         },
@@ -117,7 +117,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
             return (
                 
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    <GenericDisplay  d_colour={item.ID} d_name={item.Name} d_type={""} d_method={() => <KeywordDisplay data={item} />}/>
+                    <GenericDisplay  d_colour={item.ID} d_name={item.Name} d_state={false} d_type={""} d_method={() => <KeywordDisplay data={item} />}/>
                 </ErrorBoundary>
             )
         },

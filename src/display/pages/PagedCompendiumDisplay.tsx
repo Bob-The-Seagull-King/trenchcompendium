@@ -62,6 +62,27 @@ const PagedCompendiumDisplay = (prop: any) => {
         setKeyVal(_keyval+1)
     }
 
+    function GetNextName() {
+        const LengthOfList : number = CollectionController.itemcollection.length;
+        const IndexOfCur : number = CollectionController.itemcollection.indexOf(_curItem);
+
+        if (IndexOfCur < (LengthOfList-1)) {
+            return CollectionController.itemcollection[IndexOfCur + 1].HeldItem.Name;
+        } else {
+            return "-"
+        }
+    }
+
+    function GetPrevName() {
+        const IndexOfCur : number = CollectionController.itemcollection.indexOf(_curItem);
+
+        if (IndexOfCur > 0) {
+            return CollectionController.itemcollection[IndexOfCur - 1].HeldItem.Name;
+        } else {
+            return "-"
+        }
+    }
+
     function SetButtonActive(newIndex : number) {
         const LengthOfList : number = CollectionController.itemcollection.length;
 
@@ -103,6 +124,17 @@ const PagedCompendiumDisplay = (prop: any) => {
                 </div>
                 <div>
                     <div className="verticalspacermed"/>
+                    <div className="align-left-right">
+                        <div className="col-5">
+                            <BasicButton btn_title={GetPrevName()} btn_state={_canprev} btn_press={GrabPrevItem}/>
+                        </div>
+                        <div className="col-5">
+                            <BasicButton btn_title={GetNextName()} btn_state={_cannext} btn_press={GrabNextItem}/>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div className="verticalspacermed"/>
                     {((_curItem == undefined) || (_curItem == null)) &&
                         <div className="">
                             <h1 className="">No Items Selected</h1>
@@ -117,11 +149,11 @@ const PagedCompendiumDisplay = (prop: any) => {
                 <div>
                     <div className="verticalspacermed"/>
                     <div className="align-left-right">
-                        <div className="col-lg-3 col-5">
-                            <BasicButton btn_title={"Previous"} btn_state={_canprev} btn_press={GrabPrevItem}/>
+                        <div className="col-5">
+                            <BasicButton btn_title={GetPrevName()} btn_state={_canprev} btn_press={GrabPrevItem}/>
                         </div>
-                        <div className="col-lg-3 col-5">
-                            <BasicButton btn_title={"Next"} btn_state={_cannext} btn_press={GrabNextItem}/>
+                        <div className="col-5">
+                            <BasicButton btn_title={GetNextName()} btn_state={_cannext} btn_press={GrabNextItem}/>
                         </div>
                     </div>
                     <div className="verticalspacermed"/>
