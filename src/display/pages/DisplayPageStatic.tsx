@@ -1,6 +1,6 @@
 import { FilterManager } from "../../classes/viewmodel/collections/filters/FilterManager"
 import { ErrorBoundary } from "react-error-boundary";
-import {FilterTagItem, FilterTextItem, FilterMiscItem, FilterRangeItem} from "../components/subcomponents/filters/FilterItems"
+import {FilterTextItem, FilterMiscItem, FilterRangeItem, FilterTagSet} from "../components/subcomponents/filters/FilterItems"
 import GenericDisplay from "../components/generics/GenericDisplay"
 import GlossaryDisplay from "../components/features/glossary/GlossaryDisplay"
 import KeywordDisplay from "../components/features/glossary/KeywordDisplay";
@@ -69,38 +69,6 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
             return (
                 
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    <div className="col-12">
-                        <div className="separator"><h3>NAME</h3></div>
-                        <div className="row">
-                            {manager.ReturnTextFilters().map((item) => (
-                                <FilterTextItem data={item} key="name"/>
-                            ))}
-                        </div>
-                        <div className="separator"><h3>TAGS</h3></div>
-                        <div className='tagboxpad'></div>
-                        <div className="row">
-                            <div className="filterbox centerPosition">
-                                {manager.ReturnTagFilters().map((item) => (
-                                    <FilterTagItem key={"tag"+item.TagType.Name} data={item}/>
-                                ))}
-                            </div>
-                        </div>
-                        <div className="separator"><h3>SOURCES</h3></div>
-                        <div className="row">
-                            <div className='filterbox centerPosition'>
-                                {manager.ReturnMiscFilters().filter((value) => (value.Group == "source")).map((item) => (
-                                    <FilterMiscItem key={"miscsource"+item.Name} data={item} />
-                                ))}
-                            </div>
-                        </div>
-                            
-                        <div className='separator tagboxpad'></div>
-                        <div className="row float-end">
-                            <div className='col-12 float-end'>
-                                <div className='hovermouse filterbuttonitem basestructure bordergrey backgroundgrey' onClick={() => {close()}}>CONFIRM</div>
-                            </div>
-                        </div>
-                    </div>
                 </ErrorBoundary>
             )
         }
@@ -130,6 +98,9 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
                                     <FilterTextItem data={item}/>
                                 </div>)}
                         </div>
+                        <div>
+                            <FilterTagSet name={"Tags"} data={manager.ReturnTagFilters()}/>
+                        </div>
                     </div>
                 </ErrorBoundary>
             )
@@ -153,58 +124,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
             return (
                 
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    <div className="col-12">
-                        <div className="separator"><h3>NAME</h3></div>
-                        <div className="row">
-                            {manager.ReturnTextFilters().map((item) => (
-                                <FilterTextItem data={item} key="name"/>
-                            ))}
-                        </div>
-
-
-                        <div className="separator"><h3>VARIANT</h3></div>
-                        <div className="row">
-                            <div className='filterbox centerPosition'>
-                                {manager.ReturnMiscFilters().filter((value) => (value.Group == "variant_name")).map((item) => (
-                                    <FilterMiscItem key={"miscsource"+item.Name} data={item} />
-                                ))}
-                            </div>
-                        </div>
-
-                        <div className="separator"><h3>SOURCES</h3></div>
-                        <div className="row">
-                            <div className='filterbox centerPosition'>
-                                {manager.ReturnMiscFilters().filter((value) => (value.Group == "source")).map((item) => (
-                                    <FilterMiscItem key={"miscsource"+item.Name} data={item} />
-                                ))}
-                            </div>
-                        </div>
-
-                        <div className="separator"><h3>TEAM</h3></div>
-                        <div className="row">
-                            <div className='filterbox centerPosition'>
-                                {manager.ReturnMiscFilters().filter((value) => (value.Group == "team")).map((item) => (
-                                    <FilterMiscItem key={"miscsource"+item.Name} data={item} />
-                                ))}
-                            </div>
-                        </div>
-
-                        <div className="separator"><h3>KEYWORDS</h3></div>
-                        <div className="row">
-                            <div className='filterbox centerPosition'>
-                                {manager.ReturnMiscFilters().filter((value) => (value.Group == "keywords")).map((item) => (
-                                    <FilterMiscItem key={"miscsource"+item.Name} data={item} />
-                                ))}
-                            </div>
-                        </div>
-                            
-                        <div className='separator tagboxpad'></div>
-                        <div className="row float-end">
-                            <div className='col-12 float-end'>
-                                <div className='hovermouse filterbuttonitem basestructure bordergrey backgroundgrey' onClick={() => {close()}}>CONFIRM</div>
-                            </div>
-                        </div>
-                    </div>
+                   
                 </ErrorBoundary>
             )
         }
@@ -227,58 +147,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
             return (
                 
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    <div className="col-12">
-                        <div className="separator"><h3>NAME</h3></div>
-                        <div className="row">
-                            {manager.ReturnTextFilters().map((item) => (
-                                <FilterTextItem data={item} key="name"/>
-                            ))}
-                        </div>
-
-                        <div className="separator"><h3>SOURCES</h3></div>
-                        <div className="row">
-                            <div className='filterbox centerPosition'>
-                                {manager.ReturnMiscFilters().filter((value) => (value.Group == "source")).map((item) => (
-                                    <FilterMiscItem key={"miscsource"+item.Name} data={item} />
-                                ))}
-                            </div>
-                        </div>
-                        
-                        <div className="separator"><h3>CATEGORY</h3></div>
-                        <div className="row">
-                            <div className='filterbox centerPosition'>
-                                {manager.ReturnMiscFilters().filter((value) => (value.Group == "category")).map((item) => (
-                                    <FilterMiscItem key={"miscsource"+item.Name} data={item} />
-                                ))}
-                            </div>
-                        </div>
-                        
-                        <div className="separator"><h3>KEYWORDS</h3></div>
-                        <div className="row">
-                            <div className='filterbox centerPosition'>
-                                {manager.ReturnMiscFilters().filter((value) => (value.Group == "keywords")).map((item) => (
-                                    <FilterMiscItem key={"miscsource"+item.Name} data={item} />
-                                ))}
-                            </div>
-                        </div>
-
-
-                        <div className="separator"><h3>DISTANCE (Inches)</h3></div>
-                        <div className="row">
-                            <div className='filterbox centerPosition'>
-                                {manager.ReturnRangeFilters().filter((value) => (value.Group == "distance")).map((item) => (
-                                    <FilterRangeItem key={"miscsource"+item.Group} data={item} />
-                                ))}
-                            </div>
-                        </div>
-                            
-                        <div className='separator tagboxpad'></div>
-                        <div className="row float-end">
-                            <div className='col-12 float-end'>
-                                <div className='hovermouse filterbuttonitem basestructure bordergrey backgroundgrey' onClick={() => {close()}}>CONFIRM</div>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </ErrorBoundary>
             )
         }
@@ -301,39 +170,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
             return (
                 
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    <div className="col-12">
-                        <div className="separator"><h3>NAME</h3></div>
-                        <div className="row">
-                            {manager.ReturnTextFilters().map((item) => (
-                                <FilterTextItem data={item} key="name"/>
-                            ))}
-                        </div>
-
-                        <div className="separator"><h3>SOURCES</h3></div>
-                        <div className="row">
-                            <div className='filterbox centerPosition'>
-                                {manager.ReturnMiscFilters().filter((value) => (value.Group == "source")).map((item) => (
-                                    <FilterMiscItem key={"miscsource"+item.Name} data={item} />
-                                ))}
-                            </div>
-                        </div>
-
-                        <div className="separator"><h3>TEAM</h3></div>
-                        <div className="row">
-                            <div className='filterbox centerPosition'>
-                                {manager.ReturnMiscFilters().filter((value) => (value.Group == "team")).map((item) => (
-                                    <FilterMiscItem key={"miscsource"+item.Name} data={item} />
-                                ))}
-                            </div>
-                        </div>
-                            
-                        <div className='separator tagboxpad'></div>
-                        <div className="row float-end">
-                            <div className='col-12 float-end'>
-                                <div className='hovermouse filterbuttonitem basestructure bordergrey backgroundgrey' onClick={() => {close()}}>CONFIRM</div>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </ErrorBoundary>
             )
         }
@@ -356,40 +193,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
             return (
                 
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    <div className="col-12">
-                        <div className="separator"><h3>NAME</h3></div>
-                        <div className="row">
-                            {manager.ReturnTextFilters().map((item) => (
-                                <FilterTextItem data={item} key="name"/>
-                            ))}
-                        </div>
-                        
-                        <div className="separator"><h3>TAGS</h3></div>
-                        <div className='tagboxpad'></div>
-                        <div className="row">
-                            <div className="filterbox centerPosition">
-                                {manager.ReturnTagFilters().map((item) => (
-                                    <FilterTagItem key={"tag"+item.TagType.Name} data={item}/>
-                                ))}
-                            </div>
-                        </div>
-
-                        <div className="separator"><h3>SOURCES</h3></div>
-                        <div className="row">
-                            <div className='filterbox centerPosition'>
-                                {manager.ReturnMiscFilters().filter((value) => (value.Group == "source")).map((item) => (
-                                    <FilterMiscItem key={"miscsource"+item.Name} data={item} />
-                                ))}
-                            </div>
-                        </div>
-
-                        <div className='separator tagboxpad'></div>
-                        <div className="row float-end">
-                            <div className='col-12 float-end'>
-                                <div className='hovermouse filterbuttonitem basestructure bordergrey backgroundgrey' onClick={() => {close()}}>CONFIRM</div>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </ErrorBoundary>
             )
         }
@@ -481,40 +285,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
             return (
                 
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    <div className="col-12">
-                        <div className="separator"><h3>NAME</h3></div>
-                        <div className="row">
-                            {manager.ReturnTextFilters().map((item) => (
-                                <FilterTextItem data={item} key="name"/>
-                            ))}
-                        </div>
-                        
-                        <div className="separator"><h3>TAGS</h3></div>
-                        <div className='tagboxpad'></div>
-                        <div className="row">
-                            <div className="filterbox centerPosition">
-                                {manager.ReturnTagFilters().map((item) => (
-                                    <FilterTagItem key={"tag"+item.TagType.Name} data={item}/>
-                                ))}
-                            </div>
-                        </div>
-
-                        <div className="separator"><h3>SOURCES</h3></div>
-                        <div className="row">
-                            <div className='filterbox centerPosition'>
-                                {manager.ReturnMiscFilters().filter((value) => (value.Group == "source")).map((item) => (
-                                    <FilterMiscItem key={"miscsource"+item.Name} data={item} />
-                                ))}
-                            </div>
-                        </div>
-
-                        <div className='separator tagboxpad'></div>
-                        <div className="row float-end">
-                            <div className='col-12 float-end'>
-                                <div className='hovermouse filterbuttonitem basestructure bordergrey backgroundgrey' onClick={() => {close()}}>CONFIRM</div>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </ErrorBoundary>
             )
         }
@@ -537,40 +308,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
             return (
                 
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    <div className="col-12">
-                        <div className="separator"><h3>NAME</h3></div>
-                        <div className="row">
-                            {manager.ReturnTextFilters().map((item) => (
-                                <FilterTextItem data={item} key="name"/>
-                            ))}
-                        </div>
-                        
-                        <div className="separator"><h3>TAGS</h3></div>
-                        <div className='tagboxpad'></div>
-                        <div className="row">
-                            <div className="filterbox centerPosition">
-                                {manager.ReturnTagFilters().map((item) => (
-                                    <FilterTagItem key={"tag"+item.TagType.Name} data={item}/>
-                                ))}
-                            </div>
-                        </div>
-
-                        <div className="separator"><h3>SOURCES</h3></div>
-                        <div className="row">
-                            <div className='filterbox centerPosition'>
-                                {manager.ReturnMiscFilters().filter((value) => (value.Group == "source")).map((item) => (
-                                    <FilterMiscItem key={"miscsource"+item.Name} data={item} />
-                                ))}
-                            </div>
-                        </div>
-
-                        <div className='separator tagboxpad'></div>
-                        <div className="row float-end">
-                            <div className='col-12 float-end'>
-                                <div className='hovermouse filterbuttonitem basestructure bordergrey backgroundgrey' onClick={() => {close()}}>CONFIRM</div>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </ErrorBoundary>
             )
         }

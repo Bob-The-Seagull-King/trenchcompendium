@@ -90,3 +90,15 @@
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch
   }
+
+  .buttonclean {
+    border-radius: 0rem !important;
+    width: 100% !important;
+  }
+
+  .custom-dropdown-menu {
+    left: 0 !important; /* Align menu with button */
+    min-width: unset !important; /* Override Bootstrap min-width */
+    width: auto !important; /* Ensures width is only what is set inline */
+    max-width: 100% !important; /* Prevents overflow */
+  }

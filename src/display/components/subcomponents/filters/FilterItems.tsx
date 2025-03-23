@@ -9,6 +9,9 @@ import InputGroup from 'react-bootstrap/InputGroup';
 // Classes
 import { FilterText, FilterItem, FilterTag, FilterRange } from '../../../../classes/viewmodel/collections/filters/FilterInterfaces'
 import { makestringpresentable } from '../../../../utility/functions'
+import { ButtonGroup, Dropdown } from 'react-bootstrap';
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 /**
@@ -176,34 +179,77 @@ const FilterRangeItem = (prop: any) => {
     // -------------------------------------------
 }
 
-const FilterTagItem = (prop: any) => {
-    const ItemFilter: FilterTag = prop.data
-    const [_currentstate, returnactivetext] = useState(GetDisplayVal(ItemFilter.TagType));
 
-    // Return result -----------------------------
+const FilterItemSet = (prop: any) => {
+    const ItemFilter: FilterItem[] = prop.data
+    const ItemName : string = prop.name;
+
     return (
-        <ErrorBoundary fallback={<div>Something went wrong with FilterItems.tsx</div>}>
-        <div className="">
-            <div className="centerPosition">
-                <div className={"setheightcentered filterbox quartermargin borderstyler basestructure filterbuttonitem" + (_currentstate == "" ? " bordergrey backgroundgrey" : _currentstate == "positive" ? " subbordergreen subbackgroundgreen" : " subborderred subbackgroundred")} >
-                    <div className='hovermouse tagpad'/>
-                    <div onClick={() => SwitchStates(ItemFilter.TagType, returnactivetext)} className="hovermouse tagboxtitle ">
-                        {makestringpresentable(ItemFilter.TagType.Name)}
-                    </div>
-                    <div className='tagpad'/>
-                     
-                    <div className=''>
-                        <InputGroup className="shorten tagboxpad" >
-                            <Form.Control size="sm" className="no-margins" style={{fontSize:"0.75em", height:"0.5em", margin:"0em", textAlign:"center"}} onChange={e => UpdateName(ItemFilter.TagVal, e.target.value)} aria-label="Text input with checkbox" defaultValue={ItemFilter.TagVal.Val} placeholder=""/>
-                        </InputGroup>
-                    </div>
-                    
-                </div>
-            </div>
+        <div>
+            <Dropdown bsPrefix="empty">
+                <Dropdown.Toggle bsPrefix="empty" id="dropdown-basic">
+                    {ItemName}
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu>
+                    <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+                    <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+                    <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+                </Dropdown.Menu>
+            </Dropdown>
         </div>
-        </ErrorBoundary>
     )
-    // -------------------------------------------
+}
+
+
+const FilterTagSet = (prop: any) => {
+    const ItemFilter: FilterTag[] = prop.data
+    const ItemName : string = prop.name;
+        
+    const toggleRef = useRef<HTMLButtonElement>(null);
+    const [menuWidth, setMenuWidth] = useState<number | undefined>(undefined);
+
+    return (
+        <div>
+            <Dropdown 
+                bsPrefix="empty" 
+                autoClose="outside"
+                onToggle={(isOpen) => {
+                    if (isOpen && toggleRef.current) {
+                    setMenuWidth(toggleRef.current.getBoundingClientRect().width);
+                    }
+                }}>
+                <Dropdown.Toggle ref={toggleRef} bsPrefix="empty" id="dropdown-basic" className="container bordergrey borderthin buttonclean colorBasicText">
+                    <div className="align-left-right container">
+                        <div className="backgroundBgBase maxwidth borderthin bordergrey">
+                            <div className="maxwidth align-left horizontalspacermed"> 
+                                {ItemName}
+                            </div>
+                        </div>
+                        <div className="backgroundBgCard borderthin bordergrey horizontalspacermed">
+                            <FontAwesomeIcon icon={faChevronDown}/>
+                        </div>
+                    </div>
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu className="" style={{ width: menuWidth }}>
+                    {ItemFilter.map((item) => (
+                        <TagSelectItem key={item.TagType.Name} data={item}/>
+                    ))}
+                </Dropdown.Menu>
+            </Dropdown>
+        </div>
+    )
+}
+
+const TagSelectItem = (prop : any) => {
+    const ItemFilter: FilterTag = prop.data
+
+    return (
+        <div>
+            {ItemFilter.TagType.Name}
+        </div>
+    )
 }
 
 const FilterMiscItem = (prop: any) => {
@@ -226,4 +272,4 @@ const FilterMiscItem = (prop: any) => {
 }
 
 
-export {FilterTextItem, FilterTagItem, FilterMiscItem, FilterRangeItem}
+export {FilterTextItem, FilterMiscItem, FilterRangeItem, FilterItemSet, FilterTagSet}
