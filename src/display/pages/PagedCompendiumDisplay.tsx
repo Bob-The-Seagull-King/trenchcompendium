@@ -121,10 +121,10 @@ const PagedCompendiumDisplay = (prop: any) => {
                     <div className="verticalspacermed"/>
                     <div className="align-left-right">
                         <div className="col-5">
-                            <BasicButton btn_title={GetPrevName()} btn_state={_canprev} btn_press={GrabPrevItem}/>
+                            <BasicButton d_dir={"l"} btn_title={GetPrevName()} btn_state={_canprev} btn_press={GrabPrevItem}/>
                         </div>
                         <div className="col-5">
-                            <BasicButton btn_title={GetNextName()} btn_state={_cannext} btn_press={GrabNextItem}/>
+                            <BasicButton d_dir={"r"} btn_title={GetNextName()} btn_state={_cannext} btn_press={GrabNextItem}/>
                         </div>
                     </div>
                 </div>
@@ -145,10 +145,10 @@ const PagedCompendiumDisplay = (prop: any) => {
                     <div className="verticalspacermed"/>
                     <div className="align-left-right">
                         <div className="col-5">
-                            <BasicButton btn_title={GetPrevName()} btn_state={_canprev} btn_press={GrabPrevItem}/>
+                            <BasicButton d_dir={"l"} btn_title={GetPrevName()} btn_state={_canprev} btn_press={GrabPrevItem}/>
                         </div>
                         <div className="col-5">
-                            <BasicButton btn_title={GetNextName()} btn_state={_cannext} btn_press={GrabNextItem}/>
+                            <BasicButton d_dir={"r"} btn_title={GetNextName()} btn_state={_cannext} btn_press={GrabNextItem}/>
                         </div>
                     </div>
                     <div className="verticalspacermed"/>

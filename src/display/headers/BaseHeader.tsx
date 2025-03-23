@@ -13,7 +13,7 @@ import { getRouteName } from "../../utility/functions"
 
 // Font Aesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars, faHouse, faSquare } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faGear, faHouse, faSquare } from '@fortawesome/free-solid-svg-icons'
 
 // Component
 import PalleteSwap from './components/PalleteSwap';
@@ -24,11 +24,13 @@ import { ControllerController } from '../../classes/_high_level_controllers/Cont
 interface IControllerProp {
     controller : ControllerController; // The controller being passed through
     showstate : any;
+    showsettings : any;
 }
 
 const BaseHeader: React.FC<IControllerProp> = (prop: any) => {
         
     const handleShow = () => prop.showstate();
+    const handleShowSettings = () => prop.showsettings();
 
     // Return result -----------------------------
     return (
@@ -43,9 +45,9 @@ const BaseHeader: React.FC<IControllerProp> = (prop: any) => {
                         <div className="size-section d-xl-flex d-lg-flex d-md-flex d-none">{getRouteName(useLocation().pathname)}</div>
                         <div className="size-subtitle d-flex d-lg-none d-md-none d-xl-none">{getRouteName(useLocation().pathname)}</div>
                     </div>
-                    <div className="backgroundBgCard">
-                        <FontAwesomeIcon icon={faSquare} className="size-section colorBgCard"/>
-                    </div>
+                    <Button bsPrefix="empty" className="borderremove backgroundBgCard lonebutton" onClick={handleShowSettings}>
+                        <FontAwesomeIcon icon={faGear} className="size-section colordefault"/>
+                    </Button>
                 </div>
             </div>
         </ErrorBoundary>

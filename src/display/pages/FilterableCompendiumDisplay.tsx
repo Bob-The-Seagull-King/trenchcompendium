@@ -10,8 +10,6 @@ import { CollectionsListPage } from '../../classes/viewmodel/pages/CollectionLis
 
 // Components
 import { DisplayCollectionDataDex, DisplayCollectionType } from './DisplayPageStatic'
-import BasicButton from '../components/subcomponents/interactables/BasicButton';
-import { useLocation } from 'react-router-dom';
 import FilterBox from '../components/subcomponents/filters/FilterBox';
 
 const FilterableCompendiumDisplay = (prop: any) => {

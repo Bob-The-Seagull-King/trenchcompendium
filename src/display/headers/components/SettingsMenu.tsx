@@ -26,7 +26,7 @@ interface IControllerProp {
     responseshow : string;
 }
 
-const OffcanvasMenu: React.FC<IControllerProp> = (prop) => {
+const SettingsMenu: React.FC<IControllerProp> = (prop) => {
 
     const handleClose = prop.closeFunc;
     const show = prop.showState
@@ -52,7 +52,7 @@ const OffcanvasMenu: React.FC<IControllerProp> = (prop) => {
     
     return (
         <ErrorBoundary fallback={<div>Something went wrong with PalleteSwap.tsx</div>}>  
-            <Offcanvas className="borderthin bordergrey" data-theme={theme} show={show} onHide={handleClose} responsive={prop.responseshow}>
+            <Offcanvas placement={'end'} className="borderthin bordergrey" data-theme={theme} show={show} onHide={handleClose} responsive={prop.responseshow}>
                 <Offcanvas.Header className="borderthin bordergrey backgroundBgBase font-default " closeButton>
                     <Offcanvas.Title className="size-subtitle ">
                         <div className="colorBasicText">
@@ -60,8 +60,20 @@ const OffcanvasMenu: React.FC<IControllerProp> = (prop) => {
                         </div>
                     </Offcanvas.Title>
                 </Offcanvas.Header>
-                <Offcanvas.Body bsPrefix="empty" className="scrollingoffmenu removeoverflowbar fillspace backgroundBgBase">   
-                    <MenuBody controller={prop.controller} closeFunc={prop.closeFunc} responseshow={prop.responseshow} showState={prop.showState}/>
+                <Offcanvas.Body bsPrefix="empty" className="scrollingoffmenu removeoverflowbar fillspace backgroundBgBase">                    
+                    
+                    <GenericCollapsableBlockDisplay 
+                        d_name={"Pallete"} 
+                        d_colour={"grey"} 
+                        d_state={false}  
+                        bordertype={0}
+                        d_method={() => <div className="borderthin bordergrey" ><PalleteSwap/></div>} />
+                    <GenericCollapsableBlockDisplay 
+                        d_name={"Language"} 
+                        d_colour={"grey"} 
+                        d_state={false}  
+                        bordertype={0}
+                        d_method={() => <div className="borderthin bordergrey" ><LanguageSwap/></div>} />
                     <div className="borderthin bordergrey fillspace"/>
                 </Offcanvas.Body>
             </Offcanvas>
@@ -70,5 +82,5 @@ const OffcanvasMenu: React.FC<IControllerProp> = (prop) => {
       );
 }
 
-export default OffcanvasMenu
+export default SettingsMenu
 

@@ -17,6 +17,7 @@ import PalleteSwap from '../../headers/components/PalleteSwap';
 import LanguageSwap from '../../headers/components/LanguageSwap';
 import { ControllerController } from '../../../classes/_high_level_controllers/ControllerController';
 import CompendiumMenuItem from '../../headers/components/CompendiumMenuItem';
+import GenericLinkedCollapsableBlockDisplay from '../generics/GenericLinkedCollapsableBlockDisplay';
 
 interface IControllerProp {
     controller : ControllerController; // The controller being passed through
@@ -48,11 +49,12 @@ const MenuBody: React.FC<IControllerProp> = (prop) => {
     function returnCompendiumMenu() {
         return (
             <>
-                <GenericCollapsableBlockDisplay 
+                <GenericLinkedCollapsableBlockDisplay
                     d_name={"Rules"} 
                     d_colour={"grey"} 
                     d_state={false}  
                     bordertype={0}
+                    d_link={'/compendium/gamerule'}
                     d_method={() => <>
                         <CompendiumMenuItem bordertype={0} controller={prop.controller.CampaignRulesCollectionController}/>
                         <CompendiumMenuItem bordertype={0} controller={prop.controller.GameRulesCollectionController}/>
@@ -93,11 +95,12 @@ const MenuBody: React.FC<IControllerProp> = (prop) => {
                     {"Home"}
                 </div>
             </div>
-            <GenericCollapsableBlockDisplay 
+            <GenericLinkedCollapsableBlockDisplay 
                 d_name={"Compendium"} 
                 d_colour={"grey"} 
                 d_state={false}  
                 bordertype={0}
+                d_link={'/compendium/'}
                 d_method={() => returnCompendiumMenu()} />
 
             </>

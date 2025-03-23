@@ -17,6 +17,7 @@ import { DisplayCollectionType, DisplayCollectionDataDex } from '../../pages/Dis
 import { useNavigate } from 'react-router-dom';
 import GenericCollapsableBlockDisplay from '../../components/generics/GenericCollapsableBlockDisplay';
 import PalleteSwap from './PalleteSwap';
+import GenericLinkedCollapsableBlockDisplay from '../../components/generics/GenericLinkedCollapsableBlockDisplay';
 
 const CompendiumMenuItem = (prop: any) => {
     
@@ -38,24 +39,25 @@ const CompendiumMenuItem = (prop: any) => {
      * @param dir The page to navigate to
      */
     function NavigateOut() {
-        navigate('/compendium/' + DisplayPage.searchId);
+        navigate('/compendium/' + DisplayPage.searchId, {state: DisplayPage.searchId});
     }
 
     function SpecificNavigtateOut(item : any) {
         CollectionController.UpdateTargetItem(item);
-        navigate('/compendium/' + DisplayPage.searchId, {state: item.HeldItem.ID});
+        navigate('/compendium/' + DisplayPage.searchId, {state: item.HeldItem.ID + Date.now().toString()});
     }
     
     return (
         <ErrorBoundary fallback={<div>Something went wrong with PalleteSwap.tsx</div>}>
             <>
             {DisplayPage.menushowitems == true &&
-                <GenericCollapsableBlockDisplay 
+                <GenericLinkedCollapsableBlockDisplay 
                 d_name={DisplayPage.titlename} 
                 d_colour={"grey"} 
                 d_state={false}  
                 d_border={false}
                 bordertype={0}
+                d_link={'/compendium/'+DisplayPage.searchId}
                 d_method={() => (
                     <div className={"backgroundBgBase borderthin bordergrey"}>
                     {CollectionController.itemcollection.map((item) => (

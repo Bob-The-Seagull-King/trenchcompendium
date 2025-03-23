@@ -17,6 +17,7 @@ import MenuHeader from './MenuHeader'
 import { ControllerController } from '../../classes/_high_level_controllers/ControllerController';
 import OffcanvasMenu from './components/OffCanvasMenu';
 import OncanvasMenu from '../components/subcomponents/informationpanel/OnCanvasMenu';
+import SettingsMenu from './components/SettingsMenu';
 
 interface IControllerProp {
     controller : ControllerController; // The controller being passed through
@@ -63,6 +64,11 @@ const SuperHeader: React.FC<IControllerProp> = (prop) => {
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+        
+    const [showsettings, setShowsettings] = useState(false);
+
+    const handleClosesettings = () => setShowsettings(false);
+    const handleShowsettings = () => setShowsettings(true);
 
     // Return result -----------------------------
     return (    
@@ -70,8 +76,8 @@ const SuperHeader: React.FC<IControllerProp> = (prop) => {
             <div data-theme={theme}>
                 <div id="topbarbody" ref={ref} className="overlaystructure topbarStructure">
                     <Routes>
-                        <Route path={ROUTES.COMPENDIUM_ROUTE} element={<BaseHeader showstate={handleShow} controller={prop.controller} />} />
-                        <Route path={ROUTES.HOME_ROUTE} element={<MenuHeader showstate={handleShow} controller={prop.controller} />} />
+                        <Route path={ROUTES.COMPENDIUM_ROUTE} element={<BaseHeader showsettings={handleShowsettings} showstate={handleShow} controller={prop.controller} />} />
+                        <Route path={ROUTES.HOME_ROUTE} element={<MenuHeader showsettings={handleShowsettings} showstate={handleShow} controller={prop.controller} />} />
                     </Routes>
                 </div>
                 <Routes>
@@ -88,6 +94,7 @@ const SuperHeader: React.FC<IControllerProp> = (prop) => {
                         } />
                 </Routes>
                 <OffcanvasMenu controller={prop.controller} closeFunc={handleClose} responseshow="" showState={show}/>
+                <SettingsMenu controller={prop.controller} closeFunc={handleClosesettings} responseshow="" showState={showsettings}/>
             </div>
         </ErrorBoundary>
     )
