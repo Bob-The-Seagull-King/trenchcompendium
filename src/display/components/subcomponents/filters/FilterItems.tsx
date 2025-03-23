@@ -50,7 +50,7 @@ function GetDisplayVal(item : FilterItem){
 }
 
 // Update the value of the text fitler
-function updateName(item : FilterText, value: string) {
+function UpdateName(item : FilterText, value: string) {
     item.Val = value;
 }
 
@@ -67,14 +67,15 @@ const FilterTextItem = (prop: any) => {
     // Return result -----------------------------
     return (
         <ErrorBoundary fallback={<div>Something went wrong with FilterItems.tsx</div>}>
-            <div className="col">
-                <div className="centerPosition">
-                    <InputGroup className="mb-3 borderstyler subborderdefault">
-                        <Form.Control onChange={e => updateName(ItemFilter, e.target.value)} className='' aria-label="Text input with checkbox" defaultValue={ItemFilter.Val}/>
-                        <InputGroup.Text className=''>Exact Match?</InputGroup.Text>
-                        <InputGroup.Checkbox checked={_currentstate}  onChange={e => updateStrict(ItemFilter, returnactivetext)}  className='' aria-label="Checkbox for following text input" ></InputGroup.Checkbox>
-                    </InputGroup>
+            <div className="backgroundBgBase">
+                <div className="colourBasicText size-subtitle">
+                    {makestringpresentable(ItemFilter.Group)}
                 </div>
+                <Form.Control 
+                    onChange={e => UpdateName(ItemFilter, e.target.value)} 
+                    className='bordergrey' 
+                    aria-label="Text input with checkbox" 
+                    defaultValue={ItemFilter.Val}/>
             </div>
         </ErrorBoundary>
     )
@@ -193,7 +194,7 @@ const FilterTagItem = (prop: any) => {
                      
                     <div className=''>
                         <InputGroup className="shorten tagboxpad" >
-                            <Form.Control size="sm" className="no-margins" style={{fontSize:"0.75em", height:"0.5em", margin:"0em", textAlign:"center"}} onChange={e => updateName(ItemFilter.TagVal, e.target.value)} aria-label="Text input with checkbox" defaultValue={ItemFilter.TagVal.Val} placeholder=""/>
+                            <Form.Control size="sm" className="no-margins" style={{fontSize:"0.75em", height:"0.5em", margin:"0em", textAlign:"center"}} onChange={e => UpdateName(ItemFilter.TagVal, e.target.value)} aria-label="Text input with checkbox" defaultValue={ItemFilter.TagVal.Val} placeholder=""/>
                         </InputGroup>
                     </div>
                     

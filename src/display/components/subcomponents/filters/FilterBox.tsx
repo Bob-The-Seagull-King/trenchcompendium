@@ -7,15 +7,18 @@ import { makestringpresentable } from '../../../../utility/functions'
 import { ErrorBoundary } from "react-error-boundary";
 import { CollectionsListPage } from '../../../../classes/viewmodel/pages/CollectionListPage';
 import { FilterManager } from '../../../../classes/viewmodel/collections/filters/FilterManager';
-import { FilterText } from '../../../../classes/viewmodel/collections/filters/FilterInterfaces';
+import { FilterItem, FilterRange, FilterTag, FilterText } from '../../../../classes/viewmodel/collections/filters/FilterInterfaces';
 import { InputGroup, Form, Button, Collapse } from 'react-bootstrap';
 import { faFilter, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { FilterTextItem } from './FilterItems';
+import { DisplayCollectionType, DisplayCollectionDataDex } from '../../../pages/DisplayPageStatic';
 
 const FilterBox = (prop: any) => {
     const ViewPageController: CollectionsListPage = prop.controller
     const FilterManagerObj: FilterManager = ViewPageController.FilterManager;
     const updatesearch = prop.runfunction;
+    const DisplayPage: DisplayCollectionType = DisplayCollectionDataDex[ViewPageController.TypeName]
 
     
     const [open, setOpen] = useState(false);
@@ -44,30 +47,10 @@ const FilterBox = (prop: any) => {
         )
     }
 
-    function ReturnTextParam(_filter : FilterText) {
-        return (            
-            <div className="backgroundBgBase">
-                <div className="colourBasicText size-subtitle">
-                    {makestringpresentable(_filter.Group)}
-                </div>
-                <Form.Control 
-                    onChange={e => UpdateName(_filter, e.target.value)} 
-                    className='bordergrey' 
-                    aria-label="Text input with checkbox" 
-                    defaultValue={_filter.Val}/>
-            </div>
-        )
-    }
-
     function ReturnFilterBoxInner() {
         return (
             <div className="totalmarginsml">
-                <div>
-                    {FilterManagerObj.ReturnTextFilters().filter((item) => (item.Group != 'name')).map((item) =>
-                        <div key={item.Group}>
-                            {ReturnTextParam(item)}
-                        </div>)}
-                </div>
+                {DisplayPage.returnFilterSelect(FilterManagerObj, updatesearch, updatesearch)}
             </div>
         )
     }
