@@ -69,6 +69,15 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
             return (
                 
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
+                    <div>
+                        <div>
+                            <FilterTagSet name={"Tags"} data={manager.ReturnTagFilters()}/>
+                        </div>
+                        <div>
+                            <div className="verticalspacersml"/>
+                            <FilterMiscSet name={"Source"} data={manager.ReturnMiscFilters().filter((item) => (item.Group == 'source'))}/>
+                        </div>
+                    </div>
                 </ErrorBoundary>
             )
         }

@@ -44,6 +44,7 @@ const CompendiumRoute: React.FC<IControllerProp> = (prop) => {
                         <Route path={ROUTES.COMP_WARBAND_FACTIONS} element={<PagedCompendiumDisplay controller={prop.controller.FactionCollectionController} />} />
                         <Route path={ROUTES.COMP_SCENARIO_SCENARIO} element={<PagedCompendiumDisplay controller={prop.controller.ScenarioCollectionController} />} />
                         <Route path={ROUTES.COMP_RULES_KEYWORDS} element={<FilterableCompendiumDisplay controller={prop.controller.KeywordCollectionController} />} />
+                        <Route path={ROUTES.COMP_RULES_GLOSSARY} element={<FilterableCompendiumDisplay controller={prop.controller.GlossaryCollectionController} />} />
                         <Route path={ROUTES.HOME_ROUTE} element={<CompendiumBasePage controller={prop.controller} />} />
                     </Routes>
                 </div>
