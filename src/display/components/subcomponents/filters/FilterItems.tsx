@@ -10,7 +10,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import { FilterText, FilterItem, FilterTag, FilterRange } from '../../../../classes/viewmodel/collections/filters/FilterInterfaces'
 import { makestringpresentable } from '../../../../utility/functions'
 import { ButtonGroup, Dropdown } from 'react-bootstrap';
-import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import { faChevronDown, faSquareMinus, faSquarePlus, faSquareXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
@@ -234,7 +234,12 @@ const FilterTagSet = (prop: any) => {
 
                 <Dropdown.Menu className="" style={{ width: menuWidth }}>
                     {ItemFilter.map((item) => (
-                        <TagSelectItem key={item.TagType.Name} data={item}/>
+                        <div key={item.TagType.Name}>
+                            {ItemFilter.indexOf(item) != 0 &&
+                            <div className="bar backgroundgrey maxwidth"/>
+                            }
+                            <TagSelectItem  data={item}/>
+                        </div>
                     ))}
                 </Dropdown.Menu>
             </Dropdown>
@@ -245,9 +250,117 @@ const FilterTagSet = (prop: any) => {
 const TagSelectItem = (prop : any) => {
     const ItemFilter: FilterTag = prop.data
 
+    const [keyval, setkeyval] = useState(0);
+
+    function SetToFalse() {
+        ItemFilter.TagType.IsActive = true;
+        ItemFilter.TagType.DoInclude = false;
+        setkeyval(keyval + 1);
+    }
+
+    function SetToTrue() {
+        ItemFilter.TagType.IsActive = true;
+        ItemFilter.TagType.DoInclude = true;
+        setkeyval(keyval + 1);
+    }
+
+    function SetToOff() {
+        ItemFilter.TagType.IsActive = false;
+        setkeyval(keyval + 1);
+    }
+
+    return (
+        <div className=" align-left-right ">
+            <div className="horizontalspacermed">
+                {makestringpresentable(ItemFilter.TagType.Name)}  
+            </div>
+            <div className="size-subtitle horizontalspacermed" key={keyval}>
+                <FontAwesomeIcon icon={faSquareXmark} onClick={() => SetToFalse()} className={"horizontalspacerxsm colorred" + (((ItemFilter.TagType.DoInclude == false) && (ItemFilter.TagType.IsActive == true))? "" : " lowopacity" )}/>
+                <FontAwesomeIcon icon={faSquareMinus} onClick={() => SetToOff()} className={"horizontalspacerxsm colorgrey" + (((ItemFilter.TagType.IsActive == false))? "" : " lowopacity" )}/>
+                <FontAwesomeIcon icon={faSquarePlus} onClick={() => SetToTrue()} className={"horizontalspacerxsm colorgreen" + (((ItemFilter.TagType.DoInclude == true) && (ItemFilter.TagType.IsActive == true))? "" : " lowopacity" )}/>
+            </div>
+        </div>
+    )
+}
+
+
+const FilterMiscSet = (prop: any) => {
+    const ItemFilter: FilterItem[] = prop.data
+    const ItemName : string = prop.name;
+        
+    const toggleRef = useRef<HTMLButtonElement>(null);
+    const [menuWidth, setMenuWidth] = useState<number | undefined>(undefined);
+
     return (
         <div>
-            {ItemFilter.TagType.Name}
+            <Dropdown 
+                bsPrefix="empty" 
+                autoClose="outside"
+                onToggle={(isOpen) => {
+                    if (isOpen && toggleRef.current) {
+                    setMenuWidth(toggleRef.current.getBoundingClientRect().width);
+                    }
+                }}>
+                <Dropdown.Toggle ref={toggleRef} bsPrefix="empty" id="dropdown-basic" className="container bordergrey borderthin buttonclean colorBasicText">
+                    <div className="align-left-right container">
+                        <div className="backgroundBgBase maxwidth borderthin bordergrey">
+                            <div className="maxwidth align-left horizontalspacermed"> 
+                                {ItemName}
+                            </div>
+                        </div>
+                        <div className="backgroundBgCard borderthin bordergrey horizontalspacermed">
+                            <FontAwesomeIcon icon={faChevronDown}/>
+                        </div>
+                    </div>
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu className="" style={{ width: menuWidth }}>
+                    {ItemFilter.map((item) => (
+                        <div key={item.Name}>
+                            {ItemFilter.indexOf(item) != 0 &&
+                            <div className="bar backgroundgrey maxwidth"/>
+                            }
+                            <TagSelectMisc  data={item}/>
+                        </div>
+                    ))}
+                </Dropdown.Menu>
+            </Dropdown>
+        </div>
+    )
+}
+
+const TagSelectMisc = (prop : any) => {
+    const ItemFilter: FilterItem = prop.data
+
+    const [keyval, setkeyval] = useState(0);
+
+    function SetToFalse() {
+        ItemFilter.IsActive = true;
+        ItemFilter.DoInclude = false;
+        setkeyval(keyval + 1);
+    }
+
+    function SetToTrue() {
+        ItemFilter.IsActive = true;
+        ItemFilter.DoInclude = true;
+        setkeyval(keyval + 1);
+    }
+
+    function SetToOff() {
+        ItemFilter.IsActive = false;
+        setkeyval(keyval + 1);
+    }
+
+    return (
+        <div className=" align-left-right ">
+            <div className="horizontalspacermed">
+                {makestringpresentable(ItemFilter.Name)}  
+            </div>
+            <div className="size-subtitle horizontalspacermed" key={keyval}>
+                <FontAwesomeIcon icon={faSquareXmark} onClick={() => SetToFalse()} className={"horizontalspacerxsm colorred" + (((ItemFilter.DoInclude == false) && (ItemFilter.IsActive == true))? "" : " lowopacity" )}/>
+                <FontAwesomeIcon icon={faSquareMinus} onClick={() => SetToOff()} className={"horizontalspacerxsm colorgrey" + (((ItemFilter.IsActive == false))? "" : " lowopacity" )}/>
+                <FontAwesomeIcon icon={faSquarePlus} onClick={() => SetToTrue()} className={"horizontalspacerxsm colorgreen" + (((ItemFilter.DoInclude == true) && (ItemFilter.IsActive == true))? "" : " lowopacity" )}/>
+            </div>
         </div>
     )
 }
@@ -272,4 +385,4 @@ const FilterMiscItem = (prop: any) => {
 }
 
 
-export {FilterTextItem, FilterMiscItem, FilterRangeItem, FilterItemSet, FilterTagSet}
+export {FilterTextItem, FilterMiscItem, FilterRangeItem, FilterItemSet, FilterTagSet, FilterMiscSet}

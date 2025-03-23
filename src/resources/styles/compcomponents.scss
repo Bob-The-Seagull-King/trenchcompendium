@@ -102,3 +102,11 @@
     width: auto !important; /* Ensures width is only what is set inline */
     max-width: 100% !important; /* Prevents overflow */
   }
+
+  .lowopacity {
+    opacity: 0.5;
+  }
+
+  .filterbuttoncomp {
+    width: 10rem;
+  }

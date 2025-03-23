@@ -13,6 +13,7 @@ import { faFilter, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { FilterTextItem } from './FilterItems';
 import { DisplayCollectionType, DisplayCollectionDataDex } from '../../../pages/DisplayPageStatic';
+import BasicButton from '../interactables/BasicButton';
 
 const FilterBox = (prop: any) => {
     const ViewPageController: CollectionsListPage = prop.controller
@@ -51,6 +52,10 @@ const FilterBox = (prop: any) => {
         return (
             <div className="totalmarginsml">
                 {DisplayPage.returnFilterSelect(FilterManagerObj, updatesearch, updatesearch)}
+                <div className="verticalspacersml"/>
+                <div className="filterbuttoncomp">
+                    <BasicButton btn_title={"Search"} btn_state={true} btn_press={updatesearch}/>
+                </div>
             </div>
         )
     }

@@ -1,6 +1,6 @@
 import { FilterManager } from "../../classes/viewmodel/collections/filters/FilterManager"
 import { ErrorBoundary } from "react-error-boundary";
-import {FilterTextItem, FilterMiscItem, FilterRangeItem, FilterTagSet} from "../components/subcomponents/filters/FilterItems"
+import {FilterTextItem, FilterMiscItem, FilterRangeItem, FilterTagSet, FilterMiscSet} from "../components/subcomponents/filters/FilterItems"
 import GenericDisplay from "../components/generics/GenericDisplay"
 import GlossaryDisplay from "../components/features/glossary/GlossaryDisplay"
 import KeywordDisplay from "../components/features/glossary/KeywordDisplay";
@@ -100,6 +100,10 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
                         </div>
                         <div>
                             <FilterTagSet name={"Tags"} data={manager.ReturnTagFilters()}/>
+                        </div>
+                        <div>
+                            <div className="verticalspacersml"/>
+                            <FilterMiscSet name={"Source"} data={manager.ReturnMiscFilters().filter((item) => (item.Group == 'source'))}/>
                         </div>
                     </div>
                 </ErrorBoundary>
