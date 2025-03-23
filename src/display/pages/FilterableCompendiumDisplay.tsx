@@ -28,13 +28,23 @@ const FilterableCompendiumDisplay = (prop: any) => {
 
     function InitStateSet() {
         const SetItem = CollectionController.itemcollection;
-        console.log(CollectionController.itemcollection);
         return SetItem;
+    }
+    
+    /**
+     * Get the controller to update the search, then update
+     * the state of the ability/item list arrays. Update the
+     * keyval in order to force a rerender of elements.
+     */
+    function UpdateSearch() {
+        ViewPageController.updateSearch();
+        setCurItems(CollectionController.ReturnItems())
+        setKeyVal(_keyval+1)
     }
 
     function ReturnFilters() {
         return (
-            <FilterBox />
+            <FilterBox controller={ViewPageController} runfunction={UpdateSearch}/>
         )
     }
 
@@ -63,11 +73,11 @@ const FilterableCompendiumDisplay = (prop: any) => {
     // Return result -----------------------------
     return (
         <ErrorBoundary fallback={<div>Something went wrong with FilteredDisplayCompendium.tsx</div>}>
-            <div className="col-lg-6 col-md-12" key={_keyval}>
+            <div className="col-lg-6 col-md-12">
                 <div>
                     {ReturnFilters()}
                 </div>
-                <div>
+                <div  key={_keyval}>
                     {ReturnItems()}
                 </div>
             </div>
