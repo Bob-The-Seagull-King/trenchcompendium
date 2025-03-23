@@ -6,7 +6,7 @@ import { ErrorBoundary } from "react-error-boundary";
 import Table from 'react-bootstrap/Table';
 
 // Classes
-import { returnTags, returnDescription } from '../../../../utility/util';
+import { returnDescription } from '../../../../utility/util';
 import { TableBody } from '../../../../classes/feature/table/tablebody';
 import { getColour } from '../../../../utility/functions';
 

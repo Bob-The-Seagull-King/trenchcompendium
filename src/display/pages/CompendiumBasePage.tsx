@@ -10,7 +10,6 @@ import { CollectionsListPage } from '../../classes/viewmodel/pages/CollectionLis
 
 // Components
 import ViewTableItemDisplay from '../../display/components/subcomponents/list/ViewTableItemDisplay'
-import BaseFilterSelectDisplay from '../../display/components/subcomponents/filters/BaseFilterSelectDisplay'
 import { DisplayCollectionDataDex, DisplayCollectionType } from './DisplayPageStatic'
 import ContentsComponentLink, { ContentsLink } from '../components/subcomponents/informationpanel/ContentsComponentLink';
 import { ControllerController } from '../../classes/_high_level_controllers/ControllerController';

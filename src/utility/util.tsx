@@ -10,7 +10,6 @@ import { IGlossaryRule, GlossaryRule } from '../classes/feature/glossary/Glossar
 
 // Components
 import GenericHover from '../display/components/generics/GenericHover';
-import TagDisplay from '../display/components/subcomponents/TagDisplay';
 import AdvancedDescriptionItemDisplay from '../display/components/subcomponents/description/AdvancedDescriptionItemDisplay';
 import GlossaryDisplay from '../display/components/features/glossary/GlossaryDisplay';
 import { makestringpresentable } from './functions';
@@ -89,26 +88,6 @@ function ArrayItemIntoHtml(content: string, delim: any) {
         
     }
     return ( <span></span> )
-}
-
-/**
- * Renders a list of Tags associated with an item
- * @param taglist List of tag objects the item has
- * @param bannedList Any tag which matches a string in here should not be shown
- * @returns Map of TagDisplay objects
- */
-export function returnTags(taglist: ObjectTag, bannedList : string[]) {
-    const displaytags: ObjectTag = sortTagsForDisplay(taglist, bannedList)
-
-    return (
-        <div className="filterbox">
-                {Object.keys(displaytags).map((item) => (
-                    <div key={"tagDisplay"+item+displaytags[item]}>
-                        <TagDisplay itemkey={item} itemval={displaytags[item]}/>
-                    </div>
-                ))}
-        </div>
-    )
 }
 
 /**

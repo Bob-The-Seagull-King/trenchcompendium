@@ -13,6 +13,9 @@ export const ROUTES = {
     COMP_RULES_GLOSSARY: '/glossary/*',
     
     // Warbands //
-    COMP_WARBAND_FACTIONS : '/faction/*'
+    COMP_WARBAND_FACTIONS : '/faction/*',
+
+    // Scenarios //
+    COMP_SCENARIO_SCENARIO : '/scenario/*'
 
 }

@@ -18,7 +18,6 @@ import { ToolsController } from './classes/_high_level_controllers/ToolsControll
 import HomeRoute from './display/superroutes/HomeRoute'
 import CompendiumRoute from './display/superroutes/CompendiumRoute'
 import SuperHeader from './display/headers/SuperHeader'
-import ToolsRoute from './display/superroutes/ToolsRoute'
 
 const App: React.FC = () => {
 

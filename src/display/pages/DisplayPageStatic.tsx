@@ -184,7 +184,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         width: 9,
         titlename : 'Scenarios',
         laconic: "Unfortunate situations a warband can find itself in",
-        menushowitems: false,
+        menushowitems: true,
         returnDisplay(item: any) {
             return (
                 

@@ -10,7 +10,6 @@ import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 
 // Components
-import GenericPanel from '../../../components/generics/GenericPanel';
 import ContentPackDisplay from '../../../components/features/contentpack/ContentPackDisplay'
 
 // Font Awesome
