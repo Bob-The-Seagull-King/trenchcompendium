@@ -43,7 +43,7 @@ const MenuBody: React.FC<IControllerProp> = (prop) => {
      * @param dir The page to navigate to
      */
     function NavigateOut() {
-        navigate('/');
+        navigate('/', {state: Date.now().toString()});
     }
 
     function returnCompendiumMenu() {

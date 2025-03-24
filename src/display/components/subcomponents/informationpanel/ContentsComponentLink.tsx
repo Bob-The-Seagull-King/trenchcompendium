@@ -27,7 +27,7 @@ const ContentsComponentLink: React.FC<ContentsCollection> = (props: any) => {
      * @param dir The page to navigate to
      */
     function NavigateHome(route : string) {
-        navigate('/compendium/' + route);
+        navigate('/compendium/' + route, {state: Date.now().toString()});
     }
 
     function ReturnItemLink(_obj : ContentsLink) {

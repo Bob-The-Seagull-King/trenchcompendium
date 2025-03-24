@@ -40,6 +40,7 @@ const PagedCompendiumDisplay = (prop: any) => {
         return SetItem;
     }
 
+
     function GetCurrentItem() {
         if (CollectionController.TargetItem == null) {
             return CollectionController.itemcollection[0]
@@ -50,6 +51,7 @@ const PagedCompendiumDisplay = (prop: any) => {
 
     function GrabPrevItem() {
         const IndexOfCur : number = CollectionController.itemcollection.indexOf(_curItem);
+        CollectionController.TargetItem = CollectionController.itemcollection[IndexOfCur - 1]
         setCurItem(CollectionController.itemcollection[IndexOfCur - 1])
         SetButtonActive(IndexOfCur - 1);
         setKeyVal(_keyval+1)
@@ -57,6 +59,7 @@ const PagedCompendiumDisplay = (prop: any) => {
 
     function GrabNextItem() {
         const IndexOfCur : number = CollectionController.itemcollection.indexOf(_curItem);
+        CollectionController.TargetItem = CollectionController.itemcollection[IndexOfCur + 1]
         setCurItem(CollectionController.itemcollection[IndexOfCur + 1])
         SetButtonActive(IndexOfCur + 1);
         setKeyVal(_keyval+1)

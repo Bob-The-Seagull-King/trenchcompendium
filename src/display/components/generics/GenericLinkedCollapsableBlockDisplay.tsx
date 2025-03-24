@@ -27,7 +27,7 @@ const GenericLinkedCollapsableBlockDisplay = (props: any) => {
     const navigate = useNavigate(); 
 
     function SpecificNavigtateOut(item : any) {
-        navigate(item);
+        navigate(item, {state: Date.now().toString()});
     }
 
     return (

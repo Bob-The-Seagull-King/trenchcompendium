@@ -39,9 +39,11 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         menushowitems: true,
         returnDisplay(item: any) {
             return (
-                
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    <GenericDisplay  d_colour={item.Team} d_name={item.Name} d_type={""} d_method={() => <BookRuleDisplay data={item} />}/>
+                    <div className="colorBasicText size-section font-seriftext">
+                        {item.Name}
+                    </div>
+                    <BookRuleDisplay data={item} />
                 </ErrorBoundary>
             )
         },
@@ -256,10 +258,15 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         laconic: "Rules for playing an extended campaign",
         menushowitems: true,
         returnDisplay(item: any) {
+            
+            console.log(item);
             return (
                 
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    <GenericDisplay  d_colour={item.Team} d_name={item.Name} d_type={""} d_method={() => <BookRuleDisplay data={item} />}/>
+                    <div className="colorBasicText size-section font-seriftext">
+                        {item.Name}
+                    </div>
+                    <BookRuleDisplay data={item} />
                 </ErrorBoundary>
             )
         },

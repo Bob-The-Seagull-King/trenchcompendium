@@ -16,7 +16,7 @@ const MenuComponent = (props: any) => {
      * @param dir The page to navigate to
      */
     function NavigateHome() {
-        navigate('/' + Route);
+        navigate('/' + Route, {state: Date.now().toString()});
     }
 
     return (
