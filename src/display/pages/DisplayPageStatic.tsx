@@ -139,9 +139,6 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
                 
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
                         <div>
-                            <FilterTagSet name={"Tags"} data={manager.ReturnTagFilters()}/>
-                        </div>
-                        <div>
                             <div className="verticalspacersml"/>
                             <FilterMiscSet name={"Variant"} data={manager.ReturnMiscFilters().filter((item) => (item.Group == 'variant_name'))}/>
                         </div>
@@ -176,13 +173,6 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
             )
         },
         returnFilterSelect(manager : FilterManager, update : NoneToNoneFunction, close : NoneToNoneFunction) {
-            /*
-            
-                        <div>
-                            <div className="verticalspacersml"/>
-                            <FilterMiscSet name={"Distance"} data={manager.ReturnRangeFilters().filter((item) => (item.Group == 'distance'))}/>
-                        </div>
-            */
             return (
                 
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
@@ -201,6 +191,13 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
                         <div>
                             <div className="verticalspacersml"/>
                             <FilterMiscSet name={"Source"} data={manager.ReturnMiscFilters().filter((item) => (item.Group == 'source'))}/>
+                        </div>
+                        <div>
+                            {manager.ReturnRangeFilters().filter((item) => (item.Group == 'distance')).map((item) =>
+                                    <div key={item.Group}>
+                                        <div className="verticalspacersml"/>
+                                        <FilterRangeItem name={"Range"} data={item}/>
+                                    </div>)}
                         </div>
                 </ErrorBoundary>
             )

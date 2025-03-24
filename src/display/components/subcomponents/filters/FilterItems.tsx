@@ -10,7 +10,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import { FilterText, FilterItem, FilterTag, FilterRange } from '../../../../classes/viewmodel/collections/filters/FilterInterfaces'
 import { makestringpresentable } from '../../../../utility/functions'
 import { ButtonGroup, Dropdown } from 'react-bootstrap';
-import { faChevronDown, faSquareMinus, faSquarePlus, faSquareXmark } from '@fortawesome/free-solid-svg-icons';
+import { faChevronDown, faRefresh, faSquareMinus, faSquarePlus, faSquareXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
@@ -93,15 +93,21 @@ const FilterRangeItem = (prop: any) => {
     const upperRef = useRef<HTMLInputElement>(null);
 
     const [_keyval, setkeyval] = useState(0);
+    const toggleRef = useRef<HTMLButtonElement>(null);
+    const [menuWidth, setMenuWidth] = useState<number | undefined>(undefined);
 
-    function resetRange(item : FilterRange) {
+    function resetRangeLower(item : FilterRange) {
         item.Lower = item.Set_Lower;
-        item.Upper = item.Set_Upper;
         if (lowerRef != null) {
             if (lowerRef.current) {
                 lowerRef.current.value = item.Set_Lower.toString();
             }
         }
+        setkeyval(_keyval + 1);
+    }
+
+    function resetRangeUpper(item : FilterRange) {
+        item.Upper = item.Set_Upper;
         if (upperRef != null) {
             if (upperRef.current) {
                 upperRef.current.value = item.Set_Upper.toString();
@@ -120,25 +126,64 @@ const FilterRangeItem = (prop: any) => {
     // Return result -----------------------------
     return (
         <ErrorBoundary fallback={<div>Something went wrong with FilterItems.tsx</div>}>
-            <div className="backgroundBgBase">
-                <div className="colourBasicText size-subtitle">
-                    {makestringpresentable(ItemFilter.Group)}
-                </div>
-                <div className="align-left-right">
+            <Dropdown 
+                bsPrefix="empty" 
+                autoClose="outside"
+                onToggle={(isOpen) => {
+                    if (isOpen && toggleRef.current) {
+                    setMenuWidth(toggleRef.current.getBoundingClientRect().width);
+                    }
+                }}>
+                <Dropdown.Toggle ref={toggleRef} bsPrefix="empty" id="dropdown-basic" className="container bordergrey borderthin buttonclean colorBasicText">
+                    <div className="align-left-right container">
+                        <div className="backgroundBgBase maxwidth borderthin bordergrey">
+                            <div className="maxwidth align-left horizontalspacermed"> 
+                                {makestringpresentable(ItemFilter.Group)}
+                            </div>
+                        </div>
+                        <div className="backgroundBgCard borderthin bordergrey horizontalspacermed">
+                            <FontAwesomeIcon icon={faChevronDown}/>
+                        </div>
+                    </div>
+                </Dropdown.Toggle>
 
-                    <Form.Control 
-                        onChange={e => updateLower(ItemFilter, parseInt(e.target.value))} 
-                        className='bordergrey' 
-                        aria-label="Text input with checkbox" 
-                        defaultValue={ItemFilter.Set_Lower}/>
+                <Dropdown.Menu className="" style={{ width: menuWidth }}>
+                    <div className="align-left-right totalmarginsml">
+                        <div>
+                            <div className="colourBasicText">
+                                {"Min"}
+                            </div>
+                            <div className="centered-div width-content">
+                                <Form.Control 
+                                    onChange={e => updateLower(ItemFilter, parseInt(e.target.value))} 
+                                    className='bordergrey' 
+                                    type="number"
+                                    aria-label="Text input with checkbox" 
+                                    defaultValue={ItemFilter.Set_Lower}
+                                    ref={lowerRef}/>
+                                <FontAwesomeIcon className="colourBasicText hovermouse horizontalspacermed" onClick={() => resetRangeLower(ItemFilter)} icon={faRefresh}/>
+                            </div>
 
-                    <Form.Control 
-                        onChange={e => updateUpper(ItemFilter, parseInt(e.target.value))} 
-                        className='bordergrey' 
-                        aria-label="Text input with checkbox" 
-                        defaultValue={ItemFilter.Set_Upper}/>
-                </div>
-            </div>
+                        </div>
+                        <div>
+                            <div className="colourBasicText">
+                                {"Max"}
+                            </div>
+                            <div className="centered-div width-content">
+                                <Form.Control 
+                                    onChange={e => updateUpper(ItemFilter, parseInt(e.target.value))} 
+                                    className='bordergrey' 
+                                    type="number"
+                                    aria-label="Text input with checkbox" 
+                                    defaultValue={ItemFilter.Set_Upper}
+                                    ref={upperRef}/>
+                                <FontAwesomeIcon className="colourBasicText hovermouse horizontalspacermed" onClick={() => resetRangeUpper(ItemFilter)} icon={faRefresh}/>
+                            </div>
+                        </div>
+
+                    </div>
+                </Dropdown.Menu>
+            </Dropdown>
         </ErrorBoundary>
     )
     // -------------------------------------------
