@@ -88,6 +88,7 @@ const FilterTextItem = (prop: any) => {
 const FilterRangeItem = (prop: any) => {
     const ItemFilter: FilterRange = prop.data
 
+
     const lowerRef = useRef<HTMLInputElement>(null);
     const upperRef = useRef<HTMLInputElement>(null);
 
@@ -119,61 +120,25 @@ const FilterRangeItem = (prop: any) => {
     // Return result -----------------------------
     return (
         <ErrorBoundary fallback={<div>Something went wrong with FilterItems.tsx</div>}>
-        <div className="col" key={_keyval}>
-            <div className="centerPosition">
-                
-                <div className="row" style={{minHeight:"5rem"}}>
-                    
-                    <div className="col-3">
-                        
-                        <div className={"filterbox quartermargin borderstyler basestructure filterbuttonitem bordergrey backgroundgrey setheightcentered"}  >
-
-                            <div onClick={() => resetRange(ItemFilter)} className="hovermouse widecentertext">
-                                {"Reset"}
-                            </div>  
-                            
-                            
-                        </div>
-                    </div>
-                    <div className="col-4">
-                        
-                        <div className={"row filterbox quartermargin borderstyler basestructure filterbuttonitem bordergrey backgroundgrey setheightcentered"}  >
-                            <div className="col-5">
-                                <div className='hovermouse tagpad '/>
-                                    {"MIN"}
-                                <div className='tagpad'/>
-                            </div>
-                            
-                            <div className='col-7'>
-                                <InputGroup className=" tagboxpad" >                            
-                                    <Form.Control type="number" ref={upperRef} onChange={e => updateLower(ItemFilter, parseInt(e.target.value))} className='' aria-label="Text input with checkbox" defaultValue={ItemFilter.Lower.toString()}/>
-                                </InputGroup>
-                            </div>
-                            
-                        </div>
-                    </div>
-                    <div className="col-1"/>
-                    <div className="col-4">
-                        
-                        <div className={"row filterbox quartermargin borderstyler basestructure filterbuttonitem bordergrey backgroundgrey setheightcentered"}  >
-                            <div className="col-5">
-                                <div className='hovermouse tagpad '/>
-                                    {"MAX"}
-                                <div className='tagpad'/>
-                            </div>
-                            
-                            <div className='col-7'>
-                                <InputGroup className=" tagboxpad" >                            
-                                    <Form.Control type="number" ref={upperRef} onChange={e => updateUpper(ItemFilter, parseInt(e.target.value))} className='' aria-label="Text input with checkbox" defaultValue={ItemFilter.Upper.toString()}/>
-                                </InputGroup>
-                            </div>
-                            
-                        </div>
-                    </div>
+            <div className="backgroundBgBase">
+                <div className="colourBasicText size-subtitle">
+                    {makestringpresentable(ItemFilter.Group)}
                 </div>
-            
+                <div className="align-left-right">
+
+                    <Form.Control 
+                        onChange={e => updateLower(ItemFilter, parseInt(e.target.value))} 
+                        className='bordergrey' 
+                        aria-label="Text input with checkbox" 
+                        defaultValue={ItemFilter.Set_Lower}/>
+
+                    <Form.Control 
+                        onChange={e => updateUpper(ItemFilter, parseInt(e.target.value))} 
+                        className='bordergrey' 
+                        aria-label="Text input with checkbox" 
+                        defaultValue={ItemFilter.Set_Upper}/>
+                </div>
             </div>
-        </div>
         </ErrorBoundary>
     )
     // -------------------------------------------

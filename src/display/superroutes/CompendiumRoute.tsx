@@ -49,8 +49,14 @@ const CompendiumRoute: React.FC<IControllerProp> = (prop) => {
                         <Route path={ROUTES.COMP_RULES_CAMPAIGNRULES} element={<PagedCompendiumDisplay controller={prop.controller.CampaignRulesCollectionController} />} />
                         <Route path={ROUTES.COMP_WARBAND_FACTIONS} element={<PagedCompendiumDisplay controller={prop.controller.FactionCollectionController} />} />
                         <Route path={ROUTES.COMP_SCENARIO_SCENARIO} element={<PagedCompendiumDisplay controller={prop.controller.ScenarioCollectionController} />} />
+                        <Route path={ROUTES.COMP_CAMPAIGN_EXPLORATION} element={<PagedCompendiumDisplay controller={prop.controller.ExplorationTableCollectionController} />} />
+                        <Route path={ROUTES.COMP_CAMPAIGN_PATRONS} element={<PagedCompendiumDisplay controller={prop.controller.PatronCollectionController} />} />
                         <Route path={ROUTES.COMP_RULES_KEYWORDS} element={<FilterableCompendiumDisplay controller={prop.controller.KeywordCollectionController} />} />
                         <Route path={ROUTES.COMP_RULES_GLOSSARY} element={<FilterableCompendiumDisplay controller={prop.controller.GlossaryCollectionController} />} />
+                        <Route path={ROUTES.COMP_WARBAND_MODELS} element={<FilterableCompendiumDisplay controller={prop.controller.ModelCollectionController} />} />
+                        <Route path={ROUTES.COMP_CAMPAIGN_INJURIES} element={<FilterableCompendiumDisplay controller={prop.controller.InjuryCollectionController} />} />
+                        <Route path={ROUTES.COMP_CAMPAIGN_SKILLS} element={<FilterableCompendiumDisplay controller={prop.controller.SkillGroupCollectionController} />} />
+                        <Route path={ROUTES.COMP_WARBAND_EQUIPMENT} element={<FilterableCompendiumDisplay controller={prop.controller.EquipmentCollectionController} />} />
                         <Route path={ROUTES.HOME_ROUTE} element={<CompendiumBasePage controller={prop.controller} />} />
                     </Routes>
                 </div>

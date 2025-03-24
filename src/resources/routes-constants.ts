@@ -14,8 +14,16 @@ export const ROUTES = {
     
     // Warbands //
     COMP_WARBAND_FACTIONS : '/faction/*',
+    COMP_WARBAND_MODELS : '/model/*',
+    COMP_WARBAND_EQUIPMENT : '/equipment/*',
 
     // Scenarios //
-    COMP_SCENARIO_SCENARIO : '/scenario/*'
+    COMP_SCENARIO_SCENARIO : '/scenario/*',
+
+    // Campaign //
+    COMP_CAMPAIGN_EXPLORATION : '/explorationtable/*',
+    COMP_CAMPAIGN_INJURIES : '/injury/*',
+    COMP_CAMPAIGN_PATRONS : '/patron/*',
+    COMP_CAMPAIGN_SKILLS : '/skillgroup/*'
 
 }

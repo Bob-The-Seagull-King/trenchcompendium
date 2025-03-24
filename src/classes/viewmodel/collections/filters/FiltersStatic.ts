@@ -367,7 +367,7 @@ export const FitlerDataDex : FilterDataTable = {
             return tempMisc;
         },
         findText() {
-            return []
+            return [new FilterText({group: "name", val: "", isstrict: false})]
         }
     },
     skillgroup: {

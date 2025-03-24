@@ -56,7 +56,7 @@ const CompendiumBasePage: React.FC<IControllerProp> = (prop: any) => {
             ContentsList.push({ name: "Exploration", route: "exploration"})
             ContentsList.push({ name: "Injuries", route: "injury"})
             ContentsList.push({ name: "Patrons", route: "patron"})
-            ContentsList.push({ name: "Skills", route: "skill"})
+            ContentsList.push({ name: "Skills", route: "skillgroup"})
     
             return ( <ContentsComponentLink title={"Campaign"} showheader={true} listofcontents={ContentsList}/> )
         }

@@ -72,23 +72,25 @@ const FilterBox = (prop: any) => {
                 </div>
                 <div>
                     <div className="verticalspacermed"/>
-                    <div className="borderthin bordergrey">
-                        <div onClick={() => {setOpen(!open)}} className={'centered-div size-strongtext font-default hovermouse colorBasicText centered-div borderbed bordergrey borderthin backgroundBgCard'}>
-                            <div className={'totalmarginxsm font-seriftext'}>
-                                {"Filters"}
-                            </div>
-                            <div className={'totalmarginxsm'}>
-                                <FontAwesomeIcon icon={faFilter} className="colorBasicText"/>
-                            </div>
-                        </div>
-                        <Collapse in={open}>
-                            <div className={'container borderthin bordergrey'}>
-                                <div className="content">                    
-                                    {ReturnFilterBoxInner()}
+                    {(DisplayPage.hidefilter == undefined) &&
+                        <div className="borderthin bordergrey">
+                            <div onClick={() => {setOpen(!open)}} className={'centered-div size-strongtext font-default hovermouse colorBasicText centered-div borderbed bordergrey borderthin backgroundBgCard'}>
+                                <div className={'totalmarginxsm font-seriftext'}>
+                                    {"Filters"}
+                                </div>
+                                <div className={'totalmarginxsm'}>
+                                    <FontAwesomeIcon icon={faFilter} className="colorBasicText"/>
                                 </div>
                             </div>
-                        </Collapse>    
-                    </div>                                    
+                            <Collapse in={open}>
+                                <div className={'container borderthin bordergrey'}>
+                                    <div className="content">                    
+                                        {ReturnFilterBoxInner()}
+                                    </div>
+                                </div>
+                            </Collapse>    
+                        </div> 
+                    }                                   
                 </div>
             </div>
         </ErrorBoundary>

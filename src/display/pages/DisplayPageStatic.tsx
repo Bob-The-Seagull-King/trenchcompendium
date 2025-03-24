@@ -21,6 +21,7 @@ export interface DisplayCollectionType {
     laconic       : string,
     width         : number,
     menushowitems : boolean,
+    hidefilter?   : boolean,
     returnDisplay: (item: any) => JSX.Element
     returnFilterSelect: (manager : FilterManager, update : NoneToNoneFunction, close : NoneToNoneFunction) => JSX.Element
 }
@@ -129,7 +130,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
             return (
                 
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    <GenericDisplay  d_colour={item.Team} d_name={item.Name} d_type={""} d_method={() => <ModelCollectionDisplay data={item} />}/>
+                    <GenericDisplay d_state={false} d_colour={item.Team} d_name={item.Name} d_type={""} d_method={() => <ModelCollectionDisplay data={item} />}/>
                 </ErrorBoundary>
             )
         },
@@ -137,7 +138,25 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
             return (
                 
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                   
+                        <div>
+                            <FilterTagSet name={"Tags"} data={manager.ReturnTagFilters()}/>
+                        </div>
+                        <div>
+                            <div className="verticalspacersml"/>
+                            <FilterMiscSet name={"Variant"} data={manager.ReturnMiscFilters().filter((item) => (item.Group == 'variant_name'))}/>
+                        </div>
+                        <div>
+                            <div className="verticalspacersml"/>
+                            <FilterMiscSet name={"Team"} data={manager.ReturnMiscFilters().filter((item) => (item.Group == 'team'))}/>
+                        </div>
+                        <div>
+                            <div className="verticalspacersml"/>
+                            <FilterMiscSet name={"Keywords"} data={manager.ReturnMiscFilters().filter((item) => (item.Group == 'keywords'))}/>
+                        </div>
+                        <div>
+                            <div className="verticalspacersml"/>
+                            <FilterMiscSet name={"Source"} data={manager.ReturnMiscFilters().filter((item) => (item.Group == 'source'))}/>
+                        </div>
                 </ErrorBoundary>
             )
         }
@@ -152,15 +171,37 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
             return (
                 
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    <GenericDisplay  d_colour={'default'} d_name={item.Name} d_type={""} d_method={() => <EquipmentDisplay data={item} />}/>
+                    <GenericDisplay d_state={false} d_colour={'default'} d_name={item.Name} d_type={""} d_method={() => <EquipmentDisplay data={item} />}/>
                 </ErrorBoundary>
             )
         },
         returnFilterSelect(manager : FilterManager, update : NoneToNoneFunction, close : NoneToNoneFunction) {
+            /*
+            
+                        <div>
+                            <div className="verticalspacersml"/>
+                            <FilterMiscSet name={"Distance"} data={manager.ReturnRangeFilters().filter((item) => (item.Group == 'distance'))}/>
+                        </div>
+            */
             return (
                 
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
                     
+                        <div>
+                            <FilterTagSet name={"Tags"} data={manager.ReturnTagFilters()}/>
+                        </div>
+                        <div>
+                            <div className="verticalspacersml"/>
+                            <FilterMiscSet name={"Category"} data={manager.ReturnMiscFilters().filter((item) => (item.Group == 'category'))}/>
+                        </div>
+                        <div>
+                            <div className="verticalspacersml"/>
+                            <FilterMiscSet name={"Keywords"} data={manager.ReturnMiscFilters().filter((item) => (item.Group == 'keywords'))}/>
+                        </div>
+                        <div>
+                            <div className="verticalspacersml"/>
+                            <FilterMiscSet name={"Source"} data={manager.ReturnMiscFilters().filter((item) => (item.Group == 'source'))}/>
+                        </div>
                 </ErrorBoundary>
             )
         }
@@ -239,7 +280,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         width: 9 ,
         titlename : 'Exploration',
         laconic: "Locations you can find during a campaign",
-        menushowitems: false,
+        menushowitems: true,
         returnDisplay(item: any) {
             return (
                 
@@ -263,11 +304,12 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         titlename : 'Injuries',
         laconic: "Wounds suffered after a battle",
         menushowitems: false,
+        hidefilter: true,
         returnDisplay(item: any) {
             return (
                 
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                        <GenericTableItemDisplay d_value={item.HeldItem.TableVal} d_colour={'default'} d_valuetitle={"Result: "} d_name={item.HeldItem.Name} d_type={""} d_method={() => <InjuryDisplay data={item.HeldItem} />}/>
+                        <GenericTableItemDisplay d_value={item.TableVal} d_colour={'default'} d_valuetitle={"Result: "} d_name={item.Name} d_type={""} d_method={() => <InjuryDisplay data={item} />}/>
                 </ErrorBoundary>
             )
         },
@@ -290,7 +332,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
             return (
                 
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    <GenericDisplay  d_colour={item.Team} d_name={item.Name} d_type={""} d_method={() => <SkillGroupDisplay data={item} />}/>
+                    <GenericDisplay d_state={false} d_colour={item.Team} d_name={item.Name} d_type={""} d_method={() => <SkillGroupDisplay data={item} />}/>
                 </ErrorBoundary>
             )
         },
@@ -299,6 +341,13 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
                 
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
                     
+                    <div>
+                        <FilterTagSet name={"Tags"} data={manager.ReturnTagFilters()}/>
+                    </div>
+                    <div>
+                        <div className="verticalspacersml"/>
+                        <FilterMiscSet name={"Source"} data={manager.ReturnMiscFilters().filter((item) => (item.Group == 'source'))}/>
+                    </div>
                 </ErrorBoundary>
             )
         }
@@ -308,12 +357,12 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         width: 9,
         titlename : 'Patrons',
         laconic: "Forces a warband must appease in campaigns",
-        menushowitems: false,
+        menushowitems: true,
         returnDisplay(item: any) {
             return (
                 
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    <GenericDisplay  d_colour={item.Team} d_name={item.Name} d_type={""} d_method={() => <PatronDisplay data={item} />}/>
+                    <GenericDisplay d_colour={item.Team} d_name={item.Name} d_type={""} d_method={() => <PatronDisplay data={item} />}/>
                 </ErrorBoundary>
             )
         },
