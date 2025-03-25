@@ -12,7 +12,7 @@ const GlossaryDisplay = (props: any) => {
 
     return (
         <ErrorBoundary fallback={<div>Something went wrong with GlossaryDisplay.tsx</div>}>
-            <div className='abilityInternalStructure'>
+            <div className='totalmarginmed'>
                 <div>
                     {returnDescription(ruleObject, ruleObject.Description)}
                 </div>

@@ -14,6 +14,7 @@ import InjuryDisplay from "../components/features/ability/InjuryDisplay";
 import GenericTableItemDisplay from "../components/generics/GenericTableItemDisplay";
 import SkillGroupDisplay from "../components/features/skill/SkillGroupDisplay";
 import PatronDisplay from "../components/features/skill/PatronDisplay";
+import GenericCollapsableBlockDisplay from "../components/generics/GenericCollapsableBlockDisplay";
 
 export interface DisplayCollectionType {
     searchId      : string,
@@ -64,7 +65,21 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
             return (
                 
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    <GenericDisplay  d_colour={item.ID} d_state={false} d_name={item.Name} d_type={""} d_method={() => <GlossaryDisplay data={item} />}/>
+                    
+                    <div className="borderthin bordergrey">
+                    <GenericCollapsableBlockDisplay 
+                        d_name={item.Name} 
+                        d_colour={"grey"} 
+                        d_state={false}  
+                        bordertype={0}
+                        d_border={false}
+                        d_margin={"sml"}
+                        d_method={() => <>
+                            <div className="borderthin backgroundBgCard bordergrey">
+                            <GlossaryDisplay data={item} />
+                            </div>
+                        </>} />
+                    </div>
                 </ErrorBoundary>
             )
         },
@@ -95,7 +110,21 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
             return (
                 
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    <GenericDisplay  d_colour={item.ID} d_name={item.Name} d_state={false} d_type={""} d_method={() => <KeywordDisplay data={item} />}/>
+                    
+                    <div className="borderthin bordergrey">
+                    <GenericCollapsableBlockDisplay 
+                        d_name={item.Name} 
+                        d_colour={"grey"} 
+                        d_state={false}  
+                        bordertype={0}
+                        d_border={false}
+                        d_margin={"sml"}
+                        d_method={() => <>
+                            <div className="borderthin backgroundBgCard bordergrey">
+                                <KeywordDisplay data={item} />
+                            </div>
+                        </>} />
+                    </div>
                 </ErrorBoundary>
             )
         },

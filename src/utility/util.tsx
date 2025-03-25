@@ -76,9 +76,9 @@ function ArrayItemIntoHtml(content: string, delim: any) {
                 const GlossaryObject = GlossaryRuleFactory.CreateNewGlossaryRule(delim[i].id)
                 if (GlossaryObject == null) {
                     const KeywordObject = KeywordFactory.CreateNewKeyword(delim[i].id, null)
-                    return (<GenericHover d_colour={'default'} d_name={content} titlename={KeywordObject.Name} d_type={""} d_method={() => <KeywordDisplay data={KeywordObject} />}/>)
+                    return (<GenericHover d_colour={'grey'} d_name={content} titlename={KeywordObject.Name} d_type={""} d_method={() => <KeywordDisplay data={KeywordObject} />}/>)
                 } else {
-                    return (<GenericHover d_colour={'default'} d_name={content} titlename={GlossaryObject.Name} d_type={""} d_method={() => <GlossaryDisplay data={GlossaryObject} />}/>)
+                    return (<GenericHover d_colour={'grey'} d_name={content} titlename={GlossaryObject.Name} d_type={""} d_method={() => <GlossaryDisplay data={GlossaryObject} />}/>)
                 }
                 
             }
@@ -116,7 +116,7 @@ function sortTagsForDisplay(taglist:  ObjectTag, bannedList : string[]) {
  */
 export function returnDescription(baseObject: any, objectArray : any[]) {
     return (
-        <div className="textmaxwidth">
+        <div className="width-content">
             {objectArray.map((item) => (
                 <div key={"descriptionDisplay"}>
                     <AdvancedDescriptionItemDisplay data={item} parent={baseObject}/>

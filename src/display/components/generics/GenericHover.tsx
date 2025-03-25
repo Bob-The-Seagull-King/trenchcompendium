@@ -20,25 +20,30 @@ const GenericHover = (props: any) => {
     const ruleName = props.titlename
 
     // State
-    const [theme] = useGlobalState('theme');
+    const [theme, setTheme] = useGlobalState('theme');
 
+    if ((theme == "" ) || (theme == null)) { // Default theme to light
+        setTheme('dark');
+    }
 
     return (
       <>
         <OverlayTrigger placement={'auto'} 
           overlay={
-          <Popover.Body className="fit-to-content overcomeTooltip popover" id="tooltip">
-            <div data-theme={theme} className='fit-to-content popupBody font-default'>
-              <div className={' fit-to-content modelStructure borderstyler ' + DisplayType + 'border'+getColour(DisplayColour)}>
-                  <h1 className={'titleShape titlebody titlestyler ' + DisplayType + 'background'+getColour(DisplayColour)}>
+          <Popover.Body bsPrefix="empty" className="popover" id="tooltip">
+            <div data-theme={theme} className='width-content font-default'>
+              <div className={'col-12 backgroundBgCard borderstyler ' + DisplayType + 'border'+getColour(DisplayColour)}>
+                  <h1 className={'size-strongtext font-default hovermouse colorBasicText centered-div background'+getColour(DisplayColour)}>
                       {ruleName || ""}
                   </h1>
-                  {displayMethod()}
+                  <div className="backgroundBgCard colorBasicText size-default">
+                    {displayMethod()}
+                  </div>
               </div>
             </div>
           </Popover.Body>
           }>
-          <span className='glossaryMain hovermouse'>{DisplayName}</span>
+          <span className='colordefault hovermouse'>{DisplayName}</span>
         </OverlayTrigger>
       </>
     )
