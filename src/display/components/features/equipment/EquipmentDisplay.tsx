@@ -87,7 +87,7 @@ const EquipmentDisplay = (props: any) => {
                 
                 {abilityObject.Description.length > 0 &&
                 <div className="borderstyler borderthin bordergrey">
-                    <div className="totalmarginmed">
+                    <div className="totalmarginmed size-smaller">
                     {returnDescription(abilityObject, abilityObject.Description)}
                     </div>
                 </div>
