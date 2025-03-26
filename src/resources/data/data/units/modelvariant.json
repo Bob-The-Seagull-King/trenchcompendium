@@ -8,9 +8,9 @@
             "model_equipment_restriction": {
                 "removed": [
                     {
-                        "category": "armor",
+                        "category": "armour",
                         "res_type": "id",
-                        "value": "eq_reinforcedarmor"
+                        "value": "eq_reinforcedarmour"
                     }
                 ]
             },

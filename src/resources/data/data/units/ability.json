@@ -122,7 +122,7 @@
         "name": "Trample",
         "source": "core",
         "tags": {"action": true, "attack": true},
-        "contextdata": {"custom_attack_type": {"range": 0}, "armor_ignore": {}},
+        "contextdata": {"custom_attack_type": {"range": 0}, "armour_ignore": {}},
         "description": [            
             {
                 "tags": {"desc_type" : "default"},

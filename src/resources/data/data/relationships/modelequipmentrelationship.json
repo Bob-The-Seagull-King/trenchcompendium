@@ -59,7 +59,7 @@
             }
         ],
         "model_id": ["md_mamlukfaris","md_mamlukfaris_mv_sipahi"],
-        "mandatory_equipment": ["eq_jezzail","eq_alchemicalammunition","eq_reinforcedarmor","eq_combathelmet"],
+        "mandatory_equipment": ["eq_jezzail","eq_alchemicalammunition","eq_reinforcedarmour","eq_combathelmet"],
         "removable": false
     },
     {

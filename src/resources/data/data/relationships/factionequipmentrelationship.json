@@ -362,23 +362,23 @@
         "limit": 0
     },
     {
-        "id": "rel_fc_eq_standardarmor",
+        "id": "rel_fc_eq_standardarmour",
         "source": "core",
         "tags": {   },
-        "name": "Standard Armor",
+        "name": "Standard Armour",
         "contextdata": {    
         },
         "faction_id": ["fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
-        "equipment_id": "eq_standardarmor",
+        "equipment_id": "eq_standardarmour",
         "cost": 15,
         "costtype": 0,
         "limit": 0
     },
     {
-        "id": "rel_fc_eq_reinforcedarmor",
+        "id": "rel_fc_eq_reinforcedarmour",
         "source": "core",
         "tags": {},
-        "name": "Reinforced Armor",
+        "name": "Reinforced Armour",
         "contextdata": {            
             "faction_eq_restriction": {
                 "permitted": [
@@ -394,16 +394,16 @@
             }
         },
         "faction_id": ["fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
-        "equipment_id": "eq_reinforcedarmor",
+        "equipment_id": "eq_reinforcedarmour",
         "cost": 40,
         "costtype": 0,
         "limit": 0
     },
     {
-        "id": "rel_fc_eq_alchemistarmor",
+        "id": "rel_fc_eq_alchemistarmour",
         "source": "core",
         "tags": {},
-        "name": "Alchemist Armor",
+        "name": "Alchemist Armour",
         "contextdata": {            
             "faction_eq_restriction": {
                 "permitted": [
@@ -415,7 +415,7 @@
             }
         },
         "faction_id": ["fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
-        "equipment_id": "eq_alchemistarmor",
+        "equipment_id": "eq_alchemistarmour",
         "cost": 50,
         "costtype": 0,
         "limit": 1
@@ -802,12 +802,12 @@
         "limit": 1
     },
     {
-        "id": "rel_fc_eq_damascusarmor",
+        "id": "rel_fc_eq_damascusarmour",
         "source": "core",
         "tags": {
             "exploration_only": true
         },
-        "name": "Damascus Armor",
+        "name": "Damascus Armour",
         "contextdata": {         
             "faction_eq_restriction": {
                 "permitted": [
@@ -819,7 +819,7 @@
             }   
         },
         "faction_id": ["fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
-        "equipment_id": "eq_damascusarmor",
+        "equipment_id": "eq_damascusarmour",
         "cost": 5,
         "costtype": 1,
         "limit": 1

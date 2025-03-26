@@ -178,11 +178,11 @@ const FactionDisplay = (props: any) => {
                         </div>
                         
                         <div className="col">
-                        {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "armor" && (containsTag(item.Tags, "exploration_only") == false))).length > 0 &&
+                        {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "armour" && (containsTag(item.Tags, "exploration_only") == false))).length > 0 &&
                             <>
-                                <div className='separator bodytext tagboxpad colordefault'>Armor</div>
+                                <div className='separator bodytext tagboxpad colordefault'>Armour</div>
                                 <div className="row textmaxwidth">
-                                    {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "armor" && (containsTag(item.Tags, "exploration_only") == false))).map((item) => ( 
+                                    {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "armour" && (containsTag(item.Tags, "exploration_only") == false))).map((item) => ( 
                                         <div key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID} className="textmaxwidth">
                                             <FactionEquipmentDisplay data={item} />
                                         </div>

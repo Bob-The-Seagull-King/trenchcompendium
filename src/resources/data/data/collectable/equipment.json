@@ -129,16 +129,16 @@
         "modifiers": []
     },
     {
-        "id": "eq_reinforcedarmor",
-        "name": "Reinforced Armor",
+        "id": "eq_reinforcedarmour",
+        "name": "Reinforced Armour",
         "source": "core",
         "tags": {"trait": true},
-        "category": "armor",
+        "category": "armour",
         "distance": null,
         "stats": {
         },
         "contextdata": {
-            "upgrade_stat": {"stat": "armor", "value": -2}
+            "upgrade_stat": {"stat": "armour", "value": -2}
         },
         "description": [       
             {
@@ -226,14 +226,14 @@
         "name": "Trench Shield",
         "source": "core",
         "tags": {"trait": true, "shield": true},
-        "category": "armor",
+        "category": "armour",
         "distance": null,
         "stats": {
             "hands_melee": 1,
             "hands_ranged": 1
         },
         "contextdata": {
-            "upgrade_stat": {"stat": "armor", "value": -1},
+            "upgrade_stat": {"stat": "armour", "value": -1},
             "find_hands": { "required": true, "both_kits": true }
         },
         "description": [       
@@ -653,7 +653,7 @@
         "contextdata": {
             "get_weapon": {},
             "injury_bonus": {"type": "dice", "value": -1, "condition_type": "range", "condition_value": "long"},
-            "ignore_armor": {},
+            "ignore_armour": {},
             "auto_hit": {}},
         "description": [ 
             {
@@ -674,7 +674,7 @@
         ],
         "options": [],
         "keywords": ["kw_fire"],
-        "modifiers": ["-1D to Injuries", "Ignore Armor"]
+        "modifiers": ["-1D to Injuries", "Ignore Armour"]
     },
     {
         "id": "eq_muradbombard",
@@ -972,16 +972,16 @@
         "modifiers": ["+1 to Injuries"]
     },
     {
-        "id": "eq_standardarmor",
-        "name": "Standard Armor",
+        "id": "eq_standardarmour",
+        "name": "Standard Armour",
         "source": "core",
         "tags": {"trait": true},
-        "category": "armor",
+        "category": "armour",
         "distance": null,
         "stats": {
         },
         "contextdata": {
-            "upgrade_stat": {"stat": "armor", "value": -1}
+            "upgrade_stat": {"stat": "armour", "value": -1}
         },
         "description": [       
             {
@@ -1000,16 +1000,16 @@
         "modifiers": []
     },
     {
-        "id": "eq_alchemistarmor",
-        "name": "Alchemist Armor",
+        "id": "eq_alchemistarmour",
+        "name": "Alchemist Armour",
         "source": "core",
         "tags": {"trait": true},
-        "category": "armor",
+        "category": "armour",
         "distance": null,
         "stats": {
         },
         "contextdata": {
-            "upgrade_stat": {"stat": "armor", "value": -2},
+            "upgrade_stat": {"stat": "armour", "value": -2},
             "ignore_element": {"element": ["kw_gas","kw_fire"]}
         },
         "description": [       
@@ -1361,7 +1361,7 @@
         },
         "contextdata": {
             "get_weapon": {},
-            "ignore_armor": {}},
+            "ignore_armour": {}},
         "description": [ 
             {
                 "tags": {"desc_type" : "default"},
@@ -1385,7 +1385,7 @@
         ],
         "options": [],
         "keywords": ["kw_critical"],
-        "modifiers": [ "Ignore Armor"]
+        "modifiers": [ "Ignore Armour"]
     },
     {
         "id": "eq_hashashinleaf",
@@ -1498,7 +1498,7 @@
         "contextdata": {
             "get_weapon": {"ignore": true},
             "injury_bonus": {"type": "dice", "value": 1},
-            "ignore_armor": {}
+            "ignore_armour": {}
         },
         "description": [            
             {
@@ -1553,17 +1553,17 @@
         "modifiers": ["+1D to Hit"]
     },
     {
-        "id": "eq_damascusarmor",
-        "name": "Damascus Armor",
+        "id": "eq_damascusarmour",
+        "name": "Damascus Armour",
         "source": "core",
         "tags": {"trait": true},
-        "category": "armor",
+        "category": "armour",
         "distance": null,
         "stats": {
         },
         "contextdata": {
-            "upgrade_stat": {"stat": "armor", "value": -2},
-            "super_armor": {},
+            "upgrade_stat": {"stat": "armour", "value": -2},
+            "super_armour": {},
             "unremovable": {},
             "add_scars": {"value": 1}
         },
@@ -1656,7 +1656,7 @@
         "contextdata": {
             "get_weapon": {},
             "injury_bonus": {"type": "dice", "value": 2},
-            "ignore_armor": {},
+            "ignore_armour": {},
             "stationary": {}
         },
         "description": [ 
@@ -1681,21 +1681,21 @@
         ],
         "options": [],
         "keywords": ["kw_heavy"],
-        "modifiers": ["+2D to Injuries","Ignore Armor"]
+        "modifiers": ["+2D to Injuries","Ignore Armour"]
     },
     {
         "id": "eq_fireshield",
         "name": "Fire Shield",
         "source": "core",
         "tags": {"trait": true, "shield": true},
-        "category": "armor",
+        "category": "armour",
         "distance": null,
         "stats": {
             "hands_melee": 1,
             "hands_ranged": 1
         },
         "contextdata": {
-            "upgrade_stat": {"stat": "armor", "value": -1},
+            "upgrade_stat": {"stat": "armour", "value": -1},
             "find_hands": { "required": true, "both_kits": true },
             "ignore_element": {"element": ["kw_fire"]}
         },
@@ -1857,7 +1857,7 @@
         "name": "Iron Wall Kalkan",
         "source": "core",
         "tags": {"trait": true, "brazen_bull": true},
-        "category": "armor",
+        "category": "armour",
         "distance": null,
         "stats": {
             "hands_melee": 1,

@@ -269,7 +269,7 @@
                         "restriction": [
                             { "category": "melee" },
                             { "category": "ranged" },
-                            { "category": "armor" }
+                            { "category": "armour" }
                         ]
                     }
                 ] },

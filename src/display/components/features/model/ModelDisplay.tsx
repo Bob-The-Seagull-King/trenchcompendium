@@ -148,8 +148,8 @@ const ModelDisplay = (props: any) => {
         if (stats.ranged != undefined) {
             ProfileString.push("Ranged:" + (stats.ranged? (stats.ranged > 0? "+": "") : "") + (stats.ranged?.toString() || ""))
         }
-        if (stats.armor != undefined) {
-            ProfileString.push("Armor:" + (stats.armor?.toString() || ""))
+        if (stats.armour != undefined) {
+            ProfileString.push("Armour:" + (stats.armour?.toString() || ""))
         }
         if (stats.potential != undefined) {
             ProfileString.push("Potential:" + (stats.potential? getPotential(stats.potential) : "Standard"))
@@ -178,8 +178,8 @@ const ModelDisplay = (props: any) => {
                     {statlist.ranged != undefined &&
                         <ItemStat title={"Ranged"} value={(statlist.ranged? (statlist.ranged > 0? "+": "") : "") + (statlist.ranged?.toString() || "")}/>
                     }
-                    {statlist.armor != undefined &&
-                        <ItemStat title={"Armor"} value={statlist.armor?.toString() || ""}/>
+                    {statlist.armour != undefined &&
+                        <ItemStat title={"Armour"} value={statlist.armour?.toString() || ""}/>
                     }
                     {statlist.potential != undefined &&
                         <ItemStat title={"Potential"} value={statlist.potential? getPotential(statlist.potential) : "Standard"}/>

@@ -3,7 +3,7 @@ interface ModelStatistics {
     melee?: number, 
     ranged?: number,
     base?: number[],
-    armor?: number, 
+    armour?: number, 
     movetype?: number,
     potential?: number,
     mercenary?: boolean
@@ -16,7 +16,7 @@ export function MergeTwoStats(baseList: ModelStatistics, addonList : ModelStatis
     if (baseList.melee != undefined) {MergedList.melee = baseList.melee}
     if (baseList.ranged != undefined) {MergedList.ranged = baseList.ranged}
     if (baseList.base != undefined) {MergedList.base = baseList.base}
-    if (baseList.armor != undefined) {MergedList.armor = baseList.armor}
+    if (baseList.armour != undefined) {MergedList.armour = baseList.armour}
     if (baseList.movetype != undefined) {MergedList.movetype = baseList.movetype}
     if (baseList.potential != undefined) {MergedList.potential = baseList.potential}
     if (baseList.mercenary != undefined) {MergedList.mercenary = baseList.mercenary}
@@ -25,7 +25,7 @@ export function MergeTwoStats(baseList: ModelStatistics, addonList : ModelStatis
     if (addonList.melee != undefined) {MergedList.melee = addonList.melee}
     if (addonList.ranged != undefined) {MergedList.ranged = addonList.ranged}
     if (addonList.base != undefined) {MergedList.base = addonList.base}
-    if (addonList.armor != undefined) {MergedList.armor = addonList.armor}
+    if (addonList.armour != undefined) {MergedList.armour = addonList.armour}
     if (addonList.movetype != undefined) {MergedList.movetype = addonList.movetype}
     if (addonList.potential != undefined) {MergedList.potential = addonList.potential}
     if (addonList.mercenary != undefined) {MergedList.mercenary = addonList.mercenary}
