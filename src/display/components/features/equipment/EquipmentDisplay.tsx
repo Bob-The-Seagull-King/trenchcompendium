@@ -87,7 +87,7 @@ const EquipmentDisplay = (props: any) => {
                 
                 {abilityObject.Description.length > 0 &&
                 <div className="borderstyler borderthin bordergrey">
-                    <div className="totalmarginmed size-smaller">
+                    <div className="totalmarginsml size-smaller">
                     {returnDescription(abilityObject, abilityObject.Description)}
                     </div>
                 </div>
@@ -95,7 +95,7 @@ const EquipmentDisplay = (props: any) => {
                 
                 {abilityObject.Lore.length > 0 &&
                 <div className="borderstyler borderthin bordergrey">
-                    <div className="totalmarginmed">
+                    <div className="totalmarginsml">
                     {returnDescription(abilityObject, abilityObject.Lore)}
                     </div>
                 </div>

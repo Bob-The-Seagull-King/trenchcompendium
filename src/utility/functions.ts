@@ -219,6 +219,7 @@ export function getRouteName(_route: string) {
         case '/compendium/keyword': return "Keywords";
         case '/compendium/glossary': return "Glossary";
         case '/compendium/faction': return "Factions";
+        case '/compendium/equipment': return "Equipment & Weapons";
         default: return "Trench Crusade"
     }
 }
