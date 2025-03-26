@@ -77,7 +77,7 @@ const EquipmentDisplay = (props: any) => {
                                 <span>
                                 {abilityObject.KeyWord.map((item) => ( 
                                     <span className='tagItem smallgapright' key={"equipment_keyword_"+abilityObject.ID+"_keyword_id_"+item.ID}>
-                                        <GenericHover  d_colour={'default'} titlename={item.Name} d_name={item.Name} d_type={""} d_method={() => <KeywordDisplay data={item} />}/>
+                                        <GenericHover  d_colour={'grey'} titlename={item.Name} d_name={item.Name} d_type={""} d_method={() => <KeywordDisplay data={item} />}/>
                                     </span>
                                 )) /* Keywords */}
                                 </span>

@@ -46,7 +46,7 @@
         "description": [            
             {
                 "tags": {"desc_type" : "default"},
-                "content": "Once per battle, you may add +3” to the Movement characteristic of this model once during the activation. Declare this when the model is Activated."
+                "content": "Once per battle, you may add +3\" to the Movement characteristic of this model once during the activation. Declare this when the model is Activated."
             }
         ],
         "lore": [            
@@ -557,10 +557,10 @@
         "description": [ 
             {
                 "tags": {"desc_type" : "default"},
-                "content": "Grenades have BLAST 2” – all models within 2” of a model are hit but models other than the original target roll Injuries with -1 DICE.",
+                "content": "Grenades have BLAST 2\" – all models within 2\" of a model are hit but models other than the original target roll Injuries with -1 DICE.",
                 "glossary": [
                     {"val": "-1 DICE", "id": "kw_minusdice"},
-                    {"val": "BLAST 2”", "id": "kw_blast"}
+                    {"val": "BLAST 2\"", "id": "kw_blast"}
                 ]
             }  
         ],
@@ -623,7 +623,7 @@
         "description": [ 
             {
                 "tags": {"desc_type" : "default"},
-                "content": "Machine Guns can make three Attack Actions instead of one. They can target separate models with each attack, as long as all targets are within 6” of each other. After taking all three attacks the Activation of the model is over regardless of any remaining ACTIONS the model might have.",
+                "content": "Machine Guns can make three Attack Actions instead of one. They can target separate models with each attack, as long as all targets are within 6\" of each other. After taking all three attacks the Activation of the model is over regardless of any remaining ACTIONS the model might have.",
                 "glossary": [
                     {"val": "ACTIONS", "id": "kw_action"}
                 ]
@@ -693,7 +693,7 @@
         "description": [ 
             {
                 "tags": {"desc_type" : "default"},
-                "content": "Specify a point on the battlefield within 36” (must be in line of sight) that you want to target. Next, take a Ranged Attack ACTION. If the roll fails (i.e. you roll 6 or less), the bomb lands 1” away from its intended location, multiplied by the number representing the degree of failure (for example, if you rolled 5, the bombard shot lands 2” away, as 7-5=2). The direction is decided by your opponent.",
+                "content": "Specify a point on the battlefield within 36\" (must be in line of sight) that you want to target. Next, take a Ranged Attack ACTION. If the roll fails (i.e. you roll 6 or less), the bomb lands 1\" away from its intended location, multiplied by the number representing the degree of failure (for example, if you rolled 5, the bombard shot lands 2\" away, as 7-5=2). The direction is decided by your opponent.",
                 "glossary": [
                     {"val": "ACTION", "id": "kw_action"}
                 ]
@@ -701,7 +701,7 @@
             { "tags": {"desc_type" : "gap"} }  ,
             {
                 "tags": {"desc_type" : "default"},
-                "content": "All models within 3” of the landing 1x1mm landing spot are hit as the bomb explodes – no roll to hit is needed. If the bomb lands directly on top of any model, roll with 3D6 on the Injury Chart and add the dice together to see what happens! Other models hit by the bombard suffer a Down result due the booming shockwave, but do not incur any BLOOD MARKERS or other effects from this attack.",
+                "content": "All models within 3\" of the landing 1x1mm landing spot are hit as the bomb explodes – no roll to hit is needed. If the bomb lands directly on top of any model, roll with 3D6 on the Injury Chart and add the dice together to see what happens! Other models hit by the bombard suffer a Down result due the booming shockwave, but do not incur any BLOOD MARKERS or other effects from this attack.",
                 "glossary": [
                     {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"}
                 ]
@@ -734,7 +734,7 @@
         "description": [ 
             {
                 "tags": {"desc_type" : "default"},
-                "content": "When shot in ranged combat, draw a straight 12” line that is 1mm wide from the Brazen Bull. All models along the path of the line are automatically hit – roll for their injuries immediately. Armour does not protect against the Flame Cannon. Due to the Keyword FIRE, its hits cause an additional +1 BLOOD MARKER. This is applied after rolling for injuries.",
+                "content": "When shot in ranged combat, draw a straight 12\" line that is 1mm wide from the Brazen Bull. All models along the path of the line are automatically hit – roll for their injuries immediately. Armour does not protect against the Flame Cannon. Due to the Keyword FIRE, its hits cause an additional +1 BLOOD MARKER. This is applied after rolling for injuries.",
                 "glossary": [
                     {"val": "BLOOD MARKER", "id": "kw_bloodmarker"},
                     {"val": "FIRE", "id": "kw_fire"}
@@ -1027,7 +1027,7 @@
         "lore": [            
             {
                 "tags": {"desc_type" : "italic"},
-                "content": "uit of armour which protects against almost all harm. This is an essential tool of Alchemists’ craft, festooned with the Seals of Solomon which enables them to bend the elements of Creation to their will and shields them even from the devices of Hell."
+                "content": "Suit of armour which protects against almost all harm. This is an essential tool of Alchemists’ craft, festooned with the Seals of Solomon which enables them to bend the elements of Creation to their will and shields them even from the devices of Hell."
             }
         ],
         "options": [],
@@ -1144,7 +1144,7 @@
         "description": [            
             {
                 "tags": {"desc_type" : "default"},
-                "content": "Models with a Medi-kit can take a RISKY ACTION to remove one BLOOD MARKER from any one friendly model (including themselves) within 1” range or allow one friendly model (including themselves) that is Down to regain their footing.",
+                "content": "Models with a Medi-kit can take a RISKY ACTION to remove one BLOOD MARKER from any one friendly model (including themselves) within 1\" range or allow one friendly model (including themselves) that is Down to regain their footing.",
                 "glossary": [
                     {"val": "BLOOD MARKER", "id": "kw_bloodmarker"},
                     {"val": "RISKY ACTION", "id": "kw_riskyaction"}
@@ -1176,7 +1176,7 @@
         "description": [            
             {
                 "tags": {"desc_type" : "default"},
-                "content": "Any friendly models within 4” of the musician who is not Down can add +1 DICE to their Dash ACTIONS. Musical Instruments take one hand to use at all times as if it were a weapon.",
+                "content": "Any friendly models within 4\" of the musician who is not Down can add +1 DICE to their Dash ACTIONS. Musical Instruments take one hand to use at all times as if it were a weapon.",
                 "glossary": [
                     {"val": "+1 DICE", "id": "kw_plusdice"},
                     {"val": "ACTIONS", "id": "kw_action"}
@@ -1266,7 +1266,7 @@
         "description": [            
             {
                 "tags": {"desc_type" : "default"},
-                "content": "Any enemy Infiltrator cannot be placed closer than 16” of this model.",
+                "content": "Any enemy Infiltrator cannot be placed closer than 16\" of this model.",
                 "glossary": [
                     {"val": "Infiltrator", "id": "kw_infiltrator"}
                 ]
@@ -1365,7 +1365,7 @@
         "description": [ 
             {
                 "tags": {"desc_type" : "default"},
-                "content": "Ignores Armour. If the Assassin hits a model and causes at least one BLOOD MARKER, the Assassin may instantly place itself into Melee Combat with that model if there is a legal space that the Assassin could occupy within 1” of that model, regardless of the distance to the target or any interposing models/obstacles. The Assassin is considered to have charged that model, although it does not count as a Charge ACTION and therefore the Assassin can take the Move ACTION at a later point on this turn, if it hasn’t already. Note that if the bow takes the target Out of Action, no BLOOD MARKERS are caused and this movement cannot be made.",
+                "content": "Ignores Armour. If the Assassin hits a model and causes at least one BLOOD MARKER, the Assassin may instantly place itself into Melee Combat with that model if there is a legal space that the Assassin could occupy within 1\" of that model, regardless of the distance to the target or any interposing models/obstacles. The Assassin is considered to have charged that model, although it does not count as a Charge ACTION and therefore the Assassin can take the Move ACTION at a later point on this turn, if it hasn’t already. Note that if the bow takes the target Out of Action, no BLOOD MARKERS are caused and this movement cannot be made.",
                 "glossary": [
                     {"val": "ACTION", "id": "kw_action"},
                     {"val": "BLOOD MARKER", "id": "kw_bloodmarker"}
@@ -1503,7 +1503,7 @@
         "description": [            
             {
                 "tags": {"desc_type" : "default"},
-                "content": "Add +1 DICE to all injury rolls and ignore armour. If this attack hits its target, but does not take it Out of Action, the target is pushed 1D6” directly away from the attacker, stopping if they hit another model or solid piece of terrain. An RPG does not count towards the number of ranged weapons that a model can carry, but a model can still only carry one RPG. When shot, the activation of the model using the RPG ends.",
+                "content": "Add +1 DICE to all injury rolls and ignore armour. If this attack hits its target, but does not take it Out of Action, the target is pushed 1D6\" directly away from the attacker, stopping if they hit another model or solid piece of terrain. An RPG does not count towards the number of ranged weapons that a model can carry, but a model can still only carry one RPG. When shot, the activation of the model using the RPG ends.",
                 "glossary": [
                     {"val": "+1 DICE", "id": "kw_plusdice"}
                 ]
@@ -1662,7 +1662,7 @@
         "description": [ 
             {
                 "tags": {"desc_type" : "default"},
-                "content": "Add +2 DICE to all injury rolls and ignores all armour. If this attack hits its target, but does not take it Out of Action, the target is pushed 1D6” directly away from the attacker, stopping if they hit another model or solid piece of terrain.",
+                "content": "Add +2 DICE to all injury rolls and ignores all armour. If this attack hits its target, but does not take it Out of Action, the target is pushed 1D6\" directly away from the attacker, stopping if they hit another model or solid piece of terrain.",
                 "glossary": [
                     {"val": "+2 DICE", "id": "kw_plusdice"}
                 ]
@@ -1670,7 +1670,7 @@
             { "tags": {"desc_type" : "gap"} },
             {
                 "tags": {"desc_type" : "default"},
-                "content": "If the Cannon is placed as a Stationary object on the battlefield, it is deployed separately as one of your standard units on a 50mm base in your own Deployment Zone or Table Edge. It is immobile and cannot be damaged. Any model in the Defenders of the Iron Wall warband can shoot it during their Activation as long as they are not in Melee combat, are within 1” of the Cannon, and do not move in any way during their Activation. Alchemist Abilty Mastery of the Elements does apply to the Cannon. As with any other Ranged Weapon, each Grand Cannon can only be fired once per Turn. The Cannon cannot be lost as a casuality unless carried by a Brazen Bull."
+                "content": "If the Cannon is placed as a Stationary object on the battlefield, it is deployed separately as one of your standard units on a 50mm base in your own Deployment Zone or Table Edge. It is immobile and cannot be damaged. Any model in the Defenders of the Iron Wall warband can shoot it during their Activation as long as they are not in Melee combat, are within 1\" of the Cannon, and do not move in any way during their Activation. Alchemist Abilty Mastery of the Elements does apply to the Cannon. As with any other Ranged Weapon, each Grand Cannon can only be fired once per Turn. The Cannon cannot be lost as a casuality unless carried by a Brazen Bull."
             } 
         ],
         "lore": [            
@@ -1845,7 +1845,7 @@
         "lore": [            
             {
                 "tags": {"desc_type" : "italic"},
-                "content": "Mostly used by Mechanized Heavy Infantry, this massive 8 bore shotgun is used to take down extremely powerful and large opponents at short range. It is known as a “Wolf-Killer” in New Antioch as it is the weapon favoured by the soldiery of the Duke to take down the Heretic War Wolf assault beasts. Heavy Shotguns use tungsten-orichalcum alloy shot which explains their enormous stopping power at short ranges."
+                "content": "Mostly used by Mechanized Heavy Infantry, this massive 8 bore shotgun is used to take down extremely powerful and large opponents at short range. It is known as a “Wolf-Killer\" in New Antioch as it is the weapon favoured by the soldiery of the Duke to take down the Heretic War Wolf assault beasts. Heavy Shotguns use tungsten-orichalcum alloy shot which explains their enormous stopping power at short ranges."
             }
         ],
         "options": [],
@@ -1869,7 +1869,7 @@
         "description": [       
             {
                 "tags": {"desc_type" : "default"},
-                "content": "Takes always one hand to use in both melee and in ranged combat and cannot be switched out. The target is always considered to be in Cover when shot, and counts as fighting behind a defended obstacle when an enemy charges them. In addition, when the Brazen bull is Activated and it is in combat with only 1 model on a 40mm or smaller base, the Bull can Move normally (though not Charge or Dash), pushing its opponent in the same direction as the Bull is moving and travelling the same distance as the Bull moves if it moves directly towards the enemy that is in front half of its base. This can push the enemies so they fall as per Falling rules), and if the Bull pushes the opponent against a terrain piece higher than 2”, both models stop and the opponent immediately rolls on the injury table."
+                "content": "Takes always one hand to use in both melee and in ranged combat and cannot be switched out. The target is always considered to be in Cover when shot, and counts as fighting behind a defended obstacle when an enemy charges them. In addition, when the Brazen bull is Activated and it is in combat with only 1 model on a 40mm or smaller base, the Bull can Move normally (though not Charge or Dash), pushing its opponent in the same direction as the Bull is moving and travelling the same distance as the Bull moves if it moves directly towards the enemy that is in front half of its base. This can push the enemies so they fall as per Falling rules), and if the Bull pushes the opponent against a terrain piece higher than 2\", both models stop and the opponent immediately rolls on the injury table."
             } 
         ],
         "lore": [            
@@ -1897,7 +1897,7 @@
         "description": [            
             {
                 "tags": {"desc_type" : "default"},
-                "content": "Grants +1 DICE for all Morale tests as long as the model with the flag is not Down or Out of Action. Requires one hand to use. In addition, as long as the model carrying this banner is not Down or Out of Action, all enemies with 24” have to reduce their Movement Characteristic of by 1”.",
+                "content": "Grants +1 DICE for all Morale tests as long as the model with the flag is not Down or Out of Action. Requires one hand to use. In addition, as long as the model carrying this banner is not Down or Out of Action, all enemies with 24\" have to reduce their Movement Characteristic of by 1\".",
                 "glossary": [
                     {"val": "+1 DICE", "id": "kw_plusdice"}
                 ]
@@ -1906,7 +1906,7 @@
         "lore": [            
             {
                 "tags": {"desc_type" : "default"},
-                "content": "“This, then, is the parable of those who are bent on denying their Sustainer: all their works are as ashes which the wind blows about fiercely on a stormy day: they cannot achieve any benefit whatever from all that they may have wrought: for this is indeed the farthest one can go astray.”"
+                "content": "“This, then, is the parable of those who are bent on denying their Sustainer: all their works are as ashes which the wind blows about fiercely on a stormy day: they cannot achieve any benefit whatever from all that they may have wrought: for this is indeed the farthest one can go astray.\""
             },        
             { "tags": {"desc_type" : "gap"} },        
             {
@@ -1963,7 +1963,7 @@
         "description": [            
             {
                 "tags": {"desc_type" : "default"},
-                "content": "This transportable fortification is represented by a 1” high standing shield on 40mm base. They can either be placed anywhere within your own deployment zone after all other models are deployed. Alternatively, a sapper may carry one on their back, and then deploy it with a +2 DICE RISKY ACTION during their Activation as long as the Sapper is not in Melee combat. In this case, it must be placed within 1” of the Sapper. In either case, they count as both Cover and a Defended Obstacle once deployed.",
+                "content": "This transportable fortification is represented by a 1\" high standing shield on 40mm base. They can either be placed anywhere within your own deployment zone after all other models are deployed. Alternatively, a sapper may carry one on their back, and then deploy it with a +2 DICE RISKY ACTION during their Activation as long as the Sapper is not in Melee combat. In this case, it must be placed within 1\" of the Sapper. In either case, they count as both Cover and a Defended Obstacle once deployed.",
                 "glossary": [
                     {"val": "+2 DICE", "id": "kw_plusdice"},
                     {"val": "RISKY ACTION", "id": "kw_riskyaction"},
