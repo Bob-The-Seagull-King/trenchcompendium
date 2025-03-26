@@ -59,7 +59,7 @@ const BookRuleDisplay = (props: any) => {
                             pauseOnHover
                             theme="light" 
                             />
-                <div>
+                <div className="colourBasicText font-default size-default">
                     {returnDescription(ruleObject, ruleObject.Description)}
                 </div>
                 {ruleObject.Sections.length > 1 &&
@@ -81,7 +81,7 @@ const BookRuleDisplay = (props: any) => {
                                 </div>
                             </div>
                         </div>
-                        <div>
+                        <div className="colourBasicText font-default size-default">
                             {returnDescription(ruleObject, item.description)}
                             <div className="verticalspacermed"/>
                             {item.content.map((valitem) => (

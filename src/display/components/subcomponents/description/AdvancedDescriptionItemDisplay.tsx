@@ -172,7 +172,7 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
 
     return (
         <ErrorBoundary fallback={<div>Something went wrong with AdvancedDescriptionItemDisplay.tsx</div>}>
-            <span className='colourBasicText font-default size-default'>
+            <span className=''>
                 {returnFullItem(description)}
             </span>
         </ErrorBoundary>

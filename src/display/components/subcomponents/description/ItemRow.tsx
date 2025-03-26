@@ -13,12 +13,12 @@ const ItemRow = (props: any) => {
             <div className="itemrow_container">
                 <div className="borderstyler bordergrey borderthin itemrow_box">
                     <div className="totalmarginsml">
-                        <div className="colorgrey">{Title}</div>
+                        <div className="colorBasicText">{Title}</div>
                     </div>
                 </div>
                 <div className="borderstyler bordergrey borderthin itemrow_box">
                     <div className="totalmarginsml">
-                        <div className="">{Content()}</div>
+                        <div className="colorBasicText">{Content()}</div>
                     </div>
                 </div>
             </div>
