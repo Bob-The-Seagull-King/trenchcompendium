@@ -32,13 +32,13 @@ const GenericPopup = (props: any) => {
     return (
       <>
          
-            <span className='headersubtext glossaryMain hovermouse' onClick={() => handleShow()}>{ruleName}</span>                
+            <span className='colordefault hovermouse' onClick={() => handleShow()}>{ruleName}</span>                
          
 
           <Modal data-theme={theme} show={show} size="lg" contentClassName="overcomeBackground" dialogClassName=""  onHide={handleClose} keyboard={true}  centered>
               <Modal.Body > 
                 
-                <div className={'basestructure font-default abilityStructure borderstyler ' + DisplayType + 'border'+getColour(DisplayColour)}>
+                <div className={'backgroundBgCard basestructure font-default borderstyler border'+getColour(DisplayColour)}>
                     <h1 className={'titleShape titlebody ' + DisplayType + 'background'+getColour(DisplayColour)}>
                         {DisplayName || ""}
                         
@@ -50,7 +50,9 @@ const GenericPopup = (props: any) => {
                             </div>
                         </div>
                     </h1>
-                    {displayMethod()}
+                    <div className="totalmarginmed">
+                        {displayMethod()}
+                    </div>
                 </div>
               </Modal.Body>
           </Modal>

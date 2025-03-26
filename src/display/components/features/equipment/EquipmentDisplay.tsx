@@ -15,6 +15,7 @@ import KeywordDisplay from '../glossary/KeywordDisplay';
 import ItemStat from '../../../components/subcomponents/description/ItemStat';
 import { makestringpresentable } from '../../../../utility/functions';
 import DisplayFactionEquipmenWideDisplay from './DisplayFactionEquipmentWideDisplay';
+import ItemRow from '../../../components/subcomponents/description/ItemRow';
 
 const EquipmentDisplay = (props: any) => {
     const abilityObject: Equipment = props.data
@@ -25,89 +26,99 @@ const EquipmentDisplay = (props: any) => {
         let RangeVal = ""
         if (baseequip.Distance > 0) {RangeVal += baseequip.Distance.toString() + "\""}
         if (statlist.melee == true) {RangeVal += "Melee"}
-        if (RangeVal == "") { RangeVal = "N/A" }
 
         /** Hands */
         let HandValMelee = ""
         if (statlist.hands_melee != undefined) {HandValMelee += statlist.hands_melee.toString() + " Hands"}
-        if (HandValMelee == "") { HandValMelee = "N/A" }
         
         let HandValRange = ""
         if (statlist.hands_ranged != undefined) {HandValRange += statlist.hands_ranged.toString() + " Hands"}
-        if (HandValRange == "") { HandValRange = "N/A" }
 
         return (
-            <>
-            <div>
-                <div className="verticalspacerbig"/>
-                <div className="row row-cols-sm-7 row-cols-xs-4 justify-content-center">
-                    <ItemStat title={"Category"} value={makestringpresentable(baseequip.Category)}/>
-                    <ItemStat title={"Range"} value={(RangeVal)}/>
-                    <ItemStat title={"Hands (Melee)"} value={(HandValMelee)}/>
-                    <ItemStat title={"Hands (Ranged)"} value={(HandValRange)}/>
-                </div>
-                <div className="verticalspacerbig"/>
+            <div className="">
+                <ItemRow title={"Category"} value={() => <div>{makestringpresentable(baseequip.Category)}</div>}/>
+                {RangeVal != "" &&
+                <ItemRow title={"Range"} value={() => <div>{RangeVal}</div>}/>
+                }
+                {HandValMelee != "" &&
+                <ItemRow title={"Hands(Melee)"} value={() => <div>{HandValMelee}</div>}/>
+                }
+                {HandValRange != "" &&
+                <ItemRow title={"Hands(Ranged)"} value={() => <div>{HandValRange}</div>}/>
+                }
             </div>
-            </>
         )
     }
 
     return (
         <ErrorBoundary fallback={<div>Something went wrong with EquipmentDisplay.tsx</div>}>
-            <div className='abilityInternalStructure'>
-                <div className="row">
-                    {returnDescription(abilityObject, abilityObject.Lore)}
+            <div className='backgroundBgCard'>
+                <div className="">
+                    {ReturnStats(abilityObject.Stats, abilityObject)  /* Stats */}
                 </div>
                 {abilityObject.Modifiers.length > 0 &&
                     <>
-                        <div className="verticalspacerbig"/>
-                        <div className="row">
-                            <span>
-                                {abilityObject.Modifiers.map((item) => ( 
-                                    <span className='tagItem' key={"equipment_modifier_"+abilityObject.ID+"_modifier_id_"+item}>
-                                        <span className='glossaryMain'>{item}</span>
-                                    </span>
-                                )) /* Keywords */}
-                            </span>
-                        </div>
+                        <ItemRow title={"Modifiers"} value={() => 
+                            <div>
+                                <span>
+                                    {abilityObject.Modifiers.map((item) => ( 
+                                        <span className='tagItem smallgapright' key={"equipment_modifier_"+abilityObject.ID+"_modifier_id_"+item}>
+                                            <span className='glossaryMain'>{item}</span>
+                                        </span>
+                                    )) /* Keywords */}
+                                </span>
+                            </div>}/>
                     </>
                 }
                 {abilityObject.KeyWord.length > 0 &&
                     <>
-                    <div className="verticalspacerbig"/>
-                        <div className="row">
-                            <span>
-                                <span className='bodytext colordefault'>{"Keywords: "}</span>
+                     <ItemRow title={"Keywords"} value={() => 
+                            <div>
+                                <span>
                                 {abilityObject.KeyWord.map((item) => ( 
-                                    <span className='tagItem' key={"equipment_keyword_"+abilityObject.ID+"_keyword_id_"+item.ID}>
+                                    <span className='tagItem smallgapright' key={"equipment_keyword_"+abilityObject.ID+"_keyword_id_"+item.ID}>
                                         <GenericHover  d_colour={'default'} titlename={item.Name} d_name={item.Name} d_type={""} d_method={() => <KeywordDisplay data={item} />}/>
                                     </span>
                                 )) /* Keywords */}
-                            </span>
-                        </div>
+                                </span>
+                            </div>}/>
                     </>
                 }
-                <div className="row">
-                    {ReturnStats(abilityObject.Stats, abilityObject)  /* Stats */}
-                </div>
-                <div className="row">
+                
+                {abilityObject.Description.length > 0 &&
+                <div className="borderstyler borderthin bordergrey">
+                    <div className="totalmarginmed">
                     {returnDescription(abilityObject, abilityObject.Description)}
+                    </div>
                 </div>
-                <div className="row">
-                    <div className='separator bodytext tagboxpad colordefault'>Found In</div>
-                            <div className="row textmaxwidth">
-                                {abilityObject.EquipmentItems.map((item) => ( 
-                                    <div key={"faction_rule_"+abilityObject.ID+"_rule_id_"+item.ID} className="textmaxwidth">
-                                        <DisplayFactionEquipmenWideDisplay data={item} />
-                                    </div>
-                                )) /* Abilities */}
-                            </div>
-                        
+                }
+                
+                {abilityObject.Lore.length > 0 &&
+                <div className="borderstyler borderthin bordergrey">
+                    <div className="totalmarginmed">
+                    {returnDescription(abilityObject, abilityObject.Lore)}
+                    </div>
                 </div>
+                }
                 
             </div>
         </ErrorBoundary>
     )
+
+    /**
+     * 
+                
+                <ItemRow title={"Found In"} value={() => 
+                            <div>
+                                <span>
+                                {abilityObject.EquipmentItems.map((item) => ( 
+                                    <span className='tagItem' key={"faction_rule_"+abilityObject.ID+"_rule_id_"+item.ID} >
+                                        <DisplayFactionEquipmenWideDisplay data={item} />
+                                    </span>
+                                ))}
+                                </span>
+                            </div>}/>
+     */
 }
 
 export default EquipmentDisplay;

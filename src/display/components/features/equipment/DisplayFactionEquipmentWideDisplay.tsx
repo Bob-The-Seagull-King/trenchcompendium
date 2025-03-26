@@ -28,80 +28,19 @@
     const DisplayFactionEquipmenWideDisplay = (props: any) => {
         const factionequipmentObject: FactionEquipmentRelationship = props.data
 
-        const [equiprestrictions, setEquipRestrictions] = useState([])
-        const [_keyvar, setkeyvar] = useState(0);
-
-        
-            useEffect(() => {
-                async function SetModelOptions() {
-                    const EventProc: EventRunner = new EventRunner();
-                    
-                if (factionequipmentObject.RestrictedEquipment != null) {
-                    const result_presentation = await EventProc.runEvent(
-                        "getEquipmentRestrictionPresentable",
-                        factionequipmentObject,
-                        [],
-                        [],
-                        factionequipmentObject.RestrictedEquipment
-                    );
-                    setEquipRestrictions(result_presentation);
-                    setkeyvar((prev) => prev + 1);
-                } else {
-                    const result = await EventProc.runEvent(
-                        "getEquipmentRestriction",
-                        factionequipmentObject,
-                        [],
-                        [],
-                        null
-                    );
-                    factionequipmentObject.RestrictedEquipment = result;
-                    const result_presentation = await EventProc.runEvent(
-                        "getEquipmentRestrictionPresentable",
-                        factionequipmentObject,
-                        [],
-                        [],
-                        factionequipmentObject.RestrictedEquipment
-                    );
-                    setEquipRestrictions(result_presentation);
-                    setkeyvar((prev) => prev + 1);
-                }
-        
-                }
-            
-                SetModelOptions();
-            }, []);
+        const [_keyvar, setkeyvar] = useState(0);        
 
         return (
             <ErrorBoundary fallback={<div>Something went wrong with FactionModelDisplay.tsx</div>}>
-                <div key={_keyvar}>
+                <span key={_keyvar}>
                     {factionequipmentObject.Factions.map((item) => (
-                        <div className='textmaxwidth row alignleft' key={item.ID}>
-                        <div className="col-md-5 col-8">
-                            <GenericPopup  d_colour={item.Team} titlename={item.Name} d_name={item.Name} d_type={""} d_method={() => 
+                        <span className='smallgapright' key={item.ID}>
+                            <GenericPopup  d_colour={"grey"} titlename={item.Name + (factionequipmentObject.Factions.indexOf(item) < factionequipmentObject.Factions.length-1 ? ", " : "")} d_name={item.Name} d_type={""} d_method={() => 
                                 <FactionDisplay data={item} />}/>
-                        </div>
-                        <div className="col-md-2 col-4">
-                            <span className=" headersubtext boldtext colourgrey">
-                                {
-                                    factionequipmentObject.Cost + " " + 
-                                    getCostType(factionequipmentObject.CostType)
-                                }
-                            </span>
-                        </div>
-                        
-                        <div className="col-md-5 col-12" key={_keyvar}>
-                            {factionequipmentObject.Limit != 0 &&
-                                <>
-                                <span className="headersubtext boldtext colourgrey">
-                                    {"LIMIT: " +  factionequipmentObject.Limit + " " +  equiprestrictions.join(', ') }
-</span>
-                                </>
-                            }
-                        </div>
-                        </div>
+                        </span>
                     ))}
                 
-                </div>
+                </span>
             </ErrorBoundary>
         )
     }

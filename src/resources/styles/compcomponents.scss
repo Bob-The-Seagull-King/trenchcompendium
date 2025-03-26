@@ -110,3 +110,18 @@
   .filterbuttoncomp {
     width: 10rem;
   }
+
+  .itemrow_container {
+    display: grid;
+    grid-template-columns: 1fr 3fr; /* Two equal columns */
+  }
+
+  .itemrow_box {
+    display: flex;
+    align-items: stretch; 
+  }
+
+  .overcomeBackground {
+    background: none !important;
+    border: none !important;
+  }
