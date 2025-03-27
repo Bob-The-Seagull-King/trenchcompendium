@@ -14,7 +14,7 @@ const ItemRow = (props: any) => {
             <div className="itemrow_container">
                 <div className={" itemrow_box " + (ShowBorder == true? " borderthin borderstyler bordergrey" : "")}>
                     <div className="totalmarginsml centered-div">
-                        <div className="colorBasicText">{Title}</div>
+                        <div className="colorBasicText wordbreak">{Title}</div>
                     </div>
                 </div>
                 <div className={" itemrow_box " + (ShowBorder? " borderthin borderstyler bordergrey" : "")}>

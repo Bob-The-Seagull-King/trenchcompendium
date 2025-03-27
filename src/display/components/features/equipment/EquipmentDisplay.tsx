@@ -41,10 +41,10 @@ const EquipmentDisplay = (props: any) => {
                 <ItemRow title={"Range"} value={() => <div>{RangeVal}</div>}/>
                 }
                 {HandValMelee != "" &&
-                <ItemRow title={"Hands(Melee)"} value={() => <div>{HandValMelee}</div>}/>
+                <ItemRow title={"Hands (Melee)"} value={() => <div>{HandValMelee}</div>}/>
                 }
                 {HandValRange != "" &&
-                <ItemRow title={"Hands(Ranged)"} value={() => <div>{HandValRange}</div>}/>
+                <ItemRow title={"Hands (Ranged)"} value={() => <div>{HandValRange}</div>}/>
                 }
             </div>
         )
