@@ -16,7 +16,7 @@ const AbilityDisplay = (props: any) => {
 
     return (
         <ErrorBoundary fallback={<div>Something went wrong with AbilityDisplay.tsx</div>}>
-            <div className='abilityInternalStructure'>
+            <div className=''>
                 <div className='row'>
                     {returnDescription(abilityObject, abilityObject.Description)}
                 </div>

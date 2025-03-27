@@ -40,19 +40,22 @@ const ModelCollectionDisplay = (props: any) => {
 
     return (
         <ErrorBoundary fallback={<div>Something went wrong with ModelCollectionDisplay.tsx</div>}>
-            <div className='abilityInternalStructure'>
-                <div className={"row sidebarriers"}>
-                    <Form.Control className={"borderstyler subborder" + getColour(selectedModel.model.Team) } as="select" aria-label="Default select example"  placeholder="Member Type" onChange={(e: { target: { value: any; }; }) => { updateItem(e.target.value)    } } >
-                        {modelcollectionObject.SubModelsList.map((item) => ( 
-                            <option key="modeloption" value={item.var_name}>{makestringpresentable(item.var_name)}</option> 
-                        ))}
-                    </Form.Control>
-                </div>
-                <div className="verticalspacerbig"/>
-                <div className="row">
-                    <div key={_keyvar}>
-                        <ModelDisplay data={selectedModel.model}/>
+            <div className=''>
+                <div className="borderthin bordergrey">
+                    <div className="totalmarginmed">
+                        <div className={"row horizontalspacermed"}>
+                            <Form.Control className={"borderstyler hovermouse bordergrey overcomeradius"} as="select" aria-label="Default select example"  placeholder="Member Type" onChange={(e: { target: { value: any; }; }) => { updateItem(e.target.value)    } } >
+                                {modelcollectionObject.SubModelsList.map((item) => ( 
+                                    <option  key="modeloption" value={item.var_name}>
+                                        <div>{makestringpresentable(item.var_name) + " - " + makestringpresentable(item.model.Name != undefined? item.model.Name : "")}</div>
+                                    </option> 
+                                ))}
+                            </Form.Control>
+                        </div>
                     </div>
+                </div>
+                <div key={_keyvar}>
+                    <ModelDisplay data={selectedModel.model}/>
                 </div>
             </div>
         </ErrorBoundary>

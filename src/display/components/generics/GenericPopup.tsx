@@ -24,7 +24,11 @@ const GenericPopup = (props: any) => {
 
     // States
     const [show, setShow] = useState(false);
-    const [theme] = useGlobalState('theme');
+    const [theme, setTheme] = useGlobalState('theme');
+
+    if ((theme == "" ) || (theme == null)) { // Default theme to light
+        setTheme('dark');
+    }
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -50,7 +54,7 @@ const GenericPopup = (props: any) => {
                             </div>
                         </div>
                     </h1>
-                    <div className="totalmarginmed">
+                    <div className={"totalmarginmed colorBasicText"}>
                         {displayMethod()}
                     </div>
                 </div>

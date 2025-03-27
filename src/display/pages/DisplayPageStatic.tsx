@@ -161,7 +161,23 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
             return (
                 
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    <GenericDisplay d_state={false} d_colour={item.Team} d_name={item.Name} d_type={""} d_method={() => <ModelCollectionDisplay data={item} />}/>
+                    
+                    <div className="borderthin bordergrey">
+                        <GenericCollapsableBlockDisplay 
+                            d_name={item.Name} 
+                            d_colour={"grey"} 
+                            d_state={true}  
+                            bordertype={0}
+                            d_col={"default"}
+                            d_border={false}
+                            d_margin={"sml"}
+                            d_method={() => <>
+                                <div className="backgroundBgCard">
+                                    <ModelCollectionDisplay data={item} />
+                                </div>
+                            </>} />
+                    </div>
+
                 </ErrorBoundary>
             )
         },

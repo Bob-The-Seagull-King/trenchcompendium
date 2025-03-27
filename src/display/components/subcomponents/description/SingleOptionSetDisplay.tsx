@@ -6,6 +6,7 @@ import { StaticOption } from '../../../../classes/options/StaticOption';
 import { makestringpresentable } from '../../../../utility/functions';
 import { Form } from 'react-bootstrap';
 import { EventRunner } from '../../../../classes/contextevent/contexteventhandler';
+import ItemRow from './ItemRow';
 
 const SingleOptionSetDisplay = (props: any) => {
     const OptionSet : StaticOption = props.data
@@ -48,11 +49,12 @@ const SingleOptionSetDisplay = (props: any) => {
     return (
         
         <ErrorBoundary fallback={<div>Something went wrong with OptionSetStaticDisplay.tsx</div>}>
-            <div className="colordefault bodytext complextext">
+
+            <div className="colordefault size-subtitle font-seriftext">
                 { OptionSet.Name }
             </div>
             
-            <Form.Control className={"borderstyler subborderdefault" } as="select" aria-label="Default select example"  placeholder="Member Type" onChange={(e: { target: { value: any; }; }) => { updateItem(e.target.value)    } } >
+            <Form.Control className={"borderstyler bordergrey overcomeradius hovermouse" } as="select" aria-label="Default select example"  placeholder="Member Type" onChange={(e: { target: { value: any; }; }) => { updateItem(e.target.value)    } } >
                 {OptionSet.Selections.map((selec) => ( 
                     <option value={selec.id} key={"modeloption"+(OptionSet.Selections.indexOf(selec).toString())} >{makestringpresentable(selec.display_str)}</option> 
                 ))}

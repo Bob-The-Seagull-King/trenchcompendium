@@ -6,17 +6,18 @@ import { ErrorBoundary } from "react-error-boundary";
 const ItemRow = (props: any) => {
     const Title = props.title;
     const Content = props.value;
+    const ShowBorder = (props.s_border != undefined? props.s_border : true)
 
     return (
         
         <ErrorBoundary fallback={<div>Something went wrong with ItemStat.tsx</div>}>
             <div className="itemrow_container">
-                <div className="borderstyler bordergrey borderthin itemrow_box">
+                <div className={" itemrow_box " + (ShowBorder == true? " borderthin borderstyler bordergrey" : "")}>
                     <div className="totalmarginsml">
                         <div className="colorBasicText">{Title}</div>
                     </div>
                 </div>
-                <div className="borderstyler bordergrey borderthin itemrow_box">
+                <div className={" itemrow_box " + (ShowBorder? " borderthin borderstyler bordergrey" : "")}>
                     <div className="totalmarginsml">
                         <div className="colorBasicText">{Content()}</div>
                     </div>

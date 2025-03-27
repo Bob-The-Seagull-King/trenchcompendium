@@ -19,6 +19,7 @@ const GenericCollapsableBlockDisplay = (props: any) => {
     const BgCol = props.d_col != undefined? props.d_col : "BgBase";
     const MarginSize = props.d_margin != undefined? props.d_margin : "med";
 
+
     const [open, setOpen]   = useState((DefaultState != undefined)? DefaultState : true);
 
     return (

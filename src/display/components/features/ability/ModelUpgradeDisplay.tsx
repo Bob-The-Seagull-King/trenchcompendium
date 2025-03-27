@@ -16,19 +16,16 @@ const ModelUpgradeDisplay = (props: any) => {
 
     return (
         <ErrorBoundary fallback={<div>Something went wrong with ModelUpgradeDisplay.tsx</div>}>
-            <div className=''>
-                <div>
-                    <UpgradeDisplay data={abilityObject.UpgradeObject}/>
-                    <div className='abilityInternalStructure sidepadsonly'>
-                        <div className="row">
-                            <span className="colordefault bodytext complextext">
-                                {
-                                    abilityObject.Cost + " " + 
-                                    getCostType(abilityObject.CostType) + 
-                                    (abilityObject.WarbandLimit != 0? (" " + "(Limit " + abilityObject.WarbandLimit + ")") : "")}
-                            </span>
-                        </div>
-                        <div className='verticalspacerbig'/>
+            <div>
+                <UpgradeDisplay data={abilityObject.UpgradeObject}/>
+                <div className=''>
+                    <div className="">
+                        <span className="colorBasicText size-strongtext">
+                            {
+                                abilityObject.Cost + " " + 
+                                getCostType(abilityObject.CostType) + 
+                                (abilityObject.WarbandLimit != 0? (" " + "(Limit " + abilityObject.WarbandLimit + ")") : "")}
+                        </span>
                     </div>
                 </div>
             </div>

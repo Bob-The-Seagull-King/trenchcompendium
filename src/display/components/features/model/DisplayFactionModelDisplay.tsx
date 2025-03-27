@@ -64,46 +64,10 @@ const DisplayFactionModelDisplay = (props: any) => {
         <ErrorBoundary fallback={<div>Something went wrong with FactionModelDisplay.tsx</div>}>
             <div key={_keyvar}>
                 {factionmodelObject.Factions.map((item) => (
-                <div className='textmaxwidth row alignleft' key={_keyvar}>
-                    <div className="col-md-4 col-7">
-                        <GenericPopup  d_colour={item.Team} titlename={item.Name} d_name={item.Name} d_type={""} d_method={() => 
-                            <div className="abilityInternalStructure">
-                                <FactionDisplay data={item} />
-                        </div>}/>
-                    </div>
-                    <div className="col-md-2 col-4">
-                        <span className=" headersubtext boldtext colourgrey">
-                            {
-                                factionmodelObject.Cost + " " + 
-                                getCostType(factionmodelObject.CostType)
-                            }
-                        </span>
-                    </div>
-                    <div className="col-md-6 col-12">
-                        {minimum == maximum &&
-                            <>
-                            <span className=" headersubtext boldtext colourgrey">
-                                {minimum != "0" &&
-                                    <>
-                                    {
-                                        "LIMIT: " + minimum
-                                    }
-                                    </>
-                                }
-                            </span>
-                            </>
-                        }
-                        {minimum != maximum &&
-                            <>
-                                <span className="headersubtext boldtext colourgrey">
-                                    {
-                                        "LIMIT: " + minimum + " - " + maximum
-                                    }
-                                </span>
-                            </>
-                        }
-                    </div>
-                </div>
+                    <span className='smallgapright' key={item.ID}>
+                        <GenericPopup  d_colour={"grey"} titlename={item.Name + (factionmodelObject.Factions.indexOf(item) < factionmodelObject.Factions.length-1 ? ", " : "")} d_name={item.Name} d_type={""} d_method={() => 
+                            <FactionDisplay data={item} />}/>
+                    </span>
                 ))}
             </div>
         </ErrorBoundary>

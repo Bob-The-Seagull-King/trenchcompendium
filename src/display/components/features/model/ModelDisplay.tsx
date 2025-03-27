@@ -20,6 +20,8 @@ import ModelEquipmentDisplay from '../equipment/ModelEquipmentDisplay';
 import { EventRunner } from '../../../../classes/contextevent/contexteventhandler';
 import { Form } from 'react-bootstrap';
 import DisplayFactionModelDisplay from './DisplayFactionModelDisplay';
+import GenericCollapsableBlockDisplay from '../../../components/generics/GenericCollapsableBlockDisplay';
+import ItemRow from '../../../components/subcomponents/description/ItemRow';
 
 const ModelDisplay = (props: any) => {
     const modelcollectionObject: Model = props.data
@@ -196,27 +198,102 @@ const ModelDisplay = (props: any) => {
     return (
         <ErrorBoundary fallback={<div>Something went wrong with ModelDisplay.tsx</div>}>
             <div className=''>
-                <div className="row">
-                    <span className="colordefault contentpacklabel complextext">
-                        {modelcollectionObject.Name  /* Name */}
-                    </span>
-                </div>
-                <div className="row">
-                    {returnDescription(modelcollectionObject, modelcollectionObject.Lore) /* Lore */}
-                </div>
+                <GenericCollapsableBlockDisplay 
+                    d_name={"Lore"} 
+                    d_colour={"grey"} 
+                    d_state={false}  
+                    d_margin={"sml"}
+                    d_border={false}
+                    bordertype={0}
+                    d_method={() => <div className="borderthin bordergrey">
+                        <div className="size-smaller totalmarginsml">
+                            {returnDescription(modelcollectionObject, modelcollectionObject.Lore) /* Lore */}
+                        </div>
+                    </div>} />
+                {modelcollectionObject.Abilities.length > 0 &&
+                    <div>
+                    <GenericCollapsableBlockDisplay 
+                                        d_name={"Abilities"} 
+                                        d_colour={"grey"} 
+                                        d_state={false}  
+                                        d_margin={"sml"}
+                                        bordertype={0}
+                                        d_method={() => <>
+                                            {modelcollectionObject.Abilities.map((item) => ( 
+                                                <div key={"model_ability_"+modelcollectionObject.ID+"_ability_id_"+item.ID}>
+                                                    <GenericCollapsableBlockDisplay 
+                                                        d_name={item.Name} 
+                                                        d_colour={"grey"} 
+                                                        d_state={false}  
+                                                        d_margin={"sml"}
+                                                        d_border={false}
+                                                        bordertype={0}
+                                                        d_method={() => <div className="borderthin bordergrey">
+                                                            <div className="totalmarginsml">
+                                                                <AbilityDisplay data={item} />
+                                                            </div>
+                                                        </div>} />
+                                                </div>
+                                            )) /* Abilities */}
+                                        </>} />
+                    </div>
+                }
+                {modelcollectionObject.UpgradeList.length > 0 &&
+                    <div>
+                    <GenericCollapsableBlockDisplay 
+                                        d_name={"Upgrades"} 
+                                        d_colour={"grey"} 
+                                        d_state={false} 
+                                        d_margin={"sml"} 
+                                        bordertype={0}
+                                        d_method={() => <>
+                                            {modelcollectionObject.UpgradeList.map((item) => ( 
+                                                <div key={"model_upgrade_"+modelcollectionObject.ID+"_upgrade_id_"+item.ID}>
+                                                    <GenericCollapsableBlockDisplay 
+                                                        d_name={item.UpgradeObject.Name} 
+                                                        d_colour={"grey"} 
+                                                        d_state={false}  
+                                                        d_border={false}
+                                                        d_margin={"sml"}
+                                                        bordertype={0}
+                                                        d_method={() => <div className="borderthin bordergrey">
+                                                            <div className="totalmarginsml">
+                                                                <ModelUpgradeDisplay data={item} />
+                                                            </div>
+                                                        </div>} />
+                                                </div>
+                                            )) /* Abilities */}
+                                        </>} />
+                    </div>
+                }
+                
                 {modelcollectionObject.KeyWord.length > 0 &&
                 <>
-                    <div className="verticalspacerbig"/>
-                    <div className="row">
-                        <span className="">
-                            <span className='bodytext colordefault'>{"Keywords: "}</span>
+                    <ItemRow
+                        title={"KeyWords"}
+                        value={() => <span className="">
                             {modelcollectionObject.KeyWord.map((item) => ( 
-                                <span className='tagItem' key={"model_keyword_"+modelcollectionObject.ID+"_keyword_id_"+item.ID}>
+                                <span className='horizontalspacerxsm' key={"model_keyword_"+modelcollectionObject.ID+"_keyword_id_"+item.ID}>
                                     <GenericHover  d_colour={modelcollectionObject.Team} titlename={item.Name} d_name={item.Name} d_type={""} d_method={() => <KeywordDisplay data={item} />}/>
                                 </span>
                             )) /* Keywords */}
-                        </span>
-                    </div>
+                        </span>}
+                        />
+                </>
+                }
+                
+                {modelcollectionObject.Models.length > 0 &&
+                <>
+                    <ItemRow
+                        title={"Found In"}
+                        value={() => <span className="">
+                            {modelcollectionObject.Models.map((item) => ( 
+                                    <div key={"faction_rule_"+modelcollectionObject.ID+"_rule_id_"+item.ID} className="textmaxwidth">
+                                        <DisplayFactionModelDisplay data={item} />
+                                    </div>
+                                )) /* Abilities */}
+                        </span>}
+                        />
                 </>
                 }
                 <div className="row">
@@ -294,45 +371,6 @@ const ModelDisplay = (props: any) => {
                         }
                     </>
                 }
-                </div>
-                {modelcollectionObject.Abilities.length > 0 &&
-                    <>
-                        <div className='separator bodytext tagboxpad colordefault'>Abilities</div>
-                        <div className="verticalspacerbig"/>
-                        <div className="row">
-                            {modelcollectionObject.Abilities.map((item) => ( 
-                                <div key={"model_ability_"+modelcollectionObject.ID+"_ability_id_"+item.ID}>
-                                    <GenericDisplay  d_colour={modelcollectionObject.Team} d_name={item.Name} d_type={"sub"} d_method={() => <AbilityDisplay data={item} />}/>
-                                    <div className="verticalspacerbig"/>
-                                </div>
-                            )) /* Abilities */}
-                        </div>
-                    </>
-                }
-                {modelcollectionObject.UpgradeList.length > 0 &&
-                    <>
-                        <div className='separator bodytext tagboxpad colordefault'>Upgrades</div>
-                        <div className="verticalspacerbig"/>
-                        <div className="row">
-                            {modelcollectionObject.UpgradeList.map((item) => ( 
-                                <div key={"model_ability_"+modelcollectionObject.ID+"_ability_id_"+item.ID}>
-                                    <GenericDisplay d_state={false}  d_colour={modelcollectionObject.Team} d_name={item.UpgradeObject.Name} d_type={"sub"} d_method={() => <ModelUpgradeDisplay data={item} />}/>
-                                    <div className="verticalspacerbig"/>
-                                </div>
-                            )) /* Abilities */}
-                        </div>
-                    </>
-                }
-                <div className="row">
-                    <div className='separator bodytext tagboxpad colordefault'>Found In</div>
-                            <div className="row textmaxwidth">
-                                {modelcollectionObject.Models.map((item) => ( 
-                                    <div key={"faction_rule_"+modelcollectionObject.ID+"_rule_id_"+item.ID} className="textmaxwidth">
-                                        <DisplayFactionModelDisplay data={item} />
-                                    </div>
-                                )) /* Abilities */}
-                            </div>
-                        
                 </div>
             </div>
         </ErrorBoundary>
