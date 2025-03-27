@@ -18,17 +18,19 @@ import { ModelEquipmentRelationship } from '../../../../classes/relationship/mod
 import GenericDisplay from '../../../components/generics/GenericDisplay';
 import AbilityDisplay from '../ability/AbilityDisplay';
 import EquipmentDisplay from './EquipmentDisplay';
+import GenericCollapsableBlockDisplay from '../../../components/generics/GenericSoloBlockDisplay';
 
 const ModelEquipmentDisplay = (props: any) => {
     const abilityObject: ModelEquipmentRelationship = props.data
     const team_color : string = props.team_col;
+    const collection_name : string = (props.col_name != undefined? props.col_name : "Pre-Equipped Items")
 
     function ReturnEquipment(item : Equipment, obj : ModelEquipmentRelationship) {
         return (
             <>
                 <EquipmentDisplay data={item} />
-                <div className="row abilityInternalStructure">
-                    <span className="colordefault bodytext complextext">
+                <div className="borderthin bordergrey">
+                    <span className="colordefault totalmarginsml">
                         {
                             obj.Removable == true? "Removable" : "Cannot Be Removed"
                         }
@@ -40,42 +42,79 @@ const ModelEquipmentDisplay = (props: any) => {
 
     return (
         <ErrorBoundary fallback={<div>Something went wrong with ModelEquipmentDisplay.tsx</div>}>
-           
+            
+            {(abilityObject.EquipmentItems.length > 1 || collection_name != "Pre-Equipped Items") && 
+            <div>
+            <GenericCollapsableBlockDisplay 
+                d_name={collection_name} 
+                d_colour={"grey"} 
+                d_state={false}  
+                d_margin={"sml"}
+                bordertype={0}
+                d_method={() => <div className="">
+                    {abilityObject.EquipmentItems.map((item) => ( 
+                        <div key={"model_equipment_"+abilityObject.ID+"_equipment_id_"+item.ID}>
+                            <GenericCollapsableBlockDisplay 
+                                                d_name={item.Name} 
+                                                d_colour={"grey"} 
+                                                d_state={false}  
+                                                d_col={"default"}
+                                                d_margin={"sml"}
+                                                d_border={false}
+                                                bordertype={0}
+                                                d_method={() => <div className="">
+                                                {ReturnEquipment(item, abilityObject)}
+                                                </div>} />
+                            
+                        </div>
+                    )) /* Abilities */}
+                </div>} />
+                
+            </div>
+            }
+            {(abilityObject.EquipmentItems.length == 1 && collection_name == "Pre-Equipped Items") && 
             <div>
                 {abilityObject.EquipmentItems.map((item) => ( 
-                    <div key={"model_equipment_"+abilityObject.ID+"_equipment_id_"+item.ID}>
-                        <GenericDisplay  d_colour={'default'} d_state={false}  d_name={item.Name} d_type={"sub"} d_method={() => ReturnEquipment(item, abilityObject) }/>
-                        {((abilityObject.EquipmentItems.length > 0) && (abilityObject.EquipmentItems.indexOf(item) != abilityObject.EquipmentItems.length-1)) &&
-                            <div className="verticalspacerbig"/>
-                        }
-                    </div>
-                )) /* Abilities */}
+                            <div key={"model_equipment_"+abilityObject.ID+"_equipment_id_"+item.ID}>
+                                <GenericCollapsableBlockDisplay 
+                                                    d_name={item.Name} 
+                                                    d_colour={"grey"} 
+                                                    d_state={false}  
+                                                    d_col={"default"}
+                                                    d_margin={"sml"}
+                                                    d_border={false}
+                                                    bordertype={0}
+                                                    d_method={() => <div className="">
+                                                    {ReturnEquipment(item, abilityObject)}
+                                                    </div>} />
+                                
+                            </div>
+                        )) /* Abilities */}
+                
             </div>
+            }
             {abilityObject.MyOptions.length > 0 &&
             <>
-            <div className="verticalspacerbig"/>
-            <div>
                 {abilityObject.MyOptions.map((item) => ( 
-                    <div key={"model_equipment_"+abilityObject.ID+"_equipment_id_option_"+item.RefID}>
-                        <div className={"borderstyler subborder"+getColour(team_color)}>
-                        <div className={'titleShape hovermouse titlebody subbackground'+getColour(team_color)}>Choose One Of The Following</div>
-                        <div className="row abilityInternalStructure">
+                    <div key={item.RefID} >
+                        <GenericCollapsableBlockDisplay 
+                            d_name={"Choose One Of The Following"} 
+                            d_colour={"grey"} 
+                            d_state={false}  
+                            d_margin={"sml"}
+                            bordertype={0}
+                            d_method={() => <div className="">
                                 {item.Selections.map((subitem) => ( 
                                     <div key={"model_equipment_"+abilityObject.ID+"_equipment_id_"+subitem.value.ID}>
                                         
-                                        <div className={"borderstyler subborder"+getColour(team_color)}>
-                                            <div className="abilityInternalStructure">
-                                                <ModelEquipmentDisplay data={subitem.value} team_col={team_color}/>
-                                            </div>
+                                        <div className={""}>
+                                                <ModelEquipmentDisplay col_name={"Option " + (1+ item.Selections.indexOf(subitem))} data={subitem.value} team_col={team_color}/>
                                         </div>
-                                        <div className="verticalspacerbig"/>
                                     </div>
                                 )) /* Abilities */}
-                                </div>
-                        </div>
+                            </div>} />
                     </div>
                 )) /* Abilities */}
-            </div>
             </>}
         </ErrorBoundary>
     )

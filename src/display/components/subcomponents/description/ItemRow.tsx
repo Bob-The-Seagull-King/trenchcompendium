@@ -13,12 +13,12 @@ const ItemRow = (props: any) => {
         <ErrorBoundary fallback={<div>Something went wrong with ItemStat.tsx</div>}>
             <div className="itemrow_container">
                 <div className={" itemrow_box " + (ShowBorder == true? " borderthin borderstyler bordergrey" : "")}>
-                    <div className="totalmarginsml">
+                    <div className="totalmarginsml centered-div">
                         <div className="colorBasicText">{Title}</div>
                     </div>
                 </div>
                 <div className={" itemrow_box " + (ShowBorder? " borderthin borderstyler bordergrey" : "")}>
-                    <div className="totalmarginsml">
+                    <div className="totalmarginsml maxwidth">
                         <div className="colorBasicText">{Content()}</div>
                     </div>
                 </div>

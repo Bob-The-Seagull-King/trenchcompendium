@@ -41,6 +41,7 @@ const ModelCollectionDisplay = (props: any) => {
     return (
         <ErrorBoundary fallback={<div>Something went wrong with ModelCollectionDisplay.tsx</div>}>
             <div className=''>
+                {modelcollectionObject.SubModelsList.length > 1 &&
                 <div className="borderthin bordergrey">
                     <div className="totalmarginmed">
                         <div className={"row horizontalspacermed"}>
@@ -54,6 +55,7 @@ const ModelCollectionDisplay = (props: any) => {
                         </div>
                     </div>
                 </div>
+                }
                 <div key={_keyvar}>
                     <ModelDisplay data={selectedModel.model}/>
                 </div>

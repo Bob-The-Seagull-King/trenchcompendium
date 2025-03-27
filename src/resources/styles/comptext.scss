@@ -64,3 +64,8 @@
 .cleanunderline {
   text-decoration: none;
 }
+
+.nowrap {
+  white-space: pre-wrap;
+  word-break: break-word;
+}

@@ -125,14 +125,21 @@ const ModelDisplay = (props: any) => {
     }, []);
 
     function ReturnStatOption(statchoice : ModelStatistics[]) {
-        return (
-            <>
-            <Form.Control className={"borderstyler subborder" + getColour('default') } as="select" aria-label="Default select example"  placeholder="Member Type" >
-                {statchoice.map((item) => ( 
-                    <option key={"modeloption"+(statchoice.indexOf(item).toString())} >{ReturnStatProfileAsString(item)}</option> 
-                ))}
-            </Form.Control>
-            </>
+        return (  
+            <div className="maxwidth">          
+            <ItemRow
+                title={"Stat Options"}
+                value={() => 
+                    <div className="maxwidth">
+                        <Form.Control className={"borderstyler bordergrey overcomeradius hovermouse maxwidth" } as="select" aria-label="Default select example"  placeholder="Member Type" >
+                            {statchoice.map((item) => ( 
+                                <option key={"modeloption"+(statchoice.indexOf(item).toString())} >{ReturnStatProfileAsString(item)}</option> 
+                            ))}
+                        </Form.Control>
+                    </div>
+                }
+                />
+            </div>
         )
     }
 
@@ -165,39 +172,76 @@ const ModelDisplay = (props: any) => {
 
     function ReturnStats(statlist : ModelStatistics) {
         return (
-            <div>
-                <div className="verticalspacerbig"/>
-                <div className="row row-cols-sm-7 row-cols-xs-4 justify-content-center">
-                    {statlist.movement != undefined &&
-                        <ItemStat title={"Movement"} value={(statlist.movement?.toString() || "") + "\""}/>
-                    }
-                    {statlist.movetype != undefined &&
-                        <ItemStat title={"Move Type"} value={statlist.movetype? getMoveType(statlist.movetype) : "Infantry"}/>
-                    }
-                    {statlist.melee != undefined &&
-                        <ItemStat title={"Melee"} value={(statlist.melee? (statlist.melee > 0? "+": "") : "") + (statlist.melee?.toString() || "")}/>
-                    }
-                    {statlist.ranged != undefined &&
-                        <ItemStat title={"Ranged"} value={(statlist.ranged? (statlist.ranged > 0? "+": "") : "") + (statlist.ranged?.toString() || "")}/>
-                    }
-                    {statlist.armour != undefined &&
-                        <ItemStat title={"Armour"} value={statlist.armour?.toString() || ""}/>
-                    }
-                    {statlist.potential != undefined &&
-                        <ItemStat title={"Potential"} value={statlist.potential? getPotential(statlist.potential) : "Standard"}/>
-                    }
-                    {statlist.base != undefined &&
-                        <ItemStat title={"Base"} value={statlist.base? getBaseSize(statlist.base) : "25mm"}/>
-                    }
+            <div className="borderthin bordergrey">
+                <div className="totalmarginsml">
+                    <div className="wrap-flex centered-div stat_parent">
+                        {statlist.movement != undefined &&
+                            <div className="min-width-small"> 
+                                <ItemStat title={"Movement"} ratio="rectangle" value={(statlist.movement?.toString() || "") + "\"" + (statlist.movetype? " " + getMoveType(statlist.movetype) : " Infantry")}/>
+                            </div>
+                        }
+                        {statlist.melee != undefined &&
+                            <div className="min-width-small"> 
+                                <ItemStat title={"Melee"} value={(statlist.melee? (statlist.melee > 0? "+": "") : "") + (statlist.melee?.toString() || "")}/>
+                            </div>
+                        }
+                        {statlist.ranged != undefined &&
+                            <div className="min-width-small"> 
+                                <ItemStat title={"Ranged"} value={(statlist.ranged? (statlist.ranged > 0? "+": "") : "") + (statlist.ranged?.toString() || "")}/>
+                            </div>
+                        }
+                        {statlist.armour != undefined &&
+                            <div className="min-width-small"> 
+                                <ItemStat title={"Armour"} value={statlist.armour?.toString() || ""}/>
+                            </div>
+                        }
+                        {statlist.base != undefined &&
+                            <div className="min-width-small"> 
+                                <ItemStat title={"Base"} value={statlist.base? getBaseSize(statlist.base) : "25mm"}/>
+                            </div>
+                        }
+                        {statlist.potential != undefined &&
+                            <div className="min-width-small"> 
+                                <ItemStat title={"Potential"} ratio="rectangle" value={statlist.potential? getPotential(statlist.potential) : "Standard"}/>
+                            </div>
+                        }
+                    </div>
                 </div>
-                <div className="verticalspacerbig"/>
             </div>
         )
     }
 
     return (
         <ErrorBoundary fallback={<div>Something went wrong with ModelDisplay.tsx</div>}>
-            <div className=''>
+            <div className='' key={_keyvar}>                
+                <div className="">
+                    {ReturnStats(modelcollectionObject.Stats)  /* Stats */}
+                </div>
+                {modelcollectionObject.KeyWord.length > 0 &&
+                <>
+                    <ItemRow
+                        title={"Key Words"}
+                        value={() => <span className="container wrap-flex">
+                            {modelcollectionObject.KeyWord.map((item) => ( 
+                                <div className='smallgapright' key={"model_keyword_"+modelcollectionObject.ID+"_keyword_id_"+item.ID}>
+                                    <GenericHover  d_colour={modelcollectionObject.Team} titlename={item.Name} d_name={item.Name} d_type={""} d_method={() => <KeywordDisplay data={item} />}/>
+                                </div>
+                            )) /* Keywords */}
+                        </span>}
+                        />
+                </>
+                }
+                {statchoices.length > 0 &&
+                <div>
+                        {statchoices.map((item) => ( 
+                            <span key={item} className="">
+                                {
+                                    ReturnStatOption(item)
+                                }
+                            </span>
+                        ))} 
+                </div>
+                }
                 <GenericCollapsableBlockDisplay 
                     d_name={"Lore"} 
                     d_colour={"grey"} 
@@ -210,6 +254,69 @@ const ModelDisplay = (props: any) => {
                             {returnDescription(modelcollectionObject, modelcollectionObject.Lore) /* Lore */}
                         </div>
                     </div>} />
+                <GenericCollapsableBlockDisplay 
+                    d_name={"Description"} 
+                    d_colour={"grey"} 
+                    d_state={false}  
+                    d_margin={"sml"}
+                    d_border={false}
+                    bordertype={0}
+                    d_method={() => <div className="borderthin bordergrey">
+                        <div className=" totalmarginsml">
+                            {returnDescription(modelcollectionObject, modelcollectionObject.Description) /* Lore */}
+                        </div>
+                    </div>} />
+                {((modelcollectionObject.EquipmentList.length > 0) || (equiprestrictions.length > 0) || (equiplimits.length > 0)) &&
+                
+                    <GenericCollapsableBlockDisplay 
+                        d_name={"Equipment"} 
+                        d_colour={"grey"} 
+                        d_state={false}  
+                        d_margin={"sml"}
+                        d_border={false}
+                        bordertype={0}
+                        d_method={() => <div>
+                            {((equiprestrictions.length > 0) || (equiplimits.length > 0)) && 
+                            
+                                <div className="borderthin bordergrey">
+                                    <div className="totalmarginmed remove-margin-left">
+                                        <ul className="">
+                                        {equiprestrictions.map((item) => ( 
+                                            <li key={item} className=" nowrap colorBasicText">
+                                                {
+                                                    item
+                                                }
+                                            </li>
+                                        ))}  
+                                        {equiplimits.map((item) => ( 
+                                            <li key={item} className="nowrap colorBasicText">
+                                                {
+                                                    item
+                                                }
+                                            </li>
+                                        ))} 
+                                        </ul>
+                                    </div>
+                                </div>
+                            }
+                            {(modelcollectionObject.EquipmentList.length > 0) &&
+                                
+                                <div className={'container bordergrey'}>
+                                    <div className={"bar backgroundgrey"} />
+                                    <div className="content">                    
+                                    <div>
+                                        {modelcollectionObject.EquipmentList.map((item) => ( 
+                                                <div key={item.ID}>
+                                                    <ModelEquipmentDisplay team_col={modelcollectionObject.Team} data={item} />
+                                                </div>
+                                            )) /* Abilities */}
+                                    </div> 
+                                    </div>
+                                </div>
+                                
+                            }
+                        </div>} />
+                }
                 {modelcollectionObject.Abilities.length > 0 &&
                     <div>
                     <GenericCollapsableBlockDisplay 
@@ -267,111 +374,27 @@ const ModelDisplay = (props: any) => {
                     </div>
                 }
                 
-                {modelcollectionObject.KeyWord.length > 0 &&
-                <>
-                    <ItemRow
-                        title={"KeyWords"}
-                        value={() => <span className="">
-                            {modelcollectionObject.KeyWord.map((item) => ( 
-                                <span className='horizontalspacerxsm' key={"model_keyword_"+modelcollectionObject.ID+"_keyword_id_"+item.ID}>
-                                    <GenericHover  d_colour={modelcollectionObject.Team} titlename={item.Name} d_name={item.Name} d_type={""} d_method={() => <KeywordDisplay data={item} />}/>
-                                </span>
-                            )) /* Keywords */}
-                        </span>}
-                        />
-                </>
-                }
-                
                 {modelcollectionObject.Models.length > 0 &&
                 <>
-                    <ItemRow
-                        title={"Found In"}
-                        value={() => <span className="">
-                            {modelcollectionObject.Models.map((item) => ( 
+                    <GenericCollapsableBlockDisplay 
+                            d_name={"Found In"} 
+                            d_colour={"grey"} 
+                            d_state={false}  
+                            d_border={false}
+                            d_margin={"sml"}
+                            bordertype={0}
+                            d_method={() => <div className="borderthin bordergrey">
+                                <div className="totalmarginsml">
+                                {modelcollectionObject.Models.map((item) => ( 
                                     <div key={"faction_rule_"+modelcollectionObject.ID+"_rule_id_"+item.ID} className="textmaxwidth">
                                         <DisplayFactionModelDisplay data={item} />
                                     </div>
                                 )) /* Abilities */}
-                        </span>}
-                        />
+                                </div>
+                            </div>} />
                 </>
                 }
-                <div className="row">
-                    {ReturnStats(modelcollectionObject.Stats)  /* Stats */}
-                </div>
-                <div className="row">
-                {returnDescription(modelcollectionObject, modelcollectionObject.Description) /* Description */}
-                </div>
-                {statchoices.length > 0 &&
-                <div>
-                    <div className="row">
-                        {statchoices.map((item) => ( 
-                            <>
-                            
-                                <div className="verticalspacerbig"/>
-
-                                <div className="colordefault bodytext complextext">
-                                    {
-                                        "Choose from the following stat profiles"
-                                    }
-                                </div>
-                                
-                                <span key={item} className="colordefault bodytext complextext">
-                                    {
-                                        ReturnStatOption(item)
-                                    }
-                                </span>
-                            </>
-                        ))} 
-                    </div>
-                </div>
-                }
                  
-                <div key={_keyvar}>
-                {((modelcollectionObject.EquipmentList.length > 0) || (equiprestrictions.length > 0) || (equiplimits.length > 0)) &&
-                    <>
-                        <div className='separator bodytext tagboxpad colordefault'>Equipment</div>
-                        {((equiprestrictions.length > 0) || (equiplimits.length > 0)) && 
-                            <div>
-                                <div className="row">
-                                    {equiprestrictions.map((item) => ( 
-                                        <span key={item} className="colordefault bodytext complextext">
-                                            {
-                                                item
-                                            }
-                                        </span>
-                                    ))}  
-                                    {equiplimits.map((item) => ( 
-                                        <span key={item} className="colordefault bodytext complextext">
-                                            {
-                                                item
-                                            }
-                                        </span>
-                                    ))}                                   
-                                </div>
-                            </div>
-                        }
-                        {(modelcollectionObject.EquipmentList.length > 0) &&
-                            <>
-                                <div className="verticalspacerbig"/>
-                                <div className="row">
-                                    {modelcollectionObject.EquipmentList.map((item) => ( 
-                                        <>
-                                        <div key={"model_equipment_"+modelcollectionObject.ID+"_equipment_id_"+item.ID}>
-                                            <ModelEquipmentDisplay team_col={modelcollectionObject.Team} data={item} />
-                                            <div className="verticalspacerbig"/>
-                                        </div>
-                                        {modelcollectionObject.EquipmentList.length > 1 &&                                     
-                                            <div className='separator bodytext tagboxpad colordefault'></div>
-                                        }
-                                        </>
-                                    )) /* Abilities */}
-                                </div>
-                            </>
-                        }
-                    </>
-                }
-                </div>
             </div>
         </ErrorBoundary>
     )

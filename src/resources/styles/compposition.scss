@@ -52,6 +52,10 @@
     padding-top: 0.5rem;
 }
 
+.verticalspacerxsm {
+    padding-top: 0.25rem;
+}
+
 .horizontalspacermed {
     padding-left: 0.5rem;
     padding-right: 0.5rem;
@@ -100,6 +104,15 @@
     padding: 0 !important;
     margin: 0;
 }
+
+.remove-margin-left {
+    margin-left: 0;
+}
+
+.wrap-flex {
+    display: flex;
+    flex-wrap: wrap;
+}
   
 .bar {
     width: 0.5rem; /* Adjust thickness */
@@ -107,4 +120,13 @@
 
 .content {
     flex: 1; /* Fills remaining space */
+}
+
+.stat_parent {
+    display: flex;
+    align-items: stretch;
+  }
+
+.min-width-small {
+    min-width: 5rem;
 }
