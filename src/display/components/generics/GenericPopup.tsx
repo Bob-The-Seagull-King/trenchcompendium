@@ -46,10 +46,10 @@ const GenericPopup = (props: any) => {
                     <div className={'borderthin bordergrey centered-div colorBasicText size-subtitle font-seriftext background'+getColour(DisplayColour)}>
                         <div className="">
                             <Button className="no-padding" variant="" onClick={() => handleClose()}>
-                                <FontAwesomeIcon icon={faCircleXmark} className="colorBasicText size-section" />
+                                <FontAwesomeIcon icon={faCircleXmark} className="colorBasicText size-subtitle" />
                             </Button>
                         </div>
-                        <div className="maxwidth size-section">
+                        <div className="maxwidth size-subtitle">
                             {DisplayName || ""}
                         </div>
                     </div>
