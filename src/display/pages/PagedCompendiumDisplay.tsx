@@ -45,19 +45,13 @@ const PagedCompendiumDisplay = (prop: any) => {
         if (CollectionController.TargetItem == null) {
             return CollectionController.itemcollection[0]
         } else {
-            console.log(CollectionController.TargetItem)
-            for (let i = 0; i < CollectionController.itemcollection.length; i++) {
-                if (CollectionController.itemcollection[i].HeldItem.ID == CollectionController.TargetItem) {
-                    return CollectionController.itemcollection[i]
-                }
-            }
-            return CollectionController.itemcollection[0]
+            return CollectionController.TargetItem;
         }
     }
 
     function GrabPrevItem() {
         const IndexOfCur : number = CollectionController.itemcollection.indexOf(_curItem);
-        CollectionController.TargetItem = CollectionController.itemcollection[IndexOfCur - 1].HeldItem.ID
+        CollectionController.TargetItem = CollectionController.itemcollection[IndexOfCur - 1]
         setCurItem(CollectionController.itemcollection[IndexOfCur - 1])
         SetButtonActive(IndexOfCur - 1);
         setKeyVal(_keyval+1)
@@ -65,7 +59,7 @@ const PagedCompendiumDisplay = (prop: any) => {
 
     function GrabNextItem() {
         const IndexOfCur : number = CollectionController.itemcollection.indexOf(_curItem);
-        CollectionController.TargetItem = CollectionController.itemcollection[IndexOfCur + 1].HeldItem.ID
+        CollectionController.TargetItem = CollectionController.itemcollection[IndexOfCur + 1]
         setCurItem(CollectionController.itemcollection[IndexOfCur + 1])
         SetButtonActive(IndexOfCur + 1);
         setKeyVal(_keyval+1)

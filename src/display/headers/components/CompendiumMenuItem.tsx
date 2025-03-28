@@ -43,8 +43,8 @@ const CompendiumMenuItem = (prop: any) => {
     }
 
     function SpecificNavigtateOut(item : any) {
-        CollectionController.UpdateTargetItem(item.id);
-        navigate('/compendium/' + DisplayPage.searchId, {state: item.id + Date.now().toString()});
+        CollectionController.UpdateTargetItem(item);
+        navigate('/compendium/' + DisplayPage.searchId, {state: item.HeldItem.ID + Date.now().toString()});
     }
     
     return (
@@ -60,10 +60,10 @@ const CompendiumMenuItem = (prop: any) => {
                 d_link={'/compendium/'+DisplayPage.searchId}
                 d_method={() => (
                     <div className={"backgroundBgBase borderthin bordergrey"}>
-                    {CollectionController.dataresults.map((item : any) => (
-                        <div key={item.id} onClick={() => SpecificNavigtateOut(item)} className={'align-left-right font-default hovermouse colorBasicText centered-div '}>
+                    {CollectionController.itemcollection.map((item) => (
+                        <div key={item.HeldItem.ID} onClick={() => SpecificNavigtateOut(item)} className={'align-left-right font-default hovermouse colorBasicText centered-div '}>
                             <div className='totalmarginsml horizontalspacermed'>
-                                {item.name}
+                                {item.HeldItem.Name}
                             </div>
                         </div>
                         ))
