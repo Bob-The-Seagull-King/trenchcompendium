@@ -167,7 +167,7 @@ const FactionDisplay = (props: any) => {
                                     d_margin={"sml"}
                                     d_method={() => <>
                                         <div className="borderthin backgroundBgCard bordergrey">
-                                            <div className="totalmarginsml">
+                                            <div>
                                                 <RuleDisplay data={item} />
                                             </div>
                                         </div>

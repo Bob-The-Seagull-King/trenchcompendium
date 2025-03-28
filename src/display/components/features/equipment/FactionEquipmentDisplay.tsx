@@ -82,7 +82,7 @@ const FactionEquipmentDisplay = (props: any) => {
                 </div>
                 <div className={" itemrow_box borderthin borderstyler bordergrey"}>
                     <div className="totalmarginsml maxwidth centered-div">
-                        <span className=" maxwidth headersubtext boldtext colourgrey maxwidth">
+                        <span className=" maxwidth headersubtext boldtext colourgrey maxwidth wordbreak">
                             {
                                 factionequipmentObject.Cost + " " + 
                                 getCostType(factionequipmentObject.CostType)
@@ -94,7 +94,7 @@ const FactionEquipmentDisplay = (props: any) => {
                     <div className="totalmarginsml maxwidth centered-div">
                         {(factionequipmentObject.Limit != 0) &&
                             <>
-                            <span className="headersubtext boldtext colourgrey maxwidth">
+                            <span className="headersubtext boldtext colourgrey maxwidth wordbreak">
                                 {
                                     "LIMIT: " +  factionequipmentObject.Limit + " " +  equiprestrictions.join(', ') 
                                 }
@@ -102,7 +102,7 @@ const FactionEquipmentDisplay = (props: any) => {
                             </>
                         }{(factionequipmentObject.Limit == 0 && equiprestrictions.length > 0) &&
                             <>
-                            <span className="headersubtext boldtext colourgrey maxwidth">
+                            <span className="headersubtext boldtext colourgrey maxwidth wordbreak">
                                 {
                                     equiprestrictions.join(', ') 
                                 }

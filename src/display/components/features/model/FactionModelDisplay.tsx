@@ -70,7 +70,7 @@ const FactionModelDisplay = (props: any) => {
                 </div>
                 <div className={" itemrow_box borderthin borderstyler bordergrey"}>
                     <div className="totalmarginsml maxwidth centered-div">
-                        <span className=" maxwidth headersubtext boldtext colourgrey">
+                        <span className=" maxwidth headersubtext boldtext colourgrey wordbreak">
                             {
                                 factionmodelObject.Cost + " " + 
                                 getCostType(factionmodelObject.CostType)
@@ -79,16 +79,16 @@ const FactionModelDisplay = (props: any) => {
                     </div>
                 </div>
                 <div className={" itemrow_box borderthin borderstyler bordergrey"}>
-                    <div className="totalmarginsml maxwidth centered-div">
+                    <div className="totalmarginsml maxwidth centered-div ">
                         {minimum == maximum &&
                         <>
                         <span className="maxwidth headersubtext boldtext colourgrey">
                             {minimum != "0" &&
-                                        <>
+                                        <div className="wordbreak">
                                         {
                                             "LIMIT: " + minimum
                                         }
-                                        </>
+                                        </div>
                                     }
                             {minimum == "0" &&
                                     <>
@@ -102,7 +102,7 @@ const FactionModelDisplay = (props: any) => {
                             }
                         {minimum != maximum &&
                             <>
-                                <span className="maxwidth headersubtext boldtext colourgrey">
+                                <span className="maxwidth headersubtext boldtext colourgrey wordbreak">
                                     {
                                         "LIMIT: " + minimum + " - " + maximum
                                     }
