@@ -71,7 +71,7 @@ const BookRuleDisplay = (props: any) => {
                 {ruleObject.Sections.map((item) => (
                     <div key={item.title}>
                         <div id={item.title} className="verticalspacermed"/>
-                        <div className={'size-subtitle colorBasicText font-seriftext'}>
+                        <div className={'subtitle-letterspacing size-subtitle colorBasicText font-seriftext'}>
                             <div className='centered-div width-content'>
                                 {item.title || ""}
                                 <div className='horizontalspacermed hovermouse'>

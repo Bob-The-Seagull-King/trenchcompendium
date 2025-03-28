@@ -50,7 +50,7 @@ const SingleOptionSetDisplay = (props: any) => {
         
         <ErrorBoundary fallback={<div>Something went wrong with OptionSetStaticDisplay.tsx</div>}>
 
-            <div className="colordefault size-subtitle font-seriftext">
+            <div className="colordefault size-subtitle font-seriftext subtitle-letterspacing">
                 { OptionSet.Name }
             </div>
             
