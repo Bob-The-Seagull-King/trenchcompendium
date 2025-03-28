@@ -53,7 +53,7 @@ const CompendiumBasePage: React.FC<IControllerProp> = (prop: any) => {
 
         function GetContentsTableCampaign() {
             const ContentsList : ContentsLink[] = [];
-            ContentsList.push({ name: "Exploration", route: "exploration"})
+            ContentsList.push({ name: "Exploration", route: "explorationtable"})
             ContentsList.push({ name: "Injuries", route: "injury"})
             ContentsList.push({ name: "Patrons", route: "patron"})
             ContentsList.push({ name: "Skills", route: "skillgroup"})

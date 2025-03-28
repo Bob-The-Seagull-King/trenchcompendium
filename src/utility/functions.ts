@@ -220,6 +220,11 @@ export function getRouteName(_route: string) {
         case '/compendium/faction': return "Factions";
         case '/compendium/equipment': return "Equipment & Weapons";
         case '/compendium/model': return "Models";
+        case '/compendium/scenario': return "Scenarios";
+        case '/compendium/explorationtable': return "Locations";
+        case '/compendium/injury': return "Injuries";
+        case '/compendium/patron': return "Patrons";
+        case '/compendium/skillgroup': return "Skills";
         default: return "Trench Crusade"
     }
 }
