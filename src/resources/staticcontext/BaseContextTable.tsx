@@ -526,10 +526,10 @@ export const BaseContextCallTable : CallEventTable = {
             return ( 
             
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    <div className="row">
-                        <div className="verticalspacerbig" />
-                        <div className="col">
-                            <GenericDisplay  d_colour={'default'} d_name={relayVar.value.Name} d_type={"sub"} d_method={() => <ExplorationLocationDisplay data={relayVar.value} />}/>
+                    <div className="verticalspacersml"/>
+                    <div className="borderstyler bordergrey">
+                        <div className="totalmarginsml">
+                            <ExplorationLocationDisplay data={relayVar.value} />
                         </div>
                     </div>
                 </ErrorBoundary>
@@ -592,10 +592,10 @@ export const BaseContextCallTable : CallEventTable = {
             return ( 
             
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    <div className="row">
-                        <div className="verticalspacerbig" />
-                        <div className="col">
-                            <GenericDisplay  d_colour={'default'} d_name={relayVar.value.Name} d_type={"sub"} d_method={() => <SkillDisplay data={relayVar.value} />}/>
+                    <div className="verticalspacersml"/>
+                    <div className="borderstyler bordergrey">
+                        <div className="totalmarginsml">
+                            <SkillDisplay data={relayVar.value} />
                         </div>
                     </div>
                 </ErrorBoundary>

@@ -126,6 +126,12 @@
     grid-template-columns: 2fr 2fr 2fr;
   }
 
+  .tablerow_container {
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+
+  }
+
   .buttonrow_container {
     display: grid;
     grid-template-columns: 5fr 1fr 5fr;
@@ -153,4 +159,8 @@
   .flex-rectangle {
     flex: 1; /* Makes it responsive */
     aspect-ratio: 2 / 1;
+  }
+
+  .square-unflex {
+    aspect-ratio: 1 / 1;
   }

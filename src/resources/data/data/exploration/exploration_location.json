@@ -16,7 +16,7 @@
         "location_value": 4,
         "options": [{
             "ref_id" : "ot_moonshinestash",
-            "name" : "Moonshine Stash Options",
+            "name" : "",
             "description" : [],
             "category" : "type",
             "type" : "text",
@@ -115,7 +115,7 @@
         "location_value": 5,
         "options": [{
             "ref_id" : "ot_heavyweaponscache",
-            "name" : "Heavy Weapons Cache Options",
+            "name" : "",
             "description" : [],
             "category" : "type",
             "type" : "text",
