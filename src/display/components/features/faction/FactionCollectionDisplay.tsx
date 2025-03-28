@@ -38,19 +38,34 @@ const FactionCollectionDisplay = (props: any) => {
         
     }
 
+    function GetBaseName(factioncol : FactionCollection) {
+        for (let i = 0; i < factioncol.SubModelsList.length; i++) {
+            if (factioncol.SubModelsList[i].var_name == 'base') {
+                return factioncol.SubModelsList[i].faction.Name;
+            }
+        }
+        return ""
+    }
+
     return (
         <ErrorBoundary fallback={<div>Something went wrong with ModelCollectionDisplay.tsx</div>}>
-            <div className='abilityInternalStructure'>
-                <div className={"row sidebarriers"}>
-                    <Form.Control className={"borderstyler subborder" + getColour(selectedModel.faction.Team) } as="select" aria-label="Default select example"  placeholder="Member Type" onChange={(e: { target: { value: any; }; }) => { updateItem(e.target.value)    } } >
+            <div className=''>
+                <div className="colorBasicText size-section font-seriftext">
+                    {GetBaseName(factioncollectionObject)}
+                </div>
+                {factioncollectionObject.SubModelsList.length > 1 &&
+                <div>
+                    <Form.Control className={"borderstyler hovermouse bordergrey overcomeradius" } as="select" aria-label="Default select example"  placeholder="Member Type" onChange={(e: { target: { value: any; }; }) => { updateItem(e.target.value)    } } >
                         {factioncollectionObject.SubModelsList.map((item) => ( 
-                            <option key="modeloption" value={item.var_name}>{makestringpresentable(item.var_name)}</option> 
+                            <option key="modeloption" value={item.var_name}>{makestringpresentable((item.var_name == "base")? (item.faction.Name != undefined? item.faction.Name : "") : item.var_name)}</option> 
                         ))}
                     </Form.Control>
+                    <div className="verticalspacermed"/>
                 </div>
+                }
                 
             </div>
-            <div className="row">
+            <div className="">
                 <div key={_keyvar}>
                     <FactionDisplay data={selectedModel.faction}/>
                 </div>

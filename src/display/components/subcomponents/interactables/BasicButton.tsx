@@ -23,7 +23,7 @@ const BasicButton = (props: any) => {
 
     return (
         <ErrorBoundary fallback={<div>Something went wrong with TagDisplay.tsx</div>}>
-            <div key={active.toString()} onClick={() => RunPressFunc()} className={"centered-div borderstyler " + (active? "bordergrey backgroundBgCard hovermouse" : "borderBgCard backgroundBgBase")}>
+            <div key={active.toString()} onClick={() => RunPressFunc()} className={"maxwidth menuheight centered-div borderstyler " + (active? "bordergrey backgroundBgCard hovermouse" : "borderBgCard backgroundBgBase")}>
                 <div className={"centered-div totalmarginsml " + (active? "colorBasicText" : "colorBgCard")}>
                     {DirectionArr == "l" &&
                         <FontAwesomeIcon className={"horizontalspacermed " + (active? "colorBasicText" : "colorBgCard")} icon={faChevronLeft} />

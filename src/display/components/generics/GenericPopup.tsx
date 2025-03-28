@@ -42,19 +42,18 @@ const GenericPopup = (props: any) => {
           <Modal data-theme={theme} show={show} size="lg" contentClassName="overcomeBackground" dialogClassName=""  onHide={handleClose} keyboard={true}  centered>
               <Modal.Body > 
                 
-                <div className={'backgroundBgCard basestructure font-default borderstyler border'+getColour(DisplayColour)}>
-                    <h1 className={'titleShape titlebody ' + DisplayType + 'background'+getColour(DisplayColour)}>
-                        {DisplayName || ""}
-                        
-                        <div className="row float-end">
-                            <div className='col-12 float-end'>
-                                <Button className="no-padding" variant="" onClick={() => handleClose()}>
-                                    <FontAwesomeIcon icon={faCircleXmark} className="colorWhite contentpacklabel no-margin" />
-                                </Button>
-                            </div>
+                <div className={'backgroundBgCard basestructure font-default borderstyler bordergrey'}>
+                    <div className={'borderthin bordergrey centered-div colorBasicText size-subtitle font-seriftext background'+getColour(DisplayColour)}>
+                        <div className="">
+                            <Button className="no-padding" variant="" onClick={() => handleClose()}>
+                                <FontAwesomeIcon icon={faCircleXmark} className="colorBasicText size-section" />
+                            </Button>
                         </div>
-                    </h1>
-                    <div className={"totalmarginmed colorBasicText"}>
+                        <div className="maxwidth size-section">
+                            {DisplayName || ""}
+                        </div>
+                    </div>
+                    <div className={"colorBasicText"}>
                         {displayMethod()}
                     </div>
                 </div>

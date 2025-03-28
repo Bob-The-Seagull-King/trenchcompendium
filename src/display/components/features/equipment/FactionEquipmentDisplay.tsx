@@ -72,34 +72,55 @@ const FactionEquipmentDisplay = (props: any) => {
 
     return (
         <ErrorBoundary fallback={<div>Something went wrong with FactionModelDisplay.tsx</div>}>
-            <div key={_keyvar}>
-            <div className='textmaxwidth row alignleft'>
-                <div className="col-8">
-                    <GenericPopup  d_colour={"default"} titlename={factionequipmentObject.EquipmentItem.Name} d_name={factionequipmentObject.EquipmentItem.Name} d_type={""} d_method={() => 
-                        <EquipmentDisplay data={factionequipmentObject.EquipmentItem} />}/>
+            <div className="facdisplayrow_container backgroundBgBasic" key={_keyvar}>
+                <div className={" itemrow_box borderthin borderstyler bordergrey"}>
+                    <div className="totalmarginsml centered-div">
+                        
+                        <GenericPopup  d_colour={"default"} titlename={factionequipmentObject.EquipmentItem.Name} d_name={factionequipmentObject.EquipmentItem.Name} d_type={""} d_method={() => 
+                            <EquipmentDisplay data={factionequipmentObject.EquipmentItem} />}/>
+                    </div>
                 </div>
-                <div className="col-4">
-                    <span className=" headersubtext boldtext colourgrey">
-                        {
-                            factionequipmentObject.Cost + " " + 
-                            getCostType(factionequipmentObject.CostType)
-                        }
-                    </span>
-                </div>
-                
-                <div className="col-12" key={_keyvar}>
-                    {factionequipmentObject.Limit != 0 &&
-                        <>
-                        <span className="headersubtext boldtext colourgrey">
+                <div className={" itemrow_box borderthin borderstyler bordergrey"}>
+                    <div className="totalmarginsml maxwidth centered-div">
+                        <span className=" maxwidth headersubtext boldtext colourgrey maxwidth">
                             {
-                                   "LIMIT: " +  factionequipmentObject.Limit + " " +  equiprestrictions.join(', ') 
+                                factionequipmentObject.Cost + " " + 
+                                getCostType(factionequipmentObject.CostType)
                             }
                         </span>
-                        </>
-                    }
+                    </div>
                 </div>
+                <div className={" itemrow_box borderthin borderstyler bordergrey"}>
+                    <div className="totalmarginsml maxwidth centered-div">
+                        {(factionequipmentObject.Limit != 0) &&
+                            <>
+                            <span className="headersubtext boldtext colourgrey maxwidth">
+                                {
+                                    "LIMIT: " +  factionequipmentObject.Limit + " " +  equiprestrictions.join(', ') 
+                                }
+                            </span>
+                            </>
+                        }{(factionequipmentObject.Limit == 0 && equiprestrictions.length > 0) &&
+                            <>
+                            <span className="headersubtext boldtext colourgrey maxwidth">
+                                {
+                                    equiprestrictions.join(', ') 
+                                }
+                            </span>
+                            </>
+                        }{(factionequipmentObject.Limit == 0 && equiprestrictions.length == 0) &&
+                            <>
+                            <span className="headersubtext boldtext colourgrey maxwidth">
+                                {
+                                    "-" 
+                                }
+                            </span>
+                            </>
+                        }
+                    </div>
                 </div>
             </div>
+            
         </ErrorBoundary>
     )
 }

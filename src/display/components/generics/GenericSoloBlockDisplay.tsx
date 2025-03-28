@@ -9,7 +9,7 @@ import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons'
 // Classes
 import { getColour } from '../../../utility/functions';
 
-const GenericCollapsableBlockDisplay = (props: any) => {
+const GenericSoloBlockDisplay = (props: any) => {
     const DisplayColour : string = props.d_colour;
     const DisplayName : string = props.d_name;
     const displayMethod = props.d_method
@@ -43,4 +43,4 @@ const GenericCollapsableBlockDisplay = (props: any) => {
     )
 }
 
-export default GenericCollapsableBlockDisplay;
+export default GenericSoloBlockDisplay;

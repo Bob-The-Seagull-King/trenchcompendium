@@ -61,44 +61,55 @@ const FactionModelDisplay = (props: any) => {
 
     return (
         <ErrorBoundary fallback={<div>Something went wrong with FactionModelDisplay.tsx</div>}>
-            <div className='textmaxwidth row alignleft' key={_keyvar}>
-                <div className="col-md-4 col-7">
-                    <GenericPopup  d_colour={factionmodelObject.Model.Team} titlename={factionmodelObject.Model.Name} d_name={factionmodelObject.Model.Name} d_type={""} d_method={() => 
-                        <div className="abilityInternalStructure">
-                            <ModelDisplay data={factionmodelObject.Model} />
-                    </div>}/>
+            <div className="facdisplayrow_container backgroundBgBasic" key={_keyvar}>
+                <div className={" itemrow_box borderthin borderstyler bordergrey"}>
+                    <div className="totalmarginsml centered-div">
+                        <GenericPopup  d_colour={""} titlename={factionmodelObject.Model.Name} d_name={factionmodelObject.Model.Name} d_type={""} d_method={() => 
+                            <ModelDisplay data={factionmodelObject.Model} />}/>
+                    </div>
                 </div>
-                <div className="col-md-2 col-4">
-                    <span className=" headersubtext boldtext colourgrey">
-                        {
-                            factionmodelObject.Cost + " " + 
-                            getCostType(factionmodelObject.CostType)
-                        }
-                    </span>
-                </div>
-                <div className="col-md-6 col-12">
-                    {minimum == maximum &&
-                        <>
-                        <span className=" headersubtext boldtext colourgrey">
-                            {minimum != "0" &&
-                                <>
-                                {
-                                    "LIMIT: " + minimum
-                                }
-                                </>
+                <div className={" itemrow_box borderthin borderstyler bordergrey"}>
+                    <div className="totalmarginsml maxwidth centered-div">
+                        <span className=" maxwidth headersubtext boldtext colourgrey">
+                            {
+                                factionmodelObject.Cost + " " + 
+                                getCostType(factionmodelObject.CostType)
                             }
                         </span>
-                        </>
-                    }
-                    {minimum != maximum &&
+                    </div>
+                </div>
+                <div className={" itemrow_box borderthin borderstyler bordergrey"}>
+                    <div className="totalmarginsml maxwidth centered-div">
+                        {minimum == maximum &&
                         <>
-                            <span className="headersubtext boldtext colourgrey">
-                                {
-                                    "LIMIT: " + minimum + " - " + maximum
+                        <span className="maxwidth headersubtext boldtext colourgrey">
+                            {minimum != "0" &&
+                                        <>
+                                        {
+                                            "LIMIT: " + minimum
+                                        }
+                                        </>
+                                    }
+                            {minimum == "0" &&
+                                    <>
+                                    {
+                                        "-"
+                                    }
+                                    </>
                                 }
-                            </span>
-                        </>
-                    }
+                                </span>
+                                </>
+                            }
+                        {minimum != maximum &&
+                            <>
+                                <span className="maxwidth headersubtext boldtext colourgrey">
+                                    {
+                                        "LIMIT: " + minimum + " - " + maximum
+                                    }
+                                </span>
+                            </>
+                        }
+                    </div>
                 </div>
             </div>
         </ErrorBoundary>
