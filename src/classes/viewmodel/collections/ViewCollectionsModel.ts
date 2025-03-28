@@ -46,6 +46,13 @@ class ViewCollectionsModel {
         }
     }
 
+    public PrelimSearch() {
+        this.dataresults = Requester.MakeRequest(this.searchParam as IRequest);
+        if (this.dataresults.length == undefined) {
+            this.dataresults = [this.dataresults]
+        }
+    }
+
     public RunMultiUnitSearch( variantsearchparams : VariantSearch) {
         this.dataresults = Requester.MakeRequest(this.searchParam as IRequest);
         if (this.dataresults.length == undefined) {

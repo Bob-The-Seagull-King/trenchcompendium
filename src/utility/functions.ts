@@ -212,7 +212,6 @@ export function GetObjectTagSpecialActionVal(tag: ObjectTag) {
  * @returns A string name for the route endpoint.
  */
 export function getRouteName(_route: string) {
-    console.log(_route)
     switch (_route) {
         case '/compendium/gamerule': return "Game Rules";
         case '/compendium/campaignrule': return "Campaign Rules";

@@ -73,7 +73,7 @@ const FactionEquipmentDisplay = (props: any) => {
     return (
         <ErrorBoundary fallback={<div>Something went wrong with FactionModelDisplay.tsx</div>}>
             <div className="facdisplayrow_container backgroundBgBasic" key={_keyvar}>
-                <div className={" itemrow_box borderthin borderstyler bordergrey"}>
+                <div className={" itemrow_box borderthin borderstyler bordergrey "}>
                     <div className="totalmarginsml centered-div">
                         
                         <GenericPopup  d_colour={"default"} titlename={factionequipmentObject.EquipmentItem.Name} d_name={factionequipmentObject.EquipmentItem.Name} d_type={""} d_method={() => 

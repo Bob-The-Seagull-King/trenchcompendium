@@ -317,8 +317,6 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         laconic: "Rules for playing an extended campaign",
         menushowitems: true,
         returnDisplay(item: any) {
-            
-            console.log(item);
             return (
                 
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>

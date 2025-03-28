@@ -14,7 +14,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const BookRuleDisplay = (props: any) => {
-    console.log(props.data)
     const ruleObject: BookRule = props.data
 
     function GetContents(rules : BookRule) {

@@ -35,8 +35,6 @@ import ModelDisplay from '../model/ModelDisplay';
 const FactionDisplay = (props: any) => {
     const factionObject: Faction = props.data
 
-    console.log(factionObject);
-
     function ModelIsElite(model : Model) {
         for (let i = 0; i < model.KeyWord.length; i++) {
             if (model.KeyWord[i].ID == "kw_elite") {
@@ -197,11 +195,12 @@ const FactionDisplay = (props: any) => {
                             }
                         </div>
                     }
+                    <div className="verticalspacermed"/>
                 </div>
                     
                 {factionObject.Models.filter((item) => (item.Captain == true && item.Mercenary == false)).length > 0 &&
                         <>
-                            <div className="verticalspacermed"/>
+                            <div className="verticalspacersml"/>
                             <div className="borderthin bordergrey">
                                 <div className="borderthin bordergrey backgroundBgCard">
                                     <div className="totalmarginsml">
@@ -229,7 +228,7 @@ const FactionDisplay = (props: any) => {
                     }    
                 {factionObject.Models.filter((item) => (item.Captain == false && item.Mercenary == false && (ModelIsElite(item.Model) == true))).length > 0 &&
                     <>
-                        <div className="verticalspacermed"/>
+                        <div className="verticalspacersml"/>
                         <div className="borderthin bordergrey">
                             <div className="borderthin bordergrey backgroundBgCard">
                                 <div className="totalmarginsml">
@@ -257,7 +256,7 @@ const FactionDisplay = (props: any) => {
                     } 
                 {factionObject.Models.filter((item) => (item.Captain == false && item.Mercenary == false && (ModelIsElite(item.Model) == false))).length > 0 &&
                     <>
-                        <div className="verticalspacermed"/>
+                        <div className="verticalspacersml"/>
                         <div className="borderthin bordergrey">
                             <div className="borderthin bordergrey backgroundBgCard">
                                 <div className="totalmarginsml">
@@ -286,7 +285,7 @@ const FactionDisplay = (props: any) => {
                 
                 {factionObject.Models.filter((item) => (item.Mercenary == true)).length > 0 &&
                     <>
-                        <div className="verticalspacermed"/>
+                        <div className="verticalspacersml"/>
                         <div className="borderthin bordergrey">
                             <div className="borderthin bordergrey backgroundBgCard">
                                 <div className="totalmarginsml">
@@ -331,7 +330,7 @@ const FactionDisplay = (props: any) => {
                     <div className='abilityInternalStructure'>
                     {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "melee" && (containsTag(item.Tags, "exploration_only") == false))).length > 0 &&
                         <>
-                            <div className="verticalspacermed"/>
+                            <div className="verticalspacersml"/>
                             <div className="borderthin bordergrey">
                                 <div className="borderthin bordergrey backgroundBgCard">
                                     <div className="totalmarginsml">
@@ -354,7 +353,7 @@ const FactionDisplay = (props: any) => {
                     }
                     {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "ranged" && (containsTag(item.Tags, "exploration_only") == false))).length > 0 &&
                         <>
-                            <div className="verticalspacermed"/>
+                            <div className="verticalspacersml"/>
                             <div className="borderthin bordergrey">
                                 <div className="borderthin bordergrey backgroundBgCard">
                                     <div className="totalmarginsml">
@@ -377,7 +376,7 @@ const FactionDisplay = (props: any) => {
                     }
                     {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "armour" && (containsTag(item.Tags, "exploration_only") == false))).length > 0 &&
                         <>
-                            <div className="verticalspacermed"/>
+                            <div className="verticalspacersml"/>
                             <div className="borderthin bordergrey">
                                 <div className="borderthin bordergrey backgroundBgCard">
                                     <div className="totalmarginsml">
@@ -400,7 +399,7 @@ const FactionDisplay = (props: any) => {
                     }
                     {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "equipment" && (containsTag(item.Tags, "exploration_only") == false))).length > 0 &&
                         <>
-                            <div className="verticalspacermed"/>
+                            <div className="verticalspacersml"/>
                             <div className="borderthin bordergrey">
                                 <div className="borderthin bordergrey backgroundBgCard">
                                     <div className="totalmarginsml">
@@ -423,7 +422,7 @@ const FactionDisplay = (props: any) => {
                     }
                     {factionObject.EquipmentItems.filter((item) => ((containsTag(item.Tags, "exploration_only") == true))).length > 0 &&
                         <>
-                            <div className="verticalspacermed"/>
+                            <div className="verticalspacersml"/>
                             <div className="borderthin bordergrey">
                                 <div className="borderthin bordergrey backgroundBgCard">
                                     <div className="totalmarginsml">
