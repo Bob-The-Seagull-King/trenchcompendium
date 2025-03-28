@@ -61,6 +61,7 @@ const BookRuleDisplay = (props: any) => {
                 <div className="colourBasicText font-default size-default">
                     {returnDescription(ruleObject, ruleObject.Description)}
                 </div>
+                {ruleObject.Sections != undefined && <>
                 {ruleObject.Sections.length > 1 &&
                     <div>
                         <div className="verticalspacermed"/>
@@ -92,7 +93,7 @@ const BookRuleDisplay = (props: any) => {
                         </div>
                     </div>
                 ))
-                }
+                }</>}
             </div>
         </ErrorBoundary>
     )
