@@ -66,7 +66,9 @@ const DisplayFactionModelDisplay = (props: any) => {
                 {factionmodelObject.Factions.map((item) => (
                     <span className='smallgapright' key={item.ID}>
                         <GenericPopup  d_colour={"grey"} titlename={item.Name + (factionmodelObject.Factions.indexOf(item) < factionmodelObject.Factions.length-1 ? ", " : "")} d_name={item.Name} d_type={""} d_method={() => 
-                            <FactionDisplay data={item} />}/>
+                            <div className="totalmarginmed">
+                                <FactionDisplay data={item} />
+                            </div>}/>
                     </span>
                 ))}
             </div>
