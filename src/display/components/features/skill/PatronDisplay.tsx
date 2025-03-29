@@ -15,32 +15,53 @@ import GenericTableItemDisplay from '../../../components/generics/GenericTableIt
 import { SkillGroup } from '../../../../classes/feature/skillgroup/SkillGroup';
 import SkillDisplay from './SkillDisplay';
 import { Patron } from '../../../../classes/feature/skillgroup/Patron';
+import ItemRow from '../../../components/subcomponents/description/ItemRow';
+import GenericCollapsableBlockDisplay from '../../../components/generics/GenericCollapsableBlockDisplay';
 
 const PatronDisplay = (props: any) => {
     const patronObject : Patron = props.data
 
     return (
         <ErrorBoundary fallback={<div>Something went wrong with ExplorationTableDisplay.tsx</div>}>
-            <div className='abilityInternalStructure'>
-                <div className='row'>
-                     {returnDescription(patronObject, patronObject.Description)}
-                     <div className='verticalspacerbig'/>
-                     <div className="filterbox">
-                        {patronObject.Factions.map((item) => ( 
+            <div className=''>
+                <div className=''>
+                     <div>
+                        {returnDescription(patronObject, patronObject.Description)}
+                     </div>
+                     <div className='verticalspacermed'/>
+                     <div className="borderthin bordergrey">
+                        <ItemRow title={"Available To"} value={() => <div>{patronObject.Factions.map((item) => ( 
                             <span key={item.Name} className="colordefault bodytext complextext small-side-margin">
                                 {
                                    " " +  item.Name + " "
                                 }
                             </span>
-                        ))} 
+                        ))} </div>}/>
+                        
                      </div>
-                     <div className='verticalspacerbig'/>
                 </div>
+                <div className='verticalspacermed'/>
+                <div className="borderthin bordergrey">
                 {patronObject.Skills.map((item) => (
                     <div key={item.ID}>
-                        <GenericTableItemDisplay d_value={null} d_colour={'default'} d_valuetitle={""} d_name={item.Name} d_type={""} d_method={() => <SkillDisplay data={item} />}/>
+                        <GenericCollapsableBlockDisplay 
+                            d_name={item.Name} 
+                            d_colour={"grey"} 
+                            d_state={false}  
+                            bordertype={0}
+                            d_border={true}
+                            d_col={"BgCard"}
+                            d_margin={"sml"}
+                            d_method={() => <>
+                                <div className="backgroundBgBasic borderthin bordergrey">
+                                    <div className='totalmarginsml'>
+                                    <SkillDisplay data={item} />
+                                    </div>
+                                </div>
+                            </>} />
                     </div>
                 ))}
+                </div>
             </div>
         </ErrorBoundary>
     )
