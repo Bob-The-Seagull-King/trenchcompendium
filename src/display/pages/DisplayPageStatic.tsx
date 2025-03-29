@@ -15,6 +15,7 @@ import GenericTableItemDisplay from "../components/generics/GenericTableItemDisp
 import SkillGroupDisplay from "../components/features/skill/SkillGroupDisplay";
 import PatronDisplay from "../components/features/skill/PatronDisplay";
 import GenericCollapsableBlockDisplay from "../components/generics/GenericCollapsableBlockDisplay";
+import GenericTabledBlockDisplay from "../components/generics/GenereicTabledBlockDisplay";
 
 export interface DisplayCollectionType {
     searchId      : string,
@@ -376,7 +377,23 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
             return (
                 
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                        <GenericTableItemDisplay d_value={item.TableVal} d_colour={'default'} d_valuetitle={"Result: "} d_name={item.Name} d_type={""} d_method={() => <InjuryDisplay data={item} />}/>
+                    <div className="borderthin bordergrey">
+                        <GenericTabledBlockDisplay 
+                                d_name={item.Name} 
+                                d_colour={"grey"} 
+                                d_state={false}  
+                                bordertype={0}
+                                d_border={false}
+                                d_margin={"sml"}
+                                d_content={item.TableVal}
+                                d_method={() => <>
+                                    <div className="borderthin backgroundBgCard bordergrey">
+                                        <div className="totalmarginsml">
+                                        <InjuryDisplay data={item} />
+                                        </div>
+                                    </div>
+                                </>} />
+                        </div>
                 </ErrorBoundary>
             )
         },

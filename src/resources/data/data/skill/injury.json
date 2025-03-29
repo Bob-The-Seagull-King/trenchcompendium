@@ -14,7 +14,7 @@
                 "content": "The wound proved to be fatal. The character is permanently lost even if this was not the third Battle Scar it sustained."
             }
         ],
-        "table_val": 11,
+        "table_val": [11],
         "options": []
     },
     {
@@ -33,7 +33,7 @@
                 "content": "The enemy captures the character. Players can negotiate a ransom price in ducats for the release of the character. For as long as this is not paid, the character remains in the hands of the opposing player. Otherwise, treat this result as Full Recovery. Any equipment belonging to the character is lost in either case."
             }
         ],
-        "table_val": 12,
+        "table_val": [12],
         "options": []
     }
 ]

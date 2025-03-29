@@ -10,11 +10,11 @@ import { ContextObject, IContextObject } from '../../contextevent/contextobject'
 import { BaseAddon, IBaseAddon } from './BaseAddon';
 
 interface IInjury extends IBaseAddon {
-    table_val : number
+    table_val : number[]
 }
 
 class Injury extends BaseAddon {
-    public TableVal : number;
+    public TableVal : string;
 
     /**
      * Assigns parameters and creates a series of description
@@ -24,7 +24,7 @@ class Injury extends BaseAddon {
     public constructor(data: IInjury, parent : ContextObject | null)
     {
         super(data, parent)
-        this.TableVal = data.table_val;
+        this.TableVal = data.table_val.join('-');
     }
 
 }
