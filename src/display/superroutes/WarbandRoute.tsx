@@ -1,4 +1,7 @@
+
 import '../../resources/styles/vendor/bootstrap.css'
+import 'bootstrap/dist/css/bootstrap.css'
+import '../../resources/styles/_mainstylesource.scss'
 import React, { useEffect, useState } from 'react'
 import { ErrorBoundary } from "react-error-boundary";
 
@@ -23,7 +26,6 @@ const WarbandRoute: React.FC<IControllerProp> = (prop) => {
 
     // State
     const [_keyval, setKeyVal] = useState(0);
-
     const { state } = useLocation();
 
     useEffect(() => {
