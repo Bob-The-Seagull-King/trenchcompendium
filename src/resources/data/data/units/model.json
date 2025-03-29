@@ -439,7 +439,8 @@
                 "additions": [
                     {
                         "type": "melee",
-                        "hands": 2
+                        "hands": 2,
+                        "unrestricted": true
                     }
                 ]
             }
