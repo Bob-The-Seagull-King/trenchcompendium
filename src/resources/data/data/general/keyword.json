@@ -252,16 +252,14 @@
         "id": "kw_demonic",
         "source": "core",
         "tags": {
-            "category": "faction",
-            "faction": "fc_courtofthesevenheadedserpent"
+            "category": "model"
         },
         "name": "DEMONIC",
         "contextdata": {"option_search_viable" : {}},
         "description": [            
             {
                 "tags": {"desc_type" : "default"},
-                "content": "This model is part of the Court of the Seven Headed Serpent faction. Due to their infernal origins, models with the Keyword DEMONIC negate additional BLOOD MARKERS caused by the Keyword FIRE.",
-                "glossary": [{"val": "BLOOD MARKERS", "id": "kw_bloodmarker"},{"val": "FIRE", "id": "kw_fire"}]
+                "content": "The model is supernaturally tainted by Hell and is vulnerable to holy powers."
             }
         ]
     },
@@ -574,6 +572,58 @@
             {
                 "tags": {"desc_type" : "default"},
                 "content": "Bayonets can only be attached to weapons fitted with a ‘Bayonet lug’. They do not count towards the maximum melee weapons a model can carry."
+            }
+        ]
+    },
+    {
+        "id": "kw_golem",
+        "source": "core",
+        "tags": {
+            "category": "model"
+        },
+        "name": "GOLEM",
+        "contextdata": {"option_search_viable" : {}},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This model is a Golem, constructed from lost Kabbalistic knowledge – and it is exceedingly hard to destroy. It treats Out of Action injury results as Down unless the attack is made using the Bloodbath rule, in which case an Out of Action result removes the model from play as standard. It does not suffer additional BLOOD MARKERS from weapons with the Keyword GAS and is not affected by the Keyword FEAR. The controlling player cannot remove BLOOD MARKERS from the Golem by any means, though the opponent can use them as standard.",
+                "glossary": [
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"},
+                    {"val": "FEAR", "id": "kw_fear"},
+                    {"val": "GAS", "id": "kw_gas"}
+                ]
+            }
+        ]
+    },
+    {
+        "id": "kw_thecourt",
+        "source": "core",
+        "tags": {
+            "category": "faction",
+            "faction": "fc_courtofthesevenheadedserpent"
+        },
+        "name": "THE COURT",
+        "contextdata": {"option_search_viable" : {}},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This model is part of The Court of the Seven Headed Serpent faction."
+            }
+        ]
+    },
+    {
+        "id": "kw_leader",
+        "source": "core",
+        "tags": {
+            "category": "model"
+        },
+        "name": "LEADER",
+        "contextdata": {"option_search_viable" : {}},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "As long as this model is not taken Out of Action, add +1 DICE to any Morale tests the warband has to take.",
+                "glossary": [{"val": "+1 DICE", "id": "kw_plusdice"}]
             }
         ]
     }

@@ -381,5 +381,22 @@
         "restricted_models" : [],
         "warband_minimum" : 0,
         "warband_maximum" : 2
+    },
+    {
+        "id": "rel_fc_md_scriptureguardian",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {},
+        "options": [],
+        "faction_id" : ["fc_newantioch","fc_trenchpilgrim","fc_ironsultanate_fv_fidaiofalamut","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_defendersoftheironwall"],
+        "model_id" : "md_scriptureguardian",
+        "captain" : false,
+        "mercenary": true,
+        "cost" : 7,
+        "cost_type" : 1,
+        "restricted_models" : [],
+        "warband_minimum" : 0,
+        "warband_maximum" : 1
     }
 ]

@@ -377,5 +377,34 @@
             }
         ],
         "options": []
+    },
+    {
+        "id": "ab_slow",
+        "name": "Slow",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Scripture Guardian has a halved Dash distance (i.e. 3”)."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_vengefulscripture",
+        "name": "Vengefule Scripture",
+        "source": "core",
+        "tags": {"action": true},
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Scripture Guardian reads words from the holy (or unholy!) text it carries. This is an attack ACTION with 18” range, and it can be used in either Melee or as a Ranged attack (though not both during the same Activation). Use Ranged and Melee Characteristics as appropriate. This attack ignores armour and cover. For each BLOOD MARKER the target has, add +1 to the Injury roll. Note that if armed with a melee weapon, both the Melee attack and the use of the Vengeageful Scripture can be used simultaneously.",
+                "glossary": [{"val": "BLOOD MARKER", "id": "kw_bloodmarker"},{"val": "ACTION", "id": "kw_action"}]
+            }
+        ],
+        "options": []
     }
 ]

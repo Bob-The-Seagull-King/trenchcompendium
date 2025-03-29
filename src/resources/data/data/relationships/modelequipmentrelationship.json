@@ -94,5 +94,16 @@
         "model_id": [],
         "mandatory_equipment": ["eq_mamlukgreatsword"],
         "removable": false
+    },
+    {
+        "id": "rel_md_eq_scriptureguardian",
+        "source": "core",
+        "tags": {},
+        "name": "Scripture Guardian Equipment",
+        "contextdata": {},
+        "options": [],
+        "model_id": ["md_scriptureguardian"],
+        "mandatory_equipment": ["eq_combathelmet","eq_reinforcedarmour"],
+        "removable": false
     }
 ]
