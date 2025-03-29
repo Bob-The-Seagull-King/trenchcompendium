@@ -43,7 +43,7 @@ const ModelEquipmentDisplay = (props: any) => {
     return (
         <ErrorBoundary fallback={<div>Something went wrong with ModelEquipmentDisplay.tsx</div>}>
             
-            {(abilityObject.EquipmentItems.length > 1 || collection_name != "Pre-Equipped Items") && 
+            {(collection_name != "Pre-Equipped Items") && 
             <div>
             <GenericCollapsableBlockDisplay 
                 d_name={collection_name} 
@@ -72,7 +72,7 @@ const ModelEquipmentDisplay = (props: any) => {
                 
             </div>
             }
-            {(abilityObject.EquipmentItems.length == 1 && collection_name == "Pre-Equipped Items") && 
+            {(collection_name == "Pre-Equipped Items") && 
             <div>
                 {abilityObject.EquipmentItems.map((item) => ( 
                             <div key={"model_equipment_"+abilityObject.ID+"_equipment_id_"+item.ID}>

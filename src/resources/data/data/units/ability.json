@@ -394,7 +394,7 @@
     },
     {
         "id": "ab_vengefulscripture",
-        "name": "Vengefule Scripture",
+        "name": "Vengeful Scripture",
         "source": "core",
         "tags": {"action": true},
         "contextdata": {},
