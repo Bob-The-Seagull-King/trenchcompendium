@@ -15,13 +15,13 @@ import ContentPackDisplay from '../../../components/features/contentpack/Content
 // Font Awesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClone, faDownload, faEye, faSquareCaretUp, faSquareCaretDown, faTrash } from '@fortawesome/free-solid-svg-icons'
-import { Item } from '../../../../classes/saveitems/item';
-import { ItemManager } from '../../../../classes/saveitems/itemmanager';
 import { Button } from 'react-bootstrap';
+import { WarbandManager } from '../../../../classes/saveitems/WarbandManager';
+import { WarbandContentItem } from '../../../../classes/saveitems/WarbandContentItem';
 
-const SaveItemDisplay = (prop: any) => {
-    const Manager : ItemManager = prop.parent;
-    const ItemItem: Item = prop.data;
+const WarbandItemDisplay = (prop: any) => {
+    const Manager : WarbandManager = prop.parent;
+    const WarbandItem: WarbandContentItem = prop.data;
     const updateHost = prop.statefunction;
     const UpdateFunction = prop.updater;
     
@@ -29,32 +29,32 @@ const SaveItemDisplay = (prop: any) => {
     const ref = useRef<HTMLDivElement>(null);
 
     function ViewContentPack() {
-        UpdateFunction(ItemItem, true)
+        UpdateFunction(WarbandItem, true)
     }
     
     // Move a unit up or down in the list
     function SwapUnits(direction : boolean) {
-        Manager.ShufflePack(ItemItem, direction);
+        Manager.ShufflePack(WarbandItem, direction);
         updateHost();
     }
 
     function removeContentPack() {
-        Manager.DeletePack(ItemItem);
+        Manager.DeletePack(WarbandItem);
         updateHost();
     }
 
     function copyContentPack() {
-        Manager.DuplicateItem(ItemItem);
+        Manager.DuplicateItem(WarbandItem);
         updateHost();
     }
 
     const exportData = () => {
         const jsonString = `data:text/json;chatset=utf-8,${encodeURIComponent(
-            JSON.stringify(ItemItem.ConvertToInterface(), null, 4)
+            JSON.stringify(WarbandItem.ConvertToInterface(), null, 4)
         )}`;
         const link = document.createElement("a");
         link.href = jsonString;
-        link.download = ItemItem.Title + ".json";
+        link.download = WarbandItem.Title + ".json";
     
         link.click();
       };
@@ -73,14 +73,14 @@ const SaveItemDisplay = (prop: any) => {
 
     return (
         
-        <ErrorBoundary fallback={<div>Something went wrong with SaveItemDisplay.tsx</div>}>
+        <ErrorBoundary fallback={<div>Something went wrong with SaveWarbandDisplay.tsx</div>}>
             <div className='' ref={ref} >
                 {stateWidth > 700 &&
                     <div className="filterbox contentpackbasecontainer contentpackcontainer subborderstyler subborderdefault" >
                         <span className="contentsubnamecontainer">
                             <span/>
                             <h1 className="colordefault packtitlebase packtitlelarge">
-                                {ItemItem.Title}
+                                {WarbandItem.Title}
                             </h1>
                             <span/>
                             <span className="packvrbox">
@@ -118,7 +118,7 @@ const SaveItemDisplay = (prop: any) => {
                         
                         <div className="row textmaxwidth">
                                 <h1 className="colordefault packtitlebase packtitlelarge widecentertext" >
-                                    {ItemItem.Title}
+                                    {WarbandItem.Title}
                                 </h1>
                         </div>
                         <div className="row">
@@ -165,4 +165,4 @@ const SaveItemDisplay = (prop: any) => {
     // -------------------------------------------
 }
 
-export default SaveItemDisplay
+export default WarbandItemDisplay

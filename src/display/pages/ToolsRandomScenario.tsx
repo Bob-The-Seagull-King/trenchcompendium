@@ -5,8 +5,6 @@ import { ErrorBoundary } from "react-error-boundary";
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import SaveItemListDisplay from '../components/features/saveitem/SaveItemListDisplay';
-import SaveItemViewDisplay from '../components/features/saveitem/SaveItemViewDisplay';
 import { Item } from '../../classes/saveitems/item';
 import { ScenarioGenerator } from '../../classes/feature/scenario/ScenarioGenerator';
 import ScenarioDisplay from '../components/features/scenario/ScenarioDisplay';

@@ -15,12 +15,12 @@ import ContentPackDisplay from '../../../components/features/contentpack/Content
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFileImport, faPerson } from '@fortawesome/free-solid-svg-icons'
 import { ContentPack } from '../../../../classes/contentpacks/contentpack'
-import { Item } from '../../../../classes/saveitems/item';
-import { ItemManager } from '../../../../classes/saveitems/itemmanager';
-import SaveItemDisplay from './SaveItemDisplay';
+import WarbandItemDisplay from './WarbandItemDisplay';
+import { WarbandManager } from '../../../../classes/saveitems/WarbandManager';
+import { WarbandContentItem } from '../../../../classes/saveitems/WarbandContentItem';
 
-const SaveItemListDisplay = (prop: any) => {
-    const Manager : ItemManager = prop.manager;
+const WarbandItemListDisplay = (prop: any) => {
+    const Manager : WarbandManager = prop.manager;
     const UpdaterMethod = prop.updater;
 
     let NewItemTitle = "";
@@ -159,9 +159,9 @@ const SaveItemListDisplay = (prop: any) => {
                                         </div>
                                     </div>
                                 }
-                                {_allItems.map((item: Item) => (
+                                {_allItems.map((item: WarbandContentItem) => (
                                     <div className="col p-0" key={"packdisplay"+item.ID}>
-                                        <SaveItemDisplay  data={item} parent={Manager} statefunction={ItemRecall} updater={UpdaterMethod}/>
+                                        <WarbandItemDisplay  data={item} parent={Manager} statefunction={ItemRecall} updater={UpdaterMethod}/>
                                     </div>
                                 ))}
                         </div>  
@@ -174,4 +174,4 @@ const SaveItemListDisplay = (prop: any) => {
     // -------------------------------------------
 }
 
-export default SaveItemListDisplay
+export default WarbandItemListDisplay

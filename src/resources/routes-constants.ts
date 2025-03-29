@@ -1,7 +1,7 @@
 export const ROUTES = {
     // Super Routes //
     COMPENDIUM_ROUTE: '/compendium/*',
-    TOOLS_ROUTE: '/tools/*',
+    WARBAND_ROUTE: '/warband/*',
     HOME_ROUTE: '*',
 
     // Compendium Routes //

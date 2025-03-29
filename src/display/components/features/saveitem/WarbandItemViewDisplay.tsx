@@ -8,24 +8,24 @@ import 'react-toastify/dist/ReactToastify.css';
 // Font Awesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faDownload } from '@fortawesome/free-solid-svg-icons'
-import { Item } from '../../../../classes/saveitems/item';
-import { ItemManager } from '../../../../classes/saveitems/itemmanager';
 import { Button } from 'react-bootstrap';
+import { WarbandManager } from '../../../../classes/saveitems/WarbandManager';
+import { WarbandContentItem } from '../../../../classes/saveitems/WarbandContentItem';
 
-const SaveItemViewDisplay = (prop: any) => {
-    const Manager : ItemManager = prop.manager;
-    const ItemItem: Item = prop.data;
+const WarbandItemViewDisplay = (prop: any) => {
+    const Manager : WarbandManager = prop.manager;
+    const WarbandItem: WarbandContentItem = prop.data;
     const UpdateFunction = prop.updater;
     
     const ref = useRef<HTMLDivElement>(null);
 
     const exportData = () => {
         const jsonString = `data:text/json;chatset=utf-8,${encodeURIComponent(
-            JSON.stringify(ItemItem.ConvertToInterface(), null, 4)
+            JSON.stringify(WarbandItem.ConvertToInterface(), null, 4)
         )}`;
         const link = document.createElement("a");
         link.href = jsonString;
-        link.download = ItemItem.Title + ".json";
+        link.download = WarbandItem.Title + ".json";
     
         link.click();
       };
@@ -52,7 +52,7 @@ const SaveItemViewDisplay = (prop: any) => {
             <div className="row">
                 <div className="colordefault largefonttext centerPosition">
                         <div className="widecentertext">
-                            {ItemItem.Title} 
+                            {WarbandItem.Title} 
                         </div>
                     </div>
             </div>
@@ -66,4 +66,4 @@ const SaveItemViewDisplay = (prop: any) => {
     // -------------------------------------------
 }
 
-export default SaveItemViewDisplay;
+export default WarbandItemViewDisplay;

@@ -5,9 +5,10 @@ import { ErrorBoundary } from "react-error-boundary";
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import SaveItemListDisplay from '../components/features/saveitem/SaveItemListDisplay';
-import SaveItemViewDisplay from '../components/features/saveitem/SaveItemViewDisplay';
 import { Item } from '../../classes/saveitems/item';
+import WarbandItemViewDisplay from '../components/features/saveitem/WarbandItemViewDisplay';
+import WarbandItemListDisplay from '../components/features/saveitem/WarbandItemListDisplay';
+import { useLocation } from 'react-router-dom';
 
 const ToolsSavedItem = (prop: any) => {
     const Manager = prop.manager;
@@ -30,11 +31,12 @@ const ToolsSavedItem = (prop: any) => {
     }
 
     function grabURL() {
-        const urlPath = window.location.pathname;
+        const urlPath = useLocation().pathname;
         const urlSplits = urlPath.split('/');
+        console.log(urlSplits);
         let urlBuildParam = "";
-        if (urlSplits.length >= 4) {
-            urlBuildParam = urlSplits[3];
+        if (urlSplits.length >= 3) {
+            urlBuildParam = urlSplits[2];
             if (urlBuildParam.length > 0) {
                 return urlBuildParam;
             }
@@ -49,13 +51,13 @@ const ToolsSavedItem = (prop: any) => {
             {_currentItem != null &&
             <>
                 <div>
-                    <SaveItemViewDisplay key={_keyval} data={_currentItem} updater={UpdateItem} manager={Manager}/>
+                    <WarbandItemViewDisplay key={_keyval} data={_currentItem} updater={UpdateItem} manager={Manager}/>
                 </div>
             </>
                 
             }
             {_currentItem == null &&
-                <SaveItemListDisplay manager={Manager} updater={UpdateItem}/>
+                <WarbandItemListDisplay manager={Manager} updater={UpdateItem}/>
             }
         </div>
         </ErrorBoundary>

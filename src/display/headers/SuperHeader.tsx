@@ -76,12 +76,14 @@ const SuperHeader: React.FC<IControllerProp> = (prop) => {
             <div data-theme={theme}>
                 <div id="topbarbody" ref={ref} className="overlaystructure topbarStructure">
                     <Routes>
-                        <Route path={ROUTES.COMPENDIUM_ROUTE} element={<BaseHeader showsettings={handleShowsettings} showstate={handleShow} controller={prop.controller} />} />
+                    <Route path={ROUTES.COMPENDIUM_ROUTE} element={<BaseHeader showsettings={handleShowsettings} showstate={handleShow} controller={prop.controller} />} />
+                    <Route path={ROUTES.WARBAND_ROUTE} element={<BaseHeader showsettings={handleShowsettings} showstate={handleShow} controller={prop.controller} />} />
                         <Route path={ROUTES.HOME_ROUTE} element={<MenuHeader showsettings={handleShowsettings} showstate={handleShow} controller={prop.controller} />} />
                     </Routes>
                 </div>
                 <Routes>
                     <Route path={ROUTES.COMPENDIUM_ROUTE} element={<div style={{height:stateheight}} className="backgroundBgBase"/>} />
+                    <Route path={ROUTES.WARBAND_ROUTE} element={<div style={{height:stateheight}} className="backgroundBgBase"/>} />
                 </Routes>
                 <Routes>
                     <Route path={ROUTES.COMPENDIUM_ROUTE} element={
