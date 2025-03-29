@@ -14,6 +14,8 @@ import { ExplorationTable } from '../../../../classes/feature/exploration/Explor
 import GenericTableItemDisplay from '../../../components/generics/GenericTableItemDisplay';
 import { SkillGroup } from '../../../../classes/feature/skillgroup/SkillGroup';
 import SkillDisplay from './SkillDisplay';
+import GenericTabledBlockDisplay from '../../../components/generics/GenereicTabledBlockDisplay';
+import GenericCollapsableBlockDisplay from '../../../components/generics/GenericCollapsableBlockDisplay';
 
 const SkillGroupDisplay = (props: any) => {
     const skillgroupObject : SkillGroup = props.data
@@ -23,7 +25,39 @@ const SkillGroupDisplay = (props: any) => {
             <div className=''>
                 {skillgroupObject.Skills.map((item) => (
                     <div key={item.ID}>
-                        <GenericTableItemDisplay d_value={item.TableVal >= 0 ? item.TableVal : "Choose"} d_colour={'default'} d_valuetitle={"Result: "} d_name={item.Name} d_type={""} d_method={() => <SkillDisplay data={item} />}/>
+                    {item.TableVal != -1 &&
+                    <GenericTabledBlockDisplay 
+                        d_name={item.Name} 
+                        d_colour={"grey"} 
+                        d_state={false}  
+                        bordertype={0}
+                        d_border={false}
+                        d_margin={"sml"}
+                        d_content={item.TableVal}
+                        d_method={() => <>
+                            <div className="borderthin backgroundBgCard bordergrey">
+                                <div className="totalmarginsml">
+                                <SkillDisplay data={item} />
+                                </div>
+                            </div>
+                        </>} />
+                        }
+                        {item.TableVal == -1 &&
+                        <GenericCollapsableBlockDisplay 
+                            d_name={item.Name} 
+                            d_colour={"grey"} 
+                            d_state={false}  
+                            bordertype={0}
+                            d_border={false}
+                            d_margin={"sml"}
+                            d_method={() => <>
+                                <div className="borderthin backgroundBgCard bordergrey">
+                                    <div className="totalmarginsml">
+                                    <SkillDisplay data={item} />
+                                    </div>
+                                </div>
+                            </>} />
+                        }
                     </div>
                 ))}
             </div>
