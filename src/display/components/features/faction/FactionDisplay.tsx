@@ -199,33 +199,26 @@ const FactionDisplay = (props: any) => {
                 </div>
                     
                 {factionObject.Models.filter((item) => (item.Captain == true && item.Mercenary == false)).length > 0 &&
-                        <>
-                            <div className="verticalspacersml"/>
-                            <div className="borderthin bordergrey">
-                                <div className="borderthin bordergrey backgroundBgBasic">
-                                    <div className="totalmarginsml">
-                                        <div className={'subtitle-letterspacing size-subtitle font-seriftext'}>
-                                            <div id={"captains"} className='centered-div width-content'>
-                                                {"Captains"}
-                                                <div className='horizontalspacermed hovermouse'>
-                                                    <FontAwesomeIcon icon={faLink} onClick={() => (
-                                                        runToast()
-                                                        )}/>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="">
-                                    {factionObject.Models.filter((item) => (item.Captain == true && item.Mercenary == false)).map((item) => ( 
-                                        <div key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID} className="backgroundBgCard ">
-                                            <FactionModelDisplay data={item} />
-                                        </div>
-                                    )) /* Abilities */}
-                                </div>
-                            </div>                     
-                        </>
-                    }    
+                    <>
+                        <div id={"captains"} className='centered-div width-content'>
+                            {"Captains"}
+                            <div className='horizontalspacermed hovermouse'>
+                                <FontAwesomeIcon icon={faLink} onClick={() => (
+                                    runToast()
+                                )}/>
+                            </div>
+                        </div>
+
+                        {factionObject.Models.filter((item) => (item.Captain == true && item.Mercenary == false)).map((item) => (
+                            <div key={"faction_rule_" + factionObject.ID + "_rule_id_" + item.ID}
+                                 className="">
+                                <FactionModelDisplay data={item}/>
+
+                            </div>
+                        )) /* Abilities */}
+
+                    </>
+                }
                 {factionObject.Models.filter((item) => (item.Captain == false && item.Mercenary == false && (ModelIsElite(item.Model) == true))).length > 0 &&
                     <>
                         <div className="verticalspacersml"/>
