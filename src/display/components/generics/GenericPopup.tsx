@@ -43,17 +43,17 @@ const GenericPopup = (props: any) => {
               <Modal.Body > 
                 
                 <div className={'backgroundBgCard basestructure font-default borderthin bordergrey'}>
-                    <div className={'borderthin bordergrey centered-div colorBasicText size-subtitle font-seriftext background'+getColour(DisplayColour)}>
+                    <div className={'borderthin bordergrey centered-div size-subtitle font-seriftext background'+getColour(DisplayColour)}>
                         <div className="">
                             <Button className="no-padding" variant="" onClick={() => handleClose()}>
-                                <FontAwesomeIcon icon={faCircleXmark} className="colorBasicText size-subtitle" />
+                                <FontAwesomeIcon icon={faCircleXmark} className="size-subtitle" />
                             </Button>
                         </div>
                         <div className="maxwidth size-subtitle">
                             {DisplayName || ""}
                         </div>
                     </div>
-                    <div className={"colorBasicText"}>
+                    <div className={""}>
                         {displayMethod()}
                     </div>
                 </div>

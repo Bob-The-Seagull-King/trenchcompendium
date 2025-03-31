@@ -71,7 +71,7 @@ const BookRuleDisplay = (props: any) => {
                 {ruleObject.Sections.map((item) => (
                     <div key={item.title}>
                         <div id={item.title} className="verticalspacermed"/>
-                        <div className={'subtitle-letterspacing size-subtitle colorBasicText font-seriftext'}>
+                        <div className={'subtitle-letterspacing size-subtitle font-seriftext'}>
                             <div className='centered-div width-content'>
                                 {item.title || ""}
                                 <div className='horizontalspacermed hovermouse'>
@@ -86,7 +86,7 @@ const BookRuleDisplay = (props: any) => {
                             <div className="verticalspacermed"/>
                             {item.content.map((valitem) => (
                                 <div key={valitem.title}>
-                                    <div className='size-strongtext colorBasicText'>{valitem.title}</div>
+                                    <div className='size-strongtext'>{valitem.title}</div>
                                     {returnDescription(ruleObject, valitem.description)}
                                 </div>
                             ))}

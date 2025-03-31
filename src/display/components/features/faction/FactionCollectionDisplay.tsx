@@ -50,7 +50,7 @@ const FactionCollectionDisplay = (props: any) => {
     return (
         <ErrorBoundary fallback={<div>Something went wrong with ModelCollectionDisplay.tsx</div>}>
             <div className=''>
-                <div className="colorBasicText size-section font-seriftext">
+                <div className=" size-section font-seriftext">
                     {GetBaseName(factioncollectionObject)}
                 </div>
                 {factioncollectionObject.SubModelsList.length > 1 &&

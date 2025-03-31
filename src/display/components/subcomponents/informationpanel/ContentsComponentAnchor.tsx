@@ -20,7 +20,7 @@ const ContentsComponentAnchor: React.FC<ContentsCollection> = (props: any) => {
 
     function ReturnItemLink(_obj : ContentsLink) {
         return (
-            <a className="hovermouse cleanunderline colorBasicText" href={"#"+_obj.route}>
+            <a className="hovermouse cleanunderline" href={"#"+_obj.route}>
                 {"- " + _obj.name}
             </a>
         )

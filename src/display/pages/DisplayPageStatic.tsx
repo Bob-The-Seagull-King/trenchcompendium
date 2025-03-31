@@ -42,7 +42,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         returnDisplay(item: any) {
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    <div className="colorBasicText size-section font-seriftext">
+                    <div className="size-section font-seriftext">
                         {item.Name}
                     </div>
                     <BookRuleDisplay data={item} />
@@ -298,7 +298,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
             return (
                 
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    <div className="colorBasicText size-section font-seriftext">
+                    <div className="size-section font-seriftext">
                         {item.Name}
                     </div>
                     <ScenarioDisplay data={item} />
@@ -324,7 +324,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
             return (
                 
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    <div className="colorBasicText size-section font-seriftext">
+                    <div className="size-section font-seriftext">
                         {item.Name}
                     </div>
                     <BookRuleDisplay data={item} />
@@ -350,7 +350,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
             return (
                 
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    <div className="colorBasicText size-section font-seriftext">
+                    <div className="size-section font-seriftext">
                         {item.Name}
                     </div>
                     <ExplorationTableDisplay data={item} />
@@ -461,7 +461,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
             return (
                 
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    <div className="colorBasicText size-section font-seriftext">
+                    <div className="size-section font-seriftext">
                         {item.Name}
                     </div>
                     

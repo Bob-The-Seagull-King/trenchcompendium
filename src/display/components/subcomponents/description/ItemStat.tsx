@@ -13,7 +13,7 @@ const ItemStat = (props: any) => {
         <ErrorBoundary fallback={<div>Something went wrong with ItemStat.tsx</div>}>
             <div>
                 <div className="totalmarginxsm">
-                    <div className="colorBasicText ">{Title}</div>
+                    <div className=" ">{Title}</div>
                     <div className={"maxwidth bordergrey borderstyler backgroundBgBase centered-div"}>
                         <div className="maxwidth align-center size-strongtext totalmarginsml">
                             {Content}

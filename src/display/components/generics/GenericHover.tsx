@@ -32,10 +32,10 @@ const GenericHover = (props: any) => {
         <Popover.Body bsPrefix="empty" className="popover" id="tooltip">
           <div data-theme={theme} className='width-content font-default'>
             <div className={'col-12 backgroundBgCard borderstyler ' + DisplayType + 'border'+getColour(DisplayColour)}>
-                <h1 className={'size-strongtext font-default hovermouse colorBasicText centered-div background'+getColour(DisplayColour)}>
+                <h1 className={'size-strongtext font-default hovermouse centered-div background'+getColour(DisplayColour)}>
                     {ruleName || ""}
                 </h1>
-                <div className="backgroundBgCard colorBasicText size-default">
+                <div className="backgroundBgCard size-default">
                   {displayMethod()}
                 </div>
             </div>

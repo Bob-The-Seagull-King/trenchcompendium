@@ -26,7 +26,7 @@ const GenericTabledBlockDisplay = (props: any) => {
 
     return (
         <div >
-            <div onClick={() => {setOpen(!open)}} className={'align-left-right size-strongtext font-default hovermouse colorBasicText centered-div border'+getColour(DisplayColour) + " " + (StyleType == 0? "borderthin" : StyleType == 1? "borderthinnosides" : StyleType == 2? "borderthintop" : StyleType == 3? "borderthinbottom" : "borderremove") + " background"+BgCol}>
+            <div onClick={() => {setOpen(!open)}} className={'align-left-right size-strongtext font-default hovermouse centered-div border'+getColour(DisplayColour) + " " + (StyleType == 0? "borderthin" : StyleType == 1? "borderthinnosides" : StyleType == 2? "borderthintop" : StyleType == 3? "borderthinbottom" : "borderremove") + " background"+BgCol}>
                 <div className={"stat_parent totalmargin"+MarginSize}>
                     <div className={" min-width-small bordergrey borderstyler  centered-div background"+TitleCol}>
                         <div className="align-center size-strongtext totalmarginsml">
@@ -38,7 +38,7 @@ const GenericTabledBlockDisplay = (props: any) => {
                     </div>
                 </div>
                 <div className={'totalmargin'+MarginSize}>
-                    <FontAwesomeIcon icon={open? faChevronUp : faChevronDown} className="colorBasicText"/>
+                    <FontAwesomeIcon icon={open? faChevronUp : faChevronDown} className=""/>
                 </div>
             </div>
             <Collapse in={open}>

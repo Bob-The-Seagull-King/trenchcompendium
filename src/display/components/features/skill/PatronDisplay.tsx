@@ -31,7 +31,7 @@ const PatronDisplay = (props: any) => {
                      <div className='verticalspacermed'/>
                      <div className="borderthin bordergrey">
                         <ItemRow title={"Available To"} value={() => <div>{patronObject.Factions.map((item) => ( 
-                            <span key={item.Name} className="colorBasicText bodytext complextext small-side-margin">
+                            <span key={item.Name} className="bodytext complextext small-side-margin">
                                 {
                                    ((patronObject.Factions.indexOf(item) != 0)? "," : " ") +  item.Name + " "
                                 }

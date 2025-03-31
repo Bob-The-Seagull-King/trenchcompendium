@@ -90,7 +90,7 @@ const MenuBody: React.FC<IControllerProp> = (prop) => {
     return (
         <ErrorBoundary fallback={<div>Something went wrong with PalleteSwap.tsx</div>}>  
             <>
-            <div onClick={() => NavigateOut()} className={'align-left-right size-strongtext font-default hovermouse colorBasicText centered-div backgroundBgBase borderthin bordergrey'}>
+            <div onClick={() => NavigateOut()} className={'align-left-right size-strongtext font-default hovermouse centered-div backgroundBgBase borderthin bordergrey'}>
                 <div className='totalmarginmed'>
                     {"Home"}
                 </div>

@@ -42,7 +42,7 @@ const FilterBox = (prop: any) => {
                         }
                     }}/>
                 <Button bsPrefix="empty" className="borderremove backgroundBgBase horizontalspacermed" onClick={() => updatesearch()}>
-                    <FontAwesomeIcon icon={faMagnifyingGlass} className="colorBasicText size-strongtext"/>
+                    <FontAwesomeIcon icon={faMagnifyingGlass} className="size-strongtext"/>
                 </Button>
             </div>
         )
@@ -74,12 +74,12 @@ const FilterBox = (prop: any) => {
                     <div className="verticalspacermed"/>
                     {(DisplayPage.hidefilter == undefined) &&
                         <div className="borderthin bordergrey">
-                            <div onClick={() => {setOpen(!open)}} className={'centered-div size-strongtext font-default hovermouse colorBasicText centered-div borderbed bordergrey borderthin backgroundBgCard'}>
+                            <div onClick={() => {setOpen(!open)}} className={'centered-div size-strongtext font-default hovermouse centered-div borderbed bordergrey borderthin backgroundBgCard'}>
                                 <div className={'totalmarginxsm font-seriftext'}>
                                     {"Filters"}
                                 </div>
                                 <div className={'totalmarginxsm'}>
-                                    <FontAwesomeIcon icon={faFilter} className="colorBasicText"/>
+                                    <FontAwesomeIcon icon={faFilter} className=""/>
                                 </div>
                             </div>
                             <Collapse in={open}>

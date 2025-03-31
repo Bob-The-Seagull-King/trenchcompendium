@@ -23,12 +23,12 @@ const GenericSoloBlockDisplay = (props: any) => {
 
     return (
         <div >
-            <div onClick={() => {setOpen(!open)}} className={'align-left-right size-strongtext font-default hovermouse colorBasicText centered-div border'+getColour(DisplayColour) + " " + (StyleType == 0? "borderthin" : StyleType == 1? "borderthinnosides" : StyleType == 2? "borderthintop" : StyleType == 3? "borderthinbottom" : "borderremove") + " background"+BgCol}>
+            <div onClick={() => {setOpen(!open)}} className={'align-left-right size-strongtext font-default hovermouse centered-div border'+getColour(DisplayColour) + " " + (StyleType == 0? "borderthin" : StyleType == 1? "borderthinnosides" : StyleType == 2? "borderthintop" : StyleType == 3? "borderthinbottom" : "borderremove") + " background"+BgCol}>
                 <div className={'totalmargin'+MarginSize}>
                     {DisplayName || ""}
                 </div>
                 <div className={'totalmargin'+MarginSize}>
-                    <FontAwesomeIcon icon={open? faChevronUp : faChevronDown} className="colorBasicText"/>
+                    <FontAwesomeIcon icon={open? faChevronUp : faChevronDown} className=""/>
                 </div>
             </div>
             <Collapse in={open}>

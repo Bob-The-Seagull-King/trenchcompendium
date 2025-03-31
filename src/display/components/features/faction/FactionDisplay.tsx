@@ -111,7 +111,7 @@ const FactionDisplay = (props: any) => {
                     </div>
                     <div>
                         <div id={"lore"} className="verticalspacermed"/>
-                        <div className={'subtitle-letterspacing size-subtitle colorBasicText font-seriftext'}>
+                        <div className={'subtitle-letterspacing size-subtitle font-seriftext'}>
                             <div className='centered-div width-content'>
                                 {"Description"}
                                 <div className='horizontalspacermed hovermouse'>
@@ -142,7 +142,7 @@ const FactionDisplay = (props: any) => {
                     {factionObject.Rules.length > 0 &&
                         <>
                             <div id={"rules"} className="verticalspacermed"/>
-                            <div className={'subtitle-letterspacing size-subtitle colorBasicText font-seriftext'}>
+                            <div className={'subtitle-letterspacing size-subtitle font-seriftext'}>
                                 <div className='centered-div width-content'>
                                     {"Rules"}
                                     <div className='horizontalspacermed hovermouse'>
@@ -180,7 +180,7 @@ const FactionDisplay = (props: any) => {
                     {factionObject.MyOptions.length > 0 &&
                         <div>
                             <div id={"options"} className="verticalspacermed"/>
-                            <div className={'subtitle-letterspacing size-subtitle colorBasicText font-seriftext'}>
+                            <div className={'subtitle-letterspacing size-subtitle font-seriftext'}>
                                 <div className='centered-div width-content'>
                                     {"Warband Options"}
                                     <div className='horizontalspacermed hovermouse'>
@@ -204,7 +204,7 @@ const FactionDisplay = (props: any) => {
                             <div className="borderthin bordergrey">
                                 <div className="borderthin bordergrey backgroundBgBasic">
                                     <div className="totalmarginsml">
-                                        <div className={'subtitle-letterspacing size-subtitle colorBasicText font-seriftext'}>
+                                        <div className={'subtitle-letterspacing size-subtitle font-seriftext'}>
                                             <div id={"captains"} className='centered-div width-content'>
                                                 {"Captains"}
                                                 <div className='horizontalspacermed hovermouse'>
@@ -232,7 +232,7 @@ const FactionDisplay = (props: any) => {
                         <div className="borderthin bordergrey">
                             <div className="borderthin bordergrey backgroundBgBasic">
                                 <div className="totalmarginsml">
-                                    <div className={'subtitle-letterspacing size-subtitle colorBasicText font-seriftext'}>
+                                    <div className={'subtitle-letterspacing size-subtitle font-seriftext'}>
                                         <div id={"elite"} className='centered-div width-content'>
                                             {"Elite Units"}
                                             <div className='horizontalspacermed hovermouse'>
@@ -260,7 +260,7 @@ const FactionDisplay = (props: any) => {
                         <div className="borderthin bordergrey">
                             <div className="borderthin bordergrey backgroundBgBasic">
                                 <div className="totalmarginsml">
-                                    <div className={'subtitle-letterspacing size-subtitle colorBasicText font-seriftext'}>
+                                    <div className={'subtitle-letterspacing size-subtitle font-seriftext'}>
                                         <div id={"infantry"} className='centered-div width-content'>
                                             {"Infantry Units"}
                                             <div className='horizontalspacermed hovermouse'>
@@ -289,7 +289,7 @@ const FactionDisplay = (props: any) => {
                         <div className="borderthin bordergrey">
                             <div className="borderthin bordergrey backgroundBgBasic">
                                 <div className="totalmarginsml">
-                                    <div className={'subtitle-letterspacing size-subtitle colorBasicText font-seriftext'}>
+                                    <div className={'subtitle-letterspacing size-subtitle font-seriftext'}>
                                         <div id={"mercenary"} className='centered-div width-content'>
                                             {"Mercenaries"}
                                             <div className='horizontalspacermed hovermouse'>
@@ -316,7 +316,7 @@ const FactionDisplay = (props: any) => {
                 {factionObject.EquipmentItems.length > 0 &&
                     <>
                         <div id={"armoury"} className="verticalspacermed"/>
-                        <div className={'subtitle-letterspacing size-subtitle colorBasicText font-seriftext'}>
+                        <div className={'subtitle-letterspacing size-subtitle font-seriftext'}>
                             <div className='centered-div width-content'>
                                 {"Armoury"}
                                 <div className='horizontalspacermed hovermouse'>
@@ -334,7 +334,7 @@ const FactionDisplay = (props: any) => {
                             <div className="borderthin bordergrey">
                                 <div className="borderthin bordergrey backgroundBgBasic">
                                     <div className="totalmarginsml">
-                                        <div className={'subtitle-letterspacing size-subtitle colorBasicText font-seriftext'}>
+                                        <div className={'subtitle-letterspacing size-subtitle font-seriftext'}>
                                             <div className='centered-div width-content'>
                                                 {"Melee"}
                                             </div>
@@ -357,7 +357,7 @@ const FactionDisplay = (props: any) => {
                             <div className="borderthin bordergrey">
                                 <div className="borderthin bordergrey backgroundBgBasic">
                                     <div className="totalmarginsml">
-                                        <div className={'subtitle-letterspacing size-subtitle colorBasicText font-seriftext'}>
+                                        <div className={'subtitle-letterspacing size-subtitle font-seriftext'}>
                                             <div className='centered-div width-content'>
                                                 {"Ranged"}
                                             </div>
@@ -380,7 +380,7 @@ const FactionDisplay = (props: any) => {
                             <div className="borderthin bordergrey">
                                 <div className="borderthin bordergrey backgroundBgBasic">
                                     <div className="totalmarginsml">
-                                        <div className={'subtitle-letterspacing size-subtitle colorBasicText font-seriftext'}>
+                                        <div className={'subtitle-letterspacing size-subtitle font-seriftext'}>
                                             <div className='centered-div width-content'>
                                                 {"Armour"}
                                             </div>
@@ -403,7 +403,7 @@ const FactionDisplay = (props: any) => {
                             <div className="borderthin bordergrey">
                                 <div className="borderthin bordergrey backgroundBgBasic">
                                     <div className="totalmarginsml">
-                                        <div className={'subtitle-letterspacing size-subtitle colorBasicText font-seriftext'}>
+                                        <div className={'subtitle-letterspacing size-subtitle font-seriftext'}>
                                             <div className='centered-div width-content'>
                                                 {"Equipment"}
                                             </div>
@@ -426,7 +426,7 @@ const FactionDisplay = (props: any) => {
                             <div className="borderthin bordergrey">
                                 <div className="borderthin bordergrey backgroundBgBasic">
                                     <div className="totalmarginsml">
-                                        <div className={'subtitle-letterspacing size-subtitle colorBasicText font-seriftext'}>
+                                        <div className={'subtitle-letterspacing size-subtitle font-seriftext'}>
                                             <div className='centered-div width-content'>
                                                 {"Exploration Only"}
                                             </div>
