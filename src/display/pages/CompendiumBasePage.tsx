@@ -66,25 +66,26 @@ const CompendiumBasePage: React.FC<IControllerProp> = (prop: any) => {
         <ErrorBoundary fallback={<div>Something went wrong with BaseDisplayCompendium.tsx</div>}>
             <div className="col-lg-6 col-md-12">
                 <div>
-                    <div className="colourdefault font-seriftext size-section">
+                    {/*<div className="colourdefault font-seriftext size-section">*/}
+                    <h1 className="">
                         {"Compendium"}
-                    </div>
+                    </h1>
                 </div>
                 <div>
                     <div className="verticalspacermed"/>
-                    <div className="colourBasicText font-default">
+                    <div className="colourBasicText  ">
                         {GetContentsTableRules()}
                     </div>
                     <div className="verticalspacermed"/>
-                    <div className="colourBasicText font-default">
+                    <div className="colourBasicText  ">
                         {GetContentsTableWarbands()}
                     </div>
                     <div className="verticalspacermed"/>
-                    <div className="colourBasicText font-default">
+                    <div className="colourBasicText  ">
                         {GetContentsTableScenarios()}
                     </div>
                     <div className="verticalspacermed"/>
-                    <div className="colourBasicText font-default">
+                    <div className="colourBasicText  ">
                         {GetContentsTableCampaign()}
                     </div>
                 </div>

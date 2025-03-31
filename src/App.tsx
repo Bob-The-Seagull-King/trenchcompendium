@@ -6,6 +6,7 @@ import { useContentPackStore } from './store/contentpacks'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { ROUTES } from './resources/routes-constants'
 import './resources/styles/_mainstylesource.scss'
+import './resources/styles/_main.sass'
 
 import { ControllerController } from './classes/_high_level_controllers/ControllerController'
 import { ToolsController } from './classes/_high_level_controllers/ToolsController'
@@ -30,7 +31,7 @@ const App: React.FC = () => {
 
 
     return (
-        <div className="font-default">
+        <div className="">
         <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}>
                 <Router >

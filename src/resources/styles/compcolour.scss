@@ -1,56 +1,57 @@
-// Palletes
+// Palletes v2.2
+// @TODO: check this file and move styles elsewhere
 
-:root {
-  --colour_default_main: #be2d26;
-
-  --colour_red_main: #EE220C;
-  --colour_green_main: #61D836;
-  --colour_yellow_main: #FEAE00;
-  --colour_blue_main: #00A2FF;
-
-  --colour_grey_main: #808080;
-
-  --colour_bg_base: #333333;
-  --colour_bg_card: #222222;
-
-  --colour_basic_text: #FFFFFF;
-  --colour_highlight_text: #000000;
-}
-
-[data-theme='light'] {
-  --colour_default_main: #be2d26;
-
-  --colour_red_main: #EE220C;
-  --colour_green_main: #61D836;
-  --colour_yellow_main: #FEAE00;
-  --colour_blue_main: #00A2FF;
-
-  --colour_grey_main: #808080;
-
-  --colour_bg_base: #f8f8f8;
-  --colour_bg_card: #eeeeee;
-
-  --colour_basic_text: #000000;
-  --colour_highlight_text: #FFFFFF;
-}
-
-[data-theme='dark'] {
-  --colour_default_main: #be2d26;
-
-  --colour_red_main: #EE220C;
-  --colour_green_main: #61D836;
-  --colour_yellow_main: #FEAE00;
-  --colour_blue_main: #00A2FF;
-
-  --colour_grey_main: #808080;
-
-  --colour_bg_base: #333333;
-  --colour_bg_card: #222222;
-
-  --colour_basic_text: #FFFFFF;
-  --colour_highlight_text: #000000;
-
-}
+//:root {
+//  --colour_default_main: #be2d26;
+//
+//  --colour_red_main: #EE220C;
+//  --colour_green_main: #61D836;
+//  --colour_yellow_main: #FEAE00;
+//  --colour_blue_main: #00A2FF;
+//
+//  --colour_grey_main: #808080;
+//
+//  --colour_bg_base: #333333;
+//  --colour_bg_card: #222222;
+//
+//  --colour_basic_text: #FFFFFF;
+//  --colour_highlight_text: #000000;
+//}
+//
+//[data-theme='light'] {
+//  --colour_default_main: #be2d26;
+//
+//  --colour_red_main: #EE220C;
+//  --colour_green_main: #61D836;
+//  --colour_yellow_main: #FEAE00;
+//  --colour_blue_main: #00A2FF;
+//
+//  --colour_grey_main: #808080;
+//
+//  --colour_bg_base: #f8f8f8;
+//  --colour_bg_card: #eeeeee;
+//
+//  --colour_basic_text: #000000;
+//  --colour_highlight_text: #FFFFFF;
+//}
+//
+//[data-theme='dark'] {
+//  --colour_default_main: #be2d26;
+//
+//  --colour_red_main: #EE220C;
+//  --colour_green_main: #61D836;
+//  --colour_yellow_main: #FEAE00;
+//  --colour_blue_main: #00A2FF;
+//
+//  --colour_grey_main: #808080;
+//
+//  --colour_bg_base: #333333;
+//  --colour_bg_card: #222222;
+//
+//  --colour_basic_text: #FFFFFF;
+//  --colour_highlight_text: #000000;
+//
+//}
 
 // Web Background
   
@@ -108,7 +109,6 @@ Sets of Colours
 
 // Text
 .backgroundBasicText { background-color: var(--colour_basic_text) !important;  }
-.colorBasicText { color: var(--colour_basic_text) !important;  }
 .borderBasicText { border-color: var(--colour_basic_text) !important;  }
 
 .backgroundHighlightText { background-color: var(--colour_highlight_text) !important;  }

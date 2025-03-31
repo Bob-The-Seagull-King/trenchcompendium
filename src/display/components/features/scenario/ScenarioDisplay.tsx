@@ -121,7 +121,7 @@ const ScenarioDisplay = (props: any) => {
 
                 <div id={"forces"} className="verticalspacermed"/>
                 <div className="">
-                    <div className={'subtitle-letterspacing size-subtitle colorBasicText font-seriftext'}>
+                    <div className={'subtitle-letterspacing size-subtitle font-seriftext'}>
                         <div className='centered-div width-content '>
                             {"Forces"}
                             <div className='horizontalspacermed hovermouse'>
@@ -131,7 +131,7 @@ const ScenarioDisplay = (props: any) => {
                             </div>
                         </div>
                     </div>
-                    <div className=" colourBasicText font-default size-default ">
+                    <div className=" colourBasicText   size-default ">
                         <div className="">
                         {returnDescription(scenarioObject, scenarioObject.ForcesDesc)}
                         </div>
@@ -141,7 +141,7 @@ const ScenarioDisplay = (props: any) => {
                 <div className="verticalspacersml"/>
                 <div id={"infiltrators"} className="verticalspacermed"/>
                 <div className="">
-                    <div className={'subtitle-letterspacing size-subtitle colorBasicText font-seriftext'}>
+                    <div className={'subtitle-letterspacing size-subtitle font-seriftext'}>
                         <div className='centered-div width-content '>
                             {"Infiltrators"}
                             <div className='horizontalspacermed hovermouse'>
@@ -151,7 +151,7 @@ const ScenarioDisplay = (props: any) => {
                             </div>
                         </div>
                     </div>
-                    <div className=" colourBasicText font-default size-default ">
+                    <div className=" colourBasicText   size-default ">
                         <div className="">
                         {returnDescription(scenarioObject, scenarioObject.InfiltratorDesc)}
                         </div>
@@ -161,7 +161,7 @@ const ScenarioDisplay = (props: any) => {
                 <div className="verticalspacersml"/>
                 <div id={"battlelength"} className="verticalspacermed"/>
                 <div className="">
-                    <div className={'subtitle-letterspacing size-subtitle colorBasicText font-seriftext'}>
+                    <div className={'subtitle-letterspacing size-subtitle font-seriftext'}>
                         <div className='centered-div width-content '>
                             {"Battle Length"}
                             <div className='horizontalspacermed hovermouse'>
@@ -171,7 +171,7 @@ const ScenarioDisplay = (props: any) => {
                             </div>
                         </div>
                     </div>
-                    <div className=" colourBasicText font-default size-default ">
+                    <div className=" colourBasicText   size-default ">
                         <div className="">
                         {returnDescription(scenarioObject, scenarioObject.BattlelengthDesc)}
                         </div>
@@ -180,7 +180,7 @@ const ScenarioDisplay = (props: any) => {
 
                 <div className="verticalspacersml"/>
                 <div id={"battlefield"} className="verticalspacermed"/>
-                <div className={'subtitle-letterspacing size-subtitle colorBasicText font-seriftext'}>
+                <div className={'subtitle-letterspacing size-subtitle font-seriftext'}>
                     <div className='centered-div width-content'>
                         {"Battlefield"}
                         <div className='horizontalspacermed hovermouse'>
@@ -190,7 +190,7 @@ const ScenarioDisplay = (props: any) => {
                         </div>
                     </div>
                 </div>
-                <div className="colourBasicText font-default size-default">
+                <div className="colourBasicText   size-default">
                     {returnDescription(scenarioObject, scenarioObject.BattlefieldSize)}
                         <div >
                             {returnDescription(scenarioObject, scenarioObject.BattlefieldExtra)}
@@ -205,7 +205,7 @@ const ScenarioDisplay = (props: any) => {
 
                 <div className="verticalspacersml"/>
                 <div id={"deployment"} className="verticalspacermed"/>
-                <div className={'subtitle-letterspacing size-subtitle colorBasicText font-seriftext'}>
+                <div className={'subtitle-letterspacing size-subtitle font-seriftext'}>
                     <div className='centered-div width-content'>
                         {"Deployment"}
                         <div className='horizontalspacermed hovermouse'>
@@ -215,13 +215,13 @@ const ScenarioDisplay = (props: any) => {
                         </div>
                     </div>
                 </div>
-                <div className="colourBasicText font-default size-default">
+                <div className="colourBasicText   size-default">
                 {returnDescription(scenarioObject, scenarioObject.DeploymentDesc)}
                 </div>
 
                 <div className="verticalspacersml"/>
                 <div id={"victory"} className="verticalspacermed"/>
-                <div className={'subtitle-letterspacing size-subtitle colorBasicText font-seriftext'}>
+                <div className={'subtitle-letterspacing size-subtitle font-seriftext'}>
                     <div className='centered-div width-content'>
                         {"Victory Conditions"}
                         <div className='horizontalspacermed hovermouse'>
@@ -231,7 +231,7 @@ const ScenarioDisplay = (props: any) => {
                         </div>
                     </div>
                 </div>
-                <div className="colourBasicText font-default size-default">
+                <div className="colourBasicText   size-default">
                 {returnDescription(scenarioObject, scenarioObject.VictoryDesc)}
                 </div>
 
@@ -240,7 +240,7 @@ const ScenarioDisplay = (props: any) => {
                     <div>
                         <div className="verticalspacersml"/>
                         <div id={"specialrules"} className="verticalspacermed"/>
-                        <div className={'size-subtitle colorBasicText font-seriftext'}>
+                        <div className={'size-subtitle font-seriftext'}>
                             <div className='subtitle-letterspacing centered-div width-content'>
                                 {"Special Rules"}
                                 <div className='horizontalspacermed hovermouse'>
@@ -273,7 +273,7 @@ const ScenarioDisplay = (props: any) => {
                 }</>}
                 <div>
                         <div id={"deeds"} className="verticalspacersml"/>
-                        <div className={'size-subtitle colorBasicText font-seriftext'}>
+                        <div className={'size-subtitle font-seriftext'}>
                             <div className='subtitle-letterspacing centered-div width-content'>
                                 {"Glorious Deeds"}
                                 <div className='horizontalspacermed hovermouse'>

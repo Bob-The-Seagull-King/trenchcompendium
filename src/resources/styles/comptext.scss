@@ -15,8 +15,14 @@
   src: URL('/src/resources/fonts/artisan12.otf') format('truetype');
 }
 
-.font-default {  
-  font-family: "Artisan 12";
+@font-face {
+  font-family: 'Inter';
+  src: URL('/src/resources/fonts/Inter-VariableFont.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'OpenSans';
+  src: URL('/src/resources/fonts/OpenSans-VariableFont.ttf') format('truetype');
 }
 
 .font-seriftext {  

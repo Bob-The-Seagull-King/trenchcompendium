@@ -61,56 +61,10 @@ const FactionModelDisplay = (props: any) => {
 
     return (
         <ErrorBoundary fallback={<div>Something went wrong with FactionModelDisplay.tsx</div>}>
-            <div className="facdisplayrow_container backgroundBgBasic" key={_keyvar}>
-                <div className={" itemrow_box borderthin borderstyler bordergrey"}>
-                    <div className="totalmarginsml centered-div">
-                        <GenericPopup  d_colour={""} titlename={factionmodelObject.Model.Name} d_name={factionmodelObject.Model.Name} d_type={""} d_method={() => 
-                            <ModelDisplay data={factionmodelObject.Model} />}/>
-                    </div>
-                </div>
-                <div className={" itemrow_box borderthin borderstyler bordergrey"}>
-                    <div className="totalmarginsml maxwidth centered-div">
-                        <span className=" maxwidth headersubtext boldtext colourgrey wordbreak">
-                            {
-                                factionmodelObject.Cost + " " + 
-                                getCostType(factionmodelObject.CostType)
-                            }
-                        </span>
-                    </div>
-                </div>
-                <div className={" itemrow_box borderthin borderstyler bordergrey"}>
-                    <div className="totalmarginsml maxwidth centered-div ">
-                        {minimum == maximum &&
-                        <>
-                        <span className="maxwidth headersubtext boldtext colourgrey">
-                            {minimum != "0" &&
-                                        <div className="wordbreak">
-                                        {
-                                            "LIMIT: " + minimum
-                                        }
-                                        </div>
-                                    }
-                            {minimum == "0" &&
-                                    <>
-                                    {
-                                        "-"
-                                    }
-                                    </>
-                                }
-                                </span>
-                                </>
-                            }
-                        {minimum != maximum &&
-                            <>
-                                <span className="maxwidth headersubtext boldtext colourgrey wordbreak">
-                                    {
-                                        "LIMIT: " + minimum + " - " + maximum
-                                    }
-                                </span>
-                            </>
-                        }
-                    </div>
-                </div>
+            <div className="fighter-card" key={_keyvar}>
+
+                <ModelDisplay data={factionmodelObject.Model} />
+
             </div>
         </ErrorBoundary>
     )

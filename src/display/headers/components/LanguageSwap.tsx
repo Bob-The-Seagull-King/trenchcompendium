@@ -29,7 +29,7 @@ const LanguageSwap = (prop: any) => {
     
     function returnLanguages(themeval: string | null, curtheme : string, title : string) {
         return (
-            <div onClick={() => SetLanguage(themeval? themeval : curtheme)} className={"hovermouse size-strongtext font-default totalmarginsml align-left-right color"+(themeval == curtheme ? 'default' : 'BasicText')}>
+            <div onClick={() => SetLanguage(themeval? themeval : curtheme)} className={"hovermouse size-strongtext   totalmarginsml align-left-right color"+(themeval == curtheme ? 'default' : 'BasicText')}>
                 <div className="horizontalspacermed">{makestringpresentable(title)}</div>
             </div>
         )

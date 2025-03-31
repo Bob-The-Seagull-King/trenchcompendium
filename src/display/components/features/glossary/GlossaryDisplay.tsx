@@ -12,8 +12,8 @@ const GlossaryDisplay = (props: any) => {
 
     return (
         <ErrorBoundary fallback={<div>Something went wrong with GlossaryDisplay.tsx</div>}>
-            <div className='totalmarginmed '>
-                <div className="colourBasicText font-default size-default">
+            <div className=''>
+                <div className="colourBasicText   size-default">
                     {returnDescription(ruleObject, ruleObject.Description)}
                 </div>
             </div>

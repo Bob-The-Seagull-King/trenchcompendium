@@ -74,29 +74,36 @@ const SuperHeader: React.FC<IControllerProp> = (prop) => {
     return (    
         <ErrorBoundary fallback={<div>Something went wrong with SuperHeader.tsx</div>}>
             <div data-theme={theme}>
-                <div id="topbarbody" ref={ref} className="overlaystructure topbarStructure">
+                <div className="header-main-spacer"></div>
+
+                <div id="topbarbody" ref={ref} className="overlaystructure topbarStructure header-main">
                     <Routes>
-                    <Route path={ROUTES.COMPENDIUM_ROUTE} element={<BaseHeader showsettings={handleShowsettings} showstate={handleShow} controller={prop.controller} />} />
-                    <Route path={ROUTES.WARBAND_ROUTE} element={<BaseHeader showsettings={handleShowsettings} showstate={handleShow} controller={prop.controller} />} />
-                        <Route path={ROUTES.HOME_ROUTE} element={<MenuHeader showsettings={handleShowsettings} showstate={handleShow} controller={prop.controller} />} />
+                        <Route path={ROUTES.COMPENDIUM_ROUTE}
+                               element={<BaseHeader showsettings={handleShowsettings} showstate={handleShow}
+                                                    controller={prop.controller}/>}/>
+                        <Route path={ROUTES.WARBAND_ROUTE}
+                               element={<BaseHeader showsettings={handleShowsettings} showstate={handleShow}
+                                                    controller={prop.controller}/>}/>
+                        <Route path={ROUTES.HOME_ROUTE}
+                               element={<MenuHeader showsettings={handleShowsettings} showstate={handleShow}
+                                                    controller={prop.controller}/>}/>
                     </Routes>
                 </div>
                 <Routes>
-                    <Route path={ROUTES.COMPENDIUM_ROUTE} element={<div style={{height:stateheight}} className="backgroundBgBase"/>} />
-                    <Route path={ROUTES.WARBAND_ROUTE} element={<div style={{height:stateheight}} className="backgroundBgBase"/>} />
-                </Routes>
-                <Routes>
                     <Route path={ROUTES.COMPENDIUM_ROUTE} element={
-                        <div className="overlaystructure menustructure d-none d-lg-block " style={{height:window.innerHeight-stateheight}}>
-                            <div style={{height:stateheight-10}}/>
+                        <div className="overlaystructure menustructure d-none d-lg-block "
+                             style={{height: window.innerHeight - stateheight}}>
+                            <div style={{height: stateheight - 10}}/>
                             <div className="scrollingoffmenu menuheight removeoverflowbar">
-                                <OncanvasMenu controller={prop.controller} closeFunc={handleClose} responseshow='md' showState={show}/>
+                                <OncanvasMenu controller={prop.controller} closeFunc={handleClose} responseshow='md'
+                                              showState={show}/>
                             </div>
                         </div>
-                        } />
+                    }/>
                 </Routes>
                 <OffcanvasMenu controller={prop.controller} closeFunc={handleClose} responseshow="" showState={show}/>
-                <SettingsMenu controller={prop.controller} closeFunc={handleClosesettings} responseshow="" showState={showsettings}/>
+                <SettingsMenu controller={prop.controller} closeFunc={handleClosesettings} responseshow=""
+                              showState={showsettings}/>
             </div>
         </ErrorBoundary>
     )

@@ -134,7 +134,7 @@ const FilterRangeItem = (prop: any) => {
                     setMenuWidth(toggleRef.current.getBoundingClientRect().width);
                     }
                 }}>
-                <Dropdown.Toggle ref={toggleRef} bsPrefix="empty" id="dropdown-basic" className="container bordergrey borderthin buttonclean colorBasicText">
+                <Dropdown.Toggle ref={toggleRef} bsPrefix="empty" id="dropdown-basic" className="container bordergrey borderthin buttonclean">
                     <div className="align-left-right container">
                         <div className="backgroundBgBase maxwidth borderthin bordergrey">
                             <div className="maxwidth align-left horizontalspacermed"> 
@@ -229,7 +229,7 @@ const FilterTagSet = (prop: any) => {
                     setMenuWidth(toggleRef.current.getBoundingClientRect().width);
                     }
                 }}>
-                <Dropdown.Toggle ref={toggleRef} bsPrefix="empty" id="dropdown-basic" className="container bordergrey borderthin buttonclean colorBasicText">
+                <Dropdown.Toggle ref={toggleRef} bsPrefix="empty" id="dropdown-basic" className="container bordergrey borderthin buttonclean">
                     <div className="align-left-right container">
                         <div className="backgroundBgBase maxwidth borderthin bordergrey">
                             <div className="maxwidth align-left horizontalspacermed"> 
@@ -311,7 +311,7 @@ const FilterMiscSet = (prop: any) => {
                     setMenuWidth(toggleRef.current.getBoundingClientRect().width);
                     }
                 }}>
-                <Dropdown.Toggle ref={toggleRef} bsPrefix="empty" id="dropdown-basic" className="container bordergrey borderthin buttonclean colorBasicText">
+                <Dropdown.Toggle ref={toggleRef} bsPrefix="empty" id="dropdown-basic" className="container bordergrey borderthin buttonclean">
                     <div className="align-left-right container">
                         <div className="backgroundBgBase maxwidth borderthin bordergrey">
                             <div className="maxwidth align-left horizontalspacermed"> 

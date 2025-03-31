@@ -1,0 +1,74 @@
+// // // // //
+//
+// Theme Styles (v2.3+)
+//
+
+// @TODO: Theme attribute needs to be on the <body> and nowhere else
+
+html,
+[data-theme='light']
+    --colour_default_main: $red-tc
+
+    --colour_red_main: #EE220C
+    --colour_green_main: #61D836
+    --colour_yellow_main: #FEAE00
+    --colour_blue_main: #00A2FF
+
+    --colour_grey_main: #808080
+
+    --colour_bg_base: #f8f8f8
+    --colour_bg_card: #eeeeee
+
+    --colour_basic_text: #{$black}
+    --colour_basic_text_inverted: #{$white}
+    --colour_bg: #{$white}
+    --colour_bg_inverted: #{$black}
+    --colour_border: #{$border-light}
+    --colour_card_headline: #{$border-light}
+
+    --colour_highlight_text: $white
+
+[data-theme='dark']
+    --colour_default_main: $red-tc
+
+    --colour_red_main: #EE220C
+    --colour_green_main: #61D836
+    --colour_yellow_main: #FEAE00
+    --colour_blue_main: #00A2FF
+
+    --colour_grey_main: #808080
+
+    --colour_bg_base: #333333
+    --colour_bg_card: #222222
+
+    --colour_basic_text: #{$white}
+    --colour_basic_text_inverted: #{$black}
+    --colour_bg: #{$black}
+    --colour_bg_inverted: #{$white}
+
+    --colour_border: #{$border-dark}
+    --colour_card_headline: #{$border-light}
+
+    --colour_highlight_text: #000000
+
+
+// // // // //
+//
+// global styles based on theme settings
+//
+
+[data-theme]
+    background-color: var(--colour_bg)
+    color: var(--colour_basic_text)
+    font-family: $font-paragraph
+
+
+
+// // // // //
+//
+// Override default Bootstrap variables with project specifics
+//
+*
+    --bs-body-color: var(--colour_basic_text)
+    --bs-offcanvas-color: var(--bs-body-color)
+

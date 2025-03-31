@@ -45,7 +45,7 @@ const WarbandRoute: React.FC<IControllerProp> = (prop) => {
     // Return result -----------------------------
     return (
         <ErrorBoundary fallback={<div>Something went wrong with CompendiumRoute.tsx</div>}>
-            <div className="backgroundBaseColour font-default" data-theme={theme}>
+            <div className="backgroundBaseColour  " data-theme={theme}>
                 <div key={_keyval} className="row justify-content-center m-0 p-0">
                     <Routes>                        
                         <Route path={ROUTES.HOME_ROUTE} element={<ToolsSavedItem manager={prop.controller.UserWarbandManager} />} />

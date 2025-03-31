@@ -72,55 +72,37 @@ const FactionEquipmentDisplay = (props: any) => {
 
     return (
         <ErrorBoundary fallback={<div>Something went wrong with FactionModelDisplay.tsx</div>}>
-            <div className="facdisplayrow_container backgroundBgBasic" key={_keyvar}>
-                <div className={" itemrow_box borderthin borderstyler bordergrey "}>
-                    <div className="totalmarginsml centered-div">
-                        
-                        <GenericPopup  d_colour={"default"} titlename={factionequipmentObject.EquipmentItem.Name} d_name={factionequipmentObject.EquipmentItem.Name} d_type={""} d_method={() => 
-                            <EquipmentDisplay data={factionequipmentObject.EquipmentItem} />}/>
-                    </div>
+                <div className="armoury-element-cell">
+                    <GenericPopup  d_colour={"default"} titlename={factionequipmentObject.EquipmentItem.Name} d_name={factionequipmentObject.EquipmentItem.Name} d_type={""} d_method={() =>
+                        <EquipmentDisplay data={factionequipmentObject.EquipmentItem} />}/>
                 </div>
-                <div className={" itemrow_box borderthin borderstyler bordergrey"}>
-                    <div className="totalmarginsml maxwidth centered-div">
-                        <span className=" maxwidth headersubtext boldtext colourgrey maxwidth wordbreak">
-                            {
-                                factionequipmentObject.Cost + " " + 
-                                getCostType(factionequipmentObject.CostType)
-                            }
-                        </span>
-                    </div>
-                </div>
-                <div className={" itemrow_box borderthin borderstyler bordergrey"}>
-                    <div className="totalmarginsml maxwidth centered-div">
-                        {(factionequipmentObject.Limit != 0) &&
-                            <>
-                            <span className="headersubtext boldtext colourgrey maxwidth wordbreak">
-                                {
-                                    "LIMIT: " +  factionequipmentObject.Limit + " " +  equiprestrictions.join(', ') 
-                                }
-                            </span>
-                            </>
-                        }{(factionequipmentObject.Limit == 0 && equiprestrictions.length > 0) &&
-                            <>
-                            <span className="headersubtext boldtext colourgrey maxwidth wordbreak">
-                                {
-                                    equiprestrictions.join(', ') 
-                                }
-                            </span>
-                            </>
-                        }{(factionequipmentObject.Limit == 0 && equiprestrictions.length == 0) &&
-                            <>
-                            <span className="headersubtext boldtext colourgrey maxwidth">
-                                {
-                                    "-" 
-                                }
-                            </span>
-                            </>
+
+                <div className="armoury-element-cell">
+                    <div className="armoury-element-price">
+                        {
+                            factionequipmentObject.Cost + " " +
+                            getCostType(factionequipmentObject.CostType)
                         }
                     </div>
+
+                    {(factionequipmentObject.Limit != 0) &&
+                        <>
+                        <div className="armoury-element-restriction armoury-element-limit">
+                            {
+                                "LIMIT: " +  factionequipmentObject.Limit
+                            }
+                        </div>
+                        </>
+                    }{(equiprestrictions.length > 0) &&
+                    <>
+                        <div className="armoury-element-restriction">
+                            {
+                                equiprestrictions.join(', ') + ' only'
+                            }
+                        </div>
+                    </>
+                }
                 </div>
-            </div>
-            
         </ErrorBoundary>
     )
 }
