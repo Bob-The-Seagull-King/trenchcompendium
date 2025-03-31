@@ -147,7 +147,10 @@ class WarbandManager {
             title : _title,
             context : {
                 id: this.CalcID(_title.trim() + "_context"),
-                title: _title + "_context"
+                limit_ducat: 0,
+                limit_model: 0,
+                value_ducat: 0,
+                value_glory: 0
                 }
         }
 
