@@ -4,17 +4,77 @@ WarbandContext
     - Ducat Limit
     - Glory Limit
 
+WarbandUser
+# Used to assign a warband, users will later be expanded as campaigns as well
+    - User Name
+
 WarbandItem
 # Used to describe the elements of the warband itself
-Bank
-List of other warband property types
-player notes
-exploration
+    - Name
+    - CustomNotes[]
+    - Ducat Bank
+    - Glory Bank
+    - WarbandContext
+    - WarbandUser
+    - WarbandFaction
+    - WarbandExploration
+    - ModelPurchases[]
+    - EquipmentPurchases[]
+    - WarbandProperties[]
+        # Gathered from sub components
 
-WarbandMember
+WarbandExploration
+# Used to catalogue what has been explored
+    - Locations explored
+    - Exploration Skills
 
-WarbandItem
+WarbandPurchase
+# Used to handle how much an item costs, like Members, Items, Bonus costs
+# Used in the context of other options
+    - Ducat cost
+    - Glory cost
+    - Count-For-Cap
+    - Takes-Away-Money
+    - Sellable
+    - Thing_That_Was_Purchased
 
 WarbandProperty
 # Used to describe unique shared elements and choices on the warband-level
 # Examples: House Of Wisdom weapon selections, Defenders Of The Iron Wall anqa guard, Cabal Of Assassins FIRETEAM
+# Used in the context of other options
+    - Name
+    - Option
+    - Selection
+
+WarbandMember
+# Actual Models
+    - Model_ID
+    - Experience
+    - Promotion_State
+    - IsReserve
+    - Equipment[]
+    - Injuries[]
+    - Skills[]
+    - Upgrades[]
+    - CustomNotes[]
+    - WarbandProperties[]
+
+WarbandItem
+# Items/Equipment
+    - Equipment_ID
+    - CustomNotes[]
+    - WarbandProperties[]
+    - AssignmentModel
+
+WarbandFaction
+# The faction and related items that have been chosen
+    - Faction_Type
+    - Patron Selected
+    - WarbandProperties[]
+
+WarbandSpecial
+# Used to allow players to add unique elements to a warband
+    - Name
+    - Note / Text Descriptin
+    - Elements
+        # Unique warband properties like bonus weapon options, bonus fireteams, etc
