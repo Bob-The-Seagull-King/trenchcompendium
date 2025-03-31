@@ -36,19 +36,17 @@ const BaseHeader: React.FC<IControllerProp> = (prop: any) => {
     return (
         
         <ErrorBoundary fallback={<div>Something went wrong with BaseHeader.tsx</div>}>
-            <div className='backgroundBgCard'>
-                <div className="align-left-right horizontalspacermed">
-                    <Button bsPrefix="empty" className="borderremove backgroundBgCard lonebutton" onClick={handleShow}>
-                        <FontAwesomeIcon icon={faBars} className="size-section colordefault"/>
-                    </Button>
-                    <div className="font-ornamental colordefault">
-                        <div className="size-section d-xl-flex d-lg-flex d-md-flex d-none">{getRouteName(useLocation().pathname)}</div>
-                        <div className="size-subtitle d-flex d-lg-none d-md-none d-xl-none">{getRouteName(useLocation().pathname)}</div>
-                    </div>
-                    <Button bsPrefix="empty" className="borderremove backgroundBgCard lonebutton" onClick={handleShowSettings}>
-                        <FontAwesomeIcon icon={faGear} className="size-section colordefault"/>
-                    </Button>
+            <div className="align-left-right">
+                <Button bsPrefix="empty" className="lonebutton" onClick={handleShow}>
+                    <FontAwesomeIcon icon={faBars} className=""/>
+                </Button>
+                <div className="font-ornamental">
+                    <div className="size-section d-xl-flex d-lg-flex d-md-flex d-none">{getRouteName(useLocation().pathname)}</div>
+                    <div className="size-subtitle d-flex d-lg-none d-md-none d-xl-none">{getRouteName(useLocation().pathname)}</div>
                 </div>
+                <Button bsPrefix="empty" className="lonebutton" onClick={handleShowSettings}>
+                    <FontAwesomeIcon icon={faGear} className=""/>
+                </Button>
             </div>
         </ErrorBoundary>
 

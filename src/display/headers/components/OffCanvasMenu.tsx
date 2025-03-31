@@ -8,7 +8,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 
 // Font Awesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSun } from '@fortawesome/free-solid-svg-icons'
+import {faChevronDown, faChevronUp, faSun, faClose} from '@fortawesome/free-solid-svg-icons'
 import { faMoon } from '@fortawesome/free-solid-svg-icons'
 import { useGlobalState } from '../../../utility/globalstate'
 import { useNavigate } from 'react-router-dom';
@@ -37,7 +37,7 @@ const OffcanvasMenu: React.FC<IControllerProp> = (prop) => {
     if ((theme == "" ) || (theme == null)) { // Default theme to light
         setTheme('dark');
     }
-        
+
     // Navigation
     const navigate = useNavigate(); 
     
@@ -52,11 +52,12 @@ const OffcanvasMenu: React.FC<IControllerProp> = (prop) => {
     
     return (
         <ErrorBoundary fallback={<div>Something went wrong with PalleteSwap.tsx</div>}>  
-            <Offcanvas className="borderthin bordergrey" data-theme={theme} show={show} onHide={handleClose} responsive={prop.responseshow}>
-                <Offcanvas.Header className="borderthin bordergrey backgroundBgBase font-default " closeButton>
-                    <Offcanvas.Title className="size-subtitle ">
-                        <div className="colorBasicText">
-                            Trench Compendium v2.2
+            <Offcanvas className="borderthin bordergrey offcanvas-main-menu" data-theme={theme} show={show} onHide={handleClose} responsive={prop.responseshow}>
+                <Offcanvas.Header className="borderthin bordergrey backgroundBgBase font-default">
+                    <Offcanvas.Title className="">
+                        Trench Compendium v2.2
+                        <div className="offcanvas-close" onClick={handleClose}>
+                            <FontAwesomeIcon icon={faClose} className=""/>
                         </div>
                     </Offcanvas.Title>
                 </Offcanvas.Header>
