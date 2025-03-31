@@ -121,7 +121,17 @@ const PagedCompendiumDisplay = (prop: any) => {
         <ErrorBoundary fallback={<div>Something went wrong with PagedDisplayCompendium.tsx</div>}>
             <div className="col-lg-6 col-md-12" key={_keyval}>
                 <div>
-                    <div className="verticalspacermed"/>                    
+                    {((_curItem == undefined) || (_curItem == null)) &&
+                        <h1 className="">No Items Selected</h1>
+                    }
+                    {((_curItem != undefined) && (_curItem != null)) &&
+                        <div className="">
+                            {DisplayPage.returnDisplay(_curItem.HeldItem)}
+                        </div>
+                    }
+                </div>
+
+                <div className="rules-page-links">
                     <div className="align-left-right buttonrow_container stat_parent">
                         <div className=" maxwidth">
                             <BasicButton d_dir={"l"} btn_title={GetPrevName()} btn_state={_canprev} btn_press={GrabPrevItem}/>
@@ -133,34 +143,6 @@ const PagedCompendiumDisplay = (prop: any) => {
                             <BasicButton d_dir={"r"} btn_title={GetNextName()} btn_state={_cannext} btn_press={GrabNextItem}/>
                         </div>
                     </div>
-                </div>
-                <div>
-                    <div className="verticalspacermed"/>
-                    {((_curItem == undefined) || (_curItem == null)) &&
-                        <div className="">
-                            <h1 className="">No Items Selected</h1>
-                        </div>
-                    }
-                    {((_curItem != undefined) && (_curItem != null)) &&
-                        <div className="">
-                            {DisplayPage.returnDisplay(_curItem.HeldItem)}
-                        </div> 
-                    }
-                </div>
-                <div>
-                    <div className="verticalspacermed"/>                    
-                        <div className="align-left-right buttonrow_container stat_parent">
-                            <div className=" maxwidth">
-                                <BasicButton d_dir={"l"} btn_title={GetPrevName()} btn_state={_canprev} btn_press={GrabPrevItem}/>
-                            </div>
-                            <div>
-                                <div className="horizontalspacermed"/>
-                                </div>
-                            <div className=" maxwidth">
-                                <BasicButton d_dir={"r"} btn_title={GetNextName()} btn_state={_cannext} btn_press={GrabNextItem}/>
-                            </div>
-                        </div>
-                    <div className="verticalspacermed"/>
                 </div>
             </div>
         </ErrorBoundary>

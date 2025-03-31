@@ -48,11 +48,11 @@ const GenericEditListDisplay = (props: any) => {
             
             <Modal data-theme={theme} onEnterKeyDown={() => handleCloseTextEdit()} show={showTextEdit}  contentClassName="basestructure abilityStructure borderstyler colordefault" dialogClassName="" onHide={handleCloseTextEdit} keyboard={true}  centered>
                 
-                <h1 className={'titleShape font-default titlebody backgrounddefault'}>
+                <h1 className={'titleShape   titlebody backgrounddefault'}>
                     {EditStaticType.title}
                 </h1>
                 <Modal.Body >
-                    <div className="row font-default">
+                    <div className="row  ">
                         <div className="col-10">
                             <InputGroup className="tagboxpad" >
                                 <Form.Control size="lg" className="no-margins" ref={inputRefTextEdit} style={{fontSize:"1.5em", height:"0.5em", textAlign:"center"}} onChange={e => updateText(e.target.value)} aria-label="Text input" defaultValue={refValue} placeholder=""/>

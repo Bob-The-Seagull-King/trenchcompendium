@@ -31,12 +31,12 @@ const HomeRoute: React.FC = () => {
     return (
         
         <ErrorBoundary fallback={<div>Something went wrong with HomeRoute.tsx</div>}>
-            <div className="backgroundBaseColour font-default" data-theme={theme}>
+            <div className="backgroundBaseColour  " data-theme={theme}>
                 <div className="row justify-content-center m-0 p-0">
                     <div className="col-lg-8 col-md-12">
                         <div className="row justify-content-center">
                             <div className="col inner-content-middle align-center">
-                                <div className="colordefault font-ornamental size-title">Trench Crusade</div>
+                                <h1 className="">Trench Companion</h1>
                             </div>
                         </div>
                         <div className="row row-cols-md-2 row-cols-1 gy-3 gx-3">

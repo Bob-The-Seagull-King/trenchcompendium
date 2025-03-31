@@ -3,6 +3,7 @@
 // Theme Styles (v2.3+)
 //
 
+// @TODO: Theme attribute needs to be on the <body> and nowhere else
 
 html,
 [data-theme='light']
@@ -19,7 +20,11 @@ html,
     --colour_bg_card: #eeeeee
 
     --colour_basic_text: #{$black}
+    --colour_basic_text_inverted: #{$white}
     --colour_bg: #{$white}
+    --colour_bg_inverted: #{$black}
+    --colour_border: #{$border-light}
+    --colour_card_headline: #{$border-light}
 
     --colour_highlight_text: $white
 
@@ -37,7 +42,13 @@ html,
     --colour_bg_card: #222222
 
     --colour_basic_text: #{$white}
+    --colour_basic_text_inverted: #{$black}
     --colour_bg: #{$black}
+    --colour_bg_inverted: #{$white}
+
+    --colour_border: #{$border-dark}
+    --colour_card_headline: #{$border-light}
+
     --colour_highlight_text: #000000
 
 
@@ -49,7 +60,7 @@ html,
 [data-theme]
     background-color: var(--colour_bg)
     color: var(--colour_basic_text)
-
+    font-family: $font-paragraph
 
 
 

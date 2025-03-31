@@ -131,7 +131,7 @@ const ScenarioDisplay = (props: any) => {
                             </div>
                         </div>
                     </div>
-                    <div className=" colourBasicText font-default size-default ">
+                    <div className=" colourBasicText   size-default ">
                         <div className="">
                         {returnDescription(scenarioObject, scenarioObject.ForcesDesc)}
                         </div>
@@ -151,7 +151,7 @@ const ScenarioDisplay = (props: any) => {
                             </div>
                         </div>
                     </div>
-                    <div className=" colourBasicText font-default size-default ">
+                    <div className=" colourBasicText   size-default ">
                         <div className="">
                         {returnDescription(scenarioObject, scenarioObject.InfiltratorDesc)}
                         </div>
@@ -171,7 +171,7 @@ const ScenarioDisplay = (props: any) => {
                             </div>
                         </div>
                     </div>
-                    <div className=" colourBasicText font-default size-default ">
+                    <div className=" colourBasicText   size-default ">
                         <div className="">
                         {returnDescription(scenarioObject, scenarioObject.BattlelengthDesc)}
                         </div>
@@ -190,7 +190,7 @@ const ScenarioDisplay = (props: any) => {
                         </div>
                     </div>
                 </div>
-                <div className="colourBasicText font-default size-default">
+                <div className="colourBasicText   size-default">
                     {returnDescription(scenarioObject, scenarioObject.BattlefieldSize)}
                         <div >
                             {returnDescription(scenarioObject, scenarioObject.BattlefieldExtra)}
@@ -215,7 +215,7 @@ const ScenarioDisplay = (props: any) => {
                         </div>
                     </div>
                 </div>
-                <div className="colourBasicText font-default size-default">
+                <div className="colourBasicText   size-default">
                 {returnDescription(scenarioObject, scenarioObject.DeploymentDesc)}
                 </div>
 
@@ -231,7 +231,7 @@ const ScenarioDisplay = (props: any) => {
                         </div>
                     </div>
                 </div>
-                <div className="colourBasicText font-default size-default">
+                <div className="colourBasicText   size-default">
                 {returnDescription(scenarioObject, scenarioObject.VictoryDesc)}
                 </div>
 

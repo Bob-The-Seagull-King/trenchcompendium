@@ -61,7 +61,7 @@ const CompendiumMenuItem = (prop: any) => {
                 d_method={() => (
                     <div className={"backgroundBgBase borderthin bordergrey"}>
                     {CollectionController.itemcollection.map((item) => (
-                        <div key={item.HeldItem.ID} onClick={() => SpecificNavigtateOut(item)} className={'align-left-right font-default hovermouse centered-div '}>
+                        <div key={item.HeldItem.ID} onClick={() => SpecificNavigtateOut(item)} className={'align-left-right   hovermouse centered-div '}>
                             <div className='totalmarginsml horizontalspacermed'>
                                 {item.HeldItem.Name}
                             </div>
@@ -72,7 +72,7 @@ const CompendiumMenuItem = (prop: any) => {
                 )} />
             }
             {DisplayPage.menushowitems == false &&
-                <div onClick={() => NavigateOut()} className={'align-left-right size-strongtext font-default hovermouse centered-div backgroundBgBase bordergrey borderthin'}>
+                <div onClick={() => NavigateOut()} className={'align-left-right size-strongtext   hovermouse centered-div backgroundBgBase bordergrey borderthin'}>
                     <div className='totalmarginmed'>
                         {DisplayPage.titlename}
                     </div>

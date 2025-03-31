@@ -58,15 +58,12 @@ const BookRuleDisplay = (props: any) => {
                             pauseOnHover
                             theme="light" 
                             />
-                <div className="colourBasicText font-default size-default">
+                <div className="colourBasicText   size-default">
                     {returnDescription(ruleObject, ruleObject.Description)}
                 </div>
                 {ruleObject.Sections != undefined && <>
                 {ruleObject.Sections.length > 1 &&
-                    <div>
-                        <div className="verticalspacermed"/>
-                        {GetContents(ruleObject)}
-                    </div>
+                    GetContents(ruleObject)
                 }
                 {ruleObject.Sections.map((item) => (
                     <div key={item.title}>
@@ -74,14 +71,14 @@ const BookRuleDisplay = (props: any) => {
                         <div className={'subtitle-letterspacing size-subtitle font-seriftext'}>
                             <div className='centered-div width-content'>
                                 {item.title || ""}
-                                <div className='horizontalspacermed hovermouse'>
-                                    <FontAwesomeIcon icon={faLink} onClick={() => (
+                                <div className='hovermouse'>
+                                    <FontAwesomeIcon icon={faLink} className="icon-inline-r" onClick={() => (
                                         runToast()
                                         )}/>
                                 </div>
                             </div>
                         </div>
-                        <div className="colourBasicText font-default size-default">
+                        <div className="colourBasicText   size-default">
                             {returnDescription(ruleObject, item.description)}
                             <div className="verticalspacermed"/>
                             {item.content.map((valitem) => (

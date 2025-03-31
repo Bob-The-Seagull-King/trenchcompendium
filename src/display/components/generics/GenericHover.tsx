@@ -29,20 +29,20 @@ const GenericHover = (props: any) => {
     return (
       <OverlayTrigger placement={'auto'} 
         overlay={
-        <Popover.Body bsPrefix="empty" className="popover" id="tooltip">
-          <div data-theme={theme} className='width-content font-default'>
-            <div className={'col-12 backgroundBgCard borderstyler ' + DisplayType + 'border'+getColour(DisplayColour)}>
-                <h1 className={'size-strongtext font-default hovermouse centered-div background'+getColour(DisplayColour)}>
+        <Popover.Body bsPrefix="empty" className="popover rules-popover-element" id="tooltip">
+          <div data-theme={theme} className='width-content  '>
+            <div className={DisplayType}>
+                <div className="popover-headline">
                     {ruleName || ""}
-                </h1>
-                <div className="backgroundBgCard size-default">
+                </div>
+                <div className="popover-content">
                   {displayMethod()}
                 </div>
             </div>
           </div>
         </Popover.Body>
         }>
-        <span className='colordefault width-content hovermouse'>{DisplayName}</span>
+        <span className='rules-popover-link'>{DisplayName}</span>
       </OverlayTrigger>
     )
 }

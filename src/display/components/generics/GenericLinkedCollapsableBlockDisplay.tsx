@@ -32,7 +32,7 @@ const GenericLinkedCollapsableBlockDisplay = (props: any) => {
 
     return (
         <div >
-            <div  className={'align-left-right size-strongtext font-default centered-div border'+getColour(DisplayColour) + " " + (StyleType == 0? "borderthin" : StyleType == 1? "borderthinnosides" : StyleType == 2? "borderthintop" : StyleType == 3? "borderthinbottom" : "borderremove") + " background"+BgCol}>
+            <div  className={'align-left-right size-strongtext   centered-div border'+getColour(DisplayColour) + " " + (StyleType == 0? "borderthin" : StyleType == 1? "borderthinnosides" : StyleType == 2? "borderthintop" : StyleType == 3? "borderthinbottom" : "borderremove") + " background"+BgCol}>
                 <div onClick={() => {SpecificNavigtateOut(LinkOut)}} className={'hovermouse totalmargin'+MarginSize}>
                     {DisplayName || ""}
                 </div>

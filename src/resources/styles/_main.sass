@@ -1,8 +1,24 @@
 @import './_variables'
 
-@import './_theme-colors'
-@import './page-title'
-@import './offcanvas'
-@import './header-main'
+// wrap inside body class to enable global overwrite of BS styles etc.
+.trench-companion
+
+
+    // global
+    @import './_theme'
+    @import './_global'
+
+    // components
+    @import './offcanvas'
+    @import './header-main'
+
+    // components for rules pages
+    @import './rules-page-anchors.sass'
+    @import './rules-page-links.sass'
+    @import './rules-popover.sass'
+    @import './rules-armoury.sass'
+
+    // page specific
+    @import './page-title'
 
 

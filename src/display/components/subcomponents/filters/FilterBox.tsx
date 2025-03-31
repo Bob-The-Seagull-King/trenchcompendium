@@ -74,7 +74,7 @@ const FilterBox = (prop: any) => {
                     <div className="verticalspacermed"/>
                     {(DisplayPage.hidefilter == undefined) &&
                         <div className="borderthin bordergrey">
-                            <div onClick={() => {setOpen(!open)}} className={'centered-div size-strongtext font-default hovermouse centered-div borderbed bordergrey borderthin backgroundBgCard'}>
+                            <div onClick={() => {setOpen(!open)}} className={'centered-div size-strongtext   hovermouse centered-div borderbed bordergrey borderthin backgroundBgCard'}>
                                 <div className={'totalmarginxsm font-seriftext'}>
                                     {"Filters"}
                                 </div>

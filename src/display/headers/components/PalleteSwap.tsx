@@ -35,7 +35,7 @@ const PalleteSwap = (prop: any) => {
      */
     function returnPalletes(themeval: string | null, _icon : IconDefinition, curtheme : string) {
         return (
-            <div onClick={() => SetPallete(themeval? themeval : curtheme)} className={"hovermouse size-strongtext font-default totalmarginsml align-left-right color"+(themeval == curtheme ? 'default' : 'BasicText')}>
+            <div onClick={() => SetPallete(themeval? themeval : curtheme)} className={"hovermouse size-strongtext   totalmarginsml align-left-right color"+(themeval == curtheme ? 'default' : 'BasicText')}>
                 <div className="horizontalspacermed">{makestringpresentable(themeval? themeval : "")}</div>
                 <FontAwesomeIcon icon={_icon} className=""/>
             </div>

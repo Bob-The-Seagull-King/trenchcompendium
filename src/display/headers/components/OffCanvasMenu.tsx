@@ -53,7 +53,7 @@ const OffcanvasMenu: React.FC<IControllerProp> = (prop) => {
     return (
         <ErrorBoundary fallback={<div>Something went wrong with PalleteSwap.tsx</div>}>  
             <Offcanvas className="borderthin bordergrey offcanvas-main-menu" data-theme={theme} show={show} onHide={handleClose} responsive={prop.responseshow}>
-                <Offcanvas.Header className="borderthin bordergrey backgroundBgBase font-default">
+                <Offcanvas.Header className="borderthin bordergrey backgroundBgBase  ">
                     <Offcanvas.Title className="">
                         Trench Compendium v2.2
                         <div className="offcanvas-close" onClick={handleClose}>

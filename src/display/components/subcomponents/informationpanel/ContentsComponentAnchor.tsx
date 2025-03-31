@@ -4,6 +4,8 @@ import React from 'react'
 import { ErrorBoundary } from "react-error-boundary";
 import { useNavigate } from 'react-router-dom';
 import GenericCollapsableBlockDisplay from '../../../components/generics/GenericCollapsableBlockDisplay';
+import {faChevronRight} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 export interface ContentsLink {
     name: string,
@@ -20,23 +22,22 @@ const ContentsComponentAnchor: React.FC<ContentsCollection> = (props: any) => {
 
     function ReturnItemLink(_obj : ContentsLink) {
         return (
-            <a className="hovermouse cleanunderline" href={"#"+_obj.route}>
-                {"- " + _obj.name}
+            <a className="rules-page-anchor" href={"#"+_obj.route}>
+                {_obj.name}
+                <FontAwesomeIcon icon={faChevronRight} className="icon-inline-r" />
             </a>
         )
     }
 
     return (
         <ErrorBoundary fallback={<div>Something went wrong with MenuDisplay.tsx</div>}>
-            <div>
-            <div className="font-default bordergrey borderstyler backgroundBgCard">
-                    <div className="totalmarginsml">
-                        {props.listofcontents.map((item : ContentsLink) => 
-                            <div key={item.route}>
-                                {ReturnItemLink(item)}
-                            </div>)}
-                    </div>
+            <div className="rules-page-anchors">
+                <div className="rules-page-anchors-title">
+                    On this page
                 </div>
+                {props.listofcontents.map((item : ContentsLink) =>
+                    ReturnItemLink(item)
+                )}
             </div>
         </ErrorBoundary>
     )

@@ -42,7 +42,7 @@ const ContentsComponentLink: React.FC<ContentsCollection> = (props: any) => {
         <ErrorBoundary fallback={<div>Something went wrong with MenuDisplay.tsx</div>}>
             <div>
             {props.showheader == false &&
-                <div className="font-default bordergrey borderstyler backgroundBgCard">
+                <div className="  bordergrey borderstyler backgroundBgCard">
                     <div className="totalmarginsml">
                         {props.listofcontents.map((item : ContentsLink) => 
                             <div key={item.route}>

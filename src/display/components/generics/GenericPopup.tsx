@@ -42,7 +42,7 @@ const GenericPopup = (props: any) => {
           <Modal data-theme={theme} show={show} size="lg" contentClassName="overcomeBackground" dialogClassName=""  onHide={handleClose} keyboard={true}  centered>
               <Modal.Body > 
                 
-                <div className={'backgroundBgCard basestructure font-default borderthin bordergrey'}>
+                <div className={'backgroundBgCard basestructure   borderthin bordergrey'}>
                     <div className={'borderthin bordergrey centered-div size-subtitle font-seriftext background'+getColour(DisplayColour)}>
                         <div className="">
                             <Button className="no-padding" variant="" onClick={() => handleClose()}>
