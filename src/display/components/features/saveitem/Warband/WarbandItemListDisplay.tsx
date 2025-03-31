@@ -1,4 +1,7 @@
+
 import '../../../../resources/styles/vendor/bootstrap.css'
+import 'bootstrap/dist/css/bootstrap.css'
+import '../../../../../resources/styles/_mainstylesource.scss'
 import React, { useRef, useState } from 'react'
 
 import { ToastContainer, toast } from 'react-toastify';
@@ -8,15 +11,15 @@ import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 
 // Components
-import ContentPackDisplay from '../../../components/features/contentpack/ContentPackDisplay'
+import ContentPackDisplay from '../../../../components/features/contentpack/ContentPackDisplay'
 
 // Font Awesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFileImport, faPerson } from '@fortawesome/free-solid-svg-icons'
-import { ContentPack } from '../../../../classes/contentpacks/contentpack'
+import { ContentPack } from '../../../../../classes/contentpacks/contentpack'
 import WarbandItemDisplay from './WarbandItemDisplay';
-import { WarbandManager } from '../../../../classes/saveitems/WarbandManager';
-import { WarbandContentItem } from '../../../../classes/saveitems/WarbandContentItem';
+import { WarbandManager } from '../../../../../classes/saveitems/Warband/WarbandManager';
+import { WarbandContentItem } from '../../../../../classes/saveitems/Warband/WarbandContentItem';
 
 const WarbandItemListDisplay = (prop: any) => {
     const Manager : WarbandManager = prop.manager;

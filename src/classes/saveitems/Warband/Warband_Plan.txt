@@ -1,0 +1,20 @@
+WarbandContext
+# Used to describe limitations and restrictions imposed on the warband
+    - Model Count
+    - Ducat Limit
+    - Glory Limit
+
+WarbandItem
+# Used to describe the elements of the warband itself
+Bank
+List of other warband property types
+player notes
+exploration
+
+WarbandMember
+
+WarbandItem
+
+WarbandProperty
+# Used to describe unique shared elements and choices on the warband-level
+# Examples: House Of Wisdom weapon selections, Defenders Of The Iron Wall anqa guard, Cabal Of Assassins FIRETEAM

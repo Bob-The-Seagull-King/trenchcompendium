@@ -1,6 +1,6 @@
-import { CompendiumItem, ICompendiumItemData, ItemType } from '../CompendiumItem'
-import { DescriptionFactory } from '../../utility/functions';
-import { INote } from '../Note';
+import { CompendiumItem, ICompendiumItemData, ItemType } from '../../CompendiumItem'
+import { DescriptionFactory } from '../../../utility/functions';
+import { INote } from '../../Note';
 import { IWarbandContextItem, WarbandContextItem } from './WarbandContextItem';
 
 interface IWarbandContentItem {

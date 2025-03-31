@@ -15,7 +15,7 @@ import CompendiumBasePage from '../pages/CompendiumBasePage';
 import PagedCompendiumDisplay from '../pages/PagedCompendiumDisplay';
 import FilterableCompendiumDisplay from '../pages/FilterableCompendiumDisplay';
 import { ToolsController } from '../../classes/_high_level_controllers/ToolsController';
-import WarbandItemDisplay from '../components/features/saveitem/WarbandItemDisplay';
+import WarbandItemDisplay from '../components/features/saveitem/Warband/WarbandItemDisplay';
 import ToolsSavedItem from '../pages/ToolsSaveItem';
 
 interface IControllerProp {

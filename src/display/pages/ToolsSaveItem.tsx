@@ -5,8 +5,8 @@ import { ErrorBoundary } from "react-error-boundary";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Item } from '../../classes/saveitems/item';
-import WarbandItemViewDisplay from '../components/features/saveitem/WarbandItemViewDisplay';
-import WarbandItemListDisplay from '../components/features/saveitem/WarbandItemListDisplay';
+import WarbandItemViewDisplay from '../components/features/saveitem/Warband/WarbandItemViewDisplay';
+import WarbandItemListDisplay from '../components/features/saveitem/Warband/WarbandItemListDisplay';
 import { useLocation } from 'react-router-dom';
 
 const ToolsSavedItem = (prop: any) => {
