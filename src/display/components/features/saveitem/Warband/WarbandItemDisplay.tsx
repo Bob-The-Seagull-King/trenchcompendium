@@ -54,7 +54,7 @@ const WarbandItemDisplay = (prop: any) => {
         )}`;
         const link = document.createElement("a");
         link.href = jsonString;
-        link.download = WarbandItem.Title + ".json";
+        link.download = WarbandItem.Name + ".json";
     
         link.click();
       };
@@ -80,7 +80,7 @@ const WarbandItemDisplay = (prop: any) => {
                         <span className="contentsubnamecontainer">
                             <span/>
                             <h1 className="colordefault packtitlebase packtitlelarge">
-                                {WarbandItem.Title}
+                                {WarbandItem.Name}
                             </h1>
                             <span/>
                             <span className="packvrbox">
@@ -118,7 +118,7 @@ const WarbandItemDisplay = (prop: any) => {
                         
                         <div className="row textmaxwidth">
                                 <h1 className="colordefault packtitlebase packtitlelarge widecentertext" >
-                                    {WarbandItem.Title}
+                                    {WarbandItem.Name}
                                 </h1>
                         </div>
                         <div className="row">

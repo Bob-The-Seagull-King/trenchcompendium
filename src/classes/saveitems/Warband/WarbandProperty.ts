@@ -1,11 +1,12 @@
 import { CompendiumItem, ICompendiumItemData, ItemType } from '../../CompendiumItem'
 import { DescriptionFactory } from '../../../utility/functions';
 import { INote } from '../../Note';
-import { IWarbandContextItem, WarbandContextItem } from './WarbandContextItem';
+import { IWarbandContextItem, WarbandContextItem } from './High_Level/WarbandContextItem';
 import { DynamicOptionContextObject } from '../../options/DynamicOptionContextObject';
-import { IContextObject } from '../../contextevent/contextobject';
+import { ContextObject, IContextObject } from '../../contextevent/contextobject';
 import { DynamicContextObject } from '../../contextevent/dynamiccontextobject';
 import { StaticOptionContextObject } from '../../options/StaticOptionContextObject';
+import { ContextPackage } from '../../contextevent/contextpackage';
 
 interface IWarbandProperty {
     object_id: string,
@@ -17,7 +18,7 @@ interface ISelectedOption {
     selection_ID : number | null;
 }
 
-class WarbandProperty  {
+class WarbandProperty extends DynamicContextObject  {
     public SelfDynamicProperty : DynamicOptionContextObject;
 
     /**
@@ -27,6 +28,7 @@ class WarbandProperty  {
      */
     public constructor(selection_vals: IWarbandProperty, base_obj : StaticOptionContextObject, parent : DynamicContextObject | null)
     {
+        super(base_obj.SelfData, parent);
         this.SelfDynamicProperty = new DynamicOptionContextObject(base_obj.SelfData, base_obj, parent)
 
         for (let i = 0; i < this.SelfDynamicProperty.Selections.length; i++) {
@@ -60,6 +62,15 @@ class WarbandProperty  {
         }
         
         return _objint;
+    }
+    
+    /**
+     * Grabs the packages from any sub-objects, based
+     * on class implementation.
+     */
+    public async GrabSubPackages(event_id : string, source_obj : ContextObject, arrs_extra : any[]) : Promise<ContextPackage[]> { 
+        const static_packages : ContextPackage[] = await this.SelfDynamicProperty.GrabContextPackages(event_id, source_obj, arrs_extra);
+        return static_packages;
     }
 
 }
