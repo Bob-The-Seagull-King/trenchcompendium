@@ -282,14 +282,14 @@ const ModelDisplay = (props: any) => {
                                     <div className="totalmarginmed remove-margin-left">
                                         <ul className="">
                                         {equiprestrictions.map((item) => ( 
-                                            <li key={item} className=" nowrap">
+                                            <li key={item} className=" nowrap colorBasicText">
                                                 {
                                                     item
                                                 }
                                             </li>
                                         ))}  
                                         {equiplimits.map((item) => ( 
-                                            <li key={item} className="nowrap">
+                                            <li key={item} className="nowrap colorBasicText">
                                                 {
                                                     item
                                                 }

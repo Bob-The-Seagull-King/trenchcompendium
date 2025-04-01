@@ -55,7 +55,7 @@ const SettingsMenu: React.FC<IControllerProp> = (prop) => {
             <Offcanvas placement={'end'} className="borderthin bordergrey" data-theme={theme} show={show} onHide={handleClose} responsive={prop.responseshow}>
                 <Offcanvas.Header className="borderthin bordergrey backgroundBgBase font-default " closeButton>
                     <Offcanvas.Title className="size-subtitle ">
-                        <div className="">
+                        <div className="colorBasicText">
                             Trench Compendium v2.2
                         </div>
                     </Offcanvas.Title>
