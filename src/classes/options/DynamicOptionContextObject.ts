@@ -4,6 +4,7 @@ import { DynamicContextObject } from "../contextevent/dynamiccontextobject";
 import { SelectedOption } from "./SelectedOption";
 import { StaticOptionContextObject } from "./StaticOptionContextObject";
 
+
 /*
 DynamicOptionContextObjects are solely used to apply Context
 to objects with options.

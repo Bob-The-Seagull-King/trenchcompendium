@@ -22,13 +22,16 @@ class SelectedOption {
      * Given a specific id, set the current choice
      * to one of this object's Option's selections.
      */
-    public SelectOption(_id : number) {
+    public SelectOption(_id : number | null) {
+        if (_id == null) {
+            this.SelectedChoice = null;
+        } else {
         for (let i = 0; i < this.Option.Selections.length; i++) {
             if (this.Option.Selections[i].id == _id) {
                 this.SelectedChoice = this.Option.Selections[i]
                 break;
             }
-        }
+        }}
     }
 
 }

@@ -9,6 +9,7 @@ interface IContextObject extends ICompendiumItemData {
 
 class ContextObject extends CompendiumItem {
 
+    public SelfData : any;
     public ContextKeys : ContextEventVals = {}
     public ContextData : CallEventTable | undefined; // The table searched through in Events
 
@@ -16,6 +17,7 @@ class ContextObject extends CompendiumItem {
 
     public constructor(data : IContextObject, parent : ContextObject | null) {
         super(data);
+        this.SelfData = data;
         this.MyContext = parent;
         this.ContextKeys = data.contextdata;        
         this.ContextData = BaseContextCallTable;
