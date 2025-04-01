@@ -319,7 +319,7 @@ const FactionDisplay = (props: any) => {
                         <div className={'subtitle-letterspacing size-subtitle font-seriftext'}>
                             <div className='centered-div width-content'>
                                 {"Armoury"}
-                                <div className='icon-inline-r'>
+                                <div className='horizontalspacermed hovermouse'>
                                     <FontAwesomeIcon icon={faLink} onClick={() => (
                                         runToast()
                                         )}/>
@@ -330,13 +330,20 @@ const FactionDisplay = (props: any) => {
                     <div className='abilityInternalStructure'>
                     {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "melee" && (containsTag(item.Tags, "exploration_only") == false))).length > 0 &&
                         <>
-                            <div className="armoury-section">
-                                <div className="armoury-headline">
-                                    {"Melee Weapons"}
+                            <div className="verticalspacersml"/>
+                            <div className="borderthin bordergrey">
+                                <div className="borderthin bordergrey backgroundBgBasic">
+                                    <div className="totalmarginsml">
+                                        <div className={'subtitle-letterspacing size-subtitle font-seriftext'}>
+                                            <div className='centered-div width-content'>
+                                                {"Melee"}
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="armoury-content">
+                                <div className="">
                                     {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "melee" && (containsTag(item.Tags, "exploration_only") == false))).map((item) => ( 
-                                        <div key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID} className="armoury-element">
+                                        <div key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID} className="backgroundBgCard  textmaxwidth">
                                             <FactionEquipmentDisplay data={item} />
                                         </div>
                                     )) /* Abilities */}
@@ -346,72 +353,96 @@ const FactionDisplay = (props: any) => {
                     }
                     {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "ranged" && (containsTag(item.Tags, "exploration_only") == false))).length > 0 &&
                         <>
-                        <div className="armoury-section">
-                            <div className="armoury-headline">
-                                {"Ranged Weapons"}
-                            </div>
-                            <div className="armoury-content">
-                                {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "ranged" && (containsTag(item.Tags, "exploration_only") == false))).map((item) => (
-                                    <div key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID} className="armoury-element">
-                                        <FactionEquipmentDisplay data={item} />
+                            <div className="verticalspacersml"/>
+                            <div className="borderthin bordergrey">
+                                <div className="borderthin bordergrey backgroundBgBasic">
+                                    <div className="totalmarginsml">
+                                        <div className={'subtitle-letterspacing size-subtitle font-seriftext'}>
+                                            <div className='centered-div width-content'>
+                                                {"Ranged"}
+                                            </div>
+                                        </div>
                                     </div>
-                                )) /* Abilities */}
-                            </div>
-                        </div>
+                                </div>
+                                <div className="">
+                                    {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "ranged" && (containsTag(item.Tags, "exploration_only") == false))).map((item) => ( 
+                                        <div key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID} className="backgroundBgCard  textmaxwidth">
+                                            <FactionEquipmentDisplay data={item} />
+                                        </div>
+                                    )) /* Abilities */}
+                                </div>
+                            </div> 
                         </>
                     }
                     {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "armour" && (containsTag(item.Tags, "exploration_only") == false))).length > 0 &&
                         <>
-                            <div className="armoury-section">
-                                <div className="armoury-headline">
-                                    {"Armour"}
+                            <div className="verticalspacersml"/>
+                            <div className="borderthin bordergrey">
+                                <div className="borderthin bordergrey backgroundBgBasic">
+                                    <div className="totalmarginsml">
+                                        <div className={'subtitle-letterspacing size-subtitle font-seriftext'}>
+                                            <div className='centered-div width-content'>
+                                                {"Armour"}
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="armoury-content">
-                                    {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "armour" && (containsTag(item.Tags, "exploration_only") == false))).map((item) => (
-                                        <div key={"faction_rule_" + factionObject.ID + "_rule_id_" + item.ID}
-                                             className="armoury-element">
-                                            <FactionEquipmentDisplay data={item}/>
+                                <div className="">
+                                    {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "armour" && (containsTag(item.Tags, "exploration_only") == false))).map((item) => ( 
+                                        <div key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID} className="backgroundBgCard  textmaxwidth">
+                                            <FactionEquipmentDisplay data={item} />
                                         </div>
                                     )) /* Abilities */}
                                 </div>
-                            </div>
-
+                            </div> 
                         </>
                     }
-                        {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "equipment" && (containsTag(item.Tags, "exploration_only") == false))).length > 0 &&
-                            <>
-                                <div className="armoury-section">
-                                    <div className="armoury-headline">
-                                        {"Equipment"}
-                                    </div>
-                                    <div className="armoury-content">
-                                        {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "equipment" && (containsTag(item.Tags, "exploration_only") == false))).map((item) => (
-                                            <div key={"faction_rule_" + factionObject.ID + "_rule_id_" + item.ID}
-                                                 className="armoury-element">
-                                                <FactionEquipmentDisplay data={item}/>
+                    {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "equipment" && (containsTag(item.Tags, "exploration_only") == false))).length > 0 &&
+                        <>
+                            <div className="verticalspacersml"/>
+                            <div className="borderthin bordergrey">
+                                <div className="borderthin bordergrey backgroundBgBasic">
+                                    <div className="totalmarginsml">
+                                        <div className={'subtitle-letterspacing size-subtitle font-seriftext'}>
+                                            <div className='centered-div width-content'>
+                                                {"Equipment"}
                                             </div>
-                                        )) /* Abilities */}
+                                        </div>
                                     </div>
                                 </div>
-                            </>
-                        }
-                        {factionObject.EquipmentItems.filter((item) => ((containsTag(item.Tags, "exploration_only") == true))).length > 0 &&
-                            <>
-                                <div className="armoury-section">
-                                    <div className="armoury-headline">
-                                        {"Exploration Only"}
-                                    </div>
-                                    <div className="armoury-content">
-                                        {factionObject.EquipmentItems.filter((item) => ((containsTag(item.Tags, "exploration_only") == true))).map((item) => (
-                                            <div key={"faction_rule_" + factionObject.ID + "_rule_id_" + item.ID}
-                                                 className="armoury-element">
-                                                <FactionEquipmentDisplay data={item}/>
+                                <div className="">
+                                    {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "equipment" && (containsTag(item.Tags, "exploration_only") == false))).map((item) => ( 
+                                        <div key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID} className="backgroundBgCard  textmaxwidth">
+                                            <FactionEquipmentDisplay data={item} />
+                                        </div>
+                                    )) /* Abilities */}
+                                </div>
+                            </div> 
+                        </>
+                    }
+                    {factionObject.EquipmentItems.filter((item) => ((containsTag(item.Tags, "exploration_only") == true))).length > 0 &&
+                        <>
+                            <div className="verticalspacersml"/>
+                            <div className="borderthin bordergrey">
+                                <div className="borderthin bordergrey backgroundBgBasic">
+                                    <div className="totalmarginsml">
+                                        <div className={'subtitle-letterspacing size-subtitle font-seriftext'}>
+                                            <div className='centered-div width-content'>
+                                                {"Exploration Only"}
                                             </div>
-                                        )) /* Abilities */}
+                                        </div>
                                     </div>
                                 </div>
-                            </>
-                        }
+                                <div className="">
+                                {factionObject.EquipmentItems.filter((item) => ( (containsTag(item.Tags, "exploration_only") == true))).map((item) => ( 
+                                        <div key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID} className="backgroundBgCard textmaxwidth">
+                                            <FactionEquipmentDisplay data={item} />
+                                        </div>
+                                    )) /* Abilities */}
+                                </div>
+                            </div> 
+                        </>
+                    }
                     </div>
                     </>
                 }

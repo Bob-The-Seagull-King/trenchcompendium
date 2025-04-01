@@ -42,9 +42,9 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         returnDisplay(item: any) {
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    <h1 className="">
+                    <div className="size-section font-seriftext">
                         {item.Name}
-                    </h1>
+                    </div>
                     <BookRuleDisplay data={item} />
                 </ErrorBoundary>
             )

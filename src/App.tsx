@@ -31,7 +31,7 @@ const App: React.FC = () => {
 
 
     return (
-        <div className="">
+        <div className="font-default">
         <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}>
                 <Router >

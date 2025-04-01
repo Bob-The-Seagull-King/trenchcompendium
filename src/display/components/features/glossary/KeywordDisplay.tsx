@@ -12,7 +12,11 @@ const KeywordDisplay = (props: any) => {
 
     return (
         <ErrorBoundary fallback={<div>Something went wrong with KeywordDisplay.tsx</div>}>
-                {returnDescription(ruleObject, ruleObject.Description)}
+            <div className='totalmarginmed'>
+                <div className="colourBasicText font-default size-default">
+                    {returnDescription(ruleObject, ruleObject.Description)}
+                </div>
+            </div>
         </ErrorBoundary>
     )
 }
