@@ -15,7 +15,6 @@ export interface ContentsLink {
 
 export interface ContentsCollection {
     listofcontents: ContentsLink[];
-    showheader : boolean;
     title : string;
 }
 

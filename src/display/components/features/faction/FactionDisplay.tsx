@@ -35,6 +35,8 @@ import RulesHeadlineDisplay from "../rules-content/RulesHeadlineDisplay";
 import RulesArmouryElementDisplay from "../rules-content/RulesArmouryElementDisplay";
 import RulesAnchorLinks from "../rules-content/RulesAnchorLinks";
 import RulesLoreSection from "../rules-content/RulesLoreSection";
+import RulesFactionModelDisplay from "../rules-content/RulesFactionModelDisplay";
+import RulesFactionRule from "../rules-content/RulesFactionRule";
 
 const FactionDisplay = (props: any) => {
     const factionObject: Faction = props.data
@@ -69,9 +71,10 @@ const FactionDisplay = (props: any) => {
     function GetContents(factionobj: Faction) {
         const ContentsList : ContentsLink[] = [];
 
-        ContentsList.push({ name: "Description", route: "lore"})
+        ContentsList.push({ name: "Lore", route: "lore"})
+
         if (factionobj.Rules.length > 0) {
-            ContentsList.push({ name: "Rules", route: "rules"})
+            ContentsList.push({ name: "Faction Rules", route: "rules"})
         }
         if (factionobj.MyOptions.length > 0) {
             ContentsList.push({ name: "Warband Options", route: "options"})
@@ -90,7 +93,7 @@ const FactionDisplay = (props: any) => {
         }
         ContentsList.push({ name: "Armoury", route: "armoury"})
 
-        return ( <RulesAnchorLinks title={"Contents"} showheader={true} listofcontents={ContentsList}/> )
+        return ( <RulesAnchorLinks title={"Contents"} listofcontents={ContentsList}/> )
     }
 
     return (
@@ -119,39 +122,21 @@ const FactionDisplay = (props: any) => {
 
                 {factionObject.Rules.length > 0 &&
                     <>
-                        <div id={"rules"} className="verticalspacermed"/>
-                        <div className={'subtitle-letterspacing size-subtitle font-seriftext'}>
-                            <div className='centered-div width-content'>
-                                {"Rules"}
-                                <div className='horizontalspacermed hovermouse'>
-                                    <FontAwesomeIcon icon={faLink} onClick={() => (
-                                        runToast()
-                                        )}/>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                        <div className="borderthin bordergrey">
-                            {factionObject.Rules.map((item) => (
-                                <div key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID}>
-                                <GenericCollapsableBlockDisplay
-                                d_name={item.Name}
-                                d_colour={"grey"}
-                                d_state={false}
-                                bordertype={0}
-                                d_border={false}
-                                d_margin={"sml"}
-                                d_method={() => <>
-                                    <div className="borderthin backgroundBgCard bordergrey">
-                                        <div>
-                                            <RuleDisplay data={item} />
-                                        </div>
-                                    </div>
-                                </>} />
-                                </div>
-                            )) /* Abilities */}
-                        </div>
-                        </div>
+                        <RulesHeadlineDisplay
+                            content="Faction Rules"
+                            level={2}
+                            className=""
+                            idName="faction-rules"
+                        />
+
+                        {factionObject.Rules.map((item) => (
+
+                            <RulesFactionRule key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID}
+                                headline={item.Name}
+                                content={<RuleDisplay data={item} />}
+                            />
+
+                        ))}
                     </>
                 }
 
@@ -185,11 +170,8 @@ const FactionDisplay = (props: any) => {
                         />
 
                         {factionObject.Models.filter((item) => (item.Captain == true && item.Mercenary == false)).map((item) => (
-                            <div key={"faction_rule_" + factionObject.ID + "_rule_id_" + item.ID}
-                                 className="">
-                                <FactionModelDisplay data={item}/>
+                            <RulesFactionModelDisplay key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID} data={item} />
 
-                            </div>
                         )) /* Abilities */}
 
                     </>
@@ -204,9 +186,8 @@ const FactionDisplay = (props: any) => {
                         />
 
                         {factionObject.Models.filter((item) => (item.Captain == false && item.Mercenary == false && (ModelIsElite(item.Model) == true))).map((item) => (
-                            <div key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID} className="backgroundBgCard ">
-                                <FactionModelDisplay data={item} />
-                            </div>
+                            <RulesFactionModelDisplay key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID} data={item} />
+
                         )) /* Abilities */}
                     </>
                     } 
@@ -219,9 +200,7 @@ const FactionDisplay = (props: any) => {
                             idName="infantry"
                         />
                         {factionObject.Models.filter((item) => (item.Captain == false && item.Mercenary == false && (ModelIsElite(item.Model) == false))).map((item) => (
-                            <div key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID}  className="backgroundBgCard ">
-                                <FactionModelDisplay data={item} />
-                            </div>
+                            <RulesFactionModelDisplay key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID} data={item} />
                         )) /* Abilities */}
                     </>
                     }
@@ -236,10 +215,9 @@ const FactionDisplay = (props: any) => {
                         />
 
                         {factionObject.Models.filter((item) => (item.Mercenary == true)).map((item) => (
-                            <div key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID} className="backgroundBgCard ">
-                                <FactionModelDisplay data={item} />
-                            </div>
+                            <RulesFactionModelDisplay key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID} data={item} />
                         )) /* Abilities */}
+
                         
                     </>
                     }

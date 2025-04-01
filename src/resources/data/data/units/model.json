@@ -72,7 +72,7 @@
         "description": [
             {
                 "tags": {"desc_type" : "default"},
-                "content": "Sappers can be equipped with any weapon, armour and equipment from the Iron Sultanate Armoury.",
+                "content": "Sappers are equipped with shovels. This equipment can never be removed. They can be equipped with any weapon, armour and equipment from the Iron Sultanate Armoury.",
                 "glossary": [{"val": "Iron Sultanate", "id": "kw_sultanate"}]
             }
         ],

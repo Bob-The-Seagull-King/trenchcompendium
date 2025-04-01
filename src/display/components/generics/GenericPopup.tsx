@@ -36,7 +36,7 @@ const GenericPopup = (props: any) => {
     return (
       <>
          
-            <span className='colordefault hovermouse wordbreak' onClick={() => handleShow()}>{ruleName}</span>                
+            <span className='popup-trigger-text' onClick={() => handleShow()}>{ruleName}</span>
          
 
           <Modal data-theme={theme} show={show} size="lg" contentClassName="overcomeBackground" dialogClassName=""  onHide={handleClose} keyboard={true}  centered>

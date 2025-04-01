@@ -12,6 +12,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLink } from '@fortawesome/free-solid-svg-icons';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import RulesArmouryElementDisplay from "../rules-content/RulesArmouryElementDisplay";
+import RulesAnchorLinks from "../rules-content/RulesAnchorLinks";
+import RulesHeadlineDisplay from "../rules-content/RulesHeadlineDisplay";
 
 const BookRuleDisplay = (props: any) => {
     const ruleObject: BookRule = props.data
@@ -23,7 +26,7 @@ const BookRuleDisplay = (props: any) => {
             ContentsList.push({ name: rules.Sections[i].title, route: ""+rules.Sections[i].title})
         }
 
-        return ( <ContentsComponentAnchor title={"Contents"} showheader={true} listofcontents={ContentsList}/> )
+        return ( <RulesAnchorLinks title={"Contents"} listofcontents={ContentsList}/> )
     }
 
     function runToast() 
@@ -58,39 +61,44 @@ const BookRuleDisplay = (props: any) => {
                             pauseOnHover
                             theme="light" 
                             />
-                <div className="colourBasicText   size-default">
+
+                {/* Rules Introduction / Description */}
+                {/* @TODO: Is this necessary? Can the data be stored differently?*/}
+                <div className={'rules-introduction'}>
                     {returnDescription(ruleObject, ruleObject.Description)}
                 </div>
-                {ruleObject.Sections != undefined && <>
-                {ruleObject.Sections.length > 1 &&
-                    GetContents(ruleObject)
-                }
-                {ruleObject.Sections.map((item) => (
-                    <div key={item.title}>
-                        <div id={item.title} className="verticalspacermed"/>
-                        <div className={'subtitle-letterspacing size-subtitle font-seriftext'}>
-                            <div className='centered-div width-content'>
-                                {item.title || ""}
-                                <div className='hovermouse'>
-                                    <FontAwesomeIcon icon={faLink} className="icon-inline-right" onClick={() => (
-                                        runToast()
-                                        )}/>
-                                </div>
+
+                { ruleObject.Sections != undefined && ruleObject.Sections?.length > 0 && (
+                    <>
+                        {/* Page Anchors */}
+                        {ruleObject.Sections.length > 1 &&
+                            GetContents(ruleObject)
+                        }
+
+                        {/* Rules Items */}
+                        {ruleObject.Sections.map((item) => (
+                            <div key={item.title} className={'rules-text-item'}>
+                                <RulesHeadlineDisplay
+                                    content={item.title}
+                                    level={2}
+                                />
+
+                                {returnDescription(ruleObject, item.description)}
+
+                                {item.content.map((valitem) => (
+                                    <div key={valitem.title || ""}>
+                                        <RulesHeadlineDisplay
+                                            content={valitem.title}
+                                            level={3}
+                                        />
+
+                                        {returnDescription(ruleObject, valitem.description)}
+                                    </div>
+                                ))}
                             </div>
-                        </div>
-                        <div className="colourBasicText   size-default">
-                            {returnDescription(ruleObject, item.description)}
-                            <div className="verticalspacermed"/>
-                            {item.content.map((valitem) => (
-                                <div key={valitem.title}>
-                                    <div className='size-strongtext'>{valitem.title}</div>
-                                    {returnDescription(ruleObject, valitem.description)}
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                ))
-                }</>}
+                        ))}
+                    </>
+                )}
             </div>
         </ErrorBoundary>
     )

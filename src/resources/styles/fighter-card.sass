@@ -1,7 +1,11 @@
-.rules-model-card
+// // // // //
+//
+// The fighter card (global)
+//
 
 .fighter-card
     border: 1px solid var(--colour_border)
+    margin-bottom: 30px
 
     .fighter-card-title
         padding: 5px 10px
@@ -31,15 +35,36 @@
     .fighter-card-stats
         padding: 0 10px
         display: flex
-        justify-content: space-between
+        justify-content: left
+        gap: 10px
         margin-bottom: 15px
 
         .fighter-card-stat
+            min-width: 50px
 
             .stat-label
                 font-size: 14px
                 font-weight: bold
             .stat-value
+                text-align: center
+
                 //font-weight: bold
                 padding: 10px
                 border: 1px solid var(--colour_border)
+
+
+    .fighter-card-collapse
+
+        .fighter-card-collapse-title
+            position: relative
+            display: flex
+            justify-content: space-between
+            padding: 5px 10px
+
+            font-weight: bold
+            font-size: 18px
+            background-color: var(--colour_bg_inverted-75)
+            color: var(--colour_basic_text_inverted)
+            cursor: pointer
+        .fighter-card-collapse-content
+            padding: 10px

@@ -51,48 +51,48 @@ const RuleDisplay = (props: any) => {
 
     return (
         <ErrorBoundary fallback={<div>Something went wrong with AbilityDisplay.tsx</div>}>
-            <div key={_keyvar}>
-                <div className="totalmarginsml">
-                <div className='row'>
+            <div key={_keyvar} className='single-rule-element'>
+
+                <div className={'single-rule-element-description'}>
                     {returnDescription(ruleObject, ruleObject.Description)}
                 </div>
-                <div className='row'>
-                    {
+
+                {/* @TODO: @Bob - what is this?*/}
+                {ruleObject.MyOptions.length > 0 &&
+                    <div className={'option-static-display'}>
                         <OptionSetStaticDisplay data={ruleObject.MyOptions} />
-                    }
-                </div>
-                </div>
+                    </div>
+                }
+
+                {/* @TODO: @Bob - what is this?*/}
                 {upgradeoptions.length > 0 &&
-                 <div className="borderthintop bordergrey container ">
-                    <div className={"bar backgroundgrey"} />
-                    <div className="maxwidth">
-                    <GenericCollapsableBlockDisplay 
-                        d_name={"Upgrades"} 
-                        d_colour={"grey"} 
-                        d_state={false}  
-                        d_margin={"sml"}
-                        bordertype={2}
-                        d_method={() => <div className="borderthintop bordergrey">
-                            {upgradeoptions.map((item : ModelUpgradeRelationship) => ( 
-                                    <div className="" key={"model_ability_"+ruleObject.ID+"_ability_id_"+item.ID}>
-                                        <GenericCollapsableBlockDisplay 
-                                            d_name={item.UpgradeObject.Name} 
-                                            d_colour={"grey"} 
-                                            d_state={false}  
-                                            d_margin={"sml"}
-                                            d_col={"default"}
-                                            d_border={false}
-                                            bordertype={(upgradeoptions.indexOf(item) < (upgradeoptions.length - 1))? 1 : 2}
-                                            d_method={() => <div className={"bordergrey " + ((upgradeoptions.indexOf(item) < (upgradeoptions.length - 1))? "borderthinnosides" : "borderthicktop")}>
-                                                <div className="totalmarginsml">
-                                                    <ModelUpgradeDisplay data={item} />
-                                                </div>
-                                            </div>} />
-                                    </div>
-                                )) /* Abilities */}
-                            
-                        </div>} />
-                        </div>
+                    <div className="single-rule-element-upgradeoptions">
+                        <GenericCollapsableBlockDisplay
+                            d_name={"Upgrades"}
+                            d_colour={"grey"}
+                            d_state={false}
+                            d_margin={"sml"}
+                            bordertype={2}
+                            d_method={() => <div className="borderthintop bordergrey">
+                                {upgradeoptions.map((item : ModelUpgradeRelationship) => (
+                                        <div className="" key={"model_ability_"+ruleObject.ID+"_ability_id_"+item.ID}>
+                                            <GenericCollapsableBlockDisplay
+                                                d_name={item.UpgradeObject.Name}
+                                                d_colour={"grey"}
+                                                d_state={false}
+                                                d_margin={"sml"}
+                                                d_col={"default"}
+                                                d_border={false}
+                                                bordertype={(upgradeoptions.indexOf(item) < (upgradeoptions.length - 1))? 1 : 2}
+                                                d_method={() => <div className={"bordergrey " + ((upgradeoptions.indexOf(item) < (upgradeoptions.length - 1))? "borderthinnosides" : "borderthicktop")}>
+                                                    <div className="totalmarginsml">
+                                                        <ModelUpgradeDisplay data={item} />
+                                                    </div>
+                                                </div>} />
+                                        </div>
+                                    )) /* Abilities */}
+
+                            </div>} />
                     </div>
                 }
             </div>

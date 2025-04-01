@@ -57,9 +57,12 @@ interface RulesHeadlineProps {
 const RulesHeadlineDisplay: React.FC<RulesHeadlineProps> = ({ content, level = 1, className = "", idName = '' }) => {
     const Tag: `h${1 | 2 | 3 | 4 | 5 | 6}` = `h${level}`;
 
+    // Set anchor id fallback
+    idName = idName || encodeURIComponent(content);
+
     return (
 
-        <Tag id={idName || undefined} className={className + " headline-rules"}>
+        <Tag id={idName} className={className + " headline-rules"}>
             {content}
             {idName && (
                 <span className='icon-inline-right-s headline-link-btn' onClick={() => (

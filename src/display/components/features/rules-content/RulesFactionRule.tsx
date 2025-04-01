@@ -10,22 +10,21 @@ import {faBook, faChevronDown, faChevronUp, faLink} from '@fortawesome/free-soli
 const DefaultState = false;
 
 
-interface RulesLoreSectionProps {
+interface RulesFactionRuleProps {
     headline: any;
     content: any;
 }
 
-const RulesLoreSection: React.FC<RulesLoreSectionProps> = ({ headline, content }) => {
+const RulesFactionRule: React.FC<RulesFactionRuleProps> = ({ headline, content }) => {
     const [open, setOpen]   = useState(DefaultState);
 
     return (
-        <div className={'rules-lore-section'}>
+        <div className={'rules-faction-rule'}>
 
-            <div className={'rules-lore-title'} onClick={() => {
+            <div className={'rules-faction-rule-title'} onClick={() => {
                 setOpen(!open)
             }}>
                 <span className={'text'}>
-                    <FontAwesomeIcon icon={faBook} className="icon-inline-left-l"/>
                     {headline}
                 </span>
 
@@ -34,7 +33,7 @@ const RulesLoreSection: React.FC<RulesLoreSectionProps> = ({ headline, content }
                 </span>
             </div>
             <Collapse in={open}>
-                <div className="rules-lore-content">
+                <div className="rules-faction-rule-content">
                     {content}
                 </div>
             </Collapse>
@@ -45,4 +44,4 @@ const RulesLoreSection: React.FC<RulesLoreSectionProps> = ({ headline, content }
     )
 };
 
-export default RulesLoreSection;
+export default RulesFactionRule;
