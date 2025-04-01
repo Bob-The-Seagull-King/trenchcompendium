@@ -24,6 +24,8 @@ import ContentsComponentAnchor, { ContentsLink } from '../../../components/subco
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLink } from '@fortawesome/free-solid-svg-icons';
 import GenericCollapsableBlockDisplay from '../../../components/generics/GenericCollapsableBlockDisplay';
+import RulesAnchorLinks from "../rules-content/RulesAnchorLinks";
+import RulesHeadlineDisplay from "../rules-content/RulesHeadlineDisplay";
 
 const ScenarioDisplay = (props: any) => {
     const scenarioObject: Scenario = props.data
@@ -58,7 +60,7 @@ const ScenarioDisplay = (props: any) => {
         }
         ContentsList.push({ name: "Glorious Deeds", route: "deeds"})
 
-        return ( <ContentsComponentAnchor title={"Contents"} showheader={true} listofcontents={ContentsList}/> )
+        return ( <RulesAnchorLinks title={"Contents"} listofcontents={ContentsList}/> )
     }
 
     function runToast() 
@@ -80,268 +82,211 @@ const ScenarioDisplay = (props: any) => {
     
     return (
         <ErrorBoundary fallback={<div>Something went wrong with ScenarioDisplay.tsx</div>}>
-            
+
             <div>
                 <ToastContainer
-                            position="top-center"
-                            autoClose={5000}
-                            hideProgressBar={false}
-                            newestOnTop={false}
-                            closeOnClick
-                            rtl={false}
-                            pauseOnFocusLoss
-                            draggable
-                            pauseOnHover
-                            theme="light" 
-                            />
-                <div className="borderthin bordergrey">
-                    <GenericCollapsableBlockDisplay 
-                        d_name={"Battle Map"} 
-                        d_colour={"grey"} 
-                        d_state={false}  
-                        d_margin={"sml"}
-                        d_col={"default"}
-                        d_border={false}
-                        bordertype={0}
-                        d_method={() => <div className={"bordergrey borderthin"}>
-                            <div className="">
-                            <img src={scenarioObject.ImgLink} style={{width:"100%"}}/>
-                            </div>
-                        </div>} />
-                </div>
-                
-                <div className="verticalspacermed" />
-                <div className="borderthin bordergrey">
-                    {ReturnStats(scenarioObject)}
-                </div>
-                <div className="verticalspacermed" />
-                <div>
-                    {GetContents(scenarioObject)}
+                    position="top-center"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme="light"
+                />
+
+                {GetContents(scenarioObject)}
+
+
+                <GenericCollapsableBlockDisplay
+                    d_name={"Battle Map"}
+                    d_colour={"grey"}
+                    d_state={false}
+                    d_margin={"sml"}
+                    d_col={"default"}
+                    d_border={false}
+                    bordertype={0}
+                    d_method={() => <div className={"bordergrey borderthin"}>
+                        <div className="">
+                            <img src={scenarioObject.ImgLink} style={{width: "100%"}}/>
+                        </div>
+                    </div>}/>
+
+                {ReturnStats(scenarioObject)}
+
+                <div className={"rules-text-item"}>
+                    <RulesHeadlineDisplay
+                        content={"Forces"}
+                        level={2}
+                    />
+
+                    {returnDescription(scenarioObject, scenarioObject.ForcesDesc)}
                 </div>
 
-                <div id={"forces"} className="verticalspacermed"/>
-                <div className="">
-                    <div className={'subtitle-letterspacing size-subtitle font-seriftext'}>
-                        <div className='centered-div width-content '>
-                            {"Forces"}
-                            <div className='horizontalspacermed hovermouse'>
-                                <FontAwesomeIcon icon={faLink} onClick={() => (
-                                    runToast()
-                                    )}/>
-                            </div>
-                        </div>
-                    </div>
-                    <div className=" colourBasicText   size-default ">
-                        <div className="">
-                        {returnDescription(scenarioObject, scenarioObject.ForcesDesc)}
-                        </div>
-                    </div>
-                </div>
-                
-                <div className="verticalspacersml"/>
-                <div id={"infiltrators"} className="verticalspacermed"/>
-                <div className="">
-                    <div className={'subtitle-letterspacing size-subtitle font-seriftext'}>
-                        <div className='centered-div width-content '>
-                            {"Infiltrators"}
-                            <div className='horizontalspacermed hovermouse'>
-                                <FontAwesomeIcon icon={faLink} onClick={() => (
-                                    runToast()
-                                    )}/>
-                            </div>
-                        </div>
-                    </div>
-                    <div className=" colourBasicText   size-default ">
-                        <div className="">
-                        {returnDescription(scenarioObject, scenarioObject.InfiltratorDesc)}
-                        </div>
-                    </div>
-                </div>
-                
-                <div className="verticalspacersml"/>
-                <div id={"battlelength"} className="verticalspacermed"/>
-                <div className="">
-                    <div className={'subtitle-letterspacing size-subtitle font-seriftext'}>
-                        <div className='centered-div width-content '>
-                            {"Battle Length"}
-                            <div className='horizontalspacermed hovermouse'>
-                                <FontAwesomeIcon icon={faLink} onClick={() => (
-                                    runToast()
-                                    )}/>
-                            </div>
-                        </div>
-                    </div>
-                    <div className=" colourBasicText   size-default ">
-                        <div className="">
-                        {returnDescription(scenarioObject, scenarioObject.BattlelengthDesc)}
-                        </div>
-                    </div>
+                <div className={"rules-text-item"}>
+                    <RulesHeadlineDisplay
+                        content={"Infiltrators"}
+                        level={2}
+                    />
+
+                    {returnDescription(scenarioObject, scenarioObject.InfiltratorDesc)}
                 </div>
 
-                <div className="verticalspacersml"/>
-                <div id={"battlefield"} className="verticalspacermed"/>
-                <div className={'subtitle-letterspacing size-subtitle font-seriftext'}>
-                    <div className='centered-div width-content'>
-                        {"Battlefield"}
-                        <div className='horizontalspacermed hovermouse'>
-                            <FontAwesomeIcon icon={faLink} onClick={() => (
-                                runToast()
-                                )}/>
-                        </div>
-                    </div>
+                <div className={"rules-text-item"}>
+                    <RulesHeadlineDisplay
+                        content={"Battle Length"}
+                        level={2}
+                    />
+
+                    {returnDescription(scenarioObject, scenarioObject.BattlelengthDesc)}
                 </div>
-                <div className="colourBasicText   size-default">
-                    {returnDescription(scenarioObject, scenarioObject.BattlefieldSize)}
-                        <div >
+
+                <div className={"rules-text-item"}>
+                    <RulesHeadlineDisplay
+                        content={"Battlefield"}
+                        level={2}
+                    />
+
+                    {scenarioObject.BattlefieldSize &&
+                        <>
+                            {returnDescription(scenarioObject, scenarioObject.BattlefieldSize)}
+                        </>
+                    }
+
+                    {scenarioObject.BattlefieldExtra &&
+                        <>
                             {returnDescription(scenarioObject, scenarioObject.BattlefieldExtra)}
-                        </div>
-                        <div className="verticalspacersml"/>
-                        {scenarioObject.StandardTerrain == true &&
-                            <>
-                                {returnDescription(scenarioObject, scenarioObject.BattlefieldTerrainStandard)}
-                            </>
-                        }
+                        </>
+                    }
+
+                    {scenarioObject.StandardTerrain &&
+                        <>
+                            <RulesHeadlineDisplay
+                                content={"Standard Terrain Rules"}
+                                level={3}
+                            />
+
+                            {returnDescription(scenarioObject, scenarioObject.BattlefieldTerrainStandard)}
+                        </>
+                    }
                 </div>
 
-                <div className="verticalspacersml"/>
-                <div id={"deployment"} className="verticalspacermed"/>
-                <div className={'subtitle-letterspacing size-subtitle font-seriftext'}>
-                    <div className='centered-div width-content'>
-                        {"Deployment"}
-                        <div className='horizontalspacermed hovermouse'>
-                            <FontAwesomeIcon icon={faLink} onClick={() => (
-                                runToast()
-                                )}/>
-                        </div>
-                    </div>
-                </div>
-                <div className="colourBasicText   size-default">
-                {returnDescription(scenarioObject, scenarioObject.DeploymentDesc)}
+                <div className={"rules-text-item"}>
+                    <RulesHeadlineDisplay
+                        content={"Deployment"}
+                        level={2}
+                    />
+
+                    {returnDescription(scenarioObject, scenarioObject.DeploymentDesc)}
                 </div>
 
-                <div className="verticalspacersml"/>
-                <div id={"victory"} className="verticalspacermed"/>
-                <div className={'subtitle-letterspacing size-subtitle font-seriftext'}>
-                    <div className='centered-div width-content'>
-                        {"Victory Conditions"}
-                        <div className='horizontalspacermed hovermouse'>
-                            <FontAwesomeIcon icon={faLink} onClick={() => (
-                                runToast()
-                                )}/>
-                        </div>
-                    </div>
+                <div className={"rules-text-item"}>
+                    <RulesHeadlineDisplay
+                        content={"Victory Conditions"}
+                        level={2}
+                    />
+
+                    {returnDescription(scenarioObject, scenarioObject.VictoryDesc)}
                 </div>
-                <div className="colourBasicText   size-default">
-                {returnDescription(scenarioObject, scenarioObject.VictoryDesc)}
-                </div>
+
 
                 {scenarioObject.SpecialRules != undefined && <>
-                {scenarioObject.SpecialRules.length > 0 &&
-                    <div>
-                        <div className="verticalspacersml"/>
-                        <div id={"specialrules"} className="verticalspacermed"/>
-                        <div className={'size-subtitle font-seriftext'}>
-                            <div className='subtitle-letterspacing centered-div width-content'>
-                                {"Special Rules"}
-                                <div className='horizontalspacermed hovermouse'>
-                                    <FontAwesomeIcon icon={faLink} onClick={() => (
-                                        runToast()
+                    {scenarioObject.SpecialRules.length > 0 &&
+                        <div>
+                            <div className={'size-subtitle font-seriftext'}>
+                                <div className='subtitle-letterspacing centered-div width-content'>
+                                    {"Special Rules"}
+                                    <div className='horizontalspacermed hovermouse'>
+                                        <FontAwesomeIcon icon={faLink} onClick={() => (
+                                            runToast()
                                         )}/>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div className="borderthin bordergrey">                                
-                                {scenarioObject.SpecialRules.map((item) => ( 
-                                    <div key={"faction_rule_"+scenarioObject.ID+"_rule_id_"+item.ID}>
-                                        <GenericCollapsableBlockDisplay 
-                                            d_name={item.Name} 
-                                            d_colour={"grey"} 
-                                            d_state={false}  
+                            <div className="borderthin bordergrey">
+                                {scenarioObject.SpecialRules.map((item) => (
+                                    <div key={"faction_rule_" + scenarioObject.ID + "_rule_id_" + item.ID}>
+                                        <GenericCollapsableBlockDisplay
+                                            d_name={item.Name}
+                                            d_colour={"grey"}
+                                            d_state={false}
                                             d_margin={"sml"}
                                             d_col={"default"}
                                             d_border={false}
                                             bordertype={0}
                                             d_method={() => <div className={"bordergrey borderthin"}>
                                                 <div className="totalmarginsml">
-                                                    <RuleDisplay data={item} />
+                                                    <RuleDisplay data={item}/>
                                                 </div>
-                                            </div>} />
+                                            </div>}/>
                                     </div>
-                                )) }
-                            </div>
-                    </div>
-                }</>}
-                <div>
-                        <div id={"deeds"} className="verticalspacersml"/>
-                        <div className={'size-subtitle font-seriftext'}>
-                            <div className='subtitle-letterspacing centered-div width-content'>
-                                {"Glorious Deeds"}
-                                <div className='horizontalspacermed hovermouse'>
-                                    <FontAwesomeIcon icon={faLink} onClick={() => (
-                                        runToast()
-                                        )}/>
-                                </div>
+                                ))}
                             </div>
                         </div>
-                        <div className="">                     
-                                <div className="">
-                                    <div className="">
-                                        {returnDescription(scenarioObject, scenarioObject.DeedsDesc)}
-                                    </div>
-                                </div>
-                                <div className="verticalspacersml"/>
-                                <div className="borderthin bordergrey">
-                                {scenarioObject.Deeds.map((item) => ( 
-                                    
-                                    <div key={"faction_rule_"+scenarioObject.ID+"_rule_id_"+item.ID}>
-                                        <GenericCollapsableBlockDisplay 
-                                            d_name={item.Name} 
-                                            d_colour={"grey"} 
-                                            d_state={false}  
-                                            d_margin={"sml"}
-                                            d_col={"default"}
-                                            d_border={false}
-                                            bordertype={0}
-                                            d_method={() => <div className={"bordergrey borderthin"}>
-                                                <div className="totalmarginsml">
-                                               <GloriousDeedDisplay data={item} />
-                                               </div>
-                                            </div>} />
-                                    </div>
-                                )) }
-                                </div>
+                    }</>}
 
-                                {scenarioObject.OptionalDeeds.length > 0 &&
-                                <div>
-                                <div className="">
-                                    <div className="verticalspacersml"/>
-                                    {"If agreed by the players prior to starting the game, you may replace one of the Glory Deeds above for one of the following options:"}
-                                </div>
-                                <div className="borderthin bordergrey">
-                                {scenarioObject.OptionalDeeds.map((item) => ( 
-                                    <div key={"faction_rule_"+scenarioObject.ID+"_rule_id_"+item.ID}>
-                                        <GenericCollapsableBlockDisplay 
-                                            d_name={item.Name} 
-                                            d_colour={"grey"} 
-                                            d_state={false}  
-                                            d_margin={"sml"}
-                                            d_col={"default"}
-                                            d_border={false}
-                                            bordertype={0}
-                                            d_method={() => <div className={"bordergrey borderthin"}>
-                                                <div className="totalmarginsml">
-                                               <GloriousDeedDisplay data={item} />
-                                               </div>
-                                            </div>} />
-                                    </div>
-                                )) }
-                                </div>
-                                </div>
-                                }
+                <div className={"rules-text-item"}>
+                    <RulesHeadlineDisplay
+                        content={"Glorious Deeds"}
+                        level={2}
+                    />
 
-                                
-                            </div>
-                    </div>
+                    {returnDescription(scenarioObject, scenarioObject.DeedsDesc)}
+
+                    {scenarioObject.Deeds.map((item) => (
+                        <div key={"faction_rule_" + scenarioObject.ID + "_rule_id_" + item.ID}>
+                            <GenericCollapsableBlockDisplay
+                                d_name={item.Name}
+                                d_colour={"grey"}
+                                d_state={false}
+                                d_margin={"sml"}
+                                d_col={"default"}
+                                d_border={false}
+                                bordertype={0}
+                                d_method={() => <div className={"bordergrey borderthin"}>
+                                    <div className="totalmarginsml">
+                                        <GloriousDeedDisplay data={item}/>
+                                    </div>
+                                </div>}/>
+                        </div>
+                    ))}
+
+
+                    {scenarioObject.OptionalDeeds.length > 0 &&
+                        <>
+                            <RulesHeadlineDisplay
+                                content={"Optional Glorious Deeds"}
+                                level={2}
+                            />
+
+                            {"If agreed by the players prior to starting the game, you may replace one of the Glory Deeds above for one of the following options:"}
+
+                            {scenarioObject.OptionalDeeds.map((item) => (
+                                <div key={"faction_rule_" + scenarioObject.ID + "_rule_id_" + item.ID}>
+                                    <GenericCollapsableBlockDisplay
+                                        d_name={item.Name}
+                                        d_colour={"grey"}
+                                        d_state={false}
+                                        d_margin={"sml"}
+                                        d_col={"default"}
+                                        d_border={false}
+                                        bordertype={0}
+                                        d_method={() => <div className={"bordergrey borderthin"}>
+                                            <div className="totalmarginsml">
+                                                <GloriousDeedDisplay data={item}/>
+                                            </div>
+                                        </div>}/>
+                                </div>
+                            ))}
+                        </>
+                    }
+                </div>
+
+                <div className="">
+
+                </div>
             </div>
         </ErrorBoundary>
     )
