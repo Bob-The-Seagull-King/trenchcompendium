@@ -21,8 +21,12 @@ const MenuComponent = (props: any) => {
 
     return (
         <ErrorBoundary fallback={<div>Something went wrong with MenuDisplay.tsx</div>}>
-            <div className="hovermouse font-seriftext bordergrey borderstyler backgroundBgCard main-menu-item-big" onClick={()=>NavigateHome()}>
-                {Title}
+            <div className="hovermouse font-seriftext bordergrey borderstyler backgroundBgCard " onClick={()=>NavigateHome()}>
+                <div className="centered-div titleShape titleShape heightlargeboxfixed">
+                    <h1 className="size-section titlebody align-center colorBasicText width-content">
+                        {Title}
+                    </h1>
+                </div>
             </div>
         </ErrorBoundary>
     )
