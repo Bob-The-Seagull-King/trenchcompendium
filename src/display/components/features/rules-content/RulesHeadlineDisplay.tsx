@@ -30,9 +30,9 @@ import { faLink } from '@fortawesome/free-solid-svg-icons';
 import ContentsComponentAnchor, { ContentsLink } from '../../../components/subcomponents/informationpanel/ContentsComponentAnchor';
 import ModelDisplay from '../model/ModelDisplay';
 
-function runToast()
+function runToast( anchor = "" )
 {
-    navigator.clipboard.writeText(window.location.href)
+    navigator.clipboard.writeText(window.location.origin + window.location.pathname + "#"+anchor)
 
     toast.error("Link Copied!", {
         position: "bottom-right",
@@ -66,7 +66,7 @@ const RulesHeadlineDisplay: React.FC<RulesHeadlineProps> = ({ content, level = 1
             {content}
             {idName && (
                 <span className='icon-inline-right-s headline-link-btn' onClick={() => (
-                        runToast()
+                        runToast( idName )
                     )}>
                     <FontAwesomeIcon icon={faLink} />
                 </span>
