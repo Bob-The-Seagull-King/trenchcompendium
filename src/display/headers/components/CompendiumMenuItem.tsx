@@ -40,11 +40,13 @@ const CompendiumMenuItem = (prop: any) => {
      */
     function NavigateOut() {
         navigate('/compendium/' + DisplayPage.searchId, {state: DisplayPage.searchId});
+        // @TODO: close offcanvas navigation
     }
 
     function SpecificNavigtateOut(item : any) {
         CollectionController.UpdateTargetItem(item);
         navigate('/compendium/' + DisplayPage.searchId, {state: item.HeldItem.ID + Date.now().toString()});
+        // @TODO: close offcanvas navigation
     }
     
     return (

@@ -5,17 +5,25 @@
 //
 
 .rules-page-anchors
-    border: 1px solid var(--colour_border)
-
     padding: 0 0 10px 0
+    margin-bottom: 30px
 
     .rules-page-anchors-title
-        font-weight: bold
-        font-size: 18px
+        display: flex
+        justify-content: space-between
         padding: 5px 10px
-        margin-bottom: 10px
+
+        font-size: 18px
+        font-weight: bold
         background-color: var(--colour_bg_inverted)
         color: var(--colour_basic_text_inverted)
+        cursor: pointer
+
+
+    .rules-page-anchors-content
+        padding: 10px
+        border: 1px solid var(--colour_border)
+
 
     .rules-page-anchor
         display: block
@@ -24,3 +32,14 @@
 
         color: var(--colour_basic_text)
         text-decoration: none
+        transition: color .2s ease
+
+        i,svg
+            transition: padding .4s ease
+
+        &:hover
+            color: $brand-red
+
+            i,svg
+                padding-left: 5px
+

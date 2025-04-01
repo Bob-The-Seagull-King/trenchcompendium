@@ -24,7 +24,7 @@ const ContentsComponentAnchor: React.FC<ContentsCollection> = (props: any) => {
         return (
             <a className="rules-page-anchor" href={"#"+_obj.route}>
                 {_obj.name}
-                <FontAwesomeIcon icon={faChevronRight} className="icon-inline-r" />
+                <FontAwesomeIcon icon={faChevronRight} className="right" />
             </a>
         )
     }

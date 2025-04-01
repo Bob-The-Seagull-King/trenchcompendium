@@ -31,6 +31,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLink } from '@fortawesome/free-solid-svg-icons';
 import ContentsComponentAnchor, { ContentsLink } from '../../../components/subcomponents/informationpanel/ContentsComponentAnchor';
 import ModelDisplay from '../model/ModelDisplay';
+import RulesHeadlineDisplay from "../rules-content/RulesHeadlineDisplay";
+import RulesArmouryElementDisplay from "../rules-content/RulesArmouryElementDisplay";
+import RulesAnchorLinks from "../rules-content/RulesAnchorLinks";
+import RulesLoreSection from "../rules-content/RulesLoreSection";
 
 const FactionDisplay = (props: any) => {
     const factionObject: Faction = props.data
@@ -72,21 +76,21 @@ const FactionDisplay = (props: any) => {
         if (factionobj.MyOptions.length > 0) {
             ContentsList.push({ name: "Warband Options", route: "options"})
         }
-        if (factionobj.Models.filter((item) => (item.Captain == true && item.Mercenary == false)).length > 0) {
+        if (factionobj.Models.filter((item) => (item.Captain && !item.Mercenary)).length > 0) {
             ContentsList.push({ name: "Captains", route: "captains"})
         }
-        if (factionobj.Models.filter((item) => (item.Captain == false && item.Mercenary == false && (ModelIsElite(item.Model) == true))).length > 0) {
+        if (factionobj.Models.filter((item) => (!item.Captain && !item.Mercenary && ModelIsElite(item.Model))).length > 0) {
             ContentsList.push({ name: "Elite Units", route: "elite"})
         }
-        if (factionobj.Models.filter((item) => (item.Captain == false && item.Mercenary == false && (ModelIsElite(item.Model) == false))).length > 0) {
+        if (factionobj.Models.filter((item) => (!item.Captain && !item.Mercenary && !ModelIsElite(item.Model))).length > 0) {
             ContentsList.push({ name: "Infantry Units", route: "infantry"})
         }
-        if (factionobj.Models.filter((item) => (item.Mercenary == true)).length > 0) {
+        if (factionobj.Models.filter((item) => item.Mercenary).length > 0) {
             ContentsList.push({ name: "Mercenaries", route: "mercenary"})
         }
         ContentsList.push({ name: "Armoury", route: "armoury"})
 
-        return ( <ContentsComponentAnchor title={"Contents"} showheader={true} listofcontents={ContentsList}/> )
+        return ( <RulesAnchorLinks title={"Contents"} showheader={true} listofcontents={ContentsList}/> )
     }
 
     return (
@@ -105,15 +109,20 @@ const FactionDisplay = (props: any) => {
                             theme="light" 
                             />
 
-                <div>
-                    <div>
-                        {GetContents(factionObject)}
-                    </div>
-                    <div>
-                        <div id={"lore"} className="verticalspacermed"/>
+
+                {GetContents(factionObject)}
+
+                <RulesLoreSection
+                    headline={factionObject.Name + " lore"}
+                    content={returnDescription(factionObject, factionObject.Description)}
+                />
+
+                {factionObject.Rules.length > 0 &&
+                    <>
+                        <div id={"rules"} className="verticalspacermed"/>
                         <div className={'subtitle-letterspacing size-subtitle font-seriftext'}>
                             <div className='centered-div width-content'>
-                                {"Description"}
+                                {"Rules"}
                                 <div className='horizontalspacermed hovermouse'>
                                     <FontAwesomeIcon icon={faLink} onClick={() => (
                                         runToast()
@@ -121,93 +130,59 @@ const FactionDisplay = (props: any) => {
                                 </div>
                             </div>
                         </div>
-                        <div className="borderthin bordergrey">
-                        <GenericCollapsableBlockDisplay 
-                            d_name={"Lore"} 
-                            d_colour={"grey"} 
-                            d_state={false}  
-                            bordertype={0}
-                            d_border={false}
-                            d_margin={"sml"}
-                            d_method={() => <>
-                                <div className="borderthin backgroundBgCard bordergrey">
-                                    <div className="totalmarginsml">
-                                        {returnDescription(factionObject, factionObject.Description) /* Description */}
-                                    </div>
-                                </div>
-                            </>} />
-                        </div>
-                        
-                    </div>
-                    {factionObject.Rules.length > 0 &&
-                        <>
-                            <div id={"rules"} className="verticalspacermed"/>
-                            <div className={'subtitle-letterspacing size-subtitle font-seriftext'}>
-                                <div className='centered-div width-content'>
-                                    {"Rules"}
-                                    <div className='horizontalspacermed hovermouse'>
-                                        <FontAwesomeIcon icon={faLink} onClick={() => (
-                                            runToast()
-                                            )}/>
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                            <div className="borderthin bordergrey">
-                                {factionObject.Rules.map((item) => ( 
-                                    <div key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID}>
-                                    <GenericCollapsableBlockDisplay 
-                                    d_name={item.Name} 
-                                    d_colour={"grey"} 
-                                    d_state={false}  
-                                    bordertype={0}
-                                    d_border={false}
-                                    d_margin={"sml"}
-                                    d_method={() => <>
-                                        <div className="borderthin backgroundBgCard bordergrey">
-                                            <div>
-                                                <RuleDisplay data={item} />
-                                            </div>
-                                        </div>
-                                    </>} />
-                                    </div>
-                                )) /* Abilities */}
-                            </div>
-                            </div>
-                        </>
-                    }
-                    
-                    {factionObject.MyOptions.length > 0 &&
                         <div>
-                            <div id={"options"} className="verticalspacermed"/>
-                            <div className={'subtitle-letterspacing size-subtitle font-seriftext'}>
-                                <div className='centered-div width-content'>
-                                    {"Warband Options"}
-                                    <div className='horizontalspacermed hovermouse'>
-                                        <FontAwesomeIcon icon={faLink} onClick={() => (
-                                            runToast()
-                                            )}/>
+                        <div className="borderthin bordergrey">
+                            {factionObject.Rules.map((item) => (
+                                <div key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID}>
+                                <GenericCollapsableBlockDisplay
+                                d_name={item.Name}
+                                d_colour={"grey"}
+                                d_state={false}
+                                bordertype={0}
+                                d_border={false}
+                                d_margin={"sml"}
+                                d_method={() => <>
+                                    <div className="borderthin backgroundBgCard bordergrey">
+                                        <div>
+                                            <RuleDisplay data={item} />
+                                        </div>
                                     </div>
+                                </>} />
+                                </div>
+                            )) /* Abilities */}
+                        </div>
+                        </div>
+                    </>
+                }
+
+                {factionObject.MyOptions.length > 0 &&
+                    <div>
+                        <div id={"options"} className="verticalspacermed"/>
+                        <div className={'subtitle-letterspacing size-subtitle font-seriftext'}>
+                            <div className='centered-div width-content'>
+                                {"Warband Options"}
+                                <div className='horizontalspacermed hovermouse'>
+                                    <FontAwesomeIcon icon={faLink} onClick={() => (
+                                        runToast()
+                                        )}/>
                                 </div>
                             </div>
-                            {
-                                <OptionSetStaticDisplay data={factionObject.MyOptions} />
-                            }
                         </div>
-                    }
-                    <div className="verticalspacermed"/>
-                </div>
-                    
+                        {
+                            <OptionSetStaticDisplay data={factionObject.MyOptions} />
+                        }
+                    </div>
+                }
+                <div className="verticalspacermed"/>
+
                 {factionObject.Models.filter((item) => (item.Captain == true && item.Mercenary == false)).length > 0 &&
                     <>
-                        <div id={"captains"} className='centered-div width-content'>
-                            {"Captains"}
-                            <div className='horizontalspacermed hovermouse'>
-                                <FontAwesomeIcon icon={faLink} onClick={() => (
-                                    runToast()
-                                )}/>
-                            </div>
-                        </div>
+                        <RulesHeadlineDisplay
+                            content="Captains"
+                            level={2}
+                            className=""
+                            idName="captains"
+                        />
 
                         {factionObject.Models.filter((item) => (item.Captain == true && item.Mercenary == false)).map((item) => (
                             <div key={"faction_rule_" + factionObject.ID + "_rule_id_" + item.ID}
@@ -221,191 +196,108 @@ const FactionDisplay = (props: any) => {
                 }
                 {factionObject.Models.filter((item) => (item.Captain == false && item.Mercenary == false && (ModelIsElite(item.Model) == true))).length > 0 &&
                     <>
-                        <div className="verticalspacersml"/>
-                        <div className="borderthin bordergrey">
-                            <div className="borderthin bordergrey backgroundBgBasic">
-                                <div className="totalmarginsml">
-                                    <div className={'subtitle-letterspacing size-subtitle font-seriftext'}>
-                                        <div id={"elite"} className='centered-div width-content'>
-                                            {"Elite Units"}
-                                            <div className='horizontalspacermed hovermouse'>
-                                                <FontAwesomeIcon icon={faLink} onClick={() => (
-                                                    runToast()
-                                                    )}/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                        <RulesHeadlineDisplay
+                            content="Elite"
+                            level={2}
+                            className=""
+                            idName="elite"
+                        />
+
+                        {factionObject.Models.filter((item) => (item.Captain == false && item.Mercenary == false && (ModelIsElite(item.Model) == true))).map((item) => (
+                            <div key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID} className="backgroundBgCard ">
+                                <FactionModelDisplay data={item} />
                             </div>
-                            <div className="">
-                                {factionObject.Models.filter((item) => (item.Captain == false && item.Mercenary == false && (ModelIsElite(item.Model) == true))).map((item) => ( 
-                                    <div key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID} className="backgroundBgCard ">
-                                        <FactionModelDisplay data={item} />
-                                    </div>
-                                )) /* Abilities */}
-                            </div>
-                        </div>
+                        )) /* Abilities */}
                     </>
                     } 
                 {factionObject.Models.filter((item) => (item.Captain == false && item.Mercenary == false && (ModelIsElite(item.Model) == false))).length > 0 &&
                     <>
-                        <div className="verticalspacersml"/>
-                        <div className="borderthin bordergrey">
-                            <div className="borderthin bordergrey backgroundBgBasic">
-                                <div className="totalmarginsml">
-                                    <div className={'subtitle-letterspacing size-subtitle font-seriftext'}>
-                                        <div id={"infantry"} className='centered-div width-content'>
-                                            {"Infantry Units"}
-                                            <div className='horizontalspacermed hovermouse'>
-                                                <FontAwesomeIcon icon={faLink} onClick={() => (
-                                                    runToast()
-                                                    )}/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                        <RulesHeadlineDisplay
+                            content="Infantry"
+                            level={2}
+                            className=""
+                            idName="infantry"
+                        />
+                        {factionObject.Models.filter((item) => (item.Captain == false && item.Mercenary == false && (ModelIsElite(item.Model) == false))).map((item) => (
+                            <div key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID}  className="backgroundBgCard ">
+                                <FactionModelDisplay data={item} />
                             </div>
-                            <div className="">
-                                {factionObject.Models.filter((item) => (item.Captain == false && item.Mercenary == false && (ModelIsElite(item.Model) == false))).map((item) => ( 
-                                    <div key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID}  className="backgroundBgCard ">
-                                        <FactionModelDisplay data={item} />
-                                    </div>
-                                )) /* Abilities */}
-                            </div>
-                        </div>                          
+                        )) /* Abilities */}
                     </>
                     }
                 
                 {factionObject.Models.filter((item) => (item.Mercenary == true)).length > 0 &&
                     <>
-                        <div className="verticalspacersml"/>
-                        <div className="borderthin bordergrey">
-                            <div className="borderthin bordergrey backgroundBgBasic">
-                                <div className="totalmarginsml">
-                                    <div className={'subtitle-letterspacing size-subtitle font-seriftext'}>
-                                        <div id={"mercenary"} className='centered-div width-content'>
-                                            {"Mercenaries"}
-                                            <div className='horizontalspacermed hovermouse'>
-                                                <FontAwesomeIcon icon={faLink} onClick={() => (
-                                                    runToast()
-                                                    )}/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                        <RulesHeadlineDisplay
+                            content="Mercenaries"
+                            level={2}
+                            className=""
+                            idName="mercenaries"
+                        />
+
+                        {factionObject.Models.filter((item) => (item.Mercenary == true)).map((item) => (
+                            <div key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID} className="backgroundBgCard ">
+                                <FactionModelDisplay data={item} />
                             </div>
-                            <div className="">
-                                {factionObject.Models.filter((item) => (item.Mercenary == true)).map((item) => ( 
-                                    <div key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID} className="backgroundBgCard ">
-                                        <FactionModelDisplay data={item} />
-                                    </div>
-                                )) /* Abilities */}
-                            </div>
-                        </div>  
+                        )) /* Abilities */}
                         
                     </>
                     }
                 
                 {factionObject.EquipmentItems.length > 0 &&
                     <>
-                        <div id={"armoury"} className="verticalspacermed"/>
-                        <div className={'subtitle-letterspacing size-subtitle font-seriftext'}>
-                            <div className='centered-div width-content'>
-                                {"Armoury"}
-                                <div className='icon-inline-r'>
-                                    <FontAwesomeIcon icon={faLink} onClick={() => (
-                                        runToast()
-                                        )}/>
-                                </div>
-                            </div>
-                        </div>
-                        
-                    <div className='abilityInternalStructure'>
-                    {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "melee" && (containsTag(item.Tags, "exploration_only") == false))).length > 0 &&
-                        <>
-                            <div className="armoury-section">
-                                <div className="armoury-headline">
-                                    {"Melee Weapons"}
-                                </div>
-                                <div className="armoury-content">
-                                    {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "melee" && (containsTag(item.Tags, "exploration_only") == false))).map((item) => ( 
-                                        <div key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID} className="armoury-element">
-                                            <FactionEquipmentDisplay data={item} />
-                                        </div>
-                                    )) /* Abilities */}
-                                </div>
-                            </div> 
-                        </>
-                    }
-                    {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "ranged" && (containsTag(item.Tags, "exploration_only") == false))).length > 0 &&
-                        <>
-                        <div className="armoury-section">
-                            <div className="armoury-headline">
-                                {"Ranged Weapons"}
-                            </div>
-                            <div className="armoury-content">
-                                {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "ranged" && (containsTag(item.Tags, "exploration_only") == false))).map((item) => (
-                                    <div key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID} className="armoury-element">
-                                        <FactionEquipmentDisplay data={item} />
-                                    </div>
-                                )) /* Abilities */}
-                            </div>
-                        </div>
-                        </>
-                    }
-                    {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "armour" && (containsTag(item.Tags, "exploration_only") == false))).length > 0 &&
-                        <>
-                            <div className="armoury-section">
-                                <div className="armoury-headline">
-                                    {"Armour"}
-                                </div>
-                                <div className="armoury-content">
-                                    {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "armour" && (containsTag(item.Tags, "exploration_only") == false))).map((item) => (
-                                        <div key={"faction_rule_" + factionObject.ID + "_rule_id_" + item.ID}
-                                             className="armoury-element">
-                                            <FactionEquipmentDisplay data={item}/>
-                                        </div>
-                                    )) /* Abilities */}
-                                </div>
-                            </div>
 
-                        </>
-                    }
+                        <RulesHeadlineDisplay
+                            content="Armoury"
+                            level={2}
+                            className=""
+                            idName="mercenaries"
+                        />
+
+                        {/* @TODO @Bob - Can we make this filtering easier to use / understand? Like factionObject.EquipmentItems.getItems('melee') or something */}
+                        {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "melee" && (containsTag(item.Tags, "exploration_only") == false))).length > 0 &&
+                            <RulesArmouryElementDisplay
+                                headline="Melee Weapons"
+                                items={factionObject.EquipmentItems.filter(
+                                    (item) => item.EquipmentItem.Category === "melee" && !containsTag(item.Tags, "exploration_only")
+                                )}
+                            />
+                        }
+
+                        {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "ranged" && (containsTag(item.Tags, "exploration_only") == false))).length > 0 &&
+                            <RulesArmouryElementDisplay
+                                headline="Ranged Weapons"
+                                items={factionObject.EquipmentItems.filter(
+                                    (item) => item.EquipmentItem.Category === "ranged" && !containsTag(item.Tags, "exploration_only")
+                                )}
+                            />
+                        }
+
+                        {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "armour" && (containsTag(item.Tags, "exploration_only") == false))).length > 0 &&
+                            <RulesArmouryElementDisplay
+                                headline="Armour"
+                                items={factionObject.EquipmentItems.filter(
+                                    (item) => item.EquipmentItem.Category === "armour" && !containsTag(item.Tags, "exploration_only")
+                                )}
+                            />
+                        }
                         {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "equipment" && (containsTag(item.Tags, "exploration_only") == false))).length > 0 &&
-                            <>
-                                <div className="armoury-section">
-                                    <div className="armoury-headline">
-                                        {"Equipment"}
-                                    </div>
-                                    <div className="armoury-content">
-                                        {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "equipment" && (containsTag(item.Tags, "exploration_only") == false))).map((item) => (
-                                            <div key={"faction_rule_" + factionObject.ID + "_rule_id_" + item.ID}
-                                                 className="armoury-element">
-                                                <FactionEquipmentDisplay data={item}/>
-                                            </div>
-                                        )) /* Abilities */}
-                                    </div>
-                                </div>
-                            </>
+                            <RulesArmouryElementDisplay
+                                headline="Equipment"
+                                items={factionObject.EquipmentItems.filter(
+                                    (item) => item.EquipmentItem.Category === "equipment" && !containsTag(item.Tags, "exploration_only")
+                                )}
+                            />
                         }
                         {factionObject.EquipmentItems.filter((item) => ((containsTag(item.Tags, "exploration_only") == true))).length > 0 &&
-                            <>
-                                <div className="armoury-section">
-                                    <div className="armoury-headline">
-                                        {"Exploration Only"}
-                                    </div>
-                                    <div className="armoury-content">
-                                        {factionObject.EquipmentItems.filter((item) => ((containsTag(item.Tags, "exploration_only") == true))).map((item) => (
-                                            <div key={"faction_rule_" + factionObject.ID + "_rule_id_" + item.ID}
-                                                 className="armoury-element">
-                                                <FactionEquipmentDisplay data={item}/>
-                                            </div>
-                                        )) /* Abilities */}
-                                    </div>
-                                </div>
-                            </>
+                            <RulesArmouryElementDisplay
+                                headline="Exploration Only"
+                                items={factionObject.EquipmentItems.filter(
+                                    (item) => containsTag(item.Tags, "exploration_only")
+                                )}
+                            />
                         }
-                    </div>
+                        
                     </>
                 }
             </div>

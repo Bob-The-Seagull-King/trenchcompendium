@@ -72,7 +72,7 @@ const BookRuleDisplay = (props: any) => {
                             <div className='centered-div width-content'>
                                 {item.title || ""}
                                 <div className='hovermouse'>
-                                    <FontAwesomeIcon icon={faLink} className="icon-inline-r" onClick={() => (
+                                    <FontAwesomeIcon icon={faLink} className="icon-inline-right" onClick={() => (
                                         runToast()
                                         )}/>
                                 </div>

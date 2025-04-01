@@ -204,7 +204,7 @@ const ModelDisplay = (props: any) => {
         <ErrorBoundary fallback={<div>Something went wrong with ModelDisplay.tsx</div>}>
             <div className='fighter-card' key={_keyvar}>
                 <div className="fighter-card-title">
-                    Jabirean Alchemist {/*  @TODO: connect the name of the model here  */}
+                    {modelcollectionObject.Name}
                 </div>
 
                 <div className="fighter-card-meta fighter-card-meta-above">
