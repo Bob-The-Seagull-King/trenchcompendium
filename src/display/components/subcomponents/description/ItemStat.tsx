@@ -11,10 +11,14 @@ const ItemStat = (props: any) => {
     return (
         
         <ErrorBoundary fallback={<div>Something went wrong with ItemStat.tsx</div>}>
-            <div className="fighter-card-stat">
-                <div className="stat-label">{Title}</div>
-                <div className="stat-value">
-                    {Content}
+            <div>
+                <div className="totalmarginxsm">
+                    <div className=" ">{Title}</div>
+                    <div className={"maxwidth bordergrey borderstyler backgroundBgBase centered-div"}>
+                        <div className="maxwidth align-center size-strongtext totalmarginsml">
+                            {Content}
+                        </div>
+                    </div>
                 </div>
             </div>
         </ErrorBoundary>
