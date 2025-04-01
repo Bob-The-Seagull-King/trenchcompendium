@@ -11,7 +11,7 @@ class ContextObject extends CompendiumItem {
 
     public SelfData : any;
     public ContextKeys : ContextEventVals = {}
-    public ContextData : CallEventTable | undefined; // The table searched through in Events
+    public ContextData : CallEventTable; // The table searched through in Events
 
     public MyContext : ContextObject | null = null; // The parent object, if any
 

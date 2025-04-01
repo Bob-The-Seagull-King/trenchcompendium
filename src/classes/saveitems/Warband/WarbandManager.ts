@@ -15,7 +15,8 @@ class WarbandManager {
         let i = 0;
         for (i=0; i < this.WarbandItemList.length ; i++) {
             try {
-                if (this.WarbandItemList[i].Title.trim() == _name) {
+                const nameval = this.WarbandItemList[i].Name 
+                if ((nameval != undefined? nameval : "" ).trim() == _name) {
                     return this.WarbandItemList[i]
                 }
             } catch (e) {
@@ -142,16 +143,30 @@ class WarbandManager {
             return "The Item must have a Title";
         }
 
-        const _Item : IWarbandContentItem = {            
-            id : this.CalcID(_title.trim()),
-            title : _title,
-            context : {
+        const _Item : IWarbandContentItem = {
+            id: this.CalcID(_title.trim()),
+            contextdata: {},
+            name: _title,
+            source: 'user_warband',
+            tags: {},
+            ducat_bank: 0,
+            glory_bank: 0,
+            context: {
                 id: this.CalcID(_title.trim() + "_context"),
                 limit_ducat: 0,
                 limit_model: 0,
                 value_ducat: 0,
                 value_glory: 0
-                }
+            },
+            exploration: {
+                explorationskills: [],
+                locations: [],
+                contextdata: {},
+                id: this.CalcID(_title.trim() + "_exploration"),
+                name: _title+"_exploration",
+                source: 'user_warband',
+                tags: {}
+            }
         }
 
         this.WarbandItemList.push(new WarbandContentItem(_Item))
@@ -165,8 +180,8 @@ class WarbandManager {
      */
     public DuplicateItem(_Item : WarbandContentItem) {        
         const NewMember : WarbandContentItem = new WarbandContentItem(_Item.ConvertToInterface());
-        NewMember.Title = _Item.Title + " - Copy"
-        NewMember.ID = this.CalcID(_Item.Title + " - Copy");
+        NewMember.Name = _Item.Name + " - Copy"
+        NewMember.ID = this.CalcID(_Item.Name + " - Copy");
         
         this.WarbandItemList.push(NewMember);
         this.SetStorage();

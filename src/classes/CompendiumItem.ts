@@ -19,10 +19,10 @@ enum ItemType {
 }
 
 abstract class CompendiumItem {
-    public readonly Source;
-    public readonly ID;
-    public readonly Tags;
-    public readonly Name;
+    public Source;
+    public ID;
+    public Tags;
+    public Name;
 
     /**
      * Assigns data values to the parameters of the item

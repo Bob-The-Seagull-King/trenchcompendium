@@ -27,7 +27,7 @@ const WarbandItemViewDisplay = (prop: any) => {
         )}`;
         const link = document.createElement("a");
         link.href = jsonString;
-        link.download = WarbandItem.Title + ".json";
+        link.download = WarbandItem.Name + ".json";
     
         link.click();
       };
@@ -54,7 +54,7 @@ const WarbandItemViewDisplay = (prop: any) => {
             <div className="row">
                 <div className=" largefonttext centerPosition">
                         <div className="widecentertext">
-                            {WarbandItem.Title} 
+                            {WarbandItem.Name} 
                         </div>
                     </div>
             </div>
