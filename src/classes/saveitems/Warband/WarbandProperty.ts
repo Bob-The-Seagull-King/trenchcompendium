@@ -21,6 +21,21 @@ interface ISelectedOption {
 ///// TODO
 
 ///// HANDLE EXTRA PROPERTY WHEN SELECTED WARBANDPROPERTY OPTION IS ITSELF SOMETHING WITH OPTIONS
+///// Property collect all subproperties loop including parents
+///// Base selected objects are included in context events, but their subselected options aren't
+/**
+ * basic dunamicoptioncontextobject should be modified so any given selection
+ * can contain a basic object IF its selection is one, and if the selected object
+ * is a staticoptioncontextobject, it will instead generate a dynamicoptioncontextobject
+ * to store as its basic object
+ * 
+ * then the warbandproperty should be able to generate properties based on the
+ * selections where each dynamicoptioncontextobject has its own warband property
+ * associated with their respective parent warbandproperty for conversion purposes
+ * 
+ * the warbandproperty interface can have an optional iselectoption param for furter iwarbandproperty
+ * for deconstruction and construction
+ */
 
 class WarbandProperty extends DynamicContextObject  {
     public SelfDynamicProperty : DynamicOptionContextObject;
