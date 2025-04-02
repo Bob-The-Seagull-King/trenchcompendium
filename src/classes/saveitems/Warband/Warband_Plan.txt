@@ -11,7 +11,7 @@ WarbandUser
 WarbandItem
 # Used to describe the elements of the warband itself
     - Name //
-    - CustomNotes[]
+    - CustomNotes[] //
     - Ducat Bank //
     - Glory Bank //
     - WarbandContext //

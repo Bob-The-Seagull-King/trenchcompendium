@@ -10,8 +10,9 @@ interface IWarbandContentItem extends IContextObject {
     id : string,
     ducat_bank : number,
     glory_bank : number,
-    context : IWarbandContextItem;
-    exploration : IWarbandExplorationSet
+    context : IWarbandContextItem,
+    exploration : IWarbandExplorationSet,
+    notes : INote[]
 }
 
 class WarbandContentItem extends DynamicContextObject {
@@ -20,6 +21,7 @@ class WarbandContentItem extends DynamicContextObject {
     public Exploration : WarbandExplorationSet;
     public Ducats;
     public Glory;
+    public Notes : INote[];
 
     /**
      * Assigns parameters and creates a series of description
@@ -34,6 +36,7 @@ class WarbandContentItem extends DynamicContextObject {
         this.Exploration = new WarbandExplorationSet(data.exploration, this)
         this.Ducats = data.ducat_bank;
         this.Glory = data.glory_bank;
+        this.Notes = data.notes;
     }
 
     public ConvertToInterface() {
@@ -46,7 +49,8 @@ class WarbandContentItem extends DynamicContextObject {
             source: this.Source != undefined? this.Source : "",
             tags: this.Tags,
             ducat_bank: this.Ducats,
-            glory_bank: this.Glory
+            glory_bank: this.Glory,
+            notes: this.Notes
         }
         
         return _objint;
