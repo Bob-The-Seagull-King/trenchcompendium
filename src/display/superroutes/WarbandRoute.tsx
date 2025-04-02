@@ -17,6 +17,7 @@ import FilterableCompendiumDisplay from '../pages/FilterableCompendiumDisplay';
 import { ToolsController } from '../../classes/_high_level_controllers/ToolsController';
 import WarbandItemDisplay from '../components/features/saveitem/Warband/WarbandItemDisplay';
 import ToolsSavedItem from '../pages/ToolsSaveItem';
+import WarbandTestBlock from '../components/features/saveitem/Warband/WarbandTestBlock';
 
 interface IControllerProp {
     controller : ToolsController; // The controller being passed through
@@ -46,6 +47,7 @@ const WarbandRoute: React.FC<IControllerProp> = (prop) => {
                     <Routes>                        
                         <Route path={ROUTES.HOME_ROUTE} element={<ToolsSavedItem manager={prop.controller.UserWarbandManager} />} />
                     </Routes>
+                    <WarbandTestBlock />
                 </div>
             </div>
         </ErrorBoundary>
