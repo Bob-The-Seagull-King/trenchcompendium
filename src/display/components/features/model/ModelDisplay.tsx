@@ -255,9 +255,9 @@ const ModelDisplay = (props: any) => {
                     </div>}/>
 
                 <RulesModelDisplayCollapse
-                    d_name={"Equipment"}
-                    d_state={false}
-                    d_method={() => <div>
+                    name={"Equipment"}
+                    state={false}
+                    method={() => <div>
                         {returnDescription(modelcollectionObject, modelcollectionObject.Description) /* Lore */}
                     </div>
                     }/>
@@ -265,9 +265,9 @@ const ModelDisplay = (props: any) => {
                 {((modelcollectionObject.EquipmentList.length > 0) || (equiprestrictions.length > 0) || (equiplimits.length > 0)) &&
 
                     <RulesModelDisplayCollapse
-                        d_name={"Equipment"}
-                        d_state={false}
-                        d_method={() => <div>
+                        name={"Equipment"}
+                        state={false}
+                        method={() => <div>
                             {((equiprestrictions.length > 0) || (equiplimits.length > 0)) &&
 
                                 <div className="borderthin bordergrey">

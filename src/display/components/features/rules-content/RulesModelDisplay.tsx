@@ -24,6 +24,7 @@ import GenericCollapsableBlockDisplay from '../../../components/generics/Generic
 import RulesModelDisplayCollapse from '../../../components/features/rules-content/RulesModelDisplayCollapse';
 import ItemRow from '../../../components/subcomponents/description/ItemRow';
 import {FactionModelRelationship} from "../../../../classes/relationship/faction/FactionModelRelationship";
+import RulesModelUpgrade from "./RulesModelUpgrade";
 
 const RulesModelDisplay = (props: any) => {
     const factionmodelObject: FactionModelRelationship = props.data
@@ -229,78 +230,74 @@ const RulesModelDisplay = (props: any) => {
                     {ReturnStats(modelcollectionObject.Stats)  /* Stats */}
                 </div>
 
-                <RulesModelDisplayCollapse
-                    d_name={"Lore"}
-                    d_state={false}
-                    d_method={() => <>
-                        {returnDescription(modelcollectionObject, modelcollectionObject.Lore) /* Lore */}
-                    </>
-                    }/>
-
-                <RulesModelDisplayCollapse
-                    d_name={"Equipment"}
-                    d_state={false}
-                    d_method={() => <>
-                        {returnDescription(modelcollectionObject, modelcollectionObject.Description) /* Lore */}
-                    </>
-                    }/>
-
-
+                {/* Abilities */}
                 {modelcollectionObject.Abilities.length > 0 &&
-                    <div>
-                        <GenericCollapsableBlockDisplay
-                            d_name={"Abilities"}
-                            d_colour={"grey"}
-                            d_state={false}
-                            d_margin={"sml"}
-                            bordertype={0}
-                            d_method={() => <>
-                                {modelcollectionObject.Abilities.map((item) => (
-                                    <div key={"model_ability_" + modelcollectionObject.ID + "_ability_id_" + item.ID}>
-                                        <GenericCollapsableBlockDisplay
-                                            d_name={item.Name}
-                                            d_colour={"grey"}
-                                            d_state={false}
-                                            d_margin={"sml"}
-                                            d_border={false}
-                                            bordertype={0}
-                                            d_method={() => <div className="borderthin bordergrey">
-                                                <div className="totalmarginsml">
-                                                    <AbilityDisplay data={item}/>
-                                                </div>
-                                            </div>}/>
-                                    </div>
-                                )) /* Abilities */}
-                            </>}/>
-                    </div>
+                    <RulesModelDisplayCollapse
+                        name={"Abilities"}
+                        state={false}
+                        has_children={modelcollectionObject.Abilities.length > 0}
+                        method={() => <>
+                            {modelcollectionObject.Abilities.map((item) => (
+                                <RulesModelDisplayCollapse
+                                    key={"model_ability_" + modelcollectionObject.ID + "_ability_id_" + item.ID}
+                                    name={item.Name}
+                                    state={true}
+                                    method={() => <>
+                                        <AbilityDisplay data={item} />
+                                    </>
+                                    }
+                                />
+                            ))}
+                        </>
+                        }
+                    />
                 }
+
+                {/* Equipment Rules */}
+                {modelcollectionObject.Description &&
+                    <RulesModelDisplayCollapse
+                        name={"Equipment"}
+                        state={false}
+                        method={() => <>
+                            {returnDescription(modelcollectionObject, modelcollectionObject.Description)}
+                        </>
+                        }
+                    />
+                }
+
+                {/* Upgrades */}
                 {modelcollectionObject.UpgradeList.length > 0 &&
-                    <div>
-                        <GenericCollapsableBlockDisplay
-                            d_name={"Upgrades"}
-                            d_colour={"grey"}
-                            d_state={false}
-                            d_margin={"sml"}
-                            bordertype={0}
-                            d_method={() => <>
-                                {modelcollectionObject.UpgradeList.map((item) => (
-                                    <div key={"model_upgrade_" + modelcollectionObject.ID + "_upgrade_id_" + item.ID}>
-                                        <GenericCollapsableBlockDisplay
-                                            d_name={item.UpgradeObject.Name}
-                                            d_colour={"grey"}
-                                            d_state={true}
-                                            d_border={false}
-                                            d_margin={"sml"}
-                                            bordertype={0}
-                                            d_method={() => <div className="borderthin bordergrey">
-                                                <div className="totalmarginsml">
-                                                    <ModelUpgradeDisplay data={item}/>
-                                                </div>
-                                            </div>}/>
-                                    </div>
-                                )) /* Abilities */}
-                            </>}/>
-                    </div>
+                    <RulesModelDisplayCollapse
+                        name={"Upgrades"}
+                        state={false}
+                        has_children={modelcollectionObject.UpgradeList.length > 0}
+                        method={() => <>
+                            {modelcollectionObject.UpgradeList.map((item) => (
+                                <RulesModelDisplayCollapse
+                                    key={"model_upgrade_" + modelcollectionObject.ID + "_upgrade_id_" + item.ID}
+                                    name={item.UpgradeObject.Name}
+                                    state={true}
+                                    method={() => <>
+                                        <RulesModelUpgrade item={item}/>
+                                    </>
+                                    }
+                                />
+                            ))}
+                        </>
+                        }
+                    />
+                }
+
+                {/* Lore Text */}
+                {modelcollectionObject.Lore &&
+                    <RulesModelDisplayCollapse
+                        name={"Lore"}
+                        state={false}
+                        method={() => <>
+                            {returnDescription(modelcollectionObject, modelcollectionObject.Lore)}
+                        </>
+                        }
+                    />
                 }
 
                 <div className="fighter-card-meta fighter-card-meta-below">

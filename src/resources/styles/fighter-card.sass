@@ -66,5 +66,12 @@
             background-color: var(--colour_bg_inverted-75)
             color: var(--colour_basic_text_inverted)
             cursor: pointer
+
         .fighter-card-collapse-content
             padding: 10px
+
+    .fighter-card-collapse.has-children
+
+            > .fighter-card-collapse-content
+                padding: 0px
+                border-left: 10px solid var(--colour_border)
