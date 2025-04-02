@@ -151,6 +151,7 @@ class WarbandManager {
             tags: {},
             ducat_bank: 0,
             glory_bank: 0,
+            notes: [],
             context: {
                 id: this.CalcID(_title.trim() + "_context"),
                 limit_ducat: 0,
