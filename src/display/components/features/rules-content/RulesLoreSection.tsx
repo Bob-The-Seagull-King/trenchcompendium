@@ -19,7 +19,7 @@ const RulesLoreSection: React.FC<RulesLoreSectionProps> = ({ headline, content }
     const [open, setOpen]   = useState(DefaultState);
 
     return (
-        <div className={'rules-lore-section'}>
+        <div className={'rules-lore-section'} id={'Lore'}>
 
             <div className={'rules-lore-title'} onClick={() => {
                 setOpen(!open)

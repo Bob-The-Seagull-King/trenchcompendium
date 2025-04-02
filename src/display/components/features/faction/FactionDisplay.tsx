@@ -83,10 +83,10 @@ const FactionDisplay = (props: any) => {
             ContentsList.push({ name: "Captains", route: "captains"})
         }
         if (factionobj.Models.filter((item) => (!item.Captain && !item.Mercenary && ModelIsElite(item.Model))).length > 0) {
-            ContentsList.push({ name: "Elite Units", route: "elite"})
+            ContentsList.push({ name: "Elite", route: "elite"})
         }
         if (factionobj.Models.filter((item) => (!item.Captain && !item.Mercenary && !ModelIsElite(item.Model))).length > 0) {
-            ContentsList.push({ name: "Infantry Units", route: "infantry"})
+            ContentsList.push({ name: "Infantry", route: "infantry"})
         }
         if (factionobj.Models.filter((item) => item.Mercenary).length > 0) {
             ContentsList.push({ name: "Mercenaries", route: "mercenary"})
