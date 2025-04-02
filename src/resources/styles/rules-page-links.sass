@@ -5,4 +5,43 @@
 //
 
 .rules-page-links
+    display: flex
+    justify-content: space-between
+    gap: 15px // min gap
+
     margin: 30px 0
+
+
+    .rules-page-link
+        display: inline-block
+        position: relative
+        color: #fff
+        text-decoration: none
+
+        border: 1px solid var(--colour_border)
+
+        i, svg
+            position: absolute
+            top: 50%
+            transform: translateY(-50%)
+
+
+        .page-name
+
+    .rules-page-link-prev
+        padding: 10px 10px 10px 20px
+
+        i, svg
+            left: 5px
+
+        .page-name
+            margin-left: 5px
+
+    .rules-page-link-next
+        padding: 10px 20px 10px 10px
+
+        i, svg
+            right: 5px
+
+        .page-name
+            margin-right: 5px

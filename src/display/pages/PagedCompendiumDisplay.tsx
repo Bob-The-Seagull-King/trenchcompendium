@@ -12,6 +12,7 @@ import { CollectionsListPage } from '../../classes/viewmodel/pages/CollectionLis
 import { DisplayCollectionDataDex, DisplayCollectionType } from './DisplayPageStatic'
 import BasicButton from '../components/subcomponents/interactables/BasicButton';
 import { useLocation } from 'react-router-dom';
+import RulesPageLinks from "../components/features/rules-content/RulesPageLinks";
 
 const PagedCompendiumDisplay = (prop: any) => {
     // Initialize controllers and managers
@@ -116,11 +117,33 @@ const PagedCompendiumDisplay = (prop: any) => {
         } else {return (false)}
     }
 
+
+
+    /* @TODO @Bob, can you help me out here?
+     * This should get the current, previous and next pages
+     * - these should contain:
+     * - - .path as string - url to page
+     * - - .level as integer - as url level
+     * - - .name as string - name of page
+     */
+    function GetCurrPage () {
+        return null;
+    }
+    function GetPrevPage () {
+        return null;
+    }
+    function GetNextPage () {
+        return null;
+    }
+
+
+
+
     // Return result -----------------------------
     return (
         <ErrorBoundary fallback={<div>Something went wrong with PagedDisplayCompendium.tsx</div>}>
             <div className="col-lg-6 col-md-12" key={_keyval}>
-                <div>
+                <div className={'rules-content-main'}>
                     {((_curItem == undefined) || (_curItem == null)) &&
                         <h1 className="">No Items Selected</h1>
                     }
@@ -131,6 +154,14 @@ const PagedCompendiumDisplay = (prop: any) => {
                     }
                 </div>
 
+                {/* @TODO: this is the bottom links component */}
+                <RulesPageLinks
+                    prev_page={GetNextPage()}
+                    next_page={GetPrevPage()}
+                    curr_page={GetCurrPage()}
+                />
+
+                {/* This can be removed if the <RulesPageLinks work */}
                 <div className="rules-page-links">
                     <div className="align-left-right buttonrow_container stat_parent">
                         <div className=" maxwidth">
