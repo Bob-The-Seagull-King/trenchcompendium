@@ -1,5 +1,6 @@
 import { DynamicOptionContextObject } from "./DynamicOptionContextObject";
 import { IChoice, StaticOption } from "./StaticOption"
+import { StaticOptionContextObject } from "./StaticOptionContextObject";
 
 /*
 In a DynamicOptionContextObject, each option in the respective
@@ -12,6 +13,7 @@ class SelectedOption {
     public Option : StaticOption;
     public SelectedChoice : IChoice | null = null;
     public MyParent : DynamicOptionContextObject;
+    public NestedOption : DynamicOptionContextObject | null = null;
 
     public constructor(option : StaticOption, parent : DynamicOptionContextObject) {
         this.Option = option;
@@ -25,13 +27,28 @@ class SelectedOption {
     public SelectOption(_id : number | null) {
         if (_id == null) {
             this.SelectedChoice = null;
+            this.NestedOption = null;
         } else {
         for (let i = 0; i < this.Option.Selections.length; i++) {
             if (this.Option.Selections[i].id == _id) {
                 this.SelectedChoice = this.Option.Selections[i]
+                const SelectedVal = this.SelectedChoice.value;
+                if ((SelectedVal instanceof StaticOptionContextObject)) {
+                    if (SelectedVal.MyOptions.length > 0) {
+                        this.HandleObjectDynamics(this.SelectedChoice);
+                    } else {
+                        this.NestedOption = null;
+                    }
+                } else {
+                    this.NestedOption = null;
+                }
                 break;
             }
         }}
+    }
+
+    public HandleObjectDynamics(choice_selected : IChoice) {
+        this.NestedOption = new DynamicOptionContextObject(choice_selected.value.SelfData, choice_selected.value, this.MyParent);
     }
 
 }
