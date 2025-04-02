@@ -12,11 +12,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faDownload } from '@fortawesome/free-solid-svg-icons'
 import { Button } from 'react-bootstrap';
 import { WarbandManager } from '../../../../../classes/saveitems/Warband/WarbandManager';
-import { WarbandContentItem } from '../../../../../classes/saveitems/Warband/WarbandContentItem';
+import { UserWarband } from '../../../../../classes/saveitems/Warband/UserWarband';
 
 const WarbandItemViewDisplay = (prop: any) => {
     const Manager : WarbandManager = prop.manager;
-    const WarbandItem: WarbandContentItem = prop.data;
+    const WarbandItem: UserWarband = prop.data;
     const UpdateFunction = prop.updater;
     
     const ref = useRef<HTMLDivElement>(null);

@@ -2,11 +2,11 @@ import { CompendiumItem, ICompendiumItemData, ItemType } from '../../CompendiumI
 import { DescriptionFactory } from '../../../utility/functions';
 import { INote } from '../../Note';
 import { IWarbandContextItem, WarbandContextItem } from './High_Level/WarbandContextItem';
-import { IWarbandExplorationSet, WarbandExplorationSet } from './Exploration/WarbandExplorationSet';
+import { IWarbandExplorationSet, WarbandExplorationSet } from './CoreElements/WarbandExplorationSet';
 import { DynamicContextObject } from '../../contextevent/dynamiccontextobject';
 import { IContextObject } from '../../contextevent/contextobject';
 
-interface IWarbandContentItem extends IContextObject {
+interface IUserWarband extends IContextObject {
     id : string,
     ducat_bank : number,
     glory_bank : number,
@@ -15,7 +15,7 @@ interface IWarbandContentItem extends IContextObject {
     notes : INote[]
 }
 
-class WarbandContentItem extends DynamicContextObject {
+class UserWarband extends DynamicContextObject {
     public ID;
     public Context : WarbandContextItem;
     public Exploration : WarbandExplorationSet;
@@ -28,7 +28,7 @@ class WarbandContentItem extends DynamicContextObject {
      * objects with DescriptionFactory
      * @param data Object data in IAction format
      */
-    public constructor(data: IWarbandContentItem)
+    public constructor(data: IUserWarband)
     {
         super(data, null)
         this.ID = data.id;
@@ -40,7 +40,7 @@ class WarbandContentItem extends DynamicContextObject {
     }
 
     public ConvertToInterface() {
-        const _objint : IWarbandContentItem = {
+        const _objint : IUserWarband = {
             id : this.ID,
             context : this.Context.ConvertToInterface(),
             exploration : this.Exploration.ConvertToInterface(),
@@ -58,5 +58,5 @@ class WarbandContentItem extends DynamicContextObject {
 
 }
 
-export {IWarbandContentItem, WarbandContentItem}
+export {IUserWarband, UserWarband}
 

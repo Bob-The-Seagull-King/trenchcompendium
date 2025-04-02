@@ -1,7 +1,7 @@
-import { WarbandContentItem, IWarbandContentItem } from './WarbandContentItem';
+import { UserWarband, IUserWarband } from './UserWarband';
 
 class WarbandManager {
-    public WarbandItemList: WarbandContentItem[] = []; 
+    public WarbandItemList: UserWarband[] = []; 
 
     constructor() {
         this.WarbandItemList = this.GrabItems();
@@ -30,12 +30,12 @@ class WarbandManager {
      * Gets all of the saved items.
      */
     public GrabItems() {
-        const TempList: WarbandContentItem[] = [];  
+        const TempList: UserWarband[] = [];  
         const data = localStorage.getItem('compendiumsaveitem');  
         try {
-            const ItemList: IWarbandContentItem[] = JSON.parse(data || "");
+            const ItemList: IUserWarband[] = JSON.parse(data || "");
             for (let i = 0; i < ItemList.length; i++) {
-                TempList.push(new WarbandContentItem(ItemList[i]))
+                TempList.push(new UserWarband(ItemList[i]))
             }
             return TempList;
         } catch (e) {
@@ -49,7 +49,7 @@ class WarbandManager {
      * the manager's array of items.
      */
     public SetStorage() {
-        const _list: IWarbandContentItem[] = []
+        const _list: IUserWarband[] = []
         for (let i = 0; i < this.WarbandItemList.length; i++) {
             try {
                 _list.push(this.WarbandItemList[i].ConvertToInterface())
@@ -73,7 +73,7 @@ class WarbandManager {
         try {
             ReturnMsg = this.ValidateFileData(_content) 
             if (ReturnMsg == "") {
-                const ContentNew: WarbandContentItem = new WarbandContentItem(JSON.parse(_content) as IWarbandContentItem);
+                const ContentNew: UserWarband = new UserWarband(JSON.parse(_content) as IUserWarband);
                 this.WarbandItemList.push(ContentNew);
                 this.SetStorage();
             } else {
@@ -121,7 +121,7 @@ class WarbandManager {
      * update the stored information to match.
      * @param _pack The Content Pack to remove from the manager
      */
-    public DeletePack(_pack : WarbandContentItem) {
+    public DeletePack(_pack : UserWarband) {
         let i = 0;
         for (i = 0; i < this.WarbandItemList.length; i++) {
             if (_pack == this.WarbandItemList[i]) {
@@ -143,7 +143,7 @@ class WarbandManager {
             return "The Item must have a Title";
         }
 
-        const _Item : IWarbandContentItem = {
+        const _Item : IUserWarband = {
             id: this.CalcID(_title.trim()),
             contextdata: {},
             name: _title,
@@ -170,7 +170,7 @@ class WarbandManager {
             }
         }
 
-        this.WarbandItemList.push(new WarbandContentItem(_Item))
+        this.WarbandItemList.push(new UserWarband(_Item))
         this.SetStorage();
 
         return msg;
@@ -179,8 +179,8 @@ class WarbandManager {
     /**
      * Recreates a copy of the item as a new item.
      */
-    public DuplicateItem(_Item : WarbandContentItem) {        
-        const NewMember : WarbandContentItem = new WarbandContentItem(_Item.ConvertToInterface());
+    public DuplicateItem(_Item : UserWarband) {        
+        const NewMember : UserWarband = new UserWarband(_Item.ConvertToInterface());
         NewMember.Name = _Item.Name + " - Copy"
         NewMember.ID = this.CalcID(_Item.Name + " - Copy");
         
@@ -203,7 +203,7 @@ class WarbandManager {
      * @param _pack the content pack to move
      * @param direction if the pack should be moved up (true) or down (false)
      */
-    public ShufflePack(_pack : WarbandContentItem, direction: boolean) {
+    public ShufflePack(_pack : UserWarband, direction: boolean) {
         
         let i = 0;
         for (i = 0; i < this.WarbandItemList.length; i++) {

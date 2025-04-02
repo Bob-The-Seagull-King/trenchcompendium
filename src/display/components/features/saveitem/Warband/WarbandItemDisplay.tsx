@@ -19,11 +19,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClone, faDownload, faEye, faSquareCaretUp, faSquareCaretDown, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { Button } from 'react-bootstrap';
 import { WarbandManager } from '../../../../../classes/saveitems/Warband/WarbandManager';
-import { WarbandContentItem } from '../../../../../classes/saveitems/Warband/WarbandContentItem';
+import { UserWarband } from '../../../../../classes/saveitems/Warband/UserWarband';
 
 const WarbandItemDisplay = (prop: any) => {
     const Manager : WarbandManager = prop.parent;
-    const WarbandItem: WarbandContentItem = prop.data;
+    const WarbandItem: UserWarband = prop.data;
     const updateHost = prop.statefunction;
     const UpdateFunction = prop.updater;
     
