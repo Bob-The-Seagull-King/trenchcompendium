@@ -273,7 +273,6 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         menushowitems: true,
         returnDisplay(item: any) {
             return (
-                
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
                     <FactionCollectionDisplay data={item} />
                 </ErrorBoundary>
@@ -281,9 +280,8 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         },
         returnFilterSelect(manager : FilterManager, update : NoneToNoneFunction, close : NoneToNoneFunction) {
             return (
-                
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    
+
                 </ErrorBoundary>
             )
         }

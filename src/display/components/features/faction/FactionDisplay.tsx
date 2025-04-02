@@ -98,181 +98,179 @@ const FactionDisplay = (props: any) => {
 
     return (
         <ErrorBoundary fallback={<div>Something went wrong with FactionDisplay.tsx</div>}>
-            <div>
-                <ToastContainer
-                            position="top-center"
-                            autoClose={5000}
-                            hideProgressBar={false}
-                            newestOnTop={false}
-                            closeOnClick
-                            rtl={false}
-                            pauseOnFocusLoss
-                            draggable
-                            pauseOnHover
-                            theme="light" 
-                            />
-
-
-                {GetContents(factionObject)}
-
-                <RulesLoreSection
-                    headline={factionObject.Name + " lore"}
-                    content={returnDescription(factionObject, factionObject.Description)}
-                />
-
-                {factionObject.Rules.length > 0 &&
-                    <>
-                        <RulesHeadlineDisplay
-                            content="Faction Rules"
-                            level={2}
-                            className=""
+            <ToastContainer
+                        position="top-center"
+                        autoClose={5000}
+                        hideProgressBar={false}
+                        newestOnTop={false}
+                        closeOnClick
+                        rtl={false}
+                        pauseOnFocusLoss
+                        draggable
+                        pauseOnHover
+                        theme="light"
                         />
 
-                        {factionObject.Rules.map((item) => (
 
-                            <RulesFactionRule key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID}
-                                headline={item.Name}
-                                content={<RuleDisplay data={item} />}
-                            />
+            {GetContents(factionObject)}
 
-                        ))}
-                    </>
-                }
+            <RulesLoreSection
+                headline={factionObject.Name + " lore"}
+                content={returnDescription(factionObject, factionObject.Description)}
+            />
 
-                {factionObject.MyOptions.length > 0 &&
-                    <div>
-                        <div id={"options"} className="verticalspacermed"/>
-                        <div className={'subtitle-letterspacing size-subtitle font-seriftext'}>
-                            <div className='centered-div width-content'>
-                                {"Warband Options"}
-                                <div className='horizontalspacermed hovermouse'>
-                                    <FontAwesomeIcon icon={faLink} onClick={() => (
-                                        runToast()
-                                        )}/>
-                                </div>
+            {factionObject.Rules.length > 0 &&
+                <>
+                    <RulesHeadlineDisplay
+                        content="Faction Rules"
+                        level={2}
+                        className=""
+                    />
+
+                    {factionObject.Rules.map((item) => (
+
+                        <RulesFactionRule key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID}
+                            headline={item.Name}
+                            content={<RuleDisplay data={item} />}
+                        />
+
+                    ))}
+                </>
+            }
+
+            {factionObject.MyOptions.length > 0 &&
+                <div>
+                    <div id={"options"} className="verticalspacermed"/>
+                    <div className={'subtitle-letterspacing size-subtitle font-seriftext'}>
+                        <div className='centered-div width-content'>
+                            {"Warband Options"}
+                            <div className='horizontalspacermed hovermouse'>
+                                <FontAwesomeIcon icon={faLink} onClick={() => (
+                                    runToast()
+                                    )}/>
                             </div>
                         </div>
-                        {
-                            <OptionSetStaticDisplay data={factionObject.MyOptions} />
-                        }
                     </div>
-                }
-                <div className="verticalspacermed"/>
-
-                {factionObject.Models.filter((item) => (item.Captain == true && item.Mercenary == false)).length > 0 &&
-                    <>
-                        <RulesHeadlineDisplay
-                            content="Captains"
-                            level={2}
-                            className=""
-                        />
-
-                        {factionObject.Models.filter((item) => (item.Captain == true && item.Mercenary == false)).map((item) => (
-                            <RulesFactionModelDisplay key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID} data={item} />
-
-                        )) /* Abilities */}
-
-                    </>
-                }
-                {factionObject.Models.filter((item) => (item.Captain == false && item.Mercenary == false && (ModelIsElite(item.Model) == true))).length > 0 &&
-                    <>
-                        <RulesHeadlineDisplay
-                            content="Elite"
-                            level={2}
-                            className=""
-                        />
-
-                        {factionObject.Models.filter((item) => (item.Captain == false && item.Mercenary == false && (ModelIsElite(item.Model) == true))).map((item) => (
-                            <RulesFactionModelDisplay key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID} data={item} />
-
-                        )) /* Abilities */}
-                    </>
-                    } 
-                {factionObject.Models.filter((item) => (item.Captain == false && item.Mercenary == false && (ModelIsElite(item.Model) == false))).length > 0 &&
-                    <>
-                        <RulesHeadlineDisplay
-                            content="Infantry"
-                            level={2}
-                            className=""
-                        />
-                        {factionObject.Models.filter((item) => (item.Captain == false && item.Mercenary == false && (ModelIsElite(item.Model) == false))).map((item) => (
-                            <RulesFactionModelDisplay key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID} data={item} />
-                        )) /* Abilities */}
-                    </>
+                    {
+                        <OptionSetStaticDisplay data={factionObject.MyOptions} />
                     }
-                
-                {factionObject.Models.filter((item) => (item.Mercenary == true)).length > 0 &&
-                    <>
-                        <RulesHeadlineDisplay
-                            content="Mercenaries"
-                            level={2}
-                            className=""
-                        />
+                </div>
+            }
+            <div className="verticalspacermed"/>
 
-                        {factionObject.Models.filter((item) => (item.Mercenary == true)).map((item) => (
-                            <RulesFactionModelDisplay key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID} data={item} />
-                        )) /* Abilities */}
+            {factionObject.Models.filter((item) => (item.Captain == true && item.Mercenary == false)).length > 0 &&
+                <>
+                    <RulesHeadlineDisplay
+                        content="Captains"
+                        level={2}
+                        className=""
+                    />
 
-                        
-                    </>
-                    }
-                
-                {factionObject.EquipmentItems.length > 0 &&
-                    <>
+                    {factionObject.Models.filter((item) => (item.Captain == true && item.Mercenary == false)).map((item) => (
+                        <RulesFactionModelDisplay key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID} data={item} />
 
-                        <RulesHeadlineDisplay
-                            content="Armoury"
-                            level={2}
-                            className=""
-                        />
+                    )) /* Abilities */}
 
-                        {/* @TODO @Bob - Can we make this filtering easier to use / understand? Like factionObject.EquipmentItems.getItems('melee') or something */}
-                        {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "melee" && (containsTag(item.Tags, "exploration_only") == false))).length > 0 &&
-                            <RulesArmouryElementDisplay
-                                headline="Melee Weapons"
-                                items={factionObject.EquipmentItems.filter(
-                                    (item) => item.EquipmentItem.Category === "melee" && !containsTag(item.Tags, "exploration_only")
-                                )}
-                            />
-                        }
+                </>
+            }
+            {factionObject.Models.filter((item) => (item.Captain == false && item.Mercenary == false && (ModelIsElite(item.Model) == true))).length > 0 &&
+                <>
+                    <RulesHeadlineDisplay
+                        content="Elite"
+                        level={2}
+                        className=""
+                    />
 
-                        {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "ranged" && (containsTag(item.Tags, "exploration_only") == false))).length > 0 &&
-                            <RulesArmouryElementDisplay
-                                headline="Ranged Weapons"
-                                items={factionObject.EquipmentItems.filter(
-                                    (item) => item.EquipmentItem.Category === "ranged" && !containsTag(item.Tags, "exploration_only")
-                                )}
-                            />
-                        }
+                    {factionObject.Models.filter((item) => (item.Captain == false && item.Mercenary == false && (ModelIsElite(item.Model) == true))).map((item) => (
+                        <RulesFactionModelDisplay key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID} data={item} />
 
-                        {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "armour" && (containsTag(item.Tags, "exploration_only") == false))).length > 0 &&
-                            <RulesArmouryElementDisplay
-                                headline="Armour"
-                                items={factionObject.EquipmentItems.filter(
-                                    (item) => item.EquipmentItem.Category === "armour" && !containsTag(item.Tags, "exploration_only")
-                                )}
-                            />
-                        }
-                        {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "equipment" && (containsTag(item.Tags, "exploration_only") == false))).length > 0 &&
-                            <RulesArmouryElementDisplay
-                                headline="Equipment"
-                                items={factionObject.EquipmentItems.filter(
-                                    (item) => item.EquipmentItem.Category === "equipment" && !containsTag(item.Tags, "exploration_only")
-                                )}
-                            />
-                        }
-                        {factionObject.EquipmentItems.filter((item) => ((containsTag(item.Tags, "exploration_only") == true))).length > 0 &&
-                            <RulesArmouryElementDisplay
-                                headline="Exploration Only"
-                                items={factionObject.EquipmentItems.filter(
-                                    (item) => containsTag(item.Tags, "exploration_only")
-                                )}
-                            />
-                        }
-                        
-                    </>
+                    )) /* Abilities */}
+                </>
                 }
-            </div>
+            {factionObject.Models.filter((item) => (item.Captain == false && item.Mercenary == false && (ModelIsElite(item.Model) == false))).length > 0 &&
+                <>
+                    <RulesHeadlineDisplay
+                        content="Infantry"
+                        level={2}
+                        className=""
+                    />
+                    {factionObject.Models.filter((item) => (item.Captain == false && item.Mercenary == false && (ModelIsElite(item.Model) == false))).map((item) => (
+                        <RulesFactionModelDisplay key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID} data={item} />
+                    )) /* Abilities */}
+                </>
+                }
+
+            {factionObject.Models.filter((item) => (item.Mercenary == true)).length > 0 &&
+                <>
+                    <RulesHeadlineDisplay
+                        content="Mercenaries"
+                        level={2}
+                        className=""
+                    />
+
+                    {factionObject.Models.filter((item) => (item.Mercenary == true)).map((item) => (
+                        <RulesFactionModelDisplay key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID} data={item} />
+                    )) /* Abilities */}
+
+
+                </>
+                }
+
+            {factionObject.EquipmentItems.length > 0 &&
+                <>
+
+                    <RulesHeadlineDisplay
+                        content="Armoury"
+                        level={2}
+                        className=""
+                    />
+
+                    {/* @TODO @Bob - Can we make this filtering easier to use / understand? Like factionObject.EquipmentItems.getItems('melee') or something */}
+                    {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "melee" && (containsTag(item.Tags, "exploration_only") == false))).length > 0 &&
+                        <RulesArmouryElementDisplay
+                            headline="Melee Weapons"
+                            items={factionObject.EquipmentItems.filter(
+                                (item) => item.EquipmentItem.Category === "melee" && !containsTag(item.Tags, "exploration_only")
+                            )}
+                        />
+                    }
+
+                    {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "ranged" && (containsTag(item.Tags, "exploration_only") == false))).length > 0 &&
+                        <RulesArmouryElementDisplay
+                            headline="Ranged Weapons"
+                            items={factionObject.EquipmentItems.filter(
+                                (item) => item.EquipmentItem.Category === "ranged" && !containsTag(item.Tags, "exploration_only")
+                            )}
+                        />
+                    }
+
+                    {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "armour" && (containsTag(item.Tags, "exploration_only") == false))).length > 0 &&
+                        <RulesArmouryElementDisplay
+                            headline="Armour"
+                            items={factionObject.EquipmentItems.filter(
+                                (item) => item.EquipmentItem.Category === "armour" && !containsTag(item.Tags, "exploration_only")
+                            )}
+                        />
+                    }
+                    {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "equipment" && (containsTag(item.Tags, "exploration_only") == false))).length > 0 &&
+                        <RulesArmouryElementDisplay
+                            headline="Equipment"
+                            items={factionObject.EquipmentItems.filter(
+                                (item) => item.EquipmentItem.Category === "equipment" && !containsTag(item.Tags, "exploration_only")
+                            )}
+                        />
+                    }
+                    {factionObject.EquipmentItems.filter((item) => ((containsTag(item.Tags, "exploration_only") == true))).length > 0 &&
+                        <RulesArmouryElementDisplay
+                            headline="Exploration Only"
+                            items={factionObject.EquipmentItems.filter(
+                                (item) => containsTag(item.Tags, "exploration_only")
+                            )}
+                        />
+                    }
+
+                </>
+            }
         </ErrorBoundary>
     )
 }
