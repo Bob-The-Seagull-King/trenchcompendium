@@ -1,0 +1,60 @@
+.rules-menu-body
+
+    .home-link
+
+    .menu-list
+        list-style-type: none
+        margin: 0
+        padding: 0
+
+    .menu-list-item
+        position: relative
+
+        &.has-children
+            .menu-list-item-anchor
+                padding-right: 45px
+
+    .menu-list-item-anchor // all anchor tags
+        display: block
+        background-color: var(--colour_bg)
+        color: var(--colour_basic_text)
+        text-decoration: none
+        transition: color .2s ease
+
+        &:hover
+            color: $red-tc
+
+    .collapse-chevron-wrap
+        position: absolute
+        top: 0
+        right: 0
+        display: flex
+        align-items: center
+        justify-content: center
+        height: 44px
+        width: 44px
+        cursor: pointer
+        transition: color .2s ease, background-color .2s ease
+
+        &:hover
+            background-color: var(--colour_bg_inverted-25)
+            color: $red-tc
+
+    .menu-list.level-0
+        > li
+            > a
+                padding: 10px
+                background-color: var(--colour_bg_inverted-50)
+
+
+    .menu-list.level-1
+        > li
+            > a
+                padding: 10px 10px 10px 15px
+                background-color: var(--colour_bg_inverted-25)
+
+    .menu-list.level-2
+        > li
+            > a
+                padding: 10px 10px 10px 25px
+

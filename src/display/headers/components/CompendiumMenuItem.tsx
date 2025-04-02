@@ -50,7 +50,7 @@ const CompendiumMenuItem = (prop: any) => {
     }
     
     return (
-        <ErrorBoundary fallback={<div>Something went wrong with PalleteSwap.tsx</div>}>
+        <ErrorBoundary fallback={<div>Something went wrong with CompendiumMenuItem.tsx</div>}>
             <>
             {DisplayPage.menushowitems == true &&
                 <GenericLinkedCollapsableBlockDisplay 

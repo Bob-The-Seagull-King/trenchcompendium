@@ -18,6 +18,7 @@ import { ControllerController } from '../../classes/_high_level_controllers/Cont
 import OffcanvasMenu from './components/OffCanvasMenu';
 import OncanvasMenu from '../components/subcomponents/informationpanel/OnCanvasMenu';
 import SettingsMenu from './components/SettingsMenu';
+import RulesMenuBody from "../components/features/rules-content/RulesMenuBody";
 
 interface IControllerProp {
     controller : ControllerController; // The controller being passed through
@@ -94,10 +95,9 @@ const SuperHeader: React.FC<IControllerProp> = (prop) => {
                         <div className="overlaystructure menustructure d-none d-lg-block "
                              style={{height: window.innerHeight - stateheight}}>
                             <div style={{height: stateheight - 10}}/>
-                            <div className="scrollingoffmenu menuheight removeoverflowbar">
-                                <OncanvasMenu controller={prop.controller} closeFunc={handleClose} responseshow='md'
-                                              showState={show}/>
-                            </div>
+
+                            <RulesMenuBody controller={prop.controller}/>
+
                         </div>
                     }/>
                 </Routes>

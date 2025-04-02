@@ -9,7 +9,6 @@ import Dropdown from 'react-bootstrap/Dropdown';
 // Font Awesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faChevronDown, faChevronUp, faSun, faClose} from '@fortawesome/free-solid-svg-icons'
-import { faMoon } from '@fortawesome/free-solid-svg-icons'
 import { useGlobalState } from '../../../utility/globalstate'
 import { useNavigate } from 'react-router-dom';
 import GenericCollapsableBlockDisplay from '../../components/generics/GenericCollapsableBlockDisplay';
@@ -51,9 +50,9 @@ const OffcanvasMenu: React.FC<IControllerProp> = (prop) => {
 
     
     return (
-        <ErrorBoundary fallback={<div>Something went wrong with PalleteSwap.tsx</div>}>  
-            <Offcanvas className="borderthin bordergrey offcanvas-main-menu" data-theme={theme} show={show} onHide={handleClose} responsive={prop.responseshow}>
-                <Offcanvas.Header className="borderthin bordergrey backgroundBgBase  ">
+        <ErrorBoundary fallback={<div>Something went wrong with OffcanvasMenu.tsx</div>}>
+            <Offcanvas className="offcanvas-main-menu" data-theme={theme} show={show} onHide={handleClose} responsive={prop.responseshow}>
+                <Offcanvas.Header className="">
                     <Offcanvas.Title className="">
                         Trench Compendium v2.2
                         <div className="offcanvas-close" onClick={handleClose}>
@@ -61,9 +60,8 @@ const OffcanvasMenu: React.FC<IControllerProp> = (prop) => {
                         </div>
                     </Offcanvas.Title>
                 </Offcanvas.Header>
-                <Offcanvas.Body bsPrefix="empty" className="scrollingoffmenu removeoverflowbar fillspace backgroundBgBase">   
+                <Offcanvas.Body bsPrefix="empty" className="">
                     <MenuBody controller={prop.controller} closeFunc={prop.closeFunc} responseshow={prop.responseshow} showState={prop.showState}/>
-                    <div className="borderthin bordergrey fillspace"/>
                 </Offcanvas.Body>
             </Offcanvas>
         </ErrorBoundary>

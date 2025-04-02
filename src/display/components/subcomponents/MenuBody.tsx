@@ -28,7 +28,7 @@ interface IControllerProp {
 
 const MenuBody: React.FC<IControllerProp> = (prop) => {
 
-    // State
+    // State // @TODO: remove theme choice here if it is implemented in body
     const [theme, setTheme] = useGlobalState('theme');
 
     if ((theme == "" ) || (theme == null)) { // Default theme to light
@@ -50,7 +50,7 @@ const MenuBody: React.FC<IControllerProp> = (prop) => {
         return (
             <>
                 <GenericLinkedCollapsableBlockDisplay
-                    d_name={"Rules"} 
+                    d_name={"Rules"}
                     d_colour={"grey"} 
                     d_state={false}  
                     bordertype={0}
