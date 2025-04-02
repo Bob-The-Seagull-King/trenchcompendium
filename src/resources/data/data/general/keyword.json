@@ -15,7 +15,6 @@
                 "content": "Modifier for ACTION rolls. For each +DICE, add one dice to the dice pool of the 2D6 roll you are about to make. +1 DICE thus makes the roll a total of 3D6.",
                 "glossary": [{"val": "ACTION", "id": "kw_action"}]
             },
-            { "tags": {"desc_type" : "gap"} },
             {
                 "tags": {"desc_type" : "default"},
                 "content": "Then roll all the dice and pick the two highest. If two +DICE are added, roll 4D6 and pick the two highest, and so on."
@@ -38,7 +37,6 @@
                 "content": "Modifier for ACTION rolls. For each -DICE, add one dice to the dice pool of the 2D6 roll you are about to make. Thus -1 DICE makes the roll a total of 3D6.",
                 "glossary": [{"val": "ACTION", "id": "kw_action"}]
             },
-            { "tags": {"desc_type" : "gap"} },
             {
                 "tags": {"desc_type" : "default"},
                 "content": "Then roll all the dice and pick the two lowest. If two -DICE are added, roll 4D6 and pick the two lowest, and so on."
@@ -58,7 +56,6 @@
                 "tags": {"desc_type" : "default"},
                 "content": "Covers attacking with Melee and Ranged Weapons, Dashing and any other activity where the player must roll on the Action Success Chart to make an Action."
             },
-            { "tags": {"desc_type" : "gap"} },
             {
                 "tags": {"desc_type" : "default"},
                 "content": "This roll can be modified by the opposing player by using BLOOD MARKERS. Each marker causes -1 DICE penalty to the roll.",
@@ -142,7 +139,6 @@
                 "tags": {"desc_type" : "default"},
                 "content": "A weapon with BLAST (X) has an area of effect with a radius of inches indicated by X. If this weapon targets a model, this radius is measured from the centre of that model’s base in all directions. If this weapon targets a point on the ground, this radius is measured from that point in all directions, including vertically."
             },
-            { "tags": {"desc_type" : "gap"} },
             {
                 "tags": {"desc_type" : "default"},
                 "content": "If the Attack ACTION with this weapon is successful, it hits every model within this radius that the target (either model or point) has line of sight to (i.e. not completely blocked by terrain).",
@@ -324,7 +320,6 @@
                 "content": "This model is part of a Fireteam made up of two models. All models that are part of this Fireteam can be activated at the same time without the opponent getting their turn in between. They can take their ACTIONS in any order they wish, switching between the two models.",
                 "glossary": [{"val": "ACTIONS", "id": "kw_action"}]
             },
-            { "tags": {"desc_type" : "gap"} },
             {
                 "tags": {"desc_type" : "default"},
                 "content": "Note that if the activation of either member of the Fireteam forcefully ends (due to a failed RISKY ACTION for example), it ends both Activations. Allies cannot be part of a Fireteam.",
@@ -407,7 +402,6 @@
                 "tags": {"desc_type" : "default"},
                 "content": "Models with this Keyword can be deployed anywhere on the table out of line of sight of any enemies, but at least 8” away from the closest enemy. They are deployed after all other models without this Keyword."
             },
-            { "tags": {"desc_type" : "gap"} },
             {
                 "tags": {"desc_type" : "default"},
                 "content": "If any infiltrators cannot be deployed according to these restrictions then those models can always be placed in your deployment zone. If a scenario does not allow for infiltrators, deploy models with this Keyword during standard deployment as if they didn’t have this Keyword."
@@ -506,7 +500,6 @@
                 "tags": {"desc_type" : "default"},
                 "content": "When a model with this Keyword is targeted by an enemy’s Charge, it may immediately move D3” in any direction, except into Melee Combat. A Skirmisher may also make this move when a charging enemy model would enter Melee Combat with it during a Charge that is not targeting it. "
             },
-            { "tags": {"desc_type" : "gap"} },
             {
                 "tags": {"desc_type" : "default"},
                 "content": "After either of these moves is resolved, the Charge continues as normal toward the original target. These moves can only be taken if the Skirmisher is not in Melee Combat and only one such move may be taken per Charge."

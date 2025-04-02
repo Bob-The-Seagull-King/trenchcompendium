@@ -16,7 +16,7 @@
         "battlefield": {
             "field_size":  [
                 {
-                    "tags": {"desc_type" : "default"},
+                    "tags": {},
                     "content": "The game is played on a standard-sized battlefield (we suggest 4’ x 4’)."
                 }
             ],
@@ -28,14 +28,14 @@
             "allowed": 0,
             "description": [
                 {
-                    "tags": {"desc_type" : "default"},
+                    "tags": {},
                     "content": "Infiltrators can be deployed."
                 }
             ]
         },
         "victory_conditions":{ "description": [
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {},
                 "content": "At the end of the game, each player totals up the ducat value of their enemy models that they have taken Out of Action and divides the number by 100, rounding any fractions up to find the number of Victory Points each player has scored. Troops bought with Glory Points are worth 30 ducats per Glory Point for this calculation. The highest scoring player wins. You gain +1 Victory Point for each enemy you kill on the opposing half of the table from your own."
             }
         ]},
@@ -51,7 +51,7 @@
             "even_match": true,
             "description": [
                 {
-                    "tags": {"desc_type" : "default"},
+                    "tags": {},
                     "content": "Use your full Campaign Warband in this battle."
                 }
             ]
@@ -59,14 +59,14 @@
         "battlefield": {
             "field_size":  [
                 {
-                    "tags": {"desc_type" : "default"},
+                    "tags": {},
                     "content": "The game is played on a standard-sized battlefield (we suggest 4’ x 4’)."
                 }
             ],
             "standard_terrain": true,
             "extra_features":  [
                 {
-                    "tags": {"desc_type" : "default"},
+                    "tags": {},
                     "content": "Each player rolls D3+1 and takes that many 1” radius Objective markers. The player with the most objective markers (or the winner of a roll-off, if both players have the same number of markers) begins by placing one of their Objective markers on the playing surface. Then the opponent does the same and they keep alternating until both players have placed all of their Objective markers. Objective markers can be placed anywhere on the playing surface outside Impassable Terrain, and more than 8” away from another marker, table edge or any Deployment Zone. If it becomes impossible to place any more markers, the remaining markers are discarded."
                 }
             ]
@@ -75,19 +75,18 @@
             "allowed": 0,
             "description": [
                 {
-                    "tags": {"desc_type" : "default"},
+                    "tags": {},
                     "content": "Infiltrators can be deployed."
                 }
             ]
         },
         "victory_conditions":{ "description": [
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {},
                 "content": "To hold an objective, a player must have a model within 3” of the marker and there must be no enemy models at all within 3” of the same marker. If either of these conditions is not met, that objective is not held by any player."
             },
-            { "tags": {"desc_type" : "gap"} },
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {},
                 "content": "After the game ends, the players determine how many objectives they control. The player with the most objective markers wins. If they hold the same number of objectives, the game is a draw."
             }
         ]},
@@ -103,7 +102,7 @@
             "even_match": false,
             "description": [
                 {
-                    "tags": {"desc_type" : "default"},
+                    "tags": {},
                     "content": "Use your full Campaign Warband in this battle."
                 }
             ]
@@ -111,14 +110,14 @@
         "battlefield": {
             "field_size":  [
                 {
-                    "tags": {"desc_type" : "default"},
+                    "tags": {},
                     "content": "The game is played on a standard-sized battlefield (we suggest 4’ x 4’)."
                 }
             ],
             "standard_terrain": true,
             "extra_features":  [
                 {
-                    "tags": {"desc_type" : "default"},
+                    "tags": {},
                     "content": "Each player rolls D3+1 and takes that many 1” radius Objective markers. The player with the most objective markers (or the winner of a roll-off, if both players have the same number of markers) begins by placing one of their Objective markers on the playing surface. Then the opponent does the same and they keep alternating until both players have placed all of their Objective markers. Objective markers can be placed anywhere on the playing surface outside Impassable Terrain, and more than 8” away from another marker, table edge or any Deployment Zone. If it becomes impossible to place any more markers, the remaining markers are discarded."
                 }
             ]
@@ -127,24 +126,22 @@
             "allowed": 1,
             "description": [
                 {
-                    "tags": {"desc_type" : "default"},
+                    "tags": {},
                     "content": "Infiltrators must be deployed as normal troops."
                 }
             ]
         },
         "victory_conditions":{ "description": [
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {},
                 "content": "The players roll-off and the winner decides to be the attacker or defender. During the game, the attacker can destroy the objectives by planting mines/demolition charges or other explosives on them."
             },
-            { "tags": {"desc_type" : "gap"} },
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {},
                 "content": "To plant an explosive charge on an objective, any attacking model must first move into base contact with the objective marker and then use any melee attack ACTION they have on the objective – this automatically plants the charges and the Activation of the model ends. In any following turn, if the attacking model is activated and moves away from the marker, the objective is automatically destroyed and any other model (friends and foes) that is still in base contact with the objective must immediately roll on the Injury Chart while ignoring armour. If the model moves away from the marker or is taken Out of Action before its next Activation, the explosive charge does not go off."
             },
-            { "tags": {"desc_type" : "gap"} },
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {},
                 "content": "After the game ends, if the attacker has destroyed more objectives than their opponent, the Attacker wins. If less, then the Attacker loses. If both players have destroyed exactly the same number of the objectives, the game is adraw."
             }
         ]},
@@ -160,7 +157,7 @@
             "even_match": true,
             "description": [
                 {
-                    "tags": {"desc_type" : "default"},
+                    "tags": {},
                     "content": "Use your full Campaign Warband in this battle."
                 }
             ]
@@ -168,7 +165,7 @@
         "battlefield": {
             "field_size":  [
                 {
-                    "tags": {"desc_type" : "default"},
+                    "tags": {},
                     "content": "The game is played on a standard-sized battlefield (we suggest 4’ x 4’)."
                 }
             ],
@@ -179,24 +176,22 @@
             "allowed": 0,
             "description": [
                 {
-                    "tags": {"desc_type" : "default"},
+                    "tags": {},
                     "content": "Infiltrators can be deployed."
                 }
             ]
         },
         "victory_conditions":{ "description": [
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {},
                 "content": "After rolling for setup type, and just before starting the Setup Warbands step, the players roll off and the winner picks any of the four table edges for their opponent to escape from. Then the opponent does the same, but they cannot pick the same table edge picked by the first player."
             },
-            { "tags": {"desc_type" : "gap"} },
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {},
                 "content": "Any model that moves into contact with the ‘extraction point,’ which is the point in the exact centre of the chosen table edge, is removed and counts as escaped. If enemy models are placed to block the extraction point, models can escape as near as possible to the extraction point, on either side of the blocking models."
             },
-            { "tags": {"desc_type" : "gap"} },
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {},
                 "content": "At the end of the game, each player totals up the ducat value of their own models that have escaped the battlefield and divides the number by 100, rounding any fractions up to find the number of Victory Points each player has scored. Troops bought with Glory Points are worth 30 ducats per Glory Point for this calculation. The highest scoring player wins."
             }
         ]},
@@ -212,7 +207,7 @@
             "even_match": true,
             "description": [
                 {
-                    "tags": {"desc_type" : "default"},
+                    "tags": {},
                     "content": "Use your full Campaign Warband in this battle."
                 }
             ]
@@ -220,14 +215,14 @@
         "battlefield": {
             "field_size":  [
                 {
-                    "tags": {"desc_type" : "default"},
+                    "tags": {},
                     "content": "The game is played on a standard-sized battlefield (we suggest 4’ x 4’)."
                 }
             ],
             "standard_terrain": true,
             "extra_features":  [ 
                 {
-                    "tags": {"desc_type" : "default"},
+                    "tags": {},
                     "content": "Move the area of dense terrain (of at least 6” x 6” and that is closest to the centre of the table) so that it is in the centre of the table, and then place an objective marker on it, exactly in the centre of the table. This marker represents a small object, like relic or an artefact, lost experimental weapon etc."
                 }
             ]
@@ -236,29 +231,26 @@
             "allowed": 1,
             "description": [
                 {
-                    "tags": {"desc_type" : "default"},
+                    "tags": {},
                     "content": "Infiltrators must be deployed as normal troops."
                 }
             ]
         },
         "victory_conditions":{ "description": [
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {},
                 "content": "During the game, any model that ends its move in contact with the marker picks it up. That model is now carrying the object and will carry it until it leaves the table or is destroyed. As long as it is carrying the object, the model cannot Attack and cannot Dash and no other method of movement (teleportation, Puppet Master etc.) can be used to move the model due the mystical effect of the relic! At the end of its activation, the model can pass the object to any friendly model within 1” range, as long as neither model is in melee combat with an enemy. The model receiving the object is considered to have ended their Activation this turn, if it has not have done so yet."
             },
-            { "tags": {"desc_type" : "gap"} },
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {},
                 "content": "If the model carrying the object is taken Out of Action the object is immediately thrown D6” in a direction indicated by the opposing player, though never out of the battlefield. Stop if the object moves into contact with Impenetrable Terrain just outside it. If it lands on top of a model, the model immediately picks it up, except if there is also an enemy model in melee combat with it, in which case it is thrown again."
             },
-            { "tags": {"desc_type" : "gap"} },
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {},
                 "content": "If the model carrying the object moves into contact with any table edge, it has escaped with the object and the player immediately wins the game."
             },
-            { "tags": {"desc_type" : "gap"} },
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {},
                 "content": "If the game ends while a model is carrying the object, the players roll off with D6 one last time. If the player controlling the model carrying the objective wins the roll-off, they win the game. In any other case, the game is a draw."
             }
         ]},
@@ -274,7 +266,7 @@
             "even_match": true,
             "description": [
                 {
-                    "tags": {"desc_type" : "default"},
+                    "tags": {},
                     "content": "Use your full Campaign Warband in this battle."
                 }
             ]
@@ -282,14 +274,14 @@
         "battlefield": {
             "field_size":  [
                 {
-                    "tags": {"desc_type" : "default"},
+                    "tags": {},
                     "content": "The game is played on a standard-sized battlefield (we suggest 4’ x 4’)."
                 }
             ],
             "standard_terrain": true,
             "extra_features":  [ 
                 {
-                    "tags": {"desc_type" : "default"},
+                    "tags": {},
                     "content": "Both players place four 8”+ long trench sections in their own deployment zone, at least 3” away from the nearest other trench. "
                 }
             ]
@@ -298,14 +290,14 @@
             "allowed": 0,
             "description": [
                 {
-                    "tags": {"desc_type" : "default"},
+                    "tags": {},
                     "content": "Infiltrators can be deployed."
                 }
             ]
         },
         "victory_conditions":{ "description": [
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {},
                 "content": "At the end of the battle, players score 1 Victory Point for each of their own trenches they hold where there are no enemy models in the same trench section. They gain 1 Victory Point for each enemy trench they have that has at least one of their own models and 2 VPs if there are no enemy models in the trench."
             }
         ]},

@@ -10,17 +10,15 @@
         "base_id": "fc_ironsultanate",
         "description": [     
             {
-                "tags": {"desc_type" : "italic"},
+                "tags": {},
                 "content": "The pact between the Iron Sultanate and the Assassin fortress of Alamut ensures that the Sultan is served by the exquisitely skilled killers of the Old Man of the Mountain in exchange for independence of the Assassin’s domain."
             },
-            { "tags": {"desc_type" : "gap"} },
             {
-                "tags": {"desc_type" : "italic"},
+                "tags": {},
                 "content": "But though most outsiders know the Assassins through their service to the forces of the Iron Wall, sometimes during the dark of night small, deadly bands move silently into the hellscape of No Man’s Land. In deepest secrecy Rashid al-Din Sinan, the undisputed ruler of Alamut dispatches his hand-picked disciples on Missions of his own, communicating their orders with no spoken words, signs nor written messages, but talking directly to them in their dreams. What the purpose of such operations is no-one knows, and not even the most sadistic Heretic torturer-priest has been able to make them divulge the secrets of Alamut from captured Assassins. These warbands are known as Fida’i (which means ‘Sacrifice’), dedicated to completing their mission and returning to Alamut to receive rewards said to be able to match those of Paradise itself. They are led by a Master Assassin: one of the deadly Hands of Alamut, with two fully-trained members of the Order. A number of trainee acolytes will serve them during the mission, eager to prove their mettle and be initiated into the Order of Assassins."
             },
-            { "tags": {"desc_type" : "gap"} },
             {
-                "tags": {"desc_type" : "italic"},
+                "tags": {},
                 "content": "Alamut is also a home to a renegade sect of Ismaili Dervishes, warrior monks sworn to poverty and a lethal way of fighting. They accompany the Assassins on their secret missions as an act of piety and payment for their shelter, and their whirling dance of death has been the end of many a disbeliever."
             }
         ],
@@ -40,27 +38,23 @@
         "base_id": "fc_ironsultanate",
         "description": [     
             {
-                "tags": {"desc_type" : "italic"},
+                "tags": {},
                 "content": "The House of Wisdom is the pre-eminent centre of learning within the Iron Sultanate. Its libraries, workshops, forges, gardens of exotic and wondrous plants, hospitals and observatories are unmatched. Within its halls are mechanical marvels and weapons from far-off lands, as well as trophies captured by the Sultan’s forces and brought to be examined by the learned scholars of the House of Wisdom. Philosophers and theologists debate in its chambers; ghanzal and qasīda poets compose verses describing the beauty and pain of life. Thus it is no wonder that the House attracts the greatest minds of the age to study in its hallowed halls, from within the Sultanate and far beyond the Iron Wall."
             },
-            { "tags": {"desc_type" : "gap"} },
             {
-                "tags": {"desc_type" : "italic"},
+                "tags": {},
                 "content": "In its laboratories guarded by the faithful Kavass, the Jabirean Alchemists dissect and study the War Beasts of Shaitan so their weaknesses can be laid bare and exploited by the Believers. At such times, their roars of rage and pain echo through the porphyry corridors of the House."
             },
-            { "tags": {"desc_type" : "gap"} },
             {
-                "tags": {"desc_type" : "italic"},
+                "tags": {},
                 "content": "To maintain a degree of independence, regardless of the royal funding, the House of Wisdom performs many services for the Sultan’s armies. Their best alchemists work with the Sultanate foundries where the Great Cannons of the Iron Wall are cast. Takwin creations are provided to bolster the army of Those Who Believe, as are suits of armour and alchemical ammunition. The House of Wisdom also maintains the Sultanate fleet of airships, which both guard the realms of Those Who Believe against enemy air forces and maintain vigil over lands under darkness. They make regular excursions deep into enemy territory to witness whether the Great Sandstorm still covers the Two Holy Places, reporting any news back to the Sultan."
             },
-            { "tags": {"desc_type" : "gap"} },
             {
-                "tags": {"desc_type" : "italic"},
+                "tags": {},
                 "content": "In exchange, the masters of the House of Wisdom have freedom to despatch their own excursions and expeditions into the lands beyond the wall, to seek tomes of knowledge lost in the dark and terrible days when the forces of Jahannam overran much of the Levant and great cities fell like blossoms of a Jasmine flower in fiery heat. Sometimes they are journeys to capture an especially ferocious beast of the enemy. At other times they seek to capture or kill Heretic Alchemists which they see as both an offence to their craft and a threat to the entire world."
             },
-            { "tags": {"desc_type" : "gap"} },
             {
-                "tags": {"desc_type" : "italic"},
+                "tags": {},
                 "content": "These journeys are exceedingly dangerous and they are not undertaken lightly. Each Alchemist dispatched on such a journey is an irreplaceable loss, and since they operate under their own authority, they cannot expect direct support from the Sultan’s forces. Many noble Fāris warriors have taken oaths to protect these scholars in their journeys, as well as their own Kavass bodyguards sworn to fight and die in defence of their Masters."
             }
         ],
@@ -80,22 +74,19 @@
         "base_id": "fc_ironsultanate",
         "description": [     
             {
-                "tags": {"desc_type" : "default"},
-                "content": "\"Whosoever fears defeat always remains defeated. Do you truly think the Iron Wall alone protects Those Who Believe? For its iron extends into the very hearts of our warriors wherever their duties take them.\""
+                "tags": {},
+                "content": "\"Whoever fears defeat always remains defeated. Do you truly think the Iron Wall alone protects Those Who Believe? For its iron extends into the very hearts of our warriors wherever their duties take them.\""
             },
-            { "tags": {"desc_type" : "gap"} },
             {
-                "tags": {"desc_type" : "italic"},
+                "tags": {},
                 "content": "Since assuming the throne in the year 1902, Sultan Malik (affectionately nicknamed the ‘Lion Padishah’’ by his troops) has demonstrated a more aggressive policy in waging the Great War. On an ocassion, even detachments from the the million-strong garrison of the Iron Wall are sent on missions beyond the Wall, for the Sultanate has never relinquished the claim to the muslim lands lost to the Heretics. Though the Great Wall still comes under continuous attacks as the forces of Shaitan ceaslessly test the defenses of the Believers, the Sultan refuses to sit idle and fight passively only in defense. Thus the regular troops defending the Iron Wall have sent into missions far more regularly than in the past, hardening the raw recruits into veterans."
             },
-            { "tags": {"desc_type" : "gap"} },
             {
-                "tags": {"desc_type" : "italic"},
+                "tags": {},
                 "content": "When the Defenders of the Iron Wall go into an expedition into No Man’s Land, they utilize their unique way of war to its fullest extent. All warriors have been drilled ceaslessly in marksmanship that takes advantage of elevated positions and using Siege Jezzails in two-man teams. These skills are honed into perfection, and it is almost impossible to dislodge these troops from a well-prepared high ground. Mighty Brazen Bulls form a lynchpin of the defense in close quarters, and can push back even the greatest of enemy champions."
             },
-            { "tags": {"desc_type" : "gap"} },
             {
-                "tags": {"desc_type" : "italic"},
+                "tags": {},
                 "content": "The core of any such warband is often formed around the Sultanate Sappers: experts at demolition, mine-setting and veterans of the bitter battles above and below the Wall. They are superb in the transportation and use of the Field Artillery, erecting defensive positions at a speed that borders on supernatural, and using explosive charges to frustrate their enemies who will be whittled into nothing before they reach the lines of Sultanate’s defenders finish them off with ruthless efficiency."
             }
         ],

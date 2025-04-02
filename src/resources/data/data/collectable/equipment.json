@@ -17,7 +17,6 @@
                 "content": "A model equipped with a shovel always starts the game in cover if deployed on ground level, even if placed in open terrain. As soon as the model moves, it is no longer in cover. A model that is covered in this way retains the benefit of Cover even if the attacking model has an unobstructed view of it.",
                 "glossary": [{"val": "cover", "id": "gl_cover"}]
             },      
-            { "tags": {"desc_type" : "gap"} },      
             {
                 "tags": {"desc_type" : "default"},
                 "content": "If a model equipped with a shovel has two hands free, it can use it in Melee Combat as if it were a Trench Club."
@@ -698,7 +697,6 @@
                     {"val": "ACTION", "id": "kw_action"}
                 ]
             }  ,
-            { "tags": {"desc_type" : "gap"} }  ,
             {
                 "tags": {"desc_type" : "default"},
                 "content": "All models within 3\" of the landing 1x1mm landing spot are hit as the bomb explodes – no roll to hit is needed. If the bomb lands directly on top of any model, roll with 3D6 on the Injury Chart and add the dice together to see what happens! Other models hit by the bombard suffer a Down result due the booming shockwave, but do not incur any BLOOD MARKERS or other effects from this attack.",
@@ -1085,7 +1083,6 @@
                 "content": "A model equipped with a shovel always starts the game in cover if deployed on ground level, even if placed in open terrain. As soon as the model moves, it is no longer in cover. A model that is covered in this way retains the benefit of Cover even if the attacking model has an unobstructed view of it.",
                 "glossary": [{"val": "cover", "id": "gl_cover"}]
             },      
-            { "tags": {"desc_type" : "gap"} },      
             {
                 "tags": {"desc_type" : "default"},
                 "content": "If a model equipped with a shovel has two hands free, it can use it in Melee Combat as if it were a Trench Club."
@@ -1377,7 +1374,6 @@
                 "tags": {"desc_type" : "italic"},
                 "content": "This terrifying double-stringed bow shoots its deadly barbs through both time and space. Its arrows can reach impossible distances and pass through armour by flickering through time. It leaves behind a temporal slipstream that the Assassin can travel through in an eyeblink."
             },         
-            { "tags": {"desc_type" : "gap"} },         
             {
                 "tags": {"desc_type" : "italic"},
                 "content": "Made from wood taken from trees planted in the skulls of ancient assassins in the Garden of Alamut so that they might absorb mystic powers of their former owners, these bows are some of the greatest treasures of the Old Man of the Mountain for it is said that only six now remain in his secret armouries."
@@ -1667,7 +1663,6 @@
                     {"val": "+2 DICE", "id": "kw_plusdice"}
                 ]
             },
-            { "tags": {"desc_type" : "gap"} },
             {
                 "tags": {"desc_type" : "default"},
                 "content": "If the Cannon is placed as a Stationary object on the battlefield, it is deployed separately as one of your standard units on a 50mm base in your own Deployment Zone or Table Edge. It is immobile and cannot be damaged. Any model in the Defenders of the Iron Wall warband can shoot it during their Activation as long as they are not in Melee combat, are within 1\" of the Cannon, and do not move in any way during their Activation. Alchemist Abilty Mastery of the Elements does apply to the Cannon. As with any other Ranged Weapon, each Grand Cannon can only be fired once per Turn. The Cannon cannot be lost as a casuality unless carried by a Brazen Bull."
@@ -1908,7 +1903,6 @@
                 "tags": {"desc_type" : "default"},
                 "content": "“This, then, is the parable of those who are bent on denying their Sustainer: all their works are as ashes which the wind blows about fiercely on a stormy day: they cannot achieve any benefit whatever from all that they may have wrought: for this is indeed the farthest one can go astray.\""
             },        
-            { "tags": {"desc_type" : "gap"} },        
             {
                 "tags": {"desc_type" : "italic"},
                 "content": "The alchemical compounds woven into this banner attract desert winds that make it impossible for flying machines or winged creatures to overcome the Iron Wall."

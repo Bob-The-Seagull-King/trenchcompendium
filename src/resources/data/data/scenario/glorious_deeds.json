@@ -7,7 +7,7 @@
         "name": "Sniper",
         "description":  [
             {
-            "tags": {"desc_type" : "default"},
+            "tags": {},
             "content": "Take out an enemy ELITE in Cover with a shooting attack at Long Range.",
             "glossary": [{"val": "ELITE", "id": "kw_elite"},{"val": "Cover", "id": "gl_cover"}]
             }
@@ -21,7 +21,7 @@
         "name": "Lord of War",
         "description":  [
             {
-            "tags": {"desc_type" : "default"},
+            "tags": {},
             "content": "Take two or more enemy models Out of Action in a single turn with melee attacks with one of your own models."
             }
         ]
@@ -34,7 +34,7 @@
         "name": "Cast Them Down",
         "description":  [
             {
-            "tags": {"desc_type" : "default"},
+            "tags": {},
             "content": "Make an enemy fall from a height of 3” or more thanks to your action (shooting, melee, Supernatural Power etc.)."
             }
         ]
@@ -47,7 +47,7 @@
         "name": "Bloodletting",
         "description":  [
             {
-            "tags": {"desc_type" : "default"},
+            "tags": {},
             "content": "Make one of your enemies suffer a sixth BLOOD MARKER with an attack from one of your models.",
             "glossary": [{"val": "BLOOD MARKER", "id": "kw_bloodmarker"}]
             }
@@ -61,7 +61,7 @@
         "name": "Hold Your Ground",
         "description":  [
             {
-            "tags": {"desc_type" : "default"},
+            "tags": {},
             "content": "Pass a Morale Test."
             }
         ]
@@ -74,7 +74,7 @@
         "name": "Suicidal Bravery",
         "description":  [
             {
-            "tags": {"desc_type" : "default"},
+            "tags": {},
             "content": "Charge two enemy models with one of yours during a single Activation."
             }
         ]
@@ -87,7 +87,7 @@
         "name": "Resist and Bite",
         "description":  [
             {
-            "tags": {"desc_type" : "default"},
+            "tags": {},
             "content": "Take out an enemy with a model that is Down."
             }
         ]
@@ -100,7 +100,7 @@
         "name": "Reaper",
         "description":  [
             {
-            "tags": {"desc_type" : "default"},
+            "tags": {},
             "content": "Take at least three enemies Out of Action with one of your models during the battle with any ACTION the model has.",
             "glossary": [{"val": "ACTION", "id": "kw_action"}]
             }
@@ -114,7 +114,7 @@
         "name": "Sharpshooter",
         "description":  [
             {
-            "tags": {"desc_type" : "default"},
+            "tags": {},
             "content": "Take out an enemy in Cover while shooting from Long Range. Auto-hit weapons, grenades and weapons with a blast radius do not count.",
             "glossary": [{"val": "Cover", "id": "gl_cover"}]
             }
@@ -128,7 +128,7 @@
         "name": "Feigned Retreat",
         "description":  [
             {
-            "tags": {"desc_type" : "default"},
+            "tags": {},
             "content": "Retreat from Melee Combat and then shoot and hit the enemy you escaped from during the same Activation."
             }
         ]
@@ -141,7 +141,7 @@
         "name": "Fickle Luck",
         "description":  [
             {
-            "tags": {"desc_type" : "default"},
+            "tags": {},
             "content": "Use 2+ BLOOD MARKERS on a single enemy to give one of their ACTIONS -2 DICE (or more).",
             "glossary": [
                 {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"},
@@ -159,7 +159,7 @@
         "name": "Head Hunter",
         "description":  [
             {
-            "tags": {"desc_type" : "default"},
+            "tags": {},
             "content": "Take two enemies Out of Action with Ranged attacks with a single model."
             }
         ]
@@ -172,7 +172,7 @@
         "name": "Risk It All",
         "description":  [
             {
-            "tags": {"desc_type" : "default"},
+            "tags": {},
             "content": "Succeed in two or more RISKY ACTIONS with one model during a single Activation.",
             "glossary": [
                 {"val": "RISKY ACTIONS", "id": "kw_riskyaction"}
@@ -188,7 +188,7 @@
         "name": "Live Dangerously",
         "description":  [
             {
-            "tags": {"desc_type" : "default"},
+            "tags": {},
             "content": "Retreat from Melee Combat twice with one model during the game."
             }
         ]
@@ -201,7 +201,7 @@
         "name": "Killer Instinct",
         "description":  [
             {
-            "tags": {"desc_type" : "default"},
+            "tags": {},
             "content": "Take two enemies Out of Action with one model in melee during the battle."
             }
         ]
@@ -214,7 +214,7 @@
         "name": "No Escape",
         "description":  [
             {
-            "tags": {"desc_type" : "default"},
+            "tags": {},
             "content": "Successfully charge an enemy you cannot see."
             }
         ]
@@ -227,7 +227,7 @@
         "name": "Cast Them Down",
         "description":  [
             {
-            "tags": {"desc_type" : "default"},
+            "tags": {},
             "content": "Make an enemy fall from a height of 3”+ due to your action (shooting, melee, Supernatural Power etc)."
             }
         ]
@@ -240,7 +240,7 @@
         "name": "Show of Mercy",
         "description":  [
             {
-            "tags": {"desc_type" : "default"},
+            "tags": {},
             "content": "Retreat from Melee Combat with an enemy that is Down."
             }
         ]
@@ -253,7 +253,7 @@
         "name": "Victorious",
         "description":  [
             {
-            "tags": {"desc_type" : "default"},
+            "tags": {},
             "content": "Win the game."
             }
         ]

@@ -46,12 +46,10 @@
                     {"val": "ACTIONS", "id": "kw_action"}
                     ]
             },
-            { "tags": {"desc_type" : "gap"} },
             {
                 "tags": {"desc_type" : "default"},
                 "content": "The Down condition can either be represented by placing an indicator next to the model (such as a scrap of paper) or by physically turning the model face-down on its side. A model turned on its side will present a different profile for Line-of-Sight targeting, but these two methods of indication are otherwise identical and the model’s controller may decide which to use."
             },
-            { "tags": {"desc_type" : "gap"} },
             {
                 "tags": {"desc_type" : "default"},
                 "content": "At the start of its own Activation, a Downed warrior can Stand, but any movement (Move, Dash, Charge, Jump, Climb etc.) it can take is halved. If a model is Downed during its own Activation, it may attempt a RISKY ACTION in order to Stand. Otherwise, it remains Down for the remainder of its Activation.",

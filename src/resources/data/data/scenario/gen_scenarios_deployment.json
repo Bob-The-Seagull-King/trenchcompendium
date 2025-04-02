@@ -94,7 +94,6 @@
                     "tags": {"desc_type" : "default"},
                     "content": "The players roll-off and the winner places a 1” Tunnel Marker anywhere that is more than 6” from the table’s middle line (see diagram), though not on Impassable Terrain. Their opponent does the same on the opposite side of the table’s middle line."
                 },
-                { "tags": {"desc_type" : "gap"} },
                 {
                     "tags": {"desc_type" : "default"},
                     "content": "Not all models are set up on the table at the start of the game. Players must leave half of their models in reserve (rounding down). On the first turn of the game, the remaining models enter the battle through tunnels – when one of these models is Activated, it is placed anywhere within 6” of its Tunnel Marker, though not in melee combat. Models that enter the battlefield this way cannot Dash in the first turn of the game."
@@ -115,12 +114,10 @@
                     "tags": {"desc_type" : "default"},
                     "content": "The players roll-off and the winner chooses which table side belongs to them. Their opponent gets the opposite table edge (see diagram) and both deploy normally. Not all models are set up on the table at the start of the game. Players must leave half of their models in reserve (rounding down)."
                 },
-                { "tags": {"desc_type" : "gap"} },
                 {
                     "tags": {"desc_type" : "default"},
                     "content": "On the first turn of the game, the remaining models enter the battle at random locations – when one of these models is Activated, the player rolls a D6 and consults the Fog of War Chart below. The chart details from which table edge the model enters. Models entering the battle cannot be placed directly into melee combat."
                 },
-                { "tags": {"desc_type" : "gap"} },
                 {
                     "tags": {"desc_type" : "list"},
                     "content": "",

@@ -449,7 +449,6 @@
                     {"val": "FIRETEAM", "id": "kw_fireteam"}
                 ]
             },
-            { "tags": {"desc_type" : "gap"} },
             {
                 "tags": {"desc_type" : "bold"},
                 "content": "FIRETEAM: ",
@@ -463,7 +462,6 @@
                     }
                 ]
             },
-            { "tags": {"desc_type" : "gap"} },
             {
                 "tags": {"desc_type" : "bold"},
                 "content": "Concentrated Attack: ",

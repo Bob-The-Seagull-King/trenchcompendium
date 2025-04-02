@@ -10,7 +10,7 @@
             "even_match": true,
             "description": [
                 {
-                    "tags": {"desc_type" : "default"},
+                    "tags": {},
                     "content": "Use your full Campaign Warband in this battle."
                 }
             ]
@@ -18,14 +18,14 @@
         "battlefield": {
             "field_size":  [
                 {
-                    "tags": {"desc_type" : "default"},
+                    "tags": {},
                     "content": "The game is played on a standard-sized battlefield (we suggest 4’ x 4’)."
                 }
             ],
             "standard_terrain": true,
             "extra_features":  [
                 {
-                    "tags": {"desc_type" : "default"},
+                    "tags": {},
                     "content": "The Table must contain five buildings such as ruined houses, bunkers, chapels etc. At least part of each building must be in the location indicated on the map with a Red Marker. These buildings are the Objectives of the scenario and score Victory Points (VPs)."
                 }
             ]
@@ -34,7 +34,7 @@
             "allowed": 0,
             "description": [                
                 {
-                    "tags": {"desc_type" : "default"},
+                    "tags": {},
                     "content": "Infiltrators cannot be used in this Scenario."
                 }
             ]
@@ -43,17 +43,15 @@
             "staggered": false,
             "description": [
                 {
-                    "tags": {"desc_type" : "default"},
+                    "tags": {},
                     "content": "The players roll-off. The loser of the roll-off chooses which deployment zone will be theirs. The other deployment zone will be their opponent’s."
                 },
-                { "tags": {"desc_type" : "gap"} },
                 {
-                    "tags": {"desc_type" : "default"},
+                    "tags": {},
                     "content": "The players then take it in turns to deploy one model at a time, starting with the player who has more models in their warband (roll-off if both have the same number of models)."
                 },
-                { "tags": {"desc_type" : "gap"} },
                 {
-                    "tags": {"desc_type" : "default"},
+                    "tags": {},
                     "content": "Models must be set up wholly within their own deployment zone. If a player runs out of models to set up, the other player sets up all their models afterwards. Once the players have set up their models, deployment ends and the battle begins."
                 }
             ]
@@ -63,31 +61,30 @@
             "max": 4,
             "description": [                            
                 {
-                    "tags": {"desc_type" : "default"},
+                    "tags": {},
                     "content": "The battle lasts for four turns."
                 }
             ]
         },
         "victory_conditions":{ "description": [
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {},
                 "content": "Keep a running tally of Victory Points for both sides. The players accumulate VPs as follows:"
             },
-            { "tags": {"desc_type" : "gap"} },
             {
                 "tags": {"desc_type" : "list"},
                 "content": "",
                 "subcontent": [                    
                     {
-                        "tags": {"desc_type" : "default"},
+                        "tags": {},
                         "content": "At the end of each turn, a player scores one VP for each Objective building that they have a model within 1” of or two VPs for each Objective building that they control."
                     },
                     {
-                        "tags": {"desc_type" : "default"},
+                        "tags": {},
                         "content": "A player controls an Objective if the total number of models from their warband that are wholly within that building is higher than the total number of enemy models within 1” of the Objective building. A model is considered wholly within a building if it is entirely within the edges of the building’s footprint, as agreed by the players."
                     },
                     {
-                        "tags": {"desc_type" : "default"},
+                        "tags": {},
                         "content": "Calculate VPs for both players and the end of the round and add them together. The player with the higher number of VPs wins, otherwise the game is a draw."
                     }
                 ]
@@ -96,7 +93,7 @@
         "glorious_deeds": { 
             "description": [
                 {
-                    "tags": {"desc_type" : "default"},
+                    "tags": {},
                     "content": "Players score one Glory Point for every model that completes any of the following Glorious Deeds. Victory Points for these can only be gained once – whichever player completes them first gets the Glory!"
                 }
             ],
