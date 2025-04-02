@@ -25,8 +25,15 @@ const RulesAnchorLinks: React.FC<ContentsCollection> = (props: any) => {
     const [open, setOpen]   = useState(DefaultState);
 
     function ReturnItemLink(_obj : ContentsLink) {
+
+        const id = encodeURIComponent(_obj.name);
+        const link = window.location.origin + window.location.pathname + "#" + id;
+
         return (
-            <a className="rules-page-anchor" href={"#"+_obj.route}>
+
+            // set variable named 'link' here
+
+            <a className="rules-page-anchor" href={link}>
                 {_obj.name}
                 <FontAwesomeIcon icon={faChevronRight} className="icon-inline-right" />
             </a>

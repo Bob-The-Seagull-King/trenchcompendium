@@ -51,14 +51,13 @@ interface RulesHeadlineProps {
     content: string;
     level?: 1 | 2 | 3 | 4 | 5 | 6;
     className?: string;
-    idName?: string;
 }
 
-const RulesHeadlineDisplay: React.FC<RulesHeadlineProps> = ({ content, level = 1, className = "", idName = '' }) => {
+const RulesHeadlineDisplay: React.FC<RulesHeadlineProps> = ({ content, level = 1, className = "" }) => {
     const Tag: `h${1 | 2 | 3 | 4 | 5 | 6}` = `h${level}`;
 
     // Set anchor id fallback
-    idName = idName || encodeURIComponent(content);
+    const idName = encodeURIComponent(content);
 
     return (
 

@@ -126,7 +126,6 @@ const FactionDisplay = (props: any) => {
                             content="Faction Rules"
                             level={2}
                             className=""
-                            idName="faction-rules"
                         />
 
                         {factionObject.Rules.map((item) => (
@@ -166,7 +165,6 @@ const FactionDisplay = (props: any) => {
                             content="Captains"
                             level={2}
                             className=""
-                            idName="captains"
                         />
 
                         {factionObject.Models.filter((item) => (item.Captain == true && item.Mercenary == false)).map((item) => (
@@ -182,7 +180,6 @@ const FactionDisplay = (props: any) => {
                             content="Elite"
                             level={2}
                             className=""
-                            idName="elite"
                         />
 
                         {factionObject.Models.filter((item) => (item.Captain == false && item.Mercenary == false && (ModelIsElite(item.Model) == true))).map((item) => (
@@ -197,7 +194,6 @@ const FactionDisplay = (props: any) => {
                             content="Infantry"
                             level={2}
                             className=""
-                            idName="infantry"
                         />
                         {factionObject.Models.filter((item) => (item.Captain == false && item.Mercenary == false && (ModelIsElite(item.Model) == false))).map((item) => (
                             <RulesFactionModelDisplay key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID} data={item} />
@@ -211,7 +207,6 @@ const FactionDisplay = (props: any) => {
                             content="Mercenaries"
                             level={2}
                             className=""
-                            idName="mercenaries"
                         />
 
                         {factionObject.Models.filter((item) => (item.Mercenary == true)).map((item) => (
@@ -229,7 +224,6 @@ const FactionDisplay = (props: any) => {
                             content="Armoury"
                             level={2}
                             className=""
-                            idName="mercenaries"
                         />
 
                         {/* @TODO @Bob - Can we make this filtering easier to use / understand? Like factionObject.EquipmentItems.getItems('melee') or something */}
