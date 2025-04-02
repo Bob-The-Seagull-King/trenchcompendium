@@ -304,27 +304,6 @@ const RulesModelDisplay = (props: any) => {
                 }
 
                 <div className="fighter-card-meta fighter-card-meta-below">
-                    <div className="fighter-meta-entry-simple fighter-keywords">
-                        <span className="fighter-meta-label">
-                            Keywords:
-                        </span>
-                        <span className="fighter-meta-value">
-                            {modelcollectionObject.KeyWord.map((item) => (
-                                <span className=''
-                                      key={"model_keyword_" + modelcollectionObject.ID + "_keyword_id_" + item.ID}>
-                                    <GenericHover
-                                        d_colour={modelcollectionObject.Team}
-                                        titlename={item.Name}
-                                        d_name={item.Name}
-                                        d_type={""}
-                                        d_method={() => <KeywordDisplay data={item}/>}
-                                    />
-                                    {" "}
-                                </span>
-                            )) /* Keywords */}
-                        </span>
-                    </div>
-
                     <div className="fighter-meta-entry-simple fighter-base">
                         <span className="fighter-meta-label">
                             Base:
@@ -334,8 +313,28 @@ const RulesModelDisplay = (props: any) => {
                             {modelcollectionObject.Stats.base + "mm"}
                         </span>
                     </div>
-                </div>
 
+                    <div className="fighter-meta-entry-simple fighter-keywords">
+                        <span className="fighter-meta-label">
+                            Keywords:
+                        </span>
+                        <span className="fighter-meta-value">
+                            {modelcollectionObject.KeyWord.map((item, index) => (
+                                <span className=''
+                                      key={"model_keyword_" + modelcollectionObject.ID + "_keyword_id_" + item.ID}>
+                                    <GenericHover
+                                        d_colour={modelcollectionObject.Team}
+                                        titlename={item.Name}
+                                        d_name={item.Name}
+                                        d_type={""}
+                                        d_method={() => <KeywordDisplay data={item}/>}
+                                    />
+                                    {index < modelcollectionObject.KeyWord.length - 1 && ", "}
+                                </span>
+                            )) /* Keywords */}
+                        </span>
+                    </div>
+                </div>
             </div>
         </ErrorBoundary>
     )

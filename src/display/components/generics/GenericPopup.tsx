@@ -34,32 +34,33 @@ const GenericPopup = (props: any) => {
     const handleShow = () => setShow(true);
 
     return (
-      <>
-         
-            <span className='popup-trigger-text' onClick={() => handleShow()}>{ruleName}</span>
-         
+        <>
 
-          <Modal data-theme={theme} show={show} size="lg" contentClassName="overcomeBackground" dialogClassName=""  onHide={handleClose} keyboard={true}  centered>
-              <Modal.Body > 
-                
-                <div className={'backgroundBgCard basestructure   borderthin bordergrey'}>
-                    <div className={'borderthin bordergrey centered-div size-subtitle font-seriftext background'+getColour(DisplayColour)}>
-                        <div className="">
-                            <Button className="no-padding" variant="" onClick={() => handleClose()}>
-                                <FontAwesomeIcon icon={faCircleXmark} className="size-subtitle" />
-                            </Button>
-                        </div>
-                        <div className="maxwidth size-subtitle">
-                            {DisplayName || ""}
-                        </div>
+        <span className='popup-trigger-text' onClick={() => handleShow()}>{ruleName}</span>
+
+
+        <Modal data-theme={theme} show={show} size="lg" contentClassName="overcomeBackground" dialogClassName=""  onHide={handleClose} keyboard={true}  centered>
+            <Modal.Body >
+
+            <div className={'backgroundBgCard basestructure   borderthin bordergrey'}>
+                <div className={'borderthin bordergrey centered-div size-subtitle font-seriftext background'+getColour(DisplayColour)}>
+                    <div className="">
+                        <Button className="no-padding" variant="" onClick={() => handleClose()}>
+                            <FontAwesomeIcon icon={faCircleXmark} className="size-subtitle" />
+                        </Button>
                     </div>
-                    <div className={""}>
-                        {displayMethod()}
+                    <div className="maxwidth size-subtitle">
+                        {DisplayName || ""}
                     </div>
                 </div>
-              </Modal.Body>
-          </Modal>
-      </>
+
+                <div className={""}>
+                    {displayMethod()}
+                </div>
+            </div>
+            </Modal.Body>
+        </Modal>
+        </>
     )
 }
 
