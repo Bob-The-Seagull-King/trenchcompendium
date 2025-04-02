@@ -18,6 +18,10 @@ interface ISelectedOption {
     selection_ID : number | null;
 }
 
+///// TODO
+
+///// HANDLE EXTRA PROPERTY WHEN SELECTED WARBANDPROPERTY OPTION IS ITSELF SOMETHING WITH OPTIONS
+
 class WarbandProperty extends DynamicContextObject  {
     public SelfDynamicProperty : DynamicOptionContextObject;
 
