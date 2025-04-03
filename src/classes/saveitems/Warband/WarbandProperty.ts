@@ -82,6 +82,43 @@ class WarbandProperty extends DynamicContextObject  {
         }
     }
 
+    public RegenerateSubProperties( ) {
+        const RegenProperties : WarbandProperty[] = []
+        for (let i = 0; i < this.SelfDynamicProperty.Selections.length; i++) {
+            const CurSelection = this.SelfDynamicProperty.Selections[i]
+            let IsFound = false;
+            if (CurSelection.NestedOption != null) {
+                for (let j = 0; j < this.SubProperties.length; j++) {
+                    if (this.SubProperties[j].SelfDynamicProperty == CurSelection.NestedOption) {
+                        IsFound = true;
+                        RegenProperties.push(this.SubProperties[j]);
+                        break;
+                    }
+                }
+                if (IsFound == false) {
+                    const selectionarray : ISelectedOption[] = [];                    
+                    const NewSkill = new WarbandProperty(
+                        CurSelection.NestedOption.OptionChoice, 
+                        this, 
+                        CurSelection.NestedOption, 
+                        {
+                        object_id: CurSelection.Option.RefID,
+                        selections: selectionarray
+                        });
+                    RegenProperties.push(NewSkill);
+                }
+            }
+        }
+        this.SubProperties = RegenProperties;
+    }
+
+    public SelectSelfOption(selection_index : number, selection_id : number) {
+        if (this.SelfDynamicProperty.Selections[selection_index] != undefined) {
+            this.SelfDynamicProperty.Selections[selection_index].SelectOption(selection_id);
+            this.RegenerateSubProperties();
+        }
+    }
+
     public ConvertToInterface() {
         const selectionarray : ISelectedOption[] = [];
         for (let i = 0; i < this.SelfDynamicProperty.Selections.length; i++) {
