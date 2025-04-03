@@ -18,8 +18,36 @@ import { faClone, faDownload, faEye, faSquareCaretUp, faSquareCaretDown, faTrash
 import { Button } from 'react-bootstrap';
 import { WarbandManager } from '../../../../../classes/saveitems/Warband/WarbandManager';
 import { UserWarband } from '../../../../../classes/saveitems/Warband/UserWarband';
+import { EventRunner } from '../../../../../classes/contextevent/contexteventhandler';
+import { ExplorationLocation } from '../../../../../classes/feature/exploration/ExplorationLocation';
+import { ExplorationFactory } from '../../../../../factories/features/ExplorationFactory';
+import { WarbandProperty } from '../../../../../classes/saveitems/Warband/WarbandProperty';
 
 const WarbandTestBlock = (prop: any) => {
+
+
+    const [warbandproperty, setvwarbandproperty] = useState<WarbandProperty | null>(null)
+    const [_keyvar, setkeyvar] = useState(0);
+
+    
+        useEffect(() => {
+            async function SetModelOptions() {
+                const EventProc: EventRunner = new EventRunner();
+                
+                const LocationVal : ExplorationLocation = await ExplorationFactory.CreateNewExplorationLocation("el_testselect", null);
+                
+                if (LocationVal) {
+                    const NewProperty : WarbandProperty = new WarbandProperty(LocationVal, null, null, null)
+                    setvwarbandproperty(NewProperty);
+                    console.log(warbandproperty);
+                    setkeyvar((prev) => prev + 1);
+                }
+
+            }
+        
+            SetModelOptions();
+        }, []);
+
 
     return (
         

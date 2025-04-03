@@ -32,7 +32,7 @@ class WarbandExplorationSet extends DynamicContextObject {
         for (let i = 0; i < data.length; i++) {
             const CurVal = data[i];
             const Value = SkillFactory.CreateNewSkill(CurVal.object_id, this);
-            const NewSkill = new WarbandProperty(CurVal, Value, this);
+            const NewSkill = new WarbandProperty(Value, this, null, CurVal);
             this.Skills.push(NewSkill);
         }
     }
@@ -41,7 +41,7 @@ class WarbandExplorationSet extends DynamicContextObject {
         for (let i = 0; i < data.length; i++) {
             const CurVal = data[i];
             const Value = ExplorationFactory.CreateNewExplorationLocation(CurVal.object_id, this);
-            const NewLocation = new WarbandProperty(CurVal, Value, this);
+            const NewLocation = new WarbandProperty(Value, this, null, CurVal);
             this.Locations.push(NewLocation);
         }
     }
