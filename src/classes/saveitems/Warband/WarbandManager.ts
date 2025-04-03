@@ -136,7 +136,8 @@ class WarbandManager {
     /**
      * Builds a new item and saves it to the browser
      */
-    public NewItem(_title : string) {
+    public NewItem(_title : string, fact_id : string) {
+        // TODO CREATE FACTION ID SELECT
         const msg = ""
 
         if (_title.trim().length <= 0) {
@@ -162,6 +163,18 @@ class WarbandManager {
             exploration: {
                 explorationskills: [],
                 locations: [],
+                contextdata: {},
+                id: this.CalcID(_title.trim() + "_exploration"),
+                name: _title+"_exploration",
+                source: 'user_warband',
+                tags: {}
+            },
+            faction: {
+                faction_property: {
+                    object_id: fact_id,
+                    selections: []
+                },
+                faction_rules : [],
                 contextdata: {},
                 id: this.CalcID(_title.trim() + "_exploration"),
                 name: _title+"_exploration",

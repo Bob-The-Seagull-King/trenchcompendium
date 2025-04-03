@@ -64,8 +64,8 @@ WarbandEquipment
     - WarbandProperties[]
     - AssignmentModel
 
-WarbandFaction
+WarbandFaction ////////
 # The faction and related items that have been chosen
-    - Faction_Type
-    - Patron Selected
-    - WarbandProperties[]
+    - Faction_Type //
+    - Patron Selected //
+    - WarbandProperties[] //
