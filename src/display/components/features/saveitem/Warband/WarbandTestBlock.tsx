@@ -39,7 +39,6 @@ const WarbandTestBlock = (prop: any) => {
                 if (LocationVal) {
                     const NewProperty : WarbandProperty = new WarbandProperty(LocationVal, null, null, null)
                     setvwarbandproperty(NewProperty);
-                    console.log(warbandproperty);
                     setkeyvar((prev) => prev + 1);
                 }
 
@@ -55,7 +54,7 @@ const WarbandTestBlock = (prop: any) => {
             <div className='fillspace' >
                 <div className="row">
                     <div className="col-4">
-                        A1
+                        <Button title='Console Log property' onClick={() => (console.log(warbandproperty))} />
                     </div>
                     <div className="col-4">
                         B1
