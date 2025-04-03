@@ -1,5 +1,4 @@
-import 'bootstrap/dist/css/bootstrap.css'
-import '../../../../resources/styles/_mainstylesource.scss'
+import '../../../../resources/styles/vendor/bootstrap.css'
 import React, {useState} from 'react'
 import { ErrorBoundary } from "react-error-boundary";
 import { useNavigate } from 'react-router-dom';

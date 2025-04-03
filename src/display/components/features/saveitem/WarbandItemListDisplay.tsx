@@ -1,5 +1,4 @@
-import 'bootstrap/dist/css/bootstrap.css'
-import '../../../../resources/styles/_mainstylesource.scss'
+import '../../../../resources/styles/vendor/bootstrap.css'
 import React, { useRef, useState } from 'react'
 
 import { ToastContainer, toast } from 'react-toastify';

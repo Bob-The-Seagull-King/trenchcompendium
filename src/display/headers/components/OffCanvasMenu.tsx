@@ -1,21 +1,14 @@
-import 'bootstrap/dist/css/bootstrap.css'
-import '../../../resources/styles/_mainstylesource.scss'
+import '../../../resources/styles/vendor/bootstrap.css'
 import React from 'react'
 import { ErrorBoundary } from "react-error-boundary";
 import Offcanvas from 'react-bootstrap/Offcanvas';
 
-import Dropdown from 'react-bootstrap/Dropdown';
 
 // Font Awesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faChevronDown, faChevronUp, faSun, faClose} from '@fortawesome/free-solid-svg-icons'
-import { useGlobalState } from '../../../utility/globalstate'
+import { faClose} from '@fortawesome/free-solid-svg-icons'
 import { useNavigate } from 'react-router-dom';
-import GenericCollapsableBlockDisplay from '../../components/generics/GenericCollapsableBlockDisplay';
-import PalleteSwap from './PalleteSwap';
-import LanguageSwap from './LanguageSwap';
 import { ControllerController } from '../../../classes/_high_level_controllers/ControllerController';
-import CompendiumMenuItem from './CompendiumMenuItem';
 import MenuBody from '../../components/subcomponents/MenuBody';
 
 interface IControllerProp {

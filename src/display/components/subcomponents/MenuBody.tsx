@@ -1,8 +1,6 @@
-import 'bootstrap/dist/css/bootstrap.css'
-import '../../../resources/styles/_mainstylesource.scss'
+import '../../../resources/styles/vendor/bootstrap.css'
 import React from 'react'
 import { ErrorBoundary } from "react-error-boundary";
-import Offcanvas from 'react-bootstrap/Offcanvas';
 
 import Dropdown from 'react-bootstrap/Dropdown';
 

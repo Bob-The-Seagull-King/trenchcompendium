@@ -1,4 +1,3 @@
-import 'bootstrap/dist/css/bootstrap.css'
 import { Button, Collapse } from "react-bootstrap";
 import React, { useState } from 'react'
 

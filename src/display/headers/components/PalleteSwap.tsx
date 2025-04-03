@@ -1,6 +1,5 @@
-import 'bootstrap/dist/css/bootstrap.css'
-import '../../../resources/styles/_mainstylesource.scss'
-import React from 'react'
+import '../../../resources/styles/vendor/bootstrap.css'
+import React, {useEffect} from 'react'
 import { ErrorBoundary } from "react-error-boundary";
 
 import Dropdown from 'react-bootstrap/Dropdown';
@@ -17,7 +16,7 @@ const PalleteSwap = (prop: any) => {
 
     // State
     const [theme, setTheme] = useGlobalState('theme');
-    
+
     /**
      * Updates the locally stored web theme
      * @param theme The selected theme

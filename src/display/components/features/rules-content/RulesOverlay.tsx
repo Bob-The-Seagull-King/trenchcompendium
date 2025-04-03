@@ -1,4 +1,3 @@
-import 'bootstrap/dist/css/bootstrap.css'
 import React, { useState } from 'react'
 
 // Imports

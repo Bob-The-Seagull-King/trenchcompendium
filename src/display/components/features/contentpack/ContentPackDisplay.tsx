@@ -4,8 +4,7 @@ import Button from 'react-bootstrap/Button';
 import { ErrorBoundary } from "react-error-boundary";
 
 // Resources
-import 'bootstrap/dist/css/bootstrap.css'
-import '../../../../resources/styles/_mainstylesource.scss'
+import '../../../../resources/styles/vendor/bootstrap.css'
 
 // Classes
 import { ContentPack } from '../../../../classes/contentpacks/contentpack'
