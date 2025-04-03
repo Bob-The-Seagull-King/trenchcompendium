@@ -18,8 +18,8 @@ const LanguageSwap = (prop: any) => {
     const [language, setLanguage] = useGlobalState('language');
     
     /**
-     * Updates the locally stored web theme
-     * @param theme The selected theme
+     * Updates the locally stored web language
+     * @param language
      */
     function SetLanguage(language: string) {
         localStorage.setItem('language', language);
@@ -27,9 +27,9 @@ const LanguageSwap = (prop: any) => {
     }
 
     
-    function returnLanguages(themeval: string | null, curtheme : string, title : string) {
+    function returnLanguages(langval: string | null, curlang : string, title : string) {
         return (
-            <div onClick={() => SetLanguage(themeval? themeval : curtheme)} className={"hovermouse size-strongtext   totalmarginsml align-left-right color"+(themeval == curtheme ? 'default' : 'BasicText')}>
+            <div onClick={() => SetLanguage(langval? langval : curlang)} className={"hovermouse size-strongtext   totalmarginsml align-left-right color"+(langval == curlang ? 'default' : 'BasicText')}>
                 <div className="horizontalspacermed">{makestringpresentable(title)}</div>
             </div>
         )

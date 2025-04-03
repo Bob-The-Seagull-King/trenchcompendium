@@ -24,11 +24,6 @@ const GenericPopup = (props: any) => {
 
     // States
     const [show, setShow] = useState(false);
-    const [theme, setTheme] = useGlobalState('theme');
-
-    if ((theme == "" ) || (theme == null)) { // Default theme to light
-        setTheme('dark');
-    }
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -39,7 +34,7 @@ const GenericPopup = (props: any) => {
         <span className='popup-trigger-text' onClick={() => handleShow()}>{ruleName}</span>
 
 
-        <Modal data-theme={theme} show={show} size="lg" contentClassName="overcomeBackground" dialogClassName=""  onHide={handleClose} keyboard={true}  centered>
+        <Modal show={show} size="lg" contentClassName="overcomeBackground" dialogClassName=""  onHide={handleClose} keyboard={true}  centered>
             <Modal.Body >
 
             <div className={'backgroundBgCard basestructure   borderthin bordergrey'}>

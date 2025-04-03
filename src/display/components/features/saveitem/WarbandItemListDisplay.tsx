@@ -46,7 +46,6 @@ const WarbandItemListDisplay = (prop: any) => {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "light",
         });
     }
 
@@ -102,7 +101,6 @@ const WarbandItemListDisplay = (prop: any) => {
             pauseOnFocusLoss
             draggable
             pauseOnHover
-            theme="light" 
             />
             <input id="pack-upload" style={{display:"none"}} type="file" accept=".json" onChange={(e)=>readFileOnUpload(e.target.files? e.target.files[0] : undefined)} />
 

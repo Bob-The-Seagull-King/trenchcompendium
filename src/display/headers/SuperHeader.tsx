@@ -16,7 +16,6 @@ import MenuHeader from './MenuHeader'
 
 import { ControllerController } from '../../classes/_high_level_controllers/ControllerController';
 import OffcanvasMenu from './components/OffCanvasMenu';
-import OncanvasMenu from '../components/subcomponents/informationpanel/OnCanvasMenu';
 import SettingsMenu from './components/SettingsMenu';
 import RulesMenuBody from "../components/features/rules-content/RulesMenuBody";
 
@@ -25,13 +24,6 @@ interface IControllerProp {
 }
 
 const SuperHeader: React.FC<IControllerProp> = (prop) => {
-
-    // State
-    const [theme, setTheme] = useGlobalState('theme');
-
-    if ((theme == "" ) || (theme == null)) { // Default theme to light
-        setTheme('dark');
-    }
 
     const [stateheight, setHeight] = useState(0);
     const ref = useRef<HTMLDivElement>(null);
@@ -74,7 +66,7 @@ const SuperHeader: React.FC<IControllerProp> = (prop) => {
     // Return result -----------------------------
     return (    
         <ErrorBoundary fallback={<div>Something went wrong with SuperHeader.tsx</div>}>
-            <div data-theme={theme}>
+            <div >
                 <div className="header-main-spacer"></div>
 
                 <div id="topbarbody" ref={ref} className="overlaystructure topbarStructure header-main">

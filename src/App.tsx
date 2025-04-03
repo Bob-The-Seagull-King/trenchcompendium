@@ -20,6 +20,7 @@ import HomeRoute from './display/superroutes/HomeRoute'
 import CompendiumRoute from './display/superroutes/CompendiumRoute'
 import SuperHeader from './display/headers/SuperHeader'
 import WarbandRoute from './display/superroutes/WarbandRoute'
+import {useGlobalState} from "./utility/globalstate";
 
 const App: React.FC = () => {
 
@@ -29,22 +30,27 @@ const App: React.FC = () => {
     const compendiumcontroller = new ControllerController();
     const toolcontroller = new ToolsController();
 
+    const [theme, setTheme] = useGlobalState('theme');
+
+    useEffect(() => {
+        document.body.setAttribute("data-theme", theme);
+    }, [theme]); // Runs whenever theme changes
 
     return (
-        <div className="">
-        <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}>
-                <Router >
-                    <SuperHeader controller={compendiumcontroller}/>
-                    <Routes>
-                    <Route path={ROUTES.HOME_ROUTE} element={<HomeRoute />} />
-                    <Route path={ROUTES.COMPENDIUM_ROUTE} element={<CompendiumRoute controller={compendiumcontroller} />} />
-                    <Route path={ROUTES.WARBAND_ROUTE} element={<WarbandRoute controller={toolcontroller} />} />
-                    </Routes>
-                </Router>
-            </PersistGate>
-        </Provider>
-        </div>
+        <>
+            <Provider store={store}>
+                <PersistGate loading={null} persistor={persistor}>
+                    <Router >
+                        <SuperHeader controller={compendiumcontroller}/>
+                        <Routes>
+                        <Route path={ROUTES.HOME_ROUTE} element={<HomeRoute />} />
+                        <Route path={ROUTES.COMPENDIUM_ROUTE} element={<CompendiumRoute controller={compendiumcontroller} />} />
+                        <Route path={ROUTES.WARBAND_ROUTE} element={<WarbandRoute controller={toolcontroller} />} />
+                        </Routes>
+                    </Router>
+                </PersistGate>
+            </Provider>
+        </>
     )
 }
 

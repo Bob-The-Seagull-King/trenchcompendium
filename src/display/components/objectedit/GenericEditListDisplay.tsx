@@ -19,7 +19,6 @@ const GenericEditListDisplay = (props: any) => {
     const UpdateFunction = props.updater;
 
     const refValue = EditStaticType.returnBaseValue(Item, SubItem);
-    const [theme] = useGlobalState('theme');
 
     function updateModel() {
         UpdateFunction(Item)

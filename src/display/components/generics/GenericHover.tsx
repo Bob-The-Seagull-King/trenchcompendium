@@ -19,18 +19,11 @@ const GenericHover = (props: any) => {
 
     const ruleName = props.titlename
 
-    // State
-    const [theme, setTheme] = useGlobalState('theme');
-
-    if ((theme == "" ) || (theme == null)) { // Default theme to light
-        setTheme('dark');
-    }
-
     return (
       <OverlayTrigger placement={'auto'} 
         overlay={
         <Popover.Body bsPrefix="empty" className="popover rules-popover-element" id="tooltip">
-          <div data-theme={theme} className='width-content  '>
+          <div className='width-content  '>
             <div className={DisplayType}>
                 <div className="popover-headline">
                     {ruleName || ""}

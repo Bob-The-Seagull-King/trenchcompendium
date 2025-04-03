@@ -17,21 +17,13 @@ import { faBook, faCross } from '@fortawesome/free-solid-svg-icons';
 
 const HomeRoute: React.FC = () => {
 
-    // States
-    const [theme, setTheme] = useGlobalState('theme');
-
-    // Default to the light theme
-    if ((theme == "" ) || (theme == null)) {
-        setTheme('dark');
-    }
-
     /* TEST */
 
     // Return result -----------------------------
     return (
         
         <ErrorBoundary fallback={<div>Something went wrong with HomeRoute.tsx</div>}>
-            <div className="backgroundBaseColour  " data-theme={theme}>
+            <div className="">
                 <div className="row justify-content-center m-0 p-0">
                     <div className="col-lg-8 col-md-12">
                         <div className="row justify-content-center">

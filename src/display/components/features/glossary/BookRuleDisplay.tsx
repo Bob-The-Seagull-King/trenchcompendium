@@ -34,21 +34,20 @@ const BookRuleDisplay = (props: any) => {
         navigator.clipboard.writeText(window.location.href)
 
         toast.error("Link Copied!", {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        type: "success"
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            type: "success"
         });
     }
 
     return (
         <ErrorBoundary fallback={<div>Something went wrong with BookRuleDisplay.tsx</div>}>
-            <div>
+            <div className={'book-rule-wrap'}>
                 <ToastContainer
                             position="top-center"
                             autoClose={5000}
@@ -59,7 +58,6 @@ const BookRuleDisplay = (props: any) => {
                             pauseOnFocusLoss
                             draggable
                             pauseOnHover
-                            theme="light" 
                             />
 
                 {/* Rules Introduction / Description */}

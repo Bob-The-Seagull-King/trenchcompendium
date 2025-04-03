@@ -19,7 +19,6 @@ function runToast( anchor = "" )
         pauseOnHover: true,
         draggable: false,
         progress: undefined,
-        theme: "light", // @TODO use theme selection
         type: "success"
     });
 }

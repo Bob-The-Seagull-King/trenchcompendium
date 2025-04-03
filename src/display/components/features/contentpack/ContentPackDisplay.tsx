@@ -27,7 +27,6 @@ const ContentPackDisplay = (props: any) => {
     const updateHost = props.statefunction;
 
     // States
-    const [theme] = useGlobalState('theme');
     const [stateWidth, setWidth] = useState(window.innerWidth);
     const [show, setShow] = useState(false);
     
@@ -177,7 +176,7 @@ const ContentPackDisplay = (props: any) => {
                 }
             </div>
 
-            <Modal data-theme={theme}  size="lg" show={show}  contentClassName="overcomeBackground" dialogClassName="" onHide={handleClose} keyboard={true}  centered>    
+            <Modal size="lg" show={show}  contentClassName="overcomeBackground" dialogClassName="" onHide={handleClose} keyboard={true}  centered>
                 
                 <Modal.Body >
                 <div className={'basestructure abilityStructure subborderstyler borderdefault  '}>

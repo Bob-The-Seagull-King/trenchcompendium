@@ -1,33 +1,29 @@
 @import './_variables'
 
-// wrap inside body class to enable global overwrite of BS styles etc.
-.trench-companion
+// global
+@import './_theme'
+@import './_global'
 
+// components
+@import './offcanvas'
+@import './header-main'
+@import './fighter-card.sass'
 
-    // global
-    @import './_theme'
-    @import './_global'
+// components for rules pages
+@import './RulesAnchorLinks.sass'
+@import './rules-page-links.sass'
+@import './rules-text-item.sass'
+@import './rules-popover.sass'
+@import './rules-armoury.sass'
+@import './RulesModelDisplay.sass'
+@import './RulesHeadlineDisplay.sass'
+@import './RulesLoreSection.sass'
+@import './RulesFactionRule.sass'
+@import './RulesOverlay.sass'
+@import './RulesEquipmentMain.sass'
+@import './RulesMenuBody.sass'
 
-    // components
-    @import './offcanvas'
-    @import './header-main'
-    @import './fighter-card.sass'
-
-    // components for rules pages
-    @import './RulesAnchorLinks.sass'
-    @import './rules-page-links.sass'
-    @import './rules-text-item.sass'
-    @import './rules-popover.sass'
-    @import './rules-armoury.sass'
-    @import './RulesModelDisplay.sass'
-    @import './RulesHeadlineDisplay.sass'
-    @import './RulesLoreSection.sass'
-    @import './RulesFactionRule.sass'
-    @import './RulesOverlay.sass'
-    @import './RulesEquipmentMain.sass'
-    @import './RulesMenuBody.sass'
-
-    // page specific
-    @import './page-title'
+// page specific
+@import './page-title'
 
 

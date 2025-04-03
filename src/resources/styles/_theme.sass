@@ -3,13 +3,16 @@
 // Theme Styles (v2.3+)
 //
 
-// @TODO: Theme attribute needs to be on the <body> and nowhere else
 
-html,
-[data-theme='light']
+// // // // //
+// Light Theme
+body[data-theme='light']
     --colour_default_main: $red-tc
 
-    --colour_red_main: #EE220C
+    --colour_red_main: #{$red-tc}
+    --colour_red_main-dark: #{$tc-red-dark}
+
+
     --colour_green_main: #61D836
     --colour_yellow_main: #FEAE00
     --colour_blue_main: #00A2FF
@@ -34,10 +37,15 @@ html,
 
     --colour_highlight_text: $white
 
-[data-theme='dark']
-    --colour_default_main: $red-tc
 
-    --colour_red_main: #EE220C
+// // // // //
+// Dark Theme
+body[data-theme='dark']
+    --colour_default_main: #{$red-tc}
+
+    --colour_red_main: #{$red-tc}
+    --colour_red_main-dark: #{$tc-red-dark}
+
     --colour_green_main: #61D836
     --colour_yellow_main: #FEAE00
     --colour_blue_main: #00A2FF
@@ -63,24 +71,35 @@ html,
 
     --colour_highlight_text: #000000
 
+// // // // //
+// set sass variables to use variable colors
+// - This makes wirting styles much easier
+$color-text: var(--colour_basic_text)
+$color-text-inv: var(--colour_basic_text_inverted)
+
+$color-bg: var(--colour_bg)
+$color-bg-inv: var(--colour_bg_inverted)
+
+$link-color: var(--colour_red_main)
+$link-color-hover: var(--colour_red_main-dark)
+
 
 // // // // //
-//
 // global styles based on theme settings
-//
-
-[data-theme]
-    background-color: var(--colour_bg)
+body[data-theme]
+    background-color: $color-bg
     color: var(--colour_basic_text)
     font-family: $font-paragraph
 
+    margin: 0
+    font-size: 1rem
+    font-weight: 400
+    line-height: 1.5
+    -webkit-text-size-adjust: 100%
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
 
 
 // // // // //
-//
-// Override default Bootstrap variables with project specifics
-//
-*
-    --bs-body-color: var(--colour_basic_text)
-    --bs-offcanvas-color: var(--bs-body-color)
-
+// Bootstrap color theming
+.offcanvas
+    background-color: $color-bg

@@ -16,9 +16,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faGear, faHouse, faSquare } from '@fortawesome/free-solid-svg-icons'
 
 // Component
-import PalleteSwap from './components/PalleteSwap';
-import LanguageSwap from './components/LanguageSwap';
-import OffcanvasMenu from './components/OffCanvasMenu';
 import { ControllerController } from '../../classes/_high_level_controllers/ControllerController';
 
 interface IControllerProp {

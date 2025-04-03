@@ -23,7 +23,6 @@ const GenericEditListDisplay = (props: any) => {
     const refValue = EditStaticType.returnBaseValue(Item, SubItem);
     let textValue = refValue;
 
-    const [theme] = useGlobalState('theme');
 
     const [showTextEdit, setShowTextEdit] = useState(false);
     const handleCloseTextEdit = () => setShowTextEdit(false); 
@@ -46,7 +45,7 @@ const GenericEditListDisplay = (props: any) => {
             { EditStaticType.returnButton(Manager, Item, handleShowTextEdit, SubItem, textValue) }
             </span>
             
-            <Modal data-theme={theme} onEnterKeyDown={() => handleCloseTextEdit()} show={showTextEdit}  contentClassName="basestructure abilityStructure borderstyler colordefault" dialogClassName="" onHide={handleCloseTextEdit} keyboard={true}  centered>
+            <Modal onEnterKeyDown={() => handleCloseTextEdit()} show={showTextEdit}  contentClassName="basestructure abilityStructure borderstyler colordefault" dialogClassName="" onHide={handleCloseTextEdit} keyboard={true}  centered>
                 
                 <h1 className={'titleShape   titlebody backgrounddefault'}>
                     {EditStaticType.title}

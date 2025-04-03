@@ -63,7 +63,6 @@ const FactionDisplay = (props: any) => {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "light",
         type: "success"
         });
     }
@@ -108,7 +107,6 @@ const FactionDisplay = (props: any) => {
                         pauseOnFocusLoss
                         draggable
                         pauseOnHover
-                        theme="light"
                         />
 
 

@@ -31,12 +31,6 @@ const OffcanvasMenu: React.FC<IControllerProp> = (prop) => {
     const show = prop.showState
 
     // State
-    const [theme, setTheme] = useGlobalState('theme');
-
-    if ((theme == "" ) || (theme == null)) { // Default theme to light
-        setTheme('dark');
-    }
-
     // Navigation
     const navigate = useNavigate(); 
     
@@ -51,7 +45,7 @@ const OffcanvasMenu: React.FC<IControllerProp> = (prop) => {
     
     return (
         <ErrorBoundary fallback={<div>Something went wrong with OffcanvasMenu.tsx</div>}>
-            <Offcanvas className="offcanvas-main-menu" data-theme={theme} show={show} onHide={handleClose} responsive={prop.responseshow}>
+            <Offcanvas className="offcanvas-main-menu" show={show} onHide={handleClose} responsive={prop.responseshow}>
                 <Offcanvas.Header className="">
                     <Offcanvas.Title className="">
                         Trench Compendium v2.2

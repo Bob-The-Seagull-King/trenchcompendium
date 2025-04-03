@@ -28,13 +28,6 @@ interface IControllerProp {
 
 const OncanvasMenu: React.FC<IControllerProp> = (prop) => {
 
-    // State
-    const [theme, setTheme] = useGlobalState('theme');
-
-    if ((theme == "" ) || (theme == null)) { // Default theme to light
-        setTheme('dark');
-    }
-        
     // Navigation
     const navigate = useNavigate(); 
     
@@ -48,7 +41,7 @@ const OncanvasMenu: React.FC<IControllerProp> = (prop) => {
     
     return (
         <ErrorBoundary fallback={<div>Something went wrong with PalleteSwap.tsx</div>}>  
-            <div className="borderthin bordergrey" data-theme={theme} >
+            <div className="borderthin bordergrey">
                 <MenuBody controller={prop.controller} closeFunc={prop.closeFunc} responseshow={prop.responseshow} showState={prop.showState}/>
             </div>
         </ErrorBoundary>

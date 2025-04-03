@@ -27,14 +27,6 @@ interface IControllerProp {
 }
 
 const MenuBody: React.FC<IControllerProp> = (prop) => {
-
-    // State // @TODO: remove theme choice here if it is implemented in body
-    const [theme, setTheme] = useGlobalState('theme');
-
-    if ((theme == "" ) || (theme == null)) { // Default theme to light
-        setTheme('dark');
-    }
-        
     // Navigation
     const navigate = useNavigate(); 
     

@@ -1,18 +1,13 @@
-import 'bootstrap/dist/css/bootstrap.css'
-import '../../resources/styles/_mainstylesource.scss'
+import '../../resources/styles/vendor/bootstrap.css'
 import React, { useState } from 'react'
 import { ErrorBoundary } from "react-error-boundary";
-import Offcanvas from 'react-bootstrap/Offcanvas';
 
 // Font Aesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faGear, faGripLines } from '@fortawesome/free-solid-svg-icons'
 
 // Components
-import PalleteSwap from './components/PalleteSwap';
-import LanguageSwap from './components/LanguageSwap';
 import { Button } from 'react-bootstrap';
-import OffcanvasMenu from './components/OffCanvasMenu';
 import { ControllerController } from '../../classes/_high_level_controllers/ControllerController';
 import {getRouteName} from "../../utility/functions";
 import {useLocation} from "react-router-dom";
