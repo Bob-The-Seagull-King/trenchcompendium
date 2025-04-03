@@ -34,11 +34,7 @@ class SelectedOption {
                 this.SelectedChoice = this.Option.Selections[i]
                 const SelectedVal = this.SelectedChoice.value;
                 if ((SelectedVal instanceof StaticOptionContextObject)) {
-                    if (SelectedVal.MyOptions.length > 0) {
-                        this.HandleObjectDynamics(this.SelectedChoice);
-                    } else {
-                        this.NestedOption = null;
-                    }
+                    this.HandleObjectDynamics(this.SelectedChoice);
                 } else {
                     this.NestedOption = null;
                 }
