@@ -5,6 +5,7 @@ import { IWarbandContextItem, WarbandContextItem } from './High_Level/WarbandCon
 import { IWarbandExplorationSet, WarbandExplorationSet } from './CoreElements/WarbandExplorationSet';
 import { DynamicContextObject } from '../../contextevent/dynamiccontextobject';
 import { IContextObject } from '../../contextevent/contextobject';
+import { IWarbandFaction, WarbandFaction } from './CoreElements/WarbandFaction';
 
 interface IUserWarband extends IContextObject {
     id : string,
@@ -12,6 +13,7 @@ interface IUserWarband extends IContextObject {
     glory_bank : number,
     context : IWarbandContextItem,
     exploration : IWarbandExplorationSet,
+    faction : IWarbandFaction,
     notes : INote[]
 }
 
@@ -19,6 +21,7 @@ class UserWarband extends DynamicContextObject {
     public ID;
     public Context : WarbandContextItem;
     public Exploration : WarbandExplorationSet;
+    public Faction : WarbandFaction;
     public Ducats;
     public Glory;
     public Notes : INote[];
@@ -33,7 +36,8 @@ class UserWarband extends DynamicContextObject {
         super(data, null)
         this.ID = data.id;
         this.Context = new WarbandContextItem(data.context);
-        this.Exploration = new WarbandExplorationSet(data.exploration, this)
+        this.Exploration = new WarbandExplorationSet(data.exploration, this);
+        this.Faction = new WarbandFaction(data.faction, this);
         this.Ducats = data.ducat_bank;
         this.Glory = data.glory_bank;
         this.Notes = data.notes;
@@ -44,6 +48,7 @@ class UserWarband extends DynamicContextObject {
             id : this.ID,
             context : this.Context.ConvertToInterface(),
             exploration : this.Exploration.ConvertToInterface(),
+            faction : this.Faction.ConvertToInterface(),
             contextdata : this.ContextData,   
             name: this.Name != undefined? this.Name : "",
             source: this.Source != undefined? this.Source : "",

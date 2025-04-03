@@ -26,47 +26,26 @@ import { WarbandProperty } from '../../../../../classes/saveitems/Warband/Warban
 const WarbandTestBlock = (prop: any) => {
 
 
-    const [warbandproperty, setvwarbandproperty] = useState<WarbandProperty | null>(null)
-    const [location, setlocation] = useState<ExplorationLocation | null>(null)
+    const [warbandproperty, setvwarbandproperty] = useState<UserWarband | null>(null)
     const [_keyvar, setkeyvar] = useState(0);
 
     
         useEffect(() => {
             async function SetModelOptions() {                
-                const LocationVal : ExplorationLocation = await ExplorationFactory.CreateNewExplorationLocation("el_testselect", null);
-                
-                if (LocationVal) {
-                    setlocation(LocationVal)
-                    const NewProperty : WarbandProperty = new WarbandProperty(LocationVal, null, null, null)
-                    setvwarbandproperty(NewProperty);
-                    setkeyvar((prev) => prev + 1);
-                }
-
+                const Manager : WarbandManager = new WarbandManager();
+                Manager.NewItem("test-warband", "fc_ironsultanate_fv_fidaiofalamut")
+                const warbresult : UserWarband | null = Manager.GetItemByName("test-warband")
+                setvwarbandproperty(warbresult);
             }
         
             SetModelOptions();
         }, []);
 
-        function SelectOptionA() {
-            warbandproperty?.SelectSelfOption(0,0);
-        }
-
-        function SelectOptionB() {
-            warbandproperty?.SelectSelfOption(0,1);
-        }
-
-        function SelectOptionBSubA() {
-            warbandproperty?.SubProperties[0].SelectSelfOption(0,0);
-        }
-
-        function SelectOptionBSubB() {
-            warbandproperty?.SubProperties[0].SelectSelfOption(0,1);
-        }
 
         function RegenBuild() {         
             const Converted = warbandproperty?.ConvertToInterface();      
-            if (location && Converted) {
-                const NewProperty : WarbandProperty = new WarbandProperty(location, null, null, Converted)
+            if (Converted) {
+                const NewProperty : UserWarband = new UserWarband(Converted)
                 console.log(NewProperty)
             }
 
@@ -79,17 +58,17 @@ const WarbandTestBlock = (prop: any) => {
                 <div className="row">
                     <div className="col-4">
                         <Button title='Console Log property' onClick={() => (console.log(warbandproperty))}>
-                            Log Out WarbandProperty
+                            Log Out Warband
                             </Button>
                     </div>
                     <div className="col-4">
-                        <Button title='Console Log property' onClick={() => (SelectOptionA())}>
-                            Select Option A
+                        <Button title='Console Log property' onClick={() => (console.log(""))}>
+                            NONE
                         </Button>
                     </div>
                     <div className="col-4">
-                        <Button title='Console Log property' onClick={() => (SelectOptionB())}>
-                            Select Option B
+                        <Button title='Console Log property' onClick={() => (console.log(""))}>
+                            NONE
                         </Button>
                     </div>
                 </div>
@@ -101,19 +80,18 @@ const WarbandTestBlock = (prop: any) => {
                         </Button>
                     </div>
                     <div className="col-4">
-                        <Button title='Console Log property' onClick={() => (SelectOptionBSubA())}>
-                            Select Option B Suboption A
+                        <Button title='Console Log property' onClick={() => (console.log(""))}>
+                            NONE
                         </Button>
                     </div>
                     <div className="col-4">
-                        <Button title='Console Log property' onClick={() => (SelectOptionBSubB())}>
-                            Select Option B Suboption B
+                        <Button title='Console Log property' onClick={() => (console.log(""))}>
+                            NONE
                         </Button>
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-4">
-                        
+                    <div className="col-4">                        
                         <Button title='Console Log property' onClick={() => RegenBuild()}>
                             Log Out Regened
                         </Button>
