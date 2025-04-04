@@ -16,6 +16,8 @@ import { ModelFactory } from "../../../../factories/features/ModelFactory";
 import { WarbandEquipment } from "./WarbandEquipment";
 import { UpgradeFactory } from "../../../../factories/features/UpgradeFactory";
 import { InjuryFactory } from "../../../../factories/features/InjuryFactory";
+import { Upgrade } from "../../../feature/ability/Upgrade";
+import { Equipment } from "../../../feature/equipment/Equipment";
 
 interface IWarbandMember extends IContextObject {
     model: string,
@@ -33,7 +35,7 @@ interface IWarbandMember extends IContextObject {
 class WarbandMember extends DynamicContextObject {
     Notes : INote[];
     IsActive : boolean;
-    CurModel : Model;
+    CurModel : Model | null = null;
     SubProperties : WarbandProperty[] = [];
     Equipment : WarbandPurchase[] = [];
     Upgrades : WarbandPurchase[] = [];
@@ -55,7 +57,7 @@ class WarbandMember extends DynamicContextObject {
         this.IsActive = data.active;
         this.Experience = data.experience;
         this.Elite = data.elite;
-        this.CurModel = this.BuildModel(data.model)
+        this.BuildModel(data.model)
         this.BuildEquipment(data.equipment);
         this.BuildUpgrade(data.list_upgrades);
         this.BuildSkills(data.list_skills);
@@ -105,7 +107,7 @@ class WarbandMember extends DynamicContextObject {
 
     public BuildModel(data : string) {
         const Value = ModelFactory.CreateNewModel(data, this);
-        return (Value);
+        this.CurModel = (Value);
     }
 
     public ConvertToInterface() {
@@ -132,13 +134,18 @@ class WarbandMember extends DynamicContextObject {
             upgradelist.push(this.Upgrades[i].ConvertToInterfaceUpgrade())
         }
 
+        let modelstring = ""
+        if (this.CurModel != null) {
+            modelstring = this.CurModel.ID;
+        }
+
         const _objint : IWarbandMember = {
             contextdata : this.ContextData,            
             id: this.ID,
             name: this.Name != undefined? this.Name : "",
             source: this.Source != undefined? this.Source : "",
             tags: this.Tags,
-            model: this.CurModel.ID,
+            model: modelstring,
             subproperties : subpropset,
             notes : this.Notes,
             active : this.IsActive,
@@ -158,7 +165,49 @@ class WarbandMember extends DynamicContextObject {
      * on class implementation.
      */
     public async GrabSubPackages(event_id : string, source_obj : ContextObject, arrs_extra : any[]) : Promise<ContextPackage[]> { 
-        const subpackages : ContextPackage[] = []        
+        const subpackages : ContextPackage[] = []     
+        
+        if (this.CurModel) {
+            const static_packages : ContextPackage[] = await this.CurModel.GrabContextPackages(event_id, source_obj, arrs_extra);
+            for (let j = 0; j < static_packages.length; j++) {
+                subpackages.push(static_packages[j])
+            }
+        }
+
+        for (let i = 0; i < this.Skills.length; i++) {
+            const static_packages : ContextPackage[] = await this.Skills[i].GrabContextPackages(event_id, source_obj, arrs_extra);
+            for (let j = 0; j < static_packages.length; j++) {
+                subpackages.push(static_packages[j])
+            }
+        }  
+
+        for (let i = 0; i < this.Upgrades.length; i++) {
+            const static_packages : ContextPackage[] = await (this.Upgrades[i].HeldObject as Upgrade).GrabContextPackages(event_id, source_obj, arrs_extra);
+            for (let j = 0; j < static_packages.length; j++) {
+                subpackages.push(static_packages[j])
+            }
+        } 
+
+        for (let i = 0; i < this.Injuries.length; i++) {
+            const static_packages : ContextPackage[] = await this.Injuries[i].GrabContextPackages(event_id, source_obj, arrs_extra);
+            for (let j = 0; j < static_packages.length; j++) {
+                subpackages.push(static_packages[j])
+            }
+        }  
+
+        for (let i = 0; i < this.Equipment.length; i++) {
+            const static_packages : ContextPackage[] = await (this.Equipment[i].HeldObject as Equipment).GrabContextPackages(event_id, source_obj, arrs_extra);
+            for (let j = 0; j < static_packages.length; j++) {
+                subpackages.push(static_packages[j])
+            }
+        }
+
+        for (let i = 0; i < this.SubProperties.length; i++) {
+            const static_packages : ContextPackage[] = await this.SubProperties[i].GrabContextPackages(event_id, source_obj, arrs_extra);
+            for (let j = 0; j < static_packages.length; j++) {
+                subpackages.push(static_packages[j])
+            }
+        } 
 
         return subpackages; 
     }

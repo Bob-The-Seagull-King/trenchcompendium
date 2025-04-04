@@ -44,25 +44,23 @@ WarbandProperty ////////
     - Option //
     - Selection //
 
-WarbandMember
+WarbandMember ////////
 # Actual Models
-    - Model_ID
-    - Experience
-    - Promotion_State
-    - IsReserve
-    - Equipment[]
-    - Injuries[]
-    - Skills[]
-    - Upgrades[]
-    - CustomNotes[]
-    - WarbandProperties[]
+    - Model_ID //
+    - Experience //
+    - Promotion_State //
+    - IsReserve //
+    - Equipment[] //
+    - Injuries[] //
+    - Skills[] //
+    - Upgrades[] //
+    - CustomNotes[] //
+    - WarbandProperties[] //
 
 WarbandEquipment
 # Items/Equipment
     - Equipment_ID
-    - CustomNotes[]
     - WarbandProperties[]
-    - AssignmentModel
 
 WarbandFaction ////////
 # The faction and related items that have been chosen
