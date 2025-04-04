@@ -28,7 +28,7 @@
             "movetype": 0,
             "potential": 0
         },
-        "keywords" : ["kw_sultanate","kw_strong", "kw_elite"],
+        "keywords" : ["kw_sultanate","kw_strong"],
         "abilities" : ["ab_countercharge"]
     },
     {
