@@ -6,6 +6,9 @@ import { IWarbandExplorationSet, WarbandExplorationSet } from './CoreElements/Wa
 import { DynamicContextObject } from '../../contextevent/dynamiccontextobject';
 import { IContextObject } from '../../contextevent/contextobject';
 import { IWarbandFaction, WarbandFaction } from './CoreElements/WarbandFaction';
+import { IWarbandPurchaseEquipment, IWarbandPurchaseModel, WarbandPurchase } from './Purchases/WarbandPurchase';
+import { WarbandMember } from './Purchases/WarbandMember';
+import { WarbandEquipment } from './Purchases/WarbandEquipment';
 
 interface IUserWarband extends IContextObject {
     id : string,
@@ -14,6 +17,8 @@ interface IUserWarband extends IContextObject {
     context : IWarbandContextItem,
     exploration : IWarbandExplorationSet,
     faction : IWarbandFaction,
+    models : IWarbandPurchaseModel[],
+    equipment : IWarbandPurchaseEquipment[],
     notes : INote[]
 }
 
@@ -25,6 +30,8 @@ class UserWarband extends DynamicContextObject {
     public Ducats;
     public Glory;
     public Notes : INote[];
+    public Models : WarbandPurchase[] = [];
+    public Equipment : WarbandPurchase[] = [];
 
     /**
      * Assigns parameters and creates a series of description
@@ -41,9 +48,38 @@ class UserWarband extends DynamicContextObject {
         this.Ducats = data.ducat_bank;
         this.Glory = data.glory_bank;
         this.Notes = data.notes;
+        this.BuildModels(data.models);
+        this.BuildEquipment(data.equipment);
+    }
+
+    public BuildModels(data : IWarbandPurchaseModel[]) {
+        for (let i = 0; i < data.length; i++) {
+            const Model : WarbandMember = new WarbandMember(data[i].model, this);
+            const NewPurchase : WarbandPurchase = new WarbandPurchase(data[i].purchase, this, Model);
+            this.Models.push(NewPurchase);
+        }
+    }
+
+    public BuildEquipment(data : IWarbandPurchaseEquipment[]) {
+        for (let i = 0; i < data.length; i++) {
+            const Model : WarbandEquipment = new WarbandEquipment(data[i].equipment, this);
+            const NewPurchase : WarbandPurchase = new WarbandPurchase(data[i].purchase, this, Model);
+            this.Equipment.push(NewPurchase);
+        }
+
     }
 
     public ConvertToInterface() {
+        const modelslist : IWarbandPurchaseModel[] = []
+        for (let i = 0; i < this.Models.length; i++) {
+            modelslist.push(this.Models[i].ConvertToInterfaceModel())
+        }
+
+        const equipmentlist : IWarbandPurchaseEquipment[] = []
+        for (let i = 0; i < this.Equipment.length; i++) {
+            equipmentlist.push(this.Equipment[i].ConvertToInterfaceEquipment())
+        }
+
         const _objint : IUserWarband = {
             id : this.ID,
             context : this.Context.ConvertToInterface(),
@@ -55,6 +91,8 @@ class UserWarband extends DynamicContextObject {
             tags: this.Tags,
             ducat_bank: this.Ducats,
             glory_bank: this.Glory,
+            models : modelslist,
+            equipment : equipmentlist,
             notes: this.Notes
         }
         
