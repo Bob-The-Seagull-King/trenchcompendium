@@ -51,8 +51,8 @@ const WarbandItemListDisplay = (prop: any) => {
         });
     }
 
-    function NewItem() {
-        const Result = Manager.NewItem(NewItemTitle, "fc_ironsultanate");
+    async function NewItem() {
+        const Result = await Manager.NewItem(NewItemTitle, "fc_ironsultanate");
         if (Result != "") {
             runToast(Result);
         } else {

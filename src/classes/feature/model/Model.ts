@@ -70,17 +70,13 @@ class Model extends StaticContextObject {
         if (data.variant_name) {
             this.Variant = data.variant_name
         } else { this.Variant = "base" }
-        this.BuildKeywords(data.keywords);
-        this.BuildAbilities(data.abilities);
-        this.BuildModelUpgrades(data.id);
-        this.BuildModelEquipment(data.id);
 
         this.RunEquipmentRestriction();
         this.RunEquipmentLimit();
         this.RunStatOptions();
     }
     
-    public BuildFactionModels(id : string) {
+    public async BuildFactionModels(id : string) {
         const ModelList = Requester.MakeRequest(
             {
                 searchtype: "complex", 
@@ -105,7 +101,7 @@ class Model extends StaticContextObject {
         ModelList.sort(byPropertiesOf<IFactionModelRelationship>(["name", "id"]))
 
         for (let i = 0; i < ModelList.length; i++) {
-            this.Models.push(ModelFactory.CreateFactionModel(ModelList[i], null))
+            this.Models.push(await ModelFactory.CreateFactionModel(ModelList[i], null))
         }
     }
 
@@ -163,14 +159,14 @@ class Model extends StaticContextObject {
         }
     }
 
-    public BuildAbilities(abilities : string[]) {
+    public async BuildAbilities(abilities : string[]) {
         for (let i = 0; i < abilities.length; i++) {
-            const AbilityObj = AbilityFactory.CreateNewAbility(abilities[i], this);
+            const AbilityObj = await AbilityFactory.CreateNewAbility(abilities[i], this);
             this.Abilities.push(AbilityObj);
         }
     }
     
-    public BuildModelUpgrades(id : string) {
+    public async BuildModelUpgrades(id : string) {
         const UpgradeList = Requester.MakeRequest(
             {
                 searchtype: "complex", 
@@ -195,11 +191,11 @@ class Model extends StaticContextObject {
         UpgradeList.sort(byPropertiesOf<IModelUpgradeRelationship>(["upgrade_id"]))
 
         for (let i = 0; i < UpgradeList.length; i++) {
-            this.UpgradeList.push(UpgradeFactory.CreateModelUpgrade(UpgradeList[i]))
+            this.UpgradeList.push(await UpgradeFactory.CreateModelUpgrade(UpgradeList[i]))
         }
     }
     
-    public BuildModelEquipment(id : string) {
+    public async BuildModelEquipment(id : string) {
         const EquipmentList = Requester.MakeRequest(
             {
                 searchtype: "complex", 
@@ -224,7 +220,7 @@ class Model extends StaticContextObject {
         EquipmentList.sort(byPropertiesOf<IModelEquipmentRelationship>(["name", "id"]))
 
         for (let i = 0; i < EquipmentList.length; i++) {
-            this.EquipmentList.push(EquipmentFactory.CreateModelEquipment(EquipmentList[i], this))
+            this.EquipmentList.push(await EquipmentFactory.CreateModelEquipment(EquipmentList[i], this))
         }
     }
 

@@ -33,8 +33,8 @@ const FilterableCompendiumDisplay = (prop: any) => {
      * the state of the ability/item list arrays. Update the
      * keyval in order to force a rerender of elements.
      */
-    function UpdateSearch() {
-        ViewPageController.updateSearch();
+    async function UpdateSearch() {
+        await ViewPageController.updateSearch();
         setCurItems(CollectionController.ReturnItems())
         setKeyVal(_keyval+1)
     }

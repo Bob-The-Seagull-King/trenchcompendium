@@ -20,11 +20,10 @@ class ExplorationTable extends StaticContextObject {
     public constructor(data: IContextObject, parent : ContextObject | null)
     {
         super(data, parent)
-        this.BuildFactionEquipment(data.id);
     }
 
     
-    public BuildFactionEquipment(id : string) {
+    public async BuildFactionEquipment(id : string) {
         const LocationList = Requester.MakeRequest(
             {
                 searchtype: "complex", 
@@ -52,7 +51,7 @@ class ExplorationTable extends StaticContextObject {
         LocationList.sort(byPropertiesOf<IExplorationLocation>(["location_value"]))
 
         for (let i = 0; i < LocationList.length; i++) {
-            this.ExplorationLocations.push(ExplorationFactory.CreateExplorationLocation(LocationList[i], this))
+            this.ExplorationLocations.push(await ExplorationFactory.CreateExplorationLocation(LocationList[i], this))
         }
     }
 

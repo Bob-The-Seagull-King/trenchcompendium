@@ -21,11 +21,10 @@ class SkillGroup extends StaticContextObject {
     public constructor(data: IContextObject, parent : ContextObject | null)
     {
         super(data, parent)
-        this.BuildFactionEquipment(data.id);
     }
 
     
-    public BuildFactionEquipment(id : string) {
+    public async BuildFactionEquipment(id : string) {
         const LocationList = Requester.MakeRequest(
             {
                 searchtype: "complex", 
@@ -49,7 +48,7 @@ class SkillGroup extends StaticContextObject {
 
 
         for (let i = 0; i < LocationList.length; i++) {
-            this.Skills.push(SkillFactory.CreateSkill(LocationList[i], this))
+            this.Skills.push( await SkillFactory.CreateSkill(LocationList[i], this))
         }
 
         this.Skills.sort(byPropertiesOf<Skill>(["TableVal"]))

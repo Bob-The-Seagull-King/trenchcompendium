@@ -167,14 +167,13 @@ class Scenario extends StaticContextObject {
         this.BattlelengthDesc = DescriptionFactory(data.battle_length.description, this);
         
         this.DeedsDesc = DescriptionFactory(data.glorious_deeds.description, this);
-        this.BuildRules(data.special_rules);
         this.BuildDeeds(data.glorious_deeds.deeds);
         this.BuildOptionalDeeds(data.glorious_deeds.optional_deeds);
     }
 
-    public BuildRules(rules : string[]) {
+    public async BuildRules(rules : string[]) {
         for (let i = 0; i < rules.length; i++) {
-            const RuleObj = RuleFactory.CreateNewRule(rules[i], this);
+            const RuleObj = await RuleFactory.CreateNewRule(rules[i], this);
             this.SpecialRules.push(RuleObj);
         }
     }

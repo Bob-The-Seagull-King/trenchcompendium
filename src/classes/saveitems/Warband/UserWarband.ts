@@ -9,6 +9,7 @@ import { IWarbandFaction, WarbandFaction } from './CoreElements/WarbandFaction';
 import { IWarbandPurchaseEquipment, IWarbandPurchaseModel, WarbandPurchase } from './Purchases/WarbandPurchase';
 import { WarbandMember } from './Purchases/WarbandMember';
 import { WarbandEquipment } from './Purchases/WarbandEquipment';
+import { WarbandFactory } from '../../../factories/warband/WarbandFactory';
 
 interface IUserWarband extends IContextObject {
     id : string,
@@ -25,8 +26,8 @@ interface IUserWarband extends IContextObject {
 class UserWarband extends DynamicContextObject {
     public ID;
     public Context : WarbandContextItem;
-    public Exploration : WarbandExplorationSet;
-    public Faction : WarbandFaction;
+    public Exploration! : WarbandExplorationSet;
+    public Faction! : WarbandFaction;
     public Ducats;
     public Glory;
     public Notes : INote[];
@@ -43,13 +44,14 @@ class UserWarband extends DynamicContextObject {
         super(data, null)
         this.ID = data.id;
         this.Context = new WarbandContextItem(data.context);
-        this.Exploration = new WarbandExplorationSet(data.exploration, this);
-        this.Faction = new WarbandFaction(data.faction, this);
         this.Ducats = data.ducat_bank;
         this.Glory = data.glory_bank;
         this.Notes = data.notes;
-        this.BuildModels(data.models);
-        this.BuildEquipment(data.equipment);
+    }
+
+    public async NewWarbandItems(data : IUserWarband) {
+        this.Exploration = await WarbandFactory.CreateWarbandExplorationSet(data.exploration, this);
+        this.Faction = await WarbandFactory.CreateWarbandFaction(data.faction, this);
     }
 
     public BuildModels(data : IWarbandPurchaseModel[]) {

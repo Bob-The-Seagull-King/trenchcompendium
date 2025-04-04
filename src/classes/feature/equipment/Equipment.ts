@@ -95,7 +95,7 @@ class Equipment extends StaticOptionContextObject {
     }
 
     
-    public BuildFactionEquipment(id : string) {
+    public async BuildFactionEquipment(id : string) {
         const EquipmentList = Requester.MakeRequest(
             {
                 searchtype: "complex", 
@@ -121,7 +121,7 @@ class Equipment extends StaticOptionContextObject {
         EquipmentList.sort(byPropertiesOf<IFactionEquipmentRelationship>(["name", "id"]))
 
         for (let i = 0; i < EquipmentList.length; i++) {
-            this.EquipmentItems.push(EquipmentFactory.CreateFactionEquipment(EquipmentList[i], this))
+            this.EquipmentItems.push(await EquipmentFactory.CreateFactionEquipment(EquipmentList[i], this))
         }
     }
 

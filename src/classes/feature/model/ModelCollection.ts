@@ -47,7 +47,6 @@ class ModelCollection extends StaticContextObject {
 
         this.Team = data.team;
         this.GatherLists(data);
-        this.ConstructModels();
     }
 
     public GatherLists(data : IModel) {
@@ -102,9 +101,9 @@ class ModelCollection extends StaticContextObject {
         return NewModel;
     }
 
-    public ConstructModels() {
+    public async ConstructModels() {
         for (let i = 0; i < this.ModelDataList.length; i++) {
-            const ModelObject : Model = ModelFactory.CreateModel(this.ModelDataList[i], this.MyContext)
+            const ModelObject : Model = await ModelFactory.CreateModel(this.ModelDataList[i], this.MyContext)
             this.SubModelsList.push( { var_name: ModelObject.Variant, model: ModelObject });
         }
     }
