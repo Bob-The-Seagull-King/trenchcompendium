@@ -17,7 +17,7 @@ interface IWarbandFaction extends IContextObject {
 }
 
 class WarbandFaction extends DynamicContextObject {
-    MyFaction: WarbandProperty;
+    MyFaction: WarbandProperty | null = null;
     MyPatron: Patron | null = null;
     MyFactionRules : WarbandProperty[] = [];
 
@@ -29,29 +29,39 @@ class WarbandFaction extends DynamicContextObject {
     public constructor(data: IWarbandFaction, parent : DynamicContextObject | null)
     {
         super(data, parent)
-        const Value = FactionFactory.CreateNewFaction(data.faction_property.object_id, this);
-        this.MyFaction = new WarbandProperty(Value, this, null, data.faction_property);
-        if (data.patron_id) {
-            this.MyPatron = SkillFactory.CreateNewPatron(data.patron_id, this);
-        }
+        this.BuildFaction(data.faction_property)
+        this.BuildPatron(data.patron_id)
         this.BuildFactionRules(data);
     }
 
+    public BuildFaction(faction_property : IWarbandProperty) {        
+        const Value = FactionFactory.CreateNewFaction(faction_property.object_id, this);
+        this.MyFaction = new WarbandProperty(Value, this, null, faction_property);
+    }
+
+    public BuildPatron(patron_id : string | undefined) {        
+        if (patron_id) {
+            this.MyPatron = SkillFactory.CreateNewPatron(patron_id, this);
+        }
+    }
+
     public BuildFactionRules(data : IWarbandFaction) {
-        const FactionObj : Faction = this.MyFaction.SelfDynamicProperty.OptionChoice as Faction;
-        for (let i = 0; i < FactionObj.Rules.length; i++) {
-            let IsFound = false
-            for (let j = 0; j < data.faction_rules.length; j++) {
-                if (data.faction_rules[j].object_id == FactionObj.Rules[i].ID) {
-                    const NewRuleProperty = new WarbandProperty(FactionObj.Rules[i], this, null, data.faction_rules[j]);
-                    this.MyFactionRules.push(NewRuleProperty);
-                    IsFound = true;
-                    break;
+        if (this.MyFaction) {
+            const FactionObj : Faction = this.MyFaction.SelfDynamicProperty.OptionChoice as Faction;
+            for (let i = 0; i < FactionObj.Rules.length; i++) {
+                let IsFound = false
+                for (let j = 0; j < data.faction_rules.length; j++) {
+                    if (data.faction_rules[j].object_id == FactionObj.Rules[i].ID) {
+                        const NewRuleProperty = new WarbandProperty(FactionObj.Rules[i], this, null, data.faction_rules[j]);
+                        this.MyFactionRules.push(NewRuleProperty);
+                        IsFound = true;
+                        break;
+                    }
                 }
-            }
-            if (IsFound == false) {
-                const NewRuleProperty = new WarbandProperty(FactionObj.Rules[i], this, null, null);
-                this.MyFactionRules.push(NewRuleProperty);
+                if (IsFound == false) {
+                    const NewRuleProperty = new WarbandProperty(FactionObj.Rules[i], this, null, null);
+                    this.MyFactionRules.push(NewRuleProperty);
+                }
             }
         }
     }
@@ -65,13 +75,23 @@ class WarbandFaction extends DynamicContextObject {
             ruleset.push(this.MyFactionRules[i].ConvertToInterface())
         }
 
+        let FactionData = null
+        if (this.MyFaction) {
+            FactionData = this.MyFaction.ConvertToInterface();
+        } else {
+            FactionData = {
+                object_id: "",
+                selections: []
+            }
+        }
+
         const _objint : IWarbandFaction = {
             contextdata : this.ContextData,            
             id: this.ID,
             name: this.Name != undefined? this.Name : "",
             source: this.Source != undefined? this.Source : "",
             tags: this.Tags,
-            faction_property: this.MyFaction.ConvertToInterface(),
+            faction_property: FactionData,
             faction_rules : ruleset,
             patron_id: PatronID,
         }
@@ -93,9 +113,11 @@ class WarbandFaction extends DynamicContextObject {
             }
         }
         
-        const static_packages : ContextPackage[] = await this.MyFaction.GrabContextPackages(event_id, source_obj, arrs_extra);
-        for (let j = 0; j < static_packages.length; j++) {
-            subpackages.push(static_packages[j])
+        if (this.MyFaction) {
+            const static_packages : ContextPackage[] = await this.MyFaction.GrabContextPackages(event_id, source_obj, arrs_extra);
+            for (let j = 0; j < static_packages.length; j++) {
+                subpackages.push(static_packages[j])
+            }
         }
 
         if (this.MyPatron != null) {
