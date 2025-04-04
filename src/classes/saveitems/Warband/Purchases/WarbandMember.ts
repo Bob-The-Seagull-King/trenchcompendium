@@ -13,6 +13,9 @@ import { IWarbandPurchaseEquipment, IWarbandPurchaseUpgrade, WarbandPurchase } f
 import { INote } from "../../../Note";
 import { Model } from "../../../feature/model/Model";
 import { ModelFactory } from "../../../../factories/features/ModelFactory";
+import { WarbandEquipment } from "./WarbandEquipment";
+import { UpgradeFactory } from "../../../../factories/features/UpgradeFactory";
+import { InjuryFactory } from "../../../../factories/features/InjuryFactory";
 
 interface IWarbandMember extends IContextObject {
     model: string,
@@ -53,6 +56,45 @@ class WarbandMember extends DynamicContextObject {
         this.Experience = data.experience;
         this.Elite = data.elite;
         this.CurModel = this.BuildModel(data.model)
+        this.BuildEquipment(data.equipment);
+        this.BuildUpgrade(data.list_upgrades);
+        this.BuildSkills(data.list_skills);
+        this.BuildInjuries(data.list_injury);
+    }
+
+    public BuildEquipment(data : IWarbandPurchaseEquipment[]) {
+        for (let i = 0; i < data.length; i++) {
+            const Model : WarbandEquipment = new WarbandEquipment(data[i].equipment, this);
+            const NewPurchase : WarbandPurchase = new WarbandPurchase(data[i].purchase, this, Model);
+            this.Equipment.push(NewPurchase);
+        }
+
+    }
+
+    public BuildUpgrade(data : IWarbandPurchaseUpgrade[]) {
+        for (let i = 0; i < data.length; i++) {            
+            const Value = UpgradeFactory.CreateNewUpgrade(data[i].upgrade.object_id, this);
+            const NewPurchase : WarbandPurchase = new WarbandPurchase(data[i].purchase, this, Value);
+            this.Equipment.push(NewPurchase);
+        }
+    }
+
+    public BuildSkills(data : IWarbandProperty[]) {
+        for (let i = 0; i < data.length; i++) {
+            const CurVal = data[i];
+            const Value = SkillFactory.CreateNewSkill(CurVal.object_id, this);
+            const NewLocation = new WarbandProperty(Value, this, null, CurVal);
+            this.Skills.push(NewLocation);
+        }
+    }
+
+    public BuildInjuries(data : IWarbandProperty[]) {
+        for (let i = 0; i < data.length; i++) {
+            const CurVal = data[i];
+            const Value = InjuryFactory.CreateNewInjury(CurVal.object_id, this);
+            const NewLocation = new WarbandProperty(Value, this, null, CurVal);
+            this.Injuries.push(NewLocation);
+        }
     }
 
     public BuildModel(data : string) {
