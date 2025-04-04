@@ -35,7 +35,7 @@ interface IWarbandMember extends IContextObject {
 class WarbandMember extends DynamicContextObject {
     Notes : INote[];
     IsActive : boolean;
-    CurModel : Model | null = null;
+    CurModel! : Model;
     SubProperties : WarbandProperty[] = [];
     Equipment : WarbandPurchase[] = [];
     Upgrades : WarbandPurchase[] = [];
@@ -57,12 +57,6 @@ class WarbandMember extends DynamicContextObject {
         this.IsActive = data.active;
         this.Experience = data.experience;
         this.Elite = data.elite;
-        this.BuildModel(data.model)
-        this.BuildEquipment(data.equipment);
-        this.BuildUpgrade(data.list_upgrades);
-        this.BuildSkills(data.list_skills);
-        this.BuildInjuries(data.list_injury);
-        this.BuildNewProperties();
     }
     
 
@@ -70,43 +64,43 @@ class WarbandMember extends DynamicContextObject {
         console.log("Build New Properties")
     }
 
-    public BuildEquipment(data : IWarbandPurchaseEquipment[]) {
+    public async BuildEquipment(data : IWarbandPurchaseEquipment[]) {
         for (let i = 0; i < data.length; i++) {
-            const Model : WarbandEquipment = new WarbandEquipment(data[i].equipment, this);
+            const Model : WarbandEquipment = await new WarbandEquipment(data[i].equipment, this);
             const NewPurchase : WarbandPurchase = new WarbandPurchase(data[i].purchase, this, Model);
             this.Equipment.push(NewPurchase);
         }
 
     }
 
-    public BuildUpgrade(data : IWarbandPurchaseUpgrade[]) {
+    public async BuildUpgrade(data : IWarbandPurchaseUpgrade[]) {
         for (let i = 0; i < data.length; i++) {            
-            const Value = UpgradeFactory.CreateNewUpgrade(data[i].upgrade.object_id, this);
+            const Value = await UpgradeFactory.CreateNewUpgrade(data[i].upgrade.object_id, this);
             const NewPurchase : WarbandPurchase = new WarbandPurchase(data[i].purchase, this, Value);
             this.Equipment.push(NewPurchase);
         }
     }
 
-    public BuildSkills(data : IWarbandProperty[]) {
+    public async BuildSkills(data : IWarbandProperty[]) {
         for (let i = 0; i < data.length; i++) {
             const CurVal = data[i];
-            const Value = SkillFactory.CreateNewSkill(CurVal.object_id, this);
+            const Value = await SkillFactory.CreateNewSkill(CurVal.object_id, this);
             const NewLocation = new WarbandProperty(Value, this, null, CurVal);
             this.Skills.push(NewLocation);
         }
     }
 
-    public BuildInjuries(data : IWarbandProperty[]) {
+    public async BuildInjuries(data : IWarbandProperty[]) {
         for (let i = 0; i < data.length; i++) {
             const CurVal = data[i];
-            const Value = InjuryFactory.CreateNewInjury(CurVal.object_id, this);
+            const Value = await InjuryFactory.CreateNewInjury(CurVal.object_id, this);
             const NewLocation = new WarbandProperty(Value, this, null, CurVal);
             this.Injuries.push(NewLocation);
         }
     }
 
-    public BuildModel(data : string) {
-        const Value = ModelFactory.CreateNewModel(data, this);
+    public async BuildModel(data : string) {
+        const Value = await ModelFactory.CreateNewModel(data, this);
         this.CurModel = (Value);
     }
 

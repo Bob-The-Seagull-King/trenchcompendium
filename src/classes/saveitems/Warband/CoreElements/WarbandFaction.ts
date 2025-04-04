@@ -29,23 +29,20 @@ class WarbandFaction extends DynamicContextObject {
     public constructor(data: IWarbandFaction, parent : DynamicContextObject | null)
     {
         super(data, parent)
-        this.BuildFaction(data.faction_property)
-        this.BuildPatron(data.patron_id)
-        this.BuildFactionRules(data);
     }
 
-    public BuildFaction(faction_property : IWarbandProperty) {        
-        const Value = FactionFactory.CreateNewFaction(faction_property.object_id, this);
+    public async BuildFaction(faction_property : IWarbandProperty) {        
+        const Value = await FactionFactory.CreateNewFaction(faction_property.object_id, this);
         this.MyFaction = new WarbandProperty(Value, this, null, faction_property);
     }
 
-    public BuildPatron(patron_id : string | undefined) {        
+    public async BuildPatron(patron_id : string | undefined) {        
         if (patron_id) {
-            this.MyPatron = SkillFactory.CreateNewPatron(patron_id, this);
+            this.MyPatron = await SkillFactory.CreateNewPatron(patron_id, this);
         }
     }
 
-    public BuildFactionRules(data : IWarbandFaction) {
+    public async BuildFactionRules(data : IWarbandFaction) {
         if (this.MyFaction) {
             const FactionObj : Faction = this.MyFaction.SelfDynamicProperty.OptionChoice as Faction;
             for (let i = 0; i < FactionObj.Rules.length; i++) {

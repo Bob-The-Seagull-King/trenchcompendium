@@ -37,7 +37,7 @@ export const CollectionDataDex : CollectionDataTable = {
         searchId: 'glossary', 
         pageName: 'Glossary',
         sort: ["name", "id"],
-        postSearch(model : ViewCollectionsModel) {
+        async postSearch(model : ViewCollectionsModel) {
             model.CleanupItems();
             model.CleanupCollection();
             let i = 0;
@@ -53,7 +53,7 @@ export const CollectionDataDex : CollectionDataTable = {
         searchId: 'keyword', 
         pageName: 'Keyword',
         sort: ["name", "id"],
-        postSearch(model : ViewCollectionsModel) {
+        async postSearch(model : ViewCollectionsModel) {
             model.CleanupItems();
             model.CleanupCollection();
             let i = 0;
@@ -69,13 +69,13 @@ export const CollectionDataDex : CollectionDataTable = {
         searchId: 'model', 
         pageName: 'model',
         sort: ["name", "id"],
-        postSearch(model : ViewCollectionsModel) {
+        async postSearch(model : ViewCollectionsModel) {
             model.CleanupItems();
             model.CleanupCollection();
             let i = 0;
             model.dataresults.sort(byPropertiesOf<IModel>(["name", "id"]))
             for (i = 0; i < model.dataresults.length; i++) {
-                const summonNew = ModelFactory.CreateModelCollection(model.dataresults[i], null);
+                const summonNew = await ModelFactory.CreateModelCollection(model.dataresults[i], null);
                 const ItemNew = new ViewTableItem(summonNew, getColour(summonNew.Team));
                 model.itemcollection.push(ItemNew);
             }
@@ -85,13 +85,13 @@ export const CollectionDataDex : CollectionDataTable = {
         searchId: 'equipment', 
         pageName: 'equipment',
         sort: ["name", "id"],
-        postSearch(model : ViewCollectionsModel) {
+        async postSearch(model : ViewCollectionsModel) {
             model.CleanupItems();
             model.CleanupCollection();
             let i = 0;
             model.dataresults.sort(byPropertiesOf<IEquipment>(["name", "id"]))
             for (i = 0; i < model.dataresults.length; i++) {
-                const summonNew = EquipmentFactory.CreateEquipment(model.dataresults[i], null);
+                const summonNew = await EquipmentFactory.CreateEquipment(model.dataresults[i], null);
                 const ItemNew = new ViewTableItem(summonNew, getColour('default'));
                 model.itemcollection.push(ItemNew);
             }
@@ -101,13 +101,13 @@ export const CollectionDataDex : CollectionDataTable = {
         searchId: 'faction', 
         pageName: 'faction',
         sort: ["name", "id"],
-        postSearch(model : ViewCollectionsModel) {
+        async postSearch(model : ViewCollectionsModel) {
             model.CleanupItems();
             model.CleanupCollection();
             let i = 0;
             model.dataresults.sort(byPropertiesOf<IFaction>(["name", "id"]))
             for (i = 0; i < model.dataresults.length; i++) {
-                const summonNew = FactionFactory.CreateFactionCollection(model.dataresults[i], null);
+                const summonNew = await FactionFactory.CreateFactionCollection(model.dataresults[i], null);
                 const ItemNew = new ViewTableItem(summonNew, getColour(summonNew.Team));
                 model.itemcollection.push(ItemNew);
             }
@@ -117,13 +117,13 @@ export const CollectionDataDex : CollectionDataTable = {
         searchId: 'scenario', 
         pageName: 'scenario',
         sort: ["name", "id"],
-        postSearch(model : ViewCollectionsModel) {
+        async postSearch(model : ViewCollectionsModel) {
             model.CleanupItems();
             model.CleanupCollection();
             let i = 0;
             model.dataresults.sort(byPropertiesOf<IScenario>(["name", "id"]))
             for (i = 0; i < model.dataresults.length; i++) {
-                const summonNew = ScenarioFactory.CreateScenario(model.dataresults[i], null);
+                const summonNew = await ScenarioFactory.CreateScenario(model.dataresults[i], null);
                 const ItemNew = new ViewTableItem(summonNew, getColour('default'));
                 model.itemcollection.push(ItemNew);
             }
@@ -133,13 +133,13 @@ export const CollectionDataDex : CollectionDataTable = {
         searchId: 'gamerule', 
         pageName: 'gamerule',
         sort: ["item_index"],
-        postSearch(model : ViewCollectionsModel) {
+        async postSearch(model : ViewCollectionsModel) {
             model.CleanupItems();
             model.CleanupCollection();
             let i = 0;
             model.dataresults.sort(byPropertiesOf<IBookRule>(["item_index"]))
             for (i = 0; i < model.dataresults.length; i++) {
-                const summonNew = BookRuleFactory.CreateBookRule(model.dataresults[i], null);
+                const summonNew = await BookRuleFactory.CreateBookRule(model.dataresults[i], null);
                 const ItemNew = new ViewTableItem(summonNew, getColour('default'));
                 model.itemcollection.push(ItemNew);
             }
@@ -149,13 +149,13 @@ export const CollectionDataDex : CollectionDataTable = {
         searchId: 'campaignrule', 
         pageName: 'campaignrule',
         sort: ["item_index"],
-        postSearch(model : ViewCollectionsModel) {
+        async postSearch(model : ViewCollectionsModel) {
             model.CleanupItems();
             model.CleanupCollection();
             let i = 0;
             model.dataresults.sort(byPropertiesOf<IBookRule>(["item_index"]))
             for (i = 0; i < model.dataresults.length; i++) {
-                const summonNew = BookRuleFactory.CreateBookRule(model.dataresults[i], null);
+                const summonNew = await BookRuleFactory.CreateBookRule(model.dataresults[i], null);
                 const ItemNew = new ViewTableItem(summonNew, getColour('default'));
                 model.itemcollection.push(ItemNew);
             }
@@ -165,13 +165,13 @@ export const CollectionDataDex : CollectionDataTable = {
         searchId: 'explorationtable', 
         pageName: 'explorationtable',
         sort: ["id"],
-        postSearch(model : ViewCollectionsModel) {
+        async postSearch(model : ViewCollectionsModel) {
             model.CleanupItems();
             model.CleanupCollection();
             let i = 0;
             model.dataresults.sort(byPropertiesOf<IContextObject>(["id"]))
             for (i = 0; i < model.dataresults.length; i++) {
-                const summonNew = ExplorationFactory.CreateExplorationTable(model.dataresults[i], null);
+                const summonNew = await ExplorationFactory.CreateExplorationTable(model.dataresults[i], null);
                 const ItemNew = new ViewTableItem(summonNew, getColour('default'));
                 model.itemcollection.push(ItemNew);
             }
@@ -181,13 +181,13 @@ export const CollectionDataDex : CollectionDataTable = {
         searchId: 'injury', 
         pageName: 'injury',
         sort: ["table_val"],
-        postSearch(model : ViewCollectionsModel) {
+        async postSearch(model : ViewCollectionsModel) {
             model.CleanupItems();
             model.CleanupCollection();
             let i = 0;
             model.dataresults.sort(byPropertiesOf<IInjury>(["table_val"]))
             for (i = 0; i < model.dataresults.length; i++) {
-                const summonNew = InjuryFactory.CreateInjury(model.dataresults[i], null);
+                const summonNew = await InjuryFactory.CreateInjury(model.dataresults[i], null);
                 const ItemNew = new ViewTableItem(summonNew, getColour('default'));
                 model.itemcollection.push(ItemNew);
             }
@@ -197,13 +197,13 @@ export const CollectionDataDex : CollectionDataTable = {
         searchId: 'skillgroup', 
         pageName: 'skillgroup',
         sort: ["name", "id"],
-        postSearch(model : ViewCollectionsModel) {
+        async postSearch(model : ViewCollectionsModel) {
             model.CleanupItems();
             model.CleanupCollection();
             let i = 0;
             model.dataresults.sort(byPropertiesOf<IContextObject>(["name", "id"]))
             for (i = 0; i < model.dataresults.length; i++) {
-                const summonNew = SkillFactory.CreateSkillGroup(model.dataresults[i], null);
+                const summonNew = await SkillFactory.CreateSkillGroup(model.dataresults[i], null);
                 const ItemNew = new ViewTableItem(summonNew, getColour("default"));
                 model.itemcollection.push(ItemNew);
             }
@@ -213,13 +213,13 @@ export const CollectionDataDex : CollectionDataTable = {
         searchId: 'patron', 
         pageName: 'patron',
         sort: ["name", "id"],
-        postSearch(model : ViewCollectionsModel) {
+        async postSearch(model : ViewCollectionsModel) {
             model.CleanupItems();
             model.CleanupCollection();
             let i = 0;
             model.dataresults.sort(byPropertiesOf<IPatron>(["name", "id"]))
             for (i = 0; i < model.dataresults.length; i++) {
-                const summonNew = SkillFactory.CreatePatron(model.dataresults[i], null);
+                const summonNew = await SkillFactory.CreatePatron(model.dataresults[i], null);
                 const ItemNew = new ViewTableItem(summonNew, getColour("default"));
                 model.itemcollection.push(ItemNew);
             }

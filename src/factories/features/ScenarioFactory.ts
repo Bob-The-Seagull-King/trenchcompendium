@@ -13,7 +13,7 @@ class ScenarioFactory {
      * @param _ability The data in IPlayerAbility format describing the ability
      * @returns A newly created ability
      */
-    static CreateScenario(_scenario: IScenario, parent : ContextObject | null) {
+    static async CreateScenario(_scenario: IScenario, parent : ContextObject | null) {
         const cache = StaticDataCache.getInstance();
         const isValid = (cache.CheckID('scenario', _scenario.id))
         if (isValid == false) {
@@ -21,17 +21,18 @@ class ScenarioFactory {
         }
         const rule = new Scenario(_scenario, parent)
         cache.AddToCache('scenario', rule);
+        await rule.BuildRules(_scenario.special_rules)
         return rule;
     }
 
-    static CreateNewScenario(_val : string, parent : ContextObject | null) {
+    static async CreateNewScenario(_val : string, parent : ContextObject | null) {
         const cache = StaticDataCache.getInstance();
         const isValid = (cache.CheckID('scenario', _val))
         if (isValid == false) {
             return cache.ScenarioCache[_val];
         }
         const scenariodata = Requester.MakeRequest({searchtype: "id", searchparam: {type: "scenario", id: _val}}) as IScenario
-        const scenarionew = ScenarioFactory.CreateScenario(scenariodata, parent)
+        const scenarionew = await ScenarioFactory.CreateScenario(scenariodata, parent)
         return scenarionew;
     }
 

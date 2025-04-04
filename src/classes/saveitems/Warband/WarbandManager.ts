@@ -1,3 +1,4 @@
+import { WarbandFactory } from '../../../factories/warband/WarbandFactory';
 import { UserWarband, IUserWarband } from './UserWarband';
 
 class WarbandManager {
@@ -133,11 +134,15 @@ class WarbandManager {
         this.SetStorage();
     }
 
+    public TstClearStorag() {
+        this.WarbandItemList = [];
+        this.SetStorage();
+    }
+
     /**
      * Builds a new item and saves it to the browser
      */
-    public NewItem(_title : string, fact_id : string) {
-        // TODO CREATE FACTION ID SELECT
+    public async NewItem(_title : string, fact_id : string) {
         const msg = ""
 
         if (_title.trim().length <= 0) {
@@ -185,7 +190,7 @@ class WarbandManager {
             equipment : [],
         }
 
-        this.WarbandItemList.push(new UserWarband(_Item))
+        this.WarbandItemList.push(await WarbandFactory.CreateUserWarband(_Item))
         this.SetStorage();
 
         return msg;

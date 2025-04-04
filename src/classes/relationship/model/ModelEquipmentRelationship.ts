@@ -22,21 +22,19 @@ class ModelEquipmentRelationship extends StaticOptionContextObject {
     {
         super(data, parent)
         this.Removable = data.removable;
-        this.BuildEquipment(data.mandatory_equipment);
-        this.BuildOptionEquipment();
     }
 
-    public BuildEquipment(equipment : string[]) {
+    public async BuildEquipment(equipment : string[]) {
         for (let i = 0; i < equipment.length; i++) {
-            const EquipObj = EquipmentFactory.CreateNewEquipment(equipment[i], this);
+            const EquipObj = await  EquipmentFactory.CreateNewEquipment(equipment[i], this);
             this.EquipmentItems.push(EquipObj);
         }
     }
 
-    public BuildOptionEquipment() {
+    public async BuildOptionEquipment() {
         for (let i = 0; i < this.MyOptions.length; i++) {
             for (let j = 0; j < this.MyOptions[i].Selections.length; j++) {
-                this.MyOptions[i].Selections[j].value = EquipmentFactory.CreateModelEquipment(this.MyOptions[i].Selections[j].value, this);
+                this.MyOptions[i].Selections[j].value = await EquipmentFactory.CreateModelEquipment(this.MyOptions[i].Selections[j].value, this);
             }
         }
     }

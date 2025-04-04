@@ -15,7 +15,7 @@ class EquipmentFactory {
      * @param _ability The data in IPlayerAbility format describing the ability
      * @returns A newly created ability
      */
-    static CreateEquipment(_rule: IEquipment, parent : ContextObject | null) {
+    static async CreateEquipment(_rule: IEquipment, parent : ContextObject | null) {
         const cache = StaticDataCache.getInstance();
         const isValid = (cache.CheckID('equipment', _rule.id))
         if (isValid == false) {
@@ -23,22 +23,22 @@ class EquipmentFactory {
         }
         const rule = new Equipment(_rule, parent)
         cache.AddToCache('equipment', rule);
-        rule.BuildFactionEquipment(_rule.id);
+        await rule.BuildFactionEquipment(_rule.id);
         return rule;
     }
 
-    static CreateNewEquipment(_val : string, parent : ContextObject | null) {
+    static async CreateNewEquipment(_val : string, parent : ContextObject | null) {
         const cache = StaticDataCache.getInstance();
         const isValid = (cache.CheckID('equipment', _val))
         if (isValid == false) {
             return cache.EquipmentCache[_val];
         }
         const ruledata = Requester.MakeRequest({searchtype: "id", searchparam: {type: "equipment", id: _val}}) as IEquipment
-        const rulenew = EquipmentFactory.CreateEquipment(ruledata, parent)
+        const rulenew = await EquipmentFactory.CreateEquipment(ruledata, parent)
         return rulenew;
     }
 
-    static CreateModelEquipment(_rule: IModelEquipmentRelationship, parent : ContextObject | null) {
+    static async CreateModelEquipment(_rule: IModelEquipmentRelationship, parent : ContextObject | null) {
         const cache = StaticDataCache.getInstance();
         const isValid = (cache.CheckID('modelequipment', _rule.id))
         if (isValid == false) {
@@ -46,21 +46,23 @@ class EquipmentFactory {
         }
         const rule = new ModelEquipmentRelationship(_rule, parent)
         cache.AddToCache('modelequipment', rule);
+        await rule.BuildEquipment(_rule.mandatory_equipment);
+        await rule.BuildOptionEquipment();
         return rule;
     }
 
-    static CreateNewModelEquipment(_val : string, parent : ContextObject | null) {
+    static async CreateNewModelEquipment(_val : string, parent : ContextObject | null) {
         const cache = StaticDataCache.getInstance();
         const isValid = (cache.CheckID('modelequipment', _val))
         if (isValid == false) {
             return cache.ModelEquipmentCache[_val];
         }
         const ruledata = Requester.MakeRequest({searchtype: "id", searchparam: {type: "modelequipmentrelationship", id: _val}}) as IModelEquipmentRelationship
-        const rulenew = EquipmentFactory.CreateModelEquipment(ruledata, parent)
+        const rulenew = await EquipmentFactory.CreateModelEquipment(ruledata, parent)
         return rulenew;
     }
 
-    static CreateFactionEquipment(_rule: IFactionEquipmentRelationship, parent : ContextObject | null) {
+    static async CreateFactionEquipment(_rule: IFactionEquipmentRelationship, parent : ContextObject | null) {
         const cache = StaticDataCache.getInstance();
         const isValid = (cache.CheckID('factionequipment', _rule.id))
         if (isValid == false) {
@@ -68,17 +70,18 @@ class EquipmentFactory {
         }
         const rule = new FactionEquipmentRelationship(_rule, parent)
         cache.AddToCache('factionequipment', rule);
+        await rule.MakeItem(_rule.equipment_id);
         return rule;
     }
 
-    static CreateNewFactionEquipment(_val : string, parent : ContextObject | null) {
+    static async CreateNewFactionEquipment(_val : string, parent : ContextObject | null) {
         const cache = StaticDataCache.getInstance();
         const isValid = (cache.CheckID('factionequipment', _val))
         if (isValid == false) {
             return cache.FactionEquipmentCache[_val];
         }
         const ruledata = Requester.MakeRequest({searchtype: "id", searchparam: {type: "factionequipmentrelationship", id: _val}}) as IFactionEquipmentRelationship
-        const rulenew = EquipmentFactory.CreateFactionEquipment(ruledata, parent)
+        const rulenew = await EquipmentFactory.CreateFactionEquipment(ruledata, parent)
         return rulenew;
     }
 

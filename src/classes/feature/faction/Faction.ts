@@ -53,10 +53,9 @@ class Faction extends StaticOptionContextObject {
             this.Variant = data.variant_name
         } else { this.Variant = "base" }
 
-        this.BuildRules(data.rules)
     }
     
-    public BuildFactionModels(id : string) {
+    public async BuildFactionModels(id : string) {
         const ModelList = Requester.MakeRequest(
             {
                 searchtype: "complex", 
@@ -81,18 +80,18 @@ class Faction extends StaticOptionContextObject {
         ModelList.sort(byPropertiesOf<IFactionModelRelationship>(["name", "id"]))
 
         for (let i = 0; i < ModelList.length; i++) {
-            this.Models.push(ModelFactory.CreateFactionModel(ModelList[i], null))
+            this.Models.push(await ModelFactory.CreateFactionModel(ModelList[i], null))
         }
     }
 
-    public BuildRules(rules : string[]) {
+    public async BuildRules(rules : string[]) {
         for (let i = 0; i < rules.length; i++) {
-            const RuleObj = RuleFactory.CreateNewRule(rules[i], this);
+            const RuleObj = await RuleFactory.CreateNewRule(rules[i], this);
             this.Rules.push(RuleObj);
         }
     }
     
-    public BuildFactionEquipment(id : string) {
+    public async BuildFactionEquipment(id : string) {
         const EquipmentList = Requester.MakeRequest(
             {
                 searchtype: "complex", 
@@ -118,7 +117,7 @@ class Faction extends StaticOptionContextObject {
         EquipmentList.sort(byPropertiesOf<IFactionEquipmentRelationship>(["name", "id"]))
 
         for (let i = 0; i < EquipmentList.length; i++) {
-            this.EquipmentItems.push(EquipmentFactory.CreateFactionEquipment(EquipmentList[i], this))
+            this.EquipmentItems.push(await EquipmentFactory.CreateFactionEquipment(EquipmentList[i], this))
         }
     }
 

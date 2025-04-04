@@ -12,7 +12,7 @@ class RuleFactory {
      * @param _ability The data in IPlayerAbility format describing the ability
      * @returns A newly created ability
      */
-    static CreateRule(_rule: IRule, parent : ContextObject | null) {
+    static async CreateRule(_rule: IRule, parent : ContextObject | null) {
         const cache = StaticDataCache.getInstance();
         const isValid = (cache.CheckID('rule', _rule.id))
         if (isValid == false) {
@@ -20,28 +20,29 @@ class RuleFactory {
         }
         const rule = new Rule(_rule, parent)
         cache.AddToCache('rule', rule);
+        await rule.ReloadOptions();
         return rule;
     }
 
-    static CreateNewRule(_val : string, parent : ContextObject | null) {
+    static async CreateNewRule(_val : string, parent : ContextObject | null) {
         const cache = StaticDataCache.getInstance();
         const isValid = (cache.CheckID('rule', _val))
         if (isValid == false) {
             return cache.RuleCache[_val];
         }
         const ruledata = Requester.MakeRequest({searchtype: "id", searchparam: {type: "factionrule", id: _val}}) as IRule
-        const rulenew = RuleFactory.CreateRule(ruledata, parent)
+        const rulenew = await RuleFactory.CreateRule(ruledata, parent)
         return rulenew;
     }
 
-    static CreateNewScenarioRule(_val : string, parent : ContextObject | null) {
+    static async CreateNewScenarioRule(_val : string, parent : ContextObject | null) {
         const cache = StaticDataCache.getInstance();
         const isValid = (cache.CheckID('rule', _val))
         if (isValid == false) {
             return cache.RuleCache[_val];
         }
         const ruledata = Requester.MakeRequest({searchtype: "id", searchparam: {type: "scenariorule", id: _val}}) as IRule
-        const rulenew = RuleFactory.CreateRule(ruledata, parent)
+        const rulenew = await RuleFactory.CreateRule(ruledata, parent)
         return rulenew;
     }
 

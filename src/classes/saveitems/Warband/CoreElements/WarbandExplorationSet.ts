@@ -24,23 +24,21 @@ class WarbandExplorationSet extends DynamicContextObject {
     public constructor(data: IWarbandExplorationSet, parent : DynamicContextObject | null)
     {
         super(data, parent)
-        this.BuildSkills(data.explorationskills);
-        this.BuildLocations(data.locations);
     }
 
-    public BuildSkills(data : IWarbandProperty[]) {
+    public async BuildSkills(data : IWarbandProperty[]) {
         for (let i = 0; i < data.length; i++) {
             const CurVal = data[i];
-            const Value = SkillFactory.CreateNewSkill(CurVal.object_id, this);
+            const Value = await SkillFactory.CreateNewSkill(CurVal.object_id, this);
             const NewSkill = new WarbandProperty(Value, this, null, CurVal);
             this.Skills.push(NewSkill);
         }
     }
 
-    public BuildLocations(data : IWarbandProperty[]) {
+    public async BuildLocations(data : IWarbandProperty[]) {
         for (let i = 0; i < data.length; i++) {
             const CurVal = data[i];
-            const Value = ExplorationFactory.CreateNewExplorationLocation(CurVal.object_id, this);
+            const Value = await ExplorationFactory.CreateNewExplorationLocation(CurVal.object_id, this);
             const NewLocation = new WarbandProperty(Value, this, null, CurVal);
             this.Locations.push(NewLocation);
         }

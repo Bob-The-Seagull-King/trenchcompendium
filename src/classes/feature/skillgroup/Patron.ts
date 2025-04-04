@@ -33,13 +33,11 @@ class Patron extends StaticContextObject {
     public constructor(data: IPatron, parent : ContextObject | null)
     {
         super(data, parent)
-        this.BuildFactionEquipment(data.id);
         this.Description = DescriptionFactory(data.description, this);
-        this.BuildFactionList(data.id);
     }
 
     
-    public BuildFactionEquipment(id : string) {
+    public async BuildFactionEquipment(id : string) {
         const LocationList = Requester.MakeRequest(
             {
                 searchtype: "complex", 
@@ -63,13 +61,13 @@ class Patron extends StaticContextObject {
 
 
         for (let i = 0; i < LocationList.length; i++) {
-            this.Skills.push(SkillFactory.CreateSkill(LocationList[i], this))
+            this.Skills.push(await SkillFactory.CreateSkill(LocationList[i], this))
         }
 
         this.Skills.sort(byPropertiesOf<Skill>(["Name"]))
     }
 
-    public BuildFactionList(id : string) {
+    public async BuildFactionList(id : string) {
         const FactionList = Requester.MakeRequest(
             {
                 searchtype: "complex", 
@@ -94,7 +92,7 @@ class Patron extends StaticContextObject {
 
         for (let i = 0; i < FactionList.length; i++) {
             for (let j = 0; j < FactionList[i].faction_id.length; j++) {
-                this.Factions.push(FactionFactory.CreateNewFaction(FactionList[i].faction_id[j], this))
+                this.Factions.push(await FactionFactory.CreateNewFaction(FactionList[i].faction_id[j], this))
             }
         }
 

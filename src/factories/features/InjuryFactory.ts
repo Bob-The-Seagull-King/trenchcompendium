@@ -12,7 +12,7 @@ class InjuryFactory {
      * @param _ability The data in IPlayerAbility format describing the ability
      * @returns A newly created ability
      */
-    static CreateInjury(_rule: IInjury, parent : ContextObject | null) {
+    static async CreateInjury(_rule: IInjury, parent : ContextObject | null) {
         const cache = StaticDataCache.getInstance();
         const isValid = (cache.CheckID('injury', _rule.id))
         if (isValid == false) {
@@ -20,17 +20,18 @@ class InjuryFactory {
         }
         const rule = new Injury(_rule, parent)
         cache.AddToCache('injury', rule);
+        await rule.ReloadOptions();
         return rule;
     }
 
-    static CreateNewInjury(_val : string, parent : ContextObject | null) {
+    static async CreateNewInjury(_val : string, parent : ContextObject | null) {
         const cache = StaticDataCache.getInstance();
         const isValid = (cache.CheckID('injury', _val))
         if (isValid == false) {
             return cache.InjuryCache[_val];
         }
         const ruledata = Requester.MakeRequest({searchtype: "id", searchparam: {type: "injury", id: _val}}) as IInjury
-        const rulenew = InjuryFactory.CreateInjury(ruledata, parent)
+        const rulenew = await InjuryFactory.CreateInjury(ruledata, parent)
         return rulenew;
     }
 

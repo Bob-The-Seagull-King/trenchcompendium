@@ -37,31 +37,6 @@ class Skill extends BaseAddon {
         this.RunOptionsParse();
     }
 
-    
-    public RunOptionsParse() {
-        
-        const EventProc : EventRunner = new EventRunner();
-        for (let i = 0; i < this.MyOptions.length; i++) {
-            EventProc.runEvent(
-                "parseOptionFilterDown",
-                this,
-                [],
-                this.MyOptions[i].Selections,
-                i
-            ).then(result => {
-                this.MyOptions[i].Selections = result;
-                EventProc.runEvent(
-                    "parseOptionsIntoRelevantType",
-                    this,
-                    [],
-                    this.MyOptions[i].Selections,
-                    i
-                ).then(result => {
-                    this.MyOptions[i].Selections = result;
-                });
-            });
-        }
-    }
 
 }
 

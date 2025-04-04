@@ -13,7 +13,7 @@ class UpgradeFactory {
      * @param _ability The data in IPlayerAbility format describing the ability
      * @returns A newly created ability
      */
-    static CreateUpgrade(_rule: IUpgrade, parent : ContextObject | null) {
+    static async CreateUpgrade(_rule: IUpgrade, parent : ContextObject | null) {
         const cache = StaticDataCache.getInstance();
         const isValid = (cache.CheckID('upgrade', _rule.id))
         if (isValid == false) {
@@ -21,28 +21,30 @@ class UpgradeFactory {
         }
         const rule = new Upgrade(_rule, parent)
         cache.AddToCache('upgrade', rule);
+        await rule.ReloadOptions();
         return rule;
     }
 
-    static CreateNewUpgrade(_val : string, parent : ContextObject | null) {
+    static async CreateNewUpgrade(_val : string, parent : ContextObject | null) {
         const cache = StaticDataCache.getInstance();
         const isValid = (cache.CheckID('upgrade', _val))
         if (isValid == false) {
             return cache.UpgradeCache[_val];
         }
         const ruledata = Requester.MakeRequest({searchtype: "id", searchparam: {type: "upgrade", id: _val}}) as IUpgrade
-        const rulenew = UpgradeFactory.CreateUpgrade(ruledata, parent)
+        const rulenew = await UpgradeFactory.CreateUpgrade(ruledata, parent);
         return rulenew;
     }
 
-    static CreateModelUpgrade(_rule: IModelUpgradeRelationship) {
+    static async CreateModelUpgrade(_rule: IModelUpgradeRelationship) {
         const cache = StaticDataCache.getInstance();
         const isValid = (cache.CheckID('modelupgrade', _rule.id))
         if (isValid == false) {
             return cache.ModelUpgradeCache[_rule.id];
         }
-        const rule = new ModelUpgradeRelationship(_rule)
+        const rule = await new ModelUpgradeRelationship(_rule)
         cache.AddToCache('modelupgrade', rule);
+        await rule.BuildUpgrade(_rule.upgrade_id);
         return rule;
     }
 

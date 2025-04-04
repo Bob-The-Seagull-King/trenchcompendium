@@ -24,12 +24,12 @@ class CollectionsListPage {
      * Sets the collection to a base search request and
      * then runs that search.
      */
-    initCollection() {
+    async initCollection() {
         if (this.Initialised == false) {
             this.Initialised = true;
         
             this.Collection.UpdateSearchParams({searchtype: "file", searchparam: {type: this.Collection.CollectionType.searchId}});
-            this.Collection.RunSearch();
+            await this.Collection.RunSearch();
         }
     }
 
@@ -38,14 +38,14 @@ class CollectionsListPage {
      * and, if different to the current request, reruns the
      * collection manager's search.
      */
-    updateSearch() {
+    async updateSearch() {
         const newfilter = ConvertFiltersToRequest(this.FilterManager, this.Collection.CollectionType.searchId, this.Collection.CollectionType.sort)
         if (!(JSON.stringify(newfilter) == JSON.stringify(this.Collection.searchParam))) {
             this.Collection.UpdateSearchParams(newfilter);
             if (this.FilterManager.MyFilters.variantSearch) {
                 this.Collection.RunMultiUnitSearch(this.FilterManager.MyFilters.variantSearch);
             } else {
-                this.Collection.RunSearch();
+                await this.Collection.RunSearch();
             }
         }
     }

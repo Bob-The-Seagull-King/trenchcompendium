@@ -36,13 +36,13 @@ class ViewCollectionsModel {
     /**
      * Make a request with the searchParam and store the resulting data
      */
-    public RunSearch() {
+    public async RunSearch() {
         this.dataresults = Requester.MakeRequest(this.searchParam as IRequest);
         if (this.dataresults.length == undefined) {
             this.dataresults = [this.dataresults]
         }
         if (this.CollectionType) {
-            this.CollectionType.postSearch(this);
+            await this.CollectionType.postSearch(this);
         }
     }
 

@@ -28,7 +28,7 @@ interface FactionModelRestriction {
 
 class FactionModelRelationship extends StaticOptionContextObject {
     
-    public Model : Model;
+    public Model! : Model;
     public Captain : boolean;
     public Mercenary : boolean;
 
@@ -50,20 +50,22 @@ class FactionModelRelationship extends StaticOptionContextObject {
         this.Restricted_Models = data.restricted_models;
         this.Minimum = data.warband_minimum;
         this.Maximum = data.warband_maximum;
-        this.Model = ModelFactory.CreateNewModel(data.model_id, null);
-        this.BuildOptionModel();
     }
 
-    public GetFactions(data : string[]) {
+    public async BuildModel(model_id : string) {        
+        this.Model = await ModelFactory.CreateNewModel(model_id, null);
+    }
+
+    public async GetFactions(data : string[]) {
         for (let i = 0; i < data.length; i++) {
-            this.Factions.push(FactionFactory.CreateNewFaction(data[i], null))
+            this.Factions.push(await FactionFactory.CreateNewFaction(data[i], null))
         }
     }
 
-    public BuildOptionModel() {
+    public async BuildOptionModel() {
         for (let i = 0; i < this.MyOptions.length; i++) {
             for (let j = 0; j < this.MyOptions[i].Selections.length; j++) {
-                this.MyOptions[i].Selections[j].value = ModelFactory.CreateNewModel(this.MyOptions[i].Selections[j].value, this);
+                this.MyOptions[i].Selections[j].value = await ModelFactory.CreateNewModel(this.MyOptions[i].Selections[j].value, this);
             }
         }
     }

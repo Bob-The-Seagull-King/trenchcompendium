@@ -26,7 +26,7 @@ interface ModelUpgradeRestriction {
 
 class ModelUpgradeRelationship {
     public ID : string;
-    public UpgradeObject : Upgrade;
+    public UpgradeObject! : Upgrade;
     public Cost : number;
     public CostType : number;
     public WarbandLimit : number
@@ -45,7 +45,10 @@ class ModelUpgradeRelationship {
         this.WarbandLimit = data.warband_limit;
         this.Retrictions = data.restricted_upgrades;
         this.RequiredUpgrades = data.faction_mask;
-        this.UpgradeObject = UpgradeFactory.CreateNewUpgrade(data.upgrade_id, null);
+    }
+
+    public async BuildUpgrade(upgrade_id : string) {
+        this.UpgradeObject = await UpgradeFactory.CreateNewUpgrade(upgrade_id, null);
     }
 
 }
