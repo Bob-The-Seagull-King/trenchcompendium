@@ -60,6 +60,12 @@ class WarbandMember extends DynamicContextObject {
         this.BuildUpgrade(data.list_upgrades);
         this.BuildSkills(data.list_skills);
         this.BuildInjuries(data.list_injury);
+        this.BuildNewProperties();
+    }
+    
+
+    public BuildNewProperties() {
+        console.log("Build New Properties")
     }
 
     public BuildEquipment(data : IWarbandPurchaseEquipment[]) {
