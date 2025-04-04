@@ -180,7 +180,9 @@ class WarbandManager {
                 name: _title+"_exploration",
                 source: 'user_warband',
                 tags: {}
-            }
+            },            
+            models : [],
+            equipment : [],
         }
 
         this.WarbandItemList.push(new UserWarband(_Item))

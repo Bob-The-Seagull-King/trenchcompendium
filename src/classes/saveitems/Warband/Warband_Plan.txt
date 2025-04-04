@@ -8,7 +8,7 @@ WarbandUser
 # Used to assign a warband, users will later be expanded as campaigns as well
     - User Name
 
-WarbandItem
+WarbandItem ////////
 # Used to describe the elements of the warband itself
     - Name //
     - CustomNotes[] //
@@ -18,8 +18,8 @@ WarbandItem
     - WarbandUser //
     - WarbandFaction
     - WarbandExploration //
-    - ModelPurchases[]
-    - EquipmentPurchases[]
+    - ModelPurchases[] //
+    - EquipmentPurchases[] //
 
 WarbandExploration ////////
 # Used to catalogue what has been explored

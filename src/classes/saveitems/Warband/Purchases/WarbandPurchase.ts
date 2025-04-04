@@ -7,6 +7,9 @@ import { ContextObject, IContextObject } from '../../../contextevent/contextobje
 import { DynamicContextObject } from '../../../contextevent/dynamiccontextobject';
 import { StaticOptionContextObject } from '../../../options/StaticOptionContextObject';
 import { ContextPackage } from '../../../contextevent/contextpackage';
+import { IWarbandMember, WarbandMember } from './WarbandMember';
+import { IWarbandEquipment, WarbandEquipment } from './WarbandEquipment';
+import { IWarbandProperty, WarbandProperty } from '../WarbandProperty';
 
 interface IWarbandPurchase {
     cost_value : number,
@@ -16,6 +19,21 @@ interface IWarbandPurchase {
     sell_item : boolean,
     sell_full : boolean,
     purchaseid: string
+}
+
+interface IWarbandPurchaseModel {
+    purchase : IWarbandPurchase,
+    model : IWarbandMember
+}
+
+interface IWarbandPurchaseEquipment {
+    purchase : IWarbandPurchase,
+    equipment : IWarbandEquipment
+}
+
+interface IWarbandPurchaseUpgrade {
+    purchase : IWarbandPurchase,
+    upgrade : IWarbandProperty
 }
 
 class WarbandPurchase {
@@ -63,7 +81,37 @@ class WarbandPurchase {
         return _objint;
     }
 
+    public ConvertToInterfaceModel() {
+
+        const _objint : IWarbandPurchaseModel = {
+            purchase : this.ConvertToInterface(),
+            model : (this.HeldObject as WarbandMember).ConvertToInterface()
+        }
+        
+        return _objint;
+    }
+
+    public ConvertToInterfaceEquipment() {
+
+        const _objint : IWarbandPurchaseEquipment = {
+            purchase : this.ConvertToInterface(),
+            equipment : (this.HeldObject as WarbandEquipment).ConvertToInterface()
+        }
+        
+        return _objint;
+    }
+
+    public ConvertToInterfaceUpgrade() {
+
+        const _objint : IWarbandPurchaseUpgrade = {
+            purchase : this.ConvertToInterface(),
+            upgrade : (this.HeldObject as WarbandProperty).ConvertToInterface()
+        }
+        
+        return _objint;
+    }
+
 }
 
-export {IWarbandPurchase, WarbandPurchase}
+export {IWarbandPurchase, WarbandPurchase, IWarbandPurchaseModel, IWarbandPurchaseEquipment, IWarbandPurchaseUpgrade}
 
