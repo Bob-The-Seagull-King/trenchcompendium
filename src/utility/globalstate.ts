@@ -3,7 +3,8 @@ import React from 'react';
 import { createGlobalState } from 'react-hooks-global-state';
 
 const initialState = { theme: InitTheme(),
-                       language: InitLanguage(),
+                        language: InitLanguage(),
+                        loreshow: InnitLoreShow(),
                        eventrunner : InitEventHandler()
                     };
 const { useGlobalState } = createGlobalState(initialState);
@@ -18,6 +19,14 @@ function InitLanguage() {
         return theme
     }
     return 'ln_english'
+}
+
+function InnitLoreShow() {
+    const theme = localStorage.getItem('loreshow');
+    if (theme != null) {
+        return Boolean(theme)
+    }
+    return false
 }
 
 function InitTheme() {
