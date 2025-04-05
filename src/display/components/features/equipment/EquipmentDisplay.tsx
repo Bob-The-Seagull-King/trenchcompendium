@@ -61,7 +61,7 @@ const EquipmentDisplay = (props: any) => {
                             <div>
                                 <span>
                                     {abilityObject.Modifiers.map((item) => ( 
-                                        <span className='tagItem smallgapright' key={"equipment_modifier_"+abilityObject.ID+"_modifier_id_"+item}>
+                                        <span className='tagItem ' key={"equipment_modifier_"+abilityObject.ID+"_modifier_id_"+item}>
                                             <span className='glossaryMain'>{item}</span>
                                         </span>
                                     )) /* Keywords */}
@@ -75,7 +75,7 @@ const EquipmentDisplay = (props: any) => {
                             <div>
                                 <span>
                                 {abilityObject.KeyWord.map((item) => ( 
-                                    <span className='tagItem smallgapright' key={"equipment_keyword_"+abilityObject.ID+"_keyword_id_"+item.ID}>
+                                    <span className='tagItem ' key={"equipment_keyword_"+abilityObject.ID+"_keyword_id_"+item.ID}>
                                         <GenericHover  d_colour={'grey'} titlename={item.Name} d_name={item.Name} d_type={""} d_method={() => <KeywordDisplay data={item} />}/>
                                     </span>
                                 )) /* Keywords */}
@@ -86,7 +86,7 @@ const EquipmentDisplay = (props: any) => {
                 
                 {abilityObject.Description.length > 0 &&
                 <div className="borderstyler borderthin bordergrey">
-                    <div className="totalmarginsml  size-default colourBasicText  ">
+                    <div className="  size-default colourBasicText  ">
                     {returnDescription(abilityObject, abilityObject.Description)}
                     </div>
                 </div>
@@ -94,7 +94,7 @@ const EquipmentDisplay = (props: any) => {
                 
                 {abilityObject.Lore.length > 0 &&
                 <div className="borderstyler borderthin bordergrey">
-                    <div className="totalmarginsml colourBasicText   size-smaller">
+                    <div className=" colourBasicText   size-smaller">
                     {returnDescription(abilityObject, abilityObject.Lore)}
                     </div>
                 </div>

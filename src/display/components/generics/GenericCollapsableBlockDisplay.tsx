@@ -23,7 +23,7 @@ const GenericCollapsableBlockDisplay = (props: any) => {
 
     return (
         <div >
-            <div onClick={() => {setOpen(!open)}} className={'align-left-right size-strongtext   hovermouse centered-div border'+getColour(DisplayColour) + " " + (StyleType == 0? "borderthin" : StyleType == 1? "borderthinnosides" : StyleType == 2? "borderthintop" : StyleType == 3? "borderthinbottom" : "borderremove") + " background"+BgCol}>
+            <div onClick={() => {setOpen(!open)}} className={'      border'+getColour(DisplayColour) + " " + (StyleType == 0? "borderthin" : StyleType == 1? "borderthinnosides" : StyleType == 2? "borderthintop" : StyleType == 3? "borderthinbottom" : "borderremove") + " background"+BgCol}>
                 <div className={'totalmargin'+MarginSize}>
                     {DisplayName || ""}
                 </div>
@@ -33,7 +33,7 @@ const GenericCollapsableBlockDisplay = (props: any) => {
             </div>
             <Collapse in={open}>
                 <div className={'container border'+getColour(DisplayColour)}>
-                    {ShowBorder == true && <div className={"bar background"+getColour(DisplayColour)} />}
+                    {ShowBorder == true && <div className={"background"+getColour(DisplayColour)} />}
                     <div className="content">                    
                         {displayMethod()}
                     </div>

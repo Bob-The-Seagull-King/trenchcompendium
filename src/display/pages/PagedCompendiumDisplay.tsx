@@ -162,14 +162,14 @@ const PagedCompendiumDisplay = (prop: any) => {
 
                 {/* This can be removed if the <RulesPageLinks work */}
                 <div className="rules-page-links">
-                    <div className="align-left-right buttonrow_container stat_parent">
-                        <div className=" maxwidth">
+                    <div className=" buttonrow_container ">
+                        <div className=" ">
                             <BasicButton d_dir={"l"} btn_title={GetPrevName()} btn_state={_canprev} btn_press={GrabPrevItem}/>
                         </div>
                         <div>
-                            <div className="horizontalspacermed"/>
+                            <div className=""/>
                             </div>
-                        <div className=" maxwidth">
+                        <div className=" ">
                             <BasicButton d_dir={"r"} btn_title={GetNextName()} btn_state={_cannext} btn_press={GrabNextItem}/>
                         </div>
                     </div>

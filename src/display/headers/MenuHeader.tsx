@@ -26,7 +26,7 @@ const MenuHeader: React.FC<IControllerProp> = (prop) => {
     return (
       
         <ErrorBoundary fallback={<div>Something went wrong with MenuHeader.tsx</div>}>
-            <div className="align-left-right">
+            <div className="">
                 <Button bsPrefix="empty" className="lonebutton" onClick={handleShow}>
                     <FontAwesomeIcon icon={faBars} className=""/>
                 </Button>

@@ -29,10 +29,10 @@ const ViewTableItemDisplay = (props: any) => {
 
     return (
         <ErrorBoundary fallback={<div>Something went wrong with ViewTableItemDisplay.tsx</div>}>
-        <div style={{width: "100%", marginBottom: "0px", position: "relative"}} className='hovermouse' onClick={() => UpdateComponent()}>
+        <div style={{width: "100%", marginBottom: "0px", position: "relative"}} className='' onClick={() => UpdateComponent()}>
             
-            <h1 className={"titlebody " + (position() % 2 == 0? "" : "sub") + "background" + tableItem.Colour + " no-padding itemlisttext softpad"}>
-            <Form.Check className="colordefault packtitlebase"
+            <h1 className={" " + (position() % 2 == 0? "" : "sub") + "background" + tableItem.Colour + " no-padding itemlisttext softpad"}>
+            <Form.Check className=" packtitlebase"
                 inline
                 disabled
                 name="group1"

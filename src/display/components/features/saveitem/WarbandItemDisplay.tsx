@@ -75,10 +75,10 @@ const WarbandItemDisplay = (prop: any) => {
         <ErrorBoundary fallback={<div>Something went wrong with SaveWarbandDisplay.tsx</div>}>
             <div className='' ref={ref} >
                 {stateWidth > 700 &&
-                    <div className="filterbox contentpackbasecontainer contentpackcontainer subborderstyler subborderdefault" >
+                    <div className="filterbox contentpackbasecontainer contentpackcontainer subborderstyler " >
                         <span className="contentsubnamecontainer">
                             <span/>
-                            <h1 className="colordefault packtitlebase packtitlelarge">
+                            <h1 className=" packtitlebase packtitlelarge">
                                 {WarbandItem.Title}
                             </h1>
                             <span/>
@@ -107,16 +107,16 @@ const WarbandItemDisplay = (prop: any) => {
                         <span className="packvrbox">
                             <div className="vr packvr small-side-margin"></div>
                             <Button className="no-padding" variant="" onClick={() => removeContentPack()}>
-                                <FontAwesomeIcon icon={faTrash} className="colorred contentpacklabel no-margin" />
+                                <FontAwesomeIcon icon={faTrash} className=" contentpacklabel no-margin" />
                             </Button>
                         </span>
                     </div>
                 }
                 {stateWidth <= 700 &&
-                    <div className="filterbox contentpackbasecontainer subborderstyler subborderdefault" >
+                    <div className="filterbox contentpackbasecontainer subborderstyler " >
                         
                         <div className="row textmaxwidth">
-                                <h1 className="colordefault packtitlebase packtitlelarge widecentertext" >
+                                <h1 className=" packtitlebase packtitlelarge widecentertext" >
                                     {WarbandItem.Title}
                                 </h1>
                         </div>
@@ -151,7 +151,7 @@ const WarbandItemDisplay = (prop: any) => {
                                         <div className="vr packvr small-side-margin"/>
                                     </span>
                                     <Button className="no-padding" variant="" onClick={() => removeContentPack()}>
-                                        <FontAwesomeIcon icon={faTrash} className="colorred contentpacklabel no-margin" />
+                                        <FontAwesomeIcon icon={faTrash} className=" contentpacklabel no-margin" />
                                     </Button>
                                 <span/>
                             </div>

@@ -33,7 +33,7 @@
             <ErrorBoundary fallback={<div>Something went wrong with FactionModelDisplay.tsx</div>}>
                 <span key={_keyvar}>
                     {factionequipmentObject.Factions.map((item) => (
-                        <span className='smallgapright' key={item.ID}>
+                        <span className='' key={item.ID}>
                             <GenericPopup  d_colour={"grey"} titlename={item.Name + (factionequipmentObject.Factions.indexOf(item) < factionequipmentObject.Factions.length-1 ? ", " : "")} d_name={item.Name} d_type={""} d_method={() => 
                                 <FactionDisplay data={item} />}/>
                         </span>

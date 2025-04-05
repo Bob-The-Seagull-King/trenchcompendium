@@ -19,13 +19,13 @@ const ImageSingleDisplay = (props: any) => {
 
     return (
       <>
-        <div key={ObjectImages.Src+ObjectImages.Caption} style={{padding:"1rem"}} className="hovermouse" onClick={handleShow}>
+        <div key={ObjectImages.Src+ObjectImages.Caption} style={{padding:"1rem"}} className="" onClick={handleShow}>
           <Image src={ObjectImages.Src} fluid thumbnail />
         </div>
         <Modal show={show} onHide={handleClose}
         aria-labelledby="contained-modal-title-vcenter"
         centered >
-          <div style={{borderWidth:"2px", borderRadius:"0.5rem"}} className='borderdefault borderstyler'>
+          <div style={{borderWidth:"2px", borderRadius:"0.5rem"}} className=' borderstyler'>
           <Image src={ObjectImages.Src} thumbnail fluid  onClick={handleShow}/>
           
           {ObjectImages.Caption.length > 0 &&

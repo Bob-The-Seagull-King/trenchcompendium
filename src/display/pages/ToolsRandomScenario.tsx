@@ -27,7 +27,7 @@ const ToolsRandomScenario = (prop: any) => {
             <div className="row justify-center">
                 <div className="col-md-10 col-sm-12">
                     <div className="">
-                        <div onClick={() => (newScenario())}className='borderstyler backgrounddefault borderdefault hovermouse softpad colorWhite tagText centerPosition'>New Scenario</div>
+                        <div onClick={() => (newScenario())}className='borderstyler    softpad colorWhite tagText centerPosition'>New Scenario</div>
                     </div>
                     <div className="row">
                         <div className="verticalspacerbig"/>

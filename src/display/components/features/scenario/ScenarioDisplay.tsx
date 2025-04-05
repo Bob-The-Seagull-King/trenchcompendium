@@ -193,9 +193,9 @@ const ScenarioDisplay = (props: any) => {
                     {scenarioObject.SpecialRules.length > 0 &&
                         <div>
                             <div className={'size-subtitle font-seriftext'}>
-                                <div className='subtitle-letterspacing centered-div width-content'>
+                                <div className='subtitle-letterspacing '>
                                     {"Special Rules"}
-                                    <div className='horizontalspacermed hovermouse'>
+                                    <div className=' '>
                                         <FontAwesomeIcon icon={faLink} onClick={() => (
                                             runToast()
                                         )}/>
@@ -214,7 +214,7 @@ const ScenarioDisplay = (props: any) => {
                                             d_border={false}
                                             bordertype={0}
                                             d_method={() => <div className={"bordergrey borderthin"}>
-                                                <div className="totalmarginsml">
+                                                <div className="">
                                                     <RuleDisplay data={item}/>
                                                 </div>
                                             </div>}/>
@@ -243,7 +243,7 @@ const ScenarioDisplay = (props: any) => {
                                 d_border={false}
                                 bordertype={0}
                                 d_method={() => <div className={"bordergrey borderthin"}>
-                                    <div className="totalmarginsml">
+                                    <div className="">
                                         <GloriousDeedDisplay data={item}/>
                                     </div>
                                 </div>}/>
@@ -271,7 +271,7 @@ const ScenarioDisplay = (props: any) => {
                                         d_border={false}
                                         bordertype={0}
                                         d_method={() => <div className={"bordergrey borderthin"}>
-                                            <div className="totalmarginsml">
+                                            <div className="">
                                                 <GloriousDeedDisplay data={item}/>
                                             </div>
                                         </div>}/>

@@ -84,7 +84,7 @@ const RuleDisplay = (props: any) => {
                                                 d_border={false}
                                                 bordertype={(upgradeoptions.indexOf(item) < (upgradeoptions.length - 1))? 1 : 2}
                                                 d_method={() => <div className={"bordergrey " + ((upgradeoptions.indexOf(item) < (upgradeoptions.length - 1))? "borderthinnosides" : "borderthicktop")}>
-                                                    <div className="totalmarginsml">
+                                                    <div className="">
                                                         <ModelUpgradeDisplay data={item} />
                                                     </div>
                                                 </div>} />

@@ -137,11 +137,11 @@ const FactionDisplay = (props: any) => {
 
             {factionObject.MyOptions.length > 0 &&
                 <div>
-                    <div id={"options"} className="verticalspacermed"/>
+                    <div id={"options"} className=""/>
                     <div className={'subtitle-letterspacing size-subtitle font-seriftext'}>
-                        <div className='centered-div width-content'>
+                        <div className=''>
                             {"Warband Options"}
-                            <div className='horizontalspacermed hovermouse'>
+                            <div className=' '>
                                 <FontAwesomeIcon icon={faLink} onClick={() => (
                                     runToast()
                                     )}/>
@@ -153,7 +153,7 @@ const FactionDisplay = (props: any) => {
                     }
                 </div>
             }
-            <div className="verticalspacermed"/>
+            <div className=""/>
 
             {factionObject.Models.filter((item) => (item.Captain == true && item.Mercenary == false)).length > 0 &&
                 <>

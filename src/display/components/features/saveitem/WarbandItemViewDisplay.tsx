@@ -42,14 +42,14 @@ const WarbandItemViewDisplay = (prop: any) => {
 
             <div className="row">        
                 <span className="">
-                    <Button className="colordefault no-padding" variant="" onClick={() => exportData()}>
+                    <Button className=" no-padding" variant="" onClick={() => exportData()}>
                         <FontAwesomeIcon icon={faDownload} className="contentpacklabel no-margin"/>
                     </Button>
                 </span>    
             </div>
 
             <div className="row">
-                <div className="colordefault largefonttext centerPosition">
+                <div className=" largefonttext centerPosition">
                         <div className="widecentertext">
                             {WarbandItem.Title} 
                         </div>

@@ -32,7 +32,7 @@ const ExplorationTableDisplay = (props: any) => {
                                                 d_content={item.TableValue}
                                                 d_method={() => <>
                                                     <div className="borderthin backgroundBgCard bordergrey">
-                                                        <div className="totalmarginsml">
+                                                        <div className="">
                                                             <ExplorationLocationDisplay data={item} />
                                                         </div>
                                                     </div>

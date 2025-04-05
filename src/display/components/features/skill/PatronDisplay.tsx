@@ -27,7 +27,7 @@ const PatronDisplay = (props: any) => {
                      <div>
                         {returnDescription(patronObject, patronObject.Description)}
                      </div>
-                     <div className='verticalspacermed'/>
+                     <div className=''/>
                      <div className="borderthin bordergrey">
                         <ItemRow title={"Available To"} value={() => <div>{patronObject.Factions.map((item) => ( 
                             <span key={item.Name} className="bodytext complextext small-side-margin">
@@ -39,7 +39,7 @@ const PatronDisplay = (props: any) => {
                         
                      </div>
                 </div>
-                <div className='verticalspacermed'/>
+                <div className=''/>
                 <div className="borderthin bordergrey">
                 {patronObject.Skills.map((item) => (
                     <div key={item.ID}>
@@ -53,7 +53,7 @@ const PatronDisplay = (props: any) => {
                             d_margin={"sml"}
                             d_method={() => <>
                                 <div className="backgroundBgBasic borderthin bordergrey">
-                                    <div className='totalmarginsml'>
+                                    <div className=''>
                                     <SkillDisplay data={item} />
                                     </div>
                                 </div>

@@ -59,7 +59,7 @@ const SettingsMenu: React.FC<IControllerProp> = (prop) => {
                         </div>
                     </Offcanvas.Title>
                 </Offcanvas.Header>
-                <Offcanvas.Body bsPrefix="empty" className="scrollingoffmenu removeoverflowbar fillspace backgroundBgBase">                    
+                <Offcanvas.Body bsPrefix="empty" className="scrollingoffmenu removeoverflowbar  backgroundBgBase">
                     <GenericCollapsableBlockDisplay
                         d_name={"Pallete"} 
                         d_colour={"grey"} 
@@ -72,7 +72,7 @@ const SettingsMenu: React.FC<IControllerProp> = (prop) => {
                         d_state={false}  
                         bordertype={0}
                         d_method={() => <div className="borderthin bordergrey" ><LanguageSwap/></div>} />
-                    <div className="borderthin bordergrey fillspace"/>
+                    <div className="borderthin bordergrey "/>
                 </Offcanvas.Body>
             </Offcanvas>
         </ErrorBoundary>

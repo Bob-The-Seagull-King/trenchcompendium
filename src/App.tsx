@@ -44,9 +44,9 @@ const App: React.FC = () => {
                     <Router >
                         <SuperHeader controller={compendiumcontroller}/>
                         <Routes>
-                        <Route path={ROUTES.HOME_ROUTE} element={<HomeRoute />} />
-                        <Route path={ROUTES.COMPENDIUM_ROUTE} element={<CompendiumRoute controller={compendiumcontroller} />} />
-                        <Route path={ROUTES.WARBAND_ROUTE} element={<WarbandRoute controller={toolcontroller} />} />
+                            <Route path={ROUTES.HOME_ROUTE} element={<HomeRoute />} />
+                            <Route path={ROUTES.COMPENDIUM_ROUTE} element={<CompendiumRoute controller={compendiumcontroller} />} />
+                            <Route path={ROUTES.WARBAND_ROUTE} element={<WarbandRoute controller={toolcontroller} />} />
                         </Routes>
                     </Router>
                 </PersistGate>

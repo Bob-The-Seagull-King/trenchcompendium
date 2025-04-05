@@ -19,7 +19,7 @@ const ModelUpgradeDisplay = (props: any) => {
                 <UpgradeDisplay data={abilityObject.UpgradeObject}/>
                 <div className=''>
                     <div className="">
-                        <span className=" size-strongtext">
+                        <span className=" ">
                             {
                                 abilityObject.Cost + " " + 
                                 getCostType(abilityObject.CostType) + 

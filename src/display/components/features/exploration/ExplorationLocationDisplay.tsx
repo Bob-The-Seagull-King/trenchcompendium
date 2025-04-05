@@ -65,7 +65,7 @@ const ExplorationLocationDisplay = (props: any) => {
                     }
                 </div>
                 <div className='row'>
-                    <div className="colordefault bodytext complextext">
+                    <div className=" bodytext complextext">
                         {
                             useLimits.join(", ")
                         }

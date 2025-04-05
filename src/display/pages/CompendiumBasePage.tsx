@@ -71,24 +71,24 @@ const CompendiumBasePage: React.FC<IControllerProp> = (prop: any) => {
                     </h1>
                 </div>
                 <div>
-                    <div className="verticalspacermed"/>
+                    <div className=""/>
                     <div className="colourBasicText  ">
                         {GetContentsTableRules()}
                     </div>
-                    <div className="verticalspacermed"/>
+                    <div className=""/>
                     <div className="colourBasicText  ">
                         {GetContentsTableWarbands()}
                     </div>
-                    <div className="verticalspacermed"/>
+                    <div className=""/>
                     <div className="colourBasicText  ">
                         {GetContentsTableScenarios()}
                     </div>
-                    <div className="verticalspacermed"/>
+                    <div className=""/>
                     <div className="colourBasicText  ">
                         {GetContentsTableCampaign()}
                     </div>
                 </div>
-                <div className="verticalspacermed"/>
+                <div className=""/>
             </>
         </ErrorBoundary>
     )

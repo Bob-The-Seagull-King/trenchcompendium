@@ -29,7 +29,7 @@ const ModelEquipmentDisplay = (props: any) => {
             <>
                 <EquipmentDisplay data={item} />
                 <div className="borderthin bordergrey">
-                    <span className="colordefault totalmarginsml">
+                    <span className=" ">
                         {
                             obj.Removable == true? "Removable" : "Cannot Be Removed"
                         }

@@ -134,8 +134,8 @@ const RulesModelDisplay = (props: any) => {
             <ItemRow
                 title={"Stat Options"}
                 value={() =>
-                    <div className="maxwidth">
-                        <Form.Control className={"borderstyler bordergrey overcomeradius hovermouse maxwidth" } as="select" aria-label="Default select example"  placeholder="Member Type" >
+                    <div className="">
+                        <Form.Control className={"borderstyler bordergrey overcomeradius " } as="select" aria-label="Default select example"  placeholder="Member Type" >
                             {statchoice.map((item) => (
                                 <option key={"modeloption"+(statchoice.indexOf(item).toString())} >{ReturnStatProfileAsString(item)}</option>
                             ))}

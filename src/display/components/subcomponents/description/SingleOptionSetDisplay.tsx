@@ -49,11 +49,11 @@ const SingleOptionSetDisplay = (props: any) => {
         
         <ErrorBoundary fallback={<div>Something went wrong with OptionSetStaticDisplay.tsx</div>}>
 
-            <div className="colordefault size-subtitle font-seriftext subtitle-letterspacing">
+            <div className=" size-subtitle font-seriftext subtitle-letterspacing">
                 { OptionSet.Name }
             </div>
             
-            <Form.Control className={"borderstyler bordergrey overcomeradius hovermouse" } as="select" aria-label="Default select example"  placeholder="Member Type" onChange={(e: { target: { value: any; }; }) => { updateItem(e.target.value)    } } >
+            <Form.Control className={"borderstyler bordergrey overcomeradius " } as="select" aria-label="Default select example"  placeholder="Member Type" onChange={(e: { target: { value: any; }; }) => { updateItem(e.target.value)    } } >
                 {OptionSet.Selections.map((selec) => ( 
                     <option value={selec.id} key={"modeloption"+(OptionSet.Selections.indexOf(selec).toString())} >{makestringpresentable(selec.display_str)}</option> 
                 ))}

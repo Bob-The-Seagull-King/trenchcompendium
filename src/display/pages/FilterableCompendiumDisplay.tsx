@@ -48,11 +48,11 @@ const FilterableCompendiumDisplay = (prop: any) => {
     function ReturnItems() {
         return (
             <div>
-                <div className="verticalspacermed"/>
+                <div className=""/>
                 {((_curItems == undefined) || (_curItems == null) || (_curItems.length == 0)) &&
                     <div className="">
                         <h1 className="">No Items Found</h1>
-                        <div className="verticalspacermed"/>
+                        <div className=""/>
                     </div>
                 }
                 {((_curItems != undefined) && (_curItems != null) && (_curItems.length > 0)) &&
@@ -60,7 +60,7 @@ const FilterableCompendiumDisplay = (prop: any) => {
                         {_curItems.map((item) => (
                             <div key={item.HeldItem.ID}>
                                 {DisplayPage.returnDisplay(item.HeldItem)}
-                                <div className="verticalspacermed"/>
+                                <div className=""/>
                             </div>))}
                     </div>}
             </div>

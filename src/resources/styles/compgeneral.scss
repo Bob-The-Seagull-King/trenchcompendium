@@ -1,13 +1,1 @@
 @import './_variables';
-
-.hidden-text { 
-    display: none; 
-  } 
-   
-.show-text:hover .hidden-text { 
-display: block; 
-} 
-
-.hovermouse {
-  cursor: pointer !important;
-}

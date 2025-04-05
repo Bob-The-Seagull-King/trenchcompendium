@@ -26,7 +26,7 @@ const HomeRoute: React.FC = () => {
                 <div className="row justify-content-center m-0 p-0">
                     <div className="col-lg-8 col-md-12">
                         <div className="row justify-content-center">
-                            <div className="col inner-content-middle align-center">
+                            <div className="col ">
                                 <h1 className="">Trench Companion</h1>
                             </div>
                         </div>
@@ -45,7 +45,7 @@ const HomeRoute: React.FC = () => {
                             </div>
                         </div>
                         <div className="row "> 
-                            <div className="verticalspacermed"></div>
+                            <div className=""></div>
                         </div>
                         <div className="row row-cols-md-2 row-cols-1 gy-3 gx-3">
                             <div className="col">

@@ -35,7 +35,7 @@ const SkillGroupDisplay = (props: any) => {
                         d_content={item.TableVal}
                         d_method={() => <>
                             <div className="borderthin backgroundBgCard bordergrey">
-                                <div className="totalmarginsml">
+                                <div className="">
                                 <SkillDisplay data={item} />
                                 </div>
                             </div>
@@ -51,7 +51,7 @@ const SkillGroupDisplay = (props: any) => {
                             d_margin={"sml"}
                             d_method={() => <>
                                 <div className="borderthin backgroundBgCard bordergrey">
-                                    <div className="totalmarginsml">
+                                    <div className="">
                                     <SkillDisplay data={item} />
                                     </div>
                                 </div>

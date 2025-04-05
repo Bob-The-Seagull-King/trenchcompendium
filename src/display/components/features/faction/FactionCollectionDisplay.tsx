@@ -52,7 +52,7 @@ const FactionCollectionDisplay = (props: any) => {
             {/* Content Filter for subfactions */}
             {factioncollectionObject.SubModelsList.length > 1 &&  false &&
                 <div>
-                    <Form.Control className={"borderstyler hovermouse bordergrey overcomeradius" } as="select" aria-label="Default select example"  placeholder="Member Type" onChange={(e: { target: { value: any; }; }) => { updateItem(e.target.value)    } } >
+                    <Form.Control className={"borderstyler  bordergrey overcomeradius" } as="select" aria-label="Default select example"  placeholder="Member Type" onChange={(e: { target: { value: any; }; }) => { updateItem(e.target.value)    } } >
                         {factioncollectionObject.SubModelsList.map((item) => ( 
                             <option key="modeloption" value={item.var_name}>{makestringpresentable((item.var_name == "base")? (item.faction.Name != undefined? item.faction.Name : "") : item.var_name)}</option> 
                         ))}

@@ -42,9 +42,9 @@ const ModelCollectionDisplay = (props: any) => {
             <div className=''>
                 {modelcollectionObject.SubModelsList.length > 1 &&
                 <div className="borderthin bordergrey">
-                    <div className="totalmarginmed">
-                        <div className={"row horizontalspacermed"}>
-                            <Form.Control className={"borderstyler hovermouse bordergrey overcomeradius"} as="select" aria-label="Default select example"  placeholder="Member Type" onChange={(e: { target: { value: any; }; }) => { updateItem(e.target.value)    } } >
+                    <div className="">
+                        <div className={"row "}>
+                            <Form.Control className={"borderstyler  bordergrey overcomeradius"} as="select" aria-label="Default select example"  placeholder="Member Type" onChange={(e: { target: { value: any; }; }) => { updateItem(e.target.value)    } } >
                                 {modelcollectionObject.SubModelsList.map((item) => ( 
                                     <option  key="modeloption" value={item.var_name}>
                                         <div>{makestringpresentable(item.var_name) + " - " + makestringpresentable(item.model.Name != undefined? item.model.Name : "")}</div>

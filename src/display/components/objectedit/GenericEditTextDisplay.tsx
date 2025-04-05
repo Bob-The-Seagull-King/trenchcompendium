@@ -44,9 +44,9 @@ const GenericEditListDisplay = (props: any) => {
             { EditStaticType.returnButton(Manager, Item, handleShowTextEdit, SubItem, textValue) }
             </span>
             
-            <Modal onEnterKeyDown={() => handleCloseTextEdit()} show={showTextEdit}  contentClassName="basestructure abilityStructure borderstyler colordefault" dialogClassName="" onHide={handleCloseTextEdit} keyboard={true}  centered>
+            <Modal onEnterKeyDown={() => handleCloseTextEdit()} show={showTextEdit}  contentClassName="basestructure abilityStructure borderstyler " dialogClassName="" onHide={handleCloseTextEdit} keyboard={true}  centered>
                 
-                <h1 className={'titleShape   titlebody backgrounddefault'}>
+                <h1 className={'    '}>
                     {EditStaticType.title}
                 </h1>
                 <Modal.Body >
@@ -57,7 +57,7 @@ const GenericEditListDisplay = (props: any) => {
                             </InputGroup>
                         </div>
                         <div className="col-2">
-                            <FontAwesomeIcon icon={faSave} onClick={() => EditStaticType.updateText(Manager, Item, textValue, handleCloseTextEdit, updateModel, SubItem )} className="pageaccestextsmall hovermouse" style={{fontSize:"3em"}}/>
+                            <FontAwesomeIcon icon={faSave} onClick={() => EditStaticType.updateText(Manager, Item, textValue, handleCloseTextEdit, updateModel, SubItem )} className="pageaccestextsmall " style={{fontSize:"3em"}}/>
                         </div>
                     </div>
                 </Modal.Body>

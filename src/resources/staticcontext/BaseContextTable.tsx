@@ -526,9 +526,9 @@ export const BaseContextCallTable : CallEventTable = {
             return ( 
             
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    <div className="verticalspacersml"/>
+                    <div className=""/>
                     <div className="borderstyler bordergrey">
-                        <div className="totalmarginsml">
+                        <div className="">
                             <ExplorationLocationDisplay data={relayVar.value} />
                         </div>
                     </div>
@@ -592,9 +592,9 @@ export const BaseContextCallTable : CallEventTable = {
             return ( 
             
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    <div className="verticalspacersml"/>
+                    <div className=""/>
                     <div className="borderstyler bordergrey">
-                        <div className="totalmarginsml">
+                        <div className="">
                             <SkillDisplay data={relayVar.value} />
                         </div>
                     </div>

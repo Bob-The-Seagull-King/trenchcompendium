@@ -7,13 +7,7 @@
 // // // // //
 // Light Theme
 body[data-theme='light']
-    --colour_default_main: $red-tc
 
-    --colour_red_main: #{$red-tc}
-    --colour_red_main-dark: #{$tc-red-dark}
-
-
-    --colour_green_main: #61D836
     --colour_yellow_main: #FEAE00
     --colour_blue_main: #00A2FF
 
@@ -25,8 +19,6 @@ body[data-theme='light']
 
 
 
-    --colour_basic_text: #{$black}
-    --colour_basic_text_inverted: #{$white}
     --colour_bg: #{$white}
     --colour_bg_inverted: #{$black}
     --colour_bg_inverted-75: #{$black-75}
@@ -62,12 +54,7 @@ body[data-theme='light']
 // // // // //
 // Dark Theme
 body[data-theme='dark']
-    --colour_default_main: #{$red-tc}
 
-    --colour_red_main: #{$red-tc}
-    --colour_red_main-dark: #{$tc-red-dark}
-
-    --colour_green_main: #61D836
     --colour_yellow_main: #FEAE00
     --colour_blue_main: #00A2FF
 
@@ -77,10 +64,6 @@ body[data-theme='dark']
     --colour_bg_card: #222222
 
 
-
-
-    --colour_basic_text: #{$white}
-    --colour_basic_text_inverted: #{$black}
     --colour_bg: #{$black}
     --colour_bg_inverted: #{$white}
     --colour_bg_inverted-75: #{$white-75}
@@ -116,14 +99,9 @@ body[data-theme='dark']
 // // // // //
 // set sass variables to use variable colors
 // - This makes wirting styles much easier
-$color-text: var(--colour_basic_text)
-$color-text-inv: var(--colour_basic_text_inverted)
 
 $color-bg: var(--colour_bg)
 $color-bg-inv: var(--colour_bg_inverted)
-
-$link-color: var(--colour_red_main)
-$link-color-hover: var(--colour_red_main-dark)
 
 
 // v2 colors:

@@ -93,7 +93,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
                             <FilterTagSet name={"Tags"} data={manager.ReturnTagFilters()}/>
                         </div>
                         <div>
-                            <div className="verticalspacersml"/>
+                            <div className=""/>
                             <FilterMiscSet name={"Source"} data={manager.ReturnMiscFilters().filter((item) => (item.Group == 'source'))}/>
                         </div>
                     </div>
@@ -144,7 +144,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
                             <FilterTagSet name={"Tags"} data={manager.ReturnTagFilters()}/>
                         </div>
                         <div>
-                            <div className="verticalspacersml"/>
+                            <div className=""/>
                             <FilterMiscSet name={"Source"} data={manager.ReturnMiscFilters().filter((item) => (item.Group == 'source'))}/>
                         </div>
                     </div>
@@ -187,19 +187,19 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
                 
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
                         <div>
-                            <div className="verticalspacersml"/>
+                            <div className=""/>
                             <FilterMiscSet name={"Variant"} data={manager.ReturnMiscFilters().filter((item) => (item.Group == 'variant_name'))}/>
                         </div>
                         <div>
-                            <div className="verticalspacersml"/>
+                            <div className=""/>
                             <FilterMiscSet name={"Team"} data={manager.ReturnMiscFilters().filter((item) => (item.Group == 'team'))}/>
                         </div>
                         <div>
-                            <div className="verticalspacersml"/>
+                            <div className=""/>
                             <FilterMiscSet name={"Keywords"} data={manager.ReturnMiscFilters().filter((item) => (item.Group == 'keywords'))}/>
                         </div>
                         <div>
-                            <div className="verticalspacersml"/>
+                            <div className=""/>
                             <FilterMiscSet name={"Source"} data={manager.ReturnMiscFilters().filter((item) => (item.Group == 'source'))}/>
                         </div>
                 </ErrorBoundary>
@@ -243,21 +243,21 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
                             <FilterTagSet name={"Tags"} data={manager.ReturnTagFilters()}/>
                         </div>
                         <div>
-                            <div className="verticalspacersml"/>
+                            <div className=""/>
                             <FilterMiscSet name={"Category"} data={manager.ReturnMiscFilters().filter((item) => (item.Group == 'category'))}/>
                         </div>
                         <div>
-                            <div className="verticalspacersml"/>
+                            <div className=""/>
                             <FilterMiscSet name={"Keywords"} data={manager.ReturnMiscFilters().filter((item) => (item.Group == 'keywords'))}/>
                         </div>
                         <div>
-                            <div className="verticalspacersml"/>
+                            <div className=""/>
                             <FilterMiscSet name={"Source"} data={manager.ReturnMiscFilters().filter((item) => (item.Group == 'source'))}/>
                         </div>
                         <div>
                             {manager.ReturnRangeFilters().filter((item) => (item.Group == 'distance')).map((item) =>
                                     <div key={item.Group}>
-                                        <div className="verticalspacersml"/>
+                                        <div className=""/>
                                         <FilterRangeItem name={"Range"} data={item}/>
                                     </div>)}
                         </div>
@@ -386,7 +386,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
                                 d_content={item.TableVal}
                                 d_method={() => <>
                                     <div className="borderthin backgroundBgCard bordergrey">
-                                        <div className="totalmarginsml">
+                                        <div className="">
                                         <InjuryDisplay data={item} />
                                         </div>
                                     </div>
@@ -442,7 +442,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
                         <FilterTagSet name={"Tags"} data={manager.ReturnTagFilters()}/>
                     </div>
                     <div>
-                        <div className="verticalspacersml"/>
+                        <div className=""/>
                         <FilterMiscSet name={"Source"} data={manager.ReturnMiscFilters().filter((item) => (item.Group == 'source'))}/>
                     </div>
                 </ErrorBoundary>

@@ -29,7 +29,7 @@ const FilterBox = (prop: any) => {
 
     function ReturnTextFilterParam(_filter : FilterText) {
         return (            
-            <div className="backgroundBgBase centered-div">
+            <div className="backgroundBgBase ">
                 <Form.Control 
                     onChange={e => UpdateName(_filter, e.target.value)} 
                     className='bordergrey' 
@@ -40,8 +40,8 @@ const FilterBox = (prop: any) => {
                             updatesearch();
                         }
                     }}/>
-                <Button bsPrefix="empty" className="borderremove backgroundBgBase horizontalspacermed" onClick={() => updatesearch()}>
-                    <FontAwesomeIcon icon={faMagnifyingGlass} className="size-strongtext"/>
+                <Button bsPrefix="empty" className="borderremove backgroundBgBase " onClick={() => updatesearch()}>
+                    <FontAwesomeIcon icon={faMagnifyingGlass} className=""/>
                 </Button>
             </div>
         )
@@ -49,9 +49,9 @@ const FilterBox = (prop: any) => {
 
     function ReturnFilterBoxInner() {
         return (
-            <div className="totalmarginsml">
+            <div className="">
                 {DisplayPage.returnFilterSelect(FilterManagerObj, updatesearch, updatesearch)}
-                <div className="verticalspacersml"/>
+                <div className=""/>
                 <div className="filterbuttoncomp">
                     <BasicButton btn_title={"Search"} btn_state={true} btn_press={updatesearch}/>
                 </div>
@@ -70,14 +70,14 @@ const FilterBox = (prop: any) => {
                     </div>)}
                 </div>
                 <div>
-                    <div className="verticalspacermed"/>
+                    <div className=""/>
                     {(DisplayPage.hidefilter == undefined) &&
                         <div className="borderthin bordergrey">
-                            <div onClick={() => {setOpen(!open)}} className={'centered-div size-strongtext   hovermouse centered-div borderbed bordergrey borderthin backgroundBgCard'}>
-                                <div className={'totalmarginxsm font-seriftext'}>
+                            <div onClick={() => {setOpen(!open)}} className={'      borderbed bordergrey borderthin backgroundBgCard'}>
+                                <div className={' font-seriftext'}>
                                     {"Filters"}
                                 </div>
-                                <div className={'totalmarginxsm'}>
+                                <div className={''}>
                                     <FontAwesomeIcon icon={faFilter} className=""/>
                                 </div>
                             </div>

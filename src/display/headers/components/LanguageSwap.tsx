@@ -28,15 +28,15 @@ const LanguageSwap = (prop: any) => {
     
     function returnLanguages(langval: string | null, curlang : string, title : string) {
         return (
-            <div onClick={() => SetLanguage(langval? langval : curlang)} className={"hovermouse size-strongtext   totalmarginsml align-left-right color"+(langval == curlang ? 'default' : 'BasicText')}>
-                <div className="horizontalspacermed">{makestringpresentable(title)}</div>
+            <div onClick={() => SetLanguage(langval? langval : curlang)} className={"      color"+(langval == curlang ? 'default' : 'BasicText')}>
+                <div className="">{makestringpresentable(title)}</div>
             </div>
         )
     }
     
     return (
         <ErrorBoundary fallback={<div>Something went wrong with PalleteSwap.tsx</div>}>
-            <div className={"totalmarginsml"}>
+            <div className={""}>
                 <div>
                     {returnLanguages('ln_english', language, 'english')}
                 </div>

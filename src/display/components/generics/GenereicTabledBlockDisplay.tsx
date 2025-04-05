@@ -25,14 +25,14 @@ const GenericTabledBlockDisplay = (props: any) => {
 
     return (
         <div >
-            <div onClick={() => {setOpen(!open)}} className={'align-left-right size-strongtext   hovermouse centered-div border'+getColour(DisplayColour) + " " + (StyleType == 0? "borderthin" : StyleType == 1? "borderthinnosides" : StyleType == 2? "borderthintop" : StyleType == 3? "borderthinbottom" : "borderremove") + " background"+BgCol}>
-                <div className={"stat_parent totalmargin"+MarginSize}>
-                    <div className={" min-width-small bordergrey borderstyler  centered-div background"+TitleCol}>
-                        <div className="align-center size-strongtext totalmarginsml">
+            <div onClick={() => {setOpen(!open)}} className={'      border'+getColour(DisplayColour) + " " + (StyleType == 0? "borderthin" : StyleType == 1? "borderthinnosides" : StyleType == 2? "borderthintop" : StyleType == 3? "borderthinbottom" : "borderremove") + " background"+BgCol}>
+                <div className={" totalmargin"+MarginSize}>
+                    <div className={"  bordergrey borderstyler   background"+TitleCol}>
+                        <div className="align-center  ">
                             {Content}
                         </div>
                     </div>
-                    <div className="centered-div horizontalspacermed">
+                    <div className=" ">
                         {DisplayName || ""}
                     </div>
                 </div>
@@ -42,7 +42,7 @@ const GenericTabledBlockDisplay = (props: any) => {
             </div>
             <Collapse in={open}>
                 <div className={'container border'+getColour(DisplayColour)}>
-                    {ShowBorder == true && <div className={"bar background"+getColour(DisplayColour)} />}
+                    {ShowBorder == true && <div className={"background"+getColour(DisplayColour)} />}
                     <div className="content">                    
                         {displayMethod()}
                     </div>

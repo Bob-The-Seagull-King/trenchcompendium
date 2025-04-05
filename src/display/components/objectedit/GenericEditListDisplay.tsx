@@ -28,7 +28,7 @@ const GenericEditListDisplay = (props: any) => {
         <ErrorBoundary fallback={<div>Something went wrong with GenericEditListDisplay.tsx</div>}>
             <div className={"col-md-" + EditStaticType.smallwidth + " col-" + EditStaticType.widewidth} >
                 <InputGroup className={"tagboxpad"}  style={{height:"100%"}}>
-                    <Form.Select className="borderdefault borderstyler tallcentertext" defaultValue={EditStaticType.baseValue(Manager, Item)} aria-label="Default select example" onChange={e => { EditStaticType.updateValue(Manager, Item, e.target.value, updateModel, SubItem)} } >
+                    <Form.Select className=" borderstyler tallcentertext" defaultValue={EditStaticType.baseValue(Manager, Item)} aria-label="Default select example" onChange={e => { EditStaticType.updateValue(Manager, Item, e.target.value, updateModel, SubItem)} } >
                             {
                                 EditStaticType.returnOptions(Manager, Item, SubItem)
                             }

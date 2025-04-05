@@ -131,8 +131,8 @@ const ModelDisplay = (props: any) => {
             <ItemRow
                 title={"Stat Options"}
                 value={() => 
-                    <div className="maxwidth">
-                        <Form.Control className={"borderstyler bordergrey overcomeradius hovermouse maxwidth" } as="select" aria-label="Default select example"  placeholder="Member Type" >
+                    <div className="">
+                        <Form.Control className={"borderstyler bordergrey overcomeradius " } as="select" aria-label="Default select example"  placeholder="Member Type" >
                             {statchoice.map((item) => (
                                 <option key={"modeloption"+(statchoice.indexOf(item).toString())} >{ReturnStatProfileAsString(item)}</option>
                             ))}
@@ -248,7 +248,7 @@ const ModelDisplay = (props: any) => {
                     d_border={false}
                     bordertype={0}
                     d_method={() => <div className="borderthin bordergrey">
-                        <div className="size-smaller totalmarginsml">
+                        <div className="size-smaller ">
                             {returnDescription(modelcollectionObject, modelcollectionObject.Lore) /* Lore */}
                         </div>
                     </div>}/>
@@ -270,7 +270,7 @@ const ModelDisplay = (props: any) => {
                             {((equiprestrictions.length > 0) || (equiplimits.length > 0)) &&
 
                                 <div className="borderthin bordergrey">
-                                    <div className="totalmarginmed remove-margin-left">
+                                    <div className=" ">
                                         <ul className="">
                                             {equiprestrictions.map((item) => (
                                                 <li key={item} className=" nowrap">
@@ -293,7 +293,7 @@ const ModelDisplay = (props: any) => {
                             {(modelcollectionObject.EquipmentList.length > 0) &&
 
                                 <div className={'container bordergrey'}>
-                                    <div className={"bar backgroundgrey"}/>
+                                    <div className={"backgroundgrey"}/>
                                     <div className="content">
                                         <div>
                                             {modelcollectionObject.EquipmentList.map((item) => (
@@ -321,7 +321,7 @@ const ModelDisplay = (props: any) => {
                     //         {((equiprestrictions.length > 0) || (equiplimits.length > 0)) &&
                     //
                     //             <div className="borderthin bordergrey">
-                    //                 <div className="totalmarginmed remove-margin-left">
+                    //                 <div className=" ">
                     //                     <ul className="">
                     //                         {equiprestrictions.map((item) => (
                     //                             <li key={item} className=" nowrap">
@@ -344,7 +344,7 @@ const ModelDisplay = (props: any) => {
                     //         {(modelcollectionObject.EquipmentList.length > 0) &&
                     //
                     //             <div className={'container bordergrey'}>
-                    //                 <div className={"bar backgroundgrey"}/>
+                    //                 <div className={"backgroundgrey"}/>
                     //                 <div className="content">
                     //                     <div>
                     //                         {modelcollectionObject.EquipmentList.map((item) => (
@@ -379,7 +379,7 @@ const ModelDisplay = (props: any) => {
                                             d_border={false}
                                             bordertype={0}
                                             d_method={() => <div className="borderthin bordergrey">
-                                                <div className="totalmarginsml">
+                                                <div className="">
                                                     <AbilityDisplay data={item}/>
                                                 </div>
                                             </div>}/>
@@ -407,7 +407,7 @@ const ModelDisplay = (props: any) => {
                                             d_margin={"sml"}
                                             bordertype={0}
                                             d_method={() => <div className="borderthin bordergrey">
-                                                <div className="totalmarginsml">
+                                                <div className="">
                                                     <ModelUpgradeDisplay data={item}/>
                                                 </div>
                                             </div>}/>
@@ -427,7 +427,7 @@ const ModelDisplay = (props: any) => {
                             d_margin={"sml"}
                             bordertype={0}
                             d_method={() => <div className="borderthin bordergrey">
-                                <div className="totalmarginsml">
+                                <div className="">
                                     {modelcollectionObject.Models.map((item) => (
                                         <div key={"faction_rule_" + modelcollectionObject.ID + "_rule_id_" + item.ID}
                                              className="textmaxwidth">

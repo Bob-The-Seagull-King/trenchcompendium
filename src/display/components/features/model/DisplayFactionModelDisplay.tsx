@@ -63,9 +63,9 @@ const DisplayFactionModelDisplay = (props: any) => {
         <ErrorBoundary fallback={<div>Something went wrong with FactionModelDisplay.tsx</div>}>
             <div key={_keyvar}>
                 {factionmodelObject.Factions.map((item) => (
-                    <span className='smallgapright' key={item.ID}>
+                    <span className='' key={item.ID}>
                         <GenericPopup  d_colour={"grey"} titlename={item.Name + (factionmodelObject.Factions.indexOf(item) < factionmodelObject.Factions.length-1 ? ", " : "")} d_name={item.Name} d_type={""} d_method={() => 
-                            <div className="totalmarginmed">
+                            <div className="">
                                 <FactionDisplay data={item} />
                             </div>}/>
                     </span>

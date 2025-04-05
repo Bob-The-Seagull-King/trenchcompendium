@@ -134,25 +134,25 @@ const FilterRangeItem = (prop: any) => {
                     }
                 }}>
                 <Dropdown.Toggle ref={toggleRef} bsPrefix="empty" id="dropdown-basic" className="container bordergrey borderthin buttonclean">
-                    <div className="align-left-right container">
-                        <div className="backgroundBgBase maxwidth borderthin bordergrey">
-                            <div className="maxwidth align-left horizontalspacermed"> 
+                    <div className=" container">
+                        <div className="backgroundBgBase borderthin bordergrey">
+                            <div className="align-left ">
                                 {makestringpresentable(ItemFilter.Group)}
                             </div>
                         </div>
-                        <div className="backgroundBgCard borderthin bordergrey horizontalspacermed">
+                        <div className="backgroundBgCard borderthin bordergrey ">
                             <FontAwesomeIcon icon={faChevronDown}/>
                         </div>
                     </div>
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu className="" style={{ width: menuWidth }}>
-                    <div className="align-left-right totalmarginsml">
+                    <div className=" ">
                         <div>
                             <div className="colourBasicText">
                                 {"Min"}
                             </div>
-                            <div className="centered-div width-content">
+                            <div className="">
                                 <Form.Control 
                                     onChange={e => updateLower(ItemFilter, parseInt(e.target.value))} 
                                     className='bordergrey' 
@@ -160,7 +160,7 @@ const FilterRangeItem = (prop: any) => {
                                     aria-label="Text input with checkbox" 
                                     defaultValue={ItemFilter.Set_Lower}
                                     ref={lowerRef}/>
-                                <FontAwesomeIcon className="colourBasicText hovermouse horizontalspacermed" onClick={() => resetRangeLower(ItemFilter)} icon={faRefresh}/>
+                                <FontAwesomeIcon className="colourBasicText  " onClick={() => resetRangeLower(ItemFilter)} icon={faRefresh}/>
                             </div>
 
                         </div>
@@ -168,7 +168,7 @@ const FilterRangeItem = (prop: any) => {
                             <div className="colourBasicText">
                                 {"Max"}
                             </div>
-                            <div className="centered-div width-content">
+                            <div className="">
                                 <Form.Control 
                                     onChange={e => updateUpper(ItemFilter, parseInt(e.target.value))} 
                                     className='bordergrey' 
@@ -176,7 +176,7 @@ const FilterRangeItem = (prop: any) => {
                                     aria-label="Text input with checkbox" 
                                     defaultValue={ItemFilter.Set_Upper}
                                     ref={upperRef}/>
-                                <FontAwesomeIcon className="colourBasicText hovermouse horizontalspacermed" onClick={() => resetRangeUpper(ItemFilter)} icon={faRefresh}/>
+                                <FontAwesomeIcon className="colourBasicText  " onClick={() => resetRangeUpper(ItemFilter)} icon={faRefresh}/>
                             </div>
                         </div>
 
@@ -229,13 +229,13 @@ const FilterTagSet = (prop: any) => {
                     }
                 }}>
                 <Dropdown.Toggle ref={toggleRef} bsPrefix="empty" id="dropdown-basic" className="container bordergrey borderthin buttonclean">
-                    <div className="align-left-right container">
-                        <div className="backgroundBgBase maxwidth borderthin bordergrey">
-                            <div className="maxwidth align-left horizontalspacermed"> 
+                    <div className=" container">
+                        <div className="backgroundBgBase borderthin bordergrey">
+                            <div className="align-left ">
                                 {ItemName}
                             </div>
                         </div>
-                        <div className="backgroundBgCard borderthin bordergrey horizontalspacermed">
+                        <div className="backgroundBgCard borderthin bordergrey ">
                             <FontAwesomeIcon icon={faChevronDown}/>
                         </div>
                     </div>
@@ -245,7 +245,7 @@ const FilterTagSet = (prop: any) => {
                     {ItemFilter.map((item) => (
                         <div key={item.TagType.Name}>
                             {ItemFilter.indexOf(item) != 0 &&
-                            <div className="bar backgroundgrey maxwidth"/>
+                            <div className="backgroundgrey "/>
                             }
                             <TagSelectItem  data={item}/>
                         </div>
@@ -279,14 +279,14 @@ const TagSelectItem = (prop : any) => {
     }
 
     return (
-        <div className=" align-left-right ">
-            <div className="horizontalspacermed">
+        <div className="  ">
+            <div className="">
                 {makestringpresentable(ItemFilter.TagType.Name)}  
             </div>
-            <div className="size-subtitle horizontalspacermed" key={keyval}>
-                <FontAwesomeIcon icon={faSquareXmark} onClick={() => SetToFalse()} className={"horizontalspacerxsm colorred" + (((ItemFilter.TagType.DoInclude == false) && (ItemFilter.TagType.IsActive == true))? "" : " lowopacity" )}/>
-                <FontAwesomeIcon icon={faSquareMinus} onClick={() => SetToOff()} className={"horizontalspacerxsm colorgrey" + (((ItemFilter.TagType.IsActive == false))? "" : " lowopacity" )}/>
-                <FontAwesomeIcon icon={faSquarePlus} onClick={() => SetToTrue()} className={"horizontalspacerxsm colorgreen" + (((ItemFilter.TagType.DoInclude == true) && (ItemFilter.TagType.IsActive == true))? "" : " lowopacity" )}/>
+            <div className="size-subtitle " key={keyval}>
+                <FontAwesomeIcon icon={faSquareXmark} onClick={() => SetToFalse()} className={" " + (((ItemFilter.TagType.DoInclude == false) && (ItemFilter.TagType.IsActive == true))? "" : " lowopacity" )}/>
+                <FontAwesomeIcon icon={faSquareMinus} onClick={() => SetToOff()} className={" colorgrey" + (((ItemFilter.TagType.IsActive == false))? "" : " lowopacity" )}/>
+                <FontAwesomeIcon icon={faSquarePlus} onClick={() => SetToTrue()} className={" " + (((ItemFilter.TagType.DoInclude == true) && (ItemFilter.TagType.IsActive == true))? "" : " lowopacity" )}/>
             </div>
         </div>
     )
@@ -311,13 +311,13 @@ const FilterMiscSet = (prop: any) => {
                     }
                 }}>
                 <Dropdown.Toggle ref={toggleRef} bsPrefix="empty" id="dropdown-basic" className="container bordergrey borderthin buttonclean">
-                    <div className="align-left-right container">
+                    <div className=" container">
                         <div className="backgroundBgBase maxwidth borderthin bordergrey">
-                            <div className="maxwidth align-left horizontalspacermed"> 
+                            <div className="align-left ">
                                 {ItemName}
                             </div>
                         </div>
-                        <div className="backgroundBgCard borderthin bordergrey horizontalspacermed">
+                        <div className="backgroundBgCard borderthin bordergrey ">
                             <FontAwesomeIcon icon={faChevronDown}/>
                         </div>
                     </div>
@@ -327,7 +327,7 @@ const FilterMiscSet = (prop: any) => {
                     {ItemFilter.map((item) => (
                         <div key={item.Name}>
                             {ItemFilter.indexOf(item) != 0 &&
-                            <div className="bar backgroundgrey maxwidth"/>
+                            <div className="backgroundgrey"/>
                             }
                             <TagSelectMisc  data={item}/>
                         </div>
@@ -361,14 +361,14 @@ const TagSelectMisc = (prop : any) => {
     }
 
     return (
-        <div className=" align-left-right ">
-            <div className="horizontalspacermed">
+        <div className="  ">
+            <div className="">
                 {makestringpresentable(ItemFilter.Name)}  
             </div>
-            <div className="size-subtitle horizontalspacermed" key={keyval}>
-                <FontAwesomeIcon icon={faSquareXmark} onClick={() => SetToFalse()} className={"horizontalspacerxsm colorred" + (((ItemFilter.DoInclude == false) && (ItemFilter.IsActive == true))? "" : " lowopacity" )}/>
-                <FontAwesomeIcon icon={faSquareMinus} onClick={() => SetToOff()} className={"horizontalspacerxsm colorgrey" + (((ItemFilter.IsActive == false))? "" : " lowopacity" )}/>
-                <FontAwesomeIcon icon={faSquarePlus} onClick={() => SetToTrue()} className={"horizontalspacerxsm colorgreen" + (((ItemFilter.DoInclude == true) && (ItemFilter.IsActive == true))? "" : " lowopacity" )}/>
+            <div className="size-subtitle " key={keyval}>
+                <FontAwesomeIcon icon={faSquareXmark} onClick={() => SetToFalse()} className={" " + (((ItemFilter.DoInclude == false) && (ItemFilter.IsActive == true))? "" : " lowopacity" )}/>
+                <FontAwesomeIcon icon={faSquareMinus} onClick={() => SetToOff()} className={" colorgrey" + (((ItemFilter.IsActive == false))? "" : " lowopacity" )}/>
+                <FontAwesomeIcon icon={faSquarePlus} onClick={() => SetToTrue()} className={" " + (((ItemFilter.DoInclude == true) && (ItemFilter.IsActive == true))? "" : " lowopacity" )}/>
             </div>
         </div>
     )
@@ -383,7 +383,7 @@ const FilterMiscItem = (prop: any) => {
         <ErrorBoundary fallback={<div>Something went wrong with FilterItems.tsx</div>}>
         <div className="col">
             <div className="centerPosition">
-                <div className={"hovermouse quartermargin borderstyler basestructure filterbuttonitem" + (_currentstate == "" ? " bordergrey backgroundgrey" : _currentstate == "positive" ? " subbordergreen subbackgroundgreen" : " subborderred subbackgroundred")} onClick={() => SwitchStates(ItemFilter, returnactivetext)}>
+                <div className={" quartermargin borderstyler basestructure filterbuttonitem" + (_currentstate == "" ? " bordergrey backgroundgrey" : _currentstate == "positive" ? " " : " sub ")} onClick={() => SwitchStates(ItemFilter, returnactivetext)}>
                     {makestringpresentable(ItemFilter.Name)}
                 </div>
             </div>

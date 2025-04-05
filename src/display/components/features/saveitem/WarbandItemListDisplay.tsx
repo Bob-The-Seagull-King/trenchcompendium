@@ -117,7 +117,7 @@ const WarbandItemListDisplay = (prop: any) => {
                                     </div>
                                     <div className="col-md-2 col-6">
                                         <div className="basestructure generalbuttonbox" style={{width:"100%",alignItems:"center",height:"4em"}}>
-                                            <div style={{display:"flex",width:"fit-content",alignItems:"flex-end"}} onClick={() => NewItem()} className="hovermouse ">
+                                            <div style={{display:"flex",width:"fit-content",alignItems:"flex-end"}} onClick={() => NewItem()} className=" ">
                                                 <FontAwesomeIcon icon={faPerson} className="pageaccestext"/>
                                                 <h1 className="pageaccestext" style={{whiteSpace:"nowrap"}}>
                                                     Create
@@ -148,10 +148,10 @@ const WarbandItemListDisplay = (prop: any) => {
                     </div>
 
                     <div style={{padding:"0.5em"}}>
-                        <div className='row row-cols-1 subborderstyler subborderdefault '>
+                        <div className='row row-cols-1 subborderstyler  '>
                                 {_allItems.length < 1 &&
                                     <div className="col p-0" key={"packdisplaynone"}>
-                                        <div className='filterbox contentpackbasecontainer contentpackcontainer subborderstyler subborderdefault' style={{justifyContent:"center",alignItems:"center"}}>
+                                        <div className='filterbox contentpackbasecontainer contentpackcontainer subborderstyler ' style={{justifyContent:"center",alignItems:"center"}}>
                                             <h1 className="subtletext tagboxpad" >No Items Available</h1>
                                         </div>
                                     </div>

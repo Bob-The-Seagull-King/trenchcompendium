@@ -31,7 +31,7 @@ const ContentsComponentLink: React.FC<ContentsCollection> = (props: any) => {
 
     function ReturnItemLink(_obj : ContentsLink) {
         return (
-            <div className="hovermouse" onClick={() => NavigateHome(_obj.route)}>
+            <div className="" onClick={() => NavigateHome(_obj.route)}>
                 {"- " + _obj.name}
             </div>
         )
@@ -42,7 +42,7 @@ const ContentsComponentLink: React.FC<ContentsCollection> = (props: any) => {
             <div>
             {props.showheader == false &&
                 <div className="  bordergrey borderstyler backgroundBgCard">
-                    <div className="totalmarginsml">
+                    <div className="">
                         {props.listofcontents.map((item : ContentsLink) => 
                             <div key={item.route}>
                                 {ReturnItemLink(item)}
@@ -62,7 +62,7 @@ const ContentsComponentLink: React.FC<ContentsCollection> = (props: any) => {
                     d_margin={"sml"}
                     d_method={() => 
                     <div className="bordergrey borderthin">
-                        <div className="totalmarginsml">
+                        <div className="">
                         {props.listofcontents.map((item : ContentsLink) => 
                             <div key={item.route}>
                                 {ReturnItemLink(item)}

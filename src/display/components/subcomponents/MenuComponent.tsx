@@ -20,7 +20,7 @@ const MenuComponent = (props: any) => {
 
     return (
         <ErrorBoundary fallback={<div>Something went wrong with MenuDisplay.tsx</div>}>
-            <div className="hovermouse font-seriftext bordergrey borderstyler backgroundBgCard main-menu-item-big" onClick={()=>NavigateHome()}>
+            <div className=" font-seriftext bordergrey borderstyler backgroundBgCard main-menu-item-big" onClick={()=>NavigateHome()}>
                 {Title}
             </div>
         </ErrorBoundary>
