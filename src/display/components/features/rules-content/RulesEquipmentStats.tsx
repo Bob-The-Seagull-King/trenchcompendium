@@ -47,7 +47,7 @@ const RulesEquipmentStats: React.FC<RulesEquipmentStatsProps> = ({ abilityObject
 
     return (
         <>
-            {statlist &&
+            {statlist && (RangeVal != "" || (HandValMelee != "" || HandValRange != "") || abilityObject.Modifiers.length > 0) &&
                 <table className={'rules-equipment-stats-table'}>
                     <tbody>
                         {RangeVal != "" &&

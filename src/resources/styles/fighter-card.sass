@@ -4,16 +4,17 @@
 //
 
 .fighter-card
-    border: 1px solid var(--colour_border)
     margin-bottom: 30px
+    background-color: $color-bg-2
 
     .fighter-card-title
         padding: 5px 10px
-        font-size: 22px
-        background-color: $color-bg-inv
-        color: $color-text-inv
-
         margin-bottom: 10px
+
+        font-size: $font-size-h3
+        background-color: $color-highlight-bg
+        font-family: $font-headline
+
 
     .fighter-card-meta
         padding: 5px 10px
@@ -21,7 +22,6 @@
     .fighter-card-meta-above
         margin-bottom: 15px
 
-    .fighter-card-meta-below
 
     .fighter-meta-entry-simple
         display: flex
@@ -47,10 +47,8 @@
                 font-weight: bold
             .stat-value
                 text-align: center
-
-                //font-weight: bold
+                background-color: $color-bg-3
                 padding: 10px
-                border: 1px solid var(--colour_border)
 
 
     .fighter-card-collapse
@@ -59,19 +57,28 @@
             position: relative
             display: flex
             justify-content: space-between
-            padding: 5px 10px
+            padding: 15px 15px
 
-            font-weight: bold
             font-size: 18px
-            background-color: var(--colour_bg_inverted-75)
-            color: $color-text-inv
+            background-color: $color-bg-2
             cursor: pointer
 
+            border-bottom: 1px solid $color-bg-1
+
+
+        &:first-of-type .fighter-card-collapse-title
+            border-top: 1px solid $color-bg-1
+
+
+
         .fighter-card-collapse-content
-            padding: 10px
+            padding: 20px 15px 20px 15px
+            background-color: $color-bg-3
 
+            .ability-name,
+            .upgrade-name
+                font-weight: bold
+
+
+    // when multiple texts are inside
     .fighter-card-collapse.has-children
-
-            > .fighter-card-collapse-content
-                padding: 0px
-                border-left: 10px solid var(--colour_border)

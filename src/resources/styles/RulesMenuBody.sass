@@ -1,6 +1,56 @@
+// // // // //
+//
+// Menu Body
+//
+
+
+// Menu in the main content section
+.main-content
+
+    .rules-menu-body
+        margin-top: 30px
+
+// global menu body
 .rules-menu-body
 
-    .home-link
+    .rules-menu-header
+        position: relative
+
+        padding-left: 45px
+        background-color: $color-highlight-bg
+        display: flex
+
+        .home-link
+            position: absolute
+            top: 0
+            left: 0
+            z-index: 2
+
+            display: block
+            height: 45px
+            width: 45px
+
+            i, svg
+                position: absolute
+                top: 50%
+                left: 50%
+                transform: translate(-50%, -50%)
+
+        .compendium-link
+            position: relative
+            height: 45px
+            line-height: 45px
+            padding-left: 15px
+
+            &:before
+                content: ""
+                display: block
+                width: 1px
+                position: absolute
+                top: 15px
+                bottom: 15px
+                left: 0px
+                background-color: $color-text-muted
 
     .menu-list
         list-style-type: none
@@ -16,13 +66,13 @@
 
     .menu-list-item-anchor // all anchor tags
         display: block
-        background-color: $color-bg
+        background-color: $color-bg-1
         color: $color-text
         text-decoration: none
         transition: color .2s ease
 
         &:hover
-            color: $red-tc
+            color: $color-highlight-text
 
     .collapse-chevron-wrap
         position: absolute
@@ -37,23 +87,24 @@
         transition: color .2s ease, background-color .2s ease
 
         &:hover
-            background-color: var(--colour_bg_inverted-25)
-            color: $red-tc
+            color: $color-highlight-text
 
     .menu-list.level-0
         > li
             > a
                 padding: 10px
-                background-color: var(--colour_bg_inverted-50)
+                background-color: $color-bg-1
 
     .menu-list.level-1
         > li
             > a
                 padding: 10px 10px 10px 15px
-                background-color: var(--colour_bg_inverted-25)
+                background-color: $color-bg-2
 
     .menu-list.level-2
         > li
             > a
                 padding: 10px 10px 10px 25px
+                background-color: $color-bg-3
+
 

@@ -41,7 +41,7 @@ const RulesEquipmentMain = (props: any) => {
 
             {/* Rules Text */}
             {abilityObject.Description.length > 0 &&
-                <div className={'text-rules'}>
+                <div className={'text-element text-rules'}>
                     <div className={'text-label'}>
                         {'Rules'}
                     </div>
@@ -51,7 +51,7 @@ const RulesEquipmentMain = (props: any) => {
 
             {/* Lore Text */}
             {abilityObject.Lore.length > 0 &&
-                <div className={'text-lore'}>
+                <div className={'text-element text-lore'}>
                     <div className={'text-label'}>
                         {'Lore'}
                     </div>

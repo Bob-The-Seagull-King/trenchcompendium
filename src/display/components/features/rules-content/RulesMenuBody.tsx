@@ -5,6 +5,7 @@ import { ErrorBoundary } from "react-error-boundary";
 
 // Font Awesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {faChevronLeft} from '@fortawesome/free-solid-svg-icons'
 import { useGlobalState } from '../../../../utility/globalstate'
 import { useNavigate } from 'react-router-dom';
 import GenericCollapsableBlockDisplay from '../../../components/generics/GenericCollapsableBlockDisplay';
@@ -248,6 +249,56 @@ const RulesMenuBody: React.FC<IControllerProp> = (prop) => {
             ]
         },
         {
+            title: "Scenarios",
+            slug: "scenarios",
+            children: [
+                {
+                    title: "Claim No Man’s Land",
+                    slug: "claim-no-mans-land",
+                },
+                {
+                    title: "Relic Hunt",
+                    slug: "relic-hunt",
+                },
+                {
+                    title: "Hunt for Heroes",
+                    slug: "hunt-for-heroes",
+                },
+                {
+                    title: "Trench Warfare",
+                    slug: "trench-warfare",
+                },
+                {
+                    title: "Hunt for Heroes",
+                    slug: "hunt-for-heroes",
+                },
+                {
+                    title: "Great War",
+                    slug: "great-war",
+                },
+                {
+                    title: "Supply Raid",
+                    slug: "supply-raid",
+                },
+                {
+                    title: "Armoured Train",
+                    slug: "armoured-train",
+                },
+                {
+                    title: "Storming the Shores",
+                    slug: "storming-the-shore",
+                },
+                {
+                    title: "Dragon Hunt",
+                    slug: "dragon-hunt",
+                },
+                {
+                    title: "Random Scenario Generator",
+                    slug: "random-scenario-generator",
+                },
+            ]
+        },
+        {
             title: "Campaign Rules",
             slug: "campaign-rules",
             children: [
@@ -304,8 +355,14 @@ const RulesMenuBody: React.FC<IControllerProp> = (prop) => {
     return (
         <ErrorBoundary fallback={<div>Something went wrong with RulesMenuBody.tsx</div>}>
             <div className={'rules-menu-body'}>
-                <div onClick={() => NavigateOut()} className={'home-link'}>
-                    {"Home"}
+                <div className={'rules-menu-header'}>
+                    <div onClick={() => NavigateOut()} className={'home-link'}>
+                        <FontAwesomeIcon icon={faChevronLeft} />
+                    </div>
+
+                    <div onClick={() => navigate('/compendium/')} className={'compendium-link'}>
+                        {'Rules Compendium'}
+                    </div>
                 </div>
 
                 <RulesMenuItem

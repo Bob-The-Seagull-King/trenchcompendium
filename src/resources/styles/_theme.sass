@@ -38,6 +38,27 @@ body[data-theme='light']
     --colour_highlight_text: $white
 
 
+    // v2 Styles
+
+    // BG Color Hierarchy
+    --color_bg_lvl_minus_1: #fff
+    --color_bg_lvl_0: #eee
+    --color_bg_lvl_1: #d9d9d9
+    --color_bg_lvl_2: #ccc
+    --color_bg_lvl_3: #bbb
+
+    // Highlights
+    --color_highlight_bg: #fa1c23
+    --color_highlight: #d01317
+    --color_highlight_text: #9b1518
+
+    // Fonts
+    --color_font_main: #000
+    --color_font_muted: #2a2a2a
+
+    // Shadows
+    --box_shadow_1: 0px 0px 5px -1px rgba(0,0,0,0.45)
+
 // // // // //
 // Dark Theme
 body[data-theme='dark']
@@ -71,6 +92,27 @@ body[data-theme='dark']
 
     --colour_highlight_text: #000000
 
+    // v2 Styles
+
+    // BG Color Hierarchy
+    --color_bg_lvl_minus_1: #000
+    --color_bg_lvl_0: #111
+    --color_bg_lvl_1: #2a2a2a
+    --color_bg_lvl_2: #333
+    --color_bg_lvl_3: #404040
+
+    // Highlights
+    --color_highlight_bg: #9b1518
+    --color_highlight: #d01317
+    --color_highlight_text: #fa1c23
+
+    // Fonts
+    --color_font_main: #fff
+    --color_font_muted: #ddd
+
+    // Shadows
+    --box_shadow_1: 0px 0px 6px -1px rgba(0,0,0,0.8)
+
 // // // // //
 // set sass variables to use variable colors
 // - This makes wirting styles much easier
@@ -84,11 +126,30 @@ $link-color: var(--colour_red_main)
 $link-color-hover: var(--colour_red_main-dark)
 
 
+// v2 colors:
+$color-text: var(--color_font_main)
+$color-text-muted: var(--color_font_muted)
+
+$color-highlight-bg: var(--color_highlight_bg)
+$color-highlight: var(--color_highlight)
+$color-highlight-text: var(--color_highlight_text)
+
+$color-bg-m1: var(--color_bg_lvl_minus_1)
+$color-bg-0: var(--color_bg_lvl_0)
+$color-bg-1: var(--color_bg_lvl_1) // main BG color
+$color-bg-2: var(--color_bg_lvl_2)
+$color-bg-3: var(--color_bg_lvl_3)
+
+$box-shadow-1: var(--box_shadow_1)
+
+
+
+
 // // // // //
 // global styles based on theme settings
 body[data-theme]
-    background-color: $color-bg
-    color: var(--colour_basic_text)
+    background-color: $color-bg-1
+    color: $color-text
     font-family: $font-paragraph
 
     margin: 0
@@ -102,4 +163,7 @@ body[data-theme]
 // // // // //
 // Bootstrap color theming
 .offcanvas
+    background-color: $color-bg
+
+.modal-content
     background-color: $color-bg

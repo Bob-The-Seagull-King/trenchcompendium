@@ -70,14 +70,14 @@ const FilterableCompendiumDisplay = (prop: any) => {
     // Return result -----------------------------
     return (
         <ErrorBoundary fallback={<div>Something went wrong with FilteredDisplayCompendium.tsx</div>}>
-            <div className="col-lg-6 col-md-12">
+            <>
                 <div>
                     {ReturnFilters()}
                 </div>
                 <div  key={_keyval}>
                     {ReturnItems()}
                 </div>
-            </div>
+            </>
         </ErrorBoundary>
     )
     // -------------------------------------------

@@ -12,11 +12,11 @@ const OptionSetStaticDisplay = (props: any) => {
     return (
         
         <ErrorBoundary fallback={<div>Something went wrong with OptionSetStaticDisplay.tsx</div>}>
-            <div className="col">
+            <>
                 {OptionSet.map((item) => (
                     <SingleOptionSetDisplay key={item.RefID} data={item} />
                 ))}
-            </div>
+            </>
         </ErrorBoundary>
     )
 }

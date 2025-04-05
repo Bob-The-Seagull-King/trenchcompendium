@@ -8,16 +8,16 @@
     border-radius: 0
 
     .modal-body
-        padding-top: 5px
+        padding: 0
 
     .rules-overlay-head
         position: relative
-        margin-bottom: 5px
+        padding: 5px 15px
+        background-color: $color-highlight-bg
+        font-size: $font-size-h3
+        font-family: $font-headline
 
         .rule-name
-            padding: 10px 20px 10px 0
-            font-size: 20px
-            font-weight: bold
 
         .rules-overlay-close
             position: absolute
@@ -28,3 +28,10 @@
             cursor: pointer
 
     .rules-overlay-content
+        padding: 20px 15px
+        font-size: 14px
+        background-color: $color-bg-2
+
+        .text-element
+            &:not(last-of-type)
+                margin-bottom: 15px

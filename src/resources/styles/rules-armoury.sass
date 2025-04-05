@@ -1,30 +1,29 @@
 .armoury-section
-    border: 1px solid var(--colour_border)
     margin-top: 30px
     margin-bottom: 30px
 
     .armoury-headline
-        font-weight: bold
-        font-size: 18px
-        padding: 5px 10px
-        background-color: $color-bg-inv
-        color: $color-text-inv
+        padding: 5px 15px
+        background-color: $color-highlight-bg
+        font-size: $font-size-h3
+        font-family: $font-headline
 
     .armoury-content
         font-size: 14px
+        background-color: $color-bg-2
 
         .armoury-element
             display: grid
             grid-template-columns: 2fr 2fr
 
             &:not(:last-of-type)
-                border-bottom: 1px solid var(--colour_border)
+                border-bottom: 1px solid $color-bg-3
 
         .armoury-element-cell
-            padding: 5px 10px
+            padding: 10px 15px
 
             &:first-of-type
-                border-right: 1px solid var(--colour_border)
+                border-right: 1px solid $color-bg-3
 
             .armoury-element-price
             .armoury-element-restriction

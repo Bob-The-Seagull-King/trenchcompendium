@@ -19,9 +19,6 @@ import GenericLinkedCollapsableBlockDisplay from '../generics/GenericLinkedColla
 
 interface IControllerProp {
     controller : ControllerController; // The controller being passed through
-    closeFunc : any;
-    showState : any;
-    responseshow : string;
 }
 
 const MenuBody: React.FC<IControllerProp> = (prop) => {

@@ -10,9 +10,11 @@ import { Route, Link, Routes, useLocation } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import { getRouteName } from "../../utility/functions"
 
-// Font Aesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars, faGear, faHouse, faSquare } from '@fortawesome/free-solid-svg-icons'
+import {faBars, faGear, faHouse, faMagnifyingGlass, faSquare} from '@fortawesome/free-solid-svg-icons'
+import logo from '../../resources/images/trench-companion-logo-white-v2.png'
+
+
 
 // Component
 import { ControllerController } from '../../classes/_high_level_controllers/ControllerController';
@@ -20,30 +22,27 @@ import { ControllerController } from '../../classes/_high_level_controllers/Cont
 interface IControllerProp {
     controller : ControllerController; // The controller being passed through
     showstate : any;
-    showsettings : any;
 }
 
 const BaseHeader: React.FC<IControllerProp> = (prop: any) => {
         
     const handleShow = () => prop.showstate();
-    const handleShowSettings = () => prop.showsettings();
 
     // Return result -----------------------------
     return (
         
         <ErrorBoundary fallback={<div>Something went wrong with BaseHeader.tsx</div>}>
-            <div className="align-left-right">
-                <Button bsPrefix="empty" className="lonebutton" onClick={handleShow}>
+            <>
+                <Button className="open-offcanvas-nav-btn" onClick={handleShow}>
                     <FontAwesomeIcon icon={faBars} className=""/>
                 </Button>
-                <div className="font-ornamental">
-                    <div className="size-section d-xl-flex d-lg-flex d-md-flex d-none">{getRouteName(useLocation().pathname)}</div>
-                    <div className="size-subtitle d-flex d-lg-none d-md-none d-xl-none">{getRouteName(useLocation().pathname)}</div>
+                <div className="logo-wrap">
+                    <img src={logo} alt="Trench Companion Logo" className={'logo'}/>
                 </div>
-                <Button bsPrefix="empty" className="lonebutton" onClick={handleShowSettings}>
-                    <FontAwesomeIcon icon={faGear} className=""/>
+                <Button className="search-button">
+                    <FontAwesomeIcon icon={faMagnifyingGlass} className=""/>
                 </Button>
-            </div>
+            </>
         </ErrorBoundary>
 
     )

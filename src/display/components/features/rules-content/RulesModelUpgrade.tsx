@@ -19,6 +19,10 @@ const RulesModelUpgrade: React.FC<RulesModelUpgradeProps> = ({ item }) => {
 
     return (
         <>
+            <span className={'upgrade-name'}>
+               {abilityObject.UpgradeObject.Name + ": "}
+            </span>
+
             <UpgradeDisplay data={abilityObject.UpgradeObject}/>
 
             {abilityObject.Cost != 0 &&

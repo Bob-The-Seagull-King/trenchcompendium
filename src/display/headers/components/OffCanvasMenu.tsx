@@ -10,6 +10,8 @@ import { faClose} from '@fortawesome/free-solid-svg-icons'
 import { useNavigate } from 'react-router-dom';
 import { ControllerController } from '../../../classes/_high_level_controllers/ControllerController';
 import MenuBody from '../../components/subcomponents/MenuBody';
+import RulesMenuBody from "../../components/features/rules-content/RulesMenuBody";
+import logo from "../../../resources/images/trench-companion-logo-white-v2.png";
 
 interface IControllerProp {
     controller : ControllerController; // The controller being passed through
@@ -41,14 +43,17 @@ const OffcanvasMenu: React.FC<IControllerProp> = (prop) => {
             <Offcanvas className="offcanvas-main-menu" show={show} onHide={handleClose} responsive={prop.responseshow}>
                 <Offcanvas.Header className="">
                     <Offcanvas.Title className="">
-                        Trench Compendium v2.2
+                        <div className={'logo-wrap'}>
+                            <img src={logo} alt="Trench Companion Logo" className={'logo'}/>
+                        </div>
+
                         <div className="offcanvas-close" onClick={handleClose}>
-                            <FontAwesomeIcon icon={faClose} className=""/>
+                        <FontAwesomeIcon icon={faClose} className=""/>
                         </div>
                     </Offcanvas.Title>
                 </Offcanvas.Header>
                 <Offcanvas.Body bsPrefix="empty" className="">
-                    <MenuBody controller={prop.controller} closeFunc={prop.closeFunc} responseshow={prop.responseshow} showState={prop.showState}/>
+                    <RulesMenuBody controller={prop.controller}/>
                 </Offcanvas.Body>
             </Offcanvas>
         </ErrorBoundary>

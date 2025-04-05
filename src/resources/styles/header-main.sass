@@ -1,14 +1,69 @@
+// // // // //
+//
+// Header Styles
+//
+
+$header_height: 55
+$header_logo_height: 25
+$header_logo_padding: ($header_height - $header_logo_height) / 2
+
+
 .header-main-spacer
     width: 100%
-    height: 55px
+    height: $header_height + px
 
 .header-main
-    color: $color-text
-    background-color: $color-bg
-    padding: 5px 15px
+    position: fixed
+    top: 0
+    left: 0
+    right: 0
+    z-index: 100
 
-    button
+    display: flex
+    justify-content: space-between
+
+    color: $color-text
+    background-color: $color-bg-1
+
+    box-shadow: $box-shadow-1
+
+    .open-offcanvas-nav-btn
         background-color: transparent
         color: currentColor
         font-size: 24px
         border: none
+        padding: 10px
+        margin-left: 5px
+        height: $header_height + px
+
+    .search-button
+        background-color: transparent
+        color: currentColor
+        font-size: 24px
+        border: none
+        padding: 10px
+        margin-right: 5px
+        height: $header_height + px
+
+    .logo-wrap
+        padding: $header_logo_padding + px 5px
+        display: flex
+        justify-items: center
+        justify-content: center
+        height: $header_height + px
+
+
+        .logo
+            height: $header_logo_height + px
+            width: auto
+            display: block
+
+        @media(max-width: 575px)
+            flex-direction: column
+            .logo
+                max-width: calc(100vw - 150px)
+                height: auto
+
+        @media(max-width: 450px)
+            .logo
+                max-width: calc(100vw - 130px)

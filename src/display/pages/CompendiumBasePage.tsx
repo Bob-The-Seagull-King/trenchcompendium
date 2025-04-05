@@ -63,7 +63,7 @@ const CompendiumBasePage: React.FC<IControllerProp> = (prop: any) => {
     // Return result -----------------------------
     return (
         <ErrorBoundary fallback={<div>Something went wrong with BaseDisplayCompendium.tsx</div>}>
-            <div className="col-lg-6 col-md-12">
+            <>
                 <div>
                     {/*<div className="colourdefault font-seriftext size-section">*/}
                     <h1 className="">
@@ -89,7 +89,7 @@ const CompendiumBasePage: React.FC<IControllerProp> = (prop: any) => {
                     </div>
                 </div>
                 <div className="verticalspacermed"/>
-            </div>
+            </>
         </ErrorBoundary>
     )
     // -------------------------------------------

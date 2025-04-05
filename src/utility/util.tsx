@@ -118,9 +118,9 @@ export function returnDescription(baseObject: any, objectArray : any[]) {
     return (
         <>
             {objectArray.map((item) => (
-                <p key={"descriptionDisplay"} className={"description-element"}>
+                <span key={"descriptionDisplay"} className={"description-element"}>
                     <AdvancedDescriptionItemDisplay data={item} parent={baseObject}/>
-                </p>
+                </span>
             ))}
         </>
     )

@@ -24,6 +24,8 @@ import RulesModelDisplayCollapse from '../../../components/features/rules-conten
 import ItemRow from '../../../components/subcomponents/description/ItemRow';
 import {FactionModelRelationship} from "../../../../classes/relationship/faction/FactionModelRelationship";
 import RulesModelUpgrade from "./RulesModelUpgrade";
+import RulesModelDisplayAbility from "./RulesModelDisplayAbility";
+import AdvancedDescriptionItemDisplay from "../../subcomponents/description/AdvancedDescriptionItemDisplay";
 
 const RulesModelDisplay = (props: any) => {
     const factionmodelObject: FactionModelRelationship = props.data
@@ -200,7 +202,7 @@ const RulesModelDisplay = (props: any) => {
 
     return (
         <ErrorBoundary fallback={<div>Something went wrong with ModelDisplay.tsx</div>}>
-            <div className='fighter-card' key={_keyvar}>
+            <section className='fighter-card' key={_keyvar}>
                 <div className="fighter-card-title">
                     {modelcollectionObject.Name}
                 </div>
@@ -219,97 +221,16 @@ const RulesModelDisplay = (props: any) => {
                             Availability:
                         </span>
                         <span className="fighter-meta-value">
-                            {factionmodelObject.Minimum.toString() + "-"+ factionmodelObject.Maximum.toString()}
+                            {factionmodelObject.Minimum.toString() + "-" + factionmodelObject.Maximum.toString()}
                         </span>
                     </div>
                 </div>
-
 
                 <div className="fighter-card-stats">
                     {ReturnStats(modelcollectionObject.Stats)  /* Stats */}
                 </div>
 
-                {/* Abilities */}
-                {modelcollectionObject.Abilities.length > 0 &&
-                    <RulesModelDisplayCollapse
-                        name={"Abilities"}
-                        state={false}
-                        has_children={modelcollectionObject.Abilities.length > 0}
-                        method={() => <>
-                            {modelcollectionObject.Abilities.map((item) => (
-                                <RulesModelDisplayCollapse
-                                    key={"model_ability_" + modelcollectionObject.ID + "_ability_id_" + item.ID}
-                                    name={item.Name}
-                                    state={true}
-                                    method={() => <>
-                                        <AbilityDisplay data={item} />
-                                    </>
-                                    }
-                                />
-                            ))}
-                        </>
-                        }
-                    />
-                }
-
-                {/* Equipment Rules */}
-                {modelcollectionObject.Description &&
-                    <RulesModelDisplayCollapse
-                        name={"Equipment"}
-                        state={false}
-                        method={() => <>
-                            {returnDescription(modelcollectionObject, modelcollectionObject.Description)}
-                        </>
-                        }
-                    />
-                }
-
-                {/* Upgrades */}
-                {modelcollectionObject.UpgradeList.length > 0 &&
-                    <RulesModelDisplayCollapse
-                        name={"Upgrades"}
-                        state={false}
-                        has_children={modelcollectionObject.UpgradeList.length > 0}
-                        method={() => <>
-                            {modelcollectionObject.UpgradeList.map((item) => (
-                                <RulesModelDisplayCollapse
-                                    key={"model_upgrade_" + modelcollectionObject.ID + "_upgrade_id_" + item.ID}
-                                    name={item.UpgradeObject.Name}
-                                    state={true}
-                                    method={() => <>
-                                        <RulesModelUpgrade item={item}/>
-                                    </>
-                                    }
-                                />
-                            ))}
-                        </>
-                        }
-                    />
-                }
-
-                {/* Lore Text */}
-                {modelcollectionObject.Lore &&
-                    <RulesModelDisplayCollapse
-                        name={"Lore"}
-                        state={false}
-                        method={() => <>
-                            {returnDescription(modelcollectionObject, modelcollectionObject.Lore)}
-                        </>
-                        }
-                    />
-                }
-
                 <div className="fighter-card-meta fighter-card-meta-below">
-                    <div className="fighter-meta-entry-simple fighter-base">
-                        <span className="fighter-meta-label">
-                            Base:
-                        </span>
-                        <span className="fighter-meta-value">
-                            {/* @TODO: @Bob: How do we connect a base option like with the Lion of Jabir? Basically it should just be the string "[Option1]/[Option2]" */}
-                            {modelcollectionObject.Stats.base + "mm"}
-                        </span>
-                    </div>
-
                     <div className="fighter-meta-entry-simple fighter-keywords">
                         <span className="fighter-meta-label">
                             Keywords:
@@ -330,8 +251,85 @@ const RulesModelDisplay = (props: any) => {
                             )) /* Keywords */}
                         </span>
                     </div>
+
+                    <div className="fighter-meta-entry-simple fighter-base">
+                        <span className="fighter-meta-label">
+                            Base:
+                        </span>
+                        <span className="fighter-meta-value">
+                            {/* @TODO: @Bob: How do we connect a base option like with the Lion of Jabir? Basically it should just be the string "[Option1]/[Option2]" */}
+                            {modelcollectionObject.Stats.base + "mm"}
+                        </span>
+                    </div>
                 </div>
-            </div>
+
+                <div className={'fighter-card-collapse-wrap'}>
+                    {/* Abilities */}
+                    {modelcollectionObject.Abilities.length > 0 &&
+                        <RulesModelDisplayCollapse
+                            name={"Abilities"}
+                            state={false}
+                            has_children={modelcollectionObject.Abilities.length > 0}
+                            method={() => <>
+                                {modelcollectionObject.Abilities.map((item) => (
+                                    <React.Fragment
+                                        key={"model_ability_" + modelcollectionObject.ID + "_ability_id_" + item.ID}>
+                                        <RulesModelDisplayAbility data={item}/>
+                                    </React.Fragment>
+                                ))}
+                            </>
+                            }
+                        />
+                    }
+
+                    {/* Equipment Rules */}
+                    {modelcollectionObject.Description &&
+                        <RulesModelDisplayCollapse
+                            name={"Equipment"}
+                            state={false}
+                            method={() => <>
+                                {returnDescription(modelcollectionObject, modelcollectionObject.Description)}
+                            </>
+                            }
+                        />
+                    }
+
+                    {/* Upgrades */}
+                    {modelcollectionObject.UpgradeList.length > 0 &&
+                        <RulesModelDisplayCollapse
+                            name={"Upgrades"}
+                            state={false}
+                            has_children={modelcollectionObject.UpgradeList.length > 0}
+                            method={() => <>
+                                {modelcollectionObject.UpgradeList.map((item) => (
+
+                                    <React.Fragment
+                                        key={"model_upgrade_" + modelcollectionObject.ID + "_upgrade_id_" + item.ID}>
+                                        <RulesModelUpgrade item={item}/>
+                                    </React.Fragment>
+
+
+                                ))}
+                            </>
+                            }
+                        />
+                    }
+
+                    {/* Lore Text */}
+                    {modelcollectionObject.Lore &&
+                        <RulesModelDisplayCollapse
+                            name={"Lore"}
+                            state={false}
+                            method={() => <>
+                                {returnDescription(modelcollectionObject, modelcollectionObject.Lore)}
+                            </>
+                            }
+                        />
+                    }
+                </div>
+
+
+            </section>
         </ErrorBoundary>
     )
 }

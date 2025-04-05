@@ -16,7 +16,6 @@ import MenuHeader from './MenuHeader'
 import { ControllerController } from '../../classes/_high_level_controllers/ControllerController';
 import OffcanvasMenu from './components/OffCanvasMenu';
 import SettingsMenu from './components/SettingsMenu';
-import RulesMenuBody from "../components/features/rules-content/RulesMenuBody";
 
 interface IControllerProp {
     controller : ControllerController; // The controller being passed through
@@ -65,37 +64,27 @@ const SuperHeader: React.FC<IControllerProp> = (prop) => {
     // Return result -----------------------------
     return (    
         <ErrorBoundary fallback={<div>Something went wrong with SuperHeader.tsx</div>}>
-            <div >
+            <>
                 <div className="header-main-spacer"></div>
 
-                <div id="topbarbody" ref={ref} className="overlaystructure topbarStructure header-main">
+                <div ref={ref} className="header-main">
                     <Routes>
-                        <Route path={ROUTES.COMPENDIUM_ROUTE}
-                               element={<BaseHeader showsettings={handleShowsettings} showstate={handleShow}
-                                                    controller={prop.controller}/>}/>
-                        <Route path={ROUTES.WARBAND_ROUTE}
-                               element={<BaseHeader showsettings={handleShowsettings} showstate={handleShow}
-                                                    controller={prop.controller}/>}/>
-                        <Route path={ROUTES.HOME_ROUTE}
-                               element={<MenuHeader showsettings={handleShowsettings} showstate={handleShow}
-                                                    controller={prop.controller}/>}/>
+                        <Route element={
+                            <BaseHeader  showstate={handleShow} controller={prop.controller}/>
+                        }>
+                            <Route path={ROUTES.COMPENDIUM_ROUTE} />
+                            <Route path={ROUTES.WARBAND_ROUTE} />
+                            <Route path={ROUTES.HOME_ROUTE} />
+                        </Route>
                     </Routes>
                 </div>
-                <Routes>
-                    <Route path={ROUTES.COMPENDIUM_ROUTE} element={
-                        <div className="overlaystructure menustructure d-none d-lg-block "
-                             style={{height: window.innerHeight - stateheight}}>
-                            <div style={{height: stateheight - 10}}/>
 
-                            <RulesMenuBody controller={prop.controller}/>
 
-                        </div>
-                    }/>
-                </Routes>
+
                 <OffcanvasMenu controller={prop.controller} closeFunc={handleClose} responseshow="" showState={show}/>
                 <SettingsMenu controller={prop.controller} closeFunc={handleClosesettings} responseshow=""
                               showState={showsettings}/>
-            </div>
+            </>
         </ErrorBoundary>
     )
     // -------------------------------------------
