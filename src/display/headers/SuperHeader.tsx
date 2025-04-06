@@ -70,7 +70,7 @@ const SuperHeader: React.FC<IControllerProp> = (prop) => {
                 <div ref={ref} className="header-main">
                     <Routes>
                         <Route element={
-                            <BaseHeader  showstate={handleShow} controller={prop.controller}/>
+                            <BaseHeader  showstate={handleShow} controller={prop.controller} showsettings={handleShowsettings}/>
                         }>
                             <Route path={ROUTES.COMPENDIUM_ROUTE} />
                             <Route path={ROUTES.WARBAND_ROUTE} />

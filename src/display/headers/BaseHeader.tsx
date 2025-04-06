@@ -22,11 +22,13 @@ import { ControllerController } from '../../classes/_high_level_controllers/Cont
 interface IControllerProp {
     controller : ControllerController; // The controller being passed through
     showstate : any;
+    showsettings : any;
 }
 
 const BaseHeader: React.FC<IControllerProp> = (prop: any) => {
         
     const handleShow = () => prop.showstate();
+    const handleShowSettings = () => prop.showsettings();
 
     // Return result -----------------------------
     return (
@@ -39,8 +41,8 @@ const BaseHeader: React.FC<IControllerProp> = (prop: any) => {
                 <div className="logo-wrap">
                     <img src={logo} alt="Trench Companion Logo" className={'logo'}/>
                 </div>
-                <Button className="search-button">
-                    <FontAwesomeIcon icon={faMagnifyingGlass} className=""/>
+                <Button className="search-button" onClick={handleShowSettings}>
+                    <FontAwesomeIcon icon={faGear} className=""/>
                 </Button>
             </>
         </ErrorBoundary>
