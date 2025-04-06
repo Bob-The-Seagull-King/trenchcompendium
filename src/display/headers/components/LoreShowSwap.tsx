@@ -21,9 +21,9 @@ const LoreShowSwap = (prop: any) => {
      * Updates the locally stored web theme
      * @param theme The selected theme
      */
-    function SetPallete(theme: string) {
-        localStorage.setItem('loreshow', theme);
-        setTheme(Boolean(theme))
+    function SetPallete(theme: string | null) {
+        localStorage.setItem('loreshow', "");
+        setTheme(theme != null)
     }
 
       
@@ -37,7 +37,7 @@ const LoreShowSwap = (prop: any) => {
                 </div>
                 <div className="separator colorgrey" />
                 <div>
-                    <div onClick={() => SetPallete("false")} className={"      color"+(theme == false ? 'default' : 'BasicText')}>
+                    <div onClick={() => SetPallete(null)} className={"      color"+(theme == false ? 'default' : 'BasicText')}>
                         <div className="">{makestringpresentable("Collapse Lore By Default")}</div>
                     </div>
                 </div>

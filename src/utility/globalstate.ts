@@ -24,7 +24,9 @@ function InitLanguage() {
 function InnitLoreShow() {
     const theme = localStorage.getItem('loreshow');
     if (theme != null) {
-        return Boolean(theme)
+        if (theme != "") {
+            return true
+        }
     }
     return false
 }

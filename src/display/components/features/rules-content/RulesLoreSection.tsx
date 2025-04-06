@@ -7,7 +7,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faBook, faChevronDown, faChevronUp, faLink} from '@fortawesome/free-solid-svg-icons';
 import { useGlobalState } from '../../../../utility/globalstate';
 
-const DefaultState = false;
 
 
 interface RulesLoreSectionProps {
@@ -16,7 +15,8 @@ interface RulesLoreSectionProps {
 }
 
 const RulesLoreSection: React.FC<RulesLoreSectionProps> = ({ headline, content }) => {
-    const [open, setOpen] = useGlobalState('loreshow');
+    const [defaultstate, setdefaultstate] = useGlobalState('loreshow')
+    const [open, setOpen] = useState(defaultstate);
 
     return (
         <div className={'rules-lore-section'} id={'Lore'}>
