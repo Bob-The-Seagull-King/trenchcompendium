@@ -27,13 +27,9 @@ const PagedCompendiumDisplay = (prop: any) => {
     const urlSplits = urlPath.split('/');
     const [_curItem, setCurItem] = useState(InitStateSet());
     const [_keyval, setKeyVal] = useState(0);
-    const [_canprev, setCanPrev] = useState(SetPrevButtonActive());
-    const [_cannext, setCanNext] = useState(SetNextButtonActive());
 
     useEffect(() => {
         setCurItem(GetCurrentItem())
-        const IndexOfCur : number = CollectionController.itemcollection.indexOf(GetCurrentItem());
-        SetButtonActive(IndexOfCur);
         setKeyVal(_keyval+1)
     }, [state]);
 
@@ -41,16 +37,7 @@ const PagedCompendiumDisplay = (prop: any) => {
         const SetItem = GetCurrentItem()
         return SetItem;
     }
-
     
-    // Navigation
-    const navigate = useNavigate(); 
-    
-
-    function SpecificNavigtateOut(item : any) {
-        CollectionController.UpdateTargetItem(item);
-        navigate('/compendium/' + DisplayPage.searchId + "/"+item.HeldItem.ID, {state: item.HeldItem.ID + Date.now().toString()});
-    }
 
     function GetCurrentItem() {
         if (urlSplits.length > 3) {
@@ -70,66 +57,23 @@ const PagedCompendiumDisplay = (prop: any) => {
 
     function GrabPrevItem() {
         const IndexOfCur : number = CollectionController.itemcollection.indexOf(_curItem);
-        SpecificNavigtateOut(CollectionController.itemcollection[IndexOfCur - 1])
+        return (CollectionController.itemcollection[IndexOfCur - 1])
     }
 
     function GrabNextItem() {
         const IndexOfCur : number = CollectionController.itemcollection.indexOf(_curItem);
-        SpecificNavigtateOut(CollectionController.itemcollection[IndexOfCur + 1])
+        return (CollectionController.itemcollection[IndexOfCur + 1])
     }
 
-    function GetNextName() {
-        const LengthOfList : number = CollectionController.itemcollection.length;
-        const IndexOfCur : number = CollectionController.itemcollection.indexOf(_curItem);
 
-        if (IndexOfCur < (LengthOfList-1)) {
-            return CollectionController.itemcollection[IndexOfCur + 1].HeldItem.Name;
-        } else {
-            return "-"
+    const navigate = useNavigate(); 
+
+    function SpecificNavigtateOut(item : any) {
+        if (item != undefined) {
+            CollectionController.UpdateTargetItem(item);
+            navigate('/compendium/'+ DisplayPage.searchId + "/" + (item.HeldItem.ID), {state: Date.now().toString()});
         }
     }
-
-    function GetPrevName() {
-        const IndexOfCur : number = CollectionController.itemcollection.indexOf(_curItem);
-
-        if (IndexOfCur > 0) {
-            return CollectionController.itemcollection[IndexOfCur - 1].HeldItem.Name;
-        } else {
-            return "-"
-        }
-    }
-
-    function SetButtonActive(newIndex : number) {
-        const LengthOfList : number = CollectionController.itemcollection.length;
-
-        if (newIndex <= 0) {
-            setCanPrev(false);
-        } else {setCanPrev(true)}
-        if (newIndex < (LengthOfList - 1)) {
-            setCanNext(true)
-        } else {setCanNext(false)}
-    }
-
-    function SetPrevButtonActive() {
-        const IndexOfCur : number = CollectionController.itemcollection.indexOf(_curItem);
-
-        if (IndexOfCur <= 0) {
-            return (false);
-        } else {
-            return (true)
-        }   
-    }
-
-    function SetNextButtonActive() {
-        const LengthOfList : number = CollectionController.itemcollection.length;
-        const IndexOfCur : number = CollectionController.itemcollection.indexOf(_curItem);
-
-        if (IndexOfCur < (LengthOfList - 1)) {
-            return (true)
-        } else {return (false)}
-    }
-
-
 
 
     // Return result -----------------------------
@@ -149,10 +93,10 @@ const PagedCompendiumDisplay = (prop: any) => {
 
                 {/* @TODO: this is the bottom links component */}
                 <RulesPageLinks
-                    prev_page={GrabPrevItem}
-                    next_page={GrabNextItem}
-                    prev_name={GetPrevName()}
-                    next_name={GetNextName()}
+                    prev_page={GrabPrevItem()}
+                    next_page={GrabNextItem()}
+                    display_path={'compendium/' + DisplayPage.searchId + "/"}
+                    func={SpecificNavigtateOut}
                 />
             </div>
         </ErrorBoundary>

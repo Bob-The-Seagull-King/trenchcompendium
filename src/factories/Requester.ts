@@ -52,7 +52,7 @@ function GetContentPackData(request: IRequest): any {
     try {
         ReturnData = JSON.parse(data || "");
     } catch (e) {
-        console.log("Local storage is not valid.")
+        console.log("Local storage is not valid." )
     }
     
     let i = 0;
