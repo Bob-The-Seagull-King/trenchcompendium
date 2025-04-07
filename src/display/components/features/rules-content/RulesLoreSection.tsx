@@ -15,20 +15,19 @@ interface RulesLoreSectionProps {
 }
 
 const RulesLoreSection: React.FC<RulesLoreSectionProps> = ({ headline, content }) => {
-    const [defaultstate, setdefaultstate] = useGlobalState('loreshow')
-    const [open, setOpen] = useState(defaultstate);
+    const [open, setOpen] = useState( false);
+
+    // Render nothing if loreshow !== 'true'
+    const [loreshow] = useGlobalState('loreshow');
+    if (loreshow === 'false') return null;
 
     return (
         <div className={'rules-lore-section'} id={'Lore'}>
-
-            <div className={'rules-lore-title'} onClick={() => {
-                setOpen(!open)
-            }}>
+            <div className={'rules-lore-title'} onClick={() => setOpen(!open)}>
                 <span className={'text'}>
                     <FontAwesomeIcon icon={faBook} className="icon-inline-left-l"/>
                     {headline}
                 </span>
-
                 <span className={'collapse-chevron-wrap'}>
                     <FontAwesomeIcon icon={open ? faChevronUp : faChevronDown} className=""/>
                 </span>
@@ -38,10 +37,7 @@ const RulesLoreSection: React.FC<RulesLoreSectionProps> = ({ headline, content }
                     {content}
                 </div>
             </Collapse>
-
-
         </div>
-
     )
 };
 

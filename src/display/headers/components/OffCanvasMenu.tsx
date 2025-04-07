@@ -33,7 +33,7 @@ const OffcanvasMenu: React.FC<IControllerProp> = (prop) => {
      * Navigate to a page
      * @param dir The page to navigate to
      */
-    function NavigateOut() {
+    function NavigateHome() {
         navigate('/');
     }
 
@@ -44,7 +44,9 @@ const OffcanvasMenu: React.FC<IControllerProp> = (prop) => {
                 <Offcanvas.Header className="">
                     <Offcanvas.Title className="">
                         <div className={'logo-wrap'}>
-                            <img src={logo} alt="Trench Companion Logo" className={'logo'}/>
+                            <img src={logo} alt="Trench Companion Logo" className={'logo'}
+                                 onClick={() => NavigateHome()}
+                            />
                         </div>
 
                         <div className="offcanvas-close" onClick={handleClose}>
@@ -53,8 +55,8 @@ const OffcanvasMenu: React.FC<IControllerProp> = (prop) => {
                     </Offcanvas.Title>
                 </Offcanvas.Header>
                 <Offcanvas.Body bsPrefix="empty" className="">
-                    <MenuBody controller={prop.controller}/>
-                   {/** <RulesMenuBody controller={prop.controller}/> */}
+                    {/*<MenuBody controller={prop.controller}/>*/}
+                   <RulesMenuBody controller={prop.controller}/>
                 </Offcanvas.Body>
             </Offcanvas>
         </ErrorBoundary>

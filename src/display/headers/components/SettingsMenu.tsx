@@ -14,7 +14,6 @@ import { useNavigate } from 'react-router-dom';
 import GenericCollapsableBlockDisplay from '../../components/generics/GenericCollapsableBlockDisplay';
 import PalleteSwap from './PalleteSwap';
 import LanguageSwap from './LanguageSwap';
-import LoreShowSwap from './LoreShowSwap';
 import { ControllerController } from '../../../classes/_high_level_controllers/ControllerController';
 import CompendiumMenuItem from './CompendiumMenuItem';
 import MenuBody from '../../components/subcomponents/MenuBody';
@@ -74,13 +73,7 @@ const SettingsMenu: React.FC<IControllerProp> = (prop) => {
                         bordertype={0}
                         d_method={() => <div className="borderthin bordergrey" ><LanguageSwap/></div>} />
                     <div className="borderthin bordergrey "/>
-                    <GenericCollapsableBlockDisplay 
-                        d_name={"Lore Display"} 
-                        d_colour={"grey"} 
-                        d_state={false}  
-                        bordertype={0}
-                        d_method={() => <div className="borderthin bordergrey" ><LoreShowSwap/></div>} />
-                    <div className="borderthin bordergrey "/>
+
                 </Offcanvas.Body>
             </Offcanvas>
         </ErrorBoundary>

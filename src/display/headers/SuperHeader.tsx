@@ -47,10 +47,6 @@ const SuperHeader: React.FC<IControllerProp> = (prop) => {
         // Navigation
         const navigate = useNavigate();
 
-    function NavigateHome() {
-        navigate("/");
-    }
-        
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);

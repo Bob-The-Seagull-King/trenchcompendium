@@ -22,13 +22,15 @@ function InitLanguage() {
 }
 
 function InnitLoreShow() {
-    const theme = localStorage.getItem('loreshow');
-    if (theme != null) {
-        if (theme != "") {
-            return true
+    const loreShow = localStorage.getItem('loreshow');
+    if (loreShow != null) {
+        if (loreShow === "true") {
+            return 'true'
+        } else {
+            return 'false'
         }
     }
-    return false
+    return 'true'
 }
 
 function InitTheme() {

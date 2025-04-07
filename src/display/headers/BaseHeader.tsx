@@ -30,6 +30,12 @@ const BaseHeader: React.FC<IControllerProp> = (prop: any) => {
     const handleShow = () => prop.showstate();
     const handleShowSettings = () => prop.showsettings();
 
+    const navigate = useNavigate();
+
+    function NavigateHome() {
+        navigate('/', {state: Date.now().toString()});
+    }
+
     // Return result -----------------------------
     return (
         
@@ -39,7 +45,9 @@ const BaseHeader: React.FC<IControllerProp> = (prop: any) => {
                     <FontAwesomeIcon icon={faBars} className=""/>
                 </Button>
                 <div className="logo-wrap">
-                    <img src={logo} alt="Trench Companion Logo" className={'logo'}/>
+                    <img src={logo} alt="Trench Companion Logo" className={'logo'}
+                         onClick={() => NavigateHome()}
+                    />
                 </div>
                 <Button className="search-button" onClick={handleShowSettings}>
                     <FontAwesomeIcon icon={faGear} className=""/>

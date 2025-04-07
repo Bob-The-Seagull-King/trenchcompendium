@@ -13,6 +13,7 @@ import { ControllerController } from '../../../../classes/_high_level_controller
 import CompendiumMenuItem from '../../../headers/components/CompendiumMenuItem';
 import GenericLinkedCollapsableBlockDisplay from '../../generics/GenericLinkedCollapsableBlockDisplay';
 import RulesMenuItem from "./RulesMenuItem";
+import RulesMenuSettings from "./RulesMenuSettings";
 
 interface IControllerProp {
     controller : ControllerController; // The controller being passed through
@@ -26,11 +27,7 @@ const RulesMenuBody: React.FC<IControllerProp> = (prop) => {
     // Navigation
     const navigate = useNavigate();
 
-    /**
-     * Navigate to a page
-     * @param dir The page to navigate to
-     */
-    function NavigateOut() {
+    function NavigateHome() {
         navigate('/', {state: Date.now().toString()});
     }
 
@@ -356,7 +353,7 @@ const RulesMenuBody: React.FC<IControllerProp> = (prop) => {
         <ErrorBoundary fallback={<div>Something went wrong with RulesMenuBody.tsx</div>}>
             <div className={'rules-menu-body'}>
                 <div className={'rules-menu-header'}>
-                    <div onClick={() => NavigateOut()} className={'home-link'}>
+                    <div onClick={() => NavigateHome()} className={'home-link'}>
                         <FontAwesomeIcon icon={faChevronLeft} />
                     </div>
 
@@ -369,6 +366,7 @@ const RulesMenuBody: React.FC<IControllerProp> = (prop) => {
                     data={menu_structure}
                 />
 
+                <RulesMenuSettings />
                 {/* @TODO: Add secondary elements here   */}
             </div>
         </ErrorBoundary>

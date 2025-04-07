@@ -26,6 +26,7 @@ import {FactionModelRelationship} from "../../../../classes/relationship/faction
 import RulesModelUpgrade from "./RulesModelUpgrade";
 import RulesModelDisplayAbility from "./RulesModelDisplayAbility";
 import AdvancedDescriptionItemDisplay from "../../subcomponents/description/AdvancedDescriptionItemDisplay";
+import {useGlobalState} from "../../../../utility/globalstate";
 
 const RulesModelDisplay = (props: any) => {
     const factionmodelObject: FactionModelRelationship = props.data
@@ -36,6 +37,8 @@ const RulesModelDisplay = (props: any) => {
     const [statchoices, setstatchoices] = useState([])
     const [_keyvar, setkeyvar] = useState(0);
 
+    // Render no lore if loreshow !== 'true'
+    const [loreshow] = useGlobalState('loreshow');
 
     useEffect(() => {
         async function SetModelOptions() {
@@ -200,6 +203,8 @@ const RulesModelDisplay = (props: any) => {
         )
     }
 
+
+
     return (
         <ErrorBoundary fallback={<div>Something went wrong with ModelDisplay.tsx</div>}>
             <section className='fighter-card' key={_keyvar}>
@@ -316,7 +321,7 @@ const RulesModelDisplay = (props: any) => {
                     }
 
                     {/* Lore Text */}
-                    {modelcollectionObject.Lore &&
+                    {modelcollectionObject.Lore && loreshow !== 'false' &&
                         <RulesModelDisplayCollapse
                             name={"Lore"}
                             state={false}
