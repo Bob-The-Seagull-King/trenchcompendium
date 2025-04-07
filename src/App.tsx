@@ -22,6 +22,7 @@ import CompendiumRoute from './display/superroutes/CompendiumRoute'
 import SuperHeader from './display/headers/SuperHeader'
 import WarbandRoute from './display/superroutes/WarbandRoute'
 import {useGlobalState} from "./utility/globalstate";
+import ScrollToTop from './display/components/subcomponents/ScrollToTop'
 
 const App: React.FC = () => {
 
@@ -43,6 +44,7 @@ const App: React.FC = () => {
                 <PersistGate loading={null} persistor={persistor}>
                     <Router >
                         <SuperHeader controller={compendiumcontroller}/>
+                        <ScrollToTop/>
                         <Routes>
                             <Route path={ROUTES.HOME_ROUTE} element={<HomeRoute />} />
                             <Route path={ROUTES.COMPENDIUM_ROUTE} element={<CompendiumRoute controller={compendiumcontroller} />} />
