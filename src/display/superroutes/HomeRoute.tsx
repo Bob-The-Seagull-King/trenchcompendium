@@ -44,8 +44,8 @@ const HomeRoute: React.FC = () => {
                                 <MenuComponent title={"Play Mode"} route={"play/"} />
                             </div>
                         </div>
-                        <div className="row "> 
-                            <div className=""></div>
+                        <div className="row"> 
+                            <br/>
                         </div>
                         <div className="row row-cols-md-2 row-cols-1 gy-3 gx-3">
                             <div className="col">

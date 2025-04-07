@@ -2,6 +2,7 @@ import '../../../resources/styles/vendor/bootstrap.css'
 import React from 'react'
 import { ErrorBoundary } from "react-error-boundary";
 import { useNavigate } from 'react-router-dom';
+import CustomNavLink from './interactables/CustomNavLink';
 
 const MenuComponent = (props: any) => {
     const Title : string = props.title;
@@ -20,9 +21,11 @@ const MenuComponent = (props: any) => {
 
     return (
         <ErrorBoundary fallback={<div>Something went wrong with MenuDisplay.tsx</div>}>
-            <div className=" font-seriftext bordergrey borderstyler backgroundBgCard main-menu-item-big" onClick={()=>NavigateHome()}>
-                {Title}
-            </div>
+            <CustomNavLink link={Route} runfunc={NavigateHome}>
+                <div className=" font-seriftext bordergrey borderstyler backgroundBgCard main-menu-item-big" >
+                    {Title}
+                </div>
+            </CustomNavLink>
         </ErrorBoundary>
     )
 }
