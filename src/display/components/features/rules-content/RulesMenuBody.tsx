@@ -275,10 +275,6 @@ const RulesMenuBody: React.FC<IControllerProp> = (prop) => {
                     slug: "trench-warfare",
                 },
                 {
-                    title: "Hunt for Heroes",
-                    slug: "hunt-for-heroes",
-                },
-                {
                     title: "Great War",
                     slug: "great-war",
                 },

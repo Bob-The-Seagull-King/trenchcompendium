@@ -1,8 +1,4 @@
 import React, {useState} from 'react'
-import { ErrorBoundary } from "react-error-boundary";
-
-
-// Font Awesome
 import {Collapse} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faChevronDown, faChevronUp} from "@fortawesome/free-solid-svg-icons";

@@ -13,6 +13,7 @@ import AdvancedDescriptionItemDisplay from "../../subcomponents/description/Adva
 
 const RulesModelDisplayAbility = (props: any) => {
     const abilityObject: Ability = props.data
+    const ability_id = abilityObject.ID;
 
     return (
         <ErrorBoundary fallback={<div>Something went wrong with AbilityDisplay.tsx</div>}>
@@ -23,7 +24,7 @@ const RulesModelDisplayAbility = (props: any) => {
 
                 <span className={'ability-desc'}>
                     {abilityObject.Description.map((item) => (
-                        <React.Fragment key={"descriptionDisplay"}>
+                        <React.Fragment key={ability_id+"descriptionDisplay"}>
                             <AdvancedDescriptionItemDisplay data={item} parent={abilityObject}/>
                         </React.Fragment>
 
