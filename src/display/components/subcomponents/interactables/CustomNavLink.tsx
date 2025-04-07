@@ -17,7 +17,7 @@ const CustomNavLink: React.FC<LinkProps> = ({ link, children, runfunc }) => {
       };
     
       return (
-        <a href={link} onClick={handleClick} target="_blank" rel="noopener noreferrer" style={{textDecoration:"none"}}>
+        <a href={link} onClick={handleClick}  rel="noopener noreferrer" style={{textDecoration:"none"}}>
           {children}
         </a>
       );
