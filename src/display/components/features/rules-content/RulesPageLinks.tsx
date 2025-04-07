@@ -9,29 +9,30 @@ import {faChevronLeft, faChevronRight, faEye, faLink} from '@fortawesome/free-so
 interface RulesPageLinksProps {
     prev_page: any;
     next_page: any;
-    curr_page: any;
+    prev_name: string;
+    next_name: string;
 }
 
-const RulesPageLinks: React.FC<RulesPageLinksProps> = ({ prev_page, next_page, curr_page }) => {
+const RulesPageLinks: React.FC<RulesPageLinksProps> = (prop) => {
 
 
     return (
         <div className="rules-page-links">
-            <a href={''} className={'rules-page-link rules-page-link-prev'}>
+            <div onClick={() => prop.prev_page()} className={'rules-page-link rules-page-link-prev'}>
                 <FontAwesomeIcon icon={faChevronLeft} className="" />
 
                 <span className={'page-name'}>
-                    {'Previous'}
+                    {prop.prev_name}
                 </span>
-            </a>
+            </div>
 
-            <a href={''} className={'rules-page-link rules-page-link-next'}>
+            <div onClick={() => prop.next_page()} className={'rules-page-link rules-page-link-next'}>
                 <span className={'page-name'}>
-                    {'Next'}
+                    {prop.next_name}
                 </span>
 
                 <FontAwesomeIcon icon={faChevronRight} className=""/>
-            </a>
+            </div>
         </div>
 )
 };

@@ -10,7 +10,7 @@ import { CollectionsListPage } from '../../classes/viewmodel/pages/CollectionLis
 // Components
 import { DisplayCollectionDataDex, DisplayCollectionType } from './DisplayPageStatic'
 import BasicButton from '../components/subcomponents/interactables/BasicButton';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import RulesPageLinks from "../components/features/rules-content/RulesPageLinks";
 
 const PagedCompendiumDisplay = (prop: any) => {
@@ -22,11 +22,13 @@ const PagedCompendiumDisplay = (prop: any) => {
     const DisplayPage: DisplayCollectionType = DisplayCollectionDataDex[ViewPageController.TypeName]
     
     // Initialize Use State
+    const { state } = useLocation();
+    const urlPath = useLocation().pathname;
+    const urlSplits = urlPath.split('/');
     const [_curItem, setCurItem] = useState(InitStateSet());
     const [_keyval, setKeyVal] = useState(0);
     const [_canprev, setCanPrev] = useState(SetPrevButtonActive());
     const [_cannext, setCanNext] = useState(SetNextButtonActive());
-    const { state } = useLocation();
 
     useEffect(() => {
         setCurItem(GetCurrentItem())
@@ -40,8 +42,25 @@ const PagedCompendiumDisplay = (prop: any) => {
         return SetItem;
     }
 
+    
+    // Navigation
+    const navigate = useNavigate(); 
+    
+
+    function SpecificNavigtateOut(item : any) {
+        CollectionController.UpdateTargetItem(item);
+        navigate('/compendium/' + DisplayPage.searchId + "/"+item.HeldItem.ID, {state: item.HeldItem.ID + Date.now().toString()});
+    }
 
     function GetCurrentItem() {
+        if (urlSplits.length > 3) {
+            const CurItemID = urlSplits.slice(-1)
+            for (let i = 0; i < CollectionController.itemcollection.length; i++) {
+                if (CollectionController.itemcollection[i].HeldItem.ID == CurItemID) {                    
+                    return CollectionController.itemcollection[i]
+                }
+            }
+        }
         if (CollectionController.TargetItem == null) {
             return CollectionController.itemcollection[0]
         } else {
@@ -51,18 +70,12 @@ const PagedCompendiumDisplay = (prop: any) => {
 
     function GrabPrevItem() {
         const IndexOfCur : number = CollectionController.itemcollection.indexOf(_curItem);
-        CollectionController.TargetItem = CollectionController.itemcollection[IndexOfCur - 1]
-        setCurItem(CollectionController.itemcollection[IndexOfCur - 1])
-        SetButtonActive(IndexOfCur - 1);
-        setKeyVal(_keyval+1)
+        SpecificNavigtateOut(CollectionController.itemcollection[IndexOfCur - 1])
     }
 
     function GrabNextItem() {
         const IndexOfCur : number = CollectionController.itemcollection.indexOf(_curItem);
-        CollectionController.TargetItem = CollectionController.itemcollection[IndexOfCur + 1]
-        setCurItem(CollectionController.itemcollection[IndexOfCur + 1])
-        SetButtonActive(IndexOfCur + 1);
-        setKeyVal(_keyval+1)
+        SpecificNavigtateOut(CollectionController.itemcollection[IndexOfCur + 1])
     }
 
     function GetNextName() {
@@ -118,25 +131,6 @@ const PagedCompendiumDisplay = (prop: any) => {
 
 
 
-    /* @TODO @Bob, can you help me out here?
-     * This should get the current, previous and next pages
-     * - these should contain:
-     * - - .path as string - url to page
-     * - - .level as integer - as url level
-     * - - .name as string - name of page
-     */
-    function GetCurrPage () {
-        return null;
-    }
-    function GetPrevPage () {
-        return null;
-    }
-    function GetNextPage () {
-        return null;
-    }
-
-
-
 
     // Return result -----------------------------
     return (
@@ -155,25 +149,11 @@ const PagedCompendiumDisplay = (prop: any) => {
 
                 {/* @TODO: this is the bottom links component */}
                 <RulesPageLinks
-                    prev_page={GetNextPage()}
-                    next_page={GetPrevPage()}
-                    curr_page={GetCurrPage()}
+                    prev_page={GrabPrevItem}
+                    next_page={GrabNextItem}
+                    prev_name={GetPrevName()}
+                    next_name={GetNextName()}
                 />
-
-                {/* This can be removed if the <RulesPageLinks work */}
-                <div className="rules-page-links">
-                    <div className=" buttonrow_container ">
-                        <div className=" ">
-                            <BasicButton d_dir={"l"} btn_title={GetPrevName()} btn_state={_canprev} btn_press={GrabPrevItem}/>
-                        </div>
-                        <div>
-                            <div className=""/>
-                            </div>
-                        <div className=" ">
-                            <BasicButton d_dir={"r"} btn_title={GetNextName()} btn_state={_cannext} btn_press={GrabNextItem}/>
-                        </div>
-                    </div>
-                </div>
             </div>
         </ErrorBoundary>
     )

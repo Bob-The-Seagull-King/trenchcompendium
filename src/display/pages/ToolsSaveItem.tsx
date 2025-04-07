@@ -32,7 +32,6 @@ const ToolsSavedItem = (prop: any) => {
     function grabURL() {
         const urlPath = useLocation().pathname;
         const urlSplits = urlPath.split('/');
-        console.log(urlSplits);
         let urlBuildParam = "";
         if (urlSplits.length >= 3) {
             urlBuildParam = urlSplits[2];
