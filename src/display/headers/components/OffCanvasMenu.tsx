@@ -54,7 +54,7 @@ const OffcanvasMenu: React.FC<IControllerProp> = (prop) => {
                         </div>
                     </Offcanvas.Title>
                 </Offcanvas.Header>
-                <Offcanvas.Body bsPrefix="empty" className="">
+                <Offcanvas.Body className="offc">
                     {/*<MenuBody controller={prop.controller}/>*/}
                    <RulesMenuBody controller={prop.controller}/>
                 </Offcanvas.Body>

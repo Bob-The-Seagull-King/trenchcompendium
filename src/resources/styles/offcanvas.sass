@@ -4,6 +4,7 @@
 //
 .offcanvas-main-menu
     background-color: $color-bg-1
+
     &.offcanvas
         max-width: calc( 100% - 50px )
 
@@ -18,13 +19,15 @@
                 position: absolute
                 top: 50%
                 transform: translateY(-50%)
-                right: 0px
+                right: 0
                 height: 40px
                 width: 40px
                 text-align: center
                 line-height: 40px
                 cursor: pointer
 
+    .offcanvas-body
+        padding: 0
 
     .logo-wrap
         width: calc(100% - 30px)
