@@ -128,7 +128,16 @@ const RulesMenuBody: React.FC<IControllerProp> = (prop) => {
                             slug: "characteristics-profile",
                         }
                     ]
-                }
+                },
+                {
+                    title: "All Models",
+                    slug: "all_models",
+                },
+                {
+                    title: "Glossary",
+                    slug: "glossary",
+                },
+
             ]
         },
         {
@@ -303,10 +312,7 @@ const RulesMenuBody: React.FC<IControllerProp> = (prop) => {
                     title: "Beginning the Campaign",
                     slug: "beginning-the-campaign",
                 },
-                {
-                    title: "Patrons",
-                    slug: "patrons",
-                },
+
                 {
                     title: "Playing a Campaign Game",
                     slug: "playing-a-campaign-game",
@@ -318,6 +324,10 @@ const RulesMenuBody: React.FC<IControllerProp> = (prop) => {
                 {
                     title: "Experience & Advancement",
                     slug: "experience-advancement",
+                },
+                {
+                    title: "Patrons",
+                    slug: "patrons",
                 },
                 {
                     title: "Exploration",

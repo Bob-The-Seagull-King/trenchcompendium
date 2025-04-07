@@ -57,6 +57,7 @@ const RulesMenuSettings: React.FC = () => {
 
                 <Collapse in={open}>
                     <div className={'rules-settings-content'}>
+                        <div className={'spacer-20'}></div>
                         <div className="form-check form-switch">
                             <input className="form-check-input"
                                    type="checkbox"
@@ -89,10 +90,11 @@ const RulesMenuSettings: React.FC = () => {
                         {/*    />*/}
                         {/*    <label className="form-check-label" htmlFor="switchCheckChecked">{'Show Base Sizes'}</label>*/}
                         {/*</div>*/}
+
+                        <div className={'spacer-20'}></div>
                     </div>
                 </Collapse>
             </div>
-
 
 
         </ErrorBoundary>

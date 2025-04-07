@@ -41,9 +41,9 @@ const BaseHeader: React.FC<IControllerProp> = (prop: any) => {
         
         <ErrorBoundary fallback={<div>Something went wrong with BaseHeader.tsx</div>}>
             <>
-                <Button className="open-offcanvas-nav-btn" onClick={handleShow}>
+                <button className="open-offcanvas-nav-btn" onClick={handleShow}>
                     <FontAwesomeIcon icon={faBars} className=""/>
-                </Button>
+                </button>
                 <div className="logo-wrap">
                     <img src={logo} alt="Trench Companion Logo" className={'logo'}
                          onClick={() => NavigateHome()}
