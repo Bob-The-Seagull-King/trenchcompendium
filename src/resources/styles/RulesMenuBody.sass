@@ -13,6 +13,8 @@
         padding-bottom: 0
         overflow-y: auto
 
+        @media(max-width: 991px)
+            display: none
     .rules-settings
         display: none
 
@@ -92,6 +94,7 @@
 
         &.has-children
             .menu-list-item-anchor
+                display: block
                 padding-right: 45px
 
     .menu-list-item-anchor // all anchor tags
