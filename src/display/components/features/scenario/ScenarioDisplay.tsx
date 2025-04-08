@@ -26,29 +26,19 @@ import GenericCollapsableBlockDisplay from '../../../components/generics/Generic
 import RulesAnchorLinks from "../rules-content/RulesAnchorLinks";
 import RulesHeadlineDisplay from "../rules-content/RulesHeadlineDisplay";
 import RulesGloriousDeed from "../rules-content/RulesGloriousDeed";
+import RulesScenarioSummary from "../rules-content/RulesScenarioSummary";
 
 const ScenarioDisplay = (props: any) => {
     const scenarioObject: Scenario = props.data
 
-    function ReturnStats(statlist : Scenario) {
-        return (
-            <div>
-                <ItemRow title={"Players"} value={() => <div>{(statlist.EvenMatch == true? "Even Match" : "Attack / Defend")}</div>}/>
-                <ItemRow title={"Infiltrators"} value={() => <div>{(statlist.InfiltratorType == 0? "Not Allowed" : statlist.InfiltratorType == 1? "Allowed" : "Special")}</div>}/>
-                <ItemRow title={"Battle Length"} value={() => <div>{(statlist.BattleMin == statlist.BattleMax? statlist.BattleMin : (statlist.BattleMin + "-" + statlist.BattleMax)) + " Turns"}</div>}/>
-                <ItemRow title={"Standard Terrain"} value={() => <div>{(statlist.StandardTerrain == true? "Yes" : "No")}</div>}/>
-                <ItemRow title={"Staggered Deployment"} value={() => <div>{(statlist.StaggeredDeployment == true? "Yes" : "No")}</div>}/>
-            </div>
-        )
-    }
 
-    
-        
+
+
     function GetContents(scenarioObj: Scenario) {
-        const ContentsList : ContentsLink[] = [];
+        const ContentsList: ContentsLink[] = [];
 
-        ContentsList.push({ name: "Forces", route: "forces"})
-        ContentsList.push({ name: "Infiltrators", route: "infiltrators"})
+        ContentsList.push({name: "Forces", route: "forces"})
+        ContentsList.push({name: "Infiltrators", route: "infiltrators"})
         ContentsList.push({ name: "Battle Length", route: "battlelength"})
         ContentsList.push({ name: "Battlefield", route: "battlefield"})
         ContentsList.push({ name: "Deployment", route: "deployment"})
@@ -98,21 +88,10 @@ const ScenarioDisplay = (props: any) => {
                 {GetContents(scenarioObject)}
 
 
-                <GenericCollapsableBlockDisplay
-                    d_name={"Battle Map"}
-                    d_colour={"grey"}
-                    d_state={false}
-                    d_margin={"sml"}
-                    d_col={"default"}
-                    d_border={false}
-                    bordertype={0}
-                    d_method={() => <div className={"bordergrey borderthin"}>
-                        <div className="">
-                            <img src={scenarioObject.ImgLink} style={{width: "100%"}}/>
-                        </div>
-                    </div>}/>
+                <RulesScenarioSummary
+                    data={scenarioObject}
+                />
 
-                {ReturnStats(scenarioObject)}
 
                 <div className={"rules-text-item"}>
                     <RulesHeadlineDisplay

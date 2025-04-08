@@ -1,0 +1,93 @@
+import '../../../../resources/styles/vendor/bootstrap.css'
+import React from 'react'
+import { ErrorBoundary } from "react-error-boundary";
+
+// Classes
+import { GlossaryRule } from '../../../../classes/feature/glossary/Glossary'
+import { returnDescription } from '../../../../utility/util'
+import { ModelCollection } from '../../../../classes/feature/model/ModelCollection';
+import { Model } from '../../../../classes/feature/model/Model';
+import { Ability } from '../../../../classes/feature/ability/Ability';
+import OptionSetStaticDisplay from '../../subcomponents/description/OptionSetStaticDisplay';
+import { GloriousDeed } from '../../../../classes/feature/scenario/GloriousDeed';
+import {Scenario} from "../../../../classes/feature/scenario/Scenario";
+
+const RulesScenarioSummary = (props: any) => {
+    const scenarioObject: Scenario = props.data
+
+    function ScenarioSummaryTable(statlist : Scenario) {
+        return (
+            <>
+                <tr>
+                    <td className={'label-cell'}>
+                        {"Players"}
+                    </td>
+                    <td>
+                        {(statlist.EvenMatch ? "Even Match" : "Attack / Defend")}
+                    </td>
+                </tr>
+
+                <tr>
+                    <td className={'label-cell'}>
+                        {"Infiltrators"}
+                    </td>
+                    <td>
+                        {(statlist.InfiltratorType == 0 ? "Not Allowed" : statlist.InfiltratorType == 1 ? "Allowed" : "Special")}
+                    </td>
+                </tr>
+
+                <tr>
+                    <td className={'label-cell'}>
+                        {"Battle Length"}
+                    </td>
+                    <td>
+                        {(statlist.BattleMin == statlist.BattleMax ? statlist.BattleMin : (statlist.BattleMin + "-" + statlist.BattleMax)) + " Turns"}
+                    </td>
+                </tr>
+
+                <tr>
+                    <td className={'label-cell'}>
+                        {"Standard Terrain"}
+                    </td>
+                    <td>
+                        {(statlist.StandardTerrain == true ? "Yes" : "No")}
+                    </td>
+                </tr>
+
+                <tr>
+                    <td className={'label-cell'}>
+                        {"Staggered Deployment"}
+                    </td>
+                    <td>
+                        {(statlist.StaggeredDeployment == true ? "Yes" : "No")}
+                    </td>
+                </tr>
+            </>
+        )
+    }
+
+    return (
+        <ErrorBoundary fallback={<div>Something went wrong with GloriousDeedDisplay.tsx</div>}>
+            <div className={'RulesScenarioSummary rules-scenario-summary'}>
+                <div className={'rules-scenario-summary-title'}>
+                    {'Scenario Summary'}
+                </div>
+
+                <div className={'rules-scenario-summary-content'}>
+                    <img src={scenarioObject.ImgLink} style={{width: "100%"}}/>
+
+                    <table className={'rules-scenario-summary-table'}>
+                        <tbody>
+                            {ScenarioSummaryTable(scenarioObject)}
+                        </tbody>
+                    </table>
+
+                </div>
+
+
+            </div>
+        </ErrorBoundary>
+)
+}
+
+export default RulesScenarioSummary;
