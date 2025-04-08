@@ -19,6 +19,7 @@ import GenericTabledBlockDisplay from "../components/generics/GenereicTabledBloc
 import RulesPatron from "../components/features/rules-content/RulesPatron";
 import RulesExplotationTable from "../components/features/rules-content/RulesExplotationTable";
 import RulesHeadlineDisplay from "../components/features/rules-content/RulesHeadlineDisplay";
+import RulesInjuriesTable from "../components/features/rules-content/RulesInjuriesTable";
 
 export interface DisplayCollectionType {
     searchId      : string,
@@ -349,7 +350,6 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         menushowitems: true,
         returnDisplay(item: any) {
             return (
-                
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
                     <RulesHeadlineDisplay
                         content={'Exploration Locations'}
@@ -361,9 +361,9 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         },
         returnFilterSelect(manager : FilterManager, update : NoneToNoneFunction, close : NoneToNoneFunction) {
             return (
-                
+
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    
+
                 </ErrorBoundary>
             )
         }
@@ -377,33 +377,16 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         hidefilter: true,
         returnDisplay(item: any) {
             return (
-                
-                <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    <div className="borderthin bordergrey">
-                        <GenericTabledBlockDisplay 
-                                d_name={item.Name} 
-                                d_colour={"grey"} 
-                                d_state={false}  
-                                bordertype={0}
-                                d_border={false}
-                                d_margin={"sml"}
-                                d_content={item.TableVal}
-                                d_method={() => <>
-                                    <div className="borderthin backgroundBgCard bordergrey">
-                                        <div className="">
-                                        <InjuryDisplay data={item} />
-                                        </div>
-                                    </div>
-                                </>} />
-                        </div>
+                <ErrorBoundary fallback={<div>Something went wrong with RulesInjuriesTable Wrap.tsx</div>}>
+                    {/* @TODO: item need to contain all injuries instead of one singular injury */}
+                    <RulesInjuriesTable data={item} />
                 </ErrorBoundary>
             )
         },
         returnFilterSelect(manager : FilterManager, update : NoneToNoneFunction, close : NoneToNoneFunction) {
             return (
-                
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    
+
                 </ErrorBoundary>
             )
         }
