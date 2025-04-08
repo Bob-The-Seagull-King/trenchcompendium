@@ -1,0 +1,97 @@
+import '../../../../resources/styles/vendor/bootstrap.css'
+import React, { useEffect, useState } from 'react'
+import { ErrorBoundary } from "react-error-boundary";
+
+// Classes
+import { GlossaryRule } from '../../../../classes/feature/glossary/Glossary'
+import { returnDescription } from '../../../../utility/util'
+import { ExplorationLocation } from '../../../../classes/feature/exploration/ExplorationLocation';
+import OptionSetStaticDisplay from '../../../components/subcomponents/description/OptionSetStaticDisplay';
+import { EventRunner } from '../../../../classes/contextevent/contexteventhandler';
+import SingleOptionSetDisplay from "../../subcomponents/description/SingleOptionSetDisplay";
+
+const RulesExplorationLocation = (props: any) => {
+    const explorationLocationObject: ExplorationLocation = props.data
+
+    const [useLimits, setUseLimits] = useState([])
+    const [_keyvar, setkeyvar] = useState(0);
+
+    useEffect(() => {
+        async function SetModelOptions() {
+            const EventProc: EventRunner = new EventRunner();
+
+            if (explorationLocationObject.RestrictedSelection != null) {
+                const result_presentation = await EventProc.runEvent(
+                    "getLocationRestrictionsPresentable",
+                    explorationLocationObject,
+                    [],
+                    [],
+                    explorationLocationObject.RestrictedSelection
+                );
+                setUseLimits(result_presentation);
+                setkeyvar((prev) => prev + 1);
+            } else {
+                const result = await EventProc.runEvent(
+                    "getLocationRestrictions",
+                    explorationLocationObject,
+                    [],
+                    [],
+                    null
+                );
+                explorationLocationObject.RestrictedSelection = result;
+                const result_presentation = await EventProc.runEvent(
+                    "getLocationRestrictionsPresentable",
+                    explorationLocationObject,
+                    [],
+                    [],
+                    explorationLocationObject.RestrictedSelection
+                );
+                setUseLimits(result_presentation);
+                setkeyvar((prev) => prev + 1);
+            }
+        }
+
+        SetModelOptions();
+    }, []);
+
+
+    return (
+        <ErrorBoundary fallback={<div>Something went wrong with ExplorationLocationDisplay.tsx</div>}>
+            <div className='RulesExplorationLocation exploration-location' key={_keyvar}>
+                <div className={'exploration-location-name'}>{explorationLocationObject.Name}</div>
+
+                <p  className={'exploration-location-description'}>
+                    {returnDescription(explorationLocationObject, explorationLocationObject.Description)}
+                </p>
+
+                {explorationLocationObject.MyOptions.length &&
+                    <ul className={'exploration-location-options'}>
+                        {explorationLocationObject.MyOptions.map((item) => (
+                            <React.Fragment key={explorationLocationObject.Name + "-" + item.RefID}>
+
+                                {/* @TODO: Output the options as strings here. */}
+                                {/* - I don't know how to do that */}
+
+                                {item.Selections.map((selec) => (
+                                    <li key={item.Selections.indexOf(selec).toString()} className={'exploration-location-option'}>
+                                        <strong>{selec.display_str + ": "}</strong>
+                                        Lorem ipsum dolor sit amet
+                                        {/* Option Text goes here */}
+                                    </li>
+                                ))}
+                            </React.Fragment>
+                        ))}
+                    </ul>
+                }
+
+                <div className={'exploration-location-limits'}>
+                    {
+                        useLimits.join(", ")
+                    }
+                </div>
+            </div>
+        </ErrorBoundary>
+    )
+}
+
+export default RulesExplorationLocation;

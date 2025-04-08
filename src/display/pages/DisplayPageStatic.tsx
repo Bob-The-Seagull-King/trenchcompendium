@@ -17,6 +17,8 @@ import PatronDisplay from "../components/features/skill/PatronDisplay";
 import GenericCollapsableBlockDisplay from "../components/generics/GenericCollapsableBlockDisplay";
 import GenericTabledBlockDisplay from "../components/generics/GenereicTabledBlockDisplay";
 import RulesPatron from "../components/features/rules-content/RulesPatron";
+import RulesExplotationTable from "../components/features/rules-content/RulesExplotationTable";
+import RulesHeadlineDisplay from "../components/features/rules-content/RulesHeadlineDisplay";
 
 export interface DisplayCollectionType {
     searchId      : string,
@@ -349,10 +351,11 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
             return (
                 
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    <div className="size-section font-seriftext">
-                        {item.Name}
-                    </div>
-                    <ExplorationTableDisplay data={item} />
+                    <RulesHeadlineDisplay
+                        content={'Exploration Locations'}
+                        level={1}
+                    />
+                    <RulesExplotationTable data={item} />
                 </ErrorBoundary>
             )
         },
