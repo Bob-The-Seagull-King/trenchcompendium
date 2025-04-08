@@ -20,6 +20,7 @@ import RulesPatron from "../components/features/rules-content/RulesPatron";
 import RulesExplotationTable from "../components/features/rules-content/RulesExplotationTable";
 import RulesHeadlineDisplay from "../components/features/rules-content/RulesHeadlineDisplay";
 import RulesInjuriesTable from "../components/features/rules-content/RulesInjuriesTable";
+import RulesSkillTable from "../components/features/rules-content/RulesSkillTable";
 
 export interface DisplayCollectionType {
     searchId      : string,
@@ -401,22 +402,23 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
             return (
                 
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    
-                    <div className="borderthin bordergrey">
-                        <GenericCollapsableBlockDisplay 
-                            d_name={item.Name} 
-                            d_colour={"grey"} 
-                            d_state={false}  
-                            bordertype={0}
-                            d_border={true}
-                            d_col={"BgCard"}
-                            d_margin={"sml"}
-                            d_method={() => <>
-                                <div className="backgroundBgCard">
-                                    <SkillGroupDisplay data={item} />
-                                </div>
-                            </>} />
-                        </div>
+                    <RulesSkillTable data={item} />
+
+                    {/*<div className="borderthin bordergrey">*/}
+                    {/*    <GenericCollapsableBlockDisplay */}
+                    {/*        d_name={item.Name} */}
+                    {/*        d_colour={"grey"} */}
+                    {/*        d_state={false}  */}
+                    {/*        bordertype={0}*/}
+                    {/*        d_border={true}*/}
+                    {/*        d_col={"BgCard"}*/}
+                    {/*        d_margin={"sml"}*/}
+                    {/*        d_method={() => <>*/}
+                    {/*            <div className="backgroundBgCard">*/}
+                    {/*                <SkillGroupDisplay data={item} />*/}
+                    {/*            </div>*/}
+                    {/*        </>} />*/}
+                    {/*    </div>*/}
                 </ErrorBoundary>
             )
         },

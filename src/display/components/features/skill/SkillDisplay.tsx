@@ -16,15 +16,16 @@ const SkillDisplay = (props: any) => {
     
     return (
         <ErrorBoundary fallback={<div>Something went wrong with SkillDisplay.tsx</div>}>
-            <div className='SkillDisplay abilityInternalStructure'>
-                <div className='row'>
-                    {returnDescription(skillObject, skillObject.Description)}
-                </div>
-                <div className='row'>
-                    {
-                        <OptionSetStaticDisplay data={skillObject.MyOptions} />
-                    }
-                </div>
+            <div className='SkillDisplay'>
+                {returnDescription(skillObject, skillObject.Description)}
+
+                {skillObject.MyOptions.length &&
+                    <div className='row'>
+                        {
+                            <OptionSetStaticDisplay data={skillObject.MyOptions}/>
+                        }
+                    </div>
+                }
             </div>
         </ErrorBoundary>
     )

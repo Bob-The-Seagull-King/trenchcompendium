@@ -20,7 +20,6 @@ const RulesInjury = (props: any) => {
                         {/* @TODO: Add Injury Name here*/}
                         {'Injury Name'}
                     </strong>
-
                 </div>
 
                 <p  className={'injury-description'}>
