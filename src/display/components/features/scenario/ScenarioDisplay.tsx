@@ -25,6 +25,7 @@ import { faLink } from '@fortawesome/free-solid-svg-icons';
 import GenericCollapsableBlockDisplay from '../../../components/generics/GenericCollapsableBlockDisplay';
 import RulesAnchorLinks from "../rules-content/RulesAnchorLinks";
 import RulesHeadlineDisplay from "../rules-content/RulesHeadlineDisplay";
+import RulesGloriousDeed from "../rules-content/RulesGloriousDeed";
 
 const ScenarioDisplay = (props: any) => {
     const scenarioObject: Scenario = props.data
@@ -230,24 +231,17 @@ const ScenarioDisplay = (props: any) => {
                         level={2}
                     />
 
-                    {returnDescription(scenarioObject, scenarioObject.DeedsDesc)}
+                    <p>
+                        {returnDescription(scenarioObject, scenarioObject.DeedsDesc)}
+                    </p>
 
                     {scenarioObject.Deeds.map((item) => (
-                        <div key={"faction_rule_" + scenarioObject.ID + "_rule_id_" + item.ID}>
-                            <GenericCollapsableBlockDisplay
-                                d_name={item.Name}
-                                d_colour={"grey"}
-                                d_state={false}
-                                d_margin={"sml"}
-                                d_col={"default"}
-                                d_border={false}
-                                bordertype={0}
-                                d_method={() => <div className={"bordergrey borderthin"}>
-                                    <div className="">
-                                        <GloriousDeedDisplay data={item}/>
-                                    </div>
-                                </div>}/>
-                        </div>
+                        <React.Fragment key={"faction_rule_" + scenarioObject.ID + "_rule_id_" + item.ID}>
+                                {/* Your child components here */}
+                            <RulesGloriousDeed
+                                data={item}
+                            />
+                        </React.Fragment>
                     ))}
 
 
@@ -261,21 +255,12 @@ const ScenarioDisplay = (props: any) => {
                             {"If agreed by the players prior to starting the game, you may replace one of the Glory Deeds above for one of the following options:"}
 
                             {scenarioObject.OptionalDeeds.map((item) => (
-                                <div key={"faction_rule_" + scenarioObject.ID + "_rule_id_" + item.ID}>
-                                    <GenericCollapsableBlockDisplay
-                                        d_name={item.Name}
-                                        d_colour={"grey"}
-                                        d_state={false}
-                                        d_margin={"sml"}
-                                        d_col={"default"}
-                                        d_border={false}
-                                        bordertype={0}
-                                        d_method={() => <div className={"bordergrey borderthin"}>
-                                            <div className="">
-                                                <GloriousDeedDisplay data={item}/>
-                                            </div>
-                                        </div>}/>
-                                </div>
+                                <React.Fragment key={"faction_rule_" + scenarioObject.ID + "_rule_id_" + item.ID}>
+                                    {/* Your child components here */}
+                                    <RulesGloriousDeed
+                                        data={item}
+                                    />
+                                </React.Fragment>
                             ))}
                         </>
                     }
