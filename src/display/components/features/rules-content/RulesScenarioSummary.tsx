@@ -68,15 +68,15 @@ const RulesScenarioSummary = (props: any) => {
 
     return (
         <ErrorBoundary fallback={<div>Something went wrong with GloriousDeedDisplay.tsx</div>}>
-            <div className={'RulesScenarioSummary rules-scenario-summary'}>
-                <div className={'rules-scenario-summary-title'}>
+            <div className={'RulesScenarioSummary rules-scenario-summary rules-card'}>
+                <div className={'rules-scenario-summary-title rules-card-title'}>
                     {'Scenario Summary'}
                 </div>
 
-                <div className={'rules-scenario-summary-content'}>
+                <div className={'rules-scenario-summary-content rules-card-content'}>
                     <img src={scenarioObject.ImgLink} style={{width: "100%"}}/>
 
-                    <table className={'rules-scenario-summary-table'}>
+                    <table className={'rules-scenario-summary-table rules-card-table'}>
                         <tbody>
                             {ScenarioSummaryTable(scenarioObject)}
                         </tbody>

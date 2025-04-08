@@ -216,7 +216,6 @@ const ScenarioDisplay = (props: any) => {
 
                     {scenarioObject.Deeds.map((item) => (
                         <React.Fragment key={"faction_rule_" + scenarioObject.ID + "_rule_id_" + item.ID}>
-                                {/* Your child components here */}
                             <RulesGloriousDeed
                                 data={item}
                             />

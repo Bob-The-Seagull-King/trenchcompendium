@@ -16,7 +16,7 @@ const SkillDisplay = (props: any) => {
     
     return (
         <ErrorBoundary fallback={<div>Something went wrong with SkillDisplay.tsx</div>}>
-            <div className='abilityInternalStructure'>
+            <div className='SkillDisplay abilityInternalStructure'>
                 <div className='row'>
                     {returnDescription(skillObject, skillObject.Description)}
                 </div>

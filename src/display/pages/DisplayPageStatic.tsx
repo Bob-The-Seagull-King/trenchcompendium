@@ -16,6 +16,7 @@ import SkillGroupDisplay from "../components/features/skill/SkillGroupDisplay";
 import PatronDisplay from "../components/features/skill/PatronDisplay";
 import GenericCollapsableBlockDisplay from "../components/generics/GenericCollapsableBlockDisplay";
 import GenericTabledBlockDisplay from "../components/generics/GenereicTabledBlockDisplay";
+import RulesPatron from "../components/features/rules-content/RulesPatron";
 
 export interface DisplayCollectionType {
     searchId      : string,
@@ -457,13 +458,9 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         menushowitems: true,
         returnDisplay(item: any) {
             return (
-                
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    <div className="size-section font-seriftext">
-                        {item.Name}
-                    </div>
-                    
-                    <PatronDisplay data={item} />
+                    {/*@TODO: Add title and intro text for the patrons page*/}
+                    <RulesPatron data={item} />
                 </ErrorBoundary>
             )
         },

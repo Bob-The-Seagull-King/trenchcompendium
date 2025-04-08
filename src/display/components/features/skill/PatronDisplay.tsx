@@ -22,7 +22,7 @@ const PatronDisplay = (props: any) => {
 
     return (
         <ErrorBoundary fallback={<div>Something went wrong with ExplorationTableDisplay.tsx</div>}>
-            <div className=''>
+            <div className='PatronDisplay'>
                 <div className=''>
                      <div>
                         {returnDescription(patronObject, patronObject.Description)}
