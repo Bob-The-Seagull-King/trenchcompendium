@@ -45,7 +45,7 @@ const HomeRoute: React.FC = () => {
                             </div>
                         </div>
                         <div className="row"> 
-                            <br/>
+                            <hr />
                         </div>
                         <div className="row row-cols-md-2 row-cols-1 gy-3 gx-3">
                             <div className="col">

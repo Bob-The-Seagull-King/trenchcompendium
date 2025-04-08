@@ -43,9 +43,6 @@ const CompendiumRoute: React.FC<IControllerProp> = (prop) => {
                     <div className="col-md-3 col-sm-12">
                         <RulesMenuBody controller={prop.controller}/>
 
-                        <hr />
-                        <MenuBody controller={prop.controller}/>
-
                     </div>
 
                     <div className="col-md-9 col-sm-12">
