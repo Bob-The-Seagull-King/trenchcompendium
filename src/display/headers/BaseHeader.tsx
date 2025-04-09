@@ -12,12 +12,14 @@ import { getRouteName } from "../../utility/functions"
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faBars, faGear, faHouse, faMagnifyingGlass, faSquare} from '@fortawesome/free-solid-svg-icons'
-import logo from '../../resources/images/trench-companion-logo-white-v2.png'
+import logoDarkMode from '../../resources/images/trench-companion-logo-white-v2.png'
+import logoLightMode from '../../resources/images/trench-companion-logo-black-v2.png'
 
 
 
 // Component
 import { ControllerController } from '../../classes/_high_level_controllers/ControllerController';
+import {useGlobalState} from "../../utility/globalstate";
 
 interface IControllerProp {
     controller : ControllerController; // The controller being passed through
@@ -32,6 +34,9 @@ const BaseHeader: React.FC<IControllerProp> = (prop: any) => {
 
     const navigate = useNavigate();
 
+    // get Theme
+    const [theme] = useGlobalState('theme');
+
     function NavigateHome() {
         navigate('/', {state: Date.now().toString()});
     }
@@ -45,7 +50,9 @@ const BaseHeader: React.FC<IControllerProp> = (prop: any) => {
                     <FontAwesomeIcon icon={faBars} className=""/>
                 </button>
                 <div className="logo-wrap">
-                    <img src={logo} alt="Trench Companion Logo" className={'logo'}
+                    <img src={theme === 'dark' ? logoDarkMode : logoLightMode}
+                         alt="Trench Companion Logo"
+                         className={'logo'}
                          onClick={() => NavigateHome()}
                     />
                 </div>

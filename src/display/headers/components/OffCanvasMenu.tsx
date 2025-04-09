@@ -10,7 +10,9 @@ import { faClose} from '@fortawesome/free-solid-svg-icons'
 import { useNavigate } from 'react-router-dom';
 import { ControllerController } from '../../../classes/_high_level_controllers/ControllerController';
 import RulesMenuBody from "../../components/features/rules-content/RulesMenuBody";
-import logo from "../../../resources/images/trench-companion-logo-white-v2.png";
+import logoDarkMode from '../../../resources/images/trench-companion-logo-white-v2.png'
+import logoLightMode from '../../../resources/images/trench-companion-logo-black-v2.png'
+import {useGlobalState} from "../../../utility/globalstate";
 
 interface IControllerProp {
     controller : ControllerController; // The controller being passed through
@@ -36,6 +38,8 @@ const OffcanvasMenu: React.FC<IControllerProp> = (prop) => {
         navigate('/');
     }
 
+    // get Theme
+    const [theme] = useGlobalState('theme');
     
     return (
         <ErrorBoundary fallback={<div>Something went wrong with OffcanvasMenu.tsx</div>}>
@@ -43,7 +47,8 @@ const OffcanvasMenu: React.FC<IControllerProp> = (prop) => {
                 <Offcanvas.Header className="">
                     <Offcanvas.Title className="">
                         <div className={'logo-wrap'}>
-                            <img src={logo} alt="Trench Companion Logo" className={'logo'}
+                            <img src={theme === 'dark' ? logoDarkMode : logoLightMode}
+                                 alt="Trench Companion Logo" className={'logo'}
                                  onClick={() => NavigateHome()}
                             />
                         </div>
