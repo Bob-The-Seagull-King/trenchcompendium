@@ -145,7 +145,7 @@ class Model extends StaticContextObject {
     }
 
     public async GetPresentableStatistics() {
-        if (this.StatChoices == null) {            
+        if (this.StatChoices == null) {        
             const EventProc : EventRunner = new EventRunner();
 
             const result = await EventProc.runEvent(
@@ -156,7 +156,7 @@ class Model extends StaticContextObject {
                 null
             )
             return GetPresentationStatistic(this.Stats, result);
-        } else {            
+        } else {               
             return GetPresentationStatistic(this.Stats, this.StatChoices);
         }
     }

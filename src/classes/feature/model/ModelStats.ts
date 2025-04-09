@@ -45,6 +45,8 @@ export function MergeTwoStats(baseList: ModelStatistics, addonList : ModelStatis
 }
 
 export function GetPresentationStatistic(base_stats : ModelStatistics, stat_options : ModelStatistics[][]) {
+    console.log(base_stats);
+    console.log(stat_options);
     const finalstats : PresentModelStatistics = {}
     const movement_op = []  
     const melee_op = []  
@@ -65,31 +67,30 @@ export function GetPresentationStatistic(base_stats : ModelStatistics, stat_opti
     if (base_stats.mercenary != undefined) { mercenary_op.push(base_stats.mercenary)}
 
     try {
-
-    for (let i = 0; i < stat_options.length; i++) {
-        const option_suite : ModelStatistics[] = stat_options[i]
-        let add_to_merc = true
-        for (let j = 0; option_suite.length; j++) {
-            if (hasOnlyOneProperty(option_suite[j]) == false) {
-                add_to_merc = false;
-                break;
+        for (let i = 0; i < stat_options.length; i++) {
+            const option_suite : ModelStatistics[] = stat_options[i]
+            let add_to_merc = true
+            for (let j = 0; j < option_suite.length; j++) {
+                if (hasOnlyOneProperty(option_suite[j]) == false) {
+                    add_to_merc = false;
+                    break;
+                }
+            }
+            if (add_to_merc) {
+                for (let j = 0; option_suite.length; j++) {
+                    const cur_opt = option_suite[j];
+                    if (cur_opt.armour != undefined) {armour_op.push(cur_opt.armour)}
+                    if (cur_opt.base != undefined) {base_op.push(cur_opt.base)}
+                    if (cur_opt.melee != undefined) {melee_op.push(cur_opt.melee)}
+                    if (cur_opt.mercenary != undefined) {mercenary_op.push(cur_opt.mercenary)}
+                    if (cur_opt.movement != undefined) {movement_op.push(cur_opt.movement)}
+                    if (cur_opt.movetype != undefined) {movetype_op.push(cur_opt.movetype)}
+                    if (cur_opt.potential != undefined) {potential_op.push(cur_opt.potential)}
+                    if (cur_opt.ranged != undefined) {ranged_op.push(cur_opt.ranged)}
+                }
             }
         }
-        if (add_to_merc) {
-            for (let j = 0; option_suite.length; j++) {
-                const cur_opt = option_suite[j];
-                if (cur_opt.armour != undefined) {armour_op.push(cur_opt.armour)}
-                if (cur_opt.base != undefined) {base_op.push(cur_opt.base)}
-                if (cur_opt.melee != undefined) {melee_op.push(cur_opt.melee)}
-                if (cur_opt.mercenary != undefined) {mercenary_op.push(cur_opt.mercenary)}
-                if (cur_opt.movement != undefined) {movement_op.push(cur_opt.movement)}
-                if (cur_opt.movetype != undefined) {movetype_op.push(cur_opt.movetype)}
-                if (cur_opt.potential != undefined) {potential_op.push(cur_opt.potential)}
-                if (cur_opt.ranged != undefined) {ranged_op.push(cur_opt.ranged)}
-            }
-        }
-    }
-    } catch (e) {undefined}
+    } catch (e) {console.log(e)}
 
     if (movement_op.length > 0) {
         const arr = []

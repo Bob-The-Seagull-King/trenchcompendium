@@ -46,8 +46,6 @@ const RulesModelDisplay = (props: any) => {
             const result = await modelcollectionObject.GetPresentableStatistics()
             setstats(result);
             setkeyvar((prev) => prev + 1);
-            console.log(modelcollectionObject.ID)
-            console.log(result);
         }
 
         SetModelOptions();
@@ -173,7 +171,7 @@ const RulesModelDisplay = (props: any) => {
                 for (let j = 0; j < stats.base[i].length; j++) {
                     curstats.push(stats.base[i][j].toString());
                 }
-                basestats.push(curstats.join('x'))
+                basestats.push(curstats.join('x') + "mm")
             }
         }
 
@@ -216,7 +214,7 @@ const RulesModelDisplay = (props: any) => {
                             Base:
                         </span>
                         <span className="fighter-meta-value">
-                            {returnBaseSize(statchoices) + "mm"}
+                            {returnBaseSize(statchoices)}
                         </span>
                     </div>
 
