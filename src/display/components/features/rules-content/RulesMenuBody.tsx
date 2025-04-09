@@ -123,7 +123,7 @@ const RulesMenuBody: React.FC<IControllerProp> = (prop) => {
 
     return (
         <ErrorBoundary fallback={<div>Something went wrong with RulesMenuBody.tsx</div>}>
-            <div className={'rules-menu-body'}>
+            <div className={'RulesMenuBody rules-menu-body'}>
                 <div className={'rules-menu-header'}>
                     <div onClick={() => NavigateHome()} className={'home-link'}>
                         <FontAwesomeIcon icon={faChevronLeft} />

@@ -35,6 +35,7 @@
         padding-left: 45px
         background-color: $color-highlight-bg
         display: flex
+        color: $color-text
 
         .home-link
             position: absolute
@@ -88,16 +89,16 @@
         list-style-type: none
         margin: 0
         padding: 0
+        color: $color-text
 
     .menu-list-item
         position: relative
 
         &.has-children
-            .menu-list-item-anchor
-                display: block
+            .menu-list-item-anchor-wrap > a
                 padding-right: 45px
 
-    .menu-list-item-anchor // all anchor tags
+    .menu-list-item-anchor-wrap > a // all anchor tags
         display: block
         background-color: $color-bg-1
         color: $color-text
@@ -124,19 +125,19 @@
 
     .menu-list.level-0
         > li
-            > a
+            > .menu-list-item-anchor-wrap > a
                 padding: 15px
                 background-color: $color-bg-1
 
     .menu-list.level-1
         > li
-            > a
+            > .menu-list-item-anchor-wrap > a
                 padding: 15px 15px 15px 20px
                 background-color: $color-bg-2
 
     .menu-list.level-2
         > li
-            > a
+            > .menu-list-item-anchor-wrap > a
                 padding: 15px 15px 15px 25px
                 background-color: $color-bg-3
 

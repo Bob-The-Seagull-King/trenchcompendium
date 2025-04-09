@@ -99,7 +99,7 @@ const RulesMenuItem: React.FC<{ data: RulesMenuItemProps[], level?: number; pare
 
                 return (
                     <li className={`menu-list-item ${item.children ? "has-children" : ""}`} key={item.slug}>
-                        <div className="menu-list-item-anchor">
+                        <div className="menu-list-item-anchor-wrap">
                             <CustomNavLink link={`/${itemPath}`} runfunc={() => {NavigateOut(`/${itemPath}`)}}>
                                 {item.title}
                             </CustomNavLink>

@@ -9,7 +9,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClose} from '@fortawesome/free-solid-svg-icons'
 import { useNavigate } from 'react-router-dom';
 import { ControllerController } from '../../../classes/_high_level_controllers/ControllerController';
-import MenuBody from '../../components/subcomponents/MenuBody';
 import RulesMenuBody from "../../components/features/rules-content/RulesMenuBody";
 import logo from "../../../resources/images/trench-companion-logo-white-v2.png";
 
