@@ -17,31 +17,38 @@
         position: relative
         color: #fff
         text-decoration: none
+        background-color: $color-bg-2
+        border-bottom: 1px solid $color-highlight
+        padding: 10px 20px
 
-        border: 1px solid var(--colour_border)
+        transition: background-color .2s ease, border-bottom-color .2s ease
 
-        i, svg
-            position: absolute
-            top: 50%
-            transform: translateY(-50%)
+        &:hover
+            background-color: $color-bg-3
+            border-bottom-color: $color-highlight-text
 
+
+
+        .page-link-label
+            display: block
+            color: $color-highlight-text
+            font-size: 14px
+            margin-bottom: 2px
 
         .page-name
 
     .rules-page-link-prev
-        padding: 10px 10px 10px 20px
 
         i, svg
             left: 5px
 
         .page-name
-            margin-left: 5px
 
     .rules-page-link-next
-        padding: 10px 20px 10px 10px
+        margin-left: auto
+        text-align: right
 
         i, svg
             right: 5px
 
         .page-name
-            margin-right: 5px

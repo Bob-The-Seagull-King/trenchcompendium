@@ -27,27 +27,42 @@ const RulesPageLinks: React.FC<RulesPageLinksProps> = (prop) => {
 
     return (
         <div className="rules-page-links">
-            <CustomNavLink link={prop.display_path + ((prop.prev_page != undefined)? prop.prev_page.HeldItem.ID : "")} runfunc={RunPrev}>
-            <div className={'rules-page-link rules-page-link-prev'}>
-                <FontAwesomeIcon icon={faChevronLeft} className="" />
+            {prop.prev_page != undefined &&
+                <CustomNavLink
+                    link={prop.display_path + ((prop.prev_page != undefined)? prop.prev_page.HeldItem.ID : "")}
+                    runfunc={RunPrev}
+                    classes={'rules-page-link rules-page-link-prev'}
+                >
+                <span className={'page-link-label'}>
+                    <FontAwesomeIcon icon={faChevronLeft} className="icon-inline-left-l" />
+                    {'Previous'}
+                </span>
 
-                <span className={'page-name'}>
+                    <span className={'page-name'}>
                     {(prop.prev_page != undefined)? prop.prev_page.HeldItem.Name : ""}
                 </span>
-            </div>
-            </CustomNavLink>
+                </CustomNavLink>
+            }
 
-            <CustomNavLink link={prop.display_path + ((prop.next_page != undefined)? prop.next_page.HeldItem.ID : "")} runfunc={RunNext}>
-            <div className={'rules-page-link rules-page-link-next'}>
-                <span className={'page-name'}>
-                    {(prop.next_page != undefined)? prop.next_page.HeldItem.Name : ""}
-                </span>
+            {prop.next_page != undefined &&
+                <CustomNavLink
+                    link={prop.display_path + ((prop.next_page != undefined) ? prop.next_page.HeldItem.ID : "")}
+                    runfunc={RunNext}
+                    classes={'rules-page-link rules-page-link-next'}
+                >
+                    <span className={'page-link-label'}>
+                        {'Next'}
+                        <FontAwesomeIcon icon={faChevronRight} className="icon-inline-right-l"/>
+                    </span>
 
-                <FontAwesomeIcon icon={faChevronRight} className=""/>
-            </div>
-            </CustomNavLink>
+                    <span className={'page-name'}>
+                        {(prop.next_page != undefined) ? prop.next_page.HeldItem.Name : ""}
+                    </span>
+
+                </CustomNavLink>
+            }
         </div>
-)
+    )
 };
 
 export default RulesPageLinks;
