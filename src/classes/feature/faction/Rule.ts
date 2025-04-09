@@ -24,7 +24,7 @@ class Rule extends StaticOptionContextObject {
     
     public Description;
 
-    public BonusUpgrades: ModelUpgradeRelationship[] | null = null;
+    public BonusUpgrades!: ModelUpgradeRelationship[];
 
     /**
      * Assigns parameters and creates a series of description

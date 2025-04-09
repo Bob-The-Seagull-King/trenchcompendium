@@ -24,7 +24,6 @@ import RuleDisplay from './RuleDisplay';
 import OptionSetStaticDisplay from '../../subcomponents/description/OptionSetStaticDisplay';
 import FactionModelDisplay from '../model/FactionModelDisplay';
 import FactionEquipmentDisplay from '../equipment/FactionEquipmentDisplay';
-import FactionEquipmentWideDisplay from '../equipment/FactionEquipmentWideDisplay';
 import GenericCollapsableBlockDisplay from '../../../components/generics/GenericCollapsableBlockDisplay';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLink } from '@fortawesome/free-solid-svg-icons';

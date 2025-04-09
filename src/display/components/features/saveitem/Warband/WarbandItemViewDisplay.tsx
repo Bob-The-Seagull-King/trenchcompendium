@@ -1,4 +1,5 @@
-import '../../../../resources/styles/vendor/bootstrap.css'
+
+import '../../../../../resources/styles/vendor/bootstrap.css'
 import React, { useEffect, useRef, useState } from 'react'
 import { ErrorBoundary } from "react-error-boundary";
 
@@ -8,12 +9,12 @@ import 'react-toastify/dist/ReactToastify.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faDownload } from '@fortawesome/free-solid-svg-icons'
 import { Button } from 'react-bootstrap';
-import { WarbandManager } from '../../../../classes/saveitems/WarbandManager';
-import { WarbandContentItem } from '../../../../classes/saveitems/WarbandContentItem';
+import { WarbandManager } from '../../../../../classes/saveitems/Warband/WarbandManager';
+import { UserWarband } from '../../../../../classes/saveitems/Warband/UserWarband';
 
 const WarbandItemViewDisplay = (prop: any) => {
     const Manager : WarbandManager = prop.manager;
-    const WarbandItem: WarbandContentItem = prop.data;
+    const WarbandItem: UserWarband = prop.data;
     const UpdateFunction = prop.updater;
     
     const ref = useRef<HTMLDivElement>(null);
@@ -24,7 +25,7 @@ const WarbandItemViewDisplay = (prop: any) => {
         )}`;
         const link = document.createElement("a");
         link.href = jsonString;
-        link.download = WarbandItem.Title + ".json";
+        link.download = WarbandItem.Name + ".json";
     
         link.click();
       };
@@ -51,7 +52,7 @@ const WarbandItemViewDisplay = (prop: any) => {
             <div className="row">
                 <div className=" largefonttext centerPosition">
                         <div className="widecentertext">
-                            {WarbandItem.Title} 
+                            {WarbandItem.Name} 
                         </div>
                     </div>
             </div>

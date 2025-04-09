@@ -7,7 +7,7 @@ import { IVariantFaction, FactionCollection } from '../../classes/feature/factio
 
 class FactionFactory {
 
-    static CreateFactionCollection(_rule: IFaction, parent : ContextObject | null) {
+    static async CreateFactionCollection(_rule: IFaction, parent : ContextObject | null) {
         const cache = StaticDataCache.getInstance();
         const isValid = (cache.CheckID('factioncollection', _rule.id))
         if (isValid == false) {
@@ -16,21 +16,22 @@ class FactionFactory {
         
         const rule = new FactionCollection(_rule, parent)
         cache.AddToCache('factioncollection', rule);
+        await rule.ConstructFactions();
         return rule;
     }
 
-    static CreateNewFactionCollection(_val : string, parent : ContextObject | null) {
+    static async CreateNewFactionCollection(_val : string, parent : ContextObject | null) {
         const cache = StaticDataCache.getInstance();
         const isValid = (cache.CheckID('factioncollection', _val))
         if (isValid == false) {
             return cache.FactionCollectionCache[_val];
         }
         const ruledata = Requester.MakeRequest({searchtype: "id", searchparam: {type: "faction", id: _val}}) as IFaction
-        const rulenew = FactionFactory.CreateFactionCollection(ruledata, parent)
+        const rulenew = await FactionFactory.CreateFactionCollection(ruledata, parent)
         return rulenew;
     }
 
-    static CreateFaction(_rule: IFaction, parent : ContextObject | null) {
+    static async CreateFaction(_rule: IFaction, parent : ContextObject | null) {
         const cache = StaticDataCache.getInstance();
         const isValid = (cache.CheckID('faction', _rule.id))
         
@@ -42,12 +43,13 @@ class FactionFactory {
         }
         const rule = new Faction(_rule, parent)
         cache.AddToCache('faction', rule);
-        rule.BuildFactionModels(_rule.id);
-        rule.BuildFactionEquipment(_rule.id)
+        await rule.BuildFactionModels(_rule.id);
+        await rule.BuildFactionEquipment(_rule.id)
+        await rule.BuildRules(_rule.rules)
         return rule;
     }
 
-    static CreateNewFaction(_val : string, parent : ContextObject | null) {
+    static async CreateNewFaction(_val : string, parent : ContextObject | null) {
         const cache = StaticDataCache.getInstance();
         const isValid = (cache.CheckID('faction', _val))
         if (isValid == false) {
@@ -58,13 +60,13 @@ class FactionFactory {
         }
         const ruledata = Requester.MakeRequest({searchtype: "id", searchparam: {type: "faction", id: _val}}) as IFaction
         if (ruledata.id == undefined) {
-            return FactionFactory.CreateNewVariantFaction(_val, parent);
+            return await FactionFactory.CreateNewVariantFaction(_val, parent);
         }
-        const rulenew = FactionFactory.CreateFaction(ruledata, parent)
+        const rulenew = await FactionFactory.CreateFaction(ruledata, parent)
         return rulenew;
     }
 
-    static CreateVariantFaction(_base: IFaction, varaint: IVariantFaction, parent : ContextObject | null) {
+    static async CreateVariantFaction(_base: IFaction, varaint: IVariantFaction, parent : ContextObject | null) {
         const cache = StaticDataCache.getInstance();
         const isValid = (cache.CheckID('faction', varaint.id))
         if (isValid == false) {
@@ -73,12 +75,13 @@ class FactionFactory {
         const BasedFactionData : IFaction = FactionCollection.MergeFactions(_base, varaint);
         const rule = new Faction(BasedFactionData, parent)
         cache.AddToCache('faction', rule);
-        rule.BuildFactionModels(BasedFactionData.id);
-        rule.BuildFactionEquipment(BasedFactionData.id)
+        await rule.BuildFactionModels(BasedFactionData.id);
+        await rule.BuildFactionEquipment(BasedFactionData.id)
+        await rule.BuildRules(BasedFactionData.rules)
         return rule;
     }
 
-    static CreateNewVariantFaction(_val : string, parent : ContextObject | null) {
+    static async CreateNewVariantFaction(_val : string, parent : ContextObject | null) {
         const cache = StaticDataCache.getInstance();
         const isValid = (cache.CheckID('faction', _val))
         if (isValid == false) {
@@ -86,7 +89,7 @@ class FactionFactory {
         }
         const vardata = Requester.MakeRequest({searchtype: "id", searchparam: {type: "factionvariant", id: _val}}) as IVariantFaction
         const basedata = Requester.MakeRequest({searchtype: "id", searchparam: {type: "faction", id: vardata.base_id}}) as IFaction
-        const rulenew = FactionFactory.CreateVariantFaction(basedata, vardata, parent)
+        const rulenew = await FactionFactory.CreateVariantFaction(basedata, vardata, parent)
         return rulenew;
     }
 

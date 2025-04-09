@@ -16,11 +16,6 @@ import SkillGroupDisplay from "../components/features/skill/SkillGroupDisplay";
 import PatronDisplay from "../components/features/skill/PatronDisplay";
 import GenericCollapsableBlockDisplay from "../components/generics/GenericCollapsableBlockDisplay";
 import GenericTabledBlockDisplay from "../components/generics/GenereicTabledBlockDisplay";
-import RulesPatron from "../components/features/rules-content/RulesPatron";
-import RulesExplotationTable from "../components/features/rules-content/RulesExplotationTable";
-import RulesHeadlineDisplay from "../components/features/rules-content/RulesHeadlineDisplay";
-import RulesInjuriesTable from "../components/features/rules-content/RulesInjuriesTable";
-import RulesSkillTable from "../components/features/rules-content/RulesSkillTable";
 
 export interface DisplayCollectionType {
     searchId      : string,
@@ -351,20 +346,20 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         menushowitems: true,
         returnDisplay(item: any) {
             return (
+                
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    <RulesHeadlineDisplay
-                        content={'Exploration Locations'}
-                        level={1}
-                    />
-                    <RulesExplotationTable data={item} />
+                    <div className="size-section font-seriftext">
+                        {item.Name}
+                    </div>
+                    <ExplorationTableDisplay data={item} />
                 </ErrorBoundary>
             )
         },
         returnFilterSelect(manager : FilterManager, update : NoneToNoneFunction, close : NoneToNoneFunction) {
             return (
-
+                
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-
+                    
                 </ErrorBoundary>
             )
         }
@@ -377,17 +372,39 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         menushowitems: false,
         hidefilter: true,
         returnDisplay(item: any) {
+            console.log(item);
             return (
-                <ErrorBoundary fallback={<div>Something went wrong with RulesInjuriesTable Wrap.tsx</div>}>
-                    {/* @TODO: item need to contain all injuries instead of one singular injury */}
-                    <RulesInjuriesTable data={item} />
+                
+                <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
+                        {item.map((subitem : any) => (
+                        <div key={subitem.HeldItem.ID} className="borderthin bordergrey">
+                            <GenericTabledBlockDisplay 
+                                d_name={subitem.HeldItem.Name} 
+                                d_colour={"grey"} 
+                                d_state={false}  
+                                bordertype={0}
+                                d_border={false}
+                                d_margin={"sml"}
+                                d_content={subitem.HeldItem.TableVal}
+                                d_method={() => <>
+                                    <div className="borderthin backgroundBgCard bordergrey">
+                                        <div className="">
+                                        <InjuryDisplay data={subitem.HeldItem} />
+                                        </div>
+                                    </div>
+                                </>} />
+                                </div>
+                        ))
+
+                        }
                 </ErrorBoundary>
             )
         },
         returnFilterSelect(manager : FilterManager, update : NoneToNoneFunction, close : NoneToNoneFunction) {
             return (
+                
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-
+                    
                 </ErrorBoundary>
             )
         }
@@ -402,23 +419,22 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
             return (
                 
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    <RulesSkillTable data={item} />
-
-                    {/*<div className="borderthin bordergrey">*/}
-                    {/*    <GenericCollapsableBlockDisplay */}
-                    {/*        d_name={item.Name} */}
-                    {/*        d_colour={"grey"} */}
-                    {/*        d_state={false}  */}
-                    {/*        bordertype={0}*/}
-                    {/*        d_border={true}*/}
-                    {/*        d_col={"BgCard"}*/}
-                    {/*        d_margin={"sml"}*/}
-                    {/*        d_method={() => <>*/}
-                    {/*            <div className="backgroundBgCard">*/}
-                    {/*                <SkillGroupDisplay data={item} />*/}
-                    {/*            </div>*/}
-                    {/*        </>} />*/}
-                    {/*    </div>*/}
+                    
+                    <div className="borderthin bordergrey">
+                        <GenericCollapsableBlockDisplay 
+                            d_name={item.Name} 
+                            d_colour={"grey"} 
+                            d_state={false}  
+                            bordertype={0}
+                            d_border={true}
+                            d_col={"BgCard"}
+                            d_margin={"sml"}
+                            d_method={() => <>
+                                <div className="backgroundBgCard">
+                                    <SkillGroupDisplay data={item} />
+                                </div>
+                            </>} />
+                        </div>
                 </ErrorBoundary>
             )
         },
@@ -446,9 +462,13 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         menushowitems: true,
         returnDisplay(item: any) {
             return (
+                
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    {/*@TODO: Add title and intro text for the patrons page*/}
-                    <RulesPatron data={item} />
+                    <div className="size-section font-seriftext">
+                        {item.Name}
+                    </div>
+                    
+                    <PatronDisplay data={item} />
                 </ErrorBoundary>
             )
         },

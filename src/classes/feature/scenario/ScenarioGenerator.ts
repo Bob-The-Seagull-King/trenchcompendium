@@ -34,7 +34,7 @@ class ScenarioGenerator {
     public ListOfDeedsGroupB : GloriousDeed[] = [];
     public ListOfDeedsGroupC : GloriousDeed[] = [];
 
-    public CurrentScenario : Scenario;
+    public CurrentScenario!: Scenario;
     
     /**
      * Assigns parameters and creates a series of description
@@ -47,12 +47,14 @@ class ScenarioGenerator {
         this.GatherDeployments();
         this.BuildDeeds(3, this.ListOfDeedsGroupA);
         this.BuildDeeds(1, this.ListOfDeedsGroupB);
-        this.BuildDeeds(2, this.ListOfDeedsGroupC);
-        this.CurrentScenario = this.ConstructNewScenario();
+        this.BuildDeeds(2, this.ListOfDeedsGroupC);        
+        this.ConstructNewScenario().then(result => {
+            this.CurrentScenario = result;
+        });
     }
 
-    public ResetScenario() {
-        this.CurrentScenario = this.ConstructNewScenario();
+    public async ResetScenario() {
+        this.CurrentScenario = await this.ConstructNewScenario();
     }
 
     public GatherObjectives() {
@@ -101,7 +103,7 @@ class ScenarioGenerator {
         }
     }
 
-    public ConstructNewScenario() {
+    public async ConstructNewScenario() {
         if (this.ListOfObjectives.length === 0) throw new Error("No objectives available.");
         if (this.ListOfDeedsGroupC.length === 0) throw new Error("No deeds available in Group C.");
         
@@ -165,7 +167,7 @@ class ScenarioGenerator {
             special_rules : (ChosenObjective.special_rules || []).concat(ChosenDeployment.special_rules || [])
         }
 
-        return ScenarioFactory.CreateScenario(NewScenarioJson, null);
+        return await ScenarioFactory.CreateScenario(NewScenarioJson, null);
         
     }
 

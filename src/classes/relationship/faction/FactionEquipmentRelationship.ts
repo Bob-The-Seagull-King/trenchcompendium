@@ -22,7 +22,7 @@ interface IFactionEquipmentRelationship extends IContextObject {
 
 class FactionEquipmentRelationship extends StaticContextObject {
     
-    public EquipmentItem : Equipment;
+    public EquipmentItem! : Equipment;
 
     public Cost : number;
     public CostType : number;
@@ -39,14 +39,17 @@ class FactionEquipmentRelationship extends StaticContextObject {
         this.CostType = data.costtype;
         this.Limit = data.limit;
         this.GetFactions(data.faction_id)
-        this.EquipmentItem = EquipmentFactory.CreateNewEquipment(data.equipment_id, null);
         this.RunEquipmentRestriction();
     }
 
-    public GetFactions(data : string[]) {
+    public async MakeItem(id : string) {
+        this.EquipmentItem = await EquipmentFactory.CreateNewEquipment(id, null);
+    }
+
+    public async GetFactions(data : string[]) {
         data.sort()
         for (let i = 0; i < data.length; i++) {
-            this.Factions.push(FactionFactory.CreateNewFaction(data[i], null))
+            this.Factions.push(await FactionFactory.CreateNewFaction(data[i], null))
         }
     }
 

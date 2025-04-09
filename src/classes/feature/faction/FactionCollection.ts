@@ -42,7 +42,6 @@ class FactionCollection extends StaticContextObject {
 
         this.Team = data.team;
         this.GatherLists(data);
-        this.ConstructFactions();
     }
 
     public GatherLists(data : IFaction) {
@@ -94,9 +93,9 @@ class FactionCollection extends StaticContextObject {
         return NewFaction;
     }
 
-    public ConstructFactions() {
+    public async ConstructFactions() {
         for (let i = 0; i < this.FactionDataList.length; i++) {
-            const FactionObject : Faction = FactionFactory.CreateFaction(this.FactionDataList[i], this.MyContext)
+            const FactionObject : Faction = await FactionFactory.CreateFaction(this.FactionDataList[i], this.MyContext)
             this.SubModelsList.push( { var_name: FactionObject.Variant, faction: FactionObject });
         }
     }

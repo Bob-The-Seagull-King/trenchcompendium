@@ -2,6 +2,7 @@ import { ContextObject, IContextObject } from "../contextevent/contextobject";
 import { StaticOptionFactory } from "../../factories/features/StaticOptionFactory";
 import { StaticContextObject } from "../contextevent/staticcontextobject";
 import { IStaticOption, StaticOption } from "./StaticOption";
+import { EventRunner } from "../contextevent/contexteventhandler";
 
 interface IStaticOptionContextObject extends IContextObject {
     options : IStaticOption[]
@@ -20,6 +21,32 @@ class StaticOptionContextObject extends StaticContextObject {
     public constructor(data : IStaticOptionContextObject, parent : ContextObject | null) {
         super(data, parent)
         this.MyOptions = this.BuildOptions(data.options)
+    }
+    
+    
+    public RunOptionsParse() {
+        
+        const EventProc : EventRunner = new EventRunner();
+        for (let i = 0; i < this.MyOptions.length; i++) {
+            EventProc.runEvent(
+                "parseOptionFilterDown",
+                this,
+                [],
+                this.MyOptions[i].Selections,
+                i
+            ).then(result => {
+                this.MyOptions[i].Selections = result;
+                EventProc.runEvent(
+                    "parseOptionsIntoRelevantType",
+                    this,
+                    [],
+                    this.MyOptions[i].Selections,
+                    i
+                ).then(result => {
+                    this.MyOptions[i].Selections = result;
+                });
+            });
+        }
     }
 
     /**
@@ -45,6 +72,7 @@ class StaticOptionContextObject extends StaticContextObject {
         for (let i = 0; i < this.MyOptions.length; i++) {
             await this.MyOptions[i].FindChoices();
         }
+        await this.RunOptionsParse();
     }
 
 

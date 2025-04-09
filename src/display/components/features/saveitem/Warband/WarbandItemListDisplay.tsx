@@ -1,4 +1,5 @@
-import '../../../../resources/styles/vendor/bootstrap.css'
+
+import '../../../../../resources/styles/vendor/bootstrap.css'
 import React, { useRef, useState } from 'react'
 
 import { ToastContainer, toast } from 'react-toastify';
@@ -8,15 +9,15 @@ import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 
 // Components
-import ContentPackDisplay from '../../../components/features/contentpack/ContentPackDisplay'
+import ContentPackDisplay from '../../../../components/features/contentpack/ContentPackDisplay'
 
 // Font Awesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFileImport, faPerson } from '@fortawesome/free-solid-svg-icons'
-import { ContentPack } from '../../../../classes/contentpacks/contentpack'
+import { ContentPack } from '../../../../../classes/contentpacks/contentpack'
 import WarbandItemDisplay from './WarbandItemDisplay';
-import { WarbandManager } from '../../../../classes/saveitems/WarbandManager';
-import { WarbandContentItem } from '../../../../classes/saveitems/WarbandContentItem';
+import { WarbandManager } from '../../../../../classes/saveitems/Warband/WarbandManager';
+import { UserWarband } from '../../../../../classes/saveitems/Warband/UserWarband';
 
 const WarbandItemListDisplay = (prop: any) => {
     const Manager : WarbandManager = prop.manager;
@@ -48,8 +49,8 @@ const WarbandItemListDisplay = (prop: any) => {
         });
     }
 
-    function NewItem() {
-        const Result = Manager.NewItem(NewItemTitle);
+    async function NewItem() {
+        const Result = await Manager.NewItem(NewItemTitle, "fc_ironsultanate");
         if (Result != "") {
             runToast(Result);
         } else {
@@ -156,7 +157,7 @@ const WarbandItemListDisplay = (prop: any) => {
                                         </div>
                                     </div>
                                 }
-                                {_allItems.map((item: WarbandContentItem) => (
+                                {_allItems.map((item: UserWarband) => (
                                     <div className="col p-0" key={"packdisplay"+item.ID}>
                                         <WarbandItemDisplay  data={item} parent={Manager} statefunction={ItemRecall} updater={UpdaterMethod}/>
                                     </div>

@@ -1,7 +1,7 @@
 import { ItemManager } from '../saveitems/itemmanager';
 import { ContentPackManager } from '../contentpacks/contentmanager'
 import { ScenarioGenerator } from '../feature/scenario/ScenarioGenerator';
-import { WarbandManager } from '../saveitems/WarbandManager';
+import { WarbandManager } from '../saveitems/Warband/WarbandManager';
 
 /**
  * Contains the Controller objects for 'Tools' pages.

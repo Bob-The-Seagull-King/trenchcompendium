@@ -1,4 +1,7 @@
+
 import '../../resources/styles/vendor/bootstrap.css'
+import 'bootstrap/dist/css/bootstrap.css'
+import '../../resources/styles/_mainstylesource.scss'
 import React, { useEffect, useState } from 'react'
 import { ErrorBoundary } from "react-error-boundary";
 
@@ -12,8 +15,9 @@ import CompendiumBasePage from '../pages/CompendiumBasePage';
 import PagedCompendiumDisplay from '../pages/PagedCompendiumDisplay';
 import FilterableCompendiumDisplay from '../pages/FilterableCompendiumDisplay';
 import { ToolsController } from '../../classes/_high_level_controllers/ToolsController';
-import WarbandItemDisplay from '../components/features/saveitem/WarbandItemDisplay';
+import WarbandItemDisplay from '../components/features/saveitem/Warband/WarbandItemDisplay';
 import ToolsSavedItem from '../pages/ToolsSaveItem';
+import WarbandTestBlock from '../components/features/saveitem/Warband/WarbandTestBlock';
 
 interface IControllerProp {
     controller : ToolsController; // The controller being passed through
@@ -23,7 +27,6 @@ const WarbandRoute: React.FC<IControllerProp> = (prop) => {
 
     // State
     const [_keyval, setKeyVal] = useState(0);
-
     const { state } = useLocation();
 
     useEffect(() => {
@@ -44,6 +47,7 @@ const WarbandRoute: React.FC<IControllerProp> = (prop) => {
                     <Routes>                        
                         <Route path={ROUTES.HOME_ROUTE} element={<ToolsSavedItem manager={prop.controller.UserWarbandManager} />} />
                     </Routes>
+                    <WarbandTestBlock />
                 </div>
             </div>
         </ErrorBoundary>

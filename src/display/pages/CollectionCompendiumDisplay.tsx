@@ -11,7 +11,7 @@ import { CollectionsListPage } from '../../classes/viewmodel/pages/CollectionLis
 import { DisplayCollectionDataDex, DisplayCollectionType } from './DisplayPageStatic'
 import FilterBox from '../components/subcomponents/filters/FilterBox';
 
-const FilterableCompendiumDisplay = (prop: any) => {
+const CollectionCompendiumDisplay = (prop: any) => {
     // Initialize controllers and managers
     const ViewPageController: CollectionsListPage = prop.controller
     ViewPageController.initCollection();
@@ -27,60 +27,31 @@ const FilterableCompendiumDisplay = (prop: any) => {
         const SetItem = CollectionController.itemcollection;
         return SetItem;
     }
-    
-    /**
-     * Get the controller to update the search, then update
-     * the state of the ability/item list arrays. Update the
-     * keyval in order to force a rerender of elements.
-     */
-    async function UpdateSearch() {
-        await ViewPageController.updateSearch();
-        setCurItems(CollectionController.ReturnItems())
-        setKeyVal(_keyval+1)
-    }
-
-    function ReturnFilters() {
-        return (
-            <FilterBox controller={ViewPageController} runfunction={UpdateSearch}/>
-        )
-    }
 
     function ReturnItems() {
         return (
-            <div>
-                <div className=""/>
+            <>
                 {((_curItems == undefined) || (_curItems == null) || (_curItems.length == 0)) &&
-                    <div className="">
-                        <h1 className="">No Items Found</h1>
-                        <div className=""/>
-                    </div>
+                    <h1 className="">No Items Found</h1>
                 }
                 {((_curItems != undefined) && (_curItems != null) && (_curItems.length > 0)) &&
-                    <div className="">
-                        {_curItems.map((item) => (
-                            <div key={item.HeldItem.ID}>
-                                {DisplayPage.returnDisplay(item.HeldItem)}
-                                <div className=""/>
-                            </div>))}
-                    </div>}
-            </div>
+                    <>                       
+                       {DisplayPage.returnDisplay(_curItems)}
+                    </>}
+            </>
         )
     }
 
     // Return result -----------------------------
     return (
         <ErrorBoundary fallback={<div>Something went wrong with FilteredDisplayCompendium.tsx</div>}>
-            <>
-                <div>
-                    {ReturnFilters()}
-                </div>
+            
                 <div  key={_keyval}>
                     {ReturnItems()}
                 </div>
-            </>
         </ErrorBoundary>
     )
     // -------------------------------------------
 }
 
-export default FilterableCompendiumDisplay
+export default CollectionCompendiumDisplay

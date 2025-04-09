@@ -1,5 +1,5 @@
 import '../../../../resources/styles/vendor/bootstrap.css'
-import React from 'react'
+import React, { useState } from 'react'
 import { ErrorBoundary } from "react-error-boundary";
 
 
@@ -31,329 +31,95 @@ const RulesMenuBody: React.FC<IControllerProp> = (prop) => {
         navigate('/', {state: Date.now().toString()});
     }
 
-    // @TODO: @Lane: Can we get this structure going and pass it like this throught the recursive menu items?
-    const menu_structure = [
-        {
-            title: "Playtest Rules v1.6",
-            slug: "playtest-rules-v1-6",
-            children: [
-                {
-                    title: "Core Rules",
-                    slug:  "core-rules",
-                    children: [
-                        {
-                            title: "Introduction",
-                            slug:  "introduction",
-                        },
-                        {
-                            title: "What You Need To Play",
-                            slug:  "what-you-need-to-play",
-                        },
-                        {
-                            title: "Game Turn & Activations",
-                            slug:  "game-turn-activations",
-                        },
-                        {
-                            title: "+Dice and -Dice",
-                            slug:  "dice",
-                        },
-                        {
-                            title: "Blood Markers",
-                            slug:  "blood-markers",
-                        },
-                        {
-                            title: "Blessing Markers",
-                            slug:  "blessing-markers",
-                        },
-                        {
-                            title: "Movement",
-                            slug:  "movement",
-                        },
-                        {
-                            title: "Combat",
-                            slug:  "combat",
-                        },
-                        {
-                            title: "End of Activation",
-                            slug:  "end-of-activation",
-                        },
-                        {
-                            title: "Morale",
-                            slug:  "morale",
-                        },
-                        {
-                            title: "End of Turn",
-                            slug:  "end-of-turn",
-                        },
-                    ]
-                },
-                {
-                    title: "Keywords",
-                    slug: "keywords",
-                },
-                {
-                    title: "Starting a Warband",
-                    slug: "starting-a-warband",
-                    children: [
-                        {
-                            title: "Choose Your Faction",
-                            slug: "choose-your-faction",
-                        },
-                        {
-                            title: "Recruit Your Warband",
-                            slug: "recruit-your-warband",
-                        },
-                        {
-                            title: "Keywords",
-                            slug: "keywords",
-                        },
-                        {
-                            title: "Equipment",
-                            slug: "equipment",
-                        },
-                        {
-                            title: "Allies & Mercenaries",
-                            slug: "allies-mercenaries",
-                        },
-                        {
-                            title: "Purchasable Abilities",
-                            slug: "purchasable-abilities",
-                        },
-                        {
-                            title: "Roster",
-                            slug: "Roster",
-                        },
-                        {
-                            title: "Characteristics Profile",
-                            slug: "characteristics-profile",
-                        }
-                    ]
-                },
-                {
-                    title: "All Models",
-                    slug: "all_models",
-                },
-                {
-                    title: "Glossary",
-                    slug: "glossary",
-                },
+    const [menu_struc] = useState(returnMenuStruc())
 
-            ]
-        },
-        {
-            title: "Factions",
-            slug: "factions",
-            children: [
-                {
-                    title: "Trench Pilgrims",
-                    slug: "trench-pilgrims",
-                    children: [
-                        {
-                            title: "Procession of the Sacred Affliction",
-                            slug: "procession-of-the-sacred-affliction",
-                        },
-                        {
-                            title: "Cavalcade of the Tenth Plague",
-                            slug: "cavalcade-of-the-tenth-plague",
-                        },
-                        {
-                            title: "War Pilgrimage of Saint Methodius",
-                            slug: "war-pilgrimage-of-saint-methodius",
-                        },
-                    ]
-                },
-                {
-                    title: "The Principality of New Antioch",
-                    slug: "the-principality-of-new-antioch",
-                    children: [
-                        {
-                            title: "Fida’i of Alamut – The Cabal of Assassins",
-                            slug:  "fidai-of-alamut-the-cabal-of-assassins",
-                        },
-                        {
-                            title: "The House of Wisdom",
-                            slug:  "the-house-of-wisdom",
-                        },
-                    ]
-                },
-                {
-                    title: "The Iron Sultanate",
-                    slug: "the-iron-sultanate",
-                    children: [
-                        {
-                            title: "Papal States Intervention Force",
-                            slug:  "papal-states-intervention-force",
-                        },
-                        {
-                            title: "Eire Rangers",
-                            slug:  "eire-rangers",
-                        },
-                        {
-                            title: "Stoßtruppen of the Free State of Prussia",
-                            slug:  "stosstruppen-of-the-free-state-of-prussia",
-                        },
-                        {
-                            title: "Kingdom of Alba Assault Detachment",
-                            slug:  "kingdom-of-alba-assault-detachment",
-                        },
-                    ]
-                },
-                {
-                    title: "Heretic Legion",
-                    slug: "heretic-legion",
-                    children: [
-                        {
-                            title: "Heretic Naval Raiding Party",
-                            slug: "heretic-naval-raiding-party",
-                        },
-                        {
-                            title: "Trench Ghosts",
-                            slug:  "trench-ghosts",
-                        },
-                        {
-                            title: "Knights of Avarice",
-                            slug:  "knights-of-avarice",
-                        },
-                        {
-                            title: "Kingdom of Alba Assault Detachment",
-                            slug:  "kingdom-of-alba-assault-detachment",
-                        },
-                    ]
-                },
-                {
-                    title: "Black Grail",
-                    slug: "black-grail",
-                    children: [
-                        {
-                            title: "Dirge of the Great Hegemon",
-                            slug: "dirge-of-the-great-hegemon",
-                        },
-                    ]
-                },
-                {
-                    title: "The Court of the seven headed serpent",
-                    slug: "the-court-of-the-seven-headed-serpent",
-                },
-            ]
-        },
-        {
-            title: "Weapons & Equipment",
-            slug: "weapons-equipment",
-            children: [
-                {
-                    title: "Ranged Weapons",
-                    slug: "ranged-weapons",
-                },
-                {
-                    title: "Melee Weapons",
-                    slug: "melee-weapons",
-                },
-                {
-                    title: "Equipment",
-                    slug: "equipment",
-                },
-            ]
-        },
-        {
-            title: "Scenarios",
-            slug: "scenarios",
-            children: [
-                {
-                    title: "Claim No Man’s Land",
-                    slug: "claim-no-mans-land",
-                },
-                {
-                    title: "Relic Hunt",
-                    slug: "relic-hunt",
-                },
-                {
-                    title: "Hunt for Heroes",
-                    slug: "hunt-for-heroes",
-                },
-                {
-                    title: "Trench Warfare",
-                    slug: "trench-warfare",
-                },
-                {
-                    title: "Great War",
-                    slug: "great-war",
-                },
-                {
-                    title: "Supply Raid",
-                    slug: "supply-raid",
-                },
-                {
-                    title: "Armoured Train",
-                    slug: "armoured-train",
-                },
-                {
-                    title: "Storming the Shores",
-                    slug: "storming-the-shore",
-                },
-                {
-                    title: "Dragon Hunt",
-                    slug: "dragon-hunt",
-                },
-                {
-                    title: "Random Scenario Generator",
-                    slug: "random-scenario-generator",
-                },
-            ]
-        },
-        {
-            title: "Campaign Rules",
-            slug: "campaign-rules",
-            children: [
-                {
-                    title: "Beginning the Campaign",
-                    slug: "beginning-the-campaign",
-                },
+    function returnMenuStruc() {
+        /**
+        Playtest 1.6
+            - Rules (controller)
+            - Keywords
+            - Glossary
+        Factions (controller)
+        Models
+        Equipment
+        Scenarios (controller)
+        Campaigns
+            - Rules (controller)
+            - Patrons (controller)
+            - Exploration
+            - Injuries
+            - Skills
+         */
+        const menu_structure = [
+            {
+                title: "Playtest v1.6",
+                slug: "",
+                children: [
+                    {
+                        title: "Rules",
+                        slug: "gamerule",
+                        controller: prop.controller.GameRulesCollectionController
+                    }   ,
+                    {
+                        title: "Keywords",
+                        slug: "keyword"
+                    }   ,
+                    {
+                        title: "Glossary",
+                        slug: "glossary"
+                    }                       
+                ]
+            },
+            {
+                title: "Factions",
+                slug: "faction",
+                controller: prop.controller.FactionCollectionController
+            },
+            {
+                title: "Weapons & Equipment",
+                slug: "equipment"
+            },
+            {
+                title: "Units / Models",
+                slug: "model"
+            },
+            {
+                title: "Scenarios",
+                slug: "scenario",
+                controller: prop.controller.ScenarioCollectionController
+            },
+            {
+                title: "Campaigns 1.3",
+                slug: "",
+                children: [
+                    {
+                        title: "Rules",
+                        slug: "campaignrule",
+                        controller: prop.controller.CampaignRulesCollectionController
+                    },
+                    {
+                        title: "Patrons",
+                        slug: "patron",
+                        controller: prop.controller.PatronCollectionController
+                    },
+                    {
+                        title: "Exploration",
+                        slug: "explorationtable"
+                    },
+                    {
+                        title: "Skills",
+                        slug: "skillgroup"
+                    },
+                    {
+                        title: "Injuries",
+                        slug: "injury"
+                    }                       
+                ]
+            }
+        ]
+        return menu_structure;
+    }
 
-                {
-                    title: "Playing a Campaign Game",
-                    slug: "playing-a-campaign-game",
-                },
-                {
-                    title: "Injuries and Battle Scars",
-                    slug: "injuries-and-battle-scars",
-                },
-                {
-                    title: "Experience & Advancement",
-                    slug: "experience-advancement",
-                },
-                {
-                    title: "Patrons",
-                    slug: "patrons",
-                },
-                {
-                    title: "Exploration",
-                    slug: "exploration",
-                    children: [
-                        {
-                            title: "Warband Exploration Skills",
-                            slug: "warband-exploration-skills",
-                        },
-                        {
-                            title: "Common Exploration Locations",
-                            slug: "common-exploration-locations",
-                        },
-                        {
-                            title: "Rare Exploration Locations",
-                            slug: "rare-exploration-locations",
-                        },
-                        {
-                            title: "Legendary Exploration Locations",
-                            slug: "legendary-exploration-locations",
-                        },
-                    ]
-                },
-                {
-                    title: "Glory Items",
-                    slug: "equipment",
-                },
-            ]
-        },
-    ];
 
     return (
         <ErrorBoundary fallback={<div>Something went wrong with RulesMenuBody.tsx</div>}>
@@ -368,9 +134,11 @@ const RulesMenuBody: React.FC<IControllerProp> = (prop) => {
                     </div>
                 </div>
 
-                <RulesMenuItem
-                    data={menu_structure}
-                />
+                {menu_struc.map((item => (
+                    <RulesMenuItem key={item.title}
+                    data={[item]}
+                    />
+                )))}
 
                 <RulesMenuSettings />
                 {/* @TODO: Add secondary elements here   */}

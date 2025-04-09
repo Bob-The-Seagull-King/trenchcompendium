@@ -1,0 +1,69 @@
+WarbandContext
+# Used to describe limitations and restrictions imposed on the warband
+    - Model Count
+    - Ducat Limit
+    - Glory Limit
+
+WarbandUser
+# Used to assign a warband, users will later be expanded as campaigns as well
+    - User Name
+
+WarbandItem ////////
+# Used to describe the elements of the warband itself
+    - Name //
+    - CustomNotes[] //
+    - Ducat Bank //
+    - Glory Bank //
+    - WarbandContext //
+    - WarbandUser //
+    - WarbandFaction
+    - WarbandExploration //
+    - ModelPurchases[] //
+    - EquipmentPurchases[] //
+
+WarbandExploration ////////
+# Used to catalogue what has been explored
+    - Locations explored //
+    - Exploration Skills //
+
+WarbandPurchase ////////
+# Used to handle how much an item costs, like Members, Items, Bonus costs
+# Used in the context of other options
+    - cost //
+    - cost tupe //
+    - Count-For-Cap //
+    - Sellable //
+    - Sell Full Price //
+    - Thing_That_Was_Purchased //
+
+WarbandProperty ////////
+# Used to describe unique shared elements and choices on the warband-level
+# Examples: House Of Wisdom weapon selections, Defenders Of The Iron Wall anqa guard, Cabal Of Assassins FIRETEAM
+# Used in the context of other options
+    - Name //
+    - Option //
+    - Selection //
+
+WarbandMember ////////
+# Actual Models
+    - Model_ID //
+    - Experience //
+    - Promotion_State //
+    - IsReserve //
+    - Equipment[] //
+    - Injuries[] //
+    - Skills[] //
+    - Upgrades[] //
+    - CustomNotes[] //
+    - WarbandProperties[] //
+
+WarbandEquipment
+# Items/Equipment
+    - Equipment_ID
+    - WarbandProperties[]
+
+WarbandFaction ////////
+# The faction and related items that have been chosen
+    - Faction_Type //
+    - Patron Selected //
+    - WarbandProperties[] //

@@ -12,7 +12,7 @@ import { ContextObject, IContextObject } from '../../contextevent/contextobject'
 import { StaticContextObject } from '../../contextevent/staticcontextobject';
 import { Ability } from '../ability/Ability';
 import { IKeyword, Keyword } from '../glossary/Keyword';
-import { ModelStatistics } from './ModelStats';
+import { GetPresentationStatistic, ModelStatistics } from './ModelStats';
 import { Requester } from '../../../factories/Requester';
 import { UpgradeFactory } from '../../../factories/features/UpgradeFactory';
 import { IModelEquipmentRelationship, ModelEquipmentRelationship } from '../../relationship/model/ModelEquipmentRelationship';
@@ -52,7 +52,7 @@ class Model extends StaticContextObject {
 
     public RestrictedEquipment : EquipmentRestriction[] | null = null;
     public LimitedEquipment : EquipmentLimit[] | null = null;
-    public StatChoices : ModelStatistics[][] | null = null;
+    public StatChoices!: ModelStatistics[][];
     public Models : FactionModelRelationship[] = []
     
     /**
@@ -70,17 +70,13 @@ class Model extends StaticContextObject {
         if (data.variant_name) {
             this.Variant = data.variant_name
         } else { this.Variant = "base" }
-        this.BuildKeywords(data.keywords);
-        this.BuildAbilities(data.abilities);
-        this.BuildModelUpgrades(data.id);
-        this.BuildModelEquipment(data.id);
 
         this.RunEquipmentRestriction();
         this.RunEquipmentLimit();
         this.RunStatOptions();
     }
     
-    public BuildFactionModels(id : string) {
+    public async BuildFactionModels(id : string) {
         const ModelList = Requester.MakeRequest(
             {
                 searchtype: "complex", 
@@ -105,7 +101,7 @@ class Model extends StaticContextObject {
         ModelList.sort(byPropertiesOf<IFactionModelRelationship>(["name", "id"]))
 
         for (let i = 0; i < ModelList.length; i++) {
-            this.Models.push(ModelFactory.CreateFactionModel(ModelList[i], null))
+            this.Models.push(await ModelFactory.CreateFactionModel(ModelList[i], null))
         }
     }
 
@@ -152,6 +148,10 @@ class Model extends StaticContextObject {
         });
     }
 
+    public GetPresentableStatistics() {
+        return GetPresentationStatistic(this.Stats, this.StatChoices);
+    }
+
     public BuildKeywords(keywords : string[]) {
         for (let i = 0; i < keywords.length; i++) {
             const KeywordObj = KeywordFactory.CreateNewKeyword(keywords[i], this);
@@ -159,14 +159,14 @@ class Model extends StaticContextObject {
         }
     }
 
-    public BuildAbilities(abilities : string[]) {
+    public async BuildAbilities(abilities : string[]) {
         for (let i = 0; i < abilities.length; i++) {
-            const AbilityObj = AbilityFactory.CreateNewAbility(abilities[i], this);
+            const AbilityObj = await AbilityFactory.CreateNewAbility(abilities[i], this);
             this.Abilities.push(AbilityObj);
         }
     }
     
-    public BuildModelUpgrades(id : string) {
+    public async BuildModelUpgrades(id : string) {
         const UpgradeList = Requester.MakeRequest(
             {
                 searchtype: "complex", 
@@ -191,11 +191,11 @@ class Model extends StaticContextObject {
         UpgradeList.sort(byPropertiesOf<IModelUpgradeRelationship>(["upgrade_id"]))
 
         for (let i = 0; i < UpgradeList.length; i++) {
-            this.UpgradeList.push(UpgradeFactory.CreateModelUpgrade(UpgradeList[i]))
+            this.UpgradeList.push(await UpgradeFactory.CreateModelUpgrade(UpgradeList[i]))
         }
     }
     
-    public BuildModelEquipment(id : string) {
+    public async BuildModelEquipment(id : string) {
         const EquipmentList = Requester.MakeRequest(
             {
                 searchtype: "complex", 
@@ -220,7 +220,7 @@ class Model extends StaticContextObject {
         EquipmentList.sort(byPropertiesOf<IModelEquipmentRelationship>(["name", "id"]))
 
         for (let i = 0; i < EquipmentList.length; i++) {
-            this.EquipmentList.push(EquipmentFactory.CreateModelEquipment(EquipmentList[i], this))
+            this.EquipmentList.push(await EquipmentFactory.CreateModelEquipment(EquipmentList[i], this))
         }
     }
 

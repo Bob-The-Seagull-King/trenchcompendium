@@ -155,7 +155,7 @@ export const BaseContextCallTable : CallEventTable = {
                         }  
 
                         if (Requirement.res_type == "id") {
-                            const EquipmentItem = EquipmentFactory.CreateNewEquipment(Requirement.value, null)
+                            const EquipmentItem = await EquipmentFactory.CreateNewEquipment(Requirement.value, null)
                             NewStringParts.push("must be "+(EquipmentItem.Name))
                         }                  
 
@@ -186,7 +186,7 @@ export const BaseContextCallTable : CallEventTable = {
                         }
 
                         if (Requirement.res_type == "id") {
-                            const EquipmentItem = EquipmentFactory.CreateNewEquipment(Requirement.value, null)
+                            const EquipmentItem = await EquipmentFactory.CreateNewEquipment(Requirement.value, null)
                             NewStringParts.push("cannot be "+(EquipmentItem.Name))
                         }        
                         
@@ -218,7 +218,7 @@ export const BaseContextCallTable : CallEventTable = {
                         }
 
                         if (Requirement.res_type == "id") {
-                            const EquipmentItem = EquipmentFactory.CreateNewEquipment(Requirement.value, null)
+                            const EquipmentItem = await EquipmentFactory.CreateNewEquipment(Requirement.value, null)
                             NewStringParts.push("can be "+(EquipmentItem.Name))
                         }        
                         
@@ -277,7 +277,7 @@ export const BaseContextCallTable : CallEventTable = {
                         }
 
                         if (Requirement.res_type == "id") {
-                            const EquipmentItem = EquipmentFactory.CreateNewEquipment(Requirement.value, null)
+                            const EquipmentItem = await EquipmentFactory.CreateNewEquipment(Requirement.value, null)
                             NewStringParts.push("with the name "+(EquipmentItem.Name))
                         }     
 
@@ -314,7 +314,7 @@ export const BaseContextCallTable : CallEventTable = {
                         }
 
                         if (Requirement.res_type == "id") {
-                            const EquipmentItem = EquipmentFactory.CreateNewEquipment(Requirement.value, null)
+                            const EquipmentItem = await EquipmentFactory.CreateNewEquipment(Requirement.value, null)
                             NewStringParts.push("with the name "+(EquipmentItem.Name))
                         }     
 
@@ -357,7 +357,7 @@ export const BaseContextCallTable : CallEventTable = {
             if (trackVal == true) {
                 if (context_func["match"]) {
                     if (context_func["match"][0]["type"] == "model") {
-                        const ModelItem = ModelFactory.CreateNewModel(context_func["match"][0]["value"], null)
+                        const ModelItem = await ModelFactory.CreateNewModel(context_func["match"][0]["value"], null)
                         return ["Number of " + ModelItem.Name]
                     }
                 }
@@ -395,7 +395,7 @@ export const BaseContextCallTable : CallEventTable = {
             
             for (let i = 0; i < UpgradeList.length; i++) {
                 UpgradeList[i].model_id_set = context_func["models_id"]
-                relayVar.push(UpgradeFactory.CreateModelUpgrade(UpgradeList[i]))
+                relayVar.push(await UpgradeFactory.CreateModelUpgrade(UpgradeList[i]))
             }
 
             return relayVar;
@@ -427,12 +427,12 @@ export const BaseContextCallTable : CallEventTable = {
                         }  
 
                         if (Requirement.res_type == "id") {
-                            const ModelItem = ModelFactory.CreateNewModel(Requirement.value, null)
+                            const ModelItem = await ModelFactory.CreateNewModel(Requirement.value, null)
                             NewStringParts.push(""+(ModelItem.Name))
                         }   
 
                         if (Requirement.res_type == "equipment") {
-                            const EquipItem = EquipmentFactory.CreateNewEquipment(Requirement.value, null)
+                            const EquipItem = await EquipmentFactory.CreateNewEquipment(Requirement.value, null)
                             NewStringParts.push(""+(EquipItem.Name))
                         }                  
 
@@ -451,7 +451,7 @@ export const BaseContextCallTable : CallEventTable = {
                         }  
 
                         if (Requirement.res_type == "id") {
-                            const ModelItem = ModelFactory.CreateNewModel(Requirement.value, null)
+                            const ModelItem = await ModelFactory.CreateNewModel(Requirement.value, null)
                             NewStringParts.push("Not "+(ModelItem.Name))
                         }                  
 
@@ -493,7 +493,7 @@ export const BaseContextCallTable : CallEventTable = {
 
             for (let i = 0; i < relayVar.length; i++) {
                 
-                const ModelItem = EquipmentFactory.CreateNewEquipment(relayVar[i].value.equipment_id, null)
+                const ModelItem = await EquipmentFactory.CreateNewEquipment(relayVar[i].value.equipment_id, null)
                 
                 for (let j = 0; j < SubItem["restriction"].length; j++) {
                     if (SubItem["restriction"][j].category) {
@@ -515,7 +515,7 @@ export const BaseContextCallTable : CallEventTable = {
             const { ExplorationFactory } = await import("../../factories/features/ExplorationFactory");
 
             for (let i = 0; i < relayVar.length; i++) {
-                const ModelItem = ExplorationFactory.CreateExplorationLocation(relayVar[i].value, null)
+                const ModelItem = await ExplorationFactory.CreateExplorationLocation(relayVar[i].value, null)
                 relayVar[i].value = ModelItem;
                 relayVar[i].display_str = ModelItem.Name? ModelItem.Name : "";
             }
@@ -559,7 +559,7 @@ export const BaseContextCallTable : CallEventTable = {
 
                         if (Requirement.type == "faction") {
                             for (let k = 0; k < Requirement.value.length; k++) {
-                                const ValKey : Faction = FactionFactory.CreateNewFaction(Requirement.value[k], null)
+                                const ValKey : Faction = await FactionFactory.CreateNewFaction(Requirement.value[k], null)
                                 NewStringParts.push(makestringpresentable(ValKey.Name? ValKey.Name : ""))
                             }
                         }              
@@ -580,7 +580,7 @@ export const BaseContextCallTable : CallEventTable = {
             
             const { SkillFactory } = await import("../../factories/features/SkillFactory");
             for (let i = 0; i < relayVar.length; i++) {
-                const ModelItem = SkillFactory.CreateSkill(relayVar[i].value, null)
+                const ModelItem = await SkillFactory.CreateSkill(relayVar[i].value, null)
                 relayVar[i].value = ModelItem;
                 relayVar[i].display_str = ModelItem.Name? ModelItem.Name : "";
             }

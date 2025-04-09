@@ -11,7 +11,7 @@ class AbilityFactory {
      * @param _ability The data in IPlayerAbility format describing the ability
      * @returns A newly created ability
      */
-    static CreateAbility(_rule: IAbility, parent : ContextObject | null) {
+    static async CreateAbility(_rule: IAbility, parent : ContextObject | null) {
         const cache = StaticDataCache.getInstance();
         const isValid = (cache.CheckID('ability', _rule.id))
         if (isValid == false) {
@@ -19,17 +19,18 @@ class AbilityFactory {
         }
         const rule = new Ability(_rule, parent)
         cache.AddToCache('ability', rule);
+        await rule.ReloadOptions();
         return rule;
     }
 
-    static CreateNewAbility(_val : string, parent : ContextObject | null) {
+    static async CreateNewAbility(_val : string, parent : ContextObject | null) {
         const cache = StaticDataCache.getInstance();
         const isValid = (cache.CheckID('ability', _val))
         if (isValid == false) {
             return cache.AbilityCache[_val];
         }
         const ruledata = Requester.MakeRequest({searchtype: "id", searchparam: {type: "ability", id: _val}}) as IAbility
-        const rulenew = AbilityFactory.CreateAbility(ruledata, parent)
+        const rulenew = await AbilityFactory.CreateAbility(ruledata, parent)
         return rulenew;
     }
 

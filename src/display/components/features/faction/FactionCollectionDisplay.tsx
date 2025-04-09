@@ -7,14 +7,25 @@ import { Form } from 'react-bootstrap';
 import { makestringpresentable } from '../../../../utility/functions';
 import { FactionCollection } from '../../../../classes/feature/faction/FactionCollection';
 import FactionDisplay from './FactionDisplay';
+import { useLocation } from 'react-router-dom';
 
 const FactionCollectionDisplay = (props: any) => {
     const factioncollectionObject: FactionCollection = props.data
+    const urlPath = useLocation().pathname;
+    const urlSplits = urlPath.split('/');
 
     const [selectedModel, setSelectedModel] = useState(GetBase());
     const [_keyvar, setkeyvar] = useState(0);
 
     function GetBase() {
+        if (urlSplits.length > 3) {
+            const CurItemID = urlSplits.slice(-1)[0]
+            for (let i = 0; i < factioncollectionObject.SubModelsList.length; i++) {
+                if (factioncollectionObject.SubModelsList[i].faction.ID == CurItemID) {                    
+                    return factioncollectionObject.SubModelsList[i]
+                }
+            }
+        }
         for (let i = 0; i < factioncollectionObject.SubModelsList.length; i++) {
             if (factioncollectionObject.SubModelsList[i].var_name == "base") {
                 return factioncollectionObject.SubModelsList[i]

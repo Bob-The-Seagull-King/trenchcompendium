@@ -4,6 +4,7 @@ import { DynamicContextObject } from "../contextevent/dynamiccontextobject";
 import { SelectedOption } from "./SelectedOption";
 import { StaticOptionContextObject } from "./StaticOptionContextObject";
 
+
 /*
 DynamicOptionContextObjects are solely used to apply Context
 to objects with options.
@@ -52,7 +53,13 @@ class DynamicOptionContextObject extends DynamicContextObject {
 
         for (let i = 0; i < this.Selections.length; i++) {
             if (this.Selections[i].SelectedChoice != null) {
-                if (this.Selections[i].SelectedChoice?.value instanceof ContextObject) {
+                const SelNest = this.Selections[i].NestedOption;
+                if (SelNest != null) {
+                    const static_packages : ContextPackage[] = await SelNest.GrabContextPackages(event_id, source_obj, arrs_extra);
+                    for (let j = 0; j < static_packages.length; j++) {
+                        subpackages.push(static_packages[j])
+                    }
+                } else if (this.Selections[i].SelectedChoice?.value instanceof ContextObject) {
                     const static_packages : ContextPackage[] = await this.Selections[i].SelectedChoice?.value.GrabContextPackages(event_id, source_obj, arrs_extra);
                     for (let j = 0; j < static_packages.length; j++) {
                         subpackages.push(static_packages[j])
@@ -63,6 +70,19 @@ class DynamicOptionContextObject extends DynamicContextObject {
         }
 
         return subpackages; 
+    }
+
+    public ReturnNestedOptions() {
+        const nestedoptions : DynamicOptionContextObject[] = [];
+
+        for (let i = 0; i < this.Selections.length; i++) {
+            const CurSel = this.Selections[i].NestedOption
+            if (CurSel != null) {
+                nestedoptions.push(CurSel);
+            }
+        }
+
+        return nestedoptions;
     }
 
 }

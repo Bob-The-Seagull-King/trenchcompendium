@@ -1,7 +1,8 @@
-import { WarbandContentItem, IWarbandContentItem } from './WarbandContentItem';
+import { WarbandFactory } from '../../../factories/warband/WarbandFactory';
+import { UserWarband, IUserWarband } from './UserWarband';
 
 class WarbandManager {
-    public WarbandItemList: WarbandContentItem[] = []; 
+    public WarbandItemList: UserWarband[] = []; 
 
     constructor() {
         this.WarbandItemList = this.GrabItems();
@@ -15,7 +16,8 @@ class WarbandManager {
         let i = 0;
         for (i=0; i < this.WarbandItemList.length ; i++) {
             try {
-                if (this.WarbandItemList[i].Title.trim() == _name) {
+                const nameval = this.WarbandItemList[i].Name 
+                if ((nameval != undefined? nameval : "" ).trim() == _name) {
                     return this.WarbandItemList[i]
                 }
             } catch (e) {
@@ -29,12 +31,12 @@ class WarbandManager {
      * Gets all of the saved items.
      */
     public GrabItems() {
-        const TempList: WarbandContentItem[] = [];  
+        const TempList: UserWarband[] = [];  
         const data = localStorage.getItem('compendiumsaveitem');  
         try {
-            const ItemList: IWarbandContentItem[] = JSON.parse(data || "");
+            const ItemList: IUserWarband[] = JSON.parse(data || "");
             for (let i = 0; i < ItemList.length; i++) {
-                TempList.push(new WarbandContentItem(ItemList[i]))
+                TempList.push(new UserWarband(ItemList[i]))
             }
             return TempList;
         } catch (e) {
@@ -48,7 +50,7 @@ class WarbandManager {
      * the manager's array of items.
      */
     public SetStorage() {
-        const _list: IWarbandContentItem[] = []
+        const _list: IUserWarband[] = []
         for (let i = 0; i < this.WarbandItemList.length; i++) {
             try {
                 _list.push(this.WarbandItemList[i].ConvertToInterface())
@@ -72,7 +74,7 @@ class WarbandManager {
         try {
             ReturnMsg = this.ValidateFileData(_content) 
             if (ReturnMsg == "") {
-                const ContentNew: WarbandContentItem = new WarbandContentItem(JSON.parse(_content) as IWarbandContentItem);
+                const ContentNew: UserWarband = new UserWarband(JSON.parse(_content) as IUserWarband);
                 this.WarbandItemList.push(ContentNew);
                 this.SetStorage();
             } else {
@@ -120,7 +122,7 @@ class WarbandManager {
      * update the stored information to match.
      * @param _pack The Content Pack to remove from the manager
      */
-    public DeletePack(_pack : WarbandContentItem) {
+    public DeletePack(_pack : UserWarband) {
         let i = 0;
         for (i = 0; i < this.WarbandItemList.length; i++) {
             if (_pack == this.WarbandItemList[i]) {
@@ -132,26 +134,63 @@ class WarbandManager {
         this.SetStorage();
     }
 
+    public TstClearStorag() {
+        this.WarbandItemList = [];
+        this.SetStorage();
+    }
+
     /**
      * Builds a new item and saves it to the browser
      */
-    public NewItem(_title : string) {
+    public async NewItem(_title : string, fact_id : string) {
         const msg = ""
 
         if (_title.trim().length <= 0) {
             return "The Item must have a Title";
         }
 
-        const _Item : IWarbandContentItem = {            
-            id : this.CalcID(_title.trim()),
-            title : _title,
-            context : {
+        const _Item : IUserWarband = {
+            id: this.CalcID(_title.trim()),
+            contextdata: {},
+            name: _title,
+            source: 'user_warband',
+            tags: {},
+            ducat_bank: 0,
+            glory_bank: 0,
+            notes: [],
+            context: {
                 id: this.CalcID(_title.trim() + "_context"),
-                title: _title + "_context"
-                }
+                limit_ducat: 0,
+                limit_model: 0,
+                value_ducat: 0,
+                value_glory: 0
+            },
+            exploration: {
+                explorationskills: [],
+                locations: [],
+                contextdata: {},
+                id: this.CalcID(_title.trim() + "_exploration"),
+                name: _title+"_exploration",
+                source: 'user_warband',
+                tags: {}
+            },
+            faction: {
+                faction_property: {
+                    object_id: fact_id,
+                    selections: []
+                },
+                faction_rules : [],
+                contextdata: {},
+                id: this.CalcID(_title.trim() + "_exploration"),
+                name: _title+"_exploration",
+                source: 'user_warband',
+                tags: {}
+            },            
+            models : [],
+            equipment : [],
         }
 
-        this.WarbandItemList.push(new WarbandContentItem(_Item))
+        this.WarbandItemList.push(await WarbandFactory.CreateUserWarband(_Item))
         this.SetStorage();
 
         return msg;
@@ -160,10 +199,10 @@ class WarbandManager {
     /**
      * Recreates a copy of the item as a new item.
      */
-    public DuplicateItem(_Item : WarbandContentItem) {        
-        const NewMember : WarbandContentItem = new WarbandContentItem(_Item.ConvertToInterface());
-        NewMember.Title = _Item.Title + " - Copy"
-        NewMember.ID = this.CalcID(_Item.Title + " - Copy");
+    public DuplicateItem(_Item : UserWarband) {        
+        const NewMember : UserWarband = new UserWarband(_Item.ConvertToInterface());
+        NewMember.Name = _Item.Name + " - Copy"
+        NewMember.ID = this.CalcID(_Item.Name + " - Copy");
         
         this.WarbandItemList.push(NewMember);
         this.SetStorage();
@@ -184,7 +223,7 @@ class WarbandManager {
      * @param _pack the content pack to move
      * @param direction if the pack should be moved up (true) or down (false)
      */
-    public ShufflePack(_pack : WarbandContentItem, direction: boolean) {
+    public ShufflePack(_pack : UserWarband, direction: boolean) {
         
         let i = 0;
         for (i = 0; i < this.WarbandItemList.length; i++) {
