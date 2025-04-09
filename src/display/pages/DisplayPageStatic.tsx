@@ -372,26 +372,31 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         menushowitems: false,
         hidefilter: true,
         returnDisplay(item: any) {
+            console.log(item);
             return (
                 
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    <div className="borderthin bordergrey">
-                        <GenericTabledBlockDisplay 
-                                d_name={item.Name} 
+                        {item.map((subitem : any) => (
+                        <div key={subitem.HeldItem.ID} className="borderthin bordergrey">
+                            <GenericTabledBlockDisplay 
+                                d_name={subitem.HeldItem.Name} 
                                 d_colour={"grey"} 
                                 d_state={false}  
                                 bordertype={0}
                                 d_border={false}
                                 d_margin={"sml"}
-                                d_content={item.TableVal}
+                                d_content={subitem.HeldItem.TableVal}
                                 d_method={() => <>
                                     <div className="borderthin backgroundBgCard bordergrey">
                                         <div className="">
-                                        <InjuryDisplay data={item} />
+                                        <InjuryDisplay data={subitem.HeldItem} />
                                         </div>
                                     </div>
                                 </>} />
-                        </div>
+                                </div>
+                        ))
+
+                        }
                 </ErrorBoundary>
             )
         },

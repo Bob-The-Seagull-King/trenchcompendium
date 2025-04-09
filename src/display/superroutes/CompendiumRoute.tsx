@@ -13,6 +13,7 @@ import PagedCompendiumDisplay from '../pages/PagedCompendiumDisplay';
 import FilterableCompendiumDisplay from '../pages/FilterableCompendiumDisplay';
 import RulesMenuBody from "../components/features/rules-content/RulesMenuBody";
 import MenuBody from "../components/subcomponents/MenuBody";
+import CollectionCompendiumDisplay from '../pages/CollectionCompendiumDisplay';
 
 interface IControllerProp {
     controller : ControllerController; // The controller being passed through
@@ -65,7 +66,7 @@ const CompendiumRoute: React.FC<IControllerProp> = (prop) => {
                                 controller={prop.controller.GlossaryCollectionController}/>}/>
                             <Route path={ROUTES.COMP_WARBAND_MODELS} element={<FilterableCompendiumDisplay
                                 controller={prop.controller.ModelCollectionController}/>}/>
-                            <Route path={ROUTES.COMP_CAMPAIGN_INJURIES} element={<FilterableCompendiumDisplay
+                            <Route path={ROUTES.COMP_CAMPAIGN_INJURIES} element={<CollectionCompendiumDisplay
                                 controller={prop.controller.InjuryCollectionController}/>}/>
                             <Route path={ROUTES.COMP_CAMPAIGN_SKILLS} element={<FilterableCompendiumDisplay
                                 controller={prop.controller.SkillGroupCollectionController}/>}/>
