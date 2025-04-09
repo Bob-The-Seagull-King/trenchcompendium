@@ -79,7 +79,7 @@ const PagedCompendiumDisplay = (prop: any) => {
     // Return result -----------------------------
     return (
         <ErrorBoundary fallback={<div>Something went wrong with PagedDisplayCompendium.tsx</div>}>
-            <div className="paged-compendium-display" key={_keyval}>
+            <div className="PagedCompendiumDisplay" key={_keyval}>
                 <div className={'rules-content-main'}>
                     {((_curItem == undefined) || (_curItem == null)) &&
                         <h1 className="">No Items Selected</h1>
