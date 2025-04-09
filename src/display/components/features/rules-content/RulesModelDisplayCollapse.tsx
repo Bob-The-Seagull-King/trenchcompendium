@@ -32,7 +32,9 @@ const RulesModelDisplayCollapse: React.FC<RulesModelDisplayCollapseProps> = ({ n
 
             <Collapse in={open}>
                 <div className="fighter-card-collapse-content">
-                    {method()}
+                    <div className={'fighter-card-collapse-content-inner'}>
+                        {method()}
+                    </div>
                 </div>
             </Collapse>
         </div>
