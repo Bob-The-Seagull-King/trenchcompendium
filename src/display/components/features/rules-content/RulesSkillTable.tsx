@@ -27,7 +27,7 @@ const RulesSkillTable = (props: any) => {
                     {skillgroupObject.Name}
                 </div>
 
-                <div className={'rules-card-content rules-injury-table-content'}>
+                <div className={'rules-card-content rules-card-table-content rules-skill-table-content'}>
                     <table className={'rules-card-table rules-injury-table-content-table'}>
                         <thead>
                             <tr>

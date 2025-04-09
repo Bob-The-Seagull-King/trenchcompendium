@@ -18,9 +18,8 @@ const RulesExplotationTable = (props: any) => {
                     {explorationTableObject.Name}
                 </div>
 
-                <div className={'rules-card-content rules-exploration-table-content'}>
+                <div className={'rules-card-content rules-card-table-content rules-exploration-table-content'}>
                     <table className={'rules-card-table rules-exploration-table-content-table'}>
-
                         <thead>
                             <tr>
                                 <th>

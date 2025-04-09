@@ -86,12 +86,19 @@ a
         background-color: $color-bg-2
         padding: 15px
 
+        // Rules Cards that contain only a table
+        &.rules-card-table-content
+            padding-top: 0
+            padding-bottom: 0
+
     .rules-card-table
         width: calc(100% + 30px)
         margin-left: -15px
         margin-right: -15px
         background-color: $color-bg-2
 
+        th
+            white-space: nowrap
 
         th,
         td
@@ -100,7 +107,7 @@ a
             border: 1px solid $color-bg-1
 
         td
-            background-color: $color-bg-3
+            background-color: $color-bg-2
 
         .label-cell
             font-weight: bold

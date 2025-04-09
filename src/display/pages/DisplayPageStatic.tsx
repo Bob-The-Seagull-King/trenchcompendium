@@ -16,6 +16,9 @@ import SkillGroupDisplay from "../components/features/skill/SkillGroupDisplay";
 import PatronDisplay from "../components/features/skill/PatronDisplay";
 import GenericCollapsableBlockDisplay from "../components/generics/GenericCollapsableBlockDisplay";
 import GenericTabledBlockDisplay from "../components/generics/GenereicTabledBlockDisplay";
+import RulesInjuriesTable from "../components/features/rules-content/RulesInjuriesTable";
+import RulesExplotationTable from "../components/features/rules-content/RulesExplotationTable";
+import RulesSkillTable from "../components/features/rules-content/RulesSkillTable";
 
 export interface DisplayCollectionType {
     searchId      : string,
@@ -346,12 +349,8 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         menushowitems: true,
         returnDisplay(item: any) {
             return (
-                
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    <div className="size-section font-seriftext">
-                        {item.Name}
-                    </div>
-                    <ExplorationTableDisplay data={item} />
+                    <RulesExplotationTable data={item} />
                 </ErrorBoundary>
             )
         },
@@ -374,29 +373,10 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         returnDisplay(item: any) {
             console.log(item);
             return (
-                
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                        {item.map((subitem : any) => (
-                        <div key={subitem.HeldItem.ID} className="borderthin bordergrey">
-                            <GenericTabledBlockDisplay 
-                                d_name={subitem.HeldItem.Name} 
-                                d_colour={"grey"} 
-                                d_state={false}  
-                                bordertype={0}
-                                d_border={false}
-                                d_margin={"sml"}
-                                d_content={subitem.HeldItem.TableVal}
-                                d_method={() => <>
-                                    <div className="borderthin backgroundBgCard bordergrey">
-                                        <div className="">
-                                        <InjuryDisplay data={subitem.HeldItem} />
-                                        </div>
-                                    </div>
-                                </>} />
-                                </div>
-                        ))
 
-                        }
+                    {/* @TODO: item need to contain all injuries instead of one singular injury */}
+                    <RulesInjuriesTable data={item} />
                 </ErrorBoundary>
             )
         },
@@ -419,22 +399,8 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
             return (
                 
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    
-                    <div className="borderthin bordergrey">
-                        <GenericCollapsableBlockDisplay 
-                            d_name={item.Name} 
-                            d_colour={"grey"} 
-                            d_state={false}  
-                            bordertype={0}
-                            d_border={true}
-                            d_col={"BgCard"}
-                            d_margin={"sml"}
-                            d_method={() => <>
-                                <div className="backgroundBgCard">
-                                    <SkillGroupDisplay data={item} />
-                                </div>
-                            </>} />
-                        </div>
+                    <RulesSkillTable data={item} />
+
                 </ErrorBoundary>
             )
         },

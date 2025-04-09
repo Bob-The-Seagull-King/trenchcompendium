@@ -9,7 +9,7 @@ import { Injury } from '../../../../classes/feature/ability/Injury';
 import Rulesinjury from "./Rulesinjury";
 
 const RulesInjuriesTable = (props: any) => {
-    const injuryObject: Injury = props.data
+    const items = props.data;
 
     return (
         <ErrorBoundary fallback={<div>Something went wrong with InjuryDisplay.tsx</div>}>
@@ -18,7 +18,7 @@ const RulesInjuriesTable = (props: any) => {
                     {'Elites Injury Chart'}
                 </div>
 
-                <div className={'rules-card-content rules-injury-table-content'}>
+                <div className={'rules-card-content rules-card-table-content rules-injury-table-content'}>
                     <table className={'rules-card-table rules-injury-table-content-table'}>
 
                         <thead>
@@ -33,14 +33,18 @@ const RulesInjuriesTable = (props: any) => {
                         </thead>
                         <tbody>
 
-                            <tr>
-                                <td className={'label-cell'}>
-                                    {'11'}
+                        {items.map((item : any) => (
+                            <tr key={item.HeldItem.ID}>
+                                <td className={'label-cell text-center'}>
+                                    {item.HeldItem.TableVal}
                                 </td>
                                 <td>
-                                    <Rulesinjury/>
+                                    <Rulesinjury
+                                        injury={item.HeldItem}
+                                    />
                                 </td>
                             </tr>
+                        ))}
 
                         {/*{injuryTableObject.injuryLocations.map((item) => (*/}
                         {/*    <tr key={item.ID}>*/}

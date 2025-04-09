@@ -9,22 +9,22 @@ import { ExplorationLocation } from '../../../../classes/feature/exploration/Exp
 import OptionSetStaticDisplay from '../../../components/subcomponents/description/OptionSetStaticDisplay';
 import { EventRunner } from '../../../../classes/contextevent/contexteventhandler';
 import SingleOptionSetDisplay from "../../subcomponents/description/SingleOptionSetDisplay";
+import {Injury} from "../../../../classes/feature/ability/Injury";
 
 const RulesInjury = (props: any) => {
+    const injuryObject: Injury = props.injury
 
     return (
         <ErrorBoundary fallback={<div>Something went wrong with RulesInjury.tsx</div>}>
             <div className={'RulesInjury injury'}>
                 <div className={'injury-name'}>
                     <strong>
-                        {/* @TODO: Add Injury Name here*/}
-                        {'Injury Name'}
+                        {injuryObject.Name}
                     </strong>
                 </div>
 
                 <p  className={'injury-description'}>
-                    {/* @TODO: Add injury description here*/}
-                    {'Innjury Description'}
+                    {returnDescription(injuryObject, injuryObject.Description)}
                 </p>
             </div>
         </ErrorBoundary>
