@@ -1,5 +1,5 @@
 import React from 'react';
-import useSynodImageURL from './SynodImageURL';
+import SynodImageURL from "./SynodImageURL";
 
 interface SynodImageProps {
     imageId: number; // The image id as per WP ID
@@ -17,7 +17,7 @@ interface SynodImageProps {
  */
 
 const SynodImage: React.FC<SynodImageProps> = ({ imageId, size = 'medium', className = '' }) => {
-    const imageUrl = useSynodImageURL({ imageId, size });
+    const imageUrl = SynodImageURL({ imageId, size });
 
     // transparent 1px*1px gif
     const fallback =

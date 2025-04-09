@@ -12,17 +12,22 @@ interface SynodImageURLProps {
  * @param imageId
  * @param size
  */
-const useSynodImageURL = ({ imageId, size = 'medium' }: SynodImageURLProps): string => {
+const SynodImageURL = ({ imageId, size = 'medium' }: SynodImageURLProps): string => {
     const [imageUrl, setImageUrl] = useState('');
 
     useEffect(() => {
+
         const synodUrl = 'https://synod.trench-companion.com/';
+
         fetch(`${synodUrl}wp-json/wp/v2/media/${imageId}`)
             .then((res) => res.json())
             .then((data) => {
+
                 const sizes = data.media_details?.sizes;
                 const sizedImage = sizes?.[size]?.source_url;
+
                 setImageUrl(sizedImage || data.source_url);
+
             })
             .catch(console.error);
     }, [imageId, size]);
@@ -30,4 +35,4 @@ const useSynodImageURL = ({ imageId, size = 'medium' }: SynodImageURLProps): str
     return imageUrl;
 };
 
-export default useSynodImageURL;
+export default SynodImageURL;
