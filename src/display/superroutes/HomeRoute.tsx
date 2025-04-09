@@ -14,6 +14,7 @@ import MenuComponent from '../components/subcomponents/MenuComponent';
 import MenuOutLink from '../components/subcomponents/MenuOutLink';
 import { faBook, faCross } from '@fortawesome/free-solid-svg-icons';
 import SynodImage from "../../utility/SynodImage";
+import SynodGetWarband from "../../utility/SynodGetWarband";
 
 const HomeRoute: React.FC = () => {
 
@@ -23,8 +24,18 @@ const HomeRoute: React.FC = () => {
     return (
         
         <ErrorBoundary fallback={<div>Something went wrong with HomeRoute.tsx</div>}>
+
+
+
             <div className="home-screen">
                 <div className={'container'}>
+
+                    {/* @TODO: this is just a test*/}
+                    <SynodGetWarband
+                        WarbandId={15}
+                    />
+
+
                     <div className={'row'}>
                         <div className={'col-12 col-md-6'}>
                             <MenuComponent Title={"Rules Compendium"} Route={"compendium/"} bgImageID={17}/>
