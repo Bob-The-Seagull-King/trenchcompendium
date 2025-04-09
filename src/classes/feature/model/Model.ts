@@ -12,7 +12,7 @@ import { ContextObject, IContextObject } from '../../contextevent/contextobject'
 import { StaticContextObject } from '../../contextevent/staticcontextobject';
 import { Ability } from '../ability/Ability';
 import { IKeyword, Keyword } from '../glossary/Keyword';
-import { ModelStatistics } from './ModelStats';
+import { GetPresentationStatistic, ModelStatistics } from './ModelStats';
 import { Requester } from '../../../factories/Requester';
 import { UpgradeFactory } from '../../../factories/features/UpgradeFactory';
 import { IModelEquipmentRelationship, ModelEquipmentRelationship } from '../../relationship/model/ModelEquipmentRelationship';
@@ -52,7 +52,7 @@ class Model extends StaticContextObject {
 
     public RestrictedEquipment : EquipmentRestriction[] | null = null;
     public LimitedEquipment : EquipmentLimit[] | null = null;
-    public StatChoices : ModelStatistics[][] | null = null;
+    public StatChoices!: ModelStatistics[][];
     public Models : FactionModelRelationship[] = []
     
     /**
@@ -150,6 +150,10 @@ class Model extends StaticContextObject {
         ).then(result => {
             this.LimitedEquipment = result;
         });
+    }
+
+    public GetPresentableStatistics() {
+        return GetPresentationStatistic(this.Stats, this.StatChoices);
     }
 
     public BuildKeywords(keywords : string[]) {

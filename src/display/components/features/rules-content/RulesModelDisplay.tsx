@@ -10,7 +10,7 @@ import AbilityDisplay from '../ability/AbilityDisplay';
 import GenericHover from '../../generics/GenericHover';
 import KeywordDisplay from '../glossary/KeywordDisplay';
 import ItemStat from '../../subcomponents/description/ItemStat';
-import { ModelStatistics } from '../../../../classes/feature/model/ModelStats';
+import { ModelStatistics, PresentModelStatistics } from '../../../../classes/feature/model/ModelStats';
 import {getBaseSize, getColour, getCostType, getMoveType, getPotential} from '../../../../utility/functions';
 import ModelUpgradeDisplay from '../ability/ModelUpgradeDisplay';
 import { Equipment } from '../../../../classes/feature/equipment/Equipment';
@@ -133,6 +133,7 @@ const RulesModelDisplay = (props: any) => {
     }, []);
 
     function ReturnStatOption(statchoice : ModelStatistics[]) {
+
         return (
             <ItemRow
                 title={"Stat Options"}
@@ -150,21 +151,22 @@ const RulesModelDisplay = (props: any) => {
     }
 
     function ReturnStatProfileAsString(stats : ModelStatistics) {
+        
         const ProfileString : string[] = []
         if (stats.movement != undefined) {
-            ProfileString.push( "Movement:" + (stats.movement?.toString() || "") + "\"" )
+            ProfileString.push( "Movement:" + (stats.movement? stats.movement.toString() : "") + "\"" )
         }
         if (stats.movetype != undefined) {
-            ProfileString.push("Move-Type:" + stats.movetype? getMoveType(stats.movetype) : "Infantry")
+            ProfileString.push("Move-Type:" + getMoveType(stats.movetype))
         }
         if (stats.melee != undefined) {
-            ProfileString.push("Melee:" + (stats.melee? (stats.melee > 0? "+": "") : "") + (stats.melee?.toString() || ""))
+            ProfileString.push("Melee:" + ((stats.melee > 0? "+": stats.melee < 0? "-" :"") ) + (stats.melee?.toString() || ""))
         }
         if (stats.ranged != undefined) {
-            ProfileString.push("Ranged:" + (stats.ranged? (stats.ranged > 0? "+": "") : "") + (stats.ranged?.toString() || ""))
+            ProfileString.push("Ranged:" + ((stats.ranged > 0? "+": stats.ranged < 0? "-" :"") ) + (stats.ranged?.toString() || ""))
         }
         if (stats.armour != undefined) {
-            ProfileString.push("Armour:" + (stats.armour?.toString() || ""))
+            ProfileString.push("Armour:" + stats.armour.toString())
         }
         if (stats.potential != undefined) {
             ProfileString.push("Potential:" + (stats.potential? getPotential(stats.potential) : "Standard"))
@@ -176,34 +178,86 @@ const RulesModelDisplay = (props: any) => {
         return ProfileString.join(' ')
     }
 
-    function ReturnStats(statlist : ModelStatistics) {
+    function ReturnStats(stats : PresentModelStatistics) {
+        const movestats: string[] = []   
+        const typestats: string[] = []
+        const meleestats: string[] = []
+        const rangedstats: string[] = []
+        const armourstats: string[] = []
+
+        if (stats.movement != undefined) {
+            for (let i = 0; i < stats.movement?.length; i++) {
+                movestats.push(stats.movement[i].toString())
+            }
+        }
+        if (stats.movetype != undefined) {
+            for (let i = 0; i < stats.movetype?.length; i++) {
+                typestats.push(getMoveType(stats.movetype[i]))
+            }
+        }
+
+        if (stats.melee != undefined) {
+            for (let i = 0; i < stats.melee?.length; i++) {
+                meleestats.push(((stats.melee[i] > 0? "+": stats.melee[i] < 0? "-" :"") ) + (stats.melee?.toString() || ""))
+            }
+        }
+        if (stats.ranged != undefined) {
+            for (let i = 0; i < stats.ranged?.length; i++) {
+                rangedstats.push(((stats.ranged[i] > 0? "+": stats.ranged[i] < 0? "-" :"") ) + (stats.melee?.toString() || ""))
+            }
+        }
+        if (stats.armour != undefined) {
+            for (let i = 0; i < stats.armour?.length; i++) {
+                armourstats.push(stats.armour[i].toString())
+            }
+        }
         return (
             <>
-                {statlist.movement != undefined &&
+                {stats.movement != undefined &&
                     <>
-                        <ItemStat title={"Movement"} ratio="rectangle" value={(statlist.movement?.toString() || "") + "\"" + (statlist.movetype? " " + getMoveType(statlist.movetype) : " Infantry")}/>
+                        <ItemStat title={"Movement"} ratio="rectangle" value={(movestats.join('/'))}/>
                     </>
                 }
-                {statlist.melee != undefined &&
+                {stats.movetype != undefined &&
                     <>
-                        <ItemStat title={"Melee"} value={(statlist.melee? (statlist.melee > 0? "+": "") : "") + (statlist.melee?.toString() || "")}/>
+                        <ItemStat title={"Move Type"} ratio="rectangle" value={(typestats.join('/'))}/>
                     </>
                 }
-                {statlist.ranged != undefined &&
+                {stats.melee != undefined &&
                     <>
-                        <ItemStat title={"Ranged"} value={(statlist.ranged? (statlist.ranged > 0? "+": "") : "") + (statlist.ranged?.toString() || "")}/>
+                        <ItemStat title={"Melee"} value={meleestats.join('/')}/>
                     </>
                 }
-                {statlist.armour != undefined &&
+                {stats.ranged != undefined &&
                     <>
-                        <ItemStat title={"Armour"} value={statlist.armour?.toString() || ""}/>
+                        <ItemStat title={"Ranged"} value={rangedstats.join('/')}/>
+                    </>
+                }
+                {stats.armour != undefined &&
+                    <>
+                        <ItemStat title={"Armour"} value={armourstats.join('/')}/>
                     </>
                 }
             </>
         )
     }
 
+    function returnBaseSize(stats : PresentModelStatistics) {
+        
+        const basestats: string[] = []
 
+        if (stats.base != undefined) {
+            for (let i = 0; i < stats.base?.length; i++) {
+                const curstats : string[] = []
+                for (let j = 0; j < stats.base[i].length; j++) {
+                    curstats.push(stats.base[i][j].toString());
+                }
+                basestats.push(curstats.join('x'))
+            }
+        }
+
+        return basestats.join('/')
+    }
 
     return (
         <ErrorBoundary fallback={<div>Something went wrong with ModelDisplay.tsx</div>}>
@@ -232,7 +286,7 @@ const RulesModelDisplay = (props: any) => {
                 </div>
 
                 <div className="fighter-card-stats">
-                    {ReturnStats(modelcollectionObject.Stats)  /* Stats */}
+                    {ReturnStats(modelcollectionObject.GetPresentableStatistics())  /* Stats */}
                 </div>
 
                 <div className="fighter-card-meta fighter-card-meta-below">
@@ -262,8 +316,7 @@ const RulesModelDisplay = (props: any) => {
                             Base:
                         </span>
                         <span className="fighter-meta-value">
-                            {/* @TODO: @Bob: How do we connect a base option like with the Lion of Jabir? Basically it should just be the string "[Option1]/[Option2]" */}
-                            {modelcollectionObject.Stats.base + "mm"}
+                            {returnBaseSize(modelcollectionObject.GetPresentableStatistics()) + "mm"}
                         </span>
                     </div>
                 </div>

@@ -9,6 +9,17 @@ interface ModelStatistics {
     mercenary?: boolean
 }
 
+interface PresentModelStatistics {
+    movement?: number[],
+    melee?: number[], 
+    ranged?: number[],
+    base?: number[][],
+    armour?: number[], 
+    movetype?: number[],
+    potential?: number[],
+    mercenary?: boolean[]
+}
+
 export function MergeTwoStats(baseList: ModelStatistics, addonList : ModelStatistics) {
     const MergedList : ModelStatistics = {}
     
@@ -33,4 +44,98 @@ export function MergeTwoStats(baseList: ModelStatistics, addonList : ModelStatis
     return MergedList
 }
 
-export {ModelStatistics}
+export function GetPresentationStatistic(base_stats : ModelStatistics, stat_options : ModelStatistics[][]) {
+    const finalstats : PresentModelStatistics = {}
+
+    const movement_op = []  
+    const melee_op = []  
+    const ranged_op = []  
+    const base_op = []  
+    const armour_op = []  
+    const movetype_op = []  
+    const potential_op = []  
+    const mercenary_op = []
+
+    if (base_stats.movement) { movement_op.push(base_stats.movement)}  
+    if (base_stats.melee) { melee_op.push(base_stats.melee)}
+    if (base_stats.ranged) { ranged_op.push(base_stats.ranged)}
+    if (base_stats.base) { base_op.push(base_stats.base)}
+    if (base_stats.armour) { armour_op.push(base_stats.armour)}
+    if (base_stats.movetype) { movetype_op.push(base_stats.movetype)}
+    if (base_stats.potential) { potential_op.push(base_stats.potential)}
+    if (base_stats.mercenary) { mercenary_op.push(base_stats.mercenary)}
+
+    for (let i = 0; i < stat_options.length; i++) {
+        const option_suite : ModelStatistics[] = stat_options[i]
+        let add_to_merc = true
+        for (let j = 0; option_suite.length; j++) {
+            if (hasOnlyOneProperty(option_suite[j]) == false) {
+                add_to_merc = false;
+                break;
+            }
+        }
+        if (add_to_merc) {
+            for (let j = 0; option_suite.length; j++) {
+                const cur_opt = option_suite[j];
+                if (cur_opt.armour) {armour_op.push(cur_opt.armour)}
+                if (cur_opt.base) {base_op.push(cur_opt.base)}
+                if (cur_opt.melee) {melee_op.push(cur_opt.melee)}
+                if (cur_opt.mercenary) {mercenary_op.push(cur_opt.mercenary)}
+                if (cur_opt.movement) {movement_op.push(cur_opt.movement)}
+                if (cur_opt.movetype) {movetype_op.push(cur_opt.movetype)}
+                if (cur_opt.potential) {potential_op.push(cur_opt.potential)}
+                if (cur_opt.ranged) {ranged_op.push(cur_opt.ranged)}
+            }
+        }
+    }
+
+    if (movement_op.length > 0) {
+        const arr = []
+        for (let i = 0; i < movement_op.length; i++) { arr.push(movement_op[i]) }
+        finalstats.movement = arr;
+    }
+    if (movetype_op.length > 0) {
+        const arr = []
+        for (let i = 0; i < movetype_op.length; i++) { arr.push(movetype_op[i]) }
+        finalstats.movetype = arr;
+    }
+    if (armour_op.length > 0) {
+        const arr = []
+        for (let i = 0; i < armour_op.length; i++) { arr.push(armour_op[i]) }
+        finalstats.armour = arr;
+    }
+    if (mercenary_op.length > 0) {
+        const arr = []
+        for (let i = 0; i < mercenary_op.length; i++) { arr.push(mercenary_op[i]) }
+        finalstats.mercenary = arr;
+    }
+    if (potential_op.length > 0) {
+        const arr = []
+        for (let i = 0; i < potential_op.length; i++) { arr.push(potential_op[i]) }
+        finalstats.potential = arr;
+    }
+    if (base_op.length > 0) {
+        const arr = []
+        for (let i = 0; i < base_op.length; i++) { arr.push(base_op[i]) }
+        finalstats.base = arr;
+    }
+    if (ranged_op.length > 0) {
+        const arr = []
+        for (let i = 0; i < ranged_op.length; i++) { arr.push(ranged_op[i]) }
+        finalstats.ranged = arr;
+    }
+    if (melee_op.length > 0) {
+        const arr = []
+        for (let i = 0; i < melee_op.length; i++) { arr.push(melee_op[i]) }
+        finalstats.melee = arr;
+    }
+
+    return finalstats
+}
+
+export function hasOnlyOneProperty(stat: ModelStatistics): boolean {
+    const definedProps = Object.values(stat).filter(value => value !== undefined);
+    return definedProps.length === 1;
+}
+
+export {ModelStatistics, PresentModelStatistics}
