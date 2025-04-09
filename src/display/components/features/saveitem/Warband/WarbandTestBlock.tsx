@@ -1,5 +1,3 @@
-import 'bootstrap/dist/css/bootstrap.css'
-import '../../../../../resources/styles/_mainstylesource.scss'
 import React, { useEffect, useRef, useState } from 'react'
 import { ErrorBoundary } from "react-error-boundary";
 
