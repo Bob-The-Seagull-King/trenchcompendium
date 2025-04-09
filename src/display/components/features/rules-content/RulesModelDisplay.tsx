@@ -32,9 +32,7 @@ const RulesModelDisplay = (props: any) => {
     const factionmodelObject: FactionModelRelationship = props.data
     const modelcollectionObject: Model = props.data.Model
 
-    const [equiprestrictions, setEquipRestrictions] = useState([])
-    const [equiplimits, setEquipLimits] = useState([])
-    const [statchoices, setstatchoices] = useState([])
+    const [statchoices, setstats] = useState({})
     const [_keyvar, setkeyvar] = useState(0);
 
     // Render no lore if loreshow !== 'true'
@@ -42,91 +40,14 @@ const RulesModelDisplay = (props: any) => {
 
     useEffect(() => {
         async function SetModelOptions() {
-            const EventProc: EventRunner = new EventRunner();
-
-            /**
-             * MODEL EQUIPMENT RESTRICTIONS
-             */
-            if (modelcollectionObject.RestrictedEquipment != null) {
-                const result_presentation = await EventProc.runEvent(
-                    "getEquipmentRestrictionPresentable",
-                    modelcollectionObject,
-                    [],
-                    [],
-                    modelcollectionObject.RestrictedEquipment
-                );
-                setEquipRestrictions(result_presentation);
-                setkeyvar((prev) => prev + 1);
-            } else {
-                const result = await EventProc.runEvent(
-                    "getEquipmentRestriction",
-                    modelcollectionObject,
-                    [],
-                    [],
-                    null
-                );
-                modelcollectionObject.RestrictedEquipment = result;
-                const result_presentation = await EventProc.runEvent(
-                    "getEquipmentRestrictionPresentable",
-                    modelcollectionObject,
-                    [],
-                    [],
-                    modelcollectionObject.RestrictedEquipment
-                );
-                setEquipRestrictions(result_presentation);
-                setkeyvar((prev) => prev + 1);
-            }
-
-            /**
-             * MODEL EQUIPMENT LIMITS
-             */
-            if (modelcollectionObject.LimitedEquipment != null) {
-                const result_presentation = await EventProc.runEvent(
-                    "getEquipmentLimitPresentable",
-                    modelcollectionObject,
-                    [],
-                    [],
-                    modelcollectionObject.LimitedEquipment
-                );
-                setEquipLimits(result_presentation);
-                setkeyvar((prev) => prev + 1);
-            } else {
-                const result = await EventProc.runEvent(
-                    "getEquipmentLimit",
-                    modelcollectionObject,
-                    [],
-                    [],
-                    null
-                );
-                modelcollectionObject.LimitedEquipment = result;
-                const result_presentation = await EventProc.runEvent(
-                    "getEquipmentLimitPresentable",
-                    modelcollectionObject,
-                    [],
-                    [],
-                    modelcollectionObject.LimitedEquipment
-                );
-                setEquipLimits(result_presentation);
-                setkeyvar((prev) => prev + 1);
-            }
-
             /**
              * MODEL STAT CHOICES
              */
-            if (modelcollectionObject.StatChoices != null) {
-                setstatchoices(modelcollectionObject.StatChoices as any);
-                setkeyvar((prev) => prev + 1);
-            } else {
-                const result = await EventProc.runEvent(
-                    "getModelStatOptions",
-                    modelcollectionObject,
-                    [],
-                    [],
-                    null
-                );
-                setstatchoices(result);
-                setkeyvar((prev) => prev + 1);
-            }
+            const result = await modelcollectionObject.GetPresentableStatistics()
+            setstats(result);
+            setkeyvar((prev) => prev + 1);
+            console.log(modelcollectionObject.ID)
+            console.log(result);
         }
 
         SetModelOptions();
@@ -160,10 +81,10 @@ const RulesModelDisplay = (props: any) => {
             ProfileString.push("Move-Type:" + getMoveType(stats.movetype))
         }
         if (stats.melee != undefined) {
-            ProfileString.push("Melee:" + ((stats.melee > 0? "+": stats.melee < 0? "-" :"") ) + (stats.melee?.toString() || ""))
+            ProfileString.push("Melee:" + ((stats.melee > 0? "+": "") ) + (stats.melee?.toString() || ""))
         }
         if (stats.ranged != undefined) {
-            ProfileString.push("Ranged:" + ((stats.ranged > 0? "+": stats.ranged < 0? "-" :"") ) + (stats.ranged?.toString() || ""))
+            ProfileString.push("Ranged:" + ((stats.ranged > 0? "+": "") ) + (stats.ranged?.toString() || ""))
         }
         if (stats.armour != undefined) {
             ProfileString.push("Armour:" + stats.armour.toString())
@@ -286,7 +207,7 @@ const RulesModelDisplay = (props: any) => {
                 </div>
 
                 <div className="fighter-card-stats">
-                    {ReturnStats(modelcollectionObject.GetPresentableStatistics())  /* Stats */}
+                    {ReturnStats(statchoices)  /* Stats */}
                 </div>
 
                 <div className="fighter-card-meta fighter-card-meta-below">
@@ -295,7 +216,7 @@ const RulesModelDisplay = (props: any) => {
                             Base:
                         </span>
                         <span className="fighter-meta-value">
-                            {returnBaseSize(modelcollectionObject.GetPresentableStatistics()) + "mm"}
+                            {returnBaseSize(statchoices) + "mm"}
                         </span>
                     </div>
 

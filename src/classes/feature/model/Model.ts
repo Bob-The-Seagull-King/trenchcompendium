@@ -52,7 +52,7 @@ class Model extends StaticContextObject {
 
     public RestrictedEquipment : EquipmentRestriction[] | null = null;
     public LimitedEquipment : EquipmentLimit[] | null = null;
-    public StatChoices!: ModelStatistics[][];
+    public StatChoices: ModelStatistics[][] | null = null;
     public Models : FactionModelRelationship[] = []
     
     /**
@@ -70,10 +70,6 @@ class Model extends StaticContextObject {
         if (data.variant_name) {
             this.Variant = data.variant_name
         } else { this.Variant = "base" }
-
-        this.RunEquipmentRestriction();
-        this.RunEquipmentLimit();
-        this.RunStatOptions();
     }
     
     public async BuildFactionModels(id : string) {
@@ -106,10 +102,10 @@ class Model extends StaticContextObject {
     }
 
 
-    public RunStatOptions() {
+    public async RunStatOptions() {
         const EventProc : EventRunner = new EventRunner();
 
-        EventProc.runEvent(
+        await EventProc.runEvent(
             "getModelStatOptions",
             this,
             [],
@@ -120,10 +116,10 @@ class Model extends StaticContextObject {
         });
     }
 
-    public RunEquipmentRestriction() {
+    public async RunEquipmentRestriction() {
         const EventProc : EventRunner = new EventRunner();
 
-        EventProc.runEvent(
+        await EventProc.runEvent(
             "getEquipmentRestriction",
             this,
             [],
@@ -134,10 +130,10 @@ class Model extends StaticContextObject {
         });
     }
 
-    public RunEquipmentLimit() {
+    public async RunEquipmentLimit() {
         const EventProc : EventRunner = new EventRunner();
 
-        EventProc.runEvent(
+        await EventProc.runEvent(
             "getEquipmentLimit",
             this,
             [],
@@ -148,8 +144,21 @@ class Model extends StaticContextObject {
         });
     }
 
-    public GetPresentableStatistics() {
-        return GetPresentationStatistic(this.Stats, this.StatChoices);
+    public async GetPresentableStatistics() {
+        if (this.StatChoices == null) {            
+            const EventProc : EventRunner = new EventRunner();
+
+            const result = await EventProc.runEvent(
+                "getModelStatOptions",
+                this,
+                [],
+                [],
+                null
+            )
+            return GetPresentationStatistic(this.Stats, result);
+        } else {            
+            return GetPresentationStatistic(this.Stats, this.StatChoices);
+        }
     }
 
     public BuildKeywords(keywords : string[]) {

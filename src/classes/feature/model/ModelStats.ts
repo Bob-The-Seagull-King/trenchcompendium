@@ -46,7 +46,6 @@ export function MergeTwoStats(baseList: ModelStatistics, addonList : ModelStatis
 
 export function GetPresentationStatistic(base_stats : ModelStatistics, stat_options : ModelStatistics[][]) {
     const finalstats : PresentModelStatistics = {}
-
     const movement_op = []  
     const melee_op = []  
     const ranged_op = []  
@@ -56,14 +55,16 @@ export function GetPresentationStatistic(base_stats : ModelStatistics, stat_opti
     const potential_op = []  
     const mercenary_op = []
 
-    if (base_stats.movement) { movement_op.push(base_stats.movement)}  
-    if (base_stats.melee) { melee_op.push(base_stats.melee)}
-    if (base_stats.ranged) { ranged_op.push(base_stats.ranged)}
-    if (base_stats.base) { base_op.push(base_stats.base)}
-    if (base_stats.armour) { armour_op.push(base_stats.armour)}
-    if (base_stats.movetype) { movetype_op.push(base_stats.movetype)}
-    if (base_stats.potential) { potential_op.push(base_stats.potential)}
-    if (base_stats.mercenary) { mercenary_op.push(base_stats.mercenary)}
+    if (base_stats.movement != undefined) { movement_op.push(base_stats.movement)}  
+    if (base_stats.melee != undefined) { melee_op.push(base_stats.melee)}
+    if (base_stats.ranged != undefined) { ranged_op.push(base_stats.ranged)}
+    if (base_stats.base != undefined) { base_op.push(base_stats.base)}
+    if (base_stats.armour != undefined) { armour_op.push(base_stats.armour)}
+    if (base_stats.movetype != undefined) { movetype_op.push(base_stats.movetype)}
+    if (base_stats.potential != undefined) { potential_op.push(base_stats.potential)}
+    if (base_stats.mercenary != undefined) { mercenary_op.push(base_stats.mercenary)}
+
+    try {
 
     for (let i = 0; i < stat_options.length; i++) {
         const option_suite : ModelStatistics[] = stat_options[i]
@@ -77,17 +78,18 @@ export function GetPresentationStatistic(base_stats : ModelStatistics, stat_opti
         if (add_to_merc) {
             for (let j = 0; option_suite.length; j++) {
                 const cur_opt = option_suite[j];
-                if (cur_opt.armour) {armour_op.push(cur_opt.armour)}
-                if (cur_opt.base) {base_op.push(cur_opt.base)}
-                if (cur_opt.melee) {melee_op.push(cur_opt.melee)}
-                if (cur_opt.mercenary) {mercenary_op.push(cur_opt.mercenary)}
-                if (cur_opt.movement) {movement_op.push(cur_opt.movement)}
-                if (cur_opt.movetype) {movetype_op.push(cur_opt.movetype)}
-                if (cur_opt.potential) {potential_op.push(cur_opt.potential)}
-                if (cur_opt.ranged) {ranged_op.push(cur_opt.ranged)}
+                if (cur_opt.armour != undefined) {armour_op.push(cur_opt.armour)}
+                if (cur_opt.base != undefined) {base_op.push(cur_opt.base)}
+                if (cur_opt.melee != undefined) {melee_op.push(cur_opt.melee)}
+                if (cur_opt.mercenary != undefined) {mercenary_op.push(cur_opt.mercenary)}
+                if (cur_opt.movement != undefined) {movement_op.push(cur_opt.movement)}
+                if (cur_opt.movetype != undefined) {movetype_op.push(cur_opt.movetype)}
+                if (cur_opt.potential != undefined) {potential_op.push(cur_opt.potential)}
+                if (cur_opt.ranged != undefined) {ranged_op.push(cur_opt.ranged)}
             }
         }
     }
+    } catch (e) {undefined}
 
     if (movement_op.length > 0) {
         const arr = []

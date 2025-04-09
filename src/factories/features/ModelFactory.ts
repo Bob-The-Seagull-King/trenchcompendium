@@ -42,7 +42,10 @@ class ModelFactory {
             return cache.ModelCache[_rule.id];
         }
         const rule = new Model(_rule, parent)   
-        cache.AddToCache('model', rule);     
+        cache.AddToCache('model', rule);
+        await rule.RunEquipmentRestriction();
+        await rule.RunEquipmentLimit();
+        await rule.RunStatOptions();
         await rule.BuildKeywords(_rule.keywords);
         await rule.BuildAbilities(_rule.abilities);
         await rule.BuildModelUpgrades(_rule.id);
