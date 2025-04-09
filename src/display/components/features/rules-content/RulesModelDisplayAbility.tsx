@@ -22,14 +22,13 @@ const RulesModelDisplayAbility = (props: any) => {
                     {abilityObject.Name + ": "}
                 </span>
 
-                <span className={'ability-desc'}>
+                <p className={'ability-description'}>
                     {abilityObject.Description.map((item) => (
                         <React.Fragment key={ability_id+"descriptionDisplay"}>
                             <AdvancedDescriptionItemDisplay data={item} parent={abilityObject}/>
                         </React.Fragment>
-
                     ))}
-                </span>
+                </p>
             </div>
         </ErrorBoundary>
     )

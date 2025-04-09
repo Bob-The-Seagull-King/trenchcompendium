@@ -440,6 +440,15 @@ const ModelDisplay = (props: any) => {
                 }
 
                 <div className="fighter-card-meta fighter-card-meta-below">
+                    <div className="fighter-meta-entry-simple fighter-base">
+                        <span className="fighter-meta-label">
+                            Base:
+                        </span>
+                        <span className="fighter-meta-value">
+                            {modelcollectionObject.Stats.base + "mm"}
+                        </span>
+                    </div>
+
                     <div className="fighter-meta-entry-simple fighter-keywords">
                         <span className="fighter-meta-label">
                             Keywords:
@@ -458,15 +467,6 @@ const ModelDisplay = (props: any) => {
                                     {" "}
                                 </span>
                             )) /* Keywords */}
-                        </span>
-                    </div>
-
-                    <div className="fighter-meta-entry-simple fighter-base">
-                        <span className="fighter-meta-label">
-                            Base:
-                        </span>
-                        <span className="fighter-meta-value">
-                            {modelcollectionObject.Stats.base + "mm"}
                         </span>
                     </div>
                 </div>

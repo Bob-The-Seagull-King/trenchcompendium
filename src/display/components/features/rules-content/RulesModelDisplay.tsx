@@ -290,6 +290,15 @@ const RulesModelDisplay = (props: any) => {
                 </div>
 
                 <div className="fighter-card-meta fighter-card-meta-below">
+                    <div className="fighter-meta-entry-simple fighter-base">
+                        <span className="fighter-meta-label">
+                            Base:
+                        </span>
+                        <span className="fighter-meta-value">
+                            {returnBaseSize(modelcollectionObject.GetPresentableStatistics()) + "mm"}
+                        </span>
+                    </div>
+
                     <div className="fighter-meta-entry-simple fighter-keywords">
                         <span className="fighter-meta-label">
                             Keywords:
@@ -308,15 +317,6 @@ const RulesModelDisplay = (props: any) => {
                                     {index < modelcollectionObject.KeyWord.length - 1 && ", "}
                                 </span>
                             )) /* Keywords */}
-                        </span>
-                    </div>
-
-                    <div className="fighter-meta-entry-simple fighter-base">
-                        <span className="fighter-meta-label">
-                            Base:
-                        </span>
-                        <span className="fighter-meta-value">
-                            {returnBaseSize(modelcollectionObject.GetPresentableStatistics()) + "mm"}
                         </span>
                     </div>
                 </div>
