@@ -7,9 +7,10 @@ import { SkillFactory } from "../../../../factories/features/SkillFactory";
 import { ExplorationFactory } from "../../../../factories/features/ExplorationFactory";
 import { ContextPackage } from "../../../contextevent/contextpackage";
 import { FactionFactory } from "../../../../factories/features/FactionFactory";
-import { Patron } from "../../../feature/skillgroup/Patron";
+import { IPatronRelationship, Patron } from "../../../feature/skillgroup/Patron";
 import { Faction } from "../../../feature/faction/Faction";
 import { EventRunner } from "../../../contextevent/contexteventhandler";
+import { Requester } from "../../../../factories/Requester";
 
 interface IWarbandFaction extends IContextObject {
     faction_property: IWarbandProperty,
@@ -129,19 +130,34 @@ class WarbandFaction extends DynamicContextObject {
     }
 
     public async FindAllPatronOptions() {
-        const EventProc : EventRunner = new EventRunner();
+        const AllPatrons: Patron[] = [];
+        const PatronList = Requester.MakeRequest(
+            {
+                searchtype: "complex", 
+                searchparam: {
+                    type: "patronrelationship",
+                    request: {
+                        operator: 'and',
+                        terms: [
+                            {
+                                item: "faction_id",
+                                value: this.MyFaction?.SelfDynamicProperty.OptionChoice.ID,
+                                equals: true,
+                                strict: true
+                            }
+                        ],
+                        subparams: []
+                    }
+                }
+            }
+        ) as IPatronRelationship[]
 
-        const patron_id = await EventProc.runEvent(
-            "countAsFactionForPatrons",
-            this,
-            [],
-            this.MyFaction?.SelfDynamicProperty.OptionChoice.ID,
-            null
-        )
-
-        if (patron_id) {
-            console.log(patron_id);
+        for (let i = 0; i < PatronList.length; i++) {
+            const Patron = await SkillFactory.CreateNewPatron(PatronList[i].id, this)
+            AllPatrons.push(Patron);
         }
+
+        return AllPatrons;
     }
 
 

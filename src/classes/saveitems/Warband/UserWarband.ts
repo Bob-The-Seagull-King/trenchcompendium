@@ -102,7 +102,7 @@ class UserWarband extends DynamicContextObject {
     }
 
     public async GetPatronList() {
-        await this.Faction.FindAllPatronOptions();
+        return await this.Faction.FindAllPatronOptions();
     }
 
 }

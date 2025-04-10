@@ -55,6 +55,10 @@ const WarbandTestBlock = (prop: any) => {
 
         }
 
+        async function RunPatronGet() {
+            console.log(await warbandproperty?.GetPatronList())
+        }
+
     return (
         
         <ErrorBoundary fallback={<div>Something went wrong with SaveWarbandDisplay.tsx</div>}>
@@ -84,7 +88,7 @@ const WarbandTestBlock = (prop: any) => {
                         </Button>
                     </div>
                     <div className="col-4">
-                        <Button title='Console Log property' onClick={() => (warbandproperty?.GetPatronList())}>
+                        <Button title='Console Log property' onClick={() => (RunPatronGet())}>
                             Get Patron List
                         </Button>
                     </div>
