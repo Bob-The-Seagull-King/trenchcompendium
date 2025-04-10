@@ -50,7 +50,13 @@ const WarbandItemListDisplay = (prop: any) => {
     }
 
     async function NewItem() {
-        const Result = await Manager.NewItem(NewItemTitle, "fc_ironsultanate");
+        const Result = await Manager.NewItem(NewItemTitle, "fc_ironsultanate", {
+            id: "null_test",
+            limit_ducat: 0,
+            limit_model: 0,
+            value_ducat: 0,
+            value_glory: 0
+        });
         if (Result != "") {
             runToast(Result);
         } else {

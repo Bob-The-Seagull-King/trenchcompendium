@@ -1,4 +1,5 @@
 import { WarbandFactory } from '../../../factories/warband/WarbandFactory';
+import { IWarbandContextItem } from './High_Level/WarbandContextItem';
 import { UserWarband, IUserWarband } from './UserWarband';
 
 class WarbandManager {
@@ -142,7 +143,7 @@ class WarbandManager {
     /**
      * Builds a new item and saves it to the browser
      */
-    public async NewItem(_title : string, fact_id : string) {
+    public async NewItem(_title : string, fact_id : string, self_context: IWarbandContextItem) {
         const msg = ""
 
         if (_title.trim().length <= 0) {
@@ -160,10 +161,10 @@ class WarbandManager {
             notes: [],
             context: {
                 id: this.CalcID(_title.trim() + "_context"),
-                limit_ducat: 0,
-                limit_model: 0,
-                value_ducat: 0,
-                value_glory: 0
+                limit_ducat: self_context.limit_ducat,
+                limit_model: self_context.limit_model,
+                value_ducat: self_context.value_ducat,
+                value_glory: self_context.value_glory
             },
             exploration: {
                 explorationskills: [],
@@ -181,8 +182,8 @@ class WarbandManager {
                 },
                 faction_rules : [],
                 contextdata: {},
-                id: this.CalcID(_title.trim() + "_exploration"),
-                name: _title+"_exploration",
+                id: this.CalcID(_title.trim() + "_faction"),
+                name: _title+"_faction",
                 source: 'user_warband',
                 tags: {}
             },            

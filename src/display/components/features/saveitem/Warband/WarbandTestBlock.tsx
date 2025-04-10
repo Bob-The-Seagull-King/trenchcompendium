@@ -31,7 +31,13 @@ const WarbandTestBlock = (prop: any) => {
         useEffect(() => {
             async function SetModelOptions() {                
                 const Manager : WarbandManager = new WarbandManager();
-                await Manager.NewItem("test-warband", "fc_ironsultanate_fv_houseofwisdom")
+                await Manager.NewItem("test-warband", "fc_ironsultanate_fv_houseofwisdom",{
+                    id: "null_test",
+                    limit_ducat: 0,
+                    limit_model: 0,
+                    value_ducat: 0,
+                    value_glory: 0
+                })
                 const warbresult : UserWarband | null = Manager.GetItemByName("test-warband")
                 setvwarbandproperty(warbresult);
             }
