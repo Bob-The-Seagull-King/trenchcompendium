@@ -19,7 +19,7 @@ import { RuleFactory } from '../../../factories/features/RuleFactory';
 import { FactionModelRelationship, IFactionModelRelationship } from '../../relationship/faction/FactionModelRelationship';
 import { ModelFactory } from '../../../factories/features/ModelFactory';
 import { FactionEquipmentRelationship, IFactionEquipmentRelationship } from '../../relationship/faction/FactionEquipmentRelationship';
-import {returnDescription} from "../../../utility/util";
+import {returnDescription, returnParagraphsDescription} from "../../../utility/util";
 
 
 interface IFaction extends IStaticOptionContextObject {
@@ -132,7 +132,7 @@ class Faction extends StaticOptionContextObject {
      *        - Other spans inside should be removed leaving only text inside the paragrapg
      */
     public GetLoreHTML () {
-        return returnDescription(this, this.Description);
+        return returnParagraphsDescription(this, this.Description);
     }
 
 

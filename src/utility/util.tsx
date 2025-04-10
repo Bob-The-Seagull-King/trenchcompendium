@@ -125,3 +125,21 @@ export function returnDescription(baseObject: any, objectArray : any[]) {
         </>
     )
 }
+
+/**
+ * Returns the organized description of an object based on model data
+ * @param baseObject The model which this description is attatched to
+ * @param objectArray The array of description items to render
+ * @returns Map of AbilityDescriptionItemDisplay elements
+ */
+export function returnParagraphsDescription(baseObject: any, objectArray : any[]) {
+    return (
+        <>
+            {objectArray.map((item) => (
+                <p key={"descriptionDisplay"} className={"description-element"}>
+                    <AdvancedDescriptionItemDisplay data={item} parent={baseObject}/>
+                </p>
+            ))}
+        </>
+    )
+}
