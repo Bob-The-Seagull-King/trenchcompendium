@@ -21,6 +21,7 @@ class DynamicContextObject extends ContextObject {
         if (this.ContextData) {            
             for (const key of Object.keys(this.ContextKeys)) {
                 const context_entry = this.ContextData[key]
+                if (context_entry == undefined) {continue;}
                 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                 // @ts-ignore - dynamic lookup
                 const func = context_entry[event_id];

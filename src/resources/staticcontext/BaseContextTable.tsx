@@ -601,5 +601,15 @@ export const BaseContextCallTable : CallEventTable = {
                 </ErrorBoundary>
             )
         }
+    },
+    VariantFactionBase: {
+        event_priotity: 0,
+        async countAsFactionForPatrons(this: EventRunner, eventSource : any, relayVar : string, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            if (context_func['faction_base_id']) {
+                return context_func['faction_base_id']
+            }
+            return relayVar;
+        }
+    
     }
 }

@@ -75,6 +75,7 @@ class FactionFactory {
         const BasedFactionData : IFaction = FactionCollection.MergeFactions(_base, varaint);
         const rule = new Faction(BasedFactionData, parent)
         cache.AddToCache('faction', rule);
+        rule.ContextKeys['VariantFactionBase'] = {'faction_base_id':_base.id}
         await rule.BuildFactionModels(BasedFactionData.id);
         await rule.BuildFactionEquipment(BasedFactionData.id)
         await rule.BuildRules(BasedFactionData.rules)

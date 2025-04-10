@@ -101,6 +101,10 @@ class UserWarband extends DynamicContextObject {
         return _objint;
     }
 
+    public async GetPatronList() {
+        await this.Faction.FindAllPatronOptions();
+    }
+
 }
 
 export {IUserWarband, UserWarband}

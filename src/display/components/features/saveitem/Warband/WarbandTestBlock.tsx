@@ -84,8 +84,8 @@ const WarbandTestBlock = (prop: any) => {
                         </Button>
                     </div>
                     <div className="col-4">
-                        <Button title='Console Log property' onClick={() => (console.log(""))}>
-                            NONE
+                        <Button title='Console Log property' onClick={() => (warbandproperty?.GetPatronList())}>
+                            Get Patron List
                         </Button>
                     </div>
                     <div className="col-4">

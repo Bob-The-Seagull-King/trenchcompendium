@@ -9,6 +9,7 @@ import { ContextPackage } from "../../../contextevent/contextpackage";
 import { FactionFactory } from "../../../../factories/features/FactionFactory";
 import { Patron } from "../../../feature/skillgroup/Patron";
 import { Faction } from "../../../feature/faction/Faction";
+import { EventRunner } from "../../../contextevent/contexteventhandler";
 
 interface IWarbandFaction extends IContextObject {
     faction_property: IWarbandProperty,
@@ -125,6 +126,22 @@ class WarbandFaction extends DynamicContextObject {
         }
 
         return subpackages; 
+    }
+
+    public async FindAllPatronOptions() {
+        const EventProc : EventRunner = new EventRunner();
+
+        const patron_id = await EventProc.runEvent(
+            "countAsFactionForPatrons",
+            this,
+            [],
+            this.MyFaction?.SelfDynamicProperty.OptionChoice.ID,
+            null
+        )
+
+        if (patron_id) {
+            console.log(patron_id);
+        }
     }
 
 
