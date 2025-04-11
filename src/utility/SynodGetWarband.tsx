@@ -18,7 +18,8 @@ const SynodGetWarband = ({ WarbandId }: SynodImageURLProps): string => {
 
     useEffect(() => {
 
-        const synodUrl = 'http://synod.trench-companion.test/';
+        // const synodUrl = 'http://synod.trench-companion.test/'; // this is for local dev
+        const synodUrl = 'https://synod.trench-companion.com/'; // This is for prod
 
         fetch(`${synodUrl}wp-json/wp/v2/warband/${WarbandId}`)
             .then(res => res.json())
@@ -27,7 +28,6 @@ const SynodGetWarband = ({ WarbandId }: SynodImageURLProps): string => {
                 const warbandData = data.meta?.warband_data;
 
                 setWarbandData(warbandData);
-                console.log(data);
 
             })
             .catch(console.error);

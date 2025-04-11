@@ -371,7 +371,6 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         menushowitems: false,
         hidefilter: true,
         returnDisplay(item: any) {
-            console.log(item);
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
 
