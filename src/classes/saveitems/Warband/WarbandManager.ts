@@ -26,6 +26,25 @@ class WarbandManager {
             }
         }
         return null;
+    }  
+
+    /**
+     * @param _name The name of the item to find
+     * @returns The first instance of a item with that name
+     */
+    public GetItemByID(_id : string) {
+        let i = 0;
+        for (i=0; i < this.WarbandItemList.length ; i++) {
+            try {
+                const nameval = this.WarbandItemList[i].ID 
+                if ((nameval != undefined? nameval : "" ).trim() == _id) {
+                    return this.WarbandItemList[i]
+                }
+            } catch (e) {
+                console.log("Broken Save Item Found")
+            }
+        }
+        return null;
     }
 
     /**
@@ -242,6 +261,17 @@ class WarbandManager {
 
         this.WarbandItemList = MemberArray;
 
+        this.SetStorage();
+    }
+
+    /**
+     * 
+     * WARBAND UPDATE FUNCTIONS MOVE THROUGH HERE
+     * 
+     */
+
+    public async UpdateWarbandPatron(wb : UserWarband, patron_id : string) {
+        wb.UpdateSelfPatron(patron_id);
         this.SetStorage();
     }
 }

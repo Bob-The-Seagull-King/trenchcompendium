@@ -105,6 +105,19 @@ class UserWarband extends DynamicContextObject {
         return await this.Faction.FindAllPatronOptions();
     }
 
+    public async UpdateSelfPatron(patron_name : string ) {
+        await this.Faction.UpdatePatron(patron_name);
+    }
+
+
+    /**
+     * GETTERS
+     */
+
+    public GetPatron() {
+        return this.Faction.MyPatron;
+    }
+
 }
 
 export {IUserWarband, UserWarband}

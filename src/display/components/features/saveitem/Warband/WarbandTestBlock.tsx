@@ -59,6 +59,10 @@ const WarbandTestBlock = (prop: any) => {
             console.log(await warbandproperty?.GetPatronList())
         }
 
+        async function RunPatronUpdate() {
+            await warbandproperty?.UpdateSelfPatron("pt_sublimegate")
+        }
+
     return (
         
         <ErrorBoundary fallback={<div>Something went wrong with SaveWarbandDisplay.tsx</div>}>
@@ -93,8 +97,8 @@ const WarbandTestBlock = (prop: any) => {
                         </Button>
                     </div>
                     <div className="col-4">
-                        <Button title='Console Log property' onClick={() => (console.log(""))}>
-                            NONE
+                        <Button title='Console Log property' onClick={() => (RunPatronUpdate())}>
+                            Set Patron To Sublime Gate
                         </Button>
                     </div>
                 </div>
