@@ -23,6 +23,9 @@ import SuperHeader from './display/headers/SuperHeader'
 import WarbandRoute from './display/superroutes/WarbandRoute'
 import {useGlobalState} from "./utility/globalstate";
 import ScrollToTop from './display/components/subcomponents/ScrollToTop'
+import SynodLogin from "./utility/SynodLogin";
+import SynodLoginPage from './display/superroutes/SynodLoginPage'
+
 
 const App: React.FC = () => {
 
@@ -49,6 +52,7 @@ const App: React.FC = () => {
                             <Route path={ROUTES.HOME_ROUTE} element={<HomeRoute />} />
                             <Route path={ROUTES.COMPENDIUM_ROUTE} element={<CompendiumRoute controller={compendiumcontroller} />} />
                             <Route path={ROUTES.WARBAND_ROUTE} element={<WarbandRoute controller={toolcontroller} />} />
+                            <Route path="/login" element={<SynodLoginPage />} /> {/* New login route */}{/* @TODO: do something else if logged in */}
                         </Routes>
                     </Router>
                 </PersistGate>
