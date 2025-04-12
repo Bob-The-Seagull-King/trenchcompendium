@@ -47,7 +47,7 @@ const WarbandRoute: React.FC<IControllerProp> = (prop) => {
                     <Routes>                        
                         <Route path={ROUTES.HOME_ROUTE} element={<ToolsSavedItem manager={prop.controller.UserWarbandManager} />} />
                     </Routes>
-                    <WarbandTestBlock />
+                    {/*<WarbandTestBlock />*/}
                 </div>
             </div>
         </ErrorBoundary>

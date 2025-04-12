@@ -21,6 +21,7 @@ class ToolsController {
      */
     constructor () {
         this.UserWarbandManager = new WarbandManager();
+        this.UserWarbandManager.GetItemsAll();
     }
 
 }

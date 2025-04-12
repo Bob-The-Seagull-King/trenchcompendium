@@ -5,9 +5,11 @@ import { UserWarband, IUserWarband } from './UserWarband';
 class WarbandManager {
     public WarbandItemList: UserWarband[] = []; 
 
-    constructor() {
-        this.WarbandItemList = this.GrabItems();
-    }    
+    public async GetItemsAll() {
+        this.WarbandItemList = await this.GrabItems();
+    }
+    
+    
 
     /**
      * @param _name The name of the item to find
@@ -50,13 +52,13 @@ class WarbandManager {
     /**
      * Gets all of the saved items.
      */
-    public GrabItems() {
+    public async GrabItems() {
         const TempList: UserWarband[] = [];  
-        const data = localStorage.getItem('compendiumsaveitem');  
+        const data = localStorage.getItem('userwarbanditem');  
         try {
             const ItemList: IUserWarband[] = JSON.parse(data || "");
             for (let i = 0; i < ItemList.length; i++) {
-                TempList.push(new UserWarband(ItemList[i]))
+                TempList.push(await WarbandFactory.CreateUserWarband(ItemList[i]))
             }
             return TempList;
         } catch (e) {

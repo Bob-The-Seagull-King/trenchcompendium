@@ -12,6 +12,9 @@ import OptionSetStaticDisplay from '../../../../subcomponents/description/Option
 import { UserWarband } from '../../../../../../classes/saveitems/Warband/UserWarband';
 import { WarbandManager } from '../../../../../../classes/saveitems/Warband/WarbandManager';
 import { Patron } from '../../../../../../classes/feature/skillgroup/Patron';
+import { Form } from 'react-bootstrap';
+import { makestringpresentable } from '../../../../../../utility/functions';
+import PatronDisplay from '../../../../features/skill/PatronDisplay';
 
 const WarbandPatronDisplay = (props: any) => {
     const Warband: UserWarband = props.wrbnd
@@ -19,22 +22,44 @@ const WarbandPatronDisplay = (props: any) => {
     const UpdateFunction = props.updater;
 
     const [patrons, setpatrons] = useState<Patron[]>([])
-    const [key, setkey] = useState(0);
+    const [curpatron, setcurpatron] = useState<Patron | null>(Warband.GetPatron())
+    const [keyval, setkey] = useState(0);
 
     useEffect(() => {
         async function SetWarbandPatronOptions() {                
             const PatronList = await Warband.GetPatronList();
             setpatrons(PatronList);
-
+            setkey(keyval + 1);
         }
     
         SetWarbandPatronOptions();
     }, []);
+    
+    function updateItem(value: string) {
+        Warband.UpdateSelfPatron(value);
+        setcurpatron(Warband.GetPatron());
+        setkey(keyval + 1);
+        UpdateFunction(Warband);
+    }
 
     return (
         <ErrorBoundary fallback={<div>Something went wrong with AbilityDisplay.tsx</div>}>
-            <div className=''>
+            <div key={keyval}>
+
+                <h1>Select Patron</h1>
                 
+                <Form.Control defaultValue={ curpatron != null? curpatron.ID : undefined} className={"borderstyler bordergrey overcomeradius " } as="select" aria-label="Default select example"  placeholder="Member Type" onChange={(e: { target: { value: any; }; }) => { updateItem(e.target.value)    } } >
+                    <option value={""} key={"modeloptionnone"} >{"No Patron"}</option> 
+                    {patrons.map((selec) => ( 
+                        <option value={selec.ID} key={"modeloption"+(patrons.indexOf(selec).toString())} >{makestringpresentable(selec.Name? selec.Name : "")}</option> 
+                    ))}
+                </Form.Control>
+
+                {curpatron != null &&
+                    <>
+                        <PatronDisplay data={curpatron}/>
+                    </>
+                }
             </div>
         </ErrorBoundary>
     )

@@ -161,8 +161,12 @@ class WarbandFaction extends DynamicContextObject {
     }
 
     public async UpdatePatron(patorn_name : string) {
-        const Patron = await SkillFactory.CreateNewPatron(patorn_name, this)
-        this.MyPatron = Patron;
+        if (patorn_name == "" ) {
+            this.MyPatron = null;
+        } else {
+            const Patron = await SkillFactory.CreateNewPatron(patorn_name, this)
+            this.MyPatron = Patron;
+        }
     }
 
 

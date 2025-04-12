@@ -8,6 +8,7 @@ import { Item } from '../../classes/saveitems/item';
 import WarbandItemViewDisplay from '../components/features/saveitem/Warband/WarbandItemViewDisplay';
 import WarbandItemListDisplay from '../components/features/saveitem/Warband/WarbandItemListDisplay';
 import { useLocation } from 'react-router-dom';
+import { UserWarband } from '../../classes/saveitems/Warband/UserWarband';
 
 const ToolsSavedItem = (prop: any) => {
     const Manager = prop.manager;
@@ -23,7 +24,7 @@ const ToolsSavedItem = (prop: any) => {
         return ItemCurrent
     }
 
-    function UpdateItem(_Item : Item) {
+    function UpdateItem(_Item : UserWarband) {
         Manager.SetStorage();
         returnItem(_Item);
         returnkey(_keyval + 1);
