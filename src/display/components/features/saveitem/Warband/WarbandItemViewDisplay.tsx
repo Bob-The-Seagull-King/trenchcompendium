@@ -11,6 +11,7 @@ import { faDownload } from '@fortawesome/free-solid-svg-icons'
 import { Button } from 'react-bootstrap';
 import { WarbandManager } from '../../../../../classes/saveitems/Warband/WarbandManager';
 import { UserWarband } from '../../../../../classes/saveitems/Warband/UserWarband';
+import WarbandPatronDisplay from './UserWarbandElements/WarbandPatronDisplay';
 
 const WarbandItemViewDisplay = (prop: any) => {
     const Manager : WarbandManager = prop.manager;
@@ -34,33 +35,25 @@ const WarbandItemViewDisplay = (prop: any) => {
     return (
         
         <ErrorBoundary fallback={<div>Something went wrong with SaveItemViewDisplay.tsx</div>}>
-        <div>
-            
-            <div className="row">
-                <div className="verticalspacerbig"/>
-                <div className="verticalspacerbig"/>
-            </div>
+            <>
+                <div className="row">        
+                    <span className="">
+                        <Button className=" no-padding" variant="" onClick={() => exportData()}>
+                            <FontAwesomeIcon icon={faDownload} className="contentpacklabel no-margin"/>
+                        </Button>
+                    </span>    
+                </div>
 
-            <div className="row">        
-                <span className="">
-                    <Button className=" no-padding" variant="" onClick={() => exportData()}>
-                        <FontAwesomeIcon icon={faDownload} className="contentpacklabel no-margin"/>
-                    </Button>
-                </span>    
-            </div>
-
-            <div className="row">
-                <div className=" largefonttext centerPosition">
-                        <div className="widecentertext">
-                            {WarbandItem.Name} 
+                <div className="row">
+                    <div className="largefonttext centerPosition">
+                            <div className="widecentertext">
+                                {WarbandItem.Name} 
+                            </div>
                         </div>
-                    </div>
-            </div>
-            <div className="row">
-                <div className="verticalspacerbig"/>
-                <div className="verticalspacerbig"/>
-            </div> 
-        </div>
+                </div>
+
+                <WarbandPatronDisplay wrbnd={WarbandItem} mngr={Manager} updater={UpdateFunction}/>
+            </>
         </ErrorBoundary>
     )
     // -------------------------------------------
