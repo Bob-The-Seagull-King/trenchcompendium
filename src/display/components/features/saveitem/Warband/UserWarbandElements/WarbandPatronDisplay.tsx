@@ -35,11 +35,11 @@ const WarbandPatronDisplay = (props: any) => {
         SetWarbandPatronOptions();
     }, []);
     
-    function updateItem(value: string) {
-        Warband.UpdateSelfPatron(value);
+    async function updateItem(value: string) {
+        await Warband.UpdateSelfPatron(value);
+        UpdateFunction(Warband);
         setcurpatron(Warband.GetPatron());
         setkey(keyval + 1);
-        UpdateFunction(Warband);
     }
 
     return (
