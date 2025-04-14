@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { getRouteName } from "../../utility/functions"
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faBars, faGear, faHouse, faMagnifyingGlass, faSquare} from '@fortawesome/free-solid-svg-icons'
+import {faBars, faGear, faHouse, faMagnifyingGlass, faSquare, faUser} from '@fortawesome/free-solid-svg-icons'
 import logoDarkMode from '../../resources/images/trench-companion-logo-white-v2.png'
 import logoLightMode from '../../resources/images/trench-companion-logo-black-v2.png'
 
@@ -56,9 +56,10 @@ const BaseHeader: React.FC<IControllerProp> = (prop: any) => {
                          onClick={() => NavigateHome()}
                     />
                 </div>
-                <Button className="search-button" onClick={handleShowSettings}>
-                    <FontAwesomeIcon icon={faGear} className=""/>
-                </Button>
+
+                <a href={"/login"} className={'header-login-btn'}>
+                    <FontAwesomeIcon icon={faUser} className=""/>
+                </a>
             </>
         </ErrorBoundary>
 
