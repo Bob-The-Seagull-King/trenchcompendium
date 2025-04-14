@@ -71,21 +71,34 @@ const RulesModelDisplay = (props: any) => {
             }
         }
 
-        if (stats.melee != undefined) {
-            for (let i = 0; i < stats.melee?.length; i++) {
-                meleestats.push(((stats.melee[i] > 0? "+": stats.melee[i] < 0? "-" :"") ) + (stats.melee?.toString() || ""))
+        if (stats.melee  != undefined) {
+            for (let i = 0; i < stats.melee.length; i++) {
+                const val = stats.melee[i];
+                const prefix = val > 0 ? "+" : val < 0 ? "-" : "";
+                meleestats.push(prefix + Math.abs(val));
             }
+        } else {
+            meleestats.push('0');
         }
+
         if (stats.ranged != undefined) {
             for (let i = 0; i < stats.ranged?.length; i++) {
-                rangedstats.push(((stats.ranged[i] > 0? "+": stats.ranged[i] < 0? "-" :"") ) + (stats.melee?.toString() || ""))
+                const val = stats.ranged[i];
+                const prefix = val > 0 ? "+" : val < 0 ? "-" : "";
+                rangedstats.push(prefix + Math.abs(val));
             }
+        } else {
+            rangedstats.push('0');
         }
+
         if (stats.armour != undefined) {
             for (let i = 0; i < stats.armour?.length; i++) {
                 armourstats.push(stats.armour[i].toString())
             }
+        } else {
+            armourstats.push('0');
         }
+
         return (
             <>
                 {stats.movement != undefined &&
@@ -93,17 +106,17 @@ const RulesModelDisplay = (props: any) => {
                         <ItemStat title={"Movement"} value={(movestats.join('/') + '"/' + (typestats.join('/')))}/>
                     </>
                 }
-                {stats.melee != undefined &&
+                {meleestats.length >= 0 &&
                     <>
                         <ItemStat title={"Melee"} value={meleestats.join('/')}/>
                     </>
                 }
-                {stats.ranged != undefined &&
+                {rangedstats.length >= 0 &&
                     <>
                         <ItemStat title={"Ranged"} value={rangedstats.join('/')}/>
                     </>
                 }
-                {stats.armour != undefined &&
+                {armourstats.length >= 0 != undefined &&
                     <>
                         <ItemStat title={"Armour"} value={armourstats.join('/')}/>
                     </>
@@ -254,8 +267,6 @@ const RulesModelDisplay = (props: any) => {
                         />
                     }
                 </div>
-
-
             </section>
         </ErrorBoundary>
     )
