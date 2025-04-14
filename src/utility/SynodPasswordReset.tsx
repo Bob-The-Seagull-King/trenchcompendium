@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faCircleNotch} from "@fortawesome/free-solid-svg-icons";
 
 const SynodPasswordReset: React.FC = () => {
     const [emailOrUsername, setEmailOrUsername] = useState('');
@@ -9,6 +11,9 @@ const SynodPasswordReset: React.FC = () => {
     const [message, setMessage] = useState('');
     const [error, setError] = useState('');
 
+    const [isLoadingSendResetLink, setIsLoadingSendResetLink] = useState(false); // Loading state
+    const [isLoadingResetPassword, setIsLoadingResetPassword] = useState(false); // Loading state
+
     // const synodUrl = 'http://synod.trench-companion.test/';  // this is for local dev
     const synodUrl = 'https://synod.trench-companion.com/'; // this is for prod
 
@@ -16,6 +21,7 @@ const SynodPasswordReset: React.FC = () => {
         e.preventDefault();
         setMessage('');
         setError('');
+        setIsLoadingSendResetLink(true);
 
         try {
             const response = await axios.post(`${synodUrl}wp-json/wp/v2/users/lostpassword`, {
@@ -27,6 +33,8 @@ const SynodPasswordReset: React.FC = () => {
 
         } catch (err: any) {
             setError(err.response?.data?.message || 'Something went wrong');
+        } finally {
+            setIsLoadingSendResetLink(false);
         }
     };
 
@@ -34,6 +42,7 @@ const SynodPasswordReset: React.FC = () => {
         e.preventDefault();
         setMessage('');
         setError('');
+        setIsLoadingResetPassword(true);
 
         try {
             const response = await axios.post(`${synodUrl}wp-json/wp/v2/users/reset_password`, {
@@ -45,6 +54,8 @@ const SynodPasswordReset: React.FC = () => {
             setMessage('Password reset successful!');
         } catch (err: any) {
             setError(err.response?.data?.message || 'Password reset failed');
+        } finally {
+            setIsLoadingResetPassword(false);
         }
     };
 
@@ -73,7 +84,18 @@ const SynodPasswordReset: React.FC = () => {
                 </div>
 
                 <div className={'mb-3'}>
-                    <button type="submit" className={'btn btn-primary'}>Get Reset Code</button>
+                    <button type="submit" className={'btn btn-primary'}>
+                        {isLoadingSendResetLink ?
+                            <>
+                                {'Loading'}
+                                <FontAwesomeIcon icon={faCircleNotch} className="fa-spin icon-inline-right-l"/>
+                            </>
+                            :
+                            <>
+                                {'Get Reset Code'}
+                            </>
+                        }
+                    </button>
                 </div>
             </form>
 
@@ -108,7 +130,18 @@ const SynodPasswordReset: React.FC = () => {
                 </div>
 
                 <div className={'mb-3'}>
-                    <button type="submit" className={'btn btn-primary'}>Reset Password</button>
+                    <button type="submit" className={'btn btn-primary'}>
+                        {isLoadingResetPassword ?
+                            <>
+                                {'Loading'}
+                                <FontAwesomeIcon icon={faCircleNotch} className="fa-spin icon-inline-right-l"/>
+                            </>
+                            :
+                            <>
+                                {'Reset Password'}
+                            </>
+                        }
+                    </button>
                 </div>
             </form>
 

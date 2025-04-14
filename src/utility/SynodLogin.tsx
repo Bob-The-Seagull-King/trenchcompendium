@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
 import { useAuth } from './AuthContext';
+import {faCircleNotch, faUser} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 
 
@@ -19,6 +21,8 @@ const SynodLogin: React.FC = () => {
     const [error, setError] = useState('');
     const [message, setMesage] = useState('');
 
+    const [isLoading, setIsLoading] = useState(false); // Loading state
+
     // const synodUrl = 'http://synod.trench-companion.test/';  // this is for local dev
     const synodUrl = 'https://synod.trench-companion.com/'; // This is for prod
 
@@ -26,10 +30,12 @@ const SynodLogin: React.FC = () => {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        setIsLoading(true);
         setError('');
 
         if (!email || !password) {
             setError('Please fill out all fields');
+            setIsLoading(false);
             return;
         }
 
@@ -46,6 +52,8 @@ const SynodLogin: React.FC = () => {
             login(token, userId);
         } catch (err: any) {
             setError(err.response?.data?.message || 'Login failed');
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -81,7 +89,18 @@ const SynodLogin: React.FC = () => {
                     </div>
 
                     <div className={'mb-3'}>
-                        <button type="submit" className={'btn btn-primary'}>Login</button>
+                        <button type="submit" className={'btn btn-primary'}>
+                            {isLoading ?
+                                <>
+                                    {'Loading'}
+                                    <FontAwesomeIcon icon={faCircleNotch} className="fa-spin icon-inline-right-l"/>
+                                </>
+                            :
+                                <>
+                                    {'Login'}
+                                </>
+                            }
+                        </button>
                     </div>
                 </form>
             }

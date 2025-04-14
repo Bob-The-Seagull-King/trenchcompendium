@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faCircleNotch} from "@fortawesome/free-solid-svg-icons";
 
 const SynodRegister = () => {
     const [email, setEmail] = useState('');
@@ -7,16 +9,20 @@ const SynodRegister = () => {
     const [error, setError] = useState('');
     const [message, setMessage] = useState('');
 
+    const [isLoading, setIsLoading] = useState(false); // Loading state
+
     // const synodUrl = 'http://synod.trench-companion.test/'; // this is for local dev
     const synodUrl = 'https://synod.trench-companion.com/'; // this is for prod
 
 
     const handleSubmit = async (e: any) => {
         e.preventDefault();
+        setIsLoading(true);
 
         // Simple validation
         if (!email || !password) {
             setError('Please fill out all fields');
+            setIsLoading(false);
             return;
         }
 
@@ -32,6 +38,8 @@ const SynodRegister = () => {
             }
         } catch (err) {
             setError('An error occurred while registering.');
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -63,7 +71,18 @@ const SynodRegister = () => {
                 </div>
 
                 <div className={'mb-3'}>
-                    <button type="submit" className={'btn btn-primary'}>Sign Up</button>
+                    <button type="submit" className={'btn btn-primary'}>
+                        {isLoading ?
+                            <>
+                                {'Loading'}
+                                <FontAwesomeIcon icon={faCircleNotch} className="fa-spin icon-inline-right-l"/>
+                            </>
+                            :
+                            <>
+                                {'Sign up'}
+                            </>
+                        }
+                    </button>
                 </div>
             </form>
         </>
