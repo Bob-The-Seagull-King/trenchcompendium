@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useAuth } from './AuthContext';
 
-interface CreateWarbandProps {
-    authToken: string; // JWT token
-    userId: number;    // WordPress user ID
-}
 
-const SynodUpdateWarband: React.FC<CreateWarbandProps> = ({ authToken, userId }) => {
+
+const SynodUpdateWarband: React.FC = () => {
     const [warbandData, setWarbandData] = useState('');
     const [warbandId, setWarbandId] = useState('');
     const [message, setMessage] = useState('');
     const [error, setError] = useState('');
+
+    const { authToken, userId, isLoggedIn } = useAuth();
+
 
     // const synodUrl = 'http://synod.trench-companion.test/';  // this is for local dev
     const synodUrl = 'https://synod.trench-companion.com/'; // This is for prod

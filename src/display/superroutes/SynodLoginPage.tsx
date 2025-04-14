@@ -8,69 +8,121 @@ import SynodRegister from "../../utility/SynodRegister";
 import SynodPasswordReset from "../../utility/SynodPasswordReset";
 import SynodUpdateWarband from "../../utility/SynodUpdateWarband";
 import SynodUserWarbands from "../../utility/SynodUserWarbands";
+import {useAuth} from "../../utility/AuthContext";
 
 const SynodLoginPage: React.FC = () => {
     const [authToken, setAuthToken] = useState<string | null>(null);
-    const [userId, setUserId] = useState<number | null>(null);
+    // const [userId, setUserId] = useState<number | null>(null);
 
-    // Load saved token & userId from localStorage
-    useEffect(() => {
-        const storedToken = localStorage.getItem('jwtToken');
-        const storedUserId = localStorage.getItem('synodUserId');
+    const [visbibleLogin, setvisbibleLogin] = useState(true);
+    const [visbibleSignup, setvisbibleSignup] = useState(false);
+    const [visbibleReset, setvisbibleReset] = useState(false);
 
-        if (storedToken && storedUserId) {
-            setAuthToken(storedToken);
-            setUserId(parseInt(storedUserId, 10));
-        }
-    }, []);
+    const { userId, isLoggedIn, login, logout } = useAuth();
 
-    const handleLogin = (token: string, id: number) => {
-        setAuthToken(token);
-        setUserId(id);
-    };
+    const showLogin = async function () {
+        setvisbibleLogin(true);
+        setvisbibleSignup(false);
+        setvisbibleReset(false);
+    }
 
-    const handleLogout = () => {
-        localStorage.removeItem('jwtToken');
-        localStorage.removeItem('synodUserId');
-        setAuthToken(null);
-        setUserId(null);
-    };
+    const showSignup = async function () {
+        setvisbibleLogin(false);
+        setvisbibleSignup(true);
+        setvisbibleReset(false);
+    }
+    const showReset = async function () {
+        setvisbibleLogin(false);
+        setvisbibleSignup(false);
+        setvisbibleReset(true);
+    }
 
     return (
         <div className="SynodLoginPage">
             <div className={'container'}>
                 <div className={'row'}>
 
-                    <h1>Login</h1>
+                    {visbibleLogin &&
+                        <div className={"synod-login-wrap synod-login-form"}>
+                            <SynodLogin/>
 
-                    {/* @TODO: this is just a test*/}
-                    <SynodGetWarband
-                        WarbandId={15}
-                    />
+                            {!isLoggedIn &&
+                                <>
+                                    <div className={'login-btn-spacer'}>
+                                        {'or'}
+                                    </div>
 
-                    <hr/>
+                                    <button
+                                        className={'show-signup-btn btn btn-secondary'}
+                                        onClick={showSignup}
+                                    >
+                                        {'Sign Up instead'}
+                                    </button>
+                                </>
+                            }
+
+                            {isLoggedIn &&
+                                <button
+                                    className={'btn btn-secondary'}
+                                    onClick={logout}
+                                >
+                                    {'Logout'}
+                                </button>
+                            }
+
+                            <div
+                                className={'reset-toggle'}
+                                onClick={showReset}>
+                                {'Reset your password?'}
+                            </div>
+                        </div>
+                    }
 
 
-                    <SynodLogin onLogin={handleLogin}/>
+                    {visbibleSignup &&
+                        <div className={"synod-signup-wrap synod-login-form"}>
+                            <SynodRegister/>
 
-                    <hr/>
+                            <div className={'login-btn-spacer'}>
+                                {'or'}
+                            </div>
 
-                    <button onClick={handleLogout} style={{marginLeft: '1rem'}}>
-                        Logout
-                    </button>
+                            <button
+                                className={'show-signup-btn  btn btn-secondary'}
+                                onClick={showLogin}
+                            >
+                                {'Log In instead'}
+                            </button>
 
-                    <hr/>
 
-                    <SynodRegister
-                    />
+                        </div>
+                    }
 
-                    <hr/>
+                    {visbibleReset &&
+                        <div className={"synod-reset-wrap synod-login-form"}>
+                            <SynodPasswordReset/>
 
-                    <SynodPasswordReset/>
+                            <div className={'login-btn-spacer'}>
+                                {'or'}
+                            </div>
 
+                            <button
+                                className={'show-signup-btn  btn btn-secondary'}
+                                onClick={showLogin}
+                            >
+                                {'Log In instead'}
+                            </button>
+                        </div>
+                    }
                 </div>
+            </div>
 
-                <hr/>
+            <div className={"container mt-3 pt-3"}>
+            <hr className={'mt-3'}/>
+                {/* @TODO: Debug screen*/}
+                <SynodGetWarband
+                    WarbandId={15}
+                />
 
                 <div className={'row'}>
                     <div className={'col'}>
@@ -78,22 +130,22 @@ const SynodLoginPage: React.FC = () => {
                             WarbandId={15}
                         />
 
-                        <SynodUserWarbands />
+                        <SynodUserWarbands/>
                     </div>
 
                 </div>
 
-                <hr/>
+                <hr />
 
                 <div className={'row'}>
                     <div className={'col col-sm-6'}>
-                        {authToken && userId && (
-                            <SynodCreateWarband authToken={authToken} userId={userId}/>
+                        {isLoggedIn && (
+                            <SynodCreateWarband/>
                         )}
                     </div>
                     <div className={'col col-sm-6'}>
-                        {authToken && userId && (
-                            <SynodUpdateWarband authToken={authToken} userId={userId}/>
+                        {isLoggedIn && (
+                            <SynodUpdateWarband/>
                         )}
                     </div>
                 </div>

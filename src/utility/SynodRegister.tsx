@@ -36,26 +36,37 @@ const SynodRegister = () => {
     };
 
     return (
-        <div>
-            <h2>Sign Up</h2>
+        <>
+            <h1 className={'mt-3'}>Sign Up</h1>
             {error && <p style={{ color: 'red' }}>{error}</p>}
             {message && <p style={{ color: 'green' }}>{message}</p>}
             <form onSubmit={handleSubmit}>
-                <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Email"
-                />
-                <input
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Password"
-                />
-                <button type="submit">Sign Up</button>
+                <div className={'mb-3'}>
+                    <label htmlFor="synod-register-email" className="form-label">Email address</label>
+                    <input
+                        type="email" id={'synod-register-email'}
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="Email"
+                        className={'form-control'}
+                    />
+                </div>
+                <div className={'mb-3'}>
+                    <label htmlFor="synod-register-password" className="form-label">Password</label>
+                    <input
+                        type="password" id={'synod-register-password'}
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="Password"
+                        className={'form-control'}
+                    />
+                </div>
+
+                <div className={'mb-3'}>
+                    <button type="submit" className={'btn btn-primary'}>Sign Up</button>
+                </div>
             </form>
-        </div>
+        </>
     );
 };
 
