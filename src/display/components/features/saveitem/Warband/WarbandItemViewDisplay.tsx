@@ -12,6 +12,7 @@ import { Button } from 'react-bootstrap';
 import { WarbandManager } from '../../../../../classes/saveitems/Warband/WarbandManager';
 import { UserWarband } from '../../../../../classes/saveitems/Warband/UserWarband';
 import WarbandPatronDisplay from './UserWarbandElements/WarbandPatronDisplay';
+import WarbandFactionDisplay from './UserWarbandElements/WarbandFactionDisplay';
 
 const WarbandItemViewDisplay = (prop: any) => {
     const Manager : WarbandManager = prop.manager;
@@ -53,6 +54,7 @@ const WarbandItemViewDisplay = (prop: any) => {
                 </div>
 
                 <WarbandPatronDisplay wrbnd={WarbandItem} mngr={Manager} updater={UpdateFunction}/>
+                <WarbandFactionDisplay wrbnd={WarbandItem} mngr={Manager} updater={UpdateFunction}/>
             </>
         </ErrorBoundary>
     )
