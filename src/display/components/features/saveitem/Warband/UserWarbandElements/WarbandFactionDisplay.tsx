@@ -15,16 +15,31 @@ import { Patron } from '../../../../../../classes/feature/skillgroup/Patron';
 import { Form } from 'react-bootstrap';
 import { makestringpresentable } from '../../../../../../utility/functions';
 import PatronDisplay from '../../../../features/skill/PatronDisplay';
+import { WarbandProperty } from '../../../../../../classes/saveitems/Warband/WarbandProperty';
+import { EventRunner } from '../../../../../../classes/contextevent/contexteventhandler';
 
 const WarbandFactionDisplay = (props: any) => {
     const Warband: UserWarband = props.wrbnd
     const Manager: WarbandManager = props.mngr
     const UpdateFunction = props.updater;
 
+    const [displayrules, setdisplayrules] = useState<WarbandProperty[]>([]);
     const [keyval, setkey] = useState(0);
 
     useEffect(() => {
-        async function SetWarbandOptions() {     
+        async function SetWarbandOptions() {    
+            const EventProc: EventRunner = new EventRunner();
+            
+            const result_presentation = await EventProc.runEvent(
+                "getWarbandLevelFactionRules",
+                Warband.Faction,
+                [],
+                [],
+                null
+            );
+
+            console.log(result_presentation);
+
             setkey(keyval + 1);
         }
     

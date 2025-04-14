@@ -51,10 +51,11 @@ class WarbandProperty extends DynamicContextObject  {
     public constructor(base_obj : StaticOptionContextObject, parent : DynamicContextObject | null, dyna_obj : DynamicOptionContextObject | null, selection_vals: IWarbandProperty | null)
     {
         super(base_obj.SelfData, parent);
+        this.ContextKeys = {}
         if (dyna_obj != null) {
             this.SelfDynamicProperty = dyna_obj;
         } else {
-            this.SelfDynamicProperty = new DynamicOptionContextObject(base_obj.SelfData, base_obj, parent);
+            this.SelfDynamicProperty = new DynamicOptionContextObject(base_obj.SelfData, base_obj, this);
         }
 
         if (selection_vals != null) {

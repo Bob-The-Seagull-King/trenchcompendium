@@ -4,7 +4,7 @@ import { CompendiumItem, ICompendiumItemData } from "../CompendiumItem";
 import { ContextPackage } from "./contextpackage";
 
 interface IContextObject extends ICompendiumItemData {
-    contextdata : ContextEventVals; // ContextEvent keys used for when events are run through the object
+    contextdata : ContextEventVals | null; // ContextEvent keys used for when events are run through the object
 }
 
 class ContextObject extends CompendiumItem {
@@ -19,7 +19,9 @@ class ContextObject extends CompendiumItem {
         super(data);
         this.SelfData = data;
         this.MyContext = parent;
-        this.ContextKeys = data.contextdata;        
+        if (data.contextdata) {
+            this.ContextKeys = data.contextdata;    
+        }    
         this.ContextData = BaseContextCallTable;
     }
 

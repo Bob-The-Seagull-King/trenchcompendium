@@ -16,7 +16,6 @@ const ModelCollectionDisplay = (props: any) => {
     const [selectedModel, setSelectedModel] = useState(GetBase());
     const [_keyvar, setkeyvar] = useState(0);
 
-    console.log(modelcollectionObject)
 
     function GetBase() {
         for (let i = 0; i < modelcollectionObject.SubModelsList.length; i++) {

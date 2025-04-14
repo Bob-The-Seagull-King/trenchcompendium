@@ -87,7 +87,7 @@ class UserWarband extends DynamicContextObject {
             context : this.Context.ConvertToInterface(),
             exploration : this.Exploration.ConvertToInterface(),
             faction : this.Faction.ConvertToInterface(),
-            contextdata : this.ContextData,   
+            contextdata : this.ContextKeys,   
             name: this.Name != undefined? this.Name : "",
             source: this.Source != undefined? this.Source : "",
             tags: this.Tags,

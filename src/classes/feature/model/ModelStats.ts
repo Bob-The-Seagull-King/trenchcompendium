@@ -45,8 +45,6 @@ export function MergeTwoStats(baseList: ModelStatistics, addonList : ModelStatis
 }
 
 export function GetPresentationStatistic(base_stats : ModelStatistics, stat_options : ModelStatistics[][]) {
-    console.log(base_stats);
-    console.log(stat_options);
     const finalstats : PresentModelStatistics = {}
     const movement_op = []  
     const melee_op = []  

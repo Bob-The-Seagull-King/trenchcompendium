@@ -18,6 +18,7 @@ import ExplorationLocationDisplay from "../../display/components/features/explor
 import { LocationRestriction } from "../../classes/feature/exploration/ExplorationLocation";
 import { Faction } from "../../classes/feature/faction/Faction";
 import SkillDisplay from "../../display/components/features/skill/SkillDisplay";
+import { WarbandProperty } from "../../classes/saveitems/Warband/WarbandProperty";
 
 export const BaseContextCallTable : CallEventTable = {
     option_search_viable: {
@@ -611,5 +612,17 @@ export const BaseContextCallTable : CallEventTable = {
             return relayVar;
         }
     
+    },
+    add_to_warband: {
+        event_priotity: 0,
+        async getWarbandLevelFactionRules(this: EventRunner, eventSource : any, relayVar : WarbandProperty[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            
+            const { WarbandProperty } = await import("../../classes/saveitems/Warband/WarbandProperty");
+
+            if (context_main instanceof WarbandProperty) {
+                relayVar.push(context_main as WarbandProperty)
+            }
+            return relayVar;
+        }
     }
 }

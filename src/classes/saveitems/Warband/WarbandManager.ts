@@ -202,7 +202,7 @@ class WarbandManager {
                     selections: []
                 },
                 faction_rules : [],
-                contextdata: {},
+                contextdata: null,
                 id: this.CalcID(_title.trim() + "_faction"),
                 name: _title+"_faction",
                 source: 'user_warband',

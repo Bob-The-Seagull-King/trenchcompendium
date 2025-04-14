@@ -33,6 +33,7 @@ class WarbandFactory {
     }
 
     static async CreateWarbandFaction(data: IWarbandFaction, parent : DynamicContextObject | null) {
+        console.log(data);
         const rule = new WarbandFaction(data, parent)
         await rule.BuildFaction(data.faction_property)
         await rule.BuildPatron(data.patron_id)
@@ -56,7 +57,6 @@ class WarbandFactory {
         await rule.NewWarbandItems(data)
         await rule.BuildModels(data.models);
         await rule.BuildEquipment(data.equipment);
-        console.log(rule)
         return rule;
     }
 

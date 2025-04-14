@@ -62,6 +62,7 @@
         "source": "core",
         "tags": { },
         "contextdata": {
+            "add_to_warband": {},
             "add_fireteam_warband" : { "type": "standard", "count": 1 }
          },
         "name": "Killing Squad",
@@ -213,6 +214,7 @@
         "source": "core",
         "tags": { },
         "contextdata": { 
+            "add_to_warband": {},
             "faction_choose_equipment": {
                 "additions": [
                     {
@@ -398,7 +400,7 @@
         "source": "core",
         "tags": { },
         "contextdata": { 
-            "add_to_model": {}
+            "add_to_warband": {}
         },
         "name": "Siege Jezzail Teams",
         "description":  [
