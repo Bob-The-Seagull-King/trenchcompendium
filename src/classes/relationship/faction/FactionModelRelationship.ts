@@ -129,6 +129,40 @@ class FactionModelRelationship extends StaticOptionContextObject {
         return this.Model.hasDescription();
     }
 
+    /**
+     * Does this model have keywords?
+     */
+    public hasKeywords () : boolean {
+        return this.Model.hasKeywords();
+    }
+
+    /**
+     * Get List of Keywords
+     */
+    public getKeywords () {
+        return this.Model.getKeywords();
+    }
+
+    /**
+     * Does this model have upgrades?
+     */
+    public hasUpgrades () : boolean {
+        return this.Model.hasUpgrades();
+    }
+
+    /**
+     * Returns the list of upgrades for this model
+     */
+    public getUprgades () {
+        return this.Model.getUprgades();
+    }
+
+    /**
+     * Does this model have a lore text?
+     */
+    public hasLore () : boolean {
+        return this.Model.hasLore();
+    }
 
     /**
      * Gets the base size (or options) for a model as a string

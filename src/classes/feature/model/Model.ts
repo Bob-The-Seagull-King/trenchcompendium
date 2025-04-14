@@ -273,12 +273,59 @@ class Model extends StaticContextObject {
     }
 
     /**
+     * Does this model have keywords?
+     */
+    public hasKeywords () : boolean {
+        if( this.KeyWord.length > 0 ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Get List of Keywords
+     */
+    public getKeywords ()  {
+        return this.KeyWord;
+    }
+
+    /**
+     * Does this model have upgrades?
+     */
+    public hasUpgrades () : boolean {
+        if( this.UpgradeList.length > 0 ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Returns the list of upgrades for this model
+     */
+    public getUprgades () {
+        return this.UpgradeList;
+    }
+
+    /**
+     * Does this model have a lore text?
+     */
+    public hasLore () : boolean {
+        if( this.Lore ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    /**
      * Returns the base size (or options) for a model as a string
      */
     public getBaseSizeString () : string {
 
         // @TODO: return the base stat or options as simple string
-
         return '25mm'
 
     }

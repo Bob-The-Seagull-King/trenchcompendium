@@ -169,12 +169,13 @@ const RulesModelDisplay = (props: any) => {
                         </span>
                     </div>
 
-                    <div className="fighter-meta-entry-simple fighter-keywords">
+                    {factionmodelObject.hasKeywords() &&
+                        <div className="fighter-meta-entry-simple fighter-keywords">
                         <span className="fighter-meta-label">
                             Keywords:
                         </span>
-                        <span className="fighter-meta-value">
-                            {modelcollectionObject.KeyWord.map((item, index) => (
+                            <span className="fighter-meta-value">
+                            {factionmodelObject.getKeywords().map((item, index) => (
                                 <span className=''
                                       key={"model_keyword_" + modelcollectionObject.ID + "_keyword_id_" + item.ID}>
                                     <GenericHover
@@ -188,16 +189,17 @@ const RulesModelDisplay = (props: any) => {
                                 </span>
                             )) /* Keywords */}
                         </span>
-                    </div>
+                        </div>
+                    }
                 </div>
 
                 <div className={'fighter-card-collapse-wrap'}>
                     {/* Abilities */}
-                    {factionmodelObject.hasAbilities () &&
+                    {factionmodelObject.hasAbilities() &&
                         <RulesModelDisplayCollapse
                             name={"Abilities"}
                             state={false}
-                            has_children={modelcollectionObject.Abilities.length > 0}
+                            has_children={factionmodelObject.hasAbilities()}
                             method={() => <>
                                 {modelcollectionObject.Abilities.map((item) => (
                                     <React.Fragment
@@ -211,7 +213,7 @@ const RulesModelDisplay = (props: any) => {
                     }
 
                     {/* Equipment Rules */}
-                    {factionmodelObject.hasDescription () &&
+                    {factionmodelObject.hasDescription() &&
                         <RulesModelDisplayCollapse
                             name={"Equipment"}
                             state={false}
@@ -223,20 +225,17 @@ const RulesModelDisplay = (props: any) => {
                     }
 
                     {/* Upgrades */}
-                    {modelcollectionObject.UpgradeList.length > 0 &&
+                    {factionmodelObject.hasUpgrades() &&
                         <RulesModelDisplayCollapse
                             name={"Upgrades"}
                             state={false}
-                            has_children={modelcollectionObject.UpgradeList.length > 0}
+                            has_children={factionmodelObject.hasUpgrades()}
                             method={() => <>
-                                {modelcollectionObject.UpgradeList.map((item) => (
-
+                                {factionmodelObject.getUprgades().map((item) => (
                                     <React.Fragment
                                         key={"model_upgrade_" + modelcollectionObject.ID + "_upgrade_id_" + item.ID}>
                                         <RulesModelUpgrade item={item}/>
                                     </React.Fragment>
-
-
                                 ))}
                             </>
                             }
@@ -244,7 +243,7 @@ const RulesModelDisplay = (props: any) => {
                     }
 
                     {/* Lore Text */}
-                    {modelcollectionObject.Lore && loreshow !== 'false' &&
+                    {factionmodelObject.hasLore() && loreshow !== 'false' &&
                         <RulesModelDisplayCollapse
                             name={"Lore"}
                             state={false}
