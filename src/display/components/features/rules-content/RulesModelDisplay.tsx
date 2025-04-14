@@ -134,12 +134,7 @@ const RulesModelDisplay = (props: any) => {
             <>
                 {stats.movement != undefined &&
                     <>
-                        <ItemStat title={"Movement"} ratio="rectangle" value={(movestats.join('/'))}/>
-                    </>
-                }
-                {stats.movetype != undefined &&
-                    <>
-                        <ItemStat title={"Move Type"} ratio="rectangle" value={(typestats.join('/'))}/>
+                        <ItemStat title={"Movement"} value={(movestats.join('/') + '"/' + (typestats.join('/')))}/>
                     </>
                 }
                 {stats.melee != undefined &&
