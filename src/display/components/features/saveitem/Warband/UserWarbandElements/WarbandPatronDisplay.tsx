@@ -43,7 +43,7 @@ const WarbandPatronDisplay = (props: any) => {
     }
 
     return (
-        <ErrorBoundary fallback={<div>Something went wrong with AbilityDisplay.tsx</div>}>
+        <ErrorBoundary fallback={<div>Something went wrong with WarbandPatronDisplay.tsx</div>}>
             <div key={keyval}>
 
                 <h1>Select Patron</h1>

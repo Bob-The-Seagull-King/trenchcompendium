@@ -37,7 +37,7 @@ const WarbandFactionDisplay = (props: any) => {
     }
 
     return (
-        <ErrorBoundary fallback={<div>Something went wrong with AbilityDisplay.tsx</div>}>
+        <ErrorBoundary fallback={<div>Something went wrong with WarbandFactionDisplay.tsx</div>}>
             <div key={keyval}>
             </div>
         </ErrorBoundary>
