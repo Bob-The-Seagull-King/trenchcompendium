@@ -53,7 +53,7 @@ class ViewCollectionsModel {
         }
     }
 
-    public RunMultiUnitSearch( variantsearchparams : VariantSearch) {
+    public async RunMultiUnitSearch( variantsearchparams : VariantSearch) {
         this.dataresults = Requester.MakeRequest(this.searchParam as IRequest);
         if (this.dataresults.length == undefined) {
             this.dataresults = [this.dataresults]
@@ -107,7 +107,7 @@ class ViewCollectionsModel {
         }
 
         if (this.CollectionType) {
-            this.CollectionType.postSearch(this);
+            await this.CollectionType.postSearch(this);
         }
     }
 

@@ -17,7 +17,7 @@ class ModelFactory {
         
         const rule = new ModelCollection(_rule, parent)
         cache.AddToCache('modelcollection', rule);
-        rule.ConstructModels();
+        await rule.ConstructModels();
         return rule;
     }
 

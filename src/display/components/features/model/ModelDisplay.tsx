@@ -25,8 +25,7 @@ import ItemRow from '../../../components/subcomponents/description/ItemRow';
 import {FactionModelRelationship} from "../../../../classes/relationship/faction/FactionModelRelationship";
 
 const ModelDisplay = (props: any) => {
-    const factionmodelObject: FactionModelRelationship = props.data
-    const modelcollectionObject: Model = props.data.Model
+    const modelcollectionObject: Model = props.data
 
     const [equiprestrictions, setEquipRestrictions] = useState([])
     const [equiplimits, setEquipLimits] = useState([])
@@ -202,25 +201,6 @@ const ModelDisplay = (props: any) => {
             <div className='fighter-card' key={_keyvar}>
                 <div className="fighter-card-title">
                     {modelcollectionObject.Name}
-                </div>
-
-                <div className="fighter-card-meta fighter-card-meta-above">
-                    <div className="fighter-meta-entry-simple fighter-base">
-                        <span className="fighter-meta-label">
-                            Cost:
-                        </span>
-                        <span className="fighter-meta-value">
-                            {factionmodelObject.Cost + " " + getCostType(factionmodelObject.CostType)}
-                        </span>
-                    </div>
-                    <div className="fighter-meta-entry-simple fighter-availability">
-                        <span className="fighter-meta-label">
-                            Availability:
-                        </span>
-                        <span className="fighter-meta-value">
-                            {factionmodelObject.Minimum.toString() + "-"+ factionmodelObject.Maximum.toString()}
-                        </span>
-                    </div>
                 </div>
 
 

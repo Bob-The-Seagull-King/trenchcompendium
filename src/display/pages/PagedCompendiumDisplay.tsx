@@ -16,7 +16,6 @@ import RulesPageLinks from "../components/features/rules-content/RulesPageLinks"
 const PagedCompendiumDisplay = (prop: any) => {
     // Initialize controllers and managers
     const ViewPageController: CollectionsListPage = prop.controller
-    ViewPageController.initCollection();
 
     const CollectionController: ViewCollectionsModel = ViewPageController.Collection;
     const DisplayPage: DisplayCollectionType = DisplayCollectionDataDex[ViewPageController.TypeName]
@@ -25,8 +24,18 @@ const PagedCompendiumDisplay = (prop: any) => {
     const { state } = useLocation();
     const urlPath = useLocation().pathname;
     const urlSplits = urlPath.split('/');
-    const [_curItem, setCurItem] = useState(InitStateSet());
+    const [_curItem, setCurItem] = useState<any>([]);
     const [_keyval, setKeyVal] = useState(0);
+    
+    useEffect(() => {
+        async function SetCollectionOptions() {
+            await ViewPageController.initCollection();
+            setCurItem(InitStateSet());
+            setKeyVal((prev) => prev + 1);
+        }
+    
+        SetCollectionOptions();
+    }, []);
 
     useEffect(() => {
         setCurItem(GetCurrentItem())

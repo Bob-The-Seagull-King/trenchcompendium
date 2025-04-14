@@ -14,14 +14,23 @@ import FilterBox from '../components/subcomponents/filters/FilterBox';
 const CollectionCompendiumDisplay = (prop: any) => {
     // Initialize controllers and managers
     const ViewPageController: CollectionsListPage = prop.controller
-    ViewPageController.initCollection();
 
     const CollectionController: ViewCollectionsModel = ViewPageController.Collection;
     const DisplayPage: DisplayCollectionType = DisplayCollectionDataDex[ViewPageController.TypeName]
     
     // Initialize Use State
-    const [_curItems, setCurItems] = useState(InitStateSet());
+    const [_curItems, setCurItems] = useState<any[]>([]);
     const [_keyval, setKeyVal] = useState(0);
+    
+    useEffect(() => {
+        async function SetCollectionOptions() {
+            await ViewPageController.initCollection();
+            setCurItems(InitStateSet());
+            setKeyVal((prev) => prev + 1);
+        }
+    
+        SetCollectionOptions();
+    }, []);
 
     function InitStateSet() {
         const SetItem = CollectionController.itemcollection;

@@ -43,7 +43,7 @@ class CollectionsListPage {
         if (!(JSON.stringify(newfilter) == JSON.stringify(this.Collection.searchParam))) {
             this.Collection.UpdateSearchParams(newfilter);
             if (this.FilterManager.MyFilters.variantSearch) {
-                this.Collection.RunMultiUnitSearch(this.FilterManager.MyFilters.variantSearch);
+                await this.Collection.RunMultiUnitSearch(this.FilterManager.MyFilters.variantSearch);
             } else {
                 await this.Collection.RunSearch();
             }
