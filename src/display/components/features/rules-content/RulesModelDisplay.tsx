@@ -51,51 +51,7 @@ const RulesModelDisplay = (props: any) => {
         SetModelOptions();
     }, []);
 
-    function ReturnStatOption(statchoice : ModelStatistics[]) {
 
-        return (
-            <ItemRow
-                title={"Stat Options"}
-                value={() =>
-                    <div className="">
-                        <Form.Control className={"borderstyler bordergrey overcomeradius " } as="select" aria-label="Default select example"  placeholder="Member Type" >
-                            {statchoice.map((item) => (
-                                <option key={"modeloption"+(statchoice.indexOf(item).toString())} >{ReturnStatProfileAsString(item)}</option>
-                            ))}
-                        </Form.Control>
-                    </div>
-                }
-            />
-        )
-    }
-
-    function ReturnStatProfileAsString(stats : ModelStatistics) {
-        
-        const ProfileString : string[] = []
-        if (stats.movement != undefined) {
-            ProfileString.push( "Movement:" + (stats.movement? stats.movement.toString() : "") + "\"" )
-        }
-        if (stats.movetype != undefined) {
-            ProfileString.push("Move-Type:" + getMoveType(stats.movetype))
-        }
-        if (stats.melee != undefined) {
-            ProfileString.push("Melee:" + ((stats.melee > 0? "+": "") ) + (stats.melee?.toString() || ""))
-        }
-        if (stats.ranged != undefined) {
-            ProfileString.push("Ranged:" + ((stats.ranged > 0? "+": "") ) + (stats.ranged?.toString() || ""))
-        }
-        if (stats.armour != undefined) {
-            ProfileString.push("Armour:" + stats.armour.toString())
-        }
-        if (stats.potential != undefined) {
-            ProfileString.push("Potential:" + (stats.potential? getPotential(stats.potential) : "Standard"))
-        }
-        if (stats.base != undefined) {
-            ProfileString.push("Base:" + (stats.base? getBaseSize(stats.base) : "25mm"))
-        }
-
-        return ProfileString.join(' ')
-    }
 
     function ReturnStats(stats : PresentModelStatistics) {
         const movestats: string[] = []   
@@ -156,28 +112,28 @@ const RulesModelDisplay = (props: any) => {
         )
     }
 
-    function returnBaseSize(stats : PresentModelStatistics) {
-        
-        const basestats: string[] = []
-
-        if (stats.base != undefined) {
-            for (let i = 0; i < stats.base?.length; i++) {
-                const curstats : string[] = []
-                for (let j = 0; j < stats.base[i].length; j++) {
-                    curstats.push(stats.base[i][j].toString());
-                }
-                basestats.push(curstats.join('x') + "mm")
-            }
-        }
-
-        return basestats.join('/')
-    }
+    // function returnBaseSize(stats : PresentModelStatistics) {
+    //
+    //     const basestats: string[] = []
+    //
+    //     if (stats.base != undefined) {
+    //         for (let i = 0; i < stats.base?.length; i++) {
+    //             const curstats : string[] = []
+    //             for (let j = 0; j < stats.base[i].length; j++) {
+    //                 curstats.push(stats.base[i][j].toString());
+    //             }
+    //             basestats.push(curstats.join('x') + "mm")
+    //         }
+    //     }
+    //
+    //     return basestats.join('/')
+    // }
 
     return (
         <ErrorBoundary fallback={<div>Something went wrong with ModelDisplay.tsx</div>}>
             <section className='fighter-card' key={_keyvar}>
                 <div className="fighter-card-title">
-                    {modelcollectionObject.Name}
+                    {factionmodelObject.getName()}
                 </div>
 
                 <div className="fighter-card-meta fighter-card-meta-above">
@@ -186,7 +142,7 @@ const RulesModelDisplay = (props: any) => {
                             Cost:
                         </span>
                         <span className="fighter-meta-value">
-                            {factionmodelObject.Cost + " " + getCostType(factionmodelObject.CostType)}
+                            {factionmodelObject.getCostString()}
                         </span>
                     </div>
                     <div className="fighter-meta-entry-simple fighter-availability">
@@ -194,7 +150,7 @@ const RulesModelDisplay = (props: any) => {
                             Availability:
                         </span>
                         <span className="fighter-meta-value">
-                            {factionmodelObject.Minimum.toString() + "-" + factionmodelObject.Maximum.toString()}
+                            {factionmodelObject.getAvailabilityString()}
                         </span>
                     </div>
                 </div>
@@ -209,7 +165,7 @@ const RulesModelDisplay = (props: any) => {
                             Base:
                         </span>
                         <span className="fighter-meta-value">
-                            {returnBaseSize(statchoices)}
+                            {factionmodelObject.getBaseSizeString()}
                         </span>
                     </div>
 
@@ -237,7 +193,7 @@ const RulesModelDisplay = (props: any) => {
 
                 <div className={'fighter-card-collapse-wrap'}>
                     {/* Abilities */}
-                    {modelcollectionObject.Abilities.length > 0 &&
+                    {factionmodelObject.hasAbilities () &&
                         <RulesModelDisplayCollapse
                             name={"Abilities"}
                             state={false}
@@ -255,7 +211,7 @@ const RulesModelDisplay = (props: any) => {
                     }
 
                     {/* Equipment Rules */}
-                    {modelcollectionObject.Description &&
+                    {factionmodelObject.hasDescription () &&
                         <RulesModelDisplayCollapse
                             name={"Equipment"}
                             state={false}

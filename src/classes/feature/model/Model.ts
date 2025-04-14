@@ -7,7 +7,7 @@
 import { IModelUpgradeRelationship, ModelUpgradeRelationship } from '../../relationship/model/ModelUpgradeRelationship';
 import { AbilityFactory } from '../../../factories/features/AbilityFactory';
 import { KeywordFactory } from '../../../factories/features/KeywordFactory';
-import { byPropertiesOf, DescriptionFactory } from '../../../utility/functions';
+import {byPropertiesOf, DescriptionFactory, getCostType} from '../../../utility/functions';
 import { ContextObject, IContextObject } from '../../contextevent/contextobject';
 import { StaticContextObject } from '../../contextevent/staticcontextobject';
 import { Ability } from '../ability/Ability';
@@ -232,6 +232,57 @@ class Model extends StaticContextObject {
             this.EquipmentList.push(await EquipmentFactory.CreateModelEquipment(EquipmentList[i], this))
         }
     }
+
+
+    /**
+     * Outputs
+     */
+
+    /**
+     * Get the Name
+     */
+    public getName () : string {
+        if (!this.Name || this.Name.trim() === '') {
+            return 'Unnamed Model';
+        }
+
+        return this.Name;
+    }
+
+    /**
+     * Does this model have abilities?
+     */
+    public hasAbilities () : boolean {
+        if( this.Abilities.length > 0 ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Does this model have a description text?
+     * - This is mostly the equipment Text
+     */
+    public hasDescription () : boolean {
+        if( this.Abilities.length > 0 ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Returns the base size (or options) for a model as a string
+     */
+    public getBaseSizeString () : string {
+
+        // @TODO: return the base stat or options as simple string
+
+        return '25mm'
+
+    }
+
 
 }
 

@@ -8,6 +8,8 @@ import { Equipment } from '../../feature/equipment/Equipment';
 import { EquipmentFactory } from '../../../factories/features/EquipmentFactory';
 import { Faction } from '../../feature/faction/Faction';
 import { FactionFactory } from '../../../factories/features/FactionFactory';
+import {getCostType} from "../../../utility/functions";
+import {GetPresentationStatistic, PresentModelStatistics} from "../../feature/model/ModelStats";
 
 interface IFactionModelRelationship extends IStaticOptionContextObject {
     faction_id : string[],
@@ -79,6 +81,62 @@ class FactionModelRelationship extends StaticOptionContextObject {
             await this.MyOptions[i].FindChoices();
         }
         this.BuildOptionModel();
+    }
+
+
+    /**
+     * Outputs
+     */
+
+    /**
+     * Get the Name
+     */
+    public getName () : string {
+        return this.Model.getName();
+    }
+
+    /**
+     * Get Cost String as "100 Ducats" or "6 Glory"
+     */
+    public getCostString () : string {
+        if (!this.Cost || this.Cost <= 0) {
+            return 'Unnamed Model';
+        }
+
+        return this.Cost + " " + getCostType(this.CostType);
+    }
+
+    /**
+     * Get the Availability String
+     */
+    public getAvailabilityString () : string {
+        return this.Minimum.toString() + "-" + this.Maximum.toString();
+    }
+
+    /**
+     * Does this model have abilities?
+     */
+    public hasAbilities () : boolean {
+        return this.Model.hasAbilities();
+    }
+
+
+    /**
+     * Does this model have a description text?
+     * - This is mostly the equipment Text
+     */
+    public hasDescription () : boolean {
+        return this.Model.hasDescription();
+    }
+
+
+    /**
+     * Gets the base size (or options) for a model as a string
+     */
+    public getBaseSizeString () : string {
+
+        return this.Model.getBaseSizeString();
+
     }
 
 }
