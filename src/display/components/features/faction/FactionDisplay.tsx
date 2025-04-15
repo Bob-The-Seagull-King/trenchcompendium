@@ -14,7 +14,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLink } from '@fortawesome/free-solid-svg-icons';
 import ContentsComponentAnchor, { ContentsLink } from '../../../components/subcomponents/informationpanel/ContentsComponentAnchor';
 import RulesHeadlineDisplay from "../../rules-content/RulesHeadlineDisplay";
-import RulesArmouryElementDisplay from "../../rules-content/RulesArmouryElementDisplay";
+import RulesArmouryElement from "../../rules-content/RulesArmouryElement";
 import RulesAnchorLinks from "../../rules-content/RulesAnchorLinks";
 import RulesLoreSection from "../../rules-content/RulesLoreSection";
 import RulesFactionModelDisplay from "../../rules-content/RulesFactionModelDisplay";
@@ -204,7 +204,7 @@ const FactionDisplay = (props: any) => {
 
                     {/* @TODO @Bob - Can we make this filtering easier to use / understand? Like factionObject.EquipmentItems.getItems('melee') or something */}
                     {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "melee" && (containsTag(item.Tags, "exploration_only") == false))).length > 0 &&
-                        <RulesArmouryElementDisplay
+                        <RulesArmouryElement
                             headline="Melee Weapons"
                             items={factionObject.EquipmentItems.filter(
                                 (item) => item.EquipmentItem.Category === "melee" && !containsTag(item.Tags, "exploration_only")
@@ -213,7 +213,7 @@ const FactionDisplay = (props: any) => {
                     }
 
                     {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "ranged" && (containsTag(item.Tags, "exploration_only") == false))).length > 0 &&
-                        <RulesArmouryElementDisplay
+                        <RulesArmouryElement
                             headline="Ranged Weapons"
                             items={factionObject.EquipmentItems.filter(
                                 (item) => item.EquipmentItem.Category === "ranged" && !containsTag(item.Tags, "exploration_only")
@@ -222,7 +222,7 @@ const FactionDisplay = (props: any) => {
                     }
 
                     {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "armour" && (containsTag(item.Tags, "exploration_only") == false))).length > 0 &&
-                        <RulesArmouryElementDisplay
+                        <RulesArmouryElement
                             headline="Armour"
                             items={factionObject.EquipmentItems.filter(
                                 (item) => item.EquipmentItem.Category === "armour" && !containsTag(item.Tags, "exploration_only")
@@ -230,7 +230,7 @@ const FactionDisplay = (props: any) => {
                         />
                     }
                     {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "equipment" && (containsTag(item.Tags, "exploration_only") == false))).length > 0 &&
-                        <RulesArmouryElementDisplay
+                        <RulesArmouryElement
                             headline="Equipment"
                             items={factionObject.EquipmentItems.filter(
                                 (item) => item.EquipmentItem.Category === "equipment" && !containsTag(item.Tags, "exploration_only")
@@ -238,7 +238,7 @@ const FactionDisplay = (props: any) => {
                         />
                     }
                     {factionObject.EquipmentItems.filter((item) => ((containsTag(item.Tags, "exploration_only") == true))).length > 0 &&
-                        <RulesArmouryElementDisplay
+                        <RulesArmouryElement
                             headline="Exploration Only"
                             items={factionObject.EquipmentItems.filter(
                                 (item) => containsTag(item.Tags, "exploration_only")

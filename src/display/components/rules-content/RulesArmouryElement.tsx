@@ -5,15 +5,15 @@ import React, { useEffect, useState } from 'react'
 import FactionEquipmentDisplay from '../features/equipment/FactionEquipmentDisplay';
 
 
-interface RulesArmouryElementDisplay {
+interface RulesArmouryElement {
     headline: string;
     items: any[];
 }
 
-const RulesArmouryElementDisplay: React.FC<RulesArmouryElementDisplay> = ({ headline, items }) => {
+const RulesArmouryElement: React.FC<RulesArmouryElement> = ({ headline, items }) => {
 
     return (
-        <div className="armoury-section rules-card">
+        <div className="RulesArmouryElement rules-card">
             <div className="armoury-headline rules-card-title">
                 {headline}
             </div>
@@ -28,4 +28,4 @@ const RulesArmouryElementDisplay: React.FC<RulesArmouryElementDisplay> = ({ head
     )
 };
 
-export default RulesArmouryElementDisplay;
+export default RulesArmouryElement;

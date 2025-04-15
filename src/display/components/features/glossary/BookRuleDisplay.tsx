@@ -11,7 +11,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLink } from '@fortawesome/free-solid-svg-icons';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import RulesArmouryElementDisplay from "../../rules-content/RulesArmouryElementDisplay";
+import RulesArmouryElementDisplay from "../../rules-content/RulesArmouryElement";
 import RulesAnchorLinks from "../../rules-content/RulesAnchorLinks";
 import RulesHeadlineDisplay from "../../rules-content/RulesHeadlineDisplay";
 
