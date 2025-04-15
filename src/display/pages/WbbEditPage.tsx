@@ -1,9 +1,12 @@
 import React from 'react';
+import WbbEditView from "../components/warband-builder/WbbEditView";
 
 const WbbEditPage = () => {
     return (
-        <div>
-            <h1>WbbEditPage</h1>
+
+        <div className={'WbbEditPage'}>
+            <WbbEditView
+            />
         </div>
     );
 };
