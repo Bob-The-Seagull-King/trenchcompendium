@@ -24,9 +24,6 @@ const HomeRoute: React.FC = () => {
         <ErrorBoundary fallback={<div>Something went wrong with HomeRoute.tsx</div>}>
             <div className="home-screen">
                 <div className={'container'}>
-
-
-
                     <div className={'row'}>
                         <div className={'col-12 col-md-6'}>
                             <MenuComponent Title={"Rules Compendium"} Route={"compendium/"} bgImageID={17}/>
@@ -45,12 +42,35 @@ const HomeRoute: React.FC = () => {
                             <MenuComponent Title={"Play Mode"} Route={"play/"} bgImageID={19}/>
                         </div>
                     </div>
-                    {/*<div className={'row'}>*/}
-                    {/*    <div className={'col-12 col-md-6 pt-3 pb-3'}>*/}
-                    {/*        <a href={"/login"} className={'btn btn-primary'}>*/}
-                    {/*            Login*/}
-                    {/*        </a>*/}
-                    {/*    </div>*/}
+
+
+
+                    {/* Testing Links */}
+                    <div className={'row'}>
+                        <div className={'col-6 col-md-4 pt-3 pb-3'}>
+                            <a href={"/login"} className={'btn btn-primary btn-block'}>
+                                Login
+                            </a>
+                        </div>
+
+                        <div className={'col-6 col-md-4 pt-3 pb-3'}>
+                            <a href={"/warband-builder"} className={'btn btn-primary btn-block'}>
+                                Warband Overview
+                            </a>
+                        </div>
+
+                        <div className={'col-6 col-md-4 pt-3 pb-3'}>
+                            <a href={"/warband-builder/new"} className={'btn btn-primary btn-block'}>
+                                New Warband
+                            </a>
+                        </div>
+
+                        <div className={'col-6 col-md-4 pt-3 pb-3'}>
+                            <a href={"/warband-builder/edit"} className={'btn btn-primary btn-block'}>
+                                Edit Warband
+                            </a>
+                        </div>
+                    </div>
                     {/*<div className={'col-12 col-md-6'}>*/}
                     {/*    <MenuOutLink title={"Support The App"} link={"https://www.patreon.com/bobtheseagullking/"} />*/}
                     {/*</div>*/}

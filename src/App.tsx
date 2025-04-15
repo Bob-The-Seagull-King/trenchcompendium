@@ -26,6 +26,9 @@ import ScrollToTop from './display/components/subcomponents/ScrollToTop'
 import SynodLogin from "./utility/SynodLogin";
 import SynodLoginPage from './display/superroutes/SynodLoginPage'
 import {AuthProvider} from "./utility/AuthContext";
+import WbbOverviewPage from "./display/pages/WbbOverviewPage";
+import WbbCreateNewPage from "./display/pages/WbbCreateNewPage";
+import WbbEditPage from "./display/pages/WbbEditPage";
 
 
 const App: React.FC = () => {
@@ -55,7 +58,11 @@ const App: React.FC = () => {
                                 <Route path={ROUTES.HOME_ROUTE} element={<HomeRoute />} />
                                 <Route path={ROUTES.COMPENDIUM_ROUTE} element={<CompendiumRoute controller={compendiumcontroller} />} />
                                 <Route path={ROUTES.WARBAND_ROUTE} element={<WarbandRoute controller={toolcontroller} />} />
-                                <Route path="/login" element={<SynodLoginPage />} /> {/* New login route */}{/* @TODO: do something else if logged in */}
+                                <Route path="/login" element={<SynodLoginPage />} /> {/* New login route */}
+                                <Route path="/warband-builder" element={<WbbOverviewPage />} />
+                                <Route path="/warband-builder/new" element={<WbbCreateNewPage />} />
+                                <Route path="/warband-builder/edit" element={<WbbEditPage />} />
+
                             </Routes>
                         </Router>
                     </PersistGate>
