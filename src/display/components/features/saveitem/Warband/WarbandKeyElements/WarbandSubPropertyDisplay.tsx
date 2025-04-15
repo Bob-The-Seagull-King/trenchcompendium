@@ -51,7 +51,7 @@ const WarbandSubPropertyDisplay = (props: any) => {
                 "returnOptionDisplay",
                 MySelection.MyParent,
                 [],
-                MySelection.SelectedChoice,
+                null,
                 selectedModel
             );
             if (result != null) {
@@ -59,25 +59,27 @@ const WarbandSubPropertyDisplay = (props: any) => {
                 setkey((prev) => prev + 1);
             }
         }
-
+        
     }
 
     function updateItem(value: string) {
         let IsFound = false;
         for (let i = 0; i < MySelection.Option.Selections.length; i++) {
             if (MySelection.Option.Selections[i].id == Number.parseInt(value)) {
-                MySelection.SelectOption(i);
-                setSelectedModel(MySelection.Option.Selections[i])
+                MySelection.SelectOption(Number.parseInt(value));
                 IsFound = true;
                 break;
             }
         }
         if (IsFound == false) {
             MySelection.SelectOption(null);
-        }
+        }        
+        setSelectedModel(MySelection.SelectedChoice)
+        
+        updateObj();
     }
 
-    async function updateObj(value: string) {
+    async function updateObj() {
         UpdateFunction(Warband);
         setkey(keyval + 1);
     }
@@ -88,7 +90,7 @@ const WarbandSubPropertyDisplay = (props: any) => {
                 <h1>{MyProp.Name}</h1>               
                 
                             
-                <Form.Control className={"borderstyler bordergrey overcomeradius " } as="select" aria-label="Default select example"  placeholder="Member Type" onChange={(e: { target: { value: any; }; }) => { updateItem(e.target.value)    } } >
+                <Form.Control defaultValue={(selectedModel)? selectedModel.id: undefined} className={"borderstyler bordergrey overcomeradius " } as="select" aria-label="Default select example"  placeholder="Member Type" onChange={(e: { target: { value: any; }; }) => { updateItem(e.target.value)    } } >
                     <option value={"_no_option_selected"} key={"modeloptionnone"} >{"None Selected"}</option> 
                     {MySelection.Option.Selections.map((selec) => ( 
                         <option value={selec.id} key={"modeloption"+(MySelection.Option.Selections.indexOf(selec).toString())} >{makestringpresentable(selec.display_str)}</option> 
@@ -98,7 +100,7 @@ const WarbandSubPropertyDisplay = (props: any) => {
                 <div className="row" key={keyval}>
                     <div className="col">
                         {displayState}
-                        {(MySelection.SelectedChoice)? MySelection.SelectedChoice.id : "None"}
+                        {selectedModel? selectedModel.id : "None"}
                     </div>
                 </div>
                 
