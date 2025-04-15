@@ -16,6 +16,8 @@ import { Form } from 'react-bootstrap';
 import { makestringpresentable } from '../../../../../../utility/functions';
 import PatronDisplay from '../../../../features/skill/PatronDisplay';
 import { WarbandProperty } from '../../../../../../classes/saveitems/Warband/WarbandProperty';
+import { EventRunner } from '../../../../../../classes/contextevent/contexteventhandler';
+import WarbandSubPropertyDisplay from './WarbandSubPropertyDisplay';
 
 const WarbandPropertyDisplay = (props: any) => {
     const Warband: UserWarband = props.wrbnd
@@ -32,7 +34,7 @@ const WarbandPropertyDisplay = (props: any) => {
     
         SetWarbandOptions();
     }, []);
-    
+
     async function updateItem(value: string) {
         UpdateFunction(Warband);
         setkey(keyval + 1);
@@ -41,6 +43,12 @@ const WarbandPropertyDisplay = (props: any) => {
     return (
         <ErrorBoundary fallback={<div>Something went wrong with WarbandPropertyDisplay.tsx</div>}>
             <div key={keyval}>
+                <h1>{MyProp.Name}</h1>               
+                
+                {MyProp.SelfDynamicProperty.Selections.map((selec) => (
+                    <WarbandSubPropertyDisplay key={selec.Option.RefID} mysl={selec} wbprp={MyProp} wrbnd={Warband} updater={UpdateFunction}/>
+                ))}
+                
             </div>
         </ErrorBoundary>
     )

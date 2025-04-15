@@ -17,6 +17,7 @@ import { makestringpresentable } from '../../../../../../utility/functions';
 import PatronDisplay from '../../../../features/skill/PatronDisplay';
 import { WarbandProperty } from '../../../../../../classes/saveitems/Warband/WarbandProperty';
 import { EventRunner } from '../../../../../../classes/contextevent/contexteventhandler';
+import WarbandPropertyDisplay from '../WarbandKeyElements/WarbandPropertyDisplay';
 
 const WarbandFactionDisplay = (props: any) => {
     const Warband: UserWarband = props.wrbnd
@@ -38,7 +39,7 @@ const WarbandFactionDisplay = (props: any) => {
                 null
             );
 
-            console.log(result_presentation);
+            setdisplayrules(result_presentation);
 
             setkey(keyval + 1);
         }
@@ -54,6 +55,9 @@ const WarbandFactionDisplay = (props: any) => {
     return (
         <ErrorBoundary fallback={<div>Something went wrong with WarbandFactionDisplay.tsx</div>}>
             <div key={keyval}>
+                {displayrules.map((item) => (
+                    <WarbandPropertyDisplay key={item.ID} updater={UpdateFunction} wbprp={item} mngr={Manager} wrbnd={Warband}/>
+                ))}
             </div>
         </ErrorBoundary>
     )
