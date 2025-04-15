@@ -13,12 +13,12 @@ import OptionSetStaticDisplay from '../../subcomponents/description/OptionSetSta
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLink } from '@fortawesome/free-solid-svg-icons';
 import ContentsComponentAnchor, { ContentsLink } from '../../../components/subcomponents/informationpanel/ContentsComponentAnchor';
-import RulesHeadlineDisplay from "../rules-content/RulesHeadlineDisplay";
-import RulesArmouryElementDisplay from "../rules-content/RulesArmouryElementDisplay";
-import RulesAnchorLinks from "../rules-content/RulesAnchorLinks";
-import RulesLoreSection from "../rules-content/RulesLoreSection";
-import RulesFactionModelDisplay from "../rules-content/RulesFactionModelDisplay";
-import RulesFactionRule from "../rules-content/RulesFactionRule";
+import RulesHeadlineDisplay from "../../rules-content/RulesHeadlineDisplay";
+import RulesArmouryElementDisplay from "../../rules-content/RulesArmouryElementDisplay";
+import RulesAnchorLinks from "../../rules-content/RulesAnchorLinks";
+import RulesLoreSection from "../../rules-content/RulesLoreSection";
+import RulesFactionModelDisplay from "../../rules-content/RulesFactionModelDisplay";
+import RulesFactionRule from "../../rules-content/RulesFactionRule";
 
 const FactionDisplay = (props: any) => {
     const factionObject: Faction = props.data

@@ -1,14 +1,10 @@
-import '../../../../resources/styles/vendor/bootstrap.css'
+import '../../../resources/styles/vendor/bootstrap.css'
 import React from 'react'
 import { ErrorBoundary } from "react-error-boundary";
 
 // Classes
-import { returnDescription } from '../../../../utility/util'
-import SkillDisplay from '../skill/SkillDisplay';
-import { Patron } from '../../../../classes/feature/skillgroup/Patron';
-import ItemRow from '../../../components/subcomponents/description/ItemRow';
-import GenericCollapsableBlockDisplay from '../../../components/generics/GenericCollapsableBlockDisplay';
-import RulesGloriousDeed from "./RulesGloriousDeed";
+import { returnDescription } from '../../../utility/util'
+import { Patron } from '../../../classes/feature/skillgroup/Patron';
 import RulesPatronDetails from "./RulesPatronDetails";
 
 const RulesPatron = (props: any) => {

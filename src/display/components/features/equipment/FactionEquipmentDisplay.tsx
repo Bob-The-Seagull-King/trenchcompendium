@@ -6,8 +6,8 @@ import { ErrorBoundary } from "react-error-boundary";
 import { getCostType } from '../../../../utility/functions';
 import { EventRunner } from '../../../../classes/contextevent/contexteventhandler';
 import { FactionEquipmentRelationship } from '../../../../classes/relationship/faction/FactionEquipmentRelationship';
-import RulesOverlay from "../rules-content/RulesOverlay";
-import RulesEquipmentMain from "../rules-content/RulesEquipmentMain";
+import RulesOverlay from "../../rules-content/RulesOverlay";
+import RulesEquipmentMain from "../../rules-content/RulesEquipmentMain";
 
 const FactionEquipmentDisplay = (props: any) => {
     const factionequipmentObject: FactionEquipmentRelationship = props.data

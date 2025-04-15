@@ -20,7 +20,7 @@ import { EventRunner } from '../../../../classes/contextevent/contexteventhandle
 import { Form } from 'react-bootstrap';
 import DisplayFactionModelDisplay from './DisplayFactionModelDisplay';
 import GenericCollapsableBlockDisplay from '../../../components/generics/GenericCollapsableBlockDisplay';
-import RulesModelDisplayCollapse from '../../../components/features/rules-content/RulesModelDisplayCollapse';
+import RulesModelDisplayCollapse from '../../../components/rules-content/RulesModelDisplayCollapse';
 import ItemRow from '../../../components/subcomponents/description/ItemRow';
 import {FactionModelRelationship} from "../../../../classes/relationship/faction/FactionModelRelationship";
 

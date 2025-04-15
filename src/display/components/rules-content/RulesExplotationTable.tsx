@@ -1,11 +1,9 @@
-import '../../../../resources/styles/vendor/bootstrap.css'
+import '../../../resources/styles/vendor/bootstrap.css'
 import React from 'react'
 import { ErrorBoundary } from "react-error-boundary";
 
 // Classes
-import { ExplorationTable } from '../../../../classes/feature/exploration/ExplorationTable';
-import ExplorationLocationDisplay from '../exploration/ExplorationLocationDisplay';
-import GenericTabledBlockDisplay from '../../../components/generics/GenereicTabledBlockDisplay';
+import { ExplorationTable } from '../../../classes/feature/exploration/ExplorationTable';
 import RulesExplorationLocation from "./RulesExplorationLocation";
 
 const RulesExplotationTable = (props: any) => {

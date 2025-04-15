@@ -1,10 +1,10 @@
-import '../../../../resources/styles/vendor/bootstrap.css'
+import '../../../resources/styles/vendor/bootstrap.css'
 import React from 'react'
 import { ErrorBoundary } from "react-error-boundary";
 
 // Classes
-import { returnDescription } from '../../../../utility/util'
-import { GloriousDeed } from '../../../../classes/feature/scenario/GloriousDeed';
+import { returnDescription } from '../../../utility/util'
+import { GloriousDeed } from '../../../classes/feature/scenario/GloriousDeed';
 
 const RulesGloriousDeed = (props: any) => {
     const deedObject: GloriousDeed = props.data

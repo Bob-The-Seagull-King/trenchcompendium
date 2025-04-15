@@ -1,21 +1,10 @@
-import '../../../../resources/styles/vendor/bootstrap.css'
+import '../../../resources/styles/vendor/bootstrap.css'
 import React from 'react'
 import { ErrorBoundary } from "react-error-boundary";
 
 // Classes
-import { GlossaryRule } from '../../../../classes/feature/glossary/Glossary'
-import { returnDescription } from '../../../../utility/util'
-import { ModelCollection } from '../../../../classes/feature/model/ModelCollection';
-import { Model } from '../../../../classes/feature/model/Model';
-import { Ability } from '../../../../classes/feature/ability/Ability';
-import OptionSetStaticDisplay from '../../subcomponents/description/OptionSetStaticDisplay';
-import { ExplorationTable } from '../../../../classes/feature/exploration/ExplorationTable';
-import GenericTableItemDisplay from '../../../components/generics/GenericTableItemDisplay';
-import { SkillGroup } from '../../../../classes/feature/skillgroup/SkillGroup';
-import SkillDisplay from '../skill/SkillDisplay';
-import GenericTabledBlockDisplay from '../../../components/generics/GenereicTabledBlockDisplay';
-import GenericCollapsableBlockDisplay from '../../../components/generics/GenericCollapsableBlockDisplay';
-import Rulesinjury from "./Rulesinjury";
+import { SkillGroup } from '../../../classes/feature/skillgroup/SkillGroup';
+import SkillDisplay from '../features/skill/SkillDisplay';
 
 const RulesSkillTable = (props: any) => {
     const skillgroupObject : SkillGroup = props.data

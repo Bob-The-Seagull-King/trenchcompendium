@@ -1,12 +1,12 @@
-import '../../../../resources/styles/vendor/bootstrap.css'
+import '../../../resources/styles/vendor/bootstrap.css'
 import React, { useState } from 'react'
 
 // Classes
 import {Collapse, Form} from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faBook, faChevronDown, faChevronUp, faLink} from '@fortawesome/free-solid-svg-icons';
-import { useGlobalState } from '../../../../utility/globalstate';
-import {Faction} from "../../../../classes/feature/faction/Faction";
+import { useGlobalState } from '../../../utility/globalstate';
+import {Faction} from "../../../classes/feature/faction/Faction";
 
 
 

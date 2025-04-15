@@ -1,11 +1,8 @@
-import '../../../../resources/styles/vendor/bootstrap.css'
+import '../../../resources/styles/vendor/bootstrap.css'
 import React from 'react'
 import { ErrorBoundary } from "react-error-boundary";
 
 // Classes
-import { returnDescription } from '../../../../utility/util'
-import OptionSetStaticDisplay from '../../subcomponents/description/OptionSetStaticDisplay';
-import { Injury } from '../../../../classes/feature/ability/Injury';
 import Rulesinjury from "./Rulesinjury";
 
 const RulesInjuriesTable = (props: any) => {

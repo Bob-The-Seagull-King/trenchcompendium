@@ -1,11 +1,10 @@
-import '../../../../resources/styles/vendor/bootstrap.css'
+import '../../../resources/styles/vendor/bootstrap.css'
 import React, { useEffect, useState } from 'react'
 
 // Classes
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faChevronLeft, faChevronRight, faEye, faLink} from '@fortawesome/free-solid-svg-icons';
-import CustomNavLink from '../../../components/subcomponents/interactables/CustomNavLink';
-import { useNavigate } from 'react-router-dom';
+import CustomNavLink from '../../components/subcomponents/interactables/CustomNavLink';
 
 
 interface RulesPageLinksProps {

@@ -1,22 +1,8 @@
-import '../../../../resources/styles/vendor/bootstrap.css'
+import '../../../resources/styles/vendor/bootstrap.css'
 import React, { useEffect, useState } from 'react'
-import { ErrorBoundary } from "react-error-boundary";
 
 // Classes
-import { ToastContainer, toast } from 'react-toastify';
-import { returnDescription } from '../../../../utility/util'
-import { Model } from '../../../../classes/feature/model/Model';
-import GenericDisplay from '../../generics/GenericDisplay';
-import AbilityDisplay from '../ability/AbilityDisplay';
-import GenericHover from '../../generics/GenericHover';
-import KeywordDisplay from '../glossary/KeywordDisplay';
-import ItemStat from '../../subcomponents/description/ItemStat';
-import { ModelStatistics } from '../../../../classes/feature/model/ModelStats';
-
-import ModelUpgradeDisplay from '../ability/ModelUpgradeDisplay';
-import {Equipment, EquipmentStats} from '../../../../classes/feature/equipment/Equipment';
-import ItemRow from "../../subcomponents/description/ItemRow";
-import {makestringpresentable} from "../../../../utility/functions";
+import {Equipment, EquipmentStats} from '../../../classes/feature/equipment/Equipment';
 
 
 interface RulesEquipmentStatsProps {

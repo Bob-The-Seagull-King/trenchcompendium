@@ -1,8 +1,5 @@
-import '../../../../resources/styles/vendor/bootstrap.css'
+import '../../../resources/styles/vendor/bootstrap.css'
 import React, {useState} from 'react'
-import { ErrorBoundary } from "react-error-boundary";
-import { useNavigate } from 'react-router-dom';
-import GenericCollapsableBlockDisplay from '../../../components/generics/GenericCollapsableBlockDisplay';
 import {faBook, faChevronDown, faChevronRight, faChevronUp, faIndent} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {Collapse} from "react-bootstrap";

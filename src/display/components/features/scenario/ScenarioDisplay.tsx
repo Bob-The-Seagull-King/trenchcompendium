@@ -23,10 +23,10 @@ import ContentsComponentAnchor, { ContentsLink } from '../../../components/subco
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLink } from '@fortawesome/free-solid-svg-icons';
 import GenericCollapsableBlockDisplay from '../../../components/generics/GenericCollapsableBlockDisplay';
-import RulesAnchorLinks from "../rules-content/RulesAnchorLinks";
-import RulesHeadlineDisplay from "../rules-content/RulesHeadlineDisplay";
-import RulesGloriousDeed from "../rules-content/RulesGloriousDeed";
-import RulesScenarioSummary from "../rules-content/RulesScenarioSummary";
+import RulesAnchorLinks from "../../rules-content/RulesAnchorLinks";
+import RulesHeadlineDisplay from "../../rules-content/RulesHeadlineDisplay";
+import RulesGloriousDeed from "../../rules-content/RulesGloriousDeed";
+import RulesScenarioSummary from "../../rules-content/RulesScenarioSummary";
 
 const ScenarioDisplay = (props: any) => {
     const scenarioObject: Scenario = props.data

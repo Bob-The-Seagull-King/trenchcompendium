@@ -11,9 +11,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLink } from '@fortawesome/free-solid-svg-icons';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import RulesArmouryElementDisplay from "../rules-content/RulesArmouryElementDisplay";
-import RulesAnchorLinks from "../rules-content/RulesAnchorLinks";
-import RulesHeadlineDisplay from "../rules-content/RulesHeadlineDisplay";
+import RulesArmouryElementDisplay from "../../rules-content/RulesArmouryElementDisplay";
+import RulesAnchorLinks from "../../rules-content/RulesAnchorLinks";
+import RulesHeadlineDisplay from "../../rules-content/RulesHeadlineDisplay";
 
 const BookRuleDisplay = (props: any) => {
     const ruleObject: BookRule = props.data

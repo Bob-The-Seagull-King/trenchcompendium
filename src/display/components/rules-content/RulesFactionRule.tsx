@@ -1,4 +1,4 @@
-import '../../../../resources/styles/vendor/bootstrap.css'
+import '../../../resources/styles/vendor/bootstrap.css'
 import React, { useState } from 'react'
 
 // Classes

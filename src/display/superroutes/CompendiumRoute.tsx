@@ -11,7 +11,7 @@ import { useGlobalState } from './../../utility/globalstate'
 import CompendiumBasePage from '../pages/CompendiumBasePage';
 import PagedCompendiumDisplay from '../pages/PagedCompendiumDisplay';
 import FilterableCompendiumDisplay from '../pages/FilterableCompendiumDisplay';
-import RulesMenuBody from "../components/features/rules-content/RulesMenuBody";
+import RulesMenuBody from "../components/rules-content/RulesMenuBody";
 import MenuBody from "../components/subcomponents/MenuBody";
 import CollectionCompendiumDisplay from '../pages/CollectionCompendiumDisplay';
 

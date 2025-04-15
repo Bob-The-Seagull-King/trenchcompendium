@@ -1,32 +1,20 @@
-import '../../../../resources/styles/vendor/bootstrap.css'
+import '../../../resources/styles/vendor/bootstrap.css'
 import React, { useEffect, useState } from 'react'
 import { ErrorBoundary } from "react-error-boundary";
 
 // Classes
-import { returnDescription } from '../../../../utility/util'
-import { Model } from '../../../../classes/feature/model/Model';
-import GenericDisplay from '../../generics/GenericDisplay';
-import AbilityDisplay from '../ability/AbilityDisplay';
-import GenericHover from '../../generics/GenericHover';
-import KeywordDisplay from '../glossary/KeywordDisplay';
-import ItemStat from '../../subcomponents/description/ItemStat';
-import { ModelStatistics, PresentModelStatistics } from '../../../../classes/feature/model/ModelStats';
-import {getBaseSize, getColour, getCostType, getMoveType, getPotential} from '../../../../utility/functions';
-import ModelUpgradeDisplay from '../ability/ModelUpgradeDisplay';
-import { Equipment } from '../../../../classes/feature/equipment/Equipment';
-import { IChoice } from '../../../../classes/options/StaticOption';
-import ModelEquipmentDisplay from '../equipment/ModelEquipmentDisplay';
-import { EventRunner } from '../../../../classes/contextevent/contexteventhandler';
-import { Form } from 'react-bootstrap';
-import DisplayFactionModelDisplay from '../model/DisplayFactionModelDisplay';
-import GenericCollapsableBlockDisplay from '../../../components/generics/GenericCollapsableBlockDisplay';
-import RulesModelDisplayCollapse from '../../../components/features/rules-content/RulesModelDisplayCollapse';
-import ItemRow from '../../../components/subcomponents/description/ItemRow';
-import {FactionModelRelationship} from "../../../../classes/relationship/faction/FactionModelRelationship";
+import { returnDescription } from '../../../utility/util'
+import { Model } from '../../../classes/feature/model/Model';
+import GenericHover from '../generics/GenericHover';
+import KeywordDisplay from '../features/glossary/KeywordDisplay';
+import ItemStat from '../subcomponents/description/ItemStat';
+import { ModelStatistics, PresentModelStatistics } from '../../../classes/feature/model/ModelStats';
+import {getBaseSize, getColour, getCostType, getMoveType, getPotential} from '../../../utility/functions';
+import RulesModelDisplayCollapse from '../../components/rules-content/RulesModelDisplayCollapse';
+import {FactionModelRelationship} from "../../../classes/relationship/faction/FactionModelRelationship";
 import RulesModelUpgrade from "./RulesModelUpgrade";
 import RulesModelDisplayAbility from "./RulesModelDisplayAbility";
-import AdvancedDescriptionItemDisplay from "../../subcomponents/description/AdvancedDescriptionItemDisplay";
-import {useGlobalState} from "../../../../utility/globalstate";
+import {useGlobalState} from "../../../utility/globalstate";
 
 const RulesModelDisplay = (props: any) => {
     const factionmodelObject: FactionModelRelationship = props.data

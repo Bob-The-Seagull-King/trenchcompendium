@@ -1,16 +1,10 @@
-import '../../../../resources/styles/vendor/bootstrap.css'
+import '../../../resources/styles/vendor/bootstrap.css'
 import React, {useState} from 'react'
 import { ErrorBoundary } from "react-error-boundary";
-import Offcanvas from 'react-bootstrap/Offcanvas';
-
-import Dropdown from 'react-bootstrap/Dropdown';
 
 // Font Awesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useGlobalState } from '../../../../utility/globalstate'
-import { ControllerController } from '../../../../classes/_high_level_controllers/ControllerController';
-import {IconDefinition} from "@fortawesome/fontawesome-svg-core";
-import {makestringpresentable} from "../../../../utility/functions";
+import { useGlobalState } from '../../../utility/globalstate'
 import {faChevronDown, faChevronUp, faCog, faIndent} from "@fortawesome/free-solid-svg-icons";
 import {Collapse} from "react-bootstrap";
 

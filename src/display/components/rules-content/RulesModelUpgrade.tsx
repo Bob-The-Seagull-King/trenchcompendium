@@ -1,12 +1,10 @@
-import '../../../../resources/styles/vendor/bootstrap.css'
+import '../../../resources/styles/vendor/bootstrap.css'
 import React, { useEffect, useState } from 'react'
 
 // Classes
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLink } from '@fortawesome/free-solid-svg-icons';
-import UpgradeDisplay from "../ability/UpgradeDisplay";
-import {ModelUpgradeRelationship} from "../../../../classes/relationship/model/ModelUpgradeRelationship";
-import {getCostType} from "../../../../utility/functions";
+import UpgradeDisplay from "../features/ability/UpgradeDisplay";
+import {ModelUpgradeRelationship} from "../../../classes/relationship/model/ModelUpgradeRelationship";
+import {getCostType} from "../../../utility/functions";
 
 
 interface RulesModelUpgradeProps {

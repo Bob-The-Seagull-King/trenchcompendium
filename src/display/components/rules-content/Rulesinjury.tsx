@@ -1,15 +1,10 @@
-import '../../../../resources/styles/vendor/bootstrap.css'
+import '../../../resources/styles/vendor/bootstrap.css'
 import React, { useEffect, useState } from 'react'
 import { ErrorBoundary } from "react-error-boundary";
 
 // Classes
-import { GlossaryRule } from '../../../../classes/feature/glossary/Glossary'
-import { returnDescription } from '../../../../utility/util'
-import { ExplorationLocation } from '../../../../classes/feature/exploration/ExplorationLocation';
-import OptionSetStaticDisplay from '../../../components/subcomponents/description/OptionSetStaticDisplay';
-import { EventRunner } from '../../../../classes/contextevent/contexteventhandler';
-import SingleOptionSetDisplay from "../../subcomponents/description/SingleOptionSetDisplay";
-import {Injury} from "../../../../classes/feature/ability/Injury";
+import { returnDescription } from '../../../utility/util'
+import {Injury} from "../../../classes/feature/ability/Injury";
 
 const RulesInjury = (props: any) => {
     const injuryObject: Injury = props.injury

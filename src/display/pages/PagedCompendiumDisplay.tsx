@@ -11,7 +11,7 @@ import { CollectionsListPage } from '../../classes/viewmodel/pages/CollectionLis
 import { DisplayCollectionDataDex, DisplayCollectionType } from './DisplayPageStatic'
 import BasicButton from '../components/subcomponents/interactables/BasicButton';
 import { useLocation, useNavigate } from 'react-router-dom';
-import RulesPageLinks from "../components/features/rules-content/RulesPageLinks";
+import RulesPageLinks from "../components/rules-content/RulesPageLinks";
 
 const PagedCompendiumDisplay = (prop: any) => {
     // Initialize controllers and managers

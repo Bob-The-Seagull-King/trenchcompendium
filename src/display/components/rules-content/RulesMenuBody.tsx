@@ -1,4 +1,4 @@
-import '../../../../resources/styles/vendor/bootstrap.css'
+import '../../../resources/styles/vendor/bootstrap.css'
 import React, { useState } from 'react'
 import { ErrorBoundary } from "react-error-boundary";
 
@@ -6,12 +6,8 @@ import { ErrorBoundary } from "react-error-boundary";
 // Font Awesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faChevronLeft} from '@fortawesome/free-solid-svg-icons'
-import { useGlobalState } from '../../../../utility/globalstate'
 import { useNavigate } from 'react-router-dom';
-import GenericCollapsableBlockDisplay from '../../../components/generics/GenericCollapsableBlockDisplay';
-import { ControllerController } from '../../../../classes/_high_level_controllers/ControllerController';
-import CompendiumMenuItem from '../../../headers/components/CompendiumMenuItem';
-import GenericLinkedCollapsableBlockDisplay from '../../generics/GenericLinkedCollapsableBlockDisplay';
+import { ControllerController } from '../../../classes/_high_level_controllers/ControllerController';
 import RulesMenuItem from "./RulesMenuItem";
 import RulesMenuSettings from "./RulesMenuSettings";
 

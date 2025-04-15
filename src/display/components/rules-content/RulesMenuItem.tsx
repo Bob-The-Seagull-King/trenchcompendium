@@ -2,11 +2,11 @@ import React, {useState} from 'react'
 import {Collapse} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faChevronDown, faChevronUp} from "@fortawesome/free-solid-svg-icons";
-import CustomNavLink from '../../subcomponents/interactables/CustomNavLink';
+import CustomNavLink from '../subcomponents/interactables/CustomNavLink';
 import { useNavigate } from 'react-router-dom';
-import { CollectionsListPage } from '../../../../classes/viewmodel/pages/CollectionListPage';
-import { DisplayCollectionType, DisplayCollectionDataDex } from '../../../pages/DisplayPageStatic';
-import { FactionCollection } from '../../../../classes/feature/faction/FactionCollection';
+import { CollectionsListPage } from '../../../classes/viewmodel/pages/CollectionListPage';
+import { DisplayCollectionType, DisplayCollectionDataDex } from '../../pages/DisplayPageStatic';
+import { FactionCollection } from '../../../classes/feature/faction/FactionCollection';
 
 interface RulesMenuItemProps {
     title: string;

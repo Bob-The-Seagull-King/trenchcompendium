@@ -1,11 +1,11 @@
-import '../../../../resources/styles/vendor/bootstrap.css'
+import '../../../resources/styles/vendor/bootstrap.css'
 import React, { useEffect, useState } from 'react'
 
 // Classes
-import { returnDescription } from '../../../../utility/util'
-import GenericHover from '../../generics/GenericHover';
-import KeywordDisplay from '../glossary/KeywordDisplay';
-import {Equipment, EquipmentStats} from '../../../../classes/feature/equipment/Equipment';
+import { returnDescription } from '../../../utility/util'
+import GenericHover from '../generics/GenericHover';
+import KeywordDisplay from '../features/glossary/KeywordDisplay';
+import {Equipment, EquipmentStats} from '../../../classes/feature/equipment/Equipment';
 import RulesEquipmentStats from "./RulesEquipmentStats";
 
 

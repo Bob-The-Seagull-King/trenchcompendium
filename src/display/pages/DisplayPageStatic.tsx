@@ -16,9 +16,9 @@ import SkillGroupDisplay from "../components/features/skill/SkillGroupDisplay";
 import PatronDisplay from "../components/features/skill/PatronDisplay";
 import GenericCollapsableBlockDisplay from "../components/generics/GenericCollapsableBlockDisplay";
 import GenericTabledBlockDisplay from "../components/generics/GenereicTabledBlockDisplay";
-import RulesInjuriesTable from "../components/features/rules-content/RulesInjuriesTable";
-import RulesExplotationTable from "../components/features/rules-content/RulesExplotationTable";
-import RulesSkillTable from "../components/features/rules-content/RulesSkillTable";
+import RulesInjuriesTable from "../components/rules-content/RulesInjuriesTable";
+import RulesExplotationTable from "../components/rules-content/RulesExplotationTable";
+import RulesSkillTable from "../components/rules-content/RulesSkillTable";
 
 export interface DisplayCollectionType {
     searchId      : string,
