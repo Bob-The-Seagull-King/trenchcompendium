@@ -1,0 +1,67 @@
+// // // // //
+//
+// Warband Builder Warband Item
+// - A Warband the user has created
+//
+
+.WbbWarbandListItem
+    padding: 20px 20px 30px 20px
+    margin-bottom: 30px
+
+    background-color: $color-bg-2
+
+    position: relative
+
+    .item-name
+        font-size: 28px
+        line-height: 1.2em
+        font-family: $font-headline
+        margin-bottom: 5px
+        margin-right: 20px
+
+    .item-faction
+
+    .item-cost
+
+    .item-campaign
+        margin-top: 10px
+
+    .Wbb-item-actions
+        position: absolute
+        top: 0
+        right: 0
+        padding: 25px 20px 20px 20px
+
+        cursor: pointer
+        transition: color .2s ease
+        &:hover
+            color: $color-highlight-text
+
+.popover.Wbb-item-actions-popover
+    border-radius: 0
+    border: none
+    padding: 10px 15px
+    box-shadow: $box-shadow-1
+    background-color: $color-bg-3
+    color: $color-text
+
+    .title
+        font-size: 16px
+        font-weight: bold
+        border-bottom: 1px solid $color-bg-2
+        padding: 0 15px 10px 15px
+        margin: 0 -15px 5px -15px
+
+    .actions
+
+    .action
+        margin: 0 -15px
+        padding: 10px 15px
+        cursor: pointer
+        transition: color .2s ease
+
+        &:hover
+            color: $color-highlight-text
+
+    .action-copy
+    .action-delete

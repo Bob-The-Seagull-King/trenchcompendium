@@ -1,0 +1,36 @@
+// // // // //
+//
+// Warband Builder Faction selection screen item
+//
+
+.WbbFactionSelectItem
+    margin-bottom: 30px
+
+    > .faction-item
+        background-color: $color-bg-2
+        padding: 25px 20px
+
+    .faction-item
+        position: relative
+        padding-right: 20px
+        border-bottom: 1px solid $color-bg-0
+        transition: background-color .2s ease
+
+        &.selected
+            background-color: $color-highlight !important
+
+
+        i, svg
+            position: absolute
+            top: 50%
+            right: 10px
+            transform: translateY(-50%)
+
+    // second level
+    .WbbFactionSelectItem
+        margin-bottom: 0px
+        border-left: 5px solid $color-highlight-bg
+
+        > .faction-item
+            padding: 20px 20px
+            background-color: $color-bg-3

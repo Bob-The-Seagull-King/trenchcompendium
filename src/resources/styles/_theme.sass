@@ -40,6 +40,7 @@ body[data-theme='light']
     --color_bg_lvl_3: #dedede
 
     // Highlights
+    --color_highlight_bg_2_50: rgba(180,24,27,0.25)
     --color_highlight_bg_2: #b4181b // deeper bg color
     --color_highlight_bg: #fa1c23
     --color_highlight: #d01317
@@ -87,6 +88,7 @@ body[data-theme='dark']
 
     // Highlights
     // deeper bg level
+    --color_highlight_bg_2_50: rgba(135,18,20,0.25)
     --color_highlight_bg_2: #871214
     --color_highlight_bg: #9b1518
     --color_highlight: #d01317
@@ -111,6 +113,7 @@ $color-bg-inv: var(--colour_bg_inverted)
 $color-text: var(--color_font_main)
 $color-text-muted: var(--color_font_muted)
 
+$color-highlight-bg-2-50: var(--color_highlight_bg_2_50)
 $color-highlight-bg-2: var(--color_highlight_bg_2)
 $color-highlight-bg: var(--color_highlight_bg)
 $color-highlight: var(--color_highlight)
@@ -147,8 +150,26 @@ body[data-theme]
 .offcanvas
     background-color: $color-bg
 
-.modal-content
-    background-color: $color-bg
+.modal-dialog
+    .modal-content
+        background-color: $color-bg-2
+        color: $color-text
+
+    .modal-header
+        position: relative
+        background-color: $color-highlight-bg
+        border-bottom-color: $color-bg-1
+
+        .modal-close-icon
+            position: absolute
+            top: 50%
+            transform: translateY(-50%)
+            right: 0
+            padding: 20px
+
+
+    .modal-footer
+        border-color: $color-bg-1
 
 // Switches
 .form-check.form-switch
@@ -173,6 +194,10 @@ body[data-theme]
 input.form-control
     border-radius: 0
 
+.input-group
+    .input-group-text
+        border-radius: 0
+
 // Buttons re-styling
 .btn
     border: none !important
@@ -191,6 +216,12 @@ input.form-control
     &:active,
     &:focus
         background-color: $color-highlight !important
+
+    &:disabled,
+    &.disabled
+        opacity: 0.5
+        background-color: $color-highlight-bg
+
 
 .btn.btn-secondary
 
