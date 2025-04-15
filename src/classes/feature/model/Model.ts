@@ -12,7 +12,7 @@ import { ContextObject, IContextObject } from '../../contextevent/contextobject'
 import { StaticContextObject } from '../../contextevent/staticcontextobject';
 import { Ability } from '../ability/Ability';
 import { IKeyword, Keyword } from '../glossary/Keyword';
-import { GetPresentationStatistic, ModelStatistics } from './ModelStats';
+import { GetPresentationStatistic, ModelStatistics, PresentModelStatistics } from './ModelStats';
 import { Requester } from '../../../factories/Requester';
 import { UpgradeFactory } from '../../../factories/features/UpgradeFactory';
 import { IModelEquipmentRelationship, ModelEquipmentRelationship } from '../../relationship/model/ModelEquipmentRelationship';
@@ -323,11 +323,21 @@ class Model extends StaticContextObject {
     /**
      * Returns the base size (or options) for a model as a string
      */
-    public getBaseSizeString () : string {
-
-        // @TODO: return the base stat or options as simple string
-        return '25mm'
-
+    public async getBaseSizeString () : Promise<string> {
+        const stats : PresentModelStatistics = await this.GetPresentableStatistics();
+        
+        const basestats: string[] = []
+            if (stats.base != undefined) {
+            for (let i = 0; i < stats.base?.length; i++) {
+                const curstats : string[] = []
+                for (let j = 0; j < stats.base[i].length; j++) {
+                    curstats.push(stats.base[i][j].toString());
+                }
+                basestats.push(curstats.join('x') + "mm")
+            }
+        }
+    
+        return basestats.join('/')
     }
 
 

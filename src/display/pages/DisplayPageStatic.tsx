@@ -277,7 +277,9 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         returnDisplay(item: any) {
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
+                    {item != undefined &&
                     <FactionCollectionDisplay data={item} />
+                    }
                 </ErrorBoundary>
             )
         },

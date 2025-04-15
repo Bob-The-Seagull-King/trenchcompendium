@@ -167,9 +167,9 @@ class FactionModelRelationship extends StaticOptionContextObject {
     /**
      * Gets the base size (or options) for a model as a string
      */
-    public getBaseSizeString () : string {
+    public async getBaseSizeString () : Promise<string> {
 
-        return this.Model.getBaseSizeString();
+        return await this.Model.getBaseSizeString();
 
     }
 

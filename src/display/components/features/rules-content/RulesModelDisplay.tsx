@@ -33,6 +33,7 @@ const RulesModelDisplay = (props: any) => {
     const modelcollectionObject: Model = props.data.Model
 
     const [statchoices, setstats] = useState({})
+    const [BaseString, setBaseString] = useState('')
     const [_keyvar, setkeyvar] = useState(0);
 
     // Render no lore if loreshow !== 'true'
@@ -45,6 +46,9 @@ const RulesModelDisplay = (props: any) => {
              */
             const result = await modelcollectionObject.GetPresentableStatistics()
             setstats(result);
+
+            const baseresult = await factionmodelObject.getBaseSizeString();
+            setBaseString(baseresult);
             setkeyvar((prev) => prev + 1);
         }
 
@@ -178,7 +182,7 @@ const RulesModelDisplay = (props: any) => {
                             Base:
                         </span>
                         <span className="fighter-meta-value">
-                            {factionmodelObject.getBaseSizeString()}
+                            {BaseString}
                         </span>
                     </div>
 
