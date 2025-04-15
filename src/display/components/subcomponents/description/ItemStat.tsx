@@ -5,7 +5,6 @@ import { ErrorBoundary } from "react-error-boundary";
 const ItemStat = (props: any) => {
     const Title = props.title;
     const Content = props.value;
-    const SizeRatio = (props.ratio != undefined? props.ratio : "square")
 
     return (
         

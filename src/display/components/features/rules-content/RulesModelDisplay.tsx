@@ -51,51 +51,7 @@ const RulesModelDisplay = (props: any) => {
         SetModelOptions();
     }, []);
 
-    function ReturnStatOption(statchoice : ModelStatistics[]) {
 
-        return (
-            <ItemRow
-                title={"Stat Options"}
-                value={() =>
-                    <div className="">
-                        <Form.Control className={"borderstyler bordergrey overcomeradius " } as="select" aria-label="Default select example"  placeholder="Member Type" >
-                            {statchoice.map((item) => (
-                                <option key={"modeloption"+(statchoice.indexOf(item).toString())} >{ReturnStatProfileAsString(item)}</option>
-                            ))}
-                        </Form.Control>
-                    </div>
-                }
-            />
-        )
-    }
-
-    function ReturnStatProfileAsString(stats : ModelStatistics) {
-        
-        const ProfileString : string[] = []
-        if (stats.movement != undefined) {
-            ProfileString.push( "Movement:" + (stats.movement? stats.movement.toString() : "") + "\"" )
-        }
-        if (stats.movetype != undefined) {
-            ProfileString.push("Move-Type:" + getMoveType(stats.movetype))
-        }
-        if (stats.melee != undefined) {
-            ProfileString.push("Melee:" + ((stats.melee > 0? "+": "") ) + (stats.melee?.toString() || ""))
-        }
-        if (stats.ranged != undefined) {
-            ProfileString.push("Ranged:" + ((stats.ranged > 0? "+": "") ) + (stats.ranged?.toString() || ""))
-        }
-        if (stats.armour != undefined) {
-            ProfileString.push("Armour:" + stats.armour.toString())
-        }
-        if (stats.potential != undefined) {
-            ProfileString.push("Potential:" + (stats.potential? getPotential(stats.potential) : "Standard"))
-        }
-        if (stats.base != undefined) {
-            ProfileString.push("Base:" + (stats.base? getBaseSize(stats.base) : "25mm"))
-        }
-
-        return ProfileString.join(' ')
-    }
 
     function ReturnStats(stats : PresentModelStatistics) {
         const movestats: string[] = []   
@@ -115,44 +71,52 @@ const RulesModelDisplay = (props: any) => {
             }
         }
 
-        if (stats.melee != undefined) {
-            for (let i = 0; i < stats.melee?.length; i++) {
-                meleestats.push(((stats.melee[i] > 0? "+": stats.melee[i] < 0? "-" :"") ) + (stats.melee?.toString() || ""))
+        if (stats.melee  != undefined) {
+            for (let i = 0; i < stats.melee.length; i++) {
+                const val = stats.melee[i];
+                const prefix = val > 0 ? "+" : val < 0 ? "-" : "";
+                meleestats.push(prefix + Math.abs(val));
             }
+        } else {
+            meleestats.push('0');
         }
+
         if (stats.ranged != undefined) {
             for (let i = 0; i < stats.ranged?.length; i++) {
-                rangedstats.push(((stats.ranged[i] > 0? "+": stats.ranged[i] < 0? "-" :"") ) + (stats.melee?.toString() || ""))
+                const val = stats.ranged[i];
+                const prefix = val > 0 ? "+" : val < 0 ? "-" : "";
+                rangedstats.push(prefix + Math.abs(val));
             }
+        } else {
+            rangedstats.push('0');
         }
+
         if (stats.armour != undefined) {
             for (let i = 0; i < stats.armour?.length; i++) {
                 armourstats.push(stats.armour[i].toString())
             }
+        } else {
+            armourstats.push('0');
         }
+
         return (
             <>
                 {stats.movement != undefined &&
                     <>
-                        <ItemStat title={"Movement"} ratio="rectangle" value={(movestats.join('/'))}/>
+                        <ItemStat title={"Movement"} value={(movestats.join('/') + '"/' + (typestats.join('/')))}/>
                     </>
                 }
-                {stats.movetype != undefined &&
-                    <>
-                        <ItemStat title={"Move Type"} ratio="rectangle" value={(typestats.join('/'))}/>
-                    </>
-                }
-                {stats.melee != undefined &&
+                {meleestats.length >= 0 &&
                     <>
                         <ItemStat title={"Melee"} value={meleestats.join('/')}/>
                     </>
                 }
-                {stats.ranged != undefined &&
+                {rangedstats.length >= 0 &&
                     <>
                         <ItemStat title={"Ranged"} value={rangedstats.join('/')}/>
                     </>
                 }
-                {stats.armour != undefined &&
+                {armourstats.length >= 0 != undefined &&
                     <>
                         <ItemStat title={"Armour"} value={armourstats.join('/')}/>
                     </>
@@ -161,28 +125,28 @@ const RulesModelDisplay = (props: any) => {
         )
     }
 
-    function returnBaseSize(stats : PresentModelStatistics) {
-        
-        const basestats: string[] = []
-
-        if (stats.base != undefined) {
-            for (let i = 0; i < stats.base?.length; i++) {
-                const curstats : string[] = []
-                for (let j = 0; j < stats.base[i].length; j++) {
-                    curstats.push(stats.base[i][j].toString());
-                }
-                basestats.push(curstats.join('x') + "mm")
-            }
-        }
-
-        return basestats.join('/')
-    }
+    // function returnBaseSize(stats : PresentModelStatistics) {
+    //
+    //     const basestats: string[] = []
+    //
+    //     if (stats.base != undefined) {
+    //         for (let i = 0; i < stats.base?.length; i++) {
+    //             const curstats : string[] = []
+    //             for (let j = 0; j < stats.base[i].length; j++) {
+    //                 curstats.push(stats.base[i][j].toString());
+    //             }
+    //             basestats.push(curstats.join('x') + "mm")
+    //         }
+    //     }
+    //
+    //     return basestats.join('/')
+    // }
 
     return (
         <ErrorBoundary fallback={<div>Something went wrong with ModelDisplay.tsx</div>}>
             <section className='fighter-card' key={_keyvar}>
                 <div className="fighter-card-title">
-                    {modelcollectionObject.Name}
+                    {factionmodelObject.getName()}
                 </div>
 
                 <div className="fighter-card-meta fighter-card-meta-above">
@@ -191,7 +155,7 @@ const RulesModelDisplay = (props: any) => {
                             Cost:
                         </span>
                         <span className="fighter-meta-value">
-                            {factionmodelObject.Cost + " " + getCostType(factionmodelObject.CostType)}
+                            {factionmodelObject.getCostString()}
                         </span>
                     </div>
                     <div className="fighter-meta-entry-simple fighter-availability">
@@ -199,7 +163,7 @@ const RulesModelDisplay = (props: any) => {
                             Availability:
                         </span>
                         <span className="fighter-meta-value">
-                            {factionmodelObject.Minimum.toString() + "-" + factionmodelObject.Maximum.toString()}
+                            {factionmodelObject.getAvailabilityString()}
                         </span>
                     </div>
                 </div>
@@ -214,16 +178,17 @@ const RulesModelDisplay = (props: any) => {
                             Base:
                         </span>
                         <span className="fighter-meta-value">
-                            {returnBaseSize(statchoices)}
+                            {factionmodelObject.getBaseSizeString()}
                         </span>
                     </div>
 
-                    <div className="fighter-meta-entry-simple fighter-keywords">
+                    {factionmodelObject.hasKeywords() &&
+                        <div className="fighter-meta-entry-simple fighter-keywords">
                         <span className="fighter-meta-label">
                             Keywords:
                         </span>
-                        <span className="fighter-meta-value">
-                            {modelcollectionObject.KeyWord.map((item, index) => (
+                            <span className="fighter-meta-value">
+                            {factionmodelObject.getKeywords().map((item, index) => (
                                 <span className=''
                                       key={"model_keyword_" + modelcollectionObject.ID + "_keyword_id_" + item.ID}>
                                     <GenericHover
@@ -237,16 +202,17 @@ const RulesModelDisplay = (props: any) => {
                                 </span>
                             )) /* Keywords */}
                         </span>
-                    </div>
+                        </div>
+                    }
                 </div>
 
                 <div className={'fighter-card-collapse-wrap'}>
                     {/* Abilities */}
-                    {modelcollectionObject.Abilities.length > 0 &&
+                    {factionmodelObject.hasAbilities() &&
                         <RulesModelDisplayCollapse
                             name={"Abilities"}
                             state={false}
-                            has_children={modelcollectionObject.Abilities.length > 0}
+                            has_children={factionmodelObject.hasAbilities()}
                             method={() => <>
                                 {modelcollectionObject.Abilities.map((item) => (
                                     <React.Fragment
@@ -260,7 +226,7 @@ const RulesModelDisplay = (props: any) => {
                     }
 
                     {/* Equipment Rules */}
-                    {modelcollectionObject.Description &&
+                    {factionmodelObject.hasDescription() &&
                         <RulesModelDisplayCollapse
                             name={"Equipment"}
                             state={false}
@@ -272,20 +238,17 @@ const RulesModelDisplay = (props: any) => {
                     }
 
                     {/* Upgrades */}
-                    {modelcollectionObject.UpgradeList.length > 0 &&
+                    {factionmodelObject.hasUpgrades() &&
                         <RulesModelDisplayCollapse
                             name={"Upgrades"}
                             state={false}
-                            has_children={modelcollectionObject.UpgradeList.length > 0}
+                            has_children={factionmodelObject.hasUpgrades()}
                             method={() => <>
-                                {modelcollectionObject.UpgradeList.map((item) => (
-
+                                {factionmodelObject.getUprgades().map((item) => (
                                     <React.Fragment
                                         key={"model_upgrade_" + modelcollectionObject.ID + "_upgrade_id_" + item.ID}>
                                         <RulesModelUpgrade item={item}/>
                                     </React.Fragment>
-
-
                                 ))}
                             </>
                             }
@@ -293,7 +256,7 @@ const RulesModelDisplay = (props: any) => {
                     }
 
                     {/* Lore Text */}
-                    {modelcollectionObject.Lore && loreshow !== 'false' &&
+                    {factionmodelObject.hasLore() && loreshow !== 'false' &&
                         <RulesModelDisplayCollapse
                             name={"Lore"}
                             state={false}
@@ -304,8 +267,6 @@ const RulesModelDisplay = (props: any) => {
                         />
                     }
                 </div>
-
-
             </section>
         </ErrorBoundary>
     )

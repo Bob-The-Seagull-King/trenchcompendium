@@ -45,16 +45,16 @@ const HomeRoute: React.FC = () => {
                             <MenuComponent Title={"Play Mode"} Route={"play/"} bgImageID={19}/>
                         </div>
                     </div>
-                    <div className={'row'}>
-                        <div className={'col-12 col-md-6 pt-3 pb-3'}>
-                            <a href={"/login"} className={'btn btn-primary'}>
-                                Login
-                            </a>
-                        </div>
-                        {/*<div className={'col-12 col-md-6'}>*/}
-                        {/*    <MenuOutLink title={"Support The App"} link={"https://www.patreon.com/bobtheseagullking/"} />*/}
-                        {/*</div>*/}
-                    </div>
+                    {/*<div className={'row'}>*/}
+                    {/*    <div className={'col-12 col-md-6 pt-3 pb-3'}>*/}
+                    {/*        <a href={"/login"} className={'btn btn-primary'}>*/}
+                    {/*            Login*/}
+                    {/*        </a>*/}
+                    {/*    </div>*/}
+                    {/*<div className={'col-12 col-md-6'}>*/}
+                    {/*    <MenuOutLink title={"Support The App"} link={"https://www.patreon.com/bobtheseagullking/"} />*/}
+                    {/*</div>*/}
+                    {/*</div>*/}
                 </div>
 
 

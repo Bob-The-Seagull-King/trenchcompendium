@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
-interface LoginProps {
-    onLogin: (token: string, userId: number) => void;
-}
+import { useAuth } from './AuthContext';
+import {faCircleNotch, faUser} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+
+
 
 interface JwtPayload {
     data: {
@@ -13,22 +15,27 @@ interface JwtPayload {
     };
 }
 
-const SynodLogin: React.FC<LoginProps> = ({ onLogin }) => {
+const SynodLogin: React.FC = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
-    const [message, setMessage] = useState('');
+    const [message, setMesage] = useState('');
+
+    const [isLoading, setIsLoading] = useState(false); // Loading state
 
     // const synodUrl = 'http://synod.trench-companion.test/';  // this is for local dev
     const synodUrl = 'https://synod.trench-companion.com/'; // This is for prod
 
+    const { userId, isLoggedIn, login, logout } = useAuth();
+
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        setIsLoading(true);
         setError('');
-        setMessage('');
 
         if (!email || !password) {
             setError('Please fill out all fields');
+            setIsLoading(false);
             return;
         }
 
@@ -42,37 +49,68 @@ const SynodLogin: React.FC<LoginProps> = ({ onLogin }) => {
             const decoded = jwtDecode<JwtPayload>(token);
             const userId = decoded.data.user.id;
 
-            localStorage.setItem('jwtToken', token);
-            localStorage.setItem('synodUserId', userId.toString());
-
-            onLogin(token, userId);
-            setMessage('Login successful!');
+            login(token, userId);
         } catch (err: any) {
             setError(err.response?.data?.message || 'Login failed');
+        } finally {
+            setIsLoading(false);
         }
     };
 
     return (
-        <div>
-            <h2>Login</h2>
+        <>
+            <h1 className={'mt-3'}>Login</h1>
+
             {error && <p style={{ color: 'red' }}>{error}</p>}
             {message && <p style={{ color: 'green' }}>{message}</p>}
-            <form onSubmit={handleSubmit}>
-                <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Email or Username"
-                />
-                <input
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Password"
-                />
-                <button type="submit">Login</button>
-            </form>
-        </div>
+
+            {!isLoggedIn &&
+                <form onSubmit={handleSubmit}>
+                    <div className={'mb-3'}>
+                        <label htmlFor="synod-login-email" className="form-label">Email address</label>
+                        <input
+                            type="email" id={'synod-login-email'}
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            placeholder="Your Email"
+                            className={'form-control'}
+                        />
+                    </div>
+
+                    <div className={'mb-3'}>
+                        <label htmlFor="synod-login-pw" className="form-label">Password</label>
+                        <input
+                            type="password" id={'synod-login-password'}
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            placeholder="Password"
+                            className={'form-control'}
+                        />
+                    </div>
+
+                    <div className={'mb-3'}>
+                        <button type="submit" className={'btn btn-primary'}>
+                            {isLoading ?
+                                <>
+                                    {'Loading'}
+                                    <FontAwesomeIcon icon={faCircleNotch} className="fa-spin icon-inline-right-l"/>
+                                </>
+                            :
+                                <>
+                                    {'Login'}
+                                </>
+                            }
+                        </button>
+                    </div>
+                </form>
+            }
+
+            {isLoggedIn &&
+                <div className={'alert alert-success mt-3 mb-3'}>
+                    {'You are logged in'}
+                </div>
+            }
+        </>
     );
 };
 

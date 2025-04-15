@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faCircleNotch} from "@fortawesome/free-solid-svg-icons";
 
 const SynodPasswordReset: React.FC = () => {
     const [emailOrUsername, setEmailOrUsername] = useState('');
@@ -9,6 +11,9 @@ const SynodPasswordReset: React.FC = () => {
     const [message, setMessage] = useState('');
     const [error, setError] = useState('');
 
+    const [isLoadingSendResetLink, setIsLoadingSendResetLink] = useState(false); // Loading state
+    const [isLoadingResetPassword, setIsLoadingResetPassword] = useState(false); // Loading state
+
     // const synodUrl = 'http://synod.trench-companion.test/';  // this is for local dev
     const synodUrl = 'https://synod.trench-companion.com/'; // this is for prod
 
@@ -16,6 +21,7 @@ const SynodPasswordReset: React.FC = () => {
         e.preventDefault();
         setMessage('');
         setError('');
+        setIsLoadingSendResetLink(true);
 
         try {
             const response = await axios.post(`${synodUrl}wp-json/wp/v2/users/lostpassword`, {
@@ -27,6 +33,8 @@ const SynodPasswordReset: React.FC = () => {
 
         } catch (err: any) {
             setError(err.response?.data?.message || 'Something went wrong');
+        } finally {
+            setIsLoadingSendResetLink(false);
         }
     };
 
@@ -34,6 +42,7 @@ const SynodPasswordReset: React.FC = () => {
         e.preventDefault();
         setMessage('');
         setError('');
+        setIsLoadingResetPassword(true);
 
         try {
             const response = await axios.post(`${synodUrl}wp-json/wp/v2/users/reset_password`, {
@@ -45,50 +54,99 @@ const SynodPasswordReset: React.FC = () => {
             setMessage('Password reset successful!');
         } catch (err: any) {
             setError(err.response?.data?.message || 'Password reset failed');
+        } finally {
+            setIsLoadingResetPassword(false);
         }
     };
 
     return (
         <div>
-            <h2>Forgot Password</h2>
+            <h1 className={'mt-3'}>Forgot Password</h1>
 
-            <div className={'alert'}>
-                <form onSubmit={handleSendResetLink}>
+            <p>
+                {'Have you forgotten your password or want to change it? Request a reset code below.'}
+            </p>
+
+            <h2 className={'mt-3'}>Get Reset Code</h2>
+
+            <form onSubmit={handleSendResetLink}>
+                <label htmlFor="synod-login-forgot-email" className="form-label">Email address</label>
+
+                <div className={'mb-3'}>
                     <input
-                        type="text"
+                        type="text" id={'synod-login-forgot-email'}
+                        className={'form-control'}
                         value={emailOrUsername}
                         onChange={(e) => setEmailOrUsername(e.target.value)}
                         placeholder="Email or Username"
                     />
-                    <button type="submit">Send Reset Email</button>
-                </form>
-            </div>
 
-            <h3>Reset Password</h3>
-            <form onSubmit={handleResetPassword}>
-                <input
-                    type="text"
-                    value={login}
-                    onChange={(e) => setLogin(e.target.value)}
-                    placeholder="Username"
-                />
-                <input
-                    type="text"
-                    value={resetKey}
-                    onChange={(e) => setResetKey(e.target.value)}
-                    placeholder="Reset Code from Email"
-                />
-                <input
-                    type="password"
-                    value={newPassword}
-                    onChange={(e) => setNewPassword(e.target.value)}
-                    placeholder="New Password"
-                />
-                <button type="submit">Reset Password</button>
+                </div>
+
+                <div className={'mb-3'}>
+                    <button type="submit" className={'btn btn-primary'}>
+                        {isLoadingSendResetLink ?
+                            <>
+                                {'Loading'}
+                                <FontAwesomeIcon icon={faCircleNotch} className="fa-spin icon-inline-right-l"/>
+                            </>
+                            :
+                            <>
+                                {'Get Reset Code'}
+                            </>
+                        }
+                    </button>
+                </div>
             </form>
 
-            {message && <p style={{ color: 'green' }}>{message}</p>}
-            {error && <p style={{ color: 'red' }}>{error}</p>}
+            <h2 className={'mt-3'}>Reset Password</h2>
+            <form onSubmit={handleResetPassword}>
+                <div className={'mb-3'}>
+                    <label htmlFor="synod-login-reset-email" className="form-label">Email address</label>
+                    <input
+                        type="text" id={'synod-login-reset-email'}
+                        value={login}
+                        onChange={(e) => setLogin(e.target.value)}
+                        placeholder="Username" className={'form-control'}
+                    />
+                </div>
+                <div className={'mb-3'}>
+                    <label htmlFor="synod-login-reset-code" className="form-label">Reset Code</label>
+                    <input
+                        type="text"  id={'synod-login-reset-code'}
+                        value={resetKey}
+                        onChange={(e) => setResetKey(e.target.value)}
+                        placeholder="Reset Code from Email" className={'form-control'}
+                    />
+                </div>
+                <div className={'mb-3'}>
+                    <label htmlFor="synod-login-reset-pw" className="form-label">New Password</label>
+                    <input
+                        type="password" id={'"synod-login-reset-pw'}
+                        value={newPassword}
+                        onChange={(e) => setNewPassword(e.target.value)}
+                        placeholder="New Password" className={'form-control'}
+                    />
+                </div>
+
+                <div className={'mb-3'}>
+                    <button type="submit" className={'btn btn-primary'}>
+                        {isLoadingResetPassword ?
+                            <>
+                                {'Loading'}
+                                <FontAwesomeIcon icon={faCircleNotch} className="fa-spin icon-inline-right-l"/>
+                            </>
+                            :
+                            <>
+                                {'Reset Password'}
+                            </>
+                        }
+                    </button>
+                </div>
+            </form>
+
+            {message && <p style={{color: 'green'}}>{message}</p>}
+            {error && <p style={{color: 'red'}}>{error}</p>}
         </div>
     );
 };

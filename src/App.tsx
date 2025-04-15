@@ -25,6 +25,7 @@ import {useGlobalState} from "./utility/globalstate";
 import ScrollToTop from './display/components/subcomponents/ScrollToTop'
 import SynodLogin from "./utility/SynodLogin";
 import SynodLoginPage from './display/superroutes/SynodLoginPage'
+import {AuthProvider} from "./utility/AuthContext";
 
 
 const App: React.FC = () => {
@@ -35,6 +36,7 @@ const App: React.FC = () => {
     const compendiumcontroller = new ControllerController();
     const toolcontroller = new ToolsController();
 
+    /** Theme Settings */
     const [theme, setTheme] = useGlobalState('theme');
 
     useEffect(() => {
@@ -43,20 +45,22 @@ const App: React.FC = () => {
 
     return (
         <>
-            <Provider store={store}>
-                <PersistGate loading={null} persistor={persistor}>
-                    <Router >
-                        <SuperHeader controller={compendiumcontroller}/>
-                        <ScrollToTop/>
-                        <Routes>
-                            <Route path={ROUTES.HOME_ROUTE} element={<HomeRoute />} />
-                            <Route path={ROUTES.COMPENDIUM_ROUTE} element={<CompendiumRoute controller={compendiumcontroller} />} />
-                            <Route path={ROUTES.WARBAND_ROUTE} element={<WarbandRoute controller={toolcontroller} />} />
-                            <Route path="/login" element={<SynodLoginPage />} /> {/* New login route */}{/* @TODO: do something else if logged in */}
-                        </Routes>
-                    </Router>
-                </PersistGate>
-            </Provider>
+            <AuthProvider>
+                <Provider store={store}>
+                    <PersistGate loading={null} persistor={persistor}>
+                        <Router >
+                            <SuperHeader controller={compendiumcontroller}/>
+                            <ScrollToTop/>
+                            <Routes>
+                                <Route path={ROUTES.HOME_ROUTE} element={<HomeRoute />} />
+                                <Route path={ROUTES.COMPENDIUM_ROUTE} element={<CompendiumRoute controller={compendiumcontroller} />} />
+                                <Route path={ROUTES.WARBAND_ROUTE} element={<WarbandRoute controller={toolcontroller} />} />
+                                <Route path="/login" element={<SynodLoginPage />} /> {/* New login route */}{/* @TODO: do something else if logged in */}
+                            </Routes>
+                        </Router>
+                    </PersistGate>
+                </Provider>
+            </AuthProvider>
         </>
     )
 }
