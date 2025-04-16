@@ -14,8 +14,8 @@ interface WbbEditViewFighterProps {
         FighterName: string;
         ModelName: string;
         ModelId: string;
-        FighterTotalBaseDucats: number;
-        FighterTotalBaseGlory: number;
+        FighterBaseDucats: number;
+        FighterBaseGlory: number;
         FighterTotalCostDucats: number;
         FighterTotalCostGlory: number;
         IsElite: boolean;
@@ -29,8 +29,9 @@ interface WbbEditViewFighterProps {
     activePopoverId: string | null;
     setActivePopoverId: (id: string | null) => void;
     index: number;
+    onClick?: () => void;
 }
-const WbbEditViewFighter: React.FC<WbbEditViewFighterProps> = ({ item, activePopoverId, setActivePopoverId, index }) => {
+const WbbEditViewFighter: React.FC<WbbEditViewFighterProps> = ({ item, activePopoverId, setActivePopoverId, index, onClick }) => {
 
     const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
 
@@ -75,7 +76,7 @@ const WbbEditViewFighter: React.FC<WbbEditViewFighterProps> = ({ item, activePop
     };
 
     return (
-        <div className="WbbEditViewFighter">
+        <div className="WbbEditViewFighter" onClick={onClick}>
             <div className={'model-name'}>
                 {item.ModelName}
             </div>

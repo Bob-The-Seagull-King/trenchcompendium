@@ -45,16 +45,14 @@ const WarbandRoute: React.FC<IControllerProp> = (prop) => {
     // Return result -----------------------------
     return (
         <ErrorBoundary fallback={<div>Something went wrong with CompendiumRoute.tsx</div>}>
-            <div className="backgroundBaseColour">
-                <div key={_keyval} className="row justify-content-center m-0 p-0">
-                    <Routes>                        
-                        <Route path={ROUTES.HOME_ROUTE} element={<WbbOverviewPage manager={prop.controller.UserWarbandManager} />} />
-                        <Route path={ROUTES.WBB_EDIT} element={<WbbEditPage manager={prop.controller.UserWarbandManager} />} />
-                        <Route path={ROUTES.WBB_NEW} element={<WbbCreateNewPage manager={prop.controller.UserWarbandManager} />} />
-                        {/*<Route path={ROUTES.HOME_ROUTE} element={<ToolsSavedItem manager={prop.controller.UserWarbandManager} />} />*/}
-                    </Routes>
-                    {/*<WarbandTestBlock />*/}
-                </div>
+            <div key={_keyval} className="WarbandRoute">
+                <Routes>
+                    <Route path={ROUTES.HOME_ROUTE} element={<WbbOverviewPage manager={prop.controller.UserWarbandManager} />} />
+                    <Route path={ROUTES.WBB_EDIT} element={<WbbEditPage manager={prop.controller.UserWarbandManager} />} />
+                    <Route path={ROUTES.WBB_NEW} element={<WbbCreateNewPage manager={prop.controller.UserWarbandManager} />} />
+                    {/*<Route path={ROUTES.HOME_ROUTE} element={<ToolsSavedItem manager={prop.controller.UserWarbandManager} />} />*/}
+                </Routes>
+                {/*<WarbandTestBlock />*/}
             </div>
         </ErrorBoundary>
     )
