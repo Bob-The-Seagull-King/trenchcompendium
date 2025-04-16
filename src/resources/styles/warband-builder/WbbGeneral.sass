@@ -1,0 +1,47 @@
+// // // // //
+//
+// General Styles for the WBB
+//
+
+
+.popover.Wbb-item-actions-popover
+    border-radius: 0
+    border: none
+    padding: 10px 15px
+    box-shadow: $box-shadow-1
+    background-color: $color-bg-3
+    color: $color-text
+
+    &:after
+        content: ''
+        display: block
+        position: absolute
+        top: 50%
+        right: -8px
+        transform: translateY(-50%)
+        width: 0
+        height: 8px
+        border-left: 8px solid $color-bg-3
+        border-top: 8px solid transparent
+        border-bottom: 8px solid transparent
+
+    .title
+        font-size: 16px
+        font-weight: bold
+        border-bottom: 1px solid $color-bg-2
+        padding: 0 15px 10px 15px
+        margin: 0 -15px 5px -15px
+
+    .actions
+
+    .action
+        margin: 0 -15px
+        padding: 10px 15px
+        cursor: pointer
+        transition: color .2s ease
+
+        &:hover
+            color: $color-highlight-text
+
+    .action-copy
+    .action-delete
