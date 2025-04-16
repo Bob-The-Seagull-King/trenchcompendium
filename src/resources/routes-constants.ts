@@ -24,6 +24,11 @@ export const ROUTES = {
     COMP_CAMPAIGN_EXPLORATION : '/explorationtable/*',
     COMP_CAMPAIGN_INJURIES : '/injury/*',
     COMP_CAMPAIGN_PATRONS : '/patron/*',
-    COMP_CAMPAIGN_SKILLS : '/skillgroup/*'
+    COMP_CAMPAIGN_SKILLS : '/skillgroup/*',
+
+    // Warband Builder Routes //
+
+    WBB_EDIT : '/edit/*',
+    WBB_NEW : '/new/*'
 
 }

@@ -3,6 +3,8 @@ import WbbWarbandListItem from "../components/warband-builder/WbbWarbandListItem
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCopy, faPlus} from "@fortawesome/free-solid-svg-icons";
 import {useNavigate} from "react-router-dom";
+import { WarbandManager } from '../../classes/saveitems/Warband/WarbandManager';
+import CustomNavLink from '../components/subcomponents/interactables/CustomNavLink';
 
 
 /**
@@ -12,7 +14,8 @@ import {useNavigate} from "react-router-dom";
  *
  * @constructor
  */
-const WbbOverviewPage = () => {
+const WbbOverviewPage = (prop: any) => {
+    const Manager : WarbandManager = prop.manager;
     const navigate = useNavigate();
 
     // These are warband items for testing the Markup
@@ -52,8 +55,7 @@ const WbbOverviewPage = () => {
      * Navigates to create new WB Screen
      */
     const handleCreateNew = () => {
-        alert('Navigate to create new warband');
-        navigate('/warband-builder/new');
+        navigate('/warband/new');
 
     };
 
@@ -66,15 +68,15 @@ const WbbOverviewPage = () => {
                 <div className={'headline-wrap'}>
                     <h1>Your Warbands</h1>
 
-                    <div
-                        className={'btn btn-primary btn-new-warband'}
-                        onClick={handleCreateNew}
-                    >
-                        <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
+                    
+                    <div className={'btn btn-primary btn-new-warband'} >
+                        <CustomNavLink runfunc={handleCreateNew} link={'/warband/new'}>
+                            <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
 
-                        <span className={'new-warband-label'}>
-                        {'New Warband'}
-                        </span>
+                            <span className={'new-warband-label'}>
+                                {'New Warband'}
+                            </span>
+                        </CustomNavLink>
                     </div>
                 </div>
 
@@ -84,13 +86,13 @@ const WbbOverviewPage = () => {
                     ))}
 
                     <div className={'col-12 col-md-6'}>
-                        <div
-                            className={'WbbWarbandListItem-new'}
-                            onClick={handleCreateNew}
-                        >
-                            <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
-                            {'New Warband'}
-                        </div>
+                            <CustomNavLink runfunc={handleCreateNew} link={'/warband/new'}>
+                                <div className={'WbbWarbandListItem-new'} >
+                                    <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
+
+                                    {'New Warband'}
+                                </div>
+                            </CustomNavLink>
                     </div>
                 </div>
             </div>

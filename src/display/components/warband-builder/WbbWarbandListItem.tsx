@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faBookOpen, faCopy, faEllipsisVertical, faTrash, faXmark} from "@fortawesome/free-solid-svg-icons";
+import {faBookOpen, faCopy, faEllipsisVertical, faPen, faTrash, faXmark} from "@fortawesome/free-solid-svg-icons";
 import { Modal, Button, OverlayTrigger, Popover } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 
 /**
@@ -26,6 +27,7 @@ interface WbbWarbandListItemProps {
     };
 }
 const WbbWarbandListItem: React.FC<WbbWarbandListItemProps> = ({ item }) => {
+    const navigate = useNavigate();
     const [showPopover, setShowPopover] = useState(false);
     const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
 
@@ -46,6 +48,13 @@ const WbbWarbandListItem: React.FC<WbbWarbandListItemProps> = ({ item }) => {
     const handleDeleteClick = () => {
         setShowPopover(false);
         setShowDeleteConfirm(true);
+    };
+
+    /**
+     * Opens the delete confirmation modal
+     */
+    const handleEditClick = () => {
+        navigate('/warband/edit/' + item.synod_id);
     };
 
     /**
@@ -99,6 +108,15 @@ const WbbWarbandListItem: React.FC<WbbWarbandListItemProps> = ({ item }) => {
                                 {'Actions'}
                             </div>
                             <div className={'actions'}>
+
+                                <div
+                                    className={'action action-delete'}
+                                    onClick={handleEditClick}
+                                >
+                                    <FontAwesomeIcon icon={faPen} className="icon-inline-left-l"/>
+                                    {'Edit Warband'}
+                                </div>
+
                                 <div
                                     className={'action action-copy'}
                                     onClick={handleCopy}

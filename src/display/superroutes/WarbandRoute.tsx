@@ -18,6 +18,9 @@ import { ToolsController } from '../../classes/_high_level_controllers/ToolsCont
 import WarbandItemDisplay from '../components/features/saveitem/Warband/WarbandItemDisplay';
 import ToolsSavedItem from '../pages/ToolsSaveItem';
 import WarbandTestBlock from '../components/features/saveitem/Warband/WarbandTestBlock';
+import WbbOverviewPage from '../pages/WbbOverviewPage';
+import WbbCreateNewPage from '../pages/WbbCreateNewPage';
+import WbbEditPage from '../pages/WbbEditPage';
 
 interface IControllerProp {
     controller : ToolsController; // The controller being passed through
@@ -34,10 +37,10 @@ const WarbandRoute: React.FC<IControllerProp> = (prop) => {
     }, [state]);
 
     
-        const [show, setShow] = useState(true);
-    
-        const handleClose = () => setShow(true);
-        const handleShow = () => setShow(true);
+    const [show, setShow] = useState(true);
+
+    const handleClose = () => setShow(true);
+    const handleShow = () => setShow(true);
         
     // Return result -----------------------------
     return (
@@ -45,7 +48,10 @@ const WarbandRoute: React.FC<IControllerProp> = (prop) => {
             <div className="backgroundBaseColour">
                 <div key={_keyval} className="row justify-content-center m-0 p-0">
                     <Routes>                        
-                        <Route path={ROUTES.HOME_ROUTE} element={<ToolsSavedItem manager={prop.controller.UserWarbandManager} />} />
+                        <Route path={ROUTES.HOME_ROUTE} element={<WbbOverviewPage manager={prop.controller.UserWarbandManager} />} />
+                        <Route path={ROUTES.WBB_EDIT} element={<WbbEditPage manager={prop.controller.UserWarbandManager} />} />
+                        <Route path={ROUTES.WBB_NEW} element={<WbbCreateNewPage manager={prop.controller.UserWarbandManager} />} />
+                        {/*<Route path={ROUTES.HOME_ROUTE} element={<ToolsSavedItem manager={prop.controller.UserWarbandManager} />} />*/}
                     </Routes>
                     {/*<WarbandTestBlock />*/}
                 </div>

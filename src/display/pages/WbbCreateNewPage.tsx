@@ -5,8 +5,10 @@ import WbbWarbandListItem from "../components/warband-builder/WbbWarbandListItem
 import WbbFactionSelectItem from "../components/warband-builder/WbbFactionSelectItem";
 import {Button} from "react-bootstrap";
 import WbbCreateNewDetailsForm from "../components/warband-builder/WbbCreateNewDetailsForm";
+import { WarbandManager } from '../../classes/saveitems/Warband/WarbandManager';
 
-const WbbCreateNewPage = () => {
+const WbbCreateNewPage = (prop: any) => {
+    const Manager : WarbandManager = prop.manager;
 
     const [selectedFactionId, setSelectedFactionId] = useState<string | null>(null);
     const [selectedFactionName, setSelectedFactionName] = useState<string | null>(null);

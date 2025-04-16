@@ -11,7 +11,7 @@ const WbbEditView: React.FC = () => {
 
     /** Testing Data - @TODO: replace with actual warband Data */
     const warband = {
-        Name:   'Lorem Warband Name',
+        Name:   'Lorem Warband Name test',
         FactionName: 'The Iron Sultanate',
         CostDucats: 340,
         CostGlory: 4,
