@@ -4,6 +4,9 @@ import WbbWarbandListItem from "./WbbWarbandListItem";
 import WbbEditViewFighter from "./WbbEditViewFighter";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCopy, faPlus} from "@fortawesome/free-solid-svg-icons";
+import WbbEditViewStash from "./WbbEditViewStash";
+import WbbEditViewModifier from "./WbbEditViewModifier";
+import WbbEditViewExploration from "./WbbEditViewExploration";
 
 interface WbbEditViewProps {
     warbandData: IUserWarband;
@@ -190,7 +193,9 @@ const WbbEditView: React.FC = () => {
 
                 {/* Warband Ressources */}
                 <h3 className={'category-headline'}>Ressources</h3>
-
+                <WbbEditViewStash
+                    warband={warband}
+                />
 
                 {/* Warband Elites */}
                 <h3 className={'category-headline'}>Elites</h3>
@@ -253,6 +258,11 @@ const WbbEditView: React.FC = () => {
 
                 {/* Warband Modifiers */}
                 <h3 className={'category-headline'}>Modifiers</h3>
+                <WbbEditViewModifier
+                    warband={warband} index={123}
+                    activePopoverId={activePopoverId}
+                    setActivePopoverId={setActivePopoverId}
+                />
 
                 <div className={'btn btn-primary btn-block'}>
                     <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
@@ -262,10 +272,20 @@ const WbbEditView: React.FC = () => {
                 {/* Warband Exploration */}
                 <h3 className={'category-headline'}>Exploration</h3>
 
+                <WbbEditViewExploration
+                    warband={warband} index={123}
+                    activePopoverId={activePopoverId}
+                    setActivePopoverId={setActivePopoverId}
+                />
+
+                <div className={'btn btn-primary btn-block'}>
+                    <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
+                    {'Add Exploration'}
+                </div>
 
             </div>
         </div>
-        );
+    );
 };
 
 export default WbbEditView;

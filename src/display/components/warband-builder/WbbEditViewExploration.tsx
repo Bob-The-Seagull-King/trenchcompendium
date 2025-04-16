@@ -3,45 +3,33 @@ import {Button, Modal, OverlayTrigger, Popover} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCopy, faEllipsisVertical, faTrash, faXmark} from "@fortawesome/free-solid-svg-icons";
 
-
-/**
- * The Fighter Element in the Warband builder
- * @constructor
- */
-
-interface WbbEditViewFighterProps {
-    item: {
-        FighterName: string;
-        ModelName: string;
-        ModelId: string;
-        FighterTotalBaseDucats: number;
-        FighterTotalBaseGlory: number;
-        FighterTotalCostDucats: number;
-        FighterTotalCostGlory: number;
-        IsElite: boolean;
-        IsMercenary: boolean;
-        ExperiencePoints: number;
-        BattleScars: number;
-        Injuries: any;
-        Advancements: any;
-        Equipment: any;
-    };
+interface WbbEditViewExplorationProps {
+    warband: any;
     activePopoverId: string | null;
     setActivePopoverId: (id: string | null) => void;
     index: number;
 }
-const WbbEditViewFighter: React.FC<WbbEditViewFighterProps> = ({ item, activePopoverId, setActivePopoverId, index }) => {
+
+const WbbEditViewExploration: React.FC<WbbEditViewExplorationProps> = ({ warband, activePopoverId, setActivePopoverId, index }) => {
+
+    // @TODO: Test Data
+    const exploration = {
+        Name: 'Moonshine Stash',
+        Id: 'ex_moonshine_stash',
+        Choice: 'Distribute',
+        LocationType: 'Common Location'
+    };
 
     const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
 
-    const showPopover = activePopoverId === item.ModelId + index;
+    const showPopover = activePopoverId === exploration.Id + index;
     const togglePopover = () => {
-        setActivePopoverId(showPopover ? null : item.ModelId + index);
+        setActivePopoverId(showPopover ? null : exploration.Id + index);
     };
 
     /**
      * @TODO
-     * This copies the fighter
+     * This copies the Exploration Item
      */
     const handleCopy = () => {
         setActivePopoverId(null);
@@ -60,7 +48,7 @@ const WbbEditViewFighter: React.FC<WbbEditViewFighterProps> = ({ item, activePop
 
     /**
      * @TODO:
-     * Handles the confirmation to actually delete the fighter.
+     * Handles the confirmation to actually delete the Exploration Item
      */
     const handleConfirmDelete = () => {
         setShowDeleteConfirm(false);
@@ -74,23 +62,22 @@ const WbbEditViewFighter: React.FC<WbbEditViewFighterProps> = ({ item, activePop
         setShowDeleteConfirm(false);
     };
 
+
     return (
-        <div className="WbbEditViewFighter">
-            <div className={'model-name'}>
-                {item.ModelName}
-            </div>
-            <div className={'fighter-name'}>
-                {item.FighterName}
+        <div className="WbbEditViewExploration">
+            <div className={'exploration-name'}>
+                {exploration.Name}
             </div>
 
-            <div className={'cost-wrap'}>
-                {item.FighterTotalCostDucats > 0 &&
-                    <div className={'cost-ducats'}>{item.FighterTotalCostDucats + " Ducats"}</div>
-                }
-                {item.FighterTotalCostGlory > 0 &&
-                    <div className={'cost-Glory'}>{item.FighterTotalCostGlory + " Glory"}</div>
-                }
+            <div className={'exploration-location'}>
+                {exploration.LocationType}
             </div>
+
+            {exploration.Choice &&
+                <div className={'exploration-choice'}>
+                    {'Choice: '}{exploration.Choice}
+                </div>
+            }
 
             <div className={'actions'}>
                 <OverlayTrigger
@@ -111,7 +98,7 @@ const WbbEditViewFighter: React.FC<WbbEditViewFighterProps> = ({ item, activePop
                                     onClick={handleCopy}
                                 >
                                     <FontAwesomeIcon icon={faCopy} className="icon-inline-left-l"/>
-                                    {'Copy Fighter'}
+                                    {'Copy Exploration Location'}
                                 </div>
 
                                 <div
@@ -119,7 +106,7 @@ const WbbEditViewFighter: React.FC<WbbEditViewFighterProps> = ({ item, activePop
                                     onClick={handleDeleteClick}
                                 >
                                     <FontAwesomeIcon icon={faTrash} className="icon-inline-left-l"/>
-                                    {'Delete Fighter'}
+                                    {'Delete Exploration Location'}
                                 </div>
                             </div>
                         </Popover.Body>
@@ -146,12 +133,12 @@ const WbbEditViewFighter: React.FC<WbbEditViewFighterProps> = ({ item, activePop
 
                     <Modal.Body>
                         <p>
-                            <strong>{'Fighter Name: '}</strong>
-                            {item.ModelName + " " + item.FighterName}
+                            <strong>{'Exploration Location: '}</strong>
+                            {exploration.Name}
                         </p>
 
                         <p>
-                            Are you sure you want to delete this fighter? This action cannot be undone.
+                            Are you sure you want to delete this exploration location? This action cannot be undone.
                         </p>
                     </Modal.Body>
 
@@ -167,13 +154,8 @@ const WbbEditViewFighter: React.FC<WbbEditViewFighterProps> = ({ item, activePop
                 </Modal>
             </div>
 
-            <div className={'equipment-summary'}>
-            {/*  @TODO: generate a string with equipment starting with weapons, armor and equipment  */}
-                {'Jezzail, Trench Knife, Standard Armour, Alchemical Ammunition'}
-            </div>
-
         </div>
     );
 };
 
-export default WbbEditViewFighter;
+export default WbbEditViewExploration;
