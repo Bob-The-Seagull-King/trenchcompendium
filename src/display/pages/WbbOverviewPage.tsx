@@ -69,15 +69,18 @@ const WbbOverviewPage = (prop: any) => {
                     <h1>Your Warbands</h1>
 
                     
-                    <div className={'btn btn-primary btn-new-warband'} >
-                        <CustomNavLink runfunc={handleCreateNew} link={'/warband/new'}>
-                            <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
+                    <CustomNavLink
+                        classes={'btn btn-primary btn-new-warband'}
+                        runfunc={handleCreateNew}
+                        link={'/warband/new'}>
+                        <FontAwesomeIcon
+                            icon={faPlus}
+                            className="icon-inline-left-l"/>
 
-                            <span className={'new-warband-label'}>
-                                {'New Warband'}
-                            </span>
-                        </CustomNavLink>
-                    </div>
+                        <span className={'new-warband-label'}>
+                            {'New Warband'}
+                        </span>
+                    </CustomNavLink>
                 </div>
 
                 <div className={'row'}>
@@ -86,13 +89,16 @@ const WbbOverviewPage = (prop: any) => {
                     ))}
 
                     <div className={'col-12 col-md-6'}>
-                            <CustomNavLink runfunc={handleCreateNew} link={'/warband/new'}>
-                                <div className={'WbbWarbandListItem-new'} >
-                                    <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
-
-                                    {'New Warband'}
-                                </div>
-                            </CustomNavLink>
+                        <CustomNavLink
+                            runfunc={handleCreateNew}
+                            link={'/warband/new'}
+                            classes={'WbbWarbandListItem-new'}
+                        >
+                            <div className={'WbbWarbandListItem-new-inner'}>
+                                <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
+                                {'New Warband'}
+                            </div>
+                        </CustomNavLink>
                     </div>
                 </div>
             </div>

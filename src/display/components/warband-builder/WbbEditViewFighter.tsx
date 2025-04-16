@@ -1,42 +1,51 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
+import {Button, Modal, OverlayTrigger, Popover} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faBookOpen, faCopy, faEllipsisVertical, faPen, faTrash, faXmark} from "@fortawesome/free-solid-svg-icons";
-import { Modal, Button, OverlayTrigger, Popover } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import {faCopy, faEllipsisVertical, faTrash, faXmark} from "@fortawesome/free-solid-svg-icons";
 
 
 /**
- * This is a list item of a warband for the WBB overview page.
- * - It shows the name and infor about the warband
- * - Lets the user navigate to the edit screen for this warband
- * - show basic interactions like "rename" and "delete"
- *
+ * The Fighter Element in the Warband builder
  * @constructor
  */
 
-interface WbbWarbandListItemProps {
+interface WbbEditViewFighterProps {
     item: {
-        name: string;
-        synod_id: number;
-        faction_id: string;
-        faction_name: string;
-        value_ducats: number;
-        value_glory: number;
-        campaign_id?: number;
-        campaign_name?: string;
+        FighterName: string;
+        ModelName: string;
+        ModelId: string;
+        FighterTotalBaseDucats: number;
+        FighterTotalBaseGlory: number;
+        FighterTotalCostDucats: number;
+        FighterTotalCostGlory: number;
+        IsElite: boolean;
+        IsMercenary: boolean;
+        ExperiencePoints: number;
+        BattleScars: number;
+        Injuries: any;
+        Advancements: any;
+        Equipment: any;
     };
+    activePopoverId: string | null;
+    setActivePopoverId: (id: string | null) => void;
+    index: number;
 }
-const WbbWarbandListItem: React.FC<WbbWarbandListItemProps> = ({ item }) => {
-    const navigate = useNavigate();
-    const [showPopover, setShowPopover] = useState(false);
+const WbbEditViewFighter: React.FC<WbbEditViewFighterProps> = ({ item, activePopoverId, setActivePopoverId, index }) => {
+
     const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+
+
+    const showPopover = activePopoverId === item.ModelId + index;
+    const togglePopover = () => {
+        setActivePopoverId(showPopover ? null : item.ModelId + index);
+    };
 
     /**
      * @TODO
-     * This copies this warband
+     * This copies the fighter
      */
     const handleCopy = () => {
-        setShowPopover(false);
+        setActivePopoverId(null);
         alert('copy this item');
 
         return true;
@@ -46,15 +55,8 @@ const WbbWarbandListItem: React.FC<WbbWarbandListItemProps> = ({ item }) => {
      * Opens the delete confirmation modal
      */
     const handleDeleteClick = () => {
-        setShowPopover(false);
+        setActivePopoverId(null);
         setShowDeleteConfirm(true);
-    };
-
-    /**
-     * navigates to edit view
-     */
-    const navigateToEdit = () => {
-        navigate('/warband/edit/' + item.synod_id);
     };
 
     /**
@@ -73,35 +75,31 @@ const WbbWarbandListItem: React.FC<WbbWarbandListItemProps> = ({ item }) => {
         setShowDeleteConfirm(false);
     };
 
-
     return (
-        <div className={'col-12 col-md-6'}>
-            <div className={'WbbWarbandListItem'} onClick={navigateToEdit}>
-                <div className={'item-name'}>
-                    {item.name}
-                </div>
+        <div className="WbbEditViewFighter">
+            <div className={'model-name'}>
+                {item.ModelName}
+            </div>
+            <div className={'fighter-name'}>
+                {item.FighterName}
+            </div>
 
-                <div className={'item-faction'}>
-                    {item.faction_name}
-                </div>
+            <div className={'cost-wrap'}>
+                {item.FighterTotalCostDucats > 0 &&
+                    <div className={'cost-ducats'}>{item.FighterTotalCostDucats + " Ducats"}</div>
+                }
+                {item.FighterTotalCostGlory > 0 &&
+                    <div className={'cost-Glory'}>{item.FighterTotalCostGlory + " Glory"}</div>
+                }
+            </div>
 
-                <div className={'item-cost'}>
-                    {item.value_ducats + " Ducats" + " | " + item.value_glory + " Glory" }
-                </div>
-
-                <div className={'item-campaign'}>
-                    {item.campaign_name
-                        ? item.campaign_name
-                        : "No Campaign"
-                    }
-                </div>
-
+            <div className={'actions'}>
                 <OverlayTrigger
                     trigger="click"
                     placement="left"
                     show={showPopover}
-                    onToggle={() => setShowPopover(!showPopover)}
-                    rootClose={true} // closes when clicking outside
+                    onToggle={togglePopover}
+                    rootClose={true}
                     overlay={
                         <Popover.Body className="popover Wbb-item-actions-popover">
                             <div className='title'>
@@ -114,7 +112,7 @@ const WbbWarbandListItem: React.FC<WbbWarbandListItemProps> = ({ item }) => {
                                     onClick={handleCopy}
                                 >
                                     <FontAwesomeIcon icon={faCopy} className="icon-inline-left-l"/>
-                                    {'Copy Warband'}
+                                    {'Copy Fighter'}
                                 </div>
 
                                 <div
@@ -122,7 +120,7 @@ const WbbWarbandListItem: React.FC<WbbWarbandListItemProps> = ({ item }) => {
                                     onClick={handleDeleteClick}
                                 >
                                     <FontAwesomeIcon icon={faTrash} className="icon-inline-left-l"/>
-                                    {'Delete Warband'}
+                                    {'Delete Fighter'}
                                 </div>
                             </div>
                         </Popover.Body>
@@ -137,7 +135,7 @@ const WbbWarbandListItem: React.FC<WbbWarbandListItemProps> = ({ item }) => {
                     <Modal.Header
                         closeButton={false}
                     >
-                        <Modal.Title>Delete Warband</Modal.Title>
+                        <Modal.Title>Delete Fighter</Modal.Title>
 
                         <FontAwesomeIcon
                             icon={faXmark}
@@ -149,12 +147,12 @@ const WbbWarbandListItem: React.FC<WbbWarbandListItemProps> = ({ item }) => {
 
                     <Modal.Body>
                         <p>
-                            <strong>{'Warband Name: '}</strong>
-                            {item.name}
+                            <strong>{'Fighter Name: '}</strong>
+                            {item.ModelName + " " + item.FighterName}
                         </p>
 
                         <p>
-                            Are you sure you want to delete this warband? This action cannot be undone.
+                            Are you sure you want to delete this fighter? This action cannot be undone.
                         </p>
                     </Modal.Body>
 
@@ -169,9 +167,14 @@ const WbbWarbandListItem: React.FC<WbbWarbandListItemProps> = ({ item }) => {
                     </Modal.Footer>
                 </Modal>
             </div>
-        </div>
 
+            <div className={'equipment-summary'}>
+            {/*  @TODO: generate a string with equipment starting with weapons, armor and equipment  */}
+                {'Jezzail, Trench Knife, Standard Armour, Alchemical Ammunition'}
+            </div>
+
+        </div>
     );
 };
 
-export default WbbWarbandListItem;
+export default WbbEditViewFighter;

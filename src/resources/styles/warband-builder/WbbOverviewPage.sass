@@ -23,6 +23,7 @@
         position: absolute
         top: 36px // center vertical in currenty margins without fuzyy transform
         right: 0
+        color: $color-text
 
 
         @media(max-width: 380px)
@@ -35,9 +36,19 @@
 
 
     .WbbWarbandListItem-new
-        background-color: $color-highlight-bg-2-50
-        //border: 1px solid $color-highlight-bg-2
-
+        display: flex
+        justify-content: center
+        align-items: center
         padding: 20px
         margin-bottom: 30px
+        width: 100%
+        height: calc(100% - 30px)
+
+        background-color: $color-highlight-bg-2-50
+        color: $color-text
+        text-decoration: none
+        //border: 1px solid $color-highlight-bg-2
+
+        .WbbWarbandListItem-new-inner
+
 

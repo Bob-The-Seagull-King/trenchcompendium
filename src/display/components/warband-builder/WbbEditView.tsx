@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { UserWarband, IUserWarband } from '../../../classes/saveitems/Warband/UserWarband';
+import WbbWarbandListItem from "./WbbWarbandListItem";
+import WbbEditViewFighter from "./WbbEditViewFighter";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faCopy, faPlus} from "@fortawesome/free-solid-svg-icons";
 
 interface WbbEditViewProps {
     warbandData: IUserWarband;
@@ -18,10 +22,12 @@ const WbbEditView: React.FC = () => {
         MaxDucats: 700,
         MaxGlory: false,
         CampaignName: 'An awesome Campaign',
+        LocalId: '2025-04-11-lorem-warband-test',
+        SynodId: 222,
         CampaignId: 123,
         Models: [
             {
-                FighterName: 'Ipsum Fighter Name',
+                FighterName: 'Olaf',
                 ModelName: 'Jabirean Alchemist',
                 ModelId: 'rl_alchemists',
                 FighterTotalBaseDucats: 75,
@@ -29,6 +35,7 @@ const WbbEditView: React.FC = () => {
                 FighterTotalCostDucats: 102,
                 FighterTotalCostGlory: 2,
                 IsElite: true,
+                IsMercenary: false,
                 ExperiencePoints: 4,
                 BattleScars: 1,
                 Injuries: [
@@ -55,7 +62,7 @@ const WbbEditView: React.FC = () => {
                 ]
             },
             {
-                FighterName: 'Azeb Fighter Name',
+                FighterName: 'Olaf',
                 ModelName: 'Azeb',
                 ModelId: 'rl_azeb',
                 FighterTotalBaseDucats: 25,
@@ -63,6 +70,39 @@ const WbbEditView: React.FC = () => {
                 FighterTotalCostDucats: 35,
                 FighterTotalCostGlory: 0,
                 IsElite: false,
+                IsMercenary: false,
+                ExperiencePoints: 0,
+                BattleScars: 0,
+                Injuries: [
+                ],
+                Advancements: [
+
+                ],
+                Equipment: [
+                    {
+                        Name: 'Jezzail',
+                        CostDucats: 7,
+                        CostGlory: 0,
+                        Type: 'Ranged Weapon'
+                    },
+                    {
+                        Name: 'Alchemical Ammunition',
+                        CostDucats: 3,
+                        CostGlory: 0,
+                        Type: 'Equipment'
+                    }
+                ]
+            },
+            {
+                FighterName: 'Günther',
+                ModelName: 'Azeb',
+                ModelId: 'rl_azeb',
+                FighterTotalBaseDucats: 25,
+                FighterTotalBaseGlory: 0,
+                FighterTotalCostDucats: 35,
+                FighterTotalCostGlory: 0,
+                IsElite: false,
+                IsMercenary: false,
                 ExperiencePoints: 0,
                 BattleScars: 0,
                 Injuries: [
@@ -89,11 +129,11 @@ const WbbEditView: React.FC = () => {
 
     }
 
+    const [activePopoverId, setActivePopoverId] = useState<string | null>(null);
 
 
 
-
-        return (
+    return (
         <div className="WbbEditView">
             <div className={'container'}>
 
@@ -149,16 +189,78 @@ const WbbEditView: React.FC = () => {
                 </div>
 
                 {/* Warband Ressources */}
+                <h3 className={'category-headline'}>Ressources</h3>
+
 
                 {/* Warband Elites */}
+                <h3 className={'category-headline'}>Elites</h3>
+                {warband.Models.map((item, index) => (
+                    <>
+                        {item.IsElite &&
+                            <WbbEditViewFighter
+                                item={item} index={index}
+                                activePopoverId={activePopoverId}
+                                setActivePopoverId={setActivePopoverId}
+                            />
+                        }
+                    </>
+                ))}
+
+                <div className={'btn btn-primary btn-block'}>
+                    <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
+                    {'Add Elite'}
+                </div>
+
 
                 {/* Warband Troops */}
+                <h3 className={'category-headline'}>Troops</h3>
+                {warband.Models.map((item, index) => (
+                    <>
+                        {!item.IsElite &&
+                            <WbbEditViewFighter
+                                item={item} index={index}
+                                activePopoverId={activePopoverId}
+                                setActivePopoverId={setActivePopoverId}
+                            />
+                        }
+                    </>
+                ))}
+
+                <div className={'btn btn-primary btn-block'}>
+                    <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
+                    {'Add Troop'}
+                </div>
+
 
                 {/* Warband Mercenaries */}
+                <h3 className={'category-headline'}>Mercenaries</h3>
+                {warband.Models.map((item, index) => (
+                    <>
+                        {item.IsMercenary &&
+                            <WbbEditViewFighter
+                                item={item} index={index}
+                                activePopoverId={activePopoverId}
+                                setActivePopoverId={setActivePopoverId}
+                            />
+                        }
+                    </>
+                ))}
+
+                <div className={'btn btn-primary btn-block'}>
+                    <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
+                    {'Add Mercenary'}
+                </div>
 
                 {/* Warband Modifiers */}
+                <h3 className={'category-headline'}>Modifiers</h3>
+
+                <div className={'btn btn-primary btn-block'}>
+                    <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
+                    {'Add Modifier'}
+                </div>
 
                 {/* Warband Exploration */}
+                <h3 className={'category-headline'}>Exploration</h3>
 
 
             </div>
