@@ -50,7 +50,6 @@ const WarbandTestBlock = (prop: any) => {
             const Converted = warbandproperty?.ConvertToInterface();      
             if (Converted) {
                 const NewProperty : UserWarband = new UserWarband(Converted)
-                console.log(NewProperty)
             }
 
         }

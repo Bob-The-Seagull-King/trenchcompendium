@@ -221,11 +221,9 @@ class WarbandManager {
      * Recreates a copy of the item as a new item.
      */
     public async DuplicateItem(_Item : UserWarband) {  
-        console.log("Try Copy")      
         const NewMember : UserWarband = await WarbandFactory.CreateUserWarband((_Item.ConvertToInterface()));
-        console.log("Do Copy")      
         NewMember.Name = _Item.Name + " - Copy"
-        NewMember.ID = this.CalcID(_Item.Name + " - Copy");
+        NewMember.ID = this.CalcID(NewMember.Name);
         
         this.WarbandItemList.push(NewMember);
         this.SetStorage();
@@ -235,11 +233,14 @@ class WarbandManager {
      * Generates an ID based on upload time.
      */
     public CalcID(_name : string) {
-        const currentDate = new Date();
-        const milliseconds = currentDate.getMilliseconds();
-        
-        return _name + milliseconds.toString();
+        const milliseconds = Date.now();
+        const id =  WarbandManager.sanitizeString(_name + milliseconds.toString());
+        return id;
     }
+
+    public static sanitizeString(input: string): string {
+        return input.replace(/[^a-zA-Z0-9-_]/g, '');
+      }
 
     /**
      * Moves a content pack within the array
