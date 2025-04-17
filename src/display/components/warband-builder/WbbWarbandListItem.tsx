@@ -72,23 +72,25 @@ const WbbWarbandListItem: React.FC<WbbWarbandListItemProps> = ({ item, manager, 
 
     return (
         <div className={'col-12 col-md-6'}>
-            <div className={'WbbWarbandListItem'} onClick={navigateToEdit}>
-                <div className={'item-name'}>
-                    {item.Name}
-                </div>
+            <div className={'WbbWarbandListItem'} >
+                <div onClick={navigateToEdit}>
+                    <div className={'item-name'}>
+                        {item.Name}
+                    </div>
 
-                <div className={'item-faction'}>
-                    {(item.Faction.MyFaction)? item.Faction.MyFaction.SelfDynamicProperty.OptionChoice.Name : ""}
-                </div>
+                    <div className={'item-faction'}>
+                        {(item.Faction.MyFaction)? item.Faction.MyFaction.SelfDynamicProperty.OptionChoice.Name : ""}
+                    </div>
 
-                <div className={'item-cost'}>
-                    {item.Ducats + " Ducats" + " | " + item.Glory + " Glory" }
-                </div>
+                    <div className={'item-cost'}>
+                        {item.Ducats + " Ducats" + " | " + item.Glory + " Glory" }
+                    </div>
 
-                <div className={'item-campaign'}>
-                    {
-                        item.GetCampaignName()
-                    }
+                    <div className={'item-campaign'}>
+                        {
+                            item.GetCampaignName()
+                        }
+                    </div>
                 </div>
 
                 <OverlayTrigger
