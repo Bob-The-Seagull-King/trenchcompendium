@@ -1,65 +1,58 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
+import {Button, Modal, OverlayTrigger, Popover} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faBookOpen, faCopy, faEllipsisVertical, faPen, faTrash, faXmark} from "@fortawesome/free-solid-svg-icons";
-import { Modal, Button, OverlayTrigger, Popover } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
-import { UserWarband } from '../../../classes/saveitems/Warband/UserWarband';
-import { WarbandManager } from '../../../classes/saveitems/Warband/WarbandManager';
+import {faCopy, faEllipsisVertical, faTrash, faXmark} from "@fortawesome/free-solid-svg-icons";
 
-
-/**
- * This is a list item of a warband for the WBB overview page.
- * - It shows the name and infor about the warband
- * - Lets the user navigate to the edit screen for this warband
- * - show basic interactions like "rename" and "delete"
- *
- * @constructor
- */
-
-interface WbbWarbandListItemProps {
-    item: UserWarband
-    manager : WarbandManager
-    parentfunc : any
+interface WbbEditViewExplorationProps {
+    warband: any;
+    activePopoverId: string | null;
+    setActivePopoverId: (id: string | null) => void;
+    index: number;
 }
-const WbbWarbandListItem: React.FC<WbbWarbandListItemProps> = ({ item, manager, parentfunc }) => {
-    const navigate = useNavigate();
-    const [showPopover, setShowPopover] = useState(false);
+
+const WbbEditViewExploration: React.FC<WbbEditViewExplorationProps> = ({ warband, activePopoverId, setActivePopoverId, index }) => {
+
+    // @TODO: Test Data
+    const exploration = {
+        Name: 'Moonshine Stash',
+        Id: 'ex_moonshine_stash',
+        Choice: 'Distribute',
+        LocationType: 'Common Location'
+    };
+
     const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+
+    const showPopover = activePopoverId === exploration.Id + index;
+    const togglePopover = () => {
+        setActivePopoverId(showPopover ? null : exploration.Id + index);
+    };
 
     /**
      * @TODO
-     * This copies this warband
+     * This copies the Exploration Item
      */
-    async function handleCopy() {
-        setShowPopover(false);
-        await manager.DuplicateItem(item);
-        parentfunc();
+    const handleCopy = () => {
+        setActivePopoverId(null);
+        alert('copy this item');
+
         return true;
-    }
+    };
 
     /**
      * Opens the delete confirmation modal
      */
     const handleDeleteClick = () => {
-        setShowPopover(false);
+        setActivePopoverId(null);
         setShowDeleteConfirm(true);
     };
 
     /**
-     * navigates to edit view
-     */
-    const navigateToEdit = () => {
-        navigate('/warband/edit/' + item.ID);
-    };
-
-    /**
      * @TODO:
-     * Handles the confirmation to actually delete the warband.
+     * Handles the confirmation to actually delete the Exploration Item
      */
     const handleConfirmDelete = () => {
         setShowDeleteConfirm(false);
-        manager.DeletePack(item);
-        parentfunc();
+        alert('item deleted (backend hook here)');
     };
 
     /**
@@ -71,32 +64,28 @@ const WbbWarbandListItem: React.FC<WbbWarbandListItemProps> = ({ item, manager, 
 
 
     return (
-        <div className={'col-12 col-md-6'}>
-            <div className={'WbbWarbandListItem'} onClick={navigateToEdit}>
-                <div className={'item-name'}>
-                    {item.Name}
-                </div>
+        <div className="WbbEditViewExploration">
+            <div className={'exploration-name'}>
+                {exploration.Name}
+            </div>
 
-                <div className={'item-faction'}>
-                    {(item.Faction.MyFaction)? item.Faction.MyFaction.SelfDynamicProperty.OptionChoice.Name : ""}
-                </div>
+            <div className={'exploration-location'}>
+                {exploration.LocationType}
+            </div>
 
-                <div className={'item-cost'}>
-                    {item.Ducats + " Ducats" + " | " + item.Glory + " Glory" }
+            {exploration.Choice &&
+                <div className={'exploration-choice'}>
+                    {'Choice: '}{exploration.Choice}
                 </div>
+            }
 
-                <div className={'item-campaign'}>
-                    {
-                        item.GetCampaignName()
-                    }
-                </div>
-
+            <div className={'actions'}>
                 <OverlayTrigger
                     trigger="click"
                     placement="left"
                     show={showPopover}
-                    onToggle={() => setShowPopover(!showPopover)}
-                    rootClose={true} // closes when clicking outside
+                    onToggle={togglePopover}
+                    rootClose={true}
                     overlay={
                         <Popover.Body className="popover Wbb-item-actions-popover">
                             <div className='title'>
@@ -109,7 +98,7 @@ const WbbWarbandListItem: React.FC<WbbWarbandListItemProps> = ({ item, manager, 
                                     onClick={handleCopy}
                                 >
                                     <FontAwesomeIcon icon={faCopy} className="icon-inline-left-l"/>
-                                    {'Copy Warband'}
+                                    {'Copy Exploration Location'}
                                 </div>
 
                                 <div
@@ -117,7 +106,7 @@ const WbbWarbandListItem: React.FC<WbbWarbandListItemProps> = ({ item, manager, 
                                     onClick={handleDeleteClick}
                                 >
                                     <FontAwesomeIcon icon={faTrash} className="icon-inline-left-l"/>
-                                    {'Delete Warband'}
+                                    {'Delete Exploration Location'}
                                 </div>
                             </div>
                         </Popover.Body>
@@ -132,7 +121,7 @@ const WbbWarbandListItem: React.FC<WbbWarbandListItemProps> = ({ item, manager, 
                     <Modal.Header
                         closeButton={false}
                     >
-                        <Modal.Title>Delete Warband</Modal.Title>
+                        <Modal.Title>Delete Fighter</Modal.Title>
 
                         <FontAwesomeIcon
                             icon={faXmark}
@@ -144,12 +133,12 @@ const WbbWarbandListItem: React.FC<WbbWarbandListItemProps> = ({ item, manager, 
 
                     <Modal.Body>
                         <p>
-                            <strong>{'Warband Name: '}</strong>
-                            {item.Name}
+                            <strong>{'Exploration Location: '}</strong>
+                            {exploration.Name}
                         </p>
 
                         <p>
-                            Are you sure you want to delete this warband? This action cannot be undone.
+                            Are you sure you want to delete this exploration location? This action cannot be undone.
                         </p>
                     </Modal.Body>
 
@@ -164,9 +153,9 @@ const WbbWarbandListItem: React.FC<WbbWarbandListItemProps> = ({ item, manager, 
                     </Modal.Footer>
                 </Modal>
             </div>
-        </div>
 
+        </div>
     );
 };
 
-export default WbbWarbandListItem;
+export default WbbEditViewExploration;
