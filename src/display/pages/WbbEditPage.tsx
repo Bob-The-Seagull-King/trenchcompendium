@@ -29,6 +29,7 @@ const WbbEditPage = (prop: any) => {
         <div className={'WbbEditPage'} key={keyval}>
             <WbbEditView
                 warbandData={_currentItem}
+                manager={Manager}
             />
         </div>
     );
