@@ -57,6 +57,7 @@ const WbbCreateNewDetailsForm: React.FC<{
                         className="form-control" type={"number"}
                         value={ducatsLimit}
                         onChange={(e) => setducatsLimit(parseInt( e.target.value))}
+                        onFocus={(e) => e.target.select()}
                         placeholder=""
                     />
                     <span className="input-group-text">Ducats</span>
@@ -71,6 +72,7 @@ const WbbCreateNewDetailsForm: React.FC<{
                         className="form-control" type={"number"}
                         value={gloryLimit}
                         onChange={(e) => setgloryLimit(parseInt(e.target.value))}
+                        onFocus={(e) => e.target.select()}
                         placeholder=""
                     />
                     <span className="input-group-text">Glory</span>
