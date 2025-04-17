@@ -253,7 +253,7 @@ class UserWarband extends DynamicContextObject {
                 FighterTotalCostGlory: 0,
                 IsElite: false,
                 IsMercenary: false,
-                ExperiencePoints: 0,
+                ExperiencePoints: 10,
                 BattleScars: 0,
                 Injuries: [
                 ],

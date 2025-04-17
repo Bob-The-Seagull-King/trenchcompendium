@@ -1,10 +1,12 @@
 import React, {useState} from 'react';
 import WbbEditViewFighter from "./WbbEditViewFighter";
-import {faChevronLeft, faCopy, faPlus} from "@fortawesome/free-solid-svg-icons";
+import {faCheck, faChevronLeft, faCopy, faPen, faPlus, faSkull, faTimes} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import ItemStat from "../subcomponents/description/ItemStat";
 import WbbEquipmentListItem from "./WbbEquipmentListItem";
 import WbbFighterCollapse from "./WbbFighterCollapse";
+import WbbEditViewAdvancement from "./WbbEditViewAdvancement";
+import WbbEditViewInjury from "./WbbEditViewInjury";
 
 
 interface WbbFighterDetailViewProps {
@@ -50,6 +52,35 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
         ModifiersString: '+1D to ranged attack Rolls',
         Id: 'eq_alch_ammo',
     }
+    const boldXpIndices = [2, 4, 7, 10, 14, 18];
+
+    const Injuries = [
+        {
+            Name: 'Muscle Damage',
+            Description: 'This model cannot carry HEAVY weapons',
+            Table: 'Elites Injury Chart',
+            Id: 'inj_muscle_damage',
+            Number: 34
+        },
+        {
+            Name: 'Insomniac',
+            Description: 'This character must always be deployed as the first model on your side in any battle it takes part in. It cannot use the Keyword INFILTRATOR if it has it.',
+            Table: 'Elites Injury Chart',
+            Id: 'inj_insomniac',
+            Number: 21
+        }
+    ];
+
+    const Advancements = [
+        {
+            Name: 'Hunter',
+            Description: 'This model ignores all penalties from Cover when making a ranged attack.',
+            Table: 'Ranged Skills',
+            Id: 'adv_hunter',
+            Number: 3
+        }
+    ]
+
 
     return (
         <div className="WbbFighterDetailView fighter-card">
@@ -152,7 +183,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
 
             {/* Edit Loadout */}
             <div className={'fighter-card-collapse-wrap'}>
-                <WbbFighterCollapse title="Equipment">
+                <WbbFighterCollapse title="Equipment" initiallyOpen={true}>
                     <p> {/* Equipment Rules */}
                         <strong>Equipment: </strong>
                         {'The Alchemist can be equipped with any weapon, armour and equipment from the Iron Sultanate Armoury'}
@@ -226,14 +257,71 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
                 <WbbFighterCollapse title="Campaign Play">
                     <h3>{'Experience'}</h3>
 
+                    <div className={'xp-boxes'}>
+                        {Array.from({length: 18}, (_, i) => {
+                            const level = i + 1;
+                            const isBold = boldXpIndices.includes(level);
+                            const hasXP = level <= fighter.ExperiencePoints;
+
+                            return (
+                                <div
+                                    key={level}
+                                    className={`xp-box${isBold ? ' xp-box-bold' : ''}`}
+                                >
+                                    {hasXP && <FontAwesomeIcon icon={faCheck}/>}
+                                </div>
+                            );
+                        })}
+                    </div>
+
                     <h3>{'Battle Scars'}</h3>
+                    <div className="battle-scar-boxes">
+                        {Array.from({length: 3}, (_, i) => {
+                            const index = i + 1;
+                            const isChecked = index <= fighter.BattleScars;
+                            const isSkull = index === 3;
+
+                            return (
+                                <div key={index} className="battle-scar-box">
+                                    {isSkull &&
+                                        <FontAwesomeIcon icon={faSkull} className={'skull-icon'}/>
+                                    }
+                                    {isChecked &&
+                                        <FontAwesomeIcon icon={faTimes}/>
+                                    }
+                                </div>
+                            );
+                        })}
+                    </div>
 
                     <h3>{'Advancements'}</h3>
+                    {Advancements.map((advancement) => (
+                        <WbbEditViewAdvancement advancement={advancement} key={advancement.Id}/>
+                    ))}
+
 
                     <h3>{'Injuries'}</h3>
+                    {Injuries.map((injury) => (
+                        <WbbEditViewInjury injury={injury} key={injury.Id} />
+                    ))}
 
+                    {/*
+                    - Active
+                    - Captured
+                    - Dead
+                    */}
                     <h3>{'Fighter Status'}</h3>
+                    <div className={'fighter-status'}>
+                        <div className={'fighter-status-string'}>
+                            {'Active'}
+                        </div>
 
+                        <div className={'btn btn-primary'}>
+                            <FontAwesomeIcon icon={faPen} className={'icon-inline-left-l'}/>
+
+                            {'Change'}
+                        </div>
+                    </div>
 
                 </WbbFighterCollapse>
 
