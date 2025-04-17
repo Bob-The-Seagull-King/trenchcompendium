@@ -119,10 +119,163 @@ class UserWarband extends DynamicContextObject {
     }
 
     /**
-     * TODO
+     * Returns the Name of the Warband as string
+     */
+    public GetWarbandName () {
+        return this.Name;
+    }
+
+    /**
+     * Returns the Name of the Faction as string
+     */
+    public GetFactionName () {
+        return this.Faction.Name;
+    }
+
+    /**
+     * Returns the Ducats Value of the Warband Cost as int
+     */
+    public GetCostDucats() {
+        return this.Ducats;
+    }
+
+    /**
+     * Returns the Max Ducats Value of the Warband int
+     */
+    public GetMaxDucats() {
+        return this.Ducats;
+    }
+
+    /**
+     * Returns the Glory Value of the Warband Cost as int
+     */
+    public GetCostGlory() {
+        return this.Glory;
+    }
+
+    /**
+     * Returns the Max Glory Value of the Warband int
+     */
+    public GetMaxGlory() {
+        return this.Glory;
+    }
+
+    /**
+     * Returns the name of the associated campaign for this warband if any exists
      */
     public GetCampaignName() {
-        return "No Campaign"
+        return 'No Campaign';
+    }
+
+
+    /**
+     * Get the Fighters for this warbands
+     */
+    public GetFighters() {
+
+
+        /** Test Data */ // @TODO
+        return [
+            {
+                FighterName: 'Olaf',
+                ModelName: 'Jabirean Alchemist',
+                ModelId: 'rl_alchemists',
+                FighterBaseDucats: 75,
+                FighterBaseGlory: 0,
+                FighterTotalCostDucats: 102,
+                FighterTotalCostGlory: 2,
+                IsElite: true,
+                IsMercenary: false,
+                ExperiencePoints: 4,
+                BattleScars: 1,
+                Injuries: [
+                    {
+                        Name: 'Hand Wound',
+                        Description: 'The character suffers -1 DICE for all of its melee attack ACTIONS.',
+                        InjuryId: 'in_hand_wound'
+                    }
+                ],
+                Advancements: [
+                    {
+                        Name: 'Stand Firm',
+                        Description: 'This model treats the first Down result it suffers each battle as a Minor Hit.',
+                        InjuryId: 'sk_standfirm',
+                    }
+                ],
+                Equipment: [
+                    {
+                        Name: 'Siege Jezzail',
+                        CostDucats: 30,
+                        CostGlory: 0,
+                        Type: 'Ranged Weapon'
+                    }
+                ]
+            },
+            {
+                FighterName: 'Olaf',
+                ModelName: 'Azeb',
+                ModelId: 'rl_azeb',
+                FighterBaseDucats: 25,
+                FighterBaseGlory: 0,
+                FighterTotalCostDucats: 35,
+                FighterTotalCostGlory: 0,
+                IsElite: false,
+                IsMercenary: false,
+                ExperiencePoints: 0,
+                BattleScars: 0,
+                Injuries: [
+                ],
+                Advancements: [
+
+                ],
+                Equipment: [
+                    {
+                        Name: 'Jezzail',
+                        CostDucats: 7,
+                        CostGlory: 0,
+                        Type: 'Ranged Weapon'
+                    },
+                    {
+                        Name: 'Alchemical Ammunition',
+                        CostDucats: 3,
+                        CostGlory: 0,
+                        Type: 'Equipment'
+                    }
+                ]
+            },
+            {
+                FighterName: 'Günther',
+                ModelName: 'Azeb',
+                ModelId: 'rl_azeb',
+                FighterBaseDucats: 25,
+                FighterBaseGlory: 0,
+                FighterTotalCostDucats: 35,
+                FighterTotalCostGlory: 0,
+                IsElite: false,
+                IsMercenary: false,
+                ExperiencePoints: 0,
+                BattleScars: 0,
+                Injuries: [
+                ],
+                Advancements: [
+
+                ],
+                Equipment: [
+                    {
+                        Name: 'Jezzail',
+                        CostDucats: 7,
+                        CostGlory: 0,
+                        Type: 'Ranged Weapon'
+                    },
+                    {
+                        Name: 'Alchemical Ammunition',
+                        CostDucats: 3,
+                        CostGlory: 0,
+                        Type: 'Equipment'
+                    }
+                ]
+            }
+        ];
     }
 
 }
