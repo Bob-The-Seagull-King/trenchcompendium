@@ -1,23 +1,38 @@
+import { useNavigate } from 'react-router-dom';
+import { WarbandManager } from '../../../classes/saveitems/Warband/WarbandManager';
 import React, { useState } from 'react';
+import { UserWarband } from '../../../classes/saveitems/Warband/UserWarband';
+import { Faction } from '../../../classes/feature/faction/Faction';
 
 const WbbCreateNewDetailsForm: React.FC<{
-    factionId: string;
-    factionName: string | null;
+    chosenfaction : Faction
     onBack: () => void;
-}> = ({ factionId, onBack, factionName }) => {
+    manager: WarbandManager;
+}> = ({ chosenfaction, onBack, manager }) => {
+    const navigate = useNavigate();
 
     const [warbandName, setWarbandName] = useState('');
-    const [ducatsLimit, setducatsLimit] = useState('');
-    const [gloryLimit, setgloryLimit] = useState('');
+    const [ducatsLimit, setducatsLimit] = useState(0);
+    const [gloryLimit, setgloryLimit] = useState(0);
 
-    const handleSubmit = () => {
-        //@TODO handle backend request here
-        alert(`Creating warband "${warbandName}" for ${factionName} as faction_id ${factionId}`);
-    };
+    async function handleSubmit() {
+        const msg : null | UserWarband = await manager.NewItem(warbandName, chosenfaction.ID, {
+            id : "null",
+            limit_ducat: ducatsLimit,
+            limit_model: gloryLimit,
+            value_ducat: ducatsLimit,
+            value_glory: gloryLimit
+        })
+        if (msg == null) {
+            alert("Warband creation was unsuccessful");
+        } else {
+            navigate('/warband/edit/' + msg.ID);
+        }
+    }
 
     return (
         <div className={'WbbCreateNewDetailsForm'}>
-            <h3 className={'mb-3'}>Faction: {factionName}</h3>
+            <h3 className={'mb-3'}>Faction: {chosenfaction.Name}</h3>
 
             <p>
                 {'Please enter your warbands details below. You can change these settings in the Warband Builder at any point.'}
@@ -41,7 +56,7 @@ const WbbCreateNewDetailsForm: React.FC<{
                     <input
                         className="form-control" type={"number"}
                         value={ducatsLimit}
-                        onChange={(e) => setducatsLimit(e.target.value)}
+                        onChange={(e) => setducatsLimit(parseInt( e.target.value))}
                         placeholder=""
                     />
                     <span className="input-group-text">Ducats</span>
@@ -55,7 +70,7 @@ const WbbCreateNewDetailsForm: React.FC<{
                     <input
                         className="form-control" type={"number"}
                         value={gloryLimit}
-                        onChange={(e) => setgloryLimit(e.target.value)}
+                        onChange={(e) => setgloryLimit(parseInt(e.target.value))}
                         placeholder=""
                     />
                     <span className="input-group-text">Glory</span>

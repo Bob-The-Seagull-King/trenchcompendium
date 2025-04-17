@@ -1,43 +1,42 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
-
-export interface FactionItem {
-    name: string;
-    faction_id: string;
-    sub_factions?: FactionItem[];
-}
+import { FactionCollection } from '../../../classes/feature/faction/FactionCollection';
+import { Faction } from '../../../classes/feature/faction/Faction';
 
 interface WbbFactionSelectItemProps {
-    item: FactionItem;
-    selectedFactionId: string | null;
-    onSelect: (id: string, name: string) => void;
+    item?: FactionCollection;
+    trueitem : Faction;
+    selectedFaction: Faction | null;
+    onSelect: (fac : Faction) => void;
 }
-const WbbFactionSelectItem: React.FC<WbbFactionSelectItemProps> = ({ item, selectedFactionId, onSelect }) => {
-    const isSelected = selectedFactionId === item.faction_id;
+const WbbFactionSelectItem: React.FC<WbbFactionSelectItemProps> = ({ item, trueitem, selectedFaction, onSelect }) => {
+    const isSelected = (selectedFaction != null) && selectedFaction.ID === trueitem.ID;
 
     return (
         <div className="WbbFactionSelectItem">
             <div
                 className={`faction-item ${isSelected ? 'selected' : ''}`}
-                onClick={() => onSelect(item.faction_id, item.name)}
+                onClick={() => onSelect(trueitem)}
             >
-                {item.name}
+                {trueitem.Name}
 
                 {isSelected && (
                     <FontAwesomeIcon icon={faCheck} className="icon-inline-left-l" />
                 )}
             </div>
 
-            {item.sub_factions && item.sub_factions.length > 0 &&
-                item.sub_factions.map((sub_item) => (
+            {item != undefined &&
+            <>
+            {item.SubModelsList.filter((facvar) => (facvar.var_name != "base")).length > 0 &&
+                item.SubModelsList.filter((facvar) => (facvar.var_name != "base")).map((sub_item) => (
                     <WbbFactionSelectItem
-                        key={sub_item.faction_id}
-                        item={sub_item}
-                        selectedFactionId={selectedFactionId}
+                        key={sub_item.faction.ID}
+                        trueitem={sub_item.faction}
+                        selectedFaction={selectedFaction}
                         onSelect={onSelect}
                     />
-                ))}
+                ))}</>}
         </div>
     );
 };

@@ -36,7 +36,7 @@ const App: React.FC = () => {
     const InitializeContentState = useContentPackStore((state) => state.SetFromCookies)
     InitializeContentState();
 
-    const compendiumcontroller = new ControllerController();
+    const compendiumcontroller = ControllerController.getInstance();
     const toolcontroller = new ToolsController();
 
     /** Theme Settings */

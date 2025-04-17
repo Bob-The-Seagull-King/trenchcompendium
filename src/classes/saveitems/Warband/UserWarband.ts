@@ -118,6 +118,13 @@ class UserWarband extends DynamicContextObject {
         return this.Faction.MyPatron;
     }
 
+    /**
+     * TODO
+     */
+    public GetCampaignName() {
+        return "No Campaign"
+    }
+
 }
 
 export {IUserWarband, UserWarband}

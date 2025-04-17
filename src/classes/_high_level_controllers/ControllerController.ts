@@ -6,6 +6,9 @@ import { CollectionsListPage } from "./../viewmodel/pages/CollectionListPage"
  * its own controller.
  */
 class ControllerController {
+
+    
+    private static instance: ControllerController;
    
     GlossaryCollectionController;
     KeywordCollectionController;
@@ -37,7 +40,14 @@ class ControllerController {
         this.InjuryCollectionController = new CollectionsListPage('injury');
         this.SkillGroupCollectionController = new CollectionsListPage('skillgroup');
         this.PatronCollectionController = new CollectionsListPage('patron');
-    }
+    }    
+
+    public static getInstance(): ControllerController {
+        if (!ControllerController.instance) {
+            ControllerController.instance = new ControllerController();
+        }
+        return ControllerController.instance;
+      }
 }
 
 export {ControllerController}

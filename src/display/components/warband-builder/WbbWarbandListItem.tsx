@@ -3,6 +3,8 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faBookOpen, faCopy, faEllipsisVertical, faPen, faTrash, faXmark} from "@fortawesome/free-solid-svg-icons";
 import { Modal, Button, OverlayTrigger, Popover } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { UserWarband } from '../../../classes/saveitems/Warband/UserWarband';
+import { WarbandManager } from '../../../classes/saveitems/Warband/WarbandManager';
 
 
 /**
@@ -15,18 +17,11 @@ import { useNavigate } from 'react-router-dom';
  */
 
 interface WbbWarbandListItemProps {
-    item: {
-        name: string;
-        synod_id: number;
-        faction_id: string;
-        faction_name: string;
-        value_ducats: number;
-        value_glory: number;
-        campaign_id?: number;
-        campaign_name?: string;
-    };
+    item: UserWarband
+    manager : WarbandManager
+    parentfunc : any
 }
-const WbbWarbandListItem: React.FC<WbbWarbandListItemProps> = ({ item }) => {
+const WbbWarbandListItem: React.FC<WbbWarbandListItemProps> = ({ item, manager, parentfunc }) => {
     const navigate = useNavigate();
     const [showPopover, setShowPopover] = useState(false);
     const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
@@ -35,12 +30,12 @@ const WbbWarbandListItem: React.FC<WbbWarbandListItemProps> = ({ item }) => {
      * @TODO
      * This copies this warband
      */
-    const handleCopy = () => {
+    async function handleCopy() {
         setShowPopover(false);
-        alert('copy this item');
-
+        await manager.DuplicateItem(item);
+        parentfunc();
         return true;
-    };
+    }
 
     /**
      * Opens the delete confirmation modal
@@ -54,7 +49,7 @@ const WbbWarbandListItem: React.FC<WbbWarbandListItemProps> = ({ item }) => {
      * Opens the delete confirmation modal
      */
     const handleEditClick = () => {
-        navigate('/warband/edit/' + item.synod_id);
+        navigate('/warband/edit/' + item.ID);
     };
 
     /**
@@ -63,7 +58,8 @@ const WbbWarbandListItem: React.FC<WbbWarbandListItemProps> = ({ item }) => {
      */
     const handleConfirmDelete = () => {
         setShowDeleteConfirm(false);
-        alert('item deleted (backend hook here)');
+        manager.DeletePack(item);
+        parentfunc();
     };
 
     /**
@@ -78,21 +74,20 @@ const WbbWarbandListItem: React.FC<WbbWarbandListItemProps> = ({ item }) => {
         <div className={'col-12 col-md-6'}>
             <div className={'WbbWarbandListItem'}>
                 <div className={'item-name'}>
-                    {item.name}
+                    {item.Name}
                 </div>
 
                 <div className={'item-faction'}>
-                    {item.faction_name}
+                    {(item.Faction.MyFaction)? item.Faction.MyFaction.SelfDynamicProperty.OptionChoice.Name : ""}
                 </div>
 
                 <div className={'item-cost'}>
-                    {item.value_ducats + " Ducats" + " | " + item.value_glory + " Glory" }
+                    {item.Ducats + " Ducats" + " | " + item.Glory + " Glory" }
                 </div>
 
                 <div className={'item-campaign'}>
-                    {item.campaign_name
-                        ? item.campaign_name
-                        : "No Campaign"
+                    {
+                        item.GetCampaignName()
                     }
                 </div>
 
@@ -158,7 +153,7 @@ const WbbWarbandListItem: React.FC<WbbWarbandListItemProps> = ({ item }) => {
                     <Modal.Body>
                         <p>
                             <strong>{'Warband Name: '}</strong>
-                            {item.name}
+                            {item.Name}
                         </p>
 
                         <p>

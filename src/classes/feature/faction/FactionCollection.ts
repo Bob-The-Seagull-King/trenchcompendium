@@ -100,6 +100,15 @@ class FactionCollection extends StaticContextObject {
         }
     }
 
+    public GetBaseFac() {
+        for (let i = 0; i < this.SubModelsList.length; i++) {
+            if (this.SubModelsList[i].var_name == 'base') {
+                return this.SubModelsList[i].faction;
+            }
+        }
+        return this.SubModelsList[0].faction;
+    }
+
 }
 
 export {IVariantFaction, FactionCollection}

@@ -165,10 +165,9 @@ class WarbandManager {
      * Builds a new item and saves it to the browser
      */
     public async NewItem(_title : string, fact_id : string, self_context: IWarbandContextItem) {
-        const msg = ""
 
         if (_title.trim().length <= 0) {
-            return "The Item must have a Title";
+            return null;
         }
 
         const _Item : IUserWarband = {
@@ -211,18 +210,20 @@ class WarbandManager {
             models : [],
             equipment : [],
         }
-
-        this.WarbandItemList.push(await WarbandFactory.CreateUserWarband(_Item))
+        const new_item : UserWarband = await WarbandFactory.CreateUserWarband(_Item)
+        this.WarbandItemList.push(new_item)
         this.SetStorage();
 
-        return msg;
+        return new_item;
     }
 
     /**
      * Recreates a copy of the item as a new item.
      */
-    public DuplicateItem(_Item : UserWarband) {        
-        const NewMember : UserWarband = new UserWarband(_Item.ConvertToInterface());
+    public async DuplicateItem(_Item : UserWarband) {  
+        console.log("Try Copy")      
+        const NewMember : UserWarband = await WarbandFactory.CreateUserWarband((_Item.ConvertToInterface()));
+        console.log("Do Copy")      
         NewMember.Name = _Item.Name + " - Copy"
         NewMember.ID = this.CalcID(_Item.Name + " - Copy");
         

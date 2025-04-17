@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import WbbWarbandListItem from "../components/warband-builder/WbbWarbandListItem";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCopy, faPlus} from "@fortawesome/free-solid-svg-icons";
 import {useNavigate} from "react-router-dom";
 import { WarbandManager } from '../../classes/saveitems/Warband/WarbandManager';
 import CustomNavLink from '../components/subcomponents/interactables/CustomNavLink';
+import { UserWarband } from '../../classes/saveitems/Warband/UserWarband';
 
 
 /**
@@ -18,38 +19,23 @@ const WbbOverviewPage = (prop: any) => {
     const Manager : WarbandManager = prop.manager;
     const navigate = useNavigate();
 
-    // These are warband items for testing the Markup
-    // - Once the warband data is available these can be removed
-    const testing_items = [
-        {
-            name: "The Iron Capirotes",
-            synod_id: 122,
-            faction_id: "fc_trenchpilgrim",
-            faction_name: "Trench Pilgrims",
-            value_ducats: 749,
-            value_glory: 2,
-            campaign_id: 123,
-            campaign_name: "Ipsum campaign name",
-        },
-        {
-            name: "The Iron Capirotes v2",
-            synod_id: 123,
-            faction_id: "fc_trenchpilgrim",
-            faction_name: "Trench Pilgrims",
-            value_ducats: 799,
-            value_glory: 0,
-        },
-        {
-            name: "Assassins are cool",
-            synod_id: 124,
-            faction_id: "fc_ironsultanate_fv_fidaiofalamut",
-            faction_name: "Fida’i of Alamut – The Cabal of Assassins",
-            value_ducats: 749,
-            value_glory: 2,
-            campaign_id: 123,
-            campaign_name: "Dolor sit the cool campaign name",
+    const [allwarbands, setwarbands] = useState<UserWarband[]>([])
+    const [keyvar, setkeyvar] = useState(0);
+    
+    useEffect(() => {
+        async function SetWarbands() {
+            await Manager.GetItemsAll();
+            setwarbands(Manager.WarbandItemList);
+            setkeyvar((prev) => prev + 1);
         }
-    ];
+
+        SetWarbands();
+    }, []);
+
+    function updateSelf() {
+        Manager.SetStorage();
+        setkeyvar((prev) => prev + 1);
+    }
 
     /**
      * Navigates to create new WB Screen
@@ -58,9 +44,6 @@ const WbbOverviewPage = (prop: any) => {
         navigate('/warband/new');
 
     };
-
-
-
 
     return (
         <div className={'WbbOverviewPage'}>
@@ -80,9 +63,9 @@ const WbbOverviewPage = (prop: any) => {
                     </div>
                 </div>
 
-                <div className={'row'}>
-                    {testing_items.map(item => (
-                        <WbbWarbandListItem key={item.synod_id} item={item} />
+                <div className={'row'} key={keyvar}>
+                    {allwarbands.map(item => (
+                        <WbbWarbandListItem key={item.ID} item={item} manager={Manager} parentfunc={updateSelf}/>
                     ))}
 
                     <div className={'col-12 col-md-6'}>

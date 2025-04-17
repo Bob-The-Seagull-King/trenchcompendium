@@ -57,8 +57,8 @@ const WarbandItemListDisplay = (prop: any) => {
             value_ducat: 0,
             value_glory: 0
         });
-        if (Result != "") {
-            runToast(Result);
+        if (Result == null) {
+            runToast("Something went wrong");
         } else {
             UpdaterMethod(Manager.GetItemByName(NewItemTitle))
         }
