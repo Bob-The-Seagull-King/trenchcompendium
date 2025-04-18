@@ -62,7 +62,7 @@
         "id": "eq_jezzail",
         "name": "Jezzail",
         "source": "core",
-        "tags": {"action": true, "weapon": true, "eq_alchemicalammunition": true},
+        "tags": {"action": true, "weapon": true, "eq_alchemicalammunition": true, "jezzail": true},
         "category": "ranged",
         "distance": 18,
         "stats": {
@@ -284,7 +284,7 @@
         "id": "eq_pistolrevolver",
         "name": "Pistol / Revolver",
         "source": "core",
-        "tags": {"action": true, "weapon": true},
+        "tags": {"action": true, "weapon": true, "pistol": true},
         "category": "ranged",
         "distance": 12,
         "stats": {
@@ -386,7 +386,7 @@
         "id": "eq_siegejezzail",
         "name": "Siege Jezzail",
         "source": "core",
-        "tags": {"action": true, "weapon": true, "eq_alchemicalammunition": true},
+        "tags": {"action": true, "weapon": true, "eq_alchemicalammunition": true, "jezzail": true},
         "category": "ranged",
         "distance": 30,
         "stats": {
@@ -512,7 +512,7 @@
         "id": "eq_sniperrifle",
         "name": "Sniper Rifle",
         "source": "core",
-        "tags": {"action": true, "weapon": true},
+        "tags": {"action": true, "weapon": true, "rifle": true},
         "category": "ranged",
         "distance": 48,
         "stats": {
@@ -1519,7 +1519,7 @@
         "id": "eq_masterworksjezzail",
         "name": "Masterworks Jezzail",
         "source": "core",
-        "tags": {"action": true, "weapon": true},
+        "tags": {"action": true, "weapon": true, "jezzail": true},
         "category": "ranged",
         "distance": 36,
         "stats": {

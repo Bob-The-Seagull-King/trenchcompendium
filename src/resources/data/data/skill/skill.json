@@ -572,5 +572,194 @@
         "options": [],
         "table_val": 11,
         "skill_group": ["sg_stealthandspeed"]
+    },
+    {
+        "id": "sk_hunter",
+        "name": "Hunter",
+        "source": "core",
+        "tags": { "trait": true, "bonus": true },
+        "contextdata": { 
+            "bonus_ability": {
+                "action_type": ["attack_range"]
+            } },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This model ignores all penalties from Cover when making a ranged attack.",
+                "glossary": [
+                    {"val": "Cover", "id": "gl_cover"}
+                ]
+            }
+        ],
+        "options": [],
+        "table_val": 3,
+        "skill_group": ["sg_ranged"]
+    },
+    {
+        "id": "sk_gunslinger",
+        "name": "Gunslinger",
+        "source": "core",
+        "tags": { "trait": true, "bonus": true },
+        "contextdata": { 
+            "bonus_ability": {
+                "bonus_type": ["equipment", "weapon", "pistol"]
+            } },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "If armed with two pistols, this model can make ranged attack ACTIONS with both of them when making a ranged attack. In addition, this model suffers no penalty when using a pistol as an Off-Hand weapon.",
+                "glossary": [
+                    {"val": "ACTIONS", "id": "kw_action"}
+                ]
+            }
+        ],
+        "options": [],
+        "table_val": 4,
+        "skill_group": ["sg_ranged"]
+    },
+    {
+        "id": "sk_farshot",
+        "name": "Farshot",
+        "source": "core",
+        "tags": { "trait": true, "bonus": true, "modifier": true },
+        "contextdata": { 
+            "equipment_modifier": {
+                "equipment_type": ["ranged"],
+                "modifier_type": { "range": 6 },
+                "modifier_condition": {
+                    "tag": ["pistol","rifle","jezzail"]
+                }
+            } },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This model adds +6” to the range of any pistols, rifles and/or jezzails they carry."
+            }
+        ],
+        "options": [],
+        "table_val": 5,
+        "skill_group": ["sg_ranged"]
+    },
+    {
+        "id": "sk_sharpeyes",
+        "name": "Sharp Eyes",
+        "source": "core",
+        "tags": { "trait": true, "bonus": true },
+        "contextdata": { 
+            "bonus_ability": {
+                "bonus_type": ["equipment", "weapon", "ranged"]
+            } },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This model ignores penalties for long range when using ranged weapons."
+            }
+        ],
+        "options": [],
+        "table_val": 6,
+        "skill_group": ["sg_ranged"]
+    },
+    {
+        "id": "sk_rangedproficiency",
+        "name": "Ranged Proficiency",
+        "source": "core",
+        "tags": {"trait": true },
+        "contextdata": {
+            "upgrade_stat": { "upgrades": [{"stat": "ranged", "value": 1}]} },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Add +1 DICE to the Melee Characteristic of this model.",
+                "glossary": [{"val": "+1 DICE", "id": "kw_plusdice"}]
+            }
+        ],
+        "options": [],
+        "table_val": 7,
+        "skill_group": ["sg_ranged"]
+    },
+    {
+        "id": "sk_snipersnest",
+        "name": "Sniper's Nest",
+        "source": "core",
+        "tags": {"trait": true, "bonus": true },
+        "contextdata": {
+            "bonus_ability": {
+                "bonus_type": ["equipment", "weapon", "ranged"]
+            } },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This model gains +2 DICE (instead of the usual +1 DICE) when shooting from an elevated position.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "+2 DICE", "id": "kw_plusdice"}
+                ]
+            }
+        ],
+        "options": [],
+        "table_val": 8,
+        "skill_group": ["sg_ranged"]
+    },
+    {
+        "id": "sk_pointblank",
+        "name": "Sniper's Nest",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "When this model makes a melee attack, it may make a ranged attack ACTION with a ranged weapon instead. This is instead of making any melee attack ACTIONS.",
+                "glossary": [
+                    {"val": "ACTION", "id": "kw_action"},
+                    {"val": "ACTIONS", "id": "kw_action"}
+                ]
+            }
+        ],
+        "options": [],
+        "table_val": 9,
+        "skill_group": ["sg_ranged"]
+    },
+    {
+        "id": "sk_hipshot",
+        "name": "Hip Shot",
+        "source": "core",
+        "tags": { "trait": true, "bonus": true, "modifier": true },
+        "contextdata": { 
+            "equipment_modifier": {
+                "equipment_type": ["ranged"],
+                "modifier_type": { "keyword": "kw_assault" }
+            } },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Any ranged weapons this model is equipped with gain the Keyword ASSAULT.",
+                "glossary": [
+                    {"val": "ASSAULT", "id": "kw_assault"}
+                ]
+            }
+        ],
+        "options": [],
+        "table_val": 10,
+        "skill_group": ["sg_ranged"]
+    },
+    {
+        "id": "sk_headshot",
+        "name": "Head Shot",
+        "source": "core",
+        "tags": { "trait": true, "bonus": true},
+        "contextdata": { 
+            "bonus_ability": {
+                "bonus_type": ["equipment", "weapon", "ranged"]
+            }},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Ranged attacks of this model ignore armour on a Critical result on the Action Success Chart (12+ result)."
+            }
+        ],
+        "options": [],
+        "table_val": 11,
+        "skill_group": ["sg_ranged"]
     }
 ]
