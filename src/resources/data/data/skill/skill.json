@@ -16,6 +16,141 @@
         "skill_group": ["sg_exploration"]
     },
     {
+        "id": "es_extradice",
+        "name": "Extra Dice",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            "grab_exploration_dice": {"mod_count": 1}
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Roll one extra Exploration Die.",
+                "glossary": [{"val": "Exploration Dice", "id": "gl_explorationdice"}]
+            }
+        ],
+        "options": [],
+        "skill_group": ["sg_exploration"]
+    },
+    {
+        "id": "es_duplicate",
+        "name": "Duplicate",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "After you roll, select any Exploration Die and add another die with an identical result, including any modifications, to your total.",
+                "glossary": [{"val": "Exploration Dice", "id": "gl_explorationdice"}]
+            }
+        ],
+        "options": [],
+        "skill_group": ["sg_exploration"]
+    },
+    {
+        "id": "es_split",
+        "name": "Split",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Divide the dice result by two into two separate dice rolls. Round any halves up."
+            }
+        ],
+        "options": [],
+        "skill_group": ["sg_exploration"]
+    },
+    {
+        "id": "es_setdice",
+        "name": "Set Dice",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Select any one dice and set it to a number you want."
+            }
+        ],
+        "options": [],
+        "skill_group": ["sg_exploration"]
+    },
+    {
+        "id": "es_seek",
+        "name": "Seek",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Modify one Exploration Dice result by +1.",
+                "glossary": [{"val": "Exploration Dice", "id": "gl_explorationdice"}]
+            }
+        ],
+        "options": [],
+        "skill_group": ["sg_exploration"]
+    },
+    {
+        "id": "es_circleback",
+        "name": "Circle Back",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Modify one Exploration Dice result by -1.",
+                "glossary": [{"val": "Exploration Dice", "id": "gl_explorationdice"}]
+            }
+        ],
+        "options": [],
+        "skill_group": ["sg_exploration"]
+    },
+    {
+        "id": "es_combine",
+        "name": "Combine",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "After you roll, select two Exploration Dice and add them together. Then discard them. The value is treated as a single die roll you made. It can be more than 6.",
+                "glossary": [{"val": "Exploration Dice", "id": "gl_explorationdice"}]
+            }
+        ],
+        "options": [],
+        "skill_group": ["sg_exploration"]
+    },
+    {
+        "id": "es_lucky",
+        "name": "Lucky",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Roll an extra Exploration Die that is paired with one of your other dice. After you roll, choose one die in the pair to keep and one die in the pair to discard.",
+                "glossary": [{"val": "Exploration Die", "id": "gl_explorationdice"}]
+            }
+        ],
+        "options": [],
+        "skill_group": ["sg_exploration"]
+    },
+    {
         "id": "sk_patronskill",
         "name": "Patron Skill",
         "source": "core",
