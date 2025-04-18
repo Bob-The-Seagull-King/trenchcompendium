@@ -29,7 +29,7 @@
         ],
         "options": [],
         "table_val": 2,
-        "skill_group": ["sg_meleeandstrength"]
+        "skill_group": ["sg_meleeandstrength","sg_ranged","sg_stealthandspeed","sg_wildcard"]
     },
     {
         "id": "sk_patronskill_end",
@@ -45,7 +45,7 @@
         ],
         "options": [],
         "table_val": 12,
-        "skill_group": ["sg_meleeandstrength"]
+        "skill_group": ["sg_meleeandstrength","sg_ranged","sg_stealthandspeed","sg_wildcard"]
     },
     {
         "id": "sk_standfirm",
