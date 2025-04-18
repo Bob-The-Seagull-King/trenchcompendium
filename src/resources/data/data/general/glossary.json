@@ -73,5 +73,22 @@
                     ]
             }
         ]
+    },
+    {
+        "id": "gl_scar",
+        "source": "core",
+        "tags": {
+            "category" : "campaign"
+        },
+        "name": "Scar",
+        "description":  [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "When you roll on the Injury Chart, unless the rules state otherwise, each injury causes a Battle Scar, so mark this on your warband roster sheet. An ELITE character only has two slots for Battle Scars. This means that if you sustain a third scar, the model dies and can no longer be used in your campaign. If the model has an ability that allows for their revival (such as the Trench Pilgrim), they use it. When they return to life, they ignore the last Battle Scar that killed them. Otherwise, their profile remains the same.",
+                "glossary": [
+                    {"val": "ELITE", "id": "kw_elite"}
+                    ]
+            }
+        ]
     }
 ]

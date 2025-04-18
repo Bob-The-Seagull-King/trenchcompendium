@@ -761,5 +761,199 @@
         "options": [],
         "table_val": 11,
         "skill_group": ["sg_ranged"]
+    },
+    {
+        "id": "sk_warluck",
+        "name": "War Luck",
+        "source": "core",
+        "tags": { "trait": true},
+        "contextdata": {             
+            "upgrade_character_stat": { "upgrades": [{"stat": "scars", "value": 1}]} 
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Add +1 to the maximum Scars your model can sustain.",
+                "glossary": [
+                    {"val": "Scars", "id": "gl_scar"}
+                ]
+            }
+        ],
+        "options": [],
+        "table_val": 3,
+        "skill_group": ["sg_wildcard"]
+    },
+    {
+        "id": "sk_tisbutascratch",
+        "name": "'Tis but a Scratch",
+        "source": "core",
+        "tags": { "trait": true},
+        "contextdata": {             
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You may re-roll any injuries on the Injury Chart for this model. The second result stands."
+            }
+        ],
+        "options": [],
+        "table_val": 4,
+        "skill_group": ["sg_wildcard"]
+    },
+    {
+        "id": "sk_badcompany",
+        "name": "Bad Company",
+        "source": "core",
+        "tags": { "trait": true, "faction": true},
+        "contextdata": {      
+            "get_elite_count_cap": { "modify_value": 1 }       
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Your warband may have seven ELITE models instead of six.",
+                "glossary": [
+                    {"val": "ELITE", "id": "kw_elite"}
+                ]
+            }
+        ],
+        "options": [],
+        "table_val": 5,
+        "skill_group": ["sg_wildcard"]
+    },
+    {
+        "id": "sk_scavenger",
+        "name": "Scavenger",
+        "source": "core",
+        "tags": { "trait": true, "faction": true},
+        "contextdata": {      
+            "get_exploration_skills": { "add_skill": ["es_extradice"] }       
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "While this model is in your warband, your warband has the Extra Dice Exploration Skill.",
+                "glossary": [
+                    {"val": "Exploration", "id": "gl_explorationdice"}
+                ]
+            }
+        ],
+        "options": [],
+        "table_val": 6,
+        "skill_group": ["sg_wildcard"]
+    },
+    {
+        "id": "sk_skillandexpertise",
+        "name": "Skill & Expertise",
+        "source": "core",
+        "tags": { "trait": true, "bonus": true},
+        "contextdata": {
+            "custom_add_to_action": {
+                "restriction": [
+                    {
+                        "type": "action",
+                        "value": "attack"
+                    }
+                ]
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Add +1 DICE to any ACTION this model has, except for ranged or melee attack ACTIONS.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "ACTION", "id": "kw_action"},
+                    {"val": "ACTIONS", "id": "kw_action"}
+                ]
+            }
+        ],
+        "options": [],
+        "table_val": 7,
+        "skill_group": ["sg_wildcard"]
+    },
+    {
+        "id": "sk_showoff",
+        "name": "Show Off",
+        "source": "core",
+        "tags": { "trait": true},
+        "contextdata": {
+            "get_promotion_dice": { "value": 1 }  
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Add one additional dice to the Promotion Dice pool after each battle."
+            }
+        ],
+        "options": [],
+        "table_val": 8,
+        "skill_group": ["sg_wildcard"]
+    },
+    {
+        "id": "sk_friendsinhighplaces",
+        "name": "Friends In High Places",
+        "source": "core",
+        "tags": { "trait": true, "faction": true},
+        "contextdata": {
+            "get_exploration_skills": { "add_skill": ["es_reroll","es_reroll"] }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "While this model is in your warband, your warband has the Re-roll Dice Exploration Skill twice.",
+                "glossary": [
+                    {"val": "Exploration", "id": "gl_explorationdice"}
+                ]
+            }
+        ],
+        "options": [],
+        "table_val": 9,
+        "skill_group": ["sg_wildcard"]
+    },
+    {
+        "id": "sk_gloryhound",
+        "name": "Glory Hound",
+        "source": "core",
+        "tags": { "trait": true},
+        "contextdata": {
+            "gain_glory": {
+                "value": 1
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "At the end of each battle, if this model was fielded and was not taken Out of Action, your warband gains an additional Glory Point."
+            }
+        ],
+        "options": [],
+        "table_val": 10,
+        "skill_group": ["sg_wildcard"]
+    },
+    {
+        "id": "sk_warstories",
+        "name": "War Stories",
+        "source": "core",
+        "tags": { "trait": true},
+        "contextdata": {
+            "gain_experience": {
+                "self": false,
+                "others": true,
+                "value": 1
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "At the end of the battle, choose any ELITE model in your warband except this one. That model gains +1 Experience Point.",
+                "glossary": [
+                    {"val": "ELITE", "id": "kw_elite"}
+                ]
+            }
+        ],
+        "options": [],
+        "table_val": 11,
+        "skill_group": ["sg_wildcard"]
     }
 ]
