@@ -56,5 +56,22 @@
                 "glossary": [{"val": "RISKY ACTION", "id": "kw_riskyaction"}]
             }
         ]
+    },
+    {
+        "id": "gl_minorhit",
+        "source": "core",
+        "tags": {
+            "category" : "injury"
+        },
+        "name": "Minor Hit",
+        "description":  [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Add +1 BLOOD MARKER next to the model to represent a wound. Use the dice pips to count the hits inflicted (maximum six per model).",
+                "glossary": [
+                    {"val": "+1 BLOOD MARKER", "id": "kw_bloodmarker"}
+                    ]
+            }
+        ]
     }
 ]
