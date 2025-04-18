@@ -5,3 +5,107 @@
 
 
 .WbbFighterDetailView
+    &.fighter-card
+        background-color: $color-bg-1
+        font-size: 14px
+        padding: 0 15px
+
+    .title
+        margin: 0 -15px 15px
+        position: relative
+        padding-left: 40px
+        padding-right: 60px
+        background-color: $color-highlight-bg
+
+        .title-back
+            padding: 15px
+            position: absolute
+            top: 0
+            left: 0
+            bottom: 0
+
+        .fighter-name
+            line-height: 53px
+            font-weight: bold
+            width: 100%
+            overflow: hidden
+            text-overflow: ellipsis
+            white-space: nowrap
+
+        .fighter-cost
+            padding-right: 15px
+            position: absolute
+            top: 0
+            right: 0
+            bottom: 0
+            line-height: 53px
+
+    .fighter-card-meta
+        padding: 0
+
+    .fighter-card-stats
+        padding: 0
+
+    .fighter-card-collapse-wrap
+
+        h3
+            margin-top: 30px
+            margin-bottom: 15px
+
+    // XP Boxes
+    .xp-boxes
+        display: flex
+        flex-wrap: wrap
+        gap: 5px
+
+        .xp-box
+            position: relative
+            height: 15px
+            width: 15px
+            border: 1px solid $color-text
+
+            @media(max-width: 380px)
+                height: 11px
+                width: 11px
+            &.xp-box-bold
+                border: 1px solid $color-highlight-text
+
+            i, svg
+                position: absolute
+                top: 50%
+                left: 50%
+                transform: translate(-50%, -50%)
+
+
+    // Battle Scar Boxes
+    .battle-scar-boxes
+        display: flex
+        flex-wrap: wrap
+        gap: 5px
+
+        .battle-scar-box
+            position: relative
+            height: 35px
+            width: 35px
+            border: 1px solid $color-text
+
+            @media(max-width: 380px)
+                height: 11px
+                width: 11px
+
+            &:last-of-type
+                border: 1px solid $color-highlight-text
+
+            .skull-icon
+                opacity: .25
+                z-index: 1
+                color: $color-highlight-text
+                font-size: 22px
+
+            i, svg
+                font-size: 18px
+                position: absolute
+                z-index: 2
+                top: 50%
+                left: 50%
+                transform: translate(-50%, -50%)

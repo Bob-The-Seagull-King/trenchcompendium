@@ -20,7 +20,8 @@ const RulesModelDisplayCollapse: React.FC<RulesModelDisplayCollapseProps> = ({ n
         <div className={`fighter-card-collapse ${has_children ? 'has-children' : ''}`}>
             <div onClick={() => {
                 setOpen(!open)
-            }} className={'fighter-card-collapse-title'}>
+                }}
+                 className={'fighter-card-collapse-title'}>
                 <span className={'text'}>
                     {name || ""}
                 </span>
