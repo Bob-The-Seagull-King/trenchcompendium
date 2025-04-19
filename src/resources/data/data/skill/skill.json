@@ -334,7 +334,7 @@
         "description": [            
             {
                 "tags": {"desc_type" : "default"},
-                "content": "One of the melee attacks of this model ignores all armour once per Activation."
+                "content": "One of the Melee Attacks of this model ignores all Armour per each Activation."
             }
         ],
         "options": [],
@@ -844,7 +844,7 @@
         "description": [            
             {
                 "tags": {"desc_type" : "default"},
-                "content": "When this model makes a melee attack, it may make a ranged attack ACTION with a ranged weapon instead. This is instead of making any melee attack ACTIONS.",
+                "content": "When this model Makes a Melee Attack, it may make a Melee Attack ACTION with a Ranged Weapon it is equipped with instead of making any Melee Attack ACTIONS. This attack uses the model’s ranged characteristic. It can still use its Ranged Attack normally outside of Melee.",
                 "glossary": [
                     {"val": "ACTION", "id": "kw_action"},
                     {"val": "ACTIONS", "id": "kw_action"}
