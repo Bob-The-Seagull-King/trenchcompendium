@@ -47,6 +47,41 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
                 )
 
             }
+            case "headless_table": {
+                return (
+                    <table className="table_headless">
+                        {item.SubContent?.map((subitem) => (
+                            <AdvancedDescriptionItemDisplay key="descriptionsubitem" data={subitem} parent={parentItem}/>
+                        ))}
+                    </table>
+                )
+
+            }
+            case "table_row": {
+                return (
+                    <tr className="table_row">
+                        {item.SubContent?.map((subitem) => (
+                            <AdvancedDescriptionItemDisplay key="descriptionsubitem" data={subitem} parent={parentItem}/>
+                        ))}
+                    </tr>
+                )
+
+            }
+            case "table_item": {
+                return (
+                    <td>
+                        <span>
+                            {ConvertContentWithGlossary((item.Glossary), item.Content?.toString() || "")}
+                        </span>
+                        <span>
+                            {item.SubContent?.map((subitem) => (
+                               <AdvancedDescriptionItemDisplay key="descriptionsubitem" data={subitem} parent={parentItem}/>
+                            ))}
+                        </span>
+                    </td>
+                )
+
+            }
             case "bold": {
                 return (
                     <span>
@@ -174,9 +209,7 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
 
     return (
         <ErrorBoundary fallback={<div>Something went wrong with AdvancedDescriptionItemDisplay.tsx</div>}>
-            <span className=''>
                 {returnFullItem(description)}
-            </span>
         </ErrorBoundary>
     )
 }

@@ -41,5 +41,387 @@
                 "content": [ ]
             }
         ]
+    },
+    {
+        "id": "br_playingacampaigngame",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Playing a Campaign Game",
+        "item_index": 1,
+        "description":  [
+        ],
+        "sections": [
+            {
+                "title": "Selecting a Scenario",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "When determining which Scenario you wish to play, note how many battles you have played in the Campaign thus far, and roll on the appropriate table below. Neither player should play the same scenario twice in a row. If this happens, re-roll until you get a new one."
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "If one player has played more battles than the other, then the player with a higher number of battles shows the chart you use. The player with the lower battle count determines who is the Attacker and who is the Defender in each scenario. Otherwise roll a dice to determine who is attacking and who is defending."
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "See the Scenarios section for details on each battle."
+                    }
+                 ],
+                "content": [ ]
+            },
+            {
+                "title": "Campaign Stages",
+                "description":  [
+                    
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "Campaigns are divided into 3 Stages: Early, Mid, and Endgame. You play a set number of games in each of these stages before moving on to the next. If two players of the campaign are not on the same stage, the Campaign Stage is determined by the warband of the lower stage. Once a player has played 11 Battles in total they can play no more until all the other players have played 11 games as well."
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "At this stage all the players play a game against another player who has also played 11 games. Once all the players have played the Final Battle Scenario, you can determine who has won the Campaign as explained below."
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "Early Campaign (Battles 1-3)"
+                            },
+                            {
+                                "tags": {"desc_type" : "headless_table"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_row"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "1"
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "Claim No Man's Land"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_row"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "2"
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "Hunt for Heroes"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_row"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "3"
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "Hill 223"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_row"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "4"
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "Relic Hunt"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_row"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "5"
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "Supply Raid"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_row"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "6"
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "Random Scenario"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "Mid Campaign (Battles 4-9)"
+                            },
+                            {
+                                "tags": {"desc_type" : "headless_table"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_row"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "1"
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "Hunt for Heroes"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_row"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "2"
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "Armoured Train"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_row"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "3"
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "Storming the Shores"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_row"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "4"
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "Claim No Man's Land"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_row"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "5"
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "Dragon Hunt"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_row"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "6"
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "Random Scenario"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "Endgame (Battles 9-11)"
+                            },
+                            {
+                                "tags": {"desc_type" : "headless_table"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_row"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "1"
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "Trench Warfare"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_row"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "2"
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "Dragon Hunt"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_row"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "3"
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "From Below"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_row"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "4"
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "Fields of Glory"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_row"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "5"
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "Storming the Shores"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_row"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "6"
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "Random Scenario"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "Final Battle (Battle 12)"
+                            },
+                            {
+                                "tags": {"desc_type" : "paragraph"},
+                                "content": "Play the Great War scenario."
+                            }
+                        ]
+                    }
+                 ],
+                "content": [ ]
+            },
+            {
+                "title": "Late Joiners to Campaigns",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": "Players often want to join a Campaign in progress. This is fine, and new forces are purchased with the current Warband Threshold Value of the campaign. In addition, they can tick 1 Experience box per battle the top Warband in the campaign has played and gain the Advancements as if they played the games. This Experience can be divided between the ELITE models as the player sees fit.",
+                        "glossary": [
+                            {"val": "ELITE", "id": "kw_elite"}
+                        ]
+                    }
+                 ],
+                "content": [ ]
+            },
+            {
+                "title": "Winning the Campaign",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": "Each Scenario lists the number of Victory Points the players may gain from it. The player with the most Victory Points at the end of the campaign is the winner. All other player rankings are determined by Victory Point totals. At the end of the Campaign, tally the points together to see your ranking on the Campaign leaderboard."
+                    }
+                 ],
+                "content": [ ]
+            }
+        ]
     }
 ]
