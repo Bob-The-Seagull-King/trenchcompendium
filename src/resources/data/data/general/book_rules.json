@@ -1013,7 +1013,7 @@
         "tags": { },
         "contextdata": { },
         "name": "Injuries and Battle Scars",
-        "item_index": 0,
+        "item_index": 5,
         "description":  [
             {
             "tags": {"desc_type" : "paragraph"},
