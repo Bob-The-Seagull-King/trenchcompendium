@@ -26,6 +26,19 @@
                     }
                  ],
                 "content": [ ]
+            },
+            {
+                "title": "Patrons",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "Select a Patron for your Warband from the Patrons section of the compendium. The choice of Patron determines which Skill you may select if you roll a Patron Skill on any of the Skill Tables above when your ELITE model gains an Advancement (see Experience and Advancement below). One model cannot have duplicates of the same Patron Skill.",
+                        "glossary": [
+                            {"val": "ELITE", "id": "kw_elite"}
+                        ]
+                    }
+                 ],
+                "content": [ ]
             }
         ]
     }
