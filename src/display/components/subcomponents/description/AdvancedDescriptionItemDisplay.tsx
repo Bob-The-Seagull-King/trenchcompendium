@@ -34,13 +34,16 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
         switch (getTagSetValue(item.Tags, "desc_type")) {
             case "paragraph": {
                 return (
-                    <div className="">
-                        <span className="">
+                    <p>
+                        <span>
+                            {ConvertContentWithGlossary((item.Glossary), item.Content?.toString() || "")}
+                        </span>
+                        <span>
                             {item.SubContent?.map((subitem) => (
                                <AdvancedDescriptionItemDisplay key="descriptionsubitem" data={subitem} parent={parentItem}/>
                             ))}
                         </span>
-                    </div>
+                    </p>
                 )
 
             }
