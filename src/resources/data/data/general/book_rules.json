@@ -1007,5 +1007,41 @@
         ],
         "sections": [
         ]
+    },{
+        "id": "br_injuriesandbattlescars",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Injuries and Battle Scars",
+        "item_index": 0,
+        "description":  [
+            {
+            "tags": {"desc_type" : "paragraph"},
+            "content": "Whenever one of your ELITE models is taken Out of Action during a Battle, you will have to roll D66 for each such model after the battle ends. Consult the Trauma Chart table below to see what happened to your model. Unless rules state otherwise, each Trauma causes a Battle Scar, so mark this on your Warband roster sheet. You will notice that there are only two Battle Scars slots for your ELITE model. This means that if you sustain a third Battle Scar, this model dies and can no longer be used in your Campaign. If the model has an ability that allows their revival (such as the Trench Pilgrim), they use it. When they return to life, they ignore the last Battle Scar that killed them. Otherwise, their profile remains the same.",
+            "glossary": [
+                {"val": "ELITE", "id": "kw_elite"}
+            ]
+            },
+            {
+            "tags": {"desc_type" : "paragraph"},
+            "content": "For non-ELITE models that went Out of Action during a battle, simply roll D6 for each model: on a result 1-2, they are dead or irrevocably wounded, and you must remove them from your roster. On a roll of 3+, they survive the battle and fight on as normal.",
+            "glossary": [
+                {"val": "ELITE", "id": "kw_elite"}
+            ]
+            },
+            {
+            "tags": {"desc_type" : "paragraph"},
+            "content": "If, for whatever reason, one of your soldiers dies, their equipment is lost unless otherwise noted in the rules."
+            },
+            {
+            "tags": {"desc_type" : "paragraph"},
+            "content": "You can only have one of each type of Battle Scar per ELITE, unless explicitly stated in its entry. If a model rolls a result that would cause it to gain a Battle Scar that it cannot gain again, re-roll on the chart until a viable result is achieved.",
+            "glossary": [
+                {"val": "ELITE", "id": "kw_elite"}
+            ]
+            }
+        ],
+        "sections": [
+        ]
     }
 ]
