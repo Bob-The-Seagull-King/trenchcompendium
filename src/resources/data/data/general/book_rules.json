@@ -494,5 +494,354 @@
                 "content": [ ]
             }
         ]
+    },{
+        "id": "br_warbandlimits",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Warband Limits",
+        "item_index": 3,
+        "description":  [
+        ],
+        "sections": [
+            {
+                "title": "Warband Threshold Value",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "As you play the campaign, the words of your deeds on the battlefield spreads and attracts the attention of your superiors who will allocate more troops and resources at your disposal within their organisation, and make greater reinforcements available to you. This is represented by your Warband Threshold Value. A Warband’s starting value is indicated in the Warband list, and is typically 700 Gold Ducats. This value grows during the Campaign as indicated below (additions to the Value are cumulative). Each Warband’s Threshold Value depends on the number of battles they have played."
+                    }
+                 ],
+                "content": [ ]
+            },
+            {
+                "title": "Maximum Field Strength",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "The number of models you can field in a single battle is limited as listed in the table below. This maximum increases during the campaign, so in the first battle the maximum number of models you can field is 10, while it increases to 11 for the second battle."
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "Note that the Warband can be bigger than this, you just cannot field more models in battle than indicated in the table below. Also, some Scenarios limit the number of models below your Max Field Strength. In such cases, follow the Scenario’s instructions."
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "Note that when your Threshold Value raises, you are not automatically granted any additional troops or equipment, you must either call for Reinforcements (see below), or spend your own stored resources to hire more troops."
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "Papal States: "
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "When a Papal States Intervention Force calculates their Warband Threshold Value, or requests Reinforcements, they do so at -200 ducats. For example, such a warband about to play battle 3 in a campaign would have a Warband Threshold Value of 700 ducats."
+                            }
+                        ]
+                    }
+                 ],
+                "content": [ ]
+            },
+            {
+                "title": "Campaign Limits Table",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "headed_table"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "table_headrow"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_headitem"},
+                                        "content": "Battle Number"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_headitem"},
+                                        "content": "Threshold Value"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_headitem"},
+                                        "content": "Max Field Strength"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "table_row"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "1"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "700"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "10"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "table_row"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "2"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "800"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "11"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "table_row"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "3"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "900"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "12"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "table_row"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "4"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "1000"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "13"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "table_row"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "5"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "1100"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "14"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "table_row"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "6"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "1200"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "15"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "table_row"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "7"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "1300"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "16"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "table_row"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "8"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "1400"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "17"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "table_row"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "9"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "1500"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "18"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "table_row"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "10"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "1600"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "19"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "table_row"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "11"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "1700"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "20"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "table_row"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "12"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "1800"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "22"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                 ],
+                "content": [ ]
+            },
+            {
+                "title": "Reinforcements",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "In Trench Crusade all Warbands are part of one of the great military organisations or under the guidance of a powerful patron, and periodically receive reinforcements to offset their combat losses. Thus after each battle you can build up your force back to the current Warband Threshold Value in Gold Ducats if the Warband Value has fallen under this threshold. When you do this, you must first do the following:"
+                    },
+                    {
+                        "tags": {"desc_type" : "list"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Forego the Exploration & Looting step completely. Your Warband falls back and requests Reinforcements, missing the opportunity to Loot and Explore."
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Give up/Sell all Weapons, Armour and Equipment that is not assigned to any of your models. Remember to adhere to the limits of Equipment per model!"
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Empty your Paychest of all ducats."
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Once you’ve done this, calculate the current value of your warband in ducats."
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "You may now buy new troops, weapons, armour and equipment up to the Warband Threshold Value (see above). Do not keep any leftover ducats."
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "The Papal States Intervention Force will also gain 4 Glory Points each time they use the Reinforcement action."
+                            }
+                        ]
+                    }
+                 ],
+                "content": [ ]
+            },
+            {
+                "title": "Disbanding a Warband",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "You may disband your old warband at the end of any game and start again with a new one. All the warriors in the original warband and any equipment and other benefits they acquired are lost."
+                    }
+                 ],
+                "content": [ ]
+            }
+        ]
     }
 ]

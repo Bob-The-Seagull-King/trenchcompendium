@@ -57,6 +57,16 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
                 )
 
             }
+            case "headed_table": {
+                return (
+                    <table className="table_headed">
+                        {item.SubContent?.map((subitem) => (
+                            <AdvancedDescriptionItemDisplay key="descriptionsubitem" data={subitem} parent={parentItem}/>
+                        ))}
+                    </table>
+                )
+
+            }
             case "table_row": {
                 return (
                     <tr className="table_row">
@@ -67,9 +77,19 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
                 )
 
             }
+            case "table_headrow": {
+                return (
+                    <tr className="table_headrow">
+                        {item.SubContent?.map((subitem) => (
+                            <AdvancedDescriptionItemDisplay key="descriptionsubitem" data={subitem} parent={parentItem}/>
+                        ))}
+                    </tr>
+                )
+
+            }
             case "table_item": {
                 return (
-                    <td>
+                    <td className="table_item">
                         <span>
                             {ConvertContentWithGlossary((item.Glossary), item.Content?.toString() || "")}
                         </span>
@@ -79,6 +99,21 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
                             ))}
                         </span>
                     </td>
+                )
+
+            }
+            case "table_headitem": {
+                return (
+                    <th className="table_headitem">
+                        <span>
+                            {ConvertContentWithGlossary((item.Glossary), item.Content?.toString() || "")}
+                        </span>
+                        <span>
+                            {item.SubContent?.map((subitem) => (
+                               <AdvancedDescriptionItemDisplay key="descriptionsubitem" data={subitem} parent={parentItem}/>
+                            ))}
+                        </span>
+                    </th>
                 )
 
             }
