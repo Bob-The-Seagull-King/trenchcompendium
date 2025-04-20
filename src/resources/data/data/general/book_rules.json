@@ -1215,5 +1215,304 @@
                 "content": [ ]
             }
         ]
+    },{
+        "id": "br_exploration",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Exploration",
+        "item_index": 7,
+        "description":  [
+        ],
+        "sections": [
+            {
+                "title": "",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "list"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Determine the number of Exploration Dice each player has",
+                                "glossary": [
+                                    {"val": "Exploration Dice", "id": "gl_explorationdice"}
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Roll the Exploration Dice",
+                                "glossary": [
+                                    {"val": "Exploration Dice", "id": "gl_explorationdice"}
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Modify the Exploration Dice results with Exploration Skills & Items",
+                                "glossary": [
+                                    {"val": "Exploration Dice", "id": "gl_explorationdice"}
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Consult the Exploration Table to see if you found a Location"
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Collect Loot worth total combined result of dice rolled X10 ducats"
+                            }
+                        ]
+                    }
+                 ],
+                "content": [ ]
+            },
+            {
+                "title": "Determine the Number of Exploration Dice",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "After the Battle, both Players are allocated Exploration Dice as shown below. All warbands begin a campaign with the Reroll Exploration Skill In addition, the Winner of the Battle can re-roll any 1 of the Exploration Dice during the Looting and Exploration Step.",
+                        "glossary": [
+                            {"val": "Exploration Dice", "id": "gl_explorationdice"}
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "headed_table"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "table_headrow"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_headitem"},
+                                        "content": "Number of Battles Fought"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_headitem"},
+                                        "content": "Number of Exploration Dice"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "table_row"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "1-2"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "3"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "table_row"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "3-5"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "4"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "table_row"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "6-9"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "5"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "table_row"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "10+"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "6"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "table_row"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "Winner"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "Reroll any 1 dice"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                 ],
+                "content": [ ]
+            },
+            {
+                "title": "Roll the Exploration Dice",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "Once the players have determined the number of Exploration Dice, each rolls their dice and consults the result by adding the numbers together to get their Exploration Score. For example, if a player rolls three Exploration Dice and the results are 3, 5, and 6, the combined Exploration Score is 14.",
+                        "glossary": [
+                            {"val": "Exploration Dice", "id": "gl_explorationdice"}
+                        ]
+                    }
+                 ],
+                "content": [ ]
+            },
+            {
+                "title": "Modify the Exploration Dice",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "Next, the players can modify the Exploration Dice results with any items, Exploration Skills, Ally abilities and other bonuses in order to improve their chances of finding some rare elusive location and claiming it for their Warbands.",
+                        "glossary": [
+                            {"val": "Exploration Dice", "id": "gl_explorationdice"}
+                        ]
+                    }
+                 ],
+                "content": [ ]
+            },
+            {
+                "title": "Consult the Exploration Location Table",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "After you have modified the Exploration roll result, consult the appropriate Exploration Table to see if you have found something of special interest during your exploration. You have to match the number on the Table exactly with your Exploration Score. Too high or too low means you did not find a Location."
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "Note that each player can find any of specific Location only once during the Campaign, though it is completely legal for two different players to discover the same Location during the same Campaign. We encourage players to maintain a War Journal that tracks the Locations they have found during the Campaign."
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "To find out which Exploration Table you should use, consult the following Chart:"
+                    },
+                    {
+                        "tags": {"desc_type" : "headed_table"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "table_headrow"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_headitem"},
+                                        "content": "Number of Battles Fought"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_headitem"},
+                                        "content": "Possible Locations"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "table_row"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "1-2"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "Common Exploration Locations"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "table_row"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "3-5"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "Common or Rare Exploration Locations"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "table_row"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "Rare Exploration Locations"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "5"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "table_row"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "10+"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "Rare or Legendary Exploration Locations"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                 ],
+                "content": [ ]
+            },
+            {
+                "title": "Looting, Foraging, Scavenging and Pillaging",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "Whether you found an Exploration Location or not, the player can now collect loot from the battlefield by scavenging, foraging, selling broken weapons and armour to traders, receiving the regular pay from their Patron, hunting, and so on."
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "The value of the Loot you find is equal to 10x the Exploration Score in ducats. So if your Exploration Score was 12, you find 120 ducats from Looting. Add this to your Warband’s Paychest."
+                    }
+                 ],
+                "content": [ ]
+            },
+            {
+                "title": "Warband Exploration Skills",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "Each Warband Starts the Campaign with the Reroll Skill. More can be earned during the campaign or by hiring Allies. You can have multiples of any of the Skills on this list."
+                    }
+                 ],
+                "content": [ ]
+            }
+        ]
     }
 ]
