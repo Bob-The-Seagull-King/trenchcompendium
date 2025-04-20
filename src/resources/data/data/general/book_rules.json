@@ -843,5 +843,169 @@
                 "content": [ ]
             }
         ]
+    },{
+        "id": "br_postbattlesequencesummary",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Post-Battle Sequence Summary",
+        "item_index": 4,
+        "description":  [
+            {
+                "tags": {"desc_type" : "infobox"},
+                "content": "",
+                "subcontent": [
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "After each battle, all players who took part go through the following set of steps to prepare your Warband for the future battles."
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "Injuries: "
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Determine the extent of injuries for each warrior who is Out of Action at the end of the game. Mark any Scars your ELITES suffer. See Injuries section for details.",
+                                "glossary": [
+                                    {"val": "ELITES", "id": "kw_elite"}
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "Experience & Advancement: "
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Record experience, gain advancements, and promote heroes for surviving battles. See the Experience & Advancement section for details."
+                            }
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "Increase the Warband Threshold Value: "
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Increase the Threshold Value of your Warband (See warband size rules)."
+                            }
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "Request Reinforcements"
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "You may replenish your Warband’s losses until its total value is up to the highest current Warband Threshold value if you wish. You must first empty the Warband treasury by giving up all the ducats and stored gear you have first, and you must skip the Exploration step above."
+                            }
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "Looting & Exploration"
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Roll to see what your Warband discovers in the area they are currently occupying. See Exploration section for details."
+                            }
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "Hire New Recruits: "
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "New recruits can be acquired from your Warband List and can be recruited and equipped from your Warband’s Equipment list."
+                            }
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "Trade: "
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Buy items allowed for your Warband. See your Warband Equipment list for the available items. You may also sell any surplus Weapons, Armour and Equipment, and you receive half of their base value (rounding fractions up) from the merchants, including Glory Items."
+                            }
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "Use Glory Points"
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Use your Glory to attract Mercenaries, acquire special equipment and other benefits. See the rules for Glory for details."
+                            }
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "Reallocate Equipment: "
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Swap equipment between models as desired (provided they are eligible to use it). You can take any armour, weapons and equipment from the Warband Paychest and give them to any eligible models."
+                            }
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "Update Warband Roster: "
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Update your Warband Roster, including the total cost of the Warband (a total cost in Ducats of all your models and their weapons, armour and equipment). You are now ready for the next battle!"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "sections": [
+        ]
     }
 ]

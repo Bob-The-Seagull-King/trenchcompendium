@@ -47,6 +47,21 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
                 )
 
             }
+            case "infobox": {
+                return (
+                    <div className="infobox">
+                        <span>
+                            {ConvertContentWithGlossary((item.Glossary), item.Content?.toString() || "")}
+                        </span>
+                        <span>
+                            {item.SubContent?.map((subitem) => (
+                               <AdvancedDescriptionItemDisplay key="descriptionsubitem" data={subitem} parent={parentItem}/>
+                            ))}
+                        </span>
+                    </div>
+                )
+
+            }
             case "headless_table": {
                 return (
                     <table className="table_headless">
