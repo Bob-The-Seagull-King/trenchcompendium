@@ -1043,5 +1043,177 @@
         ],
         "sections": [
         ]
+    },{
+        "id": "br_experienceandadvancement",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Experience and Advancement",
+        "item_index": 6,
+        "description":  [
+            {
+            "tags": {"desc_type" : "paragraph"},
+            "content": "As your warriors fight battles, they will quickly become hardened veterans. Their skills improve, forged in the crucible of the Great War. An ELITE model that took part in a battle and survived (even if they were Taken Out of Action) will gain 1 Experience Point. Mark this on your Roster Sheet. In addition, if any ELITE model performs at least one Glorious Deed, they gain another Experience Point. On your Roster Sheet, check the Experience boxes from left to right: when you reach the following experience you can make a Skill Advancement Roll: (2, 4, 7, 10, 14, 18)",
+            "glossary": [
+                {"val": "ELITE", "id": "kw_elite"}
+            ]
+            }
+        ],
+        "sections": [
+            {
+                "title": "Skill Advancement Rolls",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [                            
+                            {
+                                "tags": {"desc_type" : "list"},
+                                "content": "",
+                                "subcontent": [                                    
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "Pick 2 of the following 4 Charts (Melee & Strength Skills, Ranged Skills, Stealth & Speed Skills or Wildcard Skills)."
+                                    },                                
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "Roll 2D6 once for each chart to see what Skills you can choose from (See skills section of the compendium)."
+                                    },                                
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "If you already have any Skill indicated by the roll(s), choose the next lowest number on the table that has a skill you don’t yet have."
+                                    },                                
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "If there are no such skills left, choose the next highest number on the table that has a skill you don’t yet have."
+                                    },                                
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "Select which of the two Skills generated you want the model to acquire and add it to your Warband roster."
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "When a Patron Skill is rolled, you can select any one of the Patron Skills offered by the Patron you have selected (see section on Patrons below)."
+                    }
+                 ],
+                "content": [ ]
+            },
+            {
+                "title": "",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "list"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "bold"},
+                                                "content": "Gather Your Promotion Pool: "
+                                            },{
+                                                "tags": {"desc_type" : "default"},
+                                                "content": "Your pool starts with 1 die in it. Add 1 die if you won the battle. Add 1 die for each Glorious Deed that your Warband completed this battle. Some abilities might grant you additional Promotion Dice."
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "bold"},
+                                                "content": "Distribute Your Promotion Dice: "
+                                            },{
+                                                "tags": {"desc_type" : "default"},
+                                                "content": "Assign up to 2 Promotion Dice to each Non-ELITE model (up to 3 if that model performed a Glorious Deed during the battle) in your army that is eligible for promotion. If every such model has been assigned 2 Promotion Dice and you have Promotion Dice remaining, you may assign dice so that no model has more than two or more dice than another.",
+                                                "glossary": [
+                                                    {"val": "ELITE", "id": "kw_elite"}
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "bold"},
+                                                "content": "Roll Your Promotion Dice: "
+                                            },{
+                                                "tags": {"desc_type" : "default"},
+                                                "content": "In any order you wish, select a Promotion Die and roll it. If it shows a result of 6, that model is promoted. That model gains the Keyword ELITE, it is moved to the ELITE section of your Warband’s roster, and it begins with 0 Experience Points. Only one model can be promoted in this way per post-battle sequence and, once a model is promoted in this way, end this process.",
+                                                "glossary": [
+                                                    {"val": "ELITE", "id": "kw_elite"}
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "bold"},
+                                                "content": "Track Failed Promotions: "
+                                            },{
+                                                "tags": {"desc_type" : "default"},
+                                                "content": "Keep a tally of Promotion Dice rolls you’ve failed thus far, including any from previous games in the campaign. If in total you fail 5 Promotion rolls in a row (regardless how the dice are distributed amongst the models), the 6th one will always succeed. This re-sets the counter."
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "bold"},
+                                                "content": "Maximum Elites: "
+                                            },{
+                                                "tags": {"desc_type" : "default"},
+                                                "content": "Your Warband can only have a maximum of 6 ELITES. If you are at maximum, you do not roll for Promotions until your Warband has less than 6 ELITES.",
+                                                "glossary": [
+                                                    {"val": "ELITES", "id": "kw_elite"}
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                 ],
+                "content": [ ]
+            },
+            {
+                "title": "Units Which Cannot Be Promoted",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "All of the models in your Warband cannot necessarily be Promoted. This could be due to their inherent limitations, being machines, lack of access to training and/or necessary equipment and so on."
+                    }
+                 ],
+                "content": [ ]
+            },
+            {
+                "title": "Limited Potential",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "Some models have a limited capacity to gain Experience and learn new skills. They might be too bestial, have limited in intelligence or have their utmost potential might be supernaturally limited. Such units can only gain 3 Skill Advancements (i.e. 7 Experience Points)."
+                    }
+                 ],
+                "content": [ ]
+            }
+        ]
     }
 ]
