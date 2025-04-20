@@ -1514,5 +1514,42 @@
                 "content": [ ]
             }
         ]
+    },{
+        "id": "br_gloryitems",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Glory Items",
+        "item_index": 8,
+        "description":  [
+            {
+            "tags": {"desc_type" : "paragraph"},
+            "content": "Your Warband can acquire Glory items in a few different ways."
+            },
+            {
+            "tags": {"desc_type" : "list"},
+            "content": "",
+            "subcontent": [
+                {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Some can be purchased by your Warband from their own Armoury List, and can be bought at any time during the campaign."
+                },
+                {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Glory items listed as Exploration Only are only available if you get an opportunity to spend your Glory Points on them during the Exploration & Looting step."
+                },
+                {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "When playing one-off games, you can buy any Glory Items up to the maximum Glory Point limit agreed with your opponent. Select Glory items from the Warband list and from the Exploration Items list."
+                }
+            ]
+            },
+            {
+            "tags": {"desc_type" : "paragraph"},
+            "content": "Glory Items available to the various Warbands in Trench Crusade via exploration are listed in the Exploration Only section of each Faction."
+            }
+        ],
+        "sections": [
+        ]
     }
 ]
