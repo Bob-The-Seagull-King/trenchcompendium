@@ -423,5 +423,76 @@
                 "content": [ ]
             }
         ]
+    },{
+        "id": "br_modelsincampaigns",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Models in Campaigns",
+        "item_index": 2,
+        "description":  [
+            {
+            "tags": {"desc_type" : "paragraph"},
+            "content": "At the end of each game the players work out their injuries, how much experience their ELITE warriors have earned and how much loot the warband has collected before returning to its barracks.",
+            "glossary": [
+                {"val": "ELITE", "id": "kw_elite"}
+            ]
+            },
+            {
+            "tags": {"desc_type" : "paragraph"},
+            "content": "Experience is expressed as Experience points which ELITE models receive for surviving each game. This is covered later in the Experience section. When an ELITE warrior has sufficient Experience points they receive a Skill. Normal troopers taking part in a Campaign will also have a chance of becoming an ELITE.",
+            "glossary": [
+                {"val": "ELITE", "id": "kw_elite"}
+            ]
+            }
+        ],
+        "sections": [
+            {
+                "title": "Injuries and Casualties",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "After each Battle, for each model that was taken Out of Action, determine what Injuries they sustained, if ELITE, or whether or not they died from their wounds, if not ELITE. See the rules for Injuries.",
+                        "glossary": [
+                            {"val": "ELITE", "id": "kw_elite"}
+                        ]
+                    }
+                 ],
+                "content": [ ]
+            },
+            {
+                "title": "Dismissing the Wounded",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "After determining Injuries, You can dismiss any warrior you wish after the battle if they have 2+ Scars."
+                    }
+                 ],
+                "content": [ ]
+            },
+            {
+                "title": "Models Killed in Action",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "When a model is killed all their weapons, armour and equipment are lost in the ruinous tumult of the battlefield. It is not possible to reallocate fallen warriors’ weapons or equipment once they die."
+                    }
+                 ],
+                "content": [ ]
+            },
+            {
+                "title": "Experience and Skill Advancements",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "After each Battle, determine the amount of Experience points your ELITE troops gain, and roll for their new Skill Advancements. Also determine whether any of your standard Troops are promoted into ELITE Status. See the rules for Experience below.",
+                        "glossary": [
+                            {"val": "ELITE", "id": "kw_elite"}
+                        ]
+                    }
+                 ],
+                "content": [ ]
+            }
+        ]
     }
 ]
