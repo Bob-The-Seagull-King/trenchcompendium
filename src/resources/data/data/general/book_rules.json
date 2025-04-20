@@ -1462,11 +1462,11 @@
                                 "subcontent": [
                                     {
                                         "tags": {"desc_type" : "table_item"},
-                                        "content": "Rare Exploration Locations"
+                                        "content": "6-9"
                                     },
                                     {
                                         "tags": {"desc_type" : "table_item"},
-                                        "content": "5"
+                                        "content": "Rare Exploration Locations"
                                     }
                                 ]
                             },
