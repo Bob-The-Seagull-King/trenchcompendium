@@ -86,6 +86,7 @@ class WarbandMember extends DynamicContextObject {
             const CurVal = data[i];
             const Value = await SkillFactory.CreateNewSkill(CurVal.object_id, this);
             const NewLocation = new WarbandProperty(Value, this, null, CurVal);
+            await NewLocation.HandleDynamicProps(Value, this, null, CurVal)
             this.Skills.push(NewLocation);
         }
     }
@@ -95,6 +96,7 @@ class WarbandMember extends DynamicContextObject {
             const CurVal = data[i];
             const Value = await InjuryFactory.CreateNewInjury(CurVal.object_id, this);
             const NewLocation = new WarbandProperty(Value, this, null, CurVal);
+            await NewLocation.HandleDynamicProps(Value, this, null, CurVal);
             this.Injuries.push(NewLocation);
         }
     }

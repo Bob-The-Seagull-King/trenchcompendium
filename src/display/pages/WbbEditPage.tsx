@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import WbbEditView from "../components/warband-builder/WbbEditView";
 import { WarbandManager } from '../../classes/saveitems/Warband/WarbandManager';
 import { useLocation } from 'react-router-dom';
+import WarbandItemViewDisplay from '../components/features/saveitem/Warband/WarbandItemViewDisplay';
 
 const WbbEditPage = (prop: any) => {
     const Manager : WarbandManager = prop.manager;
@@ -27,10 +28,15 @@ const WbbEditPage = (prop: any) => {
     return (
 
         <div className={'WbbEditPage'} key={keyval}>
-            <WbbEditView
-                warbandData={_currentItem}
-                manager={Manager}
-            />
+            {_currentItem != null &&
+                <>
+                    <WbbEditView
+                        warbandData={_currentItem}
+                        manager={Manager}
+                    />
+                    <WarbandItemViewDisplay manager={Manager} data={_currentItem} updater={() => (console.log("NOTHING"))} />
+                </>
+            }
         </div>
     );
 };

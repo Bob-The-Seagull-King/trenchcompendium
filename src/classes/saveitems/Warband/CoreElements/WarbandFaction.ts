@@ -36,6 +36,7 @@ class WarbandFaction extends DynamicContextObject {
     public async BuildFaction(faction_property : IWarbandProperty) {        
         const Value = await FactionFactory.CreateNewFaction(faction_property.object_id, this);
         this.MyFaction = new WarbandProperty(Value, this, null, faction_property);
+        await this.MyFaction.HandleDynamicProps(Value, this, null, faction_property);
     }
 
     public async BuildPatron(patron_id : string | undefined) {        
@@ -52,6 +53,7 @@ class WarbandFaction extends DynamicContextObject {
                 for (let j = 0; j < data.faction_rules.length; j++) {
                     if (data.faction_rules[j].object_id == FactionObj.Rules[i].ID) {
                         const NewRuleProperty = new WarbandProperty(FactionObj.Rules[i], this, null, data.faction_rules[j]);
+                        await NewRuleProperty.HandleDynamicProps(FactionObj.Rules[i], this, null, data.faction_rules[j]);
                         this.MyFactionRules.push(NewRuleProperty);
                         IsFound = true;
                         break;
@@ -59,6 +61,7 @@ class WarbandFaction extends DynamicContextObject {
                 }
                 if (IsFound == false) {
                     const NewRuleProperty = new WarbandProperty(FactionObj.Rules[i], this, null, null);
+                    await NewRuleProperty.HandleDynamicProps(FactionObj.Rules[i], this, null, null);
                     this.MyFactionRules.push(NewRuleProperty);
                 }
             }

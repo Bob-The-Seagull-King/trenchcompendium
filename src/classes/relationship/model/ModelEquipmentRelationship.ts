@@ -46,7 +46,7 @@ class ModelEquipmentRelationship extends StaticOptionContextObject {
      */
     public async ReloadOptions() {
         for (let i = 0; i < this.MyOptions.length; i++) {
-            await this.MyOptions[i].FindChoices();
+            this.MyOptions[i].Selections = await this.MyOptions[i].FindChoices();
         }
         this.BuildOptionEquipment();
     }

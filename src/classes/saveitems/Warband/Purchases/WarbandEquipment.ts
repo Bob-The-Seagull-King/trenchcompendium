@@ -33,6 +33,7 @@ class WarbandEquipment extends DynamicContextObject {
     public async BuildEquipment(equipment_property : IWarbandProperty) {        
         const Value = await EquipmentFactory.CreateNewEquipment(equipment_property.object_id, this);
         this.MyEquipment = new WarbandProperty(Value, this, null, equipment_property);
+        await this.MyEquipment.HandleDynamicProps(Value, this, null, equipment_property)
     }
     
     public BuildNewProperties() {

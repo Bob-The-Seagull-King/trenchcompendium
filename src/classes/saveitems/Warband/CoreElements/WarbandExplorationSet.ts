@@ -31,6 +31,7 @@ class WarbandExplorationSet extends DynamicContextObject {
             const CurVal = data[i];
             const Value = await SkillFactory.CreateNewSkill(CurVal.object_id, this);
             const NewSkill = new WarbandProperty(Value, this, null, CurVal);
+            await NewSkill.HandleDynamicProps(Value, this, null, CurVal);
             this.Skills.push(NewSkill);
         }
     }
@@ -40,6 +41,7 @@ class WarbandExplorationSet extends DynamicContextObject {
             const CurVal = data[i];
             const Value = await ExplorationFactory.CreateNewExplorationLocation(CurVal.object_id, this);
             const NewLocation = new WarbandProperty(Value, this, null, CurVal);
+            await NewLocation.HandleDynamicProps(Value, this, null, CurVal);
             this.Locations.push(NewLocation);
         }
     }

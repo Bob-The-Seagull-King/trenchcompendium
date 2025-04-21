@@ -10,6 +10,7 @@ import { ISkill, Skill } from '../ability/Skill';
 import { SkillFactory } from '../../../factories/features/SkillFactory';
 import { Faction } from '../faction/Faction';
 import { FactionFactory } from '../../../factories/features/FactionFactory';
+import { ContextPackage } from '../../contextevent/contextpackage';
 
 interface IPatron extends IContextObject {
     description: []
@@ -34,6 +35,22 @@ class Patron extends StaticContextObject {
     {
         super(data, parent)
         this.Description = DescriptionFactory(data.description, this);
+    }
+
+    
+    /**
+     * Grabs any additional packages unique to
+     * class implementation.
+     */
+    public async GrabSpecialPackages(event_id : string, source_obj : ContextObject, arrs_extra : any[]) : Promise<ContextPackage[]> { 
+        const static_packages : ContextPackage[] = []
+        for (let i = 0; i < this.Skills.length; i++) {
+            const temp_packages : any[] = await this.Skills[i].GrabContextPackages(event_id, source_obj, arrs_extra);
+            for (let j = 0; j < temp_packages.length; j++) {
+                static_packages.push(temp_packages[j]);
+            }
+        }
+        return static_packages;
     }
 
     

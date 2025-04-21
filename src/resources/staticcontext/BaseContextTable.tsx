@@ -19,6 +19,7 @@ import { LocationRestriction } from "../../classes/feature/exploration/Explorati
 import { Faction } from "../../classes/feature/faction/Faction";
 import SkillDisplay from "../../display/components/features/skill/SkillDisplay";
 import { WarbandProperty } from "../../classes/saveitems/Warband/WarbandProperty";
+import { FactionModelRelationship } from "../../classes/relationship/faction/FactionModelRelationship";
 
 export const BaseContextCallTable : CallEventTable = {
     option_search_viable: {

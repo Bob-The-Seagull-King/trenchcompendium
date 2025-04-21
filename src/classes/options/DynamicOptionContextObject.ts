@@ -22,9 +22,12 @@ class DynamicOptionContextObject extends DynamicContextObject {
     public constructor(data : IContextObject, option_obj : StaticOptionContextObject, parent :  DynamicContextObject | null) {
         super(data, parent);
         this.OptionChoice = option_obj;
+    }
 
+    public async BuildSelections() {
         for (let i = 0; i < this.OptionChoice.MyOptions.length; i++) {
             const NewSelection : SelectedOption = new SelectedOption(this.OptionChoice.MyOptions[i], this);
+            await NewSelection.GetSelectionChoices();
             this.Selections.push(NewSelection);
         }
     }

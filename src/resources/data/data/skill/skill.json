@@ -507,15 +507,16 @@
         "source": "core",
         "tags": { "trait": true },
         "contextdata": { 
-        "warband_wide": {}, "add_extra_model": {
-            "count": 1,
-            "restriction": [
-                {
-                    "res_type": "keyword",
-                    "val": "kw_ELITE"
-                }
-            ]
-        } },
+            "warband_wide": {}, 
+            "add_extra_model": {
+                "count": 1,
+                "restriction": [
+                    {
+                        "res_type": "keyword",
+                        "val": "kw_ELITE"
+                    }
+                ]
+            } },
         "description": [            
             {
                 "tags": {"desc_type" : "default"},
@@ -525,7 +526,25 @@
             ]
             }
         ],
-        "options": [],
+        "options": [
+            {
+                "ref_id" : "ot_sultansfavour_getmodels",
+                "name" : "Available Models",
+                "description" : [],
+                "category" : "contextobject",
+                "parent_level" : 1,
+                "dyna_only": true,
+                "question_name" : "getfactionmodelswithcount",
+                "question" : {
+                    "classes": [],
+                    "questions": [
+                        {
+                            "antipropertyq": {"warband_maximum":0}
+                        }
+                    ]
+                }
+            }
+        ],
         "skill_group": ["pt_sublimegate"]
     },
     {
