@@ -1987,5 +1987,126 @@
             
         ],
         "skill_group": ["pt_mammon"]
+    },
+    {
+        "id": "sk_infectthemind",
+        "name": "Infect the Mind",
+        "source": "core",
+        "tags": { "trait": true},
+        "contextdata": {
+            "warband_wide": {}
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "At the start of the battle, after the deployment, select one enemy model. You can move this model up to 6” in any direction you wish, though not into Melee combat, into impassable terrain or out of the battlefield."
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_antipopeofavignon"]
+    },
+    {
+        "id": "sk_eyeofbeelzebub",
+        "name": "Eye of Beelzebub",
+        "source": "core",
+        "tags": { "action": true},
+        "contextdata": {
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The overwhelming mental pressure of this emissary of Beelzebub overwhelms any mind. With a successful ACTION this model can force any single enemy model with 24\" that is in cover (but not in Melee combat) to move 1\" to leave the cover. This model is moved by your opponent, and cannot take the model into Melee combat or into another cover.",
+                "glossary": [
+                    {"val": "ACTION", "id": "kw_action"}
+            ]
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_antipopeofavignon"]
+    },
+    {
+        "id": "sk_silveredtongue",
+        "name": "Silvered Tongue",
+        "source": "core",
+        "tags": { "action": true},
+        "contextdata": {
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "With a successful ACTION this model can force any opponent it is melee combat with to make one of its own Melee attacks against itself. You can choose which weapon to use.",
+                "glossary": [
+                    {"val": "ACTION", "id": "kw_action"}
+            ]
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_antipopeofavignon"]
+    },
+    {
+        "id": "sk_swinehybrid",
+        "name": "Swine Hybrid",
+        "source": "core",
+        "tags": { "trait": true},
+        "contextdata": {
+            "upgrade_stat": { "upgrades": [{"stat": "movement", "value": 2}]}
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Movement Characteristic of this model is increased by 2\"."
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_antipopeofavignon"]
+    },
+    {
+        "id": "sk_beelzebubswisdom",
+        "name": "Beelzebub's Wisdom",
+        "source": "core",
+        "tags": { "trait": true, "enemy_penalty": true},
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Infested with the Black Grail, the head of this model is distended and liquid matter oozes out of its many trepanned holes. So great is the sheer willpower of this model that any enemy Charging it can only use their base Movment characteristics and not add D6 to determine if they reach the model or not."
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_antipopeofavignon"]
+    },
+    {
+        "id": "sk_feastondisease",
+        "name": "Feast on Disease",
+        "source": "core",
+        "tags": { "trait": true, "bonus": true },
+        "contextdata": {
+            "bonus_ability": {
+                "action_type": ["attack"]
+            }},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": " As long as the target has at least 1 INFECTION MARKER when the attack is made, all attacks of this model need 1 less BLOOD MARKER/INFECTION MARKER to cause a Bloodbath.",
+                "glossary": [
+                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"},
+                    {"val": "INFECTION MARKER", "id": "kw_infectionmarker"}
+            ]
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_antipopeofavignon"]
     }
 ]
