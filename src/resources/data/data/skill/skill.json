@@ -1727,5 +1727,133 @@
             
         ],
         "skill_group": ["pt_infernalnoble"]
+    },
+    {
+        "id": "sk_cockroachvitality",
+        "name": "Cockroach Vitality",
+        "source": "core",
+        "tags": { "trait": true, "bonus": true },
+        "contextdata": { 
+            "bonus_ability": {
+                "action_type": ["attack"]
+            } },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "BLOOD MARKERS cannot be used to penalise the Melee or Ranged Attacks of this model, though otherwise they can be used as normal.",
+                "glossary": [
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"}
+            ]
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_orderofthefly"]
+    },
+    {
+        "id": "sk_eyesofthefly",
+        "name": "Eyes of the Fly",
+        "source": "core",
+        "tags": { "trait": true, "bonus": true },
+        "contextdata": {
+            "bonus_ability": {
+                "action_type": ["attack_range"]
+            }},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This model ignores the penalties associated with Cover and Long Range.",
+                "glossary": [
+                    {"val": "Cover", "id": "gl_cover"}
+            ]
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_orderofthefly"]
+    },
+    {
+        "id": "sk_wingsofthefly",
+        "name": "Wings of the Fly",
+        "source": "core",
+        "tags": { "trait": true },
+        "contextdata": {            
+            "set_stat": { "upgrades" : [
+                {"stat": "movetype", "value": 1}
+                ]}
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "If this model has an Infantry Movement characteristic, it gains a Fly Movement characteristic with the same value."
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_orderofthefly"]
+    },
+    {
+        "id": "sk_grailplague",
+        "name": "Grail Plague",
+        "source": "core",
+        "tags": { "trait": true },
+        "contextdata": {"warband_wide": {}},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "At the start of each battle, select one enemy model without the Keyword BLACK GRAIL. This model starts the game with one INFECTION MARKER.",
+                "glossary": [
+                    {"val": "BLACK GRAIL", "id": "kw_blackgrail"},
+                    {"val": "INFECTION MARKER", "id": "gl_infectionmarker"}
+            ]
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_orderofthefly"]
+    },
+    {
+        "id": "sk_deceitofbeelzebub",
+        "name": "Deceit of Beelzebub",
+        "source": "core",
+        "tags": { "action": true },
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "As a RISKY ACTION, this model can change places with another model within 8\". Both models are removed from the battlefield and then replaced immediately as close as possible to the other’s location.",
+                "glossary": [
+                    {"val": "RISKY ACTION", "id": "kw_riskyaction"}
+            ]
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_orderofthefly"]
+    },
+    {
+        "id": "sk_knightofthefly",
+        "name": "Knight of the Fly",
+        "source": "core",
+        "tags": { "trait": true,  "enemy_penalty": true },
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Ranged Attacks against this model suffer -1 DICE to hit.",
+                "glossary": [
+                    {"val": "-1 DICE", "id": "kw_minusdice"}
+            ]
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_orderofthefly"]
     }
 ]
