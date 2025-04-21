@@ -1453,7 +1453,10 @@
         "name": "Pennies From Heaven",
         "source": "core",
         "tags": { "trait": true },
-        "contextdata": {},
+        "contextdata": {
+            "gain_ducats": {
+                "dice_value": 5
+            }},
         "description": [            
             {
                 "tags": {"desc_type" : "default"},
@@ -1596,5 +1599,133 @@
             }
         ],
         "skill_group": ["pt_learnedsaint"]
+    },
+    {
+        "id": "sk_blessedmurder",
+        "name": "Blessed Murder",
+        "source": "core",
+        "tags": { "trait": true },
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Each time this model takes an enemy Out of Action via any ACTION it takes, the model with this Skill gains 1 BLESSINGS DICE.",
+                "glossary": [
+                    {"val": "ACTION", "id": "kw_action"},
+                    {"val": "BLESSINGS DICE", "id": "kw_blessingmarker"}
+            ]
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_infernalnoble"]
+    },
+    {
+        "id": "sk_sadistic",
+        "name": "Sadistic",
+        "source": "core",
+        "tags": { "trait": true, "bonus": true },
+        "contextdata": { 
+            "bonus_ability": {
+                "bonus_type": ["hit_roll","injury_roll"]
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You gain +1 DICE for all Injury rolls and to Hit Rolls against opponents that are Down.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "Down", "id": "gl_down"}
+            ]
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_infernalnoble"]
+    },
+    {
+        "id": "sk_hellfire",
+        "name": "Hellfire",
+        "source": "core",
+        "tags": { "action": true, "attack": true, "attack_ranged": true },
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The model can take a RISKY ACTION. Select a friendly model within 18” of the caster that the caster can see. Draw a straight line between the models which travels along the ground. Every model in the way spontaneously bursts into flames from Hell. Roll on the Injury Chart for each model including the friendly model at the end. The attack has the Keyword FIRE.",
+                "glossary": [
+                    {"val": "RISKY ACTION", "id": "kw_riskyaction"},
+                    {"val": "FIRE", "id": "kw_fire"}
+            ]
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_infernalnoble"]
+    },
+    {
+        "id": "sk_30piecesofsilver",
+        "name": "30 Pieces of Silver",
+        "source": "core",
+        "tags": { "trait": true },
+        "contextdata": {
+            "gain_ducats": {
+                "dice_value": 5
+            }},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "At the end of each battle, if this model was fielded, your Warband gains an additional D6x5 ducats."
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_infernalnoble"]
+    },
+    {
+        "id": "sk_bloodsacrifice",
+        "name": "Blood Sacrifice",
+        "source": "core",
+        "tags": { "action": true },
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "With a successful ACTION, this model can transfer one of its BLOOD MARKERS to any friendly model within 6\".",
+                "glossary": [
+                    {"val": "ACTION", "id": "kw_action"},
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"}
+            ]
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_infernalnoble"]
+    },
+    {
+        "id": "sk_lashofacheron",
+        "name": "Lash of Acheron",
+        "source": "core",
+        "tags": { "action": true, "attack": true },
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "With a successful RISKY ACTION you can select any model within 6”. Roll on the Injury chart for that model immediately. This attack ignores Armour.",
+                "glossary": [
+                    {"val": "RISKY ACTION", "id": "kw_riskyaction"}
+            ]
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_infernalnoble"]
     }
 ]
