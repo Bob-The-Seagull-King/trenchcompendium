@@ -1855,5 +1855,137 @@
             
         ],
         "skill_group": ["pt_orderofthefly"]
+    },
+    {
+        "id": "sk_moneycanbuyanything",
+        "name": "Money Can Buy Anything",
+        "source": "core",
+        "tags": { "trait": true },
+        "contextdata": {
+            "warband_wide": {}, 
+            "add_extra_equipment": {
+                "count": 1,
+                "restriction": []
+            }},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You can increase a LIMIT of any Weapon, piece of Equipment or Armour by 1.",
+                "glossary": [
+                    {"val": "LIMIT", "id": "kw_limit"}
+            ]
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_mammon"]
+    },
+    {
+        "id": "sk_unsecuredloan",
+        "name": "Unsecured Loan",
+        "source": "core",
+        "tags": { "trait": true},
+        "contextdata": {
+            "gain_ducats": {
+                "value": 100
+            }},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Gain 100 ducats immediately. These ducats are only gained once, at the moment the skill is chosen."
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_mammon"]
+    },
+    {
+        "id": "sk_crookeddice",
+        "name": "Crooked Dice",
+        "source": "core",
+        "tags": { "trait": true},
+        "contextdata": {"activated": {}},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Once per game, the model with this Skill can re-roll all the dice of any single dice for one ACTION or an Injury roll it makes.",
+                "glossary": [
+                    {"val": "ACTION", "id": "kw_action"}
+            ]
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_mammon"]
+    },
+    {
+        "id": "sk_plutocracy",
+        "name": "Plutocracy",
+        "source": "core",
+        "tags": { "trait": true},
+        "contextdata": {
+            "add_fireteam_model" : { 
+                "type": "standard", 
+                "count": 1, 
+                "restriction": [
+                    {
+                        "type": "keyword",
+                        "have": false,
+                        "value": "kw_elite"
+                    }
+                ]
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This model may form a FIRETEAM with any one non-ELITE model of the Warband. Further, failing a RISKY ACTION will not end the Activation of either this model or the other model in the FIRETEAM.",
+                "glossary": [
+                    {"val": "FIRETEAM", "id": "kw_fireteam"},
+                    {"val": "RISKY ACTION", "id": "kw_riskyaction"}
+            ]
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_mammon"]
+    },
+    {
+        "id": "sk_eternaldebt",
+        "name": "Eternal Debt",
+        "source": "core",
+        "tags": { "trait": true},
+        "contextdata": {"warband_wide": {}},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Wretched of this Warband are never lost as casualties, as their heads (kept as surety by Mammon) are used to re-grown the lost bodies. All Wretched models of the Warband are considered to make a full recovery after the battle if taken Out of Action."
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_mammon"]
+    },
+    {
+        "id": "sk_aureateskin",
+        "name": "Aureate Skin",
+        "source": "core",
+        "tags": { "trait": true},
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The model with this skill is granted the splendid (yet tarnished) golden skin of their Patron, and their blood turns into molten gold. Each time the model suffers a blood marker, add 5 ducats to your treasury."
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_mammon"]
     }
 ]
