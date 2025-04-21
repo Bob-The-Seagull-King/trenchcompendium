@@ -1402,5 +1402,187 @@
             
         ],
         "skill_group": ["pt_warriorsaint"]
+    },
+    {
+        "id": "sk_walkwithgod",
+        "name": "Walk with God",
+        "source": "core",
+        "tags": { "trait": true },
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This model can pick any Skill from any Skill Chart available to it, including any Exploration Skill."
+            }
+        ],
+        "options": [
+            {      
+                "searchtype": "complex",
+                "searchparam":    {
+                    "type": "skill",
+                    "request":    {
+                        "operator": "and",
+                        "terms": [
+                            {
+                                "item": "tags",
+                                "value": "patron",
+                                "equals": false,
+                                "strict": true,
+                                "istag" : true,
+                                "tagvalue": ""
+                            }
+                        ],
+                        "subparams": [
+                            {
+                                "operator": "or",
+                                "terms": [
+                                    {             
+                                        "item": "skill_group",
+                                        "value": "sg_meleeandstrength",
+                                        "equals": true,
+                                        "strict": true
+                                    },
+                                    {             
+                                        "item": "skill_group",
+                                        "value": "sg_exploration",
+                                        "equals": true,
+                                        "strict": true
+                                    },
+                                    {             
+                                        "item": "skill_group",
+                                        "value": "sg_ranged",
+                                        "equals": true,
+                                        "strict": true
+                                    },
+                                    {             
+                                        "item": "skill_group",
+                                        "value": "sg_stealthandspeed",
+                                        "equals": true,
+                                        "strict": true
+                                    },
+                                    {             
+                                        "item": "skill_group",
+                                        "value": "sg_wildcard",
+                                        "equals": true,
+                                        "strict": true
+                                    }
+                                ],
+                                "subparams": []
+                            }
+                        ]
+                    }
+                }   
+            }
+        ],
+        "skill_group": ["pt_learnedsaint"]
+    },
+    {
+        "id": "sk_knowledgeofscience",
+        "name": "Knowledge of Science",
+        "source": "core",
+        "tags": { "trait": true },
+        "contextdata": {
+            "warband_wide": {}, 
+            "add_extra_equipment": {
+                "count": 1,
+                "restriction": []
+            } },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You can increase a LIMIT of any Weapon, piece of Equipment or Armour by 1.",
+                "glossary": [
+                    {"val": "LIMIT", "id": "kw_limit"}
+            ]
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_learnedsaint"]
+    },
+    {
+        "id": "sk_favouredbygod",
+        "name": "Favoured By God",
+        "source": "core",
+        "tags": { "trait": true },
+        "contextdata": {
+            "gain_glory": {
+                "value": 1
+            }},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "At the end of each battle, your Warband gains an additional Glory Point."
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_learnedsaint"]
+    },
+    {
+        "id": "sk_penniesfromheaven",
+        "name": "Pennies From Heaven",
+        "source": "core",
+        "tags": { "trait": true },
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "At the end of each battle, if this model was fielded, your Warband gains an additional D6x5 ducats."
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_learnedsaint"]
+    },
+    {
+        "id": "sk_organisationalskills",
+        "name": "Organisational Skills",
+        "source": "core",
+        "tags": { "trait": true },
+        "contextdata": {
+            "warband_wide": {}, 
+            "add_extra_model": {
+                "count": 1,
+                "restriction": [
+                    {
+                        "res_type": "keyword",
+                        "val": "kw_ELITE"
+                    }
+                ]
+            } },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You can increase the number of models that are normally limited by 1. This does not include ELITE Models",
+                "glossary": [
+                    {"val": "ELITE", "id": "kw_elite"}
+            ]
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_learnedsaint"]
+    },
+    {
+        "id": "sk_healingarts",
+        "name": "Healing Arts",
+        "source": "core",
+        "tags": { "trait": true },
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "When this model rolls on the Serious Injuries Chart, it may re-roll. The second result stands."
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_learnedsaint"]
     }
 ]
