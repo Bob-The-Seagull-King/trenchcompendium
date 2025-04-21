@@ -1272,5 +1272,135 @@
             
         ],
         "skill_group": ["pt_temporallord"]
+    },
+    {
+        "id": "sk_blessingsofawarriorsaint",
+        "name": "Blessings of a Warrior Saint",
+        "source": "core",
+        "tags": { "trait": true },
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This model starts each battle with D3 BLESSINGS DICE.",
+                "glossary": [
+                    {"val": "BLESSINGS DICE", "id": "kw_blessingmarker"}
+            ]
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_warriorsaint"]
+    },
+    {
+        "id": "sk_endurethesuffering",
+        "name": "Endure the Suffering",
+        "source": "core",
+        "tags": { "trait": true },
+        "contextdata": {             
+            "upgrade_character_stat": { "upgrades": [{"stat": "scars", "value": 1}]} 
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Add +1 to the maximum Scars your model can sustain.",
+                "glossary": [
+                    {"val": "Scars", "id": "gl_scar"}
+                ]
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_warriorsaint"]
+    },
+    {
+        "id": "sk_dragonslayer",
+        "name": "Dragonslayer",
+        "source": "core",
+        "tags": { "trait": true, "bonus": true },
+        "contextdata": {
+            "bonus_ability": {
+                "action_type": ["attack_melee"]
+            }},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "When this model rolls on the Injury Chart in melee against an enemy that is Down, you don’t have to roll one of the Injury Dice but can set it as 6 and then roll the rest of the dice pool.",
+                "glossary": [
+                    {"val": "Down", "id": "gl_down"}
+            ]
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_warriorsaint"]
+    },
+    {
+        "id": "sk_davidandgoliath",
+        "name": "David and Goliath",
+        "source": "core",
+        "tags": { "trait": true, "bonus": true },
+        "contextdata": {
+            "bonus_ability": {
+                "action_type": ["attack_melee"]
+            }},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "When this model makes a Melee Attack ACTION against an enemy model on a 40mm or larger base, they roll 3d6 to hit instead of 2d6, totalling the sum.",
+                "glossary": [
+                    {"val": "ACTION", "id": "kw_action"}
+            ]
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_warriorsaint"]
+    },
+    {
+        "id": "sk_onyourknees",
+        "name": "On Your Knees",
+        "source": "core",
+        "tags": { "trait": true },
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Downed Enemy models in Melee Combat with this model cannot automatically Stand at the start of their Activation.",
+                "glossary": [
+                    {"val": "Downed", "id": "gl_down"}
+            ]
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_warriorsaint"]
+    },
+    {
+        "id": "sk_warriorsprayer",
+        "name": "Warrior's Prayer",
+        "source": "core",
+        "tags": { "action": true },
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "As a RISKY ACTION, this model causes FEAR until the end of its Activation and may remove a BLOOD MARKER if it has any.",
+                "glossary": [
+                    {"val": "RISKY ACTION", "id": "kw_riskyaction"},
+                    {"val": "FEAR", "id": "kw_fear"},
+                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"}
+            ]
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_warriorsaint"]
     }
 ]
