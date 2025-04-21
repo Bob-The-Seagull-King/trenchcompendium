@@ -527,23 +527,7 @@
             }
         ],
         "options": [
-            {
-                "ref_id" : "ot_sultansfavour_getmodels",
-                "name" : "Available Models",
-                "description" : [],
-                "category" : "contextobject",
-                "parent_level" : 1,
-                "dyna_only": true,
-                "question_name" : "getfactionmodelswithcount",
-                "question" : {
-                    "classes": [],
-                    "questions": [
-                        {
-                            "antipropertyq": {"warband_maximum":0}
-                        }
-                    ]
-                }
-            }
+            
         ],
         "skill_group": ["pt_sublimegate"]
     },

@@ -28,7 +28,7 @@ export const BaseContextCallTable : CallEventTable = {
             let is_valid_pass = false
 
             if (trackVal.classes.includes(context_static.constructor.name)) {
-
+                
                 for (let i = 0; i < trackVal.questions.length; i++) {
 
                     let truthValCurrent = true;
@@ -80,6 +80,23 @@ export const BaseContextCallTable : CallEventTable = {
                                 }
                             } else {
                                 truthValCurrent = false;
+                            }
+                            
+                        }
+                    }
+                    if (questionCurrent.antipropertyq) {
+                        const entrykeys = Object.keys(questionCurrent.antipropertyq);
+
+                        for (let j = 0; j < entrykeys.length; j++) {
+                            const val = questionCurrent.antipropertyq[entrykeys[j]]
+                            if (entrykeys[j] in context_static) {
+                                if (context_static[entrykeys[j] as keyof (typeof context_static)] != val) {
+                                    undefined;
+                                } else {
+                                    truthValCurrent = false;
+                                }
+                            } else {
+                                truthValCurrent = true;
                             }
                             
                         }
