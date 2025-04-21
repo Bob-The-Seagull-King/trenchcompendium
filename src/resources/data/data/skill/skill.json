@@ -1093,5 +1093,184 @@
         "options": [],
         "table_val": 11,
         "skill_group": ["sg_wildcard"]
+    },
+    {
+        "id": "sk_firearmprocurement",
+        "name": "Firearm Procurement",
+        "source": "core",
+        "tags": { "trait": true },
+        "contextdata": {
+            "warband_wide": {},
+            "purchase_modifier_equipment": {
+                "mod": [
+                    {
+                        "cost": -5,
+                        "requirements": [
+                            {
+                                "category": "ranged"
+                            },
+                            {
+                                "cost": 20,
+                                "req_mod": ">="
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The cost of any ranged eapon worth 20 ducats or more is reduced by 5 ducats."
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_temporallord"]
+    },
+    {
+        "id": "sk_mendelistchemicals",
+        "name": "Mendelist Chemicals",
+        "source": "core",
+        "tags": { "trait": true },
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "BLOOD MARKERS of this model cannot be added to the Injury rolls against this model. Other bonuses to the Injury rolls apply, and Bloodbath against this model works as normal.",
+                "glossary": [
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"}
+            ]
+            }
+        ],
+        "options": [],
+        "skill_group": ["pt_temporallord"]
+    },
+    {
+        "id": "sk_armourandequipmentprocurement",
+        "name": "Armour & Equipment Procurement",
+        "source": "core",
+        "tags": { "trait": true },
+        "contextdata": {
+            "warband_wide": {},
+            "purchase_modifier_equipment": {
+                "mod": [
+                    {
+                        "cost": -5,
+                        "requirements": [
+                            {
+                                "category": "armour"
+                            },
+                            {
+                                "cost": 20,
+                                "req_mod": ">="
+                            }
+                        ]
+                    },
+                    {
+                        "cost": -5,
+                        "requirements": [
+                            {
+                                "category": "equipment"
+                            },
+                            {
+                                "cost": 20,
+                                "req_mod": ">="
+                            }
+                        ]
+                    }
+                ]
+            }},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The cost of any suit of armour or equipment worth 20 ducats or more is reduced by 5 ducats."
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_temporallord"]
+    },
+    {
+        "id": "sk_meleeweaponprocurement",
+        "name": "Melee Weapon Procurement",
+        "source": "core",
+        "tags": { "trait": true },
+        "contextdata": {
+            "warband_wide": {},
+            "purchase_modifier_equipment": {
+                "mod": [
+                    {
+                        "cost": -5,
+                        "requirements": [
+                            {
+                                "category": "melee"
+                            },
+                            {
+                                "cost": 20,
+                                "req_mod": ">="
+                            }
+                        ]
+                    }
+                ]
+            }},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The cost of any melee weapon worth 20 ducats or more is reduced by 5 ducats."
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_temporallord"]
+    },
+    {
+        "id": "sk_sniperschool",
+        "name": "Sniper School",
+        "source": "core",
+        "tags": { "trait": true, "bonus": true },
+        "contextdata": {
+            "bonus_ability": {
+                "action_type": ["attack_range"]
+            }},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "All Ranged attacks of this model need 1 less BLOOD MARKER to cause a Bloodbath.",
+                "glossary": [
+                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"}
+            ]
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_temporallord"]
+    },
+    {
+        "id": "sk_specialassaulttraining",
+        "name": "Special Assault Training",
+        "source": "core",
+        "tags": { "trait": true, "bonus": true },
+        "contextdata": {
+            "bonus_ability": {
+                "action_type": ["attack_melee"]
+            }},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "All Melee attacks of this model need 1 less BLOOD MARKER to cause a Bloodbath.",
+                "glossary": [
+                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"}
+            ]
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_temporallord"]
     }
 ]
