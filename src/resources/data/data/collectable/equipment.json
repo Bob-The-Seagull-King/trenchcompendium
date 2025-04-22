@@ -327,7 +327,7 @@
         },
         "contextdata": {
             "get_weapon": {},
-            "injury_bonus": {"type": "dice", "value": 1}
+            "injury_bonus": {"bonuses": [{"type": "dice", "value": 1}]}
         },
         "description": [    
             {
@@ -361,7 +361,7 @@
         },
         "contextdata": {
             "get_weapon": {},
-            "injury_bonus": {"type": "dice", "value": 1}
+            "injury_bonus": {"bonuses": [{"type": "dice", "value": 1}]}
         },
         "description": [    
             {
@@ -395,7 +395,7 @@
         },
         "contextdata": {
             "get_weapon": {},
-            "injury_bonus": {"type": "dice", "value": 1}},
+            "injury_bonus": {"bonuses": [{"type": "dice", "value": 1}]}},
         "description": [ 
             {
                 "tags": {"desc_type" : "default"},
@@ -428,7 +428,7 @@
         },
         "contextdata": {
             "get_weapon": {},
-            "injury_bonus": {"type": "dice", "value": -1}},
+            "injury_bonus": {"bonuses": [{"type": "dice", "value": -1}]}},
         "description": [ 
             {
                 "tags": {"desc_type" : "default"},
@@ -461,8 +461,8 @@
         },
         "contextdata": {
             "get_weapon": {},
-            "injury_bonus": {"type": "dice", "value": -1, "condition_type": "range", "condition_value": "long"},
-            "hit_bonus": {"type": "dice", "value": 1, "condition_type": "range", "condition_value": "long"}},
+            "injury_bonus": {"bonuses": [{"type": "dice", "value": -1, "condition_type": "range", "condition_value": "long"}]},
+            "hit_bonus": {"bonuses": [{"type": "dice", "value": 1, "condition_type": "range", "condition_value": "long"},{"type": "dice", "value": 1}]}},
         "description": [ 
             {
                 "tags": {"desc_type" : "default"},
@@ -521,7 +521,7 @@
         },
         "contextdata": {
             "get_weapon": {},
-            "hit_bonus": {"type": "dice", "value": 1}},
+            "hit_bonus": {"bonuses": [{"type": "dice", "value": 1}]}},
         "description": [ 
             {
                 "tags": {"desc_type" : "default"},
@@ -545,7 +545,7 @@
         "id": "eq_grenades",
         "name": "Grenades",
         "source": "core",
-        "tags": {"action": true, "weapon": true},
+        "tags": {"action": true, "weapon": true, "grenade": true},
         "category": "ranged",
         "distance": 8,
         "stats": {
@@ -577,7 +577,7 @@
         "id": "eq_incendiarygrenades",
         "name": "Incendiary Grenades",
         "source": "core",
-        "tags": {"action": true, "weapon": true},
+        "tags": {"action": true, "weapon": true, "grenade": true},
         "category": "ranged",
         "distance": 8,
         "stats": {
@@ -651,7 +651,7 @@
         },
         "contextdata": {
             "get_weapon": {},
-            "injury_bonus": {"type": "dice", "value": -1, "condition_type": "range", "condition_value": "long"},
+            "injury_bonus": {"bonuses": [{"type": "dice", "value": -1, "condition_type": "range", "condition_value": "long"}]},
             "ignore_armour": {},
             "auto_hit": {}},
         "description": [ 
@@ -762,7 +762,7 @@
         },
         "contextdata": {
             "get_weapon": {},
-            "hit_bonus": {"type": "dice", "value": -1}
+            "hit_bonus": {"bonuses": [{"type": "dice", "value": -1}]}
         },
         "description": [   
             {
@@ -856,7 +856,7 @@
         },
         "contextdata": {
             "get_weapon": {},
-            "injury_bonus": {"type": "flat", "value": 1}
+            "injury_bonus": {"bonuses": [{"type": "flat", "value": 1}]}
         },
         "description": [   
         ],
@@ -917,7 +917,7 @@
         },
         "contextdata": {
             "get_weapon": {},
-            "injury_bonus": {"type": "flat", "value": 2}
+            "injury_bonus": {"bonuses": [{"type": "flat", "value": 2}]}
         },
         "description": [ 
             {
@@ -948,7 +948,7 @@
         },
         "contextdata": {
             "get_weapon": {},
-            "injury_bonus": {"type": "flat", "value": 1}
+            "injury_bonus": {"bonuses": [{"type": "flat", "value": 1}]}
         },
         "description": [ 
             {
@@ -1323,7 +1323,7 @@
         },
         "contextdata": {
             "get_weapon": {},
-            "injury_bonus": {"type": "flat", "value": 1},
+            "injury_bonus": {"bonuses": [{"type": "flat", "value": 1}]},
             "extra_attack": {"value": 2}
         },
         "description": [ 
@@ -1462,7 +1462,7 @@
         },
         "contextdata": {
             "get_weapon": {},
-            "injury_bonus": {"type": "flat", "value": 1}
+            "injury_bonus": {"bonuses": [{"type": "flat", "value": 1}]}
         },
         "description": [            
             {
@@ -1493,7 +1493,7 @@
         },
         "contextdata": {
             "get_weapon": {"ignore": true},
-            "injury_bonus": {"type": "dice", "value": 1},
+            "injury_bonus": {"bonuses": [{"type": "dice", "value": 1}]},
             "ignore_armour": {}
         },
         "description": [            
@@ -1528,7 +1528,7 @@
         },
         "contextdata": {
             "get_weapon": {},
-            "hit_bonus": {"type": "dice", "value": 1}},
+            "hit_bonus": {"bonuses": [{"type": "dice", "value": 1}]}},
         "description": [ 
             {
                 "tags": {"desc_type" : "default"},
@@ -1651,7 +1651,7 @@
         },
         "contextdata": {
             "get_weapon": {},
-            "injury_bonus": {"type": "dice", "value": 2},
+            "injury_bonus": {"bonuses": [{"type": "dice", "value": 2}]},
             "ignore_armour": {},
             "stationary": {}
         },
@@ -1784,7 +1784,7 @@
         "id": "eq_molotovcocktail",
         "name": "Molotov Cocktail",
         "source": "core",
-        "tags": {"action": true, "weapon": true},
+        "tags": {"action": true, "weapon": true, "grenade": true},
         "category": "ranged",
         "distance": 6,
         "stats": {
@@ -1792,7 +1792,7 @@
         },
         "contextdata": {
             "get_weapon": {},
-            "injury_bonus": {"type": "dice", "value": -1}},
+            "injury_bonus": {"bonuses": [{"type": "dice", "value": -1}]}},
         "description": [ 
             {
                 "tags": {"desc_type" : "default"},
@@ -1825,8 +1825,8 @@
         },
         "contextdata": {
             "get_weapon": {},
-            "injury_bonus": {"type": "dice", "value": 2, "condition_type": "range", "condition_value": "short"},
-            "hit_bonus": {"type": "dice", "value": 1}},
+            "injury_bonus": {"bonuses": [{"type": "dice", "value": 2, "condition_type": "range", "condition_value": "short"}]},
+            "hit_bonus": {"bonuses": [{"type": "dice", "value": 1}]}},
         "description": [ 
             {
                 "tags": {"desc_type" : "default"},
@@ -1974,5 +1974,408 @@
         "options": [],
         "keywords": ["kw_heavy"],
         "modifiers": []
+    },
+    {
+        "id": "eq_automaticpistol",
+        "name": "Automatic Pistol",
+        "source": "core",
+        "tags": {"action": true, "weapon": true, "pistol": true},
+        "category": "ranged",
+        "distance": 12,
+        "stats": {
+            "hands_melee": 1,
+            "hands_ranged": 1,
+            "ranged": true,
+            "melee": true
+        },
+        "contextdata": {
+            "get_weapon": {},
+            "off_hand_functional": {},
+            "used_special_characteristic": {"character": "ranged"},
+            "injury_bonus": {"bonuses": [{"type": "dice", "value": -1}]},
+            "extra_attack": {"value": 2}
+        },
+        "description": [             
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "A model armed with an automatic pistol can use it in melee as well as ranged combat (using Ranged Characteristic), including as an off-hand weapon to execute an additional melee attack. You can make two Attack ACTIONS with the automatic pistol instead of one if used as a ranged weapon. They can be against the same target or two different ones.",
+                "glossary": [
+                    {"val": "ACTIONS", "id": "kw_action"}
+                ]
+            }   
+        ],
+        "lore": [        
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Automatic pistols are symbols of prestige owing to their rarity and cost. They are excellent weapons when storming trenches or fighting in hand-to-hand combat. They boast a high rate of fire, though they can be hard to control even for the best sharpshooters since they usually lack a stock."
+            }  
+        ],
+        "options": [],
+        "keywords": ["kw_assault"],
+        "modifiers": ["-1D to Injuries", "2 Attacks"]
+    },
+    {
+        "id": "eq_boltactionrifle",
+        "name": "Bolt-Action Rifle",
+        "source": "core",
+        "tags": {"action": true, "weapon": true, "rifle": true},
+        "category": "ranged",
+        "distance": 24,
+        "stats": {
+            "hands_ranged": 2,
+            "ranged": true
+        },
+        "contextdata": {
+            "get_weapon": {}},
+        "description": [  
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "The workhorse of the Great War. Sturdy, highly reliable and reasonably accurate, it is no surprise that most of the infantry of the Great War carry this battlefield classic."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_bayonetlug"],
+        "modifiers": []
+    },
+    {
+        "id": "eq_semiautomaticrifle",
+        "name": "Semi-Automatic Rifle",
+        "source": "core",
+        "tags": {"action": true, "weapon": true, "rifle": true},
+        "category": "ranged",
+        "distance": 24,
+        "stats": {
+            "hands_ranged": 2,
+            "ranged": true
+        },
+        "contextdata": {
+            "get_weapon": {}},
+        "description": [  
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Semi-automatic rifles are said to be an invention of Marbas, the Devil who holds great wisdom and knowledge in mechanical arts. They are excellent both at long range and in assault, combining accuracy and high rate of fire, though they are prone to jamming."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_bayonetlug","kw_assault"],
+        "modifiers": []
+    },
+    {
+        "id": "eq_automaticrifle",
+        "name": "Automatic Rifle",
+        "source": "core",
+        "tags": {"action": true, "weapon": true, "rifle": true},
+        "category": "ranged",
+        "distance": 24,
+        "stats": {
+            "hands_ranged": 2,
+            "ranged": true
+        },
+        "contextdata": {
+            "get_weapon": {},
+            "extra_attack": {"value": 2}
+        },
+        "description": [          
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "A model armed with an Automatic Rifle can make two attack ACTIONS instead of one. Both attacks must be against the same target.",
+                "glossary": [
+                    {"val": "ACTIONS", "id": "kw_action"}
+                ]
+            }   
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "A marvel of modern engineering, only a few prototypes exist. It has a high rate of fire and can be quickly re-loaded."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_bayonetlug","kw_assault"],
+        "modifiers": []
+    },
+    {
+        "id": "eq_automaticshotgun",
+        "name": "Automatic Shotgun",
+        "source": "core",
+        "tags": {"action": true, "weapon": true},
+        "category": "ranged",
+        "distance": 12,
+        "stats": {
+            "hands_ranged": 2,
+            "ranged": true
+        },
+        "contextdata": {
+            "get_weapon": {},
+            "injury_bonus": {"bonuses": [{"type": "dice", "value": -1, "condition_type": "range", "condition_value": "long"}]},
+            "hit_bonus": {"bonuses": [{"type": "dice", "value": 1, "condition_type": "range", "condition_value": "long"},{"type": "dice", "value": 1}]}},
+        "description": [ 
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Owing to its high accuracy, add +1 DICE to all rolls to hit and ignore the penalty to hit rolls when attacking at long range. However, injuries are rolled with -1 DICE at long range due to the low penetration power.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "-1 DICE", "id": "kw_minusdice"}
+                ]
+            }  
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "This shotgun is equipped with an auto-loader, a recent invention by the Prussian engineering corps of Königsberg. It is ideal for close quarter combat thanks to its high rate of power and accuracy. The technology has not been perfected, however, and sometimes leads to misfeeds and jams."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_bayonetlug","kw_shieldcombo","kw_assault"],
+        "modifiers": ["+1D to Hit"]
+    },
+    {
+        "id": "eq_submachinegun",
+        "name": "Submachine Gun",
+        "source": "core",
+        "tags": {"action": true, "weapon": true},
+        "category": "ranged",
+        "distance": 16,
+        "stats": {
+            "hands_ranged": 2,
+            "ranged": true
+        },
+        "contextdata": {
+            "get_weapon": {},
+            "extra_attack": {"value": 1}},
+        "description": [ 
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Can make two attack ACTIONS instead of one. These can be against a single target or two separate ones.",
+                "glossary": [
+                    {"val": "ACTIONS", "id": "kw_action"}
+                ]
+            }  
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"}, 
+                "content": "The submachine gun (or SMG) is a fully automatic firearm, trading lower penetration power and range for a much higher rate of fire. Ideal for short-range engagements, it is much sought-after by warbands despite its scarcity and high cost."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_assault"],
+        "modifiers": ["2 Attacks"]
+    },
+    {
+        "id": "eq_silenecedpistol",
+        "name": "Silenced Pistol",
+        "source": "core",
+        "tags": {"action": true, "weapon": true, "pistol": true},
+        "category": "ranged",
+        "distance": 12,
+        "stats": {
+            "hands_melee": 1,
+            "hands_ranged": 1,
+            "ranged": true,
+            "melee": true
+        },
+        "contextdata": {
+            "get_weapon": {},
+            "off_hand_functional": {},
+            "used_special_characteristic": {"character": "ranged"},
+            "hit_bonus": {"bonuses": [{"type": "dice", "value": 1, "condition_type": "cover"}]}
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "A model armed with a silenced pistol can use it in melee as well as ranged combat (using Ranged Characteristic), including as an off-hand weapon to execute an additional melee attack. Add +1 DICE to hit rolls if shot from behind any terrain obstacles.",
+                "glossary": [
+                    {"val": "terrain obstacles", "id": "gl_cover"}
+                ]
+            }  
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "A sophisticated sidearm made of Orichalcum or other holy metals, or from Infernal iron taken from the very prisons of Hell to muffle the wails of the damned. It is virtually silent and is excellent for ambushes or for shooting from behind cover."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_assault"],
+        "modifiers": ["+1D to Hit in Cover"]
+    },
+    {
+        "id": "eq_gasgrenades",
+        "name": "Gas Grenades",
+        "source": "core",
+        "tags": {"action": true, "weapon": true, "grenade": true},
+        "category": "ranged",
+        "distance": 8,
+        "stats": {
+            "ranged": true
+        },
+        "contextdata": {
+            "get_weapon": {},
+            "injury_bonus": {"bonuses": [{"type": "dice", "value": -1}]},
+            "ignore_armour": {},
+            "ignore_cover": {}},
+        "description": [ 
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Gas Grenades ignore all penalties for cover and armour but roll injuries with -1 DICE. They have BLAST 3\" – they hit all models within 3\" of a target they hit.",
+                "glossary": [
+                    {"val": "-1 DICE", "id": "kw_minusdice"},
+                    {"val": "BLAST 3\"", "id": "kw_blast"}
+                ]
+            }  
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Gas Grenades are insidious weapons, attacking the lungs and other internal organs with noxious fumes. Devil Alchemists of the 5th Circle are especially clever in creating these fiendish and hated weapons."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_grenade","kw_assault","kw_gas","kw_blast"],
+        "modifiers": []
+    },
+    {
+        "id": "eq_grenadelauncher",
+        "name": "Grenade Launcher",
+        "source": "core",
+        "tags": {"action": true, "weapon": true},
+        "category": "ranged",
+        "distance": 36,
+        "stats": {
+            "hands_ranged": 2,
+            "ranged": true
+        },
+        "contextdata": {
+            "get_weapon": {},
+            "ignore_cover": {}},
+        "description": [ 
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Ignores all penalties for cover. This weapon has a BLAST radius of 3\" – all models within this range are hit.",
+                "glossary": [
+                    {"val": "cover", "id": "gl_cover"},
+                    {"val": "BLAST 3\"", "id": "kw_blast"}
+                ]
+            }  
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Modifications of great siege rifles designed to lob grenades over long distances."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_heavy","kw_shrapnel","kw_blast"],
+        "modifiers": ["Ignore Cover"]
+    },
+    {
+        "id": "eq_satchelcharge",
+        "name": "Satchel Charge",
+        "source": "core",
+        "tags": {"action": true, "weapon": true, "grenade": true},
+        "category": "ranged",
+        "distance": 6,
+        "stats": {
+            "ranged": true
+        },
+        "contextdata": {
+            "get_weapon": {},
+            "injury_bonus": {"bonuses": [{"type": "dice", "value": 1}]},
+            "ignore_armour": {},
+            "activated": {}},
+        "description": [ 
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You can aim the Satchel Charge at either a 1mm x 1mm point on the ground or an enemy model within range. Next, take a Ranged Attack ACTION. If the roll fails (i.e. you roll 6 or less), the bomb lands 1” away from its intended location, multiplied by the number representing the degree of failure (for example, if you rolled 5, the bombard shot lands 2” away, as 7-5=2). The direction is decided by your opponent. A Satchel Charge adds +1 DICE to injury rolls. Additionally, if the Satchel Charge lands directly on top of a model, it ignores that model’s armour.",
+                "glossary": [
+                    {"val": "ACTION", "id": "kw_action"},
+                    {"val": "+1 DICE", "id": "kw_plusdice"}
+                ]
+            }  
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Battlefield explosives designed to break apart enemy fortifications and to crack even the toughest of armour."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_heavy","kw_consumable","kw_blast"],
+        "modifiers": ["Ignore Cover","+1D to Injuries"]
+    },
+    {
+        "id": "eq_antimaterialrifle",
+        "name": "Anti-Material Rifle",
+        "source": "core",
+        "tags": {"action": true, "weapon": true, "rifle": true},
+        "category": "ranged",
+        "distance": 36,
+        "stats": {
+            "hands_ranged": 2,
+            "ranged": true
+        },
+        "contextdata": {
+            "get_weapon": {},
+            "injury_bonus": {"bonuses": [{"type": "dice", "value": 1}]},
+            "ignore_armour": {}},
+        "description": [  
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Ignores armour. Add +1 DICE when rolling on the Injury Chart.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"}
+                ]
+            } 
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Enormous long rifles designed to take out heavily armoured targets, vehicles and strongpoints. With the powerful armour available to the armies of the Great war, these terrifying weapons are much in demand. A downside is their enormous weight and terrifying recoil, and thus they are most often used by Communicants or Anointed who possess the supernatural strength to wield such weapons."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_heavy", "kw_critical"],
+        "modifiers": ["Ignore Armour", "+1D to Injuries"]
+    },
+    {
+        "id": "eq_flamethrower",
+        "name": "Flamethrower",
+        "source": "core",
+        "tags": {"action": true, "weapon": true},
+        "category": "ranged",
+        "distance": 10,
+        "stats": {
+            "hands_ranged": 2,
+            "ranged": true
+        },
+        "contextdata": {
+            "get_weapon": {},
+            "ignore_armour": {},
+            "auto_hit": {}},
+        "description": [ 
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Hits up to two models within range automatically with an Attack Action as long as they are within 6\" of each other and within the Heavy Flamethrower range. Ignores armour. It also has the Keyword FIRE, so it causes an additional +1 BLOOD MARKER on enemies it hits, even if no other damage is caused.",
+                "glossary": [
+                    {"val": "ACTION", "id": "kw_action"},
+                    {"val": "-1 DICE", "id": "kw_minusdice"},
+                    {"val": "FIRE", "id": "kw_fire"}
+                ]
+            }  
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "These massive flamethrowers are normally mounted on armoured vehicles, but those possessing uncanny strength may use them as infantry weapons."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_fire","kw_heavy"],
+        "modifiers": ["Ignore Armour"]
     }
 ]
