@@ -2344,7 +2344,7 @@
     },
     {
         "id": "eq_flamethrower",
-        "name": "Flamethrower",
+        "name": "Heavy Flamethrower",
         "source": "core",
         "tags": {"action": true, "weapon": true},
         "category": "ranged",
