@@ -102,10 +102,6 @@ const WbbEditViewFighter: React.FC<WbbEditViewFighterProps> = ({ item, activePop
                     rootClose={true}
                     overlay={
                         <Popover.Body className="popover Wbb-item-actions-popover">
-                            <div className='title'>
-                                {'Actions'}
-                            </div>
-
                             <div className={'actions'}>
                                 <div
                                     className={'action action-copy'}

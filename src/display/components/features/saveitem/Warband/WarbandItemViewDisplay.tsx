@@ -37,20 +37,16 @@ const WarbandItemViewDisplay = (prop: any) => {
         
         <ErrorBoundary fallback={<div>Something went wrong with SaveItemViewDisplay.tsx</div>}>
             <>
-                <div className="row">        
-                    <span className="">
-                        <Button className=" no-padding" variant="" onClick={() => exportData()}>
-                            <FontAwesomeIcon icon={faDownload} className="contentpacklabel no-margin"/>
-                        </Button>
-                    </span>    
-                </div>
+                <span className="">
+                    <Button className=" no-padding" variant="" onClick={() => exportData()}>
+                        <FontAwesomeIcon icon={faDownload} className="contentpacklabel no-margin"/>
+                    </Button>
+                </span>
 
-                <div className="row">
-                    <div className="largefonttext centerPosition">
-                            <div className="widecentertext">
-                                {WarbandItem.Name} 
-                            </div>
-                        </div>
+                <div className="largefonttext centerPosition">
+                    <div className="widecentertext">
+                        {WarbandItem.Name}
+                    </div>
                 </div>
 
                 <WarbandPatronDisplay wrbnd={WarbandItem} mngr={Manager} updater={UpdateFunction}/>

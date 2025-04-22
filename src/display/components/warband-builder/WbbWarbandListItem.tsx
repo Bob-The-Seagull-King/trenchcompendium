@@ -101,10 +101,6 @@ const WbbWarbandListItem: React.FC<WbbWarbandListItemProps> = ({ item, manager, 
                     rootClose={true} // closes when clicking outside
                     overlay={
                         <Popover.Body className="popover Wbb-item-actions-popover">
-                            <div className='title'>
-                                {'Actions'}
-                            </div>
-
                             <div className={'actions'}>
                                 <div
                                     className={'action action-copy'}

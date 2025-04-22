@@ -4,9 +4,40 @@
 //
 
 .WbbEditView
+
+
+
     .WbbEditViewMain
-        padding-top: 30px
+        padding-top: 0px
         padding-bottom: 30px
+
+        @media(min-width: 768px)
+            display: flex
+            gap: 15px
+
+    .warband-wrap
+        @media(min-width: 768px)
+            width: calc(50% - 8px)
+
+        &.fighter-selected
+            @media(max-width: 767px)
+                display: none
+
+    .selected-item-wrap
+        @media(min-width: 768px)
+            width: calc(50% - 8px)
+            margin-top: 30px
+
+        .selected-item-empty
+            @media(max-width: 767px)
+                display: none
+
+            @media(min-width: 768px)
+                background-color: $color-bg-2
+                height: 100%
+                display: flex
+                flex-direction: column
+                justify-content: center
 
     .warband-summary
 

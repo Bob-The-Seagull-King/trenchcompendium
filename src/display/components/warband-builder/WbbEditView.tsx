@@ -68,163 +68,175 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
     return (
         <div className="WbbEditView">
             {/* The Warband List */}
-            {(warband != null && !selectedFighter) &&
+            {(warband != null) &&
                 <div className={'container WbbEditViewMain'}>
-                    <h1>{warband.GetWarbandName()}</h1>
 
-                    {/* Warband Intro */}
-                    <div className={'warband-summary'}>
-                        <div className={''}>
-                            {warband.GetFactionName()}
-                        </div>
+                    <div className={`warband-wrap ${selectedFighter ? 'fighter-selected' : ''}`}>
+                        <h1>{warband.GetWarbandName()}</h1>
 
-                        <div className={'summary-cost-element'}>
-                        <span className={'summary-cost-element-cost'}>
-                            {'Ducats: '}{warband.GetCostDucats()}
-                        </span>
 
-                            {warband.GetMaxDucats() > 0 &&
-                                <>
-                                    <span className={'summary-cost-element-seperator'}>
-                                        {' / '}
-                                    </span>
-
-                                    <span className={'summary-cost-element-max'}>
-                                        {warband.GetMaxDucats()}
-                                    </span>
-                                </>
-                            }
-                        </div>
-
-                        <div className={'summary-cost-element'}>
-                        <span className={'summary-cost-element-cost'}>
-                            {'Glory Points: '}{warband.GetCostGlory()}
-                        </span>
-
-                            {warband.GetMaxGlory() > 0 &&
-                                <>
-                                    <span className={'summary-cost-element-seperator'}>
-                                        {' / '}
-                                    </span>
-
-                                    <span className={'summary-cost-element-max'}>
-                                        {warband.GetMaxGlory()}
-                                    </span>
-                                </>
-                            }
-                        </div>
-
-                        {warband.GetCampaignName() &&
+                        {/* Warband Intro */}
+                        <div className={'warband-summary'}>
                             <div className={''}>
-                                {warband.GetCampaignName()}
+                                {warband.GetFactionName()}
                             </div>
-                        }
-                    </div>
 
-                    {/* Warband Ressources */}
-                    <h3 className={'category-headline'}>Ressources</h3>
-                    <WbbEditViewStash
-                        warband={warband}
-                    />
+                            <div className={'summary-cost-element'}>
+                            <span className={'summary-cost-element-cost'}>
+                                {'Ducats: '}{warband.GetCostDucats()}
+                            </span>
 
-                    {/* Warband Elites */}
-                    <h3 className={'category-headline'}>Elites</h3>
-                    {warband.GetFighters().map((item, index) => (
-                        <>
-                            {item.IsElite &&
-                                <WbbEditViewFighter
-                                    item={item} index={index}
-                                    activePopoverId={activePopoverId}
-                                    setActivePopoverId={setActivePopoverId}
-                                    onClick={() => openFighter(item)}
-                                />
+                                {warband.GetMaxDucats() > 0 &&
+                                    <>
+                                        <span className={'summary-cost-element-seperator'}>
+                                            {' / '}
+                                        </span>
+
+                                        <span className={'summary-cost-element-max'}>
+                                            {warband.GetMaxDucats()}
+                                        </span>
+                                    </>
+                                }
+                            </div>
+
+                            <div className={'summary-cost-element'}>
+                            <span className={'summary-cost-element-cost'}>
+                                {'Glory Points: '}{warband.GetCostGlory()}
+                            </span>
+
+                                {warband.GetMaxGlory() > 0 &&
+                                    <>
+                                        <span className={'summary-cost-element-seperator'}>
+                                            {' / '}
+                                        </span>
+
+                                        <span className={'summary-cost-element-max'}>
+                                            {warband.GetMaxGlory()}
+                                        </span>
+                                    </>
+                                }
+                            </div>
+
+                            {warband.GetCampaignName() &&
+                                <div className={''}>
+                                    {warband.GetCampaignName()}
+                                </div>
                             }
-                        </>
-                    ))}
+                        </div>
 
-                    <div className={'btn btn-add-element btn-block'}>
-                        <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
-                        {'Add Elite'}
+                        {/* Warband Ressources */}
+                        <h3 className={'category-headline'}>Ressources</h3>
+                        <WbbEditViewStash
+                            warband={warband}
+                        />
+
+                        {/* Warband Elites */}
+                        <h3 className={'category-headline'}>Elites</h3>
+                        {warband.GetFighters().map((item, index) => (
+                            <>
+                                {item.IsElite &&
+                                    <WbbEditViewFighter
+                                        item={item} index={index}
+                                        activePopoverId={activePopoverId}
+                                        setActivePopoverId={setActivePopoverId}
+                                        onClick={() => openFighter(item)}
+                                    />
+                                }
+                            </>
+                        ))}
+
+                        <div className={'btn btn-add-element btn-block'}>
+                            <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
+                            {'Add Elite'}
+                        </div>
+
+
+                        {/* Warband Troops */}
+                        <h3 className={'category-headline'}>Troops</h3>
+                        {warband.GetFighters().map((item, index) => (
+                            <>
+                                {!item.IsElite &&
+                                    <WbbEditViewFighter
+                                        item={item} index={index}
+                                        activePopoverId={activePopoverId}
+                                        setActivePopoverId={setActivePopoverId}
+                                        onClick={() => openFighter(item)}
+                                    />
+                                }
+                            </>
+                        ))}
+
+                        <div className={'btn btn-add-element btn-block'}>
+                            <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
+                            {'Add Troop'}
+                        </div>
+
+
+                        {/* Warband Mercenaries */}
+                        <h3 className={'category-headline'}>Mercenaries</h3>
+                        {warband.GetFighters().map((item, index) => (
+                            <>
+                                {item.IsMercenary &&
+                                    <WbbEditViewFighter
+                                        item={item} index={index}
+                                        activePopoverId={activePopoverId}
+                                        setActivePopoverId={setActivePopoverId}
+                                        onClick={() => openFighter(item)}
+                                    />
+                                }
+                            </>
+                        ))}
+
+                        <div className={'btn btn-add-element btn-block'}>
+                            <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
+                            {'Add Mercenary'}
+                        </div>
+
+                        {/* Warband Modifiers */}
+                        <h3 className={'category-headline'}>Modifiers</h3>
+                        <WbbEditViewModifier
+                            warband={warband} index={123}
+                            activePopoverId={activePopoverId}
+                            setActivePopoverId={setActivePopoverId}
+                        />
+
+                        <div className={'btn btn-add-element btn-block'}>
+                            <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
+                            {'Add Modifier'}
+                        </div>
+
+                        {/* Warband Exploration */}
+                        <h3 className={'category-headline'}>Exploration</h3>
+
+                        <WbbEditViewExploration
+                            warband={warband} index={123}
+                            activePopoverId={activePopoverId}
+                            setActivePopoverId={setActivePopoverId}
+                        />
+
+                        <div className={'btn btn-add-element btn-block'}>
+                            <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
+                            {'Add Exploration'}
+                        </div>
                     </div>
 
+                    <div className={'selected-item-wrap'}>
+                        {/* The Fighter Detail View */}
+                        {selectedFighter && (
+                            <WbbFighterDetailView
+                                fighter={selectedFighter}
+                                onClose={() => setSelectedFighter(null)}
+                            />
+                        )}
 
-                    {/* Warband Troops */}
-                    <h3 className={'category-headline'}>Troops</h3>
-                    {warband.GetFighters().map((item, index) => (
-                        <>
-                            {!item.IsElite &&
-                                <WbbEditViewFighter
-                                    item={item} index={index}
-                                    activePopoverId={activePopoverId}
-                                    setActivePopoverId={setActivePopoverId}
-                                    onClick={() => openFighter(item)}
-                                />
-                            }
-                        </>
-                    ))}
-
-                    <div className={'btn btn-add-element btn-block'}>
-                        <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
-                        {'Add Troop'}
-                    </div>
-
-
-                    {/* Warband Mercenaries */}
-                    <h3 className={'category-headline'}>Mercenaries</h3>
-                    {warband.GetFighters().map((item, index) => (
-                        <>
-                            {item.IsMercenary &&
-                                <WbbEditViewFighter
-                                    item={item} index={index}
-                                    activePopoverId={activePopoverId}
-                                    setActivePopoverId={setActivePopoverId}
-                                    onClick={() => openFighter(item)}
-                                />
-                            }
-                        </>
-                    ))}
-
-                    <div className={'btn btn-add-element btn-block'}>
-                        <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
-                        {'Add Mercenary'}
-                    </div>
-
-                    {/* Warband Modifiers */}
-                    <h3 className={'category-headline'}>Modifiers</h3>
-                    <WbbEditViewModifier
-                        warband={warband} index={123}
-                        activePopoverId={activePopoverId}
-                        setActivePopoverId={setActivePopoverId}
-                    />
-
-                    <div className={'btn btn-add-element btn-block'}>
-                        <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
-                        {'Add Modifier'}
-                    </div>
-
-                    {/* Warband Exploration */}
-                    <h3 className={'category-headline'}>Exploration</h3>
-
-                    <WbbEditViewExploration
-                        warband={warband} index={123}
-                        activePopoverId={activePopoverId}
-                        setActivePopoverId={setActivePopoverId}
-                    />
-
-                    <div className={'btn btn-add-element btn-block'}>
-                        <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
-                        {'Add Exploration'}
+                        {!selectedFighter && (
+                            <div className={'selected-item-empty'}>
+                                {/*{'Nothing selected'}*/}
+                            </div>
+                        )}
                     </div>
                 </div>
             }
-
-            {/* The Fighter Detail View */}
-            {selectedFighter && (
-                <WbbFighterDetailView
-                    fighter={selectedFighter}
-                    onClose={() => setSelectedFighter(null)}
-                />
-            )}
         </div>
     );
 };
