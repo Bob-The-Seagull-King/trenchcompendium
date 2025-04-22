@@ -13,12 +13,12 @@
         "contextdata": {"get_weapon": {}, "find_hands": {"required": false}},
         "description": [            
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "A model equipped with a shovel always starts the game in cover if deployed on ground level, even if placed in open terrain. As soon as the model moves, it is no longer in cover. A model that is covered in this way retains the benefit of Cover even if the attacking model has an unobstructed view of it.",
                 "glossary": [{"val": "cover", "id": "gl_cover"}]
             },      
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "If a model equipped with a shovel has two hands free, it can use it in Melee Combat as if it were a Trench Club."
             }
         ],
@@ -44,7 +44,7 @@
         "contextdata": {"activated_stat": {"stat": "movement", "value": 3}, "activated": {}},
         "description": [            
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "Once per battle, you may add +3\" to the Movement characteristic of this model once during the activation. Declare this when the model is Activated."
             }
         ],
@@ -112,7 +112,7 @@
         },
         "description": [       
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "Adds +1 DICE to Ranged Attack rolls on the Action Success Chart. Can only be used with Jezzails, Alaybozan, Halberd-Guns and Siege Jezzails.",
                 "glossary": [{"val": "+1 DICE", "id": "kw_plusdice"}]
             } 
@@ -141,7 +141,7 @@
         },
         "description": [       
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "Grants a -2 modifier to all injury rolls against the model wearing this armour."
             } 
         ],
@@ -169,7 +169,7 @@
         },
         "description": [       
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "Ignores additional BLOOD MARKERS caused by the Keyword SHRAPNEL.",
                 "glossary": [
                     {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"},
@@ -203,7 +203,7 @@
         },
         "description": [       
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "Polearms take two hands to use. Melee attacks made against this model are made with -1 DICE if the attacking model Charged this turn.",
                 "glossary": [
                     {"val": "-1 DICE", "id": "kw_minusdice"}
@@ -237,7 +237,7 @@
         },
         "description": [       
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "Always takes one hand to use in both melee and in ranged combat, and cannot be switched out. Grants -1 to all injury rolls against the model. This bonus stacks with any armour the model wears, unless otherwise indicated. For the purposes of wielding a 2-handed weapon with the ‘Shield Combo’ indicator, the Trench Shield does not take a hand to wield but still functions as normal.",
                 "glossary": [
                     {"val": "Shield Combo", "id": "kw_shieldcombo"}
@@ -300,7 +300,7 @@
         },
         "description": [            
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "A model armed with a pistol can use it in melee as well as ranged combat (using Ranged Characteristic), including as an off-hand weapon to execute an additional melee attack."
             }  
         ],
@@ -331,7 +331,7 @@
         },
         "description": [    
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "Rolls all injuries with +1 DICE.",
                 "glossary": [
                     {"val": "+1 DICE", "id": "kw_plusdice"}
@@ -365,7 +365,7 @@
         },
         "description": [    
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "Rolls all injuries with +1 DICE.",
                 "glossary": [
                     {"val": "+1 DICE", "id": "kw_plusdice"}
@@ -398,7 +398,7 @@
             "injury_bonus": {"bonuses": [{"type": "dice", "value": 1}]}},
         "description": [ 
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "Rolls all injuries with +1 DICE.",
                 "glossary": [
                     {"val": "+1 DICE", "id": "kw_plusdice"}
@@ -431,7 +431,7 @@
             "injury_bonus": {"bonuses": [{"type": "dice", "value": -1}]}},
         "description": [ 
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "Due to its low power, add -1 DICE for all Injury Chart rolls with the musket.",
                 "glossary": [
                     {"val": "-1 DICE", "id": "kw_minusdice"}
@@ -465,7 +465,7 @@
             "hit_bonus": {"bonuses": [{"type": "dice", "value": 1, "condition_type": "range", "condition_value": "long"},{"type": "dice", "value": 1}]}},
         "description": [ 
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "Owing to its high accuracy, add +1 DICE to all rolls to hit and ignore the penalty to hit rolls when attacking at long range. However, injuries are rolled with -1 DICE at long range due to the low penetration power.",
                 "glossary": [
                     {"val": "+1 DICE", "id": "kw_plusdice"},
@@ -524,7 +524,7 @@
             "hit_bonus": {"bonuses": [{"type": "dice", "value": 1}]}},
         "description": [ 
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "This weapon rolls attacks with +1 DICE. On a Critical attack roll, this weapon ignores armour. If this model is equipped with a Scope, this weapon ignores the penalty for Long Range.",
                 "glossary": [
                     {"val": "+1 DICE", "id": "kw_plusdice"}
@@ -555,7 +555,7 @@
             "get_weapon": {}},
         "description": [ 
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "Grenades have BLAST 2\" – all models within 2\" of a model are hit but models other than the original target roll Injuries with -1 DICE.",
                 "glossary": [
                     {"val": "-1 DICE", "id": "kw_minusdice"},
@@ -587,7 +587,7 @@
             "get_weapon": {}},
         "description": [ 
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "Incendiary Grenades cause +1 BLOOD MARKER upon a hit due their FIRE Keyword. The incendiary grenades ignore armour on a Critical Hit (12+ to hit).",
                 "glossary": [
                     {"val": "BLOOD MARKER", "id": "kw_bloodmarker"},
@@ -621,7 +621,7 @@
             "extra_attack": {"value": 2}},
         "description": [ 
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "Machine Guns can make three Attack Actions instead of one. They can target separate models with each attack, as long as all targets are within 6\" of each other. After taking all three attacks the Activation of the model is over regardless of any remaining ACTIONS the model might have.",
                 "glossary": [
                     {"val": "ACTIONS", "id": "kw_action"}
@@ -656,7 +656,7 @@
             "auto_hit": {}},
         "description": [ 
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "A Flamethrower hits one model within range automatically with its Attack ACTION. Ignores Armour. Injuries caused by a Flamethrower are rolled with an additional -1 DICE. It also has the Keyword FIRE, so it causes an additional +1 BLOOD MARKER on enemies it hits, even if no other damage is caused.",
                 "glossary": [
                     {"val": "ACTION", "id": "kw_action"},
@@ -691,14 +691,14 @@
             "added_dice": {"value": 1}},
         "description": [ 
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "Specify a point on the battlefield within 36\" (must be in line of sight) that you want to target. Next, take a Ranged Attack ACTION. If the roll fails (i.e. you roll 6 or less), the bomb lands 1\" away from its intended location, multiplied by the number representing the degree of failure (for example, if you rolled 5, the bombard shot lands 2\" away, as 7-5=2). The direction is decided by your opponent.",
                 "glossary": [
                     {"val": "ACTION", "id": "kw_action"}
                 ]
             }  ,
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "All models within 3\" of the landing 1x1mm landing spot are hit as the bomb explodes – no roll to hit is needed. If the bomb lands directly on top of any model, roll with 3D6 on the Injury Chart and add the dice together to see what happens! Other models hit by the bombard suffer a Down result due the booming shockwave, but do not incur any BLOOD MARKERS or other effects from this attack.",
                 "glossary": [
                     {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"}
@@ -731,7 +731,7 @@
             "auto_hit": {}},
         "description": [ 
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "When shot in ranged combat, draw a straight 12\" line that is 1mm wide from the Brazen Bull. All models along the path of the line are automatically hit – roll for their injuries immediately. Armour does not protect against the Flame Cannon. Due to the Keyword FIRE, its hits cause an additional +1 BLOOD MARKER. This is applied after rolling for injuries.",
                 "glossary": [
                     {"val": "BLOOD MARKER", "id": "kw_bloodmarker"},
@@ -766,7 +766,7 @@
         },
         "description": [   
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "Add -1 DICE every time you use a knife to see if the attack hits.",
                 "glossary": [
                     {"val": "-1 DICE", "id": "kw_minusdice"}
@@ -800,7 +800,7 @@
         },
         "description": [   
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "Bayonets can only be attached to weapons fitted with a ‘Bayonet lug’ (indicated in each Warband’s Armoury). They do not count towards the maximum melee weapons a model can carry.",
                 "glossary": [
                     {"val": "-1 DICE", "id": "kw_minusdice"}
@@ -887,7 +887,7 @@
             "get_weapon": {}},
         "description": [   
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "Enemies charging a model equipped with a Halberd-gun add -1 DICE in melee combat when rolling to hit. This only applies when a model attacks after a charge, not on subsequent rounds of melee.",
                 "glossary": [
                     {"val": "-1 DICE", "id": "kw_minusdice"}
@@ -921,7 +921,7 @@
         },
         "description": [ 
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "Add +2 to the result of all injuries caused by this weapon (i.e. a roll of 7 on the Injury Chart becomes 9)."
             }    
         ],
@@ -952,7 +952,7 @@
         },
         "description": [ 
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "Adds +1 to injury rolls (i.e. a roll of 7 on the Injury Chart becomes 8). If the Assassin hits an enemy and causes at least one BLOOD MARKER, the Assassin can move away from combat during this Activation. Note that this move does not grant enemies free attacks. Assassins can use both normal and Dash move to do this, though this may not be used for charging.",
                 "glossary": [
                     {"val": "BLOOD MARKER", "id": "kw_bloodmarker"}
@@ -983,7 +983,7 @@
         },
         "description": [       
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "-1 to all Injury Chart rolls against the model. Can be combined with any shield."
             } 
         ],
@@ -1012,7 +1012,7 @@
         },
         "description": [       
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "Counts as Reinforced Armour and therefore grants a -2 modifier to all injury rolls made against the model wearing it. All attacks with the Keyword FIRE and/or GAS suffer a -1 DICE penalty to injure this model. Additionally, this model does not suffer additional BLOOD MARKERS caused by the Keywords FIRE and/or GAS.",
                 "glossary": [
                     {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"},
@@ -1046,7 +1046,7 @@
         },
         "description": [       
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "Ignores additional BLOOD MARKERS caused by the Keyword GAS. Any such attacks suffer -1 DICE penalty to all injury rolls.",
                 "glossary": [
                     {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"},
@@ -1079,12 +1079,12 @@
         "contextdata": {"get_weapon": {}, "find_hands": {"required": false}},
         "description": [            
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "A model equipped with a shovel always starts the game in cover if deployed on ground level, even if placed in open terrain. As soon as the model moves, it is no longer in cover. A model that is covered in this way retains the benefit of Cover even if the attacking model has an unobstructed view of it.",
                 "glossary": [{"val": "cover", "id": "gl_cover"}]
             },      
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "If a model equipped with a shovel has two hands free, it can use it in Melee Combat as if it were a Trench Club."
             }
         ],
@@ -1110,7 +1110,7 @@
         "contextdata": {},
         "description": [            
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "A model with this kit adds +1 DICE to any Climbing ACTION rolls.",
                 "glossary": [
                     {"val": "+1 DICE", "id": "kw_plusdice"},
@@ -1140,7 +1140,7 @@
         "contextdata": {},
         "description": [            
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "Models with a Medi-kit can take a RISKY ACTION to remove one BLOOD MARKER from any one friendly model (including themselves) within 1\" range or allow one friendly model (including themselves) that is Down to regain their footing.",
                 "glossary": [
                     {"val": "BLOOD MARKER", "id": "kw_bloodmarker"},
@@ -1172,7 +1172,7 @@
         "contextdata": {},
         "description": [            
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "Any friendly models within 4\" of the musician who is not Down can add +1 DICE to their Dash ACTIONS. Musical Instruments take one hand to use at all times as if it were a weapon.",
                 "glossary": [
                     {"val": "+1 DICE", "id": "kw_plusdice"},
@@ -1202,7 +1202,7 @@
         "contextdata": {},
         "description": [            
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "All ranged attacks against a model that is in cover suffer -2 DICE penalty instead of -1 DICE. All the normal rules for cover apply otherwise.",
                 "glossary": [
                     {"val": "-1 DICE", "id": "kw_minusdice"},
@@ -1233,7 +1233,7 @@
         "contextdata": {"warband_wide": {}},
         "description": [            
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "Grants +1 DICE for all Morale tests as long as the model with the flag is not Down or Out of Action. Requires one hand to use.",
                 "glossary": [
                     {"val": "+1 DICE", "id": "kw_plusdice"}
@@ -1262,7 +1262,7 @@
         "contextdata": {},
         "description": [            
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "Any enemy Infiltrator cannot be placed closer than 16\" of this model.",
                 "glossary": [
                     {"val": "Infiltrator", "id": "kw_infiltrator"}
@@ -1293,7 +1293,7 @@
         },
         "description": [            
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "This model starts each game with +1 BLESSING MARKER.",
                 "glossary": [
                     {"val": "BLESSING MARKER", "id": "kw_blessingmarker"}
@@ -1328,7 +1328,7 @@
         },
         "description": [ 
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "Adds +1 to injury rolls (i.e. a roll of 7 on the Injury Chart becomes 8). A model armed with a Golden Khanjar can make two attacks instead of one in melee with one Melee Attack ACTION. This effect also applies to a Golden Khanjar wielded off-hand.",
                 "glossary": [
                     {"val": "ACTION", "id": "kw_action"}
@@ -1361,7 +1361,7 @@
             "ignore_armour": {}},
         "description": [ 
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "Ignores Armour. If the Assassin hits a model and causes at least one BLOOD MARKER, the Assassin may instantly place itself into Melee Combat with that model if there is a legal space that the Assassin could occupy within 1\" of that model, regardless of the distance to the target or any interposing models/obstacles. The Assassin is considered to have charged that model, although it does not count as a Charge ACTION and therefore the Assassin can take the Move ACTION at a later point on this turn, if it hasn’t already. Note that if the bow takes the target Out of Action, no BLOOD MARKERS are caused and this movement cannot be made.",
                 "glossary": [
                     {"val": "ACTION", "id": "kw_action"},
@@ -1397,7 +1397,7 @@
         },
         "description": [            
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "Before the battle begins, a model may use this item to gain the Keyword STRONG until the end of a battle.",
                 "glossary": [
                     {"val": "STRONG", "id": "kw_strong"}
@@ -1435,7 +1435,7 @@
         },
         "description": [            
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "This piece of equipment can be used with any rifle. Ranged attacks with the weapon ignore the penalties for Long Range."
             }
         ],
@@ -1466,7 +1466,7 @@
         },
         "description": [            
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "When using this weapon roll all injuries with +1 (i.e. a roll of 7 on the Injury Chart becomes 8)."
             }
         ],
@@ -1498,7 +1498,7 @@
         },
         "description": [            
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "Add +1 DICE to all injury rolls and ignore armour. If this attack hits its target, but does not take it Out of Action, the target is pushed 1D6\" directly away from the attacker, stopping if they hit another model or solid piece of terrain. An RPG does not count towards the number of ranged weapons that a model can carry, but a model can still only carry one RPG. When shot, the activation of the model using the RPG ends.",
                 "glossary": [
                     {"val": "+1 DICE", "id": "kw_plusdice"}
@@ -1531,7 +1531,7 @@
             "hit_bonus": {"bonuses": [{"type": "dice", "value": 1}]}},
         "description": [ 
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "You can shoot at opponents in melee without having to randomise between friendly and enemy models. A Masterwork Jezzail is loaded with Alchemical Ammunition, so it has +1 DICE on all to hit rolls. If you roll greater than the required 7 on the Action Success Chart to hit, you can also hit another enemy model with it in distance equal to the number you beat the 7 by. Roll injuries separately for both models.",
                 "glossary": [
                     {"val": "+1 DICE", "id": "kw_plusdice"}
@@ -1565,7 +1565,7 @@
         },
         "description": [       
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "This armour confers a -2 modifier to any injury rolls. This modifier applies even against attacks that ignore armour. It adds +1 to the Scars of the model. Only one model can ever wear this armour and it cannot be swapped for another model. Even if this armour is captured by the enemy, it cannot be worn by a model that does not have the Keyword SULTANATE.",
                 "glossary": [
                     {"val": "SULTANATE", "id": "kw_sultanate"}
@@ -1596,7 +1596,7 @@
         },
         "description": [            
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "At the end of each battle, your warband gains an additional Glory Point."
             }
         ],
@@ -1624,7 +1624,7 @@
         },
         "description": [            
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "When an ELITE in your warband would gain a Battle Scar, you may attempt to negate that Scar. Roll 2D6. On a 7+, the Battle Scar is negated. If you roll double 1’s, the model suffers an additional Scar. Once you attempt to negate a Battle Scar, you cannot use the Field Hospital again until you complete another battle. You can only use a Field Hospital if your warband includes a Combat Medic or an Alchemist."
             }
         ],
@@ -1657,14 +1657,14 @@
         },
         "description": [ 
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "Add +2 DICE to all injury rolls and ignores all armour. If this attack hits its target, but does not take it Out of Action, the target is pushed 1D6\" directly away from the attacker, stopping if they hit another model or solid piece of terrain.",
                 "glossary": [
                     {"val": "+2 DICE", "id": "kw_plusdice"}
                 ]
             },
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "If the Cannon is placed as a Stationary object on the battlefield, it is deployed separately as one of your standard units on a 50mm base in your own Deployment Zone or Table Edge. It is immobile and cannot be damaged. Any model in the Defenders of the Iron Wall warband can shoot it during their Activation as long as they are not in Melee combat, are within 1\" of the Cannon, and do not move in any way during their Activation. Alchemist Abilty Mastery of the Elements does apply to the Cannon. As with any other Ranged Weapon, each Grand Cannon can only be fired once per Turn. The Cannon cannot be lost as a casuality unless carried by a Brazen Bull."
             } 
         ],
@@ -1696,7 +1696,7 @@
         },
         "description": [       
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "Always takes one hand to use in both melee and in ranged combat. Grants -1 to all injury rolls against the model. This bonus stacks with any armour the model wears, unless otherwise indicated. Any attack against this model that has the Keyword FIRE will suffer -1 DICE on injury rolls and will not cause an additional BLOOD MARKER.",
                 "glossary": [
                     {"val": "FIRE", "id": "kw_fire"},
@@ -1729,7 +1729,7 @@
         },
         "description": [            
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "Gives the model consuming the Elixir Keyword TOUGH for the duration of a single battle. It cannot be given to Lions of Jabir, Brazen Bulls or Homunculi.",
                 "glossary": [
                     {"val": "TOUGH", "id": "kw_tough"}
@@ -1761,7 +1761,7 @@
         },
         "description": [       
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "Negates the additional BLOOD MARKERS from weapons with Keyword SHRAPNEL. Makes the model immune to the effects of FEAR.",
                 "glossary": [
                     {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"},
@@ -1795,7 +1795,7 @@
             "injury_bonus": {"bonuses": [{"type": "dice", "value": -1}]}},
         "description": [ 
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "-1 DICE on injury rolls. Molotov Cocktails ignore all penalties for terrain/cover, as well as ignoring all armour on a Critical Attack roll.",
                 "glossary": [
                     {"val": "-1 DICE", "id": "kw_minusdice"}
@@ -1829,7 +1829,7 @@
             "hit_bonus": {"bonuses": [{"type": "dice", "value": 1}]}},
         "description": [ 
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "This weapon rolls attacks with +1 DICE and rolls injuries at Short Range with +2 DICE",
                 "glossary": [
                     {"val": "+1 DICE", "id": "kw_plusdice"},
@@ -1863,7 +1863,7 @@
         },
         "description": [       
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "Takes always one hand to use in both melee and in ranged combat and cannot be switched out. The target is always considered to be in Cover when shot, and counts as fighting behind a defended obstacle when an enemy charges them. In addition, when the Brazen bull is Activated and it is in combat with only 1 model on a 40mm or smaller base, the Bull can Move normally (though not Charge or Dash), pushing its opponent in the same direction as the Bull is moving and travelling the same distance as the Bull moves if it moves directly towards the enemy that is in front half of its base. This can push the enemies so they fall as per Falling rules), and if the Bull pushes the opponent against a terrain piece higher than 2\", both models stop and the opponent immediately rolls on the injury table."
             } 
         ],
@@ -1891,7 +1891,7 @@
         "contextdata": {"warband_wide": {}},
         "description": [            
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "Grants +1 DICE for all Morale tests as long as the model with the flag is not Down or Out of Action. Requires one hand to use. In addition, as long as the model carrying this banner is not Down or Out of Action, all enemies with 24\" have to reduce their Movement Characteristic of by 1\".",
                 "glossary": [
                     {"val": "+1 DICE", "id": "kw_plusdice"}
@@ -1900,7 +1900,7 @@
         ],
         "lore": [            
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "“This, then, is the parable of those who are bent on denying their Sustainer: all their works are as ashes which the wind blows about fiercely on a stormy day: they cannot achieve any benefit whatever from all that they may have wrought: for this is indeed the farthest one can go astray.\""
             },        
             {
@@ -1924,7 +1924,7 @@
         "contextdata": {"warband_wide": {}},
         "description": [            
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "Sultanate Sapper Corps are experts at using explosive charges to overcome defended enemy positions such as walls, bunkers, casemates and pillboxes. Experts at timing the fuses of their bombs, many a battle has been turned thanks to a well-timed blast.",
                 "glossary": [
                     {"val": "SHRAPNEL", "id": "kw_shrapnel"}
@@ -1933,7 +1933,7 @@
         ],
         "lore": [            
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "Sultanate Sapper Corps are experts at using explosive charges to overcome defended enemy positions such as walls, bunkers, casemates and pillboxes. Experts at timing the fuses of their bombs, many a battle has been turned thanks to a well-timed blast."
             }
         ],
@@ -1956,7 +1956,7 @@
         },
         "description": [            
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "This transportable fortification is represented by a 1\" high standing shield on 40mm base. They can either be placed anywhere within your own deployment zone after all other models are deployed. Alternatively, a sapper may carry one on their back, and then deploy it with a +2 DICE RISKY ACTION during their Activation as long as the Sapper is not in Melee combat. In this case, it must be placed within 1\" of the Sapper. In either case, they count as both Cover and a Defended Obstacle once deployed.",
                 "glossary": [
                     {"val": "+2 DICE", "id": "kw_plusdice"},
@@ -1967,7 +1967,7 @@
         ],
         "lore": [            
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "Shaped into a likeness of the wondrous Anqā bird, and Created by the Imperial School of Military Engineering in association with the House of Wisdom, these movable defensive walls are light and extraordinarily resistant to all damage thanks to a richly-decorated ceramic layer on their outer surface and a secret compound of aramic and alchemical steel at its core. A Sapper can carry one on their back to battle, and with a single press of a button the guard unfolds by spreading its metalling wings and revealing a face of beautiful yet frightening countenance."
             }
         ],
@@ -2006,7 +2006,7 @@
         ],
         "lore": [        
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "Automatic pistols are symbols of prestige owing to their rarity and cost. They are excellent weapons when storming trenches or fighting in hand-to-hand combat. They boast a high rate of fire, though they can be hard to control even for the best sharpshooters since they usually lack a stock."
             }  
         ],
@@ -2115,7 +2115,7 @@
             "hit_bonus": {"bonuses": [{"type": "dice", "value": 1, "condition_type": "range", "condition_value": "long"},{"type": "dice", "value": 1}]}},
         "description": [ 
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "Owing to its high accuracy, add +1 DICE to all rolls to hit and ignore the penalty to hit rolls when attacking at long range. However, injuries are rolled with -1 DICE at long range due to the low penetration power.",
                 "glossary": [
                     {"val": "+1 DICE", "id": "kw_plusdice"},
@@ -2149,7 +2149,7 @@
             "extra_attack": {"value": 1}},
         "description": [ 
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "Can make two attack ACTIONS instead of one. These can be against a single target or two separate ones.",
                 "glossary": [
                     {"val": "ACTIONS", "id": "kw_action"}
@@ -2187,7 +2187,7 @@
         },
         "description": [            
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "A model armed with a silenced pistol can use it in melee as well as ranged combat (using Ranged Characteristic), including as an off-hand weapon to execute an additional melee attack. Add +1 DICE to hit rolls if shot from behind any terrain obstacles.",
                 "glossary": [
                     {"val": "terrain obstacles", "id": "gl_cover"}
@@ -2221,7 +2221,7 @@
             "ignore_cover": {}},
         "description": [ 
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "Gas Grenades ignore all penalties for cover and armour but roll injuries with -1 DICE. They have BLAST 3\" – they hit all models within 3\" of a target they hit.",
                 "glossary": [
                     {"val": "-1 DICE", "id": "kw_minusdice"},
@@ -2255,7 +2255,7 @@
             "ignore_cover": {}},
         "description": [ 
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "Ignores all penalties for cover. This weapon has a BLAST radius of 3\" – all models within this range are hit.",
                 "glossary": [
                     {"val": "cover", "id": "gl_cover"},
@@ -2290,7 +2290,7 @@
             "activated": {}},
         "description": [ 
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "You can aim the Satchel Charge at either a 1mm x 1mm point on the ground or an enemy model within range. Next, take a Ranged Attack ACTION. If the roll fails (i.e. you roll 6 or less), the bomb lands 1” away from its intended location, multiplied by the number representing the degree of failure (for example, if you rolled 5, the bombard shot lands 2” away, as 7-5=2). The direction is decided by your opponent. A Satchel Charge adds +1 DICE to injury rolls. Additionally, if the Satchel Charge lands directly on top of a model, it ignores that model’s armour.",
                 "glossary": [
                     {"val": "ACTION", "id": "kw_action"},
@@ -2325,7 +2325,7 @@
             "ignore_armour": {}},
         "description": [  
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "Ignores armour. Add +1 DICE when rolling on the Injury Chart.",
                 "glossary": [
                     {"val": "+1 DICE", "id": "kw_plusdice"}
@@ -2359,7 +2359,7 @@
             "auto_hit": {}},
         "description": [ 
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "Hits up to two models within range automatically with an Attack Action as long as they are within 6\" of each other and within the Heavy Flamethrower range. Ignores armour. It also has the Keyword FIRE, so it causes an additional +1 BLOOD MARKER on enemies it hits, even if no other damage is caused.",
                 "glossary": [
                     {"val": "ACTION", "id": "kw_action"},
@@ -2396,7 +2396,7 @@
         },
         "description": [   
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "Models suffer -1 DICE when fighting unarmed, both to see if the attack hits and when rolling on the Injury Chart. Note that you can never fight with unarmed as an Off-Hand weapon to get an additional attack in melee. These rules simply cover all instances where the model fights unarmed and has no other Melee Actions in their profile.",
                 "glossary": [
                     {"val": "-1 DICE", "id": "kw_minusdice"}
@@ -2430,7 +2430,7 @@
         },
         "description": [   
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "The Sacrificial Knife adds +2 to all rolls on the Injury Chart. For example, a roll of 7 on the Injury Chart becomes 9 when using the Sacrificial Knife."
             }  
         ],
@@ -2487,7 +2487,7 @@
         },
         "description": [   
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "The Hellblade has +1 DICE when rolling for injuries. It also has the Keyword FIRE, so it causes an additional +1 BLOOD MARKER on enemies it hits.",
                 "glossary": [
                     {"val": "FIRE", "id": "kw_fire"},
@@ -2522,7 +2522,7 @@
         },
         "description": [   
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "Tartarus Claws always come as a pair and do not allow the use of any other melee weapons. You can make two Attack ACTIONS with the Claws without the usual -1 DICE for the second attack. If the opponent is taken Down or Out of Action with the Claws you may immediately move the model up to 3”. If the move takes you into contact with another enemy model, this counts as a charge and you can make a second Melee Attack ACTION with the claws. You can only do this follow-up move once per Activation.",
                 "glossary": [
                     {"val": "-1 DICE", "id": "kw_minusdice"},
@@ -2559,7 +2559,7 @@
         },
         "description": [   
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "Ignores armour modifiers and rolls injuries with +1 DICE. If it hits the enemy, the wielder suffers +1 BLOOD MARKER as well.",
                 "glossary": [
                     {"val": "+1 DICE", "id": "kw_plusdice"},
@@ -2594,7 +2594,7 @@
         },
         "description": [       
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "Add +1 DICE to their Hit Rolls. This bonus does not apply if used as an off-hand weapon.",
                 "glossary": [
                     {"val": "+1 DICE", "id": "kw_plusdice"}
@@ -2630,7 +2630,7 @@
         },
         "description": [    
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "Ignores the armour of opponents that are Down.",
                 "glossary": [
                     {"val": "Down", "id": "gl_down"}
@@ -2646,5 +2646,140 @@
         "options": [],
         "keywords": [],
         "modifiers": ["Ignore Armour"]
+    },
+    {
+        "id": "eq_heavyballisticshield",
+        "name": "Heavy Ballistic Shield",
+        "source": "core",
+        "tags": {"trait": true, "shield": true},
+        "category": "armour",
+        "distance": null,
+        "stats": {
+            "hands_melee": 1,
+            "hands_ranged": 1
+        },
+        "contextdata": {
+            "find_hands": { "required": true, "both_kits": true }
+        },
+        "description": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Always takes one hand to use in both melee and in ranged combat and cannot be switched out. The target is always considered to be in Cover when shot, and counts as fighting behind a defended obstacle when an enemy charges them. These bonuses cannot be combined with Polearms, shovels, cover or defended obstacles. For the purposes of wielding a 2-handed weapon with the ‘Shield Combo’ indicator, the Heavy Ballstic Shield does not take a hand to wield but still functions as normal.",
+                "glossary": [
+                    {"val": "Shield Combo", "id": "kw_shieldcombo"}
+                ]
+            } 
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "These massive shields are made of aramid fibre mesh and orichalcum-steel alloy. They are so heavy that they can only be carried by Heavy Mechanized infantry, and even then they are too cumbersome to be used in fast paced melee. They are mainly used for protection during their ponderous advance towards the enemy."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_machinearmour",
+        "name": "Machine Armour",
+        "source": "core",
+        "tags": {"trait": true, "bonus": true},
+        "category": "armour",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {
+            "upgrade_stat": {"stat": "armour", "value": -3},
+            "bonus_ability": {
+                "action_type": ["dash"]
+            }
+        },
+        "description": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Grants a -3 modifier to all injury rolls against the model wearing this armour, and treats Down Injury results as a Minor Hit instead (note that the TOUGH Keyword ability to avoid Out of Action with Down overrides this). Due to its bulk the wearer rolls D3 for a charge extra distance instead of D6. Machine armour cannot be combined with any shield. Models wearing Machine Armour may have a base size of 40mm if you wish, unless the model wearing it is already on 50mm or bigger base.",
+                "glossary": [
+                    {"val": "TOUGH", "id": "kw_tough"}
+                ]
+            }, 
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "If worn by a model that is not part of a New Antioch force/subfaction, the only bonus the armour gives is the -3 injury modifier, as the chemical treatment that allows the wearer to withstand the rigors of the armour is a carefully guarded military secret. D3 charge distance remains in force."
+            } 
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Combining the rarest of divine metal alloys and the latest technology of New Antioch, Machine Armour makes its wearer a virtual mobile tank."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_holyiconshield",
+        "name": "Holy Icon Shield",
+        "source": "core",
+        "tags": {"trait": true, "shield": true},
+        "category": "armour",
+        "distance": null,
+        "stats": {
+            "hands_melee": 1,
+            "hands_ranged": 1
+        },
+        "contextdata": {
+            "upgrade_stat": {"stat": "armour", "value": -1},
+            "find_hands": { "required": true, "both_kits": true },
+            "super_armour": {}
+        },
+        "description": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Takes one hand to use in both melee and in ranged combat. Grants -1 to all injury rolls against the model. This shield is effective even against weapons and attacks that would normally ignore armour. For the purposes of wielding a 2-handed weapon with the ‘Shield Combo’ indicator, the Holy Icon Shield does not take a hand to wield but still functions as normal.",
+                "glossary": [
+                    {"val": "Shield Combo", "id": "kw_shieldcombo"}
+                ]
+            } 
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "These shields are made from icons that have performed miracles. Mounted on blessed wood, they are harder than any steel and virtually indestructible. Only the most revered fighters in the service of the Church ever carry one."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": ["Cannot be Ignored"]
+    },
+    {
+        "id": "eq_holyiconarmour",
+        "name": "Holy Icon Armour",
+        "source": "core",
+        "tags": {"trait": true},
+        "category": "armour",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {
+            "upgrade_stat": {"stat": "armour", "value": -1},
+            "super_armour": {}
+        },
+        "description": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Grants -1 to all Injury Chart rolls against the model wearing this armour. This armour is effective even against weapons and attacks that would normally ignore armour."
+            } 
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Only a few of these suits of armour exist in all of Christendom. Covered with miraculous icons this suit of armour is protected by the very hand of Heaven and its wearer can withstand even direct hits from artillery."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": ["Cannot be Ignored"]
     }
 ]
