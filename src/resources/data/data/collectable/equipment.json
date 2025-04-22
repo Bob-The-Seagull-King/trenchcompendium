@@ -2377,5 +2377,274 @@
         "options": [],
         "keywords": ["kw_fire","kw_heavy"],
         "modifiers": ["Ignore Armour"]
+    },
+    {
+        "id": "eq_unarmed",
+        "name": "Unarmed",
+        "source": "core",
+        "tags": {"action": true, "weapon": true,"unarmed": true},
+        "category": "melee",
+        "distance": null,
+        "stats": {
+            "hands_melee": 1,
+            "melee": true
+        },
+        "contextdata": {
+            "get_weapon": {},
+            "hit_bonus": {"bonuses": [{"type": "dice", "value": -1}]},
+            "injury_bonus": {"bonuses": [{"type": "dice", "value": -1}]}
+        },
+        "description": [   
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Models suffer -1 DICE when fighting unarmed, both to see if the attack hits and when rolling on the Injury Chart. Note that you can never fight with unarmed as an Off-Hand weapon to get an additional attack in melee. These rules simply cover all instances where the model fights unarmed and has no other Melee Actions in their profile.",
+                "glossary": [
+                    {"val": "-1 DICE", "id": "kw_minusdice"}
+                ]
+            }  
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Fighting unarmed in the Great War is nigh-suicidal, but some troops carry no melee weapons or their weapons have been lost in the heat of the battle. In such cases, a warrior is forced to defend themselves with fists, kicks and their bare teeth."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": ["-1D to Hit","-1D to Injuries"]
+    },
+    {
+        "id": "eq_sacrificialknife",
+        "name": "Sacrificial Knife",
+        "source": "core",
+        "tags": {"action": true, "weapon": true},
+        "category": "melee",
+        "distance": null,
+        "stats": {
+            "hands_melee": 1,
+            "melee": true
+        },
+        "contextdata": {
+            "get_weapon": {},
+            "injury_bonus": {"bonuses": [{"type": "flat", "value": 2}]}
+        },
+        "description": [   
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Sacrificial Knife adds +2 to all rolls on the Injury Chart. For example, a roll of 7 on the Injury Chart becomes 9 when using the Sacrificial Knife."
+            }  
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Terrifying blades blessed by the hand of a greater devil, these knives are used in Heretic rituals to sacrifice captives to the dark powers of Hell. They simply need to touch their opponents to cause indescribable pain and even the slightest wound often proves fatal from the agony alone. They are risky even to their wielders, as the merest scratch wounds friend and a foe alike."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_riskyaction"],
+        "modifiers": ["+2 to Injuries"]
+    },
+    {
+        "id": "eq_blasphemousstaff",
+        "name": "Blasphemous Staff",
+        "source": "core",
+        "tags": {"action": true, "weapon": true},
+        "category": "melee",
+        "distance": null,
+        "stats": {
+            "hands_melee": 1,
+            "melee": true
+        },
+        "contextdata": {
+            "get_weapon": {}
+        },
+        "description": [   
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Made in mockery of the rod carried by the Prophet Aaron, the slightest touch from this evil staff causes unimaginable agony due to the hellfire that it produces."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_fire","kw_critical"],
+        "modifiers": []
+    },
+    {
+        "id": "eq_hellblade",
+        "name": "Hellblade",
+        "source": "core",
+        "tags": {"action": true, "weapon": true},
+        "category": "melee",
+        "distance": null,
+        "stats": {
+            "hands_melee": 2,
+            "melee": true
+        },
+        "contextdata": {
+            "get_weapon": {},
+            "injury_bonus": {"bonuses": [{"type": "dice", "value": 1}]}
+        },
+        "description": [   
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Hellblade has +1 DICE when rolling for injuries. It also has the Keyword FIRE, so it causes an additional +1 BLOOD MARKER on enemies it hits.",
+                "glossary": [
+                    {"val": "FIRE", "id": "kw_fire"},
+                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"}
+                ]
+            }  
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Crafted from iron ore from the mines of Dis in Inferno, this weapon burns with the unquenchable fires of Hell."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_fire"],
+        "modifiers": ["+1D to Injuries"]
+    },
+    {
+        "id": "eq_tartarusclaws",
+        "name": "Tartarus Claws",
+        "source": "core",
+        "tags": {"action": true, "weapon": true},
+        "category": "melee",
+        "distance": null,
+        "stats": {
+            "hands_melee": 2,
+            "melee": true
+        },
+        "contextdata": {
+            "get_weapon": {},
+            "off_hand_functional": {}
+        },
+        "description": [   
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Tartarus Claws always come as a pair and do not allow the use of any other melee weapons. You can make two Attack ACTIONS with the Claws without the usual -1 DICE for the second attack. If the opponent is taken Down or Out of Action with the Claws you may immediately move the model up to 3”. If the move takes you into contact with another enemy model, this counts as a charge and you can make a second Melee Attack ACTION with the claws. You can only do this follow-up move once per Activation.",
+                "glossary": [
+                    {"val": "-1 DICE", "id": "kw_minusdice"},
+                    {"val": "ACTION", "id": "kw_action"},
+                    {"val": "ACTIONS", "id": "kw_action"}
+                ]
+            }  
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Made from severed hands of Malebranche, the Tartarus Claws are granted by Arch-Devils only to those whose hearts are blackened with the sin of Wrath."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_antitankhammer",
+        "name": "Anti-Tank Hammer",
+        "source": "core",
+        "tags": {"action": true, "weapon": true},
+        "category": "melee",
+        "distance": null,
+        "stats": {
+            "hands_melee": 2,
+            "melee": true
+        },
+        "contextdata": {
+            "get_weapon": {},
+            "ignore_armour": {},
+            "injury_bonus": {"bonuses": [{"type": "dice", "value": 1}]}
+        },
+        "description": [   
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Ignores armour modifiers and rolls injuries with +1 DICE. If it hits the enemy, the wielder suffers +1 BLOOD MARKER as well.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"}
+                ]
+            }  
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "A polearm with a directional explosive mounted on its head. It is exceedingly good at taking out armoured targets but puts its user in grave danger."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_riskyaction","kw_critical"],
+        "modifiers": ["+1D to Injuries","Ignore Armour"]
+    },
+    {
+        "id": "eq_scourgewhipflail",
+        "name": "Scourge / Battle-Whip / Flail",
+        "source": "core",
+        "tags": {"action": true, "weapon": true},
+        "category": "melee",
+        "distance": null,
+        "stats": {
+            "hands_melee": 1,
+            "melee": true
+        },
+        "contextdata": {
+            "get_weapon": {},
+            "hit_bonus": {"bonuses": [{"type": "dice", "value": 1, "condition_type": "off-hand", "condition_value": false}]}
+        },
+        "description": [       
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Add +1 DICE to their Hit Rolls. This bonus does not apply if used as an off-hand weapon.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"}
+                ]
+            } 
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "The metal whips of the Church are supremely good at both instilling discipline in the ranks of the faithful and tormenting the heretics. Many devils also enjoy using these weapons due to the excruciating pain they inflict. These weapons are extremely difficult to dodge."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": ["+1D to Hit"]
+    },
+    {
+        "id": "eq_misericordia",
+        "name": "Misericordia",
+        "source": "core",
+        "tags": {"action": true, "weapon": true},
+        "category": "melee",
+        "distance": null,
+        "stats": {
+            "hands_melee": 1,
+            "melee": true
+        },
+        "contextdata": {
+            "get_weapon": {},
+            "ignore_armour": {"condition": [
+                {"type": "enemy", "value": "Is Down"}
+                ]}
+        },
+        "description": [    
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Ignores the armour of opponents that are Down.",
+                "glossary": [
+                    {"val": "Down", "id": "gl_down"}
+                ]
+            }   
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "The misericordia dagger is designed to put enemies out of their misery by finding chinks in the armour: eye slits, neck joints and so forth."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": ["Ignore Armour"]
     }
 ]
