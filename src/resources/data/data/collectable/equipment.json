@@ -2781,5 +2781,388 @@
         "options": [],
         "keywords": [],
         "modifiers": ["Cannot be Ignored"]
+    },
+    {
+        "id": "eq_armourpiercingbullets",
+        "name": "Armour-Piercing Bullets",
+        "source": "core",
+        "tags": {"trait": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {
+            "equipment_add_to": {
+                "equip_check": [
+                    {
+                        "check_type": "tag",
+                        "value": "rifle"
+                    },
+                    {
+                        "check_type": "tag",
+                        "value": "pistol"
+                    }
+                ]
+            }
+        },
+        "description": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Before the battle begins, a model may use this item to grant a rifle or pistol weapon that they are equipped with the following ability: Reduce the injury penalty from Armour and Shields by 1 until the end of the battle."
+            } 
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Advanced armour technology has forced the armouries of the Great War to forge new types of bullets. Expensive and labour-intensive to produce, these hardened tungsten rounds are more effective against battlefield armour."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_consumable"],
+        "modifiers": []
+    },
+    {
+        "id": "eq_dumdumbullets",
+        "name": "Dum-Dum Bullets",
+        "source": "core",
+        "tags": {"trait": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {
+            "equipment_add_to": {
+                "equip_check": [
+                    {
+                        "check_type": "tag",
+                        "value": "rifle"
+                    },
+                    {
+                        "check_type": "tag",
+                        "value": "pistol"
+                    }
+                ]
+            },
+            "equipment_keyword_add": {"value": ["kw_critical"]}
+        },
+        "description": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Before the battle begins, a model may use this item to grant a rifle or pistol weapon that they are equipped with the CRITICAL keyword until the end of the battle.",
+                "glossary": [{"val": "CRITICAL", "id": "kw_critical"}]
+            } 
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "These hollow-point bullets are far more likely to cause fatal wounds than standard ammunition."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_consumable"],
+        "modifiers": []
+    },
+    {
+        "id": "eq_incendiaryammunition",
+        "name": "Incendiary Ammunition",
+        "source": "core",
+        "tags": {"trait": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {
+            "equipment_add_to": {
+                "equip_check": [
+                    {
+                        "check_type": "tag",
+                        "value": "rifle"
+                    },
+                    {
+                        "check_type": "tag",
+                        "value": "pistol"
+                    }
+                ]
+            },
+            "equipment_keyword_add": {"value": ["kw_fire"]}
+        },
+        "description": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Before the battle begins, a model may use this item to grant a rifle or pistol weapon that they are equipped with the FIRE keyword until the end of the battle. ",
+                "glossary": [{"val": "FIRE", "id": "kw_fire"}]
+            } 
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Developed by Aym, the Great Duke of Hell, these bullets set any target they hit on fire."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_consumable"],
+        "modifiers": []
+    },
+    {
+        "id": "eq_tracerbullets",
+        "name": "Tracer Bullets",
+        "source": "core",
+        "tags": {"trait": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {
+            "equipment_add_to": {
+                "equip_check": [
+                    {
+                        "check_type": "tag",
+                        "value": "pistol"
+                    },
+                    {
+                        "check_type": "tag",
+                        "value": "rifle"
+                    }
+                ]
+            },
+            "ranged_bonus_conditional" : { 
+                "condition" : [
+                    {
+                        "bonus_type": "dice",
+                        "value": 1
+                    }
+                ]
+            }
+        },
+        "description": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Before the battle begins, a model may use this item to grant a rifle or pistol weapon that they are equipped with +1 DICE to hit with ranged attacks until the end of the battle. ",
+                "glossary": [{"val": "+1 DICE", "id": "kw_plusdice"}]
+            } 
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Tracer bullets allow soldiers to adjust their aim efficiently."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_consumable"],
+        "modifiers": []
+    },
+    {
+        "id": "eq_martyrdompills",
+        "name": "Martyrdom Pills",
+        "source": "core",
+        "tags": {"trait": true, "enemy_penalty": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {
+            "keyword_ignore": {"value": "kw_fear"},
+            "self_defense_injury" : {"type": "dice", "val": -1}
+        },
+        "description": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Before the battle begins, a model may use this item. If it does, injuries rolled against it suffer -1 DICE until the end of the battle and the model is not affected by FEAR.",
+                "glossary": [
+                    {"val": "-1 DICE", "id": "kw_minusdice"},
+                    {"val": "FEAR", "id": "kw_fear"}
+                ]
+            } 
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Martyrdom pills are a potent mixture of mind-altering drugs and chemicals that inure a soldier against all pain and injury. However, it takes a tremendous toll on the body."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_consumable"],
+        "modifiers": []
+    },
+    {
+        "id": "eq_unholytrinket",
+        "name": "Unholy Trinket",
+        "source": "core",
+        "tags": {"trait": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {
+            "activated": {}
+        },
+        "description": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "When a model equipped with an Unholy Trinket fails a RISKY ACTION, that model may use this item. If it does, its Activation is not ended. ",
+                "glossary": [
+                    {"val": "RISKY ACTION", "id": "kw_riskyaction"}
+                ]
+            } 
+        ],
+        "lore": [ 
+        ],
+        "options": [],
+        "keywords": ["kw_consumable"],
+        "modifiers": []
+    },
+    {
+        "id": "eq_unholyrelic",
+        "name": "Unholy Relic",
+        "source": "core",
+        "tags": {"trait": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {
+            "keyword_add": {"value": ["kw_fear"]}
+        },
+        "description": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "A model equipped with an Unholy relic radiates a truly malignant aura and causes FEAR.",
+                "glossary": [
+                    {"val": "FEAR", "id": "kw_fear"}
+                ]
+            } 
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "An artefact bestowed with unholy power. Examples include Nephilim heads, desecrated splinters of the True Cross or mummified body parts of fallen saints and bishops."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_blessedicon",
+        "name": "Blessed Icon",
+        "source": "core",
+        "tags": {"trait": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {
+            "activated": {}
+        },
+        "description": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "When a model equipped with a Blessed Icon fails a RISKY ACTION, that model may use this item. If it does, its Activation is not ended. Can be used once per battle.",
+                "glossary": [
+                    {"val": "RISKY ACTION", "id": "kw_riskyaction"}
+                ]
+            } 
+        ],
+        "lore": [       
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Small icons of saints, great angels and holy warriors are a common sight amongst the Trench Pilgrims. They are hung on rosaries, belts, or attached to portable shrines carried on the Pilgrims’ backs."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_infernalbrandmark",
+        "name": "Infernal Brand Mark",
+        "source": "core",
+        "tags": {"trait": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {
+            "ignore_element": {"element": ["kw_fire"]}
+        },
+        "description": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Negates the extra BLOOD MARKER from attacks with the keyword FIRE. Any such attacks suffer -1 DICE penalty to all injury rolls.",
+                "glossary": [
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"},
+                    {"val": "FIRE", "id": "kw_fire"},
+                    {"val": "-1 DICE", "id": "kw_minusdice"}
+                ]
+            } 
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "A Heretic who has made a Holy Pilgrimage into Hell itself is branded by their patron devil with an ever-burning mark. Mortal fire no longer has the power to harm them."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_fieldshrine",
+        "name": "Field Shrine",
+        "source": "core",
+        "tags": {"trait": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {
+            "warband_wide": {}
+        },
+        "description": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Can be placed on the battlefield in your deployment zone. Acts as three models for Morale Tests. It has a base size of 40mm. Can be destroyed if any type of attack hits it."
+            } 
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Holy reliquaries, blessed artefacts and sacred crosses are often carried to the battlefield to encourage the troops, while the Heretics bring idols of the Golden Calf, tortured captives or other wicked totems to bear."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_hellboundsoulcontract",
+        "name": "Hellbound Soul Contract",
+        "source": "core",
+        "tags": {"trait": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {
+        },
+        "description": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "When this model is taken Out of Action, any model in melee combat with them immediately suffers +1 BLOOD MARKER unless the model ignores damage from sources with the Keyword FIRE.",
+                "glossary": [
+                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"},
+                    {"val": "FIRE", "id": "kw_fire"}
+                ]
+            } 
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "An infernal contract signed by a Heretic and the devil who will come to collect the damned soul when death is close. The mortal signatory bursts into infernal flames when seriously wounded."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
     }
 ]
