@@ -10,6 +10,11 @@ import WbbEditViewExploration from "./WbbEditViewExploration";
 import WbbFighterDetailView from "./WbbFighterDetailView";
 import { useNavigate, useLocation } from 'react-router-dom';
 import {WarbandManager} from "../../../classes/saveitems/Warband/WarbandManager";
+import WbbModalAddFighterTroop from "./modals/WbbModalAddFighterTroop";
+import WbbModalAddFighterElite from "./modals/WbbModalAddFighterElite";
+import WbbModalAddFighterMercenary from "./modals/WbbModalAddFighterMercenary";
+import WbbModalAddExplorationLocation from "./modals/WbbModalAddExplorationLocation";
+import WbbModalAddModifier from "./modals/WbbModalAddModifier";
 
 interface WbbEditViewProps {
     warbandData: UserWarband | null;
@@ -26,6 +31,10 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
 
     /** Set Warband as Class */
     const [warband, setWarband] = useState<UserWarband | null>(null);
+
+    if( warband === null ) {
+        return ''; // @TODO: what if warband is null
+    }
 
     useEffect(() => {
         if (warbandData) {
@@ -64,6 +73,30 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
         navigate('.', { replace: false }); // removes the ?fighter param
         setSelectedFighter(null);
     };
+
+
+    /** Modals */
+
+    // Add Fighter Modal (Troop, Elite, Mercenaries)
+    const [showAddFighterTroopModal, setShowAddFighterTroopModal] = useState(false);
+    const [showAddFighterEliteModal, setShowAddFighterEliteModal] = useState(false);
+    const [showAddFighterMercenaryModal, setShowAddFighterMercenaryModal] = useState(false);
+    const handleFighterSubmit = (selectedFighter: { id: string; name: string }[]) => {
+        warband.AddFighter(selectedFighter);
+    };
+
+    // Exploration Location Modal
+    const [showAddExplorationModal, setShowAddExplorationModal] = useState(false);
+    const handleAddExplorationLocation = (location: any, selectedOptions: any[]) => {
+        warband.AddExplorationLocation(location, selectedOptions);
+    };
+
+    // Modifier Modal
+    const [showAddModifierModal, setShowAddModifierModal] = useState(false);
+    const handleAddModifier = (modifier: any, selectedOption: any) => {
+        warband.AddModifier( modifier, selectedOption );
+    };
+
 
     return (
         <div className="WbbEditView">
@@ -145,7 +178,8 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                             </>
                         ))}
 
-                        <div className={'btn btn-add-element btn-block'}>
+                        <div className={'btn btn-add-element btn-block'}
+                             onClick={() => setShowAddFighterEliteModal(true)}>
                             <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
                             {'Add Elite'}
                         </div>
@@ -166,7 +200,8 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                             </>
                         ))}
 
-                        <div className={'btn btn-add-element btn-block'}>
+                        <div className={'btn btn-add-element btn-block'}
+                             onClick={() => setShowAddFighterTroopModal(true)}>
                             <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
                             {'Add Troop'}
                         </div>
@@ -187,7 +222,8 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                             </>
                         ))}
 
-                        <div className={'btn btn-add-element btn-block'}>
+                        <div className={'btn btn-add-element btn-block'}
+                             onClick={() => setShowAddFighterMercenaryModal(true)}>
                             <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
                             {'Add Mercenary'}
                         </div>
@@ -200,7 +236,9 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                             setActivePopoverId={setActivePopoverId}
                         />
 
-                        <div className={'btn btn-add-element btn-block'}>
+                        <div className={'btn btn-add-element btn-block'}
+                             onClick={() => setShowAddModifierModal(true)}
+                        >
                             <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
                             {'Add Modifier'}
                         </div>
@@ -214,7 +252,8 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                             setActivePopoverId={setActivePopoverId}
                         />
 
-                        <div className={'btn btn-add-element btn-block'}>
+                        <div className={'btn btn-add-element btn-block'}
+                             onClick={() => setShowAddExplorationModal(true)}>
                             <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
                             {'Add Exploration'}
                         </div>
@@ -237,6 +276,34 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                     </div>
                 </div>
             }
+
+
+
+            <WbbModalAddFighterTroop
+                show={showAddFighterTroopModal}
+                onClose={() => setShowAddFighterTroopModal(false)}
+                onSubmit={handleFighterSubmit}
+            />
+            <WbbModalAddFighterElite
+                show={showAddFighterEliteModal}
+                onClose={() => setShowAddFighterEliteModal(false)}
+                onSubmit={handleFighterSubmit}
+            />
+            <WbbModalAddFighterMercenary
+                show={showAddFighterMercenaryModal}
+                onClose={() => setShowAddFighterMercenaryModal(false)}
+                onSubmit={handleFighterSubmit}
+            />
+            <WbbModalAddModifier
+                show={showAddModifierModal}
+                onClose={() => setShowAddModifierModal(false)}
+                onSubmit={handleAddModifier}
+            />
+            <WbbModalAddExplorationLocation
+                show={showAddExplorationModal}
+                onClose={() => setShowAddExplorationModal(false)}
+                onSubmit={handleAddExplorationLocation}
+            />
         </div>
     );
 };

@@ -114,53 +114,58 @@ class UserWarband extends DynamicContextObject {
      * GETTERS
      */
 
+    /*
+     @TODO
+     - These functions need to return the proper values or do stuff
+     */
+
     public GetPatron() {
         return this.Faction.MyPatron;
     }
 
-    /**
+    /** @TODO
      * Returns the Name of the Warband as string
      */
     public GetWarbandName () {
         return this.Name;
     }
 
-    /**
+    /** @TODO
      * Returns the Name of the Faction as string
      */
     public GetFactionName () {
         return this.Faction.Name;
     }
 
-    /**
+    /** @TODO
      * Returns the Ducats Value of the Warband Cost as int
      */
     public GetCostDucats() {
         return this.Ducats;
     }
 
-    /**
+    /** @TODO
      * Returns the Max Ducats Value of the Warband int
      */
     public GetMaxDucats() {
         return this.Ducats;
     }
 
-    /**
+    /** @TODO
      * Returns the Glory Value of the Warband Cost as int
      */
     public GetCostGlory() {
         return this.Glory;
     }
 
-    /**
+    /** @TODO
      * Returns the Max Glory Value of the Warband int
      */
     public GetMaxGlory() {
         return this.Glory;
     }
 
-    /**
+    /** @TODO
      * Returns the name of the associated campaign for this warband if any exists
      */
     public GetCampaignName() {
@@ -168,7 +173,7 @@ class UserWarband extends DynamicContextObject {
     }
 
 
-    /**
+    /** @TODO
      * Get the Fighters for this warbands
      */
     public GetFighters() {
@@ -276,6 +281,77 @@ class UserWarband extends DynamicContextObject {
                 ]
             }
         ];
+    }
+
+
+    /** @TODO
+     * Gets the ranged weapon options for a fighter by its ID
+     *
+     * @param fighter_id
+     */
+    public GetRangedWeaponOptions ( fighter_id: string ) {
+
+        // @TODO: get real options
+        const options = [
+            {
+                Name: 'Jezzail',
+                Id: 'eq_jezzail',
+                Cost: '7 Ducats'
+            },
+            {
+                Name: 'Pistol',
+                Id: 'eq_pistol',
+                Cost: '5 Ducats'
+            },
+            {
+                Name: 'Musket',
+                Id: 'eq_musket',
+                Cost: '10 Ducats'
+            },
+        ];
+
+
+        return options;
+    }
+
+    /**
+     * WBB Actions
+     */
+
+    /** @TODO
+     * Adds a fighter to the Roster
+     * @param fighter
+     */
+    public AddFighter ( fighter: object ) {
+
+        return false;
+
+    }
+
+    /** @TODO
+     * Adds an exploration location to a Roster
+     *
+     * @param location
+     * @param option
+     * @constructor
+     */
+    public AddExplorationLocation ( location: object, option: object) {
+
+        return false;
+
+    }
+
+
+    /** @TODO
+     * Adds a modifier item to a warband
+     *
+     * @param modifier
+     * @param option
+     */
+    public AddModifier ( modifier: object, option: object) {
+
+        return false;
+
     }
 
 }
