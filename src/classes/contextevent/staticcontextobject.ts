@@ -9,8 +9,7 @@ class StaticContextObject extends ContextObject {
 
     public async GrabContextPackages(event_id : string, source_obj : ContextObject, arrs_extra : any[]) { 
         const StaticEvents : ContextPackage[] = [];
-        
-        if (this.ContextData) {            
+        if (this.ContextData) {         
             for (const key of Object.keys(this.ContextKeys)) {
                 const context_entry = this.ContextData[key]
                 if (context_entry == undefined) {continue;}
@@ -31,7 +30,6 @@ class StaticContextObject extends ContextObject {
                 }                
              }
         }
-
         const SubPackages : ContextPackage[] = await this.GrabSpecialPackages(event_id, source_obj, arrs_extra);
 
         for (let i = 0; i < SubPackages.length; i++) {

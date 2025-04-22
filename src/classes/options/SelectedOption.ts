@@ -11,6 +11,7 @@ and option-selection tech.
 class SelectedOption {
 
     public Option : StaticOption;
+    public SelectionSet : IChoice[] = [];
     public SelectedChoice : IChoice | null = null;
     public MyParent : DynamicOptionContextObject;
     public NestedOption : DynamicOptionContextObject | null = null;
@@ -18,6 +19,14 @@ class SelectedOption {
     public constructor(option : StaticOption, parent : DynamicOptionContextObject) {
         this.Option = option;
         this.MyParent = parent;
+    }
+
+    public async GetSelectionChoices() {
+        if (this.Option.Category == "contextobject") {
+            this.SelectionSet = await this.Option.FindChoices();
+        } else {
+            this.SelectionSet = this.Option.Selections;
+        }
     }
 
     /**
@@ -43,8 +52,9 @@ class SelectedOption {
         }}
     }
 
-    public HandleObjectDynamics(choice_selected : IChoice) {
+    public async HandleObjectDynamics(choice_selected : IChoice) {
         this.NestedOption = new DynamicOptionContextObject(choice_selected.value.SelfData, choice_selected.value, this.MyParent);
+        await this.NestedOption.BuildSelections();
     }
 
 }

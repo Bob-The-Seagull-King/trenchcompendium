@@ -11,7 +11,8 @@ interface IStaticOption {
     name : string, // Representation name of the option
     description : [], // Description of what this option means
     category : string, // Used to determine if the option is basic or uses context objects
-    contextvars : ContextEventEntry // Variables used for events.
+    contextvars : ContextEventEntry, // Variables used for events.
+    dyna_only? : boolean // Ensures it only gets active if the parent can be found
 }
 
 interface IChoice {
@@ -33,6 +34,7 @@ class StaticOption {
     public Name : string;
     public Category : string;
     public ContextVars : ContextEventEntry;
+    public DynaForce : boolean;
     
     public Description;
     public Selections : IChoice[] = [];
@@ -47,12 +49,16 @@ class StaticOption {
 
         this.MyStaticObject = parent;
         this.Description = DescriptionFactory(data.description, this);
+        this.DynaForce = (data.dyna_only != undefined)? data.dyna_only : false;
     }
 
     /**
      * Creates a set of choices to select from.
      */
-    public async FindChoices() {undefined}
+    public async FindChoices() {
+        const NewSelections : IChoice[] = []
+        return NewSelections
+    }
 
     /**
      * Getter for selections
@@ -111,8 +117,6 @@ class StaticOptionTypeList extends StaticOption {
         if (data.data_search) {
             this.DataSearch = data.data_search;
         }
-        
-        this.FindChoices();
     }
 
     /**
@@ -120,14 +124,14 @@ class StaticOptionTypeList extends StaticOption {
      * and combines that with any preset options.
      */
     public async FindChoices() {
-        this.Selections = []
+        const NewSelections : IChoice[] = [];
 
         let id_num = 0;
         for (let i = 0; i < this.PresetOptions.length; i++) {
             const val_key = Object.keys(this.OptionContext)[0]
             const value = OptionCallTable[val_key].genericReturn(this, this.OptionContext[val_key], this.PresetOptions[i])
 
-            this.Selections.push({
+            NewSelections.push({
                 id: id_num,
                 value: this.PresetOptions[i],
                 display_str : value
@@ -142,7 +146,7 @@ class StaticOptionTypeList extends StaticOption {
                 const val_key = Object.keys(this.OptionContext)[0]
                 const value = OptionCallTable[val_key].genericResultReturn(this, this.OptionContext[val_key], results[i])
 
-                this.Selections.push({
+                NewSelections.push({
                     id: id_num,
                     value: results[i],
                     display_str : value
@@ -150,6 +154,7 @@ class StaticOptionTypeList extends StaticOption {
                 id_num += 1;
             }
         }
+        return NewSelections;
     }
     
 }
@@ -157,7 +162,7 @@ class StaticOptionTypeList extends StaticOption {
 interface IStaticOptionContextObjectList extends IStaticOption {
     parent_level : number, // how many levels above this object to start a search from
     question : StaticOptionContextObjectQuestion, // the question to use in filtering context objects
-    question_name : string // string name of the event to run
+    question_name : string, // string name of the event to run
 }
 
 interface StaticOptionContextObjectQuestion {
@@ -169,6 +174,7 @@ interface QuestionBase { // To meet a question, all parameters must be met
     tagq? : ContextEventEntry, // Search for contents in that objects tags
     baseq? : ContextEventEntry,  // Search for contents in that objects option_search_viable context data entry
     propertyq? : ContextEventEntry, // Search for properties on an object (if not present, count as failure)
+    antipropertyq? : ContextEventEntry, // Search for properties to not be on an object (if not present, count as success)
 }
 
 class StaticOptionContextObjectList extends StaticOption {
@@ -189,25 +195,29 @@ class StaticOptionContextObjectList extends StaticOption {
      * to choose from.
      */
     public async FindChoices() {
-        this.Selections = []
+        
+        const NewSelections : IChoice[] = [];
         let OptionContextList : ContextObject[] = []
 
         const RelevantContextObject : ContextObject | null = this.FindContextObject()
-        if (RelevantContextObject != null) {
-            const Events : EventRunner = new EventRunner();
 
-            OptionContextList = await Events.runEvent(this.QuestionName, RelevantContextObject, [], [], this.Question)
+        if ((this.DynaForce == true && RelevantContextObject != null) || (this.DynaForce == false)) {
+            if (RelevantContextObject != null) {
+                const Events : EventRunner = new EventRunner();
+                OptionContextList = await Events.runEvent(this.QuestionName, RelevantContextObject, [], [], this.Question)
 
-            for (let i = 0; i < OptionContextList.length; i++) {
-                if (OptionContextList[i] != this.MyStaticObject) {
-                    this.Selections.push({
-                        id: i,
-                        value: OptionContextList[i],
-                        display_str : OptionContextList[i].GetTrueName()
-                    })
+                for (let i = 0; i < OptionContextList.length; i++) {
+                    if (OptionContextList[i] != this.MyStaticObject) {
+                        NewSelections.push({
+                            id: i,
+                            value: OptionContextList[i],
+                            display_str : OptionContextList[i].GetTrueName()
+                        })
+                    }
                 }
             }
         }
+        return NewSelections;
     }
 
     /**
@@ -219,7 +229,6 @@ class StaticOptionContextObjectList extends StaticOption {
      */
     public FindContextObject() {
         let baseobject : ContextObject | null = this.MyStaticObject;
-
         if (baseobject == null) { return null; }
         for (let i = 0; i < this.ParentRefLevel; i++) {
             const tempobject : ContextObject | null = baseobject.MyContext;
@@ -227,7 +236,6 @@ class StaticOptionContextObjectList extends StaticOption {
                 baseobject = tempobject;
             }
         }
-
         return baseobject;
     }
     

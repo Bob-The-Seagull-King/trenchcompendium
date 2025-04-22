@@ -220,7 +220,7 @@
             "melee": 1,
             "armour": 0,
             "movetype": 0,
-            "potential": 2
+            "potential": 1
         },
         "keywords" : ["kw_sultanate"],
         "abilities" : ["ab_artificialbody","ab_mauling","ab_lionsgrace"]
@@ -424,7 +424,7 @@
             "base": [25],
             "armour": 0,
             "movetype": 0,
-            "potential": 2
+            "potential": 1
         },
         "keywords" : [],
         "abilities" : ["ab_artificialbody","ab_recreation"]

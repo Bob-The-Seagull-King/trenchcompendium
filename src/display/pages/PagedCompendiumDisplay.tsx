@@ -24,7 +24,7 @@ const PagedCompendiumDisplay = (prop: any) => {
     const { state } = useLocation();
     const urlPath = useLocation().pathname;
     const urlSplits = urlPath.split('/');
-    const [_curItem, setCurItem] = useState<any>([]);
+    const [_curItem, setCurItem] = useState<any>(null);
     const [_keyval, setKeyVal] = useState(0);
     
     useEffect(() => {

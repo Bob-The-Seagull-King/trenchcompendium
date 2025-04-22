@@ -7,6 +7,7 @@ import { ModelStatistics } from "../../classes/feature/model/ModelStats";
 import { ModelUpgradeRelationship } from "../../classes/relationship/model/ModelUpgradeRelationship";
 import { LocationRestriction } from "../../classes/feature/exploration/ExplorationLocation";
 import { WarbandProperty } from "../../classes/saveitems/Warband/WarbandProperty";
+import { FactionModelRelationship } from "../../classes/relationship/faction/FactionModelRelationship";
 
 /**
  * Events that can be called by the runEvent method,
@@ -17,6 +18,7 @@ export interface CallEvents {
     genericEvent? : (this: EventRunner, eventSource : any, trackVal : any, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<void>, // Generic all-purpose event, avoid using if possible
     genericReturnEvent? : (this: EventRunner, eventSource : any, relayVar : any, trackVal : any, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<any>; // Generic all-purpose event if you want a value returned, avoid using if possible
     optionSearchEvent? : (this: EventRunner, eventSource : any, relayVar : ContextObject[], trackVal : StaticOptionContextObjectQuestion, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, ) => Promise<ContextObject[]>; // When being searched by an Option, use this to determine if an object should be added to their selections
+    getfactionmodelswithcount? : (this: EventRunner, eventSource : any, relayVar : FactionModelRelationship[], trackVal : StaticOptionContextObjectQuestion, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, ) => Promise<FactionModelRelationship[]>; // When being searched by an Option, use this to determine if an object should be added to their selections
     getPresentationHandeddness? : (this: EventRunner, eventSource : any, relayVar : any, trackVal : any, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => {[type : string]: string}; 
     getEquipmentRestrictionPresentable? : (this: EventRunner, eventSource : any, relayVar : any, trackVal : EquipmentRestriction[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<string[]>; 
     getEquipmentRestriction? : (this: EventRunner, eventSource : any, relayVar : any, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => EquipmentRestriction[]; 

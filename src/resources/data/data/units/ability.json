@@ -121,7 +121,7 @@
         "id": "ab_trample",
         "name": "Trample",
         "source": "core",
-        "tags": {"action": true, "attack": true},
+        "tags": {"action": true, "attack": true, "action_type": ["attack_melee"]},
         "contextdata": {"custom_attack_type": {"range": 0}, "armour_ignore": {}},
         "description": [            
             {

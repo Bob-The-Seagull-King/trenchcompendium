@@ -11,7 +11,7 @@ class ContextObject extends CompendiumItem {
 
     public SelfData : any;
     public ContextKeys : ContextEventVals = {}
-    public ContextData : CallEventTable; // The table searched through in Events
+    public readonly ContextData : CallEventTable = BaseContextCallTable; // The table searched through in Events
 
     public MyContext : ContextObject | null = null; // The parent object, if any
 
@@ -21,8 +21,7 @@ class ContextObject extends CompendiumItem {
         this.MyContext = parent;
         if (data.contextdata) {
             this.ContextKeys = data.contextdata;    
-        }    
-        this.ContextData = BaseContextCallTable;
+        }  
     }
 
     /**

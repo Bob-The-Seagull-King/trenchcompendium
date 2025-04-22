@@ -40,7 +40,7 @@ interface ISelectedOption {
  */
 
 class WarbandProperty extends DynamicContextObject  {
-    public SelfDynamicProperty : DynamicOptionContextObject;
+    public SelfDynamicProperty! : DynamicOptionContextObject;
     public SubProperties : WarbandProperty[] = [];
 
     /**
@@ -52,10 +52,15 @@ class WarbandProperty extends DynamicContextObject  {
     {
         super(base_obj.SelfData, parent);
         this.ContextKeys = {}
+        
+    }
+
+    public async HandleDynamicProps(base_obj : StaticOptionContextObject, parent : DynamicContextObject | null, dyna_obj : DynamicOptionContextObject | null, selection_vals: IWarbandProperty | null) {
         if (dyna_obj != null) {
             this.SelfDynamicProperty = dyna_obj;
         } else {
             this.SelfDynamicProperty = new DynamicOptionContextObject(base_obj.SelfData, base_obj, this);
+            await this.SelfDynamicProperty.BuildSelections();
         }
 
         if (selection_vals != null) {
@@ -66,7 +71,7 @@ class WarbandProperty extends DynamicContextObject  {
                         CurSelection.SelectOption(selection_vals.selections[j].selection_ID)
                         const subselect = selection_vals.selections[j].suboption;
                         if (subselect != undefined) {
-                            this.GenerateSubProperties(subselect, CurSelection)
+                            await this.GenerateSubProperties(subselect, CurSelection)
                         }
                         break;
                     }
@@ -75,15 +80,16 @@ class WarbandProperty extends DynamicContextObject  {
         }
     }
 
-    public GenerateSubProperties(selection_vals: IWarbandProperty, self_selection : SelectedOption) {
+    public async GenerateSubProperties(selection_vals: IWarbandProperty, self_selection : SelectedOption) {
         const Nested = self_selection.NestedOption
         if (Nested != null) {
             const NewSkill = new WarbandProperty(Nested.OptionChoice, this, Nested, selection_vals);
+            await NewSkill.HandleDynamicProps(Nested.OptionChoice, this, Nested, selection_vals)
             this.SubProperties.push(NewSkill);
         }
     }
 
-    public RegenerateSubProperties( ) {
+    public async RegenerateSubProperties( ) {
         const RegenProperties : WarbandProperty[] = []
         for (let i = 0; i < this.SelfDynamicProperty.Selections.length; i++) {
             const CurSelection = this.SelfDynamicProperty.Selections[i]
@@ -106,6 +112,13 @@ class WarbandProperty extends DynamicContextObject  {
                         object_id: CurSelection.Option.RefID,
                         selections: selectionarray
                         });
+                    await NewSkill.HandleDynamicProps(CurSelection.NestedOption.OptionChoice, 
+                        this, 
+                        CurSelection.NestedOption, 
+                        {
+                        object_id: CurSelection.Option.RefID,
+                        selections: selectionarray
+                        })
                     RegenProperties.push(NewSkill);
                 }
             }
@@ -113,10 +126,10 @@ class WarbandProperty extends DynamicContextObject  {
         this.SubProperties = RegenProperties;
     }
 
-    public SelectSelfOption(selection_index : number, selection_id : number) {
+    public async SelectSelfOption(selection_index : number, selection_id : number) {
         if (this.SelfDynamicProperty.Selections[selection_index] != undefined) {
             this.SelfDynamicProperty.Selections[selection_index].SelectOption(selection_id);
-            this.RegenerateSubProperties();
+            await this.RegenerateSubProperties();
         }
     }
 
