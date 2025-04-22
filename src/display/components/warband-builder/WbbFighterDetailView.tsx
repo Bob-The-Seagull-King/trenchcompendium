@@ -7,6 +7,14 @@ import WbbEquipmentListItem from "./WbbEquipmentListItem";
 import WbbFighterCollapse from "./WbbFighterCollapse";
 import WbbEditViewAdvancement from "./WbbEditViewAdvancement";
 import WbbEditViewInjury from "./WbbEditViewInjury";
+import WbbModalAddEquipment from "./modals/fighter/WbbModalAddEquipment";
+import WbbModalAddRangedWeapon from "./modals/fighter/WbbAddRangedWeapon";
+import WbbModalAddMeleeWeapon from "./modals/fighter/WbbAddMeleeWeapon";
+import WbbModalAddAdvancement from "./modals/fighter/WbbAddAdvancement";
+import WbbModalAddInjury from "./modals/fighter/WbbModalAddInjury";
+import WbbEditFighterExperience from "./modals/fighter/WbbEditFighterExperience";
+import WbbEditBattleScars from "./modals/fighter/WbbEditBattleScars";
+import WbbEditFighterStatus from "./modals/fighter/WbbEditFighterStatus";
 
 
 interface WbbFighterDetailViewProps {
@@ -81,6 +89,78 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
         }
     ]
 
+    // end Test Data
+
+    /**
+     * Equipment Modals
+     */
+
+    // Ranged Weapons
+    const [showAddRangedWeapon, setShowAddRangedWeapon] = useState(false);
+    const handleAddRangedWeapon = (weapon: { id: string; name: string }) => {
+        // @TODO: Implement logic to add weapon to fighter's equipment
+        console.log('Ranged weapon added:', weapon);
+    };
+
+    // Melee Weapons
+    const [showMeleeWeaponModal, setShowMeleeWeaponModal] = useState(false);
+
+    const handleAddMeleeWeapon = (weapon: { id: string, name: string }) => {
+        console.log("Selected melee weapon:", weapon);
+        // TODO: Add this weapon to the appropriate fighter or list
+    };
+
+    // Equipment
+    const [showAddEquipmentModal, setShowAddEquipmentModal] = useState(false);
+    const handleAddEquipment = (equipment: any) => {
+        // TODO: Attach equipment to fighter, or pass to backend
+        console.log('Equipment added:', equipment);
+    };
+
+    /**
+     * Campaign Modals
+     */
+
+    // Experience
+    const [showXPModal, setShowXPModal] = useState(false);
+    const handleXPSubmit = (newXP: number) => {
+        // if (!selectedFighter) return;
+        // @TODO: hook up to class
+    };
+
+    // Battle Scars
+    const [showEditScars, setShowEditScars] = useState(false);
+    const handleUpdateBattleScars = (newScars: number) => {
+        // @TODO: hook up to class
+
+        // if (fighter) {
+        //     fighter.BattleScars = newScars;
+        // }
+    };
+
+    // Advancements
+    const [showAdvancementModal, setShowAdvancementModal] = useState(false);
+    const handleAddAdvancement = (advancement: any) => {
+        // if (!selectedFighter) return;
+
+        // @TODO: hook up to class
+
+        // selectedFighter.AddAdvancement(advancement);
+    };
+
+    const [showInjuryModal, setShowInjuryModal] = useState(false);
+    const handleAddInjury = (injury: any) => {
+        // if (!selectedFighter) return;
+        // @TODO: hook up to class
+
+        // selectedFighter.AddInjury(injury);
+    };
+
+    // Fighter status
+    const [showStatusModal, setShowStatusModal] = useState(false);
+    const handleStatusUpdate = (newStatus: string) => {
+        // @TODO: hook up to class
+    };
 
     return (
         <div className="WbbFighterDetailView fighter-card">
@@ -221,7 +301,8 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
                     <WbbEquipmentListItem
                         item={item_siege_jezzail}
                     />
-                    <div className={'btn btn-add-element btn-block'}>
+                    <div className={'btn btn-add-element btn-block'}
+                         onClick={() => setShowAddRangedWeapon(true)}>
                         <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
                         {'Add Ranged Weapon'}
                     </div>
@@ -232,7 +313,8 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
                     <WbbEquipmentListItem
                         item={item_trench_knife}
                     />
-                    <div className={'btn btn-add-element btn-block'}>
+                    <div className={'btn btn-add-element btn-block'}
+                         onClick={() => setShowMeleeWeaponModal(true)}>
                         <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
                         {'Add Melee Weapon'}
                     </div>
@@ -243,12 +325,28 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
                     <WbbEquipmentListItem
                         item={item_alch_ammo}
                     />
-                    <div className={'btn btn-add-element btn-block'}>
+                    <div className={'btn btn-add-element btn-block'}
+                         onClick={() => setShowAddEquipmentModal(true)}>
                         <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
                         {'Add Equipment'}
                     </div>
 
-
+                    {/* Equipment Modals */}
+                    <WbbModalAddRangedWeapon
+                        show={showAddRangedWeapon}
+                        onClose={() => setShowAddRangedWeapon(false)}
+                        onSubmit={handleAddRangedWeapon}
+                    />
+                    <WbbModalAddMeleeWeapon
+                        show={showMeleeWeaponModal}
+                        onClose={() => setShowMeleeWeaponModal(false)}
+                        onSubmit={handleAddMeleeWeapon}
+                    />
+                    <WbbModalAddEquipment
+                        show={showAddEquipmentModal}
+                        onClose={() => setShowAddEquipmentModal(false)}
+                        onSubmit={handleAddEquipment}
+                    />
                 </WbbFighterCollapse>
             </div>
 
@@ -259,12 +357,13 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
 
                         <h3>{'Experience'}</h3>
 
-                        <div className={'btn btn-primary btn-sm edit-xp-btn'}>
+                        <div className={'btn btn-primary btn-sm edit-xp-btn'}
+                             onClick={() => setShowXPModal(true)}>
                             <FontAwesomeIcon icon={faPen} className="icon-inline-left-l"/>
                             {'Edit'}
                         </div>
 
-                        <div className={'xp-boxes'}>
+                        <div className={'xp-boxes'} onClick={() => setShowXPModal(true)}>
                             {Array.from({length: 18}, (_, i) => {
                                 const level = i + 1;
                                 const isBold = boldXpIndices.includes(level);
@@ -286,12 +385,13 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
 
                         <h3>{'Battle Scars'}</h3>
 
-                        <div className={'btn btn-primary btn-sm edit-battle-scar-btn'}>
+                        <div className={'btn btn-primary btn-sm edit-battle-scar-btn'}
+                             onClick={() => setShowEditScars(true)}>
                             <FontAwesomeIcon icon={faPen} className="icon-inline-left-l"/>
                             {'Edit'}
                         </div>
 
-                        <div className="battle-scar-boxes">
+                        <div className="battle-scar-boxes" onClick={() => setShowEditScars(true)}>
                             {Array.from({length: 3}, (_, i) => {
                                 const index = i + 1;
                                 const isChecked = index <= fighter.BattleScars;
@@ -315,12 +415,22 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
                     {Advancements.map((advancement) => (
                         <WbbEditViewAdvancement advancement={advancement} key={advancement.Id}/>
                     ))}
+                    <div className={'btn btn-add-element btn-block'}
+                         onClick={() => setShowAdvancementModal(true)}>
+                        <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
+                        {'Add Advancement'}
+                    </div>
 
 
                     <h3>{'Injuries'}</h3>
                     {Injuries.map((injury) => (
                         <WbbEditViewInjury injury={injury} key={injury.Id}/>
                     ))}
+                    <div className={'btn btn-add-element btn-block'}
+                         onClick={() => setShowInjuryModal(true)}>
+                        <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
+                        {'Add Injury'}
+                    </div>
 
                     {/*
                     - Active
@@ -333,13 +443,43 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
                             {'Active'}
                         </div>
 
-                        <div className={'btn btn-primary'}>
+                        <div className={'btn btn-primary'} onClick={() => setShowStatusModal(true)}>
                             <FontAwesomeIcon icon={faPen} className={'icon-inline-left-l'}/>
 
                             {'Change'}
                         </div>
                     </div>
 
+                    {/* Campaign Modals */}
+                    <WbbEditFighterExperience
+                        show={showXPModal}
+                        onClose={() => setShowXPModal(false)}
+                        currentXP={fighter.ExperiencePoints} // @TODO: use actual XP value
+                        // currentXP={selectedFighter.ExperiencePoints}
+                        onSubmit={handleXPSubmit}
+                    />
+                    <WbbEditBattleScars
+                        show={showEditScars}
+                        onClose={() => setShowEditScars(false)}
+                        currentScars={fighter.BattleScars} // @TODO: use actual XP value
+                        onSubmit={handleUpdateBattleScars}
+                    />
+                    <WbbModalAddAdvancement
+                        show={showAdvancementModal}
+                        onClose={() => setShowAdvancementModal(false)}
+                        onSubmit={handleAddAdvancement}
+                    />
+                    <WbbModalAddInjury
+                        show={showInjuryModal}
+                        onClose={() => setShowInjuryModal(false)}
+                        onSubmit={handleAddInjury}
+                    />
+                    <WbbEditFighterStatus
+                        show={showStatusModal}
+                        onClose={() => setShowStatusModal(false)}
+                        currentStatus={'Active'} // @TODO: use actual value
+                        onSubmit={handleStatusUpdate}
+                    />
                 </WbbFighterCollapse>
 
             </div>

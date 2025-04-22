@@ -32,9 +32,9 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
     /** Set Warband as Class */
     const [warband, setWarband] = useState<UserWarband | null>(null);
 
-    if( warband === null ) {
-        return ''; // @TODO: what if warband is null
-    }
+    // if( warband === null ) {
+    //     return ''; // @TODO: what if warband is null
+    // }
 
     useEffect(() => {
         if (warbandData) {
@@ -82,18 +82,23 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
     const [showAddFighterEliteModal, setShowAddFighterEliteModal] = useState(false);
     const [showAddFighterMercenaryModal, setShowAddFighterMercenaryModal] = useState(false);
     const handleFighterSubmit = (selectedFighter: { id: string; name: string }[]) => {
+        if (!warband) { return; } // Guard
+
         warband.AddFighter(selectedFighter);
     };
 
     // Exploration Location Modal
     const [showAddExplorationModal, setShowAddExplorationModal] = useState(false);
     const handleAddExplorationLocation = (location: any, selectedOptions: any[]) => {
+        if (!warband) { return; } // Guard
+
         warband.AddExplorationLocation(location, selectedOptions);
     };
 
     // Modifier Modal
     const [showAddModifierModal, setShowAddModifierModal] = useState(false);
     const handleAddModifier = (modifier: any, selectedOption: any) => {
+        if (!warband) { return; } // Guard
         warband.AddModifier( modifier, selectedOption );
     };
 
@@ -103,7 +108,6 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
             {/* The Warband List */}
             {(warband != null) &&
                 <div className={'container WbbEditViewMain'}>
-
                     <div className={`warband-wrap ${selectedFighter ? 'fighter-selected' : ''}`}>
                         <h1>{warband.GetWarbandName()}</h1>
 

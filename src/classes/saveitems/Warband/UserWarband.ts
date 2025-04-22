@@ -335,7 +335,7 @@ class UserWarband extends DynamicContextObject {
      * @param option
      * @constructor
      */
-    public AddExplorationLocation ( location: object, option: object) {
+    public  AddExplorationLocation ( location: object, option: object) {
 
         return false;
 
