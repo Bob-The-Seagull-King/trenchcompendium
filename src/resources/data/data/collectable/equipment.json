@@ -131,7 +131,7 @@
         "id": "eq_reinforcedarmour",
         "name": "Reinforced Armour",
         "source": "core",
-        "tags": {"trait": true},
+        "tags": {"trait": true, "armour": true},
         "category": "armour",
         "distance": null,
         "stats": {
@@ -973,7 +973,7 @@
         "id": "eq_standardarmour",
         "name": "Standard Armour",
         "source": "core",
-        "tags": {"trait": true},
+        "tags": {"trait": true, "armour": true},
         "category": "armour",
         "distance": null,
         "stats": {
@@ -1001,7 +1001,7 @@
         "id": "eq_alchemistarmour",
         "name": "Alchemist Armour",
         "source": "core",
-        "tags": {"trait": true},
+        "tags": {"trait": true, "armour": true},
         "category": "armour",
         "distance": null,
         "stats": {
@@ -1228,7 +1228,8 @@
         "category": "equipment",
         "distance": null,
         "stats": {
-            "hands_melee": 1
+            "hands_melee": 1,
+            "hands_ranged": 1
         },
         "contextdata": {"warband_wide": {}},
         "description": [            
@@ -1552,7 +1553,7 @@
         "id": "eq_damascusarmour",
         "name": "Damascus Armour",
         "source": "core",
-        "tags": {"trait": true},
+        "tags": {"trait": true, "armour": true},
         "category": "armour",
         "distance": null,
         "stats": {
@@ -2456,9 +2457,20 @@
             "melee": true
         },
         "contextdata": {
-            "get_weapon": {}
+            "get_weapon": {},
+            "choose_bonus_ability": {
+                "restricted": ["dash","attack"]
+            } 
         },
-        "description": [   
+        "description": [    
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Gives +1 DICE bonus to any other ACTION the model takes apart from Dash, Ranged Attack or Melee Attack.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "ACTION", "id": "kw_action"}
+                ]
+            }  
         ],
         "lore": [            
             {
@@ -2684,7 +2696,7 @@
         "id": "eq_machinearmour",
         "name": "Machine Armour",
         "source": "core",
-        "tags": {"trait": true, "bonus": true},
+        "tags": {"trait": true, "bonus": true, "armour": true},
         "category": "armour",
         "distance": null,
         "stats": {
@@ -2757,7 +2769,7 @@
         "id": "eq_holyiconarmour",
         "name": "Holy Icon Armour",
         "source": "core",
-        "tags": {"trait": true},
+        "tags": {"trait": true, "armour": true},
         "category": "armour",
         "distance": null,
         "stats": {
@@ -3116,7 +3128,8 @@
         "stats": {
         },
         "contextdata": {
-            "warband_wide": {}
+            "warband_wide": {},
+            "stationary": {}
         },
         "description": [       
             {
@@ -3159,6 +3172,560 @@
             {
                 "tags": {"desc_type" : "italic"},
                 "content": "An infernal contract signed by a Heretic and the devil who will come to collect the damned soul when death is close. The mortal signatory bursts into infernal flames when seriously wounded."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_tarnishedarmour",
+        "name": "Tarnished Armour",
+        "source": "core",
+        "tags": {"trait": true, "headgear": true, "armour": true},
+        "category": "armour",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {
+            "ignore_element": {"element": ["kw_shrapnel","kw_gas"]},
+            "upgrade_stat": {"stat": "armour", "value": -2}
+        },
+        "description": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The suit counts as Reinforced Armour, a helmet and a gas mask. When an enemy declares a charge, they must charge the model wearing this armour if it is visible, not in cover and within 12” of the wearer. The charging model must be able to reach this model without climbing, leaping or crossing dangerous terrain. If the wearer of the armour is already in melee combat, this power has no effect."
+            } 
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "This suit of armour gilded with gleaming gold comes with a helmet often with a beautiful, cherub-like face warped or corrupted in some way, such as with inhuman eyes or with the whole face twisted upside-down. Despite its splendour the armour is always tarnished by blood, offal or other kind of corruption. Merely seeing it fills mortals with incredible greed and makes the wearer an immediate target of their wrath as they attempt to tear it from them."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_standardofmammon",
+        "name": "Standard of Mammon",
+        "source": "core",
+        "tags": {"trait": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+            "hands_melee": 1,
+            "hands_ranged": 1
+        },
+        "contextdata": {"warband_wide": {}},
+        "description": [            
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Grants +1 DICE for all Morale tests as long as the model with the Flag is not Down or Out of Action. Requires one hand to use as if it was a weapon, both in ranged and melee combat. Any enemy entering melee combat with the model carrying this banner must make a successful ACTION or the model goes Down and cannot get up as long as they are in melee combat with the bearer of the standard.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "Down", "id": "gl_down"},
+                    {"val": "ACTION", "id": "kw_action"}
+                ]
+            }
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Battle Standards of Mammon are opulently decorated works of art, icons and banners done in mockery of the virtues of Charity and Temperance. Always made of the most expensive materials, each is a unique work of dark genius, often depicting saints performing vile sins or famous acts of Greed. It has the power to make anyone kneel before the Prince of Greed."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_goldencalfaltar",
+        "name": "Golden Calf Altar",
+        "source": "core",
+        "tags": {"trait": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {
+            "warband_wide": {},
+            "stationary": {}
+        },
+        "description": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The area within 3” of the altar is Difficult Terrain for all models in the opposing Warband. This affects even models that can Fly. The model carrying the altar may drop it at any point during their Activation. Once placed down, the Golden Calf Altar cannot be picked up again. It has a 25mm base."
+            } 
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "This portable altar of Mammon creates illusions of immense wealth in any form its target covets above all. Overcome by supernatural greed, those affected by the Curse of Mammon are forced to swoop down, feebly trying to pick up the objects of their desire."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_consumable","kw_heavy"],
+        "modifiers": []
+    },
+    {
+        "id": "eq_coinhammer",
+        "name": "Coin Hammer",
+        "source": "core",
+        "tags": {"action": true, "weapon": true},
+        "category": "melee",
+        "distance": null,
+        "stats": {
+            "hands_melee": 2,
+            "melee": true
+        },
+        "contextdata": {
+            "get_weapon": {},
+            "injury_bonus": {"bonuses": [{"type": "dice", "value": 1}]}
+        },
+        "description": [    
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Roll all injuries with +1 DICE. When you inflict a BLOOD MARKER in melee with this weapon, the model wielding the hammer gains one BLESSING MARKER.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"},
+                    {"val": "BLESSING MARKER", "id": "kw_blessingmarker"}
+                ]
+            }   
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "This double-handed hammer has the rune of mammon on its head. Its strikes leave a permanent, painful scar in the shape of Mammon’s rune which burns through even the thickest armour. Mammon loves marking the innocent with his Rune, as it sows mistrust amongst his enemies."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_heavy"],
+        "modifiers": []
+    },
+    {
+        "id": "eq_warcross",
+        "name": "War-Cross",
+        "source": "core",
+        "tags": {"action": true, "weapon": true, "grenade": true},
+        "category": "ranged",
+        "distance": 8,
+        "stats": {
+            "ranged": true
+        },
+        "contextdata": {
+            "get_weapon": {}},
+        "description": [ 
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Does not count as one of the Ranged weapons carried by the model. Cannot be carried with Grenades. Ignores penalties for long range. A model with the weapon will not run out of them."
+            }  
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "A War Cross (also known as a wurfkreuz in the Holy Roman Empire) is a four-pronged throwing weapon in the shape of a cross. It is engraved with prayers and psalms that guide it on an unerring path."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_assault"],
+        "modifiers": []
+    },
+    {
+        "id": "eq_puntgun",
+        "name": "Punt Gun",
+        "source": "core",
+        "tags": {"action": true, "weapon": true},
+        "category": "ranged",
+        "distance": 18,
+        "stats": {
+            "hands_ranged": 2,
+            "ranged": true
+        },
+        "contextdata": {
+            "get_weapon": {},
+            "hit_bonus": {"bonuses": [{"type": "dice", "value": 1}]},
+            "injury_bonus": {"bonuses": [{"type": "dice", "value": 1}]}},
+        "description": [ 
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Owing to its high accuracy and lethal shot, a punt pun adds +1 DICE to all rolls to hit and to injury rolls. Before a model shoots with the punt gun, you can overcharge it with a shot, giving the weapon BLAST 3\" radius. If you do this, the shooting ACTION with the Punt Gun always ends the shooter’s Activation and causes one BLOOD MARKER on the shooter. A model cannot make a ranged attack with the punt gun unless it is either STRONG or another friendly model is in base contact with it.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "BLAST 3\"", "id": "kw_blast"},
+                    {"val": "ACTION", "id": "kw_action"},
+                    {"val": "STRONG", "id": "kw_strong"},
+                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"}
+                ]
+            }  
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "A Punt Gun is an enormous shotgun loaded with up to 25 ounces of shot. It can be loaded with a risky amount of powder and square shot which causes widespread damage and destruction. It is a very popular weapon among Trench Pilgrims who lack access to conventional heavy weapons."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_heavy","kw_shrapnel"],
+        "modifiers": ["+1D to Injuries","+1D to Hit"]
+    },
+    {
+        "id": "eq_sacrificiallamb",
+        "name": "Sacrificial Lamb",
+        "source": "core",
+        "tags": {"trait": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {
+            "warband_wide": {},
+            "activated": {}
+        },
+        "description": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The model ignores the first BLOOD MARKER or INFECTION MARKER it suffers in combat.",
+                "glossary": [
+                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"},
+                    {"val": "INFECTION MARKER", "id": "kw_infectionmarker"}
+                ]
+            } 
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Before the battle, this lamb is sacrificed to God’s glory, and the pilgrim then anoints themselves with its blood, averting the wrath of Yahweh while fighting for His cause."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_consumable"],
+        "modifiers": []
+    },
+    {
+        "id": "eq_trenchmortar",
+        "name": "Trench Mortar",
+        "source": "core",
+        "tags": {"action": true, "weapon": true, "anchorite": true},
+        "category": "ranged",
+        "distance": 48,
+        "stats": {
+            "hands_ranged": 2,
+            "ranged": true
+        },
+        "contextdata": {
+            "get_weapon": {},
+            "injury_bonus": {"bonuses": [{"type": "dice", "value": 1}]},
+            "ignore_cover": {}
+        },
+        "description": [ 
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Specify a point on the battlefield within 36\" (must be in line of sight) that you want to target. Next, take a Ranged Attack ACTION. If the roll fails (i.e. you roll 6 or less), the bomb lands 1\" away from its intended location, multiplied by the number representing the degree of failure (for example, if you rolled 5, the bombard shot lands 2\" away, as 7 – 5 = 2). The direction is decided by your opponent. All models within 3” of the 1 x 1 mm landing spot are hit as the shell explodes – no roll to hit is needed. This weapon has a BLAST radius of 3\" - all models within this range are hit. Add +1 DICE to all injury rolls.",
+                "glossary": [
+                    {"val": "ACTION", "id": "kw_action"},
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "BLAST", "id": "kw_blast"}
+                ]
+            }
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "A trench mortar is a smooth-bore, muzzle-loading weapon with high angles of fire. The shell contains both explosives and deadly Greek Fire."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_heavy","kw_heavy","kw_blast"],
+        "modifiers": ["+2D to Injuries","Ignore Cover"]
+    },
+    {
+        "id": "eq_autocannon",
+        "name": "Auto Cannon",
+        "source": "core",
+        "tags": {"action": true, "weapon": true},
+        "category": "ranged",
+        "distance": 48,
+        "stats": {
+            "hands_ranged": 2,
+            "ranged": true
+        },
+        "contextdata": {
+            "get_weapon": {},
+            "injury_bonus": {"bonuses": [{"type": "dice", "value": 1}]},
+            "extra_attack": {"value": 2}},
+        "description": [ 
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Autocannons can make three Attack ACTIONS instead of one. They can target separate models with each attack, as long as all targets are within 6” of each other. After taking all three attacks the Activation of the model is over regardless of any remaining ACTIONS the model might have. Add +1 DICE to all injury rolls. They can shoot up to five times instead of three if they take ALL the attacks as RISKY ACTION.",
+                "glossary": [
+                    {"val": "RISKY ACTION", "id": "kw_riskyaction"},
+                    {"val": "ACTIONS", "id": "kw_action"}
+                ]
+            }  
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Autocannons are fully automatic guns that are capable of rapid-firing large-calibre 20 mm shells. Capable of generating extremely rapid firepower, autocannons overheat quickly if used for sustained fire."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_heavy"],
+        "modifiers": ["3 Attacks","+1D to Injuries"]
+    },
+    {
+        "id": "eq_gascenser",
+        "name": "Gas Censer",
+        "source": "core",
+        "tags": {"action": true, "weapon": true},
+        "category": "ranged",
+        "distance": 0,
+        "stats": {
+            "hands_ranged": 2,
+            "ranged": true
+        },
+        "contextdata": {
+            "get_weapon": {},
+            "ignore_armour": {"value": 2}},
+        "description": [ 
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The Anchorite may make an injury roll against all models within 6” except the Anchorite itself. Note that all models within range, friend or foe, are hit if the weapon is used. No Line of Sight is needed. The attack has the Keyword GAS and Ignores Armour, unless the models are in Cover in which case armour works as normal. The use of the Gas Censer always ends the Activation of this model.",
+                "glossary": [
+                    {"val": "GAS", "id": "kw_gas"}
+                ]
+            }  
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "This swinging censer is both a lethal chemical weapon as well as an object of veneration to the pilgrims of the warband. It acts as both a corrosive and respiratory weapon."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_blast","kw_gas"],
+        "modifiers": ["Ignore Armour"]
+    },
+    {
+        "id": "eq_gasfilter",
+        "name": "Gas Filter",
+        "source": "core",
+        "tags": {"trait": true, "headgear": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {
+            "ignore_element": {"element": ["kw_gas"]}
+        },
+        "description": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Ignores additional BLOOD MARKERS caused by the Keyword GAS. Any such attacks suffer -1 DICE penalty to all injury rolls.",
+                "glossary": [
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"},
+                    {"val": "GAS", "id": "kw_gas"},
+                    {"val": "-1 DICE", "id": "kw_minusdice"}
+                ]
+            } 
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "The Anchorite is installed with a holy incense system that cleanses and purifies the air the monk inside the Anchorite breathes."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_holydieselengine",
+        "name": "Holy Diesel Engine",
+        "source": "core",
+        "tags": {"trait": true, "bonus": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {
+            "bonus_ability": {
+                "action_type": ["dash"]
+            }
+        },
+        "description": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The Anchorite can add +2 DICE to its Dash ACTIONS, but it automatically gains one BLOOD MARKER if it succeeds in a Dash ACTION.",
+                "glossary": [
+                    {"val": "+2 DICE", "id": "kw_plusdice"},
+                    {"val": "ACTIONS", "id": "kw_action"},
+                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"}
+                ]
+            }
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "The Anchorite is equipped with an advanced diesel engine with an experimental cooling system."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_sacredgeometry",
+        "name": "Sacred Geometry",
+        "source": "core",
+        "tags": {"trait": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {
+            
+            "set_stat": { "upgrades": [{"stat": "ranged", "value": 1}]}
+        },
+        "description": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "This upgrade increases its Ranged Characteristic to +1 DICE. ",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"}
+                ]
+            }
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "The monk controlling this Anchorite is well-versed in geometries intended to make the viewer see the world through mathematics and, through this understanding, gains a better understanding of the divine. This allows the Anchorite to target its enemies with far more accuracy."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_grandanchorite",
+        "name": "Grand Anchorite",
+        "source": "core",
+        "tags": {"trait": true, "bonus": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {
+            "bonus_ability": {
+                "action_type": ["dash","retreat","charge","move"]
+            }
+        },
+        "description": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The Anchorite Shrine can always move out of Melee combat with any enemy without the enemy having a chance to attack it. Additionally, it can move out of Melee combat as part of a Standard Move, Charge or Dash."
+            }
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Built to an extraordinary size, the Anchorite Shrine is all but impossible to stop or slow down once it starts moving."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_pistonlegs",
+        "name": "Piston Legs",
+        "source": "core",
+        "tags": {"trait": true, "attack": true, "action_type": ["attack_melee"]},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {
+            "custom_attack_type": {"range": 0}
+        },
+        "description": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Once during its Activation, the Anchorite Shrine may make an extra Melee Attack ACTION against a Downed enemy model on a 32mm or smaller base. Resolve the attack as if the Anchorite Shrine was armed with a Trench Club.",
+                "glossary": [
+                    {"val": "ACTION", "id": "kw_action"}
+                ]
+            }
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "The feet of the Anchorite Shrine are equipped with special piston engines designed to grind its enemies into a shattered ruin of broken bones and burst flesh."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_hallowedanchorite",
+        "name": "Hallowed Anchorite",
+        "source": "core",
+        "tags": {"trait": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {
+            
+            "set_stat": { "upgrades": [{"stat": "potential", "value": 0}]}
+        },
+        "description": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "This Anchorite can be promoted to ELITE during campaigns. ",
+                "glossary": [
+                    {"val": "ELITE", "id": "kw_elite"}
+                ]
+            }
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "The anchorite has been anointed with holy Chrism, the oil made of pure myrrh, the ash from burnt icons and fifty-six other sacred ingredients. This makes the Anchorite pleasing to the Lord and its blessings can become manifold over time."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_wrathfulcherubface",
+        "name": "Wrathful Cherub Face",
+        "source": "core",
+        "tags": {"trait": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": { },
+        "description": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "If the model fighting the Shrine Anchorite in Melee is affected by the Keyword FEAR, one of the ACTIONS it has to take when it is activated must be Retreat from Melee Combat.",
+                "glossary": [
+                    {"val": "FEAR", "id": "kw_fear"},
+                    {"val": "ACTIONS", "id": "kw_action"}
+                ]
+            }
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "The Anchorite is decorated with an angelic face that is the very image of the wrath of the Lord. All must cower before the face of the Lord."
             }
         ],
         "options": [],
