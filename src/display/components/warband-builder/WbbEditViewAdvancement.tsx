@@ -33,10 +33,6 @@ const WbbEditViewAdvancement: React.FC<{ advancement: Advancement }> = ({ advanc
                 rootClose={true}
                 overlay={
                     <Popover.Body className="popover Wbb-item-actions-popover">
-                        <div className='title'>
-                            {'Actions'}
-                        </div>
-
                         <div className={'actions'}>
                             <div
                                 className={'action action-delete'}

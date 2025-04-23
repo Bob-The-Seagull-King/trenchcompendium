@@ -46,7 +46,7 @@ const WarbandPatronDisplay = (props: any) => {
         <ErrorBoundary fallback={<div>Something went wrong with WarbandPatronDisplay.tsx</div>}>
             <div key={keyval}>
 
-                <h1>Select Patron</h1>
+                <h2>Select Patron</h2>
                 
                 <Form.Control defaultValue={ curpatron != null? curpatron.ID : undefined} className={"borderstyler bordergrey overcomeradius " } as="select" aria-label="Default select example"  placeholder="Member Type" onChange={(e: { target: { value: any; }; }) => { updateItem(e.target.value)    } } >
                     <option value={""} key={"modeloptionnone"} >{"No Patron"}</option> 

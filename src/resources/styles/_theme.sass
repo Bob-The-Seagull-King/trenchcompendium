@@ -171,6 +171,13 @@ body[data-theme]
     .modal-footer
         border-color: $color-bg-1
 
+
+// Form check general
+.form-check
+    > input,
+    > label
+        cursor: pointer
+
 // Switches
 .form-check.form-switch
 
@@ -189,6 +196,10 @@ body[data-theme]
     .form-check-input:focus
         border-color: $color-highlight-bg
         outline: 0
+// Checkboxes
+.form-check-input[type=checkbox]:checked
+    background-color: $color-highlight
+    border-color: $color-highlight
 
 // form control
 input.form-control

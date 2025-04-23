@@ -86,10 +86,6 @@ const WbbEditViewModifier: React.FC<WbbEditViewModifierProps> = ({ warband, acti
                         rootClose={true}
                         overlay={
                             <Popover.Body className="popover Wbb-item-actions-popover">
-                                <div className='title'>
-                                    {'Actions'}
-                                </div>
-
                                 <div className={'actions'}>
                                     <div
                                         className={'action action-copy'}
