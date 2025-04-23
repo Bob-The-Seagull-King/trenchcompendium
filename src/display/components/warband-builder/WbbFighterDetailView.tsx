@@ -166,13 +166,13 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
     };
 
     return (
-        <div className="WbbFighterDetailView fighter-card">
+        <div className="WbbDetailView WbbFighterDetailView fighter-card">
             <div className={'title'}>
                 <div className={'title-back'} onClick={onClose}>
                     <FontAwesomeIcon icon={faChevronLeft} className=""/>
                 </div>
 
-                <div className={'fighter-name'}>
+                <div className={'title-text fighter-name'}>
                     {fighter.ModelName + ' - ' + fighter.FighterName}
                 </div>
 

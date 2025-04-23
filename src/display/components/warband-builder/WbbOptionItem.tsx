@@ -27,11 +27,10 @@ const WbbOptionItem: React.FC<WbbOptionItemProps> = ({ option }) => {
         <div className="WbbOptionItem">
             <div className="option-title"
                  onClick={(e) => {
-                     handleSelectOption();        // toggle selection
-                 }}>
+                     handleSelectOption();
+             }}>
                 <span
                     className="input-wrap"
-
                 >
                     <input
                         className="form-check-input"
@@ -39,7 +38,7 @@ const WbbOptionItem: React.FC<WbbOptionItemProps> = ({ option }) => {
                         id={option.Id}
                         checked={selected}
                         onClick={(e) => e.stopPropagation()} // prevent collapse toggle
-                        onChange={handleSelectOption}        // still needed to toggle when checkbox is clicked
+                        onChange={handleSelectOption}
                     />
                 </span>
 

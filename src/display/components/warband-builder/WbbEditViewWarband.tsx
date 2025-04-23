@@ -7,6 +7,8 @@ interface WbbEditViewWarbandProps {
     ratingGlory: number;
     countElite: number;
     countTroop: number;
+    onClick?: () => void;
+    isActive?: boolean;
 }
 
 const WbbEditViewWarband: React.FC<WbbEditViewWarbandProps> = ({
@@ -15,11 +17,13 @@ const WbbEditViewWarband: React.FC<WbbEditViewWarbandProps> = ({
        ratingDucats,
        ratingGlory,
        countElite,
-       countTroop
+       countTroop,
+       onClick,
+       isActive
    }) => {
 
     return (
-        <div className="WbbEditViewWarband warband-meta">
+        <div className={`WbbEditViewWarband warband-meta ${isActive ? 'active' : ''}`} onClick={onClick}>
             <div className={'meta-headline'}>{'Warband'}</div>
             <div className="meta-item"><strong>Faction:</strong> {faction}</div>
             <div className="meta-item"><strong>Name:</strong> {name}</div>

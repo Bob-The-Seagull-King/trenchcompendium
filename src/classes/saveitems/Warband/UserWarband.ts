@@ -194,6 +194,7 @@ class UserWarband extends DynamicContextObject {
                 IsMercenary: false,
                 ExperiencePoints: 4,
                 BattleScars: 1,
+                FighterIndex: 1, // the index for sorting and getting unique item in array
                 Injuries: [
                     {
                         Name: 'Hand Wound',
@@ -229,6 +230,7 @@ class UserWarband extends DynamicContextObject {
                 IsMercenary: false,
                 ExperiencePoints: 0,
                 BattleScars: 0,
+                FighterIndex: 2, // the index for sorting and getting unique item in array
                 Injuries: [
                 ],
                 Advancements: [
@@ -261,6 +263,7 @@ class UserWarband extends DynamicContextObject {
                 IsMercenary: false,
                 ExperiencePoints: 10,
                 BattleScars: 0,
+                FighterIndex: 3, // the index for sorting and getting unique item in array
                 Injuries: [
                 ],
                 Advancements: [
@@ -390,6 +393,51 @@ class UserWarband extends DynamicContextObject {
      */
     GetBattleCount() {
         return 3;
+    }
+
+    /**
+     * @TODO get stash Data
+     */
+    GetStash() {
+
+        return {
+            ValueDucats: 122,
+            ValueGlory: 4,
+            AmountDucats: 15,
+            AmountGlory: 1,
+            Items: [
+                {
+                    Name: 'Jezzail',
+                    Id: 'fc-jezzail',
+                    ValueDucats: 17,
+                    ValueGlory: 0
+                },
+                {
+                    Name: 'Jezzail',
+                    Id: 'fc-jezzail',
+                    ValueDucats: 17,
+                    ValueGlory: 0
+                },
+                {
+                    Name: 'Trench Knife',
+                    Id: 'fc-trench-knife',
+                    ValueDucats: 17,
+                    ValueGlory: 0
+                },
+                {
+                    Name: 'Gas Mask',
+                    Id: 'fc-gas-mask',
+                    ValueDucats: 5,
+                    ValueGlory: 0
+                },
+                {
+                    Name: 'Machine Gun',
+                    Id: 'fc-machine-gun',
+                    ValueDucats: 0,
+                    ValueGlory: 2
+                }
+            ]
+        }
     }
 }
 
