@@ -25,14 +25,13 @@ const WbbOptionItem: React.FC<WbbOptionItemProps> = ({ option }) => {
 
     return (
         <div className="WbbOptionItem">
-            <div className="option-title" onClick={() => setOpen(!open)}>
-
+            <div className="option-title"
+                 onClick={(e) => {
+                     handleSelectOption();        // toggle selection
+                 }}>
                 <span
                     className="input-wrap"
-                    onClick={(e) => {
-                        e.stopPropagation();         // prevent toggle from triggering
-                        handleSelectOption();        // toggle selection
-                    }}
+
                 >
                     <input
                         className="form-check-input"
@@ -51,7 +50,10 @@ const WbbOptionItem: React.FC<WbbOptionItemProps> = ({ option }) => {
                     {option.CostGlory > 0 && ` - ${option.CostGlory} Glory`}
                 </span>
 
-                <span className="collapse-chevron-wrap">
+                <span className="collapse-chevron-wrap" onClick={(e) => {
+                    e.stopPropagation(); // prevent option from being selected
+                    setOpen(!open);
+                }}>
                     <FontAwesomeIcon icon={open ? faChevronUp : faChevronDown} />
                 </span>
             </div>
