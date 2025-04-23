@@ -5,11 +5,29 @@
 
 .WbbOptionItem
     margin-bottom: 15px
+
     .option-title
         position: relative
         padding: 15px 40px 15px 15px
         background-color: $color-bg-1
+        cursor: pointer
 
+
+        .collapse-chevron-wrap
+            position: absolute
+            top: 0
+            right: 0
+            display: flex
+            align-items: center
+            justify-content: center
+            height: 44px
+            width: 44px
+            cursor: pointer
+            transition: color .2s ease, background-color .2s ease
+
+        &:hover
+            .collapse-chevron-wrap
+                color: $color-highlight-text
     .input-wrap
         display: inline-block
         padding: 15px
@@ -19,24 +37,14 @@
 
     .option-cost
 
-    .collapse-chevron-wrap
-        position: absolute
-        top: 0
-        right: 0
-        display: flex
-        align-items: center
-        justify-content: center
-        height: 44px
-        width: 44px
-        cursor: pointer
-        transition: color .2s ease, background-color .2s ease
 
-        &:hover
-            color: $color-highlight-text
 
 
     .option-details
         background-color: $color-bg-3
+
+        @media (min-width: 768px)
+            background-color: $color-bg-2
 
     .option-details-inner
         padding: 15px
