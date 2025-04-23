@@ -127,6 +127,10 @@ class UserWarband extends DynamicContextObject {
      * Returns the Name of the Warband as string
      */
     public GetWarbandName () {
+        if( typeof(this.Name) === 'undefined' ) {
+            return '';
+        }
+
         return this.Name;
     }
 
@@ -134,6 +138,10 @@ class UserWarband extends DynamicContextObject {
      * Returns the Name of the Faction as string
      */
     public GetFactionName () {
+        if( typeof(this.Faction.Name) === 'undefined' ) {
+            return '';
+        }
+
         return this.Faction.Name;
     }
 
@@ -163,13 +171,6 @@ class UserWarband extends DynamicContextObject {
      */
     public GetMaxGlory() {
         return this.Glory;
-    }
-
-    /** @TODO
-     * Returns the name of the associated campaign for this warband if any exists
-     */
-    public GetCampaignName() {
-        return 'No Campaign';
     }
 
 
@@ -354,6 +355,42 @@ class UserWarband extends DynamicContextObject {
 
     }
 
+
+    /**
+     * Campaign Data
+     * - This Data could be retrieved from a campaign object.
+     * - We need to preserve the method to set these values by user input
+     */
+    /** @TODO Returns the name of the campaign for the warband
+     * - can use Campaign Info
+     */
+    public GetCampaignName() {
+        return 'No Campaign connected';
+    }
+    /**
+     * @TODO: Return the Vistory Points for this Warband
+     * - can use Campaign Info
+     */
+    GetVictoryPoints() {
+        return 12;
+    }
+
+    /**
+     * @TODO: Return the Campaign Cycle of the connected campaign
+     - can use Campaign Info
+     */
+    GetCampaignCycle() {
+        return 2;
+    }
+
+    /**
+     * @TODO: Get Battle Count for this warband
+     - can use Campaign Info
+     *
+     */
+    GetBattleCount() {
+        return 3;
+    }
 }
 
 export {IUserWarband, UserWarband}

@@ -41,7 +41,22 @@
                 flex-direction: column
                 justify-content: center
 
-    .warband-summary
+    .warband-meta
+        position: relative
+        padding: 10px 15px 12px 15px
+        background-color: $color-bg-2
+        font-size: 14px
+        border-bottom: 1px solid $color-bg-1
+        transition: background-color .3s ease
+        &:hover
+            cursor: pointer
+            background-color: $color-bg-3
+
+        .meta-headline
+            font-weight: bold
+            margin-bottom: 10px
+
+
 
     .category-headline
         margin: 30px 0 15px

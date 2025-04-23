@@ -48,9 +48,9 @@ const WbbEditViewStash: React.FC<WbbEditViewStashProps> = ({ warband }) => {
     }
 
     return (
-        <div className="WbbEditViewStash">
-            <div className="stash-name">
-                {'Warband Stash'}
+        <div className="WbbEditViewStash warband-meta">
+            <div className={'meta-headline'}>
+                {'Stash'}
             </div>
 
             <div className="stash-value">
@@ -60,10 +60,10 @@ const WbbEditViewStash: React.FC<WbbEditViewStashProps> = ({ warband }) => {
 
             <div className={'stash-contents'}>
                 {stash.ValueDucats > 0 &&
-                    <div className={'contents-ducats'}>{"Ducats: " + stash.AmountDucats}</div>
+                    <div className={'contents-ducats'}><strong>{'Ducats: '}</strong>{stash.AmountDucats}</div>
                 }
                 {stash.ValueGlory > 0 &&
-                    <div className={'contents-Glory'}>{"Glory Points: " + stash.AmountGlory}</div>
+                    <div className={'contents-Glory'}><strong>{'Glory Points: '}</strong>{stash.AmountGlory}</div>
                 }
 
 

@@ -15,6 +15,8 @@ import WbbModalAddFighterElite from "./modals/WbbModalAddFighterElite";
 import WbbModalAddFighterMercenary from "./modals/WbbModalAddFighterMercenary";
 import WbbModalAddExplorationLocation from "./modals/WbbModalAddExplorationLocation";
 import WbbModalAddModifier from "./modals/WbbModalAddModifier";
+import WbbEditViewWarband from "./WbbEditViewWarband";
+import WbbEditViewCampaign from "./WbbEditViewCampaign";
 
 interface WbbEditViewProps {
     warbandData: UserWarband | null;
@@ -111,60 +113,27 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                     <div className={`warband-wrap ${selectedFighter ? 'fighter-selected' : ''}`}>
                         <h1>{warband.GetWarbandName()}</h1>
 
+                        {/* Warband Meta */}
 
-                        {/* Warband Intro */}
-                        <div className={'warband-summary'}>
-                            <div className={''}>
-                                {warband.GetFactionName()}
-                            </div>
+                        <WbbEditViewWarband
+                            faction={warband.GetFactionName()}
+                            name={warband.GetWarbandName()}
+                            ratingDucats={warband.GetCostDucats()}
+                            ratingGlory={warband.GetCostGlory()}
+                            countElite={warband.GetFighters().filter(f => f.IsElite).length}
+                            countTroop={warband.GetFighters().filter(f => !f.IsElite && !f.IsMercenary).length}
+                        />
 
-                            <div className={'summary-cost-element'}>
-                            <span className={'summary-cost-element-cost'}>
-                                {'Ducats: '}{warband.GetCostDucats()}
-                            </span>
-
-                                {warband.GetMaxDucats() > 0 &&
-                                    <>
-                                        <span className={'summary-cost-element-seperator'}>
-                                            {' / '}
-                                        </span>
-
-                                        <span className={'summary-cost-element-max'}>
-                                            {warband.GetMaxDucats()}
-                                        </span>
-                                    </>
-                                }
-                            </div>
-
-                            <div className={'summary-cost-element'}>
-                            <span className={'summary-cost-element-cost'}>
-                                {'Glory Points: '}{warband.GetCostGlory()}
-                            </span>
-
-                                {warband.GetMaxGlory() > 0 &&
-                                    <>
-                                        <span className={'summary-cost-element-seperator'}>
-                                            {' / '}
-                                        </span>
-
-                                        <span className={'summary-cost-element-max'}>
-                                            {warband.GetMaxGlory()}
-                                        </span>
-                                    </>
-                                }
-                            </div>
-
-                            {warband.GetCampaignName() &&
-                                <div className={''}>
-                                    {warband.GetCampaignName()}
-                                </div>
-                            }
-                        </div>
-
-                        {/* Warband Ressources */}
-                        <h3 className={'category-headline'}>Ressources</h3>
                         <WbbEditViewStash
                             warband={warband}
+                        />
+
+                        <WbbEditViewCampaign
+                            campaignName={warband.GetCampaignName()}
+                            patron={warband.GetPatron()?.Name || 'None'}
+                            victoryPoints={warband.GetVictoryPoints()}
+                            campaignCycle={warband.GetCampaignCycle()}
+                            battlesFought={warband.GetBattleCount()}
                         />
 
                         {/* Warband Elites */}
