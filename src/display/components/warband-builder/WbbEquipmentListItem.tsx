@@ -1,7 +1,15 @@
 import React from 'react';
 import {Button, Modal, OverlayTrigger, Popover} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCopy, faEllipsisVertical, faTrash, faXmark} from "@fortawesome/free-solid-svg-icons";
+import {
+    faArrowLeft,
+    faArrowUp,
+    faCoins,
+    faCopy,
+    faEllipsisVertical,
+    faTrash,
+    faXmark
+} from "@fortawesome/free-solid-svg-icons";
 
 interface EquipmentItemProps {
     item: {
@@ -42,18 +50,46 @@ const WbbEquipmentListItem: React.FC<EquipmentItemProps> = ({ item }) => {
                     overlay={
                         <Popover.Body className="popover Wbb-item-actions-popover">
                             <div className={'actions'}>
+
+                                {/* @TODO: Move to stash */}
+                                <div
+                                    className={'action action-move-to-stash'}
+                                >
+                                    <FontAwesomeIcon icon={faArrowUp} className="icon-inline-left-l"/>
+                                    {'Move to Stash'}
+                                </div>
+
+
+                                {/* @TODO: Move to fighter */}
+                                <div
+                                    className={'action action-move-to-fighter'}
+                                >
+                                    <FontAwesomeIcon icon={faArrowLeft} className="icon-inline-left-l"/>
+                                    {'Move to Fighter'}
+                                </div>
+
+                                {/* @TODO: Sell item */}
+                                <div
+                                    className={'action action-sell'}
+                                >
+                                    <FontAwesomeIcon icon={faCoins} className="icon-inline-left-l"/>
+                                    {'Sell Item'}
+                                </div>
+
+                                {/* @TODO: Copy Item*/}
                                 <div
                                     className={'action action-copy'}
                                 >
                                     <FontAwesomeIcon icon={faCopy} className="icon-inline-left-l"/>
-                                    {'Copy Equipment'}
+                                    {'Copy Item'}
                                 </div>
 
+                                {/* @TODO: Delete Item */}
                                 <div
                                     className={'action action-delete'}
                                 >
                                     <FontAwesomeIcon icon={faTrash} className="icon-inline-left-l"/>
-                                    {'Delete  Equipment'}
+                                    {'Delete  Item'}
                                 </div>
                             </div>
                         </Popover.Body>

@@ -278,22 +278,6 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
                             <h3>{'Options'}</h3>
                             {BoolOptions.map((option, index) => (
                                 <WbbOptionItem key={index} option={option} />
-                                // <div className="form-check" key={item.Id}>
-                                //     <input className="form-check-input" type="checkbox" value={item.Id} id={item.Id}/>
-                                //     <label className="form-check-label" htmlFor={item.Id}>
-                                //         {item.Name}
-                                //         {item.PriceDucats > 0 &&
-                                //             <>
-                                //                 {' (' + item.PriceDucats + ' Ducats)'}
-                                //             </>
-                                //         }
-                                //         {item.PriceGlory > 0 &&
-                                //             <>
-                                //                 {' (' + item.PriceGlory + ' Glory Points)'}
-                                //             </>
-                                //         }
-                                //     </label>
-                                // </div>
                             ))}
                         </>
                     }

@@ -1,15 +1,27 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {UserWarband} from "../../../classes/saveitems/Warband/UserWarband";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faChevronLeft} from "@fortawesome/free-solid-svg-icons";
+import {faChevronLeft, faPlus} from "@fortawesome/free-solid-svg-icons";
+import WbbEquipmentListItem from "./WbbEquipmentListItem";
+import WbbModalAddRangedWeapon from "./modals/fighter/WbbAddRangedWeapon";
+import WbbModalAddItemToStash from "./modals/WbbModalAddItemToStash";
 
 interface WbbStashDetailViewProps {
     warband: UserWarband;
     onClose: () => void;
 }
 
+
+
+
 const WbbStashDetailView: React.FC<WbbStashDetailViewProps> = ({ warband, onClose }) => {
     const stash = warband.GetStash();
+
+    const [showAddItemToStash, setShowAddItemToStash] = useState(false);
+    const handleAddItemToStash = (item: { id: string; name: string }) => {
+        // @TODO: Implement logic to add weapon to fighter's equipment
+        console.log('Item added to stash:', item);
+    };
 
     return (
         <div className="WbbDetailView WbbStashDetailView">
@@ -31,23 +43,34 @@ const WbbStashDetailView: React.FC<WbbStashDetailViewProps> = ({ warband, onClos
                     <div><strong>Value:</strong> {stash.ValueDucats} Ducats / {stash.ValueGlory} Glory</div>
                 </div>
 
-                <div className="stash-items">
-                    <h6>Items:</h6>
+                <div className={'stash-items-title'}>
+                    {'Stashed Items'}
+                </div>
+
+                <div className="stash-items-wrap">
                     {stash.Items && stash.Items.length > 0 ? (
-                        <ul className="list-unstyled">
+                        <>
                             {stash.Items.map((item: any, index: number) => (
-                                <li key={index} className="stash-item">
-                                    <span className="item-name">{item.Name}</span>
-                                    {item.ValueDucats > 0 &&
-                                        <span className="item-cost"> – {item.ValueDucats} Ducats</span>}
-                                    {item.ValueGlory > 0 &&
-                                        <span className="item-cost"> – {item.ValueGlory} Glory</span>}
-                                </li>
+                                <WbbEquipmentListItem
+                                    key={index}
+                                    item={item}
+                                />
                             ))}
-                        </ul>
+                        </>
                     ) : (
                         <div>No items in stash.</div>
                     )}
+                    <div className={'btn btn-add-element btn-block'}
+                         onClick={() => setShowAddItemToStash(true)}>
+                        <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
+                        {'Add Ranged Weapon'}
+                    </div>
+
+                    <WbbModalAddItemToStash
+                        show={showAddItemToStash}
+                        onClose={() => setShowAddItemToStash(false)}
+                        onSubmit={handleAddItemToStash}
+                    />
                 </div>
             </div>
 

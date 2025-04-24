@@ -26,7 +26,40 @@ const WbbCampaignDetailView: React.FC<WbbCampaignDetailViewProps> = ({ warband, 
             <div className={'detail-view-content'}>
                 {/* @TODO: add real Data here */}
 
-                Campaign details go here
+                <h4>Campaign Values</h4>
+                <div>
+                    Victory Points
+                </div>
+                <div>
+                    Notes Textarea
+                </div>
+
+                <div>
+                    Patron Display
+                </div>
+
+                <h4>Campaign Link</h4>
+
+                <div>
+                    Connect to campaign here
+                </div>
+
+
+                <h4>Campaign Summary</h4>
+
+                <div>
+                    Campaign Cycle
+                </div>
+
+                <div>
+                    Battle Count
+                </div>
+
+                <div className={''}>
+                    Leaderboard
+                </div>
+
+
             </div>
         </div>
     );
