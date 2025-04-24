@@ -78,9 +78,6 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
     const [activePopoverId, setActivePopoverId] = useState<string | null>(null);
 
     //** Start Detail view stuff
-    // v1 keeps track of which fighter opened a detail view
-    const [selectedFighter, setSelectedFighter] = useState<any | null>(null);
-
 
     // v2
     type DetailType = 'fighter' | 'stash' | 'warband' | 'campaign' | null;
@@ -119,10 +116,10 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
     const [showAddFighterTroopModal, setShowAddFighterTroopModal] = useState(false);
     const [showAddFighterEliteModal, setShowAddFighterEliteModal] = useState(false);
     const [showAddFighterMercenaryModal, setShowAddFighterMercenaryModal] = useState(false);
-    const handleFighterSubmit = (selectedFighter: { id: string; name: string }[]) => {
+    const handleFighterSubmit = (newFighter: { id: string; name: string }[]) => {
         if (!warband) { return; } // Guard
 
-        warband.AddFighter(selectedFighter);
+        warband.AddFighter(newFighter);
     };
 
     // Exploration Location Modal
@@ -146,7 +143,7 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
             {/* The Warband List */}
             {(warband != null) &&
                 <div className={'container WbbEditViewMain'}>
-                    <div className={`warband-wrap ${selectedFighter ? 'fighter-selected' : ''}`}>
+                    <div className={`warband-wrap ${detailType ? 'details-open' : ''}`}>
                         <h1>{warband.GetWarbandName()}</h1>
 
                         {/* Warband Meta */}
