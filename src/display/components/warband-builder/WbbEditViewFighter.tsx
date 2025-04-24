@@ -30,8 +30,9 @@ interface WbbEditViewFighterProps {
     setActivePopoverId: (id: string | null) => void;
     index: number;
     onClick?: () => void;
+    isActive?: boolean;
 }
-const WbbEditViewFighter: React.FC<WbbEditViewFighterProps> = ({ item, activePopoverId, setActivePopoverId, index, onClick }) => {
+const WbbEditViewFighter: React.FC<WbbEditViewFighterProps> = ({ item, activePopoverId, setActivePopoverId, index, onClick, isActive }) => {
 
     const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
 
@@ -76,7 +77,7 @@ const WbbEditViewFighter: React.FC<WbbEditViewFighterProps> = ({ item, activePop
     };
 
     return (
-        <div className="WbbEditViewFighter" onClick={onClick}>
+        <div className={`WbbEditViewFighter ${isActive ? 'active' : ''}`} onClick={onClick}>
             <div className={'model-name'}>
                 {item.ModelName}
             </div>

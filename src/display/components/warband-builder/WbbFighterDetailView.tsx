@@ -15,6 +15,7 @@ import WbbModalAddInjury from "./modals/fighter/WbbModalAddInjury";
 import WbbEditFighterExperience from "./modals/fighter/WbbEditFighterExperience";
 import WbbEditBattleScars from "./modals/fighter/WbbEditBattleScars";
 import WbbEditFighterStatus from "./modals/fighter/WbbEditFighterStatus";
+import WbbOptionItem from "./WbbOptionItem";
 
 
 interface WbbFighterDetailViewProps {
@@ -29,14 +30,16 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
         {
             Name: 'Skirmisher',
             Id: 'lorem_id',
-            PriceDucats: 5,
-            PriceGlory: 0,
+            CostDucats: 5,
+            CostGlory: 0,
+            Description: 'Any Azebs can be converted to SKIRMISHERS at the cost of +5 ducats per model. Unless engaged in melee, when an enemy model declares a charge against any Skirmisher Azeb, they can immediately move D3” in any direction they wish (except within 1” of any enemy or out of the battlefield). After this manoeuvre, the charging model is moved as normal. This may lead to the charger being unable to enter melee. This move cannot be taken by a model that is Down.'
         },
         {
             Name: 'Upgrade 2',
             Id: 'lorem_id2',
-            PriceDucats: 10,
-            PriceGlory: 0,
+            CostDucats: 10,
+            CostGlory: 0,
+            Description: 'Any Azebs can be converted to SKIRMISHERS at the cost of +5 ducats per model. Unless engaged in melee, when an enemy model declares a charge against any Skirmisher Azeb, they can immediately move D3” in any direction they wish (except within 1” of any enemy or out of the battlefield). After this manoeuvre, the charging model is moved as normal. This may lead to the charger being unable to enter melee. This move cannot be taken by a model that is Down.'
         }
     ]
     const item_siege_jezzail = {
@@ -163,13 +166,13 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
     };
 
     return (
-        <div className="WbbFighterDetailView fighter-card">
+        <div className="WbbDetailView WbbFighterDetailView fighter-card">
             <div className={'title'}>
                 <div className={'title-back'} onClick={onClose}>
                     <FontAwesomeIcon icon={faChevronLeft} className=""/>
                 </div>
 
-                <div className={'fighter-name'}>
+                <div className={'title-text fighter-name'}>
                     {fighter.ModelName + ' - ' + fighter.FighterName}
                 </div>
 
@@ -273,23 +276,24 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
                     {BoolOptions.length > 0 &&
                         <>
                             <h3>{'Options'}</h3>
-                            {BoolOptions.map((item) => (
-                                <div className="form-check" key={item.Id}>
-                                    <input className="form-check-input" type="checkbox" value={item.Id} id={item.Id}/>
-                                    <label className="form-check-label" htmlFor={item.Id}>
-                                        {item.Name}
-                                        {item.PriceDucats > 0 &&
-                                            <>
-                                                {' (' + item.PriceDucats + ' Ducats)'}
-                                            </>
-                                        }
-                                        {item.PriceGlory > 0 &&
-                                            <>
-                                                {' (' + item.PriceGlory + ' Glory Points)'}
-                                            </>
-                                        }
-                                    </label>
-                                </div>
+                            {BoolOptions.map((option, index) => (
+                                <WbbOptionItem key={index} option={option} />
+                                // <div className="form-check" key={item.Id}>
+                                //     <input className="form-check-input" type="checkbox" value={item.Id} id={item.Id}/>
+                                //     <label className="form-check-label" htmlFor={item.Id}>
+                                //         {item.Name}
+                                //         {item.PriceDucats > 0 &&
+                                //             <>
+                                //                 {' (' + item.PriceDucats + ' Ducats)'}
+                                //             </>
+                                //         }
+                                //         {item.PriceGlory > 0 &&
+                                //             <>
+                                //                 {' (' + item.PriceGlory + ' Glory Points)'}
+                                //             </>
+                                //         }
+                                //     </label>
+                                // </div>
                             ))}
                         </>
                     }

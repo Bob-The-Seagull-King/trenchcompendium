@@ -9,27 +9,20 @@
         font-size: 14px
         padding: 0 15px
 
+        @media(max-width: 767px)
+            .fighter-card-collapse-title
+                background-color: $color-bg-1
+                border-color: $color-bg-0
+
+            .fighter-card-collapse-content
+                background-color: $color-bg-2
+
     .title
         margin: 0 -15px 15px
-        position: relative
-        padding-left: 40px
-        padding-right: 60px
-        background-color: $color-highlight-bg
 
-        .title-back
-            padding: 15px
-            position: absolute
-            top: 0
-            left: 0
-            bottom: 0
 
         .fighter-name
-            line-height: 53px
-            font-weight: bold
-            width: 100%
-            overflow: hidden
-            text-overflow: ellipsis
-            white-space: nowrap
+            padding-right: 90px
 
         .fighter-cost
             padding-right: 15px

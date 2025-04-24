@@ -3,54 +3,18 @@ import WbbEditViewFighter from "./WbbEditViewFighter";
 
 interface WbbEditViewStashProps {
     warband: any;
+    onClick?: () => void;
+    isActive?: boolean;
 }
 
-const WbbEditViewStash: React.FC<WbbEditViewStashProps> = ({ warband }) => {
+const WbbEditViewStash: React.FC<WbbEditViewStashProps> = ({ warband, onClick, isActive }) => {
+    const stash = warband.GetStash();
 
-    // Testing Data for the stash
-    const stash = {
-        ValueDucats: 122,
-        ValueGlory: 4,
-        AmountDucats: 15,
-        AmountGlory: 1,
-        Items: [
-            {
-                Name: 'Jezzail',
-                Id: 'fc-jezzail',
-                ValueDucats: 17,
-                ValueGlory: 0
-            },
-            {
-                Name: 'Jezzail',
-                Id: 'fc-jezzail',
-                ValueDucats: 17,
-                ValueGlory: 0
-            },
-            {
-                Name: 'Trench Knife',
-                Id: 'fc-trench-knife',
-                ValueDucats: 17,
-                ValueGlory: 0
-            },
-            {
-                Name: 'Gas Mask',
-                Id: 'fc-gas-mask',
-                ValueDucats: 5,
-                ValueGlory: 0
-            },
-            {
-                Name: 'Machine Gun',
-                Id: 'fc-machine-gun',
-                ValueDucats: 0,
-                ValueGlory: 2
-            }
-        ]
-    }
 
     return (
-        <div className="WbbEditViewStash">
-            <div className="stash-name">
-                {'Warband Stash'}
+        <div className={`WbbEditViewStash warband-meta ${isActive ? 'active' : ''}`} onClick={onClick}>
+            <div className={'meta-headline'}>
+                {'Stash'}
             </div>
 
             <div className="stash-value">
@@ -60,16 +24,28 @@ const WbbEditViewStash: React.FC<WbbEditViewStashProps> = ({ warband }) => {
 
             <div className={'stash-contents'}>
                 {stash.ValueDucats > 0 &&
-                    <div className={'contents-ducats'}>{"Ducats: " + stash.AmountDucats}</div>
+                    <div className={'contents-ducats'}><strong>{'Ducats: '}</strong>{stash.AmountDucats}</div>
                 }
                 {stash.ValueGlory > 0 &&
-                    <div className={'contents-Glory'}>{"Glory Points: " + stash.AmountGlory}</div>
+                    <div className={'contents-Glory'}><strong>{'Glory Points: '}</strong>{stash.AmountGlory}</div>
                 }
 
 
                 {stash.Items.length > 0 ? (
                     <div className={'stash-item-list'}>
-                        {stash.Items.map(item => item.Name).join(', ')}
+                        {stash.Items.map((item: any, index: number) => (
+                            <React.Fragment key={index}>
+                                {item.Name}
+
+                                {/* Add comma if not the last item */}
+                                {index < stash.Items.length - 1 &&
+                                    <>
+                                        {', '}
+                                    </>
+                                }
+                            </React.Fragment>
+                        ))}
+
                     </div>
 
                 ) : (

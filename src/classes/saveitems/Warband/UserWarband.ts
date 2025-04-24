@@ -127,6 +127,10 @@ class UserWarband extends DynamicContextObject {
      * Returns the Name of the Warband as string
      */
     public GetWarbandName () {
+        if( typeof(this.Name) === 'undefined' ) {
+            return '';
+        }
+
         return this.Name;
     }
 
@@ -134,6 +138,10 @@ class UserWarband extends DynamicContextObject {
      * Returns the Name of the Faction as string
      */
     public GetFactionName () {
+        if( typeof(this.Faction.Name) === 'undefined' ) {
+            return '';
+        }
+
         return this.Faction.Name;
     }
 
@@ -165,13 +173,6 @@ class UserWarband extends DynamicContextObject {
         return this.Glory;
     }
 
-    /** @TODO
-     * Returns the name of the associated campaign for this warband if any exists
-     */
-    public GetCampaignName() {
-        return 'No Campaign';
-    }
-
 
     /** @TODO
      * Get the Fighters for this warbands
@@ -193,6 +194,7 @@ class UserWarband extends DynamicContextObject {
                 IsMercenary: false,
                 ExperiencePoints: 4,
                 BattleScars: 1,
+                FighterIndex: 1, // the index for sorting and getting unique item in array
                 Injuries: [
                     {
                         Name: 'Hand Wound',
@@ -228,6 +230,7 @@ class UserWarband extends DynamicContextObject {
                 IsMercenary: false,
                 ExperiencePoints: 0,
                 BattleScars: 0,
+                FighterIndex: 2, // the index for sorting and getting unique item in array
                 Injuries: [
                 ],
                 Advancements: [
@@ -260,6 +263,7 @@ class UserWarband extends DynamicContextObject {
                 IsMercenary: false,
                 ExperiencePoints: 10,
                 BattleScars: 0,
+                FighterIndex: 3, // the index for sorting and getting unique item in array
                 Injuries: [
                 ],
                 Advancements: [
@@ -354,6 +358,87 @@ class UserWarband extends DynamicContextObject {
 
     }
 
+
+    /**
+     * Campaign Data
+     * - This Data could be retrieved from a campaign object.
+     * - We need to preserve the method to set these values by user input
+     */
+    /** @TODO Returns the name of the campaign for the warband
+     * - can use Campaign Info
+     */
+    public GetCampaignName() {
+        return 'No Campaign connected';
+    }
+    /**
+     * @TODO: Return the Vistory Points for this Warband
+     * - can use Campaign Info
+     */
+    GetVictoryPoints() {
+        return 12;
+    }
+
+    /**
+     * @TODO: Return the Campaign Cycle of the connected campaign
+     - can use Campaign Info
+     */
+    GetCampaignCycle() {
+        return 2;
+    }
+
+    /**
+     * @TODO: Get Battle Count for this warband
+     - can use Campaign Info
+     *
+     */
+    GetBattleCount() {
+        return 3;
+    }
+
+    /**
+     * @TODO get stash Data
+     */
+    GetStash() {
+
+        return {
+            ValueDucats: 122,
+            ValueGlory: 4,
+            AmountDucats: 15,
+            AmountGlory: 1,
+            Items: [
+                {
+                    Name: 'Jezzail',
+                    Id: 'fc-jezzail',
+                    ValueDucats: 17,
+                    ValueGlory: 0
+                },
+                {
+                    Name: 'Jezzail',
+                    Id: 'fc-jezzail',
+                    ValueDucats: 17,
+                    ValueGlory: 0
+                },
+                {
+                    Name: 'Trench Knife',
+                    Id: 'fc-trench-knife',
+                    ValueDucats: 17,
+                    ValueGlory: 0
+                },
+                {
+                    Name: 'Gas Mask',
+                    Id: 'fc-gas-mask',
+                    ValueDucats: 5,
+                    ValueGlory: 0
+                },
+                {
+                    Name: 'Machine Gun',
+                    Id: 'fc-machine-gun',
+                    ValueDucats: 0,
+                    ValueGlory: 2
+                }
+            ]
+        }
+    }
 }
 
 export {IUserWarband, UserWarband}

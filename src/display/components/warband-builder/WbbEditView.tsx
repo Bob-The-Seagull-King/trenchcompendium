@@ -15,6 +15,11 @@ import WbbModalAddFighterElite from "./modals/WbbModalAddFighterElite";
 import WbbModalAddFighterMercenary from "./modals/WbbModalAddFighterMercenary";
 import WbbModalAddExplorationLocation from "./modals/WbbModalAddExplorationLocation";
 import WbbModalAddModifier from "./modals/WbbModalAddModifier";
+import WbbEditViewWarband from "./WbbEditViewWarband";
+import WbbEditViewCampaign from "./WbbEditViewCampaign";
+import WbbStashDetailView from "./WbbStashDetailView";
+import WbbWarbandDetailView from "./WbbWarbandDetailView";
+import WbbCampaignDetailView from "./WbbCampaignDetailView";
 
 interface WbbEditViewProps {
     warbandData: UserWarband | null;
@@ -43,35 +48,68 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
         }
     }, [warbandData]);
 
-    /** Use effect for fighter card*/
+    /** Enable Browser Navigation for all detail types */
     useEffect(() => {
         const searchParams = new URLSearchParams(location.search);
-        const fighterId = searchParams.get('fighter');
 
-        if (warband && fighterId) {
-            const fighter = warband.GetFighters().find((m) => m.ModelId === fighterId);
+        if (searchParams.has('fighter')) {
+            const fighterId = searchParams.get('fighter');
+            const fighter = warband?.GetFighters().find(f => f.ModelId === fighterId);
             if (fighter) {
-                setSelectedFighter(fighter);
+                setDetailType('fighter');
+                setDetailPayload(fighter);
             }
+        } else if (searchParams.has('stash')) {
+            setDetailType('stash');
+            setDetailPayload(null);
+        } else if (searchParams.has('campaign')) {
+            setDetailType('campaign');
+            setDetailPayload(null);
+        } else if (searchParams.has('warband')) {
+            setDetailType('warband');
+            setDetailPayload(null);
         } else {
-            setSelectedFighter(null);
+            setDetailType(null);
+            setDetailPayload(null);
         }
-    }, [location.search]);
+    }, [location.search, warband]);
 
     // will check which popover is active to only have 1 open at the same time
     const [activePopoverId, setActivePopoverId] = useState<string | null>(null);
 
-    // keeps track of which fighter opened a detail view
+    //** Start Detail view stuff
+    // v1 keeps track of which fighter opened a detail view
     const [selectedFighter, setSelectedFighter] = useState<any | null>(null);
 
-    const openFighter = (item: any) => {
-        setSelectedFighter(item);
-        navigate(`?fighter=${item.ModelId}`, { replace: false });
-    };
 
-    const closeFighter = (item: any) => {
-        navigate('.', { replace: false }); // removes the ?fighter param
-        setSelectedFighter(null);
+    // v2
+    type DetailType = 'fighter' | 'stash' | 'warband' | 'campaign' | null;
+
+    const [detailType, setDetailType] = useState<DetailType>(null);
+    const [detailPayload, setDetailPayload] = useState<any>(null);
+    const openDetail = (type: DetailType, payload: any = null) => { // Sets the detail type and payload and uses navigation to enable default browser nav
+        setDetailType(type);
+        setDetailPayload(payload);
+
+        let query = '';
+
+        if (type === 'fighter' && payload?.ModelId) {
+            query = `?fighter=${payload.ModelId}`;
+        } else if (type === 'stash') {
+            query = `?stash`;
+        } else if (type === 'campaign') {
+            query = `?campaign`;
+        } else if (type === 'warband') {
+            query = `?warband`;
+        }
+
+        // Always preserve the full pathname (like /warband/edit/WarbandName)
+        navigate(`${location.pathname}${query}`, { replace: false });
+    };
+    const closeDetail = () => {
+        setDetailType(null);
+        setDetailPayload(null);
+        navigate(location.pathname, { replace: false }); // remove search params
     };
 
 
@@ -111,60 +149,34 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                     <div className={`warband-wrap ${selectedFighter ? 'fighter-selected' : ''}`}>
                         <h1>{warband.GetWarbandName()}</h1>
 
+                        {/* Warband Meta */}
 
-                        {/* Warband Intro */}
-                        <div className={'warband-summary'}>
-                            <div className={''}>
-                                {warband.GetFactionName()}
-                            </div>
+                        <WbbEditViewWarband
+                            faction={warband.GetFactionName()}
+                            name={warband.GetWarbandName()}
+                            ratingDucats={warband.GetCostDucats()}
+                            ratingGlory={warband.GetCostGlory()}
+                            countElite={warband.GetFighters().filter(f => f.IsElite).length}
+                            countTroop={warband.GetFighters().filter(f => !f.IsElite && !f.IsMercenary).length}
+                            onClick={() => openDetail('warband', null)}
+                            isActive={detailType === 'warband'}
 
-                            <div className={'summary-cost-element'}>
-                            <span className={'summary-cost-element-cost'}>
-                                {'Ducats: '}{warband.GetCostDucats()}
-                            </span>
+                        />
 
-                                {warband.GetMaxDucats() > 0 &&
-                                    <>
-                                        <span className={'summary-cost-element-seperator'}>
-                                            {' / '}
-                                        </span>
-
-                                        <span className={'summary-cost-element-max'}>
-                                            {warband.GetMaxDucats()}
-                                        </span>
-                                    </>
-                                }
-                            </div>
-
-                            <div className={'summary-cost-element'}>
-                            <span className={'summary-cost-element-cost'}>
-                                {'Glory Points: '}{warband.GetCostGlory()}
-                            </span>
-
-                                {warband.GetMaxGlory() > 0 &&
-                                    <>
-                                        <span className={'summary-cost-element-seperator'}>
-                                            {' / '}
-                                        </span>
-
-                                        <span className={'summary-cost-element-max'}>
-                                            {warband.GetMaxGlory()}
-                                        </span>
-                                    </>
-                                }
-                            </div>
-
-                            {warband.GetCampaignName() &&
-                                <div className={''}>
-                                    {warband.GetCampaignName()}
-                                </div>
-                            }
-                        </div>
-
-                        {/* Warband Ressources */}
-                        <h3 className={'category-headline'}>Ressources</h3>
                         <WbbEditViewStash
                             warband={warband}
+                            onClick={() => openDetail('stash', null)}
+                            isActive={detailType === 'stash'}
+                        />
+
+                        <WbbEditViewCampaign
+                            campaignName={warband.GetCampaignName()}
+                            patron={warband.GetPatron()?.Name || 'None'}
+                            victoryPoints={warband.GetVictoryPoints()}
+                            campaignCycle={warband.GetCampaignCycle()}
+                            battlesFought={warband.GetBattleCount()}
+                            onClick={() => openDetail('campaign', null)}
+                            isActive={detailType === 'campaign'}
                         />
 
                         {/* Warband Elites */}
@@ -176,7 +188,8 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                                         item={item} index={index}
                                         activePopoverId={activePopoverId}
                                         setActivePopoverId={setActivePopoverId}
-                                        onClick={() => openFighter(item)}
+                                        onClick={() => openDetail('fighter', item)}
+                                        isActive={detailType === 'fighter' && detailPayload?.FighterIndex === item.FighterIndex}
                                     />
                                 }
                             </>
@@ -198,7 +211,8 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                                         item={item} index={index}
                                         activePopoverId={activePopoverId}
                                         setActivePopoverId={setActivePopoverId}
-                                        onClick={() => openFighter(item)}
+                                        onClick={() => openDetail('fighter', item)}
+                                        isActive={detailType === 'fighter' && detailPayload?.FighterIndex === item.FighterIndex}
                                     />
                                 }
                             </>
@@ -220,7 +234,8 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                                         item={item} index={index}
                                         activePopoverId={activePopoverId}
                                         setActivePopoverId={setActivePopoverId}
-                                        onClick={() => openFighter(item)}
+                                        onClick={() => openDetail('fighter', item)}
+                                        isActive={detailType === 'fighter' && detailPayload?.FighterIndex === item.FighterIndex}
                                     />
                                 }
                             </>
@@ -265,14 +280,39 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
 
                     <div className={'selected-item-wrap'}>
                         {/* The Fighter Detail View */}
-                        {selectedFighter && (
+                        {detailType === 'fighter' && detailPayload && (
                             <WbbFighterDetailView
-                                fighter={selectedFighter}
-                                onClose={() => setSelectedFighter(null)}
+                                fighter={detailPayload}
+                                onClose={closeDetail}
                             />
                         )}
 
-                        {!selectedFighter && (
+                        {/* The Warband Detail View */}
+                        {detailType === 'warband' && (
+                            <WbbWarbandDetailView
+                                warband={warband}
+                                onClose={closeDetail}
+                            />
+                        )}
+
+                        {/* The Stash Detail View */}
+                        {detailType === 'stash' && (
+                            <WbbStashDetailView
+                                warband={warband}
+                                onClose={closeDetail}
+                            />
+                        )}
+
+                        {/* The Campaign Detail View */}
+                        {detailType === 'campaign' && (
+                            <WbbCampaignDetailView
+                                warband={warband}
+                                onClose={closeDetail}
+                            />
+                        )}
+
+                        {/* Empty Fallback */}
+                        { detailType === null  && (
                             <div className={'selected-item-empty'}>
                                 {/*{'Nothing selected'}*/}
                             </div>

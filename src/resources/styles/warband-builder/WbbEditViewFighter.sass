@@ -17,6 +17,22 @@
     &:hover
         background-color: $color-bg-3
 
+    &.active
+        background-color: $color-highlight-bg-2
+
+        &:after
+            content: ""
+            display: block
+            position: absolute
+            right: -15px
+            top: 50%
+            width: 0px
+            height: 0px
+            border-style: solid
+            border-width: 15px 0 15px 15px
+            border-color: transparent transparent transparent $color-highlight-bg-2
+            transform: translateY(-50%)
+
     .model-name
         font-weight: bold
         padding-right: 100px
