@@ -35,10 +35,18 @@ body[data-theme='light']
     // BG Color Hierarchy
     --color_bg_lvl_minus_1: #fff
     --color_bg_lvl_0: #fcfcfc
+    // Main BG Color
     --color_bg_lvl_1: #fafafa
     --color_bg_lvl_2: #f0f0f0
     --color_bg_lvl_3: #dedede
     --color_bg_lvl_4: #cccccc
+
+    // Card BG Color Hierarchy
+    --color_bg_card: var(--color_bg_lvl_2)
+    --color_bg_card_2: var(--color_bg_lvl_3)
+    --color_bg_card_2_el: var(--color_bg_card)
+    --color_bg_card_2_el_border: var(--color_bg_lvl_1)
+    --color_bg_card_3: rgba(255,255,255,0.075)
 
     // Highlights
     --color_highlight_bg_2_50: rgba(180,24,27,0.25)
@@ -83,10 +91,19 @@ body[data-theme='dark']
     // BG Color Hierarchy
     --color_bg_lvl_minus_1: #000
     --color_bg_lvl_0: #111
+    // Main BG Color
     --color_bg_lvl_1: #2a2a2a
     --color_bg_lvl_2: #333
     --color_bg_lvl_3: #404040
     --color_bg_lvl_4: #464646
+
+    // Card BG Color Hierarchy
+    --color_bg_card: var(--color_bg_lvl_2)
+    --color_bg_card_2: var(--color_bg_lvl_3)
+    --color_bg_card_2_el: var(--color_bg_card)
+    --color_bg_card_2_el_border: var(--color_bg_lvl_1)
+    --color_bg_card_3: rgba(255,255,255,0.1)
+
 
     // Highlights
     // deeper bg level
@@ -130,8 +147,15 @@ $color-bg-4: var(--color_bg_lvl_4)
 
 $box-shadow-1: var(--box_shadow_1)
 
-
-
+// Global BG Color of a card
+$bg-color-card-1: var(--color_bg_card)
+// BG Color of card elements one level deeper (level 2)
+$bg-color-card-2: var(--color_bg_card_2)
+// BG Color of Elements inside cards level 2
+$bg-color-card-2-el: var(--color_bg_card_2_el)
+$bg-color-card-2-el-border: var(--color_bg_card_2_el_border)
+// BG Color of Addons to elements of card level 2
+$bg-color-card-3: var(--color_bg_card_3)
 
 // // // // //
 // global styles based on theme settings
