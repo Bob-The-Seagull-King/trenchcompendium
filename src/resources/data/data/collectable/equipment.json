@@ -10,7 +10,10 @@
             "hands_melee": 2,
             "melee": true
         },
-        "contextdata": {"get_weapon": {}, "find_hands": {"required": false}},
+        "contextdata": {
+            "get_weapon": {}, 
+            "find_hands": {"required": false},
+            "custom_attack_type": {"range": 0}},
         "description": [            
             {
                 "tags": {"desc_type" : "paragraph"},
@@ -4496,6 +4499,355 @@
         ],
         "options": [],
         "keywords": ["kw_shieldcombo","kw_shrapnel"],
+        "modifiers": []
+    },
+    {
+        "id": "eq_arquebus",
+        "name": "Arquebus",
+        "source": "core",
+        "tags": {"action": true, "weapon": true},
+        "category": "ranged",
+        "distance": 10,
+        "stats": {
+            "hands_ranged": 2,
+            "ranged": true
+        },
+        "contextdata": {
+            "get_weapon": {},
+            "custom_attack_type": {"range": 0}},
+        "description": [  
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "A primitive matchlock weapon that is simple enough that even a yoke fiend is capable of operating it."
+            }
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "A relic firearm of a bygone era, this weapon is loaded with rusty nails, lead shot, grenade shrapnel and shell pieces, some Mourners carry this weapon and form an honour guard of sorts for the Procession."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_ophidianrifle",
+        "name": "Ophidian Rifle",
+        "source": "core",
+        "tags": {"action": true, "weapon": true, "rifle": true},
+        "category": "ranged",
+        "distance": 30,
+        "stats": {
+            "hands_ranged": 2,
+            "ranged": true
+        },
+        "contextdata": {
+            "get_weapon": {},
+            "ignore_cover": {},
+            "ignore_range": {},
+            "hit_bonus": {"bonuses": [
+                {"type": "dice", "value": 1, "condition_type": "range", "condition_value": "long"},
+                {"type": "dice", "value": 1, "condition_type": "cover", "condition_value": true}
+            ]}},
+        "description": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "This weapon ignores the penalties for Cover and Long Range, and rolls attacks against models at Long Range or in Cover with +1 DICE. These bonuses stack for a possible total of +2 DICE.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "+2 DICE", "id": "kw_plusdice"},
+                    {"val": "Cover", "id": "gl_cover"}
+                ]
+            }
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "This wheel-lock hunting rifle is produced in the forges of the demon Sabnock, the Great Marquis of War. Made of both infernal and earthly metals and materials, it exists simultaneously in the twisted dimension of Hell as well as on Earth. A thing that should not be, the shots of this firearm pervert the laws of God, so taking cover from its bullets and firing over great distances aid the user of this hell-made rifle instead of hindering the aim."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_heavy"],
+        "modifiers": []
+    },
+    {
+        "id": "eq_serpentassaultgun",
+        "name": "Serpent Assault Gun",
+        "source": "core",
+        "tags": {"action": true, "weapon": true},
+        "category": "ranged",
+        "distance": 36,
+        "stats": {
+            "hands_ranged": 2,
+            "ranged": true
+        },
+        "contextdata": {
+            "get_weapon": {},
+            "extra_attack": {"value": 1}},
+        "description": [ 
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "When this model takes this ranged attack ACTION, it can make up to two attacks with this weapon. These attacks can target separate models, but the targets must be within 6” of each other.",
+                "glossary": [
+                    {"val": "ACTION", "id": "kw_action"}
+                ]
+            }  
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "This terrifying and enormous hand cannon contains a portal to the foetid swamps and bogs of the Fifth Circle of Hell. Each bullet it fires is enveloped with an awful gas."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_heavy","kw_gas","kw_assault"],
+        "modifiers": ["2 Attacks"]
+    },
+    {
+        "id": "eq_bowoflethe",
+        "name": "Bow of Lethe",
+        "source": "core",
+        "tags": {"action": true, "weapon": true},
+        "category": "ranged",
+        "distance": 24,
+        "stats": {
+            "hands_ranged": 1,
+            "ranged": true
+        },
+        "contextdata": {
+            "get_weapon": {}},
+        "description": [ 
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Before rolling an injury for this weapon, choose one of the following effects to apply to that roll:",
+                "glossary": [
+                    {"val": "ACTION", "id": "kw_action"}
+                ]
+            } , 
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                    
+                    {
+                        "tags": {"desc_type" : "list"},
+                        "content": "",
+                        "subcontent": [                            
+                            {
+                                "tags": {"desc_type" : "paragraph"},
+                                "content": "The injury ignores armour."
+                            } ,
+                            {
+                                "tags": {"desc_type" : "paragraph"},
+                                "content": "Roll the injury with +2 DICE.",
+                                "glossary": [
+                                    {"val": "+2 DICE", "id": "kw_plusdice"}
+                                ]
+                            }  
+                        ]
+                    }  
+                ]
+            }  
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "This bow is grown by the Hunters of the Left-Hand Path out of their own flesh. It can be tipped with a deadly poison made from the blood of the nameless beasts that the Hunters stalk in the wastelands of Hell, or it can shoot one of the iron bolts of Pandemonium that weigh nine tonnes on Earth."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_assault"],
+        "modifiers": ["+2D to Injuries OR Ignore Armour"]
+    },
+    {
+        "id": "eq_tortureinstrument",
+        "name": "Torture Instrument",
+        "source": "core",
+        "tags": {"action": true, "weapon": true},
+        "category": "melee",
+        "distance": 0,
+        "stats": {
+            "hands_melee": 2,
+            "melee": true
+        },
+        "contextdata": {
+            "get_weapon": {},
+            "base_dice": {"value": -1}},
+        "description": [ 
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "This weapon rolls D6 on the Injury Chart, or 2D6 on a BLOODBATH. This weapon causes an additional BLOOD MARKER for each BLOOD MARKER it inflicts from an injury result.",
+                "glossary": [
+                    {"val": "BLOODBATH", "id": "gl_bloodbath"},
+                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"}
+                ]
+            } 
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Great scourges made from living spines, red-hot rods, man-catchers and all the tools of torment fashioned by the sadistic smiths of Dis are widely used by Court warbands. Their main function is not to kill, but to cause as much agonising pain as possible. Forged in hellfire and quenched in the black waters of river Styx. The agony their wounds bring lasts for days."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_headtaker",
+        "name": "Head Taker",
+        "source": "core",
+        "tags": {"action": true, "weapon": true},
+        "category": "melee",
+        "distance": null,
+        "stats": {
+            "hands_melee": 1,
+            "melee": true
+        },
+        "contextdata": {
+            "get_weapon": {},
+            "injury_bonus": {"bonuses": [{"type": "flat", "value": 2, "condition_type": "activated", "condition_value": false}]}
+        },
+        "description": [   
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "This weapon rolls injuries against unactivated models with a flat +2 bonus."
+            }  
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Said to contain a tiny sliver of the stone that Cain used to murder Abel, this weapon allows its wielder to clearly see each spot in the body of their enemy that would bring it instant and agonising death. This makes it a superb ambush weapon much favoured by the Hunters of the Left-Hand Path."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": ["+2 to Injuries against Unactivated"]
+    },
+    {
+        "id": "eq_malebranchesword",
+        "name": "Malebranche Sword",
+        "source": "core",
+        "tags": {"action": true, "weapon": true},
+        "category": "melee",
+        "distance": null,
+        "stats": {
+            "hands_melee": 2,
+            "melee": true
+        },
+        "contextdata": {
+            "get_weapon": {},
+            "base_dice": {"value": 1}
+        },
+        "description": [   
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "This enormous evil sword rolls 3D6 on the Injury Chart, adding the results together."
+            }  
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "These forked abyssal swords are both terrible weapons as well as symbols of prestige, given to demons who have performed great deeds in the service of the Court. They were once carried by fallen Seraphim in battles against Heaven"
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_heavy"],
+        "modifiers": ["3D6 Injury Roll"]
+    },
+    {
+        "id": "eq_crownofhellfire",
+        "name": "Crown of Hellfire",
+        "source": "core",
+        "tags": {"trait": true, "headgear": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {
+        },
+        "description": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "When this model ends its Activation, each enemy model in melee combat with it suffers a BLOOD MARKER. Any effect or ability that negates BLOOD MARKERS from the Keyword FIRE negates this BLOOD MARKER.",
+                "glossary": [
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"},
+                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"},
+                    {"val": "FIRE", "id": "kw_fire"}
+                ]
+            } 
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "This burning crown is held aloft by the pain-seared hands of an invisible damned soul, whose weeping cries can still be heard. It is a reward that an elite member of the Court can earn through some extraordinary act in the service of the Serpent Head they are pledged to. Of the slave soldiers of the Court, only the Pit Locusts are allowed to wear this symbol of prestige due the fundamental role they played at the start of the Great War."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_fire"],
+        "modifiers": []
+    },
+    {
+        "id": "eq_infernalironarmour",
+        "name": "Infernal Iron Armour",
+        "source": "core",
+        "tags": {"trait": true, "armour": true},
+        "category": "armour",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {
+            "upgrade_stat": {"stat": "armour", "value": -2},
+            "super_armour": {}
+        },
+        "description": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Injuries against this model are rolled with a flat -2 penalty. This penalty applies against injuries that ignore armour."
+            } 
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "This armour is forged simultaneously in Hell and on Earth, so that no weapon, whether infernal or man-made, can overcome its protection. It serves both as protection and a torturous prison for the Hell Knights that are forced to wear it."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": ["Cannot be Ignored"]
+    },
+    {
+        "id": "eq_restrainingmuzzle",
+        "name": "Restraining Muzzle",
+        "source": "core",
+        "tags": {"trait": true, "bonus": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {
+            "upgrade_stat": {"stat": "ranged", "value": 1},
+            "bonus_ability": {
+                "action_id": ["ab_hateful"]
+            }
+        },
+        "description": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Any Yoke Fiend equipped with a Restraining Muzzle is not affected by the Hateful rule and therefore does not have to charge certain enemies within Charge range. With this device in place, the unruly Yoke Fiends can be trained better and add +1 DICE to their Ranged Attack characteristic.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"}
+                ]
+            } 
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Yoke Fiends are unruly beasts, and almost impossible to control when they smell mortal blood. Court nobles use these cruel, barbed muzzles to bring them to heel. Each is attuned to the will of the noble in the charge, who can constrict them until the pain becomes so unbearable that even the most bestial Yoke Fiend is made to obey."
+            }
+        ],
+        "options": [],
+        "keywords": [],
         "modifiers": []
     }
 ]

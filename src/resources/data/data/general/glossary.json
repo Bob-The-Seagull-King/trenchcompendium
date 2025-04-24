@@ -90,5 +90,23 @@
                     ]
             }
         ]
+    },
+    {
+        "id": "gl_bloodbath",
+        "source": "core",
+        "tags": {
+            "category" : "attack"
+        },
+        "name": "Bloodbath",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "You can roll an additional D6 on injury rolls at the cost of six BLOOD MARKERS on any model, or at the cost of three BLOOD MARKERS if the target is Down. This means that instead of rolling 2D6 on your typical weapon, you roll 3D6 on your injury roll and add the numbers together. Weapons such as the Artillery Witch’s Infernal Bomb would therefore roll 4D6 and add the results together (3D6+1D6).",
+            "glossary": [
+                {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"},
+                {"val": "Down", "id": "gl_down"}
+            ]
+            }
+        ]
     }
 ]
