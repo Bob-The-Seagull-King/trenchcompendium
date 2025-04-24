@@ -16,6 +16,7 @@ import WbbEditFighterExperience from "./modals/fighter/WbbEditFighterExperience"
 import WbbEditBattleScars from "./modals/fighter/WbbEditBattleScars";
 import WbbEditFighterStatus from "./modals/fighter/WbbEditFighterStatus";
 import WbbOptionItem from "./WbbOptionItem";
+import WbbAbilityDisplay from "./WbbAbilityDisplay";
 
 
 interface WbbFighterDetailViewProps {
@@ -89,6 +90,18 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
             Table: 'Ranged Skills',
             Id: 'adv_hunter',
             Number: 3
+        }
+    ]
+
+    const Abilities = [
+        {
+            Name: 'Skirmisher',
+            Description: 'Any Azebs can be converted to SKIRMISHERS at the cost of +5 ducats per model. Unless engaged in melee, when an enemy model declares a charge against any Skirmisher Azeb, they can immediately move D3” in any direction they wish (except within 1” of any enemy or out of the battlefield). After this manoeuvre, the charging model is moved as normal. This may lead to the charger being unable to enter melee. This move cannot be taken by a model that is Down.'
+        },
+        {
+            Name: 'Mine-setting',
+            Description: 'As an ACTION with +2 DICE, the Sapper can mine a piece of terrain they alone are touching, no bigger than 8” x 8” (an 8” section of trench, a wall,\n' +
+                'a tree, a building etc). If successful, the terrain piece is now mined. Any model (except the Sapper who set the mine) who moves into contact with the terrain piece will trigger the mine. Roll on the Injury Chart to see what happens to the model. The mine has the Keyword SHRAPNEL. After this, the terrain piece is no longer mined.',
         }
     ]
 
@@ -469,8 +482,17 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
                         onSubmit={handleStatusUpdate}
                     />
                 </WbbFighterCollapse>
-
             </div>
+
+            {/* Abilities */}
+            <div className={'fighter-card-collapse-wrap'}>
+                <WbbFighterCollapse title="Abilities">
+                    {Abilities.map((ability, index) => (
+                        <WbbAbilityDisplay key={index} ability={ability} />
+                    ))}
+                </WbbFighterCollapse>
+            </div>
+
             {/* Profile Summary */}
             <div className={'fighter-card-collapse-wrap'}>
             </div>
