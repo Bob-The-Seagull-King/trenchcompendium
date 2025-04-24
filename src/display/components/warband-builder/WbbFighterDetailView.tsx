@@ -354,84 +354,95 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
             {/* Edit Campaign Play */}
             <div className={'fighter-card-collapse-wrap'}>
                 <WbbFighterCollapse title="Campaign Play">
-                    <div className={'experience'}>
 
-                        <h3>{'Experience'}</h3>
+                    {/* Experience */}
+                    {fighter.IsElite &&
+                        <div className={'experience'}>
+                            <h3>{'Experience'}</h3>
 
-                        <div className={'btn btn-primary btn-sm edit-xp-btn'}
-                             onClick={() => setShowXPModal(true)}>
-                            <FontAwesomeIcon icon={faPen} className="icon-inline-left-l"/>
-                            {'Edit'}
+                            <div className={'btn btn-primary btn-sm edit-xp-btn'}
+                                 onClick={() => setShowXPModal(true)}>
+                                <FontAwesomeIcon icon={faPen} className="icon-inline-left-l"/>
+                                {'Edit'}
+                            </div>
+
+                            <div className={'xp-boxes'} onClick={() => setShowXPModal(true)}>
+                                {Array.from({length: 18}, (_, i) => {
+                                    const level = i + 1;
+                                    const isBold = boldXpIndices.includes(level);
+                                    const hasXP = level <= fighter.ExperiencePoints;
+
+                                    return (
+                                        <div
+                                            key={level}
+                                            className={`xp-box${isBold ? ' xp-box-bold' : ''}`}
+                                        >
+                                            {hasXP && <FontAwesomeIcon icon={faCheck}/>}
+                                        </div>
+                                    );
+                                })}
+                            </div>
                         </div>
+                    }
 
-                        <div className={'xp-boxes'} onClick={() => setShowXPModal(true)}>
-                            {Array.from({length: 18}, (_, i) => {
-                                const level = i + 1;
-                                const isBold = boldXpIndices.includes(level);
-                                const hasXP = level <= fighter.ExperiencePoints;
+                    {/* Battle Scars */}
+                    {fighter.IsElite &&
+                        <div className={'battle-scars'}>
 
-                                return (
-                                    <div
-                                        key={level}
-                                        className={`xp-box${isBold ? ' xp-box-bold' : ''}`}
-                                    >
-                                        {hasXP && <FontAwesomeIcon icon={faCheck}/>}
-                                    </div>
-                                );
-                            })}
+                            <h3>{'Battle Scars'}</h3>
+
+                            <div className={'btn btn-primary btn-sm edit-battle-scar-btn'}
+                                 onClick={() => setShowEditScars(true)}>
+                                <FontAwesomeIcon icon={faPen} className="icon-inline-left-l"/>
+                                {'Edit'}
+                            </div>
+
+                            <div className="battle-scar-boxes" onClick={() => setShowEditScars(true)}>
+                                {Array.from({length: 3}, (_, i) => {
+                                    const index = i + 1;
+                                    const isChecked = index <= fighter.BattleScars;
+                                    const isSkull = index === 3;
+
+                                    return (
+                                        <div key={index} className="battle-scar-box">
+                                            {isSkull &&
+                                                <FontAwesomeIcon icon={faSkull} className={'skull-icon'}/>
+                                            }
+                                            {isChecked &&
+                                                <FontAwesomeIcon icon={faTimes}/>
+                                            }
+                                        </div>
+                                    );
+                                })}
+                            </div>
                         </div>
-                    </div>
+                    }
 
-                    <div className={'battle-scars'}>
+                    {/* Advancements & Injuries */}
+                    {fighter.IsElite &&
+                        <>
+                            <h3>{'Advancements'}</h3>
+                            {Advancements.map((advancement) => (
+                                <WbbEditViewAdvancement advancement={advancement} key={advancement.Id}/>
+                            ))}
+                            <div className={'btn btn-add-element btn-block'}
+                                 onClick={() => setShowAdvancementModal(true)}>
+                                <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
+                                {'Add Advancement'}
+                            </div>
 
-                        <h3>{'Battle Scars'}</h3>
+                            <h3>{'Injuries'}</h3>
+                            {Injuries.map((injury) => (
+                                <WbbEditViewInjury injury={injury} key={injury.Id}/>
+                            ))}
+                            <div className={'btn btn-add-element btn-block'}
+                                 onClick={() => setShowInjuryModal(true)}>
+                                <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
+                                {'Add Injury'}
+                            </div>
+                        </>
+                    }
 
-                        <div className={'btn btn-primary btn-sm edit-battle-scar-btn'}
-                             onClick={() => setShowEditScars(true)}>
-                            <FontAwesomeIcon icon={faPen} className="icon-inline-left-l"/>
-                            {'Edit'}
-                        </div>
-
-                        <div className="battle-scar-boxes" onClick={() => setShowEditScars(true)}>
-                            {Array.from({length: 3}, (_, i) => {
-                                const index = i + 1;
-                                const isChecked = index <= fighter.BattleScars;
-                                const isSkull = index === 3;
-
-                                return (
-                                    <div key={index} className="battle-scar-box">
-                                        {isSkull &&
-                                            <FontAwesomeIcon icon={faSkull} className={'skull-icon'}/>
-                                        }
-                                        {isChecked &&
-                                            <FontAwesomeIcon icon={faTimes}/>
-                                        }
-                                    </div>
-                                );
-                            })}
-                        </div>
-                    </div>
-
-                    <h3>{'Advancements'}</h3>
-                    {Advancements.map((advancement) => (
-                        <WbbEditViewAdvancement advancement={advancement} key={advancement.Id}/>
-                    ))}
-                    <div className={'btn btn-add-element btn-block'}
-                         onClick={() => setShowAdvancementModal(true)}>
-                        <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
-                        {'Add Advancement'}
-                    </div>
-
-
-                    <h3>{'Injuries'}</h3>
-                    {Injuries.map((injury) => (
-                        <WbbEditViewInjury injury={injury} key={injury.Id}/>
-                    ))}
-                    <div className={'btn btn-add-element btn-block'}
-                         onClick={() => setShowInjuryModal(true)}>
-                        <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
-                        {'Add Injury'}
-                    </div>
 
                     {/*
                     - Active
