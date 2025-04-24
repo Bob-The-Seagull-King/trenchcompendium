@@ -42,7 +42,32 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
             CostGlory: 0,
             Description: 'Any Azebs can be converted to SKIRMISHERS at the cost of +5 ducats per model. Unless engaged in melee, when an enemy model declares a charge against any Skirmisher Azeb, they can immediately move D3” in any direction they wish (except within 1” of any enemy or out of the battlefield). After this manoeuvre, the charging model is moved as normal. This may lead to the charger being unable to enter melee. This move cannot be taken by a model that is Down.'
         }
-    ]
+    ];
+
+    const GoeticPowers = [
+        {
+            Name: 'Exquisite Pain',
+            Id: 'lorem_id',
+            CostDucats: 15,
+            CostGlory: 0,
+            Description: 'As a GOETIC (1-2) Spell, this model inflicts X BLOOD MARKERS on an enemy model that it can see, where X is the amount of BLOOD MARKERS spent.'
+        },
+        {
+            Name: 'Forbidden Pleasures',
+            Id: 'lorem_id2',
+            CostDucats: 10,
+            CostGlory: 0,
+            Description: 'Before the Battle begins, select one model in your warband without the Keyword DEMONIC. It starts the Battle with three BLOOD MARKERS.'
+        },
+        {
+            Name: 'Call of Flesh',
+            Id: 'lorem_id2',
+            CostDucats: 15,
+            CostGlory: 0,
+            Description: 'As a GOETIC (2) Spell that ends this model’s Activation, beckoning magic fills the air. When the enemy next Activates a model during this Turn, that model must Move as its first ACTION. This Move must be a Retreat if the model started its Activation in Melee Combat with a model other than the caster of this Spell. If that model is Down, it instead Stands and then Moves. During this movement, it moves in a direct path toward the caster of this Spell through any passable terrain, including Dangerous Terrain, Jumping Down etc. The model suffers injuries as normal. It can act normally after taking the prescribed ACTION(S), or attempting to take the prescribed ACTION(S) if it couldn’t, but cannot target the caster of this Spell during this Activation with ranged or melee attacks.'
+        }
+    ];
+
     const item_siege_jezzail = {
         Name: 'Siege Jezzail',
         CostDucats: 30,
@@ -285,16 +310,25 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
                         {'The Alchemist can be equipped with any weapon, armour and equipment from the Iron Sultanate Armoury'}
                     </p>
 
-                    {/* Bool Options */}
+                    {/* Bool Upgrades */}
                     {BoolOptions.length > 0 &&
                         <>
-                            <h3>{'Options'}</h3>
+                            <h3>{'Upgrades'}</h3>
                             {BoolOptions.map((option, index) => (
                                 <WbbOptionItem key={index} option={option} />
                             ))}
                         </>
                     }
 
+                    {/* Goetic Powers */}
+                    {GoeticPowers.length > 0 &&
+                        <>
+                            <h3>{'Goetic Powers'}</h3>
+                            {GoeticPowers.map((option, index) => (
+                                <WbbOptionItem key={index} option={option} />
+                            ))}
+                        </>
+                    }
 
                     {/* Ranged Weapons */}
                     <h3>{'Ranged Weapons'}</h3>
