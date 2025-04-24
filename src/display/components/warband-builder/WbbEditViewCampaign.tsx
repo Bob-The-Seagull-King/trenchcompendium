@@ -1,21 +1,14 @@
 import React from 'react';
+import {UserWarband} from "../../../classes/saveitems/Warband/UserWarband";
 
 interface WbbEditViewCampaignProps {
-    campaignName: string;
-    patron: string;
-    victoryPoints: number;
-    campaignCycle: number;
-    battlesFought: number;
+    warband: UserWarband;
     onClick?: () => void;
     isActive?: boolean;
 }
 
 const WbbEditViewCampaign: React.FC<WbbEditViewCampaignProps> = ({
-         campaignName,
-         patron,
-         victoryPoints,
-         campaignCycle,
-         battlesFought,
+         warband,
          onClick,
          isActive
      }) => {
@@ -24,14 +17,14 @@ const WbbEditViewCampaign: React.FC<WbbEditViewCampaignProps> = ({
         <div className={`WbbEditViewCampaign warband-meta ${isActive ? 'active' : ''}`} onClick={onClick}>
             <div className={'meta-headline'}>{'Campaign'}</div>
 
-            <div className="meta-item mb-2">{campaignName}</div>
+            <div className="meta-item mb-2">{warband.GetCampaignName()}</div>
             <div className="meta-item"><strong>{'Patron: '}</strong>
-                { patron != '' &&
+                { warband.GetPatronName() != '' &&
                     <>
-                        {patron}
+                        {warband.GetPatron()}
                     </>
                 }
-                { patron == '' &&
+                { warband.GetPatronName() == '' &&
                     <>
                         {'No patron set'}
                     </>
@@ -39,9 +32,9 @@ const WbbEditViewCampaign: React.FC<WbbEditViewCampaignProps> = ({
             </div>
 
 
-            <div className="meta-item"><strong>{'Victory Points: '}</strong>{victoryPoints}</div>
-            <div className="meta-item"><strong>{'Campaign Cycle: '}</strong>{campaignCycle}</div>
-            <div className="meta-item"><strong>{'Battles Fought: '}</strong>{battlesFought}</div>
+            <div className="meta-item"><strong>{'Victory Points: '}</strong>{warband.GetVictoryPoints()}</div>
+            <div className="meta-item"><strong>{'Campaign Cycle: '}</strong>{warband.GetCampaignCycle()}</div>
+            <div className="meta-item"><strong>{'Battles Fought: '}</strong>{warband.GetBattleCount()}</div>
         </div>
     );
 };

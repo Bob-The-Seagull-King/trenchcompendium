@@ -149,12 +149,7 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                         {/* Warband Meta */}
 
                         <WbbEditViewWarband
-                            faction={warband.GetFactionName()}
-                            name={warband.GetWarbandName()}
-                            ratingDucats={warband.GetCostDucats()}
-                            ratingGlory={warband.GetCostGlory()}
-                            countElite={warband.GetFighters().filter(f => f.IsElite).length}
-                            countTroop={warband.GetFighters().filter(f => !f.IsElite && !f.IsMercenary).length}
+                            warband={warband}
                             onClick={() => openDetail('warband', null)}
                             isActive={detailType === 'warband'}
 
@@ -167,11 +162,7 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                         />
 
                         <WbbEditViewCampaign
-                            campaignName={warband.GetCampaignName()}
-                            patron={warband.GetPatron()?.Name || 'None'}
-                            victoryPoints={warband.GetVictoryPoints()}
-                            campaignCycle={warband.GetCampaignCycle()}
-                            battlesFought={warband.GetBattleCount()}
+                            warband={warband}
                             onClick={() => openDetail('campaign', null)}
                             isActive={detailType === 'campaign'}
                         />

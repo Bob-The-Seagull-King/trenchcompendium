@@ -114,14 +114,14 @@ class UserWarband extends DynamicContextObject {
      * GETTERS
      */
 
-    /*
-     @TODO
-     - These functions need to return the proper values or do stuff
-     */
-
     public GetPatron() {
         return this.Faction.MyPatron;
     }
+
+    public GetPatronName() {
+            return this.GetPatron()?.Name || 'None';
+    }
+
 
     /** @TODO
      * Returns the Name of the Warband as string
@@ -439,6 +439,31 @@ class UserWarband extends DynamicContextObject {
             ]
         }
     }
+
+    /**
+     * Returns the number of elite fighters in this warband
+     * @constructor
+     */
+    GetNumElite() {
+        return this.GetFighters().filter(f => f.IsElite).length;
+    }
+
+    /**
+     * Returns the number of troop fighters in this warband
+     * @constructor
+     */
+    GetNumTroop() {
+        return this.GetFighters().filter(f => !f.IsElite && !f.IsMercenary).length
+    }
+
+    /**
+     * Returns the number of mercenary fighters in this warband
+     * @constructor
+     */
+    GetNumMercenary() {
+        return this.GetFighters().filter(f => f.IsMercenary).length;
+    }
+
 }
 
 export {IUserWarband, UserWarband}

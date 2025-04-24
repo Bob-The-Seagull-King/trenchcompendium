@@ -1,23 +1,15 @@
 import React from 'react';
+import {UserWarband} from "../../../classes/saveitems/Warband/UserWarband";
 
 interface WbbEditViewWarbandProps {
-    faction: string;
-    name: string;
-    ratingDucats: number;
-    ratingGlory: number;
-    countElite: number;
-    countTroop: number;
+    warband: UserWarband;
+
     onClick?: () => void;
     isActive?: boolean;
 }
 
 const WbbEditViewWarband: React.FC<WbbEditViewWarbandProps> = ({
-       faction,
-       name,
-       ratingDucats,
-       ratingGlory,
-       countElite,
-       countTroop,
+       warband,
        onClick,
        isActive
    }) => {
@@ -25,11 +17,17 @@ const WbbEditViewWarband: React.FC<WbbEditViewWarbandProps> = ({
     return (
         <div className={`WbbEditViewWarband warband-meta ${isActive ? 'active' : ''}`} onClick={onClick}>
             <div className={'meta-headline'}>{'Warband'}</div>
-            <div className="meta-item"><strong>Faction:</strong> {faction}</div>
-            <div className="meta-item"><strong>Name:</strong> {name}</div>
-            <div className="meta-item"><strong>Rating:</strong> {ratingDucats} Ducats | {ratingGlory} Glory</div>
+            <div className="meta-item"><strong>Faction:</strong> {warband.GetFactionName()}</div>
+            <div className="meta-item"><strong>Name:</strong> {warband.GetWarbandName()}</div>
+            <div className="meta-item"><strong>Rating:</strong> {warband.GetCostDucats()} Ducats | {warband.GetCostGlory()} Glory</div>
             <div className="meta-item">
-                <strong>Fighters:</strong> {'Elite: '}{countElite}{' | '}{'Troop: '}{countTroop}
+                <strong>{'Fighters: '}</strong>
+                {'Elite: '}{warband.GetNumElite()}
+                {' | '}
+                {'Troop: '}{warband.GetNumTroop()}
+                {' | '}
+                {'Mercenary: '}{warband.GetNumMercenary()}
+
             </div>
         </div>
     );
