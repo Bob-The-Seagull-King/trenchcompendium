@@ -1,13 +1,15 @@
 import React from 'react';
 import WbbEditViewFighter from "./WbbEditViewFighter";
-
+import { useWarband  } from '../../../context/WarbandContext';
 interface WbbEditViewStashProps {
-    warband: any;
     onClick?: () => void;
     isActive?: boolean;
 }
 
-const WbbEditViewStash: React.FC<WbbEditViewStashProps> = ({ warband, onClick, isActive }) => {
+const WbbEditViewStash: React.FC<WbbEditViewStashProps> = ({ onClick, isActive }) => {
+    const { warband } = useWarband();
+    if (warband == null) return (<div>Loading...</div>);
+
     const stash = warband.GetStash();
 
 

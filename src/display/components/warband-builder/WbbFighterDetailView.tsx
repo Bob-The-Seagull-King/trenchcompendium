@@ -1,6 +1,15 @@
 import React, {useState} from 'react';
 import WbbEditViewFighter from "./WbbEditViewFighter";
-import {faCheck, faChevronLeft, faCopy, faPen, faPlus, faSkull, faTimes} from "@fortawesome/free-solid-svg-icons";
+import {
+    faCheck,
+    faChevronLeft,
+    faCopy, faEllipsisVertical,
+    faPen,
+    faPlus,
+    faSkull,
+    faTimes,
+    faTrash
+} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import ItemStat from "../subcomponents/description/ItemStat";
 import WbbEquipmentListItem from "./WbbEquipmentListItem";
@@ -17,6 +26,7 @@ import WbbEditBattleScars from "./modals/fighter/WbbEditBattleScars";
 import WbbEditFighterStatus from "./modals/fighter/WbbEditFighterStatus";
 import WbbOptionItem from "./WbbOptionItem";
 import WbbAbilityDisplay from "./WbbAbilityDisplay";
+import {OverlayTrigger, Popover} from "react-bootstrap";
 
 
 interface WbbFighterDetailViewProps {
@@ -26,7 +36,7 @@ interface WbbFighterDetailViewProps {
 
 const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, onClose }) => {
 
-    // Test Data
+    // Test Data ***
     const BoolOptions = [
         {
             Name: 'Skirmisher',
@@ -43,7 +53,6 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
             Description: 'Any Azebs can be converted to SKIRMISHERS at the cost of +5 ducats per model. Unless engaged in melee, when an enemy model declares a charge against any Skirmisher Azeb, they can immediately move D3” in any direction they wish (except within 1” of any enemy or out of the battlefield). After this manoeuvre, the charging model is moved as normal. This may lead to the charger being unable to enter melee. This move cannot be taken by a model that is Down.'
         }
     ];
-
     const GoeticPowers = [
         {
             Name: 'Exquisite Pain',
@@ -67,7 +76,6 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
             Description: 'As a GOETIC (2) Spell that ends this model’s Activation, beckoning magic fills the air. When the enemy next Activates a model during this Turn, that model must Move as its first ACTION. This Move must be a Retreat if the model started its Activation in Melee Combat with a model other than the caster of this Spell. If that model is Down, it instead Stands and then Moves. During this movement, it moves in a direct path toward the caster of this Spell through any passable terrain, including Dangerous Terrain, Jumping Down etc. The model suffers injuries as normal. It can act normally after taking the prescribed ACTION(S), or attempting to take the prescribed ACTION(S) if it couldn’t, but cannot target the caster of this Spell during this Activation with ranged or melee attacks.'
         }
     ];
-
     const item_siege_jezzail = {
         Name: 'Siege Jezzail',
         CostDucats: 30,
@@ -90,7 +98,6 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
         Id: 'eq_alch_ammo',
     }
     const boldXpIndices = [2, 4, 7, 10, 14, 18];
-
     const Injuries = [
         {
             Name: 'Muscle Damage',
@@ -107,7 +114,6 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
             Number: 21
         }
     ];
-
     const Advancements = [
         {
             Name: 'Hunter',
@@ -117,7 +123,6 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
             Number: 3
         }
     ]
-
     const Abilities = [
         {
             Name: 'Skirmisher',
@@ -129,8 +134,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
                 'a tree, a building etc). If successful, the terrain piece is now mined. Any model (except the Sapper who set the mine) who moves into contact with the terrain piece will trigger the mine. Roll on the Injury Chart to see what happens to the model. The mine has the Keyword SHRAPNEL. After this, the terrain piece is no longer mined.',
         }
     ]
-
-    // end Test Data
+    // end Test Data ***
 
     /**
      * Equipment Modals
@@ -231,6 +235,39 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
                         </>
                     }
                 </div>
+
+                {/*<OverlayTrigger*/}
+                {/*    trigger="click"*/}
+                {/*    placement="left"*/}
+                {/*    show={showPopover}*/}
+                {/*    onToggle={togglePopover}*/}
+                {/*    rootClose={true}*/}
+                {/*    overlay={*/}
+                {/*        <Popover.Body className="popover Wbb-item-actions-popover">*/}
+                {/*            <div className={'actions'}>*/}
+                {/*                <div*/}
+                {/*                    className={'action action-copy'}*/}
+                {/*                    onClick={handleCopy}*/}
+                {/*                >*/}
+                {/*                    <FontAwesomeIcon icon={faCopy} className="icon-inline-left-l"/>*/}
+                {/*                    {'Copy Fighter'}*/}
+                {/*                </div>*/}
+
+                {/*                <div*/}
+                {/*                    className={'action action-delete'}*/}
+                {/*                    onClick={handleDeleteClick}*/}
+                {/*                >*/}
+                {/*                    <FontAwesomeIcon icon={faTrash} className="icon-inline-left-l"/>*/}
+                {/*                    {'Delete Fighter'}*/}
+                {/*                </div>*/}
+                {/*            </div>*/}
+                {/*        </Popover.Body>*/}
+                {/*    }>*/}
+                {/*    <div className={'Wbb-item-actions'}*/}
+                {/*         onClick={(e) => e.stopPropagation()}>*/}
+                {/*        <FontAwesomeIcon icon={faEllipsisVertical} className=""/>*/}
+                {/*    </div>*/}
+                {/*</OverlayTrigger>*/}
             </div>
 
             <div className="fighter-card-meta fighter-card-meta-above">

@@ -86,3 +86,28 @@
 
         .fighter-status-string
             font-weight: bold
+
+
+    // // // // //
+    //
+    // WBB Loading Overlay
+    //
+    .WbbLoadingOverlay
+        position: fixed
+        top: 0
+        left: 0
+        right: 0
+        bottom: 0
+        z-index: 1000
+        background-color: $color-bg-1
+        font-size: 16px
+        .loading-inner
+            position: absolute
+            top: 50%
+            left: 50%
+            transform: translate(-50%, -50%)
+        i, svg
+            font-size: 48px
+            color: $color-highlight-text
+
+

@@ -2,15 +2,18 @@ import React, {useState} from 'react';
 import {Button, Modal, OverlayTrigger, Popover} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCopy, faEllipsisVertical, faTrash, faXmark} from "@fortawesome/free-solid-svg-icons";
+import {useWarband} from "../../../context/WarbandContext";
 
 interface WbbEditViewExplorationProps {
-    warband: any;
     activePopoverId: string | null;
     setActivePopoverId: (id: string | null) => void;
     index: number;
 }
 
-const WbbEditViewExploration: React.FC<WbbEditViewExplorationProps> = ({ warband, activePopoverId, setActivePopoverId, index }) => {
+const WbbEditViewExploration: React.FC<WbbEditViewExplorationProps> = ({ activePopoverId, setActivePopoverId, index }) => {
+
+    const { warband } = useWarband();
+    if (warband == null) return (<div>Loading...</div>);
 
     // @TODO: Test Data
     const exploration = {

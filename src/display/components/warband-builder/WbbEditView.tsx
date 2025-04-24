@@ -3,7 +3,7 @@ import { UserWarband, IUserWarband } from '../../../classes/saveitems/Warband/Us
 import WbbWarbandListItem from "./WbbWarbandListItem";
 import WbbEditViewFighter from "./WbbEditViewFighter";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCopy, faPlus} from "@fortawesome/free-solid-svg-icons";
+import {faCircleNotch, faCopy, faPlus} from "@fortawesome/free-solid-svg-icons";
 import WbbEditViewStash from "./WbbEditViewStash";
 import WbbEditViewModifier from "./WbbEditViewModifier";
 import WbbEditViewExploration from "./WbbEditViewExploration";
@@ -20,6 +20,8 @@ import WbbEditViewCampaign from "./WbbEditViewCampaign";
 import WbbStashDetailView from "./WbbStashDetailView";
 import WbbWarbandDetailView from "./WbbWarbandDetailView";
 import WbbCampaignDetailView from "./WbbCampaignDetailView";
+import {PopoverProvider} from "../../../context/PopoverContext";
+import {WarbandProvider} from "../../../context/WarbandContext";
 
 interface WbbEditViewProps {
     warbandData: UserWarband | null;
@@ -36,10 +38,6 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
 
     /** Set Warband as Class */
     const [warband, setWarband] = useState<UserWarband | null>(null);
-
-    // if( warband === null ) {
-    //     return ''; // @TODO: what if warband is null
-    // }
 
     useEffect(() => {
         if (warbandData) {
@@ -139,30 +137,29 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
 
 
     return (
+
         <div className="WbbEditView">
             {/* The Warband List */}
-            {(warband != null) &&
-                <div className={'container WbbEditViewMain'}>
+            {(warband !== null) ? (
+                <WarbandProvider warband={warband}>
+                    <PopoverProvider>
+                        <div className={'container WbbEditViewMain'}>
                     <div className={`warband-wrap ${detailType ? 'details-open' : ''}`}>
                         <h1>{warband.GetWarbandName()}</h1>
 
                         {/* Warband Meta */}
 
                         <WbbEditViewWarband
-                            warband={warband}
                             onClick={() => openDetail('warband', null)}
                             isActive={detailType === 'warband'}
-
                         />
 
                         <WbbEditViewStash
-                            warband={warband}
                             onClick={() => openDetail('stash', null)}
                             isActive={detailType === 'stash'}
                         />
 
                         <WbbEditViewCampaign
-                            warband={warband}
                             onClick={() => openDetail('campaign', null)}
                             isActive={detailType === 'campaign'}
                         />
@@ -238,7 +235,7 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                         {/* Warband Modifiers */}
                         <h3 className={'category-headline'}>Modifiers</h3>
                         <WbbEditViewModifier
-                            warband={warband} index={123}
+                            index={123}
                             activePopoverId={activePopoverId}
                             setActivePopoverId={setActivePopoverId}
                         />
@@ -254,7 +251,7 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                         <h3 className={'category-headline'}>Exploration</h3>
 
                         <WbbEditViewExploration
-                            warband={warband} index={123}
+                            index={123}
                             activePopoverId={activePopoverId}
                             setActivePopoverId={setActivePopoverId}
                         />
@@ -278,7 +275,6 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                         {/* The Warband Detail View */}
                         {detailType === 'warband' && (
                             <WbbWarbandDetailView
-                                warband={warband}
                                 onClose={closeDetail}
                             />
                         )}
@@ -286,7 +282,6 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                         {/* The Stash Detail View */}
                         {detailType === 'stash' && (
                             <WbbStashDetailView
-                                warband={warband}
                                 onClose={closeDetail}
                             />
                         )}
@@ -294,49 +289,59 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                         {/* The Campaign Detail View */}
                         {detailType === 'campaign' && (
                             <WbbCampaignDetailView
-                                warband={warband}
                                 onClose={closeDetail}
                             />
                         )}
 
                         {/* Empty Fallback */}
-                        { detailType === null  && (
+                        {detailType === null && (
                             <div className={'selected-item-empty'}>
                                 {/*{'Nothing selected'}*/}
                             </div>
                         )}
                     </div>
                 </div>
-            }
 
-
-
-            <WbbModalAddFighterTroop
-                show={showAddFighterTroopModal}
-                onClose={() => setShowAddFighterTroopModal(false)}
-                onSubmit={handleFighterSubmit}
-            />
-            <WbbModalAddFighterElite
-                show={showAddFighterEliteModal}
-                onClose={() => setShowAddFighterEliteModal(false)}
-                onSubmit={handleFighterSubmit}
-            />
-            <WbbModalAddFighterMercenary
-                show={showAddFighterMercenaryModal}
-                onClose={() => setShowAddFighterMercenaryModal(false)}
-                onSubmit={handleFighterSubmit}
-            />
-            <WbbModalAddModifier
-                show={showAddModifierModal}
-                onClose={() => setShowAddModifierModal(false)}
-                onSubmit={handleAddModifier}
-            />
-            <WbbModalAddExplorationLocation
-                show={showAddExplorationModal}
-                onClose={() => setShowAddExplorationModal(false)}
-                onSubmit={handleAddExplorationLocation}
-            />
+                        <WbbModalAddFighterTroop
+                            show={showAddFighterTroopModal}
+                            onClose={() => setShowAddFighterTroopModal(false)}
+                            onSubmit={handleFighterSubmit}
+                        />
+                        <WbbModalAddFighterElite
+                            show={showAddFighterEliteModal}
+                            onClose={() => setShowAddFighterEliteModal(false)}
+                            onSubmit={handleFighterSubmit}
+                        />
+                        <WbbModalAddFighterMercenary
+                            show={showAddFighterMercenaryModal}
+                            onClose={() => setShowAddFighterMercenaryModal(false)}
+                            onSubmit={handleFighterSubmit}
+                        />
+                        <WbbModalAddModifier
+                            show={showAddModifierModal}
+                            onClose={() => setShowAddModifierModal(false)}
+                            onSubmit={handleAddModifier}
+                        />
+                        <WbbModalAddExplorationLocation
+                            show={showAddExplorationModal}
+                            onClose={() => setShowAddExplorationModal(false)}
+                            onSubmit={handleAddExplorationLocation}
+                        />
+                    </PopoverProvider>
+                </WarbandProvider>
+            ) : (
+                <div className={'WbbLoadingOverlay'}>
+                    <div className={'loading-inner'}>
+                        <FontAwesomeIcon icon={faCircleNotch} className="fa-spin"/>
+                        <div className={'text'}>
+                            {'Loading'}
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
+
+
     );
 };
 

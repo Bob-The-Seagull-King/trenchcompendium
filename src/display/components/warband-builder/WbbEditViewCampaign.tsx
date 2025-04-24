@@ -1,17 +1,19 @@
 import React from 'react';
 import {UserWarband} from "../../../classes/saveitems/Warband/UserWarband";
+import {useWarband} from "../../../context/WarbandContext";
 
 interface WbbEditViewCampaignProps {
-    warband: UserWarband;
     onClick?: () => void;
     isActive?: boolean;
 }
 
 const WbbEditViewCampaign: React.FC<WbbEditViewCampaignProps> = ({
-         warband,
          onClick,
          isActive
      }) => {
+
+    const { warband } = useWarband();
+    if (warband == null) return (<div>Loading...</div>);
 
     return (
         <div className={`WbbEditViewCampaign warband-meta ${isActive ? 'active' : ''}`} onClick={onClick}>

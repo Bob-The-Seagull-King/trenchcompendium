@@ -2,13 +2,16 @@ import React from 'react';
 import { UserWarband } from "../../../classes/saveitems/Warband/UserWarband";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faChevronLeft} from "@fortawesome/free-solid-svg-icons";
+import {useWarband} from "../../../context/WarbandContext";
 
 interface WbbWarbandDetailViewProps {
-    warband: UserWarband;
     onClose: () => void;
 }
 
-const WbbWarbandDetailView: React.FC<WbbWarbandDetailViewProps> = ({ warband, onClose }) => {
+const WbbWarbandDetailView: React.FC<WbbWarbandDetailViewProps> = ({  onClose }) => {
+
+    const { warband } = useWarband();
+    if (warband == null) return (<div>Loading...</div>);
 
     return (
         <div className="WbbDetailView WbbWarbandDetailView">

@@ -5,16 +5,18 @@ import {faChevronLeft, faPlus} from "@fortawesome/free-solid-svg-icons";
 import WbbEquipmentListItem from "./WbbEquipmentListItem";
 import WbbModalAddRangedWeapon from "./modals/fighter/WbbAddRangedWeapon";
 import WbbModalAddItemToStash from "./modals/WbbModalAddItemToStash";
+import {useWarband} from "../../../context/WarbandContext";
 
 interface WbbStashDetailViewProps {
-    warband: UserWarband;
     onClose: () => void;
 }
 
 
+const WbbStashDetailView: React.FC<WbbStashDetailViewProps> = ({ onClose }) => {
 
+    const { warband } = useWarband();
+    if (warband == null) return (<div>Loading...</div>);
 
-const WbbStashDetailView: React.FC<WbbStashDetailViewProps> = ({ warband, onClose }) => {
     const stash = warband.GetStash();
 
     const [showAddItemToStash, setShowAddItemToStash] = useState(false);
