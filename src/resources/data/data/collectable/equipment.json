@@ -1132,7 +1132,7 @@
         "id": "eq_medikit",
         "name": "Medi-Kit",
         "source": "core",
-        "tags": {"action": true},
+        "tags": {"action": true, "heal": true},
         "category": "equipment",
         "distance": null,
         "stats": {
@@ -3726,6 +3726,343 @@
             {
                 "tags": {"desc_type" : "italic"},
                 "content": "The Anchorite is decorated with an angelic face that is the very image of the wrath of the Lord. All must cower before the face of the Lord."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_supremepontiffcrucifix",
+        "name": "Crucifix of the Supreme Pontiff",
+        "source": "core",
+        "tags": {"trait": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": { },
+        "description": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "This model can take further ACTIONS if it fails in an attempted RISKY ACTION. Note that the action fails, but you are allowed to try any other ACTIONS on your profile without losing the Activation.",
+                "glossary": [
+                    {"val": "RISKY ACTION", "id": "kw_riskyaction"},
+                    {"val": "ACTIONS", "id": "kw_action"}
+                ]
+            }
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "A crucifix gifted to warbands of the Papal States by the Supreme Pontiff."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_carnyx",
+        "name": "Carnyx",
+        "source": "core",
+        "tags": {"trait": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+            "hands_melee": 1,
+            "hands_ranged": 1
+        },
+        "contextdata": {
+            "keyword_add": {"value": ["kw_fear"]}
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Any friendly models within 4\" of the musician who is not Down can add +1 DICE to their Dash ACTIONS. Musical Instruments take one hand to use at all times as if it were a weapon. The wielder of the instrument also causes FEAR.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "ACTIONS", "id": "kw_action"},
+                    {"val": "FEAR", "id": "kw_fear"}
+                ]
+            }
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "A specialty musical instrument wielded by the warbands of Eire."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_tanksplittersword",
+        "name": "Tank-Splitter Sword",
+        "source": "core",
+        "tags": {"action": true, "weapon": true},
+        "category": "melee",
+        "distance": null,
+        "stats": {
+            "hands_melee": 2,
+            "melee": true
+        },
+        "contextdata": {
+            "get_weapon": {},
+            "injury_bonus": {"bonuses": [{"type": "dice", "value": 1}]}
+        },
+        "description": [             
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Adds +1 DICE to injury rolls. If the model the sword hits has an armour modifier from any source other than a shield, the player may set one die of the injury roll to a 6 before the roll is made. The rest of the dice for the injury roll are rolled as normal.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"}
+                ]
+            }   
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "It takes years of gruelling Mensur practice and field drills to acquire the required precision and speed to use the specialist tank-splitter swords of the Gardekorps. Despite their great size (often over 6 feet long!) they are remarkably light, and due to the large quantities of Orichalcum used in their forging process, they are virtually unbreakable. They are often used to disable tanks and other armoured vehicles by either slicing their armour open or disabling them with an accurate swing to sever their tracks. Before any battle they are treated with a special metal-melting chemical compound which melts the armour, making it far deadlier against armoured targets than those who wear none."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_critical","kw_cumbersome"],
+        "modifiers": ["+1D to Injuries"]
+    },
+    {
+        "id": "eq_bagpipes",
+        "name": "Bagpipes",
+        "source": "core",
+        "tags": {"trait": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+            "hands_melee": 1,
+            "hands_ranged": 1
+        },
+        "contextdata": {
+            "keyword_add": {"value": ["kw_fear"]}
+        },
+        "description": [              
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Any friendly models within 4\" of the musician who is not Down can add +1 DICE to their Dash ACTIONS. Musical Instruments take one hand to use at all times as if it were a weapon. The wielder of the instrument also causes FEAR.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "ACTIONS", "id": "kw_action"},
+                    {"val": "FEAR", "id": "kw_fear"}
+                ]
+            }
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "A specialty musical instrument wielded by the warbands of Alba."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_highlandmachinearmour",
+        "name": "Highland Machine Armour",
+        "source": "core",
+        "tags": {"trait": true, "armour": true},
+        "category": "armour",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {
+            "upgrade_stat": {"stat": "armour", "value": -3}
+        },
+        "description": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Grants a -3 modifier to all injury rolls against the model wearing this armour, and treats Down Injury results as a Minor Hit instead (note that the TOUGH Keyword ability to avoid Out of Action with Down overrides this). The machine armour worn by the warbands of Alba do not impose a penalty to Dash. Machine armour cannot be combined with any shield. Models wearing Machine Armour may have a base size of 40mm if you wish, unless the model wearing it is already on 50mm or bigger base.",
+                "glossary": [
+                    {"val": "TOUGH", "id": "kw_tough"}
+                ]
+            }, 
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "If worn by a model that is not part of a New Antioch force/subfaction, the only bonus the armour gives is the -3 injury modifier, as the chemical treatment that allows the wearer to withstand the rigors of the armour is a carefully guarded military secret. D3 charge distance remains in force."
+            } 
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Combining the rarest of divine metal alloys and the latest technology of New Antioch, Machine Armour makes its wearer a virtual mobile tank."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_tanksplittersword",
+        "name": "Tank-Splitter Sword",
+        "source": "core",
+        "tags": {"action": true, "weapon": true},
+        "category": "melee",
+        "distance": null,
+        "stats": {
+            "hands_melee": 2,
+            "melee": true
+        },
+        "contextdata": {
+            "get_weapon": {},
+            "injury_bonus": {"bonuses": [{"type": "flat", "value": 1}]}
+        },
+        "description": [             
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "All injuries are rolled with +1 added to the result (i.e. a roll of 7 on the Injury Chart becomes 8). Models equipped with a Lochaber Axe impose a -1 DICE to hit penalty on any charging enemies in Melee combat. This only applies when a charging model attacks, not in subsequent rounds of Melee.",
+                "glossary": [
+                    {"val": "-1 DICE", "id": "kw_minusdice"}
+                ]
+            }   
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Tuagh-chatha axes combine the power of the Great Axe with the defensive qualities of a polearm. Its wicked spike has stopped many a Heretic in their tracks. The Dùn Èideann Guard are especially adept at their use."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_critical","kw_cumbersome","kw_heavy"],
+        "modifiers": ["+1 to Injuries","-1D to hit for Chargers"]
+    },
+    {
+        "id": "eq_shotel",
+        "name": "Shotel",
+        "source": "core",
+        "tags": {"action": true, "weapon": true},
+        "category": "melee",
+        "distance": null,
+        "stats": {
+            "hands_melee": 1,
+            "melee": true
+        },
+        "contextdata": {
+            "get_weapon": {},
+            "ignore_shield": {}
+        },
+        "description": [             
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The Shotel is specifically designed to overcome enemy shields. It ignores the target’s penalty to injury rolls from its shield, if any. The Holy Icon Shield and similar effects still apply."
+            }   
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Since the days of ancient Axum, the Shotel has been the weapon of choice for the Abyssinian warrior-elite. Its curved blade is designed to reach around an opponent’s shield and stab them in vital areas, such as the kidneys or lungs."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_critical"],
+        "modifiers": ["Ignore Shield"]
+    },
+    {
+        "id": "eq_holywateroflalibela",
+        "name": "Holy Water of Lalibela",
+        "source": "core",
+        "tags": {"trait": true, "bonus": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": { },
+        "contextdata": {
+            "bonus_ability": {
+                "bonus_tag": ["heal"]
+            }
+        },
+        "description": [              
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "This model gains +1 DICE on any ACTION that would remove one or more BLOOD MARKERS or INFECTION MARKERS if successful.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "ACTION", "id": "kw_action"},
+                    {"val": "INFECTION MARKERS", "id": "kw_infectionmarker"},
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"}
+                ]
+            }
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Vials of holy water from the rock-hewn Churches of Lalibela are carried by the Ethiopian warriors on their campaigns. It has great power over demonic entities and aids in healing."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_consumable"],
+        "modifiers": []
+    },
+    {
+        "id": "eq_anfarro",
+        "name": "Anfarro (Warrior's Crown)",
+        "source": "core",
+        "tags": {"trait": true, "headgear": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {
+            "keyword_ignore": {"value": "kw_fear"},
+            "upgrade_stat": {"stat": "melee", "value": 1}
+        },
+        "description": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "This model’s Melee characteristic is improved by +1 DICE (as only the best warriors are granted the honour of wearing an Anfarro). This model is also immune to FEAR. Note that the Anfarro cannot be worn together with a helmet.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "FEAR", "id": "kw_fear"}
+                ]
+            } 
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "An Anfarro is made from a ring of lion’s mane hair, held in a filigree gilt metal coronet studded with blue and red gemstones. It is granted by the Emperor to an aristocratic warrior and lion hunter as a token of honour and bravery."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_tabot",
+        "name": "Tabot",
+        "source": "core",
+        "tags": {"trait": true, "bonus": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": { },
+        "contextdata": {
+            "bonus_ability": {
+                "bonus_tag": ["heal"]
+            }
+        },
+        "description": [              
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Each time an ACTION is taken by any model of your warband that heals one or more BLOOD MARKERS or INFECTION MARKERS, the model carrying the Tabot gains one BLESSING MARKER.",
+                "glossary": [
+                    {"val": "BLESSING MARKER", "id": "kw_blessingmarker"},
+                    {"val": "ACTION", "id": "kw_action"},
+                    {"val": "INFECTION MARKERS", "id": "kw_infectionmarker"},
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"}
+                ]
+            }
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Made from alabaster, marble or wood from an acacia tree, these are blessed replicas of the Ark of the Covenant. A priest that accompanies the forces of the King of Kings to New Antioch, they will take the holy Tabot with them, wrapped in silk cloth decorated with gold string. Its miraculous powers reward those who perform virtuous deeds on the battlefield."
             }
         ],
         "options": [],
