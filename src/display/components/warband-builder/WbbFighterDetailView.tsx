@@ -83,6 +83,9 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
         CostGlory: 0,
         ModifiersString: 'Two handed, Heavy, +1D to Injuries',
         Id: 'eq_siege_jezzail',
+        Range: '48"',
+        Keywords: 'HEAVY',
+        Modifiers: '+1D to Injuries'
     }
     const item_trench_knife = {
         Name: 'Trench Knife',
@@ -90,6 +93,8 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
         CostGlory: 0,
         ModifiersString: 'One handed, -1D to Hit',
         Id: 'eq_trench_knife',
+        Range: 'Melee',
+        Modifiers: '-1D to Injuries'
     }
     const item_alch_ammo = {
         Name: 'Alchemical Ammunition',
@@ -97,6 +102,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
         CostGlory: 0,
         ModifiersString: '+1D to ranged attack Rolls',
         Id: 'eq_alch_ammo',
+        Rules: 'Adds +1 DICE to Ranged Attack rolls on the Action Success Chart. Can only be used with Jezzails, Alaybozan, Halberd-Guns and Siege Jezzails.'
     }
     const boldXpIndices = [2, 4, 7, 10, 14, 18];
     const Injuries = [

@@ -6,8 +6,10 @@
 
 .WbbEquipmentListItem
     position: relative
-    padding: 10px 15px
-    background-color: $bg-color-card-2-el
+
+    &:not(.play-mode)
+        padding: 10px 15px
+        background-color: $bg-color-card-2-el
 
     .equipment-name
         font-weight: bold
@@ -19,3 +21,29 @@
 
     .equipment-modifiers
 
+    &.play-mode
+
+        .equipment-name
+            padding: 10px 15px
+            background-color: $bg-color-card-2-el
+
+        .equipment-details
+            background-color: $bg-color-card-3
+
+        table
+            width: 100%
+        td
+            padding: 10px 15px
+            border-bottom: 1px solid $color-bg-1
+
+            &:last-child
+                border-left: 1px solid $color-bg-1
+
+        .keywords-wrap
+            padding: 10px 15px
+        .rules-wrap
+            padding: 10px 15px
+
+        .text-label
+            font-weight: bold
+            margin-bottom: 3px
