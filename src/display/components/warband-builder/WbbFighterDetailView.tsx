@@ -263,33 +263,37 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
                         {fighter.ModelName}
                     </span>
                 </div>
-                <div className="fighter-meta-entry-simple">
-                    <span className="fighter-meta-label">
-                        {'Cost: '}
-                    </span>
-                    <span className="fighter-meta-value">
-                        {fighter.FighterBaseDucats > 0 &&
-                            <>
-                                {fighter.FighterBaseDucats + " Ducats"}
-                            </>
-                        }
-                        {fighter.FighterBaseGlory > 0 &&
-                            <>
-                                {fighter.FighterBaseGlory + " Glory Points"}
-                            </>
-                        }
-                    </span>
-                </div>
 
-                <div className="fighter-meta-entry-simple">
-                    <span className="fighter-meta-label">
-                        {'Availability: '}
-                    </span>
-                    <span className="fighter-meta-value">
-                        {'0-1'}
-                    </span>
-                </div>
+                { !playMode &&
+                    <div className="fighter-meta-entry-simple">
+                        <span className="fighter-meta-label">
+                            {'Cost: '}
+                        </span>
+                        <span className="fighter-meta-value">
+                            {fighter.FighterBaseDucats > 0 &&
+                                <>
+                                    {fighter.FighterBaseDucats + " Ducats"}
+                                </>
+                            }
+                            {fighter.FighterBaseGlory > 0 &&
+                                <>
+                                    {fighter.FighterBaseGlory + " Glory Points"}
+                                </>
+                            }
+                        </span>
+                    </div>
+                }
 
+                { !playMode &&
+                    <div className="fighter-meta-entry-simple">
+                        <span className="fighter-meta-label">
+                            {'Availability: '}
+                        </span>
+                        <span className="fighter-meta-value">
+                            {'0-1'}
+                        </span>
+                    </div>
+                }
                 <div className="fighter-meta-entry-simple">
                     <span className="fighter-meta-label">
                         {'Kewords: '}
@@ -298,14 +302,18 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
                         {'SULTANATE, ELITE'}
                     </span>
                 </div>
-                <div className="fighter-meta-entry-simple">
-                    <span className="fighter-meta-label">
-                         {'Base: '}
-                    </span>
-                    <span className="fighter-meta-value">
-                        {'32mm'}
-                    </span>
-                </div>
+
+                { !playMode &&
+                    <div className="fighter-meta-entry-simple">
+                                <span className="fighter-meta-label">
+                            {'Base: '}
+                                </span>
+                                <span className="fighter-meta-value">
+                            {'32mm'}
+                        </span>
+                    </div>
+                }
+
             </div>
 
             <div className={'fighter-card-stats'}>
