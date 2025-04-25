@@ -13,7 +13,7 @@ interface WbbAbilityCollapseProps {
 }
 
 const WbbAbilityDisplay: React.FC<WbbAbilityCollapseProps> = ({ ability }) => {
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(true);
 
     return (
         <div className="WbbAbilityDisplay">
