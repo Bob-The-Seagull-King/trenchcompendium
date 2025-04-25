@@ -224,6 +224,43 @@ class UserWarband extends DynamicContextObject {
             },
             {
                 FighterName: 'Olaf',
+                ModelName: 'Assasin',
+                ModelId: 'rl_assasin',
+                FighterBaseDucats: 85,
+                FighterBaseGlory: 0,
+                FighterTotalCostDucats: 105,
+                FighterTotalCostGlory: 0,
+                IsElite: true,
+                IsMercenary: false,
+                ExperiencePoints: 10,
+                BattleScars: 1,
+                FighterIndex: 2, // the index for sorting and getting unique item in array
+                FighterImageId: 25, // the fighter image Synod ID for testing
+                Injuries: [
+                    {
+                        Name: 'Hand Wound',
+                        Description: 'The character suffers -1 DICE for all of its melee attack ACTIONS.',
+                        InjuryId: 'in_hand_wound'
+                    }
+                ],
+                Advancements: [
+                    {
+                        Name: 'Stand Firm',
+                        Description: 'This model treats the first Down result it suffers each battle as a Minor Hit.',
+                        InjuryId: 'sk_standfirm',
+                    }
+                ],
+                Equipment: [
+                    {
+                        Name: 'Assassins Dagger',
+                        CostDucats: 30,
+                        CostGlory: 0,
+                        Type: 'Melle Weapon'
+                    }
+                ]
+            },
+            {
+                FighterName: 'Olaf',
                 ModelName: 'Azeb',
                 ModelId: 'rl_azeb',
                 FighterBaseDucats: 25,
