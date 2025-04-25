@@ -20,6 +20,7 @@ import logoLightMode from '../../resources/images/trench-companion-logo-black-v2
 // Component
 import { ControllerController } from '../../classes/_high_level_controllers/ControllerController';
 import {useGlobalState} from "../../utility/globalstate";
+import CustomNavLink from '../components/subcomponents/interactables/CustomNavLink';
 
 interface IControllerProp {
     controller : ControllerController; // The controller being passed through
@@ -40,6 +41,9 @@ const BaseHeader: React.FC<IControllerProp> = (prop: any) => {
     function NavigateHome() {
         navigate('/', {state: Date.now().toString()});
     }
+    function NavigateLogin() {
+        navigate('/login', {state: Date.now().toString()});
+    }
 
     // Return result -----------------------------
     return (
@@ -57,9 +61,15 @@ const BaseHeader: React.FC<IControllerProp> = (prop: any) => {
                     />
                 </div>
 
-                <a href={"/login"} className={'header-login-btn'}>
-                    <FontAwesomeIcon icon={faUser} className=""/>
-                </a>
+                <CustomNavLink 
+                    link={"/login"}
+                    runfunc={() => NavigateLogin()}
+                >
+                    <div  className={'header-login-btn'}>
+                        <FontAwesomeIcon icon={faUser} className=""/>
+                    </div>
+                </CustomNavLink>
+                
             </>
         </ErrorBoundary>
 
