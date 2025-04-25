@@ -37,7 +37,7 @@
             bottom: 0
             height: 100%
             width: calc(100% - 280px)
-            
+
         .fighter-image
             position: absolute
             top: 0
@@ -48,6 +48,11 @@
             height: 100%
             object-fit: contain
             object-position: bottom right
+
+        @media(max-width: 420px)
+            .fighter-image-wrap
+                width: calc(100% - 240px)
+
 
     .fighter-card-meta
         position: relative
