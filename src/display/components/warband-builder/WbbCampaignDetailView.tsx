@@ -26,11 +26,12 @@ const WbbCampaignDetailView: React.FC<WbbCampaignDetailViewProps> = ({ onClose }
 
             <div className={'detail-view-content'}>
                 {/* @TODO: add real Data here */}
-
                 <h4>Campaign Values</h4>
+
                 <div>
                     Victory Points
                 </div>
+
                 <div>
                     Notes Textarea
                 </div>

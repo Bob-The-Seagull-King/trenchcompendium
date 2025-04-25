@@ -1,36 +1,147 @@
 import React, { useState } from 'react';
 import { OverlayTrigger, Popover, Modal, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEllipsisVertical, faTrash, faCopy } from '@fortawesome/free-solid-svg-icons';
+import {faEllipsisVertical, faTrash, faCopy, faArrowUp, faArrowLeft, faCoins} from '@fortawesome/free-solid-svg-icons';
 import { usePopover } from '../../../context/PopoverContext';
 import { useWarband } from '../../../context/WarbandContext';
 
-interface ActionPopoverProps {
+interface WbbContextualPopoverProps {
     id: string;
-    type: 'fighter' | 'advancement' | 'injury';
+    type: 'fighter' | 'injury' | 'advancement' | 'modifier' | 'exploration' | 'equipment';
     item: any;
 }
 
-const WbbContextualPopover: React.FC<ActionPopoverProps> = ({ id, type, item }) => {
+const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, item }) => {
     const { activePopoverId, setActivePopoverId } = usePopover();
+    const { warband } = useWarband();
 
-    const [showConfirm, setShowConfirm] = useState(false);
     const isActive = activePopoverId === id;
 
     const handleToggle = () => {
         setActivePopoverId(isActive ? null : id);
     };
 
-    const handleCopy = () => {
-        alert(`Copy ${type}: ${item.FighterName || item.Name}`);
-        setActivePopoverId(null);
-    };
 
-    const handleDelete = () => {
+    /** Fighter Actions */
+    const [showConfirmDeleteFighterModal, setshowConfirmDeleteFighterModal] = useState(false);
+    const handleCopyFighter = () => {
+        // @TODO: Copy this fighter
+        console.log('handleCopyFighter');
+    }
+    const showConfirmDeleteFighter = () => {
+        setshowConfirmDeleteFighterModal(true);
+        console.log('showDeleteFighterConfirm');
+    }
+    const handleDeleteFighter = () => {
+        setshowConfirmDeleteFighterModal(false);
 
-        setShowConfirm(false);
-        setActivePopoverId(null);
-    };
+        // @TODO: Delete fighter from Warband
+        console.log('handleDeleteFighter');
+    }
+
+
+    /** Modifier Actions */
+    const [showConfirmDeleteModifierModal, setshowConfirmDeleteModifierModal] = useState(false);
+
+    const showConfirmDeleteModifier = () => {
+        setshowConfirmDeleteModifierModal(true);
+        console.log('setshowConfirmDeleteModifierModal');
+    }
+    const handleDeleteModifier = () => {
+        setshowConfirmDeleteModifierModal(false);
+
+        // @TODO: Delete Modifier from Warband
+        console.log('handleDeleteModifier');
+    }
+
+    /** Exploration Actions */
+    const [showConfirmDeleteExplorationModal, setshowConfirmDeleteExplorationModal] = useState(false);
+
+    const showConfirmDeleteExploration = () => {
+        setshowConfirmDeleteExplorationModal(true);
+        console.log('showConfirmDeleteExploration');
+    }
+    const handleDeleteExploration = () => {
+        setshowConfirmDeleteExplorationModal(false);
+
+        // @TODO: Delete Exploration from Warband
+        console.log('handleDeleteExploration');
+    }
+
+    /** Equipment Actions */
+    const [showConfirmDeleteEquipmentModal, setshowConfirmDeleteEquipmentModal] = useState(false);
+    const [showConfirmSellEquipmentModal, setshowConfirmSellEquipmentModal] = useState(false);
+    const [showConfirmMoveEquipmentModal, setshowConfirmMoveEquipmentModal] = useState(false);
+
+
+    const handleMoveEquipmentToStash = () => {
+        // @TODO: Move this equipment to stash
+        console.log('handleMoveEquipmentToStash');
+    }
+
+    const showConfirmMoveEquipment = () => {
+        setshowConfirmMoveEquipmentModal(true);
+        console.log('showConfirmMoveEquipment');
+    }
+
+    const handleMoveEquipment = () => { // @TODO: pass new fighter (and maybe old fighter) variable here
+        // @TODO: Move Equipment to fighter
+        setshowConfirmMoveEquipmentModal(false)
+        console.log('handleMoveEquipment');
+    }
+
+    const showConfirmSellEquipment = () => {
+        setshowConfirmSellEquipmentModal(true);
+        console.log('showConfirmSellEquipment');
+    }
+
+    const handleSellEquipment = () => {
+        // @TODO: Sell equipment
+
+        setshowConfirmSellEquipmentModal(false);
+        console.log('handleSellEquipment');
+    }
+
+    const handleCopyEquipment = () => {
+        // @TODO: Copy Equipment for this fighter
+        console.log('handleCopyEquipment');
+    }
+    const showConfirmDeleteEquipment = () => {
+        setshowConfirmDeleteEquipmentModal(true);
+        console.log('showConfirmDeleteEquipment');
+    }
+    const handleDeleteEquipment = () => {
+        setshowConfirmDeleteEquipmentModal(false);
+        // @TODO: Delete Equipment from Warband
+        console.log('handleDeleteEquipment');
+    }
+
+    /** Advancement Actions */
+    const [showConfirmDeleteAdvancementModal, setshowConfirmDeleteAdvancementModal] = useState(false);
+
+    const showConfirmDeleteAdvancement = () => {
+        setshowConfirmDeleteAdvancementModal(true);
+        console.log('showConfirmDeleteAdvancement');
+    }
+    const handleDeleteAdvancement = () => {
+        setshowConfirmDeleteAdvancementModal(false);
+        // @TODO: Delete Advancement from Warband
+        console.log('handleDeleteAdvancement');
+    }
+
+    /** Injury Actions */
+    const [showConfirmDeleteInjuryModal, setshowConfirmDeleteInjuryModal] = useState(false);
+    const showConfirmDeleteInjury = () => {
+        console.log('showConfirmDeleteInjury');
+        setshowConfirmDeleteInjuryModal(true);
+    }
+    const handleDeleteInjury = () => {
+        setshowConfirmDeleteInjuryModal(false);
+
+        // @TODO: Delete Injury from Warband
+        console.log('handleDeleteInjury');
+    }
+
 
     return (
         <>
@@ -43,34 +154,292 @@ const WbbContextualPopover: React.FC<ActionPopoverProps> = ({ id, type, item }) 
                 overlay={
                     <Popover.Body className="popover Wbb-item-actions-popover">
                         <div className="actions">
-                            <div className="action action-copy" onClick={handleCopy}>
-                                <FontAwesomeIcon icon={faCopy} className="icon-inline-left-l" />
-                                {'Copy'}
-                            </div>
-                            <div className="action action-delete" onClick={() => setShowConfirm(true)}>
-                                <FontAwesomeIcon icon={faTrash} className="icon-inline-left-l" />
-                                {'Delete'}
-                            </div>
+                            {type === 'fighter' &&
+                                <>
+                                    <div className="action action-copy" onClick={handleCopyFighter}>
+                                        <FontAwesomeIcon icon={faCopy} className="icon-inline-left-l"/>
+                                        {'Copy Fighter'}
+                                    </div>
+                                    <div className="action action-delete" onClick={showConfirmDeleteFighter}>
+                                        <FontAwesomeIcon icon={faTrash} className="icon-inline-left-l"/>
+                                        {'Delete Fighter'}
+                                    </div>
+                                </>
+                            }
+
+                            {type === 'modifier' &&
+                                <>
+                                    <div className="action action-delete" onClick={showConfirmDeleteModifier}>
+                                        <FontAwesomeIcon icon={faTrash} className="icon-inline-left-l"/>
+                                        {'Delete Modifier'}
+                                    </div>
+                                </>
+                            }
+
+                            {type === 'exploration' &&
+                                <>
+                                    <div className="action action-delete" onClick={showConfirmDeleteExploration}>
+                                        <FontAwesomeIcon icon={faTrash} className="icon-inline-left-l"/>
+                                        {'Delete Exploration'}
+                                    </div>
+                                </>
+                            }
+
+                            {type === 'equipment' &&
+                                <>
+                                    <div
+                                        className={'action action-move-to-stash'} onClick={handleMoveEquipmentToStash}
+                                    >
+                                        <FontAwesomeIcon icon={faArrowUp} className="icon-inline-left-l"/>
+                                        {'Move to Stash'}
+                                    </div>
+
+                                    <div
+                                        className={'action action-move-to-fighter'} onClick={showConfirmMoveEquipment}
+                                    >
+                                        <FontAwesomeIcon icon={faArrowLeft} className="icon-inline-left-l"/>
+                                        {'Move to Fighter'}
+                                    </div>
+
+                                    <div
+                                        className={'action action-sell'} onClick={showConfirmSellEquipment}
+                                    >
+                                        <FontAwesomeIcon icon={faCoins} className="icon-inline-left-l"/>
+                                        {'Sell Item'}
+                                    </div>
+
+                                    <div
+                                        className={'action action-copy'} onClick={handleCopyEquipment}
+                                    >
+                                        <FontAwesomeIcon icon={faCopy} className="icon-inline-left-l"/>
+                                        {'Copy Item'}
+                                    </div>
+
+                                    <div className="action action-delete" onClick={showConfirmDeleteEquipment}>
+                                        <FontAwesomeIcon icon={faTrash} className="icon-inline-left-l"/>
+                                        {'Delete Equpiment'}
+                                    </div>
+                                </>
+                            }
+
+                            {type === 'advancement' &&
+                                <>
+                                    <div className="action action-delete" onClick={showConfirmDeleteAdvancement}>
+                                        <FontAwesomeIcon icon={faTrash} className="icon-inline-left-l"/>
+                                        {'Delete Advancement'}
+                                    </div>
+                                </>
+                            }
+
+                            {type === 'injury' &&
+                                <>
+                                    <div className="action action-delete" onClick={showConfirmDeleteInjury}>
+                                        <FontAwesomeIcon icon={faTrash} className="icon-inline-left-l"/>
+                                        {'Delete Injury'}
+                                    </div>
+                                </>
+                            }
                         </div>
                     </Popover.Body>
                 }>
+
                 <div className="Wbb-item-actions" onClick={(e) => e.stopPropagation()}>
-                    <FontAwesomeIcon icon={faEllipsisVertical} />
+                    <FontAwesomeIcon icon={faEllipsisVertical}/>
                 </div>
             </OverlayTrigger>
 
-            <Modal show={showConfirm} onHide={() => setShowConfirm(false)} centered>
+            {/** Delete Fighter Confirm Modal */}
+            <Modal show={showConfirmDeleteFighterModal} onHide={() => setshowConfirmDeleteFighterModal(false)} centered>
                 <Modal.Header closeButton>
-                    <Modal.Title>Delete {type}</Modal.Title>
+                    <Modal.Title>{`Delete Fighter`}</Modal.Title>
                 </Modal.Header>
+
                 <Modal.Body>
-                    Are you sure you want to delete <strong>{item.FighterName || item.Name}</strong>?
+                    {'Are you sure you want to delete '}
+                    <strong>{item.ModelName + ' - ' + item.FighterName}</strong>?
                 </Modal.Body>
+
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={() => setShowConfirm(false)}>
+                    <Button variant="secondary" onClick={() => setshowConfirmDeleteFighterModal(false)}>
                         Cancel
                     </Button>
-                    <Button variant="danger" onClick={handleDelete}>
+                    <Button variant="danger" onClick={handleDeleteFighter}>
+                        Delete
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+            {/** Delete Modifier Confirm Modal */}
+            <Modal show={showConfirmDeleteModifierModal} onHide={() => setshowConfirmDeleteModifierModal(false)} centered>
+                <Modal.Header closeButton>
+                    <Modal.Title>{`Delete Modifier`}</Modal.Title>
+                </Modal.Header>
+
+                <Modal.Body>
+                    <div className={'mb-3'}>
+                        {'Are you sure you want to delete this modifier?'}
+                    </div>
+                    <div >
+                        <strong>{item.Name }</strong>?
+                    </div>
+                </Modal.Body>
+
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={() => setshowConfirmDeleteModifierModal(false)}>
+                        Cancel
+                    </Button>
+                    <Button variant="danger" onClick={handleDeleteModifier}>
+                        Delete
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+            {/** Delete Exploration Confirm Modal */}
+            <Modal show={showConfirmDeleteExplorationModal} onHide={() => setshowConfirmDeleteExplorationModal(false)} centered>
+                <Modal.Header closeButton>
+                    <Modal.Title>{`Delete Exploration`}</Modal.Title>
+                </Modal.Header>
+
+                <Modal.Body>
+                    <div className={'mb-3'}>
+                        {'Are you sure you want to delete this Exploration?'}
+                    </div>
+                    <div >
+                        <strong>{item.Name }</strong>?
+                    </div>
+                </Modal.Body>
+
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={() => setshowConfirmDeleteExplorationModal(false)}>
+                        Cancel
+                    </Button>
+                    <Button variant="danger" onClick={handleDeleteExploration}>
+                        Delete
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+            {/** Delete Equipment Confirm Modal */}
+            <Modal show={showConfirmDeleteEquipmentModal} onHide={() => setshowConfirmDeleteEquipmentModal(false)} centered>
+                <Modal.Header closeButton>
+                    <Modal.Title>{`Delete Equipment`}</Modal.Title>
+                </Modal.Header>
+
+                <Modal.Body>
+                    <div className={'mb-3'}>
+                        {'Are you sure you want to delete this Equipment?'}
+                    </div>
+                    <div >
+                        <strong>{item.Name }</strong>?
+                    </div>
+                </Modal.Body>
+
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={() => setshowConfirmDeleteEquipmentModal(false)}>
+                        Cancel
+                    </Button>
+                    <Button variant="danger" onClick={handleDeleteEquipment}>
+                        Delete
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+            {/** Sell Equipment Confirm Modal */}
+            <Modal show={showConfirmSellEquipmentModal} onHide={() => setshowConfirmSellEquipmentModal(false)} centered>
+                <Modal.Header closeButton>
+                    <Modal.Title>{`Sell Equipment`}</Modal.Title>
+                </Modal.Header>
+
+                <Modal.Body>
+                    <div className={'mb-3'}>
+                        {'Are you sure you want to sell this Equipment?'}
+                    </div>
+                    <div >
+                        <strong>{item.Name }</strong>?
+                    </div>
+                </Modal.Body>
+
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={() => setshowConfirmSellEquipmentModal(false)}>
+                        Cancel
+                    </Button>
+                    <Button variant="primary" onClick={handleSellEquipment}>
+                        Sell Equipment
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+            {/** Move Equipment to Fighter Confirm Modal */}
+            <Modal show={showConfirmMoveEquipmentModal} onHide={() => setshowConfirmMoveEquipmentModal(false)} centered>
+                <Modal.Header closeButton>
+                    <Modal.Title>{`Move Equipment to Fighter`}</Modal.Title>
+                </Modal.Header>
+
+                <Modal.Body>
+                    <div className={'mb-3'}>
+                        {/* @TODO: add options to move equipment here*/}
+                        {'Are you sure you want to Move this Equipment?'}
+                    </div>
+                    <div >
+                        <strong>{item.Name }</strong>?
+                    </div>
+                </Modal.Body>
+
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={() => setshowConfirmMoveEquipmentModal(false)}>
+                        Cancel
+                    </Button>
+                    <Button variant="primary" onClick={handleMoveEquipment}>
+                        Move Equipment
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+            {/** Delete Advancement Confirm Modal */}
+            <Modal show={showConfirmDeleteAdvancementModal} onHide={() => setshowConfirmDeleteAdvancementModal(false)} centered>
+                <Modal.Header closeButton>
+                    <Modal.Title>{`Delete Advancement`}</Modal.Title>
+                </Modal.Header>
+
+                <Modal.Body>
+                    <div className={'mb-3'}>
+                        {'Are you sure you want to delete this Advancement?'}
+                    </div>
+                    <div >
+                        <strong>{item.Name }</strong>?
+                    </div>
+                </Modal.Body>
+
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={() => setshowConfirmDeleteAdvancementModal(false)}>
+                        Cancel
+                    </Button>
+                    <Button variant="danger" onClick={handleDeleteAdvancement}>
+                        Delete
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+            {/** Delete Injury Confirm Modal */}
+            <Modal show={showConfirmDeleteInjuryModal} onHide={() => setshowConfirmDeleteInjuryModal(false)} centered>
+                <Modal.Header closeButton>
+                    <Modal.Title>{`Delete Injury`}</Modal.Title>
+                </Modal.Header>
+
+                <Modal.Body>
+                    <div className={'mb-3'}>
+                        {'Are you sure you want to delete this Injury?'}
+                    </div>
+                    <div >
+                        <strong>{item.Name }</strong>?
+                    </div>
+                </Modal.Body>
+
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={() => setshowConfirmDeleteInjuryModal(false)}>
+                        Cancel
+                    </Button>
+                    <Button variant="danger" onClick={handleDeleteInjury}>
                         Delete
                     </Button>
                 </Modal.Footer>

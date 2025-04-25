@@ -2,6 +2,7 @@ import React from 'react';
 import {OverlayTrigger, Popover} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCopy, faEllipsisVertical, faTrash} from "@fortawesome/free-solid-svg-icons";
+import WbbContextualPopover from "./WbbContextualPopover";
 
 interface Injury {
     Name: string,
@@ -12,6 +13,7 @@ interface Injury {
 }
 
 const WbbEditViewInjury: React.FC<{ injury: Injury }> = ({ injury }) => {
+
     return (
         <div className="WbbEditViewInjury">
             <div className="injury-title">
@@ -26,29 +28,11 @@ const WbbEditViewInjury: React.FC<{ injury: Injury }> = ({ injury }) => {
                 {injury.Description}
             </div>
 
-            <div className={'actions'}>
-                <OverlayTrigger
-                    trigger="click"
-                    placement="left"
-                    rootClose={true}
-                    overlay={
-                        <Popover.Body className="popover Wbb-item-actions-popover">
-                            <div className={'actions'}>
-                                <div
-                                    className={'action action-delete'}
-                                >
-                                    <FontAwesomeIcon icon={faTrash} className="icon-inline-left-l"/>
-                                    {'Delete Injury'}
-                                </div>
-                            </div>
-                        </Popover.Body>
-                    }>
-                    <div className={'Wbb-item-actions'}
-                         onClick={(e) => e.stopPropagation()}>
-                        <FontAwesomeIcon icon={faEllipsisVertical} className=""/>
-                    </div>
-                </OverlayTrigger>
-            </div>
+            <WbbContextualPopover
+                id={`injury-${injury.Id}`}
+                type="injury"
+                item={injury}
+            />
         </div>
     );
 };

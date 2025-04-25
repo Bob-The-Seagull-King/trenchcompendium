@@ -10,6 +10,7 @@ import {
     faTrash,
     faXmark
 } from "@fortawesome/free-solid-svg-icons";
+import WbbContextualPopover from "./WbbContextualPopover";
 
 interface EquipmentItemProps {
     item: {
@@ -42,64 +43,11 @@ const WbbEquipmentListItem: React.FC<EquipmentItemProps> = ({ item }) => {
                 {item.ModifiersString}
             </div>
 
-            <div className={'actions'}>
-                <OverlayTrigger
-                    trigger="click"
-                    placement="left"
-                    rootClose={true}
-                    overlay={
-                        <Popover.Body className="popover Wbb-item-actions-popover">
-                            <div className={'actions'}>
-
-                                {/* @TODO: Move to stash */}
-                                <div
-                                    className={'action action-move-to-stash'}
-                                >
-                                    <FontAwesomeIcon icon={faArrowUp} className="icon-inline-left-l"/>
-                                    {'Move to Stash'}
-                                </div>
-
-
-                                {/* @TODO: Move to fighter */}
-                                <div
-                                    className={'action action-move-to-fighter'}
-                                >
-                                    <FontAwesomeIcon icon={faArrowLeft} className="icon-inline-left-l"/>
-                                    {'Move to Fighter'}
-                                </div>
-
-                                {/* @TODO: Sell item */}
-                                <div
-                                    className={'action action-sell'}
-                                >
-                                    <FontAwesomeIcon icon={faCoins} className="icon-inline-left-l"/>
-                                    {'Sell Item'}
-                                </div>
-
-                                {/* @TODO: Copy Item*/}
-                                <div
-                                    className={'action action-copy'}
-                                >
-                                    <FontAwesomeIcon icon={faCopy} className="icon-inline-left-l"/>
-                                    {'Copy Item'}
-                                </div>
-
-                                {/* @TODO: Delete Item */}
-                                <div
-                                    className={'action action-delete'}
-                                >
-                                    <FontAwesomeIcon icon={faTrash} className="icon-inline-left-l"/>
-                                    {'Delete  Item'}
-                                </div>
-                            </div>
-                        </Popover.Body>
-                    }>
-                    <div className={'Wbb-item-actions'}
-                         onClick={(e) => e.stopPropagation()}>
-                        <FontAwesomeIcon icon={faEllipsisVertical} className=""/>
-                    </div>
-                </OverlayTrigger>
-            </div>
+            <WbbContextualPopover
+                id={`equipment-${item.Id}`}
+                type="equipment"
+                item={item}
+            />
         </div>
     );
 };
