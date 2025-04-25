@@ -57,6 +57,15 @@
 
         // testing full screen images
         .fighter-image-wrap.full
+            &:before
+                content: ""
+                display: block
+                position: absolute
+                z-index: 2
+                width: 50px
+                height: 100%
+                background: linear-gradient(90deg,rgba(51, 51, 51, 1) 0%, rgba(51, 51, 51, 0) 100%)
+
             .fighter-image
                 object-fit: cover
                 object-position: top left

@@ -249,7 +249,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
 
             <div className={'fighter-card-main-area'}>
                 {fighter.FighterImageId > 0 &&
-                    <div className={`fighter-image-wrap ${fighter.FighterImageId === 25 ? 'full' : ''}`}>
+                    <div className={`fighter-image-wrap ${fighter.FighterImageId === 26 ? 'full' : ''}`}>
                         <SynodImage
                             imageId={fighter.FighterImageId}
                             className={'fighter-image'}
