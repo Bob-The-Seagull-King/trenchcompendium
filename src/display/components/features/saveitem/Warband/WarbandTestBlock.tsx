@@ -35,6 +35,7 @@ const WarbandTestBlock = (prop: any) => {
                     id: "null_test",
                     limit_ducat: 0,
                     limit_model: 0,
+                    limit_glory: 0,
                     value_ducat: 0,
                     value_glory: 0
                 })

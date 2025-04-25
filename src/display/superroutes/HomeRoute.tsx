@@ -45,18 +45,7 @@ const HomeRoute: React.FC = () => {
 
 
 
-                    {/* Testing Links */}
-                    <div className={'row'}>
-                        <div className={'col-6 col-md-4 pt-3 pb-3'}>
-                            <a href={"/login"} className={'btn btn-primary btn-block'}>
-                                Login
-                            </a>
-                        </div>
-                    </div>
-                    {/*<div className={'col-12 col-md-6'}>*/}
-                    {/*    <MenuOutLink title={"Support The App"} link={"https://www.patreon.com/bobtheseagullking/"} />*/}
-                    {/*</div>*/}
-                    {/*</div>*/}
+                    
                 </div>
 
 

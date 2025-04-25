@@ -19,7 +19,8 @@ const WbbCreateNewDetailsForm: React.FC<{
         const msg : null | UserWarband = await manager.NewItem(warbandName, chosenfaction.ID, {
             id : "null",
             limit_ducat: ducatsLimit,
-            limit_model: gloryLimit,
+            limit_glory: gloryLimit,
+            limit_model: 0,
             value_ducat: ducatsLimit,
             value_glory: gloryLimit
         })

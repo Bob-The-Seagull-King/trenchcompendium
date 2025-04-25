@@ -123,26 +123,21 @@ class UserWarband extends DynamicContextObject {
     }
 
 
-    /** @TODO
+    /**
      * Returns the Name of the Warband as string
      */
     public GetWarbandName () {
-        if( typeof(this.Name) === 'undefined' ) {
+        if( this.Name == undefined ) {
             return '';
         }
-
         return this.Name;
     }
 
-    /** @TODO
+    /**
      * Returns the Name of the Faction as string
      */
     public GetFactionName () {
-        if( typeof(this.Faction.Name) === 'undefined' ) {
-            return '';
-        }
-
-        return this.Faction.Name;
+        return this.Faction.GetSelfName();
     }
 
     /** @TODO
@@ -156,7 +151,7 @@ class UserWarband extends DynamicContextObject {
      * Returns the Max Ducats Value of the Warband int
      */
     public GetMaxDucats() {
-        return this.Ducats;
+        return this.Context.LimitDucat;
     }
 
     /** @TODO
@@ -170,7 +165,7 @@ class UserWarband extends DynamicContextObject {
      * Returns the Max Glory Value of the Warband int
      */
     public GetMaxGlory() {
-        return this.Glory;
+        return this.Context.LimitGlory;
     }
 
 

@@ -58,7 +58,7 @@ const App: React.FC = () => {
                                 <Route path={ROUTES.HOME_ROUTE} element={<HomeRoute />} />
                                 <Route path={ROUTES.COMPENDIUM_ROUTE} element={<CompendiumRoute controller={compendiumcontroller} />} />
                                 <Route path={ROUTES.WARBAND_ROUTE} element={<WarbandRoute controller={toolcontroller} />} />
-                                <Route path="/login" element={<SynodLoginPage />} /> {/* New login route */}
+                                <Route path={ROUTES.LOGIN_ROUTE} element={<SynodLoginPage />} /> {/* New login route */}
 
                             </Routes>
                         </Router>
