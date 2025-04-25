@@ -28,6 +28,7 @@ import WbbOptionItem from "./WbbOptionItem";
 import WbbAbilityDisplay from "./WbbAbilityDisplay";
 import {OverlayTrigger, Popover} from "react-bootstrap";
 import {usePlayMode} from "../../../context/PlayModeContext";
+import SynodImage from "../../../utility/SynodImage";
 
 
 interface WbbFighterDetailViewProps {
@@ -246,82 +247,95 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
                 </div>
             </div>
 
-            <div className="fighter-card-meta fighter-card-meta-above">
-                <div className="fighter-meta-entry-simple">
-                    <span className="fighter-meta-label">
-                        {'Name: '}
-                    </span>
-                    <span className="fighter-meta-value">
-                        {fighter.FighterName}
-                    </span>
-                </div>
-                <div className="fighter-meta-entry-simple">
-                    <span className="fighter-meta-label">
-                        {'Type: '}
-                    </span>
-                    <span className="fighter-meta-value">
-                        {fighter.ModelName}
-                    </span>
-                </div>
+            <div className={'fighter-card-main-area'}>
+                {fighter.FighterImageId > 0 &&
+                    <div className={'fighter-image-wrap'}>
+                        <SynodImage
+                            imageId={fighter.FighterImageId}
+                            className={'fighter-image'}
+                            size={'large'}
+                        />
+                    </div>
+                }
 
-                { !playMode &&
+                <div className="fighter-card-meta fighter-card-meta-above">
                     <div className="fighter-meta-entry-simple">
                         <span className="fighter-meta-label">
-                            {'Cost: '}
+                            {'Name: '}
                         </span>
                         <span className="fighter-meta-value">
-                            {fighter.FighterBaseDucats > 0 &&
-                                <>
-                                    {fighter.FighterBaseDucats + " Ducats"}
-                                </>
-                            }
-                            {fighter.FighterBaseGlory > 0 &&
-                                <>
-                                    {fighter.FighterBaseGlory + " Glory Points"}
-                                </>
-                            }
+                            {fighter.FighterName}
                         </span>
                     </div>
-                }
-
-                { !playMode &&
                     <div className="fighter-meta-entry-simple">
                         <span className="fighter-meta-label">
-                            {'Availability: '}
+                            {'Type: '}
                         </span>
                         <span className="fighter-meta-value">
-                            {'0-1'}
+                            {fighter.ModelName}
                         </span>
                     </div>
-                }
-                <div className="fighter-meta-entry-simple">
-                    <span className="fighter-meta-label">
-                        {'Kewords: '}
-                    </span>
-                    <span className="fighter-meta-value">
-                        {'SULTANATE, ELITE'}
-                    </span>
+
+                    { !playMode &&
+                        <div className="fighter-meta-entry-simple">
+                            <span className="fighter-meta-label">
+                                {'Cost: '}
+                            </span>
+                            <span className="fighter-meta-value">
+                                {fighter.FighterBaseDucats > 0 &&
+                                    <>
+                                        {fighter.FighterBaseDucats + " Ducats"}
+                                    </>
+                                }
+                                {fighter.FighterBaseGlory > 0 &&
+                                    <>
+                                        {fighter.FighterBaseGlory + " Glory Points"}
+                                    </>
+                                }
+                            </span>
+                        </div>
+                    }
+
+                    { !playMode &&
+                        <div className="fighter-meta-entry-simple">
+                            <span className="fighter-meta-label">
+                                {'Availability: '}
+                            </span>
+                            <span className="fighter-meta-value">
+                                {'0-1'}
+                            </span>
+                        </div>
+                    }
+                    <div className="fighter-meta-entry-simple">
+                        <span className="fighter-meta-label">
+                            {'Kewords: '}
+                        </span>
+                        <span className="fighter-meta-value">
+                            {'SULTANATE, ELITE'}
+                        </span>
+                    </div>
+
+                    { !playMode &&
+                        <div className="fighter-meta-entry-simple">
+                                    <span className="fighter-meta-label">
+                                {'Base: '}
+                                    </span>
+                                    <span className="fighter-meta-value">
+                                {'32mm'}
+                            </span>
+                        </div>
+                    }
+
                 </div>
 
-                { !playMode &&
-                    <div className="fighter-meta-entry-simple">
-                                <span className="fighter-meta-label">
-                            {'Base: '}
-                                </span>
-                                <span className="fighter-meta-value">
-                            {'32mm'}
-                        </span>
-                    </div>
-                }
-
+                <div className={'fighter-card-stats'}>
+                    <ItemStat title={"Movement"} value={'6" / Infantry'}/>
+                    <ItemStat title={"Melee"} value={'+1'}/>
+                    <ItemStat title={"Ranged"} value={'+2'}/>
+                    <ItemStat title={"Armor"} value={'0'}/>
+                </div>
             </div>
 
-            <div className={'fighter-card-stats'}>
-                <ItemStat title={"Movement"} value={'6" / Infantry'}/>
-                <ItemStat title={"Melee"} value={'+1'}/>
-                <ItemStat title={"Ranged"} value={'+2'}/>
-                <ItemStat title={"Armor"} value={'0'}/>
-            </div>
 
             {/* Edit Loadout */}
             {!playMode &&

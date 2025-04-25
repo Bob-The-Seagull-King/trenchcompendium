@@ -11,7 +11,7 @@
 
 
     .title
-        margin: 0 -15px 15px
+        margin: 0 -15px 0px
 
 
         .fighter-name
@@ -24,8 +24,34 @@
             right: 0
             bottom: 0
             line-height: 53px
+    .fighter-card-main-area
+        position: relative
+        margin: 0 -15px
+        padding: 15px
+
+        .fighter-image-wrap
+            position: absolute
+            z-index: 1
+            top: 0
+            right: 0
+            bottom: 0
+            height: 100%
+            width: calc(100% - 280px)
+            
+        .fighter-image
+            position: absolute
+            top: 0
+            right: 0
+            bottom: 0
+            z-index: 1
+            width: 100%
+            height: 100%
+            object-fit: contain
+            object-position: bottom right
 
     .fighter-card-meta
+        position: relative
+        z-index: 5
         padding: 0
 
     &.play-mode
@@ -34,7 +60,10 @@
             margin-bottom: 30px
 
     .fighter-card-stats
+        position: relative
+        z-index: 5
         padding: 0
+        margin-bottom: 0
 
     &.play-mode
         .fighter-card-stats
