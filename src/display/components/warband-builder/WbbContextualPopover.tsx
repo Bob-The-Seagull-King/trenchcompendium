@@ -1,7 +1,15 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import { OverlayTrigger, Popover, Modal, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faEllipsisVertical, faTrash, faCopy, faArrowUp, faArrowLeft, faCoins} from '@fortawesome/free-solid-svg-icons';
+import {
+    faEllipsisVertical,
+    faTrash,
+    faCopy,
+    faArrowUp,
+    faArrowLeft,
+    faCoins,
+    faEdit
+} from '@fortawesome/free-solid-svg-icons';
 import { usePopover } from '../../../context/PopoverContext';
 import { useWarband } from '../../../context/WarbandContext';
 
@@ -22,8 +30,22 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
     };
 
 
+
+
     /** Fighter Actions */
     const [showConfirmDeleteFighterModal, setshowConfirmDeleteFighterModal] = useState(false);
+    const [showConfirmRenameFighterModal, setshowConfirmRenameFighterModal] = useState(false);
+    const showConfirmRenameFighter = () => {
+        setshowConfirmRenameFighterModal(true);
+        console.log('showRenameFighterConfirm');
+    }
+    const handleRenameFighter = () => {
+        setshowConfirmRenameFighterModal(false);
+
+        // @TODO: Rename fighter from Warband
+        console.log('handleRenameFighter');
+    }
+
     const handleCopyFighter = () => {
         // @TODO: Copy this fighter
         console.log('handleCopyFighter');
@@ -142,7 +164,31 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
         console.log('handleDeleteInjury');
     }
 
-
+    /** Hides popover when a modal is opened */
+    useEffect(() => {
+        if (showConfirmDeleteFighterModal
+            || showConfirmRenameFighterModal
+            || showConfirmDeleteModifierModal
+            || showConfirmDeleteExplorationModal
+            || showConfirmDeleteEquipmentModal
+            || showConfirmSellEquipmentModal
+            || showConfirmMoveEquipmentModal
+            || showConfirmDeleteAdvancementModal
+            || showConfirmDeleteInjuryModal
+        ) {
+            setActivePopoverId(null);
+        }
+    }, [
+        showConfirmDeleteFighterModal,
+        showConfirmRenameFighterModal,
+        showConfirmDeleteModifierModal,
+        showConfirmDeleteExplorationModal,
+        showConfirmDeleteEquipmentModal,
+        showConfirmSellEquipmentModal,
+        showConfirmMoveEquipmentModal,
+        showConfirmDeleteAdvancementModal,
+        showConfirmDeleteInjuryModal
+    ]);
     return (
         <>
             <OverlayTrigger
@@ -156,6 +202,10 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                         <div className="actions">
                             {type === 'fighter' &&
                                 <>
+                                    <div className="action action-copy" onClick={showConfirmRenameFighter}>
+                                        <FontAwesomeIcon icon={faEdit} className="icon-inline-left-l"/>
+                                        {'Rename Fighter'}
+                                    </div>
                                     <div className="action action-copy" onClick={handleCopyFighter}>
                                         <FontAwesomeIcon icon={faCopy} className="icon-inline-left-l"/>
                                         {'Copy Fighter'}
@@ -265,6 +315,32 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                     </Button>
                     <Button variant="danger" onClick={handleDeleteFighter}>
                         Delete
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+            {/** Rename Fighter Confirm Modal */}
+            <Modal show={showConfirmRenameFighterModal} onHide={() => setshowConfirmRenameFighterModal(false)} centered>
+                <Modal.Header closeButton>
+                    <Modal.Title>{`Rename Fighter`}</Modal.Title>
+                </Modal.Header>
+
+                <Modal.Body>
+                    <div className="mb-3">
+                        <label className="form-label">Fighter Name</label>
+                        <input type="text" className="form-control"
+                            placeholder="Fighter Name"
+                           value={item.FighterName}
+                        />
+                    </div>
+                </Modal.Body>
+
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={() => setshowConfirmRenameFighterModal(false)}>
+                        Cancel
+                    </Button>
+                    <Button variant="primary" onClick={handleRenameFighter}>
+                        Rename
                     </Button>
                 </Modal.Footer>
             </Modal>
