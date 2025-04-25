@@ -72,12 +72,7 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
         }
     }, [location.search, warband]);
 
-    // will check which popover is active to only have 1 open at the same time
-    const [activePopoverId, setActivePopoverId] = useState<string | null>(null);
-
     //** Start Detail view stuff
-
-    // v2
     type DetailType = 'fighter' | 'stash' | 'warband' | 'campaign' | null;
 
     const [detailType, setDetailType] = useState<DetailType>(null);

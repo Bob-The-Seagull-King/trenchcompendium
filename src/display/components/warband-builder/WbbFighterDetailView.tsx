@@ -235,39 +235,6 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
                         </>
                     }
                 </div>
-
-                {/*<OverlayTrigger*/}
-                {/*    trigger="click"*/}
-                {/*    placement="left"*/}
-                {/*    show={showPopover}*/}
-                {/*    onToggle={togglePopover}*/}
-                {/*    rootClose={true}*/}
-                {/*    overlay={*/}
-                {/*        <Popover.Body className="popover Wbb-item-actions-popover">*/}
-                {/*            <div className={'actions'}>*/}
-                {/*                <div*/}
-                {/*                    className={'action action-copy'}*/}
-                {/*                    onClick={handleCopy}*/}
-                {/*                >*/}
-                {/*                    <FontAwesomeIcon icon={faCopy} className="icon-inline-left-l"/>*/}
-                {/*                    {'Copy Fighter'}*/}
-                {/*                </div>*/}
-
-                {/*                <div*/}
-                {/*                    className={'action action-delete'}*/}
-                {/*                    onClick={handleDeleteClick}*/}
-                {/*                >*/}
-                {/*                    <FontAwesomeIcon icon={faTrash} className="icon-inline-left-l"/>*/}
-                {/*                    {'Delete Fighter'}*/}
-                {/*                </div>*/}
-                {/*            </div>*/}
-                {/*        </Popover.Body>*/}
-                {/*    }>*/}
-                {/*    <div className={'Wbb-item-actions'}*/}
-                {/*         onClick={(e) => e.stopPropagation()}>*/}
-                {/*        <FontAwesomeIcon icon={faEllipsisVertical} className=""/>*/}
-                {/*    </div>*/}
-                {/*</OverlayTrigger>*/}
             </div>
 
             <div className="fighter-card-meta fighter-card-meta-above">

@@ -34,47 +34,6 @@ interface WbbEditViewFighterProps {
 }
 const WbbEditViewFighter: React.FC<WbbEditViewFighterProps> = ({ item, index, onClick, isActive }) => {
 
-    // const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
-    //
-    // const showPopover = activePopoverId === item.ModelId + index;
-    // const togglePopover = () => {
-    //     setActivePopoverId(showPopover ? null : item.ModelId + index);
-    // };
-    //
-    // /**
-    //  * @TODO
-    //  * This copies the fighter
-    //  */
-    // const handleCopy = () => {
-    //     setActivePopoverId(null);
-    //     alert('copy this item');
-    //
-    //     return true;
-    // };
-    //
-    // /**
-    //  * Opens the delete confirmation modal
-    //  */
-    // const handleDeleteClick = () => {
-    //     setActivePopoverId(null);
-    //     setShowDeleteConfirm(true);
-    // };
-    //
-    // /**
-    //  * @TODO:
-    //  * Handles the confirmation to actually delete the fighter.
-    //  */
-    // const handleConfirmDelete = () => {
-    //     setShowDeleteConfirm(false);
-    //     alert('item deleted (backend hook here)');
-    // };
-    //
-    // /**
-    //  * Closes the confirmation modal
-    //  */
-    // const handleCancelDelete = () => {
-    //     setShowDeleteConfirm(false);
-    // };
 
     return (
         <div className={`WbbEditViewFighter ${isActive ? 'active' : ''}`} onClick={onClick}>
