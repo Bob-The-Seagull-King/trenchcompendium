@@ -3,6 +3,7 @@ export const ROUTES = {
     COMPENDIUM_ROUTE: '/compendium/*',
     WARBAND_ROUTE: '/warband/*',
     HOME_ROUTE: '*',
+    LOGIN_ROUTE: '/login/*',
 
     // Compendium Routes //
 
