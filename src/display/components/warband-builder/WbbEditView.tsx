@@ -225,7 +225,7 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                                 }
 
 
-                                { (!playMode && warband.HasMercenaries()) &&
+                                { (!playMode || warband.HasMercenaries()) &&
                                     <>
                                         {/* Warband Mercenaries */}
                                         <h3 className={'category-headline'}>Mercenaries</h3>
