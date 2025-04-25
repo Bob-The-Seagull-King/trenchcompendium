@@ -171,6 +171,16 @@ class WarbandFaction extends DynamicContextObject {
         }
     }
 
+    public GetSelfName() {
+        if (this.MyFaction != undefined) {
+            if (this.MyFaction.SelfDynamicProperty.OptionChoice.Name) {
+                return this.MyFaction.SelfDynamicProperty.OptionChoice.Name
+            }
+        }
+
+        return '';
+    }
+
 
 }
 
