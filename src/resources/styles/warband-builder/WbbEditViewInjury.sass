@@ -10,12 +10,13 @@
     background-color: $bg-color-card-2-el
     border-bottom: 1px solid $bg-color-card-2-el-border
 
-    .injury-description
-        margin-top: 5px
-        white-space: nowrap
-        width: 100%
-        overflow: hidden
-        text-overflow: ellipsis
+    &:not(.play-mode)
+        .injury-description
+            margin-top: 5px
+            white-space: nowrap
+            width: 100%
+            overflow: hidden
+            text-overflow: ellipsis
 
     .actions
         position: absolute
@@ -26,3 +27,19 @@
         align-items: center
         padding: 5px 12px
         font-size: 16px
+
+    &.play-mode
+        padding: 0
+        background-color: transparent
+        border-bottom: 1px solid $bg-color-card-2-el-border
+        margin-bottom: 15px
+
+        .injury-title
+            padding: 0 15px
+            height: 44px
+            line-height: 44px
+            background-color: $bg-color-card-2-el
+
+        .injury-description
+            background-color: $bg-color-card-3
+            padding: 15px

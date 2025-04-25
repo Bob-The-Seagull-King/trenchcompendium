@@ -27,6 +27,7 @@ import WbbEditFighterStatus from "./modals/fighter/WbbEditFighterStatus";
 import WbbOptionItem from "./WbbOptionItem";
 import WbbAbilityDisplay from "./WbbAbilityDisplay";
 import {OverlayTrigger, Popover} from "react-bootstrap";
+import {usePlayMode} from "../../../context/PlayModeContext";
 
 
 interface WbbFighterDetailViewProps {
@@ -136,10 +137,11 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
     ]
     // end Test Data ***
 
+    const { playMode } = usePlayMode();
+
     /**
      * Equipment Modals
      */
-
     // Ranged Weapons
     const [showAddRangedWeapon, setShowAddRangedWeapon] = useState(false);
     const handleAddRangedWeapon = (weapon: { id: string; name: string }) => {
@@ -208,7 +210,8 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
     };
 
     return (
-        <div className="WbbDetailView WbbFighterDetailView fighter-card">
+
+        <div className={`WbbDetailView WbbFighterDetailView fighter-card ${playMode ? 'play-mode' : ''}`}>
             <div className={'title'}>
                 <div className={'title-back'} onClick={onClose}>
                     <FontAwesomeIcon icon={faChevronLeft} className=""/>
@@ -307,244 +310,302 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
             </div>
 
             {/* Edit Loadout */}
-            <div className={'fighter-card-collapse-wrap'}>
-                <WbbFighterCollapse title="Equipment" initiallyOpen={true}>
-                    <p> {/* Equipment Rules */}
-                        <strong>Equipment: </strong>
-                        {'The Alchemist can be equipped with any weapon, armour and equipment from the Iron Sultanate Armoury'}
-                    </p>
+            {!playMode &&
+                <div className={'fighter-card-collapse-wrap'}>
+                    <WbbFighterCollapse title="Equipment" initiallyOpen={true}>
+                        <p> {/* Equipment Rules */}
+                            <strong>Equipment: </strong>
+                            {'The Alchemist can be equipped with any weapon, armour and equipment from the Iron Sultanate Armoury'}
+                        </p>
 
-                    {/* Bool Upgrades */}
-                    {BoolOptions.length > 0 &&
-                        <>
-                            <h3>{'Upgrades'}</h3>
-                            {BoolOptions.map((option, index) => (
-                                <WbbOptionItem key={index} option={option} />
-                            ))}
-                        </>
-                    }
+                        {/* Bool Upgrades */}
+                        {BoolOptions.length > 0 &&
+                            <>
+                                <h3>{'Upgrades'}</h3>
+                                {BoolOptions.map((option, index) => (
+                                    <WbbOptionItem key={index} option={option}/>
+                                ))}
+                            </>
+                        }
 
-                    {/* Goetic Powers */}
-                    {GoeticPowers.length > 0 &&
-                        <>
-                            <h3>{'Goetic Powers'}</h3>
-                            {GoeticPowers.map((option, index) => (
-                                <WbbOptionItem key={index} option={option} />
-                            ))}
-                        </>
-                    }
+                        {/* Goetic Powers */}
+                        {GoeticPowers.length > 0 &&
+                            <>
+                                <h3>{'Goetic Powers'}</h3>
+                                {GoeticPowers.map((option, index) => (
+                                    <WbbOptionItem key={index} option={option}/>
+                                ))}
+                            </>
+                        }
 
-                    {/* Ranged Weapons */}
+                        {/* Ranged Weapons */}
+                        <h3>{'Ranged Weapons'}</h3>
+                        {/* @TODO: For each Item */}
+                        <WbbEquipmentListItem
+                            item={item_siege_jezzail}
+                        />
+                        <div className={'btn btn-add-element btn-block'}
+                             onClick={() => setShowAddRangedWeapon(true)}>
+                            <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
+                            {'Add Ranged Weapon'}
+                        </div>
+
+                        {/* Melee Weapons */}
+                        <h3>{'Melee Weapons'}</h3>
+                        {/* @TODO: For each Item */}
+                        <WbbEquipmentListItem
+                            item={item_trench_knife}
+                        />
+                        <div className={'btn btn-add-element btn-block'}
+                             onClick={() => setShowMeleeWeaponModal(true)}>
+                            <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
+                            {'Add Melee Weapon'}
+                        </div>
+
+                        {/* Equipment */}
+                        <h3>{'Equipment'}</h3>
+                        {/* @TODO: For each Item */}
+                        <WbbEquipmentListItem
+                            item={item_alch_ammo}
+                        />
+                        <div className={'btn btn-add-element btn-block'}
+                             onClick={() => setShowAddEquipmentModal(true)}>
+                            <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
+                            {'Add Equipment'}
+                        </div>
+
+                        {/* Equipment Modals */}
+                        <WbbModalAddRangedWeapon
+                            show={showAddRangedWeapon}
+                            onClose={() => setShowAddRangedWeapon(false)}
+                            onSubmit={handleAddRangedWeapon}
+                        />
+                        <WbbModalAddMeleeWeapon
+                            show={showMeleeWeaponModal}
+                            onClose={() => setShowMeleeWeaponModal(false)}
+                            onSubmit={handleAddMeleeWeapon}
+                        />
+                        <WbbModalAddEquipment
+                            show={showAddEquipmentModal}
+                            onClose={() => setShowAddEquipmentModal(false)}
+                            onSubmit={handleAddEquipment}
+                        />
+                    </WbbFighterCollapse>
+                </div>
+            }
+
+
+            {/* Edit Campaign Play */}
+
+            {!playMode &&
+                <div className={'fighter-card-collapse-wrap'}>
+                    <WbbFighterCollapse title="Campaign Play">
+
+                        {/* Experience */}
+                        {fighter.IsElite &&
+                            <div className={'experience'}>
+                                <h3>{'Experience'}</h3>
+
+                                <div className={'btn btn-primary btn-sm edit-xp-btn'}
+                                     onClick={() => setShowXPModal(true)}>
+                                    <FontAwesomeIcon icon={faPen} className="icon-inline-left-l"/>
+                                    {'Edit'}
+                                </div>
+
+                                <div className={'xp-boxes'} onClick={() => setShowXPModal(true)}>
+                                    {Array.from({length: 18}, (_, i) => {
+                                        const level = i + 1;
+                                        const isBold = boldXpIndices.includes(level);
+                                        const hasXP = level <= fighter.ExperiencePoints;
+
+                                        return (
+                                            <div
+                                                key={level}
+                                                className={`xp-box${isBold ? ' xp-box-bold' : ''}`}
+                                            >
+                                                {hasXP && <FontAwesomeIcon icon={faCheck}/>}
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            </div>
+                        }
+
+                        {/* Battle Scars */}
+                        {fighter.IsElite &&
+                            <div className={'battle-scars'}>
+
+                                <h3>{'Battle Scars'}</h3>
+
+                                <div className={'btn btn-primary btn-sm edit-battle-scar-btn'}
+                                     onClick={() => setShowEditScars(true)}>
+                                    <FontAwesomeIcon icon={faPen} className="icon-inline-left-l"/>
+                                    {'Edit'}
+                                </div>
+
+                                <div className="battle-scar-boxes" onClick={() => setShowEditScars(true)}>
+                                    {Array.from({length: 3}, (_, i) => {
+                                        const index = i + 1;
+                                        const isChecked = index <= fighter.BattleScars;
+                                        const isSkull = index === 3;
+
+                                        return (
+                                            <div key={index} className="battle-scar-box">
+                                                {isSkull &&
+                                                    <FontAwesomeIcon icon={faSkull} className={'skull-icon'}/>
+                                                }
+                                                {isChecked &&
+                                                    <FontAwesomeIcon icon={faTimes}/>
+                                                }
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            </div>
+                        }
+
+                        {/* Advancements & Injuries */}
+                        {fighter.IsElite &&
+                            <>
+                                <h3>{'Advancements'}</h3>
+                                {Advancements.map((advancement) => (
+                                    <WbbEditViewAdvancement advancement={advancement} key={advancement.Id}/>
+                                ))}
+                                <div className={'btn btn-add-element btn-block'}
+                                     onClick={() => setShowAdvancementModal(true)}>
+                                    <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
+                                    {'Add Advancement'}
+                                </div>
+
+                                <h3>{'Injuries'}</h3>
+                                {Injuries.map((injury) => (
+                                    <WbbEditViewInjury injury={injury} key={injury.Id}/>
+                                ))}
+
+                                <div className={'btn btn-add-element btn-block'}
+                                     onClick={() => setShowInjuryModal(true)}>
+                                    <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
+                                    {'Add Injury'}
+                                </div>
+                            </>
+                        }
+
+
+                        {/*
+                        - Active
+                        - Captured
+                        - Dead
+                        */}
+                        <h3>{'Fighter Status'}</h3>
+                        <div className={'fighter-status'}>
+                            <div className={'fighter-status-string'}>
+                                {'Active'}
+                            </div>
+
+                            <div className={'btn btn-primary'} onClick={() => setShowStatusModal(true)}>
+                                <FontAwesomeIcon icon={faPen} className={'icon-inline-left-l'}/>
+
+                                {'Change'}
+                            </div>
+                        </div>
+
+                        {/* Campaign Modals */}
+                        <WbbEditFighterExperience
+                            show={showXPModal}
+                            onClose={() => setShowXPModal(false)}
+                            currentXP={fighter.ExperiencePoints} // @TODO: use actual XP value
+                            // currentXP={selectedFighter.ExperiencePoints}
+                            onSubmit={handleXPSubmit}
+                        />
+                        <WbbEditBattleScars
+                            show={showEditScars}
+                            onClose={() => setShowEditScars(false)}
+                            currentScars={fighter.BattleScars} // @TODO: use actual BS value
+                            onSubmit={handleUpdateBattleScars}
+                        />
+                        <WbbModalAddAdvancement
+                            show={showAdvancementModal}
+                            onClose={() => setShowAdvancementModal(false)}
+                            onSubmit={handleAddAdvancement}
+                        />
+                        <WbbModalAddInjury
+                            show={showInjuryModal}
+                            onClose={() => setShowInjuryModal(false)}
+                            onSubmit={handleAddInjury}
+                        />
+                        <WbbEditFighterStatus
+                            show={showStatusModal}
+                            onClose={() => setShowStatusModal(false)}
+                            currentStatus={'Active'} // @TODO: use actual value
+                            onSubmit={handleStatusUpdate}
+                        />
+                    </WbbFighterCollapse>
+                </div>
+            }
+
+
+            {/* Abilities */}
+            {!playMode &&
+                <div className={'fighter-card-collapse-wrap'}>
+                    <WbbFighterCollapse title="Abilities">
+                        {Abilities.map((ability, index) => (
+                            <WbbAbilityDisplay key={index} ability={ability}/>
+                        ))}
+                    </WbbFighterCollapse>
+                </div>
+            }
+
+
+            {/* Play Mode Content */}
+            {playMode &&
+                <div className={'fighter-card-play-mode-info'}>
+
+                    {/* @TODO: add all equipment items*/}
                     <h3>{'Ranged Weapons'}</h3>
-                    {/* @TODO: For each Item */}
                     <WbbEquipmentListItem
                         item={item_siege_jezzail}
                     />
-                    <div className={'btn btn-add-element btn-block'}
-                         onClick={() => setShowAddRangedWeapon(true)}>
-                        <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
-                        {'Add Ranged Weapon'}
-                    </div>
 
-                    {/* Melee Weapons */}
                     <h3>{'Melee Weapons'}</h3>
                     {/* @TODO: For each Item */}
                     <WbbEquipmentListItem
                         item={item_trench_knife}
                     />
-                    <div className={'btn btn-add-element btn-block'}
-                         onClick={() => setShowMeleeWeaponModal(true)}>
-                        <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
-                        {'Add Melee Weapon'}
-                    </div>
 
-                    {/* Equipment */}
                     <h3>{'Equipment'}</h3>
                     {/* @TODO: For each Item */}
                     <WbbEquipmentListItem
                         item={item_alch_ammo}
                     />
-                    <div className={'btn btn-add-element btn-block'}
-                         onClick={() => setShowAddEquipmentModal(true)}>
-                        <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
-                        {'Add Equipment'}
-                    </div>
 
-                    {/* Equipment Modals */}
-                    <WbbModalAddRangedWeapon
-                        show={showAddRangedWeapon}
-                        onClose={() => setShowAddRangedWeapon(false)}
-                        onSubmit={handleAddRangedWeapon}
-                    />
-                    <WbbModalAddMeleeWeapon
-                        show={showMeleeWeaponModal}
-                        onClose={() => setShowMeleeWeaponModal(false)}
-                        onSubmit={handleAddMeleeWeapon}
-                    />
-                    <WbbModalAddEquipment
-                        show={showAddEquipmentModal}
-                        onClose={() => setShowAddEquipmentModal(false)}
-                        onSubmit={handleAddEquipment}
-                    />
-                </WbbFighterCollapse>
-            </div>
-
-            {/* Edit Campaign Play */}
-            <div className={'fighter-card-collapse-wrap'}>
-                <WbbFighterCollapse title="Campaign Play">
-
-                    {/* Experience */}
-                    {fighter.IsElite &&
-                        <div className={'experience'}>
-                            <h3>{'Experience'}</h3>
-
-                            <div className={'btn btn-primary btn-sm edit-xp-btn'}
-                                 onClick={() => setShowXPModal(true)}>
-                                <FontAwesomeIcon icon={faPen} className="icon-inline-left-l"/>
-                                {'Edit'}
-                            </div>
-
-                            <div className={'xp-boxes'} onClick={() => setShowXPModal(true)}>
-                                {Array.from({length: 18}, (_, i) => {
-                                    const level = i + 1;
-                                    const isBold = boldXpIndices.includes(level);
-                                    const hasXP = level <= fighter.ExperiencePoints;
-
-                                    return (
-                                        <div
-                                            key={level}
-                                            className={`xp-box${isBold ? ' xp-box-bold' : ''}`}
-                                        >
-                                            {hasXP && <FontAwesomeIcon icon={faCheck}/>}
-                                        </div>
-                                    );
-                                })}
-                            </div>
-                        </div>
-                    }
-
-                    {/* Battle Scars */}
-                    {fighter.IsElite &&
-                        <div className={'battle-scars'}>
-
-                            <h3>{'Battle Scars'}</h3>
-
-                            <div className={'btn btn-primary btn-sm edit-battle-scar-btn'}
-                                 onClick={() => setShowEditScars(true)}>
-                                <FontAwesomeIcon icon={faPen} className="icon-inline-left-l"/>
-                                {'Edit'}
-                            </div>
-
-                            <div className="battle-scar-boxes" onClick={() => setShowEditScars(true)}>
-                                {Array.from({length: 3}, (_, i) => {
-                                    const index = i + 1;
-                                    const isChecked = index <= fighter.BattleScars;
-                                    const isSkull = index === 3;
-
-                                    return (
-                                        <div key={index} className="battle-scar-box">
-                                            {isSkull &&
-                                                <FontAwesomeIcon icon={faSkull} className={'skull-icon'}/>
-                                            }
-                                            {isChecked &&
-                                                <FontAwesomeIcon icon={faTimes}/>
-                                            }
-                                        </div>
-                                    );
-                                })}
-                            </div>
-                        </div>
-                    }
-
-                    {/* Advancements & Injuries */}
-                    {fighter.IsElite &&
+                    {GoeticPowers.length > 0 &&
                         <>
-                            <h3>{'Advancements'}</h3>
-                            {Advancements.map((advancement) => (
-                                <WbbEditViewAdvancement advancement={advancement} key={advancement.Id}/>
+                            <h3>{'Goetic Powers'}</h3>
+                            {GoeticPowers.map((option, index) => (
+                                <WbbOptionItem key={index} option={option}/>
                             ))}
-                            <div className={'btn btn-add-element btn-block'}
-                                 onClick={() => setShowAdvancementModal(true)}>
-                                <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
-                                {'Add Advancement'}
-                            </div>
-
-                            <h3>{'Injuries'}</h3>
-                            {Injuries.map((injury) => (
-                                <WbbEditViewInjury injury={injury} key={injury.Id}/>
-                            ))}
-                            <div className={'btn btn-add-element btn-block'}
-                                 onClick={() => setShowInjuryModal(true)}>
-                                <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
-                                {'Add Injury'}
-                            </div>
                         </>
                     }
 
-
-                    {/*
-                    - Active
-                    - Captured
-                    - Dead
-                    */}
-                    <h3>{'Fighter Status'}</h3>
-                    <div className={'fighter-status'}>
-                        <div className={'fighter-status-string'}>
-                            {'Active'}
-                        </div>
-
-                        <div className={'btn btn-primary'} onClick={() => setShowStatusModal(true)}>
-                            <FontAwesomeIcon icon={faPen} className={'icon-inline-left-l'}/>
-
-                            {'Change'}
-                        </div>
-                    </div>
-
-                    {/* Campaign Modals */}
-                    <WbbEditFighterExperience
-                        show={showXPModal}
-                        onClose={() => setShowXPModal(false)}
-                        currentXP={fighter.ExperiencePoints} // @TODO: use actual XP value
-                        // currentXP={selectedFighter.ExperiencePoints}
-                        onSubmit={handleXPSubmit}
-                    />
-                    <WbbEditBattleScars
-                        show={showEditScars}
-                        onClose={() => setShowEditScars(false)}
-                        currentScars={fighter.BattleScars} // @TODO: use actual XP value
-                        onSubmit={handleUpdateBattleScars}
-                    />
-                    <WbbModalAddAdvancement
-                        show={showAdvancementModal}
-                        onClose={() => setShowAdvancementModal(false)}
-                        onSubmit={handleAddAdvancement}
-                    />
-                    <WbbModalAddInjury
-                        show={showInjuryModal}
-                        onClose={() => setShowInjuryModal(false)}
-                        onSubmit={handleAddInjury}
-                    />
-                    <WbbEditFighterStatus
-                        show={showStatusModal}
-                        onClose={() => setShowStatusModal(false)}
-                        currentStatus={'Active'} // @TODO: use actual value
-                        onSubmit={handleStatusUpdate}
-                    />
-                </WbbFighterCollapse>
-            </div>
-
-            {/* Abilities */}
-            <div className={'fighter-card-collapse-wrap'}>
-                <WbbFighterCollapse title="Abilities">
+                    <h3>{'Abilities'}</h3>
                     {Abilities.map((ability, index) => (
-                        <WbbAbilityDisplay key={index} ability={ability} />
+                        <WbbAbilityDisplay key={index} ability={ability}/>
                     ))}
-                </WbbFighterCollapse>
-            </div>
 
-            {/* Profile Summary */}
-            <div className={'fighter-card-collapse-wrap'}>
-            </div>
+                    {/* @TODO: add upgrades as well as WbbAbilityDisplay */}
+
+                    <h3>{'Advancements'}</h3>
+                    {Advancements.map((advancement) => (
+                        <WbbEditViewAdvancement advancement={advancement} key={advancement.Id}/>
+                    ))}
+
+                    <h3>{'Injuries'}</h3>
+                    {Injuries.map((injury) => (
+                        <WbbEditViewInjury injury={injury} key={injury.Id}/>
+                    ))}
+                </div>
+            }
+
 
         </div>
     );

@@ -22,6 +22,7 @@ import WbbWarbandDetailView from "./WbbWarbandDetailView";
 import WbbCampaignDetailView from "./WbbCampaignDetailView";
 import {PopoverProvider} from "../../../context/PopoverContext";
 import {WarbandProvider} from "../../../context/WarbandContext";
+import {PlayModeProvider, usePlayMode} from "../../../context/PlayModeContext";
 
 interface WbbEditViewProps {
     warbandData: UserWarband | null;
@@ -102,9 +103,7 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
         navigate(location.pathname, { replace: false }); // remove search params
     };
 
-
     /** Modals */
-
     // Add Fighter Modal (Troop, Elite, Mercenaries)
     const [showAddFighterTroopModal, setShowAddFighterTroopModal] = useState(false);
     const [showAddFighterEliteModal, setShowAddFighterEliteModal] = useState(false);
@@ -131,16 +130,32 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
     };
 
 
+
+    /** Play mode */
+    const [playMode, setPlayMode] = useState(false);
+    const togglePlayMode = () => setPlayMode(prev => !prev);
+
+
     return (
 
         <div className="WbbEditView">
             {/* The Warband List */}
             {(warband !== null) ? (
                 <WarbandProvider warband={warband}>
-                    <PopoverProvider>
+                    <PopoverProvider> <PlayModeProvider value={{ playMode, togglePlayMode }}>
                         <div className={'container WbbEditViewMain'}>
                             <div className={`warband-wrap ${detailType ? 'details-open' : ''}`}>
-                                <h1>{warband.GetWarbandName()}</h1>
+                                <h1>{warband.GetWarbandName()}
+
+                                    <hr></hr>
+                                    <button
+                                        className={`btn ${playMode ? 'btn-danger' : 'btn-success'} playmode-toggle`}
+                                        onClick={togglePlayMode}
+                                    >
+                                        {playMode ? 'Exit Play Mode' : 'Enter Play Mode'}
+                                    </button>
+                                </h1>
+
 
                                 {/* Warband Meta */}
 
@@ -149,15 +164,20 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                                     isActive={detailType === 'warband'}
                                 />
 
-                                <WbbEditViewStash
-                                    onClick={() => openDetail('stash', null)}
-                                    isActive={detailType === 'stash'}
-                                />
+                                { !playMode &&
+                                    <WbbEditViewStash
+                                        onClick={() => openDetail('stash', null)}
+                                        isActive={detailType === 'stash'}
+                                    />
+                                }
 
-                                <WbbEditViewCampaign
-                                    onClick={() => openDetail('campaign', null)}
-                                    isActive={detailType === 'campaign'}
-                                />
+                                { !playMode &&
+                                    <WbbEditViewCampaign
+                                        onClick={() => openDetail('campaign', null)}
+                                        isActive={detailType === 'campaign'}
+                                    />
+                                }
+
 
                                 {/* Warband Elites */}
                                 <h3 className={'category-headline'}>Elites</h3>
@@ -173,11 +193,13 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                                     </>
                                 ))}
 
-                                <div className={'btn btn-add-element btn-block'}
-                                     onClick={() => setShowAddFighterEliteModal(true)}>
-                                    <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
-                                    {'Add Elite'}
-                                </div>
+                                { !playMode &&
+                                    <div className={'btn btn-add-element btn-block'}
+                                         onClick={() => setShowAddFighterEliteModal(true)}>
+                                        <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
+                                        {'Add Elite'}
+                                    </div>
+                                }
 
 
                                 {/* Warband Troops */}
@@ -194,32 +216,41 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                                     </>
                                 ))}
 
-                                <div className={'btn btn-add-element btn-block'}
-                                     onClick={() => setShowAddFighterTroopModal(true)}>
-                                    <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
-                                    {'Add Troop'}
-                                </div>
+                                { !playMode &&
+                                    <div className={'btn btn-add-element btn-block'}
+                                         onClick={() => setShowAddFighterTroopModal(true)}>
+                                        <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
+                                        {'Add Troop'}
+                                    </div>
+                                }
 
 
-                                {/* Warband Mercenaries */}
-                                <h3 className={'category-headline'}>Mercenaries</h3>
-                                {warband.GetFighters().map((item, index) => (
+                                { (!playMode && warband.HasMercenaries()) &&
                                     <>
-                                        {item.IsMercenary &&
-                                            <WbbEditViewFighter
-                                                item={item} index={index}
-                                                onClick={() => openDetail('fighter', item)}
-                                                isActive={detailType === 'fighter' && detailPayload?.FighterIndex === item.FighterIndex}
-                                            />
-                                        }
+                                        {/* Warband Mercenaries */}
+                                        <h3 className={'category-headline'}>Mercenaries</h3>
+                                        {warband.GetFighters().map((item, index) => (
+                                        <>
+                                            {item.IsMercenary &&
+                                                <WbbEditViewFighter
+                                                    item={item} index={index}
+                                                    onClick={() => openDetail('fighter', item)}
+                                                    isActive={detailType === 'fighter' && detailPayload?.FighterIndex === item.FighterIndex}
+                                                />
+                                            }
+                                        </>
+                                        ))}
                                     </>
-                                ))}
+                                }
 
-                                <div className={'btn btn-add-element btn-block'}
-                                     onClick={() => setShowAddFighterMercenaryModal(true)}>
-                                    <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
-                                    {'Add Mercenary'}
-                                </div>
+
+                                { !playMode &&
+                                    <div className={'btn btn-add-element btn-block'}
+                                         onClick={() => setShowAddFighterMercenaryModal(true)}>
+                                        <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
+                                        {'Add Mercenary'}
+                                    </div>
+                                }
 
                                 {/* Warband Modifiers */}
                                 <h3 className={'category-headline'}>Modifiers</h3>
@@ -227,27 +258,31 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                                     index={123}
                                 />
 
-                                <div className={'btn btn-add-element btn-block'}
-                                     onClick={() => setShowAddModifierModal(true)}
-                                >
-                                    <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
-                                    {'Add Modifier'}
-                                </div>
+                                { !playMode &&
+                                    <div className={'btn btn-add-element btn-block'}
+                                         onClick={() => setShowAddModifierModal(true)}
+                                    >
+                                        <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
+                                        {'Add Modifier'}
+                                    </div>
+                                }
 
-                                {/* Warband Exploration */}
-                                <h3 className={'category-headline'}>Exploration</h3>
+                                { !playMode &&
+                                    <>
+                                        {/* Warband Exploration */}
+                                        <h3 className={'category-headline'}>Exploration</h3>
 
-                                <WbbEditViewExploration
-                                    index={123}
-                                    activePopoverId={activePopoverId}
-                                    setActivePopoverId={setActivePopoverId}
-                                />
+                                        <WbbEditViewExploration
+                                            index={123}
+                                        />
 
-                                <div className={'btn btn-add-element btn-block'}
-                                     onClick={() => setShowAddExplorationModal(true)}>
-                                    <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
-                                    {'Add Exploration'}
-                                </div>
+                                        <div className={'btn btn-add-element btn-block'}
+                                             onClick={() => setShowAddExplorationModal(true)}>
+                                            <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
+                                            {'Add Exploration'}
+                                        </div>
+                                    </>
+                                }
                             </div>
 
                             <div className={'selected-item-wrap'}>
@@ -314,7 +349,7 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                             onClose={() => setShowAddExplorationModal(false)}
                             onSubmit={handleAddExplorationLocation}
                         />
-                    </PopoverProvider>
+                    </PlayModeProvider> </PopoverProvider>
                 </WarbandProvider>
             ) : (
                 <div className={'WbbLoadingOverlay'}>

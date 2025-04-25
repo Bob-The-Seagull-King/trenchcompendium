@@ -6,12 +6,10 @@ import {useWarband} from "../../../context/WarbandContext";
 import WbbContextualPopover from "./WbbContextualPopover";
 
 interface WbbEditViewExplorationProps {
-    activePopoverId: string | null;
-    setActivePopoverId: (id: string | null) => void;
     index: number;
 }
 
-const WbbEditViewExploration: React.FC<WbbEditViewExplorationProps> = ({ activePopoverId, setActivePopoverId, index }) => {
+const WbbEditViewExploration: React.FC<WbbEditViewExplorationProps> = ({ index }) => {
 
     const { warband } = useWarband();
     if (warband == null) return (<div>Loading...</div>);

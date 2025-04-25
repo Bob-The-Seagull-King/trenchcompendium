@@ -174,6 +174,14 @@ class UserWarband extends DynamicContextObject {
     }
 
 
+    /**
+     * @TODO
+     * Returns bool - Does the warband have mercenaries?
+     */
+    public HasMercenaries () {
+        return false;
+    }
+
     /** @TODO
      * Get the Fighters for this warbands
      */

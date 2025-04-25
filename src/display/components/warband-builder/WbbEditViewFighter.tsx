@@ -3,6 +3,7 @@ import {Button, Modal, OverlayTrigger, Popover} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCopy, faEllipsisVertical, faTrash, faXmark} from "@fortawesome/free-solid-svg-icons";
 import WbbContextualPopover from "./WbbContextualPopover";
+import {usePlayMode} from "../../../context/PlayModeContext";
 
 
 /**
@@ -34,9 +35,10 @@ interface WbbEditViewFighterProps {
 }
 const WbbEditViewFighter: React.FC<WbbEditViewFighterProps> = ({ item, index, onClick, isActive }) => {
 
+    const { playMode } = usePlayMode();
 
     return (
-        <div className={`WbbEditViewFighter ${isActive ? 'active' : ''}`} onClick={onClick}>
+        <div className={`WbbEditViewFighter ${isActive ? 'active' : ''} ${playMode ? 'play-mode' : ''}`} onClick={onClick}>
             <div className={'model-name'}>
                 {item.ModelName}
             </div>
@@ -53,14 +55,17 @@ const WbbEditViewFighter: React.FC<WbbEditViewFighterProps> = ({ item, index, on
                 }
             </div>
 
-            <WbbContextualPopover
-                id={`fighter-${item.FighterIndex}`}
-                type="fighter"
-                item={item}
-            />
+            {!playMode &&
+                <WbbContextualPopover
+                    id={`fighter-${item.FighterIndex}`}
+                    type="fighter"
+                    item={item}
+                />
+            }
+
 
             <div className={'equipment-summary'}>
-            {/*  @TODO: generate a string with equipment starting with weapons, armor and equipment  */}
+                {/*  @TODO: generate a string with equipment starting with weapons, armor and equipment  */}
                 {'Jezzail, Trench Knife, Standard Armour, Alchemical Ammunition'}
             </div>
 
