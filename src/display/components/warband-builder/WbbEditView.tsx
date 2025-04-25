@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import { UserWarband, IUserWarband } from '../../../classes/saveitems/Warband/UserWarband';
 import WbbWarbandListItem from "./WbbWarbandListItem";
 import WbbEditViewFighter from "./WbbEditViewFighter";
@@ -102,6 +102,19 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
         setDetailPayload(null);
         navigate(location.pathname, { replace: false }); // remove search params
     };
+
+    // scroll to top when item is selected
+    const selectedItemWrapRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        if (!detailType) return; // Only react when a detail is selected (fighter, stash, etc.)
+
+        const isMobile = window.innerWidth <= 767;
+
+        if (isMobile && selectedItemWrapRef.current) {
+            window.scrollTo(0, 0);
+        }
+    }, [detailType]);
 
     /** Modals */
     // Add Fighter Modal (Troop, Elite, Mercenaries)
@@ -285,7 +298,7 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                                 }
                             </div>
 
-                            <div className={'selected-item-wrap'}>
+                            <div className={'selected-item-wrap'} ref={selectedItemWrapRef}>
                                 {/* The Fighter Detail View */}
                                 {detailType === 'fighter' && detailPayload && (
                                     <WbbFighterDetailView
