@@ -327,5 +327,16 @@
         "warband_limit": 1,
         "required_upgrades":[
         ]
+    },
+    {
+        "id": "rel_md_up_trenchdog_fireteam",
+        "model_id_set": ["md_trenchdog","md_trenchdog_guarddog","md_trenchdog_mercydog","md_trenchdog_martyrdomdog","md_trenchdog_hellhound"],
+        "upgrade_id": "up_trenchdog_fireteam",
+        "cost": 1,
+        "cost_type": 1,
+        "restricted_upgrades": [
+        ],
+        "warband_limit": 0,
+        "required_upgrades":[]
     }
 ]

@@ -1596,7 +1596,10 @@
         "stats": {
         },
         "contextdata": {
-            "warband_wide": {}
+            "warband_wide": {},
+            "gain_glory": {
+                "value": 1
+            }
         },
         "description": [            
             {
@@ -4844,6 +4847,866 @@
             {
                 "tags": {"desc_type" : "italic"},
                 "content": "Yoke Fiends are unruly beasts, and almost impossible to control when they smell mortal blood. Court nobles use these cruel, barbed muzzles to bring them to heel. Each is attuned to the will of the noble in the charge, who can constrict them until the pain becomes so unbearable that even the most bestial Yoke Fiend is made to obey."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_cupoffilth",
+        "name": "Cup of Filth",
+        "source": "core",
+        "tags": {"trait": true, "bonus": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {
+            "bonus_ability": {
+                "action_type": ["dash"]
+            }
+        },
+        "description": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Before the battle begins, the model equipped with the cup may allow either one an ELITE or up to 4 Thralls to drink from it. A model that drank from the cup gains +1 DICE to Dash until the end of the battle. The Cup fills itself again after each battle.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "ELITE", "id": "kw_elite"}
+                ]
+            } 
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Taken from the river of nauseating corruption vomited by the Lord of the Flies before there was time, this liquid is collected from his unholy river, the source of every illness and plague that Creation has ever known or will ever know."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_holygrenade",
+        "name": "Holy Grenade",
+        "source": "core",
+        "tags": {"action": true, "weapon": true, "grenade": true},
+        "category": "ranged",
+        "distance": 8,
+        "stats": {
+            "ranged": true
+        },
+        "contextdata": {
+            "get_weapon": {}},
+        "description": [ 
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Holy Grenades have a BLAST radius of 2\" - all models within 2\" the target are hit but other models than the original target roll Injuries with -1 DICE. Adds +1 DICE to Injury rolls against targets with the Keyword BLACK GRAIL or DEMONIC.",
+                "glossary": [
+                    {"val": "-1 DICE", "id": "kw_minusdice"},
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "BLAST", "id": "kw_blast"},
+                    {"val": "BLACK GRAIL", "id": "kw_blackgrail"},
+                    {"val": "DEMONIC", "id": "kw_demonic"}
+                ]
+            }  
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "The shells of these grenades are forged from the church bells of the original city of Antioch and imbued with the Lord’s spirit of vengeance against all evil."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_grenade","kw_assault","kw_shrapnel","kw_blast"],
+        "modifiers": []
+    },
+    {
+        "id": "eq_tormentorchain",
+        "name": "Tormentor Chain",
+        "source": "core",
+        "tags": {"action": true, "weapon": true},
+        "category": "ranged",
+        "distance": 10,
+        "stats": {
+            "hands_ranged": 1,
+            "ranged": true
+        },
+        "contextdata": {
+            "get_weapon": {}},
+        "description": [ 
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": " Tormentor Chain suffers no penalties for range or for Cover, and causes no injury.It does cause a BLOOD MARKER as an attack that uses the SHRAPNEL keyword. If the wielder hits a target with this weapon, the model hit is moved in a straight line into the nearest legal space closest to the wielder. This typically ends with the target and the wielder in base contact and in Melee Combat. This movement can place the target in Melee Combat with multiple enemy models. Additionally, no enemy models may Retreat when in Melee Combat with the wielder.",
+                "glossary": [
+                    {"val": "SHRAPNEL", "id": "kw_shrapnel"},
+                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"}
+                ]
+            } 
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "A barbed chain used to bind the damned in Hell sometimes granted as a weapon to heretic warriors who have proven the most adept at dragging prisoners to the Gates of Hell alive. Possessing a will of its own, the chain can traverse great distances to snare some poor unfortunate soul in its barbed embrace."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_shrapnel"],
+        "modifiers": []
+    },
+    {
+        "id": "eq_demonicauragrenade",
+        "name": "Demonic Aura Grenade",
+        "source": "core",
+        "tags": {"action": true, "weapon": true, "grenade": true},
+        "category": "ranged",
+        "distance": 8,
+        "stats": {
+            "ranged": true
+        },
+        "contextdata": {
+            "get_weapon": {}},
+        "description": [ 
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "You can aim the Demonic Aura Grenade against either a 1mmx1mm point on the ground or an enemy model within range. Next, take a Ranged Attack ACTION. If the roll fails (ie. you roll 6 or less), the Demonic Aura Grenade lands 1\" away from its intended location, multiplied by the number representing the degree of failure (for example, if you rolled 5, the grenade lands 2\" away, as 7-5=2). The direction is decided by your opponent. The Demonic Aura Grenade ignores armour and its BLAST ignores interposing scenery. This weapon causes double BLOOD MARKERS.",
+                "glossary": [
+                    {"val": "BLAST", "id": "kw_blast"},
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"}
+                ]
+            }  
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "It is theorised this horrific grenade is based on the same technology as the demonic weapon that destroyed the original city of Antioch. Its explosion seems to cause no physical damage, but releases an eerie, bright green light that brings rapid, agonizing death to those caught within its reach. Armour offers no protection against its withering effects. Why the heretics do not use the grenades in greater numbers remains a mystery."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_grenade","kw_blast"],
+        "modifiers": ["Double Blood Markers"]
+    },
+    {
+        "id": "eq_themarkofcain",
+        "name": "The Mark of Cain",
+        "source": "core",
+        "tags": {"trait": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {
+        },
+        "description": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Any model that causes a BLOOD MARKER on the bearer of this mark through any ACTION suffers 1 BLOOD MARKER themselves in return for each one they inflict.",
+                "glossary": [
+                    {"val": "ACTION", "id": "kw_action"},
+                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"}
+                ]
+            } 
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "\"And the LORD set a mark upon Cain, lest any finding him should kill him.\""
+            },    
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Cain, the first of murderers, was marked by God, as a ward against those who would kill him. Corrupted copies of this mark are carved into the flesh of those who venture to Hell seeking to learn the art of murder from the greatest killers who reside in the Eternal Fire."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_salvagegolem",
+        "name": "Salvage Golem",
+        "source": "core",
+        "tags": {"trait": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {
+            "warband_wide": {},
+            "gain_ducats": {
+                "dice_value": 5
+            }
+        },
+        "description": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "At the end of each battle, your Warband gains an additional D6x5 ducats."
+            } 
+        ],
+        "lore": [       
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Golem servitors, created by the Rabbis of the Kabbalistic School of Prague under the order of the Duke Constantine to alleviate the constant strain on supplies, are equipped with sophisticated senses and metal detectors. Slow, difficult to maintain and methodical, they are well-suited for combat, but prove invaluable during lulls in battle as they uncover hidden caches of loot."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_smokescreen",
+        "name": "Smokescreen",
+        "source": "core",
+        "tags": {"trait": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {
+            "warband_wide": {},
+            "stationary": {}
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "At the beginning of the battle, the model equipped with this smokescreen may deploy it. If they do, one quarter of the battlefield becomes covered in a thick layer of smoke. All Ranged Attacks that pass through any part of it suffer -1 DICE to hit.",
+                "glossary": [
+                    {"val": "-1 DICE", "id": "kw_minusdice"}
+                ]
+            }
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "The Engineering Corps of New Antioch are experts in the use of smokescreens to shield their Shock Troops from enemy fire."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_locustspitter",
+        "name": "Locust Spitter",
+        "source": "core",
+        "tags": {"action": true, "weapon": true},
+        "category": "ranged",
+        "distance": 24,
+        "stats": {
+            "hands_ranged": 2,
+            "ranged": true
+        },
+        "contextdata": {
+            "get_weapon": {},
+            "ignore_armour": {"condition": [{"value": 1}]},
+            "injury_bonus": {"bonuses": [{"type": "dice", "value": -1}]}},
+        "description": [           
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "If you successfully hit a target with the Locust Spitter, the mindless hunger of the Lord of Flies compels the swarm to continue devouring. Subtract the distance to the target from your maximum range, and then target the closest non-BLACK GRAIL model, friend or foe, that is wholly within the remaining distance. That target is also hit, and you may repeat this process until there are no targets still in range or no range left to reduce. Each model may only be hit by the Locust Spitter once.",
+                "glossary": [
+                    {"val": "BLACK GRAIL", "id": "kw_blackgrail"}
+                ]
+            }
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "A nest of infected Hell-locusts serves as the fuel tank for this horrific gun, which vaguely resembles a flamethrower. The voracious, razor-sharp iron locusts which dwell within can even the smallest chink in armour. Guided by the hateful will of the Lord of the Flies, they consume flesh and swarm to their next nearby target in mere of seconds." 
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": ["Ignore Armour", "-1D to Injuries"]
+    },
+    {
+        "id": "eq_battlefieldtitle",
+        "name": "Battlefield Title",
+        "source": "core",
+        "tags": {"trait": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {
+            "warband_wide": {},
+            "add_extra_equipment": {
+                "count": 1,
+                "restriction": []
+            } 
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "You can increase the LIMIT of any Weapon or Armour by 1 in your Armoury. This benefit remains and it continues to count against your Warband’s LIMIT even if this model is lost. Players are encouraged to come up with their own titles when purchasing it.",
+                "glossary": [
+                    {"val": "LIMIT", "id": "kw_limit"}
+                ]
+            }
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Glorious deeds on the battlefield may earn the most determined, ruthless and deadly officers a rank within the Holy Orders of the Church, Knighthood of the Teutonic Orders, or a title of Hellknight from one of the Dukes or Princes of Hell. Such a warrior is granted the right to carry the heraldic device of their house upon their wargear, and they enjoy many privileges when it comes to accessing an enhanced allocation of the most precious weapons and armour."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_bookofbattleprayers",
+        "name": "Book of Battle Prayers",
+        "source": "core",
+        "tags": {"action": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "As an ACTION, the model equipped with this book may attempt to speak a blessing. If successful, they may grant any model within 12\" a BLESSING MARKER. This book occupies one hand at all times and the equipped model cannot Dash, as they must maintain their continuous litany of prayers.",
+                "glossary": [
+                    {"val": "ACTION", "id": "kw_action"},
+                    {"val": "BLESSING MARKER", "id": "kw_blessingmarker"}
+                ]
+            }
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Written by the famous Patriarch of New Antioch, Alexios Cerularius, the remaining 137 copies of this blessed book are entrusted only to Warband leaders of extraordinary ability (or excellent political connections!)"
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_donkeysjawbone",
+        "name": "Donkey's Jawbone",
+        "source": "core",
+        "tags": {"action": true, "weapon": true},
+        "category": "melee",
+        "distance": null,
+        "stats": {
+            "hands_melee": 1,
+            "melee": true
+        },
+        "contextdata": {
+            "get_weapon": {},
+            "injury_bonus": {"bonuses": [{"type": "dice", "value": 2}]}
+        },
+        "description": [             
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Add +2 DICE to Injury rolls when using this weapon.",
+                "glossary": [
+                    {"val": "+2 DICE", "id": "kw_plusdice"}
+                ]
+            }
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Blessed by YHWH, this bone club grants its wielder the strength of Samson himself."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": ["+2D to Injuries"]
+    },
+    {
+        "id": "eq_executionersaxe",
+        "name": "Executioner's Axe",
+        "source": "core",
+        "tags": {"action": true, "weapon": true},
+        "category": "melee",
+        "distance": null,
+        "stats": {
+            "hands_melee": 2,
+            "melee": true
+        },
+        "contextdata": {
+            "get_weapon": {},
+            "injury_bonus": {"bonuses": [{"type": "dice", "value": 2}]}
+        },
+        "description": [    
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Add +2 DICE to Injury rolls when using this weapon. If the Axe hits an enemy in Melee, the model armed with it can take a second Melee Attack ACTION after resolving the injury from the first attack. This attack can be against the same or a different target. You can never make more than 2 attacks per Activation with this weapon, even if other bonuses would allow it.",
+                "glossary": [
+                    {"val": "+2 DICE", "id": "kw_plusdice"},
+                    {"val": "ACTION", "id": "kw_action"}
+                ]
+            }   
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "This axe is wielded by the executioner demons of Hell whose job is to dismember those damned who brought division on Earth. As the damned flesh reforms over timee, this grisly task is repeated again and again through eternity."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_critical"],
+        "modifiers": []
+    },
+    {
+        "id": "eq_armourofcobar",
+        "name": "Armour of Cobar",
+        "source": "core",
+        "tags": {"trait": true, "bonus": true, "armour": true},
+        "category": "armour",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {
+            "upgrade_stat": {"stat": "armour", "value": -3},
+            "bonus_ability": {
+                "action_type": ["dash"]
+            }
+        },
+        "description": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": " Grants a -3 modifier to all injury rolls against the model wearing this armour and cannot be combined with any shield. The model suffers -1 DICE to Dash due the weight of the sins of the wearer. Each time any model in the wearer’s Warband (including any Allies) is taken Out of Action, the model gains +1 BLESSING MARKER.",
+                "glossary": [
+                    {"val": "-1 DICE", "id": "kw_minusdice"},
+                    {"val": "BLESSING MARKER", "id": "kw_blessingmarker"}
+                ]
+            }
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "A suit of armour fashioned after the mail worn by Cobar the Betrayer, the first Lord of the Sixty-Six. This black iron armour is forged in the Death-Factories of Hell from souls of those who betrayed their friends in life. It rewards those who lead their followers and friends to ruin and death."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_ducalwingedarmour",
+        "name": "Ducal Winged Armour",
+        "source": "core",
+        "tags": {"trait": true, "bonus": true, "armour": true},
+        "category": "armour",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {
+            
+            "set_stat": { "upgrades": [
+                {"stat": "movement", "value": 10},
+                {"stat": "movetype", "value": 1}
+                ]},
+            "upgrade_stat": {"stat": "armour", "value": -3},
+            "bonus_ability": {
+                "action_type": ["dash"]
+            },
+            "permission_check": {
+                "requirements": [
+                    {
+                        "type": "equipment",
+                        "value": "eq_knighthood",
+                        "truth": true
+                    }
+                ]
+            }
+        },
+        "description": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Grants a -3 modifier to all injury rolls against the model wearing this armour, and treats Down Injury results as a Minor Hit instead (note that the TOUGH Keyword ability to avoid Out of Action with Down overrides this). Due to its bulk the wearer rolls D3 for a charge extra distance instead of D6. Ducal Winged Armour cannot be combined with any shield. Models wearing Ducal Winged Armour may have a base size of 40mm if you wish, unless the model wearing it is already on 50mm or bigger base.",
+                "glossary": [
+                    {"val": "TOUGH", "id": "kw_tough"}
+                ]
+            }, 
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "If worn by a model that is not part of a New Antioch force/subfaction, the only bonus the armour gives is the -3 injury modifier, as the chemical treatment that allows the wearer to withstand the rigors of the armour is a carefully guarded military secret. D3 charge distance remains in force."
+            } , 
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The model gains a new movement mode, 10\"/Flying. A model must also have Knighthood or Promotion Glory Item in order to wear it."
+            } 
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Based on the prototype battlefield armour worn by Duke Constantine himself and his personal guard Myrmidons, these extremely rare and powerful suits are granted only to the most decorated soldiers. They feature a MKIII Myrmidon Diesel engine and wings, painted and decorated to celebrate the deeds of the warrior who has “earned their wings”."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_hornofjoshua",
+        "name": "Horn of Joshua",
+        "source": "core",
+        "tags": {"action": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "A model with the Horn of Joshua may take a RISKY ACTION with +1 DICE. If successful, select any piece of terrain of up to 8\"x8\" size within 12\" the model can see (a house, 8\" woods, a wall etc.). This terrain piece is destroyed and it is removed from the table. Any models inside/touching/on top of this terrain must roll immediately on the Injury Chart. If they are not taken Out of Action they are placed on the ground in their previous spots. If the target is a trench, it is not removed from the table, but the models touching it/inside the Trench all roll on the Injury Chart on an 8\" length of a Trench. This Trench segment is selected by the player using the Horn.",
+                "glossary": [
+                    {"val": "RISKY ACTION", "id": "kw_riskyaction"},
+                    {"val": "+1 DICE", "id": "kw_plusdice"}
+                ]
+            },         
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The Horn can be used successfully only once per battle."
+            }
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Said to be one of the horns that Joshua used to bring down the walls of Jericho. Its blast still has the power to shake the very foundations of the strongest fortifications."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_armourofthefly",
+        "name": "Armour of the Fly",
+        "source": "core",
+        "tags": {"trait": true, "armour": true, "headgear": true},
+        "category": "armour",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {            
+            "set_stat": { "upgrades": [
+                {"stat": "movement", "value": 8},
+                {"stat": "movetype", "value": 1}
+                ]},
+            "upgrade_stat": {"stat": "armour", "value": -2},
+            "ignore_element": {"element": ["kw_shrapnel"]},
+            "custom_attack_type": {"range": 0}
+        },
+        "description": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Grants a -2 modifier to all injury rolls against the model wearing this armour.Ignores additional BLOOD MARKERS caused by the Keyword SHRAPNEL.",
+                "glossary": [
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"},
+                    {"val": "SHRAPNEL", "id": "kw_shrapnel"}
+                ]
+            }, 
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The model gains a new movement mode, 8\"/Flying."
+            } , 
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Additionally, the model equipped with this armour can make an additional Melee Attack whenever it makes a Melee Attack. This attack gains +1 DICE to hit and it does not cause a roll on the Injury Chart on a hit. Instead, on a hit, this attack automatically inflicts a BLOOD MARKER on its target.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"}
+                ]
+            } 
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "his suit of armour, crafted from black metal, embodies the very visage of Beelzebub himself. It includes wings that propel its wearer into the skies at astonishing speed, and once it latches onto its opponent, its filth-ridden proboscis will suck the target dry."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_resurrectionengine",
+        "name": "Resurrection Engine",
+        "source": "core",
+        "tags": {"trait": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {
+            "warband_wide": {},
+            "activated": {}
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "A Resurrection Engine can be used to completely negate any result from the Injury Chart that causes a model to die (gaining 3rd Scar, Death etc.)"
+            }
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "This miraculous holy clockwork machine grants the ability to bring the dead back to life thanks to the grace of God and the research of the Holy Science Academies of New Antioch."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_consumable"],
+        "modifiers": []
+    },
+    {
+        "id": "eq_greatbannerofnewantioch",
+        "name": "Great Banner of New Antioch",
+        "source": "core",
+        "tags": {"trait": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+            "hands_melee": 1,
+            "hands_ranged": 1
+        },
+        "contextdata": {"warband_wide": {}},
+        "description": [            
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "This banner occupies one hand at all times. While the model carrying the banner is in play, your Warband has the following benefits. Whenever your Warband would make a Morale check, it may choose whether it succeeds or fails. If it chooses to fail, your Warband immediately flees, regardless of the Morale rules of the scenario."
+            }
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "This item represents a famed standard, army battle banner or regimental colours. It may also represent one of the many Free Companies or forces in the service of the Church. Warband leaders often possess their own battle banner adorned with the awards and ribbons a unit has won, and carried proudly by a trusted warrior."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_beelzebubsembrace",
+        "name": "Beelzebub's Embrace",
+        "source": "core",
+        "tags": {"action": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {
+            "set_arms": {"ranged": 0, "melee": 0}
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The model loses its own arms but gains 4 Melee Attack ACTIONS resolved exactly as if it was armed with 4 trench clubs without off-hand penalty. If all of them hit, and the target is on a 32mm or smaller base, it is immediately taken Out of Action, regardless of any rules it may have (such as the Keyword TOUGH).",
+                "glossary": [
+                    {"val": "ACTIONS", "id": "kw_action"},
+                    {"val": "TOUGH", "id": "kw_tough"}
+                ]
+            }
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "The final metamorphosis of those most favoured by the Prince of Plague is to assume the many-legged form of their warped master."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_cruelhelmet",
+        "name": "Cruel Helmet",
+        "source": "core",
+        "tags": {"trait": true, "headgear": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {
+            "ignore_element": {"element": ["kw_shrapnel"]}
+        },
+        "description": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Ignores the additional BLOOD MARKER caused by the Keyword SHRAPNEL. Any model wearing this helmet starts the battle Down. During the first term, if attacked before it is Activated, the Wretched suffers an extra BLOOD MARKER from the first attack that hits it.",
+                "glossary": [
+                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"},
+                    {"val": "SHRAPNEL", "id": "kw_shrapnel"}
+                ]
+            } 
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "This heavy, cumbersome helmet always includes a gruesome mask. Crafted from the iron of Dis, it retains some of the searing heat of the Inferno, its touch causing skin to blister and peel. Due to its weight, it is almost impossible for its wearer to stand for long periods of time. Praetors and Sorcerers often force these dreadful devices onto their Wretched slaves, wearing the keys in chains on their person to taunt their miserable thralls."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_bestialskincloak",
+        "name": "Bestial Skin Cloak",
+        "source": "core",
+        "tags": {"trait": true, "bonus": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {
+            "bonus_ability": {
+                "action_type": ["dash","attack_melee"]
+            },
+            "cancel_item": {
+                "ability": ["ab_oraclebeastcloak"]
+            }
+        },
+        "description": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Once per Activation, the model may add +1 DICE to one of the following: Melee Attack ACTION, Injury roll the model causes in melee, or Dash ACTION. At the end of its Activation, the model gains 1 BLOOD MARKER.",
+                "glossary": [
+                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"},
+                    {"val": "ACTION", "id": "kw_shrapnel"},
+                    {"val": "+1 DICE", "id": "kw_plusdice"}
+                ]
+            } 
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "If a Hunter of the Left-hand path wears this Cloak, it cannot wear its Oracle Beast Cloak."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_koraktorthegreattomeofhell",
+        "name": "Koraktor, the Great Tome of Hell",
+        "source": "core",
+        "tags": {"trait": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {
+            "add_upgrade": {
+                "requirements": [
+                    {
+                        "type": "tag",
+                        "value": "goetic"
+                    }
+                ],
+                "count": 1
+            }
+        },
+        "description": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "A warband in possession of this book may purchase a single Goetic Power to one model in addition to the ones normally available to them, and this Power does not count towards the limit in the number of Goetic Powers they may normally have. You still have to pay the cost of acquiring the Goetic power, though this can be done at any Post-Battle sequence. It ignores other limitations of the Goetic Power, so normal limits (such as the Goetic Power belonging to a different Sin or limited to a different model) do not apply."
+            } 
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Each Auxia Sorcerer carries a book copied from the Koraktor, the original tome of Goetic Magic, said to have been written by angel Samael, who is also known as ‘Venom of God’. The reason an Angel would have authored such a book is unknown, if the story is even true at all."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_lordshipofthisworld",
+        "name": "Lordship of this World",
+        "source": "core",
+        "tags": {"trait": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {
+            "warband_wide": {}
+        },
+        "description": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "This model carries a mark such as a living tattoo or painted rune carved by the hand of its infernal patron. After both sides have completely finished their deployment but before starting the battle, you may select one piece of terrain without any of your own models placed on it. It can be no bigger than 8\" x 8\" (an 8\" section of trench, a wall, a tree, a building etc). You can move this piece of terrain, and any enemy models set upon it up to 6\" in any direction, though it cannot be moved out of the battlefield even partially. If it touches any models when you move it the models it touches are set aside and the player controlling them can redeploy them as if they had not been deployed at all thus far."
+            } 
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "It is written that the powers of evil wield the greatest influence over the material world. The most formidable servants of the Pit, who bear a unique mark, can torment the very earth itself and bend it to do their bidding."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_pieceofsilver",
+        "name": "Piece of Silver",
+        "source": "core",
+        "tags": {"trait": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {
+            "warband_wide": {}
+        },
+        "description": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "In the beginning of each Battle, take 3d6, set them at 6, and set them aside. During the battle whenever any other D6 roll is taken (save for Injury rolls), you can replace any one dice with one of the 6s before rolling the rest. Only one dice can be used to influence a single dice roll. Note that if the model in possession of this item is taken Out of Action, discard these dice immediately."
+            } 
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Said to be a sliver of one of the thirty pieces of silver that Judas Iscariot accepted in return for betraying the Redeemer, there can be no talisman more potent to the servants of Hell."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_trenchdog",
+        "name": "Trench Dog",
+        "source": "core",
+        "tags": {"trait": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {
+            "add_extra_model": {
+                "model_purchases": [
+                    "rel_fc_md_trenchdog","rel_fc_md_trenchdog_guarddog","rel_fc_md_trenchdog_mercydog","rel_fc_md_trenchdog_martyrdomdog","rel_fc_md_trenchdog_hellhound"
+                ]
+            }
+        },
+        "description": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "You add a Trench Dog to your warband. You can have up to one of each dog type."
+            } 
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "A great many animals serve in the trenches alongside the soldiers. Wardogs are by far the most common, but tame ocelots, barbary apes, small bears, and other unusual pets abound, while the forces of Hell keep Hellhounds and other infernal beasts as pets."
             }
         ],
         "options": [],
