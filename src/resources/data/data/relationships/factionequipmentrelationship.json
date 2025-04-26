@@ -1056,5 +1056,19 @@
         "cost": 10,
         "costtype": 0,
         "limit": 0
+    },
+    {
+        "id": "rel_fc_eq_trenchdog",
+        "source": "core",
+        "tags": {
+            "exploration_only": true
+        },
+        "name": "Trench Dog",
+        "contextdata": {},
+        "faction_id": ["fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "equipment_id": "eq_trenchdog",
+        "cost": 1,
+        "costtype": 1,
+        "limit": 0
     }
 ]
