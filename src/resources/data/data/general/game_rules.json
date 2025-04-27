@@ -249,7 +249,7 @@
                     "subcontent": [
                         {
                             "tags": {"desc_type" : "bold"},
-                            "content": "Make a Melee Attack"
+                            "content": "Make a Melee Attack: "
                         },
                         {
                             "tags": {"desc_type" : "default"},
@@ -614,6 +614,365 @@
                     {"val": "+DICE", "id": "kw_plusdice"},
                     {"val": "-DICE", "id": "kw_minusdice"}
                 ]
+            }
+        ]
+    },
+    {
+        "id": "gr_movement",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Movement",
+        "item_index": 4,
+        "sections":  [
+            {
+                "title": "Charging",
+                "description":  [
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Select an enemy model that is within 12” of the charging model to be the target. If the charging model does not have line of sight to its target, it must succeed with a RISKY ACTION before proceeding. Roll a D6 (the charge roll) and add it to the charging model’s Movement characteristic (with a maximum distance of 12”). The charging model must move this distance toward the target by the shortest and most effective route possible by distance. Jumping, Climbing or moving through Dangerous Terrain is always optional during a Charge, even if it is the shortest route, though the new route avoiding such obstacles must still be as short as possible.",
+                    "glossary": [
+                        {"val": "RISKY ACTION", "id": "kw_riskyaction"}
+                    ]
+                    },
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "If after completing this movement the charging model is within 1” of the target, the charging model is considered to have successfully charged the target and is now in Melee Combat. If the charging model does not reach its target, the Charge is considered to have failed, but it remains where it is after the movement."
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [
+                            
+                            {
+                                "tags": {"desc_type" : "list"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "",
+                                        "subcontent": [                                    
+                                            {
+                                                "tags": {"desc_type" : "bold"},
+                                                "content": "Charging Multiple Enemies: "
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "default"},
+                                                "content": "A model may target multiple enemies with a single Charge if there is a space that the charging model could occupy (within 12”) that would place it in Melee Combat with every target of its Charge. It still only makes a single Charge."
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "",
+                                        "subcontent": [                                    
+                                            {
+                                                "tags": {"desc_type" : "bold"},
+                                                "content": "Interposing Models During a Charge: "
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "default"},
+                                                "content": "If a charging model would pass within 1” of an enemy model that is not the target of its Charge, its charge immediately ends and it is considered to have charged the interposing model instead." 
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "",
+                                        "subcontent": [                                    
+                                            {
+                                                "tags": {"desc_type" : "bold"},
+                                                "content": "Diving Charge: "
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "default"},
+                                                "content": "If a charging model jumps down as part of a Charge, it landed within 2” of its target and it jumped from a ledge that was at least 3” (measured from the target’s base) and no more than 6” (measured from the charging model’s landing space), it may convert its Charge into a Diving Charge."
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "paragraph"},
+                                                "content": "Place the charging model in any space within 1” of the target and take a RISKY ACTION. If successful, the charging model gains a +1 DICE bonus to hit and to injure the target, and the charging model ignores the target’s Defended Obstacle bonus (if it has one) for the remainder of its Activation. If the RISKY ACTION fails, the model is Down and is injured as per the rules for Falling.",
+                                                "glossary": [
+                                                    {"val": "RISKY ACTION", "id": "kw_riskyaction"},
+                                                    {"val": "+1 DICE", "id": "kw_plusdice"}
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Climbing",
+                "description":  [
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "A model can move up or down ladders, ramps, ropes, stairs and other devices meant for climbing as a normal part of any movement it takes. This costs movement as normal. As a RISKY ACTION, a model may also attempt to climb up or down sheer surfaces, such as walls, but it must have enough remaining movement to clear the entire height. If this RISKY ACTION fails, the model remains where it is.",
+                    "glossary": [
+                        {"val": "RISKY ACTION", "id": "kw_riskyaction"}
+                    ]
+                    }
+                ]
+            },
+            {
+                "title": "Jumping",
+                "description":  [
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "As a RISKY ACTION, a model can jump across a gap of up to half their movement characteristic (measured horizontally). This costs movement as normal and can be taken as any kind of movement that the model has. A model cannot attempt to jump a gap that it does not have enough movement to clear. If this RISKY ACTION fails, the model falls as if it fell from a ledge on either side of the gap of the opponent’s choice.",
+                    "glossary": [
+                        {"val": "RISKY ACTION", "id": "kw_riskyaction"}
+                    ]
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [
+                            
+                            {
+                                "tags": {"desc_type" : "list"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "",
+                                        "subcontent": [                                    
+                                            {
+                                                "tags": {"desc_type" : "bold"},
+                                                "content": "Jumping Between Ledges of Uneven Height: "
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "default"},
+                                                "content": "If the ledge that the model is jumping to is lower han the ledge that it is jumping from, apply the rules for Jumping Down after the model jumps the gap. If the ledge that the model is jumping to is higher than the ledge that it is jumping from, it can only be up to 1” higher and, if that ledge is at least ½” higher, the jump costs an extra 1” of movement."
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "",
+                                        "subcontent": [                                    
+                                            {
+                                                "tags": {"desc_type" : "bold"},
+                                                "content": "Jumping Down"
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "default"},
+                                                "content": "A model can voluntarily ‘fall’ from a ledge that it is in base contact with. This never costs movement and can be done as part of any movement that the model has. Additionally, when falling from heights of up to 3” in this way, it does not make an injury roll."
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Falling",
+                "description":  [
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "When a model falls, it is moved from its current position to the first space that it can occupy directly beneath it or the ledge that it fell from. If it fell from a height greater than 2”, it must roll on the Injury Chart. For every 3” fallen, add +1 DICE to this injury roll (for example, a fall of 3” would be rolled with +1 DICE and a fall of 6” with +2 DICE).",
+                    "glossary": [
+                        {"val": "+1 DICE", "id": "kw_plusdice"},
+                        {"val": "+2 DICE", "id": "kw_plusdice"}
+                    ]
+                    },
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "A model can fall through its own action, such as when it fails a RISKY ACTION when jumping over gaps or when jumping down a distance greater than 3”. A model in an elevated position may also fall when it is Downed while within 1” of a ledge. When this happens, the model takes an ACTION. If it succeeds, the model remains Downed where it is. If it fails, the model falls from the nearest ledge.",
+                    "glossary": [
+                        {"val": "RISKY", "id": "kw_riskyaction"},
+                        {"val": "ACTION", "id": "kw_action"}
+                    ]
+                    }
+                ]
+            },
+            {
+                "title": "Terrain",
+                "description":  [
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "There are four types of terrain in Trench Crusade: Open, Difficult, Dangerous and Impassable."
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [
+                            
+                            {
+                                "tags": {"desc_type" : "list"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "",
+                                        "subcontent": [                                    
+                                            {
+                                                "tags": {"desc_type" : "bold"},
+                                                "content": "Open: "
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "default"},
+                                                "content": "Open terrain is the most common terrain is Trench Crusade. Models can move freely through Open terrain. This includes crossing obstacles of up to 1” high, which does not cost movement. Ladders and ramps are open terrain."
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "",
+                                        "subcontent": [                                    
+                                            {
+                                                "tags": {"desc_type" : "bold"},
+                                                "content": "Difficult: "
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "default"},
+                                                "content": "This includes rock beds, swamps, barbed wire and so on. Moving through Difficult Terrain costs double the normal movement of the model."
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "",
+                                        "subcontent": [                                    
+                                            {
+                                                "tags": {"desc_type" : "bold"},
+                                                "content": "Dangerous: "
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "default"},
+                                                "content": "This includes barbed wire, minefields, raging fires, areas covered in poisonous gas and so on. Whenever a model moves into, or starts its Activation in, Dangerous Terrain, it must take an ACTION. On a failure, make an injury roll for the model. If the model moved into the Dangerous Terrain, this ACTION is RISKY.",
+                                                "glossary": [
+                                                    {"val": "ACTION", "id": "kw_action"},
+                                                    {"val": "RISKY", "id": "kw_riskyaction"}
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "",
+                                        "subcontent": [                                    
+                                            {
+                                                "tags": {"desc_type" : "bold"},
+                                                "content": "Impassable: "
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "default"},
+                                                "content": "Models cannot pass through Impassable terrain."
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Terrain can be both Difficult and Dangerous."
+                    }
+                ]
+            },
+            {
+                "title": "Movement Types",
+                "description":  [
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "There exist two movement types currently in Trench Crusade: Infantry and Flying. A model can only have one movement type. If it gains a movement of another type, it must choose which movement it keeps."
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [
+                            
+                            {
+                                "tags": {"desc_type" : "list"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "",
+                                        "subcontent": [                                    
+                                            {
+                                                "tags": {"desc_type" : "bold"},
+                                                "content": "Infantry: "
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "default"},
+                                                "content": "This movement type covers every model that walks, crawls or gallops along the ground. Models with this movement type obey all of the typical rules for movement."
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "",
+                                        "subcontent": [                                    
+                                            {
+                                                "tags": {"desc_type" : "bold"},
+                                                "content": "Flying: "
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "default"},
+                                                "content": "This movement type covers every model that flies with wings, floats with magic or otherwise hovers above the ground. Flying models treat Difficult and/or Dangerous Terrain as Open Terrain and they do not trigger mines and similar devices. Flying models can climb up and down and they can jump over gaps of up to their Movement characteristic without taking ACTIONS.",
+                                                "glossary": [
+                                                    {"val": "ACTIONS", "id": "kw_action"}
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "All models in the game can Move when Activated unless otherwise indicated in the rules. Each model can move up to the number of inches indicated in their profile, though they can move less and not at all if you wish. There are a number of general rules that apply to all of the movement that a model takes during its Activation. Certain types of movement, such as Falling or the knockback effect of an Artillery Witch’s Infernal Bomb, are not subject to these rules. Regardless of the type of movement, a model cannot move off the battlefield unless a rule specifically states so."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                    
+                    {
+                        "tags": {"desc_type" : "list"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "A model cannot enter Melee Combat (within 1” of enemy models) unless it Charges."
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "A model cannot leave Melee Combat (within 1” of enemy models) at any point during Movement unless it is Retreating."
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "A model in Melee Combat cannot otherwise move unless they began their Activation in Melee Combat, take the standard Move ACTION and remain in Melee Combat with every model that they were in Melee Combat with at the start of their Activation.",
+                                "glossary": [
+                                    {"val": "ACTION", "id": "kw_action"}
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "A model can move through friendly models if it has enough movement to move past them entirely."
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "A model cannot move off the battlefield unless a rule specifically states so."
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Movement (including charging) is usually the only action a model can take that does not require you to roll 2D6 to determine whether you are successful or not, unless otherwise noted in the rules."
             }
         ]
     }
