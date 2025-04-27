@@ -1451,5 +1451,148 @@
                 "content": "Models in Melee combat cannot shoot unless the rules of the weapon indicate otherwise. Some indirect fire weapons have rules that allow you to target models even out of sight – these are clearly explained in the profile for such weapons. Models can see all around themselves (i.e. 360°) and they may be turned freely to face any direction before firing."
             }
         ]
+    },
+    {
+        "id": "gr_meleecombat",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Melee Combat",
+        "item_index": 7,
+        "sections":  [
+            {
+                "title": "Steps For Melee Combat",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [                    
+                            {
+                                "tags": {"desc_type" : "list"},
+                                "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "Declare which melee ACTION you are taking and what opposing model you are targeting.",
+                                        "glossary": [
+                                            {"val": "ACTION", "id": "kw_action"}
+                                        ]
+                                    },                            
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "Roll on the Action Success Chart using any melee attacks available to the model. Add any +DICE/-DICE from any source such as BLOOD MARKERS, profile of the warrior making the attack etc.",
+                                        "glossary": [
+                                            {"val": "+DICE", "id": "kw_plusdice"},
+                                            {"val": "-DICE", "id": "kw_minusdice"},
+                                            {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"}
+                                        ]
+                                    },                            
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": " If the result is successful, roll on the Injury Chart sto determine what happens to the target (unless some Equipment or Special Ability of the model indicates otherwise)."
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Modifiers",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "Defended obstacle: "
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Add -1 DICE to the roll. The target of a melee attack is considered to be defending an obstacle if it is not Down, it is touching an obstacle, that obstacle is at least ½” high (measured from the target’s base) and that obstacle is between it and its attacker. Common examples of such obstacles are stone walls, earthen ramparts and trenches. Simple hedges, bushes or low fences are often not enough.",
+                                "glossary": [
+                                    {"val": "-1 DICE", "id": "kw_minusdice"}
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "Off-Hand Weapon: "
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Add -1 DICE to the roll if the attack was made with an Off-Hand Weapon.",
+                                "glossary": [
+                                    {"val": "-1 DICE", "id": "kw_minusdice"}
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Multiple Attacks",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "Generally, each model can only attack once in melee, but some can execute multiple attacks due to their natural abilities or special weapons.",
+                        "glossary": [
+                            {"val": "ACTION", "id": "kw_action"}
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "Two Melee Weapons: "
+                            },{
+                                "tags": {"desc_type" : "default"},
+                                "content": "A model armed with two melee weapons can take two separate Melee Attack ACTIONS, one with each weapon. One of these weapons, determined before you make your first ACTION roll, is an Off-Hand weapon. Off-Hand weapons suffer -1 DICE to hit.",
+                                "glossary": [
+                                    {"val": "ACTION", "id": "kw_action"},
+                                    {"val": "-1 DICE", "id": "kw_minusdice"}
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "If a STRONG model wields a two-handed melee weapon in one hand and a one-handed melee weapon in the other, the one-handed weapon is always regarded as the Off-Hand weapon. Resolve attacks made by a model wielding two melee weapons one at a time, with the Off-Hand weapon last.",
+                        "glossary": [
+                            {"val": "STRONG", "id": "kw_stronng"}
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Moving In Combat: ",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "If a model is in Melee combat at the start of their Activation, they may use their Standard Move ACTION while staying within 1” of the enemies they are engaged in combat with. This is most often used to negate the Defended Obstacle bonus. No roll is needed to do this.",
+                        "glossary": [
+                            {"val": "ACTION", "id": "kw_action"}
+                        ]
+                    }
+                ]
+            }
+        ],
+        "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "An activated model can use any of its Melee ACTIONS if it is in contact with (i.e. within 1” of ) one or more enemies. Select any melee weapon or attack action available to the model – these are clearly indicated in the characteristics of each weapon entry.",
+                "glossary": [
+                    {"val": "ACTIONS", "id": "kw_action"}
+                ]
+            }
+        ]
     }
 ]
