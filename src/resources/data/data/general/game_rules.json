@@ -466,5 +466,155 @@
                 "content": "When each player has Activated all their models, the Turn is over."
             }
         ]
+    },
+    {
+        "id": "gr_plusdiceandminusdice",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "+DICE and -DICE",
+        "item_index": 3,
+        "sections":  [
+            {
+                "title": "Blood Markers",
+                "description":  [
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "During a battle your warriors can be wounded due to enemy attacks, the use of supernatural powers, falling from great heights and so on – see the Injury Chart for details. This damage is tracked via BLOOD MARKERS. In addition to wounds, they represent exhaustion, concussion, shellshock, physical and mental strain and so on.",
+                    "glossary": [
+                        {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"}
+                    ]
+                    },
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Each time one of your models suffers such damage, place a BLOOD MARKER (red dice) next to the model to track this damage. Use the pip number on each dice to indicate the number of BLOOD MARKERS the model has. Every time this model takes an ACTION (shooting, melee attacks and so on), your opponent can declare that they are spending one or more BLOOD MARKER it has to add -1 DICE to the dice pool when the roll on the Action Success Chart is made. Multiple markers can be applied to any single roll if the target model has multiple BLOOD MARKER to be converted.",
+                    "glossary": [
+                        {"val": "BLOOD MARKER", "id": "kw_bloodmarker"},
+                        {"val": "ACTION", "id": "kw_action"},
+                        {"val": "-1 DICE", "id": "kw_minusdice"}
+                    ]
+                    },
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "The BLOOD MARKERS can also be used by your opponent when the model suffers damage from any source. Each marker can be converted into +1 DICE on the Injury Chart roll, making a serious injury far more likely and, just like with ACTIONS, multiple markers can be used to influence a single roll on the Injury Chart.",
+                    "glossary": [
+                        {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"},
+                        {"val": "+1 DICE", "id": "kw_plusdice"},
+                        {"val": "ACTIONS", "id": "kw_action"}
+                    ]
+                    }
+                ]
+            },
+            {
+                "title": "Bloodbath",
+                "description":  [
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "You can roll an additional D6 on injury rolls at the cost of six BLOOD MARKERS on any model, or at the cost of three BLOOD MARKERS if the target is Down. This means that instead of rolling 2D6 on your typical weapon, you roll 3D6 on your injury roll and add the numbers together. Weapons such as the Artillery Witch’s Infernal Bomb would therefore roll 4D6 and add the results together (3D6+1D6).",
+                    "glossary": [
+                        {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"}
+                    ]
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [                    
+                            {
+                                "tags": {"desc_type" : "italic"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Gameplay Example: "
+                                    },        {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "A Trench Pilgrim model has sustained a wound during the battle and has two BLOOD MARKERS on them. A Heretic Trooper shoots at the Pilgrim with his trusty bolt action rifle, rolls an 8 and hits! The Heretic player decides to use one of the BLOOD MARKERS to make the shot more likely to injure. The Heretic player rolls 3D6 (2D6 +1 DICE from the spent marker) and consults the Injury Chart. The result is 4, 5 and 1. Since one +DICE was used, the player picks the two highest numbers which total 9. The Pilgrim is taken out of action!",
+                                        "glossary": [
+                                            {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"},
+                                            {"val": "+1 DICE", "id": "kw_plusdice"}
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Blessing Markers",
+                "description":  [
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "BLESSING MARKERS are similar to BLOOD MARKERS. Supernatural powers, holy relics and many other sources may grant these to a model, which can then be expended to aid the ACTIONS of the model.",
+                    "glossary": [
+                        {"val": "BLESSING MARKERS", "id": "kw_blessingmarker"},
+                        {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"},
+                        {"val": "ACTIONS", "id": "kw_action"}
+                    ]
+                    },
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Every time the model takes an ACTION (shooting, dashing, melee attacks and so on), you can declare that they are spending one or more of any BLESSING MARKERS the model has. You can add +1 DICE to the dice pool when any roll on the Action Success Chart is made. Additionally, whenever the opponent makes an injury roll against a model, that model may spend a BLESSING MARKER to apply a -1 DICE penalty to that injury roll. Multiple BLESSING MARKERS can be applied to any single roll if the target model has more than one BLESSING MARKER.",
+                    "glossary": [
+                        {"val": "BLESSING MARKERS", "id": "kw_blessingmarker"},
+                        {"val": "-1 DICE", "id": "kw_minusdice"},
+                        {"val": "+1 DICE", "id": "kw_plusdice"},
+                        {"val": "ACTION", "id": "kw_action"}
+                    ]
+                    }
+                ]
+            }
+        ],
+        "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Rules often have modifiers to dice rolls marked as +DICE and -DICE (for example, shooting from elevated positions adds +1 DICE to ranged attacks against enemies below). These are shown in the format of +1 DICE and -1 DICE. Many models have them on their profile for Melee and Ranged attacks, and things like range, cover and so on can apply them to the dice rolls you make on the Action Success Chart or Injury Chart. For each +DICE, add one dice to the dice pool of the 2D6 roll you are about to make. Thus +1 DICE makes the roll a total of 3D6. Then roll all the dice and pick the two highest numbers. If two +DICE are added, roll 4D6 and pick the two highest and so on.",
+                "glossary": [
+                    {"val": "+DICE", "id": "kw_plusdice"},
+                    {"val": "-DICE", "id": "kw_minusdice"},
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "-1 DICE", "id": "kw_minusdice"}
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The -DICE works in reverse. For each -1 DICE, add ne dice to the dice pool of the 2D6 roll you are about to make. Thus -1 DICE makes the roll a total of 3D6. Then roll all the dice and pick the two lowest numbers. If -2 DICE are added, roll 4D6 and pick the two lowest and so on.",
+                "glossary": [
+                    {"val": "-DICE", "id": "kw_minusdice"},
+                    {"val": "-1 DICE", "id": "kw_minusdice"},
+                    {"val": "-2 DICE", "id": "kw_minusdice"}
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                    
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "Gameplay Example: "
+                            },        {
+                                "tags": {"desc_type" : "default"},
+                                "content": "A Trench Pilgrim model is shooting at a Heretic trooper with a musket. The Heretic is in cover, which grants -1 DICE to any ranged attacks. The Pilgrim rolls 3D6 and gets 5, 5 and 1. The two lowest numbers are picked for a result of 6. As the Pilgrim needed 7 to hit, the shot missed!",
+                                "glossary": [
+                                    {"val": "-1 DICE", "id": "kw_minusdice"}
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Before rolling dice, add any +DICE and -DICE to the dice pool. If the pool contains both +DICE and -DICE, remove pairs of opposite dice until only one type is remaining.",
+                "glossary": [
+                    {"val": "+DICE", "id": "kw_plusdice"},
+                    {"val": "-DICE", "id": "kw_minusdice"}
+                ]
+            }
+        ]
     }
 ]
