@@ -1323,5 +1323,133 @@
                 ]
             }
         ]
+    },
+    {
+        "id": "gr_rangedcombat",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Ranged Combat",
+        "item_index": 6,
+        "sections":  [
+            {
+                "title": "Steps For Ranged Combat",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [                    
+                            {
+                                "tags": {"desc_type" : "list"},
+                                "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "Choose one Ranged Weapon ACTION, declare a target and check line of sight.",
+                                        "glossary": [
+                                            {"val": "ACTION", "id": "kw_action"}
+                                        ]
+                                    },                            
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "Check if the target is in range of the weapon."
+                                    },                            
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "Determine and apply any +DICE/-DICE that affect the shot.",
+                                        "glossary": [
+                                            {"val": "+DICE", "id": "kw_plusdice"},
+                                            {"val": "-DICE", "id": "kw_minusdice"}
+                                        ]
+                                    },                            
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "Roll on the Action Success Chart as standard."
+                                    },                            
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "If you hit the enemy, roll on the Injury Chart (see below). Determine and apply any +DICE/-DICE that affect the injury roll.",
+                                        "glossary": [
+                                            {"val": "+DICE", "id": "kw_plusdice"},
+                                            {"val": "-DICE", "id": "kw_minusdice"}
+                                        ]
+                                    },                            
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "If the weapon can shoot multiple times per Activation, resolve the shots one at a time."
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Modifiers",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "Enemy Behind Cover: "
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Add -1 DICE to the roll. A model is in cover whenever it is in contact with a piece of scenery that is at least as long as the model’s base. If an attacker can see a model in its entirety, this penalty does not apply. A model cannot gain cover merely from being obscured due to angles, distant scenery or the surface that they are standing on (such as when standing on top of a building).",
+                                "glossary": [
+                                    {"val": "-1 DICE", "id": "kw_minusdice"}
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "Long Range: "
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "If the target is more than half the weapon’s maximum range, add -1 DICE to the roll to determine if the attack hits.",
+                                "glossary": [
+                                    {"val": "-1 DICE", "id": "kw_minusdice"}
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "Shooting From an Elevated Position: "
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Add +1 DICE to hit rolls if the model is taking the shot from a position more than 2” above the target’s ground level (being the floor on which the target’s base rests on). If the target is on a 50mm or larger base, the height must be 4” from the target’s ground level.",
+                                "glossary": [
+                                    {"val": "+1 DICE", "id": "kw_plusdice"}
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "To shoot at an enemy, a model must have a ranged eapon and be able to see the target. If the model has multiple ranged weapons, you can shoot one of them per Activation. The only way to check what your model can see is to stoop over the tabletop for a model’s eye view for actual line of sight."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Models in Melee combat cannot shoot unless the rules of the weapon indicate otherwise. Some indirect fire weapons have rules that allow you to target models even out of sight – these are clearly explained in the profile for such weapons. Models can see all around themselves (i.e. 360°) and they may be turned freely to face any direction before firing."
+            }
+        ]
     }
 ]
