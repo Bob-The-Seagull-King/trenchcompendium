@@ -94,5 +94,377 @@
             }
         ],
         "description": []
+    },
+    {
+        "id": "gr_gameturnsandactivations",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Game Turns & Activations",
+        "item_index": 2,
+        "sections":  [
+            {
+                "title": "Actions",
+                "description":  [
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Once Activated a model can take as many or as few ACTIONS during each Activation as you wish, in any order you choose. However, each ACTION can only be taken once per Activation unless otherwise stated in the rules. Thus you could fire your weapon, then Move and then Dash during the same Activation, or Dash and then Charge and so on.",
+                    "glossary": [
+                        {"val": "ACTIONS", "id": "kw_action"},
+                        {"val": "ACTION", "id": "kw_action"}
+                    ]
+                    },
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Common ACTIONS that all models can take are listed below. Be sure to consult the profile of each warrior in your warband to see what ACTIONS their abilities allow them to perform in addition to these.",
+                    "glossary": [
+                        {"val": "ACTIONS", "id": "kw_action"}
+                    ]
+                    },
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Several ACTIONS require you to roll on the Action Success Chart (see below) to see if you succeed. If you succeed, you take the ACTION as described in the rules. If you fail, you can still move or take any other ACTIONS the model may have. If the ACTION is classed as a RISKY ACTION and you fail, the activation of the model is over and your opponent can now activate one of their models!",
+                    "glossary": [
+                        {"val": "RISKY ACTION", "id": "kw_riskyaction"},
+                        {"val": "ACTIONS", "id": "kw_action"}
+                    ]
+                    }
+                ]
+            },
+            {
+                "title": "Common Actions",
+                "description":  [
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "",
+                    "subcontent": [
+                        {
+                            "tags": {"desc_type" : "bold"},
+                            "content": "Move: ",
+                            "glossary": [
+                                {"val": "", "id": ""}
+                            ]
+                        },
+                        {
+                            "tags": {"desc_type" : "default"},
+                            "content": "When a model takes this ACTION during its activation, choose one of the three options below. The Move ACTION does not require a roll on the Action Success Chart.",
+                            "glossary": [
+                                {"val": "ACTION", "id": "kw_action"}
+                            ]
+                        },
+                        {
+                            "tags": {"desc_type" : "list"},
+                            "content": "",
+                            "subcontent": [
+                                
+                                {
+                                    "tags": {"desc_type" : "default"},
+                                    "content": "",
+                                    "subcontent": [                                        
+                                        {
+                                            "tags": {"desc_type" : "bold"},
+                                            "content": "Standard Move: "
+                                        },
+                                        {
+                                            "tags": {"desc_type" : "default"},
+                                            "content": "The model moves up to its Movement characteristic."
+                                        }
+                                    ]
+                                },{
+                                    "tags": {"desc_type" : "default"},
+                                    "content": "",
+                                    "subcontent": [                                        
+                                        {
+                                            "tags": {"desc_type" : "bold"},
+                                            "content": "Charge: "
+                                        },
+                                        {
+                                            "tags": {"desc_type" : "default"},
+                                            "content": "Choose an enemy model (that the charging model can see) within 12” as the target. The charging model then moves directly toward that target via the shortest and most effective route possible determined by distance, with a D6” bonus to its Movement characteristic. This movement can allow the charging model to move within 1” of the target, putting the two models in Melee Combat with each other. A model cannot Charge if they have taken the Make a Ranged Attack ACTION during this Activation, unless they made a single ranged attack with a weapon that has the Keyword ASSAULT.",
+                                            "glossary": [
+                                                {"val": "ACTION", "id": "kw_action"},
+                                                {"val": "ASSAULT", "id": "kw_assault"}
+                                            ]
+                                        }
+                                    ]
+                                },{
+                                    "tags": {"desc_type" : "default"},
+                                    "content": "",
+                                    "subcontent": [                                        
+                                        {
+                                            "tags": {"desc_type" : "bold"},
+                                            "content": "Retreat"
+                                        },
+                                        {
+                                            "tags": {"desc_type" : "default"},
+                                            "content": "The model moves up to its Movement characteristic and it may leave Melee Combat during this movement. Each enemy model in Melee Combat with the retreating model may immediately take a Melee Attack ACTION with a single melee weapon that it has. Resolve the effects of this attack before moving the retreating model.",
+                                            "glossary": [
+                                                {"val": "ACTION", "id": "kw_action"}
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                    },
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "",
+                    "subcontent": [
+                        {
+                            "tags": {"desc_type" : "bold"},
+                            "content": "Dash: "
+                        },
+                        {
+                            "tags": {"desc_type" : "default"},
+                            "content": "The model must succeed with a RISKY ACTION. If successful, the model takes the Standard Move ACTION as described above. This can be done in addition to any other ACTIONS.",
+                            "glossary": [
+                                {"val": "RISKY ACTION", "id": "kw_riskyaction"},
+                                {"val": "ACTIONS", "id": "kw_action"}
+                            ]
+                        }
+                    ]
+                    },
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "",
+                    "subcontent": [
+                        {
+                            "tags": {"desc_type" : "bold"},
+                            "content": "Make a Ranged Attack: "
+                        },
+                        {
+                            "tags": {"desc_type" : "default"},
+                            "content": "The model may shoot with a ranged weapon that it is equipped with. A model engaged in Melee Combat cannot shoot. A model cannot make a Ranged Attack during an Activation in which they have Charged, unless they made a single ranged attack with a weapon that has the Keyword ASSAULT.",
+                            "glossary": [
+                                {"val": "ASSAULT", "id": "kw_assault"}
+                            ]
+                        }
+                    ]
+                    },
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "",
+                    "subcontent": [
+                        {
+                            "tags": {"desc_type" : "bold"},
+                            "content": "Make a Melee Attack"
+                        },
+                        {
+                            "tags": {"desc_type" : "default"},
+                            "content": "If the model is engaged in Melee combat, it may attack as detailed in the Melee Weapon’s entry in the rules. The attacker must be able to see at least part of the target – no Melee attacks through walls!"
+                        }
+                    ]
+                    },
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "",
+                    "subcontent": [
+                        {
+                            "tags": {"desc_type" : "bold"},
+                            "content": "Any Other Actions: "
+                        },
+                        {
+                            "tags": {"desc_type" : "default"},
+                            "content": "Many models have other possible ACTIONS they can take during their Activations. Refer to the Warband Lists for details.",
+                            "glossary": [
+                                {"val": "ACTIONS", "id": "kw_action"}
+                            ]
+                        }
+                    ]
+                    },
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "",
+                    "subcontent": [
+                        {
+                            "tags": {"desc_type" : "bold"},
+                            "content": "Risky Actions: "
+                        },
+                        {
+                            "tags": {"desc_type" : "default"},
+                            "content": "If you fail a RISKY ACTION, this always ends the activation of the model and your opponent can now activate one of their models!",
+                            "glossary": [
+                                {"val": "RISKY ACTION", "id": "kw_riskyaction"}
+                            ]
+                        }
+                    ]
+                    }
+                ]
+            },
+            {
+                "title": "Action Success Chart",
+                "description":  [
+                    {
+                    "tags": {"desc_type" : "infobox"},
+                    "content": "",
+                    "subcontent": [
+                        {
+                            "tags": {"desc_type" : "paragraph"},
+                            "content": "When you take an ACTION (including Melee and Ranged Attacks), roll 2D6 and add any +DICE or -DICE from the character’s profile, injuries or other sources, pick the two highest (or lowest if any -DICE were applied) and consult the chart below to see if the ACTION succeeded:",
+                            "glossary": [
+                                {"val": "ACTION", "id": "kw_action"},
+                                {"val": "+DICE", "id": "kw_plusdice"},
+                                {"val": "-DICE", "id": "kw_minusdice"}
+                            ]
+                        },
+                        {
+                            "tags": {"desc_type" : "headless_table"},
+                            "content": "",
+                            "subcontent": [
+                                {
+                                    "tags": {"desc_type" : "table_row"},
+                                    "content": "",
+                                    "subcontent": [
+                                        {
+                                            "tags": {"desc_type" : "table_item"},
+                                            "content": "2-6"
+                                        },
+                                        {
+                                            "tags": {"desc_type" : "table_item"},
+                                            "content": "Failure"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "tags": {"desc_type" : "table_row"},
+                                    "content": "",
+                                    "subcontent": [
+                                        {
+                                            "tags": {"desc_type" : "table_item"},
+                                            "content": "7-11"
+                                        },
+                                        {
+                                            "tags": {"desc_type" : "table_item"},
+                                            "content": "Success"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "tags": {"desc_type" : "table_row"},
+                                    "content": "",
+                                    "subcontent": [
+                                        {
+                                            "tags": {"desc_type" : "table_item"},
+                                            "content": "12"
+                                        },
+                                        {
+                                            "tags": {"desc_type" : "table_item"},
+                                            "content": "Critical Success: Ranged and Melee attacks add +1 DICE to injury rolls if your result is a critical success when determining if they hit.",
+                                            "glossary": [
+                                                {"val": "+1 DICE", "id": "kw_plusdice"}
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "tags": {"desc_type" : "paragraph"},
+                            "content": "If you succeed, you take the ACTION as described in the rules. If you fail, you can still move or take any other ACTIONS the model may have access to. If the ACTION fails, and it was RISKY, the model’s Activation ends immediately.",
+                            "glossary": [
+                                {"val": "ACTIONS", "id": "kw_action"},
+                                {"val": "ACTION", "id": "kw_action"},
+                                {"val": "RISKY", "id": "kw_riskyaction"}
+                            ]
+                        }
+                    ]
+                    }
+                ]
+            },            
+            {
+                "title": "End of Activation",
+                "description":  [
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Once you have moved the model and taken all ACTIONS you wish, or have failed with any of your RISKY ACTIONS, the Activation of the model ends and your opponent can now Activate one of their models. Keep Activating models as long as either player has any inactivated models left.",
+                    "glossary": [
+                        {"val": "ACTIONS", "id": "kw_action"},
+                        {"val": "RISKY", "id": "kw_riskyaction"}
+                    ]
+                    },
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Once you and your opponent have Activated all of your models once, go to the Morale Phase.",
+                    "glossary": [
+                        {"val": "ACTIONS", "id": "kw_action"}
+                    ]
+                    }
+                ]
+            },            
+            {
+                "title": "Morale",
+                "description":  [
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Your warband may abandon the battle if it suffers too many casualties. At the end of any Turn, when at least half of your warband is Down or Out of Action, roll on the Action Success Chart."
+                    },
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "If you fail, your warband flees the battlefield and loses the battle immediately. If both warbands are required to take this test, the smaller warband tests first."
+                    },
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "",
+                    "subcontent": [
+                        
+                        {
+                        "tags": {"desc_type" : "bold"},
+                        "content": "Optional Rule: "
+                        },
+                        {
+                        "tags": {"desc_type" : "default"},
+                        "content": "A warband that loses a Morale Test can decide, instead of fleeing, that their warband is Shaken. Actions taken by models in a Shaken warband are considered RISKY ACTIONS.",
+                        "glossary": [
+                            {"val": "RISKY ACTIONS", "id": "kw_riskyaction"}
+                        ]
+                        }
+                    ]
+                    },
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "After one turn, the warband recovers to its normal state and is no longer considered Shaken. If it fails a Morale test again (shaken or not), it flees as standard."
+                    }
+                ]
+            },            
+            {
+                "title": "End of Turn",
+                "description":  [
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Once both players have Activated all the models in their force once, the turn ends and a new turn begins. The player with the lowest number of models in their force starts the new turn and selects a model to activate."
+                    }
+                ]
+            }
+        ],
+        "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Players Activate their models in alternating order. A single Turn consists of both players Activating all their models once."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "For example, the first player will choose a model to Activate, take any ACTIONS available to the model, and then it is time for the next player to activate one of their models.",
+                "glossary": [
+                    {"val": "ACTIONS", "id": "kw_action"}
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "You can then choose any model in your warband (that has not yet been Activated) and Activate that model. This model can now Move, take ACTIONS and use special skills and equipment as you see fit. When your model’s Activation is over, your opponent can then Activate one of their models and so on.",
+                "glossary": [
+                    {"val": "ACTIONS", "id": "kw_action"}
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The player with the lowest number of models currently remaining on the table will decide who will start with the first Activation at the beginning of each Turn. If both players have the same number of models, roll a D6 and whoever rolls highest gets to decide."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "When each player has Activated all their models, the Turn is over."
+            }
+        ]
     }
 ]
