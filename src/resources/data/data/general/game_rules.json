@@ -1567,7 +1567,7 @@
                         "tags": {"desc_type" : "paragraph"},
                         "content": "If a STRONG model wields a two-handed melee weapon in one hand and a one-handed melee weapon in the other, the one-handed weapon is always regarded as the Off-Hand weapon. Resolve attacks made by a model wielding two melee weapons one at a time, with the Off-Hand weapon last.",
                         "glossary": [
-                            {"val": "STRONG", "id": "kw_stronng"}
+                            {"val": "STRONG", "id": "kw_strong"}
                         ]
                     }
                 ]
