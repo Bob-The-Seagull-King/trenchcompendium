@@ -29,6 +29,7 @@ import WbbAbilityDisplay from "./WbbAbilityDisplay";
 import {OverlayTrigger, Popover} from "react-bootstrap";
 import {usePlayMode} from "../../../context/PlayModeContext";
 import SynodImage from "../../../utility/SynodImage";
+import {usePrintMode} from "../../../context/PrintModeContext";
 
 
 interface WbbFighterDetailViewProps {
@@ -145,6 +146,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
     // end Test Data ***
 
     const { playMode } = usePlayMode();
+    const { printMode } = usePrintMode();
 
     /**
      * Equipment Modals
@@ -338,7 +340,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
 
 
             {/* Edit Loadout */}
-            {!playMode &&
+            {(!playMode && !printMode) &&
                 <div className={'fighter-card-collapse-wrap'}>
                     <WbbFighterCollapse title="Equipment" initiallyOpen={true}>
                         <p> {/* Equipment Rules */}
@@ -425,7 +427,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
 
             {/* Edit Campaign Play */}
 
-            {!playMode &&
+            {(!playMode && !printMode) &&
                 <div className={'fighter-card-collapse-wrap'}>
                     <WbbFighterCollapse title="Campaign Play">
 
@@ -573,7 +575,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
 
 
             {/* Abilities */}
-            {!playMode &&
+            {(!playMode && !printMode) &&
                 <div className={'fighter-card-collapse-wrap'}>
                     <WbbFighterCollapse title="Abilities">
                         {Abilities.map((ability, index) => (
@@ -585,52 +587,67 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
 
 
             {/* Play Mode Content */}
-            {playMode &&
+            {(playMode || printMode) &&
                 <div className={'fighter-card-play-mode-info'}>
 
-                    {/* @TODO: add all equipment items*/}
-                    <h3>{'Ranged Weapons'}</h3>
-                    <WbbEquipmentListItem
-                        item={item_siege_jezzail}
-                    />
+                    <div className={'play-mode-equipment-wrap'}>
+                        {/* @TODO: add all equipment items*/}
+                        <h3>{'Ranged Weapons'}</h3>
+                        <WbbEquipmentListItem
+                            item={item_siege_jezzail}
+                        />
+                    </div>
 
-                    <h3>{'Melee Weapons'}</h3>
-                    {/* @TODO: For each Item */}
-                    <WbbEquipmentListItem
-                        item={item_trench_knife}
-                    />
+                    <div className={'play-mode-equipment-wrap'}>
+                        <h3>{'Melee Weapons'}</h3>
+                        {/* @TODO: For each Item */}
+                        <WbbEquipmentListItem
+                            item={item_trench_knife}
+                        />
+                    </div>
 
-                    <h3>{'Equipment'}</h3>
-                    {/* @TODO: For each Item */}
-                    <WbbEquipmentListItem
-                        item={item_alch_ammo}
-                    />
+                    <div className={'play-mode-equipment-wrap'}>
+                        <h3>{'Equipment'}</h3>
+                        {/* @TODO: For each Item */}
+                        <WbbEquipmentListItem
+                            item={item_alch_ammo}
+                        />
+                    </div>
 
-                    {GoeticPowers.length > 0 &&
-                        <>
-                            <h3>{'Goetic Powers'}</h3>
-                            {GoeticPowers.map((option, index) => (
-                                <WbbOptionItem key={index} option={option}/>
-                            ))}
-                        </>
-                    }
+                    <div className={'play-mode-goetic-powers-wrap'}>
+                        {GoeticPowers.length > 0 &&
+                            <>
+                                <h3>{'Goetic Powers'}</h3>
+                                {GoeticPowers.map((option, index) => (
+                                    <WbbOptionItem key={index} option={option}/>
+                                ))}
+                            </>
+                        }
+                    </div>
 
-                    <h3>{'Abilities'}</h3>
-                    {Abilities.map((ability, index) => (
-                        <WbbAbilityDisplay key={index} ability={ability}/>
-                    ))}
+                    <div className={'play-mode-abilities-wrap'}>
+                        <h3>{'Abilities'}</h3>
+                        {Abilities.map((ability, index) => (
+                            <WbbAbilityDisplay key={index} ability={ability}/>
+                        ))}
+                    </div>
 
                     {/* @TODO: add upgrades as well as WbbAbilityDisplay */}
 
-                    <h3>{'Advancements'}</h3>
-                    {Advancements.map((advancement) => (
-                        <WbbEditViewAdvancement advancement={advancement} key={advancement.Id}/>
-                    ))}
+                    <div className={'play-mode-advancements-wrap'}>
+                        <h3>{'Advancements'}</h3>
+                        {Advancements.map((advancement) => (
+                            <WbbEditViewAdvancement advancement={advancement} key={advancement.Id}/>
+                        ))}
+                    </div>
 
-                    <h3>{'Injuries'}</h3>
-                    {Injuries.map((injury) => (
-                        <WbbEditViewInjury injury={injury} key={injury.Id}/>
-                    ))}
+                    <div className={'play-mode-injuries-wrap'}>
+                        <h3>{'Injuries'}</h3>
+                        {Injuries.map((injury) => (
+                            <WbbEditViewInjury injury={injury} key={injury.Id}/>
+                        ))}
+                    </div>
+
                 </div>
             }
 

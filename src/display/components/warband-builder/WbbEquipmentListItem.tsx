@@ -12,6 +12,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import WbbContextualPopover from "./WbbContextualPopover";
 import {usePlayMode} from "../../../context/PlayModeContext";
+import {usePrintMode} from "../../../context/PrintModeContext";
 
 interface EquipmentItemProps {
     item: {
@@ -31,12 +32,13 @@ interface EquipmentItemProps {
 const WbbEquipmentListItem: React.FC<EquipmentItemProps> = ({ item }) => {
 
     const { playMode } = usePlayMode();
+    const { printMode } = usePrintMode();
 
     return (
-        <div className={`WbbEquipmentListItem ${playMode ? 'play-mode' : ''}`}>
+        <div className={`WbbEquipmentListItem ${playMode ? 'play-mode' : ''} ${printMode ? 'print-mode' : ''} `}>
             <div className="equipment-name">{item.Name}</div>
 
-            {!playMode &&
+            {(!playMode || printMode) &&
                 <div className="equipment-cost">
                     {item.CostDucats > 0 &&
                         <>
@@ -51,13 +53,13 @@ const WbbEquipmentListItem: React.FC<EquipmentItemProps> = ({ item }) => {
                 </div>
             }
 
-            {!playMode &&
+            {(!playMode || printMode) &&
                 <div className={'equipment-modifiers'}>
                     {item.ModifiersString}
                 </div>
             }
 
-            {!playMode &&
+            {(!playMode && !printMode) &&
                 <WbbContextualPopover
                     id={`equipment-${item.Id}`}
                     type="equipment"
@@ -65,7 +67,7 @@ const WbbEquipmentListItem: React.FC<EquipmentItemProps> = ({ item }) => {
                 />
             }
 
-            {playMode &&
+            {(playMode && !printMode)  &&
                 <div className={'equipment-details'}>
                     <table>
                         { item.Range &&

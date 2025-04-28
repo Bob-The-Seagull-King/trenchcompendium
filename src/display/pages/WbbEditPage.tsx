@@ -3,6 +3,7 @@ import WbbEditView from "../components/warband-builder/WbbEditView";
 import { WarbandManager } from '../../classes/saveitems/Warband/WarbandManager';
 import { useLocation } from 'react-router-dom';
 import WarbandItemViewDisplay from '../components/features/saveitem/Warband/WarbandItemViewDisplay';
+import {PrintModeProvider} from "../../context/PrintModeContext";
 
 const WbbEditPage = (prop: any) => {
     const Manager : WarbandManager = prop.manager;
@@ -30,11 +31,13 @@ const WbbEditPage = (prop: any) => {
         <div className={'WbbEditPage'} key={keyval}>
             {_currentItem != null &&
                 <>
-                    <WbbEditView
-                        warbandData={_currentItem}
-                        manager={Manager}
-                    />
-                    <WarbandItemViewDisplay manager={Manager} data={_currentItem} updater={() => (console.log("NOTHING"))} />
+                    <PrintModeProvider>
+                        <WbbEditView
+                            warbandData={_currentItem}
+                            manager={Manager}
+                        />
+                        <WarbandItemViewDisplay manager={Manager} data={_currentItem} updater={() => (console.log("NOTHING"))} />
+                    </PrintModeProvider>
                 </>
             }
         </div>

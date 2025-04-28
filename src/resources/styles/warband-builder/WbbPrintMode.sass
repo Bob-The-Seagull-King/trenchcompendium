@@ -1,0 +1,79 @@
+// // // // //
+//
+// Print view for WBB
+//
+//
+
+//@media print
+//    color: red
+
+body[data-print="print"]
+    .header-main-spacer
+        display: none !important
+    .header-main
+        display: none !important
+
+    .exit-print-view
+        background-color: $color-highlight-bg-2
+        font-size: 22px
+        padding: 15px
+        cursor: pointer
+
+.WbbEditView.print-mode
+    font-size: 12px !important
+
+    .print-col
+        page-break-inside: avoid
+        margin-bottom: 15px
+
+    .pb-before
+        page-break-before: always
+    .pb-after
+        page-break-after: always
+
+    .pbi-avoid
+        page-break-inside: avoid
+
+
+    .WbbDetailView
+        .title
+            padding-left: 15px
+            .title-back
+                display: none
+            .title-text,
+            .fighter-cost
+                color: #fff
+
+
+    .btn-add-element
+        display: none
+
+    .WbbFighterDetailView.fighter-card
+        font-size: 12px !important
+
+        h3
+            width: 100%
+            font-size: 18px
+
+        .fighter-card-play-mode-info
+            display: flex
+            flex-wrap: wrap
+            gap: 10px
+
+            .play-mode-equipment-wrap
+                width: calc( 33% - 7px)
+
+            .play-mode-goetic-powers-wrap,
+            .play-mode-abilities-wrap,
+            .play-mode-advancements-wrap,
+            .play-mode-injuries-wrap
+                width: 100%
+                display: flex
+                flex-wrap: wrap
+                gap: 10px
+
+            .play-mode-goetic-powers-wrap .WbbOptionItem,
+            .WbbAbilityDisplay,
+            .WbbEditViewAdvancement,
+            .WbbEditViewInjury
+                width: calc( 33% - 7px)

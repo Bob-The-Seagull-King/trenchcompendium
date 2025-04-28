@@ -8,11 +8,13 @@ import {
     faArrowUp,
     faArrowLeft,
     faCoins,
-    faEdit, faPen, faFileExport, faDice, faSignature
+    faEdit, faPen, faFileExport, faDice, faSignature, faPrint
 } from '@fortawesome/free-solid-svg-icons';
 import { usePopover } from '../../../context/PopoverContext';
 import { useWarband } from '../../../context/WarbandContext';
 import {usePlayMode} from "../../../context/PlayModeContext";
+import {usePrintMode} from "../../../context/PrintModeContext";
+import {useGlobalState} from "../../../utility/globalstate";
 
 interface WbbContextualPopoverProps {
     id: string;
@@ -24,6 +26,7 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
     const { activePopoverId, setActivePopoverId } = usePopover();
     const { warband } = useWarband();
     const { playMode, togglePlayMode } = usePlayMode();
+    const { setPrintMode } = usePrintMode();
 
     const isActive = activePopoverId === id;
 
@@ -184,8 +187,39 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
         setshowConfirmExportWarbandModal(true);
     }
 
+    /** Print Mode */
+    const handlePrintWarband = () => {
+        console.log('handlePrintWarband');
 
+        setPrintMode(true);
 
+        // Switch to print theme
+        document.body.setAttribute('data-theme', 'light');
+        document.body.setAttribute('data-print', 'print');
+
+        setTimeout(() => {
+            window.print();
+        }, 200);
+    };
+
+    // Listen to print ending (using window events)
+    const [theme, setTheme] = useGlobalState('theme');
+    useEffect(() => {
+        const handleAfterPrint = () => {
+            console.log('Resetting print mode and theme');
+
+            setPrintMode(false);
+            document.body.setAttribute('data-theme', theme);
+            document.body.setAttribute('data-print', '');
+
+        };
+
+        window.addEventListener('afterprint', handleAfterPrint);
+
+        return () => {
+            window.removeEventListener('afterprint', handleAfterPrint);
+        };
+    }, []);
 
     /** Hides popover when a modal is opened */
     useEffect(() => {
@@ -346,6 +380,13 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                                     <div className="action action-rename" onClick={showConfirmExportWarband}>
                                         <FontAwesomeIcon icon={faFileExport} className="icon-inline-left-l"/>
                                         {'Export Warband'}
+                                    </div>
+                                    <div className="action action-rename" onClick={() => {
+                                        setActivePopoverId(null);
+                                        handlePrintWarband();
+                                    }}>
+                                        <FontAwesomeIcon icon={faPrint} className="icon-inline-left-l"/>
+                                        {'Print Warband'}
                                     </div>
                                 </>
                             }
