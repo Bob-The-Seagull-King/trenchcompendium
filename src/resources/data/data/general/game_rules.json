@@ -20,80 +20,85 @@
             "content": "The following rules will immerse you in the trenches, guiding your warband through fierce skirmish battles as you vie for supremacy in No Man’s Land."
             }
         ],
-        "sections": []
-    },
-    {
-        "id": "gr_whatyouneedtoplay",
-        "source": "core",
-        "tags": { },
-        "contextdata": { },
-        "name": "What You Need To Play",
-        "item_index": 1,
-        "sections":  [
+        "sections": [
             {
-                "title": "Miniatures",
-                "description":  [
+                "title": "What You Need To Play",
+                "description":  [ ],
+                "content": [
                     {
-                    "tags": {"desc_type" : "default"},
-                    "content": "Each player commands a Warband, which typically consists of 6-20 models. While there is no ironclad rule on the scale of models, the heroic 32mm scale is what we use in our games. If you prefer another scale, do not worry – Witchburners will not be dispatched to cleanse you for your lack of scale purity!"
+                        "title": "Miniatures",
+                        "description":  [
+                            {
+                            "tags": {"desc_type" : "default"},
+                            "content": "Each player commands a Warband, which typically consists of 6-20 models. While there is no ironclad rule on the scale of models, the heroic 32mm scale is what we use in our games. If you prefer another scale, do not worry – Witchburners will not be dispatched to cleanse you for your lack of scale purity!"
+                            }
+                        ]
+                    },
+        
+                    {
+                        "title": "Tabletop",
+                        "description":  [
+                            {
+                            "tags": {"desc_type" : "default"},
+                            "content": "You will also need a gaming surface to play on. We suggest two surface sizes for games: 48” x 48” or 36” x 36”. This allows the game to be played on a typical kitchen table."
+                            }
+                        ]
+                    },
+        
+                    {
+                        "title": "Terrain",
+                        "description":  [
+                            {
+                            "tags": {"desc_type" : "default"},
+                            "content": "Terrain is also necessary, and the more you have of it, the better! Trench Crusade is a game of position and tactics, so different types of elevation, cover and varied terrain pieces will all enhance your gaming experience."
+                            }
+                        ]
+                    },
+        
+                    {
+                        "title": "Measuring Tool",
+                        "description":  [
+                            {
+                            "tags": {"desc_type" : "default"},
+                            "content": "To measure distances, you will need a tape measure or measuring stick. Trench Crusade uses the Imperial measurement system which means movement is measured in inches."
+                            }
+                        ]
+                    },
+        
+                    {
+                        "title": "Dice",
+                        "description":  [
+                            {
+                            "tags": {"desc_type" : "default"},
+                            "content": "Next, you will require dice. Each player should have ight 6-sided dice (D6s) in their own distinct colours."
+                            }
+                        ]
+                    },
+        
+                    {
+                        "title": "Blood Marker Dice",
+                        "description":  [
+                            {
+                            "tags": {"desc_type" : "default"},
+                            "content": "Finally, you will need a few red 6-sided dice to represent BLOOD MARKERS (explained in the rules below).",
+                            "glossary": [
+                                {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"}
+                            ]
+                            }
+                        ]
                     }
                 ]
             },
-
             {
-                "title": "Tabletop",
+                "title": "Keywords",
                 "description":  [
                     {
-                    "tags": {"desc_type" : "default"},
-                    "content": "You will also need a gaming surface to play on. We suggest two surface sizes for games: 48” x 48” or 36” x 36”. This allows the game to be played on a typical kitchen table."
-                    }
-                ]
-            },
-
-            {
-                "title": "Terrain",
-                "description":  [
-                    {
-                    "tags": {"desc_type" : "default"},
-                    "content": "Terrain is also necessary, and the more you have of it, the better! Trench Crusade is a game of position and tactics, so different types of elevation, cover and varied terrain pieces will all enhance your gaming experience."
-                    }
-                ]
-            },
-
-            {
-                "title": "Measuring Tool",
-                "description":  [
-                    {
-                    "tags": {"desc_type" : "default"},
-                    "content": "To measure distances, you will need a tape measure or measuring stick. Trench Crusade uses the Imperial measurement system which means movement is measured in inches."
-                    }
-                ]
-            },
-
-            {
-                "title": "Dice",
-                "description":  [
-                    {
-                    "tags": {"desc_type" : "default"},
-                    "content": "Next, you will require dice. Each player should have ight 6-sided dice (D6s) in their own distinct colours."
-                    }
-                ]
-            },
-
-            {
-                "title": "Blood Marker Dice",
-                "description":  [
-                    {
-                    "tags": {"desc_type" : "default"},
-                    "content": "Finally, you will need a few red 6-sided dice to represent BLOOD MARKERS (explained in the rules below).",
-                    "glossary": [
-                        {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"}
-                    ]
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Keywords define the core abilities, rules, troop types and damage categories in the game. Each of them is shared by several models/weapons/equipment and are called out with a Keyword. This makes it easy for you to differentiate between descriptive terms and game rules. A model or a weapon may have multiple Keywords. Rules governing all Keywords in the game are listed here."
                     }
                 ]
             }
-        ],
-        "description": []
+        ]
     },
     {
         "id": "gr_gameturnsandactivations",
@@ -101,7 +106,7 @@
         "tags": { },
         "contextdata": { },
         "name": "Game Turns & Activations",
-        "item_index": 2,
+        "item_index": 1,
         "sections":  [
             {
                 "title": "Actions",
@@ -473,7 +478,7 @@
         "tags": { },
         "contextdata": { },
         "name": "+DICE and -DICE",
-        "item_index": 3,
+        "item_index": 2,
         "sections":  [
             {
                 "title": "Blood Markers",
@@ -623,7 +628,7 @@
         "tags": { },
         "contextdata": { },
         "name": "Movement",
-        "item_index": 4,
+        "item_index": 3,
         "sections":  [
             {
                 "title": "Charging",
@@ -982,7 +987,7 @@
         "tags": { },
         "contextdata": { },
         "name": "Injury Chart",
-        "item_index": 5,
+        "item_index": 4,
         "sections":  [
         ],
         "description": [
@@ -1330,7 +1335,7 @@
         "tags": { },
         "contextdata": { },
         "name": "Ranged Combat",
-        "item_index": 6,
+        "item_index": 5,
         "sections":  [
             {
                 "title": "Steps For Ranged Combat",
@@ -1458,7 +1463,7 @@
         "tags": { },
         "contextdata": { },
         "name": "Melee Combat",
-        "item_index": 7,
+        "item_index": 6,
         "sections":  [
             {
                 "title": "Steps For Melee Combat",
