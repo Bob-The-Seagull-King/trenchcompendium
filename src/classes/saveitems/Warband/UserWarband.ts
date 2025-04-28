@@ -168,6 +168,21 @@ class UserWarband extends DynamicContextObject {
         return this.Context.LimitGlory;
     }
 
+    /**
+     * @TODO
+     * Returns bool - Does the warband have Troops?
+     */
+    public HasTroops () {
+        return true;
+    }
+
+    /**
+     * @TODO
+     * Returns bool - Does the warband have Elites?
+     */
+    public HasElites () {
+        return true;
+    }
 
     /**
      * @TODO
