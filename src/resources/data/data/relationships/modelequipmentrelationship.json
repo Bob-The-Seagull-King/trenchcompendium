@@ -11,6 +11,17 @@
         "removable": false
     },
     {
+        "id": "rel_md_eq_mercydog",
+        "source": "core",
+        "tags": {},
+        "name": "Mercy Equipment",
+        "contextdata": {},
+        "options": [],
+        "model_id": ["md_trenchdog_mercydog"],
+        "mandatory_equipment": ["eq_medikit"],
+        "removable": false
+    },
+    {
         "id": "rel_md_eq_mamlukfarisbase",
         "source": "core",
         "tags": {},

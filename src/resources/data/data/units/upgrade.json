@@ -589,5 +589,24 @@
             }
         ],
         "options": []
+    },
+    {
+        "id": "up_trenchdog_fireteam",
+        "name": "Loyal Dog",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {
+            "add_fireteam_model" : { "type": "standard", "count": 1 }
+        },
+        "description": [           
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The dog gains an ability to form a FIRETEAM with any 1 model in your Warband.",
+                "glossary": [
+                    {"val": "FIRETEAM", "id": "kw_fireteam"}
+                ]
+            }
+        ],
+        "options": []
     }
 ]

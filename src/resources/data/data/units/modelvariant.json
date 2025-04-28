@@ -236,5 +236,111 @@
         "keywords" : [],
         "cut_abilities" : [],
         "new_abilities" : []
+    },
+    {
+        "id": "md_trenchdog_guarddog",
+        "name": "Guard Dog",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            },
+        "base_id": "md_trenchdog",
+        "variant_name": "Guard",
+        "lore": [                      
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "A great many animals serve in the trenches alongside the soldiers. Wardogs are by far the most common, but tame ocelots, barbary apes, small bears, and other unusual pets abound, while the forces of Hell keep Hellhounds and other infernal beasts as pets."
+            },   
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "These dogs both warn their masters of impending danger and fight fiercely for their company."
+            }
+        ],
+        "team": "none",
+        "stats" : {},
+        "cut_keywords" : [],
+        "keywords" : [],
+        "cut_abilities" : [],
+        "new_abilities" : ["ab_guarddog"]
+    },
+    {
+        "id": "md_trenchdog_mercydog",
+        "name": "Mercy Dog",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            },
+        "base_id": "md_trenchdog",
+        "variant_name": "Mercy",
+        "lore": [                      
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "A great many animals serve in the trenches alongside the soldiers. Wardogs are by far the most common, but tame ocelots, barbary apes, small bears, and other unusual pets abound, while the forces of Hell keep Hellhounds and other infernal beasts as pets."
+            },   
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Mercy dogs carry a Medi-Kit."
+            }
+        ],
+        "team": "none",
+        "stats" : {},
+        "cut_keywords" : [],
+        "keywords" : [],
+        "cut_abilities" : [],
+        "new_abilities" : ["ab_mercydog"]
+    },
+    {
+        "id": "md_trenchdog_martyrdomdog",
+        "name": "Martyrdom Dog",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            },
+        "base_id": "md_trenchdog",
+        "variant_name": "Martyrdom",
+        "lore": [                      
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "A great many animals serve in the trenches alongside the soldiers. Wardogs are by far the most common, but tame ocelots, barbary apes, small bears, and other unusual pets abound, while the forces of Hell keep Hellhounds and other infernal beasts as pets."
+            },   
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Trench Pilgrims often enthusiastically strap their dogs with explosives so they can partake in a glorious martyrdom operation."
+            }
+        ],
+        "team": "none",
+        "stats" : {},
+        "cut_keywords" : [],
+        "keywords" : [],
+        "cut_abilities" : [],
+        "new_abilities" : ["ab_martyrdomdog"]
+    },
+    {
+        "id": "md_trenchdog_hellhound",
+        "name": "Hellhound",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            },
+        "base_id": "md_trenchdog",
+        "variant_name": "Hellhound",
+        "lore": [                      
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "A great many animals serve in the trenches alongside the soldiers. Wardogs are by far the most common, but tame ocelots, barbary apes, small bears, and other unusual pets abound, while the forces of Hell keep Hellhounds and other infernal beasts as pets."
+            },   
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "This horrifying infernal canine is the size of a small pony, and within its tortured belly rage flames of Hell itself. It howls in constant agony and rage in combat."
+            }
+        ],
+        "team": "none",
+        "stats" : {
+            "melee": 1
+        },
+        "cut_keywords" : [],
+        "keywords" : [],
+        "cut_abilities" : [],
+        "new_abilities" : ["ab_hellhound"]
     }
 ]
