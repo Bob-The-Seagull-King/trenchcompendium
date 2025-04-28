@@ -8,20 +8,22 @@ import {
     faArrowUp,
     faArrowLeft,
     faCoins,
-    faEdit
+    faEdit, faPen, faFileExport, faDice, faSignature
 } from '@fortawesome/free-solid-svg-icons';
 import { usePopover } from '../../../context/PopoverContext';
 import { useWarband } from '../../../context/WarbandContext';
+import {usePlayMode} from "../../../context/PlayModeContext";
 
 interface WbbContextualPopoverProps {
     id: string;
-    type: 'fighter' | 'injury' | 'advancement' | 'modifier' | 'exploration' | 'equipment';
+    type: 'fighter' | 'injury' | 'advancement' | 'modifier' | 'exploration' | 'equipment' | 'warband';
     item: any;
 }
 
 const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, item }) => {
     const { activePopoverId, setActivePopoverId } = usePopover();
     const { warband } = useWarband();
+    const { playMode, togglePlayMode } = usePlayMode();
 
     const isActive = activePopoverId === id;
 
@@ -164,6 +166,27 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
         console.log('handleDeleteInjury');
     }
 
+    /** Warband Actions */
+    const [showConfirmRenameWarbandModal, setshowConfirmRenameWarbandModal] = useState(false);
+    const [showConfirmExportWarbandModal, setshowConfirmExportWarbandModal] = useState(false);
+    const showConfirmRenameWarband = () => {
+        console.log('showConfirmRenameWarband');
+        setshowConfirmRenameWarbandModal(true);
+    }
+    const handleRenameWarband = () => {
+        setshowConfirmRenameWarbandModal(false);
+
+        // @TODO: Rename the Warband
+        console.log('handleRenameWarband');
+    }
+    const showConfirmExportWarband = () => {
+        console.log('showConfirmExportWarband');
+        setshowConfirmExportWarbandModal(true);
+    }
+
+
+
+
     /** Hides popover when a modal is opened */
     useEffect(() => {
         if (showConfirmDeleteFighterModal
@@ -175,6 +198,8 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
             || showConfirmMoveEquipmentModal
             || showConfirmDeleteAdvancementModal
             || showConfirmDeleteInjuryModal
+            || showConfirmRenameWarbandModal
+            || showConfirmExportWarbandModal
         ) {
             setActivePopoverId(null);
         }
@@ -187,7 +212,9 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
         showConfirmSellEquipmentModal,
         showConfirmMoveEquipmentModal,
         showConfirmDeleteAdvancementModal,
-        showConfirmDeleteInjuryModal
+        showConfirmDeleteInjuryModal,
+        showConfirmRenameWarbandModal,
+        showConfirmExportWarbandModal
     ]);
     return (
         <>
@@ -286,6 +313,39 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                                     <div className="action action-delete" onClick={showConfirmDeleteInjury}>
                                         <FontAwesomeIcon icon={faTrash} className="icon-inline-left-l"/>
                                         {'Delete Injury'}
+                                    </div>
+                                </>
+                            }
+
+                            {type === 'warband' &&
+                                <>
+                                    {playMode &&
+                                        <div className="action action-rename" onClick={() => {
+                                            setActivePopoverId(null);
+                                            togglePlayMode();
+                                        }}>
+                                            <FontAwesomeIcon icon={faPen} className="icon-inline-left-l"/>
+                                            {'Enter Edit Mode'}
+                                        </div>
+                                    }
+
+                                    {!playMode &&
+                                        <div className="action action-rename" onClick={() => {
+                                            setActivePopoverId(null);
+                                            togglePlayMode();
+                                        }}>
+                                            <FontAwesomeIcon icon={faDice} className="icon-inline-left-l"/>
+                                            {'Enter Play Mode'}
+                                        </div>
+                                    }
+
+                                    <div className="action action-rename" onClick={showConfirmRenameWarband}>
+                                        <FontAwesomeIcon icon={faSignature} className="icon-inline-left-l"/>
+                                        {'Rename Warband'}
+                                    </div>
+                                    <div className="action action-rename" onClick={showConfirmExportWarband}>
+                                        <FontAwesomeIcon icon={faFileExport} className="icon-inline-left-l"/>
+                                        {'Export Warband'}
                                     </div>
                                 </>
                             }
@@ -517,6 +577,51 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                     </Button>
                     <Button variant="danger" onClick={handleDeleteInjury}>
                         Delete
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+            {/** Rename Warband Modal */}
+            <Modal show={showConfirmRenameWarbandModal} onHide={() => setshowConfirmRenameWarbandModal(false)} centered>
+                <Modal.Header closeButton>
+                    <Modal.Title>{`Rename Warband`}</Modal.Title>
+                </Modal.Header>
+
+                <Modal.Body>
+                    <div className="mb-3">
+                        <label className="form-label">Warband Name</label>
+                        <input type="text" className="form-control"
+                               placeholder="Warband Name"
+                               value={warband?.GetWarbandName()}
+                        />
+                    </div>
+                </Modal.Body>
+
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={() => setshowConfirmRenameWarbandModal(false)}>
+                        Cancel
+                    </Button>
+                    <Button variant="danger" onClick={handleRenameWarband}>
+                        Delete
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+            {/** Export Warband Modal */}
+            <Modal show={showConfirmExportWarbandModal} onHide={() => setshowConfirmExportWarbandModal(false)} centered>
+                <Modal.Header closeButton>
+                    <Modal.Title>{`Export Warband`}</Modal.Title>
+                </Modal.Header>
+
+                <Modal.Body>
+                    <div className="mb-3">
+                    {/* @TODO: add warband Export here */}
+                    </div>
+                </Modal.Body>
+
+                <Modal.Footer>
+                    <Button variant="primary" onClick={() => setshowConfirmExportWarbandModal(false)}>
+                        Close
                     </Button>
                 </Modal.Footer>
             </Modal>
