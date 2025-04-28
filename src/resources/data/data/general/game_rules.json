@@ -1599,5 +1599,294 @@
                 ]
             }
         ]
+    },
+    {
+        "id": "gr_startingawarband",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Starting a Warband",
+        "item_index": 7,
+        "sections":  [
+            {
+                "title": "Choose Your Faction",
+                "description":  [
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Each warband in Trench Crusade belongs to a faction fighting in the Great War. Use the faction lists that follow to recruit and equip your warband. These lists provide information about the troop types available, their weapons, armour and equipment options, as well as special rules specific to that faction."
+                    },
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "",
+                    "subcontent": [
+                        
+                        {
+                        "tags": {"desc_type" : "bold"},
+                        "content": "Note: "
+                        },
+                        {
+                        "tags": {"desc_type" : "default"},
+                        "content": "Most warbands have Variant Lists which you can use instead of the main list. These are listed as part of the Warband List entry and they detail how the variant differs from the core list."
+                        }
+                    ]
+                    }
+                ]
+            },
+            {
+                "title": "Recruit Your Warband",
+                "description":  [
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Once you have selected your faction (and possible Variant), you have 700 ducats to spend on your initial warband. Each model and their equipment (if you choose to buy any) costs a set amount of money. As you make your choices, subtract the money you have “spent” from your total until you have bought all you can. Any unspent ducats are put into the warband’s strongbox and can be used later or hoarded to buy something more expensive."
+                    },
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Some items, weapons and armour cost Glory Points instead of ducats to acquire them. Glory Points are earned by performing valorous deeds in battle. Refer to the section on Glory for details. Generally warbands don’t have access to Glory Points when they are created, so these purchases usually happen later on in the campaign."
+                    },
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Each warband list details what troops are available to you and in what numbers. Most lists include a model they must have when the warband is created, usually representing its commanding officer. Otherwise you are allowed to purchase as many or as few warriors as you wish. We recommend that the weapons, armour and equipment you choose for your warriors should be represented on the models themselves to make it easier for you and your opponents to play the game."
+                    }
+                ]
+            },
+            {
+                "title": "Keywords",
+                "description":  [
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Some troop types, weapons and pieces of equipment have Keywords that give them special abilities, or denote them to be part of a group of models where certain rules apply to all models with the same Keyword. See the section on Keywords for details."
+                    }
+                ],
+                "content": [
+                    {
+                        "title": "Limitations",
+                        "description":  [
+                            {
+                            "tags": {"desc_type" : "paragraph"},
+                            "content": "Some armaments are more limited in supply. They may have the following Keywords that limit their availability. These limitations are shown in the warband lists as follows:"
+                            },
+                            {
+                            "tags": {"desc_type" : "paragraph"},
+                            "content": "",
+                            "subcontent": [
+                                
+                                {
+                                "tags": {"desc_type" : "list"},
+                                "content": "",
+                                "subcontent": [                                    
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "",
+                                        "subcontent": [
+                                            
+                                            {
+                                                "tags": {"desc_type" : "bold"},
+                                                "content": "",
+                                                "glossary": [
+                                                    {"val": "", "id": ""}
+                                                ]
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "default"},
+                                                "content": "",
+                                                "glossary": [
+                                                    {"val": "", "id": ""}
+                                                ]
+                                            }
+                                        ]
+                                        },{
+                                    "tags": {"desc_type" : "default"},
+                                    "content": "",
+                                    "subcontent": [
+                                        
+                                        {
+                                            "tags": {"desc_type" : "bold"},
+                                            "content": "LIMIT (X): ",
+                                            "glossary": [
+                                                {"val": "LIMIT (X)", "id": "kw_limit"}
+                                            ]
+                                        },
+                                        {
+                                            "tags": {"desc_type" : "default"},
+                                            "content": "If the piece of equipment has a Keyword LIMIT, then your warband cannot have more than the set number of this type of weapon, armour or equipment. For example, if a Weapon has Keyword LIMIT (2), then your warband can purchase a maximum of two such weapons. If you lose any of these weapons during the campaign, you can buy replacements with available funds up to a maximum of two.",
+                                            "glossary": [
+                                                {"val": "LIMIT (X)", "id": "kw_limit"}
+                                            ]
+                                        }
+                                    ]
+                                    },
+                                    {
+                                    "tags": {"desc_type" : "default"},
+                                    "content": "",
+                                    "subcontent": [
+                                        
+                                        {
+                                            "tags": {"desc_type" : "bold"},
+                                            "content": "ELITE only: ",
+                                            "glossary": [
+                                                {"val": "ELITE", "id": "kw_elite"}
+                                            ]
+                                        },
+                                        {
+                                            "tags": {"desc_type" : "default"},
+                                            "content": "Some weapons, armour or equipment are only usable by troops with the ELITE Keyword. You cannot give them to troops without the ELITE Keyword even if you acquire extras during a campaign.",
+                                            "glossary": [
+                                                {"val": "ELITE", "id": "kw_elite"}
+                                            ]
+                                        }
+                                    ]
+                                    }
+                                ]
+                                }
+                            ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Allies and Mercenaries",
+                "description":  [
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "During the campaign you will have a chance to obtain Glory Points which can be used to purchase powerful troops and famous warriors known as Allies. These will add both numbers and specialist abilities to your warband. They cannot be purchased with ducats – the only way to attract their services is to perform glorious deeds on the battlefield!"
+                    },
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Allies fight alongside your warband, but they do not benefit or suffer from any special rules or restrictions that your warband might have. For example, a mercenary’s equipment never counts toward the LIMIT for any of the items that they have. Additionally, a Sin Eater (a mercenary available to the Heretic Legions) would not be affected by the Trench Ghost’s unique rules such as Slow and Undead Fortitude. If a rule is capable of affecting Allies, it will explicitly state so.",
+                    "glossary": [
+                        {"val": "LIMIT", "id": "kw_limit"}
+                    ]
+                    }
+                ]
+            },
+            {
+                "title": "Purchasable Abilities",
+                "description":  [
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Some warbands allow you to purchase optional abilities for your models, such as the Goetic Powers of the Court of the Seven-headed Serpent. Unless otherwise specified, you can only ever buy one copy of any of these abilities for a single model. The same applies to bonuses gained from equipment, such as Martyrdom pills."
+                    }
+                ]
+            },
+            {
+                "title": "Roster",
+                "description":  [
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "You’ll need a warband roster sheet to record the details of your warband. Warbands can be built and recorded on the Trench Companion."
+                    },
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "When you choose a warband, take a warband roster sheet and write down the details of each trooper in the appropriate place. It is a good idea to work out the warband on a piece of scrap paper first, as you will have to juggle the weapons and fighters to get as close to the maximum permitted value of the warband as possible. If you have any cash left after choosing your warband write this down in the space marked Strongbox. You will need to give your warband a name as well as name all your Elites and all your common troopers. It’s up to you to invent suitable names, though you’ll find plenty of inspiration throughout this book."
+                    }
+                ]
+            },{
+                "title": "Characteristics Profile",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "The characteristics of each model are described in their profile. You will find profiles for all models in the appropriate faction list. The information found on the profiles is described here."
+                    }
+                 ],
+                "content": [
+                    {
+                        "title": "Model Name",
+                        "description":  [
+                            {
+                            "tags": {"desc_type" : "paragraph"},
+                            "content": "The name of the model is recorded first in any profile."
+                            }
+                        ]
+                    },
+                    {
+                        "title": "Movement",
+                        "description":  [
+                            {
+                            "tags": {"desc_type" : "paragraph"},
+                            "content": "The distance in inches which the model may move on the battlefield each time it is activated."
+                            }
+                        ]
+                    },
+                    {
+                        "title": "Ranged",
+                        "description":  [
+                            {
+                            "tags": {"desc_type" : "paragraph"},
+                            "content": "This number indicates how many +DICE/-DICE the model adds to its attack roll when using any ranged weapons. The higher the number, the more skilled a warrior is when using ranged weapons.",
+                            "glossary": [
+                                {"val": "+DICE", "id": "kw_plusdice"},
+                                {"val": "-DICE", "id": "kw_minusdice"}
+                            ]
+                            }
+                        ]
+                    },
+                    {
+                        "title": "Melee",
+                        "description":  [
+                            {
+                            "tags": {"desc_type" : "paragraph"},
+                            "content": "This number indicates how many +DICE/-DICE the model adds to its attack roll when making a melee attack. The higher the number, the more skilled a model is.",
+                            "glossary": [
+                                {"val": "+DICE", "id": "kw_plusdice"},
+                                {"val": "-DICE", "id": "kw_minusdice"}
+                            ]
+                            }
+                        ]
+                    },
+                    {
+                        "title": "Armour",
+                        "description":  [
+                            {
+                            "tags": {"desc_type" : "paragraph"},
+                            "content": "Indicates how well-armoured the model is. This number is subtracted from the roll on the Injury Chart when the model is wounded."
+                            }
+                        ]
+                    },
+                    {
+                        "title": "Base",
+                        "description":  [
+                            {
+                            "tags": {"desc_type" : "paragraph"},
+                            "content": "Indicates the size of the base the model is mounted on."
+                            }
+                        ]
+                    },
+                    {
+                        "title": "Equipment",
+                        "description":  [
+                            {
+                            "tags": {"desc_type" : "paragraph"},
+                            "content": "This entry lists the equipment, weapons and armour the model is carrying, as well as what options for acquiring additional gear it may have." 
+                            }
+                        ]
+                    },
+                    {
+                        "title": "Abilities",
+                        "description":  [
+                            {
+                            "tags": {"desc_type" : "paragraph"},
+                            "content": "If the model has any unique special abilities not covered by the standard rules, they will be described here."
+                            }
+                        ]
+                    },
+                    {
+                        "title": "Keywords",
+                        "description":  [
+                            {
+                            "tags": {"desc_type" : "paragraph"},
+                            "content": "Any Keywords the model has will be listed here. These include troop types as well as the most common abilities shared between multiple troop types, each identified by the identical Keyword. The Keywords section explains the rules for each of them."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "In this part of the rules, we will take a detailed look at each warband and provide the information you need to recruit one."
+            }
+        ]
     }
 ]
