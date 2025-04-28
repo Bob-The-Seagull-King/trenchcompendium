@@ -2068,5 +2068,149 @@
                 ]
             }
         ]
+    },
+    {
+        "id": "gr_scenarios",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Scenarios",
+        "item_index": 9,
+        "sections":  [
+            {
+                "title": "Table Size",
+                "description":  [
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Battles are fought on a table with 4’ x 4’ dimensions. The scenario will always indicate clearly if the table size differs from this."
+                    }
+                ]
+            },
+            {
+                "title": "Setting Up Terrain",
+                "description":  [
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Unless the Scenario states otherwise, use the following rules to set up the scenarios. The player with the lower number of models in their force can place one of the following terrain pieces on the table:"
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [                    
+                            {
+                                "tags": {"desc_type" : "list"},
+                                "content": "",
+                                "subcontent": [
+                                    
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "One Building (a tower, house etc.)"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "One Piece of Dangerous Terrain (swamp, barbed wire etc.)"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "One Piece of Difficult Terrain (forest, rocky ground)"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "One Piece of Impassable terrain (12” river with a bridge or ford, sheer cliffs etc.) Maximum two pieces per battle"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "One Hill"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "One Fence/Wall/other defendable terrain piece (max one per player)"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "6” Section of a Trench"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Each building must be placed:"
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [                    
+                            {
+                                "tags": {"desc_type" : "list"},
+                                "content": "",
+                                "subcontent": [
+                                    
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "at least 8” away from any table edge and"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "at least 6” away from the nearest building"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Both players place these large terrain pieces until they have both placed at least three pieces each. In addition, both players should add six smaller terrain pieces like boxes, sandbags, bomb craters, wells, fountains etc. anywhere on the table to create additional cover."
+                    }
+                ]
+            },
+            {
+                "title": "Objective Markers",
+                "description":  [
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Some Scenarios use Objective Markers. You can use flags, coins, banners, beads or other suitable pieces for these markers."
+                    }
+                ]
+            },
+            {
+                "title": "Before the Battle & Pre-Battle Abilities",
+                "description":  [
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Many abilities instruct (or offer) the chance to take an action before the battle begins. These are called Pre-Battle Abilities. Unless otherwise stated, Pre-Battle Abilities are activated and resolved after forces have been assembled and the terrain has been set up, but before models have been deployed."
+                    },
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "If both players have Pre-Battle Abilities to resolve at the same time, each player resolves a single Pre-Battle Ability at a time in alternating order, starting with the player who will have the first turn. If multiple Pre-Battle Abilities belonging to the same player need to be resolved at the same time, the player that they belong to may resolve them in any order that they please (unless the abilities specify that they must be activated in a specific order). If one player has resolved all of their Pre-Battle Abilities, the other player may resolve the remainder of theirs."
+                    }
+                ]
+            },
+            {
+                "title": "Victory Points",
+                "description":  [
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Victory Points (VPs) are used to determine who wins and loses a battle in most scenarios. VPs are often awarded for objectives specific to the scenario you are playing and this is clearly explained in the scenario itself."
+                    },
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "If you are playing the Campaign, the winner always gains 5 VPs if otherwise the result would indicate less."
+                    }
+                ]
+            },
+            {
+                "title": "Duration of the Game",
+                "description":  [
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "A typical game lasts for six Game Turns. Some scenarios have a different duration. These cases are always clearly indicated in the rules for the scenario."
+                    }
+                ]
+            }
+        ],
+        "description": [
+        ]
     }
 ]
