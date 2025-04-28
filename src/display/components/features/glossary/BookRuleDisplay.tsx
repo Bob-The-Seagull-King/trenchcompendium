@@ -84,6 +84,7 @@ const BookRuleDisplay = (props: any) => {
 
                                 {item.content.map((valitem) => (
                                     <div key={valitem.title || ""}>
+                                        <br/>
                                         <RulesHeadlineDisplay
                                             content={valitem.title}
                                             level={3}

@@ -1675,26 +1675,6 @@
                                 "content": "",
                                 "subcontent": [                                    
                                     {
-                                        "tags": {"desc_type" : "default"},
-                                        "content": "",
-                                        "subcontent": [
-                                            
-                                            {
-                                                "tags": {"desc_type" : "bold"},
-                                                "content": "",
-                                                "glossary": [
-                                                    {"val": "", "id": ""}
-                                                ]
-                                            },
-                                            {
-                                                "tags": {"desc_type" : "default"},
-                                                "content": "",
-                                                "glossary": [
-                                                    {"val": "", "id": ""}
-                                                ]
-                                            }
-                                        ]
-                                        },{
                                     "tags": {"desc_type" : "default"},
                                     "content": "",
                                     "subcontent": [
@@ -1890,11 +1870,11 @@
         ]
     },
     {
-        "id": "gr_",
+        "id": "gr_equipment",
         "source": "core",
         "tags": { },
         "contextdata": { },
-        "name": "",
+        "name": "Equipment",
         "item_index": 8,
         "sections":  [
             {
