@@ -1888,5 +1888,185 @@
                 "content": "In this part of the rules, we will take a detailed look at each warband and provide the information you need to recruit one."
             }
         ]
+    },
+    {
+        "id": "gr_",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "",
+        "item_index": 8,
+        "sections":  [
+            {
+                "title": "Ranged Weapons",
+                "description":  [
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "The weapons on the following pages can be used to perform a Ranged Attack Action. Use the Action Success Chart to see if the attack hits as explained in the Combat Rules. Add the number of +DICE/-DICE as indicated by the ranged characteristics entry for the model in the relevant Warband Armoury.",
+                    "glossary": [
+                        {"val": "+DICE", "id": "kw_plusdice"},
+                        {"val": "-DICE", "id": "kw_minusdice"}
+                    ]
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [
+                            
+                            {
+                            "tags": {"desc_type" : "bold"},
+                            "content": "Note: "
+                            },
+                            {
+                            "tags": {"desc_type" : "default"},
+                            "content": "Ranged weapons cannot be used in melee unless specifically noted by having Range marked as “Melee”."
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Melee Weapons",
+                "description":  [
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "All these weapons can be used by a model carrying them to perform a Melee Attack ACTION. Roll on the Action Success Chart to see if the attack hits. Add the number of +DICE/-DICE as indicated by the Melee characteristics entry for the model in the relevant Warband List.",
+                    "glossary": [
+                        {"val": "+DICE", "id": "kw_plusdice"},
+                        {"val": "-DICE", "id": "kw_minusdice"},
+                        {"val": "ACTION", "id": "kw_action"}
+                    ]
+                    }
+                ]
+            },
+            {
+                "title": "Armour",
+                "description":  [
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "A model can wear only one suit of armour at a time. Shields can be combined with any Armour unless otherwise indicated."
+                    }
+                ]
+            },
+            {
+                "title": "Equipment",
+                "description":  [
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Unless otherwise noted a model can only carry one piece equipment of the same type. Models may carry multiple different types of equipment, however."
+                    }
+                ]
+            }
+        ],
+        "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Unless otherwise stated in the rules, each warrior in your warband has the following options for Ranged weapons:"
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                    
+                    {
+                        "tags": {"desc_type" : "list"},
+                        "content": "",
+                        "subcontent": [
+                            
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "One two-handed ranged weapon OR"
+                            },                            
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Up to two one-handed ranged weapons."
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "They also have the following options for Melee weapons:"
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                    
+                    {
+                        "tags": {"desc_type" : "list"},
+                        "content": "",
+                        "subcontent": [
+                            
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "One two-handed melee weapon OR"
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Up to two one-handed melee weapons."
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "All weapon entries clearly indicate if you need one or two hands to effectively use the given weapon. Unless clearly stated in the Range characteristic, a ranged weapon cannot be used in melee combat. Unless they can be used in melee, ranged weapons do not use either hand in melee (leaving both hands free for melee weapons). They always count as ranged weapons for the purposes of determining how many ranged or melee weapons a model can carry."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                    
+                    {
+                        "tags": {"desc_type" : "list"},
+                        "content": "",
+                        "subcontent": [
+                            
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Each model can wear a single suit of armour and wear one type of headgear."
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Each model can carry one type of grenade."
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "A model can have any number of Equipment items, but only one of each type per model."
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The following pieces of Equipment or Armour can be carried by models as indicated in the rules. They take up one of the hands of the model at all times, thus limiting which weapons they may use in combat:"
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                    
+                    {
+                        "tags": {"desc_type" : "list"},
+                        "content": "",
+                        "subcontent": [
+                            
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "One shield (most commonly a trench shield) which always takes one hand to use in both melee and ranged combat and cannot be switched out."
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "One standard/banner/flag which always takes one hand to use in both melee and ranged combat and cannot be switched out."
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "One musical instrument which always takes one hand to use in both melee and ranged combat and cannot be switched out."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
     }
 ]
