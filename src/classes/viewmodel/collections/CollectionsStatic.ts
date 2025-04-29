@@ -145,6 +145,22 @@ export const CollectionDataDex : CollectionDataTable = {
             }
         }
     },
+    errata: {
+        searchId: 'errata', 
+        pageName: 'errata',
+        sort: ["item_index"],
+        async postSearch(model : ViewCollectionsModel) {
+            model.CleanupItems();
+            model.CleanupCollection();
+            let i = 0;
+            model.dataresults.sort(byPropertiesOf<IBookRule>(["item_index"]))
+            for (i = 0; i < model.dataresults.length; i++) {
+                const summonNew = await BookRuleFactory.CreateBookRule(model.dataresults[i], null);
+                const ItemNew = new ViewTableItem(summonNew, getColour('default'));
+                model.itemcollection.push(ItemNew);
+            }
+        }
+    },
     campaignrule: {
         searchId: 'campaignrule', 
         pageName: 'campaignrule',

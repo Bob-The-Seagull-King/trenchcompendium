@@ -52,6 +52,8 @@ const CompendiumRoute: React.FC<IControllerProp> = (prop) => {
                                 controller={prop.controller.GameRulesCollectionController}/>}/>
                             <Route path={ROUTES.COMP_RULES_CAMPAIGNRULES} element={<PagedCompendiumDisplay
                                 controller={prop.controller.CampaignRulesCollectionController}/>}/>
+                            <Route path={ROUTES.COMP_RULES_ERRATARULES} element={<PagedCompendiumDisplay
+                                controller={prop.controller.ErrataRulesCollectionController}/>}/>
                             <Route path={ROUTES.COMP_WARBAND_FACTIONS} element={<PagedCompendiumDisplay
                                 controller={prop.controller.FactionCollectionController}/>}/>
                             <Route path={ROUTES.COMP_SCENARIO_SCENARIO} element={<PagedCompendiumDisplay

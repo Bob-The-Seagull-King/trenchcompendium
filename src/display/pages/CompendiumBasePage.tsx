@@ -24,7 +24,8 @@ const CompendiumBasePage: React.FC<IControllerProp> = (prop: any) => {
         function GetContentsTableRules() {
             const ContentsList : ContentsLink[] = [];
     
-            ContentsList.push({ name: "Campaigns", route: "campaignrule"})
+            ContentsList.push({ name: "Game Rules", route: "gamerule"})
+            ContentsList.push({ name: "Errata", route: "errata"})
             ContentsList.push({ name: "Glossary", route: "glossary"})
             ContentsList.push({ name: "Keywords", route: "keyword"})
     
@@ -51,7 +52,7 @@ const CompendiumBasePage: React.FC<IControllerProp> = (prop: any) => {
 
         function GetContentsTableCampaign() {
             const ContentsList : ContentsLink[] = [];
-            ContentsList.push({ name: "Game Rules", route: "gamerule"})
+            ContentsList.push({ name: "Campaigns", route: "campaignrule"})
             ContentsList.push({ name: "Exploration", route: "explorationtable"})
             ContentsList.push({ name: "Injuries", route: "injury"})
             ContentsList.push({ name: "Patrons", route: "patron"})
