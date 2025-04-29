@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-interface SynodImageURLProps {
+interface SynodWarbandURLProps {
     WarbandId: number;
 }
 
@@ -11,7 +11,7 @@ interface SynodImageURLProps {
  * @param imageId
  * @param size
  */
-const SynodGetWarband = ({ WarbandId }: SynodImageURLProps): string => {
+const SynodGetWarband = ({ WarbandId }: SynodWarbandURLProps): string => {
 
     const [warbandData, setWarbandData] = useState('');
 

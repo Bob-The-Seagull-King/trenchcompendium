@@ -30,6 +30,7 @@ import {OverlayTrigger, Popover} from "react-bootstrap";
 import {usePlayMode} from "../../../context/PlayModeContext";
 import SynodImage from "../../../utility/SynodImage";
 import WbbContextualPopover from "./WbbContextualPopover";
+import SynodImageSource from "../../../utility/SynodImageSource";
 
 
 interface WbbFighterDetailViewProps {
@@ -276,6 +277,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
                             {fighter.FighterName}
                         </span>
                     </div>
+
                     <div className="fighter-meta-entry-simple">
                         <span className="fighter-meta-label">
                             {'Type: '}
@@ -285,7 +287,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
                         </span>
                     </div>
 
-                    { !playMode &&
+                    {!playMode &&
                         <div className="fighter-meta-entry-simple">
                             <span className="fighter-meta-label">
                                 {'Cost: '}
@@ -305,7 +307,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
                         </div>
                     }
 
-                    { !playMode &&
+                    {!playMode &&
                         <div className="fighter-meta-entry-simple">
                             <span className="fighter-meta-label">
                                 {'Availability: '}
@@ -324,12 +326,12 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
                         </span>
                     </div>
 
-                    { !playMode &&
+                    {!playMode &&
                         <div className="fighter-meta-entry-simple">
-                                    <span className="fighter-meta-label">
+                            <span className="fighter-meta-label">
                                 {'Base: '}
-                                    </span>
-                                    <span className="fighter-meta-value">
+                            </span>
+                            <span className="fighter-meta-value">
                                 {'32mm'}
                             </span>
                         </div>
@@ -342,6 +344,16 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
                     <ItemStat title={"Melee"} value={'+1'}/>
                     <ItemStat title={"Ranged"} value={'+2'}/>
                     <ItemStat title={"Armor"} value={'0'}/>
+                </div>
+
+                <div className="fighter-card-meta fighter-card-meta-below">
+                    <div className="fighter-meta-entry-simple synod-image-source-wrap">
+                        {'Image: '}
+
+                        <SynodImageSource
+                            imageId={fighter.FighterImageId}
+                        />
+                    </div>
                 </div>
             </div>
 
