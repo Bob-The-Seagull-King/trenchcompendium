@@ -64,10 +64,9 @@ const BaseHeader: React.FC<IControllerProp> = (prop: any) => {
                 <CustomNavLink 
                     link={"/login"}
                     runfunc={() => NavigateLogin()}
+                    classes={'header-login-btn'}
                 >
-                    <div  className={'header-login-btn'}>
-                        <FontAwesomeIcon icon={faUser} className=""/>
-                    </div>
+                    <FontAwesomeIcon icon={faUser} className=""/>
                 </CustomNavLink>
                 
             </>
