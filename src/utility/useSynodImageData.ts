@@ -6,15 +6,23 @@ interface SynodImageData {
     sourceUrl: string;
 }
 
+// basic in-memory cache
+const imageDataCache: Record<string, SynodImageData> = {};
+
 export function useSynodImageData(imageId: number, size = 'medium'): SynodImageData {
-    const [data, setData] = useState<SynodImageData>({
-        url: '',
-        sourceTitle: '',
-        sourceUrl: '',
+    const [data, setData] = useState<SynodImageData>(() => {
+        const key = `${imageId}-${size}`;
+        return imageDataCache[key] || { url: '', sourceTitle: '', sourceUrl: '' };
     });
 
     useEffect(() => {
         if (!imageId) return;
+
+        const key = `${imageId}-${size}`;
+        if (imageDataCache[key]) {
+            setData(imageDataCache[key]);
+            return;
+        }
 
         const synodUrl = 'https://synod.trench-companion.com/';
 
@@ -24,20 +32,17 @@ export function useSynodImageData(imageId: number, size = 'medium'): SynodImageD
                 const sizes = json.media_details?.sizes;
                 const sizedImage = sizes?.[size]?.source_url;
 
-                console.log(json);
-
-
-                setData({
+                const result = {
                     url: sizedImage || json.source_url,
-                    sourceTitle: json.meta.attachment_source_title || '',
-                    sourceUrl: json.meta.attachment_source || '',
-                });
+                    sourceTitle: json.attachment_source_title || '',
+                    sourceUrl: json.attachment_source || '',
+                };
+
+                imageDataCache[key] = result;
+                setData(result);
             })
             .catch(console.error);
     }, [imageId, size]);
-
-    console.log('loremm');
-    console.log(data);
 
     return data;
 }
