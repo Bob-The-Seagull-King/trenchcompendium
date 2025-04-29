@@ -374,7 +374,7 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                                     }
 
                                     <div className="action action-rename" onClick={showConfirmRenameWarband}>
-                                        <FontAwesomeIcon icon={faSignature} className="icon-inline-left-l"/>
+                                        <FontAwesomeIcon icon={faEdit} className="icon-inline-left-l"/>
                                         {'Rename Warband'}
                                     </div>
                                     <div className="action action-rename" onClick={showConfirmExportWarband}>

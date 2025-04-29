@@ -29,6 +29,7 @@ import WbbAbilityDisplay from "./WbbAbilityDisplay";
 import {OverlayTrigger, Popover} from "react-bootstrap";
 import {usePlayMode} from "../../../context/PlayModeContext";
 import SynodImage from "../../../utility/SynodImage";
+import WbbContextualPopover from "./WbbContextualPopover";
 
 
 interface WbbFighterDetailViewProps {
@@ -245,6 +246,14 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
                         </>
                     }
                 </div>
+
+                {!playMode &&
+                    <WbbContextualPopover
+                        id={`fighter-detail-${fighter.FighterIndex}`}
+                        type="fighter"
+                        item={fighter}
+                    />
+                }
             </div>
 
             <div className={'fighter-card-main-area'}>
