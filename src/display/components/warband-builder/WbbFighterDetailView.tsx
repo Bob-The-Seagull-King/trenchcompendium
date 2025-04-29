@@ -29,7 +29,6 @@ import WbbAbilityDisplay from "./WbbAbilityDisplay";
 import {OverlayTrigger, Popover} from "react-bootstrap";
 import {usePlayMode} from "../../../context/PlayModeContext";
 import SynodImage from "../../../utility/SynodImage";
-import {usePrintMode} from "../../../context/PrintModeContext";
 
 
 interface WbbFighterDetailViewProps {
@@ -146,7 +145,6 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
     // end Test Data ***
 
     const { playMode } = usePlayMode();
-    const { printMode } = usePrintMode();
 
     /**
      * Equipment Modals
@@ -340,7 +338,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
 
 
             {/* Edit Loadout */}
-            {(!playMode && !printMode) &&
+            {(!playMode) &&
                 <div className={'fighter-card-collapse-wrap'}>
                     <WbbFighterCollapse title="Equipment" initiallyOpen={true}>
                         <p> {/* Equipment Rules */}
@@ -427,7 +425,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
 
             {/* Edit Campaign Play */}
 
-            {(!playMode && !printMode) &&
+            {(!playMode) &&
                 <div className={'fighter-card-collapse-wrap'}>
                     <WbbFighterCollapse title="Campaign Play">
 
@@ -465,7 +463,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
                         {fighter.IsElite &&
                             <div className={'battle-scars'}>
 
-                                <h3>{'Battle Scars'}</h3>
+                                <h3></h3>
 
                                 <div className={'btn btn-primary btn-sm edit-battle-scar-btn'}
                                      onClick={() => setShowEditScars(true)}>
@@ -575,7 +573,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
 
 
             {/* Abilities */}
-            {(!playMode && !printMode) &&
+            {(!playMode) &&
                 <div className={'fighter-card-collapse-wrap'}>
                     <WbbFighterCollapse title="Abilities">
                         {Abilities.map((ability, index) => (
@@ -587,7 +585,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
 
 
             {/* Play Mode Content */}
-            {(playMode || printMode) &&
+            {(playMode) &&
                 <div className={'fighter-card-play-mode-info'}>
 
                     <div className={'play-mode-equipment-wrap'}>

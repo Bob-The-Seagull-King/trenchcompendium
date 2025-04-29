@@ -25,6 +25,8 @@ import {WarbandProvider} from "../../../context/WarbandContext";
 import {PlayModeProvider, usePlayMode} from "../../../context/PlayModeContext";
 import WbbContextualPopover from "./WbbContextualPopover";
 import {PrintModeProvider, usePrintMode} from "../../../context/PrintModeContext";
+import WbbPrintViewSimple from "./WbbPrintViewSimple";
+import {useGlobalState} from "../../../utility/globalstate";
 
 interface WbbEditViewProps {
     warbandData: UserWarband | null;
@@ -152,7 +154,19 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
 
 
     /** Print Mode */
+    const [theme, setTheme] = useGlobalState('theme');
+
     const { printMode, setPrintMode } = usePrintMode();
+    const exitPrintMode = () => {
+        setPrintMode(false);
+
+        // Restore previous theme
+        document.body.setAttribute('data-theme', theme);
+
+        // Remove print data attribute
+        document.body.removeAttribute('data-print');
+    };
+
 
     return (
         <div className={`WbbEditView ${printMode ? 'print-mode' : ''}`}>
@@ -382,120 +396,13 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                         {printMode &&
                             <>
                                 <div className={'container'}>
-                                    <div className={'exit-print-view'} onClick={() => setPrintMode(false)}>
+                                    <div className={'exit-print-view'} onClick={exitPrintMode}>
                                         <FontAwesomeIcon icon={faChevronLeft} className="icon-inline-left-l"/>
                                         {'Back to Warband'}
                                     </div>
                                 </div>
 
-                                <div className={'row'}>
-                                    <div className={'col-6 print-col'}>
-                                        <WbbWarbandDetailView
-                                            onClose={closeDetail}
-                                        />
-                                    </div>
-
-                                    <div className={'col-6 print-col'}>
-                                        <WbbStashDetailView
-                                            onClose={closeDetail}
-                                        />
-                                    </div>
-
-                                    <div className={'col-6 print-col'}>
-                                        <WbbCampaignDetailView
-                                            onClose={closeDetail}
-                                        />
-                                    </div>
-
-                                    <div className={'col-6 print-col'}>
-
-                                    </div>
-                                </div>
-
-
-                                {/* Print Elites */}
-                                {warband.HasElites() &&
-                                    <>
-                                        <div className={'pb-before'}></div>
-                                        <h2>
-                                            {'Elites'}
-                                        </h2>
-
-                                        <div className={'row'}>
-
-                                        {warband.GetFighters().map((fighter, index) => (
-                                            <>
-                                                {fighter.IsElite &&
-                                                    <div className={'col-12 print-col'}>
-                                                        <WbbFighterDetailView
-                                                            fighter={fighter}
-                                                            onClose={closeDetail}
-                                                        />
-                                                    </div>
-                                                }
-                                            </>
-                                        ))}
-                                        </div>
-
-                                    </>
-                                }
-
-                                {/* Print Troops */}
-                                {warband.HasTroops() &&
-                                    <>
-                                        <div className={'pb-before'}></div>
-
-                                        <h2>
-                                            {'Troops'}
-                                        </h2>
-
-                                        <div className={'row'}>
-
-                                            {warband.GetFighters().map((fighter, index) => (
-                                                <>
-                                                    {(!fighter.IsMercenary && !fighter.IsElite) &&
-                                                        <div className={'col-12 print-col'}>
-                                                            <WbbFighterDetailView
-                                                                fighter={fighter}
-                                                                onClose={closeDetail}
-                                                            />
-                                                        </div>
-                                                    }
-                                                </>
-                                            ))}
-                                        </div>
-
-                                    </>
-                                }
-
-                                {/* Print Mercenaries */}
-                                {warband.HasTroops() &&
-                                    <>
-                                        <div className={'pb-before'}></div>
-
-                                        <h2>
-                                            {'Mercenaries'}
-                                        </h2>
-
-                                        <div className={'row'}>
-
-                                            {warband.GetFighters().map((fighter, index) => (
-                                                <>
-                                                    {fighter.IsMercenary &&
-                                                        <div className={'col-12 print-col'}>
-                                                            <WbbFighterDetailView
-                                                                fighter={fighter}
-                                                                onClose={closeDetail}
-                                                            />
-                                                        </div>
-                                                    }
-                                                </>
-                                            ))}
-                                        </div>
-
-                                    </>
-                                }
-
+                                <WbbPrintViewSimple />
                             </>
                         }
 
