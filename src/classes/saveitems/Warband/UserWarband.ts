@@ -231,7 +231,7 @@ class UserWarband extends DynamicContextObject {
                 ExperiencePoints: 4,
                 BattleScars: 1,
                 FighterIndex: 1, // the index for sorting and getting unique item in array
-                FighterImageId: 23, // the fighter image Synod ID for testing
+                FighterImageId: 53, // the fighter image Synod ID for testing
                 Injuries: [
                     {
                         Name: 'Hand Wound',
