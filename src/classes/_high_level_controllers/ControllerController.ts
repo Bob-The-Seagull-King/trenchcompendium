@@ -22,6 +22,7 @@ class ControllerController {
     InjuryCollectionController;
     SkillGroupCollectionController;
     PatronCollectionController;
+    ErrataRulesCollectionController;
 
     /**
      * Initializes all controllers, this also means all searching
@@ -40,6 +41,7 @@ class ControllerController {
         this.InjuryCollectionController = new CollectionsListPage('injury');
         this.SkillGroupCollectionController = new CollectionsListPage('skillgroup');
         this.PatronCollectionController = new CollectionsListPage('patron');
+        this.ErrataRulesCollectionController = new CollectionsListPage('errata');
     }    
 
     public static getInstance(): ControllerController {

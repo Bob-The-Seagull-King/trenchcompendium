@@ -11,23 +11,23 @@
         "team": "faithful",
         "description":  [
             {
-                "tags": {"desc_type" : ""},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "When the Infidels opened the thrice-cursed Gate to Jahannam, releasing Gog and Magog upon those who believe, it seemed that all was lost and Shaytan would emerge victorious over Dunya. But the Creator of the Universe came to the aid of the Faithful, and as had been written, the great Iron Wall of Dhu al-Qarnayn manifested itself in the lands ruled by the Sultan of Rûm. A call was sent to those who believe righteously and, over the coming decades, the migration of the Faithful took place across Europa, Asia and Africa. Millions perished on the road and at sea, for the Heretics and their Shaytan lords swarmed them as locusts swarm fields of ripe sesame, devouring them and building vile monuments from their limbs and heads, so they could not be buried as is decreed in the Holy texts. But once all those who survived the journey had come, the mighty Gates of al-Qarnayn were closed and the Great Sultanate of the Invincible Iron Wall of the Two Horns That Pierce the Sky was formed."
             },
             {
-                "tags": {"desc_type" : ""},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "The assaults of the slaves of Jahannam against the Sultanate have never ceased since that day, and each day new martyrs are mourned as they defend the Wall and confront the heretics who have overcome its defences. But within the walls, the lost knowledge flourishes and from mosques of white marble and gold the muezzin call the faithful to pray for the success of the Sultan’s army as it struggles to protect their lands and defend the caravan trails that provide the Sultanate with vital trade goods."
             },
             {
-                "tags": {"desc_type" : ""},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "The Iron Wall is the greatest defensive work in the world, a mighty bulwark festooned with the famed artillery of the Sultan. Azeb sharpshooters stand at ready, ever watchful for surprise attacks, and the elite Janissary regiments have barracks at set intervals near the wall so they can react to any attack at speed. During a more serious incursion a full muster of Azebs is called, the House of Wisdom unleashes its terrifying takwin creations upon the foe, and if the need is desperate, the Sultan himself comes forth and his Janissaries march with him to do battle, carrying their green flag before them."
             },
             {
-                "tags": {"desc_type" : ""},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "Thus the protection of the Iron Wall has had an extensive influence on the Sultanate Way of war. The conscripted Azebs are experts at feigned flight and skirmish, while the loping Lions of Jabir harass the enemy’s flanks. All the while the superb artillery of the Sultan bombards the enemy as they make their tortuous journey across the battlefield littered with traps set by skilled Sappers. When they reach the ranks of the faithful, the Janissaries, Sultan’s elite household troops, close in and finish the enemy with their devastating counter-charge led by their iron-willed officers. Dreaded Assassins from Alamut prowl in the winds of time, striking the enemy elites and leaders, while the Alchemists of the House of Wisdom unleash devastating weapons made deadly by their elemental mastery, capable of overcoming the defences of virtually any foe."
             },
             {
-                "tags": {"desc_type" : ""},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "Beyond the Iron Wall forces of the Sultan operate in small, mobile companies, each with a particular mission to accomplish. They hunt down apostates that have gone to serve Shaytans, look for the relics from the time of the Prophets, or seek to recover lost treasures and books of knowledge from the ruins of the fallen Caliphates. Though an understanding between the Church and the Sultanate on being co-belligerents against Jahannam exists, the commanders of these expeditions will tolerate no interference and do not hesitate to crush those who would hinder their mission. Resentment against the infidels who unleashed Gog and Magog runs deep in the Sultanate, and matters of honour are swiftly resolved with duels to the death. Woe to those who dare to hinder the mission of Those Who Believe."
             }
         ],
@@ -127,6 +127,57 @@
             {
                 "tags": {},
                 "content": "Trench Pilgrims of the Procession of the Sacred Affliction are known for their zeal in close quarter combat, their armour decorated with icons and shields adorned with the depictions of the Saints, which despite appearances can withstand machine gun bullets. The millstones they carry upon their backs are used to tie about the necks of sinners before drowning them in the mud and blood of No Man’s Land."
+            }
+        ],
+        "rules": [],
+        "options": []
+    },
+    {
+        "id": "fc_hereticlegion",
+        "source": "core",
+        "tags": {
+        },
+        "contextdata": {
+            "faction_keyword": {"name": "kw_heretic"}
+        },
+        "name": "Heretic Legion",
+        "team": "hell",
+        "description":  [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "A shroud of darkness blankets the world. Smoke and brimstone spews from the yawning gates of Inferno, enveloping the lands where people have abandoned God and openly wage war against His Creation. It is a grim reality that a full third of humanity has bent its knee before the idols of Hell. The main military force of Satan on Earth is the Heretic Legions, raised from amongst these citizens of the damned."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Under special absolution from the Cardinal Protector, many spies have been dispatched into Hell’s domains over the years. Most are caught, never to be seen again, save for some whose eternally screaming heads are returned to New Antioch, branded with bleeding runes that mock the Holy Trinity."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Against all odds some do make it back to the light, whispering of the horrors they have witnessed: of firstborn cast into the mouths of the burning statues of Baal and human flesh sold by the pound in dreadful markets. They speak of the great idols of the Golden Calf and rapturous men and women who prostrate themselves before them, carving off strips of their own flesh in ecstatic offering. Inverted pyramids and towers descend into the depths of these cities, built of iron and black stone. Within these pits stand sacrificial altars where weeping captives are slowly sliced to death over agonising days and weeks with wicked knives made of infernal basalt. Cathedrals dedicated to the Princes of Hell hang from great arches of volcanic stone, while condemned are crucified on hundreds of upside-down crosses."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Accounts speak of sprawling factories made of mutilated flesh and metal, their forges yielding endless munitions for the ongoing war. Guided by the teachings of Tartarus’ smiths, alchemists toil over colossal weapons and armoured behemoths, wielding the forbidden secrets of their patrons’ metallurgy to forge instruments of death and suffering beyond the grasp of any human engineer. These are once-proud cities of Earth, where churches have been toppled and entire populations are now dedicated towards bringing down the very Throne of Heaven."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Amongst the forsaken citizens enduring within Hell’s earthly domains, the greatest status is afforded to those who fight in the Great War. Most do this as Heretic Troopers who serve their liege lords in lieu of tribute. To join the army of damnation as a full-fledged Legionnaire is no easy feat. Those who wish to win a place amongst the Heretic Legions must make an unholy pilgrimage to the burning bronze gates of Hell where the infernal heat, felt from leagues away, sears both flesh and spirit until the torment becomes unbearable. Along the Valley of Tears, the great road that leads to the gate is paved with wailing souls and lamentations and littered with endless mounds of charred bodies. Many are still half-alive, writhing in agony, trapped in a grotesque twilight between life and death, their wickedness deemed insufficient. These discarded souls are doomed to suffer until the Day of Judgement."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Those who make it within sight of Hell’s Maw are considered worthy and are initiated into the Legions, taking unbreakable vows that chain them into darkness for all eternity, their bodies branded with the mark of the Devil Lord that has claimed them. Armouries of Hell equip them for battle and Heretic Priests beckon forth new supplicants as dictated by the whispers of their patron Archdevils. Thus a new Heretic Legionnaire is born. They hail Archdevils as their masters and are thus damned for all eternity."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "There are some who push further on, to the Gate itself and beyond. Their very flesh ignites, never to recover, but those with the blackest souls can enter Inferno itself. Amongst those the Anointed are especially revered amongst the Legions. They are the paragons of unhinged brutality – men and women of colossal vigour and unyielding devotion. Having tread the accursed path to the shores of the Lake of Eternal Flame, where the damned wither and contort in ceaseless torment, the Anointed emerge forever scarred by the embrace of abyssal fires. The blackened and burnt flesh of the Anointed will never heal, but in exchange they are granted the right to wear Heavy Gehenna armoured suits and they gain strength to wield weapons that a normal man could barely lift. It is said that to gaze into their eyes is to glimpse the flames of Hell, forever etched in their vision."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Yet some who witness go even further in their depraved devotion. Suicide is a mortal sin and one eagerly embraced by many. Most cry out for devils to notice their final sacrifice in vain, as the Infernal nobles are capricious and delight in betraying their own as much as their enemies. But those with truly wicked and depraved souls are resurrected in contempt of the Redeemer, coming back as Choristers, horrific mockeries of Creation whose severed heads sing unholy hymns praising the Devil, their voices causing the ears of their enemies to bleed."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Though the vast bulk of the Heretic Legions are made of mortal humans, Hell often sends their own abhorrent progeny to reinforce their mortal foot soldiers: nightmarish War Beasts made of captured and possessed creatures and dreaded Artillery Witches who act as mobile artillery supporting lighting assaults. Thus, in this accursed theatre of war, mortals and abominations march hand in withering hand, bound by the suffering ties of damnation. The wails of tortured beasts meld with the shrieks of damned souls, while the skies rain down fiery retribution upon all who dare to oppose the Heretics’ ceaseless crusade for a demented parity with their Creator."
             }
         ],
         "rules": [],

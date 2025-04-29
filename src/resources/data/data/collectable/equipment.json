@@ -2350,7 +2350,7 @@
         "modifiers": ["Ignore Armour", "+1D to Injuries"]
     },
     {
-        "id": "eq_flamethrower",
+        "id": "eq_heavyflamethrower",
         "name": "Heavy Flamethrower",
         "source": "core",
         "tags": {"action": true, "weapon": true},

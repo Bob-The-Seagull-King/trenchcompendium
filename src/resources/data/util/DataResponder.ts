@@ -84,6 +84,9 @@ class DataResponder {
             case "campaignrule": {
                 return RelevantSet.campaignruledata.concat(data)
             }
+            case "errata": {
+                return RelevantSet.errataruledata.concat(data)
+            }
             case "ability": {
                 return RelevantSet.abilitydata.concat(data)
             }

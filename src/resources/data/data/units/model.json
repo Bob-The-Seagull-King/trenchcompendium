@@ -512,5 +512,77 @@
         },
         "keywords" : [],
         "abilities" : ["ab_fourpaws"]
+    },
+    {
+        "id": "md_deathcommando",
+        "name": "Death Commando",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+        },
+        "description": [
+        ],
+        "lore": [ 
+        ],
+        "team": "hell",
+        "stats" : {            
+            "movement": 6,
+            "melee": 2,
+            "ranged": 1,
+            "base": [32],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 0
+        },
+        "keywords" : [],
+        "abilities" : []
+    },
+    {
+        "id": "md_annointedheavyinfantry",
+        "name": "Annointed Heavy Infantry",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+        },
+        "description": [
+        ],
+        "lore": [ 
+        ],
+        "team": "hell",
+        "stats" : {            
+            "movement": 6,
+            "melee": 1,
+            "ranged": 1,
+            "base": [32],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 0
+        },
+        "keywords" : [],
+        "abilities" : []
+    },
+    {
+        "id": "md_heretictrooper",
+        "name": "Heretic Trooper",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+        },
+        "description": [
+        ],
+        "lore": [ 
+        ],
+        "team": "hell",
+        "stats" : {            
+            "movement": 6,
+            "melee": 0,
+            "ranged": 0,
+            "base": [25],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 0
+        },
+        "keywords" : [],
+        "abilities" : []
     }
 ]

@@ -58,6 +58,29 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
                 </ErrorBoundary>
             )
         }
+    },    
+    errata: {
+        searchId: 'errata',
+        width: 9 ,
+        titlename : 'Errata Rules',
+        laconic: "Errata & Unfinished/Beta Rules",
+        menushowitems: true,
+        returnDisplay(item: any) {
+            return (
+                <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
+                    <h1 className="">
+                        {item.Name}
+                    </h1>
+                    <BookRuleDisplay data={item} />
+                </ErrorBoundary>
+            )
+        },
+        returnFilterSelect(manager : FilterManager, update : NoneToNoneFunction, close : NoneToNoneFunction) {
+            return (
+                <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
+                </ErrorBoundary>
+            )
+        }
     },
     glossary: {
         searchId: 'glossary',

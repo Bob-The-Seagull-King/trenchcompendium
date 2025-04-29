@@ -328,6 +328,20 @@ export const FitlerDataDex : FilterDataTable = {
             return []
         }
     },
+    errata: {
+        searchId: 'errata',
+        findTags() {
+            const tempTags: FilterTag[] = []
+            return tempTags;
+        },
+        findMisc() {
+            const tempMisc: FilterItem[] = []
+            return tempMisc;
+        },
+        findText() {
+            return []
+        }
+    },
     campaignrule: {
         searchId: 'campaignrule',
         findTags() {

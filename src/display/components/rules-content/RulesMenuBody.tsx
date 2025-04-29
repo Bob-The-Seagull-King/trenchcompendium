@@ -57,6 +57,11 @@ const RulesMenuBody: React.FC<IControllerProp> = (prop) => {
                         controller: prop.controller.GameRulesCollectionController
                     }   ,
                     {
+                        title: "Errata",
+                        slug: "errata",
+                        controller: prop.controller.ErrataRulesCollectionController
+                    }   ,
+                    {
                         title: "Keywords",
                         slug: "keyword"
                     }   ,
