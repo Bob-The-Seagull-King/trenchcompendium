@@ -4,6 +4,7 @@ export const ROUTES = {
     WARBAND_ROUTE: '/warband/*',
     HOME_ROUTE: '*',
     LOGIN_ROUTE: '/login/*',
+    PRIVACY_ROUTE: '/privacy/*',
 
     // Compendium Routes //
 
