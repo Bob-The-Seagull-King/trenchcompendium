@@ -32,7 +32,7 @@ class ControllerController {
         this.GlossaryCollectionController = new CollectionsListPage('glossary');
         this.KeywordCollectionController = new CollectionsListPage('keyword');
         this.ModelCollectionController = new CollectionsListPage('model');
-        this.EquipmentCollectionController = new CollectionsListPage('equipment');
+        this.EquipmentCollectionController = new CollectionsListPage('armoury');
         this.FactionCollectionController = new CollectionsListPage('faction');
         this.ScenarioCollectionController = new CollectionsListPage('scenario');
         this.GameRulesCollectionController = new CollectionsListPage('gamerule');

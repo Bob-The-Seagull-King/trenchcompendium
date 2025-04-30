@@ -35,7 +35,7 @@ const CompendiumBasePage: React.FC<IControllerProp> = (prop: any) => {
         function GetContentsTableWarbands() {
             const ContentsList : ContentsLink[] = [];
 
-            ContentsList.push({ name: "Equipment & Weapons", route: "equipment"})
+            ContentsList.push({ name: "Armoury & Equipment", route: "armoury"})
             ContentsList.push({ name: "Factions", route: "faction"})
             ContentsList.push({ name: "Models", route: "model"})
     

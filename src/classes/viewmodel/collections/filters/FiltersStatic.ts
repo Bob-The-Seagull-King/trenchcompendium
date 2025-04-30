@@ -161,7 +161,7 @@ export const FitlerDataDex : FilterDataTable = {
             return [new FilterText({group: "name", val: "", isstrict: false})]
         }
     },
-    equipment: {
+    armoury: {
         searchId: 'equipment',
         findTags() {
             const tempTags: FilterTag[] = []

@@ -55,12 +55,7 @@ const RulesMenuBody: React.FC<IControllerProp> = (prop) => {
                         title: "Rules",
                         slug: "gamerule",
                         controller: prop.controller.GameRulesCollectionController
-                    }   ,
-                    {
-                        title: "Errata",
-                        slug: "errata",
-                        controller: prop.controller.ErrataRulesCollectionController
-                    }   ,
+                    }      ,
                     {
                         title: "Keywords",
                         slug: "keyword"
@@ -77,8 +72,8 @@ const RulesMenuBody: React.FC<IControllerProp> = (prop) => {
                 controller: prop.controller.FactionCollectionController
             },
             {
-                title: "Weapons & Equipment",
-                slug: "equipment"
+                title: "Armoury & Equipment",
+                slug: "armoury"
             },
             {
                 title: "Units / Models",
@@ -90,7 +85,7 @@ const RulesMenuBody: React.FC<IControllerProp> = (prop) => {
                 controller: prop.controller.ScenarioCollectionController
             },
             {
-                title: "Campaigns 1.3",
+                title: "Campaigns 1.6.3",
                 slug: "",
                 children: [
                     {
@@ -105,7 +100,8 @@ const RulesMenuBody: React.FC<IControllerProp> = (prop) => {
                     },
                     {
                         title: "Exploration",
-                        slug: "explorationtable"
+                        slug: "explorationtable",
+                        controller: prop.controller.ExplorationTableCollectionController
                     },
                     {
                         title: "Skills",
@@ -116,6 +112,11 @@ const RulesMenuBody: React.FC<IControllerProp> = (prop) => {
                         slug: "injury"
                     }                       
                 ]
+            },
+            {
+                title: "Errata",
+                slug: "errata",
+                controller: prop.controller.ErrataRulesCollectionController
             }
         ]
         return menu_structure;

@@ -10,6 +10,7 @@ import { CollectionsListPage } from '../../classes/viewmodel/pages/CollectionLis
 // Components
 import { DisplayCollectionDataDex, DisplayCollectionType } from './DisplayPageStatic'
 import FilterBox from '../components/subcomponents/filters/FilterBox';
+import { useLocation } from 'react-router-dom';
 
 const FilterableCompendiumDisplay = (prop: any) => {
     // Initialize controllers and managers
@@ -18,17 +19,31 @@ const FilterableCompendiumDisplay = (prop: any) => {
     const CollectionController: ViewCollectionsModel = ViewPageController.Collection;
     const DisplayPage: DisplayCollectionType = DisplayCollectionDataDex[ViewPageController.TypeName]
     
+    const urlPath = useLocation().pathname;
+    const urlSplits = urlPath.split('/');
+    
+    function grabItemFromURL() {
+        const CurItemID = urlSplits.slice(-1)[0]
+        return CurItemID;
+    }
+    
     // Initialize Use State
     const [_curItems, setCurItems] = useState<any[]>([]);
-    const [_keyval, setKeyVal] = useState(0);
-    
+    const [_keyval, setKeyVal] = useState(0);    
         
     useEffect(() => {
+
         async function SetCollectionOptions() {
+            /*if (DisplayPage.categoryparam && (grabItemFromURL() != ViewPageController.TypeName)) {
+               
+            } else {
+                
+            }*/
             await ViewPageController.initCollection();
             setCurItems(InitStateSet());
             setKeyVal((prev) => prev + 1);
         }
+
     
         SetCollectionOptions();
     }, []);

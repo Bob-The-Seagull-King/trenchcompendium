@@ -27,6 +27,7 @@ export interface DisplayCollectionType {
     width         : number,
     menushowitems : boolean,
     hidefilter?   : boolean,
+    categoryparam?: string,
     returnDisplay: (item: any) => JSX.Element
     returnFilterSelect: (manager : FilterManager, update : NoneToNoneFunction, close : NoneToNoneFunction) => JSX.Element
 }
@@ -232,11 +233,12 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
             )
         }
     },
-    equipment: {
-        searchId: 'equipment',
+    armoury: {
+        searchId: 'armoury',
         width: 8,
         titlename : 'Weapons & Equipment',
         laconic: "Items you can find in the armoury",
+        categoryparam: "category",
         menushowitems: false,
         returnDisplay(item: any) {
             return (

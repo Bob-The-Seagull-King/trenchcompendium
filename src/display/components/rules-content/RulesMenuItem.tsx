@@ -58,6 +58,23 @@ const RulesMenuItem: React.FC<{ data: RulesMenuItemProps[], level?: number; pare
                     })
                 }
             }
+        } else if (item.slug == "armoury") {
+            SubItems.push({
+                title: "Ranged Weapons",
+                slug: "ranged"
+            })
+            SubItems.push({
+                title: "Melee Weapons",
+                slug: "melee"
+            })
+            SubItems.push({
+                title: "Armour",
+                slug: "armour"
+            })
+            SubItems.push({
+                title: "Equipment",
+                slug: "equipment"
+            })
         }
         return SubItems
     }

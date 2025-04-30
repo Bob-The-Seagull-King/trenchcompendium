@@ -81,9 +81,9 @@ export const CollectionDataDex : CollectionDataTable = {
             }
         }
     },
-    equipment: {
+    armoury: {
         searchId: 'equipment', 
-        pageName: 'equipment',
+        pageName: 'armoury',
         sort: ["name", "id"],
         async postSearch(model : ViewCollectionsModel) {
             model.CleanupItems();
