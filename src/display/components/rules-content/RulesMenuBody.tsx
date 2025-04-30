@@ -1,5 +1,5 @@
 import '../../../resources/styles/vendor/bootstrap.css'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ErrorBoundary } from "react-error-boundary";
 
 
@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import { ControllerController } from '../../../classes/_high_level_controllers/ControllerController';
 import RulesMenuItem from "./RulesMenuItem";
 import RulesMenuSettings from "./RulesMenuSettings";
+import { ToolsController } from '../../../classes/_high_level_controllers/ToolsController';
 
 interface IControllerProp {
     controller : ControllerController; // The controller being passed through
@@ -28,24 +29,50 @@ const RulesMenuBody: React.FC<IControllerProp> = (prop) => {
     }
 
     const [menu_struc] = useState(returnMenuStruc())
+    const [warband_struc, setwarbands] = useState([{
+        title: "New Warband",
+        slug: "new"
+    }])
+    const [keyvar, setkeyvar] = useState(0);
+
+    
+    useEffect(() => {
+        async function SetWarbands() {
+            
+            const SetOfWarbands : any[] = []
+
+            const tools : ToolsController = ToolsController.getInstance();
+            await tools.UserWarbandManager.GetItemsAll();
+
+            for (let i = 0; i < tools.UserWarbandManager.WarbandItemList.length; i++) {
+                SetOfWarbands.push(
+                    {
+                        title: tools.UserWarbandManager.WarbandItemList[i].Name,
+                        slug: tools.UserWarbandManager.WarbandItemList[i].ID
+                    }
+                )
+            }
+            
+            const WarbandSet : any[] = [
+                {
+                    title: "New Warband",
+                    slug: "new"
+                },
+                {
+                    title: "Your Warbands",
+                    slug: "edit",
+                    children: SetOfWarbands
+                }
+            ]
+
+            setwarbands(WarbandSet);
+            setkeyvar(keyvar + 1);
+        }
+
+        SetWarbands();
+    }, []);
 
     function returnMenuStruc() {
-        /**
-        Playtest 1.6
-            - Rules (controller)
-            - Keywords
-            - Glossary
-        Factions (controller)
-        Models
-        Equipment
-        Scenarios (controller)
-        Campaigns
-            - Rules (controller)
-            - Patrons (controller)
-            - Exploration
-            - Injuries
-            - Skills
-         */
         const menu_structure = [
             {
                 title: "Playtest v1.6",
@@ -142,8 +169,22 @@ const RulesMenuBody: React.FC<IControllerProp> = (prop) => {
                     />
                 )))}
 
+                <div className={'rules-menu-header'}>
+                    <div onClick={() => NavigateHome()} className={'home-link'}>
+                        <FontAwesomeIcon icon={faChevronLeft} />
+                    </div>
+
+                    <div onClick={() => navigate('/warband/')} className={'compendium-link'}>
+                        {'Warband Manager'}
+                    </div>
+                </div>
+
+                <RulesMenuItem key={'warbands' + keyvar.toString()}
+                data={warband_struc}
+                parentPath={'warband'}
+                />
+
                 <RulesMenuSettings />
-                {/* @TODO: Add secondary elements here   */}
             </div>
         </ErrorBoundary>
 

@@ -10,6 +10,8 @@ import { WarbandManager } from '../saveitems/Warband/WarbandManager';
  */
 class ToolsController {
    
+    
+    private static instance: ToolsController;
     //ContentManager;
     //SaveItemManager;
     //RandomScenarioManager;
@@ -22,6 +24,13 @@ class ToolsController {
     constructor () {
         this.UserWarbandManager = new WarbandManager();
         this.UserWarbandManager.GetItemsAll();
+    }
+
+    public static getInstance(): ToolsController {
+        if (!ToolsController.instance) {
+            ToolsController.instance = new ToolsController();
+        }
+        return ToolsController.instance;
     }
 
 }

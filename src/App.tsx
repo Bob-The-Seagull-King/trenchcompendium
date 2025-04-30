@@ -37,7 +37,7 @@ const App: React.FC = () => {
     InitializeContentState();
 
     const compendiumcontroller = ControllerController.getInstance();
-    const toolcontroller = new ToolsController();
+    const toolcontroller = ToolsController.getInstance();
 
     /** Theme Settings */
     const [theme, setTheme] = useGlobalState('theme');
