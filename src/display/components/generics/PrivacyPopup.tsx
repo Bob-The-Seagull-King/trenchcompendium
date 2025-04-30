@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faUser} from "@fortawesome/free-solid-svg-icons";
+import CustomNavLink from "../subcomponents/interactables/CustomNavLink";
 
 interface ConsentPreferences {
     essential: boolean;
@@ -62,9 +65,13 @@ const PrivacyPopup: React.FC<PrivacyPopupProps> = ({ forceShow }) => {
                 <h3>{'We value your privacy'}</h3>
                 <p>
                     {'We use cookies to enhance site navigation, analyze site usage, and support personalized content and features. We only use non-essential cookies (e.g. for analytics) if you give your consent. You can change your preferences at any time.'}
-                    <br />
-                    {/*@TODO: link privacy page*/}
-                    {'Additional information can be found in our privacy dislcaimer.'}
+                    <br/>
+                    <br/>
+                    {'Additional information can be found in our '}
+                    <a href={'/privacy'}>
+                        {'privacy dislcaimer'}
+                    </a>
+                    <br/>
                 </p>
                 <div className="privacy-popup-actions">
                     <button className="btn btn-primary btn-block" onClick={handleAcceptAll}>Accept All</button>
