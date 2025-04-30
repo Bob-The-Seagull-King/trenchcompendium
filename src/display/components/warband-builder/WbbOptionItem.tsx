@@ -3,6 +3,7 @@ import { Collapse } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import {usePlayMode} from "../../../context/PlayModeContext";
+import {usePrintMode} from "../../../context/PrintModeContext";
 
 interface Option {
     Name: string;
@@ -25,21 +26,22 @@ const WbbOptionItem: React.FC<WbbOptionItemProps> = ({ option }) => {
     };
 
     const { playMode } = usePlayMode();
+    const { printMode } = usePrintMode();
 
     // Update `open` when playMode changes
     useEffect(() => {
-        if (playMode) {
+        if (playMode || printMode) {
             setOpen(true);
         } else {
             setOpen(false);
         }
-    }, [playMode]);
+    }, [playMode, printMode]);
 
     return (
         <div className="WbbOptionItem">
 
             {/* Edit View with options */}
-            {!playMode &&
+            {(!playMode && !printMode) &&
                 <div className="option-title"
                      onClick={(e) => {
                          handleSelectOption();
@@ -75,7 +77,7 @@ const WbbOptionItem: React.FC<WbbOptionItemProps> = ({ option }) => {
             }
 
             {/* Play mode view without options*/}
-            {playMode &&
+            {(playMode || printMode) &&
                 <div className="option-title"
                      onClick={() => {
                          setOpen(!open);
@@ -83,11 +85,10 @@ const WbbOptionItem: React.FC<WbbOptionItemProps> = ({ option }) => {
                     <span className="option-name">{option.Name}</span>
 
                     <span className="collapse-chevron-wrap">
-                    <FontAwesomeIcon icon={open ? faChevronUp : faChevronDown}/>
-                </span>
+                        <FontAwesomeIcon icon={open ? faChevronUp : faChevronDown}/>
+                    </span>
                 </div>
             }
-
 
             <Collapse in={open}>
                 <div className="option-details">

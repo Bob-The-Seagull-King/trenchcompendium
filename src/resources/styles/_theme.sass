@@ -46,11 +46,12 @@ body[data-theme='light']
     --color_bg_card_2: var(--color_bg_lvl_3)
     --color_bg_card_2_el: var(--color_bg_card)
     --color_bg_card_2_el_border: var(--color_bg_lvl_1)
-    --color_bg_card_3: rgba(255,255,255,0.075)
+    --color_bg_card_3: rgba(0,0,0,0.075)
 
     // Highlights
     --color_highlight_bg_2_50: rgba(180,24,27,0.25)
-    --color_highlight_bg_2: #b4181b // deeper bg color
+    // deeper bg color
+    --color_highlight_bg_2: #b4181b
     --color_highlight_bg: #fa1c23
     --color_highlight: #d01317
     --color_highlight_text: #9b1518
@@ -263,6 +264,9 @@ input.form-control
 
 
 .btn.btn-secondary
+    color: #fff
 
-
+    &:hover
+        color: currentColor
+        text-decoration: none
 

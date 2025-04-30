@@ -1,0 +1,152 @@
+// // // // //
+//
+// The simple print view first page like the official roster sheet
+//
+
+$font-size-sm: 10px
+$font-size-lg: 12px
+
+$margin-m: 7px
+
+.WbbPrintViewSimpleFighter
+
+    border: 2px solid $color-highlight-bg-2
+    padding: $margin-m 10px
+    margin-bottom: 3px
+    font-size: $font-size-sm
+    page-break-inside: avoid
+
+    .names-wrap
+        font-size: $font-size-lg
+        margin-bottom: $margin-m
+
+        .inline-label
+            display: inline-block
+            margin-right: 5px
+            font-family: $font-headline
+            font-weight: bold
+
+        .inline-value
+            font-size: $font-size-sm
+
+    .stats-row
+        display: flex
+        margin-bottom: $margin-m
+
+        .stats-wrap
+            width: calc(70% - 15px)
+            margin-right: 15px
+
+            table
+                width: 100%
+                tbody
+                    width: 100%
+
+                tr
+                    width: 100%
+
+                td
+                    border: 2px solid $color-text
+                    padding: 4px 10px
+                    text-align: center
+
+                .table-head-row
+                    font-weight: bold
+                    font-family: $font-headline
+                    font-size: $font-size-lg
+
+                .table-stats-row
+
+
+        .xp-wrap
+            width: 30%
+
+            .xp-headline
+                font-size: $font-size-lg
+                margin-bottom: 5px
+                margin-top: -5px
+                font-weight: bold
+                font-family: $font-headline
+
+            .xp-boxes
+                display: flex
+                flex-wrap: wrap
+                gap: 5px
+
+                .xp-box
+                    position: relative
+                    height: 15px
+                    width: 15px
+                    border: 1px solid $color-text
+
+                    @media(max-width: 380px)
+                        height: 11px
+                        width: 11px
+                    &.xp-box-bold
+                        border: 3px solid $color-highlight-text
+
+                    i, svg
+                        position: absolute
+                        top: 50%
+                        left: 50%
+                        transform: translate(-50%, -50%)
+
+
+    .text-rows-wrap
+
+        .text-row
+            margin-bottom: 0px
+            font-size: $font-size-sm
+            line-height: $font-size-lg
+
+        .inline-label
+            display: inline-block
+            margin-right: 5px
+            font-family: $font-headline
+            font-weight: bold
+            font-size: $font-size-lg
+
+        .inline-value
+
+    .text-row.injuries
+        position: relative
+        padding-right: 150px
+
+        .battle-scars
+            position: absolute
+            top: 0
+            right: 0
+            display: flex
+
+    .battle-scar-boxes
+        display: flex
+        flex-wrap: wrap
+        gap: 3px
+        margin-left: 5px
+
+        .battle-scar-box
+            position: relative
+            height: $font-size-lg
+            width: $font-size-lg
+            border: 1px solid $color-text
+
+            @media(max-width: 380px)
+                height: 11px
+                width: 11px
+
+            &:last-of-type
+                border: 3px solid $color-highlight-text
+
+            .skull-icon
+                opacity: .25
+                z-index: 1
+                color: $color-highlight-text
+                font-size: $font-size-sm
+
+            i, svg
+                font-size: $font-size-lg
+                position: absolute
+                z-index: 2
+                top: 50%
+                left: 50%
+                transform: translate(-50%, -50%)

@@ -29,6 +29,8 @@ import WbbAbilityDisplay from "./WbbAbilityDisplay";
 import {OverlayTrigger, Popover} from "react-bootstrap";
 import {usePlayMode} from "../../../context/PlayModeContext";
 import SynodImage from "../../../utility/SynodImage";
+import WbbContextualPopover from "./WbbContextualPopover";
+import SynodImageSource from "../../../utility/SynodImageSource";
 
 
 interface WbbFighterDetailViewProps {
@@ -245,11 +247,19 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
                         </>
                     }
                 </div>
+
+                {!playMode &&
+                    <WbbContextualPopover
+                        id={`fighter-detail-${fighter.FighterIndex}`}
+                        type="fighter"
+                        item={fighter}
+                    />
+                }
             </div>
 
             <div className={'fighter-card-main-area'}>
                 {fighter.FighterImageId > 0 &&
-                    <div className={`fighter-image-wrap ${fighter.FighterImageId === 26 ? 'full' : ''}`}>
+                    <div className={'fighter-image-wrap full'}>
                         <SynodImage
                             imageId={fighter.FighterImageId}
                             className={'fighter-image'}
@@ -267,6 +277,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
                             {fighter.FighterName}
                         </span>
                     </div>
+
                     <div className="fighter-meta-entry-simple">
                         <span className="fighter-meta-label">
                             {'Type: '}
@@ -276,7 +287,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
                         </span>
                     </div>
 
-                    { !playMode &&
+                    {!playMode &&
                         <div className="fighter-meta-entry-simple">
                             <span className="fighter-meta-label">
                                 {'Cost: '}
@@ -296,7 +307,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
                         </div>
                     }
 
-                    { !playMode &&
+                    {!playMode &&
                         <div className="fighter-meta-entry-simple">
                             <span className="fighter-meta-label">
                                 {'Availability: '}
@@ -315,12 +326,12 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
                         </span>
                     </div>
 
-                    { !playMode &&
+                    {!playMode &&
                         <div className="fighter-meta-entry-simple">
-                                    <span className="fighter-meta-label">
+                            <span className="fighter-meta-label">
                                 {'Base: '}
-                                    </span>
-                                    <span className="fighter-meta-value">
+                            </span>
+                            <span className="fighter-meta-value">
                                 {'32mm'}
                             </span>
                         </div>
@@ -334,11 +345,21 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
                     <ItemStat title={"Ranged"} value={'+2'}/>
                     <ItemStat title={"Armor"} value={'0'}/>
                 </div>
+
+                <div className="fighter-card-meta fighter-card-meta-below">
+                    <div className="fighter-meta-entry-simple synod-image-source-wrap">
+                        {'Image: '}
+
+                        <SynodImageSource
+                            imageId={fighter.FighterImageId}
+                        />
+                    </div>
+                </div>
             </div>
 
 
             {/* Edit Loadout */}
-            {!playMode &&
+            {(!playMode) &&
                 <div className={'fighter-card-collapse-wrap'}>
                     <WbbFighterCollapse title="Equipment" initiallyOpen={true}>
                         <p> {/* Equipment Rules */}
@@ -425,7 +446,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
 
             {/* Edit Campaign Play */}
 
-            {!playMode &&
+            {(!playMode) &&
                 <div className={'fighter-card-collapse-wrap'}>
                     <WbbFighterCollapse title="Campaign Play">
 
@@ -463,7 +484,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
                         {fighter.IsElite &&
                             <div className={'battle-scars'}>
 
-                                <h3>{'Battle Scars'}</h3>
+                                <h3></h3>
 
                                 <div className={'btn btn-primary btn-sm edit-battle-scar-btn'}
                                      onClick={() => setShowEditScars(true)}>
@@ -573,7 +594,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
 
 
             {/* Abilities */}
-            {!playMode &&
+            {(!playMode) &&
                 <div className={'fighter-card-collapse-wrap'}>
                     <WbbFighterCollapse title="Abilities">
                         {Abilities.map((ability, index) => (
@@ -585,52 +606,67 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
 
 
             {/* Play Mode Content */}
-            {playMode &&
+            {(playMode) &&
                 <div className={'fighter-card-play-mode-info'}>
 
-                    {/* @TODO: add all equipment items*/}
-                    <h3>{'Ranged Weapons'}</h3>
-                    <WbbEquipmentListItem
-                        item={item_siege_jezzail}
-                    />
+                    <div className={'play-mode-equipment-wrap'}>
+                        {/* @TODO: add all equipment items*/}
+                        <h3>{'Ranged Weapons'}</h3>
+                        <WbbEquipmentListItem
+                            item={item_siege_jezzail}
+                        />
+                    </div>
 
-                    <h3>{'Melee Weapons'}</h3>
-                    {/* @TODO: For each Item */}
-                    <WbbEquipmentListItem
-                        item={item_trench_knife}
-                    />
+                    <div className={'play-mode-equipment-wrap'}>
+                        <h3>{'Melee Weapons'}</h3>
+                        {/* @TODO: For each Item */}
+                        <WbbEquipmentListItem
+                            item={item_trench_knife}
+                        />
+                    </div>
 
-                    <h3>{'Equipment'}</h3>
-                    {/* @TODO: For each Item */}
-                    <WbbEquipmentListItem
-                        item={item_alch_ammo}
-                    />
+                    <div className={'play-mode-equipment-wrap'}>
+                        <h3>{'Equipment'}</h3>
+                        {/* @TODO: For each Item */}
+                        <WbbEquipmentListItem
+                            item={item_alch_ammo}
+                        />
+                    </div>
 
-                    {GoeticPowers.length > 0 &&
-                        <>
-                            <h3>{'Goetic Powers'}</h3>
-                            {GoeticPowers.map((option, index) => (
-                                <WbbOptionItem key={index} option={option}/>
-                            ))}
-                        </>
-                    }
+                    <div className={'play-mode-goetic-powers-wrap'}>
+                        {GoeticPowers.length > 0 &&
+                            <>
+                                <h3>{'Goetic Powers'}</h3>
+                                {GoeticPowers.map((option, index) => (
+                                    <WbbOptionItem key={index} option={option}/>
+                                ))}
+                            </>
+                        }
+                    </div>
 
-                    <h3>{'Abilities'}</h3>
-                    {Abilities.map((ability, index) => (
-                        <WbbAbilityDisplay key={index} ability={ability}/>
-                    ))}
+                    <div className={'play-mode-abilities-wrap'}>
+                        <h3>{'Abilities'}</h3>
+                        {Abilities.map((ability, index) => (
+                            <WbbAbilityDisplay key={index} ability={ability}/>
+                        ))}
+                    </div>
 
                     {/* @TODO: add upgrades as well as WbbAbilityDisplay */}
 
-                    <h3>{'Advancements'}</h3>
-                    {Advancements.map((advancement) => (
-                        <WbbEditViewAdvancement advancement={advancement} key={advancement.Id}/>
-                    ))}
+                    <div className={'play-mode-advancements-wrap'}>
+                        <h3>{'Advancements'}</h3>
+                        {Advancements.map((advancement) => (
+                            <WbbEditViewAdvancement advancement={advancement} key={advancement.Id}/>
+                        ))}
+                    </div>
 
-                    <h3>{'Injuries'}</h3>
-                    {Injuries.map((injury) => (
-                        <WbbEditViewInjury injury={injury} key={injury.Id}/>
-                    ))}
+                    <div className={'play-mode-injuries-wrap'}>
+                        <h3>{'Injuries'}</h3>
+                        {Injuries.map((injury) => (
+                            <WbbEditViewInjury injury={injury} key={injury.Id}/>
+                        ))}
+                    </div>
+
                 </div>
             }
 

@@ -12,18 +12,17 @@ const WbbCreateNewDetailsForm: React.FC<{
     const navigate = useNavigate();
 
     const [warbandName, setWarbandName] = useState('');
-    const [ducatsLimit, setducatsLimit] = useState(0);
-    const [gloryLimit, setgloryLimit] = useState(0);
 
     async function handleSubmit() {
         const msg : null | UserWarband = await manager.NewItem(warbandName, chosenfaction.ID, {
             id : "null",
-            limit_ducat: ducatsLimit,
-            limit_glory: gloryLimit,
+            limit_ducat: 0,
+            limit_glory: 0,
             limit_model: 0,
-            value_ducat: ducatsLimit,
-            value_glory: gloryLimit
+            value_ducat: 0,
+            value_glory: 0
         })
+
         if (msg == null) {
             alert("Warband creation was unsuccessful");
         } else {
@@ -48,36 +47,6 @@ const WbbCreateNewDetailsForm: React.FC<{
                     onChange={(e) => setWarbandName(e.target.value)}
                     placeholder=""
                 />
-            </div>
-
-            <div className={'mb-3'}>
-                <label className="form-label">Ducats Limit</label>
-
-                <div className={'input-group'}>
-                    <input
-                        className="form-control" type={"number"}
-                        value={ducatsLimit}
-                        onChange={(e) => setducatsLimit(parseInt( e.target.value))}
-                        onFocus={(e) => e.target.select()}
-                        placeholder="" min={'0'} step={"1"}
-                    />
-                    <span className="input-group-text">Ducats</span>
-                </div>
-            </div>
-
-            <div className={'mb-3'}>
-                <label className="form-label">Glory Limit</label>
-
-                <div className={'input-group'}>
-                    <input
-                        className="form-control" type={"number"}
-                        value={gloryLimit}
-                        onChange={(e) => setgloryLimit(parseInt(e.target.value))}
-                        onFocus={(e) => e.target.select()}
-                        placeholder="" min={'0'} step={"1"}
-                    />
-                    <span className="input-group-text">Glory</span>
-                </div>
             </div>
 
 

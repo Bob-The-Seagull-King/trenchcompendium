@@ -27,11 +27,20 @@
 
     .option-cost
 
-
-
-
     .option-details
         background-color: $bg-color-card-3
 
     .option-details-inner
         padding: 15px
+
+body[data-print="print"]
+    .option-title
+        padding: 10px 10px 5px 10px
+        background-color: $bg-color-card-2
+        font-weight: bold
+    .collapse-chevron-wrap
+        display: none !important
+
+    .option-details
+        .option-details-inner
+            padding: 0 10px 10px 10px

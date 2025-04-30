@@ -140,6 +140,24 @@ class UserWarband extends DynamicContextObject {
         return this.Faction.GetSelfName();
     }
 
+    /**
+     * Returns the Name of the Base-Faction as string
+     *
+     * @TODO:
+     */
+    public GetFactionBaseName () {
+        return 'The Iron Sultanate';
+    }
+
+    /**
+     * Returns the Name of the Faction Variant as string
+     *
+     * @TODO:
+     */
+    public GetFactionVariantName () {
+        return 'The Iron Sultanate';
+    }
+
     /** @TODO
      * Returns the Ducats Value of the Warband Cost as int
      */
@@ -168,6 +186,21 @@ class UserWarband extends DynamicContextObject {
         return this.Context.LimitGlory;
     }
 
+    /**
+     * @TODO
+     * Returns bool - Does the warband have Troops?
+     */
+    public HasTroops () {
+        return true;
+    }
+
+    /**
+     * @TODO
+     * Returns bool - Does the warband have Elites?
+     */
+    public HasElites () {
+        return true;
+    }
 
     /**
      * @TODO
@@ -198,7 +231,7 @@ class UserWarband extends DynamicContextObject {
                 ExperiencePoints: 4,
                 BattleScars: 1,
                 FighterIndex: 1, // the index for sorting and getting unique item in array
-                FighterImageId: 23, // the fighter image Synod ID for testing
+                FighterImageId: 53, // the fighter image Synod ID for testing
                 Injuries: [
                     {
                         Name: 'Hand Wound',
@@ -224,8 +257,8 @@ class UserWarband extends DynamicContextObject {
             },
             {
                 FighterName: 'Olaf',
-                ModelName: 'Assasin',
-                ModelId: 'rl_assasin',
+                ModelName: 'Assassin',
+                ModelId: 'rl_assassin',
                 FighterBaseDucats: 85,
                 FighterBaseGlory: 0,
                 FighterTotalCostDucats: 105,

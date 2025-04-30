@@ -3,7 +3,7 @@ import { UserWarband, IUserWarband } from '../../../classes/saveitems/Warband/Us
 import WbbWarbandListItem from "./WbbWarbandListItem";
 import WbbEditViewFighter from "./WbbEditViewFighter";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCircleNotch, faCopy, faDice, faPen, faPlus} from "@fortawesome/free-solid-svg-icons";
+import {faChevronLeft, faCircleNotch, faCopy, faDice, faPen, faPlus} from "@fortawesome/free-solid-svg-icons";
 import WbbEditViewStash from "./WbbEditViewStash";
 import WbbEditViewModifier from "./WbbEditViewModifier";
 import WbbEditViewExploration from "./WbbEditViewExploration";
@@ -24,6 +24,9 @@ import {PopoverProvider} from "../../../context/PopoverContext";
 import {WarbandProvider} from "../../../context/WarbandContext";
 import {PlayModeProvider, usePlayMode} from "../../../context/PlayModeContext";
 import WbbContextualPopover from "./WbbContextualPopover";
+import {PrintModeProvider, usePrintMode} from "../../../context/PrintModeContext";
+import WbbPrintViewSimple from "./WbbPrintViewSimple";
+import {useGlobalState} from "../../../utility/globalstate";
 
 interface WbbEditViewProps {
     warbandData: UserWarband | null;
@@ -150,108 +153,76 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
     const togglePlayMode = () => setPlayMode(prev => !prev);
 
 
-    return (
+    /** Print Mode */
+    const [theme, setTheme] = useGlobalState('theme');
 
-        <div className="WbbEditView">
+    const { printMode, setPrintMode } = usePrintMode();
+    const exitPrintMode = () => {
+        setPrintMode(false);
+
+        // Restore previous theme
+        document.body.setAttribute('data-theme', theme);
+
+        // Remove print data attribute
+        document.body.removeAttribute('data-print');
+    };
+
+
+    return (
+        <div className={`WbbEditView ${printMode ? 'print-mode' : ''}`}>
             {/* The Warband List */}
             {(warband !== null) ? (
                 <WarbandProvider warband={warband}>
                     <PopoverProvider> <PlayModeProvider value={{ playMode, togglePlayMode }}>
-                        <div className={`warband-title ${detailType ? 'details-open' : ''}`}>
-                            <div className={'container'}>
+                        {!printMode &&
+                            <>
+                                <div className={`warband-title ${detailType ? 'details-open' : ''}`}>
+                                    <div className={'container'}>
 
-                                <h1>
-                                    {warband.GetWarbandName()}
-                                </h1>
+                                        <h1>
+                                            {warband.GetWarbandName()}
+                                        </h1>
 
-                                <div className={'wbb-actions'}>
-                                    <WbbContextualPopover
-                                        id={'warabnd-actions'}
-                                        type="warband"
-                                        item={warband}
-                                    />
+                                        <div className={'wbb-actions'}>
+                                            <WbbContextualPopover
+                                                id={'warabnd-actions'}
+                                                type="warband"
+                                                item={warband}
+                                            />
+                                        </div>
+
+                                    </div>
                                 </div>
 
-                            </div>
-                        </div>
+                                <div className={'container WbbEditViewMain'}>
+                                    <div className={`warband-wrap ${detailType ? 'details-open' : ''}`}>
+                                        {/* Warband Meta */}
 
-                        <div className={'container WbbEditViewMain'}>
-                            <div className={`warband-wrap ${detailType ? 'details-open' : ''}`}>
-                                {/* Warband Meta */}
+                                        <WbbEditViewWarband
+                                            onClick={() => openDetail('warband', null)}
+                                            isActive={detailType === 'warband'}
+                                        />
 
-                                <WbbEditViewWarband
-                                    onClick={() => openDetail('warband', null)}
-                                    isActive={detailType === 'warband'}
-                                />
-
-                                {!playMode &&
-                                    <WbbEditViewStash
-                                        onClick={() => openDetail('stash', null)}
-                                        isActive={detailType === 'stash'}
-                                    />
-                                }
-
-                                {!playMode &&
-                                    <WbbEditViewCampaign
-                                        onClick={() => openDetail('campaign', null)}
-                                        isActive={detailType === 'campaign'}
-                                    />
-                                }
-
-
-                                {/* Warband Elites */}
-                                <h3 className={'category-headline'}>Elites</h3>
-                                {warband.GetFighters().map((item, index) => (
-                                    <>
-                                        {item.IsElite &&
-                                            <WbbEditViewFighter
-                                                item={item} index={index}
-                                                onClick={() => openDetail('fighter', item)}
-                                                isActive={detailType === 'fighter' && detailPayload?.FighterIndex === item.FighterIndex}
+                                        {!playMode &&
+                                            <WbbEditViewStash
+                                                onClick={() => openDetail('stash', null)}
+                                                isActive={detailType === 'stash'}
                                             />
                                         }
-                                    </>
-                                ))}
 
-                                {!playMode &&
-                                    <div className={'btn btn-add-element btn-block'}
-                                         onClick={() => setShowAddFighterEliteModal(true)}>
-                                        <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
-                                        {'Add Elite'}
-                                    </div>
-                                }
-
-
-                                {/* Warband Troops */}
-                                <h3 className={'category-headline'}>Troops</h3>
-                                {warband.GetFighters().map((item, index) => (
-                                    <>
-                                        {!item.IsElite &&
-                                            <WbbEditViewFighter
-                                                item={item} index={index}
-                                                onClick={() => openDetail('fighter', item)}
-                                                isActive={detailType === 'fighter' && detailPayload?.FighterIndex === item.FighterIndex}
+                                        {!playMode &&
+                                            <WbbEditViewCampaign
+                                                onClick={() => openDetail('campaign', null)}
+                                                isActive={detailType === 'campaign'}
                                             />
                                         }
-                                    </>
-                                ))}
-
-                                {!playMode &&
-                                    <div className={'btn btn-add-element btn-block'}
-                                         onClick={() => setShowAddFighterTroopModal(true)}>
-                                        <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
-                                        {'Add Troop'}
-                                    </div>
-                                }
 
 
-                                {(!playMode || warband.HasMercenaries()) &&
-                                    <>
-                                        {/* Warband Mercenaries */}
-                                        <h3 className={'category-headline'}>Mercenaries</h3>
+                                        {/* Warband Elites */}
+                                        <h3 className={'category-headline'}>Elites</h3>
                                         {warband.GetFighters().map((item, index) => (
                                             <>
-                                                {item.IsMercenary &&
+                                                {item.IsElite &&
                                                     <WbbEditViewFighter
                                                         item={item} index={index}
                                                         onClick={() => openDetail('fighter', item)}
@@ -260,116 +231,181 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                                                 }
                                             </>
                                         ))}
-                                    </>
-                                }
+
+                                        {!playMode &&
+                                            <div className={'btn btn-add-element btn-block'}
+                                                 onClick={() => setShowAddFighterEliteModal(true)}>
+                                                <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
+                                                {'Add Elite'}
+                                            </div>
+                                        }
 
 
-                                {!playMode &&
-                                    <div className={'btn btn-add-element btn-block'}
-                                         onClick={() => setShowAddFighterMercenaryModal(true)}>
-                                        <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
-                                        {'Add Mercenary'}
-                                    </div>
-                                }
+                                        {/* Warband Troops */}
+                                        <h3 className={'category-headline'}>Troops</h3>
+                                        {warband.GetFighters().map((item, index) => (
+                                            <>
+                                                {!item.IsElite &&
+                                                    <WbbEditViewFighter
+                                                        item={item} index={index}
+                                                        onClick={() => openDetail('fighter', item)}
+                                                        isActive={detailType === 'fighter' && detailPayload?.FighterIndex === item.FighterIndex}
+                                                    />
+                                                }
+                                            </>
+                                        ))}
 
-                                {/* Warband Modifiers */}
-                                <h3 className={'category-headline'}>Modifiers</h3>
-                                <WbbEditViewModifier
-                                    index={123}
-                                />
+                                        {!playMode &&
+                                            <div className={'btn btn-add-element btn-block'}
+                                                 onClick={() => setShowAddFighterTroopModal(true)}>
+                                                <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
+                                                {'Add Troop'}
+                                            </div>
+                                        }
 
-                                {!playMode &&
-                                    <div className={'btn btn-add-element btn-block'}
-                                         onClick={() => setShowAddModifierModal(true)}
-                                    >
-                                        <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
-                                        {'Add Modifier'}
-                                    </div>
-                                }
 
-                                {!playMode &&
-                                    <>
-                                        {/* Warband Exploration */}
-                                        <h3 className={'category-headline'}>Exploration</h3>
+                                        {(!playMode || warband.HasMercenaries()) &&
+                                            <>
+                                                {/* Warband Mercenaries */}
+                                                <h3 className={'category-headline'}>Mercenaries</h3>
+                                                {warband.GetFighters().map((item, index) => (
+                                                    <>
+                                                        {item.IsMercenary &&
+                                                            <WbbEditViewFighter
+                                                                item={item} index={index}
+                                                                onClick={() => openDetail('fighter', item)}
+                                                                isActive={detailType === 'fighter' && detailPayload?.FighterIndex === item.FighterIndex}
+                                                            />
+                                                        }
+                                                    </>
+                                                ))}
+                                            </>
+                                        }
 
-                                        <WbbEditViewExploration
+
+                                        {!playMode &&
+                                            <div className={'btn btn-add-element btn-block'}
+                                                 onClick={() => setShowAddFighterMercenaryModal(true)}>
+                                                <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
+                                                {'Add Mercenary'}
+                                            </div>
+                                        }
+
+                                        {/* Warband Modifiers */}
+                                        <h3 className={'category-headline'}>Modifiers</h3>
+                                        <WbbEditViewModifier
                                             index={123}
                                         />
 
-                                        <div className={'btn btn-add-element btn-block'}
-                                             onClick={() => setShowAddExplorationModal(true)}>
-                                            <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
-                                            {'Add Exploration'}
-                                        </div>
-                                    </>
-                                }
-                            </div>
+                                        {!playMode &&
+                                            <div className={'btn btn-add-element btn-block'}
+                                                 onClick={() => setShowAddModifierModal(true)}
+                                            >
+                                                <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
+                                                {'Add Modifier'}
+                                            </div>
+                                        }
 
-                            <div className={'selected-item-wrap'} ref={selectedItemWrapRef}>
-                                {/* The Fighter Detail View */}
-                                {detailType === 'fighter' && detailPayload && (
-                                    <WbbFighterDetailView
-                                        fighter={detailPayload}
-                                        onClose={closeDetail}
-                                    />
-                                )}
+                                        {!playMode &&
+                                            <>
+                                                {/* Warband Exploration */}
+                                                <h3 className={'category-headline'}>Exploration</h3>
 
-                                {/* The Warband Detail View */}
-                                {detailType === 'warband' && (
-                                    <WbbWarbandDetailView
-                                        onClose={closeDetail}
-                                    />
-                                )}
+                                                <WbbEditViewExploration
+                                                    index={123}
+                                                />
 
-                                {/* The Stash Detail View */}
-                                {detailType === 'stash' && (
-                                    <WbbStashDetailView
-                                        onClose={closeDetail}
-                                    />
-                                )}
-
-                                {/* The Campaign Detail View */}
-                                {detailType === 'campaign' && (
-                                    <WbbCampaignDetailView
-                                        onClose={closeDetail}
-                                    />
-                                )}
-
-                                {/* Empty Fallback */}
-                                {detailType === null && (
-                                    <div className={'selected-item-empty'}>
-                                        {/*{'Nothing selected'}*/}
+                                                <div className={'btn btn-add-element btn-block'}
+                                                     onClick={() => setShowAddExplorationModal(true)}>
+                                                    <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
+                                                    {'Add Exploration'}
+                                                </div>
+                                            </>
+                                        }
                                     </div>
-                                )}
-                            </div>
-                        </div>
+
+                                    <div className={'selected-item-wrap'} ref={selectedItemWrapRef}>
+                                        {/* The Fighter Detail View */}
+                                        {detailType === 'fighter' && detailPayload && (
+                                            <WbbFighterDetailView
+                                                fighter={detailPayload}
+                                                onClose={closeDetail}
+                                            />
+                                        )}
+
+                                        {/* The Warband Detail View */}
+                                        {detailType === 'warband' && (
+                                            <WbbWarbandDetailView
+                                                onClose={closeDetail}
+                                            />
+                                        )}
+
+                                        {/* The Stash Detail View */}
+                                        {detailType === 'stash' && (
+                                            <WbbStashDetailView
+                                                onClose={closeDetail}
+                                            />
+                                        )}
+
+                                        {/* The Campaign Detail View */}
+                                        {detailType === 'campaign' && (
+                                            <WbbCampaignDetailView
+                                                onClose={closeDetail}
+                                            />
+                                        )}
+
+                                        {/* Empty Fallback */}
+                                        {detailType === null && (
+                                            <div className={'selected-item-empty'}>
+                                                {/*{'Nothing selected'}*/}
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
 
 
-                        <WbbModalAddFighterTroop
-                            show={showAddFighterTroopModal}
-                            onClose={() => setShowAddFighterTroopModal(false)}
-                            onSubmit={handleFighterSubmit}
-                        />
-                        <WbbModalAddFighterElite
-                            show={showAddFighterEliteModal}
-                            onClose={() => setShowAddFighterEliteModal(false)}
-                            onSubmit={handleFighterSubmit}
-                        />
-                        <WbbModalAddFighterMercenary
-                            show={showAddFighterMercenaryModal}
-                            onClose={() => setShowAddFighterMercenaryModal(false)}
-                            onSubmit={handleFighterSubmit}
-                        />
-                        <WbbModalAddModifier
-                            show={showAddModifierModal}
-                            onClose={() => setShowAddModifierModal(false)}
-                            onSubmit={handleAddModifier}
-                        />
-                        <WbbModalAddExplorationLocation
-                            show={showAddExplorationModal}
-                            onClose={() => setShowAddExplorationModal(false)}
-                            onSubmit={handleAddExplorationLocation}
-                        />
+                                <WbbModalAddFighterTroop
+                                    show={showAddFighterTroopModal}
+                                    onClose={() => setShowAddFighterTroopModal(false)}
+                                    onSubmit={handleFighterSubmit}
+                                />
+                                <WbbModalAddFighterElite
+                                    show={showAddFighterEliteModal}
+                                    onClose={() => setShowAddFighterEliteModal(false)}
+                                    onSubmit={handleFighterSubmit}
+                                />
+                                <WbbModalAddFighterMercenary
+                                    show={showAddFighterMercenaryModal}
+                                    onClose={() => setShowAddFighterMercenaryModal(false)}
+                                    onSubmit={handleFighterSubmit}
+                                />
+                                <WbbModalAddModifier
+                                    show={showAddModifierModal}
+                                    onClose={() => setShowAddModifierModal(false)}
+                                    onSubmit={handleAddModifier}
+                                />
+                                <WbbModalAddExplorationLocation
+                                    show={showAddExplorationModal}
+                                    onClose={() => setShowAddExplorationModal(false)}
+                                    onSubmit={handleAddExplorationLocation}
+                                />
+                            </>
+                        }
+
+                        {/* Print Mode */}
+                        {printMode &&
+                            <>
+                                <div className={'container'}>
+                                    <div className={'exit-print-view'} onClick={exitPrintMode}>
+                                        <FontAwesomeIcon icon={faChevronLeft} className="icon-inline-left-l"/>
+                                        {'Back to Warband'}
+                                    </div>
+                                </div>
+
+                                <WbbPrintViewSimple />
+                            </>
+                        }
+
                     </PlayModeProvider> </PopoverProvider>
                 </WarbandProvider>
             ) : (
