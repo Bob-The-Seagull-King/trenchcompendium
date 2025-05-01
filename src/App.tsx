@@ -29,6 +29,9 @@ import {AuthProvider} from "./utility/AuthContext";
 import WbbOverviewPage from "./display/pages/WbbOverviewPage";
 import WbbCreateNewPage from "./display/pages/WbbCreateNewPage";
 import WbbEditPage from "./display/pages/WbbEditPage";
+import PrivacyPopup from "./display/components/generics/PrivacyPopup";
+import {TrackingManager} from "./display/components/generics/TrackingManager";
+import PrivacyPage from "./display/superroutes/PrivacyPage";
 
 
 const App: React.FC = () => {
@@ -59,11 +62,17 @@ const App: React.FC = () => {
                                 <Route path={ROUTES.COMPENDIUM_ROUTE} element={<CompendiumRoute controller={compendiumcontroller} />} />
                                 <Route path={ROUTES.WARBAND_ROUTE} element={<WarbandRoute controller={toolcontroller} />} />
                                 <Route path={ROUTES.LOGIN_ROUTE} element={<SynodLoginPage />} /> {/* New login route */}
+                                <Route path={ROUTES.PRIVACY_ROUTE} element={<PrivacyPage />} /> {/* New login route */}
 
                             </Routes>
                         </Router>
                     </PersistGate>
                 </Provider>
+
+                <PrivacyPopup />
+
+                {/* @TODO: add tracking data in component*/}
+                {/*<TrackingManager />*/}
             </AuthProvider>
         </>
     )
