@@ -573,8 +573,17 @@
         "contextdata": {
         },
         "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Anointed are always equipped with a suit of Reinforced Armour and Infernal brand mark which are included in the cost. This armour can never be removed. Otherwise they can be equipped with any weapon, armour or equipment from the Heretic Legion Armoury and may purchase a Trench Shield.",
+                "glossary": [{"val": "Heretic Legion", "id": "kw_heretic"}]
+            }
         ],
         "lore": [ 
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Heavily armed and armoured assault troops. Their skin is burned and blistering from their ordained pilgrimages to Hell and back."
+            }
         ],
         "team": "hell",
         "stats" : {            
@@ -586,7 +595,7 @@
             "movetype": 0,
             "potential": 0
         },
-        "keywords" : [],
+        "keywords" : ["kw_heretic","kw_strong"],
         "abilities" : []
     },
     {

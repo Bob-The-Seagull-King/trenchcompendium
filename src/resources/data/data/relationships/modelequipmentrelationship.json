@@ -116,5 +116,16 @@
         "model_id": ["md_scriptureguardian"],
         "mandatory_equipment": ["eq_combathelmet","eq_reinforcedarmour"],
         "removable": false
+    },
+    {
+        "id": "rel_md_eq_annointedheavyinfantry",
+        "source": "core",
+        "tags": {},
+        "name": "Annointed Heavy Infantry Equipment",
+        "contextdata": {},
+        "options": [],
+        "model_id": ["md_annointedheavyinfantry"],
+        "mandatory_equipment": ["eq_infernalbrandmark","eq_reinforcedarmour"],
+        "removable": false
     }
 ]
