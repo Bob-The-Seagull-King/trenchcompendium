@@ -29,7 +29,8 @@ const FilterableCompendiumDisplay = (prop: any) => {
     
     // Initialize Use State
     const [_curItems, setCurItems] = useState<any[]>([]);
-    const [_keyval, setKeyVal] = useState(0);    
+    const [_keyval, setKeyVal] = useState(0);  
+    const [slugname, setslugname] = useState("Loading");  
         
     useEffect(() => {
 
@@ -59,6 +60,7 @@ const FilterableCompendiumDisplay = (prop: any) => {
             } else {
                 await ViewPageController.initCollection();
             }
+            setslugname("No Items Found")
             setCurItems(InitStateSet());
             setKeyVal((prev) => prev + 1);
         }
@@ -95,7 +97,7 @@ const FilterableCompendiumDisplay = (prop: any) => {
                 <div className=""/>
                 {((_curItems == undefined) || (_curItems == null) || (_curItems.length == 0)) &&
                     <div className="">
-                        <h1 className="">No Items Found</h1>
+                        <h1 className="">{slugname}</h1>
                         <div className=""/>
                     </div>
                 }

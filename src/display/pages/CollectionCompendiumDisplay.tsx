@@ -21,10 +21,12 @@ const CollectionCompendiumDisplay = (prop: any) => {
     // Initialize Use State
     const [_curItems, setCurItems] = useState<any[]>([]);
     const [_keyval, setKeyVal] = useState(0);
+    const [slugname, setslugname] = useState("Loading");
     
     useEffect(() => {
         async function SetCollectionOptions() {
             await ViewPageController.initCollection();
+            setslugname("No Items Found")
             setCurItems(InitStateSet());
             setKeyVal((prev) => prev + 1);
         }
@@ -41,7 +43,7 @@ const CollectionCompendiumDisplay = (prop: any) => {
         return (
             <>
                 {((_curItems == undefined) || (_curItems == null) || (_curItems.length == 0)) &&
-                    <h1 className="">No Items Found</h1>
+                    <h1 className="">{slugname}</h1>
                 }
                 {((_curItems != undefined) && (_curItems != null) && (_curItems.length > 0)) &&
                     <>                       

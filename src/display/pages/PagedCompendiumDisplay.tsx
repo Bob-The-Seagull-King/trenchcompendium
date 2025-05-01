@@ -26,10 +26,12 @@ const PagedCompendiumDisplay = (prop: any) => {
     const urlSplits = urlPath.split('/');
     const [_curItem, setCurItem] = useState<any>(null);
     const [_keyval, setKeyVal] = useState(0);
+    const [slugname, setslugname] = useState("Loading");
     
     useEffect(() => {
         async function SetCollectionOptions() {
             await ViewPageController.initCollection();
+            setslugname("No Items Found")
             setCurItem(InitStateSet());
             setKeyVal((prev) => prev + 1);
         }
@@ -91,7 +93,7 @@ const PagedCompendiumDisplay = (prop: any) => {
             <div className="PagedCompendiumDisplay" key={_keyval}>
                 <div className={'rules-content-main'}>
                     {((_curItem == undefined) || (_curItem == null)) &&
-                        <h1 className="">No Items Selected</h1>
+                        <h1 className="">{slugname}</h1>
                     }
                     {((_curItem != undefined) && (_curItem != null)) &&
                         <div className="">
