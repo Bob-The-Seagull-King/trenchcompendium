@@ -27,6 +27,27 @@ class FilterManager {
         }
     }
 
+    ResetFilters () {
+        for (let i = 0; i < this.TextOptions.length; i++) {
+            this.TextOptions[i].Val = "";
+            this.TextOptions[i].IsStrict = false;
+        }
+        for (let i = 0; i < this.TagOptions.length; i++) {
+            this.TagOptions[i].TagType.IsActive = false;
+            this.TagOptions[i].TagType.DoInclude = true;
+            this.TagOptions[i].TagVal.Val = "";
+            this.TagOptions[i].TagVal.IsStrict = false;
+        }
+        for (let i = 0; i < this.MiscOptions.length; i++) {
+            this.MiscOptions[i].IsActive = false;
+            this.MiscOptions[i].DoInclude = true;
+        }
+        for (let i = 0; i < this.RangeOptions.length; i++) {
+            this.RangeOptions[i].Lower = this.RangeOptions[i].Set_Lower;
+            this.RangeOptions[i].Upper = this.RangeOptions[i].Set_Upper;
+        }
+    }
+
     /**
      * @returns Array of all text-type filters
      */

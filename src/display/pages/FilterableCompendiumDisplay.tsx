@@ -34,12 +34,31 @@ const FilterableCompendiumDisplay = (prop: any) => {
     useEffect(() => {
 
         async function SetCollectionOptions() {
-            /*if (DisplayPage.categoryparam && (grabItemFromURL() != ViewPageController.TypeName)) {
-               
+            if (DisplayPage.categoryparam && (grabItemFromURL() != ViewPageController.TypeName)) {
+                const urlitem = grabItemFromURL();
+                ViewPageController.FilterManager.ResetFilters();
+                let FoundSet = false;
+
+                for (let i = 0; i < ViewPageController.FilterManager.MiscOptions.length; i++) {
+                    const option = ViewPageController.FilterManager.MiscOptions[i]
+                    console.log(option);
+
+                    if (option.Group == DisplayPage.categoryparam) {
+                        if (option.Name == urlitem) {
+                            FoundSet = true;
+                            option.DoInclude = true;
+                            option.IsActive = true;
+                        }
+                    }
+                }
+                if (FoundSet) {
+                    await ViewPageController.updateSearch();
+                } else {
+                    await ViewPageController.initCollection();                    
+                }
             } else {
-                
-            }*/
-            await ViewPageController.initCollection();
+                await ViewPageController.initCollection();
+            }
             setCurItems(InitStateSet());
             setKeyVal((prev) => prev + 1);
         }
