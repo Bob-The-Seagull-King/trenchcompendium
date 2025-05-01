@@ -6,6 +6,7 @@ import { ErrorBoundary } from "react-error-boundary";
 import { GlossaryRule } from '../../../../classes/feature/glossary/Glossary'
 import { returnDescription } from '../../../../utility/util'
 import { Upgrade } from '../../../../classes/feature/ability/Upgrade';
+import OptionSetStaticDisplay from '../../subcomponents/description/OptionSetStaticDisplay';
 
 const UpgradeDisplay = (props: any) => {
     const abilityObject: Upgrade = props.data
@@ -14,6 +15,11 @@ const UpgradeDisplay = (props: any) => {
         <ErrorBoundary fallback={<div>Something went wrong with UpgradeDisplay.tsx</div>}>
             <>
                 {returnDescription(abilityObject, abilityObject.Description)}
+            </>
+            <>
+                {
+                    <OptionSetStaticDisplay data={abilityObject.MyOptions} />
+                }
             </>
         </ErrorBoundary>
     )

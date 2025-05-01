@@ -519,10 +519,38 @@
         "source": "core",
         "tags": {},
         "contextdata": {
+            "model_equipment_restriction": {
+                "required": [
+                    {
+                        "category": "ranged",
+                        "res_type": "id",
+                        "value": "eq_silenecedpistol"
+                    },
+                    {
+                        "category": "ranged",
+                        "res_type": "id",
+                        "value": "eq_tormentorchain"
+                    },
+                    {
+                        "category": "ranged",
+                        "res_type": "id",
+                        "value": "eq_gasgrenades"
+                    }
+                ]
+            }
         },
         "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Death Commando can be equipped with any weapon, armour or equipment from the Heretic Legion Armoury. The only ranged weapons they can be equipped with are Silenced Pistols, a Tormentor Chain and Gas Grenades.",
+                "glossary": [{"val": "Heretic Legion", "id": "kw_heretic"}]
+            }
         ],
         "lore": [ 
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Silent Killers equipped with stealth generators that hide them from the eyes of God. These terrifying infiltrators have been known to kill entire enemy squads alone."
+            }
         ],
         "team": "hell",
         "stats" : {            
@@ -534,8 +562,8 @@
             "movetype": 0,
             "potential": 0
         },
-        "keywords" : [],
-        "abilities" : []
+        "keywords" : ["kw_elite","kw_infiltrator","kw_elite"],
+        "abilities" : ["ab_hide","ab_stealthgenerator"]
     },
     {
         "id": "md_annointedheavyinfantry",
@@ -569,8 +597,22 @@
         "contextdata": {
         },
         "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The Heretic Trooper can be equipped with any weapon, armour or equipment from the Heretic Legion Armoury.",
+                "glossary": [{"val": "Heretic Legion", "id": "kw_heretic"}]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "You can upgrade up to half (rounding down) of your Heretic Troopers into Heretic Legionnaires at the cost of +10 ducats each. You can select to upgrade either the Ranged or Melee characteristic of any of your Legionnaires by +1 DICE. You can choose a different bonus for each Legionnaire.",
+                "glossary": [{"val": "+1 DICE", "id": "kw_plusdice"}]
+            }
         ],
         "lore": [ 
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "The Leader of a Heretic warband. These fallen priests perform all kinds of unholy magics, summoning petrifying demons and creatures using their Goetic spells. Often pledged to a Demon Lord in Hell, such as Pazuzu or Guison, the Profane Gospels they recite terrify church forces, causing ears to bleed and eyeballs to burst in their sockets."
+            }
         ],
         "team": "hell",
         "stats" : {            
@@ -582,7 +624,109 @@
             "movetype": 0,
             "potential": 0
         },
-        "keywords" : [],
+        "keywords" : ["kw_heretic"],
         "abilities" : []
+    },
+    {
+        "id": "md_hereticpriest",
+        "name": "Heretic Priest",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Heretic Priest can be equipped with any weapon, armour or equipment from the Heretic Legion Armoury.",
+                "glossary": [{"val": "Heretic Legion", "id": "kw_heretic"}]
+            }
+        ],
+        "lore": [ 
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "The Leader of a Heretic warband. These fallen priests perform all kinds of unholy magics, summoning petrifying demons and creatures using their Goetic spells. Often pledged to a Demon Lord in Hell, such as Pazuzu or Guison, the Profane Gospels they recite terrify church forces, causing ears to bleed and eyeballs to burst in their sockets."
+            }
+        ],
+        "team": "hell",
+        "stats" : {            
+            "movement": 6,
+            "melee": 2,
+            "ranged": 2,
+            "base": [32],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 0
+        },
+        "keywords" : ["kw_elite","kw_heretic","kw_tough","kw_leader"],
+        "abilities" : ["ab_puppetmaster"]
+    },
+    {
+        "id": "md_heretichorister",
+        "name": "Heretic Chorister",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Heretic Chorister can be equipped with any weapon, armour or equipment from the Heretic Legion Armoury.",
+                "glossary": [{"val": "Heretic Legion", "id": "kw_heretic"}]
+            }
+        ],
+        "lore": [ 
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                    
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "Suicide is a Mortal Sin, and sacrificing yourself to the glory of Hell is a yet greater affront to God. Some Heretics born with a gift of sonorous voice but little prospects of rising through the ranks but possessing a determination to excel may pursue the dark path of becoming a Chorister."
+                    }
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                    
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "Such supplicants go to one of the black altars of Heretic abodes at the bottom of the deep inverted pyramid temples dedicated to the greatest of Arch-devils. There they are dressed in the robes of dark devotion, lie on the altar and mutilate themselves to death by carving unholy runes into their flesh. The more wounds they can suffer before perishing, the more pleasing it is said their offering is. The most devout slice their own throats, trying to cut as deep as they can before their miserable life leaves them."
+                    }
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                    
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "Most such wretches go to their doom in the Lake of Fire, but some are reborn as Choristers after nine days. Their corpses lurch back to their feet, and finish their grisly beheading, and lift their severed heads that begin to sing hymns they have learned in the Inferno. From their self-inflicted wounds spurts cold blood that forms diabolic symbols and changes to match the words of their unholy chorale. They head towards the front lines driven by a call no living can hear and join the Heretic warband of their choosing."
+                    }
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                    
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "As their severed heads sing their agonising hymns, the minds of their enemies are filled with visions from the Pits of Hell, weakening both the resolve and strength of those unfortunate enough to hear the dire song of a Chorister. Their hymns are often the first thing a fresh recruit experiences on the battlefield, as their unholy voice rolls across the trenches, proclaiming a never-ending prophecy of the final victory of Hell over Heaven."
+                    }
+                ]
+            }
+        ],
+        "team": "hell",
+        "stats" : {            
+            "movement": 6,
+            "melee": 2,
+            "ranged": -2,
+            "base": [32],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 0
+        },
+        "keywords" : ["kw_elite","kw_heretic","kw_fear"],
+        "abilities" : ["ab_unholyhymns"]
     }
 ]

@@ -200,7 +200,7 @@ class Model extends StaticContextObject {
         UpgradeList.sort(byPropertiesOf<IModelUpgradeRelationship>(["upgrade_id"]))
 
         for (let i = 0; i < UpgradeList.length; i++) {
-            this.UpgradeList.push(await UpgradeFactory.CreateModelUpgrade(UpgradeList[i]))
+            this.UpgradeList.push(await UpgradeFactory.CreateModelUpgrade(UpgradeList[i], this))
         }
     }
     

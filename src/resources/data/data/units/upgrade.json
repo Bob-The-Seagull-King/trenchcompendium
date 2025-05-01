@@ -608,5 +608,101 @@
             }
         ],
         "options": []
+    },
+    {
+        "id": "up_heretictrooper_hereticlegionnaire",
+        "name": "Heretic Legionnaire",
+        "source": "core",
+        "tags": {"trait": true
+                },
+        "contextdata": {
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Trooper becomes a Legionnaire and chooses to gain +1 DICE for either ranged or melee attacks.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"}
+                ]
+            }
+        ],
+        "options": [
+            {
+                "ref_id" : "ot_legionnaire",
+                "name" : "Legionnaire Training",
+                "description" : [],
+                "category" : "type",
+                "type" : "text",
+                "strictness" : "strict",
+                "predefined_options" : [],
+                "option_context" : {"basic_option_default":{}},
+                "data_search" : {      
+                    "searchtype": "complex",
+                    "searchparam":    {
+                        "type": "upgrade",
+                        "request":    {
+                            "operator": "and",
+                            "terms": [
+                                {             
+                                    "item": "tags",
+                                    "value": "category",
+                                    "equals": true,
+                                    "strict": true,
+                                    "istag": true,
+                                    "tagvalue": "heretictrooper"
+                                }
+                            ],
+                            "subparams": []
+                        }
+                    }                        
+                }
+            }
+        ]
+    },
+    {
+        "id": "up_heretictrooper_hereticlegionnaire_ranged",
+        "name": "Ranged Legionnaire",
+        "source": "core",
+        "tags": {"trait": true,
+                "heretictrooper": true
+                },
+        "contextdata": {
+            "upgrade_stat": { "upgrades" : [
+                {"stat": "ranged", "value": 1}
+                ]}
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Trooper becomes a Legionnaire with +1 DICE to ranged attacks.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_heretictrooper_hereticlegionnaire_Melee",
+        "name": "Melee Legionnaire",
+        "source": "core",
+        "tags": {"trait": true,
+                "heretictrooper": true
+                },
+        "contextdata": {
+            "upgrade_stat": { "upgrades" : [
+                {"stat": "melee", "value": 1}
+                ]}
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Trooper becomes a Legionnaire with +1 DICE to melee attacks.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"}
+                ]
+            }
+        ],
+        "options": []
     }
 ]

@@ -495,5 +495,74 @@
             }
         ],
         "options": []
+    },
+    {
+        "id": "ab_puppetmaster",
+        "name": "Puppet Master",
+        "source": "core",
+        "tags": {"action": true},
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Select a target model, friend or foe (including the Priest), within 12”. As a RISKY ACTION you can move the model D6” in any one direction, including forcing it to jump/fall down or enter into melee combat with any enemy model (as if it had Charged), or leave Combat (as if it had Retreated, including granting any enemies within range free attacks).",
+                "glossary": [{"val": "RISKY ACTION", "id": "kw_riskyaction"}]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_hide",
+        "name": "Hide",
+        "source": "core",
+        "tags": {"action": true},
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "As a RISKY ACTION with +1 DICE the Commando can hide if any piece of scenery the model is touching can block line of sight in any direction, even partially, regardless of whether an enemy currently has a clear LOS. If successful, enemies cannot target the Commando with ranged attacks or Charges. Weapons with the Keyword BLAST affect the Commando as normal if it is in the radius of the weapon. This effect ends if the Commando moves from its exact position in any way, it makes a Ranged Attack or an enemy model comes within 1.5” of it.",
+                "glossary": [
+                    {"val": "RISKY ACTION", "id": "kw_riskyaction"},
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "BLAST", "id": "kw_blast"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_stealthgenerator",
+        "name": "Stealth Generator",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Ranged attacks against a Death Commando suffer -1 DICE to all the attack rolls.",
+                "glossary": [
+                    {"val": "-1 DICE", "id": "kw_minusdice"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_unholyhymns",
+        "name": "Unholy Hymns",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "All enemy models within 8” of the Chorister suffer an additional -1 DICE for all ACTIONS they attempt.",
+                "glossary": [
+                    {"val": "-1 DICE", "id": "kw_minusdice"},
+                    {"val": "ACTIONS", "id": "kw_action"}
+                ]
+            }
+        ],
+        "options": []
     }
 ]

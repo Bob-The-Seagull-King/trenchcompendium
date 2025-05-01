@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react'
 import UpgradeDisplay from "../features/ability/UpgradeDisplay";
 import {ModelUpgradeRelationship} from "../../../classes/relationship/model/ModelUpgradeRelationship";
 import {getCostType} from "../../../utility/functions";
+import { EventRunner } from '../../../classes/contextevent/contexteventhandler';
 
 
 interface RulesModelUpgradeProps {
@@ -14,7 +15,29 @@ interface RulesModelUpgradeProps {
 const RulesModelUpgrade: React.FC<RulesModelUpgradeProps> = ({ item }) => {
 
     const abilityObject: ModelUpgradeRelationship = item
+    
+    const [maximum, setmaximum] = useState("")
+    const [_keyvar, setkeyvar] = useState(0);
 
+    useEffect(() => {
+        async function SetModelOptions() {
+            const EventProc: EventRunner = new EventRunner();
+
+            const result = await EventProc.runEvent(
+                "getUpgradeLimitPresentation",
+                abilityObject,
+                [],
+                [abilityObject.WarbandLimit.toString()],
+                true
+            );
+
+            setmaximum(result.join(", "));
+            setkeyvar((prev) => prev + 1);
+        }
+
+        SetModelOptions();
+    }, []);
+    
     return (
         <>
             <span className={'upgrade-name'}>
@@ -32,7 +55,7 @@ const RulesModelUpgrade: React.FC<RulesModelUpgradeProps> = ({ item }) => {
 
             {abilityObject.WarbandLimit != 0 &&
                 <div className={'upgrade-limit'}>
-                    {(abilityObject.WarbandLimit != 0 ? (" " + "(Limit " + abilityObject.WarbandLimit + ")") : "")}
+                    {(abilityObject.WarbandLimit != 0 ? (" " + "(Limit " + maximum + ")") : "")}
                 </div>
             }
         </>

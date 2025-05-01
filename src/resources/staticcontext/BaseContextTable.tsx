@@ -385,6 +385,14 @@ export const BaseContextCallTable : CallEventTable = {
             return relayVar;
         }
     },
+    faction_upgrade_count_special: {
+        event_priotity: 0,
+        async getUpgradeLimitPresentation(this: EventRunner, eventSource : any, relayVar : string[], trackVal : boolean, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+                        
+            relayVar.push("TEST")
+            return relayVar;
+        }
+    },
     faction_add_upgrades : {
         event_priotity: 0,
         async getFactionRuleUpgrades(this: EventRunner, eventSource : any, relayVar : ModelUpgradeRelationship[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
@@ -414,7 +422,7 @@ export const BaseContextCallTable : CallEventTable = {
             
             for (let i = 0; i < UpgradeList.length; i++) {
                 UpgradeList[i].model_id_set = context_func["models_id"]
-                relayVar.push(await UpgradeFactory.CreateModelUpgrade(UpgradeList[i]))
+                relayVar.push(await UpgradeFactory.CreateModelUpgrade(UpgradeList[i], null))
             }
 
             return relayVar;

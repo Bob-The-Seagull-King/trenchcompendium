@@ -8,8 +8,7 @@ import { Upgrade } from '../../feature/ability/Upgrade';
 import { ModelFactory } from '../../../factories/features/ModelFactory';
 import { UpgradeFactory } from '../../../factories/features/UpgradeFactory';
 
-interface IModelUpgradeRelationship {
-    id : string,
+interface IModelUpgradeRelationship extends IStaticOptionContextObject {
     model_id_set : string[],
     upgrade_id : string,
     cost : number,
@@ -24,8 +23,8 @@ interface ModelUpgradeRestriction {
     max_count : 0
 }
 
-class ModelUpgradeRelationship {
-    public ID : string;
+class ModelUpgradeRelationship extends StaticOptionContextObject {
+
     public UpgradeObject! : Upgrade;
     public Cost : number;
     public CostType : number;
@@ -37,9 +36,9 @@ class ModelUpgradeRelationship {
      * objects with DescriptionFactory
      * @param data Object data in IAbility format
      */
-    public constructor(data: IModelUpgradeRelationship)
+    public constructor(data: IModelUpgradeRelationship, parent : ContextObject | null)
     {
-        this.ID = data.id;
+        super(data, parent)
         this.Cost = data.cost;
         this.CostType = data.cost_type;
         this.WarbandLimit = data.warband_limit;

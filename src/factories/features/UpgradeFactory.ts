@@ -36,13 +36,13 @@ class UpgradeFactory {
         return rulenew;
     }
 
-    static async CreateModelUpgrade(_rule: IModelUpgradeRelationship) {
+    static async CreateModelUpgrade(_rule: IModelUpgradeRelationship, parent : ContextObject | null) {
         const cache = StaticDataCache.getInstance();
         const isValid = (cache.CheckID('modelupgrade', _rule.id))
         if (isValid == false) {
             return cache.ModelUpgradeCache[_rule.id];
         }
-        const rule = await new ModelUpgradeRelationship(_rule)
+        const rule = await new ModelUpgradeRelationship(_rule, parent)
         cache.AddToCache('modelupgrade', rule);
         await rule.BuildUpgrade(_rule.upgrade_id);
         return rule;
