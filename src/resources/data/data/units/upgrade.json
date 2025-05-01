@@ -645,11 +645,11 @@
                             "terms": [
                                 {             
                                     "item": "tags",
-                                    "value": "category",
+                                    "value": "heretictrooper",
                                     "equals": true,
                                     "strict": true,
                                     "istag": true,
-                                    "tagvalue": "heretictrooper"
+                                    "tagvalue": ""
                                 }
                             ],
                             "subparams": []

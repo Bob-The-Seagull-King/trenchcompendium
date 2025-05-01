@@ -389,7 +389,26 @@ export const BaseContextCallTable : CallEventTable = {
         event_priotity: 0,
         async getUpgradeLimitPresentation(this: EventRunner, eventSource : any, relayVar : string[], trackVal : boolean, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
                         
-            relayVar.push("TEST")
+            const { ModelFactory } = await import("../../factories/features/ModelFactory");
+            if (trackVal == true) {
+                if (context_func["match"]) {
+                    if (context_func["match"][0]["type"] == "model") {
+                        const ModelItem = await ModelFactory.CreateNewModel(context_func["match"][0]["value"], null)
+                        let prelude = ""
+
+                        if (context_func["match"][0]["modifier"]) {
+                            if (context_func["match"][0]["modifier"] == 'half') {
+                                prelude = "Half your "
+                            }
+                        } else {
+                            prelude = "Number of "
+                        }
+
+                        return [prelude + ModelItem.Name]
+                    }
+                }
+            }
+
             return relayVar;
         }
     },

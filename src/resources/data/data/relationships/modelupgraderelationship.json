@@ -490,7 +490,16 @@
         "tags": {},
         "name": "",
         "contextdata": {
-            "faction_upgrade_count_special": {}
+            "faction_upgrade_count_special": {
+                "match": [
+                    {
+                        "type": "model",
+                        "value" : "md_heretictrooper",
+                        "modifier": "half"
+                    }
+                ]
+
+            }
         },
         "options": [],
         "model_id_set": ["md_heretictrooper"],
