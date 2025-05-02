@@ -11,8 +11,6 @@ import OptionSetStaticDisplay from '../../subcomponents/description/OptionSetSta
 const UpgradeDisplay = (props: any) => {
     const abilityObject: Upgrade = props.data
 
-    console.log(abilityObject);
-
     return (
         <ErrorBoundary fallback={<div>Something went wrong with UpgradeDisplay.tsx</div>}>
             <>

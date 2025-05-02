@@ -265,7 +265,7 @@ class Model extends StaticContextObject {
      * - This is mostly the equipment Text
      */
     public hasDescription () : boolean {
-        if( this.Abilities.length > 0 ) {
+        if( this.Description.length > 0 ) {
             return true;
         } else {
             return false;

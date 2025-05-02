@@ -42,7 +42,6 @@ const FilterableCompendiumDisplay = (prop: any) => {
 
                 for (let i = 0; i < ViewPageController.FilterManager.MiscOptions.length; i++) {
                     const option = ViewPageController.FilterManager.MiscOptions[i]
-                    console.log(option);
 
                     if (option.Group == DisplayPage.categoryparam) {
                         if (option.Name == urlitem) {

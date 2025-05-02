@@ -574,7 +574,7 @@
         },
         "description": [
             {
-                "tags": {"desc_type" : "paragraph"},
+                "tags": {"desc_type" : "default"},
                 "content": "Anointed are always equipped with a suit of Reinforced Armour and Infernal brand mark which are included in the cost. This armour can never be removed. Otherwise they can be equipped with any weapon, armour or equipment from the Heretic Legion Armoury and may purchase a Trench Shield.",
                 "glossary": [{"val": "Heretic Legion", "id": "kw_heretic"}]
             }
@@ -620,7 +620,7 @@
         "lore": [ 
             {
                 "tags": {"desc_type" : "italic"},
-                "content": "The Leader of a Heretic warband. These fallen priests perform all kinds of unholy magics, summoning petrifying demons and creatures using their Goetic spells. Often pledged to a Demon Lord in Hell, such as Pazuzu or Guison, the Profane Gospels they recite terrify church forces, causing ears to bleed and eyeballs to burst in their sockets."
+                "content": "These soldiers make up the bulk of the Heretic forces. They have witnessed the Gate of Hell and survived, damning them for all eternity."
             }
         ],
         "team": "hell",
@@ -653,7 +653,7 @@
         "lore": [ 
             {
                 "tags": {"desc_type" : "italic"},
-                "content": "These soldiers make up the bulk of the Heretic forces. They have witnessed the Gate of Hell and survived, damning them for all eternity."
+                "content": "The Leader of a Heretic warband. These fallen priests perform all kinds of unholy magics, summoning petrifying demons and creatures using their Goetic spells. Often pledged to a Demon Lord in Hell, such as Pazuzu or Guison, the Profane Gospels they recite terrify church forces, causing ears to bleed and eyeballs to burst in their sockets."
             }
         ],
         "team": "hell",
