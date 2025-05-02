@@ -57,7 +57,7 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
 
         if (searchParams.has('fighter')) {
             const fighterId = searchParams.get('fighter');
-            const fighter = warband?.GetFighters().find(f => f.ModelId === fighterId);
+            const fighter = warband?.GetFighters().find(f => f.Slug === fighterId);
             if (fighter) {
                 setDetailType('fighter');
                 setDetailPayload(fighter);
@@ -88,8 +88,8 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
 
         let query = '';
 
-        if (type === 'fighter' && payload?.ModelId) {
-            query = `?fighter=${payload.ModelId}`;
+        if (type === 'fighter' && payload?.Slug) {
+            query = `?fighter=${payload.Slug}`;
         } else if (type === 'stash') {
             query = `?stash`;
         } else if (type === 'campaign') {

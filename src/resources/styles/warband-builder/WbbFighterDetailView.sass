@@ -28,53 +28,8 @@
     .fighter-card-main-area
         position: relative
         margin: 0 -15px
-        padding: 15px
-
-        // default smaller images
-        .fighter-image-wrap
-            position: absolute
-            z-index: 1
-            top: 0
-            right: 0
-            bottom: 0
-            height: 100%
-            width: calc(100% - 280px)
-            min-width: 150px
-
-        .fighter-image
-            position: absolute
-            top: 0
-            right: 0
-            bottom: 0
-            z-index: 1
-            width: 100%
-            height: 100%
-            object-fit: contain
-            object-position: bottom right
-
-        @media(max-width: 420px)
-            .fighter-image-wrap
-                width: calc(100% - 240px)
-
-        // testing full screen images
-        .fighter-image-wrap.full
-            &:before
-                content: ""
-                display: block
-                position: absolute
-                z-index: 2
-                width: 50px
-                height: 100%
-                background: linear-gradient(90deg,rgba(51, 51, 51, 1) 0%, rgba(51, 51, 51, 0) 100%)
-
-            .fighter-image
-                object-fit: cover
-                object-position: top left
 
     .fighter-card-meta
-        position: relative
-        z-index: 5
-        padding: 0
 
     &.play-mode
         .fighter-card-meta
@@ -82,9 +37,6 @@
             margin-bottom: 30px
 
     .fighter-card-stats
-        position: relative
-        z-index: 5
-        padding: 0
         margin-bottom: 0
 
     &.play-mode

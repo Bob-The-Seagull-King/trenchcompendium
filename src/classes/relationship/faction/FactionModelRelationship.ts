@@ -173,6 +173,14 @@ class FactionModelRelationship extends StaticOptionContextObject {
 
     }
 
+    /**
+     * Returns the slug of the model in use
+     * @constructor
+     */
+    public GetSlug() {
+        return this.Model.GetSlug();
+    }
+
 }
 
 export {IFactionModelRelationship, FactionModelRelationship}

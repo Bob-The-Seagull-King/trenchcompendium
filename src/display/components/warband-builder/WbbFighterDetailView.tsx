@@ -31,6 +31,8 @@ import {usePlayMode} from "../../../context/PlayModeContext";
 import SynodImage from "../../../utility/SynodImage";
 import WbbContextualPopover from "./WbbContextualPopover";
 import SynodImageSource from "../../../utility/SynodImageSource";
+import SynodModelImage from "../../../utility/SynodModelImage";
+import SynodModelImageSource from "../../../utility/SynodModelImageSource";
 
 
 interface WbbFighterDetailViewProps {
@@ -260,10 +262,10 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
             <div className={'fighter-card-main-area'}>
                 {fighter.FighterImageId > 0 &&
                     <div className={'fighter-image-wrap full'}>
-                        <SynodImage
-                            imageId={fighter.FighterImageId}
+                        <SynodModelImage
+                            modelSlug={fighter.Slug}
+                            size="medium"
                             className={'fighter-image'}
-                            size={'large'}
                         />
                     </div>
                 }
@@ -350,8 +352,8 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
                     <div className="fighter-meta-entry-simple synod-image-source-wrap">
                         {'Image: '}
 
-                        <SynodImageSource
-                            imageId={fighter.FighterImageId}
+                        <SynodModelImageSource
+                            modelSlug={fighter.Slug}
                         />
                     </div>
                 </div>

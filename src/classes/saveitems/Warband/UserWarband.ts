@@ -221,7 +221,7 @@ class UserWarband extends DynamicContextObject {
             {
                 FighterName: 'Olaf',
                 ModelName: 'Jabirean Alchemist',
-                ModelId: 'rl_alchemists',
+                Slug: 'md_jabireanalchemist',
                 FighterBaseDucats: 75,
                 FighterBaseGlory: 0,
                 FighterTotalCostDucats: 102,
@@ -258,7 +258,7 @@ class UserWarband extends DynamicContextObject {
             {
                 FighterName: 'Olaf',
                 ModelName: 'Assassin',
-                ModelId: 'rl_assassin',
+                Slug: 'md_sultanateassassin',
                 FighterBaseDucats: 85,
                 FighterBaseGlory: 0,
                 FighterTotalCostDucats: 105,
@@ -295,7 +295,7 @@ class UserWarband extends DynamicContextObject {
             {
                 FighterName: 'Olaf',
                 ModelName: 'Azeb',
-                ModelId: 'rl_azeb',
+                Slug: 'md_azeb',
                 FighterBaseDucats: 25,
                 FighterBaseGlory: 0,
                 FighterTotalCostDucats: 35,
@@ -329,7 +329,7 @@ class UserWarband extends DynamicContextObject {
             {
                 FighterName: 'Günther',
                 ModelName: 'Azeb',
-                ModelId: 'rl_azeb',
+                Slug: 'md_azeb',
                 FighterBaseDucats: 25,
                 FighterBaseGlory: 0,
                 FighterTotalCostDucats: 35,
