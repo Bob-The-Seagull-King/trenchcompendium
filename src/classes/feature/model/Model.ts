@@ -319,6 +319,13 @@ class Model extends StaticContextObject {
         }
     }
 
+    /**
+     * Returns the ID of the Model
+     */
+    public GetSlug () {
+        return this.ID;
+    }
+
 
     /**
      * Returns the base size (or options) for a model as a string

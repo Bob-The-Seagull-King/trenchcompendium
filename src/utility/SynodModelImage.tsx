@@ -1,0 +1,38 @@
+import React, { useState } from 'react';
+import { useSynodModelImageData } from './useSynodModelImageData';
+
+
+/**
+ * Shows a synod image for a model by its slug
+ */
+
+interface SynodModelImageProps {
+    modelSlug: string;
+    size?: string;
+    className?: string;
+}
+
+const SynodModelImage: React.FC<SynodModelImageProps> = ({ modelSlug, size = 'medium', className = '' }) => {
+    const { url, modelName, error } = useSynodModelImageData(modelSlug, size);
+
+    const fallback =
+        'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+
+    console.log(url);
+
+    if( error ) {
+        return '';
+    }
+
+    return (
+        <img
+            src={url || fallback}
+            alt={modelName || ''}
+            className={url ? `loaded-image ${className}` : `ghost-image ${className}`}
+        />
+    );
+
+
+};
+
+export default SynodModelImage;

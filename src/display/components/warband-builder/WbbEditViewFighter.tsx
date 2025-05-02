@@ -15,7 +15,7 @@ interface WbbEditViewFighterProps {
     item: {
         FighterName: string;
         ModelName: string;
-        ModelId: string;
+        Slug: string;
         FighterBaseDucats: number;
         FighterBaseGlory: number;
         FighterTotalCostDucats: number;

@@ -17,6 +17,8 @@ import RulesModelDisplayAbility from "./RulesModelDisplayAbility";
 import {useGlobalState} from "../../../utility/globalstate";
 import { EventRunner } from '../../../classes/contextevent/contexteventhandler';
 import ModelEquipmentDisplay from '../features/equipment/ModelEquipmentDisplay';
+import SynodModelImage from "../../../utility/SynodModelImage";
+import SynodModelImageSource from "../../../utility/SynodModelImageSource";
 
 const RulesModelDisplay = (props: any) => {
     const factionmodelObject: FactionModelRelationship = props.data
@@ -164,62 +166,81 @@ const RulesModelDisplay = (props: any) => {
                     {factionmodelObject.getName()}
                 </div>
 
-                <div className="fighter-card-meta fighter-card-meta-above">
-                    <div className="fighter-meta-entry-simple fighter-cost">
+                <div className={'fighter-card-main-area'}>
+                    <div className={'fighter-image-wrap'}>
+                        <SynodModelImage
+                            modelSlug={modelcollectionObject.GetSlug()}
+                            size="medium"
+                            className="fighter-image"
+                        />
+                    </div>
+                    <div className="fighter-card-meta fighter-card-meta-above">
+                        <div className="fighter-meta-entry-simple fighter-cost">
                         <span className="fighter-meta-label">
                             Cost:
                         </span>
-                        <span className="fighter-meta-value">
+                            <span className="fighter-meta-value">
                             {factionmodelObject.getCostString()}
                         </span>
-                    </div>
-                    <div className="fighter-meta-entry-simple fighter-availability">
+                        </div>
+                        <div className="fighter-meta-entry-simple fighter-availability">
                         <span className="fighter-meta-label">
                             Availability:
                         </span>
-                        <span className="fighter-meta-value">
+                            <span className="fighter-meta-value">
                             {minimum + "-" + maximum}
                         </span>
-                    </div>
-                </div>
-
-                <div className="fighter-card-stats">
-                    {ReturnStats(statchoices)  /* Stats */}
-                </div>
-
-                <div className="fighter-card-meta fighter-card-meta-below">
-                    <div className="fighter-meta-entry-simple fighter-base">
-                        <span className="fighter-meta-label">
-                            Base:
-                        </span>
-                        <span className="fighter-meta-value">
-                            {BaseString}
-                        </span>
-                    </div>
-
-                    {factionmodelObject.hasKeywords() &&
-                        <div className="fighter-meta-entry-simple fighter-keywords">
-                        <span className="fighter-meta-label">
-                            Keywords:
-                        </span>
-                            <span className="fighter-meta-value">
-                            {factionmodelObject.getKeywords().map((item, index) => (
-                                <span className=''
-                                      key={"model_keyword_" + modelcollectionObject.ID + "_keyword_id_" + item.ID}>
-                                    <GenericHover
-                                        d_colour={modelcollectionObject.Team}
-                                        titlename={item.Name}
-                                        d_name={item.Name}
-                                        d_type={""}
-                                        d_method={() => <KeywordDisplay data={item}/>}
-                                    />
-                                    {index < modelcollectionObject.KeyWord.length - 1 && ", "}
-                                </span>
-                            )) /* Keywords */}
-                        </span>
                         </div>
-                    }
+                    </div>
+
+                    <div className="fighter-card-stats">
+                        {ReturnStats(statchoices)  /* Stats */}
+                    </div>
+
+                    <div className="fighter-card-meta fighter-card-meta-below">
+                        <div className="fighter-meta-entry-simple fighter-base">
+                            <span className="fighter-meta-label">
+                                Base:
+                            </span>
+                            <span className="fighter-meta-value">
+                                {BaseString}
+                            </span>
+                        </div>
+
+                        {factionmodelObject.hasKeywords() &&
+                            <div className="fighter-meta-entry-simple fighter-keywords">
+                                <span className="fighter-meta-label">
+                                    Keywords:
+                                </span>
+                                <span className="fighter-meta-value">
+                                    {factionmodelObject.getKeywords().map((item, index) => (
+                                        <span className=''
+                                              key={"model_keyword_" + modelcollectionObject.ID + "_keyword_id_" + item.ID}>
+                                            <GenericHover
+                                                d_colour={modelcollectionObject.Team}
+                                                titlename={item.Name}
+                                                d_name={item.Name}
+                                                d_type={""}
+                                                d_method={() => <KeywordDisplay data={item}/>}
+                                            />
+                                            {index < modelcollectionObject.KeyWord.length - 1 && ", "}
+                                        </span>
+                                    )) /* Keywords */}
+                                </span>
+                            </div>
+                        }
+
+                        <div className="fighter-meta-entry-simple synod-image-source-wrap">
+                            {'Image: '}
+
+                            <SynodModelImageSource
+                                modelSlug={factionmodelObject.GetSlug()}
+                            />
+                        </div>
+
+                    </div>
                 </div>
+
 
                 <div className={'fighter-card-collapse-wrap'}>
                     {/* Abilities */}
@@ -248,22 +269,22 @@ const RulesModelDisplay = (props: any) => {
                             method={() => <>
                                 {returnDescription(modelcollectionObject, modelcollectionObject.Description)}
                                 {(modelcollectionObject.EquipmentList.length > 0) &&
-                    
-                                 <div className={'container bordergrey'}>
-                                     <div className={"backgroundgrey"}/>
-                                     <div className="content">
-                                         <div>
-                                             {modelcollectionObject.EquipmentList.map((item) => (
-                                                 <div key={item.ID}>
-                                                     <ModelEquipmentDisplay team_col={modelcollectionObject.Team}
-                                                                            data={item}/>
-                                                 </div>
-                                             ))}
-                                         </div>
-                                     </div>
-                                 </div>
-                    
-                             }
+
+                                    <div className={'container bordergrey'}>
+                                        <div className={"backgroundgrey"}/>
+                                        <div className="content">
+                                            <div>
+                                                {modelcollectionObject.EquipmentList.map((item) => (
+                                                    <div key={item.ID}>
+                                                        <ModelEquipmentDisplay team_col={modelcollectionObject.Team}
+                                                                               data={item}/>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                }
                             </>
                             }
                         />
