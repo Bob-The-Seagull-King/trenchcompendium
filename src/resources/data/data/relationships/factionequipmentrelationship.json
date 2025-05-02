@@ -734,7 +734,7 @@
         "name": "Sniper Scope",
         "contextdata": {     
         },
-        "faction_id": ["fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_hereticlegion","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_sniperscope",
         "cost": 2,
         "costtype": 1,
@@ -776,7 +776,22 @@
         "equipment_id": "eq_rocketpropelledgrenade",
         "cost": 2,
         "costtype": 1,
-        "limit": 3
+        "limit": 2
+    },
+    {
+        "id": "rel_fc_eq_rocketpropelledgrenade_one",
+        "source": "core",
+        "tags": {
+            "exploration_only": true
+        },
+        "name": "Rocket-Propelled Grenade",
+        "contextdata": {     
+        },
+        "faction_id": ["fc_hereticlegion"],
+        "equipment_id": "eq_rocketpropelledgrenade",
+        "cost": 2,
+        "costtype": 1,
+        "limit": 1
     },
     {
         "id": "rel_fc_eq_masterworksjezzail",
@@ -841,7 +856,7 @@
                 ]
             }   
         },
-        "faction_id": ["fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_hereticlegion","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_knighthood",
         "cost": 5,
         "costtype": 1,
@@ -1065,7 +1080,7 @@
         },
         "name": "Trench Dog",
         "contextdata": {},
-        "faction_id": ["fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_hereticlegion","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_trenchdog",
         "cost": 1,
         "costtype": 1,
@@ -1392,6 +1407,112 @@
         "equipment_id": "eq_musicalinstrument",
         "cost": 15,
         "costtype": 0,
+        "limit": 1
+    },
+    {
+        "id": "rel_fc_eq_tormentorchain",
+        "source": "core",
+        "tags": {
+            "exploration_only": true
+        },
+        "name": "Tormentor Chain",
+        "contextdata": {     
+        },
+        "faction_id": ["fc_hereticlegion"],
+        "equipment_id": "eq_tormentorchain",
+        "cost": 3,
+        "costtype": 1,
+        "limit": 2
+    },
+    {
+        "id": "rel_fc_eq_demonicauragrenade",
+        "source": "core",
+        "tags": {
+            "exploration_only": true
+        },
+        "name": "Demonic Aura Grenade",
+        "contextdata": {     
+        },
+        "faction_id": ["fc_hereticlegion"],
+        "equipment_id": "eq_demonicauragrenade",
+        "cost": 3,
+        "costtype": 1,
+        "limit": 1
+    },
+    {
+        "id": "rel_fc_eq_themarkofcain",
+        "source": "core",
+        "tags": {},
+        "name": "Mark of Cain",
+        "contextdata": {            
+            "faction_eq_restriction": {
+                "permitted": [
+                    {
+                        "res_type": "keyword",
+                        "value": "kw_elite"
+                    }
+                ]
+            }
+        },
+        "faction_id": ["fc_hereticlegion"],
+        "equipment_id": "eq_themarkofcain",
+        "cost": 4,
+        "costtype": 1,
+        "limit": 1
+    },
+    {
+        "id": "rel_fc_eq_battlefieldtitle",
+        "source": "core",
+        "tags": {},
+        "name": "Battlefield Title",
+        "contextdata": {            
+            "faction_eq_restriction": {
+                "permitted": [
+                    {
+                        "res_type": "keyword",
+                        "value": "kw_elite"
+                    }
+                ]
+            }
+        },
+        "faction_id": ["fc_hereticlegion"],
+        "equipment_id": "eq_battlefieldtitle",
+        "cost": 6,
+        "costtype": 1,
+        "limit": 1
+    },
+    {
+        "id": "rel_fc_eq_executionersaxe",
+        "source": "core",
+        "tags": {},
+        "name": "Executioner's Axe",
+        "contextdata": {   
+        },
+        "faction_id": ["fc_hereticlegion"],
+        "equipment_id": "eq_executionersaxe",
+        "cost": 6,
+        "costtype": 1,
+        "limit": 1
+    },
+    {
+        "id": "rel_fc_eq_armourofcobar",
+        "source": "core",
+        "tags": {},
+        "name": "Armour of Cobar",
+        "contextdata": {            
+            "faction_eq_restriction": {
+                "permitted": [
+                    {
+                        "res_type": "keyword",
+                        "value": "kw_elite"
+                    }
+                ]
+            }
+        },
+        "faction_id": ["fc_hereticlegion"],
+        "equipment_id": "eq_armourofcobar",
+        "cost": 8,
+        "costtype": 1,
         "limit": 1
     }
 ]

@@ -169,12 +169,12 @@ export const BaseContextCallTable : CallEventTable = {
                         }
 
                         if (Requirement.res_type == "keyword") {
-                            const ValKey : Keyword = KeywordFactory.CreateNewKeyword(Requirement.value, null)
+                            const ValKey : Keyword = KeywordFactory.CreateNewKeyword(Requirement.value.toString(), null)
                             NewStringParts.push("must be "+makestringpresentable(ValKey.Name? ValKey.Name : ""))
-                        }  
+                        }
 
                         if (Requirement.res_type == "id") {
-                            const EquipmentItem = await EquipmentFactory.CreateNewEquipment(Requirement.value, null)
+                            const EquipmentItem = await EquipmentFactory.CreateNewEquipment(Requirement.value.toString(), null)
                             NewStringParts.push("must be "+(EquipmentItem.Name))
                         }                  
 
@@ -196,16 +196,26 @@ export const BaseContextCallTable : CallEventTable = {
                         }
 
                         if (Requirement.res_type == "keyword") {
-                            const ValKey : Keyword = KeywordFactory.CreateNewKeyword(Requirement.value, null)
+                            const ValKey : Keyword = KeywordFactory.CreateNewKeyword(Requirement.value.toString(), null)
                             NewStringParts.push("must be "+makestringpresentable(ValKey.Name? ValKey.Name : ""))
-                        }
+                        }                        
+
+                        if (Requirement.res_type == "ducat") {
+                            let LimitVal = "";
+                            if (Requirement.param == "maximum" ) {
+                                LimitVal = "above"
+                            } else {
+                                LimitVal = "below"
+                            }
+                            NewStringParts.push("with Ducat cost " + LimitVal + " " + Requirement.value)
+                        }  
 
                         if (Requirement.res_type == "all") {
                             NewStringParts.push("cannot be equipped")
                         }
 
                         if (Requirement.res_type == "id") {
-                            const EquipmentItem = await EquipmentFactory.CreateNewEquipment(Requirement.value, null)
+                            const EquipmentItem = await EquipmentFactory.CreateNewEquipment(Requirement.value.toString(), null)
                             NewStringParts.push("cannot be "+(EquipmentItem.Name))
                         }        
                         
@@ -228,7 +238,7 @@ export const BaseContextCallTable : CallEventTable = {
                         }
 
                         if (Requirement.res_type == "keyword") {
-                            const ValKey : Keyword = KeywordFactory.CreateNewKeyword(Requirement.value, null)
+                            const ValKey : Keyword = KeywordFactory.CreateNewKeyword(Requirement.value.toString(), null)
                             NewStringParts.push("must be "+makestringpresentable(ValKey.Name? ValKey.Name : ""))
                         }
 
@@ -237,7 +247,7 @@ export const BaseContextCallTable : CallEventTable = {
                         }
 
                         if (Requirement.res_type == "id") {
-                            const EquipmentItem = await EquipmentFactory.CreateNewEquipment(Requirement.value, null)
+                            const EquipmentItem = await EquipmentFactory.CreateNewEquipment(Requirement.value.toString(), null)
                             NewStringParts.push("can be "+(EquipmentItem.Name))
                         }        
                         
@@ -373,11 +383,23 @@ export const BaseContextCallTable : CallEventTable = {
         async getModelLimitPresentation(this: EventRunner, eventSource : any, relayVar : string[], trackVal : boolean, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
             
             const { ModelFactory } = await import("../../factories/features/ModelFactory");
+            const { KeywordFactory } = await import("../../factories/features/KeywordFactory");
             if (trackVal == true) {
                 if (context_func["match"]) {
                     if (context_func["match"][0]["type"] == "model") {
                         const ModelItem = await ModelFactory.CreateNewModel(context_func["match"][0]["value"], null)
                         return ["Number of " + ModelItem.Name]
+                    }
+                }
+                if (context_func["exceed"]) {
+                    if (context_func["exceed"][0]["type"] == "keyword") {
+                        const KeywordItem = await KeywordFactory.CreateNewKeyword(context_func["exceed"][0]["value"], null)
+                        return ["Must be outnumbered by models with the keyword " + KeywordItem.Name]
+                    }
+                }
+                if (context_func["warband_limit"]) {
+                    for (let i = 0; i < context_func["warband_limit"].length; i++) {
+                        relayVar.push("( " + context_func["warband_limit"][i]["value"] + " in a warband worth over " + context_func["warband_limit"][i]["size"] + " ducats)")
                     }
                 }
             }
@@ -468,17 +490,17 @@ export const BaseContextCallTable : CallEventTable = {
                         NewStringParts.push("")
 
                         if (Requirement.res_type == "keyword") {
-                            const ValKey : Keyword = KeywordFactory.CreateNewKeyword(Requirement.value, null)
+                            const ValKey : Keyword = KeywordFactory.CreateNewKeyword(Requirement.value.toString(), null)
                             NewStringParts.push(makestringpresentable(ValKey.Name? ValKey.Name : ""))
                         }  
 
                         if (Requirement.res_type == "id") {
-                            const ModelItem = await ModelFactory.CreateNewModel(Requirement.value, null)
+                            const ModelItem = await ModelFactory.CreateNewModel(Requirement.value.toString(), null)
                             NewStringParts.push(""+(ModelItem.Name))
                         }   
 
                         if (Requirement.res_type == "equipment") {
-                            const EquipItem = await EquipmentFactory.CreateNewEquipment(Requirement.value, null)
+                            const EquipItem = await EquipmentFactory.CreateNewEquipment(Requirement.value.toString(), null)
                             NewStringParts.push(""+(EquipItem.Name))
                         }                  
 
@@ -492,12 +514,12 @@ export const BaseContextCallTable : CallEventTable = {
                         NewStringParts.push("")
 
                         if (Requirement.res_type == "keyword") {
-                            const ValKey : Keyword = KeywordFactory.CreateNewKeyword(Requirement.value, null)
+                            const ValKey : Keyword = KeywordFactory.CreateNewKeyword(Requirement.value.toString(), null)
                             NewStringParts.push("Not " + makestringpresentable(ValKey.Name? ValKey.Name : ""))
                         }  
 
                         if (Requirement.res_type == "id") {
-                            const ModelItem = await ModelFactory.CreateNewModel(Requirement.value, null)
+                            const ModelItem = await ModelFactory.CreateNewModel(Requirement.value.toString(), null)
                             NewStringParts.push("Not "+(ModelItem.Name))
                         }                  
 

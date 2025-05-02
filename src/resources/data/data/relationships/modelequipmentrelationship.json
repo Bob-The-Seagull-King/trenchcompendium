@@ -127,5 +127,27 @@
         "model_id": ["md_annointedheavyinfantry"],
         "mandatory_equipment": ["eq_infernalbrandmark","eq_reinforcedarmour"],
         "removable": false
+    },
+    {
+        "id": "rel_md_eq_warwolfassaultbeast",
+        "source": "core",
+        "tags": {},
+        "name": "War Wolf Assault Beast Equipment",
+        "contextdata": {},
+        "options": [],
+        "model_id": ["md_warwolfassaultbeast"],
+        "mandatory_equipment": ["eq_warwolfchainmaw","eq_warwolfshreddingclaws"],
+        "removable": false
+    },
+    {
+        "id": "rel_md_eq_artillerywtich",
+        "source": "core",
+        "tags": {},
+        "name": "Artillery Witch Equipment",
+        "contextdata": {},
+        "options": [],
+        "model_id": ["md_artillerywitch"],
+        "mandatory_equipment": ["eq_artillerywitchinfernalbomb"],
+        "removable": false
     }
 ]

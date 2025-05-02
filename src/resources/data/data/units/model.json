@@ -653,14 +653,14 @@
         "lore": [ 
             {
                 "tags": {"desc_type" : "italic"},
-                "content": "The Leader of a Heretic warband. These fallen priests perform all kinds of unholy magics, summoning petrifying demons and creatures using their Goetic spells. Often pledged to a Demon Lord in Hell, such as Pazuzu or Guison, the Profane Gospels they recite terrify church forces, causing ears to bleed and eyeballs to burst in their sockets."
+                "content": "These soldiers make up the bulk of the Heretic forces. They have witnessed the Gate of Hell and survived, damning them for all eternity."
             }
         ],
         "team": "hell",
         "stats" : {            
             "movement": 6,
-            "melee": 2,
-            "ranged": 2,
+            "melee": 1,
+            "ranged": 1,
             "base": [32],
             "armour": 0,
             "movetype": 0,
@@ -737,5 +737,192 @@
         },
         "keywords" : ["kw_elite","kw_heretic","kw_fear"],
         "abilities" : ["ab_unholyhymns"]
+    },
+    {
+        "id": "md_warwolfassaultbeast",
+        "name": "War Wolf Assault Beast",
+        "source": "core",
+        "tags": {},
+        "contextdata": {            
+            "model_equipment_restriction": {
+                "removed": [
+                    {
+                        "category": "equipment",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "melee",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "ranged",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "armour",
+                        "res_type": "all",
+                        "value": ""
+                    }
+                ]
+            }
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You cannot buy additional equipment, weapons or armour for War Wolves. Each War Wolf is encased in a nigh impregnable suit of Tartarus Armour that is reflected in its profile above. Additionally, each War Wolf has a set of Shredding Claws and a vicious Chainsaw Mouth. These pieces of equipment are built into the integrity of its construction and cannot be removed or lost in any way. The weapons are detailed below. The War Wolf may make one attack ACTION with each of these weapons in Melee Combat and may make no other attacks during its Activation (so it can make two attacks per Activation).",
+                "glossary": [{"val": "ACTION", "id": "kw_action"}]
+            }
+        ],
+        "lore": [ 
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "This abomination charges through miles of barbed wire to clear a path for the heretic infantry; its uniquely formed head designed to cut clean through it. War Wolves wear unique armour forged in the factories of hell, as seen by the maker’s marks stamped upon it."
+            }
+        ],
+        "team": "hell",
+        "stats" : {            
+            "movement": 8,
+            "melee": 2,
+            "base": [50],
+            "armour": -3,
+            "movetype": 0,
+            "potential": 1
+        },
+        "keywords" : ["kw_fear","kw_heretic","kw_tough","kw_artificial"],
+        "abilities" : ["ab_lopingdash"]
+    },
+    {
+        "id": "md_artillerywitch",
+        "name": "Artillery Witch",
+        "source": "core",
+        "tags": {},
+        "contextdata": {            
+            "model_equipment_restriction": {
+                "removed": [
+                    {
+                        "category": "ranged",
+                        "res_type": "all",
+                        "value": ""
+                    }
+                ]
+            }
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "An Artillery Witch is always equipped with an endless supply of Infernal Bombs (see below) and can carry no other ranged weapons. Otherwise, she can be equipped with any melee weapon, armour or equipment from the Heretic Legion Armoury.",
+                "glossary": [{"val": "Heretic Legion", "id": "kw_heretic"}]
+            }
+        ],
+        "lore": [ 
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                    
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "Suicide is a Mortal Sin, and sacrificing yourself to the glory of Hell is a yet greater affront to God. Some Heretics born with a gift of sonorous voice but little prospects of rising through the ranks but possessing a determination to excel may pursue the dark path of becoming a Chorister."
+                    }
+                ]
+            }
+        ],
+        "team": "hell",
+        "stats" : {            
+            "movement": 6,
+            "melee": -1,
+            "ranged": 0,
+            "base": [25],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 1
+        },
+        "keywords" : ["kw_heretic","kw_artificial"],
+        "abilities" : ["ab_levitate","ab_artificiallife"]
+    },
+    {
+        "id": "md_wretched",
+        "name": "Wretched",
+        "source": "core",
+        "tags": {},
+        "contextdata": {            
+            "model_equipment_restriction": {
+                "removed": [
+                    {
+                        "category": "ranged",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "res_type": "ducat",
+                        "value": 10,
+                        "param": "maximum"
+                    }
+                ]
+            }
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Wretched can be equipped with any melee weapon, armour or equipment from the Heretic Armoury List. None of their weapons, armour or equipment can cost more than 10 ducats each. Every Wretched must be equipped with at least one weapon.",
+                "glossary": [{"val": "Heretic Armoury", "id": "kw_heretic"}]
+            }
+        ],
+        "lore": [ 
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                    
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "Many unfortunates fall into the hands of the Heretic warbands, either during one of their many raids or battles, or purchased from the slave markets within their own territories. Some are foolhardy adventurers who travel into the domains of the damned only to be caught by their watchful patrols."
+                    }
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                    
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "Their lot is grim and terrible. They are worked to death in the factories of Sixty-Six Lords, butchered for meat, or worst of all, sold or offered to the agents of the Court of the Seven-Headed Serpent to be used as raw power for Goetic Spells."
+                    }
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                    
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "Yet one path to freedom exists: they can volunteer to serve in the Legions as the lowest of low, the most disposable of penal troops. For the law of Hell is clear: those who rebel against God can gain their freedom if they are deemed to have performed sufficiently great deeds. Thus it is no wonder that many Heretic warbands drive swarms of the Wretched ahead of them to blunt and slow down the enemy assaults."
+                    }
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                    
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "Wretched are branded with cursed flesh-eating tattoos as a safeguard against escape and heavily drugged to degrade and dull their will, while still leaving their aggression intact. Heretic Elites discard the lives of the Wretched carelessly, as their sacrifice on the battlefield counts as a worthy deed which will be rewarded by their Patrons."
+                    }
+                ]
+            }
+        ],
+        "team": "hell",
+        "stats" : {            
+            "movement": 6,
+            "melee": -1,
+            "ranged": -1,
+            "base": [25],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 2
+        },
+        "keywords" : [],
+        "abilities" : ["ab_lawofhell","ab_darkblessing","ab_chattel"]
     }
 ]

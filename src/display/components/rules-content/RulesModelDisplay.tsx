@@ -15,6 +15,8 @@ import {FactionModelRelationship} from "../../../classes/relationship/faction/Fa
 import RulesModelUpgrade from "./RulesModelUpgrade";
 import RulesModelDisplayAbility from "./RulesModelDisplayAbility";
 import {useGlobalState} from "../../../utility/globalstate";
+import { EventRunner } from '../../../classes/contextevent/contexteventhandler';
+import ModelEquipmentDisplay from '../features/equipment/ModelEquipmentDisplay';
 
 const RulesModelDisplay = (props: any) => {
     const factionmodelObject: FactionModelRelationship = props.data
@@ -22,6 +24,8 @@ const RulesModelDisplay = (props: any) => {
 
     const [statchoices, setstats] = useState({})
     const [BaseString, setBaseString] = useState('')
+    const [minimum, setminimum] = useState("")
+    const [maximum, setmaximum] = useState("")
     const [_keyvar, setkeyvar] = useState(0);
 
     // Render no lore if loreshow !== 'true'
@@ -29,6 +33,25 @@ const RulesModelDisplay = (props: any) => {
 
     useEffect(() => {
         async function SetModelOptions() {
+            const EventProc: EventRunner = new EventRunner();
+                            
+            const result_max = await EventProc.runEvent(
+                "getModelLimitPresentation",
+                factionmodelObject,
+                [],
+                [factionmodelObject.Maximum.toString()],
+                true
+            );
+            setmaximum(result_max.join(", "));
+
+            const result_min = await EventProc.runEvent(
+                "getModelLimitPresentation",
+                factionmodelObject,
+                [],
+                [factionmodelObject.Minimum.toString()],
+                false
+            );
+            setminimum(result_min.join(", "));
             /**
              * MODEL STAT CHOICES
              */
@@ -155,7 +178,7 @@ const RulesModelDisplay = (props: any) => {
                             Availability:
                         </span>
                         <span className="fighter-meta-value">
-                            {factionmodelObject.getAvailabilityString()}
+                            {minimum + "-" + maximum}
                         </span>
                     </div>
                 </div>
@@ -224,6 +247,23 @@ const RulesModelDisplay = (props: any) => {
                             state={false}
                             method={() => <>
                                 {returnDescription(modelcollectionObject, modelcollectionObject.Description)}
+                                {(modelcollectionObject.EquipmentList.length > 0) &&
+                    
+                                 <div className={'container bordergrey'}>
+                                     <div className={"backgroundgrey"}/>
+                                     <div className="content">
+                                         <div>
+                                             {modelcollectionObject.EquipmentList.map((item) => (
+                                                 <div key={item.ID}>
+                                                     <ModelEquipmentDisplay team_col={modelcollectionObject.Team}
+                                                                            data={item}/>
+                                                 </div>
+                                             ))}
+                                         </div>
+                                     </div>
+                                 </div>
+                    
+                             }
                             </>
                             }
                         />

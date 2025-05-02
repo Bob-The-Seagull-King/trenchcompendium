@@ -41,8 +41,9 @@ interface EquipmentRestriction {
 interface RestrictionSingle {
     category? : string,
     tag? : string,
-    res_type : string,
-    value : string
+    res_type : string ,
+    value : string | number,
+    param? : any
 }
 
 interface EquipmentLimit {

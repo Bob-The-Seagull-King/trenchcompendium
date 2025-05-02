@@ -564,5 +564,120 @@
             }
         ],
         "options": []
+    },
+    {
+        "id": "ab_lopingdash",
+        "name": "Loping Dash",
+        "source": "core",
+        "tags": {"trait": true, "bonus": true},
+        "contextdata": {
+            "bonus_ability": {
+                "action_type": ["dash"]
+            }},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "A War Wolf may take its Dash ACTION with +2 DICE. The War Wolf ignores movement penalties caused by Difficult Terrain.",
+                "glossary": [
+                    {"val": "+2 DICE", "id": "kw_plusdice"},
+                    {"val": "ACTION", "id": "kw_action"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_levitate",
+        "name": "Levitate",
+        "source": "core",
+        "tags": {"trait": true, "bonus": true},
+        "contextdata": {
+            "bonus_ability": {
+                "action_type": ["climb"]
+            }},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Artillery Witch can Climb up without taking an ACTION and does not roll on the Injury Chart when falling.",
+                "glossary": [
+                    {"val": "ACTION", "id": "kw_action"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_artificiallife",
+        "name": "Artificial Life",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Artillery Witches are not affected by FEAR. Additionally, attacks with the Keyword GAS suffer a -1 DICE penalty to injure the Witch and they do not suffer additional BLOOD MARKERS from the Keyword GAS.",
+                "glossary": [
+                    {"val": "FEAR", "id": "kw_fear"},
+                    {"val": "GAS", "id": "kw_gas"},
+                    {"val": "-1 DICE", "id": "kw_minusdice"},
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_lawofhell",
+        "name": "Law of Hell",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {"activated": {}},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "If a Wretch manages to take any enemy ELITE model Out of Action or performs a Glorious Deed, it gains its freedom and is immediately removed from the battle and from your warband permanently. It does not count as a casualty, but your warband’s total size for this battle is reduced by one for purposes of Morale.", 
+                "glossary": [
+                    {"val": "ELITE", "id": "kw_elite"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_darkblessing",
+        "name": "Dark Blessing",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {"activated": {}},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": " If a Wretch is taken Out of Action in battle, one of your models with Keywords HERETIC and ELITE gains one BLESSING MARKER.", 
+                "glossary": [
+                    {"val": "ELITE", "id": "kw_elite"},
+                    {"val": "HERETIC", "id": "kw_heretic"},
+                    {"val": "BLESSING MARKER", "id": "kw_blessingmarker"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_chattel",
+        "name": "Chattel",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {
+            "get_sale_price": {
+                "mod": 2
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Wretched can be sold at any time for their full ducat value between battles. Note that their weapons, armour and equipment still only fetch half price."
+            }
+        ],
+        "options": []
     }
 ]

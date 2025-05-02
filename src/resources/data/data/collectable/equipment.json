@@ -5712,5 +5712,110 @@
         "options": [],
         "keywords": [],
         "modifiers": []
+    },
+    {
+        "id": "eq_warwolfchainmaw",
+        "name": "Chain Maw",
+        "source": "core",
+        "tags": {"action": true, "weapon": true, "model": true},
+        "category": "melee",
+        "distance": null,
+        "stats": {
+            "hands_melee": 0,
+            "melee": true
+        },
+        "contextdata": {
+            "get_weapon": {},
+            "ignore_armour": {},
+            "injury_bonus": {"bonuses": [{"type": "dice", "value": 1}]},
+            "hit_bonus": {"bonuses": [{"type": "dice", "value": 1}]}
+        },
+        "description": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The War Wolf treats its Chainsaw Mouth as a melee weapon with the Keyword RISKY that grants a +1 DICE bonus to hit (for total of +3D). Additionally, the attack ignores any armour worn by the target and has a +1 DICE bonus to injure. The Chainsaw Mouth does not take any hands to wield.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "RISKY", "id": "kw_riskyaction"}
+                ]
+            } 
+        ],
+        "lore": [   
+        ],
+        "options": [],
+        "keywords": ["kw_riskyaction"],
+        "modifiers": ["+1D to Hit","+1D to Injuries","Ignore Armour"]
+    },
+    {
+        "id": "eq_warwolfshreddingclaws",
+        "name": "Shredding Claws",
+        "source": "core",
+        "tags": {"action": true, "weapon": true, "model": true},
+        "category": "melee",
+        "distance": null,
+        "stats": {
+            "hands_melee": 2,
+            "melee": true
+        },
+        "contextdata": {
+            "get_weapon": {},
+            "injury_bonus": {"bonuses": [{"type": "dice", "value": 1}]}
+        },
+        "description": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The War Wolf treats its Shredding Claws as a two-handed melee weapon with the Keywords RISKY and CUMBERSOME. The Shredding Claws have a +1 DICE bonus to injure. Because the Shredding Claws are wielded alongside the Chainsaw Mouth, they are treated as an Off-Hand Weapon and suffer penalties accordingly.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "RISKY", "id": "kw_riskyaction"},
+                    {"val": "CUMBERSOME", "id": "kw_cumbersome"}
+                ]
+            } 
+        ],
+        "lore": [   
+        ],
+        "options": [],
+        "keywords": ["kw_riskyaction","kw_cumbersome"],
+        "modifiers": ["+1D to Injuries"]
+    },
+    {
+        "id": "eq_artillerywitchinfernalbomb",
+        "name": "Infernal Bomb",
+        "source": "core",
+        "tags": {"action": true, "weapon": true, "model": true},
+        "category": "ranged",
+        "distance": 36,
+        "stats": {
+            "hands_ranged": 1,
+            "ranged": true
+        },
+        "contextdata": {
+            "get_weapon": {},
+            "added_dice": {"value": 1}},
+        "description": [ 
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "This wicked infernal weapon is treated as a one-handed Ranged weapon with the Keyword BLAST 3”. Specify a 1x1mm point on the battlefield within 36” that the Witch can see and that you want to target. Next, make a Ranged Attack ACTION. If the roll fails (i.e. you roll 6 or less with the two lowest Dice), the bomb lands 1” away from its intended location, multiplied by the number representing the degree of failure (for example, if you rolled 5, the bomb lands 2” away, as 7 - 5 = 2). The direction is decided by your opponent. Roll on the Injury Chart for each model within the BLAST radius.",
+                "glossary": [
+                    {"val": "ACTION", "id": "kw_action"},
+                    {"val": "BLAST", "id": "kw_blast"}
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "If the bomb lands exactly on top of any model, roll with 3D6 on the Injury Chart and add the dice together! Other models hit by the bomb roll on the Injury Chart as standard. Any model hit, but not taken Out of Action, by this attack is blown D3” directly away from the point of impact (roll for each model separately), stopping if they hit other models, buildings or objects. This attack has the Keyword SHRAPNEL and therefore causes an additional +1 BLOOD MARKER. Cover, range and higher position do not affect attacks by the Infernal Bomb. Roll injuries for models that would benefit from Cover from the perspective of the BLAST point with -1 DICE. The Activation of the Witch ends immediately after using the Infernal Bomb.",
+                "glossary": [
+                    {"val": "ACTIONS", "id": "kw_action"},
+                    {"val": "BLAST", "id": "kw_blast"},
+                    {"val": "-1 DICE", "id": "kw_minusdice"},
+                    {"val": "SHRAPNEL", "id": "kw_shrapnel"},
+                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"}
+                ]
+            }  
+        ],
+        "lore": [ ],
+        "options": [],
+        "keywords": ["kw_blast","kw_shrapnel"],
+        "modifiers": []
     }
 ]
