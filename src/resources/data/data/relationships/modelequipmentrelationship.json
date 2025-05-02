@@ -149,5 +149,27 @@
         "model_id": ["md_artillerywitch"],
         "mandatory_equipment": ["eq_artillerywitchinfernalbomb"],
         "removable": false
+    },
+    {
+        "id": "rel_md_eq_sineater",
+        "source": "core",
+        "tags": {},
+        "name": "Sin Eater Equipment",
+        "contextdata": {},
+        "options": [],
+        "model_id": ["md_sineater"],
+        "mandatory_equipment": ["eq_sineatertenderizermaul","eq_reinforcedarmour"],
+        "removable": false
+    },
+    {
+        "id": "rel_md_eq_geoticwarlock",
+        "source": "core",
+        "tags": {},
+        "name": "Goetic Warlock Equipment",
+        "contextdata": {},
+        "options": [],
+        "model_id": ["md_goeticwarlock"],
+        "mandatory_equipment": ["eq_swordaxe","eq_swordaxe","eq_reinforcedarmour"],
+        "removable": false
     }
 ]

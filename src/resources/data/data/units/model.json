@@ -924,5 +924,113 @@
         },
         "keywords" : [],
         "abilities" : ["ab_lawofhell","ab_darkblessing","ab_chattel"]
+    },
+    {
+        "id": "md_sineater",
+        "name": "Sin Eater",
+        "source": "core",
+        "tags": {},
+        "contextdata": {    
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Sin Eater is equipped with Reinforced Armour and a 2-handed Tenderizer Maul. You cannot alter the Sin Eater’s weapons and equipment in any way."
+            }
+        ],
+        "lore": [ 
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                    
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "Sin Eaters are horrific creatures: once they were mortal men and women, but their overwhelming greed and hunger for human flesh tainted with Sin, combined with the corrupting influence of the Hellgate, has turned them into a form that matches their inner foulness. They’re swollen into monstrous proportions and are always at a point of nearly bursting, yet forever ravenous for more flesh and human sins to devour."
+                    }
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                    
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "The Sin Eater is one of the very few creatures that Beelzebub approves of outside his own followers due its insatiable gluttony."
+                    }
+                ]
+            }
+        ],
+        "team": "hell",
+        "stats" : {            
+            "movement": 6,
+            "melee": 2,
+            "base": [50],
+            "armour": 0,
+            "movetype": 0,
+            "mercenary": true,
+            "potential": 2
+        },
+        "keywords" : ["kw_heretic","kw_fear","kw_tough","kw_strong"],
+        "abilities" : ["ab_devourtheguilty","ab_vomit"]
+    },
+    {
+        "id": "md_goeticwarlock",
+        "name": "Goetic Warlock",
+        "source": "core",
+        "tags": {},
+        "contextdata": {  
+            "modify_equipment_block": {}  
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Warlock wears Reinforced Armour. A Warlock counts as being armed with two swords in Melee combat – its arms are deadly weapons in their own right. You cannot alter the Warlock’s weapons and equipment in any way."
+            }
+        ],
+        "lore": [ 
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                    
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "Goetic Warlocks are horrific creations from the death factories of the 3rd Circle of Hell, manufactured from captured priests, prophets, vicars, rectors and monks. Fiendish machines first burn their flesh away with hellfire, encasing the still-living skeletons in an infernal suit of armour and stamping them with goetic runes. The process is so agonising that they consent to a demonic pact to bring end to their pain. Thus a new Goetic Warlock is born, ready to hunt the living they once swore to protect."
+                    }
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                    
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "The mere gaze of the warlock causes necrosis and in close quarters they embrace unsuspecting enemies with their iron claws, using their goetic magic to gate themselves to a secluded location where they can finish their victim by slowly shredding them apart. Their favourite method is by skinning their victims alive and using their gruesome trophies as repulsive vellum to write grimoires and unholy religious texts, or wearing the faces of their victims to power their illusionary spells to confound their enemies."
+                    }
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                    
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "Due to the rarity of victims required to create Goetic Warlocks, they are only assigned to the Heretic commanders with the greatest renown, need and with the right connections in the twisted web of Heretic politics. Mammon, the great devil of Greed, sells the services of his own personal battalion of Warlocks to the highest bidder."
+                    }
+                ]
+            }
+        ],
+        "team": "hell",
+        "stats" : {            
+            "movement": 6,
+            "melee": 1,
+            "ranged": 1,
+            "base": [40],
+            "armour": 0,
+            "movetype": 0,
+            "mercenary": true,
+            "potential": 2
+        },
+        "keywords" : ["kw_demonic","kw_fear","kw_artificial"],
+        "abilities" : ["ab_goeticportal","ab_barbedembrace","ab_goeticgaze"]
     }
 ]

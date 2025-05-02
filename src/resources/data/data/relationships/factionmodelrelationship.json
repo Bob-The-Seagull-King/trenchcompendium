@@ -640,5 +640,39 @@
         "restricted_models" : [],
         "warband_minimum" : 0,
         "warband_maximum" : 0
+    },
+    {
+        "id": "rel_fc_md_sineater",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {"option_search_viable": {}},
+        "options": [],
+        "faction_id" : ["fc_hereticlegion"],
+        "model_id" : "md_sineater",
+        "captain" : false,
+        "mercenary": true,
+        "cost" : 6,
+        "cost_type" : 1,
+        "restricted_models" : [],
+        "warband_minimum" : 0,
+        "warband_maximum" : 1
+    },
+    {
+        "id": "rel_fc_md_goeticwarlock",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {"option_search_viable": {}},
+        "options": [],
+        "faction_id" : ["fc_hereticlegion"],
+        "model_id" : "md_goeticwarlock",
+        "captain" : false,
+        "mercenary": true,
+        "cost" : 4,
+        "cost_type" : 1,
+        "restricted_models" : [],
+        "warband_minimum" : 0,
+        "warband_maximum" : 1
     }
 ]

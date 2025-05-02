@@ -679,5 +679,106 @@
             }
         ],
         "options": []
+    },
+    {
+        "id": "ab_devourtheguilty",
+        "name": "Devour the Guilty",
+        "source": "core",
+        "tags": {"action": true},
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "As a RISKY ACTION, the Sin Eater can attempt to consume a model, friend (in which case the ACTION is not RISKY and is done with +1 DICE) or foe, that is on a 40mm or smaller base and is within 1”. If successful, remove the model from the table and set aside any markers that the model has (BLOOD, INFECTION, BLESSING etc.). While it is devoured the model cannot be targeted by any attack or ability. When Activated, the devoured model may make one melee attack ACTION available to it, but the attack suffers a -3 DICE penalty when rolling to hit. A devoured model counts as being Down for all rules purposes (including Morale) and, if it is still devoured at the end of the battle, it counts as being Out of Action instead.", 
+                "glossary": [
+                    {"val": "RISKY", "id": "kw_riskyaction"},
+                    {"val": "ACTION", "id": "kw_action"},
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "-3 DICE", "id": "kw_minusdice"},
+                    {"val": "BLOOD", "id": "kw_bloodmarker"},
+                    {"val": "INFECTION", "id": "kw_infectionmarker"},
+                    {"val": "BLESSING", "id": "kw_blessingmarker"}
+                ]
+            },         
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Whenever the Sin Eater is activated, the devoured model suffers one BLOOD MARKER automatically that cannot be avoided by any means. If the devoured model suffers a BLOOD MARKER in this way when it already has six BLOOD MARKER, it is immediately taken Out of Action and it is no longer considered devoured. If the Sin Eater is taken Out of Action, the devoured model is placed Down where the Sin Eater was. The Sin Eater can only ever have one consumed model in its belly.", 
+                "glossary": [
+                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"},
+                    {"val": "HERETIC", "id": "kw_heretic"},
+                    {"val": "BLESSING MARKER", "id": "kw_blessingmarker"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_vomit",
+        "name": "Vomit",
+        "source": "core",
+        "tags": {"action": true},
+        "contextdata": {},
+        "description": [           
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The Sin Eater attempts to purge a model it has devoured as an ACTION with +4 DICE. If successful, the model’s controller places the model within 1” of the Sin Eater. If no suitable space exists, the vomit fails and the model remains devoured. The vomited model is Down. The Sin Eater can only use this ACTION if it has a model devoured.", 
+                "glossary": [
+                    {"val": "ACTION", "id": "kw_action"},
+                    {"val": "+4 DICE", "id": "kw_plusdice"},
+                    {"val": "Down", "id": "gl_down"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_goeticportal",
+        "name": "Goetic Portal",
+        "source": "core",
+        "tags": {"action": true},
+        "contextdata": {},
+        "description": [           
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "As a RISKY ACTION with +1 DICE, the Warlock can Teleport up to 6” in any direction into a free space it can see, including into melee with an enemy model. The Warlock may bring a single enemy model that is in Melee Combat with it and has a base size of 32mm or smaller. There must be suitable space for the Warlock (and a possible passenger which must end the teleport in Melee Combat with the Warlock) at its target destination or this teleport automatically fails. It may not teleport out of the battlefield. It may teleport even if it is currently Down, but remains so after the teleportation.", 
+                "glossary": [
+                    {"val": "RISKY ACTION", "id": "kw_riskyaction"},
+                    {"val": "+1 DICE", "id": "kw_plusdice"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_barbedembrace",
+        "name": "Barbed Embrace",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {},
+        "description": [           
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Enemies cannot Retreat from the Goetic Warlock. Additionally, if a model is able to move out of Melee Combat with the Warlock because of a special ability (such as the Assassin’s Dagger), they cannot."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_goeticgaze",
+        "name": "Goetic Gaze",
+        "source": "core",
+        "tags": {"action": true},
+        "contextdata": {},
+        "description": [           
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "This is an ACTION which is modified exactly the same way as a ranged attack, executed against one enemy the Warlock can see within 24”. If successful, the model suffers one BLOOD MARKER. If the success is a Critical Success, the target suffers two BLOOD MARKER instead. This ACTION can be used against enemy models in Melee Combat without having to randomise the target.", 
+                "glossary": [
+                    {"val": "ACTION", "id": "kw_action"},
+                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"}
+                ]
+            }
+        ],
+        "options": []
     }
 ]

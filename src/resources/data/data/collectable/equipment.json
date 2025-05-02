@@ -5817,5 +5817,39 @@
         "options": [],
         "keywords": ["kw_blast","kw_shrapnel"],
         "modifiers": []
+    },
+    {
+        "id": "eq_sineatertenderizermaul",
+        "name": "Tenderizer Maul",
+        "source": "core",
+        "tags": {"action": true, "weapon": true, "model": true},
+        "category": "melee",
+        "distance": null,
+        "stats": {
+            "hands_melee": 2,
+            "melee": true
+        },
+        "contextdata": {
+            "get_weapon": {},
+            "injury_bonus": {"bonuses": [{"type": "flat", "value": 1}]}
+        },
+        "description": [   
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Its huge reach means that the Sin Eater may make one Melee Attack ACTION against each enemy model it is fighting in Melee.",
+                "glossary": [
+                    {"val": "ACTION", "id": "kw_action"}
+                ]
+            }
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Mauls, clubs, maces… these are large, cumbersome weapons, often made from sturdy wood with a metal tip of steel, lead or Iron of Tartarus. It takes great strength to fight with it for any length of time. They are especially suited for attacking armoured targets."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_heavy"],
+        "modifiers": ["+1 to Injuries"]
     }
 ]
