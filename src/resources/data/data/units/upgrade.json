@@ -23,7 +23,7 @@
         "description": [            
             {
                 "tags": {"desc_type" : "default"},
-                "content": "The model is converted to an INFILTRATOR. The model  can be placed anywhere on the table out of line of sight of any enemies, but at least 8” away from the closest enemy. Deployed after all other models without the Keyword INFILTRATOR.",
+                "content": "The model is converted to an INFILTRATOR. The model can be placed anywhere on the table out of line of sight of any enemies, but at least 8” away from the closest enemy. Deployed after all other models without the Keyword INFILTRATOR.",
                 "glossary": [{"val": "INFILTRATOR", "id": "kw_infiltrator"}]
             }
         ],

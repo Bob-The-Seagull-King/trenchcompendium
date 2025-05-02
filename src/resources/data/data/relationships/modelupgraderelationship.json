@@ -509,5 +509,21 @@
         "restricted_upgrades": [],
         "warband_limit": 1,
         "required_upgrades":[]
+    },
+    {
+        "id": "rel_factionrule_unseenadvance_infiltrator",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {},
+        "options": [],
+        "model_id_set": ["rl_unseenadvance"],
+        "upgrade_id": "up_infiltrator",
+        "cost": 10,
+        "cost_type": 0,
+        "restricted_upgrades": [
+        ],
+        "warband_limit": 3,
+        "required_upgrades":[]
     }
 ]

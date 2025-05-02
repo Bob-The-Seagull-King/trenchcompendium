@@ -1,10 +1,14 @@
 [
     {
         "id": "pt_sublimegate",
-        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_fidaiofalamut","fc_ironsultanate_fv_houseofwisdom"]
+        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_fidaiofalamut","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_defendersoftheironwall"]
     },
     {
-        "id": "pt_sublimegate",
-        "faction_id": ["fc_ironsultanate_fv_defendersoftheironwall"]
+        "id": "pt_infernalnoble",
+        "faction_id": ["fc_hereticlegion"]
+    },
+    {
+        "id": "pt_mammon",
+        "faction_id": ["fc_hereticlegion"]
     }
 ]

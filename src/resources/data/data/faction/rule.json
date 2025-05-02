@@ -481,5 +481,102 @@
             }
         ],
         "options": []
+    },
+    {
+        "id": "rl_fastaslightning",
+        "source": "core",
+        "tags": { "bonus": true },
+        "contextdata": { 
+            "add_to_model": {},
+            "bonus_ability": {
+                "action_type": ["dash"]
+            }
+        },
+        "name": "Fast as Lightning",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "All Models have +1 DICE when taking their Dash ACTIONS.",
+            "glossary": [
+                {"val": "+1 DICE", "id": "kw_plusdice"},
+                {"val": "ACTIONS", "id": "kw_action"}
+            ]
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_closeassaultweapons",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Close Assault Weapons",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "The warband can buy Submachine Guns for 25 ducats per weapon."
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_lighttroops",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Light Troops",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "The force may only include 0-1 Annointed and 0-1 Artillery Witch."
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_letsleepingdogslie",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Let Sleeping Dogs Lie",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "The warband may not include a War Wolf."
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_unseenadvance",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            "faction_add_upgrades": {
+                "model_key": "rl_unseenadvance",
+                "filters": [
+                    {
+                        "type": "keyword",
+                        "value": "kw_elite",
+                        "truth": false
+                    }
+                ]
+            }
+        },
+        "name": "Unseen Advance",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Up to three models without ELITE Keyword can be upgraded into INFILTRATORS at the cost of 10 ducats per Model.",
+            "glossary": [
+                {"val": "ELITE", "id": "kw_elite"},
+                {"val": "INFILTRATORS", "id": "kw_infiltrator"}
+            ]
+            }
+        ],
+        "options": []
     }
 ]
