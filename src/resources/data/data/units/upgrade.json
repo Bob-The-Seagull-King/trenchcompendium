@@ -704,5 +704,60 @@
             }
         ],
         "options": []
+    },
+    {
+        "id": "up_trenchghost_sarcophagusmine",
+        "name": "Sarcophagus Mine",
+        "source": "core",
+        "tags": {"action": true },
+        "contextdata": {
+            "activated": {},
+            "set_stat": { "upgrades" : [
+                {"stat": "armour", "value": -3}
+                ]},                
+            "override_equipment_restriction": {
+                "removed": [
+                    {
+                        "category": "equipment",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "melee",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "ranged",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "armour",
+                        "res_type": "all",
+                        "value": ""
+                    }
+                ]
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "They gain an armour characteristic of -3, but can carry no other weapons or any other items from the Armoury. In addition, whenever an enemy comes within 3” of the Mine, you can trigger a detonation as described below. Alternatively, you can forgo this and explode the mine during your own Activation of the model with a successful RISKY ACTION with +1 DICE.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "RISKY ACTION", "id": "kw_riskyaction"}
+                ]
+            },        
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "When detonated, the mine explosion is treated as a BLAST 3” weapon targeting the Sarcophagus model with Keyword SHRAPNEL. Models within 1” of the model hit by the explosion roll their injuries with +1 DICE. The Mine itself is taken Out of Action.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "BLAST", "id": "kw_blast"}
+                ]
+            }
+        ],
+        "options": []
     }
 ]

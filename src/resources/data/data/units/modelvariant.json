@@ -342,5 +342,51 @@
         "keywords" : [],
         "cut_abilities" : [],
         "new_abilities" : ["ab_hellhound"]
+    },
+    {
+        "id": "md_annointedheavyinfantry_trenchghost",
+        "name": "Annointed Heavy Infantry (Trench Ghost)",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            },
+        "base_id": "md_annointedheavyinfantry",
+        "variant_name": "Trench_Ghost",
+            "lore": [               
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Heavily armed and armoured assault troops. Their skin is burned and blistering from their ordained pilgrimages to Hell and back."
+            }
+        ],
+        "description": [    
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Anointed are always equipped with a suit of Reinforced Armour which are included in the cost. This armour can never be removed. Otherwise they can be equipped with any weapon, armour or equipment from the Heretic Legion Armoury and may purchase a Trench Shield.",
+                "glossary": [{"val": "Heretic Legion", "id": "kw_heretic"}]
+            }
+        ],
+        "team": "hell",
+        "stats" : {},
+        "cut_keywords" : [],
+        "keywords" : [],
+        "cut_abilities" : [],
+        "new_abilities" : []
+    },
+    {
+        "id": "md_heretichorister_barbedwirebanshee",
+        "name": "Barbed Wire Banshee",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            },
+        "base_id": "md_heretichorister",
+        "variant_name": "Trench_Ghost",
+            "lore": [],
+        "team": "hell",
+        "stats" : {},
+        "cut_keywords" : [],
+        "keywords" : [],
+        "cut_abilities" : ["ab_unholyhymns"],
+        "new_abilities" : ["ab_deathwail"]
     }
 ]

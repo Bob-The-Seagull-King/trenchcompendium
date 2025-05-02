@@ -525,5 +525,21 @@
         ],
         "warband_limit": 3,
         "required_upgrades":[]
+    },
+    {
+        "id": "rel_factionrule_trenchghost_sarcophagusmine",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {},
+        "options": [],
+        "model_id_set": ["rl_sarcophagusmine"],
+        "upgrade_id": "up_trenchghost_sarcophagusmine",
+        "cost": 30,
+        "cost_type": 0,
+        "restricted_upgrades": [
+        ],
+        "warband_limit": 2,
+        "required_upgrades":[]
     }
 ]

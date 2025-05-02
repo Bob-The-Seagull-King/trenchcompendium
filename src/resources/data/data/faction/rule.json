@@ -578,5 +578,181 @@
             }
         ],
         "options": []
+    },
+    {
+        "id": "rl_horror",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            "add_to_model": {},
+            "keyword_add": {"value": ["kw_strong"]}
+        },
+        "name": "Horror",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "All models in the Warband cause FEAR.",
+            "glossary": [
+                {"val": "FEAR", "id": "kw_fear"}
+            ]
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_semicorporeal",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            "add_to_model": {}
+        },
+        "name": "Semi-Corporeal",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Any Ranged attacks against all models in the Trench Ghost Warband roll injuries with -1 DICE – the undead are hard to kill with bullets! Melee Attacks do not suffer this penalty.",
+            "glossary": [
+                {"val": "-1 DICE", "id": "kw_minusdice"}
+            ]
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_spectral",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            "add_to_model": {}
+        },
+        "name": "Spectral",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "All models in the warband ignore movement penalties caused by Difficult Terrain, though they cannot move through any objects/terrain. Dangerous terrain affects them as normal."
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_undead",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            "add_to_model": {}
+        },
+        "name": "Undead",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "All models in the Trench Ghost warband do not suffer additional BLOOD MARKERS from attacks with the Keyword GAS.",
+            "glossary": [
+                {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"},
+                {"val": "GAS", "id": "kw_gas"}
+            ]
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_enemiesofall",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Enemies of All",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Trench Ghosts cannot use Mercenaries."
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_lostsouls",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Lost Souls",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": " Since only mortals who have souls become ghosts, this warband may not have any model with the Keyword ARTIFICIAL, such as War Wolves or Artillery Witches. In addition, no model in the warband may have a Hellbound Soul Contract or an Infernal Brand Mark. Any model that has one of these pieces of equipment in their base profile will not have it, although its price stays the same.",
+            "glossary": [
+                {"val": "ARTIFICIAL", "id": "kw_artificial"}
+            ]
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_slow",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            "add_to_model": {}
+        },
+        "name": "Slow",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "All models in Trench Ghost warband have a half Dash distance (i.e. 3”), and they suffer -1 DICE to all attacks against models Retreating from Melee combat.",
+            "glossary": [
+                {"val": "-1 DICE", "id": "kw_minusdice"}
+            ]
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_sarcophagusmine",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            "faction_add_upgrades": {
+                "model_key": "rl_sarcophagusmine",                
+                "models_id": ["md_heretictrooper"]
+            }
+        },
+        "name": "Sarcophagus Mine",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "At the cost of +30 ducats, up to two of the Troopers can be turned into Sarcophagus Mines."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_barbedwirebanshee",
+        "source": "core",
+        "tags": { },
+        "contextdata": {
+        },
+        "name": "Barbed Wire Banshee",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Instead of a Chorister, a Trench Ghost warband may include a Barbed Wire Banshee at the same cost. It has the same characteristics as a Chorister with the usual Trench Ghost special rules applied to it, but instead of the Unholy Hymns ability the Banshee has Death Wail."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_tankpalanquin",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Tank Palanquin",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "At the cost of 60 ducats, the Heretic Priest of the warband can ride a ghostly Tank Palanquin. "
+            }
+        ],
+        "options": []
     }
 ]

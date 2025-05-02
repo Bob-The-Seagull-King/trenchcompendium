@@ -780,5 +780,22 @@
             }
         ],
         "options": []
+    },
+    {
+        "id": "ab_deathwail",
+        "name": "Death Wail",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {},
+        "description": [           
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "All enemy models within 8” of the Chorister suffer an additional +1 DICE when any injury roll is made against them.", 
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"}
+                ]
+            }
+        ],
+        "options": []
     }
 ]

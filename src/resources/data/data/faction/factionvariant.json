@@ -114,5 +114,29 @@
         "cut_rules" : [],
         "rules" : ["rl_fastaslightning","rl_closeassaultweapons","rl_lighttroops","rl_letsleepingdogslie","rl_unseenadvance"],
         "options": []
+    },
+    {
+        "id": "fc_hereticlegion_fv_trenchghosts",
+        "name": "Trench Ghosts",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "faction_keyword": {"name": "kw_heretic"}
+        },
+        "base_id": "fc_hereticlegion",
+        "description": [     
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Sometimes when Heretic troopers die upon a hallowed ground or in presence of an uncorrupted holy relic, they become trapped between planes of existence. Claimed by neither Heaven nor Hell, the Trench Ghosts become Undead – doomed to fight a war without an end, attacking both the Faithful and Heretic alike, hating all life, obeying commands that no living can hear. Their greed for worldly wealth and items of power remains undiminished, and their semi-corporeal bodies are exceedingly difficult to destroy. Their faces, covered with gas masks they no longer have any use for, betray nothing of the agony they endure. In close combat they whisper of the agony of their existence and the pain of their doom which will never give them rest, their broken bodies and shattered minds forced to endure the horrors of war for all eternity. Few can withstand such terror without breaking."
+            }, 
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Tales are told of many Trench Ghost Warbands that haunt No Man’s Land, but the most famous are the Ghosts of Tannenberg, shades of the Heretic force that won the battle of Tannenberg but after sacking the Church of St. Jacob passed into the shadow."
+            }
+        ],
+        "team": "hell",
+        "cut_rules" : [],
+        "rules" : ["rl_horror","rl_semicorporeal","rl_spectral","rl_undead","rl_enemiesofall","rl_lostsouls","rl_slow","rl_sarcophagusmine","rl_barbedwirebanshee","rl_tankpalanquin"],
+        "options": []
     }
 ]

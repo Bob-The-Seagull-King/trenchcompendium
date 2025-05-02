@@ -5851,5 +5851,41 @@
         "options": [],
         "keywords": ["kw_heavy"],
         "modifiers": ["+1 to Injuries"]
+    },
+    {
+        "id": "eq_tankpalanquin",
+        "name": "Tank Palanquin",
+        "source": "core",
+        "tags": {"trait": true, "bonus": true, "armour": true},
+        "category": "armour",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {
+            "bonus_ability": {
+                "action_type": ["dash"]
+            },
+            "set_stat": { "upgrades" : [
+                {"stat": "base", "value": [50]},
+                {"stat": "armour", "value": -3}
+                ]},
+            "keyword_add": {"value": ["kw_strong"]}
+        },
+        "description": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Grants a -3 modifier to all injury rolls against the model wearing this armour. Due to its bulk the wearer rolls D3 for a charge extra distance instead of D6. Tank Palanquins cannot be combined with any shield."
+            }, 
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The Priest riding it has a 50mm base, and counts as being on a 2” high platform. While on a Tank Palanquin, the Priest gains the Keyword STRONG.",                "glossary": [
+                    {"val": "STRONG", "id": "kw_strong"}
+                ]
+            } 
+        ],
+        "lore": [     ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
     }
 ]
