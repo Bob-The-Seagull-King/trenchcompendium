@@ -10,5 +10,13 @@
     {
         "id": "pt_mammon",
         "faction_id": ["fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion","fc_hereticlegion_fv_hereticnavalraidingparty","fc_hereticlegion_fv_trenchghosts"]
+    },
+    {
+        "id": "pt_learnedsaint",
+        "faction_id": ["fc_trenchpilgrim"]
+    },
+    {
+        "id": "pt_warriorsaint",
+        "faction_id": ["fc_trenchpilgrim"]
     }
 ]

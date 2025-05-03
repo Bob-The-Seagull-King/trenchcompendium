@@ -5729,7 +5729,7 @@
         "contextdata": {
             "add_extra_model": {
                 "model_purchases": [
-                    "rel_fc_md_trenchdog","rel_fc_md_trenchdog_guarddog","rel_fc_md_trenchdog_mercydog","rel_fc_md_trenchdog_martyrdomdog","rel_fc_md_trenchdog_hellhound"
+                    "rel_fc_md_trenchdog"
                 ]
             }
         },
@@ -5743,6 +5743,150 @@
             {
                 "tags": {"desc_type" : "italic"},
                 "content": "A great many animals serve in the trenches alongside the soldiers. Wardogs are by far the most common, but tame ocelots, barbary apes, small bears, and other unusual pets abound, while the forces of Hell keep Hellhounds and other infernal beasts as pets."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_trenchdog_guarddog",
+        "name": "Trench Dog (Guard Dog)",
+        "source": "core",
+        "tags": {"trait": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {
+            "add_extra_model": {
+                "model_purchases": [
+                    "rel_fc_md_trenchdog_guarddog"
+                ]
+            }
+        },
+        "description": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "You add a Trench Dog to your warband. You can have up to one of each dog type."
+            } 
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "A great many animals serve in the trenches alongside the soldiers. Wardogs are by far the most common, but tame ocelots, barbary apes, small bears, and other unusual pets abound, while the forces of Hell keep Hellhounds and other infernal beasts as pets."
+            },   
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "These dogs both warn their masters of impending danger and fight fiercely for their company."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_trenchdog_mercydog",
+        "name": "Trench Dog (Mercy Dog)",
+        "source": "core",
+        "tags": {"trait": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {
+            "add_extra_model": {
+                "model_purchases": [
+                    "rel_fc_md_trenchdog_mercydog"
+                ]
+            }
+        },
+        "description": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "You add a Trench Dog to your warband. You can have up to one of each dog type."
+            } 
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "A great many animals serve in the trenches alongside the soldiers. Wardogs are by far the most common, but tame ocelots, barbary apes, small bears, and other unusual pets abound, while the forces of Hell keep Hellhounds and other infernal beasts as pets."
+            },   
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Mercy dogs carry a Medi-Kit."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_trenchdog_martyrdomdog",
+        "name": "Trench Dog (Martyrdom Dog)",
+        "source": "core",
+        "tags": {"trait": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {
+            "add_extra_model": {
+                "model_purchases": [
+                    "rel_fc_md_trenchdog_martyrdomdog"
+                ]
+            }
+        },
+        "description": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "You add a Trench Dog to your warband. You can have up to one of each dog type."
+            } 
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "A great many animals serve in the trenches alongside the soldiers. Wardogs are by far the most common, but tame ocelots, barbary apes, small bears, and other unusual pets abound, while the forces of Hell keep Hellhounds and other infernal beasts as pets."
+            },   
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Trench Pilgrims often enthusiastically strap their dogs with explosives so they can partake in a glorious martyrdom operation."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_trenchdog_hellhound",
+        "name": "Trench Dog (Hellhound)",
+        "source": "core",
+        "tags": {"trait": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {
+            "add_extra_model": {
+                "model_purchases": [
+                    "rel_fc_md_trenchdog_hellhound"
+                ]
+            }
+        },
+        "description": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "You add a Trench Dog to your warband. You can have up to one of each dog type."
+            } 
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "A great many animals serve in the trenches alongside the soldiers. Wardogs are by far the most common, but tame ocelots, barbary apes, small bears, and other unusual pets abound, while the forces of Hell keep Hellhounds and other infernal beasts as pets."
+            },   
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "This horrifying infernal canine is the size of a small pony, and within its tortured belly rage flames of Hell itself. It howls in constant agony and rage in combat."
             }
         ],
         "options": [],
