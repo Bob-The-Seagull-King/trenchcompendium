@@ -488,6 +488,31 @@ export const BaseContextCallTable : CallEventTable = {
                     }
                 }
             }
+
+            if (context_func['filters'] ) {
+                for (let i = 0; i < context_func['filters'].length; i++) {
+                    const curFilter = context_func['filters'][i]
+                    if (curFilter["type"] == "keyword") {            
+                        if (curFilter['truth'] == true) {
+                            if (trackVal.getKeywordIDs().includes(curFilter["value"])) {
+                                ValidUpgrade = true;
+                            } else {
+                                ValidUpgrade = false;
+                                break;
+                            }
+                        } else {
+                            console.log(trackVal.getKeywordIDs().includes(curFilter["value"]))
+                            if (trackVal.getKeywordIDs().includes(curFilter["value"])) {
+                                ValidUpgrade = false;
+                                break;
+                            } else {
+                                ValidUpgrade = true;
+                            }
+                        }
+                    }
+                }
+            }
+
             if (ValidUpgrade) {
                 console.log(context_func["model_key"])
                 const UpgradeList = Requester.MakeRequest(

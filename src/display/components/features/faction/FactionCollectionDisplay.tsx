@@ -57,7 +57,7 @@ const FactionCollectionDisplay = (props: any) => {
     return (
         <ErrorBoundary fallback={<div>Something went wrong with ModelCollectionDisplay.tsx</div>}>
             <h1>
-                {GetBaseName(factioncollectionObject)}
+                {GetBaseName(factioncollectionObject) + ((selectedModel.var_name == 'base')? "" : ": " + selectedModel.faction.Name)}
             </h1>
 
             {/* Content Filter for subfactions */}

@@ -291,6 +291,16 @@ class Model extends StaticContextObject {
         return this.KeyWord;
     }
 
+    public getKeywordIDs() : string[] {
+        const idlist : string[] = []
+
+        for (let i = 0; i < this.KeyWord.length; i++) {
+            idlist.push(this.KeyWord[i].ID)
+        }
+
+        return idlist;
+    }
+
     /**
      * Does this model have upgrades?
      */

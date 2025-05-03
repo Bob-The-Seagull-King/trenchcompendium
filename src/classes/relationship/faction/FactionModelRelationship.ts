@@ -167,18 +167,18 @@ class FactionModelRelationship extends StaticOptionContextObject {
             UpgradesListAvailable.push(this.Model.UpgradeList[i]);
         }
 
-        const Events : EventRunner = new EventRunner();
-
-        const result = await Events.runEvent(
-            "getContextuallyAddedUpgrades",
-            faction,
-            [],
-            [],
-            this.Model
-        )
-
-        for (let i = 0; i < result.length; i++) {
-            UpgradesListAvailable.push(result[i]);
+        if (this.Mercenary != true) {
+            const Events : EventRunner = new EventRunner();
+            const result = await Events.runEvent(
+                "getContextuallyAddedUpgrades",
+                faction,
+                [],
+                [],
+                this.Model
+            )
+            for (let i = 0; i < result.length; i++) {
+                UpgradesListAvailable.push(result[i]);
+            }
         }
 
         return UpgradesListAvailable;
