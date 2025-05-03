@@ -388,5 +388,39 @@
         "keywords" : [],
         "cut_abilities" : ["ab_unholyhymns"],
         "new_abilities" : ["ab_deathwail"]
+    },
+    {
+        "id": "md_hereticpriest_mammonpriest",
+        "name": "Heretic Priest of Mammon",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            },
+        "base_id": "md_hereticpriest",
+        "variant_name": "Knights_of_Avarice",
+            "lore": [],
+        "team": "hell",
+        "stats" : {},
+        "cut_keywords" : [],
+        "keywords" : [],
+        "cut_abilities" : ["ab_puppetmaster"],
+        "new_abilities" : ["ab_powersofthepriestofmammon"]
+    },
+    {
+        "id": "md_artillerywitch_gaswitch",
+        "name": "Artillery Witches of Mammon",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            },
+        "base_id": "md_artillerywitch",
+        "variant_name": "Knights_of_Avarice",
+            "lore": [],
+        "team": "hell",
+        "stats" : {},
+        "cut_keywords" : [],
+        "keywords" : [],
+        "cut_abilities" : [],
+        "new_abilities" : []
     }
 ]

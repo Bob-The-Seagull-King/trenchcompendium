@@ -20,6 +20,7 @@ import { Faction } from "../../classes/feature/faction/Faction";
 import SkillDisplay from "../../display/components/features/skill/SkillDisplay";
 import { WarbandProperty } from "../../classes/saveitems/Warband/WarbandProperty";
 import { FactionModelRelationship } from "../../classes/relationship/faction/FactionModelRelationship";
+import RulesModelDisplayAbility from "../../display/components/rules-content/RulesModelDisplayAbility";
 
 export const BaseContextCallTable : CallEventTable = {
     option_search_viable: {
@@ -664,6 +665,33 @@ export const BaseContextCallTable : CallEventTable = {
                     <div className="borderstyler bordergrey">
                         <div className="">
                             <SkillDisplay data={relayVar.value} />
+                        </div>
+                    </div>
+                </ErrorBoundary>
+            )
+        }
+    },
+    ability_option: {
+        event_priotity: 0,
+        async parseOptionsIntoRelevantType(this: EventRunner, eventSource : any, relayVar : IChoice[],  trackVal : number, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null){
+            
+            const { AbilityFactory } = await import("../../factories/features/AbilityFactory");
+            for (let i = 0; i < relayVar.length; i++) {
+                const ModelItem = await AbilityFactory.CreateAbility(relayVar[i].value, null)
+                relayVar[i].value = ModelItem;
+                relayVar[i].display_str = ModelItem.Name? ModelItem.Name : "";
+            }
+
+            return relayVar
+        },
+        returnOptionDisplay(this: EventRunner, eventSource : any, relayVar : IChoice, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null){
+            
+            return ( 
+            
+                <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
+                    <div className="ability-selected-option">
+                        <div className="">
+                            <RulesModelDisplayAbility data={relayVar.value} ID={relayVar.id} />
                         </div>
                     </div>
                 </ErrorBoundary>

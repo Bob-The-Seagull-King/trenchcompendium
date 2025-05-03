@@ -9,6 +9,6 @@
     },
     {
         "id": "pt_mammon",
-        "faction_id": ["fc_hereticlegion","fc_hereticlegion_fv_hereticnavalraidingparty","fc_hereticlegion_fv_trenchghosts"]
+        "faction_id": ["fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion","fc_hereticlegion_fv_hereticnavalraidingparty","fc_hereticlegion_fv_trenchghosts"]
     }
 ]

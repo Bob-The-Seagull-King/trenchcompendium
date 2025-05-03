@@ -162,6 +162,17 @@
         "removable": false
     },
     {
+        "id": "rel_md_eq_artillerywtich_mammon",
+        "source": "core",
+        "tags": {},
+        "name": "Artillery Witches of Mammon Equipment",
+        "contextdata": {},
+        "options": [],
+        "model_id": ["md_artillerywitch_gaswitch"],
+        "mandatory_equipment": ["eq_artillerywitchinfernalgasbomb"],
+        "removable": false
+    },
+    {
         "id": "rel_md_eq_sineater",
         "source": "core",
         "tags": {},

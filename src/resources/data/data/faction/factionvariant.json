@@ -138,5 +138,33 @@
         "cut_rules" : [],
         "rules" : ["rl_horror","rl_semicorporeal","rl_spectral","rl_undead","rl_enemiesofall","rl_lostsouls","rl_slow","rl_sarcophagusmine","rl_barbedwirebanshee","rl_tankpalanquin"],
         "options": []
+    },
+    {
+        "id": "fc_hereticlegion_fv_knightsofavarice",
+        "name": "Knights of Avarice",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "faction_keyword": {"name": "kw_heretic"}
+        },
+        "base_id": "fc_hereticlegion",
+        "description": [     
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The warbands who follow the Prince of Greed call themselves the Knights of Avarice. Such heretics display their wealth extravagantly and prefer to carry the most expensive and hard-to-acquire weapons, armour and equipment, suffering none to join them who lacks the means to obtain their glittering panoply. They are festooned with chains of gold and the finest silk cloaks, their armour is gilded with gold and decorated with precious stones, and the handles of their great coin hammers are made of the rarest of wood. Yet despite the opulent wealth at display, their finery is tarnished by the blood and soot that spews from the Hellgate, and the delicate artistic filigree of their golden masks is both terrible and beautiful in equal measure. In combat they favour hammers and clubs that break the bones but leave the flesh and blood intact, as well as poison gas and highly accurate rifles. They scorn crude and destructive fire or explosive weapons that could damage any objects of value."
+            }, 
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "After the Knights of Avarice have claimed victory in combat, they scour the battlefield or any settlement they’ve conquered like a swarm of locusts. Anything and everything of value is taken: metals from brass to bronze, silver to gold, art objects, precious stones, livestock, trade goods, rare tomes and scrolls… all are meticulously catalogued and carried away by slaves and demonic beasts of burden or great armoured cars that take the stolen loot to the underground treasure chambers which act as the temples of Mammon. Even the dead are stripped of their flesh with the detached skill of seasoned butchers, ready to be sold at market. Internal organs taken from fallen victims are carefully preserved in alchemical liquids to be sold to the scientists of the infernal laboratories."
+            }, 
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "For the Heretics of the Path of Mammon hoarding riches is not mere acquisition of wealth – it is their religious compulsion. Ironically, they gain little pleasure from their vast wealth, as their greed makes them continuously desire ever greater riches. Thus their warbands forever roam No Man’s Land, looking for forgotten treasures or foes to dissect and turn into wealth. For the greed of Mammon will never be sated."
+            }
+        ],
+        "team": "hell",
+        "cut_rules" : [],
+        "rules" : ["rl_worshipmammon","rl_mammonschosen","rl_corruptmerchants","rl_infernalrivalry","rl_goeticwarlocks","rl_debtorstomammon"],
+        "options": []
     }
 ]

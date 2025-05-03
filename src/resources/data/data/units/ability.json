@@ -512,6 +512,76 @@
         "options": []
     },
     {
+        "id": "ab_thepriceofgreed",
+        "name": "The Price of Greed",
+        "source": "core",
+        "tags": {"action": true},
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Worldly wealth belonging to the target model of this curse starts crushing them under its weight. Choose any model the Priest sees within 12” and take a RISKY ACTION. If successful, roll immediately on the Injury Chart for that model and add +1 DICE to the injury roll for each -1 Armour modifier the model has (for example if the model has a Trench Shield and standard armour, add +2 DICE to the injury rolls).",
+                "glossary": [
+                    {"val": "RISKY ACTION", "id": "kw_riskyaction"},
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "+2 DICE", "id": "kw_plusdice"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_powersofthepriestofmammon",
+        "name": "Powers of the Priest of Mammon",
+        "source": "core",
+        "tags": {"trait": true, "buy_choose": true},
+        "contextdata": {
+            "ability_option": {}
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Upon recruiting the model, you may choose one of the following heretical powers for it to possess."
+            }
+        ],
+        "options": [
+            {
+                "ref_id" : "ot_powersofthemammonpriest",
+                "name" : "Heretical Powers",
+                "description" : [],
+                "category" : "type",
+                "type" : "text",
+                "strictness" : "strict",
+                "predefined_options" : [],
+                "option_context" : {"basic_option_default":{}},
+                "data_search" : {      
+                    "searchtype": "complex",
+                    "searchparam":    {
+                        "type": "ability",
+                        "request":    {
+                            "operator": "or",
+                            "terms": [
+                                {             
+                                    "item": "id",
+                                    "value": "ab_thepriceofgreed",
+                                    "equals": true,
+                                    "strict": true
+                                },
+                                {             
+                                    "item": "id",
+                                    "value": "ab_puppetmaster",
+                                    "equals": true,
+                                    "strict": true
+                                }
+                            ],
+                            "subparams": []
+                        }
+                    }                        
+                }
+            }
+        ]
+    },
+    {
         "id": "ab_hide",
         "name": "Hide",
         "source": "core",

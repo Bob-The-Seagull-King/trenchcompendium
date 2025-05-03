@@ -5,6 +5,7 @@ import { ErrorBoundary } from "react-error-boundary";
 // Classes
 import { Ability } from '../../../classes/feature/ability/Ability';
 import AdvancedDescriptionItemDisplay from "../subcomponents/description/AdvancedDescriptionItemDisplay";
+import OptionSetStaticDisplay from '../subcomponents/description/OptionSetStaticDisplay';
 
 const RulesModelDisplayAbility = (props: any) => {
     const abilityObject: Ability = props.data
@@ -24,6 +25,9 @@ const RulesModelDisplayAbility = (props: any) => {
                         </React.Fragment>
                     ))}
                 </p>
+
+                <OptionSetStaticDisplay data={abilityObject.MyOptions} />
+                
             </div>
         </ErrorBoundary>
     )

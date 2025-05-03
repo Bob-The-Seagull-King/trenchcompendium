@@ -754,5 +754,231 @@
             }
         ],
         "options": []
+    },
+    {
+        "id": "rl_worshipmammon",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Worship Mammon",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "In a campaign, the patron of the warband will always be Mammon. Instead of the Puppet Master ability, the Heretic Priest of the Knights of Avarice may select the Price of Greed ability if they wish. "
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_mammonschosen",
+        "source": "core",
+        "tags": { },
+        "contextdata": {
+            "add_to_warband": {},
+            "validate_final_unit": {
+                "requirements": [
+                    {
+                        "type": "ducats",
+                        "value": 80
+                    }
+                ],
+                "exception": [
+                    {
+                        "type": "id",
+                        "value": "md_wretched"
+                    }
+                ]
+            } 
+        },
+        "name": "Mammon's Chosen",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Knights of Avarice allow only the wealthiest and the best-equipped candidates to join their ranks. Your force may have no models that cost less than 80 ducats (including their equipment)."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_corruptmerchants",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            "add_to_warband": {},
+            "faction_choose_equipment": {
+                "additions": [
+                    {
+                        "list": "fc_ironsultanate",
+                        "count": 1,
+                        "option_id": 0,
+                        "restriction": [
+                            { "category": "melee" },
+                            { "category": "ranged" },
+                            { "category": "armour" },
+                            { "category": "equipment" }
+                        ]
+                    },
+                    {
+                        "list": "fc_newantioch",
+                        "count": 1,
+                        "option_id": 1,
+                        "restriction": [
+                            { "category": "melee" },
+                            { "category": "ranged" },
+                            { "category": "armour" },
+                            { "category": "equipment" }
+                        ]
+                    }
+                ]
+            }
+        },
+        "name": "Corrupt Merchants",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Many merchants, traders and moneylenders within the Faithful nations are followers of Mammon and secretly supply the Knights of Avarice with their wares. When creating the warband, select one weapon, suit of armour or other piece of equipment from the New Antioch Armoury and one such item from the Iron Sultanate Armoury. You can acquire this gear exactly as the warband they come from. Any of these items in question must not be already available to the Heretic Warband. All the same limitations of the original lists apply, so there is little point in taking an Assassin’s Dagger (for example) since it can be only used by Assassins. These two selected additions are available to your warband throughout the campaign."
+            }
+        ],
+        "options": [
+            {
+                "ref_id" : "ot_ironsultanate",
+                "name" : "Iron Sultanate Items",
+                "description" : [],
+                "category" : "type",
+                "type" : "text",
+                "strictness" : "strict",
+                "predefined_options" : [],
+                "option_context" : {"basic_option_default":{}},
+                "data_search" : {      
+                    "searchtype": "complex",
+                    "searchparam":    {
+                        "type": "factionequipmentrelationship",
+                        "request":    {
+                            "operator": "and",
+                            "terms": [
+                                {             
+                                    "item": "faction_id",
+                                    "value": "fc_ironsultanate",
+                                    "equals": true,
+                                    "strict": true
+                                },
+                                {             
+                                    "item": "faction_id",
+                                    "value": "fc_hereticlegion",
+                                    "equals": false,
+                                    "strict": true
+                                }
+                            ],
+                            "subparams": []
+                        }
+                    }                        
+                }
+            },
+            {
+                "ref_id" : "ot_newantioch",
+                "name" : "New Antioch Items",
+                "description" : [],
+                "category" : "type",
+                "type" : "text",
+                "strictness" : "strict",
+                "predefined_options" : [],
+                "option_context" : {"basic_option_default":{}},
+                "data_search" : {      
+                    "searchtype": "complex",
+                    "searchparam":    {
+                        "type": "factionequipmentrelationship",
+                        "request":    {
+                            "operator": "and",
+                            "terms": [
+                                {             
+                                    "item": "faction_id",
+                                    "value": "fc_newantioch",
+                                    "equals": true,
+                                    "strict": true
+                                },
+                                {             
+                                    "item": "faction_id",
+                                    "value": "fc_hereticlegion",
+                                    "equals": false,
+                                    "strict": true
+                                }
+                            ],
+                            "subparams": []
+                        }
+                    }                        
+                }
+            }
+        ]
+    },
+    {
+        "id": "rl_preservetheloot",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Preserve the Loot",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Knights of Avarice greatly dislike using weapons that could damage the amount of wealth that can be extracted from the fallen. No weapon with the Keyword FIRE or SHRAPNEL can be used by any model in this warband. In addition, the Artillery Witches of this warband use Gas Bombs: They have the Keyword GAS instead of SHRAPNEL and they ignore armour. Injuries caused by a direct hit are rolled with 2D6 and models within a 3” blast radius are rolled with -1 DICE. In a similar vein, their Grenade Launchers have the GAS keyword instead of the SHRAPNEL keyword, have a -1 DICE to injury rolls and ignore armour.",
+            "glossary": [
+                {"val": "-1 DICE", "id": "kw_minusdice"},
+                {"val": "FIRE", "id": "kw_fire"},
+                {"val": "GAS", "id": "kw_gas"},
+                {"val": "SHRAPNEL", "id": "kw_shrapnel"}
+            ]
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_infernalrivalry",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Infernal Rivalry",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Mammon is a rival of Beruth, the great devil of wrath and murder, who is the Patron of Death Commandos. Knights of Avarice may include no Death Commandos."
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_goeticwarlocks",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Goetic Warlocks",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Goetic Warlocks are creations of Mammon. This warband may include one for the price of 110 ducats. This Warlock is still a mercenary and obeys all of the rules associated with being a mercenary (such as having fixed equipment and not being able to be promoted to an ELITE throughout the course of a campaign).",
+            "glossary": [
+                {"val": "ELITE", "id": "kw_elite"}
+            ]
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_debtorstomammon",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            "add_to_warband": {}
+        },
+        "name": "Debtors to Mammon",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Wretched of the warband are not tied by Mammon’s Chosen rule."
+        }
+        ],
+        "options": []
     }
 ]

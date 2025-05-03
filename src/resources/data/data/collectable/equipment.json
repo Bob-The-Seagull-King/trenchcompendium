@@ -2281,6 +2281,42 @@
         "modifiers": ["Ignore Cover"]
     },
     {
+        "id": "eq_gasgrenadelauncher",
+        "name": "Gas Grenade Launcher",
+        "source": "core",
+        "tags": {"action": true, "weapon": true},
+        "category": "ranged",
+        "distance": 36,
+        "stats": {
+            "hands_ranged": 2,
+            "ranged": true
+        },
+        "contextdata": {
+            "get_weapon": {},
+            "ignore_cover": {},
+            "ignore_armour": {}},
+        "description": [ 
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Ignores all penalties for cover. This weapon has a BLAST radius of 3\" – all models within this range are hit. Injury rolls are made with -1 DICE and ignore armour.",
+                "glossary": [
+                    {"val": "cover", "id": "gl_cover"},
+                    {"val": "BLAST 3\"", "id": "kw_blast"},
+                    {"val": "-1 DICE", "id": "kw_minusdice"}
+                ]
+            }  
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Modifications of great siege rifles designed to lob grenades over long distances, specially crafted by the servants of Mammon to best preserve loot."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_heavy","kw_gas","kw_blast"],
+        "modifiers": ["Ignore Cover", "Ignore Armour", "-1D to Injuries"]
+    },
+    {
         "id": "eq_satchelcharge",
         "name": "Satchel Charge",
         "source": "core",
@@ -5817,6 +5853,46 @@
         "options": [],
         "keywords": ["kw_blast","kw_shrapnel"],
         "modifiers": []
+    },
+    {
+        "id": "eq_artillerywitchinfernalgasbomb",
+        "name": "Infernal Gas Bomb",
+        "source": "core",
+        "tags": {"action": true, "weapon": true, "model": true},
+        "category": "ranged",
+        "distance": 36,
+        "stats": {
+            "hands_ranged": 1,
+            "ranged": true
+        },
+        "contextdata": {
+            "get_weapon": {},
+            "added_dice": {"value": 1}},
+        "description": [ 
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "This wicked infernal weapon is treated as a one-handed Ranged weapon with the Keyword BLAST 3”. Specify a 1x1mm point on the battlefield within 36” that the Witch can see and that you want to target. Next, make a Ranged Attack ACTION. If the roll fails (i.e. you roll 6 or less with the two lowest Dice), the bomb lands 1” away from its intended location, multiplied by the number representing the degree of failure (for example, if you rolled 5, the bomb lands 2” away, as 7 - 5 = 2). The direction is decided by your opponent. Roll on the Injury Chart for each model within the BLAST radius.",
+                "glossary": [
+                    {"val": "ACTION", "id": "kw_action"},
+                    {"val": "BLAST", "id": "kw_blast"}
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "If the bomb lands exactly on top of any model, make a standard Injury roll. Other models hit by the bomb roll on the Injury Chart with -1 DICE. Any model hit, but not taken Out of Action, by this attack is blown D3” directly away from the point of impact (roll for each model separately), stopping if they hit other models, buildings or objects. This attack has the Keyword GAS and therefore causes an additional +1 BLOOD MARKER. Cover, range and higher position do not affect attacks by the Infernal Bomb. Roll injuries for models that would benefit from Cover from the perspective of the BLAST point with -1 DICE. The Activation of the Witch ends immediately after using the Infernal Bomb.",
+                "glossary": [
+                    {"val": "ACTIONS", "id": "kw_action"},
+                    {"val": "BLAST", "id": "kw_blast"},
+                    {"val": "-1 DICE", "id": "kw_minusdice"},
+                    {"val": "GAS", "id": "kw_gas"},
+                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"}
+                ]
+            }  
+        ],
+        "lore": [ ],
+        "options": [],
+        "keywords": ["kw_blast","kw_gas"],
+        "modifiers": ["Ignore Armour"]
     },
     {
         "id": "eq_sineatertenderizermaul",
