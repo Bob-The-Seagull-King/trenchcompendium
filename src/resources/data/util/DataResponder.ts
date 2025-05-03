@@ -219,7 +219,7 @@ class DataResponder {
         let i = 0;
         for (i = 0; i < dataSet.length; i++) {
             if (dataSet[i].id == request.id) {
-                return dataSet[i]
+                return JSON.parse(JSON.stringify(dataSet[i]))
             }
         }
         return {}
@@ -232,7 +232,7 @@ class DataResponder {
      */
     public static GetFullDataEntry(request: IDataRequest) {
         const dataSet = DataResponder.GetDataType(request.type, request.data, request.language)
-        return dataSet;
+        return JSON.parse(JSON.stringify(dataSet));
     }
 
     /**
@@ -249,7 +249,7 @@ class DataResponder {
             const data = dataSet[i];
             const dynamicKey = request.id as keyof (typeof data);
             if (!valueSet.includes(data[dynamicKey])) {
-                valueSet.push(data[dynamicKey])
+                valueSet.push(JSON.parse(JSON.stringify(data[dynamicKey])))
             }
         }
 
@@ -291,11 +291,10 @@ class DataResponder {
     public static ComplexSearch(search: IDataRequestComplexSearch) {
         const dataSet = DataResponder.GetDataType(search.type, search.data, search.language)
         const dataSelect = []
-
         let i = 0;
         for (i = 0; i < dataSet.length; i++) {
             if (DataResponder.ValidateComplexSearch(search.request, dataSet[i])) {
-                dataSelect.push(dataSet[i]);
+                dataSelect.push(JSON.parse(JSON.stringify(dataSet[i])));
             }
         }
         return dataSelect;
@@ -311,7 +310,6 @@ class DataResponder {
     public static ValidateComplexSearch(term: IDataRequestSearchParam, data: any) {
         let isvalid = false;
         let i = 0;
-        
         for (i = 0; i < term.terms.length; i++) {
             const isSearch = DataResponder.ValidateBySearch(term.terms[i], data)
             if (term.operator == "and") {
@@ -352,7 +350,6 @@ class DataResponder {
      * @returns boolean if the data object matches the search term
      */
     public static ValidateBySearch(term: IDataRequestSearchTerm, data: any) {
-
         if (!term.istag) {
             const dynamicKey = term.item as keyof (typeof data);
             

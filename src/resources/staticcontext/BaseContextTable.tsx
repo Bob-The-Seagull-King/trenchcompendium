@@ -148,8 +148,8 @@ export const BaseContextCallTable : CallEventTable = {
         async getEquipmentRestrictionPresentable(this: EventRunner, eventSource : any, relayVar : any, trackVal : EquipmentRestriction[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) 
         {
             
-            const { ModelFactory } = await import("../../factories/features/ModelFactory");
-            const { EquipmentFactory } = await import("../../factories/features/EquipmentFactory");
+            const ModelModule = await import("../../factories/features/ModelFactory");
+            const EquipmentModule = await import("../../factories/features/EquipmentFactory");
 
             const RemoveCollection : string[] = []
             const AddedCollection : string[] = []
@@ -177,7 +177,7 @@ export const BaseContextCallTable : CallEventTable = {
                         }
 
                         if (Requirement.res_type == "id") {
-                            const EquipmentItem = await EquipmentFactory.CreateNewEquipment(Requirement.value.toString(), null)
+                            const EquipmentItem = await EquipmentModule.EquipmentFactory.CreateNewEquipment(Requirement.value.toString(), null)
                             NewStringParts.push("must be "+(EquipmentItem.Name))
                         }                  
 
@@ -218,7 +218,7 @@ export const BaseContextCallTable : CallEventTable = {
                         }
 
                         if (Requirement.res_type == "id") {
-                            const EquipmentItem = await EquipmentFactory.CreateNewEquipment(Requirement.value.toString(), null)
+                            const EquipmentItem = await EquipmentModule.EquipmentFactory.CreateNewEquipment(Requirement.value.toString(), null)
                             NewStringParts.push("cannot be "+(EquipmentItem.Name))
                         }        
                         
@@ -250,7 +250,7 @@ export const BaseContextCallTable : CallEventTable = {
                         }
 
                         if (Requirement.res_type == "id") {
-                            const EquipmentItem = await EquipmentFactory.CreateNewEquipment(Requirement.value.toString(), null)
+                            const EquipmentItem = await EquipmentModule.EquipmentFactory.CreateNewEquipment(Requirement.value.toString(), null)
                             NewStringParts.push("can be "+(EquipmentItem.Name))
                         }        
                         
@@ -476,8 +476,8 @@ export const BaseContextCallTable : CallEventTable = {
         },
         async getContextuallyAddedUpgrades(this: EventRunner, eventSource : any, relayVar : ModelUpgradeRelationship[], trackVal : Model, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
             
-            const { Requester } = await import("../../factories/Requester")
             const { UpgradeFactory } = await import("../../factories/features/UpgradeFactory");
+
             let ValidUpgrade = false;
 
             if (context_func['models_id'] ) {
@@ -489,7 +489,7 @@ export const BaseContextCallTable : CallEventTable = {
                 }
             }
             if (ValidUpgrade) {
-                
+                console.log(context_func["model_key"])
                 const UpgradeList = Requester.MakeRequest(
                     {
                         searchtype: "complex", 
@@ -499,8 +499,8 @@ export const BaseContextCallTable : CallEventTable = {
                                 operator: 'and',
                                 terms: [
                                     {
-                                        item: "upgrade_id",
-                                        value: "up_hallucinogendisguise",
+                                        item: "model_id_set",
+                                        value: context_func["model_key"].toString(),
                                         equals: true,
                                         strict: true
                                     }
@@ -517,7 +517,7 @@ export const BaseContextCallTable : CallEventTable = {
                     UpgradeList[i].model_id_set = context_func["models_id"]
                     relayVar.push(await UpgradeFactory.CreateModelUpgrade(UpgradeList[i], null))
                 }
-
+                
             }
 
             return relayVar;
@@ -528,8 +528,8 @@ export const BaseContextCallTable : CallEventTable = {
         async getEquipmentRestrictionPresentable(this: EventRunner, eventSource : any, relayVar : any, trackVal : EquipmentRestriction[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) 
         {
             
-            const { ModelFactory } = await import("../../factories/features/ModelFactory");
-            const { EquipmentFactory } = await import("../../factories/features/EquipmentFactory");
+            const ModelModule = await import("../../factories/features/ModelFactory");
+            const EquipmentModule = await import("../../factories/features/EquipmentFactory");
 
             const PermittedCollection : string[] = []
             const BannedCollection : string[] = []
@@ -549,12 +549,12 @@ export const BaseContextCallTable : CallEventTable = {
                         }  
 
                         if (Requirement.res_type == "id") {
-                            const ModelItem = await ModelFactory.CreateNewModel(Requirement.value.toString(), null)
+                            const ModelItem = await ModelModule.ModelFactory.CreateNewModel(Requirement.value.toString(), null)
                             NewStringParts.push(""+(ModelItem.Name))
                         }   
 
                         if (Requirement.res_type == "equipment") {
-                            const EquipItem = await EquipmentFactory.CreateNewEquipment(Requirement.value.toString(), null)
+                            const EquipItem = await EquipmentModule.EquipmentFactory.CreateNewEquipment(Requirement.value.toString(), null)
                             NewStringParts.push(""+(EquipItem.Name))
                         }                  
 
@@ -573,7 +573,7 @@ export const BaseContextCallTable : CallEventTable = {
                         }  
 
                         if (Requirement.res_type == "id") {
-                            const ModelItem = await ModelFactory.CreateNewModel(Requirement.value.toString(), null)
+                            const ModelItem = await ModelModule.ModelFactory.CreateNewModel(Requirement.value.toString(), null)
                             NewStringParts.push("Not "+(ModelItem.Name))
                         }                  
 
