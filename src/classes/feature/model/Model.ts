@@ -22,6 +22,7 @@ import { EventRunner } from '../../contextevent/contexteventhandler';
 import { EquipmentLimit, EquipmentRestriction } from '../equipment/Equipment';
 import { FactionModelRelationship, IFactionModelRelationship } from '../../relationship/faction/FactionModelRelationship';
 import { ModelFactory } from '../../../factories/features/ModelFactory';
+import { Faction } from '../faction/Faction';
 
 interface IModel extends IContextObject {
     description: [];
@@ -346,6 +347,7 @@ class Model extends StaticContextObject {
     
         return basestats.join('/')
     }
+
 
 
 }

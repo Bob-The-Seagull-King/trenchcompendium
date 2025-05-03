@@ -21,6 +21,7 @@ import SkillDisplay from "../../display/components/features/skill/SkillDisplay";
 import { WarbandProperty } from "../../classes/saveitems/Warband/WarbandProperty";
 import { FactionModelRelationship } from "../../classes/relationship/faction/FactionModelRelationship";
 import RulesModelDisplayAbility from "../../display/components/rules-content/RulesModelDisplayAbility";
+import { Model } from "../../classes/feature/model/Model";
 
 export const BaseContextCallTable : CallEventTable = {
     option_search_viable: {
@@ -147,6 +148,7 @@ export const BaseContextCallTable : CallEventTable = {
         async getEquipmentRestrictionPresentable(this: EventRunner, eventSource : any, relayVar : any, trackVal : EquipmentRestriction[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) 
         {
             
+            const { ModelFactory } = await import("../../factories/features/ModelFactory");
             const { EquipmentFactory } = await import("../../factories/features/EquipmentFactory");
 
             const RemoveCollection : string[] = []
@@ -462,9 +464,60 @@ export const BaseContextCallTable : CallEventTable = {
                 }
             ) as IModelUpgradeRelationship[]
             
+            console.log(context_func)
+            console.log(UpgradeList);
+            
             for (let i = 0; i < UpgradeList.length; i++) {
                 UpgradeList[i].model_id_set = context_func["models_id"]
                 relayVar.push(await UpgradeFactory.CreateModelUpgrade(UpgradeList[i], null))
+            }
+
+            return relayVar;
+        },
+        async getContextuallyAddedUpgrades(this: EventRunner, eventSource : any, relayVar : ModelUpgradeRelationship[], trackVal : Model, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            
+            const { Requester } = await import("../../factories/Requester")
+            const { UpgradeFactory } = await import("../../factories/features/UpgradeFactory");
+            let ValidUpgrade = false;
+
+            if (context_func['models_id'] ) {
+                for (let i = 0; i < context_func['models_id'].length; i++) {
+                    if (trackVal.ID == context_func['models_id'][i]) {
+                        ValidUpgrade = true;
+                        break;
+                    }
+                }
+            }
+            if (ValidUpgrade) {
+                
+                const UpgradeList = Requester.MakeRequest(
+                    {
+                        searchtype: "complex", 
+                        searchparam: {
+                            type: "modelupgraderelationship",
+                            request: {
+                                operator: 'and',
+                                terms: [
+                                    {
+                                        item: "upgrade_id",
+                                        value: "up_hallucinogendisguise",
+                                        equals: true,
+                                        strict: true
+                                    }
+                                ],
+                                subparams: []
+                            }
+                        }
+                    }
+                ) as IModelUpgradeRelationship[]
+                
+                console.log(UpgradeList);
+
+                for (let i = 0; i < UpgradeList.length; i++) {
+                    UpgradeList[i].model_id_set = context_func["models_id"]
+                    relayVar.push(await UpgradeFactory.CreateModelUpgrade(UpgradeList[i], null))
+                }
+
             }
 
             return relayVar;

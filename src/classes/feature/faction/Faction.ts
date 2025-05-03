@@ -55,6 +55,22 @@ class Faction extends StaticOptionContextObject {
         } else { this.Variant = "base" }
 
     }
+
+    /**
+     * Grabs any additional packages unique to
+     * class implementation.
+     */
+    public async GrabSpecialPackages(event_id : string, source_obj : ContextObject, arrs_extra : any[]) : Promise<ContextPackage[]> { 
+        const static_packages : ContextPackage[] = []
+        for (let i = 0; i < this.Rules.length; i++) {
+            const temp_packages : any[] = await this.Rules[i].GrabContextPackages(event_id, source_obj, arrs_extra);
+            for (let j = 0; j < temp_packages.length; j++) {
+                static_packages.push(temp_packages[j]);
+            }
+        }
+        return static_packages;
+    }
+
     
     public async BuildFactionModels(id : string) {
         const ModelList = Requester.MakeRequest(

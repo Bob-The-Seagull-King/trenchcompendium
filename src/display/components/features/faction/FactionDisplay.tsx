@@ -19,6 +19,7 @@ import RulesAnchorLinks from "../../rules-content/RulesAnchorLinks";
 import RulesLoreSection from "../../rules-content/RulesLoreSection";
 import RulesFactionModelDisplay from "../../rules-content/RulesFactionModelDisplay";
 import RulesFactionRule from "../../rules-content/RulesFactionRule";
+import RulesModelDisplay from '../../rules-content/RulesModelDisplay';
 
 const FactionDisplay = (props: any) => {
     const factionObject: Faction = props.data
@@ -144,7 +145,7 @@ const FactionDisplay = (props: any) => {
                     />
 
                     {factionObject.Models.filter((item) => (item.Captain == true && item.Mercenary == false)).map((item) => (
-                        <RulesFactionModelDisplay key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID} data={item} />
+                        <RulesModelDisplay  key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID} data={item} faction={factionObject} />
 
                     )) /* Abilities */}
 
@@ -159,7 +160,7 @@ const FactionDisplay = (props: any) => {
                     />
 
                     {factionObject.Models.filter((item) => (item.Captain == false && item.Mercenary == false && (ModelIsElite(item.Model) == true))).map((item) => (
-                        <RulesFactionModelDisplay key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID} data={item} />
+                        <RulesModelDisplay  key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID} data={item} faction={factionObject} />
 
                     )) /* Abilities */}
                 </>
@@ -172,7 +173,7 @@ const FactionDisplay = (props: any) => {
                         className=""
                     />
                     {factionObject.Models.filter((item) => (item.Captain == false && item.Mercenary == false && (ModelIsElite(item.Model) == false))).map((item) => (
-                        <RulesFactionModelDisplay key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID} data={item} />
+                        <RulesModelDisplay  key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID} data={item} faction={factionObject} />
                     )) /* Abilities */}
                 </>
                 }
@@ -186,7 +187,7 @@ const FactionDisplay = (props: any) => {
                     />
 
                     {factionObject.Models.filter((item) => (item.Mercenary == true)).map((item) => (
-                        <RulesFactionModelDisplay key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID} data={item} />
+                        <RulesModelDisplay  key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID} data={item} faction={factionObject} />
                     )) /* Abilities */}
 
 

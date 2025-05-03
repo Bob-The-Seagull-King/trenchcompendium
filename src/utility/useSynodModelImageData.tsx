@@ -72,7 +72,6 @@ export function useSynodModelImageData(modelSlug: string, size = 'medium'): Mode
             });
     }, [modelSlug, size]);
 
-    console.log(data);
 
     return data;
 }

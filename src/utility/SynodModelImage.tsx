@@ -18,7 +18,6 @@ const SynodModelImage: React.FC<SynodModelImageProps> = ({ modelSlug, size = 'me
     const fallback =
         'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
 
-    console.log(url);
 
     if( error ) {
         return '';

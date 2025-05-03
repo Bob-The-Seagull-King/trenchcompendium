@@ -47,7 +47,7 @@ const RulesFactionModelDisplay = (props: any) => {
 
     return (
         <ErrorBoundary fallback={<div>Something went wrong with FactionModelDisplay.tsx</div>}>
-            <RulesModelDisplay data={factionmodelObject} />
+            
         </ErrorBoundary>
     )
 }

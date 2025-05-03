@@ -29,7 +29,6 @@ const SynodPasswordReset: React.FC = () => {
             });
 
             setMessage('Password reset email sent. Check your inbox.');
-            console.log(response);
 
         } catch (err: any) {
             setError(err.response?.data?.message || 'Something went wrong');

@@ -52,7 +52,8 @@ const PagedCompendiumDisplay = (prop: any) => {
 
     function GetCurrentItem() {
         if (urlSplits.length > 3) {
-            const CurItemID = urlSplits.slice(-1)
+            const CurItemID = urlSplits.slice(3)[0]
+            
             for (let i = 0; i < CollectionController.itemcollection.length; i++) {
                 if (CollectionController.itemcollection[i].HeldItem.ID == CurItemID) {                    
                     return CollectionController.itemcollection[i]

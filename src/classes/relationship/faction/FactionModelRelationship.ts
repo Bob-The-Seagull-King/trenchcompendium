@@ -10,6 +10,8 @@ import { Faction } from '../../feature/faction/Faction';
 import { FactionFactory } from '../../../factories/features/FactionFactory';
 import {getCostType} from "../../../utility/functions";
 import {GetPresentationStatistic, PresentModelStatistics} from "../../feature/model/ModelStats";
+import { ModelUpgradeRelationship } from '../model/ModelUpgradeRelationship';
+import { EventRunner } from '../../contextevent/contexteventhandler';
 
 interface IFactionModelRelationship extends IStaticOptionContextObject {
     faction_id : string[],
@@ -153,8 +155,33 @@ class FactionModelRelationship extends StaticOptionContextObject {
     /**
      * Returns the list of upgrades for this model
      */
-    public getUprgades () {
-        return this.Model.getUprgades();
+    public async getUpgrades (faction : Faction) {
+        return await this.getContextuallyAvailableUpgrades(faction);
+    }
+
+    
+    public async getContextuallyAvailableUpgrades(faction : Faction) : Promise<ModelUpgradeRelationship[]> {
+        const UpgradesListAvailable : ModelUpgradeRelationship[] = []
+        
+        for (let i = 0; i < this.Model.UpgradeList.length; i++) {
+            UpgradesListAvailable.push(this.Model.UpgradeList[i]);
+        }
+
+        const Events : EventRunner = new EventRunner();
+
+        const result = await Events.runEvent(
+            "getContextuallyAddedUpgrades",
+            faction,
+            [],
+            [],
+            this.Model
+        )
+
+        for (let i = 0; i < result.length; i++) {
+            UpgradesListAvailable.push(result[i]);
+        }
+
+        return UpgradesListAvailable;
     }
 
     /**

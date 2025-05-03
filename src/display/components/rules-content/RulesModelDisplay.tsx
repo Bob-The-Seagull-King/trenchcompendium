@@ -19,12 +19,16 @@ import { EventRunner } from '../../../classes/contextevent/contexteventhandler';
 import ModelEquipmentDisplay from '../features/equipment/ModelEquipmentDisplay';
 import SynodModelImage from "../../../utility/SynodModelImage";
 import SynodModelImageSource from "../../../utility/SynodModelImageSource";
+import { ModelUpgradeRelationship } from '../../../classes/relationship/model/ModelUpgradeRelationship';
+import { Faction } from '../../../classes/feature/faction/Faction';
 
 const RulesModelDisplay = (props: any) => {
     const factionmodelObject: FactionModelRelationship = props.data
     const modelcollectionObject: Model = props.data.Model
+    const parentfaction : Faction = props.faction;
 
     const [statchoices, setstats] = useState({})
+    const [upgrades, setupgrades] = useState<ModelUpgradeRelationship[]>([])
     const [BaseString, setBaseString] = useState('')
     const [minimum, setminimum] = useState("")
     const [maximum, setmaximum] = useState("")
@@ -36,6 +40,13 @@ const RulesModelDisplay = (props: any) => {
     useEffect(() => {
         async function SetModelOptions() {
             const EventProc: EventRunner = new EventRunner();
+                            
+            if (parentfaction != undefined) {
+                const result_upgrades = await factionmodelObject.getContextuallyAvailableUpgrades(parentfaction);
+                setupgrades(result_upgrades);
+            } else {
+                setupgrades(modelcollectionObject.UpgradeList)
+            }
                             
             const result_max = await EventProc.runEvent(
                 "getModelLimitPresentation",
@@ -242,7 +253,7 @@ const RulesModelDisplay = (props: any) => {
                 </div>
 
 
-                <div className={'fighter-card-collapse-wrap'}>
+                <div className={'fighter-card-collapse-wrap'} key={_keyvar}>
                     {/* Abilities */}
                     {factionmodelObject.hasAbilities() &&
                         <RulesModelDisplayCollapse
@@ -291,13 +302,13 @@ const RulesModelDisplay = (props: any) => {
                     }
 
                     {/* Upgrades */}
-                    {factionmodelObject.hasUpgrades() &&
+                    {upgrades.length > 0 &&
                         <RulesModelDisplayCollapse
                             name={"Upgrades"}
                             state={false}
                             has_children={factionmodelObject.hasUpgrades()}
                             method={() => <>
-                                {factionmodelObject.getUprgades().map((item) => (
+                                {upgrades.map((item) => (
                                     <React.Fragment
                                         key={"model_upgrade_" + modelcollectionObject.ID + "_upgrade_id_" + item.ID}>
                                         <RulesModelUpgrade item={item}/>
