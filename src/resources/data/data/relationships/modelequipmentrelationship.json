@@ -193,5 +193,16 @@
         "model_id": ["md_goeticwarlock"],
         "mandatory_equipment": ["eq_swordaxe","eq_swordaxe","eq_reinforcedarmour"],
         "removable": false
+    },
+    {
+        "id": "rel_md_eq_communicant",
+        "source": "core",
+        "tags": {},
+        "name": "Communicant Equipment",
+        "contextdata": {},
+        "options": [],
+        "model_id": ["md_communicant"],
+        "mandatory_equipment": ["eq_communicantcross"],
+        "removable": false
     }
 ]

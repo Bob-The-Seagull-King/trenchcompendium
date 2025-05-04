@@ -541,5 +541,21 @@
         ],
         "warband_limit": 2,
         "required_upgrades":[]
+    },
+    {
+        "id": "rel_md_up_zealotstrength_castigator",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {},
+        "options": [],
+        "model_id_set": ["md_castigator"],
+        "upgrade_id": "up_zealotstrength",
+        "cost": 5,
+        "cost_type": 0,
+        "restricted_upgrades": [
+        ],
+        "warband_limit": 0,
+        "required_upgrades":[]
     }
 ]

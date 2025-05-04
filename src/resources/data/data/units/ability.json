@@ -919,5 +919,75 @@
             }
         ],
         "options": []
+    },
+    {
+        "id": "ab_enforcedorthodoxy",
+        "name": "Enforced Orthodoxy",
+        "source": "core",
+        "tags": {"action": true},
+        "contextdata": {},
+        "description": [           
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "At any point during its Activation, a Castigator may take a RISKY ACTION with +1 DICE. If successful, all friendly models that are Down and within 8” of the Castigator may immediately stand up at no penalty or cost.", 
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_riskyaction"},
+                    {"val": "RISKY ACTION", "id": "kw_riskyaction"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_whipofgod",
+        "name": "Whip of God",
+        "source": "core",
+        "tags": {"action": true},
+        "contextdata": {},
+        "description": [           
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Unlike other models, a Castigator is allowed to attack friendly models with melee attacks within 1”. They can do this without declaring a charge. Each time the Castigator takes a friendly model Out of Action with a melee attack, set a die aside in a pool as the act of piety inspires the troops. The next time your warband makes a Morale roll, add an amount of +DICE to that roll equal to the amount of dice in the pool and empty it.", 
+                "glossary": [
+                    {"val": "+DICE", "id": "kw_riskyaction"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_miracleofregeneration",
+        "name": "Miracle of Regeneration",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {},
+        "description": [           
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "At the start of each of their Activations, the Communicant can remove one BLOOD MARKER from themselves, if they have any.", 
+                "glossary": [
+                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_bodyguard_pilgrim",
+        "name": "Pilgrim Bodyguard",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {},
+        "description": [           
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": " If any model with the PILGRIM Keyword within 1” of the Communicant is hit by a ranged or melee weapon (excluding BLAST weapons), you can choose to redirect the hit against the Communicant instead. Determine the injuries exactly as if the weapon just hit the Communicant.", 
+                "glossary": [
+                    {"val": "PILGRIM", "id": "kw_pilgrim"},
+                    {"val": "BLAST", "id": "kw_blast"}
+                ]
+            }
+        ],
+        "options": []
     }
 ]

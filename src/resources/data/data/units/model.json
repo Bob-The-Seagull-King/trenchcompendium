@@ -1064,5 +1064,85 @@
         },
         "keywords" : ["kw_pilgrim","kw_elite", "kw_leader"],
         "abilities" : ["ab_loudspeakers","ab_layingonhands","ab_mementomori"]
+    },
+    {
+        "id": "md_castigator",
+        "name": "Castigator",
+        "source": "core",
+        "tags": {},
+        "contextdata": {},
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Castigator can be equipped with any weapons, armour or equipment from the Trench Pilgrims Equipment List.",
+                "glossary": [{"val": "Trench Pilgrims", "id": "kw_pilgrim"}]
+            }
+        ],
+        "lore": [      
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Tasked with instilling the Fear of God in the troops, this orthodoxy officer keeps the soldiers on the path of righteousness and punishes those who transgress. They are protected by their unwavering faith as well as by the saints they revere."
+            }
+        ],
+        "team": "faithful",
+        "stats" : {            
+            "movement": 6,
+            "melee": 1,
+            "ranged": 1,
+            "base": [32],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 0
+        },
+        "keywords" : ["kw_pilgrim","kw_elite"],
+        "abilities" : ["ab_enforcedorthodoxy","ab_whipofgod"]
+    },
+    {
+        "id": "md_communicant",
+        "name": "Communicant",
+        "source": "core",
+        "tags": {},
+        "contextdata": {},
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Communicant can be equipped with any weapon, armour and equipment from the Trench Pilgrim Equipment List. They always carry a Communicant Cross (see below).",
+                "glossary": [{"val": "Trench Pilgrims", "id": "kw_pilgrim"}]
+            }
+        ],
+        "lore": [      
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "Communicants are devotees who consumed the flesh and blood of a Meta-Christ. Strengthened by the divine essence, they grow to enormous size and wounds they suffer close themselves miraculously. They see clearer blind, so blessed crosses are nailed through their eyes."
+                    }
+                ]
+            },    
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "On the battlefield they act as line-breakers and bodyguards for Prophets and Castigators, heedlessly walking through enemy fire and mauling their enemies with enormous weapons that a normal man can barely even lift."
+                    }
+                ]
+            }
+        ],
+        "team": "faithful",
+        "stats" : {            
+            "movement": 6,
+            "melee": 2,
+            "ranged": -3,
+            "base": [40],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 1
+        },
+        "keywords" : ["kw_pilgrim","kw_elite","kw_strong","kw_tough"],
+        "abilities" : ["ab_miracleofregeneration","ab_bodyguard_pilgrim"]
     }
 ]

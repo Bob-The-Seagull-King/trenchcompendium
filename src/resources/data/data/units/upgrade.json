@@ -759,5 +759,24 @@
             }
         ],
         "options": []
+    },
+    {
+        "id": "up_zealotstrength",
+        "name": "Zealot Strength",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {
+            "keyword_add": {"value": ["kw_strong"]}
+        },
+        "description": [           
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The model may have the Keyword STRONG.",
+                "glossary": [
+                    {"val": "STRONG", "id": "kw_strong"}
+                ]
+            }
+        ],
+        "options": []
     }
 ]

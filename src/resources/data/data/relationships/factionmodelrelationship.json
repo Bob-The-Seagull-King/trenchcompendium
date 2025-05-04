@@ -841,5 +841,39 @@
         "restricted_models" : [],
         "warband_minimum" : 1,
         "warband_maximum" : 1
+    } ,
+    {
+        "id": "rel_fc_md_castigator",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {"option_search_viable": {}},
+        "options": [],
+        "faction_id" : ["fc_trenchpilgrim"],
+        "model_id" : "md_castigator",
+        "captain" : false,
+        "mercenary": false,
+        "cost" : 50,
+        "cost_type" : 0,
+        "restricted_models" : [],
+        "warband_minimum" : 0,
+        "warband_maximum" : 1
+    }  ,
+    {
+        "id": "rel_fc_md_communicant",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {"option_search_viable": {}},
+        "options": [],
+        "faction_id" : ["fc_trenchpilgrim"],
+        "model_id" : "md_communicant",
+        "captain" : false,
+        "mercenary": false,
+        "cost" : 100,
+        "cost_type" : 0,
+        "restricted_models" : [],
+        "warband_minimum" : 0,
+        "warband_maximum" : 1
     }   
 ]

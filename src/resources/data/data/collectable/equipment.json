@@ -6107,5 +6107,35 @@
         "options": [],
         "keywords": [],
         "modifiers": []
+    },
+    {
+        "id": "eq_communicantcross",
+        "name": "Communicant Cross",
+        "source": "core",
+        "tags": {"trait": true, "headgear": true, "model": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {
+            "ignore_element": {"element": ["kw_shrapnel","kw_gas"]},
+            "keyword_ignore": {"value": "kw_fear"}
+        },
+        "description": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "A sacred cross is nailed on the face of the Communicant. Negates the additional BLOOD MARKERS from weapons with Keyword SHRAPNEL and GAS. Makes the model immune to the effects of FEAR.",
+                "glossary": [
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"},
+                    {"val": "SHRAPNEL", "id": "kw_shrapnel"},
+                    {"val": "GAS", "id": "kw_gas"},
+                    {"val": "FEAR", "id": "kw_fear"}
+                ]
+            } 
+        ],
+        "lore": [  ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
     }
 ]
