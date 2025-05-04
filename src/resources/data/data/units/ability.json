@@ -867,5 +867,57 @@
             }
         ],
         "options": []
+    },
+    {
+        "id": "ab_loudspeakers",
+        "name": "Loudspeakers",
+        "source": "core",
+        "tags": {"action": true},
+        "contextdata": {},
+        "description": [           
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The War Prophet blares out holy sermons and dire prophecies at 100 decibels to inspire the faithful. The Prophet can take a RISKY ACTION with +2 DICE once during each Activation. If the action is successful, all friendly models within 8” of the Prophet (including the Prophet) that are not engaged in melee can immediately move up to 3” towards any enemy model they can see by the optimal path that reduces the distance between the moving model and the enemy. This move allows them to enter combat as if they charged the enemy and are considered to have done so until the end of the turn.", 
+                "glossary": [
+                    {"val": "+2 DICE", "id": "kw_plusdice"},
+                    {"val": "RISKY ACTION", "id": "kw_riskyaction"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_layingonhands",
+        "name": "Laying On Hands",
+        "source": "core",
+        "tags": {"action": true},
+        "contextdata": {},
+        "description": [           
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "With a successful ACTION, you may remove D3 BLOOD MARKERS from any friendly model within 6” (including the Prophet).", 
+                "glossary": [
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"},
+                    {"val": "ACTION", "id": "kw_action"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_mementomori",
+        "name": "Memento Mori",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {
+            "activated": {}
+        },
+        "description": [           
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The War Prophet is touched by a higher power and the revealed truth allows them a degree of protection against premature death. Once per battle, when the War Prophet is taken Out of Action for any reason, ignore the result as if nothing had happened."
+            }
+        ],
+        "options": []
     }
 ]

@@ -1032,5 +1032,37 @@
         },
         "keywords" : ["kw_demonic","kw_fear","kw_artificial"],
         "abilities" : ["ab_goeticportal","ab_barbedembrace","ab_goeticgaze"]
+    },
+    {
+        "id": "md_warprophet",
+        "name": "War Prophet",
+        "source": "core",
+        "tags": {},
+        "contextdata": {},
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The War Prophet can be equipped with any weapons, armour or equipment from the Trench Pilgrims Equipment List.",
+                "glossary": [{"val": "Trench Pilgrims", "id": "kw_pilgrim"}]
+            }
+        ],
+        "lore": [      
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "A charismatic leader and powerful fighter of the Pilgrim group. They are driven by visions of Armageddon, and their preaching and prophecies drive the pilgrimage from one battlefield to the next, as they seek to thwart the forces of Satan and find martyrdom in combat."
+            }
+        ],
+        "team": "faithful",
+        "stats" : {            
+            "movement": 6,
+            "melee": 2,
+            "ranged": 2,
+            "base": [32],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 0
+        },
+        "keywords" : ["kw_pilgrim","kw_elite", "kw_leader"],
+        "abilities" : ["ab_loudspeakers","ab_layingonhands","ab_mementomori"]
     }
 ]
