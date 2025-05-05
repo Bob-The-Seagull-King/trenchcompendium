@@ -995,9 +995,9 @@
         "limit": 0
     },
     {
-        "id": "rel_fc_eq_molotovcocktail",
+        "id": "rel_fc_eq_molotovcocktail", 
         "source": "core",
-        "tags": {
+        "tags": { 
         },
         "name": "Molotov Cocktail",
         "contextdata": {  
