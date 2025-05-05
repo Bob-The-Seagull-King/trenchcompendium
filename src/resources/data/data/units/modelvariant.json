@@ -471,5 +471,78 @@
         "stats" : {},
         "cut_abilities" : ["ab_layingonhands"],
         "new_abilities" : ["ab_wrathofgod"]
+    },
+    {
+        "id": "md_anchoriteshrine_saintmethodius",
+        "name": "Anchorite Shrine (War Pilgrimage of Saint Methodius)",
+        "source": "core",
+        "tags": {},
+        "contextdata": {            
+            "model_equipment_restriction": {
+                "required": [
+                    {
+                        "category": "melee",
+                        "res_type": "tag",
+                        "value": "methodius"
+                    },
+                    {
+                        "category": "ranged",
+                        "res_type": "tag",
+                        "value": "methodius"
+                    },
+                    {
+                        "category": "armour",
+                        "res_type": "tag",
+                        "value": "methodius"
+                    },
+                    {
+                        "category": "equipment",
+                        "res_type": "tag",
+                        "value": "methodius"
+                    }
+                ]
+            },
+            "model_equipment_limit": {
+                "maximum": [
+                    {
+                        "tag": "weapon",
+                        "res_type": "tag",
+                        "value": "methodius",
+                        "limit": 1
+                    },
+                    {
+                        "category": "equipment",
+                        "res_type": "tag",
+                        "value": "methodius",
+                        "limit": 2
+                    }
+                ]
+            }
+        },
+        "base_id": "md_anchoriteshrine",
+        "variant_name": "War_Pilgrimage_of_Saint_Methodius",
+        "team": "faithful",
+        "cut_keywords" : [],
+        "keywords" : [],
+        "stats" : {
+            "ranged": 0
+        },
+        "cut_abilities" : ["ab_brokenonthewheel"],
+        "new_abilities" : []
+    },
+    {
+        "id": "md_stigmaticnun_saintmethodius",
+        "name": "Stigmatic Nun (War Pilgrimage of Saint Methodius)",
+        "source": "core",
+        "tags": {},
+        "contextdata": {},
+        "base_id": "md_stigmaticnun",
+        "variant_name": "War_Pilgrimage_of_Saint_Methodius",
+        "team": "faithful",
+        "cut_keywords" : [],
+        "keywords" : [],
+        "stats" : {},
+        "cut_abilities" : [],
+        "new_abilities" : []
     }
 ]

@@ -210,5 +210,45 @@
         "cut_rules" : [],
         "rules" : ["rl_bloodsacrifice","rl_heavenawaits","rl_theunclean","rl_dayofhiswrath","rl_stolencommunicants","rl_favourofthelord"],
         "options": []
+    },
+    {
+        "id": "fc_trenchpilgrim_fv_warpilgimageofsaintmethodius",
+        "name": "War Pilgrimage of Saint Methodius",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "faction_keyword": {"name": "kw_pilgrim"}
+        },
+        "base_id": "fc_trenchpilgrim",
+        "description": [     
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "From the Night of Fire and Blood that laid low the Greater Moravian monastery of Velehrad emerged a single monk of the Orthodox Order of St. Methodius. Though the rest of the brotherhood perished in the catastrophe, slaughtered by a squadron of ruthless Death Commandos, the sole survivor brought with him the books of the Saint and his faith out of the ruin."
+            },  
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "With the loss of the workshops and monastic libraries of Velehrad, it was believed that the secrets of the Anchorite construction were lost, especially since the Church no longer wished to pursue their construction due to advances in armour technology elsewhere. But this was in error. The monk, named brother Akakios, still knew the craft."
+            },  
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Akakios fled to the Theocratia of Hellas and founded a new monastery on the slopes of holy Mount Athos. Many monks lived in the monastic communities on the slopes of the mountain and some were attracted to join their brother. Thus Akakios became the first War Prophet of the Order and many lay members joined or became supporters and, eventually, the foot soldiers of the well-equipped and disciplined War Pilgrimages of St. Methodius. No other Pilgrim Progression can match the methodical and technical approach of the soldiers of the Order."
+            },  
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "In their fortified monastery the learned monks hoard and protect the knowledge of modifying the sacred designs of St. Methodius. Their Shrine Anchorites are without a peer and feature many modern weapons and adjustments which allow them to carry modern long-range weaponry. No other warband has such abundant access to Anchorites or the variety of sophisticated weaponry and equipment."
+            },  
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Following the ancient Orthodox creed, the pilgrims of St. Methodius reject many of the teachings and customs of other Pilgrim Processions. They consider the creation of the Communicants as a dangerous heresy and condemn the use of Martyrdom Devices as an affront to God’s commandment against suicide, as well as holding to other beliefs many of the Trench Pilgrims view as an essential part of their crusade against the forces of Inferno. Bitter schisms and arguments with other sects sometimes erupt into violence, and the Church itself accuses the Order of Hetrodoxy of clinging to the outdated Eastern Orthodox faith."
+            },  
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "However, due to their formidable fortress monasteries upon Mount Athos and their undeniable zeal on the battlefield, the Princes of the Church turn a blind eye to the affairs of the followers of St. Methodius, as long as they focus all their zeal in the seemingly impossible task of relieving the city of Trebizond. Here, according to the visions of prophet Akakios, the unsullied faith is still practiced and the Salvation of Mankind will be achieved. To this end, the Order sends one War Pilgrimage after another to the front line. Not one has made it within sight of the fabled walls of Trebizond, but this only increases the zeal of the Order and rouses them into ever greater efforts to reach the City of the Hill."
+            }
+        ],
+        "team": "faithful",
+        "cut_rules" : [],
+        "rules" : ["rl_anchoritecloister","rl_anchoritearmoury","rl_mortalsin","rl_communicantheresy","rl_treasureinheaven","rl_chasteorder","rl_gunsmithmonks","rl_followersofsaintmethodius"],
+        "options": []
     }
 ]

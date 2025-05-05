@@ -1225,5 +1225,142 @@
             }
         ],
         "options": []
+    },
+    {
+        "id": "rl_anchoritecloister",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Anchorite Cloister",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "This warband may buy up to two Anchorite Shrines."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_anchoritearmoury",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Anchorite Armoury",
+        "description":  [
+            {
+            "tags": {"desc_type" : "paragraph"},
+            "content": "This warband may alter the weaponry and equipment of their Anchorites as indicated below. Anchorites of St. Methodius have +0 DICE to their Ranged Characteristic.",
+            "glossary": [
+                {"val": "+0 DICE", "id": "kw_plusdice"}
+            ]
+            },
+            {
+            "tags": {"desc_type" : "paragraph"},
+            "content": "Due to its construction and immense size, any Anchorite of this warband may use any one of these weapons as a single-handed weapon. The Anchorite may replace its Breaking Wheel with one of these weapons at the cost indicated below. You can change these weapons and equipment between battles, but you must sell the old weapon at half price before installing a new one. "
+            },
+            {
+            "tags": {"desc_type" : "paragraph"},
+            "content": "Each Shrine Anchorite of the War Pilgrimage of St. Methodius can equip up to two Anchorite-Only equipment pieces."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_mortalsin",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Mortal Sin",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "No Ecclesiastic Prisoner of the warband may be equipped with a Martyrdom Device and no member of the warband can be Broken on the Wheel."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_communicantheresy",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Communicant Heresy",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "The Pilgrims of St.Methodius oppose the creation of Communicants and therefore cannot include them in their warbands. This includes Mercenaries."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_treasureinheaven",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            "faction_remove_upgrades": {
+                "upgrades": ["rel_md_up_resurrection"]
+            } 
+        },
+        "name": "Treasure in Heaven",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "The Trench Pilgrims of this warband cannot be resurrected as Martyr-Penintents."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_chasteorder",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Chaste Order",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "While they revere the holy stigmata of the nuns of the order, the fathers of the monasteries shun the ecstatic revelry of many Trench Pilgrims and insist on modest dress. All Stigmatic Nuns of the warband must wear Standard Armour. In addition, the warband may only have a maximum of three Stigmatic Nuns."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_gunsmithmonks",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Gunsmith Monks",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "The warband can buy Machine Guns (LIMIT: 2) at a cost of 50 ducats each, an Automatic Rifle (LIMIT: 1) for 40 ducats and a Submachine Gun (LIMIT: 1) for 30 ducats.",
+            "glossary": [
+                {"val": "LIMIT", "id": "kw_limit"}
+            ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_followersofsaintmethodius",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Followers of St.Methodius",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "The Patron of the warband is always a Learned Saint."
+            }
+        ],
+        "options": []
     }
 ]

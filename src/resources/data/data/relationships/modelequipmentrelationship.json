@@ -228,6 +228,17 @@
         "removable": false
     },
     {
+        "id": "rel_md_eq_anchoriteshrine_saintmethodius",
+        "source": "core",
+        "tags": {},
+        "name": "Anchorite Shrine Equipment",
+        "contextdata": {},
+        "options": [],
+        "model_id": ["md_anchoriteshrine_saintmethodius"],
+        "mandatory_equipment": ["eq_combathelmet","eq_bonebreakermace"],
+        "removable": false
+    },
+    {
         "id": "rel_md_eq_combatmedic",
         "source": "core",
         "tags": {},
@@ -280,6 +291,17 @@
         "options": [],
         "model_id": ["md_observer"],
         "mandatory_equipment": ["eq_standardarmour","eq_gasmask","eq_combathelmet","eq_trenchpolearm","eq_medikit"],
+        "removable": false
+    },
+    {
+        "id": "rel_md_eq_stigmaticnun_saintmethodius",
+        "source": "core",
+        "tags": {},
+        "name": "Chaste Stigmatic Nun Equipment",
+        "contextdata": {},
+        "options": [],
+        "model_id": ["md_stigmaticnun_saintmethodius"],
+        "mandatory_equipment": ["eq_standardarmour"],
         "removable": false
     }
 ]
