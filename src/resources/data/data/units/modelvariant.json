@@ -453,6 +453,7 @@
         "team": "faithful",
         "cut_keywords" : [],
         "keywords" : [],
+        "stats" : {},
         "cut_abilities" : [],
         "new_abilities" : []
     },
@@ -467,6 +468,7 @@
         "team": "faithful",
         "cut_keywords" : [],
         "keywords" : [],
+        "stats" : {},
         "cut_abilities" : [],
         "new_abilities" : []
     }
