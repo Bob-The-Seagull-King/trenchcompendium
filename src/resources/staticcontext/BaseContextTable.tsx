@@ -22,6 +22,7 @@ import { WarbandProperty } from "../../classes/saveitems/Warband/WarbandProperty
 import { FactionModelRelationship } from "../../classes/relationship/faction/FactionModelRelationship";
 import RulesModelDisplayAbility from "../../display/components/rules-content/RulesModelDisplayAbility";
 import { Model } from "../../classes/feature/model/Model";
+import { Ability, IAbility } from "../../classes/feature/ability/Ability";
 
 export const BaseContextCallTable : CallEventTable = {
     option_search_viable: {
@@ -546,6 +547,47 @@ export const BaseContextCallTable : CallEventTable = {
         async getContextuallyAddedUpgrades(this: EventRunner, eventSource : any, relayVar : ModelUpgradeRelationship[], trackVal : Model, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
             return relayVar.filter(item => !(context_func["upgrades"].includes(item.ID)))
         }
+    },
+    add_to_model: {
+        event_priotity: 0,
+        async getContextuallyAddedAbilities(this: EventRunner, eventSource : any, relayVar : Ability[], trackVal : Model, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            
+            const { AbilityFactory } = await import("../../factories/features/AbilityFactory");
+
+            let ValidUpgrade = true;
+
+            if (context_func['removed'] ) {
+                for (let i = 0; i < context_func['removed'].length; i++) {
+                    const curFilter = context_func['removed'][i]
+                    if (curFilter["category"] == "id") {            
+                        if (curFilter["value"].includes(trackVal.ID)) {
+                            ValidUpgrade = false;
+                        }
+                    }
+                }
+            }
+
+            if (ValidUpgrade) {
+                const AbilityList = Requester.MakeRequest(
+                    {searchtype: "id", searchparam: {type: "glossary", id: context_func["id"]}}
+                ) as IAbility
+                relayVar.push(await AbilityFactory.CreateAbility(AbilityList, null))
+            }
+
+            return relayVar;
+        }
+
+    },
+    remove_from_model: {
+        event_priotity: 0,
+        async getContextuallyAddedAbilities(this: EventRunner, eventSource : any, relayVar : Ability[], trackVal : Model, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            if (context_func["id"].includes(trackVal.ID)) {
+                return relayVar.filter(item => !(context_func["abilities"].includes(item.ID)))
+            } else {
+                return relayVar;
+            }
+        }
+
     },
     faction_eq_restriction: {
         event_priotity: 0,        

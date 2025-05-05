@@ -419,7 +419,9 @@
         "source": "core",
         "tags": { },
         "contextdata": { 
-            "add_to_model": {}
+            "add_to_model": {
+                "id": "rl_marksmanshipoftheironwall"
+            }
         },
         "name": "Marksmanship of the Iron Wall",
         "description":  [
@@ -487,7 +489,9 @@
         "source": "core",
         "tags": { "bonus": true },
         "contextdata": { 
-            "add_to_model": {},
+            "add_to_model": {
+                "id": "rl_fastaslightning"
+            },
             "bonus_ability": {
                 "action_type": ["dash"]
             }
@@ -584,7 +588,9 @@
         "source": "core",
         "tags": { },
         "contextdata": { 
-            "add_to_model": {},
+            "add_to_model": {
+                "id": "rl_horror"
+            },
             "keyword_add": {"value": ["kw_strong"]}
         },
         "name": "Horror",
@@ -604,7 +610,9 @@
         "source": "core",
         "tags": { },
         "contextdata": { 
-            "add_to_model": {}
+            "add_to_model": {
+                "id": "rl_semicorporeal"
+            }
         },
         "name": "Semi-Corporeal",
         "description":  [
@@ -623,7 +631,9 @@
         "source": "core",
         "tags": { },
         "contextdata": { 
-            "add_to_model": {}
+            "add_to_model": {
+                "id": "rl_spectral"
+            }
         },
         "name": "Spectral",
         "description":  [
@@ -639,7 +649,9 @@
         "source": "core",
         "tags": { },
         "contextdata": { 
-            "add_to_model": {}
+            "add_to_model": {
+                "id": "rl_undead"
+            }
         },
         "name": "Undead",
         "description":  [
@@ -692,7 +704,9 @@
         "source": "core",
         "tags": { },
         "contextdata": { 
-            "add_to_model": {}
+            "add_to_model": {
+                "id": "rl_slow"
+            }
         },
         "name": "Slow",
         "description":  [
@@ -1019,7 +1033,8 @@
         "source": "core",
         "tags": { },
         "contextdata": { 
-            "add_to_model": {                               
+            "add_to_model": {   
+                "id": "rl_punishingmillstones",                            
                 "removed": [
                     {
                         "category": "id",

@@ -21,6 +21,7 @@ import SynodModelImage from "../../../utility/SynodModelImage";
 import SynodModelImageSource from "../../../utility/SynodModelImageSource";
 import { ModelUpgradeRelationship } from '../../../classes/relationship/model/ModelUpgradeRelationship';
 import { Faction } from '../../../classes/feature/faction/Faction';
+import { Ability } from '../../../classes/feature/ability/Ability';
 
 const RulesModelDisplay = (props: any) => {
     const factionmodelObject: FactionModelRelationship = props.data
@@ -29,6 +30,7 @@ const RulesModelDisplay = (props: any) => {
 
     const [statchoices, setstats] = useState({})
     const [upgrades, setupgrades] = useState<ModelUpgradeRelationship[]>([])
+    const [abilities, setabilities] = useState<Ability[]>([])
     const [BaseString, setBaseString] = useState('')
     const [minimum, setminimum] = useState("")
     const [maximum, setmaximum] = useState("")
@@ -41,13 +43,24 @@ const RulesModelDisplay = (props: any) => {
         async function SetModelOptions() {
             const EventProc: EventRunner = new EventRunner();
                             
+            /* UPGRADES */
             if (parentfaction != undefined) {
                 const result_upgrades = await factionmodelObject.getContextuallyAvailableUpgrades(parentfaction);
                 setupgrades(result_upgrades);
             } else {
                 setupgrades(modelcollectionObject.UpgradeList)
             }
-                            
+
+            /* ABILITIES */
+            if (parentfaction != undefined) {
+                const result_abilities = await factionmodelObject.getContextuallyAvailableAbilities(parentfaction);
+                setabilities(result_abilities);
+            } else {
+                setabilities(modelcollectionObject.Abilities)
+            }
+
+
+            /* MODEL MIN/MAX */                
             const result_max = await EventProc.runEvent(
                 "getModelLimitPresentation",
                 factionmodelObject,
@@ -65,9 +78,8 @@ const RulesModelDisplay = (props: any) => {
                 false
             );
             setminimum(result_min.join(", "));
-            /**
-             * MODEL STAT CHOICES
-             */
+
+            /* MODEL STAT CHOICES */
             const result = await modelcollectionObject.GetPresentableStatistics()
             setstats(result);
 
@@ -255,13 +267,13 @@ const RulesModelDisplay = (props: any) => {
 
                 <div className={'fighter-card-collapse-wrap'} key={_keyvar}>
                     {/* Abilities */}
-                    {factionmodelObject.hasAbilities() &&
+                    {abilities.length > 0 &&
                         <RulesModelDisplayCollapse
                             name={"Abilities"}
                             state={false}
                             has_children={factionmodelObject.hasAbilities()}
                             method={() => <>
-                                {modelcollectionObject.Abilities.map((item) => (
+                                {abilities.map((item) => (
                                     <React.Fragment
                                         key={"model_ability_" + modelcollectionObject.ID + "_ability_id_" + item.ID}>
                                         <RulesModelDisplayAbility data={item}/>

@@ -9,6 +9,7 @@ import { LocationRestriction } from "../../classes/feature/exploration/Explorati
 import { WarbandProperty } from "../../classes/saveitems/Warband/WarbandProperty";
 import { FactionModelRelationship } from "../../classes/relationship/faction/FactionModelRelationship";
 import { Model } from "../../classes/feature/model/Model";
+import { Ability } from "../../classes/feature/ability/Ability";
 
 /**
  * Events that can be called by the runEvent method,
@@ -28,6 +29,7 @@ export interface CallEvents {
     countAsFactionForPatrons? : (this: EventRunner, eventSource : any, relayVar : string, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<string>; 
     getModelStatOptions? : (this: EventRunner, eventSource : any, relayVar : ModelStatistics[][], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => ModelStatistics[][]; 
     getContextuallyAddedUpgrades? : (this: EventRunner, eventSource : any, relayVar : ModelUpgradeRelationship[], trackVal : Model, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<ModelUpgradeRelationship[]>; 
+    getContextuallyAddedAbilities? : (this: EventRunner, eventSource : any, relayVar : Ability[], trackVal : Model, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<Ability[]>; 
     getWarbandLevelFactionRules? : (this: EventRunner, eventSource : any, relayVar : WarbandProperty[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<WarbandProperty[]>; 
     getModelStats? : (this: EventRunner, eventSource : any, relayVar : ModelStatistics, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => ModelStatistics; 
     getModelLimitPresentation? : (this: EventRunner, eventSource : any, relayVar : string[], trackVal : boolean, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<string[]>; 

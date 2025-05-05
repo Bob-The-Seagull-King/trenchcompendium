@@ -12,6 +12,7 @@ import {getCostType} from "../../../utility/functions";
 import {GetPresentationStatistic, PresentModelStatistics} from "../../feature/model/ModelStats";
 import { ModelUpgradeRelationship } from '../model/ModelUpgradeRelationship';
 import { EventRunner } from '../../contextevent/contexteventhandler';
+import { Ability } from '../../feature/ability/Ability';
 
 interface IFactionModelRelationship extends IStaticOptionContextObject {
     faction_id : string[],
@@ -183,6 +184,31 @@ class FactionModelRelationship extends StaticOptionContextObject {
         }
 
         return UpgradesListAvailable;
+    }
+
+    public async getContextuallyAvailableAbilities(faction : Faction) : Promise<Ability[]> {
+        const AbilitiesAvailable : Ability[] = []
+        const BaseList : Ability[] = []
+        
+        for (let i = 0; i < this.Model.Abilities.length; i++) {
+            BaseList.push(this.Model.Abilities[i]);
+        }
+
+        if (this.Mercenary != true) {
+            const Events : EventRunner = new EventRunner();
+            const result = await Events.runEvent(
+                "getContextuallyAddedAbilities",
+                faction,
+                [],
+                BaseList,
+                this.Model
+            )
+            for (let i = 0; i < result.length; i++) {
+                AbilitiesAvailable.push(result[i]);
+            }
+        }
+
+        return AbilitiesAvailable;
     }
 
     /**
