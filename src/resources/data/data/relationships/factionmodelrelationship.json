@@ -894,23 +894,6 @@
         "warband_maximum" : 0
     },
     {
-        "id": "rel_fc_md_trenchpilgrim_sacredaffliction",
-        "source": "core",
-        "tags": {},
-        "name": "",
-        "contextdata": {"option_search_viable": {}},
-        "options": [],
-        "faction_id" : ["fc_trenchpilgrim_fv_processionofthesacredaffliction"],
-        "model_id" : "md_trenchpilgrim_sacredaffliction",
-        "captain" : false,
-        "mercenary": false,
-        "cost" : 30,
-        "cost_type" : 0,
-        "restricted_models" : [],
-        "warband_minimum" : 0,
-        "warband_maximum" : 0
-    }   ,
-    {
         "id": "rel_fc_md_ecclesiasticprisoner",
         "source": "core",
         "tags": {},

@@ -1059,7 +1059,15 @@
         "id": "rl_zealotstrength",
         "source": "core",
         "tags": { },
-        "contextdata": {  },
+        "contextdata": {             
+            "faction_add_upgrades": {
+                "model_key": "rl_zealotstrength",                
+                "models_id": ["md_trenchpilgrim"]
+            },
+            "faction_remove_upgrades": {
+                "upgrades": ["rel_md_up_zealotstrength_pilgrimbase"]
+            }
+         },
         "name": "Zealot Strength",
         "description":  [
             {
@@ -1094,7 +1102,7 @@
         "contextdata": { 
             "faction_add_upgrades": {
                 "model_key": "rl_wrathofgod",                
-                "models_id": ["md_trenchpilgrim_sacredaffliction","md_castigator"]
+                "models_id": ["md_trenchpilgrim","md_castigator"]
             }
         },
         "name": "Wrath of God",

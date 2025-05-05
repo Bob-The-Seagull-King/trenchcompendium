@@ -162,9 +162,10 @@ class FactionModelRelationship extends StaticOptionContextObject {
     
     public async getContextuallyAvailableUpgrades(faction : Faction) : Promise<ModelUpgradeRelationship[]> {
         const UpgradesListAvailable : ModelUpgradeRelationship[] = []
+        const BaseList : ModelUpgradeRelationship[] = []
         
         for (let i = 0; i < this.Model.UpgradeList.length; i++) {
-            UpgradesListAvailable.push(this.Model.UpgradeList[i]);
+            BaseList.push(this.Model.UpgradeList[i]);
         }
 
         if (this.Mercenary != true) {
@@ -173,7 +174,7 @@ class FactionModelRelationship extends StaticOptionContextObject {
                 "getContextuallyAddedUpgrades",
                 faction,
                 [],
-                [],
+                BaseList,
                 this.Model
             )
             for (let i = 0; i < result.length; i++) {

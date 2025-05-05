@@ -464,9 +464,6 @@ export const BaseContextCallTable : CallEventTable = {
                 }
             ) as IModelUpgradeRelationship[]
             
-            console.log(context_func)
-            console.log(UpgradeList);
-            
             for (let i = 0; i < UpgradeList.length; i++) {
                 UpgradeList[i].model_id_set = context_func["models_id"]
                 relayVar.push(await UpgradeFactory.CreateModelUpgrade(UpgradeList[i], null))
@@ -501,7 +498,6 @@ export const BaseContextCallTable : CallEventTable = {
                                 break;
                             }
                         } else {
-                            console.log(trackVal.getKeywordIDs().includes(curFilter["value"]))
                             if (trackVal.getKeywordIDs().includes(curFilter["value"])) {
                                 ValidUpgrade = false;
                                 break;
@@ -514,7 +510,6 @@ export const BaseContextCallTable : CallEventTable = {
             }
 
             if (ValidUpgrade) {
-                console.log(context_func["model_key"])
                 const UpgradeList = Requester.MakeRequest(
                     {
                         searchtype: "complex", 
@@ -535,8 +530,6 @@ export const BaseContextCallTable : CallEventTable = {
                         }
                     }
                 ) as IModelUpgradeRelationship[]
-                
-                console.log(UpgradeList);
 
                 for (let i = 0; i < UpgradeList.length; i++) {
                     UpgradeList[i].model_id_set = context_func["models_id"]
@@ -546,6 +539,12 @@ export const BaseContextCallTable : CallEventTable = {
             }
 
             return relayVar;
+        }
+    },
+    faction_remove_upgrades : {
+        event_priotity: 1,
+        async getContextuallyAddedUpgrades(this: EventRunner, eventSource : any, relayVar : ModelUpgradeRelationship[], trackVal : Model, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            return relayVar.filter(item => !(context_func["upgrades"].includes(item.ID)))
         }
     },
     faction_eq_restriction: {

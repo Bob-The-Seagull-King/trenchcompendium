@@ -456,20 +456,5 @@
         "stats" : {},
         "cut_abilities" : [],
         "new_abilities" : []
-    },
-    {
-        "id": "md_trenchpilgrim_sacredaffliction",
-        "name": "Trench Pilgrim (Sacred Affliction)",
-        "source": "core",
-        "tags": {},
-        "contextdata": {},
-        "base_id": "md_trenchpilgrim",
-        "variant_name": "Procession_of_the_Sacred_Affliction",
-        "team": "faithful",
-        "cut_keywords" : [],
-        "keywords" : [],
-        "stats" : {},
-        "cut_abilities" : [],
-        "new_abilities" : []
     }
 ]
