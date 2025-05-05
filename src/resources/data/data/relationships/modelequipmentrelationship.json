@@ -204,5 +204,27 @@
         "model_id": ["md_communicant"],
         "mandatory_equipment": ["eq_communicantcross"],
         "removable": false
+    },
+    {
+        "id": "rel_md_eq_ecclesiasticprisoner",
+        "source": "core",
+        "tags": {},
+        "name": "Ecclesiastic Prisoner Equipment",
+        "contextdata": {},
+        "options": [],
+        "model_id": ["md_ecclesiasticprisoner"],
+        "mandatory_equipment": ["eq_ironcapriote"],
+        "removable": false
+    },
+    {
+        "id": "rel_md_eq_anchoriteshrine",
+        "source": "core",
+        "tags": {},
+        "name": "Anchorite Shrine Equipment",
+        "contextdata": {},
+        "options": [],
+        "model_id": ["md_anchoriteshrine"],
+        "mandatory_equipment": ["eq_combathelmet","eq_catherinewheel","eq_bonebreakermace"],
+        "removable": false
     }
 ]

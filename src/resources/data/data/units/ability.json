@@ -989,5 +989,112 @@
             }
         ],
         "options": []
+    },
+    {
+        "id": "ab_awaited",
+        "name": "Awaited",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {},
+        "description": [           
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "If the Ecclesiastic Prisoner is taken Out of Action by its Martyrdom Device, it does not count as being Out of Action for any rules related to Morale."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_maddash",
+        "name": "Mad Dash",
+        "source": "core",
+        "tags": {"trait": true, "bonus": true},
+        "contextdata": {
+            "bonus_ability": {
+                "action_type": ["dash"]
+            }},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Ecclesiastic Prisoner can add +1 DICE to their Dash ACTION.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "ACTION", "id": "kw_action"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_agile",
+        "name": "Agile",
+        "source": "core",
+        "tags": {"trait": true, "bonus": true},
+        "contextdata": {
+            "bonus_ability": {
+                "action_type": ["dash"]
+            }},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Stigmatic Nuns may take any Dash ACTION or jump/climb/Diving Charge ACTION with +1 DICE.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "ACTION", "id": "kw_action"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_blessedstigmata",
+        "name": "Blessed Stigmata",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": { },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "At the start of each of their Activations, any Stigmatic Nun can remove one BLOOD MARKER (but not an INFECTION MARKER) from themselves and convert it into a BLESSING MARKER.",
+                "glossary": [
+                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"},
+                    {"val": "INFECTION MARKER", "id": "kw_infectionmarker"},
+                    {"val": "BLESSING MARKER", "id": "kw_blessingmarker"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_brokenonthewheel",
+        "name": "Broken on the Wheel",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": { },
+        "description": [            
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Before the start of the battle, one Trench Pilgrim or Ecclesiastic Prisoner may voluntarily be broken on the wheel to show their piety and devotion (permanently remove all weapons, armour and equipment from the victim and use/store them as you wish). The Anchorite will then shatter the bones of the volunteer and carry the broken victim to the battle on its Wheel. "
+            },       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "As long as the volunteer is not taken Out of Action, any Attacks against the Anchorite are redirected to the volunteer. The volunteer cannot be independently targeted by any abilities or attacks (including BLAST weapons). For all rules purposes and attack effects (such as forced movement), the two models are treated as a single model, including sharing BLOOD, INFECTION and BLESSING MARKERS. Treat Down results against the volunteer as a Minor Hit.",
+                "glossary": [
+                    {"val": "BLOOD", "id": "kw_bloodmarker"},
+                    {"val": "INFECTION", "id": "kw_infectionmarker"},
+                    {"val": "BLESSING", "id": "kw_blessingmarker"},
+                    {"val": "BLAST", "id": "kw_blast"},
+                    {"val": "Down", "id": "gl_down"}
+                ]
+            },       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The volunteer cannot take any ACTIONS, be Activated separately or move – for obvious reasons. At the end of the battle, even if the volunteer may have survived, the model dies and is removed from your warband.",
+                "glossary": [
+                    {"val": "ACTIONS", "id": "kw_action"}
+                ]
+            }
+        ],
+        "options": []
     }
 ]

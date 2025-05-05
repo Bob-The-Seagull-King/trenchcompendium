@@ -1918,5 +1918,26 @@
         "cost": 2,
         "costtype": 1,
         "limit": 1
+    },
+    {
+        "id": "rel_fc_eq_martyrdomdevice",
+        "source": "core",
+        "tags": {},
+        "name": "Martyrdom Device",
+        "contextdata": {            
+            "faction_eq_restriction": {
+                "permitted": [
+                    {
+                        "res_type": "id",
+                        "value": "md_ecclesiasticprisoner"
+                    }
+                ]
+            }
+        },
+        "faction_id": ["fc_trenchpilgrim"],
+        "equipment_id": "eq_martyrdomdevice",
+        "cost": 35,
+        "costtype": 0,
+        "limit": 4
     }
 ]

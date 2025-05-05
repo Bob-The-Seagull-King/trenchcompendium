@@ -1144,5 +1144,224 @@
         },
         "keywords" : ["kw_pilgrim","kw_elite","kw_strong","kw_tough"],
         "abilities" : ["ab_miracleofregeneration","ab_bodyguard_pilgrim"]
+    },
+    {
+        "id": "md_trenchpilgrim",
+        "name": "Trench Pilgrim",
+        "source": "core",
+        "tags": {},
+        "contextdata": {},
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Trench Pilgrim can be equipped with any weapon, armour and equipment from the Trench Pilgrim Equipment List.",
+                "glossary": [{"val": "Trench Pilgrims", "id": "kw_pilgrim"}]
+            }
+        ],
+        "lore": [      
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "A holy warrior of the trenches. Considers it his religious duty to make pilgrimage to the sacred battlefields to fight the heretic legions. Pilgrims wear the iron capirote to insulate their minds from the horrors of war."
+            }
+        ],
+        "team": "faithful",
+        "stats" : {            
+            "movement": 6,
+            "melee": 0,
+            "ranged": 0,
+            "base": [25],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 0
+        },
+        "keywords" : ["kw_pilgrim"],
+        "abilities" : []
+    },
+    {
+        "id": "md_ecclesiasticprisoner",
+        "name": "Ecclesiastic Prisoner",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "unarmed_penalty_remove": {},
+            
+            "model_equipment_restriction": {
+                "removed": [
+                    {
+                        "category": "equipment",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "melee",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "ranged",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "armour",
+                        "res_type": "all",
+                        "value": ""
+                    }
+                ]
+            }
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Ecclesiastic Prisoners are equipped with Iron Capirotes and this equipment cannot be removed, except by being Broken on the Wheel. Prisoners fight unarmed in melee, flailing feebly with their manacled arms. The -1D penalty to melee combat is already included in the profile above. Ecclesiastic Prisoners cannot be equipped with any weapons, armour or equipment from the Trench Pilgrims Armoury. They may be equipped with Martyrdom Devices for 35 ducats.",
+                "glossary": [
+                    {"val": "Trench Pilgrims", "id": "kw_pilgrim"},
+                    {"val": "-1D", "id": "kw_minusdice"}
+                ]
+            }
+        ],
+        "lore": [      
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Bound in chains, their minds consumed by a desperate resolve, Prisoners surge forward, driven by the hope that their sacrificial charge will somehow cleanse their tarnished souls."
+            }
+        ],
+        "team": "faithful",
+        "stats" : {            
+            "movement": 6,
+            "melee": -1,
+            "base": [25],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 2
+        },
+        "keywords" : ["kw_pilgrim"],
+        "abilities" : ["ab_awaited","ab_maddash"]
+    },
+    {
+        "id": "md_stigmaticnun",
+        "name": "Stigmatic Nun",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            
+            "model_equipment_restriction": {
+                "required": [
+                    {
+                        "category": "ranged",
+                        "res_type": "id",
+                        "value": "eq_pistolrevolver"
+                    },
+                    {
+                        "category": "ranged",
+                        "res_type": "id",
+                        "value": "eq_automaticpistol"
+                    },
+                    {
+                        "category": "ranged",
+                        "res_type": "id",
+                        "value": "eq_warcross"
+                    }
+                ]
+            }
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Stigmatic Nuns can be equipped with any melee weapons, armour or equipment from the Trench Pilgrim Armoury. The only ranged weapons that Nuns can be equipped with are pistols, automatic pistols and warcrosses.",
+                "glossary": [{"val": "Trench Pilgrims", "id": "kw_pilgrim"}]
+            }
+        ],
+        "lore": [      
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "Blessed with stigmata and unshakeable faith, these swordmaster nuns are the vanguard of any assault by the holy armies."
+                    }
+                ]
+            },    
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "“From henceforth let no man trouble me: for I bear in my body the marks of our Lord and Saviour.” - Galatians 6:17"
+                    }
+                ]
+            }
+        ],
+        "team": "faithful",
+        "stats" : {            
+            "movement": 8,
+            "melee": 1,
+            "ranged": 1,
+            "base": [25],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 0
+        },
+        "keywords" : ["kw_pilgrim"],
+        "abilities" : ["ab_agile","ab_blessedstigmata"]
+    },
+    {
+        "id": "md_anchoriteshrine",
+        "name": "Anchorite Shrine",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            
+            "model_equipment_restriction": {
+                "removed": [
+                    {
+                        "category": "equipment",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "melee",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "ranged",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "armour",
+                        "res_type": "all",
+                        "value": ""
+                    }
+                ]
+            }
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You cannot buy additional equipment, weapons or armour for Shrine Anchorites. Each Anchorite is equipped with a special suit of armour (reflected in the profile), a Combat Helmet, a Catherine Wheel and a Bonebreaker Mace. These pieces of equipment are built into the integrity of its construction and cannot be removed or lost in any way. The weapons are detailed below. The Anchorite may make one attack ACTION with each of these weapons in Melee Combat and may make no other attacks during its Activation (so it can make two attacks per Activation).",
+                "glossary": [{"val": "ACTION", "id": "kw_action"}]
+            }
+        ],
+        "lore": [      
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "A colossal suit of machine armour fuelled by diesel and faith, the Shrine Anchorite stands as a grim symbol of humanity’s despair. Within its spiked, blood-stained interior, the pilot-monk endures a terrible form of penance, his anguished prayers and chants echoing across the battlefield. This grotesque amalgamation of suffering and devotion instils fear in the heart of the heretic, as the anchorite, a malevolent weapon draped in holy iconography and weeping gore, emerges to unleash a symphony of slaughter, where the wretched union of man and machine heralds the demise of all who oppose the Almighty"
+            }
+        ],
+        "team": "faithful",
+        "stats" : {            
+            "movement": 6,
+            "melee": 2,
+            "base": [60],
+            "armour": -3,
+            "movetype": 0,
+            "potential": 2
+        },
+        "keywords" : ["kw_pilgrim","kw_fear","kw_tough","kw_strong"],
+        "abilities" : ["ab_brokenonthewheel"]
     }
 ]

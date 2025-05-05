@@ -557,5 +557,37 @@
         ],
         "warband_limit": 0,
         "required_upgrades":[]
+    },
+    {
+        "id": "rel_md_up_resurrection",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {},
+        "options": [],
+        "model_id_set": ["md_trenchpilgrim"],
+        "upgrade_id": "up_resurrection",
+        "cost": 45,
+        "cost_type": 0,
+        "restricted_upgrades": [
+        ],
+        "warband_limit": 0,
+        "required_upgrades":[]
+    },
+    {
+        "id": "rel_md_up_zealotstrength_pilgrimbase",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {},
+        "options": [],
+        "model_id_set": ["md_trenchpilgrim"],
+        "upgrade_id": "up_zealotstrength",
+        "cost": 5,
+        "cost_type": 0,
+        "restricted_upgrades": [
+        ],
+        "warband_limit": 1,
+        "required_upgrades":[]
     }
 ]

@@ -778,5 +778,30 @@
             }
         ],
         "options": []
+    },
+    {
+        "id": "up_resurrection",
+        "name": "Martyr Penitent Ressurection",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {
+            "upgrade_stat": { "upgrades": [{"stat": "melee", "value": 1}]},
+            "on_pick": {
+                "reset_scar": {},
+                "reset_skill": {}
+            }
+        },
+        "description": [           
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "When a Trench Pilgrim dies, you may elect to re-buy them after the battle as a Martyr-Penitent resurrected by a Meta-Christ for a cost of 45 ducats. When hit, any attacks against a Martyr-Penitent add -1 DICE when rolling on the Injury Table. Their Melee bonus is increased to +1 DICE (reflected on the profile above). Martyr-Penitents retain any possessions they had before dying and being resurrected, but lose any Scars and advancements they had if they were ELITE via Campaign promotion.",
+                "glossary": [
+                    {"val": "-1 DICE", "id": "kw_minusdice"},
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "ELITE", "id": "kw_elite"}
+                ]
+            }
+        ],
+        "options": []
     }
 ]
