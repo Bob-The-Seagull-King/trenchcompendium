@@ -980,5 +980,130 @@
         }
         ],
         "options": []
+    },
+    {
+        "id": "rl_facethyfears",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Face Thy Fears",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "No model in the Procession of the Sacred Affliction can wear Iron Capirotes. Those troops with Capirotes in their base profile will not have them, though their cost remains the same."
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_reliquaryarmoury",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Reliquary Armoury",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "All models of this warband (save for the Anchorite) can buy Holy Icon Shields for 20 ducats, not just ELITE models. In addition, warband models with the ELITE Keyword may acquire Holy Icon Armour (see below).",
+            "glossary": [
+                {"val": "ELITE", "id": "kw_elite"}
+            ]
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_punishingmillstones",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            "add_to_model": {                               
+                "removed": [
+                    {
+                        "category": "id",
+                        "value": "md_ecclesiasticprisoner_sacredaffliction"
+                    }
+                ]
+            }
+        },
+        "name": "Punishing Millstones",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "All models in the Procession of the Sacred Affliction (except Ecclesiastic Prisoners who are not worthy) add extra +1 DICE to injury rolls in melee against models that are Down.",
+            "glossary": [
+                {"val": "+1 DICE", "id": "kw_plusdice"},
+                {"val": "Down", "id": "gl_down"}
+            ]
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_meleefocused",
+        "source": "core",
+        "tags": { },
+        "contextdata": {  },
+        "name": "Melee-Focused",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "This warband may not have any Machine Guns and only one Punt Gun."
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_zealotstrength",
+        "source": "core",
+        "tags": { },
+        "contextdata": {  },
+        "name": "Zealot Strength",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Up to three Trench Pilgrims may purchase the Zealot Strength upgrade."
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_hammerandanvil",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Hammer and Anvil",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "The Anti-tank Hammers of this warband are not limited to ELITE.",
+            "glossary": [
+                {"val": "ELITE", "id": "kw_elite"}
+            ]
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_wrathofgod",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            "faction_add_upgrades": {
+                "model_key": "rl_wrathofgod",                
+                "models_id": ["md_trenchpilgrim_sacredaffliction","md_castigator"]
+            }
+        },
+        "name": "Wrath of God",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "One Trench Pilgrim or Castigator in this warband can be gripped by the vengeful fury of the Lord for +15 ducats."
+            }
+        ],
+        "options": []
     }
 ]

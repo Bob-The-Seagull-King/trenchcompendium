@@ -29,7 +29,7 @@
         "tags": {},
         "name": "Musket",
         "contextdata": {},
-        "faction_id": ["fc_trenchpilgrim","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_trenchpilgrim","fc_trenchpilgrim_fv_processionofthesacredaffliction","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_musket",
         "cost": 5,
         "costtype": 0,
@@ -41,7 +41,7 @@
         "tags": {},
         "name": "Pistol",
         "contextdata": {},
-        "faction_id": ["fc_trenchpilgrim","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_trenchpilgrim","fc_trenchpilgrim_fv_processionofthesacredaffliction","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_pistolrevolver",
         "cost": 6,
         "costtype": 0,
@@ -112,7 +112,7 @@
         "name": "Sniper Rifle",
         "contextdata": {       
         },
-        "faction_id": ["fc_trenchpilgrim"],
+        "faction_id": ["fc_trenchpilgrim","fc_trenchpilgrim_fv_processionofthesacredaffliction"],
         "equipment_id": "eq_sniperrifle",
         "cost": 2,
         "costtype": 1,
@@ -198,7 +198,7 @@
         "name": "Flamethrower",
         "contextdata": {  
         },
-        "faction_id": ["fc_trenchpilgrim"],
+        "faction_id": ["fc_trenchpilgrim","fc_trenchpilgrim_fv_processionofthesacredaffliction"],
         "equipment_id": "eq_flamethrower",
         "cost": 30,
         "costtype": 0,
@@ -253,7 +253,7 @@
         "name": "Knife",
         "contextdata": {    
         },
-        "faction_id": ["fc_trenchpilgrim","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_trenchpilgrim","fc_trenchpilgrim_fv_processionofthesacredaffliction","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_knifedagger",
         "cost": 1,
         "costtype": 0,
@@ -266,7 +266,7 @@
         "name": "Bayonet",
         "contextdata": {    
         },
-        "faction_id": ["fc_trenchpilgrim","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_trenchpilgrim","fc_trenchpilgrim_fv_processionofthesacredaffliction","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_bayonet",
         "cost": 2,
         "costtype": 0,
@@ -279,7 +279,7 @@
         "name": "Trench Club",
         "contextdata": {    
         },
-        "faction_id": ["fc_trenchpilgrim","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_trenchpilgrim","fc_trenchpilgrim_fv_processionofthesacredaffliction","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_trenchclub",
         "cost": 3,
         "costtype": 0,
@@ -292,7 +292,7 @@
         "name": "Sword/Axe",
         "contextdata": {    
         },
-        "faction_id": ["fc_trenchpilgrim","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_trenchpilgrim","fc_trenchpilgrim_fv_processionofthesacredaffliction","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_swordaxe",
         "cost": 4,
         "costtype": 0,
@@ -305,7 +305,7 @@
         "name": "Polearm",
         "contextdata": {    
         },
-        "faction_id": ["fc_trenchpilgrim","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_trenchpilgrim","fc_trenchpilgrim_fv_processionofthesacredaffliction","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_trenchpolearm",
         "cost": 7,
         "costtype": 0,
@@ -318,7 +318,7 @@
         "name": "Great-Hammer/Maul",
         "contextdata": {    
         },
-        "faction_id": ["fc_trenchpilgrim","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_trenchpilgrim","fc_trenchpilgrim_fv_processionofthesacredaffliction","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_doublehandedbluntweapon",
         "cost": 10,
         "costtype": 0,
@@ -331,7 +331,7 @@
         "name": "Great-Sword/Axe",
         "contextdata": {    
         },
-        "faction_id": ["fc_trenchpilgrim","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_trenchpilgrim","fc_trenchpilgrim_fv_processionofthesacredaffliction","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_greatswordaxe",
         "cost": 12,
         "costtype": 0,
@@ -407,7 +407,7 @@
         "name": "Standard Armour",
         "contextdata": {    
         },
-        "faction_id": ["fc_trenchpilgrim","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_trenchpilgrim","fc_trenchpilgrim_fv_processionofthesacredaffliction","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_standardarmour",
         "cost": 15,
         "costtype": 0,
@@ -466,7 +466,7 @@
         "name": "Trench Shield",
         "contextdata": {   
         },
-        "faction_id": ["fc_trenchpilgrim","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_trenchpilgrim","fc_trenchpilgrim_fv_processionofthesacredaffliction","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_trenchshield",
         "cost": 10,
         "costtype": 0,
@@ -492,7 +492,7 @@
         "name": "Gas Mask",
         "contextdata": {   
         },
-        "faction_id": ["fc_trenchpilgrim","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_trenchpilgrim","fc_trenchpilgrim_fv_processionofthesacredaffliction","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_gasmask",
         "cost": 5,
         "costtype": 0,
@@ -552,7 +552,7 @@
         "name": "Mountaineer Kit",
         "contextdata": {       
         },
-        "faction_id": ["fc_trenchpilgrim"],
+        "faction_id": ["fc_trenchpilgrim","fc_trenchpilgrim_fv_processionofthesacredaffliction"],
         "equipment_id": "eq_mountaineerkit",
         "cost": 3,
         "costtype": 0,
@@ -565,7 +565,7 @@
         "name": "Medi-Kit",
         "contextdata": {       
         },
-        "faction_id": ["fc_trenchpilgrim","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_trenchpilgrim","fc_trenchpilgrim_fv_processionofthesacredaffliction","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_medikit",
         "cost": 5,
         "costtype": 0,
@@ -619,7 +619,7 @@
                 ]
             }        
         },
-        "faction_id": ["fc_trenchpilgrim","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_trenchpilgrim","fc_trenchpilgrim_fv_processionofthesacredaffliction","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_musicalinstrument",
         "cost": 15,
         "costtype": 0,
@@ -666,7 +666,7 @@
         "name": "Troop Flag",
         "contextdata": {        
         },
-        "faction_id": ["fc_trenchpilgrim","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_trenchpilgrim","fc_trenchpilgrim_fv_processionofthesacredaffliction","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_troopflag",
         "cost": 1,
         "costtype": 1,
@@ -708,7 +708,7 @@
                 ]
             }      
         },
-        "faction_id": ["fc_trenchpilgrim","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_trenchpilgrim","fc_trenchpilgrim_fv_processionofthesacredaffliction","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_holyrelic",
         "cost": 2,
         "costtype": 1,
@@ -839,7 +839,7 @@
         "name": "Rocket-Propelled Grenade",
         "contextdata": {     
         },
-        "faction_id": ["fc_trenchpilgrim","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty"],
+        "faction_id": ["fc_trenchpilgrim","fc_trenchpilgrim_fv_processionofthesacredaffliction","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty"],
         "equipment_id": "eq_rocketpropelledgrenade",
         "cost": 2,
         "costtype": 1,
@@ -1002,7 +1002,7 @@
         "name": "Molotov Cocktail",
         "contextdata": {  
         },
-        "faction_id": ["fc_trenchpilgrim"],
+        "faction_id": ["fc_trenchpilgrim","fc_trenchpilgrim_fv_processionofthesacredaffliction"],
         "equipment_id": "eq_molotovcocktail",
         "cost": 5,
         "costtype": 0,
@@ -1130,7 +1130,7 @@
         "tags": {},
         "name": "Bolt-Action Rifle",
         "contextdata": {},
-        "faction_id": ["fc_trenchpilgrim","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty"],
+        "faction_id": ["fc_trenchpilgrim","fc_trenchpilgrim_fv_processionofthesacredaffliction","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty"],
         "equipment_id": "eq_boltactionrifle",
         "cost": 10,
         "costtype": 0,
@@ -1142,7 +1142,7 @@
         "tags": {},
         "name": "Semi-Automatic Rifle",
         "contextdata": {},
-        "faction_id": ["fc_trenchpilgrim","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty"],
+        "faction_id": ["fc_trenchpilgrim","fc_trenchpilgrim_fv_processionofthesacredaffliction","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty"],
         "equipment_id": "eq_semiautomaticrifle",
         "cost": 15,
         "costtype": 0,
@@ -1154,7 +1154,7 @@
         "tags": {},
         "name": "Automatic Pistol",
         "contextdata": {},
-        "faction_id": ["fc_trenchpilgrim"],
+        "faction_id": ["fc_trenchpilgrim","fc_trenchpilgrim_fv_processionofthesacredaffliction"],
         "equipment_id": "eq_automaticpistol",
         "cost": 20,
         "costtype": 0,
@@ -1210,7 +1210,7 @@
         "tags": {},
         "name": "Indenciary Grenades",
         "contextdata": {},
-        "faction_id": ["fc_trenchpilgrim","fc_hereticlegion","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty"],
+        "faction_id": ["fc_trenchpilgrim","fc_trenchpilgrim_fv_processionofthesacredaffliction","fc_hereticlegion","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty"],
         "equipment_id": "eq_incendiarygrenades",
         "cost": 15,
         "costtype": 0,
@@ -1222,7 +1222,7 @@
         "tags": {},
         "name": "Submachine Gun",
         "contextdata": {},
-        "faction_id": ["fc_trenchpilgrim","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts"],
+        "faction_id": ["fc_trenchpilgrim","fc_trenchpilgrim_fv_processionofthesacredaffliction","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts"],
         "equipment_id": "eq_submachinegun",
         "cost": 2,
         "costtype": 1,
@@ -1400,7 +1400,7 @@
                 ]
             }
         },
-        "faction_id": ["fc_trenchpilgrim"],
+        "faction_id": ["fc_trenchpilgrim","fc_trenchpilgrim_fv_processionofthesacredaffliction"],
         "equipment_id": "eq_reinforcedarmour",
         "cost": 40,
         "costtype": 0,
@@ -1460,7 +1460,7 @@
         "name": "Incendiary Ammunition",
         "contextdata": {         
         },
-        "faction_id": ["fc_trenchpilgrim","fc_hereticlegion","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty"],
+        "faction_id": ["fc_trenchpilgrim","fc_trenchpilgrim_fv_processionofthesacredaffliction","fc_hereticlegion","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty"],
         "equipment_id": "eq_incendiaryammunition",
         "cost": 15,
         "costtype": 0,
@@ -1685,7 +1685,7 @@
         "tags": {},
         "name": "War Cross",
         "contextdata": {},
-        "faction_id": ["fc_trenchpilgrim"],
+        "faction_id": ["fc_trenchpilgrim","fc_trenchpilgrim_fv_processionofthesacredaffliction"],
         "equipment_id": "eq_warcross",
         "cost": 5,
         "costtype": 0,
@@ -1704,12 +1704,24 @@
         "limit": 2
     },
     {
+        "id": "rel_fc_eq_puntgun_sacredaffliction",
+        "source": "core",
+        "tags": {},
+        "name": "Punt Gun",
+        "contextdata": {},
+        "faction_id": ["fc_trenchpilgrim_fv_processionofthesacredaffliction"],
+        "equipment_id": "eq_puntgun",
+        "cost": 20,
+        "costtype": 0,
+        "limit": 1
+    },
+    {
         "id": "rel_fc_eq_scourgewhipflail",
         "source": "core",
         "tags": {},
         "name": "Scourge / Whip / Flail",
         "contextdata": {},
-        "faction_id": ["fc_trenchpilgrim"],
+        "faction_id": ["fc_trenchpilgrim","fc_trenchpilgrim_fv_processionofthesacredaffliction"],
         "equipment_id": "eq_scourgewhipflail",
         "cost": 5,
         "costtype": 0,
@@ -1736,12 +1748,24 @@
         "limit": 3
     },
     {
+        "id": "rel_fc_eq_antitankhammer_sacredaffliction",
+        "source": "core",
+        "tags": {},
+        "name": "Anti-Tank Hammer",
+        "contextdata": {    },
+        "faction_id": ["fc_trenchpilgrim_fv_processionofthesacredaffliction"],
+        "equipment_id": "eq_antitankhammer",
+        "cost": 35,
+        "costtype": 0,
+        "limit": 3
+    },
+    {
         "id": "rel_fc_eq_misericordia",
         "source": "core",
         "tags": {},
         "name": "Misericordia",
         "contextdata": {    },
-        "faction_id": ["fc_trenchpilgrim"],
+        "faction_id": ["fc_trenchpilgrim","fc_trenchpilgrim_fv_processionofthesacredaffliction"],
         "equipment_id": "eq_misericordia",
         "cost": 15,
         "costtype": 0,
@@ -1768,12 +1792,44 @@
         "limit": 0
     },
     {
+        "id": "rel_fc_eq_holyiconshield_sacredaffliction",
+        "source": "core",
+        "tags": {},
+        "name": "Holy-Icon Shield",
+        "contextdata": {    },
+        "faction_id": ["fc_trenchpilgrim_fv_processionofthesacredaffliction"],
+        "equipment_id": "eq_holyiconshield",
+        "cost": 20,
+        "costtype": 0,
+        "limit": 0
+    },
+    {
+        "id": "rel_fc_eq_holyiconarmour_sacredaffliction",
+        "source": "core",
+        "tags": {},
+        "name": "Holy-Icon Armour",
+        "contextdata": { 
+            "faction_eq_restriction": {
+                "permitted": [
+                    {
+                        "res_type": "keyword",
+                        "value": "kw_elite"
+                    }
+                ]
+            }   },
+        "faction_id": ["fc_trenchpilgrim_fv_processionofthesacredaffliction"],
+        "equipment_id": "eq_holyiconarmour",
+        "cost": 30,
+        "costtype": 0,
+        "limit": 0
+    },
+    {
         "id": "rel_fc_eq_blessedicon",
         "source": "core",
         "tags": {},
         "name": "Blessed Icon",
         "contextdata": {   },
-        "faction_id": ["fc_trenchpilgrim"],
+        "faction_id": ["fc_trenchpilgrim","fc_trenchpilgrim_fv_processionofthesacredaffliction"],
         "equipment_id": "eq_blessedicon",
         "cost": 15,
         "costtype": 0,
@@ -1785,7 +1841,7 @@
         "tags": {},
         "name": "Field Shrine",
         "contextdata": {   },
-        "faction_id": ["fc_trenchpilgrim"],
+        "faction_id": ["fc_trenchpilgrim","fc_trenchpilgrim_fv_processionofthesacredaffliction"],
         "equipment_id": "eq_fieldshrine",
         "cost": 2,
         "costtype": 1,
@@ -1797,7 +1853,7 @@
         "tags": {},
         "name": "Martyrdom Pills",
         "contextdata": {   },
-        "faction_id": ["fc_trenchpilgrim"],
+        "faction_id": ["fc_trenchpilgrim","fc_trenchpilgrim_fv_processionofthesacredaffliction"],
         "equipment_id": "eq_martyrdompills",
         "cost": 20,
         "costtype": 0,
@@ -1809,7 +1865,7 @@
         "tags": {},
         "name": "Holy Grenade",
         "contextdata": {   },
-        "faction_id": ["fc_trenchpilgrim"],
+        "faction_id": ["fc_trenchpilgrim","fc_trenchpilgrim_fv_processionofthesacredaffliction"],
         "equipment_id": "eq_holygrenade",
         "cost": 2,
         "costtype": 1,
@@ -1830,7 +1886,7 @@
                     }
                 ]
             }},
-        "faction_id": ["fc_trenchpilgrim"],
+        "faction_id": ["fc_trenchpilgrim","fc_trenchpilgrim_fv_processionofthesacredaffliction"],
         "equipment_id": "eq_donkeysjawbone",
         "cost": 4,
         "costtype": 1,
@@ -1843,7 +1899,7 @@
             "exploration_only": true},
         "name": "Horn of Joshua",
         "contextdata": {    },
-        "faction_id": ["fc_trenchpilgrim"],
+        "faction_id": ["fc_trenchpilgrim","fc_trenchpilgrim_fv_processionofthesacredaffliction"],
         "equipment_id": "eq_hornofjoshua",
         "cost": 9,
         "costtype": 1,
@@ -1857,7 +1913,7 @@
         },
         "name": "Trench Dog",
         "contextdata": {},
-        "faction_id": ["fc_trenchpilgrim","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_trenchpilgrim","fc_trenchpilgrim_fv_processionofthesacredaffliction","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_trenchdog",
         "cost": 1,
         "costtype": 1,
@@ -1871,7 +1927,7 @@
         },
         "name": "Trench Dog (Guard Dog)",
         "contextdata": {},
-        "faction_id": ["fc_trenchpilgrim","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_trenchpilgrim","fc_trenchpilgrim_fv_processionofthesacredaffliction","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_trenchdog_guarddog",
         "cost": 2,
         "costtype": 1,
@@ -1899,7 +1955,7 @@
         },
         "name": "Trench Dog (Martyrdom Dog)",
         "contextdata": {},
-        "faction_id": ["fc_trenchpilgrim"],
+        "faction_id": ["fc_trenchpilgrim","fc_trenchpilgrim_fv_processionofthesacredaffliction"],
         "equipment_id": "eq_trenchdog_martyrdomdog",
         "cost": 2,
         "costtype": 1,
@@ -1934,7 +1990,7 @@
                 ]
             }
         },
-        "faction_id": ["fc_trenchpilgrim"],
+        "faction_id": ["fc_trenchpilgrim","fc_trenchpilgrim_fv_processionofthesacredaffliction"],
         "equipment_id": "eq_martyrdomdevice",
         "cost": 35,
         "costtype": 0,

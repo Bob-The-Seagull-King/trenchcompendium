@@ -166,5 +166,25 @@
         "cut_rules" : [],
         "rules" : ["rl_worshipmammon","rl_mammonschosen","rl_corruptmerchants","rl_infernalrivalry","rl_goeticwarlocks","rl_debtorstomammon"],
         "options": []
+    },
+    {
+        "id": "fc_trenchpilgrim_fv_processionofthesacredaffliction",
+        "name": "Procession of the Sacred Affliction",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "faction_keyword": {"name": "kw_pilgrim"}
+        },
+        "base_id": "fc_trenchpilgrim",
+        "description": [     
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Trench Pilgrims of the Procession of the Sacred Affliction are known for their zeal in close quarter combat, their armour decorated with icons and shields adorned with the depictions of the Saints, which despite appearances can withstand machine gun bullets. The millstones they carry upon their backs are used to tie about the necks of sinners before drowning them in the mud and blood of No Man’s Land. They spurn the use of the Iron Capirotes, believing firmly that faith alone is enough to withstand the horrors of Hell."
+            }
+        ],
+        "team": "faithful",
+        "cut_rules" : [],
+        "rules" : ["rl_facethyfears","rl_reliquaryarmoury","rl_punishingmillstones","rl_meleefocused","rl_zealotstrength","rl_hammerandanvil","rl_wrathofgod"],
+        "options": []
     }
 ]

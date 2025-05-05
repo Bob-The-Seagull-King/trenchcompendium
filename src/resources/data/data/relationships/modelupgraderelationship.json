@@ -565,7 +565,7 @@
         "name": "",
         "contextdata": {},
         "options": [],
-        "model_id_set": ["md_trenchpilgrim"],
+        "model_id_set": ["md_trenchpilgrim","md_trenchpilgrim_sacredaffliction"],
         "upgrade_id": "up_resurrection",
         "cost": 45,
         "cost_type": 0,
@@ -584,6 +584,38 @@
         "model_id_set": ["md_trenchpilgrim"],
         "upgrade_id": "up_zealotstrength",
         "cost": 5,
+        "cost_type": 0,
+        "restricted_upgrades": [
+        ],
+        "warband_limit": 1,
+        "required_upgrades":[]
+    },
+    {
+        "id": "rel_md_up_zealotstrength_pilgrimsacredaffliction",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {},
+        "options": [],
+        "model_id_set": ["md_trenchpilgrim_sacredaffliction"],
+        "upgrade_id": "up_zealotstrength",
+        "cost": 5,
+        "cost_type": 0,
+        "restricted_upgrades": [
+        ],
+        "warband_limit": 3,
+        "required_upgrades":[]
+    },
+    {
+        "id": "rel_md_rl_wrathofgod",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {},
+        "options": [],
+        "model_id_set": ["rl_wrathofgod"],
+        "upgrade_id": "up_wrathofgod",
+        "cost": 15,
         "cost_type": 0,
         "restricted_upgrades": [
         ],

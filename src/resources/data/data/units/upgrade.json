@@ -803,5 +803,41 @@
             }
         ],
         "options": []
+    },
+    {
+        "id": "up_wrathofgod",
+        "name": "Wrath of God",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {
+           "keyword_ignore": {"value": "kw_fear"},            
+           "override_equipment_restriction": {
+               "removed": [
+                   {
+                       "category": "ranged",
+                       "res_type": "all",
+                       "value": ""
+                   }
+               ],
+               "required": [
+                   {
+                       "category": "armour",
+                       "res_type": "tag",
+                       "value": "shield"
+                   }
+               ]
+           }
+        },
+        "description": [           
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This model is immune to FEAR and disregards any BLOOD MARKERS from any source. This model may never wear armour, though they can carry a Trench Shield or Holy Icon Shield. This model may not carry any ranged weapons.",
+                "glossary": [
+                    {"val": "FEAR", "id": "kw_fear"},
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"}
+                ]
+            }
+        ],
+        "options": []
     }
 ]
