@@ -8,6 +8,7 @@ import { EventRunner } from '../../../../classes/contextevent/contexteventhandle
 import { FactionEquipmentRelationship } from '../../../../classes/relationship/faction/FactionEquipmentRelationship';
 import RulesOverlay from "../../rules-content/RulesOverlay";
 import RulesEquipmentMain from "../../rules-content/RulesEquipmentMain";
+import RulesEquipmentStats from "../../rules-content/RulesEquipmentStats";
 
 const FactionEquipmentDisplay = (props: any) => {
     const factionequipmentObject: FactionEquipmentRelationship = props.data
@@ -62,7 +63,14 @@ const FactionEquipmentDisplay = (props: any) => {
                         titlename={factionequipmentObject.EquipmentItem.Name}
                         d_name={factionequipmentObject.EquipmentItem.Name}
                         d_method={() =>
-                            <RulesEquipmentMain data={factionequipmentObject.EquipmentItem}/>}
+                            
+                            <div className={'rules-equipment-main'}>                    
+                                {/* Stats */}
+                                <RulesEquipmentStats
+                                    abilityObject={factionequipmentObject.EquipmentItem}
+                                />
+                                <RulesEquipmentMain data={factionequipmentObject.EquipmentItem}/>}
+                            </div>
                     />
                 </div>
 
