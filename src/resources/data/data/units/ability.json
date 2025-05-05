@@ -1349,5 +1349,22 @@
             }
         ],
         "options": []
+    },
+    {
+        "id": "ab_wrathofgod",
+        "name": "Wrath of God",
+        "source": "core",
+        "tags": {"action": true},
+        "contextdata": {
+            "armour_ignore": {}
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This is a RISKY ACTION. If successful, roll on the Injury Chart against one enemy model within 3” of the Prophet. Armour offers no protection against this attack.",
+                "glossary": [{"val": "RISKY ACTION", "id": "kw_riskyaction"}]
+            }
+        ],
+        "options": []
     }
 ]

@@ -1128,5 +1128,102 @@
             }
         ],
         "options": []
+    },
+    {
+        "id": "rl_bloodsacrifice",
+        "source": "core",
+        "tags": { },
+        "contextdata": {  
+        },
+        "name": "Blood Sacrifice",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Any model (except Ecclesiastic Prisoners who are not worthy) in the warband can purchase a Sacrificial Lamb (see below)."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_heavenawaits",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            "faction_remove_upgrades": {
+                "upgrades": ["rel_md_up_resurrection"]
+            } 
+        },
+        "name": "Heaven Awaits",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "The Cavalcade rejects the doctrine of the Meta-Christ. Their dead Pilgrims cannot be resurrected as Martyr-Penitents."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_theunclean",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "The Unclean",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "The Cavalcade detests using the unclean Ecclesiastic Prisoners and may have only up to two of them."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_dayofhiswrath",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Day of His Wrath",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "The War Prophet of this warband cannot use Laying on Hands but can call upon the Wrath of God instead."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_stolencommunicants",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Stolen Communicants",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Communicants cost 3 Glory Points instead of ducats for this warband due to the difficulty of acquiring and indoctrinating them. "
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_favourofthelord",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            "add_to_warband": {}
+        },
+        "name": "Favour of the Lord",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "At the start of each turn, you can give any one model in the warband a BLESSING MARKER.",
+            "glossary": [
+                {"val": "BLESSING MARKER", "id": "kw_blessingmarker"}
+            ]
+            }
+        ],
+        "options": []
     }
 ]

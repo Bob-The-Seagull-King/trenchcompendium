@@ -186,5 +186,29 @@
         "cut_rules" : [],
         "rules" : ["rl_facethyfears","rl_reliquaryarmoury","rl_punishingmillstones","rl_meleefocused","rl_zealotstrength","rl_hammerandanvil","rl_wrathofgod"],
         "options": []
+    },
+    {
+        "id": "fc_trenchpilgrim_fv_cavalcadeofthetenthplague",
+        "name": "Cavalcade of the Tenth Plague",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "faction_keyword": {"name": "kw_pilgrim"}
+        },
+        "base_id": "fc_trenchpilgrim",
+        "description": [     
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "This Trench Pilgrim Procession traditionally sacrifices lambs before battle, anointing themselves in its blood to ward off the wrath of God. The Pilgrims then draw holy symbols with the blood of the sacrifice upon their bodies, clothing and armour, and then march to battle singing hymns, in certain belief that the blood of the Lamb shields them from any harm."
+            },  
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Firm believers in traditional reading of the Holy Texts, they reject the new doctrines of the Meta-Christ by the Church. They steal Communicants from other Processions and force them to fight for them in penance for being born from Sin."
+            }
+        ],
+        "team": "faithful",
+        "cut_rules" : [],
+        "rules" : ["rl_bloodsacrifice","rl_heavenawaits","rl_theunclean","rl_dayofhiswrath","rl_stolencommunicants","rl_favourofthelord"],
+        "options": []
     }
 ]

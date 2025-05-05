@@ -456,5 +456,20 @@
         "stats" : {},
         "cut_abilities" : [],
         "new_abilities" : []
+    },
+    {
+        "id": "md_warprophet_tenthplague",
+        "name": "War Prophet (Cavalcade of the Tenth Plague)",
+        "source": "core",
+        "tags": {},
+        "contextdata": {},
+        "base_id": "md_warprophet",
+        "variant_name": "Cavalcade_of_the_Tenth_Plague",
+        "team": "faithful",
+        "cut_keywords" : [],
+        "keywords" : [],
+        "stats" : {},
+        "cut_abilities" : ["ab_layingonhands"],
+        "new_abilities" : ["ab_wrathofgod"]
     }
 ]
