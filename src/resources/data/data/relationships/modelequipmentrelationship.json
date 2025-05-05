@@ -226,5 +226,60 @@
         "model_id": ["md_anchoriteshrine"],
         "mandatory_equipment": ["eq_combathelmet","eq_catherinewheel","eq_bonebreakermace"],
         "removable": false
+    },
+    {
+        "id": "rel_md_eq_combatmedic",
+        "source": "core",
+        "tags": {},
+        "name": "Combat Medic Equipment",
+        "contextdata": {},
+        "options": [],
+        "model_id": ["md_combatmedic","md_combatmedic_mv_pilgrim"],
+        "mandatory_equipment": ["eq_combathelmet","eq_standardarmour","eq_medikit","eq_misericordia"],
+        "removable": false
+    },
+    {
+        "id": "rel_md_eq_witchburner",
+        "source": "core",
+        "tags": {},
+        "name": "Witchburner Equipment",
+        "contextdata": {},
+        "options": [],
+        "model_id": ["md_witchburner"],
+        "mandatory_equipment": ["eq_combathelmet","eq_reinforcedarmour","eq_gavelofjustice"],
+        "removable": false
+    },
+    {
+        "id": "rel_md_eq_communicantantitankhunter",
+        "source": "core",
+        "tags": {},
+        "name": "Communicant Anti-Tank Hunter Equipment",
+        "contextdata": {},
+        "options": [],
+        "model_id": ["md_communicantantitankhunter"],
+        "mandatory_equipment": ["eq_trenchclub","eq_trenchclub","eq_combathelmet","eq_antimaterialrifle"],
+        "removable": false
+    },
+    {
+        "id": "rel_md_eq_mendelistammomonk",
+        "source": "core",
+        "tags": {},
+        "name": "Mendelist Ammo Monk Equipment",
+        "contextdata": {},
+        "options": [],
+        "model_id": ["md_mendelistammomonk"],
+        "mandatory_equipment": ["eq_gasmask"],
+        "removable": false
+    },
+    {
+        "id": "rel_md_eq_observer",
+        "source": "core",
+        "tags": {},
+        "name": "Observer Equipment",
+        "contextdata": {},
+        "options": [],
+        "model_id": ["md_observer"],
+        "mandatory_equipment": ["eq_standardarmour","eq_gasmask","eq_combathelmet","eq_trenchpolearm","eq_medikit"],
+        "removable": false
     }
 ]

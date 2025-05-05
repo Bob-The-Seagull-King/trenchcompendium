@@ -1363,5 +1363,309 @@
         },
         "keywords" : ["kw_pilgrim","kw_fear","kw_tough","kw_strong"],
         "abilities" : ["ab_brokenonthewheel"]
+    },
+    {
+        "id": "md_combatmedic",
+        "name": "Combat Medic",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            
+            "modify_equipment_block": {}  
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Medic carries a Misericordia and a Medi-kit. They wear a gas mask and suit of standard armour (reflected on the profile above). You cannot modify the equipment, armour and weapons of the Medic in any way."
+            }
+        ],
+        "lore": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "The Sisters of St. Cosmas are a highly trained elite medical corps, specialising in battlefield first aid and surgeries on the front lines of the Great War."
+                    }
+                ]
+            },   
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "The Sisters take a modified Hippocratic Oath that compels them to help any wounded soldiers of the Faith, no matter how dire the circumstance, as well as dispatching heretics and other enemies they find on the battlefield without pity or mercy."
+                    }
+                ]
+            } ,  
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "Armed with a combat surgical knife that doubles as a Misericordia, they are as equally adept at saving lives as taking them from those they find lying wounded in No Man’s Land. They carry medical kits with a plethora of battlefield drugs that are especially useful for nullifying the pain of even the most ghastly wounds, and getting soldiers back on their feet and back into the fray, even if just for a few moments so they can accomplish their mission or die trying."
+                    }
+                ]
+            }
+        ],
+        "team": "faithful",
+        "stats" : {            
+            "movement": 6,
+            "melee": 0,
+            "ranged": 0,
+            "base": [25],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 0
+        },
+        "keywords" : ["kw_antioch"],
+        "abilities" : ["ab_finishthefallen","ab_expertmedic"]
+    },
+    {
+        "id": "md_witchburner",
+        "name": "Witchburner",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            
+            "modify_equipment_block": {}  
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Witchburner is equipped with Reinforced Armour, wears a Helmet and carries a War Gavel (see below). You cannot alter their armour, weapons or equipment in any way."
+            }
+        ],
+        "lore": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "The Witchburners are the field officers of the Inquisition. They are tasked with hunting down and punishing witches, warlocks and heretics that cannot be brought to face justice by conventional means."
+                    }
+                ]
+            },   
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "On the battlefield they have the power to channel divine retribution on those deemed to have transgressed against God, causing sinners to burst into flames with mere words of condemnation. Since none are sinless, none are safe from their words of condemnation."
+                    }
+                ]
+            }
+        ],
+        "team": "faithful",
+        "stats" : {            
+            "movement": 6,
+            "melee": 1,
+            "ranged": 0,
+            "base": [32],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 2,
+            "mercenary": true
+        },
+        "keywords" : [],
+        "abilities" : ["ab_divinejudgement","ab_ceremonialduty","ab_dignifiedconduct"]
+    },
+    {
+        "id": "md_communicantantitankhunter",
+        "name": "Communicant Anti-Tank Hunter",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            
+            "modify_equipment_block": {}  
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Communicant is armed with an anti-materiel rifle and a helmet. They count as being armed with two Trench clubs in Melee combat – its fists are deadly weapons in their own right. Their flesh is hard as iron, so Communicants are considered to be wearing Standard Armour as noted in their profile. You cannot alter their weapons and equipment in any way."
+            }
+        ],
+        "lore": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "Communicants are partakers of the experimental Chemical Communion – the blood and flesh harvested from a Meta-Christ by the Mendelist monks and applied to the genome of volunteers. The most holy and pious of the Church are chosen to partake of the experimental communion, going through many biological changes to become larger and more durable, greatly enhancing their effectiveness on the battlefield. Their divinely-enhanced strength allows them to carry and shoot massive anti-materiel guns as easily as a normal soldier would wield a simple rifle. The process is uncertain, however, with the possibility for unpredictable side effects. Some lose their ability to speak or their higher brain functions become distracted by the heavenly choir only they can hear, requiring exact commands from their handlers."
+                    }
+                ]
+            },   
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "Because the Church consistently needs funds to sustain its military operations, Communicants are frequently allocated to the highest bidders among the armies affiliated with New Antioch. Their services are in constant demand as they are able to take out enemy fighting vehicles, heavily armoured troops and strongpoints with a single shot."
+                    }
+                ]
+            }
+        ],
+        "team": "faithful",
+        "stats" : {            
+            "movement": 6,
+            "melee": 1,
+            "ranged": 1,
+            "base": [40],
+            "armour": -1,
+            "movetype": 0,
+            "potential": 2,
+            "mercenary": true
+        },
+        "keywords" : ["kw_tough","kw_strong"],
+        "abilities" : ["ab_miracleofregeneration"]
+    },
+    {
+        "id": "md_mendelistammomonk",
+        "name": "Mendelist Ammo Monk",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            
+            "modify_equipment_block": {}  
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Monk has no weapons. They wear a gas mask and carry the Ammunition Sacrament (see below). You may not change their armaments in any way."
+            }
+        ],
+        "lore": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "The Order of Mendelist Monks is entrusted with the design of divinely enhanced items and the creation of the Communicants, devotees who have undergone Chemical Communion with an infusion of the synthesised blood of a Meta-Christ."
+                    }
+                ]
+            },   
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "The Brotherhood of Blessed Munitions is one of the sub-sects of the Mendelist Order, whose duty is to provide the faithful with various types of ammunition treated with the chemically altered blood of a Meta-Christ. Such solutions are highly unstable and difficult to handle, and the secrets of their various formulae are jealously guarded."
+                    }
+                ]
+            },   
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "On the battlefield, the monks brave enemy fire and infernal terrors, committed to their holy task of bringing the Wrath of the Lord upon the heretics. Their patron, St. Barbara, is said to lift those who die on the battlefield to Everlasting Glory."
+                    }
+                ]
+            }
+        ],
+        "team": "faithful",
+        "stats" : {            
+            "movement": 6,
+            "melee": -1,
+            "ranged": -1,
+            "base": [25],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 2,
+            "mercenary": true
+        },
+        "keywords" : [],
+        "abilities" : ["ab_faithfulfollowers","ab_theammunitionsacrement"]
+    },
+    {
+        "id": "md_observer",
+        "name": "Observer",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            
+            "modify_equipment_block": {}  
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Standard Armour, Oculus Helm (counts as Combat Helmet and Gas Mask), Trench Polearm, in-built Medi-Kit. You cannot alter the Observer’s weapons and equipment in any way."
+            }
+        ],
+        "lore": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "When the need is great, the Synod of Strategic Prophecy sends Observers to support the war effort. This order of warrior monks lives a life of absolute solitude, sharpening their minds and bodies, making of themselves living weapons in the Hands of God."
+                    }
+                ]
+            },   
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "Once a soldier joins the order, they never leave the Temple of The Word. The slightest disturbance to their prayers and training interrupts their ability to commune with the Lord of all Creation. Thus the days of the Observers are spent in secluded, cloistered cells, when not practising their martial or mental disciplines."
+                    }
+                ]
+            },   
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "The rare exception is when they are summoned to the battlefield. Here, amidst the chaos and carnage, their unique abilities can decisively shift the balance in favour of the faithful. Observers wear a specially crafted helmet enabling them to attune to the Voice of God. This remarkable connection grants them the capacity to simultaneously perceive the immediate past, present and future, to a degree. This allows them to perform unrivalled martial feats."
+                    }
+                ]
+            },   
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "But a living human is not meant to hear the Holy Words, so it comes at a cost. Since the Voice of God never decays, they must concentrate with superhuman focus to extricate the righteous guidance amidst the narrative spanning from creation’s inception to the present moment. The ceaseless resonance of the Divine Echo ringing in their ears renders sleep impossible. Therefore they must resort to potent sedatives and mind-altering drugs for them to endure the heavy burden of their battlefield role for any length of time."
+                    }
+                ]
+            },   
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "The Observers diligently practice the recitation of the Words of God, granting them the power to issue commands to anyone they address, friend or foe. The special metal of their helmet allows them to replicate the Holy Word as closely as it is possible, compelling any creature in creation to obey them momentarily."
+                    }
+                ]
+            }
+        ],
+        "team": "faithful",
+        "stats" : {            
+            "movement": 6,
+            "melee": 2,
+            "ranged": 1,
+            "base": [32],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 2,
+            "mercenary": true
+        },
+        "keywords" : [],
+        "abilities" : ["ab_lightningspeed","ab_temporalfuge","ab_eyeofgod","ab_voiceofgod"]
     }
 ]

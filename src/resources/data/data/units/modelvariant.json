@@ -422,5 +422,24 @@
         "keywords" : [],
         "cut_abilities" : [],
         "new_abilities" : []
+    },
+    {
+        "id": "md_combatmedic_mv_pilgrim",
+        "name": "Combat Medic (Pilgrim)",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "modify_equipment_block": {}  },
+        "base_id": "md_combatmedic",
+        "variant_name": "Trench_Pilgrim",
+        "team": "faithful",
+        "stats" : {
+            "potential": 2,
+            "mercenary": true
+        },
+        "cut_keywords" : ["kw_antioch"],
+        "keywords" : [],
+        "cut_abilities" : [],
+        "new_abilities" : []
     }
 ]

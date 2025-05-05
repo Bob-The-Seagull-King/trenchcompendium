@@ -1096,5 +1096,258 @@
             }
         ],
         "options": []
+    },
+    {
+        "id": "ab_finishthefallen",
+        "name": "Finish the Fallen",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": { },
+        "description": [           
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Due to their knowledge of anatomy and physiology, medics are experts at inflicting debilitating injuries and excruciating pain. Unless the target has the Keyword DEMONIC or BLACK GRAIL, add +1 DICE to any injury rolls the Medic makes in melee against opponents who are Down.",
+                "glossary": [
+                    {"val": "DEMONIC", "id": "kw_demonic"},
+                    {"val": "BLACK GRAIL", "id": "kw_blackgrail"},
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "Down", "id": "gl_down"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_expertmedic",
+        "name": "Expert Medic",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": { },
+        "description": [           
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The Medic adds +1 DICE whenever they use their Medi-Kit to aid friendly models.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_divinejudgement",
+        "name": "Divine Judgement",
+        "source": "core",
+        "tags": {"action": true},
+        "contextdata": { },
+        "description": [           
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The Witchburner can select any model in the opposing warband within 24” (even if hidden or out of sight) and bring the Judgement of Heaven upon them with a Litany of Condemnation. This is a RISKY ACTION. If successful, the model suffers one BLOOD MARKER (models with the Keyword HERETIC, BLACK GRAIL or DEMONIC suffer two BLOOD MARKER) as it bursts into celestial flames. This holy fire even affects units that are immune to FIRE weapons.",
+                "glossary": [
+                    {"val": "RISKY ACTION", "id": "kw_riskyaction"},
+                    {"val": "HERETIC", "id": "kw_heretic"},
+                    {"val": "BLACK GRAIL", "id": "kw_blackgrail"},
+                    {"val": "DEMONIC", "id": "kw_demonic"},
+                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_ceremonialduty",
+        "name": "Ceremonial Duty",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {
+            "keyword_ignore": { "value": "kw_fear" }},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"}, 
+                "content": "The Witchburner has taken vows to persecute heretics with extreme prejudice. Nothing will stop this holy task. The Witchburner is immune to FEAR.",
+                "glossary": [
+                    {"val": "FEAR", "id": "kw_fear"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_dignifiedconduct",
+        "name": "Dignified Conduct",
+        "source": "core",
+        "tags": {"trait": true, "bonus": true},
+        "contextdata": {
+            "bonus_ability": {
+                "action_type": ["dash"]
+            }},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Due to the dignity of their status, the Witchburner cannot take the Dash ACTION.",
+                "glossary": [
+                    {"val": "ACTION", "id": "kw_action"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_faithfulfollowers",
+        "name": "Faithful Followers",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": { },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "When a friendly model within 1” of the Monk is Activated, you can declare that the Monk is Activated at the same time. You may then use the Monk before taking any ACTION or movement with the model you originally Activated. This does not allow you to Activate the Monk more than once per Turn.",
+                "glossary": [
+                    {"val": "ACTION", "id": "kw_action"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_theammunitionsacrement",
+        "name": "The Ammunition Sacrement",
+        "source": "core",
+        "tags": {"action": true},
+        "contextdata": { },
+        "description": [            
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "As a RISKY ACTION, the Monk can provide a friendly model within 1” of it with one of the following benefits. The chosen benefit lasts until the end of the targeted model’s Activation this Turn:",
+                "glossary": [
+                    {"val": "RISKY ACTION", "id": "kw_riskyaction"}
+                ]
+            },      
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [
+                    {
+                        "tags": {"desc_type" : "list"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "paragraph"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Bullet of the Guided Path: "
+                                    },{
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "Whenever this model makes an Attack with a Ranged Weapon, add +1 DICE to hit.",
+                                        "glossary": [
+                                            {"val": "+1 DICE", "id": "kw_plusdice"}
+                                        ]
+                                    }
+                                ]
+                            },{
+                                "tags": {"desc_type" : "paragraph"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Cartridge of His Wrath: "
+                                    },{
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "Add the Keywords SHRAPNEL and BLAST 2” to every Ranged Weapon this model is equipped with.",
+                                        "glossary": [
+                                            {"val": "SHRAPNEL", "id": "kw_shrapnel"},
+                                            {"val": "BLAST", "id": "kw_blast"}
+                                        ]
+                                    }
+                                ]
+                            },{
+                                "tags": {"desc_type" : "paragraph"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Echo of His Word: "
+                                    },{
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "Whenever this model makes an Attack with a Ranged Weapon, add +1 to injury rolls caused by that Attack."
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_lightningspeed",
+        "name": "Lightning Speed",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": { },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "In Melee, the Observer may attack twice with its Trench Polearm instead of only once."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_temporalfuge",
+        "name": "Temporal Fuge",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": { },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Attacks that target the Observer suffer -1 DICE to hit.",
+                "glossary": [
+                    {"val": "-1 DICE", "id": "kw_minusdice"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_eyeofgod",
+        "name": "Eye of God",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": { },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "If the Observer fails an ACTION, you may re-roll the dice. However, if any of the dice you roll gives a result of 1, there is psychic backlash and the Observer suffers a Down result (including any resulting BLOOD MARKERS), and their Activation immediately ends.",
+                "glossary": [
+                    {"val": "ACTION", "id": "kw_action"},
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"},
+                    {"val": "Down", "id": "gl_down"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_voiceofgod",
+        "name": "Voice of God",
+        "source": "core",
+        "tags": {"action": true},
+        "contextdata": { },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "As a RISKY ACTION, the Observer may command any model on the board, friend or a foe, that has not been Activated this Turn. If successful, that model is compelled by the Divine Words. The Observer’s Activation immediately ends and the target’s Activation begins immediately after.",
+                "glossary": [
+                    {"val": "RISKY ACTION", "id": "kw_riskyaction"}
+                ]
+            }
+        ],
+        "options": []
     }
 ]
