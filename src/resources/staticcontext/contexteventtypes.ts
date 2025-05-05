@@ -2,7 +2,7 @@ import { IChoice, StaticOption, StaticOptionContextObjectQuestion } from "../../
 import { EventRunner } from "../../classes/contextevent/contexteventhandler";
 import { DynamicContextObject } from "../../classes/contextevent/dynamiccontextobject";
 import { ContextObject } from "../../classes/contextevent/contextobject";
-import { EquipmentLimit, EquipmentRestriction } from "../../classes/feature/equipment/Equipment";
+import { EquipmentLimit, EquipmentRestriction, EquipmentStats } from "../../classes/feature/equipment/Equipment";
 import { ModelStatistics } from "../../classes/feature/model/ModelStats";
 import { ModelUpgradeRelationship } from "../../classes/relationship/model/ModelUpgradeRelationship";
 import { LocationRestriction } from "../../classes/feature/exploration/ExplorationLocation";
@@ -30,6 +30,7 @@ export interface CallEvents {
     getModelStatOptions? : (this: EventRunner, eventSource : any, relayVar : ModelStatistics[][], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => ModelStatistics[][]; 
     getContextuallyAddedUpgrades? : (this: EventRunner, eventSource : any, relayVar : ModelUpgradeRelationship[], trackVal : Model, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<ModelUpgradeRelationship[]>; 
     getContextuallyAddedAbilities? : (this: EventRunner, eventSource : any, relayVar : Ability[], trackVal : Model, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<Ability[]>; 
+    modifyEquipmentStats? : (this: EventRunner, eventSource : any, relayVar : EquipmentStats, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<EquipmentStats>; 
     getWarbandLevelFactionRules? : (this: EventRunner, eventSource : any, relayVar : WarbandProperty[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<WarbandProperty[]>; 
     getModelStats? : (this: EventRunner, eventSource : any, relayVar : ModelStatistics, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => ModelStatistics; 
     getModelLimitPresentation? : (this: EventRunner, eventSource : any, relayVar : string[], trackVal : boolean, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<string[]>; 

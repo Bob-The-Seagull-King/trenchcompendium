@@ -5,7 +5,7 @@ import { ContextObject } from "../../classes/contextevent/contextobject";
 import { IChoice, QuestionBase, StaticOptionContextObjectQuestion } from "../../classes/options/StaticOption";
 import { containsTag, makestringpresentable } from "../../utility/functions";
 import { getTagValue } from "../../utility/functions";
-import { Equipment, EquipmentLimit, EquipmentRestriction } from "../../classes/feature/equipment/Equipment";
+import { Equipment, EquipmentLimit, EquipmentRestriction, EquipmentStats } from "../../classes/feature/equipment/Equipment";
 import { Keyword } from "../../classes/feature/glossary/Keyword";
 import { KeywordFactory } from "../../factories/features/KeywordFactory";
 import { ModelStatistics } from "../../classes/feature/model/ModelStats";
@@ -795,6 +795,21 @@ export const BaseContextCallTable : CallEventTable = {
             )
         }
     },
+    override_stats : {
+        event_priotity: 1,        
+        async modifyEquipmentStats(this: EventRunner, eventSource : any, relayVar : EquipmentStats, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            
+            if (context_func["stats"]) {                
+
+                if (context_func["stats"].hands_melee != undefined) {relayVar.hands_melee = context_func["stats"].hands_melee}
+                if (context_func["stats"].hands_ranged != undefined) {relayVar.hands_ranged = context_func["stats"].hands_ranged}
+                if (context_func["stats"].melee != undefined) {relayVar.melee = context_func["stats"].melee}
+                if (context_func["stats"].ranged != undefined) {relayVar.ranged = context_func["stats"].ranged}
+            }
+            
+            return relayVar;
+        }
+    }
     ability_option: {
         event_priotity: 0,
         async parseOptionsIntoRelevantType(this: EventRunner, eventSource : any, relayVar : IChoice[],  trackVal : number, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null){

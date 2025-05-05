@@ -67,7 +67,8 @@ const FactionEquipmentDisplay = (props: any) => {
                             <div className={'rules-equipment-main'}>                    
                                 {/* Stats */}
                                 <RulesEquipmentStats
-                                    abilityObject={factionequipmentObject.EquipmentItem}
+                                    facrelObject={factionequipmentObject}
+                                    baseobject={factionequipmentObject.EquipmentItem}
                                 />
                                 <RulesEquipmentMain data={factionequipmentObject.EquipmentItem}/>}
                             </div>

@@ -4,7 +4,7 @@ import { IStaticOptionContextObject, StaticOptionContextObject } from '../../opt
 import { ContextObject, IContextObject } from '../../contextevent/contextobject';
 import { Model } from '../../feature/model/Model';
 import { ModelFactory } from '../../../factories/features/ModelFactory';
-import { Equipment, EquipmentRestriction } from '../../feature/equipment/Equipment';
+import { Equipment, EquipmentRestriction, EquipmentStats } from '../../feature/equipment/Equipment';
 import { EquipmentFactory } from '../../../factories/features/EquipmentFactory';
 import { StaticContextObject } from '../../contextevent/staticcontextobject';
 import { EventRunner } from '../../contextevent/contexteventhandler';
@@ -53,6 +53,25 @@ class FactionEquipmentRelationship extends StaticContextObject {
         }
     }
 
+    public async getFactionEquipmentStats() : Promise<EquipmentStats> {
+        const FinalStats : EquipmentStats = {}
+
+        if (this.EquipmentItem.Stats.hands_melee != undefined) {FinalStats.hands_melee = this.EquipmentItem.Stats.hands_melee}
+        if (this.EquipmentItem.Stats.hands_ranged != undefined) {FinalStats.hands_ranged = this.EquipmentItem.Stats.hands_ranged}
+        if (this.EquipmentItem.Stats.melee != undefined) {FinalStats.melee = this.EquipmentItem.Stats.melee}
+        if (this.EquipmentItem.Stats.ranged != undefined) {FinalStats.ranged = this.EquipmentItem.Stats.ranged}
+        
+        const Events : EventRunner = new EventRunner();
+        const result = await Events.runEvent(
+            "modifyEquipmentStats",
+            this,
+            [],
+            FinalStats,
+            null
+        )
+
+        return result;
+    }
     
     public RunEquipmentRestriction() {
         const EventProc : EventRunner = new EventRunner();

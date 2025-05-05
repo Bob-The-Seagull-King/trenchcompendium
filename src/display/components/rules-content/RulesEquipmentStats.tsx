@@ -3,21 +3,41 @@ import React, { useEffect, useState } from 'react'
 
 // Classes
 import {Equipment, EquipmentStats} from '../../../classes/feature/equipment/Equipment';
+import { FactionEquipmentRelationship } from '../../../classes/relationship/faction/FactionEquipmentRelationship';
+import { ModelEquipmentRelationship } from '../../../classes/relationship/model/ModelEquipmentRelationship';
 
 
 interface RulesEquipmentStatsProps {
-    abilityObject: Equipment;
+    facrelObject?: FactionEquipmentRelationship;
+    baseobject: Equipment;
 }
 
-const RulesEquipmentStats: React.FC<RulesEquipmentStatsProps> = ({ abilityObject }) => {
+const RulesEquipmentStats: React.FC<RulesEquipmentStatsProps> = (props : RulesEquipmentStatsProps) => {
 
-    if( typeof abilityObject == 'undefined' ||
-        typeof abilityObject.Stats == 'undefined' ) {
+    if( typeof props.facrelObject == 'undefined' &&
+        typeof props.baseobject == 'undefined' ) {
         return ;
     }
-
-    const statlist = abilityObject.Stats;
+    const abilityObject = props.baseobject;
+    const [statlist, setstatlist] = useState<EquipmentStats[]>(abilityObject.Stats)
     const baseequip = abilityObject;
+    const [_keyvar, setkeyvar] = useState(0);
+
+    
+    useEffect(() => {
+        async function SetModelOptions() {
+            
+            /* stats */
+            if (props.facrelObject != undefined) {
+                const result_upgrades = await props.facrelObject.getContextuallyAvailableUpgrades();
+                setstatlist(result_upgrades);
+            }
+            setkeyvar((prev) => prev + 1);
+        }
+
+        SetModelOptions();
+    }, []);
+
 
     /** Range */
     let RangeVal = ""
@@ -34,7 +54,7 @@ const RulesEquipmentStats: React.FC<RulesEquipmentStatsProps> = ({ abilityObject
     return (
         <>
             {statlist && (RangeVal != "" || (HandValMelee != "" || HandValRange != "") || abilityObject.Modifiers.length > 0) &&
-                <table className={'rules-equipment-stats-table'}>
+                <table key={_keyvar} className={'rules-equipment-stats-table'}>
                     <tbody>
                         {RangeVal != "" &&
                             <tr>
