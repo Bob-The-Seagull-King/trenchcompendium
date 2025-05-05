@@ -2047,11 +2047,40 @@
         "limit": 0
     },
     {
+        "id": "rel_fc_methodius_eq_catherinewheel",
+        "source": "core",
+        "tags": {"methodius": true},
+        "name": "Catherine Wheel",
+        "contextdata": {       
+            "faction_eq_restriction": {
+                "permitted": [
+                    {
+                        "res_type": "id",
+                        "value": "md_anchoriteshrine_saintmethodius"
+                    }
+                ]
+            }
+        },
+        "faction_id": ["fc_trenchpilgrim_fv_warpilgimageofsaintmethodius"],
+        "equipment_id": "eq_catherinewheel",
+        "cost": 0,
+        "costtype": 0,
+        "limit": 0
+    },
+    {
         "id": "rel_fc_methodius_eq_heavyflamethrower",
         "source": "core",
         "tags": {"methodius": true},
         "name": "Heavy Flamethrower",
-        "contextdata": {  
+        "contextdata": {   
+            "faction_eq_restriction": {
+                "permitted": [
+                    {
+                        "res_type": "id",
+                        "value": "md_anchoriteshrine_saintmethodius"
+                    }
+                ]
+            },
             "override_stats": {        
                 "stats": {
                     "hands_ranged": 1
@@ -2070,6 +2099,14 @@
         "tags": {"methodius": true},
         "name": "Anti-Material Rifle",
         "contextdata": {  
+            "faction_eq_restriction": {
+                "permitted": [
+                    {
+                        "res_type": "id",
+                        "value": "md_anchoriteshrine_saintmethodius"
+                    }
+                ]
+            },
             "override_stats": {        
                 "stats": {
                     "hands_ranged": 1
@@ -2088,6 +2125,14 @@
         "tags": {"methodius": true},
         "name": "Punt Gun",
         "contextdata": {  
+            "faction_eq_restriction": {
+                "permitted": [
+                    {
+                        "res_type": "id",
+                        "value": "md_anchoriteshrine_saintmethodius"
+                    }
+                ]
+            },
             "override_stats": {        
                 "stats": {
                     "hands_ranged": 1
@@ -2106,6 +2151,14 @@
         "tags": {"methodius": true},
         "name": "Trench Mortar",
         "contextdata": {  
+            "faction_eq_restriction": {
+                "permitted": [
+                    {
+                        "res_type": "id",
+                        "value": "md_anchoriteshrine_saintmethodius"
+                    }
+                ]
+            },
             "override_stats": {        
                 "stats": {
                     "hands_ranged": 1
@@ -2124,6 +2177,14 @@
         "tags": {"methodius": true},
         "name": "Autocannon",
         "contextdata": {  
+            "faction_eq_restriction": {
+                "permitted": [
+                    {
+                        "res_type": "id",
+                        "value": "md_anchoriteshrine_saintmethodius"
+                    }
+                ]
+            },
             "override_stats": {        
                 "stats": {
                     "hands_ranged": 1
@@ -2142,6 +2203,14 @@
         "tags": {"methodius": true},
         "name": "Gas Censer",
         "contextdata": {  
+            "faction_eq_restriction": {
+                "permitted": [
+                    {
+                        "res_type": "id",
+                        "value": "md_anchoriteshrine_saintmethodius"
+                    }
+                ]
+            },
             "override_stats": {        
                 "stats": {
                     "hands_ranged": 1
@@ -2160,6 +2229,14 @@
         "tags": {"methodius": true},
         "name": "Gas Filter",
         "contextdata": { 
+            "faction_eq_restriction": {
+                "permitted": [
+                    {
+                        "res_type": "id",
+                        "value": "md_anchoriteshrine_saintmethodius"
+                    }
+                ]
+            }
         },
         "faction_id": ["fc_trenchpilgrim_fv_warpilgimageofsaintmethodius"],
         "equipment_id": "eq_gasfilter",
@@ -2173,6 +2250,14 @@
         "tags": {"methodius": true},
         "name": "Holy Diesel Engine",
         "contextdata": { 
+            "faction_eq_restriction": {
+                "permitted": [
+                    {
+                        "res_type": "id",
+                        "value": "md_anchoriteshrine_saintmethodius"
+                    }
+                ]
+            }
         },
         "faction_id": ["fc_trenchpilgrim_fv_warpilgimageofsaintmethodius"],
         "equipment_id": "eq_holydieselengine",
@@ -2186,6 +2271,14 @@
         "tags": {"methodius": true},
         "name": "Sacred Geometry",
         "contextdata": { 
+            "faction_eq_restriction": {
+                "permitted": [
+                    {
+                        "res_type": "id",
+                        "value": "md_anchoriteshrine_saintmethodius"
+                    }
+                ]
+            }
         },
         "faction_id": ["fc_trenchpilgrim_fv_warpilgimageofsaintmethodius"],
         "equipment_id": "eq_sacredgeometry",
@@ -2199,6 +2292,14 @@
         "tags": {"methodius": true},
         "name": "Grand Anchorite",
         "contextdata": { 
+            "faction_eq_restriction": {
+                "permitted": [
+                    {
+                        "res_type": "id",
+                        "value": "md_anchoriteshrine_saintmethodius"
+                    }
+                ]
+            }
         },
         "faction_id": ["fc_trenchpilgrim_fv_warpilgimageofsaintmethodius"],
         "equipment_id": "eq_grandanchorite",
@@ -2212,6 +2313,14 @@
         "tags": {"methodius": true},
         "name": "Piston Legs",
         "contextdata": { 
+            "faction_eq_restriction": {
+                "permitted": [
+                    {
+                        "res_type": "id",
+                        "value": "md_anchoriteshrine_saintmethodius"
+                    }
+                ]
+            }
         },
         "faction_id": ["fc_trenchpilgrim_fv_warpilgimageofsaintmethodius"],
         "equipment_id": "eq_pistonlegs",
@@ -2224,7 +2333,15 @@
         "source": "core",
         "tags": {"methodius": true},
         "name": "Hallowed Anchorite",
-        "contextdata": { 
+        "contextdata": {
+            "faction_eq_restriction": {
+                "permitted": [
+                    {
+                        "res_type": "id",
+                        "value": "md_anchoriteshrine_saintmethodius"
+                    }
+                ]
+            } 
         },
         "faction_id": ["fc_trenchpilgrim_fv_warpilgimageofsaintmethodius"],
         "equipment_id": "eq_hallowedanchorite",
@@ -2238,6 +2355,14 @@
         "tags": {"methodius": true},
         "name": "Wrathful Cherub Face",
         "contextdata": { 
+            "faction_eq_restriction": {
+                "permitted": [
+                    {
+                        "res_type": "id",
+                        "value": "md_anchoriteshrine_saintmethodius"
+                    }
+                ]
+            }
         },
         "faction_id": ["fc_trenchpilgrim_fv_warpilgimageofsaintmethodius"],
         "equipment_id": "eq_wrathfulcherubface",
