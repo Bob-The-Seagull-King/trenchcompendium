@@ -177,6 +177,10 @@ export const BaseContextCallTable : CallEventTable = {
                             NewStringParts.push("must be "+makestringpresentable(ValKey.Name? ValKey.Name : ""))
                         }
 
+                        if (Requirement.res_type == "tag") {
+                            NewStringParts.push("must have tag "+makestringpresentable(Requirement.value.toString()))
+                        }
+
                         if (Requirement.res_type == "id") {
                             const EquipmentItem = await EquipmentModule.EquipmentFactory.CreateNewEquipment(Requirement.value.toString(), null)
                             NewStringParts.push("must be "+(EquipmentItem.Name))
