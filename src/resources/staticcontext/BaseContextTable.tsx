@@ -569,11 +569,12 @@ export const BaseContextCallTable : CallEventTable = {
 
             if (ValidUpgrade) {
                 const AbilityList = Requester.MakeRequest(
-                    {searchtype: "id", searchparam: {type: "glossary", id: context_func["id"]}}
+                    {searchtype: "id", searchparam: {type: "factionrule", id: context_func["id"]}}
                 ) as IAbility
+                console.log(AbilityList)
                 relayVar.push(await AbilityFactory.CreateAbility(AbilityList, null))
             }
-
+            console.log(relayVar);
             return relayVar;
         }
 
