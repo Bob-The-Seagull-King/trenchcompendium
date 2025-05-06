@@ -884,7 +884,7 @@
     },
     {
         "id": "up_fianna",
-        "name": "Infiltrator",
+        "name": "Fianna",
         "source": "core",
         "tags": {"trait": true},
         "contextdata": {
