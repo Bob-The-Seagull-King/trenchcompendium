@@ -1571,7 +1571,7 @@
             
             "faction_add_upgrades": {
                 "model_key": "rl_berserker",
-                "models_id": ["md_lieutenant","md_shocktrooper"]
+                "models_id": ["md_lieutenant_eire","md_shocktrooper"]
             }
         },
         "name": "Berserker",
