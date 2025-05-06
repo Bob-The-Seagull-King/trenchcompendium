@@ -1130,5 +1130,56 @@
         "restricted_models" : [],
         "warband_minimum" : 0,
         "warband_maximum" : 1
-    }   
+    },
+    {
+        "id": "rel_fc_md_lieutenant",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {"option_search_viable": {}},
+        "options": [],
+        "faction_id" : ["fc_newantioch"],
+        "model_id" : "md_lieutenant",
+        "captain" : true,
+        "mercenary": false,
+        "cost" : 70,
+        "cost_type" : 0,
+        "restricted_models" : [],
+        "warband_minimum" : 1,
+        "warband_maximum" : 1
+    },
+    {
+        "id": "rel_fc_md_trenchcleric",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {"option_search_viable": {}},
+        "options": [],
+        "faction_id" : ["fc_newantioch"],
+        "model_id" : "md_trenchcleric",
+        "captain" : false,
+        "mercenary": false,
+        "cost" : 60,
+        "cost_type" : 0,
+        "restricted_models" : [],
+        "warband_minimum" : 0,
+        "warband_maximum" : 1
+    },
+    {
+        "id": "rel_fc_md_sniperpriest",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {"option_search_viable": {}},
+        "options": [],
+        "faction_id" : ["fc_newantioch"],
+        "model_id" : "md_sniperpriest",
+        "captain" : false,
+        "mercenary": false,
+        "cost" : 50,
+        "cost_type" : 0,
+        "restricted_models" : [],
+        "warband_minimum" : 0,
+        "warband_maximum" : 2
+    }
 ]

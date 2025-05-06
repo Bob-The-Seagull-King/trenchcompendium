@@ -1706,5 +1706,145 @@
         },
         "keywords" : [],
         "abilities" : []
+    },
+    {
+        "id": "md_lieutenant",
+        "name": "Lieutenant",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Lieutenant can be equipped with any weapon, armour and equipment from the New Antioch Armoury.",
+                "glossary": [{"val": "New Antioch", "id": "kw_antioch"}]
+            }
+        ],
+        "lore": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "Lieutenants are leaders of small squads or platoons of New Antioch’s soldiers, playing a fundamental role on the distant frontlines of the Trench Crusade, displaying unwavering resolve in preserving the unity and morale of their troops. Lieutenants might be the favoured son or daughter of a noble family or gained their rank by impressing their superiors with their exceptional strategic acumen and audacious bravery."
+                    }
+                ]
+            },  
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "In addition to their command role, they are also responsible for acquiring new weapons, arms, equipment and food for their troops. All too often this requires looting the battlefields of No Man’s Land or even raiding settlements, since resupply can be sporadic at best."
+                    }
+                ]
+            },  
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "Having rightfully earned their position, Lieutenants enjoy the privilege of selecting their preferred arms and armour, often with the pick of the rarest battlefield finds. It is not uncommon for a Lieutenant to wield a distinctive weapon, perhaps a family heirloom, an idiosyncratic affectation or an ostentatious piece providing some much-needed swagger"
+                    }
+                ]
+            }
+        ],
+        "team": "faithful",
+        "stats" : {            
+            "movement": 6,
+            "melee": 2,
+            "ranged": 2,
+            "base": [32],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 0
+        },
+        "keywords" : ["kw_antioch","kw_elite","kw_leader","kw_tough"],
+        "abilities" : ["ab_onmycommand"]
+    },
+    {
+        "id": "md_trenchcleric",
+        "name": "Trench Cleric",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "A Cleric can be equipped with any weapon, armour and equipment from the New Antioch Armoury.",
+                "glossary": [{"val": "New Antioch", "id": "kw_antioch"}]
+            }
+        ],
+        "lore": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "A holy warrior who looks after the souls of the soldiers in the company, the cleric chants inspiring battle prayers and can perform various miracles such as healing or even smiting the enemy. A cleric often carries a portable shrine on his back to denote his faith in the company’s Patron, be that one of the Saints of their homeland, a mighty Arch-Angel or the Lord himself."
+                    }
+                ]
+            }
+        ],
+        "team": "faithful",
+        "stats" : {            
+            "movement": 6,
+            "melee": 1,
+            "ranged": 1,
+            "base": [32],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 0
+        },
+        "keywords" : ["kw_antioch","kw_elite"],
+        "abilities" : ["ab_trenchclericpowers"]
+    },
+    {
+        "id": "md_sniperpriest",
+        "name": "Sniper Priest",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "A Sniper Priest can be equipped with any weapon, armour and equipment from the New Antioch Armoury.",
+                "glossary": [{"val": "New Antioch", "id": "kw_antioch"}]
+            }
+        ],
+        "lore": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "These devotees of the Church blind themselves ritually as a devotion to God and use only their faith to strike the enemies of the Church. During the Siege of St. Lux stories were told of a sniper priest killing a target three miles away."
+                    }
+                ]
+            }
+        ],
+        "team": "faithful",
+        "stats" : {            
+            "movement": 6,
+            "melee": -1,
+            "ranged": 2,
+            "base": [25],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 0
+        },
+        "keywords" : ["kw_antioch","kw_elite"],
+        "abilities" : ["ab_aim","ab_absolutefaith"]
     }
 ]

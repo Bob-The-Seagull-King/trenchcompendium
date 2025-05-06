@@ -1366,5 +1366,143 @@
             }
         ],
         "options": []
+    },
+    {
+        "id": "ab_onmycommand",
+        "name": "On My Command!",
+        "source": "core",
+        "tags": {"action": true},
+        "contextdata": { },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"}, 
+                "content": "Once per Turn, as an ACTION the Lieutenant can instead force the opponent to activate one of their models that the Lieutenant can select from amongst the models they can see. This ends the Activation of the Lieutenant.",
+                "glossary": [
+                    {"val": "ACTION", "id": "kw_action"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_trenchclericpowers",
+        "name": "Powers of the Trench Cleric",
+        "source": "core",
+        "tags": {"trait": true, "buy_choose": true},
+        "contextdata": {
+            "ability_option": {}
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Upon recruiting the model, you may choose one of the following holy powers for it to possess."
+            }
+        ],
+        "options": [
+            {
+                "ref_id" : "ot_powersofthetrenchcleric",
+                "name" : "Holy Powers",
+                "description" : [],
+                "category" : "type",
+                "type" : "text",
+                "strictness" : "strict",
+                "predefined_options" : [],
+                "option_context" : {"basic_option_default":{}},
+                "data_search" : {      
+                    "searchtype": "complex",
+                    "searchparam":    {
+                        "type": "ability",
+                        "request":    {
+                            "operator": "or",
+                            "terms": [
+                                {             
+                                    "item": "id",
+                                    "value": "ab_godiswithus",
+                                    "equals": true,
+                                    "strict": true
+                                },
+                                {             
+                                    "item": "id",
+                                    "value": "ab_onwardschristiansoldiers",
+                                    "equals": true,
+                                    "strict": true
+                                }
+                            ],
+                            "subparams": []
+                        }
+                    }                        
+                }
+            }
+        ]
+    },
+    {
+        "id": "ab_godiswithus",
+        "name": "God is With Us!",
+        "source": "core",
+        "tags": {"action": true},
+        "contextdata": { },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"}, 
+                "content": "Select one friendly model within 6” of the Priest (including the Priest) and take a RISKY ACTION. If successful, the model immediately gains a BLESSING MARKER.",
+                "glossary": [
+                    {"val": "RISKY ACTION", "id": "kw_riskyaction"},
+                    {"val": "BLESSING MARKER", "id": "kw_blessingmarker"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_onwardschristiansoldiers",
+        "name": "Onwards, Christian Soldiers!",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": { },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"}, 
+                "content": "All friendly models that are within 8” of the Trench Cleric at the start of their Activation are not affected by FEAR.",
+                "glossary": [
+                    {"val": "FEAR", "id": "kw_fear"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_aim",
+        "name": "Aim",
+        "source": "core",
+        "tags": {"action": true},
+        "contextdata": { },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"}, 
+                "content": "A Sniper Priest may take a RISKY ACTION to aim. If successful then the Priest may add +2 DICE to any Ranged attack rolls during this same Activation.",
+                "glossary": [
+                    {"val": "RISKY ACTION", "id": "kw_riskyaction"},
+                    {"val": "+2 DICE", "id": "kw_plusdice"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_absolutefaith",
+        "name": "Absolute Faith",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": { },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"}, 
+                "content": "Sniper Priests do not use their eyesight to aim at their enemies. The opponent cannot apply any BLOOD MARKERs when they use a Ranged weapon. They still suffer penalties for Range and Cover as standard.",
+                "glossary": [
+                    {"val": "BLOOD MARKERs", "id": "kw_bloodmarker"}
+                ]
+            }
+        ],
+        "options": []
     }
 ]
