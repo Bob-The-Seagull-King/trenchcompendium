@@ -621,5 +621,29 @@
         ],
         "warband_limit": 1,
         "required_upgrades":[]
+    },
+    {
+        "id": "rel_md_yeoman_infiltrator",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {
+            "faction_upgrade_count_special": {
+                "warband_limit": [
+                    {
+                        "size": 1000,
+                        "value" : 3
+                    }
+                ]
+            }},
+        "options": [],
+        "model_id_set": ["md_yeoman"],
+        "upgrade_id": "up_infiltrator",
+        "cost": 10,
+        "cost_type": 0,
+        "restricted_upgrades": [
+        ],
+        "warband_limit": 2,
+        "required_upgrades":[]
     }
 ]

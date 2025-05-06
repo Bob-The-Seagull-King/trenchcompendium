@@ -436,6 +436,11 @@ export const BaseContextCallTable : CallEventTable = {
                         return [prelude + ModelItem.Name]
                     }
                 }
+                if (context_func["warband_limit"]) {
+                    for (let i = 0; i < context_func["warband_limit"].length; i++) {
+                        relayVar.push("( " + context_func["warband_limit"][i]["value"] + " in a warband worth over " + context_func["warband_limit"][i]["size"] + " ducats)")
+                    }
+                }
             }
 
             return relayVar;

@@ -316,5 +316,18 @@
         "model_id": ["md_stigmaticnun_saintmethodius"],
         "mandatory_equipment": ["eq_standardarmour"],
         "removable": false
+    },
+    {
+        "id": "rel_md_eq_yeoman",
+        "source": "core",
+        "tags": {},
+        "name": "Yeoman Equipment",
+        "contextdata": {},
+        "options": [],
+        "model_id": ["md_yeoman"],
+        "mandatory_equipment": ["eq_boltactionrifle"],
+        "removable": true,
+        "salevalue": 5,
+        "saletype": 1
     }
 ]

@@ -1846,5 +1846,52 @@
         },
         "keywords" : ["kw_antioch","kw_elite"],
         "abilities" : ["ab_aim","ab_absolutefaith"]
+    },
+    {
+        "id": "md_yeoman",
+        "name": "Yeoman",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Each yeoman is equipped with a bolt action rifle at a reduced cost of 5 ducats. You can swap this rifle for another ranged weapon of lower, equal or greater cost. If the cost is greater, you must pay the difference in ducats."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Yeomen can be equipped with any weapon, armour and equipment from the New Antioch Armoury. At the cost of +10 ducats per model, up to two yeomen can be upgraded to Trench Moles (up to three in warbands of over 1000 ducats value), scouts who make use of tunnels that criss-cross No Man’s Land. They gain the Keyword INFILTRATOR.",
+                "glossary": [
+                    {"val": "New Antioch", "id": "kw_antioch"},
+                    {"val": "INFILTRATOR", "id": "kw_infiltrator"}
+                ]
+            }
+        ],
+        "lore": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "A basic trooper of New Antioch. Brave men and women who have received standard training and sworn an oath to the Duke of New Antioch. What they lack in combat skills compared to more elite troops they more than make up with their numbers and wide selection of weapons available to them."
+                    }
+                ]
+            }
+        ],
+        "team": "faithful",
+        "stats" : {            
+            "movement": 6,
+            "melee": 0,
+            "ranged": 0,
+            "base": [25],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 0
+        },
+        "keywords" : ["kw_antioch"],
+        "abilities" : []
     }
 ]
