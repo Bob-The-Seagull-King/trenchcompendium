@@ -486,15 +486,6 @@ export const BaseContextCallTable : CallEventTable = {
 
             let ValidUpgrade = false;
 
-            if (context_func['models_id'] ) {
-                for (let i = 0; i < context_func['models_id'].length; i++) {
-                    if (trackVal.ID == context_func['models_id'][i]) {
-                        ValidUpgrade = true;
-                        break;
-                    }
-                }
-            }
-
             if (context_func['filters'] ) {
                 for (let i = 0; i < context_func['filters'].length; i++) {
                     const curFilter = context_func['filters'][i]
@@ -517,6 +508,16 @@ export const BaseContextCallTable : CallEventTable = {
                     }
                 }
             }
+            
+            if (context_func['models_id'] ) {
+                for (let i = 0; i < context_func['models_id'].length; i++) {
+                    if (trackVal.ID == context_func['models_id'][i]) {
+                        ValidUpgrade = true;
+                        break;
+                    }
+                }
+            }
+
 
             if (ValidUpgrade) {
                 const UpgradeList = Requester.MakeRequest(

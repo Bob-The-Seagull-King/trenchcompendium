@@ -1374,5 +1374,128 @@
             }
         ],
         "options": []
+    },
+    {
+        "id": "rl_specialistforce",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            "get_warband_ducats": {
+                "mod": -200
+            },
+            "get_warband_glory": {
+                "mod": 11
+            }
+        },
+        "name": "Specialist Force",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "A Papal States Intervention Force is recruited with 500 ducats and 11 Glory Points when creating a warband for a campaign. When recruiting a warband for a one-off battle, we recommend using 700 ducats and 15 Glory Points."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_swissguard",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            "faction_add_upgrades": {
+                "model_key": "rl_swissguard",
+                "models_id": ["md_lieutenant"],
+                "filters": [
+                    {
+                        "type": "keyword",
+                        "value": "kw_elite",
+                        "truth": false
+                    }
+                ]
+            }
+        },
+        "name": "Swiss Guard",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Up to four non-ELITE troopers and the Lieutenant can be upgraded into Swiss Guards at the cost of 5 ducats each. They are immune to FEAR.",
+            "glossary": [
+                {"val": "ELITE", "id": "kw_elite"},
+                {"val": "FEAR", "id": "kw_fear"}
+            ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_supremeblessing",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            "add_armoury_item": {
+                "free_purchases": [
+                    "rel_fc_papalstates_eq_supremepontiffcrucifix"
+                ]
+            }
+        },
+        "name": "Supreme Blessing",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "One model in the warband may carry the crucifix given by the Supreme Pontiff. This model can take further ACTIONS if it fails in an attempted RISKY ACTION. Note that the action fails, but you are allowed to try any other ACTIONS on your profile without losing the Activation. If the crucifix is lost, a new one can be acquired at the cost of 3 Glory Points.",
+            "glossary": [
+                {"val": "RISKY ACTION", "id": "kw_riskyaction"},
+                {"val": "ACTIONS", "id": "kw_action"}
+            ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_farfromhome",
+        "source": "core",
+        "tags": { },
+        "contextdata": {     
+            "faction_remove_upgrades": {
+                "upgrades": ["rel_md_yeoman_infiltrator"]
+            }
+         },
+        "name": "Far from Home",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "The Papal Intervention Force may have no Trench Moles."
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_vaticansrepresentative",
+        "source": "core",
+        "tags": { },
+        "contextdata": {
+         },
+        "name": "Vatican's Representative",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Papal States Warband must include a Trench Cleric but does not have to include a Lieutenant."
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_lector",
+        "source": "core",
+        "tags": { },
+        "contextdata": {
+         },
+        "name": "Lector",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Any Trench Cleric in the Papal Intervention Force can select the \"Arise and be Healed!\" prayer in addition to the ones usually available to a Trench Cleric."
+        }
+        ],
+        "options": []
     }
 ]

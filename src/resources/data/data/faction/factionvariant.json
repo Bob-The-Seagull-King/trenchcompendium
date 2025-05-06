@@ -250,5 +250,29 @@
         "cut_rules" : [],
         "rules" : ["rl_anchoritecloister","rl_anchoritearmoury","rl_mortalsin","rl_communicantheresy","rl_treasureinheaven","rl_chasteorder","rl_gunsmithmonks","rl_followersofsaintmethodius"],
         "options": []
+    },
+    {
+        "id": "fc_newantioch_fv_papalstatesinterventionforce",
+        "name": "Papal States Intervention Force",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "faction_keyword": {"name": "kw_antioch"}
+        },
+        "base_id": "fc_newantioch",
+        "description": [     
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The Papal states who all operate under the command of the Supreme Pontiff of Rome rather than the Duke of New Antioch are sometimes dispatched to the front lines to perform a specific duty such as hunting down and eliminating dangerous Heretic leaders or recovering artefacts of great spiritual importance."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "These Warbands are typically quite small but have access to extremely elite soldiers and specialist equipment. They are led by utterly devoted warrior-monks and priests hand-picked by the Pope."
+            }
+        ],
+        "team": "faithful",
+        "cut_rules" : [],
+        "rules" : ["rl_specialistforce","rl_swissguard","rl_supremeblessing","rl_farfromhome","rl_vaticansrepresentative","rl_lector"],
+        "options": []
     }
 ]

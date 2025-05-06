@@ -661,5 +661,21 @@
         ],
         "warband_limit": 0,
         "required_upgrades":[]
+    },
+    {
+        "id": "rel_factionrule_swissguard",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": { },
+        "options": [],
+        "model_id_set": ["rl_swissguard"],
+        "upgrade_id": "up_swissguard",
+        "cost": 5,
+        "cost_type": 0,
+        "restricted_upgrades": [
+        ],
+        "warband_limit": 4,
+        "required_upgrades":[]
     }
 ]

@@ -60,6 +60,21 @@
         "options": []
     },
     {
+        "id": "up_swissguard",
+        "name": "Swiss Guard",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {"keyword_ignore": {"value": "kw_fear"}},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The model is not affected by the keyword FEAR.",
+                "glossary": [{"val": "FEAR", "id": "kw_fear"}]
+            }
+        ],
+        "options": []
+    },
+    {
         "id": "up_hallucinogendisguise",
         "name": "Hallucinogen Disguise",
         "source": "core",

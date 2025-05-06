@@ -544,5 +544,20 @@
         "stats" : {},
         "cut_abilities" : [],
         "new_abilities" : []
+    },
+    {
+        "id": "md_trenchcleric_lector",
+        "name": "Lector",
+        "source": "core",
+        "tags": {},
+        "contextdata": {},
+        "base_id": "md_trenchcleric",
+        "variant_name": "Papal_States_Intervention_Force",
+        "team": "faithful",
+        "cut_keywords" : [],
+        "keywords" : [],
+        "stats" : {},
+        "cut_abilities" : ["ab_trenchclericpowers"],
+        "new_abilities" : ["ab_trenchclericpowers_lector"]
     }
 ]

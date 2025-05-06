@@ -1436,6 +1436,63 @@
         ]
     },
     {
+        "id": "ab_trenchclericpowers_lector",
+        "name": "Powers of the Lector",
+        "source": "core",
+        "tags": {"trait": true, "buy_choose": true},
+        "contextdata": {
+            "ability_option": {}
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Upon recruiting the model, you may choose one of the following holy powers for it to possess."
+            }
+        ],
+        "options": [
+            {
+                "ref_id" : "ot_powersofthelector",
+                "name" : "Holy Powers",
+                "description" : [],
+                "category" : "type",
+                "type" : "text",
+                "strictness" : "strict",
+                "predefined_options" : [],
+                "option_context" : {"basic_option_default":{}},
+                "data_search" : {      
+                    "searchtype": "complex",
+                    "searchparam":    {
+                        "type": "ability",
+                        "request":    {
+                            "operator": "or",
+                            "terms": [
+                                {             
+                                    "item": "id",
+                                    "value": "ab_godiswithus",
+                                    "equals": true,
+                                    "strict": true
+                                },
+                                {             
+                                    "item": "id",
+                                    "value": "ab_onwardschristiansoldiers",
+                                    "equals": true,
+                                    "strict": true
+                                },
+                                {             
+                                    "item": "id",
+                                    "value": "ab_ariseandbehealed",
+                                    "equals": true,
+                                    "strict": true
+                                }
+                            ],
+                            "subparams": []
+                        }
+                    }                        
+                }
+            }
+        ]
+    },
+    {
         "id": "ab_godiswithus",
         "name": "God is With Us!",
         "source": "core",
@@ -1465,6 +1522,25 @@
                 "content": "All friendly models that are within 8” of the Trench Cleric at the start of their Activation are not affected by FEAR.",
                 "glossary": [
                     {"val": "FEAR", "id": "kw_fear"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_ariseandbehealed",
+        "name": "Arise and be Healed!",
+        "source": "core",
+        "tags": {"action": true},
+        "contextdata": { },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"}, 
+                "content": "Select one friendly model within 3” of the Priest and take a RISKY ACTION. If successful, the warrior immediately stands up if Down and loses up to D3 BLOOD MARKERS or INFECTION MARKERS (or any combination) of your choice.",
+                "glossary": [
+                    {"val": "RISKY ACTION", "id": "kw_riskyaction"},
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"},
+                    {"val": "INFECTION MARKERS", "id": "kw_infectionmarker"}
                 ]
             }
         ],
