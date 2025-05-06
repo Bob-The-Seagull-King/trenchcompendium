@@ -17,6 +17,7 @@ const RulesModelUpgrade: React.FC<RulesModelUpgradeProps> = ({ item }) => {
     const abilityObject: ModelUpgradeRelationship = item
     
     const [maximum, setmaximum] = useState("")
+    const [restrict, setrestrict] = useState("")
     const [_keyvar, setkeyvar] = useState(0);
 
     useEffect(() => {
@@ -31,6 +32,8 @@ const RulesModelUpgrade: React.FC<RulesModelUpgradeProps> = ({ item }) => {
                 true
             );
 
+            const restrictions = await abilityObject.GetRestrictions();
+            setrestrict(restrictions)
             setmaximum(result.join(", "));
             setkeyvar((prev) => prev + 1);
         }
@@ -53,9 +56,15 @@ const RulesModelUpgrade: React.FC<RulesModelUpgradeProps> = ({ item }) => {
                 </div>
             }
 
-            {abilityObject.WarbandLimit != 0 &&
+            {maximum != "" &&
                 <div className={'upgrade-limit'}>
-                    {(abilityObject.WarbandLimit != 0 ? (" " + "(Limit " + maximum + ")") : "")}
+                    {(maximum != "" ? (" " + "(Limit " + maximum + ")") : "")}
+                </div>
+            }
+
+            {restrict != "" &&
+                <div className={'upgrade-limit'}>
+                    {(restrict != "" ? (" " + "(Requirements: " + maximum + ")") : "")}
                 </div>
             }
         </>

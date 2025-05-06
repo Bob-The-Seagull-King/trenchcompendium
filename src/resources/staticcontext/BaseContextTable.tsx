@@ -446,6 +446,26 @@ export const BaseContextCallTable : CallEventTable = {
             return relayVar;
         }
     },
+    override_required_upgrade: {
+        event_priotity: 1,
+        async getUpgradeRestrictionsPresentation(this: EventRunner, eventSource : any, relayVar : string[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+                        
+            const { ModelFactory } = await import("../../factories/features/ModelFactory");
+
+            if (context_func["filters"]) {
+                for (let i = 0; i < context_func["filters"].length; i++) {
+                    const curFilter = context_func["filters"][i];
+
+                    if (curFilter["type"] == "id") {
+                        const ModelItem = await ModelFactory.CreateNewModel(context_func["match"][0]["value"], null)
+                        relayVar.push("Unless the model is a " + ModelItem.Name);
+                    }
+                }
+            }
+
+            return relayVar;
+        }
+    },
     faction_add_upgrades : {
         event_priotity: 0,
         async getFactionRuleUpgrades(this: EventRunner, eventSource : any, relayVar : ModelUpgradeRelationship[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {

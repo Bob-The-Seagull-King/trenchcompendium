@@ -7,6 +7,7 @@ import { Model } from '../../feature/model/Model';
 import { Upgrade } from '../../feature/ability/Upgrade';
 import { ModelFactory } from '../../../factories/features/ModelFactory';
 import { UpgradeFactory } from '../../../factories/features/UpgradeFactory';
+import { EventRunner } from '../../contextevent/contexteventhandler';
 
 interface IModelUpgradeRelationship extends IStaticOptionContextObject {
     model_id_set : string[],
@@ -15,7 +16,7 @@ interface IModelUpgradeRelationship extends IStaticOptionContextObject {
     cost_type : number,
     restricted_upgrades : ModelUpgradeRestriction[],
     warband_limit : number,
-    faction_mask : string[]
+    required_upgrades : string[]
 }
 
 interface ModelUpgradeRestriction {
@@ -43,11 +44,32 @@ class ModelUpgradeRelationship extends StaticOptionContextObject {
         this.CostType = data.cost_type;
         this.WarbandLimit = data.warband_limit;
         this.Retrictions = data.restricted_upgrades;
-        this.RequiredUpgrades = data.faction_mask;
+        this.RequiredUpgrades = data.required_upgrades;
     }
 
     public async BuildUpgrade(upgrade_id : string) {
         this.UpgradeObject = await UpgradeFactory.CreateNewUpgrade(upgrade_id, null);
+    }
+
+    public async GetRestrictions() {
+        const restrictions : string[] = [];
+        
+        for (let i = 0; i < this.RequiredUpgrades.length; i++) {
+            const ReqUpgrade : Upgrade = await UpgradeFactory.CreateNewUpgrade(this.RequiredUpgrades[i], null);
+            restrictions.push("Requires " + ReqUpgrade.Name);
+        }
+
+        const EventProc: EventRunner = new EventRunner();
+
+        const result = await EventProc.runEvent(
+            "getUpgradeRestrictionsPresentation",
+            this,
+            [],
+            restrictions,
+            true
+        );
+
+        return result.join(',');
     }
 
 }
