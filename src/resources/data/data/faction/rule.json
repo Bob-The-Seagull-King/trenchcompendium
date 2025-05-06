@@ -273,6 +273,12 @@
                                     "value": "fc_ironsultanate",
                                     "equals": false,
                                     "strict": true
+                                },
+                                {             
+                                    "item": "tag",
+                                    "value": "exploration_only",
+                                    "equals": false,
+                                    "strict": true
                                 }
                             ],
                             "subparams": []
@@ -305,6 +311,12 @@
                                 {             
                                     "item": "faction_id",
                                     "value": "fc_ironsultanate",
+                                    "equals": false,
+                                    "strict": true
+                                },
+                                {             
+                                    "item": "tag",
+                                    "value": "exploration_only",
                                     "equals": false,
                                     "strict": true
                                 }
@@ -882,6 +894,12 @@
                                     "value": "fc_hereticlegion",
                                     "equals": false,
                                     "strict": true
+                                },
+                                {             
+                                    "item": "tag",
+                                    "value": "exploration_only",
+                                    "equals": false,
+                                    "strict": true
                                 }
                             ],
                             "subparams": []
@@ -914,6 +932,12 @@
                                 {             
                                     "item": "faction_id",
                                     "value": "fc_hereticlegion",
+                                    "equals": false,
+                                    "strict": true
+                                },
+                                {             
+                                    "item": "tag",
+                                    "value": "exploration_only",
                                     "equals": false,
                                     "strict": true
                                 }
