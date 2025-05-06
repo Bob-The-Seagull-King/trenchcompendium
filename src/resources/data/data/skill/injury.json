@@ -6,7 +6,9 @@
         "tags": {
         },
         "contextdata": {
-            "kill_character": {}
+            "on_pick": {
+                "kill_character": {}
+            }
          },
         "description": [            
             {
@@ -24,8 +26,10 @@
         "tags": {
         },
         "contextdata": {
-            "remove_character": {},
-            "strip_equipment": {}
+            "on_pick": {
+                "capture_character": {},
+                "strip_equipment": {}
+            }
          },
         "description": [            
             {
@@ -35,5 +39,490 @@
         ],
         "table_val": [12],
         "options": []
+    },
+    {
+        "id": "in_severenervedamage",
+        "name": "Severe Nerve Damage",
+        "source": "core",
+        "tags": {
+            "bonus": true
+        },
+        "contextdata": {
+            "bonus_ability": {
+                "action_type": ["action"]
+            }
+         },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "All ACTIONS this model takes (including Melee and Ranged attacks) are RISKY.",
+                "glossary": [
+                    {"val": "ACTIONS", "id": "kw_action"},
+                    {"val": "RISKY", "id": "kw_risky"}
+                ]
+            }
+        ],
+        "table_val": [13],
+        "options": []
+    },
+    {
+        "id": "in_handwound",
+        "name": "Hand Wound",
+        "source": "core",
+        "tags": {
+            "bonus": true
+        },
+        "contextdata": {
+            "bonus_ability": {
+                "action_type": ["attack_melee"]
+            }},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The model suffers -1 DICE for all of its Melee Attack ACTIONS that use the injured hand.",
+                "glossary": [
+                    {"val": "ACTIONS", "id": "kw_action"},
+                    {"val": "-1 DICE", "id": "kw_minusdice"}
+                ]
+            }
+        ],
+        "table_val": [14],
+        "options": []
+    },
+    {
+        "id": "in_lostaneye",
+        "name": "",
+        "source": "core",
+        "tags": {
+        },
+        "contextdata": {
+            "upgrade_stat": { "upgrades": [{"stat": "ranged", "value": -1}]},
+            "ignore_scar": {
+                "requirements": [
+                    {
+                        "type": "id",
+                        "value": "md_sniperpriest"
+                    }
+                ]
+            }
+         },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The model suffers -1 DICE for all of its Range Attack ACTIONS. Suffering 2 such injuries blinds the model and it has to retire from the campaign. Sniper Priest is immune to this Trama and suffers no Scar.",
+                "glossary": [
+                    {"val": "-1 DICE", "id": "kw_minusdice"},
+                    {"val": "ACTIONS", "id": "kw_action"}
+                ]
+            }
+        ],
+        "table_val": [15],
+        "options": []
+    },
+    {
+        "id": "in_chestwound",
+        "name": "Chest Wound",
+        "source": "core",
+        "tags": {
+        },
+        "contextdata": {
+         },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "All Injury rolls against this model are resolved with +1 DICE.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"}
+                ]
+            }
+        ],
+        "table_val": [16],
+        "options": []
+    },
+    {
+        "id": "in_insomniac",
+        "name": "Insomniac",
+        "source": "core",
+        "tags": {
+        },
+        "contextdata": {
+            "keyword_mod_remove": {"type": "remove", "value": "kw_infiltrator"}
+         },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This model must always be deployed as the first model on your side in any battle it takes part in. It cannot use the Keyword INFILTRATOR if it has it.",
+                "glossary": [
+                    {"val": "INFILTRATOR", "id": "kw_infiltrator"}
+                ]
+            }
+        ],
+        "table_val": [21],
+        "options": []
+    },
+    {
+        "id": "in_headwound",
+        "name": "Head Wound",
+        "source": "core",
+        "tags": {
+        },
+        "contextdata": {
+            "keyword_mod_remove": {"type": "remove", "value": "kw_elite"}
+         },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This model loses the Keyword ELITE. It can regain it in the future as normal via promotion, representing recovery.",
+                "glossary": [
+                    {"val": "ELITE", "id": "kw_elite"}
+                ]
+            }
+        ],
+        "table_val": [22],
+        "options": []
+    },
+    {
+        "id": "in_shellshocked",
+        "name": "Shell Shocked",
+        "source": "core",
+        "tags": {
+        },
+        "contextdata": {
+         },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Roll D6 on any Battle this model is taking part in. On a roll of 1-2, it cannot take part in the Battle."
+            }
+        ],
+        "table_val": [23],
+        "options": []
+    },
+    {
+        "id": "in_darkmemory",
+        "name": "Dark Memory",
+        "source": "core",
+        "tags": {
+        },
+        "contextdata": {
+         },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Mark down the opposing Warband type that caused this Trauma. If you play the same scenario again, the model FEARS all enemy models when playing against the same type of Warband.",
+                "glossary": [
+                    {"val": "FEARS", "id": "kw_fear"}
+                ]
+            }
+        ],
+        "table_val": [24],
+        "options": [{
+            "ref_id" : "ot_darkmemory",
+            "name" : "Feared Warband",
+            "description" : [],
+            "category" : "type",
+            "type" : "text",
+            "strictness" : "strict",
+            "predefined_options" : [],
+            "option_context" : {"basic_option_default":{}},
+            "data_search" : {      
+                "searchtype": "file", 
+                "searchparam": {
+                    "type": "faction" 
+                    }            
+            }
+        }]
+    },
+    {
+        "id": "in_paranoid",
+        "name": "Paranoid",
+        "source": "core",
+        "tags": {
+        },
+        "contextdata": {
+         },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This model cannot be deployed within 8\" of a friendly model. Friendly models can be deployed as normal once this model is deployed."
+            }
+        ],
+        "table_val": [25],
+        "options": []
+    },
+    {
+        "id": "in_lostarm",
+        "name": "Lost Arm",
+        "source": "core",
+        "tags": {
+        },
+        "contextdata": {
+            "add_arms": {"ranged": -1, "melee": -1}
+         },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The model has 1 less hand, which limits the types of weapons/equipment it can use."
+            }
+        ],
+        "table_val": [26],
+        "options": []
+    },
+    {
+        "id": "in_legwound",
+        "name": "Leg Wound",
+        "source": "core",
+        "tags": {
+            "bonus": true
+        },
+        "contextdata": {
+            "bonus_ability": {
+                "action_type": ["dash"]
+            },
+            "upgrade_stat": { "upgrades": [{"stat": "movement", "value": -2}]}
+         },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The model’s Movement characteristic is reduced by 2\" and it suffers -1 DICE to Dash.",
+                "glossary": [
+                    {"val": "-1 DICE", "id": "kw_minusdice"}
+                ]
+            }
+        ],
+        "table_val": [31],
+        "options": []
+    },
+    {
+        "id": "in_expensivetreatment",
+        "name": "Expensive Treatment",
+        "source": "core",
+        "tags": {
+        },
+        "contextdata": {
+            "on_deploy": {
+                "warband": [
+                    {
+                        "ducats": -10
+                    }
+                ]
+            }
+         },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The model’s wounds require constant treatment. To deploy this model, you must deduct 10 ducats from your Paychest. This payment does not count towards your Warband’s Threshold Value."
+            }
+        ],
+        "table_val": [32],
+        "options": []
+    },
+    {
+        "id": "in_possessed",
+        "name": "Possessed",
+        "source": "core",
+        "tags": {
+        },
+        "contextdata": {
+         },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "While unconscious, the model was possessed by the restless spirit of a dead soldier. If possible, this model must begin its Activation with a Dash and this Dash must cover a distance of at least 3” in a single direction. If this model is Down at the start of its Activation, it must instead first Stand and then attempt to Dash. If this model begins its Activation in Melee Combat, it may ignore these restrictions during that Activation."
+            }
+        ],
+        "table_val": [33],
+        "options": []
+    },
+    {
+        "id": "in_muscledamage",
+        "name": "Muscle Damage",
+        "source": "core",
+        "tags": {
+        },
+        "contextdata": {
+            "model_equipment_restriction": {
+                "removed": [
+                    {
+                        "category": "ranged",
+                        "res_type": "keyword",
+                        "value": "kw_heavy"
+                    },
+                    {
+                        "category": "melee",
+                        "res_type": "keyword",
+                        "value": "kw_heavy"
+                    }
+                ]
+            }
+         },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This model cannot carry HEAVY weapons.",
+                "glossary": [
+                    {"val": "HEAVY", "id": "kw_heavy"}
+                ]
+            }
+        ],
+        "table_val": [34],
+        "options": []
+    },
+    {
+        "id": "in_minorwound",
+        "name": "Minor Wound",
+        "source": "core",
+        "tags": {
+        },
+        "contextdata": {
+         },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This model cannot be fielded during the next battle."
+            }
+        ],
+        "table_val": [35],
+        "options": []
+    },
+    {
+        "id": "in_fullrecovery",
+        "name": "Full Recovery",
+        "source": "core",
+        "tags": {
+        },
+        "contextdata": {
+            "ignore_scar": {
+            }
+         },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The model has survived the battle with no ill effects. No Battle Scar is suffered."
+            }
+        ],
+        "table_val": [36,62],
+        "options": []
+    },
+    {
+        "id": "in_hardened",
+        "name": "Hardened",
+        "source": "core",
+        "tags": {
+        },
+        "contextdata": {
+            "ignore_scar": {
+            },
+            "keyword_ignore": {"value": "kw_fear"}
+         },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This model ignores the effects of the Keyword FEAR. No Battle Scar is suffered.",
+                "glossary": [
+                    {"val": "FEAR", "id": "kw_fear"}
+                ]
+            }
+        ],
+        "table_val": [63],
+        "options": []
+    },
+    {
+        "id": "in_bitterlessons",
+        "name": "Bitter Lessons",
+        "source": "core",
+        "tags": {
+        },
+        "contextdata": {
+            "ignore_scar": {
+            },
+            "on_pick": {
+                "experience": {
+                    "dice": 3
+                }
+            }
+         },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This model gains D3 Experience Points. No Battle Scar is suffered."
+            }
+        ],
+        "table_val": [64],
+        "options": []
+    },
+    {
+        "id": "in_robbed",
+        "name": "Robbed",
+        "source": "core",
+        "tags": {
+        },
+        "contextdata": {
+            "ignore_scar": {
+            },
+            "on_pick": {
+                "strip_equipment": {}
+            }
+         },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This model loses all weapons, armour and equipment it had. No Battle Scar is suffered."
+            }
+        ],
+        "table_val": [65],
+        "options": []
+    },
+    {
+        "id": "in_facialscar",
+        "name": "Facial Scar",
+        "source": "core",
+        "tags": {
+        },
+        "contextdata": {
+            "ignore_scar": {
+            }
+         },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Due to a grudge, this model gains +1 DICE for all Melee Attack ACTIONS against all enemies with the same Faction Keyword that took this model Out of Action. No Battle Scar is suffered.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "ACTIONS", "id": "kw_action"}
+                ]
+            }
+        ],
+        "table_val": [66],
+        "options": [{
+            "ref_id" : "ot_facialscar",
+            "name" : "Chosen Keyword",
+            "description" : [],
+            "category" : "type",
+            "type" : "text",
+            "strictness" : "strict",
+            "predefined_options" : [],
+            "option_context" : {"basic_option_default":{}},
+            "data_search" : {      
+                "searchtype": "complex",
+                "searchparam":    {
+                    "type": "keyword",
+                    "request":    {
+                        "operator": "and",
+                        "terms": [
+                            {             
+                                "item": "tags",
+                                "value": "category",
+                                "equals": true,
+                                "strict": true,
+                                "istag": true,
+                                "tagvalue": "faction"
+                            }
+                        ],
+                        "subparams": []
+                    }
+                }                        
+            }
+        }]
     }
 ]
