@@ -64,7 +64,7 @@ const RulesModelUpgrade: React.FC<RulesModelUpgradeProps> = ({ item }) => {
 
             {restrict != "" &&
                 <div className={'upgrade-limit'}>
-                    {(restrict != "" ? (" " + "(Requirements: " + maximum + ")") : "")}
+                    {(restrict != "" ? (" " + "(Requirements: " + restrict + ")") : "")}
                 </div>
             }
         </>
