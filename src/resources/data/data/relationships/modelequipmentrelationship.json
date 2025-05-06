@@ -239,6 +239,19 @@
         "removable": false
     },
     {
+        "id": "rel_md_eq_anchoriteshrine_saintmethodius_wheel",
+        "source": "core",
+        "tags": {},
+        "name": "Anchorite Shrine Equipment",
+        "contextdata": {},
+        "options": [],
+        "model_id": ["md_anchoriteshrine_saintmethodius"],
+        "mandatory_equipment": ["eq_catherinewheel"],
+        "removable": true,
+        "salevalue": 0,
+        "saletype": 1
+    },
+    {
         "id": "rel_md_eq_combatmedic",
         "source": "core",
         "tags": {},

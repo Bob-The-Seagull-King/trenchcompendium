@@ -12,7 +12,7 @@ import { Equipment, EquipmentStats } from '../../../../classes/feature/equipment
 import GenericHover from '../../../components/generics/GenericHover';
 import KeywordDisplay from '../glossary/KeywordDisplay';
 import ItemStat from '../../../components/subcomponents/description/ItemStat';
-import { getColour, makestringpresentable } from '../../../../utility/functions';
+import { getColour, getCostType, makestringpresentable } from '../../../../utility/functions';
 import { ModelEquipmentRelationship } from '../../../../classes/relationship/model/ModelEquipmentRelationship';
 import GenericDisplay from '../../../components/generics/GenericDisplay';
 import AbilityDisplay from '../ability/AbilityDisplay';
@@ -29,11 +29,19 @@ const ModelEquipmentDisplay = (props: any) => {
             <>
                 <EquipmentDisplay data={item} />
                 <div className="borderthin bordergrey">
-                    <span className=" ">
+                    <>
                         {
                             obj.Removable == true? "Removable" : "Cannot Be Removed"
                         }
-                    </span>
+                    </>
+                    {obj.SaleValue != 0 &&
+                    
+                    <>
+                        {
+                           "Can be sold for " + obj.SaleValue + " " + getCostType(obj.SaleType)
+                        }
+                    </>
+                    }
                 </div>
             </>
         )

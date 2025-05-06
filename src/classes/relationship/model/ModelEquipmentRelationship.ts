@@ -10,18 +10,32 @@ import { EquipmentFactory } from '../../../factories/features/EquipmentFactory';
 interface IModelEquipmentRelationship extends IStaticOptionContextObject {
     model_id : string[],
     mandatory_equipment : string[],
-    removable : boolean
+    removable : boolean,
+    salevalue? : number,
+    saletype? : number
 }
 
 class ModelEquipmentRelationship extends StaticOptionContextObject {
     
     public EquipmentItems : Equipment[] = [];
     public Removable : boolean;
+    public SaleValue : number;
+    public SaleType : number;
     
     public constructor(data: IModelEquipmentRelationship, parent : ContextObject | null)
     {
         super(data, parent)
         this.Removable = data.removable;
+        if (data.salevalue) {
+            this.SaleValue = data.salevalue;
+        } else {
+            this.SaleValue = 0;
+        }
+        if (data.saletype) {
+            this.SaleType = data.saletype;
+        } else {
+            this.SaleType = 0;
+        }
     }
 
     public async BuildEquipment(equipment : string[]) {
