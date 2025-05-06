@@ -1679,7 +1679,12 @@
         "description": [
             {
                 "tags": {"desc_type" : "default"},
-                "content": ""
+                "content": "Mechanized Heavy Infantry always wear Light Machine Armour which counts as Reinforced Armour (32mm Base). This is reflected in the cost and profile above. This can be upgraded to Machine Armour (despite not being ELITE and LIMIT: 1) for +10 Ducats (40mm Base). They can be equipped with any weapon, armour and equipment from the New Antioch Armoury.",
+                "glossary": [
+                    {"val": "New Antioch", "id": "kw_antioch"},
+                    {"val": "ELITE", "id": "kw_elite"},
+                    {"val": "LIMIT", "id": "kw_limit"}
+                ]
             }
         ],
         "lore": [       
@@ -1689,7 +1694,7 @@
                 "subcontent": [                       
                     {
                         "tags": {"desc_type" : "italic"},
-                        "content": ""
+                        "content": "Well-armoured, large soldiers who wield the heavy weaponry of the company. They are selected from amongst the best and given heavy chemical enhancements."
                     }
                 ]
             }
@@ -1704,7 +1709,7 @@
             "movetype": 0,
             "potential": 0
         },
-        "keywords" : [],
+        "keywords" : ["kw_antioch","kw_strong"],
         "abilities" : []
     },
     {
@@ -1893,5 +1898,89 @@
         },
         "keywords" : ["kw_antioch"],
         "abilities" : []
+    },
+    {
+        "id": "md_shocktrooper",
+        "name": "Shocktrooper",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "A Shocktrooper can be equipped with any weapon, armour and equipment from the New Antioch Armoury.",
+                "glossary": [
+                    {"val": "New Antioch", "id": "kw_antioch"}
+                ]
+            }
+        ],
+        "lore": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "Assault Troops that specialise in attacking enemy defensive positions. They are masters of rapid assault and melee combat. Experts at combined arms and Fireteam tactics."
+                    }
+                ]
+            }
+        ],
+        "team": "faithful",
+        "stats" : {            
+            "movement": 6,
+            "melee": 1,
+            "ranged": 0,
+            "base": [25],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 0
+        },
+        "keywords" : ["kw_antioch"],
+        "abilities" : ["ab_shockcharge","ab_assaultdrill"]
+    },
+    {
+        "id": "md_combatengineer",
+        "name": "Combat Engineer",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Combat Engineers are equipped with a Shovel and Engineer Body Armour. This equipment and armour can never be removed. A Combat Engineer can be equipped with any weapon or equipment from the New Antioch Armoury.",
+                "glossary": [
+                    {"val": "New Antioch", "id": "kw_antioch"}
+                ]
+            }
+        ],
+        "lore": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "The combat engineers specialise in destroying bunkers, discovering minefields and building battlefield emplacements. Casualties are extremely high in the combat engineer units, but they consider it an honour to fight and die for New Antioch and the Church."
+                    }
+                ]
+            }
+        ],
+        "team": "faithful",
+        "stats" : {            
+            "movement": 6,
+            "melee": 0,
+            "ranged": 1,
+            "base": [25],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 0
+        },
+        "keywords" : ["kw_antioch"],
+        "abilities" : ["ab_battlefielddemolition","ab_fortify","ab_demineengineer"]
     }
 ]

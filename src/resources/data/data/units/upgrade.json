@@ -839,5 +839,32 @@
             }
         ],
         "options": []
+    },
+    {
+        "id": "up_machinearmour",
+        "name": "Machine Armour",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {          
+                
+            "set_stat": { "upgrades" : [
+                {"stat": "base", "value": [40]}
+                ]},
+           "change_model_equipment": {
+               "removed": [
+                "rel_md_eq_mechanisedheavyinfantry_base"
+               ],
+               "added": [
+                "rel_md_eq_mechanisedheavyinfantry_advanced"
+               ]
+           }
+        },
+        "description": [           
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The model swaps out its Light Machine Armour for Machine Armour, and its base size increases to 40mm."
+            }
+        ],
+        "options": []
     }
 ]

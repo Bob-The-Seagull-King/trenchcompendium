@@ -159,6 +159,34 @@
         "modifiers": []
     },
     {
+        "id": "eq_engineerbodyarmour",
+        "name": "Engineer Body Armour",
+        "source": "core",
+        "tags": {"trait": true, "armour": true, "model": true},
+        "category": "armour",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {
+            "upgrade_stat": {"stat": "armour", "value": -2}
+        },
+        "description": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Grants a -2 modifier to injury rolls made against the Combat Engineer (this is included in the Combat Engineer’s profile). All weapons with keyword SHRAPNEL suffer -1 DICE on all injury rolls against the Combat Engineer and SHRAPNEL attacks do not cause extra BLOOD MARKERS on a model wearing this suit. The effects relating to SHRAPNEL work even against attacks that ignore armour.",
+                "glossary": [
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"},
+                    {"val": "SHRAPNEL", "id": "kw_shrapnel"}
+                ]
+            } 
+        ],
+        "lore": [     
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
         "id": "eq_combathelmet",
         "name": "Combat Helmet",
         "source": "core",

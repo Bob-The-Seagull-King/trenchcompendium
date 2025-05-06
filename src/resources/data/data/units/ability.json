@@ -1504,5 +1504,104 @@
             }
         ],
         "options": []
+    },
+    {
+        "id": "ab_shockcharge",
+        "name": "Shock Charge",
+        "source": "core",
+        "tags": {"trait": true, "bonus": true},
+        "contextdata": { },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"}, 
+                "content": "When a Shocktrooper charges, roll 2D6 instead of 1D6 and then add the highest of the two dice to their charge move."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_assaultdrill",
+        "name": "Assault Drill",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": { },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"}, 
+                "content": "Shocktroopers ignore the effects of Keyword HEAVY on Melee weapons. The Shocktrooper can still only carry a single HEAVY item, unless they are STRONG.",
+                "glossary": [
+                    {"val": "HEAVY", "id": "kw_heavy"},
+                    {"val": "STRONG", "id": "kw_strong"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_battlefielddemolition",
+        "name": "Battlefield Demolition",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {
+            "override_equipment_keyword": {
+                "overrides": [
+                    {
+                        "id": "eq_satchelcharge",
+                        "remove": [
+                            "kw_heavy"
+                        ]
+                    }
+                ]
+            }
+         },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"}, 
+                "content": "The Engineer ignores HEAVY rules for Satchel Charges.",
+                "glossary": [
+                    {"val": "HEAVY", "id": "kw_heavy"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_fortify",
+        "name": "Fortify",
+        "source": "core",
+        "tags": {"action": true},
+        "contextdata": { 
+         },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"}, 
+                "content": "During their Activation, an Engineer can take a RISKY ACTION with +1 DICE. If successful, the engineer is considered to be in Cover until the model moves. This ACTION cannot be used if the model is in Melee combat.",
+                "glossary": [
+                    {"val": "RISKY", "id": "kw_riskyaction"},
+                    {"val": "ACTION", "id": "kw_action"},
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "Cover", "id": "gl_cover"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_demineengineer",
+        "name": "De-Mine",
+        "source": "core",
+        "tags": {"action": true},
+        "contextdata": { 
+         },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"}, 
+                "content": "As a RISKY ACTION the Engineer can disable any mine or trapped terrain they move in contact with. If they fail, the mine blows up as described in applicable rules.",
+                "glossary": [
+                    {"val": "RISKY ACTION", "id": "kw_riskyaction"}
+                ]
+            }
+        ],
+        "options": []
     }
 ]
