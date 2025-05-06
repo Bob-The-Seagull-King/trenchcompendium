@@ -546,7 +546,7 @@
                 ]
             }
         },
-        "faction_id": ["fc_newantioch","fc_newantioch_fc_eirerangers","fc_newantioch_fv_papalstatesinterventionforce"],
+        "faction_id": ["fc_newantioch","fc_newantioch_fv_papalstatesinterventionforce"],
         "equipment_id": "eq_reinforcedarmour",
         "cost": 40,
         "costtype": 0,
@@ -567,7 +567,7 @@
                 ]
             }
         },
-        "faction_id": ["fc_newantioch","fc_newantioch_fc_eirerangers","fc_newantioch_fv_papalstatesinterventionforce"],
+        "faction_id": ["fc_newantioch","fc_newantioch_fv_papalstatesinterventionforce"],
         "equipment_id": "eq_machinearmour",
         "cost": 50,
         "costtype": 0,
