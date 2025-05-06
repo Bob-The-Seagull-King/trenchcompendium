@@ -13,10 +13,14 @@
     },
     {
         "id": "pt_learnedsaint",
-        "faction_id": ["fc_trenchpilgrim","fc_trenchpilgrim_fv_cavalcadeofthetenthplague","fc_trenchpilgrim_fv_processionofthesacredaffliction","fc_trenchpilgrim_fv_warpilgimageofsaintmethodius"]
+        "faction_id": ["fc_newantioch","fc_trenchpilgrim","fc_trenchpilgrim_fv_cavalcadeofthetenthplague","fc_trenchpilgrim_fv_processionofthesacredaffliction","fc_trenchpilgrim_fv_warpilgimageofsaintmethodius"]
     },
     {
         "id": "pt_warriorsaint",
-        "faction_id": ["fc_trenchpilgrim","fc_trenchpilgrim_fv_cavalcadeofthetenthplague","fc_trenchpilgrim_fv_processionofthesacredaffliction"]
+        "faction_id": ["fc_newantioch","fc_trenchpilgrim","fc_trenchpilgrim_fv_cavalcadeofthetenthplague","fc_trenchpilgrim_fv_processionofthesacredaffliction"]
+    },
+    {
+        "id": "pt_temporallord",
+        "faction_id": ["fc_newantioch"]
     }
 ]
