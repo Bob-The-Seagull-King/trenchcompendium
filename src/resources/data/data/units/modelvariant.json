@@ -559,5 +559,35 @@
         "stats" : {},
         "cut_abilities" : ["ab_trenchclericpowers"],
         "new_abilities" : ["ab_trenchclericpowers_lector"]
+    },
+    {
+        "id": "md_trenchcleric_erie",
+        "name": "Eire Warrior Priest",
+        "source": "core",
+        "tags": {},
+        "contextdata": {},
+        "base_id": "md_trenchcleric",
+        "variant_name": "Eire_Rangers",
+        "team": "faithful",
+        "cut_keywords" : [],
+        "keywords" : [],
+        "stats" : {},
+        "cut_abilities" : ["ab_trenchclericpowers"],
+        "new_abilities" : ["ab_trenchclericpowers_erie"]
+    },
+    {
+        "id": "md_lieutenant_eire",
+        "name": "Eire Lieutenant",
+        "source": "core",
+        "tags": {},
+        "contextdata": {},
+        "base_id": "md_lieutenant",
+        "variant_name": "Eire_Rangers",
+        "team": "faithful",
+        "cut_keywords" : [],
+        "keywords" : ["kw_skirmisher"],
+        "stats" : {},
+        "cut_abilities" : ["ab_onmycommand"],
+        "new_abilities" : []
     }
 ]

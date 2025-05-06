@@ -146,7 +146,7 @@
         "tags": {
         },
         "contextdata": {
-            "keyword_mod_remove": {"type": "remove", "value": "kw_infiltrator"}
+            "keyword_mod_remove": {"mods": [{"type": "remove", "value": "kw_infiltrator"}]}
          },
         "description": [            
             {
@@ -167,7 +167,7 @@
         "tags": {
         },
         "contextdata": {
-            "keyword_mod_remove": {"type": "remove", "value": "kw_elite"}
+            "keyword_mod_remove": {"mods": [{"type": "remove", "value": "kw_elite"}]}
          },
         "description": [            
             {

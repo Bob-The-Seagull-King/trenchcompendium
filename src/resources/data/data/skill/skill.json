@@ -275,7 +275,7 @@
         "tags": { "trait": true },
         "contextdata": { 
             "enhance_action" : { "category": ["melee"], "tag": ["melee"]},
-            "keyword_mod": {"type": "add", "value": "kw_strong"}
+            "keyword_mod": {"mods": [{"type": "add", "value": "kw_strong"}]}
         },
         "description": [            
             {

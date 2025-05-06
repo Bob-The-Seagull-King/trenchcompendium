@@ -4,7 +4,7 @@
         "name": "Skirmisher",
         "source": "core",
         "tags": {"trait": true},
-        "contextdata": {"keyword_mod": {"type": "add", "value": "kw_skirmisher"}},
+        "contextdata": {"keyword_mod": {"mods": [{"type": "add", "value": "kw_skirmisher"}]}},
         "description": [            
             {
                 "tags": {"desc_type" : "default"},
@@ -19,7 +19,7 @@
         "name": "Infiltrator",
         "source": "core",
         "tags": {"trait": true},
-        "contextdata": {"keyword_mod": {"type": "add", "value": "kw_infiltrator"}},
+        "contextdata": {"keyword_mod": {"mods": [{"type": "add", "value": "kw_infiltrator"}]}},
         "description": [            
             {
                 "tags": {"desc_type" : "default"},
@@ -878,6 +878,58 @@
             {
                 "tags": {"desc_type" : "default"},
                 "content": "The model swaps out its Light Machine Armour for Machine Armour, and its base size increases to 40mm."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_fianna",
+        "name": "Infiltrator",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {
+            "keyword_mod": {"mods": [
+                {"type": "add", "value": "kw_infiltrator"},
+                {"type": "add", "value": "kw_skirmisher"}
+            ]}
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The model gains the keywords INFILTRATOR and SKIRMISHER",
+                "glossary": [
+                    {"val": "INFILTRATOR", "id": "kw_infiltrator"},
+                    {"val": "SKIRMISHER", "id": "kw_skirmisher"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_berserker",
+        "name": "Berserker",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {
+           "keyword_ignore": {"value": "kw_fear"},            
+           "override_equipment_restriction": {
+               "required": [
+                   {
+                       "category": "armour",
+                       "res_type": "tag",
+                       "value": "shield"
+                   }
+               ]
+           }
+        },
+        "description": [           
+            {
+                "tags": {"desc_type" : "default"},
+                "content": " This model is immune to FEAR and disregards any BLOOD MARKERS from any source. Berserkers never wear armour, though they can carry a Trench Shield.",
+                "glossary": [
+                    {"val": "FEAR", "id": "kw_fear"},
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"}
+                ]
             }
         ],
         "options": []

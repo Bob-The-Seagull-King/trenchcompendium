@@ -1497,5 +1497,203 @@
         }
         ],
         "options": []
+    },
+    {
+        "id": "rl_fianna",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            "faction_add_upgrades": {
+                "model_key": "rl_fianna",
+                "models_id": ["md_shocktrooper"]
+            }
+        },
+        "name": "Fianna",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Any Shocktroopers in an Eire Warband can be made a member of Fianna, the famed warrior-hunters. They cost +10 ducats each and have the Keywords SKIRMISHER and INFILTRATOR.",
+            "glossary": [
+                {"val": "SKIRMISHER", "id": "kw_skirmisher"},
+                {"val": "INFILTRATOR", "id": "kw_infiltrator"}
+            ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_carnyx",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Carnyx",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Your army can purchase a special Carnyx instead of a generic musical instrument. This horn is identical to a musical instrument (including equipment restrictions and LIMIT), except it can be carried by an ELITE model and the model carrying it causes FEAR.",
+            "glossary": [
+                {"val": "LIMIT", "id": "kw_limit"},
+                {"val": "ELITE", "id": "kw_elite"},
+                {"val": "FEAR", "id": "kw_fear"}
+            ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_hitandruntactics",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            "add_to_model": {
+                "id": "rl_hitandruntactics"
+            }
+        },
+        "name": "Hit-and-Run Tactics",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "If a model of this warband uses the Retreat ACTION to move away from Combat, enemies have a -1 DICE penalty to hit rolls with their free attack.",
+            "glossary": [
+                {"val": "ACTION", "id": "kw_action"},
+                {"val": "-1 DICE", "id": "kw_minusdice"}
+            ]
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_berserker",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            
+            "faction_add_upgrades": {
+                "model_key": "rl_berserker",
+                "models_id": ["md_lieutenant","md_shocktrooper"]
+            }
+        },
+        "name": "Berserker",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Either your Lieutenant or one of the Fianna can be a Berserker. This model is immune to FEAR and disregards any BLOOD MARKERS from any source. Berserkers never wear armour, though they can carry a Trench Shield. Add +15 Ducats to the cost of this model.",
+            "glossary": [
+                {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"},
+                {"val": "FEAR", "id": "kw_fear"}
+            ]
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_stronginfaith",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Strong in Faith",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Eire is a bastion of the Church, with many famed warrior-priests who travel to war. The warband may have up to two Trench Clerics and they can each choose to replace their Onwards, Christian Soldiers! ability with \"Away Serpents!\" or \"Arise and be Healed!\"."
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_looseorganisation",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+
+            "add_fireteam_warband" : { "type": "antioch", "count": 1 }
+        },
+        "name": "Loose Organisation",
+        "description":  [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Your warband may only have up to one FIRETEAM from the New Antioch Fireteams feature. Additionally, your Lieutenant loses the On my command! ability and gains the Keyword SKIRMISHER. ",
+                "glossary": [
+                    {"val": "FIRETEAM", "id": "kw_fireteam"},
+                    {"val": "SKIRMISHER", "id": "kw_skirmisher"}
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [
+                    {
+                        "tags": {"desc_type" : "bold"},
+                        "content": "FIRETEAM: ",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "This model is part of a FIRETEAM made up of two models. All models that are part of the same FIRETEAM can be activated at the same time without the opponent getting their turn in between and can take their ACTIONS in any order they wish, switching between the two models. Note that if the Activation of either member of the FIRETEAM forcefully ends (due to a failed RISKY ACTION for example), it ends both Activations. Allies cannot be part of a FIRETEAM.",
+                                "glossary": [
+                                    {"val": "FIRETEAM", "id": "kw_fireteam"}
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                    
+                        {
+                            "tags": {"desc_type" : "bold"},
+                            "content": "Concentrated Attack: ",
+                            "subcontent": [
+                                {
+                                    "tags": {"desc_type" : "default"},
+                                    "content": "If a model in the FIRETEAM makes any kind of Attack ACTION (ranged or melee) against an opponent, where the other member of their FIRETEAM has already hit it with an attack ACTION during the same activation, the cost of a Bloodbath is reduced to three BLOOD MARKERS against this opponent, whether the model is standing or Down.",
+                                    "glossary": [
+                                        {"val": "FIRETEAM", "id": "kw_fireteam"},
+                                        {"val": "ACTION", "id": "kw_action"},
+                                        {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"}
+                                    ]
+                                }
+                            ]
+                        }
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_followersofsaintpatrick",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Followers of Saint Patrick",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "If playing a Campaign, the patron of the warband is automatically the Learned Saint Saint Patrick."
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_lightinfantry",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Light Infantry",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "The warband is allowed to field only one Mechanized Heavy Infantry trooper. No model (save for the single Mechanized Heavy Infantry) may carry a HEAVY weapon or wear Heavy or Machine Armour. This does not apply to Combat Engineers’ Satchel Charges.",
+            "glossary": [
+                {"val": "HEAVY", "id": "kw_heavy"}
+            ]
+        }
+        ],
+        "options": []
     }
 ]

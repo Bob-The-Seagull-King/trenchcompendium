@@ -41,7 +41,7 @@
         "tags": {},
         "name": "Pistol",
         "contextdata": {},
-        "faction_id": ["fc_newantioch","fc_newantioch_fv_papalstatesinterventionforce","fc_trenchpilgrim","fc_trenchpilgrim_fv_warpilgimageofsaintmethodius","fc_trenchpilgrim_fv_cavalcadeofthetenthplague","fc_trenchpilgrim_fv_processionofthesacredaffliction","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_newantioch","fc_newantioch_fc_eirerangers","fc_newantioch_fv_papalstatesinterventionforce","fc_trenchpilgrim","fc_trenchpilgrim_fv_warpilgimageofsaintmethodius","fc_trenchpilgrim_fv_cavalcadeofthetenthplague","fc_trenchpilgrim_fv_processionofthesacredaffliction","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_pistolrevolver",
         "cost": 6,
         "costtype": 0,
@@ -53,7 +53,7 @@
         "tags": {},
         "name": "Shotgun",
         "contextdata": {},
-        "faction_id": ["fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut","fc_trenchpilgrim","fc_trenchpilgrim_fv_cavalcadeofthetenthplague","fc_newantioch","fc_newantioch_fv_papalstatesinterventionforce"],
+        "faction_id": ["fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut","fc_trenchpilgrim","fc_trenchpilgrim_fv_cavalcadeofthetenthplague","fc_newantioch","fc_newantioch_fc_eirerangers","fc_newantioch_fv_papalstatesinterventionforce"],
         "equipment_id": "eq_shotgun",
         "cost": 10,
         "costtype": 0,
@@ -112,7 +112,7 @@
         "name": "Sniper Rifle",
         "contextdata": {    
         },
-        "faction_id": ["fc_newantioch","fc_newantioch_fv_papalstatesinterventionforce"],
+        "faction_id": ["fc_newantioch","fc_newantioch_fc_eirerangers","fc_newantioch_fv_papalstatesinterventionforce"],
         "equipment_id": "eq_sniperrifle",
         "cost": 35,
         "costtype": 0,
@@ -138,7 +138,7 @@
         "name": "Grenades",
         "contextdata": {  
         },
-        "faction_id": ["fc_newantioch","fc_newantioch_fv_papalstatesinterventionforce","fc_hereticlegion","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_newantioch","fc_newantioch_fc_eirerangers","fc_newantioch_fv_papalstatesinterventionforce","fc_hereticlegion","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_grenades",
         "cost": 7,
         "costtype": 0,
@@ -192,6 +192,27 @@
         "limit": 2
     },
     {
+        "id": "rel_fc_eq_machinegun_eire",
+        "source": "core",
+        "tags": {     },
+        "name": "Machine Gun",
+        "contextdata": {  
+            "faction_eq_restriction": {
+                "permitted": [
+                    {
+                        "res_type": "id",
+                        "value": "md_mechanisedheavyinfantry"
+                    }
+                ]
+            }  
+        },
+        "faction_id": ["fc_newantioch_fc_eirerangers"],
+        "equipment_id": "eq_machinegun",
+        "cost": 50,
+        "costtype": 0,
+        "limit": 2
+    },
+    {
         "id": "rel_fc_eq_machinegun_glory",
         "source": "core",
         "tags": {     },
@@ -211,7 +232,7 @@
         "name": "Flamethrower",
         "contextdata": {  
         },
-        "faction_id": ["fc_newantioch","fc_newantioch_fv_papalstatesinterventionforce","fc_hereticlegion","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_newantioch","fc_newantioch_fc_eirerangers","fc_newantioch_fv_papalstatesinterventionforce","fc_hereticlegion","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_flamethrower",
         "cost": 30,
         "costtype": 0,
@@ -279,7 +300,7 @@
         "name": "Knife",
         "contextdata": {    
         },
-        "faction_id": ["fc_newantioch","fc_newantioch_fv_papalstatesinterventionforce","fc_trenchpilgrim","fc_trenchpilgrim_fv_warpilgimageofsaintmethodius","fc_trenchpilgrim_fv_cavalcadeofthetenthplague","fc_trenchpilgrim_fv_processionofthesacredaffliction","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_newantioch","fc_newantioch_fc_eirerangers","fc_newantioch_fv_papalstatesinterventionforce","fc_trenchpilgrim","fc_trenchpilgrim_fv_warpilgimageofsaintmethodius","fc_trenchpilgrim_fv_cavalcadeofthetenthplague","fc_trenchpilgrim_fv_processionofthesacredaffliction","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_knifedagger",
         "cost": 1,
         "costtype": 0,
@@ -292,7 +313,7 @@
         "name": "Bayonet",
         "contextdata": {    
         },
-        "faction_id": ["fc_newantioch","fc_newantioch_fv_papalstatesinterventionforce","fc_trenchpilgrim","fc_trenchpilgrim_fv_warpilgimageofsaintmethodius","fc_trenchpilgrim_fv_cavalcadeofthetenthplague","fc_trenchpilgrim_fv_processionofthesacredaffliction","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_newantioch","fc_newantioch_fc_eirerangers","fc_newantioch_fv_papalstatesinterventionforce","fc_trenchpilgrim","fc_trenchpilgrim_fv_warpilgimageofsaintmethodius","fc_trenchpilgrim_fv_cavalcadeofthetenthplague","fc_trenchpilgrim_fv_processionofthesacredaffliction","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_bayonet",
         "cost": 2,
         "costtype": 0,
@@ -305,7 +326,7 @@
         "name": "Trench Club",
         "contextdata": {    
         },
-        "faction_id": ["fc_newantioch","fc_newantioch_fv_papalstatesinterventionforce","fc_trenchpilgrim","fc_trenchpilgrim_fv_warpilgimageofsaintmethodius","fc_trenchpilgrim_fv_cavalcadeofthetenthplague","fc_trenchpilgrim_fv_processionofthesacredaffliction","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_newantioch","fc_newantioch_fc_eirerangers","fc_newantioch_fv_papalstatesinterventionforce","fc_trenchpilgrim","fc_trenchpilgrim_fv_warpilgimageofsaintmethodius","fc_trenchpilgrim_fv_cavalcadeofthetenthplague","fc_trenchpilgrim_fv_processionofthesacredaffliction","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_trenchclub",
         "cost": 3,
         "costtype": 0,
@@ -318,7 +339,7 @@
         "name": "Sword/Axe",
         "contextdata": {    
         },
-        "faction_id": ["fc_newantioch","fc_newantioch_fv_papalstatesinterventionforce","fc_trenchpilgrim","fc_trenchpilgrim_fv_warpilgimageofsaintmethodius","fc_trenchpilgrim_fv_cavalcadeofthetenthplague","fc_trenchpilgrim_fv_processionofthesacredaffliction","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_newantioch","fc_newantioch_fc_eirerangers","fc_newantioch_fv_papalstatesinterventionforce","fc_trenchpilgrim","fc_trenchpilgrim_fv_warpilgimageofsaintmethodius","fc_trenchpilgrim_fv_cavalcadeofthetenthplague","fc_trenchpilgrim_fv_processionofthesacredaffliction","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_swordaxe",
         "cost": 4,
         "costtype": 0,
@@ -331,7 +352,7 @@
         "name": "Polearm",
         "contextdata": {    
         },
-        "faction_id": ["fc_newantioch","fc_newantioch_fv_papalstatesinterventionforce","fc_trenchpilgrim","fc_trenchpilgrim_fv_warpilgimageofsaintmethodius","fc_trenchpilgrim_fv_cavalcadeofthetenthplague","fc_trenchpilgrim_fv_processionofthesacredaffliction","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_newantioch","fc_newantioch_fc_eirerangers","fc_newantioch_fv_papalstatesinterventionforce","fc_trenchpilgrim","fc_trenchpilgrim_fv_warpilgimageofsaintmethodius","fc_trenchpilgrim_fv_cavalcadeofthetenthplague","fc_trenchpilgrim_fv_processionofthesacredaffliction","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_trenchpolearm",
         "cost": 7,
         "costtype": 0,
@@ -351,6 +372,27 @@
         "limit": 0
     },
     {
+        "id": "rel_fc_eq_doublehandedbluntweapon_eire",
+        "source": "core",
+        "tags": {   },
+        "name": "Great-Hammer/Maul",
+        "contextdata": {      
+            "faction_eq_restriction": {
+                "permitted": [
+                    {
+                        "res_type": "id",
+                        "value": "md_mechanisedheavyinfantry"
+                    }
+                ]
+            }  
+        },
+        "faction_id": ["fc_newantioch_fc_eirerangers"],
+        "equipment_id": "eq_doublehandedbluntweapon",
+        "cost": 10,
+        "costtype": 0,
+        "limit": 0
+    },
+    {
         "id": "rel_fc_eq_greatswordaxe",
         "source": "core",
         "tags": {   },
@@ -358,6 +400,27 @@
         "contextdata": {    
         },
         "faction_id": ["fc_newantioch","fc_newantioch_fv_papalstatesinterventionforce","fc_trenchpilgrim","fc_trenchpilgrim_fv_warpilgimageofsaintmethodius","fc_trenchpilgrim_fv_cavalcadeofthetenthplague","fc_trenchpilgrim_fv_processionofthesacredaffliction","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "equipment_id": "eq_greatswordaxe",
+        "cost": 12,
+        "costtype": 0,
+        "limit": 0
+    },
+    {
+        "id": "rel_fc_eq_greatswordaxe_eire",
+        "source": "core",
+        "tags": {   },
+        "name": "Great-Sword/Axe",
+        "contextdata": {   
+            "faction_eq_restriction": {
+                "permitted": [
+                    {
+                        "res_type": "id",
+                        "value": "md_mechanisedheavyinfantry"
+                    }
+                ]
+            }   
+        },
+        "faction_id": ["fc_newantioch_fc_eirerangers"],
         "equipment_id": "eq_greatswordaxe",
         "cost": 12,
         "costtype": 0,
@@ -433,7 +496,7 @@
         "name": "Standard Armour",
         "contextdata": {    
         },
-        "faction_id": ["fc_newantioch","fc_newantioch_fv_papalstatesinterventionforce","fc_trenchpilgrim","fc_trenchpilgrim_fv_warpilgimageofsaintmethodius","fc_trenchpilgrim_fv_cavalcadeofthetenthplague","fc_trenchpilgrim_fv_processionofthesacredaffliction","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_newantioch","fc_newantioch_fc_eirerangers","fc_newantioch_fv_papalstatesinterventionforce","fc_trenchpilgrim","fc_trenchpilgrim_fv_warpilgimageofsaintmethodius","fc_trenchpilgrim_fv_cavalcadeofthetenthplague","fc_trenchpilgrim_fv_processionofthesacredaffliction","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_standardarmour",
         "cost": 15,
         "costtype": 0,
@@ -483,7 +546,7 @@
                 ]
             }
         },
-        "faction_id": ["fc_newantioch","fc_newantioch_fv_papalstatesinterventionforce"],
+        "faction_id": ["fc_newantioch","fc_newantioch_fc_eirerangers","fc_newantioch_fv_papalstatesinterventionforce"],
         "equipment_id": "eq_reinforcedarmour",
         "cost": 40,
         "costtype": 0,
@@ -504,7 +567,7 @@
                 ]
             }
         },
-        "faction_id": ["fc_newantioch","fc_newantioch_fv_papalstatesinterventionforce"],
+        "faction_id": ["fc_newantioch","fc_newantioch_fc_eirerangers","fc_newantioch_fv_papalstatesinterventionforce"],
         "equipment_id": "eq_machinearmour",
         "cost": 50,
         "costtype": 0,
@@ -546,7 +609,7 @@
                 ]
             }
         },
-        "faction_id": ["fc_newantioch","fc_newantioch_fv_papalstatesinterventionforce"],
+        "faction_id": ["fc_newantioch","fc_newantioch_fc_eirerangers","fc_newantioch_fv_papalstatesinterventionforce"],
         "equipment_id": "eq_heavyballisticshield",
         "cost": 15,
         "costtype": 0,
@@ -559,7 +622,7 @@
         "name": "Trench Shield",
         "contextdata": {   
         },
-        "faction_id": ["fc_newantioch","fc_newantioch_fv_papalstatesinterventionforce","fc_trenchpilgrim","fc_trenchpilgrim_fv_warpilgimageofsaintmethodius","fc_trenchpilgrim_fv_cavalcadeofthetenthplague","fc_trenchpilgrim_fv_processionofthesacredaffliction","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_newantioch","fc_newantioch_fc_eirerangers","fc_newantioch_fv_papalstatesinterventionforce","fc_trenchpilgrim","fc_trenchpilgrim_fv_warpilgimageofsaintmethodius","fc_trenchpilgrim_fv_cavalcadeofthetenthplague","fc_trenchpilgrim_fv_processionofthesacredaffliction","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_trenchshield",
         "cost": 10,
         "costtype": 0,
@@ -572,7 +635,7 @@
         "name": "Combat Helmet",
         "contextdata": {   
         },
-        "faction_id": ["fc_newantioch","fc_newantioch_fv_papalstatesinterventionforce","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_newantioch","fc_newantioch_fc_eirerangers","fc_newantioch_fv_papalstatesinterventionforce","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_combathelmet",
         "cost": 5,
         "costtype": 0,
@@ -585,7 +648,7 @@
         "name": "Gas Mask",
         "contextdata": {   
         },
-        "faction_id": ["fc_newantioch","fc_newantioch_fv_papalstatesinterventionforce","fc_trenchpilgrim","fc_trenchpilgrim_fv_warpilgimageofsaintmethodius","fc_trenchpilgrim_fv_cavalcadeofthetenthplague","fc_trenchpilgrim_fv_processionofthesacredaffliction","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_newantioch","fc_newantioch_fc_eirerangers","fc_newantioch_fv_papalstatesinterventionforce","fc_trenchpilgrim","fc_trenchpilgrim_fv_warpilgimageofsaintmethodius","fc_trenchpilgrim_fv_cavalcadeofthetenthplague","fc_trenchpilgrim_fv_processionofthesacredaffliction","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_gasmask",
         "cost": 5,
         "costtype": 0,
@@ -598,7 +661,7 @@
         "name": "Shovel",
         "contextdata": {   
         },
-        "faction_id": ["fc_newantioch","fc_newantioch_fv_papalstatesinterventionforce","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_newantioch","fc_newantioch_fc_eirerangers","fc_newantioch_fv_papalstatesinterventionforce","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_shovel",
         "cost": 5,
         "costtype": 0,
@@ -645,7 +708,7 @@
         "name": "Mountaineer Kit",
         "contextdata": {       
         },
-        "faction_id": ["fc_newantioch","fc_newantioch_fv_papalstatesinterventionforce"],
+        "faction_id": ["fc_newantioch","fc_newantioch_fc_eirerangers","fc_newantioch_fv_papalstatesinterventionforce"],
         "equipment_id": "eq_mountaineerkit",
         "cost": 3,
         "costtype": 0,
@@ -671,7 +734,7 @@
         "name": "Medi-Kit",
         "contextdata": {       
         },
-        "faction_id": ["fc_newantioch","fc_newantioch_fv_papalstatesinterventionforce","fc_trenchpilgrim","fc_trenchpilgrim_fv_warpilgimageofsaintmethodius","fc_trenchpilgrim_fv_cavalcadeofthetenthplague","fc_trenchpilgrim_fv_processionofthesacredaffliction","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_newantioch","fc_newantioch_fc_eirerangers","fc_newantioch_fv_papalstatesinterventionforce","fc_trenchpilgrim","fc_trenchpilgrim_fv_warpilgimageofsaintmethodius","fc_trenchpilgrim_fv_cavalcadeofthetenthplague","fc_trenchpilgrim_fv_processionofthesacredaffliction","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_medikit",
         "cost": 5,
         "costtype": 0,
@@ -772,7 +835,7 @@
         "name": "Troop Flag",
         "contextdata": {        
         },
-        "faction_id": ["fc_newantioch","fc_newantioch_fv_papalstatesinterventionforce","fc_trenchpilgrim","fc_trenchpilgrim_fv_warpilgimageofsaintmethodius","fc_trenchpilgrim_fv_cavalcadeofthetenthplague","fc_trenchpilgrim_fv_processionofthesacredaffliction","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_newantioch","fc_newantioch_fc_eirerangers","fc_newantioch_fv_papalstatesinterventionforce","fc_trenchpilgrim","fc_trenchpilgrim_fv_warpilgimageofsaintmethodius","fc_trenchpilgrim_fv_cavalcadeofthetenthplague","fc_trenchpilgrim_fv_processionofthesacredaffliction","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_troopflag",
         "cost": 1,
         "costtype": 1,
@@ -793,7 +856,7 @@
                 ]
             }      
         },
-        "faction_id": ["fc_newantioch","fc_newantioch_fv_papalstatesinterventionforce","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_newantioch","fc_newantioch_fc_eirerangers","fc_newantioch_fv_papalstatesinterventionforce","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_binoculars",
         "cost": 10,
         "costtype": 0,
@@ -892,7 +955,7 @@
         "name": "Sniper Scope",
         "contextdata": {     
         },
-        "faction_id": ["fc_newantioch","fc_newantioch_fv_papalstatesinterventionforce","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_newantioch","fc_newantioch_fc_eirerangers","fc_newantioch_fv_papalstatesinterventionforce","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_sniperscope",
         "cost": 2,
         "costtype": 1,
@@ -930,7 +993,7 @@
         "name": "Rocket-Propelled Grenade",
         "contextdata": {     
         },
-        "faction_id": ["fc_newantioch","fc_newantioch_fv_papalstatesinterventionforce","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_newantioch","fc_newantioch_fc_eirerangers","fc_newantioch_fv_papalstatesinterventionforce","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_rocketpropelledgrenade",
         "cost": 2,
         "costtype": 1,
@@ -945,7 +1008,7 @@
         "name": "Salvage Golem",
         "contextdata": {     
         },
-        "faction_id": ["fc_newantioch","fc_newantioch_fv_papalstatesinterventionforce"],
+        "faction_id": ["fc_newantioch","fc_newantioch_fc_eirerangers","fc_newantioch_fv_papalstatesinterventionforce"],
         "equipment_id": "eq_salvagegolem",
         "cost": 4,
         "costtype": 1,
@@ -1029,7 +1092,7 @@
                 ]
             }   
         },
-        "faction_id": ["fc_newantioch","fc_newantioch_fv_papalstatesinterventionforce","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_newantioch","fc_newantioch_fc_eirerangers","fc_newantioch_fv_papalstatesinterventionforce","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_knighthood",
         "cost": 5,
         "costtype": 1,
@@ -1044,7 +1107,7 @@
         "name": "Smokescreen",
         "contextdata": {         
         },
-        "faction_id": ["fc_newantioch","fc_newantioch_fv_papalstatesinterventionforce"],
+        "faction_id": ["fc_newantioch","fc_newantioch_fc_eirerangers","fc_newantioch_fv_papalstatesinterventionforce"],
         "equipment_id": "eq_smokescreen",
         "cost": 5,
         "costtype": 1,
@@ -1059,7 +1122,7 @@
         "name": "Field Hospital",
         "contextdata": {    
         },
-        "faction_id": ["fc_newantioch","fc_newantioch_fv_papalstatesinterventionforce","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom"],
+        "faction_id": ["fc_newantioch","fc_newantioch_fc_eirerangers","fc_newantioch_fv_papalstatesinterventionforce","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom"],
         "equipment_id": "eq_fieldhospital",
         "cost": 10,
         "costtype": 1,
@@ -1074,7 +1137,7 @@
         "name": "Resurrection Engine",
         "contextdata": {    
         },
-        "faction_id": ["fc_newantioch","fc_newantioch_fv_papalstatesinterventionforce"],
+        "faction_id": ["fc_newantioch","fc_newantioch_fc_eirerangers","fc_newantioch_fv_papalstatesinterventionforce"],
         "equipment_id": "eq_resurrectionengine",
         "cost": 12,
         "costtype": 1,
@@ -1167,7 +1230,29 @@
         "name": "Heavy Shotgun",
         "contextdata": {  
         },
-        "faction_id": ["fc_newantioch","fc_newantioch_fv_papalstatesinterventionforce"],
+        "faction_id": ["fc_newantioch","fc_newantioch_fc_eirerangers","fc_newantioch_fv_papalstatesinterventionforce"],
+        "equipment_id": "eq_heavyshotgun",
+        "cost": 20,
+        "costtype": 0,
+        "limit": 2
+    },
+    {
+        "id": "rel_fc_eq_heavyshotgun_erie",
+        "source": "core",
+        "tags": {
+        },
+        "name": "Heavy Shotgun",
+        "contextdata": {   
+            "faction_eq_restriction": {
+                "permitted": [
+                    {
+                        "res_type": "id",
+                        "value": "md_mechanisedheavyinfantry"
+                    }
+                ]
+            } 
+        },
+        "faction_id": ["fc_newantioch_fc_eirerangers"],
         "equipment_id": "eq_heavyshotgun",
         "cost": 20,
         "costtype": 0,
@@ -1281,7 +1366,7 @@
         "tags": {},
         "name": "Bolt-Action Rifle",
         "contextdata": {},
-        "faction_id": ["fc_newantioch","fc_newantioch_fv_papalstatesinterventionforce","fc_trenchpilgrim","fc_trenchpilgrim_fv_warpilgimageofsaintmethodius","fc_trenchpilgrim_fv_cavalcadeofthetenthplague","fc_trenchpilgrim_fv_processionofthesacredaffliction","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty"],
+        "faction_id": ["fc_newantioch","fc_newantioch_fc_eirerangers","fc_newantioch_fv_papalstatesinterventionforce","fc_trenchpilgrim","fc_trenchpilgrim_fv_warpilgimageofsaintmethodius","fc_trenchpilgrim_fv_cavalcadeofthetenthplague","fc_trenchpilgrim_fv_processionofthesacredaffliction","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty"],
         "equipment_id": "eq_boltactionrifle",
         "cost": 10,
         "costtype": 0,
@@ -1293,7 +1378,7 @@
         "tags": {},
         "name": "Semi-Automatic Rifle",
         "contextdata": {},
-        "faction_id": ["fc_newantioch","fc_newantioch_fv_papalstatesinterventionforce","fc_trenchpilgrim","fc_trenchpilgrim_fv_warpilgimageofsaintmethodius","fc_trenchpilgrim_fv_cavalcadeofthetenthplague","fc_trenchpilgrim_fv_processionofthesacredaffliction","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty"],
+        "faction_id": ["fc_newantioch","fc_newantioch_fc_eirerangers","fc_newantioch_fv_papalstatesinterventionforce","fc_trenchpilgrim","fc_trenchpilgrim_fv_warpilgimageofsaintmethodius","fc_trenchpilgrim_fv_cavalcadeofthetenthplague","fc_trenchpilgrim_fv_processionofthesacredaffliction","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty"],
         "equipment_id": "eq_semiautomaticrifle",
         "cost": 15,
         "costtype": 0,
@@ -1325,7 +1410,7 @@
                     }
                 ]
             }   },
-        "faction_id": ["fc_newantioch","fc_newantioch_fv_papalstatesinterventionforce"],
+        "faction_id": ["fc_newantioch","fc_newantioch_fc_eirerangers","fc_newantioch_fv_papalstatesinterventionforce"],
         "equipment_id": "eq_automaticpistol",
         "cost": 20,
         "costtype": 0,
@@ -1369,7 +1454,7 @@
         "tags": {},
         "name": "Automatic Rifle",
         "contextdata": {},
-        "faction_id": ["fc_newantioch","fc_newantioch_fv_papalstatesinterventionforce","fc_trenchpilgrim_fv_warpilgimageofsaintmethodius"],
+        "faction_id": ["fc_newantioch","fc_newantioch_fc_eirerangers","fc_newantioch_fv_papalstatesinterventionforce","fc_trenchpilgrim_fv_warpilgimageofsaintmethodius"],
         "equipment_id": "eq_automaticrifle",
         "cost": 40,
         "costtype": 0,
@@ -1405,7 +1490,7 @@
         "tags": {},
         "name": "Indenciary Grenades",
         "contextdata": {},
-        "faction_id": ["fc_newantioch","fc_newantioch_fv_papalstatesinterventionforce"],
+        "faction_id": ["fc_newantioch","fc_newantioch_fc_eirerangers","fc_newantioch_fv_papalstatesinterventionforce"],
         "equipment_id": "eq_incendiarygrenades",
         "cost": 15,
         "costtype": 0,
@@ -1429,7 +1514,7 @@
         "tags": {},
         "name": "Submachine Gun",
         "contextdata": {},
-        "faction_id": ["fc_newantioch","fc_newantioch_fv_papalstatesinterventionforce"],
+        "faction_id": ["fc_newantioch","fc_newantioch_fc_eirerangers","fc_newantioch_fv_papalstatesinterventionforce"],
         "equipment_id": "eq_submachinegun",
         "cost": 30,
         "costtype": 0,
@@ -1465,7 +1550,7 @@
         "tags": {},
         "name": "Automatic Shotgun",
         "contextdata": {},
-        "faction_id": ["fc_newantioch","fc_newantioch_fv_papalstatesinterventionforce"],
+        "faction_id": ["fc_newantioch","fc_newantioch_fc_eirerangers","fc_newantioch_fv_papalstatesinterventionforce"],
         "equipment_id": "eq_automaticshotgun",
         "cost": 15,
         "costtype": 0,
@@ -1478,6 +1563,26 @@
         "name": "Grenade Launcher",
         "contextdata": {},
         "faction_id": ["fc_newantioch","fc_newantioch_fv_papalstatesinterventionforce","fc_hereticlegion","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty"],
+        "equipment_id": "eq_grenadelauncher",
+        "cost": 30,
+        "costtype": 0,
+        "limit": 2
+    },
+    {
+        "id": "rel_fc_eq_grenadelauncher_eire",
+        "source": "core",
+        "tags": {},
+        "name": "Grenade Launcher",
+        "contextdata": {  
+            "faction_eq_restriction": {
+                "permitted": [
+                    {
+                        "res_type": "id",
+                        "value": "md_mechanisedheavyinfantry"
+                    }
+                ]
+            }  },
+        "faction_id": ["fc_newantioch_fc_eirerangers"],
         "equipment_id": "eq_grenadelauncher",
         "cost": 30,
         "costtype": 0,
@@ -1513,7 +1618,27 @@
         "tags": {},
         "name": "Heavy Flamethrower",
         "contextdata": {},
-        "faction_id": ["fc_newantioch","fc_newantioch_fv_papalstatesinterventionforce"],
+        "faction_id": ["fc_newantioch","fc_newantioch_fc_eirerangers","fc_newantioch_fv_papalstatesinterventionforce"],
+        "equipment_id": "eq_heavyflamethrower",
+        "cost": 55,
+        "costtype": 0,
+        "limit": 1
+    },
+    {
+        "id": "rel_fc_eq_heavyflamethrower_erie",
+        "source": "core",
+        "tags": {},
+        "name": "Heavy Flamethrower",
+        "contextdata": {
+            "faction_eq_restriction": {
+                "permitted": [
+                    {
+                        "res_type": "id",
+                        "value": "md_mechanisedheavyinfantry"
+                    }
+                ]
+            } },
+        "faction_id": ["fc_newantioch_fc_eirerangers"],
         "equipment_id": "eq_heavyflamethrower",
         "cost": 55,
         "costtype": 0,
@@ -1526,6 +1651,30 @@
         "name": "Satchel Charge",
         "contextdata": {},
         "faction_id": ["fc_newantioch","fc_newantioch_fv_papalstatesinterventionforce"],
+        "equipment_id": "eq_satchelcharge",
+        "cost": 15,
+        "costtype": 0,
+        "limit": 3
+    },
+    {
+        "id": "rel_fc_eq_satchelcharge_eire",
+        "source": "core",
+        "tags": {},
+        "name": "Satchel Charge",
+        "contextdata": {
+            "faction_eq_restriction": {
+                "permitted": [
+                    {
+                        "res_type": "id",
+                        "value": "md_mechanisedheavyinfantry"
+                    },
+                    {
+                        "res_type": "id",
+                        "value": "md_combatengineer"
+                    }
+                ]
+            }},
+        "faction_id": ["fc_newantioch_fc_eirerangers"],
         "equipment_id": "eq_satchelcharge",
         "cost": 15,
         "costtype": 0,
@@ -1813,7 +1962,7 @@
                 ]
             }
         },
-        "faction_id": ["fc_newantioch","fc_newantioch_fv_papalstatesinterventionforce","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty"],
+        "faction_id": ["fc_newantioch","fc_newantioch_fc_eirerangers","fc_newantioch_fv_papalstatesinterventionforce","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty"],
         "equipment_id": "eq_battlefieldtitle",
         "cost": 6,
         "costtype": 1,
@@ -1834,7 +1983,7 @@
                 ]
             }
         },
-        "faction_id": ["fc_newantioch","fc_newantioch_fv_papalstatesinterventionforce"],
+        "faction_id": ["fc_newantioch","fc_newantioch_fc_eirerangers","fc_newantioch_fv_papalstatesinterventionforce"],
         "equipment_id": "eq_bookofbattleprayers",
         "cost": 6,
         "costtype": 1,
@@ -1847,7 +1996,7 @@
         "name": "Ducal Winged Armour",
         "contextdata": {      
         },
-        "faction_id": ["fc_newantioch","fc_newantioch_fv_papalstatesinterventionforce"],
+        "faction_id": ["fc_newantioch","fc_newantioch_fc_eirerangers","fc_newantioch_fv_papalstatesinterventionforce"],
         "equipment_id": "eq_ducalwingedarmour",
         "cost": 8,
         "costtype": 1,
@@ -2130,7 +2279,7 @@
         "tags": {},
         "name": "Field Shrine",
         "contextdata": {   },
-        "faction_id": ["fc_newantioch","fc_newantioch_fv_papalstatesinterventionforce","fc_trenchpilgrim","fc_trenchpilgrim_fv_warpilgimageofsaintmethodius","fc_trenchpilgrim_fv_cavalcadeofthetenthplague","fc_trenchpilgrim_fv_processionofthesacredaffliction"],
+        "faction_id": ["fc_newantioch","fc_newantioch_fc_eirerangers","fc_newantioch_fv_papalstatesinterventionforce","fc_trenchpilgrim","fc_trenchpilgrim_fv_warpilgimageofsaintmethodius","fc_trenchpilgrim_fv_cavalcadeofthetenthplague","fc_trenchpilgrim_fv_processionofthesacredaffliction"],
         "equipment_id": "eq_fieldshrine",
         "cost": 2,
         "costtype": 1,
@@ -2162,7 +2311,7 @@
                     }
                 ]
             }  },
-        "faction_id": ["fc_newantioch","fc_newantioch_fv_papalstatesinterventionforce"],
+        "faction_id": ["fc_newantioch","fc_newantioch_fc_eirerangers","fc_newantioch_fv_papalstatesinterventionforce"],
         "equipment_id": "eq_martyrdompills",
         "cost": 1,
         "costtype": 1,
@@ -2222,7 +2371,7 @@
         },
         "name": "Trench Dog",
         "contextdata": {},
-        "faction_id": ["fc_newantioch","fc_newantioch_fv_papalstatesinterventionforce","fc_trenchpilgrim","fc_trenchpilgrim_fv_warpilgimageofsaintmethodius","fc_trenchpilgrim_fv_cavalcadeofthetenthplague","fc_trenchpilgrim_fv_processionofthesacredaffliction","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_newantioch","fc_newantioch_fc_eirerangers","fc_newantioch_fv_papalstatesinterventionforce","fc_trenchpilgrim","fc_trenchpilgrim_fv_warpilgimageofsaintmethodius","fc_trenchpilgrim_fv_cavalcadeofthetenthplague","fc_trenchpilgrim_fv_processionofthesacredaffliction","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_trenchdog",
         "cost": 1,
         "costtype": 1,
@@ -2236,7 +2385,7 @@
         },
         "name": "Trench Dog (Guard Dog)",
         "contextdata": {},
-        "faction_id": ["fc_newantioch","fc_newantioch_fv_papalstatesinterventionforce","fc_trenchpilgrim","fc_trenchpilgrim_fv_warpilgimageofsaintmethodius","fc_trenchpilgrim_fv_cavalcadeofthetenthplague","fc_trenchpilgrim_fv_processionofthesacredaffliction","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_newantioch","fc_newantioch_fc_eirerangers","fc_newantioch_fv_papalstatesinterventionforce","fc_trenchpilgrim","fc_trenchpilgrim_fv_warpilgimageofsaintmethodius","fc_trenchpilgrim_fv_cavalcadeofthetenthplague","fc_trenchpilgrim_fv_processionofthesacredaffliction","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_trenchdog_guarddog",
         "cost": 2,
         "costtype": 1,
@@ -2250,7 +2399,7 @@
         },
         "name": "Trench Dog (Mercy Dog)",
         "contextdata": {},
-        "faction_id": ["fc_newantioch","fc_newantioch_fv_papalstatesinterventionforce"],
+        "faction_id": ["fc_newantioch","fc_newantioch_fc_eirerangers","fc_newantioch_fv_papalstatesinterventionforce"],
         "equipment_id": "eq_trenchdog_mercydog",
         "cost": 2,
         "costtype": 1,
@@ -2653,6 +2802,19 @@
         "equipment_id": "eq_supremepontiffcrucifix",
         "cost": 3,
         "costtype": 1,
+        "limit": 1
+    },
+    {
+        "id": "rel_fc_eq_carnyx",
+        "source": "core",
+        "tags": {},
+        "name": "Carnyx",
+        "contextdata": {        
+        },
+        "faction_id": ["fc_newantioch_fc_eirerangers"],
+        "equipment_id": "eq_carnyx",
+        "cost": 15,
+        "costtype": 0,
         "limit": 1
     }
 ]

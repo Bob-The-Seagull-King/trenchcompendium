@@ -274,5 +274,33 @@
         "cut_rules" : [],
         "rules" : ["rl_specialistforce","rl_swissguard","rl_supremeblessing","rl_farfromhome","rl_vaticansrepresentative","rl_lector"],
         "options": []
+    },
+    {
+        "id": "fc_newantioch_fc_eirerangers",
+        "name": "Eire Rangers",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "faction_keyword": {"name": "kw_antioch"}
+        },
+        "base_id": "fc_newantioch",
+        "description": [     
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Eire is a stronghold of the Church and an ancient centre of learning. Due to the constant and devastating raids of the Heretic Navy, they are bitter enemies of the Infernal forces. The Emerald Isle has endured hunger and ravaged by the Black Grail, as well as a full-fledged invasion aimed at destroying the famed House of Manuscripts where many of the holiest of texts are kept. After this century of ruthless battles and brutal guerrilla warfare against the invaders, the warriors of Eire are now masters of skirmish fighting, hit-and-run tactics and ambushes. Elite Fianna warrior-hunters are especially adept at these guerrilla tactics: they uphold the ancient tradition of a band of roving warriors living off the land. While seen as trouble-makers and godless hellraisers, they are nevertheless expert skirmishers, and easily find employment in the warbands who take the Cross and travel to New Antioch to strike back at the enemy. These warriors adorn themselves with grisly trophies in the manner of their pagan ancestors, carrying skulls of the vanquished – much to the irritation of the Church."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Due to the ravages of the wars, the island nation has few resources for heavy armour or most intricate automatic weapons, but they more than make up for this with their skilled light infantry and knowledge of the lay of the land. So when the Poet-King Tadhg O’Connor dispatches his famed Rangers to aid the Principality of New Antioch instead of paying the yearly tithe of Vienna, the Duke is more than happy to accept these fierce warriors instead."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "A rare latent Berserker trait runs in a few warrior bloodlines of Eire. It can be made to manifest with the Chemical Communion of the blood of the Meta-Christ. Such fighters enter a state of battle-rage, where no bullet or blade seems to cause them any harm."
+            }
+        ],
+        "team": "faithful",
+        "cut_rules" : ["rl_newantiochfireteam"],
+        "rules" : ["rl_fianna","rl_carnyx","rl_hitandruntactics","rl_berserker","rl_stronginfaith","rl_looseorganisation","rl_followersofsaintpatrick","rl_lightinfantry"],
+        "options": []
     }
 ]
