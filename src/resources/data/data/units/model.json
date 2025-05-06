@@ -1667,5 +1667,44 @@
         },
         "keywords" : [],
         "abilities" : ["ab_lightningspeed","ab_temporalfuge","ab_eyeofgod","ab_voiceofgod"]
+    },
+    {
+        "id": "md_mechanisedheavyinfantry",
+        "name": "Mechanised Heavy Infantry",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": ""
+            }
+        ],
+        "lore": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": ""
+                    }
+                ]
+            }
+        ],
+        "team": "faithful",
+        "stats" : {            
+            "movement": 6,
+            "melee": 0,
+            "ranged": 1,
+            "base": [32],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 0
+        },
+        "keywords" : [],
+        "abilities" : []
     }
 ]

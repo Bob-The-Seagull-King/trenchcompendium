@@ -1037,7 +1037,7 @@
         "contextdata": {"option_search_viable": {}},
         "options": [],
         "faction_id" : ["fc_trenchpilgrim_fv_warpilgimageofsaintmethodius"],
-        "model_id" : "md_anchoriteshrine",
+        "model_id" : "md_anchoriteshrine_saintmethodius",
         "captain" : false,
         "mercenary": false,
         "cost" : 140,
