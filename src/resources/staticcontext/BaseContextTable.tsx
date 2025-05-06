@@ -457,7 +457,7 @@ export const BaseContextCallTable : CallEventTable = {
                     const curFilter = context_func["filters"][i];
 
                     if (curFilter["type"] == "id") {
-                        const ModelItem = await ModelFactory.CreateNewModel(context_func["match"][0]["value"], null)
+                        const ModelItem = await ModelFactory.CreateNewModel(curFilter["value"], null)
                         relayVar.push("Unless the model is a " + ModelItem.Name);
                     }
                 }
