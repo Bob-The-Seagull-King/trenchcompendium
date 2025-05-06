@@ -19,7 +19,7 @@ const RulesEquipmentStats: React.FC<RulesEquipmentStatsProps> = (props : RulesEq
         return ;
     }
     const abilityObject = props.baseobject;
-    const [statlist, setstatlist] = useState<EquipmentStats[]>(abilityObject.Stats)
+    const [statlist, setstatlist] = useState<EquipmentStats>(abilityObject.Stats)
     const baseequip = abilityObject;
     const [_keyvar, setkeyvar] = useState(0);
 
@@ -29,7 +29,7 @@ const RulesEquipmentStats: React.FC<RulesEquipmentStatsProps> = (props : RulesEq
             
             /* stats */
             if (props.facrelObject != undefined) {
-                const result_upgrades = await props.facrelObject.getContextuallyAvailableUpgrades();
+                const result_upgrades = await props.facrelObject.getFactionEquipmentStats();
                 setstatlist(result_upgrades);
             }
             setkeyvar((prev) => prev + 1);

@@ -70,8 +70,9 @@ const FactionEquipmentDisplay = (props: any) => {
                                     facrelObject={factionequipmentObject}
                                     baseobject={factionequipmentObject.EquipmentItem}
                                 />
-                                <RulesEquipmentMain data={factionequipmentObject.EquipmentItem}/>}
+                                <RulesEquipmentMain data={factionequipmentObject.EquipmentItem}/>
                             </div>
+                            }
                     />
                 </div>
 

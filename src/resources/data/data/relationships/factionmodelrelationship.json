@@ -1036,7 +1036,7 @@
         "name": "",
         "contextdata": {"option_search_viable": {}},
         "options": [],
-        "faction_id" : ["md_anchoriteshrine_saintmethodius"],
+        "faction_id" : ["fc_trenchpilgrim_fv_warpilgimageofsaintmethodius"],
         "model_id" : "md_anchoriteshrine",
         "captain" : false,
         "mercenary": false,

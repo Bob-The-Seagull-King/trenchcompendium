@@ -148,7 +148,6 @@ export const BaseContextCallTable : CallEventTable = {
         event_priotity: 0,        
         async getEquipmentRestrictionPresentable(this: EventRunner, eventSource : any, relayVar : any, trackVal : EquipmentRestriction[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) 
         {
-            
             const ModelModule = await import("../../factories/features/ModelFactory");
             const EquipmentModule = await import("../../factories/features/EquipmentFactory");
 
@@ -798,7 +797,7 @@ export const BaseContextCallTable : CallEventTable = {
     override_stats : {
         event_priotity: 1,        
         async modifyEquipmentStats(this: EventRunner, eventSource : any, relayVar : EquipmentStats, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
-            
+            console.log("test");
             if (context_func["stats"]) {                
 
                 if (context_func["stats"].hands_melee != undefined) {relayVar.hands_melee = context_func["stats"].hands_melee}
@@ -809,7 +808,7 @@ export const BaseContextCallTable : CallEventTable = {
             
             return relayVar;
         }
-    }
+    },
     ability_option: {
         event_priotity: 0,
         async parseOptionsIntoRelevantType(this: EventRunner, eventSource : any, relayVar : IChoice[],  trackVal : number, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null){
