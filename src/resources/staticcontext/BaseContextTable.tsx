@@ -716,7 +716,7 @@ export const BaseContextCallTable : CallEventTable = {
 
             for (let i = 0; i < relayVar.length; i++) {
                 
-                const ModelItem = EquipmentFactory.CreateNewEquipment(relayVar[i].value.equipment_id, null)
+                const ModelItem = EquipmentFactory.CreateFactionEquipment(relayVar[i].value, null)
                 relayVar[i].value = ModelItem;
             }
 
@@ -731,11 +731,11 @@ export const BaseContextCallTable : CallEventTable = {
 
             for (let i = 0; i < relayVar.length; i++) {
                 
-                const ModelItem = await EquipmentFactory.CreateNewEquipment(relayVar[i].value.equipment_id, null)
+                const ModelItem = await EquipmentFactory.CreateFactionEquipment(relayVar[i].value, null)
                 
                 for (let j = 0; j < SubItem["restriction"].length; j++) {
                     if (SubItem["restriction"][j].category) {
-                        if (ModelItem.Category == SubItem["restriction"][j].category) {
+                        if (ModelItem.EquipmentItem.Category == SubItem["restriction"][j].category) {
                             NewChoices.push(relayVar[i])
                             break;
                         }
@@ -754,7 +754,7 @@ export const BaseContextCallTable : CallEventTable = {
 
             for (let i = 0; i < relayVar.length; i++) {
                 
-                const ModelItem = EquipmentFactory.CreateNewEquipment(relayVar[i].value.equipment_id, null)
+                const ModelItem = EquipmentFactory.CreateFactionEquipment(relayVar[i].value, null)
                 relayVar[i].value = ModelItem;
             }
 
@@ -769,16 +769,37 @@ export const BaseContextCallTable : CallEventTable = {
 
             for (let i = 0; i < relayVar.length; i++) {
                 
-                const ModelItem = await EquipmentFactory.CreateNewEquipment(relayVar[i].value.equipment_id, null)
+                const ModelItem = await EquipmentFactory.CreateFactionEquipment(relayVar[i].value, null)
                 
                 for (let j = 0; j < SubItem["restriction"].length; j++) {
                     if (SubItem["restriction"][j].category) {
-                        if (ModelItem.Category == SubItem["restriction"][j].category) {
+                        if (ModelItem.EquipmentItem.Category == SubItem["restriction"][j].category) {
                             NewChoices.push(relayVar[i])
                             break;
                         }
                     }
                 }
+                
+                const EventProc: EventRunner = new EventRunner();
+
+                const result = await EventProc.runEvent(
+                    "getEquipmentRestriction",
+                    ModelItem,
+                    [],
+                    [],
+                    null
+                );
+                ModelItem.RestrictedEquipment = result;
+
+                const result_presentation = await EventProc.runEvent(
+                    "getEquipmentRestrictionPresentable",
+                    ModelItem,
+                    [],
+                    [],
+                    ModelItem.RestrictedEquipment
+                );
+
+                relayVar[i].display_str = result_presentation
             }
 
             return NewChoices
