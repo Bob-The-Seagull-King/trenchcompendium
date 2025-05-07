@@ -1695,5 +1695,201 @@
         }
         ],
         "options": []
+    },
+    {
+        "id": "rl_expertfireteams",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+
+            "add_fireteam_warband" : { "type": "antioch", "count": 3 }
+        },
+        "name": "Expert Fireteams",
+        "description":  [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "You may have up to three FIRETEAMS from the New Antioch Fireteams feature.",
+                "glossary": [
+                    {"val": "FIRETEAM", "id": "kw_fireteam"}
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [
+                    {
+                        "tags": {"desc_type" : "bold"},
+                        "content": "FIRETEAM: ",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "This model is part of a FIRETEAM made up of two models. All models that are part of the same FIRETEAM can be activated at the same time without the opponent getting their turn in between and can take their ACTIONS in any order they wish, switching between the two models. Note that if the Activation of either member of the FIRETEAM forcefully ends (due to a failed RISKY ACTION for example), it ends both Activations. Allies cannot be part of a FIRETEAM.",
+                                "glossary": [
+                                    {"val": "FIRETEAM", "id": "kw_fireteam"}
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                    
+                        {
+                            "tags": {"desc_type" : "bold"},
+                            "content": "Concentrated Attack: ",
+                            "subcontent": [
+                                {
+                                    "tags": {"desc_type" : "default"},
+                                    "content": "If a model in the FIRETEAM makes any kind of Attack ACTION (ranged or melee) against an opponent, where the other member of their FIRETEAM has already hit it with an attack ACTION during the same activation, the cost of a Bloodbath is reduced to three BLOOD MARKERS against this opponent, whether the model is standing or Down.",
+                                    "glossary": [
+                                        {"val": "FIRETEAM", "id": "kw_fireteam"},
+                                        {"val": "ACTION", "id": "kw_action"},
+                                        {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"}
+                                    ]
+                                }
+                            ]
+                        }
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_mastersofthegrenade",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            "add_to_model": {
+                "id": "rl_mastersofthegrenade"
+            }
+        },
+        "name": "Masters of the Grenade",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Models of the Stoßtruppen Warband add 4” range to all of their GRENADE weapons.",
+            "glossary": [
+                {"val": "GRENADE", "id": "kw_grenade"}
+            ]
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_forwardpositions",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            "faction_add_upgrades": {
+                "model_key": "rl_forwardpositions",
+                "models_id": ["md_shocktrooper"]
+            }
+        },
+        "name": "Forward Positions",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Up to two Shocktroops can have the Keyword INFILTRATOR at the cost of +10 ducats per model.",
+            "glossary": [
+                {"val": "INFILTRATOR", "id": "kw_infiltrator"}
+            ]
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_rapidassault",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            "faction_add_upgrades": {
+                "model_key": "rl_rapidassault",
+                "models_id": ["md_shocktrooper","md_lieutenant"]
+            }
+        },
+        "name": "Rapid Assault",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "At the cost of +5 ducats per model, any Shocktroopers and Lieutenants may add +1 DICE to all their Dash ACTIONS.",
+            "glossary": [
+                {"val": "+1 DICE", "id": "kw_plusdice"},
+                {"val": "ACTIONS", "id": "kw_action"}
+            ]
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_specialisedequipment",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Specialised Equipment",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "This warband has LIMIT:4 for Submachine guns. Automatic Shotguns and Automatic Pistols are not limited to ELITE. The warband may have no Grenade Launchers and only one Machine Gun.",
+            "glossary": [
+                {"val": "ELITE", "id": "kw_elite"},
+                {"val": "LIMIT", "id": "kw_limit"}
+            ]
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_troopselection",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            "faction_remove_upgrades": {
+                "upgrades": ["rel_md_yeoman_infiltrator"]
+            }
+        },
+        "name": "Troop Selection",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "The warband must have at least two shocktroopers and can have up to eight. the warband can have only one mechanised heavy infantry, one sniper priest and no trench moles."
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_lightlyarmoured",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Lightly Armoured",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Apart from mechanised heavy infantry and the lieutenant, no model in the warband can be equipped with reinforced or machine armour."
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_lightmelee",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            "remove_from_model": {
+                "id": ["ab_assaultdrill"]
+            }
+        },
+        "name": "Light Melee",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Prussian shocktroopers lose the Assault Drill ability."
+        }
+        ],
+        "options": []
     }
 ]

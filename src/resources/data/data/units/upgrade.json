@@ -933,5 +933,24 @@
             }
         ],
         "options": []
+    },
+    {
+        "id": "up_rapidassault",
+        "name": "Rapid Assault",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {
+        },
+        "description": [           
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This model may add +1 DICE to all their Dash ACTIONS.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "ACTIONS", "id": "kw_action"}
+                ]
+            }
+        ],
+        "options": []
     }
 ]

@@ -302,5 +302,29 @@
         "cut_rules" : ["rl_newantiochfireteam"],
         "rules" : ["rl_fianna","rl_carnyx","rl_hitandruntactics","rl_berserker","rl_stronginfaith","rl_looseorganisation","rl_followersofsaintpatrick","rl_lightinfantry"],
         "options": []
+    },
+    {
+        "id": "fc_newantioch_fc_stortruppenofthefreestateofprussia",
+        "name": "Stoßtruppen of the Free State of Prussia",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "faction_keyword": {"name": "kw_antioch"}
+        },
+        "base_id": "fc_newantioch",
+        "description": [     
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "When the need to take out an enemy strongpoint or assault an especially powerful defensive line of trenches or redoubts arises, the Duke of Antioch often calls upon the famed Stoßtruppen forces of the Free State of Prussia. These elite units often operate in deep forward positions, and quite often they carry secret orders or specific missions from the Princes of the Church or the New Antioch High Command."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The Free State Shocktroopers are selected and trained specifically to perform lightning assaults, master the firearms of close assault, and operate in Fireteams that are perfectly synchronised in their combined arms tactics. Admittance to this elite group is strictly by merit. All members must be decorated athletes, under 25 years of age, unmarried and must have demonstrated a high level of aggression on the battlefield. Of all the soldiers serving Prussia, Stoßtruppen have by far the highest casualty rate. When inducted into the ranks, all swear an oath at the Köningsber Cathedral: “To each, his own, to me, death”."
+            }
+        ],
+        "team": "faithful",
+        "cut_rules" : ["rl_newantiochfireteam"],
+        "rules" : ["rl_expertfireteams","rl_mastersofthegrenade","rl_forwardpositions","rl_rapidassault","rl_specialisedequipment","rl_troopselection","rl_lightlyarmoured","rl_lightmelee"],
+        "options": []
     }
 ]
