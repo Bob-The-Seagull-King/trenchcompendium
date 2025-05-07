@@ -746,6 +746,44 @@ export const BaseContextCallTable : CallEventTable = {
             return NewChoices
         }
     },
+    model_add_equipment: {
+        event_priotity: 0,
+        async parseOptionsIntoRelevantType(this: EventRunner, eventSource : any, relayVar : IChoice[],  trackVal : number, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null){
+            
+            const { EquipmentFactory } = await import("../../factories/features/EquipmentFactory");
+
+            for (let i = 0; i < relayVar.length; i++) {
+                
+                const ModelItem = EquipmentFactory.CreateNewEquipment(relayVar[i].value.equipment_id, null)
+                relayVar[i].value = ModelItem;
+            }
+
+            return relayVar
+        },
+        async parseOptionFilterDown(this: EventRunner, eventSource : any, relayVar : IChoice[], trackVal : number, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            
+            const { EquipmentFactory } = await import("../../factories/features/EquipmentFactory");
+            
+            const NewChoices : IChoice[] = []
+            const SubItem = context_func["additions"][trackVal]
+
+            for (let i = 0; i < relayVar.length; i++) {
+                
+                const ModelItem = await EquipmentFactory.CreateNewEquipment(relayVar[i].value.equipment_id, null)
+                
+                for (let j = 0; j < SubItem["restriction"].length; j++) {
+                    if (SubItem["restriction"][j].category) {
+                        if (ModelItem.Category == SubItem["restriction"][j].category) {
+                            NewChoices.push(relayVar[i])
+                            break;
+                        }
+                    }
+                }
+            }
+
+            return NewChoices
+        }
+    },
     location_rule_option: {
         event_priotity: 0,
         async parseOptionsIntoRelevantType(this: EventRunner, eventSource : any, relayVar : IChoice[],  trackVal : number, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null){
