@@ -182,5 +182,44 @@
         ],
         "rules": [],
         "options": []
+    },
+    {
+        "id": "fc_cultoftheblackgrail",
+        "source": "core",
+        "tags": {
+        },
+        "contextdata": {
+            "faction_keyword": {"name": "kw_blackgrail"}
+        },
+        "name": "Cult of the Black Grail",
+        "team": "hell",
+        "description":  [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Epidemics of typhus, malaria, typhoid,  smallpox, yellow-fever, pneumonia, trench  fever, Markisian disease and countless  others ravage the trenches and battlefields of the Great War, but they all pale in comparison to the most dreaded of them all: the Black Grail."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Beelzebub, Lord of the Flies, stands apart from the other lords of Hell, who act mainly through their mortal followers. Instead, when he periodically gains supremacy in the bitter power struggles of the archfiends, he sends forth his deadliest curse."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Infused with demonic essence from the bowels of the seventh layer of Hell, where the putrid fortress of Beelzebub stands, spews forth a torrent of demonic hell-flies, scorpions, locusts and other infernal insects. The Hellgate opens and a veritable tidal wave of foulness emerges, flowing across the land at startling speed, consuming everything and leaving indescribable horror in its wake. After nine days the insect swarm exhausts itself, devouring its own in its insatiable hunger. "
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The Black Grail is indiscriminate in its hatred of all living things: its infections can spread to virtually any living biological matter, which bursts forth with tumours, boils and weeping pustules. Puddles and ponds of melted flesh are left in its wake, endless mouths left screaming in their agony, for the Black Grail destroys the body but leaves the mind intact to suffer. The Scientist-Priests of the Church and the Alchemists of the Sultanate fervently look for a way to inoculate their people against this foulest of diseases, but thus far they are without success. The only answer is to burn the infected settlements with specially-constructed flamethrower tanks that use holy anointing oil as the fuel for their weapons."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "But if this is not done, or the countermeasures are too late, what happens next is even worse: bodies of men, horses, dogs, insects and other animals of every kind that are infected by the Black Grail lurch to their feet, driven by a demonic will. Not living, not dead, they become vessels to spread the corruption of their master ever further, forming warbands that strive to find and infect life of any kind. They also gather things that mortals value and bring this loot as well as grisly trophies to the feet of the idols of Beelzebub they erect. Thus the Cult of the Black Grail mocks the devotions of the Faithful and their prayers."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "At the head of such warbands stand the knights of the Order of the Fly: those most depraved men and women who willingly embrace the Black Grail and whose devotion Beelzebub finds sufficient. They are granted weapons, armour and equipment corrupted by the hand of the Archfiend in exchange for sacrifices brought to the altars of Beelzebub, which these warbands build wherever they go, objects of grisly horror constructed from the remains of their victims shaped into the form of monstrous flies."
+            }
+        ],
+        "rules": ["rl_infectionmarkers","rl_grailmorale"],
+        "options": []
     }
 ]

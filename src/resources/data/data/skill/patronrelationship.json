@@ -22,5 +22,13 @@
     {
         "id": "pt_temporallord",
         "faction_id": ["fc_newantioch_fv_expeditionaryforcedofabyssinia","fc_newantioch_fv_kingdomofalbaassaultdetatchment","fc_newantioch_fc_stortruppenofthefreestateofprussia","fc_newantioch","fc_newantioch_fv_papalstatesinterventionforce"]
+    },
+    {
+        "id": "pt_orderofthefly",
+        "faction_id": ["fc_cultoftheblackgrail"]
+    },
+    {
+        "id": "pt_antipopeofavignon",
+        "faction_id": ["fc_cultoftheblackgrail"]
     }
 ]
