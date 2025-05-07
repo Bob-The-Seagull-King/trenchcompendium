@@ -883,6 +883,33 @@
         "options": []
     },
     {
+        "id": "up_highlandmachinearmour",
+        "name": "Highland Machine Armour",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {          
+                
+            "set_stat": { "upgrades" : [
+                {"stat": "base", "value": [40]}
+                ]},
+           "change_model_equipment": {
+               "removed": [
+                "rel_md_eq_mechanisedheavyinfantry_base"
+               ],
+               "added": [
+                "rel_md_eq_mechanisedheavyinfantry_advanced"
+               ]
+           }
+        },
+        "description": [           
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The model swaps out its Light Machine Armour for Highland Machine Armour, and its base size increases to 40mm."
+            }
+        ],
+        "options": []
+    },
+    {
         "id": "up_fianna",
         "name": "Fianna",
         "source": "core",

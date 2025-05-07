@@ -1891,5 +1891,148 @@
         }
         ],
         "options": []
+    },
+    {
+        "id": "rl_rampantcharge",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            "add_to_model": {
+                "id": "rl_rampantcharge"
+            }
+        },
+        "name": "Rampant Charge",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "All models in this warband ignore the penalty for Defended Obstacles."
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_meleefocused",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Melee Focused",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Mechanized Heavy Infantry of this warband have +1 DICE in melee instead of Ranged Attacks.",
+            "glossary": [
+                {"val": "+1 DICE", "id": "kw_plusdice"}
+            ]
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_highlandmachinearmour",
+        "source": "core",
+        "tags": { },
+        "contextdata": {
+            "add_to_model": {
+                "id": "rl_highlandmachinearmour"
+            } 
+        },
+        "name": "Highland Machine Armour",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Models in this warband equipped with machine armour ignore the penalty to charging imposed by the armour."
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_highlandstrength",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Highland Strength",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "The Lieutenant of the warband has the Keyword STRONG.",
+            "glossary": [
+                {"val": "STRONG", "id": "kw_strong"}
+            ]
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_strainedsupply",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Strained Supply",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "This warband has LIMIT:1 for Grenade Launchers, Submachine Guns, Machine Guns, Automatic Shotguns and Sniper Rifles.",
+            "glossary": [
+                {"val": "LIMIT", "id": "kw_limit"}
+            ]
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_bagpipes",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Bagpipes",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Your warband can purchase special bagpipes instead of a generic musical instrument. These bagpipes are identical to a musical instrument (including their equipment restrictions and LIMIT), but friendly models within 4” of the model carrying them are immune to FEAR.",
+            "glossary": [
+                {"val": "LIMIT", "id": "kw_limit"},
+                {"val": "FEAR", "id": "kw_fear"}
+            ]
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_brave",
+        "source": "core",
+        "tags": { },
+        "contextdata": {
+            "add_to_warband": {} 
+        },
+        "name": "Brave",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "The warband adds +1 DICE to all Morale Tests.",
+            "glossary": [
+                {"val": "+1 DICE", "id": "kw_plusdice"}
+            ]
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_claymoresmiths",
+        "source": "core",
+        "tags": { },
+        "contextdata": {
+        },
+        "name": "Claymore Smiths",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "An Alba Warband can buy Great Swords for 7 ducats instead of usual 12 ducats."
+        }
+        ],
+        "options": []
     }
 ]

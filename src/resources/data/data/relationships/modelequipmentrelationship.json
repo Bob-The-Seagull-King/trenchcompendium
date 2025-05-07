@@ -362,5 +362,16 @@
         "model_id": [],
         "mandatory_equipment": ["eq_machinearmour"],
         "removable": false
+    },
+    {
+        "id": "rel_md_eq_mechanisedheavyinfantry_highland",
+        "source": "core",
+        "tags": {},
+        "name": "Upgraded Highland Mechanised Infantry Equipment",
+        "contextdata": {},
+        "options": [],
+        "model_id": [],
+        "mandatory_equipment": ["eq_highlandmachinearmour"],
+        "removable": false
     }
 ]

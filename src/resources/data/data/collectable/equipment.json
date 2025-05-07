@@ -3984,6 +3984,40 @@
         },
         "contextdata": {
             "get_weapon": {},
+            "injury_bonus": {"bonuses": [{"type": "dice", "value": 1}]}
+        },
+        "description": [             
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "dds +1 DICE to injury rolls. If the model the sword hits has an armour modifier from any source other than a shield, the player may set one die of the injury roll to a 6 before the roll is made. The rest of the dice for the injury roll are rolled as normal.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"}
+                ]
+            }   
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "It takes years of gruelling Mensur practice and field drills to acquire the required precision and speed to use the specialist tank-splitter swords of the Gardekorps. Despite their great size (often over 6 feet long!) they are remarkably light, and due to the large quantities of Orichalcum used in their forging process, they are virtually unbreakable. They are often used to disable tanks and other armoured vehicles by either slicing their armour open or disabling them with an accurate swing to sever their tracks. Before any battle they are treated with a special metal-melting chemical compound which melts the armour, making it far deadlier against armoured targets than those who wear none."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_critical","kw_cumbersome"],
+        "modifiers": ["+1D to Injuries"]
+    },
+    {
+        "id": "eq_lochaberaxe",
+        "name": "Lochaber Axe",
+        "source": "core",
+        "tags": {"action": true, "weapon": true},
+        "category": "melee",
+        "distance": null,
+        "stats": {
+            "hands_melee": 2,
+            "melee": true
+        },
+        "contextdata": {
+            "get_weapon": {},
             "injury_bonus": {"bonuses": [{"type": "flat", "value": 1}]}
         },
         "description": [             

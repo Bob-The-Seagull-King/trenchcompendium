@@ -326,5 +326,29 @@
         "cut_rules" : ["rl_newantiochfireteam"],
         "rules" : ["rl_expertfireteams","rl_mastersofthegrenade","rl_forwardpositions","rl_rapidassault","rl_specialisedequipment","rl_troopselection","rl_lightlyarmoured","rl_lightmelee"],
         "options": []
+    },
+    {
+        "id": "fc_newantioch_fv_kingdomofalbaassaultdetatchment",
+        "name": "Kingdom of Alba Assault Detatchment",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "faction_keyword": {"name": "kw_antioch"}
+        },
+        "base_id": "fc_newantioch",
+        "description": [     
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Hailing from the Scottish Highlands where the Church is strong, these men (and a few fierce women!) come to New Antioch in search of glory, forgiveness of their sins, as well as dreams of acquiring valuable loot to send back to their island home, but above all to get their hands on some Devil-worshippers! "
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The Heretic submarine fleet harries the shores of the Kingdom constantly, carrying off their young in chains to be sacrificed in the dark altars of the Arch-devils and their hatred towards Hell’s forces runs deep. The fleet of Britain and their famed moving fortress are reserved in guarding their own shores, causing friction and resentment among their northern neighbours, whose coastal defences are far less comprehensive. As is the tradition in Alba, these warbands favour close quarters combat and fierce charges over defence and long-range attacks."
+            }
+        ],
+        "team": "faithful",
+        "cut_rules" : [],
+        "rules" : ["rl_rampantcharge","rl_meleefocused","rl_highlandmachinearmour","rl_highlandstrength","rl_strainedsupply","rl_bagpipes","rl_brave","rl_claymoresmiths","rl_lightlyarmoured"],
+        "options": []
     }
 ]

@@ -589,5 +589,38 @@
         "stats" : {},
         "cut_abilities" : ["ab_onmycommand"],
         "new_abilities" : []
+    },
+    {
+        "id": "md_lieutenant_alba",
+        "name": "Highland Lieutenant",
+        "source": "core",
+        "tags": {},
+        "contextdata": {},
+        "base_id": "md_lieutenant",
+        "variant_name": "Alba",
+        "team": "faithful",
+        "cut_keywords" : [],
+        "keywords" : ["kw_strong"],
+        "stats" : {},
+        "cut_abilities" : [],
+        "new_abilities" : []
+    },
+    {
+        "id": "md_mechanisedheavyinfantry_alba",
+        "name": "Highland Mechanised Infantry",
+        "source": "core",
+        "tags": {},
+        "contextdata": {},
+        "base_id": "md_mechanisedheavyinfantry",
+        "variant_name": "Alba",
+        "team": "faithful",
+        "cut_keywords" : [],
+        "keywords" : [],
+        "stats" : {
+            "ranged": 0,
+            "melee": 1
+        },
+        "cut_abilities" : [],
+        "new_abilities" : []
     }
 ]
