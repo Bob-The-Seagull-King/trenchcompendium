@@ -679,6 +679,22 @@
         "required_upgrades":[]
     },
     {
+        "id": "rel_md_mechanisedheavyinfantry_highlandmachinearmour",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": { },
+        "options": [],
+        "model_id_set": ["rl_highlandmachinearmour"],
+        "upgrade_id": "up_highlandmachinearmour",
+        "cost": 10,
+        "cost_type": 0,
+        "restricted_upgrades": [
+        ],
+        "warband_limit": 0,
+        "required_upgrades":[]
+    },
+    {
         "id": "rel_factionrule_swissguard",
         "source": "core",
         "tags": {},

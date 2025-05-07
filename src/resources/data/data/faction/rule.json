@@ -1935,7 +1935,11 @@
         "contextdata": {
             "add_to_model": {
                 "id": "rl_highlandmachinearmour"
-            } 
+            } ,
+            "faction_add_upgrades": {
+                "model_key": "rl_highlandmachinearmour",
+                "models_id": ["md_mechanisedheavyinfantry_alba"]
+            }
         },
         "name": "Highland Machine Armour",
         "description":  [
