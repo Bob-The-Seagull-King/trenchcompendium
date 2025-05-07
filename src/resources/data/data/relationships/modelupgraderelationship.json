@@ -659,7 +659,7 @@
         "cost_type": 0,
         "restricted_upgrades": [
         ],
-        "warband_limit": 2,
+        "warband_limit": 4,
         "required_upgrades":[]
     },
     {
