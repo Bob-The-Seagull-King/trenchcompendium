@@ -942,6 +942,19 @@
         "source": "core",
         "tags": { },
         "contextdata": { 
+            
+            "faction_eq_restriction": {
+                "removed": [
+                    {
+                        "res_type": "keyword",
+                        "value": "kw_fire"
+                    },
+                    {
+                        "res_type": "keyword",
+                        "value": "kw_shrapnel"
+                    }
+                ]
+            }
         },
         "name": "Preserve the Loot",
         "description":  [
