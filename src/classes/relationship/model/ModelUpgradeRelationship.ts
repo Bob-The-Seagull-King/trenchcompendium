@@ -66,9 +66,10 @@ class ModelUpgradeRelationship extends StaticOptionContextObject {
             this,
             [],
             restrictions,
-            true
+            null
         );
-
+        console.log(restrictions);
+        console.log(result);
         return result.join(',');
     }
 

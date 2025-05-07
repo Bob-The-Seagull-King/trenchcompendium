@@ -449,20 +449,23 @@ export const BaseContextCallTable : CallEventTable = {
     override_required_upgrade: {
         event_priotity: 1,
         async getUpgradeRestrictionsPresentation(this: EventRunner, eventSource : any, relayVar : string[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
-                        
+            console.log("test")
+            console.log(context_func)
             const { ModelFactory } = await import("../../factories/features/ModelFactory");
 
             if (context_func["filters"]) {
+                console.log(context_func["filters"])                
                 for (let i = 0; i < context_func["filters"].length; i++) {
                     const curFilter = context_func["filters"][i];
 
                     if (curFilter["type"] == "id") {
                         const ModelItem = await ModelFactory.CreateNewModel(curFilter["value"], null)
+                        console.log(ModelItem);
                         relayVar.push("Unless the model is a " + ModelItem.Name);
                     }
                 }
             }
-
+            console.log(relayVar);
             return relayVar;
         }
     },
@@ -600,10 +603,8 @@ export const BaseContextCallTable : CallEventTable = {
                 const AbilityList = Requester.MakeRequest(
                     {searchtype: "id", searchparam: {type: "factionrule", id: context_func["id"]}}
                 ) as IAbility
-                console.log(AbilityList)
                 relayVar.push(await AbilityFactory.CreateAbility(AbilityList, null))
             }
-            console.log(relayVar);
             return relayVar;
         }
 
@@ -823,7 +824,7 @@ export const BaseContextCallTable : CallEventTable = {
     override_stats : {
         event_priotity: 1,        
         async modifyEquipmentStats(this: EventRunner, eventSource : any, relayVar : EquipmentStats, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
-            console.log("test");
+            
             if (context_func["stats"]) {                
 
                 if (context_func["stats"].hands_melee != undefined) {relayVar.hands_melee = context_func["stats"].hands_melee}
