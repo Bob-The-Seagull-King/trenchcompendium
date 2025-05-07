@@ -1173,46 +1173,23 @@
                 "searchparam":    {
                     "type": "factionequipmentrelationship",
                     "request":    {
-                        "operator": "and",
+                        "operator": "or",
                         "terms": [
+                            {             
+                                "item": "faction_id",
+                                "value": "fc_newantioch",
+                                "equals": true,
+                                "strict": true
+                            },
+                            {             
+                                "item": "faction_id",
+                                "value": "fc_hereticlegion",
+                                "equals": false,
+                                "strict": true
+                            }
                         ],
                         "subparams": [
-                            {
-                                "operator": "or",
-                                "terms": [
-                                    {             
-                                        "item": "category",
-                                        "value": "melee",
-                                        "equals": true,
-                                        "strict": true
-                                    },
-                                    {             
-                                        "item": "category",
-                                        "value": "ranged",
-                                        "equals": true,
-                                        "strict": true
-                                    }
-                                ],
-                                "subparams": []
-                            },
-                            {
-                                "operator": "or",
-                                "terms": [
-                                    {             
-                                        "item": "faction_id",
-                                        "value": "fc_newantioch",
-                                        "equals": true,
-                                        "strict": true
-                                    },
-                                    {             
-                                        "item": "faction_id",
-                                        "value": "fc_hereticlegion",
-                                        "equals": false,
-                                        "strict": true
-                                    }
-                                ],
-                                "subparams": []
-                            }
+                            
                         ]
                     }
                 }                        
