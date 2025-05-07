@@ -181,6 +181,10 @@ class FactionModelRelationship extends StaticOptionContextObject {
             for (let i = 0; i < result.length; i++) {
                 UpgradesListAvailable.push(result[i]);
             }
+        } else {
+            for (let i = 0; i < BaseList.length; i++) {
+                UpgradesListAvailable.push(BaseList[i]);
+            }
         }
 
         return UpgradesListAvailable;
@@ -205,6 +209,10 @@ class FactionModelRelationship extends StaticOptionContextObject {
             )
             for (let i = 0; i < result.length; i++) {
                 AbilitiesAvailable.push(result[i]);
+            }
+        } else {
+            for (let i = 0; i < BaseList.length; i++) {
+                AbilitiesAvailable.push(BaseList[i]);
             }
         }
 
