@@ -1982,5 +1982,131 @@
         },
         "keywords" : ["kw_antioch"],
         "abilities" : ["ab_battlefielddemolition","ab_fortify","ab_demineengineer"]
+    },
+    {
+        "id": "md_amalgam",
+        "name": "Amalgam",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "glossary": [
+                    {"val": "New Antioch", "id": "kw_antioch"}
+                ]
+            }
+        ],
+        "lore": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": ""
+                    }
+                ]
+            }
+        ],
+        "team": "faithful",
+        "stats" : {            
+            "movement": 6,
+            "melee": 0,
+            "ranged": 0,
+            "base": [25],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 0
+        },
+        "keywords" : [],
+        "abilities" : []
+    },
+    {
+        "id": "md_plagueknight",
+        "name": "Plague Knight",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "glossary": [
+                    {"val": "New Antioch", "id": "kw_antioch"}
+                ]
+            }
+        ],
+        "lore": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": ""
+                    }
+                ]
+            }
+        ],
+        "team": "faithful",
+        "stats" : {            
+            "movement": 6,
+            "melee": 0,
+            "ranged": 0,
+            "base": [25],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 0
+        },
+        "keywords" : [],
+        "abilities" : []
+    },
+    {
+        "id": "md_heraldofbeelzebub",
+        "name": "Herald of Beelzebub",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "glossary": [
+                    {"val": "New Antioch", "id": "kw_antioch"}
+                ]
+            }
+        ],
+        "lore": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": ""
+                    }
+                ]
+            }
+        ],
+        "team": "faithful",
+        "stats" : {            
+            "movement": 6,
+            "melee": 0,
+            "ranged": 0,
+            "base": [25],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 0
+        },
+        "keywords" : [],
+        "abilities" : []
     }
 ]
