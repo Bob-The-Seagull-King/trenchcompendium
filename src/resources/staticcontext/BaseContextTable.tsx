@@ -741,6 +741,27 @@ export const BaseContextCallTable : CallEventTable = {
                         }
                     }
                 }
+                
+                const EventProc: EventRunner = new EventRunner();
+
+                const result = await EventProc.runEvent(
+                    "getEquipmentRestriction",
+                    ModelItem,
+                    [],
+                    [],
+                    null
+                );
+                ModelItem.RestrictedEquipment = result;
+
+                const result_presentation = await EventProc.runEvent(
+                    "getEquipmentRestrictionPresentable",
+                    ModelItem,
+                    [],
+                    [],
+                    ModelItem.RestrictedEquipment
+                );
+
+                relayVar[i].display_str = ModelItem.Name + " (" + result_presentation + ")"
             }
 
             return NewChoices
@@ -799,7 +820,7 @@ export const BaseContextCallTable : CallEventTable = {
                     ModelItem.RestrictedEquipment
                 );
 
-                relayVar[i].display_str = result_presentation
+                relayVar[i].display_str = ModelItem.Name + " (" + result_presentation + ")"
             }
 
             return NewChoices
