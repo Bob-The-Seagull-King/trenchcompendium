@@ -798,5 +798,59 @@
         ],
         "warband_limit": 0,
         "required_upgrades":[]
+    },
+    {
+        "id": "rel_md_plagueknight_up_plagueknightcompanionofthefly_base",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {},
+        "options": [],
+        "model_id_set": ["md_plagueknight"],
+        "upgrade_id": "up_plagueknightcompanionofthefly_base",
+        "cost": 5,
+        "cost_type": 0,
+        "restricted_upgrades": [
+            "up_plagueknightrottencross",
+            "up_plagueknightalmoner"
+        ],
+        "warband_limit": 0,
+        "required_upgrades":[]
+    },
+    {
+        "id": "rel_md_plagueknight_up_plagueknightrottencross",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {},
+        "options": [],
+        "model_id_set": ["md_plagueknight"],
+        "upgrade_id": "up_plagueknightrottencross",
+        "cost": 5,
+        "cost_type": 0,
+        "restricted_upgrades": [
+            "up_plagueknightcompanionofthefly_base",
+            "up_plagueknightalmoner"
+        ],
+        "warband_limit": 0,
+        "required_upgrades":[]
+    },
+    {
+        "id": "rel_md_plagueknight_up_plagueknightalmoner",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {},
+        "options": [],
+        "model_id_set": ["md_plagueknight"],
+        "upgrade_id": "up_plagueknightalmoner",
+        "cost": 10,
+        "cost_type": 0,
+        "restricted_upgrades": [
+            "up_plagueknightcompanionofthefly_base",
+            "up_plagueknightrottencross"
+        ],
+        "warband_limit": 0,
+        "required_upgrades":[]
     }
 ]

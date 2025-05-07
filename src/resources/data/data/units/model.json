@@ -1996,7 +1996,7 @@
                 "tags": {"desc_type" : "paragraph"},
                 "content": "",
                 "glossary": [
-                    {"val": "New Antioch", "id": "kw_antioch"}
+                    {"val": "Black Grail", "id": "kw_blackgrail"}
                 ]
             }
         ],
@@ -2030,6 +2030,75 @@
         "name": "Plague Knight",
         "source": "core",
         "tags": {},
+        "contextdata": {            
+            "validate_final_unit_equipment": {
+                "requirements": [
+                    {
+                        "tag": "armour",
+                        "value": true
+                    }
+                ]
+            } 
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "A Plague Knight cannot be fielded, unless it is equipped with a suit of armour. In addition, a Plague Knight can be equipped with any weapon, armour and equipment from the Black Grail Armoury",
+                "glossary": [
+                    {"val": "Black Grail", "id": "kw_blackgrail"}
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "Plague Knight Ranks"
+                            }
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "You may have one rank per Plague Knight if you pay the necessary cost, as indicated."
+                    }
+                ]
+            }
+        ],
+        "lore": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "Ranking lowliest in the nobility of the Black Grail, these armoured great warriors were once truly depraved worshippers Beelzebub. When the Black Grail came for them, they willingly submitted themselves to the authority of the Lord of Flies. As a result they retain a semblance of sentience and the ability to wield weapons as they did in life. They aspire to win favour in the eyes of Beelzebub and one day be promoted in the hierarchy of the Order of the Fly."
+                    }
+                ]
+            }
+        ],
+        "team": "faithful",
+        "stats" : {            
+            "movement": 6,
+            "melee": 2,
+            "ranged": 0,
+            "base": [32],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 0
+        },
+        "keywords" : ["kw_blackgrail","kw_fear","kw_elite","kw_strong"],
+        "abilities" : ["ab_undeadfortitude"]
+    },
+    {
+        "id": "md_heraldofbeelzebub",
+        "name": "Herald of Beelzebub",
+        "source": "core",
+        "tags": {},
         "contextdata": {
             
         },
@@ -2038,7 +2107,7 @@
                 "tags": {"desc_type" : "paragraph"},
                 "content": "",
                 "glossary": [
-                    {"val": "New Antioch", "id": "kw_antioch"}
+                    {"val": "Black Grail", "id": "kw_blackgrail"}
                 ]
             }
         ],
@@ -2068,19 +2137,31 @@
         "abilities" : []
     },
     {
-        "id": "md_heraldofbeelzebub",
-        "name": "Herald of Beelzebub",
+        "id": "md_lordoftumors",
+        "name": "Lord of Tumors",
         "source": "core",
         "tags": {},
         "contextdata": {
+            "stat_options": { 
+                "options": [
+                    [
+                        {
+                            "base": [50]
+                        },
+                        {
+                            "base": [40]
+                        }
+                    ]
+                ]
+            }
             
         },
         "description": [
             {
                 "tags": {"desc_type" : "paragraph"},
-                "content": "",
+                "content": "A Lord of Tumours can be equipped with any weapon, armour and equipment from the Black Grail Armoury.",
                 "glossary": [
-                    {"val": "New Antioch", "id": "kw_antioch"}
+                    {"val": "Black Grail", "id": "kw_blackgrail"}
                 ]
             }
         ],
@@ -2091,7 +2172,7 @@
                 "subcontent": [                       
                     {
                         "tags": {"desc_type" : "italic"},
-                        "content": ""
+                        "content": "A high-ranking noble officiant in the Cult of the Black Grail, the Lord of Tumours spreads filth and corruption amongst friend and foe alike. They commune with the Lord of the Flies through a trance-like ecstasy and can channel the very power of the seventh circle of Hell which Beelzebub rules."
                     }
                 ]
             }
@@ -2099,14 +2180,13 @@
         "team": "faithful",
         "stats" : {            
             "movement": 6,
-            "melee": 0,
-            "ranged": 0,
-            "base": [25],
+            "melee": 4,
+            "ranged": 1,
             "armour": 0,
             "movetype": 0,
             "potential": 0
         },
-        "keywords" : [],
-        "abilities" : []
+        "keywords" : ["kw_blackgrail","kw_elite","kw_leader","kw_tough","kw_strong","kw_fear"],
+        "abilities" : ["ab_undeadfortitude","ab_beelzebubstouch"]
     }
 ]

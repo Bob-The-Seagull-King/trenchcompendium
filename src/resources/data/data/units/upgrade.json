@@ -1016,5 +1016,207 @@
             }
         ],
         "options": []
+    },
+    {
+        "id": "up_plagueknightcompanionofthefly_base",
+        "name": "Knight Companion of the Fly",
+        "source": "core",
+        "tags": {"trait": true },
+        "contextdata": {
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Add +1 DICE to Ranged or Melee.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"}
+                ]
+            }
+        ],
+        "options": [
+            {
+                "ref_id" : "ot_companion",
+                "name" : "Knight Companion Selection",
+                "description" : [],
+                "category" : "type",
+                "type" : "text",
+                "strictness" : "strict",
+                "predefined_options" : [],
+                "option_context" : {"basic_option_default":{}},
+                "data_search" : {      
+                    "searchtype": "complex",
+                    "searchparam":    {
+                        "type": "upgrade",
+                        "request":    {
+                            "operator": "and",
+                            "terms": [
+                                {             
+                                    "item": "tags",
+                                    "value": "knightcompanionofthefly",
+                                    "equals": true,
+                                    "strict": true,
+                                    "istag": true,
+                                    "tagvalue": ""
+                                }
+                            ],
+                            "subparams": []
+                        }
+                    }                        
+                }
+            }
+        ]
+    },
+    {
+        "id": "up_plagueknightcompanionofthefly_ranged",
+        "name": "Ranged Knight",
+        "source": "core",
+        "tags": {"trait": true,
+                "knightcompanionofthefly": true
+                },
+        "contextdata": {
+            "upgrade_stat": { "upgrades" : [
+                {"stat": "ranged", "value": 1}
+                ]}
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Knight gains +1 DICE to ranged attacks.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_plagueknightcompanionofthefly_melee",
+        "name": "Melee Knight",
+        "source": "core",
+        "tags": {"trait": true,
+                "knightcompanionofthefly": true
+                },
+        "contextdata": {
+            "upgrade_stat": { "upgrades" : [
+                {"stat": "melee", "value": 1}
+                ]}
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Knight gains +1 DICE to melee attacks.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_plagueknightalmoner",
+        "name": "Plague Almoner",
+        "source": "core",
+        "tags": {"trait": true
+                },
+        "contextdata": {
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This model requires one less BLOOD MARKER/INFECTION MARKER to cause Bloodbath.",
+                "glossary": [
+                    {"val": "BLOOD MARKER", "id": "kw_infectionmarker"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_plagueknightrottencross",
+        "name": "Knight of the Rotten Cross",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {
+            "model_add_equipment": {
+                "additions": [
+                    {
+                        "count": 1,
+                        "option_id": 0,
+                        "restriction": [
+                            { "category": "melee" },
+                            { "category": "ranged" }
+                        ]
+                    }
+                ]
+            }
+        },
+        "description": [           
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "When acquired, this model may purchase any weapon from the New Antioch or Heretic Legion list. The Knight of the Rotten Cross cannot give its weapon away but can purchase a new one if the old one is lost.",
+                "glossary": [
+                    {"val": "INFILTRATORS", "id": "kw_infiltrator"}
+                ]
+            }
+        ],
+        "options": [{
+            "ref_id" : "ot_rottencross",
+            "name" : "Rotten Cross Selections",
+            "description" : [],
+            "category" : "type",
+            "type" : "text",
+            "strictness" : "strict",
+            "predefined_options" : [],
+            "option_context" : {"basic_option_default":{}},
+            "data_search" : {      
+                "searchtype": "complex",
+                "searchparam":    {
+                    "type": "factionequipmentrelationship",
+                    "request":    {
+                        "operator": "and",
+                        "terms": [
+                        ],
+                        "subparams": [
+                            {
+                                "operator": "or",
+                                "terms": [
+                                    {             
+                                        "item": "category",
+                                        "value": "melee",
+                                        "equals": true,
+                                        "strict": true
+                                    },
+                                    {             
+                                        "item": "category",
+                                        "value": "ranged",
+                                        "equals": false,
+                                        "strict": true
+                                    }
+                                ],
+                                "subparams": []
+                            },
+                            {
+                                "operator": "or",
+                                "terms": [
+                                    {             
+                                        "item": "faction_id",
+                                        "value": "fc_newantioch",
+                                        "equals": true,
+                                        "strict": true
+                                    },
+                                    {             
+                                        "item": "faction_id",
+                                        "value": "fc_hereticlegion",
+                                        "equals": false,
+                                        "strict": true
+                                    }
+                                ],
+                                "subparams": []
+                            }
+                        ]
+                    }
+                }                        
+            }
+        }]
     }
 ]

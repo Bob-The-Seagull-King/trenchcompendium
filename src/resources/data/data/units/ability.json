@@ -1861,5 +1861,48 @@
             }
         ],
         "options": []
+    },
+    {
+        "id": "ab_undeadfortitude",
+        "name": "Undead Fortitude",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": { 
+         },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"}, 
+                "content": "Non-FIRE injuries against the model are rolled with -1 DICE. Additionally, this model ignores any additional BLOOD MARKERS caused by the Keyword GAS.",
+                "glossary": [
+                    {"val": "FIRE", "id": "kw_fire"},
+                    {"val": "-1 DICE", "id": "kw_minusdice"},
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"},
+                    {"val": "GAS", "id": "kw_gas"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_beelzebubstouch",
+        "name": "Beelzebub's Touch",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": { 
+         },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"}, 
+                "content": "If a melee attack by the Lord of Tumours hits the target and causes at least one BLOOD MARKER or INFECTION MARKER, the Lord of Tumours inflicts an additional INFECTION MARKER on the target. Additionally, the Lord of Tumours is never considered unarmed and any of its empty hands count as Trench Clubs.",
+                "glossary": [
+                    {"val": "FIRE", "id": "kw_fire"},
+                    {"val": "-1 DICE", "id": "kw_minusdice"},
+                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"},
+                    {"val": "INFECTION MARKER", "id": "kw_bloodmarker"},
+                    {"val": "GAS", "id": "kw_gas"}
+                ]
+            }
+        ],
+        "options": []
     }
 ]
