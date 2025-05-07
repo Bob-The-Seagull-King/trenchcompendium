@@ -1184,7 +1184,7 @@
                             {             
                                 "item": "faction_id",
                                 "value": "fc_hereticlegion",
-                                "equals": false,
+                                "equals": true,
                                 "strict": true
                             }
                         ],
