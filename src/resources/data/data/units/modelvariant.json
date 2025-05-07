@@ -576,6 +576,21 @@
         "new_abilities" : ["ab_trenchclericpowers_erie"]
     },
     {
+        "id": "md_trenchcleric_ethiopia",
+        "name": "Holy Warrior",
+        "source": "core",
+        "tags": {},
+        "contextdata": {},
+        "base_id": "md_trenchcleric",
+        "variant_name": "Expeditionary_Forced_of_Abyssinia",
+        "team": "faithful",
+        "cut_keywords" : [],
+        "keywords" : [],
+        "stats" : {},
+        "cut_abilities" : ["ab_trenchclericpowers"],
+        "new_abilities" : ["ab_trenchclericpowers_ethiopia"]
+    },
+    {
         "id": "md_lieutenant_eire",
         "name": "Eire Lieutenant",
         "source": "core",

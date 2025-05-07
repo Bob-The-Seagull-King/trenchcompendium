@@ -1556,6 +1556,69 @@
         ]
     },
     {
+        "id": "ab_trenchclericpowers_ethiopia",
+        "name": "Powers of the Holy Warrior",
+        "source": "core",
+        "tags": {"trait": true, "buy_choose": true},
+        "contextdata": {
+            "ability_option": {}
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Upon recruiting the model, you may choose one of the following holy powers for it to possess."
+            }
+        ],
+        "options": [
+            {
+                "ref_id" : "ot_powersofthelector",
+                "name" : "Holy Powers",
+                "description" : [],
+                "category" : "type",
+                "type" : "text",
+                "strictness" : "strict",
+                "predefined_options" : [],
+                "option_context" : {"basic_option_default":{}},
+                "data_search" : {      
+                    "searchtype": "complex",
+                    "searchparam":    {
+                        "type": "ability",
+                        "request":    {
+                            "operator": "or",
+                            "terms": [
+                                {             
+                                    "item": "id",
+                                    "value": "ab_godiswithus",
+                                    "equals": true,
+                                    "strict": true
+                                },
+                                {             
+                                    "item": "id",
+                                    "value": "ab_onwardschristiansoldiers",
+                                    "equals": true,
+                                    "strict": true
+                                },
+                                {             
+                                    "item": "id",
+                                    "value": "ab_blessedpalm",
+                                    "equals": true,
+                                    "strict": true
+                                },
+                                {             
+                                    "item": "id",
+                                    "value": "ab_godsmercy",
+                                    "equals": true,
+                                    "strict": true
+                                }
+                            ],
+                            "subparams": []
+                        }
+                    }                        
+                }
+            }
+        ]
+    },
+    {
         "id": "ab_godiswithus",
         "name": "God is With Us!",
         "source": "core",
@@ -1568,6 +1631,43 @@
                 "glossary": [
                     {"val": "RISKY ACTION", "id": "kw_riskyaction"},
                     {"val": "BLESSING MARKER", "id": "kw_blessingmarker"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_blessedpalm",
+        "name": "Blessed Palm",
+        "source": "core",
+        "tags": {"action": true},
+        "contextdata": { },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"}, 
+                "content": "As an ACTION, the Warrior removes one BLESSING MARKER it has and adds it to any other member of the warband. This ACTION succeeds automatically.",
+                "glossary": [
+                    {"val": "ACTION", "id": "kw_action"},
+                    {"val": "BLESSING MARKER", "id": "kw_blessingmarker"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_godsmercy",
+        "name": "God's Mercy",
+        "source": "core",
+        "tags": {"action": true},
+        "contextdata": { },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"}, 
+                "content": "Select one friendly model within 3” of the warrior and take an ACTION. If successful, the target immediately stands if Down and loses up to one BLOOD MARKER or INFECTION MARKER(your choice) it has.",
+                "glossary": [
+                    {"val": "ACTION", "id": "kw_action"},
+                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"},
+                    {"val": "INFECTION MARKER", "id": "kw_infectionmarker"}
                 ]
             }
         ],

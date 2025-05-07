@@ -2034,5 +2034,186 @@
         }
         ],
         "options": []
+    },
+    {
+        "id": "rl_chewa",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            "faction_add_upgrades": {
+                "model_key": "rl_chewa",
+                "models_id": ["md_shocktrooper"],
+                "filters": [
+                    {
+                        "type": "keyword",
+                        "value": "kw_elite",
+                        "truth": true
+                    }
+                ]
+            }
+        },
+        "name": "Chewa",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Any shocktroopers or ELITE models in an Abyssinian warband can be made a member of Chewa, the traditional warrior-elite. This costs +5 ducats per model and can be done after the model has been recruited. These models gain +1 DICEagainst enemies that are in melee combat with a model other than the Chewa. If this enemy is in melee with 2+ other models, this bonus is increased to +2 DICE.",
+            "glossary": [
+                {"val": "+1 DICE", "id": "kw_plusdice"},
+                {"val": "+2 DICE", "id": "kw_plusdice"}
+            ]
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_faithofethiopia",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Faith of Ethiopia",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "The sect of the Sniper Priests does not operate in the Solomonic Dynasty, so your warband cannot contain any Sniper Priests."
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_flankingforces",
+        "source": "core",
+        "tags": { },
+        "contextdata": {      
+            "faction_add_upgrades": {
+                "model_key": "rl_flankingforces",                
+                "models_id": ["md_yeoman"]
+            },
+            "faction_remove_upgrades": {
+                "upgrades": ["rel_md_yeoman_infiltrator"]
+            }
+        },
+        "name": "Flanking Forces",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "The warband cannot have Trench Moles, but instead you can upgrade up to four Yeomen to Vanguards at the cost of +5 ducats each. They have the following special rules: Unless the scenario prohibits use of the special deployment of INFILTRATORS, you may deploy the Vanguard on any table edge as long as they are at least 8” away from any enemy model after INFILTRATORS are deployed. Vanguard can also be deployed in your own deployment zone as standard.",
+            "glossary": [
+            {"val": "INFILTRATORS", "id": "kw_infiltrator"}
+            ]
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_chieftanpanoply",
+        "source": "core",
+        "tags": { },
+        "contextdata": {     
+            "faction_remove_upgrades": {
+                "upgrades": ["rel_md_mechanisedheavyinfantry_machinearmour"]
+            }
+        },
+        "name": "Chieftan Panoply",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "The Mechanized Infantry of the warband cannot be upgraded to use Machine Armour."
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_shortrangemarksmanship",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            "add_to_model": {   
+                "id": "rl_punishingmillstones",                            
+                "required": [
+                    {
+                        "category": "id",
+                        "value": ["md_yeomen","md_lieutenant"]
+                    }
+                ]
+            }
+        },
+        "name": "Short-Range Marksmanship",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Yeomen, Vanguard and the Lieutenant in this warband gain +1 DICE to all hit rolls if they are using their ranged weapons at short range (i.e. half or less of their maximum range). This bonus does not apply to GRENADES or weapons with the Keyword HEAVY.",
+            "glossary": [
+                {"val": "+1 DICE", "id": "kw_plusdice"},
+                {"val": "GRENADES", "id": "kw_grenade"},
+                {"val": "HEAVY", "id": "kw_heavy"}
+            ]
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_abyssianhealers",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Abyssian Healers",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Your warband can have up to two Combat Medics."
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_holywarriors",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Holy Warriors",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "The warband may include up to two Holy Warriors (use Trench Cleric characteristics) and they can each choose to replace their “Onwards, Christian Soldiers!” ability with one of the \"BLessed Palm\" or \"God's Mercy\" abilities."
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_weaponsofmobilewarfare",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            "warband_equipment_limit": {
+                "maximum": [
+                    {
+                        "category": "ranged",
+                        "res_type": "keyword",
+                        "value": "kw_heavy",
+                        "ignore": [
+                            {
+                                "type": "id",
+                                "value": "eq_satchelcharge"
+                            }
+                        ],
+                        "limit": 3
+                    }
+                ]
+            }
+        },
+        "name": "Weapons of Mobile Warfare",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Your warband can have a maximum of three ranged weapons with the Keyword HEAVY. This limitation does not include satchel charges.",
+            "glossary": [
+                {"val": "HEAVY", "id": "kw_heavy"}
+            ]
+        }
+        ],
+        "options": []
     }
 ]

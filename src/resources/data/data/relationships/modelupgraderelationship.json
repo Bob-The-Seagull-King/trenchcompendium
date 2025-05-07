@@ -647,6 +647,22 @@
         "required_upgrades":[]
     },
     {
+        "id": "rel_md_yeoman_vanguard",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {},
+        "options": [],
+        "model_id_set": ["rl_flankingforces"],
+        "upgrade_id": "up_vanguard",
+        "cost": 5,
+        "cost_type": 0,
+        "restricted_upgrades": [
+        ],
+        "warband_limit": 2,
+        "required_upgrades":[]
+    },
+    {
         "id": "rel_md_mechanisedheavyinfantry_machinearmour",
         "source": "core",
         "tags": {},
@@ -744,6 +760,22 @@
         "options": [],
         "model_id_set": ["rl_rapidassault"],
         "upgrade_id": "up_rapidassault",
+        "cost": 5,
+        "cost_type": 0,
+        "restricted_upgrades": [
+        ],
+        "warband_limit": 0,
+        "required_upgrades":[]
+    },
+    {
+        "id": "rel_factionrule_chewa",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {},
+        "options": [],
+        "model_id_set": ["rl_chewa"],
+        "upgrade_id": "up_chewa",
         "cost": 5,
         "cost_type": 0,
         "restricted_upgrades": [

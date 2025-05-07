@@ -979,5 +979,42 @@
             }
         ],
         "options": []
+    },
+    {
+        "id": "up_chewa",
+        "name": "Chewa",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {
+        },
+        "description": [           
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The model gains +1 DICE against enemies that are in melee combat with a model other than the Chewa. If this enemy is in melee with 2+ other models, this bonus is increased to +2 DICE.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "+2 DICE", "id": "kw_plusdice"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_vanguard",
+        "name": "Vanguard",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {
+        },
+        "description": [           
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Unless the scenario prohibits use of the special deployment of INFILTRATORS, you may deploy the Vanguard on any table edge as long as they are at least 8” away from any enemy model after INFILTRATORS are deployed. Vanguard can also be deployed in your own deployment zone as standard.",
+                "glossary": [
+                    {"val": "INFILTRATORS", "id": "kw_infiltrator"}
+                ]
+            }
+        ],
+        "options": []
     }
 ]

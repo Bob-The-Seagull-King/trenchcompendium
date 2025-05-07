@@ -599,6 +599,19 @@ export const BaseContextCallTable : CallEventTable = {
                 }
             }
 
+            if (context_func['required'] ) {
+                for (let i = 0; i < context_func['required'].length; i++) {
+                    const curFilter = context_func['required'][i]
+                    if (curFilter["category"] == "id") {            
+                        if (curFilter["value"].includes(trackVal.ID)) {
+                            ValidUpgrade = true;
+                        } else {
+                            ValidUpgrade = false;
+                        }
+                    }
+                }
+            }
+
             if (ValidUpgrade) {
                 const AbilityList = Requester.MakeRequest(
                     {searchtype: "id", searchparam: {type: "factionrule", id: context_func["id"]}}
@@ -627,6 +640,7 @@ export const BaseContextCallTable : CallEventTable = {
             
             const ModelModule = await import("../../factories/features/ModelFactory");
             const EquipmentModule = await import("../../factories/features/EquipmentFactory");
+            const UpgradeModule = await import("../../factories/features/UpgradeFactory");
 
             const PermittedCollection : string[] = []
             const BannedCollection : string[] = []
@@ -653,6 +667,11 @@ export const BaseContextCallTable : CallEventTable = {
                         if (Requirement.res_type == "equipment") {
                             const EquipItem = await EquipmentModule.EquipmentFactory.CreateNewEquipment(Requirement.value.toString(), null)
                             NewStringParts.push(""+(EquipItem.Name))
+                        }                  
+
+                        if (Requirement.res_type == "upgrade") {
+                            const UpgradeItem = await UpgradeModule.UpgradeFactory.CreateNewUpgrade(Requirement.value.toString(), null)
+                            NewStringParts.push(""+(UpgradeItem.Name))
                         }                  
 
                         PermittedCollection.push(NewStringParts.join(' '));
