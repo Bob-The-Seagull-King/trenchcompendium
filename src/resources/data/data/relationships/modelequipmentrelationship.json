@@ -328,7 +328,7 @@
         "mandatory_equipment": ["eq_boltactionrifle"],
         "removable": true,
         "salevalue": 5,
-        "saletype": 1
+        "saletype": 0
     },
     {
         "id": "rel_md_eq_combatengineer",
