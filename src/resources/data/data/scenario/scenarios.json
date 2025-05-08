@@ -805,5 +805,179 @@
             "optional_deeds": []
         },
         "special_rules": ["sr_gunturret","sr_trainwagons","sr_supplycrates"]
+    },
+    {
+        "id": "sc_stormingtheshores",
+        "source": "core",
+        "tags": {"desc_type" : "paragraph"},
+        "name": "Storming the Shores",
+        "img_link": "https://i.imgur.com/jYKeLrM.png",
+        "description":  [],
+        "forces": {
+            "even_match": true,
+            "description": [
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": ""
+                }
+            ]
+        },
+        "battlefield": {
+            "field_size":  [
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "."
+                }
+            ],
+            "standard_terrain": true,
+            "extra_features":  [
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": ""
+                }
+            ]
+         },
+        "infiltrators": { 
+            "allowed": 0,
+            "description": [                
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": ""
+                }
+            ]
+        },
+        "deployment": {
+            "staggered": false,
+            "description": [
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": ""
+                }
+            ]
+        },
+        "battle_length": { 
+            "min": 4,
+            "max": 4,
+            "description": [                            
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": ""
+                }
+            ]
+        },
+        "victory_conditions":{ "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": ""
+            },
+            {
+                "tags": {"desc_type" : "list"},
+                "content": "",
+                "subcontent": [                    
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": ""
+                    }
+                ]
+            }
+        ]},
+        "glorious_deeds": { 
+            "description": [
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": ""
+                }
+            ],
+            "deeds": [],
+            "optional_deeds": []
+        },
+        "special_rules": [ ]
+    },
+    {
+        "id": "sc_dragonhunt",
+        "source": "core",
+        "tags": {"desc_type" : "paragraph"},
+        "name": "Dragon Hunt",
+        "img_link": "https://i.imgur.com/jYKeLrM.png",
+        "description":  [],
+        "forces": {
+            "even_match": true,
+            "description": [
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": ""
+                }
+            ]
+        },
+        "battlefield": {
+            "field_size":  [
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "."
+                }
+            ],
+            "standard_terrain": true,
+            "extra_features":  [
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": ""
+                }
+            ]
+         },
+        "infiltrators": { 
+            "allowed": 0,
+            "description": [                
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": ""
+                }
+            ]
+        },
+        "deployment": {
+            "staggered": false,
+            "description": [
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": ""
+                }
+            ]
+        },
+        "battle_length": { 
+            "min": 4,
+            "max": 4,
+            "description": [                            
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": ""
+                }
+            ]
+        },
+        "victory_conditions":{ "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": ""
+            },
+            {
+                "tags": {"desc_type" : "list"},
+                "content": "",
+                "subcontent": [                    
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": ""
+                    }
+                ]
+            }
+        ]},
+        "glorious_deeds": { 
+            "description": [
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": ""
+                }
+            ],
+            "deeds": [],
+            "optional_deeds": []
+        },
+        "special_rules": [ ]
     }
 ]
