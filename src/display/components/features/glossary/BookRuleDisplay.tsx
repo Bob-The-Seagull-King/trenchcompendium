@@ -46,7 +46,7 @@ const BookRuleDisplay = (props: any) => {
 
     return (
         <ErrorBoundary fallback={<div>Something went wrong with BookRuleDisplay.tsx</div>}>
-            <div className={'book-rule-wrap'}>
+            <div className={'book-rules-wrap'}>
                 <ToastContainer
                             position="top-center"
                             autoClose={5000}
@@ -60,7 +60,6 @@ const BookRuleDisplay = (props: any) => {
                             />
 
                 {/* Rules Introduction / Description */}
-                {/* @TODO: Is this necessary? Can the data be stored differently?*/}
                 <div className={'rules-introduction'}>
                     {returnDescription(ruleObject, ruleObject.Description)}
                 </div>
