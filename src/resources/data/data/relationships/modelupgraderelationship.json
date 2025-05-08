@@ -852,5 +852,35 @@
         ],
         "warband_limit": 0,
         "required_upgrades":[]
+    },
+    {
+        "id": "rel_md_houndsoftheblackgrail_up_infectioushound",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {},
+        "options": [],
+        "model_id_set": ["md_houndsoftheblackgrail"],
+        "upgrade_id": "up_infectioushound",
+        "cost": 5,
+        "cost_type": 0,
+        "restricted_upgrades": [ ],
+        "warband_limit": 0,
+        "required_upgrades":[]
+    },
+    {
+        "id": "rel_md_heraldofbeelzebub_up_maddeningbuzz",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {},
+        "options": [],
+        "model_id_set": ["md_heraldofbeelzebub"],
+        "upgrade_id": "up_maddeningbuzz",
+        "cost": 10,
+        "cost_type": 0,
+        "restricted_upgrades": [ ],
+        "warband_limit": 1,
+        "required_upgrades":[]
     }
 ]

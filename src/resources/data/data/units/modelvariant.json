@@ -637,5 +637,23 @@
         },
         "cut_abilities" : [],
         "new_abilities" : []
+    },
+    {
+        "id": "md_grailthrall_flythrall",
+        "name": "Fly Thrall",
+        "source": "core",
+        "tags": {},
+        "contextdata": {},
+        "base_id": "md_grailthrall",
+        "variant_name": "Base",
+        "team": "faithful",
+        "cut_keywords" : [],
+        "keywords" : [],
+        "stats" : {
+            "movement": 6,
+            "movetype": 1
+        },
+        "cut_abilities" : ["ab_undeadfortitude"],
+        "new_abilities" : []
     }
 ]

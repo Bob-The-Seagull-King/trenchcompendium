@@ -1125,7 +1125,8 @@
                 "tags": {"desc_type" : "default"},
                 "content": "This model requires one less BLOOD MARKER/INFECTION MARKER to cause Bloodbath.",
                 "glossary": [
-                    {"val": "BLOOD MARKER", "id": "kw_infectionmarker"}
+                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"},
+                    {"val": "INFECTION MARKER", "id": "kw_infectionmarker"}
                 ]
             }
         ],
@@ -1195,5 +1196,46 @@
                 }                        
             }
         }]
+    },
+    {
+        "id": "up_infectioushound",
+        "name": "Infectious Hound",
+        "source": "core",
+        "tags": {"trait": true
+                },
+        "contextdata": {
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This model causes INFECTION MARKERS with their unarmed attacks instead of BLOOD MARKERS.",
+                "glossary": [
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"},
+                    {"val": "INFECTION MARKERS", "id": "kw_infectionmarker"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_maddeningbuzz",
+        "name": "Maddening Buzz",
+        "source": "core",
+        "tags": {"trait": true
+                },
+        "contextdata": {
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Every ACTION taken by non-BLACK GRAIL models within 8” of a Herald is considered RISKY. Note: This does not affect non-ACTION rolls such as Charge distance rolls, nor does it affect ACTIONS that do not require a roll on the Action Success Chart.",
+                "glossary": [
+                    {"val": "ACTION", "id": "kw_action"},
+                    {"val": "BLACK GRAIL", "id": "kw_blackgrail"},
+                    {"val": "RISKY", "id": "kw_riskyaction"}
+                ]
+            }
+        ],
+        "options": []
     }
 ]

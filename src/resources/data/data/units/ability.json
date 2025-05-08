@@ -981,7 +981,7 @@
         "description": [           
             {
                 "tags": {"desc_type" : "paragraph"},
-                "content": " If any model with the PILGRIM Keyword within 1” of the Communicant is hit by a ranged or melee weapon (excluding BLAST weapons), you can choose to redirect the hit against the Communicant instead. Determine the injuries exactly as if the weapon just hit the Communicant.", 
+                "content": "If any model with the PILGRIM Keyword within 1” of the Communicant is hit by a ranged or melee weapon (excluding BLAST weapons), you can choose to redirect the hit against the Communicant instead. Determine the injuries exactly as if the weapon just hit the Communicant.", 
                 "glossary": [
                     {"val": "PILGRIM", "id": "kw_pilgrim"},
                     {"val": "BLAST", "id": "kw_blast"}
@@ -1901,6 +1901,187 @@
                     {"val": "INFECTION MARKER", "id": "kw_bloodmarker"},
                     {"val": "GAS", "id": "kw_gas"}
                 ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_parasitictick",
+        "name": "Parasitic Tick",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": { 
+         },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"}, 
+                "content": "If the Corpse Guard inflicts one or more BLOOD MARKERS or INFECTION MARKERS with a melee attack on a non-BLACK GRAIL model, it can remove one of its own BLOOD or INFECTION MARKERS.",
+                "glossary": [
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"},
+                    {"val": "INFECTION MARKERS", "id": "kw_bloodmarker"},
+                    {"val": "BLACK GRAIL", "id": "kw_blackgrail"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_bodyguard_blackgrail",
+        "name": "Black Grail Bodyguard",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": { 
+         },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"}, 
+                "content": "If a BLACK GRAIL model within 1” of the Corpse Guard is hit, the Corpse Guard can redirect the hit to itself. The injury and any additional effects of the attack are resolved against the Corpse Guard instead of the original target. This ability cannot be used against BLAST weapons.",
+                "glossary": [
+                    {"val": "BLAST", "id": "kw_blast"},
+                    {"val": "BLACK GRAIL", "id": "kw_blackgrail"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_frighteningspeed",
+        "name": "Frightening Speed",
+        "source": "core",
+        "tags": {"trait": true, "bonus": true},
+        "contextdata": {
+            "bonus_ability": {
+                "action_type": ["dash"]
+            }},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Hounds roll to Dash with +1 DICE and they do not suffer any penalties to movement after they Stand from being Down.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "Down", "id": "gl_down"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_diseasecarrier",
+        "name": "Disease Carrier",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": { },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "If an enemy model is Activated while in Melee Combat with a Hound, that model suffers one INFECTION MARKER.",
+                "glossary": [
+                    {"val": "INFECTION MARKER", "id": "kw_infectionmarker"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_overwhelminghorde",
+        "name": "Overwhelming Horde",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": { },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "For each friendly BLACK GRAIL model within 3” of the Thrall, it gains +1 DICE to its Melee attack rolls, up to maximum +4 DICE.",
+                "glossary": [
+                    {"val": "BLACK GRAIL", "id": "kw_blackgrail"},
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "+4 DICE", "id": "kw_plusdice"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_infectedproboscis",
+        "name": "Infected Proboscis",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": { },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Heralds do not suffer penalties for fighting unarmed, and they cause INFECTION MARKERS with their unarmed attacks instead of BLOOD MARKERS. If this attack inflicts an INFECTION MARKERS on a non-BLACK GRAIL enemy model, the Herald can remove one of their own BLOOD MARKERS.",
+                "glossary": [
+                    {"val": "INFECTION MARKERS", "id": "kw_infectionmarker"},
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"},
+                    {"val": "BLACK GRAIL", "id": "kw_blackgrail"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_toxic",
+        "name": "Toxic",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": { },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This model ignores any additional BLOOD MARKERS caused by the Keyword GAS.",
+                "glossary": [
+                    {"val": "GAS", "id": "kw_gas"},
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_corpulent",
+        "name": "Corpulent",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": { },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "An Amalgam is a vast bulk of diseased flesh and is extraordinarily difficult to kill. Injuries against the Amalgam are rolled with -2 DICE.",
+                "glossary": [
+                    {"val": "-2 DICE", "id": "kw_minusdice"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_trample_amalgam",
+        "name": "Trample",
+        "source": "core",
+        "tags": {"action": true, "attack": true, "action_type": ["attack_melee"]},
+        "contextdata": {"custom_attack_type": {"range": 0}, "armour_ignore": {}},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Once during its Activation, the Amalgam may make an extra Melee Attack ACTION against a Downed enemy model on a 32mm or smaller base. Resolve the attack as if the Amalgam was armed with a Trench Club. This attack ignores armour as the Amalgam stomps their enemies into pulp.",
+                "glossary": [
+                    {"val": "ACTION", "id": "kw_action"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_unstoppable",
+        "name": "Trample",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Enemy models never get free attacks against the Amalgam when it Retreats. Additionally, the Amalgam can move out of Melee Combat using its Standard Move, Charge and Dash."
             }
         ],
         "options": []

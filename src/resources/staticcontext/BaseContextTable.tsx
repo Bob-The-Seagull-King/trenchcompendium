@@ -204,7 +204,7 @@ export const BaseContextCallTable : CallEventTable = {
 
                         if (Requirement.res_type == "keyword") {
                             const ValKey : Keyword = KeywordFactory.CreateNewKeyword(Requirement.value.toString(), null)
-                            NewStringParts.push("must be "+makestringpresentable(ValKey.Name? ValKey.Name : ""))
+                            NewStringParts.push("with keyword "+makestringpresentable(ValKey.Name? ValKey.Name : ""))
                         }                        
 
                         if (Requirement.res_type == "ducat") {

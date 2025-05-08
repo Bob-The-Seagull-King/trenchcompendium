@@ -1990,13 +1990,39 @@
         "tags": {},
         "contextdata": {
             
+            "set_arms": {"ranged": 0, "melee": 0, "special": 6},
+            "weapon_duplicate_limit": {
+                "limit": 2
+            },
+            "model_equipment_restriction": {
+                "removed": [
+                    {
+                        "category": "equipment",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "ranged",
+                        "res_type": "keyword",
+                        "value": "kw_grenade"
+                    }
+                ],
+                "required": [
+                    {
+                        "category": "armour",
+                        "res_type": "id",
+                        "value": "eq_trenchshield"
+                    }
+                ]
+            }
         },
         "description": [
             {
                 "tags": {"desc_type" : "paragraph"},
-                "content": "",
+                "content": "The amalgam has six functional arms. They can carry six one-handed weapons or three double-handed weapons, or any combination thereof, as long as the six arms can carry them. The amalgam uses the Black Grail Armoury for weapons – it never carries any other gear except weapons, though one of its arms may carry a single trench shield (representing pieces of armour it has absorbed). It may not carry Grenades and it can only wield up to two weapons with the same name. The Amalgam can take a Ranged Attack ACTION once per Activation with each ranged weapon it is equipped with and it can take a Melee Attack ACTION once per Activation with each melee weapon it is equipped with. None of its weapons are off-hand weapons. The Amalgam cannot benefit from Shield Combo.",
                 "glossary": [
-                    {"val": "Black Grail", "id": "kw_blackgrail"}
+                    {"val": "Black Grail", "id": "kw_blackgrail"},
+                    {"val": "ACTION", "id": "kw_action"}
                 ]
             }
         ],
@@ -2007,23 +2033,23 @@
                 "subcontent": [                       
                     {
                         "tags": {"desc_type" : "italic"},
-                        "content": ""
+                        "content": "An Amalgam is a huge, shambling mass of dozens of bodies of infected fallen enemy warriors, insects, mammals and any other living creatures that had the misfortune of succumbing to the agonising blessings of the Black Grail together. These shoggoths shamble across the battlefield like walking mountains of corpulent, diseased flesh, its flailing arms still wielding weapons its victims used in life. Anyone or anything unfortunate enough to be in its path is crushed into a disgusting pulp beneath its elephantine feet. "
                     }
                 ]
             }
         ],
-        "team": "faithful",
+        "team": "hell",
         "stats" : {            
             "movement": 6,
             "melee": 0,
             "ranged": 0,
-            "base": [25],
+            "base": [60],
             "armour": 0,
             "movetype": 0,
             "potential": 0
         },
-        "keywords" : [],
-        "abilities" : []
+        "keywords" : ["kw_blackgrail","kw_fear","kw_tough","kw_strong"],
+        "abilities" : ["ab_toxic","ab_corpulent","ab_trample_amalgam","ab_unstoppable"]
     },
     {
         "id": "md_plagueknight",
@@ -2081,7 +2107,7 @@
                 ]
             }
         ],
-        "team": "faithful",
+        "team": "hell",
         "stats" : {            
             "movement": 6,
             "melee": 2,
@@ -2100,12 +2126,48 @@
         "source": "core",
         "tags": {},
         "contextdata": {
-            
+            "unarmed_penalty_remove": {},
+            "model_equipment_restriction": {
+                "removed": [
+                    {
+                        "category": "melee",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "armour",
+                        "res_type": "all",
+                        "value": ""
+                    }
+                ],
+                "required": [
+                    {
+                        "category": "equipment",
+                        "res_type": "id",
+                        "value": "eq_compoundeyeshelmet"
+                    },
+                    {
+                        "category": "equipment",
+                        "res_type": "id",
+                        "value": "eq_graildevotee"
+                    }
+                ]
+            },
+            "model_equipment_limit": {
+                "maximum": [
+                    {
+                        "tag": "weapon",
+                        "res_type": "id",
+                        "value": "eq_graildevotee",
+                        "limit": 1
+                    }
+                ]
+            }
         },
         "description": [
             {
                 "tags": {"desc_type" : "paragraph"},
-                "content": "",
+                "content": "Heralds can be equipped with any ranged weapon from the Black Grail Armoury. They cannot be equipped with any other items, except for Compound Eyes Helmets or a single Grail Devotee. When they fight unarmed in Melee Combat, the attack is always modified by Infected Proboscis. One Herald can have the Maddening Buzz ability (see below) at the cost of +10 ducats.",
                 "glossary": [
                     {"val": "Black Grail", "id": "kw_blackgrail"}
                 ]
@@ -2118,23 +2180,33 @@
                 "subcontent": [                       
                     {
                         "tags": {"desc_type" : "italic"},
-                        "content": ""
+                        "content": "Some victims of the Black Grail suffer a far worse fate than becoming a Thrall. They are bestowed with the black honour by being melded with hell-flies, growing into a grotesque winged insect made of bloated flesh. After this torturous metamorphosis they take to air as Heralds of Beelzebub, the winged squires and scouts of the Order of the Fly. Their vestigial human bodies are still conscious as they are slowly eaten from within to be used as fuel by the Herald, all the while their warped bodies fight for the glory of Hell against their will."
+                    }
+                ]
+            },  
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "The Heralds are the vanguard in any assault of the Black Grail, and the ear-numbing otherworldly drone of their wings strikes terror in any defender, breaking their focus and sapping their willpower. Heralds wield discarded weapons, contaminated with horrible worms that churn through them, which in turn infect their victims. Each diseased bullet has sentience of its own, finding even the smallest chink in any armour, burrowing into the nervous system and liquefying the internal organs from within."
                     }
                 ]
             }
         ],
-        "team": "faithful",
+        "team": "hell",
         "stats" : {            
-            "movement": 6,
+            "movement": 10,
             "melee": 0,
             "ranged": 0,
-            "base": [25],
+            "base": [40],
             "armour": 0,
-            "movetype": 0,
+            "movetype": 1,
             "potential": 0
         },
-        "keywords" : [],
-        "abilities" : []
+        "keywords" : ["kw_blackgrail","kw_skirmisher","kw_fear"],
+        "abilities" : ["ab_infectedproboscis","ab_toxic"]
     },
     {
         "id": "md_lordoftumors",
@@ -2177,7 +2249,7 @@
                 ]
             }
         ],
-        "team": "faithful",
+        "team": "hell",
         "stats" : {            
             "movement": 6,
             "melee": 4,
@@ -2188,5 +2260,187 @@
         },
         "keywords" : ["kw_blackgrail","kw_elite","kw_leader","kw_tough","kw_strong","kw_fear"],
         "abilities" : ["ab_undeadfortitude","ab_beelzebubstouch"]
+    },
+    {
+        "id": "md_corpseguard",
+        "name": "Corpse Guard",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Corpse Guard can be equipped with any weapon, armour and equipment from the Black Grail Armoury.",
+                "glossary": [
+                    {"val": "Black Grail", "id": "kw_blackgrail"}
+                ]
+            }
+        ],
+        "lore": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "Only the strongest human devotees can survive the blessings of the Black Grail. The ones that do are inducted into the ranks of the Corpse Guard, bodyguards to the nobility of the Black Grail. If they serve with distinction, they may one day join the ranks of the Infernal Nobility."
+                    }
+                ]
+            }
+        ],
+        "team": "hell",
+        "stats" : {            
+            "movement": 6,
+            "melee": 1,
+            "ranged": 0,
+            "base": [32],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 0
+        },
+        "keywords" : ["kw_blackgrail","kw_elite","kw_fear"],
+        "abilities" : ["ab_undeadfortitude","ab_parasitictick","ab_bodyguard_blackgrail"]
+    },
+    {
+        "id": "md_houndsoftheblackgrail",
+        "name": "Hounds of the Black Grail",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "unarmed_penalty_remove": {},
+            
+            "model_equipment_restriction": {
+                "removed": [
+                    {
+                        "category": "equipment",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "melee",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "ranged",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "armour",
+                        "res_type": "all",
+                        "value": ""
+                    }
+                ]
+            }
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The Hounds cannot be equipped with any weapons, armour or equipment. They do not suffer penalties for fighting unarmed. At the cost of +5 ducats, they cause INFECTION MARKERS with their unarmed attacks instead of BLOOD MARKERS.",
+                "glossary": [
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"},
+                    {"val": "INFECTION MARKERS", "id": "kw_bloodmarker"}
+                ]
+            }
+        ],
+        "lore": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "Parasitic carcasses of canines infested with maggots and flies spawned from the body of Beelzebub himself. Their unholy mission is to prowl No Man’s Land and spread diseases and pestilence in the name of their dark master."
+                    }
+                ]
+            }
+        ],
+        "team": "hell",
+        "stats" : {            
+            "movement": 8,
+            "melee": 1,
+            "base": [30,60],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 2
+        },
+        "keywords" : ["kw_blackgrail","kw_fear"],
+        "abilities" : ["ab_undeadfortitude","ab_frighteningspeed","ab_diseasecarrier"]
+    },
+    {
+        "id": "md_grailthrall",
+        "name": "Grail Thrall",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "unarmed_penalty_remove": {},
+            
+            "model_equipment_restriction": {
+                "removed": [
+                    {
+                        "category": "equipment",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "melee",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "ranged",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "armour",
+                        "res_type": "all",
+                        "value": ""
+                    }
+                ]
+            }
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Thralls cannot be equipped with any weapons, armour or equipment. They do not suffer penalties for fighting unarmed."
+            }
+        ],
+        "lore": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "The boons of the Black Grail lead slowly but surely down the path of utter corruption. Only very few of the chosen can withstand the blessings of the Lord of the Flies. Most are turned into Grail Thralls, and join the endless legions of empty, hollowed-out and diseased husks who must obey the whims of the Black Grail nobles for all eternity, while suffering the torment of their countless supernatural infections. "
+                    }
+                ]
+            },      
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "Thralls come in two varieties: Grail Thralls that have become almost impervious to pain and Fly Thralls, controlled by the gargantuan hell-flies that have buried their proboscis deep into the central nervous system of their victims, allowing far greater mobility in exchange for less resistance to pain."
+                    }
+                ]
+            }
+        ],
+        "team": "hell",
+        "stats" : {            
+            "movement": 5,
+            "melee": -1,
+            "base": [25],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 2
+        },
+        "keywords" : ["kw_blackgrail","kw_fear"],
+        "abilities" : ["ab_undeadfortitude","ab_overwhelminghorde"]
     }
 ]
