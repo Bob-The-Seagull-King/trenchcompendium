@@ -365,5 +365,202 @@
             "glossary": [{"val": "ELITES", "id": "kw_elite"}]
             }
         ]
+    },
+    {
+        "id": "gd_survivetotellthetale",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "Survive to Tell the Tale",
+        "description":  [
+            {
+            "tags": {},
+            "content": "A model is hit by two mines during the battle and is not taken Out of Action."
+            }
+        ]
+    },
+    {
+        "id": "gd_intothetrenches",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "Into the Trenches",
+        "description":  [
+            {
+            "tags": {},
+            "content": "Charge an enemy model in a trench and take it Out of Action during the same turn."
+            }
+        ]
+    },
+    {
+        "id": "gd_headshot",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "Headshot",
+        "description":  [
+            {
+            "tags": {},
+            "content": "Retreat from melee combat with an enemy and then take them out with a ranged attack ACTION during the same Activation.",
+            "glossary": [{"val": "ACTION", "id": "kw_action"}]
+            }
+        ]
+    },
+    {
+        "id": "gd_goodhunting",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "Good Hunting",
+        "description":  [
+            {
+            "tags": {},
+            "content": "Take out an enemy in a trench with a ranged attack at Long Range."
+            }
+        ]
+    },
+    {
+        "id": "gd_throwthemback",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "Throw Them Back",
+        "description":  [
+            {
+            "tags": {},
+            "content": "As a Defender, take an enemy in a trench Out of Action when there were no defenders in the trench before you activated the model that takes the enemy out."
+            }
+        ]
+    },
+    {
+        "id": "gd_daringraid",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "Daring Raid",
+        "description":  [
+            {
+            "tags": {},
+            "content": "The Attacker completes this Glorious Deed if they destroy one Objective Marker in the opponent’s Deployment Zone."
+            }
+        ]
+    },
+    {
+        "id": "gd_rampage",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "Rampage",
+        "description":  [
+            {
+            "tags": {},
+            "content": "The Attacker completes this Glorious Deed if a single model destroys 2+ Objective Markers."
+            }
+        ]
+    },
+    {
+        "id": "gd_stopthemintheirtracks",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "Stop Them in Their Tracks",
+        "description":  [
+            {
+            "tags": {},
+            "content": "The Defender completes this Glorious Deed if they take an enemy model Out of Action in the Attacker’s Deployment Zone."
+            }
+        ]
+    },
+    {
+        "id": "gd_savethesupplies",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "Save the Supplies",
+        "description":  [
+            {
+            "tags": {},
+            "content": "The Defender completes this Glorious Deed if four or more supplies are left at the end of the fourth turn."
+            }
+        ]
+    },
+    {
+        "id": "gd_nostoneleftunturned",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "No Stone Left Unturned",
+        "description":  [
+            {
+            "tags": {},
+            "content": "The same model successfully opens two wagons."
+            }
+        ]
+    },
+    {
+        "id": "gd_notonmywatch",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "Not on My Watch",
+        "description":  [
+            {
+            "tags": {},
+            "content": "Take out an enemy operating the Gun Turret with a ranged attack at Long Range."
+            }
+        ]
+    },
+    {
+        "id": "gd_supplyrun",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "Supply Run",
+        "description":  [
+            {
+            "tags": {},
+            "content": "Successfully extract at least two crates from the map. The model that extracts the second crate gets the Glory Point."
+            }
+        ]
+    },
+    {
+        "id": "gd_meatgrinder",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "Meat Grinder",
+        "description":  [
+            {
+            "tags": {},
+            "content": "Take out three enemies using the Gun Turret with the same model."
+            }
+        ]
+    },
+    {
+        "id": "gd_kingofthehill_train",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "King of the Hill",
+        "description":  [
+            {
+            "tags": {},
+            "content": "Have a model spend at least three consecutive turns on the top of the hill, within 3” of a wagon and without suffering any BLOOD MARKERS.",
+            "glossary": [{"val": "BLOOD MARKERS", "id": "kw_bloodmarker"}]
+            }
+        ]
+    },
+    {
+        "id": "gd_overtheenemyline",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "Over the Enemy Line",
+        "description":  [
+            {
+            "tags": {},
+            "content": " Successfully extract a crate through the opposing player’s deployment zone."
+            }
+        ]
     }
 ]

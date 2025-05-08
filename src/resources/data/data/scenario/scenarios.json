@@ -345,5 +345,465 @@
             "optional_deeds": []
         },
         "special_rules": ["sr_nominatedelites"]
+    },
+    {
+        "id": "sc_trenchwarfar",
+        "source": "core",
+        "tags": {"desc_type" : "paragraph"},
+        "name": "Trench Warfare",
+        "img_link": "https://i.imgur.com/jYKeLrM.png",
+        "description":  [],
+        "forces": {
+            "even_match": false,
+            "description": [
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "The larger warband is the Attacker and they use their entire warband. The smaller warband is the Defender and they can have up to half of the number of models the Attacker has. If both warbands have the same number of models, roll a dice to see who the attacker is and who the defender is."
+                }
+            ]
+        },
+        "battlefield": {
+            "field_size":  [
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "The game is played on a standard-sized Battlefield (we suggest 4’ x 4’). ."
+                }
+            ],
+            "standard_terrain": true,
+            "extra_features":  [ ]
+         },
+        "infiltrators": { 
+            "allowed": 2,
+            "description": [                
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Infiltrators can be used in this scenario. However, the Attacker cannot place their infiltrators closer than 12” of their own deployment zone."
+                }
+            ]
+        },
+        "deployment": {
+            "staggered": false,
+            "description": [
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "The players then take turns to deploy one model at a time, starting with the attacker."
+                },
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Models must be set up wholly within their own deployment zone. If a player runs out of models to set up, the other player sets up all their models afterwards. Once the players have set up their models, deployment ends and the battle begins."
+                }
+            ]
+        },
+        "battle_length": { 
+            "min": 4,
+            "max": 5,
+            "description": [                            
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "At the end of the fourth turn, the Attacker rolls1D6. On a roll of 1-2, the battle ends. Otherwise the game lasts for five turns."
+                }
+            ]
+        },
+        "victory_conditions":{ "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "If one warband is wiped out completely or loses their Morale test, the game ends and the opposing warband wins."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Otherwise, keep a running tally of Victory Points for both sides. The players accumulate VPs as follows:"
+            },
+            {
+                "tags": {"desc_type" : "list"},
+                "content": "",
+                "subcontent": [                    
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": "At the end of the battle, the defender scores 2 victory points for each trench section that has one of the defender’s models and no enemies in it. The defender scores 1 VP for each trench section that has one of their models, but also has one or more enemy models."
+                    },                
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": "At the end of the battle, the Attacker scores 2 VPs for each trench section that has one or more of their models, but also has one or more enemy models."
+                    },                
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": "At the end of the battle the Attacker scores 3 VPs for each trench section that has one or more of their models but no enemy models. Calculate VPs at the end each turn for both players and the end of the game and add them together. The player with the higher number of VPs wins, otherwise the game is a draw."
+                    }
+                ]
+            }
+        ]},
+        "glorious_deeds": { 
+            "description": [
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Players score one Glory Point for every model that completes any of the following Glorious Deeds. Glory Points for these can only be gained once - whichever player completes them first gets the Glory Points! "
+                }
+            ],
+            "deeds": ["gd_survivetotellthetale","gd_intothetrenches","gd_headshot","gd_goodhunting","gd_throwthemback","gd_holdyourground"],
+            "optional_deeds": []
+        },
+        "special_rules": ["sr_trenches","sr_mines"]
+    },
+    {
+        "id": "sc_greatwar",
+        "source": "core",
+        "tags": {"desc_type" : "paragraph"},
+        "name": "Great War",
+        "img_link": "https://i.imgur.com/jYKeLrM.png",
+        "description":  [],
+        "forces": {
+            "even_match": true,
+            "description": [
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Both sides use their entire forces."
+                }
+            ]
+        },
+        "battlefield": {
+            "field_size":  [
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "The game is played on a standard-sized Battlefield (we suggest 4’ x 4’). "
+                }
+            ],
+            "standard_terrain": true,
+            "extra_features":  [
+            ]
+         },
+        "infiltrators": { 
+            "allowed": 1,
+            "description": [                
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Infiltrators can be used in this Scenario."
+                }
+            ]
+        },
+        "deployment": {
+            "staggered": false,
+            "description": [
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "The players then take turns to deploy one model at a time, starting with the attacker."
+                },
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Models must be set up wholly within their own deployment zone. If a player runs out of models to set up, the other player sets up all their models afterwards. Once the players have set up their models, deployment ends and the battle begins."
+                }
+            ]
+        },
+        "battle_length": { 
+            "min": 5,
+            "max": 5,
+            "description": [                            
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "The battle lasts for five turns."
+                }
+            ]
+        },
+        "victory_conditions":{ "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "If one warband is wiped out completely the opposing warband wins. Otherwise, keep a running tally of Victory Points for both sides. The players accumulate Victory Points as follows:"
+            },
+            {
+                "tags": {"desc_type" : "list"},
+                "content": "",
+                "subcontent": [                    
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": "By taking out enemies you earn VPs equal to the ducat value of the model (including any equipment) divided 10, rounding any fractions up to the nearest full number. "
+                    },               
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": "Mercenaries & Allies are worth three times their Glory Points cost as Victory Points."
+                    },               
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": "Glorious equipment is worth three times the Glory Points cost of the equipment as Victory Points."
+                    }
+                ]
+            }
+        ]},
+        "glorious_deeds": { 
+            "description": [
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Since this scenario ends the Campaign, there is no further need to acquire Glory Points."
+                }
+            ],
+            "deeds": [],
+            "optional_deeds": []
+        },
+        "special_rules": ["sr_morale"]
+    },
+    {
+        "id": "sc_supplyraid",
+        "source": "core",
+        "tags": {"desc_type" : "paragraph"},
+        "name": "Supply Raid",
+        "img_link": "https://i.imgur.com/jYKeLrM.png",
+        "description":  [],
+        "forces": {
+            "even_match": false,
+            "description": [
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "The players roll-off. The winner can decide to be either the Attacker or the Defender."
+                },
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "The Defender selects up to six models from their warband. The Attacker selects up to 6+D3 models from their warband."
+                },
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "At the beginning of turn two, both players receive D3 randomly selected models from the rest of their warband as reinforcements. These reinforcements are placed anywhere along the player’s own table edge but at least 8” away from any enemy models. Once the player has deployed their entire warband, no further reinforcements can be deployed."
+                }
+            ]
+        },
+        "battlefield": {
+            "field_size":  [
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "The game is played on a standard-sized battlefield (we suggest 4’ x 4’)."
+                }
+            ],
+            "standard_terrain": true,
+            "extra_features":  [
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Starting with the Defender, players then take turns to place an Objective Marker until each player has placed three markers. Each Objective Marker must be more than 6” away from other Objective Markers and 6” away from the edge of the battlefield. Only one Objective Marker can be placed in the Defender’s Deployment Zone and none in the Attacker’s. These represent the Defender’s supplies that the Attacker is trying to destroy."
+                },
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "The Attacker treats the Objective Markers exactly as enemy models and they can be charged, attacked and shot at. The supplies can be destroyed by any melee attack that hits them, or a ranged attack that hits them from a weapon with the Keyword HEAVY.",
+                    "glossary": [{"val": "HEAVY", "id": "kw_heavy"}]
+                }
+            ]
+         },
+        "infiltrators": { 
+            "allowed": 1,
+            "description": [                
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Infiltrators can be used in this Scenario."
+                }
+            ]
+        },
+        "deployment": {
+            "staggered": true,
+            "description": [
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Starting with the Defender, the players take turns to deploy one model at a time. Models must be set up wholly within their own deployment zone. If a player runs out of models to set up, the other player sets up all their models afterwards. "
+                },
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Once the players have set up their models, deployment ends and the battle begins."
+                }
+            ]
+        },
+        "battle_length": { 
+            "min": 4,
+            "max": 4,
+            "description": [                            
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "The battle lasts for four turns."
+                }
+            ]
+        },
+        "victory_conditions":{ "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "If one warband fails its Morale Test, the game ends in an outright victory for their opponent."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Keep a running tally of Victory Points for both sides. The players accumulate VPs as follows:"
+            },
+            {
+                "tags": {"desc_type" : "list"},
+                "content": "",
+                "subcontent": [                    
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": "1 VP is gained per enemy model taken Out of Action."
+                    },                 
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": "The Attacker gains 1 VP for each Objective Marker that is destroyed."
+                    },                 
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": "At the end of the battle, the Defender gains 2 VPs for each Objective that remains on the table."
+                    },                 
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": "Calculate VPs for both players and the end of the battle and add them together. The player with the higher number of VPs wins, otherwise the game is a draw."
+                    }
+                ]
+            }
+        ]},
+        "glorious_deeds": { 
+            "description": [
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Players score one Glory Point for every model that completes any of the following Glorious Deeds. Glory Points for these can only be gained once – whichever player completes them first gets the Glory Points! "
+                }
+            ],
+            "deeds": ["gd_daringraid","gd_rampage","gd_holdyourground","gd_stopthemintheirtracks","gd_victorious","gd_savethesupplies"],
+            "optional_deeds": []
+        },
+        "special_rules": [ ]
+    },
+    {
+        "id": "sc_armouredtrain",
+        "source": "core",
+        "tags": {"desc_type" : "paragraph"},
+        "name": "Armoured Train",
+        "img_link": "https://i.imgur.com/jYKeLrM.png",
+        "description":  [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "An armoured train has been derailed. While no clear reason has been determined, some speculate that this ill-fated transport could have been sent by loyal citizens desperate to support their forces in the front lines. Others say that it was part of a military effort that was ambushed by enemy forces, or that it could have been contraband intended as a commercial venture by merchants seeking to profit from the demands of war. Truth be told, any other misfortune might have fallen upon it. What truly matters is that the train carried supplies vital to keep the engines of war up and running: food, ammunition, medicine and even relics—holy and unholy. The loss of its contents has sparked a frenzy and now warbands from all sides rush to claim what remains. Evidence of a brutal fate lies scattered across the landscape, with barbed wire, scattered shells and fading blood trails hinting at a crew that vanished without a trace."
+            }],
+        "forces": {
+            "even_match": true,
+            "description": [
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Both forces can use up to 15 models from their warband."
+                }
+            ]
+        },
+        "battlefield": {
+            "field_size":  [
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "The game is played on a standard-size battlefield (we suggest 4’ x 4’)."
+                }
+            ],
+            "standard_terrain": true,
+            "extra_features":  [
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "The table must contain:"
+                },
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "",
+                    "subcontent": [
+                        {
+                            "tags": {"desc_type" : "list"},
+                            "content": "",
+                            "subcontent": [                    
+                                {
+                                    "tags": {"desc_type" : "default"},
+                                    "content": "A hill spanning its entire middle section, as indicated on the map"
+                                },                   
+                                {
+                                    "tags": {"desc_type" : "default"},
+                                    "content": "A bridge dividing the hill in half, forming a tunnel that allows access to both sides of the map"
+                                },                   
+                                {
+                                    "tags": {"desc_type" : "default"},
+                                    "content": "A train with three wagons spread throughout the highest section of the hill"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Both the hill and the bridge should be about 5” high. Models up to 125mm tall can pass under the bridge. Parts of each side of the hill must contain patches of barbed wire. The hill sides should also be considered as Difficult Terrain, due to the steep elevation. "
+                },
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Fill the rest of the battlefield with terrain in the usual way, using models such as guard towers, ruined buildings etc., placing them at least 1” away from the hillsides."
+                }
+            ]
+         },
+        "infiltrators": { 
+            "allowed": 0,
+            "description": [                
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Infiltrators can be used in this scenario but must be deployed as normal troops."
+                }
+            ]
+        },
+        "deployment": {
+            "staggered": false,
+            "description": [
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "The players roll-off. The winner of the roll-off chooses which deployment zone will be theirs. The other deployment zone will be their opponent’s."
+                },
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "The players then take it in turns to deploy one model at a time, starting with the player who has more models in their warband (roll-off if both have the same number of models)."
+                },
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Models must be set up wholly within their own deployment zone. If a player runs out of models to set up, the other player sets up all their models afterwards. Once the players have set up their models, deployment ends and the battle begins."
+                },
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Then place a Gun Turret model, represented by a circled G, on top of the wagon at the centre of the map. Once placed, neither of these can be moved during the game. See the Field Artillery rules for the weapons’ profile and specifications."
+                }
+            ]
+        },
+        "battle_length": { 
+            "min": 6,
+            "max": 6,
+            "description": [                            
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "The battle lasts for six turns."
+                }
+            ]
+        },
+        "victory_conditions":{ "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "If one warband is wiped out completely or loses their Morale test, the game ends and the opposing warband wins. Otherwise, keep a running tally of Victory Points for both sides. The players accumulate VPs as follows: "
+            },
+            {
+                "tags": {"desc_type" : "list"},
+                "content": "",
+                "subcontent": [                    
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": "A player scores 3 VPs for each crate successfully extracted from the map."
+                    },               
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": "A player scores 2 VPs for each crate destroyed during the game."
+                    },               
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": "A player scores 1 VPs for each crate used during the game."
+                    }
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Calculate VPs at the end each turn for both players and the end of the game and add them together. The player with the higher number of VPs wins, otherwise the game is a draw."
+            }
+        ]},
+        "glorious_deeds": { 
+            "description": [
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Players score one Glory Point for every model that completes any of the following Glorious Deeds. Glory Points for these can only be gained once – whichever player completes them first gets the Glory Points! "
+                }
+            ],
+            "deeds": ["gd_nostoneleftunturned","gd_notonmywatch","gd_supplyrun","gd_kingofthehill_train","gd_overtheenemyline"],
+            "optional_deeds": []
+        },
+        "special_rules": ["sr_gunturret","sr_trainwagons","sr_supplycrates"]
     }
 ]

@@ -1,5 +1,5 @@
 import '../../../../resources/styles/vendor/bootstrap.css'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { ErrorBoundary } from "react-error-boundary";
 
 // Classes
@@ -16,6 +16,9 @@ import GenericHover from '../../../../display/components/generics/GenericHover'
 import EmptyDisplay from '../../../../display/components/generics/EmptyDisplay'
 import GenericPopup from '../../../../display/components/generics/GenericPopup'
 import { ObjectTag } from '../../../../classes/CompendiumItem';
+import { Equipment } from '../../../../classes/feature/equipment/Equipment';
+import EquipmentDisplay from '../../../components/features/equipment/EquipmentDisplay';
+import { EquipmentFactory } from '../../../../factories/features/EquipmentFactory';
 
 const AdvancedDescriptionItemDisplay = (props: any) => {
     const description: AdvancedDescription = props.data
@@ -224,6 +227,20 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
                     </div>
                 )
             }
+            case "equipment": {
+                return (
+                    <div className="">
+                        <span>
+                            {getEquipmentDisplay(item.Content?.toString() || "")}
+                        </span>
+                        <span>
+                            {item.SubContent?.map((subitem) => (
+                               <AdvancedDescriptionItemDisplay key="descriptionsubitem" data={subitem} parent={parentItem}/>
+                            ))}
+                        </span>
+                    </div>
+                )
+            }
             case "question": {
                 return (
                     <span>
@@ -255,6 +272,30 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
             }
         }
         return null;
+    }
+
+    function getEquipmentDisplay(val : string) {
+        const [component, setcomponent] = useState<null | Equipment>(null);
+        const [keyvar, setkeyvar] = useState(0);
+
+        useEffect(() => {
+            async function getItem() {
+                const item = await EquipmentFactory.CreateNewEquipment(val, null)
+                setcomponent(item);
+                setkeyvar(keyvar + 1);
+            };
+
+            getItem();
+        }, []);
+
+
+        return (
+            <span key={keyvar}>
+                {component !== null &&
+                    <EquipmentDisplay data={component} />
+                }   
+            </span>
+        );
     }
 
     return (
