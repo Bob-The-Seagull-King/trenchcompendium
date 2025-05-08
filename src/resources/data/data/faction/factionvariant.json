@@ -441,7 +441,7 @@
         ],
         "team": "hell",
         "cut_rules" : [],
-        "rules" : [],
+        "rules" : ["rl_theexecutor","rl_thelamenters","rl_thefallen","rl_thelost","rl_thebereaved","rl_dishonoured","rl_hegemonslastblessing","rl_hegemonswill"],
         "options": []
     }
 ]

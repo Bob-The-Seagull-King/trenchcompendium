@@ -2277,5 +2277,226 @@
             }
         ],
         "options": []
+    },
+    {
+        "id": "rl_theexecutor",
+        "source": "core",
+        "tags": { },
+        "contextdata": {   
+        },
+        "name": "The Executor",
+        "description":  [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The warband must include an Executor (use Plague Knight characteristics) who has the Keyword TOUGH and a Ranged characteristic of +1 DICE. The Executor costs 80 ducats.",
+                "glossary": [
+                    {"val": "TOUGH", "id": "kw_tough"},
+                    {"val": "+1 DICE", "id": "kw_plusdice"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_thelamenters",
+        "source": "core",
+        "tags": { },
+        "contextdata": {   
+        },
+        "name": "The Lamenters",
+        "description":  [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The warband can include up to three Plague Knights (including the Executor) known as The Lamenters."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_thefallen",
+        "source": "core",
+        "tags": { },
+        "contextdata": {   
+        },
+        "name": "The Fallen",
+        "description":  [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The warband cannot include a Lord of Tumours or Amalgam, for all were slain a long time ago."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_thelost",
+        "source": "core",
+        "tags": { },
+        "contextdata": {   
+        },
+        "name": "The Lost",
+        "description":  [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The warband may only include a maximum of two Hounds (known as Wailers) and a maximum of two Heralds of Beelzebub (called Weepers)."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_thebereaved",
+        "source": "core",
+        "tags": { },
+        "contextdata": {   
+        },
+        "name": "The Bereaved",
+        "description":  [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Grail Thralls and Fly Thralls of the warband are called the Bereaved. Bereaved have a Ranged characteristic of +0 DICE and cost 30 ducats each. Grail Thralls (but not Fly Thralls) can be equipped with ranged weapons, standards and musical instruments from the Black Grail Armoury. ",
+                "glossary": [
+                    {"val": "+0 DICE", "id": "kw_plusdice"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_dishonoured",
+        "source": "core",
+        "tags": { },
+        "contextdata": {   
+        },
+        "name": "Dishonoured",
+        "description":  [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": " No model in the warband may carry a Black Grail Shield or Beelzebub’s Axe. The Lord of the Flies does not suffer failed knights to carry his device."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_hegemonslastblessing",
+        "source": "core",
+        "tags": { },
+        "contextdata": {   
+        },
+        "name": "Hegemon's Last Blessing",
+        "description":  [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This warband has Plague Blade LIMIT:3, Putrid Shotgun LIMIT:3and Viscera Cannon LIMIT:3. Non-ELITE models can be equipped with Viscera Cannons.",
+                "glossary": [
+                    {"val": "LIMIT", "id": "kw_limit"},
+                    {"val": "ELITE", "id": "kw_elite"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_hegemonswill",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            "add_to_model": {   
+                "id": "rl_hegemonswill",                            
+                "required": [
+                    {
+                        "category": "id",
+                        "value": ["md_plagueknight_executor","md_plagueknight"]
+                    }
+                ]
+            }  
+        },
+        "name": "Hegemon's Will",
+        "description":  [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Using the remnants of the lingering power of a fallen Hegemon, a Plague Knight of the Warband can directly command a nearby Thrall. "
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "During its Activation, a Plague Knight in this warband can remove an INFECTION MARKER from any model in play to enable a friendly Thrall within 18” to use any one of the Actions detailed below. Each Thrall can only be affected by Hegemon’s Will once per Turn, but one Plague Knight may issue commands to multiple Thralls (though not multiple commands to the same Thrall) during a single Activation, if all the conditions are met.",
+                "glossary": [
+                    {"val": "INFECTION MARKER", "id": "kw_infectionmarker"}
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                    
+                    {
+                        "tags": {"desc_type" : "list"},
+                        "content": "",
+                        "subcontent": [
+                            
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Move: "
+                                    },{
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "The Thrall takes a standard Move ACTION.",
+                                        "glossary": [
+                                            {"val": "ACTION", "id": "kw_action"}
+                                        ]
+                                    }
+                                ]
+                            },{
+                                "tags": {"desc_type" : "default"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Ranged Attack: "
+                                    },{
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "The Thrall takes a Ranged Attack ACTION with any Ranged weapon it has. ",
+                                        "glossary": [
+                                            {"val": "ACTION", "id": "kw_action"}
+                                        ]
+                                    }
+                                ]
+                            },{
+                                "tags": {"desc_type" : "default"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Charge: "
+                                    },{
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "The Thrall takes a standard Charge ACTION.",
+                                        "glossary": [
+                                            {"val": "ACTION", "id": "kw_action"}
+                                        ]
+                                    }
+                                ]
+                            },{
+                                "tags": {"desc_type" : "default"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Melee Attack: "
+                                    },{
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "The Thrall takes a Melee Attack ACTION.",
+                                        "glossary": [
+                                            {"val": "ACTION", "id": "kw_action"}
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "options": []
     }
 ]

@@ -646,7 +646,7 @@
         "contextdata": {},
         "base_id": "md_grailthrall",
         "variant_name": "Base",
-        "team": "faithful",
+        "team": "hell",
         "cut_keywords" : [],
         "keywords" : [],
         "stats" : {
@@ -654,6 +654,59 @@
             "movetype": 1
         },
         "cut_abilities" : ["ab_undeadfortitude"],
+        "new_abilities" : []
+    },
+    {
+        "id": "md_grailthrall_bereaved",
+        "name": "Bereaved",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "model_equipment_restriction": {
+                "added": [
+                    {
+                        "category": "ranged",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "equipment",
+                        "res_type": "id",
+                        "value": "eq_musicalinstrument"
+                    },
+                    {
+                        "category": "equipment",
+                        "res_type": "id",
+                        "value": "eq_troopflag"
+                    }
+                ]
+            }},
+        "base_id": "md_grailthrall",
+        "variant_name": "Dirge_of_the_Great_Hegemon",
+        "team": "hell",
+        "cut_keywords" : [],
+        "keywords" : [],
+        "stats" : {
+            "ranged": 0
+        },
+        "cut_abilities" : [],
+        "new_abilities" : []
+    },
+    {
+        "id": "md_plagueknight_executor",
+        "name": "Executor",
+        "source": "core",
+        "tags": {},
+        "contextdata": {},
+        "base_id": "md_plagueknight",
+        "variant_name": "Dirge_of_the_Great_Hegemon",
+        "team": "hell",
+        "cut_keywords" : [],
+        "keywords" : ["kw_tough"],
+        "stats" : {
+            "ranged": 1
+        },
+        "cut_abilities" : [],
         "new_abilities" : []
     }
 ]
