@@ -2442,5 +2442,69 @@
         },
         "keywords" : ["kw_blackgrail","kw_fear"],
         "abilities" : ["ab_undeadfortitude","ab_overwhelminghorde"]
+    },
+    {
+        "id": "md_beastofnomansland",
+        "name": "Beast of No Man's Land",
+        "source": "core",
+        "tags": {},
+        "contextdata": {            
+            "model_equipment_restriction": {
+                "removed": [
+                    {
+                        "category": "equipment",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "melee",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "ranged",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "armour",
+                        "res_type": "all",
+                        "value": ""
+                    }
+                ]
+            }
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The Beast model can be up to 60mm tall, placed on a base of 120 x 80mm. It is armed only with its vicious Claws and devastating Bite. These are natural parts of the creature itself and cannot be removed or lost in any way."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The Beast will seek out the nearest model with the most BLOOD MARKERS, driven by its bloodthirsty frenzy. The Beast will Charge the model through the fastest route and will Climb, Jump Over Gaps, Between Ledges of Unequal Heights and Down (as long as the height won’t cause an injury to it) to get at a warband model. However, note that it will not move through Dangerous terrain if it can be avoided. The Beast does not need to have line of sight of a model to Charge it. If the beast cannot Charge a model, it will just Move toward the nearest one.",
+                "glossary": [
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"}
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "When the Beast reaches a model, it will make one attack ACTION with each of its Claws and one attack ACTION with its Bite, all in Melee Combat (so it can make three attacks per Activation). If the Beast Charges more than one model, it will split its attacks amongst the opponents.",
+                "glossary": [
+                    {"val": "ACTION", "id": "kw_action"}
+                ]
+            }
+        ],
+        "lore": [  ],
+        "team": "scenario",
+        "stats" : {            
+            "movement": 8,
+            "melee": 2,
+            "base": [120,80],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 2
+        },
+        "keywords" : ["kw_fear","kw_tough"],
+        "abilities" : ["ab_unrelenting","ab_resilient"]
     }
 ]

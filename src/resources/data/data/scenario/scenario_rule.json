@@ -285,5 +285,303 @@
             }
         ],
         "options": []
+    },
+    {
+        "id": "sr_unforseenevents",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Unforseen Events",
+        "description":  [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "These rules represent the treacherous and often unforeseeable tides of war that can suddenly shift the battle unexpectedly. Starting on the second turn of combat, roll 1D6. On a roll of 1-3, a random event occurs, otherwise the game continues until the start of the next turn, when another roll will be required. These events will always occur at the start of the combat turn, before any model Activation (unless stated otherwise).Upon the occurrence of a random event, roll another 1D6 for the Unforeseen Events chart below to see what exactly happens and follow the directions. No more than one random encounter will ever take place in a single game, so after a random encounter is rolled, a player no longer needs to roll at the start of a combat turn. The entries below refer to the corresponding number rolled and its respective effects:"
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [
+                    {
+                    "tags": {"desc_type" : "bold"},
+                    "content": "1. Rising Fog"
+                    }
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Heavy fog covers the entire combat zone, drastically limiting visibility for all models. All Ranged Attacks have their total range halved, according to the weapon’s profile and respective modifiers that may have been applied (such as scopes etc.) The fog lasts for two turns before it dissipates."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [
+                    {
+                    "tags": {"desc_type" : "bold"},
+                    "content": "2. Striding Mercenary"
+                    }
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "A Mercenary appears on the ridge overlooking the shore. Witnessing the unfolding carnage, they decide to seize the opportunity and offer their services to the warband with the most Glory Points currently accumulated (if both warbands have the same number of points, roll-off 1D6 to see whom they offer their help to. On a roll of 1-3, the Attacker wins, and a roll of 4-6, the Defender wins the roll-off ). The Mercenary will offer their services to the warband for a single turn, even if they have already hired their maximum number of Mercenary models for 1 Glory Point. "
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "You can choose any of the Mercenary units available to your warband and immediately deploy them at least 6” away from any other model in the battlefield, but not within the opponent’s Deployment Zone. You can also deny the Mercenary’s services if you don’t have the required amount of points to pay them."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "At the end of the turn, the warband that they aided must pay them their required amount of Glory Points before they leave the battlefield. If the warband cannot (or will not) meet the Mercenary’s standard, they leave, but not before taking out their frustration on a random member of the warband (only choose among members of the warband who haven’t been taken Out of Action yet). Roll directly on the Injury Chart for this member, according to the Mercenary’s profile statistics for the attack (the opponent chooses which attack was used), applying any applicable modifiers."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [
+                    {
+                    "tags": {"desc_type" : "bold"},
+                    "content": "3. Unearthed Relics"
+                    }
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Relics are suddenly unearthed in the battlefield. Each player places two Objective Markers to represent the relics, for a total of four, each at least 6” away from any Deployment Zone, at least 6” away from each other and at least 6” away from any model. The relics cannot be placed on impassable terrain or surrounded by it. A model that comes into base contact with the relic claims it. The model’s owner decides if it is a holy or unholy relic, according to the restriction of their faction’s warband. The model either gains +1 BLESSING MARKER (for a holy relic) or starts radiating a malignant aura and causes FEAR (for an unholy relic).",
+                "glossary": [
+                    {"val": "BLESSING MARKER", "id": "kw_blessingmarker"},
+                    {"val": "FEAR", "id": "kw_fear"}
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [
+                    {
+                    "tags": {"desc_type" : "bold"},
+                    "content": "4. The Beast of No Man’s Land"
+                    }
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The scent of blood soaking the ground and the incessant sound of gunfire has brought the attention of a prowling beast. Rumours have been spreading about this fiend. Some say it is a stray War Beast, a hell-spawn abomination that escaped captivity before it could be made into a War Wolf. Others claim it is something much older, something that scarred the earth and fed upon its inhabitants long before the start of the war. Whatever it is, the creature knows no bounds and sees neither friend nor foe, only meat. "
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The Beast must be placed within 6” of a side of the board that is not a Deployment Zone and at least 6” away from a Deployment Zone. The players roll-off to determine on which side of the board the creature will appear. The winning player chooses the board side and the losing player places the creature where they deem fit, according to the parameters above."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Note that the Beast cannot be initially placed anywhere within 12” of a warband model."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "At the end of each of a model’s Activation, the player must roll 1D6. On a roll of 1-4, the Beast is Activated subsequently, before the opponent activates one of their own models. The same player then acts out the Beast’s actions, as described in its profile. If by the end of the turn the Beast hasn’t been activated, it is before the start of the next turn. The Beast can only be Activated once per turn. Below is the Beast’s profile and special rules:"
+            },
+            {
+                "tags": {"desc_type" : "model"},
+                "content": "md_beastofnomansland"
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [
+                    {
+                    "tags": {"desc_type" : "bold"},
+                    "content": "5. Rat Frenzy"
+                    }
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Rats have infested the trenches ever since the start of the war. Troops wake up to the skittering of their little paws, the grinding of their teeth gnawing and tearing at the dead, and even swarming upon the living when the rotten flesh runs low and dry from the bones of the fallen. The sounds of gunfight, the bombs detonating upon the ground, the spreading of smoke and ash, and the disturbance of the troops storming the shore has stirred the rats’ nest and the pests now scurry out of their holes in a ravenous frenzy, feeding on anything that stands in their way."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Use two templates of 80mm to represent the Swarms of Rats. Use two Swarm of Rats’ models if you have them. The players roll-off to place each Swarm of Rats on the board. The Swarms must be placed within 8” of any piece of terrain, including terrain within Deployment Zones, but cannot be placed over Impassable terrain or surrounded by it, and cannot be placed directly on top of another model or in base contact with them. The Swarms must be placed at least 3” away from any warband model. "
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The Swarms are considered Dangerous Terrain, with +1 DICE to injure. A model can Move through, start its Move or end its movement on a Swarm. If a model comes into base contact with a Swarm, they’re considered to be standing on Dangerous Terrain.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"}
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "If a model armed with a weapon, or that has an ability with the Keyword FIRE or BLAST, and that is not knocked Down, comes into base contact with a Swarm, it can attempt a RISKY ACTION to disperse the Swarm without triggering the Dangerous terrain effect.",
+                "glossary": [
+                    {"val": "FIRE", "id": "kw_fire"},
+                    {"val": "BLAST", "id": "kw_blast"},
+                    {"val": "RISKY ACTION", "id": "kw_riskyaction"}
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "If successful, remove the Swarm from the game board and the Activation of the model is over regardless of any remaining ACTIONS the model might have.",
+                "glossary": [
+                    {"val": "ACTIONS", "id": "kw_action"}
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Each Swarm moves 2D6” at the start of each combat turn, before the Activation of any model. They will always move toward the nearest model that is knocked Down or toward the nearest model that is not engaged in melee combat and that is at least 6” away from any other model. The Swarms cannot move toward a model that causes FEAR. The Swarm must have line of sight to the model that is either knocked Down or singled out in order to move toward them. If neither condition is met, the Swarm does not move on that turn.",
+                "glossary": [
+                    {"val": "FEAR", "id": "kw_fear"}
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The Swarms cannot be engaged in any form of combat. The Swarms will stay for D3 turns after which the rats will scurry back to their holes and disappear."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [
+                    {
+                    "tags": {"desc_type" : "bold"},
+                    "content": "6. Long Lost Stash"
+                    }
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The constant bombardment over the shore uncovers long lost stashes, containing several weapons and items, the spoils of war. Each player places one Objective Marker to represent these stashes to a total of two, each at least 8” away from any Deployment Zone, at least 8” away from each other and at least 6” away from any model. The stashes cannot be placed on impassable terrain or surrounded by it. "
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "A model that comes into base contact with the stash claims it. The model’s owner rolls 1D6 for a chance to get one of the following items:"
+            },
+            {
+                "tags": {"desc_type" : "headless_table"},
+                "content": "",
+                "subcontent": [
+                    {
+                        "tags": {"desc_type" : "table_row"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "table_item"},
+                                "content": "1"
+                            },
+                            {
+                                "tags": {"desc_type" : "table_item"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "equipment"},
+                                        "content": "eq_trenchshield"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "table_row"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "table_item"},
+                                "content": "2"
+                            },
+                            {
+                                "tags": {"desc_type" : "table_item"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "equipment"},
+                                        "content": "eq_standardarmour"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "table_row"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "table_item"},
+                                "content": "3"
+                            },
+                            {
+                                "tags": {"desc_type" : "table_item"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "equipment"},
+                                        "content": "eq_grenades"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "table_row"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "table_item"},
+                                "content": "4"
+                            },
+                            {
+                                "tags": {"desc_type" : "table_item"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "equipment"},
+                                        "content": "eq_medikit"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "table_row"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "table_item"},
+                                "content": "5"
+                            },
+                            {
+                                "tags": {"desc_type" : "table_item"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "equipment"},
+                                        "content": "eq_armourpiercingbullets"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "table_row"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "table_item"},
+                                "content": "6"
+                            },
+                            {
+                                "tags": {"desc_type" : "table_item"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "equipment"},
+                                        "content": "eq_grenadelauncher"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The model that claims the stash may immediately equip the item they have looted for the duration of this game."
+            }
+        ],
+        "options": []
     }
 ]

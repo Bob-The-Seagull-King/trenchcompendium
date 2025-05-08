@@ -562,5 +562,126 @@
             "content": " Successfully extract a crate through the opposing player’s deployment zone."
             }
         ]
+    },
+    {
+        "id": "gd_theshoreisours",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "The Shore is Ours",
+        "description":  [
+            {
+            "tags": {},
+            "content": "As the Attacker, win the game by taking control of the Main Structure Objective Building for two full consecutive turns. Your last activated model to have entered the Main Structure (and that was not taken Out of Action) gains the Glory Point."
+            }
+        ]
+    },
+    {
+        "id": "gd_theheadofthesnake",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "The Head of the Snake",
+        "description":  [
+            {
+            "tags": {},
+            "content": "As the Defender, take half of the Attacker’s ELITE models Out of Action (rounded down) with the same model.",
+            "glossary": [{"val": "ELITE", "id": "kw_elite"}]
+            }
+        ]
+    },
+    {
+        "id": "gd_battlefieldlegend",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "Battlefield Legend",
+        "description":  [
+            {
+            "tags": {},
+            "content": "Take at least two enemy models Out of Action with the same model during the battle with any ACTIONS the model has, without suffering any BLOOD MARKER. If the model suffers a BLOOD MARKER but reduces it back to zero, the count resets and the model is now eligible to score this deed again if they meet the necessary requirements stated above.",
+            "glossary": [
+                {"val": "ACTIONS", "id": "kw_action"},
+                {"val": "BLOOD MARKER", "id": "kw_bloodmarker"}
+            ]
+            }
+        ]
+    },
+    {
+        "id": "gd_bloodcloud",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "Blood Cloud",
+        "description":  [
+            {
+            "tags": {},
+            "content": "Take at least three enemy models Out of Action with one of your models using a weapon with the Keyword BLAST.",
+            "glossary": [{"val": "BLAST", "id": "kw_blast"}]
+            }
+        ]
+    },
+    {
+        "id": "gd_coldbloodedkiller",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "Cold-Blooded Killer",
+        "description":  [
+            {
+            "tags": {},
+            "content": "Use 2+ BLOOD MARKERS on a Melee Attack of one of your models to take an enemy ELITE model Out of Action in a single Activation.",
+            "glossary": [
+                {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"},
+                {"val": "ELITE", "id": "kw_elite"}
+            ]
+            }
+        ]
+    },
+    {
+        "id": "gd_ghostofshores",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "Ghost of Shores",
+        "description":  [
+            {
+            "tags": {},
+            "content": "Take an enemy ELITE model Out of Action with one of your models with the Keywords INFILTRATOR or SKIRMISHER.",
+            "glossary": [
+                {"val": "ELITE", "id": "kw_elite"},
+                {"val": "INFILTRATOR", "id": "kw_infiltrator"},
+                {"val": "SKIRMISHER", "id": "kw_skirmisher"}
+            ]
+            }
+        ]
+    },
+    {
+        "id": "gd_ratcatcher",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "Rat Catcher",
+        "description":  [
+            {
+            "tags": {},
+            "content": "Disperse a Swarm of Rats that has taken another model Out of Action, with a model armed with a weapon with the Keyword FIRE.",
+            "glossary": [{"val": "FIRE", "id": "kw_fire"}]
+            }
+        ]
+    },
+    {
+        "id": "gd_bloodybeast",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "Bloody Beast",
+        "description":  [
+            {
+            "tags": {},
+            "content": "Take the Beast Out of Action with a model that has at least 2+ BLOOD MARKERS at the start of its Activation.",
+            "glossary": [{"val": "BLOOD MARKERS", "id": "kw_bloodmarker"}]
+            }
+        ]
     }
 ]

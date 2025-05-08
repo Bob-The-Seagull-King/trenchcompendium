@@ -6021,6 +6021,69 @@
         "modifiers": ["+1D to Injuries"]
     },
     {
+        "id": "eq_beastofnomanslandbite",
+        "name": "Bite",
+        "source": "core",
+        "tags": {"action": true, "weapon": true, "model": true},
+        "category": "melee",
+        "distance": null,
+        "stats": {
+            "hands_melee": 0,
+            "melee": true
+        },
+        "contextdata": {
+            "get_weapon": {},
+            "ignore_armour": {},
+            "injury_bonus": {"bonuses": [{"type": "dice", "value": 1}]},
+            "hit_bonus": {"bonuses": [{"type": "dice", "value": 1}]}
+        },
+        "description": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The Beast treats its Bite as a melee weapon that grants a +1 DICE bonus to hit (for total of +3D). Additionally, the attack ignores any armour worn by the target and has a +1 DICE bonus to injure. The Bite does not take any hands to wield.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"}
+                ]
+            } 
+        ],
+        "lore": [   
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": ["+1D to Hit","+1D to Injuries","Ignore Armour"]
+    },
+    {
+        "id": "eq_beastofnomanslandclaws",
+        "name": "Claws",
+        "source": "core",
+        "tags": {"action": true, "weapon": true, "model": true},
+        "category": "melee",
+        "distance": null,
+        "stats": {
+            "hands_melee": 2,
+            "melee": true
+        },
+        "contextdata": {
+            "get_weapon": {},
+            "injury_bonus": {"bonuses": [{"type": "dice", "value": 1}]}
+        },
+        "description": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The Beast treats its Claws as a two-handed melee weapon with the Keyword RISKY. The Claws have a +1 DICE bonus to injure. Because the Claws are wielded alongside the Bite, they are treated as an Off-Hand Weapon and suffer penalties accordingly.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "RISKY", "id": "kw_riskyaction"}
+                ]
+            } 
+        ],
+        "lore": [   
+        ],
+        "options": [],
+        "keywords": ["kw_riskyaction"],
+        "modifiers": ["+1D to Injuries"]
+    },
+    {
         "id": "eq_artillerywitchinfernalbomb",
         "name": "Infernal Bomb",
         "source": "core",

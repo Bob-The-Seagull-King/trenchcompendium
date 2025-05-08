@@ -657,6 +657,45 @@
         "options": []
     },
     {
+        "id": "ab_unrelenting",
+        "name": "Unrelenting",
+        "source": "core",
+        "tags": {"trait": true, "bonus": true},
+        "contextdata": {
+            "bonus_ability": {
+                "action_type": ["dash"]
+            }},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Beast may take its Dash and any of its Jump ACTIONS with +2 DICE. ",
+                "glossary": [
+                    {"val": "+2 DICE", "id": "kw_plusdice"},
+                    {"val": "ACTIONS", "id": "kw_action"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_resilient",
+        "name": "Resilient",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Beast is a massive creature with unnatural vitality and is subject to the rules for TOUGH creatures. Additionally, its hide is rough and thick, acting like natural armour. Attacks made against the Beast are made with -1 DICE.",
+                "glossary": [
+                    {"val": "-1 DICE", "id": "kw_minusdice"},
+                    {"val": "TOUGH", "id": "kw_tough"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
         "id": "ab_levitate",
         "name": "Levitate",
         "source": "core",

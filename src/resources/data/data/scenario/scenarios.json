@@ -812,13 +812,19 @@
         "tags": {"desc_type" : "paragraph"},
         "name": "Storming the Shores",
         "img_link": "https://i.imgur.com/jYKeLrM.png",
-        "description":  [],
+        "description":  [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The shoreline of this beach, river, lake or swamp stands as a vital stronghold - its bunkers, trenches and heavy emplacements forming an unyielding wall against invasion. Guarding a crucial supply route, the defenders rely on their fortifications and firepower to hold the line with minimal troops, confident in the terrain’s advantage. Yet, the attackers have taken note of the thinly stretched defences, massing their forces in overwhelming numbers to breach the coastal bastion. The horizon brims with movement, the tide of war rolling in to test the strength of the shoreline’s iron grip."
+            }],
         "forces": {
-            "even_match": true,
+            "even_match": false,
             "description": [
                 {
                     "tags": {"desc_type" : "paragraph"},
-                    "content": ""
+                    "content": "The player with the higher number of models is the Attacker. The Attacker must declare the size of their warband, up to sixteen models max. If the Attacker has two or fewer ELITES, they must field all of them. The opponent is the Defender and they can have up to half of the total number of models the Attacker has declared, rounded down. If both warbands have the same number of models, roll a dice to see who the Attacker and who the Defender is.",
+                    "glossary": [{"val": "ELITES", "id": "kw_elite"}]
+                
                 }
             ]
         },
@@ -826,23 +832,67 @@
             "field_size":  [
                 {
                     "tags": {"desc_type" : "paragraph"},
-                    "content": "."
+                    "content": "The game is played on a standard-size battlefield (we suggest 4’ x 4’)."
                 }
             ],
             "standard_terrain": true,
             "extra_features":  [
                 {
                     "tags": {"desc_type" : "paragraph"},
-                    "content": ""
+                    "content": "The Defender places three 8”-long Trench sections in their Deployment Zone. They can be placed as the Defender wishes and can be continuous. However, in the division between each of the three trench sections the Defender must place a bunker model (as indicated by the small Red Markers on the map) of at least 4” x 4” and up to 3” high, so that models of up to 75mm tall may enter the bunker’s interior. "
+                },
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "The Defender must place a Main Structure in the location indicated on the map by a large Red Marker. This structure can be a church, a large bunker, a tower etc. It must be at least 6” x 6” and up to 6” high, so that models of up to 150mm tall may enter the building’s interior."
+                },
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "The Main Structure and the bunkers are the Objectives of the scenario, hereafter referred to as Objective Buildings, and score Victory Points (VPs)."
+                },
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "The Defender then places three defence works (sandbags, barricades, low wall etc.) each of which counts as a defended obstacle and is at least 4” long horizontally. They are max 1” high. Use the following instructions to deploy these defence works."
+                },
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "",
+                    "subcontent": [
+                        {
+                            "tags": {"desc_type" : "list"},
+                            "content": "",
+                            "subcontent": [                    
+                                {
+                                    "tags": {"desc_type" : "default"},
+                                    "content": "Within 18” of the centre of the battlefield (measured to the centre)."
+                                },               
+                                {
+                                    "tags": {"desc_type" : "default"},
+                                    "content": "At least 12” away from another defence work (measured from the centre)."
+                                },               
+                                {
+                                    "tags": {"desc_type" : "default"},
+                                    "content": "Not within or surrounded by Impassable terrain."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "The Defender places either a Gun Turret or a Mortar, represented by a circled G and a circled M, respectively, on the scenario map, in any location within their deployment zone. Once placed, neither of these can be moved during the game. See the Field Artillery rules for the weapons’ profile and specifications."
+                },
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Fill the rest of the battlefield with terrain in the usual way, using models such as barricades, ruined buildings, trees, sandbags etc."
                 }
             ]
          },
         "infiltrators": { 
-            "allowed": 0,
+            "allowed": 2,
             "description": [                
                 {
                     "tags": {"desc_type" : "paragraph"},
-                    "content": ""
+                    "content": "Infiltrators can be used in this scenario but they cannot be within 8” of any of the Defender’s Objective Buildings."
                 }
             ]
         },
@@ -851,47 +901,107 @@
             "description": [
                 {
                     "tags": {"desc_type" : "paragraph"},
-                    "content": ""
+                    "content": "The player with the higher number of models is the Attacker. The other deployment zone will be their opponent’s, as the Defender, with half the number of models the Attacker has declared."
+                },
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "The Defender starts by deploying their models and also placing the Gun Turret (or Mortar) where they wish according to the parameters set below. After the Defender has deployed their models, the Attacker deploys theirs. "
+                },
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Models must be set up wholly within their own deployment zone. "
+                },
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Once the players have set up their models, deployment ends and the battle begins."
                 }
             ]
         },
         "battle_length": { 
-            "min": 4,
-            "max": 4,
+            "min": 5,
+            "max": 6,
             "description": [                            
                 {
                     "tags": {"desc_type" : "paragraph"},
-                    "content": ""
+                    "content": "At the end of the fifth turn, the Attacker rolls 1D6. On a roll of 1-2, the battle ends. Otherwise, the game lasts for six turns."
                 }
             ]
         },
         "victory_conditions":{ "description": [
             {
                 "tags": {"desc_type" : "paragraph"},
-                "content": ""
+                "content": "If one warband is wiped out completely or loses their Morale test, the game ends and the opposing warband wins. Otherwise, keep a running tally of Victory Points for both sides. The players accumulate VPs as follows: "
             },
             {
-                "tags": {"desc_type" : "list"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "",
-                "subcontent": [                    
+                "subcontent": [
                     {
-                        "tags": {"desc_type" : "default"},
-                        "content": ""
+                        "tags": {"desc_type" : "list"},
+                        "content": "",
+                        "subcontent": [                    
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "The players score five VPs for each Objective Building that they have taken control of. The Attacker scores two VPs for each Objective Building they have destroyed."
+                            },               
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "The players control an Objective Building if the total number of models from their warband (that are wholly within that building) is higher than the total number of enemy models within 1” of the Objective Building. A model is considered wholly within a building if it is entirely within the edges of the building’s footprint, as agreed by the players."
+                            },               
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "The Attacker destroys an Objective Building if at least one of their ELITE models that is wholly within the building plants an explosive charge. The model can plant the explosive charge with an Action (no roll required) but upon doing so, the Activation of the model ends. In any following turn, if the ELITE model is activated and moves at least 1” outside the building’s footprint (previously accorded by the players), the Objective Building is immediately destroyed and any other model (friend or foe) that is still wholly within the building must immediately roll on the Injury Chart, ignoring armour. If the ELITE model is taken Out of Action before its next Activation, the explosive charge does not go off.",
+                                "glossary": [{"val": "ELITE", "id": "kw_elite"}]
+                            }
+                        ]
                     }
                 ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "If you are playing a Campaign, the Winner gains 5 Victory Points."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Calculate VPs at the end of the game for both players and add them together. The player with the higher number of VPs wins, otherwise the game is a draw. However, the following conditions can alter the tides of battle, granting the win regardless of the VPs a player may have accumulated:"
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [
+                    {
+                        "tags": {"desc_type" : "list"},
+                        "content": "",
+                        "subcontent": [                    
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "If the Attacker takes control of the Main Structure Objective Building for two full consecutive turns, they win the game regardless of the VPs the Defender may have."
+                            },              
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "If the Defender takes all of the Attacker’s ELITE models Out of Action, they win the game regardless of the VPs the Attacker may have.",
+                                "glossary": [{"val": "ELITE", "id": "kw_elite"}]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "If either of these two victory conditions are met at any point during the game, it is considered a decisive win for the respective player and the game immediately ends."
             }
         ]},
         "glorious_deeds": { 
             "description": [
                 {
                     "tags": {"desc_type" : "paragraph"},
-                    "content": ""
+                    "content": "Players score one Glory Point for every model that completes any of the following Glorious Deeds. Glory Points for these can only be gained once – whichever player completes them first gets the Glory Points!"
                 }
             ],
-            "deeds": [],
-            "optional_deeds": []
+            "deeds": ["gd_theshoreisours","gd_theheadofthesnake","gd_battlefieldlegend","gd_bloodcloud","gd_coldbloodedkiller","gd_ghostofshores"],
+            "optional_deeds": ["gd_ratcatcher","gd_bloodybeast"]
         },
-        "special_rules": [ ]
+        "special_rules": ["sr_gunturret","sr_mortar","sr_unforseenevents"]
     },
     {
         "id": "sc_dragonhunt",

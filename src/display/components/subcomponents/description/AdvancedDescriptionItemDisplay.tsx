@@ -19,6 +19,9 @@ import { ObjectTag } from '../../../../classes/CompendiumItem';
 import { Equipment } from '../../../../classes/feature/equipment/Equipment';
 import EquipmentDisplay from '../../../components/features/equipment/EquipmentDisplay';
 import { EquipmentFactory } from '../../../../factories/features/EquipmentFactory';
+import { Model } from '../../../../classes/feature/model/Model';
+import { ModelFactory } from '../../../../factories/features/ModelFactory';
+import ModelDisplay from '../../../components/features/model/ModelDisplay';
 
 const AdvancedDescriptionItemDisplay = (props: any) => {
     const description: AdvancedDescription = props.data
@@ -241,6 +244,20 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
                     </div>
                 )
             }
+            case "model": {
+                return (
+                    <div className="">
+                        <span>
+                            {getModelDisplay(item.Content?.toString() || "")}
+                        </span>
+                        <span>
+                            {item.SubContent?.map((subitem) => (
+                               <AdvancedDescriptionItemDisplay key="descriptionsubitem" data={subitem} parent={parentItem}/>
+                            ))}
+                        </span>
+                    </div>
+                )
+            }
             case "question": {
                 return (
                     <span>
@@ -293,6 +310,30 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
             <span key={keyvar}>
                 {component !== null &&
                     <EquipmentDisplay data={component} />
+                }   
+            </span>
+        );
+    }
+
+    function getModelDisplay(val : string) {
+        const [component, setcomponent] = useState<null | Model>(null);
+        const [keyvar, setkeyvar] = useState(0);
+
+        useEffect(() => {
+            async function getItem() {
+                const item = await ModelFactory.CreateNewModel(val, null)
+                setcomponent(item);
+                setkeyvar(keyvar + 1);
+            };
+
+            getItem();
+        }, []);
+
+
+        return (
+            <span key={keyvar}>
+                {component !== null &&
+                    <ModelDisplay data={component} />
                 }   
             </span>
         );

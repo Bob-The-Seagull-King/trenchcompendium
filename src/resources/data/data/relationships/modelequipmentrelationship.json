@@ -373,5 +373,16 @@
         "model_id": [],
         "mandatory_equipment": ["eq_highlandmachinearmour"],
         "removable": false
+    },
+    {
+        "id": "rel_md_eq_beastofnomansland",
+        "source": "core",
+        "tags": {},
+        "name": "Beast of No Man's Land Equipment",
+        "contextdata": {},
+        "options": [],
+        "model_id": ["md_beastofnomansland"],
+        "mandatory_equipment": ["eq_beastofnomanslandclaws","eq_beastofnomanslandbite"],
+        "removable": false
     }
 ]
