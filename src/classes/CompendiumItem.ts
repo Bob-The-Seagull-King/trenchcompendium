@@ -40,6 +40,20 @@ abstract class CompendiumItem {
             this.ID = "";
         }
     }
+
+    /**
+     * Return Name as string
+     */
+    GetName () {
+        return this.Name;
+    }
+
+    /**
+     * Return ID as string
+     */
+    GetID () {
+        return this.ID;
+    }
 }
 
 export {ICompendiumItemData, CompendiumItem, ItemType, ObjectTag}

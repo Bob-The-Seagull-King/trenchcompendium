@@ -10,3 +10,26 @@
     .description-element
         &:not(:last-of-type)
             margin-bottom: 15px
+
+// lists inside of paragraphs
+.book-rules-wrap
+    .description-element
+        p
+            ul
+                margin-top: 15px
+
+// tables in the rules section
+.book-rules-wrap
+    .description-element
+    .info-box
+
+    table.table_headless
+        background-color: $bg-color-card-1
+        margin-bottom: 30px
+
+        tr
+        td
+            border: 1px solid $color-bg-1
+            padding: 15px
+            &:first-of-type
+                font-weight: bold

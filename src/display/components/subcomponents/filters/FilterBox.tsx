@@ -29,7 +29,7 @@ const FilterBox = (prop: any) => {
 
     function ReturnTextFilterParam(_filter : FilterText) {
         return (            
-            <div className="backgroundBgBase ">
+            <div className="ReturnTextFilterParam ">
                 <Form.Control 
                     onChange={e => UpdateName(_filter, e.target.value)} 
                     className='bordergrey' 
@@ -49,7 +49,7 @@ const FilterBox = (prop: any) => {
 
     function ReturnFilterBoxInner() {
         return (
-            <div className="">
+            <div className="ReturnFilterBoxInner">
                 {DisplayPage.returnFilterSelect(FilterManagerObj, updatesearch, updatesearch)}
                 <div className=""/>
                 <div className="filterbuttoncomp">
@@ -62,17 +62,17 @@ const FilterBox = (prop: any) => {
     // Return result -----------------------------
     return (
         <ErrorBoundary fallback={<div>Something went wrong with FilterBox.tsx</div>}>
-            <div>
+            <div className={'FilterBox'}>
                 <div>
                     {FilterManagerObj.ReturnTextFilters().filter((item) => (item.Group == 'name')).map((item) =>
                     <div key={item.Group}>
                         {ReturnTextFilterParam(item)}
                     </div>)}
                 </div>
+
                 <div>
-                    <div className=""/>
                     {(DisplayPage.hidefilter == undefined) &&
-                        <div className="borderthin bordergrey">
+                        <div className="borderthin bordergrey findme-1">
                             <div onClick={() => {setOpen(!open)}} className={'      borderbed bordergrey borderthin backgroundBgCard'}>
                                 <div className={' font-seriftext'}>
                                     {"Filters"}

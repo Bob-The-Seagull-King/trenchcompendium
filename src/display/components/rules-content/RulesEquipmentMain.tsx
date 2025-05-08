@@ -14,9 +14,7 @@ const RulesEquipmentMain = (props: any) => {
     const abilityObject: Equipment = props.data;
 
     return (
-        <div>
-
-
+        <div className={'RulesEquipmentMain'}>
             {/* Keywords */}
             {abilityObject.KeyWord.length > 0 &&
                 <>

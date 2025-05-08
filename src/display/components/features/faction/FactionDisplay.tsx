@@ -98,7 +98,7 @@ const FactionDisplay = (props: any) => {
             <RulesLoreSection faction={factionObject} />
 
             {factionObject.Rules.length > 0 &&
-                <>
+                <div className={'rules-faction-rules-wrap'}>
                     <RulesHeadlineDisplay
                         content="Faction Rules"
                         level={2}
@@ -113,11 +113,11 @@ const FactionDisplay = (props: any) => {
                         />
 
                     ))}
-                </>
+                </div>
             }
 
             {factionObject.MyOptions.length > 0 &&
-                <div>
+                <>
                     <div id={"options"} className=""/>
                     <div className={'subtitle-letterspacing size-subtitle font-seriftext'}>
                         <div className=''>
@@ -132,7 +132,7 @@ const FactionDisplay = (props: any) => {
                     {
                         <OptionSetStaticDisplay data={factionObject.MyOptions} />
                     }
-                </div>
+                </>
             }
             <div className=""/>
 
