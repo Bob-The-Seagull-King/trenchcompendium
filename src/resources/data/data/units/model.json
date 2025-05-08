@@ -2046,7 +2046,7 @@
             "base": [60],
             "armour": 0,
             "movetype": 0,
-            "potential": 0
+            "potential": 2
         },
         "keywords" : ["kw_blackgrail","kw_fear","kw_tough","kw_strong"],
         "abilities" : ["ab_toxic","ab_corpulent","ab_trample_amalgam","ab_unstoppable"]
