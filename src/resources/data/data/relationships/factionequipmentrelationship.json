@@ -175,6 +175,61 @@
         "limit": 2
     },
     {
+        "id": "rel_fc_eq_brokencrown",
+        "source": "core",
+        "tags": {},
+        "name": "Broken Crown",
+        "contextdata": {            
+            "faction_eq_restriction": {
+                "permitted": [
+                    {
+                        "res_type": "keyword",
+                        "value": "kw_elite"
+                    }
+                ]
+            }
+        },
+        "faction_id": ["fc_cultoftheblackgrail_fv_dirgeofthegreathegemon"],
+        "equipment_id": "eq_brokencrown",
+        "cost": 25,
+        "costtype": 0,
+        "limit": 1
+    },
+    {
+        "id": "rel_fc_eq_urnofbitterashes",
+        "source": "core",
+        "tags": {},
+        "name": "Broken Crown",
+        "contextdata": {            
+            "faction_eq_restriction": {
+                "permitted": [
+                    {
+                        "res_type": "keyword",
+                        "value": "kw_elite"
+                    }
+                ]
+            }
+        },
+        "faction_id": ["fc_cultoftheblackgrail_fv_dirgeofthegreathegemon"],
+        "equipment_id": "eq_urnofbitterashes",
+        "cost": 40,
+        "costtype": 0,
+        "limit": 1
+    },
+    {
+        "id": "rel_fc_eq_blunderbuss",
+        "source": "core",
+        "tags": {},
+        "name": "Blunderbuss",
+        "contextdata": { 
+        },
+        "faction_id": ["fc_cultoftheblackgrail_fv_dirgeofthegreathegemon"],
+        "equipment_id": "eq_blunderbuss",
+        "cost": 5,
+        "costtype": 0,
+        "limit": 0
+    },
+    {
         "id": "rel_fc_eq_plagueblade_dirge",
         "source": "core",
         "tags": {},
