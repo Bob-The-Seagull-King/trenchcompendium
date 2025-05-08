@@ -5,7 +5,7 @@
     },
     {
         "id": "pt_infernalnoble",
-        "faction_id": ["fc_hereticlegion","fc_hereticlegion_fv_hereticnavalraidingparty","fc_hereticlegion_fv_trenchghosts"]
+        "faction_id": ["fc_courtofthesevenheadedserpent","fc_hereticlegion","fc_hereticlegion_fv_hereticnavalraidingparty","fc_hereticlegion_fv_trenchghosts"]
     },
     {
         "id": "pt_mammon",

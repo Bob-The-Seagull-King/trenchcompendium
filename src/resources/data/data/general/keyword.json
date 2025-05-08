@@ -115,7 +115,7 @@
         "source": "core",
         "tags": {
             "category": "faction",
-            "faction": "fc_blackgrail"
+            "faction": "fc_cultoftheblackgrail"
         },
         "name": "BLACK GRAIL",
         "contextdata": {"option_search_viable" : {}},
