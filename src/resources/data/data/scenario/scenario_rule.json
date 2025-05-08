@@ -1,14 +1,15 @@
 [
     {
-        "id": "sr_test",
+        "id": "sr_nominatedelites",
         "source": "core",
         "tags": { },
         "contextdata": { },
-        "name": "Default Rule",
+        "name": "Nominated Elites",
         "description":  [
             {
             "tags": {"desc_type" : "default"},
-            "content": ""
+            "content": "After the deployment, in secret, both players nominate three enemy ELITE models as targets to be eliminated (unless the opponent has a smaller number of ELITE in which case nominate all of them). Each player also nominates one of their own ELITE models that must be kept alive until the end of the game. These score additional Victory Points at the end of the game as follows.",
+            "glossary": [{"val": "ELITE", "id": "kw_elite"}]
             }
         ],
         "options": []

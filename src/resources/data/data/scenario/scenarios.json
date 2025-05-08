@@ -2,7 +2,7 @@
     {
         "id": "sc_claimnomansland",
         "source": "core",
-        "tags": {},
+        "tags": {"desc_type" : "paragraph"},
         "name": "Claim No Man's Land",
         "img_link": "https://i.imgur.com/jYKeLrM.png",
         "description":  [],
@@ -10,7 +10,7 @@
             "even_match": true,
             "description": [
                 {
-                    "tags": {},
+                    "tags": {"desc_type" : "paragraph"},
                     "content": "Use your full Campaign Warband in this battle."
                 }
             ]
@@ -18,14 +18,14 @@
         "battlefield": {
             "field_size":  [
                 {
-                    "tags": {},
+                    "tags": {"desc_type" : "paragraph"},
                     "content": "The game is played on a standard-sized battlefield (we suggest 4’ x 4’)."
                 }
             ],
             "standard_terrain": true,
             "extra_features":  [
                 {
-                    "tags": {},
+                    "tags": {"desc_type" : "paragraph"},
                     "content": "The Table must contain five buildings such as ruined houses, bunkers, chapels etc. At least part of each building must be in the location indicated on the map with a Red Marker. These buildings are the Objectives of the scenario and score Victory Points (VPs)."
                 }
             ]
@@ -34,7 +34,7 @@
             "allowed": 0,
             "description": [                
                 {
-                    "tags": {},
+                    "tags": {"desc_type" : "paragraph"},
                     "content": "Infiltrators cannot be used in this Scenario."
                 }
             ]
@@ -43,15 +43,15 @@
             "staggered": false,
             "description": [
                 {
-                    "tags": {},
+                    "tags": {"desc_type" : "paragraph"},
                     "content": "The players roll-off. The loser of the roll-off chooses which deployment zone will be theirs. The other deployment zone will be their opponent’s."
                 },
                 {
-                    "tags": {},
+                    "tags": {"desc_type" : "paragraph"},
                     "content": "The players then take it in turns to deploy one model at a time, starting with the player who has more models in their warband (roll-off if both have the same number of models)."
                 },
                 {
-                    "tags": {},
+                    "tags": {"desc_type" : "paragraph"},
                     "content": "Models must be set up wholly within their own deployment zone. If a player runs out of models to set up, the other player sets up all their models afterwards. Once the players have set up their models, deployment ends and the battle begins."
                 }
             ]
@@ -61,14 +61,14 @@
             "max": 4,
             "description": [                            
                 {
-                    "tags": {},
+                    "tags": {"desc_type" : "paragraph"},
                     "content": "The battle lasts for four turns."
                 }
             ]
         },
         "victory_conditions":{ "description": [
             {
-                "tags": {},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "Keep a running tally of Victory Points for both sides. The players accumulate VPs as follows:"
             },
             {
@@ -76,15 +76,15 @@
                 "content": "",
                 "subcontent": [                    
                     {
-                        "tags": {},
+                        "tags": {"desc_type" : "default"},
                         "content": "At the end of each turn, a player scores one VP for each Objective building that they have a model within 1” of or two VPs for each Objective building that they control."
                     },
                     {
-                        "tags": {},
+                        "tags": {"desc_type" : "default"},
                         "content": "A player controls an Objective if the total number of models from their warband that are wholly within that building is higher than the total number of enemy models within 1” of the Objective building. A model is considered wholly within a building if it is entirely within the edges of the building’s footprint, as agreed by the players."
                     },
                     {
-                        "tags": {},
+                        "tags": {"desc_type" : "default"},
                         "content": "Calculate VPs for both players and the end of the round and add them together. The player with the higher number of VPs wins, otherwise the game is a draw."
                     }
                 ]
@@ -93,7 +93,7 @@
         "glorious_deeds": { 
             "description": [
                 {
-                    "tags": {},
+                    "tags": {"desc_type" : "paragraph"},
                     "content": "Players score one Glory Point for every model that completes any of the following Glorious Deeds. Victory Points for these can only be gained once – whichever player completes them first gets the Glory!"
                 }
             ],
@@ -101,5 +101,249 @@
             "optional_deeds": []
         },
         "special_rules": [ ]
+    },
+    {
+        "id": "sc_relichunt",
+        "source": "core",
+        "tags": {"desc_type" : "paragraph"},
+        "name": "Relic Hunt",
+        "img_link": "https://i.imgur.com/jYKeLrM.png",
+        "description":  [],
+        "forces": {
+            "even_match": true,
+            "description": [
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Both players select up to six models from their warband. No models on 40mm+ sized bases can be included. If your warband must contain a specific model upon creation, you may field that model even if it would be excluded by this restriction. "
+                },
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "At the start of turn two, both players receive D3 randomly selected models from their warband as reinforcements. These reinforcements are placed anywhere along the player’s own table edge but at least 8” away from any enemy models."
+                }
+            ]
+        },
+        "battlefield": {
+            "field_size":  [
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "The game is played on a standard-sized battlefield (we suggest 4’ x 4’)."
+                }
+            ],
+            "standard_terrain": true,
+            "extra_features":  [
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Place six markers representing Reliquaries on the table as indicated on the map, numbered one to six."
+                }
+            ]
+         },
+        "infiltrators": { 
+            "allowed": 1,
+            "description": [                
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Infiltrators can be used in this Scenario."
+                }
+            ]
+        },
+        "deployment": {
+            "staggered": true,
+            "description": [
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "The players roll-off. The loser of the roll-off chooses which deployment zone will be theirs. The other deployment zone will be their opponent’s."
+                },
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "The players then take it in turns to deploy one model at a time, starting with the player who has more models in their warband (roll-off if both have the same number of models)."
+                },
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Models must be set up wholly within their own deployment zone. If a player runs out of models to set up, the other player sets up all their models afterwards. Once the players have set up their models, deployment ends and the battle begins."
+                }
+            ]
+        },
+        "battle_length": { 
+            "min": 4,
+            "max": 4,
+            "description": [                            
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "The battle lasts for four turns."
+                }
+            ]
+        },
+        "victory_conditions":{ "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Keep a running tally of Victory Points for both sides. The players accumulate VPs as follows:"
+            },
+            {
+                "tags": {"desc_type" : "list"},
+                "content": "",
+                "subcontent": [                    
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": "No Morale tests are taken during this scenario."
+                    },                 
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": "A player scores one VP when they have models touching one of the Reliquary markers and make a successful ACTION roll. Once the VP is claimed, flip the marker over to show it has been claimed this turn. It can no longer generate VPs this turn for you or your opponent.",
+                        "glossary": [
+                            {"val": "ACTION", "id": "kw_action"}
+                        ]
+                    },                 
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": "Maximum VPs that can be claimed per turn is four."
+                    },                 
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": "After Turn 1 is over, remove Reliquary Markers 1 and 2 from the table. Flip any claimed Reliquary Markers over to indicate they can be claimed again this Turn."
+                    },                 
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": "After Turn 2 is over, remove Reliquary Markers 3 and 4 from the table. Flip any claimed Reliquary Markers over to indicate they can be claimed again this Turn."
+                    },                 
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": "On Turn 4 the final two Reliquary Markers (5 and 6) are worth 2 VPs each when claimed successfully."
+                    },                 
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": " Calculate VPs for both players and the end of each Turn and add them together. The player with the higher number of VPs wins, otherwise the game is a draw."
+                    }
+                ]
+            }
+        ]},
+        "glorious_deeds": { 
+            "description": [
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Players score one Glory Point for every model that completes any of the following Glorious Deeds. Victory Points for these can only be gained once – whichever player completes them first gets the Glory!"
+                }
+            ],
+            "deeds": ["gd_sniper","gd_castthemdown","gd_bloodsacrifice","gd_resistandbite","gd_relichunter","gd_protecttherelic"],
+            "optional_deeds": []
+        },
+        "special_rules": [ ]
+    },
+    {
+        "id": "sc_huntforheroes",
+        "source": "core",
+        "tags": {"desc_type" : "paragraph"},
+        "name": "Hunt for Heroes",
+        "img_link": "https://i.imgur.com/jYKeLrM.png",
+        "description":  [],
+        "forces": {
+            "even_match": true,
+            "description": [
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Both forces can use up to 20 models from their warband. Each player must deploy all their ELITE models if they are able.",
+                    "glossary": [{"val": "ELITE", "id": "kw_elite"}]
+                }
+            ]
+        },
+        "battlefield": {
+            "field_size":  [
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "The game is played on a standard-sized battlefield (we suggest 4’ x 4’)"
+                }
+            ],
+            "standard_terrain": true,
+            "extra_features":  [
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Place three markers representing Objectives on the table as indicated on the map, numbered one to six."
+                }
+            ]
+         },
+        "infiltrators": { 
+            "allowed": 1,
+            "description": [                
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Infiltrators can be used in this Scenario."
+                }
+            ]
+        },
+        "deployment": {
+            "staggered": false,
+            "description": [
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "The players roll-off. The loser of the roll-off chooses which deployment zone will be theirs. The other deployment zone will be their opponent’s. "
+                },
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "The players then take it in turns to deploy one model at a time, starting with the player who has more models in their warband (roll-off if both have the same number of models)."
+                },
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Models must be set up wholly within their own deployment zone. If a player runs out of models to set up, the other player sets up all their models afterwards. Once the players have set up their models, deployment ends and the battle begins."
+                }
+            ]
+        },
+        "battle_length": { 
+            "min": 4,
+            "max": 4,
+            "description": [                            
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "The battle lasts for four turns."
+                }
+            ]
+        },
+        "victory_conditions":{ "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Keep a running tally of Victory Points for both sides. The players accumulate VPs as follows:"
+            },
+            {
+                "tags": {"desc_type" : "list"},
+                "content": "",
+                "subcontent": [                    
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": "At the end of each Turn, a player scores one VP if they have models within 1” of any of the Objective buildings or two VPs if they control the Objective at the end of the Turn."
+                    },              
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": "A player controls an Objective if the total number of models from their warband, that are wholly within that building, is higher than the total number of enemy models within 1” of the Objective building. A model is considered wholly within a building if it is entirely within the edges of the building as agreed by the players."
+                    },              
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": "When the game ends, both players reveal the hidden target models."
+                    },              
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": "For each enemy ELITE on their list that was taken Out of Action, the player scores 2 VPs.",
+                        "glossary": [{"val": "ELITE", "id": "kw_elite"}]
+                    },              
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": "If the ELITE model they indicated as the friendly model to be kept alive has not been taken Out of Action at the end of the game, the controlling player scores 3 VPs.",
+                        "glossary": [{"val": "ELITE", "id": "kw_elite"}]
+                    },              
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": "Calculate VPs for both players and the end of the game and add them together. The player with the higher number of VPs wins, otherwise the game is a draw."
+                    }
+                ]
+            }
+        ]},
+        "glorious_deeds": { 
+            "description": [
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Players score one Glory Point for every model that completes any of the following Glorious Deeds. Victory Points for these can only be gained once – whichever player completes them first gets the Glory! "
+                }
+            ],
+            "deeds": ["gd_killtheirleaders","gd_deathfromabove","gd_kingofthehill","gd_holdyourground","gd_highriskhighreward"],
+            "optional_deeds": []
+        },
+        "special_rules": ["sr_nominatedelites" ]
     }
 ]

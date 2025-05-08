@@ -257,5 +257,113 @@
             "content": "Win the game."
             }
         ]
+    },
+    {
+        "id": "gd_bloodsacrifice",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "Blood Sacrifice",
+        "description":  [
+            {
+            "tags": {},
+            "content": "One of your models takes at least three enemies out of action during the battle."
+            }
+        ]
+    },
+    {
+        "id": "gd_resistandbite",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "Resist and Bite",
+        "description":  [
+            {
+            "tags": {},
+            "content": "Take out an enemy with a model that is Down.",
+            "glossary": [{"val": "Down", "id": "gl_down"}]
+            }
+        ]
+    },
+    {
+        "id": "gd_relichunter",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "Relic Hunter",
+        "description":  [
+            {
+            "tags": {},
+            "content": "One of your models claims at least two different Reliquary Markers during the game."
+            }
+        ]
+    },
+    {
+        "id": "gd_protecttherelic",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "Protect the Relic",
+        "description":  [
+            {
+            "tags": {},
+            "content": "Take out an enemy that is touching one of the Reliquary Markers."
+            }
+        ]
+    },
+    {
+        "id": "gd_killtheirleaders",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "Kill Their Leaders",
+        "description":  [
+            {
+            "tags": {},
+            "content": "Take out all the ELITES you nominated as targets.",
+            "glossary": [{"val": "ELITES", "id": "kw_elite"}]
+            }
+        ]
+    },
+    {
+        "id": "gd_deathfromabove",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "Death From Above",
+        "description":  [
+            {
+            "tags": {},
+            "content": "Take out an enemy with a melee attack ACTION benefitting from a Diving Charge.",
+            "glossary": [{"val": "ACTION", "id": "kw_action"}]
+            }
+        ]
+    },
+    {
+        "id": "gd_kingofthehill",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "King of the Hill",
+        "description":  [
+            {
+            "tags": {},
+            "content": "Control all three Objectives at the same time."
+            }
+        ]
+    },
+    {
+        "id": "gd_highriskhighreward",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "High Risk, High Reward",
+        "description":  [
+            {
+            "tags": {},
+            "content": " Your nominated model to be kept alive takes out one of the target enemy ELITES.",
+            "glossary": [{"val": "ELITES", "id": "kw_elite"}]
+            }
+        ]
     }
 ]
