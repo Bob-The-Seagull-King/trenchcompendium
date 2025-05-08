@@ -344,6 +344,6 @@
             "deeds": ["gd_killtheirleaders","gd_deathfromabove","gd_kingofthehill","gd_holdyourground","gd_highriskhighreward"],
             "optional_deeds": []
         },
-        "special_rules": ["sr_nominatedelites" ]
+        "special_rules": ["sr_nominatedelites"]
     }
 ]
