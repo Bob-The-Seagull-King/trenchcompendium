@@ -402,5 +402,46 @@
         "cut_rules" : [],
         "rules" : ["rl_chewa","rl_faithofethiopia","rl_flankingforces","rl_shortrangemarksmanship","rl_abyssianhealers","rl_holywarriors","rl_chieftanpanoply","rl_weaponsofmobilewarfare"],
         "options": []
+    },
+    {
+        "id": "fc_cultoftheblackgrail_fv_dirgeofthegreathegemon",
+        "name": "Dirge of the Great Hegemon",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "faction_keyword": {"name": "kw_blackgrail"}
+        },
+        "base_id": "fc_cultoftheblackgrail",
+        "description": [     
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "In the annals of the Great War two mighty Hegemons of the Black Grail have risen: Yersinia Rex, Emperor of Pestilence, and Febris, the rotting Bride of Beelzebub. Each of them were destroyed, but at an unimaginable cost to the forces of the Great Tyrant YHWH. Even the great Paladin Engelier, the Sword of Heaven, died when confronting the might of a Hegemon."
+            },  
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "With the ascension of a Hegemon, the hideous power of the Black Grail is exalted. Beelzebub grows sleek and fat, and like a magnanimous king, bestowing blessings and gifts upon his most favoured children. Beelzebub’s insidious grip over his Grail Thralls greatly increases. They move with more grace and the exalted blessings of the Grail opens their ruined minds, allowing them to truly witness the rotting glory of the Lord of the Flies, enabling them to understand more complex weaponry. In turn, the nobles that make up the ranks of the Order of the Fly are given kingly gifts from their mighty liege. "
+            },  
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Full of the ascendant power of the Black Grail, how miserable they become when their Hegemon lord falls in battle. Each Hegemon is unique, and when slain, it can never be re-created. The ecstasy of the Plague Knights in the service of their dread ruler sinks into the deepest despair from which there is no escape. Their strain of the Black Grail is shunned by others of their kind and they are no longer welcome at Ekron, the City of Beelzebub: they are cast out from the Order of the Fly for their failure. The Hegemon’s strain of disease continues spreading and creating thralls, but they are born into a world bereft of their sires, leaving them hopeless and desolated. "
+            },  
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The eyes of the Plague Knights continuously weep cold black blood as they cry for their lost Dark Paradise that will never be again. The tantalising dream of a great flood of pestilence that cleanses the earth is lost forever. Their mournful wails echo and reverberate through No Man’s Land, a cry of sorrow deeper than any mortal can feel, and agonising rage of black hatred that no mortal comprehends. They compose mournful paeans to their lost Hegemon -beautiful yet disturbing songs that promise nothing but never-ending death."
+            },  
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Such shattered remains of the once-mighty legions of the Hegemon take their vengeance on any opponent regardless of their allegiance, even throwing themselves at other Black Grail warbands in futile acts of regret, trying to feel pain that would at least momentarily dull their aching feeling of loss. But no such hope exists in their eternal damnation."
+            },  
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "These bands made up of the strains of fallen Hegemons’ once-mighty legions form everlasting funeral processions for their dead masters. The echo of their dirges accompanies their solemn steps, taking them from nowhere to nowhere. Their eyes are forever stained by the foul tears of the Black Grail and their skin turns black and sloughs off, hanging in tatters like funereal garb. They seek lost artefacts and broken shards of armour and weapons of their lost liege, fashioning disturbing and rusted jewellery from these remains where the Hegemon’s power still lingers beyond the grave. Few things that haunt No Man’s Land are more dangerous – or ghastlier – than these corruption-ridden echoes of the dark past, the funeral processions that last until time itself is no more."
+            }
+            
+        ],
+        "team": "hell",
+        "cut_rules" : [],
+        "rules" : [],
+        "options": []
     }
 ]
