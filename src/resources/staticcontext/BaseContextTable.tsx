@@ -3,7 +3,7 @@ import { CallEventTable, ContextEventEntry } from "./contexteventtypes";
 import { EventRunner } from "../../classes/contextevent/contexteventhandler";
 import { ContextObject } from "../../classes/contextevent/contextobject";
 import { IChoice, QuestionBase, StaticOptionContextObjectQuestion } from "../../classes/options/StaticOption";
-import { containsTag, makestringpresentable } from "../../utility/functions";
+import { containsTag, getCostType, makestringpresentable } from "../../utility/functions";
 import { getTagValue } from "../../utility/functions";
 import { Equipment, EquipmentLimit, EquipmentRestriction, EquipmentStats } from "../../classes/feature/equipment/Equipment";
 import { Keyword } from "../../classes/feature/glossary/Keyword";
@@ -449,23 +449,19 @@ export const BaseContextCallTable : CallEventTable = {
     override_required_upgrade: {
         event_priotity: 1,
         async getUpgradeRestrictionsPresentation(this: EventRunner, eventSource : any, relayVar : string[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
-            console.log("test")
-            console.log(context_func)
+           
             const { ModelFactory } = await import("../../factories/features/ModelFactory");
 
-            if (context_func["filters"]) {
-                console.log(context_func["filters"])                
+            if (context_func["filters"]) {          
                 for (let i = 0; i < context_func["filters"].length; i++) {
                     const curFilter = context_func["filters"][i];
 
                     if (curFilter["type"] == "id") {
                         const ModelItem = await ModelFactory.CreateNewModel(curFilter["value"], null)
-                        console.log(ModelItem);
                         relayVar.push("Unless the model is a " + ModelItem.Name);
                     }
                 }
             }
-            console.log(relayVar);
             return relayVar;
         }
     },
@@ -735,34 +731,39 @@ export const BaseContextCallTable : CallEventTable = {
                 
                 for (let j = 0; j < SubItem["restriction"].length; j++) {
                     if (SubItem["restriction"][j].category) {
-                        if (ModelItem.EquipmentItem.Category == SubItem["restriction"][j].category) {
+                        if ( (ModelItem.EquipmentItem.Category == SubItem["restriction"][j].category)) {
                             NewChoices.push(relayVar[i])
+
+                            const EventProc: EventRunner = new EventRunner();
+
+                            const result = await EventProc.runEvent(
+                                "getEquipmentRestriction",
+                                ModelItem,
+                                [],
+                                [],
+                                null
+                            );
+                            ModelItem.RestrictedEquipment = result;
+
+                            const result_presentation = await EventProc.runEvent(
+                                "getEquipmentRestrictionPresentable",
+                                ModelItem,
+                                [],
+                                [],
+                                ModelItem.RestrictedEquipment
+                            );
+
+                            relayVar[i].display_str = ModelItem.Name + (" " + ModelItem.Cost.toString() + " ") + (ModelItem.Limit != 0? " (Limit " + ModelItem.Limit + ")" : "") + (result_presentation.length > 0? " (" + result_presentation.join(', ') + " only)" : "")
+
                             break;
                         }
                     }
                 }
-                
-                const EventProc: EventRunner = new EventRunner();
-
-                const result = await EventProc.runEvent(
-                    "getEquipmentRestriction",
-                    ModelItem,
-                    [],
-                    [],
-                    null
-                );
-                ModelItem.RestrictedEquipment = result;
-
-                const result_presentation = await EventProc.runEvent(
-                    "getEquipmentRestrictionPresentable",
-                    ModelItem,
-                    [],
-                    [],
-                    ModelItem.RestrictedEquipment
-                );
-
-                relayVar[i].display_str = ModelItem.Name + " (" + result_presentation + ")"
             }
+
+            NewChoices.sort(function(a, b) {
+                return a.display_str.localeCompare(b.display_str);
+              });
 
             return NewChoices
         }
@@ -789,39 +790,45 @@ export const BaseContextCallTable : CallEventTable = {
             const SubItem = context_func["additions"][trackVal]
 
             for (let i = 0; i < relayVar.length; i++) {
-                
+
                 const ModelItem = await EquipmentFactory.CreateFactionEquipment(relayVar[i].value, null)
                 
                 for (let j = 0; j < SubItem["restriction"].length; j++) {
                     if (SubItem["restriction"][j].category) {
-                        if (ModelItem.EquipmentItem.Category == SubItem["restriction"][j].category) {
+                        if ((!ModelItem.Tags["exploration_only"]) && (ModelItem.EquipmentItem.Category == SubItem["restriction"][j].category)) {
                             NewChoices.push(relayVar[i])
+                            const EventProc: EventRunner = new EventRunner();
+
+                            const result = await EventProc.runEvent(
+                                "getEquipmentRestriction",
+                                ModelItem,
+                                [],
+                                [],
+                                null
+                            );
+                            ModelItem.RestrictedEquipment = result;
+
+                            const result_presentation = await EventProc.runEvent(
+                                "getEquipmentRestrictionPresentable",
+                                ModelItem,
+                                [],
+                                [],
+                                ModelItem.RestrictedEquipment
+                            );
+
+                            relayVar[i].display_str = ModelItem.Name + (" " + ModelItem.Cost.toString() + " " + getCostType(ModelItem.CostType) + " " ) + (ModelItem.Limit != 0? " (Limit " + ModelItem.Limit + ")" : "") + (result_presentation.length > 0? " (" + result_presentation.join(', ') + " only)" : "")
+
                             break;
                         }
                     }
                 }
                 
-                const EventProc: EventRunner = new EventRunner();
-
-                const result = await EventProc.runEvent(
-                    "getEquipmentRestriction",
-                    ModelItem,
-                    [],
-                    [],
-                    null
-                );
-                ModelItem.RestrictedEquipment = result;
-
-                const result_presentation = await EventProc.runEvent(
-                    "getEquipmentRestrictionPresentable",
-                    ModelItem,
-                    [],
-                    [],
-                    ModelItem.RestrictedEquipment
-                );
-
-                relayVar[i].display_str = ModelItem.Name + " (" + result_presentation + ")"
+                
             }
+
+            NewChoices.sort(function(a, b) {
+                return a.display_str.localeCompare(b.display_str);
+              });
 
             return NewChoices
         }
