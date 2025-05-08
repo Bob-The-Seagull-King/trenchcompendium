@@ -663,6 +663,18 @@
         "tags": {},
         "contextdata": {
             "model_equipment_restriction": {
+                "removed": [    
+                    {
+                        "category": "melee",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "armour",
+                        "res_type": "all",
+                        "value": ""
+                    }
+                ],
                 "added": [
                     {
                         "category": "ranged",
