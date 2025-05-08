@@ -91,14 +91,13 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         menushowitems: false,
         returnDisplay(item: any) {
             return (
-                
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    
+
                     <div className="borderthin bordergrey">
-                    <GenericCollapsableBlockDisplay 
-                        d_name={item.Name} 
-                        d_colour={"grey"} 
-                        d_state={false}  
+                    <GenericCollapsableBlockDisplay
+                        d_name={item.Name}
+                        d_colour={"grey"}
+                        d_state={false}
                         bordertype={0}
                         d_border={false}
                         d_margin={"sml"}
@@ -136,22 +135,20 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         menushowitems: false,
         returnDisplay(item: any) {
             return (
-                
+
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    
-                    <div className="borderthin bordergrey">
-                    <GenericCollapsableBlockDisplay 
-                        d_name={item.Name} 
-                        d_colour={"grey"} 
-                        d_state={false}  
-                        bordertype={0}
-                        d_border={false}
-                        d_margin={"sml"}
-                        d_method={() => <>
-                            <div className="borderthin backgroundBgCard bordergrey">
+
+                    <div className="DisplayPageStatic-returnDisplay">
+                        <GenericCollapsableBlockDisplay
+                            d_name={item.Name}
+                            d_colour={"grey"}
+                            d_state={false}
+                            bordertype={0}
+                            d_border={false}
+                            d_margin={"sml"}
+                            d_method={() => <>
                                 <KeywordDisplay data={item} />
-                            </div>
-                        </>} />
+                            </>} />
                     </div>
                 </ErrorBoundary>
             )

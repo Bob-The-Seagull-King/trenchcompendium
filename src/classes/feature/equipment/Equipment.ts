@@ -12,6 +12,7 @@ import { KeywordFactory } from '../../../factories/features/KeywordFactory';
 import { FactionEquipmentRelationship, IFactionEquipmentRelationship } from '../../relationship/faction/FactionEquipmentRelationship';
 import { EquipmentFactory } from '../../../factories/features/EquipmentFactory';
 import { Requester } from '../../../factories/Requester';
+import {returnDescription} from "../../../utility/util";
 
 interface IEquipment extends IStaticOptionContextObject {
     description: [],
@@ -126,6 +127,88 @@ class Equipment extends StaticOptionContextObject {
         }
     }
 
+
+    /**
+     * Returns the category as string
+     * @constructor
+     */
+    GetCategory () {
+        return this.Category;
+    }
+
+    /**
+     *  Return Range as String
+     */
+    GetRange () {
+
+        let rangestring = '';
+
+        if( this.Distance ) {
+            rangestring += this.Distance+'"';
+        }
+
+        if( this.Distance && this.Stats.melee ) {
+            rangestring += ' / ';
+        }
+
+        if( this.Stats.melee ) {
+            rangestring += 'Melee';
+        }
+        return rangestring;
+    }
+
+    /**
+     *  Return Melee Hands as String
+     */
+    GetHandsMelee () {
+        if( this.Stats.hands_melee ) {
+            return this.Stats.hands_melee.toString() + " Hands";
+        } else {
+            return '';
+        }
+    }
+
+    /**
+     *  Return Ranged Hands as String
+     */
+    GetHandsRanged () {
+        if( this.Stats.hands_ranged ) {
+            return this.Stats.hands_ranged.toString() + " Hands";
+        } else {
+            return '';
+        }
+    }
+
+    /**
+     *  Return Modifiers as String
+     */
+    GetModifiers () {
+        return this.Modifiers;
+    }
+
+    /**
+     *  Return Keywords
+     */
+    GetKeyWords () {
+        return this.KeyWord;
+    }
+
+    /**
+     *  Return Description as String
+     */
+    GetDescription () {
+
+        if (!this.Description || this.Description.length === 0) return null;
+
+        return returnDescription(this, this.Description);
+    }
+
+    /**
+     *  Return Lore as String
+     */
+    GetLore () {
+        return returnDescription(this, this.Lore);
+    }
 }
 
 export {IEquipment, Equipment, EquipmentStats, EquipmentRestriction, EquipmentLimit, RestrictionSingle, LimitSingle}

@@ -11,6 +11,9 @@ import { CollectionsListPage } from '../../classes/viewmodel/pages/CollectionLis
 import { DisplayCollectionDataDex, DisplayCollectionType } from './DisplayPageStatic'
 import FilterBox from '../components/subcomponents/filters/FilterBox';
 import { useLocation } from 'react-router-dom';
+import {Equipment} from "../../classes/feature/equipment/Equipment";
+import RulesEquipmentEntry from "../components/rules-content/RulesEquipmentEntry";
+import {ModelCollection} from "../../classes/feature/model/ModelCollection";
 
 const FilterableCompendiumDisplay = (prop: any) => {
     // Initialize controllers and managers
@@ -31,7 +34,10 @@ const FilterableCompendiumDisplay = (prop: any) => {
     const [_curItems, setCurItems] = useState<any[]>([]);
     const [_keyval, setKeyVal] = useState(0);  
     const [slugname, setslugname] = useState("Loading");  
-        
+
+    console.log('_curItems');
+    console.log(_curItems);
+
     useEffect(() => {
 
         async function SetCollectionOptions() {
@@ -92,20 +98,32 @@ const FilterableCompendiumDisplay = (prop: any) => {
 
     function ReturnItems() {
         return (
-            <div>
-                <div className=""/>
+            <div className={'FilterableCompendiumDisplay'}>
                 {((_curItems == undefined) || (_curItems == null) || (_curItems.length == 0)) &&
-                    <div className="">
+                    <div className="findme-2">
                         <h1 className="">{slugname}</h1>
                         <div className=""/>
                     </div>
                 }
+
                 {((_curItems != undefined) && (_curItems != null) && (_curItems.length > 0)) &&
-                    <div className="">
+                    <div className="filter-items-wrap">
                         {_curItems.map((item) => (
-                            <div key={item.HeldItem.ID}>
-                                {DisplayPage.returnDisplay(item.HeldItem)}
-                                <div className=""/>
+                            <div className={'filter-item'} key={item.HeldItem.ID}>
+                                {item.HeldItem instanceof Equipment &&
+                                    <>
+                                        <RulesEquipmentEntry
+                                            equipment={item.HeldItem}
+                                        />
+                                    </>
+                                }
+
+                                {/* @TODO Create Markup for this */}
+                                {item.HeldItem instanceof ModelCollection &&
+                                    <>
+                                        {DisplayPage.returnDisplay(item.HeldItem)}
+                                    </>
+                                }
                             </div>))}
                     </div>}
             </div>
