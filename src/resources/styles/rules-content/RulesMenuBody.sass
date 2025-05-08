@@ -109,24 +109,50 @@
             color: $color-highlight-text
 
     .collapse-chevron-wrap
-
+        height: 54px
 
     .menu-list.level-0
         > li
             > .menu-list-item-anchor-wrap > a
-                padding: 15px
+                padding: 15px 25px 15px 15px
                 background-color: $color-bg-1
+                border-bottom: 1px solid $color-bg-0
 
     .menu-list.level-1
         > li
             > .menu-list-item-anchor-wrap > a
-                padding: 15px 15px 15px 20px
+                padding: 15px 25px 15px 20px
                 background-color: $color-bg-2
+                border-bottom: 1px solid $color-bg-1
 
     .menu-list.level-2
         > li
             > .menu-list-item-anchor-wrap > a
                 padding: 15px 15px 15px 25px
                 background-color: $color-bg-3
+                border-bottom: 1px solid $color-bg-2
 
+// // // // //
+// Menu in main content
+.main-content
+    .rules-menu-body
+
+
+        .menu-list.level-0
+            > li
+                > .menu-list-item-anchor-wrap > a
+                    background-color: $bg-color-card-1
+                    border-bottom: 1px solid $color-bg-1
+
+        .menu-list.level-1
+            > li
+                > .menu-list-item-anchor-wrap > a
+                    background-color: $bg-color-card-2
+                    border-bottom: 1px solid $color-bg-2
+
+        .menu-list.level-2
+            > li
+                > .menu-list-item-anchor-wrap > a
+                    background-color: $bg-color-card-3
+                    border-bottom: 1px solid $color-bg-3
 
