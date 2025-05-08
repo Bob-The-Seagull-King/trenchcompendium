@@ -59,10 +59,6 @@ const BookRuleDisplay = (props: any) => {
                             pauseOnHover
                             />
 
-                {/* Rules Introduction / Description */}
-                <div className={'rules-introduction'}>
-                    {returnDescription(ruleObject, ruleObject.Description)}
-                </div>
 
                 { ruleObject.Sections != undefined && ruleObject.Sections?.length > 0 && (
                     <>
@@ -70,7 +66,16 @@ const BookRuleDisplay = (props: any) => {
                         {ruleObject.Sections.length > 1 &&
                             GetContents(ruleObject)
                         }
+                    </>
+                )}
 
+                {/* Rules Introduction / Description */}
+                <div className={'rules-introduction'}>
+                    {returnDescription(ruleObject, ruleObject.Description)}
+                </div>
+
+                { ruleObject.Sections != undefined && ruleObject.Sections?.length > 0 && (
+                    <>
                         {/* Rules Items */}
                         {ruleObject.Sections.map((item) => (
                             <div key={item.title} className={'rules-text-item'}>
