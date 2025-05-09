@@ -318,9 +318,6 @@ export function ImageBuilder(source_obj : CompendiumItem) {
 export function MergeLists(add_lists : string[][], remove_lists : string[][]) {
     let FinalArray : string[] = []
 
-    console.log(add_lists)
-    console.log(remove_lists);
-
     add_lists.forEach( _list => {
         FinalArray = FinalArray.concat(_list)
     })

@@ -13,6 +13,7 @@ class RuleFactory {
      * @returns A newly created ability
      */
     static async CreateRule(_rule: IRule, parent : ContextObject | null) {
+        console.log(_rule)
         const cache = StaticDataCache.getInstance();
         const isValid = (cache.CheckID('rule', _rule.id))
         if (isValid == false) {
@@ -36,6 +37,7 @@ class RuleFactory {
     }
 
     static async CreateNewScenarioRule(_val : string, parent : ContextObject | null) {
+        console.log(_val)
         const cache = StaticDataCache.getInstance();
         const isValid = (cache.CheckID('rule', _val))
         if (isValid == false) {

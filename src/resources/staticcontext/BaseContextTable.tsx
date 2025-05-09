@@ -728,7 +728,9 @@ export const BaseContextCallTable : CallEventTable = {
             for (let i = 0; i < relayVar.length; i++) {
                 
                 const ModelItem = await EquipmentFactory.CreateFactionEquipment(relayVar[i].value, null)
-                
+                if (ModelItem.EquipmentItem == undefined) {
+                    continue;
+                }
                 for (let j = 0; j < SubItem["restriction"].length; j++) {
                     if (SubItem["restriction"][j].category) {
                         if ( (ModelItem.EquipmentItem.Category == SubItem["restriction"][j].category)) {
@@ -792,6 +794,9 @@ export const BaseContextCallTable : CallEventTable = {
             for (let i = 0; i < relayVar.length; i++) {
 
                 const ModelItem = await EquipmentFactory.CreateFactionEquipment(relayVar[i].value, null)
+                if (ModelItem.EquipmentItem == undefined) {
+                    continue;
+                }
                 
                 for (let j = 0; j < SubItem["restriction"].length; j++) {
                     if (SubItem["restriction"][j].category) {
@@ -848,6 +853,8 @@ export const BaseContextCallTable : CallEventTable = {
             return relayVar
         },
         returnOptionDisplay(this: EventRunner, eventSource : any, relayVar : IChoice, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null){
+            
+
             return ( 
             
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>

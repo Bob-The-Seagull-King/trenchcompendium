@@ -35,9 +35,6 @@ const FilterableCompendiumDisplay = (prop: any) => {
     const [_keyval, setKeyVal] = useState(0);  
     const [slugname, setslugname] = useState("Loading");  
 
-    console.log('_curItems');
-    console.log(_curItems);
-
     useEffect(() => {
 
         async function SetCollectionOptions() {

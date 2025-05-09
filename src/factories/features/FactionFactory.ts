@@ -67,8 +67,6 @@ class FactionFactory {
     }
 
     static async CreateVariantFaction(_base: IFaction, varaint: IVariantFaction, parent : ContextObject | null) {
-        console.log(_base)
-        console.log(varaint)
         const cache = StaticDataCache.getInstance();
         const isValid = (cache.CheckID('faction', varaint.id))
         if (isValid == false) {
@@ -90,8 +88,6 @@ class FactionFactory {
         if (isValid == false) {
             return cache.FactionCache[_val];
         }
-        console.log("start")
-        console.log(_val)
         const vardata = Requester.MakeRequest({searchtype: "id", searchparam: {type: "factionvariant", id: _val}}) as IVariantFaction
         const basedata = Requester.MakeRequest({searchtype: "id", searchparam: {type: "faction", id: vardata.base_id}}) as IFaction
         const rulenew = await FactionFactory.CreateVariantFaction(basedata, vardata, parent)

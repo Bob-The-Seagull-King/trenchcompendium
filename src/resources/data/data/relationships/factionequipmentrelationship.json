@@ -345,7 +345,7 @@
         "limit": 0
     },
     {
-        "id": "rel_fc_eq_machinegun",
+        "id": "rel_fc_eq_machinegun_one",
         "source": "core",
         "tags": {     },
         "name": "Machine Gun",

@@ -8,6 +8,7 @@ import { ConvertContentWithGlossary } from '../../../../utility/util'
 import { AdvancedDescription} from '../../../../classes/AdvancedDescription'
 import { TableBody } from '../../../../classes/feature/table/tablebody'
 import { TableFactory } from '../../../../factories/features/TableFactory'
+import { StaticContextObject } from '../../../../classes/contextevent/staticcontextobject'
 
 // Components
 import GenericDisplay from '../../../../display/components/generics/GenericDisplay'
@@ -292,7 +293,7 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
     }
 
     function getEquipmentDisplay(val : string) {
-        const [component, setcomponent] = useState<null | Equipment>(null);
+        /*const [component, setcomponent] = useState<null | Equipment>(null);
         const [keyvar, setkeyvar] = useState(0);
 
         useEffect(() => {
@@ -300,7 +301,7 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
                 const item = await EquipmentFactory.CreateNewEquipment(val, null)
                 setcomponent(item);
                 setkeyvar(keyvar + 1);
-            };
+            }
 
             getItem();
         }, []);
@@ -312,11 +313,14 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
                     <EquipmentDisplay data={component} />
                 }   
             </span>
-        );
+        );*/
+        return (
+            <>{val}</>
+        )
     }
 
     function getModelDisplay(val : string) {
-        const [component, setcomponent] = useState<null | Model>(null);
+        /*const [component, setcomponent] = useState<null | Model>(null);
         const [keyvar, setkeyvar] = useState(0);
 
         useEffect(() => {
@@ -324,7 +328,7 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
                 const item = await ModelFactory.CreateNewModel(val, null)
                 setcomponent(item);
                 setkeyvar(keyvar + 1);
-            };
+            }
 
             getItem();
         }, []);
@@ -336,7 +340,11 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
                     <ModelDisplay data={component} />
                 }   
             </span>
-        );
+        );*/
+        
+        return (
+            <>{val}</>
+        )
     }
 
     return (

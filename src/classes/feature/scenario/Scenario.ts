@@ -173,7 +173,7 @@ class Scenario extends StaticContextObject {
 
     public async BuildRules(rules : string[]) {
         for (let i = 0; i < rules.length; i++) {
-            const RuleObj = await RuleFactory.CreateNewRule(rules[i], this);
+            const RuleObj = await RuleFactory.CreateNewScenarioRule(rules[i], this);
             this.SpecialRules.push(RuleObj);
         }
     }

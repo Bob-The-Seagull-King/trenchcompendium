@@ -2,6 +2,7 @@ import { Requester } from '../Requester';
 import { StaticDataCache } from '../../classes/_high_level_controllers/StaticDataCache';
 import { IKeyword, Keyword } from '../../classes/feature/glossary/Keyword';
 import { ContextObject } from '../../classes/contextevent/contextobject';
+import { StaticContextObject } from '../../classes/contextevent/staticcontextobject'
 
 class KeywordFactory {
 

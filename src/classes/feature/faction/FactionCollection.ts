@@ -74,8 +74,6 @@ class FactionCollection extends StaticContextObject {
     }
 
     public static MergeFactions(base: IFaction, variant : IVariantFaction) {
-        console.log(base)
-        console.log(variant)
         const rules_final : string[] = MergeLists([base.rules, variant.rules], [variant.cut_rules])
         
         const NewFaction : IFaction = {
