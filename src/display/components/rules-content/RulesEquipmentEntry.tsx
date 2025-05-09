@@ -13,6 +13,8 @@ interface RulesEquipmentEntryProps {
 
 const RulesEquipmentEntry: React.FC<RulesEquipmentEntryProps> = ({ equipment }) => {
 
+    const [loreshow, setLoreShow] = useGlobalState('loreshow');
+
     return (
         <div className="RulesEquipmentEntry">
             <h4 className="equipment-name">
@@ -113,8 +115,7 @@ const RulesEquipmentEntry: React.FC<RulesEquipmentEntryProps> = ({ equipment }) 
             }
 
             {/* Lore Text */}
-            {/* @TODO show lore only if globally set */}
-            {(equipment.GetLore() ) &&
+            {(equipment.GetLore() && loreshow === 'true' ) &&
                 <div className={'rules-text-element'}>
                     <div className={'text-label'}>
                         {'Lore'}

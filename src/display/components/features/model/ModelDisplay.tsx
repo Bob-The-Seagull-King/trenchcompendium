@@ -38,6 +38,7 @@ import SynodModelImageSource from "../../../../utility/SynodModelImageSource";
 import {useSynodModelImageData} from "../../../../utility/useSynodModelImageData";
 import RulesEquipmentEntry from "../../rules-content/RulesEquipmentEntry";
 import RulesModelDisplayAbility from "../../rules-content/RulesModelDisplayAbility";
+import {useGlobalState} from "../../../../utility/globalstate";
 
 const ModelDisplay = (props: any) => {
     const modelcollectionObject: Model = props.data
@@ -46,6 +47,7 @@ const ModelDisplay = (props: any) => {
     const [equiplimits, setEquipLimits] = useState([])
     const [statchoices, setstatchoices] = useState([])
     const [_keyvar, setkeyvar] = useState(0);
+    const [loreshow, setLoreShow] = useGlobalState('loreshow');
 
     const sourceData = useSynodModelImageData(modelcollectionObject.GetSlug());
 
@@ -377,7 +379,7 @@ const ModelDisplay = (props: any) => {
                     </>
                 }
 
-                { modelcollectionObject.Lore.length > 0 &&
+                {( modelcollectionObject.Lore.length > 0 && loreshow === 'true' ) &&
                     <RulesModelDisplayCollapse
                         name={"Lore"}
                         state={false}

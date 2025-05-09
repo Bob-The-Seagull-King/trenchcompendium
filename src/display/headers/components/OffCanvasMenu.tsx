@@ -146,8 +146,6 @@ const OffcanvasMenu: React.FC<IControllerProp> = (prop) => {
                         />
                     )}
 
-
-
                     <OffcanvasMenuSettings/>
 
                 </Offcanvas.Body>
