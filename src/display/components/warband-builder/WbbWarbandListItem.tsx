@@ -5,6 +5,7 @@ import { Modal, Button, OverlayTrigger, Popover } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { UserWarband } from '../../../classes/saveitems/Warband/UserWarband';
 import { WarbandManager } from '../../../classes/saveitems/Warband/WarbandManager';
+import SynodImage from "../../../utility/SynodImage";
 
 
 /**
@@ -91,6 +92,14 @@ const WbbWarbandListItem: React.FC<WbbWarbandListItemProps> = ({ item, manager, 
                             item.GetCampaignName()
                         }
                     </div>
+                </div>
+
+                <div className={'warband-item-image-wrap'}>
+                    <SynodImage
+                        imageId={113} // @TODO: add support for faction specific images
+                        className={'warband-item-image'}
+                        size={'large'}
+                    />
                 </div>
 
                 <OverlayTrigger
