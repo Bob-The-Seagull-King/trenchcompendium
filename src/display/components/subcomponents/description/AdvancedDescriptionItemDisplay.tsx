@@ -293,12 +293,14 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
     }
 
     function getEquipmentDisplay(val : string) {
-        /*const [component, setcomponent] = useState<null | Equipment>(null);
+        
+        const [component, setcomponent] = useState<null | Equipment>(null);
         const [keyvar, setkeyvar] = useState(0);
 
         useEffect(() => {
-            async function getItem() {
-                const item = await EquipmentFactory.CreateNewEquipment(val, null)
+            async function getItem() {                
+                const EquipmentModule = await import("../../../../factories/features/EquipmentFactory");
+                const item = await EquipmentModule.EquipmentFactory.CreateNewEquipment(val, null)
                 setcomponent(item);
                 setkeyvar(keyvar + 1);
             }
@@ -313,19 +315,18 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
                     <EquipmentDisplay data={component} />
                 }   
             </span>
-        );*/
-        return (
-            <>{val}</>
-        )
+        );
     }
 
     function getModelDisplay(val : string) {
-        /*const [component, setcomponent] = useState<null | Model>(null);
+        const [component, setcomponent] = useState<null | Model>(null);
         const [keyvar, setkeyvar] = useState(0);
 
         useEffect(() => {
             async function getItem() {
-                const item = await ModelFactory.CreateNewModel(val, null)
+                
+                const ModelModule = await import("../../../../factories/features/ModelFactory");
+                const item = await ModelModule.ModelFactory.CreateNewModel(val, null)
                 setcomponent(item);
                 setkeyvar(keyvar + 1);
             }
@@ -340,11 +341,7 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
                     <ModelDisplay data={component} />
                 }   
             </span>
-        );*/
-        
-        return (
-            <>{val}</>
-        )
+        );
     }
 
     return (

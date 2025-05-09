@@ -44,8 +44,9 @@ const ScenarioDisplay = (props: any) => {
         ContentsList.push({ name: "Deployment", route: "deployment"})
         ContentsList.push({ name: "Victory Conditions", route: "victory"})
         if (scenarioObj.SpecialRules != undefined) {
-            if (scenarioObj.SpecialRules.length > 0) {
-                ContentsList.push({ name: "Special Rules", route: "specialrules"})
+            for (let i = 0; i < scenarioObj.SpecialRules.length; i++ ) {
+                const scenname = scenarioObj.SpecialRules[i].Name
+                ContentsList.push({ name: scenname? scenname : "", route: scenarioObj.SpecialRules[i].ID})
             }
         }
         ContentsList.push({ name: "Glorious Deeds", route: "deeds"})
@@ -170,39 +171,19 @@ const ScenarioDisplay = (props: any) => {
 
 
                 {scenarioObject.SpecialRules != undefined && <>
-                    {scenarioObject.SpecialRules.length > 0 &&
-                        <div>
-                            <div className={'size-subtitle font-seriftext'}>
-                                <div className='subtitle-letterspacing '>
-                                    {"Special Rules"}
-                                    <div className=' '>
-                                        <FontAwesomeIcon icon={faLink} onClick={() => (
-                                            runToast()
-                                        )}/>
+                    
+                    {scenarioObject.SpecialRules.map((item) => (
+                                    
+                                    <div key={item.ID} className={"rules-text-item"}>
+                                        <RulesHeadlineDisplay
+                                            content={item.Name? item.Name : ""}
+                                            level={2}
+                                        />
+
+                                        {returnDescription(item, item.Description)}
                                     </div>
-                                </div>
-                            </div>
-                            <div className="borderthin bordergrey">
-                                {scenarioObject.SpecialRules.map((item) => (
-                                    <div key={"faction_rule_" + scenarioObject.ID + "_rule_id_" + item.ID}>
-                                        <GenericCollapsableBlockDisplay
-                                            d_name={item.Name}
-                                            d_colour={"grey"}
-                                            d_state={false}
-                                            d_margin={"sml"}
-                                            d_col={"default"}
-                                            d_border={false}
-                                            bordertype={0}
-                                            d_method={() => <div className={"bordergrey borderthin"}>
-                                                <div className="">
-                                                    <RuleDisplay data={item}/>
-                                                </div>
-                                            </div>}/>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    }</>}
+                            ))}
+                    </>}
 
                 <div className={"rules-text-item"}>
                     <RulesHeadlineDisplay
