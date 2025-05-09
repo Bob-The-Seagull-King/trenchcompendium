@@ -78,7 +78,7 @@
         "id": "up_hallucinogendisguise",
         "name": "Hallucinogen Disguise",
         "source": "core",
-        "tags": {"trait": true},
+        "tags": {"trait": true, "special_category": "art_of_assassination"},
         "contextdata": { "infiltrator_scenario": {}},
         "description": [            
             {
@@ -93,7 +93,7 @@
         "id": "up_thunderboltofalamut",
         "name": "Thunderbolt of Alamut",
         "source": "core",
-        "tags": {"trait": true},
+        "tags": {"trait": true, "special_category": "art_of_assassination"},
         "contextdata": {"upgrade_stat": { "upgrades" : [{"stat": "movement", "value": 2}]}},
         "description": [            
             {
@@ -108,7 +108,7 @@
         "id": "up_mirageoftime",
         "name": "Mirage of Time",
         "source": "core",
-        "tags": {"trait": true},
+        "tags": {"trait": true, "special_category": "art_of_assassination"},
         "contextdata": {"self_defense_hit" : {"type": "dice", "val": -1}},
         "description": [            
             {
@@ -123,7 +123,7 @@
         "id": "up_secretpaths",
         "name": "Secret Paths",
         "source": "core",
-        "tags": {"trait": true},
+        "tags": {"trait": true, "special_category": "art_of_assassination"},
         "contextdata": {"self_defense_hit" : {"type": "dice", "val": -1}},
         "description": [            
             {
@@ -500,7 +500,7 @@
         "id": "up_secrets_medicine",
         "name": "Medicine",
         "source": "core",
-        "tags": {"action": true},
+        "tags": {"action": true, "special_category": "secrets_of_the_house_of_wisdom"},
         "contextdata": {
             "override_equipment_restriction": {
                 "removed": [
@@ -528,7 +528,7 @@
         "id": "up_secrets_cartographyandgeography",
         "name": "Cartography and Geography",
         "source": "core",
-        "tags": {"trait": true},
+        "tags": {"trait": true, "special_category": "secrets_of_the_house_of_wisdom"},
         "contextdata": {
             "keyword_add": {"value": ["kw_infiltrator"]},
             "model_attatch": {"restrictions": []},
@@ -549,7 +549,7 @@
         "id": "up_secrets_secretsoftakwin",
         "name": "Secrets of Takwin",
         "source": "core",
-        "tags": {"trait": true},
+        "tags": {"trait": true, "special_category": "secrets_of_the_house_of_wisdom"},
         "contextdata": {
             "model_attatch": {"restrictions": [{"type": "id", "value": "md_takwincreation"}]}
         },
@@ -565,7 +565,7 @@
         "id": "up_secrets_chemistryandalchemy",
         "name": "Chemistry and Alchemy",
         "source": "core",
-        "tags": {"trait": true},
+        "tags": {"trait": true, "special_category": "secrets_of_the_house_of_wisdom"},
         "contextdata": {
             "warband_wide": {}
         },
@@ -587,7 +587,7 @@
         "id": "up_secrets_philosophypoetrytheology",
         "name": "Philosophy Poetry and Theology",
         "source": "core",
-        "tags": {"trait": true},
+        "tags": {"trait": true, "special_category": "secrets_of_the_house_of_wisdom"},
         "contextdata": {
             "keyword_add": {"value": ["kw_fear"]},
             "model_attatch": {"restrictions": []},

@@ -94,7 +94,24 @@
         "id": "rl_artofassassination",
         "source": "core",
         "tags": { },
-        "contextdata": { 
+        "contextdata": {    
+            "special_category_upgrades": {
+                "upgrades": [
+                    {
+                        "category": "art_of_assassination",
+                        "count": 1
+                    }
+                ]
+            },
+            "add_to_model": {   
+                "id": "rl_artofassassination",                            
+                "required": [
+                    {
+                        "category": "id",
+                        "value": ["md_sultanateassassin","md_sultanateassassin_mv_masterassassin"]
+                    }
+                ]
+            },
             "faction_add_upgrades": {
                 "model_key": "rl_artofassassination",
                 "models_id": ["md_sultanateassassin","md_sultanateassassin_mv_masterassassin"]
@@ -195,6 +212,23 @@
         "source": "core",
         "tags": { },
         "contextdata": { 
+            "special_category_upgrades": {
+                "upgrades": [
+                    {
+                        "category": "secrets_of_the_house_of_wisdom",
+                        "count": 1
+                    }
+                ]
+            },
+            "add_to_model": {   
+                "id": "rl_secretsofthehouseofwisdom",                            
+                "required": [
+                    {
+                        "category": "id",
+                        "value": ["md_jabireanalchemist"]
+                    }
+                ]
+            },
             "faction_add_upgrades": {
                 "model_key": "rl_secretsofthehouseofwisdom",
                 "models_id": ["md_jabireanalchemist"]
