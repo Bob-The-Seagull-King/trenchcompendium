@@ -1,5 +1,5 @@
 import '../../resources/styles/vendor/bootstrap.css'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ErrorBoundary } from "react-error-boundary";
 
 import { ToastContainer, toast } from 'react-toastify';
@@ -8,17 +8,38 @@ import { Item } from '../../classes/saveitems/item';
 import { ScenarioGenerator } from '../../classes/feature/scenario/ScenarioGenerator';
 import ScenarioDisplay from '../components/features/scenario/ScenarioDisplay';
 import GenericDisplay from '../components/generics/GenericDisplay';
+import { ToolsController } from '../../classes/_high_level_controllers/ToolsController';
+import { Scenario } from '../../classes/feature/scenario/Scenario';
 
 const ToolsRandomScenario = (prop: any) => {
-    const Manager : ScenarioGenerator = prop.manager;
+    const Manager : ScenarioGenerator = prop.manager? prop.manager : getManager();
     
-    const [_currentItem, returnItem] = useState(Manager.CurrentScenario);
+    function getManager() {        
+        const ToolsManagerScenario = ToolsController.getInstance();
+        ToolsManagerScenario.RandomScenarioManager = new ScenarioGenerator();
+
+        return ToolsManagerScenario.RandomScenarioManager;
+    }
+
+    const [_currentItem, returnItem] = useState<Scenario | null>(null);
     const [_keyval, returnkey] = useState(1);
 
-    function newScenario() {
-        Manager.ResetScenario();
+    
+    useEffect(() => {
+        async function SetScenario() {
+            await Manager.ResetScenario();
+            returnItem(Manager.CurrentScenario);
+            returnkey(_keyval + 1)
+        }
+
+        SetScenario();
+    }, []);
+    
+
+    async function newScenario() {
+        await Manager.ResetScenario();
         returnItem(Manager.CurrentScenario);
-        returnkey(_keyval + 1);
+        returnkey(_keyval + 1)
     }
 
     // Return result -----------------------------
@@ -29,12 +50,9 @@ const ToolsRandomScenario = (prop: any) => {
                     <div className="">
                         <div onClick={() => (newScenario())}className='borderstyler    softpad colorWhite tagText centerPosition'>New Scenario</div>
                     </div>
-                    <div className="row">
-                        <div className="verticalspacerbig"/>
-                    </div>
-                    <div className="">
-                        <GenericDisplay  d_colour={"default"} d_name={_currentItem.Name} d_type={""} d_method={() => <ScenarioDisplay data={_currentItem} />}/>
-                    </div>
+                    {_currentItem != null &&
+                        <ScenarioDisplay data={_currentItem} />
+                    }
                 </div>
             </div>
         </ErrorBoundary>
