@@ -9,7 +9,7 @@ import GenericHover from '../generics/GenericHover';
 import KeywordDisplay from '../features/glossary/KeywordDisplay';
 import ItemStat from '../subcomponents/description/ItemStat';
 import { ModelStatistics, PresentModelStatistics } from '../../../classes/feature/model/ModelStats';
-import {getBaseSize, getColour, getCostType, getMoveType, getPotential} from '../../../utility/functions';
+import {getBaseSize, getColour, getCostType, getMoveType, getPotential, makestringpresentable} from '../../../utility/functions';
 import RulesModelDisplayCollapse from '../../components/rules-content/RulesModelDisplayCollapse';
 import {FactionModelRelationship} from "../../../classes/relationship/faction/FactionModelRelationship";
 import RulesModelUpgrade from "./RulesModelUpgrade";
@@ -19,7 +19,7 @@ import { EventRunner } from '../../../classes/contextevent/contexteventhandler';
 import ModelEquipmentDisplay from '../features/equipment/ModelEquipmentDisplay';
 import SynodModelImage from "../../../utility/SynodModelImage";
 import SynodModelImageSource from "../../../utility/SynodModelImageSource";
-import { ModelUpgradeRelationship } from '../../../classes/relationship/model/ModelUpgradeRelationship';
+import { ModelUpgradeRelationship, UpgradesGrouped } from '../../../classes/relationship/model/ModelUpgradeRelationship';
 import { Faction } from '../../../classes/feature/faction/Faction';
 import { Ability } from '../../../classes/feature/ability/Ability';
 
@@ -29,7 +29,7 @@ const RulesModelDisplay = (props: any) => {
     const parentfaction : Faction = props.faction;
 
     const [statchoices, setstats] = useState({})
-    const [upgrades, setupgrades] = useState<ModelUpgradeRelationship[]>([])
+    const [upgrades, setupgrades] = useState<UpgradesGrouped>({})
     const [abilities, setabilities] = useState<Ability[]>([])
     const [BaseString, setBaseString] = useState('')
     const [minimum, setminimum] = useState("")
@@ -45,7 +45,7 @@ const RulesModelDisplay = (props: any) => {
                             
             /* UPGRADES */
             if (parentfaction != undefined) {
-                const result_upgrades = await factionmodelObject.getContextuallyAvailableUpgrades(parentfaction);
+                const result_upgrades = await factionmodelObject.GetSplitUpgrades(parentfaction);
                 setupgrades(result_upgrades);
             } else {
                 setupgrades(modelcollectionObject.UpgradeList)
@@ -164,23 +164,6 @@ const RulesModelDisplay = (props: any) => {
             </>
         )
     }
-
-    // function returnBaseSize(stats : PresentModelStatistics) {
-    //
-    //     const basestats: string[] = []
-    //
-    //     if (stats.base != undefined) {
-    //         for (let i = 0; i < stats.base?.length; i++) {
-    //             const curstats : string[] = []
-    //             for (let j = 0; j < stats.base[i].length; j++) {
-    //                 curstats.push(stats.base[i][j].toString());
-    //             }
-    //             basestats.push(curstats.join('x') + "mm")
-    //         }
-    //     }
-    //
-    //     return basestats.join('/')
-    // }
 
     return (
         <ErrorBoundary fallback={<div>Something went wrong with ModelDisplay.tsx</div>}>
@@ -314,21 +297,28 @@ const RulesModelDisplay = (props: any) => {
                     }
 
                     {/* Upgrades */}
-                    {upgrades.length > 0 &&
-                        <RulesModelDisplayCollapse
-                            name={"Upgrades"}
-                            state={false}
-                            has_children={factionmodelObject.hasUpgrades()}
-                            method={() => <>
-                                {upgrades.map((item) => (
-                                    <React.Fragment
-                                        key={"model_upgrade_" + modelcollectionObject.ID + "_upgrade_id_" + item.ID}>
-                                        <RulesModelUpgrade item={item}/>
-                                    </React.Fragment>
-                                ))}
-                            </>
-                            }
-                        />
+                    {Object.keys(upgrades).length > 0 &&
+                    <>
+                    {
+                        Object.keys(upgrades).map((item) => (
+                            <RulesModelDisplayCollapse
+                                name={makestringpresentable(item)}
+                                state={false}
+                                has_children={factionmodelObject.hasUpgrades()}
+                                method={() => <>
+                                    {upgrades[item].map((subitem : ModelUpgradeRelationship) => (
+                                        <React.Fragment
+                                            key={"model_upgrade_" + modelcollectionObject.ID + "_upgrade_id_" + subitem.ID}>
+                                            <RulesModelUpgrade item={subitem}/>
+                                        </React.Fragment>
+                                    ))}
+                                </>
+                                }
+                            />
+                        ))
+                    }
+                    </>
+                        
                     }
 
                     {/* Lore Text */}

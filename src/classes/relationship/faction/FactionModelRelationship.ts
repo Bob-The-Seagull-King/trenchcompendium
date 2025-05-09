@@ -10,7 +10,7 @@ import { Faction } from '../../feature/faction/Faction';
 import { FactionFactory } from '../../../factories/features/FactionFactory';
 import {getCostType} from "../../../utility/functions";
 import {GetPresentationStatistic, PresentModelStatistics} from "../../feature/model/ModelStats";
-import { ModelUpgradeRelationship } from '../model/ModelUpgradeRelationship';
+import { ModelUpgradeRelationship, UpgradesGrouped } from '../model/ModelUpgradeRelationship';
 import { EventRunner } from '../../contextevent/contexteventhandler';
 import { Ability } from '../../feature/ability/Ability';
 
@@ -188,6 +188,24 @@ class FactionModelRelationship extends StaticOptionContextObject {
         }
 
         return UpgradesListAvailable;
+    }
+
+    public async GetSplitUpgrades(faction : Faction) : Promise<UpgradesGrouped> {
+
+        const groups : UpgradesGrouped = {}
+
+        const UpgradeListFull : ModelUpgradeRelationship[] = await this.getContextuallyAvailableUpgrades(faction);
+
+        for (let i = 0; i < UpgradeListFull.length; i++) {
+            const special_cat = UpgradeListFull[i].GetSpecialCategory()
+            if (groups[special_cat]) {
+                groups[special_cat].push(UpgradeListFull[i])
+            } else {
+                groups[special_cat] = [UpgradeListFull[i]]
+            }
+        }
+
+        return groups;
     }
 
     public async getContextuallyAvailableAbilities(faction : Faction) : Promise<Ability[]> {

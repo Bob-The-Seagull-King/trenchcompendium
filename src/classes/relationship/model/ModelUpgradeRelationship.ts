@@ -24,6 +24,8 @@ interface ModelUpgradeRestriction {
     max_count : 0
 }
 
+
+
 class ModelUpgradeRelationship extends StaticOptionContextObject {
 
     public UpgradeObject! : Upgrade;
@@ -71,7 +73,17 @@ class ModelUpgradeRelationship extends StaticOptionContextObject {
         return result.join(',');
     }
 
+    public GetSpecialCategory() {
+        if (this.UpgradeObject.Tags['special_category']) {
+            return this.UpgradeObject.Tags['special_category'].toString();
+        } else {
+            return 'upgrades';
+        }
+    }
+
 }
 
 export {IModelUpgradeRelationship, ModelUpgradeRelationship}
 
+
+export type UpgradesGrouped = {[type : string]: ModelUpgradeRelationship[]};
