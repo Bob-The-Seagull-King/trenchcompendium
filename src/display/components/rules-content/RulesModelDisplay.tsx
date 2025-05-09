@@ -8,7 +8,14 @@ import { Model } from '../../../classes/feature/model/Model';
 import GenericHover from '../generics/GenericHover';
 import KeywordDisplay from '../features/glossary/KeywordDisplay';
 import ItemStat from '../subcomponents/description/ItemStat';
-import { ModelStatistics, PresentModelStatistics } from '../../../classes/feature/model/ModelStats';
+import {
+    getModelStatArmour,
+    getModelStatMelee,
+    getModelStatMove,
+    getModelStatRanged,
+    ModelStatistics,
+    PresentModelStatistics
+} from '../../../classes/feature/model/ModelStats';
 import {getBaseSize, getColour, getCostType, getMoveType, getPotential, makestringpresentable} from '../../../utility/functions';
 import RulesModelDisplayCollapse from '../../components/rules-content/RulesModelDisplayCollapse';
 import {FactionModelRelationship} from "../../../classes/relationship/faction/FactionModelRelationship";
@@ -22,6 +29,12 @@ import SynodModelImageSource from "../../../utility/SynodModelImageSource";
 import { ModelUpgradeRelationship, UpgradesGrouped } from '../../../classes/relationship/model/ModelUpgradeRelationship';
 import { Faction } from '../../../classes/feature/faction/Faction';
 import { Ability } from '../../../classes/feature/ability/Ability';
+import FighterCardTitle from "./FighterCard/FighterCardTitle";
+import FighterCardImageWrap from "./FighterCard/FighterCardImageWrap";
+import FighterCardMetaEntry from "./FighterCard/FighterCardMetaEntry";
+import FighterCardStats from "./FighterCard/FighterCardStats";
+import FighterCardMetaEntryKeywords from "./FighterCard/FighterCardMetaEntryKeywords";
+import {useSynodModelImageData} from "../../../utility/useSynodModelImageData";
 
 const RulesModelDisplay = (props: any) => {
     const factionmodelObject: FactionModelRelationship = props.data
@@ -35,6 +48,9 @@ const RulesModelDisplay = (props: any) => {
     const [minimum, setminimum] = useState("")
     const [maximum, setmaximum] = useState("")
     const [_keyvar, setkeyvar] = useState(0);
+
+    const sourceData = useSynodModelImageData(modelcollectionObject.GetSlug());
+
 
     // Render no lore if loreshow !== 'true'
     const [loreshow] = useGlobalState('loreshow');
@@ -93,156 +109,60 @@ const RulesModelDisplay = (props: any) => {
 
 
 
-    function ReturnStats(stats : PresentModelStatistics) {
-        const movestats: string[] = []   
-        const typestats: string[] = []
-        const meleestats: string[] = []
-        const rangedstats: string[] = []
-        const armourstats: string[] = []
-
-        if (stats.movement != undefined) {
-            for (let i = 0; i < stats.movement?.length; i++) {
-                movestats.push(stats.movement[i].toString())
-            }
-        }
-        if (stats.movetype != undefined) {
-            for (let i = 0; i < stats.movetype?.length; i++) {
-                typestats.push(getMoveType(stats.movetype[i]))
-            }
-        }
-
-        if (stats.melee  != undefined) {
-            for (let i = 0; i < stats.melee.length; i++) {
-                const val = stats.melee[i];
-                const prefix = val > 0 ? "+" : val < 0 ? "-" : "";
-                meleestats.push(prefix + Math.abs(val));
-            }
-        } else {
-            meleestats.push('0');
-        }
-
-        if (stats.ranged != undefined) {
-            for (let i = 0; i < stats.ranged?.length; i++) {
-                const val = stats.ranged[i];
-                const prefix = val > 0 ? "+" : val < 0 ? "-" : "";
-                rangedstats.push(prefix + Math.abs(val));
-            }
-        } else {
-            rangedstats.push('0');
-        }
-
-        if (stats.armour != undefined) {
-            for (let i = 0; i < stats.armour?.length; i++) {
-                armourstats.push(stats.armour[i].toString())
-            }
-        } else {
-            armourstats.push('0');
-        }
-
-        return (
-            <>
-                {stats.movement != undefined &&
-                    <>
-                        <ItemStat title={"Movement"} value={(movestats.join('/') + '"/' + (typestats.join('/')))}/>
-                    </>
-                }
-                {meleestats.length >= 0 &&
-                    <>
-                        <ItemStat title={"Melee"} value={meleestats.join('/')}/>
-                    </>
-                }
-                {rangedstats.length >= 0 &&
-                    <>
-                        <ItemStat title={"Ranged"} value={rangedstats.join('/')}/>
-                    </>
-                }
-                {armourstats.length >= 0 != undefined &&
-                    <>
-                        <ItemStat title={"Armour"} value={armourstats.join('/')}/>
-                    </>
-                }
-            </>
-        )
-    }
-
     return (
         <ErrorBoundary fallback={<div>Something went wrong with ModelDisplay.tsx</div>}>
-            <section className='fighter-card' key={_keyvar}>
-                <div className="fighter-card-title">
-                    {factionmodelObject.getName()}
-                </div>
+            <section className='RulesModelDisplay fighter-card' key={_keyvar}>
+                <FighterCardTitle
+                    name={factionmodelObject.getName()}
+                />
 
                 <div className={'fighter-card-main-area'}>
-                    <div className={'fighter-image-wrap'}>
-                        <SynodModelImage
-                            modelSlug={modelcollectionObject.GetSlug()}
-                            size="medium"
-                            className="fighter-image"
+                    <FighterCardImageWrap
+                        model_slug={modelcollectionObject.GetSlug()}
+                    />
+
+                    <div className="fighter-card-meta fighter-card-meta-above">
+                        <FighterCardMetaEntry
+                            className="fighter-cost"
+                            label="Cost"
+                            value={factionmodelObject.getCostString()}
+                        />
+
+                        <FighterCardMetaEntry
+                            className="fighter-availability"
+                            label="Availability"
+                            value={factionmodelObject.getAvailabilityString()}
                         />
                     </div>
-                    <div className="fighter-card-meta fighter-card-meta-above">
-                        <div className="fighter-meta-entry-simple fighter-cost">
-                        <span className="fighter-meta-label">
-                            Cost:
-                        </span>
-                            <span className="fighter-meta-value">
-                            {factionmodelObject.getCostString()}
-                        </span>
-                        </div>
-                        <div className="fighter-meta-entry-simple fighter-availability">
-                        <span className="fighter-meta-label">
-                            Availability:
-                        </span>
-                            <span className="fighter-meta-value">
-                            {minimum + "-" + maximum}
-                        </span>
-                        </div>
-                    </div>
 
-                    <div className="fighter-card-stats">
-                        {ReturnStats(statchoices)  /* Stats */}
-                    </div>
+                    <FighterCardStats
+                        movement={getModelStatMove(statchoices)}
+                        melee={getModelStatRanged(statchoices)}
+                        ranged={getModelStatMelee(statchoices)}
+                        armour={getModelStatArmour(statchoices)}
+                    />
 
                     <div className="fighter-card-meta fighter-card-meta-below">
-                        <div className="fighter-meta-entry-simple fighter-base">
-                            <span className="fighter-meta-label">
-                                Base:
-                            </span>
-                            <span className="fighter-meta-value">
-                                {BaseString}
-                            </span>
-                        </div>
+                        <FighterCardMetaEntry
+                            className="fighter-base"
+                            label="Base"
+                            value={BaseString}
+                        />
 
-                        {factionmodelObject.hasKeywords() &&
-                            <div className="fighter-meta-entry-simple fighter-keywords">
-                                <span className="fighter-meta-label">
-                                    Keywords:
-                                </span>
-                                <span className="fighter-meta-value">
-                                    {factionmodelObject.getKeywords().map((item, index) => (
-                                        <span className=''
-                                              key={"model_keyword_" + modelcollectionObject.ID + "_keyword_id_" + item.ID}>
-                                            <GenericHover
-                                                d_colour={modelcollectionObject.Team}
-                                                titlename={item.Name}
-                                                d_name={item.Name}
-                                                d_type={""}
-                                                d_method={() => <KeywordDisplay data={item}/>}
-                                            />
-                                            {index < modelcollectionObject.KeyWord.length - 1 && ", "}
-                                        </span>
-                                    )) /* Keywords */}
-                                </span>
-                            </div>
-                        }
+                        <FighterCardMetaEntryKeywords
+                            keywords={factionmodelObject.getKeywords()}
+                            modelId={modelcollectionObject.ID}
+                        />
 
-                        <div className="fighter-meta-entry-simple synod-image-source-wrap">
-                            {'Image: '}
-
-                            <SynodModelImageSource
-                                modelSlug={factionmodelObject.GetSlug()}
+                        {!sourceData.loading && !sourceData.error && sourceData.sourceUrl &&
+                            <FighterCardMetaEntry
+                                className="synod-image-source-wrap"
+                                label="Image"
+                                value={<SynodModelImageSource
+                                    modelSlug={modelcollectionObject.GetSlug()}
+                                />}
                             />
-                        </div>
+                        }
 
                     </div>
                 </div>
@@ -254,7 +174,6 @@ const RulesModelDisplay = (props: any) => {
                         <RulesModelDisplayCollapse
                             name={"Abilities"}
                             state={false}
-                            has_children={factionmodelObject.hasAbilities()}
                             method={() => <>
                                 {abilities.map((item) => (
                                     <React.Fragment
@@ -274,8 +193,8 @@ const RulesModelDisplay = (props: any) => {
                             state={false}
                             method={() => <>
                                 {returnDescription(modelcollectionObject, modelcollectionObject.Description)}
-                                {(modelcollectionObject.EquipmentList.length > 0) &&
 
+                                {(modelcollectionObject.EquipmentList.length > 0) &&
                                     <div className={'container bordergrey'}>
                                         <div className={"backgroundgrey"}/>
                                         <div className="content">

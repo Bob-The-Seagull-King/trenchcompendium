@@ -8,7 +8,7 @@ interface RulesModelDisplayCollapseProps {
     name: string | undefined;
     method: any;
     state: boolean;
-    has_children?: boolean;
+    has_children?: boolean; // this is not really needed anymore
 }
 
 const RulesModelDisplayCollapse: React.FC<RulesModelDisplayCollapseProps> = ({ name = "", method, state, has_children = false }) => {

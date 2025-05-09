@@ -341,7 +341,7 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
 
 
         return (
-            <span key={keyvar}>
+            <span className={'AdvancedDescriptionItemDisplay'} key={keyvar}>
                 {component !== null &&
                     <ModelDisplay data={component} />
                 }   

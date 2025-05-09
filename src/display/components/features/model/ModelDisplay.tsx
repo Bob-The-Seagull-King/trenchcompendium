@@ -10,7 +10,13 @@ import AbilityDisplay from '../ability/AbilityDisplay';
 import GenericHover from '../../generics/GenericHover';
 import KeywordDisplay from '../glossary/KeywordDisplay';
 import ItemStat from '../../subcomponents/description/ItemStat';
-import { ModelStatistics } from '../../../../classes/feature/model/ModelStats';
+import {
+    getModelStatArmour,
+    getModelStatMelee,
+    getModelStatMove,
+    getModelStatRanged,
+    ModelStatistics
+} from '../../../../classes/feature/model/ModelStats';
 import {getBaseSize, getColour, getCostType, getMoveType, getPotential} from '../../../../utility/functions';
 import ModelUpgradeDisplay from '../ability/ModelUpgradeDisplay';
 import { Equipment } from '../../../../classes/feature/equipment/Equipment';
@@ -23,6 +29,15 @@ import GenericCollapsableBlockDisplay from '../../../components/generics/Generic
 import RulesModelDisplayCollapse from '../../../components/rules-content/RulesModelDisplayCollapse';
 import ItemRow from '../../../components/subcomponents/description/ItemRow';
 import {FactionModelRelationship} from "../../../../classes/relationship/faction/FactionModelRelationship";
+import FighterCardTitle from "../../rules-content/FighterCard/FighterCardTitle";
+import FighterCardImageWrap from "../../rules-content/FighterCard/FighterCardImageWrap";
+import FighterCardMetaEntry from "../../rules-content/FighterCard/FighterCardMetaEntry";
+import FighterCardStats from "../../rules-content/FighterCard/FighterCardStats";
+import FighterCardMetaEntryKeywords from "../../rules-content/FighterCard/FighterCardMetaEntryKeywords";
+import SynodModelImageSource from "../../../../utility/SynodModelImageSource";
+import {useSynodModelImageData} from "../../../../utility/useSynodModelImageData";
+import RulesEquipmentEntry from "../../rules-content/RulesEquipmentEntry";
+import RulesModelDisplayAbility from "../../rules-content/RulesModelDisplayAbility";
 
 const ModelDisplay = (props: any) => {
     const modelcollectionObject: Model = props.data
@@ -32,6 +47,7 @@ const ModelDisplay = (props: any) => {
     const [statchoices, setstatchoices] = useState([])
     const [_keyvar, setkeyvar] = useState(0);
 
+    const sourceData = useSynodModelImageData(modelcollectionObject.GetSlug());
 
     useEffect(() => {
         async function SetModelOptions() {
@@ -169,48 +185,60 @@ const ModelDisplay = (props: any) => {
         return ProfileString.join(' ')
     }
 
-    function ReturnStats(statlist : ModelStatistics) {
-        return (
-            <>
-                {statlist.movement != undefined &&
-                    <>
-                        <ItemStat title={"Movement"} ratio="rectangle" value={(statlist.movement?.toString() || "") + "\"" + (statlist.movetype? " " + getMoveType(statlist.movetype) : " Infantry")}/>
-                    </>
-                }
-                {statlist.melee != undefined &&
-                    <>
-                        <ItemStat title={"Melee"} value={(statlist.melee? (statlist.melee > 0? "+": "") : "") + (statlist.melee?.toString() || "")}/>
-                    </>
-                }
-                {statlist.ranged != undefined &&
-                    <>
-                        <ItemStat title={"Ranged"} value={(statlist.ranged? (statlist.ranged > 0? "+": "") : "") + (statlist.ranged?.toString() || "")}/>
-                    </>
-                }
-                {statlist.armour != undefined &&
-                    <>
-                        <ItemStat title={"Armour"} value={statlist.armour?.toString() || ""}/>
-                    </>
-                }
-            </>
-        )
-    }
+
+    // use Base Size
+    const [baseSize, setBaseSize] = useState<string | null>(null);
+
+    useEffect(() => {
+        modelcollectionObject.getBaseSizeString().then(setBaseSize);
+    }, [modelcollectionObject]);
 
     return (
         <ErrorBoundary fallback={<div>Something went wrong with ModelDisplay.tsx</div>}>
-            <div className='fighter-card' key={_keyvar}>
-                <div className="fighter-card-title">
-                    {modelcollectionObject.Name}
+            <div className='ModelDisplay fighter-card' key={_keyvar}>
+                <FighterCardTitle
+                    name={modelcollectionObject.getName()}
+                />
+
+                <div className={'fighter-card-main-area'}>
+                    <FighterCardImageWrap
+                        model_slug={modelcollectionObject.GetSlug()}
+                    />
+
+                    <FighterCardStats
+                        movement={getModelStatMove(modelcollectionObject.Stats)}
+                        melee={getModelStatRanged(modelcollectionObject.Stats)}
+                        ranged={getModelStatMelee(modelcollectionObject.Stats)}
+                        armour={getModelStatArmour(modelcollectionObject.Stats)}
+                    />
+
+                    <div className="fighter-card-meta fighter-card-meta-below">
+                        <FighterCardMetaEntry
+                            className="fighter-base"
+                            label="Base"
+                            value={baseSize}
+                        />
+
+                        <FighterCardMetaEntryKeywords
+                            keywords={modelcollectionObject.getKeywords()}
+                            modelId={modelcollectionObject.ID}
+                        />
+
+                        {!sourceData.loading && !sourceData.error && sourceData.sourceUrl &&
+                            <FighterCardMetaEntry
+                                className="synod-image-source-wrap"
+                                label="Image"
+                                value={<SynodModelImageSource
+                                    modelSlug={modelcollectionObject.GetSlug()}
+                                />}
+                            />
+                        }
+                    </div>
                 </div>
 
-
-                <div className="fighter-card-stats">
-                    {ReturnStats(modelcollectionObject.Stats)  /* Stats */}
-                </div>
-
-
+                {/* @TODO: what is this? */}
                 {statchoices.length > 0 &&
-                    <div>
+                    <div className={'findme-5 statchoices'}>
                         {statchoices.map((item) => (
                             <span key={item} className="">
                                 {
@@ -220,35 +248,45 @@ const ModelDisplay = (props: any) => {
                         ))}
                     </div>
                 }
-                <GenericCollapsableBlockDisplay
-                    d_name={"Lore"}
-                    d_colour={"grey"}
-                    d_state={false}
-                    d_margin={"sml"}
-                    d_border={false}
-                    bordertype={0}
-                    d_method={() => <div className="borderthin bordergrey">
-                        <div className="size-smaller ">
-                            {returnDescription(modelcollectionObject, modelcollectionObject.Lore) /* Lore */}
-                        </div>
-                    </div>}/>
 
                 <RulesModelDisplayCollapse
-                    name={"Equipment"}
+                    name={"Rules"}
                     state={false}
                     method={() => <div>
-                        {returnDescription(modelcollectionObject, modelcollectionObject.Description) /* Lore */}
+                        {returnDescription(modelcollectionObject, modelcollectionObject.Description) /* Equipment Description */}
                     </div>
-                    }/>
+                    }
+                />
+
+
+                {modelcollectionObject.Abilities.length > 0 &&
+
+                    <>
+                        <RulesModelDisplayCollapse
+                            name={"Abilities"}
+                            state={false}
+                            method={() => <>
+                                {modelcollectionObject.Abilities.map((item) => (
+                                    <React.Fragment
+                                        key={"model_ability_" + modelcollectionObject.ID + "_ability_id_" + item.ID}>
+                                        <RulesModelDisplayAbility data={item}/>
+                                    </React.Fragment>
+                                ))}
+                            </>
+                            }
+                        />
+                    </>
+                }
 
                 {((modelcollectionObject.EquipmentList.length > 0) || (equiprestrictions.length > 0) || (equiplimits.length > 0)) &&
 
                     <RulesModelDisplayCollapse
                         name={"Equipment"}
                         state={false}
-                        method={() => <div>
-                            {((equiprestrictions.length > 0) || (equiplimits.length > 0)) &&
+                        method={() => <>
 
+                            {/* @TODO: Is this needed? What is this? Where is it used?*/}
+                            {((equiprestrictions.length > 0) || (equiplimits.length > 0)) &&
                                 <div className="borderthin bordergrey">
                                     <div className=" ">
                                         <ul className="">
@@ -270,104 +308,23 @@ const ModelDisplay = (props: any) => {
                                     </div>
                                 </div>
                             }
+
+                            {/* Equipment list */}
                             {(modelcollectionObject.EquipmentList.length > 0) &&
-
-                                <div className={'container bordergrey'}>
-                                    <div className={"backgroundgrey"}/>
-                                    <div className="content">
-                                        <div>
-                                            {modelcollectionObject.EquipmentList.map((item) => (
-                                                <div key={item.ID}>
-                                                    <ModelEquipmentDisplay team_col={modelcollectionObject.Team}
-                                                                           data={item}/>
-                                                </div>
-                                            )) /* Abilities */}
-                                        </div>
-                                    </div>
-                                </div>
-
+                                <>
+                                    {modelcollectionObject.EquipmentList.map((item) => (
+                                        <ModelEquipmentDisplay
+                                            key={item.ID}
+                                            team_col={modelcollectionObject.Team}
+                                            data={item}/>
+                                    )) /* Abilities */}
+                                </>
                             }
-                        </div>}
+                        </>}
                     />
+                }
 
-                    // <GenericCollapsableBlockDisplay
-                    //     d_name={"Equipment"}
-                    //     d_colour={"grey"}
-                    //     d_state={false}
-                    //     d_margin={"sml"}
-                    //     d_border={false}
-                    //     bordertype={0}
-                    //     d_method={() => <div>
-                    //         {((equiprestrictions.length > 0) || (equiplimits.length > 0)) &&
-                    //
-                    //             <div className="borderthin bordergrey">
-                    //                 <div className=" ">
-                    //                     <ul className="">
-                    //                         {equiprestrictions.map((item) => (
-                    //                             <li key={item} className=" nowrap">
-                    //                                 {
-                    //                                     item
-                    //                                 }
-                    //                             </li>
-                    //                         ))}
-                    //                         {equiplimits.map((item) => (
-                    //                             <li key={item} className="nowrap">
-                    //                                 {
-                    //                                     item
-                    //                                 }
-                    //                             </li>
-                    //                         ))}
-                    //                     </ul>
-                    //                 </div>
-                    //             </div>
-                    //         }
-                    //         {(modelcollectionObject.EquipmentList.length > 0) &&
-                    //
-                    //             <div className={'container bordergrey'}>
-                    //                 <div className={"backgroundgrey"}/>
-                    //                 <div className="content">
-                    //                     <div>
-                    //                         {modelcollectionObject.EquipmentList.map((item) => (
-                    //                             <div key={item.ID}>
-                    //                                 <ModelEquipmentDisplay team_col={modelcollectionObject.Team}
-                    //                                                        data={item}/>
-                    //                             </div>
-                    //                         )) /* Abilities */}
-                    //                     </div>
-                    //                 </div>
-                    //             </div>
-                    //
-                    //         }
-                    //     </div>}/>
-                }
-                {modelcollectionObject.Abilities.length > 0 &&
-                    <div>
-                        <GenericCollapsableBlockDisplay
-                            d_name={"Abilities"}
-                            d_colour={"grey"}
-                            d_state={false}
-                            d_margin={"sml"}
-                            bordertype={0}
-                            d_method={() => <>
-                                {modelcollectionObject.Abilities.map((item) => (
-                                    <div key={"model_ability_" + modelcollectionObject.ID + "_ability_id_" + item.ID}>
-                                        <GenericCollapsableBlockDisplay
-                                            d_name={item.Name}
-                                            d_colour={"grey"}
-                                            d_state={false}
-                                            d_margin={"sml"}
-                                            d_border={false}
-                                            bordertype={0}
-                                            d_method={() => <div className="borderthin bordergrey">
-                                                <div className="">
-                                                    <AbilityDisplay data={item}/>
-                                                </div>
-                                            </div>}/>
-                                    </div>
-                                )) /* Abilities */}
-                            </>}/>
-                    </div>
-                }
+                {/* @TODO: Is this needed here?*/}
                 {modelcollectionObject.UpgradeList.length > 0 &&
                     <div>
                         <GenericCollapsableBlockDisplay
@@ -397,6 +354,7 @@ const ModelDisplay = (props: any) => {
                     </div>
                 }
 
+                {/* @TODO: What is this? */}
                 {modelcollectionObject.Models.length > 0 && false &&
                     <>
                         <GenericCollapsableBlockDisplay
@@ -419,37 +377,17 @@ const ModelDisplay = (props: any) => {
                     </>
                 }
 
-                <div className="fighter-card-meta fighter-card-meta-below">
-                    <div className="fighter-meta-entry-simple fighter-base">
-                        <span className="fighter-meta-label">
-                            Base:
-                        </span>
-                        <span className="fighter-meta-value">
-                            {modelcollectionObject.Stats.base + "mm"}
-                        </span>
-                    </div>
-
-                    <div className="fighter-meta-entry-simple fighter-keywords">
-                        <span className="fighter-meta-label">
-                            Keywords:
-                        </span>
-                        <span className="fighter-meta-value">
-                            {modelcollectionObject.KeyWord.map((item) => (
-                                <span className=''
-                                      key={"model_keyword_" + modelcollectionObject.ID + "_keyword_id_" + item.ID}>
-                                    <GenericHover
-                                        d_colour={modelcollectionObject.Team}
-                                        titlename={item.Name}
-                                        d_name={item.Name}
-                                        d_type={""}
-                                        d_method={() => <KeywordDisplay data={item}/>}
-                                    />
-                                    {" "}
-                                </span>
-                            )) /* Keywords */}
-                        </span>
-                    </div>
-                </div>
+                { modelcollectionObject.Lore.length > 0 &&
+                    <RulesModelDisplayCollapse
+                        name={"Lore"}
+                        state={false}
+                        method={() =>
+                            <>
+                                {returnDescription(modelcollectionObject, modelcollectionObject.Lore) /* Lore */}
+                            </>
+                        }
+                    />
+                }
 
             </div>
         </ErrorBoundary>
