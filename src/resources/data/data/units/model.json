@@ -2056,7 +2056,15 @@
         "name": "Plague Knight",
         "source": "core",
         "tags": {},
-        "contextdata": {            
+        "contextdata": {         
+            "special_category_upgrades": {
+                "upgrades": [
+                    {
+                        "category": "knight_ranks",
+                        "count": 1
+                    }
+                ]
+            },
             "validate_final_unit_equipment": {
                 "requirements": [
                     {
