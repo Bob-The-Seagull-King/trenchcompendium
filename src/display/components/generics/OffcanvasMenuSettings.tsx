@@ -39,8 +39,8 @@ const OffcanvasMenuSettings: React.FC = () => {
     return (
         <ErrorBoundary fallback={<div>Something went wrong with RulesMenuSettings.tsx</div>}>
 
-            <div className={'rules-settings'}>
-                <div className={'rules-settings-title'} onClick={() => {
+            <div className={'OffcanvasMenuSettings'}>
+                <div className={'OffcanvasMenuSettings-title'} onClick={() => {
                     setOpen(!open)
                 }}>
                     {'Settings'}
@@ -51,7 +51,7 @@ const OffcanvasMenuSettings: React.FC = () => {
                 </div>
 
                 <Collapse in={open}>
-                    <div className={'rules-settings-content'}>
+                    <div className={'OffcanvasMenuSettings-content'}>
                         <div className={'spacer-20'}></div>
                         <div className="form-check form-switch">
                             <input className="form-check-input"
