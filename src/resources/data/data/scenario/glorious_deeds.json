@@ -683,5 +683,80 @@
             "glossary": [{"val": "BLOOD MARKERS", "id": "kw_bloodmarker"}]
             }
         ]
+    },
+    {
+        "id": "gd_dragonslayer",
+        "source": "core",
+        "tags": {  },
+        "contextdata": {
+            "override_points": {
+                "value": 2
+            }
+         },
+        "name": "Dragon Slayer",
+        "description":  [
+            {
+            "tags": {},
+            "content": "Take the Dragon Out of Action with one of your models (that is on top of it) using a melee weapon. This Deed is worth two Glory Points."
+            }
+        ]
+    },
+    {
+        "id": "gd_genocidal",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "Genocidal",
+        "description":  [
+            {
+            "tags": {},
+            "content": "Take at least three Peasants Out of Action with the same model."
+            }
+        ]
+    },
+    {
+        "id": "gd_opportunist",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "Opportunist",
+        "description":  [
+            {
+            "tags": {},
+            "content": "Use a Peasant during its Activation to lure the Dragon into moving over an enemy model. Your model whose turn was prior to the Peasant’s gains the Glory Point."
+            }
+        ]
+    },
+    {
+        "id": "gd_offmyback",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "Off My Back",
+        "description":  [
+            {
+            "tags": {},
+            "content": "Make an enemy model that is on top of the Dragon fall due to your action (shooting, melee, Supernatural Power etc)."
+            }
+        ]
+    },
+    {
+        "id": "gd_firewithfire",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "Fire With Fire",
+        "description":  [
+            {
+            "tags": {},
+            "content": "Inflict 2+ BLOOD MARKERS on the Dragon with the same model, using a weapon with either the Keyword FIRE, GAS or SHRAPNEL.",
+            "glossary": [
+                {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"},
+                {"val": "FIRE", "id": "kw_fire"},
+                {"val": "GAS", "id": "kw_gas"},
+                {"val": "SHRAPNEL", "id": "kw_shrapnel"}
+            ]
+            }
+        ]
     }
 ]

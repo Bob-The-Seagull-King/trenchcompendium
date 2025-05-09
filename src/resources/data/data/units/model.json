@@ -2506,5 +2506,155 @@
         },
         "keywords" : ["kw_fear","kw_tough"],
         "abilities" : ["ab_unrelenting","ab_resilient"]
+    },
+    {
+        "id": "md_thedragon",
+        "name": "The Dragon",
+        "source": "core",
+        "tags": {},
+        "contextdata": { 
+            "stat_options": { 
+                "options": [
+                    [
+                        {
+                            "base": [120],
+                            "movement": 10
+                        },
+                        {
+                            "base": [210],
+                            "movement": 9
+                        },
+                        {
+                            "base": [260],
+                            "movement": 8
+                        }
+                    ]
+                ]
+            }
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The Dragon’s model must be placed on a base of at least 120mm and can go up to a 300mm base. You can use a Larval Beast to proxy the model, or a Possessed Tank or even an actual Dragon model. The larger the model is the better – however, the less Movement it also has, according to the following metrics:"
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [
+                    {
+                        "tags": {"desc_type" : "list"},
+                        "content": "",
+                        "subcontent": [                    
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "On a 120mm to 200mm base = Movement: 10”"
+                            },                  
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "On a 210mm to 250mm base = Movement: 9”"
+                            },                  
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "On a 260mm to 300mm base = Movement: 8”"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The Dragon is considered both an enemy model and as Difficult Terrain. When in base contact with it, a warband model can Climb the Dragon, Move through it, beneath it, on it and start or end its movement beneath it or on it. Ideally, the Dragon’s model should be big enough to allow for two models on a 60mm base to stand on top of it (or up to four models on a 25mm base). A model that is on top of the Dragon rolls with +1 DICE to hit it and +1 DICE to injure it. However, note that all ACTIONS taken by a model on top of the Dragon are considered as RISKY. Additionally, when the Dragon uses its Move, any model on top of it must immediately succeed at a RISKY ACTIONS. On a fail, the model is forcibly moved 2” in a direction of the opponent’s choice and is knocked Down. If this movement forces the model to fall from the Dragon, the model’s owner must also roll on the Injury Chart, as per the rules of Falling.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "ACTIONS", "id": "kw_action"},
+                    {"val": "RISKY", "id": "kw_riskyaction"}
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "When Activated, the Dragon will Move towards the nearest Peasant model via the fastest route possible. The Dragon cannot Charge as usual. Instead, if its movement takes it into contact with a model it counts as charging and engages that model in melee combat, if that is the Dragon’s intended target. When moving toward a targeted model, if the Dragon comes into base contact with another model that it is not targeting, it does not engage in melee combat with it, even if the model intends to engage it. Instead, the Dragon will run right over them. Any model moved over by the Dragon suffers an injury. The player controlling the Dragon immediately rolls on the Injury Chart with +1 DICE to injure, for any models trampled by the Dragon.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"}
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "When attacked by a warband model, the Dragon will seek out the last warband model that attacked it on its next Activation. The Dragon will Move toward the model via the fastest route possible (even through certain impassable terrain pieces, if possible. See below). The Dragon ignores movement penalties and effects caused by Difficult Terrain and Dangerous Terrain. If the last model that attacked the Dragon is on top of it, or if the Dragon cannot reach the model that attacked it in one Activation, on its next Activation it will shift its focus to either move toward the nearest Peasant model, the last model that attacked it or to leave the area. If the Dragon attacks a targeted model at the start of its turn, it will then use its Movement to either move toward the nearest Peasant model or to leave the area. "
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Note that the Dragon does not need to have line of sight to a model to Move toward it. "
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "If there are no more Peasant models present on the table before the end of the game, having either escaped the area (see the Peasant section) or been taken Out of Action, the Dragon will shift its focus to leave the area to continue its rampage elsewhere, using its Movement when Activated to reach the nearest edge of the table. If the Dragon comes into base contact with any of the table’s edges, it successfully leaves the area. See the Victory Conditions section. Note that the Dragon cannot Dash. "
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The Dragon’s limbs function as its weapons. It is armed with its Stomp, its Tail Swipe and its Fire Breath. These are parts of the creature itself and cannot be removed or lost in any way. When the Dragon comes into base contact with a model that it has targeted, it will make two attack ACTIONS with its Stomp in Melee Combat (so it can make two attacks per Activation with this weapon).",
+                "glossary": [
+                    {"val": "ACTIONS", "id": "kw_action"}
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "If the Dragon engages in Melee combat with multiple models, it will make one attack ACTION against each model, with its Tail Swipe instead (see below). However, after the Dragon is knocked Down twice, as per its Undying special rule (see below), it loses its tail, meaning that it cannot use its Tail Swipe attack any longer.",
+                "glossary": [
+                    {"val": "ACTION", "id": "kw_action"}
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "If the Dragon’s movement does not get it into Melee range of a model, or if the model moves away from its Melee range but remains within range to use its Fire Breath, it attacks once with it instead in Ranged Combat."
+            }
+        ],
+        "lore": [  ],
+        "team": "scenario",
+        "stats" : {
+            "melee": 3,
+            "ranged": 3,
+            "base": [120,80],
+            "armour": -3,
+            "movetype": 0,
+            "potential": 2
+        },
+        "keywords" : ["kw_fear"],
+        "abilities" : ["ab_undying","ab_resistant","ab_siegeweapon"]
+    },
+    {
+        "id": "md_thepeasant",
+        "name": "The Peasant",
+        "source": "core",
+        "tags": {},
+        "contextdata": { 
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The Peasant has no attacks, equipment or abilities. They can only Move, as per their normal Movement, and cannot Dash. When Activated, a Peasant will always try to move as far away as possible from the Dragon, toward one of the table’s edges. In this path, they should also try to keep as much distance as possible from any warband model. However, note that the Peasant will not Move into Dangerous Terrain and will also try to avoid Difficult Terrain, if possible."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "If a Peasant comes into base contact with any of the table’s edges, it successfully leaves the area. Remove the corresponding Peasant model from the board."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The afflicted peasantry’s feeble nature makes them vulnerable in any confrontation. Attacks made against a Peasant are made with +2 DICE to Hit and +2 DICEto injure.",
+                "glossary": [
+                    {"val": "+2 DICE", "id": "kw_plusdice"}
+                ]
+            }
+        ],
+        "lore": [  ],
+        "team": "scenario",
+        "stats" : {            
+            "movement": 6,
+            "base": [25],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 2
+        },
+        "keywords" : [],
+        "abilities" : []
     }
 ]

@@ -696,6 +696,59 @@
         "options": []
     },
     {
+        "id": "ab_undying",
+        "name": "Undying",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Dragon is an extremely resilient opponent. If a model’s attack would take the Dragon Out of Action, it is knocked Down instead. Every time the Dragon is knocked Down this way, any BLOOD MARKERS it may have are removed. Use a dice to match the corresponding number of times the Dragon has been knocked Down. The Dragon must then be knocked Down in this way two more times (for a total of three) before it can be taken Out of Action. However, note that on its last “life”, the Dragon can only be taken Out of Action then when it accumulates six BLOOD MARKERS. These BLOOD MARKERS can then be used to cause a Blood Bath or to add +DICE to kill the Dragon.",
+                "glossary": [
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"},
+                    {"val": "+DICE", "id": "kw_plusdice"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_resistant",
+        "name": "Resistant",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "At the start of each of its Activations, the Dragon can remove one BLOOD MARKER from itself, if it has any. Additionally, attacks with the Keyword GAS, FIRE or SHRAPNEL suffer a -1 DICE penalty to injure the Dragon.",
+                "glossary": [
+                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"},
+                    {"val": "-1 DICE", "id": "kw_minusdice"},
+                    {"val": "FIRE", "id": "kw_fire"},
+                    {"val": "GAS", "id": "kw_gas"},
+                    {"val": "SHRAPNEL", "id": "kw_shrapnel"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_siegeweapon",
+        "name": "Siege Weapon",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Dragon’s massive size allows it to destroy buildings and other pieces of structures that are up to half of its base size. If what would normally be considered as an impassable terrain piece, that is in the Dragon’s path and corresponds to the metrics above, when the Dragon moves it will pass over it, crumbling the structure completely. Remove the piece from the board – the area where it was becomes Difficult Terrain the same size as the building was. Additionally, any model that is wholly within the building’s footprint (previously accorded by the players) when it crumbles must immediately roll on the Injury Chart, ignoring armour."
+            }
+        ],
+        "options": []
+    },
+    {
         "id": "ab_levitate",
         "name": "Levitate",
         "source": "core",

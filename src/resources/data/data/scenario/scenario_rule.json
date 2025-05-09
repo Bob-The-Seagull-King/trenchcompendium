@@ -583,5 +583,49 @@
             }
         ],
         "options": []
+    },
+    {
+        "id": "sr_thedragon",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "The Dragon",
+        "description":  [
+            {
+            "tags": {"desc_type" : "paragraph"},
+            "content": "The Dragon is activated once per turn. At the end of each of a player’ model Activation, the player must roll a 1D6. On a roll of 5-6, the Dragon is Activated subsequently, before the opponent activates one of their own models. The same player then acts out the Dragon’s actions, as described in its profile. If by the end of the turn the Dragon hasn’t been activated, it is before the start of the next turn. Below is the Dragon’s profile and special rules:"
+            },
+            {
+            "tags": {"desc_type" : "model"},
+            "content": "md_thedragon"
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "sr_thepeasants",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "The Peasants",
+        "description":  [
+            {
+            "tags": {"desc_type" : "paragraph"},
+            "content": "The villages surrounding the frontlines have been tainted by all sorts of maladies and misfortune. The war has taken its toll on the peasantry, many of which are contaminated with never seen before afflictions. Hence the main reason why they have not been evacuated from the battlefield. However, their taint has attracted the attention of the Dragon. Rescuing them is not an option. They pose a great risk to the troops. "
+            },
+            {
+            "tags": {"desc_type" : "paragraph"},
+            "content": "So, putting an end to their miserable lives is the only right thing to do and the order that every warband sent to claim the Dragon’s head has been given to by their higher ups. "
+            },
+            {
+            "tags": {"desc_type" : "paragraph"},
+            "content": "All Peasants are deployed at the start of the game (see the Battlefield section). Each Peasant is activated once per turn. At the end of each of a player’ model Activation, the same player also Activates a Peasant model anywhere on the table that hasn’t been Activated yet. The player then acts out the Peasant’s actions, as described in its profile. The players alternate between Activating the Peasants until all have been Activated in that turn. Below is the Peasant’s profile and special rules:"
+            },
+            {
+            "tags": {"desc_type" : "model"},
+            "content": "md_thepeasant"
+            }
+        ],
+        "options": []
     }
 ]

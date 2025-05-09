@@ -1009,13 +1009,17 @@
         "tags": {"desc_type" : "paragraph"},
         "name": "Dragon Hunt",
         "img_link": "https://i.imgur.com/jYKeLrM.png",
-        "description":  [],
+        "description":  [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Reports from the front lines tell of a massive entity tearing through the afflicted, plague-ridden villages surrounding No Man’s Land. Some claim it to be a newborn Larval Beast, a Possessed Tank, others an Angelic creature gone rogue and some even say it is an actual Dragon. The descriptions vary, but all agree on its immense size and the trail of destruction and bloodshed it leaves behind. Showing no allegiance, the creature has trampled warbands and strongholds alike, spreading chaos indiscriminately. Hunting down “The Dragon,” as it has been named in the scattered reports, has become a top priority. The warband that claims its head will secure prestige and glory across the theatre of war."
+            }],
         "forces": {
             "even_match": true,
             "description": [
                 {
                     "tags": {"desc_type" : "paragraph"},
-                    "content": ""
+                    "content": "Both sides use their entire forces."
                 }
             ]
         },
@@ -1023,23 +1027,27 @@
             "field_size":  [
                 {
                     "tags": {"desc_type" : "paragraph"},
-                    "content": "."
+                    "content": "The game is played on a standard-size battlefield (we suggest 4’ x 4’)."
                 }
             ],
             "standard_terrain": true,
             "extra_features":  [
                 {
                     "tags": {"desc_type" : "paragraph"},
-                    "content": ""
+                    "content": "Place a model on a base of at least 120mm to represent the Dragon at the centre of the table, as indicated on the map by the Objective Marker."
+                },
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Each player then places three models each (that are on 25mm bases) where they see fit. These represent peasants. Note that the peasants must be placed at least 6” away from another model, at least 8” away from the Dragon, at least 6” away from a player’s deployment zone and cannot be placed on – or be surrounded by – Impassable Terrain."
                 }
             ]
          },
         "infiltrators": { 
-            "allowed": 0,
+            "allowed": 2,
             "description": [                
                 {
                     "tags": {"desc_type" : "paragraph"},
-                    "content": ""
+                    "content": "Infiltrators can be used in this scenario but they cannot be placed within 8” of the Dragon model."
                 }
             ]
         },
@@ -1048,32 +1056,74 @@
             "description": [
                 {
                     "tags": {"desc_type" : "paragraph"},
-                    "content": ""
+                    "content": "The players roll-off. The loser of the roll-off chooses which deployment zone will be theirs. The other deployment zone will be their opponent’s."
+                },
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "The players then take it in turns to deploy one model at a time, starting with the player who has more models in their warband (roll-off if both have the same number of models)."
+                },
+                {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Models must be set up wholly within their own deployment zone. If a player runs out of models to set up, the other player sets up all their models afterwards. Once the players have set up their models, deployment ends and the battle begins."
                 }
             ]
         },
         "battle_length": { 
             "min": 4,
-            "max": 4,
+            "max": 5,
             "description": [                            
                 {
                     "tags": {"desc_type" : "paragraph"},
-                    "content": ""
+                    "content": "At the end of the fourth turn, a player rolls 1D6. On a roll of 1-2, the battle ends. Otherwise, the game lasts for five turns."
                 }
             ]
         },
         "victory_conditions":{ "description": [
             {
                 "tags": {"desc_type" : "paragraph"},
-                "content": ""
+                "content": "If one warband is wiped out completely or loses their Morale test, the game ends and the opposing warband wins. Otherwise, keep a running tally of Victory Points for both sides. The players accumulate VPs as follows:"
             },
             {
-                "tags": {"desc_type" : "list"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "",
-                "subcontent": [                    
+                "subcontent": [
                     {
-                        "tags": {"desc_type" : "default"},
-                        "content": ""
+                        "tags": {"desc_type" : "list"},
+                        "content": "",
+                        "subcontent": [                    
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "A player scores four VPs for each time they knock Down the Dragon with one of their warband models."
+                            },             
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "A player scores six VPs for taking the Dragon Out of Action with one of their warband models."
+                            },             
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "A player scores two VPs for each Peasant taken Out of Action by one of their warband models. If a Peasant model escapes the area, neither player gains the VPs for that model."
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Calculate VPs at the end of the game for both players and add them together. The player with the higher number of VPs wins, otherwise the game is a draw. However, the following condition can bring the game to an immediate end, regardless of the VPs the players may have accumulated:"
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [
+                    {
+                        "tags": {"desc_type" : "list"},
+                        "content": "",
+                        "subcontent": [                    
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "If the Dragon successfully leaves the battlefield, neither of the players win the game, regardless of the VPs they may have accumulated up until this point. Take into account only the Glorious Deeds performed, if any, and award no VPs."
+                            }
+                        ]
                     }
                 ]
             }
@@ -1082,12 +1132,12 @@
             "description": [
                 {
                     "tags": {"desc_type" : "paragraph"},
-                    "content": ""
+                    "content": "Players score one Glory Point for every model that completes any of the following Glorious Deeds. Glory Points for these can only be gained once – whichever player completes them first gets the Glory Points!"
                 }
             ],
-            "deeds": [],
+            "deeds": ["gd_dragonslayer","gd_genocidal","gd_opportunist","gd_offmyback","gd_firewithfire"],
             "optional_deeds": []
         },
-        "special_rules": [ ]
+        "special_rules": ["sr_thedragon","sr_thepeasants"]
     }
 ]

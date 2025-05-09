@@ -384,5 +384,16 @@
         "model_id": ["md_beastofnomansland"],
         "mandatory_equipment": ["eq_beastofnomanslandclaws","eq_beastofnomanslandbite"],
         "removable": false
+    },
+    {
+        "id": "rel_md_eq_thedragon",
+        "source": "core",
+        "tags": {},
+        "name": "The Dragon's Equipment",
+        "contextdata": {},
+        "options": [],
+        "model_id": ["md_thedragon"],
+        "mandatory_equipment": ["eq_thedragon_stomp","eq_thedragon_firebreath","eq_thedragon_tailswipe"],
+        "removable": false
     }
 ]

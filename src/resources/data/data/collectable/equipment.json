@@ -6484,5 +6484,99 @@
         "options": [],
         "keywords": ["kw_shrapnel","kw_riskyaction","kw_blast"],
         "modifiers": []
+    },
+    {
+        "id": "eq_thedragon_stomp",
+        "name": "Stomp",
+        "source": "core",
+        "tags": {"action": true, "weapon": true, "model": true},
+        "category": "melee",
+        "distance": null,
+        "stats": {
+            "hands_melee": 1,
+            "melee": true
+        },
+        "contextdata": {
+            "get_weapon": {},
+            "injury_bonus": {"bonuses": [{"type": "dice", "value": 1}]},
+            "hit_bonus": {"bonuses": [{"type": "dice", "value": 1}]},
+            "ignore_armour": {}
+        },
+        "description": [             
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The Dragon treats its Stomp as a melee weapon that grants a +1 DICE bonus to hit (for total of +4 DICE). Additionally, the attack ignores any armour worn by the target and has a +1 DICE bonus to injure. The Stomp takes one “hand” to wield. ",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "+4 DICE", "id": "kw_plusdice"}
+                ]
+            }   
+        ],
+        "lore": [
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": ["+1D to Injuries","+1D to Hit","Ignore Armour"]
+    },
+    {
+        "id": "eq_thedragon_firebreath",
+        "name": "Bonebreaker Mace",
+        "source": "core",
+        "tags": {"action": true, "weapon": true, "model": true},
+        "category": "ranged",
+        "distance": null,
+        "stats": {
+            "hands_ranged": 2,
+            "ranged": true
+        },
+        "contextdata": {
+            "get_weapon": {},
+            "auto_hit": {}
+        },
+        "description": [             
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The Dragon treats its Fire Breath as a ranged weapon with 10” range. It hits up to two models within range automatically with the Attack ACTION as long as they are within 6” of each other. This attack has the Keyword FIRE, so it causes an additional +1 BLOOD MARKER on enemies it hits, even if no other damage is caused. Additionally, the attack ignores any armour worn by the target. The Fire Breath does not take any hands to wield.",
+                "glossary": [
+                    {"val": "ACTION", "id": "kw_action"},
+                    {"val": "FIRE", "id": "kw_fire"},
+                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"}
+                ]
+            }   
+        ],
+        "lore": [
+        ],
+        "options": [],
+        "keywords": ["kw_fire"],
+        "modifiers": ["2 Attacks"]
+    },
+    {
+        "id": "eq_thedragon_tailswipe",
+        "name": "Tail Swipe",
+        "source": "core",
+        "tags": {"action": true, "weapon": true, "model": true},
+        "category": "melee",
+        "distance": null,
+        "stats": {
+            "hands_melee": 1,
+            "melee": true
+        },
+        "contextdata": {
+            "get_weapon": {},
+            "injury_bonus": {"bonuses": [{"type": "flat", "value": 1}]}
+        },
+        "description": [   
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Its huge reach means that the Dragon may make one Melee Attack ACTION against each enemy model it is fighting in Melee.",
+                "glossary": [
+                    {"val": "ACTION", "id": "kw_action"}
+                ]
+            }
+        ],
+        "lore": [   ],
+        "options": [],
+        "keywords": ["kw_heavy"],
+        "modifiers": ["+1 to Injuries"]
     }
 ]
