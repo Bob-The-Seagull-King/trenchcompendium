@@ -242,7 +242,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
                 
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
                 
-                    <div className="borderthin bordergrey">
+                    <div className="DisplayPageStatic-armoury-returnDisplay">
                         <GenericCollapsableBlockDisplay 
                             d_name={item.Name} 
                             d_colour={"grey"} 

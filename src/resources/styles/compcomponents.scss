@@ -116,11 +116,6 @@
     width: 10rem;
   }
 
-  .itemrow_container {
-    display: grid;
-    grid-template-columns: 1fr 3fr;
-  }
-
   .facdisplayrow_container {
     display: grid;
     grid-template-columns: 2fr 2fr 2fr;
@@ -135,11 +130,6 @@
   .buttonrow_container {
     display: grid;
     grid-template-columns: 5fr 1fr 5fr;
-  }
-
-  .itemrow_box {
-    display: flex;
-    align-items: stretch; 
   }
 
   .overcomeBackground {

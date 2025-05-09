@@ -51,7 +51,7 @@ const EquipmentDisplay = (props: any) => {
 
     return (
         <ErrorBoundary fallback={<div>Something went wrong with EquipmentDisplay.tsx</div>}>
-            <div className='backgroundBgCard'>
+            <div className='EquipmentDisplay'>
                 <div className="">
                     {ReturnStats(abilityObject.Stats, abilityObject)  /* Stats */}
                 </div>
