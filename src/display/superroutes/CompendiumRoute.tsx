@@ -15,7 +15,7 @@ import RulesMenuBody from "../components/rules-content/RulesMenuBody";
 import MenuBody from "../components/subcomponents/MenuBody";
 import CollectionCompendiumDisplay from '../pages/CollectionCompendiumDisplay';
 import { ToolsController } from '../../classes/_high_level_controllers/ToolsController';
-import ToolsRandomScenario from 'display/pages/ToolsRandomScenario';
+import ToolsRandomScenario from '../pages/ToolsRandomScenario';
 
 interface IControllerProp {
     controller : ControllerController; // The controller being passed through
