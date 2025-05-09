@@ -9,17 +9,14 @@ import {faChevronLeft} from '@fortawesome/free-solid-svg-icons'
 import { useNavigate } from 'react-router-dom';
 import { ControllerController } from '../../../classes/_high_level_controllers/ControllerController';
 import RulesMenuItem from "./RulesMenuItem";
-import RulesMenuSettings from "./RulesMenuSettings";
 import { ToolsController } from '../../../classes/_high_level_controllers/ToolsController';
 
-interface IControllerProp {
-    controller : ControllerController; // The controller being passed through
-    closeFunc? : any;
-    showState? : any;
-    responseshow? : string;
+interface RulesMenuBodyProps {
+    controller: any;
+    onBack?: () => void;
 }
 
-const RulesMenuBody: React.FC<IControllerProp> = (prop) => {
+const RulesMenuBody: React.FC<RulesMenuBodyProps> = ({ controller, onBack }) => {
 
     // Navigation
     const navigate = useNavigate();
@@ -29,48 +26,6 @@ const RulesMenuBody: React.FC<IControllerProp> = (prop) => {
     }
 
     const [menu_struc] = useState(returnMenuStruc())
-    const [warband_struc, setwarbands] = useState([{
-        title: "New Warband",
-        slug: "new"
-    }])
-    const [keyvar, setkeyvar] = useState(0);
-
-    
-    useEffect(() => {
-        async function SetWarbands() {
-            
-            const SetOfWarbands : any[] = []
-
-            const tools : ToolsController = ToolsController.getInstance();
-            await tools.UserWarbandManager.GetItemsAll();
-
-            for (let i = 0; i < tools.UserWarbandManager.WarbandItemList.length; i++) {
-                SetOfWarbands.push(
-                    {
-                        title: tools.UserWarbandManager.WarbandItemList[i].Name,
-                        slug: tools.UserWarbandManager.WarbandItemList[i].ID
-                    }
-                )
-            }
-            
-            const WarbandSet : any[] = [
-                {
-                    title: "New Warband",
-                    slug: "new"
-                },
-                {
-                    title: "Your Warbands",
-                    slug: "edit",
-                    children: SetOfWarbands
-                }
-            ]
-
-            setwarbands(WarbandSet);
-            setkeyvar(keyvar + 1);
-        }
-
-        SetWarbands();
-    }, []);
 
     function returnMenuStruc() {
         const menu_structure = [
@@ -81,7 +36,7 @@ const RulesMenuBody: React.FC<IControllerProp> = (prop) => {
                     {
                         title: "Rules",
                         slug: "gamerule",
-                        controller: prop.controller.GameRulesCollectionController
+                        controller: controller.GameRulesCollectionController
                     }      ,
                     {
                         title: "Keywords",
@@ -96,7 +51,7 @@ const RulesMenuBody: React.FC<IControllerProp> = (prop) => {
             {
                 title: "Factions",
                 slug: "faction",
-                controller: prop.controller.FactionCollectionController
+                controller: controller.FactionCollectionController
             },
             {
                 title: "Armoury & Equipment",
@@ -109,7 +64,7 @@ const RulesMenuBody: React.FC<IControllerProp> = (prop) => {
             {
                 title: "Scenarios",
                 slug: "scenario",
-                controller: prop.controller.ScenarioCollectionController,
+                controller: controller.ScenarioCollectionController,
                 children: [
                     {
                         title: "Random Scenario",
@@ -124,17 +79,17 @@ const RulesMenuBody: React.FC<IControllerProp> = (prop) => {
                     {
                         title: "Rules",
                         slug: "campaignrule",
-                        controller: prop.controller.CampaignRulesCollectionController
+                        controller: controller.CampaignRulesCollectionController
                     },
                     {
                         title: "Patrons",
                         slug: "patron",
-                        controller: prop.controller.PatronCollectionController
+                        controller: controller.PatronCollectionController
                     },
                     {
                         title: "Exploration",
                         slug: "explorationtable",
-                        controller: prop.controller.ExplorationTableCollectionController
+                        controller: controller.ExplorationTableCollectionController
                     },
                     {
                         title: "Skills",
@@ -149,7 +104,7 @@ const RulesMenuBody: React.FC<IControllerProp> = (prop) => {
             {
                 title: "Errata",
                 slug: "errata",
-                controller: prop.controller.ErrataRulesCollectionController
+                controller: controller.ErrataRulesCollectionController
             }
         ]
         return menu_structure;
@@ -158,11 +113,19 @@ const RulesMenuBody: React.FC<IControllerProp> = (prop) => {
 
     return (
         <ErrorBoundary fallback={<div>Something went wrong with RulesMenuBody.tsx</div>}>
-            <div className={'RulesMenuBody rules-menu-body'}>
+            <div className={'RulesMenuBody menu-body'}>
                 <div className={'rules-menu-header'}>
-                    <div onClick={() => NavigateHome()} className={'home-link'}>
-                        <FontAwesomeIcon icon={faChevronLeft} />
-                    </div>
+                    {onBack &&
+                        <div onClick={onBack} className={'home-link'}>
+                            <FontAwesomeIcon icon={faChevronLeft}/>
+                        </div>
+                    }
+
+                    {!onBack &&
+                        <div onClick={() => NavigateHome()} className={'home-link'}>
+                            <FontAwesomeIcon icon={faChevronLeft}/>
+                        </div>
+                    }
 
                     <div onClick={() => navigate('/compendium/')} className={'compendium-link'}>
                         {'Rules Compendium'}
@@ -171,26 +134,10 @@ const RulesMenuBody: React.FC<IControllerProp> = (prop) => {
 
                 {menu_struc.map((item => (
                     <RulesMenuItem key={item.title}
-                    data={[item]}
+                                   data={[item]}
                     />
                 )))}
 
-                <div className={'rules-menu-header'}>
-                    <div onClick={() => NavigateHome()} className={'home-link'}>
-                        <FontAwesomeIcon icon={faChevronLeft} />
-                    </div>
-
-                    <div onClick={() => navigate('/warband/')} className={'compendium-link'}>
-                        {'Warband Manager'}
-                    </div>
-                </div>
-
-                <RulesMenuItem key={'warbands' + keyvar.toString()}
-                data={warband_struc}
-                parentPath={'warband'}
-                />
-
-                <RulesMenuSettings />
             </div>
         </ErrorBoundary>
 

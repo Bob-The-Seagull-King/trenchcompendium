@@ -11,7 +11,7 @@ import {Collapse} from "react-bootstrap";
 
 const DefaultState = false;
 
-const RulesMenuSettings: React.FC = () => {
+const OffcanvasMenuSettings: React.FC = () => {
 
     const [theme, setTheme] = useGlobalState('theme');
     const [loreshow, setLoreShow] = useGlobalState('loreshow');
@@ -34,6 +34,7 @@ const RulesMenuSettings: React.FC = () => {
 
         setLoreShow(newLore);
     };
+
 
     return (
         <ErrorBoundary fallback={<div>Something went wrong with RulesMenuSettings.tsx</div>}>
@@ -96,5 +97,5 @@ const RulesMenuSettings: React.FC = () => {
     );
 }
 
-export default RulesMenuSettings
+export default OffcanvasMenuSettings
 

@@ -1,13 +1,12 @@
+
+
+
+
 // // // // //
-//
-// Menu Body
-//
+// Menu in main content
 
-
-// Menu in the main content section
 .main-content
-
-    .rules-menu-body
+    .RulesMenuBody
         margin-top: 30px
         height: auto
         padding-bottom: 0
@@ -15,128 +14,6 @@
 
         @media(max-width: 991px)
             display: none
-    .rules-settings
-        display: none
-
-
-// global menu body
-.rules-menu-body
-    height: 100%
-    padding-bottom: 55px
-    overflow-y: scroll
-    scrollbar-width: none
-
-    &::-webkit-scrollbar
-        display: none
-
-    .rules-menu-header
-        position: relative
-
-        padding-left: 45px
-        background-color: $color-highlight-bg
-        display: flex
-        color: $color-text
-
-        .home-link
-            position: absolute
-            top: 0
-            left: 0
-            z-index: 2
-
-            display: block
-            height: 45px
-            width: 45px
-            cursor: pointer
-
-            background-color: transparent
-            transition: background-color .2s ease, color .2s ease
-
-            &:hover
-                background-color: $color-highlight-bg-2
-                color: $color-text-muted
-
-
-            i, svg
-                position: absolute
-                top: 50%
-                left: 50%
-                transform: translate(-50%, -50%)
-
-        .compendium-link
-            position: relative
-            height: 45px
-            line-height: 45px
-            padding-left: 15px
-            cursor: pointer
-
-            transition: color .2s ease
-
-            &:hover
-                color: $color-text-muted
-
-
-            &:before
-                content: ""
-                display: block
-                width: 1px
-                position: absolute
-                top: 15px
-                bottom: 15px
-                left: 0px
-                background-color: $color-text-muted
-
-    .menu-list
-        list-style-type: none
-        margin: 0
-        padding: 0
-        color: $color-text
-
-    .menu-list-item
-        position: relative
-
-        &.has-children
-            .menu-list-item-anchor-wrap > a
-                padding-right: 45px
-
-    .menu-list-item-anchor-wrap > a // all anchor tags
-        display: block
-        background-color: $color-bg-1
-        color: $color-text
-        text-decoration: none
-        transition: color .2s ease
-
-        &:hover
-            color: $color-highlight-text
-
-    .collapse-chevron-wrap
-        height: 54px
-
-    .menu-list.level-0
-        > li
-            > .menu-list-item-anchor-wrap > a
-                padding: 15px 25px 15px 15px
-                background-color: $color-bg-1
-                border-bottom: 1px solid $color-bg-0
-
-    .menu-list.level-1
-        > li
-            > .menu-list-item-anchor-wrap > a
-                padding: 15px 25px 15px 20px
-                background-color: $color-bg-2
-                border-bottom: 1px solid $color-bg-1
-
-    .menu-list.level-2
-        > li
-            > .menu-list-item-anchor-wrap > a
-                padding: 15px 15px 15px 25px
-                background-color: $color-bg-3
-                border-bottom: 1px solid $color-bg-2
-
-// // // // //
-// Menu in main content
-.main-content
-    .rules-menu-body
-
 
         .menu-list.level-0
             > li

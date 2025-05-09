@@ -44,11 +44,8 @@ const HomeRoute: React.FC = () => {
                     </div>
 
 
-
                     
                 </div>
-
-
             </div>
         </ErrorBoundary>
     )
