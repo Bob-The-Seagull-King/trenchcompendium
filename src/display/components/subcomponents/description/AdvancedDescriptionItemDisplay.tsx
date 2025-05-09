@@ -23,6 +23,7 @@ import { EquipmentFactory } from '../../../../factories/features/EquipmentFactor
 import { Model } from '../../../../classes/feature/model/Model';
 import { ModelFactory } from '../../../../factories/features/ModelFactory';
 import ModelDisplay from '../../../components/features/model/ModelDisplay';
+import RulesEquipmentEntry from "../../rules-content/RulesEquipmentEntry";
 
 const AdvancedDescriptionItemDisplay = (props: any) => {
     const description: AdvancedDescription = props.data
@@ -310,10 +311,14 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
 
 
         return (
-            <span key={keyvar}>
+            <span className={'AdvancedDescriptionItemDisplay-getEquipmentDisplay'} key={keyvar}>
                 {component !== null &&
-                    <EquipmentDisplay data={component} />
-                }   
+                    <>
+                        <RulesEquipmentEntry
+                            equipment={component}
+                        />
+                    </>
+                }
             </span>
         );
     }

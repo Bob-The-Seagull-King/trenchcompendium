@@ -13,9 +13,6 @@ interface RulesEquipmentEntryProps {
 
 const RulesEquipmentEntry: React.FC<RulesEquipmentEntryProps> = ({ equipment }) => {
 
-    console.log('equipment.GetDescription()');
-    console.log(equipment.GetDescription());
-
     return (
         <div className="RulesEquipmentEntry">
             <h4 className="equipment-name">
@@ -117,7 +114,7 @@ const RulesEquipmentEntry: React.FC<RulesEquipmentEntryProps> = ({ equipment }) 
 
             {/* Lore Text */}
             {/* @TODO show lore only if globally set */}
-            {(equipment.GetLore()) &&
+            {(equipment.GetLore() ) &&
                 <div className={'rules-text-element'}>
                     <div className={'text-label'}>
                         {'Lore'}

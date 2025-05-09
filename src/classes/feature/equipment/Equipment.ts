@@ -207,6 +207,8 @@ class Equipment extends StaticOptionContextObject {
      *  Return Lore as String
      */
     GetLore () {
+        if (!this.Lore || this.Lore.length === 0) return null;
+
         return returnDescription(this, this.Lore);
     }
 }
