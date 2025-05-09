@@ -52,6 +52,8 @@ const CompendiumRoute: React.FC<IControllerProp> = (prop) => {
 
                     <div className="col-md-9 col-sm-12">
                         <Routes>
+                            <Route path={ROUTES.COMP_SCENARIO_GENERATOR}
+                                   element={<ToolsRandomScenario controller={ToolsManagerScenario.RandomScenarioManager}/>}/>
                             <Route path={ROUTES.COMP_RULES_GAMERULES} element={<PagedCompendiumDisplay
                                 controller={prop.controller.GameRulesCollectionController}/>}/>
                             <Route path={ROUTES.COMP_RULES_CAMPAIGNRULES} element={<PagedCompendiumDisplay
@@ -80,8 +82,6 @@ const CompendiumRoute: React.FC<IControllerProp> = (prop) => {
                                 controller={prop.controller.EquipmentCollectionController}/>}/>
                             <Route path={ROUTES.HOME_ROUTE}
                                    element={<CompendiumBasePage controller={prop.controller}/>}/>
-                            <Route path={ROUTES.COMP_SCENARIO_GENERATOR}
-                                   element={<ToolsRandomScenario controller={ToolsManagerScenario.RandomScenarioManager}/>}/>
                         </Routes>
                     </div>
                 </div>

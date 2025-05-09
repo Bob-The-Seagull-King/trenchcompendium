@@ -28,7 +28,7 @@ export const ROUTES = {
 
     // Scenarios //
     COMP_SCENARIO_SCENARIO : '/scenario/*',
-    COMP_SCENARIO_GENERATOR : '/randomscenario/*',
+    COMP_SCENARIO_GENERATOR : '/scenario/randomscenario/*',
 
     // Campaign //
     COMP_CAMPAIGN_EXPLORATION : '/explorationtable/*',
