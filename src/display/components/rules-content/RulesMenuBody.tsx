@@ -109,7 +109,13 @@ const RulesMenuBody: React.FC<IControllerProp> = (prop) => {
             {
                 title: "Scenarios",
                 slug: "scenario",
-                controller: prop.controller.ScenarioCollectionController
+                controller: prop.controller.ScenarioCollectionController,
+                children: [
+                    {
+                        title: "Random Scenario",
+                        slug: "randomscenario"
+                    }
+                ]
             },
             {
                 title: "Campaigns 1.6.3",

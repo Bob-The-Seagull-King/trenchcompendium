@@ -14,7 +14,7 @@ class ToolsController {
     private static instance: ToolsController;
     //ContentManager;
     //SaveItemManager;
-    //RandomScenarioManager;
+    RandomScenarioManager;
     UserWarbandManager
 
     /**
@@ -23,6 +23,7 @@ class ToolsController {
      */
     constructor () {
         this.UserWarbandManager = new WarbandManager();
+        this.RandomScenarioManager = new ScenarioGenerator();
         this.UserWarbandManager.GetItemsAll();
     }
 
