@@ -1,3 +1,5 @@
+import {getMoveType} from "../../../utility/functions";
+
 interface ModelStatistics {
     movement?: number,
     melee?: number, 
@@ -140,3 +142,69 @@ export function hasOnlyOneProperty(stat: ModelStatistics): boolean {
 }
 
 export {ModelStatistics, PresentModelStatistics}
+
+
+/**
+ * Normalize stats for models and presentmodels that take differenty types
+ * @param value
+ */
+function normalizeStat<T>(value: T | T[] | undefined): T[] {
+    if (value === undefined) return [];
+    return Array.isArray(value) ? value : [value];
+}
+type StatInput = ModelStatistics | PresentModelStatistics;
+
+/**
+ * Returns the string for the Models Move Stat
+ * @param stats
+ */
+export function getModelStatMove(stats: StatInput): string {
+    const movements = normalizeStat(stats.movement);
+    const movetypes = normalizeStat(stats.movetype);
+
+    if (movements.length === 0 || movetypes.length === 0) return '';
+
+    const moveStr = movements.map(m => m.toString()).join('/');
+    const typeStr = movetypes.map(getMoveType).join('/');
+
+    return `${moveStr}"/${typeStr}`;
+}
+
+/**
+ * Returns the string for the Models Ranged Stat
+ * @param stats
+ */
+export function getModelStatRanged(stats: StatInput): string {
+    const ranged = normalizeStat(stats.ranged);
+
+    if (ranged.length === 0) return '0';
+
+    return ranged
+        .map(val => (val > 0 ? '+' : val < 0 ? '-' : '') + Math.abs(val))
+        .join('/');
+}
+/**
+ * Returns the string for the Models Melee Stat
+ * @param stats
+ */
+export function getModelStatMelee(stats: StatInput): string {
+    const melee = normalizeStat(stats.melee);
+
+    if (melee.length === 0) return '0';
+
+    return melee
+        .map(val => (val > 0 ? '+' : val < 0 ? '-' : '') + Math.abs(val))
+        .join('/');
+}
+
+/**
+ * Returns the string for the Models ArmourStat
+ * @param stats
+ */
+export function getModelStatArmour(stats: StatInput): string {
+    const armour = normalizeStat(stats.armour);
+
+    if (armour.length === 0) return '0';
+
+    return armour.map(a => a.toString()).join('/');
+}
