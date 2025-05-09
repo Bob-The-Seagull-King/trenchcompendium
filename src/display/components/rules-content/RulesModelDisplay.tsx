@@ -48,7 +48,7 @@ const RulesModelDisplay = (props: any) => {
                 const result_upgrades = await factionmodelObject.GetSplitUpgrades(parentfaction);
                 setupgrades(result_upgrades);
             } else {
-                setupgrades(modelcollectionObject.UpgradeList)
+                setupgrades(modelcollectionObject.GetSplitUpgrades())
             }
 
             /* ABILITIES */
@@ -302,6 +302,7 @@ const RulesModelDisplay = (props: any) => {
                     {
                         Object.keys(upgrades).map((item) => (
                             <RulesModelDisplayCollapse
+                                key={item}
                                 name={makestringpresentable(item)}
                                 state={false}
                                 has_children={factionmodelObject.hasUpgrades()}

@@ -4,7 +4,7 @@
  * 
  */
 
-import { IModelUpgradeRelationship, ModelUpgradeRelationship } from '../../relationship/model/ModelUpgradeRelationship';
+import { IModelUpgradeRelationship, ModelUpgradeRelationship, UpgradesGrouped } from '../../relationship/model/ModelUpgradeRelationship';
 import { AbilityFactory } from '../../../factories/features/AbilityFactory';
 import { KeywordFactory } from '../../../factories/features/KeywordFactory';
 import {byPropertiesOf, DescriptionFactory, getCostType} from '../../../utility/functions';
@@ -232,6 +232,26 @@ class Model extends StaticContextObject {
         for (let i = 0; i < EquipmentList.length; i++) {
             this.EquipmentList.push(await EquipmentFactory.CreateModelEquipment(EquipmentList[i], this))
         }
+    }
+    
+    
+    
+    public GetSplitUpgrades() : UpgradesGrouped {
+
+        const groups : UpgradesGrouped = {}
+
+        const UpgradeListFull : ModelUpgradeRelationship[] = this.UpgradeList
+
+        for (let i = 0; i < UpgradeListFull.length; i++) {
+            const special_cat = UpgradeListFull[i].GetSpecialCategory()
+            if (groups[special_cat]) {
+                groups[special_cat].push(UpgradeListFull[i])
+            } else {
+                groups[special_cat] = [UpgradeListFull[i]]
+            }
+        }
+
+        return groups;
     }
 
 
