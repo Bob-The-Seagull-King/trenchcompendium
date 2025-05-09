@@ -1021,7 +1021,7 @@
         "id": "up_plagueknightcompanionofthefly_base",
         "name": "Knight Companion of the Fly",
         "source": "core",
-        "tags": {"trait": true },
+        "tags": {"trait": true, "special_category": "knight_ranks" },
         "contextdata": {
         },
         "description": [            
@@ -1116,7 +1116,7 @@
         "id": "up_plagueknightalmoner",
         "name": "Plague Almoner",
         "source": "core",
-        "tags": {"trait": true
+        "tags": {"trait": true, "special_category": "knight_ranks"
                 },
         "contextdata": {
         },
@@ -1136,7 +1136,7 @@
         "id": "up_plagueknightrottencross",
         "name": "Knight of the Rotten Cross",
         "source": "core",
-        "tags": {"trait": true},
+        "tags": {"trait": true, "special_category": "knight_ranks"},
         "contextdata": {
             "model_add_equipment": {
                 "additions": [
