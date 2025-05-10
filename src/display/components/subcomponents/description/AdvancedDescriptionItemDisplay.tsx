@@ -24,6 +24,9 @@ import { Model } from '../../../../classes/feature/model/Model';
 import { ModelFactory } from '../../../../factories/features/ModelFactory';
 import ModelDisplay from '../../../components/features/model/ModelDisplay';
 import RulesEquipmentEntry from "../../rules-content/RulesEquipmentEntry";
+import RulesEquipmentMain from '../../../components/rules-content/RulesEquipmentMain';
+import RulesEquipmentStats from '../../../components/rules-content/RulesEquipmentStats';
+import RulesOverlay from '../../../components/rules-content/RulesOverlay';
 
 const AdvancedDescriptionItemDisplay = (props: any) => {
     const description: AdvancedDescription = props.data
@@ -314,10 +317,21 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
             <span className={'AdvancedDescriptionItemDisplay-getEquipmentDisplay'} key={keyvar}>
                 {component !== null &&
                     <>
-                        <RulesEquipmentEntry
-                            equipment={component}
-                        />
-                    </>
+                        <RulesOverlay
+                            titlename={component.Name}
+                            d_name={component.Name}
+                            d_method={() =>
+                                
+                                <div className={'rules-equipment-main'}>                    
+                                    {/* Stats */}
+                                    <RulesEquipmentStats
+                                        facrelObject={undefined}
+                                        baseobject={component}
+                                    />
+                                    <RulesEquipmentMain data={component}/>
+                                </div>
+                                }/>
+                </>
                 }
             </span>
         );
