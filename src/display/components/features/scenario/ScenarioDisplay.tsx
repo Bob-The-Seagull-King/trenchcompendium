@@ -93,6 +93,11 @@ const ScenarioDisplay = (props: any) => {
                     data={scenarioObject}
                 />
 
+                {scenarioObject.Description.length > 0 &&
+                    <div className={"rules-text-item"}>
+                        {returnDescription(scenarioObject, scenarioObject.Description)}
+                    </div>
+                }
 
                 <div className={"rules-text-item"}>
                     <RulesHeadlineDisplay
