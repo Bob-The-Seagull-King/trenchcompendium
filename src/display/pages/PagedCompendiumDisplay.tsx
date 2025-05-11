@@ -96,7 +96,7 @@ const PagedCompendiumDisplay = (prop: any) => {
         <ErrorBoundary fallback={<div>Something went wrong with PagedDisplayCompendium.tsx</div>}>
             <div className="PagedCompendiumDisplay" key={_keyval}>
                 <div className={'rules-content-main'}>
-                    {((_cureItem == null) && (DisplayPage.defaultpage)) &&
+                    {((_curItem == null) && (DisplayPage.defaultpage)) &&
                         <>
                             {DisplayPage.defaultpage()}
                         </>
