@@ -2532,5 +2532,145 @@
             }
         ],
         "options": []
+    },
+    {
+        "id": "rl_deadlysin_wrath",
+        "source": "core",
+        "tags": {
+            "court_sin": true
+         },
+        "contextdata": {   
+        },
+        "name": "Wrath",
+        "description":  [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Test sin for Wrath used for DEMONIC models.",
+                "glossary": [
+                    {"val": "DEMONIC", "id": "kw_demonic"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_deadlysin_envy",
+        "source": "core",
+        "tags": {
+            "court_sin": true
+         },
+        "contextdata": {   
+        },
+        "name": "Envy",
+        "description":  [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Test sin for Envy used for DEMONIC models.",
+                "glossary": [
+                    {"val": "DEMONIC", "id": "kw_demonic"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_deadlysin_lust",
+        "source": "core",
+        "tags": {
+            "court_sin": true
+         },
+        "contextdata": {   
+        },
+        "name": "Lust",
+        "description":  [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Test sin for Lust used for DEMONIC models.",
+                "glossary": [
+                    {"val": "DEMONIC", "id": "kw_demonic"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_deadlysin_pride",
+        "source": "core",
+        "tags": {
+            "court_sin": true
+         },
+        "contextdata": {   
+        },
+        "name": "Pride",
+        "description":  [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Test sin for Pride used for DEMONIC models.",
+                "glossary": [
+                    {"val": "DEMONIC", "id": "kw_demonic"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_deadlysin_sloth",
+        "source": "core",
+        "tags": {
+            "court_sin": true
+         },
+        "contextdata": {   
+        },
+        "name": "Sloth",
+        "description":  [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Test sin for Sloth used for DEMONIC models.",
+                "glossary": [
+                    {"val": "DEMONIC", "id": "kw_demonic"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_deadlysin_gluttony",
+        "source": "core",
+        "tags": {
+            "court_sin": true
+         },
+        "contextdata": {   
+        },
+        "name": "Gluttony",
+        "description":  [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Test sin for Gluttony used for DEMONIC models.",
+                "glossary": [
+                    {"val": "DEMONIC", "id": "kw_demonic"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_deadlysin_greed",
+        "source": "core",
+        "tags": {
+            "court_sin": true
+         },
+        "contextdata": {   
+        },
+        "name": "Greed",
+        "description":  [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Test sin for Greed used for DEMONIC models.",
+                "glossary": [
+                    {"val": "DEMONIC", "id": "kw_demonic"}
+                ]
+            }
+        ],
+        "options": []
     }
 ]

@@ -228,7 +228,8 @@
         "tags": {
         },
         "contextdata": {
-            "faction_keyword": {"name": "kw_thecourt"}
+            "faction_keyword": {"name": "kw_thecourt"},
+            "faction_rule_option": {}
         },
         "name": "Court of the Seven-Headed Serpent",
         "team": "hell",
@@ -285,6 +286,45 @@
             }
         ],
         "rules": [],
-        "options": []
+        "options": [
+            {
+            "ref_id" : "ot_courtsins",
+            "name" : "Seven Deadly Sins",
+            "description" : [                
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "You must select which of the Seven Deadly Sins the warband is dedicated to: Choose either Wrath, Envy, Pride, Gluttony, Greed, Sloth or Lust. Your chosen Sin grants your warband GOETIC powers/spells, certain abilities for models, and other effects.",
+                        "glossary": [
+                            {"val": "GOETIC", "id": "kw_goetic"}
+                        ]
+                    }
+            ],
+            "category" : "type",
+            "type" : "text",
+            "strictness" : "strict",
+            "predefined_options" : [],
+            "option_context" : {"basic_option_default":{}},
+            "data_search" : {      
+                "searchtype": "complex",
+                "searchparam":    {
+                    "type": "factionrule",
+                    "request":    {
+                        "operator": "and",
+                        "terms": [
+                            {
+                                "item": "tags",
+                                "value": "court_sin",
+                                "equals": true,
+                                "strict": true,
+                                "istag" : true,
+                                "tagvalue": ""
+                            }
+                        ],
+                        "subparams": []
+                    }
+                }                        
+            }
+        }
+        ]
     }
 ]

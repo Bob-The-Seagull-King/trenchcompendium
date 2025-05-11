@@ -8,7 +8,7 @@ import SingleOptionSetDisplay from './SingleOptionSetDisplay';
 
 const OptionSetStaticDisplay = (props: any) => {
     const OptionSet : StaticOption[] = props.data
-
+    
     return (
         
         <ErrorBoundary fallback={<div>Something went wrong with OptionSetStaticDisplay.tsx</div>}>

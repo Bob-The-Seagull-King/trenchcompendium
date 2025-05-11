@@ -23,6 +23,7 @@ import { FactionModelRelationship } from "../../classes/relationship/faction/Fac
 import RulesModelDisplayAbility from "../../display/components/rules-content/RulesModelDisplayAbility";
 import { Model } from "../../classes/feature/model/Model";
 import { Ability, IAbility } from "../../classes/feature/ability/Ability";
+import RuleDisplay from "../../display/components/features/faction/RuleDisplay";
 
 export const BaseContextCallTable : CallEventTable = {
     option_search_viable: {
@@ -836,6 +837,31 @@ export const BaseContextCallTable : CallEventTable = {
               });
 
             return NewChoices
+        }
+    },
+    faction_rule_option: {
+        event_priotity: 0,
+        async parseOptionsIntoRelevantType(this: EventRunner, eventSource : any, relayVar : IChoice[],  trackVal : number, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null){
+            
+            const { RuleFactory } = await import("../../factories/features/RuleFactory");
+
+            for (let i = 0; i < relayVar.length; i++) {
+                const ModelItem = await RuleFactory.CreateRule(relayVar[i].value, null)
+                relayVar[i].value = ModelItem;
+                relayVar[i].display_str = ModelItem.Name? ModelItem.Name : "";
+            }
+
+            return relayVar
+        },
+        returnOptionDisplay(this: EventRunner, eventSource : any, relayVar : IChoice, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null){
+            
+
+            return ( 
+            
+                <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
+                    <RuleDisplay data={relayVar.value} />
+                </ErrorBoundary>
+            )
         }
     },
     location_rule_option: {

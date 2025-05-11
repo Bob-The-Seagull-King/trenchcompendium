@@ -46,6 +46,7 @@ class FactionFactory {
         await rule.BuildFactionModels(_rule.id);
         await rule.BuildFactionEquipment(_rule.id)
         await rule.BuildRules(_rule.rules)
+        await rule.ReloadOptions();
         return rule;
     }
 
@@ -79,6 +80,7 @@ class FactionFactory {
         await rule.BuildFactionModels(BasedFactionData.id);
         await rule.BuildFactionEquipment(BasedFactionData.id)
         await rule.BuildRules(BasedFactionData.rules)
+        await rule.ReloadOptions();
         return rule;
     }
 

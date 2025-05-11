@@ -147,6 +147,34 @@
         ]
     },
     {
+        "id": "kw_goetic",
+        "source": "core",
+        "tags": {
+            "category": "trait"
+        },
+        "name": "GOETIC (X)",
+        "contextdata": {"option_search_viable" : {}},
+        "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Goetic Spells are marked with the Keyword GOETIC (x) where the number in brackets indicates how many BLOOD MARKERS will have to be spent to trigger the effect of the Spell. If multiple numbers or a range of numbers are listed in the brackets, any one of those numbers can be chosen. These BLOOD MARKERS can be taken from any model currently taking part in the battle, be they friendly or enemy models. However, they must come from models that do not have the Keyword DEMONIC or BLACK GRAIL.",
+                "glossary": [
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"},
+                    {"val": "DEMONIC", "id": "kw_demonic"},
+                    {"val": "BLACK GRAIL", "id": "kw_blackgrail"}
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "BLOOD MARKERS used this way are removed from the game and the described effect of the Goetic Spell or ability then takes effect as described – no ACTION roll is needed, unless outlined in the spell. Despite not requiring an ACTION roll, Goetic Spells are ACTIONS and, as with other ACTIONS, spells can only be used by the model once per Activation. Some Goetic Powers are not marked with the Keyword GOETIC (x). These powers are typically passive abilities.",
+                "glossary": [
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"},
+                    {"val": "ACTION", "id": "kw_action"}
+                ]
+            }
+        ]
+    },
+    {
         "id": "kw_blessingmarker",
         "source": "core",
         "tags": {

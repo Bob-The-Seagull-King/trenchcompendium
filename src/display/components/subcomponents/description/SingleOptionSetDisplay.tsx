@@ -6,6 +6,7 @@ import { makestringpresentable } from '../../../../utility/functions';
 import { Form } from 'react-bootstrap';
 import { EventRunner } from '../../../../classes/contextevent/contexteventhandler';
 import ItemRow from './ItemRow';
+import { returnDescription } from '../../../../utility/util';
 
 const SingleOptionSetDisplay = (props: any) => {
     const OptionSet : StaticOption = props.data
@@ -53,6 +54,10 @@ const SingleOptionSetDisplay = (props: any) => {
                     <div className=" size-subtitle font-seriftext subtitle-letterspacing">
                         { OptionSet.Name }
                     </div>
+
+                    {
+                        returnDescription(OptionSet, OptionSet.Description)
+                    }
                     
                     <Form.Control className={"borderstyler bordergrey overcomeradius " } as="select" aria-label="Default select example"  placeholder="Member Type" onChange={(e: { target: { value: any; }; }) => { updateItem(e.target.value)    } } >
                         {OptionSet.Selections.map((selec) => ( 
