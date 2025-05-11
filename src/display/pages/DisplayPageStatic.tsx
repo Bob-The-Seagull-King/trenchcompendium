@@ -47,11 +47,9 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         defaultpage() {
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    {item != undefined &&
                         <div>
                             {"THIS IS A TEST TO BE REPLACED"}
                         </div>
-                    }
                 </ErrorBoundary>
             )
         },
@@ -81,11 +79,9 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         defaultpage() {
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    {item != undefined &&
                         <div>
                             {"THIS IS A TEST TO BE REPLACED"}
                         </div>
-                    }
                 </ErrorBoundary>
             )
         },
@@ -331,11 +327,9 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         defaultpage() {
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    {item != undefined &&
                         <div>
                             {"THIS IS A TEST TO BE REPLACED"}
                         </div>
-                    }
                 </ErrorBoundary>
             )
         },
@@ -367,11 +361,9 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         defaultpage() {
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    {item != undefined &&
                         <div>
                             {"THIS IS A TEST TO BE REPLACED"}
                         </div>
-                    }
                 </ErrorBoundary>
             )
         },
@@ -404,11 +396,9 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         defaultpage() {
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    {item != undefined &&
                         <div>
                             {"THIS IS A TEST TO BE REPLACED"}
                         </div>
-                    }
                 </ErrorBoundary>
             )
         },
@@ -437,11 +427,9 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         defaultpage() {
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    {item != undefined &&
                         <div>
                             {"THIS IS A TEST TO BE REPLACED"}
                         </div>
-                    }
                 </ErrorBoundary>
             )
         },
@@ -519,11 +507,9 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         defaultpage() {
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    {item != undefined &&
                         <div>
                             {"THIS IS A TEST TO BE REPLACED"}
                         </div>
-                    }
                 </ErrorBoundary>
             )
         },
