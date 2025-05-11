@@ -2363,5 +2363,77 @@
             }
         ],
         "options": []
+    },
+    {
+        "id": "ab_hateful",
+        "name": "Hateful",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {   
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "When a yoke fiend is Activated, if there is an enemy model without the Keyword BLACK GRAIL or DEMONIC within 12” that it can see, it must make a Charge against the closest enemy model without the Keyword BLACK GRAIL or DEMONIC as its first ACTION. If it begins its Activation Down and the above conditions are true, it must stand and then Charge, unless it cannot stand. If it begins its Activation in melee combat, it ignores this ability.",
+                "glossary": [
+                    {"val": "BLACK GRAIL", "id": "kw_blackgrail"},
+                    {"val": "DEMONIC", "id": "kw_demonic"},
+                    {"val": "ACTION", "id": "kw_action"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_torturer",
+        "name": "Torturer",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {   
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Yoke Fiend can target friendly non-DEMONIC models within 1” with melee attacks. When it does, it can only make a single melee attack during its Activation.",
+                "glossary": [
+                    {"val": "DEMONIC", "id": "kw_demonic"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_swarmingattack",
+        "name": "Swarming Attack",
+        "source": "core",
+        "tags": {"action": true},
+        "contextdata": {   
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "When the Pit Locust makes a melee attack, it can make an additional attack with its stinger if it charged during this Activation. Pit Locusts suffer no penalties for fighting unarmed, nor do they suffer penalties or restrictions for making Off-Hand Attacks with their stingers. The first attack made by a Pit Locust has the Keyword SHRAPNEL and therefore causes an additional BLOOD MARKER. ",
+                "glossary": [
+                    {"val": "SHRAPNEL", "id": "kw_shrapnel"},
+                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_demonicaura",
+        "name": "Demonic Aura",
+        "source": "core",
+        "tags": {"action": true},
+        "contextdata": {   
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Depending on which Deadly Sin the warband is dedicated to, the Desecrated Saint emits a powerful aura of that sin."
+            }
+        ],
+        "options": []
     }
 ]

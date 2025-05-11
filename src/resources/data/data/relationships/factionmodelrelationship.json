@@ -1776,5 +1776,87 @@
         "restricted_models" : [],
         "warband_minimum" : 0,
         "warband_maximum" : 3
+    },
+    {
+        "id": "rel_fc_md_yokefiend",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {"option_search_viable": {}},
+        "options": [],
+        "faction_id" : ["fc_courtofthesevenheadedserpent"],
+        "model_id" : "md_yokefiend",
+        "captain" : false,
+        "mercenary": false,
+        "cost" : 30,
+        "cost_type" : 0,
+        "restricted_models" : [],
+        "warband_minimum" : 0,
+        "warband_maximum" : 0
+    },
+    {
+        "id": "rel_fc_md_wretched_court",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {
+            "option_search_viable": {},
+            "faction_model_count_special": {
+                "exceed": [
+                    {
+                        "type": "keyword",
+                        "value" : "kw_demonic"
+                    }
+                ]
+            }
+        },
+        "options": [],
+        "faction_id" : ["fc_courtofthesevenheadedserpent"],
+        "model_id" : "md_wretched",
+        "captain" : false,
+        "mercenary": false,
+        "cost" : 20,
+        "cost_type" : 0,
+        "restricted_models" : [],
+        "warband_minimum" : 0,
+        "warband_maximum" : 0
+    },
+    {
+        "id": "rel_fc_md_pitlocust",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {
+            "option_search_viable": {}
+        },
+        "options": [],
+        "faction_id" : ["fc_courtofthesevenheadedserpent"],
+        "model_id" : "md_pitlocust",
+        "captain" : false,
+        "mercenary": false,
+        "cost" : 90,
+        "cost_type" : 0,
+        "restricted_models" : [],
+        "warband_minimum" : 0,
+        "warband_maximum" : 3
+    },
+    {
+        "id": "rel_fc_md_desecratedsaint",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {
+            "option_search_viable": {}
+        },
+        "options": [],
+        "faction_id" : ["fc_courtofthesevenheadedserpent"],
+        "model_id" : "md_desecratedsaint",
+        "captain" : false,
+        "mercenary": false,
+        "cost" : 140,
+        "cost_type" : 0,
+        "restricted_models" : [],
+        "warband_minimum" : 0,
+        "warband_maximum" : 1
     }
 ]

@@ -726,15 +726,38 @@
         "name": "Wretched",
         "source": "core",
         "tags": {},
-        "contextdata": {},
+        "contextdata": {
+            
+            "validate_final_unit_equipment": {
+                "requirements": [
+                    {
+                        "tag": "weapon",
+                        "value": true
+                    }
+                ]
+            }
+        },
         "base_id": "md_wretched",
         "variant_name": "Base",
         "team": "hell",
+        "lore": [               
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "These unfortunate souls possess not a drop of demon blood. They act as disposable shock troops or are used as subjects of torture to power the Goetic magic of the sorcerers and other users of the dark arts. Captured during one of the hunts of the Court, sold to the devils in the heretic domains or having the misfortune to have foolishly pushed through in the places where the borders of the world are thin, their minds are scarred by witnessing the horror of damnation while still alive. Willing to do anything to escape their fate a million times worse than death, they grasp at the thinnest of straws. Should a wretch bring down a mighty opponent, the Law of Hell is clear: the mortal will gain its freedom, in memory and honour of the First Rebellion when there was war in Heaven and blood of the angels painted the firmament red."
+            }
+        ],
+        "description": [    
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The wretched can be equipped with any melee weapon, armour and equipment from the Court Armoury. None of their weapons, armour or equipment can cost more than 10 ducats each. They must be equipped with at least one weapon.",
+                "glossary": [{"val": "Court", "id": "kw_thecourt"}]
+            }
+        ],
         "cut_keywords" : [],
-        "keywords" : [],
+        "keywords" : ["kw_thecourt"],
         "stats" : {
         },
-        "cut_abilities" : ["ab_darkblessing"],
+        "cut_abilities" : ["ab_darkblessing","ab_chattel"],
         "new_abilities" : []
     }
 ]

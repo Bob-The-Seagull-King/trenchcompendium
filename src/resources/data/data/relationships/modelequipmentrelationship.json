@@ -417,5 +417,16 @@
         "model_id": ["md_hellknight"],
         "mandatory_equipment": ["eq_infernalironarmour"],
         "removable": false
+    },
+    {
+        "id": "rel_md_eq_pitlocust",
+        "source": "core",
+        "tags": {},
+        "name": "Pit Locust Equipment",
+        "contextdata": {},
+        "options": [],
+        "model_id": ["md_pitlocust"],
+        "mandatory_equipment": ["eq_reinforcedarmour"],
+        "removable": false
     }
 ]

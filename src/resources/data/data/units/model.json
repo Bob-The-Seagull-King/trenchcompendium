@@ -2670,33 +2670,53 @@
         "name": "Yoke Fiend",
         "source": "core",
         "tags": {},
-        "contextdata": {
+        "contextdata": {           
+            "model_equipment_restriction": {
+                "required": [
+                    {
+                        "category": "ranged",
+                        "res_type": "ducat",
+                        "value": 30,
+                        "param": "maximum"
+                    }
+                ]
+            },
+            "model_equipment_limit": {
+                "maximum": [
+                    {
+                        "category": "ranged",
+                        "res_type": "all",
+                        "value": "",
+                        "limit": 1
+                    }
+                ]
+            }
         },
         "description": [
             {
                 "tags": {"desc_type" : "paragraph"},
-                "content": "",
-                "glossary": [{"val": "Court of the Seven-Headed Serpent", "id": "kw_thecourt"}]
+                "content": "Yoke fiends can be equipped with any melee weapon, armour and equipment from the Court Armoury. They can be equipped with any one ranged weapon from the Court Armoury that costs 30 ducats or less.",
+                "glossary": [{"val": "Court", "id": "kw_thecourt"}]
             }
         ],
         "lore": [ 
             {
                 "tags": {"desc_type" : "italic"},
-                "content": ""
+                "content": "A Yoke Fiend stands some seven to eight feet tall, with layers of shivering fat and muscle branded by their masters, carved by the knives of the Hell-Priests to mark them as property of greater demons. They exhibit bestial features such as horns and hooves of cattle or goats, ape-like limbs with immensely dense bones. They hate seeing their own reflections, as in their heart of hearts they know the beauty and glory they have lost for all eternity."
             }
         ],
         "team": "hell",
         "stats" : {            
             "movement": 6,
-            "melee": 0,
+            "melee": 1,
             "ranged": 0,
-            "base": [25],
+            "base": [32],
             "armour": 0,
             "movetype": 0,
-            "potential": 0
+            "potential": 2
         },
-        "keywords" : [],
-        "abilities" : []
+        "keywords" : ["kw_thecourt","kw_demonic"],
+        "abilities" : ["ab_hateful","ab_torturer"]
     },
     {
         "id": "md_pitlocust",
@@ -2704,32 +2724,58 @@
         "source": "core",
         "tags": {},
         "contextdata": {
+            "unarmed_penalty_remove": {},
+            "model_equipment_restriction": {
+                "removed": [
+                    {
+                        "category": "armour",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "melee",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "ranged",
+                        "res_type": "all",
+                        "value": ""
+                    }
+                ],
+                "required": [
+                    {
+                        "category": "equipment",
+                        "res_type": "id",
+                        "value": "eq_crownofhellfire"
+                    }
+                ]
+            }
         },
         "description": [
             {
                 "tags": {"desc_type" : "paragraph"},
-                "content": "",
-                "glossary": [{"val": "Court of the Seven-Headed Serpent", "id": "kw_thecourt"}]
+                "content": "A Pit Locust wears a suit of Reinforced Armour which is reflected in its profile above. They can have no other armour, weapons and equipment, except for the Crown of Hellfire. They do not suffer penalties for fighting unarmed."
             }
         ],
         "lore": [ 
             {
                 "tags": {"desc_type" : "italic"},
-                "content": ""
+                "content": "Pit Locusts are terrifying, horse-sized winged and armoured creatures with twisted faces resembling humans. They fight with rending blades attached to their limbs and with poison stingers."
             }
         ],
         "team": "hell",
         "stats" : {            
-            "movement": 6,
-            "melee": 0,
+            "movement": 8,
+            "melee": 2,
             "ranged": 0,
-            "base": [25],
+            "base": [30,60],
             "armour": 0,
-            "movetype": 0,
-            "potential": 0
+            "movetype": 1,
+            "potential": 1
         },
-        "keywords" : [],
-        "abilities" : []
+        "keywords" : ["kw_thecourt","kw_demonic","kw_fear"],
+        "abilities" : ["ab_swarmingattack"]
     },
     {
         "id": "md_sorcerer",
@@ -2871,5 +2917,60 @@
         },
         "keywords" : ["kw_thecourt","kw_demonic","kw_strong","kw_elite"],
         "abilities" : ["ab_goetics_knight","ab_bloodmagic"]
+    },
+    {
+        "id": "md_desecratedsaint",
+        "name": "Desecrated Saint",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "set_arms": {"ranged": 0, "melee": 3, "special": 0},
+            "model_equipment_restriction": {
+                "removed": [
+                    {
+                        "category": "armour",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "equipment",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "ranged",
+                        "res_type": "all",
+                        "value": ""
+                    }
+                ]
+            }
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The Desecrated Saint is encased in nigh-impregnable Cocytus Armour reflected on the profile above. This armour cannot be removed or lost. The Desecrated Saint has three functional arms. They can carry up to three melee weapons, only one of which can be a two-handed weapon. The Desecrated Saint can be equipped with any melee weapons from the Court Armoury, and can make a Melee Attack ACTION once per Activation with each melee weapon it is equipped with and suffers no off-hand penaties. ",
+                "glossary": [
+                    {"val": "Court", "id": "kw_thecourt"},
+                    {"val": "ACTION", "id": "kw_action"}
+                ]
+            }
+        ],
+        "lore": [ 
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Pit Locusts are terrifying, horse-sized winged and armoured creatures with twisted faces resembling humans. They fight with rending blades attached to their limbs and with poison stingers."
+            }
+        ],
+        "team": "hell",
+        "stats" : {            
+            "movement": 6,
+            "melee": 3,
+            "base": [60],
+            "armour": -3,
+            "movetype": 0,
+            "potential": 1
+        },
+        "keywords" : ["kw_thecourt","kw_demonic","kw_fear","kw_tough","kw_strong"],
+        "abilities" : ["ab_demonicaura"]
     }
 ]
