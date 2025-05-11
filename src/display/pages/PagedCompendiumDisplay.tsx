@@ -101,7 +101,7 @@ const PagedCompendiumDisplay = (prop: any) => {
                             {DisplayPage.defaultpage()}
                         </>
                     }
-                    {((_curItem == undefined) || ((_curItem == null) && (!DisplayPage.defaultpage))) &&
+                    {(((_curItem == undefined) || (_curItem == null)) && (!DisplayPage.defaultpage)) &&
                         <h1 className="">{slugname}</h1>
                     }
                     {((_curItem != undefined) && (_curItem != null)) &&
