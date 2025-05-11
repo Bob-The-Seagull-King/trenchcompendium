@@ -720,5 +720,21 @@
         },
         "cut_abilities" : [],
         "new_abilities" : []
+    },
+    {
+        "id": "md_wretched_court",
+        "name": "Wretched",
+        "source": "core",
+        "tags": {},
+        "contextdata": {},
+        "base_id": "md_wretched",
+        "variant_name": "Base",
+        "team": "hell",
+        "cut_keywords" : [],
+        "keywords" : [],
+        "stats" : {
+        },
+        "cut_abilities" : ["ab_darkblessing"],
+        "new_abilities" : []
     }
 ]

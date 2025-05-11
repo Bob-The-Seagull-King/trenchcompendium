@@ -2664,5 +2664,137 @@
         },
         "keywords" : [],
         "abilities" : []
+    },
+    {
+        "id": "md_yokefiend",
+        "name": "Yoke Fiend",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "glossary": [{"val": "Court of the Seven-Headed Serpent", "id": "kw_thecourt"}]
+            }
+        ],
+        "lore": [ 
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": ""
+            }
+        ],
+        "team": "hell",
+        "stats" : {            
+            "movement": 6,
+            "melee": 0,
+            "ranged": 0,
+            "base": [25],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 0
+        },
+        "keywords" : [],
+        "abilities" : []
+    },
+    {
+        "id": "md_pitlocust",
+        "name": "Pit Locust",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "glossary": [{"val": "Court of the Seven-Headed Serpent", "id": "kw_thecourt"}]
+            }
+        ],
+        "lore": [ 
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": ""
+            }
+        ],
+        "team": "hell",
+        "stats" : {            
+            "movement": 6,
+            "melee": 0,
+            "ranged": 0,
+            "base": [25],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 0
+        },
+        "keywords" : [],
+        "abilities" : []
+    },
+    {
+        "id": "md_sorcerer",
+        "name": "Sorcerer",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "glossary": [{"val": "Court of the Seven-Headed Serpent", "id": "kw_thecourt"}]
+            }
+        ],
+        "lore": [ 
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": ""
+            }
+        ],
+        "team": "hell",
+        "stats" : {            
+            "movement": 6,
+            "melee": 0,
+            "ranged": 0,
+            "base": [25],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 0
+        },
+        "keywords" : [],
+        "abilities" : []
+    },
+    {
+        "id": "md_praetor",
+        "name": "Praetor",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "glossary": [{"val": "Court of the Seven-Headed Serpent", "id": "kw_thecourt"}]
+            }
+        ],
+        "lore": [ 
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": ""
+            }
+        ],
+        "team": "hell",
+        "stats" : {            
+            "movement": 6,
+            "melee": 0,
+            "ranged": 0,
+            "base": [25],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 0
+        },
+        "keywords" : [],
+        "abilities" : []
     }
 ]
