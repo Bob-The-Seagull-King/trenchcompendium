@@ -13,6 +13,7 @@ class SkillFactory {
      * @returns A newly created ability
      */
     static async CreateSkill(_rule: ISkill, parent : ContextObject | null) {
+        console.log(_rule)
         const cache = StaticDataCache.getInstance();
         const isValid = (cache.CheckID('skill', _rule.id))
         if (isValid == false) {
@@ -30,6 +31,7 @@ class SkillFactory {
         if (isValid == false) {
             return cache.SkillCache[_val];
         }
+        console.log(_val)
         const ruledata = Requester.MakeRequest({searchtype: "id", searchparam: {type: "skill", id: _val}}) as ISkill
         const rulenew = await SkillFactory.CreateSkill(ruledata, parent)
         return rulenew;
@@ -41,6 +43,7 @@ class SkillFactory {
      * @returns A newly created ability
      */
     static async CreateSkillGroup(_rule: IContextObject, parent : ContextObject | null) {
+        console.log(_rule)
         const cache = StaticDataCache.getInstance();
         const isValid = (cache.CheckID('skillgroup', _rule.id))
         if (isValid == false) {
@@ -58,6 +61,7 @@ class SkillFactory {
         if (isValid == false) {
             return cache.SkillGroupCache[_val];
         }
+        console.log(_val)
         const ruledata = Requester.MakeRequest({searchtype: "id", searchparam: {type: "group", id: _val}}) as IContextObject
         const rulenew = await SkillFactory.CreateSkillGroup(ruledata, parent)
         return rulenew;
