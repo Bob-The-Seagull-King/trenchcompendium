@@ -519,12 +519,10 @@ export const BaseContextCallTable : CallEventTable = {
                                     ValidUpgrade = true;
                                 } else {
                                     ValidUpgrade = false;
-                                    break;
                                 }
                             } else {
                                 if (trackVal.getKeywordIDs().includes(curFilter["value"])) {
                                     ValidUpgrade = false;
-                                    break;
                                 } else {
                                     ValidUpgrade = true;
                                 }
@@ -537,7 +535,6 @@ export const BaseContextCallTable : CallEventTable = {
                     for (let i = 0; i < curUpgrade['models_id'].length; i++) {
                         if (trackVal.ID == curUpgrade['models_id'][i]) {
                             ValidUpgrade = true;
-                            break;
                         }
                     }
                 }
