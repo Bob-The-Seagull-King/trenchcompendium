@@ -12,7 +12,6 @@ class KeywordFactory {
      * @returns A newly created ability
      */
     static CreateKeyword(_rule: IKeyword, parent : ContextObject | null) {
-        console.log(_rule)
         const cache = StaticDataCache.getInstance();
         const isValid = (cache.CheckID('keyword', _rule.id))
         if (isValid == false) {
@@ -29,7 +28,6 @@ class KeywordFactory {
         if (isValid == false) {
             return cache.KeywordCache[_val];
         }
-        console.log(_val)
         const ruledata = Requester.MakeRequest({searchtype: "id", searchparam: {type: "keyword", id: _val}}) as IKeyword
         const rulenew = KeywordFactory.CreateKeyword(ruledata, parent)
         return rulenew;

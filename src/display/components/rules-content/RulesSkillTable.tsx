@@ -9,6 +9,8 @@ import SkillDisplay from '../features/skill/SkillDisplay';
 const RulesSkillTable = (props: any) => {
     const skillgroupObject : SkillGroup = props.data
 
+    console.log(skillgroupObject);
+
     return (
         <ErrorBoundary fallback={<div>Something went wrong with ExplorationTableDisplay.tsx</div>}>
             <div className='RulesSkillTable rules-skill-table rules-card'>

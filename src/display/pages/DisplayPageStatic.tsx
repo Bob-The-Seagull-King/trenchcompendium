@@ -474,6 +474,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         laconic: "Unique abilities and talents a model can gain",
         menushowitems: false,
         returnDisplay(item: any) {
+            console.log(item);
             return (
                 
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>

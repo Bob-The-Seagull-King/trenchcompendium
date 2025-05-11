@@ -223,6 +223,7 @@ export const CollectionDataDex : CollectionDataTable = {
                 const ItemNew = new ViewTableItem(summonNew, getColour("default"));
                 model.itemcollection.push(ItemNew);
             }
+            console.log(model.itemcollection);
         }
     },
     patron: {

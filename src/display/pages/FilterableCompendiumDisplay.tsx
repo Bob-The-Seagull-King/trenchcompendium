@@ -35,6 +35,7 @@ const FilterableCompendiumDisplay = (prop: any) => {
     const [_keyval, setKeyVal] = useState(0);  
     const [slugname, setslugname] = useState("Loading");  
 
+
     useEffect(() => {
 
         async function SetCollectionOptions() {
@@ -62,6 +63,7 @@ const FilterableCompendiumDisplay = (prop: any) => {
             } else {
                 await ViewPageController.initCollection();
             }
+            console.log(CollectionController.itemcollection)
             setslugname("No Items Found")
             setCurItems(InitStateSet());
             setKeyVal((prev) => prev + 1);
