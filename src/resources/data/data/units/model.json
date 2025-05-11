@@ -2741,28 +2741,28 @@
         "description": [
             {
                 "tags": {"desc_type" : "paragraph"},
-                "content": "",
-                "glossary": [{"val": "Court of the Seven-Headed Serpent", "id": "kw_thecourt"}]
+                "content": "The Sorcerer can be equipped with any melee weapon, armour and equipment from the Court Armoury.",
+                "glossary": [{"val": "Court", "id": "kw_thecourt"}]
             }
         ],
         "lore": [ 
             {
                 "tags": {"desc_type" : "italic"},
-                "content": ""
+                "content": "Sorcerers come in many forms and manipulate their own bodies to better cast the mighty spells they are charged with. Some have many arms, others multiple heads or countless alterations and terrible improvements – some self-administered, others by force – based on the whims of the Arch-devil and their cabal of High Sorcerers who lead their Goetic strategy. A Sorcerer’s feet do not touch the ground – a distant echo of their angelic past – but instead float across No Man’s Land, chanting the cruel gospel of Hell as they advance. Their dark wisdom and cunning make them equally capable of leading one of the Court’s warbands or acting as advisors to one of the Praetors as they stride forth into the mortal realms."
             }
         ],
         "team": "hell",
         "stats" : {            
             "movement": 6,
-            "melee": 0,
-            "ranged": 0,
-            "base": [25],
+            "melee": 1,
+            "ranged": 1,
+            "base": [50],
             "armour": 0,
-            "movetype": 0,
+            "movetype": 1,
             "potential": 0
         },
-        "keywords" : [],
-        "abilities" : []
+        "keywords" : ["kw_thecourt","kw_demonic","kw_elite","kw_fear"],
+        "abilities" : ["ab_goetics_sorcerer","ab_blessingsoftheserpentmoon"]
     },
     {
         "id": "md_praetor",
@@ -2774,27 +2774,102 @@
         "description": [
             {
                 "tags": {"desc_type" : "paragraph"},
-                "content": "",
-                "glossary": [{"val": "Court of the Seven-Headed Serpent", "id": "kw_thecourt"}]
+                "content": "The Praetor can be equipped with any weapons, armour and equipment from the Court Armoury.",
+                "glossary": [{"val": "Court", "id": "kw_thecourt"}]
             }
         ],
         "lore": [ 
             {
                 "tags": {"desc_type" : "italic"},
-                "content": ""
+                "content": "Praetors are demonic commanders and magistrates within a small corner of the fiefdom of a mighty Arch-Devil or Demon Lord. Each commands small cohorts at their liege’s behest, raised from the denizens within the ever-shifting domains of Hell. Yoke devils muster at their command and Hell Knights bound to blind obedience bend their knees to these field commanders of Hell."
+            }
+        ],
+        "team": "hell",
+        "stats" : {            
+            "movement": 8,
+            "melee": 3,
+            "ranged": 3,
+            "base": [50],
+            "armour": 0,
+            "movetype": 1,
+            "potential": 0
+        },
+        "keywords" : ["kw_tough","kw_strong","kw_fear","kw_thecourt","kw_demonic","kw_leader"],
+        "abilities" : ["ab_goetics_praetor"]
+    },
+    {
+        "id": "md_hunterofthelefthandpath",
+        "name": "Hunter of the Left-Hand Path",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "model_equipment_restriction": {
+                "removed": [
+                    {
+                        "category": "ranged",
+                        "res_type": "all",
+                        "value": ""
+                    }
+                ]
+            }
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The Hunter can be equipped with any melee weapons, armour (though not Infernal Armour which would disrupt the powers of the Hunter) and equipment from the Court Armoury. The Hunter always carries the Bow of Lethe as its ranged weapon and it cannot swap or lose this weapon. It always takes the use of one of the arms of the Hunter.",
+                "glossary": [{"val": "Court", "id": "kw_thecourt"}]
+            }
+        ],
+        "lore": [ 
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "The hunters of the Court of the Seven-headed Serpent are followers of the Left-hand Path. They stalk the primordial hinterlands of hell, where they hunt terrifying beasts and perform vile magicks and auguries, using the innards of their still-living prey to discern portents and omens."
+            }
+        ],
+        "team": "hell",
+        "stats" : {            
+            "movement": 6,
+            "melee": 1,
+            "ranged": 2,
+            "base": [32],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 0
+        },
+        "keywords" : ["kw_thecourt","kw_demonic","kw_elite","kw_infiltrator"],
+        "abilities" : ["ab_shadowwalker","ab_lefthandpath","ab_oraclebeastcloak"]
+    },
+    {
+        "id": "md_hellknight",
+        "name": "Hell Knight",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The Hell Knights are always equipped with a suit of Infernal Iron Armour which is included in their cost. This armour can never be removed or lost. Hell Knights can be equipped with any weapons, armour and equipment from the Court Armoury.",
+                "glossary": [{"val": "Court", "id": "kw_thecourt"}]
+            }
+        ],
+        "lore": [ 
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "The silent battalions of Hell, summoned to serve when the Court of the Seven-Headed Serpent seeks sport, are composed of Hell Knights. Their ever-burning banners stream as they march to war, carrying out the bidding of their masters. They are the bannerets of the High Lords of the Court, champions who respond to foolish mortals daring to challenge the hunting parties of the Serpent’s nobility, who embark on hunting excursions beyond the Gate for their amusement."
             }
         ],
         "team": "hell",
         "stats" : {            
             "movement": 6,
             "melee": 0,
-            "ranged": 0,
-            "base": [25],
+            "ranged": 2,
+            "base": [40],
             "armour": 0,
             "movetype": 0,
             "potential": 0
         },
-        "keywords" : [],
-        "abilities" : []
+        "keywords" : ["kw_thecourt","kw_demonic","kw_strong","kw_elite"],
+        "abilities" : ["ab_goetics_knight","ab_bloodmagic"]
     }
 ]
