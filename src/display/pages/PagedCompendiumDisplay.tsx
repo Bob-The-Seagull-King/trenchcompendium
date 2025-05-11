@@ -60,6 +60,9 @@ const PagedCompendiumDisplay = (prop: any) => {
                 }
             }
         }
+        if (DisplayPage.defaultpage) {
+            return null;
+        }
         if (CollectionController.TargetItem == null) {
             return CollectionController.itemcollection[0]
         } else {
@@ -93,6 +96,11 @@ const PagedCompendiumDisplay = (prop: any) => {
         <ErrorBoundary fallback={<div>Something went wrong with PagedDisplayCompendium.tsx</div>}>
             <div className="PagedCompendiumDisplay" key={_keyval}>
                 <div className={'rules-content-main'}>
+                    {((_cureItem == null) && (DisplayPage.defaultpage)) &&
+                        <>
+                            {DisplayPage.defaultpage()}
+                        </>
+                    }
                     {((_curItem == undefined) || (_curItem == null)) &&
                         <h1 className="">{slugname}</h1>
                     }

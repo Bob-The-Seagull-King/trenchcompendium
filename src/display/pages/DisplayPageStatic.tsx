@@ -27,6 +27,7 @@ export interface DisplayCollectionType {
     width         : number,
     menushowitems : boolean,
     hidefilter?   : boolean,
+    defaultpage?  : () => JSX.Element,
     categoryparam?: string,
     returnDisplay: (item: any) => JSX.Element
     returnFilterSelect: (manager : FilterManager, update : NoneToNoneFunction, close : NoneToNoneFunction) => JSX.Element
@@ -43,6 +44,17 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         titlename : 'Game Rules',
         laconic: "How to play a game of Trench Crusade",
         menushowitems: true,
+        defaultpage() {
+            return (
+                <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
+                    {item != undefined &&
+                        <div>
+                            {"THIS IS A TEST TO BE REPLACED"}
+                        </div>
+                    }
+                </ErrorBoundary>
+            )
+        },
         returnDisplay(item: any) {
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
@@ -66,6 +78,17 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         titlename : 'Errata Rules',
         laconic: "Errata & Unfinished/Beta Rules",
         menushowitems: true,
+        defaultpage() {
+            return (
+                <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
+                    {item != undefined &&
+                        <div>
+                            {"THIS IS A TEST TO BE REPLACED"}
+                        </div>
+                    }
+                </ErrorBoundary>
+            )
+        },
         returnDisplay(item: any) {
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
@@ -305,6 +328,17 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
                 </ErrorBoundary>
             )
         },
+        defaultpage() {
+            return (
+                <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
+                    {item != undefined &&
+                        <div>
+                            {"THIS IS A TEST TO BE REPLACED"}
+                        </div>
+                    }
+                </ErrorBoundary>
+            )
+        },
         returnFilterSelect(manager : FilterManager, update : NoneToNoneFunction, close : NoneToNoneFunction) {
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
@@ -327,6 +361,17 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
                         {item.Name}
                     </div>
                     <ScenarioDisplay data={item} />
+                </ErrorBoundary>
+            )
+        },
+        defaultpage() {
+            return (
+                <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
+                    {item != undefined &&
+                        <div>
+                            {"THIS IS A TEST TO BE REPLACED"}
+                        </div>
+                    }
                 </ErrorBoundary>
             )
         },
@@ -356,6 +401,17 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
                 </ErrorBoundary>
             )
         },
+        defaultpage() {
+            return (
+                <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
+                    {item != undefined &&
+                        <div>
+                            {"THIS IS A TEST TO BE REPLACED"}
+                        </div>
+                    }
+                </ErrorBoundary>
+            )
+        },
         returnFilterSelect(manager : FilterManager, update : NoneToNoneFunction, close : NoneToNoneFunction) {
             return (
                 
@@ -375,6 +431,17 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
                     <RulesExplotationTable data={item} />
+                </ErrorBoundary>
+            )
+        },
+        defaultpage() {
+            return (
+                <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
+                    {item != undefined &&
+                        <div>
+                            {"THIS IS A TEST TO BE REPLACED"}
+                        </div>
+                    }
                 </ErrorBoundary>
             )
         },
@@ -449,6 +516,17 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         titlename : 'Patrons',
         laconic: "Forces a warband must appease in campaigns",
         menushowitems: true,
+        defaultpage() {
+            return (
+                <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
+                    {item != undefined &&
+                        <div>
+                            {"THIS IS A TEST TO BE REPLACED"}
+                        </div>
+                    }
+                </ErrorBoundary>
+            )
+        },
         returnDisplay(item: any) {
             return (
                 
