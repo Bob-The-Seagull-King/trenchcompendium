@@ -882,5 +882,35 @@
         "restricted_upgrades": [ ],
         "warband_limit": 1,
         "required_upgrades":[]
+    },
+    {
+        "id": "rel_rl_goeticpowersandspells_up_goetic_burninginferno",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {},
+        "options": [],
+        "model_id_set": ["rl_goeticpowersandspells_inferno"],
+        "upgrade_id": "up_goetic_burninginferno",
+        "cost": 15,
+        "cost_type": 0,
+        "restricted_upgrades": [ ],
+        "warband_limit": 0,
+        "required_upgrades":[]
+    },
+    {
+        "id": "rel_rl_goeticpowersandspells_up_goetic_slavemaster",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {},
+        "options": [],
+        "model_id_set": ["rl_goeticpowersandspells_slavemaster"],
+        "upgrade_id": "up_goetic_slavemaster",
+        "cost": 10,
+        "cost_type": 0,
+        "restricted_upgrades": [ ],
+        "warband_limit": 0,
+        "required_upgrades":[]
     }
 ]

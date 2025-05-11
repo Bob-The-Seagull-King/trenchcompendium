@@ -113,8 +113,9 @@
                 ]
             },
             "faction_add_upgrades": {
+                "list": [{
                 "model_key": "rl_artofassassination",
-                "models_id": ["md_sultanateassassin","md_sultanateassassin_mv_masterassassin"]
+                "models_id": ["md_sultanateassassin","md_sultanateassassin_mv_masterassassin"]}]
             }
         },
         "name": "Art of Assassination",
@@ -230,8 +231,9 @@
                 ]
             },
             "faction_add_upgrades": {
+                "list": [{
                 "model_key": "rl_secretsofthehouseofwisdom",
-                "models_id": ["md_jabireanalchemist"]
+                "models_id": ["md_jabireanalchemist"]}]
             }
         },
         "name": "Secrets of the House of Wisdom",
@@ -606,6 +608,7 @@
         "tags": { },
         "contextdata": { 
             "faction_add_upgrades": {
+                "list": [{
                 "model_key": "rl_unseenadvance",
                 "filters": [
                     {
@@ -613,7 +616,7 @@
                         "value": "kw_elite",
                         "truth": false
                     }
-                ]
+                ]}]
             }
         },
         "name": "Unseen Advance",
@@ -772,8 +775,9 @@
         "tags": { },
         "contextdata": { 
             "faction_add_upgrades": {
+                "list": [{
                 "model_key": "rl_sarcophagusmine",                
-                "models_id": ["md_heretictrooper"]
+                "models_id": ["md_heretictrooper"]}]
             }
         },
         "name": "Sarcophagus Mine",
@@ -1135,8 +1139,9 @@
         "tags": { },
         "contextdata": {             
             "faction_add_upgrades": {
+                "list": [{
                 "model_key": "rl_zealotstrength",                
-                "models_id": ["md_trenchpilgrim"]
+                "models_id": ["md_trenchpilgrim"]}]
             },
             "faction_remove_upgrades": {
                 "upgrades": ["rel_md_up_zealotstrength_pilgrimbase"]
@@ -1175,8 +1180,9 @@
         "tags": { },
         "contextdata": { 
             "faction_add_upgrades": {
+                "list": [{
                 "model_key": "rl_wrathofgod",                
-                "models_id": ["md_trenchpilgrim","md_castigator"]
+                "models_id": ["md_trenchpilgrim","md_castigator"]}]
             }
         },
         "name": "Wrath of God",
@@ -1449,6 +1455,7 @@
         "tags": { },
         "contextdata": { 
             "faction_add_upgrades": {
+                "list": [{
                 "model_key": "rl_swissguard",
                 "models_id": ["md_lieutenant"],
                 "filters": [
@@ -1457,7 +1464,7 @@
                         "value": "kw_elite",
                         "truth": false
                     }
-                ]
+                ]}]
             }
         },
         "name": "Swiss Guard",
@@ -1551,8 +1558,9 @@
         "tags": { },
         "contextdata": { 
             "faction_add_upgrades": {
+                "list": [{
                 "model_key": "rl_fianna",
-                "models_id": ["md_shocktrooper"]
+                "models_id": ["md_shocktrooper"]}]
             }
         },
         "name": "Fianna",
@@ -1617,8 +1625,9 @@
         "contextdata": { 
             
             "faction_add_upgrades": {
+                "list": [{
                 "model_key": "rl_berserker",
-                "models_id": ["md_lieutenant_eire","md_shocktrooper"]
+                "models_id": ["md_lieutenant_eire","md_shocktrooper"]}]
             }
         },
         "name": "Berserker",
@@ -1830,8 +1839,9 @@
         "tags": { },
         "contextdata": { 
             "faction_add_upgrades": {
+                "list": [{
                 "model_key": "rl_forwardpositions",
-                "models_id": ["md_shocktrooper"]
+                "models_id": ["md_shocktrooper"]}]
             }
         },
         "name": "Forward Positions",
@@ -1852,8 +1862,9 @@
         "tags": { },
         "contextdata": { 
             "faction_add_upgrades": {
+                "list": [{
                 "model_key": "rl_rapidassault",
-                "models_id": ["md_shocktrooper","md_lieutenant"]
+                "models_id": ["md_shocktrooper","md_lieutenant"]}]
             }
         },
         "name": "Rapid Assault",
@@ -1984,8 +1995,9 @@
                 "id": "rl_highlandmachinearmour"
             } ,
             "faction_add_upgrades": {
+                "list": [{
                 "model_key": "rl_highlandmachinearmour",
-                "models_id": ["md_mechanisedheavyinfantry_alba"]
+                "models_id": ["md_mechanisedheavyinfantry_alba"]}]
             }
         },
         "name": "Highland Machine Armour",
@@ -2092,6 +2104,7 @@
         "tags": { },
         "contextdata": { 
             "faction_add_upgrades": {
+                "list": [{
                 "model_key": "rl_chewa",
                 "models_id": ["md_shocktrooper"],
                 "filters": [
@@ -2100,7 +2113,7 @@
                         "value": "kw_elite",
                         "truth": true
                     }
-                ]
+                ]}]
             }
         },
         "name": "Chewa",
@@ -2137,8 +2150,9 @@
         "tags": { },
         "contextdata": {      
             "faction_add_upgrades": {
+                "list": [{
                 "model_key": "rl_flankingforces",                
-                "models_id": ["md_yeoman"]
+                "models_id": ["md_yeoman"]}]
             },
             "faction_remove_upgrades": {
                 "upgrades": ["rel_md_yeoman_infiltrator"]
@@ -2669,6 +2683,87 @@
                 "glossary": [
                     {"val": "DEMONIC", "id": "kw_demonic"}
                 ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_noblesofthecourt",
+        "source": "core",
+        "tags": { },
+        "contextdata": {   
+        },
+        "name": "Nobles of the Court",
+        "description":  [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Your warband must include a Praetor OR a Sorcerer as your leader when it is created. If you select a Praetor as your leader you may include up to one Sorcerer in your warband and vice versa."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_goeticpowersandspells",
+        "source": "core",
+        "tags": {
+         },
+        "contextdata": {   
+            "faction_add_upgrades": {
+                "list": [
+                    {
+                        "model_key": "rl_goeticpowersandspells_inferno",
+                        "models_id": ["md_sorcerer"]
+                    },
+                    {
+                        "model_key": "rl_goeticpowersandspells_slavemaster",
+                        "filters": [
+                            {
+                                "type": "keyword",
+                                "value": "kw_elite",
+                                "truth": false
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "name": "Goetic Powers and Spells",
+        "description":  [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Many of the warriors of the Court have access to Goetic abilities – Powers and Spells which use the suffering of mortals as spiritual energy to unleash the reality-bending powers of the Demons. As God’s plan for the universe is disrupted and perverted, the infernal sorcerers and other demonic creatures can use the released primordial energy of Creation to alter reality. Demons have to be quick, however: God’s omnipotence will soon reassert itself and the opportunity for Demons to disturb the world is lost. Thus infernal creatures have a continuous and growing need for human sacrifices, pain and endless warfare to enable their supernatural powers."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Goetic Spells are marked with the Keyword GOETIC (x) where the number in brackets indicates how many BLOOD MARKERS will have to be spent to trigger the effect of the Spell. If multiple numbers or a range of numbers are listed in the brackets, any one of those numbers can be chosen. These BLOOD MARKERS can be taken from any model currently taking part in the battle, be they friendly or enemy models. However, they must come from models that do not have the Keyword DEMONIC or BLACK GRAIL.",
+                "glossary": [
+                    {"val": "GOETIC", "id": "kw_goetic"},
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"},
+                    {"val": "DEMONIC", "id": "kw_demonic"},
+                    {"val": "BLACK GRAIL", "id": "kw_blackgrail"}
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "BLOOD MARKERS used this way are removed from the game and the described effect of the Goetic Spell or ability then takes effect as described – no ACTION roll is needed, unless outlined in the spell. Despite not requiring an ACTION roll, Goetic Spells are ACTIONS and, as with other ACTIONS, spells can only be used by the model once per Activation. Some Goetic Powers are not marked with the Keyword GOETIC (x). These powers are typically passive abilities.",
+                "glossary": [
+                    {"val": "GOETIC", "id": "kw_goetic"},
+                    {"val": "ACTION", "id": "kw_action"}
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                    
+                    {
+                        "tags": {"desc_type" : "bold"},
+                        "content": "Seven Deadly Sins"
+                    }
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Many of the warriors of the Court have access to a selection of devastating Spells and other Powers as detailed in the list below which can be purchased at the indicated cost when the model is initially purchased. Depending on the type of model and which Deadly Sin the warband is dedicated to, the selection available to you may vary. All such limitations are clearly marked below."
             }
         ],
         "options": []

@@ -285,7 +285,7 @@
                 "content": "The missions of the Court against the Faithful do not follow the same logic as one a mortal commander might have. A mighty praetor could strike at a militarily insignificant village only to kill a new-born future saint, betray their own mortal followers by suddenly falling upon some unsuspecting heretic settlement or even clash with a warband of a rival Head of the Serpent. The wise do not question the motives of Hell’s rage and Heretics accept these occasional attacks against their forces as a fitting judgement for their lack of success in the war against the Faithful."
             }
         ],
-        "rules": [],
+        "rules": ["rl_noblesofthecourt","rl_goeticpowersandspells"],
         "options": [
             {
             "ref_id" : "ot_courtsins",

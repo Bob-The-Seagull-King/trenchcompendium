@@ -1237,5 +1237,118 @@
             }
         ],
         "options": []
+    },
+    {
+        "id": "up_goetic_burninginferno",
+        "name": "Burning Inferno",
+        "source": "core",
+        "tags": {"action": true, "special_category": "goetic"
+                },
+        "contextdata": {
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "As a Ranged Attack ACTION with GOETIC (1-3) spell the Sorcerer opens a portal to the Lake of Fire and draws forth a great screaming ball of infernal lava mixed with damned souls. Select a 1x1mm point within 36” that the Sorcerer can see. Next, make a ranged attack ACTION: this attack suffers penalties for Long Range but not for Cover. If the roll fails (i.e. you roll 6 or less), the fireball lands 1” away from its intended location, multiplied by the number representing the degree of failure (for example, if you rolled 5, the fireball lands 2” away, as 7-5=2). The direction is decided by your opponent. The Burning Inferno has the Keyword BLAST X”, where X is the amount of BLOOD MARKERS spent. Additionally, if the Burning Inferno lands directly on top of a model, it ignores that model’s armour. This attack has the Keyword FIRE.",
+                "glossary": [
+                    {"val": "ACTION", "id": "kw_action"},
+                    {"val": "GOETIC", "id": "kw_goetic"},
+                    {"val": "BLAST", "id": "kw_blast"},
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"},
+                    {"val": "FIRE", "id": "kw_fire"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_goetic_slavemaster",
+        "name": "Slavemaster",
+        "source": "core",
+        "tags": {"action": true, "special_category": "goetic"
+                },
+        "contextdata": {
+        },
+        "description": [      
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "As a GOETIC (1) spell, this model can command any friendly Yoke Fiend within 12” to do one of the following:",
+                "glossary": [
+                    {"val": "GOETIC", "id": "kw_goetic"}
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                    
+                    {
+                        "tags": {"desc_type" : "list"},
+                        "content": "",
+                        "subcontent": [
+                            
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Move: "
+                                    },{
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "The Yoke Fiend takes a Standard Move ACTION of up to 6”.",
+                                        "glossary": [
+                                            {"val": "ACTION", "id": "kw_action"}
+                                        ]
+                                    }
+                                ]
+                            },{
+                                "tags": {"desc_type" : "default"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Ranged Attack: "
+                                    },{
+                                        "tags": {"desc_type" : "default"},
+                                        "content": " The Yoke Fiend takes a Ranged Attack ACTION with any Ranged weapon it has.",
+                                        "glossary": [
+                                            {"val": "ACTION", "id": "kw_action"}
+                                        ]
+                                    }
+                                ]
+                            },{
+                                "tags": {"desc_type" : "default"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Melee Attack: "
+                                    },{
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "The Yoke Fiend takes a Melee Attack ACTION.",
+                                        "glossary": [
+                                            {"val": "ACTION", "id": "kw_action"}
+                                        ]
+                                    }
+                                ]
+                            },{
+                                "tags": {"desc_type" : "default"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Sacrifice: "
+                                    },{
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "The Yoke Fiend kills itself (it is removed from the board immediately as a casualty)."
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "options": []
     }
 ]

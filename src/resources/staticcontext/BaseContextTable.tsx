@@ -472,74 +472,8 @@ export const BaseContextCallTable : CallEventTable = {
             
             const { UpgradeFactory } = await import("../../factories/features/UpgradeFactory");
 
-            const UpgradeList = Requester.MakeRequest(
-                {
-                    searchtype: "complex", 
-                    searchparam: {
-                        type: "modelupgraderelationship",
-                        request: {
-                            operator: 'and',
-                            terms: [
-                                {
-                                    item: "model_id_set",
-                                    value: context_func["model_key"],
-                                    equals: true,
-                                    strict: true
-                                }
-                            ],
-                            subparams: []
-                        }
-                    }
-                }
-            ) as IModelUpgradeRelationship[]
-            
-            for (let i = 0; i < UpgradeList.length; i++) {
-                UpgradeList[i].model_id_set = context_func["models_id"]
-                relayVar.push(await UpgradeFactory.CreateModelUpgrade(UpgradeList[i], null))
-            }
-
-            return relayVar;
-        },
-        async getContextuallyAddedUpgrades(this: EventRunner, eventSource : any, relayVar : ModelUpgradeRelationship[], trackVal : Model, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
-            
-            const { UpgradeFactory } = await import("../../factories/features/UpgradeFactory");
-
-            let ValidUpgrade = false;
-
-            if (context_func['filters'] ) {
-                for (let i = 0; i < context_func['filters'].length; i++) {
-                    const curFilter = context_func['filters'][i]
-                    if (curFilter["type"] == "keyword") {            
-                        if (curFilter['truth'] == true) {
-                            if (trackVal.getKeywordIDs().includes(curFilter["value"])) {
-                                ValidUpgrade = true;
-                            } else {
-                                ValidUpgrade = false;
-                                break;
-                            }
-                        } else {
-                            if (trackVal.getKeywordIDs().includes(curFilter["value"])) {
-                                ValidUpgrade = false;
-                                break;
-                            } else {
-                                ValidUpgrade = true;
-                            }
-                        }
-                    }
-                }
-            }
-            
-            if (context_func['models_id'] ) {
-                for (let i = 0; i < context_func['models_id'].length; i++) {
-                    if (trackVal.ID == context_func['models_id'][i]) {
-                        ValidUpgrade = true;
-                        break;
-                    }
-                }
-            }
-
-
-            if (ValidUpgrade) {
+            for (let k = 0; k < context_func['list'].length; k++) {
+                const curUpgrade = context_func['list'][k]
                 const UpgradeList = Requester.MakeRequest(
                     {
                         searchtype: "complex", 
@@ -550,7 +484,7 @@ export const BaseContextCallTable : CallEventTable = {
                                 terms: [
                                     {
                                         item: "model_id_set",
-                                        value: context_func["model_key"].toString(),
+                                        value: curUpgrade["model_key"],
                                         equals: true,
                                         strict: true
                                     }
@@ -560,12 +494,83 @@ export const BaseContextCallTable : CallEventTable = {
                         }
                     }
                 ) as IModelUpgradeRelationship[]
-
+                
                 for (let i = 0; i < UpgradeList.length; i++) {
-                    UpgradeList[i].model_id_set = context_func["models_id"]
+                    UpgradeList[i].model_id_set = curUpgrade["models_id"]
                     relayVar.push(await UpgradeFactory.CreateModelUpgrade(UpgradeList[i], null))
                 }
+            }
+            return relayVar;
+        },
+        async getContextuallyAddedUpgrades(this: EventRunner, eventSource : any, relayVar : ModelUpgradeRelationship[], trackVal : Model, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            
+            const { UpgradeFactory } = await import("../../factories/features/UpgradeFactory");
+
+            for (let k = 0; k < context_func['list'].length; k++) {
+                const curUpgrade = context_func['list'][k]
+                let ValidUpgrade = false;
+
+                if (curUpgrade['filters'] ) {
+                    for (let i = 0; i < curUpgrade['filters'].length; i++) {
+                        const curFilter = curUpgrade['filters'][i]
+                        if (curFilter["type"] == "keyword") {            
+                            if (curFilter['truth'] == true) {
+                                if (trackVal.getKeywordIDs().includes(curFilter["value"])) {
+                                    ValidUpgrade = true;
+                                } else {
+                                    ValidUpgrade = false;
+                                    break;
+                                }
+                            } else {
+                                if (trackVal.getKeywordIDs().includes(curFilter["value"])) {
+                                    ValidUpgrade = false;
+                                    break;
+                                } else {
+                                    ValidUpgrade = true;
+                                }
+                            }
+                        }
+                    }
+                }
                 
+                if (curUpgrade['models_id'] ) {
+                    for (let i = 0; i < curUpgrade['models_id'].length; i++) {
+                        if (trackVal.ID == curUpgrade['models_id'][i]) {
+                            ValidUpgrade = true;
+                            break;
+                        }
+                    }
+                }
+
+
+                if (ValidUpgrade) {
+                    const UpgradeList = Requester.MakeRequest(
+                        {
+                            searchtype: "complex", 
+                            searchparam: {
+                                type: "modelupgraderelationship",
+                                request: {
+                                    operator: 'and',
+                                    terms: [
+                                        {
+                                            item: "model_id_set",
+                                            value: curUpgrade["model_key"].toString(),
+                                            equals: true,
+                                            strict: true
+                                        }
+                                    ],
+                                    subparams: []
+                                }
+                            }
+                        }
+                    ) as IModelUpgradeRelationship[]
+
+                    for (let i = 0; i < UpgradeList.length; i++) {
+                        UpgradeList[i].model_id_set = curUpgrade["models_id"]
+                        relayVar.push(await UpgradeFactory.CreateModelUpgrade(UpgradeList[i], null))
+                    }
+                    
+                }
             }
 
             return relayVar;
