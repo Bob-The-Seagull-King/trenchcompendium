@@ -19,6 +19,7 @@ import GenericTabledBlockDisplay from "../components/generics/GenereicTabledBloc
 import RulesInjuriesTable from "../components/rules-content/RulesInjuriesTable";
 import RulesExplotationTable from "../components/rules-content/RulesExplotationTable";
 import RulesSkillTable from "../components/rules-content/RulesSkillTable";
+import RulesEquipmentEntry from "../components/rules-content/RulesEquipmentEntry";
 
 export interface DisplayCollectionType {
     searchId      : string,
