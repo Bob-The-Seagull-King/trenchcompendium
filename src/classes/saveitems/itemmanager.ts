@@ -38,7 +38,7 @@ class ItemManager {
             }
             return TempList;
         } catch (e) {
-            console.log("Local storage is not valid.")
+            undefined;
         }
         return TempList;
     }

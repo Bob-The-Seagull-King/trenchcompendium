@@ -21,7 +21,7 @@ function GrabContentPack() {
         const ContentList: ContentPack[] = JSON.parse(data || "");
         return ContentList;
     } catch (e) {
-        console.log("Local storage is not valid.")
+        undefined;
     }
     return TempList;
 }
