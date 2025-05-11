@@ -109,20 +109,9 @@ const FilterableCompendiumDisplay = (prop: any) => {
                     <div className="filter-items-wrap">
                         {_curItems.map((item) => (
                             <div className={'filter-item'} key={item.HeldItem.ID}>
-                                {item.HeldItem instanceof Equipment &&
-                                    <>
-                                        <RulesEquipmentEntry
-                                            equipment={item.HeldItem}
-                                        />
-                                    </>
-                                }
-
-                                {/* @TODO Create Markup for this */}
-                                {item.HeldItem instanceof ModelCollection &&
-                                    <>
-                                        {DisplayPage.returnDisplay(item.HeldItem)}
-                                    </>
-                                }
+                                <>
+                                    {DisplayPage.returnDisplay(item.HeldItem)}
+                                </>
                             </div>))}
                     </div>}
             </div>

@@ -261,20 +261,9 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
                 
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
                 
-                    <div className="DisplayPageStatic-armoury-returnDisplay">
-                        <GenericCollapsableBlockDisplay 
-                            d_name={item.Name} 
-                            d_colour={"grey"} 
-                            d_state={true}  
-                            bordertype={0}
-                            d_border={false}
-                            d_margin={"sml"}
-                            d_method={() => <>
-                                <div className="">
-                                    <EquipmentDisplay data={item} />
-                                </div>
-                            </>} />
-                    </div>
+                        <RulesEquipmentEntry
+                            equipment={item}
+                        />
                 </ErrorBoundary>
             )
         },
