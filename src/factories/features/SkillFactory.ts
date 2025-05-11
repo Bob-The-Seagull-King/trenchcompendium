@@ -41,7 +41,6 @@ class SkillFactory {
      * @returns A newly created ability
      */
     static async CreateSkillGroup(_rule: IContextObject, parent : ContextObject | null) {
-        console.log(_rule)
         const cache = StaticDataCache.getInstance();
         const isValid = (cache.CheckID('skillgroup', _rule.id))
         if (isValid == false) {

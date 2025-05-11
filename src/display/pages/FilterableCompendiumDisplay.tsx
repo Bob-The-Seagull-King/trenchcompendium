@@ -63,7 +63,6 @@ const FilterableCompendiumDisplay = (prop: any) => {
             } else {
                 await ViewPageController.initCollection();
             }
-            console.log(CollectionController.itemcollection)
             setslugname("No Items Found")
             setCurItems(InitStateSet());
             setKeyVal((prev) => prev + 1);
