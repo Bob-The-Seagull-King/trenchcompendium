@@ -2840,7 +2840,7 @@
             "movetype": 1,
             "potential": 0
         },
-        "keywords" : ["kw_tough","kw_strong","kw_fear","kw_thecourt","kw_demonic","kw_leader"],
+        "keywords" : ["kw_tough","kw_strong","kw_fear","kw_thecourt","kw_demonic","kw_leader","kw_elite"],
         "abilities" : ["ab_goetics_praetor"]
     },
     {

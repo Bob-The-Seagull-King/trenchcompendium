@@ -2720,7 +2720,7 @@
                             {
                                 "type": "keyword",
                                 "value": "kw_elite",
-                                "truth": false
+                                "truth": true
                             }
                         ]
                     }
