@@ -60,7 +60,7 @@ const RulesExplorationLocation = (props: any) => {
                     {returnDescription(explorationLocationObject, explorationLocationObject.Description)}
                 </p>
 
-                {explorationLocationObject.MyOptions.length &&
+                {explorationLocationObject.MyOptions.length > 0 &&
                     <ul className={'exploration-location-options'}>
                         {explorationLocationObject.MyOptions.map((item) => (
                             <React.Fragment key={explorationLocationObject.Name + "-" + item.RefID}>
