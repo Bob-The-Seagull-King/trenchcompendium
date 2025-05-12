@@ -55,25 +55,33 @@ const SingleOptionSetDisplay = (props: any) => {
         <ErrorBoundary fallback={<div>Something went wrong with OptionSetStaticDisplay.tsx</div>}>
             {OptionSet.Selections.length > 0 &&
                 <>
-                    <div className=" size-subtitle font-seriftext subtitle-letterspacing">
+                    <h3>
                         { OptionSet.Name }
-                    </div>
+                    </h3>
 
-                    {
-                        returnDescription(OptionSet, OptionSet.Description)
-                    }
-                    
-                    <Form.Control className={"borderstyler bordergrey overcomeradius " } as="select" aria-label="Default select example"  placeholder="Member Type" onChange={(e: { target: { value: any; }; }) => { updateItem(e.target.value)    } } >
-                        {OptionSet.Selections.map((selec) => ( 
-                            <option value={selec.id} key={"modeloption"+(OptionSet.Selections.indexOf(selec).toString())} >{makestringpresentable(selec.display_str)}</option> 
-                        ))}
-                    </Form.Control>
-                    
-                    <div className="row" key={_keyvar}>
+                    <p>
+                        {
+                            returnDescription(OptionSet, OptionSet.Description)
+                        }
+                    </p>
+
+                    <Form.Group controlId={OptionSet.RefID+'-select'} className={'mb-3'}>
+                        <Form.Label>{'Choose Option'}</Form.Label>
+                        <Form.Control className={"find-SingleOptionSetDisplay" }
+                                      as="select"
+                                      onChange={(e: { target: { value: any; }; }) => { updateItem(e.target.value)    } }
+                        >
+                            {OptionSet.Selections.map((selec) => (
+                                <option value={selec.id} key={"modeloption"+(OptionSet.Selections.indexOf(selec).toString())} >{makestringpresentable(selec.display_str)}</option>
+                            ))}
+                        </Form.Control>
+                    </Form.Group>
+
+                    <p>
                         <div className="col">
                             {displayState}
                         </div>
-                    </div>
+                    </p>
                 </>
             }
         </ErrorBoundary>
