@@ -5,5 +5,19 @@
         "source": "core",
         "tags": {},
         "contextdata": {}
+    },
+    {
+        "id": "et_rarelocations",
+        "name": "Rare Locations",
+        "source": "core",
+        "tags": {},
+        "contextdata": {}
+    },
+    {
+        "id": "et_legendarylocations",
+        "name": "Legendary Locations",
+        "source": "core",
+        "tags": {},
+        "contextdata": {}
     }
 ]
