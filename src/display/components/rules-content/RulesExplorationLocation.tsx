@@ -51,6 +51,7 @@ const RulesExplorationLocation = (props: any) => {
         SetModelOptions();
     }, []);
 
+    console.log(explorationLocationObject)
 
     return (
         <ErrorBoundary fallback={<div>Something went wrong with ExplorationLocationDisplay.tsx</div>}>
@@ -72,7 +73,8 @@ const RulesExplorationLocation = (props: any) => {
                                 {item.Selections.map((selec) => (
                                     <li key={item.Selections.indexOf(selec).toString()} className={'exploration-location-option'}>
                                         <strong>{selec.display_str + ": "}</strong>
-                                        Lorem ipsum dolor sit amet
+                                        {
+                                        "Lorem ipsum dolor sit amet"}
                                         {/* Option Text goes here */}
                                     </li>
                                 ))}
