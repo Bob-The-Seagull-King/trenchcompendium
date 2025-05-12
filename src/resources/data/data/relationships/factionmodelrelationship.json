@@ -1812,7 +1812,7 @@
         },
         "options": [],
         "faction_id" : ["fc_courtofthesevenheadedserpent"],
-        "model_id" : "md_wretched",
+        "model_id" : "md_wretched_court",
         "captain" : false,
         "mercenary": false,
         "cost" : 20,

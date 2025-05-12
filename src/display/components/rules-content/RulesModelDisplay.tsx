@@ -58,7 +58,16 @@ const RulesModelDisplay = (props: any) => {
     // Render no lore if loreshow !== 'true'
     const [loreshow] = useGlobalState('loreshow');
 
-    
+    function getAvailabilityString() {
+        if (minimum == maximum) {
+            if (minimum == "0") {
+                return "Unlimited"
+            } else {
+                return minimum
+            }
+        }
+        return minimum + "-" + maximum
+    }
 
     function SplitUpgrades(UpgradeListFull : ModelUpgradeRelationship[]) : UpgradesGrouped {
 
@@ -185,7 +194,7 @@ const RulesModelDisplay = (props: any) => {
                         <FighterCardMetaEntry
                             className="fighter-availability"
                             label="Availability"
-                            value={factionmodelObject.getAvailabilityString()}
+                            value={getAvailabilityString()}
                         />
                     </div>
 
