@@ -2554,14 +2554,23 @@
             "court_sin": true
          },
         "contextdata": {   
+            "add_to_model": {   
+                "id": "ab_demonicaura_wrath",                            
+                "required": [
+                    {
+                        "category": "id",
+                        "value": ["md_desecratedsaint"]
+                    }
+                ]
+            }
         },
         "name": "Wrath",
         "description":  [
             {
                 "tags": {"desc_type" : "paragraph"},
-                "content": "Test sin for Wrath used for DEMONIC models.",
+                "content": "Desecrated Saints gain the Aura of Wrath ability. Your warband gains the GOETIC powers Charge of Hatred, Lesser Mark of Cain, and Blind Rage.",
                 "glossary": [
-                    {"val": "DEMONIC", "id": "kw_demonic"}
+                    {"val": "GOETIC", "id": "kw_goetic"}
                 ]
             }
         ],
@@ -2573,15 +2582,24 @@
         "tags": {
             "court_sin": true
          },
-        "contextdata": {   
+        "contextdata": {  
+            "add_to_model": {   
+                "id": "ab_demonicaura_envy",                            
+                "required": [
+                    {
+                        "category": "id",
+                        "value": ["md_desecratedsaint"]
+                    }
+                ]
+            }  
         },
         "name": "Envy",
         "description":  [
             {
                 "tags": {"desc_type" : "paragraph"},
-                "content": "Test sin for Envy used for DEMONIC models.",
+                "content": "Desecrated Saints gain the Aura of Envy ability. Your warband gains the GOETIC powers Envious Eyes, Coveted Position, and Whats Yours is Mine.",
                 "glossary": [
-                    {"val": "DEMONIC", "id": "kw_demonic"}
+                    {"val": "GOETIC", "id": "kw_goetic"}
                 ]
             }
         ],
@@ -2594,14 +2612,23 @@
             "court_sin": true
          },
         "contextdata": {   
+            "add_to_model": {   
+                "id": "ab_demonicaura_lust",                            
+                "required": [
+                    {
+                        "category": "id",
+                        "value": ["md_desecratedsaint"]
+                    }
+                ]
+            }
         },
         "name": "Lust",
         "description":  [
             {
                 "tags": {"desc_type" : "paragraph"},
-                "content": "Test sin for Lust used for DEMONIC models.",
+                "content": "Desecrated Saints gain the Aura of Lust ability. Your warband gains the GOETIC powers Forbidden Pleasures, Exquisite Pain, and Call of Flesh.",
                 "glossary": [
-                    {"val": "DEMONIC", "id": "kw_demonic"}
+                    {"val": "GOETIC", "id": "kw_goetic"}
                 ]
             }
         ],
@@ -2614,14 +2641,23 @@
             "court_sin": true
          },
         "contextdata": {   
+            "add_to_model": {   
+                "id": "ab_demonicaura_pride",                            
+                "required": [
+                    {
+                        "category": "id",
+                        "value": ["md_desecratedsaint"]
+                    }
+                ]
+            }
         },
         "name": "Pride",
         "description":  [
             {
                 "tags": {"desc_type" : "paragraph"},
-                "content": "Test sin for Pride used for DEMONIC models.",
+                "content": "Desecrated Saints gain the Aura of Pride ability. Your warband gains the GOETIC powers Proud Defiance, Too Proud to Fall, and Light of Samael.",
                 "glossary": [
-                    {"val": "DEMONIC", "id": "kw_demonic"}
+                    {"val": "GOETIC", "id": "kw_goetic"}
                 ]
             }
         ],
@@ -2634,14 +2670,23 @@
             "court_sin": true
          },
         "contextdata": {   
+            "add_to_model": {   
+                "id": "ab_demonicaura_sloth",                            
+                "required": [
+                    {
+                        "category": "id",
+                        "value": ["md_desecratedsaint"]
+                    }
+                ]
+            }
         },
         "name": "Sloth",
         "description":  [
             {
                 "tags": {"desc_type" : "paragraph"},
-                "content": "Test sin for Sloth used for DEMONIC models.",
+                "content": "Desecrated Saints gain the Aura of Sloth ability. Your warband gains the GOETIC powers Morphean Mind, Charm of Acedia, and Daemonium Meridianum.",
                 "glossary": [
-                    {"val": "DEMONIC", "id": "kw_demonic"}
+                    {"val": "GOETIC", "id": "kw_goetic"}
                 ]
             }
         ],
@@ -2653,15 +2698,24 @@
         "tags": {
             "court_sin": true
          },
-        "contextdata": {   
+        "contextdata": {  
+            "add_to_model": {   
+                "id": "ab_demonicaura_gluttony",                            
+                "required": [
+                    {
+                        "category": "id",
+                        "value": ["md_desecratedsaint"]
+                    }
+                ]
+            } 
         },
         "name": "Gluttony",
         "description":  [
             {
                 "tags": {"desc_type" : "paragraph"},
-                "content": "Test sin for Gluttony used for DEMONIC models.",
+                "content": "Desecrated Saints gain the Aura of Famine ability. Your warband gains the GOETIC powers Belly of the Beast, Uncaring Gluttony, and Eater of the Flesh.",
                 "glossary": [
-                    {"val": "DEMONIC", "id": "kw_demonic"}
+                    {"val": "GOETIC", "id": "kw_goetic"}
                 ]
             }
         ],
@@ -2673,15 +2727,24 @@
         "tags": {
             "court_sin": true
          },
-        "contextdata": {   
+        "contextdata": { 
+            "add_to_model": {   
+                "id": "ab_demonicaura_greed",                            
+                "required": [
+                    {
+                        "category": "id",
+                        "value": ["md_desecratedsaint"]
+                    }
+                ]
+            }   
         },
         "name": "Greed",
         "description":  [
             {
                 "tags": {"desc_type" : "paragraph"},
-                "content": "Test sin for Greed used for DEMONIC models.",
+                "content": "Desecrated Saints gain the Aura of Greed ability. Your warband gains the GOETIC powers Body of Gold, Black Heart, and Universal Greed.",
                 "glossary": [
-                    {"val": "DEMONIC", "id": "kw_demonic"}
+                    {"val": "GOETIC", "id": "kw_goetic"}
                 ]
             }
         ],

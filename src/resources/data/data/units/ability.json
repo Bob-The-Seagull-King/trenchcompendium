@@ -2435,5 +2435,128 @@
             }
         ],
         "options": []
+    },
+    {
+        "id": "ab_demonicaura_sloth",
+        "name": "Aura of Sloth",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {   
+        },
+        "description": [                
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Enemy models within 8” of the Saint treat Minor Hit results as a Down result instead. This affects models that normally treat Down results as a Minor Hit result (such as models wearing Machine Armour).",
+                "glossary": [
+                    {"val": "Down", "id": "gl_down"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_demonicaura_envy",
+        "name": "Aura of Envy",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {   
+        },
+        "description": [                
+            {
+                "tags": {"desc_type" : "default"},
+                "content": " Enemy models within 12” of the Saint cannot Charge enemy models that are already engaged in melee combat with one of their allies."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_demonicaura_pride",
+        "name": "Aura of Pride",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {   
+        },
+        "description": [                
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "When the Desecrated Saint ends its Activation, all enemy models within 8” of it suffer one BLOOD MARKER from the light of the Morningstar that the Saint emits.",
+                "glossary": [
+                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_demonicaura_greed",
+        "name": "Aura of Greed",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {   
+        },
+        "description": [                
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "When an enemy model declares a Charge, they must Charge the Desecrated Saint if it is visible, not in cover and within 12” of the Saint. The charging model must be able to reach this model without Climbing, Jumping or crossing Dangerous Terrain."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_demonicaura_wrath",
+        "name": "Aura of Wrath",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {   
+        },
+        "description": [                
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "All friendly models within 8” of the Saint (including the Saint) roll melee attacks and to Dash with +1 DICE.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_demonicaura_lust",
+        "name": "Aura of Lust",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {   
+        },
+        "description": [                
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Enemy models within 6” of the Desecrated Saint (unless they have the Keyword BLACK GRAIL) gain no benefit from any armour they wear, as they are naked before the Serpent Head of Lust in the Hell-dimension that the Saint projects all around it. This includes additional effects, such as Machine Armour’s ability to reduce Down results to Minor Hit results, but not penalties or neutral effects (such as the Charging penalty or the base size adjustment). Note: Holy Icon Shields and Armour, Infernal Iron Armour or similar armour that always grant armour save are not affected by the Aura of Lust.",
+                "glossary": [
+                    {"val": "BLACK GRAIL", "id": "kw_blackgrail"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_demonicaura_gluttony",
+        "name": "Aura of Famine",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {   
+        },
+        "description": [                
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Enemy models within 8” of the Desecrated Saint (unless they have the Keyword BLACK GRAIL or ARTIFICIAL) roll ACTIONS with -1 DICE.",
+                "glossary": [
+                    {"val": "BLACK GRAIL", "id": "kw_blackgrail"},
+                    {"val": "ARTIFICIAL", "id": "kw_artificial"},
+                    {"val": "ACTIONS", "id": "kw_action"},
+                    {"val": "-1 DICE", "id": "kw_minusdice"}
+                ]
+            }
+        ],
+        "options": []
     }
 ]
