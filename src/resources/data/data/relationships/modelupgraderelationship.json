@@ -957,5 +957,50 @@
         "restricted_upgrades": [ ],
         "warband_limit": 3,
         "required_upgrades":[]
+    },
+    {
+        "id": "rel_rl_sin_envy_all_up_goetic_envy_whatisyoursismine",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {},
+        "options": [],
+        "model_id_set": ["rl_sin_envy_all"],
+        "upgrade_id": "up_goetic_envy_whatisyoursismine",
+        "cost": 10,
+        "cost_type": 0,
+        "restricted_upgrades": [ ],
+        "warband_limit": 0,
+        "required_upgrades":[]
+    },
+    {
+        "id": "rel_rl_sin_envy_captains_up_goetic_envy_enviouseyes",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {},
+        "options": [],
+        "model_id_set": ["rl_sin_envy_captains"],
+        "upgrade_id": "up_goetic_envy_enviouseyes",
+        "cost": 5,
+        "cost_type": 0,
+        "restricted_upgrades": [ ],
+        "warband_limit": 0,
+        "required_upgrades":[]
+    },
+    {
+        "id": "rel_rl_sin_envy_captains_up_goetic_envy_covetedposition",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {},
+        "options": [],
+        "model_id_set": ["rl_sin_envy_captains"],
+        "upgrade_id": "up_goetic_envy_covetedposition",
+        "cost": 10,
+        "cost_type": 0,
+        "restricted_upgrades": [ ],
+        "warband_limit": 0,
+        "required_upgrades":[]
     }
 ]

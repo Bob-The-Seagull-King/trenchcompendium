@@ -1417,5 +1417,114 @@
             }
         ],
         "options": []
+    },
+    {
+        "id": "up_goetic_envy_enviouseyes",
+        "name": "Envious Eyes",
+        "source": "core",
+        "tags": {"trait": true, "special_category": "goetic"
+                },
+        "contextdata": {
+            "model_add_equipment": {
+                "additions": [
+                    {
+                        "count": 1,
+                        "option_id": 0,
+                        "restriction": [
+                            { "category": "melee" },
+                            { "category": "ranged" }
+                        ]
+                    }
+                ]
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This model can be equipped with one weapon or suit of armour (excluding shields) from the Trench Pilgrim, New Antioch or Iron Sultanate warband armouries, including ranged weapons. You must pay the cost of this item as standard and, if it is lost, it must be purchased again as soon as you have the funds. This item follows the normal limitations. The model will never willingly trade this item away or allow it to be removed. A Sorcerer with this Power can be equipped with a ranged weapon purchased in this way, even though they can normally only equip melee weapons."
+            }
+        ],
+        "options": [{
+            "ref_id" : "ot_enviouseyes",
+            "name" : "Envious Eyes Selections",
+            "description" : [],
+            "category" : "type",
+            "type" : "text",
+            "strictness" : "strict",
+            "predefined_options" : [],
+            "option_context" : {"basic_option_default":{}},
+            "data_search" : {      
+                "searchtype": "complex",
+                "searchparam":    {
+                    "type": "factionequipmentrelationship",
+                    "request":    {
+                        "operator": "or",
+                        "terms": [
+                            {             
+                                "item": "faction_id",
+                                "value": "fc_newantioch",
+                                "equals": true,
+                                "strict": true
+                            },
+                            {             
+                                "item": "faction_id",
+                                "value": "fc_trenchpilgrim",
+                                "equals": true,
+                                "strict": true
+                            },
+                            {             
+                                "item": "faction_id",
+                                "value": "fc_ironsultanate",
+                                "equals": true,
+                                "strict": true
+                            }
+                        ],
+                        "subparams": [
+                            
+                        ]
+                    }
+                }                        
+            }
+        }]
+    },
+    {
+        "id": "up_goetic_envy_covetedposition",
+        "name": "Coveted Position",
+        "source": "core",
+        "tags": {"trait": true, "special_category": "goetic"
+                },
+        "contextdata": {
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "As a GOETIC (2) Spell, this model changes positions with any other model it can see within 12”, as long as the bases of the models fit into their positions. This cannot be done if either model is engaged in Melee Combat.",
+                "glossary": [
+                    {"val": "GOETIC", "id": "kw_goetic"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_goetic_envy_whatisyoursismine",
+        "name": "What Is Yours Is Mine",
+        "source": "core",
+        "tags": {"trait": true, "special_category": "goetic"
+                },
+        "contextdata": {
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "As a GOETIC (1) Spell, this model can remove a BLOOD MARKER or BLESSING MARKER from any model that it can see. This model then gains a marker of that type. This marker can come from models regardless of their Keywords and is separate from the BLOOD MARKER used to cast this spell.",
+                "glossary": [
+                    {"val": "GOETIC", "id": "kw_goetic"},
+                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"},
+                    {"val": "BLESSING MARKER", "id": "kw_blessingmarker"}
+                ]
+            }
+        ],
+        "options": []
     }
 ]

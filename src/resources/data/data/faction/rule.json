@@ -2599,7 +2599,7 @@
         "description":  [
             {
                 "tags": {"desc_type" : "paragraph"},
-                "content": "Desecrated Saints gain the Aura of Wrath ability. Your warband gains the GOETIC powers Charge of Hatred, Lesser Mark of Cain, and Blind Rage.",
+                "content": "Desecrated Saints gain the Aura of Wrath ability. Your warband gains the GOETIC powers Charge of Hatred, Lesser Mark of Cain, and Blind Rage. In addition, your Praetor can only take one GOETIC power or spell.",
                 "glossary": [
                     {"val": "GOETIC", "id": "kw_goetic"}
                 ]
@@ -2614,6 +2614,24 @@
             "court_sin": true
          },
         "contextdata": {  
+            "faction_add_upgrades": {
+                "list": [
+                    {
+                        "model_key": "rl_sin_envy_all",
+                        "filters": [
+                            {
+                                "type": "keyword",
+                                "value": "kw_elite",
+                                "truth": true
+                            }
+                        ]
+                    },
+                    {
+                        "model_key": "rl_sin_envy_captains",
+                        "models_id": ["md_sorcerer","md_praetor"]
+                    }
+                ]
+            },
             "true_add_to_model": {  
                 "list": [{ 
                 "id": "ab_demonicaura_envy",                            
