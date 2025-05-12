@@ -20,6 +20,7 @@ import RulesInjuriesTable from "../components/rules-content/RulesInjuriesTable";
 import RulesExplotationTable from "../components/rules-content/RulesExplotationTable";
 import RulesSkillTable from "../components/rules-content/RulesSkillTable";
 import RulesEquipmentEntry from "../components/rules-content/RulesEquipmentEntry";
+import { CollectionsListPage } from "../../classes/viewmodel/pages/CollectionListPage";
 
 export interface DisplayCollectionType {
     searchId      : string,
@@ -28,7 +29,7 @@ export interface DisplayCollectionType {
     width         : number,
     menushowitems : boolean,
     hidefilter?   : boolean,
-    defaultpage?  : () => JSX.Element,
+    defaultpage?  : (ViewPageController: CollectionsListPage) => JSX.Element,
     categoryparam?: string,
     returnDisplay: (item: any) => JSX.Element
     returnFilterSelect: (manager : FilterManager, update : NoneToNoneFunction, close : NoneToNoneFunction) => JSX.Element
@@ -45,7 +46,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         titlename : 'Game Rules',
         laconic: "How to play a game of Trench Crusade",
         menushowitems: true,
-        defaultpage() {
+        defaultpage(ViewPageController: CollectionsListPage) {
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
                         <div>
@@ -77,7 +78,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         titlename : 'Errata Rules',
         laconic: "Errata & Unfinished/Beta Rules",
         menushowitems: true,
-        defaultpage() {
+        defaultpage(ViewPageController: CollectionsListPage) {
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
                         <div>
@@ -314,7 +315,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
                 </ErrorBoundary>
             )
         },
-        defaultpage() {
+        defaultpage(ViewPageController: CollectionsListPage) {
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
                         <div>
@@ -348,7 +349,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
                 </ErrorBoundary>
             )
         },
-        defaultpage() {
+        defaultpage(ViewPageController: CollectionsListPage) {
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
                         <div>
@@ -383,7 +384,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
                 </ErrorBoundary>
             )
         },
-        defaultpage() {
+        defaultpage(ViewPageController: CollectionsListPage) {
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
                         <div>
@@ -414,7 +415,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
                 </ErrorBoundary>
             )
         },
-        defaultpage() {
+        defaultpage(ViewPageController: CollectionsListPage) {
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
                         <div>
@@ -494,7 +495,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         titlename : 'Patrons',
         laconic: "Forces a warband must appease in campaigns",
         menushowitems: true,
-        defaultpage() {
+        defaultpage(ViewPageController: CollectionsListPage) {
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
                         <div>

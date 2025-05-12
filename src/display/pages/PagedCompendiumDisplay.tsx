@@ -98,7 +98,7 @@ const PagedCompendiumDisplay = (prop: any) => {
                 <div className={'rules-content-main'}>
                     {((_curItem == null) && (DisplayPage.defaultpage)) &&
                         <>
-                            {DisplayPage.defaultpage()}
+                            {DisplayPage.defaultpage(ViewPageController)}
                         </>
                     }
                     {(((_curItem == undefined) || (_curItem == null)) && (!DisplayPage.defaultpage)) &&
