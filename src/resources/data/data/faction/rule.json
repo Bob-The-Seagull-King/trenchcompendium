@@ -2557,7 +2557,7 @@
             "faction_add_upgrades": {
                 "list": [
                     {
-                        "model_key": "art_of_assassination",
+                        "model_key": "rl_artofassassination",
                         "models_id": ["md_sorcerer"]
                     }
                 ]
