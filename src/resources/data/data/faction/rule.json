@@ -2850,6 +2850,23 @@
             "court_sin": true
          },
         "contextdata": { 
+            "faction_add_upgrades": {
+                "list": [
+                    {
+                        "model_key": "rl_sin_greed_all",
+                        "filters": [
+                            {
+                                "type": "keyword",
+                                "value": "kw_elite",
+                                "truth": true
+                            }
+                        ]
+                    }
+                ]
+            },
+            "add_patron": {
+                "list": ["pt_mammon"]
+            },
             "true_add_to_model": {  
                 "list": [{ 
                 "id": "ab_demonicaura_greed",                            
@@ -2865,7 +2882,7 @@
         "description":  [
             {
                 "tags": {"desc_type" : "paragraph"},
-                "content": "Desecrated Saints gain the Aura of Greed ability. Your warband gains the GOETIC powers Body of Gold, Black Heart, and Universal Greed.",
+                "content": "Desecrated Saints gain the Aura of Greed ability. Your warband gains the GOETIC powers Body of Gold, Black Heart, and Universal Greed. In addition, warbands of the sin of Greed can take Mammon as their patron.",
                 "glossary": [
                     {"val": "GOETIC", "id": "kw_goetic"}
                 ]

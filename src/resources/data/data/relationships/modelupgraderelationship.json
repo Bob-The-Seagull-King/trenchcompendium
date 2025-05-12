@@ -1182,5 +1182,50 @@
         "restricted_upgrades": [ ],
         "warband_limit": 1,
         "required_upgrades":[]
+    },
+    {
+        "id": "rel_rl_sin_greed_all_up_goetic_greed_bodyofgold",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {},
+        "options": [],
+        "model_id_set": ["rl_sin_greed_all"],
+        "upgrade_id": "up_goetic_greed_bodyofgold",
+        "cost": 15,
+        "cost_type": 0,
+        "restricted_upgrades": [ ],
+        "warband_limit": 1,
+        "required_upgrades":[]
+    },
+    {
+        "id": "rel_rl_sin_greed_all_up_goetic_greed_blackheart",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {},
+        "options": [],
+        "model_id_set": ["rl_sin_greed_all"],
+        "upgrade_id": "up_goetic_greed_blackheart",
+        "cost": 15,
+        "cost_type": 0,
+        "restricted_upgrades": [ ],
+        "warband_limit": 3,
+        "required_upgrades":[]
+    },
+    {
+        "id": "rel_rl_sin_greed_all_up_goetic_greed_universalgreed",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {},
+        "options": [],
+        "model_id_set": ["rl_sin_greed_all"],
+        "upgrade_id": "up_goetic_greed_universalgreed",
+        "cost": 15,
+        "cost_type": 0,
+        "restricted_upgrades": [ ],
+        "warband_limit": 1,
+        "required_upgrades":[]
     }
 ]

@@ -1818,5 +1818,95 @@
             }
         ],
         "options": []
+    },
+    {
+        "id": "up_goetic_greed_bodyofgold",
+        "name": "Body of Gold",
+        "source": "core",
+        "tags": {"trait": true, "special_category": "goetic"
+                },
+        "contextdata": {
+        },
+        "description": [          
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                          
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "So great is the devotion of this servant of greed that their entire body takes on the aspect of the precious metal."
+                    }
+                ]
+            },          
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This model gains the Keyword GOLEM. If the model has the Keyword TOUGH it loses it.",
+                "glossary": [
+                    {"val": "GOLEM", "id": "kw_golem"},
+                    {"val": "TOUGH", "id": "kw_tough"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_goetic_greed_blackheart",
+        "name": "Black Heart",
+        "source": "core",
+        "tags": {"action": true, "special_category": "goetic"
+                },
+        "contextdata": {
+        },
+        "description": [          
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                          
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "Greed has corrupted the heart of this fallen creature to such an extent that within their chest is a gaping hole. When it desires something enough, it bleeds black tar that empowers this servant of avarice."
+                    }
+                ]
+            },          
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This GOETIC (1) power allows the model to add +1 DICE to any ACTION it takes. Can be used multiple times per activation, but only once per ACTION.",
+                "glossary": [
+                    {"val": "GOETIC", "id": "kw_goetic"},
+                    {"val": "ACTION", "id": "kw_action"},
+                    {"val": "+1 DICE", "id": "kw_plusdice"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_goetic_greed_universalgreed",
+        "name": "Universal Greed",
+        "source": "core",
+        "tags": {"trait": true, "special_category": "goetic"
+                },
+        "contextdata": {
+        },
+        "description": [          
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                          
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "The greed of others is just as welcome to Hell as that displayed by its own servants."
+                    }
+                ]
+            },          
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "For every model in the opposing force that is worth 150 ducats or more, this model gains +1 BLESSING MARKER at the start of the battle.",
+                "glossary": [
+                    {"val": "BLESSING MARKER", "id": "kw_blessingmarker"}
+                ]
+            }
+        ],
+        "options": []
     }
 ]
