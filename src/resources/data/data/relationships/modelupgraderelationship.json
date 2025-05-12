@@ -1002,5 +1002,50 @@
         "restricted_upgrades": [ ],
         "warband_limit": 0,
         "required_upgrades":[]
+    },
+    {
+        "id": "rel_rl_sin_lust_captains_up_goetic_lust_forbiddenpleasures",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {},
+        "options": [],
+        "model_id_set": ["rl_sin_lust_captains"],
+        "upgrade_id": "up_goetic_lust_forbiddenpleasures",
+        "cost": 10,
+        "cost_type": 0,
+        "restricted_upgrades": [ ],
+        "warband_limit": 0,
+        "required_upgrades":[]
+    },
+    {
+        "id": "rel_rl_sin_lust_captains_up_goetic_lust_callofflesh",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {},
+        "options": [],
+        "model_id_set": ["rl_sin_lust_captains"],
+        "upgrade_id": "up_goetic_lust_callofflesh",
+        "cost": 15,
+        "cost_type": 0,
+        "restricted_upgrades": [ ],
+        "warband_limit": 0,
+        "required_upgrades":[]
+    },
+    {
+        "id": "rel_rl_sin_lust_all_up_goetic_lust_exquisitepain",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {},
+        "options": [],
+        "model_id_set": ["rl_sin_lust_all"],
+        "upgrade_id": "up_goetic_lust_exquisitepain",
+        "cost": 15,
+        "cost_type": 0,
+        "restricted_upgrades": [ ],
+        "warband_limit": 0,
+        "required_upgrades":[]
     }
 ]

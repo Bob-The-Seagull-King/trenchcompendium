@@ -1491,7 +1491,7 @@
         "id": "up_goetic_envy_covetedposition",
         "name": "Coveted Position",
         "source": "core",
-        "tags": {"trait": true, "special_category": "goetic"
+        "tags": {"action": true, "special_category": "goetic"
                 },
         "contextdata": {
         },
@@ -1510,7 +1510,7 @@
         "id": "up_goetic_envy_whatisyoursismine",
         "name": "What Is Yours Is Mine",
         "source": "core",
-        "tags": {"trait": true, "special_category": "goetic"
+        "tags": {"action": true, "special_category": "goetic"
                 },
         "contextdata": {
         },
@@ -1522,6 +1522,66 @@
                     {"val": "GOETIC", "id": "kw_goetic"},
                     {"val": "BLOOD MARKER", "id": "kw_bloodmarker"},
                     {"val": "BLESSING MARKER", "id": "kw_blessingmarker"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_goetic_lust_forbiddenpleasures",
+        "name": "Forbidden Pleasures",
+        "source": "core",
+        "tags": {"trait": true, "special_category": "goetic"
+                },
+        "contextdata": {
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Before the Battle begins, select one model in your warband without the Keyword DEMONIC. It starts the Battle with three BLOOD MARKERS.",
+                "glossary": [
+                    {"val": "DEMONIC", "id": "kw_demonic"},
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_goetic_lust_exquisitepain",
+        "name": "Exquisite Pain",
+        "source": "core",
+        "tags": {"action": true, "special_category": "goetic"
+                },
+        "contextdata": {
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "As a GOETIC (1-2) Spell, this model inflicts X BLOOD MARKERS on an enemy model that it can see, where X is the amount of BLOOD MARKERS spent.",
+                "glossary": [
+                    {"val": "GOETIC", "id": "kw_goetic"},
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_goetic_lust_callofflesh",
+        "name": "Call of Flesh",
+        "source": "core",
+        "tags": {"action": true, "special_category": "goetic"
+                },
+        "contextdata": {
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "As a GOETIC (2) Spell that ends this model’s Activation, beckoning magic fills the air. When the enemy next Activates a model during this Turn, that model must Move as its first ACTION. This Move must be a Retreat if the model started its Activation in Melee Combat with a model other than the caster of this Spell. If that model is Down, it instead Stands and then Moves. During this movement, it moves in a direct path toward the caster of this Spell through any passable terrain, including Dangerous Terrain, Jumping Down etc. The model suffers injuries as normal. It can act normally after taking the prescribed ACTION(S), or attempting to take the prescribed ACTION(S) if it couldn’t, but cannot target the caster of this Spell during this Activation with ranged or melee attacks.",
+                "glossary": [
+                    {"val": "GOETIC", "id": "kw_goetic"},
+                    {"val": "ACTION", "id": "kw_action"}
                 ]
             }
         ],
