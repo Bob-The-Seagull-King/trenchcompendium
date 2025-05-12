@@ -37,15 +37,19 @@ const RulesMenuBody: React.FC<RulesMenuBodyProps> = ({ controller, onBack }) => 
                         title: "Rules",
                         slug: "gamerule",
                         controller: controller.GameRulesCollectionController
-                    }      ,
+                    },
                     {
                         title: "Keywords",
                         slug: "keyword"
-                    }   ,
+                    },
                     {
                         title: "Glossary",
                         slug: "glossary"
-                    }                       
+                    },
+                    {
+                        title: "Units / Models",
+                        slug: "model"
+                    }               
                 ]
             },
             {
@@ -56,10 +60,6 @@ const RulesMenuBody: React.FC<RulesMenuBodyProps> = ({ controller, onBack }) => 
             {
                 title: "Armoury & Equipment",
                 slug: "armoury"
-            },
-            {
-                title: "Units / Models",
-                slug: "model"
             },
             {
                 title: "Scenarios",

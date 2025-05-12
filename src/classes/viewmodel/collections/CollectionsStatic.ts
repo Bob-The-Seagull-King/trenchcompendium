@@ -1,4 +1,4 @@
-import { byPropertiesOf } from "../../../utility/functions";
+import { byPropertiesOf, containsTag } from "../../../utility/functions";
 import { ViewCollectionsModel } from "./ViewCollectionsModel";
 import { ViewTableItem } from "./ViewTableItem";
 import { getColour } from "../../../utility/functions";
@@ -92,8 +92,10 @@ export const CollectionDataDex : CollectionDataTable = {
             model.dataresults.sort(byPropertiesOf<IEquipment>(["name", "id"]))
             for (i = 0; i < model.dataresults.length; i++) {
                 const summonNew = await EquipmentFactory.CreateEquipment(model.dataresults[i], null);
-                const ItemNew = new ViewTableItem(summonNew, getColour('default'));
-                model.itemcollection.push(ItemNew);
+                if (!containsTag(summonNew.Tags, "model")) {
+                    const ItemNew = new ViewTableItem(summonNew, getColour('default'));
+                    model.itemcollection.push(ItemNew);
+                }
             }
         }
     },
