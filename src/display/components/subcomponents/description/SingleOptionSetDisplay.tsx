@@ -10,6 +10,7 @@ import { returnDescription } from '../../../../utility/util';
 
 const SingleOptionSetDisplay = (props: any) => {
     const OptionSet : StaticOption = props.data
+    const OptionUpdate = props.onSelectionChange;
     
     const [selectedModel, setSelectedModel] = useState(OptionSet.Selections[0]);
     const [displayState, setDisplayState] = useState( <></> );
@@ -29,6 +30,9 @@ const SingleOptionSetDisplay = (props: any) => {
 
     async function SetModelOptions() {
         if (OptionSet.MyStaticObject != null) {
+
+            OptionUpdate(OptionSet.RefID, selectedModel);
+
             const EventProc: EventRunner = new EventRunner();
             
             const result = await EventProc.runEvent(

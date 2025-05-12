@@ -8,13 +8,14 @@ import SingleOptionSetDisplay from './SingleOptionSetDisplay';
 
 const OptionSetStaticDisplay = (props: any) => {
     const OptionSet : StaticOption[] = props.data
+    const OnSelectChange = props.onSelectionChange;
     
     return (
         
         <ErrorBoundary fallback={<div>Something went wrong with OptionSetStaticDisplay.tsx</div>}>
             <>
                 {OptionSet.map((item) => (
-                    <SingleOptionSetDisplay key={item.RefID} data={item} />
+                    <SingleOptionSetDisplay key={item.RefID} data={item} onSelectionChange={OnSelectChange}/>
                 ))}
             </>
         </ErrorBoundary>

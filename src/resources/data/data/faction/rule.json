@@ -2554,7 +2554,7 @@
             "court_sin": true
          },
         "contextdata": {   
-            "add_to_model": {   
+            "true_add_to_model": {   
                 "id": "ab_demonicaura_wrath",                            
                 "required": [
                     {
@@ -2583,7 +2583,7 @@
             "court_sin": true
          },
         "contextdata": {  
-            "add_to_model": {   
+            "true_add_to_model": {   
                 "id": "ab_demonicaura_envy",                            
                 "required": [
                     {
@@ -2612,7 +2612,7 @@
             "court_sin": true
          },
         "contextdata": {   
-            "add_to_model": {   
+            "true_add_to_model": {   
                 "id": "ab_demonicaura_lust",                            
                 "required": [
                     {
@@ -2641,7 +2641,7 @@
             "court_sin": true
          },
         "contextdata": {   
-            "add_to_model": {   
+            "true_add_to_model": {   
                 "id": "ab_demonicaura_pride",                            
                 "required": [
                     {
@@ -2670,7 +2670,7 @@
             "court_sin": true
          },
         "contextdata": {   
-            "add_to_model": {   
+            "true_add_to_model": {   
                 "id": "ab_demonicaura_sloth",                            
                 "required": [
                     {
@@ -2699,7 +2699,7 @@
             "court_sin": true
          },
         "contextdata": {  
-            "add_to_model": {   
+            "true_add_to_model": {   
                 "id": "ab_demonicaura_gluttony",                            
                 "required": [
                     {
@@ -2728,7 +2728,7 @@
             "court_sin": true
          },
         "contextdata": { 
-            "add_to_model": {   
+            "true_add_to_model": {   
                 "id": "ab_demonicaura_greed",                            
                 "required": [
                     {

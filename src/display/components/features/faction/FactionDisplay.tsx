@@ -24,6 +24,9 @@ import RulesModelDisplay from '../../rules-content/RulesModelDisplay';
 const FactionDisplay = (props: any) => {
     const factionObject: Faction = props.data
 
+    const [selections, setSelections] = useState<Record<string, any>>({});
+    const [usekey, setusekey] = useState(0);
+
     function ModelIsElite(model : Model) {
         for (let i = 0; i < model.KeyWord.length; i++) {
             if (model.KeyWord[i].ID == "kw_elite") {
@@ -33,6 +36,11 @@ const FactionDisplay = (props: any) => {
 
         return false
     }
+    
+    const UpdateForSelection = (optionSetId: string, selectedModel: any) => {
+        setSelections(prev => ({ ...prev, [optionSetId]: selectedModel }));
+        setusekey(usekey + 1);
+    };
     
     function runToast() 
     {
@@ -118,24 +126,18 @@ const FactionDisplay = (props: any) => {
 
             {factionObject.MyOptions.length > 0 &&
                 <>
-                    <div id={"options"} className=""/>
-                    <div className={'subtitle-letterspacing size-subtitle font-seriftext'}>
-                        <div className=''>
-                            {"Warband Options"}
-                            <div className=' '>
-                                <FontAwesomeIcon icon={faLink} onClick={() => (
-                                    runToast()
-                                    )}/>
-                            </div>
-                        </div>
-                    </div>
+                    <RulesHeadlineDisplay
+                        content="Warband Options"
+                        level={2}
+                        className=""
+                    />
                     {
-                        <OptionSetStaticDisplay data={factionObject.MyOptions} />
+                        <OptionSetStaticDisplay data={factionObject.MyOptions} onSelectionChange={UpdateForSelection}/>
                     }
                 </>
             }
             <div className=""/>
-
+            <div key={usekey}>
             {factionObject.Models.filter((item) => (item.Captain == true && item.Mercenary == false)).length > 0 &&
                 <>
                     <RulesHeadlineDisplay
@@ -145,7 +147,7 @@ const FactionDisplay = (props: any) => {
                     />
 
                     {factionObject.Models.filter((item) => (item.Captain == true && item.Mercenary == false)).map((item) => (
-                        <RulesModelDisplay  key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID} data={item} faction={factionObject} />
+                        <RulesModelDisplay  key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID} data={item} faction={factionObject} optionselections={selections}/>
 
                     )) /* Abilities */}
 
@@ -160,7 +162,7 @@ const FactionDisplay = (props: any) => {
                     />
 
                     {factionObject.Models.filter((item) => (item.Captain == false && item.Mercenary == false && (ModelIsElite(item.Model) == true))).map((item) => (
-                        <RulesModelDisplay  key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID} data={item} faction={factionObject} />
+                        <RulesModelDisplay  key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID} data={item} faction={factionObject} optionselections={selections} />
 
                     )) /* Abilities */}
                 </>
@@ -173,7 +175,7 @@ const FactionDisplay = (props: any) => {
                         className=""
                     />
                     {factionObject.Models.filter((item) => (item.Captain == false && item.Mercenary == false && (ModelIsElite(item.Model) == false))).map((item) => (
-                        <RulesModelDisplay  key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID} data={item} faction={factionObject} />
+                        <RulesModelDisplay  key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID} data={item} faction={factionObject} optionselections={selections} />
                     )) /* Abilities */}
                 </>
                 }
@@ -193,7 +195,7 @@ const FactionDisplay = (props: any) => {
 
                 </>
                 }
-
+            </div>
             {factionObject.EquipmentItems.length > 0 &&
                 <>
 

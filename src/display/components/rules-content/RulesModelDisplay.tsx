@@ -35,11 +35,14 @@ import FighterCardMetaEntry from "./FighterCard/FighterCardMetaEntry";
 import FighterCardStats from "./FighterCard/FighterCardStats";
 import FighterCardMetaEntryKeywords from "./FighterCard/FighterCardMetaEntryKeywords";
 import {useSynodModelImageData} from "../../../utility/useSynodModelImageData";
+import { ContextObject } from '../../../classes/contextevent/contextobject';
+import { IChoice } from '../../../classes/options/StaticOption';
 
 const RulesModelDisplay = (props: any) => {
     const factionmodelObject: FactionModelRelationship = props.data
     const modelcollectionObject: Model = props.data.Model
     const parentfaction : Faction = props.faction;
+    const bonusselections = props.optionselections
 
     const [statchoices, setstats] = useState({})
     const [upgrades, setupgrades] = useState<UpgradesGrouped>({})
@@ -70,11 +73,28 @@ const RulesModelDisplay = (props: any) => {
             /* ABILITIES */
             if (parentfaction != undefined) {
                 const result_abilities = await factionmodelObject.getContextuallyAvailableAbilities(parentfaction);
-                setabilities(result_abilities);
+                if (bonusselections != undefined) {
+                    for (const [optionSetId, selectedObject] of Object.entries(bonusselections)) {
+                        if ((selectedObject as IChoice).value instanceof ContextObject) {
+                        const Events : EventRunner = new EventRunner();
+                        const result = await Events.runEvent(
+                            "getContextuallyAddedAbilities",
+                            (selectedObject as IChoice).value,
+                            [],
+                            result_abilities,
+                            modelcollectionObject
+                        )
+                        setabilities(result)
+                        }
+                    }
+                } else {
+                    setabilities(result_abilities);
+                }
             } else {
                 setabilities(modelcollectionObject.Abilities)
             }
 
+            
 
             /* MODEL MIN/MAX */                
             const result_max = await EventProc.runEvent(

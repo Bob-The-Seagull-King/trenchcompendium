@@ -624,6 +624,48 @@ export const BaseContextCallTable : CallEventTable = {
         }
 
     },
+    true_add_to_model: {
+        event_priotity: 0,
+        async getContextuallyAddedAbilities(this: EventRunner, eventSource : any, relayVar : Ability[], trackVal : Model, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            
+            const { AbilityFactory } = await import("../../factories/features/AbilityFactory");
+
+            let ValidUpgrade = true;
+
+            if (context_func['removed'] ) {
+                for (let i = 0; i < context_func['removed'].length; i++) {
+                    const curFilter = context_func['removed'][i]
+                    if (curFilter["category"] == "id") {            
+                        if (curFilter["value"].includes(trackVal.ID)) {
+                            ValidUpgrade = false;
+                        }
+                    }
+                }
+            }
+
+            if (context_func['required'] ) {
+                for (let i = 0; i < context_func['required'].length; i++) {
+                    const curFilter = context_func['required'][i]
+                    if (curFilter["category"] == "id") {            
+                        if (curFilter["value"].includes(trackVal.ID)) {
+                            ValidUpgrade = true;
+                        } else {
+                            ValidUpgrade = false;
+                        }
+                    }
+                }
+            }
+
+            if (ValidUpgrade) {
+                const AbilityList = Requester.MakeRequest(
+                    {searchtype: "id", searchparam: {type: "ability", id: context_func["id"]}}
+                ) as IAbility
+                relayVar.push(await AbilityFactory.CreateAbility(AbilityList, null))
+            }
+            return relayVar;
+        }
+
+    },
     remove_from_model: {
         event_priotity: 0,
         async getContextuallyAddedAbilities(this: EventRunner, eventSource : any, relayVar : Ability[], trackVal : Model, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
