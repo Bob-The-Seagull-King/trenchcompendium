@@ -80,11 +80,13 @@ const RulesExplorationLocation = (props: any) => {
                     </ul>
                 }
 
+                {useLimits.length > 0 &&
                 <div className={'exploration-location-limits'}>
                     {
                         useLimits.join(", ")
                     }
                 </div>
+                }
             </div>
         </ErrorBoundary>
     )
