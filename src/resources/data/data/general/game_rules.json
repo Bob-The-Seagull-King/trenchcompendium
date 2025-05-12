@@ -198,7 +198,7 @@
                                     "subcontent": [                                        
                                         {
                                             "tags": {"desc_type" : "bold"},
-                                            "content": "Retreat"
+                                            "content": "Retreat: "
                                         },
                                         {
                                             "tags": {"desc_type" : "default"},
