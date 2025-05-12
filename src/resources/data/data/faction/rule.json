@@ -844,7 +844,8 @@
                 "requirements": [
                     {
                         "type": "ducats",
-                        "value": 80
+                        "value": 80,
+                        "subvalue": "minimum"
                     }
                 ],
                 "exception": [

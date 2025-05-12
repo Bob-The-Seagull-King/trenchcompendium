@@ -1170,5 +1170,564 @@
             }
         ],
         "options": []
+    },
+    {
+        "id": "el_angelicinstrument",
+        "name": "Angelic Instrument",
+        "source": "core",
+        "tags": {
+            "exploration_table": "et_rarelocations"
+        },
+        "contextdata": {
+            "location_rule_option": {},
+            "gain_new_item_from_list": {
+                "count": 1,
+                "obey_restriction": true,
+                "obey_faction": true,
+                "treat_as": "eq_musicalinstrument",
+                "auto_replace": true,
+                "id": ["eq_angelicinstrument"]
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Exploring the battlefield you discover an otherworldly instrument alongside the shattered remains of a lesser angel – fallen or divine. Add an Angelic Instrument to your Warband’s roster for free. It’s identical to a Musical Instrument (including their equipment restrictions and LIMIT), except its effect has a range of 8\" instead of 4\". If your Warband is at its LIMIT for Musical Instruments, it can immediately remove an existing Musical Instrument for the Angelic Instrument.",
+                "glossary": [
+                    {"val": "LIMIT", "id": "kw_limit"}
+                ]
+            }
+        ],
+        "location_value": 5,
+        "options": [  ]
+    },
+    {
+        "id": "el_abandonedpropheticradiostation",
+        "name": "Abandoned Prophetic Radio Station",
+        "source": "core",
+        "tags": {
+            "exploration_table": "et_rarelocations"
+        },
+        "contextdata": {
+            "location_rule_option": {},
+            "add_skill": {
+                "id": [
+                    "es_extradice"
+                ]
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You find a hastily-abandoned Synod of Strategic Prophecy station, with scribbled predictions and prophecies scattered amongst the disarray. You gain the Extra Dice Exploration Skill."
+            }
+        ],
+        "location_value": 9,
+        "options": [  ]
+    },
+    {
+        "id": "el_potofmanna",
+        "name": "Pot of Manna",
+        "source": "core",
+        "tags": {
+            "exploration_table": "et_rarelocations"
+        },
+        "contextdata": {
+            "location_rule_option": {},
+            "add_to_warband": {}
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You find a cup blessed by God that provides endless nourishment. Whenever your Warband rolls to explore, your Warband gains an additional 10 ducats from Looting due to the lowered cost of rations."
+            }
+        ],
+        "location_value": 11,
+        "options": [  ]
+    },
+    {
+        "id": "el_ransackedalchemistworkshop",
+        "name": "Pot of Manna",
+        "source": "core",
+        "tags": {
+            "exploration_table": "et_rarelocations"
+        },
+        "contextdata": {
+            "location_rule_option": {},
+            "consumable": {},
+            "use_on_model": {
+                "scar_heal": {
+                    "count": 1
+                }
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You scavenge some of the life-giving potions within. Add Curative Fluids to your Warband’s roster for free. During any Reallocate Equipment step for the rest of the Campaign, your Warband can use these fluids to remove 1 Battle Scar from a model in your Warband. Once these fluids are used, they are spent and cannot be used again."
+            }
+        ],
+        "location_value": 12,
+        "options": [  ]
+    },
+    {
+        "id": "el_blackmarket",
+        "name": "Black Market",
+        "source": "core",
+        "tags": {
+            "exploration_table": "et_rarelocations"
+        },
+        "contextdata": {
+            "location_rule_option": {},
+            "set_exploration_purchase_cap": {
+                "cost": 8
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You discover a major underground trading post in No Man’s Land. From now on you may purchase Glory Items costing 8 Glory or less that are allowed for your Warband during the Trade step."
+            }
+        ],
+        "location_value": 15,
+        "options": [  ]
+    },
+    {
+        "id": "el_bookofgolems",
+        "name": "Book of Golems",
+        "source": "core",
+        "tags": {
+            "exploration_table": "et_rarelocations"
+        },
+        "contextdata": {
+            "location_rule_option": {},
+            "gain_new_model_from_list": {
+                "count": 1,
+                "id": ["md_takwincreation_golem"]
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You find a Rabbinic Manual on Creating Golems. Studying it allows you to create one Golem. Use the House of Wisdom Takwin Creature Creation to make a Homunculus of up to 100 ducats of value (40 ducats base cost), and add it to your Warband’s roster for free. In addition, you can buy items from your Armoury for your Golem. Otherwise, it uses exactly the same rules as Takwin Homunculi but has the Keyword GOLEM. This Golem can never be promoted to ELITE or gain Experience. Unlike a Takwin Creature, this Golem does not need to be associated with an Alchemist and it does not count as a Takwin Creature for any purposes (such as LIMIT). Replace any instance of “Iron Sultanate” with your Faction. ",
+                "glossary": [
+                    {"val": "LIMIT", "id": "kw_limit"},
+                    {"val": "ELITE", "id": "kw_elite"},
+                    {"val": "GOLEM", "id": "kw_golem"}
+                ]
+            }
+        ],
+        "location_value": 17,
+        "options": [  ]
+    },
+    {
+        "id": "el_ruinedchurchmasjidsynagogue",
+        "name": "Ruined Church/Masjid/Synagogue",
+        "source": "core",
+        "tags": {
+            "exploration_table": "et_rarelocations"
+        },
+        "contextdata": {"location_rule_option": {}},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You find a great shrine, temple or other religious building of faith. Upon its altar rests an object of great power waiting for you."
+            }
+        ],
+        "location_value": 11,
+        "options": [{
+            "ref_id" : "ot_ruinedchurchmasjidsynagogue",
+            "name" : "",
+            "description" : [],
+            "category" : "type",
+            "type" : "text",
+            "strictness" : "strict",
+            "predefined_options" : [],
+            "option_context" : {"basic_option_default":{}},
+            "data_search" : {      
+                "searchtype": "complex",
+                "searchparam":    {
+                    "type": "explorationlocation",
+                    "request":    {
+                        "operator": "and",
+                        "terms": [
+                            {             
+                                "item": "tags",
+                                "value": "location_option",
+                                "equals": true,
+                                "strict": true,
+                                "istag": true,
+                                "tagvalue": "el_ruinedchurchmasjidsynagogue"
+                            }
+                        ],
+                        "subparams": []
+                    }
+                }                        
+            }
+        } ]
+    },
+    {
+        "id": "el_ruinedchurchmasjidsynagogue_report",
+        "name": "Report",
+        "source": "core",
+        "tags": {
+            "location_option": "el_ruinedchurchmasjidsynagogue"
+        },
+        "contextdata": {
+            "gain_glory": {
+                "count": 4
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You can report the location to your superiors and gain 4 Glory Points."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "el_ruinedchurchmasjidsynagogue_purchase",
+        "name": "Purchase",
+        "source": "core",
+        "tags": {
+            "location_option": "el_ruinedchurchmasjidsynagogue"
+        },
+        "contextdata": {
+            "single_exploration_glory_item": {
+                "cost": 10
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You may purchase a Glory Item that costs 10 Glory or less and is allowed to your Warband."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "el_stashofdrugsanderotica",
+        "name": "Ruined Church/Masjid/Synagogue",
+        "source": "core",
+        "tags": {
+            "exploration_table": "et_rarelocations"
+        },
+        "contextdata": {"location_rule_option": {}},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You find a motherlode of forbidden objects and chemicals, highly sought after and in demand. Choose one:"
+            }
+        ],
+        "location_value": 21,
+        "options": [{
+            "ref_id" : "ot_stashofdrugsanderotica",
+            "name" : "",
+            "description" : [],
+            "category" : "type",
+            "type" : "text",
+            "strictness" : "strict",
+            "predefined_options" : [],
+            "option_context" : {"basic_option_default":{}},
+            "data_search" : {      
+                "searchtype": "complex",
+                "searchparam":    {
+                    "type": "explorationlocation",
+                    "request":    {
+                        "operator": "and",
+                        "terms": [
+                            {             
+                                "item": "tags",
+                                "value": "location_option",
+                                "equals": true,
+                                "strict": true,
+                                "istag": true,
+                                "tagvalue": "el_stashofdrugsanderotica"
+                            }
+                        ],
+                        "subparams": []
+                    }
+                }                        
+            }
+        } ]
+    },
+    {
+        "id": "el_stashofdrugsanderotica_confiscate",
+        "name": "Confiscate",
+        "source": "core",
+        "tags": {
+            "location_option": "el_stashofdrugsanderotica"
+        },
+        "contextdata": {
+            "validate_location": {
+                "allowed": [
+                    {
+                        "type": "faction",
+                        "value": ["fc_trenchpilgrim","fc_newantioch","fc_courtofthesevenheadedserpent","fc_cultoftheblackgrail","fc_hereticlegion","fc_ironsultanate"]
+                    }
+                ]
+            },
+            "gain_glory": {
+                "count": 4
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Your Warband gains 4 Glory Points."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "el_stashofdrugsanderotica_sell",
+        "name": "Sell",
+        "source": "core",
+        "tags": {
+            "location_option": "el_stashofdrugsanderotica"
+        },
+        "contextdata": {
+            "validate_location": {
+                "allowed": [
+                    {
+                        "type": "faction",
+                        "value": ["fc_newantioch","fc_courtofthesevenheadedserpent","fc_cultoftheblackgrail","fc_hereticlegion","fc_ironsultanate"]
+                    }
+                ]
+            },
+            "gain_ducats": {
+                "cost": 120
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Your Warband gains 120 ducats."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "el_stashofdrugsanderotica_indulge",
+        "name": "Indulge",
+        "source": "core",
+        "tags": {
+            "location_option": "el_stashofdrugsanderotica"
+        },
+        "contextdata": {
+            "validate_location": {
+                "allowed": [
+                    {
+                        "type": "faction",
+                        "value": ["fc_newantioch","fc_courtofthesevenheadedserpent","fc_cultoftheblackgrail","fc_hereticlegion","fc_ironsultanate"]
+                    }
+                ]
+            },
+            "add_to_warband": {}
+        },
+        "description": [       
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "From now on, your Warband rolls Morale checks with +1 DICE.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "el_saintsreliquary",
+        "name": "Saint's Reqliary",
+        "source": "core",
+        "tags": {
+            "exploration_table": "et_rarelocations"
+        },
+        "contextdata": {
+            "location_rule_option": {},
+            "gain_new_item_from_list": {
+                "count": 1,
+                "add_to_purchase_context": {                    
+                    "faction_eq_restriction": {
+                        "banned": [
+                            {
+                                "res_type": "keyword",
+                                "value": "kw_elite"
+                            }
+                        ]
+                    } 
+                },
+                "id": ["eq_saintsreliquary"]
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You discover a well-hidden reliquary of a fallen Saint. Add a Saintly Relic to your Warband’s roster for free. This piece of equipment can only be carried by an ELITE model. A model equipped with the Saintly Relic gains the Keyword TOUGH, but loses the Keyword INFILTRATOR (if it has it) and can never have Cover.",
+                "glossary": [
+                    {"val": "TOUGH", "id": "kw_tough"},
+                    {"val": "ELITE", "id": "kw_elite"},
+                    {"val": "INFILTRATOR", "id": "kw_infiltrator"}
+                ]
+            }
+        ],
+        "location_value": 23,
+        "options": [ ]
+    },
+    {
+        "id": "el_highrankingcaptain",
+        "name": "High-Ranking Captain",
+        "source": "core",
+        "tags": {
+            "exploration_table": "et_rarelocations"
+        },
+        "contextdata": {"location_rule_option": {}},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You capture a high-ranking enemy – an officer of New Antioch, Sultanate Sheik, Shard of a fallen Black Grail Hegemon, Pilgrim prophet, a Mammonite merchant, or some other important personage. Choose one:"
+            }
+        ],
+        "location_value": 25,
+        "options": [{
+            "ref_id" : "ot_highrankingcaptain",
+            "name" : "",
+            "description" : [],
+            "category" : "type",
+            "type" : "text",
+            "strictness" : "strict",
+            "predefined_options" : [],
+            "option_context" : {"basic_option_default":{}},
+            "data_search" : {      
+                "searchtype": "complex",
+                "searchparam":    {
+                    "type": "explorationlocation",
+                    "request":    {
+                        "operator": "and",
+                        "terms": [
+                            {             
+                                "item": "tags",
+                                "value": "location_option",
+                                "equals": true,
+                                "strict": true,
+                                "istag": true,
+                                "tagvalue": "el_highrankingcaptain"
+                            }
+                        ],
+                        "subparams": []
+                    }
+                }                        
+            }
+        } ]
+    },
+    {
+        "id": "el_highrankingcaptain_execute",
+        "name": "Execute",
+        "source": "core",
+        "tags": {
+            "location_option": "el_highrankingcaptain"
+        },
+        "contextdata": {
+            "gain_glory": {
+                "count": 4
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Your Warband gains 4 Glory Points."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "el_highrankingcaptain_ransom",
+        "name": "Ransom",
+        "source": "core",
+        "tags": {
+            "location_option": "el_highrankingcaptain"
+        },
+        "contextdata": {
+            "gain_ducats": {
+                "cost": 100
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Your Warband gains 100 ducats."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "el_highrankingcaptain_indenture",
+        "name": "Indenture",
+        "source": "core",
+        "tags": {
+            "location_option": "el_highrankingcaptain"
+        },
+        "contextdata": {
+            "location_rule_option": {},
+            "add_skill": {
+                "id": [
+                    "es_setdice"
+                ]
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You keep the captive as a guide. You gain the Set Dice Exploration Skill."
+            }
+        ],
+        "options": [  ]
+    },
+    {
+        "id": "el_highrankingcaptain_imprison",
+        "name": "Imprison",
+        "source": "core",
+        "tags": {
+            "location_option": "el_highrankingcaptain"
+        },
+        "contextdata": {
+            "location_rule_option": {},
+            "single_exploration_glory_item": {
+                "cost": 8
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You may purchase a Glory Item that costs 8 Glory or less and is allowed to your Warband."
+            }
+        ],
+        "options": [  ]
+    },
+    {
+        "id": "el_abandonedressurectionmachine",
+        "name": "Abandoned Ressurection Machine",
+        "source": "core",
+        "tags": {
+            "exploration_table": "et_rarelocations"
+        },
+        "contextdata": {
+            "location_rule_option": {},
+            "consumable": {},
+            "use_on_model": {
+                "scar_heal": {
+                    "all": true
+                }
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You find remnants of machines that were once used as part of the Meta-Christ Program. Most of them are broken, torn apart by some immense force, but one of them works and can be dismantled. Add a Salvaged Resurrection Machine to your Warband’s roster for free. During any Reallocate Equipment step for the rest of the Campaign, your Warband can activate this machine to remove any number of Battle Scars from a single model in your Warband. Once this machine is used, it is spent and cannot be used again."
+            }
+        ],
+        "location_value": 32,
+        "options": [  ]
     }
 ]

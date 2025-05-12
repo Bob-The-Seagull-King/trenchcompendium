@@ -1222,6 +1222,33 @@
         "modifiers": []
     },
     {
+        "id": "eq_angelicinstrument",
+        "name": "Angelic Instrument",
+        "source": "core",
+        "tags": {"trait": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+            "hands_melee": 1,
+            "hands_ranged": 1
+        },
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Any friendly models within 8\" of the musician who is not Down can add +1 DICE to their Dash ACTIONS. Musical Instruments take one hand to use at all times as if it were a weapon.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "ACTIONS", "id": "kw_action"}
+                ]
+            }
+        ],
+        "lore": [],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
         "id": "eq_cloakofalamut",
         "name": "Cloak of Alamut",
         "source": "core",
@@ -6579,5 +6606,33 @@
         "options": [],
         "keywords": ["kw_heavy"],
         "modifiers": ["+1 to Injuries"]
+    },
+    {
+        "id": "eq_saintsreliquary",
+        "name": "Saint's Reliquary",
+        "source": "core",
+        "tags": {"trait": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {
+            "keyword_mod": {"mods": [{"type": "add", "value": "kw_golem"}]},
+            "keyword_mod_remove": {"mods": [{"type": "remove", "value": "kw_tough"}]} },
+        "description": [            
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "A model equipped with the Saintly Relic gains the Keyword TOUGH, but loses the Keyword INFILTRATOR (if it has it) and can never have Cover.",
+                "glossary": [
+                    {"val": "TOUGH", "id": "kw_tough"},
+                    {"val": "INFILTRATOR", "id": "kw_infiltrator"}
+                ]
+            }
+        ],
+        "lore": [
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
     }
 ]

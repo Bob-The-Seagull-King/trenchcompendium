@@ -1826,6 +1826,8 @@
         "tags": {"trait": true, "special_category": "goetic"
                 },
         "contextdata": {
+            "keyword_mod": {"mods": [{"type": "add", "value": "kw_golem"}]},
+            "keyword_mod_remove": {"mods": [{"type": "remove", "value": "kw_tough"}]}
         },
         "description": [          
             {
