@@ -67,7 +67,7 @@ const SingleOptionSetDisplay = (props: any) => {
 
                     <Form.Group controlId={OptionSet.RefID+'-select'} className={'mb-3'}>
                         <Form.Label>{'Choose Option'}</Form.Label>
-                        <Form.Control className={"find-SingleOptionSetDisplay" }
+                        <Form.Control
                                       as="select"
                                       onChange={(e: { target: { value: any; }; }) => { updateItem(e.target.value)    } }
                         >

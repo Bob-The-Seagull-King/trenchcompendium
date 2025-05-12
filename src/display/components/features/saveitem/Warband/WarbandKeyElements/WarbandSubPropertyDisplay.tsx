@@ -86,24 +86,24 @@ const WarbandSubPropertyDisplay = (props: any) => {
 
     return (
         <ErrorBoundary fallback={<div>Something went wrong with WarbandPropertyDisplay.tsx</div>}>
-            <div key={keyval}>
-                <h1>{MyProp.Name}</h1>               
-                
-                            
-                <Form.Control defaultValue={(selectedModel)? selectedModel.id: undefined} className={"borderstyler bordergrey overcomeradius " } as="select" aria-label="Default select example"  placeholder="Member Type" onChange={(e: { target: { value: any; }; }) => { updateItem(e.target.value)    } } >
-                    <option value={"_no_option_selected"} key={"modeloptionnone"} >{"None Selected"}</option> 
-                    {MySelection.Option.Selections.map((selec) => ( 
-                        <option value={selec.id} key={"modeloption"+(MySelection.Option.Selections.indexOf(selec).toString())} >{makestringpresentable(selec.display_str)}</option> 
-                    ))}
-                </Form.Control>
-                
-                <div className="row" key={keyval}>
-                    <div className="col">
-                        {displayState}
-                        {selectedModel? selectedModel.id : "None"}
-                    </div>
+            <div className={'WarbandSubPropertyDisplay'} key={keyval}>
+                <h1>{MyProp.Name}</h1>
+
+                <Form.Group controlId={MyProp.ID+'-select'} className={'mb-3'}>
+                    <Form.Label>{'Choose Option'}</Form.Label>
+
+                    <Form.Control defaultValue={(selectedModel)? selectedModel.id: undefined} as="select" onChange={(e: { target: { value: any; }; }) => { updateItem(e.target.value)    } } >
+                        <option value={"_no_option_selected"} key={"modeloptionnone"} >{"None Selected"}</option>
+                        {MySelection.Option.Selections.map((selec) => (
+                            <option value={selec.id} key={"modeloption"+(MySelection.Option.Selections.indexOf(selec).toString())} >{makestringpresentable(selec.display_str)}</option>
+                        ))}
+                    </Form.Control>
+                </Form.Group>
+
+                <div>
+                    {displayState}
+                    {selectedModel? selectedModel.id : "None"}
                 </div>
-                
             </div>
         </ErrorBoundary>
     )

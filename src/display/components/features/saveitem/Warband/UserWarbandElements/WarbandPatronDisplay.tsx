@@ -44,16 +44,19 @@ const WarbandPatronDisplay = (props: any) => {
 
     return (
         <ErrorBoundary fallback={<div>Something went wrong with WarbandPatronDisplay.tsx</div>}>
-            <div key={keyval}>
-
+            <div className={'WarbandPatronDisplay'} key={keyval}>
                 <h2>Select Patron</h2>
-                
-                <Form.Control defaultValue={ curpatron != null? curpatron.ID : undefined} className={"borderstyler bordergrey overcomeradius " } as="select" aria-label="Default select example"  placeholder="Member Type" onChange={(e: { target: { value: any; }; }) => { updateItem(e.target.value)    } } >
-                    <option value={""} key={"modeloptionnone"} >{"No Patron"}</option> 
-                    {patrons.map((selec) => ( 
-                        <option value={selec.ID} key={"modeloption"+(patrons.indexOf(selec).toString())} >{makestringpresentable(selec.Name? selec.Name : "")}</option> 
-                    ))}
-                </Form.Control>
+
+                <Form.Group controlId={'WarbandPatronDisplay-select'} className={'mb-3'}>
+                    <Form.Label>{'Choose Patron'}</Form.Label>
+
+                    <Form.Control defaultValue={ curpatron != null? curpatron.ID : undefined} as="select" onChange={(e: { target: { value: any; }; }) => { updateItem(e.target.value)    } } >
+                        <option value={""} key={"modeloptionnone"} >{"No Patron"}</option>
+                        {patrons.map((selec) => (
+                            <option value={selec.ID} key={"modeloption"+(patrons.indexOf(selec).toString())} >{makestringpresentable(selec.Name? selec.Name : "")}</option>
+                        ))}
+                    </Form.Control>
+                </Form.Group>
 
                 {curpatron != null &&
                     <>

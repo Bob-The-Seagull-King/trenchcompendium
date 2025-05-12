@@ -55,20 +55,21 @@ const FactionCollectionDisplay = (props: any) => {
     }
 
     return (
-        <ErrorBoundary fallback={<div>Something went wrong with ModelCollectionDisplay.tsx</div>}>
+        <ErrorBoundary fallback={<div>Something went wrong with FactionCollectionDisplay.tsx</div>}>
             <h1>
                 {GetBaseName(factioncollectionObject) + ((selectedModel.var_name == 'base')? "" : ": " + selectedModel.faction.Name)}
             </h1>
 
             {/* Content Filter for subfactions */}
             {factioncollectionObject.SubModelsList.length > 1 &&  false &&
-                <div>
-                    <Form.Control className={"borderstyler  bordergrey overcomeradius" } as="select" aria-label="Default select example"  placeholder="Member Type" onChange={(e: { target: { value: any; }; }) => { updateItem(e.target.value)    } } >
+                <Form.Group controlId={factioncollectionObject.ID + '-select'} className={'mb-3'}>
+                    <Form.Label>{'Choose Option'}</Form.Label>
+                    <Form.Control as="select" onChange={(e: { target: { value: any; }; }) => { updateItem(e.target.value)    } } >
                         {factioncollectionObject.SubModelsList.map((item) => ( 
                             <option key="modeloption" value={item.var_name}>{makestringpresentable((item.var_name == "base")? (item.faction.Name != undefined? item.faction.Name : "") : item.var_name)}</option> 
                         ))}
                     </Form.Control>
-                </div>
+                </Form.Group>
             }
 
             {/* Text content for faction */}

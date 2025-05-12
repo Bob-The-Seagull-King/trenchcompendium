@@ -40,21 +40,18 @@ const ModelCollectionDisplay = (props: any) => {
 
     return (
         <ErrorBoundary fallback={<div>Something went wrong with ModelCollectionDisplay.tsx</div>}>
-            <div className=''>
+            <div className='ModelCollectionDisplay'>
                 {modelcollectionObject.SubModelsList.length > 1 &&
-                <div className="borderthin bordergrey">
-                    <div className="">
-                        <div className={"row "}>
-                            <Form.Control className={"borderstyler  bordergrey overcomeradius"} as="select" aria-label="Default select example"  placeholder="Member Type" onChange={(e: { target: { value: any; }; }) => { updateItem(e.target.value)    } } >
-                                {modelcollectionObject.SubModelsList.map((item) => ( 
-                                    <option  key="modeloption" value={item.var_name}>
-                                        <div>{makestringpresentable(item.var_name) + " - " + makestringpresentable(item.model.Name != undefined? item.model.Name : "")}</div>
-                                    </option> 
-                                ))}
-                            </Form.Control>
-                        </div>
-                    </div>
-                </div>
+                    <Form.Group controlId={modelcollectionObject.ID+'-select'} className={'mb-3'}>
+                        <Form.Label>{'Choose Option'}</Form.Label>
+                        <Form.Control as="select" onChange={(e: { target: { value: any; }; }) => { updateItem(e.target.value)    } } >
+                            {modelcollectionObject.SubModelsList.map((item) => (
+                                <option  key="modeloption" value={item.var_name}>
+                                    {makestringpresentable(item.var_name) + " - " + makestringpresentable(item.model.Name != undefined? item.model.Name : "")}
+                                </option>
+                            ))}
+                        </Form.Control>
+                    </Form.Group>
                 }
                 <div key={_keyvar}>
                     <ModelDisplay data={selectedModel.model}/>
