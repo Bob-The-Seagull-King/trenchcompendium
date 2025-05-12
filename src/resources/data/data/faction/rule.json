@@ -2802,6 +2802,24 @@
             "court_sin": true
          },
         "contextdata": {  
+            "faction_add_upgrades": {
+                "list": [
+                    {
+                        "model_key": "rl_sin_gluttony_all",
+                        "filters": [
+                            {
+                                "type": "keyword",
+                                "value": "kw_elite",
+                                "truth": true
+                            }
+                        ]
+                    },
+                    {
+                        "model_key": "rl_sin_gluttony_captains",
+                        "models_id": ["md_sorcerer","md_praetor"]
+                    }
+                ]
+            },
             "true_add_to_model": {  
                 "list": [{ 
                 "id": "ab_demonicaura_gluttony",                            

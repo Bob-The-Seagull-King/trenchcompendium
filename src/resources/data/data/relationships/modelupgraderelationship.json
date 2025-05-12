@@ -1137,5 +1137,50 @@
         "restricted_upgrades": [ ],
         "warband_limit": 1,
         "required_upgrades":[]
+    },
+    {
+        "id": "rel_rl_sin_gluttony_all_up_goetic_gluttony_bellyofthebeast",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {},
+        "options": [],
+        "model_id_set": ["rl_sin_gluttony_all"],
+        "upgrade_id": "up_goetic_gluttony_bellyofthebeast",
+        "cost": 5,
+        "cost_type": 0,
+        "restricted_upgrades": [ ],
+        "warband_limit": 0,
+        "required_upgrades":[]
+    },
+    {
+        "id": "rel_rl_sin_gluttony_all_up_goetic_gluttony_uncaringgluttony",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {},
+        "options": [],
+        "model_id_set": ["rl_sin_gluttony_all"],
+        "upgrade_id": "up_goetic_gluttony_uncaringgluttony",
+        "cost": 10,
+        "cost_type": 0,
+        "restricted_upgrades": [ ],
+        "warband_limit": 1,
+        "required_upgrades":[]
+    },
+    {
+        "id": "rel_rl_sin_gluttony_captains_up_goetic_gluttony_eateroftheflesh",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {},
+        "options": [],
+        "model_id_set": ["rl_sin_gluttony_captains"],
+        "upgrade_id": "up_goetic_gluttony_eateroftheflesh",
+        "cost": 10,
+        "cost_type": 0,
+        "restricted_upgrades": [ ],
+        "warband_limit": 1,
+        "required_upgrades":[]
     }
 ]

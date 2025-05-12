@@ -1729,5 +1729,94 @@
             }
         ],
         "options": []
+    },
+    {
+        "id": "up_goetic_gluttony_bellyofthebeast",
+        "name": "Belly of the Beast",
+        "source": "core",
+        "tags": {"trait": true, "special_category": "goetic"
+                },
+        "contextdata": {
+        },
+        "description": [          
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                          
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "This creature is known to feast on vast mounds of flesh before it leaves Hell. If it is cut in battle, its opponents suffer agonizing burns as the acidic contents of their gut gushes all over them."
+                    }
+                ]
+            },          
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Whenever an enemy model inflicts one or more BLOOD MARKER on this model with a melee attack, that model suffers one BLOOD MARKER.",
+                "glossary": [
+                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_goetic_gluttony_uncaringgluttony",
+        "name": "Uncaring Gluttony",
+        "source": "core",
+        "tags": {"action": true, "special_category": "goetic"
+                },
+        "contextdata": {
+        },
+        "description": [          
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                          
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "This curse drives its target mad with an unnatural hunger, making them heedless of any danger as it seeks to consume any matter its manipulated mind perceives as edible."
+                    }
+                ]
+            },          
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "As a GOETIC (2) Spell, this model can curse any enemy model that has not been Activated during the Battle with ravenous hunger. Pick any one equipment item (i.e. not weapon or armour) the model is carrying. This item is discarded for the duration of the battle as the model has been chewing on it, rendering the item temporarily unusable.",
+                "glossary": [
+                    {"val": "GOETIC", "id": "kw_goetic"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_goetic_gluttony_eateroftheflesh",
+        "name": "Eater of the Flesh",
+        "source": "core",
+        "tags": {"trait": true, "special_category": "goetic"
+                },
+        "contextdata": {
+        },
+        "description": [          
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                          
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "An unnatural hunger for the flesh haunts this creature. Whenever the blood of a mortal creature is spilled this demonic entity may consume it through tears in reality, to gorge themselves in viscera and guts."
+                    }
+                ]
+            },          
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Whenever a model without the keyword DEMONIC or BLACK GRAIL suffers one or more BLOOD MARKERS in melee combat against this model, you can remove those markers and heal an equal number of BLOOD MARKERS from this model. This model may charge and engage friendly models in melee combat.",
+                "glossary": [
+                    {"val": "DEMONIC", "id": "kw_demonic"},
+                    {"val": "BLACK GRAIL", "id": "kw_blackgrail"},
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"}
+                ]
+            }
+        ],
+        "options": []
     }
 ]
