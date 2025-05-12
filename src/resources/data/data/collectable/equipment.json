@@ -6521,7 +6521,7 @@
     },
     {
         "id": "eq_thedragon_firebreath",
-        "name": "Bonebreaker Mace",
+        "name": "Fire Breath",
         "source": "core",
         "tags": {"action": true, "weapon": true, "model": true},
         "category": "ranged",
