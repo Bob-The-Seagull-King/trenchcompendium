@@ -5701,7 +5701,8 @@
                 "requirements": [
                     {
                         "type": "tag",
-                        "value": "goetic"
+                        "value": "special_category",
+                        "subvalue": "goetic"
                     }
                 ],
                 "count": 1

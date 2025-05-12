@@ -2569,7 +2569,8 @@
                 ]
             },
             "remove_from_model": {
-                "id": ["ab_goetics_praetor"]
+                "abilities": ["ab_goetics_praetor"],
+                "id": ["md_praetor"]
             },
             "true_add_to_model": {  
                 "list": [
