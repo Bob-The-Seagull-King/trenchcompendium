@@ -1,5 +1,5 @@
 import '../../../../resources/styles/vendor/bootstrap.css'
-import React from 'react'
+import React, {useEffect} from 'react'
 import { ErrorBoundary } from "react-error-boundary";
 
 // Classes
@@ -14,8 +14,17 @@ import 'react-toastify/dist/ReactToastify.css';
 import RulesArmouryElementDisplay from "../../rules-content/RulesArmouryElement";
 import RulesAnchorLinks from "../../rules-content/RulesAnchorLinks";
 import RulesHeadlineDisplay from "../../rules-content/RulesHeadlineDisplay";
+import {initGlobalTextGlitch} from "../../../../utility/textGlitch";
+
+
+
 
 const BookRuleDisplay = (props: any) => {
+
+    useEffect(() => {
+        initGlobalTextGlitch();
+    }, []);
+
     const ruleObject: BookRule = props.data
 
     function GetContents(rules : BookRule) {
@@ -46,7 +55,7 @@ const BookRuleDisplay = (props: any) => {
 
     return (
         <ErrorBoundary fallback={<div>Something went wrong with BookRuleDisplay.tsx</div>}>
-            <div className={'book-rules-wrap'}>
+            <div className={'book-rules-wrap glitch'}>
                 <ToastContainer
                             position="top-center"
                             autoClose={5000}
