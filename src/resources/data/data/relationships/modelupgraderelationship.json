@@ -1047,5 +1047,50 @@
         "restricted_upgrades": [ ],
         "warband_limit": 0,
         "required_upgrades":[]
+    },
+    {
+        "id": "rel_rl_sin_pride_all_up_goetic_pride_prouddefiance",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {},
+        "options": [],
+        "model_id_set": ["rl_sin_pride_all"],
+        "upgrade_id": "up_goetic_pride_prouddefiance",
+        "cost": 15,
+        "cost_type": 0,
+        "restricted_upgrades": [ ],
+        "warband_limit": 0,
+        "required_upgrades":[]
+    },
+    {
+        "id": "rel_rl_sin_pride_captains_up_goetic_pride_tooproudtofall",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {},
+        "options": [],
+        "model_id_set": ["rl_sin_pride_captains"],
+        "upgrade_id": "up_goetic_pride_tooproudtofall",
+        "cost": 10,
+        "cost_type": 0,
+        "restricted_upgrades": [ ],
+        "warband_limit": 0,
+        "required_upgrades":[]
+    },
+    {
+        "id": "rel_rl_sin_pride_captains_up_goetic_pride_lightofsamael",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {},
+        "options": [],
+        "model_id_set": ["rl_sin_pride_captains"],
+        "upgrade_id": "up_goetic_pride_lightofsamael",
+        "cost": 15,
+        "cost_type": 0,
+        "restricted_upgrades": [ ],
+        "warband_limit": 0,
+        "required_upgrades":[]
     }
 ]

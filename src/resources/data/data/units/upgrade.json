@@ -1586,5 +1586,61 @@
             }
         ],
         "options": []
+    },
+    {
+        "id": "up_goetic_pride_prouddefiance",
+        "name": "Proud Defiance",
+        "source": "core",
+        "tags": {"trait": true, "special_category": "goetic"
+                },
+        "contextdata": {
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "While this model is on the battlefield, its Warband automatically succeeds Morale Tests."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_goetic_pride_tooproudtofall",
+        "name": "Too Proud to Fall",
+        "source": "core",
+        "tags": {"action": true, "special_category": "goetic"
+                },
+        "contextdata": {
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "As a GOETIC (2) Spell, when this model would otherwise fall Down for any reason, it instead doesn’t. If used to negate a Down result, this model still suffers any BLOOD MARKER as normal. This Spell can be cast outside of this model’s Activation. Note that if a TOUGH model suffers an Out of Action result, which is then converted into Down, this Spell can be used, but TOUGH is considered to have been used.",
+                "glossary": [
+                    {"val": "GOETIC", "id": "kw_goetic"},
+                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"},
+                    {"val": "TOUGH", "id": "kw_tough"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_goetic_pride_lightofsamael",
+        "name": "Light of Samael",
+        "source": "core",
+        "tags": {"action": true, "special_category": "goetic"
+                },
+        "contextdata": {
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "As a GOETIC (2) Spell, this model can hit an enemy model it can see within 24” with punishing light. That model rolls on the Injury Chart. If the target is on a 32mm or smaller base and was not taken Out of Action, it is pushed D6” directly away from the caster of this Spell, stopping if it hits another model or a solid object. They also stop if they would otherwise enter Impassable Terrain or if they would be pushed out of the battlefield.",
+                "glossary": [
+                    {"val": "GOETIC", "id": "kw_goetic"}
+                ]
+            }
+        ],
+        "options": []
     }
 ]
