@@ -637,7 +637,7 @@
                 ]
             }},
         "options": [],
-        "model_id_set": ["md_yeoman"],
+        "model_id_set": ["md_yeoman","md_yeoman_survivor"],
         "upgrade_id": "up_infiltrator",
         "cost": 10,
         "cost_type": 0,

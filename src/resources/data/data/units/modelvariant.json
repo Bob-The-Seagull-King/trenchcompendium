@@ -759,5 +759,20 @@
         },
         "cut_abilities" : ["ab_darkblessing","ab_chattel"],
         "new_abilities" : []
+    },
+    {
+        "id": "md_yeoman_survivor",
+        "name": "Yeoman",
+        "source": "core",
+        "tags": {},
+        "contextdata": { },
+        "base_id": "md_yeoman",
+        "variant_name": "Exploration",
+        "team": "faithful",
+        "stats" : {},
+        "cut_keywords" : [],
+        "keywords" : [],
+        "cut_abilities" : [],
+        "new_abilities" : []
     }
 ]
