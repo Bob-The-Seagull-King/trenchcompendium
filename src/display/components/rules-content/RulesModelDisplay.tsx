@@ -58,14 +58,49 @@ const RulesModelDisplay = (props: any) => {
     // Render no lore if loreshow !== 'true'
     const [loreshow] = useGlobalState('loreshow');
 
+    
+
+    function SplitUpgrades(UpgradeListFull : ModelUpgradeRelationship[]) : UpgradesGrouped {
+
+        const groups : UpgradesGrouped = {}
+
+        for (let i = 0; i < UpgradeListFull.length; i++) {
+            const special_cat = UpgradeListFull[i].GetSpecialCategory()
+            if (groups[special_cat]) {
+                groups[special_cat].push(UpgradeListFull[i])
+            } else {
+                groups[special_cat] = [UpgradeListFull[i]]
+            }
+        }
+
+        return groups;
+    }
+
     useEffect(() => {
         async function SetModelOptions() {
             const EventProc: EventRunner = new EventRunner();
                             
             /* UPGRADES */
             if (parentfaction != undefined) {
-                const result_upgrades = await factionmodelObject.GetSplitUpgrades(parentfaction);
-                setupgrades(result_upgrades);
+                const result_upgrades = await factionmodelObject.getContextuallyAvailableUpgrades(parentfaction);
+                if (bonusselections != undefined) {
+                    for (const [optionSetId, selectedObject] of Object.entries(bonusselections)) {
+                        if ((selectedObject as IChoice).value instanceof ContextObject) {
+                        const Events : EventRunner = new EventRunner();
+                        const result = await Events.runEvent(
+                            "getContextuallyAddedUpgrades",
+                            (selectedObject as IChoice).value,
+                            [],
+                            result_upgrades,
+                            modelcollectionObject
+                        )
+                        setupgrades(SplitUpgrades(result))
+                        }
+                    }
+                } else {
+                    setupgrades(SplitUpgrades(result_upgrades));
+                }
+                setupgrades(SplitUpgrades(result_upgrades));
             } else {
                 setupgrades(modelcollectionObject.GetSplitUpgrades())
             }

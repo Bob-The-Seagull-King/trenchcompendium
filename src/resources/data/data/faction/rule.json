@@ -2554,6 +2554,14 @@
             "court_sin": true
          },
         "contextdata": {   
+            "faction_add_upgrades": {
+                "list": [
+                    {
+                        "model_key": "art_of_assassination",
+                        "models_id": ["md_sorcerer"]
+                    }
+                ]
+            },
             "true_add_to_model": {   
                 "id": "ab_demonicaura_wrath",                            
                 "required": [
