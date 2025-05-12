@@ -100,7 +100,6 @@ const RulesModelDisplay = (props: any) => {
                 } else {
                     setupgrades(SplitUpgrades(result_upgrades));
                 }
-                setupgrades(SplitUpgrades(result_upgrades));
             } else {
                 setupgrades(modelcollectionObject.GetSplitUpgrades())
             }
