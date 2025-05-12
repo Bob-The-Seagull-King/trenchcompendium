@@ -912,5 +912,50 @@
         "restricted_upgrades": [ ],
         "warband_limit": 0,
         "required_upgrades":[]
+    },
+    {
+        "id": "rel_rl_sin_wrath_up_goetic_wrath_chargeofhatred",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {},
+        "options": [],
+        "model_id_set": ["rl_sin_wrath"],
+        "upgrade_id": "up_goetic_wrath_chargeofhatred",
+        "cost": 10,
+        "cost_type": 0,
+        "restricted_upgrades": [ ],
+        "warband_limit": 3,
+        "required_upgrades":[]
+    },
+    {
+        "id": "rel_rl_sin_wrath_up_goetic_wrath_lessermarkofcain",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {},
+        "options": [],
+        "model_id_set": ["rl_sin_wrath"],
+        "upgrade_id": "up_goetic_wrath_lessermarkofcain",
+        "cost": 20,
+        "cost_type": 0,
+        "restricted_upgrades": [ ],
+        "warband_limit": 1,
+        "required_upgrades":[]
+    },
+    {
+        "id": "rel_rl_sin_wrath_up_goetic_wrath_blindrage",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {},
+        "options": [],
+        "model_id_set": ["rl_sin_wrath"],
+        "upgrade_id": "up_goetic_wrath_blindrage",
+        "cost": 10,
+        "cost_type": 0,
+        "restricted_upgrades": [ ],
+        "warband_limit": 3,
+        "required_upgrades":[]
     }
 ]

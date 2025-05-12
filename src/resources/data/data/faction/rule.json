@@ -2557,17 +2557,39 @@
             "faction_add_upgrades": {
                 "list": [
                     {
-                        "model_key": "rl_artofassassination",
-                        "models_id": ["md_sorcerer"]
+                        "model_key": "rl_sin_wrath",
+                        "filters": [
+                            {
+                                "type": "keyword",
+                                "value": "kw_elite",
+                                "truth": true
+                            }
+                        ]
                     }
                 ]
             },
-            "true_add_to_model": {   
-                "id": "ab_demonicaura_wrath",                            
-                "required": [
+            "remove_from_model": {
+                "id": ["ab_goetics_praetor"]
+            },
+            "true_add_to_model": {  
+                "list": [
                     {
-                        "category": "id",
-                        "value": ["md_desecratedsaint"]
+                        "id": "ab_demonicaura_wrath",                            
+                        "required": [
+                            {
+                                "category": "id",
+                                "value": ["md_desecratedsaint"]
+                            }
+                        ] 
+                    },
+                    {
+                        "id": "ab_goetics_knight",                            
+                        "required": [
+                            {
+                                "category": "id",
+                                "value": ["md_praetor"]
+                            }
+                        ] 
                     }
                 ]
             }
@@ -2591,14 +2613,15 @@
             "court_sin": true
          },
         "contextdata": {  
-            "true_add_to_model": {   
+            "true_add_to_model": {  
+                "list": [{ 
                 "id": "ab_demonicaura_envy",                            
                 "required": [
                     {
                         "category": "id",
                         "value": ["md_desecratedsaint"]
                     }
-                ]
+                ]}]
             }  
         },
         "name": "Envy",
@@ -2620,14 +2643,15 @@
             "court_sin": true
          },
         "contextdata": {   
-            "true_add_to_model": {   
+            "true_add_to_model": {  
+                "list": [{ 
                 "id": "ab_demonicaura_lust",                            
                 "required": [
                     {
                         "category": "id",
                         "value": ["md_desecratedsaint"]
                     }
-                ]
+                ]}]
             }
         },
         "name": "Lust",
@@ -2650,13 +2674,14 @@
          },
         "contextdata": {   
             "true_add_to_model": {   
+                "list": [{
                 "id": "ab_demonicaura_pride",                            
                 "required": [
                     {
                         "category": "id",
                         "value": ["md_desecratedsaint"]
                     }
-                ]
+                ]}]
             }
         },
         "name": "Pride",
@@ -2678,14 +2703,15 @@
             "court_sin": true
          },
         "contextdata": {   
-            "true_add_to_model": {   
+            "true_add_to_model": {  
+                "list": [{ 
                 "id": "ab_demonicaura_sloth",                            
                 "required": [
                     {
                         "category": "id",
                         "value": ["md_desecratedsaint"]
                     }
-                ]
+                ]}]
             }
         },
         "name": "Sloth",
@@ -2707,14 +2733,15 @@
             "court_sin": true
          },
         "contextdata": {  
-            "true_add_to_model": {   
+            "true_add_to_model": {  
+                "list": [{ 
                 "id": "ab_demonicaura_gluttony",                            
                 "required": [
                     {
                         "category": "id",
                         "value": ["md_desecratedsaint"]
                     }
-                ]
+                ]}]
             } 
         },
         "name": "Gluttony",
@@ -2736,14 +2763,15 @@
             "court_sin": true
          },
         "contextdata": { 
-            "true_add_to_model": {   
+            "true_add_to_model": {  
+                "list": [{ 
                 "id": "ab_demonicaura_greed",                            
                 "required": [
                     {
                         "category": "id",
                         "value": ["md_desecratedsaint"]
                     }
-                ]
+                ]}]
             }   
         },
         "name": "Greed",

@@ -1350,5 +1350,72 @@
             }
         ],
         "options": []
+    },
+    {
+        "id": "up_goetic_wrath_chargeofhatred",
+        "name": "Charge of Hatred",
+        "source": "core",
+        "tags": {"trait": true, "special_category": "goetic"
+                },
+        "contextdata": {
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "When this model Charges, it can always move the maximum distance of 12”, although it suffers penalties to this movement as standard (Difficult Terrain, Standing etc.). Additionally, it must make a RISKY ACTION to Charge an enemy model other than the closest one.",
+                "glossary": [
+                    {"val": "RISKY ACTION", "id": "kw_riskyaction"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_goetic_wrath_lessermarkofcain",
+        "name": "Lesser Mark of Cain",
+        "source": "core",
+        "tags": {"trait": true, "special_category": "goetic"
+                },
+        "contextdata": {
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                              
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "An inferior copy of the mark that God-Tyrant YHWH placed on the forehead of Cain, the First Murderer."
+                    }
+                ]
+            },          
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Injuries against this model are rolled with -1 DICE.",
+                "glossary": [
+                    {"val": "-1 DICE", "id": "kw_minusdice"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_goetic_wrath_blindrage",
+        "name": "Blind Rage",
+        "source": "core",
+        "tags": {"trait": true, "special_category": "goetic"
+                },
+        "contextdata": {
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This model rolls to Dash with +1 DICE.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"}
+                ]
+            }
+        ],
+        "options": []
     }
 ]

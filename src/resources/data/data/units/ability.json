@@ -2336,7 +2336,7 @@
         "description": [            
             {
                 "tags": {"desc_type" : "default"},
-                "content": "You may purchase one GOETIC Power or Spell for the Hell Knight. ",
+                "content": "You may purchase one GOETIC Power or Spell for the Model. ",
                 "glossary": [
                     {"val": "GOETIC", "id": "kw_goetic"}
                 ]
