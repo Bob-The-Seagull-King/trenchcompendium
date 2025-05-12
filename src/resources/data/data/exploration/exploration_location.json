@@ -1094,7 +1094,7 @@
                 "content": "You find the hidden Strongbox of a Warband lost in the Great War."
             }
         ],
-        "location_value": 18,
+        "location_value": 20,
         "options": [{
             "ref_id" : "ot_warbandstrongbox",
             "name" : "",
@@ -1334,7 +1334,7 @@
                 "content": "You find a great shrine, temple or other religious building of faith. Upon its altar rests an object of great power waiting for you."
             }
         ],
-        "location_value": 11,
+        "location_value": 19,
         "options": [{
             "ref_id" : "ot_ruinedchurchmasjidsynagogue",
             "name" : "",
@@ -1408,7 +1408,7 @@
     },
     {
         "id": "el_stashofdrugsanderotica",
-        "name": "Ruined Church/Masjid/Synagogue",
+        "name": "Stash of Drugs & Erotica",
         "source": "core",
         "tags": {
             "exploration_table": "et_rarelocations"
