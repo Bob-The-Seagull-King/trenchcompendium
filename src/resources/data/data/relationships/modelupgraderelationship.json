@@ -1092,5 +1092,50 @@
         "restricted_upgrades": [ ],
         "warband_limit": 0,
         "required_upgrades":[]
+    },
+    {
+        "id": "rel_rl_sin_sloth_all_up_goetic_sloth_morpheanmind",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {},
+        "options": [],
+        "model_id_set": ["rl_sin_sloth_all"],
+        "upgrade_id": "up_goetic_sloth_morpheanmind",
+        "cost": 15,
+        "cost_type": 0,
+        "restricted_upgrades": [ ],
+        "warband_limit": 0,
+        "required_upgrades":[]
+    },
+    {
+        "id": "rel_rl_sin_sloth_all_up_goetic_sloth_charmofacedia",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {},
+        "options": [],
+        "model_id_set": ["rl_sin_sloth_all"],
+        "upgrade_id": "up_goetic_sloth_charmofacedia",
+        "cost": 10,
+        "cost_type": 0,
+        "restricted_upgrades": [ ],
+        "warband_limit": 0,
+        "required_upgrades":[]
+    },
+    {
+        "id": "rel_rl_sin_sloth_all_up_goetic_sloth_daemoniummeridianum",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {},
+        "options": [],
+        "model_id_set": ["rl_sin_sloth_all"],
+        "upgrade_id": "up_goetic_sloth_daemoniummeridianum",
+        "cost": 20,
+        "cost_type": 0,
+        "restricted_upgrades": [ ],
+        "warband_limit": 1,
+        "required_upgrades":[]
     }
 ]

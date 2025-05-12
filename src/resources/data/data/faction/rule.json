@@ -2758,6 +2758,20 @@
             "court_sin": true
          },
         "contextdata": {   
+            "faction_add_upgrades": {
+                "list": [
+                    {
+                        "model_key": "rl_sin_sloth_all",
+                        "filters": [
+                            {
+                                "type": "keyword",
+                                "value": "kw_elite",
+                                "truth": true
+                            }
+                        ]
+                    }
+                ]
+            },
             "true_add_to_model": {  
                 "list": [{ 
                 "id": "ab_demonicaura_sloth",                            

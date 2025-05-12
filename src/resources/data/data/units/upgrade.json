@@ -1642,5 +1642,92 @@
             }
         ],
         "options": []
+    },
+    {
+        "id": "up_goetic_sloth_morpheanmind",
+        "name": "Morphean Mind",
+        "source": "core",
+        "tags": {"trait": true, "special_category": "goetic"
+                },
+        "contextdata": {
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                          
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "The mind of this Demonic creature warps the flow of time so it can take as long as it wishes to decide on its actions."
+                    }
+                ]
+            },      
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "No more than one BLOOD MARKER at a time can be used to negatively affect an ACTION or RISKY ACTION this model takes.",
+                "glossary": [
+                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"},
+                    {"val": "ACTION", "id": "kw_action"},
+                    {"val": "RISKY", "id": "kw_riskyaction"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_goetic_sloth_charmofacedia",
+        "name": "Charm of Acedia",
+        "source": "core",
+        "tags": {"action": true, "special_category": "goetic"
+                },
+        "contextdata": {
+        },
+        "description": [          
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                          
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "The great aversion to effort possessed by this infernal warrior seeps to nearby creatures or to the very Creation itself, forcing them to bend to its will and thus avoiding the need for the demonic creature to struggle to achieve its aims."
+                    }
+                ]
+            },          
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This GOETIC (1) spell can be cast right before the model casting it takes an ACTION involving any model, friend or foe (including the model itself and thus covering Dashing, Climbing, Jumping etc). The target ceases any potential resistance or tension, seeing no point in such effort, making the ACTION succeed automatically with no dice rolled.",
+                "glossary": [
+                    {"val": "GOETIC", "id": "kw_goetic"},
+                    {"val": "ACTION", "id": "kw_action"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_goetic_sloth_daemoniummeridianum",
+        "name": "Daemonium Meridianum",
+        "source": "core",
+        "tags": {"trait": true, "special_category": "goetic"
+                },
+        "contextdata": {
+        },
+        "description": [         
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                          
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "It is all but impossible to approach this infernal warrior with any energy or enthusiasm."
+                    }
+                ]
+            },           
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Open Terrain within 6” of this model is considered Difficult Terrain for enemy models. Dangerous Terrain within 6” of this model is considered both Dangerous Terrain and Difficult Terrain for enemy models."
+            }
+        ],
+        "options": []
     }
 ]
