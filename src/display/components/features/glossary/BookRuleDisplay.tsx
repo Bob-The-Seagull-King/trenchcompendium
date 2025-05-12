@@ -15,6 +15,7 @@ import RulesArmouryElementDisplay from "../../rules-content/RulesArmouryElement"
 import RulesAnchorLinks from "../../rules-content/RulesAnchorLinks";
 import RulesHeadlineDisplay from "../../rules-content/RulesHeadlineDisplay";
 import {initGlobalTextGlitch} from "../../../../utility/textGlitch";
+import {useGlobalState} from "../../../../utility/globalstate";
 
 
 
@@ -53,9 +54,11 @@ const BookRuleDisplay = (props: any) => {
         });
     }
 
+    const [applycurse] = useGlobalState('applycurse');
+
     return (
         <ErrorBoundary fallback={<div>Something went wrong with BookRuleDisplay.tsx</div>}>
-            <div className={'book-rules-wrap glitch'}>
+            <div className={`book-rules-wrap ${applycurse === 'true' ? 'glitch' : ''}`}>
                 <ToastContainer
                             position="top-center"
                             autoClose={5000}

@@ -2,10 +2,13 @@ import { EventRunner } from '../classes/contextevent/contexteventhandler';
 import React from 'react';
 import { createGlobalState } from 'react-hooks-global-state';
 
-const initialState = { theme: InitTheme(),
-                        language: InitLanguage(),
-                        loreshow: InnitLoreShow(),
-                       eventrunner : InitEventHandler()
+const initialState = {
+    theme: InitTheme(),
+    language: InitLanguage(),
+    loreshow: InitLoreShow(),
+    applycurse: InitApplyCurse(),
+    eventrunner : InitEventHandler(),
+
                     };
 const { useGlobalState } = createGlobalState(initialState);
 
@@ -21,7 +24,7 @@ function InitLanguage() {
     return 'ln_english'
 }
 
-function InnitLoreShow() {
+function InitLoreShow() {
     const loreShow = localStorage.getItem('loreshow');
     if (loreShow != null) {
         if (loreShow === "true") {
@@ -39,6 +42,20 @@ function InitTheme() {
         return theme
     }
     return 'dark'
+}
+
+
+function InitApplyCurse() {
+    const applycurse = localStorage.getItem('applycurse');
+
+    if (applycurse != null) {
+        if (applycurse === "true") {
+            return 'true'
+        } else {
+            return 'false'
+        }
+    }
+    return 'true'
 }
 
 export {useGlobalState, InitTheme};

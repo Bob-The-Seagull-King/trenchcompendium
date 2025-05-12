@@ -15,6 +15,7 @@ const OffcanvasMenuSettings: React.FC = () => {
 
     const [theme, setTheme] = useGlobalState('theme');
     const [loreshow, setLoreShow] = useGlobalState('loreshow');
+    const [applycurse, setapplyCurse] = useGlobalState('applycurse');
     const [open, setOpen]   = useState(DefaultState);
 
 
@@ -36,6 +37,13 @@ const OffcanvasMenuSettings: React.FC = () => {
     };
 
 
+    const applyCurse = applycurse === 'true';
+    const handleApplyCurse = () => {
+        const newCurse = applycurse === 'true' ? 'false' : 'true';
+        localStorage.setItem('applycurse', newCurse);
+        setapplyCurse(newCurse);
+    };
+
     return (
         <ErrorBoundary fallback={<div>Something went wrong with RulesMenuSettings.tsx</div>}>
 
@@ -53,6 +61,7 @@ const OffcanvasMenuSettings: React.FC = () => {
                 <Collapse in={open}>
                     <div className={'OffcanvasMenuSettings-content'}>
                         <div className={'spacer-20'}></div>
+
                         <div className="form-check form-switch">
                             <input className="form-check-input"
                                    type="checkbox"
@@ -73,6 +82,17 @@ const OffcanvasMenuSettings: React.FC = () => {
                                    onChange={handleLoreToggle}
                             />
                             <label className="form-check-label" htmlFor="lore-switch">{'Show Lore'}</label>
+                        </div>
+
+                        <div className="form-check form-switch">
+                            <input className="form-check-input"
+                                   type="checkbox"
+                                   role="switch"
+                                   id="curse-switch"
+                                   checked={applycurse === 'true'}
+                                   onChange={handleApplyCurse}
+                            />
+                            <label className="form-check-label" htmlFor="curse-switch">{'Apply Curse'}</label>
                         </div>
 
                         {/*<div className="form-check form-switch">*/}
