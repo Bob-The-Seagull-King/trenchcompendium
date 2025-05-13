@@ -305,13 +305,17 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         defaultpage(ViewPageController: CollectionsListPage) {
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                        <div>
-                            {"Faction Default Page - THIS IS A TEST TO BE REPLACED"}
-                        </div>
+                    <h1 className="">
+                        {'Factions'}
+                    </h1>
+
+                    <div>
+                        {"Faction Default Page - THIS IS A TEST TO BE REPLACED"}
+                    </div>
                 </ErrorBoundary>
             )
         },
-        returnFilterSelect(manager : FilterManager, update : NoneToNoneFunction, close : NoneToNoneFunction) {
+        returnFilterSelect(manager: FilterManager, update: NoneToNoneFunction, close: NoneToNoneFunction) {
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
 

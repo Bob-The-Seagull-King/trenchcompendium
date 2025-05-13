@@ -64,33 +64,35 @@ const CompendiumBasePage: React.FC<IControllerProp> = (prop: any) => {
     // Return result -----------------------------
     return (
         <ErrorBoundary fallback={<div>Something went wrong with BaseDisplayCompendium.tsx</div>}>
-            <>
-                <div>
-                    {/*<div className="colourdefault font-seriftext size-section">*/}
-                    <h1 className="">
-                        {"Compendium"}
-                    </h1>
-                </div>
-                <div>
-                    <div className=""/>
-                    <div className="colourBasicText  ">
-                        {GetContentsTableRules()}
-                    </div>
-                    <div className=""/>
-                    <div className="colourBasicText  ">
-                        {GetContentsTableWarbands()}
-                    </div>
-                    <div className=""/>
-                    <div className="colourBasicText  ">
-                        {GetContentsTableScenarios()}
-                    </div>
-                    <div className=""/>
-                    <div className="colourBasicText  ">
-                        {GetContentsTableCampaign()}
-                    </div>
+            <div className={'rules-content-main'}>
+                <h1 className="">
+                    {"Compendium"}
+                </h1>
+
+                <p>
+
+                </p>
+
+
+            </div>
+            <div>
+                <div className=""/>
+                <div className="colourBasicText  ">
+                    {GetContentsTableRules()}
                 </div>
                 <div className=""/>
-            </>
+                <div className="colourBasicText  ">
+                    {GetContentsTableWarbands()}
+                </div>
+                <div className=""/>
+                <div className="colourBasicText  ">
+                    {GetContentsTableScenarios()}
+                </div>
+                <div className=""/>
+                <div className="colourBasicText  ">
+                    {GetContentsTableCampaign()}
+                </div>
+            </div>
         </ErrorBoundary>
     )
     // -------------------------------------------
