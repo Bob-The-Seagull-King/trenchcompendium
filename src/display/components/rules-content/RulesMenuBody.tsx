@@ -76,6 +76,7 @@ const RulesMenuBody: React.FC<RulesMenuBodyProps> = ({ controller, onBack }) => 
             {
                 title: "Campaigns 1.6.3",
                 slug: "",
+                superslug: "compendium/campaignrule",
                 children: [
                     {
                         title: "Rules",
