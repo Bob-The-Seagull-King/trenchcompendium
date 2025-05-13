@@ -201,8 +201,8 @@ const RulesModelDisplay = (props: any) => {
 
                     <FighterCardStats
                         movement={getModelStatMove(statchoices)}
-                        melee={getModelStatRanged(statchoices)}
-                        ranged={getModelStatMelee(statchoices)}
+                        melee={getModelStatMelee(statchoices)}
+                        ranged={getModelStatRanged(statchoices)}
                         armour={getModelStatArmour(statchoices)}
                     />
 
