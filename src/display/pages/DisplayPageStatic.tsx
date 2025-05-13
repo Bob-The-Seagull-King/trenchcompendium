@@ -165,10 +165,10 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
                                 <tr className={'filter-item-row'} key={subitem.HeldItem.ID}>
                                     <>
                                         <td>
-                                            {subitem.Name}
+                                            {subitem.HeldItem.Name}
                                         </td>
                                         <td>
-                                            <KeywordDisplay data={subitem} />
+                                            <KeywordDisplay data={subitem.HeldItem} />
                                         </td>
                                     </>
                                 </tr>
