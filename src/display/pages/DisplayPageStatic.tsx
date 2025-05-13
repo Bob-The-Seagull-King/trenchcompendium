@@ -340,12 +340,12 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         menushowitems: true,
         returnDisplay(item: any) {
             return (
-                
+
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    <div className="size-section font-seriftext">
+                    <h1>
                         {item.Name}
-                    </div>
-                    <ScenarioDisplay data={item} />
+                    </h1>
+                    <ScenarioDisplay data={item}/>
                 </ErrorBoundary>
             )
         },
@@ -375,12 +375,12 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         menushowitems: true,
         returnDisplay(item: any) {
             return (
-                
+
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    <div className="size-section font-seriftext">
+                    <h1>
                         {item.Name}
-                    </div>
-                    <BookRuleDisplay data={item} />
+                    </h1>
+                    <BookRuleDisplay data={item}/>
                 </ErrorBoundary>
             )
         },
@@ -508,10 +508,10 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
             return (
                 
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    <div className="size-section font-seriftext">
+                    <h1>
                         {item.Name}
-                    </div>
-                    
+                    </h1>
+
                     <PatronDisplay data={item} />
                 </ErrorBoundary>
             )

@@ -18,18 +18,27 @@
             ul
                 margin-top: 15px
 
+                li
+                    margin-bottom: 5px
+
 // tables in the rules section
 .book-rules-wrap
     .description-element
     .info-box
 
-    table.table_headless
+    table.table_headless,
+    table.table_headed
         background-color: $bg-color-card-1
         margin-bottom: 30px
 
+        th
+
+            border: 1px solid $color-bg-1
+            padding: 15px
         tr
         td
             border: 1px solid $color-bg-1
             padding: 15px
+
             &:first-of-type
                 font-weight: bold
