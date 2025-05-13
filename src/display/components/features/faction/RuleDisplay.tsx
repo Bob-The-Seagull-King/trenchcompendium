@@ -12,10 +12,8 @@ import OptionSetStaticDisplay from '../../subcomponents/description/OptionSetSta
 import { Rule } from '../../../../classes/feature/faction/Rule';
 import { EventRunner } from '../../../../classes/contextevent/contexteventhandler';
 import { ModelUpgradeRelationship } from '../../../../classes/relationship/model/ModelUpgradeRelationship';
-import GenericDisplay from '../../generics/GenericDisplay';
-import ModelUpgradeDisplay from '../ability/ModelUpgradeDisplay';
-import GenericCollapsableBlockDisplay from '../../../components/generics/GenericCollapsableBlockDisplay';
 import RulesCollapsibleContent from "../../rules-content/RulesCollapsibleContent";
+import RulesModelUpgrade from "../../rules-content/RulesModelUpgrade";
 
 const RuleDisplay = (props: any) => {
     const ruleObject: Rule = props.data
@@ -27,6 +25,7 @@ const RuleDisplay = (props: any) => {
     useEffect(() => {
         async function SetModelOptions() {
             const EventProc: EventRunner = new EventRunner()
+
             /**
              * MODEL STAT CHOICES
              */
@@ -49,6 +48,10 @@ const RuleDisplay = (props: any) => {
         SetModelOptions();
     }, []);
 
+
+    console.log('upgradeoptions');
+    console.log(upgradeoptions);
+
     return (
         <ErrorBoundary fallback={<div>Something went wrong with AbilityDisplay.tsx</div>}>
             <div key={_keyvar} className='RuleDisplay'>
@@ -67,30 +70,18 @@ const RuleDisplay = (props: any) => {
                 {/* Upgrade Options */}
                 {upgradeoptions.length > 0 &&
                     <div className="RuleDisplay-upgradeoptions">
+                        {/* @TODO: Change the headline string to a matching headline */}
                         <RulesCollapsibleContent
                             headline={'Upgrades'}
                             content={
-                            <>
-                                {upgradeoptions.map((item : ModelUpgradeRelationship) => (
-                                    <div className={'RuleDisplay-upgradeoption'}
-                                         key={"model_ability_" + ruleObject.ID + "_ability_id_" + item.ID}>
-                                        <div className={'RuleDisplay-upgradeoption-title'}>
-                                            {item.UpgradeObject.GetName()}
-
-                                            {item.GetCostString() != '' &&
-                                                <span className={'cost'}>
-                                                    {' - ' + item.GetCostString()}
-                                                </span>
-                                            }
-                                        </div>
-
-                                        <div className={'RuleDisplay-upgradeoption-description'}>
-                                            <ModelUpgradeDisplay data={item}/>
-                                        </div>
-                                    </div>
-                                )) /* Abilities */}
-                            </>
-
+                                <>
+                                    {upgradeoptions.map((item : ModelUpgradeRelationship) => (
+                                        <React.Fragment
+                                            key={"model_ability_" + ruleObject.ID + "_ability_id_" + item.ID}>
+                                            <RulesModelUpgrade item={item}/>
+                                        </React.Fragment>
+                                    )) /* Abilities */}
+                                </>
                             }
                         />
                     </div>

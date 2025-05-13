@@ -18,15 +18,9 @@ import {
     ModelStatistics
 } from '../../../../classes/feature/model/ModelStats';
 import {getBaseSize, getColour, getCostType, getMoveType, getPotential, makestringpresentable} from '../../../../utility/functions';
-import ModelUpgradeDisplay from '../ability/ModelUpgradeDisplay';
-import { Equipment } from '../../../../classes/feature/equipment/Equipment';
-import { IChoice } from '../../../../classes/options/StaticOption';
 import ModelEquipmentDisplay from '../equipment/ModelEquipmentDisplay';
 import { EventRunner } from '../../../../classes/contextevent/contexteventhandler';
-import { Form } from 'react-bootstrap';
 import RulesModelDisplayCollapse from '../../../components/rules-content/RulesModelDisplayCollapse';
-import ItemRow from '../../../components/subcomponents/description/ItemRow';
-import {FactionModelRelationship} from "../../../../classes/relationship/faction/FactionModelRelationship";
 import FighterCardTitle from "../../rules-content/FighterCard/FighterCardTitle";
 import FighterCardImageWrap from "../../rules-content/FighterCard/FighterCardImageWrap";
 import FighterCardMetaEntry from "../../rules-content/FighterCard/FighterCardMetaEntry";

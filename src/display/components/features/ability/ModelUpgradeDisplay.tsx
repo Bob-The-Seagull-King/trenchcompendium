@@ -44,7 +44,6 @@ const ModelUpgradeDisplay = (props: any) => {
                         {abilityObject.GetLimitString()}
                     </div>
                 }
-
                 <UpgradeDisplay data={abilityObject.UpgradeObject}/>
             </div>
         </ErrorBoundary>
