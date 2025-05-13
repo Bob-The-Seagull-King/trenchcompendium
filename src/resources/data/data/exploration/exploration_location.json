@@ -2233,8 +2233,8 @@
         "options": []
     },
     {
-        "id": "el_skullofasaint",
-        "name": "Skull of a Saint",
+        "id": "el_lockofsamsonshair",
+        "name": "Lock of Samson's Hair",
         "source": "core",
         "tags": {
             "exploration_table": "et_legendarylocations"
