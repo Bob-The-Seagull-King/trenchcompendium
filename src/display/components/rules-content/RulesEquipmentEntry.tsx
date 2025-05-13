@@ -23,16 +23,18 @@ const RulesEquipmentEntry: React.FC<RulesEquipmentEntryProps> = ({ equipment }) 
 
             <table className={'rules-equipment-stats-table'}>
                 <tbody>
-                {equipment.GetCategory() != '' &&
-                    <tr>
-                        <td className={'label-cell'}>
-                            {'Category'}
-                        </td>
-                        <td>
-                            {equipment.GetCategory()}
-                        </td>
-                    </tr>
-                }
+
+                {/* Let's not show this as the category is always redundant with the range or the context*/}
+                {/*{equipment.GetCategory() != '' &&*/}
+                {/*    <tr>*/}
+                {/*        <td className={'label-cell'}>*/}
+                {/*            {'Category'}*/}
+                {/*        </td>*/}
+                {/*        <td>*/}
+                {/*            {equipment.GetCategory()}*/}
+                {/*        </td>*/}
+                {/*    </tr>*/}
+                {/*}*/}
 
                 {equipment.GetRange() != '' &&
                     <tr>
