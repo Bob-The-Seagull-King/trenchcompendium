@@ -468,7 +468,7 @@
                                 "content": "",
                                 "subcontent": [
                                     {
-                                        "tags": {"desc_type" : "equipment"},
+                                        "tags": {"desc_type" : "equipmentslim"},
                                         "content": "eq_trenchshield"
                                     }
                                 ]
@@ -488,7 +488,7 @@
                                 "content": "",
                                 "subcontent": [
                                     {
-                                        "tags": {"desc_type" : "equipment"},
+                                        "tags": {"desc_type" : "equipmentslim"},
                                         "content": "eq_standardarmour"
                                     }
                                 ]
@@ -508,7 +508,7 @@
                                 "content": "",
                                 "subcontent": [
                                     {
-                                        "tags": {"desc_type" : "equipment"},
+                                        "tags": {"desc_type" : "equipmentslim"},
                                         "content": "eq_grenades"
                                     }
                                 ]
@@ -528,7 +528,7 @@
                                 "content": "",
                                 "subcontent": [
                                     {
-                                        "tags": {"desc_type" : "equipment"},
+                                        "tags": {"desc_type" : "equipmentslim"},
                                         "content": "eq_medikit"
                                     }
                                 ]
@@ -548,7 +548,7 @@
                                 "content": "",
                                 "subcontent": [
                                     {
-                                        "tags": {"desc_type" : "equipment"},
+                                        "tags": {"desc_type" : "equipmentslim"},
                                         "content": "eq_armourpiercingbullets"
                                     }
                                 ]
@@ -568,7 +568,7 @@
                                 "content": "",
                                 "subcontent": [
                                     {
-                                        "tags": {"desc_type" : "equipment"},
+                                        "tags": {"desc_type" : "equipmentslim"},
                                         "content": "eq_grenadelauncher"
                                     }
                                 ]
