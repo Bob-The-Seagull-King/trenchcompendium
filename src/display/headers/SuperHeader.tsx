@@ -74,6 +74,7 @@ const SuperHeader: React.FC<IControllerProp> = (prop) => {
                         </Route>
                     </Routes>
                 </div>
+
                 <OffcanvasMenu controller={prop.controller} closeFunc={handleClose} responseshow="" showState={show}/>
                 <SettingsMenu controller={prop.controller} closeFunc={handleClosesettings} responseshow=""
                               showState={showsettings}/>

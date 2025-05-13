@@ -82,7 +82,7 @@ const FilterBox = (prop: any) => {
                                 </div>
                             </div>
                             <Collapse in={open}>
-                                <div className={'container borderthin bordergrey'}>
+                                <div className={'borderthin bordergrey findme-123'}>
                                     <div className="content">                    
                                         {ReturnFilterBoxInner()}
                                     </div>

@@ -133,8 +133,8 @@ const FilterRangeItem = (prop: any) => {
                     setMenuWidth(toggleRef.current.getBoundingClientRect().width);
                     }
                 }}>
-                <Dropdown.Toggle ref={toggleRef} bsPrefix="empty" id="dropdown-basic" className="container bordergrey borderthin buttonclean">
-                    <div className=" container">
+                <Dropdown.Toggle ref={toggleRef} bsPrefix="empty" id="dropdown-basic" className="bordergrey borderthin buttonclean">
+                    <div className="">
                         <div className="backgroundBgBase borderthin bordergrey findme-filter1">
                             <div className="align-left ">
                                 {makestringpresentable(ItemFilter.Group)}
@@ -228,8 +228,8 @@ const FilterTagSet = (prop: any) => {
                     setMenuWidth(toggleRef.current.getBoundingClientRect().width);
                     }
                 }}>
-                <Dropdown.Toggle ref={toggleRef} bsPrefix="empty" id="dropdown-basic" className="container bordergrey borderthin buttonclean">
-                    <div className=" container">
+                <Dropdown.Toggle ref={toggleRef} bsPrefix="empty" id="dropdown-basic" className="bordergrey borderthin buttonclean">
+                    <div className="">
                         <div className="backgroundBgBase borderthin bordergrey">
                             <div className="align-left ">
                                 {ItemName}
@@ -310,8 +310,8 @@ const FilterMiscSet = (prop: any) => {
                     setMenuWidth(toggleRef.current.getBoundingClientRect().width);
                     }
                 }}>
-                <Dropdown.Toggle ref={toggleRef} bsPrefix="empty" id="dropdown-basic" className="container bordergrey borderthin buttonclean">
-                    <div className=" container">
+                <Dropdown.Toggle ref={toggleRef} bsPrefix="empty" id="dropdown-basic" className="bordergrey borderthin buttonclean">
+                    <div className="">
                         <div className="backgroundBgBase maxwidth borderthin bordergrey">
                             <div className="align-left ">
                                 {ItemName}
