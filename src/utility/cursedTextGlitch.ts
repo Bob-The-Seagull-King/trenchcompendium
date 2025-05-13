@@ -1,15 +1,21 @@
-export function initGlobalTextGlitch({
-         glitchInterval = 5000,
-         glitchDuration = 9000
-     } = {}) {
+import {useGlobalState} from "./globalstate";
+import {useEffect, useRef, useState} from "react";
+
+export function initGlobalTextGlitch() {
+
+    // if (applyCurse !== 'true') return;
+
+    const glitchInterval = 5000;
+    const glitchDuration = 8000;
+
     const elements = document.querySelectorAll<HTMLElement>('.glitch');
 
     elements.forEach((el) => {
-        const textNodes = getTextNodes(el);
-
-        if (textNodes.length === 0) return;
-
         setInterval(() => {
+
+            const textNodes = getTextNodes(el);
+
+            if (textNodes.length === 0) return;
 
             const node = textNodes[Math.floor(Math.random() * textNodes.length)];
 
@@ -30,22 +36,25 @@ export function initGlobalTextGlitch({
             span.className = 'glitch-wrapper';
             span.innerHTML = `${before}<span class="glitch-active" data-text="${truncatedGlitch}">${truncatedGlitch}</span>${after}`;
 
-            // Replace text node with span
-            const parent = node.parentNode!;
+            // Store the current span reference
+            (node as any).__glitchSpan = span;
 
+            const parent = node.parentNode;
             if (parent) {
                 parent.replaceChild(span, node);
-
             }
 
             setTimeout(() => {
-                if (parent) {
-                    parent.replaceChild(document.createTextNode(text), span);
+                const currentSpan = (node as any).__glitchSpan;
+                // Only revert if this span is still in the DOM
+                if (currentSpan && currentSpan.parentNode === parent) {
+                    parent?.replaceChild(document.createTextNode(text), currentSpan);
                 }
             }, glitchDuration);
-        }, glitchInterval);
+        }, glitchInterval + Math.random() * 5000);
     });
 }
+
 
 function getTextNodes(node: Node): Text[] {
     const textNodes: Text[] = [];
@@ -61,42 +70,6 @@ function getTextNodes(node: Node): Text[] {
         }
     }
     return textNodes;
-}
-
-function getFixedLengthGlitchFragment(glitch: string, targetLength: number): string {
-    const words = glitch.split(' ');
-    const candidates: string[] = [];
-
-    // Try multiple random starting points
-    for (let attempt = 0; attempt < 50; attempt++) {
-        let result = '';
-        let length = 0;
-        const start = Math.floor(Math.random() * words.length);
-
-        for (let i = start; i < words.length; i++) {
-            const word = words[i];
-            const wordWithSpace = result.length > 0 ? ' ' + word : word;
-
-            if (length + wordWithSpace.length > targetLength) break;
-
-            result += wordWithSpace;
-            length = result.length;
-
-            if (length === targetLength) return result;
-        }
-    }
-
-    // Fallback: cut any glitch string cleanly at word boundaries
-    const clean = glitch.replace(/[^a-zA-Z0-9\s]/g, '').trim(); // remove special chars
-    const fallback = clean.split(' ').reduce((acc, word) => {
-        if (acc.length + word.length + 1 <= targetLength) {
-            return acc.length > 0 ? acc + ' ' + word : word;
-        }
-        return acc;
-    }, '');
-
-    // Pad if needed
-    return fallback.padEnd(targetLength, '█').slice(0, targetLength);
 }
 
 
@@ -151,4 +124,58 @@ export function getGlitchTextByLength(targetLength: number): string {
     }
 
     return result.padEnd(targetLength, '█').slice(0, targetLength);
+}
+
+
+/**
+ * Curse text using zalgo
+ * @param maxIntensity
+ */
+export function useIdleZalgoEffect(maxIntensity = 15, delay = 3000) {
+    const [zalgoLevel, setZalgoLevel] = useState(0);
+    const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+    const resetZalgo = () => {
+        setZalgoLevel(zalgoLevel -1 );
+        if (timeoutRef.current) clearInterval(timeoutRef.current);
+
+        timeoutRef.current = setInterval(() => {
+            setZalgoLevel(prev => Math.min(prev + 1, maxIntensity));
+        }, delay);
+    };
+
+    useEffect(() => {
+        const events = ['keydown', 'mousedown', 'touchstart'];
+        // const events = ['mousemove', 'keydown', 'mousedown', 'touchstart'];
+        events.forEach(e => window.addEventListener(e, resetZalgo));
+
+        resetZalgo();
+
+        return () => {
+            if (timeoutRef.current) clearInterval(timeoutRef.current);
+            events.forEach(e => window.removeEventListener(e, resetZalgo));
+        };
+    }, []);
+
+    return zalgoLevel;
+}
+
+export function applyZalgo(text: string, intensity = 1): string {
+    const zalgoUp = ['̍','̎','̄','̅','̿','̑','̆','͒','͗','̇','̈','̊','͊','͋','̃','̂','̌','́','̋','̏'];
+    const zalgoDown = ['̖','̗','̘','̜','̝','̞','̟','̠','̤','̥','̩','̪','̬','̯','̰','̱','̲','̳','ͅ','͈','͉'];
+    const zalgoMid = ['̕','̛','̀','́','͘','̡','̢','̧','̨','̴','̵','̶','͜','͝'];
+
+    const rand = (arr: string[]) => arr[Math.floor(Math.random() * arr.length)];
+
+    return text.split('').map(char => {
+        if (char === ' ') return char;
+        let result = char;
+
+        for (let i = 0; i < intensity; i++) {
+            result += rand(zalgoUp) + rand(zalgoDown);
+            if (i > 1) result += rand(zalgoMid);
+        }
+
+        return result;
+    }).join('');
 }

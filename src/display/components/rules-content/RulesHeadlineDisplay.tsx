@@ -37,6 +37,7 @@ const RulesHeadlineDisplay: React.FC<RulesHeadlineProps> = ({ content, level = 1
     return (
         <Tag id={idName} className={className + " headline-rules"}>
             {content}
+
             {idName && (
                 <span className='icon-inline-right-s headline-link-btn' onClick={() => (
                         runToast( idName )

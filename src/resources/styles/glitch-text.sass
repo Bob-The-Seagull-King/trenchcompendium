@@ -64,3 +64,40 @@
                 top: -1px
                 left: -1px
                 clip: rect(0px, 9999px, 30px, 0)
+
+
+.cursed-image
+    &.curse-active
+        animation: hue-glitch 0.2s linear
+
+        @keyframes hue-glitch
+            0%
+                filter: hue-rotate(0deg) brightness(1)
+            5%
+                filter: hue-rotate(60deg) saturate(150%) brightness(0.8)
+            13%
+                filter: hue-rotate(90deg) saturate(50%) brightness(0.7)
+            25%
+                filter: hue-rotate(30deg) saturate(666%) brightness(0.9)
+            29%
+                filter: hue-rotate(210deg) saturate(250%) brightness(1.4)
+            50%
+                filter: hue-rotate(180deg) saturate(213%) brightness(1)
+            66%
+                filter: hue-rotate(15deg) saturate(150%) brightness(0.7)
+            75%
+                filter: hue-rotate(3deg) saturate(666%) brightness(0.9)
+            82%
+                filter: hue-rotate(240deg) saturate(240%) brightness(1.4)
+            90%
+                filter: hue-rotate(240deg) saturate(400%) brightness(1.2)
+            100%
+                filter: hue-rotate(100deg) saturate(200%) brightness(0.8)
+
+
+
+
+
+
+
+

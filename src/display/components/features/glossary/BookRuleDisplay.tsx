@@ -14,7 +14,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import RulesArmouryElementDisplay from "../../rules-content/RulesArmouryElement";
 import RulesAnchorLinks from "../../rules-content/RulesAnchorLinks";
 import RulesHeadlineDisplay from "../../rules-content/RulesHeadlineDisplay";
-import {initGlobalTextGlitch} from "../../../../utility/textGlitch";
+import {initGlobalTextGlitch} from "../../../../utility/cursedTextGlitch";
 import {useGlobalState} from "../../../../utility/globalstate";
 
 
@@ -22,9 +22,14 @@ import {useGlobalState} from "../../../../utility/globalstate";
 
 const BookRuleDisplay = (props: any) => {
 
-    useEffect(() => {
-        initGlobalTextGlitch();
-    }, []);
+    const [applycurse] = useGlobalState('applycurse');
+
+    if( applycurse === 'true' ) {
+        useEffect(() => {
+            initGlobalTextGlitch();
+        }, [applycurse]);
+    }
+
 
     const ruleObject: BookRule = props.data
 
@@ -54,7 +59,6 @@ const BookRuleDisplay = (props: any) => {
         });
     }
 
-    const [applycurse] = useGlobalState('applycurse');
 
     return (
         <ErrorBoundary fallback={<div>Something went wrong with BookRuleDisplay.tsx</div>}>

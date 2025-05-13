@@ -7,7 +7,6 @@ import GenericHover from '../generics/GenericHover';
 import KeywordDisplay from '../features/glossary/KeywordDisplay';
 import {Equipment, EquipmentStats} from '../../../classes/feature/equipment/Equipment';
 import RulesEquipmentStats from "./RulesEquipmentStats";
-import {initGlobalTextGlitch} from "../../../utility/textGlitch";
 
 
 
