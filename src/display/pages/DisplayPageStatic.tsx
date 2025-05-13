@@ -161,7 +161,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
                                     {'Keywords'}
                                 </th>
                             </tr>
-                            {item.map((subitem) => (
+                            {item.map((subitem : any) => (
                                 <tr className={'filter-item-row'} key={subitem.HeldItem.ID}>
                                     <>
                                         <td>
