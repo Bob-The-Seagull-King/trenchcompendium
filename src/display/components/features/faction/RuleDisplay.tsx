@@ -22,7 +22,7 @@ const RuleDisplay = (props: any) => {
     const showSimple = props.show_simple;
     const showCollapse = props.show_collapse;
 
-    const [upgradeoptions, setupgradeoptions] = useState<any[]>([])
+    const [upgradeoptions, setupgradeoptions] = useState<UpgradesGrouped>({})
     const [_keyvar, setkeyvar] = useState(0);
 
     
