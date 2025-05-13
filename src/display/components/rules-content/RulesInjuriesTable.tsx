@@ -10,6 +10,17 @@ const RulesInjuriesTable = (props: any) => {
 
     return (
         <ErrorBoundary fallback={<div>Something went wrong with InjuryDisplay.tsx</div>}>
+            <>
+                <h1>
+                    {"Injuries"}
+                </h1>
+                <p>
+                    {
+                        "Whenever one of your ELITE models is taken Out of Action during a Battle, you will have to roll D66 for each such model after the battle ends. Consult the Trauma Chart table below to see what happened to your model. Unless rules state otherwise, each Trauma causes a Battle Scar, so mark this on your Warband roster sheet. You can only have one of each type of Battle Scar per ELITE, unless explicitly stated in its entry. If a model rolls a result that would cause it to gain a Battle Scar that it cannot gain again, re-roll on the chart until a viable result is achieved."
+                    }
+                </p>
+                <br/>
+            </>
             <div className='RulesInjuriesTable rules-injury-table rules-card'>
                 <div className={'rules-card-title rules-injury-table-title'}>
                     {'Elites Injury Chart'}
