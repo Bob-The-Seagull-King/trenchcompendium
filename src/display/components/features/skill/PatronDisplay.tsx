@@ -16,6 +16,7 @@ import SkillDisplay from './SkillDisplay';
 import { Patron } from '../../../../classes/feature/skillgroup/Patron';
 import ItemRow from '../../../components/subcomponents/description/ItemRow';
 import GenericCollapsableBlockDisplay from '../../../components/generics/GenericCollapsableBlockDisplay';
+import RulesCollapsibleContent from "../../rules-content/RulesCollapsibleContent";
 
 const PatronDisplay = (props: any) => {
     const patronObject : Patron = props.data
@@ -23,44 +24,43 @@ const PatronDisplay = (props: any) => {
     return (
         <ErrorBoundary fallback={<div>Something went wrong with ExplorationTableDisplay.tsx</div>}>
             <div className='PatronDisplay'>
-                <div className=''>
-                     <div>
-                        {returnDescription(patronObject, patronObject.Description)}
-                     </div>
-                     <div className=''/>
-                     <div className="borderthin bordergrey">
-                        <ItemRow title={"Available To"} value={() => <div>{patronObject.Factions.map((item) => ( 
-                            <span key={item.Name} className="bodytext complextext small-side-margin">
-                                {
-                                   ((patronObject.Factions.indexOf(item) != 0)? "," : " ") +  item.Name + " "
-                                }
-                            </span>
-                        ))} </div>}/>
-                        
-                     </div>
+                <div className='PatronDisplay-description'>
+                    {returnDescription(patronObject, patronObject.GetDescription())}
                 </div>
-                <div className=''/>
-                <div className="borderthin bordergrey">
-                {patronObject.Skills.map((item) => (
-                    <div key={item.ID}>
-                        <GenericCollapsableBlockDisplay 
-                            d_name={item.Name} 
-                            d_colour={"grey"} 
-                            d_state={false}  
-                            bordertype={0}
-                            d_border={true}
-                            d_col={"BgCard"}
-                            d_margin={"sml"}
-                            d_method={() => <>
-                                <div className="backgroundBgBasic borderthin bordergrey">
-                                    <div className=''>
-                                    <SkillDisplay data={item} />
-                                    </div>
-                                </div>
-                            </>} />
+
+                <div className={'rules-card'}>
+                    <div className={'rules-card-title'}>
+                        {patronObject.GetName()}
                     </div>
-                ))}
+
+                    <div className={'rules-card-content'}>
+                        <i>
+                            {'Available to: '}
+                            {patronObject.Factions.map((item) => (
+                                <span key={item.Name} className="bodytext complextext small-side-margin">
+                                    {
+                                        ((patronObject.Factions.indexOf(item) != 0)? "," : " ") +  item.Name + " "
+                                    }
+                                </span>
+                            ))}
+                        </i>
+
+                    </div>
+
+                    <div>
+
+                    {patronObject.Skills.map((item) => (
+                        <RulesCollapsibleContent key={item.ID}
+                             headline={item.Name}
+                             content={
+                                 <SkillDisplay data={item} />
+                             }
+                        />
+                    ))}
+                    </div>
                 </div>
+
+
             </div>
         </ErrorBoundary>
     )

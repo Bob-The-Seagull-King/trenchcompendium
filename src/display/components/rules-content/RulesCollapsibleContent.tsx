@@ -5,7 +5,7 @@ import {faChevronDown, faChevronUp} from "@fortawesome/free-solid-svg-icons";
 import {Collapse} from "react-bootstrap";
 
 interface RulesCollapsibleContentProps {
-    headline: string;
+    headline: string | undefined;
     content: any;
 }
 
@@ -32,7 +32,9 @@ const RulesCollapsibleContent: React.FC<RulesCollapsibleContentProps> = ({ headl
 
             <Collapse in={open}>
                 <div className="RulesCollapsibleContent-content">
-                    {content}
+                    <div className="RulesCollapsibleContent-content-inner">
+                        {content}
+                    </div>
                 </div>
             </Collapse>
         </div>

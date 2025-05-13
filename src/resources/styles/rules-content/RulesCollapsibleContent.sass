@@ -4,6 +4,10 @@
 //
 
 .RulesCollapsibleContent
+
+    &:first-of-type
+        border-top: 1px solid $color-bg-1
+
     .RulesCollapsibleContent-title
         position: relative
         display: flex
@@ -19,5 +23,7 @@
         .text
 
     .RulesCollapsibleContent-content
-        padding: 15px
         background-color: $color-bg-3
+
+        .RulesCollapsibleContent-content-inner
+            padding: 15px

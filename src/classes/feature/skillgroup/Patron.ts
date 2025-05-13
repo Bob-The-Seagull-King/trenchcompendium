@@ -116,6 +116,20 @@ class Patron extends StaticContextObject {
         this.Factions.sort(byPropertiesOf<Faction>(["Name"]))
     }
 
+
+    /**
+     * Gets the Name of the Patron
+     */
+    public GetName () {
+        return this.Name;
+    }
+
+    /**
+     * Gets the description text
+     */
+    public GetDescription () {
+        return this.Description;
+    }
 }
 
 export {IPatron, Patron, IPatronRelationship}
