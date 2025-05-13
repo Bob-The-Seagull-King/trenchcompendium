@@ -11,7 +11,7 @@ import { Ability } from '../../../../classes/feature/ability/Ability';
 import OptionSetStaticDisplay from '../../subcomponents/description/OptionSetStaticDisplay';
 import { Rule } from '../../../../classes/feature/faction/Rule';
 import { EventRunner } from '../../../../classes/contextevent/contexteventhandler';
-import { ModelUpgradeRelationship } from '../../../../classes/relationship/model/ModelUpgradeRelationship';
+import { ModelUpgradeRelationship, UpgradesGrouped } from '../../../../classes/relationship/model/ModelUpgradeRelationship';
 import RulesCollapsibleContent from "../../rules-content/RulesCollapsibleContent";
 import RulesModelUpgrade from "../../rules-content/RulesModelUpgrade";
 
@@ -25,6 +25,23 @@ const RuleDisplay = (props: any) => {
     const [_keyvar, setkeyvar] = useState(0);
 
     
+
+    function SplitUpgrades(UpgradeListFull : ModelUpgradeRelationship[]) : UpgradesGrouped {
+
+        const groups : UpgradesGrouped = {}
+
+        for (let i = 0; i < UpgradeListFull.length; i++) {
+            const special_cat = UpgradeListFull[i].GetSpecialCategory()
+            if (groups[special_cat]) {
+                groups[special_cat].push(UpgradeListFull[i])
+            } else {
+                groups[special_cat] = [UpgradeListFull[i]]
+            }
+        }
+        return groups;
+    }
+
+    
     useEffect(() => {
         async function SetModelOptions() {
             const EventProc: EventRunner = new EventRunner()
@@ -33,7 +50,7 @@ const RuleDisplay = (props: any) => {
              * MODEL STAT CHOICES
              */
             if (ruleObject.BonusUpgrades != null) {
-                setupgradeoptions(ruleObject.BonusUpgrades as any);
+                setupgradeoptions(SplitUpgrades(ruleObject.BonusUpgrades as any));
                 setkeyvar((prev) => prev + 1);
             } else {
                 const result = await EventProc.runEvent(
@@ -43,7 +60,7 @@ const RuleDisplay = (props: any) => {
                     [],
                     null
                 );
-                setupgradeoptions(result);
+                setupgradeoptions(SplitUpgrades(result));
                 setkeyvar((prev) => prev + 1);
             }
         }
@@ -66,44 +83,53 @@ const RuleDisplay = (props: any) => {
                         <OptionSetStaticDisplay data={ruleObject.MyOptions} />
                     </div>
                 }
+                {Object.keys(upgradeoptions).length > 0 &&
+                    <>
+                    {
+                        Object.keys(upgradeoptions).map((item) => (
+                            <>
+                                { ( showCollapse || !showSimple ) &&
+                                    <div className="RuleDisplay-upgradeoptions">
+                                        {/* @TODO: Change the headline string to a matching headline */}
+                                        <RulesCollapsibleContent
+                                            headline={makestringpresentable(item)}
+                                            content={
+                                                <>
+                                                    {upgradeoptions[item].map((subitem: ModelUpgradeRelationship) => (
+                                                        <React.Fragment
+                                                            key={"model_ability_" + ruleObject.ID + "_ability_id_" + subitem.ID}>
+                                                            <RulesModelUpgrade item={subitem}/>
+                                                        </React.Fragment>
+                                                    )) /* Abilities */}
+                                                </>
+                                            }
+                                        />
+                                    </div>
+                                }
 
+                                { (showSimple ) &&
+                                    <>
+                                        <hr/>
+                                        <div className={'RuleDisplay-Upgrade-Title'}>
+                                            {makestringpresentable(item)}
+                                        </div>
+                                        {upgradeoptions[item].map((subitem: ModelUpgradeRelationship) => (
+                                            <React.Fragment
+                                                key={"model_ability_" + ruleObject.ID + "_ability_id_" + subitem.ID}>
+                                                <RulesModelUpgrade item={subitem}/>
+                                            </React.Fragment>
+                                        )) /* Abilities */}
+                                    </>
+                                }
+                            </>
+                        ))
+                    }
+                    </>
+                        
+                    }
                 {/* Upgrade Options - with toggle to show simple inside off collapses or as collapse outside */}
                 {upgradeoptions.length > 0 &&
-                    <>
-                        { ( showCollapse || !showSimple ) &&
-                            <div className="RuleDisplay-upgradeoptions">
-                                {/* @TODO: Change the headline string to a matching headline */}
-                                <RulesCollapsibleContent
-                                    headline={'Upgrades'}
-                                    content={
-                                        <>
-                                            {upgradeoptions.map((item: ModelUpgradeRelationship) => (
-                                                <React.Fragment
-                                                    key={"model_ability_" + ruleObject.ID + "_ability_id_" + item.ID}>
-                                                    <RulesModelUpgrade item={item}/>
-                                                </React.Fragment>
-                                            )) /* Abilities */}
-                                        </>
-                                    }
-                                />
-                            </div>
-                        }
-
-                        { (showSimple ) &&
-                            <>
-                                <hr/>
-                                <div className={'RuleDisplay-Upgrade-Title'}>
-                                    {'Options'}
-                                </div>
-                                {upgradeoptions.map((item: ModelUpgradeRelationship) => (
-                                    <React.Fragment
-                                        key={"model_ability_" + ruleObject.ID + "_ability_id_" + item.ID}>
-                                        <RulesModelUpgrade item={item}/>
-                                    </React.Fragment>
-                                )) /* Abilities */}
-                            </>
-                        }
-                    </>
+                    
 
                 }
 
