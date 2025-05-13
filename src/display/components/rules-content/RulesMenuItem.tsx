@@ -113,8 +113,8 @@ const RulesMenuItem: React.FC<{ data: RulesMenuItemProps[], level?: number; pare
         <ul className={`menu-list level-${level}`}>
             {data.map((item) => {
                 const isOpen = openItems[item.slug]; // Check if item is open
-                const itemPath = {item.superslug != undefined}? item.superslug : (item.slug != "")? `${parentPath}/${item.slug}` : `${parentPath}` ; // Prepend "compendium" base path
-                const parentPath = (item.slug != "")? `${parentPath}/${item.slug}` : `${parentPath}` ; // Prepend "compendium" base path
+                const itemPath = (item.superslug != undefined)? item.superslug : (item.slug != "")? `${parentPath}/${item.slug}` : `${parentPath}` ; // Prepend "compendium" base path
+                const basePath = (item.slug != "")? `${parentPath}/${item.slug}` : `${parentPath}` ; // Prepend "compendium" base path
 
                 return (
                     <li className={`menu-list-item ${item.children ? "has-children" : ""}`} key={item.slug}>
@@ -133,7 +133,7 @@ const RulesMenuItem: React.FC<{ data: RulesMenuItemProps[], level?: number; pare
 
                                 <Collapse in={isOpen}>
                                     <div>
-                                        <RulesMenuItem data={GetAllItems(item)} level={level + 1} parentPath={parentPath} />
+                                        <RulesMenuItem data={GetAllItems(item)} level={level + 1} parentPath={basePath} />
                                     </div>
                                 </Collapse>
                             </>
