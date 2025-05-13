@@ -14,6 +14,7 @@ import { EventRunner } from '../../../../classes/contextevent/contexteventhandle
 import { ModelUpgradeRelationship, UpgradesGrouped } from '../../../../classes/relationship/model/ModelUpgradeRelationship';
 import RulesCollapsibleContent from "../../rules-content/RulesCollapsibleContent";
 import RulesModelUpgrade from "../../rules-content/RulesModelUpgrade";
+import { makestringpresentable } from '../../../../utility/functions';
 
 const RuleDisplay = (props: any) => {
     const ruleObject: Rule = props.data
@@ -127,11 +128,7 @@ const RuleDisplay = (props: any) => {
                     </>
                         
                     }
-                {/* Upgrade Options - with toggle to show simple inside off collapses or as collapse outside */}
-                {upgradeoptions.length > 0 &&
-                    
-
-                }
+                
 
             </div>
         </ErrorBoundary>
