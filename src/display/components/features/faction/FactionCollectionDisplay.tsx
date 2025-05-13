@@ -64,11 +64,11 @@ const FactionCollectionDisplay = (props: any) => {
             {factioncollectionObject.SubModelsList.length > 1 &&  false &&
                 <Form.Group controlId={factioncollectionObject.ID + '-select'} className={'mb-3'}>
                     <Form.Label>{'Choose Option'}</Form.Label>
-                    <Form.Control as="select" onChange={(e: { target: { value: any; }; }) => { updateItem(e.target.value)    } } >
+                    <Form.Select onChange={(e: { target: { value: any; }; }) => { updateItem(e.target.value)    } } >
                         {factioncollectionObject.SubModelsList.map((item) => ( 
                             <option key="modeloption" value={item.var_name}>{makestringpresentable((item.var_name == "base")? (item.faction.Name != undefined? item.faction.Name : "") : item.var_name)}</option> 
                         ))}
-                    </Form.Control>
+                    </Form.Select>
                 </Form.Group>
             }
 

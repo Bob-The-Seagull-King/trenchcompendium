@@ -92,12 +92,12 @@ const WarbandSubPropertyDisplay = (props: any) => {
                 <Form.Group controlId={MyProp.ID+'-select'} className={'mb-3'}>
                     <Form.Label>{'Choose Option'}</Form.Label>
 
-                    <Form.Control defaultValue={(selectedModel)? selectedModel.id: undefined} as="select" onChange={(e: { target: { value: any; }; }) => { updateItem(e.target.value)    } } >
+                    <Form.Select defaultValue={(selectedModel)? selectedModel.id: undefined} onChange={(e: { target: { value: any; }; }) => { updateItem(e.target.value)    } } >
                         <option value={"_no_option_selected"} key={"modeloptionnone"} >{"None Selected"}</option>
                         {MySelection.Option.Selections.map((selec) => (
                             <option value={selec.id} key={"modeloption"+(MySelection.Option.Selections.indexOf(selec).toString())} >{makestringpresentable(selec.display_str)}</option>
                         ))}
-                    </Form.Control>
+                    </Form.Select>
                 </Form.Group>
 
                 <div>

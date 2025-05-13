@@ -44,13 +44,13 @@ const ModelCollectionDisplay = (props: any) => {
                 {modelcollectionObject.SubModelsList.length > 1 &&
                     <Form.Group controlId={modelcollectionObject.ID+'-select'} className={'mb-3'}>
                         <Form.Label>{'Choose Option'}</Form.Label>
-                        <Form.Control as="select" onChange={(e: { target: { value: any; }; }) => { updateItem(e.target.value)    } } >
+                        <Form.Select onChange={(e: { target: { value: any; }; }) => { updateItem(e.target.value)    } } >
                             {modelcollectionObject.SubModelsList.map((item) => (
                                 <option  key="modeloption" value={item.var_name}>
                                     {makestringpresentable(item.var_name) + " - " + makestringpresentable(item.model.Name != undefined? item.model.Name : "")}
                                 </option>
                             ))}
-                        </Form.Control>
+                        </Form.Select>
                     </Form.Group>
                 }
                 <div key={_keyvar}>

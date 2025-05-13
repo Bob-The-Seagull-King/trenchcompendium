@@ -68,14 +68,13 @@ const SingleOptionSetDisplay = (props: any) => {
 
                     <Form.Group controlId={OptionSet.RefID+'-select'} className={'mb-3'}>
                         <Form.Label>{'Choose Option'}</Form.Label>
-                        <Form.Control
-                            as="select"
+                        <Form.Select
                             onChange={(e: { target: { value: any; }; }) => { updateItem(e.target.value)    } }
                         >
                             {OptionSet.Selections.map((selec) => (
                                 <option value={selec.id} key={"modeloption"+(OptionSet.Selections.indexOf(selec).toString())} >{makestringpresentable(selec.display_str)}</option>
                             ))}
-                        </Form.Control>
+                        </Form.Select>
                     </Form.Group>
 
                     <p>
