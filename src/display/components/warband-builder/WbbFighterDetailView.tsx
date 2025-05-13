@@ -30,7 +30,6 @@ import {OverlayTrigger, Popover} from "react-bootstrap";
 import {usePlayMode} from "../../../context/PlayModeContext";
 import SynodImage from "../../../utility/SynodImage";
 import WbbContextualPopover from "./WbbContextualPopover";
-import SynodImageSource from "../../../utility/SynodImageSource";
 import SynodModelImage from "../../../utility/SynodModelImage";
 import SynodModelImageSource from "../../../utility/SynodModelImageSource";
 
