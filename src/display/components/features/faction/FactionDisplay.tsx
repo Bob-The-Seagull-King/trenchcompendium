@@ -117,7 +117,7 @@ const FactionDisplay = (props: any) => {
 
                         <RulesFactionRule key={"faction_rule_"+factionObject.ID+"_rule_id_"+item.ID}
                             headline={item.Name}
-                            content={<RuleDisplay data={item} />}
+                            content={<RuleDisplay data={item} show_simple={true} />}
                         />
 
                     ))}

@@ -17,7 +17,10 @@ import RulesModelUpgrade from "../../rules-content/RulesModelUpgrade";
 
 const RuleDisplay = (props: any) => {
     const ruleObject: Rule = props.data
-    
+
+    const showSimple = props.show_simple;
+    const showCollapse = props.show_collapse;
+
     const [upgradeoptions, setupgradeoptions] = useState<any[]>([])
     const [_keyvar, setkeyvar] = useState(0);
 
@@ -49,9 +52,6 @@ const RuleDisplay = (props: any) => {
     }, []);
 
 
-    console.log('upgradeoptions');
-    console.log(upgradeoptions);
-
     return (
         <ErrorBoundary fallback={<div>Something went wrong with AbilityDisplay.tsx</div>}>
             <div key={_keyvar} className='RuleDisplay'>
@@ -67,24 +67,44 @@ const RuleDisplay = (props: any) => {
                     </div>
                 }
 
-                {/* Upgrade Options */}
+                {/* Upgrade Options - with toggle to show simple inside off collapses or as collapse outside */}
                 {upgradeoptions.length > 0 &&
-                    <div className="RuleDisplay-upgradeoptions">
-                        {/* @TODO: Change the headline string to a matching headline */}
-                        <RulesCollapsibleContent
-                            headline={'Upgrades'}
-                            content={
-                                <>
-                                    {upgradeoptions.map((item : ModelUpgradeRelationship) => (
-                                        <React.Fragment
-                                            key={"model_ability_" + ruleObject.ID + "_ability_id_" + item.ID}>
-                                            <RulesModelUpgrade item={item}/>
-                                        </React.Fragment>
-                                    )) /* Abilities */}
-                                </>
-                            }
-                        />
-                    </div>
+                    <>
+                        { ( showCollapse || !showSimple ) &&
+                            <div className="RuleDisplay-upgradeoptions">
+                                {/* @TODO: Change the headline string to a matching headline */}
+                                <RulesCollapsibleContent
+                                    headline={'Upgrades'}
+                                    content={
+                                        <>
+                                            {upgradeoptions.map((item: ModelUpgradeRelationship) => (
+                                                <React.Fragment
+                                                    key={"model_ability_" + ruleObject.ID + "_ability_id_" + item.ID}>
+                                                    <RulesModelUpgrade item={item}/>
+                                                </React.Fragment>
+                                            )) /* Abilities */}
+                                        </>
+                                    }
+                                />
+                            </div>
+                        }
+
+                        { (showSimple ) &&
+                            <>
+                                <hr/>
+                                <div className={'RuleDisplay-Upgrade-Title'}>
+                                    {'Options'}
+                                </div>
+                                {upgradeoptions.map((item: ModelUpgradeRelationship) => (
+                                    <React.Fragment
+                                        key={"model_ability_" + ruleObject.ID + "_ability_id_" + item.ID}>
+                                        <RulesModelUpgrade item={item}/>
+                                    </React.Fragment>
+                                )) /* Abilities */}
+                            </>
+                        }
+                    </>
+
                 }
 
             </div>
