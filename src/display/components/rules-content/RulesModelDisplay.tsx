@@ -256,22 +256,20 @@ const RulesModelDisplay = (props: any) => {
                             name={"Equipment"}
                             state={false}
                             method={() => <>
-                                {returnDescription(modelcollectionObject, modelcollectionObject.Description)}
+                                <div className={'description-wrap'}>
+                                    {returnDescription(modelcollectionObject, modelcollectionObject.Description)}
+                                </div>
 
                                 {(modelcollectionObject.EquipmentList.length > 0) &&
-                                    <div className={'container bordergrey'}>
-                                        <div className={"backgroundgrey"}/>
-                                        <div className="content">
-                                            <div>
-                                                {modelcollectionObject.EquipmentList.map((item) => (
-                                                    <div key={item.ID}>
-                                                        <ModelEquipmentDisplay team_col={modelcollectionObject.Team}
-                                                                               data={item}/>
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <>
+                                        {modelcollectionObject.EquipmentList.map((item) => (
+                                            <ModelEquipmentDisplay
+                                                team_col={modelcollectionObject.Team}
+                                                key={item.ID}
+                                                data={item}
+                                            />
+                                        ))}
+                                    </>
 
                                 }
                             </>
