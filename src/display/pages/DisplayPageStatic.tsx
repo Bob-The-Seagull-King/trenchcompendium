@@ -153,12 +153,28 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
             return (
 
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    <td>
-                        {item.Name}
-                    </td>
-                    <td>
-                        <KeywordDisplay data={item} />
-                    </td>
+                    
+                    <div className={'keywords-table-wrap'}>
+                        <table className={'keywords-table'}>
+                            <tr>
+                                <th colSpan={2}>
+                                    {'Keywords'}
+                                </th>
+                            </tr>
+                            {item.map((subitem) => (
+                                <tr className={'filter-item-row'} key={subitem.HeldItem.ID}>
+                                    <>
+                                        <td>
+                                            {subitem.Name}
+                                        </td>
+                                        <td>
+                                            <KeywordDisplay data={subitem} />
+                                        </td>
+                                    </>
+                                </tr>
+                            ))}
+                        </table>
+                    </div>
                 </ErrorBoundary>
             )
         },

@@ -96,52 +96,18 @@ const FilterableCompendiumDisplay = (prop: any) => {
     }
 
     function ReturnItems() {
-        const isKeywordList = _curItems.every(item => item.HeldItem instanceof Keyword);
 
         return (
             <div className={'FilterableCompendiumDisplay'}>
 
-                {((_curItems == undefined) || (_curItems == null) || (_curItems.length == 0)) &&
-                    <div className="findme-2">
-                        {slugname}
-                    </div>
-                }
-
-                {((_curItems != undefined) && (_curItems != null) && (_curItems.length > 0)) &&
-                    <>
-                        {/* If this is the Keywords List -> Use a table layout */}
-                        {isKeywordList && (
-                            <div className={'keywords-table-wrap'}>
-                                <table className={'keywords-table'}>
-                                    <tr>
-                                        <th colSpan={2}>
-                                            {'Keywords'}
-                                        </th>
-                                    </tr>
-                                    {_curItems.map((item) => (
-                                        <tr className={'filter-item-row'} key={item.HeldItem.ID}>
-                                            <>
-                                                {DisplayPage.returnDisplay(item.HeldItem)}
-                                            </>
-                                        </tr>
-                                    ))}
-                                </table>
-                            </div>
-                        )}
-
-                        {/* If this is not the Keywords List -> Use a block layout */}
-                        {!isKeywordList && (
-                            <div className="filter-items-wrap">
-                                {_curItems.map((item) => (
-                                    <div className={'filter-item'} key={item.HeldItem.ID}>
-                                        <>
-                                            {DisplayPage.returnDisplay(item.HeldItem)}
-                                        </>
-                                    </div>))}
-                            </div>
-                        )}
-                    </>
-                }
+                <div className="filter-items-wrap">
+                    {_curItems.map((item) => (
+                        <div className={'filter-item'} key={item.HeldItem.ID}>
+                            <>
+                                {DisplayPage.returnDisplay(item.HeldItem)}
+                            </>
+                        </div>))}
+                </div>
 
             </div>
         )
