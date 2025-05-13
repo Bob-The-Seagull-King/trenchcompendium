@@ -117,7 +117,7 @@ const RulesModelDisplay = (props: any) => {
             /* ABILITIES */
             if (parentfaction != undefined) {
                 const result_abilities = await factionmodelObject.getContextuallyAvailableAbilities(parentfaction);
-                if (bonusselections != undefined) {
+                if (bonusselections != undefined && (Object.entries(bonusselections).length > 0)) {
                     for (const [optionSetId, selectedObject] of Object.entries(bonusselections)) {
                         if ((selectedObject as IChoice).value instanceof ContextObject) {
                         const Events : EventRunner = new EventRunner();
