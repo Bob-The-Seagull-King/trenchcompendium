@@ -3,6 +3,7 @@ import React, {useState} from 'react'
 import {faBook, faChevronDown, faChevronRight, faChevronUp, faIndent} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {Collapse} from "react-bootstrap";
+import {useGlobalState} from "../../../utility/globalstate";
 
 export interface ContentsLink {
     name: string,
@@ -20,15 +21,19 @@ const RulesAnchorLinks: React.FC<ContentsCollection> = (props: any) => {
 
     const [open, setOpen]   = useState(DefaultState);
 
+    const [loreshow] = useGlobalState('loreshow');
+
     function ReturnItemLink(_obj : ContentsLink) {
 
         const id = encodeURIComponent(_obj.name);
         const link = window.location.origin + window.location.pathname + "#" + id;
 
+        // hide lore link, if lore is disabled
+        if( loreshow === 'false' && _obj.name === 'Lore') {
+            return '';
+        }
+
         return (
-
-            // set variable named 'link' here
-
             <a className="rules-page-anchor" href={link}>
                 {_obj.name}
                 <FontAwesomeIcon icon={faChevronRight} className="icon-inline-right" />
