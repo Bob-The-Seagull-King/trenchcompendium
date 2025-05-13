@@ -111,21 +111,22 @@ const FilterableCompendiumDisplay = (prop: any) => {
                     <>
                         {/* If this is the Keywords List -> Use a table layout */}
                         {isKeywordList && (
-                            <table className={'keywords-table'}>
-                                <tr>
-                                    <th colSpan={2}>
-                                        {'Keywords'}
-                                    </th>
-                                </tr>
-                                {_curItems.map((item) => (
-                                    <tr className={'filter-item-row'} key={item.HeldItem.ID}>
-                                        <>
-                                            {DisplayPage.returnDisplay(item.HeldItem)}
-                                        </>
+                            <div className={'keywords-table-wrap'}>
+                                <table className={'keywords-table'}>
+                                    <tr>
+                                        <th colSpan={2}>
+                                            {'Keywords'}
+                                        </th>
                                     </tr>
-                                ))}
-                            </table>
-
+                                    {_curItems.map((item) => (
+                                        <tr className={'filter-item-row'} key={item.HeldItem.ID}>
+                                            <>
+                                                {DisplayPage.returnDisplay(item.HeldItem)}
+                                            </>
+                                        </tr>
+                                    ))}
+                                </table>
+                            </div>
                         )}
 
                         {/* If this is not the Keywords List -> Use a block layout */}
