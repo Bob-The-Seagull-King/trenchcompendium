@@ -11,6 +11,7 @@ const RulesInjuriesTable = (props: any) => {
     return (
         <ErrorBoundary fallback={<div>Something went wrong with InjuryDisplay.tsx</div>}>
             <>
+                <br/>
                 <h1>
                     {"Injuries"}
                 </h1>
