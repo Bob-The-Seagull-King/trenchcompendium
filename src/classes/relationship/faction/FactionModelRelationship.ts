@@ -186,7 +186,6 @@ class FactionModelRelationship extends StaticOptionContextObject {
                 UpgradesListAvailable.push(BaseList[i]);
             }
         }
-
         return UpgradesListAvailable;
     }
 

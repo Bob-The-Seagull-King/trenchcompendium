@@ -249,6 +249,20 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
                     </div>
                 )
             }
+            case "equipmentslim": {
+                return (
+                    <div className="">
+                        <span>
+                            {getEquipmentSlimDisplay(item.Content?.toString() || "")}
+                        </span>
+                        <span>
+                            {item.SubContent?.map((subitem) => (
+                               <AdvancedDescriptionItemDisplay key="descriptionsubitem" data={subitem} parent={parentItem}/>
+                            ))}
+                        </span>
+                    </div>
+                )
+            }
             case "model": {
                 return (
                     <div className="">
@@ -297,6 +311,35 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
     }
 
     function getEquipmentDisplay(val : string) {
+        
+        const [component, setcomponent] = useState<null | Equipment>(null);
+        const [keyvar, setkeyvar] = useState(0);
+
+        useEffect(() => {
+            async function getItem() {                
+                const EquipmentModule = await import("../../../../factories/features/EquipmentFactory");
+                const item = await EquipmentModule.EquipmentFactory.CreateNewEquipment(val, null)
+                setcomponent(item);
+                setkeyvar(keyvar + 1);
+            }
+
+            getItem();
+        }, []);
+
+
+        return (
+            <span className={'AdvancedDescriptionItemDisplay-getEquipmentDisplay'} key={keyvar}>
+                {component !== null &&
+                    
+                    <RulesEquipmentEntry
+                    equipment={component}
+                />
+                }
+            </span>
+        );
+    }
+    
+    function getEquipmentSlimDisplay(val : string) {
         
         const [component, setcomponent] = useState<null | Equipment>(null);
         const [keyvar, setkeyvar] = useState(0);

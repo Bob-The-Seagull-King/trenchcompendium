@@ -53,6 +53,7 @@ const SingleOptionSetDisplay = (props: any) => {
     return (
         
         <ErrorBoundary fallback={<div>Something went wrong with OptionSetStaticDisplay.tsx</div>}>
+            <>
             {OptionSet.Selections.length > 0 &&
                 <>
                     <h3>
@@ -84,6 +85,7 @@ const SingleOptionSetDisplay = (props: any) => {
                     </p>
                 </>
             }
+            </>
         </ErrorBoundary>
     )
 }

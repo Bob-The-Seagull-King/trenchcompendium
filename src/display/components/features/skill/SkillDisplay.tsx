@@ -19,7 +19,7 @@ const SkillDisplay = (props: any) => {
             <div className='SkillDisplay'>
                 {returnDescription(skillObject, skillObject.Description)}
 
-                {skillObject.MyOptions.length &&
+                {skillObject.MyOptions.length > 0 &&
                     <div className='row'>
                         {
                             <OptionSetStaticDisplay data={skillObject.MyOptions}/>

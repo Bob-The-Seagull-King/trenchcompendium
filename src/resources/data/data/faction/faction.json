@@ -229,7 +229,8 @@
         },
         "contextdata": {
             "faction_keyword": {"name": "kw_thecourt"},
-            "faction_rule_option": {}
+            "faction_rule_option": {},
+            "mult-captain": {}
         },
         "name": "Court of the Seven-Headed Serpent",
         "team": "hell",

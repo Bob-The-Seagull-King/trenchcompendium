@@ -10,6 +10,9 @@ import { ContextPackage } from '../../../contextevent/contextpackage';
 import { IWarbandMember, WarbandMember } from './WarbandMember';
 import { IWarbandEquipment, WarbandEquipment } from './WarbandEquipment';
 import { IWarbandProperty, WarbandProperty } from '../WarbandProperty';
+import { IFactionModelRelationship } from '../../../relationship/faction/FactionModelRelationship';
+import { IFactionEquipmentRelationship } from '../../../relationship/faction/FactionEquipmentRelationship';
+import { IModelUpgradeRelationship } from '../../../relationship/model/ModelUpgradeRelationship';
 
 interface IWarbandPurchase {
     cost_value : number,
@@ -18,7 +21,9 @@ interface IWarbandPurchase {
     count_cap : boolean,
     sell_item : boolean,
     sell_full : boolean,
-    purchaseid: string
+    purchaseid: string,
+    faction_rel_id: string,
+    custom_rel?: IFactionModelRelationship | IFactionEquipmentRelationship | IModelUpgradeRelationship
 }
 
 interface IWarbandPurchaseModel {
@@ -39,6 +44,9 @@ interface IWarbandPurchaseUpgrade {
 class WarbandPurchase {
     SelfParent : DynamicContextObject;
     HeldObject : ContextObject;
+
+    PurchaseInterface : string;
+    CustomInterface : IFactionModelRelationship | IFactionEquipmentRelationship | IModelUpgradeRelationship | undefined = undefined;
 
     ItemCost : number;
     CostType : number;
@@ -64,6 +72,10 @@ class WarbandPurchase {
         this.CountCap = data.count_cap;
         this.Sellable = data.sell_item;
         this.FullSell = data.sell_full;
+        this.PurchaseInterface = data.faction_rel_id;
+        if (data.custom_rel) {
+            this.CustomInterface = data.custom_rel;
+        }
     }
 
     public ConvertToInterface() {
@@ -75,7 +87,9 @@ class WarbandPurchase {
             count_cap : this.CountCap,
             sell_item : this.Sellable,
             sell_full : this.FullSell,
-            purchaseid: this.HeldObject.ID
+            purchaseid: this.HeldObject.ID,
+            faction_rel_id: this.PurchaseInterface,
+            custom_rel : this.CustomInterface
         }
         
         return _objint;

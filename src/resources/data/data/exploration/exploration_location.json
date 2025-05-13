@@ -87,6 +87,16 @@
                         "value": ["fc_ironsultanate","fc_trenchpilgrim","fc_newantioch"]
                     }
                 ]
+            },
+            "gain_experience": {
+                "gains": [
+                    {
+                        "count": 1
+                    },
+                    {
+                        "count": 1
+                    }
+                ]
             }
         },
         "description": [            
@@ -202,5 +212,2222 @@
             }
         ],
         "options": []
+    },
+    {
+        "id": "el_trenchshrine",
+        "name": "Trench Shrine",
+        "source": "core",
+        "tags": {
+            "exploration_table": "et_commonlocations"
+        },
+        "contextdata": {"location_rule_option": {}},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You find a Shrine erected by the soldiers of the great war. Some are made from artillery shells or melted cannons, while a flag of a Sultanate can be used to indicate a place of prayer. Choose one."
+            }
+        ],
+        "location_value": 6,
+        "options": [{
+            "ref_id" : "ot_trenchshrine",
+            "name" : "",
+            "description" : [],
+            "category" : "type",
+            "type" : "text",
+            "strictness" : "strict",
+            "predefined_options" : [],
+            "option_context" : {"basic_option_default":{}},
+            "data_search" : {      
+                "searchtype": "complex",
+                "searchparam":    {
+                    "type": "explorationlocation",
+                    "request":    {
+                        "operator": "and",
+                        "terms": [
+                            {             
+                                "item": "tags",
+                                "value": "location_option",
+                                "equals": true,
+                                "strict": true,
+                                "istag": true,
+                                "tagvalue": "el_trenchshrine"
+                            }
+                        ],
+                        "subparams": []
+                    }
+                }                        
+            }
+        } ]
+    },
+    {
+        "id": "el_trenchshrine_standard",
+        "name": "Standard",
+        "source": "core",
+        "tags": {
+            "location_option": "el_trenchshrine"
+        },
+        "contextdata": {
+            "gain_new_item_from_list": {
+                "count": 1,
+                "obey_restriction": true,
+                "obey_faction": true,
+                "id": ["eq_troopflag"]
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Add a Troop Flag to your Warband’s roster for free. You cannot exceed your Warband’s LIMIT on Troop Flags in this way.",
+                "glossary": [{"val": "LIMIT", "id": "kw_limit"}]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "el_trenchshrine_shrine",
+        "name": "Shrine",
+        "source": "core",
+        "tags": {
+            "location_option": "el_trenchshrine"
+        },
+        "contextdata": {
+            "gain_new_item_from_list": {
+                "count": 1,
+                "id": ["eq_fieldshrine"]
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Add a Field Shrine to your Warband’s roster for free."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "el_trenchshrine_return",
+        "name": "Return",
+        "source": "core",
+        "tags": {
+            "location_option": "el_trenchshrine"
+        },
+        "contextdata": {
+            "gain_glory": {
+                "count": 2
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Your Warband gains two Glory Points."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "el_ruinedhouse",
+        "name": "Ruined House",
+        "source": "core",
+        "tags": {
+            "exploration_table": "et_commonlocations"
+        },
+        "contextdata": {"location_rule_option": {}},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This house has been obliterated by heavy weaponry, its inhabitants slain and ripped apart. Choose one:"
+            }
+        ],
+        "location_value": 8,
+        "options": [{
+            "ref_id" : "ot_ruinedhouse",
+            "name" : "",
+            "description" : [],
+            "category" : "type",
+            "type" : "text",
+            "strictness" : "strict",
+            "predefined_options" : [],
+            "option_context" : {"basic_option_default":{}},
+            "data_search" : {      
+                "searchtype": "complex",
+                "searchparam":    {
+                    "type": "explorationlocation",
+                    "request":    {
+                        "operator": "and",
+                        "terms": [
+                            {             
+                                "item": "tags",
+                                "value": "location_option",
+                                "equals": true,
+                                "strict": true,
+                                "istag": true,
+                                "tagvalue": "el_ruinedhouse"
+                            }
+                        ],
+                        "subparams": []
+                    }
+                }                        
+            }
+        } ]
+    },
+    {
+        "id": "el_ruinedhouse_rummage",
+        "name": "Rummage",
+        "source": "core",
+        "tags": {
+            "location_option": "el_ruinedhouse"
+        },
+        "contextdata": {
+            "spend_ducats": {
+                "count": 30,
+                "obey_restriction": true,
+                "obey_faction": true
+            }
+
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Add up to 30 ducats worth of equipment to your Warband’s roster for free. You cannot exceed your Warband’s LIMIT on a piece of equipment in this way.",
+                "glossary": [{"val": "LIMIT", "id": "kw_limit"}]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "el_ruinedhouse_relic",
+        "name": "Relic",
+        "source": "core",
+        "tags": {
+            "location_option": "el_ruinedhouse"
+        },
+        "contextdata": {
+            "single_exploration_glory_item": {
+                "cost": 7
+            }
+
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You may purchase a Glory Item that costs 7 Glory or less and is allowed by your warband."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "el_survivor",
+        "name": "Survivor",
+        "source": "core",
+        "tags": {
+            "exploration_table": "et_commonlocations"
+        },
+        "contextdata": {"location_rule_option": {}},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You find a soldier staggering in the No Man’s Land. A deserter, perhaps, or a squaddie whose comrades were wiped out by one of the horrors roaming the battlefields of the Great War. It is time to put them to work! Depending on your faction, add the specified model to your Warband’s roster for free."
+            }
+        ],
+        "location_value": 9,
+        "options": [{
+            "ref_id" : "ot_survivor",
+            "name" : "",
+            "description" : [],
+            "category" : "type",
+            "type" : "text",
+            "strictness" : "strict",
+            "predefined_options" : [],
+            "option_context" : {"basic_option_default":{}},
+            "data_search" : {      
+                "searchtype": "complex",
+                "searchparam":    {
+                    "type": "explorationlocation",
+                    "request":    {
+                        "operator": "and",
+                        "terms": [
+                            {             
+                                "item": "tags",
+                                "value": "location_option",
+                                "equals": true,
+                                "strict": true,
+                                "istag": true,
+                                "tagvalue": "el_survivor"
+                            }
+                        ],
+                        "subparams": []
+                    }
+                }                        
+            }
+        }]
+    },
+    {
+        "id": "el_survivor_yeoman",
+        "name": "New Antioch",
+        "source": "core",
+        "tags": {
+            "location_option": "el_survivor"
+        },
+        "contextdata": {
+            "validate_location": {
+                "allowed": [
+                    {
+                        "type": "faction",
+                        "value": ["fc_newantioch"]
+                    }
+                ]
+            },
+            "gain_new_model_from_list": {
+                "count": 1,
+                "id": ["md_yeoman_survivor"]
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Yeoman, except they do not have a Ranged weapon."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "el_survivor_trenchpilgrims",
+        "name": "Trench Pilgrims",
+        "source": "core",
+        "tags": {
+            "location_option": "el_survivor"
+        },
+        "contextdata": {
+            "validate_location": {
+                "allowed": [
+                    {
+                        "type": "faction",
+                        "value": ["fc_trenchpilgrim"]
+                    }
+                ]
+            },
+            "gain_new_model_from_list": {
+                "count": 1,
+                "id": ["md_ecclesiasticprisoner"]
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Ecclesiastical Prisoner"
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "el_survivor_ironsultanate",
+        "name": "Iron Sultanate",
+        "source": "core",
+        "tags": {
+            "location_option": "el_survivor"
+        },
+        "contextdata": {
+            "validate_location": {
+                "allowed": [
+                    {
+                        "type": "faction",
+                        "value": ["fc_ironsultanate"]
+                    }
+                ]
+            },
+            "gain_new_model_from_list": {
+                "count": 1,
+                "id": ["md_azeb"]
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Azeb"
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "el_survivor_hereticlegion",
+        "name": "Heretic Legions",
+        "source": "core",
+        "tags": {
+            "location_option": "el_survivor"
+        },
+        "contextdata": {
+            "validate_location": {
+                "allowed": [
+                    {
+                        "type": "faction",
+                        "value": ["fc_hereticlegion"]
+                    }
+                ]
+            },
+            "gain_new_model_from_list": {
+                "count": 1,
+                "id": ["md_wretched"]
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Wretched"
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "el_survivor_court",
+        "name": "The Court",
+        "source": "core",
+        "tags": {
+            "location_option": "el_survivor"
+        },
+        "contextdata": {
+            "validate_location": {
+                "allowed": [
+                    {
+                        "type": "faction",
+                        "value": ["fc_courtofthesevenheadedserpent"]
+                    }
+                ]
+            },
+            "gain_new_model_from_list": {
+                "count": 1,
+                "id": ["md_wretched_court"]
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Wretched"
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "el_survivor_blackgrail",
+        "name": "Black Grail",
+        "source": "core",
+        "tags": {
+            "location_option": "el_survivor"
+        },
+        "contextdata": {
+            "validate_location": {
+                "allowed": [
+                    {
+                        "type": "faction",
+                        "value": ["fc_cultoftheblackgrail"]
+                    }
+                ]
+            },
+            "gain_new_model_from_list": {
+                "count": 1,
+                "id": ["md_grailthrall"]
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Grail Thrall"
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "el_fallensoldier",
+        "name": "Fallen Soldier",
+        "source": "core",
+        "tags": {
+            "exploration_table": "et_commonlocations"
+        },
+        "contextdata": {
+            "location_rule_option": {},
+            "gain_new_item": {
+                "count": 1,
+                "obey_restriction": true,
+                "obey_faction": true,
+                "limitations": {
+                    "required": [
+                        {
+                            "category": "ranged",
+                            "res_type": "ducats",
+                            "value": 15
+                        }
+                    ]
+                }
+            },
+            "gain_new_item_from_list": {
+                "count": 1,
+                "obey_faction": true,
+                "required": false,
+                "id": ["eq_medikit","eq_mountaineerkit","eq_shovel"]
+            },
+            "gain_all_from_list": {
+                "id": ["eq_combathelmet","eq_standardarmour"]
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You find the body of a fallen soldier, half-gnawed by rats, still clutching some of their possessions. Add a Ranged weapon in your Warband’s Armoury that costs 15 ducats or less, a Combat Helmet, and Standard Armour to your Warband’s roster for free. Then, roll a D6. On a 4+, add one of the following to your Warband’s roster for free (your choice must be available to your Warband): a First-Aid Kit, a Mountaineer’s Kit, or a Shovel."
+            }
+        ],
+        "location_value": 10,
+        "options": [ ]
+    },
+    {
+        "id": "el_trenchmerchant",
+        "name": "Trench Merchant",
+        "source": "core",
+        "tags": {
+            "exploration_table": "et_commonlocations"
+        },
+        "contextdata": {"location_rule_option": {}},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You establish contact with a Trench Merchant, one of the unscrupulous, unlicensed peddlers who infest the No Man’s Land. Choose One:"
+            }
+        ],
+        "location_value": 11,
+        "options": [{
+            "ref_id" : "ot_trenchmerchant",
+            "name" : "",
+            "description" : [],
+            "category" : "type",
+            "type" : "text",
+            "strictness" : "strict",
+            "predefined_options" : [],
+            "option_context" : {"basic_option_default":{}},
+            "data_search" : {      
+                "searchtype": "complex",
+                "searchparam":    {
+                    "type": "explorationlocation",
+                    "request":    {
+                        "operator": "and",
+                        "terms": [
+                            {             
+                                "item": "tags",
+                                "value": "location_option",
+                                "equals": true,
+                                "strict": true,
+                                "istag": true,
+                                "tagvalue": "el_trenchmerchant"
+                            }
+                        ],
+                        "subparams": []
+                    }
+                }                        
+            }
+        } ]
+    },
+    {
+        "id": "el_trenchmerchant_report",
+        "name": "Report",
+        "source": "core",
+        "tags": {
+            "location_option": "el_trenchmerchant"
+        },
+        "contextdata": {
+            "gain_glory": {
+                "count": 2
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Your Warband gains 2 Glory Points."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "el_trenchmerchant_trade",
+        "name": "Trade",
+        "source": "core",
+        "tags": {
+            "location_option": "el_trenchmerchant"
+        },
+        "contextdata": {
+            "set_exploration_purchase_cap": {
+                "cost": 5
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "From now on, you may purchase Glory Items that cost 5 Glory or less that are allowed to your Warband during the Trade step."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "el_mapanddocumentbag",
+        "name": "Map and Document Bag",
+        "source": "core",
+        "tags": {
+            "exploration_table": "et_commonlocations"
+        },
+        "contextdata": {
+            "location_rule_option": {},
+            "add_skill": {
+                "id": [
+                    "es_reroll"
+                ]
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Marked with carefully concealed signs, you find a hidden Map & Document Bag. You gain the Reroll Exploration Skill."
+            }
+        ],
+        "location_value": 14,
+        "options": [  ]
+    },
+    {
+        "id": "el_snipersnest",
+        "name": "Sniper's Nest",
+        "source": "core",
+        "tags": {
+            "exploration_table": "et_commonlocations"
+        },
+        "contextdata": {"location_rule_option": {}},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You find the well-camouflaged position of a Sniper. Depending on your faction, add the specified gear to your Warband’s roster for free. If your Warband is already at the LIMIT for any of these items, your Warband instead gains Ducats or Glory Points equal to its cost.",
+                "glossary": [{"val": "LIMIT", "id": "kw_limit"}]
+            }
+        ],
+        "location_value": 16,
+        "options": [{
+            "ref_id" : "ot_snipersnest",
+            "name" : "",
+            "description" : [],
+            "category" : "type",
+            "type" : "text",
+            "strictness" : "strict",
+            "predefined_options" : [],
+            "option_context" : {"basic_option_default":{}},
+            "data_search" : {      
+                "searchtype": "complex",
+                "searchparam":    {
+                    "type": "explorationlocation",
+                    "request":    {
+                        "operator": "and",
+                        "terms": [
+                            {             
+                                "item": "tags",
+                                "value": "location_option",
+                                "equals": true,
+                                "strict": true,
+                                "istag": true,
+                                "tagvalue": "el_snipersnest"
+                            }
+                        ],
+                        "subparams": []
+                    }
+                }                        
+            }
+        }]
+    },
+    {
+        "id": "el_snipersnest_antiochpilgrim",
+        "name": "New Antioch or Trench Pilgrims",
+        "source": "core",
+        "tags": {
+            "location_option": "el_snipersnest"
+        },
+        "contextdata": {
+            "validate_location": {
+                "allowed": [
+                    {
+                        "type": "faction",
+                        "value": ["fc_newantioch","fc_trenchpilgrim"]
+                    }
+                ]
+            },
+            "gain_new_item_from_list": {
+                "count": 1,
+                "obey_faction": true,
+                "obey_restriction": true,
+                "alternate_value": true,
+                "id": ["eq_sniperrifle", "eq_sniperscope"]
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Sniper Rifle or Sniper Scope."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "el_snipersnest_ironsultanate",
+        "name": "Iron Sultanate",
+        "source": "core",
+        "tags": {
+            "location_option": "el_snipersnest"
+        },
+        "contextdata": {
+            "validate_location": {
+                "allowed": [
+                    {
+                        "type": "faction",
+                        "value": ["fc_ironsultanate"]
+                    }
+                ]
+            },
+            "gain_all_from_list": {
+                "obey_faction": true,
+                "obey_restriction": true,
+                "alternate_value": true,
+                "id": ["eq_siegejezzail","eq_alchemicalammunition","eq_cloakofalamut"]
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Siege Jezzail, Alchemical Ammunition, and a Cloak of Alamut"
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "el_snipersnest_hereticlegion",
+        "name": "Heretic Legions",
+        "source": "core",
+        "tags": {
+            "location_option": "el_snipersnest"
+        },
+        "contextdata": {
+            "validate_location": {
+                "allowed": [
+                    {
+                        "type": "faction",
+                        "value": ["fc_hereticlegion"]
+                    }
+                ]
+            },
+            "gain_all_from_list": {
+                "obey_faction": true,
+                "obey_restriction": true,
+                "alternate_value": true,
+                "id": ["eq_automaticrifle"]
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Automatic Rifle"
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "el_survivor_blackgrail",
+        "name": "Black Grail",
+        "source": "core",
+        "tags": {
+            "location_option": "el_snipersnest"
+        },
+        "contextdata": {
+            "validate_location": {
+                "allowed": [
+                    {
+                        "type": "faction",
+                        "value": ["fc_cultoftheblackgrail"]
+                    }
+                ]
+            },
+            "gain_all_from_list": {
+                "obey_faction": true,
+                "obey_restriction": true,
+                "alternate_value": true,
+                "id": ["eq_fieldshrine","eq_corruptionbelcher"]
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Corruption Belcher and Field Shrine"
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "el_survivor_court",
+        "name": "The Court",
+        "source": "core",
+        "tags": {
+            "location_option": "el_snipersnest"
+        },
+        "contextdata": {
+            "validate_location": {
+                "allowed": [
+                    {
+                        "type": "faction",
+                        "value": ["fc_courtofthesevenheadedserpent"]
+                    }
+                ]
+            },
+            "gain_all_from_list": {
+                "obey_faction": true,
+                "obey_restriction": true,
+                "alternate_value": true,
+                "id": ["eq_ophidianrifle"]
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Ophidian Rifle"
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "el_fallenknight",
+        "name": "Fallen Knight",
+        "source": "core",
+        "tags": {
+            "exploration_table": "et_commonlocations"
+        },
+        "contextdata": {"location_rule_option": {}},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You find a fallen hero of past ages. Perhaps a Baron from New Antioch, a great Faris of the Sultanate, or a Plague Knight of Beelzebub. Choose one:"
+            }
+        ],
+        "location_value": 18,
+        "options": [{
+            "ref_id" : "ot_fallenknight",
+            "name" : "",
+            "description" : [],
+            "category" : "type",
+            "type" : "text",
+            "strictness" : "strict",
+            "predefined_options" : [],
+            "option_context" : {"basic_option_default":{}},
+            "data_search" : {      
+                "searchtype": "complex",
+                "searchparam":    {
+                    "type": "explorationlocation",
+                    "request":    {
+                        "operator": "and",
+                        "terms": [
+                            {             
+                                "item": "tags",
+                                "value": "location_option",
+                                "equals": true,
+                                "strict": true,
+                                "istag": true,
+                                "tagvalue": "el_fallenknight"
+                            }
+                        ],
+                        "subparams": []
+                    }
+                }                        
+            }
+        } ]
+    },
+    {
+        "id": "el_fallenknight_loot",
+        "name": "Report",
+        "source": "core",
+        "tags": {
+            "location_option": "el_fallenknight"
+        },
+        "contextdata": {
+            "gain_new_item_from_list": {
+                "count": 1,
+                "id": ["eq_swordaxe","eq_trenchpolearm"]
+            },
+            "gain_all_from_list": {
+                "id": ["eq_combathelmet","eq_trenchshield","eq_reinforcedarmour"]
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Add Reinforced Armour, a Trench Shield, a Combat Helmet, and either a Sword or Polearm to your Warband’s roster for free."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "el_fallenknight_memorialise",
+        "name": "Memorialise",
+        "source": "core",
+        "tags": {
+            "location_option": "el_fallenknight"
+        },
+        "contextdata": {
+            "gain_glory": {
+                "count": 2
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Your Warband gains 2 Glory Points."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "el_warbandstrongbox",
+        "name": "Warband Strongbox",
+        "source": "core",
+        "tags": {
+            "exploration_table": "et_commonlocations"
+        },
+        "contextdata": {"location_rule_option": {}},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You find the hidden Strongbox of a Warband lost in the Great War."
+            }
+        ],
+        "location_value": 20,
+        "options": [{
+            "ref_id" : "ot_warbandstrongbox",
+            "name" : "",
+            "description" : [],
+            "category" : "type",
+            "type" : "text",
+            "strictness" : "strict",
+            "predefined_options" : [],
+            "option_context" : {"basic_option_default":{}},
+            "data_search" : {      
+                "searchtype": "complex",
+                "searchparam":    {
+                    "type": "explorationlocation",
+                    "request":    {
+                        "operator": "and",
+                        "terms": [
+                            {             
+                                "item": "tags",
+                                "value": "location_option",
+                                "equals": true,
+                                "strict": true,
+                                "istag": true,
+                                "tagvalue": "el_warbandstrongbox"
+                            }
+                        ],
+                        "subparams": []
+                    }
+                }                        
+            }
+        } ]
+    },
+    {
+        "id": "el_warbandstrongbox_trove",
+        "name": "Trove",
+        "source": "core",
+        "tags": {
+            "location_option": "el_warbandstrongbox"
+        },
+        "contextdata": {
+            "spend_ducats": {
+                "count": 120,
+                "obey_restriction": true,
+                "obey_faction": true
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Add up to 120 ducats worth of weapons, armour, and equipment to your Warband’s roster for free. You cannot exceed your Warband’s LIMIT on equipment in this way.",
+                "glossary": [{"val": "LIMIT", "id": "kw_limit"}]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "el_warbandstrongbox_panoply",
+        "name": "Panoply",
+        "source": "core",
+        "tags": {
+            "location_option": "el_warbandstrongbox"
+        },
+        "contextdata": {
+            "spend_glory": {
+                "count": 9,
+                "obey_restriction": true,
+                "obey_faction": true
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You may purchase any combination of Glory Items allowed to your Warband with a total cost of 9 Glory or less."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "el_angelicinstrument",
+        "name": "Angelic Instrument",
+        "source": "core",
+        "tags": {
+            "exploration_table": "et_rarelocations"
+        },
+        "contextdata": {
+            "location_rule_option": {},
+            "gain_new_item_from_list": {
+                "count": 1,
+                "obey_restriction": true,
+                "obey_faction": true,
+                "treat_as": "eq_musicalinstrument",
+                "auto_replace": true,
+                "id": ["eq_angelicinstrument"]
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Exploring the battlefield you discover an otherworldly instrument alongside the shattered remains of a lesser angel – fallen or divine. Add an Angelic Instrument to your Warband’s roster for free. It’s identical to a Musical Instrument (including their equipment restrictions and LIMIT), except its effect has a range of 8\" instead of 4\". If your Warband is at its LIMIT for Musical Instruments, it can immediately remove an existing Musical Instrument for the Angelic Instrument.",
+                "glossary": [
+                    {"val": "LIMIT", "id": "kw_limit"}
+                ]
+            }
+        ],
+        "location_value": 5,
+        "options": [  ]
+    },
+    {
+        "id": "el_abandonedpropheticradiostation",
+        "name": "Abandoned Prophetic Radio Station",
+        "source": "core",
+        "tags": {
+            "exploration_table": "et_rarelocations"
+        },
+        "contextdata": {
+            "location_rule_option": {},
+            "add_skill": {
+                "id": [
+                    "es_extradice"
+                ]
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You find a hastily-abandoned Synod of Strategic Prophecy station, with scribbled predictions and prophecies scattered amongst the disarray. You gain the Extra Dice Exploration Skill."
+            }
+        ],
+        "location_value": 9,
+        "options": [  ]
+    },
+    {
+        "id": "el_potofmanna",
+        "name": "Pot of Manna",
+        "source": "core",
+        "tags": {
+            "exploration_table": "et_rarelocations"
+        },
+        "contextdata": {
+            "location_rule_option": {},
+            "add_to_warband": {}
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You find a cup blessed by God that provides endless nourishment. Whenever your Warband rolls to explore, your Warband gains an additional 10 ducats from Looting due to the lowered cost of rations."
+            }
+        ],
+        "location_value": 11,
+        "options": [  ]
+    },
+    {
+        "id": "el_ransackedalchemistworkshop",
+        "name": "Ransacked Alchemical Workshop",
+        "source": "core",
+        "tags": {
+            "exploration_table": "et_rarelocations"
+        },
+        "contextdata": {
+            "location_rule_option": {},
+            "consumable": {},
+            "use_on_model": {
+                "scar_heal": {
+                    "count": 1
+                }
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You scavenge some of the life-giving potions within. Add Curative Fluids to your Warband’s roster for free. During any Reallocate Equipment step for the rest of the Campaign, your Warband can use these fluids to remove 1 Battle Scar from a model in your Warband. Once these fluids are used, they are spent and cannot be used again."
+            }
+        ],
+        "location_value": 12,
+        "options": [  ]
+    },
+    {
+        "id": "el_blackmarket",
+        "name": "Black Market",
+        "source": "core",
+        "tags": {
+            "exploration_table": "et_rarelocations"
+        },
+        "contextdata": {
+            "location_rule_option": {},
+            "set_exploration_purchase_cap": {
+                "cost": 8
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You discover a major underground trading post in No Man’s Land. From now on you may purchase Glory Items costing 8 Glory or less that are allowed for your Warband during the Trade step."
+            }
+        ],
+        "location_value": 15,
+        "options": [  ]
+    },
+    {
+        "id": "el_bookofgolems",
+        "name": "Book of Golems",
+        "source": "core",
+        "tags": {
+            "exploration_table": "et_rarelocations"
+        },
+        "contextdata": {
+            "location_rule_option": {},
+            "gain_new_model_from_list": {
+                "count": 1,
+                "id": ["md_takwincreation_golem"]
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You find a Rabbinic Manual on Creating Golems. Studying it allows you to create one Golem. Use the House of Wisdom Takwin Creature Creation to make a Homunculus of up to 100 ducats of value (40 ducats base cost), and add it to your Warband’s roster for free. In addition, you can buy items from your Armoury for your Golem. Otherwise, it uses exactly the same rules as Takwin Homunculi but has the Keyword GOLEM. This Golem can never be promoted to ELITE or gain Experience. Unlike a Takwin Creature, this Golem does not need to be associated with an Alchemist and it does not count as a Takwin Creature for any purposes (such as LIMIT). Replace any instance of “Iron Sultanate” with your Faction. ",
+                "glossary": [
+                    {"val": "LIMIT", "id": "kw_limit"},
+                    {"val": "ELITE", "id": "kw_elite"},
+                    {"val": "GOLEM", "id": "kw_golem"}
+                ]
+            }
+        ],
+        "location_value": 17,
+        "options": [  ]
+    },
+    {
+        "id": "el_ruinedchurchmasjidsynagogue",
+        "name": "Ruined Church/Masjid/Synagogue",
+        "source": "core",
+        "tags": {
+            "exploration_table": "et_rarelocations"
+        },
+        "contextdata": {"location_rule_option": {}},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You find a great shrine, temple or other religious building of faith. Upon its altar rests an object of great power waiting for you."
+            }
+        ],
+        "location_value": 19,
+        "options": [{
+            "ref_id" : "ot_ruinedchurchmasjidsynagogue",
+            "name" : "",
+            "description" : [],
+            "category" : "type",
+            "type" : "text",
+            "strictness" : "strict",
+            "predefined_options" : [],
+            "option_context" : {"basic_option_default":{}},
+            "data_search" : {      
+                "searchtype": "complex",
+                "searchparam":    {
+                    "type": "explorationlocation",
+                    "request":    {
+                        "operator": "and",
+                        "terms": [
+                            {             
+                                "item": "tags",
+                                "value": "location_option",
+                                "equals": true,
+                                "strict": true,
+                                "istag": true,
+                                "tagvalue": "el_ruinedchurchmasjidsynagogue"
+                            }
+                        ],
+                        "subparams": []
+                    }
+                }                        
+            }
+        } ]
+    },
+    {
+        "id": "el_ruinedchurchmasjidsynagogue_report",
+        "name": "Report",
+        "source": "core",
+        "tags": {
+            "location_option": "el_ruinedchurchmasjidsynagogue"
+        },
+        "contextdata": {
+            "gain_glory": {
+                "count": 4
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You can report the location to your superiors and gain 4 Glory Points."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "el_ruinedchurchmasjidsynagogue_purchase",
+        "name": "Purchase",
+        "source": "core",
+        "tags": {
+            "location_option": "el_ruinedchurchmasjidsynagogue"
+        },
+        "contextdata": {
+            "single_exploration_glory_item": {
+                "cost": 10
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You may purchase a Glory Item that costs 10 Glory or less and is allowed to your Warband."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "el_stashofdrugsanderotica",
+        "name": "Stash of Drugs & Erotica",
+        "source": "core",
+        "tags": {
+            "exploration_table": "et_rarelocations"
+        },
+        "contextdata": {"location_rule_option": {}},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You find a motherlode of forbidden objects and chemicals, highly sought after and in demand. Choose one:"
+            }
+        ],
+        "location_value": 21,
+        "options": [{
+            "ref_id" : "ot_stashofdrugsanderotica",
+            "name" : "",
+            "description" : [],
+            "category" : "type",
+            "type" : "text",
+            "strictness" : "strict",
+            "predefined_options" : [],
+            "option_context" : {"basic_option_default":{}},
+            "data_search" : {      
+                "searchtype": "complex",
+                "searchparam":    {
+                    "type": "explorationlocation",
+                    "request":    {
+                        "operator": "and",
+                        "terms": [
+                            {             
+                                "item": "tags",
+                                "value": "location_option",
+                                "equals": true,
+                                "strict": true,
+                                "istag": true,
+                                "tagvalue": "el_stashofdrugsanderotica"
+                            }
+                        ],
+                        "subparams": []
+                    }
+                }                        
+            }
+        } ]
+    },
+    {
+        "id": "el_stashofdrugsanderotica_confiscate",
+        "name": "Confiscate",
+        "source": "core",
+        "tags": {
+            "location_option": "el_stashofdrugsanderotica"
+        },
+        "contextdata": {
+            "validate_location": {
+                "allowed": [
+                    {
+                        "type": "faction",
+                        "value": ["fc_trenchpilgrim","fc_newantioch","fc_courtofthesevenheadedserpent","fc_cultoftheblackgrail","fc_hereticlegion","fc_ironsultanate"]
+                    }
+                ]
+            },
+            "gain_glory": {
+                "count": 4
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Your Warband gains 4 Glory Points."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "el_stashofdrugsanderotica_sell",
+        "name": "Sell",
+        "source": "core",
+        "tags": {
+            "location_option": "el_stashofdrugsanderotica"
+        },
+        "contextdata": {
+            "validate_location": {
+                "allowed": [
+                    {
+                        "type": "faction",
+                        "value": ["fc_newantioch","fc_courtofthesevenheadedserpent","fc_cultoftheblackgrail","fc_hereticlegion","fc_ironsultanate"]
+                    }
+                ]
+            },
+            "gain_ducats": {
+                "cost": 120
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Your Warband gains 120 ducats."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "el_stashofdrugsanderotica_indulge",
+        "name": "Indulge",
+        "source": "core",
+        "tags": {
+            "location_option": "el_stashofdrugsanderotica"
+        },
+        "contextdata": {
+            "validate_location": {
+                "allowed": [
+                    {
+                        "type": "faction",
+                        "value": ["fc_newantioch","fc_courtofthesevenheadedserpent","fc_cultoftheblackgrail","fc_hereticlegion","fc_ironsultanate"]
+                    }
+                ]
+            },
+            "add_to_warband": {}
+        },
+        "description": [       
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "From now on, your Warband rolls Morale checks with +1 DICE.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "el_saintsreliquary",
+        "name": "Saint's Reqliary",
+        "source": "core",
+        "tags": {
+            "exploration_table": "et_rarelocations"
+        },
+        "contextdata": {
+            "location_rule_option": {},
+            "gain_new_item_from_list": {
+                "count": 1,
+                "add_to_purchase_context": {                    
+                    "faction_eq_restriction": {
+                        "banned": [
+                            {
+                                "res_type": "keyword",
+                                "value": "kw_elite"
+                            }
+                        ]
+                    } 
+                },
+                "id": ["eq_saintsreliquary"]
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You discover a well-hidden reliquary of a fallen Saint. Add a Saintly Relic to your Warband’s roster for free. This piece of equipment can only be carried by an ELITE model. A model equipped with the Saintly Relic gains the Keyword TOUGH, but loses the Keyword INFILTRATOR (if it has it) and can never have Cover.",
+                "glossary": [
+                    {"val": "TOUGH", "id": "kw_tough"},
+                    {"val": "ELITE", "id": "kw_elite"},
+                    {"val": "INFILTRATOR", "id": "kw_infiltrator"}
+                ]
+            }
+        ],
+        "location_value": 23,
+        "options": [ ]
+    },
+    {
+        "id": "el_highrankingcaptain",
+        "name": "High-Ranking Captain",
+        "source": "core",
+        "tags": {
+            "exploration_table": "et_rarelocations"
+        },
+        "contextdata": {"location_rule_option": {}},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You capture a high-ranking enemy – an officer of New Antioch, Sultanate Sheik, Shard of a fallen Black Grail Hegemon, Pilgrim prophet, a Mammonite merchant, or some other important personage. Choose one:"
+            }
+        ],
+        "location_value": 25,
+        "options": [{
+            "ref_id" : "ot_highrankingcaptain",
+            "name" : "",
+            "description" : [],
+            "category" : "type",
+            "type" : "text",
+            "strictness" : "strict",
+            "predefined_options" : [],
+            "option_context" : {"basic_option_default":{}},
+            "data_search" : {      
+                "searchtype": "complex",
+                "searchparam":    {
+                    "type": "explorationlocation",
+                    "request":    {
+                        "operator": "and",
+                        "terms": [
+                            {             
+                                "item": "tags",
+                                "value": "location_option",
+                                "equals": true,
+                                "strict": true,
+                                "istag": true,
+                                "tagvalue": "el_highrankingcaptain"
+                            }
+                        ],
+                        "subparams": []
+                    }
+                }                        
+            }
+        } ]
+    },
+    {
+        "id": "el_highrankingcaptain_execute",
+        "name": "Execute",
+        "source": "core",
+        "tags": {
+            "location_option": "el_highrankingcaptain"
+        },
+        "contextdata": {
+            "gain_glory": {
+                "count": 4
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Your Warband gains 4 Glory Points."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "el_highrankingcaptain_ransom",
+        "name": "Ransom",
+        "source": "core",
+        "tags": {
+            "location_option": "el_highrankingcaptain"
+        },
+        "contextdata": {
+            "gain_ducats": {
+                "cost": 100
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Your Warband gains 100 ducats."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "el_highrankingcaptain_indenture",
+        "name": "Indenture",
+        "source": "core",
+        "tags": {
+            "location_option": "el_highrankingcaptain"
+        },
+        "contextdata": {
+            "location_rule_option": {},
+            "add_skill": {
+                "id": [
+                    "es_setdice"
+                ]
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You keep the captive as a guide. You gain the Set Dice Exploration Skill."
+            }
+        ],
+        "options": [  ]
+    },
+    {
+        "id": "el_highrankingcaptain_imprison",
+        "name": "Imprison",
+        "source": "core",
+        "tags": {
+            "location_option": "el_highrankingcaptain"
+        },
+        "contextdata": {
+            "location_rule_option": {},
+            "single_exploration_glory_item": {
+                "cost": 8
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You may purchase a Glory Item that costs 8 Glory or less and is allowed to your Warband."
+            }
+        ],
+        "options": [  ]
+    },
+    {
+        "id": "el_abandonedressurectionmachine",
+        "name": "Abandoned Ressurection Machine",
+        "source": "core",
+        "tags": {
+            "exploration_table": "et_rarelocations"
+        },
+        "contextdata": {
+            "location_rule_option": {},
+            "consumable": {},
+            "use_on_model": {
+                "scar_heal": {
+                    "all": true
+                }
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You find remnants of machines that were once used as part of the Meta-Christ Program. Most of them are broken, torn apart by some immense force, but one of them works and can be dismantled. Add a Salvaged Resurrection Machine to your Warband’s roster for free. During any Reallocate Equipment step for the rest of the Campaign, your Warband can activate this machine to remove any number of Battle Scars from a single model in your Warband. Once this machine is used, it is spent and cannot be used again."
+            }
+        ],
+        "location_value": 32,
+        "options": [  ]
+    },
+    {
+        "id": "el_battlefieldofcorpses",
+        "name": "Battlefield of Corpses",
+        "source": "core",
+        "tags": {
+            "exploration_table": "et_legendarylocations"
+        },
+        "contextdata": {
+            "spend_ducats": {
+                "count": 100,
+                "limit": 2
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You come across a scene of terrible slaughter. The remains of both humans and Hellish creatures from various nations, fallen through battles over the past 800 years, lie torn and scattered across the horizon, while the trenches that criss-cross this scene are filled with blood. Most of the dead have been looted, but you find up to 2 pieces of equipment, armour or weapons which you can pick from any Warband list other than your own. Their combined cost cannot exceed 100 ducats and neither item can cost any Glory Points. If lost during the Campaign, they are gone permanently. Note that limitations on who can use it still apply if detailed in the rules (such as Assassin’s Daggers, LIMIT etc).",
+                "glossary": [{"val": "LIMIT", "id": "kw_limit"}]
+            }
+        ],
+        "location_value": 6,
+        "options": []
+    },
+    {
+        "id": "el_esotericlibrary",
+        "name": "Esoteric Library",
+        "source": "core",
+        "tags": {
+            "exploration_table": "et_legendarylocations"
+        },
+        "contextdata": {"location_rule_option": {}},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You find a concealed collection of Works of Goetic Magic, blood sacrifice rites, and learn how to summon demons. You may:"
+            }
+        ],
+        "location_value": 8,
+        "options": [{
+            "ref_id" : "ot_esotericlibrary",
+            "name" : "",
+            "description" : [],
+            "category" : "type",
+            "type" : "text",
+            "strictness" : "strict",
+            "predefined_options" : [],
+            "option_context" : {"basic_option_default":{}},
+            "data_search" : {      
+                "searchtype": "complex",
+                "searchparam":    {
+                    "type": "explorationlocation",
+                    "request":    {
+                        "operator": "and",
+                        "terms": [
+                            {             
+                                "item": "tags",
+                                "value": "location_option",
+                                "equals": true,
+                                "strict": true,
+                                "istag": true,
+                                "tagvalue": "el_esotericlibrary"
+                            }
+                        ],
+                        "subparams": []
+                    }
+                }                        
+            }
+        } ]
+    },
+    {
+        "id": "el_esotericlibrary_sell",
+        "name": "Sell",
+        "source": "core",
+        "tags": {
+            "location_option": "el_esotericlibrary"
+        },
+        "contextdata": {
+            "gain_ducats": {
+                "dice": 6,
+                "mod": 10
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You gain 6D6X10 ducats."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "el_esotericlibrary_burn",
+        "name": "Burn",
+        "source": "core",
+        "tags": {
+            "location_option": "el_esotericlibrary"
+        },
+        "contextdata": {
+            "validate_location": {
+                "allowed": [
+                    {
+                        "type": "faction",
+                        "value": ["fc_trenchpilgrim","fc_newantioch","fc_ironsultanate"]
+                    }
+                ]
+            },
+            "gain_glory": {
+                "count": 3,
+                "dice3": 1
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Gain 3+D3 Glory Points."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "el_esotericlibrary_study",
+        "name": "Burn",
+        "source": "core",
+        "tags": {
+            "location_option": "el_esotericlibrary"
+        },
+        "contextdata": {
+            "validate_location": {
+                "allowed": [
+                    {
+                        "type": "faction",
+                        "value": ["fc_courtofthesevenheadedserpent","fc_hereticlegion"]
+                    }
+                ]
+            },
+            "add_to_warband": {}
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "At the start of each Battle, select any one model (friend or foe). That model starts the Battle with +1 BLOOD MARKER.",
+                "glossary": [{"val": "BLOOD MARKER", "id": "kw_bloodmarker"}]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "el_esotericlibrary_plague",
+        "name": "Plague",
+        "source": "core",
+        "tags": {
+            "location_option": "el_esotericlibrary"
+        },
+        "contextdata": {
+            "validate_location": {
+                "allowed": [
+                    {
+                        "type": "faction",
+                        "value": ["fc_cultoftheblackgrail"]
+                    }
+                ]
+            },
+            "add_to_warband": {}
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Unleash a Plague from the books. At the start of each Battle, select any one model (friend or foe). That model starts the Battle with +1 INFECTION MARKER.",
+                "glossary": [{"val": "INFECTION MARKER", "id": "kw_infectionmarker"}]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "el_hiddenpassages",
+        "name": "Hidden Passages",
+        "source": "core",
+        "tags": {
+            "exploration_table": "et_legendarylocations"
+        },
+        "contextdata": {
+            "location_rule_option": {},
+            "add_skill": {
+                "id": [
+                    "es_duplicate"
+                ]
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You uncover a hidden entrance to a vast underground network, perhaps dug by the Heretics to infiltrate the Great Iron Wall, or by refugees living in the No Man’s Land. This allows you to explore the area you are in far more efficiently. Your Warband gains the Duplicate Exploration Skill."
+            }
+        ],
+        "location_value": 10,
+        "options": [  ]
+    },
+    {
+        "id": "el_jabireanalchemicalbooks",
+        "name": "Jabierean Alchemical Books",
+        "source": "core",
+        "tags": {
+            "exploration_table": "et_legendarylocations"
+        },
+        "contextdata": {"location_rule_option": {}},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You find one of the fabled books from the Jabirean Corpus, filled with the most wondrous secrets of the nature of the universe. Choose one:"
+            }
+        ],
+        "location_value": 12,
+        "options": [{
+            "ref_id" : "ot_jabireanalchemicalbooks",
+            "name" : "",
+            "description" : [],
+            "category" : "type",
+            "type" : "text",
+            "strictness" : "strict",
+            "predefined_options" : [],
+            "option_context" : {"basic_option_default":{}},
+            "data_search" : {      
+                "searchtype": "complex",
+                "searchparam":    {
+                    "type": "explorationlocation",
+                    "request":    {
+                        "operator": "and",
+                        "terms": [
+                            {             
+                                "item": "tags",
+                                "value": "location_option",
+                                "equals": true,
+                                "strict": true,
+                                "istag": true,
+                                "tagvalue": "el_jabireanalchemicalbooks"
+                            }
+                        ],
+                        "subparams": []
+                    }
+                }                        
+            }
+        } ]
+    },
+    {
+        "id": "el_jabireanalchemicalbooks_sellducats",
+        "name": "Sell for Ducats",
+        "source": "core",
+        "tags": {
+            "location_option": "el_jabireanalchemicalbooks"
+        },
+        "contextdata": {
+            "gain_ducats": {
+                "cost": 150
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You gain 150 ducats."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "el_jabireanalchemicalbooks_sellglory",
+        "name": "Sell for Glory",
+        "source": "core",
+        "tags": {
+            "location_option": "el_jabireanalchemicalbooks"
+        },
+        "contextdata": {
+            "gain_glory": {
+                "count": 5
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You gain 5 glory points."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "el_jabireanalchemicalbooks_keep",
+        "name": "Keep",
+        "source": "core",
+        "tags": {
+            "location_option": "el_jabireanalchemicalbooks"
+        },
+        "contextdata": {
+            "add_equipment_purchase": {
+                "id": ["rel_fc_eq_fireshield"]
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Your Warband may now buy a Fire Shield exactly as if it was a House of Wisdom Warband."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "el_jabireanalchemicalbooks_study",
+        "name": "Keep",
+        "source": "core",
+        "tags": {
+            "location_option": "el_jabireanalchemicalbooks"
+        },
+        "contextdata": {
+            "validate_location": {
+                "allowed": [
+                    {
+                        "type": "faction",
+                        "value": ["fc_ironsultanate_fv_houseofwisdom"]
+                    }
+                ]
+            },
+            "purchase_modifier_upgrade": {
+                "mod": [
+                    {
+                        "cost": -5,
+                        "requirements": [
+                            {
+                                "tag": "takwin"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You glean from it great secrets of Takwin creation, and all the Alchemical Formulae now cost 5 ducats less (down to minimum of 5)."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "el_blacknetworkcontact",
+        "name": "Black Market",
+        "source": "core",
+        "tags": {
+            "exploration_table": "et_legendarylocations"
+        },
+        "contextdata": {
+            "location_rule_option": {},
+            "set_exploration_purchase_cap": {
+                "cost": 99
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You make contact with one of the legendary Merchant Princes of the Black Network. From now on, you may purchase Glory Items of any Glory Points cost that are allowed to your Warband during the Trade step."
+            }
+        ],
+        "location_value": 14,
+        "options": [  ]
+    },
+    {
+        "id": "el_treasureoftheholies",
+        "name": "Treasure of the Holies",
+        "source": "core",
+        "tags": {
+            "exploration_table": "et_legendarylocations"
+        },
+        "contextdata": {
+            "location_rule_option": {},
+            "consumable": {
+                
+                "single_exploration_glory_item": {
+                    "cost": 99
+                }
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You find a legendary holy reliquary, be it the Tabernacle of the Hebrews, an altar to the Morning Star himself, a shrine founded by St. Peter or a place where the Prophet visited. On its altar lies a strongbox containing an object of great power waiting for you. You may purchase any single Glory Item of any Glory Points cost as long as it is allowed to your Warband. You do not have to purchase it immediately, as you may bring the strongbox with you, and can do so in any future Trade step."
+            }
+        ],
+        "location_value": 16,
+        "options": [  ]
+    },
+    {
+        "id": "el_skullofasaint",
+        "name": "Skull of a Saint",
+        "source": "core",
+        "tags": {
+            "exploration_table": "et_legendarylocations"
+        },
+        "contextdata": {"location_rule_option": {}},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You find the skull of a saint beheaded in ages past. The power of communion lingers in its holy remains."
+            }
+        ],
+        "location_value": 18,
+        "options": [{
+            "ref_id" : "ot_skullofasaint",
+            "name" : "",
+            "description" : [],
+            "category" : "type",
+            "type" : "text",
+            "strictness" : "strict",
+            "predefined_options" : [],
+            "option_context" : {"basic_option_default":{}},
+            "data_search" : {      
+                "searchtype": "complex",
+                "searchparam":    {
+                    "type": "explorationlocation",
+                    "request":    {
+                        "operator": "and",
+                        "terms": [
+                            {             
+                                "item": "tags",
+                                "value": "location_option",
+                                "equals": true,
+                                "strict": true,
+                                "istag": true,
+                                "tagvalue": "el_skullofasaint"
+                            }
+                        ],
+                        "subparams": []
+                    }
+                }                        
+            }
+        } ]
+    },
+    {
+        "id": "el_skullofasaint_faithful",
+        "name": "Faithful Skull",
+        "source": "core",
+        "tags": {
+            "location_option": "el_skullofasaint"
+        },
+        "contextdata": {
+            "validate_location": {
+                "allowed": [
+                    {
+                        "type": "faction",
+                        "value": ["fc_ironsultanate","fc_newantioch","fc_trenchpilgrim"]
+                    }
+                ]
+            },
+            "gain_new_item_from_list": {
+                "count": 1,
+                "id": ["eq_faithfulskull"]
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "A saint guides your troops before each battle. The model with the skull gains the following skill:"
+            },        
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Unless the scenario prohibits the use of special deployment of Infiltrators, you may deploy the model on any table edge as long as it is at least 8\" away from any enemy model after Infiltrators are deployed."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "el_skullofasaint_hell",
+        "name": "Hell Skull",
+        "source": "core",
+        "tags": {
+            "location_option": "el_skullofasaint"
+        },
+        "contextdata": {
+            "validate_location": {
+                "allowed": [
+                    {
+                        "type": "faction",
+                        "value": ["fc_courtofthesevenheadedserpent","fc_cultoftheblackgrail","fc_hereticlegion"]
+                    }
+                ]
+            },
+            "gain_new_item_from_list": {
+                "count": 1,
+                "id": ["eq_hellskull"]
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The skull screams as you mount it on a pole to mock God and paint it with blasphemous names. This item counts as a banner."
+            },        
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "It adds +2 DICE to your Morale Tests and you automatically gain 1 Glory Point after each battle.",
+                "glossary": [
+                    {"val": "+2 DICE", "id": "kw_plusdice"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "el_lockofsamsonshair",
+        "name": "Lock of Samson's Hair",
+        "source": "core",
+        "tags": {
+            "exploration_table": "et_legendarylocations"
+        },
+        "contextdata": {"location_rule_option": {},
+        "gain_new_item_from_list": {
+            "count": 1,
+            "id": ["eq_lockofsamsonshair"]
+        }},
+        "description": [            
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "You discover a lock of hair of Samson, imbued with the unlimited strength of the strongest warrior to ever live. This item is a piece of equipment with the following rules:"
+            },          
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The model with this item gains the Keyword STRONG and +1 to all Injury rolls in Melee.",
+                "glossary": [
+                    {"val": "STRONG", "id": "kw_strong"}
+                ]
+            }
+        ],
+        "location_value": 20,
+        "options": [ ]
+    },
+    {
+        "id": "el_sampleofholydna",
+        "name": "Sample of Holy DNA",
+        "source": "core",
+        "tags": {
+            "exploration_table": "et_legendarylocations"
+        },
+        "contextdata": {
+            "location_rule_option": {},
+            "consumable": {},
+            "use_on_model": {
+                "add_upgrade": {
+                    "id": ["up_holydna"]
+                }
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You find a sample of Holy DNA. You can treat any one model in your Warband with it. When this model is activated, one INFECTION MARKER or BLOOD MARKER the model has becomes a BLESSINGS MARKER instead.",
+                "glossary": [
+                    {"val": "INFECTION MARKER", "id": "kw_infectionmarker"},
+                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"},
+                    {"val": "BLESSINGS MARKER", "id": "kw_blessingmarker"}
+                ]
+            }
+        ],
+        "location_value": 26,
+        "options": [  ]
+    },
+    {
+        "id": "el_golgothatektites",
+        "name": "Golgotha Tektites",
+        "source": "core",
+        "tags": {
+            "exploration_table": "et_legendarylocations"
+        },
+        "contextdata": {"location_rule_option": {}},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You can treat any armour you own with the Golgotha Tekites used to forge the armour of the mighty Paladins."
+            }
+        ],
+        "location_value": 30,
+        "options": [{
+            "ref_id" : "ot_golgothatektites",
+            "name" : "",
+            "description" : [],
+            "category" : "type",
+            "type" : "text",
+            "strictness" : "strict",
+            "predefined_options" : [],
+            "option_context" : {"basic_option_default":{}},
+            "data_search" : {      
+                "searchtype": "complex",
+                "searchparam":    {
+                    "type": "explorationlocation",
+                    "request":    {
+                        "operator": "and",
+                        "terms": [
+                            {             
+                                "item": "tags",
+                                "value": "location_option",
+                                "equals": true,
+                                "strict": true,
+                                "istag": true,
+                                "tagvalue": "el_golgothatektites"
+                            }
+                        ],
+                        "subparams": []
+                    }
+                }                        
+            }
+        } ]
+    },
+    {
+        "id": "el_golgothatektites_apply",
+        "name": "Apply",
+        "source": "core",
+        "tags": {
+            "location_option": "el_golgothatektites"
+        },
+        "contextdata": {
+            "use_on_equipment": {
+                "required": [
+                    {
+                        "type": "category",
+                        "value": "armour"
+                    }
+                ]
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The armour now ignores extra BLOOD MARKERS from Keywords GAS, FIRE, and SHRAPNEL.",
+                "glossary": [
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"},
+                    {"val": "GAS", "id": "kw_gas"},
+                    {"val": "FIRE", "id": "kw_fire"},
+                    {"val": "SHRAPNEL", "id": "kw_shrapnel"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "el_golgothatektites_turnin",
+        "name": "Turn In",
+        "source": "core",
+        "tags": {
+            "location_option": "el_golgothatektites"
+        },
+        "contextdata": {
+            "validate_location": {
+                "allowed": [
+                    {
+                        "type": "faction",
+                        "value": ["fc_newantioch"]
+                    }
+                ]
+            },
+            "spend_glory": {
+                "count": 15,
+                "add_faction": [
+                    "fc_trenchpilgrim"
+                ]
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "New Antioch Warbands can turn the tektites into the Church and exchange them for 15 Glory Points worth of items from either New Antioch or Trench Pilgrims list."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "el_fruitfromthetreeofgoodandevilknowledge",
+        "name": "Fruit from the Tree of Good and Evil Knowledge",
+        "source": "core",
+        "tags": {
+            "exploration_table": "et_legendarylocations"
+        },
+        "contextdata": {
+            "location_rule_option": {},
+            "consumable": {},
+            "use_on_model": {
+                "add_skill": {
+                    "count": 1,
+                    "follow_warband": true
+                },
+                "add_upgrade": {
+                    "id": ["up_fruit"]
+                }
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Amongst bones of giant humans unearthed by the ravages of war you discover a golden-hued fruit wrapped in spun cloth.Any model eating this fruit will immediately gain any Skill of your choice normally available to your Warband/this model (including any Exploration Skill). In addition the model will gain the Keyword DEMONIC.",
+                "glossary": [
+                    {"val": "DEMONIC", "id": "kw_demonic"}
+                ]
+            }
+        ],
+        "location_value": 36,
+        "options": [  ]
     }
 ]

@@ -1222,6 +1222,33 @@
         "modifiers": []
     },
     {
+        "id": "eq_angelicinstrument",
+        "name": "Angelic Instrument",
+        "source": "core",
+        "tags": {"trait": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+            "hands_melee": 1,
+            "hands_ranged": 1
+        },
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Any friendly models within 8\" of the musician who is not Down can add +1 DICE to their Dash ACTIONS. Musical Instruments take one hand to use at all times as if it were a weapon.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "ACTIONS", "id": "kw_action"}
+                ]
+            }
+        ],
+        "lore": [],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
         "id": "eq_cloakofalamut",
         "name": "Cloak of Alamut",
         "source": "core",
@@ -6579,5 +6606,115 @@
         "options": [],
         "keywords": ["kw_heavy"],
         "modifiers": ["+1 to Injuries"]
+    },
+    {
+        "id": "eq_saintsreliquary",
+        "name": "Saint's Reliquary",
+        "source": "core",
+        "tags": {"trait": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {
+            "keyword_mod": {"mods": [{"type": "add", "value": "kw_golem"}]},
+            "keyword_mod_remove": {"mods": [{"type": "remove", "value": "kw_tough"}]} },
+        "description": [            
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "A model equipped with the Saintly Relic gains the Keyword TOUGH, but loses the Keyword INFILTRATOR (if it has it) and can never have Cover.",
+                "glossary": [
+                    {"val": "TOUGH", "id": "kw_tough"},
+                    {"val": "INFILTRATOR", "id": "kw_infiltrator"}
+                ]
+            }
+        ],
+        "lore": [
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_faithfulskull",
+        "name": "Faithful Saint's Skull",
+        "source": "core",
+        "tags": {"trait": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Unless the scenario prohibits the use of special deployment of Infiltrators, you may deploy the model on any table edge as long as it is at least 8\" away from any enemy model after Infiltrators are deployed."
+            }
+        ],
+        "lore": [
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_hellskull",
+        "name": "Hell Saint's Skull",
+        "source": "core",
+        "tags": {"trait": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+            "hands_melee": 1,
+            "hands_ranged": 1
+        },
+        "contextdata": {"warband_wide": {},
+        "gain_glory": {
+            "value": 1
+        }},
+        "description": [            
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "It adds +2 DICE to your Morale Tests and you automatically gain 1 Glory Point after each battle.",
+                "glossary": [
+                    {"val": "+2 DICE", "id": "kw_plusdice"}
+                ]
+            }
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Most warbands and units carry banners, flags, standards, pennants or other symbols to rally the troops."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_lockofsamsonshair",
+        "name": "Lock of Samson's Hair",
+        "source": "core",
+        "tags": {"trait": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {
+            "keyword_add": {"value": ["kw_strong"]}},
+        "description": [            
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The model with this item gains the Keyword STRONG and +1 to all Injury rolls in Melee.",
+                "glossary": [
+                    {"val": "STRONG", "id": "kw_strong"}
+                ]
+            }
+        ],
+        "lore": [
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
     }
 ]

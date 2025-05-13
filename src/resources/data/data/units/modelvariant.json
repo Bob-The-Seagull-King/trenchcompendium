@@ -759,5 +759,55 @@
         },
         "cut_abilities" : ["ab_darkblessing","ab_chattel"],
         "new_abilities" : []
+    },
+    {
+        "id": "md_yeoman_survivor",
+        "name": "Yeoman",
+        "source": "core",
+        "tags": {},
+        "contextdata": { },
+        "base_id": "md_yeoman",
+        "variant_name": "Exploration",
+        "team": "faithful",
+        "stats" : {},
+        "cut_keywords" : [],
+        "keywords" : [],
+        "cut_abilities" : [],
+        "new_abilities" : []
+    },
+    {
+        "id": "md_takwincreation_golem",
+        "name": "Golem",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "upgrade_limit": {
+                "limits": [
+                    {
+                        "type": "ducats",
+                        "value": 60
+                    }
+                ]
+            },
+            "upgrade_budget_free": {
+                "ducats": 60
+            }
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The golem cannot be equipped with any weapons, armour or equipment. It can fight in melee without any penalty."
+            }
+        ],
+        "lore": [],
+        "base_id": "md_takwincreation",
+        "variant_name": "Rare_Exploration",
+        "team": "none",
+        "cut_keywords" : [],
+        "keywords" : ["kw_golem"],
+        "stats" : {
+        },
+        "cut_abilities" : [],
+        "new_abilities" : []
     }
 ]

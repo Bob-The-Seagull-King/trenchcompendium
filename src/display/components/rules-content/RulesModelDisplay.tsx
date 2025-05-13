@@ -81,7 +81,6 @@ const RulesModelDisplay = (props: any) => {
                 groups[special_cat] = [UpgradeListFull[i]]
             }
         }
-
         return groups;
     }
 
@@ -92,7 +91,9 @@ const RulesModelDisplay = (props: any) => {
             /* UPGRADES */
             if (parentfaction != undefined) {
                 const result_upgrades = await factionmodelObject.getContextuallyAvailableUpgrades(parentfaction);
-                if (bonusselections != undefined) {
+                console.log(modelcollectionObject.Name)
+                console.log(bonusselections);
+                if (bonusselections != undefined && (Object.entries(bonusselections).length > 0)) {
                     for (const [optionSetId, selectedObject] of Object.entries(bonusselections)) {
                         if ((selectedObject as IChoice).value instanceof ContextObject) {
                         const Events : EventRunner = new EventRunner();
@@ -116,7 +117,7 @@ const RulesModelDisplay = (props: any) => {
             /* ABILITIES */
             if (parentfaction != undefined) {
                 const result_abilities = await factionmodelObject.getContextuallyAvailableAbilities(parentfaction);
-                if (bonusselections != undefined) {
+                if (bonusselections != undefined && (Object.entries(bonusselections).length > 0)) {
                     for (const [optionSetId, selectedObject] of Object.entries(bonusselections)) {
                         if ((selectedObject as IChoice).value instanceof ContextObject) {
                         const Events : EventRunner = new EventRunner();
@@ -200,8 +201,8 @@ const RulesModelDisplay = (props: any) => {
 
                     <FighterCardStats
                         movement={getModelStatMove(statchoices)}
-                        melee={getModelStatRanged(statchoices)}
-                        ranged={getModelStatMelee(statchoices)}
+                        melee={getModelStatMelee(statchoices)}
+                        ranged={getModelStatRanged(statchoices)}
                         armour={getModelStatArmour(statchoices)}
                     />
 

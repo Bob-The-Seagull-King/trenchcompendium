@@ -51,7 +51,6 @@ const RulesExplorationLocation = (props: any) => {
         SetModelOptions();
     }, []);
 
-
     return (
         <ErrorBoundary fallback={<div>Something went wrong with ExplorationLocationDisplay.tsx</div>}>
             <div className='RulesExplorationLocation exploration-location' key={_keyvar}>
@@ -61,7 +60,7 @@ const RulesExplorationLocation = (props: any) => {
                     {returnDescription(explorationLocationObject, explorationLocationObject.Description)}
                 </p>
 
-                {explorationLocationObject.MyOptions.length &&
+                {explorationLocationObject.MyOptions.length > 0 &&
                     <ul className={'exploration-location-options'}>
                         {explorationLocationObject.MyOptions.map((item) => (
                             <React.Fragment key={explorationLocationObject.Name + "-" + item.RefID}>
@@ -71,8 +70,8 @@ const RulesExplorationLocation = (props: any) => {
 
                                 {item.Selections.map((selec) => (
                                     <li key={item.Selections.indexOf(selec).toString()} className={'exploration-location-option'}>
-                                        <strong>{selec.display_str + ": "}</strong>
-                                        Lorem ipsum dolor sit amet
+                                        <strong>{selec.value.Name + ": "}</strong>
+                                        {returnDescription(selec.value, selec.value.Description)}
                                         {/* Option Text goes here */}
                                     </li>
                                 ))}
@@ -81,11 +80,13 @@ const RulesExplorationLocation = (props: any) => {
                     </ul>
                 }
 
+                {useLimits.length > 0 &&
                 <div className={'exploration-location-limits'}>
                     {
                         useLimits.join(", ")
                     }
                 </div>
+                }
             </div>
         </ErrorBoundary>
     )
