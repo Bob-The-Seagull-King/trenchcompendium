@@ -1,25 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { ErrorBoundary } from "react-error-boundary";
 
-import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
-
-// Components
-import ContentPackDisplay from '../../../../components/features/contentpack/ContentPackDisplay'
-
 // Font Awesome
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faClone, faDownload, faEye, faSquareCaretUp, faSquareCaretDown, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { Button } from 'react-bootstrap';
 import { WarbandManager } from '../../../../../classes/saveitems/Warband/WarbandManager';
 import { UserWarband } from '../../../../../classes/saveitems/Warband/UserWarband';
-import { EventRunner } from '../../../../../classes/contextevent/contexteventhandler';
-import { ExplorationLocation } from '../../../../../classes/feature/exploration/ExplorationLocation';
-import { ExplorationFactory } from '../../../../../factories/features/ExplorationFactory';
-import { WarbandProperty } from '../../../../../classes/saveitems/Warband/WarbandProperty';
 
 const WarbandTestBlock = (prop: any) => {
 

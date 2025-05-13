@@ -5,17 +5,11 @@ import GenericDisplay from "../components/generics/GenericDisplay"
 import GlossaryDisplay from "../components/features/glossary/GlossaryDisplay"
 import KeywordDisplay from "../components/features/glossary/KeywordDisplay";
 import ModelCollectionDisplay from "../components/features/model/ModelCollectionDisplay";
-import EquipmentDisplay from "../components/features/equipment/EquipmentDisplay";
 import FactionCollectionDisplay from "../components/features/faction/FactionCollectionDisplay";
 import ScenarioDisplay from "../components/features/scenario/ScenarioDisplay";
 import BookRuleDisplay from "../components/features/glossary/BookRuleDisplay";
-import ExplorationTableDisplay from "../components/features/exploration/ExplorationTableDisplay";
-import InjuryDisplay from "../components/features/ability/InjuryDisplay";
-import GenericTableItemDisplay from "../components/generics/GenericTableItemDisplay";
-import SkillGroupDisplay from "../components/features/skill/SkillGroupDisplay";
 import PatronDisplay from "../components/features/skill/PatronDisplay";
 import GenericCollapsableBlockDisplay from "../components/generics/GenericCollapsableBlockDisplay";
-import GenericTabledBlockDisplay from "../components/generics/GenereicTabledBlockDisplay";
 import RulesInjuriesTable from "../components/rules-content/RulesInjuriesTable";
 import RulesExplotationTable from "../components/rules-content/RulesExplotationTable";
 import RulesSkillTable from "../components/rules-content/RulesSkillTable";
