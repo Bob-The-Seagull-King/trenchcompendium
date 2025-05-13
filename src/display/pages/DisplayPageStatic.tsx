@@ -50,7 +50,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
                         <div>
-                            {"THIS IS A TEST TO BE REPLACED"}
+                            {"Game Rule Default Page - THIS IS A TEST TO BE REPLACED"}
                         </div>
                 </ErrorBoundary>
             )
@@ -82,7 +82,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
                         <div>
-                            {"THIS IS A TEST TO BE REPLACED"}
+                            {"Errata Default Page - THIS IS A TEST TO BE REPLACED"}
                         </div>
                 </ErrorBoundary>
             )
@@ -319,7 +319,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
                         <div>
-                            {"THIS IS A TEST TO BE REPLACED"}
+                            {"Faction Default Page - THIS IS A TEST TO BE REPLACED"}
                         </div>
                 </ErrorBoundary>
             )
@@ -353,7 +353,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
                         <div>
-                            {"THIS IS A TEST TO BE REPLACED"}
+                            {"Scenarios Default Page - THIS IS A TEST TO BE REPLACED"}
                         </div>
                 </ErrorBoundary>
             )
@@ -388,7 +388,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
                         <div>
-                            {"THIS IS A TEST TO BE REPLACED"}
+                            {"Campaign Rule Default Page - THIS IS A TEST TO BE REPLACED"}
                         </div>
                 </ErrorBoundary>
             )
@@ -419,7 +419,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
                         <div>
-                            {"THIS IS A TEST TO BE REPLACED"}
+                            {"Exploration Default Page - THIS IS A TEST TO BE REPLACED"}
                         </div>
                 </ErrorBoundary>
             )
@@ -499,7 +499,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
                         <div>
-                            {"THIS IS A TEST TO BE REPLACED"}
+                            {"Patrons Default Page - THIS IS A TEST TO BE REPLACED"}
                         </div>
                 </ErrorBoundary>
             )
