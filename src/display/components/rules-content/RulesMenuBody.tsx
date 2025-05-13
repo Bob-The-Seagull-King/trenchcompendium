@@ -32,6 +32,7 @@ const RulesMenuBody: React.FC<RulesMenuBodyProps> = ({ controller, onBack }) => 
             {
                 title: "Playtest v1.6",
                 slug: "",
+                superslug: "compendium/gamerule",
                 children: [
                     {
                         title: "Rules",
