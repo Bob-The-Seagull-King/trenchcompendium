@@ -10,6 +10,7 @@ interface SynodImageData {
 const imageDataCache: Record<string, SynodImageData> = {};
 
 export function useSynodImageData(imageId: number, size = 'medium'): SynodImageData {
+
     const [data, setData] = useState<SynodImageData>(() => {
         const key = `${imageId}-${size}`;
         return imageDataCache[key] || { url: '', sourceTitle: '', sourceUrl: '' };
@@ -34,8 +35,8 @@ export function useSynodImageData(imageId: number, size = 'medium'): SynodImageD
 
                 const result = {
                     url: sizedImage || json.source_url,
-                    sourceTitle: json.attachment_source_title || '',
-                    sourceUrl: json.attachment_source || '',
+                    sourceTitle: json.meta.attachment_source_title || '',
+                    sourceUrl: json.meta.attachment_source || '',
                 };
 
                 imageDataCache[key] = result;
