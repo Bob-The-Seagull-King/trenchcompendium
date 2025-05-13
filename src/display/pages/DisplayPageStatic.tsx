@@ -15,6 +15,7 @@ import RulesExplotationTable from "../components/rules-content/RulesExplotationT
 import RulesSkillTable from "../components/rules-content/RulesSkillTable";
 import RulesEquipmentEntry from "../components/rules-content/RulesEquipmentEntry";
 import { CollectionsListPage } from "../../classes/viewmodel/pages/CollectionListPage";
+import RulesKeywordsTable from "../components/rules-content/RulesKeywordsTable";
 
 export interface DisplayCollectionType {
     searchId      : string,
@@ -154,27 +155,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
 
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
                     
-                    <div className={'keywords-table-wrap'}>
-                        <table className={'keywords-table'}>
-                            <tr>
-                                <th colSpan={2}>
-                                    {'Keywords'}
-                                </th>
-                            </tr>
-                            {item.map((subitem : any) => (
-                                <tr className={'filter-item-row'} key={subitem.HeldItem.ID}>
-                                    <>
-                                        <td>
-                                            {subitem.HeldItem.Name}
-                                        </td>
-                                        <td>
-                                            <KeywordDisplay data={subitem.HeldItem} />
-                                        </td>
-                                    </>
-                                </tr>
-                            ))}
-                        </table>
-                    </div>
+                    <RulesKeywordsTable data={item}/>
                 </ErrorBoundary>
             )
         },
