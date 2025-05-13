@@ -55,6 +55,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
                     <h1 className="">
                         {item.Name}
                     </h1>
+
                     <BookRuleDisplay data={item} />
                 </ErrorBoundary>
             )
@@ -152,19 +153,12 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
             return (
 
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-
-                    <div className="DisplayPageStatic-returnDisplay">
-                        <GenericCollapsableBlockDisplay
-                            d_name={item.Name}
-                            d_colour={"grey"}
-                            d_state={false}
-                            bordertype={0}
-                            d_border={false}
-                            d_margin={"sml"}
-                            d_method={() => <>
-                                <KeywordDisplay data={item} />
-                            </>} />
-                    </div>
+                    <td>
+                        {item.Name}
+                    </td>
+                    <td>
+                        <KeywordDisplay data={item} />
+                    </td>
                 </ErrorBoundary>
             )
         },
@@ -256,7 +250,6 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
             return (
                 
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                
                         <RulesEquipmentEntry
                             equipment={item}
                         />

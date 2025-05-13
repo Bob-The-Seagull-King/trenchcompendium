@@ -14,6 +14,7 @@ import { useLocation } from 'react-router-dom';
 import {Equipment} from "../../classes/feature/equipment/Equipment";
 import RulesEquipmentEntry from "../components/rules-content/RulesEquipmentEntry";
 import {ModelCollection} from "../../classes/feature/model/ModelCollection";
+import {Keyword} from "../../classes/feature/glossary/Keyword";
 
 const FilterableCompendiumDisplay = (prop: any) => {
     // Initialize controllers and managers
@@ -95,27 +96,59 @@ const FilterableCompendiumDisplay = (prop: any) => {
     }
 
     function ReturnItems() {
+        const isKeywordList = _curItems.every(item => item.HeldItem instanceof Keyword);
+
         return (
             <div className={'FilterableCompendiumDisplay'}>
+
                 {((_curItems == undefined) || (_curItems == null) || (_curItems.length == 0)) &&
                     <div className="findme-2">
-                        <h1 className="">{slugname}</h1>
-                        <div className=""/>
+                        {slugname}
                     </div>
                 }
 
                 {((_curItems != undefined) && (_curItems != null) && (_curItems.length > 0)) &&
-                    <div className="filter-items-wrap">
-                        {_curItems.map((item) => (
-                            <div className={'filter-item'} key={item.HeldItem.ID}>
-                                <>
-                                    {DisplayPage.returnDisplay(item.HeldItem)}
-                                </>
-                            </div>))}
-                    </div>}
+                    <>
+                        {/* If this is the Keywords List -> Use a table layout */}
+                        {isKeywordList && (
+                            <table className={'keywords-table'}>
+                                <tr>
+                                    <th colSpan={2}>
+                                        {'Keywords'}
+                                    </th>
+                                </tr>
+                                {_curItems.map((item) => (
+                                    <tr className={'filter-item-row'} key={item.HeldItem.ID}>
+                                        <>
+                                            {DisplayPage.returnDisplay(item.HeldItem)}
+                                        </>
+                                    </tr>
+                                ))}
+                            </table>
+
+                        )}
+
+                        {/* If this is not the Keywords List -> Use a block layout */}
+                        {!isKeywordList && (
+                            <div className="filter-items-wrap">
+                                {_curItems.map((item) => (
+                                    <div className={'filter-item'} key={item.HeldItem.ID}>
+                                        <>
+                                            {DisplayPage.returnDisplay(item.HeldItem)}
+                                        </>
+                                    </div>))}
+                            </div>
+                        )}
+                    </>
+                }
+
             </div>
         )
     }
+
+    console.log('_curItems');
+    console.log(_curItems);
+
 
     // Return result -----------------------------
     return (

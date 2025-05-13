@@ -135,7 +135,7 @@ const FilterRangeItem = (prop: any) => {
                 }}>
                 <Dropdown.Toggle ref={toggleRef} bsPrefix="empty" id="dropdown-basic" className="container bordergrey borderthin buttonclean">
                     <div className=" container">
-                        <div className="backgroundBgBase borderthin bordergrey">
+                        <div className="backgroundBgBase borderthin bordergrey findme-filter1">
                             <div className="align-left ">
                                 {makestringpresentable(ItemFilter.Group)}
                             </div>
