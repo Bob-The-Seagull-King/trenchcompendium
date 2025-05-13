@@ -21,3 +21,17 @@
         display: flex
         justify-content: space-between
         margin-bottom: 30px
+
+
+    .wbb-faction-masonry
+        column-count: 2
+        column-gap: 15px
+
+        margin-bottom: 30px
+
+        > div
+            break-inside: avoid
+            margin-bottom: 1rem
+
+        @media(max-width: 768px)
+            column-count: 1

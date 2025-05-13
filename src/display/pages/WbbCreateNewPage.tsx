@@ -58,7 +58,8 @@ const WbbCreateNewPage = (prop: any) => {
                             <h1>Select Faction</h1>
                             <h2 className={'sub-headline'}>New Warband</h2>
                         </div>
-                        <div key={keyvar} className={'row'}>
+
+                        <div className={'wbb-faction-masonry'}>
                             {factionlist.map(item => (
                                 <WbbFactionSelectItem
                                     key={item.HeldItem.ID}
