@@ -17,7 +17,7 @@ const RulesKeywordsTable = (props: any) => {
 
                 <div className={'rules-card-content rules-card-table-content rules-injury-table-content'}>
                     <table className={'rules-card-table rules-injury-table-content-table'}>
-
+        	            <tbody>
                         {items.map((item : any) => (
                             <tr key={item.HeldItem.ID}>
                                 <td className={'label-cell text-center'}>
@@ -28,17 +28,6 @@ const RulesKeywordsTable = (props: any) => {
                                 </td>
                             </tr>
                         ))}
-
-                        {/*{injuryTableObject.injuryLocations.map((item) => (*/}
-                        {/*    <tr key={item.ID}>*/}
-                        {/*        <td className={'label-cell text-center'}>*/}
-                        {/*            {item.TableValue}*/}
-                        {/*        </td>*/}
-                        {/*        <td>*/}
-                        {/*            <RulesinjuryLocation data={item}/>*/}
-                        {/*        </td>*/}
-                        {/*    </tr>*/}
-                        {/*))}*/}
                         </tbody>
                     </table>
                 </div>
