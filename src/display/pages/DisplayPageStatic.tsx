@@ -154,7 +154,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
             return (
 
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    
+                    <br/>
                     <RulesKeywordsTable data={item}/>
                 </ErrorBoundary>
             )

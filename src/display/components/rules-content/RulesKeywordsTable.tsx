@@ -17,14 +17,14 @@ const RulesKeywordsTable = (props: any) => {
 
                 <div className={'rules-card-content rules-card-table-content rules-injury-table-content'}>
                     <table className={'rules-card-table rules-injury-table-content-table'}>
-        	            <tbody>
+                        <tbody>
                         {items.map((item : any) => (
                             <tr key={item.HeldItem.ID}>
                                 <td className={'label-cell text-center'}>
-                                    {item.HeldItem.TableVal}
+                                    {item.HeldItem.Name}
                                 </td>
                                 <td>
-                                <KeywordDisplay data={subitem.HeldItem} />
+                                <KeywordDisplay data={item.HeldItem} />
                                 </td>
                             </tr>
                         ))}
