@@ -20,6 +20,7 @@ class Upgrade extends BaseAddon {
     }
 
 
+
 }
 
 export {IUpgrade, Upgrade}

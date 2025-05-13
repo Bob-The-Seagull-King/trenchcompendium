@@ -53,38 +53,36 @@ const SingleOptionSetDisplay = (props: any) => {
     return (
         
         <ErrorBoundary fallback={<div>Something went wrong with OptionSetStaticDisplay.tsx</div>}>
-            <>
-            {OptionSet.Selections.length > 0 &&
-                <>
-                    <h3>
-                        { OptionSet.Name }
-                    </h3>
+            <div className={'SingleOptionSetDisplay'}>
+                {OptionSet.Selections.length > 0 &&
+                    <>
+                        <h3>
+                            { OptionSet.Name }
+                        </h3>
 
-                    <p>
-                        {
-                            returnDescription(OptionSet, OptionSet.Description)
-                        }
-                    </p>
+                        <p>
+                            {
+                                returnDescription(OptionSet, OptionSet.Description)
+                            }
+                        </p>
 
-                    <Form.Group controlId={OptionSet.RefID+'-select'} className={'mb-3'}>
-                        <Form.Label>{'Choose Option'}</Form.Label>
-                        <Form.Select
-                            onChange={(e: { target: { value: any; }; }) => { updateItem(e.target.value)    } }
-                        >
-                            {OptionSet.Selections.map((selec) => (
-                                <option value={selec.id} key={"modeloption"+(OptionSet.Selections.indexOf(selec).toString())} >{makestringpresentable(selec.display_str)}</option>
-                            ))}
-                        </Form.Select>
-                    </Form.Group>
+                        <Form.Group controlId={OptionSet.RefID+'-select'} className={'mb-3'}>
+                            <Form.Label>{'Choose Option'}</Form.Label>
+                            <Form.Select
+                                onChange={(e: { target: { value: any; }; }) => { updateItem(e.target.value)    } }
+                            >
+                                {OptionSet.Selections.map((selec) => (
+                                    <option value={selec.id} key={"modeloption"+(OptionSet.Selections.indexOf(selec).toString())} >{makestringpresentable(selec.display_str)}</option>
+                                ))}
+                            </Form.Select>
+                        </Form.Group>
 
-                    <p>
-                        <div className="col">
+                        <div className="SingleOptionSetDisplay-Details">
                             {displayState}
                         </div>
-                    </p>
-                </>
-            }
-            </>
+                    </>
+                }
+            </div>
         </ErrorBoundary>
     )
 }

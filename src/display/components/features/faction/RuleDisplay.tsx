@@ -15,6 +15,7 @@ import { ModelUpgradeRelationship } from '../../../../classes/relationship/model
 import GenericDisplay from '../../generics/GenericDisplay';
 import ModelUpgradeDisplay from '../ability/ModelUpgradeDisplay';
 import GenericCollapsableBlockDisplay from '../../../components/generics/GenericCollapsableBlockDisplay';
+import RulesCollapsibleContent from "../../rules-content/RulesCollapsibleContent";
 
 const RuleDisplay = (props: any) => {
     const ruleObject: Rule = props.data
@@ -50,9 +51,9 @@ const RuleDisplay = (props: any) => {
 
     return (
         <ErrorBoundary fallback={<div>Something went wrong with AbilityDisplay.tsx</div>}>
-            <div key={_keyvar} className='single-rule-element'>
+            <div key={_keyvar} className='RuleDisplay'>
 
-                <div className={'single-rule-element-description'}>
+                <div className={'RuleDisplay-description'}>
                     {returnDescription(ruleObject, ruleObject.Description)}
                 </div>
 
@@ -63,37 +64,38 @@ const RuleDisplay = (props: any) => {
                     </div>
                 }
 
-                {/* @TODO: @Bob - what is this?*/}
+                {/* Upgrade Options */}
                 {upgradeoptions.length > 0 &&
-                    <div className="single-rule-element-upgradeoptions">
-                        <GenericCollapsableBlockDisplay
-                            d_name={"Upgrades"}
-                            d_colour={"grey"}
-                            d_state={false}
-                            d_margin={"sml"}
-                            bordertype={2}
-                            d_method={() => <div className="borderthintop bordergrey">
+                    <div className="RuleDisplay-upgradeoptions">
+                        <RulesCollapsibleContent
+                            headline={'Upgrades'}
+                            content={
+                            <>
                                 {upgradeoptions.map((item : ModelUpgradeRelationship) => (
-                                        <div className="" key={"model_ability_"+ruleObject.ID+"_ability_id_"+item.ID}>
-                                            <GenericCollapsableBlockDisplay
-                                                d_name={item.UpgradeObject.Name}
-                                                d_colour={"grey"}
-                                                d_state={false}
-                                                d_margin={"sml"}
-                                                d_col={"default"}
-                                                d_border={false}
-                                                bordertype={(upgradeoptions.indexOf(item) < (upgradeoptions.length - 1))? 1 : 2}
-                                                d_method={() => <div className={"bordergrey " + ((upgradeoptions.indexOf(item) < (upgradeoptions.length - 1))? "borderthinnosides" : "borderthicktop")}>
-                                                    <div className="">
-                                                        <ModelUpgradeDisplay data={item} />
-                                                    </div>
-                                                </div>} />
-                                        </div>
-                                    )) /* Abilities */}
+                                    <div className={'RuleDisplay-upgradeoption'}
+                                         key={"model_ability_" + ruleObject.ID + "_ability_id_" + item.ID}>
+                                        <div className={'RuleDisplay-upgradeoption-title'}>
+                                            {item.UpgradeObject.GetName()}
 
-                            </div>} />
+                                            {item.GetCostString() != '' &&
+                                                <span className={'cost'}>
+                                                    {' - ' + item.GetCostString()}
+                                                </span>
+                                            }
+                                        </div>
+
+                                        <div className={'RuleDisplay-upgradeoption-description'}>
+                                            <ModelUpgradeDisplay data={item}/>
+                                        </div>
+                                    </div>
+                                )) /* Abilities */}
+                            </>
+
+                            }
+                        />
                     </div>
                 }
+
             </div>
         </ErrorBoundary>
     )

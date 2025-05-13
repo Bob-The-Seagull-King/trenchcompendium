@@ -1,7 +1,7 @@
 /* modelupgraderelationship */
 
 import { IStaticOptionContextObject, StaticOptionContextObject } from '../../options/StaticOptionContextObject';
-import { DescriptionFactory } from '../../../utility/functions';
+import {DescriptionFactory, getCostType} from '../../../utility/functions';
 import { ContextObject, IContextObject } from '../../contextevent/contextobject';
 import { Model } from '../../feature/model/Model';
 import { Upgrade } from '../../feature/ability/Upgrade';
@@ -81,6 +81,31 @@ class ModelUpgradeRelationship extends StaticOptionContextObject {
         }
     }
 
+    /**
+     * Return the Cost string for this Upgrade
+     */
+    public GetCostString () {
+
+        if( this.Cost > 0) {
+            return this.Cost + ' ' + getCostType(this.CostType);
+        } else {
+            return '';
+        }
+    }
+
+    /**
+     * Get the Limit String For this Upgrade
+     * @constructor
+     */
+    public GetLimitString () {
+
+        if( this.WarbandLimit != 0 ) {
+            return 'Limit: ' + this.WarbandLimit.toString();
+        } else {
+            return '';
+        }
+
+    }
 }
 
 export {IModelUpgradeRelationship, ModelUpgradeRelationship}

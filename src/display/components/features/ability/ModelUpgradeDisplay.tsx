@@ -38,18 +38,14 @@ const ModelUpgradeDisplay = (props: any) => {
     
     return (
         <ErrorBoundary fallback={<div>Something went wrong with ModelUpgradeDisplay.tsx</div>}>
-            <div>
-                <UpgradeDisplay data={abilityObject.UpgradeObject}/>
-                <div className=''>
-                    <div className="">
-                        <span className=" ">
-                            {
-                                abilityObject.Cost + " " + 
-                                getCostType(abilityObject.CostType) + 
-                                (abilityObject.WarbandLimit != 0? (" " + "(Limit " + maximum + ")") : "")}
-                        </span>
+            <div className={'ModelUpgradeDisplay'}>
+                {abilityObject.GetLimitString() != '' &&
+                    <div className={'ModelUpgradeDisplay-limitations'}>
+                        {abilityObject.GetLimitString()}
                     </div>
-                </div>
+                }
+
+                <UpgradeDisplay data={abilityObject.UpgradeObject}/>
             </div>
         </ErrorBoundary>
     )

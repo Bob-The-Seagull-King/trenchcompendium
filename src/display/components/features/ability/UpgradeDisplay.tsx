@@ -13,14 +13,16 @@ const UpgradeDisplay = (props: any) => {
 
     return (
         <ErrorBoundary fallback={<div>Something went wrong with UpgradeDisplay.tsx</div>}>
-            <>
-                {returnDescription(abilityObject, abilityObject.Description)}
-            </>
-            <>
-                {
-                    <OptionSetStaticDisplay data={abilityObject.MyOptions} />
-                }
-            </>
+            <div className={'UpgradeDisplay'}>
+                <>
+                    {returnDescription(abilityObject, abilityObject.Description)}
+                </>
+                <>
+                    {
+                        <OptionSetStaticDisplay data={abilityObject.MyOptions} />
+                    }
+                </>
+            </div>
         </ErrorBoundary>
     )
 }
