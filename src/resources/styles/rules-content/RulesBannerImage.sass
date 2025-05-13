@@ -1,0 +1,56 @@
+// // // // //
+//
+// Banner Image for the compendium content
+//
+
+
+.RulesBannerImage
+    position: relative
+    display: block
+    margin-bottom: 15px
+
+    &:before
+        content: ""
+        display: block
+        width: 100%
+        padding-top: 25%
+
+    &:after
+        position: absolute
+        z-index: 4
+        top: 0
+        left: 0
+        width: 100%
+        height: 100%
+        content: ""
+        display: block
+        background-color: rgba(0,0,0,0.4)
+        transition: opacity .2s ease
+
+    img
+        position: absolute
+        z-index: 3
+        top: 0
+        left: 0
+        height: 100%
+        width: 100%
+
+        object-fit: cover
+        object-position: center
+
+    .link-text
+
+        position: absolute
+        z-index: 7
+        top: 50%
+        transform: translateY(-50%)
+        left: 0
+        display: block
+        width: 100%
+        font-size: 32px
+        text-align: center
+        color: #fff
+
+    &:hover
+        &:after
+            opacity: .4
