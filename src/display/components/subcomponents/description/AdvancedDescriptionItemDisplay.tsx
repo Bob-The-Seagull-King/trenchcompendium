@@ -330,7 +330,10 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
         return (
             <span className={'AdvancedDescriptionItemDisplay-getEquipmentDisplay'} key={keyvar}>
                 {component !== null &&
-                    <RulesEquipmentMain data={component}/>
+                    
+                    <RulesEquipmentEntry
+                    equipment={component}
+                />
                 }
             </span>
         );
