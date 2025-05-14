@@ -79,11 +79,13 @@ const WBBMenuBody: React.FC<RulesMenuBodyProps> = ({ controller, onBack }) => {
                         <FontAwesomeIcon icon={faChevronLeft} />
                     </div>
 
-                    <div className={'compendium-link'} >
-                        <CustomNavLink link={`/warband/`} runfunc={() => {navigate('/compendium/')}}>
-                            {'Warband Manager'}
-                        </CustomNavLink>
-                    </div>
+                    <CustomNavLink
+                        classes={'compendium-link'}
+                        link={`/warband/`}
+                        runfunc={() => {navigate('/warband/')}}
+                    >
+                           {'Warband Manager'}
+                    </CustomNavLink>
                 </div>
 
                 <RulesMenuItem key={'warbands' + keyvar.toString()}
