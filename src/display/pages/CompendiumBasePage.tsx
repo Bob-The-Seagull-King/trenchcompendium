@@ -23,47 +23,6 @@ interface IControllerProp {
 const CompendiumBasePage: React.FC<IControllerProp> = (prop: any) => {
     
     
-
-        function GetContentsTableRules() {
-            const ContentsList : ContentsLink[] = [];
-    
-            ContentsList.push({ name: "Game Rules", route: "gamerule"})
-            ContentsList.push({ name: "Errata", route: "errata"})
-            ContentsList.push({ name: "Glossary", route: "glossary"})
-            ContentsList.push({ name: "Keywords", route: "keyword"})
-    
-            return ( <ContentsComponentLink title={"Rules"} showheader={true} listofcontents={ContentsList}/> )
-        }
-
-        function GetContentsTableWarbands() {
-            const ContentsList : ContentsLink[] = [];
-
-            ContentsList.push({ name: "Armoury & Equipment", route: "armoury"})
-            ContentsList.push({ name: "Factions", route: "faction"})
-            ContentsList.push({ name: "Models", route: "model"})
-    
-            return ( <ContentsComponentLink title={"Warbands"} showheader={true} listofcontents={ContentsList}/> )
-        }
-
-        function GetContentsTableScenarios() {
-            const ContentsList : ContentsLink[] = [];
-    
-            ContentsList.push({ name: "Scenarios", route: "scenario"})
-    
-            return ( <ContentsComponentLink title={"Scenario"} showheader={true} listofcontents={ContentsList}/> )
-        }
-
-        function GetContentsTableCampaign() {
-            const ContentsList : ContentsLink[] = [];
-            ContentsList.push({ name: "Campaigns", route: "campaignrule"})
-            ContentsList.push({ name: "Exploration", route: "explorationtable"})
-            ContentsList.push({ name: "Injuries", route: "injury"})
-            ContentsList.push({ name: "Patrons", route: "patron"})
-            ContentsList.push({ name: "Skills", route: "skillgroup"})
-    
-            return ( <ContentsComponentLink title={"Campaign"} showheader={true} listofcontents={ContentsList}/> )
-        }
-
     // Return result -----------------------------
     return (
         <ErrorBoundary fallback={<div>Something went wrong with BaseDisplayCompendium.tsx</div>}>

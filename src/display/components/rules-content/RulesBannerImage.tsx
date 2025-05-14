@@ -1,6 +1,7 @@
 // RulesBannerImage.tsx
 import React from 'react';
 import SynodImage from "../../../utility/SynodImage";
+import { useNavigate } from 'react-router-dom';
 
 interface RulesBannerImageProps {
     imageId: number;
@@ -11,8 +12,13 @@ interface RulesBannerImageProps {
 const RulesBannerImage: React.FC<RulesBannerImageProps> = ({ imageId, linkUrl, linkText }) => {
     if (!imageId || !linkUrl || !linkText) return null;
 
+    const navigate = useNavigate();
     return (
-        <a className={'RulesBannerImage'} href={linkUrl} >
+        <CustomNavLink link={linkUrl}
+                        runfunc={() => {
+                            navigate(linkUrl)
+                        }}
+                        classes={'RulesBannerImage'}  >
             <SynodImage
                 imageId={imageId}
                 size="large"
@@ -22,7 +28,7 @@ const RulesBannerImage: React.FC<RulesBannerImageProps> = ({ imageId, linkUrl, l
             <span className={'link-text'}>
                 {linkText}
             </span>
-        </a>
+        </CustomNavLink>
     );
 };
 
