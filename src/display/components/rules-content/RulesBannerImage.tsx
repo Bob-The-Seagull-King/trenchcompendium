@@ -2,6 +2,7 @@
 import React from 'react';
 import SynodImage from "../../../utility/SynodImage";
 import { useNavigate } from 'react-router-dom';
+import CustomNavLink from '../subcomponents/interactables/CustomNavLink';
 
 interface RulesBannerImageProps {
     imageId: number;
