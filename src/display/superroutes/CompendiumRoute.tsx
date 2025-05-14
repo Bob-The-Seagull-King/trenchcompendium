@@ -36,10 +36,6 @@ const CompendiumRoute: React.FC<IControllerProp> = (prop) => {
         setKeyVal(_keyval+1)
     }, [state]);
 
-    const [show, setShow] = useState(true);
-
-    const handleClose = () => setShow(true);
-    const handleShow = () => setShow(true);
 
     // Return result -----------------------------
     return (
