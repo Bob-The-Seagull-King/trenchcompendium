@@ -68,7 +68,7 @@ const FactionCollectionDisplay = (props: any) => {
             <div className={'FactionCollectionDisplay'}>
                 <div className={'faction-hero'}>
                     <h1>
-                        {GetBaseName(factioncollectionObject) + ((selectedModel.var_name == 'base')? "" : ": " + selectedModel.faction.Name)}
+                        { ((selectedModel.var_name == 'base')? GetBaseName(factioncollectionObject) : selectedModel.faction.Name)}
                     </h1>
 
                     <SynodFactionImage

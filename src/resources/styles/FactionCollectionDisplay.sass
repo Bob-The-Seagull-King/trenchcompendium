@@ -16,19 +16,51 @@
             margin-left: calc(var(--bs-gutter-x) * -0.5)
             margin-right: calc(var(--bs-gutter-x) * -0.5)
 
+
+        &:before
+            position: absolute
+            z-index: 3
+            left: 0
+            bottom: 0
+            content: ""
+            width: 100%
+            display: block
+            height: 150px
+            background: linear-gradient(0deg, $color-bg-1 0%, rgba(51, 51, 51, 0) 100%)
+
         h1
             position: absolute
             z-index: 5
-            bottom: 0px
+            bottom: 40px
+            margin-bottom: 0
             left: 30px
             right: 30px
             text-shadow: 0px 0px 8px #000
+
+            @media(max-width: 1199px)
+                font-size: 54px
+
+            @media(max-width: 991px)
+                font-size: 52px
+
+            @media(max-width: 767px)
+                font-size: 42px
+
+            @media(max-width: 575px)
+                font-size: 40px
+
+            @media(max-width: 500px)
+                font-size: 34px
 
             @media(max-width: 380px)
                 font-size: 28px
 
             @media(max-width: 340px)
                 font-size: 24px
+
+            @media(min-width: 1200px)
+                font-size: 70px
+
         img
             position: absolute
             z-index: 2
