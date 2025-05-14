@@ -23,15 +23,12 @@ const SingleOptionSetDisplay = (props: any) => {
             }
         }
     }
-
-    useEffect(() => {
-            SetModelOptions();
-        }, [selectedModel]);
-
     async function SetModelOptions() {
         if (OptionSet.MyStaticObject != null) {
 
-            OptionUpdate(OptionSet.RefID, selectedModel);
+            if (OptionUpdate) {
+                OptionUpdate(OptionSet.RefID, selectedModel);
+            }
 
             const EventProc: EventRunner = new EventRunner();
             
@@ -49,6 +46,11 @@ const SingleOptionSetDisplay = (props: any) => {
         }
 
     }
+
+    useEffect(() => {
+            SetModelOptions();
+        }, [selectedModel]);
+
 
     return (
         
@@ -77,7 +79,7 @@ const SingleOptionSetDisplay = (props: any) => {
                             </Form.Select>
                         </Form.Group>
 
-                        <div className="SingleOptionSetDisplay-Details">
+                        <div key={_keyvar} className="SingleOptionSetDisplay-Details">
                             {displayState}
                         </div>
                     </>

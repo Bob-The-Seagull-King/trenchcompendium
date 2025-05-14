@@ -39,9 +39,6 @@ const WarbandSubPropertyDisplay = (props: any) => {
         SetWarbandOptions();
     }, []);
 
-    useEffect(() => {
-            SetModelOptions();
-        }, [selectedModel]);
 
     async function SetModelOptions() {
         if (MySelection.Option.MyStaticObject != null) {
@@ -61,6 +58,10 @@ const WarbandSubPropertyDisplay = (props: any) => {
         }
         
     }
+    
+    useEffect(() => {
+            SetModelOptions();
+        }, [selectedModel]);
 
     function updateItem(value: string) {
         let IsFound = false;
