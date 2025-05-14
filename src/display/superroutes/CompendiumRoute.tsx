@@ -47,12 +47,12 @@ const CompendiumRoute: React.FC<IControllerProp> = (prop) => {
             <div className={'CompendiumRoute'}>
                 <div className="container main-content">
                     <div key={_keyval} className="row">
-                        <div className="col-md-3 col-sm-12">
+                        <div className="col-lg-3 col-sm-12">
                             <RulesMenuBody controller={prop.controller}/>
 
                         </div>
 
-                        <div className="col-md-9 col-sm-12">
+                        <div className="col-lg-9 col-sm-12">
                             <Routes>
                                 <Route path={ROUTES.COMP_SCENARIO_GENERATOR}
                                        element={<ToolsRandomScenario controller={ToolsManagerScenario.RandomScenarioManager}/>}/>
