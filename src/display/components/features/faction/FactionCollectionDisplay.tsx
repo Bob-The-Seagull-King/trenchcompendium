@@ -8,6 +8,7 @@ import { makestringpresentable } from '../../../../utility/functions';
 import { FactionCollection } from '../../../../classes/feature/faction/FactionCollection';
 import FactionDisplay from './FactionDisplay';
 import { useLocation } from 'react-router-dom';
+import SynodFactionImage from "../../../../utility/SynodFactionImage";
 
 const FactionCollectionDisplay = (props: any) => {
     const factioncollectionObject: FactionCollection = props.data
@@ -54,26 +55,43 @@ const FactionCollectionDisplay = (props: any) => {
         return ""
     }
 
+    function GetFactionID () {
+        if( selectedModel.var_name == 'base' ) {
+            return factioncollectionObject.ID;
+        } else {
+            return selectedModel.faction.ID;
+        }
+    }
+
     return (
         <ErrorBoundary fallback={<div>Something went wrong with FactionCollectionDisplay.tsx</div>}>
-            <h1>
-                {GetBaseName(factioncollectionObject) + ((selectedModel.var_name == 'base')? "" : ": " + selectedModel.faction.Name)}
-            </h1>
+            <div className={'FactionCollectionDisplay'}>
+                <div className={'faction-hero'}>
+                    <h1>
+                        {GetBaseName(factioncollectionObject) + ((selectedModel.var_name == 'base')? "" : ": " + selectedModel.faction.Name)}
+                    </h1>
 
-            {/* Content Filter for subfactions */}
-            {factioncollectionObject.SubModelsList.length > 1 &&  false &&
-                <Form.Group controlId={factioncollectionObject.ID + '-select'} className={'mb-3'}>
-                    <Form.Label>{'Choose Option'}</Form.Label>
-                    <Form.Select onChange={(e: { target: { value: any; }; }) => { updateItem(e.target.value)    } } >
-                        {factioncollectionObject.SubModelsList.map((item) => ( 
-                            <option key="modeloption" value={item.var_name}>{makestringpresentable((item.var_name == "base")? (item.faction.Name != undefined? item.faction.Name : "") : item.var_name)}</option> 
-                        ))}
-                    </Form.Select>
-                </Form.Group>
-            }
+                    <SynodFactionImage
+                        factionSlug={GetFactionID ()}
+                        size={'full'}
+                    />
+                </div>
 
-            {/* Text content for faction */}
-            <FactionDisplay data={selectedModel.faction}/>
+                {/* Content Filter for subfactions */}
+                {factioncollectionObject.SubModelsList.length > 1 &&  false &&
+                    <Form.Group controlId={factioncollectionObject.ID + '-select'} className={'mb-3'}>
+                        <Form.Label>{'Choose Option'}</Form.Label>
+                        <Form.Select onChange={(e: { target: { value: any; }; }) => { updateItem(e.target.value)    } } >
+                            {factioncollectionObject.SubModelsList.map((item) => (
+                                <option key="modeloption" value={item.var_name}>{makestringpresentable((item.var_name == "base")? (item.faction.Name != undefined? item.faction.Name : "") : item.var_name)}</option>
+                            ))}
+                        </Form.Select>
+                    </Form.Group>
+                }
+
+                {/* Text content for faction */}
+                <FactionDisplay data={selectedModel.faction}/>
+            </div>
         </ErrorBoundary>
     )
 }
