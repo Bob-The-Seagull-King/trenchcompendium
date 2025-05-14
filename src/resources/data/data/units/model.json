@@ -2908,8 +2908,8 @@
         "team": "hell",
         "stats" : {            
             "movement": 6,
-            "melee": 0,
-            "ranged": 2,
+            "melee": 2,
+            "ranged": 0,
             "base": [40],
             "armour": 0,
             "movetype": 0,
