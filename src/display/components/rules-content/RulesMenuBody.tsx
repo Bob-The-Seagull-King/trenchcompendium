@@ -125,15 +125,20 @@ const RulesMenuBody: React.FC<RulesMenuBodyProps> = ({ controller, onBack }) => 
                     }
 
                     {!onBack &&
-                        <div onClick={() => NavigateHome()} className={'home-link'}>
-                            <FontAwesomeIcon icon={faChevronLeft}/>
-                        </div>
-                    }
-                    <div className={'compendium-link'} >
-                        <CustomNavLink link={`/compendium/`} runfunc={() => {navigate('/compendium/')}}>
-                            {'Rules Compendium'}
+                        <CustomNavLink link={`/compendium/`}
+                            runfunc={() => {NavigateHome()}}
+                            classes={'home-link'}
+                        >
+                    <FontAwesomeIcon icon={faChevronLeft}/>
                         </CustomNavLink>
-                    </div>
+                    }
+
+                    <CustomNavLink link={`/compendium/`}
+                                   runfunc={() => {navigate('/compendium/')}}
+                                   classes={'compendium-link'}
+                    >
+                        {'Rules Compendium'}
+                    </CustomNavLink>
                 </div>
 
                 {menu_struc.map((item => (
