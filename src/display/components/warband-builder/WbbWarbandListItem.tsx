@@ -74,7 +74,7 @@ const WbbWarbandListItem: React.FC<WbbWarbandListItemProps> = ({ item, manager, 
     return (
         <div className={'col-12 col-md-6'}>
             <div className={'WbbWarbandListItem'} >
-                <div onClick={navigateToEdit}>
+                <div onClick={navigateToEdit} className={'warband-item-text-wrap'}>
                     <div className={'item-name'}>
                         {item.Name}
                     </div>

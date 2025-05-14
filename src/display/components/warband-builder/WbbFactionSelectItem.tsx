@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { FactionCollection } from '../../../classes/feature/faction/FactionCollection';
 import { Faction } from '../../../classes/feature/faction/Faction';
+import SynodFactionImage from "../../../utility/SynodFactionImage";
 
 interface WbbFactionSelectItemProps {
     item?: FactionCollection;
@@ -19,24 +20,35 @@ const WbbFactionSelectItem: React.FC<WbbFactionSelectItemProps> = ({ item, truei
                 className={`faction-item ${isSelected ? 'selected' : ''}`}
                 onClick={() => onSelect(trueitem)}
             >
-                {trueitem.Name}
+                <div className={'faction-name'}>
+                    {trueitem.Name}
+                </div>
 
                 {isSelected && (
                     <FontAwesomeIcon icon={faCheck} className="icon-inline-left-l" />
                 )}
+
+                <div className={'faction-image-wrap'}>
+                    <SynodFactionImage
+                        factionSlug={trueitem.GetID()}
+                        className={'faction-image'}
+                    />
+                </div>
             </div>
 
             {item != undefined &&
-            <>
-            {item.SubModelsList.filter((facvar) => (facvar.var_name != "base")).length > 0 &&
-                item.SubModelsList.filter((facvar) => (facvar.var_name != "base")).map((sub_item) => (
-                    <WbbFactionSelectItem
-                        key={sub_item.faction.ID}
-                        trueitem={sub_item.faction}
-                        selectedFaction={selectedFaction}
-                        onSelect={onSelect}
-                    />
-                ))}</>}
+                <>
+                    {item.SubModelsList.filter((facvar) => (facvar.var_name != "base")).length > 0 &&
+                        item.SubModelsList.filter((facvar) => (facvar.var_name != "base")).map((sub_item) => (
+                            <WbbFactionSelectItem
+                                key={sub_item.faction.ID}
+                                trueitem={sub_item.faction}
+                                selectedFaction={selectedFaction}
+                                onSelect={onSelect}
+                            />
+                    ))}
+                </>
+            }
         </div>
     );
 };
