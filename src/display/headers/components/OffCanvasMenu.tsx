@@ -80,7 +80,10 @@ const OffcanvasMenu: React.FC<IControllerProp> = (prop) => {
                         <div className={'logo-wrap'}>
                             <img src={theme === 'dark' ? logoDarkMode : logoLightMode}
                                  alt="Trench Companion Logo" className={'logo'}
-                                 onClick={() => NavigateHome()}
+                                 onClick={() => {
+                                     NavigateHome()
+                                     handleClose();
+                                 }}
                             />
                         </div>
 
@@ -91,11 +94,12 @@ const OffcanvasMenu: React.FC<IControllerProp> = (prop) => {
                 </Offcanvas.Header>
 
                 <Offcanvas.Body className="offcanvas-body">
-
                     {activeView === 'main' && (
                         <div className={'menu-lvl-1'}>
                             <div className={'menu-lvl-1-item-main'}
-                                onClick={() => setActiveView('compendium')}
+                                onClick={() => {
+                                    setActiveView('compendium');
+                                }}
                             >
                                 <span className={'title'}>
                                     {'Compendium'}
@@ -124,7 +128,10 @@ const OffcanvasMenu: React.FC<IControllerProp> = (prop) => {
 
                             <CustomNavLink
                                 link={"/login"}
-                                runfunc={() => NavigateLogin()}
+                                runfunc={() => {
+                                    NavigateLogin();
+                                    handleClose();
+                                }}
                                 classes={'menu-lvl-1-item-secondary'}
                             >
                                 <FontAwesomeIcon icon={faUser} className=""/>
@@ -137,6 +144,7 @@ const OffcanvasMenu: React.FC<IControllerProp> = (prop) => {
                         <RulesMenuBody
                             controller={prop.controller}
                             onBack={() => setActiveView('main')}
+                            onNavigate={() => handleClose()}
                         />
                     )}
                     {activeView === 'wbb' && (

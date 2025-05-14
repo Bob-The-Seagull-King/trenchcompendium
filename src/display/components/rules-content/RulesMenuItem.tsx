@@ -14,11 +14,13 @@ interface RulesMenuItemProps {
     controller?: CollectionsListPage,
     superslug? : string,
     children?: RulesMenuItemProps[];
+    onNavigate?: () => void;
 }
 
-const RulesMenuItem: React.FC<{ data: RulesMenuItemProps[], level?: number; parentPath?: string }> = ({
+const RulesMenuItem: React.FC<{ data: RulesMenuItemProps[], level?: number; parentPath?: string, onNavigate?: any }> = ({
   data,
   level = 0,
+  onNavigate,
   parentPath = "compendium" // Set "compendium" as the base path
 }) => {
     
@@ -107,6 +109,7 @@ const RulesMenuItem: React.FC<{ data: RulesMenuItemProps[], level?: number; pare
 
     function NavigateOut(link : string) {
         navigate(link, {state: Date.now().toString()});
+        if (onNavigate) onNavigate();
     }
 
     return (
@@ -119,7 +122,10 @@ const RulesMenuItem: React.FC<{ data: RulesMenuItemProps[], level?: number; pare
                 return (
                     <li className={`menu-list-item ${item.children ? "has-children" : ""}`} key={item.slug}>
                         <div className="menu-list-item-anchor-wrap">
-                            <CustomNavLink link={`/${itemPath}`} runfunc={() => {NavigateOut(`/${itemPath}`)}}>
+                            <CustomNavLink link={`/${itemPath}`} runfunc={() => {
+                                NavigateOut(`/${itemPath}`)
+
+                            }}>
                                 {item.title}
                             </CustomNavLink>
                         </div>
@@ -133,7 +139,12 @@ const RulesMenuItem: React.FC<{ data: RulesMenuItemProps[], level?: number; pare
 
                                 <Collapse in={isOpen}>
                                     <div>
-                                        <RulesMenuItem data={GetAllItems(item)} level={level + 1} parentPath={basePath} />
+                                        <RulesMenuItem
+                                            data={GetAllItems(item)}
+                                            level={level + 1}
+                                            parentPath={basePath}
+                                            onNavigate={onNavigate}
+                                        />
                                     </div>
                                 </Collapse>
                             </>

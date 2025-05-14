@@ -15,9 +15,10 @@ import CustomNavLink from '../subcomponents/interactables/CustomNavLink';
 interface RulesMenuBodyProps {
     controller: any;
     onBack?: () => void;
+    onNavigate?: () => void;
 }
 
-const RulesMenuBody: React.FC<RulesMenuBodyProps> = ({ controller, onBack }) => {
+const RulesMenuBody: React.FC<RulesMenuBodyProps> = ({ controller, onBack, onNavigate }) => {
 
     // Navigation
     const navigate = useNavigate();
@@ -124,6 +125,7 @@ const RulesMenuBody: React.FC<RulesMenuBodyProps> = ({ controller, onBack }) => 
                         </div>
                     }
 
+                    {/* Main Area view */}
                     {!onBack &&
                         <CustomNavLink link={`/compendium/`}
                             runfunc={() => {NavigateHome()}}
@@ -134,7 +136,10 @@ const RulesMenuBody: React.FC<RulesMenuBodyProps> = ({ controller, onBack }) => 
                     }
 
                     <CustomNavLink link={`/compendium/`}
-                                   runfunc={() => {navigate('/compendium/')}}
+                                   runfunc={() => {
+                                       navigate('/compendium/')
+                                       if (onNavigate) onNavigate();
+                                   }}
                                    classes={'compendium-link'}
                     >
                         {'Rules Compendium'}
@@ -142,8 +147,10 @@ const RulesMenuBody: React.FC<RulesMenuBodyProps> = ({ controller, onBack }) => 
                 </div>
 
                 {menu_struc.map((item => (
-                    <RulesMenuItem key={item.title}
-                                   data={[item]}
+                    <RulesMenuItem
+                        key={item.title}
+                        data={[item]}
+                        onNavigate={onNavigate}
                     />
                 )))}
 
