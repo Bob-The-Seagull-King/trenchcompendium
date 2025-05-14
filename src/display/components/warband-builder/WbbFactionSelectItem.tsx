@@ -24,10 +24,6 @@ const WbbFactionSelectItem: React.FC<WbbFactionSelectItemProps> = ({ item, truei
                     {trueitem.Name}
                 </div>
 
-                {isSelected && (
-                    <FontAwesomeIcon icon={faCheck} className="icon-inline-left-l" />
-                )}
-
                 <div className={'faction-image-wrap'}>
                     <SynodFactionImage
                         factionSlug={trueitem.GetID()}

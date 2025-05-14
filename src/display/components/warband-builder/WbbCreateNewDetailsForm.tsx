@@ -3,6 +3,9 @@ import { WarbandManager } from '../../../classes/saveitems/Warband/WarbandManage
 import React, { useState } from 'react';
 import { UserWarband } from '../../../classes/saveitems/Warband/UserWarband';
 import { Faction } from '../../../classes/feature/faction/Faction';
+import SynodFactionImage from "../../../utility/SynodFactionImage";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faChevronLeft, faPlus} from "@fortawesome/free-solid-svg-icons";
 
 const WbbCreateNewDetailsForm: React.FC<{
     chosenfaction : Faction
@@ -32,27 +35,52 @@ const WbbCreateNewDetailsForm: React.FC<{
 
     return (
         <div className={'WbbCreateNewDetailsForm'}>
-            <h3 className={'mb-3'}>Faction: {chosenfaction.Name}</h3>
+            <div className={'row'}>
+                <div className={'col-12 col-xl-6'}>
+                    <div className={'warband-options-wrap'}>
+                        <h2 className={'mb-3'}>{chosenfaction.Name}</h2>
+                        <label className="form-label">Warband Name</label>
+                        <input
+                            className="form-control mb-3" type={"text"}
+                            value={warbandName}
+                            onChange={(e) => setWarbandName(e.target.value)}
+                            placeholder={'Your awesome warband name'}
+                        />
 
-            <p>
-                {'Please enter your warbands details below. You can change these settings in the Warband Builder at any point.'}
-            </p>
+                        <p><small>
+                            {'You can change the name of your warband at any time.'}
+                        </small>
+                        </p>
 
-            <div className={'mb-3'}>
-                <label className="form-label">Warband Name</label>
+                        <button onClick={handleSubmit} className="btn btn-primary">
+                            Create Warband
+                            <FontAwesomeIcon icon={faPlus} className={'icon-inline-right-l'}/>
+                        </button>
+                    </div>
+                </div>
 
-                <input
-                    className="form-control" type={"text"}
-                    value={warbandName}
-                    onChange={(e) => setWarbandName(e.target.value)}
-                    placeholder=""
-                />
+                <div className={'col-12 col-xl-6'}>
+                    <div className={'faction-image-wrap'}>
+
+                    <SynodFactionImage
+                            factionSlug={chosenfaction.ID}
+                            size={'large'}
+                        />
+                    </div>
+                </div>
             </div>
 
 
+
+
+
             <div className="bottom-actions">
-                <button onClick={onBack} className="btn btn-secondary">Back</button>
-                <button onClick={handleSubmit} className="btn btn-primary">Create Warband</button>
+                {/*<button onClick={onBack} className="btn btn-secondary">*/}
+                {/*    <FontAwesomeIcon icon={faChevronLeft} className={'icon-inline-left-l'}/>*/}
+                {/*    {'Back'}*/}
+                {/*</button>*/}
+
+
             </div>
         </div>
     );

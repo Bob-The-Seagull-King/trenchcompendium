@@ -11,6 +11,8 @@ import { Faction } from '../../classes/feature/faction/Faction';
 import { ControllerController } from '../../classes/_high_level_controllers/ControllerController';
 import CustomNavLink from '../components/subcomponents/interactables/CustomNavLink';
 import { useNavigate } from 'react-router-dom';
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
+
 
 const WbbCreateNewPage = (prop: any) => {
     const Manager : WarbandManager = prop.manager;
@@ -33,15 +35,9 @@ const WbbCreateNewPage = (prop: any) => {
         GetFactions();
     }, []);
 
-    const handleFactionSubmit = () => {
-        if (selectedFaction) {
-            setStep(2); // move to the next step
-        }
-
-    };
-
     const handleFactionSelect = (fac : Faction) => {
         setSelectedFaction(fac);
+        setStep(2); // move to the next step
     };
 
     const handleBack = () => {
@@ -55,8 +51,8 @@ const WbbCreateNewPage = (prop: any) => {
                 {step === 1 && (
                     <div className={'container'}>
                         <div className={'headline-wrap'}>
-                            <h1>Select Faction</h1>
-                            <h2 className={'sub-headline'}>New Warband</h2>
+                            <h1>{'New Warband'}</h1>
+                            <h2 className={'sub-headline'}>{'Select Faction'}</h2>
                         </div>
 
                         <div className={'wbb-faction-masonry'}>
@@ -78,12 +74,10 @@ const WbbCreateNewPage = (prop: any) => {
                                 runfunc={() => (navigate("/warband/"))}
                                 >
                                     <>
-                                        Back to Main
+                                        <FontAwesomeIcon icon={faChevronLeft} className={'icon-inline-left-l'}/>
+                                        {'Your Warbands'}
                                     </>
                             </CustomNavLink>
-                            <Button className="btn-primary" onClick={handleFactionSubmit} disabled={!selectedFaction}>
-                                Choose Faction
-                            </Button>
                         </div>
                     </div>
                 )}
@@ -91,8 +85,8 @@ const WbbCreateNewPage = (prop: any) => {
             {step === 2 && selectedFaction && (
                 <div className={'container'}>
                     <div className={'headline-wrap'}>
-                        <h1>Warband Options</h1>
-                        <h2 className={'sub-headline'}>New Warband</h2>
+                        <h1>{'New Warband'}</h1>
+                        <h2 className={'sub-headline'}>{'Warband Name'}</h2>
                     </div>
 
                     <WbbCreateNewDetailsForm
