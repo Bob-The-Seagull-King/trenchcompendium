@@ -140,7 +140,7 @@
         "stats": {
         },
         "contextdata": {
-            "upgrade_stat": {"stat": "armour", "value": -2}
+            "upgrade_stat": {"upgrades": [{"stat": "armour", "value": -2}]}
         },
         "description": [       
             {
@@ -168,7 +168,7 @@
         "stats": {
         },
         "contextdata": {
-            "upgrade_stat": {"stat": "armour", "value": -2}
+            "upgrade_stat": {"upgrades": [{"stat": "armour", "value": -2}]}
         },
         "description": [       
             {
@@ -263,7 +263,7 @@
             "hands_ranged": 1
         },
         "contextdata": {
-            "upgrade_stat": {"stat": "armour", "value": -1},
+            "upgrade_stat": {"upgrades": [{"stat": "armour", "value": -1}]},
             "find_hands": { "required": true, "both_kits": true }
         },
         "description": [       
@@ -1010,7 +1010,7 @@
         "stats": {
         },
         "contextdata": {
-            "upgrade_stat": {"stat": "armour", "value": -1}
+            "upgrade_stat": {"upgrades": [{"stat": "armour", "value": -1}]}
         },
         "description": [       
             {
@@ -1038,7 +1038,7 @@
         "stats": {
         },
         "contextdata": {
-            "upgrade_stat": {"stat": "armour", "value": -2},
+            "upgrade_stat": {"upgrades": [{"stat": "armour", "value": -2}]},
             "ignore_element": {"element": ["kw_gas","kw_fire"]}
         },
         "description": [       
@@ -1617,7 +1617,7 @@
         "stats": {
         },
         "contextdata": {
-            "upgrade_stat": {"stat": "armour", "value": -2},
+            "upgrade_stat": {"upgrades": [{"stat": "armour", "value": -2}]},
             "super_armour": {},
             "unremovable": {},
             "add_scars": {"value": 1}
@@ -1752,7 +1752,7 @@
             "hands_ranged": 1
         },
         "contextdata": {
-            "upgrade_stat": {"stat": "armour", "value": -1},
+            "upgrade_stat": {"upgrades": [{"stat": "armour", "value": -1}]},
             "find_hands": { "required": true, "both_kits": true },
             "ignore_element": {"element": ["kw_fire"]}
         },
@@ -2799,7 +2799,7 @@
         "stats": {
         },
         "contextdata": {
-            "upgrade_stat": {"stat": "armour", "value": -3},
+            "upgrade_stat": {"upgrades": [{"stat": "armour", "value": -3}]},
             "bonus_ability": {
                 "action_type": ["dash"]
             }
@@ -2839,7 +2839,7 @@
             "hands_ranged": 1
         },
         "contextdata": {
-            "upgrade_stat": {"stat": "armour", "value": -1},
+            "upgrade_stat": {"upgrades": [{"stat": "armour", "value": -1}]},
             "find_hands": { "required": true, "both_kits": true },
             "super_armour": {}
         },
@@ -2872,7 +2872,7 @@
         "stats": {
         },
         "contextdata": {
-            "upgrade_stat": {"stat": "armour", "value": -1},
+            "upgrade_stat": {"upgrades": [{"stat": "armour", "value": -1}]},
             "super_armour": {}
         },
         "description": [       
@@ -3286,7 +3286,7 @@
         },
         "contextdata": {
             "ignore_element": {"element": ["kw_shrapnel","kw_gas"]},
-            "upgrade_stat": {"stat": "armour", "value": -2}
+            "upgrade_stat": {"upgrades": [{"stat": "armour", "value": -2}]}
         },
         "description": [       
             {
@@ -3973,7 +3973,7 @@
         "stats": {
         },
         "contextdata": {
-            "upgrade_stat": {"stat": "armour", "value": -3}
+            "upgrade_stat": {"upgrades": [{"stat": "armour", "value": -3}]}
         },
         "description": [       
             {
@@ -4143,7 +4143,7 @@
         },
         "contextdata": {
             "keyword_ignore": {"value": "kw_fear"},
-            "upgrade_stat": {"stat": "melee", "value": 1}
+            "upgrade_stat": {"upgrades": [{"stat": "melee", "value": 1}]}
         },
         "description": [       
             {
@@ -4416,7 +4416,7 @@
             "hands_ranged": 1
         },
         "contextdata": {
-            "upgrade_stat": {"stat": "armour", "value": -1},
+            "upgrade_stat": {"upgrades": [{"stat": "armour", "value": -1}]},
             "find_hands": { "required": true, "both_kits": true }
         },
         "description": [       
@@ -4488,7 +4488,7 @@
         },
         "contextdata": {
             "ignore_element": {"element": ["kw_shrapnel"]},
-            "upgrade_stat": {"stat": "ranged", "value": 1}
+            "upgrade_stat": {"upgrades": [{"stat": "ranged", "value": 1}]}
         },
         "description": [       
             {
@@ -4925,7 +4925,7 @@
         "stats": {
         },
         "contextdata": {
-            "upgrade_stat": {"stat": "armour", "value": -2},
+            "upgrade_stat": {"upgrades": [{"stat": "armour", "value": -2}]},
             "super_armour": {}
         },
         "description": [       
@@ -4954,7 +4954,7 @@
         "stats": {
         },
         "contextdata": {
-            "upgrade_stat": {"stat": "ranged", "value": 1},
+            "upgrade_stat": {"upgrades": [{"stat": "ranged", "value": 1}]},
             "bonus_ability": {
                 "action_id": ["ab_hateful"]
             }
@@ -5389,7 +5389,7 @@
         "stats": {
         },
         "contextdata": {
-            "upgrade_stat": {"stat": "armour", "value": -3},
+            "upgrade_stat": {"upgrades": [{"stat": "armour", "value": -3}]},
             "bonus_ability": {
                 "action_type": ["dash"]
             }
@@ -5429,7 +5429,7 @@
                 {"stat": "movement", "value": 10},
                 {"stat": "movetype", "value": 1}
                 ]},
-            "upgrade_stat": {"stat": "armour", "value": -3},
+            "upgrade_stat": {"upgrades": [{"stat": "armour", "value": -3}]},
             "bonus_ability": {
                 "action_type": ["dash"]
             },
@@ -5519,7 +5519,7 @@
                 {"stat": "movement", "value": 8},
                 {"stat": "movetype", "value": 1}
                 ]},
-            "upgrade_stat": {"stat": "armour", "value": -2},
+            "upgrade_stat": {"upgrades": [{"stat": "armour", "value": -2}]},
             "ignore_element": {"element": ["kw_shrapnel"]},
             "custom_attack_type": {"range": 0}
         },

@@ -1073,5 +1073,89 @@ export const BaseContextCallTable : CallEventTable = {
             }
             return relayVar;
         }
+    },
+    upgrade_stat: {
+        event_priotity: 1,
+        async updateModelStats(this: EventRunner, eventSource : any, relayVar : ModelStatistics,   context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            
+            for (let i = 0; i < context_func["upgrades"].length; i++) {
+                const contextitem = context_func["upgrades"][i];
+
+                if (contextitem["stat"] == 'armour') {
+                    if (relayVar.armour) {
+                        relayVar.armour += contextitem["value"]
+                    } else {
+                        relayVar.armour = contextitem["value"]
+                    }
+                }
+
+                if (contextitem["stat"] == 'movement') {
+                    if (relayVar.movement) {
+                        relayVar.movement += contextitem["value"]
+                    } else {
+                        relayVar.movement = contextitem["value"]
+                    }
+                }
+
+                if (contextitem["stat"] == 'melee') {
+                    if (relayVar.melee) {
+                        relayVar.melee += contextitem["value"]
+                    } else {
+                        relayVar.melee = contextitem["value"]
+                    }
+                }
+
+                if (contextitem["stat"] == 'ranged') {
+                    if (relayVar.ranged) {
+                        relayVar.ranged += contextitem["value"]
+                    } else {
+                        relayVar.ranged = contextitem["value"]
+                    }
+                }
+            }            
+            return relayVar;
+        }
+    },
+    set_stat: {
+        event_priotity: 1,
+        async updateModelStats(this: EventRunner, eventSource : any, relayVar : ModelStatistics,   context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            
+            for (let i = 0; i < context_func["upgrades"].length; i++) {
+                const contextitem = context_func["upgrades"][i];
+
+                if (contextitem["stat"] == 'armour') {                    
+                    relayVar.armour = contextitem["value"]
+                }
+
+                if (contextitem["stat"] == 'movement') {                    
+                    relayVar.movement = contextitem["value"]
+                }
+
+                if (contextitem["stat"] == 'melee') {                    
+                    relayVar.melee = contextitem["value"]
+                }
+
+                if (contextitem["stat"] == 'ranged') {                    
+                    relayVar.ranged = contextitem["value"]
+                }
+
+                if (contextitem["stat"] == 'base') {                    
+                    relayVar.base = contextitem["value"]
+                }
+
+                if (contextitem["stat"] == 'movetype') {                    
+                    relayVar.movetype = contextitem["value"]
+                }
+
+                if (contextitem["stat"] == 'potential') {                    
+                    relayVar.potential = contextitem["value"]
+                }
+
+                if (contextitem["stat"] == 'mercenary') {                    
+                    relayVar.mercenary = contextitem["value"]
+                }
+            }         
+            return relayVar;
+        }
     }
 }

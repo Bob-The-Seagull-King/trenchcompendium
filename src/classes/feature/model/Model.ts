@@ -12,14 +12,14 @@ import { ContextObject, IContextObject } from '../../contextevent/contextobject'
 import { StaticContextObject } from '../../contextevent/staticcontextobject';
 import { Ability } from '../ability/Ability';
 import { IKeyword, Keyword } from '../glossary/Keyword';
-import { GetPresentationStatistic, ModelStatistics, PresentModelStatistics } from './ModelStats';
+import { GetPresentationStatistic, MergeTwoStats, ModelStatistics, PresentModelStatistics } from './ModelStats';
 import { Requester } from '../../../factories/Requester';
 import { UpgradeFactory } from '../../../factories/features/UpgradeFactory';
 import { IModelEquipmentRelationship, ModelEquipmentRelationship } from '../../relationship/model/ModelEquipmentRelationship';
 import { EquipmentFactory } from '../../../factories/features/EquipmentFactory';
 import { ContextPackage } from '../../contextevent/contextpackage';
 import { EventRunner } from '../../contextevent/contexteventhandler';
-import { EquipmentLimit, EquipmentRestriction } from '../equipment/Equipment';
+import { Equipment, EquipmentLimit, EquipmentRestriction } from '../equipment/Equipment';
 import { FactionModelRelationship, IFactionModelRelationship } from '../../relationship/faction/FactionModelRelationship';
 import { ModelFactory } from '../../../factories/features/ModelFactory';
 import { Faction } from '../faction/Faction';
@@ -146,6 +146,8 @@ class Model extends StaticContextObject {
     }
 
     public async GetPresentableStatistics() {
+        const BaseStats = await this.GetStatsInfluencedByEquipmentProvided();
+
         if (this.StatChoices == null) {        
             const EventProc : EventRunner = new EventRunner();
 
@@ -156,10 +158,31 @@ class Model extends StaticContextObject {
                 [],
                 null
             )
-            return GetPresentationStatistic(this.Stats, result);
+            
+            return GetPresentationStatistic(BaseStats, result);
         } else {               
-            return GetPresentationStatistic(this.Stats, this.StatChoices);
+            return GetPresentationStatistic(BaseStats, this.StatChoices);
         }
+    }
+
+    public async GetStatsInfluencedByEquipmentProvided() {
+        let InfluencedStats = MergeTwoStats(this.Stats, {})
+        const EventProc : EventRunner = new EventRunner();
+        for (let i = 0; i < this.EquipmentList.length; i++) {
+            for (let j = 0; j < this.EquipmentList[i].EquipmentItems.length; j++) {
+                const CurEquip : Equipment = this.EquipmentList[i].EquipmentItems[j]
+
+                InfluencedStats = await EventProc.runEvent(
+                    "updateModelStats",
+                    CurEquip,
+                    [],
+                    InfluencedStats,
+                    null
+                )
+                
+            }
+        }       
+        return InfluencedStats;
     }
 
     public BuildKeywords(keywords : string[]) {

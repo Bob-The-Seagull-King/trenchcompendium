@@ -91,8 +91,6 @@ const RulesModelDisplay = (props: any) => {
             /* UPGRADES */
             if (parentfaction != undefined) {
                 const result_upgrades = await factionmodelObject.getContextuallyAvailableUpgrades(parentfaction);
-                console.log(modelcollectionObject.Name)
-                console.log(bonusselections);
                 if (bonusselections != undefined && (Object.entries(bonusselections).length > 0)) {
                     for (const [optionSetId, selectedObject] of Object.entries(bonusselections)) {
                         if ((selectedObject as IChoice).value instanceof ContextObject) {

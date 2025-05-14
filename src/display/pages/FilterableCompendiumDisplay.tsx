@@ -113,9 +113,6 @@ const FilterableCompendiumDisplay = (prop: any) => {
         )
     }
 
-    console.log('_curItems');
-    console.log(_curItems);
-
 
     // Return result -----------------------------
     return (
