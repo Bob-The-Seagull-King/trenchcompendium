@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import { ControllerController } from '../../../classes/_high_level_controllers/ControllerController';
 import RulesMenuItem from "./RulesMenuItem";
 import { ToolsController } from '../../../classes/_high_level_controllers/ToolsController';
+import CustomNavLink from '../subcomponents/interactables/CustomNavLink';
 
 interface RulesMenuBodyProps {
     controller: any;
@@ -128,9 +129,10 @@ const RulesMenuBody: React.FC<RulesMenuBodyProps> = ({ controller, onBack }) => 
                             <FontAwesomeIcon icon={faChevronLeft}/>
                         </div>
                     }
-
-                    <div onClick={() => navigate('/compendium/')} className={'compendium-link'}>
-                        {'Rules Compendium'}
+                    <div className={'compendium-link'} >
+                        <CustomNavLink link={`/compendium/`} runfunc={() => {navigate('/compendium/')}}>
+                            {'Rules Compendium'}
+                        </CustomNavLink>
                     </div>
                 </div>
 

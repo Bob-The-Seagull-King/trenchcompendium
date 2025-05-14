@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import { ControllerController } from '../../../classes/_high_level_controllers/ControllerController';
 import { ToolsController } from '../../../classes/_high_level_controllers/ToolsController';
 import RulesMenuItem from "../rules-content/RulesMenuItem";
+import CustomNavLink from '../subcomponents/interactables/CustomNavLink';
 
 interface RulesMenuBodyProps {
     controller: any;
@@ -78,8 +79,10 @@ const WBBMenuBody: React.FC<RulesMenuBodyProps> = ({ controller, onBack }) => {
                         <FontAwesomeIcon icon={faChevronLeft} />
                     </div>
 
-                    <div onClick={() => navigate('/warband/')} className={'compendium-link'}>
-                        {'Warband Manager'}
+                    <div className={'compendium-link'} >
+                        <CustomNavLink link={`/warband/`} runfunc={() => {navigate('/compendium/')}}>
+                            {'Warband Manager'}
+                        </CustomNavLink>
                     </div>
                 </div>
 
