@@ -52,7 +52,11 @@ const WbbCreateNewDetailsForm: React.FC<{
                         </small>
                         </p>
 
-                        <button onClick={handleSubmit} className="btn btn-primary">
+                        <button onClick={handleSubmit}
+                                className="btn btn-primary"
+                                disabled={warbandName.trim() === ''}
+                                
+                        >
                             Create Warband
                             <FontAwesomeIcon icon={faPlus} className={'icon-inline-right-l'}/>
                         </button>
@@ -68,19 +72,6 @@ const WbbCreateNewDetailsForm: React.FC<{
                         />
                     </div>
                 </div>
-            </div>
-
-
-
-
-
-            <div className="bottom-actions">
-                {/*<button onClick={onBack} className="btn btn-secondary">*/}
-                {/*    <FontAwesomeIcon icon={faChevronLeft} className={'icon-inline-left-l'}/>*/}
-                {/*    {'Back'}*/}
-                {/*</button>*/}
-
-
             </div>
         </div>
     );
