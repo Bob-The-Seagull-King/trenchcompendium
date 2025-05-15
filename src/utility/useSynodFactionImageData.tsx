@@ -20,7 +20,7 @@ interface FactionImageData {
 // in-memory cache
 const factionImageCache: Record<string, FactionImageData> = {};
 
-export function useSynodFactionImageData(factionSlug: string, size = 'medium'): FactionImageData {
+export function useSynodFactionImageData(factionSlug: string, size = 'full'): FactionImageData {
     const [data, setData] = useState<FactionImageData>(() => {
         return factionImageCache[factionSlug] || {
             url: '',

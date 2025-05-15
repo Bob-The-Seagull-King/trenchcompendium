@@ -21,7 +21,7 @@ interface ModelImageData {
 // in-memory cache
 const modelImageCache: Record<string, ModelImageData> = {};
 
-export function useSynodModelImageData(modelSlug: string, size = 'medium'): ModelImageData {
+export function useSynodModelImageData(modelSlug: string, size = 'full'): ModelImageData {
     const [data, setData] = useState<ModelImageData>(() => {
         return modelImageCache[modelSlug] || {
             url: '',

@@ -11,7 +11,7 @@ interface SynodFactionImageProps {
     className?: string;
 }
 
-const SynodFactionImage: React.FC<SynodFactionImageProps> = ({ factionSlug, size = 'medium', className = '' }) => {
+const SynodFactionImage: React.FC<SynodFactionImageProps> = ({ factionSlug, size = 'full', className = '' }) => {
 
     if( !factionSlug) {
         return false;

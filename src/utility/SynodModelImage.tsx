@@ -12,7 +12,7 @@ interface SynodModelImageProps {
     className?: string;
 }
 
-const SynodModelImage: React.FC<SynodModelImageProps> = ({ modelSlug, size = 'medium', className = '' }) => {
+const SynodModelImage: React.FC<SynodModelImageProps> = ({ modelSlug, size = 'full', className = '' }) => {
     const { url, modelName, error } = useSynodModelImageData(modelSlug, size);
 
     const fallback =
