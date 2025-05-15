@@ -40,7 +40,7 @@ const CompendiumBasePage: React.FC<IControllerProp> = (prop: any) => {
                         <RulesBannerImage
                             imageId={164}
                             linkUrl={'/compendium/gamerule'}
-                            linkText={'Game Rules'}
+                            linkText={'Playtest Rules v1.6'}
                         />
                     </div>
 
@@ -72,7 +72,7 @@ const CompendiumBasePage: React.FC<IControllerProp> = (prop: any) => {
                         <RulesBannerImage
                             imageId={162}
                             linkUrl={'/compendium/campaignrule'}
-                            linkText={'Campaign Rules'}
+                            linkText={'Campaigns v1.6.3'}
                         />
                     </div>
                 </div>
