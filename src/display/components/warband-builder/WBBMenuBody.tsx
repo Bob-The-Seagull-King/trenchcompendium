@@ -45,7 +45,7 @@ const WBBMenuBody: React.FC<RulesMenuBodyProps> = ({ controller, onBack }) => {
                 SetOfWarbands.push(
                     {
                         title: tools.UserWarbandManager.WarbandItemList[i].Name,
-                        slug: tools.UserWarbandManager.WarbandItemList[i].ID
+                        slug: 'edit/'+tools.UserWarbandManager.WarbandItemList[i].ID
                     }
                 )
             }
@@ -57,7 +57,7 @@ const WBBMenuBody: React.FC<RulesMenuBodyProps> = ({ controller, onBack }) => {
                 },
                 {
                     title: "Your Warbands",
-                    slug: "edit",
+                    slug: "",
                     children: SetOfWarbands
                 }
             ]
