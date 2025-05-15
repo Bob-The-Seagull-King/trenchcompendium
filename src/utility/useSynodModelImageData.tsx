@@ -37,6 +37,9 @@ export function useSynodModelImageData(modelSlug: string, size = 'full'): ModelI
 
     useEffect(() => {
         if (!modelSlug) return;
+
+        console.log('Fetching model:', modelSlug);
+
         if (modelImageCache[modelSlug]) {
             setData({ ...modelImageCache[modelSlug], loading: false });
             return;
