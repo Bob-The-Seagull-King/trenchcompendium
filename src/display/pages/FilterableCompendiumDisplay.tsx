@@ -118,10 +118,10 @@ const FilterableCompendiumDisplay = (prop: any) => {
     return (
         <ErrorBoundary fallback={<div>Something went wrong with FilteredDisplayCompendium.tsx</div>}>
             <>
-                <div>
+                <div className={'FilterableCompendiumDisplay-filter'}>
                     {ReturnFilters()}
                 </div>
-                <div  key={_keyval}>
+                <div className={'FilterableCompendiumDisplay-items'} key={_keyval}>
                     {ReturnItems()}
                 </div>
             </>
