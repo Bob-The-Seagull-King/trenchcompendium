@@ -98,7 +98,7 @@ const WBBMenuBody: React.FC<WBBMenuBodyProps> = ({ controller, onBack, onNavigat
                                data={warband_struc}
                                parentPath={'warband'}
                                onNavigate={onNavigate}
-                               
+
                 />
 
             </div>

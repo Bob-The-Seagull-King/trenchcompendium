@@ -21,20 +21,20 @@
 
     .btn-new-warband
         position: absolute
-        top: 36px // center vertical in currenty margins without fuzyy transform
+        top: 31px
         right: 0
         color: $color-text
 
         &:hover
             color: $color-text
             text-decoration: none
-        @media(max-width: 380px)
-            top: 30px // center vertical in currenty margins without fuzyy transform
-
-            i, svg
-                margin-left: .3em
+        @media(max-width: 575px)
             .new-warband-label
                 display: none
+
+            i, svg
+                margin: 0 .3em
+
 
 
     .WbbWarbandListItem-new
