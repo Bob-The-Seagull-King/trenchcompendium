@@ -65,7 +65,7 @@ const WbbCreateNewPage = (prop: any) => {
                         </div>
 
                         <div className={'wbb-faction-masonry'}>
-                        {factionlist.map(item => (
+                            {factionlist.map(item => (
                                 <WbbFactionSelectItem
                                     key={item.HeldItem.ID}
                                     item={item.HeldItem}

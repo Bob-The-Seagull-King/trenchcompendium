@@ -18,12 +18,15 @@ import { CollectionsListPage } from "../../classes/viewmodel/pages/CollectionLis
 import RulesKeywordsTable from "../components/rules-content/RulesKeywordsTable";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faChevronRight, faPlus} from "@fortawesome/free-solid-svg-icons";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import RulesBannerImage from "../components/rules-content/RulesBannerImage";
 import RulesBannerText from "../components/rules-content/RulesBannerText";
 import CustomNavLink from "../components/subcomponents/interactables/CustomNavLink";
 import {useNavigate} from "react-router-dom";
 import { Link } from 'react-router-dom'
+import {ControllerController} from "../../classes/_high_level_controllers/ControllerController";
+import WbbFactionSelectItem from "../components/warband-builder/WbbFactionSelectItem";
+import RulesBannerFaction from "../components/rules-content/RulesBannerFaction";
 
 export interface DisplayCollectionType {
     searchId      : string,
@@ -400,14 +403,141 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
             )
         },
         defaultpage(ViewPageController: CollectionsListPage) {
+
+            const factionlist = [
+                {
+                    title: 'Court of the Seven-Headed Serpent',
+                    slug: 'fc_courtofthesevenheadedserpent'
+                },
+                {
+                    title: 'Cult of the Black Grail',
+                    slug: 'fc_cultoftheblackgrail',
+                    children: [
+                        {
+                            title: 'Dirge of the Great Hegemon',
+                            slug: 'fc_cultoftheblackgrail_fv_dirgeofthegreathegemon',
+                        },
+                    ]
+                },
+                {
+                    title: 'Heretic Legion',
+                    slug: 'fc_hereticlegion',
+                    children: [
+                        {
+                            title: 'Heretic Naval Raiding Party',
+                            slug: 'fc_hereticlegion_fv_hereticnavalraidingparty',
+                        },
+                        {
+                            title: 'Trench Ghosts',
+                            slug: 'fc_hereticlegion_fv_trenchghosts',
+                        },
+                        {
+                            title: 'Knights of Avarice',
+                            slug: 'fc_hereticlegion_fv_knightsofavarice',
+                        },
+                    ]
+                },
+                {
+                    title: 'Iron Sultanate',
+                    slug: 'fc_ironsultanate',
+                    children: [
+                        {
+                            title: 'Fidai of Alamut - The Cabal of Assassins',
+                            slug: 'fc_ironsultanate_fv_fidaiofalamut',
+                        },
+                        {
+                            title: 'House of Wisdom',
+                            slug: 'fc_ironsultanate_fv_houseofwisdom',
+                        },
+                        {
+                            title: 'Defender\'s of the Iron Wall',
+                            slug: 'fc_ironsultanate_fv_defendersoftheironwall',
+                        },
+                    ]
+                },
+                {
+                    title: 'The Prinicpality of New Antioch',
+                    slug: 'fc_newantioch',
+                    children: [
+                        {
+                            title: 'Papal States Intervention Force',
+                            slug: 'fc_newantioch_fv_papalstatesinterventionforce',
+                        },
+                        {
+                            title: 'Eire Rangers',
+                            slug: 'fc_newantioch_fc_eirerangers',
+                        },
+                        {
+                            title: 'Stoßtruppen of the Free State of Prussia',
+                            slug: 'fc_newantioch_fc_stortruppenofthefreestateofprussia',
+                        },
+                        {
+                            title: 'Kingdom of Alba Assault Detatchment',
+                            slug: 'fc_newantioch_fv_kingdomofalbaassaultdetatchment',
+                        },
+                        {
+                            title: 'Expeditionary Forces of Abyssinia',
+                            slug: 'fc_newantioch_fv_expeditionaryforcedofabyssinia',
+                        },
+                    ]
+                },
+                {
+                    title: 'Trench Pilgrims',
+                    slug: 'fc_trenchpilgrim',
+                    children: [
+                        {
+                            title: 'Procession of the Sacred Affliction',
+                            slug: 'fc_trenchpilgrim_fv_processionofthesacredaffliction',
+                        },
+                        {
+                            title: 'Cavalcade of the Tenth Plague',
+                            slug: 'fc_trenchpilgrim_fv_cavalcadeofthetenthplague',
+                        },
+                        {
+                            title: 'War Pilgrimage of Saint Methodius',
+                            slug: 'fc_trenchpilgrim_fv_warpilgimageofsaintmethodius',
+                        },
+                    ]
+                }
+            ];
+
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
                     <h1 className="">
                         {'Factions'}
                     </h1>
 
-                    <div>
-                        {"Faction Default Page - THIS IS A TEST TO BE REPLACED"}
+                    <p>
+                        {'Each warband in Trench Crusade belongs to a faction fighting in the Great War. Use the faction lists that follow to recruit and equip your warband. These lists provide information about the troop types available, their weapons, armour and equipment options, as well as special rules specific to that faction.'}
+                    </p>
+
+
+                    <div className={'spacer-20'}></div>
+
+                    <div className={'rules-faction-masonry'}>
+                        {factionlist.map(item => {
+                            const hasChildren = Array.isArray(item.children) && item.children.length > 0
+
+                            return (
+                                <RulesBannerFaction
+                                    key={item.slug}
+                                    slug={item.slug}
+                                    title={item.title}
+                                >
+                                    {hasChildren && (
+                                        <>
+                                            {item.children!.map(sub_item => (
+                                                <RulesBannerFaction
+                                                    key={sub_item.slug}
+                                                    slug={sub_item.slug}
+                                                    title={sub_item.title}
+                                                />
+                                            ))}
+                                        </>
+                                    )}
+                                </RulesBannerFaction>
+                            )
+                        })}
                     </div>
                 </ErrorBoundary>
             )
