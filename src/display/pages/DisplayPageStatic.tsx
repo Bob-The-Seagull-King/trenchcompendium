@@ -23,6 +23,7 @@ import RulesBannerImage from "../components/rules-content/RulesBannerImage";
 import RulesBannerText from "../components/rules-content/RulesBannerText";
 import CustomNavLink from "../components/subcomponents/interactables/CustomNavLink";
 import {useNavigate} from "react-router-dom";
+import { Link } from 'react-router-dom'
 
 export interface DisplayCollectionType {
     searchId      : string,
@@ -117,7 +118,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
                                 </>
                             </RulesBannerText>
                         </div>
-                        
+
                         <div className={'col-12 col-md-6'}>
                             <RulesBannerText
                                 link="/compendium/keyword"
@@ -656,9 +657,84 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         defaultpage(ViewPageController: CollectionsListPage) {
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                        <div>
-                            {"Exploration Default Page - THIS IS A TEST TO BE REPLACED"}
+                    <h1>
+                        {'Exploration Locations'}
+                    </h1>
+
+                    <p>
+                        {'After you have modified the Exploration roll result, consult the appropriate Exploration Table to see if you have found something of special Interest. You have to match the number on the table exactly with your dice – rolling too high or too low means you did not find the Note that each player can find any of the locations only once during the campaign, though it is completely legal for two different players to discover the same location during the same campaign. We encourage players to maintain a War Journal that tracks the locations they find during the campaign. To find out which Exploration Table you should use, consult the following chart:'}
+                        <br />
+                        <br />
+                        {'Consult the page below to check the rules for explorations during campaign play.'}
+                    </p>
+
+                    <div className={'row'}>
+                        <div className={'col-12 col-md-6'}>
+                            <RulesBannerText
+                                title={'Exploration Rules'}
+                                link={'/compendium/campaignrule/br_exploration'}
+                            />
                         </div>
+                    </div>
+
+
+                    <div className={'spacer-20'}></div>
+
+                    <h2>
+                        {'Exploration Locations Table'}
+                    </h2>
+                    <table className={'table_headed table_headed-highlight'}>
+                        <tr className={'table_headrow'}>
+                            <th>
+                                {'Number of Balles Fought'}
+                            </th>
+                            <th>
+                                {'Possible Locations'}
+                            </th>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                {'1-2'}
+                            </td>
+                            <td>
+                                <Link to={'/compendium/explorationtable/et_commonlocations'} className="">
+                                    {'Common Exploration Locations'}
+                                </Link>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                {'3-5'}
+                            </td>
+                            <td>
+                                <Link to={'/compendium/explorationtable/et_commonlocations'} className="">
+                                    {'Common or Rare Exploration Locations'}
+                                </Link>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                {'6-9'}
+                            </td>
+                            <td>
+                                <Link to={'/compendium/explorationtable/et_commonlocations'} className="">
+                                    {'Rare Exploration Locations'}
+                                </Link>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                {'10+'}
+                            </td>
+                            <td>
+                                <Link to={'/compendium/explorationtable/et_commonlocations'} className="">
+                                    {'Rare or Legendary Exploration Locations'}
+                                </Link>
+                            </td>
+                        </tr>
+                    </table>
+
                 </ErrorBoundary>
             )
         },
