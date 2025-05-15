@@ -1,5 +1,5 @@
 // Hook: useSynodModelImageData
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 
 /**
@@ -22,6 +22,8 @@ interface ModelImageData {
 const modelImageCache: Record<string, ModelImageData> = {};
 
 export function useSynodModelImageData(modelSlug: string, size = 'full'): ModelImageData {
+    const fetchedRef = useRef<Record<string, boolean>>({}); // track fetched slugs
+
     const [data, setData] = useState<ModelImageData>(() => {
         return modelImageCache[modelSlug] || {
             url: '',
@@ -37,6 +39,9 @@ export function useSynodModelImageData(modelSlug: string, size = 'full'): ModelI
 
     useEffect(() => {
         if (!modelSlug) return;
+
+        if (fetchedRef.current[modelSlug]) return; // prevent double fetch
+        fetchedRef.current[modelSlug] = true;
 
         console.log('Fetching model:', modelSlug);
 
