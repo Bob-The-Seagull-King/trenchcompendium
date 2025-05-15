@@ -43,8 +43,6 @@ export function useSynodModelImageData(modelSlug: string, size = 'full'): ModelI
         if (fetchedRef.current[modelSlug]) return; // prevent double fetch
         fetchedRef.current[modelSlug] = true;
 
-        console.log('Fetching model:', modelSlug);
-
         if (modelImageCache[modelSlug]) {
             setData({ ...modelImageCache[modelSlug], loading: false });
             return;
