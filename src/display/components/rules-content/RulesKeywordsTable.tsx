@@ -10,7 +10,7 @@ const RulesKeywordsTable = (props: any) => {
 
     return (
         <ErrorBoundary fallback={<div>Something went wrong with InjuryDisplay.tsx</div>}>
-            <div className='RulesInjuriesTable rules-injury-table rules-card'>
+            <div className='RulesKeywordsTable rules-card'>
                 <div className={'rules-card-title rules-injury-table-title'}>
                     {'Keywords'}
                 </div>
