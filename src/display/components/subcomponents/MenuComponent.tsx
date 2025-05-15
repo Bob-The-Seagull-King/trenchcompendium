@@ -10,9 +10,10 @@ interface MenuComponentProps {
     Title: string;
     Route: string;
     bgImageID?: number; // optional bg image
+    comingSoon?: boolean; // coming soon -> disabled
 }
 
-const MenuComponent: React.FC<MenuComponentProps> = ({ Title, Route, bgImageID = 0 }) => {
+const MenuComponent: React.FC<MenuComponentProps> = ({ Title, Route, bgImageID = 0, comingSoon = false }) => {
 
     // Navigation
     const navigate = useNavigate(); 
@@ -27,20 +28,44 @@ const MenuComponent: React.FC<MenuComponentProps> = ({ Title, Route, bgImageID =
 
     return (
         <ErrorBoundary fallback={<div>Something went wrong with MenuDisplay.tsx</div>}>
-            <CustomNavLink link={Route} runfunc={NavigateHome} classes={'home-link-primary'}>
-                <span className={'title'}>
-                    {Title}
-                </span>
+            { !comingSoon &&
+                <CustomNavLink link={Route} runfunc={NavigateHome} classes={'home-link-primary'}>
+                    <span className={'title'}>
+                        {Title}
+                    </span>
 
-                {/* only if bgImageID is defined*/}
-                {bgImageID > 0 &&
-                    <SynodImage
-                        imageId={bgImageID}
-                        className={''}
-                        size={'large'}
-                    />
-                }
-            </CustomNavLink>
+                    {/* only if bgImageID is defined*/}
+                    {bgImageID > 0 &&
+                        <SynodImage
+                            imageId={bgImageID}
+                            className={''}
+                            size={'large'}
+                        />
+                    }
+                </CustomNavLink>
+            }
+
+            { comingSoon &&
+                <div className={'home-link-primary coming-soon'}>
+                    <span className={'title'}>
+                        {Title}
+                    </span>
+
+                    {/* only if bgImageID is defined*/}
+                    {bgImageID > 0 &&
+                        <SynodImage
+                            imageId={bgImageID}
+                            className={''}
+                            size={'large'}
+                        />
+                    }
+
+                    <div className={'coming-soon-label'}>
+                        {'Coming soon'}
+                    </div>
+                </div>
+            }
+
         </ErrorBoundary>
     )
 }

@@ -35,11 +35,11 @@ const HomeRoute: React.FC = () => {
                         </div>
 
                         <div className={'col-12 col-md-6'}>
-                            <MenuComponent Title={"Campaign Manager"} Route={"campaign/"} bgImageID={16}/>
+                            <MenuComponent Title={"Campaign Manager"} Route={"campaign/"} bgImageID={16} comingSoon={true}/>
                         </div>
 
                         <div className={'col-12 col-md-6'}>
-                            <MenuComponent Title={"Play Mode"} Route={"play/"} bgImageID={19}/>
+                            <MenuComponent Title={"Play Mode"} Route={"play/"} bgImageID={19} comingSoon={true}/>
                         </div>
                     </div>
 

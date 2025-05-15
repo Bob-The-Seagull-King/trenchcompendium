@@ -55,7 +55,7 @@ const WbbCreateNewDetailsForm: React.FC<{
                         <button onClick={handleSubmit}
                                 className="btn btn-primary"
                                 disabled={warbandName.trim() === ''}
-                                
+
                         >
                             Create Warband
                             <FontAwesomeIcon icon={faPlus} className={'icon-inline-right-l'}/>
