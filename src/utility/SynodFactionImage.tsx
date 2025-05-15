@@ -23,7 +23,8 @@ const SynodFactionImage: React.FC<SynodFactionImageProps> = ({ factionSlug, size
         'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
 
     if (error) return null;
-
+    console.log('xxx');
+    console.log(url);
     return (
         <img
             src={url || fallback}

@@ -60,9 +60,9 @@ const MenuComponent: React.FC<MenuComponentProps> = ({ Title, Route, bgImageID =
                         />
                     }
 
-                    <div className={'coming-soon-label'}>
-                        {'Coming soon'}
-                    </div>
+                    {/*<div className={'coming-soon-label'}>*/}
+                    {/*    {'Coming soon'}*/}
+                    {/*</div>*/}
                 </div>
             }
 
