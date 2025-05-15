@@ -17,9 +17,11 @@ import RulesEquipmentEntry from "../components/rules-content/RulesEquipmentEntry
 import { CollectionsListPage } from "../../classes/viewmodel/pages/CollectionListPage";
 import RulesKeywordsTable from "../components/rules-content/RulesKeywordsTable";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faChevronRight} from "@fortawesome/free-solid-svg-icons";
+import {faChevronRight, faPlus} from "@fortawesome/free-solid-svg-icons";
 import React from "react";
 import RulesBannerImage from "../components/rules-content/RulesBannerImage";
+import CustomNavLink from "../components/subcomponents/interactables/CustomNavLink";
+import {useNavigate} from "react-router-dom";
 
 export interface DisplayCollectionType {
     searchId      : string,
@@ -342,11 +344,104 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
             )
         },
         defaultpage(ViewPageController: CollectionsListPage) {
+
+            // @TODO: get ressources from data
+            const scenarios = [
+                {
+                    name: 'Armoured Train',
+                    link: 'sc_armouredtrain',
+                    source: 'Playtest Rules'
+                },
+                {
+                    name: 'Claim No Man\'s Land',
+                    link: 'sc_claimnomansland',
+                    source: 'Playtest Rules'
+                },
+                {
+                    name: 'Dragon Hunt',
+                    link: 'sc_dragonhunt',
+                    source: 'Playtest Rules'
+                },
+                {
+                    name: 'Great War',
+                    link: 'sc_greatwar',
+                    source: 'Playtest Rules'
+                },
+                {
+                    name: 'Hunt for Heroes',
+                    link: 'sc_huntforheroes',
+                    source: 'Playtest Rules'
+                },
+                {
+                    name: 'Relic Hunt',
+                    link: 'sc_relichunt',
+                    source: 'Playtest Rules'
+                },
+                {
+                    name: 'Storming the Shores',
+                    link: 'sc_stormingtheshores',
+                    source: 'Playtest Rules'
+                },
+                {
+                    name: 'Supply Raid',
+                    link: 'sc_supplyraid',
+                    source: 'Playtest Rules'
+                },
+                {
+                    name: 'Trench Warfare',
+                    link: 'sc_trenchwarfar',
+                    source: 'Playtest Rules'
+                }
+            ];
+
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                        <div>
-                            {"Scenarios Default Page - THIS IS A TEST TO BE REPLACED"}
-                        </div>
+                    <h1>
+                        {"Scenarios"}
+                    </h1>
+
+                    <p>
+                        These are the official Trench Crusade Scenarios. You can select one from the list below or use the random scenario generator.
+
+                        <br/> <br/>
+                        <a href={'/scenario/generator'}>
+                            Scenario Generator
+                            <FontAwesomeIcon icon={faChevronRight} className={'icon-inline-right'}/>
+                        </a>
+                    </p>
+
+                    <div className={'spacer-20'}></div>
+
+                    <h2>
+                        {'Scenarios Table'}
+                    </h2>
+
+                    <table className={'table_headed table_headed-highlight'}>
+                        <thead>
+                            <tr>
+                                <th>Scenario</th>
+                                <th>Source</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {/* @TODO: use navigate*/}
+                            {scenarios.map((scenario, index) => (
+                                <tr key={index}>
+                                    <td className={'font-normal'}>
+                                        <a href={'/compendium/scenario/' + scenario.link}>
+                                            {scenario.name}
+                                        </a>
+                                    </td>
+                                    <td>
+                                        {scenario.source}
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+
+
                 </ErrorBoundary>
             )
         },
@@ -546,31 +641,118 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         laconic: "Forces a warband must appease in campaigns",
         menushowitems: true,
         defaultpage(ViewPageController: CollectionsListPage) {
+
+            // @TODO: get ressources from data
+            const patrons = [
+                {
+                    name: 'Anti-Pope of Avignon',
+                    link: 'pt_antipopeofavignon',
+                    factions: 'Cult of the Black Grail, Dirge of the Great Hegemon'
+                },
+                {
+                    name: 'Infernal Noble',
+                    link: 'pt_infernalnoble',
+                    factions: 'Infernal Noble'
+                },
+                {
+                    name: 'Learned Saint',
+                    link: 'pt_learnedsaint',
+                    factions: 'Cavalcade of the Tenth Plague, Eire Rangers, Expeditionary Forces of Abyssinia, Kingdom of Alba Assault Detatchment, Papal States Intervention Force, Procession of the Sacred Affliction, Stoßtruppen of the Free State of Prussia, The Prinicpality of New Antioch, Trench Pilgrims, War Pilgrimage of Saint Methodius'
+                },
+                {
+                    name: 'Mammon',
+                    link: 'pt_mammon',
+                    factions: 'Heretic Legion, Heretic Naval Raiding Party, Knights of Avarice, Trench Ghosts'
+                },
+                {
+                    name: 'Sublime Gate',
+                    link: 'pt_sublimegate',
+                    factions: 'Defender\'s of the Iron Wall, Fidai of Alamut - The Cabal of Assassins, House of Wisdom, Iron Sultanate'
+                },
+                {
+                    name: 'Temporal Lord',
+                    link: 'pt_temporallord',
+                    factions: 'Expeditionary Forces of Abyssinia, Kingdom of Alba Assault Detatchment, Papal States Intervention Force, Stoßtruppen of the Free State of Prussia, The Prinicpality of New Antioch'
+                },
+                {
+                    name: 'The Order of the Fly',
+                    link: 'pt_orderofthefly',
+                    factions: 'Cult of the Black Grail, Dirge of the Great Hegemon'
+                },
+                {
+                    name: 'Warrior Saint',
+                    link: 'pt_warriorsaint',
+                    factions: 'Cavalcade of the Tenth Plague, Expeditionary Forces of Abyssinia, Kingdom of Alba Assault Detatchment, Papal States Intervention Force, Procession of the Sacred Affliction, Stoßtruppen of the Free State of Prussia, The Prinicpality of New Antioch, Trench Pilgrims'
+                }
+            ];
+
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                        <div>
-                            {"Patrons Default Page - THIS IS A TEST TO BE REPLACED"}
-                        </div>
+                    <h1>
+                        {"Patrons"}
+                    </h1>
+
+                    <p>
+                        {'These are the official Trench Crusade Patron. You can select one from the list below or use the official PDF.'}
+
+                        <br/> <br/>
+                        <a href={'https://www.trenchcrusade.com/s/Trench-Crusade-Campaign-Rules-v163.pdf'}
+                           rel={"noreferrer noopener nofollow"} target={'_blank'}
+                        >
+                            Official Campaign Rules PDF
+                            <FontAwesomeIcon icon={faChevronRight} className="icon-inline-right"/>
+
+                        </a>
+                    </p>
+
+                    <div className={'spacer-20'}></div>
+
+                    <h2>Patrons Table</h2>
+
+                    <table className={'table_headed table_headed-highlight'}>
+                        <thead>
+                        <tr>
+                            <th>Patron</th>
+                            <th>Available to</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        {/* @TODO: use navigate*/}
+                        {patrons.map((patron, index) => (
+                            <tr key={index}>
+                                <td className={'font-normal'}>
+                                    <a href={'/compendium/patron/' + patron.link}>
+                                        {patron.name}
+                                    </a>
+                                </td>
+                                <td>
+                                    {patron.factions}
+                                </td>
+                            </tr>
+                        ))}
+                        </tbody>
+                    </table>
                 </ErrorBoundary>
             )
         },
         returnDisplay(item: any) {
             return (
-                
+
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
                     <h1>
                         {item.Name}
                     </h1>
 
-                    <PatronDisplay data={item} />
+                    <PatronDisplay data={item}/>
                 </ErrorBoundary>
             )
         },
-        returnFilterSelect(manager : FilterManager, update : NoneToNoneFunction, close : NoneToNoneFunction) {
+        returnFilterSelect(manager: FilterManager, update: NoneToNoneFunction, close: NoneToNoneFunction) {
             return (
-                
+
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    
+
                 </ErrorBoundary>
             )
         }

@@ -22,7 +22,7 @@
                     margin-bottom: 5px
 
 // tables in the rules section
-.book-rules-wrap
+.PagedCompendiumDisplay
     .description-element
     .info-box
 
@@ -39,5 +39,14 @@
             border: 1px solid $color-bg-1
             padding: 15px
 
-            &:first-of-type
+            &:first-of-type:not(.font-normal)
                 font-weight: bold
+
+    table.table_headed.table_headed-highlight
+        th
+            color: #fff
+            background-color: $color-highlight-bg
+
+    table
+        td.font-normal
+            font-weight: normal
