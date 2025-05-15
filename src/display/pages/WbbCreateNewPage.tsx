@@ -45,18 +45,27 @@ const WbbCreateNewPage = (prop: any) => {
         setSelectedFaction(null);
     };
 
+
+
     return (
         <div className={'WbbCreateNewPage'}>
 
                 {step === 1 && (
                     <div className={'container'}>
                         <div className={'headline-wrap'}>
-                            <h1>{'New Warband'}</h1>
+                            <h1>
+                                <span className={'headline-back-btn'} onClick={() => (
+                                    navigate('/warband/')
+                                )}>
+                                    <FontAwesomeIcon icon={faChevronLeft} className={''}/>
+                                </span>
+                                {'New Warband'}
+                            </h1>
                             <h2 className={'sub-headline'}>{'Select Faction'}</h2>
                         </div>
 
                         <div className={'wbb-faction-masonry'}>
-                            {factionlist.map(item => (
+                        {factionlist.map(item => (
                                 <WbbFactionSelectItem
                                     key={item.HeldItem.ID}
                                     item={item.HeldItem}
@@ -85,7 +94,12 @@ const WbbCreateNewPage = (prop: any) => {
             {step === 2 && selectedFaction && (
                 <div className={'container'}>
                     <div className={'headline-wrap'}>
-                        <h1>{'New Warband'}</h1>
+                        <h1>
+                            <span className={'headline-back-btn'} onClick={handleBack}>
+                                <FontAwesomeIcon icon={faChevronLeft} className={''}/>
+                            </span>
+                            {'New Warband'}
+                        </h1>
                         <h2 className={'sub-headline'}>{'Warband Name'}</h2>
                     </div>
 

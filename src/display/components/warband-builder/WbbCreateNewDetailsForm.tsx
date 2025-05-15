@@ -36,7 +36,7 @@ const WbbCreateNewDetailsForm: React.FC<{
     return (
         <div className={'WbbCreateNewDetailsForm'}>
             <div className={'row'}>
-                <div className={'col-12 col-xl-6'}>
+                <div className={'col-12 col-xl-5'}>
                     <div className={'warband-options-wrap'}>
                         <h2 className={'mb-3'}>{chosenfaction.Name}</h2>
                         <label className="form-label">Warband Name</label>
@@ -59,12 +59,12 @@ const WbbCreateNewDetailsForm: React.FC<{
                     </div>
                 </div>
 
-                <div className={'col-12 col-xl-6'}>
+                <div className={'col-12 col-xl-7'}>
                     <div className={'faction-image-wrap'}>
 
                     <SynodFactionImage
                             factionSlug={chosenfaction.ID}
-                            size={'large'}
+                            size={'full'}
                         />
                     </div>
                 </div>
