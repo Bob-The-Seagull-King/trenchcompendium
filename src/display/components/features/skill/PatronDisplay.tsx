@@ -29,7 +29,7 @@ const PatronDisplay = (props: any) => {
                             {patronObject.Factions.map((item) => (
                                 <span key={item.Name} className="bodytext complextext small-side-margin">
                                     {
-                                        ((patronObject.Factions.indexOf(item) != 0)? "," : " ") +  item.Name + " "
+                                        ((patronObject.Factions.indexOf(item) != 0)? ", " : "") +  item.Name + ""
                                     }
                                 </span>
                             ))}
