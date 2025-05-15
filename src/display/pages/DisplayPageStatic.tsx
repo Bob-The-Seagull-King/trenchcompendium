@@ -20,6 +20,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faChevronRight, faPlus} from "@fortawesome/free-solid-svg-icons";
 import React from "react";
 import RulesBannerImage from "../components/rules-content/RulesBannerImage";
+import RulesBannerText from "../components/rules-content/RulesBannerText";
 import CustomNavLink from "../components/subcomponents/interactables/CustomNavLink";
 import {useNavigate} from "react-router-dom";
 
@@ -50,9 +51,101 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         defaultpage(ViewPageController: CollectionsListPage) {
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                        <div>
-                            {"Game Rule Default Page - THIS IS A TEST TO BE REPLACED"}
+                    <h1>
+                        {'Playtest Rules v1.6'}
+                    </h1>
+
+                    <p>
+                        {'All the rules for Trench Crusade in one place. Below are the official Playtest Rules version 1.6 for the tabletop game Trench Crusade. These are the official rules taken from the rules PDF and always kept up to date. Our goal is to provide a comprehensive resource for all rules in the game.'}
+                    </p>
+
+                    <div className={'row'}>
+
+                        <div className={'col-12 col-md-6'}>
+                            <RulesBannerText
+                                link="/compendium/gamerule/gr_introduction"
+                                title={'How to play Trench Crusade'}
+                            >
+                                <>
+                                    <RulesBannerText
+                                        link="/compendium/gamerule/gr_gameturnsandactivations"
+                                        title={'Game Turns & Activations'}
+                                    >
+                                    </RulesBannerText>
+
+                                    <RulesBannerText
+                                        link="/compendium/gamerule/gr_plusdiceandminusdice"
+                                        title={'+DICE and -DICE'}
+                                    >
+                                    </RulesBannerText>
+
+                                    <RulesBannerText
+                                        link="/compendium/gamerule/gr_movement"
+                                        title={'Movement'}
+                                    >
+                                    </RulesBannerText>
+
+                                    <RulesBannerText
+                                        link="/compendium/gamerule/gr_injurychart"
+                                        title={'Injury Chart'}
+                                    >
+                                    </RulesBannerText>
+
+                                    <RulesBannerText
+                                        link="/compendium/gamerule/gr_rangedcombat"
+                                        title={'Ranged Combat'}
+                                    >
+                                    </RulesBannerText>
+
+                                    <RulesBannerText
+                                        link="/compendium/gamerule/gr_meleecombat"
+                                        title={'Melee Combat'}
+                                    >
+                                    </RulesBannerText>
+
+                                    <RulesBannerText
+                                        link="/compendium/gamerule/gr_startingawarband"
+                                        title={'Starting a Warband'}
+                                    >
+                                    </RulesBannerText>
+
+                                    <RulesBannerText
+                                        link="/compendium/gamerule/gr_scenarios"
+                                        title={'Scenarios'}
+                                    >
+                                    </RulesBannerText>
+                                </>
+                            </RulesBannerText>
                         </div>
+                        
+                        <div className={'col-12 col-md-6'}>
+                            <RulesBannerText
+                                link="/compendium/keyword"
+                                title={'Keywords'}
+                            >
+                                <>
+                                </>
+                            </RulesBannerText>
+
+
+                            <RulesBannerText
+                                link="/compendium/glossary"
+                                title={'Glossary'}
+                            >
+                                <>
+                                </>
+                            </RulesBannerText>
+
+
+                            <RulesBannerText
+                                link="/compendium/model"
+                                title={'Models'}
+                            >
+                                <>
+                                </>
+                            </RulesBannerText>
+                        </div>
+                    </div>
                 </ErrorBoundary>
             )
         },
@@ -63,21 +156,21 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
                         {item.Name}
                     </h1>
 
-                    <BookRuleDisplay data={item} />
+                    <BookRuleDisplay data={item}/>
                 </ErrorBoundary>
             )
         },
-        returnFilterSelect(manager : FilterManager, update : NoneToNoneFunction, close : NoneToNoneFunction) {
+        returnFilterSelect(manager: FilterManager, update: NoneToNoneFunction, close: NoneToNoneFunction) {
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
                 </ErrorBoundary>
             )
         }
-    },    
+    },
     errata: {
         searchId: 'errata',
-        width: 9 ,
-        titlename : 'Errata Rules',
+        width: 9,
+        titlename: 'Errata Rules',
         laconic: "Errata & Unfinished/Beta Rules",
         menushowitems: true,
         defaultpage(ViewPageController: CollectionsListPage) {
@@ -711,10 +804,10 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
 
                     <table className={'table_headed table_headed-highlight'}>
                         <thead>
-                        <tr>
-                            <th>Patron</th>
-                            <th>Available to</th>
-                        </tr>
+                            <tr>
+                                <th>Patron</th>
+                                <th>Available to</th>
+                            </tr>
                         </thead>
 
                         <tbody>
