@@ -4,7 +4,12 @@
 //
 
 .WbbEditView
+    position: relative
+
     .WbbEditViewMain
+        position: relative
+        z-index: 5
+
         padding-top: 0
         padding-bottom: 30px
 
@@ -32,17 +37,19 @@
                 display: none
 
             @media(min-width: 768px)
-                background-color: $color-bg-2
+                //background-color: $color-bg-2
                 height: 100%
                 display: flex
                 flex-direction: column
                 justify-content: center
 
     .warband-title
+        position: relative
+        z-index: 5
         padding-top: 15px
         padding-bottom: 15px
         margin-bottom: 30px
-        background-color: $color-highlight-bg-2
+        background-color: $color-highlight-bg
 
         > .container
             position: relative
@@ -59,6 +66,37 @@
             &.details-open
                 display: none
 
+
+    .WbbEditView-hero
+        position: absolute
+        z-index: 1
+        top: 55px
+        left: 0
+        width: 100%
+        aspect-ratio: 2 / 1
+        overflow: hidden
+
+        img
+            position: absolute
+            z-index: 2
+            top: 0
+            left: 0
+            width: 105%
+            height: 105%
+            object-fit: cover
+            object-position: center
+            filter: blur(3px)
+
+        &:before
+            content: ""
+            position: absolute
+            z-index: 3
+            bottom: 0px
+            left: 0
+            display: block
+            width: 100%
+            height: 100px
+            background: linear-gradient(0deg,$color-bg-1 0%, rgba(51, 51, 51, 0) 100%)
 
     .warband-meta
         position: relative

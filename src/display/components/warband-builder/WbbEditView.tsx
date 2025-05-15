@@ -27,6 +27,7 @@ import WbbContextualPopover from "./WbbContextualPopover";
 import {PrintModeProvider, usePrintMode} from "../../../context/PrintModeContext";
 import WbbPrintViewSimple from "./WbbPrintViewSimple";
 import {useGlobalState} from "../../../utility/globalstate";
+import SynodFactionImage from "../../../utility/SynodFactionImage";
 
 interface WbbEditViewProps {
     warbandData: UserWarband | null;
@@ -194,7 +195,15 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                                     </div>
                                 </div>
 
+                                <div className={'WbbEditView-hero'}>
+                                    <SynodFactionImage
+                                        factionSlug={warband.GetFactionSlug()}
+                                        size={'full'}
+                                    />
+                                </div>
+
                                 <div className={'container WbbEditViewMain'}>
+
                                     <div className={`warband-wrap ${detailType ? 'details-open' : ''}`}>
                                         {/* Warband Meta */}
 
@@ -397,7 +406,7 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                             <>
                                 <div className={'container'}>
                                     <div className={'exit-print-view'} onClick={exitPrintMode}>
-                                        <FontAwesomeIcon icon={faChevronLeft} className="icon-inline-left-l"/>
+                                    <FontAwesomeIcon icon={faChevronLeft} className="icon-inline-left-l"/>
                                         {'Back to Warband'}
                                     </div>
                                 </div>

@@ -139,6 +139,14 @@ class UserWarband extends DynamicContextObject {
     public GetFactionName () {
         return this.Faction.GetSelfName();
     }
+    /**
+     * Returns the Name of the Faction as string
+     */
+    public GetFactionSlug () {
+
+        return this.Faction.MyFaction?.ID;
+
+    }
 
     /**
      * Returns the Name of the Base-Faction as string
