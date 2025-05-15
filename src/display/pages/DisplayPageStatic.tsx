@@ -16,6 +16,10 @@ import RulesSkillTable from "../components/rules-content/RulesSkillTable";
 import RulesEquipmentEntry from "../components/rules-content/RulesEquipmentEntry";
 import { CollectionsListPage } from "../../classes/viewmodel/pages/CollectionListPage";
 import RulesKeywordsTable from "../components/rules-content/RulesKeywordsTable";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faChevronRight} from "@fortawesome/free-solid-svg-icons";
+import React from "react";
+import RulesBannerImage from "../components/rules-content/RulesBannerImage";
 
 export interface DisplayCollectionType {
     searchId      : string,
@@ -375,17 +379,75 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         defaultpage(ViewPageController: CollectionsListPage) {
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                        <div>
-                            {"Campaign Rule Default Page - THIS IS A TEST TO BE REPLACED"}
+                    <>
+                        <h1>
+                            {'Campaigns v1.6.3'}
+                        </h1>
+                        <p className={''}>
+                            {'Here you can find the campaign rules. When in doubt consult the official campaign rules pdf.'}
+
+                            <br/>
+                            <br/>
+
+                            <a href={'https://www.trenchcrusade.com/s/Trench-Crusade-Campaign-Rules-v163.pdf'}
+                               rel={"noreferrer noopener nofollow"} target={'_blank'}
+                            >
+                                Official Campaign Rules PDF
+                                <FontAwesomeIcon icon={faChevronRight} className="icon-inline-right"/>
+
+                            </a>
+                        </p>
+
+                        <div className={'spacer-20'}></div>
+
+                        <div className={'row '}>
+                            <div className={'col-12 col-md-6'}>
+                                {/* @TODO: Change to static page */}
+                                <RulesBannerImage
+                                    imageId={210}
+                                    linkUrl={'/compendium/campaignrule/br_introduction'}
+                                    linkText={'Campaign Rules'}
+                                />
+                            </div>
+
+                            <div className={'col-12 col-md-6'}>
+                                <RulesBannerImage
+                                    imageId={212}
+                                    linkUrl={'/compendium/patron'}
+                                    linkText={'Patrons'}
+                                />
+                            </div>
+                            <div className={'col-12 col-md-6'}>
+                                <RulesBannerImage
+                                    imageId={216}
+                                    linkUrl={'/compendium/explorationtable'}
+                                    linkText={'Exploration'}
+                                />
+                            </div>
+                            <div className={'col-12 col-md-6'}>
+                                <RulesBannerImage
+                                    imageId={228}
+                                    linkUrl={'/compendium/skillgroup'}
+                                    linkText={'Skills'}
+                                />
+                            </div>
+                            <div className={'col-12 col-md-6'}>
+                                <RulesBannerImage
+                                    imageId={225}
+                                    linkUrl={'/compendium/injury'}
+                                    linkText={'Injuries'}
+                                />
+                            </div>
                         </div>
+                    </>
                 </ErrorBoundary>
             )
         },
-        returnFilterSelect(manager : FilterManager, update : NoneToNoneFunction, close : NoneToNoneFunction) {
+        returnFilterSelect(manager: FilterManager, update: NoneToNoneFunction, close: NoneToNoneFunction) {
             return (
-                
+
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    
+
                 </ErrorBoundary>
             )
         }
