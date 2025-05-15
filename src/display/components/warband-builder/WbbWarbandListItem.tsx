@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { UserWarband } from '../../../classes/saveitems/Warband/UserWarband';
 import { WarbandManager } from '../../../classes/saveitems/Warband/WarbandManager';
 import SynodImage from "../../../utility/SynodImage";
-
+import SynodFactionImage from "../../../utility/SynodFactionImage";
 
 /**
  * This is a list item of a warband for the WBB overview page.
@@ -72,7 +72,7 @@ const WbbWarbandListItem: React.FC<WbbWarbandListItemProps> = ({ item, manager, 
 
 
     return (
-        <div className={'col-12 col-md-6'}>
+        <div className={'col-12 col-lg-6'}>
             <div className={'WbbWarbandListItem'} >
                 <div onClick={navigateToEdit} className={'warband-item-text-wrap'}>
                     <div className={'item-name'}>
@@ -95,8 +95,8 @@ const WbbWarbandListItem: React.FC<WbbWarbandListItemProps> = ({ item, manager, 
                 </div>
 
                 <div className={'warband-item-image-wrap'}>
-                    <SynodImage
-                        imageId={113} // @TODO: add support for faction specific images
+                    <SynodFactionImage
+                        factionSlug={(item.Faction.MyFaction)? item.Faction.MyFaction.SelfDynamicProperty.OptionChoice.ID : ""}
                         className={'warband-item-image'}
                         size={'large'}
                     />

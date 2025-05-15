@@ -25,16 +25,18 @@
         top: 0
         right: 0
         height: 100%
+        aspect-ratio: 2 / 1
 
+        max-width: 75%
 
         &:before
             content: ""
+            z-index: 3
             display: block
             opacity: 1
             position: absolute
             top: 0
             left: 0
-            z-index: 2
             width: 50px
             height: 100%
             transition: opacity .3s ease
@@ -46,7 +48,7 @@
             display: block
             opacity: 0
             position: absolute
-            z-index: 2
+            z-index: 3
             top: 0
             left: 0
             width: 50px
@@ -56,8 +58,14 @@
             background: linear-gradient(90deg,rgba(64, 64, 64, 1) 0%, rgba(64, 64, 64, 0) 100%)
 
     .warband-item-image
+        position: absolute
+        z-index: 2
+        top: 0
+        right: 0
         height: 100%
-        width: auto
+        width: 100%
+        object-position: center
+        object-fit: cover
 
     &:hover
         background-color: $color-bg-3

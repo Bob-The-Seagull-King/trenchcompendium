@@ -71,7 +71,7 @@ const WbbOverviewPage = (prop: any) => {
                         <WbbWarbandListItem key={item.ID} item={item} manager={Manager} parentfunc={updateSelf}/>
                     ))}
 
-                    <div className={'col-12 col-md-6'}>
+                    <div className={'col-12 col-lg-6'}>
                         <CustomNavLink
                             runfunc={handleCreateNew}
                             link={'/warband/new'}
