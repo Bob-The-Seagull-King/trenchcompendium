@@ -227,9 +227,9 @@ class UserWarband extends DynamicContextObject {
         /** Test Data */ // @TODO
         return [
             {
-                FighterName: 'Olaf',
-                ModelName: 'Jabirean Alchemist',
-                Slug: 'md_jabireanalchemist',
+                FighterName: 'Aladin',
+                ModelName: 'Yüzbaşı Captain',
+                Slug: 'md_yuzbasicaptain',
                 FighterBaseDucats: 75,
                 FighterBaseGlory: 0,
                 FighterTotalCostDucats: 102,
@@ -264,7 +264,7 @@ class UserWarband extends DynamicContextObject {
                 ]
             },
             {
-                FighterName: 'Olaf',
+                FighterName: 'Mustafa',
                 ModelName: 'Assassin',
                 Slug: 'md_sultanateassassin',
                 FighterBaseDucats: 85,
