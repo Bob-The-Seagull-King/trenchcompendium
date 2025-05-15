@@ -29,7 +29,7 @@ const RulesBannerFaction: React.FC<RulesBannerFactionProps> = ({ slug, title, pa
                     <SynodFactionImage
                         factionSlug={slug}
                         className={'faction-image'}
-                        size={'medium'}
+                        size={'full'}
                     />
                 </div>
             </Link>
