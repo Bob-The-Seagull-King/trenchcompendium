@@ -57,8 +57,8 @@ const WbbCreateNewDetailsForm: React.FC<{
                                 disabled={warbandName.trim() === ''}
 
                         >
+                            <FontAwesomeIcon icon={faPlus} className={'icon-inline-left-l'}/>
                             Create Warband
-                            <FontAwesomeIcon icon={faPlus} className={'icon-inline-right-l'}/>
                         </button>
                     </div>
                 </div>
