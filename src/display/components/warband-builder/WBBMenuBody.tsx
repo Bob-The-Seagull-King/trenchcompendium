@@ -12,12 +12,14 @@ import { ToolsController } from '../../../classes/_high_level_controllers/ToolsC
 import RulesMenuItem from "../rules-content/RulesMenuItem";
 import CustomNavLink from '../subcomponents/interactables/CustomNavLink';
 
-interface RulesMenuBodyProps {
+interface WBBMenuBodyProps {
     controller: any;
     onBack: () => void;
+    onNavigate?: () => void;
+
 }
 
-const WBBMenuBody: React.FC<RulesMenuBodyProps> = ({ controller, onBack }) => {
+const WBBMenuBody: React.FC<WBBMenuBodyProps> = ({ controller, onBack, onNavigate }) => {
 
     // Navigation
     const navigate = useNavigate();
@@ -82,7 +84,11 @@ const WBBMenuBody: React.FC<RulesMenuBodyProps> = ({ controller, onBack }) => {
                     <CustomNavLink
                         classes={'compendium-link'}
                         link={`/warband/`}
-                        runfunc={() => {navigate('/warband/')}}
+                        runfunc={() => {
+                            navigate('/warband/')
+                            if (onNavigate) onNavigate();
+                        }
+                    }
                     >
                            {'Warband Manager'}
                     </CustomNavLink>
@@ -91,6 +97,8 @@ const WBBMenuBody: React.FC<RulesMenuBodyProps> = ({ controller, onBack }) => {
                 <RulesMenuItem key={'warbands' + keyvar.toString()}
                                data={warband_struc}
                                parentPath={'warband'}
+                               onNavigate={onNavigate}
+                               
                 />
 
             </div>

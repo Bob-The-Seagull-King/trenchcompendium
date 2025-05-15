@@ -151,6 +151,7 @@ const OffcanvasMenu: React.FC<IControllerProp> = (prop) => {
                         <WBBMenuBody
                             controller={prop.controller}
                             onBack={() => setActiveView('main')}
+                            onNavigate={() => handleClose()}
                         />
                     )}
 
