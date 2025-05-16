@@ -127,7 +127,7 @@ const RulesMenuItem: React.FC<{ data: RulesMenuItemProps[], level?: number; pare
                 
                 useEffect(() => {
                     setCurrentPage(((urlPath.substring(1)) == (itemPath)))
-                    if (((urlPath.substring(1)).includes(itemPath)) && ((urlPath.substring(1)) != (itemPath))) {
+                    if (((urlPath.substring(1)).includes(itemPath))) {
                         setOpenItems(prev => ({
                             ...prev,
                             [item.slug]: true // Toggle open state for this item
