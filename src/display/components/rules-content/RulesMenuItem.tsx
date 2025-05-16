@@ -124,7 +124,7 @@ const RulesMenuItem: React.FC<{ data: RulesMenuItemProps[], level?: number; pare
                 const location = useLocation()
                 const [isCurrentPage, setCurrentPage] = useState(((urlPath.substring(1)) == itemPath))
                 const [keyvar, setkeyvar] = useState(0)
-                
+
                 useEffect(() => {
                     setCurrentPage(((urlPath.substring(1)) == (itemPath)))
                     if (((urlPath.substring(1)).includes(itemPath))) {
@@ -148,9 +148,10 @@ const RulesMenuItem: React.FC<{ data: RulesMenuItemProps[], level?: number; pare
                         <div key={keyvar} className="menu-list-item-anchor-wrap">
                             <CustomNavLink link={`/${itemPath}`} runfunc={() => {
                                 NavigateOut(`/${itemPath}`)
-
-                            }}>
-                                {item.title + ((isCurrentPage == true)? " This Is Me" : "")}
+                                }}
+                               classes={((isCurrentPage == true)? "current" : "")}
+                            >
+                                {item.title}
                             </CustomNavLink>
                         </div>
                         
