@@ -1116,6 +1116,56 @@ export const BaseContextCallTable : CallEventTable = {
             return relayVar;
         }
     },
+    keyword_add: {
+        event_priotity: 0,
+        async getContextuallyRelevantKeywordsByID(this: EventRunner, eventSource : any, relayVar : string[], trackVal : Model, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            if (context_func['value']) {
+                for (let i = 0; i < context_func['value'].length; i++) {
+                    if (!relayVar.includes(context_func['value'][i])) {
+                        relayVar.push(context_func['value'][i])
+                    }
+                }
+            }            
+            return relayVar;
+        }
+    },
+    keyword_mod: {
+        event_priotity: 1,
+        async getContextuallyRelevantKeywordsByID(this: EventRunner, eventSource : any, relayVar : string[], trackVal : Model, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            if (context_func['mods']) {
+                for (let i = 0; i < context_func['mods'].length; i++) {
+                    const rel_mod = context_func['mods'][i]
+
+                    if (rel_mod['type'] == 'add') {
+                        if (!relayVar.includes(rel_mod['value'])) {
+                            relayVar.push(rel_mod['value'])
+                        }
+                    }
+                    if (rel_mod['type'] == 'remove') {
+                        relayVar = relayVar.filter(item => !(item != rel_mod['value']))
+                    }
+                    
+                }
+            }            
+            return relayVar;
+        }
+    },
+    keyword_mod_remove: {
+        event_priotity: 2,
+        async getContextuallyRelevantKeywordsByID(this: EventRunner, eventSource : any, relayVar : string[], trackVal : Model, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            if (context_func['mods']) {
+                for (let i = 0; i < context_func['mods'].length; i++) {
+                    const rel_mod = context_func['mods'][i]
+                    
+                    if (rel_mod['type'] == 'remove') {
+                        relayVar = relayVar.filter(item => !(item != rel_mod['value']))
+                    }
+                    
+                }
+            }            
+            return relayVar;
+        }
+    },
     set_stat: {
         event_priotity: 1,
         async updateModelStats(this: EventRunner, eventSource : any, relayVar : ModelStatistics,   context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {

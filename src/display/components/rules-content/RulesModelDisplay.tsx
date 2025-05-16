@@ -37,6 +37,8 @@ import FighterCardMetaEntryKeywords from "./FighterCard/FighterCardMetaEntryKeyw
 import {useSynodModelImageData} from "../../../utility/useSynodModelImageData";
 import { ContextObject } from '../../../classes/contextevent/contextobject';
 import { IChoice } from '../../../classes/options/StaticOption';
+import { Keyword } from '../../../classes/feature/glossary/Keyword';
+import { KeywordFactory } from '../../../factories/features/KeywordFactory';
 
 const RulesModelDisplay = (props: any) => {
     const factionmodelObject: FactionModelRelationship = props.data
@@ -47,6 +49,7 @@ const RulesModelDisplay = (props: any) => {
     const [statchoices, setstats] = useState({})
     const [upgrades, setupgrades] = useState<UpgradesGrouped>({})
     const [abilities, setabilities] = useState<Ability[]>([])
+    const [keywordsList, setkeywords] = useState<Keyword[]>([])
     const [BaseString, setBaseString] = useState('')
     const [minimum, setminimum] = useState("")
     const [maximum, setmaximum] = useState("")
@@ -54,6 +57,10 @@ const RulesModelDisplay = (props: any) => {
 
     const sourceData = useSynodModelImageData(modelcollectionObject.GetSlug());
 
+    async function getKeywords(abilities: Ability[]) {
+        
+        setkeyvar(_keyvar + 1);
+    }
 
     // Render no lore if loreshow !== 'true'
     const [loreshow] = useGlobalState('loreshow');
@@ -113,6 +120,7 @@ const RulesModelDisplay = (props: any) => {
             }
 
             /* ABILITIES */
+            let cur_abilities = modelcollectionObject.Abilities
             if (parentfaction != undefined) {
                 const result_abilities = await factionmodelObject.getContextuallyAvailableAbilities(parentfaction);
                 if (bonusselections != undefined && (Object.entries(bonusselections).length > 0)) {
@@ -126,17 +134,50 @@ const RulesModelDisplay = (props: any) => {
                             result_abilities,
                             modelcollectionObject
                         )
+                        cur_abilities = result
                         setabilities(result)
                         }
                     }
                 } else {
+                    cur_abilities = result_abilities
                     setabilities(result_abilities);
                 }
             } else {
+                cur_abilities = modelcollectionObject.Abilities
                 setabilities(modelcollectionObject.Abilities)
             }
 
-            
+            /* KEYWORDS */
+            const KeywordsList : Keyword[] = []
+
+            const BaseKeywords : Keyword[] = factionmodelObject.getKeywords();
+            let IDString : string[] = []
+
+            for (let i = 0; i < BaseKeywords.length; i++) {
+                IDString.push(BaseKeywords[i].ID)
+            }
+            console.log(IDString)
+
+            for (let i = 0; i < cur_abilities.length; i++) {
+                console.log(cur_abilities)
+                const Events : EventRunner = new EventRunner();
+                IDString = await Events.runEvent(
+                    "getContextuallyRelevantKeywordsByID",
+                    cur_abilities[i],
+                    [],
+                    IDString,
+                    modelcollectionObject
+                )
+                console.log(IDString)
+            }
+
+            for (let i = 0; i < IDString.length; i++) {
+                const Keyword = await KeywordFactory.CreateNewKeyword(IDString[i], null)
+                KeywordsList.push(Keyword);
+            }
+
+            setkeywords(KeywordsList)
+            await getKeywords(abilities);
 
             /* MODEL MIN/MAX */                
             const result_max = await EventProc.runEvent(
@@ -204,7 +245,7 @@ const RulesModelDisplay = (props: any) => {
                         armour={getModelStatArmour(statchoices)}
                     />
 
-                    <div className="fighter-card-meta fighter-card-meta-below">
+                    <div className="fighter-card-meta fighter-card-meta-below" key={_keyvar}>
                         <FighterCardMetaEntry
                             className="fighter-base"
                             label="Base"
@@ -212,7 +253,8 @@ const RulesModelDisplay = (props: any) => {
                         />
 
                         <FighterCardMetaEntryKeywords
-                            keywords={factionmodelObject.getKeywords()}
+                            key={_keyvar}
+                            keywords={keywordsList}
                             modelId={modelcollectionObject.ID}
                         />
 

@@ -640,7 +640,7 @@
             "add_to_model": {
                 "id": "rl_horror"
             },
-            "keyword_add": {"value": ["kw_strong"]}
+            "keyword_add": {"value": ["kw_fear"]}
         },
         "name": "Horror",
         "description":  [

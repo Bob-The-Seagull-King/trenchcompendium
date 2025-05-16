@@ -34,6 +34,7 @@ import {useGlobalState} from "../../../../utility/globalstate";
 import { Ability } from '../../../../classes/feature/ability/Ability';
 import { UpgradesGrouped, ModelUpgradeRelationship } from '../../../../classes/relationship/model/ModelUpgradeRelationship';
 import RulesModelUpgrade from '../../../components/rules-content/RulesModelUpgrade';
+import { Keyword } from '../../../../classes/feature/glossary/Keyword';
 
 const ModelDisplay = (props: any) => {
     const modelcollectionObject: Model = props.data

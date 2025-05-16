@@ -27,6 +27,12 @@ import { Link } from 'react-router-dom'
 import {ControllerController} from "../../classes/_high_level_controllers/ControllerController";
 import WbbFactionSelectItem from "../components/warband-builder/WbbFactionSelectItem";
 import RulesBannerFaction from "../components/rules-content/RulesBannerFaction";
+import { Patron } from "../../classes/feature/skillgroup/Patron";
+import { Faction } from "../../classes/feature/faction/Faction";
+import { FactionCollection } from "../../classes/feature/faction/FactionCollection";
+import DefaultFactions from "../components/mainpages/DefaultFactions";
+import DefaultScenario from "../components/mainpages/DefaultScenario";
+import DefaultPatron from "../components/mainpages/DefaultPatron";
 
 export interface DisplayCollectionType {
     searchId      : string,
@@ -71,53 +77,19 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
                                 title={'How to play Trench Crusade'}
                             >
                                 <>
-                                    <RulesBannerText
-                                        link="/compendium/gamerule/gr_gameturnsandactivations"
-                                        title={'Game Turns & Activations'}
-                                    >
-                                    </RulesBannerText>
+                                {ViewPageController.Collection.itemcollection.filter((item) => (item.HeldItem.ID != 'gr_introduction')).map( (rule) => (
 
                                     <RulesBannerText
-                                        link="/compendium/gamerule/gr_plusdiceandminusdice"
-                                        title={'+DICE and -DICE'}
+                                        key={rule.HeldItem.ID}
+                                        link={"/compendium/gamerule/"+rule.HeldItem.ID}
+                                        title={rule.HeldItem.Name}
                                     >
                                     </RulesBannerText>
+                                ))
 
-                                    <RulesBannerText
-                                        link="/compendium/gamerule/gr_movement"
-                                        title={'Movement'}
-                                    >
-                                    </RulesBannerText>
+                                }
+                                    
 
-                                    <RulesBannerText
-                                        link="/compendium/gamerule/gr_injurychart"
-                                        title={'Injury Chart'}
-                                    >
-                                    </RulesBannerText>
-
-                                    <RulesBannerText
-                                        link="/compendium/gamerule/gr_rangedcombat"
-                                        title={'Ranged Combat'}
-                                    >
-                                    </RulesBannerText>
-
-                                    <RulesBannerText
-                                        link="/compendium/gamerule/gr_meleecombat"
-                                        title={'Melee Combat'}
-                                    >
-                                    </RulesBannerText>
-
-                                    <RulesBannerText
-                                        link="/compendium/gamerule/gr_startingawarband"
-                                        title={'Starting a Warband'}
-                                    >
-                                    </RulesBannerText>
-
-                                    <RulesBannerText
-                                        link="/compendium/gamerule/gr_scenarios"
-                                        title={'Scenarios'}
-                                    >
-                                    </RulesBannerText>
                                 </>
                             </RulesBannerText>
                         </div>
@@ -403,141 +375,9 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         },
         defaultpage(ViewPageController: CollectionsListPage) {
 
-            const factionlist = [
-                {
-                    title: 'Court of the Seven-Headed Serpent',
-                    slug: 'fc_courtofthesevenheadedserpent'
-                },
-                {
-                    title: 'Cult of the Black Grail',
-                    slug: 'fc_cultoftheblackgrail',
-                    children: [
-                        {
-                            title: 'Dirge of the Great Hegemon',
-                            slug: 'fc_cultoftheblackgrail_fv_dirgeofthegreathegemon',
-                        },
-                    ]
-                },
-                {
-                    title: 'Heretic Legion',
-                    slug: 'fc_hereticlegion',
-                    children: [
-                        {
-                            title: 'Heretic Naval Raiding Party',
-                            slug: 'fc_hereticlegion_fv_hereticnavalraidingparty',
-                        },
-                        {
-                            title: 'Trench Ghosts',
-                            slug: 'fc_hereticlegion_fv_trenchghosts',
-                        },
-                        {
-                            title: 'Knights of Avarice',
-                            slug: 'fc_hereticlegion_fv_knightsofavarice',
-                        },
-                    ]
-                },
-                {
-                    title: 'Iron Sultanate',
-                    slug: 'fc_ironsultanate',
-                    children: [
-                        {
-                            title: 'Fidai of Alamut - The Cabal of Assassins',
-                            slug: 'fc_ironsultanate_fv_fidaiofalamut',
-                        },
-                        {
-                            title: 'House of Wisdom',
-                            slug: 'fc_ironsultanate_fv_houseofwisdom',
-                        },
-                        {
-                            title: 'Defender\'s of the Iron Wall',
-                            slug: 'fc_ironsultanate_fv_defendersoftheironwall',
-                        },
-                    ]
-                },
-                {
-                    title: 'The Prinicpality of New Antioch',
-                    slug: 'fc_newantioch',
-                    children: [
-                        {
-                            title: 'Papal States Intervention Force',
-                            slug: 'fc_newantioch_fv_papalstatesinterventionforce',
-                        },
-                        {
-                            title: 'Eire Rangers',
-                            slug: 'fc_newantioch_fc_eirerangers',
-                        },
-                        {
-                            title: 'Stoßtruppen of the Free State of Prussia',
-                            slug: 'fc_newantioch_fc_stortruppenofthefreestateofprussia',
-                        },
-                        {
-                            title: 'Kingdom of Alba Assault Detatchment',
-                            slug: 'fc_newantioch_fv_kingdomofalbaassaultdetatchment',
-                        },
-                        {
-                            title: 'Expeditionary Forces of Abyssinia',
-                            slug: 'fc_newantioch_fv_expeditionaryforcedofabyssinia',
-                        },
-                    ]
-                },
-                {
-                    title: 'Trench Pilgrims',
-                    slug: 'fc_trenchpilgrim',
-                    children: [
-                        {
-                            title: 'Procession of the Sacred Affliction',
-                            slug: 'fc_trenchpilgrim_fv_processionofthesacredaffliction',
-                        },
-                        {
-                            title: 'Cavalcade of the Tenth Plague',
-                            slug: 'fc_trenchpilgrim_fv_cavalcadeofthetenthplague',
-                        },
-                        {
-                            title: 'War Pilgrimage of Saint Methodius',
-                            slug: 'fc_trenchpilgrim_fv_warpilgimageofsaintmethodius',
-                        },
-                    ]
-                }
-            ];
-
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    <h1 className="">
-                        {'Factions'}
-                    </h1>
-
-                    <p>
-                        {'Each warband in Trench Crusade belongs to a faction fighting in the Great War. Use the faction lists that follow to recruit and equip your warband. These lists provide information about the troop types available, their weapons, armour and equipment options, as well as special rules specific to that faction.'}
-                    </p>
-
-
-                    <div className={'spacer-20'}></div>
-
-                    <div className={'rules-faction-masonry'}>
-                        {factionlist.map(item => {
-                            const hasChildren = Array.isArray(item.children) && item.children.length > 0
-
-                            return (
-                                <RulesBannerFaction
-                                    key={item.slug}
-                                    slug={item.slug}
-                                    title={item.title}
-                                >
-                                    {hasChildren && (
-                                        <>
-                                            {item.children!.map(sub_item => (
-                                                <RulesBannerFaction
-                                                    key={sub_item.slug}
-                                                    slug={sub_item.slug}
-                                                    title={sub_item.title}
-                                                />
-                                            ))}
-                                        </>
-                                    )}
-                                </RulesBannerFaction>
-                            )
-                        })}
-                    </div>
+                    <DefaultFactions item={ViewPageController}/>
                 </ErrorBoundary>
             )
         },
@@ -568,103 +408,10 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         },
         defaultpage(ViewPageController: CollectionsListPage) {
 
-            // @TODO: get ressources from data
-            const scenarios = [
-                {
-                    name: 'Armoured Train',
-                    link: 'sc_armouredtrain',
-                    source: 'Playtest Rules'
-                },
-                {
-                    name: 'Claim No Man\'s Land',
-                    link: 'sc_claimnomansland',
-                    source: 'Playtest Rules'
-                },
-                {
-                    name: 'Dragon Hunt',
-                    link: 'sc_dragonhunt',
-                    source: 'Playtest Rules'
-                },
-                {
-                    name: 'Great War',
-                    link: 'sc_greatwar',
-                    source: 'Playtest Rules'
-                },
-                {
-                    name: 'Hunt for Heroes',
-                    link: 'sc_huntforheroes',
-                    source: 'Playtest Rules'
-                },
-                {
-                    name: 'Relic Hunt',
-                    link: 'sc_relichunt',
-                    source: 'Playtest Rules'
-                },
-                {
-                    name: 'Storming the Shores',
-                    link: 'sc_stormingtheshores',
-                    source: 'Playtest Rules'
-                },
-                {
-                    name: 'Supply Raid',
-                    link: 'sc_supplyraid',
-                    source: 'Playtest Rules'
-                },
-                {
-                    name: 'Trench Warfare',
-                    link: 'sc_trenchwarfar',
-                    source: 'Playtest Rules'
-                }
-            ];
 
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    <h1>
-                        {"Scenarios"}
-                    </h1>
-
-                    <p>
-                        These are the official Trench Crusade Scenarios. You can select one from the list below or use the random scenario generator.
-
-                        <br/> <br/>
-                        <a href={'/scenario/generator'}>
-                            Scenario Generator
-                            <FontAwesomeIcon icon={faChevronRight} className={'icon-inline-right'}/>
-                        </a>
-                    </p>
-
-                    <div className={'spacer-20'}></div>
-
-                    <h2>
-                        {'Scenarios Table'}
-                    </h2>
-
-                    <table className={'table_headed table_headed-highlight'}>
-                        <thead>
-                            <tr>
-                                <th>Scenario</th>
-                                <th>Source</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            {/* @TODO: use navigate*/}
-                            {scenarios.map((scenario, index) => (
-                                <tr key={index}>
-                                    <td className={'font-normal'}>
-                                        <a href={'/compendium/scenario/' + scenario.link}>
-                                            {scenario.name}
-                                        </a>
-                                    </td>
-                                    <td>
-                                        {scenario.source}
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-
-
+                    <DefaultScenario item={ViewPageController}/>
                 </ErrorBoundary>
             )
         },
@@ -720,7 +467,6 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
 
                         <div className={'row '}>
                             <div className={'col-12 col-md-6'}>
-                                {/* @TODO: Change to static page */}
                                 <RulesBannerImage
                                     imageId={210}
                                     linkUrl={'/compendium/campaignrule/br_introduction'}
@@ -815,7 +561,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
                     <table className={'table_headed table_headed-highlight'}>
                         <tr className={'table_headrow'}>
                             <th>
-                                {'Number of Balles Fought'}
+                                {'Number of Battles Fought'}
                             </th>
                             <th>
                                 {'Possible Locations'}
@@ -887,7 +633,6 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
 
-                    {/* @TODO: item need to contain all injuries instead of one singular injury */}
                     <RulesInjuriesTable data={item} />
                 </ErrorBoundary>
             )
@@ -940,97 +685,10 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         menushowitems: true,
         defaultpage(ViewPageController: CollectionsListPage) {
 
-            // @TODO: get ressources from data
-            const patrons = [
-                {
-                    name: 'Anti-Pope of Avignon',
-                    link: 'pt_antipopeofavignon',
-                    factions: 'Cult of the Black Grail, Dirge of the Great Hegemon'
-                },
-                {
-                    name: 'Infernal Noble',
-                    link: 'pt_infernalnoble',
-                    factions: 'Infernal Noble'
-                },
-                {
-                    name: 'Learned Saint',
-                    link: 'pt_learnedsaint',
-                    factions: 'Cavalcade of the Tenth Plague, Eire Rangers, Expeditionary Forces of Abyssinia, Kingdom of Alba Assault Detatchment, Papal States Intervention Force, Procession of the Sacred Affliction, Stoßtruppen of the Free State of Prussia, The Prinicpality of New Antioch, Trench Pilgrims, War Pilgrimage of Saint Methodius'
-                },
-                {
-                    name: 'Mammon',
-                    link: 'pt_mammon',
-                    factions: 'Heretic Legion, Heretic Naval Raiding Party, Knights of Avarice, Trench Ghosts'
-                },
-                {
-                    name: 'Sublime Gate',
-                    link: 'pt_sublimegate',
-                    factions: 'Defender\'s of the Iron Wall, Fidai of Alamut - The Cabal of Assassins, House of Wisdom, Iron Sultanate'
-                },
-                {
-                    name: 'Temporal Lord',
-                    link: 'pt_temporallord',
-                    factions: 'Expeditionary Forces of Abyssinia, Kingdom of Alba Assault Detatchment, Papal States Intervention Force, Stoßtruppen of the Free State of Prussia, The Prinicpality of New Antioch'
-                },
-                {
-                    name: 'The Order of the Fly',
-                    link: 'pt_orderofthefly',
-                    factions: 'Cult of the Black Grail, Dirge of the Great Hegemon'
-                },
-                {
-                    name: 'Warrior Saint',
-                    link: 'pt_warriorsaint',
-                    factions: 'Cavalcade of the Tenth Plague, Expeditionary Forces of Abyssinia, Kingdom of Alba Assault Detatchment, Papal States Intervention Force, Procession of the Sacred Affliction, Stoßtruppen of the Free State of Prussia, The Prinicpality of New Antioch, Trench Pilgrims'
-                }
-            ];
 
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    <h1>
-                        {"Patrons"}
-                    </h1>
-
-                    <p>
-                        {'These are the official Trench Crusade Patron. You can select one from the list below or use the official PDF.'}
-
-                        <br/> <br/>
-                        <a href={'https://www.trenchcrusade.com/s/Trench-Crusade-Campaign-Rules-v163.pdf'}
-                           rel={"noreferrer noopener nofollow"} target={'_blank'}
-                        >
-                            Official Campaign Rules PDF
-                            <FontAwesomeIcon icon={faChevronRight} className="icon-inline-right"/>
-
-                        </a>
-                    </p>
-
-                    <div className={'spacer-20'}></div>
-
-                    <h2>Patrons Table</h2>
-
-                    <table className={'table_headed table_headed-highlight'}>
-                        <thead>
-                            <tr>
-                                <th>Patron</th>
-                                <th>Available to</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                        {/* @TODO: use navigate*/}
-                        {patrons.map((patron, index) => (
-                            <tr key={index}>
-                                <td className={'font-normal'}>
-                                    <a href={'/compendium/patron/' + patron.link}>
-                                        {patron.name}
-                                    </a>
-                                </td>
-                                <td>
-                                    {patron.factions}
-                                </td>
-                            </tr>
-                        ))}
-                        </tbody>
-                    </table>
+                    <DefaultPatron item={ViewPageController} />
                 </ErrorBoundary>
             )
         },
