@@ -46,10 +46,6 @@ const RulesMenuBody: React.FC<RulesMenuBodyProps> = ({ controller, onBack, onNav
                         slug: "keyword"
                     },
                     {
-                        title: "Glossary",
-                        slug: "glossary"
-                    },
-                    {
                         title: "Units / Models",
                         slug: "model"
                     }               

@@ -105,15 +105,6 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
 
 
                             <RulesBannerText
-                                link="/compendium/glossary"
-                                title={'Glossary'}
-                            >
-                                <>
-                                </>
-                            </RulesBannerText>
-
-
-                            <RulesBannerText
                                 link="/compendium/model"
                                 title={'Models'}
                             >

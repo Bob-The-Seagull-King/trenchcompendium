@@ -68,8 +68,6 @@ const CompendiumRoute: React.FC<IControllerProp> = (prop) => {
                                     controller={prop.controller.PatronCollectionController}/>}/>
                                 <Route path={ROUTES.COMP_RULES_KEYWORDS} element={<CollectionCompendiumDisplay
                                     controller={prop.controller.KeywordCollectionController}/>}/>
-                                <Route path={ROUTES.COMP_RULES_GLOSSARY} element={<FilterableCompendiumDisplay
-                                    controller={prop.controller.GlossaryCollectionController}/>}/>
                                 <Route path={ROUTES.COMP_WARBAND_MODELS} element={<FilterableCompendiumDisplay
                                     controller={prop.controller.ModelCollectionController}/>}/>
                                 <Route path={ROUTES.COMP_CAMPAIGN_INJURIES} element={<CollectionCompendiumDisplay
