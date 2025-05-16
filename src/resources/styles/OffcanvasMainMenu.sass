@@ -228,3 +228,24 @@
                 padding: 15px 15px 15px 25px
                 background-color: $color-bg-3
                 border-bottom: 1px solid $color-bg-2
+
+
+    .menu-list > li
+        > .menu-list-item-anchor-wrap > a
+            &.current
+                position: relative
+                color: $color-highlight
+
+                &:before
+                    content: ""
+                    display: block
+                    width: 3px
+                    background-color: $color-highlight-bg
+                    height: 100%
+                    position: absolute
+                    top: 0
+                    bottom: 0
+                    left: 0
+
+                &:hover
+                    color: $color-highlight
