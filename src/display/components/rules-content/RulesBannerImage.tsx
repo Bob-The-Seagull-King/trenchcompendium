@@ -14,10 +14,14 @@ const RulesBannerImage: React.FC<RulesBannerImageProps> = ({ imageId, linkUrl, l
     if (!imageId || !linkUrl || !linkText) return null;
 
     const navigate = useNavigate();
+    
+    function SpecificNavigtateOut(item : any) {
+        navigate(item, {state: Date.now().toString()});
+    }
     return (
         <CustomNavLink link={linkUrl}
                         runfunc={() => {
-                            navigate(linkUrl)
+                            SpecificNavigtateOut(linkUrl)
                         }}
                         classes={'RulesBannerImage'}  >
             <SynodImage

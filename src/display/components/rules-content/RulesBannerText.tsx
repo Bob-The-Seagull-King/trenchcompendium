@@ -1,7 +1,8 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faChevronRight} from "@fortawesome/free-solid-svg-icons";
+import CustomNavLink from '../subcomponents/interactables/CustomNavLink';
 
 type RulesBannerTextProps = {
     link: string
@@ -10,12 +11,21 @@ type RulesBannerTextProps = {
 }
 
 const RulesBannerText: React.FC<RulesBannerTextProps> = ({ link, title,  children }) => {
+    const navigate = useNavigate();
+    
+    function SpecificNavigtateOut(item : any) {
+        navigate(item, {state: Date.now().toString()});
+    }
     return (
         <div className={'RulesBannerText'}>
-            <Link to={link} className="RulesBannerText-link">
+            <CustomNavLink link={link}
+                        runfunc={() => {
+                            SpecificNavigtateOut(link)
+                        }}
+                        classes={'RulesBannerText-link'}  >
                 {title}
                 <FontAwesomeIcon icon={faChevronRight} className="icon-inline-right"/>
-            </Link>
+            </CustomNavLink>
 
             {children}
         </div>

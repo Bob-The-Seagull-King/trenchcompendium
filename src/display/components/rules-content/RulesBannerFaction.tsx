@@ -1,8 +1,9 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faChevronRight} from "@fortawesome/free-solid-svg-icons";
 import SynodFactionImage from "../../../utility/SynodFactionImage";
+import CustomNavLink from '../subcomponents/interactables/CustomNavLink';
 
 type RulesBannerFactionProps = {
     slug: string
@@ -16,11 +17,18 @@ const RulesBannerFaction: React.FC<RulesBannerFactionProps> = ({ slug, title, pa
     const link = `/compendium/faction/${fullSlug}`
 
 
+    const navigate = useNavigate();
+    
+    function SpecificNavigtateOut(item : any) {
+        navigate(item, {state: Date.now().toString()});
+    }
     return (
         <div className="RulesBannerFaction">
-            <Link to={link}
-                className={'faction-item'}
-            >
+            <CustomNavLink link={link}
+                        runfunc={() => {
+                            SpecificNavigtateOut(link)
+                        }}
+                        classes={'faction-item'}  >
                 <div className={'faction-name'}>
                     {title}
                 </div>
@@ -32,7 +40,7 @@ const RulesBannerFaction: React.FC<RulesBannerFactionProps> = ({ slug, title, pa
                         size={'full'}
                     />
                 </div>
-            </Link>
+            </CustomNavLink>
 
 
             {children}
