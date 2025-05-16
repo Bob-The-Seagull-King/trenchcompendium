@@ -156,10 +156,8 @@ const RulesModelDisplay = (props: any) => {
             for (let i = 0; i < BaseKeywords.length; i++) {
                 IDString.push(BaseKeywords[i].ID)
             }
-            console.log(IDString)
 
             for (let i = 0; i < cur_abilities.length; i++) {
-                console.log(cur_abilities)
                 const Events : EventRunner = new EventRunner();
                 IDString = await Events.runEvent(
                     "getContextuallyRelevantKeywordsByID",
@@ -168,7 +166,6 @@ const RulesModelDisplay = (props: any) => {
                     IDString,
                     modelcollectionObject
                 )
-                console.log(IDString)
             }
 
             for (let i = 0; i < IDString.length; i++) {

@@ -1,9 +1,9 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {Collapse} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faChevronDown, faChevronUp} from "@fortawesome/free-solid-svg-icons";
 import CustomNavLink from '../subcomponents/interactables/CustomNavLink';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { CollectionsListPage } from '../../../classes/viewmodel/pages/CollectionListPage';
 import { DisplayCollectionType, DisplayCollectionDataDex } from '../../pages/DisplayPageStatic';
 import { FactionCollection } from '../../../classes/feature/faction/FactionCollection';
@@ -24,6 +24,8 @@ const RulesMenuItem: React.FC<{ data: RulesMenuItemProps[], level?: number; pare
   parentPath = "compendium" // Set "compendium" as the base path
 }) => {
     
+    const urlPath = useLocation().pathname;
+
     function GetSubItems(item : RulesMenuItemProps) {
         const SubItems : RulesMenuItemProps[] = []
         if (item.controller) {
@@ -118,15 +120,37 @@ const RulesMenuItem: React.FC<{ data: RulesMenuItemProps[], level?: number; pare
                 const isOpen = openItems[item.slug]; // Check if item is open
                 const itemPath = (item.superslug != undefined)? item.superslug : (item.slug != "")? `${parentPath}/${item.slug}` : `${parentPath}` ; // Prepend "compendium" base path
                 const basePath = (item.slug != "")? `${parentPath}/${item.slug}` : `${parentPath}` ; // Prepend "compendium" base path
+                
+                const location = useLocation()
+                const [isCurrentPage, setCurrentPage] = useState(((urlPath.substring(1)) == itemPath))
+                const [keyvar, setkeyvar] = useState(0)
+                
+                useEffect(() => {
+                    setCurrentPage(((urlPath.substring(1)) == (itemPath)))
+                    if (((urlPath.substring(1)).includes(itemPath)) && ((urlPath.substring(1)) != (itemPath))) {
+                        setOpenItems(prev => ({
+                            ...prev,
+                            [item.slug]: true // Toggle open state for this item
+                        }));
+                        setkeyvar(keyvar + 1)
+                    } else {
+                        setOpenItems(prev => ({
+                            ...prev,
+                            [item.slug]: false // Toggle open state for this item
+                        }));
+                        
+                    }
+                }, [location]);
 
+                
                 return (
                     <li className={`menu-list-item ${item.children ? "has-children" : ""}`} key={item.slug}>
-                        <div className="menu-list-item-anchor-wrap">
+                        <div key={keyvar} className="menu-list-item-anchor-wrap">
                             <CustomNavLink link={`/${itemPath}`} runfunc={() => {
                                 NavigateOut(`/${itemPath}`)
 
                             }}>
-                                {item.title}
+                                {item.title + ((isCurrentPage == true)? " This Is Me" : "")}
                             </CustomNavLink>
                         </div>
                         
