@@ -93,7 +93,7 @@ const RulesMenuBody: React.FC<RulesMenuBodyProps> = ({ controller, onBack, onNav
                     },
                     {
                         title: "Skills",
-                        slug: "skillgroup"
+                        slug: "skills"
                     },
                     {
                         title: "Injuries",

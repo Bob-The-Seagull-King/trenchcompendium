@@ -41,6 +41,7 @@ export interface DisplayCollectionType {
     width         : number,
     menushowitems : boolean,
     hidefilter?   : boolean,
+    showtitle?    : boolean,
     defaultpage?  : (ViewPageController: CollectionsListPage) => JSX.Element,
     categoryparam?: string,
     returnDisplay: (item: any) => JSX.Element
@@ -482,7 +483,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
                             <div className={'col-12 col-md-6'}>
                                 <RulesBannerImage
                                     imageId={228}
-                                    linkUrl={'/compendium/skillgroup'}
+                                    linkUrl={'/compendium/skills'}
                                     linkText={'Skills'}
                                 />
                             </div>
@@ -640,7 +641,9 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
     skillgroup: {
         searchId: 'skillgroup',
         width: 9,
+        showtitle    : true,
         titlename : 'Skills',
+        hidefilter   : true,
         laconic: "Unique abilities and talents a model can gain",
         menushowitems: false,
         returnDisplay(item: any) {

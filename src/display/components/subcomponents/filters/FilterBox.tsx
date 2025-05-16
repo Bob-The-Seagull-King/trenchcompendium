@@ -62,6 +62,7 @@ const FilterBox = (prop: any) => {
     // Return result -----------------------------
     return (
         <ErrorBoundary fallback={<div>Something went wrong with FilterBox.tsx</div>}>
+            {(DisplayPage.hidefilter == undefined) &&
             <div className={'FilterBox'}>
                 <div>
                     {FilterManagerObj.ReturnTextFilters().filter((item) => (item.Group == 'name')).map((item) =>
@@ -71,7 +72,7 @@ const FilterBox = (prop: any) => {
                 </div>
 
                 <div>
-                    {(DisplayPage.hidefilter == undefined) &&
+                    
                         <div className="borderthin bordergrey findme-1">
                             <div onClick={() => {setOpen(!open)}} className={'      borderbed bordergrey borderthin backgroundBgCard'}>
                                 <div className={' font-seriftext'}>
@@ -89,9 +90,9 @@ const FilterBox = (prop: any) => {
                                 </div>
                             </Collapse>    
                         </div> 
-                    }                                   
+                                                       
                 </div>
-            </div>
+            </div>}
         </ErrorBoundary>
     )
     // -------------------------------------------

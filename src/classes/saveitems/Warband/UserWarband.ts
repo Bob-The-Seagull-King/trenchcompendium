@@ -177,7 +177,7 @@ class UserWarband extends DynamicContextObject {
      * Returns the Max Ducats Value of the Warband int
      */
     public GetMaxDucats() {
-        return this.Context.LimitDucat;
+        return 0;
     }
 
     /** @TODO
@@ -191,7 +191,7 @@ class UserWarband extends DynamicContextObject {
      * Returns the Max Glory Value of the Warband int
      */
     public GetMaxGlory() {
-        return this.Context.LimitGlory;
+        return 0;
     }
 
     /**

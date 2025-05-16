@@ -118,6 +118,12 @@ const FilterableCompendiumDisplay = (prop: any) => {
     return (
         <ErrorBoundary fallback={<div>Something went wrong with FilteredDisplayCompendium.tsx</div>}>
             <>
+                {(DisplayPage.showtitle != undefined) &&
+                    <>
+                    <br/>
+                    <h1>{DisplayPage.titlename}</h1>
+                    </>
+                }
                 <div className={'FilterableCompendiumDisplay-filter'}>
                     {ReturnFilters()}
                 </div>
