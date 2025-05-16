@@ -181,9 +181,6 @@ class WarbandManager {
             notes: [],
             context: {
                 id: this.CalcID(_title.trim() + "_context"),
-                limit_ducat: self_context.limit_ducat,
-                limit_glory: self_context.limit_glory,
-                limit_model: self_context.limit_model,
                 value_ducat: self_context.value_ducat,
                 value_glory: self_context.value_glory
             },

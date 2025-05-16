@@ -19,9 +19,6 @@ const WbbCreateNewDetailsForm: React.FC<{
     async function handleSubmit() {
         const msg : null | UserWarband = await manager.NewItem(warbandName, chosenfaction.ID, {
             id : "null",
-            limit_ducat: 0,
-            limit_glory: 0,
-            limit_model: 0,
             value_ducat: 0,
             value_glory: 0
         })

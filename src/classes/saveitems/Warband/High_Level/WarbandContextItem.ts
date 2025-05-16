@@ -4,17 +4,11 @@ import { INote } from '../../../Note';
 
 interface IWarbandContextItem {
     id : string,
-    limit_ducat: number,
-    limit_glory: number,
-    limit_model: number,
     value_ducat: number,
     value_glory: number
 }
 
 class WarbandContextItem {
-    public LimitDucat;
-    public LimitGlory;
-    public LimitModel;
     public ValueDucat;
     public ValueGlory;
     public ID;
@@ -27,9 +21,6 @@ class WarbandContextItem {
     public constructor(data: IWarbandContextItem)
     {
         this.ID = data.id;
-        this.LimitModel = data.limit_model;
-        this.LimitGlory = data.limit_glory;
-        this.LimitDucat = data.limit_ducat;
         this.ValueDucat = data.value_ducat;
         this.ValueGlory = data.value_glory;
     }
@@ -37,9 +28,6 @@ class WarbandContextItem {
     public ConvertToInterface() {
         const _objint : IWarbandContextItem = {
             id : this.ID,
-            limit_glory: this.LimitGlory,
-            limit_ducat: this.LimitDucat,
-            limit_model: this.LimitModel,
             value_ducat: this.ValueDucat,
             value_glory: this.ValueGlory
         }
