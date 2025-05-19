@@ -12,7 +12,7 @@ interface RulesEquipmentEntryProps {
 }
 
 const RulesEquipmentEntry: React.FC<RulesEquipmentEntryProps> = ({ equipment }) => {
-
+    
     const [loreshow, setLoreShow] = useGlobalState('loreshow');
 
     return (
