@@ -24,40 +24,14 @@ export const FitlerDataDex : FilterDataTable = {
         searchId: 'glossary',
         findTags() {
             const tempTags: FilterTag[] = []
-            const foundTags = (Requester.MakeRequest({ searchtype: 'tags', searchparam: { type: 'glossary' } })).sort();
-    
-            let i = 0;
-            for (i = 0; i < foundTags.length; i++) {
-                const tempTagText: IFilterText = { group: "tags", val: "", isstrict: false}
-                const tempTagObject: IFilterItem = { group: "tags", isactive: false, doinclude: false, name: foundTags[i]}
-                const tempTagInterface: IFilterTag = { group: "tags", tagtype: tempTagObject, tagval: tempTagText }
-                const tempTagConstructed = new FilterTag(tempTagInterface);
-                tempTags.push(tempTagConstructed);
-            }
-    
             return tempTags;
         },
         findMisc() {
             const tempMisc: FilterItem[] = []
-            const keytypes = ["source"]
-            keytypes.sort();
-    
-            let i = 0;
-            for (i = 0; i < keytypes.length; i ++) {
-                const foundVals = Requester.MakeRequest({ searchtype: 'keyvalues', searchparam: { type: 'glossary' , id: keytypes[i]} }).sort();
-                
-                let j = 0;
-                for (j = 0; j < foundVals.length; j++) {
-                    const tempItemObject: IFilterItem = { group: keytypes[i], isactive: false, doinclude: false, name: foundVals[j]}
-                    const tempItemConstructed = new FilterItem(tempItemObject);
-                    tempMisc.push(tempItemConstructed);
-                }
-            }
-    
             return tempMisc;
         },
         findText() {
-            return [new FilterText({group: "name", val: "", isstrict: false})]
+            return []
         }
     },
     keyword: {
@@ -127,7 +101,7 @@ export const FitlerDataDex : FilterDataTable = {
         },
         findMisc() {
             const tempMisc: FilterItem[] = []
-            const keytypes = ["source","team","keywords","variant_name"]
+            const keytypes = ["source","keywords"]
             keytypes.sort();
     
             let i = 0;
@@ -211,15 +185,6 @@ export const FitlerDataDex : FilterDataTable = {
         },
         findText() {
             return [new FilterText({group: "name", val: "", isstrict: false})]
-        },
-        findRange() {
-            return [new FilterRange(
-                {   set_lower: 0,
-                    set_upper: 100,
-                    lower: 0,
-                    upper: 100,
-                    group: "distance"
-                })]
         }
     },
     faction: {
@@ -231,87 +196,28 @@ export const FitlerDataDex : FilterDataTable = {
         },
         findTags() {
             const tempTags: FilterTag[] = []
-            const foundTags = (Requester.MakeRequest({ searchtype: 'tags', searchparam: { type: 'faction' } })).sort();
-            const foundTagsVariant = (Requester.MakeRequest({ searchtype: 'tags', searchparam: { type: 'factionvariant' } })).sort();
-    
-            const allTags = Array.from(new Set([...foundTags, ...foundTagsVariant]));
-
-            let i = 0;
-            for (i = 0; i < allTags.length; i++) {
-                const tempTagText: IFilterText = { group: "tags", val: "", isstrict: false}
-                const tempTagObject: IFilterItem = { group: "tags", isactive: false, doinclude: false, name: allTags[i]}
-                const tempTagInterface: IFilterTag = { group: "tags", tagtype: tempTagObject, tagval: tempTagText }
-                const tempTagConstructed = new FilterTag(tempTagInterface);
-                tempTags.push(tempTagConstructed);
-            }
-    
             return tempTags;
         },
         findMisc() {
             const tempMisc: FilterItem[] = []
-            const keytypes = ["source","team"]
-            keytypes.sort();
-    
-            let i = 0;
-            for (i = 0; i < keytypes.length; i ++) {
-                const foundVals = Requester.MakeRequest({ searchtype: 'keyvalues', searchparam: { type: 'faction' , id: keytypes[i]} }).sort();
-                const foundValsVariant = Requester.MakeRequest({ searchtype: 'keyvalues', searchparam: { type: 'factionvariant' , id: keytypes[i]} }).sort();
-                const allVals = Array.from(new Set([...foundVals, ...foundValsVariant]));
-
-                let j = 0;
-                for (j = 0; j < allVals.length; j++) {
-                    const tempItemObject: IFilterItem = { group: keytypes[i], isactive: false, doinclude: false, name: allVals[j]}
-                    const tempItemConstructed = new FilterItem(tempItemObject);
-                    tempMisc.push(tempItemConstructed);
-                }
-            }
-    
             return tempMisc;
         },
         findText() {
-            return [new FilterText({group: "name", val: "", isstrict: false})]
+            return []
         }
     },
     scenario: {
         searchId: 'scenario',
         findTags() {
             const tempTags: FilterTag[] = []
-            const foundTags = (Requester.MakeRequest({ searchtype: 'tags', searchparam: { type: 'scenario' } })).sort();
-            
-
-            let i = 0;
-            for (i = 0; i < foundTags.length; i++) {
-                const tempTagText: IFilterText = { group: "tags", val: "", isstrict: false}
-                const tempTagObject: IFilterItem = { group: "tags", isactive: false, doinclude: false, name: foundTags[i]}
-                const tempTagInterface: IFilterTag = { group: "tags", tagtype: tempTagObject, tagval: tempTagText }
-                const tempTagConstructed = new FilterTag(tempTagInterface);
-                tempTags.push(tempTagConstructed);
-            }
-    
             return tempTags;
         },
         findMisc() {
             const tempMisc: FilterItem[] = []
-            const keytypes = ["source"]
-            keytypes.sort();
-    
-            let i = 0;
-            for (i = 0; i < keytypes.length; i ++) {
-                const foundVals = Requester.MakeRequest({ searchtype: 'keyvalues', searchparam: { type: 'scenario' , id: keytypes[i]} }).sort();
-               
-
-                let j = 0;
-                for (j = 0; j < foundVals.length; j++) {
-                    const tempItemObject: IFilterItem = { group: keytypes[i], isactive: false, doinclude: false, name: foundVals[j]}
-                    const tempItemConstructed = new FilterItem(tempItemObject);
-                    tempMisc.push(tempItemConstructed);
-                }
-            }
-    
             return tempMisc;
         },
         findText() {
-            return [new FilterText({group: "name", val: "", isstrict: false})]
+            return []
         }
     },
     gamerule: {
@@ -381,91 +287,35 @@ export const FitlerDataDex : FilterDataTable = {
             return tempMisc;
         },
         findText() {
-            return [new FilterText({group: "name", val: "", isstrict: false})]
+            return []
         }
     },
     skillgroup: {
         searchId: 'skillgroup',
         findTags() {
             const tempTags: FilterTag[] = []
-            const foundTags = (Requester.MakeRequest({ searchtype: 'tags', searchparam: { type: 'skillgroup' } })).sort();
-            
-
-            let i = 0;
-            for (i = 0; i < foundTags.length; i++) {
-                const tempTagText: IFilterText = { group: "tags", val: "", isstrict: false}
-                const tempTagObject: IFilterItem = { group: "tags", isactive: false, doinclude: false, name: foundTags[i]}
-                const tempTagInterface: IFilterTag = { group: "tags", tagtype: tempTagObject, tagval: tempTagText }
-                const tempTagConstructed = new FilterTag(tempTagInterface);
-                tempTags.push(tempTagConstructed);
-            }
-    
             return tempTags;
         },
         findMisc() {
             const tempMisc: FilterItem[] = []
-            const keytypes = ["source"]
-            keytypes.sort();
-    
-            let i = 0;
-            for (i = 0; i < keytypes.length; i ++) {
-                const foundVals = Requester.MakeRequest({ searchtype: 'keyvalues', searchparam: { type: 'skillgroup' , id: keytypes[i]} }).sort();
-               
-
-                let j = 0;
-                for (j = 0; j < foundVals.length; j++) {
-                    const tempItemObject: IFilterItem = { group: keytypes[i], isactive: false, doinclude: false, name: foundVals[j]}
-                    const tempItemConstructed = new FilterItem(tempItemObject);
-                    tempMisc.push(tempItemConstructed);
-                }
-            }
-    
             return tempMisc;
         },
         findText() {
-            return [new FilterText({group: "name", val: "", isstrict: false})]
+            return []
         }
     },
     patron: {
         searchId: 'patron',
         findTags() {
             const tempTags: FilterTag[] = []
-            const foundTags = (Requester.MakeRequest({ searchtype: 'tags', searchparam: { type: 'patron' } })).sort();
-            
-
-            let i = 0;
-            for (i = 0; i < foundTags.length; i++) {
-                const tempTagText: IFilterText = { group: "tags", val: "", isstrict: false}
-                const tempTagObject: IFilterItem = { group: "tags", isactive: false, doinclude: false, name: foundTags[i]}
-                const tempTagInterface: IFilterTag = { group: "tags", tagtype: tempTagObject, tagval: tempTagText }
-                const tempTagConstructed = new FilterTag(tempTagInterface);
-                tempTags.push(tempTagConstructed);
-            }
-    
             return tempTags;
         },
         findMisc() {
             const tempMisc: FilterItem[] = []
-            const keytypes = ["source"]
-            keytypes.sort();
-    
-            let i = 0;
-            for (i = 0; i < keytypes.length; i ++) {
-                const foundVals = Requester.MakeRequest({ searchtype: 'keyvalues', searchparam: { type: 'patron' , id: keytypes[i]} }).sort();
-               
-
-                let j = 0;
-                for (j = 0; j < foundVals.length; j++) {
-                    const tempItemObject: IFilterItem = { group: keytypes[i], isactive: false, doinclude: false, name: foundVals[j]}
-                    const tempItemConstructed = new FilterItem(tempItemObject);
-                    tempMisc.push(tempItemConstructed);
-                }
-            }
-    
             return tempMisc;
         },
         findText() {
-            return [new FilterText({group: "name", val: "", isstrict: false})]
+            return []
         }
     }
 }
