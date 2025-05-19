@@ -1,5 +1,6 @@
 import '../../../../resources/styles/vendor/bootstrap.css'
 import React, { useState } from 'react'
+import { Typeahead } from 'react-bootstrap-typeahead';
 
 // Classes
 import { makestringpresentable } from '../../../../utility/functions'
@@ -20,7 +21,7 @@ const FilterBox = (prop: any) => {
     const updatesearch = prop.runfunction;
     const DisplayPage: DisplayCollectionType = DisplayCollectionDataDex[ViewPageController.TypeName]
 
-    
+    const [singleSelections, setSingleSelections] = useState<string[]>(ViewPageController.returnCollectionName());
     const [open, setOpen] = useState(false);
 
     function UpdateName( _filter : FilterText, newVal : string) {
@@ -30,16 +31,19 @@ const FilterBox = (prop: any) => {
     function ReturnTextFilterParam(_filter : FilterText) {
         return (            
             <div className="ReturnTextFilterParam ">
-                <Form.Control 
-                    onChange={e => UpdateName(_filter, e.target.value)} 
-                    className='bordergrey' 
-                    aria-label="Text input with checkbox" 
-                    defaultValue={_filter.Val}
-                    onKeyUp={(event) => {
+                <Typeahead
+                    id="basic-typeahead-single"
+                    labelKey="name"
+                    onInputChange={(text) => UpdateName(_filter, text)}
+                    options={singleSelections}
+                    placeholder={_filter.Val}
+                    selected={undefined}                    
+                    onKeyDown={(event) => {
                         if (event.key === "Enter") {
                             updatesearch();
                         }
-                    }}/>
+                    }}
+                    />
                 <Button bsPrefix="empty" className="borderremove backgroundBgBase " onClick={() => updatesearch()}>
                     <FontAwesomeIcon icon={faMagnifyingGlass} className=""/>
                 </Button>
