@@ -33,16 +33,6 @@ class CollectionsListPage {
         }
     }
 
-    returnCollectionName() : string[] {
-        const NameList : string[] = []
-
-        for (let i = 0; i < this.Collection.itemcollection.length; i++) {
-            NameList.push(this.Collection.itemcollection[i].HeldItem.Name)
-        }
-
-        return NameList;
-    }
-
     /**
      * Gets the JSON request specified by the filtermanager
      * and, if different to the current request, reruns the

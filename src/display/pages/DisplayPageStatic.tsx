@@ -33,6 +33,8 @@ import { FactionCollection } from "../../classes/feature/faction/FactionCollecti
 import DefaultFactions from "../components/mainpages/DefaultFactions";
 import DefaultScenario from "../components/mainpages/DefaultScenario";
 import DefaultPatron from "../components/mainpages/DefaultPatron";
+import { ModelCollection } from "../../classes/feature/model/ModelCollection";
+import { Equipment } from "../../classes/feature/equipment/Equipment";
 
 export interface DisplayCollectionType {
     searchId      : string,
@@ -43,6 +45,7 @@ export interface DisplayCollectionType {
     hidefilter?   : boolean,
     showtitle?    : boolean,
     defaultpage?  : (ViewPageController: CollectionsListPage) => JSX.Element,
+    textboxOptions: (ViewPageController: CollectionsListPage) => string[],
     categoryparam?: string,
     returnDisplay: (item: any) => JSX.Element
     returnFilterSelect: (manager : FilterManager, update : NoneToNoneFunction, close : NoneToNoneFunction) => JSX.Element
@@ -59,6 +62,9 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         titlename : 'Game Rules',
         laconic: "How to play a game of Trench Crusade",
         menushowitems: true,
+        textboxOptions(ViewPageController: CollectionsListPage) {
+            return []
+        },
         defaultpage(ViewPageController: CollectionsListPage) {
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
@@ -141,6 +147,9 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         titlename: 'Errata Rules',
         laconic: "Errata & Unfinished/Beta Rules",
         menushowitems: true,
+        textboxOptions(ViewPageController: CollectionsListPage) {
+            return []
+        },
         defaultpage(ViewPageController: CollectionsListPage) {
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
@@ -173,6 +182,9 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         titlename : 'Glossary',
         laconic: "Commonly used terms & mechanics",
         menushowitems: false,
+        textboxOptions(ViewPageController: CollectionsListPage) {
+            return []
+        },
         returnDisplay(item: any) {
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
@@ -217,6 +229,9 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         titlename : 'Keywords',
         laconic: "Shared definitions that describe game rules.",
         menushowitems: false,
+        textboxOptions(ViewPageController: CollectionsListPage) {
+            return []
+        },
         returnDisplay(item: any) {
             return (
 
@@ -254,6 +269,17 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         titlename : 'Models',
         laconic: "Who and what partake in battles",
         menushowitems: false,
+        textboxOptions(ViewPageController: CollectionsListPage) {
+            const listofname : string[] = []
+
+            for (let i = 0; i < ViewPageController.Collection.itemcollection.length; i++) {
+                for (let j = 0; j < (ViewPageController.Collection.itemcollection[i].HeldItem as ModelCollection).SubModelsList.length; j++) {
+                    const item = (ViewPageController.Collection.itemcollection[i].HeldItem as ModelCollection).SubModelsList[j].model.Name;
+                    listofname.push(item? item : "")
+                }
+            }
+            return listofname;
+        },
         returnDisplay(item: any) {
             return (
                 
@@ -309,6 +335,15 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         laconic: "Items you can find in the armoury",
         categoryparam: "category",
         menushowitems: false,
+        textboxOptions(ViewPageController: CollectionsListPage) {
+            const listofname : string[] = []
+
+            for (let i = 0; i < ViewPageController.Collection.itemcollection.length; i++) {
+                const item = (ViewPageController.Collection.itemcollection[i].HeldItem as Equipment).Name;
+                listofname.push(item? item : "")
+            }
+            return listofname;
+        },
         returnDisplay(item: any) {
             return (
                 
@@ -356,6 +391,9 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         titlename : 'Factions',
         laconic: "Assorted groups and nations participating in the war",
         menushowitems: true,
+        textboxOptions(ViewPageController: CollectionsListPage) {
+            return []
+        },
         returnDisplay(item: any) {
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
@@ -387,6 +425,9 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         titlename : 'Scenarios',
         laconic: "Unfortunate situations a warband can find itself in",
         menushowitems: true,
+        textboxOptions(ViewPageController: CollectionsListPage) {
+            return []
+        },
         returnDisplay(item: any) {
             return (
 
@@ -422,6 +463,9 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         titlename : 'Campaign Rules',
         laconic: "Rules for playing an extended campaign",
         menushowitems: true,
+        textboxOptions(ViewPageController: CollectionsListPage) {
+            return []
+        },
         returnDisplay(item: any) {
             return (
 
@@ -514,6 +558,9 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         titlename : 'Exploration',
         laconic: "Locations you can find during a campaign",
         menushowitems: true,
+        textboxOptions(ViewPageController: CollectionsListPage) {
+            return []
+        },
         returnDisplay(item: any) {
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
@@ -621,6 +668,9 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         laconic: "Wounds suffered after a battle",
         menushowitems: false,
         hidefilter: true,
+        textboxOptions(ViewPageController: CollectionsListPage) {
+            return []
+        },
         returnDisplay(item: any) {
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
@@ -646,6 +696,9 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         hidefilter   : true,
         laconic: "Unique abilities and talents a model can gain",
         menushowitems: false,
+        textboxOptions(ViewPageController: CollectionsListPage) {
+            return []
+        },
         returnDisplay(item: any) {
             return (
                 
@@ -677,6 +730,9 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         titlename : 'Patrons',
         laconic: "Forces a warband must appease in campaigns",
         menushowitems: true,
+        textboxOptions(ViewPageController: CollectionsListPage) {
+            return []
+        },
         defaultpage(ViewPageController: CollectionsListPage) {
 
 

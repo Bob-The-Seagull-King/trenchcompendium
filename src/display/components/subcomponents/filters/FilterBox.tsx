@@ -21,7 +21,7 @@ const FilterBox = (prop: any) => {
     const updatesearch = prop.runfunction;
     const DisplayPage: DisplayCollectionType = DisplayCollectionDataDex[ViewPageController.TypeName]
 
-    const [singleSelections, setSingleSelections] = useState<string[]>(ViewPageController.returnCollectionName());
+    const [singleSelections, setSingleSelections] = useState<string[]>(DisplayPage.textboxOptions(ViewPageController));
     const [open, setOpen] = useState(false);
 
     function UpdateName( _filter : FilterText, newVal : string) {
