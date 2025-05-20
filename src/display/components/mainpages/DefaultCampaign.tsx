@@ -16,7 +16,66 @@ const DefaultCampaign = () => {
 
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DefaultGame.tsx</div>}>
-                                    
+                          <>
+                        <h1>
+                            {'Campaigns v1.6.3'}
+                        </h1>
+                        <p className={''}>
+                            {'Here you can find the campaign rules. When in doubt consult the official campaign rules pdf.'}
+
+                            <br/>
+                            <br/>
+
+                            <a href={'https://www.trenchcrusade.com/s/Trench-Crusade-Campaign-Rules-v163.pdf'}
+                               rel={"noreferrer noopener nofollow"} target={'_blank'}
+                            >
+                                Official Campaign Rules PDF
+                                <FontAwesomeIcon icon={faChevronRight} className="icon-inline-right"/>
+
+                            </a>
+                        </p>
+
+                        <div className={'spacer-20'}></div>
+
+                        <div className={'row '}>
+                            <div className={'col-12 col-md-6'}>
+                                <RulesBannerImage
+                                    imageId={210}
+                                    linkUrl={'/compendium/campaign/campaign_rules/br_introduction'}
+                                    linkText={'Campaign Rules'}
+                                />
+                            </div>
+
+                            <div className={'col-12 col-md-6'}>
+                                <RulesBannerImage
+                                    imageId={212}
+                                    linkUrl={'/compendium/campaign/patron'}
+                                    linkText={'Patrons'}
+                                />
+                            </div>
+                            <div className={'col-12 col-md-6'}>
+                                <RulesBannerImage
+                                    imageId={216}
+                                    linkUrl={'/compendium/campaign/explorationtable'}
+                                    linkText={'Exploration'}
+                                />
+                            </div>
+                            <div className={'col-12 col-md-6'}>
+                                <RulesBannerImage
+                                    imageId={228}
+                                    linkUrl={'/compendium/campaign/skills'}
+                                    linkText={'Skills'}
+                                />
+                            </div>
+                            <div className={'col-12 col-md-6'}>
+                                <RulesBannerImage
+                                    imageId={225}
+                                    linkUrl={'/compendium/campaign/injury'}
+                                    linkText={'Injuries'}
+                                />
+                            </div>
+                        </div>
+                    </>          
                 </ErrorBoundary>
             )
 };

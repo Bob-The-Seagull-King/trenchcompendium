@@ -481,66 +481,35 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         defaultpage(ViewPageController: CollectionsListPage) {
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    <>
-                        <h1>
-                            {'Campaigns v1.6.3'}
-                        </h1>
-                        <p className={''}>
-                            {'Here you can find the campaign rules. When in doubt consult the official campaign rules pdf.'}
+                    <PageMetaInformation
+                        title={'Campaign Rules 1.6.3'}
+                        description={'All the rules for Trench Crusade in one place. Below are the official Playtest Rules version 1.6 for the tabletop game Trench Crusade.'}
+                    />
 
-                            <br/>
-                            <br/>
+                    <div className={'row'}>
 
-                            <a href={'https://www.trenchcrusade.com/s/Trench-Crusade-Campaign-Rules-v163.pdf'}
-                               rel={"noreferrer noopener nofollow"} target={'_blank'}
+                        <div className={'col-12'}>
+                            <RulesBannerText
+                                link="/compendium/campaign/campaign_rules/br_introduction"
+                                title={'How to play Trench Crusade'}
                             >
-                                Official Campaign Rules PDF
-                                <FontAwesomeIcon icon={faChevronRight} className="icon-inline-right"/>
+                                <>
+                                {ViewPageController.Collection.itemcollection.filter((item) => (item.HeldItem.ID != 'br_introduction')).map( (rule) => (
 
-                            </a>
-                        </p>
+                                    <RulesBannerText
+                                        key={rule.HeldItem.ID}
+                                        link={"/compendium/campaign/campaign_rules/"+rule.HeldItem.ID}
+                                        title={rule.HeldItem.Name}
+                                    >
+                                    </RulesBannerText>
+                                ))
 
-                        <div className={'spacer-20'}></div>
+                                }
+                                    
 
-                        <div className={'row '}>
-                            <div className={'col-12 col-md-6'}>
-                                <RulesBannerImage
-                                    imageId={210}
-                                    linkUrl={'/compendium/campaign/campaign_rules/br_introduction'}
-                                    linkText={'Campaign Rules'}
-                                />
-                            </div>
-
-                            <div className={'col-12 col-md-6'}>
-                                <RulesBannerImage
-                                    imageId={212}
-                                    linkUrl={'/compendium/campaign/patron'}
-                                    linkText={'Patrons'}
-                                />
-                            </div>
-                            <div className={'col-12 col-md-6'}>
-                                <RulesBannerImage
-                                    imageId={216}
-                                    linkUrl={'/compendium/campaign/explorationtable'}
-                                    linkText={'Exploration'}
-                                />
-                            </div>
-                            <div className={'col-12 col-md-6'}>
-                                <RulesBannerImage
-                                    imageId={228}
-                                    linkUrl={'/compendium/campaign/skills'}
-                                    linkText={'Skills'}
-                                />
-                            </div>
-                            <div className={'col-12 col-md-6'}>
-                                <RulesBannerImage
-                                    imageId={225}
-                                    linkUrl={'/compendium/campaign/injury'}
-                                    linkText={'Injuries'}
-                                />
-                            </div>
+                                </>
+                            </RulesBannerText>
                         </div>
-                    </>
                 </ErrorBoundary>
             )
         },
