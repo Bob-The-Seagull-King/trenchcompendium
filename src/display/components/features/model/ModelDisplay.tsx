@@ -146,12 +146,12 @@ const ModelDisplay = (props: any) => {
                                 method={() => <>
                                     {returnDescription(modelcollectionObject, modelcollectionObject.Description)}
     
-                                    {(modelcollectionObject.EquipmentList.length > 0) &&
+                                    {(modelcollectionObject.getUniqueEquipment().length > 0) &&
                                         <div className={'container bordergrey'}>
                                             <div className={"backgroundgrey"}/>
                                             <div className="content">
                                                 <div>
-                                                    {modelcollectionObject.EquipmentList.map((item) => (
+                                                    {modelcollectionObject.getUniqueEquipment().map((item) => (
                                                         <div key={item.ID}>
                                                             <ModelEquipmentDisplay team_col={modelcollectionObject.Team}
                                                                                    data={item}/>

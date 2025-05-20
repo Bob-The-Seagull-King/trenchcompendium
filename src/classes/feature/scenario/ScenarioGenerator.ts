@@ -15,7 +15,8 @@ interface GenerateObjective extends IContextObject {
     infiltrators? : InfiltratorData,
     victory_conditions : VictoryData,
     special_rules : string[],
-    banned_deployments: string[]
+    banned_deployments: string[],
+    description: []
 }
 
 interface GenerateDeployment extends IContextObject {
@@ -23,7 +24,8 @@ interface GenerateDeployment extends IContextObject {
     infiltrators? : InfiltratorData,
     deployment : DeploymentData,
     battle_length? : BattleLengthData,
-    special_rules : string[]
+    special_rules : string[],
+    description: []
 }
 
 class ScenarioGenerator {
@@ -35,6 +37,206 @@ class ScenarioGenerator {
     public ListOfDeedsGroupC : GloriousDeed[] = [];
 
     public CurrentScenario!: Scenario;
+
+    
+    public DeploymentDataDesc : any[] = []
+    public ScenarioDataDesc : any[] = []
+    public DeedDataDesc : any[] = []
+    public RulesDataDesc : any[] = []
+
+    private DeploymentData = [{
+                    tags: {desc_type : "paragraph"},
+                    content: "The player that did not roll for Missions rolls a D6 and consults the chart below to determine how the warbands deploy for the game."
+                },
+                {
+                    tags: {desc_type : "headless_table"},
+                    content: "",
+                    subcontent: [
+                        {
+                            tags: {desc_type : "table_row"},
+                            content: "",
+                            subcontent: [
+                                {
+                                    tags: {desc_type : "table_item"},
+                                    content: "1"
+                                },
+                                {
+                                    tags: {desc_type : "table_item"},
+                                    content: "Chance Encounter"
+                                }
+                            ]
+                        },{
+                            tags: {desc_type : "table_row"},
+                            content: "",
+                            subcontent: [
+                                {
+                                    tags: {desc_type : "table_item"},
+                                    content: "2"
+                                },
+                                {
+                                    tags: {desc_type : "table_item"},
+                                    content: "Standard Deployment"
+                                }
+                            ]
+                        },{
+                            tags: {desc_type : "table_row"},
+                            content: "",
+                            subcontent: [
+                                {
+                                    tags: {desc_type : "table_item"},
+                                    content: "3"
+                                },
+                                {
+                                    tags: {desc_type : "table_item"},
+                                    content: "Flank Attack"
+                                }
+                            ]
+                        },{
+                            tags: {desc_type : "table_row"},
+                            content: "",
+                            subcontent: [
+                                {
+                                    tags: {desc_type : "table_item"},
+                                    content: "4"
+                                },
+                                {
+                                    tags: {desc_type : "table_item"},
+                                    content: "Long Distance Battle"
+                                }
+                            ]
+                        },{
+                            tags: {desc_type : "table_row"},
+                            content: "",
+                            subcontent: [
+                                {
+                                    tags: {desc_type : "table_item"},
+                                    content: "5"
+                                },
+                                {
+                                    tags: {desc_type : "table_item"},
+                                    content: "Tunnels"
+                                }
+                            ]
+                        },{
+                            tags: {desc_type : "table_row"},
+                            content: "",
+                            subcontent: [
+                                {
+                                    tags: {desc_type : "table_item"},
+                                    content: "6"
+                                },
+                                {
+                                    tags: {desc_type : "table_item"},
+                                    content: "Fog Of War"
+                                }
+                            ]
+                        }
+                    ]
+                }]
+    private ScenarioData = [
+                    {
+                        tags: {desc_type : "paragraph"},
+                        content: "After terrain has been placed, either player rolls a D6 and consults the chart below to determine the victory conditions for the game. Note that if you are playing the campaign, the winner always gains 5 Victory Points if otherwise the result would indicate less."
+                    },
+                    {
+                        tags: {desc_type : "paragraph"},
+                        content: "",
+                        subcontent: [
+                    {
+                        tags: {desc_type : "headless_table"},
+                        content: "",
+                        subcontent: [
+                            {
+                                tags: {desc_type : "table_row"},
+                                content: "",
+                                subcontent: [
+                                    {
+                                        tags: {desc_type : "table_item"},
+                                        content: "1"
+                                    },
+                                    {
+                                        tags: {desc_type : "table_item"},
+                                        content: "Attritional Battle"
+                                    }
+                                ]
+                            },{
+                                tags: {desc_type : "table_row"},
+                                content: "",
+                                subcontent: [
+                                    {
+                                        tags: {desc_type : "table_item"},
+                                        content: "2"
+                                    },
+                                    {
+                                        tags: {desc_type : "table_item"},
+                                        content: "Take and Hold"
+                                    }
+                                ]
+                            },{
+                                tags: {desc_type : "table_row"},
+                                content: "",
+                                subcontent: [
+                                    {
+                                        tags: {desc_type : "table_item"},
+                                        content: "3"
+                                    },
+                                    {
+                                        tags: {desc_type : "table_item"},
+                                        content: "Sabotage"
+                                    }
+                                ]
+                            },{
+                                tags: {desc_type : "table_row"},
+                                content: "",
+                                subcontent: [
+                                    {
+                                        tags: {desc_type : "table_item"},
+                                        content: "4"
+                                    },
+                                    {
+                                        tags: {desc_type : "table_item"},
+                                        content: "Over the Top"
+                                    }
+                                ]
+                            },{
+                                tags: {desc_type : "table_row"},
+                                content: "",
+                                subcontent: [
+                                    {
+                                        tags: {desc_type : "table_item"},
+                                        content: "5"
+                                    },
+                                    {
+                                        tags: {desc_type : "table_item"},
+                                        content: "Breakthrough"
+                                    }
+                                ]
+                            },{
+                                tags: {desc_type : "table_row"},
+                                content: "",
+                                subcontent: [
+                                    {
+                                        tags: {desc_type : "table_item"},
+                                        content: "6"
+                                    },
+                                    {
+                                        tags: {desc_type : "table_item"},
+                                        content: "Retrieve"
+                                    }
+                                ]
+                            }
+                        ]
+                    }]
+                    }]
+    private DeedData = [{
+                        tags: {desc_type : "paragraph"},
+                        content: "To determine the Glorious Deeds for the scenario, each player rolls two D6, one after the other. If a player rolls the same result on both dice, roll one of the dice again until it shows a different result. Match each player’s results to their table below."
+                    },
+                    {
+                        tags: {desc_type : "paragraph"},
+                        content: "Finally, every scenario shares a fifth Glorious Deed: “Victorious: Win the Battle.” Completing any of these Glorious Deeds earns the player 1 Glory Point. Once a Glorious Deed is completed by a player, it cannot be completed again by either player."
+                    }]
+    private RulesData = []
     
     /**
      * Assigns parameters and creates a series of description
@@ -47,10 +249,15 @@ class ScenarioGenerator {
         this.GatherDeployments();
         this.BuildDeeds(3, this.ListOfDeedsGroupA);
         this.BuildDeeds(1, this.ListOfDeedsGroupB);
-        this.BuildDeeds(2, this.ListOfDeedsGroupC);        
+        this.BuildDeeds(2, this.ListOfDeedsGroupC); 
+        
+        this.ScenarioDataDesc = DescriptionFactory(this.ScenarioData, this);   
+        this.DeedDataDesc = DescriptionFactory(this.DeedData, this);   
+        this.DeploymentDataDesc = DescriptionFactory(this.DeploymentData, this);       
         this.ConstructNewScenario().then(result => {
             this.CurrentScenario = result;
         });
+        
     }
 
     public async ResetScenario() {
@@ -183,5 +390,5 @@ class ScenarioGenerator {
 
 }
 
-export {ScenarioGenerator}
+export {ScenarioGenerator, GenerateDeployment, GenerateObjective}
 

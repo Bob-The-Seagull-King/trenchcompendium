@@ -54,7 +54,7 @@ const ModelEquipmentDisplay = (props: any) => {
 
                 {(collection_name != "Pre-Equipped Items") &&
                 <>
-                    {abilityObject.EquipmentItems.map((item) =>
+                    {abilityObject.getUniqueEquipment().map((item) =>
                         <RulesEquipmentEntry
                             key={item.ID}
                             equipment={item}
@@ -65,7 +65,7 @@ const ModelEquipmentDisplay = (props: any) => {
 
                 {(collection_name == "Pre-Equipped Items") &&
                 <>
-                    {abilityObject.EquipmentItems.map((item) =>
+                    {abilityObject.getUniqueEquipment().map((item) =>
                         <RulesEquipmentEntry
                             key={item.ID}
                             equipment={item}

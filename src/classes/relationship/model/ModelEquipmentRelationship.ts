@@ -53,6 +53,19 @@ class ModelEquipmentRelationship extends StaticOptionContextObject {
         }
     }
 
+
+    public getUniqueEquipment() {
+        const UniqueEquipment : Equipment[] = []
+        const IDList : string[] = []
+        for (let i = 0; i < this.EquipmentItems.length; i++) {
+            if (!IDList.includes(this.EquipmentItems[i].ID)) {
+                IDList.push(this.EquipmentItems[i].ID);
+                UniqueEquipment.push(this.EquipmentItems[i])
+            }
+        }
+
+        return UniqueEquipment;
+    }
     
     /**
      * Have all options search for potential selections

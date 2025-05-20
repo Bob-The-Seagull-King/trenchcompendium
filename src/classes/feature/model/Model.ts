@@ -293,6 +293,19 @@ class Model extends StaticContextObject {
         return this.Name;
     }
 
+    public getUniqueEquipment() {
+        const UniqueEquipment : ModelEquipmentRelationship[] = []
+        const IDList : string[] = []
+        for (let i = 0; i < this.EquipmentList.length; i++) {
+            if (!IDList.includes(this.EquipmentList[i].ID)) {
+                IDList.push(this.EquipmentList[i].ID);
+                UniqueEquipment.push(this.EquipmentList[i])
+            }
+        }
+
+        return UniqueEquipment;
+    }
+
     /**
      * Does this model have abilities?
      */

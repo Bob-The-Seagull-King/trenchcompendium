@@ -297,9 +297,9 @@ const RulesModelDisplay = (props: any) => {
                                     {returnDescription(modelcollectionObject, modelcollectionObject.Description)}
                                 </div>
 
-                                {(modelcollectionObject.EquipmentList.length > 0) &&
+                                {(modelcollectionObject.getUniqueEquipment().length > 0) &&
                                     <>
-                                        {modelcollectionObject.EquipmentList.map((item) => (
+                                        {modelcollectionObject.getUniqueEquipment().map((item) => (
                                             <ModelEquipmentDisplay
                                                 team_col={modelcollectionObject.Team}
                                                 key={item.ID}

@@ -8,9 +8,14 @@ export const ROUTES = {
 
     // Compendium Routes //
 
+    // Parent Pages //
+
+    COMP_PARENT_GAME : '/game/*',
+    COMP_PARENT_CAMPAIGN : '/campaign/*',
+
     // Rules //
-    COMP_RULES_GAMERULES : '/gamerule/*',
-    COMP_RULES_CAMPAIGNRULES : '/campaignrule/*',
+    COMP_RULES_GAMERULES : '/rules/*',
+    COMP_RULES_CAMPAIGNRULES : '/campaign_rules/*',
     COMP_RULES_ERRATARULES : '/errata/*',
     COMP_RULES_KEYWORDS: '/keyword/*',
     COMP_RULES_GLOSSARY: '/glossary/*',

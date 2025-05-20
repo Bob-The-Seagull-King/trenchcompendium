@@ -33,12 +33,11 @@ const RulesMenuBody: React.FC<RulesMenuBodyProps> = ({ controller, onBack, onNav
         const menu_structure = [
             {
                 title: "Playtest v1.6",
-                slug: "",
-                superslug: "compendium/gamerule",
+                slug: "game",
                 children: [
                     {
                         title: "Rules",
-                        slug: "gamerule",
+                        slug: "rules",
                         controller: controller.GameRulesCollectionController
                     },
                     {
@@ -73,12 +72,11 @@ const RulesMenuBody: React.FC<RulesMenuBodyProps> = ({ controller, onBack, onNav
             },
             {
                 title: "Campaigns 1.6.3",
-                slug: "",
-                superslug: "compendium/campaignrule",
+                slug: "campaign",
                 children: [
                     {
                         title: "Rules",
-                        slug: "campaignrule",
+                        slug: "campaign_rules",
                         controller: controller.CampaignRulesCollectionController
                     },
                     {

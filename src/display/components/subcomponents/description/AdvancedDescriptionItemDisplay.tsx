@@ -27,10 +27,13 @@ import RulesEquipmentEntry from "../../rules-content/RulesEquipmentEntry";
 import RulesEquipmentMain from '../../../components/rules-content/RulesEquipmentMain';
 import RulesEquipmentStats from '../../../components/rules-content/RulesEquipmentStats';
 import RulesOverlay from '../../../components/rules-content/RulesOverlay';
+import { useGlobalState } from '../../../../utility/globalstate';
 
 const AdvancedDescriptionItemDisplay = (props: any) => {
     const description: AdvancedDescription = props.data
     const parentItem = description.Parent;
+    
+    const [loreshow] = useGlobalState('loreshow');
 
     let colour = getParentValue('Team');
     if (colour == null) { colour = "default"}
@@ -42,6 +45,9 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
      * @returns Full DOM element containing the rendered description
      */
     function returnFullItem(item: AdvancedDescription) {
+        if ((getTagSetValue(item.Tags, "lore") == true) && (loreshow == 'false')) {
+            return <></>
+        }
         switch (getTagSetValue(item.Tags, "desc_type")) {
             case "paragraph": {
                 return (
