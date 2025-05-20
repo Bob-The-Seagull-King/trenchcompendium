@@ -57,7 +57,7 @@ type NoneToNoneFunction = () => void;
 
 export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
     gamerule: {
-        searchId: 'gamerule',
+        searchId: 'game/rules',
         width: 9 ,
         titlename : 'Game Rules',
         laconic: "How to play a game of Trench Crusade",
@@ -80,7 +80,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
 
                         <div className={'col-12 col-md-6'}>
                             <RulesBannerText
-                                link="/compendium/gamerule/gr_introduction"
+                                link="/compendium/game/rules/gr_introduction"
                                 title={'How to play Trench Crusade'}
                             >
                                 <>
@@ -88,7 +88,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
 
                                     <RulesBannerText
                                         key={rule.HeldItem.ID}
-                                        link={"/compendium/gamerule/"+rule.HeldItem.ID}
+                                        link={"/compendium/game/rules/"+rule.HeldItem.ID}
                                         title={rule.HeldItem.Name}
                                     >
                                     </RulesBannerText>
@@ -458,7 +458,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         }
     },
     campaignrule: {
-        searchId: 'campaignrule',
+        searchId: 'campaign/campaign_rules',
         width: 9 ,
         titlename : 'Campaign Rules',
         laconic: "Rules for playing an extended campaign",
@@ -505,7 +505,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
                             <div className={'col-12 col-md-6'}>
                                 <RulesBannerImage
                                     imageId={210}
-                                    linkUrl={'/compendium/campaignrule/br_introduction'}
+                                    linkUrl={'/compendium/campaign/campaign_rules/br_introduction'}
                                     linkText={'Campaign Rules'}
                                 />
                             </div>
@@ -513,28 +513,28 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
                             <div className={'col-12 col-md-6'}>
                                 <RulesBannerImage
                                     imageId={212}
-                                    linkUrl={'/compendium/patron'}
+                                    linkUrl={'/compendium/campaign/patron'}
                                     linkText={'Patrons'}
                                 />
                             </div>
                             <div className={'col-12 col-md-6'}>
                                 <RulesBannerImage
                                     imageId={216}
-                                    linkUrl={'/compendium/explorationtable'}
+                                    linkUrl={'/compendium/campaign/explorationtable'}
                                     linkText={'Exploration'}
                                 />
                             </div>
                             <div className={'col-12 col-md-6'}>
                                 <RulesBannerImage
                                     imageId={228}
-                                    linkUrl={'/compendium/skills'}
+                                    linkUrl={'/compendium/campaign/skills'}
                                     linkText={'Skills'}
                                 />
                             </div>
                             <div className={'col-12 col-md-6'}>
                                 <RulesBannerImage
                                     imageId={225}
-                                    linkUrl={'/compendium/injury'}
+                                    linkUrl={'/compendium/campaign/injury'}
                                     linkText={'Injuries'}
                                 />
                             </div>
@@ -586,7 +586,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
                         <div className={'col-12 col-md-6'}>
                             <RulesBannerText
                                 title={'Exploration Rules'}
-                                link={'/compendium/campaignrule/br_exploration'}
+                                link={'/compendium/campaign/campaign_rules/br_exploration'}
                             />
                         </div>
                     </div>
