@@ -9,6 +9,7 @@ import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import CustomNavLink from '../subcomponents/interactables/CustomNavLink';
 import { Faction } from '../../../classes/feature/faction/Faction';
+import RulesBannerImage from '../rules-content/RulesBannerImage';
 
 const DefaultCampaign = () => {
     
