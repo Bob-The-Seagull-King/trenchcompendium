@@ -110,7 +110,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
 
                         <div className={'col-12 col-md-6'}>
                             <RulesBannerText
-                                link="/compendium/keyword"
+                                link="/compendium/game/keyword"
                                 title={'Keywords'}
                             >
                                 <>
@@ -119,7 +119,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
 
 
                             <RulesBannerText
-                                link="/compendium/model"
+                                link="/compendium/game/model"
                                 title={'Models'}
                             >
                                 <>
@@ -310,14 +310,6 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
             return (
                 
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                        <div>
-                            <div className=""/>
-                            <FilterMiscSet name={"Variant"} data={manager.ReturnMiscFilters().filter((item) => (item.Group == 'variant_name'))}/>
-                        </div>
-                        <div>
-                            <div className=""/>
-                            <FilterMiscSet name={"Team"} data={manager.ReturnMiscFilters().filter((item) => (item.Group == 'team'))}/>
-                        </div>
                         <div>
                             <div className=""/>
                             <FilterMiscSet name={"Keywords"} data={manager.ReturnMiscFilters().filter((item) => (item.Group == 'keywords'))}/>

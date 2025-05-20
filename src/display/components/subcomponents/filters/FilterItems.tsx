@@ -201,7 +201,7 @@ const FilterTagSet = (prop: any) => {
         if (value === 'show_all') {
             setSelectedValue(null)
             ItemFilter.forEach((item) => {
-                item.TagType.IsActive = true
+                item.TagType.IsActive = false
                 item.TagType.DoInclude = true
             })
         } else {
@@ -250,7 +250,7 @@ const FilterMiscSet = (prop: any) => {
             setSelectedValue(null); // ← Important
 
             ItemFilter.forEach((item) => {
-                item.IsActive = true;
+                item.IsActive = false;
                 item.DoInclude = true;
             });
 
