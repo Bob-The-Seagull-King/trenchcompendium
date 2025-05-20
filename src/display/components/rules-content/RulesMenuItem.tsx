@@ -122,7 +122,7 @@ const RulesMenuItem: React.FC<{ data: RulesMenuItemProps[], level?: number; pare
                 const basePath = (item.slug != "")? `${parentPath}/${item.slug}` : `${parentPath}` ; // Prepend "compendium" base path
                 
                 const location = useLocation()
-                const [isCurrentPage, setCurrentPage] = useState(((urlPath.substring(1)) == itemPath))
+                const [isCurrentPage, setCurrentPage] = useState(false)
                 const [keyvar, setkeyvar] = useState(0)
 
                 useEffect(() => {
