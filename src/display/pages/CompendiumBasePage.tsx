@@ -39,7 +39,7 @@ const CompendiumBasePage: React.FC<IControllerProp> = (prop: any) => {
                     <div className={'col-12 col-md-6'}>
                         <RulesBannerImage
                             imageId={164}
-                            linkUrl={'/compendium/gamerule'}
+                            linkUrl={'/compendium/game'}
                             linkText={'Playtest Rules v1.6'}
                         />
                     </div>
@@ -71,7 +71,7 @@ const CompendiumBasePage: React.FC<IControllerProp> = (prop: any) => {
                     <div className={'col-12 col-md-6'}>
                         <RulesBannerImage
                             imageId={162}
-                            linkUrl={'/compendium/campaignrule'}
+                            linkUrl={'/compendium/campaign'}
                             linkText={'Campaigns v1.6.3'}
                         />
                     </div>

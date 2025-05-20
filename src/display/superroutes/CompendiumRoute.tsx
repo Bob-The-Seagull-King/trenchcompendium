@@ -18,6 +18,8 @@ import { ToolsController } from '../../classes/_high_level_controllers/ToolsCont
 import ToolsRandomScenario from '../pages/ToolsRandomScenario';
 import SynodImage from "../../utility/SynodImage";
 import {useSynodFactionImageData} from "../../utility/useSynodFactionImageData";
+import DefaultGame from '../components/mainpages/DefaultGame';
+import DefaultCampaign from '../components/mainpages/DefaultCampaign';
 
 interface IControllerProp {
     controller : ControllerController; // The controller being passed through
@@ -50,11 +52,15 @@ const CompendiumRoute: React.FC<IControllerProp> = (prop) => {
 
                         <div className="col-lg-9 col-sm-12">
                             <Routes>
+                                <Route path={ROUTES.COMP_PARENT_GAME}
+                                       element={<DefaultGame/>}/>
+                                <Route path={ROUTES.COMP_PARENT_CAMPAIGN}
+                                       element={<DefaultCampaign/>}/>
                                 <Route path={ROUTES.COMP_SCENARIO_GENERATOR}
                                        element={<ToolsRandomScenario controller={ToolsManagerScenario.RandomScenarioManager}/>}/>
-                                <Route path={ROUTES.COMP_RULES_GAMERULES} element={<PagedCompendiumDisplay
+                                <Route path={'/game'+ROUTES.COMP_RULES_GAMERULES} element={<PagedCompendiumDisplay
                                     controller={prop.controller.GameRulesCollectionController}/>}/>
-                                <Route path={ROUTES.COMP_RULES_CAMPAIGNRULES} element={<PagedCompendiumDisplay
+                                <Route path={'/campaign'+ROUTES.COMP_RULES_CAMPAIGNRULES} element={<PagedCompendiumDisplay
                                     controller={prop.controller.CampaignRulesCollectionController}/>}/>
                                 <Route path={ROUTES.COMP_RULES_ERRATARULES} element={<PagedCompendiumDisplay
                                     controller={prop.controller.ErrataRulesCollectionController}/>}/>
@@ -62,17 +68,17 @@ const CompendiumRoute: React.FC<IControllerProp> = (prop) => {
                                     controller={prop.controller.FactionCollectionController}/>}/>
                                 <Route path={ROUTES.COMP_SCENARIO_SCENARIO} element={<PagedCompendiumDisplay
                                     controller={prop.controller.ScenarioCollectionController}/>}/>
-                                <Route path={ROUTES.COMP_CAMPAIGN_EXPLORATION} element={<PagedCompendiumDisplay
+                                <Route path={'/campaign'+ROUTES.COMP_CAMPAIGN_EXPLORATION} element={<PagedCompendiumDisplay
                                     controller={prop.controller.ExplorationTableCollectionController}/>}/>
-                                <Route path={ROUTES.COMP_CAMPAIGN_PATRONS} element={<PagedCompendiumDisplay
+                                <Route path={'/campaign'+ROUTES.COMP_CAMPAIGN_PATRONS} element={<PagedCompendiumDisplay
                                     controller={prop.controller.PatronCollectionController}/>}/>
-                                <Route path={ROUTES.COMP_RULES_KEYWORDS} element={<CollectionCompendiumDisplay
+                                <Route path={'/game'+ROUTES.COMP_RULES_KEYWORDS} element={<CollectionCompendiumDisplay
                                     controller={prop.controller.KeywordCollectionController}/>}/>
-                                <Route path={ROUTES.COMP_WARBAND_MODELS} element={<FilterableCompendiumDisplay
+                                <Route path={'/game'+ROUTES.COMP_WARBAND_MODELS} element={<FilterableCompendiumDisplay
                                     controller={prop.controller.ModelCollectionController}/>}/>
-                                <Route path={ROUTES.COMP_CAMPAIGN_INJURIES} element={<CollectionCompendiumDisplay
+                                <Route path={'/campaign'+ROUTES.COMP_CAMPAIGN_INJURIES} element={<CollectionCompendiumDisplay
                                     controller={prop.controller.InjuryCollectionController}/>}/>
-                                <Route path={ROUTES.COMP_CAMPAIGN_SKILLS} element={<FilterableCompendiumDisplay
+                                <Route path={'/campaign'+ROUTES.COMP_CAMPAIGN_SKILLS} element={<FilterableCompendiumDisplay
                                     controller={prop.controller.SkillGroupCollectionController}/>}/>
                                 <Route path={ROUTES.COMP_WARBAND_EQUIPMENT} element={<FilterableCompendiumDisplay
                                     controller={prop.controller.EquipmentCollectionController}/>}/>
