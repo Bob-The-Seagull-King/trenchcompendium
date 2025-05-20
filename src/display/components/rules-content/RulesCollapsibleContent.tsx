@@ -1,17 +1,19 @@
 // RulesCollapsibleContent.tsx
 import React, { useState } from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faChevronDown, faChevronUp} from "@fortawesome/free-solid-svg-icons";
+import {faChevronDown, faChevronUp, faFilter} from "@fortawesome/free-solid-svg-icons";
 import {Collapse} from "react-bootstrap";
+import {IconProp} from "@fortawesome/fontawesome-svg-core";
 
 interface RulesCollapsibleContentProps {
     headline: string | undefined;
+    headlineIcon?: IconProp;
     content: any;
 }
 
 const DefaultState = false;
 
-const RulesCollapsibleContent: React.FC<RulesCollapsibleContentProps> = ({ headline, content }) => {
+const RulesCollapsibleContent: React.FC<RulesCollapsibleContentProps> = ({ headline, headlineIcon, content }) => {
     const [open, setOpen]   = useState(DefaultState);
 
     return (
@@ -22,6 +24,10 @@ const RulesCollapsibleContent: React.FC<RulesCollapsibleContentProps> = ({ headl
                  }}
             >
                 <span className={'text'}>
+                    {headlineIcon &&
+                        <FontAwesomeIcon icon={headlineIcon} className="icon-inline-left-l"/>
+                    }
+
                     {headline}
                 </span>
 
