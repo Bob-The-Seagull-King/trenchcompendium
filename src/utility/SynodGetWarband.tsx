@@ -6,10 +6,9 @@ interface SynodWarbandURLProps {
 
 
 /**
- * This gets an image url from the synod by its Post ID
+ * This gets a warband from the synod by its Post ID
  *
- * @param imageId
- * @param size
+ * @param WarbandId
  */
 const SynodGetWarband = ({ WarbandId }: SynodWarbandURLProps): string => {
 

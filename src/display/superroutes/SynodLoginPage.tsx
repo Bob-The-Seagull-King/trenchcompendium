@@ -120,15 +120,15 @@ const SynodLoginPage: React.FC = () => {
             <div className={"container mt-3 pt-3"}>
             <hr className={'mt-3'}/>
                 {/* @TODO: Debug screen*/}
-                <SynodGetWarband
-                    WarbandId={15}
-                />
+                {/*<SynodGetWarband*/}
+                {/*    WarbandId={15}*/}
+                {/*/>*/}
 
                 <div className={'row'}>
                     <div className={'col'}>
-                        <SynodGetWarband
-                            WarbandId={15}
-                        />
+                        {/*<SynodGetWarband*/}
+                        {/*    WarbandId={15}*/}
+                        {/*/>*/}
 
                         <SynodUserWarbands/>
                     </div>
