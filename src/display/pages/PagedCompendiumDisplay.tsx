@@ -52,7 +52,7 @@ const PagedCompendiumDisplay = (prop: any) => {
 
     function GetCurrentItem() {
         if (urlSplits.length > 3) {
-            const CurItemID = urlSplits.slice(urlSplits.length-1)[0]
+            const CurItemID = (ViewPageController.TypeName != 'faction')? urlSplits.slice(urlSplits.length-1)[0] : urlSplits.slice(3)[0]
 
             console.log(urlSplits)
             
