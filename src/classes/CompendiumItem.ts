@@ -45,7 +45,7 @@ abstract class CompendiumItem {
      * Return Name as string
      */
     GetName () {
-        return this.Name;
+        return this.Name? this.Name : "";
     }
 
     /**

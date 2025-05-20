@@ -427,11 +427,11 @@ class Model extends StaticContextObject {
             const cache = StaticDataCache.getInstance();
             const isValid = (cache.CheckID('model', vardata.base_id))
             if (isValid == false) {
-                return cache.ModelCollectionCache[vardata.base_id].GetName;
+                return cache.ModelCollectionCache[vardata.base_id].GetName();
             }
-            return this.Name;
+            return this.GetName();
         } else {
-            return this.Name;
+            return this.GetName();
         }
     }
 
