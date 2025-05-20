@@ -510,6 +510,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
                                 </>
                             </RulesBannerText>
                         </div>
+                    </div>
                 </ErrorBoundary>
             )
         },
