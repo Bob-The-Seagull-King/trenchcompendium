@@ -130,6 +130,16 @@ class Patron extends StaticContextObject {
     public GetDescription () {
         return this.Description;
     }
+
+
+    /**
+     * Return the description as string
+     *
+     * @TODO: return the first paragraph as string
+     */
+    public GetMetaDescription () {
+        return '';
+    }
 }
 
 export {IPatron, Patron, IPatronRelationship}

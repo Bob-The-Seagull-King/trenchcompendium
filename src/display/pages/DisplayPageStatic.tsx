@@ -35,6 +35,8 @@ import DefaultScenario from "../components/mainpages/DefaultScenario";
 import DefaultPatron from "../components/mainpages/DefaultPatron";
 import { ModelCollection } from "../../classes/feature/model/ModelCollection";
 import { Equipment } from "../../classes/feature/equipment/Equipment";
+import { Helmet } from 'react-helmet';
+import PageMetaInformation from "../components/generics/PageMetaInformation";
 
 export interface DisplayCollectionType {
     searchId      : string,
@@ -68,6 +70,11 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         defaultpage(ViewPageController: CollectionsListPage) {
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
+                    <PageMetaInformation
+                        title={'Playtest Rules v1.6'}
+                        description={'All the rules for Trench Crusade in one place. Below are the official Playtest Rules version 1.6 for the tabletop game Trench Crusade.'}
+                    />
+
                     <h1>
                         {'Playtest Rules v1.6'}
                     </h1>
@@ -126,6 +133,11 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         returnDisplay(item: any) {
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
+                    <PageMetaInformation
+                        title={item.Name}
+                        description={item.GetDescription()}
+                    />
+
                     <h1 className="">
                         {item.Name}
                     </h1>
@@ -234,8 +246,12 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         },
         returnDisplay(item: any) {
             return (
-
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
+                    <PageMetaInformation
+                        title={item.Name}
+                        description={'All Keywords for Trench Crusade in one Place. '}
+                    />
+
                     <RulesKeywordsTable data={item}/>
                 </ErrorBoundary>
             )
@@ -385,7 +401,9 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
                     {item != undefined &&
-                    <FactionCollectionDisplay data={item} />
+                        <>
+                            <FactionCollectionDisplay data={item} />
+                        </>
                     }
                 </ErrorBoundary>
             )
@@ -455,8 +473,12 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         },
         returnDisplay(item: any) {
             return (
-
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
+                    <PageMetaInformation
+                        title={item.Name}
+                        description={item.GetDescription()}
+                    />
+
                     <h1>
                         {item.Name}
                     </h1>
@@ -721,10 +743,12 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
             return []
         },
         defaultpage(ViewPageController: CollectionsListPage) {
-
-
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
+                    <PageMetaInformation
+                        title={'Patrons'}
+                        description={'These are the official Trench Crusade Patron. You can select one from the list below or use the official PDF.'}
+                    />
                     <DefaultPatron item={ViewPageController} />
                 </ErrorBoundary>
             )
@@ -733,6 +757,11 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
             return (
 
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
+                    <PageMetaInformation
+                        title={item.Name}
+                        description={item.GetMetaDescription()}
+                    />
+
                     <h1>
                         {item.Name}
                     </h1>

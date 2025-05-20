@@ -108,6 +108,36 @@ class FactionCollection extends StaticContextObject {
         return this.SubModelsList[0].faction;
     }
 
+
+    /**
+     * Returns the base name for this faction collection
+     */
+    public GetBaseName () {
+        for (let i = 0; i < this.SubModelsList.length; i++) {
+            if (this.SubModelsList[i].var_name == 'base') {
+                return this.SubModelsList[i].faction.Name;
+            }
+        }
+        return ""
+    }
+
+
+    /**
+     * Returns the Display name for this faction collection
+     * @TODO: return display name like "Cult of the black grail" or "Dirge of the great hegemon"
+     */
+    public GetDisplayName() {
+        return '';
+    }
+
+    /**
+     * Return a string for the description of this faction.
+     * @TODO: This should be like the first paragraph of the lore
+     */
+    public GetDescription () {
+        return '';
+    }
+
 }
 
 export {IVariantFaction, FactionCollection}

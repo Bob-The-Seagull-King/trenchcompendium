@@ -9,6 +9,8 @@ import { FactionCollection } from '../../../../classes/feature/faction/FactionCo
 import FactionDisplay from './FactionDisplay';
 import { useLocation } from 'react-router-dom';
 import SynodFactionImage from "../../../../utility/SynodFactionImage";
+import PageMetaInformation from "../../generics/PageMetaInformation";
+import {useSynodFactionImageData} from "../../../../utility/useSynodFactionImageData";
 
 const FactionCollectionDisplay = (props: any) => {
     const factioncollectionObject: FactionCollection = props.data
@@ -46,15 +48,6 @@ const FactionCollectionDisplay = (props: any) => {
         
     }
 
-    function GetBaseName(factioncol : FactionCollection) {
-        for (let i = 0; i < factioncol.SubModelsList.length; i++) {
-            if (factioncol.SubModelsList[i].var_name == 'base') {
-                return factioncol.SubModelsList[i].faction.Name;
-            }
-        }
-        return ""
-    }
-
     function GetFactionID () {
         if( selectedModel.var_name == 'base' ) {
             return factioncollectionObject.ID;
@@ -63,12 +56,20 @@ const FactionCollectionDisplay = (props: any) => {
         }
     }
 
+    const { url, factionName, error } = useSynodFactionImageData(GetFactionID (), 'medium')
+
     return (
         <ErrorBoundary fallback={<div>Something went wrong with FactionCollectionDisplay.tsx</div>}>
+            <PageMetaInformation
+                title={factioncollectionObject.GetDisplayName()}
+                description={factioncollectionObject.GetDescription()}
+                ogImage={url}
+            />
+
             <div className={'FactionCollectionDisplay'}>
                 <div className={'faction-hero'}>
                     <h1>
-                        { ((selectedModel.var_name == 'base')? GetBaseName(factioncollectionObject) : selectedModel.faction.Name)}
+                        { ((selectedModel.var_name == 'base')? factioncollectionObject.GetBaseName() : selectedModel.faction.Name)}
                     </h1>
 
                     <SynodFactionImage

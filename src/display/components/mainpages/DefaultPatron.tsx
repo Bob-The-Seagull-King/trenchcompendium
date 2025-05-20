@@ -21,7 +21,7 @@ const DefaultPatron: React.FC<RulesArmouryElement> = ({ item }) => {
 
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                        <h1>
+                    <h1>
                         {"Patrons"}
                     </h1>
 

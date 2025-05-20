@@ -70,6 +70,15 @@ class BookRule extends StaticContextObject {
         }
     }
 
+
+    /**
+     * Gets a short descroption as String
+     * @TODO: return the first paragraph as string
+     */
+    public GetDescription () {
+        return '';
+    }
+
 }
 
 export {IBookRule, BookRule}
