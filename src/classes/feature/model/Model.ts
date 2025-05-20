@@ -23,6 +23,8 @@ import { Equipment, EquipmentLimit, EquipmentRestriction } from '../equipment/Eq
 import { FactionModelRelationship, IFactionModelRelationship } from '../../relationship/faction/FactionModelRelationship';
 import { ModelFactory } from '../../../factories/features/ModelFactory';
 import { Faction } from '../faction/Faction';
+import { StaticDataCache } from '../../_high_level_controllers/StaticDataCache';
+import { IVariantModel } from './ModelCollection';
 
 interface IModel extends IContextObject {
     description: [];
@@ -420,10 +422,16 @@ class Model extends StaticContextObject {
      * Get the name of the Base variant of this model
      */
     public GetBaseVariantName () {
-        if( this.GetName() == 'Kavass') {
-            return 'Azeb'
+        if( this.Variant != 'base' ) {
+            const vardata = Requester.MakeRequest({searchtype: "id", searchparam: {type: "modelvariant", id: this.ID}}) as IVariantModel
+            const cache = StaticDataCache.getInstance();
+            const isValid = (cache.CheckID('model', vardata.base_id))
+            if (isValid == false) {
+                return cache.ModelCollectionCache[vardata.base_id].GetName;
+            }
+            return this.Name;
         } else {
-            return false;
+            return this.Name;
         }
     }
 
@@ -432,11 +440,7 @@ class Model extends StaticContextObject {
      * is this model a variant of a base model?
      */
     public isVariant () {
-        if( this.GetBaseVariantName() ) {
-            return true;
-        } else {
-            return false;
-        }
+        return ( this.Variant != 'base' );
     }
 
 }
