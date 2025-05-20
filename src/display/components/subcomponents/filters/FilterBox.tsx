@@ -14,6 +14,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { FilterTextItem } from './FilterItems';
 import { DisplayCollectionType, DisplayCollectionDataDex } from '../../../pages/DisplayPageStatic';
 import BasicButton from '../interactables/BasicButton';
+import RulesCollapsibleContent from "../../rules-content/RulesCollapsibleContent";
 
 const FilterBox = (prop: any) => {
     const ViewPageController: CollectionsListPage = prop.controller
@@ -55,10 +56,10 @@ const FilterBox = (prop: any) => {
         return (
             <div className="ReturnFilterBoxInner">
                 {DisplayPage.returnFilterSelect(FilterManagerObj, updatesearch, updatesearch)}
-                <div className=""/>
-                <div className="filterbuttoncomp">
-                    <BasicButton btn_title={"Search"} btn_state={true} btn_press={updatesearch}/>
-                </div>
+
+                <Button variant="primary" onClick={updatesearch}>
+                    Apply Filter
+                </Button>
             </div>
         )
     }
@@ -70,32 +71,18 @@ const FilterBox = (prop: any) => {
             <div className={'FilterBox'}>
                 <div>
                     {FilterManagerObj.ReturnTextFilters().filter((item) => (item.Group == 'name')).map((item) =>
-                    <div key={item.Group}>
-                        {ReturnTextFilterParam(item)}
-                    </div>)}
+                        (
+                            <div key={item.Group}>
+                                {ReturnTextFilterParam(item)}
+                            </div>
+                        ))}
                 </div>
 
-                <div>
-                    
-                        <div className="borderthin bordergrey findme-1">
-                            <div onClick={() => {setOpen(!open)}} className={'      borderbed bordergrey borderthin backgroundBgCard'}>
-                                <div className={' font-seriftext'}>
-                                    {"Filters"}
-                                </div>
-                                <div className={''}>
-                                    <FontAwesomeIcon icon={faFilter} className=""/>
-                                </div>
-                            </div>
-                            <Collapse in={open}>
-                                <div className={'borderthin bordergrey findme-123'}>
-                                    <div className="content">                    
-                                        {ReturnFilterBoxInner()}
-                                    </div>
-                                </div>
-                            </Collapse>    
-                        </div> 
-                                                       
-                </div>
+                <RulesCollapsibleContent
+                    headline={'Filters'}
+                    headlineIcon={faFilter}
+                    content={ReturnFilterBoxInner()}
+                />
             </div>}
         </ErrorBoundary>
     )

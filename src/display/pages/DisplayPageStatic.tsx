@@ -358,7 +358,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
             return (
                 
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    
+                    <div className={'returnFilterSelect'}>
                         <div>
                             <FilterTagSet name={"Tags"} data={manager.ReturnTagFilters()}/>
                         </div>
@@ -381,6 +381,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
                                         <FilterRangeItem name={"Range"} data={item}/>
                                     </div>)}
                         </div>
+                    </div>
                 </ErrorBoundary>
             )
         }

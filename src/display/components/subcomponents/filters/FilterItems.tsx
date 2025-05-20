@@ -189,105 +189,46 @@ const FilterRangeItem = (prop: any) => {
 }
 
 
-const FilterItemSet = (prop: any) => {
-    const ItemFilter: FilterItem[] = prop.data
-    const ItemName : string = prop.name;
-
-    return (
-        <div>
-            <Dropdown bsPrefix="empty">
-                <Dropdown.Toggle bsPrefix="empty" id="dropdown-basic">
-                    {ItemName}
-                </Dropdown.Toggle>
-
-                <Dropdown.Menu>
-                    <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-                    <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                    <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-                </Dropdown.Menu>
-            </Dropdown>
-        </div>
-    )
-}
-
-
 const FilterTagSet = (prop: any) => {
     const ItemFilter: FilterTag[] = prop.data
     const ItemName : string = prop.name;
-        
-    const toggleRef = useRef<HTMLButtonElement>(null);
-    const [menuWidth, setMenuWidth] = useState<number | undefined>(undefined);
 
+    const [selectedValue, setSelectedValue] = useState<string | null>(null)
+
+    const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const value = e.target.value
+
+        if (value === 'show_all') {
+            setSelectedValue(null)
+            ItemFilter.forEach((item) => {
+                item.TagType.IsActive = true
+                item.TagType.DoInclude = true
+            })
+        } else {
+            setSelectedValue(value)
+            ItemFilter.forEach((item) => {
+                item.TagType.IsActive = item.TagType.Name === value
+                item.TagType.DoInclude = item.TagType.Name === value
+            })
+        }
+    }
     return (
-        <div>
-            <Dropdown 
-                bsPrefix="empty" 
-                autoClose="outside"
-                onToggle={(isOpen) => {
-                    if (isOpen && toggleRef.current) {
-                    setMenuWidth(toggleRef.current.getBoundingClientRect().width);
-                    }
-                }}>
-                <Dropdown.Toggle ref={toggleRef} bsPrefix="empty" id="dropdown-basic" className="bordergrey borderthin buttonclean">
-                    <div className="">
-                        <div className="backgroundBgBase borderthin bordergrey">
-                            <div className="align-left ">
-                                {ItemName}
-                            </div>
-                        </div>
-                        <div className="backgroundBgCard borderthin bordergrey ">
-                            <FontAwesomeIcon icon={faChevronDown}/>
-                        </div>
-                    </div>
-                </Dropdown.Toggle>
+        <div className={'FilterTagSet'}>
+            <Form.Group controlId={ItemName + '-select'} className={'mb-3'}>
+                <Form.Label>{'Choose ' + ItemName}</Form.Label>
+                <Form.Select
+                    value={selectedValue ?? 'show_all'}
+                    onChange={handleSelectChange}
+                >
+                    <option value="show_all">Show All</option>
 
-                <Dropdown.Menu className="" style={{ width: menuWidth }}>
                     {ItemFilter.map((item) => (
-                        <div key={item.TagType.Name}>
-                            {ItemFilter.indexOf(item) != 0 &&
-                            <div className="backgroundgrey "/>
-                            }
-                            <TagSelectItem  data={item}/>
-                        </div>
+                        <option value={item.TagType.Name} key={"ItemName + '-option'" + item.TagType.Name}>
+                            {makestringpresentable(item.TagType.Name)}
+                        </option>
                     ))}
-                </Dropdown.Menu>
-            </Dropdown>
-        </div>
-    )
-}
-
-const TagSelectItem = (prop : any) => {
-    const ItemFilter: FilterTag = prop.data
-
-    const [keyval, setkeyval] = useState(0);
-
-    function SetToFalse() {
-        ItemFilter.TagType.IsActive = true;
-        ItemFilter.TagType.DoInclude = false;
-        setkeyval(keyval + 1);
-    }
-
-    function SetToTrue() {
-        ItemFilter.TagType.IsActive = true;
-        ItemFilter.TagType.DoInclude = true;
-        setkeyval(keyval + 1);
-    }
-
-    function SetToOff() {
-        ItemFilter.TagType.IsActive = false;
-        setkeyval(keyval + 1);
-    }
-
-    return (
-        <div className="  ">
-            <div className="">
-                {makestringpresentable(ItemFilter.TagType.Name)}  
-            </div>
-            <div className="size-subtitle " key={keyval}>
-                <FontAwesomeIcon icon={faSquareXmark} onClick={() => SetToFalse()} className={" " + (((ItemFilter.TagType.DoInclude == false) && (ItemFilter.TagType.IsActive == true))? "" : " lowopacity" )}/>
-                <FontAwesomeIcon icon={faSquareMinus} onClick={() => SetToOff()} className={" colorgrey" + (((ItemFilter.TagType.IsActive == false))? "" : " lowopacity" )}/>
-                <FontAwesomeIcon icon={faSquarePlus} onClick={() => SetToTrue()} className={" " + (((ItemFilter.TagType.DoInclude == true) && (ItemFilter.TagType.IsActive == true))? "" : " lowopacity" )}/>
-            </div>
+                </Form.Select>
+            </Form.Group>
         </div>
     )
 }
@@ -300,79 +241,53 @@ const FilterMiscSet = (prop: any) => {
     const toggleRef = useRef<HTMLButtonElement>(null);
     const [menuWidth, setMenuWidth] = useState<number | undefined>(undefined);
 
-    return (
-        <div>
-            <Dropdown 
-                bsPrefix="empty" 
-                autoClose="outside"
-                onToggle={(isOpen) => {
-                    if (isOpen && toggleRef.current) {
-                    setMenuWidth(toggleRef.current.getBoundingClientRect().width);
-                    }
-                }}>
-                <Dropdown.Toggle ref={toggleRef} bsPrefix="empty" id="dropdown-basic" className="bordergrey borderthin buttonclean">
-                    <div className="">
-                        <div className="backgroundBgBase maxwidth borderthin bordergrey">
-                            <div className="align-left ">
-                                {ItemName}
-                            </div>
-                        </div>
-                        <div className="backgroundBgCard borderthin bordergrey ">
-                            <FontAwesomeIcon icon={faChevronDown}/>
-                        </div>
-                    </div>
-                </Dropdown.Toggle>
+    const [selectedValue, setSelectedValue] = useState<string | null>(null);
 
-                <Dropdown.Menu className="" style={{ width: menuWidth }}>
+    const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const value = e.target.value;
+
+        console.log(value);
+
+        if (value === 'show_all') {
+            setSelectedValue(null); // ← Important
+
+            ItemFilter.forEach((item) => {
+                item.IsActive = true;
+                item.DoInclude = true;
+            });
+
+
+        } else {
+            setSelectedValue(value);
+            ItemFilter.forEach((item) => {
+                item.IsActive = item.Name === value;
+                item.DoInclude = item.Name === value;
+            });
+        }
+    };
+
+
+    return (
+        <div className={'FilterMiscSet'}>
+            <Form.Group controlId={ItemName + '-select'} className={'mb-3'}>
+                <Form.Label>{'Choose ' + ItemName}</Form.Label>
+                <Form.Select
+                    value={selectedValue ?? 'show_all'}
+                    onChange={handleSelectChange}
+                >
+                    <option value="show_all">Show All</option>
+
                     {ItemFilter.map((item) => (
-                        <div key={item.Name}>
-                            {ItemFilter.indexOf(item) != 0 &&
-                            <div className="backgroundgrey"/>
-                            }
-                            <TagSelectMisc  data={item}/>
-                        </div>
+                        <option value={item.Name} key={"ItemName + '-option'" + item.Name}>
+                            {makestringpresentable(item.Name)}
+                        </option>
                     ))}
-                </Dropdown.Menu>
-            </Dropdown>
+                </Form.Select>
+            </Form.Group>
         </div>
     )
 }
 
-const TagSelectMisc = (prop : any) => {
-    const ItemFilter: FilterItem = prop.data
-
-    const [keyval, setkeyval] = useState(0);
-
-    function SetToFalse() {
-        ItemFilter.IsActive = true;
-        ItemFilter.DoInclude = false;
-        setkeyval(keyval + 1);
-    }
-
-    function SetToTrue() {
-        ItemFilter.IsActive = true;
-        ItemFilter.DoInclude = true;
-        setkeyval(keyval + 1);
-    }
-
-    function SetToOff() {
-        ItemFilter.IsActive = false;
-        setkeyval(keyval + 1);
-    }
-
-    return (
-        <div className="  ">
-            <div className="">
-                {makestringpresentable(ItemFilter.Name)}  
-            </div>
-            <div className="size-subtitle " key={keyval}>
-                <FontAwesomeIcon icon={faSquareXmark} onClick={() => SetToFalse()} className={" " + (((ItemFilter.DoInclude == false) && (ItemFilter.IsActive == true))? "" : " lowopacity" )}/>
-                <FontAwesomeIcon icon={faSquareMinus} onClick={() => SetToOff()} className={" colorgrey" + (((ItemFilter.IsActive == false))? "" : " lowopacity" )}/>
-                <FontAwesomeIcon icon={faSquarePlus} onClick={() => SetToTrue()} className={" " + (((ItemFilter.DoInclude == true) && (ItemFilter.IsActive == true))? "" : " lowopacity" )}/>
-            </div>
-        </div>
-    )
-}
 
 const FilterMiscItem = (prop: any) => {
     const ItemFilter: FilterItem = prop.data
@@ -394,4 +309,4 @@ const FilterMiscItem = (prop: any) => {
 }
 
 
-export {FilterTextItem, FilterMiscItem, FilterRangeItem, FilterItemSet, FilterTagSet, FilterMiscSet}
+export {FilterTextItem, FilterMiscItem, FilterRangeItem, FilterTagSet, FilterMiscSet}
