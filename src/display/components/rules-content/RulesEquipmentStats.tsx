@@ -14,10 +14,11 @@ interface RulesEquipmentStatsProps {
 
 const RulesEquipmentStats: React.FC<RulesEquipmentStatsProps> = (props : RulesEquipmentStatsProps) => {
 
-    if( typeof props.facrelObject == 'undefined' &&
-        typeof props.baseobject == 'undefined' ) {
-        return ;
+    if (typeof props.facrelObject === 'undefined' &&
+        typeof props.baseobject === 'undefined') {
+        return null;
     }
+
     const abilityObject = props.baseobject;
     const [statlist, setstatlist] = useState<EquipmentStats>(abilityObject.Stats)
     const baseequip = abilityObject;

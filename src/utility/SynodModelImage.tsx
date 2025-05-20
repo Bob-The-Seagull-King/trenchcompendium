@@ -20,7 +20,7 @@ const SynodModelImage: React.FC<SynodModelImageProps> = ({ modelSlug, size = 'fu
 
 
     if( error ) {
-        return '';
+        return null;
     }
 
     return (
