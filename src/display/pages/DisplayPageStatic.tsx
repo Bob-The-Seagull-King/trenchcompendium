@@ -85,7 +85,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
 
                     <div className={'row'}>
 
-                        <div className={'col-12 col-md-6'}>
+                        <div className={'col-12'}>
                             <RulesBannerText
                                 link="/compendium/game/rules/gr_introduction"
                                 title={'How to play Trench Crusade'}
@@ -104,25 +104,6 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
                                 }
                                     
 
-                                </>
-                            </RulesBannerText>
-                        </div>
-
-                        <div className={'col-12 col-md-6'}>
-                            <RulesBannerText
-                                link="/compendium/game/keyword"
-                                title={'Keywords'}
-                            >
-                                <>
-                                </>
-                            </RulesBannerText>
-
-
-                            <RulesBannerText
-                                link="/compendium/game/model"
-                                title={'Models'}
-                            >
-                                <>
                                 </>
                             </RulesBannerText>
                         </div>
