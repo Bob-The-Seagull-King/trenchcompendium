@@ -31,23 +31,32 @@ const FilterBox = (prop: any) => {
 
     function ReturnTextFilterParam(_filter : FilterText) {
         return (            
-            <div className="ReturnTextFilterParam ">
-                <Typeahead
-                    id="basic-typeahead-single"
-                    labelKey="name"
-                    onInputChange={(text) => UpdateName(_filter, text)}
-                    options={singleSelections}
-                    placeholder={_filter.Val}
-                    selected={undefined}                    
-                    onKeyDown={(event) => {
-                        if (event.key === "Enter") {
-                            updatesearch();
-                        }
-                    }}
+            <div className="ReturnTextFilterParam">
+                <InputGroup>
+                    <Typeahead
+                        id="basic-typeahead-single"
+                        labelKey="name"
+                        onInputChange={(text) => UpdateName(_filter, text)}
+                        options={singleSelections}
+                        placeholder={_filter.Val}
+                        selected={[]}
+                        onChange={(selected) => {
+                            if (selected.length > 0) {
+                                UpdateName(_filter, selected[0].toString()); // optional: update text filter value
+                                updatesearch();
+                            }
+                        }}
+                        onKeyDown={(event) => {
+                            if (event.key === "Enter") {
+                                updatesearch();
+                            }
+                        }}
                     />
-                <Button bsPrefix="empty" className="borderremove backgroundBgBase " onClick={() => updatesearch()}>
-                    <FontAwesomeIcon icon={faMagnifyingGlass} className=""/>
-                </Button>
+
+                    <Button variant="primary" className="search-btn" onClick={() => updatesearch()}>
+                        <FontAwesomeIcon icon={faMagnifyingGlass} className=""/>
+                    </Button>
+                </InputGroup>
             </div>
         )
     }
@@ -69,14 +78,12 @@ const FilterBox = (prop: any) => {
         <ErrorBoundary fallback={<div>Something went wrong with FilterBox.tsx</div>}>
             {(DisplayPage.hidefilter == undefined) &&
             <div className={'FilterBox'}>
-                <div>
-                    {FilterManagerObj.ReturnTextFilters().filter((item) => (item.Group == 'name')).map((item) =>
-                        (
-                            <div key={item.Group}>
-                                {ReturnTextFilterParam(item)}
-                            </div>
-                        ))}
-                </div>
+                {FilterManagerObj.ReturnTextFilters().filter((item) => (item.Group == 'name')).map((item) =>
+                    (
+                        <React.Fragment key={item.Group}>
+                            {ReturnTextFilterParam(item)}
+                        </React.Fragment>
+                    ))}
 
                 <RulesCollapsibleContent
                     headline={'Filters'}
