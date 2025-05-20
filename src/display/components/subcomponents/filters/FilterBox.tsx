@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 import { Typeahead } from 'react-bootstrap-typeahead';
 
 // Classes
-import { makestringpresentable } from '../../../../utility/functions'
 import { ErrorBoundary } from "react-error-boundary";
 import { CollectionsListPage } from '../../../../classes/viewmodel/pages/CollectionListPage';
 import { FilterManager } from '../../../../classes/viewmodel/collections/filters/FilterManager';
@@ -11,9 +10,7 @@ import { FilterItem, FilterRange, FilterTag, FilterText } from '../../../../clas
 import { InputGroup, Form, Button, Collapse } from 'react-bootstrap';
 import {faClose, faFilter, faMagnifyingGlass} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { FilterTextItem } from './FilterItems';
 import { DisplayCollectionType, DisplayCollectionDataDex } from '../../../pages/DisplayPageStatic';
-import BasicButton from '../interactables/BasicButton';
 import RulesCollapsibleContent from "../../rules-content/RulesCollapsibleContent";
 
 const FilterBox = (prop: any) => {

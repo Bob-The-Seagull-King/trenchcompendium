@@ -42,20 +42,12 @@ const ModelCollectionDisplay = (props: any) => {
         <ErrorBoundary fallback={<div>Something went wrong with ModelCollectionDisplay.tsx</div>}>
             <div className='ModelCollectionDisplay'>
                 {modelcollectionObject.SubModelsList.length > 1 &&
-                    <Form.Group controlId={modelcollectionObject.ID+'-select'} className={'mb-3'}>
-                        <Form.Label>{'Choose Option'}</Form.Label>
-                        <Form.Select onChange={(e: { target: { value: any; }; }) => { updateItem(e.target.value)    } } >
-                            {modelcollectionObject.SubModelsList.map((item) => (
-                                <option  key="modeloption" value={item.var_name}>
-                                    {makestringpresentable(item.var_name) + " - " + makestringpresentable(item.model.Name != undefined? item.model.Name : "")}
-                                </option>
-                            ))}
-                        </Form.Select>
-                    </Form.Group>
+                    <>
+                        {modelcollectionObject.SubModelsList.map((item) => (
+                            <ModelDisplay key={"modeloption"+item.var_name} data={item.model}/>
+                        ))}
+                    </>
                 }
-                <div key={_keyvar}>
-                    <ModelDisplay data={selectedModel.model}/>
-                </div>
             </div>
         </ErrorBoundary>
     )

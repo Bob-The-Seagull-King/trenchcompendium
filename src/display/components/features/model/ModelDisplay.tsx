@@ -37,177 +37,184 @@ import RulesModelUpgrade from '../../../components/rules-content/RulesModelUpgra
 import { Keyword } from '../../../../classes/feature/glossary/Keyword';
 
 const ModelDisplay = (props: any) => {
-    const modelcollectionObject: Model = props.data
+    const ModelObject: Model = props.data
     
-        const [statchoices, setstats] = useState({})
-        const [upgrades, setupgrades] = useState<UpgradesGrouped>({})
-        const [abilities, setabilities] = useState<Ability[]>([])
-        const [BaseString, setBaseString] = useState('')
-        const [minimum, setminimum] = useState("")
-        const [maximum, setmaximum] = useState("")
-        const [_keyvar, setkeyvar] = useState(0);
-    
-        const sourceData = useSynodModelImageData(modelcollectionObject.GetSlug());
-    
-    
-        // Render no lore if loreshow !== 'true'
-        const [loreshow] = useGlobalState('loreshow');
-    
-        useEffect(() => {
-            async function SetModelOptions() {
-                const EventProc: EventRunner = new EventRunner();
+    const [statchoices, setstats] = useState({})
+    const [upgrades, setupgrades] = useState<UpgradesGrouped>({})
+    const [abilities, setabilities] = useState<Ability[]>([])
+    const [BaseString, setBaseString] = useState('')
+    const [_keyvar, setkeyvar] = useState(0);
 
-                setupgrades(modelcollectionObject.GetSplitUpgrades())
+    const sourceData = useSynodModelImageData(ModelObject.GetSlug());
     
-                setabilities(modelcollectionObject.Abilities)
+    // Render no lore if loreshow !== 'true'
+    const [loreshow] = useGlobalState('loreshow');
+
+    useEffect(() => {
+        async function SetModelOptions() {
+            const EventProc: EventRunner = new EventRunner();
+
+            setupgrades(ModelObject.GetSplitUpgrades())
+
+            setabilities(ModelObject.Abilities)
+
+            /* MODEL STAT CHOICES */
+            const result = await ModelObject.GetPresentableStatistics()
+            setstats(result);
+
+            const baseresult = await ModelObject.getBaseSizeString();
+            setBaseString(baseresult);
+            setkeyvar((prev) => prev + 1);
+        }
+
+        SetModelOptions();
+    }, []);
     
-                /* MODEL STAT CHOICES */
-                const result = await modelcollectionObject.GetPresentableStatistics()
-                setstats(result);
-    
-                const baseresult = await modelcollectionObject.getBaseSizeString();
-                setBaseString(baseresult);
-                setkeyvar((prev) => prev + 1);
-            }
-    
-            SetModelOptions();
-        }, []);
-    
-    
-    
-        return (
-            <ErrorBoundary fallback={<div>Something went wrong with ModelDisplay.tsx</div>}>
-                <section className='RulesModelDisplay fighter-card' key={_keyvar}>
-                    <FighterCardTitle
-                        name={modelcollectionObject.getName()}
+
+
+
+    return (
+        <ErrorBoundary fallback={<div>Something went wrong with ModelDisplay.tsx</div>}>
+            <section className='RulesModelDisplay fighter-card' key={_keyvar}>
+                <FighterCardTitle
+                    name={ModelObject.getName()}
+                />
+
+                <div className={'fighter-card-main-area'}>
+                    <FighterCardImageWrap
+                        model_slug={ModelObject.GetSlug()}
                     />
-    
-                    <div className={'fighter-card-main-area'}>
-                        <FighterCardImageWrap
-                            model_slug={modelcollectionObject.GetSlug()}
-                        />
-    
-                        <FighterCardStats
-                            movement={getModelStatMove(statchoices)}
-                            melee={getModelStatMelee(statchoices)}
-                            ranged={getModelStatRanged(statchoices)}
-                            armour={getModelStatArmour(statchoices)}
-                        />
-    
-                        <div className="fighter-card-meta fighter-card-meta-below">
+
+                    <FighterCardStats
+                        movement={getModelStatMove(statchoices)}
+                        melee={getModelStatMelee(statchoices)}
+                        ranged={getModelStatRanged(statchoices)}
+                        armour={getModelStatArmour(statchoices)}
+                    />
+
+                    <div className="fighter-card-meta fighter-card-meta-below">
+                        {ModelObject.isVariant() &&
                             <FighterCardMetaEntry
-                                className="fighter-base"
-                                label="Base"
-                                value={BaseString}
+                                className="fighter-variant"
+                                label="Variant of"
+                                value={ModelObject.GetBaseVariantName()}
                             />
-    
-                            <FighterCardMetaEntryKeywords
-                                keywords={modelcollectionObject.getKeywords()}
-                                modelId={modelcollectionObject.ID}
+                        }
+
+
+                        <FighterCardMetaEntry
+                            className="fighter-base"
+                            label="Base"
+                            value={BaseString}
+                        />
+
+                        <FighterCardMetaEntryKeywords
+                            keywords={ModelObject.getKeywords()}
+                            modelId={ModelObject.ID}
+                        />
+
+                        {!sourceData.loading && !sourceData.error && sourceData.sourceUrl &&
+                            <FighterCardMetaEntry
+                                className="synod-image-source-wrap"
+                                label="Image"
+                                value={<SynodModelImageSource
+                                    modelSlug={ModelObject.GetSlug()}
+                                />}
                             />
-    
-                            {!sourceData.loading && !sourceData.error && sourceData.sourceUrl &&
-                                <FighterCardMetaEntry
-                                    className="synod-image-source-wrap"
-                                    label="Image"
-                                    value={<SynodModelImageSource
-                                        modelSlug={modelcollectionObject.GetSlug()}
-                                    />}
-                                />
-                            }
-    
-                        </div>
+                        }
+
                     </div>
-    
-    
-                    <div className={'fighter-card-collapse-wrap'} key={_keyvar}>
-                        {/* Abilities */}
-                        {abilities.length > 0 &&
+                </div>
+
+
+                <div className={'fighter-card-collapse-wrap'} key={_keyvar}>
+                    {/* Abilities */}
+                    {abilities.length > 0 &&
+                        <RulesModelDisplayCollapse
+                            name={"Abilities"}
+                            state={false}
+                            method={() => <>
+                                {abilities.map((item) => (
+                                    <React.Fragment
+                                        key={"model_ability_" + ModelObject.ID + "_ability_id_" + item.ID}>
+                                        <RulesModelDisplayAbility data={item}/>
+                                    </React.Fragment>
+                                ))}
+                            </>
+                            }
+                        />
+                    }
+
+                    {/* Equipment Rules */}
+                    {ModelObject.hasDescription() &&
+                        <RulesModelDisplayCollapse
+                            name={"Rules"}
+                            state={false}
+                            method={() => <>
+                                {returnDescription(ModelObject, ModelObject.Description)}
+
+                                {(ModelObject.getUniqueEquipment().length > 0) &&
+                                    <div className={'container bordergrey'}>
+                                        <div className={"backgroundgrey"}/>
+                                        <div className="content">
+                                            <div>
+                                                {ModelObject.getUniqueEquipment().map((item) => (
+                                                    <div key={item.ID}>
+                                                        <ModelEquipmentDisplay team_col={ModelObject.Team}
+                                                                               data={item}/>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                }
+                            </>
+                            }
+                        />
+                    }
+
+                    {/* Upgrades */}
+                    {Object.keys(upgrades).length > 0 &&
+                    <>
+                    {
+                        Object.keys(upgrades).map((item) => (
                             <RulesModelDisplayCollapse
-                                name={"Abilities"}
+                                key={item}
+                                name={makestringpresentable(item)}
                                 state={false}
+                                has_children={ModelObject.hasUpgrades()}
                                 method={() => <>
-                                    {abilities.map((item) => (
+                                    {upgrades[item].map((subitem : ModelUpgradeRelationship) => (
                                         <React.Fragment
-                                            key={"model_ability_" + modelcollectionObject.ID + "_ability_id_" + item.ID}>
-                                            <RulesModelDisplayAbility data={item}/>
+                                            key={"model_upgrade_" + ModelObject.ID + "_upgrade_id_" + subitem.ID}>
+                                            <RulesModelUpgrade item={subitem}/>
                                         </React.Fragment>
                                     ))}
                                 </>
                                 }
                             />
-                        }
-    
-                        {/* Equipment Rules */}
-                        {modelcollectionObject.hasDescription() &&
-                            <RulesModelDisplayCollapse
-                                name={"Rules"}
-                                state={false}
-                                method={() => <>
-                                    {returnDescription(modelcollectionObject, modelcollectionObject.Description)}
-    
-                                    {(modelcollectionObject.getUniqueEquipment().length > 0) &&
-                                        <div className={'container bordergrey'}>
-                                            <div className={"backgroundgrey"}/>
-                                            <div className="content">
-                                                <div>
-                                                    {modelcollectionObject.getUniqueEquipment().map((item) => (
-                                                        <div key={item.ID}>
-                                                            <ModelEquipmentDisplay team_col={modelcollectionObject.Team}
-                                                                                   data={item}/>
-                                                        </div>
-                                                    ))}
-                                                </div>
-                                            </div>
-                                        </div>
-    
-                                    }
-                                </>
-                                }
-                            />
-                        }
-    
-                        {/* Upgrades */}
-                        {Object.keys(upgrades).length > 0 &&
-                        <>
-                        {
-                            Object.keys(upgrades).map((item) => (
-                                <RulesModelDisplayCollapse
-                                    key={item}
-                                    name={makestringpresentable(item)}
-                                    state={false}
-                                    has_children={modelcollectionObject.hasUpgrades()}
-                                    method={() => <>
-                                        {upgrades[item].map((subitem : ModelUpgradeRelationship) => (
-                                            <React.Fragment
-                                                key={"model_upgrade_" + modelcollectionObject.ID + "_upgrade_id_" + subitem.ID}>
-                                                <RulesModelUpgrade item={subitem}/>
-                                            </React.Fragment>
-                                        ))}
-                                    </>
-                                    }
-                                />
-                            ))
-                        }
-                        </>
-                            
-                        }
-    
-                        {/* Lore Text */}
-                        {modelcollectionObject.Lore.length > 0 && loreshow !== 'false' &&
-                            <RulesModelDisplayCollapse
-                                name={"Lore"}
-                                state={false}
-                                method={() => <>
-                                    {returnDescription(modelcollectionObject, modelcollectionObject.Lore)}
-                                </>
-                                }
-                            />
-                        }
-                    </div>
-                </section>
-            </ErrorBoundary>
-        )
+                        ))
+                    }
+                    </>
+
+                    }
+
+                    {/* Lore Text */}
+                    {ModelObject.Lore.length > 0 && loreshow !== 'false' &&
+                        <RulesModelDisplayCollapse
+                            name={"Lore"}
+                            state={false}
+                            method={() => <>
+                                {returnDescription(ModelObject, ModelObject.Lore)}
+                            </>
+                            }
+                        />
+                    }
+                </div>
+            </section>
+        </ErrorBoundary>
+    )
 }
 
 export default ModelDisplay;

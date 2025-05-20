@@ -415,6 +415,29 @@ class Model extends StaticContextObject {
     }
 
 
+    // @TODO: Add logic to get the real base variant name
+    /**
+     * Get the name of the Base variant of this model
+     */
+    public GetBaseVariantName () {
+        if( this.GetName() == 'Kavass') {
+            return 'Azeb'
+        } else {
+            return false;
+        }
+    }
+
+
+    /**
+     * is this model a variant of a base model?
+     */
+    public isVariant () {
+        if( this.GetBaseVariantName() ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 }
 
