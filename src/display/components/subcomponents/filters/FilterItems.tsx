@@ -246,8 +246,6 @@ const FilterMiscSet = (prop: any) => {
     const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const value = e.target.value;
 
-        console.log(value);
-
         if (value === 'show_all') {
             setSelectedValue(null); // ← Important
 
