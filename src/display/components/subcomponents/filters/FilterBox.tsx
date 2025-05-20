@@ -9,7 +9,7 @@ import { CollectionsListPage } from '../../../../classes/viewmodel/pages/Collect
 import { FilterManager } from '../../../../classes/viewmodel/collections/filters/FilterManager';
 import { FilterItem, FilterRange, FilterTag, FilterText } from '../../../../classes/viewmodel/collections/filters/FilterInterfaces';
 import { InputGroup, Form, Button, Collapse } from 'react-bootstrap';
-import { faFilter, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import {faClose, faFilter, faMagnifyingGlass} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { FilterTextItem } from './FilterItems';
 import { DisplayCollectionType, DisplayCollectionDataDex } from '../../../pages/DisplayPageStatic';
@@ -53,8 +53,15 @@ const FilterBox = (prop: any) => {
                         }}
                     />
 
-                    <Button variant="primary" className="search-btn" onClick={() => updatesearch()}>
-                        <FontAwesomeIcon icon={faMagnifyingGlass} className=""/>
+                    <Button
+                        variant="secondary"
+                        className="search-btn"
+                        onClick={() => {
+                            UpdateName(_filter, '');
+                            updatesearch();
+                        }}
+                    >
+                        <FontAwesomeIcon icon={faClose} className=""/>
                     </Button>
                 </InputGroup>
             </div>
