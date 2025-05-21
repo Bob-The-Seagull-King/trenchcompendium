@@ -1,8 +1,34 @@
 .SynodLoginPage
+    position: relative
+    min-height: calc( 100vh - 55px )
+    overflow: hidden
+    
+    .login-bg
+        position: absolute
+        top: -5px
+        bottom: -5px
+        left: -5px
+        right: -5px
+        z-index: 1
+        width: calc(100% + 5px)
+        height: calc(100% + 5px)
+        object-position: center left
+        object-fit: cover
+        filter: blur(5px)
 
     .synod-login-form
+        position: relative
+        z-index: 5
         max-width: 350px
-        margin: 0 auto
+        margin: 30px auto
+        padding: 0px 30px 30px
+
+        background-color: $color-bg-1
+
+        @media (max-width: 370px)
+            width: 100%
+            margin-left: 15px
+            margin-right: 15px
 
         .btn
             width: 100%

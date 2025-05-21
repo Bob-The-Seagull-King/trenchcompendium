@@ -9,6 +9,7 @@ import SynodPasswordReset from "../../utility/SynodPasswordReset";
 import SynodUpdateWarband from "../../utility/SynodUpdateWarband";
 import SynodUserWarbands from "../../utility/SynodUserWarbands";
 import {useAuth} from "../../utility/AuthContext";
+import SynodImage from "../../utility/SynodImage";
 
 const SynodLoginPage: React.FC = () => {
     const [authToken, setAuthToken] = useState<string | null>(null);
@@ -39,6 +40,12 @@ const SynodLoginPage: React.FC = () => {
 
     return (
         <div className="SynodLoginPage">
+            <SynodImage
+                imageId={250}
+                className={'login-bg'}
+                size={'full'}
+            />
+
             <div className={'container'}>
                 <div className={'row'}>
 
@@ -117,39 +124,22 @@ const SynodLoginPage: React.FC = () => {
                 </div>
             </div>
 
-            <div className={"container mt-3 pt-3"}>
-            <hr className={'mt-3'}/>
-                {/* @TODO: Debug screen*/}
-                {/*<SynodGetWarband*/}
-                {/*    WarbandId={15}*/}
-                {/*/>*/}
-
-                <div className={'row'}>
-                    <div className={'col'}>
-                        {/*<SynodGetWarband*/}
-                        {/*    WarbandId={15}*/}
-                        {/*/>*/}
-
+            {false &&
+                <>
+                    <div className={"container mt-3 pt-3"}>
                         <SynodUserWarbands/>
-                    </div>
 
-                </div>
+                        {isLoggedIn && (
+                            <SynodUpdateWarband/>
+                        )}
 
-                <hr />
-
-                <div className={'row'}>
-                    <div className={'col col-sm-6'}>
                         {isLoggedIn && (
                             <SynodCreateWarband/>
                         )}
                     </div>
-                    <div className={'col col-sm-6'}>
-                        {isLoggedIn && (
-                            <SynodUpdateWarband/>
-                        )}
-                    </div>
-                </div>
-            </div>
+                </>
+            }
+
         </div>
     );
 };
