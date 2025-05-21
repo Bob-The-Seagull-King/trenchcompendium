@@ -56,7 +56,7 @@ const ToolsRandomScenario = (prop: any) => {
                 <div className={'rules-scenario-summary-content rules-card-content'}>
                     <h2>{deploy.name}</h2>
                     <SynodImage
-                        imageId={deploy.ImgLink}
+                        imageId={Number(deploy.img_link)}
                         size="large"
                         className="rules-banner-image-element"
                     />
