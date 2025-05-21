@@ -12,6 +12,7 @@ import { ControllerController } from '../../classes/_high_level_controllers/Cont
 import CustomNavLink from '../components/subcomponents/interactables/CustomNavLink';
 import { useNavigate } from 'react-router-dom';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
+import PageMetaInformation from "../components/generics/PageMetaInformation";
 
 
 const WbbCreateNewPage = (prop: any) => {
@@ -50,46 +51,51 @@ const WbbCreateNewPage = (prop: any) => {
     return (
         <div className={'WbbCreateNewPage'}>
 
-                {step === 1 && (
-                    <div className={'container'}>
-                        <div className={'headline-wrap'}>
-                            <h1>
-                                <span className={'headline-back-btn'} onClick={() => (
-                                    navigate('/warband/')
-                                )}>
-                                    <FontAwesomeIcon icon={faChevronLeft} className={''}/>
-                                </span>
-                                {'New Warband'}
-                            </h1>
-                            <h2 className={'sub-headline'}>{'Select Faction'}</h2>
-                        </div>
+            <PageMetaInformation
+                title={'New Warband'}
+                description={'Create a new warband for your Trench Crusade games.'}
+            />
 
-                        <div className={'wbb-faction-masonry'}>
-                            {factionlist.map(item => (
-                                <WbbFactionSelectItem
-                                    key={item.HeldItem.ID}
-                                    item={item.HeldItem}
-                                    trueitem={item.HeldItem.GetBaseFac()}
-                                    onSelect={handleFactionSelect}
-                                    selectedFaction={selectedFaction}
-                                />
-                            ))}
-                        </div>
-
-                        <div className="bottom-actions">
-                            <CustomNavLink                             
-                                link={"warband/"}
-                                classes={"btn btn-secondary"}
-                                runfunc={() => (navigate("/warband/"))}
-                                >
-                                    <>
-                                        <FontAwesomeIcon icon={faChevronLeft} className={'icon-inline-left-l'}/>
-                                        {'Your Warbands'}
-                                    </>
-                            </CustomNavLink>
-                        </div>
+            {step === 1 && (
+                <div className={'container'}>
+                    <div className={'headline-wrap'}>
+                        <h1>
+                            <span className={'headline-back-btn'} onClick={() => (
+                                navigate('/warband/')
+                            )}>
+                                <FontAwesomeIcon icon={faChevronLeft} className={''}/>
+                            </span>
+                            {'New Warband'}
+                        </h1>
+                        <h2 className={'sub-headline'}>{'Select Faction'}</h2>
                     </div>
-                )}
+
+                    <div className={'wbb-faction-masonry'}>
+                        {factionlist.map(item => (
+                            <WbbFactionSelectItem
+                                key={item.HeldItem.ID}
+                                item={item.HeldItem}
+                                trueitem={item.HeldItem.GetBaseFac()}
+                                onSelect={handleFactionSelect}
+                                selectedFaction={selectedFaction}
+                            />
+                        ))}
+                    </div>
+
+                    <div className="bottom-actions">
+                        <CustomNavLink
+                            link={"warband/"}
+                            classes={"btn btn-secondary"}
+                            runfunc={() => (navigate("/warband/"))}
+                            >
+                                <>
+                                    <FontAwesomeIcon icon={faChevronLeft} className={'icon-inline-left-l'}/>
+                                    {'Your Warbands'}
+                                </>
+                        </CustomNavLink>
+                    </div>
+                </div>
+            )}
 
             {step === 2 && selectedFaction && (
                 <div className={'container'}>

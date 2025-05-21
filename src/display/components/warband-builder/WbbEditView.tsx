@@ -28,6 +28,7 @@ import {PrintModeProvider, usePrintMode} from "../../../context/PrintModeContext
 import WbbPrintViewSimple from "./WbbPrintViewSimple";
 import {useGlobalState} from "../../../utility/globalstate";
 import SynodFactionImage from "../../../utility/SynodFactionImage";
+import PageMetaInformation from "../generics/PageMetaInformation";
 
 interface WbbEditViewProps {
     warbandData: UserWarband | null;
@@ -175,6 +176,11 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
             {(warband !== null) ? (
                 <WarbandProvider warband={warband}>
                     <PopoverProvider> <PlayModeProvider value={{ playMode, togglePlayMode }}>
+                        <PageMetaInformation
+                            title={warband.GetWarbandName() + ' - Warband Manager'}
+                            description={'Manage your warband with Trench Companion, the official resource for Trench Crusade.'}
+                        />
+
                         {!printMode &&
                             <>
                                 <div className={`warband-title ${detailType ? 'details-open' : ''}`}>

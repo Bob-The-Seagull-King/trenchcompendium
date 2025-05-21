@@ -12,6 +12,7 @@ import logo from '../../resources/images/compendium.png'
 
 import MenuComponent from '../components/subcomponents/MenuComponent';
 import MenuOutLink from '../components/subcomponents/MenuOutLink';
+import PageMetaInformation from "../components/generics/PageMetaInformation";
 
 
 
@@ -24,6 +25,17 @@ const HomeRoute: React.FC = () => {
         <ErrorBoundary fallback={<div>Something went wrong with HomeRoute.tsx</div>}>
             <div className="home-screen">
                 <div className={'container'}>
+                    <PageMetaInformation
+                        title={'Trench Companion'}
+                        description={'The official resource for Trench Crusade'}
+                    />
+
+                    <h1>
+                        {'Trench Companion'}
+                    </h1>
+
+                    <div className={'spacer-20'}></div>
+
                     <div className={'row'}>
                         <div className={'col-12 col-md-6'}>
                             <MenuComponent Title={"Rules Compendium"} Route={"compendium/"} bgImageID={17}/>

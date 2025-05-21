@@ -6,6 +6,7 @@ import {useNavigate} from "react-router-dom";
 import { WarbandManager } from '../../classes/saveitems/Warband/WarbandManager';
 import CustomNavLink from '../components/subcomponents/interactables/CustomNavLink';
 import { UserWarband } from '../../classes/saveitems/Warband/UserWarband';
+import PageMetaInformation from "../components/generics/PageMetaInformation";
 
 
 /**
@@ -49,7 +50,12 @@ const WbbOverviewPage = (prop: any) => {
         <div className={'WbbOverviewPage'}>
             <div className={'container'}>
                 <div className={'headline-wrap'}>
-                    <h1>Your Warbands</h1>
+                    <PageMetaInformation
+                        title={'Your Warbands'}
+                        description={'Manage your warbands in Trench Companion, the official resource for Trench Crusade.'}
+                    />
+
+                    <h1>{'Your Warbands'}</h1>
 
                     
                     <CustomNavLink

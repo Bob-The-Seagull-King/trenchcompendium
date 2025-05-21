@@ -146,9 +146,18 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         defaultpage(ViewPageController: CollectionsListPage) {
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                        <div>
-                            {"Errata Default Page - THIS IS A TEST TO BE REPLACED"}
-                        </div>
+                    <PageMetaInformation
+                        title={'Rules Errata & FAQ'}
+                        description={'Sometimes the rules for Trench Crusade change, get balanced or clarified. These changes can be found here.'}
+                    />
+                    <h1>
+                        {'Rules Errata'}
+                    </h1>
+
+                    <p>
+                        {'Sometimes the rules for Trench Crusade change, get balanced or clarified. These changes can be found here.'}
+                    </p>
+
                 </ErrorBoundary>
             )
         },

@@ -119,7 +119,7 @@ const FilterableCompendiumDisplay = (prop: any) => {
                 {/* @TODO : replace title and meta for sub-pages */}
                 <PageMetaInformation
                     title={DisplayPage.titlename + ' Glossary'}
-                    description={'The complete Glossary for all '+ DisplayPage.titlename + 'in the game Trench Crusade'}
+                    description={'The complete Glossary for all '+ DisplayPage.titlename + ' in the game Trench Crusade'}
                 />
 
                 {/* @TODO : replace h1 for sub-pages */}

@@ -4,6 +4,7 @@ import { WarbandManager } from '../../classes/saveitems/Warband/WarbandManager';
 import { useLocation } from 'react-router-dom';
 import WarbandItemViewDisplay from '../components/features/saveitem/Warband/WarbandItemViewDisplay';
 import {PrintModeProvider} from "../../context/PrintModeContext";
+import PageMetaInformation from "../components/generics/PageMetaInformation";
 
 const WbbEditPage = (prop: any) => {
     const Manager : WarbandManager = prop.manager;
