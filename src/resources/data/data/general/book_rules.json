@@ -910,7 +910,7 @@
                         "subcontent": [
                             {
                                 "tags": {"desc_type" : "bold"},
-                                "content": "Request Reinforcements"
+                                "content": "Request Reinforcements: "
                             },
                             {
                                 "tags": {"desc_type" : "default"},
@@ -924,7 +924,7 @@
                         "subcontent": [
                             {
                                 "tags": {"desc_type" : "bold"},
-                                "content": "Looting & Exploration"
+                                "content": "Looting & Exploration: "
                             },
                             {
                                 "tags": {"desc_type" : "default"},
@@ -966,7 +966,7 @@
                         "subcontent": [
                             {
                                 "tags": {"desc_type" : "bold"},
-                                "content": "Use Glory Points"
+                                "content": "Use Glory Points: "
                             },
                             {
                                 "tags": {"desc_type" : "default"},
