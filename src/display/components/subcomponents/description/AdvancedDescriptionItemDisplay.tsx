@@ -1,6 +1,7 @@
 import '../../../../resources/styles/vendor/bootstrap.css'
 import React, { useEffect, useState } from 'react'
 import { ErrorBoundary } from "react-error-boundary";
+import { useNavigate } from 'react-router-dom';
 
 // Classes
 import { getTagValue, getTagSetValue} from '../../../../utility/functions'
@@ -28,6 +29,7 @@ import RulesEquipmentMain from '../../../components/rules-content/RulesEquipment
 import RulesEquipmentStats from '../../../components/rules-content/RulesEquipmentStats';
 import RulesOverlay from '../../../components/rules-content/RulesOverlay';
 import { useGlobalState } from '../../../../utility/globalstate';
+import CustomNavLink from '../interactables/CustomNavLink';
 
 const AdvancedDescriptionItemDisplay = (props: any) => {
     const description: AdvancedDescription = props.data
@@ -37,6 +39,8 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
 
     let colour = getParentValue('Team');
     if (colour == null) { colour = "default"}
+    
+    const navigate = useNavigate();
 
     /**
      * Takes a description and combines all tags, subcomponents,
@@ -289,6 +293,27 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
                             ))}
                         </span>
                     </div>
+                )
+            }
+            case "link": {
+                return (
+                    <span>
+                        <span>
+                            <CustomNavLink
+                                classes={'font-normal'}
+                                link={getTagSetValue(item.Tags, "url")}
+                                runfunc={() => {
+                                    navigate(getTagSetValue(item.Tags, "url"))
+                                }}>
+                                {ConvertContentWithGlossary((item.Glossary), item.Content?.toString() || "")} 
+                            </CustomNavLink>
+                        </span>
+                        <span>
+                            {item.SubContent?.map((subitem) => (
+                               <AdvancedDescriptionItemDisplay key="descriptionsubitem" data={subitem} parent={parentItem}/>
+                            ))}
+                        </span>
+                    </span>
                 )
             }
             case "question": {
