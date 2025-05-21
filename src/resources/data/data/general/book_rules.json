@@ -107,7 +107,7 @@
                                                 "content": "",
                                                 "subcontent": [
                                                     {
-                                                        "tags": {"desc_type" : "link", "url": "compendium/scenario/sc_claimnomansland"},
+                                                        "tags": {"desc_type" : "link", "url": "/compendium/scenario/sc_claimnomansland"},
                                                         "content": "Claim No Man's Land"
                                                     }
                                                 ]
