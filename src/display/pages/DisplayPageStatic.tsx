@@ -158,6 +158,22 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
                         {'Sometimes the rules for Trench Crusade change, get balanced or clarified. These changes can be found here.'}
                     </p>
 
+                    <div className={'row'}>
+
+                        <div className={'col-12'}>
+                        {ViewPageController.Collection.itemcollection.map( (rule) => (
+                            <RulesBannerText
+                                key={rule.HeldItem.ID}
+                                link={"/compendium/errata/"+rule.HeldItem.ID}
+                                title={rule.HeldItem.Name}
+                            >
+                            </RulesBannerText>
+                            ))
+
+                            }
+                        </div>
+                    </div>
+
                 </ErrorBoundary>
             )
         },
