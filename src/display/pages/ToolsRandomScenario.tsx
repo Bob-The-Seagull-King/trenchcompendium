@@ -59,6 +59,7 @@ const ToolsRandomScenario = (prop: any) => {
                         imageId={Number(deploy.img_link)}
                         size="large"
                         className="rules-banner-image-element"
+                        style={{width:"100%"}}
                     />
 
                     {

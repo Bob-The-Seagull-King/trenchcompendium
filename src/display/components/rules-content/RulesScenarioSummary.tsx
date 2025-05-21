@@ -72,6 +72,7 @@ const RulesScenarioSummary = (props: any) => {
                         imageId={Number(scenarioObject.ImgLink)}
                         size="large"
                         className="rules-banner-image-element"
+                        style={{width:"100%"}}
                     />
 
                     <table className={'rules-scenario-summary-table rules-card-table'}>
