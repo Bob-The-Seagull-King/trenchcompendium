@@ -124,7 +124,13 @@
                                             },
                                             {
                                                 "tags": {"desc_type" : "table_item"},
-                                                "content": "Hunt for Heroes"
+                                                "content": "",
+                                                "subcontent": [
+                                                    {
+                                                        "tags": {"desc_type" : "link", "url": "/compendium/scenario/sc_huntforheroes"},
+                                                        "content": "Hunt for Heroes"
+                                                    }
+                                                ]
                                             }
                                         ]
                                     },
@@ -152,7 +158,13 @@
                                             },
                                             {
                                                 "tags": {"desc_type" : "table_item"},
-                                                "content": "Relic Hunt"
+                                                "content": "",
+                                                "subcontent": [
+                                                    {
+                                                        "tags": {"desc_type" : "link", "url": "/compendium/scenario/sc_relichunt"},
+                                                        "content": "Relic Hunt"
+                                                    }
+                                                ]
                                             }
                                         ]
                                     },
@@ -166,7 +178,13 @@
                                             },
                                             {
                                                 "tags": {"desc_type" : "table_item"},
-                                                "content": "Supply Raid"
+                                                "content": "",
+                                                "subcontent": [
+                                                    {
+                                                        "tags": {"desc_type" : "link", "url": "/compendium/scenario/sc_supplyraid"},
+                                                        "content": "Supply Raid"
+                                                    }
+                                                ]
                                             }
                                         ]
                                     },
@@ -180,7 +198,13 @@
                                             },
                                             {
                                                 "tags": {"desc_type" : "table_item"},
-                                                "content": "Random Scenario"
+                                                "content": "",
+                                                "subcontent": [
+                                                    {
+                                                        "tags": {"desc_type" : "link", "url": "/compendium/scenario/randomscenario"},
+                                                        "content": "Random Scenario"
+                                                    }
+                                                ]
                                             }
                                         ]
                                     }
@@ -210,7 +234,13 @@
                                             },
                                             {
                                                 "tags": {"desc_type" : "table_item"},
-                                                "content": "Hunt for Heroes"
+                                                "content": "",
+                                                "subcontent": [
+                                                    {
+                                                        "tags": {"desc_type" : "link", "url": "/compendium/scenario/sc_huntforheroes"},
+                                                        "content": "Hunt for Heroes"
+                                                    }
+                                                ]
                                             }
                                         ]
                                     },
@@ -224,7 +254,13 @@
                                             },
                                             {
                                                 "tags": {"desc_type" : "table_item"},
-                                                "content": "Armoured Train"
+                                                "content": "",
+                                                "subcontent": [
+                                                    {
+                                                        "tags": {"desc_type" : "link", "url": "/compendium/scenario/sc_armouredtrain"},
+                                                        "content": "Armoured Train"
+                                                    }
+                                                ]
                                             }
                                         ]
                                     },
@@ -238,7 +274,13 @@
                                             },
                                             {
                                                 "tags": {"desc_type" : "table_item"},
-                                                "content": "Storming the Shores"
+                                                "content": "",
+                                                "subcontent": [
+                                                    {
+                                                        "tags": {"desc_type" : "link", "url": "/compendium/scenario/sc_stormingtheshores"},
+                                                        "content": "Storming the Shores"
+                                                    }
+                                                ]
                                             }
                                         ]
                                     },
@@ -252,7 +294,13 @@
                                             },
                                             {
                                                 "tags": {"desc_type" : "table_item"},
-                                                "content": "Claim No Man's Land"
+                                                "content": "",
+                                                "subcontent": [
+                                                    {
+                                                        "tags": {"desc_type" : "link", "url": "/compendium/scenario/sc_claimnomansland"},
+                                                        "content": "Claim No Man's Land"
+                                                    }
+                                                ]
                                             }
                                         ]
                                     },
@@ -266,7 +314,13 @@
                                             },
                                             {
                                                 "tags": {"desc_type" : "table_item"},
-                                                "content": "Dragon Hunt"
+                                                "content": "",
+                                                "subcontent": [
+                                                    {
+                                                        "tags": {"desc_type" : "link", "url": "/compendium/scenario/sc_dragonhunt"},
+                                                        "content": "Dragon Hunt"
+                                                    }
+                                                ]
                                             }
                                         ]
                                     },
@@ -280,7 +334,13 @@
                                             },
                                             {
                                                 "tags": {"desc_type" : "table_item"},
-                                                "content": "Random Scenario"
+                                                "content": "",
+                                                "subcontent": [
+                                                    {
+                                                        "tags": {"desc_type" : "link", "url": "/compendium/scenario/randomscenario"},
+                                                        "content": "Random Scenario"
+                                                    }
+                                                ]
                                             }
                                         ]
                                     }
@@ -310,7 +370,13 @@
                                             },
                                             {
                                                 "tags": {"desc_type" : "table_item"},
-                                                "content": "Trench Warfare"
+                                                "content": "",
+                                                "subcontent": [
+                                                    {
+                                                        "tags": {"desc_type" : "link", "url": "/compendium/scenario/sc_trenchwarfar"},
+                                                        "content": "Trench Warfare"
+                                                    }
+                                                ]
                                             }
                                         ]
                                     },
@@ -324,7 +390,13 @@
                                             },
                                             {
                                                 "tags": {"desc_type" : "table_item"},
-                                                "content": "Dragon Hunt"
+                                                "content": "",
+                                                "subcontent": [
+                                                    {
+                                                        "tags": {"desc_type" : "link", "url": "/compendium/scenario/sc_dragonhunt"},
+                                                        "content": "Dragon Hunt"
+                                                    }
+                                                ]
                                             }
                                         ]
                                     },
@@ -366,7 +438,13 @@
                                             },
                                             {
                                                 "tags": {"desc_type" : "table_item"},
-                                                "content": "Storming the Shores"
+                                                "content": "",
+                                                "subcontent": [
+                                                    {
+                                                        "tags": {"desc_type" : "link", "url": "/compendium/scenario/sc_stormingtheshores"},
+                                                        "content": "Storming the Shores"
+                                                    }
+                                                ]
                                             }
                                         ]
                                     },
@@ -380,7 +458,13 @@
                                             },
                                             {
                                                 "tags": {"desc_type" : "table_item"},
-                                                "content": "Random Scenario"
+                                                "content": "",
+                                                "subcontent": [
+                                                    {
+                                                        "tags": {"desc_type" : "link", "url": "/compendium/scenario/randomscenario"},
+                                                        "content": "Random Scenario"
+                                                    }
+                                                ]
                                             }
                                         ]
                                     }
@@ -397,8 +481,14 @@
                                 "content": "Final Battle (Battle 12)"
                             },
                             {
-                                "tags": {"desc_type" : "paragraph"},
-                                "content": "Play the Great War scenario."
+                                "tags": {"desc_type" : "table_item"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "link", "url": "/compendium/scenario/sc_greatwar"},
+                                        "content": "Play the Great War scenario"
+                                    }
+                                ]
                             }
                         ]
                     }
@@ -871,7 +961,13 @@
                         "subcontent": [
                             {
                                 "tags": {"desc_type" : "bold"},
-                                "content": "Injuries: "
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "link", "url": "/compendium/campaign/injury"},
+                                        "content": "Injuries: "
+                                    }
+                                ]
                             },
                             {
                                 "tags": {"desc_type" : "default"},
@@ -888,7 +984,13 @@
                         "subcontent": [
                             {
                                 "tags": {"desc_type" : "bold"},
-                                "content": "Experience & Advancement: "
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "link", "url": "/compendium/campaign/campaign_rules/br_experienceandadvancement"},
+                                        "content": "Experience & Advancement: "
+                                    }
+                                ]
                             },
                             {
                                 "tags": {"desc_type" : "default"},
@@ -902,7 +1004,13 @@
                         "subcontent": [
                             {
                                 "tags": {"desc_type" : "bold"},
-                                "content": "Increase the Warband Threshold Value: "
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "link", "url": "/compendium/campaign/campaign_rules/br_warbandlimits"},
+                                        "content": "Increase the Warband Threshold Value: "
+                                    }
+                                ]
                             },
                             {
                                 "tags": {"desc_type" : "default"},
@@ -930,7 +1038,13 @@
                         "subcontent": [
                             {
                                 "tags": {"desc_type" : "bold"},
-                                "content": "Looting & Exploration: "
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "link", "url": "/compendium/campaign/explorationtable"},
+                                        "content": "Looting & Exploration: "
+                                    }
+                                ]
                             },
                             {
                                 "tags": {"desc_type" : "default"},
@@ -972,7 +1086,13 @@
                         "subcontent": [
                             {
                                 "tags": {"desc_type" : "bold"},
-                                "content": "Use Glory Points: "
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "link", "url": "/compendium/campaign/campaign_rules/br_gloryitems"},
+                                        "content": "Use Glory Points: "
+                                    }
+                                ]
                             },
                             {
                                 "tags": {"desc_type" : "default"},
