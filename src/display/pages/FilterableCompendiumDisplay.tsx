@@ -12,7 +12,7 @@ import { DisplayCollectionDataDex, DisplayCollectionType } from './DisplayPageSt
 import FilterBox from '../components/subcomponents/filters/FilterBox';
 import { useLocation } from 'react-router-dom';
 import PageMetaInformation from "../components/generics/PageMetaInformation";
-import { makestringpresentable } from 'utility/functions';
+import { makestringpresentable } from '../../utility/functions';
 
 const FilterableCompendiumDisplay = (prop: any) => {
     // Initialize controllers and managers
@@ -117,13 +117,11 @@ const FilterableCompendiumDisplay = (prop: any) => {
         <ErrorBoundary fallback={<div>Something went wrong with FilteredDisplayCompendium.tsx</div>}>
             <div className={'rules-content-main'}>
 
-                {/* @TODO : replace title and meta for sub-pages */}
                 <PageMetaInformation
                     title={DisplayPage.titlename + ' Glossary'}
                     description={'The complete Glossary for all '+ ((DisplayPage.titlename == 'Weapons & Equipment')? makestringpresentable((urlSplits.length > 3)? urlSplits.slice(4)[0] : DisplayPage.titlename): DisplayPage.titlename) + ' in the game Trench Crusade'}
                 />
 
-                {/* @TODO : replace h1 for sub-pages */}
                 <h1>
                     {((DisplayPage.titlename == 'Weapons & Equipment')? makestringpresentable((urlSplits.length > 3)? urlSplits.slice(4)[0] : DisplayPage.titlename): DisplayPage.titlename) + ' Glossary'}
                 </h1>
