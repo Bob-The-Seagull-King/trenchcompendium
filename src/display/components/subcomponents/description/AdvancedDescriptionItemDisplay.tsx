@@ -42,6 +42,10 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
     
     const navigate = useNavigate();
 
+    function NavigateOut(url: string) {
+        navigate(url, {state: Date.now().toString()});
+    }
+
     /**
      * Takes a description and combines all tags, subcomponents,
      * and glossary items into a DOM element.
@@ -303,7 +307,7 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
                                 classes={'font-normal'}
                                 link={getTagSetValue(item.Tags, "url")}
                                 runfunc={() => {
-                                    navigate(getTagSetValue(item.Tags, "url"))
+                                    NavigateOut(getTagSetValue(item.Tags, "url"))
                                 }}>
                                 {ConvertContentWithGlossary((item.Glossary), item.Content?.toString() || "")} 
                             </CustomNavLink>
