@@ -23,9 +23,28 @@ const PageMetaInformation: React.FC<PageMetaInformationProps> = ({
      ogUrl,
  }) => {
 
+    // construct the title
+    if( title == '' ) {
+        title = 'Trench Companion - The official Trench Crusade resource';
+    } else {
+        title = title + ' | Trench Companion';
+
+    }
+
+    // Create Description Fallback
+    if( description == '' ) {
+        description = 'Trench Companion - The official resource for the tabletop game Trench Crusade.';
+    }
+
+    // Create ogImage Fallback
+    if( ogImage == '' ) {
+        ogImage = 'https://synod.trench-companion.com/wp-content/uploads/2025/05/Trench-Companion-Share.png';
+    }
+
+
     return (
         <Helmet>
-            <title>{title + ' | Trench Companion'}</title>
+            <title>{title}</title>
 
             {description &&
                 <meta name="description" content={description}/>
