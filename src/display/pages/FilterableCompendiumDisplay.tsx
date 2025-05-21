@@ -119,11 +119,11 @@ const FilterableCompendiumDisplay = (prop: any) => {
 
                 <PageMetaInformation
                     title={DisplayPage.titlename + ' Glossary'}
-                    description={'The complete Glossary for all '+ ((DisplayPage.titlename == 'Weapons & Equipment')? makestringpresentable((urlSplits.length > 3)? urlSplits.slice(4)[0] : DisplayPage.titlename): DisplayPage.titlename) + ' in the game Trench Crusade'}
+                    description={'The complete Glossary for all '+ (DisplayPage.titlename) + ' in the game Trench Crusade'}
                 />
 
                 <h1>
-                    {((DisplayPage.titlename == 'Weapons & Equipment')? makestringpresentable((urlSplits.length > 3)? urlSplits.slice(4)[0] : DisplayPage.titlename): DisplayPage.titlename) + ' Glossary'}
+                    {(DisplayPage.titlename) + ' Glossary'}
                 </h1>
 
                 <div className={'FilterableCompendiumDisplay-filter'}>
