@@ -192,6 +192,22 @@ class Scenario extends StaticContextObject {
         }
     }
 
+    /**
+     * Returns the scenario description as string
+     * @TODO: Needs to return something
+     */
+    public GetDescription () {
+        return 'This is a scenario.';
+    }
+
+    /**
+     * Returns the image for the scenario or ''
+     *
+     * @TODO: should grab image from Synod or static resources
+     */
+    public GetImageUrl () {
+        return this.ImgLink;
+    }
 }
 
 export {IScenario, Scenario, ForcesData, BattlefieldData, InfiltratorData, DeploymentData, VictoryData, BattleLengthData, GloriousDeedData}

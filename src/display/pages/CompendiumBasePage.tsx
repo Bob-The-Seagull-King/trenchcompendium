@@ -15,6 +15,7 @@ import { ControllerController } from '../../classes/_high_level_controllers/Cont
 import RulesBannerImage from "../components/rules-content/RulesBannerImage";
 import SynodImageSource from "../../utility/SynodImageSource";
 import SynodImageSources from "../../utility/SynodImageSources";
+import PageMetaInformation from "../components/generics/PageMetaInformation";
 
 interface IControllerProp {
     controller : ControllerController; // The controller being passed through
@@ -27,8 +28,13 @@ const CompendiumBasePage: React.FC<IControllerProp> = (prop: any) => {
     return (
         <ErrorBoundary fallback={<div>Something went wrong with BaseDisplayCompendium.tsx</div>}>
             <div className={'rules-content-main'}>
+                <PageMetaInformation
+                    title={'Rules Compendium'}
+                    description={'Welcome to the Compendium. Here you can find all current rules for Trench Crusade including Game Rules, Campaign rules, Faction and glossaries for all the rules.'}
+                />
+
                 <h1 className="">
-                    {"Compendium"}
+                    {"Rules Compendium"}
                 </h1>
 
                 <p className={'mb-3'}>

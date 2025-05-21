@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import CustomNavLink from '../subcomponents/interactables/CustomNavLink';
 import { Faction } from '../../../classes/feature/faction/Faction';
 import RulesBannerImage from '../rules-content/RulesBannerImage';
+import PageMetaInformation from "../generics/PageMetaInformation";
 
 const DefaultCampaign = () => {
     
@@ -18,6 +19,11 @@ const DefaultCampaign = () => {
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DefaultGame.tsx</div>}>
                     <div className={'rules-content-main'}>
+                        <PageMetaInformation
+                            title={'Campaign Rules v1.6.3'}
+                            description={'Here you can find the campaign rules. When in doubt consult the official campaign rules pdf.'}
+                        />
+
                         <h1>
                             {'Campaigns v1.6.3'}
                         </h1>

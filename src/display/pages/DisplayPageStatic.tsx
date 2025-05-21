@@ -229,7 +229,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
                     <PageMetaInformation
-                        title={item.Name}
+                        title={'Keywords'}
                         description={'All Keywords for Trench Crusade in one Place. '}
                     />
 
@@ -410,6 +410,12 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
             return (
 
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
+                    <PageMetaInformation
+                        title={item.Name}
+                        description={item.GetDescription()}
+                        ogImage={item.GetImageUrl()}
+                    />
+
                     <h1>
                         {item.Name}
                     </h1>
@@ -462,35 +468,36 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         defaultpage(ViewPageController: CollectionsListPage) {
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    <PageMetaInformation
-                        title={'Campaign Rules 1.6.3'}
-                        description={'All the rules for Trench Crusade in one place. Below are the official Playtest Rules version 1.6 for the tabletop game Trench Crusade.'}
-                    />
+                    <div className={'rules-content-main'}>
+                        <PageMetaInformation
+                            title={'Campaigns v1.6.3 - Rules'}
+                            description={'All the rules for Trench Crusade in one place. Below are the official Playtest Rules version 1.6 for the tabletop game Trench Crusade.'}
+                        />
 
-                    <div className={'row'}>
+                        <h1>
+                            {'Campaigns v1.6.3 - Rules'}
+                        </h1>
 
-                        <div className={'col-12'}>
-                            <RulesBannerText
-                                link="/compendium/campaign/campaign_rules/br_introduction"
-                                title={'How to play Trench Crusade'}
-                            >
-                                <>
-                                {ViewPageController.Collection.itemcollection.filter((item) => (item.HeldItem.ID != 'br_introduction')).map( (rule) => (
+                        <RulesBannerText
+                            link="/compendium/campaign/campaign_rules/br_introduction"
+                            title={'How to play Trench Crusade'}
+                        >
+                            <>
+                            {ViewPageController.Collection.itemcollection.filter((item) => (item.HeldItem.ID != 'br_introduction')).map( (rule) => (
 
-                                    <RulesBannerText
-                                        key={rule.HeldItem.ID}
-                                        link={"/compendium/campaign/campaign_rules/"+rule.HeldItem.ID}
-                                        title={rule.HeldItem.Name}
-                                    >
-                                    </RulesBannerText>
-                                ))
+                                <RulesBannerText
+                                    key={rule.HeldItem.ID}
+                                    link={"/compendium/campaign/campaign_rules/"+rule.HeldItem.ID}
+                                    title={rule.HeldItem.Name}
+                                >
+                                </RulesBannerText>
+                            ))
 
-                                }
-                                    
+                            }
 
-                                </>
-                            </RulesBannerText>
-                        </div>
+
+                            </>
+                        </RulesBannerText>
                     </div>
                 </ErrorBoundary>
             )
@@ -523,6 +530,11 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         defaultpage(ViewPageController: CollectionsListPage) {
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
+                    <PageMetaInformation
+                        title={'Exploration Locations'}
+                        description={'After you have modified the Exploration roll result, consult the appropriate Exploration Table to see if you have found something of special Interest. You have to match the number on the table exactly with your dice – rolling too high or too low means you did not find the Note that each player can find any of the locations only once during the campaign, though it is completely legal for two different players to discover the same location during the same campaign.'}
+                    />
+
                     <h1>
                         {'Exploration Locations'}
                     </h1>
@@ -688,10 +700,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         defaultpage(ViewPageController: CollectionsListPage) {
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    <PageMetaInformation
-                        title={'Patrons'}
-                        description={'These are the official Trench Crusade Patron. You can select one from the list below or use the official PDF.'}
-                    />
+
                     <DefaultPatron item={ViewPageController} />
                 </ErrorBoundary>
             )

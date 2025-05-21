@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import RulesBannerFaction from '../rules-content/RulesBannerFaction';
 import { FactionCollection } from '../../../classes/feature/faction/FactionCollection';
 import { ErrorBoundary } from 'react-error-boundary';
+import PageMetaInformation from "../generics/PageMetaInformation";
 
 
 interface RulesArmouryElement {
@@ -14,8 +15,13 @@ const DefaultFactions: React.FC<RulesArmouryElement> = ({ item }) => {
 
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
+                    <PageMetaInformation
+                        title={'Factions in Trench Crusade'}
+                        description={'Each warband in Trench Crusade belongs to a faction fighting in the Great War. Use the faction lists that follow to recruit and equip your warband.'}
+                    />
+
                     <h1 className="">
-                        {'Factions'}
+                        {'Factions in Trench Crusade'}
                     </h1>
 
                     <p>

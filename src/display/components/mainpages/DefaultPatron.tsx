@@ -9,6 +9,7 @@ import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import CustomNavLink from '../subcomponents/interactables/CustomNavLink';
 import { Faction } from '../../../classes/feature/faction/Faction';
+import PageMetaInformation from "../generics/PageMetaInformation";
 
 
 interface RulesArmouryElement {
@@ -21,12 +22,17 @@ const DefaultPatron: React.FC<RulesArmouryElement> = ({ item }) => {
 
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
+                    <PageMetaInformation
+                        title={'Patrons'}
+                        description={'These are the official Trench Crusade Patrons. You can select one from the list below or use the official PDF.'}
+                    />
+
                     <h1>
                         {"Patrons"}
                     </h1>
 
                     <p>
-                        {'These are the official Trench Crusade Patron. You can select one from the list below or use the official PDF.'}
+                        {'These are the official Trench Crusade Patrons. You can select one from the list below or use the official PDF.'}
 
                         <br/> <br/>
                         <a href={'https://www.trenchcrusade.com/s/Trench-Crusade-Campaign-Rules-v163.pdf'}

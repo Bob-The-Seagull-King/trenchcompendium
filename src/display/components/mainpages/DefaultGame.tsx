@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import CustomNavLink from '../subcomponents/interactables/CustomNavLink';
 import { Faction } from '../../../classes/feature/faction/Faction';
 import RulesBannerImage from '../rules-content/RulesBannerImage';
+import PageMetaInformation from "../generics/PageMetaInformation";
 
 const DefaultGame = () => {
     
@@ -17,6 +18,11 @@ const DefaultGame = () => {
 
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DefaultGame.tsx</div>}>
+                    <PageMetaInformation
+                        title={'Playtest Rules v1.6'}
+                        description={'All the game rules for Trench Crusade in one place'}
+                    />
+
                     <div className={'rules-content-main'}>
                         <h1>
                             {'Playtest Rules v1.6'}

@@ -14,6 +14,7 @@ import { returnDescription } from '../../utility/util';
 import GloriousDeedDisplay from '../components/features/scenario/GloriousDeedDisplay';
 import { DescriptionFactory } from '../../utility/functions';
 import RulesGloriousDeed from '../components/rules-content/RulesGloriousDeed';
+import PageMetaInformation from "../components/generics/PageMetaInformation";
 
 const ToolsRandomScenario = (prop: any) => {
     const Manager : ScenarioGenerator = prop.manager? prop.manager : getManager();
@@ -79,62 +80,75 @@ const ToolsRandomScenario = (prop: any) => {
     // Return result -----------------------------
     return (
         <ErrorBoundary fallback={<div>Something went wrong with ToolsRandomScenario.tsx</div>}>
+            <div className={'rules-content-main'}>
 
-            {/* Rules */}
+                <PageMetaInformation
+                    title={'Random Scenario'}
+                    description={'Create a random scenario for your trench crusade games'}
+                />
 
-            {/* Scenario */}
-            <h1>Roll for Scenario Type</h1>
-            {
-                returnDescription(Manager,  Manager.ScenarioDataDesc )
-            }
-            {
-                Manager.ListOfObjectives.map((item) => 
-                <div key={item.id}>
-                    {returnScenario(item)}
-                </div>)
-            }
+                {/* Scenario */}
+                <h1>Random Scenario</h1>
+                <p>
+                    {'Create a random scenario for your trench crusade games'}
+                </p>
 
-            {/* Deployments */}
-            <h1>Roll for Deployment Type</h1>
-            {
-                returnDescription(Manager, Manager.DeploymentDataDesc)
-            }
-            {
-                Manager.ListOfDeployments.map((item) => 
-                <div key={item.id}>
-                    {returnDeployment(item)}
-                </div>)
-            }
+                <div className={'spacer-20'}></div>
 
-            {/* Glorious Deeds */}
-            <h1>Glorious Deeds</h1>
-            {
-                returnDescription(Manager, Manager.DeedDataDesc)
-            }
+                <h2>Roll for Scenario Type</h2>
+                {
+                    returnDescription(Manager,  Manager.ScenarioDataDesc )
+                }
+                {
+                    Manager.ListOfObjectives.map((item) =>
+                    <div key={item.id}>
+                        {returnScenario(item)}
+                    </div>)
+                }
 
-            <h2>Die Result - Player 1</h2>
-            {
-                Manager.ListOfDeedsGroupA.map((item) => 
-                <RulesGloriousDeed key={item.ID} data={item}/>)
-            }
+                {/* Deployments */}
+                <h1>Roll for Deployment Type</h1>
+                {
+                    returnDescription(Manager, Manager.DeploymentDataDesc)
+                }
+                {
+                    Manager.ListOfDeployments.map((item) =>
+                    <div key={item.id}>
+                        {returnDeployment(item)}
+                    </div>)
+                }
 
-            <h2>Die Result - Player 2</h2>
-            {
-                Manager.ListOfDeedsGroupB.map((item) => 
-                <RulesGloriousDeed key={item.ID} data={item}/>)
-            }
+                {/* Glorious Deeds */}
+                <h1>Glorious Deeds</h1>
+                {
+                    returnDescription(Manager, Manager.DeedDataDesc)
+                }
 
-            <h2>Deeds to Always Include</h2>
-            {
-                Manager.ListOfDeedsGroupC.map((item) => 
-                <RulesGloriousDeed key={item.ID} data={item}/>)
-            }
+                <h2>Die Result - Player 1</h2>
+                {
+                    Manager.ListOfDeedsGroupA.map((item) =>
+                    <RulesGloriousDeed key={item.ID} data={item}/>)
+                }
 
-            {/* Generator Button */}
-            <div onClick={() => (newScenario())}className='borderstyler softpad colorWhite tagText centerPosition'>New Scenario</div>
-            {_currentItem != null &&
-                <ScenarioDisplay data={_currentItem} />
-            }
+                <h2>Die Result - Player 2</h2>
+                {
+                    Manager.ListOfDeedsGroupB.map((item) =>
+                    <RulesGloriousDeed key={item.ID} data={item}/>)
+                }
+
+                <h2>Deeds to Always Include</h2>
+                {
+                    Manager.ListOfDeedsGroupC.map((item) =>
+                    <RulesGloriousDeed key={item.ID} data={item}/>)
+                }
+
+                {/* Generator Button */}
+                <div onClick={() => (newScenario())}className='borderstyler softpad colorWhite tagText centerPosition'>New Scenario</div>
+                {_currentItem != null &&
+                    <ScenarioDisplay data={_currentItem} />
+                }
+            </div>
+
         </ErrorBoundary>
     )
     // -------------------------------------------

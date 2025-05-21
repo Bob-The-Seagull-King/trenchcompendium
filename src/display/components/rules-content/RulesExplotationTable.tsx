@@ -5,12 +5,30 @@ import { ErrorBoundary } from "react-error-boundary";
 // Classes
 import { ExplorationTable } from '../../../classes/feature/exploration/ExplorationTable';
 import RulesExplorationLocation from "./RulesExplorationLocation";
+import PageMetaInformation from "../generics/PageMetaInformation";
 
 const RulesExplotationTable = (props: any) => {
     const explorationTableObject: ExplorationTable = props.data
 
+    let title;
+
+    if( explorationTableObject.Name ) {
+        title = explorationTableObject.Name.toString();
+    } else {
+        title = '';
+    }
+
     return (
         <ErrorBoundary fallback={<div>Something went wrong with ExplorationTableDisplay.tsx</div>}>
+            <PageMetaInformation
+                title={title}
+                description={'Find ' + explorationTableObject.Name + ' for explorations in your Trench Crusade campaign games. '}
+            />
+
+            <h1>
+                {explorationTableObject.Name}
+            </h1>
+
             <div className='RulesExplotationTable rules-exploration-table rules-card'>
                 <div className={'rules-card-title rules-exploration-table-title'}>
                     {explorationTableObject.Name}

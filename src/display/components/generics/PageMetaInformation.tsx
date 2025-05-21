@@ -24,7 +24,7 @@ const PageMetaInformation: React.FC<PageMetaInformationProps> = ({
  }) => {
 
     // construct the title
-    if( title == '' ) {
+    if( !title || title == '' || title == 'undefined' ) {
         title = 'Trench Companion - The official Trench Crusade resource';
     } else {
         title = title + ' | Trench Companion';

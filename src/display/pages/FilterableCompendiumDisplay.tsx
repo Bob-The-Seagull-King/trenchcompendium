@@ -11,10 +11,7 @@ import { CollectionsListPage } from '../../classes/viewmodel/pages/CollectionLis
 import { DisplayCollectionDataDex, DisplayCollectionType } from './DisplayPageStatic'
 import FilterBox from '../components/subcomponents/filters/FilterBox';
 import { useLocation } from 'react-router-dom';
-import {Equipment} from "../../classes/feature/equipment/Equipment";
-import RulesEquipmentEntry from "../components/rules-content/RulesEquipmentEntry";
-import {ModelCollection} from "../../classes/feature/model/ModelCollection";
-import {Keyword} from "../../classes/feature/glossary/Keyword";
+import PageMetaInformation from "../components/generics/PageMetaInformation";
 
 const FilterableCompendiumDisplay = (prop: any) => {
     // Initialize controllers and managers
@@ -117,20 +114,31 @@ const FilterableCompendiumDisplay = (prop: any) => {
     // Return result -----------------------------
     return (
         <ErrorBoundary fallback={<div>Something went wrong with FilteredDisplayCompendium.tsx</div>}>
-            <>
-                {(DisplayPage.showtitle != undefined) &&
-                    <>
-                    <br/>
-                    <h1>{DisplayPage.titlename}</h1>
-                    </>
-                }
+            <div className={'rules-content-main'}>
+
+                {/* @TODO : replace title and meta for sub-pages */}
+                <PageMetaInformation
+                    title={DisplayPage.titlename + ' Glossary'}
+                    description={'The complete Glossary for all '+ DisplayPage.titlename + 'in the game Trench Crusade'}
+                />
+
+                {/* @TODO : replace h1 for sub-pages */}
+                <h1>
+                    {DisplayPage.titlename + ' Glossary'}
+                </h1>
+
                 <div className={'FilterableCompendiumDisplay-filter'}>
                     {ReturnFilters()}
                 </div>
+
+                <div className={'spacer-20'}>
+
+                </div>
+
                 <div className={'FilterableCompendiumDisplay-items'} key={_keyval}>
                     {ReturnItems()}
                 </div>
-            </>
+            </div>
         </ErrorBoundary>
     )
     // -------------------------------------------
