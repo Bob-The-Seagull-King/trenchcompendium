@@ -585,7 +585,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
                                 {'1-2'}
                             </td>
                             <td>
-                                <Link to={'/compendium/explorationtable/et_commonlocations'} className="">
+                                <Link to={'/compendium/campaign/explorationtable/et_commonlocations'} className="">
                                     {'Common Exploration Locations'}
                                 </Link>
                             </td>
@@ -595,7 +595,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
                                 {'3-5'}
                             </td>
                             <td>
-                                <Link to={'/compendium/explorationtable/et_commonlocations'} className="">
+                                <Link to={'/compendium/campaign/explorationtable/et_commonlocations'} className="">
                                     {'Common or Rare Exploration Locations'}
                                 </Link>
                             </td>
@@ -605,7 +605,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
                                 {'6-9'}
                             </td>
                             <td>
-                                <Link to={'/compendium/explorationtable/et_commonlocations'} className="">
+                                <Link to={'/compendium/campaign/explorationtable/et_commonlocations'} className="">
                                     {'Rare Exploration Locations'}
                                 </Link>
                             </td>
@@ -615,7 +615,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
                                 {'10+'}
                             </td>
                             <td>
-                                <Link to={'/compendium/explorationtable/et_commonlocations'} className="">
+                                <Link to={'/compendium/campaign/explorationtable/et_commonlocations'} className="">
                                     {'Rare or Legendary Exploration Locations'}
                                 </Link>
                             </td>
