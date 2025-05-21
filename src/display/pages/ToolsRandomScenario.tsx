@@ -15,6 +15,7 @@ import GloriousDeedDisplay from '../components/features/scenario/GloriousDeedDis
 import { DescriptionFactory } from '../../utility/functions';
 import RulesGloriousDeed from '../components/rules-content/RulesGloriousDeed';
 import PageMetaInformation from "../components/generics/PageMetaInformation";
+import SynodImage from '../../utility/SynodImage';
 
 const ToolsRandomScenario = (prop: any) => {
     const Manager : ScenarioGenerator = prop.manager? prop.manager : getManager();
@@ -54,7 +55,11 @@ const ToolsRandomScenario = (prop: any) => {
             <>
                 <div className={'rules-scenario-summary-content rules-card-content'}>
                     <h2>{deploy.name}</h2>
-                    <img src={deploy.img_link} style={{width: "100%"}}/>
+                    <SynodImage
+                        imageId={deploy.ImgLink}
+                        size="large"
+                        className="rules-banner-image-element"
+                    />
 
                     {
                         returnDescription(Manager, DescriptionFactory(deploy.description, Manager))

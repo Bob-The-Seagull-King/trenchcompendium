@@ -4,6 +4,7 @@ import { ErrorBoundary } from "react-error-boundary";
 
 // Classes
 import {Scenario} from "../../../classes/feature/scenario/Scenario";
+import SynodImage from '../../../utility/SynodImage';
 
 const RulesScenarioSummary = (props: any) => {
     const scenarioObject: Scenario = props.data
@@ -67,7 +68,11 @@ const RulesScenarioSummary = (props: any) => {
                 </div>
 
                 <div className={'rules-scenario-summary-content rules-card-content'}>
-                    <img src={scenarioObject.ImgLink} style={{width: "100%"}}/>
+                        <SynodImage
+                        imageId={scenarioObject.ImgLink}
+                        size="large"
+                        className="rules-banner-image-element"
+                    />
 
                     <table className={'rules-scenario-summary-table rules-card-table'}>
                         <tbody>

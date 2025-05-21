@@ -4,7 +4,7 @@
         "source": "core",
         "tags": {"desc_type" : "paragraph"},
         "name": "Claim No Man's Land",
-        "img_link": "https://i.imgur.com/cR83rXd.png",
+        "img_link": "237",
         "description":  [],
         "forces": {
             "even_match": true,
@@ -107,7 +107,7 @@
         "source": "core",
         "tags": {"desc_type" : "paragraph"},
         "name": "Relic Hunt",
-        "img_link": "https://i.imgur.com/TJ3qUpn.png",
+        "img_link": "238",
         "description":  [],
         "forces": {
             "even_match": true,
@@ -233,7 +233,7 @@
         "source": "core",
         "tags": {"desc_type" : "paragraph"},
         "name": "Hunt for Heroes",
-        "img_link": "https://i.imgur.com/dU0zccS.png",
+        "img_link": "239",
         "description":  [],
         "forces": {
             "even_match": true,
@@ -351,7 +351,7 @@
         "source": "core",
         "tags": {"desc_type" : "paragraph"},
         "name": "Trench Warfare",
-        "img_link": "https://i.imgur.com/q8tQgyp.png",
+        "img_link": "240",
         "description":  [],
         "forces": {
             "even_match": false,
@@ -449,7 +449,7 @@
         "source": "core",
         "tags": {"desc_type" : "paragraph"},
         "name": "Great War",
-        "img_link": "https://i.imgur.com/wh9965J.png",
+        "img_link": "241",
         "description":  [],
         "forces": {
             "even_match": true,
@@ -544,7 +544,7 @@
         "source": "core",
         "tags": {"desc_type" : "paragraph"},
         "name": "Supply Raid",
-        "img_link": "https://i.imgur.com/OFdAOuU.png",
+        "img_link": "242",
         "description":  [],
         "forces": {
             "even_match": false,
@@ -664,7 +664,7 @@
         "source": "core",
         "tags": {"desc_type" : "paragraph"},
         "name": "Armoured Train",
-        "img_link": "https://i.imgur.com/5Qe3D0U.png",
+        "img_link": "243",
         "description":  [
             {
                 "tags": {"desc_type" : "paragraph"},
@@ -811,7 +811,7 @@
         "source": "core",
         "tags": {"desc_type" : "paragraph"},
         "name": "Storming the Shores",
-        "img_link": "https://i.imgur.com/bcPbO3F.png",
+        "img_link": "244",
         "description":  [
             {
                 "tags": {"desc_type" : "paragraph"},
@@ -1008,7 +1008,7 @@
         "source": "core",
         "tags": {"desc_type" : "paragraph"},
         "name": "Dragon Hunt",
-        "img_link": "https://i.imgur.com/K5fzyfK.png",
+        "img_link": "245",
         "description":  [
             {
                 "tags": {"desc_type" : "paragraph"},
