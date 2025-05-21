@@ -236,7 +236,151 @@ class ScenarioGenerator {
                         tags: {desc_type : "paragraph"},
                         content: "Finally, every scenario shares a fifth Glorious Deed: “Victorious: Win the Battle.” Completing any of these Glorious Deeds earns the player 1 Glory Point. Once a Glorious Deed is completed by a player, it cannot be completed again by either player."
                     }]
-    private RulesData = []
+    private RulesData = [{
+                            tags: {desc_type : "paragraph"},
+                            content: "These rules can be used to generate either one-off or Campaign scenarios on the fly. To Generate a Scenario, follow these steps:"
+                        },
+                        {
+                            tags: {desc_type : "paragraph"},
+                            content: "",
+                            subcontent: [
+                        {
+                            tags: {desc_type : "headless_table"},
+                            content: "",
+                            subcontent: [
+                                {
+                                    tags: {desc_type : "table_row"},
+                                    content: "",
+                                    subcontent: [
+                                        {
+                                            tags: {desc_type : "table_item"},
+                                            content: "1"
+                                        },
+                                        {
+                                            tags: {desc_type : "table_item"},
+                                            content: "One player rolls for Scenario type on the chart below."
+                                        }
+                                    ]
+                                },{
+                                    tags: {desc_type : "table_row"},
+                                    content: "",
+                                    subcontent: [
+                                        {
+                                            tags: {desc_type : "table_item"},
+                                            content: "2"
+                                        },
+                                        {
+                                            tags: {desc_type : "table_item"},
+                                            content: "One player rolls for Deployment type on the chart below"
+                                        }
+                                    ]
+                                },{
+                                    tags: {desc_type : "table_row"},
+                                    content: "",
+                                    subcontent: [
+                                        {
+                                            tags: {desc_type : "table_item"},
+                                            content: "3"
+                                        },
+                                        {
+                                            tags: {desc_type : "table_item"},
+                                            content: "Both players roll for Glorious Deeds on the charts below."
+                                        }
+                                    ]
+                                },{
+                                    tags: {desc_type : "table_row"},
+                                    content: "",
+                                    subcontent: [
+                                        {
+                                            tags: {desc_type : "table_item"},
+                                            content: "4"
+                                        },
+                                        {
+                                            tags: {desc_type : "table_item"},
+                                            content: "Players set up Terrain according to the instructions."
+                                        }
+                                    ]
+                                },{
+                                    tags: {desc_type : "table_row"},
+                                    content: "",
+                                    subcontent: [
+                                        {
+                                            tags: {desc_type : "table_item"},
+                                            content: "5"
+                                        },
+                                        {
+                                            tags: {desc_type : "table_item"},
+                                            content: "Players deploy their troops according to instructions."
+                                        }
+                                    ]
+                                },{
+                                    tags: {desc_type : "table_row"},
+                                    content: "",
+                                    subcontent: [
+                                        {
+                                            tags: {desc_type : "table_item"},
+                                            content: "6"
+                                        },
+                                        {
+                                            tags: {desc_type : "table_item"},
+                                            content: "Determine the Length of the Game as detailed below."
+                                        }
+                                    ]
+                                }
+                            ]
+                        }]
+                        },
+                        {
+                            tags: {desc_type : "paragraph"},
+                            content: "",
+                            subcontent: [
+                                {
+                                    tags: {desc_type : "bold"},
+                                    content: "Setting Up"
+                                }
+                            ]
+                        },
+                        {
+                            tags: {desc_type : "paragraph"},
+                            content: "Unless the scenario instructs otherwise, the players take it in turns to deploy one model at a time, starting with the player who has more models in their warband (rolloff if both have the same number of models."
+                        },
+                        {
+                            tags: {desc_type : "paragraph"},
+                            content: "Models must be set up wholly within their own deployment zone. If a player runs out of models to set up, the other player sets up all their models afterwards. Once the players have set up their models, deployment ends and the battle begins."
+                        },
+                        {
+                            tags: {desc_type : "paragraph"},
+                            content: "When a model that is not set up on the playing area moves onto the table, measure the move from its entry point as determined in the scenario."
+                        },
+                        {
+                            tags: {desc_type : "paragraph"},
+                            content: "",
+                            subcontent: [
+                                {
+                                    tags: {desc_type : "bold"},
+                                    content: "Terrain"
+                                }
+                            ]
+                        },
+                        {
+                            tags: {desc_type : "paragraph"},
+                            content: "Set up terrain as explained in the terrain section of the book. It is important for any battlefield to have enough terrain to block Line of Sight at regular intervals so that the game does not turn into a battle where only longrange weapons matter. Both players should set up an equal number of terrain pieces"
+                        },
+                        {
+                            tags: {desc_type : "paragraph"},
+                            content: "",
+                            subcontent: [
+                                {
+                                    tags: {desc_type : "bold"},
+                                    content: "Game Length"
+                                }
+                            ]
+                        },
+                        {
+                            tags: {desc_type : "paragraph"},
+                            content: "At the end of the fifth turn of the game, one of the players rolls a D6. If the result is 4 or more, the game ends. If the game continues, the game ends at the end of the sixth turn. "
+                        }
+                    ]
     
     /**
      * Assigns parameters and creates a series of description
@@ -254,6 +398,7 @@ class ScenarioGenerator {
         this.ScenarioDataDesc = DescriptionFactory(this.ScenarioData, this);   
         this.DeedDataDesc = DescriptionFactory(this.DeedData, this);   
         this.DeploymentDataDesc = DescriptionFactory(this.DeploymentData, this);       
+        this.RulesDataDesc = DescriptionFactory(this.RulesData, this);       
         this.ConstructNewScenario().then(result => {
             this.CurrentScenario = result;
         });

@@ -87,6 +87,10 @@ const ToolsRandomScenario = (prop: any) => {
                     description={'Create a random scenario for your trench crusade games'}
                 />
 
+                {
+                    returnDescription(Manager,  Manager.RulesDataDesc )
+                }
+
                 {/* Scenario */}
                 <h1>Random Scenario</h1>
                 <p>
