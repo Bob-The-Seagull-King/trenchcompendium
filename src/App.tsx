@@ -32,6 +32,8 @@ import WbbEditPage from "./display/pages/WbbEditPage";
 import PrivacyPopup from "./display/components/generics/PrivacyPopup";
 import {TrackingManager} from "./display/components/generics/TrackingManager";
 import PrivacyPage from "./display/superroutes/PrivacyPage";
+import ProfileEditPage from "./display/superroutes/ProfileEditPage";
+import ProfileViewPage from "./display/superroutes/ProfileViewPage";
 
 
 const App: React.FC = () => {
@@ -61,9 +63,10 @@ const App: React.FC = () => {
                                 <Route path={ROUTES.HOME_ROUTE} element={<HomeRoute />} />
                                 <Route path={ROUTES.COMPENDIUM_ROUTE} element={<CompendiumRoute controller={compendiumcontroller} />} />
                                 <Route path={ROUTES.WARBAND_ROUTE} element={<WarbandRoute controller={toolcontroller} />} />
-                                <Route path={ROUTES.LOGIN_ROUTE} element={<SynodLoginPage />} /> {/* New login route */}
-                                <Route path={ROUTES.PRIVACY_ROUTE} element={<PrivacyPage />} /> {/* New login route */}
-
+                                <Route path={ROUTES.LOGIN_ROUTE} element={<SynodLoginPage />} /> {/* Login Page */}
+                                <Route path={ROUTES.PRIVACY_ROUTE} element={<PrivacyPage />} /> {/* Privacy Page */}
+                                <Route path={ROUTES.PROFILE_EDIT_ROUTE} element={<ProfileEditPage />} /> {/* Edit Profile Page */}
+                                <Route path={ROUTES.PROFILE_VIEW_ROUTE} element={<ProfileViewPage />} />
                             </Routes>
                         </Router>
                     </PersistGate>

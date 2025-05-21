@@ -38,6 +38,17 @@ const SynodLoginPage: React.FC = () => {
         setvisbibleReset(true);
     }
 
+    /**
+     * Redirect user to their profile page when already logged in.
+     */
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        if (isLoggedIn && userId) {
+            navigate(`/profile/${userId}/edit`)
+        }
+    }, [isLoggedIn, userId])
+
     return (
         <div className="SynodLoginPage">
             <SynodImage
@@ -51,7 +62,11 @@ const SynodLoginPage: React.FC = () => {
 
                     {visbibleLogin &&
                         <div className={"synod-login-wrap synod-login-form"}>
-                            <SynodLogin/>
+                            <SynodLogin onLoginSuccess={() => {
+                                if (userId) {
+                                    navigate(`/profile/${userId}/edit`)
+                                }
+                            }} />
 
                             {!isLoggedIn &&
                                 <>

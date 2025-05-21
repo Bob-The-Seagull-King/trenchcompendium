@@ -1,11 +1,9 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { jwtDecode } from 'jwt-decode';
-import { useAuth } from './AuthContext';
-import {faCircleNotch, faUser} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-
-
+import React, { useState } from 'react'
+import axios from 'axios'
+import { jwtDecode } from 'jwt-decode'
+import { useAuth } from './AuthContext'
+import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 interface JwtPayload {
     data: {
@@ -15,47 +13,56 @@ interface JwtPayload {
     };
 }
 
-const SynodLogin: React.FC = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
-    const [message, setMesage] = useState('');
+interface SynodLoginProps {
+    onLoginSuccess?: () => void;
+}
 
-    const [isLoading, setIsLoading] = useState(false); // Loading state
+const SynodLogin: React.FC<SynodLoginProps> = ({ onLoginSuccess }) => {
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [error, setError] = useState('')
+    const [message, setMessage] = useState('')
+    const [isLoading, setIsLoading] = useState(false)
 
-    // const synodUrl = 'http://synod.trench-companion.test/';  // this is for local dev
-    const synodUrl = 'https://synod.trench-companion.com/'; // This is for prod
+    // const synodUrl = 'http://synod.trench-companion.test/' // local dev
+    const synodUrl = 'https://synod.trench-companion.com/' // production
 
-    const { userId, isLoggedIn, login, logout } = useAuth();
+    const { isLoggedIn, login } = useAuth()
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        setIsLoading(true);
-        setError('');
+        e.preventDefault()
+        setIsLoading(true)
+        setError('')
+        setMessage('')
 
         if (!email || !password) {
-            setError('Please fill out all fields');
-            setIsLoading(false);
-            return;
+            setError('Please fill out all fields')
+            setIsLoading(false)
+            return
         }
 
         try {
             const response = await axios.post(`${synodUrl}wp-json/jwt-auth/v1/token`, {
                 username: email,
                 password,
-            });
+            })
 
-            const token = response.data.token;
-            const decoded = jwtDecode<JwtPayload>(token);
-            const userId = decoded.data.user.id;
+            const token = response.data.token
+            const decoded = jwtDecode<JwtPayload>(token)
+            const userId = decoded.data.user.id
 
-            login(token, userId);
+            login(token, userId)
+
+            // ✅ Trigger redirect after login
+            if (onLoginSuccess) {
+                onLoginSuccess()
+            }
         } catch (err: any) {
-            setError(err.response?.data?.message || 'Login failed');
+            setError(err.response?.data?.message || 'Login failed')
         } finally {
-            setIsLoading(false);
+            setIsLoading(false)
         }
-    };
+    }
 
     return (
         <>
@@ -64,54 +71,54 @@ const SynodLogin: React.FC = () => {
             {error && <p style={{ color: 'red' }}>{error}</p>}
             {message && <p style={{ color: 'green' }}>{message}</p>}
 
-            {!isLoggedIn &&
+            {!isLoggedIn && (
                 <form onSubmit={handleSubmit}>
-                    <div className={'mb-3'}>
+                    <div className="mb-3">
                         <label htmlFor="synod-login-email" className="form-label">Email address</label>
                         <input
-                            type="email" id={'synod-login-email'}
+                            type="email"
+                            id="synod-login-email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             placeholder="Your Email"
-                            className={'form-control'}
+                            className="form-control"
                         />
                     </div>
 
-                    <div className={'mb-3'}>
-                        <label htmlFor="synod-login-pw" className="form-label">Password</label>
+                    <div className="mb-3">
+                        <label htmlFor="synod-login-password" className="form-label">Password</label>
                         <input
-                            type="password" id={'synod-login-password'}
+                            type="password"
+                            id="synod-login-password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             placeholder="Password"
-                            className={'form-control'}
+                            className="form-control"
                         />
                     </div>
 
-                    <div className={'mb-3'}>
-                        <button type="submit" className={'btn btn-primary'}>
-                            {isLoading ?
+                    <div className="mb-3">
+                        <button type="submit" className="btn btn-primary">
+                            {isLoading ? (
                                 <>
                                     {'Loading'}
-                                    <FontAwesomeIcon icon={faCircleNotch} className="fa-spin icon-inline-right-l"/>
+                                    <FontAwesomeIcon icon={faCircleNotch} className="fa-spin icon-inline-right-l" />
                                 </>
-                            :
-                                <>
-                                    {'Login'}
-                                </>
-                            }
+                            ) : (
+                                'Login'
+                            )}
                         </button>
                     </div>
                 </form>
-            }
+            )}
 
-            {isLoggedIn &&
-                <div className={'alert alert-success mt-3 mb-3'}>
+            {isLoggedIn && (
+                <div className="alert alert-success mt-3 mb-3">
                     {'You are logged in'}
                 </div>
-            }
+            )}
         </>
-    );
-};
+    )
+}
 
-export default SynodLogin;
+export default SynodLogin
