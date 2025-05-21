@@ -54,13 +54,14 @@ const ToolsRandomScenario = (prop: any) => {
         return (
             <>
                 <div className={'rules-scenario-summary-content rules-card-content'}>
+                    <div 
+                        style={{width:"100%"}}>
                     <h2>{deploy.name}</h2>
                     <SynodImage
                         imageId={Number(deploy.img_link)}
                         size="large"
                         className="rules-banner-image-element"
-                        style={{width:"100%"}}
-                    />
+                    /></div>
 
                     {
                         returnDescription(Manager, DescriptionFactory(deploy.description, Manager))

@@ -43,6 +43,7 @@ const SynodImage: React.FC<SynodImageProps> = ({ imageId, size = 'medium', class
             src={url || fallback}
             className={imageClass}
             alt=""
+            style={{width: "100%"}}
         />
     );
 };

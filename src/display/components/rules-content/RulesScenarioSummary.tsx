@@ -68,12 +68,13 @@ const RulesScenarioSummary = (props: any) => {
                 </div>
 
                 <div className={'rules-scenario-summary-content rules-card-content'}>
+                    <div 
+                        style={{width:"100%"}}>
                         <SynodImage
                         imageId={Number(scenarioObject.ImgLink)}
                         size="large"
                         className="rules-banner-image-element"
-                        style={{width:"100%"}}
-                    />
+                    /></div>
 
                     <table className={'rules-scenario-summary-table rules-card-table'}>
                         <tbody>
