@@ -64,6 +64,14 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
                 )
 
             }
+            case "break": {
+                return (
+                    <p>
+                        <hr/>
+                    </p>
+                )
+
+            }
             case "infobox": {
                 return (
                     <div className="infobox">
