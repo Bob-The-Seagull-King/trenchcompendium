@@ -13,7 +13,7 @@
                 "subcontent": [
                     
                     {
-                        "tags": {"desc_type" : "default"},
+                        "tags": {"desc_type" : "paragraph"},
                         "content": "",
                         "subcontent": [                            
                             {
@@ -24,14 +24,14 @@
                                 "tags": {"desc_type" : "bold"},
                                 "content": "Will the book continue the use of +DICE / -DICE and + to wound?",
                                 "glossary": [
-                                    {"val": "+DICE", "id": "kw_plusidce"},
+                                    {"val": "+DICE", "id": "kw_plusdice"},
                                     {"val": "-DICE", "id": "kw_minusdice"}
                                 ]
                             }
                         ]
                     },                    
                     {
-                        "tags": {"desc_type" : "default"},
+                        "tags": {"desc_type" : "paragraph"},
                         "content": "",
                         "subcontent": [                            
                             {
@@ -42,7 +42,7 @@
                                 "tags": {"desc_type" : "default"},
                                 "content": "A small die icon should replace the “D” in +1D on weapons as folks tend to assume it means “+1 Damage”. We are planning to have a clear separate term INJURY DICE and differentiate it from the INJURY RESULT. This new terminology should be in the next revision of the rules.",
                                 "glossary": [
-                                    {"val": "D", "id": "kw_plusidce"}
+                                    {"val": "D", "id": "kw_plusdice"}
                                 ]
                             }
                         ]
@@ -55,7 +55,7 @@
                 "subcontent": [
                     
                     {
-                        "tags": {"desc_type" : "default"},
+                        "tags": {"desc_type" : "paragraph"},
                         "content": "",
                         "subcontent": [                            
                             {
@@ -72,7 +72,7 @@
                         ]
                     },                    
                     {
-                        "tags": {"desc_type" : "default"},
+                        "tags": {"desc_type" : "paragraph"},
                         "content": "",
                         "subcontent": [                            
                             {
@@ -93,7 +93,7 @@
                 "subcontent": [
                     
                     {
-                        "tags": {"desc_type" : "default"},
+                        "tags": {"desc_type" : "paragraph"},
                         "content": "",
                         "subcontent": [                            
                             {
@@ -106,25 +106,37 @@
                                 "glossary": [
                                     {"val": "ELITE", "id": "kw_elite"}
                                 ]
-                            },                        
+                            },
                             {
-                                "tags": {"desc_type" : "bold"},
-                                "content": "Concerning equipment: is the model still able to use any ELITE only item it was equipped with and it is simply prohibited from gaining more, or must it give away all ELITE only items until recovery?",
-                                "glossary": [
-                                    {"val": "ELITE", "id": "kw_elite"}
+                                "tags": {"desc_type" : "paragraph"},
+                                "content": "",
+                                "subcontent": [       
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Concerning equipment: is the model still able to use any ELITE only item it was equipped with and it is simply prohibited from gaining more, or must it give away all ELITE only items until recovery?",
+                                        "glossary": [
+                                            {"val": "ELITE", "id": "kw_elite"}
+                                        ]
+                                    }
                                 ]
-                            },                        
+                            },  
                             {
-                                "tags": {"desc_type" : "bold"},
-                                "content": "When a model recovers, does it regain every XP/skill/upgrade/injury it lost, or is it considered a “new” ELITE and it starts back from 0 XP ?",
-                                "glossary": [
-                                    {"val": "ELITE", "id": "kw_elite"}
+                                "tags": {"desc_type" : "paragraph"},
+                                "content": "",
+                                "subcontent": [       
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "When a model recovers, does it regain every XP/skill/upgrade/injury it lost, or is it considered a “new” ELITE and it starts back from 0 XP ?",
+                                        "glossary": [
+                                            {"val": "ELITE", "id": "kw_elite"}
+                                        ]
+                                    }
                                 ]
                             }
                         ]
                     },                    
                     {
-                        "tags": {"desc_type" : "default"},
+                        "tags": {"desc_type" : "paragraph"},
                         "content": "",
                         "subcontent": [                            
                             {
@@ -134,14 +146,21 @@
                             {
                                 "tags": {"desc_type" : "default"},
                                 "content": "Here is the revised description from the next version:"
-                            },                         
+                            },  
                             {
-                                "tags": {"desc_type" : "italic"},
-                                "content": "This model is no longer considered ELITE for gaining Experience but is otherwise unaffected. It can regain this via promotion, representing recovery. In this case, the Scar still remains.",
-                                "glossary": [
-                                    {"val": "ELITE", "id": "kw_elite"}
+                                "tags": {"desc_type" : "paragraph"},
+                                "content": "",
+                                "subcontent": [       
+                                    {
+                                        "tags": {"desc_type" : "italic"},
+                                        "content": "This model is no longer considered ELITE for gaining Experience but is otherwise unaffected. It can regain this via promotion, representing recovery. In this case, the Scar still remains.",
+                                        "glossary": [
+                                            {"val": "ELITE", "id": "kw_elite"}
+                                        ]
+                                    }
                                 ]
-                            }
+                            }                         
+                            
                         ]
                         }
                 ]
@@ -152,7 +171,7 @@
                 "subcontent": [
                     
                     {
-                        "tags": {"desc_type" : "default"},
+                        "tags": {"desc_type" : "paragraph"},
                         "content": "",
                         "subcontent": [                            
                             {
@@ -172,7 +191,7 @@
                         ]
                     },                    
                     {
-                        "tags": {"desc_type" : "default"},
+                        "tags": {"desc_type" : "paragraph"},
                         "content": "",
                         "subcontent": [                            
                             {
@@ -182,14 +201,20 @@
                             {
                                 "tags": {"desc_type" : "default"},
                                 "content": "After the injury roll. All these Keywords will follow this format in the next version of the rules:"
-                            },                         
+                            },  
                             {
-                                "tags": {"desc_type" : "default"},
-                                "content": "If the Success Roll for an attack made with a weapon with this Keyword is a Success or Critical Success, one BLOOD MARKER is added to the target in addition to any other effects of the attack after making the injury roll. N.B. The BLOOD MARKER is added to the model as long as the result for the attack is a Success or Critical Success, even if it has no other effects or is otherwise negated",
-                                "glossary": [
-                                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"}
+                                "tags": {"desc_type" : "paragraph"},
+                                "content": "",
+                                "subcontent": [       
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "If the Success Roll for an attack made with a weapon with this Keyword is a Success or Critical Success, one BLOOD MARKER is added to the target in addition to any other effects of the attack after making the injury roll. N.B. The BLOOD MARKER is added to the model as long as the result for the attack is a Success or Critical Success, even if it has no other effects or is otherwise negated",
+                                        "glossary": [
+                                            {"val": "BLOOD MARKER", "id": "kw_bloodmarker"}
+                                        ]
+                                    }
                                 ]
-                            }
+                            }  
                         ]
                         }
                 ]
@@ -200,7 +225,7 @@
                 "subcontent": [
                     
                     {
-                        "tags": {"desc_type" : "default"},
+                        "tags": {"desc_type" : "paragraph"},
                         "content": "",
                         "subcontent": [                            
                             {
@@ -217,7 +242,7 @@
                         ]
                     },                    
                     {
-                        "tags": {"desc_type" : "default"},
+                        "tags": {"desc_type" : "paragraph"},
                         "content": "",
                         "subcontent": [                            
                             {
@@ -243,7 +268,7 @@
                 "subcontent": [
                     
                     {
-                        "tags": {"desc_type" : "default"},
+                        "tags": {"desc_type" : "paragraph"},
                         "content": "",
                         "subcontent": [                            
                             {
@@ -256,18 +281,25 @@
                                 "glossary": [
                                     {"val": "LEADER", "id": "kw_leader"}
                                 ]
-                            },                
+                            },  
                             {
-                                "tags": {"desc_type" : "bold"},
-                                "content": "Assuming the answer to the previous question is yes, what happens if the LEADER model dies? Do I need to buy another copy of that model who gains the keyword LEADER or can I give the keyword to another eligible model in the warband?",
-                                "glossary": [
-                                    {"val": "LEADER", "id": "kw_leader"}
+                                "tags": {"desc_type" : "paragraph"},
+                                "content": "",
+                                "subcontent": [       
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Assuming the answer to the previous question is yes, what happens if the LEADER model dies? Do I need to buy another copy of that model who gains the keyword LEADER or can I give the keyword to another eligible model in the warband?",
+                                        "glossary": [
+                                            {"val": "LEADER", "id": "kw_leader"}
+                                        ]
+                                    }
                                 ]
-                            }
+                            }               
+                            
                         ]
                     },                    
                     {
-                        "tags": {"desc_type" : "default"},
+                        "tags": {"desc_type" : "paragraph"},
                         "content": "",
                         "subcontent": [                            
                             {
@@ -291,7 +323,7 @@
                 "subcontent": [
                     
                     {
-                        "tags": {"desc_type" : "default"},
+                        "tags": {"desc_type" : "paragraph"},
                         "content": "",
                         "subcontent": [                            
                             {
@@ -305,7 +337,7 @@
                         ]
                     },                    
                     {
-                        "tags": {"desc_type" : "default"},
+                        "tags": {"desc_type" : "paragraph"},
                         "content": "",
                         "subcontent": [                            
                             {
@@ -329,7 +361,7 @@
                 "subcontent": [
                     
                     {
-                        "tags": {"desc_type" : "default"},
+                        "tags": {"desc_type" : "paragraph"},
                         "content": "",
                         "subcontent": [                            
                             {
@@ -343,7 +375,7 @@
                         ]
                     },                    
                     {
-                        "tags": {"desc_type" : "default"},
+                        "tags": {"desc_type" : "paragraph"},
                         "content": "",
                         "subcontent": [                            
                             {
@@ -364,7 +396,7 @@
                 "subcontent": [
                     
                     {
-                        "tags": {"desc_type" : "default"},
+                        "tags": {"desc_type" : "paragraph"},
                         "content": "",
                         "subcontent": [                            
                             {
@@ -378,7 +410,7 @@
                         ]
                     },                    
                     {
-                        "tags": {"desc_type" : "default"},
+                        "tags": {"desc_type" : "paragraph"},
                         "content": "",
                         "subcontent": [                            
                             {
@@ -399,7 +431,7 @@
                 "subcontent": [
                     
                     {
-                        "tags": {"desc_type" : "default"},
+                        "tags": {"desc_type" : "paragraph"},
                         "content": "",
                         "subcontent": [                            
                             {
@@ -418,7 +450,7 @@
                         ]
                     },                    
                     {
-                        "tags": {"desc_type" : "default"},
+                        "tags": {"desc_type" : "paragraph"},
                         "content": "",
                         "subcontent": [                            
                             {
