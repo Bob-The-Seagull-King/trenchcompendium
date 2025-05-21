@@ -17,7 +17,7 @@ const DefaultCampaign = () => {
 
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DefaultGame.tsx</div>}>
-                          <>
+                    <div className={'rules-content-main'}>
                         <h1>
                             {'Campaigns v1.6.3'}
                         </h1>
@@ -76,7 +76,7 @@ const DefaultCampaign = () => {
                                 />
                             </div>
                         </div>
-                    </>          
+                    </div>
                 </ErrorBoundary>
             )
 };

@@ -17,7 +17,7 @@ const DefaultGame = () => {
 
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DefaultGame.tsx</div>}>
-                    <>
+                    <div className={'rules-content-main'}>
                         <h1>
                             {'Playtest Rules v1.6'}
                         </h1>
@@ -48,7 +48,7 @@ const DefaultGame = () => {
                                 />
                             </div>
                         </div>
-                    </>            
+                    </div>
                 </ErrorBoundary>
             )
 };
