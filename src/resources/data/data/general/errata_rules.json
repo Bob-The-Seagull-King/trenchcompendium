@@ -1,3 +1,445 @@
 [
-    
+    {
+        "id": "er_faqone",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Frequently Asked Questions #1",
+        "item_index": 0,
+        "description":  [            
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [
+                    
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": "",
+                        "subcontent": [                            
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "Q: "
+                            },                        
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "Will the book continue the use of +DICE / -DICE and + to wound?",
+                                "glossary": [
+                                    {"val": "+DICE", "id": "kw_plusidce"},
+                                    {"val": "-DICE", "id": "kw_minusdice"}
+                                ]
+                            }
+                        ]
+                    },                    
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": "",
+                        "subcontent": [                            
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "A: "
+                            },                         
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "A small die icon should replace the “D” in +1D on weapons as folks tend to assume it means “+1 Damage”. We are planning to have a clear separate term INJURY DICE and differentiate it from the INJURY RESULT. This new terminology should be in the next revision of the rules.",
+                                "glossary": [
+                                    {"val": "D", "id": "kw_plusidce"}
+                                ]
+                            }
+                        ]
+                        }
+                ]
+            },            
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [
+                    
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": "",
+                        "subcontent": [                            
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "Q: "
+                            },                        
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "Are the following scenarios correct interpretations of the rules for granting Cover?",
+                                "glossary": [
+                                    {"val": "Cover", "id": "gl_cover"}
+                                ]
+                            }
+                        ]
+                    },                    
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": "",
+                        "subcontent": [                            
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "A: "
+                            },                         
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "1 to 4 are correct, 5a and 5 b are not. The terrain providing cover must be positioned so that the model can “hide” behind it to get protection, i.e. must be interposed between the attacker and target."
+                            }
+                        ]
+                        }
+                ]
+            },            
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [
+                    
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": "",
+                        "subcontent": [                            
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "Q: "
+                            },                        
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "The Head Wound injury could use some more clarity. Does a model that loses the ELITEkeyword due to a Head Wound lose access to any ELITE only skills/upgrades they had? What about injuries? ",
+                                "glossary": [
+                                    {"val": "ELITE", "id": "kw_elite"}
+                                ]
+                            },                        
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "Concerning equipment: is the model still able to use any ELITE only item it was equipped with and it is simply prohibited from gaining more, or must it give away all ELITE only items until recovery?",
+                                "glossary": [
+                                    {"val": "ELITE", "id": "kw_elite"}
+                                ]
+                            },                        
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "When a model recovers, does it regain every XP/skill/upgrade/injury it lost, or is it considered a “new” ELITE and it starts back from 0 XP ?",
+                                "glossary": [
+                                    {"val": "ELITE", "id": "kw_elite"}
+                                ]
+                            }
+                        ]
+                    },                    
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": "",
+                        "subcontent": [                            
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "A: "
+                            },                         
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Here is the revised description from the next version:"
+                            },                         
+                            {
+                                "tags": {"desc_type" : "italic"},
+                                "content": "This model is no longer considered ELITE for gaining Experience but is otherwise unaffected. It can regain this via promotion, representing recovery. In this case, the Scar still remains.",
+                                "glossary": [
+                                    {"val": "ELITE", "id": "kw_elite"}
+                                ]
+                            }
+                        ]
+                        }
+                ]
+            },            
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [
+                    
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": "",
+                        "subcontent": [                            
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "Q: "
+                            },                        
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "Are any additional BLOOD MARKERS inflicted by FIRE/GAS/SHRAPNEL applied before or after the injury roll?",
+                                "glossary": [
+                                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"},
+                                    {"val": "FIRE", "id": "kw_fire"},
+                                    {"val": "GAS", "id": "kw_gas"},
+                                    {"val": "SHRAPNEL", "id": "kw_shrapnel"}
+                                ]
+                            }
+                        ]
+                    },                    
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": "",
+                        "subcontent": [                            
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "A: "
+                            },                         
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "After the injury roll. All these Keywords will follow this format in the next version of the rules:"
+                            },                         
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "If the Success Roll for an attack made with a weapon with this Keyword is a Success or Critical Success, one BLOOD MARKER is added to the target in addition to any other effects of the attack after making the injury roll. N.B. The BLOOD MARKER is added to the model as long as the result for the attack is a Success or Critical Success, even if it has no other effects or is otherwise negated",
+                                "glossary": [
+                                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"}
+                                ]
+                            }
+                        ]
+                        }
+                ]
+            },            
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [
+                    
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": "",
+                        "subcontent": [                            
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "Q: "
+                            },                        
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "Is there a limit on the number of BLOOD MARKERS a model can have?",
+                                "glossary": [
+                                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"}
+                                ]
+                            }
+                        ]
+                    },                    
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": "",
+                        "subcontent": [                            
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "A: "
+                            },                         
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Yes, a model cannot have more than six BLOOD MARKERS at the same time. Same applies to BLESSING and INFECTION MARKERS.",
+                                "glossary": [
+                                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"},
+                                    {"val": "BLESSING", "id": "kw_blessingmarker"},
+                                    {"val": "INFECTION MARKERS", "id": "kw_infectionmarker"}
+                                ]
+                            }
+                        ]
+                        }
+                ]
+            },            
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [
+                    
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": "",
+                        "subcontent": [                            
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "Q: "
+                            },                        
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "Are all models in warband variants that replace the mandatory leader supposed to gain the keyword LEADER?",
+                                "glossary": [
+                                    {"val": "LEADER", "id": "kw_leader"}
+                                ]
+                            },                
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "Assuming the answer to the previous question is yes, what happens if the LEADER model dies? Do I need to buy another copy of that model who gains the keyword LEADER or can I give the keyword to another eligible model in the warband?",
+                                "glossary": [
+                                    {"val": "LEADER", "id": "kw_leader"}
+                                ]
+                            }
+                        ]
+                    },                    
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": "",
+                        "subcontent": [                            
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "A: "
+                            },                         
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Yes, these models all have LEADER Keyword in the next revision of the rules. If this model is lost, the Keyword is lost with it unless you buy a replacement.",
+                                "glossary": [
+                                    {"val": "LEADER", "id": "kw_leader"}
+                                ]
+                            }
+                        ]
+                        }
+                ]
+            },            
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [
+                    
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": "",
+                        "subcontent": [                            
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "Q: "
+                            },                        
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "Can a model attack twice in Melee with an Automatic Pistol?"
+                            }
+                        ]
+                    },                    
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": "",
+                        "subcontent": [                            
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "A: "
+                            },                         
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "No. The Automatic Pistol can only attack twice when used to make a Ranged Attack ACTION. Although an attack in Melee with an Automatic Pistol uses the Ranged characteristic of the model, it is still considered a Melee Attack ACTION.",
+                                "glossary": [
+                                    {"val": "ACTION", "id": "kw_action"}
+                                ]
+                            }
+                        ]
+                        }
+                ]
+            },            
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [
+                    
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": "",
+                        "subcontent": [                            
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "Q: "
+                            },                        
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "At which moment can I resurrect a Trench Pilgrim as a Martyr Penitent?"
+                            }
+                        ]
+                    },                    
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": "",
+                        "subcontent": [                            
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "A: "
+                            },                         
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Immediately after the Trench Pilgrim dies (in the “injury” step of the Post-battle sequence, so before any exploration and chance for reinforcements). You need to have the ducats to pay for the resurrection available at that moment."
+                            }
+                        ]
+                        }
+                ]
+            },            
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [
+                    
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": "",
+                        "subcontent": [                            
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "Q: "
+                            },                        
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "If both warbands need to roll for morale and they have the same number of models, who rolls first?"
+                            }
+                        ]
+                    },                    
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": "",
+                        "subcontent": [                            
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "A: "
+                            },                         
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Roll off to see who goes first."
+                            }
+                        ]
+                        }
+                ]
+            },            
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [
+                    
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": "",
+                        "subcontent": [                            
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "Q: "
+                            },                        
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "If an Anchorite Shrine has a model Broken on the Wheel that is still in play, can the opponent spend BLOOD MARKERS on the broken model to apply -DICE to the Shrine’s ACTIONS?",
+                                "glossary": [
+                                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"},
+                                    {"val": "-DICE", "id": "kw_minusdice"},
+                                    {"val": "ACTIONS", "id": "kw_action"}
+                                ]
+                            }
+                        ]
+                    },                    
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": "",
+                        "subcontent": [                            
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "A: "
+                            },                         
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Yes. As stated in the rules: or all rules purposes and attack effects (such as forced movement), the two models are treated as a single model, including sharing BLOOD, INFECTION and BLESSING MARKERS.",
+                                "glossary": [
+                                    {"val": "BLOOD", "id": "kw_bloodmarker"},
+                                    {"val": "BLESSING", "id": "kw_blessingmarker"},
+                                    {"val": "INFECTION", "id": "kw_infectionmarker"}
+                                ]
+                            }
+                        ]
+                        }
+                ]
+            }
+
+        ],
+        "sections": []
+    }
 ]
