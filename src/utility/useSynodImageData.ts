@@ -25,7 +25,6 @@ export function useSynodImageData(imageId: number, size = 'medium'): SynodImageD
             }
 
             const synodUrl = 'https://synod.trench-companion.com/';
-            synodcache.AddCallCache(key);
 
             if (synodcache.CheckCallCache(key)) {    
                 while (!synodcache.CheckCache(key)) {
@@ -35,22 +34,23 @@ export function useSynodImageData(imageId: number, size = 'medium'): SynodImageD
             }
 
             if (!synodcache.CheckCache(key)) {
-            fetch(`${synodUrl}wp-json/wp/v2/media/${imageId}`)
-                .then((res) => res.json())
-                .then((json) => {
-                    const sizes = json.media_details?.sizes;
-                    const sizedImage = sizes?.[size]?.source_url;
+                synodcache.AddCallCache(key);
+                fetch(`${synodUrl}wp-json/wp/v2/media/${imageId}`)
+                    .then((res) => res.json())
+                    .then((json) => {
+                        const sizes = json.media_details?.sizes;
+                        const sizedImage = sizes?.[size]?.source_url;
 
-                    const result = {
-                        url: sizedImage || json.source_url,
-                        sourceTitle: json.meta.attachment_source_title || '',
-                        sourceUrl: json.meta.attachment_source || '',
-                    };
+                        const result = {
+                            url: sizedImage || json.source_url,
+                            sourceTitle: json.meta.attachment_source_title || '',
+                            sourceUrl: json.meta.attachment_source || '',
+                        };
 
-                    synodcache.AddCache(key,result);
-                    setData(result);
-                })
-                .catch(console.error);
+                        synodcache.AddCache(key,result);
+                        setData(result);
+                    })
+                    .catch(console.error);
             }
             
         }
