@@ -496,12 +496,12 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
                     <div className={'rules-content-main'}>
                         <PageMetaInformation
-                            title={'Campaigns v1.6.3 - Rules'}
+                            title={'Campaign Rules - v1.6.3'}
                             description={'All the rules for Trench Crusade in one place. Below are the official Playtest Rules version 1.6 for the tabletop game Trench Crusade.'}
                         />
 
                         <h1>
-                            {'Campaigns v1.6.3 - Rules'}
+                            {'Campaign Rules - v1.6.3'}
                         </h1>
 
                         <RulesBannerText
