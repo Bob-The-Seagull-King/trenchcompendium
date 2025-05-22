@@ -113,14 +113,18 @@ const ModelDisplay = (props: any) => {
                             modelId={ModelObject.ID}
                         />
 
-                        {!sourceData.loading && !sourceData.error && sourceData.sourceUrl &&
-                            <FighterCardMetaEntry
-                                className="synod-image-source-wrap"
-                                label="Image"
-                                value={<SynodModelImageSource
-                                    modelSlug={ModelObject.GetSlug()}
-                                />}
-                            />
+                        {sourceData != undefined && 
+                            <>
+                                {!sourceData.loading && !sourceData.error && sourceData.sourceUrl &&
+                                    <FighterCardMetaEntry
+                                        className="synod-image-source-wrap"
+                                        label="Image"
+                                        value={<SynodModelImageSource
+                                            modelSlug={ModelObject.GetSlug()}
+                                        />}
+                                    />
+                                }
+                            </>
                         }
 
                     </div>
