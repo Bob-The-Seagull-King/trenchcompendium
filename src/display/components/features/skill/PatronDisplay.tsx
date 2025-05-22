@@ -38,46 +38,37 @@ const PatronDisplay = (props: any) => {
                         </i>
 
                     </div>
+                    <div className={'rules-card-content rules-card-table-content rules-skill-table-content'}>
+                        <table className={'rules-card-table rules-skill-table-content-table'}>
+                            <thead>
+                                <tr>
+                                    <th>
+                                        {'Skill'}
+                                    </th>
+                                </tr>
+                            </thead>
 
-                    <div>
-                    {patronObject.Skills.map((item) => (
-                        <div key={item.ID}>
-                        {item.TableVal != -1 &&
-                        <GenericTabledBlockDisplay 
-                            d_name={item.Name} 
-                            d_colour={"grey"} 
-                            d_state={false}  
-                            bordertype={0}
-                            d_border={false}
-                            d_margin={"sml"}
-                            d_content={item.TableVal}
-                            d_method={() => <>
-                                <div className="borderthin backgroundBgCard bordergrey">
-                                    <div className="">
-                                    <SkillDisplay data={item} />
-                                    </div>
-                                </div>
-                            </>} />
-                            }
-                            {item.TableVal == -1 &&
-                            <GenericCollapsableBlockDisplay 
-                                d_name={item.Name} 
-                                d_colour={"grey"} 
-                                d_state={false}  
-                                bordertype={0}
-                                d_border={false}
-                                d_margin={"sml"}
-                                d_method={() => <>
-                                    <div className="borderthin backgroundBgCard bordergrey">
-                                        <div className="">
-                                        <SkillDisplay data={item} />
-                                        </div>
-                                    </div>
-                                </>} />
-                            }
-                        </div>
-                    ))}
+                            <tbody>
+                                {patronObject.Skills.map((item) => (
+                                    <tr key={item.ID}>
+                                        
+                                        <td>
+                                            <div className={'skill-name'}>
+                                                <strong>
+                                                    {item.Name}
+                                                </strong>
+                                            </div>
+
+                                            <div className={'skill-description'}>
+                                                <SkillDisplay data={item}/>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
                     </div>
+                    
                 </div>
 
 
