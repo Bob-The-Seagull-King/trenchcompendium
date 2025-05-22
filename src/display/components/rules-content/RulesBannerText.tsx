@@ -8,16 +8,23 @@ type RulesBannerTextProps = {
     link: string
     title: string
     children?: React.ReactNode
+    type?: string
 }
 
-const RulesBannerText: React.FC<RulesBannerTextProps> = ({ link, title,  children }) => {
+const RulesBannerText: React.FC<RulesBannerTextProps> = ({ link, title,  children, type }) => {
     const navigate = useNavigate();
     
     function SpecificNavigtateOut(item : any) {
         navigate(item, {state: Date.now().toString()});
     }
+
+    let typeClass = '';
+    if( type == 'inline') {
+        typeClass = 'inline'
+    }
+
     return (
-        <div className={'RulesBannerText'}>
+        <div className={'RulesBannerText ' + typeClass}>
             <CustomNavLink link={link}
                         runfunc={() => {
                             SpecificNavigtateOut(link)
@@ -26,7 +33,6 @@ const RulesBannerText: React.FC<RulesBannerTextProps> = ({ link, title,  childre
                 {title}
                 <FontAwesomeIcon icon={faChevronRight} className="icon-inline-right"/>
             </CustomNavLink>
-
             {children}
         </div>
     )
