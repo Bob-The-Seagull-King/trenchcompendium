@@ -466,7 +466,7 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
                             d_method={() =>
                                 
                                 <div className={'skill-description'}>
-                                    <SkillDisplay data={item}/>
+                                    <SkillDisplay data={component}/>
                                 </div>
                                 }/>
                 </>
