@@ -11,6 +11,7 @@ import { useLocation } from 'react-router-dom';
 import SynodFactionImage from "../../../../utility/SynodFactionImage";
 import PageMetaInformation from "../../generics/PageMetaInformation";
 import {useSynodFactionImageData} from "../../../../utility/useSynodFactionImageData";
+import RulesBannerFaction from '../../../components/rules-content/RulesBannerFaction';
 
 const FactionCollectionDisplay = (props: any) => {
     const factioncollectionObject: FactionCollection = props.data
@@ -92,6 +93,21 @@ const FactionCollectionDisplay = (props: any) => {
 
                 {/* Text content for faction */}
                 <FactionDisplay data={selectedModel.faction}/>
+
+                <RulesBannerFaction
+                    key={factioncollectionObject.GetBaseFac().ID}
+                    slug={factioncollectionObject.GetBaseFac().ID}
+                    title={factioncollectionObject.GetBaseFac().Name}
+                >
+                    {(factioncollectionObject).SubModelsList.filter((item : any) => (item.var_name != 'base')).map(sub_item => (
+                        <RulesBannerFaction
+                            key={sub_item.faction.ID}
+                            slug={sub_item.faction.ID}
+                            parentSlug={factioncollectionObject.GetBaseFac().ID}
+                            title={sub_item.faction.Name? sub_item.faction.Name : ""}
+                        />
+                    ))}
+                </RulesBannerFaction>
             </div>
         </ErrorBoundary>
     )
