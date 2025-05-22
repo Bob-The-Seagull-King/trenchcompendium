@@ -14,7 +14,7 @@ interface SynodModelImageProps {
 
 const SynodModelImage: React.FC<SynodModelImageProps> = ({ modelSlug, size = 'full', className = '' }) => {
     const { url, modelName, error } = useSynodModelImageData(modelSlug, size);
-
+    console.log(url)
     const fallback =
         'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
 
