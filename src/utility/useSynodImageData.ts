@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { SynodImageCache, SynodImageData } from '../classes/_high_level_controllers/SynodImageCache';
 
+const delay = (ms: number | undefined) => new Promise(res => setTimeout(res, ms));
+
 export function useSynodImageData(imageId: number, size = 'medium'): SynodImageData {
 
     const [data, setData] = useState<SynodImageData>(() => {
@@ -25,6 +27,16 @@ export function useSynodImageData(imageId: number, size = 'medium'): SynodImageD
             const synodUrl = 'https://synod.trench-companion.com/';
             synodcache.AddCallCache(key);
 
+           
+                for (let i = 0; i < 10; i++) {
+                    await delay(100);
+                    if (synodcache.CheckCallCache(key)) {                        
+                        setData(synodcache.imageDataCache[key])
+                        return;
+                    }
+                }
+            
+
             fetch(`${synodUrl}wp-json/wp/v2/media/${imageId}`)
                 .then((res) => res.json())
                 .then((json) => {
@@ -42,14 +54,7 @@ export function useSynodImageData(imageId: number, size = 'medium'): SynodImageD
                 })
                 .catch(console.error);
 
-            /*if (synodcache.CheckCallCache(key)) {
-                while (!synodcache.CheckCache(key)) {
-                    setTimeout('', 100);
-                }
-                setData(synodcache.imageDataCache[key])
-            } else {
-                
-            }*/
+            
         }
 
         runImageCheck();
