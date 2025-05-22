@@ -27,16 +27,16 @@ export function useSynodImageData(imageId: number, size = 'medium'): SynodImageD
             const synodUrl = 'https://synod.trench-companion.com/';
             synodcache.AddCallCache(key);
 
-           
+            if (synodcache.CheckCallCache(key)) {    
                 for (let i = 0; i < 10; i++) {
                     await delay(100);
-                    if (synodcache.CheckCallCache(key)) {                        
+                    if (synodcache.CheckCache(key)) {                        
                         setData(synodcache.imageDataCache[key])
-                        return;
                     }
                 }
-            
+            }
 
+            if (!synodcache.CheckCache(key)) {
             fetch(`${synodUrl}wp-json/wp/v2/media/${imageId}`)
                 .then((res) => res.json())
                 .then((json) => {
@@ -53,7 +53,7 @@ export function useSynodImageData(imageId: number, size = 'medium'): SynodImageD
                     setData(result);
                 })
                 .catch(console.error);
-
+            }
             
         }
 
