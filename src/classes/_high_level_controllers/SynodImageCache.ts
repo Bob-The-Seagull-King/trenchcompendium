@@ -20,7 +20,7 @@ class SynodImageCache {
 
     // basic in-memory cache
     imageDataCache: Record<string, SynodImageData> = {};
-    callCache: Record<string, Boolean> = {};
+    callCache: Record<string, boolean> = {};
     
     private static instance: SynodImageCache;
     
