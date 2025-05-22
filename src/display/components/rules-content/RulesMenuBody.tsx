@@ -85,7 +85,7 @@ const RulesMenuBody: React.FC<RulesMenuBodyProps> = ({ controller, onBack, onNav
                         controller: controller.PatronCollectionController
                     },
                     {
-                        title: "Exploration",
+                        title: "Exploration Locations",
                         slug: "explorationtable",
                         controller: controller.ExplorationTableCollectionController
                     },

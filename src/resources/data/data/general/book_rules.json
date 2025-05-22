@@ -1397,9 +1397,26 @@
                 "description":  [
                     {
                         "tags": {"desc_type" : "paragraph"},
-                        "content": "After the Battle, both Players are allocated Exploration Dice as shown below. All warbands begin a campaign with the Reroll Exploration Skill In addition, the Winner of the Battle can re-roll any 1 of the Exploration Dice during the Looting and Exploration Step.",
-                        "glossary": [
-                            {"val": "Exploration Dice", "id": "gl_explorationdice"}
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "After the Battle, both Players are allocated Exploration Dice as shown below. All warbands begin a campaign with the ",
+                                "glossary": [
+                                    {"val": "Exploration Dice", "id": "gl_explorationdice"}
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "skillslim"},
+                                "content": "es_reroll"
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": " Exploration Skill. In addition, the Winner of the Battle can re-roll any 1 of the Exploration Dice during the Looting and Exploration Step.",
+                                "glossary": [
+                                    {"val": "Exploration Dice", "id": "gl_explorationdice"}
+                                ]
+                            }
                         ]
                     },
                     {
