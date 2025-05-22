@@ -27,8 +27,11 @@ export function useSynodImageData(imageId: number, size = 'medium'): SynodImageD
             const synodUrl = 'https://synod.trench-companion.com/';
 
             if (synodcache.CheckCallCache(key)) {    
-                while (!synodcache.CheckCache(key)) {
+                const EMERGENCY_OUT = 1000; // If we spend 100 seconds on one image, just give up
+                let count_check = 0;
+                while ((!synodcache.CheckCache(key)) && (count_check < EMERGENCY_OUT)) {
                     await delay(100);
+                    count_check += 1;
                 }                   
                 setData(synodcache.imageDataCache[key])
             }
