@@ -97,7 +97,7 @@ const FactionCollectionDisplay = (props: any) => {
                 <RulesBannerFaction
                     key={factioncollectionObject.GetBaseFac().ID}
                     slug={factioncollectionObject.GetBaseFac().ID}
-                    title={factioncollectionObject.GetBaseFac().Name}
+                    title={factioncollectionObject.GetBaseFac().Name? factioncollectionObject.GetBaseFac().Name : ""}
                 >
                     {(factioncollectionObject).SubModelsList.filter((item : any) => (item.var_name != 'base')).map(sub_item => (
                         <RulesBannerFaction
