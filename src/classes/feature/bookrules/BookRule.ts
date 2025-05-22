@@ -72,10 +72,12 @@ class BookRule extends StaticContextObject {
 
 
     /**
-     * Gets a short descroption as String
-     * @TODO: return the first paragraph as string
+     * Gets the content of the first description item of an object
      */
     public GetDescription () {
+        if (this.Description.length > 0) {
+            return this.Description[0].Content;
+        }
         return '';
     }
 

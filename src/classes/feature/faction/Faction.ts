@@ -143,9 +143,6 @@ class Faction extends StaticOptionContextObject {
 
     /**
      * Returns the Lore text as HTML
-     *
-     * @TODO: The HTML should be so, that the class="description-element" is a <p> element.
-     *        - Other spans inside should be removed leaving only text inside the paragrapg
      */
     public GetLoreHTML () {
         return returnParagraphsDescription(this, this.Description);

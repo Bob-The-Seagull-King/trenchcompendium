@@ -124,17 +124,25 @@ class FactionCollection extends StaticContextObject {
 
     /**
      * Returns the Display name for this faction collection
-     * @TODO: return display name like "Cult of the black grail" or "Dirge of the great hegemon"
      */
     public GetDisplayName() {
-        return '';
+        const basefac : Faction = this.GetBaseFac();
+        if (basefac != undefined) {
+            return basefac.Name;
+        }
+        return this.Name;
     }
 
     /**
      * Return a string for the description of this faction.
-     * @TODO: This should be like the first paragraph of the lore
      */
     public GetDescription () {
+        const basefac : Faction = this.GetBaseFac();
+        if (basefac != undefined) {
+            if (basefac.Description.length > 0) {
+                return basefac.Description[0].Content;
+            }
+        }
         return '';
     }
 

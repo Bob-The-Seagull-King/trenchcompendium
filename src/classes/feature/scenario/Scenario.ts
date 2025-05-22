@@ -194,16 +194,17 @@ class Scenario extends StaticContextObject {
 
     /**
      * Returns the scenario description as string
-     * @TODO: Needs to return something
      */
     public GetDescription () {
-        return 'This is a scenario.';
+        if (this.Description.length > 0) {
+            return this.Description[0].Content;
+        }
+        return 'This is a Scenario';
     }
 
     /**
      * Returns the image for the scenario or ''
      *
-     * @TODO: should grab image from Synod or static resources
      */
     public GetImageUrl () {
         return this.ImgLink;

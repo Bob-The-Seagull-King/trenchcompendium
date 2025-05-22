@@ -135,9 +135,11 @@ class Patron extends StaticContextObject {
     /**
      * Return the description as string
      *
-     * @TODO: return the first paragraph as string
      */
     public GetMetaDescription () {
+        if (this.Description.length > 0) {
+            return this.Description[0].Content;
+        }
         return '';
     }
 }

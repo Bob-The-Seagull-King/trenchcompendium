@@ -111,7 +111,6 @@ const PagedCompendiumDisplay = (prop: any) => {
                     }
                 </div>
 
-                {/* @TODO: this is the bottom links component */}
                 <RulesPageLinks
                     prev_page={GrabPrevItem()}
                     next_page={GrabNextItem()}

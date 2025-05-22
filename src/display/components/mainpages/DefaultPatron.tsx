@@ -57,7 +57,6 @@ const DefaultPatron: React.FC<RulesArmouryElement> = ({ item }) => {
                         </thead>
 
                         <tbody>
-                        {/* @TODO: use navigate*/}
                         {item.Collection.itemcollection.map((patron : any) => (
                             <tr key={patron.HeldItem.ID}>
                                 <td className={'font-normal'}>

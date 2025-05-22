@@ -205,7 +205,6 @@ const FactionDisplay = (props: any) => {
                         className=""
                     />
 
-                    {/* @TODO @Bob - Can we make this filtering easier to use / understand? Like factionObject.EquipmentItems.getItems('melee') or something */}
                     {factionObject.EquipmentItems.filter((item) => (item.EquipmentItem.Category == "melee" && (containsTag(item.Tags, "exploration_only") == false))).length > 0 &&
                         <RulesArmouryElement
                             headline="Melee Weapons"

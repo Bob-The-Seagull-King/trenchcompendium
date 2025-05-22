@@ -417,7 +417,6 @@ class Model extends StaticContextObject {
     }
 
 
-    // @TODO: Add logic to get the real base variant name
     /**
      * Get the name of the Base variant of this model
      */
