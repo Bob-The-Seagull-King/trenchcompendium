@@ -7,8 +7,9 @@ const delay = (ms: number | undefined) => new Promise(res => setTimeout(res, ms)
 
 export function useSynodFactionImageData(factionSlug: string, size = 'full'): FactionImageData {
     const [data, setData] = useState<FactionImageData>(() => {
+        const key = `${factionSlug}-${size}`;
         const synodcache : SynodImageCache = SynodImageCache.getInstance();
-        return synodcache.imageFactionCache[factionSlug] || {
+        return synodcache.imageFactionCache[key] || {
             url: '',
             sourceTitle: '',
             sourceUrl: '',
@@ -26,25 +27,26 @@ export function useSynodFactionImageData(factionSlug: string, size = 'full'): Fa
             if (!factionSlug) return;
             const synodcache : SynodImageCache = SynodImageCache.getInstance();
 
-            if (synodcache.CheckFactionCache(factionSlug)) {
-                setData({ ...synodcache.imageFactionCache[factionSlug], loading: false });
+            const key = `${factionSlug}-${size}`;
+            if (synodcache.CheckFactionCache(key)) {
+                setData({ ...synodcache.imageFactionCache[key], loading: false });
                 return;
             }
 
             const synodUrl = 'https://synod.trench-companion.com/';
 
-            if (synodcache.CheckFactionCallCache(factionSlug)) {    
+            if (synodcache.CheckFactionCallCache(key)) {    
                 const EMERGENCY_OUT = 1000; // If we spend 100 seconds on one image, just give up
                 let count_check = 0;
-                while ((!synodcache.CheckFactionCache(factionSlug)) && (count_check < EMERGENCY_OUT)) {
+                while ((!synodcache.CheckFactionCache(key)) && (count_check < EMERGENCY_OUT)) {
                     await delay(100);
                     count_check += 1;
                 }                   
-                setData(synodcache.imageFactionCache[factionSlug])
+                setData(synodcache.imageFactionCache[key])
             }
 
-            if (!synodcache.CheckFactionCache(factionSlug)) {
-                synodcache.AddFactionCallCache(factionSlug);
+            if (!synodcache.CheckFactionCache(key)) {
+                synodcache.AddFactionCallCache(key);
                 fetch(`${synodUrl}wp-json/synod/v1/faction-image/${factionSlug}`)
                     .then((res) => {
                         if (!res.ok) throw new Error('Network response was not ok');
@@ -65,7 +67,7 @@ export function useSynodFactionImageData(factionSlug: string, size = 'full'): Fa
                             error: !json.image || !json.image?.source_url,
                         };
 
-                        synodcache.imageFactionCache[factionSlug] = result;
+                        synodcache.imageFactionCache[key] = result;
                         setData(result);
                     })
                     .catch(() => {
