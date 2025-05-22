@@ -28,12 +28,10 @@ export function useSynodImageData(imageId: number, size = 'medium'): SynodImageD
             synodcache.AddCallCache(key);
 
             if (synodcache.CheckCallCache(key)) {    
-                for (let i = 0; i < 20; i++) {
-                    await delay(250);
-                    if (synodcache.CheckCache(key)) {                        
-                        setData(synodcache.imageDataCache[key])
-                    }
-                }
+                while (!synodcache.CheckCache(key)) {
+                    await delay(100);
+                }                   
+                setData(synodcache.imageDataCache[key])
             }
 
             if (!synodcache.CheckCache(key)) {
