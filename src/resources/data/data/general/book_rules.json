@@ -91,9 +91,23 @@
                                 "content": "Early Campaign (Battles 1-3)"
                             },
                             {
-                                "tags": {"desc_type" : "headless_table"},
+                                "tags": {"desc_type" : "headed_table"},
                                 "content": "",
                                 "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_headrow"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "table_headitem"},
+                                                "content": "Battle Number"
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "table_headitem"},
+                                                "content": "Scenario"
+                                            }
+                                        ]
+                                    },
                                     {
                                         "tags": {"desc_type" : "table_row"},
                                         "content": "",
@@ -221,9 +235,23 @@
                                 "content": "Mid Campaign (Battles 4-9)"
                             },
                             {
-                                "tags": {"desc_type" : "headless_table"},
+                                "tags": {"desc_type" : "headed_table"},
                                 "content": "",
                                 "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_headrow"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "table_headitem"},
+                                                "content": "Battle Number"
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "table_headitem"},
+                                                "content": "Scenario"
+                                            }
+                                        ]
+                                    },
                                     {
                                         "tags": {"desc_type" : "table_row"},
                                         "content": "",
@@ -357,9 +385,23 @@
                                 "content": "Endgame (Battles 9-11)"
                             },
                             {
-                                "tags": {"desc_type" : "headless_table"},
+                                "tags": {"desc_type" : "headed_table"},
                                 "content": "",
                                 "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_headrow"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "table_headitem"},
+                                                "content": "Battle Number"
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "table_headitem"},
+                                                "content": "Scenario"
+                                            }
+                                        ]
+                                    },
                                     {
                                         "tags": {"desc_type" : "table_row"},
                                         "content": "",
@@ -481,9 +523,23 @@
                                 "content": "Final Battle"
                             },
                             {
-                                "tags": {"desc_type" : "headless_table"},
+                                "tags": {"desc_type" : "headed_table"},
                                 "content": "",
                                 "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_headrow"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "table_headitem"},
+                                                "content": "Battle Number"
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "table_headitem"},
+                                                "content": "Scenario"
+                                            }
+                                        ]
+                                    },
                                     {
                                         "tags": {"desc_type" : "table_row"},
                                         "content": "",

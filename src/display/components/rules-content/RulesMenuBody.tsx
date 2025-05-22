@@ -100,7 +100,7 @@ const RulesMenuBody: React.FC<RulesMenuBodyProps> = ({ controller, onBack, onNav
                 ]
             },
             {
-                title: "Errata",
+                title: "Rules Errata & FAQ",
                 slug: "errata",
                 controller: controller.ErrataRulesCollectionController
             }

@@ -152,7 +152,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
                         description={'Sometimes the rules for Trench Crusade change, get balanced or clarified. These changes can be found here.'}
                     />
                     <h1>
-                        {'Rules Errata'}
+                        {'Rules Errata & FAQ'}
                     </h1>
 
                     <p>
