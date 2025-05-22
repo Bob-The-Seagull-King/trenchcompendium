@@ -348,7 +348,7 @@
         "name": "Mechanised Heavy Infantry Equipment",
         "contextdata": {},
         "options": [],
-        "model_id": ["md_mechanisedheavyinfantry"],
+        "model_id": ["md_mechanisedheavyinfantry","md_mechanisedheavyinfantry_abyssianna"],
         "mandatory_equipment": ["eq_reinforcedarmour"],
         "removable": false
     },
