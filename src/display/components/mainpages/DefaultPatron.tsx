@@ -62,9 +62,9 @@ const DefaultPatron: React.FC<RulesArmouryElement> = ({ item }) => {
                                 <td className={'font-normal'}>
                                     <CustomNavLink
                                         classes={'font-normal'}
-                                        link={'/compendium/patron/'+patron.HeldItem.ID}
+                                        link={'/compendium/campaign/patron/'+patron.HeldItem.ID}
                                         runfunc={() => {
-                                            navigate('/compendium/patron/'+patron.HeldItem.ID)
+                                            navigate('/compendium/campaign/patron/'+patron.HeldItem.ID)
                                         }}>
                                         {patron.HeldItem.Name}
                                     </CustomNavLink>
