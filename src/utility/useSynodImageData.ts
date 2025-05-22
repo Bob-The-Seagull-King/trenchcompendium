@@ -23,32 +23,33 @@ export function useSynodImageData(imageId: number, size = 'medium'): SynodImageD
             }
 
             const synodUrl = 'https://synod.trench-companion.com/';
+            synodcache.AddCallCache(key);
 
-            if (synodcache.CheckCallCache(key)) {
+            fetch(`${synodUrl}wp-json/wp/v2/media/${imageId}`)
+                .then((res) => res.json())
+                .then((json) => {
+                    const sizes = json.media_details?.sizes;
+                    const sizedImage = sizes?.[size]?.source_url;
+
+                    const result = {
+                        url: sizedImage || json.source_url,
+                        sourceTitle: json.meta.attachment_source_title || '',
+                        sourceUrl: json.meta.attachment_source || '',
+                    };
+
+                    synodcache.AddCache(key,result);
+                    setData(result);
+                })
+                .catch(console.error);
+
+            /*if (synodcache.CheckCallCache(key)) {
                 while (!synodcache.CheckCache(key)) {
                     setTimeout('', 100);
                 }
                 setData(synodcache.imageDataCache[key])
             } else {
-                synodcache.AddCallCache(key);
-
-                fetch(`${synodUrl}wp-json/wp/v2/media/${imageId}`)
-                    .then((res) => res.json())
-                    .then((json) => {
-                        const sizes = json.media_details?.sizes;
-                        const sizedImage = sizes?.[size]?.source_url;
-
-                        const result = {
-                            url: sizedImage || json.source_url,
-                            sourceTitle: json.meta.attachment_source_title || '',
-                            sourceUrl: json.meta.attachment_source || '',
-                        };
-
-                        synodcache.AddCache(key,result);
-                        setData(result);
-                    })
-                    .catch(console.error);
-            }
+                
+            }*/
         }
 
         runImageCheck();
