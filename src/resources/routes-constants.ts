@@ -6,7 +6,7 @@ export const ROUTES = {
     LOGIN_ROUTE: '/login/*',
     PRIVACY_ROUTE: '/privacy/*',
     PROFILE_VIEW_ROUTE: '/profile/:id',
-    PROFILE_EDIT_ROUTE: '/profile/:id/edit',
+    PROFILE_SETTINGS_ROUTE: '/profile/:id/settings',
 
     // Compendium Routes //
 
