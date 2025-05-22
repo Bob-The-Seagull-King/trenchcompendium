@@ -11,6 +11,7 @@ import './resources/styles/_mainstylesource.scss'
 
 import { ControllerController } from './classes/_high_level_controllers/ControllerController'
 import { ToolsController } from './classes/_high_level_controllers/ToolsController'
+import { SynodImageCache } from './classes/_high_level_controllers/SynodImageCache'
 
 /* 
     Major routes are placed here.
@@ -43,6 +44,7 @@ const App: React.FC = () => {
 
     const compendiumcontroller = ControllerController.getInstance();
     const toolcontroller = ToolsController.getInstance();
+    const imagecache = SynodImageCache.getInstance();
 
     /** Theme Settings */
     const [theme, setTheme] = useGlobalState('theme');
