@@ -34,10 +34,17 @@ const DefaultScenario: React.FC<RulesArmouryElement> = ({ item }) => {
                         {'These are the official Trench Crusade Scenarios. You can select one from the list below or use the random scenario generator.'}
 
                         <br/> <br/>
-                        <a href={'/scenario/generator'}>
-                            Scenario Generator
-                            <FontAwesomeIcon icon={faChevronRight} className={'icon-inline-right'}/>
-                        </a>
+                        <CustomNavLink
+                            classes={'font-normal'}
+                            link={'/compendium/scenario/randomscenario'}
+                            runfunc={() => {
+                                navigate('/compendium/scenario/randomscenario')
+                            }}>
+                            <>
+                                Scenario Generator
+                                <FontAwesomeIcon icon={faChevronRight} className={'icon-inline-right'}/>
+                            </>
+                        </CustomNavLink>
                     </p>
 
                     <div className={'spacer-20'}></div>

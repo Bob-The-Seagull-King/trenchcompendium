@@ -4,7 +4,7 @@
         "source": "core",
         "tags": {},
         "name": "Chance Encounter",
-        "img_link": "246",
+        "img_link": "237",
         "deployment": {
             "description": [
                 {
@@ -40,7 +40,7 @@
         "source": "core",
         "tags": {},
         "name": "Standard Deployment",
-        "img_link": "247",
+        "img_link": "238",
         "deployment": {
             "description": [
                 {
@@ -62,7 +62,7 @@
         "source": "core",
         "tags": {},
         "name": "Flank Attack",
-        "img_link": "248",
+        "img_link": "239",
         "deployment": {
             "description": [
                 {
@@ -84,7 +84,7 @@
         "source": "core",
         "tags": {},
         "name": "Long Distance Battle",
-        "img_link": "249",
+        "img_link": "240",
         "deployment": {
             "description": [
                 {
@@ -106,7 +106,7 @@
         "source": "core",
         "tags": {},
         "name": "Tunnels",
-        "img_link": "249",
+        "img_link": "241",
         "infiltrators": { 
             "allowed": 1,
             "description": [
@@ -149,7 +149,7 @@
         "source": "core",
         "tags": {},
         "name": "Fog of War",
-        "img_link": "249",
+        "img_link": "242",
         "deployment": {
             "description": [
                 {

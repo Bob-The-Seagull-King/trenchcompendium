@@ -115,7 +115,9 @@ function sortTagsForDisplay(taglist:  ObjectTag, bannedList : string[]) {
  * @returns Map of AbilityDescriptionItemDisplay elements
  */
 export function returnDescription(baseObject: any, objectArray : any[]) {
-    console.log(objectArray)
+    if (objectArray == undefined) {
+        return (<></>)
+    }
     return (
         <>
             {objectArray.map((item) => (

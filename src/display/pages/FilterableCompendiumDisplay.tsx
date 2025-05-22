@@ -111,6 +111,15 @@ const FilterableCompendiumDisplay = (prop: any) => {
         )
     }
 
+    function returnDesc() {
+        if (DisplayPage.titlename == "Weapons & Equipment") {
+            if (urlSplits.length > 3) {
+                return makestringpresentable(urlSplits[3])
+            }
+        }
+        return DisplayPage.titlename;
+    }
+
 
     // Return result -----------------------------
     return (
@@ -119,11 +128,11 @@ const FilterableCompendiumDisplay = (prop: any) => {
 
                 <PageMetaInformation
                     title={DisplayPage.titlename + ' Glossary'}
-                    description={'The complete Glossary for all '+ (DisplayPage.titlename) + ' in the game Trench Crusade'}
+                    description={'The complete Glossary for all '+ returnDesc() + ' in the game Trench Crusade'}
                 />
 
                 <h1>
-                    {(DisplayPage.titlename) + ' Glossary'}
+                    {returnDesc() + ' Glossary'}
                 </h1>
 
                 <div className={'FilterableCompendiumDisplay-filter'}>

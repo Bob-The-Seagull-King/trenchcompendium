@@ -30,10 +30,6 @@ const HomeRoute: React.FC = () => {
                         description={'The official resource for Trench Crusade'}
                     />
 
-                    <h1>
-                        {'Trench Companion'}
-                    </h1>
-
                     <div className={'spacer-20'}></div>
 
                     <div className={'row'}>

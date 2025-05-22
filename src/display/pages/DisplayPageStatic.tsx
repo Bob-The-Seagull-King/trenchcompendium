@@ -37,6 +37,7 @@ import { ModelCollection } from "../../classes/feature/model/ModelCollection";
 import { Equipment } from "../../classes/feature/equipment/Equipment";
 import { Helmet } from 'react-helmet';
 import PageMetaInformation from "../components/generics/PageMetaInformation";
+import { Scenario } from "../../classes/feature/scenario/Scenario";
 
 export interface DisplayCollectionType {
     searchId      : string,
@@ -438,7 +439,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
                     <PageMetaInformation
                         title={item.Name}
                         description={item.GetDescription()}
-                        ogImage={item.GetImageUrl()}
+                        ogImage={(item as Scenario).ImgLink}
                     />
 
                     <h1>
