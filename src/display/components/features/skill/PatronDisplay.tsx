@@ -7,6 +7,8 @@ import { returnDescription } from '../../../../utility/util'
 import SkillDisplay from './SkillDisplay';
 import { Patron } from '../../../../classes/feature/skillgroup/Patron';
 import RulesCollapsibleContent from "../../rules-content/RulesCollapsibleContent";
+import GenericCollapsableBlockDisplay from '../../../components/generics/GenericCollapsableBlockDisplay';
+import GenericTabledBlockDisplay from '../../../components/generics/GenereicTabledBlockDisplay';
 
 const PatronDisplay = (props: any) => {
     const patronObject : Patron = props.data
@@ -38,14 +40,42 @@ const PatronDisplay = (props: any) => {
                     </div>
 
                     <div>
-
                     {patronObject.Skills.map((item) => (
-                        <RulesCollapsibleContent key={item.ID}
-                             headline={item.Name}
-                             content={
-                                 <SkillDisplay data={item} />
-                             }
-                        />
+                        <div key={item.ID}>
+                        {item.TableVal != -1 &&
+                        <GenericTabledBlockDisplay 
+                            d_name={item.Name} 
+                            d_colour={"grey"} 
+                            d_state={false}  
+                            bordertype={0}
+                            d_border={false}
+                            d_margin={"sml"}
+                            d_content={item.TableVal}
+                            d_method={() => <>
+                                <div className="borderthin backgroundBgCard bordergrey">
+                                    <div className="">
+                                    <SkillDisplay data={item} />
+                                    </div>
+                                </div>
+                            </>} />
+                            }
+                            {item.TableVal == -1 &&
+                            <GenericCollapsableBlockDisplay 
+                                d_name={item.Name} 
+                                d_colour={"grey"} 
+                                d_state={false}  
+                                bordertype={0}
+                                d_border={false}
+                                d_margin={"sml"}
+                                d_method={() => <>
+                                    <div className="borderthin backgroundBgCard bordergrey">
+                                        <div className="">
+                                        <SkillDisplay data={item} />
+                                        </div>
+                                    </div>
+                                </>} />
+                            }
+                        </div>
                     ))}
                     </div>
                 </div>
