@@ -128,9 +128,9 @@ class FactionCollection extends StaticContextObject {
     public GetDisplayName() {
         const basefac : Faction = this.GetBaseFac();
         if (basefac != undefined) {
-            return basefac.Name;
+            return basefac.Name? basefac.Name : "";
         }
-        return this.Name;
+        return this.Name? this.Name : "";
     }
 
     /**
