@@ -1376,7 +1376,7 @@
         "name": "",
         "contextdata": {"option_search_viable": {}},
         "options": [],
-        "faction_id" : ["fc_newantioch","fc_newantioch_fv_expeditionaryforcedofabyssinia","fc_newantioch_fv_papalstatesinterventionforce"],
+        "faction_id" : ["fc_newantioch","fc_newantioch_fv_papalstatesinterventionforce"],
         "model_id" : "md_mechanisedheavyinfantry",
         "captain" : false,
         "mercenary": false,
