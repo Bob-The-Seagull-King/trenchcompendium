@@ -478,15 +478,31 @@
                         "subcontent": [
                             {
                                 "tags": {"desc_type" : "bold"},
-                                "content": "Final Battle (Battle 12)"
+                                "content": "Final Battle"
                             },
                             {
-                                "tags": {"desc_type" : "table_item"},
+                                "tags": {"desc_type" : "headless_table"},
                                 "content": "",
                                 "subcontent": [
                                     {
-                                        "tags": {"desc_type" : "link", "url": "/compendium/scenario/sc_greatwar"},
-                                        "content": "Play the Great War scenario"
+                                        "tags": {"desc_type" : "table_row"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "12"
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "",
+                                                "subcontent": [
+                                                    {
+                                                        "tags": {"desc_type" : "link", "url": "/compendium/scenario/sc_greatwar"},
+                                                        "content": "Play the Great War scenario"
+                                                    }
+                                                ]
+                                            }
+                                        ]
                                     }
                                 ]
                             }
@@ -1581,7 +1597,13 @@
                                     },
                                     {
                                         "tags": {"desc_type" : "table_item"},
-                                        "content": "Common Exploration Locations"
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "link", "url": "/compendium/campaign/explorationtable/et_commonlocations"},
+                                                "content": "Common Exploration Locations"
+                                            }
+                                        ]
                                     }
                                 ]
                             },
@@ -1595,7 +1617,21 @@
                                     },
                                     {
                                         "tags": {"desc_type" : "table_item"},
-                                        "content": "Common or Rare Exploration Locations"
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "link", "url": "/compendium/campaign/explorationtable/et_commonlocations"},
+                                                "content": "Common "
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "default", "url": "/compendium/campaign/explorationtable/et_commonlocations"},
+                                                "content": " or "
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "link", "url": "/compendium/campaign/explorationtable/et_rarelocations"},
+                                                "content": "Rare Exploration Locations"
+                                            }
+                                        ]
                                     }
                                 ]
                             },
@@ -1609,7 +1645,13 @@
                                     },
                                     {
                                         "tags": {"desc_type" : "table_item"},
-                                        "content": "Rare Exploration Locations"
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "link", "url": "/compendium/campaign/explorationtable/et_rarelocations"},
+                                                "content": "Rare Exploration Locations"
+                                            }
+                                        ]
                                     }
                                 ]
                             },
@@ -1623,7 +1665,21 @@
                                     },
                                     {
                                         "tags": {"desc_type" : "table_item"},
-                                        "content": "Rare or Legendary Exploration Locations"
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "link", "url": "/compendium/campaign/explorationtable/et_rarelocations"},
+                                                "content": "Rare"
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "default", "url": "/compendium/campaign/explorationtable/et_commonlocations"},
+                                                "content": " or "
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "link", "url": "/compendium/campaign/explorationtable/et_legendarylocations"},
+                                                "content": "Legendary Exploration Locations"
+                                            }
+                                        ]
                                     }
                                 ]
                             }
@@ -1651,7 +1707,15 @@
                 "description":  [
                     {
                         "tags": {"desc_type" : "paragraph"},
-                        "content": "Each Warband Starts the Campaign with the Reroll Skill. More can be earned during the campaign or by hiring Allies. You can have multiples of any of the Skills on this list."
+                        "content": "Each Warband Starts the Campaign with the "
+                    },
+                    {
+                        "tags": {"desc_type" : "skillslim"},
+                        "content": "es_reroll"
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": " Skill. More can be earned during the campaign or by hiring Allies. You can have multiples of any of the Skills on this list."
                     }
                  ],
                 "content": [ ]

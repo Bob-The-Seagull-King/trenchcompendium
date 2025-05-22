@@ -109,7 +109,7 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
             }
             case "headed_table": {
                 return (
-                    <table className="table_headed">
+                    <table className="table_headed table_headed-highlight">
                         {item.SubContent?.map((subitem) => (
                             <AdvancedDescriptionItemDisplay key="descriptionsubitem" data={subitem} parent={parentItem}/>
                         ))}

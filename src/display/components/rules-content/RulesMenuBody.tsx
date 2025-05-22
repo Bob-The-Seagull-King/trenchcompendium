@@ -75,7 +75,7 @@ const RulesMenuBody: React.FC<RulesMenuBodyProps> = ({ controller, onBack, onNav
                 slug: "campaign",
                 children: [
                     {
-                        title: "Rules",
+                        title: "Campaign Rules",
                         slug: "campaign_rules",
                         controller: controller.CampaignRulesCollectionController
                     },
