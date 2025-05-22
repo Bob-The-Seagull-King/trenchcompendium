@@ -40,14 +40,6 @@ const PatronDisplay = (props: any) => {
                     </div>
                     <div className={'rules-card-content rules-card-table-content rules-skill-table-content'}>
                         <table className={'rules-card-table rules-skill-table-content-table'}>
-                            <thead>
-                                <tr>
-                                    <th>
-                                        {'Skill'}
-                                    </th>
-                                </tr>
-                            </thead>
-
                             <tbody>
                                 {patronObject.Skills.map((item) => (
                                     <tr key={item.ID}>
