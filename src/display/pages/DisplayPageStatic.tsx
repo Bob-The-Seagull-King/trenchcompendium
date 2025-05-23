@@ -38,6 +38,11 @@ import { Equipment } from "../../classes/feature/equipment/Equipment";
 import { Helmet } from 'react-helmet';
 import PageMetaInformation from "../components/generics/PageMetaInformation";
 import { Scenario } from "../../classes/feature/scenario/Scenario";
+import { ExplorationTable } from "../../classes/feature/exploration/ExplorationTable";
+import { ViewTableItem } from "../../classes/viewmodel/collections/ViewTableItem";
+import { BookRule } from "../../classes/feature/bookrules/BookRule";
+import { Keyword } from "../../classes/feature/glossary/Keyword";
+import { SkillGroup } from "../../classes/feature/skillgroup/SkillGroup";
 
 export interface DisplayCollectionType {
     searchId      : string,
@@ -115,16 +120,22 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         returnDisplay(item: any) {
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    <PageMetaInformation
-                        title={item.Name}
-                        description={item.GetDescription()}
-                    />
+                    {(item instanceof BookRule) &&
+                        <>
+                            <PageMetaInformation
+                                title={item.GetTrueName()}
+                                description={item.GetDescription()}
+                            />
 
-                    <h1 className="">
-                        {item.Name}
-                    </h1>
+                            <h1 className="">
+                                {item.Name}
+                            </h1>
 
-                    <BookRuleDisplay data={item}/>
+                            <BookRuleDisplay data={item}/>
+                    
+                        </>
+
+                    }
                 </ErrorBoundary>
             )
         },
@@ -181,10 +192,15 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         returnDisplay(item: any) {
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    <h1 className="">
-                        {item.Name}
-                    </h1>
-                    <BookRuleDisplay data={item} />
+                    {(item instanceof BookRule) &&
+                        <>
+                            <h1 className="">
+                                {item.Name}
+                            </h1>
+                            <BookRuleDisplay data={item} />                        
+                        </>
+
+                    }
                 </ErrorBoundary>
             )
         },
@@ -208,20 +224,6 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
 
-                    <div className="borderthin bordergrey">
-                    <GenericCollapsableBlockDisplay
-                        d_name={item.Name}
-                        d_colour={"grey"}
-                        d_state={false}
-                        bordertype={0}
-                        d_border={false}
-                        d_margin={"sml"}
-                        d_method={() => <>
-                            <div className="borderthin backgroundBgCard bordergrey">
-                            <GlossaryDisplay data={item} />
-                            </div>
-                        </>} />
-                    </div>
                 </ErrorBoundary>
             )
         },
@@ -254,12 +256,17 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         returnDisplay(item: any) {
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    <PageMetaInformation
-                        title={'Keywords'}
-                        description={'All Keywords for Trench Crusade in one Place. '}
-                    />
+                    {(item instanceof Keyword) &&
+                        <>
+                            <PageMetaInformation
+                                title={'Keywords'}
+                                description={'All Keywords for Trench Crusade in one Place. '}
+                            />
 
-                    <RulesKeywordsTable data={item}/>
+                            <RulesKeywordsTable data={item}/>
+                        </>
+
+                    }
                 </ErrorBoundary>
             )
         },
@@ -307,8 +314,9 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
             return (
                 
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-
-                    <ModelCollectionDisplay data={item} />
+                    {(item instanceof ModelCollection) &&
+                        <ModelCollectionDisplay data={item} />
+                    }
 
                 </ErrorBoundary>
             )
@@ -349,9 +357,12 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
             return (
                 
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
+                    {(item instanceof Equipment) &&
                         <RulesEquipmentEntry
                             equipment={item}
                         />
+                    }
+                        
                 </ErrorBoundary>
             )
         },
@@ -399,7 +410,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         returnDisplay(item: any) {
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    {item != undefined &&
+                    {(item instanceof FactionCollection) &&
                         <>
                             <FactionCollectionDisplay data={item} />
                         </>
@@ -436,16 +447,20 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
             return (
 
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    <PageMetaInformation
-                        title={item.Name}
-                        description={item.GetDescription()}
-                        ogImage={(item as Scenario).ImgLink}
-                    />
+                    {(item instanceof Scenario) &&
+                        <>
+                            <PageMetaInformation
+                                title={item.GetTrueName()}
+                                description={item.GetDescription()}
+                                ogImage={(item as Scenario).ImgLink}
+                            />
 
-                    <h1>
-                        {item.Name}
-                    </h1>
-                    <ScenarioDisplay data={item}/>
+                            <h1>
+                                {item.Name}
+                            </h1>
+                            <ScenarioDisplay data={item}/>
+                        </>
+                    }
                 </ErrorBoundary>
             )
         },
@@ -477,17 +492,23 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
             return []
         },
         returnDisplay(item: any) {
+            
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    <PageMetaInformation
-                        title={item.Name}
-                        description={item.GetDescription()}
-                    />
+                    {(item instanceof BookRule) &&
+                        <>
+                            <PageMetaInformation
+                            title={item.GetTrueName()}
+                            description={item.GetDescription()}
+                            />
 
-                    <h1>
-                        {item.Name}
-                    </h1>
-                    <BookRuleDisplay data={item}/>
+                            <h1>
+                                {item.Name}
+                            </h1>
+                            <BookRuleDisplay data={item}/>
+                        </>
+                    }
+                    
                 </ErrorBoundary>
             )
         },
@@ -549,7 +570,9 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         returnDisplay(item: any) {
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    <RulesExplotationTable data={item} />
+                    {(item instanceof ExplorationTable) &&
+                        <RulesExplotationTable data={item} />
+                    }
                 </ErrorBoundary>
             )
         },
@@ -664,7 +687,6 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         returnDisplay(item: any) {
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-
                     <RulesInjuriesTable data={item} />
                 </ErrorBoundary>
             )
@@ -693,7 +715,11 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
             return (
                 
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    <RulesSkillTable data={item} />
+                    {(item instanceof SkillGroup) &&
+                        <>                        
+                            <RulesSkillTable data={item} />
+                        </>
+                    }
 
                 </ErrorBoundary>
             )
@@ -735,16 +761,21 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
             return (
 
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    <PageMetaInformation
-                        title={item.Name}
-                        description={item.GetMetaDescription()}
-                    />
+                    {(item instanceof Patron) &&
+                        <>
+                            <PageMetaInformation
+                                title={item.GetTrueName()}
+                                description={item.GetMetaDescription()}
+                            />
 
-                    <h1>
-                        {item.Name}
-                    </h1>
+                            <h1>
+                                {item.Name}
+                            </h1>
 
-                    <PatronDisplay data={item}/>
+                            <PatronDisplay data={item}/>
+                        </>
+                    }
+                    
                 </ErrorBoundary>
             )
         },

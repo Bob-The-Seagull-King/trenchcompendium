@@ -10,6 +10,8 @@ import PageMetaInformation from "../generics/PageMetaInformation";
 const RulesExplotationTable = (props: any) => {
     const explorationTableObject: ExplorationTable = props.data
 
+    console.log(explorationTableObject);
+
     let title;
 
     if( explorationTableObject.Name ) {

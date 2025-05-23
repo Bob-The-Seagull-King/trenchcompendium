@@ -59,8 +59,6 @@ export function useSynodModelImageData(modelSlug: string, size = 'full'): ModelI
                         return res.json();
                     })
                     .then((json) => {
-                        console.log("TEST")
-                        console.log(json)
                         const sizes = json.image?.media_details?.sizes;
                         const sizedImage = sizes?.[size]?.source_url;
 

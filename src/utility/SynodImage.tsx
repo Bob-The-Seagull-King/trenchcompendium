@@ -10,7 +10,7 @@ interface SynodImageProps {
 
 const SynodImage: React.FC<SynodImageProps> = ({ imageId, size = 'medium', className = '' }) => {
     const { url } = useSynodImageData(imageId, size);
-    console.log(url);
+    
     const fallback =
         'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
 
