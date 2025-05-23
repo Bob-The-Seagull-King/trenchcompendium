@@ -6,10 +6,9 @@ const delay = (ms: number | undefined) => new Promise(res => setTimeout(res, ms)
 
 export function useSynodModelImageData(modelSlug: string, size = 'full'): ModelImageData {
 
+
     const [data, setData] = useState<ModelImageData>(() => {
-        const key = `${modelSlug}-${size}`;
-        const synodcache : SynodImageCache = SynodImageCache.getInstance();
-        return synodcache.imageModelCache[key] || {
+         return {
             url: '',
             sourceTitle: '',
             sourceUrl: '',
@@ -23,20 +22,15 @@ export function useSynodModelImageData(modelSlug: string, size = 'full'): ModelI
 
     useEffect(() => {
         async function runImageCheck() {
-            if (!modelSlug) return;
+            if (!modelSlug) return data;
 
 
             const synodcache : SynodImageCache = SynodImageCache.getInstance();
 
             const key = `${modelSlug}-${size}`;
             if (synodcache.CheckModelCache(key)) {
-                setData(synodcache.imageModelCache[key]);
-                return;
-            }
-
-            if (synodcache.imageModelCache[key]) {
-                setData(synodcache.imageModelCache[key]);
-                return;
+                setData({ ...synodcache.imageModelCache[key] });
+                return data;
             }
 
             const synodUrl = 'https://synod.trench-companion.com/';
@@ -47,8 +41,21 @@ export function useSynodModelImageData(modelSlug: string, size = 'full'): ModelI
                 while ((!synodcache.CheckModelCache(key)) && (count_check < EMERGENCY_OUT)) {
                     await delay(100);
                     count_check += 1;
-                }                   
-                setData(synodcache.imageModelCache[key])
+                }               
+                if ((!synodcache.CheckModelCache(key)))    {
+                    setData({
+                    url: '',
+                    sourceTitle: '',
+                    sourceUrl: '',
+                    imageId: 0,
+                    modelName: '',
+                    modelId: 0,
+                    loading: true,
+                    error: false,
+                })
+                } else {
+                    setData({ ...synodcache.imageModelCache[key] })
+                }
             }
 
             if (!synodcache.CheckModelCache(key)) {
@@ -72,16 +79,29 @@ export function useSynodModelImageData(modelSlug: string, size = 'full'): ModelI
                             loading: false,
                             error: !json.image || !json.image?.source_url,
                         };
-
                         synodcache.AddModelCache(modelSlug, result);
-                        setData(result);
+                        setData({ ...synodcache.imageModelCache[key] });
                     })
                     .catch(() => {
                         setData(prev => ({ ...prev, loading: false, error: true }));
                     });
+            } else {             
+                if ((!synodcache.CheckModelCache(key)))    {
+                    setData({
+                    url: '',
+                    sourceTitle: '',
+                    sourceUrl: '',
+                    imageId: 0,
+                    modelName: '',
+                    modelId: 0,
+                    loading: true,
+                    error: false,
+                })
+                } else {
+                    setData({ ...synodcache.imageModelCache[key] })
+                }
             }
         }
-
         runImageCheck();
     }, [modelSlug, size]);
 

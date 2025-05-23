@@ -20,7 +20,6 @@ const SynodImage: React.FC<SynodImageProps> = ({ imageId, size = 'medium', class
     const curse_interval = 5000;
     const curse_variance = 9000;
 
-
     useEffect(() => {
         if (applycurse === 'true') {
             const interval = setInterval(() => {

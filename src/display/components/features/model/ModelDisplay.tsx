@@ -44,8 +44,6 @@ const ModelDisplay = (props: any) => {
     const [abilities, setabilities] = useState<Ability[]>([])
     const [BaseString, setBaseString] = useState('')
     const [_keyvar, setkeyvar] = useState(0);
-
-    const sourceData = useSynodModelImageData(ModelObject.GetSlug());
     
     // Render no lore if loreshow !== 'true'
     const [loreshow] = useGlobalState('loreshow');
@@ -113,19 +111,13 @@ const ModelDisplay = (props: any) => {
                             modelId={ModelObject.ID}
                         />
 
-                        {sourceData != undefined && 
-                            <>
-                                {!sourceData.loading && !sourceData.error && sourceData.sourceUrl &&
-                                    <FighterCardMetaEntry
+                        <FighterCardMetaEntry
                                         className="synod-image-source-wrap"
                                         label="Image"
                                         value={<SynodModelImageSource
                                             modelSlug={ModelObject.GetSlug()}
                                         />}
                                     />
-                                }
-                            </>
-                        }
 
                     </div>
                 </div>

@@ -55,8 +55,6 @@ const RulesModelDisplay = (props: any) => {
     const [maximum, setmaximum] = useState("")
     const [_keyvar, setkeyvar] = useState(0);
 
-    const sourceData = useSynodModelImageData(modelcollectionObject.GetSlug());
-
     async function getKeywords(abilities: Ability[]) {
         
         setkeyvar(_keyvar + 1);
@@ -255,15 +253,13 @@ const RulesModelDisplay = (props: any) => {
                             modelId={modelcollectionObject.ID}
                         />
 
-                        {!sourceData.loading && !sourceData.error && sourceData.sourceUrl &&
-                            <FighterCardMetaEntry
+                        <FighterCardMetaEntry
                                 className="synod-image-source-wrap"
                                 label="Image"
                                 value={<SynodModelImageSource
                                     modelSlug={modelcollectionObject.GetSlug()}
                                 />}
                             />
-                        }
 
                     </div>
                 </div>

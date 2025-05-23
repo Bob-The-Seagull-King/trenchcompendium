@@ -19,7 +19,7 @@ const PagedCompendiumDisplay = (prop: any) => {
 
     const CollectionController: ViewCollectionsModel = ViewPageController.Collection;
     const DisplayPage: DisplayCollectionType = DisplayCollectionDataDex[ViewPageController.TypeName]
-    console.log(ViewPageController.TypeName)
+    
     // Initialize Use State
     const { state } = useLocation();
     const urlPath = useLocation().pathname;
@@ -51,28 +51,22 @@ const PagedCompendiumDisplay = (prop: any) => {
     }
     
 
-    function GetCurrentItem() {  
-        console.log("TEST A ")     
+    function GetCurrentItem() {    
         if (urlSplits.length > 3) {
             const CurItemID = (ViewPageController.TypeName != 'faction')? urlSplits.slice(urlSplits.length-1)[0] : urlSplits.slice(3)[0]
             
-            console.log("TEST B " + CurItemID)
             for (let i = 0; i < CollectionController.itemcollection.length; i++) {
-                if (CollectionController.itemcollection[i].HeldItem.ID == CurItemID) {   
-                    console.log("TEST C " + CurItemID)                 
+                if (CollectionController.itemcollection[i].HeldItem.ID == CurItemID) {              
                     return CollectionController.itemcollection[i]
                 }
             }
-        }  
-        console.log("TEST D ")     
+        }     
         if (DisplayPage.defaultpage) {
             return null;
-        }
-        console.log("TEST E ")     
+        }  
         if (CollectionController.TargetItem == null) {
             return CollectionController.itemcollection[0]
-        } else {
-            console.log("TEST F ")     
+        } else {   
             return CollectionController.TargetItem;
         }
     }

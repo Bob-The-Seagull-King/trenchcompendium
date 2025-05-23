@@ -10,7 +10,7 @@ interface SynodModelImageSourceProps {
 }
 
 const SynodModelImageSource: React.FC<SynodModelImageSourceProps> = ({ modelSlug }) => {
-    const { sourceTitle, sourceUrl, loading, error } = useSynodModelImageData(modelSlug);
+    const { sourceTitle, sourceUrl, loading, error } = useSynodModelImageData(modelSlug, 'medium');
 
 
     if (loading || error || !sourceUrl) return null;

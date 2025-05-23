@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSynodModelImageData } from './useSynodModelImageData';
 
 
@@ -18,10 +18,14 @@ const SynodModelImage: React.FC<SynodModelImageProps> = ({ modelSlug, size = 'fu
     const fallback =
         'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
 
-
     if( error ) {
         return null;
     }
+    
+    
+        useEffect(() => {
+            console.log("RE-RENDER" + url);
+        }, [url]);
 
     return (
         <img
