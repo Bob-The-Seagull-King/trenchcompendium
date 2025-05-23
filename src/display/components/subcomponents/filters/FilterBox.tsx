@@ -1,6 +1,6 @@
 import '../../../../resources/styles/vendor/bootstrap.css'
 import React, { useState } from 'react'
-import { Typeahead } from 'react-bootstrap-typeahead';
+import { Typeahead } from 'react-bootstrap-typeahead'
 
 // Classes
 import { ErrorBoundary } from "react-error-boundary";
@@ -26,8 +26,10 @@ const FilterBox = (prop: any) => {
         _filter.Val = newVal;
     }
 
+
     function ReturnTextFilterParam(_filter : FilterText) {
-        return (            
+
+        return (
             <div className="ReturnTextFilterParam">
                 <InputGroup>
                     <Typeahead
@@ -41,6 +43,12 @@ const FilterBox = (prop: any) => {
                             if (selected.length > 0) {
                                 UpdateName(_filter, selected[0].toString()); // optional: update text filter value
                                 updatesearch();
+
+                                // DOM-based blur fallback
+                                setTimeout(() => {
+                                    const el = document.querySelector<HTMLInputElement>('.rbt input[type="text"]')
+                                    el?.blur()
+                                }, 0)
                             }
                         }}
                         onKeyDown={(event) => {
@@ -68,7 +76,7 @@ const FilterBox = (prop: any) => {
     function ReturnFilterBoxInner() {
         return (
             <div className="ReturnFilterBoxInner">
-                {DisplayPage.returnFilterSelect(FilterManagerObj, updatesearch, updatesearch)}
+            {DisplayPage.returnFilterSelect(FilterManagerObj, updatesearch, updatesearch)}
 
                 <Button variant="primary" onClick={updatesearch}>
                     Apply Filter
