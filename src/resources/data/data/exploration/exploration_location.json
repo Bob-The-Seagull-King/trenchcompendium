@@ -277,7 +277,15 @@
         "description": [            
             {
                 "tags": {"desc_type" : "default"},
-                "content": "Add a Troop Flag to your Warband’s roster for free. You cannot exceed your Warband’s LIMIT on Troop Flags in this way.",
+                "content": "Add a "
+            },
+            {
+                "tags": {"desc_type" : "equipmentslim"},
+                "content": "eq_troopflag"
+            },        
+            {
+                "tags": {"desc_type" : "default"},
+                "content": " to your Warband’s roster for free. You cannot exceed your Warband’s LIMIT on Troop Flags in this way.",
                 "glossary": [{"val": "LIMIT", "id": "kw_limit"}]
             }
         ],
@@ -299,7 +307,15 @@
         "description": [            
             {
                 "tags": {"desc_type" : "default"},
-                "content": "Add a Field Shrine to your Warband’s roster for free."
+                "content": "Add a "
+            },
+            {
+                "tags": {"desc_type" : "equipmentslim"},
+                "content": "eq_fieldshrine"
+            },        
+            {
+                "tags": {"desc_type" : "default"},
+                "content": " to your Warband’s roster for free."
             }
         ],
         "options": []
@@ -482,10 +498,14 @@
                 "id": ["md_yeoman_survivor"]
             }
         },
-        "description": [            
+        "description": [           
+            {
+                "tags": {"desc_type" : "modelslim"},
+                "content": "md_yeoman_survivor"
+            },         
             {
                 "tags": {"desc_type" : "default"},
-                "content": "Yeoman, except they do not have a Ranged weapon."
+                "content": ", except they do not have a Ranged weapon."
             }
         ],
         "options": []
@@ -511,10 +531,10 @@
                 "id": ["md_ecclesiasticprisoner"]
             }
         },
-        "description": [            
+        "description": [             
             {
-                "tags": {"desc_type" : "default"},
-                "content": "Ecclesiastical Prisoner"
+                "tags": {"desc_type" : "modelslim"},
+                "content": "md_ecclesiasticprisoner"
             }
         ],
         "options": []
@@ -542,8 +562,8 @@
         },
         "description": [            
             {
-                "tags": {"desc_type" : "default"},
-                "content": "Azeb"
+                "tags": {"desc_type" : "modelslim"},
+                "content": "md_azeb"
             }
         ],
         "options": []
@@ -569,10 +589,10 @@
                 "id": ["md_wretched"]
             }
         },
-        "description": [            
+        "description": [           
             {
-                "tags": {"desc_type" : "default"},
-                "content": "Wretched"
+                "tags": {"desc_type" : "modelslim"},
+                "content": "md_wretched"
             }
         ],
         "options": []
@@ -598,10 +618,10 @@
                 "id": ["md_wretched_court"]
             }
         },
-        "description": [            
+        "description": [           
             {
-                "tags": {"desc_type" : "default"},
-                "content": "Wretched"
+                "tags": {"desc_type" : "modelslim"},
+                "content": "md_wretched_court"
             }
         ],
         "options": []
@@ -629,8 +649,8 @@
         },
         "description": [            
             {
-                "tags": {"desc_type" : "default"},
-                "content": "Grail Thrall"
+                "tags": {"desc_type" : "modelslim"},
+                "content": "md_grailthrall"
             }
         ],
         "options": []
@@ -671,7 +691,47 @@
         "description": [            
             {
                 "tags": {"desc_type" : "default"},
-                "content": "You find the body of a fallen soldier, half-gnawed by rats, still clutching some of their possessions. Add a Ranged weapon in your Warband’s Armoury that costs 15 ducats or less, a Combat Helmet, and Standard Armour to your Warband’s roster for free. Then, roll a D6. On a 4+, add one of the following to your Warband’s roster for free (your choice must be available to your Warband): a First-Aid Kit, a Mountaineer’s Kit, or a Shovel."
+                "content": "You find the body of a fallen soldier, half-gnawed by rats, still clutching some of their possessions. Add a Ranged weapon in your Warband’s Armoury that costs 15 ducats or less, a "
+            },
+            {
+                "tags": {"desc_type" : "equipmentslim"},
+                "content": "eq_combathelmet"
+            },          
+            {
+                "tags": {"desc_type" : "default"},
+                "content": ", and "
+            },
+            {
+                "tags": {"desc_type" : "equipmentslim"},
+                "content": "eq_standardarmour"
+            },          
+            {
+                "tags": {"desc_type" : "default"},
+                "content": " to your Warband’s roster for free. Then, roll a D6. On a 4+, add one of the following to your Warband’s roster for free (your choice must be available to your Warband): a "
+            },
+            {
+                "tags": {"desc_type" : "equipmentslim"},
+                "content": "eq_medikit"
+            },          
+            {
+                "tags": {"desc_type" : "default"},
+                "content": ", a "
+            },
+            {
+                "tags": {"desc_type" : "equipmentslim"},
+                "content": "eq_mountaineerkit"
+            },          
+            {
+                "tags": {"desc_type" : "default"},
+                "content": ", or a "
+            },
+            {
+                "tags": {"desc_type" : "equipmentslim"},
+                "content": "eq_shovel"
+            },          
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "."
             }
         ],
         "location_value": 10,
@@ -781,7 +841,15 @@
         "description": [            
             {
                 "tags": {"desc_type" : "default"},
-                "content": "Marked with carefully concealed signs, you find a hidden Map & Document Bag. You gain the Reroll Exploration Skill."
+                "content": "Marked with carefully concealed signs, you find a hidden Map & Document Bag. You gain the "
+            },
+            {
+                "tags": {"desc_type" : "skillslim"},
+                "content": "es_reroll"
+            },      
+            {
+                "tags": {"desc_type" : "default"},
+                "content": " Exploration Skill."
             }
         ],
         "location_value": 14,
@@ -860,8 +928,20 @@
         },
         "description": [            
             {
+                "tags": {"desc_type" : "equipmentslim"},
+                "content": "eq_sniperrifle"
+            },
+            {
                 "tags": {"desc_type" : "default"},
-                "content": "Sniper Rifle or Sniper Scope."
+                "content": " or "
+            },
+            {
+                "tags": {"desc_type" : "equipmentslim"},
+                "content": "eq_sniperscope"
+            },
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "."
             }
         ],
         "options": []
@@ -889,10 +969,26 @@
                 "id": ["eq_siegejezzail","eq_alchemicalammunition","eq_cloakofalamut"]
             }
         },
-        "description": [            
+        "description": [     
+            {
+                "tags": {"desc_type" : "equipmentslim"},
+                "content": "eq_siegejezzail"
+            },       
             {
                 "tags": {"desc_type" : "default"},
-                "content": "Siege Jezzail, Alchemical Ammunition, and a Cloak of Alamut"
+                "content": ", "
+            },
+            {
+                "tags": {"desc_type" : "equipmentslim"},
+                "content": "eq_alchemicalammunition"
+            },       
+            {
+                "tags": {"desc_type" : "default"},
+                "content": ", and a "
+            },
+            {
+                "tags": {"desc_type" : "equipmentslim"},
+                "content": "eq_cloakofalamut"
             }
         ],
         "options": []
@@ -920,10 +1016,10 @@
                 "id": ["eq_automaticrifle"]
             }
         },
-        "description": [            
+        "description": [         
             {
-                "tags": {"desc_type" : "default"},
-                "content": "Automatic Rifle"
+                "tags": {"desc_type" : "equipmentslim"},
+                "content": "eq_automaticrifle"
             }
         ],
         "options": []
@@ -951,10 +1047,18 @@
                 "id": ["eq_fieldshrine","eq_corruptionbelcher"]
             }
         },
-        "description": [            
+        "description": [          
+            {
+                "tags": {"desc_type" : "equipmentslim"},
+                "content": "eq_corruptionbelcher"
+            }    ,       
             {
                 "tags": {"desc_type" : "default"},
-                "content": "Corruption Belcher and Field Shrine"
+                "content": " and "
+            } ,  
+            {
+                "tags": {"desc_type" : "equipmentslim"},
+                "content": "eq_fieldshrine"
             }
         ],
         "options": []
@@ -982,10 +1086,10 @@
                 "id": ["eq_ophidianrifle"]
             }
         },
-        "description": [            
+        "description": [    
             {
-                "tags": {"desc_type" : "default"},
-                "content": "Ophidian Rifle"
+                "tags": {"desc_type" : "equipmentslim"},
+                "content": "eq_ophidianrifle"
             }
         ],
         "options": []
@@ -1055,7 +1159,47 @@
         "description": [            
             {
                 "tags": {"desc_type" : "default"},
-                "content": "Add Reinforced Armour, a Trench Shield, a Combat Helmet, and either a Sword or Polearm to your Warband’s roster for free."
+                "content": "Add "
+            },
+            {
+                "tags": {"desc_type" : "equipmentslim"},
+                "content": "eq_reinforcedarmour"
+            },         
+            {
+                "tags": {"desc_type" : "default"},
+                "content": ", a "
+            },
+            {
+                "tags": {"desc_type" : "equipmentslim"},
+                "content": "eq_trenchshield"
+            },         
+            {
+                "tags": {"desc_type" : "default"},
+                "content": ", a "
+            },
+            {
+                "tags": {"desc_type" : "equipmentslim"},
+                "content": "eq_combathelmet"
+            },         
+            {
+                "tags": {"desc_type" : "default"},
+                "content": ", and either a "
+            },
+            {
+                "tags": {"desc_type" : "equipmentslim"},
+                "content": "eq_swordaxe"
+            },         
+            {
+                "tags": {"desc_type" : "default"},
+                "content": " or "
+            },
+            {
+                "tags": {"desc_type" : "equipmentslim"},
+                "content": "eq_trenchpolearm"
+            },         
+            {
+                "tags": {"desc_type" : "default"},
+                "content": " to your Warband’s roster for free."
             }
         ],
         "options": []
@@ -1192,7 +1336,15 @@
         "description": [            
             {
                 "tags": {"desc_type" : "default"},
-                "content": "Exploring the battlefield you discover an otherworldly instrument alongside the shattered remains of a lesser angel – fallen or divine. Add an Angelic Instrument to your Warband’s roster for free. It’s identical to a Musical Instrument (including their equipment restrictions and LIMIT), except its effect has a range of 8\" instead of 4\". If your Warband is at its LIMIT for Musical Instruments, it can immediately remove an existing Musical Instrument for the Angelic Instrument.",
+                "content": "Exploring the battlefield you discover an otherworldly instrument alongside the shattered remains of a lesser angel – fallen or divine. Add an "
+            },
+            {
+                "tags": {"desc_type" : "equipmentslim"},
+                "content": "eq_angelicinstrument"
+            },        
+            {
+                "tags": {"desc_type" : "default"},
+                "content": " to your Warband’s roster for free. It’s identical to a Musical Instrument (including their equipment restrictions and LIMIT), except its effect has a range of 8\" instead of 4\". If your Warband is at its LIMIT for Musical Instruments, it can immediately remove an existing Musical Instrument for the Angelic Instrument.",
                 "glossary": [
                     {"val": "LIMIT", "id": "kw_limit"}
                 ]
@@ -1219,7 +1371,15 @@
         "description": [            
             {
                 "tags": {"desc_type" : "default"},
-                "content": "You find a hastily-abandoned Synod of Strategic Prophecy station, with scribbled predictions and prophecies scattered amongst the disarray. You gain the Extra Dice Exploration Skill."
+                "content": "You find a hastily-abandoned Synod of Strategic Prophecy station, with scribbled predictions and prophecies scattered amongst the disarray. You gain the "
+            },
+            {
+                "tags": {"desc_type" : "skillslim"},
+                "content": "es_extradice"
+            },          
+            {
+                "tags": {"desc_type" : "default"},
+                "content": " Exploration Skill."
             }
         ],
         "location_value": 9,
@@ -1309,7 +1469,15 @@
         "description": [            
             {
                 "tags": {"desc_type" : "default"},
-                "content": "You find a Rabbinic Manual on Creating Golems. Studying it allows you to create one Golem. Use the House of Wisdom Takwin Creature Creation to make a Homunculus of up to 100 ducats of value (40 ducats base cost), and add it to your Warband’s roster for free. In addition, you can buy items from your Armoury for your Golem. Otherwise, it uses exactly the same rules as Takwin Homunculi but has the Keyword GOLEM. This Golem can never be promoted to ELITE or gain Experience. Unlike a Takwin Creature, this Golem does not need to be associated with an Alchemist and it does not count as a Takwin Creature for any purposes (such as LIMIT). Replace any instance of “Iron Sultanate” with your Faction. ",
+                "content": "You find a Rabbinic Manual on Creating Golems. Studying it allows you to create one "
+            },       
+            {
+                "tags": {"desc_type" : "modelslim"},
+                "content": "md_takwincreation_golem"
+            },      
+            {
+                "tags": {"desc_type" : "default"},
+                "content": ". Use the House of Wisdom Takwin Creature Creation to make a Homunculus of up to 100 ducats of value (40 ducats base cost), and add it to your Warband’s roster for free. In addition, you can buy items from your Armoury for your Golem. Otherwise, it uses exactly the same rules as Takwin Homunculi but has the Keyword GOLEM. This Golem can never be promoted to ELITE or gain Experience. Unlike a Takwin Creature, this Golem does not need to be associated with an Alchemist and it does not count as a Takwin Creature for any purposes (such as LIMIT). Replace any instance of “Iron Sultanate” with your Faction. ",
                 "glossary": [
                     {"val": "LIMIT", "id": "kw_limit"},
                     {"val": "ELITE", "id": "kw_elite"},
@@ -1564,7 +1732,15 @@
         "description": [            
             {
                 "tags": {"desc_type" : "default"},
-                "content": "You discover a well-hidden reliquary of a fallen Saint. Add a Saintly Relic to your Warband’s roster for free. This piece of equipment can only be carried by an ELITE model. A model equipped with the Saintly Relic gains the Keyword TOUGH, but loses the Keyword INFILTRATOR (if it has it) and can never have Cover.",
+                "content": "You discover a well-hidden reliquary of a fallen Saint. Add a "
+            },
+            {
+                "tags": {"desc_type" : "equipmentslim"},
+                "content": "eq_saintsreliquary"
+            },            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": " to your Warband’s roster for free. This piece of equipment can only be carried by an ELITE model. A model equipped with the Saintly Relic gains the Keyword TOUGH, but loses the Keyword INFILTRATOR (if it has it) and can never have Cover.",
                 "glossary": [
                     {"val": "TOUGH", "id": "kw_tough"},
                     {"val": "ELITE", "id": "kw_elite"},
@@ -1679,7 +1855,15 @@
         "description": [            
             {
                 "tags": {"desc_type" : "default"},
-                "content": "You keep the captive as a guide. You gain the Set Dice Exploration Skill."
+                "content": "You keep the captive as a guide. You gain the "
+            },
+            {
+                "tags": {"desc_type" : "skillslim"},
+                "content": "es_setdice"
+            },          
+            {
+                "tags": {"desc_type" : "default"},
+                "content": " Exploration Skill."
             }
         ],
         "options": [  ]
@@ -1921,7 +2105,15 @@
         "description": [            
             {
                 "tags": {"desc_type" : "default"},
-                "content": "You uncover a hidden entrance to a vast underground network, perhaps dug by the Heretics to infiltrate the Great Iron Wall, or by refugees living in the No Man’s Land. This allows you to explore the area you are in far more efficiently. Your Warband gains the Duplicate Exploration Skill."
+                "content": "You uncover a hidden entrance to a vast underground network, perhaps dug by the Heretics to infiltrate the Great Iron Wall, or by refugees living in the No Man’s Land. This allows you to explore the area you are in far more efficiently. Your Warband gains the "
+            },
+            {
+                "tags": {"desc_type" : "skillslim"},
+                "content": "es_duplicate"
+            },            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": " Exploration Skill."
             }
         ],
         "location_value": 10,
@@ -2028,7 +2220,15 @@
         "description": [            
             {
                 "tags": {"desc_type" : "default"},
-                "content": "Your Warband may now buy a Fire Shield exactly as if it was a House of Wisdom Warband."
+                "content": "Your Warband may now buy a "
+            },
+            {
+                "tags": {"desc_type" : "equipmentslim"},
+                "content": "eq_fireshield"
+            },           
+            {
+                "tags": {"desc_type" : "default"},
+                "content": " exactly as if it was a House of Wisdom Warband."
             }
         ],
         "options": []
@@ -2184,10 +2384,24 @@
                 "id": ["eq_faithfulskull"]
             }
         },
-        "description": [            
+        "description": [               
             {
                 "tags": {"desc_type" : "paragraph"},
-                "content": "A saint guides your troops before each battle. The model with the skull gains the following skill:"
+                "content": "",
+                "subcontent": [
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "A saint guides your troops before each battle. The model with the "
+                    },
+                    {
+                        "tags": {"desc_type" : "equipmentslim"},
+                        "content": "eq_faithfulskull"
+                    },          
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": " gains the following skill:"
+                    }
+                ]
             },        
             {
                 "tags": {"desc_type" : "paragraph"},
@@ -2217,10 +2431,24 @@
                 "id": ["eq_hellskull"]
             }
         },
-        "description": [            
+        "description": [             
             {
                 "tags": {"desc_type" : "paragraph"},
-                "content": "The skull screams as you mount it on a pole to mock God and paint it with blasphemous names. This item counts as a banner."
+                "content": "",
+                "subcontent": [
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "The "
+                    },
+                    {
+                        "tags": {"desc_type" : "equipmentslim"},
+                        "content": "eq_hellskull"
+                    },           
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": " screams as you mount it on a pole to mock God and paint it with blasphemous names. This item counts as a banner."
+                    }
+                ]
             },        
             {
                 "tags": {"desc_type" : "paragraph"},
@@ -2244,11 +2472,26 @@
             "count": 1,
             "id": ["eq_lockofsamsonshair"]
         }},
-        "description": [            
+        "description": [                 
             {
                 "tags": {"desc_type" : "paragraph"},
-                "content": "You discover a lock of hair of Samson, imbued with the unlimited strength of the strongest warrior to ever live. This item is a piece of equipment with the following rules:"
-            },          
+                "content": "", 
+                "subcontent": [
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": "You discover a "
+                    },
+                    {
+                        "tags": {"desc_type" : "equipmentslim"},
+                        "content": "eq_lockofsamsonshair"
+                    },         
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": ", imbued with the unlimited strength of the strongest warrior to ever live. This item is a piece of equipment with the following rules:"
+                    }
+                ]
+            }     
+            ,          
             {
                 "tags": {"desc_type" : "paragraph"},
                 "content": "The model with this item gains the Keyword STRONG and +1 to all Injury rolls in Melee.",

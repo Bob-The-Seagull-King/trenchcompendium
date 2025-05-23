@@ -559,7 +559,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         }
     },
     explorationtable: {
-        searchId: 'explorationtable',
+        searchId: 'campaign/explorationtable',
         width: 9 ,
         titlename : 'Exploration',
         laconic: "Locations you can find during a campaign",
@@ -741,7 +741,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         }
     },
     patron: {
-        searchId: 'patron',
+        searchId: 'campaign/patron',
         width: 9,
         titlename : 'Patrons',
         laconic: "Forces a warband must appease in campaigns",

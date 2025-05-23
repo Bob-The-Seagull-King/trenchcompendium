@@ -315,6 +315,20 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
                     </div>
                 )
             }
+            case "modelslim": {
+                return (
+                    <span className="">
+                        <span>
+                            {getModelSlimDisplay(item.Content?.toString() || "")}
+                        </span>
+                        <span>
+                            {item.SubContent?.map((subitem) => (
+                               <AdvancedDescriptionItemDisplay key="descriptionsubitem" data={subitem} parent={parentItem}/>
+                            ))}
+                        </span>
+                    </span>
+                )
+            }
             case "link": {
                 return (
                     <span>
@@ -496,6 +510,38 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
             <span className={'AdvancedDescriptionItemDisplay'} key={keyvar}>
                 {component !== null &&
                     <ModelDisplay data={component} />
+                }   
+            </span>
+        );
+    }
+
+    function getModelSlimDisplay(val : string) {
+        const [component, setcomponent] = useState<null | Model>(null);
+        const [keyvar, setkeyvar] = useState(0);
+
+        useEffect(() => {
+            async function getItem() {
+                
+                const ModelModule = await import("../../../../factories/features/ModelFactory");
+                const item = await ModelModule.ModelFactory.CreateNewModel(val, null)
+                setcomponent(item);
+                setkeyvar(keyvar + 1);
+            }
+
+            getItem();
+        }, []);
+
+
+        return (
+            <span className={'AdvancedDescriptionItemDisplay'} key={keyvar}>
+                {component !== null &&
+                    <RulesOverlay
+                        titlename={component.Name}
+                        d_name={component.Name}
+                        d_method={() =>
+                            
+                                <ModelDisplay data={component} />
+                            }/>
                 }   
             </span>
         );
