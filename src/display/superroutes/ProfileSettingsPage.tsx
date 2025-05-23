@@ -7,6 +7,7 @@ import {SYNOD} from "../../resources/api-constants";
 import LoadingOverlay from "../components/generics/Loading-Overlay";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faChevronLeft} from "@fortawesome/free-solid-svg-icons";
+import {ToastContainer, toast} from "react-toastify";
 
 
 
@@ -14,6 +15,9 @@ const ProfileSettingsPage: React.FC = () => {
     const { id } = useParams<{ id?: string }>();
     const { isLoggedIn, userId, authToken, logout } = useAuth();
     const navigate = useNavigate();
+
+    const [showToast, setShowToast] = useState(false)
+    const [toastMsg, setToastMsg] = useState('')
 
     const [nickname, setNickname] = useState('');
     const [email, setEmail] = useState('');
@@ -84,9 +88,11 @@ const ProfileSettingsPage: React.FC = () => {
             setInitialNickname(nickname);
             setInitialEmail(email);
             setPassword('');
-            setMessage('Settings saved successfully.');
+
+            toast.success('Settings saved successfully.')
         } catch (err: any) {
             setError(err.response?.data?.message || 'Failed to update settings.');
+            toast.error('Error: Settings could not be saved.')
         }
     };
 
@@ -100,6 +106,18 @@ const ProfileSettingsPage: React.FC = () => {
 
     return (
         <div className="ProfileSettingsPage">
+            <ToastContainer
+                position="bottom-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
+
             <div className="container">
                 <div className="row">
                     <div className="col-12">
