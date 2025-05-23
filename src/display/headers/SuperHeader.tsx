@@ -44,8 +44,8 @@ const SuperHeader: React.FC<IControllerProp> = (prop) => {
     }, [location])
 
     
-        // Navigation
-        const navigate = useNavigate();
+    // Navigation
+    const navigate = useNavigate();
 
     const [show, setShow] = useState(false);
 
@@ -57,13 +57,61 @@ const SuperHeader: React.FC<IControllerProp> = (prop) => {
     const handleClosesettings = () => setShowsettings(false);
     const handleShowsettings = () => setShowsettings(true);
 
+
+    /**
+     * Handles the hiding and showing of the header when scrolling
+     */
+    const [isShy, setIsShy] = useState(false)
+    const lastScrollY = useRef(window.scrollY)
+    const upScrollTotal = useRef(0)
+    const downScrollTotal = useRef(0)
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const currentScroll = window.scrollY
+            const delta = currentScroll - lastScrollY.current
+
+            if (currentScroll === 0) {
+                setIsShy(false)
+                upScrollTotal.current = 0
+            } else {
+                if (delta > 0) { // Scrolling down
+                    downScrollTotal.current += Math.abs(delta)
+
+                    if (downScrollTotal.current >= 55) {
+                        setIsShy(true)
+                        downScrollTotal.current = 0 // reset after hiding
+                    }
+
+                } else if (delta < 0) { // Scrolling up
+
+                    upScrollTotal.current += Math.abs(delta)
+
+                    if (upScrollTotal.current >= 55) {
+                        setIsShy(false)
+                        upScrollTotal.current = 0 // reset after reveal
+                    }
+                }
+            }
+
+            lastScrollY.current = currentScroll
+        }
+
+        window.addEventListener('scroll', handleScroll)
+        return () => {
+            window.removeEventListener('scroll', handleScroll)
+        }
+    }, [])
+
+    
+
     // Return result -----------------------------
     return (    
         <ErrorBoundary fallback={<div>Something went wrong with SuperHeader.tsx</div>}>
             <>
-                <div className="header-main-spacer"></div>
+                <div className={`header-main-spacer`}></div>
 
-                <div ref={ref} className="header-main">
+                <div ref={ref} className={`header-main ${isShy ? 'shy' : ''}`}>
                     <Routes>
                         <Route element={
                             <BaseHeader  showstate={handleShow} controller={prop.controller} showsettings={handleShowsettings}/>
