@@ -1,20 +1,20 @@
 // // // // //
 //
-// A user list entry
+// A list entry for a warband
 //
 
-.UserListEntry
+.WarbandListEntry
     display: flex
     margin-bottom: 15px
 
-    .UserListEntry-image-wrap
+    .WarbandListEntry-image-wrap
         display: block
         position: relative
         aspect-ratio: 1 / 1
         width: 75px
         height: 75px
 
-    .UserListEntry-image
+    .WarbandListEntry-image
         position: absolute
         z-index: 2
         top: 0
@@ -25,15 +25,21 @@
         object-position: center
         object-fit: cover
 
-    .UserListEntry-text
+    .WarbandListEntry-text
         padding-left: 15px
-        padding-top: 10px
-    .user-name
+        padding-top: 0
+
+    .warband-name
         color: $color-text
         text-decoration: none
 
         &:hover
             text-decoration: none
 
-    .user-status
+    .warband-faction
         color: $color-text-muted
+        font-size: 14px
+
+    .warband-value
+        color: $color-text-muted
+        font-size: 14px

@@ -1,20 +1,21 @@
 // // // // //
 //
-// A user list entry
+// A List entry for a campaign
 //
 
-.UserListEntry
+
+.CampaignListEntry
     display: flex
     margin-bottom: 15px
 
-    .UserListEntry-image-wrap
+    .CampaignListEntry-image-wrap
         display: block
         position: relative
         aspect-ratio: 1 / 1
         width: 75px
         height: 75px
 
-    .UserListEntry-image
+    .CampaignListEntry-image
         position: absolute
         z-index: 2
         top: 0
@@ -25,15 +26,16 @@
         object-position: center
         object-fit: cover
 
-    .UserListEntry-text
+    .CampaignListEntry-text
         padding-left: 15px
         padding-top: 10px
-    .user-name
+
+    .campaign-name
         color: $color-text
         text-decoration: none
 
         &:hover
             text-decoration: none
 
-    .user-status
+    .campaign-status
         color: $color-text-muted

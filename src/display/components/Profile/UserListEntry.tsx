@@ -20,7 +20,7 @@ const UserListEntry: React.FC<UserListEntryProps> = ({ id, username, status }) =
     const randomId = imageIds[Math.floor(Math.random() * imageIds.length)]
 
     const navigate = useNavigate();
-    
+
     return (
         <div className="UserListEntry">
             <CustomNavLink

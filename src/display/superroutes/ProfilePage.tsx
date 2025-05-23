@@ -12,6 +12,8 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCog, faDownload, faPlus} from "@fortawesome/free-solid-svg-icons";
 import ProfilePageAchievements from "../components/Profile/ProfilePageAchievements";
 import ProfilePageFriends from "../components/Profile/ProfilePageFriends";
+import ProfilePageCampaigns from "../components/Profile/ProfilePageCampaigns";
+import ProfilePageWarbands from "../components/Profile/ProfilePageWarbands";
 
 /**
  * On this page, any user can see a profile.
@@ -66,11 +68,18 @@ const ProfilePage: React.FC = () => {
 
                     <div className={'col-12'}>
                         <ProfilePageAchievements userId={parseInt(id)} />
-
                     </div>
 
                     <div className={'col-12'}>
                         <ProfilePageFriends userId={parseInt(id)} />
+                    </div>
+
+                    <div className={'col-12'}>
+                        <ProfilePageCampaigns userId={parseInt(id)} />
+                    </div>
+
+                    <div className={'col-12'}>
+                        <ProfilePageWarbands userId={parseInt(id)} />
                     </div>
                 </div>
             </div>
