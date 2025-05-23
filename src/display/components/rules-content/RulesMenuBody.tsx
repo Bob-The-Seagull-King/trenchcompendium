@@ -75,7 +75,7 @@ const RulesMenuBody: React.FC<RulesMenuBodyProps> = ({ controller, onBack, onNav
                 slug: "campaign",
                 children: [
                     {
-                        title: "Rules",
+                        title: "Campaign Rules",
                         slug: "campaign_rules",
                         controller: controller.CampaignRulesCollectionController
                     },
@@ -85,7 +85,7 @@ const RulesMenuBody: React.FC<RulesMenuBodyProps> = ({ controller, onBack, onNav
                         controller: controller.PatronCollectionController
                     },
                     {
-                        title: "Exploration",
+                        title: "Exploration Locations",
                         slug: "explorationtable",
                         controller: controller.ExplorationTableCollectionController
                     },
@@ -100,7 +100,7 @@ const RulesMenuBody: React.FC<RulesMenuBodyProps> = ({ controller, onBack, onNav
                 ]
             },
             {
-                title: "Errata",
+                title: "Rules Errata & FAQ",
                 slug: "errata",
                 controller: controller.ErrataRulesCollectionController
             }

@@ -91,9 +91,23 @@
                                 "content": "Early Campaign (Battles 1-3)"
                             },
                             {
-                                "tags": {"desc_type" : "headless_table"},
+                                "tags": {"desc_type" : "headed_table"},
                                 "content": "",
                                 "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_headrow"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "table_headitem"},
+                                                "content": "Battle Number"
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "table_headitem"},
+                                                "content": "Scenario"
+                                            }
+                                        ]
+                                    },
                                     {
                                         "tags": {"desc_type" : "table_row"},
                                         "content": "",
@@ -221,9 +235,23 @@
                                 "content": "Mid Campaign (Battles 4-9)"
                             },
                             {
-                                "tags": {"desc_type" : "headless_table"},
+                                "tags": {"desc_type" : "headed_table"},
                                 "content": "",
                                 "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_headrow"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "table_headitem"},
+                                                "content": "Battle Number"
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "table_headitem"},
+                                                "content": "Scenario"
+                                            }
+                                        ]
+                                    },
                                     {
                                         "tags": {"desc_type" : "table_row"},
                                         "content": "",
@@ -357,9 +385,23 @@
                                 "content": "Endgame (Battles 9-11)"
                             },
                             {
-                                "tags": {"desc_type" : "headless_table"},
+                                "tags": {"desc_type" : "headed_table"},
                                 "content": "",
                                 "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_headrow"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "table_headitem"},
+                                                "content": "Battle Number"
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "table_headitem"},
+                                                "content": "Scenario"
+                                            }
+                                        ]
+                                    },
                                     {
                                         "tags": {"desc_type" : "table_row"},
                                         "content": "",
@@ -478,15 +520,45 @@
                         "subcontent": [
                             {
                                 "tags": {"desc_type" : "bold"},
-                                "content": "Final Battle (Battle 12)"
+                                "content": "Final Battle"
                             },
                             {
-                                "tags": {"desc_type" : "table_item"},
+                                "tags": {"desc_type" : "headed_table"},
                                 "content": "",
                                 "subcontent": [
                                     {
-                                        "tags": {"desc_type" : "link", "url": "/compendium/scenario/sc_greatwar"},
-                                        "content": "Play the Great War scenario"
+                                        "tags": {"desc_type" : "table_headrow"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "table_headitem"},
+                                                "content": "Battle Number"
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "table_headitem"},
+                                                "content": "Scenario"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_row"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "12"
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "",
+                                                "subcontent": [
+                                                    {
+                                                        "tags": {"desc_type" : "link", "url": "/compendium/scenario/sc_greatwar"},
+                                                        "content": "Play the Great War scenario"
+                                                    }
+                                                ]
+                                            }
+                                        ]
                                     }
                                 ]
                             }
@@ -1229,7 +1301,7 @@
                 "content": [ ]
             },
             {
-                "title": "",
+                "title": "Non-Elite Promotions",
                 "description":  [
                     {
                         "tags": {"desc_type" : "paragraph"},
@@ -1397,9 +1469,26 @@
                 "description":  [
                     {
                         "tags": {"desc_type" : "paragraph"},
-                        "content": "After the Battle, both Players are allocated Exploration Dice as shown below. All warbands begin a campaign with the Reroll Exploration Skill In addition, the Winner of the Battle can re-roll any 1 of the Exploration Dice during the Looting and Exploration Step.",
-                        "glossary": [
-                            {"val": "Exploration Dice", "id": "gl_explorationdice"}
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "After the Battle, both Players are allocated Exploration Dice as shown below. All warbands begin a campaign with the ",
+                                "glossary": [
+                                    {"val": "Exploration Dice", "id": "gl_explorationdice"}
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "skillslim"},
+                                "content": "es_reroll"
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": " Exploration Skill. In addition, the Winner of the Battle can re-roll any 1 of the Exploration Dice during the Looting and Exploration Step.",
+                                "glossary": [
+                                    {"val": "Exploration Dice", "id": "gl_explorationdice"}
+                                ]
+                            }
                         ]
                     },
                     {
@@ -1564,7 +1653,13 @@
                                     },
                                     {
                                         "tags": {"desc_type" : "table_item"},
-                                        "content": "Common Exploration Locations"
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "link", "url": "/compendium/campaign/explorationtable/et_commonlocations"},
+                                                "content": "Common Exploration Locations"
+                                            }
+                                        ]
                                     }
                                 ]
                             },
@@ -1578,7 +1673,21 @@
                                     },
                                     {
                                         "tags": {"desc_type" : "table_item"},
-                                        "content": "Common or Rare Exploration Locations"
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "link", "url": "/compendium/campaign/explorationtable/et_commonlocations"},
+                                                "content": "Common "
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "default", "url": "/compendium/campaign/explorationtable/et_commonlocations"},
+                                                "content": " or "
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "link", "url": "/compendium/campaign/explorationtable/et_rarelocations"},
+                                                "content": "Rare Exploration Locations"
+                                            }
+                                        ]
                                     }
                                 ]
                             },
@@ -1592,7 +1701,13 @@
                                     },
                                     {
                                         "tags": {"desc_type" : "table_item"},
-                                        "content": "Rare Exploration Locations"
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "link", "url": "/compendium/campaign/explorationtable/et_rarelocations"},
+                                                "content": "Rare Exploration Locations"
+                                            }
+                                        ]
                                     }
                                 ]
                             },
@@ -1606,7 +1721,21 @@
                                     },
                                     {
                                         "tags": {"desc_type" : "table_item"},
-                                        "content": "Rare or Legendary Exploration Locations"
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "link", "url": "/compendium/campaign/explorationtable/et_rarelocations"},
+                                                "content": "Rare"
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "default", "url": "/compendium/campaign/explorationtable/et_commonlocations"},
+                                                "content": " or "
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "link", "url": "/compendium/campaign/explorationtable/et_legendarylocations"},
+                                                "content": "Legendary Exploration Locations"
+                                            }
+                                        ]
                                     }
                                 ]
                             }
@@ -1634,7 +1763,15 @@
                 "description":  [
                     {
                         "tags": {"desc_type" : "paragraph"},
-                        "content": "Each Warband Starts the Campaign with the Reroll Skill. More can be earned during the campaign or by hiring Allies. You can have multiples of any of the Skills on this list."
+                        "content": "Each Warband Starts the Campaign with the "
+                    },
+                    {
+                        "tags": {"desc_type" : "skillslim"},
+                        "content": "es_reroll"
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": " Skill. More can be earned during the campaign or by hiring Allies. You can have multiples of any of the Skills on this list."
                     }
                  ],
                 "content": [ ]

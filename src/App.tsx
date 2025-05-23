@@ -33,8 +33,8 @@ import WbbEditPage from "./display/pages/WbbEditPage";
 import PrivacyPopup from "./display/components/generics/PrivacyPopup";
 import {TrackingManager} from "./display/components/generics/TrackingManager";
 import PrivacyPage from "./display/superroutes/PrivacyPage";
-import ProfileEditPage from "./display/superroutes/ProfileEditPage";
-import ProfileViewPage from "./display/superroutes/ProfileViewPage";
+import ProfileSettingsPage from "./display/superroutes/ProfileSettingsPage";
+import ProfilePage from "./display/superroutes/ProfilePage";
 
 
 const App: React.FC = () => {
@@ -67,8 +67,8 @@ const App: React.FC = () => {
                                 <Route path={ROUTES.WARBAND_ROUTE} element={<WarbandRoute controller={toolcontroller} />} />
                                 <Route path={ROUTES.LOGIN_ROUTE} element={<SynodLoginPage />} /> {/* Login Page */}
                                 <Route path={ROUTES.PRIVACY_ROUTE} element={<PrivacyPage />} /> {/* Privacy Page */}
-                                <Route path={ROUTES.PROFILE_EDIT_ROUTE} element={<ProfileEditPage />} /> {/* Edit Profile Page */}
-                                <Route path={ROUTES.PROFILE_VIEW_ROUTE} element={<ProfileViewPage />} />
+                                <Route path={ROUTES.PROFILE_SETTINGS_ROUTE} element={<ProfileSettingsPage />} /> {/* Edit Profile Page */}
+                                <Route path={ROUTES.PROFILE_VIEW_ROUTE} element={<ProfilePage />} />
                             </Routes>
                         </Router>
                     </PersistGate>

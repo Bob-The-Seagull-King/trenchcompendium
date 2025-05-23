@@ -639,6 +639,33 @@
         "new_abilities" : []
     },
     {
+        "id": "md_mechanisedheavyinfantry_abyssianna",
+        "name": "Abyssinian Mechanised Infantry",
+        "source": "core",
+        "tags": {},
+        "contextdata": {},
+        "base_id": "md_mechanisedheavyinfantry",
+        "variant_name": "Expeditionary_Forced_of_Abyssinia",
+        "team": "faithful",
+        "cut_keywords" : [],
+        "keywords" : [],
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Abyssinian Heavy Infantry always wear Light Machine Armour which counts as Reinforced Armour (32mm Base). This is reflected in the cost and profile above. They can be equipped with any weapon, armour and equipment from the New Antioch Armoury.",
+                "glossary": [
+                    {"val": "New Antioch", "id": "kw_antioch"}
+                ]
+            }
+        ],
+        "stats" : {
+            "ranged": 0,
+            "melee": 1
+        },
+        "cut_abilities" : [],
+        "new_abilities" : []
+    },
+    {
         "id": "md_grailthrall_flythrall",
         "name": "Fly Thrall",
         "source": "core",

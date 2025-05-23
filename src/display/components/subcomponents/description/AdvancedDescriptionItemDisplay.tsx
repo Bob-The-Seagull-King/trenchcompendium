@@ -30,6 +30,8 @@ import RulesEquipmentStats from '../../../components/rules-content/RulesEquipmen
 import RulesOverlay from '../../../components/rules-content/RulesOverlay';
 import { useGlobalState } from '../../../../utility/globalstate';
 import CustomNavLink from '../interactables/CustomNavLink';
+import { Skill } from '../../../../classes/feature/ability/Skill';
+import SkillDisplay from '../../../components/features/skill/SkillDisplay';
 
 const AdvancedDescriptionItemDisplay = (props: any) => {
     const description: AdvancedDescription = props.data
@@ -107,7 +109,7 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
             }
             case "headed_table": {
                 return (
-                    <table className="table_headed">
+                    <table className="table_headed table_headed-highlight">
                         {item.SubContent?.map((subitem) => (
                             <AdvancedDescriptionItemDisplay key="descriptionsubitem" data={subitem} parent={parentItem}/>
                         ))}
@@ -273,7 +275,7 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
             }
             case "equipmentslim": {
                 return (
-                    <div className="">
+                    <span>
                         <span>
                             {getEquipmentSlimDisplay(item.Content?.toString() || "")}
                         </span>
@@ -282,7 +284,21 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
                                <AdvancedDescriptionItemDisplay key="descriptionsubitem" data={subitem} parent={parentItem}/>
                             ))}
                         </span>
-                    </div>
+                    </span>
+                )
+            }
+            case "skillslim": {
+                return (
+                    <span>
+                        <span>
+                            {getSkillSlimDisplay(item.Content?.toString() || "")}
+                        </span>
+                        <span>
+                            {item.SubContent?.map((subitem) => (
+                               <AdvancedDescriptionItemDisplay key="descriptionsubitem" data={subitem} parent={parentItem}/>
+                            ))}
+                        </span>
+                    </span>
                 )
             }
             case "model": {
@@ -415,6 +431,42 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
                                         baseobject={component}
                                     />
                                     <RulesEquipmentMain data={component}/>
+                                </div>
+                                }/>
+                </>
+                }
+            </span>
+        );
+    }
+    
+    function getSkillSlimDisplay(val : string) {
+        
+        const [component, setcomponent] = useState<null | Skill>(null);
+        const [keyvar, setkeyvar] = useState(0);
+
+        useEffect(() => {
+            async function getItem() {                
+                const SkillModile = await import("../../../../factories/features/SkillFactory");
+                const item = await SkillModile.SkillFactory.CreateNewSkill(val, null)
+                setcomponent(item);
+                setkeyvar(keyvar + 1);
+            }
+
+            getItem();
+        }, []);
+
+
+        return (
+            <span className={'AdvancedDescriptionItemDisplay-getEquipmentDisplay'} key={keyvar}>
+                {component !== null &&
+                    <>
+                        <RulesOverlay
+                            titlename={component.Name}
+                            d_name={component.Name}
+                            d_method={() =>
+                                
+                                <div className={'skill-description'}>
+                                    <SkillDisplay data={component}/>
                                 </div>
                                 }/>
                 </>

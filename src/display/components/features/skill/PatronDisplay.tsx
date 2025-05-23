@@ -7,6 +7,8 @@ import { returnDescription } from '../../../../utility/util'
 import SkillDisplay from './SkillDisplay';
 import { Patron } from '../../../../classes/feature/skillgroup/Patron';
 import RulesCollapsibleContent from "../../rules-content/RulesCollapsibleContent";
+import GenericCollapsableBlockDisplay from '../../../components/generics/GenericCollapsableBlockDisplay';
+import GenericTabledBlockDisplay from '../../../components/generics/GenereicTabledBlockDisplay';
 
 const PatronDisplay = (props: any) => {
     const patronObject : Patron = props.data
@@ -36,18 +38,29 @@ const PatronDisplay = (props: any) => {
                         </i>
 
                     </div>
+                    <div className={'rules-card-content rules-card-table-content rules-skill-table-content'}>
+                        <table className={'rules-card-table rules-skill-table-content-table'}>
+                            <tbody>
+                                {patronObject.Skills.map((item) => (
+                                    <tr key={item.ID}>
+                                        
+                                        <td>
+                                            <div className={'skill-name'}>
+                                                <strong>
+                                                    {item.Name}
+                                                </strong>
+                                            </div>
 
-                    <div>
-
-                    {patronObject.Skills.map((item) => (
-                        <RulesCollapsibleContent key={item.ID}
-                             headline={item.Name}
-                             content={
-                                 <SkillDisplay data={item} />
-                             }
-                        />
-                    ))}
+                                            <div className={'skill-description'}>
+                                                <SkillDisplay data={item}/>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
                     </div>
+                    
                 </div>
 
 
