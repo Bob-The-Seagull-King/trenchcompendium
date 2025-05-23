@@ -14,6 +14,7 @@ import ProfilePageAchievements from "../components/Profile/ProfilePageAchievemen
 import ProfilePageFriends from "../components/Profile/ProfilePageFriends";
 import ProfilePageCampaigns from "../components/Profile/ProfilePageCampaigns";
 import ProfilePageWarbands from "../components/Profile/ProfilePageWarbands";
+import CustomNavLink from "../components/subcomponents/interactables/CustomNavLink";
 
 /**
  * On this page, any user can see a profile.
@@ -53,11 +54,17 @@ const ProfilePage: React.FC = () => {
                             </h2>
 
                             {isOwnProfile ? (
-                                <button className={'btn btn-primary'}>
+                                <CustomNavLink
+                                    classes={'btn btn-primary'}
+                                    link={`/profile/${id}/settings`}
+                                    runfunc={() => {
+                                        navigate(`/profile/${id}/settings`)
+                                    }}>
                                     <FontAwesomeIcon icon={faCog} className="icon-inline-left"/>
                                     {'Settings'}
-                                </button>
+                                </CustomNavLink>
                             ) : (
+                                // @TODO: add friend action
                                 <button className={'btn btn-primary'}>
                                     <FontAwesomeIcon icon={faPlus} className="icon-inline-left"/>
                                     {'Add Friend'}
