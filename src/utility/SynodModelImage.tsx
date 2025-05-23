@@ -21,11 +21,6 @@ const SynodModelImage: React.FC<SynodModelImageProps> = ({ modelSlug, size = 'fu
     if( error ) {
         return null;
     }
-    
-    
-        useEffect(() => {
-            console.log("RE-RENDER" + url);
-        }, [url]);
 
     return (
         <img

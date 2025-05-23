@@ -22,7 +22,7 @@ export function useSynodModelImageData(modelSlug: string, size = 'full'): ModelI
 
     useEffect(() => {
         async function runImageCheck() {
-            if (!modelSlug) return data;
+            if (!modelSlug) return;
 
 
             const synodcache : SynodImageCache = SynodImageCache.getInstance();
@@ -30,7 +30,7 @@ export function useSynodModelImageData(modelSlug: string, size = 'full'): ModelI
             const key = `${modelSlug}-${size}`;
             if (synodcache.CheckModelCache(key)) {
                 setData({ ...synodcache.imageModelCache[key] });
-                return data;
+                return;
             }
 
             const synodUrl = 'https://synod.trench-companion.com/';
@@ -41,21 +41,10 @@ export function useSynodModelImageData(modelSlug: string, size = 'full'): ModelI
                 while ((!synodcache.CheckModelCache(key)) && (count_check < EMERGENCY_OUT)) {
                     await delay(100);
                     count_check += 1;
-                }               
-                if ((!synodcache.CheckModelCache(key)))    {
-                    setData({
-                    url: '',
-                    sourceTitle: '',
-                    sourceUrl: '',
-                    imageId: 0,
-                    modelName: '',
-                    modelId: 0,
-                    loading: true,
-                    error: false,
-                })
-                } else {
+                }    
+                if (synodcache.CheckModelCache(key)) {
                     setData({ ...synodcache.imageModelCache[key] })
-                }
+                }               
             }
 
             if (!synodcache.CheckModelCache(key)) {
@@ -79,29 +68,28 @@ export function useSynodModelImageData(modelSlug: string, size = 'full'): ModelI
                             loading: false,
                             error: !json.image || !json.image?.source_url,
                         };
+                        
                         synodcache.AddModelCache(modelSlug, result);
                         setData({ ...synodcache.imageModelCache[key] });
                     })
                     .catch(() => {
                         setData(prev => ({ ...prev, loading: false, error: true }));
                     });
-            } else {             
-                if ((!synodcache.CheckModelCache(key)))    {
-                    setData({
-                    url: '',
-                    sourceTitle: '',
-                    sourceUrl: '',
-                    imageId: 0,
-                    modelName: '',
-                    modelId: 0,
-                    loading: true,
-                    error: false,
-                })
-                } else {
-                    setData({ ...synodcache.imageModelCache[key] })
-                }
+            } else {
+                setData({ ...synodcache.imageModelCache[key] });
             }
         }
+
+        setData({
+            url: '',
+            sourceTitle: '',
+            sourceUrl: '',
+            imageId: 0,
+            modelName: '',
+            modelId: 0,
+            loading: true,
+            error: false,
+        });
         runImageCheck();
     }, [modelSlug, size]);
 

@@ -12,7 +12,6 @@ const FighterCardImageWrap: React.FC<FighterCardImageWrapProps> = ({ model_slug 
     return (
         <div className={'fighter-image-wrap'}>
             <SynodModelImage
-                key={model_slug}
                 modelSlug={model_slug}
                 size="medium"
                 className="fighter-image"
