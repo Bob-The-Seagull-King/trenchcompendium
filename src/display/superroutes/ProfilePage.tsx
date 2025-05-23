@@ -32,10 +32,9 @@ const ProfilePage: React.FC = () => {
 
     return (
         <div className="ProfilePage">
-
             <div className={'container'}>
                 <div className={'row'}>
-                    <div className={'col-12'}>
+                    <div className={'col-12 col-lg-7'}>
                         <div className={'profile-intro'}>
                             <div className={'profile-image-wrap'}>
                                 <SynodImage
@@ -45,61 +44,55 @@ const ProfilePage: React.FC = () => {
                                 />
                             </div>
 
-                            <h1 className={'profile-name'}>
-                                {'Super Trencher'}
-                            </h1>
+                            <div className={'profile-intro-text'}>
+                                <h1 className={'profile-name'}>
+                                    {'Super Trencher'}
+                                </h1>
 
-                            <h2 className={'profile-sub'}>
-                                {'Supporter'}
-                            </h2>
+                                <h2 className={'profile-sub'}>
+                                    {'Supporter'}
+                                </h2>
 
-                            {isOwnProfile ? (
-                                <CustomNavLink
-                                    classes={'btn btn-primary'}
-                                    link={`/profile/${id}/settings`}
-                                    runfunc={() => {
-                                        navigate(`/profile/${id}/settings`)
-                                    }}>
-                                    <FontAwesomeIcon icon={faCog} className="icon-inline-left"/>
-                                    {'Settings'}
-                                </CustomNavLink>
-                            ) : (
-                                // @TODO: add friend action
-                                <button className={'btn btn-primary'}>
-                                    <FontAwesomeIcon icon={faPlus} className="icon-inline-left"/>
-                                    {'Add Friend'}
-                                </button>
-                            )}
+                                {isOwnProfile ? (
+                                    <CustomNavLink
+                                        classes={'btn btn-primary'}
+                                        link={`/profile/${id}/settings`}
+                                        runfunc={() => {
+                                            navigate(`/profile/${id}/settings`)
+                                        }}>
+                                        <FontAwesomeIcon icon={faCog} className="icon-inline-left"/>
+                                        {'Settings'}
+                                    </CustomNavLink>
+                                ) : (
+                                    // @TODO: add friend action
+                                    <button className={'btn btn-primary'}>
+                                        <FontAwesomeIcon icon={faPlus} className="icon-inline-left"/>
+                                        {'Add Friend'}
+                                    </button>
+                                )}
+                            </div>
                         </div>
+
+                        <div className={'hide-lg-up'}>
+                            <ProfilePageAchievements userId={parseInt(id)}/>
+
+                            <ProfilePageFriends userId={parseInt(id)}/>
+                        </div>
+
+                        <ProfilePageCampaigns userId={parseInt(id)}/>
+
+                        <ProfilePageWarbands userId={parseInt(id)}/>
                     </div>
 
-                    <div className={'col-12'}>
-                        <ProfilePageAchievements userId={parseInt(id)} />
-                    </div>
+                    <div className={'col-12 col-lg-5'}>
+                        <div className={'hide-lg-down'}>
+                            <ProfilePageAchievements userId={parseInt(id)}/>
 
-                    <div className={'col-12'}>
-                        <ProfilePageFriends userId={parseInt(id)} />
-                    </div>
-
-                    <div className={'col-12'}>
-                        <ProfilePageCampaigns userId={parseInt(id)} />
-                    </div>
-
-                    <div className={'col-12'}>
-                        <ProfilePageWarbands userId={parseInt(id)} />
+                            <ProfilePageFriends userId={parseInt(id)}/>
+                        </div>
                     </div>
                 </div>
             </div>
-
-            <h1>Viewing Profile: {id}</h1>
-
-            {isOwnProfile && (
-                <div className="own-profile-actions mt-3">
-                    <button onClick={logout} className="btn btn-secondary">
-                        Log out
-                    </button>
-                </div>
-            )}
         </div>
     )
 }
