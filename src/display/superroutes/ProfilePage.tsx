@@ -15,6 +15,8 @@ import ProfilePageFriends from "../components/Profile/ProfilePageFriends";
 import ProfilePageCampaigns from "../components/Profile/ProfilePageCampaigns";
 import ProfilePageWarbands from "../components/Profile/ProfilePageWarbands";
 import CustomNavLink from "../components/subcomponents/interactables/CustomNavLink";
+import {SYNOD} from "../../resources/api-constants";
+import {ToastContainer} from "react-toastify";
 
 /**
  * On this page, any user can see a profile.
@@ -28,8 +30,24 @@ const ProfilePage: React.FC = () => {
 
     const isOwnProfile = isLoggedIn && id && parseInt(id, 10) === userId
 
+    /**
+     * Get public user Data
+     */
+    const [userData, setUserData] = React.useState<any>(null)
+    React.useEffect(() => {
+        if (!id) return
+
+        fetch(`${SYNOD.URL}/wp-json/synod/v1/user-public/${id}`)
+            .then(res => res.json())
+            .then(data => setUserData(data))
+            .catch(err => console.error('Failed to fetch user data', err))
+    }, [id])
+
     if (!id) return null
 
+    if( userData ) {
+        console.log(userData)
+    }
     return (
         <div className="ProfilePage">
             <div className={'container'}>
@@ -46,7 +64,7 @@ const ProfilePage: React.FC = () => {
 
                             <div className={'profile-intro-text'}>
                                 <h1 className={'profile-name'}>
-                                    {'Super Trencher'}
+                                    {userData?.nickname || 'Loading...'}
                                 </h1>
 
                                 <h2 className={'profile-sub'}>
@@ -93,7 +111,12 @@ const ProfilePage: React.FC = () => {
                     </div>
                 </div>
             </div>
+
+            <button onClick={logout} className="btn btn-secondary mt-3">
+                Log out
+            </button>
         </div>
+
     )
 }
 
