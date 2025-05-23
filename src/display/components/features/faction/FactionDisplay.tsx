@@ -136,7 +136,7 @@ const FactionDisplay = (props: any) => {
                     }
                 </>
             }
-            <div className=""/>
+
             <div key={usekey}>
             {factionObject.Models.filter((item) => (item.Captain == true && item.Mercenary == false)).length > 0 &&
                 <>
@@ -198,7 +198,6 @@ const FactionDisplay = (props: any) => {
             </div>
             {factionObject.EquipmentItems.length > 0 &&
                 <>
-
                     <RulesHeadlineDisplay
                         content="Armoury"
                         level={2}

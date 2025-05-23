@@ -55,21 +55,13 @@ const ExplorationLocationDisplay = (props: any) => {
 
     return (
         <ErrorBoundary fallback={<div>Something went wrong with ExplorationLocationDisplay.tsx</div>}>
-            <div className='abilityInternalStructure' key={_keyvar}>
-                <div className='row'>
-                    {returnDescription(explorationLocationObject, explorationLocationObject.Description)}
-                </div>
-                <div className='row'>
+            <div className={'ExplorationLocationDisplay'}>
+                {returnDescription(explorationLocationObject, explorationLocationObject.Description)}
+                <OptionSetStaticDisplay data={explorationLocationObject.MyOptions} />
+                <div className=" bodytext complextext">
                     {
-                        <OptionSetStaticDisplay data={explorationLocationObject.MyOptions} />
+                        useLimits.join(", ")
                     }
-                </div>
-                <div className='row'>
-                    <div className=" bodytext complextext">
-                        {
-                            useLimits.join(", ")
-                        }
-                    </div>
                 </div>
             </div>
         </ErrorBoundary>
