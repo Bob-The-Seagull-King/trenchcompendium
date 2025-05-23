@@ -1,0 +1,48 @@
+// // // // //
+//
+// Breadcrumb Navigation
+//
+
+.RulesBreadCrumbs
+    margin: 0px 0 30px
+    font-size: 14px
+    background-color: $color-bg-3
+    padding: 5px 0
+
+    > .container
+        position: relative
+
+        &:after
+            content: ""
+            position: absolute
+            z-index: 5
+            top: 0
+            bottom: 0
+            right: 0
+            width: 30px
+            background: linear-gradient(270deg, $color-bg-3 0%, rgba(51, 51, 51, 0) 100%)
+
+    .breadcrumb-item
+        color: $color-text
+        text-decoration: none
+
+        &:hover
+            text-decoration: none
+
+    .breadcrumb-separator
+        font-size: 12px
+
+    .RulesBreadCrumbs-inner
+        position: relative
+        padding-right: 30px
+        white-space: nowrap
+        overflow-x: auto
+        overflow-y: hidden
+        -webkit-overflow-scrolling: touch // smooth scrolling on iOS
+
+        scrollbar-width: none // Firefox
+
+        &::-webkit-scrollbar // Chrome, Safari
+            display: none
+
+
