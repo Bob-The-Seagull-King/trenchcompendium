@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import {SYNOD} from "../resources/api-constants";
 
 interface SynodWarbandURLProps {
     WarbandId: number;
@@ -17,10 +18,8 @@ const SynodGetWarband = ({ WarbandId }: SynodWarbandURLProps): string => {
 
     useEffect(() => {
 
-        // const synodUrl = 'http://synod.trench-companion.test/'; // this is for local dev
-        const synodUrl = 'https://synod.trench-companion.com/'; // This is for prod
 
-        fetch(`${synodUrl}wp-json/wp/v2/warband/${WarbandId}`)
+        fetch(`${SYNOD.URL}/wp-json/wp/v2/warband/${WarbandId}`)
             .then(res => res.json())
             .then(data => {
 

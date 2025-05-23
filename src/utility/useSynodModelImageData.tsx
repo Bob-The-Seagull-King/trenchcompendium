@@ -1,6 +1,7 @@
 // Hook: useSynodModelImageData
 import { ModelImageData, SynodImageCache } from '../classes/_high_level_controllers/SynodImageCache';
 import { useEffect, useState, useRef } from 'react';
+import {SYNOD} from "../resources/api-constants";
 
 const delay = (ms: number | undefined) => new Promise(res => setTimeout(res, ms));
 
@@ -48,9 +49,7 @@ export async function useSynodModelImageData(modelSlug: string, size = 'full'): 
         return data;
     }
 
-    const synodUrl = 'https://synod.trench-companion.com/';
-
-    if (synodcache.CheckModelCallCache(key)) {    
+    if (synodcache.CheckModelCallCache(key)) {
         const EMERGENCY_OUT = 1000; // If we spend 100 seconds on one image, just give up
         let count_check = 0;
         while ((!synodcache.CheckModelCache(key)) && (count_check < EMERGENCY_OUT)) {
@@ -64,7 +63,7 @@ export async function useSynodModelImageData(modelSlug: string, size = 'full'): 
 
     if (!synodcache.CheckModelCache(key)) {
         synodcache.AddModelCallCache(key);
-        const response : Response = await fetch(`${synodUrl}wp-json/synod/v1/model-image/${modelSlug}`)
+        const response : Response = await fetch(`${SYNOD.URL}/wp-json/synod/v1/model-image/${modelSlug}`)
 
         if (response) {
             console.log(response)

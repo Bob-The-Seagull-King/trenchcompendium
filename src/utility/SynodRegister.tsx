@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCircleNotch} from "@fortawesome/free-solid-svg-icons";
+import {SYNOD} from "../resources/api-constants";
 
 const SynodRegister = () => {
     const [email, setEmail] = useState('');
@@ -10,10 +11,6 @@ const SynodRegister = () => {
     const [message, setMessage] = useState('');
 
     const [isLoading, setIsLoading] = useState(false); // Loading state
-
-    // const synodUrl = 'http://synod.trench-companion.test/'; // this is for local dev
-    const synodUrl = 'https://synod.trench-companion.com/'; // this is for prod
-
 
     const handleSubmit = async (e: any) => {
         e.preventDefault();
@@ -27,7 +24,7 @@ const SynodRegister = () => {
         }
 
         try {
-            const response = await axios.post(synodUrl+'wp-json/wp/v2/users/register', {
+            const response = await axios.post(SYNOD.URL+'/wp-json/wp/v2/users/register', {
                 username: email,
                 email,
                 password,

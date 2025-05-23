@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useAuth } from './AuthContext';
+import {SYNOD} from "../resources/api-constants";
 
 
 const SynodCreateWarband: React.FC = () => {
     const [warbandData, setWarbandData] = useState('');
     const [message, setMessage] = useState('');
     const [error, setError] = useState('');
-
-    // const synodUrl = 'http://synod.trench-companion.test/'; // this is for local dev
-    const synodUrl = 'https://synod.trench-companion.com/'; // This is for prod
 
     const { authToken, userId, isLoggedIn } = useAuth();
 
@@ -26,7 +24,7 @@ const SynodCreateWarband: React.FC = () => {
         }
 
         try {
-            const response = await axios.post(`${synodUrl}wp-json/wp/v2/warband`, {
+            const response = await axios.post(`${SYNOD.URL}/wp-json/wp/v2/warband`, {
                 title: 'Warband created at ' + new Date().toLocaleString(),
                 status: 'publish',
                 meta: {
