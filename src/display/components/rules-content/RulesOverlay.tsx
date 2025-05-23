@@ -21,7 +21,7 @@ const RulesOverlay = (props: any) => {
         <>
             <span className='popup-trigger-text' onClick={() => handleShow()}>{ruleName}</span>
 
-            <Modal show={show} size="lg" contentClassName="rules-overlay" dialogClassName=""  onHide={handleClose} keyboard={true}  centered>
+            <Modal show={show} size="lg" contentClassName="RulesOverlay" dialogClassName=""  onHide={handleClose} keyboard={true}  centered>
                 <Modal.Body >
                     <div className={'rules-overlay-head'}>
                         <div className={'rule-name'}>
