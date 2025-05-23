@@ -10,6 +10,6 @@ export const SYNOD = {
     // SYNOD API URL //
     LIVE: 'https://synod.trench-companion.com', // for reference
     DEV: 'http://synod.trench-companion.test', // for reference
-    URL: 'http://synod.trench-companion.com', // The currently used API url
+    URL: 'https://synod.trench-companion.com', // The currently used API url
 
 }
