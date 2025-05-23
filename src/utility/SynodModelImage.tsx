@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useSynodModelImageData } from './useSynodModelImageData';
+import { initSynodModelImageData, useSynodModelImageData } from './useSynodModelImageData';
+import { ModelImageData } from '../classes/_high_level_controllers/SynodImageCache';
 
 
 /**
@@ -13,20 +14,34 @@ interface SynodModelImageProps {
 }
 
 const SynodModelImage: React.FC<SynodModelImageProps> = ({ modelSlug, size = 'full', className = '' }) => {
-    const { url, modelName, error } = useSynodModelImageData(modelSlug, size);
+    const [data, setData] = useState(initSynodModelImageData(modelSlug, size));
+    const [_keyvar, setkeyvar] = useState(0);
     
+    
+    useEffect(() => {
+        async function SetImageData() {
+            const IMG_Model : ModelImageData = await useSynodModelImageData(modelSlug, size)
+            setData(IMG_Model)
+            console.log(IMG_Model)
+            setkeyvar(_keyvar + 1)
+        }
+
+        SetImageData();
+    }, []);
+
     const fallback =
         'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
 
-    if( error ) {
+    if( data.error ) {
         return null;
     }
 
     return (
         <img
-            src={url || fallback}
-            alt={modelName || ''}
-            className={url ? `loaded-image ${className}` : `ghost-image ${className}`}
+            key={_keyvar}
+            src={data.url || fallback}
+            alt={data.modelName || ''}
+            className={data.url ? `loaded-image ${className}` : `ghost-image ${className}`}
         />
     );
 
