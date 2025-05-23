@@ -1,0 +1,39 @@
+// // // // //
+//
+// A user list entry
+//
+
+.UserListEntry
+    display: flex
+    margin-bottom: 15px
+
+
+    .UserListEntry-image-wrap
+        position: relative
+        aspect-ratio: 1 / 1
+        width: 75px
+        height: 75px
+
+    .UserListEntry-image
+        position: absolute
+        z-index: 2
+        top: 0
+        left: 0
+        width: 100%
+        height: 100%
+
+        object-position: center
+        object-fit: cover
+
+    .UserListEntry-text
+        padding-left: 15px
+        padding-top: 10px
+    .user-name
+        color: $color-text
+        text-decoration: none
+
+        &:hover
+            text-decoration: none
+
+    .user-status
+        color: $color-text-muted
