@@ -559,8 +559,8 @@ class ScenarioGenerator {
         while (index2 === index1) {
             index2 = Math.floor(Math.random() * arr.length);
         }
-        idstring += index1.toString() + "_" 
-        idstring += index2.toString() + "_" 
+        idstring += zeroPad(index1,2) + "_" 
+        idstring += zeroPad(index2,2) + "_" 
         
         return {
             elements: [arr[index1], arr[index2]],
