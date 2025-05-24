@@ -28,6 +28,13 @@ interface GenerateDeployment extends IContextObject {
     description: []
 }
 
+interface ScenarioSet {
+    genscen : Scenario,
+    id : string
+}
+
+const zeroPad = (num : number, places : number) => String(num).padStart(places, '0')
+
 class ScenarioGenerator {
 
     public ListOfObjectives : GenerateObjective[] = [];
@@ -36,7 +43,7 @@ class ScenarioGenerator {
     public ListOfDeedsGroupB : GloriousDeed[] = [];
     public ListOfDeedsGroupC : GloriousDeed[] = [];
 
-    public CurrentScenario!: Scenario;
+    public CurrentScenario!: ScenarioSet;
 
     
     public DeploymentDataDesc : any[] = []
@@ -400,8 +407,7 @@ class ScenarioGenerator {
         this.DeploymentDataDesc = DescriptionFactory(this.DeploymentData, this);       
         this.RulesDataDesc = DescriptionFactory(this.RulesData, this);       
         this.ConstructNewScenario().then(result => {
-            this.CurrentScenario = result;
-        });
+            this.CurrentScenario = result; });
         
     }
 
@@ -455,25 +461,45 @@ class ScenarioGenerator {
         }
     }
 
-    public async ConstructNewScenario() {
+    public async ConstructNewScenario() : Promise<ScenarioSet> {
+        let genstring = "Ob:"
         if (this.ListOfObjectives.length === 0) throw new Error("No objectives available.");
         if (this.ListOfDeedsGroupC.length === 0) throw new Error("No deeds available in Group C.");
         
+        const obj_num = Math.floor(Math.random() * this.ListOfObjectives.length)
+        const ChosenObjective : GenerateObjective = this.ListOfObjectives[obj_num]
+        genstring += zeroPad(obj_num,2) + "_";
         
-        const ChosenObjective : GenerateObjective = this.ListOfObjectives[Math.floor(Math.random() * this.ListOfObjectives.length)]
         const FilteredDeploymentList : GenerateDeployment[] = this.ListOfDeployments.filter((item) => (!ChosenObjective.banned_deployments.includes(item.id)))
         if (FilteredDeploymentList.length === 0) throw new Error("No valid deployments available.");
         
-        const ChosenDeployment : GenerateDeployment = FilteredDeploymentList[Math.floor(Math.random() * FilteredDeploymentList.length)]
+        const dep_num = Math.floor(Math.random() * FilteredDeploymentList.length)
+        const ChosenDeployment : GenerateDeployment = FilteredDeploymentList[dep_num]
+        genstring += "Dp:"+zeroPad(dep_num,2) + "_";
         
-        const DeedsGroupA : GloriousDeed[] = this.getTwoRandomElements(this.ListOfDeedsGroupA);
-        const DeedsGroupB : GloriousDeed[] = this.getTwoRandomElements(this.ListOfDeedsGroupB);
-        const DeedsGroupC : GloriousDeed[] = [this.ListOfDeedsGroupC[Math.floor(Math.random() * this.ListOfDeedsGroupC.length)]]
+        const deedfin_num = Math.floor(Math.random() * this.ListOfDeedsGroupC.length)
+        genstring += "GlP1:"
+        const resultA = this.getTwoRandomElements(this.ListOfDeedsGroupA,genstring);
+        const DeedsGroupA : GloriousDeed[] = resultA.elements;
+        genstring = resultA.modifiedId + "_";
+        genstring += "GlP2:"
+        const resultB = this.getTwoRandomElements(this.ListOfDeedsGroupB,genstring);
+        const DeedsGroupB : GloriousDeed[] = resultB.elements;
+        genstring = resultB.modifiedId + "_";
+        genstring += "GlFn:"
+        const DeedsGroupC : GloriousDeed[] = [this.ListOfDeedsGroupC[deedfin_num]]
         
         const AllDeedsCombined : string[] = []
-        for (let i = 0; i < DeedsGroupA.length; i++) {AllDeedsCombined.push(DeedsGroupA[i].ID)}
-        for (let i = 0; i < DeedsGroupB.length; i++) {AllDeedsCombined.push(DeedsGroupB[i].ID)}
-        for (let i = 0; i < DeedsGroupC.length; i++) {AllDeedsCombined.push(DeedsGroupC[i].ID)}
+        for (let i = 0; i < DeedsGroupA.length; i++) {
+            AllDeedsCombined.push(DeedsGroupA[i].ID);
+        }
+        for (let i = 0; i < DeedsGroupB.length; i++) {
+            AllDeedsCombined.push(DeedsGroupB[i].ID)
+        }
+        for (let i = 0; i < DeedsGroupC.length; i++) {
+            AllDeedsCombined.push(DeedsGroupC[i].ID)
+        }
+        genstring += zeroPad(deedfin_num,2);
 
         const NewScenarioJson : IScenario = {
             id: ChosenObjective.id+"_"+ChosenDeployment.id,
@@ -519,21 +545,30 @@ class ScenarioGenerator {
             special_rules : (ChosenObjective.special_rules || []).concat(ChosenDeployment.special_rules || [])
         }
 
-        return await ScenarioFactory.CreateScenario(NewScenarioJson, null);
+        const ScenGen : Scenario = await ScenarioFactory.CreateScenario(NewScenarioJson, null);
+        return {
+            genscen : ScenGen,
+            id : genstring
+        }
         
     }
 
-    public getTwoRandomElements<T>(arr: any[]) {      
+    public getTwoRandomElements<T>(arr: any[], idstring : string): { elements: any[], modifiedId: string } {      
         const index1 = Math.floor(Math.random() * arr.length);
         let index2 = index1;
         while (index2 === index1) {
             index2 = Math.floor(Math.random() * arr.length);
         }
+        idstring += index1.toString() + "_" 
+        idstring += index2.toString() + "_" 
         
-        return [arr[index1], arr[index2]];
+        return {
+            elements: [arr[index1], arr[index2]],
+            modifiedId: idstring
+        };
     }
 
 }
 
-export {ScenarioGenerator, GenerateDeployment, GenerateObjective}
+export {ScenarioGenerator, GenerateDeployment, GenerateObjective, ScenarioSet}
 

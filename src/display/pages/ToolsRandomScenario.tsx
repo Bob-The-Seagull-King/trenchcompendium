@@ -5,7 +5,7 @@ import { ErrorBoundary } from "react-error-boundary";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Item } from '../../classes/saveitems/item';
-import { GenerateDeployment, GenerateObjective, ScenarioGenerator } from '../../classes/feature/scenario/ScenarioGenerator';
+import { GenerateDeployment, GenerateObjective, ScenarioGenerator, ScenarioSet } from '../../classes/feature/scenario/ScenarioGenerator';
 import ScenarioDisplay from '../components/features/scenario/ScenarioDisplay';
 import GenericDisplay from '../components/generics/GenericDisplay';
 import { ToolsController } from '../../classes/_high_level_controllers/ToolsController';
@@ -22,14 +22,24 @@ const ToolsRandomScenario = (prop: any) => {
     
     function getManager() {        
         const ToolsManagerScenario = ToolsController.getInstance();
-        ToolsManagerScenario.RandomScenarioManager = new ScenarioGenerator();
+        if (ToolsManagerScenario.RandomScenarioManager == undefined) {
+            console.log("HELP")
+            ToolsManagerScenario.RandomScenarioManager = new ScenarioGenerator();
+        }
 
         return ToolsManagerScenario.RandomScenarioManager;
     }
 
-    const [_currentItem, returnItem] = useState<Scenario | null>(null);
+    const [_currentItem, returnItem] = useState<ScenarioSet | null>(getScenario());
     const [_keyval, returnkey] = useState(1);
 
+    function getScenario() {
+        if (Manager.CurrentScenario != undefined) {
+            console.log("wuh oh")
+            return Manager.CurrentScenario;
+        }
+        return null;
+    }
     
     useEffect(() => {
         async function SetScenario() {
@@ -62,8 +72,17 @@ const ToolsRandomScenario = (prop: any) => {
 
                 {/* Generator Button */}
                 <div onClick={() => (newScenario())}className='borderstyler softpad colorWhite tagText centerPosition'>New Scenario</div>
+                
+                <br/>
+
                 {_currentItem != null &&
-                    <ScenarioDisplay data={_currentItem} />
+                    <h3>{"Scenario Code: "+_currentItem?.id}</h3>
+                }
+
+                <br/>
+                
+                {_currentItem != null &&
+                    <ScenarioDisplay data={_currentItem.genscen} />
                 }
             </div>
 

@@ -29,28 +29,7 @@ const ToolsRandomScenarioRules = (prop: any) => {
         return ToolsManagerScenario.RandomScenarioManager;
     }
 
-    const [_currentItem, returnItem] = useState<Scenario | null>(null);
     const [_keyval, returnkey] = useState(1);
-
-    
-    useEffect(() => {
-        async function SetScenario() {
-            if (Manager.CurrentScenario == null || Manager.CurrentScenario == undefined) {
-                await Manager.ResetScenario();
-                returnItem(Manager.CurrentScenario);
-                returnkey(_keyval + 1)
-            }
-        }
-
-        SetScenario();
-    }, []);
-    
-
-    async function newScenario() {
-        await Manager.ResetScenario();
-        returnItem(Manager.CurrentScenario);
-        returnkey(_keyval + 1)
-    }
 
     function returnDeployment(deploy : GenerateDeployment) {
         return (
