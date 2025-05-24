@@ -1032,41 +1032,45 @@
                         "content": "",
                         "subcontent": [
                             {
-                                "tags": {"desc_type" : "bold"},
+                                "tags": {"desc_type" : "paragraph"},
                                 "content": "",
                                 "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "subheader"},
+                                        "content": "Injuries"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "paragraph"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "Determine the extent of injuries for each warrior who is Out of Action at the end of the game. Mark any Scars your ELITES suffer. See ",
+                                        "glossary": [
+                                            {"val": "ELITES", "id": "kw_elite"}
+                                        ]
+                                    },
                                     {
                                         "tags": {"desc_type" : "link", "url": "/compendium/campaign/injury"},
-                                        "content": "Injuries: "
+                                        "content": "Injuries"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": " section for details."
                                     }
                                 ]
                             },
                             {
-                                "tags": {"desc_type" : "default"},
-                                "content": "Determine the extent of injuries for each warrior who is Out of Action at the end of the game. Mark any Scars your ELITES suffer. See Injuries section for details.",
-                                "glossary": [
-                                    {"val": "ELITES", "id": "kw_elite"}
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "tags": {"desc_type" : "paragraph"},
-                        "content": "",
-                        "subcontent": [
-                            {
-                                "tags": {"desc_type" : "bold"},
+                                "tags": {"desc_type" : "paragraph"},
                                 "content": "",
                                 "subcontent": [
                                     {
-                                        "tags": {"desc_type" : "link", "url": "/compendium/campaign/campaign_rules/br_experienceandadvancement"},
-                                        "content": "Experience & Advancement: "
+                                        "tags": {"desc_type" : "rulesbanner", "url": "/compendium/campaign/injury"},
+                                        "content": "Injuries and Battle Scars"
                                     }
                                 ]
-                            },
-                            {
-                                "tags": {"desc_type" : "default"},
-                                "content": "Record experience, gain advancements, and promote heroes for surviving battles. See the Experience & Advancement section for details."
                             }
                         ]
                     },
@@ -1075,52 +1079,86 @@
                         "content": "",
                         "subcontent": [
                             {
-                                "tags": {"desc_type" : "bold"},
+                                "tags": {"desc_type" : "paragraph"},
                                 "content": "",
                                 "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "subheader"},
+                                        "content": "Experience & Advancement"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "paragraph"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "Record experience, gain advancements, and promote heroes for surviving battles. See the "
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "link", "url": "/compendium/campaign/injury"},
+                                        "content": "Experience & Advancement"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": " section for details."
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "paragraph"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "rulesbanner", "url": "/compendium/campaign/campaign_rules/br_experienceandadvancement"},
+                                        "content": "Experience & Advancement"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "paragraph"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "subheader"},
+                                        "content": "Increase the Warband Threshold Value"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "paragraph"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "Increase the Threshold Value of your Warband (see "
+                                    },
                                     {
                                         "tags": {"desc_type" : "link", "url": "/compendium/campaign/campaign_rules/br_warbandlimits"},
-                                        "content": "Increase the Warband Threshold Value: "
+                                        "content": "Warband Size"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": " rules)."
                                     }
                                 ]
                             },
                             {
-                                "tags": {"desc_type" : "default"},
-                                "content": "Increase the Threshold Value of your Warband (See warband size rules)."
-                            }
-                        ]
-                    },
-                    {
-                        "tags": {"desc_type" : "paragraph"},
-                        "content": "",
-                        "subcontent": [
-                            {
-                                "tags": {"desc_type" : "bold"},
-                                "content": "Request Reinforcements: "
-                            },
-                            {
-                                "tags": {"desc_type" : "default"},
-                                "content": "You may replenish your Warband’s losses until its total value is up to the highest current Warband Threshold value if you wish. You must first empty the Warband treasury by giving up all the ducats and stored gear you have first, and you must skip the Exploration step above."
-                            }
-                        ]
-                    },
-                    {
-                        "tags": {"desc_type" : "paragraph"},
-                        "content": "",
-                        "subcontent": [
-                            {
-                                "tags": {"desc_type" : "bold"},
+                                "tags": {"desc_type" : "paragraph"},
                                 "content": "",
                                 "subcontent": [
                                     {
-                                        "tags": {"desc_type" : "link", "url": "/compendium/campaign/explorationtable"},
-                                        "content": "Looting & Exploration: "
+                                        "tags": {"desc_type" : "rulesbanner", "url": "/compendium/campaign/campaign_rules/br_warbandlimits"},
+                                        "content": "Warband Limits"
                                     }
                                 ]
-                            },
-                            {
-                                "tags": {"desc_type" : "default"},
-                                "content": "Roll to see what your Warband discovers in the area they are currently occupying. See Exploration section for details."
                             }
                         ]
                     },
@@ -1129,11 +1167,105 @@
                         "content": "",
                         "subcontent": [
                             {
-                                "tags": {"desc_type" : "bold"},
-                                "content": "Hire New Recruits: "
+                                "tags": {"desc_type" : "paragraph"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "subheader"},
+                                        "content": "Request Reinforcements"
+                                    }
+                                ]
                             },
                             {
-                                "tags": {"desc_type" : "default"},
+                                "tags": {"desc_type" : "paragraph"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "You may replenish your Warband’s losses until its total value is up to the highest current "
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "link", "url": "/compendium/campaign/campaign_rules/br_warbandlimits"},
+                                        "content": "Warband Threshold"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": " value if you wish. You must first empty the Warband treasury by giving up all the ducats and stored gear you have first, and you must skip the Exploration step."
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "paragraph"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "rulesbanner", "url": "/compendium/campaign/campaign_rules/br_warbandlimits"},
+                                        "content": "Warband Limits"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "paragraph"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "subheader"},
+                                        "content": "Looting & Exploration"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "paragraph"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "Roll to see what your Warband discovers in the area they are currently occupying. See "
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "link", "url": "/compendium/campaign/explorationtable"},
+                                        "content": "Exploration"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": " section for details."
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "paragraph"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "rulesbanner", "url": "/compendium/campaign/explorationtable"},
+                                        "content": "Looting & Exploration"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "paragraph"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "subheader"},
+                                        "content": "Hire New Recruits"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "paragraph"},
                                 "content": "New recruits can be acquired from your Warband List and can be recruited and equipped from your Warband’s Equipment list."
                             }
                         ]
@@ -1143,11 +1275,17 @@
                         "content": "",
                         "subcontent": [
                             {
-                                "tags": {"desc_type" : "bold"},
-                                "content": "Trade: "
+                                "tags": {"desc_type" : "paragraph"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "subheader"},
+                                        "content": "Trade"
+                                    }
+                                ]
                             },
                             {
-                                "tags": {"desc_type" : "default"},
+                                "tags": {"desc_type" : "paragraph"},
                                 "content": "Buy items allowed for your Warband. See your Warband Equipment list for the available items. You may also sell any surplus Weapons, Armour and Equipment, and you receive half of their base value (rounding fractions up) from the merchants, including Glory Items."
                             }
                         ]
@@ -1157,18 +1295,42 @@
                         "content": "",
                         "subcontent": [
                             {
-                                "tags": {"desc_type" : "bold"},
+                                "tags": {"desc_type" : "paragraph"},
                                 "content": "",
                                 "subcontent": [
                                     {
-                                        "tags": {"desc_type" : "link", "url": "/compendium/campaign/campaign_rules/br_gloryitems"},
-                                        "content": "Use Glory Points: "
+                                        "tags": {"desc_type" : "subheader"},
+                                        "content": "Use Glory Points"
                                     }
                                 ]
                             },
                             {
-                                "tags": {"desc_type" : "default"},
-                                "content": "Use your Glory to attract Mercenaries, acquire special equipment and other benefits. See the rules for Glory for details."
+                                "tags": {"desc_type" : "paragraph"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "Use your Glory to attract Mercenaries, acquire special equipment and other benefits. See the rules for "
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "link", "url": "/compendium/campaign/campaign_rules/br_gloryitems"},
+                                        "content": "Glory"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": " for details."
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "paragraph"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "rulesbanner", "url": "/compendium/campaign/campaign_rules/br_gloryitems"},
+                                        "content": "Glory Items"
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -1177,11 +1339,17 @@
                         "content": "",
                         "subcontent": [
                             {
-                                "tags": {"desc_type" : "bold"},
-                                "content": "Reallocate Equipment: "
+                                "tags": {"desc_type" : "paragraph"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "subheader"},
+                                        "content": "Reallocate Equipment"
+                                    }
+                                ]
                             },
                             {
-                                "tags": {"desc_type" : "default"},
+                                "tags": {"desc_type" : "paragraph"},
                                 "content": "Swap equipment between models as desired (provided they are eligible to use it). You can take any armour, weapons and equipment from the Warband Paychest and give them to any eligible models."
                             }
                         ]
@@ -1191,11 +1359,17 @@
                         "content": "",
                         "subcontent": [
                             {
-                                "tags": {"desc_type" : "bold"},
-                                "content": "Update Warband Roster: "
+                                "tags": {"desc_type" : "paragraph"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "subheader"},
+                                        "content": "Update Warband Roster"
+                                    }
+                                ]
                             },
                             {
-                                "tags": {"desc_type" : "default"},
+                                "tags": {"desc_type" : "paragraph"},
                                 "content": "Update your Warband Roster, including the total cost of the Warband (a total cost in Ducats of all your models and their weapons, armour and equipment). You are now ready for the next battle!"
                             }
                         ]
