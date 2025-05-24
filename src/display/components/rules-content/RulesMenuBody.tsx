@@ -65,7 +65,11 @@ const RulesMenuBody: React.FC<RulesMenuBodyProps> = ({ controller, onBack, onNav
                 controller: controller.ScenarioCollectionController,
                 children: [
                     {
-                        title: "Random Scenario",
+                        title: "Random Scenario Rules",
+                        slug: "randomscenariorules"
+                    },
+                    {
+                        title: "Random Scenario Generator",
                         slug: "randomscenario"
                     }
                 ]

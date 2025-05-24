@@ -21,6 +21,7 @@ import {useSynodFactionImageData} from "../../utility/useSynodFactionImageData";
 import DefaultGame from '../components/mainpages/DefaultGame';
 import DefaultCampaign from '../components/mainpages/DefaultCampaign';
 import RulesBreadCrumbs from "../components/rules-content/RulesBreadCrumbs";
+import ToolsRandomScenarioRules from '../pages/ToolsRandomScenarioRules';
 
 interface IControllerProp {
     controller : ControllerController; // The controller being passed through
@@ -61,6 +62,8 @@ const CompendiumRoute: React.FC<IControllerProp> = (prop) => {
                                        element={<DefaultCampaign/>}/>
                                 <Route path={ROUTES.COMP_SCENARIO_GENERATOR}
                                        element={<ToolsRandomScenario controller={ToolsManagerScenario.RandomScenarioManager}/>}/>
+                                <Route path={ROUTES.COMP_SCENARIO_GENRULES}
+                                       element={<ToolsRandomScenarioRules controller={ToolsManagerScenario.RandomScenarioManager}/>}/>
                                 <Route path={'/game'+ROUTES.COMP_RULES_GAMERULES} element={<PagedCompendiumDisplay
                                     controller={prop.controller.GameRulesCollectionController}/>}/>
                                 <Route path={'/campaign'+ROUTES.COMP_RULES_CAMPAIGNRULES} element={<PagedCompendiumDisplay

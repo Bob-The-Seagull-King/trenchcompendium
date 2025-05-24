@@ -45,6 +45,18 @@ const DefaultScenario: React.FC<RulesArmouryElement> = ({ item }) => {
                                 <FontAwesomeIcon icon={faChevronRight} className={'icon-inline-right'}/>
                             </>
                         </CustomNavLink>
+                        <br/>
+                        <CustomNavLink
+                            classes={'font-normal'}
+                            link={'/compendium/scenario/randomscenariorules'}
+                            runfunc={() => {
+                                navigate('/compendium/scenario/randomscenariorules')
+                            }}>
+                            <>
+                                Scenario Generation Rules
+                                <FontAwesomeIcon icon={faChevronRight} className={'icon-inline-right'}/>
+                            </>
+                        </CustomNavLink>
                     </p>
 
                     <div className={'spacer-20'}></div>

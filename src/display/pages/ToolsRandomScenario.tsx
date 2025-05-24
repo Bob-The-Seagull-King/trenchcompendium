@@ -50,109 +50,15 @@ const ToolsRandomScenario = (prop: any) => {
         returnkey(_keyval + 1)
     }
 
-    function returnDeployment(deploy : GenerateDeployment) {
-        return (
-            <>
-                <div className={'rules-scenario-summary-content rules-card-content'}>
-                    <div 
-                        style={{width:"100%"}}>
-                    <h2>{deploy.name}</h2>
-                    <SynodImage
-                        imageId={Number(deploy.img_link)}
-                        size="large"
-                        className="rules-banner-image-element"
-                    /></div>
-
-                    {
-                        returnDescription(Manager, DescriptionFactory(deploy.description, Manager))
-                    }
-                </div>
-            </>
-        )
-    }
-
-    function returnScenario(deploy : GenerateObjective) {
-        return (
-            <>
-                <div className={'rules-scenario-summary-content rules-card-content'}>
-                    <h2>{deploy.name}</h2>
-                    {
-                        returnDescription(Manager, DescriptionFactory(deploy.description, Manager))
-                    }
-                </div>
-            </>
-        )
-    }
-
     // Return result -----------------------------
     return (
         <ErrorBoundary fallback={<div>Something went wrong with ToolsRandomScenario.tsx</div>}>
             <div className={'rules-content-main'}>
 
                 <PageMetaInformation
-                    title={'Random Scenario'}
-                    description={'Create a random scenario for your trench crusade games'}
+                    title={'Random Scenario Generator'}
+                    description={'Have a scenario randomly generated for you'}
                 />
-
-                {/* Scenario */}
-                <h1>Random Scenario</h1>
-                <p>
-                    {'Create a random scenario for your trench crusade games'}
-                </p>
-                
-                {
-                    returnDescription(Manager,  Manager.RulesDataDesc )
-                }
-
-
-                <div className={'spacer-20'}></div>
-
-                <h2>Roll for Scenario Type</h2>
-                {
-                    returnDescription(Manager,  Manager.ScenarioDataDesc )
-                }
-                {
-                    Manager.ListOfObjectives.map((item) =>
-                    <div key={item.id}>
-                        {returnScenario(item)}
-                    </div>)
-                }
-
-                {/* Deployments */}
-                <h1>Roll for Deployment Type</h1>
-                {
-                    returnDescription(Manager, Manager.DeploymentDataDesc)
-                }
-                {
-                    Manager.ListOfDeployments.map((item) =>
-                    <div key={item.id}>
-                        {returnDeployment(item)}
-                    </div>)
-                }
-
-                {/* Glorious Deeds */}
-                <h1>Glorious Deeds</h1>
-                {
-                    returnDescription(Manager, Manager.DeedDataDesc)
-                }
-
-                <h2>Die Result - Player 1</h2>
-                {
-                    Manager.ListOfDeedsGroupA.map((item) =>
-                    <RulesGloriousDeed key={item.ID} data={item}/>)
-                }
-
-                <h2>Die Result - Player 2</h2>
-                {
-                    Manager.ListOfDeedsGroupB.map((item) =>
-                    <RulesGloriousDeed key={item.ID} data={item}/>)
-                }
-
-                <h2>Deeds to Always Include</h2>
-                {
-                    Manager.ListOfDeedsGroupC.map((item) =>
-                    <RulesGloriousDeed key={item.ID} data={item}/>)
-                }
 
                 {/* Generator Button */}
                 <div onClick={() => (newScenario())}className='borderstyler softpad colorWhite tagText centerPosition'>New Scenario</div>
