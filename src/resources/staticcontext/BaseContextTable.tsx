@@ -24,6 +24,7 @@ import RulesModelDisplayAbility from "../../display/components/rules-content/Rul
 import { Model } from "../../classes/feature/model/Model";
 import { Ability, IAbility } from "../../classes/feature/ability/Ability";
 import RuleDisplay from "../../display/components/features/faction/RuleDisplay";
+import { Skill } from "../../classes/feature/ability/Skill";
 
 export const BaseContextCallTable : CallEventTable = {
     option_search_viable: {
@@ -997,8 +998,7 @@ export const BaseContextCallTable : CallEventTable = {
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
                     <div className={'BaseContextTable-skill'}>
                         <div className={'BaseContextTable-skill-head'}>
-                            {/* @TODO: add skill name here*/}
-                            {'Lorem'}
+                            {(relayVar.value as Skill).GetTrueName() }
                         </div>
 
                         <div className={'BaseContextTable-skill-body'}>
