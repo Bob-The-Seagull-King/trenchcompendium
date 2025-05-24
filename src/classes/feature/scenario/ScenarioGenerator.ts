@@ -28,6 +28,16 @@ interface GenerateDeployment extends IContextObject {
     description: []
 }
 
+interface GenCode {
+    obj : number,
+    dep : number,
+    gl_a_1 : number,
+    gl_a_2 : number,
+    gl_b_1 : number,
+    gl_b_2 : number,
+    gl_fn : number
+}
+
 interface ScenarioSet {
     genscen : Scenario,
     id : string
@@ -407,12 +417,35 @@ class ScenarioGenerator {
         this.DeploymentDataDesc = DescriptionFactory(this.DeploymentData, this);       
         this.RulesDataDesc = DescriptionFactory(this.RulesData, this);       
         this.ConstructNewScenario().then(result => {
-            this.CurrentScenario = result; });
+            if (this.CurrentScenario == null) {
+            this.CurrentScenario = result; }});
         
     }
 
     public async ResetScenario() {
         this.CurrentScenario = await this.ConstructNewScenario();
+    }
+
+    public async SetCodeScenario(code : string) {
+
+        const code_split = code.split(/\D+/)
+
+        console.log(code_split);
+
+        if (code_split.length == 8) {
+            const code_values : GenCode = {
+                obj : Number(code_split[1]),
+                dep : Number(code_split[2]),
+                gl_a_1 : Number(code_split[3]),
+                gl_a_2 : Number(code_split[4]),
+                gl_b_1 : Number(code_split[5]),
+                gl_b_2 : Number(code_split[6]),
+                gl_fn : Number(code_split[7])
+            }
+            this.CurrentScenario = await this.ConstructNewScenario(code_values);
+        }else {
+            this.CurrentScenario = await this.ConstructNewScenario();
+        }
     }
 
     public GatherObjectives() {
@@ -461,33 +494,36 @@ class ScenarioGenerator {
         }
     }
 
-    public async ConstructNewScenario() : Promise<ScenarioSet> {
-        let genstring = "Ob:"
+    public async ConstructNewScenario(code? : GenCode) : Promise<ScenarioSet> {
+        let genstring = "Ob"
         if (this.ListOfObjectives.length === 0) throw new Error("No objectives available.");
         if (this.ListOfDeedsGroupC.length === 0) throw new Error("No deeds available in Group C.");
-        
+        console.log(this.ListOfObjectives)
+        console.log(this.ListOfDeployments)
         const obj_num = Math.floor(Math.random() * this.ListOfObjectives.length)
-        const ChosenObjective : GenerateObjective = this.ListOfObjectives[obj_num]
-        genstring += zeroPad(obj_num,2) + "_";
+        console.log(code? code.obj : obj_num)
+        const ChosenObjective : GenerateObjective = this.ListOfObjectives[code? code.obj : obj_num]
+        genstring += zeroPad(obj_num,2);
         
         const FilteredDeploymentList : GenerateDeployment[] = this.ListOfDeployments.filter((item) => (!ChosenObjective.banned_deployments.includes(item.id)))
         if (FilteredDeploymentList.length === 0) throw new Error("No valid deployments available.");
         
         const dep_num = Math.floor(Math.random() * FilteredDeploymentList.length)
-        const ChosenDeployment : GenerateDeployment = FilteredDeploymentList[dep_num]
-        genstring += "Dp:"+zeroPad(dep_num,2) + "_";
+        console.log(code? code.dep : dep_num)
+        const ChosenDeployment : GenerateDeployment = FilteredDeploymentList[code? code.dep : dep_num]
+        genstring += "Dp"+zeroPad(dep_num,2);
         
         const deedfin_num = Math.floor(Math.random() * this.ListOfDeedsGroupC.length)
-        genstring += "GlP1:"
+        genstring += "GlPo"
         const resultA = this.getTwoRandomElements(this.ListOfDeedsGroupA,genstring);
-        const DeedsGroupA : GloriousDeed[] = resultA.elements;
-        genstring = resultA.modifiedId + "_";
-        genstring += "GlP2:"
+        const DeedsGroupA : GloriousDeed[] = code?  [this.ListOfDeedsGroupA[code.gl_a_1],this.ListOfDeedsGroupA[code.gl_a_2]]: resultA.elements;
+        genstring = resultA.modifiedId;
+        genstring += "GlPt"
         const resultB = this.getTwoRandomElements(this.ListOfDeedsGroupB,genstring);
-        const DeedsGroupB : GloriousDeed[] = resultB.elements;
-        genstring = resultB.modifiedId + "_";
-        genstring += "GlFn:"
-        const DeedsGroupC : GloriousDeed[] = [this.ListOfDeedsGroupC[deedfin_num]]
+        const DeedsGroupB : GloriousDeed[] = code?  [this.ListOfDeedsGroupB[code.gl_b_1],this.ListOfDeedsGroupB[code.gl_b_2]]: resultB.elements;
+        genstring = resultB.modifiedId;
+        genstring += "GlFn"
+        const DeedsGroupC : GloriousDeed[] = [this.ListOfDeedsGroupC[code? code.gl_fn : deedfin_num]]
         
         const AllDeedsCombined : string[] = []
         for (let i = 0; i < DeedsGroupA.length; i++) {
@@ -545,6 +581,7 @@ class ScenarioGenerator {
             special_rules : (ChosenObjective.special_rules || []).concat(ChosenDeployment.special_rules || [])
         }
 
+        console.log(genstring)
         const ScenGen : Scenario = await ScenarioFactory.CreateScenario(NewScenarioJson, null);
         return {
             genscen : ScenGen,
@@ -560,7 +597,7 @@ class ScenarioGenerator {
             index2 = Math.floor(Math.random() * arr.length);
         }
         idstring += zeroPad(index1,2) + "_" 
-        idstring += zeroPad(index2,2) + "_" 
+        idstring += zeroPad(index2,2) 
         
         return {
             elements: [arr[index1], arr[index2]],

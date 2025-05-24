@@ -16,18 +16,31 @@ import { DescriptionFactory } from '../../utility/functions';
 import RulesGloriousDeed from '../components/rules-content/RulesGloriousDeed';
 import PageMetaInformation from "../components/generics/PageMetaInformation";
 import SynodImage from '../../utility/SynodImage';
+import { useLocation } from 'react-router-dom';
 
 const ToolsRandomScenario = (prop: any) => {
     const Manager : ScenarioGenerator = prop.manager? prop.manager : getManager();
     
+    const urlPath = useLocation().pathname;
+    const urlSplits = urlPath.split('/');
+    
     function getManager() {        
         const ToolsManagerScenario = ToolsController.getInstance();
         if (ToolsManagerScenario.RandomScenarioManager == undefined) {
-            console.log("HELP")
             ToolsManagerScenario.RandomScenarioManager = new ScenarioGenerator();
         }
 
         return ToolsManagerScenario.RandomScenarioManager;
+    }
+
+    function GetCode() {
+        
+        if (urlSplits.length > 4) {
+            const CurItemID = urlSplits.slice(-1)[0]
+            console.log(CurItemID)
+            return CurItemID;
+        }
+        return null;
     }
 
     const [_currentItem, returnItem] = useState<ScenarioSet | null>(getScenario());
@@ -35,7 +48,6 @@ const ToolsRandomScenario = (prop: any) => {
 
     function getScenario() {
         if (Manager.CurrentScenario != undefined) {
-            console.log("wuh oh")
             return Manager.CurrentScenario;
         }
         return null;
@@ -43,7 +55,16 @@ const ToolsRandomScenario = (prop: any) => {
     
     useEffect(() => {
         async function SetScenario() {
+            
+            const code : string | null = GetCode();
+            if (code != null) {
+                console.log("CODE")
+                await Manager.SetCodeScenario(code);
+                returnItem(Manager.CurrentScenario);
+                returnkey(_keyval + 1)
+            }
             if (Manager.CurrentScenario == null || Manager.CurrentScenario == undefined) {
+                console.log("AHHHHHH")
                 await Manager.ResetScenario();
                 returnItem(Manager.CurrentScenario);
                 returnkey(_keyval + 1)
