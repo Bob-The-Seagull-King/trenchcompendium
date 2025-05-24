@@ -1,27 +1,41 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import CustomNavLink from "../subcomponents/interactables/CustomNavLink";
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import SynodImage from "../../../utility/SynodImage";
+import { BreadcrumbItem } from 'react-bootstrap';
+import { makestringpresentable } from '../../../utility/functions';
+
+interface breadcrumbitem  {
+    title : string,
+    url : string
+}
 
 const RulesBreadCrumbs: React.FC = () => {
 
     const navigate = useNavigate();
+    const urlPath = useLocation().pathname;
+    const urlSplits = urlPath.split('/');
 
-    // @TODO: use actual navigation items
-    const breadcrumbs = [
-        {
-            title: 'Court of the seven headed serpent',
-            url: '/compendium/faction/fc_courtofthesevenheadedserpent'
-        },
-        {
-            title: 'Factions',
-            url: '/compendium/faction'
-        },
-        {
-            title: 'Compendium',
-            url: '/compendium'
-        },
-    ]
+    const { state } = useLocation();
+    const [breadcrumbs, setbreadcrumbs] = useState<breadcrumbitem[]>([])
+        
+    useEffect(() => {
+        const splits = urlSplits;
+        const breaditems : breadcrumbitem[] = []
+        let sumurl = ""
+        for (let i = 1; i < splits.length; i++) {
+            if (i > 1) { sumurl += "/"}
+            sumurl += splits[i]
+            breaditems.unshift(
+                {
+                    title: makestringpresentable(splits[i]),
+                    url: sumurl
+                }
+            )
+        }
+
+        setbreadcrumbs(breaditems);
+    }, [state]);
 
     return (
         <div className="RulesBreadCrumbs">
