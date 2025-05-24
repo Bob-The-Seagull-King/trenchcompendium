@@ -24,7 +24,7 @@ const RulesBreadCrumbs: React.FC = () => {
         const breaditems : breadcrumbitem[] = []
         let sumurl = ""
         for (let i = 1; i < splits.length; i++) {
-            if (i > 1) { sumurl += "/"}
+            sumurl += "/"
             sumurl += splits[i]
             breaditems.unshift(
                 {
