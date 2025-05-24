@@ -20,11 +20,7 @@ const SkillDisplay = (props: any) => {
                 {returnDescription(skillObject, skillObject.Description)}
 
                 {skillObject.MyOptions.length > 0 &&
-                    <div className='row'>
-                        {
-                            <OptionSetStaticDisplay data={skillObject.MyOptions}/>
-                        }
-                    </div>
+                    <OptionSetStaticDisplay data={skillObject.MyOptions}/>
                 }
             </div>
         </ErrorBoundary>

@@ -6,7 +6,7 @@ import React, { useEffect, useState } from 'react'
 import SynodImage from "../../../utility/SynodImage";
 
 interface ProfilePageAchievementsProps {
-    userId: number
+    userId?: number
 }
 
 const ProfilePageAchievements: React.FC<ProfilePageAchievementsProps> = ({ userId }) => {
@@ -57,6 +57,9 @@ const ProfilePageAchievements: React.FC<ProfilePageAchievementsProps> = ({ userI
             image: 253
         }
     ]
+
+    // @TODO: if no userData is set -> get achievements for user
+
 
     return (
         <div className="ProfilePageAchievements">

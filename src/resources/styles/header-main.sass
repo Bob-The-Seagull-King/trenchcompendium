@@ -9,15 +9,15 @@ $header_logo_padding: ($header_height - $header_logo_height) / 2
 
 
 .header-main-spacer
-    //width: 100%
-    //height: $header_height + px
+    width: 100%
+    height: $header_height + px
 
 .header-main
-    //position: fixed
-    //top: 0
-    //left: 0
-    //right: 0
-    //z-index: 100
+    position: fixed
+    top: 0
+    left: 0
+    right: 0
+    z-index: 100
 
     display: flex
     justify-content: space-between
@@ -26,6 +26,12 @@ $header_logo_padding: ($header_height - $header_logo_height) / 2
     background-color: $color-bg-1
 
     box-shadow: $box-shadow-1
+    transition: transform .2s ease
+    transform: translateY(0)
+
+    &.shy
+        transform: translateY(-100%)
+
 
     .open-offcanvas-nav-btn
         background-color: transparent
@@ -46,6 +52,9 @@ $header_logo_padding: ($header_height - $header_logo_height) / 2
         padding: 10px
         margin-right: 5px
         height: $header_height + px
+
+        &:hover
+            color: currentColor
 
     .logo-wrap
         padding: $header_logo_padding + px 5px

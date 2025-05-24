@@ -89,16 +89,16 @@ const FactionDisplay = (props: any) => {
     return (
         <ErrorBoundary fallback={<div>Something went wrong with FactionDisplay.tsx</div>}>
             <ToastContainer
-                        position="top-center"
-                        autoClose={5000}
-                        hideProgressBar={false}
-                        newestOnTop={false}
-                        closeOnClick
-                        rtl={false}
-                        pauseOnFocusLoss
-                        draggable
-                        pauseOnHover
-                        />
+                position="top-center"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
 
 
             {GetContents(factionObject)}
@@ -136,7 +136,7 @@ const FactionDisplay = (props: any) => {
                     }
                 </>
             }
-            <div className=""/>
+
             <div key={usekey}>
             {factionObject.Models.filter((item) => (item.Captain == true && item.Mercenary == false)).length > 0 &&
                 <>
@@ -198,7 +198,6 @@ const FactionDisplay = (props: any) => {
             </div>
             {factionObject.EquipmentItems.length > 0 &&
                 <>
-
                     <RulesHeadlineDisplay
                         content="Armoury"
                         level={2}

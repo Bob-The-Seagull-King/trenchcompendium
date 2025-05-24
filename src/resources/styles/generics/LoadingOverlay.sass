@@ -1,0 +1,28 @@
+// // // // //
+//
+// A global Loading overlay
+//
+
+
+.LoadingOverlay
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    .LoadingOverlay-inner
+        position: absolute
+        top: 50%
+        left: 0
+        right: 0
+        margin: auto
+
+        transform: translateY(-50%)
+
+        text-align: center
+
+        i, svg
+            color: $color-highlight-text
+            font-size: 40px
+
+        .text

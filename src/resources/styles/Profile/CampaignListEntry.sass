@@ -1,0 +1,41 @@
+// // // // //
+//
+// A List entry for a campaign
+//
+
+
+.CampaignListEntry
+    display: flex
+    margin-bottom: 15px
+
+    .CampaignListEntry-image-wrap
+        display: block
+        position: relative
+        aspect-ratio: 1 / 1
+        width: 75px
+        height: 75px
+
+    .CampaignListEntry-image
+        position: absolute
+        z-index: 2
+        top: 0
+        left: 0
+        width: 100%
+        height: 100%
+
+        object-position: center
+        object-fit: cover
+
+    .CampaignListEntry-text
+        padding-left: 15px
+        padding-top: 10px
+
+    .campaign-name
+        color: $color-text
+        text-decoration: none
+
+        &:hover
+            text-decoration: none
+
+    .campaign-status
+        color: $color-text-muted

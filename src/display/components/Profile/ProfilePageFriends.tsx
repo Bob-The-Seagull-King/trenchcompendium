@@ -4,6 +4,7 @@
 
 import React, { useEffect, useState } from 'react'
 import SynodImage from "../../../utility/SynodImage";
+import UserListEntry from "./UserListEntry";
 
 interface ProfilePageFriendsProps {
     userId: number
@@ -50,7 +51,15 @@ const ProfilePageFriends: React.FC<ProfilePageFriendsProps> = ({ userId }) => {
 
                 <div className={'profile-card-content'}>
                     <ul className={'friends-list'}>
-
+                        {friends.map((friend) => (
+                            <li key={friend.id} className={'friend'}>
+                                <UserListEntry
+                                    id={friend.id}
+                                    username={friend.username}
+                                    status={friend.status}
+                                />
+                            </li>
+                        ))}
                     </ul>
                 </div>
             </div>

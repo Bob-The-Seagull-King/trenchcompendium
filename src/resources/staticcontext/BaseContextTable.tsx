@@ -934,12 +934,7 @@ export const BaseContextCallTable : CallEventTable = {
             return ( 
             
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    <div className=""/>
-                    <div className="borderstyler bordergrey">
-                        <div className="">
-                            <ExplorationLocationDisplay data={relayVar.value} />
-                        </div>
-                    </div>
+                    <ExplorationLocationDisplay data={relayVar.value} />
                 </ErrorBoundary>
             )
         }
@@ -1000,14 +995,18 @@ export const BaseContextCallTable : CallEventTable = {
             return ( 
             
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    <div className=""/>
-                    <div className="borderstyler bordergrey">
-                        <div className="">
-                            <SkillDisplay data={relayVar.value} />
+                    <div className={'BaseContextTable-skill'}>
+                        <div className={'BaseContextTable-skill-head'}>
+                            {/* @TODO: add skill name here*/}
+                            {'Lorem'}
+                        </div>
+
+                        <div className={'BaseContextTable-skill-body'}>
+                            <SkillDisplay data={relayVar.value}/>
                         </div>
                     </div>
                 </ErrorBoundary>
-            )
+        )
         }
     },
     override_stats : {

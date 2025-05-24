@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import {SYNOD} from "../resources/api-constants";
 
 interface Warband {
     warband_id: number;
@@ -15,8 +16,6 @@ const SynodUserWarbands: React.FC = () => {
     const [loading, setLoading] = useState(true);
 
     const userId = localStorage.getItem('synodUserId');
-    // const synodUrl = 'http://synod.trench-companion.test/'; // this is for local dev
-    const synodUrl = 'https://synod.trench-companion.com/'; // this is for prod
 
     useEffect(() => {
         const fetchWarbands = async () => {
@@ -27,7 +26,7 @@ const SynodUserWarbands: React.FC = () => {
             }
 
             try {
-                const response = await axios.get(`${synodUrl}wp-json/wp/v2/warbands/by-user/${userId}`);
+                const response = await axios.get(`${SYNOD.URL}/wp-json/wp/v2/warbands/by-user/${userId}`);
                 setWarbands(response.data);
             } catch (err: any) {
                 setError(err.response?.data?.message || 'Failed to fetch warbands');
@@ -37,7 +36,7 @@ const SynodUserWarbands: React.FC = () => {
         };
 
         fetchWarbands();
-    }, [userId, synodUrl]);
+    }, [userId, SYNOD.URL]);
 
     return (
         <div style={{ padding: '1rem' }}>

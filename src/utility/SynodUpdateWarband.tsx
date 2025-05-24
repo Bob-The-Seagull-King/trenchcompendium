@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useAuth } from './AuthContext';
+import {SYNOD} from "../resources/api-constants";
 
 
 
@@ -12,9 +13,6 @@ const SynodUpdateWarband: React.FC = () => {
 
     const { authToken, userId, isLoggedIn } = useAuth();
 
-
-    // const synodUrl = 'http://synod.trench-companion.test/';  // this is for local dev
-    const synodUrl = 'https://synod.trench-companion.com/'; // This is for prod
 
     const handleCreate = async () => {
         setError('');
@@ -29,7 +27,7 @@ const SynodUpdateWarband: React.FC = () => {
         }
 
         try {
-            const response = await axios.post(`${synodUrl}wp-json/wp/v2/warband/${warbandId}`, {
+            const response = await axios.post(`${SYNOD.URL}/wp-json/wp/v2/warband/${warbandId}`, {
                 meta: {
                     warband_data: JSON.stringify(parsedData),
                 }

@@ -1,0 +1,45 @@
+// // // // //
+//
+// A list entry for a warband
+//
+
+.WarbandListEntry
+    display: flex
+    margin-bottom: 15px
+
+    .WarbandListEntry-image-wrap
+        display: block
+        position: relative
+        aspect-ratio: 1 / 1
+        width: 75px
+        height: 75px
+
+    .WarbandListEntry-image
+        position: absolute
+        z-index: 2
+        top: 0
+        left: 0
+        width: 100%
+        height: 100%
+
+        object-position: center
+        object-fit: cover
+
+    .WarbandListEntry-text
+        padding-left: 15px
+        padding-top: 0
+
+    .warband-name
+        color: $color-text
+        text-decoration: none
+
+        &:hover
+            text-decoration: none
+
+    .warband-faction
+        color: $color-text-muted
+        font-size: 14px
+
+    .warband-value
+        color: $color-text-muted
+        font-size: 14px

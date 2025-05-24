@@ -13,7 +13,7 @@ const RulesModelDisplayAbility = (props: any) => {
 
     return (
         <ErrorBoundary fallback={<div>Something went wrong with AbilityDisplay.tsx</div>}>
-            <div className='ability'>
+            <div className='RulesModelDisplayAbility ability'>
                 <span className={'ability-name'}>
                     {abilityObject.Name + ": "}
                 </span>

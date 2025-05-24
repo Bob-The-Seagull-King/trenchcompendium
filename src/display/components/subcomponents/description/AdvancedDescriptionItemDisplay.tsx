@@ -33,6 +33,7 @@ import CustomNavLink from '../interactables/CustomNavLink';
 import { Skill } from '../../../../classes/feature/ability/Skill';
 import SkillDisplay from '../../../components/features/skill/SkillDisplay';
 import RulesBannerText from '../../../components/rules-content/RulesBannerText';
+import RulesModelDisplay from "../../rules-content/RulesModelDisplay";
 
 const AdvancedDescriptionItemDisplay = (props: any) => {
     const description: AdvancedDescription = props.data
@@ -543,7 +544,7 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
             <span className={'AdvancedDescriptionItemDisplay'} key={keyvar}>
                 {component !== null &&
                     <ModelDisplay data={component} />
-                }   
+                }
             </span>
         );
     }
@@ -572,9 +573,8 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
                         titlename={component.Name}
                         d_name={component.Name}
                         d_method={() =>
-                            
-                                <ModelDisplay data={component} />
-                            }/>
+                        <ModelDisplay data={component} />
+                    }/>
                 }   
             </span>
         );

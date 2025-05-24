@@ -45,7 +45,7 @@ const SynodLoginPage: React.FC = () => {
 
     useEffect(() => {
         if (isLoggedIn && userId) {
-            navigate(`/profile/${userId}/edit`)
+            navigate(`/profile/${userId}`)
         }
     }, [isLoggedIn, userId])
 
@@ -64,7 +64,7 @@ const SynodLoginPage: React.FC = () => {
                         <div className={"synod-login-wrap synod-login-form"}>
                             <SynodLogin onLoginSuccess={() => {
                                 if (userId) {
-                                    navigate(`/profile/${userId}/edit`)
+                                    navigate(`/profile/${userId}`)
                                 }
                             }} />
 

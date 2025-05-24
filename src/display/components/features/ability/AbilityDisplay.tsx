@@ -15,15 +15,9 @@ const AbilityDisplay = (props: any) => {
 
     return (
         <ErrorBoundary fallback={<div>Something went wrong with AbilityDisplay.tsx</div>}>
-            <div className=''>
-                <div className='row'>
-                    {returnDescription(abilityObject, abilityObject.Description)}
-                </div>
-                <div className='row'>
-                    {
-                        <OptionSetStaticDisplay data={abilityObject.MyOptions} />
-                    }
-                </div>
+            <div className='AbilityDisplay'>
+                {returnDescription(abilityObject, abilityObject.Description)}
+                <OptionSetStaticDisplay data={abilityObject.MyOptions} />
             </div>
         </ErrorBoundary>
     )

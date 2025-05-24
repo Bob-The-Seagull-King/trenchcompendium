@@ -2,6 +2,7 @@
 import { FactionImageData, SynodImageCache } from '../classes/_high_level_controllers/SynodImageCache';
 import React from 'react';
 import { useEffect, useState } from 'react';
+import {SYNOD} from "../resources/api-constants";
 
 const delay = (ms: number | undefined) => new Promise(res => setTimeout(res, ms));
 
@@ -33,9 +34,7 @@ export function useSynodFactionImageData(factionSlug: string, size = 'full'): Fa
                 return;
             }
 
-            const synodUrl = 'https://synod.trench-companion.com/';
-
-            if (synodcache.CheckFactionCallCache(key)) {    
+            if (synodcache.CheckFactionCallCache(key)) {
                 const EMERGENCY_OUT = 1000; // If we spend 100 seconds on one image, just give up
                 let count_check = 0;
                 while ((!synodcache.CheckFactionCache(key)) && (count_check < EMERGENCY_OUT)) {
@@ -47,7 +46,7 @@ export function useSynodFactionImageData(factionSlug: string, size = 'full'): Fa
 
             if (!synodcache.CheckFactionCache(key)) {
                 synodcache.AddFactionCallCache(key);
-                fetch(`${synodUrl}wp-json/synod/v1/faction-image/${factionSlug}`)
+                fetch(`${SYNOD.URL}/wp-json/synod/v1/faction-image/${factionSlug}`)
                     .then((res) => {
                         if (!res.ok) throw new Error('Network response was not ok');
                         return res.json();

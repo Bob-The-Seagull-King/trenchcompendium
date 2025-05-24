@@ -4,6 +4,7 @@ import { jwtDecode } from 'jwt-decode'
 import { useAuth } from './AuthContext'
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {SYNOD} from "../resources/api-constants";
 
 interface JwtPayload {
     data: {
@@ -24,8 +25,6 @@ const SynodLogin: React.FC<SynodLoginProps> = ({ onLoginSuccess }) => {
     const [message, setMessage] = useState('')
     const [isLoading, setIsLoading] = useState(false)
 
-    // const synodUrl = 'http://synod.trench-companion.test/' // local dev
-    const synodUrl = 'https://synod.trench-companion.com/' // production
 
     const { isLoggedIn, login } = useAuth()
 
@@ -42,7 +41,7 @@ const SynodLogin: React.FC<SynodLoginProps> = ({ onLoginSuccess }) => {
         }
 
         try {
-            const response = await axios.post(`${synodUrl}wp-json/jwt-auth/v1/token`, {
+            const response = await axios.post(`${SYNOD.URL}/wp-json/jwt-auth/v1/token`, {
                 username: email,
                 password,
             })

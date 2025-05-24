@@ -20,6 +20,7 @@ import SynodImage from "../../utility/SynodImage";
 import {useSynodFactionImageData} from "../../utility/useSynodFactionImageData";
 import DefaultGame from '../components/mainpages/DefaultGame';
 import DefaultCampaign from '../components/mainpages/DefaultCampaign';
+import RulesBreadCrumbs from "../components/rules-content/RulesBreadCrumbs";
 
 interface IControllerProp {
     controller : ControllerController; // The controller being passed through
@@ -43,6 +44,8 @@ const CompendiumRoute: React.FC<IControllerProp> = (prop) => {
     return (
         <ErrorBoundary fallback={<div>Something went wrong with CompendiumRoute.tsx</div>}>
             <div className={'CompendiumRoute'}>
+                <RulesBreadCrumbs />
+
                 <div className="container main-content">
                     <div key={_keyval} className="row">
                         <div className="col-lg-3 col-sm-12">
