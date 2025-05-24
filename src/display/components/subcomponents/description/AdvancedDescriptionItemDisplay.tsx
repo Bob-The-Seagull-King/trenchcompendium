@@ -32,6 +32,7 @@ import { useGlobalState } from '../../../../utility/globalstate';
 import CustomNavLink from '../interactables/CustomNavLink';
 import { Skill } from '../../../../classes/feature/ability/Skill';
 import SkillDisplay from '../../../components/features/skill/SkillDisplay';
+import RulesBannerText from '../../../components/rules-content/RulesBannerText';
 
 const AdvancedDescriptionItemDisplay = (props: any) => {
     const description: AdvancedDescription = props.data
@@ -65,6 +66,21 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
                         <span>
                             {ConvertContentWithGlossary((item.Glossary), item.Content?.toString() || "")}
                         </span>
+                        <span>
+                            {item.SubContent?.map((subitem) => (
+                               <AdvancedDescriptionItemDisplay key="descriptionsubitem" data={subitem} parent={parentItem}/>
+                            ))}
+                        </span>
+                    </p>
+                )
+
+            }
+            case "subheader": {
+                return (
+                    <p>
+                        <h2>
+                            {ConvertContentWithGlossary((item.Glossary), item.Content?.toString() || "")}
+                        </h2>
                         <span>
                             {item.SubContent?.map((subitem) => (
                                <AdvancedDescriptionItemDisplay key="descriptionsubitem" data={subitem} parent={parentItem}/>
@@ -341,6 +357,23 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
                                 }}>
                                 {ConvertContentWithGlossary((item.Glossary), item.Content?.toString() || "")} 
                             </CustomNavLink>
+                        </span>
+                        <span>
+                            {item.SubContent?.map((subitem) => (
+                               <AdvancedDescriptionItemDisplay key="descriptionsubitem" data={subitem} parent={parentItem}/>
+                            ))}
+                        </span>
+                    </span>
+                )
+            }
+            case "rulesbanner": {
+                return (
+                    <span>
+                        <span>
+                            <RulesBannerText
+                                link={getTagSetValue(item.Tags, "url")}
+                                title={item.Content?.toString() || "" }
+                                type={'inline'} />
                         </span>
                         <span>
                             {item.SubContent?.map((subitem) => (

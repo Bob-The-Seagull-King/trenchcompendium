@@ -355,7 +355,7 @@
         ],
         "options": [{
             "ref_id" : "ot_swordofallah",
-            "name" : "Melee Skills",
+            "name" : "",
             "description" : [],
             "category" : "type",
             "type" : "text",
@@ -416,7 +416,7 @@
         ],
         "options": [{
             "ref_id" : "ot_newantioch",
-            "name" : "New Antioch Items",
+            "name" : "",
             "description" : [],
             "category" : "type",
             "type" : "text",
@@ -1530,7 +1530,7 @@
         "options": [
             {
                 "ref_id" : "ot_walkwithgod",
-                "name" : "Skills",
+                "name" : "",
                 "description" : [],
                 "category" : "type",
                 "type" : "text",

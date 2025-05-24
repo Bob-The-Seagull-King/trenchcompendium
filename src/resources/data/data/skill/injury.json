@@ -58,7 +58,7 @@
                 "content": "All ACTIONS this model takes (including Melee and Ranged attacks) are RISKY.",
                 "glossary": [
                     {"val": "ACTIONS", "id": "kw_action"},
-                    {"val": "RISKY", "id": "kw_risky"}
+                    {"val": "RISKY", "id": "kw_riskyaction"}
                 ]
             }
         ],
