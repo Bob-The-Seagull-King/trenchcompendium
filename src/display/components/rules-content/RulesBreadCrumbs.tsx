@@ -3,7 +3,7 @@ import CustomNavLink from "../subcomponents/interactables/CustomNavLink";
 import {useLocation, useNavigate} from "react-router-dom";
 import SynodImage from "../../../utility/SynodImage";
 import { BreadcrumbItem } from 'react-bootstrap';
-import { makestringpresentable } from '../../../utility/functions';
+import { convertstringIDtoName, isstringdataID, makestringpresentable } from '../../../utility/functions';
 
 interface breadcrumbitem  {
     title : string,
@@ -20,21 +20,28 @@ const RulesBreadCrumbs: React.FC = () => {
     const [breadcrumbs, setbreadcrumbs] = useState<breadcrumbitem[]>([])
         
     useEffect(() => {
-        const splits = urlSplits;
-        const breaditems : breadcrumbitem[] = []
-        let sumurl = ""
-        for (let i = 1; i < splits.length; i++) {
-            sumurl += "/"
-            sumurl += splits[i]
-            breaditems.unshift(
-                {
-                    title: makestringpresentable(splits[i]),
-                    url: sumurl
+        async function GetBreadCrumbs() {
+            const splits = urlSplits;
+            const breaditems : breadcrumbitem[] = []
+            let sumurl = ""
+            for (let i = 1; i < splits.length; i++) {
+                sumurl += "/"
+                sumurl += splits[i]
+                let titlenm = makestringpresentable(splits[i]);
+                if (isstringdataID(splits[i])) {
+                    titlenm = await convertstringIDtoName(splits[i])
                 }
-            )
-        }
+                breaditems.unshift(
+                    {
+                        title: titlenm,
+                        url: sumurl
+                    }
+                )
+            }
 
-        setbreadcrumbs(breaditems);
+            setbreadcrumbs(breaditems);
+        }
+        GetBreadCrumbs()
     }, [state]);
 
     return (

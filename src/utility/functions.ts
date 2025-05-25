@@ -4,6 +4,23 @@ import { ObjectImage } from "../classes/ObjectImage";
 import { Requester } from "../factories/Requester";
 import { IObjectImage } from "../classes/ObjectImage";
 import { AdvancedDescriptionItemFactory } from "../factories/components/AdvancedDescriptionItemFactory";
+import { BookRule } from "../classes/feature/bookrules/BookRule";
+import { Equipment } from "../classes/feature/equipment/Equipment";
+import { ExplorationLocation } from "../classes/feature/exploration/ExplorationLocation";
+import { ExplorationTable } from "../classes/feature/exploration/ExplorationTable";
+import { Faction } from "../classes/feature/faction/Faction";
+import { Rule } from "../classes/feature/faction/Rule";
+import { GlossaryRule } from "../classes/feature/glossary/Glossary";
+import { Keyword } from "../classes/feature/glossary/Keyword";
+import { Scenario } from "../classes/feature/scenario/Scenario";
+import { GloriousDeed } from "../classes/feature/scenario/GloriousDeed";
+import { Injury } from "../classes/feature/ability/Injury";
+import { Patron } from "../classes/feature/skillgroup/Patron";
+import { Skill } from "../classes/feature/ability/Skill";
+import { SkillGroup } from "../classes/feature/skillgroup/SkillGroup";
+import { Ability } from "../classes/feature/ability/Ability";
+import { Model } from "../classes/feature/model/Model";
+import { Upgrade } from "../classes/feature/ability/Upgrade";
 
 /**
  * Returns a capitalized version of a given string
@@ -15,6 +32,141 @@ export function capitalizeString(stringVal: string) {
         return stringVal[0].toUpperCase() + stringVal.slice(1).toLowerCase();
     }
     return "";
+}
+
+export function isstringdataID(stringval : string ) {
+    const idsplits = stringval.split('_');
+    if (idsplits.length > 1) {
+        return (["gr","eq","el","et","fc","fv","rl","br","er","gl","kw","tb","sc","sr","gd","in","pt","sk","sg","ab","md","mv","up"].includes(idsplits[0]))
+    }
+    return false;
+}
+
+export async function convertstringIDtoName(stringval : string) {
+    const idsplits = stringval.split('_');
+    
+    try {
+        switch (idsplits[0]) {
+            case "gr": {
+                const { BookRuleFactory } = await import("../factories/features/BookRuleFactory");
+                const realitem : BookRule = await BookRuleFactory.CreateNewBookRule(stringval, null)
+                return realitem.GetTrueName();
+            }        
+            case "eq": {
+                const { EquipmentFactory } = await import("../factories/features/EquipmentFactory");
+                const realitem : Equipment = await EquipmentFactory.CreateNewEquipment(stringval, null)
+                return realitem.GetTrueName();
+            }         
+            case "el": {
+                const { ExplorationFactory } = await import("../factories/features/ExplorationFactory");
+                const realitem : ExplorationLocation = await ExplorationFactory.CreateNewExplorationLocation(stringval, null)
+                return realitem.GetTrueName();
+            }           
+            case "et": {
+                const { ExplorationFactory } = await import("../factories/features/ExplorationFactory");
+                const realitem : ExplorationTable = await ExplorationFactory.CreateNewExplorationTable(stringval, null)
+                return realitem.GetTrueName();
+            }            
+            case "fc": {
+                const { FactionFactory } = await import("../factories/features/FactionFactory");
+                const realitem : Faction = await FactionFactory.CreateNewFaction(stringval, null)
+                return realitem.GetTrueName();
+            }           
+            case "fv": {
+                const { FactionFactory } = await import("../factories/features/FactionFactory");
+                const realitem : Faction = await FactionFactory.CreateNewFaction(stringval, null)
+                return realitem.GetTrueName();
+            }              
+            case "rl": {
+                const { RuleFactory } = await import("../factories/features/RuleFactory");
+                const realitem : Rule = await RuleFactory.CreateNewRule(stringval, null)
+                return realitem.GetTrueName();
+            }    
+            case "br": {
+                const { BookRuleFactory } = await import("../factories/features/BookRuleFactory");
+                const realitem : BookRule = await BookRuleFactory.CreateNewBookRule(stringval, null)
+                return realitem.GetTrueName();
+            } 
+            case "er": {
+                const { BookRuleFactory } = await import("../factories/features/BookRuleFactory");
+                const realitem : BookRule = await BookRuleFactory.CreateNewBookRule(stringval, null)
+                return realitem.GetTrueName();
+            }    
+            case "gl": {
+                const { GlossaryRuleFactory } = await import("../factories/features/GlossaryFactory");
+                const realitem : GlossaryRule | null = await GlossaryRuleFactory.CreateNewGlossaryRule(stringval)
+                if (realitem == null) {return makestringpresentable(stringval);}
+                return realitem.Name? realitem.Name : makestringpresentable(stringval);
+            }    
+            case "kw": {
+                const { KeywordFactory } = await import("../factories/features/KeywordFactory");
+                const realitem : Keyword = await KeywordFactory.CreateNewKeyword(stringval, null)
+                return realitem.GetTrueName();
+            }    
+            case "sc": {
+                const { ScenarioFactory } = await import("../factories/features/ScenarioFactory");
+                const realitem : Scenario = await ScenarioFactory.CreateNewScenario(stringval, null)
+                return realitem.GetTrueName();
+            }             
+            case "sr": {
+                const { RuleFactory } = await import("../factories/features/RuleFactory");
+                const realitem : Rule = await RuleFactory.CreateNewScenarioRule(stringval, null)
+                return realitem.GetTrueName();
+            }              
+            case "gd": {
+                const { GloriousDeedFactory } = await import("../factories/features/GloriousDeedFactory");
+                const realitem : GloriousDeed = await GloriousDeedFactory.CreateNewGloriousDeed(stringval, null)
+                return realitem.GetTrueName();
+            }                 
+            case "in": {
+                const { InjuryFactory } = await import("../factories/features/InjuryFactory");
+                const realitem : Injury = await InjuryFactory.CreateNewInjury(stringval, null)
+                return realitem.GetTrueName();
+            }                 
+            case "pt": {
+                const { SkillFactory } = await import("../factories/features/SkillFactory");
+                const realitem : Patron = await SkillFactory.CreateNewPatron(stringval, null)
+                return realitem.GetTrueName();
+            }                 
+            case "sk": {
+                const { SkillFactory } = await import("../factories/features/SkillFactory");
+                const realitem : Skill = await SkillFactory.CreateNewSkill(stringval, null)
+                return realitem.GetTrueName();
+            }                   
+            case "sg": {
+                const { SkillFactory } = await import("../factories/features/SkillFactory");
+                const realitem : SkillGroup = await SkillFactory.CreateNewSkillGroup(stringval, null)
+                return realitem.GetTrueName();
+            }                     
+            case "ab": {
+                const { AbilityFactory } = await import("../factories/features/AbilityFactory");
+                const realitem : Ability = await AbilityFactory.CreateNewAbility(stringval, null)
+                return realitem.GetTrueName();
+            }                     
+            case "md": {
+                const { ModelFactory } = await import("../factories/features/ModelFactory");
+                const realitem : Model = await ModelFactory.CreateNewModel(stringval, null)
+                return realitem.GetTrueName();
+            }                      
+            case "mv": {
+                const { ModelFactory } = await import("../factories/features/ModelFactory");
+                const realitem : Model = await ModelFactory.CreateNewModel(stringval, null)
+                return realitem.GetTrueName();
+            }                      
+            case "up": {
+                const { UpgradeFactory } = await import("../factories/features/UpgradeFactory");
+                const realitem : Upgrade = await UpgradeFactory.CreateNewUpgrade(stringval, null)
+                return realitem.GetTrueName();
+            }            
+            default: {
+                return makestringpresentable(stringval);
+            }
+        }
+    } catch (e) {
+        return makestringpresentable(stringval);
+    }
+
+    return makestringpresentable(stringval);
 }
 
 /**
