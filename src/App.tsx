@@ -32,10 +32,17 @@ import WbbCreateNewPage from "./display/pages/WbbCreateNewPage";
 import WbbEditPage from "./display/pages/WbbEditPage";
 import PrivacyPopup from "./display/components/generics/PrivacyPopup";
 import {TrackingManager} from "./display/components/generics/TrackingManager";
-import PrivacyPage from "./display/superroutes/PrivacyPage";
 import ProfileSettingsPage from "./display/superroutes/ProfileSettingsPage";
 import ProfilePage from "./display/superroutes/ProfilePage";
 import FooterMain from "./display/footers/FooterMain";
+import StaticPrivacy from "./display/pages/StaticPrivacy";
+import StaticLegalNotice from "./display/pages/StaticLegalNotice";
+import StaticTermsAndConditions from "./display/pages/StaticTermsAndConditions";
+import StaticContact from "./display/pages/StaticContact";
+import StaticWithdrawal from "./display/pages/StaticWithdrawal";
+import StaticPremiumMembership from "./display/pages/StaticPremiumMembership";
+import StaticSupporterPacks from "./display/pages/StaticSupporterPacks";
+import StaticCollaborate from "./display/pages/StaticCollaborate";
 
 
 const App: React.FC = () => {
@@ -69,9 +76,21 @@ const App: React.FC = () => {
                                 <Route path={ROUTES.COMPENDIUM_ROUTE} element={<CompendiumRoute controller={compendiumcontroller} />} />
                                 <Route path={ROUTES.WARBAND_ROUTE} element={<WarbandRoute controller={toolcontroller} />} />
                                 <Route path={ROUTES.LOGIN_ROUTE} element={<SynodLoginPage />} /> {/* Login Page */}
-                                <Route path={ROUTES.PAGE_PRIVCACY} element={<PrivacyPage />} /> {/* Privacy Page */}
                                 <Route path={ROUTES.PROFILE_SETTINGS_ROUTE} element={<ProfileSettingsPage />} /> {/* Edit Profile Page */}
                                 <Route path={ROUTES.PROFILE_VIEW_ROUTE} element={<ProfilePage />} />
+
+                                {/* Static Pages - Legal */}
+                                <Route path={ROUTES.PAGE_LEGAL} element={<StaticLegalNotice />} /> {/* Legal Notice Page */}
+                                <Route path={ROUTES.PAGE_PRIVCACY} element={<StaticPrivacy />} /> {/* Privacy Page */}
+                                <Route path={ROUTES.PAGE_TERMS} element={<StaticTermsAndConditions />} /> {/* Terms and Conditions */}
+                                {/*<Route path={ROUTES.PAGE_CONTACT} element={<StaticContact />} /> /!* Contact Page *!/*/}
+                                <Route path={ROUTES.PAGE_WITHDRAWAL} element={<StaticWithdrawal />} /> {/* Withdrawal Page */}
+
+                                {/* Static Pages - Content */}
+                                <Route path={ROUTES.PAGE_MEMBERSHIP} element={<StaticPremiumMembership />} /> {/* Withdrawal Page */}
+                                <Route path={ROUTES.PAGE_SUPPORTER_PACKS} element={<StaticSupporterPacks />} /> {/* Withdrawal Page */}
+                                <Route path={ROUTES.PAGE_COLLABORATE} element={<StaticCollaborate />} /> {/* Withdrawal Page */}
+
                             </Routes>
 
                             <FooterMain />

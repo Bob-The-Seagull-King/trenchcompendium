@@ -94,10 +94,10 @@ const FooterMain: React.FC = () => {
             title: 'Withdrawal',
             link: ROUTES.PAGE_WITHDRAWAL
         },
-        {
-            title: 'Contact',
-            link: ROUTES.PAGE_CONTACT
-        }
+        // {
+        //     title: 'Contact',
+        //     link: ROUTES.PAGE_CONTACT
+        // }
     ]
 
 

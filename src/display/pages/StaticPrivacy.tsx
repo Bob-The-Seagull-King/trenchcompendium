@@ -1,14 +1,21 @@
-import React, {useState} from "react";
+
+/**
+ * A Static page for the privacy notice
+ */
+
+import React, {useState} from 'react'
 import PrivacyPopup from "../components/generics/PrivacyPopup";
 
-const PrivacyPage: React.FC = () => {
+const StaticPrivacy: React.FC = () => {
+
     const [showPopup, setShowPopup] = useState(false);
 
+
     return (
-        <div className={'PrivacyPage'}>
+        <div className="StaticPrivacy page-static">
             <div className={'container'}>
 
-                <PrivacyPopup forceShow={showPopup} />
+                <PrivacyPopup forceShow={showPopup}/>
 
                 <h1>
                     {'Privacy Policy for Trench Companion'}
@@ -31,7 +38,7 @@ const PrivacyPage: React.FC = () => {
                         'By using our website, you hereby consent to our Privacy Policy and agree to its terms.'
                     }
 
-                    <br />
+                    <br/>
                     <div className={'btn btn-secondary btn-sm mt-3 mb-3'} onClick={() => setShowPopup(true)}>
                         {'Change Privacy Settings'}
                     </div>
@@ -178,8 +185,8 @@ const PrivacyPage: React.FC = () => {
                     }
                 </p>
             </div>
-
         </div>
-    );
+    )
 }
-export default PrivacyPage;
+
+export default StaticPrivacy
