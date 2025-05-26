@@ -17,6 +17,8 @@ import RulesGloriousDeed from '../components/rules-content/RulesGloriousDeed';
 import PageMetaInformation from "../components/generics/PageMetaInformation";
 import SynodImage from '../../utility/SynodImage';
 import { useLocation } from 'react-router-dom';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faPlus, faRotate} from "@fortawesome/free-solid-svg-icons";
 
 const ToolsRandomScenario = (prop: any) => {
     const Manager : ScenarioGenerator = prop.manager? prop.manager : getManager();
@@ -52,7 +54,10 @@ const ToolsRandomScenario = (prop: any) => {
         }
         return null;
     }
-    
+
+    console.log('_currentItem');
+    console.log(_currentItem);
+
     useEffect(() => {
         async function SetScenario() {
             
@@ -85,28 +90,91 @@ const ToolsRandomScenario = (prop: any) => {
     return (
         <ErrorBoundary fallback={<div>Something went wrong with ToolsRandomScenario.tsx</div>}>
             <div className={'rules-content-main'}>
+                <div className={'ToolsRandomScenario'}>
+                    <PageMetaInformation
+                        title={'Random Scenario Generator'}
+                        description={'Have a scenario randomly generated for you'}
+                    />
 
-                <PageMetaInformation
-                    title={'Random Scenario Generator'}
-                    description={'Have a scenario randomly generated for you'}
-                />
+                    <h1>
+                        {'Random Scenario Generator'}
+                    </h1>
 
-                {/* Generator Button */}
-                <div onClick={() => (newScenario())}className='borderstyler softpad colorWhite tagText centerPosition'>New Scenario</div>
-                
-                <br/>
+                    <table className={'table_headed table_headed-highlight'}>
+                        <tr className={'table-headrow'}>
+                            <th colSpan={2}>
+                                {'Random Scenario'}
+                            </th>
+                        </tr>
 
-                {_currentItem != null &&
-                    <h3>{"Scenario Code: "+_currentItem?.id}</h3>
-                }
+                        <tr className={'table_row'}>
+                            <td>
+                                {'Scenario Type'}
+                            </td>
+                            <td>
+                                {/* @TODO: Add Scenario Type String here */}
+                                {'Sabotage'}
+                            </td>
+                        </tr>
 
-                <br/>
-                
-                {_currentItem != null &&
-                    <ScenarioDisplay data={_currentItem.genscen} />
-                }
+                        <tr className={'table_row'}>
+                            <td>
+                                {'Deployment'}
+                            </td>
+                            <td>
+                                {/* @TODO: Add Deployment Type String here */}
+                                {'Tunnels'}
+                            </td>
+                        </tr>
+
+                        <tr className={'table_row'}>
+                            <td>
+                                {'Glorious Deeds'}
+                            </td>
+                            <td>
+                                {/* @TODO: Add Deeds Strings here */}
+                                {'Head Hunter'}{', '}
+                                {'Reaper'}{', '}
+                                {'Show of Mercy'}{', '}
+                                {'Killer Instinct'}{', '}
+                                {'Victorious'}
+                            </td>
+                        </tr>
+
+                        {_currentItem != null &&
+                            <tr className={'table_row'}>
+                                <td>
+                                    {'Scenario Code'}
+                                </td>
+                                <td>
+                                    {_currentItem?.id}
+                                </td>
+                            </tr>
+                        }
+                        <tr className={'table_row'}>
+                            <td colSpan={2}>
+                                {/* Generator Button */}
+                                <div
+                                    onClick={() => (newScenario())}
+                                    className='btn btn-primary'
+                                >
+                                    <FontAwesomeIcon icon={faRotate} className="icon-inline-left-l"/>
+
+                                    {'Roll new Scenario'}
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <h2>
+                        {'Scenario Rules'}
+                    </h2>
+
+                    {_currentItem != null &&
+                        <ScenarioDisplay data={_currentItem.genscen} />
+                    }
+                </div>
             </div>
-
         </ErrorBoundary>
     )
     // -------------------------------------------
