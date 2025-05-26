@@ -87,7 +87,7 @@ const StaticPremiumMembership: React.FC = () => {
 
                     imageId={265}
                     className={'swap'}
-                    
+
                 />
 
             </div>

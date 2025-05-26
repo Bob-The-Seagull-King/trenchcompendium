@@ -6,7 +6,7 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 
 // Font Awesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faClose, faUser} from '@fortawesome/free-solid-svg-icons'
+import {faClose, faRightFromBracket, faUser} from '@fortawesome/free-solid-svg-icons'
 import {useLocation, useNavigate} from 'react-router-dom';
 import { ControllerController } from '../../../classes/_high_level_controllers/ControllerController';
 import RulesMenuBody from "../../components/rules-content/RulesMenuBody";
@@ -18,6 +18,7 @@ import OffcanvasMenuSettings from "../../components/generics/OffcanvasMenuSettin
 import SynodImage from "../../../utility/SynodImage";
 import CustomNavLink from "../../components/subcomponents/interactables/CustomNavLink";
 import {ROUTES} from "../../../resources/routes-constants";
+import {useAuth} from "../../../utility/AuthContext";
 
 interface IControllerProp {
     controller : ControllerController; // The controller being passed through
@@ -33,6 +34,9 @@ const OffcanvasMenu: React.FC<IControllerProp> = (prop) => {
 
     const handleClose = prop.closeFunc;
     const show = prop.showState
+
+    const { isLoggedIn, userId, logout } = useAuth()
+
 
     // State
     // Navigation
@@ -51,8 +55,19 @@ const OffcanvasMenu: React.FC<IControllerProp> = (prop) => {
     }
 
     // get Theme
-
     const [theme] = useGlobalState('theme');
+
+    // Set list of secondary nav links
+    const secondary_links = [
+        {
+            title: 'Premium Membership',
+            link: ROUTES.PAGE_MEMBERSHIP
+        },
+        {
+            title: 'Supporter Packs',
+            link: ROUTES.PAGE_SUPPORTER_PACKS
+        },
+    ]
 
     /**
      * Set active view
@@ -98,9 +113,9 @@ const OffcanvasMenu: React.FC<IControllerProp> = (prop) => {
                     {activeView === 'main' && (
                         <div className={'menu-lvl-1'}>
                             <div className={'menu-lvl-1-item-main'}
-                                onClick={() => {
-                                    setActiveView('compendium');
-                                }}
+                                 onClick={() => {
+                                     setActiveView('compendium');
+                                 }}
                             >
                                 <span className={'title'}>
                                     {'Compendium'}
@@ -127,17 +142,72 @@ const OffcanvasMenu: React.FC<IControllerProp> = (prop) => {
                                 />
                             </div>
 
-                            <CustomNavLink
-                                link={ROUTES.LOGIN_ROUTE}
-                                runfunc={() => {
-                                    NavigateLogin();
-                                    handleClose();
-                                }}
-                                classes={'menu-lvl-1-item-secondary'}
-                            >
-                                <FontAwesomeIcon icon={faUser} className=""/>
-                                {'Login'}
-                            </CustomNavLink>
+                            {/* Login Nav */}
+                            {!isLoggedIn &&
+                                <CustomNavLink
+                                    link={ROUTES.LOGIN_ROUTE}
+                                    runfunc={() => {
+                                        NavigateLogin();
+                                        handleClose();
+                                    }}
+                                    classes={'menu-lvl-1-item-secondary'}
+                                >
+                                    <FontAwesomeIcon icon={faUser} className="icon-inline-left-l"/>
+                                    {'Login'}
+                                </CustomNavLink>
+                            }
+
+                            {/* Logged in Nav */}
+                            {isLoggedIn &&
+                                <>
+                                    <CustomNavLink
+                                        link={'/profile/' + userId}
+                                        runfunc={() => {
+                                            navigate('/profile/' + userId)
+                                            handleClose();
+
+                                        }}
+                                        classes={'menu-lvl-1-item-secondary'}
+                                    >
+                                        <FontAwesomeIcon icon={faUser} className="icon-inline-left-l"/>
+
+                                        {'Profile'}
+                                    </CustomNavLink>
+
+                                    <div
+                                        className={'menu-lvl-1-item-secondary'}
+                                        onClick={() => {
+                                            logout()
+                                            NavigateLogin()
+                                            handleClose()
+                                        }}
+                                    >
+                                        <FontAwesomeIcon icon={faRightFromBracket} className="icon-inline-left-l"/>
+
+                                        {'Log Out'}
+                                    </div>
+                                </>
+                            }
+
+                            {/* Secondary Links */}
+                            { secondary_links.length > 0 &&
+                                <>
+                                    {secondary_links.map((linkItem, j) => (
+                                        <CustomNavLink
+                                            key={j}
+                                            classes={'menu-lvl-1-item-secondary'}
+                                            link={linkItem.link}
+                                            runfunc={() => {
+                                                navigate(linkItem.link)
+                                                handleClose()
+                                            }}>
+                                            {linkItem.title}
+                                        </CustomNavLink>
+                                    ))}
+                                </>
+                            }
+
+
                         </div>
                     )}
 
