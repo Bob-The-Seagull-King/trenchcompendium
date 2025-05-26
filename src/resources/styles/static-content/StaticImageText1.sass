@@ -1,0 +1,49 @@
+// // // // //
+//
+// Static content - Image and Text Combo
+//
+
+
+.StaticImageText1
+    position: relative
+    display: flex
+    gap: 30px
+    margin-bottom: 30px
+
+    .image-wrap
+        position: relative
+        aspect-ratio: 4 / 3
+
+        width: calc( 50% - 15px)
+
+
+        > img
+            position: absolute
+            top: 0
+            left: 0
+            width: 100%
+            height: 100%
+            object-fit: cover
+            object-position: center
+
+    .text-wrap
+        display: flex
+        flex-direction: column
+        justify-content: center
+        width: calc( 50% - 15px)
+
+    @media(min-width: 768px)
+        &.swap
+            .image-wrap
+                order: 2
+            .text-wrap
+                order: 1
+
+    @media(max-width: 767px)
+        flex-direction: column
+        gap: 15px
+
+        .image-wrap
+            width: 100%
+        .text-wrap
+            width: 100%
