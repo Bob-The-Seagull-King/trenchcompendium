@@ -9,6 +9,9 @@ import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import CustomNavLink from '../subcomponents/interactables/CustomNavLink';
 import PageMetaInformation from "../generics/PageMetaInformation";
+import {getTagSetValue} from "../../../utility/functions";
+import RulesBannerText from "../rules-content/RulesBannerText";
+import {ROUTES} from "../../../resources/routes-constants";
 
 
 interface RulesArmouryElement {
@@ -32,32 +35,21 @@ const DefaultScenario: React.FC<RulesArmouryElement> = ({ item }) => {
 
                     <p>
                         {'These are the official Trench Crusade Scenarios. You can select one from the list below or use the random scenario generator.'}
-
-                        <br/> <br/>
-                        <CustomNavLink
-                            classes={'font-normal'}
-                            link={'/compendium/scenario/randomscenario'}
-                            runfunc={() => {
-                                navigate('/compendium/scenario/randomscenario')
-                            }}>
-                            <>
-                                Scenario Generator
-                                <FontAwesomeIcon icon={faChevronRight} className={'icon-inline-right'}/>
-                            </>
-                        </CustomNavLink>
-                        <br/>
-                        <CustomNavLink
-                            classes={'font-normal'}
-                            link={'/compendium/scenario/randomscenariorules'}
-                            runfunc={() => {
-                                navigate('/compendium/scenario/randomscenariorules')
-                            }}>
-                            <>
-                                Scenario Generation Rules
-                                <FontAwesomeIcon icon={faChevronRight} className={'icon-inline-right'}/>
-                            </>
-                        </CustomNavLink>
                     </p>
+
+                    <RulesBannerText
+                        link={ROUTES.COMP_SCENARIO_GENRULES}
+                        title={'Random Scenario Rules'}
+                        type={'inline'}
+                    />
+
+                    <br />
+
+                    <RulesBannerText
+                        link={ROUTES.COMP_SCENARIO_GENERATOR}
+                        title={'Scenario Generator'}
+                        type={'inline'}
+                    />
 
                     <div className={'spacer-20'}></div>
 
