@@ -17,7 +17,7 @@ const SynodImage: React.FC<SynodImageProps> = ({ imageId, size = 'medium', class
     const [applycurse] = useGlobalState('applycurse');
     const [glitch, setGlitch] = useState(false);
 
-    const curse_interval = 5000;
+    const curse_interval = 25000;
     const curse_variance = 9000;
 
     useEffect(() => {
