@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faUser} from "@fortawesome/free-solid-svg-icons";
 import CustomNavLink from "../subcomponents/interactables/CustomNavLink";
+import {ROUTES} from "../../../resources/routes-constants";
 
 interface ConsentPreferences {
     essential: boolean;
@@ -68,7 +69,7 @@ const PrivacyPopup: React.FC<PrivacyPopupProps> = ({ forceShow }) => {
                     <br/>
                     <br/>
                     {'Additional information can be found in our '}
-                    <a href={'/privacy'}>
+                    <a href={ROUTES.PAGE_PRIVCACY}>
                         {'privacy dislcaimer'}
                     </a>
                     <br/>

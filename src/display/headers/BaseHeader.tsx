@@ -21,6 +21,7 @@ import logoLightMode from '../../resources/images/trench-companion-logo-black-v2
 import { ControllerController } from '../../classes/_high_level_controllers/ControllerController';
 import {useGlobalState} from "../../utility/globalstate";
 import CustomNavLink from '../components/subcomponents/interactables/CustomNavLink';
+import {ROUTES} from "../../resources/routes-constants";
 
 interface IControllerProp {
     controller : ControllerController; // The controller being passed through
@@ -42,7 +43,7 @@ const BaseHeader: React.FC<IControllerProp> = (prop: any) => {
         navigate('/', {state: Date.now().toString()});
     }
     function NavigateLogin() {
-        navigate('/login', {state: Date.now().toString()});
+        navigate(ROUTES.LOGIN_ROUTE, {state: Date.now().toString()});
     }
 
     // Return result -----------------------------
@@ -62,7 +63,7 @@ const BaseHeader: React.FC<IControllerProp> = (prop: any) => {
                 </div>
 
                 <CustomNavLink 
-                    link={"/login"}
+                    link={ROUTES.LOGIN_ROUTE}
                     runfunc={() => NavigateLogin()}
                     classes={'header-login-btn'}
                 >

@@ -17,6 +17,7 @@ import WBBMenuBody from "../../components/warband-builder/WBBMenuBody";
 import OffcanvasMenuSettings from "../../components/generics/OffcanvasMenuSettings";
 import SynodImage from "../../../utility/SynodImage";
 import CustomNavLink from "../../components/subcomponents/interactables/CustomNavLink";
+import {ROUTES} from "../../../resources/routes-constants";
 
 interface IControllerProp {
     controller : ControllerController; // The controller being passed through
@@ -46,7 +47,7 @@ const OffcanvasMenu: React.FC<IControllerProp> = (prop) => {
     }
 
     function NavigateLogin() {
-        navigate('/login', {state: Date.now().toString()});
+        navigate(ROUTES.LOGIN_ROUTE, {state: Date.now().toString()});
     }
 
     // get Theme
@@ -127,7 +128,7 @@ const OffcanvasMenu: React.FC<IControllerProp> = (prop) => {
                             </div>
 
                             <CustomNavLink
-                                link={"/login"}
+                                link={ROUTES.LOGIN_ROUTE}
                                 runfunc={() => {
                                     NavigateLogin();
                                     handleClose();
