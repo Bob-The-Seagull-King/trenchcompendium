@@ -171,7 +171,7 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
             }
             case "table_headitem": {
                 return (
-                    <th className="table_headitem">
+                    <th>
                         <span>
                             {ConvertContentWithGlossary((item.Glossary), item.Content?.toString() || "")}
                         </span>
