@@ -35,6 +35,7 @@ import {TrackingManager} from "./display/components/generics/TrackingManager";
 import PrivacyPage from "./display/superroutes/PrivacyPage";
 import ProfileSettingsPage from "./display/superroutes/ProfileSettingsPage";
 import ProfilePage from "./display/superroutes/ProfilePage";
+import FooterMain from "./display/footers/FooterMain";
 
 
 const App: React.FC = () => {
@@ -60,16 +61,20 @@ const App: React.FC = () => {
                     <PersistGate loading={null} persistor={persistor}>
                         <Router >
                             <SuperHeader controller={compendiumcontroller}/>
+
                             <ScrollToTop/>
+
                             <Routes>
                                 <Route path={ROUTES.HOME_ROUTE} element={<HomeRoute />} />
                                 <Route path={ROUTES.COMPENDIUM_ROUTE} element={<CompendiumRoute controller={compendiumcontroller} />} />
                                 <Route path={ROUTES.WARBAND_ROUTE} element={<WarbandRoute controller={toolcontroller} />} />
                                 <Route path={ROUTES.LOGIN_ROUTE} element={<SynodLoginPage />} /> {/* Login Page */}
-                                <Route path={ROUTES.PRIVACY_ROUTE} element={<PrivacyPage />} /> {/* Privacy Page */}
+                                <Route path={ROUTES.PAGE_PRIVCACY} element={<PrivacyPage />} /> {/* Privacy Page */}
                                 <Route path={ROUTES.PROFILE_SETTINGS_ROUTE} element={<ProfileSettingsPage />} /> {/* Edit Profile Page */}
                                 <Route path={ROUTES.PROFILE_VIEW_ROUTE} element={<ProfilePage />} />
                             </Routes>
+
+                            <FooterMain />
                         </Router>
                     </PersistGate>
                 </Provider>

@@ -4,7 +4,6 @@ export const ROUTES = {
     WARBAND_ROUTE: '/warband/*',
     HOME_ROUTE: '*',
     LOGIN_ROUTE: '/login/*',
-    PRIVACY_ROUTE: '/privacy/*',
     PROFILE_VIEW_ROUTE: '/profile/:id',
     PROFILE_SETTINGS_ROUTE: '/profile/:id/settings',
 
@@ -45,8 +44,21 @@ export const ROUTES = {
     COMP_CAMPAIGN_SKILLS : '/skills/*',
 
     // Warband Builder Routes //
-
     WBB_EDIT : '/edit/*',
-    WBB_NEW : '/new/*'
+    WBB_NEW : '/new/*',
+
+    // Static pages - legal stuff //
+    PAGE_LEGAL : '/page/legal-notice',
+    PAGE_PRIVCACY : '/page/privacy',
+    PAGE_TERMS : '/page/terms',
+    PAGE_CONTACT : '/page/contact', // information around contacting us
+    PAGE_WITHDRAWAL : '/page/withdrawal',
+
+    // Static Pages - other content //
+    PAGE_MEMBERSHIP : '/page/premium-membership', // will show fluff around the membership
+    PAGE_SUPPORTER_PACKS : '/page/supporter-packs', // will show fluff around the supporter packs
+    PAGE_COLLABORATE: '/page/collaboration', // will show fluff and contact for B2B partners
+
+
 
 }
