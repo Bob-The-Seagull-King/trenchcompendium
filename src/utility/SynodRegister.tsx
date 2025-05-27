@@ -6,6 +6,7 @@ import {SYNOD} from "../resources/api-constants";
 
 const SynodRegister = () => {
     const [email, setEmail] = useState('');
+    const [nickname, setNickname] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [message, setMessage] = useState('');
@@ -28,6 +29,7 @@ const SynodRegister = () => {
                 username: email,
                 email,
                 password,
+                nickname
             });
 
             if (response.status === 201) {
@@ -56,6 +58,18 @@ const SynodRegister = () => {
                         className={'form-control'}
                     />
                 </div>
+
+                <div className={'mb-3'}>
+                    <label htmlFor="synod-register-nickname" className="form-label">Nickname</label>
+                    <input
+                        type="email" id={'synod-register-nickname'}
+                        value={nickname}
+                        onChange={(e) => setNickname(e.target.value)}
+                        placeholder="Nickname"
+                        className={'form-control'}
+                    />
+                </div>
+
                 <div className={'mb-3'}>
                     <label htmlFor="synod-register-password" className="form-label">Password</label>
                     <input
