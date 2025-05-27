@@ -67,6 +67,10 @@ const OffcanvasMenu: React.FC<IControllerProp> = (prop) => {
             title: 'Supporter Packs',
             link: ROUTES.PAGE_SUPPORTER_PACKS
         },
+        {
+            title: 'Collaboration',
+            link: ROUTES.PAGE_COLLABORATE
+        },
     ]
 
     /**
