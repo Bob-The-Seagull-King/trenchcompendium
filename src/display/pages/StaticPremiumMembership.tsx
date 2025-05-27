@@ -6,6 +6,7 @@
 import React from 'react'
 import StaticParagraph from "../static-content/StaticParagraph";
 import StaticImageText1 from "../static-content/StaticImageText-1";
+import StaticFaq from "../static-content/StaticFaq";
 
 const StaticPremiumMembership: React.FC = () => {
     return (
@@ -90,6 +91,45 @@ const StaticPremiumMembership: React.FC = () => {
 
                 />
 
+                <h2>
+                    {'Frequently asked questions'}
+                </h2>
+
+                <StaticFaq
+                    title={'How do you handle the payment?'}
+                    content={
+                    <>
+                        {'Currently the payment is realized by using PayPal Subscription. '}
+                    </>
+                    }
+                />
+
+                <StaticFaq
+                    title={'How can I cancel my subscription?'}
+                    content={
+                    <>
+                        {'You can cancel your subscription in your profile settings or by cancelling in your PayPal dashboard.'}
+                    </>
+                    }
+                />
+
+                <StaticFaq
+                    title={'What happens to my uploaded images when i cancel my subscription?'}
+                    content={
+                        <>
+                            {'The Images you have uploaded will stay on your profile. You will not be able to upload any new images when you are not subscribed.'}
+                        </>
+                    }
+                />
+
+                <StaticFaq
+                    title={'What happens to my customization options, when I cancel my subscription?'}
+                    content={
+                        <>
+                            {'Your Profile status and customization options will be reset to the ones available to free members.'}
+                        </>
+                    }
+                />
             </div>
 
 
