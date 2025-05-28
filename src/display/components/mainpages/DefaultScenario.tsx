@@ -38,7 +38,7 @@ const DefaultScenario: React.FC<RulesArmouryElement> = ({ item }) => {
                     </p>
 
                     <RulesBannerText
-                        link={ROUTES.COMP_SCENARIO_GENRULES}
+                        link={"randomscenariorules"}
                         title={'Random Scenario Rules'}
                         type={'inline'}
                     />
@@ -46,7 +46,7 @@ const DefaultScenario: React.FC<RulesArmouryElement> = ({ item }) => {
                     <br />
 
                     <RulesBannerText
-                        link={ROUTES.COMP_SCENARIO_GENERATOR}
+                        link={"randomscenario"}
                         title={'Scenario Generator'}
                         type={'inline'}
                     />

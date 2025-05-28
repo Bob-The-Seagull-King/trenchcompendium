@@ -17,6 +17,8 @@ import ProfilePageWarbands from "../components/Profile/ProfilePageWarbands";
 import CustomNavLink from "../components/subcomponents/interactables/CustomNavLink";
 import {SYNOD} from "../../resources/api-constants";
 import {ToastContainer} from "react-toastify";
+import { SiteUser } from '../../classes/user_synod/site_user';
+import { UserFactory } from '../../factories/synod/UserFactory';
 
 /**
  * On this page, any user can see a profile.
@@ -33,15 +35,23 @@ const ProfilePage: React.FC = () => {
     /**
      * Get public user Data
      */
-    const [userData, setUserData] = React.useState<any>(null)
+    const [userData, setUserData] = React.useState<SiteUser | null>(null)
     React.useEffect(() => {
-        if (!id) return
 
-        fetch(`${SYNOD.URL}/wp-json/synod/v1/user-public/${id}`)
-            .then(res => res.json())
-            .then(data => setUserData(data))
-            .catch(err => console.error('Failed to fetch user data', err))
-    }, [id])
+        async function GetUserContent() {
+            console.log(id)
+            
+            if (!id) return
+
+            const UserData : SiteUser | null = await UserFactory.CreateUserByID(Number(id));
+
+            if (UserData != null) {
+                setUserData(UserData);
+            }
+        }
+
+        GetUserContent()
+    }, [])
 
     if (!id) return null
 
@@ -64,7 +74,7 @@ const ProfilePage: React.FC = () => {
 
                             <div className={'profile-intro-text'}>
                                 <h1 className={'profile-name'}>
-                                    {userData?.nickname || 'Loading...'}
+                                    {userData?.Nickname || 'Loading...'}
                                 </h1>
 
                                 <h2 className={'profile-sub'}>

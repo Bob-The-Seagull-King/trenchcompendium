@@ -10,6 +10,11 @@ export interface SynodImageData {
     sourceUrl: string;
 }
 
+export interface SynodProfilePicData {
+    urls: any; // Record<string, string>
+    id: string;
+}
+
 /**
  * Gets synod image data for a model by its slug
  */
@@ -113,6 +118,24 @@ class SynodImageCache {
     }
     public AddFactionCallCache(key : string) {
         this.callFactionCache[key] = true;
+    }
+
+    // FACTION IMAGES
+    imageProfileCache: Record<string, SynodProfilePicData> = {};
+    callProfileCache: Record<string, boolean> = {};
+    
+    public CheckProfileCache(key : string) {
+        return (this.imageProfileCache[key])
+    }
+    public CheckProfileCallCache(key : string) {
+        return (this.callProfileCache[key])
+    }
+
+    public AddProfileCache(key : string, data : SynodProfilePicData) {
+        this.imageProfileCache[key] = data;
+    }
+    public AddProfileCallCache(key : string) {
+        this.callProfileCache[key] = true;
     }
 
 }
