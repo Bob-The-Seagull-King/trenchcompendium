@@ -178,7 +178,7 @@ const OffcanvasMenu: React.FC<IControllerProp> = (prop) => {
                                         {'Profile'}
                                     </CustomNavLink>
 
-                                    <div
+                                    <a href={ROUTES.LOGIN_ROUTE}
                                         className={'menu-lvl-1-item-secondary'}
                                         onClick={() => {
                                             logout()
@@ -189,7 +189,7 @@ const OffcanvasMenu: React.FC<IControllerProp> = (prop) => {
                                         <FontAwesomeIcon icon={faRightFromBracket} className="icon-inline-left-l"/>
 
                                         {'Log Out'}
-                                    </div>
+                                    </a>
                                 </>
                             }
 
