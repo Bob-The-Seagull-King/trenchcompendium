@@ -81,7 +81,7 @@ const ProfilePage: React.FC = () => {
                                     onClick={handleOpenPfPDrawer}
                                 >
                                     <SynodImage
-                                        imageId={userData?.GetProfileImageId() || 0}
+                                        imageId={userData?.GetProfilePictureImageId() || 0}
                                         size="large"
                                         className="profile-image"
                                     />
@@ -89,7 +89,7 @@ const ProfilePage: React.FC = () => {
                             ):(
                                 <div className={'profile-image-wrap'}>
                                     <SynodImage
-                                        imageId={userData?.GetProfileImageId() || 0}
+                                        imageId={userData?.GetProfilePictureImageId() || 0}
                                         size="large"
                                         className="profile-image"
                                     />

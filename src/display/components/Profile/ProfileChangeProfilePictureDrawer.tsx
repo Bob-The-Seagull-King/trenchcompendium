@@ -4,7 +4,8 @@ import SynodImage from "../../../utility/SynodImage";
 
 import {ProfilePictureOption, SiteUser} from '../../../classes/user_synod/site_user';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faClose, faStar} from "@fortawesome/free-solid-svg-icons";
+import {faCheck, faClose, faStar} from "@fortawesome/free-solid-svg-icons";
+import LoadingOverlay from "../generics/Loading-Overlay";
 
 
 interface ProfileChangeProfilePictureDrawerProps {
@@ -25,8 +26,6 @@ const ProfileChangeProfilePictureDrawer: React.FC<ProfileChangeProfilePictureDra
                 .finally(() => setLoading(false))
         }
     }, [show, userData])
-    console.log('options');
-    console.log(options);
 
     return (
         <Offcanvas
@@ -47,23 +46,31 @@ const ProfileChangeProfilePictureDrawer: React.FC<ProfileChangeProfilePictureDra
             <Offcanvas.Body>
                 <div className={'pfp-selection'}>
                     {loading ? (
-                        // @TODO: add loading spinner
-                        <p>Loading...</p>
+                        <LoadingOverlay
+                            message={'Loading your settings'}
+                        />
                     ) : (
-                        // @TODO: mark current
                         // @TODO: do selection
                         <>
                             {options.map((opt) => (
                                 <div
                                     key={opt.id}
-                                    className={`pfp-option${!opt.available ? ' unavailable' : ''}`}
+                                    className={[
+                                        'pfp-option',
+                                        !opt.available && 'unavailable',
+                                        opt.id === userData.GetProfilePictureId() && 'current',
+                                    ].filter(Boolean).join(' ')}
                                 >
-                                    { (!opt.available) &&
+                                    { (!opt.available && opt.id !== userData.GetProfilePictureId() ) &&
                                         <>
                                             {opt.tier == 'premium' &&
                                                 <FontAwesomeIcon icon={faStar} />
                                             }
                                         </>
+                                    }
+
+                                    { opt.id === userData.GetProfilePictureId() &&
+                                        <FontAwesomeIcon icon={faCheck} />
                                     }
                                     <img src={opt.url}  />
                                 </div>

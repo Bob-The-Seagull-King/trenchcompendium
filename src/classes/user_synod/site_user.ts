@@ -120,9 +120,17 @@ class SiteUser {
 
     /**
      * Returns the profile picture ID
+     * - can NOT be loaded as image
      */
-    public GetProfileImageId () {
+    public GetProfilePictureId () {
         return parseInt(this.ProfilePic.id);
+    }
+    /**
+     * Returns the profile picture Image ID
+     * - can be loaded as image
+     */
+    public GetProfilePictureImageId () {
+        return parseInt(this.ProfilePic.image_id);
     }
 
     /**
