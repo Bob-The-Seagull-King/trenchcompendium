@@ -63,13 +63,11 @@ const ToolsRandomScenario = (prop: any) => {
             
             const code : string | null = GetCode();
             if (code != null) {
-                console.log("CODE")
                 await Manager.SetCodeScenario(code);
                 returnItem(Manager.CurrentScenario);
                 returnkey(_keyval + 1)
             }
             if (Manager.CurrentScenario == null || Manager.CurrentScenario == undefined) {
-                console.log("AHHHHHH")
                 await Manager.ResetScenario();
                 returnItem(Manager.CurrentScenario);
                 returnkey(_keyval + 1)
@@ -100,6 +98,7 @@ const ToolsRandomScenario = (prop: any) => {
                         {'Random Scenario Generator'}
                     </h1>
 
+                    {_currentItem != null &&
                     <table className={'table_headed table_headed-highlight'}>
                         <tr className={'table-headrow'}>
                             <th colSpan={2}>
@@ -112,8 +111,7 @@ const ToolsRandomScenario = (prop: any) => {
                                 {'Scenario Type'}
                             </td>
                             <td>
-                                {/* @TODO: Add Scenario Type String here */}
-                                {'Sabotage'}
+                                {_currentItem.infobox.obj}
                             </td>
                         </tr>
 
@@ -122,8 +120,7 @@ const ToolsRandomScenario = (prop: any) => {
                                 {'Deployment'}
                             </td>
                             <td>
-                                {/* @TODO: Add Deployment Type String here */}
-                                {'Tunnels'}
+                                {_currentItem.infobox.dep}
                             </td>
                         </tr>
 
@@ -131,13 +128,12 @@ const ToolsRandomScenario = (prop: any) => {
                             <td>
                                 {'Glorious Deeds'}
                             </td>
-                            <td>
-                                {/* @TODO: Add Deeds Strings here */}
-                                {'Head Hunter'}{', '}
-                                {'Reaper'}{', '}
-                                {'Show of Mercy'}{', '}
-                                {'Killer Instinct'}{', '}
-                                {'Victorious'}
+                            <td>                                
+                                {_currentItem.infobox.gl_a_1}{', '}                                
+                                {_currentItem.infobox.gl_a_2}{', '}
+                                {_currentItem.infobox.gl_b_1}{', '}
+                                {_currentItem.infobox.gl_b_2}{', '}
+                                {_currentItem.infobox.gl_fn}
                             </td>
                         </tr>
 
@@ -165,6 +161,7 @@ const ToolsRandomScenario = (prop: any) => {
                             </td>
                         </tr>
                     </table>
+                    }
 
                     <h2>
                         {'Scenario Rules'}

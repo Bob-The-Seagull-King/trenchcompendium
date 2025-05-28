@@ -38,9 +38,20 @@ interface GenCode {
     gl_fn : number
 }
 
+interface GenTitles {
+    obj : string,
+    dep : string,
+    gl_a_1 : string,
+    gl_a_2 : string,
+    gl_b_1 : string,
+    gl_b_2 : string,
+    gl_fn : string
+}
+
 interface ScenarioSet {
     genscen : Scenario,
-    id : string
+    id : string,
+    infobox : GenTitles
 }
 
 const zeroPad = (num : number, places : number) => String(num).padStart(places, '0')
@@ -495,13 +506,13 @@ class ScenarioGenerator {
     }
 
     public async ConstructNewScenario(code? : GenCode) : Promise<ScenarioSet> {
+
         let genstring = "Ob"
         if (this.ListOfObjectives.length === 0) throw new Error("No objectives available.");
         if (this.ListOfDeedsGroupC.length === 0) throw new Error("No deeds available in Group C.");
-        console.log(this.ListOfObjectives)
-        console.log(this.ListOfDeployments)
+        
         const obj_num = Math.floor(Math.random() * this.ListOfObjectives.length)
-        console.log(code? code.obj : obj_num)
+        
         const ChosenObjective : GenerateObjective = this.ListOfObjectives[code? code.obj : obj_num]
         genstring += zeroPad(obj_num,2);
         
@@ -509,7 +520,7 @@ class ScenarioGenerator {
         if (FilteredDeploymentList.length === 0) throw new Error("No valid deployments available.");
         
         const dep_num = Math.floor(Math.random() * FilteredDeploymentList.length)
-        console.log(code? code.dep : dep_num)
+        
         const ChosenDeployment : GenerateDeployment = FilteredDeploymentList[code? code.dep : dep_num]
         genstring += "Dp"+zeroPad(dep_num,2);
         
@@ -581,11 +592,20 @@ class ScenarioGenerator {
             special_rules : (ChosenObjective.special_rules || []).concat(ChosenDeployment.special_rules || [])
         }
 
-        console.log(genstring)
+        const info : GenTitles = {            
+            obj : ChosenObjective.name,
+            dep : ChosenDeployment.name,
+            gl_a_1 : DeedsGroupA[0].GetTrueName(),
+            gl_a_2 : DeedsGroupA[1].GetTrueName(),
+            gl_b_1 : DeedsGroupB[0].GetTrueName(),
+            gl_b_2 : DeedsGroupB[1].GetTrueName(),
+            gl_fn : DeedsGroupC[0].GetTrueName()
+        }
         const ScenGen : Scenario = await ScenarioFactory.CreateScenario(NewScenarioJson, null);
         return {
             genscen : ScenGen,
-            id : genstring
+            id : genstring,
+            infobox: info
         }
         
     }
