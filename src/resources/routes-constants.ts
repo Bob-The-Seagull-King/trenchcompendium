@@ -59,6 +59,7 @@ export const ROUTES = {
     PAGE_SUPPORTER_PACKS : '/page/supporter-packs', // will show fluff around the supporter packs
     PAGE_COLLABORATE: '/page/collaboration', // will show fluff and contact for B2B partners
 
-
+    // Main Site URL
+    MAIN : 'https://trench-companion.com'
 
 }

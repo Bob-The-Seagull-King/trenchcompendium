@@ -175,29 +175,48 @@ body[data-theme]
 
 // // // // //
 // Bootstrap color theming
-.offcanvas
-    background-color: $color-bg
-
-.modal-dialog
-    .modal-content
-        background-color: $color-bg-2
+.trench-companion
+    .offcanvas
+        background-color: $color-bg-1
         color: $color-text
 
-    .modal-header
-        position: relative
-        background-color: $color-highlight-bg
-        border-bottom-color: $color-bg-1
+        .offcanvas-header
+            background-color: $color-highlight-bg
+            color: #fff
 
-        .modal-close-icon
-            position: absolute
-            top: 50%
-            transform: translateY(-50%)
-            right: 0
-            padding: 20px
+        .offcanvas-title
+            .offcanvas-close
+                position: absolute
+                top: 50%
+                transform: translateY(-50%)
+                right: 0
+                height: 40px
+                width: 40px
+                text-align: center
+                line-height: 40px
+                cursor: pointer
+                color: $color-text
+
+    .modal-dialog
+        .modal-content
+            background-color: $color-bg-2
+            color: $color-text
+
+        .modal-header
+            position: relative
+            background-color: $color-highlight-bg
+            border-bottom-color: $color-bg-1
+
+            .modal-close-icon
+                position: absolute
+                top: 50%
+                transform: translateY(-50%)
+                right: 0
+                padding: 20px
 
 
-    .modal-footer
-        border-color: $color-bg-1
+        .modal-footer
+            border-color: $color-bg-1
 
 
 // Form check general

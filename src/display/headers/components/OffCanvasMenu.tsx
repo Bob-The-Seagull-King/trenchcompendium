@@ -108,7 +108,7 @@ const OffcanvasMenu: React.FC<IControllerProp> = (prop) => {
                         </div>
 
                         <div className="offcanvas-close" onClick={handleClose}>
-                        <FontAwesomeIcon icon={faClose} className=""/>
+                            <FontAwesomeIcon icon={faClose} className=""/>
                         </div>
                     </Offcanvas.Title>
                 </Offcanvas.Header>

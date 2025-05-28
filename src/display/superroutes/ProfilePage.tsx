@@ -4,12 +4,12 @@
  */
 
 
-import React from 'react'
+import React, {useState} from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../utility/AuthContext'
 import SynodImage from "../../utility/SynodImage";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCog, faDownload, faPlus} from "@fortawesome/free-solid-svg-icons";
+import {faCog, faDownload, faPlus, faQrcode} from "@fortawesome/free-solid-svg-icons";
 import ProfilePageAchievements from "../components/Profile/ProfilePageAchievements";
 import ProfilePageFriends from "../components/Profile/ProfilePageFriends";
 import ProfilePageCampaigns from "../components/Profile/ProfilePageCampaigns";
@@ -19,6 +19,8 @@ import {SYNOD} from "../../resources/api-constants";
 import {ToastContainer} from "react-toastify";
 import { SiteUser } from '../../classes/user_synod/site_user';
 import { UserFactory } from '../../factories/synod/UserFactory';
+import { QRCodeSVG } from 'qrcode.react';
+import ProfileShareDrawer from "../components/Profile/ProfileShareDrawer";
 
 /**
  * On this page, any user can see a profile.
@@ -31,6 +33,11 @@ const ProfilePage: React.FC = () => {
     const navigate = useNavigate()
 
     const isOwnProfile = isLoggedIn && id && parseInt(id, 10) === userId
+
+    /** Share Drawer */
+    const [showShareDrawer, setShowShareDrawer] = useState(false)
+    const handleOpenShareDrawer = () => setShowShareDrawer(true)
+    const handleCloseShareDrawer = () => setShowShareDrawer(false)
 
     /**
      * Get public user Data
@@ -81,16 +88,30 @@ const ProfilePage: React.FC = () => {
                                     {'Supporter'}
                                 </h2>
 
+
+
+
                                 {isOwnProfile ? (
-                                    <CustomNavLink
-                                        classes={'btn btn-primary'}
-                                        link={`/profile/${id}/settings`}
-                                        runfunc={() => {
-                                            navigate(`/profile/${id}/settings`)
-                                        }}>
-                                        <FontAwesomeIcon icon={faCog} className="icon-inline-left"/>
-                                        {'Settings'}
-                                    </CustomNavLink>
+                                    <>
+                                        <CustomNavLink
+                                            classes={'btn btn-primary'}
+                                            link={ '/profile/' + userData?.GetUserId() + '/settings' || `/profile/${id}/settings`}
+                                            runfunc={() => {
+                                                navigate( '/profile/' + userData?.GetUserId() + '/settings' || `/profile/${id}/settings`)
+                                            }}>
+                                            <FontAwesomeIcon icon={faCog} className="icon-inline-left"/>
+                                            {'Settings'}
+                                        </CustomNavLink>
+
+                                        <div className={'btn btn-secondary'} onClick={handleOpenShareDrawer}>
+                                            <FontAwesomeIcon
+                                                icon={faQrcode}
+
+                                            />
+                                        </div>
+                                    </>
+
+
                                 ) : (
                                     // @TODO: add friend action
                                     <button className={'btn btn-primary'}>
@@ -125,6 +146,12 @@ const ProfilePage: React.FC = () => {
             <button onClick={logout} className="btn btn-secondary mt-3">
                 Log out
             </button>
+
+            <ProfileShareDrawer
+                userId={parseInt(id)}
+                show={showShareDrawer}
+                onClose={handleCloseShareDrawer}
+            />
         </div>
 
     )
