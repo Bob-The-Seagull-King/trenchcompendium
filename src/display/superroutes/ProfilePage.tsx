@@ -66,7 +66,7 @@ const ProfilePage: React.FC = () => {
                         <div className={'profile-intro'}>
                             <div className={'profile-image-wrap'}>
                                 <SynodImage
-                                    imageId={113}
+                                    imageId={userData?.GetProfileImageId() || 0}
                                     size="large"
                                     className="profile-image"
                                 />
@@ -74,7 +74,7 @@ const ProfilePage: React.FC = () => {
 
                             <div className={'profile-intro-text'}>
                                 <h1 className={'profile-name'}>
-                                    {userData?.Nickname || 'Loading...'}
+                                    {userData?.GetNickname() || 'Loading...'}
                                 </h1>
 
                                 <h2 className={'profile-sub'}>

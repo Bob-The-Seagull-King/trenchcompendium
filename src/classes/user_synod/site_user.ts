@@ -94,6 +94,27 @@ class SiteUser {
         return _objint;
     }
 
+
+    /**
+     * Returns the nickname of the user
+     */
+    public GetNickname () {
+        return this.Nickname;
+    }
+
+    /**
+     * Returns the user ID
+     */
+    public GetUserId () {
+        return this.ID;
+    }
+
+    /**
+     * Returns the profile picture ID
+     */
+    public GetProfileImageId () {
+        return parseInt(this.ProfilePic.id);
+    }
 }
 
 export {ISiteUser, SiteUser, SiteUserPublic}
