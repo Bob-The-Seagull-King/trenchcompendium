@@ -62,7 +62,7 @@ const SynodRegister = () => {
                 <div className={'mb-3'}>
                     <label htmlFor="synod-register-nickname" className="form-label">Nickname</label>
                     <input
-                        type="email" id={'synod-register-nickname'}
+                        type="text" id={'synod-register-nickname'}
                         value={nickname}
                         onChange={(e) => setNickname(e.target.value)}
                         placeholder="Nickname"
