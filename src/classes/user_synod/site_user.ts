@@ -12,6 +12,20 @@ interface ISiteUser {
     profile_picture: SynodProfilePicData
 }
 
+/**
+interface ISiteUser {
+    id: number,
+    nickname : string,
+    email: string,
+    requests : number[],
+    achievments: number[],
+    friends: number[],
+    warbands: IUserWarband[],
+    profile_picture: SynodProfilePicData,
+    Lets not include campaigns at the moment, or at least just put them as a number[] for future use.
+}
+ */
+
 interface SiteUserPublic {
     id: number,
     nickname : string,
