@@ -1,6 +1,8 @@
 import { SynodProfilePicData } from "../_high_level_controllers/SynodImageCache";
 import { IUserWarband, UserWarband } from "../saveitems/Warband/UserWarband";
 import { IAchievement } from "./user_achievements";
+import {ROUTES} from "../../resources/routes-constants";
+import {SYNOD} from "../../resources/api-constants";
 
 interface ISiteUser {
     id: number,
@@ -10,6 +12,13 @@ interface ISiteUser {
     warbands: IUserWarband[],
     campaigns: number[],
     profile_picture: SynodProfilePicData
+}
+
+export interface ProfilePictureOption {
+    id: number
+    available: boolean
+    url: string
+    tier: string
 }
 
 /**
@@ -114,6 +123,26 @@ class SiteUser {
      */
     public GetProfileImageId () {
         return parseInt(this.ProfilePic.id);
+    }
+
+    /**
+     * Gets Profile Picture Options from API
+     */
+    async getProfilePictureOptions(): Promise<ProfilePictureOption[]> {
+        const token = localStorage.getItem('jwtToken') // @TODO: This is probably not the best way to do it
+
+        const res = await fetch(`${SYNOD.URL}/wp-json/synod/v1/user-pfp-options/${this.GetUserId()}`, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            },
+        })
+
+        if (!res.ok) {
+            throw new Error('Failed to fetch profile picture options')
+        }
+
+        const data = await res.json()
+        return data as ProfilePictureOption[]
     }
 }
 

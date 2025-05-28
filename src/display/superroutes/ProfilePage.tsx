@@ -15,12 +15,10 @@ import ProfilePageFriends from "../components/Profile/ProfilePageFriends";
 import ProfilePageCampaigns from "../components/Profile/ProfilePageCampaigns";
 import ProfilePageWarbands from "../components/Profile/ProfilePageWarbands";
 import CustomNavLink from "../components/subcomponents/interactables/CustomNavLink";
-import {SYNOD} from "../../resources/api-constants";
-import {ToastContainer} from "react-toastify";
 import { SiteUser } from '../../classes/user_synod/site_user';
 import { UserFactory } from '../../factories/synod/UserFactory';
-import { QRCodeSVG } from 'qrcode.react';
 import ProfileShareDrawer from "../components/Profile/ProfileShareDrawer";
+import ProfileChangeProfilePictureDrawer from "../components/Profile/ProfileChangeProfilePictureDrawer";
 
 /**
  * On this page, any user can see a profile.
@@ -38,6 +36,11 @@ const ProfilePage: React.FC = () => {
     const [showShareDrawer, setShowShareDrawer] = useState(false)
     const handleOpenShareDrawer = () => setShowShareDrawer(true)
     const handleCloseShareDrawer = () => setShowShareDrawer(false)
+
+    /** Share Drawer */
+    const [showPfPDrawer, setShowPfPDrawer] = useState(false)
+    const handleOpenPfPDrawer = () => setShowPfPDrawer(true)
+    const handleClosePfPDrawer = () => setShowPfPDrawer(false)
 
     /**
      * Get public user Data
@@ -71,13 +74,28 @@ const ProfilePage: React.FC = () => {
                 <div className={'row'}>
                     <div className={'col-12 col-lg-7'}>
                         <div className={'profile-intro'}>
-                            <div className={'profile-image-wrap'}>
-                                <SynodImage
-                                    imageId={userData?.GetProfileImageId() || 0}
-                                    size="large"
-                                    className="profile-image"
-                                />
-                            </div>
+
+                            {isOwnProfile ? (
+                                <div
+                                    className={'profile-image-wrap editable'}
+                                    onClick={handleOpenPfPDrawer}
+                                >
+                                    <SynodImage
+                                        imageId={userData?.GetProfileImageId() || 0}
+                                        size="large"
+                                        className="profile-image"
+                                    />
+                                </div>
+                            ):(
+                                <div className={'profile-image-wrap'}>
+                                    <SynodImage
+                                        imageId={userData?.GetProfileImageId() || 0}
+                                        size="large"
+                                        className="profile-image"
+                                    />
+                                </div>
+                            )}
+
 
                             <div className={'profile-intro-text'}>
                                 <h1 className={'profile-name'}>
@@ -147,11 +165,25 @@ const ProfilePage: React.FC = () => {
                 Log out
             </button>
 
-            <ProfileShareDrawer
-                userId={parseInt(id)}
-                show={showShareDrawer}
-                onClose={handleCloseShareDrawer}
-            />
+            {isOwnProfile && (
+                <>
+                    <ProfileShareDrawer
+                        userId={parseInt(id)}
+                        show={showShareDrawer}
+                        onClose={handleCloseShareDrawer}
+                    />
+
+                    {userData &&
+                        <ProfileChangeProfilePictureDrawer
+                            userData={userData}
+                            show={showPfPDrawer}
+                            onClose={handleClosePfPDrawer}
+                        />
+                    }
+                </>
+
+            )}
+
         </div>
 
     )
