@@ -6,7 +6,9 @@ import { ISiteUser, SiteUser } from '../user_synod/site_user';
 import { IAchievement } from '../user_synod/user_achievements';
 import { ISiteUserPublic, SiteUserPublic } from '../user_synod/user_public';
 
-
+/**
+ * Stores non image data from Synod, to prevent uneeded 
+ */
 class SynodDataCache {
    
 
