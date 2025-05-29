@@ -169,11 +169,10 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
                     <p>
                         {'Sometimes the rules for Trench Crusade change, get balanced or clarified. These changes can be found here.'}
                     </p>
-
                     <div className={'row'}>
 
                         <div className={'col-12'}>
-                        {ViewPageController.Collection.itemcollection.map( (rule) => (
+                        {ViewPageController.Collection.itemcollection.filter((item) => (item.HeldItem.ID != 'er_faqcommunity')).map( (rule) => (
                             <RulesBannerText
                                 key={rule.HeldItem.ID}
                                 link={"/compendium/errata/"+rule.HeldItem.ID}
@@ -185,6 +184,15 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
                             }
                         </div>
                     </div>
+
+                    <p>
+                        {'Not all clarifications exist in officially published documents. Some questions are answered in the official Discord server, or are otherwise considered the accepted consensus when an official one isn\'t given. These rulings are collected below, but should not be treated as gospel.'}
+                    </p>
+
+                    <RulesBannerText
+                            link="/compendium/errata/er_faqcommunity"
+                            title={'Community Questions & Answers'}
+                    />
 
                 </ErrorBoundary>
             )

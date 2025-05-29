@@ -32,18 +32,6 @@ const FooterMain: React.FC = () => {
         },
     ]
 
-    // Warband related links
-    const warband_links = [
-        {
-            title: 'Your Warbands',
-            link: ROUTES.WARBAND_ROUTE
-        },
-        {
-            title: 'New Warband',
-            link: ROUTES.WARBAND_ROUTE + '/new/'
-        },
-    ]
-
     // Account related links
     const profile_link = isLoggedIn && userId
         ? `/profile/${userId}`
@@ -57,6 +45,10 @@ const FooterMain: React.FC = () => {
         {
             title: 'Your Profile',
             link: profile_link
+        },
+        {
+            title: 'Your Warbands',
+            link: ROUTES.WARBAND_ROUTE
         },
         {
             title: 'Account Settings',
@@ -73,7 +65,7 @@ const FooterMain: React.FC = () => {
         {
             title: 'Collaborations',
             link: ROUTES.PAGE_COLLABORATE
-        },
+        }
     ]
 
 
@@ -93,11 +85,18 @@ const FooterMain: React.FC = () => {
         {
             title: 'Withdrawal',
             link: ROUTES.PAGE_WITHDRAWAL
+        }
+    ]
+
+    const trench_companion_links = [
+        {
+            title: 'Legal Notice',
+            link: ROUTES.COMPANION_ABOUT
         },
-        // {
-        //     title: 'Contact',
-        //     link: ROUTES.PAGE_CONTACT
-        // }
+        {
+             title: 'Contact',
+             link: ROUTES.PAGE_CONTACT
+        }
     ]
 
 
@@ -107,16 +106,16 @@ const FooterMain: React.FC = () => {
             links: rules_links
         },
         {
-            title: 'Warbands',
-            links: warband_links
-        },
-        {
             title: 'Account',
             links: account_links
         },
         {
             title: 'Legal Information',
             links: legal_links
+        },
+        {
+            title: 'Trench Companion',
+            links: trench_companion_links
         }
     ]
 

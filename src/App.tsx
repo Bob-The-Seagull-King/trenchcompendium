@@ -43,6 +43,7 @@ import StaticWithdrawal from "./display/pages/StaticWithdrawal";
 import StaticPremiumMembership from "./display/pages/StaticPremiumMembership";
 import StaticSupporterPacks from "./display/pages/StaticSupporterPacks";
 import StaticCollaborate from "./display/pages/StaticCollaborate";
+import StaticAbout from './display/pages/StaticAbout'
 
 
 const App: React.FC = () => {
@@ -83,8 +84,12 @@ const App: React.FC = () => {
                                 <Route path={ROUTES.PAGE_LEGAL} element={<StaticLegalNotice />} /> {/* Legal Notice Page */}
                                 <Route path={ROUTES.PAGE_PRIVCACY} element={<StaticPrivacy />} /> {/* Privacy Page */}
                                 <Route path={ROUTES.PAGE_TERMS} element={<StaticTermsAndConditions />} /> {/* Terms and Conditions */}
-                                {/*<Route path={ROUTES.PAGE_CONTACT} element={<StaticContact />} /> /!* Contact Page *!/*/}
                                 <Route path={ROUTES.PAGE_WITHDRAWAL} element={<StaticWithdrawal />} /> {/* Withdrawal Page */}
+
+                                {/* Static Pages - Trench Companion */}
+                                <Route path={ROUTES.PAGE_CONTACT} element={<StaticContact />} /> {/* Contact Page */}
+                                <Route path={ROUTES.COMPANION_ABOUT} element={<StaticAbout />} /> {/* Contact Page */}
+
 
                                 {/* Static Pages - Content */}
                                 <Route path={ROUTES.PAGE_MEMBERSHIP} element={<StaticPremiumMembership />} /> {/* Withdrawal Page */}

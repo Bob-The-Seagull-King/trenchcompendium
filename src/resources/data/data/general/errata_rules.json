@@ -1,11 +1,73 @@
 [
     {
+        "id": "er_faqcommunity",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Community Questions & Answers",
+        "item_index": 0,
+        "description":  [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "This page collects a series of frequent rules questions and answers from the Trench Crusade Discord Server. Answers marked by a (C) have been confirmed by members of the development team themselves, while those marked by a (F) are included in official FAQ documents. The remaining are based on community consensus and experience."
+            }
+        ],
+        "sections": [
+            {
+                "title": "General Rules",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "paragraph"}, "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Q1.1: "
+                                    },                        
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "When a roll is modified using Blood/Blessing/Infection Markers, are those markers discarded? ",
+                                        "glossary": [
+                                            {"val": "Blood", "id": "kw_bloodmarker"},
+                                            {"val": "Blessing", "id": "kw_blessingmarker"},
+                                            {"val": "Infection", "id": "kw_infectionmarker"}
+                                        ]
+                                    }
+                                ]
+                            },                    
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "A1.1: "
+                                    },                         
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "Yes, each time one or more Markers are used, remove that number of markers from the model."
+                                    }
+                                ]
+                            }
+                        ]
+                    },   
+                    {
+                        "tags": {"desc_type" : "break"},
+                        "content": ""
+                    }
+                 ],
+                "content": [ ]
+            }
+        ]
+    },
+    {
         "id": "er_faqone",
         "source": "core",
         "tags": { },
         "contextdata": { },
         "name": "Frequently Asked Questions #1",
-        "item_index": 0,
+        "item_index": 1,
         "description":  [            
             {
                 "tags": {"desc_type" : "paragraph"},

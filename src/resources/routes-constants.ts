@@ -54,6 +54,9 @@ export const ROUTES = {
     PAGE_CONTACT : '/page/contact', // information around contacting us
     PAGE_WITHDRAWAL : '/page/withdrawal',
 
+    // Static pages - Personal Content //
+    COMPANION_ABOUT : '/about',
+
     // Static Pages - other content //
     PAGE_MEMBERSHIP : '/page/premium-membership', // will show fluff around the membership
     PAGE_SUPPORTER_PACKS : '/page/supporter-packs', // will show fluff around the supporter packs
