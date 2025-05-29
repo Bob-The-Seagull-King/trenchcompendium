@@ -58,6 +58,50 @@
                     }
                  ],
                 "content": [ ]
+            },
+            {
+                "title": "Movement ",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "paragraph"}, "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Q2.1: "
+                                    },                        
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Can a model move and charge in the same round?"
+                                    }
+                                ]
+                            },                    
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "A2.1: "
+                                    },                         
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "No, a model can only choose one option from the Move ACTION during each activation, so it can either make a Standard Move, Retreat or Charge. The only way a model can, usually, move twice in the same activation is by performing a Move ACTION and a Dash ACTION (in any order).",
+                                        "glossary": [
+                                            {"val": "ACTION", "id": "kw_action"}
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },   
+                    {
+                        "tags": {"desc_type" : "break"},
+                        "content": ""
+                    }
+                 ],
+                "content": [ ]
             }
         ]
     },
