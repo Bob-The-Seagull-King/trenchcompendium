@@ -19,6 +19,7 @@ import { SiteUser } from '../../classes/user_synod/site_user';
 import { UserFactory } from '../../factories/synod/UserFactory';
 import ProfileShareDrawer from "../components/Profile/ProfileShareDrawer";
 import ProfileChangeProfilePictureDrawer from "../components/Profile/ProfileChangeProfilePictureDrawer";
+import { SiteUserPublic } from '../../classes/user_synod/user_public';
 
 /**
  * On this page, any user can see a profile.
@@ -45,7 +46,7 @@ const ProfilePage: React.FC = () => {
     /**
      * Get public user Data
      */
-    const [userData, setUserData] = React.useState<SiteUser | null>(null)
+    const [userData, setUserData] = React.useState<SiteUserPublic | null>(null)
     React.useEffect(() => {
 
         async function GetUserContent() {
@@ -53,7 +54,7 @@ const ProfilePage: React.FC = () => {
             
             if (!id) return
 
-            const UserData : SiteUser | null = await UserFactory.CreateUserByID(Number(id));
+            const UserData : SiteUserPublic | null = await UserFactory.CreatePublicUserByID(Number(id));
 
             if (UserData != null) {
                 setUserData(UserData);
@@ -108,7 +109,13 @@ const ProfilePage: React.FC = () => {
 
 
 
+                            {
+                                /**
+                            
+                                    @TODO : Bob handle when we are able to get the private user data
 
+                                 */
+                            }
                                 {isOwnProfile ? (
                                     <>
                                         <CustomNavLink

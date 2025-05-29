@@ -6,12 +6,13 @@ import {ProfilePictureOption, SiteUser} from '../../../classes/user_synod/site_u
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCheck, faClose, faStar} from "@fortawesome/free-solid-svg-icons";
 import LoadingOverlay from "../generics/Loading-Overlay";
+import { SiteUserPublic } from '../../../classes/user_synod/user_public';
 
 
 interface ProfileChangeProfilePictureDrawerProps {
     show: boolean
     onClose: () => void
-    userData: SiteUser
+    userData: SiteUserPublic
 }
 
 const ProfileChangeProfilePictureDrawer: React.FC<ProfileChangeProfilePictureDrawerProps> = ({ show, onClose, userData }) => {
@@ -22,7 +23,7 @@ const ProfileChangeProfilePictureDrawer: React.FC<ProfileChangeProfilePictureDra
         if (show) {
             userData.getProfilePictureOptions()
                 .then(setOptions)
-                .catch((err) => console.error(err))
+                .catch((err : any) => console.error(err))
                 .finally(() => setLoading(false))
         }
     }, [show, userData])

@@ -3,26 +3,22 @@ import { IUserWarband, UserWarband } from "../saveitems/Warband/UserWarband";
 import { IAchievement } from "./user_achievements";
 import {ROUTES} from "../../resources/routes-constants";
 import {SYNOD} from "../../resources/api-constants";
-import { SiteUserPublic } from "./user_public";
+import { UserFactory } from "../../factories/synod/UserFactory";
+import { WarbandFactory } from "../../factories/warband/WarbandFactory";
+import { ProfilePictureOption } from "./site_user";
+import { AchievementFactory } from "../../factories/synod/AchievementFactory";
 
-interface ISiteUser {
+interface ISiteUserPublic {
     id: number,
     nickname : string,
-    achievments: number[],
+    achievements: number[],
     friends: number[],
     warbands: IUserWarband[],
     campaigns: number[],
     profile_picture: SynodProfilePicData
 }
 
-export interface ProfilePictureOption {
-    id: number
-    available: boolean
-    url: string
-    tier: string
-}
-
-class SiteUser {
+class SiteUserPublic {
     ID : number;
     Nickname : string;
     Achievements : IAchievement[] = []
@@ -31,11 +27,36 @@ class SiteUser {
     ProfilePic : SynodProfilePicData;
     Campaigns : number[] = []
     
-    public constructor(data: ISiteUser)
+    public constructor(data: ISiteUserPublic)
     {
         this.ID = data.id;
         this.Nickname = data.nickname;
         this.ProfilePic = data.profile_picture;
+    }
+
+    public async BuildAchievements(data: ISiteUserPublic) {
+        for (let i = 0; i < data.achievements.length; i++) {
+            const newach = await AchievementFactory.CreateAchievement(data.achievements[i])
+            if (newach != null) {
+                this.Achievements.push(newach);
+            }
+        }
+    }
+
+    public async BuildFriends(data: ISiteUserPublic) {
+        for (let i = 0; i < data.friends.length; i++) {
+            const newFriend = await UserFactory.CreatePublicUserByID(data.friends[i])
+            if (newFriend != null) {
+                this.Friends.push(newFriend);
+            }
+        }
+    }
+
+    public async BuildWarbands(data: ISiteUserPublic) {
+        for (let i = 0; i < data.warbands.length; i++) {
+            const band = await WarbandFactory.CreateUserWarband(data.warbands[i]);
+            this.Warbands.push(band);
+        }
     }
 
     public ConvertToInterface() {
@@ -56,10 +77,10 @@ class SiteUser {
             requestfriendlist.push(this.Campaigns[i])
         }
 
-        const _objint : ISiteUser = {
+        const _objint : ISiteUserPublic = {
             id : this.ID,
             nickname : this.Nickname,
-            achievments: achievementlist,
+            achievements: achievementlist,
             friends: friendlist,
             warbands: warbandlist,
             profile_picture: this.ProfilePic,
@@ -120,5 +141,5 @@ class SiteUser {
     }
 }
 
-export {ISiteUser, SiteUser}
+export {ISiteUserPublic, SiteUserPublic}
 

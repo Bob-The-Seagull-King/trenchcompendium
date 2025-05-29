@@ -3,9 +3,9 @@ import { IUserWarband } from "../saveitems/Warband/UserWarband";
 
 interface IAchievement {
     id: number,
-    title: string,
-    desc: string
+    name: string,
+    description: string,
+    image: number
 }
 
 export {IAchievement}
-
