@@ -47,6 +47,7 @@ class SiteUser {
         for (let i = 0; i < this.Friends.length; i++) {
             friendlist.push(this.Friends[i].ID)
         }
+
         const warbandlist : IUserWarband[] = []
         for (let i = 0; i < this.Warbands.length; i++) {
             warbandlist.push(this.Warbands[i].ConvertToInterface())
@@ -120,7 +121,7 @@ class SiteUser {
     }
 
     /**
-     * Sets a ne profile picture for the user
+     * Sets a new profile picture for the user
      *
      * @param newProfilePictureId
      */

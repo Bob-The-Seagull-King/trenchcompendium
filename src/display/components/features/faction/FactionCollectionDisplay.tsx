@@ -93,6 +93,7 @@ const FactionCollectionDisplay = (props: any) => {
 
                 {/* Text content for faction */}
                 <FactionDisplay data={selectedModel.faction}/>
+
                 {factioncollectionObject.SubModelsList.length > 1 &&
                     <RulesBannerFaction
                     key={factioncollectionObject.GetBaseFac().ID}

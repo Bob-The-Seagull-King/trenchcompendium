@@ -20,6 +20,8 @@ import { UserFactory } from '../../factories/synod/UserFactory';
 import ProfileShareDrawer from "../components/Profile/ProfileShareDrawer";
 import ProfileChangeProfilePictureDrawer from "../components/Profile/ProfileChangeProfilePictureDrawer";
 import { SiteUserPublic } from '../../classes/user_synod/user_public';
+import {SYNOD} from "../../resources/api-constants";
+import {toast, ToastContainer} from "react-toastify";
 
 /**
  * On this page, any user can see a profile.
@@ -51,6 +53,7 @@ const ProfilePage: React.FC = () => {
     const handleOpenPfPDrawer = () => setShowPfPDrawer(true)
     const handleClosePfPDrawer = () => setShowPfPDrawer(false)
 
+
     /**
      * Get public user Data
      */
@@ -72,13 +75,58 @@ const ProfilePage: React.FC = () => {
         GetUserContent()
     }, [])
 
+    /**
+     * Handle add friend
+     */
+    const handleOpenAddFriend =  async () => {
+        const token = localStorage.getItem('jwtToken'); // You can refactor this to use a better auth system
+        if (!token) throw new Error('User is not authenticated');
+
+        const response = await fetch(`${SYNOD.URL}/wp-json/synod/v1/friends/request`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+                "target_user_id": userData?.GetUserId()
+            }),
+        });
+
+        if (!response.ok) {
+            const errorText = await response.text();
+
+            toast.error('Friend request already sent.')
+
+            throw new Error(`Failed to request friend: ${errorText}`);
+        }
+
+        toast.success('Friend request sent.')
+    }
+
     if (!id) return null
 
     if( userData ) {
+        console.log('UserData');
+
         console.log(userData)
+        console.log(userData?.GetProfilePictureImageId());
+
     }
     return (
         <div className="ProfilePage">
+            <ToastContainer
+                position="bottom-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
+
             <div className={'container'}>
                 <div className={'row'}>
                     <div className={'col-12 col-lg-7'}>
@@ -146,11 +194,18 @@ const ProfilePage: React.FC = () => {
 
 
                                 ) : (
-                                    // @TODO: add friend action
-                                    <button className={'btn btn-primary'}>
-                                        <FontAwesomeIcon icon={faPlus} className="icon-inline-left"/>
-                                        {'Add Friend'}
-                                    </button>
+                                    <>
+                                    {isLoggedIn &&
+                                        // @TODO: add friend action
+                                        <button
+                                            className={'btn btn-primary'}
+                                            onClick={handleOpenAddFriend}
+                                        >
+                                            <FontAwesomeIcon icon={faPlus} className="icon-inline-left"/>
+                                            {'Add Friend'}
+                                        </button>
+                                    }
+                                    </>
                                 )}
                             </div>
                         </div>

@@ -115,9 +115,6 @@ class UserFactory {
              */
             const token = localStorage.getItem('jwtToken')
 
-            // /* @TODO David please add/show how to get the proper stuff to make this request work */
-            // const response : Response = await fetch(`${SYNOD.URL}/wp-json/synod/v1/user-private/${_val}`)
-
             const response = await fetch(`${SYNOD.URL}/wp-json/synod/v1/user-full/${_val}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`,

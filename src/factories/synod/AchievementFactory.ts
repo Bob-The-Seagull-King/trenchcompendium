@@ -29,9 +29,16 @@ class AchievementFactory {
 
         if (!synodcache.CheckAchievementCache(_val)) {
             synodcache.AddAchievementCallCache(_val);
-            
-            /* @TODO David Achivement Call goes here */
-            const response : Response = await fetch(`${SYNOD.URL}/wp-json/synod/v1/user-private/${_val}`)
+
+            /**
+             * This gets the Auth token from local storage. We could use the Auth Context maybe?
+             */
+            const token = localStorage.getItem('jwtToken')
+            const response = await fetch(`${SYNOD.URL}/wp-json/synod/v1/user-full/${_val}`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            })
             if (response) {
                 const json : any = await response.json();              
                 achData = json
