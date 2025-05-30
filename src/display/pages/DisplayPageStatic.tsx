@@ -186,12 +186,12 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
                     </div>
 
                     <p>
-                        {'Not all clarifications exist in officially published documents. Some questions are answered in the official Discord server, or are otherwise considered the accepted consensus when an official one isn\'t given. These rulings are collected below, but should not be treated as gospel.'}
+                        {'Not all clarifications exist in officially published documents. Some questions are answered in the official Discord server, or are otherwise considered the accepted consensus when an official one isn\'t given. Any official comments from developers are collected, but should not be treated as gospel and may be subject to change.'}
                     </p>
 
                     <RulesBannerText
                             link="/compendium/errata/er_faqcommunity"
-                            title={'Community Questions & Answers'}
+                            title={'Developer Questions & Answers'}
                     />
 
                 </ErrorBoundary>

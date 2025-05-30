@@ -352,9 +352,19 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
                         <span>
                             <CustomNavLink
                                 classes={'font-normal'}
+                                external={
+                                    (getTagSetValue(item.Tags, "external") == true)? true : false
+                                }
                                 link={getTagSetValue(item.Tags, "url")}
                                 runfunc={() => {
-                                    NavigateOut(getTagSetValue(item.Tags, "url"))
+                                    if (getTagSetValue(item.Tags, "external")) {
+                                        const w = window.open(getTagSetValue(item.Tags, "url"), '_blank');
+                                        if (w) {
+                                            w.focus();
+                                        }
+                                    } else {
+                                        NavigateOut(getTagSetValue(item.Tags, "url"))
+                                    }
                                 }}>
                                 {ConvertContentWithGlossary((item.Glossary), item.Content?.toString() || "")} 
                             </CustomNavLink>

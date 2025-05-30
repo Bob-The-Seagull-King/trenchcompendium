@@ -29,7 +29,8 @@ interface IWarbandMember extends IContextObject {
     list_injury : IWarbandProperty[],
     list_skills : IWarbandProperty[],
     experience : number,
-    elite : boolean
+    elite : boolean,
+    recruited: boolean
 }
 
 class WarbandMember extends DynamicContextObject {
@@ -43,7 +44,7 @@ class WarbandMember extends DynamicContextObject {
     Injuries : WarbandProperty[] = [];
     Experience : number;
     Elite : boolean;
-
+    Recruited : boolean;
 
     /**
      * Assigns parameters and creates a series of description
@@ -57,6 +58,7 @@ class WarbandMember extends DynamicContextObject {
         this.IsActive = data.active;
         this.Experience = data.experience;
         this.Elite = data.elite;
+        this.Recruited = data.recruited;
     }
     
 
@@ -150,7 +152,8 @@ class WarbandMember extends DynamicContextObject {
             list_injury : injuryset,
             list_skills : skillset,
             experience : this.Experience,
-            elite : this.Elite
+            elite : this.Elite,
+            recruited : this.Recruited
         }
         
         return _objint;

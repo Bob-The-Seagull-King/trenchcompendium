@@ -4,12 +4,12 @@
         "source": "core",
         "tags": { },
         "contextdata": { },
-        "name": "Community Questions & Answers",
+        "name": "Developer Questions & Answers",
         "item_index": 0,
         "description":  [
             {
                 "tags": {"desc_type" : "paragraph"},
-                "content": "This page collects a series of frequent rules questions and answers from the Trench Crusade Discord Server. Answers marked by a (C) have been confirmed by members of the development team themselves, while those marked by a (F) are included in official FAQ documents. The remaining are based on community consensus and experience."
+                "content": "This page collects a series of frequent rules questions and answers from the Trench Crusade Discord Server. Answers provided here are those confirmed by the development team themselves. Official FAQ documents are documented in other Errata sections."
             }
         ],
         "sections": [
@@ -55,6 +55,77 @@
                     {
                         "tags": {"desc_type" : "break"},
                         "content": ""
+                    },{
+                        "tags": {"desc_type" : "paragraph"}, "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Q1.2: "
+                                    },                        
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "For the purpose of interacting with rules that require a model having a certain base size (such as the Sin Eater’s Devour the Guilty ability), how are models on an oval base considered?"
+                                    }
+                                ]
+                            },                    
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "A1.2: "
+                                    },                         
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "Consider the model as being on a base corresponding to the larger size. For example a Lion of Jabir (60mm x 30mm oval base) would be considered on a 60 mm base."
+                                    }
+                                ]
+                            }
+                        ]
+                    },   
+                    {
+                        "tags": {"desc_type" : "break"},
+                        "content": ""
+                    },{
+                        "tags": {"desc_type" : "paragraph"}, "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Q1.3: "
+                                    },                        
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "If an effect (e.g. Maddening Buzz or the warband being Shaken) turns all ACTIONS a model takes into RISKY ACTION, do I need to roll to see  if the model makes Move ACTIONS?",
+                                        "glossary": [
+                                            {"val": "ACTIONS", "id": "kw_action"},
+                                            {"val": "RISKY ACTION", "id": "kw_riskyaction"}
+                                        ]
+                                    }
+                                ]
+                            },                    
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "A1.3: "
+                                    },                         
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "No, any ACTION that automatically succeeds without rolling the dice, such as a Standard Move, Charge or Retreat, is not affected.",
+                                        "glossary": [
+                                            {"val": "ACTION", "id": "kw_action"}
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
                     }
                  ],
                 "content": [ ]
@@ -74,7 +145,7 @@
                                     },                        
                                     {
                                         "tags": {"desc_type" : "bold"},
-                                        "content": "Can a model move and charge in the same round?"
+                                        "content": "Can a model that starts its activation in Melee charge another enemy, as long as it remains within 1” of any model it was in melee with at the start of the activation?"
                                     }
                                 ]
                             },                    
@@ -87,7 +158,975 @@
                                     },                         
                                     {
                                         "tags": {"desc_type" : "default"},
-                                        "content": "No, a model can only choose one option from the Move ACTION during each activation, so it can either make a Standard Move, Retreat or Charge. The only way a model can, usually, move twice in the same activation is by performing a Move ACTION and a Dash ACTION (in any order).",
+                                        "content": "No, a model that starts its activation in Melee can only Retreat or make a Standard Move, as long as it ends this Standard Move in Melee with all model it was within 1” of at the start of the activation, and cannot bring other enemy models in melee when moved this way."
+                                    }
+                                ]
+                            }
+                        ]
+                    },   
+                    {
+                        "tags": {"desc_type" : "break"},
+                        "content": ""
+                    },{
+                        "tags": {"desc_type" : "paragraph"}, "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Q2.2: "
+                                    },                        
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "When a model charges. does it have to move all the way up to the target of the charge or can it stop the charge 1” away from it? "
+                                    }
+                                ]
+                            },                    
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "A2.2: "
+                                    },                         
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "The charging model can choose to stop its movement at 1” or less from the target. It is not mandatory to reach base-to-base contact."
+                                    }
+                                ]
+                            }
+                        ]
+                    },   
+                    {
+                        "tags": {"desc_type" : "break"},
+                        "content": ""
+                    },{
+                        "tags": {"desc_type" : "paragraph"}, "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Q2.3: "
+                                    },                        
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "When a model is climbing a vertical surface, do you only count the vertical movement towards its movement capability for that ACTION, or do you have to take into account any horizontal movement needed to avoid the model ending the climb in mid-air? For example, can a model with a 6” movement value climb a 6” high wall if it starts its movement in contact with it, or is its maximum climb height less than 6” because it needs to move horizontally to stand on the top surface? ",
+                                        "glossary": [
+                                            {"val": "ACTION", "id": "kw_action"}
+                                        ]
+                                    }
+                                ]
+                            },                    
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "A2.3: "
+                                    },                         
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "Horizontal movement to get to a stable surface must be counted towards the total distance moved by the model."
+                                    }
+                                ]
+                            }
+                        ]
+                    },   
+                    {
+                        "tags": {"desc_type" : "break"},
+                        "content": ""
+                    },{
+                        "tags": {"desc_type" : "paragraph"}, "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Q2.4: "
+                                    },                        
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "When a model voluntarily jumps down from a ledge, this “never costs movement”. Does this only include the vertical distance or also any horizontal movement the model has to make in order to cross the ledge? "
+                                    }
+                                ]
+                            },                    
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "A2.4: "
+                                    },                         
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "Only the vertical drop down doesn’t cost any movement."
+                                    }
+                                ]
+                            }
+                        ]
+                    },   
+                    {
+                        "tags": {"desc_type" : "break"},
+                        "content": ""
+                    },{
+                        "tags": {"desc_type" : "paragraph"}, "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Q2.5: "
+                                    },                        
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Can models move or be pushed wherever they want or are there restrictions on the available directions of movement or on the final position? "
+                                    }
+                                ]
+                            },                    
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "A2.5: "
+                                    },                         
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "Movement direction is always across a surface (horizontal, vertical etc) and the model must end its movement in a position where its base can stand."
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                 ],
+                "content": [ ]
+            },
+            {
+                "title": "Ranged Attacks",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "paragraph"}, "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Q3.1: "
+                                    },                        
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "A model makes a Ranged Attack that targets “a 1×1 mm point on the battlefield the model can see” (e.g. Artillery Witch, MURAD Bombard, Burning Inferno). An enemy model is on a higher ground or behind a low wall. Since the ground below the model is not visible from the attacker’s point of view, does it mean that the attacker cannot directly target them?"
+                                    }
+                                ]
+                            },                    
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "A3.1: "
+                                    },                         
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": " If the attacking model can see a model, it can attack a point on the ground below it, even if it can’t directly see the ground."
+                                    }
+                                ]
+                            }
+                        ]
+                    },   
+                    {
+                        "tags": {"desc_type" : "break"},
+                        "content": ""
+                    },{
+                        "tags": {"desc_type" : "paragraph"}, "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Q3.2: "
+                                    },                        
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Is the attack bonus for elevation granted to models that are 2″ or more above the target or more than 2″ ? "
+                                    }
+                                ]
+                            },                    
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "A3.2: "
+                                    },                         
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "The bonus for elevation is granted from a height of 2” or more above the target (including 2″), which becomes 4″ or more if the target is on a 50mm or larger base."
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                 ],
+                "content": [ ]
+            },
+            {
+                "title": "Melee Attacks",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "paragraph"}, "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Q4.1: "
+                                    },                        
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Does a model armed with two melee weapons have to take the two Melee Attack ACTIONS one after the other or can other ACTIONS be taken between the two Attacks? Does the same extend to a model that has the possibility to make more than one Melee Attack? ",
+                                        "glossary": [
+                                            {"val": "ACTIONS", "id": "kw_action"}
+                                        ]
+                                    }
+                                ]
+                            },                    
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "A4.1: "
+                                    },                         
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "Melee attacks with two (or more) different weapons are separate Melee Attack ACTIONS and other ACTIONS can be taken between an attack and the other.",
+                                        "glossary": [
+                                            {"val": "ACTIONS", "id": "kw_action"}
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },   
+                    {
+                        "tags": {"desc_type" : "break"},
+                        "content": ""
+                    },{
+                        "tags": {"desc_type" : "paragraph"}, "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Q4.2: "
+                                    },                        
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Is the decision that a weapon is off-hand meant to last for the whole battle or can it be changed every time the model attacks? "
+                                    }
+                                ]
+                            },                    
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "A4.2: "
+                                    },                         
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "It is made the first time the model attacks in Melee, and lasts for the whole battle."
+                                    }
+                                ]
+                            }
+                        ]
+                    },   
+                    {
+                        "tags": {"desc_type" : "break"},
+                        "content": ""
+                    },{
+                        "tags": {"desc_type" : "paragraph"}, "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Q4.3: "
+                                    },                        
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Does a model always have to attack with the Off-Hand weapon last or is it only applied on a STRONG model wielding a two-handed weapon in one hand? ",
+                                        "glossary": [
+                                            {"val": "STRONG", "id": "kw_strong"}
+                                        ]
+                                    }
+                                ]
+                            },                    
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "A4.3: "
+                                    },                         
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "A model armed with two melee weapons can use them in any order unless specified."
+                                    }
+                                ]
+                            }
+                        ]
+                    },   
+                    {
+                        "tags": {"desc_type" : "break"},
+                        "content": ""
+                    }
+                 ],
+                "content": [ ]
+            },
+            {
+                "title": "Weapons, Armour, and Equipment",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "paragraph"}, "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Q5.1: "
+                                    },                        
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "If a TOUGH model is wearing Machine Armour and suffers an “Out of Action” result, does it go Down or does the armour effect convert the result to “Minor Hit”?",
+                                        "glossary": [
+                                            {"val": "TOUGH", "id": "kw_tough"}
+                                        ]
+                                    }
+                                ]
+                            },                    
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "A5.1: "
+                                    },                         
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "Machine Armour only treats a “Down” result (7 or 8) on the injury table as a “Minor Hit” so a TOUGH model with a Machine Armour that would be put Out of Action will go Down.",
+                                        "glossary": [
+                                            {"val": "TOUGH", "id": "kw_tough"}
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },   
+                    {
+                        "tags": {"desc_type" : "break"},
+                        "content": ""
+                    },{
+                        "tags": {"desc_type" : "paragraph"}, "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Q5.2: "
+                                    },                        
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "If a deployed Field Shrine is destroyed during the battle in a campaign, is it lost or can it be used again in a following battle?"
+                                    }
+                                ]
+                            },                    
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "A5.2: "
+                                    },                         
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "It can be used again."
+                                    }
+                                ]
+                            }
+                        ]
+                    },   
+                    {
+                        "tags": {"desc_type" : "break"},
+                        "content": ""
+                    },{
+                        "tags": {"desc_type" : "paragraph"}, "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Q5.3: "
+                                    },                        
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Can a model armed with an arquebus or equipped with a shovel use it as a two-handed version of a trench club when they have other melee weapons as well?"
+                                    }
+                                ]
+                            },                    
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "A5.3: "
+                                    },                         
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "Yes"
+                                    }
+                                ]
+                            }
+                        ]
+                    },   
+                    {
+                        "tags": {"desc_type" : "break"},
+                        "content": ""
+                    },{
+                        "tags": {"desc_type" : "paragraph"}, "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Q5.4: "
+                                    },                        
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Can I choose to shoot less than three times with a Machine Gun? Does my model’s activation end only when I shoot three times?"
+                                    }
+                                ]
+                            },                    
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "A5.4: "
+                                    },                         
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "When shooting with a Machine Gun you can make up to three Ranged Attack ACTIONS. After resolving the attacks the activation of the model is over regardless of the number of attacks performed.",
+                                        "glossary": [
+                                            {"val": "ACTIONS", "id": "kw_action"}
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },   
+                    {
+                        "tags": {"desc_type" : "break"},
+                        "content": ""
+                    },{
+                        "tags": {"desc_type" : "paragraph"}, "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Q5.5: "
+                                    },                        
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "The rules for shields/ musical instruments/troop flags seem to imply, according to how they are written, that the model can carry one such item together with two one-handed melee weapons and two one-handed ranged weapons but can only use one weapon at a time. Is this the correct interpretation or does an item that takes a hand all the time prevent the model for carrying more than a single one-handed melee weapon and a single one-handed ranged weapon? "
+                                    }
+                                ]
+                            },                    
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "A5.5: "
+                                    },                         
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "A shield/instrument/flag does not prevent a model to carry 2 ranged/melee weapons, as long as only one at a time is used. (Note that the passive effect of a Blasphemous Staff still works)."
+                                    }
+                                ]
+                            }
+                        ]
+                    },   
+                    {
+                        "tags": {"desc_type" : "break"},
+                        "content": ""
+                    },{
+                        "tags": {"desc_type" : "paragraph"}, "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Q5.6: "
+                                    },                        
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Can a model equipped with two items that take a hand all the time (shield/musical instrument/troop flag) be also equipped with and use grenades? "
+                                    }
+                                ]
+                            },                    
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "A5.6: "
+                                    },                         
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "Yes"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                 ],
+                "content": [ ]
+            },
+            {
+                "title": "Keywords",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "paragraph"}, "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Q6.1: "
+                                    },                        
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "When are members of a FIRETEAM selected?",
+                                        "glossary": [
+                                            {"val": "FIRETEAM", "id": "kw_fireteam"}
+                                        ]
+                                    }
+                                ]
+                            },                    
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "A6.1: "
+                                    },                         
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "Models are assigned to a FIRETEAM before each battle.",
+                                        "glossary": [
+                                            {"val": "FIRETEAM", "id": "kw_fireteam"}
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },   
+                    {
+                        "tags": {"desc_type" : "break"},
+                        "content": ""
+                    },{
+                        "tags": {"desc_type" : "paragraph"}, "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Q6.2: "
+                                    },                        
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "f a member of a FIRETEAM is activated through another model’s ability (i.e Voice of God or On My Command!), can the other model in the FIRETEAM be activated as well?",
+                                        "glossary": [
+                                            {"val": "FIRETEAM", "id": "kw_fireteam"}
+                                        ]
+                                    }
+                                ]
+                            },                    
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "A6.2: "
+                                    },                         
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "Yes. Both models can be activated following the normal FIRETEAM rules.",
+                                        "glossary": [
+                                            {"val": "FIRETEAM", "id": "kw_fireteam"}
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },   
+                    {
+                        "tags": {"desc_type" : "break"},
+                        "content": ""
+                    },{
+                        "tags": {"desc_type" : "paragraph"}, "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Q6.3: "
+                                    },                        
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "To what rolls does the -1 DICE penalty for the keyword FEAR apply to?",
+                                        "glossary": [
+                                            {"val": "-1 DICE", "id": "kw_minusdice"},
+                                            {"val": "FEAR", "id": "kw_fear"}
+                                        ]
+                                    }
+                                ]
+                            },                    
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "A6.3: "
+                                    },                         
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "FEAR applies a -1 DICE penalty to the Melee Attack rolls to hit the model with FEAR",
+                                        "glossary": [
+                                            {"val": "-1 DICE", "id": "kw_minusdice"},
+                                            {"val": "FEAR", "id": "kw_fear"}
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },   
+                    {
+                        "tags": {"desc_type" : "break"},
+                        "content": ""
+                    },{
+                        "tags": {"desc_type" : "paragraph"}, "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Q6.4: "
+                                    },                        
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "If both players have INFILTRATORS and are allowed to use them, in which order are they deployed? ",
+                                        "glossary": [
+                                            {"val": "INFILTRATORS", "id": "kw_infiltrator"}
+                                        ]
+                                    }
+                                ]
+                            },                    
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "A6.4: "
+                                    },                         
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "After deploying all the non-INFILTRATOR models for both warband, conduct a second round of alternate deployment for INFILTRATOR models only, beginning from the player with more INFILTRATOR (roll off if tied).",
+                                        "glossary": [
+                                            {"val": "INFILTRATOR", "id": "kw_infiltrator"}
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },   
+                    {
+                        "tags": {"desc_type" : "break"},
+                        "content": ""
+                    }
+                 ],
+                "content": [ ]
+            },
+            {
+                "title": "Heretic Legion",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "paragraph"}, "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Q7.1: "
+                                    },                        
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "[Knights of Avarice]: Does the effect of the Standard of Mammon’s trigger when the wielder moves into melee with an enemy, or only when an enemy moves into melee with them?"
+                                    }
+                                ]
+                            },                    
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "A7.1: "
+                                    },                         
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "It triggers in both situations."
+                                    }
+                                ]
+                            }
+                        ]
+                    },   
+                    {
+                        "tags": {"desc_type" : "break"},
+                        "content": ""
+                    },{
+                        "tags": {"desc_type" : "paragraph"}, "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Q7.2: "
+                                    },                        
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "[Trench Ghosts]: Do Sarcophagus Mines still count as Heretic Troopers for determining how many Legionnaires the warband can have? "
+                                    }
+                                ]
+                            },                    
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "A7.2: "
+                                    },                         
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "No. They are a different unit."
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                 ],
+                "content": [ ]
+            },
+            {
+                "title": "Trench Pilgrims",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "paragraph"}, "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Q8.1: "
+                                    },                        
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Does a Trench Pilgrim resurrected as a Martyr Penitent keep any special abilities they had before dying, such as Zealous Strength or Wrath of God?"
+                                    }
+                                ]
+                            },                    
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "A8.1: "
+                                    },                         
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "Yes"
+                                    }
+                                ]
+                            }
+                        ]
+                    },  
+                    {
+                        "tags": {"desc_type" : "break"},
+                        "content": ""
+                    },{
+                        "tags": {"desc_type" : "paragraph"}, "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Q8.2: "
+                                    },                        
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "If a Martyr Penitent dies, can it be Resurrected again?"
+                                    }
+                                ]
+                            },                    
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "A8.2: "
+                                    },                         
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "No, only Trench Pilgrims can be resurrected as Martyr Penitents. Once they do, they can’t be resurrected again."
+                                    }
+                                ]
+                            }
+                        ]
+                    },   
+                    {
+                        "tags": {"desc_type" : "break"},
+                        "content": ""
+                    },{
+                        "tags": {"desc_type" : "paragraph"}, "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Q8.3: "
+                                    },                        
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "When a model that is Broken on the Wheel goes Out of Action, do any Blood Markers it suffered stay on the Anchorite Shrine or are they removed?",
+                                        "glossary": [
+                                            {"val": "Blood Markers", "id": "kw_bloodmarker"}
+                                        ]
+                                    }
+                                ]
+                            },                    
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "A8.3: "
+                                    },                         
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "They are removed."
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                 ],
+                "content": [ ]
+            },
+            {
+                "title": "The Iron Sultanate",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "paragraph"}, "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Q9.1: "
+                                    },                        
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "If a Jabirean Alchemist is armed with a weapon that already possesses the keyword FIRE, GAS or SHRAPNEL, does the keyword granted by its Master of the Elements ability replace the one on that weapon, or is it in addition to the existing one?",
+                                        "glossary": [
+                                            {"val": "FIRE", "id": "kw_fire"},
+                                            {"val": "GAS", "id": "kw_gas"},
+                                            {"val": "SHRAPNEL", "id": "kw_shrapnel"}
+                                        ]
+                                    }
+                                ]
+                            },                    
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "A9.1: "
+                                    },                         
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "The keyword granted by Master of the Elements is in addition to those already possessed by the weapon."
+                                    }
+                                ]
+                            }
+                        ]
+                    },   
+                    {
+                        "tags": {"desc_type" : "break"},
+                        "content": ""
+                    },{
+                        "tags": {"desc_type" : "paragraph"}, "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Q9.2: "
+                                    },                        
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Can an Assassin use its Time Slip ability when Down?"
+                                    }
+                                ]
+                            },                    
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "A9.2: "
+                                    },                         
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "Yes, a model who is Down is only prevented from moving “during its Activation through its own ACTION”. As Time Slip occurs during another model’s activation and it is not an ACTION,  it can be used even when the Assassin is Down.",
                                         "glossary": [
                                             {"val": "ACTION", "id": "kw_action"}
                                         ]
@@ -99,6 +1138,769 @@
                     {
                         "tags": {"desc_type" : "break"},
                         "content": ""
+                    },{
+                        "tags": {"desc_type" : "paragraph"}, "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Q9.3: "
+                                    },                        
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Is the Time Slip ability of an Assassin a regular move or a teleportation effect?"
+                                    }
+                                ]
+                            },                    
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "A9.3: "
+                                    },                         
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "It’s a regular move."
+                                    }
+                                ]
+                            }
+                        ]
+                    },   
+                    {
+                        "tags": {"desc_type" : "break"},
+                        "content": ""
+                    },{
+                        "tags": {"desc_type" : "paragraph"}, "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Q9.4: "
+                                    },                        
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "[Fida’i of Alamut]: The rules for Fida’i of Alamut prohibit Dervishes from wearing Reinforced Armour. If a Dervish is promoted to ELITE during a campaign, is this restriction still in place?",
+                                        "glossary": [
+                                            {"val": "ELITE", "id": "kw_elite"}
+                                        ]
+                                    }
+                                ]
+                            },                    
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "A9.4: "
+                                    },                         
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "No, a promoted Dervish is allowed to wear Reinforced Armour as it is now ELITE.",
+                                        "glossary": [
+                                            {"val": "ELITE", "id": "kw_elite"}
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },   
+                    {
+                        "tags": {"desc_type" : "break"},
+                        "content": ""
+                    },{
+                        "tags": {"desc_type" : "paragraph"}, "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Q9.5: "
+                                    },                        
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "[House of Wisdom]: How many weapons can a House of Wisdom warband take from other lists due to its  “Weapon Collections” rule?"
+                                    }
+                                ]
+                            },                    
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "A9.5: "
+                                    },                         
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "Up to one from New Antioch, up to one from Trench Pilgrim armoury. In either case, only a single weapon can be taken from each armoury, so for example a House of Wisdom warband can have a single Anti-Tank Hammer and a single Heavy Shotgun."
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                 ],
+                "content": [ ]
+            },
+            {
+                "title": "The Principality of New Antioch",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "paragraph"}, "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Q10.1: "
+                                    },                        
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Is a Trench Cleric’s special ability chosen when the model is first created or does the model have access to all abilities and chooses one before each battle?"
+                                    }
+                                ]
+                            },                    
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "A10.1: "
+                                    },                         
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "The ability is chosen at recruitment."
+                                    }
+                                ]
+                            }
+                        ]
+                    },   
+                    {
+                        "tags": {"desc_type" : "break"},
+                        "content": ""
+                    },{
+                        "tags": {"desc_type" : "paragraph"}, "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Q10.2: "
+                                    },                        
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Can Combat Engineers use a Trench Shield?"
+                                    }
+                                ]
+                            },                    
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "A10.2: "
+                                    },                         
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "As per current (1.6.3) rules, no, as Combat Engineers do not have access to additional armour options beyond Engineer Armour. "
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                 ],
+                "content": [ ]
+            },
+            {
+                "title": "The Cult of the Black Grail",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "paragraph"}, "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Q11.1: "
+                                    },                        
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Can a Medi-Kit be used to heal INFECTION MARKERS?",
+                                        "glossary": [
+                                            {"val": "INFECTION MARKERS", "id": "kw_infectionmarker"}
+                                        ]
+                                    }
+                                ]
+                            },                    
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "A11.1: "
+                                    },                         
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "No. Only effects that explicitly remove INFECTION MARKERS can do it.",
+                                        "glossary": [
+                                            {"val": "INFECTION MARKERS", "id": "kw_infectionmarker"}
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },   
+                    {
+                        "tags": {"desc_type" : "break"},
+                        "content": ""
+                    },{
+                        "tags": {"desc_type" : "paragraph"}, "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Q11.2: "
+                                    },                        
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Does a Grail/Fly Thrall count itself for the effect of its “Overwhelming Horde” ability?"
+                                    }
+                                ]
+                            },                    
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "A11.2: "
+                                    },                         
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "No. It will be clarified in a future issue of the rules."
+                                    }
+                                ]
+                            }
+                        ]
+                    },   
+                    {
+                        "tags": {"desc_type" : "break"},
+                        "content": ""
+                    },{
+                        "tags": {"desc_type" : "paragraph"}, "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Q11.3: "
+                                    },                        
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Do the melee and ranged weapons limit for the Amalgam also apply for bayonets? For example if I gave the Amalgam 2 Bolt-Action Rifles with 2 bayonets, could I also give it 2 swords?"
+                                    }
+                                ]
+                            },                    
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "A11.3: "
+                                    },                         
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "Bayonets can indeed be used."
+                                    }
+                                ]
+                            }
+                        ]
+                    },   
+                    {
+                        "tags": {"desc_type" : "break"},
+                        "content": ""
+                    },{
+                        "tags": {"desc_type" : "paragraph"}, "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Q11.4: "
+                                    },                        
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Is the INFECTION MARKERS inflicted by a Hound of the Black Grail through the Disease Carrier ability applied before or after checking whether a model with any INFECTION MARKERS when activated gains an additional one? I.e. will a model with no INFECTION MARKERS, who starts its activation in melee combat with a Hound of the Black Grail, gain 1 or 2 INFECTION MARKERS?. ",
+                                        "glossary": [
+                                            {"val": "INFECTION MARKERS", "id": "kw_infectionmarker"}
+                                        ]
+                                    }
+                                ]
+                            },                    
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "A11.4: "
+                                    },                         
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "Disease Carrier triggers first, so the model will have 2 INFECTION MARKERS after it is activated.",
+                                        "glossary": [
+                                            {"val": "INFECTION MARKERS", "id": "kw_infectionmarker"}
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                 ],
+                "content": [ ]
+            },
+            {
+                "title": "The Court of the Seven-Headed Serpent",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "paragraph"}, "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Q12.1: "
+                                    },                        
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Some Goetic Powers have a “Praetor or Sorcerer only” restriction. Does it mean I can only  choose that power once or can both the Praetor and Sorcerer in my warband have it?"
+                                    }
+                                ]
+                            },                    
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "A12.1: "
+                                    },                         
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "Unless the power has a LIMIT of 1, it can be taken by both the Praetor and the Sorcerer.",
+                                        "glossary": [
+                                            {"val": "LIMIT", "id": "kw_limit"}
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },   
+                    {
+                        "tags": {"desc_type" : "break"},
+                        "content": ""
+                    },{
+                        "tags": {"desc_type" : "paragraph"}, "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Q12.2: "
+                                    },                        
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "When a Hell Knight armed with a Heavy Flamethrower uses its Blood Magic power, does this affect both hits at the same time or only one?"
+                                    }
+                                ]
+                            },                    
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "A12.2: "
+                                    },                         
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "Each attack is considered a separate roll, so only one is affected by Blood Magic."
+                                    }
+                                ]
+                            }
+                        ]
+                    },   
+                    {
+                        "tags": {"desc_type" : "break"},
+                        "content": ""
+                    },{
+                        "tags": {"desc_type" : "paragraph"}, "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Q12.3: "
+                                    },                        
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "[Sloth]: Does the Sloth Goetic Power Daemonium Meridianum affect flying models?"
+                                    }
+                                ]
+                            },                    
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "A12.3: "
+                                    },                         
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "All the normal rules for Difficult Terrain apply, so flying models are not affected."
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                 ],
+                "content": [ ]
+            },
+            {
+                "title": "Allies & Mercenaries",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "paragraph"}, "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Q13.1: "
+                                    },                        
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Can a Goetic Warlock using its Goetic Portal ability move together with an enemy model engaged in Melee so that this enemy ends the teleport within 1” (therefore in Melee) of a model friendly to the Warlock?"
+                                    }
+                                ]
+                            },                    
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "A13.1: "
+                                    },                         
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "Yes"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                 ],
+                "content": [ ]
+            },
+            {
+                "title": "Campaign Rules",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "paragraph"}, "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Q14.1: "
+                                    },                        
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Is a model with the Point Blank skill allowed to make a regular Ranged Attack ACTION in the same activation in which it uses Point Blank to make a Ranged Attack ACTION instead of a Melee Attack? ",
+                                        "glossary": [
+                                            {"val": "ACTION", "id": "kw_action"}
+                                        ]
+                                    }
+                                ]
+                            },                    
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "A14.1: "
+                                    },                         
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "The attack made using Point Blank replaces any Melee Attack the model is allowed to make during its activation. It can still make a regular Ranged Attack ACTIONS following the normal rules.",
+                                        "glossary": [
+                                            {"val": "ACTIONS", "id": "kw_action"}
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },   
+                    {
+                        "tags": {"desc_type" : "break"},
+                        "content": ""
+                    },{
+                        "tags": {"desc_type" : "paragraph"}, "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Q14.2: "
+                                    },                        
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Does the bonus +1 DICE in Skills and Expertise apply to all ACTION (aside those noted) or do you choose a single ACTION to get +1 DICE for?",
+                                        "glossary": [
+                                            {"val": "+1 DICE", "id": "kw_plusdice"},
+                                            {"val": "ACTION", "id": "kw_action"}
+                                        ]
+                                    }
+                                ]
+                            },                    
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "A14.2: "
+                                    },                         
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "When you gain the skill, you choose a single action available to the model to get +1 DICE",
+                                        "glossary": [
+                                            {"val": "+1 DICE", "id": "kw_plusdice"}
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },   
+                    {
+                        "tags": {"desc_type" : "break"},
+                        "content": ""
+                    },{
+                        "tags": {"desc_type" : "paragraph"}, "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Q14.3: "
+                                    },                        
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Does the 100 ducats total cost of the Golem obtained through the Book of Golem location include the 40 ducats for the base model and/or the cost of equipment?"
+                                    }
+                                ]
+                            },                    
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "A14.3: "
+                                    },                         
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "The 40 ducats base cost is included, that leaves up to 60 ducats to spend on alchemical formulas. Equipment can be bought separately and it doesn’t count towards the 100 ducats limit."
+                                    }
+                                ]
+                            }
+                        ]
+                    },   
+                    {
+                        "tags": {"desc_type" : "break"},
+                        "content": ""
+                    },{
+                        "tags": {"desc_type" : "paragraph"}, "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Q14.4: "
+                                    },                        
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Do the Executioner’s Axe and the Champion skill stack, for 2 bonus attacks?"
+                                    }
+                                ]
+                            },                    
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "A14.4: "
+                                    },                         
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "No, they don’t."
+                                    }
+                                ]
+                            }
+                        ]
+                    },   
+                    {
+                        "tags": {"desc_type" : "break"},
+                        "content": ""
+                    },{
+                        "tags": {"desc_type" : "paragraph"}, "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Q14.5: "
+                                    },                        
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Does the Sample of Holy DNA’s effect to turn an INFECTION MARKER into a BLESSING MARKER when the model is activated happen before or after the INFECTION MARKER on the model generates an additional INFECTION MARKER? ",
+                                        "glossary": [
+                                            {"val": "INFECTION MARKER", "id": "kw_infectionmarker"},
+                                            {"val": "BLESSING MARKER" , "id": "kw_blessingmarker"}
+                                        ]
+                                    }
+                                ]
+                            },                    
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "A14.5: "
+                                    },                         
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "Sample of Holy DNA resolves first."
+                                    }
+                                ]
+                            }
+                        ]
+                    },   
+                    {
+                        "tags": {"desc_type" : "break"},
+                        "content": ""
+                    },{
+                        "tags": {"desc_type" : "paragraph"}, "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Q14.6: "
+                                    },                        
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Can upgrades to models (like Trench Mole for Yeomen, SKIRMISHER for Azebs, Legionnaire bonus etc.) be purchased between battles in a campaign or they are chosen at model’s creation? "
+                                    }
+                                ]
+                            },                    
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "A14.6: "
+                                    },                         
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "They are meant to be purchasable only at model’s recruitment."
+                                    }
+                                ]
+                            }
+                        ]
+                    },   
+                    {
+                        "tags": {"desc_type" : "break"},
+                        "content": ""
+                    },{
+                        "tags": {"desc_type" : "paragraph"}, "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Q14.7: "
+                                    },                        
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Is the correct interpretation that Krokator, The Great Tome of Hell can only be carried by a Sorcerer, but it can grant the use of a Goetic Power to any one model in the warband? If so, can the model be any model, even one that cannot normally have Goetic Powers?  "
+                                    }
+                                ]
+                            },                    
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "A14.7: "
+                                    },                         
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "No. Only the Sorcerer carrying the Tome can gain an additional Goetic Power."
+                                    }
+                                ]
+                            }
+                        ]
+                    },   
+                    {
+                        "tags": {"desc_type" : "break"},
+                        "content": ""
+                    },{
+                        "tags": {"desc_type" : "paragraph"}, "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Q14.8: "
+                                    },                        
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Does ‘Tis but a Scratch allow the model with that skill to re-roll injuries suffered during a battle?"
+                                    }
+                                ]
+                            },                    
+                            {
+                                "tags": {"desc_type" : "paragraph"}, "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "A14.8: "
+                                    },                         
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "Confirmed typo. ‘Tis but a Scratch is intended to affect rolls on the Elite Trauma Chart."
+                                    }
+                                ]
+                            }
+                        ]
                     }
                  ],
                 "content": [ ]
@@ -174,7 +1976,15 @@
                             },                        
                             {
                                 "tags": {"desc_type" : "bold"},
-                                "content": "Are the following scenarios correct interpretations of the rules for granting Cover?",
+                                "content": "Are the "
+                            },                        
+                            {
+                                "tags": {"desc_type" : "link", "external": true, "url": "https://atrollinthetrenches.wordpress.com/wp-content/uploads/2025/05/image.png"},
+                                "content": "following scenarios"
+                            },                       
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": " correct interpretations of the rules for granting Cover?",
                                 "glossary": [
                                     {"val": "Cover", "id": "gl_cover"}
                                 ]
