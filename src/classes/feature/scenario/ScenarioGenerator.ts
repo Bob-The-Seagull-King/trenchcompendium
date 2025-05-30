@@ -585,7 +585,7 @@ class ScenarioGenerator {
                 description: [
                     {
                         tags: {desc_type : "default"},
-                        content: "Players score one Glory Point for every model that completes any of the following Glorious Deeds. Victory Points for these can only be gained once – whichever player completes them first gets the Glory!"
+                        content: "Players score one Glory Point for every model that completes any of the following Glorious Deeds. Glory Points for these can only be gained once – whichever player completes them first gets the Glory!"
                     }
                 ]
             },

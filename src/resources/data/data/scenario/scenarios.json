@@ -94,7 +94,7 @@
             "description": [
                 {
                     "tags": {"desc_type" : "paragraph"},
-                    "content": "Players score one Glory Point for every model that completes any of the following Glorious Deeds. Victory Points for these can only be gained once – whichever player completes them first gets the Glory!"
+                    "content": "Players score one Glory Point for every model that completes any of the following Glorious Deeds. Glory Points for these can only be gained once – whichever player completes them first gets the Glory!"
                 }
             ],
             "deeds": ["gd_sniper","gd_lordofwar","gd_castthemdown","gd_bloodletting","gd_holdyourground","gd_suicidalbravery","gd_resistandbite"],
@@ -220,7 +220,7 @@
             "description": [
                 {
                     "tags": {"desc_type" : "paragraph"},
-                    "content": "Players score one Glory Point for every model that completes any of the following Glorious Deeds. Victory Points for these can only be gained once – whichever player completes them first gets the Glory!"
+                    "content": "Players score one Glory Point for every model that completes any of the following Glorious Deeds. Glory Points for these can only be gained once – whichever player completes them first gets the Glory!"
                 }
             ],
             "deeds": ["gd_sniper","gd_castthemdown","gd_bloodsacrifice","gd_resistandbite","gd_relichunter","gd_protecttherelic"],
@@ -338,7 +338,7 @@
             "description": [
                 {
                     "tags": {"desc_type" : "paragraph"},
-                    "content": "Players score one Glory Point for every model that completes any of the following Glorious Deeds. Victory Points for these can only be gained once – whichever player completes them first gets the Glory! "
+                    "content": "Players score one Glory Point for every model that completes any of the following Glorious Deeds. Glory Points for these can only be gained once – whichever player completes them first gets the Glory! "
                 }
             ],
             "deeds": ["gd_killtheirleaders","gd_deathfromabove","gd_kingofthehill","gd_holdyourground","gd_highriskhighreward"],
