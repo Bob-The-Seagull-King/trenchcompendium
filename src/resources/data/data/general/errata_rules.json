@@ -487,10 +487,6 @@
                                 ]
                             }
                         ]
-                    },   
-                    {
-                        "tags": {"desc_type" : "break"},
-                        "content": ""
                     }
                  ],
                 "content": [ ]
@@ -872,10 +868,6 @@
                                 ]
                             }
                         ]
-                    },   
-                    {
-                        "tags": {"desc_type" : "break"},
-                        "content": ""
                     }
                  ],
                 "content": [ ]
