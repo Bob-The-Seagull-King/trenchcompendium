@@ -90,7 +90,7 @@ const FooterMain: React.FC = () => {
 
     const trench_companion_links = [
         {
-            title: 'Legal Notice',
+            title: 'About',
             link: ROUTES.COMPANION_ABOUT
         },
         {
