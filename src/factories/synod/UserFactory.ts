@@ -108,9 +108,22 @@ class UserFactory {
 
         if (!synodcache.CheckCache(_val)) {
             synodcache.AddCallCache(_val);
-            
-            /* @TODO David please add/show how to get the proper stuff to make this request work */
-            const response : Response = await fetch(`${SYNOD.URL}/wp-json/synod/v1/user-private/${_val}`)
+
+
+            /**
+             * This gets the Auth token from local storage. We could use the Auth Context maybe?
+             */
+            const token = localStorage.getItem('jwtToken')
+
+            // /* @TODO David please add/show how to get the proper stuff to make this request work */
+            // const response : Response = await fetch(`${SYNOD.URL}/wp-json/synod/v1/user-private/${_val}`)
+
+            const response = await fetch(`${SYNOD.URL}/wp-json/synod/v1/user-private/${_val}`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            })
+
             if (response) {
                 const json : any = await response.json();              
                 userdata = json
