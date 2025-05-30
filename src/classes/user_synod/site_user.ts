@@ -89,14 +89,14 @@ class SiteUser {
      * - can NOT be loaded as image
      */
     public GetProfilePictureId () {
-        return parseInt(this.ProfilePic.id);
+        return this.ProfilePic.id;
     }
     /**
      * Returns the profile picture Image ID
      * - can be loaded as image
      */
     public GetProfilePictureImageId () {
-        return parseInt(this.ProfilePic.image_id);
+        return this.ProfilePic.image_id;
     }
 
     /**
@@ -118,6 +118,39 @@ class SiteUser {
         const data = await res.json()
         return data as ProfilePictureOption[]
     }
+
+    /**
+     * Sets a ne profile picture for the user
+     *
+     * @param newProfilePictureId
+     */
+    public async updateProfilePicture(newProfilePictureId: number): Promise<void> {
+        const token = localStorage.getItem('jwtToken'); // You can refactor this to use a better auth system
+        if (!token) throw new Error('User is not authenticated');
+
+        const response = await fetch(`${SYNOD.URL}/wp-json/wp/v2/users/me`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+                profile_picture_id: newProfilePictureId,
+            }),
+        });
+
+        if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(`Failed to update profile picture: ${errorText}`);
+        }
+
+        // Optionally update the local property
+        this.ProfilePic.id = newProfilePictureId;
+
+        // @TODO: get the new user data maybe?
+
+    }
+
 }
 
 export {ISiteUser, SiteUser}

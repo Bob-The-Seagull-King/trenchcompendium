@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import { Offcanvas } from 'react-bootstrap'
 import SynodImage from "../../../utility/SynodImage";
 
@@ -7,26 +7,57 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCheck, faClose, faStar} from "@fortawesome/free-solid-svg-icons";
 import LoadingOverlay from "../generics/Loading-Overlay";
 import { SiteUserPublic } from '../../../classes/user_synod/user_public';
+import {UserFactory} from "../../../factories/synod/UserFactory";
 
 
 interface ProfileChangeProfilePictureDrawerProps {
     show: boolean
     onClose: () => void
-    userData: SiteUserPublic
+    userId: number
 }
 
-const ProfileChangeProfilePictureDrawer: React.FC<ProfileChangeProfilePictureDrawerProps> = ({ show, onClose, userData }) => {
-    const [options, setOptions] = React.useState<ProfilePictureOption[]>([])
+const ProfileChangeProfilePictureDrawer: React.FC<ProfileChangeProfilePictureDrawerProps> = ({ show, onClose, userId }) => {
     const [loading, setLoading] = React.useState(true)
 
-    React.useEffect(() => {
-        if (show) {
-            userData.getProfilePictureOptions()
-                .then(setOptions)
-                .catch((err : any) => console.error(err))
-                .finally(() => setLoading(false))
+    const [user, setUser] = useState<SiteUser | null>(null)
+    const [options, setOptions] = useState<ProfilePictureOption[]>([])
+    const [error, setError] = useState<string | null>(null)
+
+    useEffect(() => {
+        const fetchUserAndOptions = async () => {
+            try {
+                const siteUser = await UserFactory.CreatePrivateUserByID(userId)
+                if (!siteUser) throw new Error('User not found')
+                setUser(siteUser)
+
+                const opts = await siteUser.getProfilePictureOptions()
+                setOptions(opts)
+            } catch (err: any) {
+                setError('Could not load profile picture options.')
+            } finally {
+                setLoading(false)
+            }
         }
-    }, [show, userData])
+
+        fetchUserAndOptions()
+    }, [userId])
+
+
+    const handleProfilePictureChange = async (newProfilePictureId: number) => {
+        if (!user) return // userData is your SiteUser instance
+
+        setLoading(true)
+
+        try {
+            await user.updateProfilePicture(newProfilePictureId)
+        } catch (error) {
+            console.error('Error updating profile picture:', error)
+            alert('Failed to update profile picture.')
+        } finally {
+            setLoading(false)
+            onClose()
+        }
+    }
 
     return (
         <Offcanvas
@@ -46,12 +77,11 @@ const ProfileChangeProfilePictureDrawer: React.FC<ProfileChangeProfilePictureDra
 
             <Offcanvas.Body>
                 <div className={'pfp-selection'}>
-                    {loading ? (
+                    {(loading || !user )? (
                         <LoadingOverlay
                             message={'Loading your settings'}
                         />
                     ) : (
-                        // @TODO: do selection
                         <>
                             {options.map((opt) => (
                                 <div
@@ -59,10 +89,12 @@ const ProfileChangeProfilePictureDrawer: React.FC<ProfileChangeProfilePictureDra
                                     className={[
                                         'pfp-option',
                                         !opt.available && 'unavailable',
-                                        opt.id === userData.GetProfilePictureId() && 'current',
+                                        opt.id === user.GetProfilePictureId() && 'current',
                                     ].filter(Boolean).join(' ')}
+
+                                    onClick={opt.available ? () => handleProfilePictureChange(opt.id) : undefined}
                                 >
-                                    { (!opt.available && opt.id !== userData.GetProfilePictureId() ) &&
+                                    { (!opt.available && opt.id !== user.GetProfilePictureId() ) &&
                                         <>
                                             {opt.tier == 'premium' &&
                                                 <FontAwesomeIcon icon={faStar} />
@@ -70,7 +102,7 @@ const ProfileChangeProfilePictureDrawer: React.FC<ProfileChangeProfilePictureDra
                                         </>
                                     }
 
-                                    { opt.id === userData.GetProfilePictureId() &&
+                                    { opt.id === user.GetProfilePictureId() &&
                                         <FontAwesomeIcon icon={faCheck} />
                                     }
                                     <img src={opt.url}  />

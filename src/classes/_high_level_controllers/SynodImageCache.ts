@@ -12,8 +12,8 @@ export interface SynodImageData {
 
 export interface SynodProfilePicData {
     urls: any; // Record<string, string>
-    id: string; // the identifier of the image post
-    image_id: string // the id of the image
+    id: number; // the identifier of the image post
+    image_id: number // the id of the image
 }
 
 /**

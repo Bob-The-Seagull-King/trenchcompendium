@@ -4,7 +4,7 @@
  */
 
 
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../utility/AuthContext'
 import SynodImage from "../../utility/SynodImage";
@@ -29,6 +29,14 @@ import { SiteUserPublic } from '../../classes/user_synod/user_public';
 const ProfilePage: React.FC = () => {
     const { id } = useParams<{ id?: string }>()
     const { isLoggedIn, userId, logout } = useAuth()
+
+    /**
+     * Handle Profile picture change
+     */
+    // @TODO: change profile picture on change
+
+
+
     const navigate = useNavigate()
 
     const isOwnProfile = isLoggedIn && id && parseInt(id, 10) === userId
@@ -182,7 +190,7 @@ const ProfilePage: React.FC = () => {
 
                     {userData &&
                         <ProfileChangeProfilePictureDrawer
-                            userData={userData}
+                            userId={parseInt(id)}
                             show={showPfPDrawer}
                             onClose={handleClosePfPDrawer}
                         />

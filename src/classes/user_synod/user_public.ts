@@ -110,14 +110,14 @@ class SiteUserPublic {
      * - can NOT be loaded as image
      */
     public GetProfilePictureId () {
-        return parseInt(this.ProfilePic.id);
+        return this.ProfilePic.id;
     }
     /**
      * Returns the profile picture Image ID
      * - can be loaded as image
      */
     public GetProfilePictureImageId () {
-        return parseInt(this.ProfilePic.image_id);
+        return this.ProfilePic.image_id;
     }
 
     /**
