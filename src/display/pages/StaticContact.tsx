@@ -13,9 +13,9 @@ const StaticContact: React.FC = () => {
 
                 <div className={'row'}>
 
-                    <div className={'rules-scenario-summary rules-card col-12 col-sm-6 col-xs-6'}>
+                    <div className={'rules-scenario-summary rules-card col-12'}>
                         <div className={'rules-scenario-summary-title rules-card-title'}>
-                            Support
+                            Emails
                         </div>
                                     
                         <div className={'rules-scenario-summary-content rules-card-content'}>
@@ -23,57 +23,50 @@ const StaticContact: React.FC = () => {
                                 <tbody>
                                     <tr>
                                         <td className={'label-cell'}>
-                                            {"Email"}
+                                            {"Support"}
                                         </td>
                                         <td>
-                                            {"Answer"}
+                                            {"support@trench-companion.com"}
                                         </td>
                                     </tr>
                                     <tr>
                                         <td className={'label-cell'}>
-                                            {"Phone"}
+                                            {"Business"}
                                         </td>
                                         <td>
-                                            {"Answer2"}
+                                            {"info@trench-companion.com"}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td className={'label-cell'}>
+                                            {"API"}
+                                        </td>
+                                        <td>
+                                            {"synod@trench-companion.com"}
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
-                            <div className={"ContactFormSupport"}>
+                        </div>
+                    </div>
 
-                            </div>
+                    <div className={'rules-scenario-summary rules-card col-12'}>
+                        <div className={'rules-scenario-summary-title rules-card-title'}>
+                            Submit a Support Request
+                        </div>
+                                    
+                        <div className={'ContactFormSupport rules-scenario-summary-content rules-card-content'}>
+                            
                         </div>
                     </div>
 
                     <div className={'RulesScenarioSummary rules-scenario-summary rules-card col-12 col-sm-6 col-xs-6'}>
                         <div className={'rules-scenario-summary-title rules-card-title'}>
-                            Business Inquiries
+                            Submit a Business Inquiry
                         </div>
                                     
-                        <div className={'rules-scenario-summary-content rules-card-content'}>
-                            <table className={'rules-scenario-summary-table rules-card-table'}>
-                                <tbody>
-                                    <tr>
-                                        <td className={'label-cell'}>
-                                            {"Email"}
-                                        </td>
-                                        <td>
-                                            {"Answer"}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td className={'label-cell'}>
-                                            {"Phone"}
-                                        </td>
-                                        <td>
-                                            {"Answer2"}
-                                        </td>
-                                    </tr>
-                                </tbody>
-                                <div className={"ContactFormBusiness"}>
-
-                                </div>
-                            </table>
+                        <div className={'ContactFormBusiness rules-scenario-summary-content rules-card-content'}>
+                            
                         </div>
                     </div>
 
