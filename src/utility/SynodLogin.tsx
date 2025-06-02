@@ -51,7 +51,7 @@ const SynodLogin: React.FC<SynodLoginProps> = ({ onLoginSuccess }) => {
             const userId = decoded.data.user.id
 
             login(token, userId)
-            setUserId(userId)
+            //setUserId(userId)
 
             // ✅ Trigger redirect after login
             if (onLoginSuccess) {

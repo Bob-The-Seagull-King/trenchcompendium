@@ -194,7 +194,7 @@ export function makestringpresentable(stringVal: string) {
 }
 
 export function BreadcrumbPresentable(stringVal : string) {
-    let rtrn = makestringpresentable(stringVal);
+    const rtrn = makestringpresentable(stringVal);
 
     const DirectSwapDict : Record<string, string> = {
         'faction' : "Factions"
