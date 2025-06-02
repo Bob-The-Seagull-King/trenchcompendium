@@ -84,14 +84,13 @@ const FactionDisplay = (props: any) => {
             ContentsList.push({ name: "Mercenaries", route: "mercenary"})
         }
 
+        ContentsList.push({ name: "Armoury", route: "armoury"})
+
         if (factioncolinp != null && factioncolinp != undefined) {
             if (factioncolinp.SubModelsList.length > 1) {
                 ContentsList.push({ name: "Variants", route: "variants"})
             }
         }
-
-
-        ContentsList.push({ name: "Armoury", route: "armoury"})
 
         return ( <RulesAnchorLinks title={"Contents"} listofcontents={ContentsList}/> )
     }

@@ -12,6 +12,7 @@ import SynodFactionImage from "../../../../utility/SynodFactionImage";
 import PageMetaInformation from "../../generics/PageMetaInformation";
 import {useSynodFactionImageData} from "../../../../utility/useSynodFactionImageData";
 import RulesBannerFaction from '../../../components/rules-content/RulesBannerFaction';
+import RulesHeadlineDisplay from '../../../components/rules-content/RulesHeadlineDisplay';
 
 const FactionCollectionDisplay = (props: any) => {
     const factioncollectionObject: FactionCollection = props.data
@@ -96,6 +97,11 @@ const FactionCollectionDisplay = (props: any) => {
 
                 {factioncollectionObject.SubModelsList.length > 1 &&
                 <>
+                    <RulesHeadlineDisplay
+                        content="Variants"
+                        level={2}
+                        className=""
+                    />
                     {factioncollectionObject.GetBaseFac() != selectedModel.faction &&
                         <>                        
                             <RulesBannerFaction
@@ -106,9 +112,8 @@ const FactionCollectionDisplay = (props: any) => {
                             </RulesBannerFaction>
                         </>
                     }
-                    {factioncollectionObject.GetBaseFac() != selectedModel.faction &&
+                    {factioncollectionObject.GetBaseFac() == selectedModel.faction &&
                         <>
-                        
                             {(factioncollectionObject).SubModelsList.filter((item : any) => (item.var_name != 'base')).map(sub_item => (
                                 <RulesBannerFaction
                                     key={sub_item.faction.ID}
