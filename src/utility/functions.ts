@@ -159,14 +159,12 @@ export async function convertstringIDtoName(stringval : string) {
                 return realitem.GetTrueName();
             }            
             default: {
-                return makestringpresentable(stringval);
+                return BreadcrumbPresentable(stringval);
             }
         }
     } catch (e) {
-        return makestringpresentable(stringval);
+        return BreadcrumbPresentable(stringval);
     }
-
-    return makestringpresentable(stringval);
 }
 
 /**
@@ -193,6 +191,20 @@ export function makestringpresentable(stringVal: string) {
         stringreturned = stringreturned + ((i == 0)?  "" : " ") + tempstring
     }
     return stringreturned;
+}
+
+export function BreadcrumbPresentable(stringVal : string) {
+    let rtrn = makestringpresentable(stringVal);
+
+    const DirectSwapDict : Record<string, string> = {
+        'faction' : "Factions"
+    }
+
+    if (DirectSwapDict[stringVal]) {
+        return DirectSwapDict[stringVal]
+    }
+
+    return rtrn;
 }
 
 export function getMoveType(type : number) {

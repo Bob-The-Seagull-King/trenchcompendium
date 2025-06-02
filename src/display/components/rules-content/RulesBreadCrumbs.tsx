@@ -3,7 +3,7 @@ import CustomNavLink from "../subcomponents/interactables/CustomNavLink";
 import {useLocation, useNavigate} from "react-router-dom";
 import SynodImage from "../../../utility/SynodImage";
 import { BreadcrumbItem } from 'react-bootstrap';
-import { convertstringIDtoName, isstringdataID, makestringpresentable } from '../../../utility/functions';
+import { BreadcrumbPresentable, convertstringIDtoName, isstringdataID, makestringpresentable } from '../../../utility/functions';
 
 interface breadcrumbitem  {
     title : string,
@@ -27,7 +27,7 @@ const RulesBreadCrumbs: React.FC = () => {
             for (let i = 1; i < splits.length; i++) {
                 sumurl += "/"
                 sumurl += splits[i]
-                let titlenm = makestringpresentable(splits[i]);
+                let titlenm = BreadcrumbPresentable(splits[i]);
                 if (isstringdataID(splits[i])) {
                     titlenm = await convertstringIDtoName(splits[i])
                 }
