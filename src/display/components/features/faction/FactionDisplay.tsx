@@ -88,7 +88,11 @@ const FactionDisplay = (props: any) => {
 
         if (factioncolinp != null && factioncolinp != undefined) {
             if (factioncolinp.SubModelsList.length > 1) {
-                ContentsList.push({ name: "Variants", route: "variants"})
+                if (factionobj.Variant == "base") {
+                    ContentsList.push({ name: "Variants", route: "variants"})
+                } else {
+                    ContentsList.push({ name: "Base Faction", route: "base"})
+                }
             }
         }
 

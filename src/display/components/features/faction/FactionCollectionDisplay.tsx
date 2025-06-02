@@ -97,13 +97,13 @@ const FactionCollectionDisplay = (props: any) => {
 
                 {factioncollectionObject.SubModelsList.length > 1 &&
                 <>
-                    <RulesHeadlineDisplay
-                        content="Variants"
-                        level={2}
-                        className=""
-                    />
                     {factioncollectionObject.GetBaseFac() != selectedModel.faction &&
-                        <>                        
+                        <>  
+                            <RulesHeadlineDisplay
+                                content="Base Faction"
+                                level={2}
+                                className=""
+                            />                      
                             <RulesBannerFaction
                             key={factioncollectionObject.GetBaseFac().ID}
                             slug={factioncollectionObject.GetBaseFac().ID}
@@ -114,6 +114,11 @@ const FactionCollectionDisplay = (props: any) => {
                     }
                     {factioncollectionObject.GetBaseFac() == selectedModel.faction &&
                         <>
+                            <RulesHeadlineDisplay
+                                content="Variants"
+                                level={2}
+                                className=""
+                            />
                             {(factioncollectionObject).SubModelsList.filter((item : any) => (item.var_name != 'base')).map(sub_item => (
                                 <RulesBannerFaction
                                     key={sub_item.faction.ID}
