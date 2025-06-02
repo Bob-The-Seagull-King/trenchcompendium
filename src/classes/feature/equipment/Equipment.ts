@@ -183,7 +183,7 @@ class Equipment extends StaticOptionContextObject {
      *  Return Modifiers as String
      */
     GetModifiers () {
-        return this.Modifiers;
+        return this.Modifiers.join(', ');
     }
 
     /**
