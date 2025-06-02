@@ -16,7 +16,7 @@ import {
     ModelStatistics,
     PresentModelStatistics
 } from '../../../classes/feature/model/ModelStats';
-import {getBaseSize, getColour, getCostType, getMoveType, getPotential, makestringpresentable} from '../../../utility/functions';
+import {getBaseSize, getColour, getCostType, getMoveType, getPotential, isNumber, makestringpresentable} from '../../../utility/functions';
 import RulesModelDisplayCollapse from '../../components/rules-content/RulesModelDisplayCollapse';
 import {FactionModelRelationship} from "../../../classes/relationship/faction/FactionModelRelationship";
 import RulesModelUpgrade from "./RulesModelUpgrade";
@@ -64,14 +64,35 @@ const RulesModelDisplay = (props: any) => {
     const [loreshow] = useGlobalState('loreshow');
 
     function getAvailabilityString() {
-        if (minimum == maximum) {
-            if (minimum == "0") {
+        if (minimum[0] == maximum[0]) {
+            if (minimum[0] == "0") {
                 return "Unlimited"
             } else {
-                return minimum
+                return minimum[0]
             }
         }
-        return minimum + "-" + maximum
+        if (isNumber(maximum[0]) && isNumber(maximum[0])) {
+            return minimum[0] + "-" + maximum[0]
+        } else if (isNumber(minimum[0])) {
+            return minimum[0]
+        } else {
+            return "";
+        }
+    }
+
+    function getAvailabilityExtra() {
+        const infostring : string[] = [];
+        for (let i = 0; i < minimum.length; i++) {
+            if (!isNumber(minimum[i])) {
+                infostring.push(minimum[i])
+            }
+        }
+        for (let i = 0; i < maximum.length; i++) {
+            if (!isNumber(maximum[i])) {
+                infostring.push(maximum[i])
+            }
+        }
+        return infostring.join(", ")
     }
 
     function SplitUpgrades(UpgradeListFull : ModelUpgradeRelationship[]) : UpgradesGrouped {
@@ -182,7 +203,8 @@ const RulesModelDisplay = (props: any) => {
                 [factionmodelObject.Maximum.toString()],
                 true
             );
-            setmaximum(result_max.join(", "));
+            console.log(result_max)
+            setmaximum(result_max);
 
             const result_min = await EventProc.runEvent(
                 "getModelLimitPresentation",
@@ -191,7 +213,8 @@ const RulesModelDisplay = (props: any) => {
                 [factionmodelObject.Minimum.toString()],
                 false
             );
-            setminimum(result_min.join(", "));
+            console.log(result_min)
+            setminimum(result_min);
 
             /* MODEL STAT CHOICES */
             const result = await modelcollectionObject.GetPresentableStatistics()
@@ -230,6 +253,7 @@ const RulesModelDisplay = (props: any) => {
                             className="fighter-availability"
                             label="Availability"
                             value={getAvailabilityString()}
+                            addition={getAvailabilityExtra()}
                         />
                     </div>
 

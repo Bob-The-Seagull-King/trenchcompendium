@@ -193,6 +193,13 @@ export function makestringpresentable(stringVal: string) {
     return stringreturned;
 }
 
+export function isNumber(value?: string | number): boolean
+{
+   return ((value != undefined) && (value != null) &&
+           (value !== '') &&
+           !isNaN(Number(value.toString())));
+}
+
 export function BreadcrumbPresentable(stringVal : string) {
     const rtrn = makestringpresentable(stringVal);
 
