@@ -60,7 +60,7 @@ const FactionDisplay = (props: any) => {
         });
     }
     
-    function GetContents(factionobj: Faction, factioncol : FactionCollection | null | undefined) {
+    function GetContents(factionobj: Faction, factioncolinp : FactionCollection | null | undefined) {
         const ContentsList : ContentsLink[] = [];
 
         ContentsList.push({ name: "Lore", route: "lore"})
@@ -84,8 +84,8 @@ const FactionDisplay = (props: any) => {
             ContentsList.push({ name: "Mercenaries", route: "mercenary"})
         }
 
-        if (factioncol != null && factioncol != undefined) {
-            if (factioncol.SubModelsList.length > 1) {
+        if (factioncolinp != null && factioncolinp != undefined) {
+            if (factioncolinp.SubModelsList.length > 1) {
                 ContentsList.push({ name: "Variants", route: "variants"})
             }
         }
