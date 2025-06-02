@@ -92,24 +92,37 @@ const FactionCollectionDisplay = (props: any) => {
                 }
 
                 {/* Text content for faction */}
-                <FactionDisplay data={selectedModel.faction}/>
+                <FactionDisplay data={selectedModel.faction} col={factioncollectionObject}/>
 
                 {factioncollectionObject.SubModelsList.length > 1 &&
-                    <RulesBannerFaction
-                    key={factioncollectionObject.GetBaseFac().ID}
-                    slug={factioncollectionObject.GetBaseFac().ID}
-                    title={factioncollectionObject.GetBaseFac().GetTrueName()}
-                    >
-                    {(factioncollectionObject).SubModelsList.filter((item : any) => (item.var_name != 'base')).map(sub_item => (
-                        <RulesBannerFaction
-                            key={sub_item.faction.ID}
-                            slug={sub_item.faction.ID}
-                            parentSlug={factioncollectionObject.GetBaseFac().ID}
-                            title={sub_item.faction.Name? sub_item.faction.Name : ""}
-                        />
-                    ))}
-                    </RulesBannerFaction>
+                <>
+                    {factioncollectionObject.GetBaseFac() != selectedModel.faction &&
+                        <>                        
+                            <RulesBannerFaction
+                            key={factioncollectionObject.GetBaseFac().ID}
+                            slug={factioncollectionObject.GetBaseFac().ID}
+                            title={factioncollectionObject.GetBaseFac().GetTrueName()}
+                            >
+                            </RulesBannerFaction>
+                        </>
+                    }
+                    {factioncollectionObject.GetBaseFac() != selectedModel.faction &&
+                        <>
+                        
+                            {(factioncollectionObject).SubModelsList.filter((item : any) => (item.var_name != 'base')).map(sub_item => (
+                                <RulesBannerFaction
+                                    key={sub_item.faction.ID}
+                                    slug={sub_item.faction.ID}
+                                    parentSlug={factioncollectionObject.GetBaseFac().ID}
+                                    title={sub_item.faction.Name? sub_item.faction.Name : ""}
+                                />
+                            ))}
+                        </>
+                    }
+                </>
+                    
                 }
+                
             </div>
         </ErrorBoundary>
     )

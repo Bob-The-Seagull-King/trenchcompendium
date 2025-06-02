@@ -20,9 +20,11 @@ import RulesLoreSection from "../../rules-content/RulesLoreSection";
 import RulesFactionModelDisplay from "../../rules-content/RulesFactionModelDisplay";
 import RulesFactionRule from "../../rules-content/RulesFactionRule";
 import RulesModelDisplay from '../../rules-content/RulesModelDisplay';
+import { FactionCollection } from '../../../../classes/feature/faction/FactionCollection';
 
 const FactionDisplay = (props: any) => {
     const factionObject: Faction = props.data
+    const factioncol : FactionCollection = props.col;
 
     const [selections, setSelections] = useState<Record<string, any>>({});
     const [usekey, setusekey] = useState(0);
@@ -58,7 +60,7 @@ const FactionDisplay = (props: any) => {
         });
     }
     
-    function GetContents(factionobj: Faction) {
+    function GetContents(factionobj: Faction, factioncol : FactionCollection | null | undefined) {
         const ContentsList : ContentsLink[] = [];
 
         ContentsList.push({ name: "Lore", route: "lore"})
@@ -81,6 +83,14 @@ const FactionDisplay = (props: any) => {
         if (factionobj.Models.filter((item) => item.Mercenary).length > 0) {
             ContentsList.push({ name: "Mercenaries", route: "mercenary"})
         }
+
+        if (factioncol != null && factioncol != undefined) {
+            if (factioncol.SubModelsList.length > 1) {
+                ContentsList.push({ name: "Variants", route: "variants"})
+            }
+        }
+
+
         ContentsList.push({ name: "Armoury", route: "armoury"})
 
         return ( <RulesAnchorLinks title={"Contents"} listofcontents={ContentsList}/> )
@@ -101,7 +111,7 @@ const FactionDisplay = (props: any) => {
             />
 
 
-            {GetContents(factionObject)}
+            {GetContents(factionObject, factioncol)}
 
             <RulesLoreSection faction={factionObject} />
 
