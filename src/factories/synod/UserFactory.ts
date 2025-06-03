@@ -2,6 +2,7 @@ import { ISiteUserPublic, SiteUserPublic } from "../../classes/user_synod/user_p
 import { SynodDataCache } from "../../classes/_high_level_controllers/SynodDataCache";
 import { ISiteUser, SiteUser } from "../../classes/user_synod/site_user";
 import {SYNOD} from "../../resources/api-constants";
+import { useAuth } from "../../utility/AuthContext";
 
 const delay = (ms: number | undefined) => new Promise(res => setTimeout(res, ms));
 
@@ -84,6 +85,7 @@ class UserFactory {
         
         const rule = new SiteUser(_rule)
         synodcache.userObjectCache[_rule.id] = rule;
+        console.log(rule.Nickname)
         return rule;
     }
 
@@ -136,7 +138,6 @@ class UserFactory {
 
         return null;
     }
-
 }
 
 export {UserFactory}
