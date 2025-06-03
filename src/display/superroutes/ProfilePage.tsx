@@ -57,7 +57,8 @@ const ProfilePage: React.FC = () => {
     /**
      * Get public user Data
      */
-    const [userData, setUserData] = React.useState<SiteUserPublic | null>(null)
+    const [userData, setUserData] = React.useState<SiteUser | SiteUserPublic | null>(null)
+    const [keyvar, setkeyvar] = useState(0);
     React.useEffect(() => {
 
         async function GetUserContent() {
@@ -65,10 +66,16 @@ const ProfilePage: React.FC = () => {
             
             if (!id) return
 
-            const UserData : SiteUserPublic | null = await UserFactory.CreatePublicUserByID(Number(id));
+            let UserData : SiteUserPublic | SiteUser | null = null;
+            if (isLoggedIn && (userId == Number(id))) {
+                UserData = await UserFactory.CreatePrivateUserByID(Number(id));
+            } else {
+                UserData = await UserFactory.CreatePublicUserByID(Number(id));
+            }
 
             if (UserData != null) {
                 setUserData(UserData);
+                setkeyvar(keyvar + 1)
             }
         }
 
@@ -106,13 +113,6 @@ const ProfilePage: React.FC = () => {
 
     if (!id) return null
 
-    if( userData ) {
-        console.log('UserData');
-
-        console.log(userData)
-        console.log(userData?.GetProfilePictureImageId());
-
-    }
     return (
         <div className="ProfilePage">
             <ToastContainer
@@ -130,28 +130,28 @@ const ProfilePage: React.FC = () => {
             <div className={'container'}>
                 <div className={'row'}>
                     <div className={'col-12 col-lg-7'}>
-                        <div className={'profile-intro'}>
-
-                            {isOwnProfile ? (
-                                <div
-                                    className={'profile-image-wrap editable'}
-                                    onClick={handleOpenPfPDrawer}
-                                >
-                                    <SynodImage
-                                        imageId={userData?.GetProfilePictureImageId() || 0}
-                                        size="large"
-                                        className="profile-image"
-                                    />
-                                </div>
-                            ):(
-                                <div className={'profile-image-wrap'}>
-                                    <SynodImage
-                                        imageId={userData?.GetProfilePictureImageId() || 0}
-                                        size="large"
-                                        className="profile-image"
-                                    />
-                                </div>
-                            )}
+                        <div className={'profile-intro'} key={keyvar}>
+                                {((userData instanceof SiteUser) ) ? (
+                                    <div
+                                        className={'profile-image-wrap editable'}
+                                        onClick={handleOpenPfPDrawer}
+                                    >
+                                        <SynodImage
+                                            imageId={userData?.GetProfilePictureImageId() || 0}
+                                            size="large"
+                                            className="profile-image"
+                                        />
+                                    </div>
+                                ):(
+                                    <div className={'profile-image-wrap'}>
+                                        <SynodImage
+                                            imageId={userData?.GetProfilePictureImageId() || 0}
+                                            size="large"
+                                            className="profile-image"
+                                        />
+                                    </div>
+                                )}
+                            
 
 
                             <div className={'profile-intro-text'}>
@@ -165,48 +165,43 @@ const ProfilePage: React.FC = () => {
 
 
 
-                            {
-                                /**
                             
-                                    @TODO : Bob handle when we are able to get the private user data
+                                    {((userData instanceof SiteUser) ) ? (
+                                        <>
+                                            <CustomNavLink
+                                                classes={'btn btn-primary'}
+                                                link={ '/profile/' + userData?.GetUserId() + '/settings' || `/profile/${id}/settings`}
+                                                runfunc={() => {
+                                                    navigate( '/profile/' + userData?.GetUserId() + '/settings' || `/profile/${id}/settings`)
+                                                }}>
+                                                <FontAwesomeIcon icon={faCog} className="icon-inline-left"/>
+                                                {'Settings'}
+                                            </CustomNavLink>
 
-                                 */
-                            }
-                                {isOwnProfile ? (
-                                    <>
-                                        <CustomNavLink
-                                            classes={'btn btn-primary'}
-                                            link={ '/profile/' + userData?.GetUserId() + '/settings' || `/profile/${id}/settings`}
-                                            runfunc={() => {
-                                                navigate( '/profile/' + userData?.GetUserId() + '/settings' || `/profile/${id}/settings`)
-                                            }}>
-                                            <FontAwesomeIcon icon={faCog} className="icon-inline-left"/>
-                                            {'Settings'}
-                                        </CustomNavLink>
+                                            <div className={'btn btn-secondary'} onClick={handleOpenShareDrawer}>
+                                                <FontAwesomeIcon
+                                                    icon={faQrcode}
 
-                                        <div className={'btn btn-secondary'} onClick={handleOpenShareDrawer}>
-                                            <FontAwesomeIcon
-                                                icon={faQrcode}
-
-                                            />
-                                        </div>
-                                    </>
+                                                />
+                                            </div>
+                                        </>
 
 
-                                ) : (
-                                    <>
-                                    {isLoggedIn &&
-                                        // @TODO: add friend action
-                                        <button
-                                            className={'btn btn-primary'}
-                                            onClick={handleOpenAddFriend}
-                                        >
-                                            <FontAwesomeIcon icon={faPlus} className="icon-inline-left"/>
-                                            {'Add Friend'}
-                                        </button>
-                                    }
-                                    </>
-                                )}
+                                    ) : (
+                                        <>
+                                        {isLoggedIn &&
+                                            // @TODO: add friend action
+                                            <button
+                                                className={'btn btn-primary'}
+                                                onClick={handleOpenAddFriend}
+                                            >
+                                                <FontAwesomeIcon icon={faPlus} className="icon-inline-left"/>
+                                                {'Add Friend'}
+                                            </button>
+                                        }
+                                        </>
+                                    )}
+                                
                             </div>
                         </div>
 
@@ -234,25 +229,26 @@ const ProfilePage: React.FC = () => {
             <button onClick={logout} className="btn btn-secondary mt-3">
                 Log out
             </button>
-
-            {isOwnProfile && (
-                <>
-                    <ProfileShareDrawer
-                        userId={parseInt(id)}
-                        show={showShareDrawer}
-                        onClose={handleCloseShareDrawer}
-                    />
-
-                    {userData &&
-                        <ProfileChangeProfilePictureDrawer
+            
+                    {((userData instanceof SiteUser)) && (
+                    <>
+                        <ProfileShareDrawer
                             userId={parseInt(id)}
-                            show={showPfPDrawer}
-                            onClose={handleClosePfPDrawer}
+                            show={showShareDrawer}
+                            onClose={handleCloseShareDrawer}
                         />
-                    }
-                </>
 
-            )}
+                        {userData &&
+                            <ProfileChangeProfilePictureDrawer
+                                userId={parseInt(id)}
+                                show={showPfPDrawer}
+                                onClose={handleClosePfPDrawer}
+                            />
+                        }
+                    </>
+
+                )}
+            
 
         </div>
 
