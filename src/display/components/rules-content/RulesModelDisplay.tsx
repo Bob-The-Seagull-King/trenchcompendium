@@ -74,6 +74,9 @@ const RulesModelDisplay = (props: any) => {
         if (isNumber(maximum[0]) && isNumber(maximum[0])) {
             return minimum[0] + "-" + maximum[0]
         } else if (isNumber(minimum[0])) {
+            if (Number(minimum[0]) == 0) {
+                return "";
+            }
             return minimum[0]
         } else {
             return "";
@@ -93,6 +96,35 @@ const RulesModelDisplay = (props: any) => {
             }
         }
         return infostring.join(", ")
+    }
+
+    function getAvailabilityDOM() {
+        const Numbers = getAvailabilityString();
+        const Extras = getAvailabilityExtra();
+
+        return (
+                <>
+                {Numbers.length > 0 &&
+                    <>
+                        {Numbers}
+                    </>
+                }
+                {Extras.length > 0 &&
+                    <>
+                    {((Numbers.length > 0) ) ? (
+                        <>
+                            <br/>
+                            <span className="fighter-meta-subval">{Extras}</span>
+                        </>
+                    ) : (
+                        <>
+                            {Extras}
+                        </>
+                    )}
+                    </>
+                }
+            </>
+        )
     }
 
     function SplitUpgrades(UpgradeListFull : ModelUpgradeRelationship[]) : UpgradesGrouped {
@@ -252,8 +284,7 @@ const RulesModelDisplay = (props: any) => {
                         <FighterCardMetaEntry
                             className="fighter-availability"
                             label="Availability"
-                            value={getAvailabilityString()}
-                            addition={getAvailabilityExtra()}
+                            value={getAvailabilityDOM()}
                         />
                     </div>
 
