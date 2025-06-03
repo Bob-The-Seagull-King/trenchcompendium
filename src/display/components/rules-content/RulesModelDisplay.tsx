@@ -102,6 +102,7 @@ const RulesModelDisplay = (props: any) => {
         const Numbers = getAvailabilityString();
         const Extras = getAvailabilityExtra();
 
+        return Numbers;
         return (
                 <>
                 {Numbers.length > 0 &&
