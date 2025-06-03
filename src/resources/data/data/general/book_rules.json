@@ -1577,6 +1577,155 @@
                 "content": [ ]
             },
             {
+                "tags": {"desc_type" : "headless_table"},
+                "content": "",
+                "subcontent": [
+                    {
+                        "tags": {"desc_type" : "table_row"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "table_item"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "NEW ANTIOCH"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "table_item"},
+                                "content": "-"
+                            }
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "table_row"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "table_item"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "IRON SULTANATE"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "table_item"},
+                                "content": "-"
+                            }
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "table_row"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "table_item"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "HERETIC LEGION"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "table_item"},
+                                "content": "The Wretched"
+                            }
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "table_row"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "table_item"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "BLACK GRAIL"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "table_item"},
+                                "content": "Grail Thralls, Amalgam, Grail Hounds"
+                            }
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "table_row"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "table_item"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "TRENCH PILGRIMS"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "table_item"},
+                                "content": "Ecclesiastic Prisoners, Anchorite Shrine"
+                            }
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "table_row"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "table_item"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "THE COURT"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "table_item"},
+                                "content": "Yoke Fiends, The Wretched"
+                            }
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "table_row"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "table_item"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "ALLIES"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "table_item"},
+                                "content": "Note that Allies & Mercenaries cannot become ELITE unless otherwise noted in the rules. Note that models such as Goetic Warlock and Combat Medic that are bought as part of the Warband List can be promoted and can claim ELITE status.",
+                                "glossary": [
+                                    {"val": "ELITE", "id": "kw_elite"}
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "title": "Limited Potential",
                 "description":  [
                     {
@@ -1585,6 +1734,132 @@
                     }
                  ],
                 "content": [ ]
+            },
+            {
+                "tags": {"desc_type" : "headless_table"},
+                "content": "",
+                "subcontent": [
+                    {
+                        "tags": {"desc_type" : "table_row"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "table_item"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "NEW ANTIOCH"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "table_item"},
+                                "content": "-"
+                            }
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "table_row"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "table_item"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "IRON SULTANATE"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "table_item"},
+                                "content": "Brazen Bull, Lions of Jabir, Homunculi (House of Wisdom)"
+                            }
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "table_row"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "table_item"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "HERETIC LEGION"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "table_item"},
+                                "content": "War Wolf, Artillery Witch"
+                            }
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "table_row"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "table_item"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "BLACK GRAIL"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "table_item"},
+                                "content": "-"
+                            }
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "table_row"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "table_item"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "TRENCH PILGRIMS"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "table_item"},
+                                "content": "Communicant"
+                            }
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "table_row"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "table_item"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "THE COURT"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "table_item"},
+                                "content": "Desecrated Saint, Pit Locust"
+                            }
+                        ]
+                    }
+                ]
             }
         ]
     },{
