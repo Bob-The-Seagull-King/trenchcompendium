@@ -1586,17 +1586,42 @@
                         "subcontent": [
                             {
                                 "tags": {"desc_type" : "table_item"},
-                                "content": "",
-                                "subcontent": [
-                                    {
-                                        "tags": {"desc_type" : "bold"},
-                                        "content": "NEW ANTIOCH"
-                                    }
-                                ]
+                                "content": "NEW ANTIOCH"
                             },
                             {
                                 "tags": {"desc_type" : "table_item"},
                                 "content": "-"
+                            }
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "table_row"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "table_item"},
+                                "content": "7-11"
+                            },
+                            {
+                                "tags": {"desc_type" : "table_item"},
+                                "content": "Success"
+                            }
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "table_row"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "table_item"},
+                                "content": "12"
+                            },
+                            {
+                                "tags": {"desc_type" : "table_item"},
+                                "content": "Critical Success: Ranged and Melee attacks add +1 DICE to injury rolls if your result is a critical success when determining if they hit.",
+                                "glossary": [
+                                    {"val": "+1 DICE", "id": "kw_plusdice"}
+                                ]
                             }
                         ]
                     }
