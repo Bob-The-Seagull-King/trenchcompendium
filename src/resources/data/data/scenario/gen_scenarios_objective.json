@@ -25,7 +25,7 @@
             ]
          },
         "infiltrators": { 
-            "allowed": 0,
+            "allowed": 1,
             "description": [
                 {
                     "tags": {"desc_type" : "paragraph"},
@@ -78,7 +78,7 @@
             ]
          },
         "infiltrators": { 
-            "allowed": 0,
+            "allowed": 1,
             "description": [
                 {
                     "tags": {"desc_type" : "paragraph"},
@@ -143,7 +143,7 @@
             ]
          },
         "infiltrators": { 
-            "allowed": 1,
+            "allowed": 0,
             "description": [
                 {
                     "tags": {"desc_type" : "paragraph"},
@@ -216,7 +216,7 @@
             ]
          },
         "infiltrators": { 
-            "allowed": 0,
+            "allowed": 1,
             "description": [
                 {
                     "tags": {"desc_type" : "paragraph"},
@@ -268,7 +268,7 @@
             "extra_features":  [ ]
          },
         "infiltrators": { 
-            "allowed": 0,
+            "allowed": 1,
             "description": [
                 {
                     "tags": {"desc_type" : "paragraph"},
@@ -337,7 +337,7 @@
             ]
          },
         "infiltrators": { 
-            "allowed": 1,
+            "allowed": 0,
             "description": [
                 {
                     "tags": {"desc_type" : "paragraph"},

@@ -108,7 +108,7 @@
         "name": "Tunnels",
         "img_link": "241",
         "infiltrators": { 
-            "allowed": 1,
+            "allowed": 0,
             "description": [
                 {
                     "tags": {"desc_type" : "default"},

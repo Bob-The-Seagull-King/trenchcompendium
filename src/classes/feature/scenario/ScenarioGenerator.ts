@@ -559,7 +559,7 @@ class ScenarioGenerator {
             forces : ChosenObjective.forces,
             battlefield : ChosenObjective.battlefield,
             infiltrators : {
-                allowed: (ChosenDeployment.infiltrators? ChosenDeployment.infiltrators.allowed : ChosenObjective.infiltrators? ChosenObjective.infiltrators.allowed : 0),
+                allowed: (ChosenDeployment.infiltrators? ChosenDeployment.infiltrators.allowed : ChosenObjective.infiltrators? ChosenObjective.infiltrators.allowed : 1),
                 description: (ChosenDeployment.infiltrators? ChosenDeployment.infiltrators.description : ChosenObjective.infiltrators? ChosenObjective.infiltrators.description : [
                     {
                         tags: {desc_type : "default"},
