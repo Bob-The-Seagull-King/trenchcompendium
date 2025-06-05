@@ -85,7 +85,7 @@ const ProfilePage: React.FC = () => {
 
     function logoutuser() {
         logout();
-        setkeyvar(keyvar + 1)
+        navigate('/login')
     }
 
     /**
