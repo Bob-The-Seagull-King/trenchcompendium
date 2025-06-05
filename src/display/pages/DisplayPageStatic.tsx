@@ -264,17 +264,12 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         returnDisplay(item: any) {
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    {(item instanceof Keyword) &&
-                        <>
-                            <PageMetaInformation
+                    <PageMetaInformation
                                 title={'Keywords'}
                                 description={'All Keywords for Trench Crusade in one Place. '}
-                            />
+                    />
 
-                            <RulesKeywordsTable data={item}/>
-                        </>
-
-                    }
+                    <RulesKeywordsTable data={item}/>
                 </ErrorBoundary>
             )
         },
