@@ -143,13 +143,28 @@ const ProfilePage: React.FC = () => {
                                         />
                                     </div>
                                 ):(
-                                    <div className={'profile-image-wrap'}>
-                                        <SynodImage
-                                            imageId={userData?.GetProfilePictureImageId() || 0}
-                                            size="large"
-                                            className="profile-image"
-                                        />
-                                    </div>
+                                    <>
+                                        {((userData instanceof SiteUserPublic) ) ? (
+                                            <div
+                                                className={'profile-image-wrap editable'}
+                                                onClick={handleOpenPfPDrawer}
+                                            >
+                                                <SynodImage
+                                                    imageId={userData?.GetProfilePictureImageId() || 0}
+                                                    size="large"
+                                                    className="profile-image"
+                                                />
+                                            </div>
+                                        ):(
+                                            <div className={'profile-image-wrap'}>
+                                                <SynodImage
+                                                    imageId={0}
+                                                    size="large"
+                                                    className="profile-image"
+                                                />
+                                            </div>
+                                        )}
+                                    </>
                                 )}
                             
 
