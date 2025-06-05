@@ -97,6 +97,9 @@ class SiteUser {
      * - can be loaded as image
      */
     public GetProfilePictureImageId () {
+        if (this.ProfilePic == undefined) {
+            return 0;
+        }
         return this.ProfilePic.image_id;
     }
 

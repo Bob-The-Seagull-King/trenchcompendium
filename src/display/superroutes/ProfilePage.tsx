@@ -5,7 +5,7 @@
 
 
 import React, {useEffect, useState} from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate, useLocation } from 'react-router-dom'
 import { useAuth } from '../../utility/AuthContext'
 import SynodImage from "../../utility/SynodImage";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -32,6 +32,8 @@ const ProfilePage: React.FC = () => {
     const { id } = useParams<{ id?: string }>()
     const { isLoggedIn, userId, logout } = useAuth()
 
+    const { state } = useLocation();
+    
     /**
      * Handle Profile picture change
      */
@@ -59,11 +61,10 @@ const ProfilePage: React.FC = () => {
      */
     const [userData, setUserData] = React.useState<SiteUser | SiteUserPublic | null>(null)
     const [keyvar, setkeyvar] = useState(0);
+
     React.useEffect(() => {
 
-        async function GetUserContent() {
-            console.log(id)
-            
+        async function GetUserContent() {            
             if (!id) return
 
             let UserData : SiteUserPublic | SiteUser | null = null;
@@ -80,7 +81,12 @@ const ProfilePage: React.FC = () => {
         }
 
         GetUserContent()
-    }, [])
+    }, [userId, id, state])
+
+    function logoutuser() {
+        logout();
+        setkeyvar(keyvar + 1)
+    }
 
     /**
      * Handle add friend
@@ -200,7 +206,7 @@ const ProfilePage: React.FC = () => {
                                                 />
                                             </div>
 
-                                            <div className={'btn btn-tertiary'} onClick={logout}>
+                                            <div className={'btn btn-tertiary'} onClick={logoutuser}>
                                                 Log out
                                             </div>
                                         </>
