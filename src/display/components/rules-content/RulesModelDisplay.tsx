@@ -64,6 +64,9 @@ const RulesModelDisplay = (props: any) => {
     const [loreshow] = useGlobalState('loreshow');
 
     function getAvailabilityString() {
+        if ((minimum[0] == undefined) || (maximum[0] == undefined)) {
+            return "";
+        }
         if (minimum[0] == maximum[0]) {
             if (minimum[0] == "0") {
                 return "Unlimited"
@@ -101,8 +104,6 @@ const RulesModelDisplay = (props: any) => {
     function getAvailabilityDOM() {
         const Numbers = getAvailabilityString();
         const Extras = getAvailabilityExtra();
-
-        return Numbers;
         return (
                 <>
                 {Numbers.length > 0 &&
@@ -112,16 +113,17 @@ const RulesModelDisplay = (props: any) => {
                 }
                 {Extras.length > 0 &&
                     <>
-                    {((Numbers.length > 0) ) ? (
+                    {(Numbers.length > 0) && 
                         <>
                             <br/>
                             <span className="fighter-meta-subval">{Extras}</span>
                         </>
-                    ) : (
+                    }
+                    {(Numbers.length == 0) && 
                         <>
                             {Extras}
                         </>
-                    )}
+                    }
                     </>
                 }
             </>
@@ -236,7 +238,6 @@ const RulesModelDisplay = (props: any) => {
                 [factionmodelObject.Maximum.toString()],
                 true
             );
-            console.log(result_max)
             setmaximum(result_max);
 
             const result_min = await EventProc.runEvent(
@@ -246,7 +247,6 @@ const RulesModelDisplay = (props: any) => {
                 [factionmodelObject.Minimum.toString()],
                 false
             );
-            console.log(result_min)
             setminimum(result_min);
 
             /* MODEL STAT CHOICES */
