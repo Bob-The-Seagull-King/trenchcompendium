@@ -185,7 +185,7 @@ const ProfilePage: React.FC = () => {
                                                 />
                                             </div>
 
-                                            <div className={'btn btn-secondary'} onClick={logout}>
+                                            <div className={'btn btn-tertiary'} onClick={logout}>
                                                 Log out
                                             </div>
                                         </>

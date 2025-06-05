@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../utility/AuthContext';
 import { Form } from 'react-bootstrap';
 import axios from 'axios';
@@ -12,8 +12,9 @@ import {ToastContainer, toast} from "react-toastify";
 
 
 const ProfileSettingsPage: React.FC = () => {
-    const { id } = useParams();
-    console.log(id)
+    const urlPath = useLocation().pathname;
+    const urlSplits = urlPath.split('/');
+    const id  = getID();
     const { isLoggedIn, userId, authToken, logout } = useAuth();
     const navigate = useNavigate();
 
@@ -29,8 +30,16 @@ const ProfileSettingsPage: React.FC = () => {
     const [message, setMessage] = useState('');
     const [error, setError] = useState('');
 
+    function getID() {
+        if (urlSplits.length > 2) {
+            const CurItemID = urlSplits[2]
+            return CurItemID;
+        }
+        return "";
+    }
+
     useEffect(() => {
-        if (!id || !userId || !isLoggedIn() || parseInt(id, 10) !== userId) {
+        if (id == "" || !userId || !isLoggedIn() || id !== (userId == null? -999 : userId).toString()) {
             navigate(`/profile/${id}`);
             return;
         }
@@ -45,8 +54,6 @@ const ProfileSettingsPage: React.FC = () => {
                 },
             })
             .then((res) => {
-
-                console.log(res);
 
                 const { nickname, email } = res.data;
                 setNickname(nickname || '');
