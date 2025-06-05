@@ -41,7 +41,7 @@ const ProfilePage: React.FC = () => {
 
     const navigate = useNavigate()
 
-    const isOwnProfile = isLoggedIn && id && parseInt(id, 10) === userId
+    const isOwnProfile = isLoggedIn() && id && parseInt(id, 10) === userId
 
     /** Share Drawer */
     const [showShareDrawer, setShowShareDrawer] = useState(false)
@@ -67,7 +67,7 @@ const ProfilePage: React.FC = () => {
             if (!id) return
 
             let UserData : SiteUserPublic | SiteUser | null = null;
-            if (isLoggedIn && (userId == Number(id))) {
+            if (isLoggedIn() && (userId == Number(id))) {
                 UserData = await UserFactory.CreatePrivateUserByID(Number(id));
             } else {
                 UserData = await UserFactory.CreatePublicUserByID(Number(id));
@@ -184,12 +184,16 @@ const ProfilePage: React.FC = () => {
 
                                                 />
                                             </div>
+
+                                            <div className={'btn btn-secondary'} onClick={logout}>
+                                                Log out
+                                            </div>
                                         </>
 
 
                                     ) : (
                                         <>
-                                        {isLoggedIn &&
+                                        {isLoggedIn() &&
                                             // @TODO: add friend action
                                             <button
                                                 className={'btn btn-primary'}
@@ -226,9 +230,6 @@ const ProfilePage: React.FC = () => {
                 </div>
             </div>
 
-            <button onClick={logout} className="btn btn-secondary mt-3">
-                Log out
-            </button>
             
                     {((userData instanceof SiteUser)) && (
                     <>

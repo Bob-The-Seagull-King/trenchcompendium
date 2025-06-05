@@ -44,10 +44,10 @@ const SynodLoginPage: React.FC = () => {
     const navigate = useNavigate()
 
     useEffect(() => {
-        if (isLoggedIn && userId) {
+        if (isLoggedIn() && userId) {
             navigate(`/profile/${userId}`)
         }
-    }, [isLoggedIn, userId])
+    }, [userId])
 
     return (
         <div className="SynodLoginPage">
@@ -68,7 +68,7 @@ const SynodLoginPage: React.FC = () => {
                                 }
                             }} />
 
-                            {!isLoggedIn &&
+                            {!isLoggedIn() &&
                                 <>
                                     <div className={'login-btn-spacer'}>
                                         {'or'}
@@ -83,7 +83,7 @@ const SynodLoginPage: React.FC = () => {
                                 </>
                             }
 
-                            {isLoggedIn &&
+                            {isLoggedIn() &&
                                 <button
                                     className={'btn btn-secondary'}
                                     onClick={logout}
@@ -144,11 +144,11 @@ const SynodLoginPage: React.FC = () => {
                     <div className={"container mt-3 pt-3"}>
                         <SynodUserWarbands/>
 
-                        {isLoggedIn && (
+                        {isLoggedIn() && (
                             <SynodUpdateWarband/>
                         )}
 
-                        {isLoggedIn && (
+                        {isLoggedIn() && (
                             <SynodCreateWarband/>
                         )}
                     </div>

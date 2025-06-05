@@ -27,7 +27,7 @@ const UserListEntry: React.FC<UserListEntryProps> = ({ id, username, status }) =
                 classes={'UserListEntry-image-wrap'}
                 link={`/profile/${id}`}
                 runfunc={() => {
-                    navigate(`/profile/${id}`)
+                    navigate(`/profile/${id}`, {state: Date.now().toString()})
                 }}>
                 <SynodImage
                     imageId={randomId}
@@ -40,7 +40,7 @@ const UserListEntry: React.FC<UserListEntryProps> = ({ id, username, status }) =
                     classes={'user-name'}
                     link={`/profile/${id}`}
                     runfunc={() => {
-                        navigate(`/profile/${id}`)
+                        navigate(`/profile/${id}`, {state: Date.now().toString()})
                     }}>
                     {username}
                 </CustomNavLink>

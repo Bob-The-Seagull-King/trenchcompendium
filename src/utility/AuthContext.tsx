@@ -4,7 +4,7 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 interface AuthContextType {
     authToken: string | null;
     userId: number | null;
-    isLoggedIn: boolean;
+    isLoggedIn: () => boolean;
     login: (token: string, id: number) => void;
     logout: () => void;
 }
@@ -41,7 +41,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setUserId(null);
     };
 
-    const isLoggedIn = !!authToken && !!userId;
+    const isLoggedIn = () => {return (!!authToken && !!userId);}
 
     return (
         <AuthContext.Provider value={{ authToken, userId, isLoggedIn, login, logout }}>

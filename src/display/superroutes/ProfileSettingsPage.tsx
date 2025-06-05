@@ -12,7 +12,8 @@ import {ToastContainer, toast} from "react-toastify";
 
 
 const ProfileSettingsPage: React.FC = () => {
-    const { id } = useParams<{ id?: string }>();
+    const { id } = useParams();
+    console.log(id)
     const { isLoggedIn, userId, authToken, logout } = useAuth();
     const navigate = useNavigate();
 
@@ -29,7 +30,7 @@ const ProfileSettingsPage: React.FC = () => {
     const [error, setError] = useState('');
 
     useEffect(() => {
-        if (!id || !userId || !isLoggedIn || parseInt(id, 10) !== userId) {
+        if (!id || !userId || !isLoggedIn() || parseInt(id, 10) !== userId) {
             navigate(`/profile/${id}`);
             return;
         }
@@ -58,7 +59,7 @@ const ProfileSettingsPage: React.FC = () => {
                 setError('Failed to load user info.');
                 setLoading(false);
             });
-    }, [id, userId, isLoggedIn, authToken, navigate]);
+    }, [id, userId, authToken, navigate]);
 
     const hasChanges =
         nickname !== initialNickname || email !== initialEmail || password.trim() !== '';
