@@ -8,6 +8,7 @@ import LoadingOverlay from "../components/generics/Loading-Overlay";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faChevronLeft} from "@fortawesome/free-solid-svg-icons";
 import {ToastContainer, toast} from "react-toastify";
+import { SynodDataCache } from '../../classes/_high_level_controllers/SynodDataCache';
 
 
 
@@ -92,6 +93,14 @@ const ProfileSettingsPage: React.FC = () => {
                     },
                 }
             );
+
+            if (userId != null) {
+                const userdatacache : SynodDataCache = SynodDataCache.getInstance();
+
+                delete userdatacache.userObjectCache[userId]
+                delete userdatacache.userDataCache[userId]
+                delete userdatacache.callUserDataCache[userId]
+            }
 
             setInitialNickname(nickname);
             setInitialEmail(email);

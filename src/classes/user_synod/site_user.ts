@@ -4,6 +4,7 @@ import { IAchievement } from "./user_achievements";
 import {ROUTES} from "../../resources/routes-constants";
 import {SYNOD} from "../../resources/api-constants";
 import { SiteUserPublic } from "./user_public";
+import { SynodDataCache } from "../_high_level_controllers/SynodDataCache";
 
 interface ISiteUser {
     id: number,
@@ -146,7 +147,7 @@ class SiteUser {
         if (!response.ok) {
             const errorText = await response.text();
             throw new Error(`Failed to update profile picture: ${errorText}`);
-        }
+        }        
 
         // Optionally update the local property
         this.ProfilePic.id = newProfilePictureId;

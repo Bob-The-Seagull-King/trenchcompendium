@@ -131,7 +131,6 @@ class UserFactory {
         }
 
         if (userdata != undefined) {
-            console.log(userdata)
             const user = await UserFactory.BuildUserPrivate(userdata)
             return user;
         }

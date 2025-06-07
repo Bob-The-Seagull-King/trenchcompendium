@@ -22,6 +22,7 @@ import ProfileChangeProfilePictureDrawer from "../components/Profile/ProfileChan
 import { SiteUserPublic } from '../../classes/user_synod/user_public';
 import {SYNOD} from "../../resources/api-constants";
 import {toast, ToastContainer} from "react-toastify";
+import { SynodDataCache } from '../../classes/_high_level_controllers/SynodDataCache';
 
 /**
  * On this page, any user can see a profile.
@@ -53,7 +54,18 @@ const ProfilePage: React.FC = () => {
     /** Share Drawer */
     const [showPfPDrawer, setShowPfPDrawer] = useState(false)
     const handleOpenPfPDrawer = () => setShowPfPDrawer(true)
-    const handleClosePfPDrawer = () => setShowPfPDrawer(false)
+    const handleClosePfPDrawer = () => {
+        setShowPfPDrawer(false)
+        
+        if (userId != null) {
+            const userdatacache : SynodDataCache = SynodDataCache.getInstance();
+
+            delete userdatacache.userObjectCache[userId]
+            delete userdatacache.userDataCache[userId]
+            delete userdatacache.callUserDataCache[userId]
+        }
+        navigate('', {state: Date.now().toString()})
+    }
 
 
     /**
@@ -151,10 +163,7 @@ const ProfilePage: React.FC = () => {
                                 ):(
                                     <>
                                         {((userData instanceof SiteUserPublic) ) ? (
-                                            <div
-                                                className={'profile-image-wrap editable'}
-                                                onClick={handleOpenPfPDrawer}
-                                            >
+                                            <div className={'profile-image-wrap'}>
                                                 <SynodImage
                                                     imageId={userData?.GetProfilePictureImageId() || 0}
                                                     size="large"
