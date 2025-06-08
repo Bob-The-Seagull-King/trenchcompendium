@@ -4,7 +4,7 @@ import {faBookOpen, faCopy, faEllipsisVertical, faPen, faTrash, faXmark} from "@
 import { Modal, Button, OverlayTrigger, Popover } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { UserWarband } from '../../../classes/saveitems/Warband/UserWarband';
-import { WarbandManager } from '../../../classes/saveitems/Warband/WarbandManager';
+import { SumWarband, WarbandManager } from '../../../classes/saveitems/Warband/WarbandManager';
 import SynodImage from "../../../utility/SynodImage";
 import SynodFactionImage from "../../../utility/SynodFactionImage";
 
@@ -18,7 +18,7 @@ import SynodFactionImage from "../../../utility/SynodFactionImage";
  */
 
 interface WbbWarbandListItemProps {
-    item: UserWarband
+    item: SumWarband
     manager : WarbandManager
     parentfunc : any
 }
@@ -33,7 +33,7 @@ const WbbWarbandListItem: React.FC<WbbWarbandListItemProps> = ({ item, manager, 
      */
     async function handleCopy() {
         setShowPopover(false);
-        await manager.DuplicateItem(item);
+        await manager.DuplicateItem(item.warband_data);
         parentfunc();
         return true;
     }
@@ -50,7 +50,7 @@ const WbbWarbandListItem: React.FC<WbbWarbandListItemProps> = ({ item, manager, 
      * navigates to edit view
      */
     const navigateToEdit = () => {
-        navigate('/warband/edit/' + item.ID);
+        navigate('/warband/edit/' + item.warband_data.ID);
     };
 
     /**
@@ -59,7 +59,7 @@ const WbbWarbandListItem: React.FC<WbbWarbandListItemProps> = ({ item, manager, 
      */
     const handleConfirmDelete = () => {
         setShowDeleteConfirm(false);
-        manager.DeletePack(item);
+        manager.DeletePack(item.warband_data);
         parentfunc();
     };
 
@@ -76,27 +76,27 @@ const WbbWarbandListItem: React.FC<WbbWarbandListItemProps> = ({ item, manager, 
             <div className={'WbbWarbandListItem'} >
                 <div onClick={navigateToEdit} className={'warband-item-text-wrap'}>
                     <div className={'item-name'}>
-                        {item.Name}
+                        {item.warband_data.Name}
                     </div>
 
                     <div className={'item-faction'}>
-                        {(item.Faction.MyFaction)? item.Faction.MyFaction.SelfDynamicProperty.OptionChoice.Name : ""}
+                        {(item.warband_data.Faction.MyFaction)? item.warband_data.Faction.MyFaction.SelfDynamicProperty.OptionChoice.Name : ""}
                     </div>
 
                     <div className={'item-cost'}>
-                        {item.Ducats + " Ducats" + " | " + item.Glory + " Glory" }
+                        {item.warband_data.Ducats + " Ducats" + " | " + item.warband_data.Glory + " Glory" }
                     </div>
 
                     <div className={'item-campaign'}>
                         {
-                            item.GetCampaignName()
+                            item.warband_data.GetCampaignName()
                         }
                     </div>
                 </div>
 
                 <div className={'warband-item-image-wrap'}>
                     <SynodFactionImage
-                        factionSlug={(item.Faction.MyFaction)? item.Faction.MyFaction.SelfDynamicProperty.OptionChoice.ID : ""}
+                        factionSlug={(item.warband_data.Faction.MyFaction)? item.warband_data.Faction.MyFaction.SelfDynamicProperty.OptionChoice.ID : ""}
                         className={'warband-item-image'}
                         size={'large'}
                     />
@@ -152,7 +152,7 @@ const WbbWarbandListItem: React.FC<WbbWarbandListItemProps> = ({ item, manager, 
                     <Modal.Body>
                         <p>
                             <strong>{'Warband Name: '}</strong>
-                            {item.Name}
+                            {item.warband_data.Name}
                         </p>
 
                         <p>

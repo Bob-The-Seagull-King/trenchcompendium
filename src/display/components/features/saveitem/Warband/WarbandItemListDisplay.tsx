@@ -16,7 +16,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFileImport, faPerson } from '@fortawesome/free-solid-svg-icons'
 import { ContentPack } from '../../../../../classes/contentpacks/contentpack'
 import WarbandItemDisplay from './WarbandItemDisplay';
-import { WarbandManager } from '../../../../../classes/saveitems/Warband/WarbandManager';
+import { SumWarband, WarbandManager } from '../../../../../classes/saveitems/Warband/WarbandManager';
 import { UserWarband } from '../../../../../classes/saveitems/Warband/UserWarband';
 
 const WarbandItemListDisplay = (prop: any) => {
@@ -161,8 +161,8 @@ const WarbandItemListDisplay = (prop: any) => {
                                         </div>
                                     </div>
                                 }
-                                {_allItems.map((item: UserWarband) => (
-                                    <div className="col p-0" key={"packdisplay"+item.ID}>
+                                {_allItems.map((item: SumWarband) => (
+                                    <div className="col p-0" key={"packdisplay"+item.warband_data.ID}>
                                         <WarbandItemDisplay  data={item} parent={Manager} statefunction={ItemRecall} updater={UpdaterMethod}/>
                                     </div>
                                 ))}

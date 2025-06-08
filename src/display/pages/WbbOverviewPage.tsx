@@ -3,7 +3,7 @@ import WbbWarbandListItem from "../components/warband-builder/WbbWarbandListItem
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCopy, faPlus} from "@fortawesome/free-solid-svg-icons";
 import {useNavigate} from "react-router-dom";
-import { WarbandManager } from '../../classes/saveitems/Warband/WarbandManager';
+import { SumWarband, WarbandManager } from '../../classes/saveitems/Warband/WarbandManager';
 import CustomNavLink from '../components/subcomponents/interactables/CustomNavLink';
 import { UserWarband } from '../../classes/saveitems/Warband/UserWarband';
 import PageMetaInformation from "../components/generics/PageMetaInformation";
@@ -20,7 +20,7 @@ const WbbOverviewPage = (prop: any) => {
     const Manager : WarbandManager = prop.manager;
     const navigate = useNavigate();
 
-    const [allwarbands, setwarbands] = useState<UserWarband[]>([])
+    const [allwarbands, setwarbands] = useState<SumWarband[]>([])
     const [keyvar, setkeyvar] = useState(0);
     
     useEffect(() => {
@@ -74,7 +74,7 @@ const WbbOverviewPage = (prop: any) => {
 
                 <div className={'row'} key={keyvar}>
                     {allwarbands.map(item => (
-                        <WbbWarbandListItem key={item.ID} item={item} manager={Manager} parentfunc={updateSelf}/>
+                        <WbbWarbandListItem key={item.warband_data.ID} item={item} manager={Manager} parentfunc={updateSelf}/>
                     ))}
 
                     <div className={'col-12 col-lg-6'}>

@@ -1,16 +1,26 @@
+import { SiteUser } from '../../user_synod/site_user';
 import { WarbandFactory } from '../../../factories/warband/WarbandFactory';
 import { IWarbandContextItem } from './High_Level/WarbandContextItem';
 import { UserWarband, IUserWarband } from './UserWarband';
 
+export interface ISumWarband {
+    id : number // -1 means LOCAL warband
+    warband_data : IUserWarband
+}
+
+export interface SumWarband {
+    id : number // -1 means LOCAL warband
+    warband_data : UserWarband
+}
+
 class WarbandManager {
-    public WarbandItemList: UserWarband[] = []; 
+    public WarbandItemList: SumWarband[] = []; 
+    public UserProfile : SiteUser | null = null;
 
     public async GetItemsAll() {
         this.WarbandItemList = await this.GrabItems();
     }
     
-    
-
     /**
      * @param _name The name of the item to find
      * @returns The first instance of a item with that name
@@ -19,7 +29,7 @@ class WarbandManager {
         let i = 0;
         for (i=0; i < this.WarbandItemList.length ; i++) {
             try {
-                const nameval = this.WarbandItemList[i].Name 
+                const nameval = this.WarbandItemList[i].warband_data.Name 
                 if ((nameval != undefined? nameval : "" ).trim() == _name) {
                     return this.WarbandItemList[i]
                 }
@@ -38,7 +48,7 @@ class WarbandManager {
         let i = 0;
         for (i=0; i < this.WarbandItemList.length ; i++) {
             try {
-                const nameval = this.WarbandItemList[i].ID 
+                const nameval = this.WarbandItemList[i].warband_data.ID 
                 if ((nameval != undefined? nameval : "" ).trim() == _id) {
                     return this.WarbandItemList[i]
                 }
@@ -53,12 +63,16 @@ class WarbandManager {
      * Gets all of the saved items.
      */
     public async GrabItems() {
-        const TempList: UserWarband[] = [];  
+        const TempList: SumWarband[] = [];  
         const data = localStorage.getItem('userwarbanditem');  
         try {
             const ItemList: IUserWarband[] = JSON.parse(data || "");
             for (let i = 0; i < ItemList.length; i++) {
-                TempList.push(await WarbandFactory.CreateUserWarband(ItemList[i]))
+                TempList.push(
+                    {
+                        id: -1,
+                        warband_data:    await WarbandFactory.CreateUserWarband(ItemList[i])
+                    })
             }
             return TempList;
         } catch (e) {
@@ -72,10 +86,14 @@ class WarbandManager {
      * the manager's array of items.
      */
     public SetStorage() {
-        const _list: IUserWarband[] = []
+        const _list: ISumWarband[] = []
         for (let i = 0; i < this.WarbandItemList.length; i++) {
             try {
-                _list.push(this.WarbandItemList[i].ConvertToInterface())
+                _list.push(
+                    {   
+                        id: -1,
+                        warband_data: this.WarbandItemList[i].warband_data.ConvertToInterface()
+                    })
             } catch (e) {
                 console.log("Conversion Failed")
             }
@@ -97,7 +115,11 @@ class WarbandManager {
             ReturnMsg = this.ValidateFileData(_content) 
             if (ReturnMsg == "") {
                 const ContentNew: UserWarband = new UserWarband(JSON.parse(_content) as IUserWarband);
-                this.WarbandItemList.push(ContentNew);
+                this.WarbandItemList.push(
+                    {
+                        id: -1,
+                        warband_data: ContentNew
+                    });
                 this.SetStorage();
             } else {
                 return ReturnMsg;
@@ -123,7 +145,7 @@ class WarbandManager {
 
         // Check that no Content Pack shares the same ID
         for (i = 0; i < this.WarbandItemList.length; i++) {
-            if (this.WarbandItemList[i].ID == TestPack.id) {
+            if (this.WarbandItemList[i].warband_data.ID == TestPack.id) {
                 return "You already have a Item Sheet with the same ID";
             }
         }
@@ -147,7 +169,7 @@ class WarbandManager {
     public DeletePack(_pack : UserWarband) {
         let i = 0;
         for (i = 0; i < this.WarbandItemList.length; i++) {
-            if (_pack == this.WarbandItemList[i]) {
+            if (_pack == this.WarbandItemList[i].warband_data) {
                 this.WarbandItemList.splice(i, 1);
                 break;
             }
@@ -209,7 +231,11 @@ class WarbandManager {
             equipment : [],
         }
         const new_item : UserWarband = await WarbandFactory.CreateUserWarband(_Item)
-        this.WarbandItemList.push(new_item)
+        this.WarbandItemList.push(
+            {
+                id: -1,
+                warband_data: new_item
+            })
         this.SetStorage();
 
         return new_item;
@@ -223,7 +249,11 @@ class WarbandManager {
         NewMember.Name = _Item.Name + " - Copy"
         NewMember.ID = this.CalcID(NewMember.Name);
         
-        this.WarbandItemList.push(NewMember);
+        this.WarbandItemList.push(
+            {
+                id: -1,
+                warband_data: NewMember
+            });
         this.SetStorage();
     }
 
@@ -249,7 +279,7 @@ class WarbandManager {
         
         let i = 0;
         for (i = 0; i < this.WarbandItemList.length; i++) {
-            if (_pack == this.WarbandItemList[i]) {
+            if (_pack == this.WarbandItemList[i].warband_data) {
                 break;
             }
         }

@@ -9,7 +9,7 @@ import WbbEditViewModifier from "./WbbEditViewModifier";
 import WbbEditViewExploration from "./WbbEditViewExploration";
 import WbbFighterDetailView from "./WbbFighterDetailView";
 import { useNavigate, useLocation } from 'react-router-dom';
-import {WarbandManager} from "../../../classes/saveitems/Warband/WarbandManager";
+import {SumWarband, WarbandManager} from "../../../classes/saveitems/Warband/WarbandManager";
 import WbbModalAddFighterTroop from "./modals/WbbModalAddFighterTroop";
 import WbbModalAddFighterElite from "./modals/WbbModalAddFighterElite";
 import WbbModalAddFighterMercenary from "./modals/WbbModalAddFighterMercenary";
@@ -31,7 +31,7 @@ import SynodFactionImage from "../../../utility/SynodFactionImage";
 import PageMetaInformation from "../generics/PageMetaInformation";
 
 interface WbbEditViewProps {
-    warbandData: UserWarband | null;
+    warbandData: SumWarband | null;
     manager : WarbandManager
 }
 
@@ -49,7 +49,7 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
     useEffect(() => {
         if (warbandData) {
             // warbandData is already a UserWarband instance
-            setWarband(warbandData);
+            setWarband(warbandData.warband_data);
         }
     }, [warbandData]);
 

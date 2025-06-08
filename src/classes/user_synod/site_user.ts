@@ -5,13 +5,14 @@ import {ROUTES} from "../../resources/routes-constants";
 import {SYNOD} from "../../resources/api-constants";
 import { SiteUserPublic } from "./user_public";
 import { SynodDataCache } from "../_high_level_controllers/SynodDataCache";
+import { ISumWarband, SumWarband } from "../saveitems/Warband/WarbandManager";
 
 interface ISiteUser {
     id: number,
     nickname : string,
     achievments: number[],
     friends: number[],
-    warbands: IUserWarband[],
+    warbands: ISumWarband[],
     campaigns: number[],
     profile_picture: SynodProfilePicData
 }
@@ -28,7 +29,7 @@ class SiteUser {
     Nickname : string;
     Achievements : IAchievement[] = []
     Friends : SiteUserPublic[] = []
-    Warbands : UserWarband[] = [];
+    Warbands : SumWarband[] = [];
     ProfilePic : SynodProfilePicData;
     Campaigns : number[] = []
     
@@ -49,9 +50,13 @@ class SiteUser {
             friendlist.push(this.Friends[i].ID)
         }
 
-        const warbandlist : IUserWarband[] = []
+        const warbandlist : ISumWarband[] = []
         for (let i = 0; i < this.Warbands.length; i++) {
-            warbandlist.push(this.Warbands[i].ConvertToInterface())
+            warbandlist.push(
+                {
+                    id : this.Warbands[i].id,
+                    warband_data: this.Warbands[i].warband_data.ConvertToInterface()
+                })
         }
         const requestfriendlist : number[] = []
         for (let i = 0; i < this.Campaigns.length; i++) {

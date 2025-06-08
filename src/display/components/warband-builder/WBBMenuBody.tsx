@@ -46,8 +46,8 @@ const WBBMenuBody: React.FC<WBBMenuBodyProps> = ({ controller, onBack, onNavigat
             for (let i = 0; i < tools.UserWarbandManager.WarbandItemList.length; i++) {
                 SetOfWarbands.push(
                     {
-                        title: tools.UserWarbandManager.WarbandItemList[i].Name,
-                        slug: 'edit/'+tools.UserWarbandManager.WarbandItemList[i].ID
+                        title: tools.UserWarbandManager.WarbandItemList[i].warband_data.Name,
+                        slug: 'edit/'+tools.UserWarbandManager.WarbandItemList[i].warband_data.ID
                     }
                 )
             }

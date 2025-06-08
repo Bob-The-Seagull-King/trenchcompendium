@@ -14,92 +14,10 @@ const WarbandTestBlock = (prop: any) => {
     const [warbandproperty, setvwarbandproperty] = useState<UserWarband | null>(null)
     const [_keyvar, setkeyvar] = useState(0);
 
-    
-        useEffect(() => {
-            async function SetModelOptions() {                
-                const Manager : WarbandManager = new WarbandManager();
-                await Manager.NewItem("test-warband", "fc_ironsultanate_fv_houseofwisdom",{
-                    id: "null_test",
-                    value_ducat: 0,
-                    value_glory: 0
-                })
-                const warbresult : UserWarband | null = Manager.GetItemByName("test-warband")
-                setvwarbandproperty(warbresult);
-            }
-        
-            SetModelOptions();
-        }, []);
-
-
-        function RegenBuild() {         
-            const Converted = warbandproperty?.ConvertToInterface();      
-            if (Converted) {
-                const NewProperty : UserWarband = new UserWarband(Converted)
-            }
-
-        }
-
-        async function RunPatronGet() {
-            console.log(await warbandproperty?.GetPatronList())
-        }
-
-        async function RunPatronUpdate() {
-            await warbandproperty?.UpdateSelfPatron("pt_sublimegate")
-        }
-
     return (
         
         <ErrorBoundary fallback={<div>Something went wrong with SaveWarbandDisplay.tsx</div>}>
-            <div className='fillspace' >
-                <div className="row">
-                    <div className="col-4">
-                        <Button title='Console Log property' onClick={() => (console.log(warbandproperty))}>
-                            Log Out Warband
-                            </Button>
-                    </div>
-                    <div className="col-4">
-                        <Button title='Console Log property' onClick={() => (console.log(""))}>
-                            NONE
-                        </Button>
-                    </div>
-                    <div className="col-4">
-                        <Button title='Console Log property' onClick={() => (console.log(""))}>
-                            NONE
-                        </Button>
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col-4">
-                        
-                        <Button title='Console Log property' onClick={() => (console.log(warbandproperty?.ConvertToInterface()))}>
-                            Log Out Interface
-                        </Button>
-                    </div>
-                    <div className="col-4">
-                        <Button title='Console Log property' onClick={() => (RunPatronGet())}>
-                            Get Patron List
-                        </Button>
-                    </div>
-                    <div className="col-4">
-                        <Button title='Console Log property' onClick={() => (RunPatronUpdate())}>
-                            Set Patron To Sublime Gate
-                        </Button>
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col-4">                        
-                        <Button title='Console Log property' onClick={() => RegenBuild()}>
-                            Log Out Regened
-                        </Button>
-                    </div>
-                    <div className="col-4">
-                        B2
-                    </div>
-                    <div className="col-4">
-                        C2
-                    </div>
-                </div>
-            </div>
+            
         </ErrorBoundary>
     )
     // -------------------------------------------
