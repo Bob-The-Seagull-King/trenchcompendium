@@ -25,6 +25,7 @@ class ToolsController {
         this.UserWarbandManager = new WarbandManager();
         this.RandomScenarioManager = new ScenarioGenerator();
         this.UserWarbandManager.GetItemsAll();
+        this.UserWarbandManager.GrabUser();
     }
 
     public static getInstance(): ToolsController {

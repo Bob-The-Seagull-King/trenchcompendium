@@ -26,7 +26,7 @@ import {useGlobalState} from "./utility/globalstate";
 import ScrollToTop from './display/components/subcomponents/ScrollToTop'
 import SynodLogin from "./utility/SynodLogin";
 import SynodLoginPage from './display/superroutes/SynodLoginPage'
-import {AuthProvider} from "./utility/AuthContext";
+import {AuthProvider} from "./utility/AuthProvider";
 import WbbOverviewPage from "./display/pages/WbbOverviewPage";
 import WbbCreateNewPage from "./display/pages/WbbCreateNewPage";
 import WbbEditPage from "./display/pages/WbbEditPage";

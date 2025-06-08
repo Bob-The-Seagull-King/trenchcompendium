@@ -1,16 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-
-// Define the shape of your global state
-interface AuthContextType {
-    authToken: string | null;
-    userId: number | null;
-    isLoggedIn: () => boolean;
-    login: (token: string, id: number) => void;
-    logout: () => void;
-}
-
-// Create the context
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
+import { AuthContext } from './AuthContext';
+import { ToolsController } from '../classes/_high_level_controllers/ToolsController';
 
 // Create the provider component
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -30,6 +20,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const login = (token: string, id: number) => {
         localStorage.setItem('jwtToken', token);
         localStorage.setItem('synodUserId', id.toString());
+
+        const toolscont : ToolsController = ToolsController.getInstance();
+        toolscont.UserWarbandManager.SetLoggedUser(id);
+
         setAuthToken(token);
         setUserId(id);
     };
@@ -37,6 +31,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const logout = () => {
         localStorage.removeItem('jwtToken');
         localStorage.removeItem('synodUserId');
+
+        const toolscont : ToolsController = ToolsController.getInstance();
+        toolscont.UserWarbandManager.RemoveLoggedUser();
+
         setAuthToken(null);
         setUserId(null);
     };
@@ -48,11 +46,4 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             {children}
         </AuthContext.Provider>
     );
-};
-
-// Custom hook to use the auth context
-export const useAuth = (): AuthContextType => {
-    const context = useContext(AuthContext);
-    if (!context) throw new Error('useAuth must be used within an AuthProvider');
-    return context;
 };

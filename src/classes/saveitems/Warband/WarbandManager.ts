@@ -2,6 +2,7 @@ import { SiteUser } from '../../user_synod/site_user';
 import { WarbandFactory } from '../../../factories/warband/WarbandFactory';
 import { IWarbandContextItem } from './High_Level/WarbandContextItem';
 import { UserWarband, IUserWarband } from './UserWarband';
+import { UserFactory } from '../../../factories/synod/UserFactory';
 
 export interface ISumWarband {
     id : number // -1 means LOCAL warband
@@ -17,7 +18,27 @@ class WarbandManager {
     public WarbandItemList: SumWarband[] = []; 
     public UserProfile : SiteUser | null = null;
 
+    public async SetLoggedUser(id : number) {
+        const NewUser : SiteUser | null = await UserFactory.CreatePrivateUserByID(id);
+        this.UserProfile = NewUser;
+        console.log(this.UserProfile);
+    }
+
+    public RemoveLoggedUser() {
+        this.UserProfile = null;
+    }
+
+    public async GrabUser() {
+        
+        const storedToken = localStorage.getItem('jwtToken');
+        const storedUserId = localStorage.getItem('synodUserId');
+        if (storedToken && storedUserId) {
+            await this.SetLoggedUser(parseInt(storedUserId, 10));
+        }
+    }
+
     public async GetItemsAll() {
+        console.log("TEST");
         this.WarbandItemList = await this.GrabItems();
     }
     
