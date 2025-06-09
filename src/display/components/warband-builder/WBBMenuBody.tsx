@@ -43,11 +43,11 @@ const WBBMenuBody: React.FC<WBBMenuBodyProps> = ({ controller, onBack, onNavigat
             const tools : ToolsController = ToolsController.getInstance();
             await tools.UserWarbandManager.GetItemsAll();
 
-            for (let i = 0; i < tools.UserWarbandManager.WarbandItemList.length; i++) {
+            for (let i = 0; i < tools.UserWarbandManager.CurWarbands().length; i++) {
                 SetOfWarbands.push(
                     {
-                        title: tools.UserWarbandManager.WarbandItemList[i].warband_data.Name,
-                        slug: 'edit/'+tools.UserWarbandManager.WarbandItemList[i].warband_data.ID
+                        title: tools.UserWarbandManager.CurWarbands()[i].warband_data.Name,
+                        slug: 'edit/'+tools.UserWarbandManager.CurWarbands()[i].warband_data.ID
                     }
                 )
             }

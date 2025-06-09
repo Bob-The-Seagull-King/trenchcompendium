@@ -34,7 +34,6 @@ const WarbandItemDisplay = (prop: any) => {
     
     // Move a unit up or down in the list
     function SwapUnits(direction : boolean) {
-        Manager.ShufflePack(WarbandItem, direction);
         updateHost();
     }
 

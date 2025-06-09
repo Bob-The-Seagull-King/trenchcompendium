@@ -26,7 +26,7 @@ const WbbOverviewPage = (prop: any) => {
     useEffect(() => {
         async function SetWarbands() {
             await Manager.GetItemsAll();
-            setwarbands(Manager.WarbandItemList);
+            setwarbands(Manager.CurWarbands());
             setkeyvar((prev) => prev + 1);
         }
 

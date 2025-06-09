@@ -3,6 +3,7 @@ import { WarbandFactory } from '../../../factories/warband/WarbandFactory';
 import { IWarbandContextItem } from './High_Level/WarbandContextItem';
 import { UserWarband, IUserWarband } from './UserWarband';
 import { UserFactory } from '../../../factories/synod/UserFactory';
+import { SYNOD } from '../../../resources/api-constants';
 
 export interface ISumWarband {
     id : number // -1 means LOCAL warband
@@ -15,8 +16,15 @@ export interface SumWarband {
 }
 
 class WarbandManager {
-    public WarbandItemList: SumWarband[] = []; 
-    public UserProfile : SiteUser | null = null;
+    private WarbandItemList: SumWarband[] = []; 
+    private UserProfile : SiteUser | null = null;
+
+    public CurWarbands() : SumWarband[] { 
+        if (this.UserProfile != null) {
+            return this.UserProfile.Warbands;
+        }
+        return this.WarbandItemList;
+    }
 
     public async SetLoggedUser(id : number) {
         const NewUser : SiteUser | null = await UserFactory.CreatePrivateUserByID(id);
@@ -48,11 +56,11 @@ class WarbandManager {
      */
     public GetItemByName(_name : string) {
         let i = 0;
-        for (i=0; i < this.WarbandItemList.length ; i++) {
+        for (i=0; i < this.CurWarbands().length ; i++) {
             try {
-                const nameval = this.WarbandItemList[i].warband_data.Name 
+                const nameval = this.CurWarbands()[i].warband_data.Name 
                 if ((nameval != undefined? nameval : "" ).trim() == _name) {
-                    return this.WarbandItemList[i]
+                    return this.CurWarbands()[i]
                 }
             } catch (e) {
                 console.log("Broken Save Item Found")
@@ -68,17 +76,17 @@ class WarbandManager {
     public GetItemByID(_id : string) {
         let i = 0;
         if (this.UserProfile != null) {
-            for (i=0; i < this.WarbandItemList.length ; i++) {
-                if (this.WarbandItemList[i].id == Number(_id)) {
-                    return this.WarbandItemList[i]
+            for (i=0; i < this.CurWarbands().length ; i++) {
+                if (this.CurWarbands()[i].id == Number(_id)) {
+                    return this.CurWarbands()[i]
                 }
             }
         }
-        for (i=0; i < this.WarbandItemList.length ; i++) {
+        for (i=0; i < this.CurWarbands().length ; i++) {
             try {
-                const nameval = this.WarbandItemList[i].warband_data.ID 
+                const nameval = this.CurWarbands()[i].warband_data.ID 
                 if ((nameval != undefined? nameval : "" ).trim() == _id) {
-                    return this.WarbandItemList[i]
+                    return this.CurWarbands()[i]
                 }
             } catch (e) {
                 console.log("Broken Save Item Found")
@@ -117,13 +125,20 @@ class WarbandManager {
      * the manager's array of items.
      */
     public SetStorage() {
+        if (this.UserProfile != null) {
+            return;
+        }
+        this.UpdateLocalStorage();
+    }
+
+    public UpdateLocalStorage() {
         const _list: ISumWarband[] = []
-        for (let i = 0; i < this.WarbandItemList.length; i++) {
+        for (let i = 0; i < this.CurWarbands().length; i++) {
             try {
                 _list.push(
                     {   
                         id: -1,
-                        warband_data: this.WarbandItemList[i].warband_data.ConvertToInterface()
+                        warband_data: this.CurWarbands()[i].warband_data.ConvertToInterface()
                     })
             } catch (e) {
                 console.log("Conversion Failed")
@@ -133,63 +148,11 @@ class WarbandManager {
     }
 
     /**
-     * Attempts to convert a given file into an
-     * object, returning a message if something went wrong in
-     * the conversion process.
-     * @param _content The string representation of the File
-     * @returns String message, "" means nothing unusual has
-     * occured, non empty strings indicate an error.
-     */
-    public FileToContentPack(_content : string) {
-        let ReturnMsg = "";
-        try {
-            ReturnMsg = this.ValidateFileData(_content) 
-            if (ReturnMsg == "") {
-                const ContentNew: UserWarband = new UserWarband(JSON.parse(_content) as IUserWarband);
-                this.WarbandItemList.push(
-                    {
-                        id: -1,
-                        warband_data: ContentNew
-                    });
-                this.SetStorage();
-            } else {
-                return ReturnMsg;
-            }
-        } catch (e) {
-            ReturnMsg = "File was not in the Item Sheet format.";
-        }
-
-        return ReturnMsg;
-    }
-
-    /**
-     * Checks if the provided information can convert into
-     * a JSON format and that the minimum structure of an item
-     * is provided.
-     * @param _content The string representation of the File
-     * @returns String message, "" means nothing unusual has
-     * occured, non empty strings indicate an error.
-     */
-    private ValidateFileData(_content : string) {
-        const TestPack = (JSON.parse(_content))
-        let i = 0;
-
-        // Check that no Content Pack shares the same ID
-        for (i = 0; i < this.WarbandItemList.length; i++) {
-            if (this.WarbandItemList[i].warband_data.ID == TestPack.id) {
-                return "You already have a Item Sheet with the same ID";
-            }
-        }
-
-        return ""
-    }
-
-    /**
      * Getter for the Content Packs
      * @returns All Content Packs
      */
     public GetPack() {
-        return this.WarbandItemList;
+        return this.CurWarbands();
     }
 
     /**
@@ -199,18 +162,13 @@ class WarbandManager {
      */
     public DeletePack(_pack : UserWarband) {
         let i = 0;
-        for (i = 0; i < this.WarbandItemList.length; i++) {
-            if (_pack == this.WarbandItemList[i].warband_data) {
-                this.WarbandItemList.splice(i, 1);
+        for (i = 0; i < this.CurWarbands().length; i++) {
+            if (_pack == this.CurWarbands()[i].warband_data) {
+                this.CurWarbands().splice(i, 1);
                 break;
             }
         }
         
-        this.SetStorage();
-    }
-
-    public TstClearStorag() {
-        this.WarbandItemList = [];
         this.SetStorage();
     }
 
@@ -262,14 +220,45 @@ class WarbandManager {
             equipment : [],
         }
         const new_item : UserWarband = await WarbandFactory.CreateUserWarband(_Item)
-        this.WarbandItemList.push(
-            {
-                id: -1,
-                warband_data: new_item
-            })
-        this.SetStorage();
 
+        if (this.UserProfile != null) {
+            await this.CreateWarbandSynod(new_item.ConvertToInterface())
+            this.UserProfile.Warbands.push(
+                {
+                    id: -1,
+                    warband_data: new_item
+                }
+            )
+        } else {
+
+            this.CurWarbands().push(
+                {
+                    id: -1,
+                    warband_data: new_item
+                })
+            this.SetStorage();
+        }
+        console.log(this.WarbandItemList);
+        console.log(this.UserProfile);
         return new_item;
+    }
+
+    public async CreateWarbandSynod(wb_data : IUserWarband) {
+        const token = localStorage.getItem('jwtToken')
+        const response = await fetch(`${SYNOD.URL}/wp-json/wp/v2/warband/`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+                title: wb_data.name,
+                status: "publish",
+                meta: {
+                    warband_data: wb_data
+                }
+            }),
+        })
+        console.log(response);
     }
 
     /**
@@ -280,11 +269,12 @@ class WarbandManager {
         NewMember.Name = _Item.Name + " - Copy"
         NewMember.ID = this.CalcID(NewMember.Name);
         
-        this.WarbandItemList.push(
+        this.CurWarbands().push(
             {
                 id: -1,
                 warband_data: NewMember
             });
+
         this.SetStorage();
     }
 
@@ -309,17 +299,17 @@ class WarbandManager {
     public ShufflePack(_pack : UserWarband, direction: boolean) {
         
         let i = 0;
-        for (i = 0; i < this.WarbandItemList.length; i++) {
-            if (_pack == this.WarbandItemList[i].warband_data) {
+        for (i = 0; i < this.CurWarbands().length; i++) {
+            if (_pack == this.CurWarbands()[i].warband_data) {
                 break;
             }
         }
 
-        if ((i == 0 && direction == true) || (i == this.WarbandItemList.length - 1 && direction == false)) {return;}
+        if ((i == 0 && direction == true) || (i == this.CurWarbands().length - 1 && direction == false)) {return;}
 
         const new_i = i + (direction? -1 : 1);
 
-        const MemberArray = this.WarbandItemList.slice();
+        const MemberArray = this.CurWarbands().slice();
         [MemberArray[i], MemberArray[new_i]] = [MemberArray[new_i], MemberArray[i]]
 
         this.WarbandItemList = MemberArray;

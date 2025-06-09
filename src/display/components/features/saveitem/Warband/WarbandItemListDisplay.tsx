@@ -71,7 +71,7 @@ const WarbandItemListDisplay = (prop: any) => {
         const fileReader = new FileReader();
         fileReader.onloadend = ()=>{
            try{
-                const Msg: string = Manager.FileToContentPack((fileReader.result)? fileReader.result.toString() : "");
+                const Msg = ""
                 if (Msg != "") {
                     runToast("Upload Error: " + Msg);
                 }

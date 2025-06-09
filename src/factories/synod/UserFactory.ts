@@ -76,7 +76,6 @@ class UserFactory {
      */
 
     static async BuildUserPrivate(_rule: ISiteUser) {
-        
         const synodcache = SynodDataCache.getInstance();
         
         if (synodcache.userObjectCache[_rule.id]) {
@@ -131,6 +130,8 @@ class UserFactory {
         }
 
         if (userdata != undefined) {
+            console.log("TEST")
+            console.log(userdata)
             const user = await UserFactory.BuildUserPrivate(userdata)
             return user;
         }
