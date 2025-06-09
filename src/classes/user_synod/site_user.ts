@@ -6,6 +6,7 @@ import {SYNOD} from "../../resources/api-constants";
 import { SiteUserPublic } from "./user_public";
 import { SynodDataCache } from "../_high_level_controllers/SynodDataCache";
 import { ISumWarband, SumWarband } from "../saveitems/Warband/WarbandManager";
+import { WarbandFactory } from "../../factories/warband/WarbandFactory";
 
 interface ISiteUser {
     id: number,
@@ -38,6 +39,21 @@ class SiteUser {
         this.ID = data.id;
         this.Nickname = data.nickname;
         this.ProfilePic = data.profile_picture;
+    }
+
+    public async GenerateWarbands(data: ISiteUser) {
+        for (let i = 0; i < data.warbands.length; i++) {
+            if (this.Warbands.filter((val : SumWarband) => val.id == data.warbands[i].id).length > 0) { continue; }
+            try {
+                const newarband : UserWarband = await WarbandFactory.CreateUserWarband(data.warbands[i].warband_data)
+                this.Warbands.push(
+                    {
+                        id: data.warbands[i].id,
+                        warband_data : newarband
+                    }
+                )
+            } catch (e) {console.log(e)}
+        }
     }
 
     public ConvertToInterface() {

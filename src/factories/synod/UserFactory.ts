@@ -85,7 +85,7 @@ class UserFactory {
         
         const rule = new SiteUser(_rule)
         synodcache.userObjectCache[_rule.id] = rule;
-        console.log(rule.Nickname)
+        await rule.GenerateWarbands(_rule);
         return rule;
     }
 

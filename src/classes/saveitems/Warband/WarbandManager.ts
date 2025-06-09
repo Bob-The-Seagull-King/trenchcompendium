@@ -32,13 +32,13 @@ class WarbandManager {
         
         const storedToken = localStorage.getItem('jwtToken');
         const storedUserId = localStorage.getItem('synodUserId');
-        if (storedToken && storedUserId) {
+        if (storedToken && storedUserId && this.UserProfile == null) {
             await this.SetLoggedUser(parseInt(storedUserId, 10));
         }
     }
 
     public async GetItemsAll() {
-        console.log("TEST");
+        await this.GrabUser();
         this.WarbandItemList = await this.GrabItems();
     }
     
@@ -67,6 +67,13 @@ class WarbandManager {
      */
     public GetItemByID(_id : string) {
         let i = 0;
+        if (this.UserProfile != null) {
+            for (i=0; i < this.WarbandItemList.length ; i++) {
+                if (this.WarbandItemList[i].id == Number(_id)) {
+                    return this.WarbandItemList[i]
+                }
+            }
+        }
         for (i=0; i < this.WarbandItemList.length ; i++) {
             try {
                 const nameval = this.WarbandItemList[i].warband_data.ID 
@@ -84,6 +91,9 @@ class WarbandManager {
      * Gets all of the saved items.
      */
     public async GrabItems() {
+        if (this.UserProfile != null) {
+            return this.UserProfile.Warbands;
+        }
         const TempList: SumWarband[] = [];  
         const data = localStorage.getItem('userwarbanditem');  
         try {
