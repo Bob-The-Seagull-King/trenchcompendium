@@ -2417,5 +2417,385 @@
 
         ],
         "sections": []
+    },
+    {
+        "id": "er_faqtwo",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Frequently Asked Questions #2",
+        "item_index": 2,
+        "description":  [                       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [
+                    
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [                            
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "Q: "
+                            },                        
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "Is the rule that prevents a model to take the same ACTION multiple time during an activation restricted to ACTIONS taken during that model’s activation? For example, it has been ruled in #ask-the-team that the Black Grail Shield can be used multiple times. Is this a general that can be extended to all reaction-type ACTION?",
+                                "glossary": [
+                                    {"val": "ACTION", "id": "kw_action"}
+                                ]
+                            }
+                        ]
+                    },                    
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [                            
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "A: "
+                            },                         
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Yes, since the rule of the Black Grail Shield rules specifies this and it is not taken during the model’s Activation."
+                            }
+                        ]
+                        }
+                ]
+            },   
+            {
+                "tags": {"desc_type" : "break"},
+                "content": ""
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [
+                    
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [                            
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "Q: "
+                            },                        
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "When an ability or effect requires a model to “take an ACTION”, does it mean perform one of the four basic ACTION (Move, Ranged Attack, Melee Attack, Dash) or is it just rolling the dice on the Action Success Table?",
+                                "glossary": [
+                                    {"val": "ACTION", "id": "kw_action"}
+                                ]
+                            }
+                        ]
+                    },                    
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [                            
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "A: "
+                            },                         
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "When a type of ACTION is not specified (i.e. “the model takes a Melee Attack ACTION”), then the phrase “take an ACTION” means “roll on the Action Success Table”. What happens in case of a success or failure is described in the text of the effect that requires the model to take an ACTION.",
+                                "glossary": [
+                                    {"val": "ACTION", "id": "kw_action"}
+                                ]
+                            }
+                        ]
+                        }
+                ]
+            },   
+            {
+                "tags": {"desc_type" : "break"},
+                "content": ""
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [
+                    
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [                            
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "Q: "
+                            },                        
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "A model is pushed into Dangerous Terrain (i.e. by the knockback effect of an Infernal Bomb). Does it have to roll for injury immediately (counting the push as 'move' into the terrain) or when it is activated?"
+                            }
+                        ]
+                    },                    
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [                            
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "A: "
+                            },                         
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Immediately when it enters the terrain."
+                            }
+                        ]
+                        }
+                ]
+            },   
+            {
+                "tags": {"desc_type" : "break"},
+                "content": ""
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [
+                    
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [                            
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "Q: "
+                            },                        
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "Can models move through narrow sapaces like windows? If so, can they go through gaps of any size?"
+                            }
+                        ]
+                    },                    
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [                            
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "A: "
+                            },                         
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Since all tables and terrain pieces are unique, we strongly recommend agreeing with your opponent beforehand. In general I encourage. Allowing this as it leads into more cinematic games."
+                            }
+                        ]
+                        }
+                ]
+            },   
+            {
+                "tags": {"desc_type" : "break"},
+                "content": ""
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [
+                    
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [                            
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "Q: "
+                            },                        
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "When a model declares a charge against multiple enemies, is a single target not in Line of Sight sufficient to cause the Charge to become a RISKY ACTION?",
+                                "glossary": [
+                                    {"val": "RISKY ACTION", "id": "kw_riskyaction"}
+                                ]
+                            }
+                        ]
+                    },                    
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [                            
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "A: "
+                            },                         
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "No."
+                            }
+                        ]
+                        }
+                ]
+            },   
+            {
+                "tags": {"desc_type" : "break"},
+                "content": ""
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [
+                    
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [                            
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "Q: "
+                            },                        
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "Can a Downed model use a teleportation effect like Coveted Position during its own activation or does this count as moving?"
+                            }
+                        ]
+                    },                    
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [                            
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "A: "
+                            },                         
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Yes. Move is a specific, different ACTION (unless otherwise specified in the rules).",
+                                "glossary": [
+                                    {"val": "ACTION", "id": "kw_action"}
+                                ]
+                            }
+                        ]
+                        }
+                ]
+            },   
+            {
+                "tags": {"desc_type" : "break"},
+                "content": ""
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [
+                    
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [                            
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "Q: "
+                            },                        
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "Are effects that trigger upon making an attack (i.e. Executioner’s Axe, Champion, Tartarus Claws) applied during the free melee attack granted by the Retreat Action?",
+                                "glossary": [
+                                    {"val": "Action", "id": "kw_action"}
+                                ]
+                            }
+                        ]
+                    },                    
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [                            
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "A: "
+                            },                         
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Rules As Written: Yes, unless the rules specify otherwise, since if there is no condition to these effects and they do not take place during the model’s Activation. However, we intend to look at this for the Full Rules to ensure they do not break the game"
+                            }
+                        ]
+                        }
+                ]
+            },   
+            {
+                "tags": {"desc_type" : "break"},
+                "content": ""
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [
+                    
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [                            
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "Q: "
+                            },                        
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "There are three ways a Downed model can stand up: At the beginning of its own activation; when the model goes Down in its own activation and takes a RISKY ACTION to stand up; thanks to the effect of items or abilities, like the Medi-Kit or the Castigator’s Enforced Orthodoxy ability. Does the “half movement” penalty for the rest of the activation only applies to the first situation or to any or all of the other two?",
+                                "glossary": [
+                                    {"val": "RISKY ACTION", "id": "kw_riskyaction"}
+                                ]
+                            }
+                        ]
+                    },                    
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [                            
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "A: "
+                            },                         
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "If the model stands up outside of its own Activation, the penalty does not apply."
+                            }
+                        ]
+                        }
+                ]
+            },   
+            {
+                "tags": {"desc_type" : "break"},
+                "content": ""
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [
+                    
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [                            
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "Q: "
+                            },                        
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "The wording of effects that ignore armour is inconsistent. Some effects (i.e. Incendiary grenades) state they “ignore armour”, other (i.e. Anti-tank hammerS) “ignore armour modifiers”. In other cases (I.e. The Day of His Wrath ability for the Cavalcade of the Tenth Plague) “armour offers no protection”. Are all these effects only referring to the armour modifiers to injury rolls or are there any differences?"
+                            }
+                        ]
+                    },                    
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [                            
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "A: "
+                            },                         
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Yes, there are no differences. Just to avoid this kind of confusion, weapons that bypass armour will have a consistent IGNORE ARMOUR Keyword in the full rules."
+                            }
+                        ]
+                        }
+                ]
+            }
+
+        ],
+        "sections": []
     }
 ]
