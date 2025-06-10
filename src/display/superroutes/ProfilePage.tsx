@@ -9,7 +9,7 @@ import { useParams, useNavigate, useLocation } from 'react-router-dom'
 import { useAuth } from '../../utility/AuthContext'
 import SynodImage from "../../utility/SynodImage";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCog, faDownload, faPlus, faQrcode} from "@fortawesome/free-solid-svg-icons";
+import {faCheck, faCog, faDownload, faPlus, faQrcode} from "@fortawesome/free-solid-svg-icons";
 import ProfilePageAchievements from "../components/Profile/ProfilePageAchievements";
 import ProfilePageFriends from "../components/Profile/ProfilePageFriends";
 import ProfilePageCampaigns from "../components/Profile/ProfilePageCampaigns";
@@ -104,6 +104,8 @@ const ProfilePage: React.FC = () => {
      * Handle add friend
      */
     const handleOpenAddFriend =  async () => {
+        // @TODO: Add loading animation
+
         const token = localStorage.getItem('jwtToken'); // You can refactor this to use a better auth system
         if (!token) throw new Error('User is not authenticated');
 
@@ -209,7 +211,6 @@ const ProfilePage: React.FC = () => {
                                             <div className={'btn btn-secondary btn-qr'} onClick={handleOpenShareDrawer}>
                                                 <FontAwesomeIcon
                                                     icon={faQrcode}
-
                                                 />
                                             </div>
                                         </>
@@ -218,14 +219,25 @@ const ProfilePage: React.FC = () => {
                                     ) : (
                                         <>
                                         {isLoggedIn() &&
-                                            // @TODO: add friend action
-                                            <button
-                                                className={'btn btn-primary btn-add-friend'}
-                                                onClick={handleOpenAddFriend}
-                                            >
-                                                <FontAwesomeIcon icon={faPlus} className="icon-inline-left"/>
-                                                {'Add Friend'}
-                                            </button>
+                                            <>
+                                                {(isLoggedIn()) ? (
+                                                    // @TODO: Check if this is the current users friend
+                                                    <button
+                                                        className={'btn btn-primary btn-add-friend'}
+                                                        onClick={handleOpenAddFriend}
+                                                    >
+                                                        <FontAwesomeIcon icon={faPlus} className="icon-inline-left"/>
+                                                        {'Add Friend'}
+                                                    </button>
+                                                ): (
+                                                    <div className={'friend-indicator'}>
+                                                        <FontAwesomeIcon icon={faCheck} className="icon-inline-left"/>
+                                                        {'Friend accepted'}
+                                                    </div>
+
+                                                )}
+                                            </>
+
                                         }
                                         </>
                                     )}
