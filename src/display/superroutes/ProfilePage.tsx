@@ -193,13 +193,11 @@ const ProfilePage: React.FC = () => {
                                     {'Supporter'}
                                 </h2>
 
-
-
-                            
+                                <div className={'user-interaction'}>
                                     {((userData instanceof SiteUser) ) ? (
                                         <>
                                             <CustomNavLink
-                                                classes={'btn btn-primary'}
+                                                classes={'btn btn-primary btn-settings'}
                                                 link={ '/profile/' + userData?.GetUserId() + '/settings' || `/profile/${id}/settings`}
                                                 runfunc={() => {
                                                     navigate( '/profile/' + userData?.GetUserId() + '/settings' || `/profile/${id}/settings`)
@@ -208,15 +206,11 @@ const ProfilePage: React.FC = () => {
                                                 {'Settings'}
                                             </CustomNavLink>
 
-                                            <div className={'btn btn-secondary'} onClick={handleOpenShareDrawer}>
+                                            <div className={'btn btn-secondary btn-qr'} onClick={handleOpenShareDrawer}>
                                                 <FontAwesomeIcon
                                                     icon={faQrcode}
 
                                                 />
-                                            </div>
-
-                                            <div className={'btn btn-tertiary'} onClick={logoutuser}>
-                                                Log out
                                             </div>
                                         </>
 
@@ -226,7 +220,7 @@ const ProfilePage: React.FC = () => {
                                         {isLoggedIn() &&
                                             // @TODO: add friend action
                                             <button
-                                                className={'btn btn-primary'}
+                                                className={'btn btn-primary btn-add-friend'}
                                                 onClick={handleOpenAddFriend}
                                             >
                                                 <FontAwesomeIcon icon={faPlus} className="icon-inline-left"/>
@@ -235,7 +229,7 @@ const ProfilePage: React.FC = () => {
                                         }
                                         </>
                                     )}
-                                
+                                </div>
                             </div>
                         </div>
 
