@@ -139,6 +139,7 @@ class UserWarband extends DynamicContextObject {
     public GetFactionName () {
         return this.Faction.GetSelfName();
     }
+
     /**
      * Returns the Name of the Faction as string
      */
@@ -456,9 +457,11 @@ class UserWarband extends DynamicContextObject {
     public GetCampaignName() {
         return 'No Campaign connected';
     }
+
     /**
      * @TODO: Return the Vistory Points for this Warband
      * - can use Campaign Info
+     * - uses VP for the currently active cylce
      */
     GetVictoryPoints() {
         return 12;
@@ -467,16 +470,44 @@ class UserWarband extends DynamicContextObject {
     /**
      * @TODO: Return the Campaign Cycle of the connected campaign
      - can use Campaign Info
+     - This is the campaign cycle that is currently selected for the WBB view
      */
-    GetCampaignCycle() {
+    GetCampaignCycleView() {
         return 2;
     }
 
     /**
+     * @TODO: return the maximum campaign cycle, that is possible for this Warband
+     * - This returns the maximum campaign cycle this warband has advanced to
+     * - simultaneously this is the only cycle, which can be edited
+     * @constructor
+     */
+    GetCampaignCycleMax() {
+        return 5;
+    }
+
+    /**
+     * Returns the Threshold value for the currently viewed campaign cycle
+     * @constructor
+     */
+    GetCampaignTresholdValue () {
+        const thresholds = [700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800]; // thresholds per cycle
+
+        return thresholds[this.GetCampaignCycleView() - 1] ?? thresholds[thresholds.length - 1];
+    }
+
+    GetCampaignMaxFieldStrength () {
+        const maxFieldStrengths = [10,11,12,13,14,15,16,17,18,19,20,21,22]; // Max field strength per cycle
+
+        return maxFieldStrengths[this.GetCampaignCycleView() - 1] ?? maxFieldStrengths[maxFieldStrengths.length - 1];
+    }
+
+
+    /**
      * @TODO: Get Battle Count for this warband
      * - can use Campaign Info
-     * -  Battle count != Campaign Round
-     *
+     * - Battle count != Campaign Cycle
+     * - Currently not really used until play mode is implemented
      */
     GetBattleCount() {
         return 3;
@@ -555,7 +586,7 @@ class UserWarband extends DynamicContextObject {
      * Returns the notes for this warband as string
      * @constructor
      */
-    GetNotes () {
+    GetWarbandNotes () {
         return '';
 
         /**
@@ -569,6 +600,23 @@ class UserWarband extends DynamicContextObject {
      */
     GetLore () {
         return '';
+
+        /**
+         * If empty, return ''
+         */
+    }
+
+    /** @TODO:
+     * Returns the campaign notes for this warband as string
+     *
+     * @constructor
+     */
+    GetCampaignNotes () {
+        return '';
+
+        /**
+         * If empty, return ''
+         */
     }
 
     /** @TODO:

@@ -21,22 +21,30 @@ const WbbEditViewCampaign: React.FC<WbbEditViewCampaignProps> = ({
 
             <div className="meta-item mb-2">{warband.GetCampaignName()}</div>
             <div className="meta-item"><strong>{'Patron: '}</strong>
-                { warband.GetPatronName() != '' &&
+                { (warband.GetPatronName() != '') ? (
                     <>
                         {warband.GetPatron()}
                     </>
-                }
-                { warband.GetPatronName() == '' &&
+                ): (
                     <>
                         {'No patron set'}
                     </>
-                }
+                )}
             </div>
 
+            <div className="meta-item">
+                <strong>{'Victory Points: '}</strong>
+                {warband.GetVictoryPoints()}
+            </div>
 
-            <div className="meta-item"><strong>{'Victory Points: '}</strong>{warband.GetVictoryPoints()}</div>
-            <div className="meta-item"><strong>{'Campaign Cycle: '}</strong>{warband.GetCampaignCycle()}</div>
-            <div className="meta-item"><strong>{'Battles Fought: '}</strong>{warband.GetBattleCount()}</div>
+            <div className="meta-item">
+                <strong>
+                    {'Campaign Cycle: '}
+                </strong>
+                {warband.GetCampaignCycleView()}
+                {' / '}
+                {warband.GetCampaignCycleMax()}
+            </div>
         </div>
     );
 };

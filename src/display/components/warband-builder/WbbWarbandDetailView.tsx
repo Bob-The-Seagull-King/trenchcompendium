@@ -18,9 +18,14 @@ const WbbWarbandDetailView: React.FC<WbbWarbandDetailViewProps> = ({  onClose })
     if (warband == null) return (<div>Loading...</div>);
 
     /** Goetic Options */
+    const [goeticDiscipline, setGoeticDiscipline] = useState<string>(warband.GetGoeticSelection());
+
     const [showGoeticModal, setshowGoeticModal] = useState(false);
     const handleGoeticUpdate = ( selectedGoetic: string ) => {
+        setGoeticDiscipline(selectedGoetic)
+
         // @TODO: Update Goetic Power
+        console.log('@TODO: set goetic power '+ selectedGoetic)
     }
 
 
@@ -95,14 +100,14 @@ const WbbWarbandDetailView: React.FC<WbbWarbandDetailViewProps> = ({  onClose })
                         */}
                         <WbbOptionBox
                             title={'Seven Deadly Sins'}
-                            value={warband.GetGoeticSelection()}
+                            value={goeticDiscipline}
                             onClick={() => setshowGoeticModal(true)}
                         />
 
                         <WbbEditGoeticSelectionModal
                             show={showGoeticModal}
                             onClose={() => setshowGoeticModal(false)}
-                            currentGoetic={warband.GetGoeticSelection()}
+                            currentGoetic={goeticDiscipline}
                             onSubmit={handleGoeticUpdate}
                         />
                     </>
@@ -114,7 +119,7 @@ const WbbWarbandDetailView: React.FC<WbbWarbandDetailViewProps> = ({  onClose })
 
                 {/* Notes textarea */}
                 <WbbTextarea
-                    initialText={warband.GetNotes()}
+                    initialText={warband.GetWarbandNotes()}
                     title="Warband Notes"
                     onSave={(newText) => {
                         // @TODO Save the newText as warband Notes

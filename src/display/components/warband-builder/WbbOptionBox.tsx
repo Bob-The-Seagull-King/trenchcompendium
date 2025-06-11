@@ -5,7 +5,7 @@ import {usePlayMode} from "../../../context/PlayModeContext";
 
 interface WbbOptionBoxProps {
     title: string;
-    value: string;
+    value: string | number;
     onClick: () => void;
 }
 

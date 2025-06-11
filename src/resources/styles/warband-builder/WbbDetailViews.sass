@@ -36,19 +36,33 @@
         .detail-section-title
             font-size: 16px
             font-weight: bold
+            margin-bottom: 15px
 
         .detail-section-text
             margin: 15px 0
 
             .detail-section-text-element
 
-        .detail-section-option
-            .detail-section-option-box
+        // Info Box inside the detail view content
+        .info-box
+            position: relative
+            background-color: $color-bg-3
+            padding: 15px
+            overflow: hidden
+            .info-box-icon
+                position: absolute
+                top: -8px
+                left: -8px
+                z-index: 0
+                opacity: 0.2
+                font-size: 48px
 
+            .info-box-title
+                margin-bottom: 5px
+                font-weight: bold
 
-                .detail-section-option-value
-
-                .btn
+            .info-box-content
+                font-style: italic
 
     &.WbbStashDetailView
         .stash-items-title
