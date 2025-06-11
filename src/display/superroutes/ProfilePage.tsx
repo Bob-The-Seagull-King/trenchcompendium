@@ -334,29 +334,25 @@ const ProfilePage: React.FC = () => {
                 </div>
             </div>
 
-            
-                    {((userData instanceof SiteUser)) && (
-                    <>
-                        <ProfileShareDrawer
+            {((userData instanceof SiteUser)) && (
+                <>
+                    <ProfileShareDrawer
+                        userId={parseInt(id)}
+                        show={showShareDrawer}
+                        onClose={handleCloseShareDrawer}
+                    />
+
+                    {userData &&
+                        <ProfileChangeProfilePictureDrawer
                             userId={parseInt(id)}
-                            show={showShareDrawer}
-                            onClose={handleCloseShareDrawer}
+                            show={showPfPDrawer}
+                            onClose={handleClosePfPDrawer}
                         />
+                    }
+                </>
 
-                        {userData &&
-                            <ProfileChangeProfilePictureDrawer
-                                userId={parseInt(id)}
-                                show={showPfPDrawer}
-                                onClose={handleClosePfPDrawer}
-                            />
-                        }
-                    </>
-
-                )}
-            
-
+            )}
         </div>
-
     )
 }
 

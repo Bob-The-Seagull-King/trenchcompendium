@@ -12,6 +12,8 @@ interface ProfilePageFriendsProps {
 
 const ProfilePageFriends: React.FC<ProfilePageFriendsProps> = ({ userId }) => {
 
+    // @TODO: Add friends list and friend request list
+
     // @TODO: Replace with Synod Data
     const friends = [
         {
