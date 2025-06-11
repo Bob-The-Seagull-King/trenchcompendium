@@ -44,7 +44,14 @@ const ProfilePage: React.FC = () => {
 
     const navigate = useNavigate()
 
-    const isOwnProfile = isLoggedIn() && id && parseInt(id, 10) === userId
+    /** is this the current site users own profile? */
+    const isOwnProfile = () => {
+        return userData instanceof SiteUser
+    }
+
+    /** Loading state when adding a friend */
+    const [loadingAddFriend, setLoadingAddFriend] = useState(false)
+
 
     /** Share Drawer */
     const [showShareDrawer, setShowShareDrawer] = useState(false)
@@ -75,6 +82,7 @@ const ProfilePage: React.FC = () => {
     const [keyvar, setkeyvar] = useState(0);
 
     React.useEffect(() => {
+        setLoadingAddFriend(true);
 
         async function GetUserContent() {            
             if (!id) return
@@ -90,21 +98,53 @@ const ProfilePage: React.FC = () => {
                 setUserData(UserData);
                 setkeyvar(keyvar + 1)
             }
+
+            setLoadingAddFriend(false);
+
         }
 
         GetUserContent()
     }, [userId, id, state])
 
-    function logoutuser() {
-        logout();
-        navigate('/login')
-    }
+    /** Is current profile user friend of current user */
+    const [isFriend, setIsFriend] = useState<boolean | null>(null);
+    useEffect(() => {
+        async function checkFriendship() {
+            if (userData && userId && 'IsUserFriend' in userData) {
+                const result = await userData.IsUserFriend(userId);
+                setIsFriend(result);
+            }
+        }
+
+        checkFriendship();
+    }, [userData, userId]);
+
+    /** Does the current user have sent a friend request to this user? */
+    const [hasReceivedRequest, setHasReceivedRequest] = useState<boolean | null>(null);
+    useEffect(() => {
+        async function checkFriendshipStatus() {
+            if (userData && userId) {
+                if ('IsUserFriend' in userData && typeof userData.IsUserFriend === 'function') {
+                    const isFriend = await userData.IsUserFriend(userId);
+                    setIsFriend(isFriend);
+                }
+
+                if ('HasUserFriendRequestReceived' in userData && typeof userData.HasUserFriendRequestReceived === 'function') {
+                    const hasRequest = await userData.HasUserFriendRequestReceived(userId);
+                    setHasReceivedRequest(hasRequest);
+                }
+            }
+        }
+
+        checkFriendshipStatus();
+    }, [userData, userId]);
 
     /**
      * Handle add friend
      */
     const handleOpenAddFriend =  async () => {
-        // @TODO: Add loading animation
+
+        setLoadingAddFriend(true);
 
         const token = localStorage.getItem('jwtToken'); // You can refactor this to use a better auth system
         if (!token) throw new Error('User is not authenticated');
@@ -128,6 +168,8 @@ const ProfilePage: React.FC = () => {
             throw new Error(`Failed to request friend: ${errorText}`);
         }
 
+        setLoadingAddFriend(false);
+        setHasReceivedRequest(true)
         toast.success('Friend request sent.')
     }
 
@@ -151,7 +193,7 @@ const ProfilePage: React.FC = () => {
                 <div className={'row'}>
                     <div className={'col-12 col-lg-7'}>
                         <div className={'profile-intro'} key={keyvar}>
-                                {((userData instanceof SiteUser) ) ? (
+                                {(isOwnProfile() ) ? (
                                     <div
                                         className={'profile-image-wrap editable'}
                                         onClick={handleOpenPfPDrawer}
@@ -196,7 +238,8 @@ const ProfilePage: React.FC = () => {
                                 </h2>
 
                                 <div className={'user-interaction'}>
-                                    {((userData instanceof SiteUser) ) ? (
+                                    {/* Is current users own profile */}
+                                    {(isOwnProfile() ) ? (
                                         <>
                                             <CustomNavLink
                                                 classes={'btn btn-primary btn-settings'}
@@ -218,26 +261,51 @@ const ProfilePage: React.FC = () => {
 
                                     ) : (
                                         <>
+                                        {/* Logged in user */}
                                         {isLoggedIn() &&
                                             <>
-                                                {(isLoggedIn()) ? (
-                                                    // @TODO: Check if this is the current users friend
-                                                    <button
-                                                        className={'btn btn-primary btn-add-friend'}
-                                                        onClick={handleOpenAddFriend}
-                                                    >
-                                                        <FontAwesomeIcon icon={faPlus} className="icon-inline-left"/>
-                                                        {'Add Friend'}
-                                                    </button>
-                                                ): (
+                                            {(loadingAddFriend) ? (
+                                                // Loading state
+                                                <>
                                                     <div className={'friend-indicator'}>
-                                                        <FontAwesomeIcon icon={faCheck} className="icon-inline-left"/>
-                                                        {'Friend accepted'}
+                                                        {'Loading'}
                                                     </div>
+                                                </>
+                                            ): (
+                                                <>
+                                                    {(isFriend) ? (
+                                                        // IS friend
+                                                        <div className={'friend-indicator'}>
+                                                            <FontAwesomeIcon icon={faCheck} className="icon-inline-left"/>
+                                                            {'Friend accepted'}
+                                                        </div>
+                                                    ): (
+                                                        // is NOT friend
+                                                        <>
+                                                            {( hasReceivedRequest ) ? (
+                                                                /* Friend request sent already  */
+                                                                <div className={'friend-indicator'}>
+                                                                    <FontAwesomeIcon
+                                                                        icon={faCheck}
+                                                                        className="icon-inline-left"/>
+                                                                    {'Friend request sent'}
+                                                                </div>
+                                                            ) : (
+                                                                /* Friend request NOT sent yet */
+                                                                <button
+                                                                    className={'btn btn-primary btn-add-friend'}
+                                                                    onClick={handleOpenAddFriend}
+                                                                >
+                                                                    <FontAwesomeIcon icon={faPlus} className="icon-inline-left"/>
+                                                                    {'Add Friend'}
+                                                                </button>
+                                                            )}
+                                                        </>
 
-                                                )}
+                                                    )}
+                                                </>
+                                            )}
                                             </>
-
                                         }
                                         </>
                                     )}

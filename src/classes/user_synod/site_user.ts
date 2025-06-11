@@ -7,6 +7,7 @@ import { SiteUserPublic } from "./user_public";
 import { SynodDataCache } from "../_high_level_controllers/SynodDataCache";
 import { ISumWarband, SumWarband } from "../saveitems/Warband/WarbandManager";
 import { WarbandFactory } from "../../factories/warband/WarbandFactory";
+import {UserFactory} from "../../factories/synod/UserFactory";
 
 interface ISiteUser {
     id: number,
@@ -175,6 +176,38 @@ class SiteUser {
 
         // @TODO: get the new user data maybe?
 
+    }
+
+
+    /**
+     * Check if a user with ID is a friend of this site_user
+     * @param user_id
+     * @constructor
+     */
+    public async IsUserFriend(user_id: number): Promise<boolean> {
+
+        // @TODO: Check if user_id is in the friends list of this
+
+        console.log('@Lane: please help');
+        console.log('IsUserFriend() - site_user');
+        console.log(user_id);
+        return false;
+
+    }
+
+    /**
+     * Check if a user with ID has sent a friend request to this site_user
+     * @param user_id
+     * @constructor
+     */
+    public async HasUserFriendRequestReceived (user_id: number): Promise<boolean> {
+
+        // @TODO: Check if this user_id is in the friend request list of this
+        console.log('@Lane: please help');
+        console.log('HasUserFriendRequestReceived() - site_user');
+        console.log(user_id);
+
+        return true;
     }
 
 }

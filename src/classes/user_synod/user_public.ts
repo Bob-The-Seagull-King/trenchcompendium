@@ -44,6 +44,9 @@ class SiteUserPublic {
     }
 
     public async BuildFriends(data: ISiteUserPublic) {
+        console.log('building friends');
+        console.log(data);
+
         for (let i = 0; i < data.friends.length; i++) {
             const newFriend = await UserFactory.CreatePublicUserByID(data.friends[i])
             if (newFriend != null) {
@@ -141,6 +144,37 @@ class SiteUserPublic {
 
         const data = await res.json()
         return data as ProfilePictureOption[]
+    }
+
+    /**
+     * Check if a user with ID is a friend of this user_public
+     * @param user_id - The user id to check friendship for
+     * @constructor
+     */
+    public async IsUserFriend(user_id: number): Promise<boolean> {
+
+        // @TODO: Check if user_id is in the friends list of this
+
+        console.log('@Lane: please help');
+        console.log('IsUserFriend() - user_public');
+        console.log(user_id);
+        return false;
+    }
+
+    /**
+     * Check if a user with ID has sent a friend request to this user_public
+     * @param user_id
+     * @constructor
+     */
+    public async HasUserFriendRequestReceived (user_id: number): Promise<boolean> {
+
+        // @TODO: Check if this user_id is in the friend request list of this
+
+        console.log('@Lane: please help');
+        console.log('HasUserFriendRequestReceived() - user_public');
+        console.log(user_id);
+
+        return false;
     }
 }
 
