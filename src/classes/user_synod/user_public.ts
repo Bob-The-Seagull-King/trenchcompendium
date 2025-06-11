@@ -5,14 +5,14 @@ import {ROUTES} from "../../resources/routes-constants";
 import {SYNOD} from "../../resources/api-constants";
 import { UserFactory } from "../../factories/synod/UserFactory";
 import { WarbandFactory } from "../../factories/warband/WarbandFactory";
-import { ProfilePictureOption } from "./site_user";
+import { IFriend, ProfilePictureOption } from "./site_user";
 import { AchievementFactory } from "../../factories/synod/AchievementFactory";
 
 interface ISiteUserPublic {
     id: number,
     nickname : string,
     achievements: number[],
-    friends: number[],
+    friends: IFriend[],
     warbands: IUserWarband[],
     campaigns: number[],
     profile_picture: SynodProfilePicData
@@ -22,7 +22,8 @@ class SiteUserPublic {
     ID : number;
     Nickname : string;
     Achievements : IAchievement[] = []
-    Friends : SiteUserPublic[] = []
+    Friends : IFriend[] = []
+    BuiltFriends : SiteUserPublic[] = []
     Warbands : UserWarband[] = [];
     ProfilePic : SynodProfilePicData;
     Campaigns : number[] = []
@@ -32,9 +33,11 @@ class SiteUserPublic {
         this.ID = data.id;
         this.Nickname = data.nickname;
         this.ProfilePic = data.profile_picture;
+        this.Friends = data.friends;
     }
 
     public async BuildAchievements(data: ISiteUserPublic) {
+        if (data.achievements == undefined) { return; }
         for (let i = 0; i < data.achievements.length; i++) {
             const newach = await AchievementFactory.CreateAchievement(data.achievements[i])
             if (newach != null) {
@@ -44,13 +47,10 @@ class SiteUserPublic {
     }
 
     public async BuildFriends(data: ISiteUserPublic) {
-        console.log('building friends');
-        console.log(data);
-
         for (let i = 0; i < data.friends.length; i++) {
-            const newFriend = await UserFactory.CreatePublicUserByID(data.friends[i])
+            const newFriend = await UserFactory.CreatePublicUserByID(data.friends[i].id)
             if (newFriend != null) {
-                this.Friends.push(newFriend);
+                this.BuiltFriends.push(newFriend);
             }
         }
     }
@@ -67,10 +67,6 @@ class SiteUserPublic {
         for (let i = 0; i < this.Achievements.length; i++) {
             achievementlist.push(this.Achievements[i].id)
         }
-        const friendlist : number[] = []
-        for (let i = 0; i < this.Friends.length; i++) {
-            friendlist.push(this.Friends[i].ID)
-        }
         const warbandlist : IUserWarband[] = []
         for (let i = 0; i < this.Warbands.length; i++) {
             warbandlist.push(this.Warbands[i].ConvertToInterface())
@@ -84,7 +80,7 @@ class SiteUserPublic {
             id : this.ID,
             nickname : this.Nickname,
             achievements: achievementlist,
-            friends: friendlist,
+            friends: this.Friends,
             warbands: warbandlist,
             profile_picture: this.ProfilePic,
             campaigns: requestfriendlist
@@ -152,12 +148,9 @@ class SiteUserPublic {
      * @constructor
      */
     public async IsUserFriend(user_id: number): Promise<boolean> {
-
-        // @TODO: Check if user_id is in the friends list of this
-
-        console.log('@Lane: please help');
-        console.log('IsUserFriend() - user_public');
-        console.log(user_id);
+        for (let i = 0; i < this.Friends.length; i++) {
+            if (this.Friends[i].id == user_id) { return true;}
+        }
         return false;
     }
 

@@ -13,7 +13,8 @@ interface ISiteUser {
     id: number,
     nickname : string,
     achievments: number[],
-    friends: number[],
+    friends: IFriend[],
+    friend_requests: IFriend[],
     warbands: ISumWarband[],
     campaigns: number[],
     profile_picture: SynodProfilePicData
@@ -26,11 +27,19 @@ export interface ProfilePictureOption {
     tier: string
 }
 
+export interface IFriend {
+    id : number,
+    nickname : string,
+    profile_picture_url : string
+}
+
 class SiteUser {
     ID : number;
     Nickname : string;
     Achievements : IAchievement[] = []
-    Friends : SiteUserPublic[] = []
+    Friends : IFriend[] = []
+    Requests : IFriend[] = [];
+    BuiltFriends : SiteUserPublic[] = [];
     Warbands : SumWarband[] = [];
     ProfilePic : SynodProfilePicData;
     Campaigns : number[] = []
@@ -40,6 +49,8 @@ class SiteUser {
         this.ID = data.id;
         this.Nickname = data.nickname;
         this.ProfilePic = data.profile_picture;
+        this.Friends = data.friends
+        this.Requests = data.friend_requests
     }
 
     public async GenerateWarbands(data: ISiteUser) {
@@ -57,14 +68,20 @@ class SiteUser {
         }
     }
 
+
+    public async BuildFriends(data: ISiteUser) {
+        for (let i = 0; i < data.friends.length; i++) {
+            const newFriend = await UserFactory.CreatePublicUserByID(data.friends[i].id)
+            if (newFriend != null) {
+                this.BuiltFriends.push(newFriend);
+            }
+        }
+    }
+
     public ConvertToInterface() {
         const achievementlist : number[] = []
         for (let i = 0; i < this.Achievements.length; i++) {
             achievementlist.push(this.Achievements[i].id)
-        }
-        const friendlist : number[] = []
-        for (let i = 0; i < this.Friends.length; i++) {
-            friendlist.push(this.Friends[i].ID)
         }
 
         const warbandlist : ISumWarband[] = []
@@ -84,7 +101,8 @@ class SiteUser {
             id : this.ID,
             nickname : this.Nickname,
             achievments: achievementlist,
-            friends: friendlist,
+            friends: this.Friends,
+            friend_requests : this.Requests,
             warbands: warbandlist,
             profile_picture: this.ProfilePic,
             campaigns: requestfriendlist
@@ -185,12 +203,9 @@ class SiteUser {
      * @constructor
      */
     public async IsUserFriend(user_id: number): Promise<boolean> {
-
-        // @TODO: Check if user_id is in the friends list of this
-
-        console.log('@Lane: please help');
-        console.log('IsUserFriend() - site_user');
-        console.log(user_id);
+        for (let i = 0; i < this.Friends.length; i++) {
+            if (this.Friends[i].id == user_id) { return true;}
+        }
         return false;
 
     }
@@ -201,13 +216,10 @@ class SiteUser {
      * @constructor
      */
     public async HasUserFriendRequestReceived (user_id: number): Promise<boolean> {
-
-        // @TODO: Check if this user_id is in the friend request list of this
-        console.log('@Lane: please help');
-        console.log('HasUserFriendRequestReceived() - site_user');
-        console.log(user_id);
-
-        return true;
+        for (let i = 0; i < this.Requests.length; i++) {
+            if (this.Requests[i].id == user_id) { return true;}
+        }
+        return false;
     }
 
 }

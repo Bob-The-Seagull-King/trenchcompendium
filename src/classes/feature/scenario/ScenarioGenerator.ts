@@ -441,8 +441,6 @@ class ScenarioGenerator {
 
         const code_split = code.split(/\D+/)
 
-        console.log(code_split);
-
         if (code_split.length == 8) {
             const code_values : GenCode = {
                 obj : Number(code_split[1]),

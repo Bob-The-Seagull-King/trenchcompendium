@@ -143,34 +143,37 @@ const ProfilePage: React.FC = () => {
      * Handle add friend
      */
     const handleOpenAddFriend =  async () => {
+        try {
+            setLoadingAddFriend(true);
 
-        setLoadingAddFriend(true);
+            const token = localStorage.getItem('jwtToken'); // You can refactor this to use a better auth system
+            if (!token) throw new Error('User is not authenticated');
 
-        const token = localStorage.getItem('jwtToken'); // You can refactor this to use a better auth system
-        if (!token) throw new Error('User is not authenticated');
+            const response = await fetch(`${SYNOD.URL}/wp-json/synod/v1/friends/request`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                },
+                body: JSON.stringify({
+                    "target_user_id": userData?.GetUserId()
+                }),
+            });
 
-        const response = await fetch(`${SYNOD.URL}/wp-json/synod/v1/friends/request`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`,
-            },
-            body: JSON.stringify({
-                "target_user_id": userData?.GetUserId()
-            }),
-        });
+            if (!response.ok) {
+                const errorText = await response.text();
 
-        if (!response.ok) {
-            const errorText = await response.text();
+                toast.error('Friend request already sent.')
 
-            toast.error('Friend request already sent.')
+                throw new Error(`Failed to request friend: ${errorText}`);
+            }
 
-            throw new Error(`Failed to request friend: ${errorText}`);
+            setLoadingAddFriend(false);
+            setHasReceivedRequest(true)
+            toast.success('Friend request sent.')
+        } catch (e) {
+            toast.info('Friend Request Failed')
         }
-
-        setLoadingAddFriend(false);
-        setHasReceivedRequest(true)
-        toast.success('Friend request sent.')
     }
 
     if (!id) return null

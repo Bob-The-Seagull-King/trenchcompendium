@@ -29,7 +29,6 @@ class WarbandManager {
     public async SetLoggedUser(id : number) {
         const NewUser : SiteUser | null = await UserFactory.CreatePrivateUserByID(id);
         this.UserProfile = NewUser;
-        console.log(this.UserProfile);
     }
 
     public RemoveLoggedUser() {
@@ -222,13 +221,13 @@ class WarbandManager {
         const new_item : UserWarband = await WarbandFactory.CreateUserWarband(_Item)
 
         if (this.UserProfile != null) {
-            await this.CreateWarbandSynod(new_item.ConvertToInterface())
-            this.UserProfile.Warbands.push(
+            const id  = await this.CreateWarbandSynod(new_item.ConvertToInterface())
+            
+            this.CurWarbands().push(
                 {
-                    id: -1,
+                    id: Number(id),
                     warband_data: new_item
-                }
-            )
+                })
         } else {
 
             this.CurWarbands().push(
@@ -238,8 +237,6 @@ class WarbandManager {
                 })
             this.SetStorage();
         }
-        console.log(this.WarbandItemList);
-        console.log(this.UserProfile);
         return new_item;
     }
 
@@ -254,11 +251,12 @@ class WarbandManager {
                 title: wb_data.name,
                 status: "publish",
                 meta: {
-                    warband_data: wb_data
+                    warband_data: JSON.stringify(wb_data)
                 }
             }),
         })
-        console.log(response);
+        const json : any = await response.json();     
+        return json.id
     }
 
     /**

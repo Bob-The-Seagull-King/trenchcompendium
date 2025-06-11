@@ -56,14 +56,18 @@ class UserFactory {
             if (response) {
                 const json : any = await response.json();              
                 userdata = json
+                console.log("USER DATA PUBLIC")
+                console.log(json)
                 synodcache.AddPublicCache(_val, json)
             }
         }
 
         if (userdata != undefined) {
             console.log(userdata)
-            const user = await UserFactory.BuildUserPublic(userdata)
-            return user;
+            try {
+                const user = await UserFactory.BuildUserPublic(userdata)
+                return user;
+            } catch (e) {console.log(e)}
         }
 
         return null;
@@ -85,6 +89,7 @@ class UserFactory {
         const rule = new SiteUser(_rule)
         synodcache.userObjectCache[_rule.id] = rule;
         await rule.GenerateWarbands(_rule);
+        await rule.BuildFriends(_rule)
         return rule;
     }
 
@@ -125,13 +130,13 @@ class UserFactory {
             if (response) {
                 const json : any = await response.json();              
                 userdata = json
+                console.log("USER DATA")
+                console.log(json)
                 synodcache.AddCache(_val, json)
             }
         }
 
         if (userdata != undefined) {
-            console.log("TEST")
-            console.log(userdata)
             const user = await UserFactory.BuildUserPrivate(userdata)
             return user;
         }
