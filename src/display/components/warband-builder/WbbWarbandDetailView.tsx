@@ -67,6 +67,14 @@ const WbbWarbandDetailView: React.FC<WbbWarbandDetailViewProps> = ({  onClose })
                     </div>
 
                     <div className={'detail-section-text-element'}>
+                        <strong>
+                            {'Value: '}
+                        </strong>
+                        {warband.GetCostDucatsTotal()} Ducats
+                        | {warband.GetCostGloryTotal()} Glory
+                    </div>
+
+                    <div className={'detail-section-text-element'}>
                         <strong>{'Fighters: '}</strong>
                         {'Elite: '}{warband.GetNumElite()}
                         {' | '}
@@ -74,20 +82,12 @@ const WbbWarbandDetailView: React.FC<WbbWarbandDetailViewProps> = ({  onClose })
                         {' | '}
                         {'Mercenary: '}{warband.GetNumMercenary()}
                     </div>
-
-                    <div className={'detail-section-text-element'}>
-                        <strong>
-                            {'Rating: '}
-                        </strong>
-                        {warband.GetCostDucatsTotal()} Ducats
-                        | {warband.GetCostGloryTotal()} Glory
-                    </div>
                 </div>
 
                 {/* Warband level options */}
 
                 {/* Goetic Options */}
-                { warband.HasGoeticOptions() &&
+                {warband.HasGoeticOptions() &&
                     <>
                         {/* @TODO
                           * - hide for all campaign Rounds but the first

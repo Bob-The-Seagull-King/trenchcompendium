@@ -642,8 +642,8 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                     <Button variant="secondary" onClick={() => setshowConfirmRenameWarbandModal(false)}>
                         Cancel
                     </Button>
-                    <Button variant="danger" onClick={handleRenameWarband}>
-                        Delete
+                    <Button variant="primary" onClick={handleRenameWarband}>
+                        Rename
                     </Button>
                 </Modal.Footer>
             </Modal>
