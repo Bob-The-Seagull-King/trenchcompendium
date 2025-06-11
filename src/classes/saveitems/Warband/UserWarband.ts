@@ -167,31 +167,33 @@ class UserWarband extends DynamicContextObject {
     }
 
     /** @TODO
-     * Returns the Ducats Value of the Warband Cost as int
+     * Returns the Ducats Value of the Warband Cost as int (without stash)
      */
     public GetCostDucats() {
         return this.Ducats;
     }
 
-    /** @TODO
-     * Returns the Max Ducats Value of the Warband int
+    /**
+     * @TODO:
+     * Returns the total Ducats Value including stash as int
+     * @constructor
      */
-    public GetMaxDucats() {
-        return 0;
+    public GetCostDucatsTotal () {
+        return this.Ducats;
     }
 
     /** @TODO
-     * Returns the Glory Value of the Warband Cost as int
+     * Returns the Glory Value of the Warband Cost as int (without stash)
      */
     public GetCostGlory() {
         return this.Glory;
     }
 
     /** @TODO
-     * Returns the Max Glory Value of the Warband int
+     * Returns the Glory Value of the Warband including stash as int
      */
-    public GetMaxGlory() {
-        return 0;
+    public GetCostGloryTotal() {
+        return this.Glory;
     }
 
     /**
@@ -472,7 +474,8 @@ class UserWarband extends DynamicContextObject {
 
     /**
      * @TODO: Get Battle Count for this warband
-     - can use Campaign Info
+     * - can use Campaign Info
+     * -  Battle count != Campaign Round
      *
      */
     GetBattleCount() {
@@ -548,6 +551,41 @@ class UserWarband extends DynamicContextObject {
         return this.GetFighters().filter(f => f.IsMercenary).length;
     }
 
+    /** @TODO
+     * Returns the notes for this warband as string
+     * @constructor
+     */
+    GetNotes () {
+        return '';
+
+        /**
+         * If empty, return ''
+         */
+    }
+
+    /** @TODO
+     * Returns the lore for this warband as string
+     * @constructor
+     */
+    GetLore () {
+        return '';
+    }
+
+    /** @TODO:
+     * Does this warband have goetic options?
+     * @constructor
+     */
+    HasGoeticOptions () {
+        return true;
+    }
+
+    /** @TODO:
+     * Returns the name of the chosen goetic discipline of this warband
+     * @constructor
+     */
+    GetGoeticSelection () {
+        return 'Wrath'
+    }
 }
 
 export {IUserWarband, UserWarband}

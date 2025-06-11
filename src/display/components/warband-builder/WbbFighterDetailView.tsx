@@ -32,6 +32,7 @@ import SynodImage from "../../../utility/SynodImage";
 import WbbContextualPopover from "./WbbContextualPopover";
 import SynodModelImage from "../../../utility/SynodModelImage";
 import SynodModelImageSource from "../../../utility/SynodModelImageSource";
+import WbbModalEditFighterStatus from "./modals/fighter/WbbEditFighterStatus";
 
 
 interface WbbFighterDetailViewProps {
@@ -583,7 +584,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
                             onClose={() => setShowInjuryModal(false)}
                             onSubmit={handleAddInjury}
                         />
-                        <WbbEditFighterStatus
+                        <WbbModalEditFighterStatus
                             show={showStatusModal}
                             onClose={() => setShowStatusModal(false)}
                             currentStatus={'Active'} // @TODO: use actual value

@@ -8,7 +8,7 @@ interface WbbEditFighterStatusProps {
     onSubmit: (newStatus: string) => void;
 }
 
-const WbbEditFighterStatus: React.FC<WbbEditFighterStatusProps> = ({
+const WbbModalEditFighterStatus: React.FC<WbbEditFighterStatusProps> = ({
                                                                        show,
                                                                        onClose,
                                                                        currentStatus,
@@ -54,4 +54,4 @@ const WbbEditFighterStatus: React.FC<WbbEditFighterStatusProps> = ({
     );
 };
 
-export default WbbEditFighterStatus;
+export default WbbModalEditFighterStatus;
