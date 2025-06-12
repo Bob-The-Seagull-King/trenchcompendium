@@ -124,12 +124,12 @@ const WbbCampaignDetailView: React.FC<WbbCampaignDetailViewProps> = ({ onClose }
                     </div>
 
                     <div className={'info-box-content'}>
-                        {'We are currently developing a complete campaign management mode, where you can connect your and your friends warbands to a campaign.'}
+                        {'We are currently developing a complete campaign management mode, where you can connect your own warband and the warbands of your friends to a campaign.'}
                         <br/>
                         {'With this new release there will be many additional options for your campaign play.'}
                         <br/>
                         <br/>
-                        {'Your warband is structured into campaign cycles. When you finish a game or campaign cycle, you can advance to the next one. During the campaign you can reference the warband details of previous cycles. Keep in mind, that you can only edit your warband for the latest / current campaign cylce. So make sure, so check your warband before advancing to the next cycle.'}
+                        {'Your warband is structured into campaign cycles. When you finish a game or campaign cycle, you can advance to the next one. During the campaign you can reference the warband details of previous cycles. Keep in mind, that you can only edit your warband for the latest / current campaign cylce. So make sure, to check your warband before advancing to the next cycle.'}
                     </div>
                 </div>
             </div>
