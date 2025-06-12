@@ -5,44 +5,21 @@
 import React, { useEffect, useState } from 'react'
 import SynodImage from "../../../utility/SynodImage";
 import UserListEntry from "./UserListEntry";
+import {SiteUserPublic} from "../../../classes/user_synod/user_public";
+import {SiteUser} from "../../../classes/user_synod/site_user";
 
 interface ProfilePageFriendsProps {
-    userId: number
+    userData: SiteUser | SiteUserPublic;
 }
 
-const ProfilePageFriends: React.FC<ProfilePageFriendsProps> = ({ userId }) => {
+const ProfilePageFriends: React.FC<ProfilePageFriendsProps> = ({ userData }) => {
 
     // @TODO: Add friends list and friend request list
 
-    // @TODO: Replace with Synod Data
-    const friends = [
-        {
-            id: 1,
-            username: 'Crimson Knight',
-            status: 'supporter'
-        },
-        {
-            id: 2,
-            username: 'Iron Warden',
-            status: 'member'
-        },
-        {
-            id: 3,
-            username: 'Ghost Fox Killer Elite XXXX',
-            status: 'supporter'
-        },
-        {
-            id: 4,
-            username: 'Learchus',
-            status: 'member'
-        },
-        {
-            id: 5,
-            username: 'Bob',
-            status: 'Lunatic Supporter'
-        }
-    ]
+    console.log('++ userData ++');
+    console.log(userData);
 
+    const friends = userData.Friends;
 
     return (
         <div className="ProfilePageFriends">
@@ -57,8 +34,9 @@ const ProfilePageFriends: React.FC<ProfilePageFriendsProps> = ({ userId }) => {
                             <li key={friend.id} className={'friend'}>
                                 <UserListEntry
                                     id={friend.id}
-                                    username={friend.username}
+                                    username={friend.nickname}
                                     status={friend.status}
+                                    pfp_url={friend.profile_picture_url}
                                 />
                             </li>
                         ))}

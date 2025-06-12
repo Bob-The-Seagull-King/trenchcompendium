@@ -321,7 +321,9 @@ const ProfilePage: React.FC = () => {
                         <div className={'hide-lg-up'}>
                             <ProfilePageAchievements userId={parseInt(id)}/>
 
-                            <ProfilePageFriends userId={parseInt(id)}/>
+                            {userData && (
+                                <ProfilePageFriends userData={userData}/>
+                            )}
                         </div>
 
                         <ProfilePageCampaigns userId={parseInt(id)}/>
@@ -333,7 +335,9 @@ const ProfilePage: React.FC = () => {
                         <div className={'hide-lg-down'}>
                             <ProfilePageAchievements userId={parseInt(id)}/>
 
-                            <ProfilePageFriends userId={parseInt(id)}/>
+                            {userData && (
+                                <ProfilePageFriends userData={userData}/>
+                            )}
                         </div>
                     </div>
                 </div>

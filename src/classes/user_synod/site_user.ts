@@ -31,6 +31,7 @@ export interface IFriend {
     id : number,
     nickname : string,
     profile_picture_url : string
+    status: string
 }
 
 class SiteUser {

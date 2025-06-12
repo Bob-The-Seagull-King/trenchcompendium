@@ -11,13 +11,10 @@ interface UserListEntryProps {
     id: number
     username: string
     status: string
+    pfp_url: string
 }
 
-const UserListEntry: React.FC<UserListEntryProps> = ({ id, username, status }) => {
-
-    // @TODO: These are random image IDS -> Replace with user profile image IDs
-    const imageIds = [171, 168, 172, 179]
-    const randomId = imageIds[Math.floor(Math.random() * imageIds.length)]
+const UserListEntry: React.FC<UserListEntryProps> = ({ id, username, status, pfp_url }) => {
 
     const navigate = useNavigate();
 
@@ -29,10 +26,9 @@ const UserListEntry: React.FC<UserListEntryProps> = ({ id, username, status }) =
                 runfunc={() => {
                     navigate(`/profile/${id}`, {state: Date.now().toString()})
                 }}>
-                <SynodImage
-                    imageId={randomId}
-                    className={'UserListEntry-image'}
-                />
+
+                <img className={'UserListEntry-image'} src={pfp_url} />
+
             </CustomNavLink>
 
             <div className={'UserListEntry-text'}>
