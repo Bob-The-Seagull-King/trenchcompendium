@@ -213,10 +213,13 @@ class SiteUser {
 
     /**
      * Check if a user with ID has sent a friend request to this site_user
+     * - This is probably not needed anymore
      * @param user_id
      * @constructor
      */
     public async HasUserFriendRequestReceived (user_id: number): Promise<boolean> {
+
+        console.log('@TODO: HasUserFriendRequestReceived in site_user - which is deprecated (probably)');
 
         for (let i = 0; i < this.Requests.length; i++) {
             if (this.Requests[i].id == user_id) { return true;}
@@ -224,6 +227,69 @@ class SiteUser {
         return false;
     }
 
+    /**
+     * Accept a friend request from the user_id for the current user
+     *
+     * @param user_id
+     */
+    public async acceptFriendRequest ( user_id: number ): Promise<boolean> {
+        const token = localStorage.getItem('jwtToken') // @TODO: This is probably not the best way to do it
+
+        const res = await fetch(`${SYNOD.URL}/wp-json/synod/v1/friends/accept`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                user_id: user_id,
+            })
+        })
+
+        if (!res.ok) {
+            throw new Error('Failed to accept friend request')
+        }
+
+        const data = await res.json()
+
+        if( data.value ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Decline a friend request from the user_id for the current user
+     *
+     * @param user_id
+     */
+    public async declineFriendRequest ( user_id: number ): Promise<boolean> {
+        const token = localStorage.getItem('jwtToken') // @TODO: This is probably not the best way to do it
+
+        const res = await fetch(`${SYNOD.URL}/wp-json/synod/v1/friends/decline`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                user_id: user_id,
+            })
+        })
+
+        if (!res.ok) {
+            throw new Error('Failed to decline friend request')
+        }
+
+        const data = await res.json()
+
+        if( data.value ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
 
 export {ISiteUser, SiteUser}

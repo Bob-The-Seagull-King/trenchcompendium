@@ -178,6 +178,7 @@ const ProfilePage: React.FC = () => {
         }
     }
 
+
     if (!id) return null
 
     return (
@@ -322,7 +323,9 @@ const ProfilePage: React.FC = () => {
                             <ProfilePageAchievements userId={parseInt(id)}/>
 
                             {userData && (
-                                <ProfilePageFriends userData={userData}/>
+                                <ProfilePageFriends
+                                    userData={userData}
+                                />
                             )}
                         </div>
 
@@ -336,7 +339,9 @@ const ProfilePage: React.FC = () => {
                             <ProfilePageAchievements userId={parseInt(id)}/>
 
                             {userData && (
-                                <ProfilePageFriends userData={userData}/>
+                                <ProfilePageFriends
+                                    userData={userData}
+                                />
                             )}
                         </div>
                     </div>
