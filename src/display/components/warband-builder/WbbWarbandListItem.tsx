@@ -50,7 +50,7 @@ const WbbWarbandListItem: React.FC<WbbWarbandListItemProps> = ({ item, manager, 
      * navigates to edit view
      */
     const navigateToEdit = () => {
-        navigate('/warband/edit/' + item.warband_data.ID);
+        navigate('/warband/edit/' + item.id);
     };
 
     /**
@@ -59,7 +59,7 @@ const WbbWarbandListItem: React.FC<WbbWarbandListItemProps> = ({ item, manager, 
      */
     const handleConfirmDelete = () => {
         setShowDeleteConfirm(false);
-        manager.DeletePack(item.warband_data);
+        manager.DeletePack(item.id);
         parentfunc();
     };
 

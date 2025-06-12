@@ -17,7 +17,38 @@ export interface SumWarband {
 
 class WarbandManager {
     private WarbandItemList: SumWarband[] = []; 
+    private LocalIDCount : number;
     private UserProfile : SiteUser | null = null;
+
+    public constructor() {
+        const StoredVal = localStorage.getItem('localwarbandcount')
+        if (StoredVal != null) {
+            try {
+                this.LocalIDCount = Number(StoredVal);
+            } catch (e) {
+                this.LocalIDCount = -999;
+            }            
+        } else {
+            this.LocalIDCount = 0;
+            localStorage.setItem('localwarbandcount', '0')
+        }
+    }
+
+    private GetIDLocal() : number {
+        let needID = true;
+        while (needID) {
+            needID = false;
+            for (let i = 0; i < this.WarbandItemList.length; i++) {
+                if (this.WarbandItemList[i].id == this.LocalIDCount) {
+                    this.LocalIDCount += 1;
+                    localStorage.setItem('localwarbandcount', String(this.LocalIDCount))
+                    needID = true;
+                }
+            }
+        }
+        console.log(this.LocalIDCount)
+        return this.LocalIDCount;
+    }
 
     public CurWarbands() : SumWarband[] { 
         if (this.UserProfile != null) {
@@ -74,21 +105,9 @@ class WarbandManager {
      */
     public GetItemByID(_id : string) {
         let i = 0;
-        if (this.UserProfile != null) {
-            for (i=0; i < this.CurWarbands().length ; i++) {
-                if (this.CurWarbands()[i].id == Number(_id)) {
-                    return this.CurWarbands()[i]
-                }
-            }
-        }
         for (i=0; i < this.CurWarbands().length ; i++) {
-            try {
-                const nameval = this.CurWarbands()[i].warband_data.ID 
-                if ((nameval != undefined? nameval : "" ).trim() == _id) {
-                    return this.CurWarbands()[i]
-                }
-            } catch (e) {
-                console.log("Broken Save Item Found")
+            if (this.CurWarbands()[i].id == Number(_id)) {
+                return this.CurWarbands()[i]
             }
         }
         return null;
@@ -104,12 +123,12 @@ class WarbandManager {
         const TempList: SumWarband[] = [];  
         const data = localStorage.getItem('userwarbanditem');  
         try {
-            const ItemList: IUserWarband[] = JSON.parse(data || "");
+            const ItemList: ISumWarband[] = JSON.parse(data || "");
             for (let i = 0; i < ItemList.length; i++) {
                 TempList.push(
                     {
-                        id: -1,
-                        warband_data:    await WarbandFactory.CreateUserWarband(ItemList[i])
+                        id: ItemList[i].id,
+                        warband_data:    await WarbandFactory.CreateUserWarband(ItemList[i].warband_data)
                     })
             }
             return TempList;
@@ -136,7 +155,7 @@ class WarbandManager {
             try {
                 _list.push(
                     {   
-                        id: -1,
+                        id: this.CurWarbands()[i].id,
                         warband_data: this.CurWarbands()[i].warband_data.ConvertToInterface()
                     })
             } catch (e) {
@@ -159,16 +178,26 @@ class WarbandManager {
      * update the stored information to match.
      * @param _pack The Content Pack to remove from the manager
      */
-    public DeletePack(_pack : UserWarband) {
-        let i = 0;
-        for (i = 0; i < this.CurWarbands().length; i++) {
-            if (_pack == this.CurWarbands()[i].warband_data) {
-                this.CurWarbands().splice(i, 1);
-                break;
+    public async DeletePack(_pack : number) {
+        if (this.UserProfile != null) {
+            const status = await this.DeleteWarbandSynod(_pack);
+            if (status == 200) {
+                for (let i = 0; i < this.CurWarbands().length; i++) {
+                    if (_pack == this.CurWarbands()[i].id) {
+                        this.CurWarbands().splice(i, 1);
+                        break;
+                    }
+                }
             }
-        }
-        
-        this.SetStorage();
+        } else {
+            for (let i = 0; i < this.CurWarbands().length; i++) {
+                if (_pack == this.CurWarbands()[i].id) {
+                    this.CurWarbands().splice(i, 1);
+                    this.SetStorage();
+                    break;
+                }
+            }
+        }        
     }
 
     /**
@@ -222,22 +251,21 @@ class WarbandManager {
 
         if (this.UserProfile != null) {
             const id  = await this.CreateWarbandSynod(new_item.ConvertToInterface())
-            
-            this.CurWarbands().push(
-                {
+            const NewSum : SumWarband = {
                     id: Number(id),
                     warband_data: new_item
-                })
+                }
+            this.CurWarbands().push(NewSum)
+            return NewSum;
         } else {
-
-            this.CurWarbands().push(
-                {
-                    id: -1,
+            const NewSum : SumWarband = {
+                    id: this.GetIDLocal(),
                     warband_data: new_item
-                })
+                }
+            this.WarbandItemList.push(NewSum)
             this.SetStorage();
+            return NewSum;
         }
-        return new_item;
     }
 
     public async CreateWarbandSynod(wb_data : IUserWarband) {
@@ -260,6 +288,22 @@ class WarbandManager {
         return json.id
     }
 
+    public async DeleteWarbandSynod(id : number) {
+        const token = localStorage.getItem('jwtToken')
+        const response = await fetch(`${SYNOD.URL}/wp-json/wp/v2/warband/`+String(id), {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            }
+        })
+        const json : any = await response.json();
+        if (response.status) {
+            return response.status
+        }
+        return 0;
+    }
+
     /**
      * Recreates a copy of the item as a new item.
      */
@@ -267,14 +311,24 @@ class WarbandManager {
         const NewMember : UserWarband = await WarbandFactory.CreateUserWarband((_Item.ConvertToInterface()));
         NewMember.Name = _Item.Name + " - Copy"
         NewMember.ID = this.CalcID(NewMember.Name);
-        
-        this.CurWarbands().push(
-            {
-                id: -1,
-                warband_data: NewMember
-            });
 
-        this.SetStorage();
+        if (this.UserProfile != null) {
+            const id  = await this.CreateWarbandSynod(NewMember.ConvertToInterface())
+            
+            this.CurWarbands().push(
+                {
+                    id: Number(id),
+                    warband_data: NewMember
+                })
+        } else {
+
+            this.CurWarbands().push(
+                {
+                    id: this.GetIDLocal(),
+                    warband_data: NewMember
+                })
+            this.SetStorage();
+        }
     }
 
     /**
@@ -288,32 +342,6 @@ class WarbandManager {
 
     public static sanitizeString(input: string): string {
         return input.replace(/[^a-zA-Z0-9-_]/g, '');
-      }
-
-    /**
-     * Moves a content pack within the array
-     * @param _pack the content pack to move
-     * @param direction if the pack should be moved up (true) or down (false)
-     */
-    public ShufflePack(_pack : UserWarband, direction: boolean) {
-        
-        let i = 0;
-        for (i = 0; i < this.CurWarbands().length; i++) {
-            if (_pack == this.CurWarbands()[i].warband_data) {
-                break;
-            }
-        }
-
-        if ((i == 0 && direction == true) || (i == this.CurWarbands().length - 1 && direction == false)) {return;}
-
-        const new_i = i + (direction? -1 : 1);
-
-        const MemberArray = this.CurWarbands().slice();
-        [MemberArray[i], MemberArray[new_i]] = [MemberArray[new_i], MemberArray[i]]
-
-        this.WarbandItemList = MemberArray;
-
-        this.SetStorage();
     }
 
     /**
@@ -321,7 +349,6 @@ class WarbandManager {
      * WARBAND UPDATE FUNCTIONS MOVE THROUGH HERE
      * 
      */
-
     public async UpdateWarbandPatron(wb : UserWarband, patron_id : string) {
         wb.UpdateSelfPatron(patron_id);
         this.SetStorage();

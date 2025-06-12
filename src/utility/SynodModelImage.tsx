@@ -21,8 +21,7 @@ const SynodModelImage: React.FC<SynodModelImageProps> = ({ modelSlug, size = 'fu
     useEffect(() => {
         async function SetImageData() {
             const IMG_Model : ModelImageData = await useSynodModelImageData(modelSlug, size)
-            setData(IMG_Model)
-            console.log(IMG_Model)
+            setData(IMG_Model) 
             setkeyvar(_keyvar + 1)
         }
 

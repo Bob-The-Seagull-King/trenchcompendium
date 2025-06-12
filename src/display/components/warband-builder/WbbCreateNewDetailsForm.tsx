@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { WarbandManager } from '../../../classes/saveitems/Warband/WarbandManager';
+import { SumWarband, WarbandManager } from '../../../classes/saveitems/Warband/WarbandManager';
 import React, { useState } from 'react';
 import { UserWarband } from '../../../classes/saveitems/Warband/UserWarband';
 import { Faction } from '../../../classes/feature/faction/Faction';
@@ -17,7 +17,7 @@ const WbbCreateNewDetailsForm: React.FC<{
     const [warbandName, setWarbandName] = useState('');
 
     async function handleSubmit() {
-        const msg : null | UserWarband = await manager.NewItem(warbandName, chosenfaction.ID, {
+        const msg : null | SumWarband = await manager.NewItem(warbandName, chosenfaction.ID, {
             id : "null",
             value_ducat: 0,
             value_glory: 0
@@ -26,7 +26,7 @@ const WbbCreateNewDetailsForm: React.FC<{
         if (msg == null) {
             alert("Warband creation was unsuccessful");
         } else {
-            navigate('/warband/edit/' + msg.ID);
+            navigate('/warband/edit/' + msg.id);
         }
     }
 

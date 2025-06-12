@@ -56,14 +56,11 @@ class UserFactory {
             if (response) {
                 const json : any = await response.json();              
                 userdata = json
-                console.log("USER DATA PUBLIC")
-                console.log(json)
                 synodcache.AddPublicCache(_val, json)
             }
         }
 
         if (userdata != undefined) {
-            console.log(userdata)
             try {
                 const user = await UserFactory.BuildUserPublic(userdata)
                 return user;
@@ -130,8 +127,6 @@ class UserFactory {
             if (response) {
                 const json : any = await response.json();              
                 userdata = json
-                console.log("USER DATA")
-                console.log(json)
                 synodcache.AddCache(_val, json)
             }
         }

@@ -66,9 +66,7 @@ export async function useSynodModelImageData(modelSlug: string, size = 'full'): 
         const response : Response = await fetch(`${SYNOD.URL}/wp-json/synod/v1/model-image/${modelSlug}`)
 
         if (response) {
-            console.log(response)
             const json : any = await response.json();
-            console.log(json)
             const sizes = json.image?.media_details?.sizes;
             const sizedImage = sizes?.[size]?.source_url;
 
@@ -82,8 +80,6 @@ export async function useSynodModelImageData(modelSlug: string, size = 'full'): 
                 loading: false,
                 error: !json.image || !json.image?.source_url,
             };
-            console.log("DASHKJDHS")
-            console.log(result)
             synodcache.AddModelCache(key, result);
             return synodcache.imageModelCache[key];
         }

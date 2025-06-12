@@ -15,9 +15,14 @@ interface ISiteUser {
     achievments: number[],
     friends: IFriend[],
     friend_requests: IFriend[],
-    warbands: ISumWarband[],
+    warbands: ISynodWarband[],
     campaigns: number[],
     profile_picture: SynodProfilePicData
+}
+
+export interface ISynodWarband {
+    id : number // -1 means LOCAL warband
+    warband_data : string
 }
 
 export interface ProfilePictureOption {
@@ -58,7 +63,7 @@ class SiteUser {
         for (let i = 0; i < data.warbands.length; i++) {
             if (this.Warbands.filter((val : SumWarband) => val.id == data.warbands[i].id).length > 0) { continue; }
             try {
-                const newarband : UserWarband = await WarbandFactory.CreateUserWarband(data.warbands[i].warband_data)
+                const newarband : UserWarband = await WarbandFactory.CreateUserWarband(JSON.parse(data.warbands[i].warband_data))
                 this.Warbands.push(
                     {
                         id: data.warbands[i].id,
@@ -85,12 +90,12 @@ class SiteUser {
             achievementlist.push(this.Achievements[i].id)
         }
 
-        const warbandlist : ISumWarband[] = []
+        const warbandlist : ISynodWarband[] = []
         for (let i = 0; i < this.Warbands.length; i++) {
             warbandlist.push(
                 {
                     id : this.Warbands[i].id,
-                    warband_data: this.Warbands[i].warband_data.ConvertToInterface()
+                    warband_data: JSON.stringify(this.Warbands[i].warband_data.ConvertToInterface())
                 })
         }
         const requestfriendlist : number[] = []
