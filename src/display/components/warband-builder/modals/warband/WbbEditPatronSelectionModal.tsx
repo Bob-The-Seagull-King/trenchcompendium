@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
+import {faXmark} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 interface WbbEditPatronSelectionProps {
     show: boolean;
@@ -26,8 +28,15 @@ const WbbEditPatronSelectionModal: React.FC<WbbEditPatronSelectionProps> = ({
 
     return (
         <Modal show={show} onHide={onClose} className="WbbEditPatronSelectionModal" centered>
-            <Modal.Header closeButton>
+            <Modal.Header closeButton={false}>
                 <Modal.Title>Edit Patron</Modal.Title>
+
+                <FontAwesomeIcon
+                    icon={faXmark}
+                    className="modal-close-icon"
+                    role="button"
+                    onClick={onClose}
+                />
             </Modal.Header>
 
             <Modal.Body>

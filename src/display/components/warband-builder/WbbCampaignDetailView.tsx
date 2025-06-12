@@ -8,6 +8,7 @@ import WbbOptionBox from "./WbbOptionBox";
 import WbbEditGoeticSelectionModal from "./modals/warband/WbbEditGoeticSelectionModal";
 import WbbEditVictoryPointsModal from "./modals/warband/WbbEditVictoryPointsModal";
 import WbbEditPatronSelectionModal from "./modals/warband/WbbEditPatronSelectionModal";
+import WbbEditCampaignCycleModal from "./modals/warband/WbbEditCampaignCycleModal";
 
 interface WbbCampaignDetailViewProps {
     onClose: () => void;
@@ -34,6 +35,21 @@ const WbbCampaignDetailView: React.FC<WbbCampaignDetailViewProps> = ({ onClose }
         // @TODO: Update Patron
         console.log('@TODO: Set new Patron ' + newPatron);
     }
+
+    /** Campaign Cycle */
+    const [campaignCycle, setCampaignCycle] = useState<number>(warband.GetCampaignCycleView());
+    const [campaignCycleMax, setCampaignCycleMax] = useState<number>(warband.GetCampaignCycleMax());
+    const [showCampaignCycleModal, setshowCampaignCycleModal] = useState(false);
+    const handleCampaignCycleUpdate = ( newCycle: number, newCycleMax: number ) => {
+
+
+        setCampaignCycle(newCycle)
+        setCampaignCycleMax(newCycleMax)
+
+        // @TODO: Campaign Cycle
+        console.log('@TODO: Set new Campaign Cylce current: ' + newCycle + ' & new Max Cycle: ' + newCycleMax);
+    }
+
 
     return (
         <div className="WbbDetailView WbbCampaignDetailView">
@@ -102,6 +118,21 @@ const WbbCampaignDetailView: React.FC<WbbCampaignDetailViewProps> = ({ onClose }
                     onClose={() => setshowPatronModal(false)}
                     currentPatron={patron}
                     onSubmit={handlePatronUpdate}
+                />
+
+                {/* Campaign Cycle */}
+                <WbbOptionBox
+                    title={'Campaign Cycle'}
+                    value={campaignCycle}
+                    onClick={() => setshowCampaignCycleModal(true)}
+                />
+
+                <WbbEditCampaignCycleModal
+                    show={showCampaignCycleModal}
+                    onClose={() => setshowCampaignCycleModal(false)}
+                    currentCampaignCycle={campaignCycle}
+                    currentCampaignCycleMax={campaignCycleMax}
+                    onSubmit={handleCampaignCycleUpdate}
                 />
 
 

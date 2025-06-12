@@ -483,7 +483,7 @@ class UserWarband extends DynamicContextObject {
      * @constructor
      */
     GetCampaignCycleMax() {
-        return 5;
+        return 3;
     }
 
     /**
