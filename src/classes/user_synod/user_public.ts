@@ -155,19 +155,39 @@ class SiteUserPublic {
     }
 
     /**
-     * Check if a user with ID has sent a friend request to this user_public
+     * Check if a user with ID of requester_id has sent a friend request to this user_public
+     * - only logged in users can get check for their own user_id
+     *
      * @param user_id
      * @constructor
      */
-    public async HasUserFriendRequestReceived (user_id: number): Promise<boolean> {
+    public async HasUserFriendRequestReceived ( requester_id: number ): Promise<boolean> {
 
-        // @TODO: Check if this user_id is in the friend request list of this
+        const token = localStorage.getItem('jwtToken') // @TODO: This is probably not the best way to do it
 
-        console.log('@Lane: please help');
-        console.log('HasUserFriendRequestReceived() - user_public');
-        console.log(user_id);
+        const res = await fetch(`${SYNOD.URL}/wp-json/synod/v1/friends/request_received/`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                requester_id: requester_id,
+                requestee_id: this.GetUserId()
+            })
+        })
 
-        return false;
+        if (!res.ok) {
+            throw new Error('Failed to fetch friend request check')
+        }
+
+        const data = await res.json()
+
+        if( data.value ) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
 

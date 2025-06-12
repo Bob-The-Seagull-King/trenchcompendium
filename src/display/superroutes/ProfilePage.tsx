@@ -128,7 +128,6 @@ const ProfilePage: React.FC = () => {
                     const isFriend = await userData.IsUserFriend(userId);
                     setIsFriend(isFriend);
                 }
-
                 if ('HasUserFriendRequestReceived' in userData && typeof userData.HasUserFriendRequestReceived === 'function') {
                     const hasRequest = await userData.HasUserFriendRequestReceived(userId);
                     setHasReceivedRequest(hasRequest);
@@ -165,14 +164,17 @@ const ProfilePage: React.FC = () => {
 
                 toast.error('Friend request already sent.')
 
+                setLoadingAddFriend(false);
+                setHasReceivedRequest(true);
+
                 throw new Error(`Failed to request friend: ${errorText}`);
             }
 
             setLoadingAddFriend(false);
-            setHasReceivedRequest(true)
+            setHasReceivedRequest(true);
             toast.success('Friend request sent.')
         } catch (e) {
-            toast.info('Friend Request Failed')
+            //
         }
     }
 

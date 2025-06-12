@@ -216,6 +216,7 @@ class SiteUser {
      * @constructor
      */
     public async HasUserFriendRequestReceived (user_id: number): Promise<boolean> {
+
         for (let i = 0; i < this.Requests.length; i++) {
             if (this.Requests[i].id == user_id) { return true;}
         }
