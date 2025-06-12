@@ -95,16 +95,25 @@ const ProfilePageFriends: React.FC<ProfilePageFriendsProps> = ({ userData }) => 
                     )}
 
                     <ul className={'friends-list'}>
-                        {friends.map((friend) => (
-                            <li key={friend.id} className={'friend'}>
-                                <UserListEntry
-                                    id={friend.id}
-                                    username={friend.nickname}
-                                    status={friend.status}
-                                    pfp_url={friend.profile_picture_url}
-                                />
-                            </li>
-                        ))}
+                        {friendRequests.length > 0 ? (
+                        <>
+                            {friends.map((friend) => (
+                                <li key={friend.id} className={'friend'}>
+                                    <UserListEntry
+                                        id={friend.id}
+                                        username={friend.nickname}
+                                        status={friend.status}
+                                        pfp_url={friend.profile_picture_url}
+                                    />
+                                </li>
+                            ))}
+                        </>
+                        ): (
+                            <>
+                                {'No friends connected'}
+                            </>
+                        )}
+
                     </ul>
                 </div>
             </div>
