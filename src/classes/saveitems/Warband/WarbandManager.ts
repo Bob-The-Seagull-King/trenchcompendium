@@ -246,6 +246,7 @@ class WarbandManager {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
             },
             body: JSON.stringify({
                 title: wb_data.name,
@@ -255,7 +256,7 @@ class WarbandManager {
                 }
             }),
         })
-        const json : any = await response.json();     
+        const json : any = await response.json();
         return json.id
     }
 
