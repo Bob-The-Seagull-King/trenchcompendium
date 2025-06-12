@@ -123,7 +123,7 @@ const WbbCampaignDetailView: React.FC<WbbCampaignDetailViewProps> = ({ onClose }
                 {/* Campaign Cycle */}
                 <WbbOptionBox
                     title={'Campaign Cycle'}
-                    value={campaignCycle}
+                    value={campaignCycle + ' / '+campaignCycleMax}
                     onClick={() => setshowCampaignCycleModal(true)}
                 />
 
