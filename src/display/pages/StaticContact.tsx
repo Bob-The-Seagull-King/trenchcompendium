@@ -49,27 +49,6 @@ const StaticContact: React.FC = () => {
                             </table>
                         </div>
                     </div>
-
-                    <div className={'rules-scenario-summary rules-card col-12'}>
-                        <div className={'rules-scenario-summary-title rules-card-title'}>
-                            Submit a Support Request
-                        </div>
-                                    
-                        <div className={'ContactFormSupport rules-scenario-summary-content rules-card-content'}>
-                            
-                        </div>
-                    </div>
-
-                    <div className={'RulesScenarioSummary rules-scenario-summary rules-card col-12 col-sm-6 col-xs-6'}>
-                        <div className={'rules-scenario-summary-title rules-card-title'}>
-                            Submit a Business Inquiry
-                        </div>
-                                    
-                        <div className={'ContactFormBusiness rules-scenario-summary-content rules-card-content'}>
-                            
-                        </div>
-                    </div>
-
                 </div>
                 
             </div>
