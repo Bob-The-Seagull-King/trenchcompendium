@@ -4,7 +4,7 @@
  */
 
 
-import React, {useEffect, useState} from 'react'
+import React, {useCallback, useEffect, useState} from 'react'
 import { useParams, useNavigate, useLocation } from 'react-router-dom'
 import { useAuth } from '../../utility/AuthContext'
 import SynodImage from "../../utility/SynodImage";
@@ -38,10 +38,6 @@ const ProfilePage: React.FC = () => {
     /**
      * Handle Profile picture change
      */
-    // @TODO: change profile picture on change
-
-
-
     const navigate = useNavigate()
 
     /** is this the current site users own profile? */
@@ -49,7 +45,7 @@ const ProfilePage: React.FC = () => {
         return userData instanceof SiteUser
     }
 
-    /** Loading state when adding a friend */
+    /** Loading state when adding a friend via main button on stangers profiles */
     const [loadingAddFriend, setLoadingAddFriend] = useState(false)
 
 
@@ -81,30 +77,40 @@ const ProfilePage: React.FC = () => {
     const [userData, setUserData] = React.useState<SiteUser | SiteUserPublic | null>(null)
     const [keyvar, setkeyvar] = useState(0);
 
-    React.useEffect(() => {
-        setLoadingAddFriend(true);
+    /** Get user Data function */
+    const fetchUserData = useCallback(async () => {
+        if (!id) return;
 
-        async function GetUserContent() {            
-            if (!id) return
-
-            let UserData : SiteUserPublic | SiteUser | null = null;
-            if (isLoggedIn() && (userId == Number(id))) {
-                UserData = await UserFactory.CreatePrivateUserByID(Number(id));
-            } else {
-                UserData = await UserFactory.CreatePublicUserByID(Number(id));
-            }
-
-            if (UserData != null) {
-                setUserData(UserData);
-                setkeyvar(keyvar + 1)
-            }
-
-            setLoadingAddFriend(false);
-
+        if (userId != null) {
+            const userdatacache : SynodDataCache = SynodDataCache.getInstance();
+            delete userdatacache.userObjectCache[userId];
+            delete userdatacache.userDataCache[userId];
+            delete userdatacache.callUserDataCache[userId];
         }
 
-        GetUserContent()
-    }, [userId, id, state])
+        setLoadingAddFriend(true);
+        setIsLoadingFriendslist(true);
+
+        let UserData: SiteUserPublic | SiteUser | null = null;
+
+        if (isLoggedIn() && userId === Number(id)) {
+            UserData = await UserFactory.CreatePrivateUserByID(Number(id));
+        } else {
+            UserData = await UserFactory.CreatePublicUserByID(Number(id));
+        }
+
+        if (UserData != null) {
+            setUserData(UserData);
+            setkeyvar(prev => prev + 1); // Only once, after setting data
+        }
+
+        setLoadingAddFriend(false);
+        setIsLoadingFriendslist(false);
+    }, [id, userId]);
+
+    React.useEffect(() => {
+        fetchUserData();
+    }, [userId, id, state]);
 
     /** Is current profile user friend of current user */
     const [isFriend, setIsFriend] = useState<boolean | null>(null);
@@ -139,11 +145,19 @@ const ProfilePage: React.FC = () => {
     }, [userData, userId]);
 
     /**
-     * Handle add friend
+     * Handle add friend via any button
+     * - either via click on main button (no arg)
+     * - or click in add Friends Modal (user id as arg)
      */
-    const handleOpenAddFriend =  async () => {
+    const handleAddFriend =  async ( targetUserId?: number) => {
+
+        if( !targetUserId ) {
+            targetUserId = userData?.GetUserId();
+        }
+
         try {
             setLoadingAddFriend(true);
+            setIsLoadingFriendslist(true);
 
             const token = localStorage.getItem('jwtToken'); // You can refactor this to use a better auth system
             if (!token) throw new Error('User is not authenticated');
@@ -155,7 +169,7 @@ const ProfilePage: React.FC = () => {
                     'Authorization': `Bearer ${token}`,
                 },
                 body: JSON.stringify({
-                    "target_user_id": userData?.GetUserId()
+                    "target_user_id": targetUserId
                 }),
             });
 
@@ -165,19 +179,28 @@ const ProfilePage: React.FC = () => {
                 toast.error('Friend request already sent.')
 
                 setLoadingAddFriend(false);
+                setIsLoadingFriendslist(false);
                 setHasReceivedRequest(true);
+
+                await fetchUserData();
 
                 throw new Error(`Failed to request friend: ${errorText}`);
             }
 
             setLoadingAddFriend(false);
+            setIsLoadingFriendslist(false);
             setHasReceivedRequest(true);
             toast.success('Friend request sent.')
+
+            await fetchUserData();
+
         } catch (e) {
             //
         }
     }
 
+    /** Loading state of friends list */
+    const [isLoadingFriendslist, setIsLoadingFriendslist] = useState(false);
 
     if (!id) return null
 
@@ -300,7 +323,7 @@ const ProfilePage: React.FC = () => {
                                                                 /* Friend request NOT sent yet */
                                                                 <button
                                                                     className={'btn btn-primary btn-add-friend'}
-                                                                    onClick={handleOpenAddFriend}
+                                                                    onClick={() => handleAddFriend()}
                                                                 >
                                                                     <FontAwesomeIcon icon={faPlus} className="icon-inline-left"/>
                                                                     {'Add Friend'}
@@ -322,11 +345,13 @@ const ProfilePage: React.FC = () => {
                         <div className={'hide-lg-up'}>
                             <ProfilePageAchievements userId={parseInt(id)}/>
 
-                            {userData && (
-                                <ProfilePageFriends
-                                    userData={userData}
-                                />
-                            )}
+                            <ProfilePageFriends
+                                key={keyvar}
+                                userData={userData}
+                                onAddFriend={handleAddFriend}
+                                isLoading={isLoadingFriendslist}
+                                reload={fetchUserData}
+                            />
                         </div>
 
                         <ProfilePageCampaigns userId={parseInt(id)}/>
@@ -338,11 +363,13 @@ const ProfilePage: React.FC = () => {
                         <div className={'hide-lg-down'}>
                             <ProfilePageAchievements userId={parseInt(id)}/>
 
-                            {userData && (
-                                <ProfilePageFriends
-                                    userData={userData}
-                                />
-                            )}
+                            <ProfilePageFriends
+                                key={keyvar}
+                                userData={userData}
+                                onAddFriend={handleAddFriend}
+                                isLoading={isLoadingFriendslist}
+                                reload={fetchUserData}
+                            />
                         </div>
                     </div>
                 </div>

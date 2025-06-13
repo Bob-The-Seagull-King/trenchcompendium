@@ -87,12 +87,39 @@
         margin-bottom: 30px
 
     .profile-card-head
+        position: relative
+
+        display: flex
+        justify-content: space-between
         background-color: $color-highlight-bg
         padding: 10px
         font-family: $font-paragraph
 
 
+        .profile-card-head-action
+            position: absolute
+            top: 0
+            right: 0
+            bottom: 0
+            height: 100%
+            padding: 10px
+            width: 40px
+            cursor: pointer
+            transition: background-color .2s ease
+
+            &:hover
+                background-color: $color-highlight-bg-2
+
+            i, svg
+                position: absolute
+                top: 50%
+                left: 50%
+                transform: translate(-50%, -50%)
+
     .profile-card-content
         background-color: $bg-color-card-1
         padding: 10px
 
+        .profile-card-loading
+            position: relative
+            min-height: 200px

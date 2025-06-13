@@ -4,6 +4,7 @@
 //
 
 .UserListEntry
+    position: relative
     display: flex
     margin-bottom: 15px
 
@@ -28,6 +29,7 @@
     .UserListEntry-text
         padding-left: 15px
         padding-top: 10px
+
     .user-name
         color: $color-text
         text-decoration: none
@@ -44,3 +46,32 @@
 
         .btn
             margin-right: 5px
+
+    .search-actions
+        > div
+            position: absolute
+            top: 50%
+            right: 0
+            height: 40px
+            width: 40px
+            transform: translateY(-50%)
+            text-align: center
+            padding-top: 10px
+
+        i, svg
+            font-size: 20px
+
+        .is-friend-indicator
+            i, svg
+                color: $green
+
+        .request-sent-indicator
+            i, svg
+
+        .add-friend-btn
+            background-color: $color-highlight-bg
+            transition: background-color .2s ease
+            cursor: pointer
+
+            &:hover
+                background-color: $color-highlight-bg-2
