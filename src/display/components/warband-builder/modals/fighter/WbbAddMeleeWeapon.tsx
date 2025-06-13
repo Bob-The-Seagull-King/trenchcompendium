@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
+import {faXmark} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 interface MeleeWeapon {
     id: string;
@@ -34,8 +36,15 @@ const WbbModalAddMeleeWeapon: React.FC<WbbModalAddMeleeWeaponProps> = ({ show, o
 
     return (
         <Modal show={show} onHide={onClose} className="WbbModalAddItem WbbModalAddMeleeWeapon" centered>
-            <Modal.Header closeButton>
+            <Modal.Header closeButton={false}>
                 <Modal.Title>Select Melee Weapon</Modal.Title>
+
+                <FontAwesomeIcon
+                    icon={faXmark}
+                    className="modal-close-icon"
+                    role="button"
+                    onClick={onClose}
+                />
             </Modal.Header>
 
             <Modal.Body>

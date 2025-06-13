@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
+import {faXmark} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 interface Fighter {
     id: string;
@@ -37,8 +39,15 @@ const WbbModalAddFighterTroop: React.FC<WbbModalAddFighterTroopProps> = ({ show,
 
     return (
         <Modal show={show} onHide={onClose} className={'WbbModalAddItem WbbModalAddFighterTroop'} centered>
-            <Modal.Header closeButton>
+            <Modal.Header closeButton={false}>
                 <Modal.Title>Add Troop</Modal.Title>
+
+                <FontAwesomeIcon
+                    icon={faXmark}
+                    className="modal-close-icon"
+                    role="button"
+                    onClick={onClose}
+                />
             </Modal.Header>
 
             <Modal.Body>

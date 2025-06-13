@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
+import {faXmark} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 interface RangedWeapon {
     id: string;
@@ -34,8 +36,15 @@ const WbbModalAddRangedWeapon: React.FC<WbbModalAddRangedWeaponProps> = ({ show,
 
     return (
         <Modal show={show} onHide={onClose} className="WbbModalAddItem WbbModalAddRangedWeapon" centered>
-            <Modal.Header closeButton>
+            <Modal.Header closeButton={false}>
                 <Modal.Title>Select Ranged Weapon</Modal.Title>
+
+                <FontAwesomeIcon
+                    icon={faXmark}
+                    className="modal-close-icon"
+                    role="button"
+                    onClick={onClose}
+                />
             </Modal.Header>
 
             <Modal.Body>

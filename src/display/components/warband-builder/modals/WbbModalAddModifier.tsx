@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
+import {faXmark} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 interface ModifierOption {
     id: string;
@@ -84,8 +86,15 @@ const WbbModalAddModifier: React.FC<WbbModalAddModifierProps> = ({ show, onClose
 
     return (
         <Modal show={show} onHide={onClose} className="WbbModalAddItem WbbModalAddModifier" centered>
-            <Modal.Header closeButton>
+            <Modal.Header closeButton={false}>
                 <Modal.Title>Select Warband Modifier</Modal.Title>
+
+                <FontAwesomeIcon
+                    icon={faXmark}
+                    className="modal-close-icon"
+                    role="button"
+                    onClick={onClose}
+                />
             </Modal.Header>
 
             <Modal.Body>
