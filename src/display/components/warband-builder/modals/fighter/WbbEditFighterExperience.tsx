@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Button, FormControl } from 'react-bootstrap';
+import {faXmark} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 interface WbbEditFighterExperienceProps {
     show: boolean;
@@ -22,8 +24,15 @@ const WbbEditFighterExperience: React.FC<WbbEditFighterExperienceProps> = ({ sho
 
     return (
         <Modal show={show} onHide={onClose} className="WbbModalAddItem WbbEditFighterExperience" centered>
-            <Modal.Header closeButton>
+            <Modal.Header closeButton={false}>
                 <Modal.Title>Set Experience Points</Modal.Title>
+
+                <FontAwesomeIcon
+                    icon={faXmark}
+                    className="modal-close-icon"
+                    role="button"
+                    onClick={onClose}
+                />
             </Modal.Header>
 
             <Modal.Body>

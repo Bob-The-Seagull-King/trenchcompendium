@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
+import {faXmark} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 interface Injury {
     id: string;
@@ -33,8 +35,15 @@ const WbbModalAddInjury: React.FC<WbbModalAddInjuryProps> = ({ show, onClose, on
 
     return (
         <Modal show={show} onHide={onClose} className="WbbModalAddItem WbbModalAddInjury" centered>
-            <Modal.Header closeButton>
+            <Modal.Header closeButton={false}>
                 <Modal.Title>Select Injury</Modal.Title>
+
+                <FontAwesomeIcon
+                    icon={faXmark}
+                    className="modal-close-icon"
+                    role="button"
+                    onClick={onClose}
+                />
             </Modal.Header>
 
             <Modal.Body>

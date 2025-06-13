@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
+import {faXmark} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 interface WbbEditBattleScarsProps {
     show: boolean;
@@ -27,8 +29,15 @@ const WbbEditBattleScars: React.FC<WbbEditBattleScarsProps> = ({ show, onClose, 
 
     return (
         <Modal show={show} onHide={onClose} className="WbbModalEdit WbbEditBattleScars" centered>
-            <Modal.Header closeButton>
+            <Modal.Header closeButton={false}>
                 <Modal.Title>Edit Battle Scars</Modal.Title>
+
+                <FontAwesomeIcon
+                    icon={faXmark}
+                    className="modal-close-icon"
+                    role="button"
+                    onClick={onClose}
+                />
             </Modal.Header>
 
             <Modal.Body>

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
+import {faXmark} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 interface WbbEditFighterStatusProps {
     show: boolean;
@@ -25,8 +27,15 @@ const WbbModalEditFighterStatus: React.FC<WbbEditFighterStatusProps> = ({
 
     return (
         <Modal show={show} onHide={onClose} className="WbbModalAddItem WbbEditFighterStatus" centered>
-            <Modal.Header closeButton>
+            <Modal.Header closeButton={false}>
                 <Modal.Title>Edit Fighter Status</Modal.Title>
+
+                <FontAwesomeIcon
+                    icon={faXmark}
+                    className="modal-close-icon"
+                    role="button"
+                    onClick={onClose}
+                />
             </Modal.Header>
 
             <Modal.Body>

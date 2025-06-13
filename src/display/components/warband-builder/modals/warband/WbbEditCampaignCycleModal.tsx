@@ -163,7 +163,7 @@ const WbbEditCampaignCycleModal: React.FC<WbbEditCampaignCycleProps> = ({
                     <br/>
                     <div className={'cycle-hint-below'}>
                         <ul>
-                            <li>{'The Warband Details of the previous round will be copied.'}</li>
+                            <li>{'The Warband details of the previous round will be copied.'}</li>
                             <li>{'The previous rounds cannot be edited after you advance to the next round.'}</li>
                             <li>{'Make sure you have tracked all advancements, injuries, exploration etc. before advancing to the next round.'}</li>
                         </ul>
