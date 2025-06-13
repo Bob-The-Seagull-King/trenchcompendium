@@ -21,7 +21,7 @@ import WbbStashDetailView from "./WbbStashDetailView";
 import WbbWarbandDetailView from "./WbbWarbandDetailView";
 import WbbCampaignDetailView from "./WbbCampaignDetailView";
 import {PopoverProvider} from "../../../context/PopoverContext";
-import {WarbandProvider} from "../../../context/WarbandContext";
+import {useWarband, WarbandProvider} from "../../../context/WarbandContext";
 import {PlayModeProvider, usePlayMode} from "../../../context/PlayModeContext";
 import WbbContextualPopover from "./WbbContextualPopover";
 import {PrintModeProvider, usePrintMode} from "../../../context/PrintModeContext";
@@ -29,6 +29,7 @@ import WbbPrintViewSimple from "./WbbPrintViewSimple";
 import {useGlobalState} from "../../../utility/globalstate";
 import SynodFactionImage from "../../../utility/SynodFactionImage";
 import PageMetaInformation from "../generics/PageMetaInformation";
+import WbbTitle from './micro-elements/WbbTitle';
 
 interface WbbEditViewProps {
     warbandData: SumWarband | null;
@@ -186,9 +187,7 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                                 <div className={`warband-title ${detailType ? 'details-open' : ''}`}>
                                     <div className={'container'}>
 
-                                        <h1>
-                                            {warband.warband_data.GetWarbandName()}
-                                        </h1>
+                                        <WbbTitle/>
 
                                         <div className={'wbb-actions'}>
                                             <WbbContextualPopover

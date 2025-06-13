@@ -5,15 +5,26 @@ import { SumWarband } from '../classes/saveitems/Warband/WarbandManager';
 interface WarbandContextType {
     warband: SumWarband | null;
     setWarband: (wb: SumWarband | null) => void;
+    reloadDisplay: () => void;
+    updateKey : number;
 }
 
 const WarbandContext = createContext<WarbandContextType | undefined>(undefined);
 
 export const WarbandProvider: React.FC<{ children: ReactNode, warband: SumWarband }> = ({ children, warband }) => {
     const [wb, setWarband] = useState<SumWarband | null>(warband);
+    const [statekey, setstatekey] = useState(0);
+
+    const reloadDisplay = () => {
+        console.log("RELOAD")
+        setstatekey(statekey + 1)
+    }
 
     return (
-        <WarbandContext.Provider value={{ warband: wb, setWarband }}>
+        <WarbandContext.Provider value={{ warband: wb, setWarband, reloadDisplay, updateKey: statekey}} >
+            <div className='boundary-warband-provider' key={statekey}>
+
+            </div>
             {children}
         </WarbandContext.Provider>
     );

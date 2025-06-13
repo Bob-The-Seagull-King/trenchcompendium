@@ -25,7 +25,7 @@ interface WbbContextualPopoverProps {
 
 const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, item }) => {
     const { activePopoverId, setActivePopoverId } = usePopover();
-    const { warband } = useWarband();
+    const { warband, reloadDisplay } = useWarband();
     const { playMode, togglePlayMode } = usePlayMode();
     const { setPrintMode } = usePrintMode();
     const [newname, setName] = useState("")
@@ -180,7 +180,9 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
         setshowConfirmRenameWarbandModal(false);
         warband?.warband_data.SetWarbandName(newname)
         const Manager : ToolsController = ToolsController.getInstance();
-        Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999)
+        Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
+            () => reloadDisplay())
+
     }
     const showConfirmExportWarband = () => {
         console.log('showConfirmExportWarband');
