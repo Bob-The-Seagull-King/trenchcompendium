@@ -17,7 +17,7 @@ const WbbStashDetailView: React.FC<WbbStashDetailViewProps> = ({ onClose }) => {
     const { warband } = useWarband();
     if (warband == null) return (<div>Loading...</div>);
 
-    const stash = warband.GetStash();
+    const stash = warband.warband_data.GetStash();
 
     const [showAddItemToStash, setShowAddItemToStash] = useState(false);
     const handleAddItemToStash = (item: { id: string; name: string }) => {

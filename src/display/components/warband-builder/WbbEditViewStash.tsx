@@ -10,7 +10,7 @@ const WbbEditViewStash: React.FC<WbbEditViewStashProps> = ({ onClick, isActive }
     const { warband } = useWarband();
     if (warband == null) return (<div>Loading...</div>);
 
-    const stash = warband.GetStash();
+    const stash = warband.warband_data.GetStash();
 
 
     return (

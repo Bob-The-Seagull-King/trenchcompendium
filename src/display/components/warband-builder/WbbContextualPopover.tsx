@@ -15,6 +15,7 @@ import { useWarband } from '../../../context/WarbandContext';
 import {usePlayMode} from "../../../context/PlayModeContext";
 import {usePrintMode} from "../../../context/PrintModeContext";
 import {useGlobalState} from "../../../utility/globalstate";
+import { ToolsController } from '../../../classes/_high_level_controllers/ToolsController';
 
 interface WbbContextualPopoverProps {
     id: string;
@@ -27,14 +28,13 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
     const { warband } = useWarband();
     const { playMode, togglePlayMode } = usePlayMode();
     const { setPrintMode } = usePrintMode();
+    const [newname, setName] = useState("")
 
     const isActive = activePopoverId === id;
 
     const handleToggle = () => {
         setActivePopoverId(isActive ? null : id);
     };
-
-
 
 
     /** Fighter Actions */
@@ -178,9 +178,9 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
     }
     const handleRenameWarband = () => {
         setshowConfirmRenameWarbandModal(false);
-
-        // @TODO: Rename the Warband
-        console.log('handleRenameWarband');
+        warband?.warband_data.SetWarbandName(newname)
+        const Manager : ToolsController = ToolsController.getInstance();
+        Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999)
     }
     const showConfirmExportWarband = () => {
         console.log('showConfirmExportWarband');
@@ -633,7 +633,8 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                         <label className="form-label">Warband Name</label>
                         <input type="text" className="form-control"
                                placeholder="Warband Name"
-                               value={warband?.GetWarbandName()}
+                               defaultValue={warband?.warband_data.GetWarbandName()}
+                               onChange={(e) => {setName(e.target.value)}}
                         />
                     </div>
                 </Modal.Body>

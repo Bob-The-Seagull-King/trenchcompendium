@@ -19,7 +19,7 @@ const WbbCampaignDetailView: React.FC<WbbCampaignDetailViewProps> = ({ onClose }
     if (warband == null) return (<div>Loading...</div>);
 
     /** Victory Points */
-    const [victoryPoints, setVictoryPoints] = useState<number>(warband.GetVictoryPoints());
+    const [victoryPoints, setVictoryPoints] = useState<number>(warband.warband_data.GetVictoryPoints());
     const [showVictoryPointsModal, setshowVictoryPointsModal] = useState(false);
     const handleVictoryPointsUpdate = ( newVP: number ) => {
         setVictoryPoints(newVP)
@@ -28,7 +28,7 @@ const WbbCampaignDetailView: React.FC<WbbCampaignDetailViewProps> = ({ onClose }
     }
 
     /** Patron */
-    const [patron, setPatron] = useState<string>(warband.GetPatronName());
+    const [patron, setPatron] = useState<string>(warband.warband_data.GetPatronName());
     const [showPatronModal, setshowPatronModal] = useState(false);
     const handlePatronUpdate = ( newPatron: string ) => {
         setPatron(newPatron)
@@ -37,8 +37,8 @@ const WbbCampaignDetailView: React.FC<WbbCampaignDetailViewProps> = ({ onClose }
     }
 
     /** Campaign Cycle */
-    const [campaignCycle, setCampaignCycle] = useState<number>(warband.GetCampaignCycleView());
-    const [campaignCycleMax, setCampaignCycleMax] = useState<number>(warband.GetCampaignCycleMax());
+    const [campaignCycle, setCampaignCycle] = useState<number>(warband.warband_data.GetCampaignCycleView());
+    const [campaignCycleMax, setCampaignCycleMax] = useState<number>(warband.warband_data.GetCampaignCycleMax());
     const [showCampaignCycleModal, setshowCampaignCycleModal] = useState(false);
     const handleCampaignCycleUpdate = ( newCycle: number, newCycleMax: number ) => {
 
@@ -72,23 +72,23 @@ const WbbCampaignDetailView: React.FC<WbbCampaignDetailViewProps> = ({ onClose }
                     <strong>
                         {'Campaign Cycle: '}
                     </strong>
-                    {warband.GetCampaignCycleView()}
+                    {warband.warband_data.GetCampaignCycleView()}
                     {' / '}
-                    {warband.GetCampaignCycleMax()}
+                    {warband.warband_data.GetCampaignCycleMax()}
                 </div>
 
                 <div className={'detail-section-text-element'}>
                     <strong>
                         {'Treshold Value: '}
                     </strong>
-                    {warband.GetCampaignTresholdValue()}
+                    {warband.warband_data.GetCampaignTresholdValue()}
                 </div>
 
                 <div className={'detail-section-text-element'}>
                     <strong>
                         {'Max field strength: '}
                     </strong>
-                    {warband.GetCampaignMaxFieldStrength()}
+                    {warband.warband_data.GetCampaignMaxFieldStrength()}
                 </div>
 
                 {/* Victory Points */}
@@ -138,7 +138,7 @@ const WbbCampaignDetailView: React.FC<WbbCampaignDetailViewProps> = ({ onClose }
 
                 {/* Notes textarea */}
                 <WbbTextarea
-                    initialText={warband.GetCampaignNotes()}
+                    initialText={warband.warband_data.GetCampaignNotes()}
                     title="Campaign Notes"
                     onSave={(newText) => {
                         // @TODO Save the newText as campaign Notes

@@ -11,8 +11,8 @@ const WbbPrintViewSimple: React.FC = () => {
 
     if (!warband || !printMode) return null;
 
-    const stash = warband.GetStash();
-    const fighters = warband.GetFighters();
+    const stash = warband.warband_data.GetStash();
+    const fighters = warband.warband_data.GetFighters();
 
     return (
         <div className="WbbPrintViewSimple">
@@ -20,10 +20,10 @@ const WbbPrintViewSimple: React.FC = () => {
                 <WbbPrintViewSimpleOverview/>
             </div>
 
-            {warband.HasElites() &&
+            {warband.warband_data.HasElites() &&
                 <div className={'print-view-page-elites-wrap pbi-avoid'}>
                     <h2 className={'page-headline'}>{'Elites'}</h2>
-                    {warband.GetFighters().map((item, index) => (
+                    {warband.warband_data.GetFighters().map((item, index) => (
                         <>
                             {item.IsElite &&
                                 <WbbPrintViewSimpleFighter key={'print-elites' + index}
@@ -33,7 +33,7 @@ const WbbPrintViewSimple: React.FC = () => {
                         </>
                     ))}
 
-                    {warband.GetFighters().map((item, index) => (
+                    {warband.warband_data.GetFighters().map((item, index) => (
                         <>
                             {item.IsElite &&
                                 <WbbPrintViewSimpleFighter key={'print-elites' + index}
@@ -43,7 +43,7 @@ const WbbPrintViewSimple: React.FC = () => {
                         </>
                     ))}
 
-                    {warband.GetFighters().map((item, index) => (
+                    {warband.warband_data.GetFighters().map((item, index) => (
                         <>
                             {item.IsElite &&
                                 <WbbPrintViewSimpleFighter key={'print-elites' + index}
@@ -55,11 +55,11 @@ const WbbPrintViewSimple: React.FC = () => {
                 </div>
             }
 
-            {warband.HasTroops() &&
+            {warband.warband_data.HasTroops() &&
                 <div className={'print-view-troops-wrap pbi-avoid'}>
                     <h2 className={'page-headline'}>{'Troops'}</h2>
 
-                    {warband.GetFighters().map((item, index) => (
+                    {warband.warband_data.GetFighters().map((item, index) => (
                         <>
                             {(!item.IsElite && !item.IsMercenary) &&
                                 <WbbPrintViewSimpleFighter
@@ -72,11 +72,11 @@ const WbbPrintViewSimple: React.FC = () => {
                 </div>
             }
 
-            {warband.HasMercenaries() &&
+            {warband.warband_data.HasMercenaries() &&
                 <div className={'print-view-mercenaries-wrap pbi-avoid'}>
                     <h2 className={'page-headline'}>{'Mercenaries'}</h2>
 
-                    {warband.GetFighters().map((item, index) => (
+                    {warband.warband_data.GetFighters().map((item, index) => (
                         <>
                             {item.IsMercenary &&
                                 <WbbPrintViewSimpleFighter

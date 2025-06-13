@@ -19,11 +19,11 @@ const WbbEditViewCampaign: React.FC<WbbEditViewCampaignProps> = ({
         <div className={`WbbEditViewCampaign warband-meta ${isActive ? 'active' : ''}`} onClick={onClick}>
             <div className={'meta-headline'}>{'Campaign'}</div>
 
-            <div className="meta-item mb-2">{warband.GetCampaignName()}</div>
+            <div className="meta-item mb-2">{warband.warband_data.GetCampaignName()}</div>
             <div className="meta-item"><strong>{'Patron: '}</strong>
-                { (warband.GetPatronName() != '') ? (
+                { (warband.warband_data.GetPatronName() != '') ? (
                     <>
-                        {warband.GetPatron()}
+                        {warband.warband_data.GetPatron()}
                     </>
                 ): (
                     <>
@@ -34,16 +34,16 @@ const WbbEditViewCampaign: React.FC<WbbEditViewCampaignProps> = ({
 
             <div className="meta-item">
                 <strong>{'Victory Points: '}</strong>
-                {warband.GetVictoryPoints()}
+                {warband.warband_data.GetVictoryPoints()}
             </div>
 
             <div className="meta-item">
                 <strong>
                     {'Campaign Cycle: '}
                 </strong>
-                {warband.GetCampaignCycleView()}
+                {warband.warband_data.GetCampaignCycleView()}
                 {' / '}
-                {warband.GetCampaignCycleMax()}
+                {warband.warband_data.GetCampaignCycleMax()}
             </div>
         </div>
     );

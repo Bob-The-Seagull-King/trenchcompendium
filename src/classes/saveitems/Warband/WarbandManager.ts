@@ -165,6 +165,17 @@ class WarbandManager {
         localStorage.setItem('userwarbanditem', JSON.stringify(_list));
     }
 
+    public async UpdateItemInfo(id : number) {
+        if (this.UserProfile == null) {
+            this.SetStorage();
+        } else {
+            const Item : null | SumWarband = this.GetItemByID(String(id));
+            if (Item != null) {
+                await this.UpdateWarbandSynod(id, Item)
+            }
+        }
+    }
+
     /**
      * Getter for the Content Packs
      * @returns All Content Packs
@@ -288,6 +299,29 @@ class WarbandManager {
         return json.id
     }
 
+    public async UpdateWarbandSynod(id : number, wb_data : SumWarband) {
+        console.log("UPDATE")
+        console.log(id)
+        console.log(wb_data)
+        const token = localStorage.getItem('jwtToken')
+        const response = await fetch(`${SYNOD.URL}/wp-json/wp/v2/warband/`+String(id), {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                title: wb_data.warband_data.Name,
+                meta: {
+                    warband_data: JSON.stringify(wb_data.warband_data.ConvertToInterface())
+                }
+            }),
+        })
+        const json : any = await response.json();
+        console.log(response)
+        console.log(json);
+    }
+
     public async DeleteWarbandSynod(id : number) {
         const token = localStorage.getItem('jwtToken')
         const response = await fetch(`${SYNOD.URL}/wp-json/wp/v2/warband/`+String(id), {
@@ -349,9 +383,15 @@ class WarbandManager {
      * WARBAND UPDATE FUNCTIONS MOVE THROUGH HERE
      * 
      */
-    public async UpdateWarbandPatron(wb : UserWarband, patron_id : string) {
-        wb.UpdateSelfPatron(patron_id);
-        this.SetStorage();
+
+    /**
+     * Update the patron of a warband
+     * @param wb 
+     * @param patron_id 
+     */
+    public async UpdateWarbandPatron(wb : SumWarband, patron_id : string) {
+        wb.warband_data.UpdateSelfPatron(patron_id);
+        this.UpdateItemInfo(wb.id);
     }
 }
 

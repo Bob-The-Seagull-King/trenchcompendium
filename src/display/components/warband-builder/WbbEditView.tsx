@@ -44,12 +44,12 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
     const location = useLocation();
 
     /** Set Warband as Class */
-    const [warband, setWarband] = useState<UserWarband | null>(null);
+    const [warband, setWarband] = useState<SumWarband | null>(null);
 
     useEffect(() => {
         if (warbandData) {
             // warbandData is already a UserWarband instance
-            setWarband(warbandData.warband_data);
+            setWarband(warbandData);
         }
     }, [warbandData]);
 
@@ -59,7 +59,7 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
 
         if (searchParams.has('fighter')) {
             const fighterId = searchParams.get('fighter');
-            const fighter = warband?.GetFighters().find(f => f.Slug === fighterId);
+            const fighter = warband?.warband_data.GetFighters().find(f => f.Slug === fighterId);
             if (fighter) {
                 setDetailType('fighter');
                 setDetailPayload(fighter);
@@ -130,7 +130,7 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
     const handleFighterSubmit = (newFighter: { id: string; name: string }[]) => {
         if (!warband) { return; } // Guard
 
-        warband.AddFighter(newFighter);
+        warband.warband_data.AddFighter(newFighter);
     };
 
     // Exploration Location Modal
@@ -138,14 +138,14 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
     const handleAddExplorationLocation = (location: any, selectedOptions: any[]) => {
         if (!warband) { return; } // Guard
 
-        warband.AddExplorationLocation(location, selectedOptions);
+        warband.warband_data.AddExplorationLocation(location, selectedOptions);
     };
 
     // Modifier Modal
     const [showAddModifierModal, setShowAddModifierModal] = useState(false);
     const handleAddModifier = (modifier: any, selectedOption: any) => {
         if (!warband) { return; } // Guard
-        warband.AddModifier( modifier, selectedOption );
+        warband.warband_data.AddModifier( modifier, selectedOption );
     };
 
 
@@ -177,7 +177,7 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                 <WarbandProvider warband={warband}>
                     <PopoverProvider> <PlayModeProvider value={{ playMode, togglePlayMode }}>
                         <PageMetaInformation
-                            title={warband.GetWarbandName() + ' - Warband Manager'}
+                            title={warband.warband_data.GetWarbandName() + ' - Warband Manager'}
                             description={'Manage your warband with Trench Companion, the official resource for Trench Crusade.'}
                         />
 
@@ -187,7 +187,7 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                                     <div className={'container'}>
 
                                         <h1>
-                                            {warband.GetWarbandName()}
+                                            {warband.warband_data.GetWarbandName()}
                                         </h1>
 
                                         <div className={'wbb-actions'}>
@@ -203,7 +203,7 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
 
                                 <div className={'WbbEditView-hero'}>
                                     <SynodFactionImage
-                                        factionSlug={warband.GetFactionSlug()}
+                                        factionSlug={warband.warband_data.GetFactionSlug()}
                                         size={'full'}
                                     />
                                 </div>
@@ -235,7 +235,7 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
 
                                         {/* Warband Elites */}
                                         <h3 className={'category-headline'}>Elites</h3>
-                                        {warband.GetFighters().map((item, index) => (
+                                        {warband.warband_data.GetFighters().map((item, index) => (
                                             <>
                                                 {item.IsElite &&
                                                     <WbbEditViewFighter
@@ -258,7 +258,7 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
 
                                         {/* Warband Troops */}
                                         <h3 className={'category-headline'}>Troops</h3>
-                                        {warband.GetFighters().map((item, index) => (
+                                        {warband.warband_data.GetFighters().map((item, index) => (
                                             <>
                                                 {!item.IsElite &&
                                                     <WbbEditViewFighter
@@ -279,11 +279,11 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                                         }
 
 
-                                        {(!playMode || warband.HasMercenaries()) &&
+                                        {(!playMode || warband.warband_data.HasMercenaries()) &&
                                             <>
                                                 {/* Warband Mercenaries */}
                                                 <h3 className={'category-headline'}>Mercenaries</h3>
-                                                {warband.GetFighters().map((item, index) => (
+                                                {warband.warband_data.GetFighters().map((item, index) => (
                                                     <>
                                                         {item.IsMercenary &&
                                                             <WbbEditViewFighter

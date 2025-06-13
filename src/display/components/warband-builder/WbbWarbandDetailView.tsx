@@ -18,7 +18,7 @@ const WbbWarbandDetailView: React.FC<WbbWarbandDetailViewProps> = ({  onClose })
     if (warband == null) return (<div>Loading...</div>);
 
     /** Goetic Options */
-    const [goeticDiscipline, setGoeticDiscipline] = useState<string>(warband.GetGoeticSelection());
+    const [goeticDiscipline, setGoeticDiscipline] = useState<string>(warband.warband_data.GetGoeticSelection());
 
     const [showGoeticModal, setshowGoeticModal] = useState(false);
     const handleGoeticUpdate = ( selectedGoetic: string ) => {
@@ -53,46 +53,46 @@ const WbbWarbandDetailView: React.FC<WbbWarbandDetailViewProps> = ({  onClose })
                             {'Faction: '}
                         </strong>
 
-                        {warband.GetFactionName()}
+                        {warband.warband_data.GetFactionName()}
                     </div>
 
                     <div className={'detail-section-text-element'}>
                         <strong>
                             {'Name: '}
                         </strong>
-                        {warband.GetWarbandName()}
+                        {warband.warband_data.GetWarbandName()}
                     </div>
 
                     <div className={'detail-section-text-element'}>
                         <strong>
                             {'Rating: '}
                         </strong>
-                        {warband.GetCostDucats()} Ducats
-                        | {warband.GetCostGlory()} Glory
+                        {warband.warband_data.GetCostDucats()} Ducats
+                        | {warband.warband_data.GetCostGlory()} Glory
                     </div>
 
                     <div className={'detail-section-text-element'}>
                         <strong>
                             {'Value: '}
                         </strong>
-                        {warband.GetCostDucatsTotal()} Ducats
-                        | {warband.GetCostGloryTotal()} Glory
+                        {warband.warband_data.GetCostDucatsTotal()} Ducats
+                        | {warband.warband_data.GetCostGloryTotal()} Glory
                     </div>
 
                     <div className={'detail-section-text-element'}>
                         <strong>{'Fighters: '}</strong>
-                        {'Elite: '}{warband.GetNumElite()}
+                        {'Elite: '}{warband.warband_data.GetNumElite()}
                         {' | '}
-                        {'Troop: '}{warband.GetNumTroop()}
+                        {'Troop: '}{warband.warband_data.GetNumTroop()}
                         {' | '}
-                        {'Mercenary: '}{warband.GetNumMercenary()}
+                        {'Mercenary: '}{warband.warband_data.GetNumMercenary()}
                     </div>
                 </div>
 
                 {/* Warband level options */}
 
                 {/* Goetic Options */}
-                {warband.HasGoeticOptions() &&
+                {warband.warband_data.HasGoeticOptions() &&
                     <>
                         {/* @TODO
                           * - hide for all campaign Rounds but the first
@@ -119,7 +119,7 @@ const WbbWarbandDetailView: React.FC<WbbWarbandDetailViewProps> = ({  onClose })
 
                 {/* Notes textarea */}
                 <WbbTextarea
-                    initialText={warband.GetWarbandNotes()}
+                    initialText={warband.warband_data.GetWarbandNotes()}
                     title="Warband Notes"
                     onSave={(newText) => {
                         // @TODO Save the newText as warband Notes
@@ -129,7 +129,7 @@ const WbbWarbandDetailView: React.FC<WbbWarbandDetailViewProps> = ({  onClose })
 
                 {/* Lore  textarea */}
                 <WbbTextarea
-                    initialText={warband.GetLore()}
+                    initialText={warband.warband_data.GetLore()}
                     title="Warband Lore"
                     onSave={(newText) => {
                         // @TODO Save the newText as warband Lore

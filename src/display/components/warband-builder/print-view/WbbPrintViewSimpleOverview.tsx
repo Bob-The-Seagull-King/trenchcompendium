@@ -12,8 +12,8 @@ const WbbPrintViewSimpleOverview: React.FC = () => {
 
     if (!warband ) return <div>Loading Warband...</div>;
 
-    const stash = warband.GetStash();
-    const fighters = warband.GetFighters();
+    const stash = warband.warband_data.GetStash();
+    const fighters = warband.warband_data.GetFighters();
 
     return (
         <div className="WbbPrintViewSimpleOverview">
@@ -34,7 +34,7 @@ const WbbPrintViewSimpleOverview: React.FC = () => {
                         {'Warband Name'}
                     </div>
                     <div className={'warband-value'}>
-                        {warband.GetWarbandName()}
+                        {warband.warband_data.GetWarbandName()}
                     </div>
                 </div>
 
@@ -45,7 +45,7 @@ const WbbPrintViewSimpleOverview: React.FC = () => {
                                 {'Faction'}
                             </div>
                             <div className={'warband-value'}>
-                                {warband.GetFactionBaseName()}
+                                {warband.warband_data.GetFactionBaseName()}
                             </div>
                         </div>
                     </div>
@@ -55,7 +55,7 @@ const WbbPrintViewSimpleOverview: React.FC = () => {
                                 {'Variant'}
                             </div>
                             <div className={'warband-value'}>
-                                {warband.GetFactionVariantName()}
+                                {warband.warband_data.GetFactionVariantName()}
                             </div>
                         </div>
                     </div>
@@ -103,9 +103,9 @@ const WbbPrintViewSimpleOverview: React.FC = () => {
                             </div>
                             <div className={'warband-value'}>
 
-                                {warband.GetCostDucats()}{' Ducats'}
+                                {warband.warband_data.GetCostDucats()}{' Ducats'}
                                 {' | '}
-                                {warband.GetCostGlory()}{' Glory'}
+                                {warband.warband_data.GetCostGlory()}{' Glory'}
                             </div>
                         </div>
                     </div>

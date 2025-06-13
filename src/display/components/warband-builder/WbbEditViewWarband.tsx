@@ -19,18 +19,18 @@ const WbbEditViewWarband: React.FC<WbbEditViewWarbandProps> = ({
     return (
         <div className={`WbbEditViewWarband warband-meta ${isActive ? 'active' : ''}`} onClick={onClick}>
             <div className={'meta-headline'}>{'Warband'}</div>
-            <div className="meta-item"><strong>Faction:</strong> {warband.GetFactionName()}</div>
-            <div className="meta-item"><strong>Name:</strong> {warband.GetWarbandName()}</div>
-            <div className="meta-item"><strong>Rating:</strong> {warband.GetCostDucats()} Ducats
-                | {warband.GetCostGlory()} Glory
+            <div className="meta-item"><strong>Faction:</strong> {warband.warband_data.GetFactionName()}</div>
+            <div className="meta-item"><strong>Name:</strong> {warband.warband_data.GetWarbandName()}</div>
+            <div className="meta-item"><strong>Rating:</strong> {warband.warband_data.GetCostDucats()} Ducats
+                | {warband.warband_data.GetCostGlory()} Glory
             </div>
             <div className="meta-item">
                 <strong>{'Fighters: '}</strong>
-                {'Elite: '}{warband.GetNumElite()}
+                {'Elite: '}{warband.warband_data.GetNumElite()}
                 {' | '}
-                {'Troop: '}{warband.GetNumTroop()}
+                {'Troop: '}{warband.warband_data.GetNumTroop()}
                 {' | '}
-                {'Mercenary: '}{warband.GetNumMercenary()}
+                {'Mercenary: '}{warband.warband_data.GetNumMercenary()}
 
             </div>
         </div>

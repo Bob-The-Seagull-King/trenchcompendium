@@ -133,6 +133,12 @@ class UserWarband extends DynamicContextObject {
         return this.Name;
     }
 
+    public SetWarbandName (newval : string) {
+        if( newval != undefined ) {
+            this.Name = newval;
+        }
+    }
+
     /**
      * Returns the Name of the Faction as string
      */
