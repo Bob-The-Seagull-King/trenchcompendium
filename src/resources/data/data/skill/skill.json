@@ -1807,7 +1807,7 @@
                 "content": "At the start of each battle, select one enemy model without the Keyword BLACK GRAIL. This model starts the game with one INFECTION MARKER.",
                 "glossary": [
                     {"val": "BLACK GRAIL", "id": "kw_blackgrail"},
-                    {"val": "INFECTION MARKER", "id": "gl_infectionmarker"}
+                    {"val": "INFECTION MARKER", "id": "kw_infectionmarker"}
             ]
             }
         ],
