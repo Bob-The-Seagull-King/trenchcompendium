@@ -38,12 +38,17 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
 
 
     /** Fighter Actions */
+    const [fighterName, setFighterName] = React.useState(
+        type === 'fighter' && item?.FighterName ? item.FighterName : ''
+    );
+
     const [showConfirmDeleteFighterModal, setshowConfirmDeleteFighterModal] = useState(false);
     const [showConfirmRenameFighterModal, setshowConfirmRenameFighterModal] = useState(false);
     const showConfirmRenameFighter = () => {
         setshowConfirmRenameFighterModal(true);
         console.log('showRenameFighterConfirm');
     }
+
     const handleRenameFighter = () => {
         setshowConfirmRenameFighterModal(false);
 
@@ -401,6 +406,7 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                 </div>
             </OverlayTrigger>
 
+            {/* Fighter interactions */}
             {/** Delete Fighter Confirm Modal */}
             <Modal show={showConfirmDeleteFighterModal} onHide={() => setshowConfirmDeleteFighterModal(false)} centered>
                 <Modal.Header closeButton>
@@ -432,8 +438,9 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                     <div className="mb-3">
                         <label className="form-label">Fighter Name</label>
                         <input type="text" className="form-control"
-                            placeholder="Fighter Name"
-                           value={item.FighterName}
+                               placeholder="Fighter Name"
+                               value={fighterName}
+                               onChange={(e) => setFighterName(e.target.value)}
                         />
                     </div>
                 </Modal.Body>
@@ -447,6 +454,7 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                     </Button>
                 </Modal.Footer>
             </Modal>
+
 
             {/** Delete Modifier Confirm Modal */}
             <Modal show={showConfirmDeleteModifierModal} onHide={() => setshowConfirmDeleteModifierModal(false)} centered>
