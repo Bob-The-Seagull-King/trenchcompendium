@@ -56,7 +56,7 @@ const WbbFighterShows : React.FC<WbbFighterShow> = ({ playMode, openDetail, deta
                 <h3 className={'category-headline'}>Troops</h3>
                 {warband.warband_data.GetFighters().map((item, index) => (
                     <>
-                        {!item.model.IsElite() &&
+                        {(!item.model.IsElite() && (!item.model.IsMercenary())) &&
                             <WbbEditViewFighter
                                 item={item} index={index}
                                 onClick={() => openDetail('fighter', item)}

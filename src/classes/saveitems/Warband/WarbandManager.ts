@@ -46,7 +46,6 @@ class WarbandManager {
                 }
             }
         }
-        console.log(this.LocalIDCount)
         return this.LocalIDCount;
     }
 
@@ -300,9 +299,6 @@ class WarbandManager {
     }
 
     public async UpdateWarbandSynod(id : number, wb_data : SumWarband) {
-        console.log("UPDATE")
-        console.log(id)
-        console.log(wb_data)
         const token = localStorage.getItem('jwtToken')
         const response = await fetch(`${SYNOD.URL}/wp-json/wp/v2/warband/`+String(id), {
             method: 'POST',
@@ -317,9 +313,6 @@ class WarbandManager {
                 }
             }),
         })
-        const json : any = await response.json();
-        console.log(response)
-        console.log(json);
     }
 
     public async DeleteWarbandSynod(id : number) {

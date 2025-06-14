@@ -475,6 +475,27 @@ class UserWarband extends DynamicContextObject {
         return 'Wrath'
     }
 
+    public GetCountOfModel(id : string) {
+        let count = 0;
+        for (let i = 0; i < this.Models.length; i++) {
+            if ((this.Models[i].HeldObject as WarbandMember).CurModel.ID == id) {
+                count ++;
+            }
+        }
+        return count;
+    }
+
+    public async GetCountOfKeyword(id : string) {
+        let count = 0;
+        for (let i = 0; i < this.Models.length; i++) {
+            const istruth = await (this.Models[i].HeldObject as WarbandMember).IsKeywordPresent(id)
+            if (istruth) {
+                count ++;
+            }
+        }
+        return count;
+    }
+
     public async GetEliteFighterOptions() : Promise<FactionModelRelationship[]> {
         const ListOfRels : FactionModelRelationship[] = await this.GetFighterOptions();
 
@@ -490,25 +511,42 @@ class UserWarband extends DynamicContextObject {
     public async GetTroopFighterOptions() : Promise<FactionModelRelationship[]> {
         const ListOfRels : FactionModelRelationship[] = await this.GetFighterOptions();
 
-        return ListOfRels.filter(item => (!((item.Mercenary == true)) && !(item.Model.getKeywordIDs().includes("kw_elite"))))
+        return ListOfRels.filter(item => (((item.Mercenary == false)) && !(item.Model.getKeywordIDs().includes("kw_elite"))))
     }
 
     public async GetFighterOptions() : Promise<FactionModelRelationship[]> {
         const FacCheck = this.Faction.MyFaction;
-        let ListOfRels : FactionModelRelationship[] = []
-        console.log(FacCheck);
+        const ListOfRels : FactionModelRelationship[] = []
+        let BaseRels : FactionModelRelationship[] = []
+        
         if (FacCheck != undefined) {
-            ListOfRels = ((FacCheck.SelfDynamicProperty).OptionChoice as Faction).Models
+            BaseRels = ((FacCheck.SelfDynamicProperty).OptionChoice as Faction).Models
         }
 
         const eventmon : EventRunner = new EventRunner();
-        return await eventmon.runEvent(
+        BaseRels = await eventmon.runEvent(
             "getAllFactionModelRelationships",
             this,
             [],
-            ListOfRels,
+            BaseRels,
             null
         )
+
+        for (let i = 0; i < BaseRels.length; i++) {
+            let maxcount = BaseRels[i].Maximum;
+            maxcount = await eventmon.runEvent(
+                "getModelLimitTrue",
+                BaseRels[i],
+                [],
+                maxcount,
+                this
+            )
+            if (this.GetCountOfModel(BaseRels[i].Model.ID) < maxcount) {
+                ListOfRels.push(BaseRels[i]);
+            }
+        }
+
+        return ListOfRels
     }
 }
 

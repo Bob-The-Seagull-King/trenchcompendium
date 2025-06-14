@@ -31,7 +31,6 @@ const ToolsRandomScenario = (prop: any) => {
         
         if (urlSplits.length > 4) {
             const CurItemID = urlSplits.slice(-1)[0]
-            console.log(CurItemID)
             return CurItemID;
         }
         return null;
@@ -46,9 +45,6 @@ const ToolsRandomScenario = (prop: any) => {
         }
         return null;
     }
-
-    console.log('_currentItem');
-    console.log(_currentItem);
 
     useEffect(() => {
         async function SetScenario() {

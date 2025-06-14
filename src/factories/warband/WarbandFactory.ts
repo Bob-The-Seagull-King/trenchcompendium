@@ -77,7 +77,6 @@ class WarbandFactory {
     }
     
     static async CreateUserWarband(data: IUserWarband) {
-        console.log(data);
         const rule = new UserWarband(data);
         await rule.NewWarbandItems(data)
         await rule.BuildModels(data.models);

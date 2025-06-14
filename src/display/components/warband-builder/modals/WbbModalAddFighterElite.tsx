@@ -37,7 +37,7 @@ const WbbModalAddFighterElite: React.FC<WbbModalAddFighterEliteProps> = ({ show,
         }
     
         SetModelOptions();
-    }, []);
+    }, [show]);
 
     const handleSubmit = () => {
         if (selectedId) {

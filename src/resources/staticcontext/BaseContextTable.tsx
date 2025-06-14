@@ -25,6 +25,7 @@ import { Model } from "../../classes/feature/model/Model";
 import { Ability, IAbility } from "../../classes/feature/ability/Ability";
 import RuleDisplay from "../../display/components/features/faction/RuleDisplay";
 import { Skill } from "../../classes/feature/ability/Skill";
+import { UserWarband } from "../../classes/saveitems/Warband/UserWarband";
 
 export const BaseContextCallTable : CallEventTable = {
     option_search_viable: {
@@ -389,6 +390,29 @@ export const BaseContextCallTable : CallEventTable = {
     },
     faction_model_count_special: {
         event_priotity: 0,
+        async getModelLimitTrue(this: EventRunner, eventSource : any, relayVar : number, trackVal : UserWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+
+            if (context_func["match"]) {
+                if (context_func["match"][0]["type"] == "model") {
+                    const MatchVal = trackVal.GetCountOfModel(context_func["match"][0]["value"])
+                    return MatchVal;
+                }
+            }
+            if (context_func["exceed"]) {
+                if (context_func["exceed"][0]["type"] == "keyword") {
+                    const MatchVal = await trackVal.GetCountOfKeyword(context_func["exceed"][0]["value"])
+                    return MatchVal
+                }
+            }
+            if (context_func["warband_limit"]) {
+                for (let i = 0; i < context_func["warband_limit"].length; i++) {
+                    /** @TODO When we figure out campaign attatchment and warband limit */
+                    return relayVar;
+                }
+            }
+            
+            return relayVar;
+        },
         async getModelLimitPresentation(this: EventRunner, eventSource : any, relayVar : string[], trackVal : boolean, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
             
             const { ModelFactory } = await import("../../factories/features/ModelFactory");

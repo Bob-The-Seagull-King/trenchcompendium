@@ -38,7 +38,7 @@ const WbbModalAddFighterTroop: React.FC<WbbModalAddFighterTroopProps> = ({ show,
         }
     
         SetModelOptions();
-    }, []);
+    }, [show]);
 
     const handleSubmit = () => {
         if (selectedId) {

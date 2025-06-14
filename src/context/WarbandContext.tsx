@@ -16,7 +16,6 @@ export const WarbandProvider: React.FC<{ children: ReactNode, warband: SumWarban
     const [statekey, setstatekey] = useState(0);
 
     const reloadDisplay = () => {
-        console.log("RELOAD")
         setstatekey(statekey + 1)
     }
 

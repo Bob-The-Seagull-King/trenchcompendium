@@ -38,7 +38,7 @@ const WbbModalAddFighterMercenary: React.FC<WbbModalAddFighterMercenaryProps> = 
         }
     
         SetModelOptions();
-    }, []);
+    }, [show]);
 
     const handleSubmit = () => {
         if (selectedId) {

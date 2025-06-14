@@ -10,6 +10,7 @@ import { WarbandProperty } from "../../classes/saveitems/Warband/WarbandProperty
 import { FactionModelRelationship } from "../../classes/relationship/faction/FactionModelRelationship";
 import { Model } from "../../classes/feature/model/Model";
 import { Ability } from "../../classes/feature/ability/Ability";
+import { UserWarband } from "../../classes/saveitems/Warband/UserWarband";
 
 /**
  * Events that can be called by the runEvent method,
@@ -35,6 +36,7 @@ export interface CallEvents {
     getWarbandLevelFactionRules? : (this: EventRunner, eventSource : any, relayVar : WarbandProperty[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<WarbandProperty[]>; 
     getModelStats? : (this: EventRunner, eventSource : any, relayVar : ModelStatistics, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => ModelStatistics; 
     getModelLimitPresentation? : (this: EventRunner, eventSource : any, relayVar : string[], trackVal : boolean, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<string[]>; 
+    getModelLimitTrue? : (this: EventRunner, eventSource : any, relayVar : number,  trackVal : UserWarband,context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<number>; 
     getUpgradeLimitPresentation? : (this: EventRunner, eventSource : any, relayVar : string[], trackVal : boolean, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<string[]>; 
     getUpgradeRestrictionsPresentation? : (this: EventRunner, eventSource : any, relayVar : string[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<string[]>; 
     getFactionRuleUpgrades? : (this: EventRunner, eventSource : any, relayVar : ModelUpgradeRelationship[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<ModelUpgradeRelationship[]>; 

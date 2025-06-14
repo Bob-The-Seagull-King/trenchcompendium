@@ -18,6 +18,7 @@ import { UpgradeFactory } from "../../../../factories/features/UpgradeFactory";
 import { InjuryFactory } from "../../../../factories/features/InjuryFactory";
 import { Upgrade } from "../../../feature/ability/Upgrade";
 import { Equipment } from "../../../feature/equipment/Equipment";
+import { Keyword } from "../../../feature/glossary/Keyword";
 
 interface IWarbandMember extends IContextObject {
     model: string,
@@ -236,6 +237,24 @@ class WarbandMember extends DynamicContextObject {
         }
 
         return options;
+    }
+
+    public async GetKeywordsFull() {
+        const keywordarr : Keyword[] = [];
+        for (let i = 0; i < this.CurModel.KeyWord.length; i++) {
+            keywordarr.push(this.CurModel.KeyWord[i]);
+        }
+        return keywordarr;
+    }
+
+    public async IsKeywordPresent(id : string) {
+        const keys = await this.GetKeywordsFull();
+        for (let i = 0; i < keys.length; i++) {
+            if (keys[i].ID == id) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }
