@@ -10,6 +10,7 @@ import { IWarbandMember, WarbandMember } from '../../classes/saveitems/Warband/P
 import { IWarbandExplorationSet, WarbandExplorationSet } from '../../classes/saveitems/Warband/CoreElements/WarbandExplorationSet';
 import { IWarbandFaction, WarbandFaction } from '../../classes/saveitems/Warband/CoreElements/WarbandFaction';
 import { IUserWarband, UserWarband } from '../../classes/saveitems/Warband/UserWarband';
+import { FactionModelRelationship } from '../../classes/relationship/faction/FactionModelRelationship';
 
 class WarbandFactory {
 
@@ -49,6 +50,30 @@ class WarbandFactory {
         await rule.BuildInjuries(data.list_injury);
         await rule.BuildNewProperties();
         return rule;
+    }
+
+    static async BuildWarbandMemberFromPurchase(rel: FactionModelRelationship, parent : DynamicContextObject | null) {
+        const data : IWarbandMember = {
+                id: rel.Model.ID, // The id of the item
+                name: rel.Model.GetTrueName(), // The name of the item
+                source: rel.Model.Source? rel.Model.Source : "unknown", // The source of the item (core book, homebrew, etc)
+                tags: rel.Model.Tags,
+                contextdata: rel.Model.ContextData,
+                model: rel.Model.ID,
+                subproperties : [],
+                notes : [],
+                active : true,
+                equipment : [],
+                list_upgrades : [],
+                list_injury : [],
+                list_skills : [],
+                experience : 0,
+                elite : rel.Model.getKeywordIDs().includes("kw_elite"),
+                recruited: false
+            }
+        
+        const Model : WarbandMember = await WarbandFactory.CreateWarbandMember(data, parent);
+        return Model;
     }
     
     static async CreateUserWarband(data: IUserWarband) {

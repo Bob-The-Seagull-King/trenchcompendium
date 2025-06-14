@@ -31,6 +31,8 @@ import SynodFactionImage from "../../../utility/SynodFactionImage";
 import PageMetaInformation from "../generics/PageMetaInformation";
 import WbbTitle from './micro-elements/WbbTitle';
 import { FactionModelRelationship } from '../../../classes/relationship/faction/FactionModelRelationship';
+import WbbFighterAdds from './micro-elements/WbbFighterAdds';
+import WbbFighterShows from './micro-elements/WbbFighterShows';
 
 interface WbbEditViewProps {
     warbandData: SumWarband | null;
@@ -129,11 +131,7 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
     const [showAddFighterTroopModal, setShowAddFighterTroopModal] = useState(false);
     const [showAddFighterEliteModal, setShowAddFighterEliteModal] = useState(false);
     const [showAddFighterMercenaryModal, setShowAddFighterMercenaryModal] = useState(false);
-    const handleFighterSubmit = (newFighter: FactionModelRelationship[]) => {
-        if (!warband) { return; } // Guard
-
-        warband.warband_data.AddFighter(newFighter);
-    };
+    
 
     // Exploration Location Modal
     const [showAddExplorationModal, setShowAddExplorationModal] = useState(false);
@@ -232,79 +230,15 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                                             />
                                         }
 
-
-                                        {/* Warband Elites */}
-                                        <h3 className={'category-headline'}>Elites</h3>
-                                        {warband.warband_data.GetFighters().map((item, index) => (
-                                            <>
-                                                {item.model.IsElite() &&
-                                                    <WbbEditViewFighter
-                                                        item={item} index={index}
-                                                        onClick={() => openDetail('fighter', item)}
-                                                        isActive={detailType === 'fighter' && warband.warband_data.Models.indexOf(detailPayload.purchase) === warband.warband_data.Models.indexOf(item.purchase)}
-                                                    />
-                                                }
-                                            </>
-                                        ))}
-
-                                        {!playMode &&
-                                            <div className={'btn btn-add-element btn-block'}
-                                                 onClick={() => setShowAddFighterEliteModal(true)}>
-                                                <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
-                                                {'Add Elite'}
-                                            </div>
-                                        }
-
-
-                                        {/* Warband Troops */}
-                                        <h3 className={'category-headline'}>Troops</h3>
-                                        {warband.warband_data.GetFighters().map((item, index) => (
-                                            <>
-                                                {!item.model.IsElite() &&
-                                                    <WbbEditViewFighter
-                                                        item={item} index={index}
-                                                        onClick={() => openDetail('fighter', item)}
-                                                        isActive={detailType === 'fighter' && warband.warband_data.Models.indexOf(detailPayload.purchase) === warband.warband_data.Models.indexOf(item.purchase)}
-                                                    />
-                                                }
-                                            </>
-                                        ))}
-
-                                        {!playMode &&
-                                            <div className={'btn btn-add-element btn-block'}
-                                                 onClick={() => setShowAddFighterTroopModal(true)}>
-                                                <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
-                                                {'Add Troop'}
-                                            </div>
-                                        }
-
-
-                                        {(!playMode || warband.warband_data.HasMercenaries()) &&
-                                            <>
-                                                {/* Warband Mercenaries */}
-                                                <h3 className={'category-headline'}>Mercenaries</h3>
-                                                {warband.warband_data.GetFighters().map((item, index) => (
-                                                    <>
-                                                        {item.model.IsMercenary() &&
-                                                            <WbbEditViewFighter
-                                                                item={item} index={index}
-                                                                onClick={() => openDetail('fighter', item)}
-                                                                isActive={detailType === 'fighter' && warband.warband_data.Models.indexOf(detailPayload.purchase) === warband.warband_data.Models.indexOf(item.purchase)}
-                                                            />
-                                                        }
-                                                    </>
-                                                ))}
-                                            </>
-                                        }
-
-
-                                        {!playMode &&
-                                            <div className={'btn btn-add-element btn-block'}
-                                                 onClick={() => setShowAddFighterMercenaryModal(true)}>
-                                                <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
-                                                {'Add Mercenary'}
-                                            </div>
-                                        }
+                                        <WbbFighterShows 
+                                            playMode={playMode}
+                                            openDetail={openDetail}
+                                            detailType={detailType}
+                                            detailPayload={detailPayload}
+                                            setShowAddFighterEliteModal={setShowAddFighterEliteModal}
+                                            setShowAddFighterTroopModal={setShowAddFighterTroopModal}
+                                            setShowAddFighterMercenaryModal={setShowAddFighterMercenaryModal}
+                                        />
 
                                         {/* Warband Modifiers */}
                                         <h3 className={'category-headline'}>Modifiers</h3>
@@ -378,21 +312,13 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                                     </div>
                                 </div>
 
-
-                                <WbbModalAddFighterTroop
-                                    show={showAddFighterTroopModal}
-                                    onClose={() => setShowAddFighterTroopModal(false)}
-                                    onSubmit={handleFighterSubmit}
-                                />
-                                <WbbModalAddFighterElite
-                                    show={showAddFighterEliteModal}
-                                    onClose={() => setShowAddFighterEliteModal(false)}
-                                    onSubmit={handleFighterSubmit}
-                                />
-                                <WbbModalAddFighterMercenary
-                                    show={showAddFighterMercenaryModal}
-                                    onClose={() => setShowAddFighterMercenaryModal(false)}
-                                    onSubmit={handleFighterSubmit}
+                                <WbbFighterAdds            
+                                    showelite={showAddFighterEliteModal}
+                                    showtroop={showAddFighterTroopModal}
+                                    showmercenary={showAddFighterMercenaryModal}
+                                    onCloseMercenary={() => setShowAddFighterMercenaryModal(false)}
+                                    onCloseElite={() => setShowAddFighterEliteModal(false)}
+                                    onCloseTroop={() => setShowAddFighterTroopModal(false)}
                                 />
                                 <WbbModalAddModifier
                                     show={showAddModifierModal}

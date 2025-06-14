@@ -7,7 +7,7 @@ import { DynamicContextObject } from '../../contextevent/dynamiccontextobject';
 import { IContextObject } from '../../contextevent/contextobject';
 import { IWarbandFaction, WarbandFaction } from './CoreElements/WarbandFaction';
 import { IWarbandPurchaseEquipment, IWarbandPurchaseModel, RealWarbandPurchaseModel, WarbandPurchase } from './Purchases/WarbandPurchase';
-import { WarbandMember } from './Purchases/WarbandMember';
+import { IWarbandMember, WarbandMember } from './Purchases/WarbandMember';
 import { WarbandEquipment } from './Purchases/WarbandEquipment';
 import { WarbandFactory } from '../../../factories/warband/WarbandFactory';
 import { FactionModelRelationship } from '../../../classes/relationship/faction/FactionModelRelationship';
@@ -57,9 +57,9 @@ class UserWarband extends DynamicContextObject {
         this.Faction = await WarbandFactory.CreateWarbandFaction(data.faction, this);
     }
 
-    public BuildModels(data : IWarbandPurchaseModel[]) {
+    public async BuildModels(data : IWarbandPurchaseModel[]) {
         for (let i = 0; i < data.length; i++) {
-            const Model : WarbandMember = new WarbandMember(data[i].model, this);
+            const Model : WarbandMember = await WarbandFactory.CreateWarbandMember(data[i].model, this);
             const NewPurchase : WarbandPurchase = new WarbandPurchase(data[i].purchase, this, Model);
             this.Models.push(NewPurchase);
         }
@@ -271,11 +271,23 @@ class UserWarband extends DynamicContextObject {
      * Adds a fighter to the Roster
      * @param fighter
      */
-    public AddFighter ( fighter: FactionModelRelationship[] ) {
-        console.log("ADDED")
-        console.log(fighter)
-        return false;
-
+    public async AddFighter ( fighter: FactionModelRelationship[] ) {
+        for (let i = 0; i < fighter.length; i++) { 
+            
+            const Model : WarbandMember = await WarbandFactory.BuildWarbandMemberFromPurchase(fighter[i], this);
+            const NewPurchase : WarbandPurchase = new WarbandPurchase({
+                cost_value : fighter[i].Cost,
+                cost_type : fighter[i].CostType,
+                count_limit : true,
+                count_cap : true,
+                sell_item : true,
+                sell_full : true,
+                purchaseid: fighter[i].Model.ID,
+                faction_rel_id: fighter[i].ID,
+                custom_rel: fighter[i].SelfData
+            }, this, Model);
+            this.Models.push(NewPurchase);
+        }
     }
 
     /** @TODO
