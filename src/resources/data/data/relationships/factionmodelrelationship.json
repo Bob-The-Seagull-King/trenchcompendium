@@ -1529,7 +1529,7 @@
         "name": "",
         "contextdata": {"option_search_viable": {}},
         "options": [],
-        "faction_id" : ["fc_cultoftheblackgrail"],
+        "faction_id" : ["fc_cultoftheblackgrail","fc_cultoftheblackgrail_fv_dirgeofthegreathegemon"],
         "model_id" : "md_corpseguard",
         "captain" : false,
         "mercenary": false,
@@ -1676,7 +1676,7 @@
         "warband_maximum" : 1
     },
     {
-        "id": "rel_fc_md_plagueknight_captain",
+        "id": "rel_fc_md_plagueknight_captain_dirge",
         "source": "core",
         "tags": {},
         "name": "",
