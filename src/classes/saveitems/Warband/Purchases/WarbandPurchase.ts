@@ -41,6 +41,21 @@ interface IWarbandPurchaseUpgrade {
     upgrade : IWarbandProperty
 }
 
+interface RealWarbandPurchaseModel {
+    purchase : WarbandPurchase,
+    model : WarbandMember
+}
+
+interface RealWarbandPurchaseEquipment {
+    purchase : WarbandPurchase,
+    equipment : WarbandEquipment
+}
+
+interface RealWarbandPurchaseUpgrade {
+    purchase : WarbandPurchase,
+    upgrade : WarbandProperty
+}
+
 class WarbandPurchase {
     SelfParent : DynamicContextObject;
     HeldObject : ContextObject;
@@ -125,7 +140,17 @@ class WarbandPurchase {
         return _objint;
     }
 
+    public GetTotalDucats() {
+        // @TODO Lane
+        return 10;
+    }
+
+    public GetTotalGlory() {
+        // @TODO Lane
+        return 1;
+    }
+
 }
 
-export {IWarbandPurchase, WarbandPurchase, IWarbandPurchaseModel, IWarbandPurchaseEquipment, IWarbandPurchaseUpgrade}
+export {IWarbandPurchase, WarbandPurchase, IWarbandPurchaseModel, IWarbandPurchaseEquipment, IWarbandPurchaseUpgrade, RealWarbandPurchaseModel, RealWarbandPurchaseEquipment, RealWarbandPurchaseUpgrade}
 

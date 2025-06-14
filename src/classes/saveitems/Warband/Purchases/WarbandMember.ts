@@ -9,7 +9,7 @@ import { ContextPackage } from "../../../contextevent/contextpackage";
 import { FactionFactory } from "../../../../factories/features/FactionFactory";
 import { Patron } from "../../../feature/skillgroup/Patron";
 import { Faction } from "../../../feature/faction/Faction";
-import { IWarbandPurchaseEquipment, IWarbandPurchaseUpgrade, WarbandPurchase } from "./WarbandPurchase";
+import { IWarbandPurchaseEquipment, IWarbandPurchaseUpgrade, RealWarbandPurchaseEquipment, WarbandPurchase } from "./WarbandPurchase";
 import { INote } from "../../../Note";
 import { Model } from "../../../feature/model/Model";
 import { ModelFactory } from "../../../../factories/features/ModelFactory";
@@ -211,6 +211,32 @@ class WarbandMember extends DynamicContextObject {
         return subpackages; 
     }
 
+    public IsMercenary(): boolean {
+        if (this.CurModel.Stats.mercenary) {
+            return this.CurModel.Stats.mercenary
+        }
+        return false;
+    }
+
+    public IsElite(): boolean {
+        return this.Elite;
+    }
+
+    public GetEquipment() {
+        
+        const options : RealWarbandPurchaseEquipment[] = [ ];
+
+        for (let i = 0; i < this.Equipment.length; i++) {
+            options.push(
+                {
+                    purchase: this.Equipment[i],
+                    equipment: this.Equipment[i].HeldObject as WarbandEquipment
+                }
+            )
+        }
+
+        return options;
+    }
 
 }
 

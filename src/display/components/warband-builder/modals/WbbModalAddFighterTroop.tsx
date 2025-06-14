@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import {faXmark} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { FactionModelRelationship } from '../../../../classes/relationship/faction/FactionModelRelationship';
+import { useWarband } from '../../../../context/WarbandContext';
+import { getCostType } from '../../../../utility/functions';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 interface Fighter {
     id: string;
@@ -11,31 +14,40 @@ interface Fighter {
 interface WbbModalAddFighterTroopProps {
     show: boolean;
     onClose: () => void;
-    onSubmit: (selectedFighters: Fighter[]) => void;
+    onSubmit: (selectedFighters: FactionModelRelationship[]) => void;
 }
 
 const WbbModalAddFighterTroop: React.FC<WbbModalAddFighterTroopProps> = ({ show, onClose, onSubmit }) => {
     const [selectedId, setSelectedId] = useState<string | null>(null);
+        const { warband } = useWarband();
+        const [listofoptions, setListofOptions] = useState<FactionModelRelationship[]>([])
+        const [keyvar, setkevvar] = useState(0);
+    
 
     const handleSelect = (id: string) => {
         setSelectedId(id);
     };
+        
+    useEffect(() => {
+        async function SetModelOptions() {
+            const options = await warband?.warband_data.GetTroopFighterOptions()
+            if (options != undefined) {
+                setListofOptions(options)
+                setkevvar(keyvar + 1)
+            }
+        }
+    
+        SetModelOptions();
+    }, []);
 
     const handleSubmit = () => {
         if (selectedId) {
-            const selected = availableFighters.filter((f) => f.id === selectedId);
+            const selected = listofoptions.filter((f) => f.ID === selectedId);
             onSubmit(selected);
             setSelectedId(null); // clear selection
             onClose();
         }
     };
-
-    // Test Data @TODO: replace with actual fighter options
-    const availableFighters = [
-        { id: 'f1', name: 'Azeb', cost: '15 Ducats' },
-        { id: 'f2', name: 'Sapper', cost: '20 Ducats' },
-        { id: 'f3', name: 'Jannissary', cost: '30 Ducats' }
-    ];
 
     return (
         <Modal show={show} onHide={onClose} className={'WbbModalAddItem WbbModalAddFighterTroop'} centered>
@@ -51,17 +63,17 @@ const WbbModalAddFighterTroop: React.FC<WbbModalAddFighterTroopProps> = ({ show,
             </Modal.Header>
 
             <Modal.Body>
-                {availableFighters.map((fighter) => (
+                {listofoptions.map((fighter) => (
                     <div
-                        key={fighter.id}
-                        className={`select-item ${selectedId === fighter.id ? 'selected' : ''}`}
-                        onClick={() => handleSelect(fighter.id)}
+                        key={fighter.ID}
+                        className={`select-item ${selectedId === fighter.ID ? 'selected' : ''}`}
+                        onClick={() => handleSelect(fighter.ID)}
                     >
                         <span className={'item-name'}>
-                            {fighter.name}
+                            {fighter.Model.GetName()}
                         </span>
                         <span className={'item-cost'}>
-                            {fighter.cost}
+                            {fighter.Cost + " " + getCostType(fighter.CostType)}
                         </span>
                     </div>
                 ))}

@@ -37,10 +37,6 @@ const WbbEditPage = (prop: any) => {
                             warbandData={_currentItem}
                             manager={Manager}
                         />
-
-
-                        {/* @TODO: What is this and is it still needed?*/}
-                        {/*<WarbandItemViewDisplay manager={Manager} data={_currentItem} updater={() => (console.log("NOTHING"))} />*/}
                     </PrintModeProvider>
                 </>
             }

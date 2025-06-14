@@ -6,10 +6,13 @@ import { IWarbandExplorationSet, WarbandExplorationSet } from './CoreElements/Wa
 import { DynamicContextObject } from '../../contextevent/dynamiccontextobject';
 import { IContextObject } from '../../contextevent/contextobject';
 import { IWarbandFaction, WarbandFaction } from './CoreElements/WarbandFaction';
-import { IWarbandPurchaseEquipment, IWarbandPurchaseModel, WarbandPurchase } from './Purchases/WarbandPurchase';
+import { IWarbandPurchaseEquipment, IWarbandPurchaseModel, RealWarbandPurchaseModel, WarbandPurchase } from './Purchases/WarbandPurchase';
 import { WarbandMember } from './Purchases/WarbandMember';
 import { WarbandEquipment } from './Purchases/WarbandEquipment';
 import { WarbandFactory } from '../../../factories/warband/WarbandFactory';
+import { FactionModelRelationship } from '../../../classes/relationship/faction/FactionModelRelationship';
+import { EventRunner } from '../../../classes/contextevent/contexteventhandler';
+import { Faction } from '../../../classes/feature/faction/Faction';
 
 interface IUserWarband extends IContextObject {
     id : string,
@@ -231,153 +234,18 @@ class UserWarband extends DynamicContextObject {
      * Get the Fighters for this warbands
      */
     public GetFighters() {
+        const options : RealWarbandPurchaseModel[] = [ ];
 
+        for (let i = 0; i < this.Models.length; i++) {
+            options.push(
+                {
+                    purchase: this.Models[i],
+                    model: this.Models[i].HeldObject as WarbandMember
+                }
+            )
+        }
 
-        /** Test Data */ // @TODO
-        return [
-            {
-                FighterName: 'Aladin',
-                ModelName: 'Yüzbaşı Captain',
-                Slug: 'md_yuzbasicaptain',
-                FighterBaseDucats: 75,
-                FighterBaseGlory: 0,
-                FighterTotalCostDucats: 102,
-                FighterTotalCostGlory: 2,
-                IsElite: true,
-                IsMercenary: false,
-                ExperiencePoints: 4,
-                BattleScars: 1,
-                FighterIndex: 1, // the index for sorting and getting unique item in array
-                FighterImageId: 53, // the fighter image Synod ID for testing
-                Injuries: [
-                    {
-                        Name: 'Hand Wound',
-                        Description: 'The character suffers -1 DICE for all of its melee attack ACTIONS.',
-                        InjuryId: 'in_hand_wound'
-                    }
-                ],
-                Advancements: [
-                    {
-                        Name: 'Stand Firm',
-                        Description: 'This model treats the first Down result it suffers each battle as a Minor Hit.',
-                        InjuryId: 'sk_standfirm',
-                    }
-                ],
-                Equipment: [
-                    {
-                        Name: 'Siege Jezzail',
-                        CostDucats: 30,
-                        CostGlory: 0,
-                        Type: 'Ranged Weapon'
-                    }
-                ]
-            },
-            {
-                FighterName: 'Mustafa',
-                ModelName: 'Assassin',
-                Slug: 'md_sultanateassassin',
-                FighterBaseDucats: 85,
-                FighterBaseGlory: 0,
-                FighterTotalCostDucats: 105,
-                FighterTotalCostGlory: 0,
-                IsElite: true,
-                IsMercenary: false,
-                ExperiencePoints: 10,
-                BattleScars: 1,
-                FighterIndex: 2, // the index for sorting and getting unique item in array
-                FighterImageId: 26, // the fighter image Synod ID for testing
-                Injuries: [
-                    {
-                        Name: 'Hand Wound',
-                        Description: 'The character suffers -1 DICE for all of its melee attack ACTIONS.',
-                        InjuryId: 'in_hand_wound'
-                    }
-                ],
-                Advancements: [
-                    {
-                        Name: 'Stand Firm',
-                        Description: 'This model treats the first Down result it suffers each battle as a Minor Hit.',
-                        InjuryId: 'sk_standfirm',
-                    }
-                ],
-                Equipment: [
-                    {
-                        Name: 'Assassins Dagger',
-                        CostDucats: 30,
-                        CostGlory: 0,
-                        Type: 'Melle Weapon'
-                    }
-                ]
-            },
-            {
-                FighterName: 'Olaf',
-                ModelName: 'Azeb',
-                Slug: 'md_azeb',
-                FighterBaseDucats: 25,
-                FighterBaseGlory: 0,
-                FighterTotalCostDucats: 35,
-                FighterTotalCostGlory: 0,
-                IsElite: false,
-                IsMercenary: false,
-                ExperiencePoints: 0,
-                BattleScars: 0,
-                FighterIndex: 13, // the index for sorting and getting unique item in array
-                FighterImageId: 24, // the fighter image Synod ID for testing
-                Injuries: [
-                ],
-                Advancements: [
-
-                ],
-                Equipment: [
-                    {
-                        Name: 'Jezzail',
-                        CostDucats: 7,
-                        CostGlory: 0,
-                        Type: 'Ranged Weapon'
-                    },
-                    {
-                        Name: 'Alchemical Ammunition',
-                        CostDucats: 3,
-                        CostGlory: 0,
-                        Type: 'Equipment'
-                    }
-                ]
-            },
-            {
-                FighterName: 'Günther',
-                ModelName: 'Azeb',
-                Slug: 'md_azeb',
-                FighterBaseDucats: 25,
-                FighterBaseGlory: 0,
-                FighterTotalCostDucats: 35,
-                FighterTotalCostGlory: 0,
-                IsElite: false,
-                IsMercenary: false,
-                ExperiencePoints: 10,
-                BattleScars: 0,
-                FighterIndex: 3, // the index for sorting and getting unique item in array
-                FighterImageId: 24, // the fighter image Synod ID for testing
-                Injuries: [
-                ],
-                Advancements: [
-
-                ],
-                Equipment: [
-                    {
-                        Name: 'Jezzail',
-                        CostDucats: 7,
-                        CostGlory: 0,
-                        Type: 'Ranged Weapon'
-                    },
-                    {
-                        Name: 'Alchemical Ammunition',
-                        CostDucats: 3,
-                        CostGlory: 0,
-                        Type: 'Equipment'
-                    }
-                ]
-            }
-        ];
+        return options;
     }
 
 
@@ -389,23 +257,7 @@ class UserWarband extends DynamicContextObject {
     public GetRangedWeaponOptions ( fighter_id: string ) {
 
         // @TODO: get real options
-        const options = [
-            {
-                Name: 'Jezzail',
-                Id: 'eq_jezzail',
-                Cost: '7 Ducats'
-            },
-            {
-                Name: 'Pistol',
-                Id: 'eq_pistol',
-                Cost: '5 Ducats'
-            },
-            {
-                Name: 'Musket',
-                Id: 'eq_musket',
-                Cost: '10 Ducats'
-            },
-        ];
+        const options : any[] = [ ];
 
 
         return options;
@@ -419,8 +271,9 @@ class UserWarband extends DynamicContextObject {
      * Adds a fighter to the Roster
      * @param fighter
      */
-    public AddFighter ( fighter: object ) {
-
+    public AddFighter ( fighter: FactionModelRelationship[] ) {
+        console.log("ADDED")
+        console.log(fighter)
         return false;
 
     }
@@ -529,38 +382,7 @@ class UserWarband extends DynamicContextObject {
             ValueGlory: 4,
             AmountDucats: 15,
             AmountGlory: 1,
-            Items: [
-                {
-                    Name: 'Jezzail',
-                    Id: 'fc-jezzail',
-                    ValueDucats: 17,
-                    ValueGlory: 0
-                },
-                {
-                    Name: 'Jezzail',
-                    Id: 'fc-jezzail',
-                    ValueDucats: 17,
-                    ValueGlory: 0
-                },
-                {
-                    Name: 'Trench Knife',
-                    Id: 'fc-trench-knife',
-                    ValueDucats: 17,
-                    ValueGlory: 0
-                },
-                {
-                    Name: 'Gas Mask',
-                    Id: 'fc-gas-mask',
-                    ValueDucats: 5,
-                    ValueGlory: 0
-                },
-                {
-                    Name: 'Machine Gun',
-                    Id: 'fc-machine-gun',
-                    ValueDucats: 0,
-                    ValueGlory: 2
-                }
-            ]
+            Items: []
         }
     }
 
@@ -569,7 +391,7 @@ class UserWarband extends DynamicContextObject {
      * @constructor
      */
     GetNumElite() {
-        return this.GetFighters().filter(f => f.IsElite).length;
+        return this.GetFighters().filter(f => f.model.IsElite()).length;
     }
 
     /**
@@ -577,7 +399,7 @@ class UserWarband extends DynamicContextObject {
      * @constructor
      */
     GetNumTroop() {
-        return this.GetFighters().filter(f => !f.IsElite && !f.IsMercenary).length
+        return this.GetFighters().filter(f => !f.model.IsElite() && !f.model.IsMercenary()).length
     }
 
     /**
@@ -585,7 +407,7 @@ class UserWarband extends DynamicContextObject {
      * @constructor
      */
     GetNumMercenary() {
-        return this.GetFighters().filter(f => f.IsMercenary).length;
+        return this.GetFighters().filter(f => f.model.IsMercenary()).length;
     }
 
     /** @TODO
@@ -639,6 +461,42 @@ class UserWarband extends DynamicContextObject {
      */
     GetGoeticSelection () {
         return 'Wrath'
+    }
+
+    public async GetEliteFighterOptions() : Promise<FactionModelRelationship[]> {
+        const ListOfRels : FactionModelRelationship[] = await this.GetFighterOptions();
+
+        return ListOfRels.filter(item => item.Model.getKeywordIDs().includes("kw_elite"))
+    }
+
+    public async GetMercenaryFighterOptions() : Promise<FactionModelRelationship[]> {
+        const ListOfRels : FactionModelRelationship[] = await this.GetFighterOptions();
+
+        return ListOfRels.filter(item => (item.Mercenary == true))
+    }
+
+    public async GetTroopFighterOptions() : Promise<FactionModelRelationship[]> {
+        const ListOfRels : FactionModelRelationship[] = await this.GetFighterOptions();
+
+        return ListOfRels.filter(item => (!((item.Mercenary == true)) && !(item.Model.getKeywordIDs().includes("kw_elite"))))
+    }
+
+    public async GetFighterOptions() : Promise<FactionModelRelationship[]> {
+        const FacCheck = this.Faction.MyFaction;
+        let ListOfRels : FactionModelRelationship[] = []
+        console.log(FacCheck);
+        if (FacCheck != undefined) {
+            ListOfRels = ((FacCheck.SelfDynamicProperty).OptionChoice as Faction).Models
+        }
+
+        const eventmon : EventRunner = new EventRunner();
+        return await eventmon.runEvent(
+            "getAllFactionModelRelationships",
+            this,
+            [],
+            ListOfRels,
+            null
+        )
     }
 }
 

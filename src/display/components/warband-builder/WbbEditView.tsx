@@ -30,6 +30,7 @@ import {useGlobalState} from "../../../utility/globalstate";
 import SynodFactionImage from "../../../utility/SynodFactionImage";
 import PageMetaInformation from "../generics/PageMetaInformation";
 import WbbTitle from './micro-elements/WbbTitle';
+import { FactionModelRelationship } from '../../../classes/relationship/faction/FactionModelRelationship';
 
 interface WbbEditViewProps {
     warbandData: SumWarband | null;
@@ -60,7 +61,7 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
 
         if (searchParams.has('fighter')) {
             const fighterId = searchParams.get('fighter');
-            const fighter = warband?.warband_data.GetFighters().find(f => f.Slug === fighterId);
+            const fighter = warband?.warband_data.GetFighters().find(f => f.model.ID === fighterId);
             if (fighter) {
                 setDetailType('fighter');
                 setDetailPayload(fighter);
@@ -128,7 +129,7 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
     const [showAddFighterTroopModal, setShowAddFighterTroopModal] = useState(false);
     const [showAddFighterEliteModal, setShowAddFighterEliteModal] = useState(false);
     const [showAddFighterMercenaryModal, setShowAddFighterMercenaryModal] = useState(false);
-    const handleFighterSubmit = (newFighter: { id: string; name: string }[]) => {
+    const handleFighterSubmit = (newFighter: FactionModelRelationship[]) => {
         if (!warband) { return; } // Guard
 
         warband.warband_data.AddFighter(newFighter);
@@ -236,11 +237,11 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                                         <h3 className={'category-headline'}>Elites</h3>
                                         {warband.warband_data.GetFighters().map((item, index) => (
                                             <>
-                                                {item.IsElite &&
+                                                {item.model.IsElite() &&
                                                     <WbbEditViewFighter
                                                         item={item} index={index}
                                                         onClick={() => openDetail('fighter', item)}
-                                                        isActive={detailType === 'fighter' && detailPayload?.FighterIndex === item.FighterIndex}
+                                                        isActive={detailType === 'fighter' && warband.warband_data.Models.indexOf(detailPayload.purchase) === warband.warband_data.Models.indexOf(item.purchase)}
                                                     />
                                                 }
                                             </>
@@ -259,11 +260,11 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                                         <h3 className={'category-headline'}>Troops</h3>
                                         {warband.warband_data.GetFighters().map((item, index) => (
                                             <>
-                                                {!item.IsElite &&
+                                                {!item.model.IsElite() &&
                                                     <WbbEditViewFighter
                                                         item={item} index={index}
                                                         onClick={() => openDetail('fighter', item)}
-                                                        isActive={detailType === 'fighter' && detailPayload?.FighterIndex === item.FighterIndex}
+                                                        isActive={detailType === 'fighter' && warband.warband_data.Models.indexOf(detailPayload.purchase) === warband.warband_data.Models.indexOf(item.purchase)}
                                                     />
                                                 }
                                             </>
@@ -284,11 +285,11 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                                                 <h3 className={'category-headline'}>Mercenaries</h3>
                                                 {warband.warband_data.GetFighters().map((item, index) => (
                                                     <>
-                                                        {item.IsMercenary &&
+                                                        {item.model.IsMercenary() &&
                                                             <WbbEditViewFighter
                                                                 item={item} index={index}
                                                                 onClick={() => openDetail('fighter', item)}
-                                                                isActive={detailType === 'fighter' && detailPayload?.FighterIndex === item.FighterIndex}
+                                                                isActive={detailType === 'fighter' && warband.warband_data.Models.indexOf(detailPayload.purchase) === warband.warband_data.Models.indexOf(item.purchase)}
                                                             />
                                                         }
                                                     </>

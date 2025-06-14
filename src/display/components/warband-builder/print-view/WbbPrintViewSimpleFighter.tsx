@@ -2,23 +2,10 @@ import React from 'react';
 import WbbAbilityDisplay from "../WbbAbilityDisplay";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCheck, faSkull, faTimes} from "@fortawesome/free-solid-svg-icons";
-
-interface Fighter {
-    FighterName: string;
-    ModelName: string;
-    FighterTotalCostDucats: number;
-    FighterTotalCostGlory: number;
-    IsElite: boolean;
-    IsMercenary: boolean;
-    ExperiencePoints: number;
-    BattleScars: number;
-    Injuries?: { Name: string; Description?: string }[];
-    Advancements?: { Name: string; Description?: string }[];
-    Equipment?: { Name: string }[];
-}
+import { RealWarbandPurchaseModel } from '../../../../classes/saveitems/Warband/Purchases/WarbandPurchase';
 
 interface WbbPrintViewSimpleFighterProps {
-    fighter: Fighter;
+    fighter: RealWarbandPurchaseModel;
 }
 
 const WbbPrintViewSimpleFighter: React.FC<WbbPrintViewSimpleFighterProps> = ({ fighter }) => {
@@ -35,7 +22,7 @@ const WbbPrintViewSimpleFighter: React.FC<WbbPrintViewSimpleFighterProps> = ({ f
                             {'Name:'}
                         </span>
                         <span className={'inline-value'}>
-                            {fighter.FighterName}
+                            {fighter.model.GetName()}
                         </span>
                     </div>
                     <div className={'col-4'}>
@@ -43,7 +30,7 @@ const WbbPrintViewSimpleFighter: React.FC<WbbPrintViewSimpleFighterProps> = ({ f
                             {'Type:'}
                         </span>
                         <span className={'inline-value'}>
-                            {fighter.ModelName}
+                            {fighter.model.CurModel.GetName()}
                         </span>
                     </div>
                     <div className={'col-4'}>
@@ -109,7 +96,7 @@ const WbbPrintViewSimpleFighter: React.FC<WbbPrintViewSimpleFighterProps> = ({ f
                     </table>
                 </div>
 
-                {fighter.IsElite &&
+                {fighter.model.IsElite() &&
                     <div className={'xp-wrap'}>
                         <div className={'xp-headline'}>
                             {'Experience'}
@@ -118,7 +105,7 @@ const WbbPrintViewSimpleFighter: React.FC<WbbPrintViewSimpleFighterProps> = ({ f
                             {Array.from({length: 18}, (_, i) => {
                                 const level = i + 1;
                                 const isBold = boldXpIndices.includes(level);
-                                const hasXP = level <= fighter.ExperiencePoints;
+                                const hasXP = level <= fighter.model.Experience;
 
                                 return (
                                     <div
@@ -150,12 +137,12 @@ const WbbPrintViewSimpleFighter: React.FC<WbbPrintViewSimpleFighterProps> = ({ f
                         {'Equipment:'}
                     </span>
                     <span className={'inline-value'}>
-                        {fighter.Equipment && fighter.Equipment.length > 0 && (
+                        {fighter.model.GetEquipment().length > 0 && (
                             <>
-                                {fighter.Equipment?.map((eq, idx) => (
+                                {fighter.model.GetEquipment()?.map((eq, idx) => (
                                     <span key={idx}>
-                                        {eq.Name}
-                                        {idx < (fighter.Equipment?.length || 0) - 1 && ', '}
+                                        {eq.equipment.Name}
+                                        {idx < (fighter.model.GetEquipment()?.length || 0) - 1 && ', '}
                                     </span>
                                 ))}
                             </>
@@ -169,12 +156,12 @@ const WbbPrintViewSimpleFighter: React.FC<WbbPrintViewSimpleFighterProps> = ({ f
                         {'Advancements:'}
                     </span>
                     <span className={'inline-value'}>
-                        {fighter.Advancements && fighter.Advancements.length > 0 && (
+                        {fighter.model.Skills.length > 0 && (
                             <>
-                                {fighter.Advancements?.map((adv, idx) => (
+                                {fighter.model.Skills?.map((adv, idx) => (
                                     <span key={idx}>
                                         {adv.Name}
-                                        {idx < (fighter.Advancements?.length || 0) - 1 && ', '}
+                                        {idx < (fighter.model.Skills?.length || 0) - 1 && ', '}
                                     </span>
                                 ))}
                             </>
@@ -187,18 +174,18 @@ const WbbPrintViewSimpleFighter: React.FC<WbbPrintViewSimpleFighterProps> = ({ f
                         {'Injuries:'}
                     </span>
                     <span className={'inline-value'}>
-                        {fighter.Injuries && fighter.Injuries.length > 0 && (
+                        {fighter.model.Injuries.length > 0 && (
                             <>
-                                {fighter.Injuries?.map((inj, idx) => (
+                                {fighter.model.Injuries?.map((inj, idx) => (
                                     <span key={idx}>
                                         {inj.Name}
-                                        {idx < (fighter.Injuries?.length || 0) - 1 && ', '}
+                                        {idx < (fighter.model.Injuries?.length || 0) - 1 && ', '}
                                     </span>
                                 ))}
                             </>
                         )}
 
-                        {fighter.IsElite &&
+                        {fighter.model.IsElite() &&
                             <span className={'battle-scars'}>
                                 <span className={'inline-label'}>
                                     {'Battle Scars'}
@@ -207,7 +194,7 @@ const WbbPrintViewSimpleFighter: React.FC<WbbPrintViewSimpleFighterProps> = ({ f
                                 <div className="battle-scar-boxes">
                                     {Array.from({length: 3}, (_, i) => {
                                         const index = i + 1;
-                                        const isChecked = index <= fighter.BattleScars;
+                                        const isChecked = index <= fighter.model.Injuries.length;
                                         const isSkull = index === 3;
 
                                         return (

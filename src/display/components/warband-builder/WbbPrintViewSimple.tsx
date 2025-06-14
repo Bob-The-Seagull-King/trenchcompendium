@@ -25,7 +25,7 @@ const WbbPrintViewSimple: React.FC = () => {
                     <h2 className={'page-headline'}>{'Elites'}</h2>
                     {warband.warband_data.GetFighters().map((item, index) => (
                         <>
-                            {item.IsElite &&
+                            {item.model.IsElite() &&
                                 <WbbPrintViewSimpleFighter key={'print-elites' + index}
                                     fighter={item}
                                 />
@@ -35,7 +35,7 @@ const WbbPrintViewSimple: React.FC = () => {
 
                     {warband.warband_data.GetFighters().map((item, index) => (
                         <>
-                            {item.IsElite &&
+                            {item.model.IsElite() &&
                                 <WbbPrintViewSimpleFighter key={'print-elites' + index}
                                                            fighter={item}
                                 />
@@ -45,7 +45,7 @@ const WbbPrintViewSimple: React.FC = () => {
 
                     {warband.warband_data.GetFighters().map((item, index) => (
                         <>
-                            {item.IsElite &&
+                            {item.model.IsElite() &&
                                 <WbbPrintViewSimpleFighter key={'print-elites' + index}
                                                            fighter={item}
                                 />
@@ -61,7 +61,7 @@ const WbbPrintViewSimple: React.FC = () => {
 
                     {warband.warband_data.GetFighters().map((item, index) => (
                         <>
-                            {(!item.IsElite && !item.IsMercenary) &&
+                            {(!item.model.IsElite() && !item.model.IsMercenary()) &&
                                 <WbbPrintViewSimpleFighter
                                     key={'print-troop' + index}
                                     fighter={item}
@@ -78,7 +78,7 @@ const WbbPrintViewSimple: React.FC = () => {
 
                     {warband.warband_data.GetFighters().map((item, index) => (
                         <>
-                            {item.IsMercenary &&
+                            {item.model.IsMercenary() &&
                                 <WbbPrintViewSimpleFighter
                                     key={'print-mercenary' + index}
                                     fighter={item}

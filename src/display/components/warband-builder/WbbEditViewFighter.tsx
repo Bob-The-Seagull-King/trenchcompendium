@@ -4,6 +4,8 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCopy, faEllipsisVertical, faTrash, faXmark} from "@fortawesome/free-solid-svg-icons";
 import WbbContextualPopover from "./WbbContextualPopover";
 import {usePlayMode} from "../../../context/PlayModeContext";
+import { RealWarbandPurchaseModel } from '../../../classes/saveitems/Warband/Purchases/WarbandPurchase';
+import { useWarband } from '../../../context/WarbandContext';
 
 
 /**
@@ -12,7 +14,7 @@ import {usePlayMode} from "../../../context/PlayModeContext";
  */
 
 interface WbbEditViewFighterProps {
-    item: {
+    item: RealWarbandPurchaseModel; /*{
         FighterName: string;
         ModelName: string;
         Slug: string;
@@ -28,7 +30,7 @@ interface WbbEditViewFighterProps {
         Advancements: any;
         Equipment: any;
         FighterIndex: number;
-    };
+    };*/
     index: number;
     onClick?: () => void;
     isActive?: boolean;
@@ -36,28 +38,29 @@ interface WbbEditViewFighterProps {
 const WbbEditViewFighter: React.FC<WbbEditViewFighterProps> = ({ item, index, onClick, isActive }) => {
 
     const { playMode } = usePlayMode();
+    const { warband } = useWarband();
 
     return (
         <div className={`WbbEditViewFighter ${isActive ? 'active' : ''} ${playMode ? 'play-mode' : ''}`} onClick={onClick}>
             <div className={'model-name'}>
-                {item.ModelName}
+                {item.model.CurModel.GetName()}
             </div>
             <div className={'fighter-name'}>
-                {item.FighterName}
+                {item.model.GetName()}
             </div>
 
             <div className={'cost-wrap'}>
-                {item.FighterTotalCostDucats > 0 &&
-                    <div className={'cost-ducats'}>{item.FighterTotalCostDucats + " Ducats"}</div>
+                {item.purchase.GetTotalDucats() > 0 &&
+                    <div className={'cost-ducats'}>{item.purchase.GetTotalDucats() + " Ducats"}</div>
                 }
-                {item.FighterTotalCostGlory > 0 &&
-                    <div className={'cost-Glory'}>{item.FighterTotalCostGlory + " Glory"}</div>
+                {item.purchase.GetTotalGlory() > 0 &&
+                    <div className={'cost-Glory'}>{item.purchase.GetTotalGlory() + " Glory"}</div>
                 }
             </div>
 
             {!playMode &&
                 <WbbContextualPopover
-                    id={`fighter-${item.FighterIndex}`}
+                    id={`fighter-${warband? warband.warband_data.Models.indexOf(item.purchase) : 0}`}
                     type="fighter"
                     item={item}
                 />

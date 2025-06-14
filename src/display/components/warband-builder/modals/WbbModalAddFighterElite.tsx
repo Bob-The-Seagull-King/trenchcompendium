@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import {faXmark} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { FactionModelRelationship } from '../../../../classes/relationship/faction/FactionModelRelationship';
+import { useWarband } from '../../../../context/WarbandContext';
+import { getCostType } from '../../../../utility/functions';
 
 interface Fighter {
     id: string;
@@ -11,34 +14,42 @@ interface Fighter {
 interface WbbModalAddFighterEliteProps {
     show: boolean;
     onClose: () => void;
-    onSubmit: (selectedFighters: Fighter[]) => void;
+    onSubmit: (selectedFighters: FactionModelRelationship[]) => void;
 }
 
 const WbbModalAddFighterElite: React.FC<WbbModalAddFighterEliteProps> = ({ show, onClose, onSubmit }) => {
     const [selectedId, setSelectedId] = useState<string | null>(null);
+    const { warband } = useWarband();
+    const [listofoptions, setListofOptions] = useState<FactionModelRelationship[]>([])
+    const [keyvar, setkevvar] = useState(0);
 
     const handleSelect = (id: string) => {
         setSelectedId(id);
     };
+    
+    useEffect(() => {
+        async function SetModelOptions() {
+            const options = await warband?.warband_data.GetEliteFighterOptions()
+            if (options != undefined) {
+                setListofOptions(options)
+                setkevvar(keyvar + 1)
+            }
+        }
+    
+        SetModelOptions();
+    }, []);
 
     const handleSubmit = () => {
         if (selectedId) {
-            const selected = availableFighters.filter((f) => f.id === selectedId);
+            const selected = listofoptions.filter((f) => f.ID === selectedId);
             onSubmit(selected);
             setSelectedId(null); // clear selection
             onClose();
         }
     };
 
-    // Test Data @TODO: replace with actual elite options
-    const availableFighters = [
-        { id: 'e1', name: 'Yüzbasi Captain', cost: '35 Ducats' },
-        { id: 'e2', name: 'Assassin', cost: '40 Ducats' },
-        { id: 'e3', name: 'Jabirean Alchemist', cost: '30 Ducats' }
-    ];
-
     return (
-        <Modal show={show} onHide={onClose} className={'WbbModalAddItem WbbModalAddFighterElite'} centered>
+        <Modal show={show} onHide={onClose} key={keyvar} className={'WbbModalAddItem WbbModalAddFighterElite'} centered>
             <Modal.Header closeButton={false}>
                 <Modal.Title>Add Elite</Modal.Title>
 
@@ -51,17 +62,17 @@ const WbbModalAddFighterElite: React.FC<WbbModalAddFighterEliteProps> = ({ show,
             </Modal.Header>
 
             <Modal.Body>
-                {availableFighters.map((fighter) => (
+                {listofoptions.map((fighter) => (
                     <div
-                        key={fighter.id}
-                        className={`select-item ${selectedId === fighter.id ? 'selected' : ''}`}
-                        onClick={() => handleSelect(fighter.id)}
+                        key={fighter.ID}
+                        className={`select-item ${selectedId === fighter.ID ? 'selected' : ''}`}
+                        onClick={() => handleSelect(fighter.ID)}
                     >
                         <span className={'item-name'}>
-                            {fighter.name}
+                            {fighter.Model.GetName()}
                         </span>
                         <span className={'item-cost'}>
-                            {fighter.cost}
+                            {fighter.Cost + " " + getCostType(fighter.CostType)}
                         </span>
                     </div>
                 ))}
