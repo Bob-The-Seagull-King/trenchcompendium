@@ -256,7 +256,7 @@
             "extra_features":  [
                 {
                     "tags": {"desc_type" : "paragraph"},
-                    "content": "Place three markers representing Objectives on the table as indicated on the map, numbered one to six."
+                    "content": "Place three markers representing Objectives on the table as indicated on the map, numbered one to three."
                 }
             ]
          },
