@@ -141,13 +141,33 @@ class WarbandPurchase {
     }
 
     public GetTotalDucats() {
-        // @TODO Lane
-        return 10;
+        let TotalDucatCost = 0;
+        if (this.CostType == 0) {
+            TotalDucatCost += this.ItemCost;
+        }
+
+        if (this.HeldObject instanceof WarbandMember) {
+            TotalDucatCost += this.HeldObject.GetSubCosts(0);
+        } else if (this.HeldObject instanceof WarbandEquipment) {
+            TotalDucatCost += this.HeldObject.GetSubCosts(0);
+        }
+
+        return TotalDucatCost;
     }
 
     public GetTotalGlory() {
-        // @TODO Lane
-        return 1;
+        let TotalGloryCost = 0;
+        if (this.CostType == 1) {
+            TotalGloryCost += this.ItemCost;
+        }
+
+        if (this.HeldObject instanceof WarbandMember) {
+            TotalGloryCost += this.HeldObject.GetSubCosts(1);
+        } else if (this.HeldObject instanceof WarbandEquipment) {
+            TotalGloryCost += this.HeldObject.GetSubCosts(1);
+        }
+
+        return TotalGloryCost;
     }
 
 }

@@ -257,6 +257,11 @@ class WarbandMember extends DynamicContextObject {
         return false;
     }
 
+    public GetSubCosts(type : number) {
+        // @TODO
+        return 0;
+    }
+
 }
 
 export {IWarbandMember, WarbandMember}
