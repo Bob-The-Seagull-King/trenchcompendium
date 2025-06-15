@@ -485,6 +485,19 @@ class UserWarband extends DynamicContextObject {
         return count;
     }
 
+    public GetCountOfRel(id : string) {
+        let count = 0;
+        for (let i = 0; i < this.Models.length; i++) {
+            const inter = this.Models[i].CustomInterface
+            if (inter) {
+                if (inter.id == id) {
+                    count ++;
+                }
+            }
+        }
+        return count;
+    }
+
     public async GetCountOfKeyword(id : string) {
         let count = 0;
         for (let i = 0; i < this.Models.length; i++) {
@@ -541,7 +554,7 @@ class UserWarband extends DynamicContextObject {
                 maxcount,
                 this
             )
-            if (this.GetCountOfModel(BaseRels[i].Model.ID) < maxcount) {
+            if (this.GetCountOfRel(BaseRels[i].ID) < maxcount) {
                 ListOfRels.push(BaseRels[i]);
             }
         }
