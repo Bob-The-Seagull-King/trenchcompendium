@@ -1229,7 +1229,7 @@
                                         "content": "Roll to see what your Warband discovers in the area they are currently occupying. See "
                                     },
                                     {
-                                        "tags": {"desc_type" : "link", "url": "/compendium/campaign/explorationtable"},
+                                        "tags": {"desc_type" : "link", "url": "/compendium/campaign/campaign_rules/br_exploration"},
                                         "content": "Exploration"
                                     },
                                     {
@@ -1243,7 +1243,7 @@
                                 "content": "",
                                 "subcontent": [
                                     {
-                                        "tags": {"desc_type" : "rulesbanner", "url": "/compendium/campaign/explorationtable"},
+                                        "tags": {"desc_type" : "rulesbanner", "url": "/compendium/campaign/campaign_rules/br_exploration"},
                                         "content": "Looting & Exploration"
                                     }
                                 ]
