@@ -627,7 +627,7 @@ class UserWarband extends DynamicContextObject {
                 maxcount,
                 this
             )
-            if (this.GetCountOfRel(BaseRels[i].ID) < maxcount) {
+            if (this.GetCountOfRel(BaseRels[i].ID) < maxcount && ((BaseRels[i].Minimum != 0 && BaseRels[i].Maximum != 0))) {
                 ListOfRels.push(BaseRels[i]);
             }
         }
@@ -662,7 +662,7 @@ class UserWarband extends DynamicContextObject {
                 maxcount,
                 this
             )
-            if (this.GetCountOfEquipmentRel(BaseRels[i].ID) < maxcount) {
+            if (this.GetCountOfEquipmentRel(BaseRels[i].ID) < maxcount || (maxcount == 0 && BaseRels[i].Limit == 0)) {
                 ListOfRels.push(BaseRels[i]);
             }
         }
