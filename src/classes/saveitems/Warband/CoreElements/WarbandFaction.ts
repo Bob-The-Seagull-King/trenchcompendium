@@ -11,6 +11,7 @@ import { IPatronRelationship, Patron } from "../../../feature/skillgroup/Patron"
 import { Faction } from "../../../feature/faction/Faction";
 import { EventRunner } from "../../../contextevent/contexteventhandler";
 import { Requester } from "../../../../factories/Requester";
+import { Rule } from "../../../feature/faction/Rule";
 
 interface IWarbandFaction extends IContextObject {
     faction_property: IWarbandProperty,
@@ -66,6 +67,7 @@ class WarbandFaction extends DynamicContextObject {
                 }
             }
         }
+        console.log(this);
     }
 
     public ConvertToInterface() {
@@ -179,6 +181,20 @@ class WarbandFaction extends DynamicContextObject {
         }
 
         return '';
+    }
+
+    public GetModifierProperties() {
+        const PropertyList : WarbandProperty[] = [];
+
+        for (let i = 0; i < this.MyFactionRules.length; i++) {
+            const FactionRule : Rule = this.MyFactionRules[i].SelfDynamicProperty.OptionChoice as Rule;
+
+            if (FactionRule.ContextData["warband_wide"] || FactionRule.ContextData["add_to_warband"]) {
+                PropertyList.push(this.MyFactionRules[i])
+            }
+        }
+
+        return PropertyList;
     }
 
 

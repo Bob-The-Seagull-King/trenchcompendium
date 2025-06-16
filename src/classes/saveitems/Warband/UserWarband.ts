@@ -14,6 +14,7 @@ import { FactionModelRelationship } from '../../relationship/faction/FactionMode
 import { EventRunner } from '../../contextevent/contexteventhandler';
 import { Faction } from '../../feature/faction/Faction';
 import { FactionEquipmentRelationship } from '../../relationship/faction/FactionEquipmentRelationship';
+import { WarbandProperty } from './WarbandProperty';
 
 interface IUserWarband extends IContextObject {
     id : string,
@@ -668,6 +669,14 @@ class UserWarband extends DynamicContextObject {
         }
 
         return ListOfRels
+    }
+
+    public GetModifiersList() {
+        let PropertyList : WarbandProperty[] = [];
+
+        PropertyList = [...PropertyList, ...this.Faction.GetModifierProperties()]
+
+        return PropertyList;
     }
 }
 
