@@ -10,9 +10,10 @@ import { IWarbandPurchaseEquipment, IWarbandPurchaseModel, RealWarbandPurchaseMo
 import { IWarbandMember, WarbandMember } from './Purchases/WarbandMember';
 import { WarbandEquipment } from './Purchases/WarbandEquipment';
 import { WarbandFactory } from '../../../factories/warband/WarbandFactory';
-import { FactionModelRelationship } from '../../../classes/relationship/faction/FactionModelRelationship';
-import { EventRunner } from '../../../classes/contextevent/contexteventhandler';
-import { Faction } from '../../../classes/feature/faction/Faction';
+import { FactionModelRelationship } from '../../relationship/faction/FactionModelRelationship';
+import { EventRunner } from '../../contextevent/contexteventhandler';
+import { Faction } from '../../feature/faction/Faction';
+import { FactionEquipmentRelationship } from '../../relationship/faction/FactionEquipmentRelationship';
 
 interface IUserWarband extends IContextObject {
     id : string,
@@ -94,8 +95,8 @@ class UserWarband extends DynamicContextObject {
             name: this.Name != undefined? this.Name : "",
             source: this.Source != undefined? this.Source : "",
             tags: this.Tags,
-            ducat_bank: this.Ducats,
-            glory_bank: this.Glory,
+            ducat_bank: this.GetDucatCost(),
+            glory_bank: this.GetGloryCost(),
             models : modelslist,
             equipment : equipmentlist,
             notes: this.Notes
@@ -180,7 +181,7 @@ class UserWarband extends DynamicContextObject {
      * Returns the Ducats Value of the Warband Cost as int (without stash)
      */
     public GetCostDucats() {
-        return this.Ducats;
+        return this.GetDucatCost();
     }
 
     /**
@@ -189,21 +190,21 @@ class UserWarband extends DynamicContextObject {
      * @constructor
      */
     public GetCostDucatsTotal () {
-        return this.Ducats;
+        return this.GetDucatCost() + this.GetDucatCostStash();
     }
 
     /** @TODO
      * Returns the Glory Value of the Warband Cost as int (without stash)
      */
     public GetCostGlory() {
-        return this.Glory;
+        return this.GetGloryCost();
     }
 
     /** @TODO
      * Returns the Glory Value of the Warband including stash as int
      */
     public GetCostGloryTotal() {
-        return this.Glory;
+        return this.GetGloryCost() + this.GetGloryCostStash();
     }
 
     /**
@@ -288,6 +289,25 @@ class UserWarband extends DynamicContextObject {
             }, this, Model);
             this.Models.push(NewPurchase);
         }
+    }
+    /** @TODO
+     * Adds a fighter to the Roster
+     * @param fighter
+     */
+    public async AddStash ( stash: FactionEquipmentRelationship ) {
+        const Equipment : WarbandEquipment = await WarbandFactory.BuildWarbandEquipmentFromPurchase(stash, this);
+        const NewPurchase : WarbandPurchase = new WarbandPurchase({
+            cost_value : stash.Cost,
+            cost_type : stash.CostType,
+            count_limit : true,
+            count_cap : true,
+            sell_item : true,
+            sell_full : true,
+            purchaseid: stash.EquipmentItem.ID,
+            faction_rel_id: stash.ID,
+            custom_rel: stash.SelfData
+        }, this, Equipment);
+        this.Equipment.push(NewPurchase);
     }
 
     /** @TODO
@@ -390,8 +410,8 @@ class UserWarband extends DynamicContextObject {
     GetStash() {
 
         return {
-            ValueDucats: this.GetDucatCost(),
-            ValueGlory: this.GetGloryCost(),
+            ValueDucats: this.GetDucatCostStash(),
+            ValueGlory: this.GetGloryCostStash(),
             AmountDucats: 15 /* @TODO */,
             AmountGlory: 1 /* @TODO */,
             Items: []
@@ -407,11 +427,30 @@ class UserWarband extends DynamicContextObject {
         return TotalDucatCost
     }
 
+    public GetDucatCostStash() {
+        
+        let TotalDucatCost = 0;
+        for (let i = 0; i < this.Equipment.length; i++) {
+            TotalDucatCost += this.Equipment[i].GetTotalDucats();
+        }
+        console.log(TotalDucatCost);
+        return TotalDucatCost
+    }
+
     public GetGloryCost() {
         
         let TotalGloryCost = 0;
         for (let i = 0; i < this.Models.length; i++) {
             TotalGloryCost += this.Models[i].GetTotalGlory();
+        }
+        return TotalGloryCost
+    }
+
+    public GetGloryCostStash() {
+        
+        let TotalGloryCost = 0;
+        for (let i = 0; i < this.Equipment.length; i++) {
+            TotalGloryCost += this.Equipment[i].GetTotalGlory();
         }
         return TotalGloryCost
     }
@@ -516,6 +555,22 @@ class UserWarband extends DynamicContextObject {
         return count;
     }
 
+    public GetCountOfEquipmentRel(id : string) {
+        let count = 0;
+        for (let i = 0; i < this.Equipment.length; i++) {
+            const inter = this.Equipment[i].CustomInterface
+            if (inter) {
+                if (inter.id == id) {
+                    count ++;
+                }
+            }
+        }
+        for (let i = 0; i < this.Models.length; i++) {
+            count += ((this.Models[i].HeldObject as WarbandMember).GetEquipmentCount(id))
+        }
+        return count;
+    }
+
     public async GetCountOfKeyword(id : string) {
         let count = 0;
         for (let i = 0; i < this.Models.length; i++) {
@@ -573,6 +628,41 @@ class UserWarband extends DynamicContextObject {
                 this
             )
             if (this.GetCountOfRel(BaseRels[i].ID) < maxcount) {
+                ListOfRels.push(BaseRels[i]);
+            }
+        }
+
+        return ListOfRels
+    }
+
+    public async GetFactionEquipmentOptions() : Promise<FactionEquipmentRelationship[]> {
+        const FacCheck = this.Faction.MyFaction;
+        const ListOfRels : FactionEquipmentRelationship[] = []
+        let BaseRels : FactionEquipmentRelationship[] = []
+        
+        if (FacCheck != undefined) {
+            BaseRels = ((FacCheck.SelfDynamicProperty).OptionChoice as Faction).EquipmentItems
+        }
+
+        const eventmon : EventRunner = new EventRunner();
+        BaseRels = await eventmon.runEvent(
+            "getAllFactionEquipmentRelationships",
+            this,
+            [],
+            BaseRels,
+            null
+        )
+
+        for (let i = 0; i < BaseRels.length; i++) {
+            let maxcount = BaseRels[i].Limit;
+            maxcount = await eventmon.runEvent(
+                "getEquipmentLimitTrue",
+                BaseRels[i],
+                [],
+                maxcount,
+                this
+            )
+            if (this.GetCountOfEquipmentRel(BaseRels[i].ID) < maxcount) {
                 ListOfRels.push(BaseRels[i]);
             }
         }

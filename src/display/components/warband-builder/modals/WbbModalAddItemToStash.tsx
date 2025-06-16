@@ -1,5 +1,8 @@
-import React, { useState } from 'react';
+import { useWarband } from '../../../../context/WarbandContext';
+import { FactionEquipmentRelationship } from '../../../../classes/relationship/faction/FactionEquipmentRelationship';
+import React, { useEffect, useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
+import { getCostType } from '../../../../utility/functions';
 
 interface Item {
     id: string;
@@ -11,52 +14,58 @@ interface Item {
 interface WbbModalAddItemToStashProps {
     show: boolean;
     onClose: () => void;
-    onSubmit: (weapon: Item) => void;
+    onSubmit: (weapon: FactionEquipmentRelationship) => void;
+    category : string;
 }
 
-const WbbModalAddItemToStash: React.FC<WbbModalAddItemToStashProps> = ({ show, onClose, onSubmit }) => {
+const WbbModalAddItemToStash: React.FC<WbbModalAddItemToStashProps> = ({ show, onClose, onSubmit, category }) => {
     const [selectedId, setSelectedId] = useState<string | null>(null);
-
-    const availableItems: Item[] = [
-        { id: 'mw1', name: 'Trench Knife', costDucats: 5 },
-        { id: 'mw2', name: 'Ritual Blade', costDucats: 10 },
-        { id: 'mw3', name: 'Great Sword', costDucats: 20 },
-    ];
+    
+    const { warband } = useWarband();
+    const [listofoptions, setListofOptions] = useState<FactionEquipmentRelationship[]>([])
+    const [keyvar, setkevvar] = useState(0);
 
     const handleSubmit = () => {
-        const weapon = availableItems.find(w => w.id === selectedId);
+        const weapon = listofoptions.find(w => w.ID === selectedId);
         if (weapon) {
             onSubmit(weapon);
             setSelectedId(null);
             onClose();
         }
     };
+    
+    useEffect(() => {
+        async function SetEquipmentOptions() {
+            const options = await warband?.warband_data.GetFactionEquipmentOptions()
+            if (options != undefined) {
+                setListofOptions(options.filter((item : FactionEquipmentRelationship) => item.EquipmentItem.Category == category))
+                setkevvar(keyvar + 1)
+            }
+        }
+    
+        SetEquipmentOptions();
+    }, [show]);
 
     return (
-        <Modal show={show} onHide={onClose} className="WbbModalAddItem WbbModalAddItemToStash" centered>
+        <Modal show={show} key={keyvar} onHide={onClose} className="WbbModalAddItem WbbModalAddItemToStash" centered>
             <Modal.Header closeButton>
                 <Modal.Title>Add Item to Stash</Modal.Title>
             </Modal.Header>
 
             <Modal.Body>
-                {availableItems.map((item) => (
+                {listofoptions.map((item) => (
                     <div
-                        key={item.id}
-                        className={`select-item ${selectedId === item.id ? 'selected' : ''}`}
-                        onClick={() => setSelectedId(item.id)}
+                        key={item.ID}
+                        className={`select-item ${selectedId === item.ID ? 'selected' : ''}`}
+                        onClick={() => setSelectedId(item.ID)}
                     >
                         <span className={'item-name'}>
-                            {item.name}
+                            {item.EquipmentItem.GetTrueName()}
                         </span>
                         <span className={'item-cost'}>
-                            {item.costDucats &&
+                            {item.Cost &&
                                 <>
-                                    {item.costDucats}{' Ducats'}
-                                </>
-                            }
-                            {item.costGlory &&
-                                <>
-                                    {item.costGlory}{' Glory'}
+                                    {item.Cost + " " + getCostType(item.CostType)}
                                 </>
                             }
                         </span>

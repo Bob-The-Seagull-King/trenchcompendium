@@ -262,6 +262,19 @@ class WarbandMember extends DynamicContextObject {
         return 0;
     }
 
+    public GetEquipmentCount(id : string) {
+        let count = 0;
+        for (let i = 0; i < this.Equipment.length; i++) {
+            const inter = this.Equipment[i].CustomInterface
+            if (inter) {
+                if (inter.id == id) {
+                    count ++;
+                }
+            }
+        }
+        return count;
+    }
+
 }
 
 export {IWarbandMember, WarbandMember}

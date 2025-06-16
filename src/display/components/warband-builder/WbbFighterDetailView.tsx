@@ -82,33 +82,6 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
             Description: 'As a GOETIC (2) Spell that ends this model’s Activation, beckoning magic fills the air. When the enemy next Activates a model during this Turn, that model must Move as its first ACTION. This Move must be a Retreat if the model started its Activation in Melee Combat with a model other than the caster of this Spell. If that model is Down, it instead Stands and then Moves. During this movement, it moves in a direct path toward the caster of this Spell through any passable terrain, including Dangerous Terrain, Jumping Down etc. The model suffers injuries as normal. It can act normally after taking the prescribed ACTION(S), or attempting to take the prescribed ACTION(S) if it couldn’t, but cannot target the caster of this Spell during this Activation with ranged or melee attacks.'
         }
     ];
-    const item_siege_jezzail = {
-        Name: 'Siege Jezzail',
-        CostDucats: 30,
-        CostGlory: 0,
-        ModifiersString: 'Two handed, Heavy, +1D to Injuries',
-        Id: 'eq_siege_jezzail',
-        Range: '48"',
-        Keywords: 'HEAVY',
-        Modifiers: '+1D to Injuries'
-    }
-    const item_trench_knife = {
-        Name: 'Trench Knife',
-        CostDucats: 3,
-        CostGlory: 0,
-        ModifiersString: 'One handed, -1D to Hit',
-        Id: 'eq_trench_knife',
-        Range: 'Melee',
-        Modifiers: '-1D to Injuries'
-    }
-    const item_alch_ammo = {
-        Name: 'Alchemical Ammunition',
-        CostDucats: 3,
-        CostGlory: 0,
-        ModifiersString: '+1D to ranged attack Rolls',
-        Id: 'eq_alch_ammo',
-        Rules: 'Adds +1 DICE to Ranged Attack rolls on the Action Success Chart. Can only be used with Jezzails, Alaybozan, Halberd-Guns and Siege Jezzails.'
-    }
     const boldXpIndices = [2, 4, 7, 10, 14, 18];
     const Injuries = [
         {
@@ -391,10 +364,6 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
 
                         {/* Ranged Weapons */}
                         <h3>{'Ranged Weapons'}</h3>
-                        {/* @TODO: For each Item */}
-                        <WbbEquipmentListItem
-                            item={item_siege_jezzail}
-                        />
                         <div className={'btn btn-add-element btn-block'}
                              onClick={() => setShowAddRangedWeapon(true)}>
                             <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
@@ -403,10 +372,10 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
 
                         {/* Melee Weapons */}
                         <h3>{'Melee Weapons'}</h3>
-                        {/* @TODO: For each Item */}
+                        {/* @TODO: For each Item 
                         <WbbEquipmentListItem
                             item={item_trench_knife}
-                        />
+                        />*/}
                         <div className={'btn btn-add-element btn-block'}
                              onClick={() => setShowMeleeWeaponModal(true)}>
                             <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
@@ -415,10 +384,6 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
 
                         {/* Equipment */}
                         <h3>{'Equipment'}</h3>
-                        {/* @TODO: For each Item */}
-                        <WbbEquipmentListItem
-                            item={item_alch_ammo}
-                        />
                         <div className={'btn btn-add-element btn-block'}
                              onClick={() => setShowAddEquipmentModal(true)}>
                             <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
@@ -614,25 +579,18 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
                     <div className={'play-mode-equipment-wrap'}>
                         {/* @TODO: add all equipment items*/}
                         <h3>{'Ranged Weapons'}</h3>
-                        <WbbEquipmentListItem
-                            item={item_siege_jezzail}
-                        />
                     </div>
 
                     <div className={'play-mode-equipment-wrap'}>
                         <h3>{'Melee Weapons'}</h3>
-                        {/* @TODO: For each Item */}
+                        {/* @TODO: For each Item
                         <WbbEquipmentListItem
                             item={item_trench_knife}
-                        />
+                        /> */}
                     </div>
 
                     <div className={'play-mode-equipment-wrap'}>
                         <h3>{'Equipment'}</h3>
-                        {/* @TODO: For each Item */}
-                        <WbbEquipmentListItem
-                            item={item_alch_ammo}
-                        />
                     </div>
 
                     <div className={'play-mode-goetic-powers-wrap'}>

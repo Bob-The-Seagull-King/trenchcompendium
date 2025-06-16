@@ -13,41 +13,36 @@ import {
 import WbbContextualPopover from "./WbbContextualPopover";
 import {usePlayMode} from "../../../context/PlayModeContext";
 import {usePrintMode} from "../../../context/PrintModeContext";
+import { WarbandPurchase } from '../../../classes/saveitems/Warband/Purchases/WarbandPurchase';
+import { WarbandEquipment } from '../../../classes/saveitems/Warband/Purchases/WarbandEquipment';
+import { Equipment } from '../../../classes/feature/equipment/Equipment';
+import { getCostType } from '../../../utility/functions';
+import { useWarband } from '../../../context/WarbandContext';
+import { returnDescription } from '../../../utility/util';
+import KeywordDisplay from '../features/glossary/KeywordDisplay';
+import GenericHover from '../generics/GenericHover';
 
 interface EquipmentItemProps {
-    item: {
-        Name: string;
-        CostDucats: number;
-        CostGlory: number;
-        ModifiersString?: string;
-        Id: string;
-        Range?: string;
-        Type?: string;
-        Rules?: string;
-        Keywords?: string;
-        Modifiers?: string;
-    };
+    item: WarbandPurchase
 }
 
 const WbbEquipmentListItem: React.FC<EquipmentItemProps> = ({ item }) => {
 
+    const { warband } = useWarband();
     const { playMode } = usePlayMode();
     const { printMode } = usePrintMode();
 
+    const ItemValue = ((item.HeldObject as WarbandEquipment).MyEquipment.SelfDynamicProperty.OptionChoice as Equipment)
+
     return (
         <div className={`WbbEquipmentListItem ${playMode ? 'play-mode' : ''} ${printMode ? 'print-mode' : ''} `}>
-            <div className="equipment-name">{item.Name}</div>
+            <div className="equipment-name">{ItemValue.GetTrueName()}</div>
 
             {(!playMode || printMode) &&
                 <div className="equipment-cost">
-                    {item.CostDucats > 0 &&
+                    {item.ItemCost > 0 &&
                         <>
-                            {item.CostDucats + " Ducats"}
-                        </>
-                    }
-                    {item.CostGlory > 0 &&
-                        <>
-                            {item.CostGlory + "  Glory"}
+                            {item.ItemCost + " " + getCostType(item.CostType)}
                         </>
                     }
                 </div>
@@ -55,13 +50,13 @@ const WbbEquipmentListItem: React.FC<EquipmentItemProps> = ({ item }) => {
 
             {(!playMode || printMode) &&
                 <div className={'equipment-modifiers'}>
-                    {item.ModifiersString}
+                    {ItemValue.GetModifiers()}
                 </div>
             }
 
             {(!playMode && !printMode) &&
                 <WbbContextualPopover
-                    id={`equipment-${item.Id}`}
+                    id={`equipment-${warband?.warband_data.Equipment.indexOf(item)}`}
                     type="equipment"
                     item={item}
                 />
@@ -70,54 +65,67 @@ const WbbEquipmentListItem: React.FC<EquipmentItemProps> = ({ item }) => {
             {(playMode && !printMode)  &&
                 <div className={'equipment-details'}>
                     <table>
-                        { item.Range &&
+                        { ItemValue.GetRange() &&
                             <tr>
                                 <td>
                                     Range
                                 </td>
                                 <td>
-                                    {item.Range}
+                                    {ItemValue.GetRange()}
                                 </td>
                             </tr>
                         }
-                        { item.Type &&
+                        { ItemValue.Category &&
                             <tr>
                                 <td>
                                     Type
                                 </td>
                                 <td>
-                                    {item.Type}
+                                    {ItemValue.Category}
                                 </td>
                             </tr>
                         }
-                        { item.Modifiers &&
+                        { ItemValue.GetModifiers() &&
                             <tr>
                                 <td>
                                     Modifiers
                                 </td>
                                 <td>
-                                    {item.Modifiers}
+                                    {ItemValue.GetModifiers()}
                                 </td>
                             </tr>
                         }
                     </table>
-                    { item.Keywords &&
+                    { ItemValue.KeyWord &&
                         <div className={'keywords-wrap'}>
                             <div className={'text-label'}>
                                 {'Keywords'}
                             </div>
                             <div className={'keywords'}>
-                                {item.Keywords}
+                                <p className={'keywords'}>
+                                    {ItemValue.GetKeyWords().map((item, index) => (
+                                        <span className='' key={"equipment_keyword_" + ItemValue.GetID() + "_keyword_id"}>
+                                        <GenericHover
+                                            d_colour={'grey'}
+                                            titlename={item.Name}
+                                            d_name={item.Name}
+                                            d_type={""}
+                                            d_method={() => <KeywordDisplay data={item}/>}
+                                        />
+                                        {index < ItemValue.GetKeyWords().length - 1 && ", "}
+                                    </span>
+                                    )) /* Keywords */}
+                                </p>
                             </div>
                         </div>
                     }
-                    { item.Rules &&
+                    { ItemValue.Description &&
                         <div className={'rules-wrap'}>
                             <div className={'text-label'}>
                                 {'Rules'}
                             </div>
                             <div className={'rules'}>
-                                {item.Rules}
+                                {returnDescription(ItemValue, ItemValue.Description)}
                             </div>
                         </div>
                     }

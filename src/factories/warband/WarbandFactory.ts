@@ -11,6 +11,7 @@ import { IWarbandExplorationSet, WarbandExplorationSet } from '../../classes/sav
 import { IWarbandFaction, WarbandFaction } from '../../classes/saveitems/Warband/CoreElements/WarbandFaction';
 import { IUserWarband, UserWarband } from '../../classes/saveitems/Warband/UserWarband';
 import { FactionModelRelationship } from '../../classes/relationship/faction/FactionModelRelationship';
+import { FactionEquipmentRelationship } from '../../classes/relationship/faction/FactionEquipmentRelationship';
 
 class WarbandFactory {
 
@@ -24,6 +25,24 @@ class WarbandFactory {
         await rule.BuildEquipment(data.equipment_id)
         await rule.BuildNewProperties();
         return rule;
+    }
+
+    static async BuildWarbandEquipmentFromPurchase(rel: FactionEquipmentRelationship, parent : DynamicContextObject | null) {
+        const data : IWarbandEquipment = {    
+                id: rel.EquipmentItem.ID, // The id of the item
+                name: rel.EquipmentItem.GetTrueName(), // The name of the item
+                source: rel.EquipmentItem.Source? rel.EquipmentItem.Source : "unknown", // The source of the item (core book, homebrew, etc)
+                tags: rel.EquipmentItem.Tags,
+                contextdata : rel.EquipmentItem.ContextData,            
+                equipment_id: {                    
+                    object_id: rel.EquipmentItem.ID,
+                    selections: []
+                },
+                subproperties : []
+            }
+        
+        const Equipment : WarbandEquipment = await WarbandFactory.CreateWarbandEquipment(data, parent);
+        return Equipment;
     }
 
     static async CreateWarbandExplorationSet(data: IWarbandExplorationSet, parent : DynamicContextObject | null) {
