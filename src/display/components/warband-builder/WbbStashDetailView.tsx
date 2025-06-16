@@ -47,6 +47,7 @@ const WbbStashDetailView: React.FC<WbbStashDetailViewProps> = ({ onClose }) => {
     }, [updateKey]);
 
     return (
+        <ErrorBoundary fallback={<div>Something went wrong with Stashed Items.tsx</div>}>
         <div className="WbbDetailView WbbStashDetailView">
             <div className={'title'}>
                 <div className={'title-back'} onClick={onClose}>
@@ -71,7 +72,6 @@ const WbbStashDetailView: React.FC<WbbStashDetailViewProps> = ({ onClose }) => {
                 </div>
 
                 <div className="stash-items-wrap">
-                <ErrorBoundary fallback={<div>Something went wrong with Stashed Items.tsx</div>}>
                     {warband?.warband_data.Equipment.filter(item => 
                             (((item.HeldObject as WarbandEquipment).MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Category == "ranged")
                             ).length > 0 ? (
@@ -187,11 +187,11 @@ const WbbStashDetailView: React.FC<WbbStashDetailViewProps> = ({ onClose }) => {
                         onSubmit={handleAddItemToStash}
                         category='equipment'
                     />
-                </ErrorBoundary>
                 </div>
             </div>
 
         </div>
+        </ErrorBoundary>
     );
 };
 
