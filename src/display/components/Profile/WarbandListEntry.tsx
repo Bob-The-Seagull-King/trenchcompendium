@@ -5,55 +5,49 @@ import React from 'react'
 import {useNavigate} from "react-router-dom";
 import CustomNavLink from "../subcomponents/interactables/CustomNavLink";
 import SynodImage from "../../../utility/SynodImage";
+import {UserWarband} from "../../../classes/saveitems/Warband/UserWarband";
 
 interface WarbandListEntryProps {
-    warbandId: number
-    warbandImageID: number
-    warbandName: string
-    warbandFactionName: string
-    warbandValue: string
+    warband: UserWarband
+
 }
 
 const WarbandListEntry: React.FC<WarbandListEntryProps> = ({
-        warbandId,
-        warbandImageID,
-        warbandName,
-        warbandFactionName,
-        warbandValue
+   warband
     }) => {
 
     const navigate = useNavigate();
-
 
     return (
         <div className="WarbandListEntry">
             <CustomNavLink
                 classes={'WarbandListEntry-image-wrap'}
-                link={`/warband/${warbandId}`}
+                link={`/warband/${warband.GetId()}`}
                 runfunc={() => {
-                    navigate(`/warband/${warbandId}`)
+                    navigate(`/warband/${warband.GetId()}`)
                 }}>
-                <SynodImage
-                    imageId={warbandImageID}
-                    className={'WarbandListEntry-image'}
-                />
+
+                <img src={warband.GetImageThumbnailURL()} alt={warband.GetWarbandName() + ' Image'} className={'WarbandListEntry-image'} />
+
             </CustomNavLink>
 
             <div className={'WarbandListEntry-text'}>
                 <CustomNavLink
                     classes={'warband-name'}
-                    link={`/warband/${warbandId}`}
+                    link={`/warband/${warband.GetId()}`}
                     runfunc={() => {
-                        navigate(`/warband/${warbandId}`)
+                        navigate(`/warband/${warband.GetId()}`)
                     }}>
-                    {warbandName}
+                    {warband.GetWarbandName()}
                 </CustomNavLink>
 
                 <div className={'warband-faction'}>
-                    {warbandFactionName}
+                    {warband.GetFactionName()}
                 </div>
                 <div className={'warband-value'}>
-                    {warbandValue}
+                    {warband.GetCostDucatsTotal() + ' Ductas'}
+                    {' | '}
+                    {warband.GetCostGloryTotal() + ' Glory'}
                 </div>
             </div>
         </div>

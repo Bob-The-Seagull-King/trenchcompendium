@@ -354,9 +354,14 @@ const ProfilePage: React.FC = () => {
                             />
                         </div>
 
-                        <ProfilePageCampaigns userId={parseInt(id)}/>
+                        <ProfilePageWarbands
+                            userData={userData}
+                        />
 
-                        <ProfilePageWarbands userId={parseInt(id)}/>
+                        <ProfilePageCampaigns
+                            userData={userData}
+                        />
+
                     </div>
 
                     <div className={'col-12 col-lg-5'}>

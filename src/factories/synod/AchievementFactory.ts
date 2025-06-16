@@ -30,6 +30,9 @@ class AchievementFactory {
         if (!synodcache.CheckAchievementCache(_val)) {
             synodcache.AddAchievementCallCache(_val);
 
+            console.log('@TODO: _val is not the user id, cant do request');
+            console.log(_val);
+
             /**
              * This gets the Auth token from local storage. We could use the Auth Context maybe?
              */

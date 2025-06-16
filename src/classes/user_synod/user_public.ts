@@ -189,6 +189,16 @@ class SiteUserPublic {
             return false;
         }
     }
+
+    /**
+     * Returns an array of warbands for this user
+     * - to show on the profile page for example
+     *
+     * @constructor
+     */
+    public async GetWarbands () {
+        return []
+    }
 }
 
 export {ISiteUserPublic, SiteUserPublic}

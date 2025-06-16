@@ -119,6 +119,31 @@ class UserWarband extends DynamicContextObject {
      * GETTERS
      */
 
+    /**
+     * Gets the ID of this warband
+     * @constructor
+     */
+    public GetId(): any {
+        return this.ID;
+    }
+
+    /**
+     * Returns the thumbnail Image ID for this warband
+     * @constructor
+     */
+    public GetImageThumbnailId () {
+
+        return 1;
+    }
+    /**
+     * Returns the thumbnail URL for this warband
+     * @constructor
+     */
+    public GetImageThumbnailURL () {
+
+        return '';
+    }
+
     public GetPatron() {
         return this.Faction.MyPatron;
     }

@@ -70,7 +70,11 @@ class SiteUser {
                         warband_data : newarband
                     }
                 )
-            } catch (e) {console.log(e)}
+            } catch (e) {
+
+                console.log('@TODO: Error if no warbands for user are present');
+                console.log(e);
+            }
         }
     }
 
@@ -294,6 +298,21 @@ class SiteUser {
         } else {
             return false;
         }
+    }
+
+    /**
+     * Returns an array of warbands for this user
+     * - to show on the profile page for example
+     *
+     * - duplicate of user_public
+     * @constructor
+     */
+    public async GetWarbands () {
+
+        // @TODO
+        console.log(' @TODO: return the list of warbands for this user here. @site_user -> GetWarbands()')
+
+        return []
     }
 }
 

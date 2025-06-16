@@ -199,9 +199,9 @@ const ProfilePageFriends: React.FC<ProfilePageFriendsProps> = ({
                         </>
                     )}
 
-                    <ul className={'friends-list'}>
-                        {friends.length > 0 ? (
-                        <>
+                    {friends.length > 0 ? (
+                        <ul className={'friends-list'}>
+
                             {friends.map((friend) => (
                                 <li key={friend.id} className={'friend'}>
                                     <UserListEntry
@@ -212,14 +212,14 @@ const ProfilePageFriends: React.FC<ProfilePageFriendsProps> = ({
                                     />
                                 </li>
                             ))}
-                        </>
-                        ): (
-                            <>
-                                {'No friends connected'}
-                            </>
-                        )}
+                        </ul>
+                    ) : (
+                        <div className="friends-list-empty">
+                            {'No friends connected'}
+                        </div>
+                    )}
 
-                    </ul>
+
                 </div>
             </div>
 
