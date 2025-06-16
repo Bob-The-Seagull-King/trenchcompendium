@@ -30,7 +30,7 @@ class WarbandManager {
             }            
         } else {
             this.LocalIDCount = 0;
-            localStorage.setItem('localwarbandcount', '0')
+            localStorage.setItem('localwarbandcount', '-999')
         }
     }
 
@@ -38,6 +38,9 @@ class WarbandManager {
         let needID = true;
         while (needID) {
             needID = false;
+            if (this.LocalIDCount == undefined) { 
+                this.LocalIDCount = -999;
+            }
             for (let i = 0; i < this.WarbandItemList.length; i++) {
                 if (this.WarbandItemList[i].id == this.LocalIDCount) {
                     this.LocalIDCount += 1;

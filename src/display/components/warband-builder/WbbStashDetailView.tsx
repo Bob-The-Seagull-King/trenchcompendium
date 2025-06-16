@@ -11,6 +11,7 @@ import { WarbandPurchase } from '../../../classes/saveitems/Warband/Purchases/Wa
 import { WarbandEquipment } from '../../../classes/saveitems/Warband/Purchases/WarbandEquipment';
 import { Equipment } from '../../../classes/feature/equipment/Equipment';
 import { ToolsController } from '../../../classes/_high_level_controllers/ToolsController';
+import { ErrorBoundary } from "react-error-boundary";
 
 interface WbbStashDetailViewProps {
     onClose: () => void;
@@ -70,6 +71,7 @@ const WbbStashDetailView: React.FC<WbbStashDetailViewProps> = ({ onClose }) => {
                 </div>
 
                 <div className="stash-items-wrap">
+                <ErrorBoundary fallback={<div>Something went wrong with Stashed Items.tsx</div>}>
                     {warband?.warband_data.Equipment.filter(item => 
                             (((item.HeldObject as WarbandEquipment).MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Category == "ranged")
                             ).length > 0 ? (
@@ -185,6 +187,7 @@ const WbbStashDetailView: React.FC<WbbStashDetailViewProps> = ({ onClose }) => {
                         onSubmit={handleAddItemToStash}
                         category='equipment'
                     />
+                </ErrorBoundary>
                 </div>
             </div>
 

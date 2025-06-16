@@ -52,7 +52,7 @@ const WbbEditViewStash: React.FC<WbbEditViewStashProps> = ({ onClick, isActive }
 
                 ) : (
                     <div className={'stash-item-list'}>
-                        {'No items in you stash'}
+                        {'No items in your stash'}
                     </div>
                 )}
 
