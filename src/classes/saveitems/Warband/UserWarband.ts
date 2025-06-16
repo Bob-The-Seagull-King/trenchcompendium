@@ -95,7 +95,7 @@ class UserWarband extends DynamicContextObject {
             name: this.Name != undefined? this.Name : "",
             source: this.Source != undefined? this.Source : "",
             tags: this.Tags,
-            ducat_bank: this.GetCostDucatTotal(),
+            ducat_bank: this.GetCostDucatsTotal(),
             glory_bank: this.GetCostGloryTotal(),
             models : modelslist,
             equipment : equipmentlist,
