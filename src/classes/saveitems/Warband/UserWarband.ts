@@ -95,8 +95,8 @@ class UserWarband extends DynamicContextObject {
             name: this.Name != undefined? this.Name : "",
             source: this.Source != undefined? this.Source : "",
             tags: this.Tags,
-            ducat_bank: this.GetDucatCost(),
-            glory_bank: this.GetGloryCost(),
+            ducat_bank: this.GetCostDucatTotal(),
+            glory_bank: this.GetCostGloryTotal(),
             models : modelslist,
             equipment : equipmentlist,
             notes: this.Notes
@@ -627,7 +627,7 @@ class UserWarband extends DynamicContextObject {
                 maxcount,
                 this
             )
-            if (this.GetCountOfRel(BaseRels[i].ID) < maxcount && ((BaseRels[i].Minimum != 0 && BaseRels[i].Maximum != 0))) {
+            if (this.GetCountOfRel(BaseRels[i].ID) < maxcount || ((BaseRels[i].Minimum != 0 && BaseRels[i].Maximum != 0))) {
                 ListOfRels.push(BaseRels[i]);
             }
         }
