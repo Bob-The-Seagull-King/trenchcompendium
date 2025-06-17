@@ -60,7 +60,6 @@ const WbbStashDetailView: React.FC<WbbStashDetailViewProps> = ({ onClose }) => {
             </div>
 
             <div key={updateKey} className={'detail-view-content'}>
-                {/* @TODO: add real Data here */}
                 <div className="stash-summary mb-3" key={stashkey}>
                     <div><strong>Ducats:</strong> {stash.AmountDucats || 0}</div>
                     <div><strong>Glory Points:</strong> {stash.AmountGlory || 0}</div>

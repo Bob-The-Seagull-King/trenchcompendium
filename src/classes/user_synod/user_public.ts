@@ -5,15 +5,16 @@ import {ROUTES} from "../../resources/routes-constants";
 import {SYNOD} from "../../resources/api-constants";
 import { UserFactory } from "../../factories/synod/UserFactory";
 import { WarbandFactory } from "../../factories/warband/WarbandFactory";
-import { IFriend, ProfilePictureOption } from "./site_user";
+import { IFriend, ISynodWarband, ProfilePictureOption } from "./site_user";
 import { AchievementFactory } from "../../factories/synod/AchievementFactory";
+import { SumWarband } from "../saveitems/Warband/WarbandManager";
 
 interface ISiteUserPublic {
     id: number,
     nickname : string,
     achievements: number[],
     friends: IFriend[],
-    warbands: IUserWarband[],
+    warbands: ISynodWarband[],
     campaigns: number[],
     profile_picture: SynodProfilePicData
 }
@@ -24,7 +25,7 @@ class SiteUserPublic {
     Achievements : IAchievement[] = []
     Friends : IFriend[] = []
     BuiltFriends : SiteUserPublic[] = []
-    Warbands : UserWarband[] = [];
+    Warbands : SumWarband[] = [];
     ProfilePic : SynodProfilePicData;
     Campaigns : number[] = []
     
@@ -57,8 +58,20 @@ class SiteUserPublic {
 
     public async BuildWarbands(data: ISiteUserPublic) {
         for (let i = 0; i < data.warbands.length; i++) {
-            const band = await WarbandFactory.CreateUserWarband(data.warbands[i]);
-            this.Warbands.push(band);
+            if (this.Warbands.filter((val : SumWarband) => val.id == data.warbands[i].id).length > 0) { continue; }
+            try {
+                const newarband : UserWarband = await WarbandFactory.CreateUserWarband(JSON.parse(data.warbands[i].warband_data))
+                this.Warbands.push(
+                    {
+                        id: data.warbands[i].id,
+                        warband_data : newarband
+                    }
+                )
+            } catch (e) {
+
+                console.log('@TODO: Error if no warbands for user are present');
+                console.log(e);
+            }
         }
     }
 
@@ -67,9 +80,13 @@ class SiteUserPublic {
         for (let i = 0; i < this.Achievements.length; i++) {
             achievementlist.push(this.Achievements[i].id)
         }
-        const warbandlist : IUserWarband[] = []
+        const warbandlist : ISynodWarband[] = []
         for (let i = 0; i < this.Warbands.length; i++) {
-            warbandlist.push(this.Warbands[i].ConvertToInterface())
+            warbandlist.push(
+                {
+                    id : this.Warbands[i].id,
+                    warband_data: JSON.stringify(this.Warbands[i].warband_data.ConvertToInterface())
+                })
         }
         const requestfriendlist : number[] = []
         for (let i = 0; i < this.Campaigns.length; i++) {
@@ -198,10 +215,7 @@ class SiteUserPublic {
      * @constructor
      */
     public async GetWarbands () {
-        // @TODO
-        console.log(' @TODO: return the list of warbands for this user here. @user_public -> GetWarbands()')
-
-        return []
+        return this.Warbands;
     }
 
     /**

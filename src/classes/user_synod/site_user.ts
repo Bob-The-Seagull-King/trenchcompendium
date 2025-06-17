@@ -341,11 +341,7 @@ class SiteUser {
      * @constructor
      */
     public async GetWarbands () {
-
-        // @TODO
-        console.log(' @TODO: return the list of warbands for this user here. @site_user -> GetWarbands()')
-
-        return []
+        return this.Warbands;
     }
 
     /**

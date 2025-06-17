@@ -78,7 +78,6 @@ const RuleDisplay = (props: any) => {
                     {returnDescription(ruleObject, ruleObject.Description)}
                 </div>
 
-                {/* @TODO: @Bob - what is this?*/}
                 {ruleObject.MyOptions.length > 0 &&
                     <div className={'option-static-display'}>
                         <OptionSetStaticDisplay data={ruleObject.MyOptions} />
