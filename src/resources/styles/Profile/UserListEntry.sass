@@ -75,3 +75,43 @@
 
             &:hover
                 background-color: $color-highlight-bg-2
+
+    // @todo: this is also copied from the wbb actions
+    .UserListEntry-actions
+        position: absolute
+        cursor: pointer
+        top: 0
+        right: 0
+        bottom: 0
+        display: flex
+        align-items: center
+        padding: 5px 12px
+        font-size: 16px
+
+// @TODO: this is duplicated. A uniform style for popovers is a good idea
+// Popover styles are used in the rules, the WBB and on profile page currently
+.popover.UserListEntry-options-popover
+    color: $color-text
+    padding: 0
+
+    &:after
+        content: ''
+        display: block
+        position: absolute
+        top: 50%
+        right: -8px
+        transform: translateY(-50%)
+        width: 0
+        height: 8px
+        border-left: 8px solid $color-bg-2
+        border-top: 8px solid transparent
+        border-bottom: 8px solid transparent
+
+    .action
+        margin: 0px
+        padding: 12px 15px
+        cursor: pointer
+        transition: color .2s ease
+
+        &:hover
+            color: $color-highlight-text

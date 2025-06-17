@@ -137,7 +137,7 @@ const UserListEntry: React.FC<UserListEntryProps> = ({ id,
                                 </div>
                             </Popover.Body>
                         }>
-                        <div className={'Wbb-item-actions'}
+                        <div className={'UserListEntry-actions'}
                              onClick={(e) => e.stopPropagation()}>
                             <FontAwesomeIcon icon={faEllipsisVertical} className=""/>
                         </div>
