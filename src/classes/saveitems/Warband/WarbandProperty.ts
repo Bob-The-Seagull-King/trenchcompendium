@@ -184,6 +184,13 @@ class WarbandProperty extends DynamicContextObject  {
         return static_packages;
     }
 
+    public GetOwnDescription() {
+        if (Object.prototype.hasOwnProperty.call(this.SelfDynamicProperty.OptionChoice, 'Description')) {
+            return (this.SelfDynamicProperty.OptionChoice as any).Description;
+        }
+        return null;
+    }
+
 }
 
 export {IWarbandProperty, WarbandProperty}
