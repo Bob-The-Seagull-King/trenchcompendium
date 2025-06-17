@@ -7,6 +7,7 @@ import WbbModalEditFighterStatus from "./modals/fighter/WbbEditFighterStatus";
 import WbbEditGoeticSelectionModal from "./modals/warband/WbbEditGoeticSelectionModal";
 import WbbTextarea from "./WbbTextarea";
 import WbbOptionBox from "./WbbOptionBox";
+import WbbDetailViewCollapse from "./WbbDetailViewCollapse";
 
 interface WbbWarbandDetailViewProps {
     onClose: () => void;
@@ -90,53 +91,74 @@ const WbbWarbandDetailView: React.FC<WbbWarbandDetailViewProps> = ({  onClose })
                 </div>
 
                 {/* Warband level options */}
+                <div className={'WbbDetailViewCollapse-wrap'}>
+                    {/* @TODO: only show if warband has options */}
+                    <WbbDetailViewCollapse title="Warband Options" initiallyOpen={true}>
 
-                {/* Goetic Options */}
-                {warband.warband_data.HasGoeticOptions() &&
-                    <>
-                        {/* @TODO
+                        {/* Goetic Options */}
+                        {warband.warband_data.HasGoeticOptions() &&
+                            <>
+                                {/* @TODO
                           * - hide for all campaign Rounds but the first
                           * - hide in play mode
                         */}
-                        <WbbOptionBox
-                            title={'Seven Deadly Sins'}
-                            value={goeticDiscipline}
-                            onClick={() => setshowGoeticModal(true)}
+                                <WbbOptionBox
+                                    title={'Seven Deadly Sins'}
+                                    value={goeticDiscipline}
+                                    onClick={() => setshowGoeticModal(true)}
+                                />
+
+                                <WbbEditGoeticSelectionModal
+                                    show={showGoeticModal}
+                                    onClose={() => setshowGoeticModal(false)}
+                                    currentGoetic={goeticDiscipline}
+                                    onSubmit={handleGoeticUpdate}
+                                />
+                            </>
+                        }
+
+                        {/*@TODO: add options to this area */}
+                        Warband level options go here.
+                        <br/>
+                        - Fireteams
+                        <br/>
+                        - HoW Weapon Selection
+
+                    </WbbDetailViewCollapse>
+
+                    {/* Warband Rules */}
+                    {/* @TODO: only show if warband has Special Rules */}
+                    <WbbDetailViewCollapse title="Special Rules" initiallyOpen={true}>
+
+                        {/*@TODO: add special rules as text to this area */}
+                        Special Rules go here
+
+                    </WbbDetailViewCollapse>
+
+
+
+                    {/* Notes textarea */}
+                    <WbbDetailViewCollapse title="Notes & Lore" initiallyOpen={false}>
+                        <WbbTextarea
+                            initialText={warband.warband_data.GetWarbandNotes()}
+                            title="Warband Notes"
+                            onSave={(newText) => {
+                                // @TODO Save the newText as warband Notes
+                                console.log('@TODO Save the newText as warband Notes', newText);
+                            }}
                         />
 
-                        <WbbEditGoeticSelectionModal
-                            show={showGoeticModal}
-                            onClose={() => setshowGoeticModal(false)}
-                            currentGoetic={goeticDiscipline}
-                            onSubmit={handleGoeticUpdate}
+                        {/* Lore  textarea */}
+                        <WbbTextarea
+                            initialText={warband.warband_data.GetLore()}
+                            title="Warband Lore"
+                            onSave={(newText) => {
+                                // @TODO Save the newText as warband Lore
+                                console.log('@TODO Save the newText as warband Lore', newText);
+                            }}
                         />
-                    </>
-                }
-
-                {/* @TODO: Add other warband level options here */}
-
-
-
-                {/* Notes textarea */}
-                <WbbTextarea
-                    initialText={warband.warband_data.GetWarbandNotes()}
-                    title="Warband Notes"
-                    onSave={(newText) => {
-                        // @TODO Save the newText as warband Notes
-                        console.log('@TODO Save the newText as warband Notes', newText);
-                    }}
-                />
-
-                {/* Lore  textarea */}
-                <WbbTextarea
-                    initialText={warband.warband_data.GetLore()}
-                    title="Warband Lore"
-                    onSave={(newText) => {
-                        // @TODO Save the newText as warband Lore
-                        console.log('@TODO Save the newText as warband Lore', newText);
-                    }}
-                />
-
+                    </WbbDetailViewCollapse>
+                </div>
 
             </div>
         </div>
