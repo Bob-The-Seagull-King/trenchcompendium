@@ -242,9 +242,16 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
 
                                         {/* Warband Modifiers */}
                                         <h3 className={'category-headline'}>Modifiers</h3>
-                                        <WbbEditViewModifier
-                                            index={123}
-                                        />
+                                        {warband?.warband_data.GetModifiersList().map((item) =>
+                                            <WbbEditViewModifier
+                                                    key={item.GetTrueName()}
+                                                    warbprop={item}
+                                                    index={warband?.warband_data.GetModifiersList().indexOf(item)}
+                                                />    
+                                        )
+                                            
+                                        }
+                                        
 
                                         {!playMode &&
                                             <div className={'btn btn-add-element btn-block'}
