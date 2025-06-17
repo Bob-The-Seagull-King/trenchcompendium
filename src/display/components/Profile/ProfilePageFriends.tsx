@@ -97,6 +97,15 @@ const ProfilePageFriends: React.FC<ProfilePageFriendsProps> = ({
         reload();
     }
 
+    const handleRemoveFriend = async ( user_id: number) => {
+        if( isSiteUser(userData) ) {
+            await userData.removeFriend(user_id);
+            toast.success('Friend removed')
+        }
+
+        reload();
+    }
+
     /**
      * Search friends functionality
      */
@@ -173,6 +182,7 @@ const ProfilePageFriends: React.FC<ProfilePageFriendsProps> = ({
                 </div>
 
                 <div className={'profile-card-content'}>
+                    {/* Friend Requests*/}
                     {friendRequests.length > 0 && (
                         <>
                             <div className={'friend-requests-headline'}>
@@ -199,6 +209,7 @@ const ProfilePageFriends: React.FC<ProfilePageFriendsProps> = ({
                         </>
                     )}
 
+                    {/* Friends */}
                     {friends.length > 0 ? (
                         <ul className={'friends-list'}>
 
@@ -209,6 +220,7 @@ const ProfilePageFriends: React.FC<ProfilePageFriendsProps> = ({
                                         username={friend.nickname}
                                         status={friend.status}
                                         pfp_url={friend.profile_picture_url}
+                                        onRemoveFriend={handleRemoveFriend}
                                     />
                                 </li>
                             ))}

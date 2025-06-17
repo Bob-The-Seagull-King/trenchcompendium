@@ -6,8 +6,17 @@ import React, {useState} from 'react'
 import SynodImage from "../../../utility/SynodImage";
 import CustomNavLink from "../subcomponents/interactables/CustomNavLink";
 import {useNavigate} from "react-router-dom";
-import {faCheck, faCircleNotch, faHourglassHalf, faPlus, faTimes} from "@fortawesome/free-solid-svg-icons";
+import {
+    faCheck,
+    faCircleNotch,
+    faCopy, faEllipsisVertical,
+    faHourglassHalf,
+    faPlus,
+    faTimes,
+    faTrash
+} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {OverlayTrigger, Popover} from "react-bootstrap";
 
 interface UserListEntryProps {
     id: number
@@ -21,6 +30,7 @@ interface UserListEntryProps {
     request_sent?: boolean;
     is_friend?: boolean;
     onAddFriend?: () => void;
+    onRemoveFriend?: (userId: number) => void;
 }
 
 const UserListEntry: React.FC<UserListEntryProps> = ({ id,
@@ -33,7 +43,8 @@ const UserListEntry: React.FC<UserListEntryProps> = ({ id,
                                                          is_search,
                                                          request_sent,
                                                          is_friend,
-                                                         onAddFriend
+                                                         onAddFriend,
+                                                         onRemoveFriend
 }) => {
 
     const navigate = useNavigate();
@@ -66,6 +77,19 @@ const UserListEntry: React.FC<UserListEntryProps> = ({ id,
         onDecline?.(id)
     }
 
+    // show options popover
+    const [showPopover, setShowPopover] = useState(false);
+
+    /**
+     * Delete a friend
+     */
+    const handleRemoveClick = ( id: number ) => {
+        setShowPopover(false)
+
+        onRemoveFriend?.(id)
+    };
+
+
     return (
         <div className="UserListEntry">
             <CustomNavLink
@@ -92,6 +116,33 @@ const UserListEntry: React.FC<UserListEntryProps> = ({ id,
                 <div className={'user-status'}>
                     {status}
                 </div>
+
+                { (!is_request && !is_search) &&
+                    <OverlayTrigger
+                        trigger="click"
+                        placement="left"
+                        show={showPopover}
+                        onToggle={() => setShowPopover(!showPopover)}
+                        rootClose={true} // closes when clicking outside
+                        overlay={
+                            <Popover.Body className="popover UserListEntry-options-popover">
+                                <div className={'actions'}>
+                                    <div
+                                        className={'action action-delete'}
+                                        onClick={() => handleRemoveClick(id)}
+                                    >
+                                        <FontAwesomeIcon icon={faTrash} className="icon-inline-left-l"/>
+                                        {'Remove Friend'}
+                                    </div>
+                                </div>
+                            </Popover.Body>
+                        }>
+                        <div className={'Wbb-item-actions'}
+                             onClick={(e) => e.stopPropagation()}>
+                            <FontAwesomeIcon icon={faEllipsisVertical} className=""/>
+                        </div>
+                    </OverlayTrigger>
+                }
 
                 { is_request &&
                     <div className={'request-actions'}>

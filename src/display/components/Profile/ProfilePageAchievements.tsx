@@ -30,11 +30,6 @@ const ProfilePageAchievements: React.FC<ProfilePageAchievementsProps> = ({ userD
                 setIsLoading(true);
                 const achievementList = await userData.GetAchievements();
 
-                // Extract the warband_data objects (UserWarband instances)
-                // const warbandObjects: UserWarband[] = warbandList.map((entry: any) => entry.warband_data);
-
-                console.log('achievementList');
-                console.log(achievementList);
                 setAchievements(achievementList);
             } catch (error) {
                 console.error('Failed to load achievements:', error);

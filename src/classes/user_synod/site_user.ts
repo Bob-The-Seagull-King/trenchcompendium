@@ -301,6 +301,39 @@ class SiteUser {
     }
 
     /**
+     * Removes a friend for this user
+     * @param user_id
+     */
+    public async removeFriend ( user_id: number ): Promise<boolean> {
+        const token = localStorage.getItem('jwtToken') // @TODO: This is probably not the best way to do it
+
+        const res = await fetch(`${SYNOD.URL}/wp-json/synod/v1/friends/remove`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                user_id: user_id,
+            })
+        })
+
+        if (!res.ok) {
+            throw new Error('Failed to remove friend')
+        }
+
+        const data = await res.json()
+
+        if( data.value ) {
+            return true;
+        } else {
+            return false;
+        }
+
+        return false;
+    }
+
+    /**
      * Returns an array of warbands for this user
      * - to show on the profile page for example
      *
