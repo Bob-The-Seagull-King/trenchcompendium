@@ -314,6 +314,43 @@ class SiteUser {
 
         return []
     }
+
+    /**
+     * Returns an array of achievments for this user
+     * - to show on the profile page for example
+     *
+     * - duplicate of user_public
+     * @constructor
+     */
+    public async GetAchievements () {
+
+        // @TODO
+        console.log(' @TODO: return the list of achievements for this user here. @site_user -> GetAchievements()')
+        console.log(this.Achievements);
+
+        /*
+        * return like this:
+        */
+        const achievements = [
+            {
+                "id": 84,
+                "name": "Friends with the Devil",
+                "description": "",
+                "image_id": 413,
+                "image_url": 'https://synod.trench-companion.com/wp-content/uploads/2025/06/friends_with_dev-300x300.png'
+            },
+            {
+                "id": 358,
+                "name": "The First Forging",
+                "description": "Created a warband",
+                "image_id": 421,
+                "image_url": 'https://synod.trench-companion.com/wp-content/uploads/2025/06/warband_creation_1-300x300.png'
+            }
+        ];
+
+
+        return achievements
+    }
 }
 
 export {ISiteUser, SiteUser}

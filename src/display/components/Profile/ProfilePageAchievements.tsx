@@ -4,62 +4,79 @@
 
 import React, { useEffect, useState } from 'react'
 import SynodImage from "../../../utility/SynodImage";
+import {SiteUser} from "../../../classes/user_synod/site_user";
+import {SiteUserPublic} from "../../../classes/user_synod/user_public";
+import LoadingOverlay from "../generics/Loading-Overlay";
+import {UserWarband} from "../../../classes/saveitems/Warband/UserWarband";
+import {IAchievement} from "../../../classes/user_synod/user_achievements";
+import {OverlayTrigger, Popover} from "react-bootstrap";
 
 interface ProfilePageAchievementsProps {
-    userId?: number
+    userData: SiteUser | SiteUserPublic | null;
 }
 
-const ProfilePageAchievements: React.FC<ProfilePageAchievementsProps> = ({ userId }) => {
+const ProfilePageAchievements: React.FC<ProfilePageAchievementsProps> = ({ userData }) => {
 
-    // @TODO: These are just test - replace with synod data
-    const achievements = [
-        {
-            id: 1,
-            name: 'First Blood',
-            description: 'Has the first blood lorem ipsum dolor sit amet constetutor a 1000 times',
-            image: 251
-        },
-        {
-            id: 2,
-            name: 'Veteran Fighter',
-            description: 'Has the first blood lorem ipsum dolor sit amet constetutor a 1000 times',
-            image: 252
-        },
-        {
-            id: 3,
-            name: 'Master Strategist',
-            description: 'Has the first blood lorem ipsum dolor sit amet constetutor a 1000 times',
-            image: 253
-        },
-        {
-            id: 4,
-            name: 'Warlord of the Wastes',
-            description: 'Has the first blood lorem ipsum dolor sit amet constetutor a 1000 times',
-            image: 254
-        },
-        {
-            id: 5,
-            name: 'Unbroken',
-            description: 'Has the first blood lorem ipsum dolor sit amet constetutor a 1000 times',
-            image: 255
-        },
-        {
-            id: 6,
-            name: 'Collector of Relics',
-            description: 'Has the first blood lorem ipsum dolor sit amet constetutor a 1000 times',
-            image: 254
+    const [achievements, setAchievements] = useState<IAchievement[]>([]);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
 
-        },
-        {
-            id: 7,
-            name: 'Champion of the Synod',
-            description: 'Has the first blood lorem ipsum dolor sit amet constetutor a 1000 times',
-            image: 253
-        }
-    ]
 
-    // @TODO: if no userData is set -> get achievements for user
+    useEffect(() => {
+        const loadAchievements = async () => {
 
+            if (!userData || typeof userData.GetAchievements !== 'function') return;
+
+            try {
+                setIsLoading(true);
+                const achievementList = await userData.GetAchievements();
+
+                // Extract the warband_data objects (UserWarband instances)
+                // const warbandObjects: UserWarband[] = warbandList.map((entry: any) => entry.warband_data);
+
+                console.log('achievementList');
+                console.log(achievementList);
+                setAchievements(achievementList);
+            } catch (error) {
+                console.error('Failed to load achievements:', error);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        loadAchievements();
+    }, [userData]);
+
+
+    if (isLoading) {
+        return (
+            <div className="ProfilePageAchievements">
+                <div className={'profile-card'}>
+                    <div className={'profile-card-head'}>
+                        {'Achievements'}
+                    </div>
+
+                    <div className={'profile-card-content'}>
+                        <div className={'profile-card-loading'}>
+                            <LoadingOverlay
+                                message={'Loading Achievements'}
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+
+    const renderPopover = (achievement: IAchievement) => (
+        <Popover id={`popover-${achievement.id}`}>
+            <div className="popover-headline">
+                {achievement.name}
+            </div>
+            <div className="popover-content">
+                {achievement.description || 'No description available.'}
+            </div>
+        </Popover>
+    )
 
     return (
         <div className="ProfilePageAchievements">
@@ -71,13 +88,21 @@ const ProfilePageAchievements: React.FC<ProfilePageAchievementsProps> = ({ userI
                 <div className={'profile-card-content'}>
                     <ul className={'achievement-list'}>
                         {achievements.map((achievement) => (
-                            <li key={achievement.id} className={'achievement'}>
-                                <SynodImage imageId={achievement.image}
-                                            className={'achievement-image'}
-                                />
-                                {/* @TODO: Add popover with Name and Description */}
-                                {/*{achievement.name}*/}
-                            </li>
+                            <OverlayTrigger
+                                key={achievement.id}
+                                trigger="click"
+                                placement="top"
+                                overlay={renderPopover(achievement)}
+                                rootClose // closes the popover when clicking outside
+                            >
+                                <li className={'achievement'} style={{ cursor: 'pointer' }}>
+                                    <img
+                                        src={achievement.image_url}
+                                        alt={achievement.name}
+                                        className={'achievement-image'}
+                                    />
+                                </li>
+                            </OverlayTrigger>
                         ))}
                     </ul>
                 </div>

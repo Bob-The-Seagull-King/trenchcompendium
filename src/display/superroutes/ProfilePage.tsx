@@ -343,7 +343,9 @@ const ProfilePage: React.FC = () => {
                         </div>
 
                         <div className={'hide-lg-up'}>
-                            <ProfilePageAchievements userId={parseInt(id)}/>
+                            <ProfilePageAchievements
+                                userData={userData}
+                            />
 
                             <ProfilePageFriends
                                 key={keyvar}
@@ -366,7 +368,9 @@ const ProfilePage: React.FC = () => {
 
                     <div className={'col-12 col-lg-5'}>
                         <div className={'hide-lg-down'}>
-                            <ProfilePageAchievements userId={parseInt(id)}/>
+                            <ProfilePageAchievements
+                                userData={userData}
+                            />
 
                             <ProfilePageFriends
                                 key={keyvar}

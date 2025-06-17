@@ -5,7 +5,8 @@ interface IAchievement {
     id: number,
     name: string,
     description: string,
-    image: number
+    image_url: string,
+    image_id: number
 }
 
 export {IAchievement}
