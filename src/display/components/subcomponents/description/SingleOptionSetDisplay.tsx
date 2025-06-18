@@ -18,7 +18,7 @@ const SingleOptionSetDisplay = (props: any) => {
 
     function updateItem(value: string) {
         for (let i = 0; i < OptionSet.Selections.length; i++) {
-            if (OptionSet.Selections[i].id == Number.parseInt(value)) {
+            if (OptionSet.Selections[i].id == (value)) {
                 setSelectedModel(OptionSet.Selections[i])
             }
         }
