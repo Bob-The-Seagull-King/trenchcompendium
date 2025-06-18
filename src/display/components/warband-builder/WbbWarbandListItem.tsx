@@ -7,6 +7,7 @@ import { UserWarband } from '../../../classes/saveitems/Warband/UserWarband';
 import { SumWarband, WarbandManager } from '../../../classes/saveitems/Warband/WarbandManager';
 import SynodImage from "../../../utility/SynodImage";
 import SynodFactionImage from "../../../utility/SynodFactionImage";
+import CustomNavLink from '../subcomponents/interactables/CustomNavLink';
 
 /**
  * This is a list item of a warband for the WBB overview page.
@@ -73,40 +74,50 @@ const WbbWarbandListItem: React.FC<WbbWarbandListItemProps> = ({ item, manager, 
 
     return (
         <div className={'col-12 col-lg-6'}>
-            <div className={'WbbWarbandListItem'} >
-                <div onClick={navigateToEdit} className={'warband-item-text-wrap'}>
-                    <div className={'item-name'}>
-                        {item.warband_data.Name}
+            <div className={'WbbWarbandListItem'}>
+                <CustomNavLink
+                    classes={'WbbWarbandListItem-link'}
+                    link={`/warband/edit/${item.id}`}
+                    runfunc={() => {
+                        navigate('/warband/edit/' + item.id);
+                    }}
+                >
+                    <div className={'warband-item-text-wrap'}>
+                        <div className={'item-name'}>
+                            {item.warband_data.Name}
+                        </div>
+
+                        <div className={'item-faction'}>
+                            {(item.warband_data.Faction.MyFaction)? item.warband_data.Faction.MyFaction.SelfDynamicProperty.OptionChoice.Name : ""}
+                        </div>
+
+                        <div className={'item-cost'}>
+                            {item.warband_data.Ducats + " Ducats" + " | " + item.warband_data.Glory + " Glory" }
+                        </div>
+
+                        <div className={'item-campaign'}>
+                            {item.warband_data.GetCampaignName()}
+                            <br />
+                            {'Campaign Cycle: ' + item.warband_data.GetCampaignCycleMax()}
+                        </div>
                     </div>
 
-                    <div className={'item-faction'}>
-                        {(item.warband_data.Faction.MyFaction)? item.warband_data.Faction.MyFaction.SelfDynamicProperty.OptionChoice.Name : ""}
+                    <div className={'warband-item-image-wrap'}>
+                        <SynodFactionImage
+                            factionSlug={(item.warband_data.Faction.MyFaction)? item.warband_data.Faction.MyFaction.SelfDynamicProperty.OptionChoice.ID : ""}
+                            className={'warband-item-image'}
+                            size={'large'}
+                        />
                     </div>
-
-                    <div className={'item-cost'}>
-                        {item.warband_data.Ducats + " Ducats" + " | " + item.warband_data.Glory + " Glory" }
-                    </div>
-
-                    <div className={'item-campaign'}>
-                        {item.warband_data.GetCampaignName()}
-                        <br />
-                        {'Campaign Cycle: ' + item.warband_data.GetCampaignCycleMax()}
-                    </div>
-                </div>
-
-                <div className={'warband-item-image-wrap'}>
-                    <SynodFactionImage
-                        factionSlug={(item.warband_data.Faction.MyFaction)? item.warband_data.Faction.MyFaction.SelfDynamicProperty.OptionChoice.ID : ""}
-                        className={'warband-item-image'}
-                        size={'large'}
-                    />
-                </div>
+                </CustomNavLink>
 
                 <OverlayTrigger
                     trigger="click"
                     placement="left"
                     show={showPopover}
-                    onToggle={() => setShowPopover(!showPopover)}
+                    onToggle={(e) => {
+                        setShowPopover(!showPopover)}
+                    }
                     rootClose={true} // closes when clicking outside
                     overlay={
                         <Popover.Body className="popover Wbb-item-actions-popover">
@@ -172,7 +183,6 @@ const WbbWarbandListItem: React.FC<WbbWarbandListItemProps> = ({ item, manager, 
                 </Modal>
             </div>
         </div>
-
     );
 };
 
