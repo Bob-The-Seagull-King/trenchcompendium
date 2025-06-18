@@ -6,6 +6,7 @@ import {useNavigate} from "react-router-dom";
 import CustomNavLink from "../subcomponents/interactables/CustomNavLink";
 import SynodImage from "../../../utility/SynodImage";
 import {UserWarband} from "../../../classes/saveitems/Warband/UserWarband";
+import SynodFactionImage from "../../../utility/SynodFactionImage";
 
 interface WarbandListEntryProps {
     warband: UserWarband
@@ -27,8 +28,10 @@ const WarbandListEntry: React.FC<WarbandListEntryProps> = ({
                     navigate(`/warband/${warband.GetId()}`)
                 }}>
 
-                <img src={warband.GetImageThumbnailURL()} alt={warband.GetWarbandName() + ' Image'} className={'WarbandListEntry-image'} />
-
+                <SynodFactionImage
+                    className={'WarbandListEntry-image'}
+                    factionSlug={warband.GetFactionSlug()}
+                />
             </CustomNavLink>
 
             <div className={'WarbandListEntry-text'}>
@@ -44,6 +47,7 @@ const WarbandListEntry: React.FC<WarbandListEntryProps> = ({
                 <div className={'warband-faction'}>
                     {warband.GetFactionName()}
                 </div>
+
                 <div className={'warband-value'}>
                     {warband.GetCostDucatsTotal() + ' Ductas'}
                     {' | '}
