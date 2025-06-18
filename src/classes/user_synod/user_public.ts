@@ -178,7 +178,11 @@ class SiteUserPublic {
      * @param user_id
      * @constructor
      */
-    public async HasUserFriendRequestReceived ( requester_id: number ): Promise<boolean> {
+    public async HasUserFriendRequestReceived ( user_id: number ): Promise<boolean> {
+
+        if( this.GetUserId() === user_id) {
+            return false; // cant request yourself
+        }
 
         const token = localStorage.getItem('jwtToken') // @TODO: This is probably not the best way to do it
 
@@ -189,7 +193,7 @@ class SiteUserPublic {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                requester_id: requester_id,
+                requester_id: user_id,
                 requestee_id: this.GetUserId()
             })
         })

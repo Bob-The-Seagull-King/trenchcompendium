@@ -129,7 +129,8 @@ const ProfilePage: React.FC = () => {
     const [hasReceivedRequest, setHasReceivedRequest] = useState<boolean | null>(null);
     useEffect(() => {
         async function checkFriendshipStatus() {
-            if (userData && userId) {
+            if (userData && userId && ( userData.ID !== userId )) {
+
                 if ('IsUserFriend' in userData && typeof userData.IsUserFriend === 'function') {
                     const isFriend = await userData.IsUserFriend(userId);
                     setIsFriend(isFriend);

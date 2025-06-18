@@ -228,6 +228,9 @@ class SiteUser {
      */
     public async HasUserFriendRequestReceived (user_id: number): Promise<boolean> {
 
+        if( this.GetUserId() === user_id) {
+            return false; // cant request yourself
+        }
         console.log('@TODO: HasUserFriendRequestReceived in site_user - which is deprecated (probably)');
 
         for (let i = 0; i < this.Requests.length; i++) {
