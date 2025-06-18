@@ -456,7 +456,6 @@ class UserWarband extends DynamicContextObject {
         for (let i = 0; i < this.Equipment.length; i++) {
             TotalDucatCost += this.Equipment[i].GetTotalDucats();
         }
-        console.log(TotalDucatCost);
         return TotalDucatCost
     }
 

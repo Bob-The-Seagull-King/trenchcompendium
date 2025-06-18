@@ -62,7 +62,6 @@ class WarbandProperty extends DynamicContextObject  {
             this.SelfDynamicProperty = new DynamicOptionContextObject(base_obj.SelfData, base_obj, this);
             await this.SelfDynamicProperty.BuildSelections();
         }
-
         if (selection_vals != null) {
             for (let i = 0; i < this.SelfDynamicProperty.Selections.length; i++) {
                 const CurSelection = this.SelfDynamicProperty.Selections[i];

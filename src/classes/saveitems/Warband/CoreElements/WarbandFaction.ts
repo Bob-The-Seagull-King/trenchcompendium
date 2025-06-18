@@ -67,7 +67,6 @@ class WarbandFaction extends DynamicContextObject {
                 }
             }
         }
-        console.log(this);
     }
 
     public ConvertToInterface() {
@@ -188,7 +187,6 @@ class WarbandFaction extends DynamicContextObject {
 
         for (let i = 0; i < this.MyFactionRules.length; i++) {
             const FactionRule : Rule = this.MyFactionRules[i].SelfDynamicProperty.OptionChoice as Rule;
-            console.log
             if (FactionRule.ContextKeys["warband_wide"] || FactionRule.ContextKeys["add_to_warband"]) {
                 PropertyList.push(this.MyFactionRules[i])
             }
