@@ -4,7 +4,6 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faChevronLeft, faFloppyDisk, faPen} from "@fortawesome/free-solid-svg-icons";
 import {useWarband} from "../../../context/WarbandContext";
 import WbbModalEditFighterStatus from "./modals/fighter/WbbEditFighterStatus";
-import WbbEditGoeticSelectionModal from "./modals/warband/WbbEditGoeticSelectionModal";
 import WbbTextarea from "./WbbTextarea";
 import WbbOptionBox from "./WbbOptionBox";
 import WbbDetailViewCollapse from "./WbbDetailViewCollapse";
@@ -109,12 +108,12 @@ const WbbWarbandDetailView: React.FC<WbbWarbandDetailViewProps> = ({  onClose })
                                     onClick={() => setshowGoeticModal(true)}
                                 />
 
-                                <WbbEditGoeticSelectionModal
-                                    show={showGoeticModal}
-                                    onClose={() => setshowGoeticModal(false)}
-                                    currentGoetic={goeticDiscipline}
-                                    onSubmit={handleGoeticUpdate}
-                                />
+                                {/*<WbbEditGoeticSelectionModal*/}
+                                {/*    show={showGoeticModal}*/}
+                                {/*    onClose={() => setshowGoeticModal(false)}*/}
+                                {/*    currentGoetic={goeticDiscipline}*/}
+                                {/*    onSubmit={handleGoeticUpdate}*/}
+                                {/*/>*/}
                             </>
                         }
 
