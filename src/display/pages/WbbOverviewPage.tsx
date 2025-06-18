@@ -7,6 +7,7 @@ import { SumWarband, WarbandManager } from '../../classes/saveitems/Warband/Warb
 import CustomNavLink from '../components/subcomponents/interactables/CustomNavLink';
 import { UserWarband } from '../../classes/saveitems/Warband/UserWarband';
 import PageMetaInformation from "../components/generics/PageMetaInformation";
+import LoadingOverlay from "../components/generics/Loading-Overlay";
 
 
 /**
@@ -22,12 +23,15 @@ const WbbOverviewPage = (prop: any) => {
 
     const [allwarbands, setwarbands] = useState<SumWarband[]>([])
     const [keyvar, setkeyvar] = useState(0);
-    
+    const [isLoading, setisloading] = useState(false);
+
     useEffect(() => {
         async function SetWarbands() {
+            setisloading(true)
             await Manager.GetItemsAll();
             setwarbands(Manager.CurWarbands());
             setkeyvar((prev) => prev + 1);
+            setisloading(false)
         }
 
         SetWarbands();
@@ -45,6 +49,9 @@ const WbbOverviewPage = (prop: any) => {
         navigate('/warband/new');
 
     };
+
+    console.log('allwarbands');
+    console.log(allwarbands);
 
     return (
         <div className={'WbbOverviewPage'}>
@@ -73,22 +80,34 @@ const WbbOverviewPage = (prop: any) => {
                 </div>
 
                 <div className={'row'} key={keyvar}>
-                    {allwarbands.map(item => (
-                        <WbbWarbandListItem key={item.warband_data.ID} item={item} manager={Manager} parentfunc={updateSelf}/>
-                    ))}
+                    {isLoading ? (
+                        <div className={'warbands-loading-wrap'}>
+                            <LoadingOverlay
+                                message={'Loading your warbands'}
+                            />
+                        </div>
+                    ) : (
+                        <>
+                            {allwarbands.map(item => (
+                                <WbbWarbandListItem key={item.warband_data.ID} item={item} manager={Manager} parentfunc={updateSelf}/>
+                            ))}
+                        </>
+                    )}
 
-                    <div className={'col-12 col-lg-6'}>
-                        <CustomNavLink
-                            runfunc={handleCreateNew}
-                            link={'/warband/new'}
-                            classes={'WbbWarbandListItem-new'}
-                        >
-                            <div className={'WbbWarbandListItem-new-inner'}>
-                                <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
-                                {'New Warband'}
-                            </div>
-                        </CustomNavLink>
-                    </div>
+                    {!isLoading &&
+                        <div className={'col-12 col-lg-6'}>
+                            <CustomNavLink
+                                runfunc={handleCreateNew}
+                                link={'/warband/new'}
+                                classes={'WbbWarbandListItem-new'}
+                            >
+                                <div className={'WbbWarbandListItem-new-inner'}>
+                                    <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
+                                    {'New Warband'}
+                                </div>
+                            </CustomNavLink>
+                        </div>
+                    }
                 </div>
             </div>
         </div>
