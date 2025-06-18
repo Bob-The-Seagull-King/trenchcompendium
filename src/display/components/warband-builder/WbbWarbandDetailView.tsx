@@ -99,9 +99,10 @@ const WbbWarbandDetailView: React.FC<WbbWarbandDetailViewProps> = ({  onClose })
                         {warband.warband_data.HasGoeticOptions() &&
                             <>
                                 {/* @TODO
-                          * - hide for all campaign Rounds but the first
-                          * - hide in play mode
-                        */}
+                                      * - hide for all campaign Rounds but the first
+                                      * - hide in play mode
+                                */}
+                                
                                 <WbbOptionBox
                                     title={'Seven Deadly Sins'}
                                     value={goeticDiscipline}
