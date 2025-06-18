@@ -319,10 +319,10 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                                     </div>
                                 </div>
 
-                                <WbbFighterAdds            
-                                    showelite={showAddFighterEliteModal}
-                                    showtroop={showAddFighterTroopModal}
-                                    showmercenary={showAddFighterMercenaryModal}
+                                <WbbFighterAdds
+                                    showAddFighterEliteModal={showAddFighterEliteModal}
+                                    showAddFighterTroopModal={showAddFighterTroopModal}
+                                    showAddFighterMercenaryModal={showAddFighterMercenaryModal}
                                     onCloseMercenary={() => setShowAddFighterMercenaryModal(false)}
                                     onCloseElite={() => setShowAddFighterEliteModal(false)}
                                     onCloseTroop={() => setShowAddFighterTroopModal(false)}

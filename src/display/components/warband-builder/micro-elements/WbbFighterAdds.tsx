@@ -8,15 +8,22 @@ import { ToolsController } from '../../../../classes/_high_level_controllers/Too
 
 
 interface WbbModalAddFighterEliteProps {
-    showelite: boolean;
-    showtroop: boolean;
-    showmercenary: boolean;
+    showAddFighterEliteModal: boolean;
+    showAddFighterTroopModal: boolean;
+    showAddFighterMercenaryModal: boolean;
     onCloseTroop: () => void;
     onCloseElite: () => void;
     onCloseMercenary: () => void;
 }
 
-const WbbFighterAdds : React.FC<WbbModalAddFighterEliteProps> = ({ showelite, showtroop, showmercenary, onCloseTroop, onCloseElite, onCloseMercenary }) => {
+const WbbFighterAdds : React.FC<WbbModalAddFighterEliteProps> = ({
+                                                                     showAddFighterEliteModal,
+                                                                     showAddFighterTroopModal,
+                                                                     showAddFighterMercenaryModal,
+                                                                     onCloseTroop,
+                                                                     onCloseElite,
+                                                                     onCloseMercenary
+}) => {
 
     const { warband, updateKey, reloadDisplay } = useWarband();
 
@@ -32,19 +39,20 @@ const WbbFighterAdds : React.FC<WbbModalAddFighterEliteProps> = ({ showelite, sh
     };
     return (
         <>
-            
             <WbbModalAddFighterTroop
-                show={showtroop}
+                show={showAddFighterTroopModal}
                 onClose={() => onCloseTroop()}
                 onSubmit={handleFighterSubmit}
             />
+
             <WbbModalAddFighterElite
-                show={showelite}
+                show={showAddFighterEliteModal}
                 onClose={() => onCloseElite()}
                 onSubmit={handleFighterSubmit}
             />
+
             <WbbModalAddFighterMercenary
-                show={showmercenary}
+                show={showAddFighterMercenaryModal}
                 onClose={() => onCloseMercenary()}
                 onSubmit={handleFighterSubmit}
             />
