@@ -7,6 +7,7 @@ import WbbModalEditFighterStatus from "./modals/fighter/WbbEditFighterStatus";
 import WbbTextarea from "./WbbTextarea";
 import WbbOptionBox from "./WbbOptionBox";
 import WbbDetailViewCollapse from "./WbbDetailViewCollapse";
+import WbbEditGoeticSelectionModal from "./modals/warband/WbbEditGoeticSelectionModal";
 
 interface WbbWarbandDetailViewProps {
     onClose: () => void;
@@ -108,12 +109,12 @@ const WbbWarbandDetailView: React.FC<WbbWarbandDetailViewProps> = ({  onClose })
                                     onClick={() => setshowGoeticModal(true)}
                                 />
 
-                                {/*<WbbEditGoeticSelectionModal*/}
-                                {/*    show={showGoeticModal}*/}
-                                {/*    onClose={() => setshowGoeticModal(false)}*/}
-                                {/*    currentGoetic={goeticDiscipline}*/}
-                                {/*    onSubmit={handleGoeticUpdate}*/}
-                                {/*/>*/}
+                                <WbbEditGoeticSelectionModal
+                                    show={showGoeticModal}
+                                    onClose={() => setshowGoeticModal(false)}
+                                    currentGoetic={goeticDiscipline}
+                                    onSubmit={handleGoeticUpdate}
+                                />
                             </>
                         }
 

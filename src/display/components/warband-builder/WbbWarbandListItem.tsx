@@ -48,13 +48,6 @@ const WbbWarbandListItem: React.FC<WbbWarbandListItemProps> = ({ item, manager, 
     };
 
     /**
-     * navigates to edit view
-     */
-    const navigateToEdit = () => {
-        navigate('/warband/edit/' + item.id);
-    };
-
-    /**
      *
      * Handles the confirmation to actually delete the warband.
      */

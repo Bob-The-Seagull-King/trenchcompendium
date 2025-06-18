@@ -135,6 +135,7 @@ const ProfilePage: React.FC = () => {
                     const isFriend = await userData.IsUserFriend(userId);
                     setIsFriend(isFriend);
                 }
+
                 if ('HasUserFriendRequestReceived' in userData && typeof userData.HasUserFriendRequestReceived === 'function') {
                     const hasRequest = await userData.HasUserFriendRequestReceived(userId);
                     setHasReceivedRequest(hasRequest);
