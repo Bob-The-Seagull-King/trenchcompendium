@@ -192,16 +192,16 @@ const ProfilePageFriends: React.FC<ProfilePageFriendsProps> = ({
                             <ul className={'friends-list friends-list_requests'}>
                                 {friendRequests.map((friend) => (
                                     <li key={friend.id} className={'friend'}>
-                                            <UserListEntry
-                                                id={friend.id}
-                                                username={friend.nickname}
-                                                status={friend.status}
-                                                pfp_url={friend.profile_picture_url}
-                                                is_request={true}
-                                                onAccept={handleAccept}
-                                                onDecline={handleDecline}
-                                            />
-                                        </li>
+                                        <UserListEntry
+                                            id={friend.id}
+                                            username={friend.nickname}
+                                            status={friend.status}
+                                            pfp_url={friend.profile_picture_url}
+                                            is_request={true}
+                                            onAccept={handleAccept}
+                                            onDecline={handleDecline}
+                                        />
+                                    </li>
                                 ))}
                             </ul>
 

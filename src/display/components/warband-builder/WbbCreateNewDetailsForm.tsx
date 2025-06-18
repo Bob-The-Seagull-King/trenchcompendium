@@ -34,7 +34,12 @@ const WbbCreateNewDetailsForm: React.FC<{
         <div className={'WbbCreateNewDetailsForm'}>
             <div className={'row'}>
                 <div className={'col-12 col-xl-5'}>
-                    <div className={'warband-options-wrap'}>
+                    <form className={'warband-options-wrap'}
+                          onSubmit={(e) => {
+                              e.preventDefault();
+                              handleSubmit();
+                          }}
+                    >
                         <h2 className={'mb-3'}>{chosenfaction.Name}</h2>
                         <label className="form-label">Warband Name</label>
                         <input
@@ -49,15 +54,14 @@ const WbbCreateNewDetailsForm: React.FC<{
                         </small>
                         </p>
 
-                        <button onClick={handleSubmit}
+                        <button
                                 className="btn btn-primary"
                                 disabled={warbandName.trim() === ''}
-
                         >
                             <FontAwesomeIcon icon={faPlus} className={'icon-inline-left-l'}/>
                             Create Warband
                         </button>
-                    </div>
+                    </form>
                 </div>
 
                 <div className={'col-12 col-xl-7'}>
