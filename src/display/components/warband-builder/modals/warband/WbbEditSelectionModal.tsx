@@ -2,34 +2,35 @@ import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import {faXmark} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { IChoice } from '../../../../../classes/options/StaticOption';
+import { SelectedOption } from '../../../../../classes/options/SelectedOption';
 
-interface WbbEditGoeticSelectionProps {
+interface WbbEditSelectionProps {
     show: boolean;
     onClose: () => void;
-    currentGoetic: string;
-    onSubmit: (newGoetic: string) => void;
+    currentChoice: IChoice | null;
+    onSubmit: (newGoetic: IChoice | null) => void;
+    choiceparent : SelectedOption
 }
 
-const WbbEditGoeticSelectionModal: React.FC<WbbEditGoeticSelectionProps> = ({
+const WbbEditSelectionModal: React.FC<WbbEditSelectionProps> = ({
                                                                                 show,
                                                                                 onClose,
-                                                                                currentGoetic,
-                                                                                onSubmit
+                                                                                currentChoice,
+                                                                                onSubmit,
+                                                                                choiceparent
                                                                             }) => {
-    const [selectedGoetic, setSelectedGoetic] = useState<string>(currentGoetic);
-
-    const goeticDisciplines = ['Wrath', 'Lust', 'Greed', 'Sloth'];
+    const [selectedGoetic, setSelectedGoetic] = useState<IChoice | null>(currentChoice);
 
     const handleSubmit = () => {
         onSubmit(selectedGoetic);
-        console.log('@TODO: handle change of goetic');
         onClose();
     };
 
     return (
         <Modal show={show} onHide={onClose} className="WbbEditGoeticSelectionModal" centered>
             <Modal.Header closeButton={false}>
-                <Modal.Title>Edit Goetic Discipline</Modal.Title>
+                <Modal.Title>Edit Option</Modal.Title>
 
                 <FontAwesomeIcon
                     icon={faXmark}
@@ -40,16 +41,16 @@ const WbbEditGoeticSelectionModal: React.FC<WbbEditGoeticSelectionProps> = ({
             </Modal.Header>
 
             <Modal.Body>
-                <h6>Select Goetic Discipline</h6>
+                <h6>Select Option</h6>
 
                 <div className={'goetic-selection-wrap'}>
-                    {goeticDisciplines.map((discipline) => (
+                    {choiceparent.Option.Selections.map((discipline) => (
                         <div
-                            key={discipline}
+                            key={discipline.id + discipline.display_str}
                             className={`select-item ${selectedGoetic === discipline ? 'selected' : ''}`}
                             onClick={() => setSelectedGoetic(discipline)}
                         >
-                            {discipline}
+                            {discipline.display_str}
                         </div>
                     ))}
                 </div>
@@ -59,7 +60,7 @@ const WbbEditGoeticSelectionModal: React.FC<WbbEditGoeticSelectionProps> = ({
                 <Button variant="secondary" onClick={onClose}>
                     Cancel
                 </Button>
-                <Button variant="primary" onClick={handleSubmit} disabled={selectedGoetic === currentGoetic}>
+                <Button variant="primary" onClick={handleSubmit} disabled={selectedGoetic === currentChoice}>
                     Update Discipline
                 </Button>
             </Modal.Footer>
@@ -67,4 +68,4 @@ const WbbEditGoeticSelectionModal: React.FC<WbbEditGoeticSelectionProps> = ({
     );
 };
 
-export default WbbEditGoeticSelectionModal;
+export default WbbEditSelectionModal;

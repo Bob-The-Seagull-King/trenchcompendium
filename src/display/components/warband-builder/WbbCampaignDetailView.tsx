@@ -5,7 +5,6 @@ import {faChevronLeft, faDownload, faInfoCircle} from "@fortawesome/free-solid-s
 import {useWarband} from "../../../context/WarbandContext";
 import WbbTextarea from "./WbbTextarea";
 import WbbOptionBox from "./WbbOptionBox";
-import WbbEditGoeticSelectionModal from "./modals/warband/WbbEditGoeticSelectionModal";
 import WbbEditVictoryPointsModal from "./modals/warband/WbbEditVictoryPointsModal";
 import WbbEditPatronSelectionModal from "./modals/warband/WbbEditPatronSelectionModal";
 import WbbEditCampaignCycleModal from "./modals/warband/WbbEditCampaignCycleModal";

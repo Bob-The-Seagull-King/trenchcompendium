@@ -4,10 +4,10 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faChevronLeft, faFloppyDisk, faPen} from "@fortawesome/free-solid-svg-icons";
 import {useWarband} from "../../../context/WarbandContext";
 import WbbModalEditFighterStatus from "./modals/fighter/WbbEditFighterStatus";
-import WbbEditGoeticSelectionModal from "./modals/warband/WbbEditGoeticSelectionModal";
 import WbbTextarea from "./WbbTextarea";
 import WbbOptionBox from "./WbbOptionBox";
 import WbbDetailViewCollapse from "./WbbDetailViewCollapse";
+import WbbEditSelectionModal from './modals/warband/WbbEditSelectionModal';
 
 interface WbbWarbandDetailViewProps {
     onClose: () => void;
@@ -95,27 +95,6 @@ const WbbWarbandDetailView: React.FC<WbbWarbandDetailViewProps> = ({  onClose })
                     {/* @TODO: only show if warband has options */}
                     <WbbDetailViewCollapse title="Warband Options" initiallyOpen={true}>
 
-                        {/* Goetic Options */}
-                        {warband.warband_data.HasGoeticOptions() &&
-                            <>
-                                {/* @TODO
-                          * - hide for all campaign Rounds but the first
-                          * - hide in play mode
-                        */}
-                                <WbbOptionBox
-                                    title={'Seven Deadly Sins'}
-                                    value={goeticDiscipline}
-                                    onClick={() => setshowGoeticModal(true)}
-                                />
-
-                                <WbbEditGoeticSelectionModal
-                                    show={showGoeticModal}
-                                    onClose={() => setshowGoeticModal(false)}
-                                    currentGoetic={goeticDiscipline}
-                                    onSubmit={handleGoeticUpdate}
-                                />
-                            </>
-                        }
 
                         {/*@TODO: add options to this area */}
                         Warband level options go here.
