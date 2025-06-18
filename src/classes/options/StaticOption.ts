@@ -16,7 +16,7 @@ interface IStaticOption {
 }
 
 interface IChoice {
-    id : number, // ID of the choice (unique only to the parent object)
+    id : string, // ID of the choice (unique only to the parent object)
     value : any, // Unaltered value of the choice
     display_str : string // String representation of the choice for lists
 }
@@ -79,7 +79,7 @@ class StaticOption {
      * choices.
      */
     public GetChoiceIDs() {
-        const id_arr : number[] = []
+        const id_arr : string[] = []
 
         for (let i = 0; i < this.Selections.length; i++) {
             id_arr.push(this.Selections[i].id)
@@ -132,7 +132,7 @@ class StaticOptionTypeList extends StaticOption {
             const value = OptionCallTable[val_key].genericReturn(this, this.OptionContext[val_key], this.PresetOptions[i])
 
             NewSelections.push({
-                id: id_num,
+                id: "preset_option" + id_num.toString(),
                 value: this.PresetOptions[i],
                 display_str : value
             })
@@ -146,8 +146,15 @@ class StaticOptionTypeList extends StaticOption {
                 const val_key = Object.keys(this.OptionContext)[0]
                 const value = OptionCallTable[val_key].genericResultReturn(this, this.OptionContext[val_key], results[i])
 
+                let new_id = ""
+                if (results[i].id) {
+                    new_id = results[i].id
+                } else {
+                    new_id = "found_option"+id_num.toString();
+                }
+
                 NewSelections.push({
-                    id: id_num,
+                    id: new_id,
                     value: results[i],
                     display_str : value
                 })
@@ -209,7 +216,7 @@ class StaticOptionContextObjectList extends StaticOption {
                 for (let i = 0; i < OptionContextList.length; i++) {
                     if (OptionContextList[i] != this.MyStaticObject) {
                         NewSelections.push({
-                            id: i,
+                            id: OptionContextList[i].ID,
                             value: OptionContextList[i],
                             display_str : OptionContextList[i].GetTrueName()
                         })
