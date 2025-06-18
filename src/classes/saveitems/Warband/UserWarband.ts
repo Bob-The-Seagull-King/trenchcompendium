@@ -203,7 +203,7 @@ class UserWarband extends DynamicContextObject {
         return 'The Iron Sultanate';
     }
 
-    /** @TODO
+    /** 
      * Returns the Ducats Value of the Warband Cost as int (without stash)
      */
     public GetCostDucats() {
@@ -211,7 +211,7 @@ class UserWarband extends DynamicContextObject {
     }
 
     /**
-     * @TODO:
+     * 
      * Returns the total Ducats Value including stash as int
      * @constructor
      */
@@ -219,14 +219,14 @@ class UserWarband extends DynamicContextObject {
         return this.GetDucatCost() + this.GetDucatCostStash();
     }
 
-    /** @TODO
+    /**
      * Returns the Glory Value of the Warband Cost as int (without stash)
      */
     public GetCostGlory() {
         return this.GetGloryCost();
     }
 
-    /** @TODO
+    /**
      * Returns the Glory Value of the Warband including stash as int
      */
     public GetCostGloryTotal() {
@@ -234,30 +234,30 @@ class UserWarband extends DynamicContextObject {
     }
 
     /**
-     * @TODO
+     * 
      * Returns bool - Does the warband have Troops?
      */
     public HasTroops () {
-        return true;
+        return this.GetFighters().filter((item) => (!item.model.IsElite() && !item.model.IsMercenary())).length > 0;
     }
 
     /**
-     * @TODO
+     *
      * Returns bool - Does the warband have Elites?
      */
     public HasElites () {
-        return true;
+        return this.GetFighters().filter((item) => (item.model.IsElite())).length > 0;
     }
 
     /**
-     * @TODO
+     *
      * Returns bool - Does the warband have mercenaries?
      */
     public HasMercenaries () {
-        return false;
+        return this.GetFighters().filter((item) => (item.model.IsMercenary())).length > 0;
     }
 
-    /** @TODO
+    /**
      * Get the Fighters for this warbands
      */
     public GetFighters() {
@@ -294,7 +294,7 @@ class UserWarband extends DynamicContextObject {
      * WBB Actions
      */
 
-    /** @TODO
+    /**
      * Adds a fighter to the Roster
      * @param fighter
      */
@@ -316,10 +316,7 @@ class UserWarband extends DynamicContextObject {
             this.Models.push(NewPurchase);
         }
     }
-    /** @TODO
-     * Adds a fighter to the Roster
-     * @param fighter
-     */
+    
     public async AddStash ( stash: FactionEquipmentRelationship ) {
         const Equipment : WarbandEquipment = await WarbandFactory.BuildWarbandEquipmentFromPurchase(stash, this);
         const NewPurchase : WarbandPurchase = new WarbandPurchase({
@@ -459,7 +456,6 @@ class UserWarband extends DynamicContextObject {
         for (let i = 0; i < this.Equipment.length; i++) {
             TotalDucatCost += this.Equipment[i].GetTotalDucats();
         }
-        console.log(TotalDucatCost);
         return TotalDucatCost
     }
 

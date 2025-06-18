@@ -28,7 +28,7 @@ const WbbWarbandListItem: React.FC<WbbWarbandListItemProps> = ({ item, manager, 
     const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
 
     /**
-     * @TODO
+     *
      * This copies this warband
      */
     async function handleCopy() {
@@ -54,7 +54,7 @@ const WbbWarbandListItem: React.FC<WbbWarbandListItemProps> = ({ item, manager, 
     };
 
     /**
-     * @TODO:
+     *
      * Handles the confirmation to actually delete the warband.
      */
     const handleConfirmDelete = () => {

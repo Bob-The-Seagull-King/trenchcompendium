@@ -29,6 +29,17 @@ class SelectedOption {
         }
     }
 
+    public GetSelectedTitle() {
+        if (this.SelectedChoice != null) {
+            return this.SelectedChoice.display_str;
+        }
+        return "";
+    }
+
+    public GetSelected() {
+        return this.SelectedChoice;
+    }
+
     /**
      * Given a specific id, set the current choice
      * to one of this object's Option's selections.
