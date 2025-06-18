@@ -2205,6 +2205,32 @@
         "options": []
     },
     {
+        "id": "ab_goetics_praetor_wrath",
+        "name": "Goetic Power",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {                   
+            "special_category_upgrades": {
+                "upgrades": [
+                    {
+                        "category": "goetic",
+                        "count": 1
+                    }
+                ]
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You may purchase up to two GOETIC Powers or Spells for the Praetor (only one if you command a Wrath Warband).",
+                "glossary": [
+                    {"val": "GOETIC", "id": "kw_goetic"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
         "id": "ab_goetics_sorcerer",
         "name": "Goetic Magic",
         "source": "core",
