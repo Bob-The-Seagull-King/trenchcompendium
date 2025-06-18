@@ -5,7 +5,7 @@ import { UserWarband } from '../../../classes/saveitems/Warband/UserWarband';
 import { Faction } from '../../../classes/feature/faction/Faction';
 import SynodFactionImage from "../../../utility/SynodFactionImage";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faChevronLeft, faPlus} from "@fortawesome/free-solid-svg-icons";
+import {faChevronLeft, faCircleNotch, faPlus} from "@fortawesome/free-solid-svg-icons";
 
 const WbbCreateNewDetailsForm: React.FC<{
     chosenfaction : Faction
@@ -15,6 +15,7 @@ const WbbCreateNewDetailsForm: React.FC<{
     const navigate = useNavigate();
 
     const [warbandName, setWarbandName] = useState('');
+    const [isLoading, setisLoading] = useState(false)
 
     async function handleSubmit() {
         const msg : null | SumWarband = await manager.NewItem(warbandName, chosenfaction.ID, {
@@ -37,7 +38,11 @@ const WbbCreateNewDetailsForm: React.FC<{
                     <form className={'warband-options-wrap'}
                           onSubmit={(e) => {
                               e.preventDefault();
-                              handleSubmit();
+                              setisLoading(true);
+
+                              if( !isLoading ) {
+                                  handleSubmit();
+                              }
                           }}
                     >
                         <h2 className={'mb-3'}>{chosenfaction.Name}</h2>
@@ -56,10 +61,20 @@ const WbbCreateNewDetailsForm: React.FC<{
 
                         <button
                                 className="btn btn-primary"
-                                disabled={warbandName.trim() === ''}
+                                disabled={warbandName.trim() === '' || isLoading }
                         >
-                            <FontAwesomeIcon icon={faPlus} className={'icon-inline-left-l'}/>
-                            Create Warband
+                            { isLoading ? (
+                                <>
+                                    <FontAwesomeIcon icon={faCircleNotch} className={'icon-inline-left-l fa-spin'}/>
+                                    {'Creating Warband'}
+                                </>
+                            ):(
+                                <>
+                                    <FontAwesomeIcon icon={faPlus} className={'icon-inline-left-l'}/>
+                                    {'Create Warband'}
+                                </>
+                            )}
+
                         </button>
                     </form>
                 </div>
