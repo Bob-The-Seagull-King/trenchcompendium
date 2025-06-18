@@ -39,11 +39,14 @@ const WbbCreateNewPage = (prop: any) => {
     const handleFactionSelect = (fac : Faction) => {
         setSelectedFaction(fac);
         setStep(2); // move to the next step
+        window.scrollTo({ top: 0});
     };
 
     const handleBack = () => {
         setStep(1); // allow going back
         setSelectedFaction(null);
+        window.scrollTo({ top: 0});
+
     };
 
 
