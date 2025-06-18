@@ -135,14 +135,6 @@ class UserWarband extends DynamicContextObject {
 
         return 1;
     }
-    /**
-     * Returns the thumbnail URL for this warband
-     * @constructor
-     */
-    public GetImageThumbnailURL () {
-
-        return '';
-    }
 
     public GetPatron() {
         return this.Faction.MyPatron;
