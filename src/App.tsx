@@ -62,6 +62,12 @@ const App: React.FC = () => {
         document.body.setAttribute("data-theme", theme);
     }, [theme]); // Runs whenever theme changes
 
+    /** Remove global loader */
+    useEffect(() => {
+        const loader = document.getElementById('global-loader');
+        if (loader) loader.remove();
+    }, []);
+
     return (
         <>
             <AuthProvider>
