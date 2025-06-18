@@ -6,7 +6,7 @@ import axios from 'axios';
 import {SYNOD} from "../../resources/api-constants";
 import LoadingOverlay from "../components/generics/Loading-Overlay";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faChevronLeft} from "@fortawesome/free-solid-svg-icons";
+import {faChevronLeft, faCircleNotch, faFloppyDisk} from "@fortawesome/free-solid-svg-icons";
 import {ToastContainer, toast} from "react-toastify";
 import { SynodDataCache } from '../../classes/_high_level_controllers/SynodDataCache';
 
@@ -30,6 +30,8 @@ const ProfileSettingsPage: React.FC = () => {
     const [loading, setLoading] = useState(true);
     const [message, setMessage] = useState('');
     const [error, setError] = useState('');
+
+    const [isLoadingSubmit, setisLoadingSubmit] = useState(false)
 
     function getID() {
         if (urlSplits.length > 2) {
@@ -73,6 +75,8 @@ const ProfileSettingsPage: React.FC = () => {
         nickname !== initialNickname || email !== initialEmail || password.trim() !== '';
 
     const handleSave = async () => {
+        setisLoadingSubmit(true);
+
         if (!authToken) return;
 
         setError('');
@@ -110,6 +114,8 @@ const ProfileSettingsPage: React.FC = () => {
         } catch (err: any) {
             setError(err.response?.data?.message || 'Failed to update settings.');
             toast.error('Error: Settings could not be saved.')
+        } finally {
+            setisLoadingSubmit(false);
         }
     };
 
@@ -155,8 +161,24 @@ const ProfileSettingsPage: React.FC = () => {
                         {message && <p style={{color: 'green'}}>{message}</p>}
 
                         {hasChanges && (
-                            <button className="btn btn-primary btn-save-setting" onClick={handleSave}>
-                                Save Settings
+                            <button className="btn btn-primary btn-save-setting"
+                                disabled={ isLoadingSubmit }
+                                onClick={ (e) => {
+                                    if(!isLoadingSubmit) {
+                                        handleSave();
+                                    }
+                            }}>
+                                {isLoadingSubmit ?(
+                                    <>
+                                        <FontAwesomeIcon icon={faCircleNotch} className={'icon-inline-left-l fa-spin'}/>
+                                        {'Saving'}
+                                    </>
+                                ):(
+                                    <>
+                                        <FontAwesomeIcon icon={faFloppyDisk} className={'icon-inline-left-l'}/>
+                                        {'Save Settings'}
+                                    </>
+                                )}
                             </button>
                         )}
                     </div>
