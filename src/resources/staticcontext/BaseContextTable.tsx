@@ -785,15 +785,8 @@ export const BaseContextCallTable : CallEventTable = {
         event_priotity: 0,
         async getAllFactionEquipmentRelationships(this: EventRunner, eventSource : any, relayVar : FactionEquipmentRelationship[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
             
-            console.log(relayVar)
             const EquipRelModule = await import("../../classes/relationship/faction/FactionEquipmentRelationship");
             const DynamicModule = await import("../../classes/options/DynamicOptionContextObject");
-            console.log("func")
-            console.log(context_func)
-            console.log("static")
-            console.log(context_static)
-            console.log("main")
-            console.log(context_main)
             try {
                 if (context_main != null) {
                     if (context_main instanceof DynamicModule.DynamicOptionContextObject) {
@@ -803,7 +796,9 @@ export const BaseContextCallTable : CallEventTable = {
                             const selection = optionobj.Selections[i];
                             if (selection.SelectedChoice != null) {
                                 if (selection.SelectedChoice.value instanceof EquipRelModule.FactionEquipmentRelationship) {
-                                    relayVar.push(await selection.SelectedChoice.value)
+                                    if (!relayVar.includes(await selection.SelectedChoice.value)) {
+                                        relayVar.push(await selection.SelectedChoice.value)
+                                    }
                                 }
                             }
                         }
@@ -812,7 +807,6 @@ export const BaseContextCallTable : CallEventTable = {
             } catch (e) {
                 console.log(e)
             }
-            console.log(relayVar)
             return relayVar;
         },
         async parseOptionsIntoRelevantType(this: EventRunner, eventSource : any, relayVar : IChoice[],  trackVal : number, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null){
