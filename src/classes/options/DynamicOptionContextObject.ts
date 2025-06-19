@@ -51,6 +51,7 @@ class DynamicOptionContextObject extends DynamicContextObject {
         
         const static_packages : ContextPackage[] = await this.OptionChoice.GrabContextPackages(event_id, source_obj, arrs_extra);
         for (let j = 0; j < static_packages.length; j++) {
+            static_packages[j].dyncontext = this;
             subpackages.push(static_packages[j])
         }
 
