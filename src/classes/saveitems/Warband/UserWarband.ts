@@ -661,6 +661,7 @@ class UserWarband extends DynamicContextObject {
     public async GetFactionEquipmentOptions() : Promise<FactionEquipmentRelationship[]> {
         const FacCheck = this.Faction.MyFaction;
         const ListOfRels : FactionEquipmentRelationship[] = []
+        const AddedIDs : string[] = [];
         let BaseRels : FactionEquipmentRelationship[] = []
         
         if (FacCheck != undefined) {
@@ -685,7 +686,8 @@ class UserWarband extends DynamicContextObject {
                 maxcount,
                 this
             )
-            if (this.GetCountOfEquipmentRel(BaseRels[i].ID) < maxcount || (maxcount == 0 && BaseRels[i].Limit == 0)) {
+            if ((!AddedIDs.includes(BaseRels[i].ID)) && this.GetCountOfEquipmentRel(BaseRels[i].ID) < maxcount || (maxcount == 0 && BaseRels[i].Limit == 0)) {
+                AddedIDs.push(BaseRels[i].ID)
                 ListOfRels.push(BaseRels[i]);
             }
         }
