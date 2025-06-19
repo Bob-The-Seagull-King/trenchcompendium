@@ -796,7 +796,7 @@ export const BaseContextCallTable : CallEventTable = {
                             const selection = optionobj.Selections[i];
                             if (selection.SelectedChoice != null) {
                                 if (selection.SelectedChoice.value instanceof EquipRelModule.FactionEquipmentRelationship) {
-                                    if (!relayVar.includes(await selection.SelectedChoice.value)) {
+                                    if (relayVar.filter((item) => (item.ID == selection.SelectedChoice?.value.ID)).length == 0) {
                                         relayVar.push(await selection.SelectedChoice.value)
                                     }
                                 }
