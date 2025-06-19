@@ -4,7 +4,7 @@ import { INote } from '../../Note';
 import { IWarbandContextItem, WarbandContextItem } from './High_Level/WarbandContextItem';
 import { IWarbandExplorationSet, WarbandExplorationSet } from './CoreElements/WarbandExplorationSet';
 import { DynamicContextObject } from '../../contextevent/dynamiccontextobject';
-import { IContextObject } from '../../contextevent/contextobject';
+import { ContextObject, IContextObject } from '../../contextevent/contextobject';
 import { IWarbandFaction, WarbandFaction } from './CoreElements/WarbandFaction';
 import { IWarbandPurchaseEquipment, IWarbandPurchaseModel, RealWarbandPurchaseModel, WarbandPurchase } from './Purchases/WarbandPurchase';
 import { IWarbandMember, WarbandMember } from './Purchases/WarbandMember';
@@ -15,6 +15,7 @@ import { EventRunner } from '../../contextevent/contexteventhandler';
 import { Faction } from '../../feature/faction/Faction';
 import { FactionEquipmentRelationship } from '../../relationship/faction/FactionEquipmentRelationship';
 import { WarbandProperty } from './WarbandProperty';
+import { ContextPackage } from '../../contextevent/contextpackage';
 
 interface IUserWarband extends IContextObject {
     id : string,
@@ -104,6 +105,23 @@ class UserWarband extends DynamicContextObject {
         }
         
         return _objint;
+    }
+
+    /**
+     * Grabs the packages from any sub-objects, based
+     * on class implementation.
+     */
+    public async GrabSubPackages(event_id : string, source_obj : ContextObject, arrs_extra : any[]) : Promise<ContextPackage[]> { 
+        const subpackages : ContextPackage[] = []        
+
+        if (this.Faction) {
+            const static_packages : ContextPackage[] = await this.Faction.GrabContextPackages(event_id, source_obj, arrs_extra);
+            for (let j = 0; j < static_packages.length; j++) {
+                subpackages.push(static_packages[j])
+            }
+        }
+
+        return subpackages; 
     }
 
     public async GetPatronList() {

@@ -26,6 +26,7 @@ import { Ability, IAbility } from "../../classes/feature/ability/Ability";
 import RuleDisplay from "../../display/components/features/faction/RuleDisplay";
 import { Skill } from "../../classes/feature/ability/Skill";
 import { UserWarband } from "../../classes/saveitems/Warband/UserWarband";
+import { FactionEquipmentRelationship } from "../../classes/relationship/faction/FactionEquipmentRelationship";
 
 export const BaseContextCallTable : CallEventTable = {
     option_search_viable: {
@@ -782,6 +783,31 @@ export const BaseContextCallTable : CallEventTable = {
     },
     faction_choose_equipment: {
         event_priotity: 0,
+        async getAllFactionEquipmentRelationships(this: EventRunner, eventSource : any, relayVar : FactionEquipmentRelationship[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            
+            const EquipRelModule = await import("../../classes/relationship/faction/FactionEquipmentRelationship");
+            console.log("func")
+            console.log(context_func)
+            console.log("static")
+            console.log(context_static)
+            console.log("main")
+            console.log(context_main)
+            try {
+                const optionobj = context_static as (any);
+                console.log(optionobj);
+                for (let i = 0; i < optionobj.Selections.length; i++) {
+                    const selection = optionobj.Selections[i];
+                    if (selection.SelectedChoice != null) {
+                        if (selection.SelectedChoice.value instanceof EquipRelModule.FactionEquipmentRelationship) {
+                            relayVar.push(selection.SelectedChoice.value)
+                        }
+                    }
+                }
+            } catch (e) {
+                console.log(e)
+            }
+            return relayVar;
+        },
         async parseOptionsIntoRelevantType(this: EventRunner, eventSource : any, relayVar : IChoice[],  trackVal : number, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null){
             
             const { EquipmentFactory } = await import("../../factories/features/EquipmentFactory");
