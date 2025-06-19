@@ -821,7 +821,7 @@ export const BaseContextCallTable : CallEventTable = {
 
             for (let i = 0; i < relayVar.length; i++) {
                 
-                const ModelItem = EquipmentFactory.CreateFactionEquipment(relayVar[i].value, null)
+                const ModelItem = await EquipmentFactory.CreateFactionEquipment(relayVar[i].value, null)
                 relayVar[i].value = ModelItem;
             }
 
