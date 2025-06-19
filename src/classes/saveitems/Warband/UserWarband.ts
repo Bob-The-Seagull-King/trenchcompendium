@@ -117,6 +117,7 @@ class UserWarband extends DynamicContextObject {
         if (this.Faction) {
             const static_packages : ContextPackage[] = await this.Faction.GrabContextPackages(event_id, source_obj, arrs_extra);
             for (let j = 0; j < static_packages.length; j++) {
+                static_packages[j].callpath.push(this.constructor.name)
                 subpackages.push(static_packages[j])
             }
         }

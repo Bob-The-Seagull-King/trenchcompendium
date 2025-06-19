@@ -180,6 +180,9 @@ class WarbandProperty extends DynamicContextObject  {
      */
     public async GrabSubPackages(event_id : string, source_obj : ContextObject, arrs_extra : any[]) : Promise<ContextPackage[]> { 
         const static_packages : ContextPackage[] = await this.SelfDynamicProperty.GrabContextPackages(event_id, source_obj, arrs_extra);
+        for (let i = 0; i < static_packages.length; i++) {
+            static_packages[i].callpath.push(this.constructor.name)
+        }
         return static_packages;
     }
 

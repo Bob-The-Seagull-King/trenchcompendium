@@ -47,6 +47,7 @@ class Patron extends StaticContextObject {
         for (let i = 0; i < this.Skills.length; i++) {
             const temp_packages : any[] = await this.Skills[i].GrabContextPackages(event_id, source_obj, arrs_extra);
             for (let j = 0; j < temp_packages.length; j++) {
+                temp_packages[j].callpath.push(this.constructor.name)
                 static_packages.push(temp_packages[j]);
             }
         }

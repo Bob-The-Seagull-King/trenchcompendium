@@ -42,6 +42,9 @@ class EventRunner {
         let relay_variable = relayVar;
         let returnVal;
 
+        console.log("DEBUG OUTPUT: " + event_id)
+        console.log(Events)
+
         // Run each event
         for (const _event of Events) {
             

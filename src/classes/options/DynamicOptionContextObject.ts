@@ -52,6 +52,7 @@ class DynamicOptionContextObject extends DynamicContextObject {
         const static_packages : ContextPackage[] = await this.OptionChoice.GrabContextPackages(event_id, source_obj, arrs_extra);
         for (let j = 0; j < static_packages.length; j++) {
             static_packages[j].dyncontext = this;
+            static_packages[j].callpath.push(this.constructor.name)
             subpackages.push(static_packages[j])
         }
 
@@ -61,11 +62,13 @@ class DynamicOptionContextObject extends DynamicContextObject {
                 if (SelNest != null) {
                     const static_packages : ContextPackage[] = await SelNest.GrabContextPackages(event_id, source_obj, arrs_extra);
                     for (let j = 0; j < static_packages.length; j++) {
+                        static_packages[j].callpath.push(this.constructor.name)
                         subpackages.push(static_packages[j])
                     }
                 } else if (this.Selections[i].SelectedChoice?.value instanceof ContextObject) {
                     const static_packages : ContextPackage[] = await this.Selections[i].SelectedChoice?.value.GrabContextPackages(event_id, source_obj, arrs_extra);
                     for (let j = 0; j < static_packages.length; j++) {
+                        static_packages[j].callpath.push(this.constructor.name)
                         subpackages.push(static_packages[j])
                     }
                 }

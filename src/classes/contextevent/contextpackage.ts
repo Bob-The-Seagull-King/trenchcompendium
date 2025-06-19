@@ -9,6 +9,7 @@ interface ContextPackage {
     callback    : any;      // The function that will be called as a part of this event.
     callbackdict: ContextEventEntry;     // Any additional information that comes with the function
     dyncontext  : ContextObject | null;     // The event function origin's parent context (or null)
+    callpath    : string[];     // The names of each class, added to progressively to get a debuggable trace
 }
 
 export {ContextPackage}
