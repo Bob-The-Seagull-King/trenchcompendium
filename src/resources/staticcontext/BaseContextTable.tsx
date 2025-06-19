@@ -858,7 +858,7 @@ export const BaseContextCallTable : CallEventTable = {
                                 ModelItem.RestrictedEquipment
                             );
 
-                            relayVar[i].display_str = ModelItem.Name + (" " + ModelItem.Cost.toString() + " ") + (ModelItem.Limit != 0? " (Limit " + ModelItem.Limit + ")" : "") + (result_presentation.length > 0? " (" + result_presentation.join(', ') + " only)" : "")
+                            relayVar[i].display_str = ModelItem.Name + (" (" + ModelItem.Cost.toString() + " " + getCostType(ModelItem.CostType) + ") ") + (ModelItem.Limit != 0? " (Limit " + ModelItem.Limit + ")" : "") + (result_presentation.length > 0? " (" + result_presentation.join(', ') + " only)" : "")
 
                             break;
                         }
