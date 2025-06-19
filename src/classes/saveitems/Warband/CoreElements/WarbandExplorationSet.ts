@@ -78,7 +78,7 @@ class WarbandExplorationSet extends DynamicContextObject {
         for (let i = 0; i < this.Skills.length; i++) {
             const static_packages : ContextPackage[] = await this.Skills[i].GrabContextPackages(event_id, source_obj, arrs_extra);
             for (let j = 0; j < static_packages.length; j++) {
-                static_packages[j].callpath.push(this.constructor.name)
+                static_packages[j].callpath.push("WarbandExplorationSet")
                 subpackages.push(static_packages[j])
             }
         }
@@ -86,7 +86,7 @@ class WarbandExplorationSet extends DynamicContextObject {
         for (let i = 0; i < this.Locations.length; i++) {
             const static_packages : ContextPackage[] = await this.Locations[i].GrabContextPackages(event_id, source_obj, arrs_extra);
             for (let j = 0; j < static_packages.length; j++) {
-                static_packages[j].callpath.push(this.constructor.name)
+                static_packages[j].callpath.push("WarbandExplorationSet")
                 subpackages.push(static_packages[j])
             }
         }

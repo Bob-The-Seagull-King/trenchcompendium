@@ -13,7 +13,7 @@ class DynamicContextObject extends ContextObject {
         const SubPackages : ContextPackage[] = await this.GrabSubPackages(event_id, source_obj, arrs_extra);
 
         for (let i = 0; i < SubPackages.length; i++) {
-            SubPackages[i].callpath.push(this.constructor.name)
+            SubPackages[i].callpath.push("DynamicContextObject")
             if (SubPackages[i].dyncontext == null) {
                 SubPackages[i].dyncontext = this;
             }
@@ -34,7 +34,7 @@ class DynamicContextObject extends ContextObject {
                         callback    : func,
                         callbackdict: this.ContextKeys[key],
                         dyncontext  : this.MyContext,
-                        callpath    : [this.constructor.name]
+                        callpath    : ["DynamicContextObject"]
                     }
 
                     SubPackages.push(curr_package);

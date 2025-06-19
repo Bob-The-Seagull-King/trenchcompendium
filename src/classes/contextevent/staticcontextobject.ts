@@ -24,7 +24,7 @@ class StaticContextObject extends ContextObject {
                         callback    : func,
                         callbackdict: this.ContextKeys[key],
                         dyncontext  : this.MyContext,
-                        callpath    : [this.constructor.name]
+                        callpath    : ["StaticContextObject"]
                     }
 
                     StaticEvents.push(curr_package);
@@ -34,7 +34,7 @@ class StaticContextObject extends ContextObject {
         const SubPackages : ContextPackage[] = await this.GrabSpecialPackages(event_id, source_obj, arrs_extra);
 
         for (let i = 0; i < SubPackages.length; i++) {
-            SubPackages[i].callpath.push(this.constructor.name);
+            SubPackages[i].callpath.push("StaticContextObject");
             StaticEvents.push(SubPackages[i]);
         }
  

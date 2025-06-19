@@ -81,7 +81,7 @@ class WarbandEquipment extends DynamicContextObject {
         if (this.MyEquipment) {
             const static_packages : ContextPackage[] = await this.MyEquipment.GrabContextPackages(event_id, source_obj, arrs_extra);
             for (let j = 0; j < static_packages.length; j++) {
-                static_packages[j].callpath.push(this.constructor.name)
+                static_packages[j].callpath.push("WarbandEquipment")
                 subpackages.push(static_packages[j])
             }
         }        
@@ -89,7 +89,7 @@ class WarbandEquipment extends DynamicContextObject {
         for (let i = 0; i < this.SubProperties.length; i++) {
             const static_packages : ContextPackage[] = await this.SubProperties[i].GrabContextPackages(event_id, source_obj, arrs_extra);
             for (let j = 0; j < static_packages.length; j++) {
-                static_packages[j].callpath.push(this.constructor.name)
+                static_packages[j].callpath.push("WarbandEquipment")
                 subpackages.push(static_packages[j])
             }
         } 

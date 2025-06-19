@@ -111,7 +111,7 @@ class WarbandFaction extends DynamicContextObject {
         for (let i = 0; i < this.MyFactionRules.length; i++) {
             const static_packages : ContextPackage[] = await this.MyFactionRules[i].GrabContextPackages(event_id, source_obj, arrs_extra);
             for (let j = 0; j < static_packages.length; j++) {
-                static_packages[j].callpath.push(this.constructor.name)
+                static_packages[j].callpath.push("WarbandFaction")
                 subpackages.push(static_packages[j])
             }
         }
@@ -119,7 +119,7 @@ class WarbandFaction extends DynamicContextObject {
         if (this.MyFaction) {
             const static_packages : ContextPackage[] = await this.MyFaction.GrabContextPackages(event_id, source_obj, arrs_extra);
             for (let j = 0; j < static_packages.length; j++) {
-                static_packages[j].callpath.push(this.constructor.name)
+                static_packages[j].callpath.push("WarbandFaction")
                 subpackages.push(static_packages[j])
             }
         }
@@ -127,7 +127,7 @@ class WarbandFaction extends DynamicContextObject {
         if (this.MyPatron != null) {
             const static_packages : ContextPackage[] = await this.MyPatron.GrabContextPackages(event_id, source_obj, arrs_extra);
             for (let j = 0; j < static_packages.length; j++) {
-                static_packages[j].callpath.push(this.constructor.name)
+                static_packages[j].callpath.push("WarbandFaction")
                 subpackages.push(static_packages[j])
             } 
         }
