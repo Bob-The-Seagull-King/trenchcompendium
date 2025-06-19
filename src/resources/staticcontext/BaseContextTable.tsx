@@ -803,7 +803,7 @@ export const BaseContextCallTable : CallEventTable = {
                             const selection = optionobj.Selections[i];
                             if (selection.SelectedChoice != null) {
                                 if (selection.SelectedChoice.value instanceof EquipRelModule.FactionEquipmentRelationship) {
-                                    relayVar.push(selection.SelectedChoice.value)
+                                    relayVar.push(await selection.SelectedChoice.value)
                                 }
                             }
                         }
