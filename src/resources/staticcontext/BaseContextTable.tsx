@@ -785,7 +785,9 @@ export const BaseContextCallTable : CallEventTable = {
         event_priotity: 0,
         async getAllFactionEquipmentRelationships(this: EventRunner, eventSource : any, relayVar : FactionEquipmentRelationship[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
             
+            console.log(relayVar)
             const EquipRelModule = await import("../../classes/relationship/faction/FactionEquipmentRelationship");
+            const DynamicModule = await import("../../classes/options/DynamicOptionContextObject");
             console.log("func")
             console.log(context_func)
             console.log("static")
@@ -793,19 +795,24 @@ export const BaseContextCallTable : CallEventTable = {
             console.log("main")
             console.log(context_main)
             try {
-                const optionobj = context_static as (any);
-                console.log(optionobj);
-                for (let i = 0; i < optionobj.Selections.length; i++) {
-                    const selection = optionobj.Selections[i];
-                    if (selection.SelectedChoice != null) {
-                        if (selection.SelectedChoice.value instanceof EquipRelModule.FactionEquipmentRelationship) {
-                            relayVar.push(selection.SelectedChoice.value)
+                if (context_main != null) {
+                    if (context_main instanceof DynamicModule.DynamicOptionContextObject) {
+                        const optionobj = context_main;
+                        console.log(optionobj);
+                        for (let i = 0; i < optionobj.Selections.length; i++) {
+                            const selection = optionobj.Selections[i];
+                            if (selection.SelectedChoice != null) {
+                                if (selection.SelectedChoice.value instanceof EquipRelModule.FactionEquipmentRelationship) {
+                                    relayVar.push(selection.SelectedChoice.value)
+                                }
+                            }
                         }
                     }
                 }
             } catch (e) {
                 console.log(e)
             }
+            console.log(relayVar)
             return relayVar;
         },
         async parseOptionsIntoRelevantType(this: EventRunner, eventSource : any, relayVar : IChoice[],  trackVal : number, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null){
