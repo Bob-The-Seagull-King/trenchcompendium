@@ -39,10 +39,10 @@ const WbbEditViewFighterSortable: React.FC<WbbEditViewFighterSortableProps> = ({
         if (isDragging) {
             const selection = window.getSelection();
 
-            alert (selection);
-            if (selection && selection.type === 'Range') {
+            if(selection) {
                 selection.removeAllRanges();
             }
+
         }
     }, [isDragging]);
 
