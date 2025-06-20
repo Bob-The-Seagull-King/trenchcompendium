@@ -36,7 +36,7 @@ const WbbEditViewFighterSortable: React.FC<WbbEditViewFighterSortableProps> = ({
         cursor: isDragging ? 'grabbing' : 'pointer',
         zIndex: isDragging ? '3' : '2',
         position: 'relative',
-        color: 'red',
+        color: 'blue',
     };
 
     return (
