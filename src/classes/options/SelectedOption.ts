@@ -44,7 +44,7 @@ class SelectedOption {
      * Given a specific id, set the current choice
      * to one of this object's Option's selections.
      */
-    public SelectOption(_id : number | null) {
+    public SelectOption(_id : string | null) {
         if (_id == null) {
             this.SelectedChoice = null;
             this.NestedOption = null;

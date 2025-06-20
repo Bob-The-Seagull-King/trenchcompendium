@@ -26,6 +26,7 @@ import { Ability, IAbility } from "../../classes/feature/ability/Ability";
 import RuleDisplay from "../../display/components/features/faction/RuleDisplay";
 import { Skill } from "../../classes/feature/ability/Skill";
 import { UserWarband } from "../../classes/saveitems/Warband/UserWarband";
+import { FactionEquipmentRelationship } from "../../classes/relationship/faction/FactionEquipmentRelationship";
 
 export const BaseContextCallTable : CallEventTable = {
     option_search_viable: {
@@ -782,13 +783,45 @@ export const BaseContextCallTable : CallEventTable = {
     },
     faction_choose_equipment: {
         event_priotity: 0,
+        async getAllFactionEquipmentRelationships(this: EventRunner, eventSource : any, relayVar : FactionEquipmentRelationship[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            
+            const EquipRelModule = await import("../../classes/relationship/faction/FactionEquipmentRelationship");
+            const DynamicModule = await import("../../classes/options/DynamicOptionContextObject");
+            try {
+                if (context_main != null) {
+                    if (context_main instanceof DynamicModule.DynamicOptionContextObject) {
+                        const optionobj = context_main;
+                        console.log(optionobj);
+                        for (let i = 0; i < optionobj.Selections.length; i++) {
+                            const selection = optionobj.Selections[i];
+                            if (selection.SelectedChoice != null) {
+                                if (selection.SelectedChoice.value instanceof EquipRelModule.FactionEquipmentRelationship) {
+                                    let ispresent = false;
+                                    for (let j = 0; j < relayVar.length; j++) {
+                                        if (relayVar[j].ID == selection.SelectedChoice.value.ID) {
+                                            ispresent = true;
+                                        }
+                                    }
+                                    if (ispresent == false) {
+                                        relayVar.push(await selection.SelectedChoice.value)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            } catch (e) {
+                console.log(e)
+            }
+            return relayVar;
+        },
         async parseOptionsIntoRelevantType(this: EventRunner, eventSource : any, relayVar : IChoice[],  trackVal : number, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null){
             
             const { EquipmentFactory } = await import("../../factories/features/EquipmentFactory");
 
             for (let i = 0; i < relayVar.length; i++) {
                 
-                const ModelItem = EquipmentFactory.CreateFactionEquipment(relayVar[i].value, null)
+                const ModelItem = await EquipmentFactory.CreateFactionEquipment(relayVar[i].value, null)
                 relayVar[i].value = ModelItem;
             }
 
@@ -831,7 +864,7 @@ export const BaseContextCallTable : CallEventTable = {
                                 ModelItem.RestrictedEquipment
                             );
 
-                            relayVar[i].display_str = ModelItem.Name + (" " + ModelItem.Cost.toString() + " ") + (ModelItem.Limit != 0? " (Limit " + ModelItem.Limit + ")" : "") + (result_presentation.length > 0? " (" + result_presentation.join(', ') + " only)" : "")
+                            relayVar[i].display_str = ModelItem.Name + (" (" + ModelItem.Cost.toString() + " " + getCostType(ModelItem.CostType) + ") ") + (ModelItem.Limit != 0? " (Limit " + ModelItem.Limit + ")" : "") + (result_presentation.length > 0? " (" + result_presentation.join(', ') + " only)" : "")
 
                             break;
                         }

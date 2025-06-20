@@ -66,8 +66,8 @@ const WarbandSubPropertyDisplay = (props: any) => {
     function updateItem(value: string) {
         let IsFound = false;
         for (let i = 0; i < MySelection.Option.Selections.length; i++) {
-            if (MySelection.Option.Selections[i].id == Number.parseInt(value)) {
-                MySelection.SelectOption(Number.parseInt(value));
+            if (MySelection.Option.Selections[i].id == (value)) {
+                MySelection.SelectOption((value));
                 IsFound = true;
                 break;
             }

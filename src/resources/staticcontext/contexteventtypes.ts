@@ -8,6 +8,7 @@ import { ModelUpgradeRelationship } from "../../classes/relationship/model/Model
 import { LocationRestriction } from "../../classes/feature/exploration/ExplorationLocation";
 import { WarbandProperty } from "../../classes/saveitems/Warband/WarbandProperty";
 import { FactionModelRelationship } from "../../classes/relationship/faction/FactionModelRelationship";
+import { FactionEquipmentRelationship } from "../../classes/relationship/faction/FactionEquipmentRelationship"
 import { Model } from "../../classes/feature/model/Model";
 import { Ability } from "../../classes/feature/ability/Ability";
 import { UserWarband } from "../../classes/saveitems/Warband/UserWarband";
@@ -25,6 +26,7 @@ export interface CallEvents {
     getPresentationHandeddness? : (this: EventRunner, eventSource : any, relayVar : any, trackVal : any, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => {[type : string]: string}; 
     getEquipmentRestrictionPresentable? : (this: EventRunner, eventSource : any, relayVar : any, trackVal : EquipmentRestriction[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<string[]>; 
     getEquipmentRestriction? : (this: EventRunner, eventSource : any, relayVar : any, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => EquipmentRestriction[]; 
+    getAllFactionEquipmentRelationships? : (this: EventRunner, eventSource : any, relayVar : FactionEquipmentRelationship[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<FactionEquipmentRelationship[]>; 
     getEquipmentLimitPresentable? : (this: EventRunner, eventSource : any, relayVar : any, trackVal : EquipmentLimit[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<string[]>; 
     getEquipmentLimit? : (this: EventRunner, eventSource : any, relayVar : any, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => EquipmentLimit[]; 
     countAsFactionForPatrons? : (this: EventRunner, eventSource : any, relayVar : string, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<string>; 

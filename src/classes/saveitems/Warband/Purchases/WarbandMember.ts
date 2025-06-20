@@ -173,6 +173,7 @@ class WarbandMember extends DynamicContextObject {
         if (this.CurModel) {
             const static_packages : ContextPackage[] = await this.CurModel.GrabContextPackages(event_id, source_obj, arrs_extra);
             for (let j = 0; j < static_packages.length; j++) {
+                static_packages[j].callpath.push("WarbandMember")
                 subpackages.push(static_packages[j])
             }
         }
@@ -180,6 +181,7 @@ class WarbandMember extends DynamicContextObject {
         for (let i = 0; i < this.Skills.length; i++) {
             const static_packages : ContextPackage[] = await this.Skills[i].GrabContextPackages(event_id, source_obj, arrs_extra);
             for (let j = 0; j < static_packages.length; j++) {
+                static_packages[j].callpath.push("WarbandMember")
                 subpackages.push(static_packages[j])
             }
         }  
@@ -187,6 +189,7 @@ class WarbandMember extends DynamicContextObject {
         for (let i = 0; i < this.Upgrades.length; i++) {
             const static_packages : ContextPackage[] = await (this.Upgrades[i].HeldObject as Upgrade).GrabContextPackages(event_id, source_obj, arrs_extra);
             for (let j = 0; j < static_packages.length; j++) {
+                static_packages[j].callpath.push("WarbandMember")
                 subpackages.push(static_packages[j])
             }
         } 
@@ -194,6 +197,7 @@ class WarbandMember extends DynamicContextObject {
         for (let i = 0; i < this.Injuries.length; i++) {
             const static_packages : ContextPackage[] = await this.Injuries[i].GrabContextPackages(event_id, source_obj, arrs_extra);
             for (let j = 0; j < static_packages.length; j++) {
+                static_packages[j].callpath.push("WarbandMember")
                 subpackages.push(static_packages[j])
             }
         }  
@@ -201,6 +205,7 @@ class WarbandMember extends DynamicContextObject {
         for (let i = 0; i < this.Equipment.length; i++) {
             const static_packages : ContextPackage[] = await (this.Equipment[i].HeldObject as Equipment).GrabContextPackages(event_id, source_obj, arrs_extra);
             for (let j = 0; j < static_packages.length; j++) {
+                static_packages[j].callpath.push("WarbandMember")
                 subpackages.push(static_packages[j])
             }
         }
@@ -208,6 +213,7 @@ class WarbandMember extends DynamicContextObject {
         for (let i = 0; i < this.SubProperties.length; i++) {
             const static_packages : ContextPackage[] = await this.SubProperties[i].GrabContextPackages(event_id, source_obj, arrs_extra);
             for (let j = 0; j < static_packages.length; j++) {
+                static_packages[j].callpath.push("WarbandMember")
                 subpackages.push(static_packages[j])
             }
         } 

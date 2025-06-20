@@ -65,6 +65,7 @@ class Faction extends StaticOptionContextObject {
         for (let i = 0; i < this.Rules.length; i++) {
             const temp_packages : any[] = await this.Rules[i].GrabContextPackages(event_id, source_obj, arrs_extra);
             for (let j = 0; j < temp_packages.length; j++) {
+                temp_packages[j].callpath.push("Faction")
                 static_packages.push(temp_packages[j]);
             }
         }

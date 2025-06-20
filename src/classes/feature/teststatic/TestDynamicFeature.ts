@@ -74,6 +74,7 @@ class TestDynamicFeature extends DynamicContextObject {
         for (let i = 0; i < this.teststaticlist.length; i++) {
             const static_packages : ContextPackage[] = await this.teststaticlist[i].GrabContextPackages(event_id, source_obj, arrs_extra);
             for (let j = 0; j < static_packages.length; j++) {
+                static_packages[j].callpath.push("TestDynamicFeature")
                 subpackages.push(static_packages[j])
             }
         }
@@ -81,6 +82,7 @@ class TestDynamicFeature extends DynamicContextObject {
         for (let i = 0; i < this.testbasiclist.length; i++) {
             const static_packages : ContextPackage[] = await this.testbasiclist[i].GrabContextPackages(event_id, source_obj, arrs_extra);
             for (let j = 0; j < static_packages.length; j++) {
+                static_packages[j].callpath.push("TestDynamicFeature")
                 subpackages.push(static_packages[j])
             }
         }

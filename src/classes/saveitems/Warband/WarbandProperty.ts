@@ -16,7 +16,7 @@ interface IWarbandProperty {
 
 interface ISelectedOption {
     option_refID : string,
-    selection_ID : number | null,
+    selection_ID : string | null,
     suboption? : IWarbandProperty
 }
 
@@ -125,7 +125,7 @@ class WarbandProperty extends DynamicContextObject  {
         this.SubProperties = RegenProperties;
     }
 
-    public async SelectSelfOption(selection_index : number, selection_id : number) {
+    public async SelectSelfOption(selection_index : number, selection_id : string) {
         if (this.SelfDynamicProperty.Selections[selection_index] != undefined) {
             this.SelfDynamicProperty.Selections[selection_index].SelectOption(selection_id);
             await this.RegenerateSubProperties();
@@ -180,6 +180,9 @@ class WarbandProperty extends DynamicContextObject  {
      */
     public async GrabSubPackages(event_id : string, source_obj : ContextObject, arrs_extra : any[]) : Promise<ContextPackage[]> { 
         const static_packages : ContextPackage[] = await this.SelfDynamicProperty.GrabContextPackages(event_id, source_obj, arrs_extra);
+        for (let i = 0; i < static_packages.length; i++) {
+            static_packages[i].callpath.push("WarbandProperty")
+        }
         return static_packages;
     }
 

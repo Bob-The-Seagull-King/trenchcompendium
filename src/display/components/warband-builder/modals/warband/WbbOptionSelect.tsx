@@ -22,7 +22,7 @@ const WbbOptionSelect: React.FC<WbbEditSelectionProps> = ({choice}) => {
     const handleSubmit = (foundOption : IChoice | null) => {
         if (foundOption != null) {
             setSelectedoption(foundOption)
-            choice.SelectOption(foundOption? foundOption.id : 0);
+            choice.SelectOption(foundOption? foundOption.id : null);
             const Manager : ToolsController = ToolsController.getInstance();
             Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
                 () => reloadDisplay())
