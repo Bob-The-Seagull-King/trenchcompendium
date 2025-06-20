@@ -8,6 +8,7 @@ import WbbTextarea from "./WbbTextarea";
 import WbbOptionBox from "./WbbOptionBox";
 import WbbDetailViewCollapse from "./WbbDetailViewCollapse";
 import WbbEditGoeticSelectionModal from "./modals/warband/WbbEditGoeticSelectionModal";
+import WbbExplorationSkills from "./WbbExplorationSkills";
 
 interface WbbWarbandDetailViewProps {
     onClose: () => void;
@@ -136,7 +137,11 @@ const WbbWarbandDetailView: React.FC<WbbWarbandDetailViewProps> = ({  onClose })
 
                     </WbbDetailViewCollapse>
 
+                    <WbbDetailViewCollapse title="Exploration Skills" initiallyOpen={true}>
 
+                        <WbbExplorationSkills />
+
+                    </WbbDetailViewCollapse>
 
                     {/* Notes textarea */}
                     <WbbDetailViewCollapse title="Notes & Lore" initiallyOpen={false}>
@@ -159,6 +164,8 @@ const WbbWarbandDetailView: React.FC<WbbWarbandDetailViewProps> = ({  onClose })
                             }}
                         />
                     </WbbDetailViewCollapse>
+
+
                 </div>
 
             </div>
