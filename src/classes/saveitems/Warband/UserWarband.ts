@@ -556,6 +556,29 @@ class UserWarband extends DynamicContextObject {
         return 'Wrath'
     }
 
+    /**
+     * Gets the special rules for the faction of the Warband
+     * // @TODO: is currently dummy data
+     *
+     */
+    public GetSpecialRules () {
+
+        return [
+            {
+                name: 'Infection Markers',
+                description: 'Some attacks by the weaponry of the Black Grail causes their opponents to suffer INFECTION MARKERS. These work in a similar fashion to BLOOD MARKERS. INFECTION MARKERScan be used to modify dice rolls exactly like BLOOD MARKERS (i.e. ACTION rolls and injury rolls and used in Bloodbaths). Use a different coloured dice (the more disgusting the better!) to indicate these markers and place them next to the infected model.\n' +
+                    '\n' +
+                    'A model may have up to six INFECTION MARKERS and six BLOOD MARKERS at the same time. If a model had any INFECTION MARKERS before, but has none when it is Activated, no new ones are added to the model – though it can still be re-infected by further attacks if a model has one or more INFECTION MARKERS when activated, it gains +1 INFECTION MARKERS.'
+            },
+            {
+                name: 'Morale',
+                description: 'Fighting against the Black Grail is a terrifying prospect. Enemy Warbands roll Morale Tests with -1 DICE when fighting a Black Grail Warband. The Court Warbands and other Black Grail Warbands ignore this penalty.'
+            }
+        ]
+    }
+
+
+
     public GetCountOfModel(id : string) {
         let count = 0;
         for (let i = 0; i < this.Models.length; i++) {

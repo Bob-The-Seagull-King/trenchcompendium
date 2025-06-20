@@ -9,6 +9,8 @@ import WbbOptionBox from "./WbbOptionBox";
 import WbbDetailViewCollapse from "./WbbDetailViewCollapse";
 import WbbEditGoeticSelectionModal from "./modals/warband/WbbEditGoeticSelectionModal";
 import WbbExplorationSkills from "./WbbExplorationSkills";
+import WbbExplorationSkill from "./WbbExplorationSkill";
+import WbbSpecialRule from "./WbbSpecialRule";
 
 interface WbbWarbandDetailViewProps {
     onClose: () => void;
@@ -18,6 +20,8 @@ const WbbWarbandDetailView: React.FC<WbbWarbandDetailViewProps> = ({  onClose })
 
     const { warband } = useWarband();
     if (warband == null) return (<div>Loading...</div>);
+
+    console.log(warband);
 
     /** Goetic Options */
     const [goeticDiscipline, setGoeticDiscipline] = useState<string>(warband.warband_data.GetGoeticSelection());
@@ -131,10 +135,13 @@ const WbbWarbandDetailView: React.FC<WbbWarbandDetailViewProps> = ({  onClose })
                     {/* Warband Rules */}
                     {/* @TODO: only show if warband has Special Rules */}
                     <WbbDetailViewCollapse title="Special Rules" initiallyOpen={true}>
-
-                        {/*@TODO: add special rules as text to this area */}
-                        Special Rules go here
-
+                        {warband.warband_data.GetSpecialRules().map((specialRule, index) => (
+                            <WbbSpecialRule
+                                key={index}
+                                Title={specialRule.name}
+                                Description={specialRule.description}
+                            />
+                        ))}
                     </WbbDetailViewCollapse>
 
                     <WbbDetailViewCollapse title="Exploration Skills" initiallyOpen={true}>

@@ -47,7 +47,6 @@ const WbbExplorationSkill: React.FC<WbbExplorationSkillProps> = ({
                     ))}
                 </div>
             </div>
-
         </div>
     )
 }
