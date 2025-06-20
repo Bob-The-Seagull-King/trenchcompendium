@@ -30,7 +30,7 @@ const WbbEditViewFighterSortable: React.FC<WbbEditViewFighterSortableProps> = ({
         transform: CSS.Transform.toString(transform),
         transition,
         touchAction: 'manipulation', // improves mobile drag handling
-        userSelect: 'none',         // ❌ disables text selection
+        // userSelect: 'none',         // ❌ disables text selection
         WebkitUserSelect: 'none',   // ❌ disables text selection on Safari
         WebkitTouchCallout: 'none', // ❌ disables iOS system context menu
         cursor: isDragging ? 'grabbing' : 'pointer',
