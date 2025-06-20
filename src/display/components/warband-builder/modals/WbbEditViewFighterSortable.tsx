@@ -32,11 +32,11 @@ const WbbEditViewFighterSortable: React.FC<WbbEditViewFighterSortableProps> = ({
         touchAction: 'manipulation', // improves mobile drag handling
         // userSelect: 'none',         // ❌ disables text selection
         // WebkitUserSelect: 'none',   // ❌ disables text selection on Safari
-        // WebkitTouchCallout: 'none', // ❌ disables iOS system context menu
+        WebkitTouchCallout: 'none', // ❌ disables iOS system context menu
         cursor: isDragging ? 'grabbing' : 'pointer',
         zIndex: isDragging ? '3' : '2',
         position: 'relative',
-        color: 'yellow',
+        color: 'red',
     };
 
     return (
