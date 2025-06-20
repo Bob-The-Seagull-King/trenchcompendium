@@ -29,18 +29,15 @@ const WbbEditViewFighterSortable: React.FC<WbbEditViewFighterSortableProps> = ({
     const style: React.CSSProperties = {
         transform: CSS.Transform.toString(transform),
         transition,
-        touchAction: 'manipulation', // improves mobile drag handling
-        userSelect: 'none',         // ❌ disables text selection
-        // WebkitUserSelect: 'none',   // ❌ disables text selection on Safari
-        WebkitTouchCallout: 'none', // ❌ disables iOS system context menu
         cursor: isDragging ? 'grabbing' : 'pointer',
         zIndex: isDragging ? '3' : '2',
-        position: 'relative',
         // color: 'red',
     };
 
     return (
-        <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
+        <div className={'WbbEditViewFighterSortable'}
+            ref={setNodeRef} style={style} {...attributes} {...listeners}
+        >
             <WbbEditViewFighter
                 item={fighter}
                 index={index}

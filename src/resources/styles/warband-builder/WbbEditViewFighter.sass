@@ -3,7 +3,25 @@
 // The short Fighter Element in the edit view
 //
 
+// The Wrapper if the item is sortable
+.WbbEditViewFighterSortable
+    touch-action: manipulation
+    user-select: none
+    -webkit-touch-callout: none
+    position: relative
 
+    &:before
+        content: ""
+        position: absolute
+        z-index: 5
+        top: 0
+        left: 0
+        right: 0
+        bottom: 0
+        width: 100%
+        background-color: rgba(255,255,0,0.4)
+
+// the actual fighter element
 .WbbEditViewFighter
     position: relative
     padding: 10px 15px
