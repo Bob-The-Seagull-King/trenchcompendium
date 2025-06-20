@@ -264,8 +264,8 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
 
                                         {!playMode &&
                                             <>
-                                                {/* Warband Exploration */}
-                                                <h3 className={'category-headline'}>Exploration</h3>
+                                                {/* Warband Exploration Locations */}
+                                                <h3 className={'category-headline'}>Exploration Locations</h3>
 
                                                 <WbbEditViewExploration
                                                     index={123}
@@ -274,7 +274,7 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                                                 <div className={'btn btn-add-element btn-block'}
                                                      onClick={() => setShowAddExplorationModal(true)}>
                                                     <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
-                                                    {'Add Exploration'}
+                                                    {'Add Exploration Location'}
                                                 </div>
                                             </>
                                         }

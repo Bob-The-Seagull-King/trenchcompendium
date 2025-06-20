@@ -134,7 +134,7 @@ const WbbWarbandDetailView: React.FC<WbbWarbandDetailViewProps> = ({  onClose })
 
                     {/* Warband Rules */}
                     {/* @TODO: only show if warband has Special Rules */}
-                    <WbbDetailViewCollapse title="Special Rules" initiallyOpen={true}>
+                    <WbbDetailViewCollapse title='Faction Special Rules' initiallyOpen={true}>
                         {warband.warband_data.GetSpecialRules().map((specialRule, index) => (
                             <WbbSpecialRule
                                 key={index}
