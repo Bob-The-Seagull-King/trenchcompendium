@@ -1,26 +1,41 @@
-import WbbEditViewFighter from "../WbbEditViewFighter";
-import {useSortable} from "@dnd-kit/sortable";
-import {RealWarbandPurchaseModel} from "../../../../classes/saveitems/Warband/Purchases/WarbandPurchase";
+import React from 'react';
+import WbbEditViewFighter from '../WbbEditViewFighter';
+import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-function WbbEditViewFighterSortable({
-                             fighter,
-                             index,
-                             onClick,
-                             isActive
-                         }: {
+import { RealWarbandPurchaseModel } from '../../../../classes/saveitems/Warband/Purchases/WarbandPurchase';
+
+interface WbbEditViewFighterSortableProps {
     fighter: RealWarbandPurchaseModel;
     index: number;
     onClick: () => void;
     isActive: boolean;
-}) {
-    const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
-        id: fighter.model.ID,
-    });
+}
 
-    const style = {
+const WbbEditViewFighterSortable: React.FC<WbbEditViewFighterSortableProps> = ({
+                                                                                   fighter,
+                                                                                   index,
+                                                                                   onClick,
+                                                                                   isActive
+                                                                               }) => {
+    const {
+        attributes,
+        listeners,
+        setNodeRef,
+        transform,
+        transition,
+        isDragging,
+    } = useSortable({ id: fighter.model.ID });
+
+    const style: React.CSSProperties = {
         transform: CSS.Transform.toString(transform),
         transition,
-        touchAction: 'manipulation', // for better mobile drag
+        touchAction: 'manipulation', // improves mobile drag handling
+        userSelect: 'none',         // ❌ disables text selection
+        WebkitUserSelect: 'none',   // ❌ disables text selection on Safari
+        WebkitTouchCallout: 'none', // ❌ disables iOS system context menu
+        cursor: isDragging ? 'grabbing' : 'pointer',
+        zIndex: isDragging ? '3' : '2',
+        position: 'relative',
     };
 
     return (
@@ -33,6 +48,6 @@ function WbbEditViewFighterSortable({
             />
         </div>
     );
-}
+};
 
 export default WbbEditViewFighterSortable;

@@ -23,25 +23,6 @@ import {
 import {CSS} from '@dnd-kit/utilities';
 import WbbEditViewFighterSortable from "../modals/WbbEditViewFighterSortable";
 
-function SortableItem({id}: {id: string}) {
-    const {attributes, listeners, setNodeRef, transform, transition} = useSortable({id});
-
-    const style = {
-        transform: CSS.Transform.toString(transform),
-        transition,
-        padding: '12px',
-        marginBottom: '8px',
-        background: '#eee',
-        border: '1px solid #ccc',
-        cursor: 'grab',
-    };
-
-    return (
-        <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
-            {id}
-        </div>
-    );
-}
 
 type DetailType = 'fighter' | 'stash' | 'warband' | 'campaign' | null;
 
