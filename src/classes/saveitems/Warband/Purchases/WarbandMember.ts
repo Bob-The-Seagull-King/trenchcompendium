@@ -31,7 +31,8 @@ interface IWarbandMember extends IContextObject {
     list_skills : IWarbandProperty[],
     experience : number,
     elite : boolean,
-    recruited: boolean
+    recruited: boolean,
+    fighterName: string
 }
 
 class WarbandMember extends DynamicContextObject {
@@ -46,6 +47,7 @@ class WarbandMember extends DynamicContextObject {
     Experience : number;
     Elite : boolean;
     Recruited : boolean;
+    FighterName?: string; // @TODO: Set fighter name
 
     /**
      * Assigns parameters and creates a series of description
@@ -154,7 +156,8 @@ class WarbandMember extends DynamicContextObject {
             list_skills : skillset,
             experience : this.Experience,
             elite : this.Elite,
-            recruited : this.Recruited
+            recruited : this.Recruited,
+            fighterName: '' // @TODO: Set Fighter name - initially empty Fighter Name might even be correct
         }
         
         return _objint;
@@ -219,6 +222,12 @@ class WarbandMember extends DynamicContextObject {
         return false;
     }
 
+    /**
+     * Is this fighter Elite?
+     *
+     * @constructor
+     * @return: boolean
+     */
     public IsElite(): boolean {
         return this.Elite;
     }
@@ -273,6 +282,101 @@ class WarbandMember extends DynamicContextObject {
             }
         }
         return count;
+    }
+
+    /**
+     * Get the name of the Fighter
+     * - i.e. "Steve the fearless"
+     *
+     * // @TODO: This need to be set somewhere
+     * @return: string
+     */
+    GetFighterName () {
+        return this.FighterName;
+    }
+
+    /**
+     * Get the name of the Model
+     * - i.e. "Desecrated Saint"
+     *
+     * @return: string
+     */
+    GetModelName () {
+        return this.Name;
+    }
+
+    /**
+     * The base ducats cost of the fighter on recruitment
+     *
+     * @return: int
+     */
+    GetBaseCostDucats () {
+        return 50;
+    }
+
+    /**
+     * Return the total cost of the fighter in Ducats
+     * - This includes base cost plus upgrades
+     *
+     * // @TODO: calculate actual ducats value
+     * @return: int
+     */
+    GetTotalCostDucats () {
+
+        const $total = this.GetBaseCostDucats () + 50;
+        return $total;
+
+    }
+
+    /**
+     * The base glory cost of the fighter on recruitment
+     *
+     * @return: int
+     */
+    GetBaseCostGlory () {
+        return 0;
+    }
+
+    /**
+     * Returns the total cost of the fighter in Glory
+     * - This includes base cost plus upgrades
+     *
+     * // @TODO: calculate actual glory value
+     * @return: int
+     */
+    GetTotalCostGlory () {
+
+        const total = this.GetBaseCostGlory() + 2;
+        return total;
+    }
+
+    /**
+     * Return the model slug / id
+     * - is used to grab images for model
+     *
+     * @return: string
+     */
+    GetModelSlug () {
+        return this.ID;
+    }
+
+    /**
+     * The Experience points of the fighter
+     *
+     * @return: int
+     */
+    GetExperiencePoints () {
+        return this.Experience;
+    }
+
+    /**
+     * The Number of battle scars of this fighter
+     * // @TODO: return the actual amount of battle scars
+     *
+     * @return: int
+     */
+    GetBattleScars () {
+        return 2;
     }
 
 }

@@ -33,14 +33,18 @@ import WbbContextualPopover from "./WbbContextualPopover";
 import SynodModelImage from "../../../utility/SynodModelImage";
 import SynodModelImageSource from "../../../utility/SynodModelImageSource";
 import WbbModalEditFighterStatus from "./modals/fighter/WbbEditFighterStatus";
+import {IWarbandMember} from "../../../classes/saveitems/Warband/Purchases/WarbandMember";
 
 
 interface WbbFighterDetailViewProps {
-    fighter: any;
+    warbandmember: any;
     onClose: () => void;
 }
 
-const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, onClose }) => {
+const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmember, onClose }) => {
+
+
+    const fighter = warbandmember.model;
 
     // Test Data ***
     const BoolOptions = [
@@ -202,30 +206,36 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
                 </div>
 
                 <div className={'title-text fighter-name'}>
-                    {fighter.ModelName + ' - ' + fighter.FighterName}
+                    {fighter.GetModelName()}
+                    { fighter.GetFighterName() != '' &&
+                        <>
+                            {' - ' + fighter.GetFighterName()}
+                        </>
+                    }
+
                 </div>
 
                 <div className={'fighter-cost'}>
-                    { fighter.FighterTotalCostDucats > 0 &&
+                    { fighter.GetTotalCostDucats() > 0 &&
                         <>
-                            {fighter.FighterTotalCostDucats + " D"}
+                            {fighter.GetTotalCostDucats() + " D"}
                         </>
                     }
-                    { fighter.FighterTotalCostDucats > 0 && fighter.FighterTotalCostGlory > 0 &&
+                    { fighter.GetTotalCostDucats() > 0 && fighter.GetTotalCostGlory() > 0 &&
                         <>
                             {" / "}
                         </>
                     }
-                    { fighter.FighterTotalCostGlory > 0 &&
+                    { fighter.GetTotalCostGlory() > 0 &&
                         <>
-                            {fighter.FighterTotalCostGlory + " G"}
+                            {fighter.GetTotalCostGlory() + " G"}
                         </>
                     }
                 </div>
 
                 {!playMode &&
                     <WbbContextualPopover
-                        id={`fighter-detail-${fighter.FighterIndex}`}
+                        id={`fighter-detail-`} // @TODO: add unique fighter index identifier to distinguish fighter with the same model / name
                         type="fighter"
                         item={fighter}
                     />
@@ -233,10 +243,10 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
             </div>
 
             <div className={'fighter-card-main-area'}>
-                {fighter.FighterImageId > 0 &&
+                {fighter.GetModelSlug() != '' &&
                     <div className={'fighter-image-wrap full'}>
                         <SynodModelImage
-                            modelSlug={fighter.Slug}
+                            modelSlug={fighter.GetModelSlug()}
                             size="medium"
                             className={'fighter-image'}
                         />
@@ -249,7 +259,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
                             {'Name: '}
                         </span>
                         <span className="fighter-meta-value">
-                            {fighter.FighterName}
+                            {fighter.GetFighterName()}
                         </span>
                     </div>
 
@@ -258,7 +268,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
                             {'Type: '}
                         </span>
                         <span className="fighter-meta-value">
-                            {fighter.ModelName}
+                            {fighter.GetModelName()}
                         </span>
                     </div>
 
@@ -268,14 +278,14 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
                                 {'Cost: '}
                             </span>
                             <span className="fighter-meta-value">
-                                {fighter.FighterBaseDucats > 0 &&
+                                {fighter.GetBaseCostDucats() > 0 &&
                                     <>
-                                        {fighter.FighterBaseDucats + " Ducats"}
+                                        {fighter.GetBaseCostDucats() + " Ducats"}
                                     </>
                                 }
-                                {fighter.FighterBaseGlory > 0 &&
+                                {fighter.GetBaseCostGlory() > 0 &&
                                     <>
-                                        {fighter.FighterBaseGlory + " Glory Points"}
+                                        {fighter.GetBaseCostGlory() + " Glory Points"}
                                     </>
                                 }
                             </span>
@@ -326,7 +336,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
                         {'Image: '}
 
                         <SynodModelImageSource
-                            modelSlug={fighter.Slug}
+                            modelSlug={fighter.GetModelSlug()}
                         />
                     </div>
                 </div>
@@ -418,7 +428,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
                     <WbbFighterCollapse title="Campaign Play">
 
                         {/* Experience */}
-                        {fighter.IsElite &&
+                        {fighter.IsElite() &&
                             <div className={'experience'}>
                                 <h3>{'Experience'}</h3>
 
@@ -432,7 +442,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
                                     {Array.from({length: 18}, (_, i) => {
                                         const level = i + 1;
                                         const isBold = boldXpIndices.includes(level);
-                                        const hasXP = level <= fighter.ExperiencePoints;
+                                        const hasXP = level <= fighter.GetExperiencePoints();
 
                                         return (
                                             <div
@@ -462,7 +472,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
                                 <div className="battle-scar-boxes" onClick={() => setShowEditScars(true)}>
                                     {Array.from({length: 3}, (_, i) => {
                                         const index = i + 1;
-                                        const isChecked = index <= fighter.BattleScars;
+                                        const isChecked = index <= fighter.GetBattleScars();
                                         const isSkull = index === 3;
 
                                         return (
@@ -529,14 +539,14 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
                         <WbbEditFighterExperience
                             show={showXPModal}
                             onClose={() => setShowXPModal(false)}
-                            currentXP={fighter.ExperiencePoints} // @TODO: use actual XP value
+                            currentXP={fighter.GetExperiencePoints()} // @TODO: use actual XP value
                             // currentXP={selectedFighter.ExperiencePoints}
                             onSubmit={handleXPSubmit}
                         />
                         <WbbEditBattleScars
                             show={showEditScars}
                             onClose={() => setShowEditScars(false)}
-                            currentScars={fighter.BattleScars} // @TODO: use actual BS value
+                            currentScars={fighter.GetBattleScars()} // @TODO: use actual BS value
                             onSubmit={handleUpdateBattleScars}
                         />
                         <WbbModalAddAdvancement
@@ -611,7 +621,9 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
                         ))}
                     </div>
 
-                    {/* @TODO: add upgrades as well as WbbAbilityDisplay */}
+                    {/*
+                        @TODO: add upgrades as well as WbbAbilityDisplay
+                    */}
 
                     <div className={'play-mode-advancements-wrap'}>
                         <h3>{'Advancements'}</h3>
@@ -626,11 +638,8 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ fighter, on
                             <WbbEditViewInjury injury={injury} key={injury.Id}/>
                         ))}
                     </div>
-
                 </div>
             }
-
-
         </div>
     );
 };

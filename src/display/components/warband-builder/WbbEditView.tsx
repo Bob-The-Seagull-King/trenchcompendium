@@ -284,7 +284,7 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                                         {/* The Fighter Detail View */}
                                         {detailType === 'fighter' && detailPayload && (
                                             <WbbFighterDetailView
-                                                fighter={detailPayload}
+                                                warbandmember={detailPayload}
                                                 onClose={closeDetail}
                                             />
                                         )}
