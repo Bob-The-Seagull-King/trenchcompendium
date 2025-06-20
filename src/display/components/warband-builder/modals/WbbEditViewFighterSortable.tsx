@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import WbbEditViewFighter from '../WbbEditViewFighter';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
@@ -34,6 +34,15 @@ const WbbEditViewFighterSortable: React.FC<WbbEditViewFighterSortableProps> = ({
         boxShadow: isDragging ? '0px 0px 8px 1px rgba(0,0,0,0.5)' : 'none',
         // color: 'red',
     };
+
+    useEffect(() => {
+        if (isDragging) {
+            const selection = window.getSelection();
+            if (selection && selection.type === 'Range') {
+                selection.removeAllRanges();
+            }
+        }
+    }, [isDragging]);
 
     return (
         <div className={'WbbEditViewFighterSortable'}
