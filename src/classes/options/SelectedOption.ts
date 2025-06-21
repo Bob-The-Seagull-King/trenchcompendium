@@ -22,11 +22,8 @@ class SelectedOption {
     }
 
     public async GetSelectionChoices() {
-        if (this.Option.Category == "contextobject") {
-            this.SelectionSet = await this.Option.FindChoices();
-        } else {
-            this.SelectionSet = this.Option.Selections;
-        }
+        const foundchoices = await this.Option.FindChoices();
+        this.SelectionSet = foundchoices
     }
 
     public GetSelectedTitle() {
@@ -49,9 +46,9 @@ class SelectedOption {
             this.SelectedChoice = null;
             this.NestedOption = null;
         } else {
-        for (let i = 0; i < this.Option.Selections.length; i++) {
-            if (this.Option.Selections[i].id == _id) {
-                this.SelectedChoice = this.Option.Selections[i]
+        for (let i = 0; i < this.SelectionSet.length; i++) {
+            if (this.SelectionSet[i].id == _id) {
+                this.SelectedChoice = this.SelectionSet[i]
                 const SelectedVal = this.SelectedChoice.value;
                 if ((SelectedVal instanceof StaticOptionContextObject)) {
                     this.HandleObjectDynamics(this.SelectedChoice);

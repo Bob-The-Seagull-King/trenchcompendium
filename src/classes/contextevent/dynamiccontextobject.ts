@@ -10,14 +10,17 @@ class DynamicContextObject extends ContextObject {
 
     public async GrabContextPackages(event_id : string, source_obj : ContextObject, arrs_extra : any[]) { 
         
+        
         const SubPackages : ContextPackage[] = await this.GrabSubPackages(event_id, source_obj, arrs_extra);
-
+        
+        /*
         for (let i = 0; i < SubPackages.length; i++) {
             SubPackages[i].callpath.push("DynamicContextObject")
             if (SubPackages[i].dyncontext == null) {
                 SubPackages[i].dyncontext = this;
             }
         }
+        */
 
         if (this.ContextData) {            
             for (const key of Object.keys(this.ContextKeys)) {

@@ -25,6 +25,7 @@ class SiteUserPublic {
     Achievements : IAchievement[] = []
     Friends : IFriend[] = []
     BuiltFriends : SiteUserPublic[] = []
+    Requests : IFriend[] = [];
     Warbands : SumWarband[] = [];
     ProfilePic : SynodProfilePicData;
     Campaigns : number[] = []
