@@ -687,9 +687,14 @@ class UserWarband extends DynamicContextObject {
         const ListOfRels : FactionEquipmentRelationship[] = []
         const AddedIDs : string[] = [];
         let BaseRels : FactionEquipmentRelationship[] = []
+        let RefRels : FactionEquipmentRelationship[] = []
         
         if (FacCheck != undefined) {
-            BaseRels = ((FacCheck.SelfDynamicProperty).OptionChoice as Faction).EquipmentItems
+            RefRels = ((FacCheck.SelfDynamicProperty).OptionChoice as Faction).EquipmentItems
+        }
+
+        for (let i = 0; i < RefRels.length; i++) {
+            BaseRels.push(RefRels[i]);
         }
 
         const eventmon : EventRunner = new EventRunner();
