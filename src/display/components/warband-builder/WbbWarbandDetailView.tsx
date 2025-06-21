@@ -11,6 +11,8 @@ import WbbEditGoeticSelectionModal from "./modals/warband/WbbEditGoeticSelection
 import WbbExplorationSkills from "./WbbExplorationSkills";
 import WbbExplorationSkill from "./WbbExplorationSkill";
 import WbbSpecialRule from "./WbbSpecialRule";
+import WbbOptionSelect from './modals/warband/WbbOptionSelect';
+import WbbEditViewModifier from './WbbEditViewModifier';
 
 interface WbbWarbandDetailViewProps {
     onClose: () => void;
@@ -96,51 +98,47 @@ const WbbWarbandDetailView: React.FC<WbbWarbandDetailViewProps> = ({  onClose })
                 {/* Warband level options */}
                 <div className={'WbbDetailViewCollapse-wrap'}>
                     {/* @TODO: only show if warband has options */}
-                    <WbbDetailViewCollapse title="Warband Options" initiallyOpen={true}>
+                    {(warband.warband_data.Faction.MyFaction? warband.warband_data.Faction.MyFaction.SelfDynamicProperty.Selections.length : 0) > 0 &&
+                        <WbbDetailViewCollapse title="Warband Options" initiallyOpen={true}>
 
-                        {/* Goetic Options */}
-                        {warband.warband_data.HasGoeticOptions() &&
-                            <>
-                                {/* @TODO
-                                      * - hide for all campaign Rounds but the first
-                                      * - hide in play mode
-                                */}
-                                
-                                <WbbOptionBox
-                                    title={'Seven Deadly Sins'}
-                                    value={goeticDiscipline}
-                                    onClick={() => setshowGoeticModal(true)}
+                            {(warband.warband_data.Faction.MyFaction? warband.warband_data.Faction.MyFaction.SelfDynamicProperty.Selections.length : 0) > 0 &&
+                                <span className={'title-choice'}>
+                                    {(warband.warband_data.Faction.MyFaction? warband.warband_data.Faction.MyFaction.SelfDynamicProperty.Selections : []).map((item) => 
+                                        <WbbOptionSelect 
+                                            key={warband.warband_data.Faction.MyFaction? warband.warband_data.Faction.MyFaction.SelfDynamicProperty.Selections.indexOf(item) : 0}
+                                            choice={item}
+                                        />
+                                    )}                        
+                                </span>
+                            }
+                        </WbbDetailViewCollapse>
+                    }
+                    {warband?.warband_data.GetWarbandFactionOptionsModifiersList().length > 0 &&
+                        <WbbDetailViewCollapse title='Faction Selections' initiallyOpen={true}>
+                            
+                            {warband?.warband_data.GetWarbandFactionOptionsModifiersList().map((item) =>
+                                <WbbEditViewModifier
+                                    key={item.GetTrueName()}
+                                    warbprop={item}
+                                    isinner={true}
+                                    index={warband?.warband_data.GetWarbandFactionOptionsModifiersList().indexOf(item)}
                                 />
-
-                                <WbbEditGoeticSelectionModal
-                                    show={showGoeticModal}
-                                    onClose={() => setshowGoeticModal(false)}
-                                    currentGoetic={goeticDiscipline}
-                                    onSubmit={handleGoeticUpdate}
+                            )}
+                        </WbbDetailViewCollapse>
+                    }
+                    {warband?.warband_data.GetWarbandFactionModifiersList().length > 0 &&
+                        <WbbDetailViewCollapse title='Faction Special Rules' initiallyOpen={true}>
+                            
+                            {warband?.warband_data.GetWarbandFactionModifiersList().map((item) =>
+                                <WbbEditViewModifier
+                                    key={item.GetTrueName()}
+                                    warbprop={item}
+                                    isinner={true}
+                                    index={warband?.warband_data.GetWarbandFactionModifiersList().indexOf(item)}
                                 />
-                            </>
-                        }
-
-                        {/*@TODO: add options to this area */}
-                        Warband level options go here.
-                        <br/>
-                        - Fireteams
-                        <br/>
-                        - HoW Weapon Selection
-
-                    </WbbDetailViewCollapse>
-
-                    {/* Warband Rules */}
-                    {/* @TODO: only show if warband has Special Rules */}
-                    <WbbDetailViewCollapse title='Faction Special Rules' initiallyOpen={true}>
-                        {warband.warband_data.GetSpecialRules().map((specialRule, index) => (
-                            <WbbSpecialRule
-                                key={index}
-                                Title={specialRule.name}
-                                Description={specialRule.description}
-                            />
-                        ))}
-                    </WbbDetailViewCollapse>
+                            )}
+                        </WbbDetailViewCollapse>
+                    }
 
                     <WbbDetailViewCollapse title="Exploration Skills" initiallyOpen={true}>
 

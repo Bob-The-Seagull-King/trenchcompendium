@@ -725,11 +725,27 @@ class UserWarband extends DynamicContextObject {
     }
 
     public GetModifiersList() {
+        const PropertyList : WarbandProperty[] = [];
+        return PropertyList;
+    }
+
+    public GetWarbandFactionModifiersList() {
+        
         let PropertyList : WarbandProperty[] = [];
 
-        PropertyList = [...PropertyList, ...this.Faction.GetModifierProperties()]
+        PropertyList = [...PropertyList, ...this.Faction.GetModifierProperties().filter((item) => item.SelfDynamicProperty.Selections.length == 0)]
 
         return PropertyList;
+    }
+
+    public GetWarbandFactionOptionsModifiersList() {
+        
+        let PropertyList : WarbandProperty[] = [];
+
+        PropertyList = [...PropertyList, ...this.Faction.GetModifierProperties().filter((item) => item.SelfDynamicProperty.Selections.length > 0)]
+
+        return PropertyList;
+
     }
 }
 

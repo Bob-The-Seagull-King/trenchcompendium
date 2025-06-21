@@ -11,9 +11,10 @@ import { ToolsController } from '../../../../../classes/_high_level_controllers/
 
 interface WbbEditSelectionProps {
     choice : SelectedOption;
+    isinner?: boolean;
 }
 
-const WbbOptionSelect: React.FC<WbbEditSelectionProps> = ({choice}) => {
+const WbbOptionSelect: React.FC<WbbEditSelectionProps> = ({choice, isinner}) => {
     const { warband, reloadDisplay, updateKey } = useWarband();
     const [selectedoption, setSelectedoption] = useState<IChoice | null>(choice.GetSelected());
 
@@ -29,7 +30,7 @@ const WbbOptionSelect: React.FC<WbbEditSelectionProps> = ({choice}) => {
         }
     };
     return (
-        <div className={'modifier-body'} key={updateKey}>
+        <div className={(isinner != undefined) ? (isinner == true)? 'modifier-inner-body' : 'modifier-body' : 'modifier-body'} key={updateKey}>
             <WbbOptionBox
                 title={choice.Option.Name}
                 value={choice.GetSelectedTitle()}

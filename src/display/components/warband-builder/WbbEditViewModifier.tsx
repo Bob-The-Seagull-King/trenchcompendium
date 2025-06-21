@@ -11,9 +11,10 @@ import WbbOptionSelect from './modals/warband/WbbOptionSelect';
 interface WbbEditViewModifierProps {
     warbprop: WarbandProperty;
     index : number
+    isinner?: boolean;
 }
 
-const WbbEditViewModifier: React.FC<WbbEditViewModifierProps> = ({ warbprop, index }) => {
+const WbbEditViewModifier: React.FC<WbbEditViewModifierProps> = ({ warbprop, index, isinner }) => {
 
     const { warband, updateKey } = useWarband();
     if (warband == null) return (<div>Loading...</div>);
@@ -24,20 +25,15 @@ const WbbEditViewModifier: React.FC<WbbEditViewModifierProps> = ({ warbprop, ind
                 <span className={'title-name'}>
                     {warbprop.GetTrueName()}
                 </span>
-
-                {/* actions */}
-                <WbbContextualPopover
-                    id={`modifier-${index}`}
-                    type="modifier"
-                    item={index}
-                />
             </div>
             
 
                 {warbprop.SelfDynamicProperty.Selections.length > 0 &&
+                
                     <span className={'title-choice'}>
                         {warbprop.SelfDynamicProperty.Selections.map((item) => 
                             <WbbOptionSelect 
+                                isinner={(isinner != undefined) ? isinner : false}
                                 key={warbprop.SelfDynamicProperty.Selections.indexOf(item)}
                                 choice={item}
                             />
@@ -45,7 +41,7 @@ const WbbEditViewModifier: React.FC<WbbEditViewModifierProps> = ({ warbprop, ind
                     </span>
                 }
 
-            <div className={'modifier-body'}>
+            <div className={(isinner != undefined) ? (isinner == true)? 'modifier-inner-body' : 'modifier-body' : 'modifier-body'}>
                 
                 {(warbprop.GetOwnDescription() != null) &&
                 <>
