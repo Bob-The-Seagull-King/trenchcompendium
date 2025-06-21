@@ -21,6 +21,8 @@ class RuleFactory {
         const rule = new Rule(_rule, parent)
         cache.AddToCache('rule', rule);
         await rule.ReloadOptions();
+        await rule.RunUpgradeOptions();
+        await rule.RunOptionsParse();
         return rule;
     }
 

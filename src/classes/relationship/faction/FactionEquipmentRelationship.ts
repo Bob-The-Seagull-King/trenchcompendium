@@ -38,8 +38,6 @@ class FactionEquipmentRelationship extends StaticContextObject {
         this.Cost = data.cost;
         this.CostType = data.costtype;
         this.Limit = data.limit;
-        this.GetFactions(data.faction_id)
-        this.RunEquipmentRestriction();
     }
 
     public async MakeItem(id : string) {
@@ -73,18 +71,16 @@ class FactionEquipmentRelationship extends StaticContextObject {
         return result;
     }
     
-    public RunEquipmentRestriction() {
+    public async RunEquipmentRestriction() {
         const EventProc : EventRunner = new EventRunner();
 
-        EventProc.runEvent(
+        this.RestrictedEquipment = await EventProc.runEvent(
             "getEquipmentRestriction",
             this,
             [],
             [],
             null
-        ).then(result => {
-            this.RestrictedEquipment = result;
-        });
+        )
     }
 
 }

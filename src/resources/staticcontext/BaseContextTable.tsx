@@ -784,14 +784,12 @@ export const BaseContextCallTable : CallEventTable = {
     faction_choose_equipment: {
         event_priotity: 0,
         async getAllFactionEquipmentRelationships(this: EventRunner, eventSource : any, relayVar : FactionEquipmentRelationship[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
-            
             const EquipRelModule = await import("../../classes/relationship/faction/FactionEquipmentRelationship");
             const DynamicModule = await import("../../classes/options/DynamicOptionContextObject");
             try {
                 if (context_main != null) {
                     if (context_main instanceof DynamicModule.DynamicOptionContextObject) {
                         const optionobj = context_main;
-                        console.log(optionobj);
                         for (let i = 0; i < optionobj.Selections.length; i++) {
                             const selection = optionobj.Selections[i];
                             if (selection.SelectedChoice != null) {
@@ -803,7 +801,8 @@ export const BaseContextCallTable : CallEventTable = {
                                         }
                                     }
                                     if (ispresent == false) {
-                                        relayVar.push(await selection.SelectedChoice.value)
+                                        console.log("ADDED " + selection.SelectedChoice.value.ID)
+                                        relayVar.push(selection.SelectedChoice.value)
                                     }
                                 }
                             }
@@ -813,15 +812,19 @@ export const BaseContextCallTable : CallEventTable = {
             } catch (e) {
                 console.log(e)
             }
+            console.log(relayVar);
             return relayVar;
         },
         async parseOptionsIntoRelevantType(this: EventRunner, eventSource : any, relayVar : IChoice[],  trackVal : number, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null){
             
             const { EquipmentFactory } = await import("../../factories/features/EquipmentFactory");
+            const { FactionEquipmentRelationship } = await import("../../classes/relationship/faction/FactionEquipmentRelationship");
 
             for (let i = 0; i < relayVar.length; i++) {
                 
-                const ModelItem = await EquipmentFactory.CreateFactionEquipment(relayVar[i].value, null)
+                const ModelItem = ((relayVar[i].value instanceof FactionEquipmentRelationship)? relayVar[i].value :
+                    await EquipmentFactory.CreateFactionEquipment(relayVar[i].value, null)
+                )
                 relayVar[i].value = ModelItem;
             }
 
@@ -830,13 +833,15 @@ export const BaseContextCallTable : CallEventTable = {
         async parseOptionFilterDown(this: EventRunner, eventSource : any, relayVar : IChoice[], trackVal : number, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
             
             const { EquipmentFactory } = await import("../../factories/features/EquipmentFactory");
+            const { FactionEquipmentRelationship } = await import("../../classes/relationship/faction/FactionEquipmentRelationship");
             
             const NewChoices : IChoice[] = []
             const SubItem = context_func["additions"][trackVal]
-
             for (let i = 0; i < relayVar.length; i++) {
-                
-                const ModelItem = await EquipmentFactory.CreateFactionEquipment(relayVar[i].value, null)
+
+                const ModelItem = ((relayVar[i].value instanceof FactionEquipmentRelationship)? relayVar[i].value :
+                    await EquipmentFactory.CreateFactionEquipment(relayVar[i].value, null)
+                )
                 if (ModelItem.EquipmentItem == undefined) {
                     continue;
                 }
@@ -887,7 +892,7 @@ export const BaseContextCallTable : CallEventTable = {
 
             for (let i = 0; i < relayVar.length; i++) {
                 
-                const ModelItem = EquipmentFactory.CreateFactionEquipment(relayVar[i].value, null)
+                const ModelItem = await EquipmentFactory.CreateFactionEquipment(relayVar[i].value, null)
                 relayVar[i].value = ModelItem;
             }
 

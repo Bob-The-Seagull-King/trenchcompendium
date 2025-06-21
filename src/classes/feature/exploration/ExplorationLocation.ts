@@ -41,39 +41,33 @@ class ExplorationLocation extends StaticOptionContextObject {
         super(data, parent)
         this.Description = DescriptionFactory(data.description, this);
         this.TableValue = data.location_value;
-        this.RunOptionsParse();
-        this.RunRestrictions();
     }
     
     
-    public RunRestrictions() {
+    public async RunRestrictions() {
         const EventProc : EventRunner = new EventRunner();
 
-        EventProc.runEvent(
+        this.RestrictedSelection  = await EventProc.runEvent(
             "getLocationRestrictions",
             this,
             [],
             [],
             null
-        ).then(result => {
-            this.RestrictedSelection = result;
-        });
+        )
     }
 
-    public RunOptionsParse() {
+    public async RunOptionsParse() {
         
         const EventProc : EventRunner = new EventRunner();
         for (let i = 0; i < this.MyOptions.length; i++) {
-            EventProc.runEvent(
+            const result = await EventProc.runEvent(
                 "parseOptionsIntoRelevantType",
                 this,
                 [],
                 this.MyOptions[i].Selections,
                 i
-            ).then(result => {
-                this.MyOptions[i].Selections = result;
-                
-            });
+            )
+            this.MyOptions[i].Selections = result;
         }
     }
 

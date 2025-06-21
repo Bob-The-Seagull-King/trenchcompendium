@@ -68,9 +68,13 @@ class EquipmentFactory {
         if (isValid == false) {
             return cache.FactionEquipmentCache[_rule.id];
         }
+        
         const rule = new FactionEquipmentRelationship(_rule, parent)
+        
         cache.AddToCache('factionequipment', rule);
         await rule.MakeItem(_rule.equipment_id);
+        await rule.GetFactions(_rule.faction_id)
+        await rule.RunEquipmentRestriction();
         return rule;
     }
 
@@ -81,6 +85,7 @@ class EquipmentFactory {
             return cache.FactionEquipmentCache[_val];
         }
         const ruledata = Requester.MakeRequest({searchtype: "id", searchparam: {type: "factionequipmentrelationship", id: _val}}) as IFactionEquipmentRelationship
+        
         const rulenew = await EquipmentFactory.CreateFactionEquipment(ruledata, parent)
         return rulenew;
     }

@@ -21,6 +21,7 @@ class SkillFactory {
         const rule = new Skill(_rule, parent)
         cache.AddToCache('skill', rule);
         await rule.ReloadOptions();
+        await rule.RunOptionsParse();
         return rule;
     }
 

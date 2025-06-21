@@ -25,6 +25,7 @@ class DynamicOptionContextObject extends DynamicContextObject {
     }
 
     public async BuildSelections() {
+        await this.ReloadOption();
         for (let i = 0; i < this.OptionChoice.MyOptions.length; i++) {
             const NewSelection : SelectedOption = new SelectedOption(this.OptionChoice.MyOptions[i], this);
             await NewSelection.GetSelectionChoices();

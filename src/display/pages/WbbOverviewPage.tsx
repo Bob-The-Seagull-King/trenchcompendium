@@ -50,9 +50,6 @@ const WbbOverviewPage = (prop: any) => {
 
     };
 
-    console.log('allwarbands');
-    console.log(allwarbands);
-
     return (
         <div className={'WbbOverviewPage'}>
             <div className={'container'}>

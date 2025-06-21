@@ -50,6 +50,8 @@ class ExplorationFactory {
         const rule = new ExplorationLocation(_rule, parent)
         cache.AddToCache('explorationlocation', rule);
         await rule.ReloadOptions();
+        await rule.RunOptionsParse();
+        await rule.RunRestrictions();
         return rule;
     }
 

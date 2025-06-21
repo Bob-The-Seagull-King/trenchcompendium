@@ -22,8 +22,7 @@ class SelectedOption {
     }
 
     public async GetSelectionChoices() {
-        const foundchoices = await this.Option.FindChoices();
-        this.SelectionSet = foundchoices
+        this.SelectionSet = this.Option.Selections;
     }
 
     public GetSelectedTitle() {

@@ -35,48 +35,41 @@ class Rule extends StaticOptionContextObject {
     {
         super(data, parent)
         this.Description = DescriptionFactory(data.description, this);
-        this.RunUpgradeOptions();
-        this.RunOptionsParse();
     }
 
-    public RunOptionsParse() {
+    public async RunOptionsParse() {
         
         const EventProc : EventRunner = new EventRunner();
         for (let i = 0; i < this.MyOptions.length; i++) {
-            EventProc.runEvent(
+            const ResultA = await EventProc.runEvent(
                 "parseOptionFilterDown",
                 this,
                 [],
                 this.MyOptions[i].Selections,
                 i
-            ).then(result => {
-                this.MyOptions[i].Selections = result;
-                EventProc.runEvent(
+            )
+            this.MyOptions[i].Selections = ResultA;
+            this.MyOptions[i].Selections = await EventProc.runEvent(
                     "parseOptionsIntoRelevantType",
                     this,
                     [],
                     this.MyOptions[i].Selections,
                     i
-                ).then(result => {
-                    this.MyOptions[i].Selections = result;
-                });
-            });
+                )
         }
     }
     
 
-    public RunUpgradeOptions() {
+    public async RunUpgradeOptions() {
         const EventProc : EventRunner = new EventRunner();
 
-        EventProc.runEvent(
+        this.BonusUpgrades = await EventProc.runEvent(
             "getFactionRuleUpgrades",
             this,
             [],
             [],
             null
-        ).then(result => {
-            this.BonusUpgrades = result;
-        });
+        )
     }
 
 

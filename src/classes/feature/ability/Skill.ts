@@ -34,7 +34,6 @@ class Skill extends BaseAddon {
             this.TableVal = -1;
         }
 
-        this.RunOptionsParse();
     }
 
 

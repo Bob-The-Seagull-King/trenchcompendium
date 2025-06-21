@@ -21,8 +21,6 @@ const WbbWarbandDetailView: React.FC<WbbWarbandDetailViewProps> = ({  onClose })
     const { warband } = useWarband();
     if (warband == null) return (<div>Loading...</div>);
 
-    console.log(warband);
-
     /** Goetic Options */
     const [goeticDiscipline, setGoeticDiscipline] = useState<string>(warband.warband_data.GetGoeticSelection());
 
