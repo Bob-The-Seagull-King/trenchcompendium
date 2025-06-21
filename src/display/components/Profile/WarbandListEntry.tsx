@@ -7,9 +7,10 @@ import CustomNavLink from "../subcomponents/interactables/CustomNavLink";
 import SynodImage from "../../../utility/SynodImage";
 import {UserWarband} from "../../../classes/saveitems/Warband/UserWarband";
 import SynodFactionImage from "../../../utility/SynodFactionImage";
+import { SumWarband } from '../../../classes/saveitems/Warband/WarbandManager';
 
 interface WarbandListEntryProps {
-    warband: UserWarband
+    warband: SumWarband
 
 }
 
@@ -23,35 +24,35 @@ const WarbandListEntry: React.FC<WarbandListEntryProps> = ({
         <div className="WarbandListEntry">
             <CustomNavLink
                 classes={'WarbandListEntry-image-wrap'}
-                link={`/warband/${warband.GetId()}`}
+                link={`/warband/${warband}`}
                 runfunc={() => {
-                    navigate(`/warband/${warband.GetId()}`)
+                    navigate(`/warband/${warband.id}`)
                 }}>
 
                 <SynodFactionImage
                     className={'WarbandListEntry-image'}
-                    factionSlug={warband.GetFactionSlug()}
+                    factionSlug={warband.warband_data.GetFactionSlug()}
                 />
             </CustomNavLink>
 
             <div className={'WarbandListEntry-text'}>
                 <CustomNavLink
                     classes={'warband-name'}
-                    link={`/warband/${warband.GetId()}`}
+                    link={`/warband/${warband.id}`}
                     runfunc={() => {
-                        navigate(`/warband/${warband.GetId()}`)
+                        navigate(`/warband/${warband.id}`)
                     }}>
-                    {warband.GetWarbandName()}
+                    {warband.warband_data.GetWarbandName()}
                 </CustomNavLink>
 
                 <div className={'warband-faction'}>
-                    {warband.GetFactionName()}
+                    {warband.warband_data.GetFactionName()}
                 </div>
 
                 <div className={'warband-value'}>
-                    {warband.GetCostDucatsTotal() + ' Ductas'}
+                    {warband.warband_data.GetCostDucatsTotal() + ' Ductas'}
                     {' | '}
-                    {warband.GetCostGloryTotal() + ' Glory'}
+                    {warband.warband_data.GetCostGloryTotal() + ' Glory'}
                 </div>
             </div>
         </div>

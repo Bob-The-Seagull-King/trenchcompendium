@@ -22,7 +22,6 @@ const WbbEditGoeticSelectionModal: React.FC<WbbEditGoeticSelectionProps> = ({
 
     const handleSubmit = () => {
         onSubmit(selectedGoetic);
-        console.log('@TODO: handle change of goetic');
         onClose();
     };
 

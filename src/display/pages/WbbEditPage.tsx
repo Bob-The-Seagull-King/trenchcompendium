@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import WbbEditView from "../components/warband-builder/WbbEditView";
-import { WarbandManager } from '../../classes/saveitems/Warband/WarbandManager';
+import { SumWarband, WarbandManager } from '../../classes/saveitems/Warband/WarbandManager';
 import { useLocation } from 'react-router-dom';
 import WarbandItemViewDisplay from '../components/features/saveitem/Warband/WarbandItemViewDisplay';
 import {PrintModeProvider} from "../../context/PrintModeContext";
 import PageMetaInformation from "../components/generics/PageMetaInformation";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
+import LoadingOverlay from '../components/generics/Loading-Overlay';
 
 const WbbEditPage = (prop: any) => {
     const Manager : WarbandManager = prop.manager;
@@ -12,7 +15,7 @@ const WbbEditPage = (prop: any) => {
     const { state } = useLocation();
     const urlPath = useLocation().pathname;
     const urlSplits = urlPath.split('/');
-    const [_currentItem, returnItem] = useState(grabItemFromURL);
+    const [_currentItem, returnItem] = useState<SumWarband | null>(null);
     const [keyval, setKeyVal] = useState(0);
     
     function grabItemFromURL() {
@@ -23,8 +26,13 @@ const WbbEditPage = (prop: any) => {
     }
     
     useEffect(() => {
-        returnItem(grabItemFromURL())
-        setKeyVal((prev) => (prev + 1))
+        async function SetWarband() {
+            await Manager.GetItemsAll();
+
+            returnItem(grabItemFromURL())
+            setKeyVal((prev) => (prev + 1))
+        }
+        SetWarband();
     }, [state]);
 
     return (
@@ -39,6 +47,14 @@ const WbbEditPage = (prop: any) => {
                         />
                     </PrintModeProvider>
                 </>
+            }
+            {_currentItem == null &&
+            
+                <div className={'warbands-loading-wrap'}>
+                    <LoadingOverlay
+                        message={'Loading your warbands'}
+                    />
+                </div>
             }
         </div>
     );

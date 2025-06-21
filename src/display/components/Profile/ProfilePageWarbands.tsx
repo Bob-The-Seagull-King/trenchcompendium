@@ -9,6 +9,7 @@ import {SiteUser} from "../../../classes/user_synod/site_user";
 import {SiteUserPublic} from "../../../classes/user_synod/user_public";
 import LoadingOverlay from "../generics/Loading-Overlay";
 import {UserWarband} from "../../../classes/saveitems/Warband/UserWarband";
+import { SumWarband } from '../../../classes/saveitems/Warband/WarbandManager';
 
 interface ProfilePageWarbandsProps {
     userData: SiteUser | SiteUserPublic | null;
@@ -18,7 +19,7 @@ interface ProfilePageWarbandsProps {
 
 const ProfilePageWarbands: React.FC<ProfilePageWarbandsProps> = ({ userData }) => {
 
-    const [warbands, setWarbands] = useState<UserWarband[]>([]);
+    const [warbands, setWarbands] = useState<SumWarband[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
     useEffect(() => {
@@ -31,7 +32,7 @@ const ProfilePageWarbands: React.FC<ProfilePageWarbandsProps> = ({ userData }) =
                 const warbandList = await userData.GetWarbands();
 
                 // Extract the warband_data objects (UserWarband instances)
-                const warbandObjects: UserWarband[] = warbandList.map((entry: any) => entry.warband_data);
+                const warbandObjects: SumWarband[] = warbandList.map((entry: any) => entry);
 
                 setWarbands(warbandObjects);
             } catch (error) {
@@ -75,7 +76,7 @@ const ProfilePageWarbands: React.FC<ProfilePageWarbandsProps> = ({ userData }) =
                     {warbands.length > 0 ? (
                         <ul className={'warbands-list'}>
                             {warbands.map((warband) => (
-                                <li key={warband.GetId()} className={'warband'}>
+                                <li key={warband.warband_data.GetId()} className={'warband'}>
                                     <WarbandListEntry
                                         warband={warband}
                                     />

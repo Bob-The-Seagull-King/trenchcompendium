@@ -20,6 +20,8 @@ class WarbandManager {
     private LocalIDCount : number;
     private UserProfile : SiteUser | null = null;
 
+    public ListOfWarbands : SumWarband[] = [];
+
     public constructor() {
         const StoredVal = localStorage.getItem('localwarbandcount')
         if (StoredVal != null) {
@@ -120,6 +122,7 @@ class WarbandManager {
      */
     public async GrabItems() {
         if (this.UserProfile != null) {
+            this.ListOfWarbands = this.UserProfile.Warbands;
             return this.UserProfile.Warbands;
         }
         const TempList: SumWarband[] = [];  
@@ -133,10 +136,12 @@ class WarbandManager {
                         warband_data:    await WarbandFactory.CreateUserWarband(ItemList[i].warband_data)
                     })
             }
+            this.ListOfWarbands = TempList;
             return TempList;
         } catch (e) {
             undefined;
         }
+        this.ListOfWarbands = TempList;
         return TempList;
     }
 
