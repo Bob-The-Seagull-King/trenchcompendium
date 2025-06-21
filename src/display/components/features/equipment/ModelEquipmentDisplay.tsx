@@ -19,6 +19,9 @@ import AbilityDisplay from '../ability/AbilityDisplay';
 import EquipmentDisplay from './EquipmentDisplay';
 import GenericCollapsableBlockDisplay from '../../../components/generics/GenericSoloBlockDisplay';
 import RulesEquipmentEntry from "../../rules-content/RulesEquipmentEntry";
+import RulesEquipmentMain from '../../../components/rules-content/RulesEquipmentMain';
+import RulesEquipmentStats from '../../../components/rules-content/RulesEquipmentStats';
+import RulesOverlay from '../../../components/rules-content/RulesOverlay';
 
 const ModelEquipmentDisplay = (props: any) => {
     const abilityObject: ModelEquipmentRelationship = props.data
@@ -47,7 +50,7 @@ const ModelEquipmentDisplay = (props: any) => {
             </>
         )
     }
-
+    
     return (
         <ErrorBoundary fallback={<div>Something went wrong with ModelEquipmentDisplay.tsx</div>}>
             <div className={'ModelEquipmentDisplay'}>
@@ -79,22 +82,46 @@ const ModelEquipmentDisplay = (props: any) => {
                 <>
                     {abilityObject.MyOptions.map((item) => (
                         <div key={item.RefID} >
-                            <GenericCollapsableBlockDisplay
-                                d_name={"Choose One Of The Following"}
-                                d_colour={"grey"}
-                                d_state={false}
-                                d_margin={"sml"}
-                                bordertype={0}
-                                d_method={() => <div className="">
+                            <table className={'table_headed table_headed-highlight'} style={{width:"100%"}}>
+                                <thead>
+                                    <tr>
+                                        <th>Choose One of the Following</th>
+                                    </tr>
+                                </thead>
+                                
+                                <tbody>
                                     {item.Selections.map((subitem) => (
-                                        <div key={"model_equipment_"+abilityObject.ID+"_equipment_id_"+subitem.value.ID}>
-
-                                            <div className={""}>
-                                                    <ModelEquipmentDisplay col_name={"Option " + (1+ item.Selections.indexOf(subitem))} data={subitem.value} team_col={team_color}/>
-                                            </div>
-                                        </div>
+                                        <tr key={subitem.value.ID}>
+                                            <td className={'font-normal'}>
+                                                {(subitem.value as ModelEquipmentRelationship).EquipmentItems.map((subsubitem) => 
+                                                    <span 
+                                                        key={subsubitem.ID} >
+                                                        {(subitem.value as ModelEquipmentRelationship).EquipmentItems.indexOf(subsubitem) > 0 &&
+                                                            <span>{" and "}</span>
+                                                        }
+                                                        <RulesOverlay
+                                                        titlename={subsubitem.Name}
+                                                        d_name={subsubitem.Name}
+                                                        d_method={() =>
+                                                            
+                                                            <div className={'rules-equipment-main'}>                    
+                                                                {/* Stats */}
+                                                                <RulesEquipmentStats
+                                                                    facrelObject={undefined}
+                                                                    baseobject={subsubitem}
+                                                                />
+                                                                <RulesEquipmentMain data={subsubitem}/>
+                                                            </div>
+                                                            }/>
+                                                    </span>
+                                                
+                                                )}
+                                                </td>
+                                        </tr>
                                     )) /* Abilities */}
-                                </div>} />
+                                </tbody>
+                            </table>
+                            
                         </div>
                     )) /* Abilities */}
                 </>}

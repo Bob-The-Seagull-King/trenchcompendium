@@ -15,7 +15,7 @@ import { UpgradeFactory } from "../../factories/features/UpgradeFactory";
 import { ErrorBoundary } from "react-error-boundary";
 import GenericDisplay from "../../display/components/generics/GenericDisplay"
 import ExplorationLocationDisplay from "../../display/components/features/exploration/ExplorationLocationDisplay";
-import { LocationRestriction } from "../../classes/feature/exploration/ExplorationLocation";
+import { ExplorationLocation, LocationRestriction } from "../../classes/feature/exploration/ExplorationLocation";
 import { Faction } from "../../classes/feature/faction/Faction";
 import SkillDisplay from "../../display/components/features/skill/SkillDisplay";
 import { WarbandProperty } from "../../classes/saveitems/Warband/WarbandProperty";
@@ -801,7 +801,6 @@ export const BaseContextCallTable : CallEventTable = {
                                         }
                                     }
                                     if (ispresent == false) {
-                                        console.log("ADDED " + selection.SelectedChoice.value.ID)
                                         relayVar.push(selection.SelectedChoice.value)
                                     }
                                 }
@@ -812,7 +811,6 @@ export const BaseContextCallTable : CallEventTable = {
             } catch (e) {
                 console.log(e)
             }
-            console.log(relayVar);
             return relayVar;
         },
         async parseOptionsIntoRelevantType(this: EventRunner, eventSource : any, relayVar : IChoice[],  trackVal : number, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null){
@@ -889,10 +887,13 @@ export const BaseContextCallTable : CallEventTable = {
         async parseOptionsIntoRelevantType(this: EventRunner, eventSource : any, relayVar : IChoice[],  trackVal : number, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null){
             
             const { EquipmentFactory } = await import("../../factories/features/EquipmentFactory");
+            const { FactionEquipmentRelationship } = await import("../../classes/relationship/faction/FactionEquipmentRelationship");
 
             for (let i = 0; i < relayVar.length; i++) {
                 
-                const ModelItem = await EquipmentFactory.CreateFactionEquipment(relayVar[i].value, null)
+                const ModelItem = ((relayVar[i].value instanceof FactionEquipmentRelationship)? relayVar[i].value :
+                    await EquipmentFactory.CreateFactionEquipment(relayVar[i].value, null)
+                )
                 relayVar[i].value = ModelItem;
             }
 
@@ -901,13 +902,16 @@ export const BaseContextCallTable : CallEventTable = {
         async parseOptionFilterDown(this: EventRunner, eventSource : any, relayVar : IChoice[], trackVal : number, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
             
             const { EquipmentFactory } = await import("../../factories/features/EquipmentFactory");
+            const { FactionEquipmentRelationship } = await import("../../classes/relationship/faction/FactionEquipmentRelationship");
             
             const NewChoices : IChoice[] = []
             const SubItem = context_func["additions"][trackVal]
 
             for (let i = 0; i < relayVar.length; i++) {
 
-                const ModelItem = await EquipmentFactory.CreateFactionEquipment(relayVar[i].value, null)
+                const ModelItem = ((relayVar[i].value instanceof FactionEquipmentRelationship)? relayVar[i].value :
+                    await EquipmentFactory.CreateFactionEquipment(relayVar[i].value, null)
+                )
                 if (ModelItem.EquipmentItem == undefined) {
                     continue;
                 }
@@ -957,9 +961,12 @@ export const BaseContextCallTable : CallEventTable = {
         async parseOptionsIntoRelevantType(this: EventRunner, eventSource : any, relayVar : IChoice[],  trackVal : number, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null){
             
             const { RuleFactory } = await import("../../factories/features/RuleFactory");
+            const { Rule } = await import("../../classes/feature/faction/Rule");
 
             for (let i = 0; i < relayVar.length; i++) {
-                const ModelItem = await RuleFactory.CreateRule(relayVar[i].value, null)
+                const ModelItem = ((relayVar[i].value instanceof Rule)? relayVar[i].value :
+                    await RuleFactory.CreateRule(relayVar[i].value, null)
+                )
                 relayVar[i].value = ModelItem;
                 relayVar[i].display_str = ModelItem.Name? ModelItem.Name : "";
             }
@@ -982,9 +989,12 @@ export const BaseContextCallTable : CallEventTable = {
         async parseOptionsIntoRelevantType(this: EventRunner, eventSource : any, relayVar : IChoice[],  trackVal : number, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null){
             
             const { ExplorationFactory } = await import("../../factories/features/ExplorationFactory");
+            const { ExplorationLocation } = await import("../../classes/feature/exploration/ExplorationLocation");
 
             for (let i = 0; i < relayVar.length; i++) {
-                const ModelItem = await ExplorationFactory.CreateExplorationLocation(relayVar[i].value, null)
+                const ModelItem = ((relayVar[i].value instanceof ExplorationLocation)? relayVar[i].value :
+                    await ExplorationFactory.CreateExplorationLocation(relayVar[i].value, null)
+                )
                 relayVar[i].value = ModelItem;
                 relayVar[i].display_str = ModelItem.Name? ModelItem.Name : "";
             }
@@ -1045,8 +1055,12 @@ export const BaseContextCallTable : CallEventTable = {
         async parseOptionsIntoRelevantType(this: EventRunner, eventSource : any, relayVar : IChoice[],  trackVal : number, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null){
             
             const { SkillFactory } = await import("../../factories/features/SkillFactory");
+            const { Skill } = await import("../../classes/feature/ability/Skill");
+            
             for (let i = 0; i < relayVar.length; i++) {
-                const ModelItem = await SkillFactory.CreateSkill(relayVar[i].value, null)
+                const ModelItem = ((relayVar[i].value instanceof Skill)? relayVar[i].value :
+                    await SkillFactory.CreateSkill(relayVar[i].value, null)
+                )
                 relayVar[i].value = ModelItem;
                 relayVar[i].display_str = ModelItem.Name? ModelItem.Name : "";
             }
@@ -1091,8 +1105,14 @@ export const BaseContextCallTable : CallEventTable = {
         async parseOptionsIntoRelevantType(this: EventRunner, eventSource : any, relayVar : IChoice[],  trackVal : number, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null){
             
             const { AbilityFactory } = await import("../../factories/features/AbilityFactory");
+            
+            const { Ability } = await import("../../classes/feature/ability/Ability");
+
             for (let i = 0; i < relayVar.length; i++) {
-                const ModelItem = await AbilityFactory.CreateAbility(relayVar[i].value, null)
+                
+                const ModelItem = ((relayVar[i].value instanceof Ability)? relayVar[i].value :
+                    await AbilityFactory.CreateAbility(relayVar[i].value, null)
+                )
                 relayVar[i].value = ModelItem;
                 relayVar[i].display_str = ModelItem.Name? ModelItem.Name : "";
             }

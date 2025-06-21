@@ -47,6 +47,7 @@ class EquipmentFactory {
         const rule = new ModelEquipmentRelationship(_rule, parent)
         cache.AddToCache('modelequipment', rule);
         await rule.BuildEquipment(_rule.mandatory_equipment);
+        await rule.ReloadOptions();
         await rule.BuildOptionEquipment();
         return rule;
     }
@@ -70,7 +71,6 @@ class EquipmentFactory {
         }
         
         const rule = new FactionEquipmentRelationship(_rule, parent)
-        
         cache.AddToCache('factionequipment', rule);
         await rule.MakeItem(_rule.equipment_id);
         await rule.GetFactions(_rule.faction_id)
