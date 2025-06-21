@@ -1571,7 +1571,7 @@
             }
         ],
         "options": [],
-        "keywords": ["kw_critical"],
+        "keywords": ["kw_critical","kw_consumable"],
         "modifiers": ["+1 to Injuries"]
     },
     {
