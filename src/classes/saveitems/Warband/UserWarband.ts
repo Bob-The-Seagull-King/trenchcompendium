@@ -531,15 +531,24 @@ class UserWarband extends DynamicContextObject {
     }
 
     public async SaveNote(text_new : string, title : string) {
+        let note : INote | null = null;
         for (let i = 0; i < this.Notes.length; i++) {
             if (this.Notes[i].title == title) {
+
                 this.Notes[i].text == text_new;
-                    
-                const Manager : ToolsController = ToolsController.getInstance();
-                await Manager.UserWarbandManager.UpdateItemInfo(this.ID)
                 break;
             }
         }
+        if (note == null) {
+            note = {
+                text: text_new,
+                title: title
+            }
+            this.Notes.push(note);
+        }
+                    
+        const Manager : ToolsController = ToolsController.getInstance();
+        await Manager.UserWarbandManager.UpdateItemInfo(this.ID)
 
     }
 
