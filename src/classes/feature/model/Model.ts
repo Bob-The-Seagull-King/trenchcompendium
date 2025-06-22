@@ -422,12 +422,17 @@ class Model extends StaticContextObject {
      */
     public GetBaseVariantName () {
         if( this.Variant != 'base' ) {
-            const vardata = Requester.MakeRequest({searchtype: "id", searchparam: {type: "modelvariant", id: this.ID}}) as IVariantModel
+            const vardata = this.SelfData as IVariantModel
             const cache = StaticDataCache.getInstance();
             const isValid = (cache.CheckID('model', vardata.base_id))
             if (isValid == true) {
                 const rtrnnm = cache.ModelCollectionCache[vardata.base_id].GetName();
                 return rtrnnm? rtrnnm : "";
+            } else {
+                const basedata = Requester.MakeRequest({searchtype: "id", searchparam: {type: "model=", id: vardata.base_id}}) as IModel
+                if (basedata.name) {
+                    return basedata.name;
+                }
             }
             const rtrnnm = this.GetName();
             return rtrnnm? rtrnnm : "";
