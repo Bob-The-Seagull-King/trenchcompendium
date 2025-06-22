@@ -1540,7 +1540,7 @@
         },
         "faction_id": ["fc_cultoftheblackgrail","fc_cultoftheblackgrail_fv_dirgeofthegreathegemon","fc_newantioch","fc_newantioch_fv_expeditionaryforcedofabyssinia","fc_newantioch_fv_kingdomofalbaassaultdetatchment","fc_newantioch_fc_stortruppenofthefreestateofprussia","fc_newantioch_fc_eirerangers","fc_newantioch_fv_papalstatesinterventionforce","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_knighthood",
-        "cost": 5,
+        "cost": 4,
         "costtype": 1,
         "limit": 1
     },
