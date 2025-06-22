@@ -50,6 +50,7 @@ class Model extends StaticContextObject {
     public KeyWord : Keyword[] = [];
     public Abilities : Ability[] = [];
     public Variant : string;
+    public BaseModel : Model | null = null;
     public UpgradeList : ModelUpgradeRelationship[] = []
     public EquipmentList : ModelEquipmentRelationship[] = []
 
@@ -421,24 +422,10 @@ class Model extends StaticContextObject {
      * Get the name of the Base variant of this model
      */
     public GetBaseVariantName () {
-        if( this.Variant != 'base' ) {
-            const vardata = this.SelfData as IVariantModel
-            const cache = StaticDataCache.getInstance();
-            const isValid = (cache.CheckID('model', vardata.base_id))
-            if (isValid == false) {
-                const rtrnnm = cache.ModelCollectionCache[vardata.base_id].GetName();
-                return (rtrnnm != undefined)? rtrnnm : "";
-            } else {
-                const basedata = Requester.MakeRequest({searchtype: "id", searchparam: {type: "model", id: vardata.base_id}}) as IModel
-                if (basedata.name) {
-                    return basedata.name;
-                }
-            }
-            const rtrnnm = this.GetName();
-            return (rtrnnm != undefined)? rtrnnm : "";
+        if (this.BaseModel == null) {
+            return this.GetTrueName();
         } else {
-            const rtrnnm = this.GetName();
-            return (rtrnnm != undefined)? rtrnnm : "";
+            return this.BaseModel.GetTrueName();
         }
     }
 

@@ -81,6 +81,8 @@ class ModelFactory {
         const BasedModelData : IModel = ModelCollection.MergeModels(_base, varaint);
         const rule = new Model(BasedModelData, parent)
         cache.AddToCache('model', rule);
+        const Base = await ModelFactory.CreateModel(_base, parent);
+        rule.BaseModel = Base;
         await rule.BuildKeywords(BasedModelData.keywords);
         await rule.BuildAbilities(BasedModelData.abilities);
         await rule.BuildModelUpgrades(BasedModelData.id);
