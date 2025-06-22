@@ -22,6 +22,8 @@ import {
 } from '@dnd-kit/sortable';
 import {CSS} from '@dnd-kit/utilities';
 import WbbEditViewFighterSortable from "../modals/WbbEditViewFighterSortable";
+import { WarbandMember } from '../../../../classes/saveitems/Warband/Purchases/WarbandMember';
+import { ToolsController } from '../../../../classes/_high_level_controllers/ToolsController';
 
 
 type DetailType = 'fighter' | 'stash' | 'warband' | 'campaign' | null;
@@ -38,7 +40,7 @@ interface WbbFighterShow {
 
 const WbbFighterShows : React.FC<WbbFighterShow> = ({ playMode, openDetail, detailType, detailPayload, setShowAddFighterEliteModal, setShowAddFighterTroopModal, setShowAddFighterMercenaryModal }) => {
 
-    const { warband, updateKey } = useWarband();
+    const { warband, updateKey, reloadDisplay } = useWarband();
 
     const sensors = useSensors(
         useSensor(PointerSensor, {
@@ -48,35 +50,12 @@ const WbbFighterShows : React.FC<WbbFighterShow> = ({ playMode, openDetail, deta
         })
     );
 
-    const handleDragEndElites = (event: any) => {
+    const handleDragEnd = (event: any) => {
         const {active, over} = event;
-
-        console.log('New fighter order:');
-        console.log('dragged: ');
-        console.log(active);
-        console.log('over: ');
-        console.log(over);
-
-    };
-    const handleDragEndTroops = (event: any) => {
-        const {active, over} = event;
-
-        console.log('New fighter order:');
-        console.log('dragged: ');
-        console.log(active);
-        console.log('over: ');
-        console.log(over);
-
-    };
-    const handleDragEndMercenaries = (event: any) => {
-        const {active, over} = event;
-
-        console.log('New fighter order:');
-        console.log('dragged: ');
-        console.log(active);
-        console.log('over: ');
-        console.log(over);
-
+        warband?.warband_data.ReorganiseFighters(active , over )
+        reloadDisplay()
+        const Manager : ToolsController = ToolsController.getInstance();
+        Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999)
     };
 
     return (
@@ -88,7 +67,7 @@ const WbbFighterShows : React.FC<WbbFighterShow> = ({ playMode, openDetail, deta
                 <DndContext
                     sensors={sensors}
                     collisionDetection={closestCenter}
-                    onDragEnd={handleDragEndElites}
+                    onDragEnd={handleDragEnd}
                 >
                     <SortableContext
                         items={warband.warband_data.GetFighters().map(f => f.model.ID)}
@@ -128,7 +107,7 @@ const WbbFighterShows : React.FC<WbbFighterShow> = ({ playMode, openDetail, deta
                 <DndContext
                     sensors={sensors}
                     collisionDetection={closestCenter}
-                    onDragEnd={handleDragEndElites}
+                    onDragEnd={handleDragEnd}
                 >
                     <SortableContext
                         items={warband.warband_data.GetFighters().map(f => f.model.ID)}
@@ -170,7 +149,7 @@ const WbbFighterShows : React.FC<WbbFighterShow> = ({ playMode, openDetail, deta
                         <DndContext
                             sensors={sensors}
                             collisionDetection={closestCenter}
-                            onDragEnd={handleDragEndMercenaries}
+                            onDragEnd={handleDragEnd}
                         >
                             <SortableContext
                                 items={warband.warband_data.GetFighters().map(f => f.model.ID)}

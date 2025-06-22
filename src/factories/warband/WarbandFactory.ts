@@ -71,9 +71,10 @@ class WarbandFactory {
         return rule;
     }
 
-    static async BuildWarbandMemberFromPurchase(rel: FactionModelRelationship, parent : DynamicContextObject | null) {
+    static async BuildWarbandMemberFromPurchase(rel: FactionModelRelationship, parent : UserWarband) {
+        const milliseconds = Date.now();
         const data : IWarbandMember = {
-                id: rel.Model.ID, // The id of the item
+                id: rel.Model.ID + "_" + parent.Models.length + "_" + milliseconds.toString(), // The id of the item
                 name: rel.Model.GetTrueName(), // The name of the item
                 source: rel.Model.Source? rel.Model.Source : "unknown", // The source of the item (core book, homebrew, etc)
                 tags: rel.Model.Tags,

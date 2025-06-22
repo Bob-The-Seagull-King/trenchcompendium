@@ -3,6 +3,7 @@ import WbbEditViewFighter from '../WbbEditViewFighter';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { RealWarbandPurchaseModel } from '../../../../classes/saveitems/Warband/Purchases/WarbandPurchase';
+import { DndContext } from '@dnd-kit/core';
 
 interface WbbEditViewFighterSortableProps {
     fighter: RealWarbandPurchaseModel;

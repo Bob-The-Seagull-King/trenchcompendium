@@ -747,6 +747,45 @@ class UserWarband extends DynamicContextObject {
         return PropertyList;
 
     }
+
+    public Test() {
+        console.log("TEST")
+    }
+
+    public ReorganiseFighters(set : any, over: any) {
+        let NewSet = null;
+        let NewOver = null;
+        
+        for (let i = 0; i < this.Models.length; i++) {
+            if (this.Models[i].HeldObject.ID == set.id) {
+                NewSet = this.Models[i];
+            }
+            if (this.Models[i].HeldObject.ID == over.id) {
+                NewOver = this.Models[i];
+            }
+        }
+
+        if (NewSet == null || NewOver == null) {
+            return;
+        }
+
+        const fromIndex = this.Models.indexOf(NewSet);
+        const toIndex = this.Models.indexOf(NewOver);
+
+        // Validate both members exist
+        if (fromIndex === -1 || toIndex === -1) {
+            return;
+        }
+
+        // Remove the member from its original position
+        this.Models.splice(fromIndex, 1);
+
+        // Recalculate toIndex if needed (shifted due to removal)
+        const adjustedIndex = fromIndex < toIndex ? toIndex - 1 : toIndex;
+
+        // Insert the member at the new position
+        this.Models.splice(adjustedIndex, 0, NewSet);
+    }
 }
 
 export {IUserWarband, UserWarband}
