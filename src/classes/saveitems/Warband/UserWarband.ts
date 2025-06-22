@@ -546,9 +546,6 @@ class UserWarband extends DynamicContextObject {
             }
             this.Notes.push(note);
         }
-                    
-        const Manager : ToolsController = ToolsController.getInstance();
-        await Manager.UserWarbandManager.UpdateItemInfo(this.ID)
 
     }
 

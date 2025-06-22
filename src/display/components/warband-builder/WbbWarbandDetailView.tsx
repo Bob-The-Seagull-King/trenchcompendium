@@ -13,6 +13,7 @@ import WbbExplorationSkill from "./WbbExplorationSkill";
 import WbbSpecialRule from "./WbbSpecialRule";
 import WbbOptionSelect from './modals/warband/WbbOptionSelect';
 import WbbEditViewModifier from './WbbEditViewModifier';
+import { ToolsController } from '../../../classes/_high_level_controllers/ToolsController';
 
 interface WbbWarbandDetailViewProps {
     onClose: () => void;
@@ -20,7 +21,7 @@ interface WbbWarbandDetailViewProps {
 
 const WbbWarbandDetailView: React.FC<WbbWarbandDetailViewProps> = ({  onClose }) => {
 
-    const { warband } = useWarband();
+    const { warband, reloadDisplay } = useWarband();
     if (warband == null) return (<div>Loading...</div>);
 
     /** Goetic Options */
@@ -153,6 +154,11 @@ const WbbWarbandDetailView: React.FC<WbbWarbandDetailViewProps> = ({  onClose })
                             title="Warband Notes"
                             onSave={(newText : string) => {
                                 warband?.warband_data.SaveNote(newText, 'notes')
+                                
+                    
+                                const Manager : ToolsController = ToolsController.getInstance();
+                                Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
+                                    () => reloadDisplay())
                             }}
                         />
 
@@ -162,6 +168,11 @@ const WbbWarbandDetailView: React.FC<WbbWarbandDetailViewProps> = ({  onClose })
                             title="Warband Lore"
                             onSave={(newText : string) => {
                                 warband?.warband_data.SaveNote(newText, 'lore')
+                                
+                    
+                                const Manager : ToolsController = ToolsController.getInstance();
+                                Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
+                                    () => reloadDisplay())
                             }}
                         />
                     </WbbDetailViewCollapse>
