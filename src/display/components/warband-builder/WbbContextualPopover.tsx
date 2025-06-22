@@ -68,7 +68,7 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
             } else { 
                 const Manager : ToolsController = ToolsController.getInstance();
                 Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
-                    () => reloadDisplay().then(() => toast.success(result)))
+                    () => reloadDisplay())
                 
             }
         })
@@ -82,7 +82,7 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
         warband?.warband_data.DeleteFighter(item).then(() => {
             const Manager : ToolsController = ToolsController.getInstance();
             Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
-                () => reloadDisplay().then(() => toast.success("Model Deleted")))
+                () => reloadDisplay())
         })
     }
 
