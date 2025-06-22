@@ -1,5 +1,5 @@
 import { CompendiumItem, ICompendiumItemData, ItemType } from '../../CompendiumItem'
-import { DescriptionFactory } from '../../../utility/functions';
+import { containsTag, DescriptionFactory } from '../../../utility/functions';
 import { INote } from '../../Note';
 import { IWarbandContextItem, WarbandContextItem } from './High_Level/WarbandContextItem';
 import { IWarbandExplorationSet, WarbandExplorationSet } from './CoreElements/WarbandExplorationSet';
@@ -694,7 +694,9 @@ class UserWarband extends DynamicContextObject {
         }
 
         for (let i = 0; i < RefRels.length; i++) {
-            BaseRels.push(RefRels[i]);
+            if (!containsTag(RefRels[i].Tags, "exploration_only")) {
+                BaseRels.push(RefRels[i]);
+            }
         }
 
         const eventmon : EventRunner = new EventRunner();
@@ -716,8 +718,10 @@ class UserWarband extends DynamicContextObject {
                 this
             )
             if ((!AddedIDs.includes(BaseRels[i].ID)) && this.GetCountOfEquipmentRel(BaseRels[i].ID) < maxcount || (maxcount == 0 && BaseRels[i].Limit == 0)) {
-                AddedIDs.push(BaseRels[i].ID)
-                ListOfRels.push(BaseRels[i]);
+                if (!containsTag(BaseRels[i].Tags, "exploration_only")) {
+                    AddedIDs.push(BaseRels[i].ID)
+                    ListOfRels.push(BaseRels[i]);
+                }
             }
         }
 
@@ -746,10 +750,6 @@ class UserWarband extends DynamicContextObject {
 
         return PropertyList;
 
-    }
-
-    public Test() {
-        console.log("TEST")
     }
 
     public ReorganiseFighters(set : any, over: any) {

@@ -5826,8 +5826,23 @@
         "description": [       
             {
                 "tags": {"desc_type" : "paragraph"},
-                "content": "You add a Trench Dog to your warband. You can have up to one of each dog type."
-            } 
+                "content": "",
+                "subcontent": [
+                          
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": "You add a "
+                    } ,    
+                    {
+                        "tags": {"desc_type" : "modelslim"},
+                        "content": "rel_fc_md_trenchdog"
+                    } ,    
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": " to your warband. You can have up to one of each dog type."
+                    } 
+                ]
+            }
         ],
         "lore": [            
             {
@@ -5855,11 +5870,26 @@
                 ]
             }
         },
-        "description": [       
+        "description": [    
             {
                 "tags": {"desc_type" : "paragraph"},
-                "content": "You add a Trench Dog to your warband. You can have up to one of each dog type."
-            } 
+                "content": "",
+                "subcontent": [
+                          
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": "You add a "
+                    } ,    
+                    {
+                        "tags": {"desc_type" : "modelslim"},
+                        "content": "rel_fc_md_trenchdog_guarddog"
+                    } ,    
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": " to your warband. You can have up to one of each dog type."
+                    } 
+                ]
+            }
         ],
         "lore": [            
             {
@@ -5891,11 +5921,26 @@
                 ]
             }
         },
-        "description": [       
+        "description": [      
             {
                 "tags": {"desc_type" : "paragraph"},
-                "content": "You add a Trench Dog to your warband. You can have up to one of each dog type."
-            } 
+                "content": "",
+                "subcontent": [
+                          
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": "You add a "
+                    } ,    
+                    {
+                        "tags": {"desc_type" : "modelslim"},
+                        "content": "rel_fc_md_trenchdog_mercydog"
+                    } ,    
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": " to your warband. You can have up to one of each dog type."
+                    } 
+                ]
+            }
         ],
         "lore": [            
             {
@@ -5927,11 +5972,26 @@
                 ]
             }
         },
-        "description": [       
+        "description": [      
             {
                 "tags": {"desc_type" : "paragraph"},
-                "content": "You add a Trench Dog to your warband. You can have up to one of each dog type."
-            } 
+                "content": "",
+                "subcontent": [
+                          
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": "You add a "
+                    } ,    
+                    {
+                        "tags": {"desc_type" : "modelslim"},
+                        "content": "rel_fc_md_trenchdog_martyrdomdog"
+                    } ,    
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": " to your warband. You can have up to one of each dog type."
+                    } 
+                ]
+            }
         ],
         "lore": [            
             {
@@ -5966,8 +6026,23 @@
         "description": [       
             {
                 "tags": {"desc_type" : "paragraph"},
-                "content": "You add a Trench Dog to your warband. You can have up to one of each dog type."
-            } 
+                "content": "",
+                "subcontent": [
+                          
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": "You add a "
+                    } ,    
+                    {
+                        "tags": {"desc_type" : "modelslim"},
+                        "content": "rel_fc_md_trenchdog_hellhound"
+                    } ,    
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": " to your warband. You can have up to one of each dog type."
+                    } 
+                ]
+            }
         ],
         "lore": [            
             {
