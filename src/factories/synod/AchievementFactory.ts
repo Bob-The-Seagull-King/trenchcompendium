@@ -8,6 +8,10 @@ const delay = (ms: number | undefined) => new Promise(res => setTimeout(res, ms)
 
 class AchievementFactory {
 
+    /**
+     * DEPRECIATED, ACHIEVEMENTS ARE STORED IN USER CURRENTLY
+     */
+    /*
     static async CreateAchievement(_val : number) {
 
         const synodcache : SynodDataCache = SynodDataCache.getInstance();
@@ -30,12 +34,6 @@ class AchievementFactory {
         if (!synodcache.CheckAchievementCache(_val)) {
             synodcache.AddAchievementCallCache(_val);
 
-            console.log('@TODO: _val is not the user id, cant do request');
-            console.log(_val);
-
-            /**
-             * This gets the Auth token from local storage. We could use the Auth Context maybe?
-             */
             const token = localStorage.getItem('jwtToken')
             const response = await fetch(`${SYNOD.URL}/wp-json/synod/v1/user-full/${_val}`, {
                 headers: {
@@ -55,6 +53,7 @@ class AchievementFactory {
 
         return null;
     }
+    */
 
 }
 

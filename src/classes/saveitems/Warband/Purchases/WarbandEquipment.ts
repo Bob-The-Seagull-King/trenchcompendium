@@ -38,7 +38,7 @@ class WarbandEquipment extends DynamicContextObject {
     }
     
     public BuildNewProperties() {
-        console.log("Build New Properties")
+        undefined;
     }
 
     public ConvertToInterface() {

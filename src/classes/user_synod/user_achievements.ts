@@ -6,6 +6,7 @@ interface IAchievement {
     name: string,
     description: string,
     image_url: string,
+    image: number,
     image_id: number
 }
 

@@ -24,7 +24,6 @@ class UserFactory {
         
         const rule = new SiteUserPublic(_rule)
         synodcache.publicObjectCache[_rule.id] = rule;
-        await rule.BuildAchievements(_rule);
         await rule.BuildFriends(_rule);
         await rule.BuildWarbands(_rule);
         return rule;

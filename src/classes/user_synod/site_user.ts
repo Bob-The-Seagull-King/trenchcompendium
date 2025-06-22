@@ -12,7 +12,7 @@ import {UserFactory} from "../../factories/synod/UserFactory";
 interface ISiteUser {
     id: number,
     nickname : string,
-    achievments: number[],
+    achievements: IAchievement[],
     friends: IFriend[],
     friend_requests: IFriend[],
     warbands: ISynodWarband[],
@@ -57,6 +57,7 @@ class SiteUser {
         this.ProfilePic = data.profile_picture;
         this.Friends = data.friends
         this.Requests = data.friend_requests
+        this.Achievements = data.achievements;
     }
 
     public async GenerateWarbands(data: ISiteUser) {
@@ -89,11 +90,6 @@ class SiteUser {
     }
 
     public ConvertToInterface() {
-        const achievementlist : number[] = []
-        for (let i = 0; i < this.Achievements.length; i++) {
-            achievementlist.push(this.Achievements[i].id)
-        }
-
         const warbandlist : ISynodWarband[] = []
         for (let i = 0; i < this.Warbands.length; i++) {
             warbandlist.push(
@@ -110,7 +106,7 @@ class SiteUser {
         const _objint : ISiteUser = {
             id : this.ID,
             nickname : this.Nickname,
-            achievments: achievementlist,
+            achievements: this.Achievements,
             friends: this.Friends,
             friend_requests : this.Requests,
             warbands: warbandlist,
@@ -355,33 +351,9 @@ class SiteUser {
      * @constructor
      */
     public async GetAchievements () {
-
-        // @TODO
-        console.log(' @TODO: return the list of achievements for this user here. @site_user -> GetAchievements()')
+        console.log("GET")
         console.log(this.Achievements);
-
-        /*
-        * return like this:
-        */
-        const achievements = [
-            {
-                "id": 84,
-                "name": "Friends with the Devil",
-                "description": "",
-                "image_id": 413,
-                "image_url": 'https://synod.trench-companion.com/wp-content/uploads/2025/06/friends_with_dev-300x300.png'
-            },
-            {
-                "id": 358,
-                "name": "The First Forging",
-                "description": "Created a warband",
-                "image_id": 421,
-                "image_url": 'https://synod.trench-companion.com/wp-content/uploads/2025/06/warband_creation_1-300x300.png'
-            }
-        ];
-
-
-        return achievements
+        return this.Achievements;
     }
 }
 

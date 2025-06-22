@@ -12,7 +12,7 @@ import { SumWarband } from "../saveitems/Warband/WarbandManager";
 interface ISiteUserPublic {
     id: number,
     nickname : string,
-    achievements: number[],
+    achievements: IAchievement[],
     friends: IFriend[],
     warbands: ISynodWarband[],
     campaigns: number[],
@@ -36,16 +36,7 @@ class SiteUserPublic {
         this.Nickname = data.nickname;
         this.ProfilePic = data.profile_picture;
         this.Friends = data.friends;
-    }
-
-    public async BuildAchievements(data: ISiteUserPublic) {
-        if (data.achievements == undefined) { return; }
-        for (let i = 0; i < data.achievements.length; i++) {
-            const newach = await AchievementFactory.CreateAchievement(data.achievements[i])
-            if (newach != null) {
-                this.Achievements.push(newach);
-            }
-        }
+        this.Achievements = data.achievements;
     }
 
     public async BuildFriends(data: ISiteUserPublic) {
@@ -77,10 +68,7 @@ class SiteUserPublic {
     }
 
     public ConvertToInterface() {
-        const achievementlist : number[] = []
-        for (let i = 0; i < this.Achievements.length; i++) {
-            achievementlist.push(this.Achievements[i].id)
-        }
+
         const warbandlist : ISynodWarband[] = []
         for (let i = 0; i < this.Warbands.length; i++) {
             warbandlist.push(
@@ -97,7 +85,7 @@ class SiteUserPublic {
         const _objint : ISiteUserPublic = {
             id : this.ID,
             nickname : this.Nickname,
-            achievements: achievementlist,
+            achievements: this.Achievements,
             friends: this.Friends,
             warbands: warbandlist,
             profile_picture: this.ProfilePic,
@@ -231,33 +219,9 @@ class SiteUserPublic {
      * @constructor
      */
     public async GetAchievements () {
-
-        // @TODO
-        console.log(' @TODO: return the list of achievements for this user here. @site_user -> GetAchievements()')
+        console.log("GET")
         console.log(this.Achievements);
-
-        /*
-        * return like this:
-        */
-        const achievements = [
-            {
-                "id": 84,
-                "name": "Friends with the Devil",
-                "description": "",
-                "image_id": 413, // deprecated
-                "image_url": 'https://synod.trench-companion.com/wp-content/uploads/2025/06/friends_with_dev-300x300.png'
-            },
-            {
-                "id": 358,
-                "name": "The First Forging",
-                "description": "Created a warband",
-                "image_id": 421, // deprecated
-                "image_url": 'https://synod.trench-companion.com/wp-content/uploads/2025/06/warband_creation_1-300x300.png'
-            }
-        ];
-
-
-        return achievements
+        return this.Achievements;
     }
 }
 

@@ -66,7 +66,7 @@ class WarbandMember extends DynamicContextObject {
     
 
     public BuildNewProperties() {
-        console.log("Build New Properties")
+        undefined;
     }
 
     public async BuildEquipment(data : IWarbandPurchaseEquipment[]) {

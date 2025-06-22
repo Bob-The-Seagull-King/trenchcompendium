@@ -53,7 +53,6 @@ class WarbandFaction extends DynamicContextObject {
                 let IsFound = false
                 for (let j = 0; j < data.faction_rules.length; j++) {
                     if (data.faction_rules[j].object_id == FactionObj.Rules[i].ID) {
-                        console.log(FactionObj.Rules[i].MyOptions)
                         const NewRuleProperty = new WarbandProperty(FactionObj.Rules[i], this, null, data.faction_rules[j]);
                         await NewRuleProperty.HandleDynamicProps(FactionObj.Rules[i], this, null, data.faction_rules[j]);
                         this.MyFactionRules.push(NewRuleProperty);

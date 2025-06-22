@@ -29,7 +29,7 @@ const ProfilePageAchievements: React.FC<ProfilePageAchievementsProps> = ({ userD
             try {
                 setIsLoading(true);
                 const achievementList = await userData.GetAchievements();
-
+                console.log(achievementList);
                 setAchievements(achievementList);
             } catch (error) {
                 console.error('Failed to load achievements:', error);
