@@ -427,18 +427,18 @@ class Model extends StaticContextObject {
             const isValid = (cache.CheckID('model', vardata.base_id))
             if (isValid == true) {
                 const rtrnnm = cache.ModelCollectionCache[vardata.base_id].GetName();
-                return rtrnnm? rtrnnm : "";
+                return (rtrnnm != undefined)? rtrnnm : "";
             } else {
-                const basedata = Requester.MakeRequest({searchtype: "id", searchparam: {type: "model=", id: vardata.base_id}}) as IModel
+                const basedata = Requester.MakeRequest({searchtype: "id", searchparam: {type: "model", id: vardata.base_id}}) as IModel
                 if (basedata.name) {
                     return basedata.name;
                 }
             }
             const rtrnnm = this.GetName();
-            return rtrnnm? rtrnnm : "";
+            return (rtrnnm != undefined)? rtrnnm : "";
         } else {
             const rtrnnm = this.GetName();
-            return rtrnnm? rtrnnm : "";
+            return (rtrnnm != undefined)? rtrnnm : "";
         }
     }
 
