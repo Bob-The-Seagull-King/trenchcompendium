@@ -16,6 +16,7 @@ import { Faction } from '../../feature/faction/Faction';
 import { FactionEquipmentRelationship } from '../../relationship/faction/FactionEquipmentRelationship';
 import { WarbandProperty } from './WarbandProperty';
 import { ContextPackage } from '../../contextevent/contextpackage';
+import { ToolsController } from 'classes/_high_level_controllers/ToolsController';
 
 interface IUserWarband extends IContextObject {
     id : string,
@@ -503,41 +504,57 @@ class UserWarband extends DynamicContextObject {
         return this.GetFighters().filter(f => f.model.IsMercenary()).length;
     }
 
-    /** @TODO
+    /** 
      * Returns the notes for this warband as string
      * @constructor
      */
     GetWarbandNotes () {
-        return '';
-
-        /**
-         * If empty, return ''
-         */
+        for (let i = 0; i < this.Notes.length; i++) {
+            if (this.Notes[i].title == 'notes') {
+                return this.Notes[i].text
+            }
+        }
+        return ''
     }
 
-    /** @TODO
+    /**
      * Returns the lore for this warband as string
      * @constructor
      */
     GetLore () {
-        return '';
-
-        /**
-         * If empty, return ''
-         */
+        for (let i = 0; i < this.Notes.length; i++) {
+            if (this.Notes[i].title == 'lore') {
+                return this.Notes[i].text
+            }
+        }
+        return ''
     }
 
-    /** @TODO:
+    public async SaveNote(text_new : string, title : string) {
+        for (let i = 0; i < this.Notes.length; i++) {
+            if (this.Notes[i].title == title) {
+                this.Notes[i].text == text_new;
+                    
+                const Manager : ToolsController = ToolsController.getInstance();
+                await Manager.UserWarbandManager.UpdateItemInfo(this.ID)
+                break;
+            }
+        }
+
+    }
+
+    /**
      * Returns the campaign notes for this warband as string
      *
      * @constructor
      */
     GetCampaignNotes () {
-        return '';
-
-        /**
-         * If empty, return ''
-         */
+        for (let i = 0; i < this.Notes.length; i++) {
+            if (this.Notes[i].title == 'campaign') {
+                return this.Notes[i].text
+            }
+        }
+        return ''
     }
 
     /** @TODO:

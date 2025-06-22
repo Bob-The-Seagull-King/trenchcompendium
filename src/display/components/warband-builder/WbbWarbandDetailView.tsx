@@ -151,9 +151,8 @@ const WbbWarbandDetailView: React.FC<WbbWarbandDetailViewProps> = ({  onClose })
                         <WbbTextarea
                             initialText={warband.warband_data.GetWarbandNotes()}
                             title="Warband Notes"
-                            onSave={(newText) => {
-                                // @TODO Save the newText as warband Notes
-                                console.log('@TODO Save the newText as warband Notes', newText);
+                            onSave={(newText : string) => {
+                                warband?.warband_data.SaveNote(newText, 'notes')
                             }}
                         />
 
@@ -161,9 +160,8 @@ const WbbWarbandDetailView: React.FC<WbbWarbandDetailViewProps> = ({  onClose })
                         <WbbTextarea
                             initialText={warband.warband_data.GetLore()}
                             title="Warband Lore"
-                            onSave={(newText) => {
-                                // @TODO Save the newText as warband Lore
-                                console.log('@TODO Save the newText as warband Lore', newText);
+                            onSave={(newText : string) => {
+                                warband?.warband_data.SaveNote(newText, 'lore')
                             }}
                         />
                     </WbbDetailViewCollapse>
