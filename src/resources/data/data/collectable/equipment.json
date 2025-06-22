@@ -5835,7 +5835,7 @@
                     } ,    
                     {
                         "tags": {"desc_type" : "modelslim"},
-                        "content": "rel_fc_md_trenchdog"
+                        "content": "md_trenchdog"
                     } ,    
                     {
                         "tags": {"desc_type" : "default"},
@@ -5882,7 +5882,7 @@
                     } ,    
                     {
                         "tags": {"desc_type" : "modelslim"},
-                        "content": "rel_fc_md_trenchdog_guarddog"
+                        "content": "md_trenchdog_guarddog"
                     } ,    
                     {
                         "tags": {"desc_type" : "default"},
@@ -5933,7 +5933,7 @@
                     } ,    
                     {
                         "tags": {"desc_type" : "modelslim"},
-                        "content": "rel_fc_md_trenchdog_mercydog"
+                        "content": "md_trenchdog_mercydog"
                     } ,    
                     {
                         "tags": {"desc_type" : "default"},
@@ -5984,8 +5984,8 @@
                     } ,    
                     {
                         "tags": {"desc_type" : "modelslim"},
-                        "content": "rel_fc_md_trenchdog_martyrdomdog"
-                    } ,    
+                        "content": "md_trenchdog_martyrdomdog"
+                    } ,   
                     {
                         "tags": {"desc_type" : "default"},
                         "content": " to your warband. You can have up to one of each dog type."
@@ -6035,7 +6035,7 @@
                     } ,    
                     {
                         "tags": {"desc_type" : "modelslim"},
-                        "content": "rel_fc_md_trenchdog_hellhound"
+                        "content": "md_trenchdog_hellhound"
                     } ,    
                     {
                         "tags": {"desc_type" : "default"},

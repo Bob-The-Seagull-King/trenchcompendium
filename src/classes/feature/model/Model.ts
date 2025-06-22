@@ -425,7 +425,7 @@ class Model extends StaticContextObject {
             const vardata = Requester.MakeRequest({searchtype: "id", searchparam: {type: "modelvariant", id: this.ID}}) as IVariantModel
             const cache = StaticDataCache.getInstance();
             const isValid = (cache.CheckID('model', vardata.base_id))
-            if (isValid == false) {
+            if (isValid == true) {
                 const rtrnnm = cache.ModelCollectionCache[vardata.base_id].GetName();
                 return rtrnnm? rtrnnm : "";
             }
