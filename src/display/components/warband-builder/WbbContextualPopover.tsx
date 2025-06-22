@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { OverlayTrigger, Popover, Modal, Button } from 'react-bootstrap';
+
+import { ToastContainer, toast } from 'react-toastify';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faEllipsisVertical,
@@ -16,6 +18,7 @@ import {usePlayMode} from "../../../context/PlayModeContext";
 import {usePrintMode} from "../../../context/PrintModeContext";
 import {useGlobalState} from "../../../utility/globalstate";
 import { ToolsController } from '../../../classes/_high_level_controllers/ToolsController';
+import { RealWarbandPurchaseModel } from '../../../classes/saveitems/Warband/Purchases/WarbandPurchase';
 
 interface WbbContextualPopoverProps {
     id: string;
@@ -46,29 +49,41 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
     const [showConfirmRenameFighterModal, setshowConfirmRenameFighterModal] = useState(false);
     const showConfirmRenameFighter = () => {
         setshowConfirmRenameFighterModal(true);
-        console.log('showRenameFighterConfirm');
     }
 
     const handleRenameFighter = () => {
         setshowConfirmRenameFighterModal(false);
 
-        // @TODO: Rename fighter from Warband
-        console.log('handleRenameFighter');
+        (item as RealWarbandPurchaseModel).model.RenameSelf(fighterName);
+        const Manager : ToolsController = ToolsController.getInstance();
+        Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
+            () => reloadDisplay())
     }
 
     const handleCopyFighter = () => {
-        // @TODO: Copy this fighter
-        console.log('handleCopyFighter');
+
+        warband?.warband_data.DuplicateFighter(item).then((result : string) => {
+            if (result.includes(" Sucessfully Duplicated") == false) {
+                toast.error(result);
+            } else { 
+                const Manager : ToolsController = ToolsController.getInstance();
+                Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
+                    () => reloadDisplay().then(() => toast.success(result)))
+                
+            }
+        })
     }
     const showConfirmDeleteFighter = () => {
         setshowConfirmDeleteFighterModal(true);
-        console.log('showDeleteFighterConfirm');
     }
     const handleDeleteFighter = () => {
         setshowConfirmDeleteFighterModal(false);
 
-        // @TODO: Delete fighter from Warband
-        console.log('handleDeleteFighter');
+        warband?.warband_data.DeleteFighter(item).then(() => {
+            const Manager : ToolsController = ToolsController.getInstance();
+            Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
+                () => reloadDisplay().then(() => toast.success("Model Deleted")))
+        })
     }
 
 
@@ -259,6 +274,17 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
     ]);
     return (
         <>
+            <ToastContainer
+                position="top-center"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
             <OverlayTrigger
                 trigger="click"
                 placement="left"

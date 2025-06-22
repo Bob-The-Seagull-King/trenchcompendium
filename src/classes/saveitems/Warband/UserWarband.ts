@@ -17,6 +17,7 @@ import { FactionEquipmentRelationship } from '../../relationship/faction/Faction
 import { WarbandProperty } from './WarbandProperty';
 import { ContextPackage } from '../../contextevent/contextpackage';
 import { ToolsController } from '../../_high_level_controllers/ToolsController';
+import { ModelFactory } from '../../../factories/features/ModelFactory';
 
 interface IUserWarband extends IContextObject {
     id : string,
@@ -319,6 +320,53 @@ class UserWarband extends DynamicContextObject {
             this.Models.push(NewPurchase);
         }
     }
+
+    public async DuplicateFighter( fighter : RealWarbandPurchaseModel ) {
+
+        const IsValidToAdd = await this.AtMaxOfModel(fighter.purchase.PurchaseInterface);
+
+        if (!IsValidToAdd) {
+            return "Warband At Limit For " + fighter.model.CurModel.GetTrueName();
+        }
+        
+        const milliseconds = Date.now();
+        const NewMember : WarbandMember = await WarbandFactory.CreateWarbandMember((fighter.model.ConvertToInterface()), this);
+        NewMember.Name = fighter.model.Name
+        NewMember.ID =  NewMember.CurModel.ID + "_" + this.Models.length + "_" + milliseconds.toString()
+        const NewPurchase : WarbandPurchase = new WarbandPurchase(fighter.purchase.ConvertToInterface(), this, NewMember);
+        this.Models.push(NewPurchase);
+
+        return fighter.model.Name + " Sucessfully Duplicated";
+
+    }
+
+    public async AtMaxOfModel( model : string) {
+        const RefModel : FactionModelRelationship = await ModelFactory.CreateNewFactionModel(model, null);
+        
+        const eventmon : EventRunner = new EventRunner();
+        let maxcount = RefModel.Maximum;
+        maxcount = await eventmon.runEvent(
+            "getModelLimitTrue",
+            RefModel,
+            [],
+            maxcount,
+            this
+        )
+        if (this.GetCountOfRel(RefModel.ID) < maxcount || ((RefModel.Minimum == 0 && RefModel.Maximum == 0))) {
+            return false;
+        }
+        return true;
+    }
+    
+    public async DeleteFighter( fighter : RealWarbandPurchaseModel ) {
+        
+        for (let i = 0; i < this.Models.length; i++) {
+            if (fighter.model == (this.Models[i].HeldObject as WarbandMember)) {
+                this.Models.splice(i, 1);
+                break;
+            }
+        }
+    }
     
     public async AddStash ( stash: FactionEquipmentRelationship ) {
         const Equipment : WarbandEquipment = await WarbandFactory.BuildWarbandEquipmentFromPurchase(stash, this);
@@ -562,44 +610,6 @@ class UserWarband extends DynamicContextObject {
         }
         return ''
     }
-
-    /** @TODO:
-     * Does this warband have goetic options?
-     * @constructor
-     */
-    HasGoeticOptions () {
-        return true;
-    }
-
-    /** @TODO:
-     * Returns the name of the chosen goetic discipline of this warband
-     * @constructor
-     */
-    GetGoeticSelection () {
-        return 'Wrath'
-    }
-
-    /**
-     * Gets the special rules for the faction of the Warband
-     * // @TODO: is currently dummy data
-     *
-     */
-    public GetSpecialRules () {
-
-        return [
-            {
-                name: 'Infection Markers',
-                description: 'Some attacks by the weaponry of the Black Grail causes their opponents to suffer INFECTION MARKERS. These work in a similar fashion to BLOOD MARKERS. INFECTION MARKERScan be used to modify dice rolls exactly like BLOOD MARKERS (i.e. ACTION rolls and injury rolls and used in Bloodbaths). Use a different coloured dice (the more disgusting the better!) to indicate these markers and place them next to the infected model.\n' +
-                    '\n' +
-                    'A model may have up to six INFECTION MARKERS and six BLOOD MARKERS at the same time. If a model had any INFECTION MARKERS before, but has none when it is Activated, no new ones are added to the model – though it can still be re-infected by further attacks if a model has one or more INFECTION MARKERS when activated, it gains +1 INFECTION MARKERS.'
-            },
-            {
-                name: 'Morale',
-                description: 'Fighting against the Black Grail is a terrifying prospect. Enemy Warbands roll Morale Tests with -1 DICE when fighting a Black Grail Warband. The Court Warbands and other Black Grail Warbands ignore this penalty.'
-            }
-        ]
-    }
-
 
 
     public GetCountOfModel(id : string) {

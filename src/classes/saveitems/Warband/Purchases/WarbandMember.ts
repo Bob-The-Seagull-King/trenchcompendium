@@ -385,6 +385,16 @@ class WarbandMember extends DynamicContextObject {
         return 2;
     }
 
+    public RenameSelf(name : string) {
+        if (this.ApproveNewName(name)) {
+            this.Name = name;
+        }
+    }
+
+    private ApproveNewName(name : string) {
+        return true;
+    }
+
 }
 
 export {IWarbandMember, WarbandMember}

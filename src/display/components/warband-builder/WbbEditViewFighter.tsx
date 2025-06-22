@@ -14,23 +14,7 @@ import { useWarband } from '../../../context/WarbandContext';
  */
 
 interface WbbEditViewFighterProps {
-    item: RealWarbandPurchaseModel; /*{
-        FighterName: string;
-        ModelName: string;
-        Slug: string;
-        FighterBaseDucats: number;
-        FighterBaseGlory: number;
-        FighterTotalCostDucats: number;
-        FighterTotalCostGlory: number;
-        IsElite: boolean;
-        IsMercenary: boolean;
-        ExperiencePoints: number;
-        BattleScars: number;
-        Injuries: any;
-        Advancements: any;
-        Equipment: any;
-        FighterIndex: number;
-    };*/
+    item: RealWarbandPurchaseModel;
     index: number;
     onClick?: () => void;
     isActive?: boolean;
