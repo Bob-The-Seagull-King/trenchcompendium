@@ -325,7 +325,7 @@ class UserWarband extends DynamicContextObject {
 
         const IsValidToAdd = await this.AtMaxOfModel(fighter.purchase.PurchaseInterface);
 
-        if (!IsValidToAdd) {
+        if (IsValidToAdd) {
             return "Warband At Limit For " + fighter.model.CurModel.GetTrueName();
         }
         

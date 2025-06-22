@@ -298,7 +298,7 @@ class WarbandMember extends DynamicContextObject {
      * @return: string
      */
     GetFighterName () {
-        return this.FighterName;
+        return this.Name;
     }
 
     /**
@@ -308,7 +308,7 @@ class WarbandMember extends DynamicContextObject {
      * @return: string
      */
     GetModelName () {
-        return this.Name;
+        return this.CurModel.Name;
     }
 
     /**
