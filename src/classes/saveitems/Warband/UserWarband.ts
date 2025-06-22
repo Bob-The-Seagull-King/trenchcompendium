@@ -16,7 +16,7 @@ import { Faction } from '../../feature/faction/Faction';
 import { FactionEquipmentRelationship } from '../../relationship/faction/FactionEquipmentRelationship';
 import { WarbandProperty } from './WarbandProperty';
 import { ContextPackage } from '../../contextevent/contextpackage';
-import { ToolsController } from 'classes/_high_level_controllers/ToolsController';
+import { ToolsController } from '../../_high_level_controllers/ToolsController';
 
 interface IUserWarband extends IContextObject {
     id : string,
