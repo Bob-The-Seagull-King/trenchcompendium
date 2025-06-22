@@ -24,16 +24,6 @@ const WbbWarbandDetailView: React.FC<WbbWarbandDetailViewProps> = ({  onClose })
     const { warband, reloadDisplay } = useWarband();
     if (warband == null) return (<div>Loading...</div>);
 
-    /** Goetic Options */
-    const [goeticDiscipline, setGoeticDiscipline] = useState<string>(warband.warband_data.GetGoeticSelection());
-
-    const [showGoeticModal, setshowGoeticModal] = useState(false);
-    const handleGoeticUpdate = ( selectedGoetic: string ) => {
-        setGoeticDiscipline(selectedGoetic)
-
-        // @TODO: Update Goetic Power
-        console.log('@TODO: set goetic power '+ selectedGoetic)
-    }
 
 
     return (
