@@ -4,18 +4,15 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCopy, faEllipsisVertical, faTrash} from "@fortawesome/free-solid-svg-icons";
 import WbbContextualPopover from "./WbbContextualPopover";
 import {usePlayMode} from "../../../context/PlayModeContext";
+import { Injury } from '../../../classes/feature/ability/Injury';
+import { WarbandProperty } from '../../../classes/saveitems/Warband/WarbandProperty';
+import { returnDescription } from '../../../utility/util';
 
-interface Injury {
-    Name: string,
-    Description: string,
-    Table: string,
-    Id: string,
-    Number: number
-}
-
-const WbbEditViewInjury: React.FC<{ injury: Injury }> = ({ injury }) => {
+const WbbEditViewInjury: React.FC<{ injury: WarbandProperty }> = ({ injury }) => {
 
     const { playMode } = usePlayMode();
+
+    const SelfInjury : Injury = injury.SelfDynamicProperty.OptionChoice as Injury;
 
     return (
         <div className={`WbbEditViewInjury ${playMode ? 'play-mode' : ''}`}>
@@ -25,17 +22,17 @@ const WbbEditViewInjury: React.FC<{ injury: Injury }> = ({ injury }) => {
 
             {!playMode &&
                 <div className="injury-source">
-                    {injury.Table + " #" + injury.Number}
+                    {"Elite Injuries Chart #" + SelfInjury.TableVal}
                 </div>
             }
 
             <div className="injury-description">
-                {injury.Description}
+                {returnDescription(SelfInjury, SelfInjury.Description)}
             </div>
 
             {!playMode &&
                 <WbbContextualPopover
-                    id={`injury-${injury.Id}`}
+                    id={`injury-${injury.ID}`}
                     type="injury"
                     item={injury}
                 />

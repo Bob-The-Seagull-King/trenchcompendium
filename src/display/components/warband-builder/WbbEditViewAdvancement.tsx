@@ -4,19 +4,16 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCopy, faEllipsisVertical, faTrash} from "@fortawesome/free-solid-svg-icons";
 import WbbContextualPopover from "./WbbContextualPopover";
 import {usePlayMode} from "../../../context/PlayModeContext";
+import { WarbandProperty } from '../../../classes/saveitems/Warband/WarbandProperty';
+import { Skill } from '../../../classes/feature/ability/Skill';
+import { returnDescription } from '../../../utility/util';
 
-
-interface Advancement {
-    Name: string,
-    Description: string,
-    Table: string,
-    Id: string,
-    Number: number
-}
-
-const WbbEditViewAdvancement: React.FC<{ advancement: Advancement }> = ({ advancement }) => {
+const WbbEditViewAdvancement: React.FC<{ advancement: WarbandProperty }> = ({ advancement }) => {
 
     const { playMode } = usePlayMode();
+    
+    const SelfSkill : Skill = advancement.SelfDynamicProperty.OptionChoice as Skill;
+
 
     return (
 
@@ -25,20 +22,14 @@ const WbbEditViewAdvancement: React.FC<{ advancement: Advancement }> = ({ advanc
                 <strong>{advancement.Name}</strong>
             </div>
 
-            { !playMode &&
-                <div className="advancement-source">
-                    {advancement.Table + " #" + advancement.Number}
-                </div>
-            }
-
             <div className="advancement-description">
-                {advancement.Description}
+                {returnDescription(SelfSkill, SelfSkill.Description)}
             </div>
 
             {/* actions */}
             { !playMode &&
                 <WbbContextualPopover
-                    id={`advancement-${advancement.Id}`}
+                    id={`advancement-${advancement.ID}`}
                     type="advancement"
                     item={advancement}
                 />

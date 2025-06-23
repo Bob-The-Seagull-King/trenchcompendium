@@ -38,7 +38,7 @@ interface IWarbandMember extends IContextObject {
 class WarbandMember extends DynamicContextObject {
 
     public readonly boldXpIndices = [2, 4, 7, 10, 14, 18];
-    
+
     Notes : INote[];
     IsActive : boolean;
     CurModel! : Model;
@@ -259,7 +259,7 @@ class WarbandMember extends DynamicContextObject {
 
     public GetEquipmentAsString() {
         const CurEquip : RealWarbandPurchaseEquipment[] = this.GetEquipment();
-        let returnVal : string[] = [];
+        const returnVal : string[] = [];
 
         for (let i = 0; i < CurEquip.length; i++) {
             returnVal.push(CurEquip[i].equipment.MyEquipment.SelfDynamicProperty.GetTrueName())
@@ -389,14 +389,21 @@ class WarbandMember extends DynamicContextObject {
         return this.Experience;
     }
 
+    public GetInjuriesList() {
+        return this.Injuries;
+    }
+
+    public GetSkillsList() {
+        return this.Skills;
+    }
+
     /**
      * The Number of battle scars of this fighter
-     * // @TODO: return the actual amount of battle scars
      *
      * @return: int
      */
     GetBattleScars () {
-        return 2;
+        return this.Injuries.length;
     }
 
     public RenameSelf(name : string) {

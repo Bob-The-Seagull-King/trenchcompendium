@@ -87,31 +87,6 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
             Description: 'As a GOETIC (2) Spell that ends this model’s Activation, beckoning magic fills the air. When the enemy next Activates a model during this Turn, that model must Move as its first ACTION. This Move must be a Retreat if the model started its Activation in Melee Combat with a model other than the caster of this Spell. If that model is Down, it instead Stands and then Moves. During this movement, it moves in a direct path toward the caster of this Spell through any passable terrain, including Dangerous Terrain, Jumping Down etc. The model suffers injuries as normal. It can act normally after taking the prescribed ACTION(S), or attempting to take the prescribed ACTION(S) if it couldn’t, but cannot target the caster of this Spell during this Activation with ranged or melee attacks.'
         }
     ];
-    const Injuries = [
-        {
-            Name: 'Muscle Damage',
-            Description: 'This model cannot carry HEAVY weapons',
-            Table: 'Elites Injury Chart',
-            Id: 'inj_muscle_damage',
-            Number: 34
-        },
-        {
-            Name: 'Insomniac',
-            Description: 'This character must always be deployed as the first model on your side in any battle it takes part in. It cannot use the Keyword INFILTRATOR if it has it.',
-            Table: 'Elites Injury Chart',
-            Id: 'inj_insomniac',
-            Number: 21
-        }
-    ];
-    const Advancements = [
-        {
-            Name: 'Hunter',
-            Description: 'This model ignores all penalties from Cover when making a ranged attack.',
-            Table: 'Ranged Skills',
-            Id: 'adv_hunter',
-            Number: 3
-        }
-    ]
     const Abilities = [
         {
             Name: 'Skirmisher',
@@ -494,8 +469,8 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                         {fighter.IsElite() &&
                             <>
                                 <h3>{'Advancements'}</h3>
-                                {Advancements.map((advancement) => (
-                                    <WbbEditViewAdvancement advancement={advancement} key={advancement.Id}/>
+                                {fighter.GetSkillsList().map((advancement) => (
+                                    <WbbEditViewAdvancement advancement={advancement} key={advancement.ID + fighter.ID}/>
                                 ))}
                                 <div className={'btn btn-add-element btn-block'}
                                      onClick={() => setShowAdvancementModal(true)}>
@@ -504,8 +479,8 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                                 </div>
 
                                 <h3>{'Injuries'}</h3>
-                                {Injuries.map((injury) => (
-                                    <WbbEditViewInjury injury={injury} key={injury.Id}/>
+                                {fighter.GetInjuriesList().map((injury) => (
+                                    <WbbEditViewInjury injury={injury} key={injury.ID  + fighter.ID}/>
                                 ))}
 
                                 <div className={'btn btn-add-element btn-block'}
@@ -627,15 +602,15 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
 
                     <div className={'play-mode-advancements-wrap'}>
                         <h3>{'Advancements'}</h3>
-                        {Advancements.map((advancement) => (
-                            <WbbEditViewAdvancement advancement={advancement} key={advancement.Id}/>
+                        {fighter.GetSkillsList().map((advancement) => (
+                            <WbbEditViewAdvancement advancement={advancement} key={advancement.ID + fighter.ID}/>
                         ))}
                     </div>
 
                     <div className={'play-mode-injuries-wrap'}>
                         <h3>{'Injuries'}</h3>
-                        {Injuries.map((injury) => (
-                            <WbbEditViewInjury injury={injury} key={injury.Id}/>
+                        {fighter.GetInjuriesList().map((injury) => (
+                            <WbbEditViewInjury injury={injury} key={injury.ID + fighter.ID}/>
                         ))}
                     </div>
                 </div>
