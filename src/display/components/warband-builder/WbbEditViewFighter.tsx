@@ -52,8 +52,7 @@ const WbbEditViewFighter: React.FC<WbbEditViewFighterProps> = ({ item, index, on
 
 
             <div className={'equipment-summary'}>
-                {/*  @TODO: generate a string with equipment starting with weapons, armor and equipment  */}
-                {'Jezzail, Trench Knife, Standard Armour, Alchemical Ammunition'}
+                {item.model.GetEquipmentAsString()}
             </div>
 
         </div>

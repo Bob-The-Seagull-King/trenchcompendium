@@ -254,6 +254,17 @@ class WarbandMember extends DynamicContextObject {
         return options;
     }
 
+    public GetEquipmentAsString() {
+        const CurEquip : RealWarbandPurchaseEquipment[] = this.GetEquipment();
+        let returnVal : string[] = [];
+
+        for (let i = 0; i < CurEquip.length; i++) {
+            returnVal.push(CurEquip[i].equipment.MyEquipment.SelfDynamicProperty.GetTrueName())
+        }
+
+        return returnVal.join(', ');
+    }
+
     public async GetKeywordsFull() {
         const keywordarr : Keyword[] = [];
         for (let i = 0; i < this.CurModel.KeyWord.length; i++) {
