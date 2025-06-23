@@ -35,6 +35,7 @@ import SynodModelImageSource from "../../../utility/SynodModelImageSource";
 import WbbModalEditFighterStatus from "./modals/fighter/WbbEditFighterStatus";
 import {IWarbandMember} from "../../../classes/saveitems/Warband/Purchases/WarbandMember";
 import { RealWarbandPurchaseModel } from '../../../classes/saveitems/Warband/Purchases/WarbandPurchase';
+import { returnDescription } from '../../../utility/util';
 
 
 interface WbbFighterDetailViewProps {
