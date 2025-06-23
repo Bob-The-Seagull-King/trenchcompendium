@@ -264,6 +264,10 @@ class WarbandManager {
             },            
             models : [],
             equipment : [],
+            debts: {
+                ducats: 0,
+                glory: 0
+            }
         }
         const new_item : UserWarband = await WarbandFactory.CreateUserWarband(_Item)
 
