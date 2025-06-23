@@ -840,7 +840,7 @@
     },
     {
         "id": "sk_pointblank",
-        "name": "Sniper's Nest",
+        "name": "Point Blank",
         "source": "core",
         "tags": {"trait": true},
         "contextdata": {},
