@@ -377,7 +377,14 @@ class WarbandMember extends DynamicContextObject {
      * @return: string
      */
     GetModelSlug () {
-        return this.ID;
+
+        let modelstring = ""
+        if (this.CurModel != null) {
+            modelstring = this.CurModel.ID;
+        }
+
+        return modelstring;
+        
     }
 
     /**
