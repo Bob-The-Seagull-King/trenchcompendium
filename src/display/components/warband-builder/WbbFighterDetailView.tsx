@@ -34,10 +34,11 @@ import SynodModelImage from "../../../utility/SynodModelImage";
 import SynodModelImageSource from "../../../utility/SynodModelImageSource";
 import WbbModalEditFighterStatus from "./modals/fighter/WbbEditFighterStatus";
 import {IWarbandMember} from "../../../classes/saveitems/Warband/Purchases/WarbandMember";
+import { RealWarbandPurchaseModel } from '../../../classes/saveitems/Warband/Purchases/WarbandPurchase';
 
 
 interface WbbFighterDetailViewProps {
-    warbandmember: any;
+    warbandmember: RealWarbandPurchaseModel;
     onClose: () => void;
 }
 
@@ -86,7 +87,6 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
             Description: 'As a GOETIC (2) Spell that ends this model’s Activation, beckoning magic fills the air. When the enemy next Activates a model during this Turn, that model must Move as its first ACTION. This Move must be a Retreat if the model started its Activation in Melee Combat with a model other than the caster of this Spell. If that model is Down, it instead Stands and then Moves. During this movement, it moves in a direct path toward the caster of this Spell through any passable terrain, including Dangerous Terrain, Jumping Down etc. The model suffers injuries as normal. It can act normally after taking the prescribed ACTION(S), or attempting to take the prescribed ACTION(S) if it couldn’t, but cannot target the caster of this Spell during this Activation with ranged or melee attacks.'
         }
     ];
-    const boldXpIndices = [2, 4, 7, 10, 14, 18];
     const Injuries = [
         {
             Name: 'Muscle Damage',
@@ -441,7 +441,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                                 <div className={'xp-boxes'} onClick={() => setShowXPModal(true)}>
                                     {Array.from({length: 18}, (_, i) => {
                                         const level = i + 1;
-                                        const isBold = boldXpIndices.includes(level);
+                                        const isBold = fighter.boldXpIndices.includes(level);
                                         const hasXP = level <= fighter.GetExperiencePoints();
 
                                         return (
@@ -458,7 +458,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                         }
 
                         {/* Battle Scars */}
-                        {fighter.IsElite &&
+                        {fighter.IsElite() &&
                             <div className={'battle-scars'}>
 
                                 <h3></h3>
@@ -491,7 +491,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                         }
 
                         {/* Advancements & Injuries */}
-                        {fighter.IsElite &&
+                        {fighter.IsElite() &&
                             <>
                                 <h3>{'Advancements'}</h3>
                                 {Advancements.map((advancement) => (

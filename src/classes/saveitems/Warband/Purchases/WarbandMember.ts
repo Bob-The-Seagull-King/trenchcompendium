@@ -36,6 +36,9 @@ interface IWarbandMember extends IContextObject {
 }
 
 class WarbandMember extends DynamicContextObject {
+
+    public readonly boldXpIndices = [2, 4, 7, 10, 14, 18];
+    
     Notes : INote[];
     IsActive : boolean;
     CurModel! : Model;
