@@ -266,17 +266,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                             </span>
                         </div>
                     }
-
-                    {!playMode &&
-                        <div className="fighter-meta-entry-simple">
-                            <span className="fighter-meta-label">
-                                {'Availability: '}
-                            </span>
-                            <span className="fighter-meta-value">
-                                {'0-1'}
-                            </span>
-                        </div>
-                    }
+                    
                     <div className="fighter-meta-entry-simple">
                         <span className="fighter-meta-label">
                             {'Kewords: '}
@@ -324,7 +314,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                     <WbbFighterCollapse title="Equipment" initiallyOpen={true}>
                         <p> {/* Equipment Rules */}
                             <strong>Equipment: </strong>
-                            {'The Alchemist can be equipped with any weapon, armour and equipment from the Iron Sultanate Armoury'}
+                            {returnDescription(fighter, fighter.CurModel.Description)}
                         </p>
 
                         {/* Bool Upgrades */}
