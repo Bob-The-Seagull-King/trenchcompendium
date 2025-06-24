@@ -71,92 +71,100 @@ const WbbStashDetailView: React.FC<WbbStashDetailViewProps> = ({ onClose }) => {
                 </div>
 
                 <div className="stash-items-wrap">
-                    {warband?.warband_data.Equipment.filter(item => 
-                            (((item.HeldObject as WarbandEquipment).MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Category == "ranged")
-                            ).length > 0 ? (
-                        <>
-                            {warband?.warband_data.Equipment.filter(item => 
-                            (((item.HeldObject as WarbandEquipment).MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Category == "ranged")
-                            ).map((item: WarbandPurchase, index: number) => (
-                                <WbbEquipmentListItem
-                                    key={index}
-                                    item={item}
-                                />
-                            ))}
-                        </>
-                    ) : (
-                        <div>No ranged items in stash.</div>
-                    )}
-                    <div className={'btn btn-add-element btn-block'}
-                         onClick={() => setShowRangedAddItemToStash(true)}>
-                        <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
-                        {'Add Ranged Weapon'}
+                    <div className={'stash-items-category'}>
+                        {warband?.warband_data.Equipment.filter(item =>
+                                (((item.HeldObject as WarbandEquipment).MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Category == "ranged")
+                                ).length > 0 ? (
+                            <>
+                                {warband?.warband_data.Equipment.filter(item =>
+                                (((item.HeldObject as WarbandEquipment).MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Category == "ranged")
+                                ).map((item: WarbandPurchase, index: number) => (
+                                    <WbbEquipmentListItem
+                                        key={index}
+                                        item={item}
+                                    />
+                                ))}
+                            </>
+                        ) : (
+                            <div className={'stash-items-empty'}>No ranged items in stash.</div>
+                        )}
+                        <div className={'btn btn-add-element btn-block'}
+                             onClick={() => setShowRangedAddItemToStash(true)}>
+                            <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
+                            {'Add Ranged Weapon'}
+                        </div>
                     </div>
-                    <br/>
-                    {warband?.warband_data.Equipment.filter(item => 
-                            (((item.HeldObject as WarbandEquipment).MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Category == "melee")
-                            ).length > 0 ? (
-                        <>
-                            {warband?.warband_data.Equipment.filter(item => 
-                            (((item.HeldObject as WarbandEquipment).MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Category == "melee")
-                            ).map((item: WarbandPurchase, index: number) => (
-                                <WbbEquipmentListItem
-                                    key={index}
-                                    item={item}
-                                />
-                            ))}
-                        </>
-                    ) : (
-                        <div>No melee items in stash.</div>
-                    )}
-                    <div className={'btn btn-add-element btn-block'}
-                         onClick={() => setShowMeleeAddItemToStash(true)}>
-                        <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
-                        {'Add Melee Weapon'}
+
+                    <div className={'stash-items-category'}>
+                        {warband?.warband_data.Equipment.filter(item =>
+                                (((item.HeldObject as WarbandEquipment).MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Category == "melee")
+                                ).length > 0 ? (
+                            <>
+                                {warband?.warband_data.Equipment.filter(item =>
+                                (((item.HeldObject as WarbandEquipment).MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Category == "melee")
+                                ).map((item: WarbandPurchase, index: number) => (
+                                    <WbbEquipmentListItem
+                                        key={index}
+                                        item={item}
+                                    />
+                                ))}
+                            </>
+                        ) : (
+                            <div className={'stash-items-empty'}>No melee items in stash.</div>
+                        )}
+                        <div className={'btn btn-add-element btn-block'}
+                             onClick={() => setShowMeleeAddItemToStash(true)}>
+                            <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
+                            {'Add Melee Weapon'}
+                        </div>
                     </div>
-                    <br/>
-                    {warband?.warband_data.Equipment.filter(item => 
-                            (((item.HeldObject as WarbandEquipment).MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Category == "armour")
-                            ).length > 0 ? (
-                        <>
-                            {warband?.warband_data.Equipment.filter(item => 
-                            (((item.HeldObject as WarbandEquipment).MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Category == "armour")
-                            ).map((item: WarbandPurchase, index: number) => (
-                                <WbbEquipmentListItem
-                                    key={index}
-                                    item={item}
-                                />
-                            ))}
-                        </>
-                    ) : (
-                        <div>No armour in stash.</div>
-                    )}
-                    <div className={'btn btn-add-element btn-block'}
-                         onClick={() => setShowArmourAddItemToStash(true)}>
-                        <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
-                        {'Add Armour'}
+
+                    <div className={'stash-items-category'}>
+                        {warband?.warband_data.Equipment.filter(item =>
+                                (((item.HeldObject as WarbandEquipment).MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Category == "armour")
+                                ).length > 0 ? (
+                            <>
+                                {warband?.warband_data.Equipment.filter(item =>
+                                (((item.HeldObject as WarbandEquipment).MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Category == "armour")
+                                ).map((item: WarbandPurchase, index: number) => (
+                                    <WbbEquipmentListItem
+                                        key={index}
+                                        item={item}
+                                    />
+                                ))}
+                            </>
+                        ) : (
+                            <div className={'stash-items-empty'}>No armour in stash.</div>
+                        )}
+                        <div className={'btn btn-add-element btn-block'}
+                             onClick={() => setShowArmourAddItemToStash(true)}>
+                            <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
+                            {'Add Armour'}
+                        </div>
                     </div>
-                    <br/>
-                    {warband?.warband_data.Equipment.filter(item => 
-                            (((item.HeldObject as WarbandEquipment).MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Category == "equipment")
-                            ).length > 0 ? (
-                        <>
-                            {warband?.warband_data.Equipment.filter(item => 
-                            (((item.HeldObject as WarbandEquipment).MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Category == "equipment")
-                            ).map((item: WarbandPurchase, index: number) => (
-                                <WbbEquipmentListItem
-                                    key={index}
-                                    item={item}
-                                />
-                            ))}
-                        </>
-                    ) : (
-                        <div>No equipment in stash.</div>
-                    )}
-                    <div className={'btn btn-add-element btn-block'}
-                         onClick={() => setShowEquipAddItemToStash(true)}>
-                        <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
-                        {'Add Equipment'}
+
+                    <div className={'stash-items-category'}>
+                        {warband?.warband_data.Equipment.filter(item =>
+                                (((item.HeldObject as WarbandEquipment).MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Category == "equipment")
+                                ).length > 0 ? (
+                            <>
+                                {warband?.warband_data.Equipment.filter(item =>
+                                (((item.HeldObject as WarbandEquipment).MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Category == "equipment")
+                                ).map((item: WarbandPurchase, index: number) => (
+                                    <WbbEquipmentListItem
+                                        key={index}
+                                        item={item}
+                                    />
+                                ))}
+                            </>
+                        ) : (
+                            <div className={'stash-items-empty'}>No equipment in stash.</div>
+                        )}
+                        <div className={'btn btn-add-element btn-block'}
+                             onClick={() => setShowEquipAddItemToStash(true)}>
+                            <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
+                            {'Add Equipment'}
+                        </div>
                     </div>
 
                     <WbbModalAddItemToStash
