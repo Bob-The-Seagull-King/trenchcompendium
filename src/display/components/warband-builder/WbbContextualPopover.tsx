@@ -135,6 +135,7 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
 
     /** Equipment Actions */
     const [showConfirmDeleteEquipmentModal, setshowConfirmDeleteEquipmentModal] = useState(false);
+    const [showConfirmRefundEquipmentModal, setshowConfirmRefundEquipmentModal] = useState(false);
     const [showConfirmSellEquipmentModal, setshowConfirmSellEquipmentModal] = useState(false);
     const [showConfirmMoveEquipmentModal, setshowConfirmMoveEquipmentModal] = useState(false);
 
@@ -171,6 +172,21 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
         // @TODO: Copy Equipment for this fighter
         console.log('handleCopyEquipment');
     }
+
+    const showConfirmRefundEquipment = () => {
+        setshowConfirmDeleteEquipmentModal(true);
+    }
+
+    const handleRefundEquipment = () => {
+        setshowConfirmDeleteEquipmentModal(false);
+        // @TODO: refund equipment
+        /**
+         * This will:
+         * - remove the equipment from the fighter
+         * - refund its cost
+         */
+    }
+
     const showConfirmDeleteEquipment = () => {
         setshowConfirmDeleteEquipmentModal(true);
         console.log('showConfirmDeleteEquipment');
@@ -383,6 +399,11 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                                         {'Copy Item'}
                                     </div>
 
+                                    <div className="action action-refund" onClick={showConfirmRefundEquipment}>
+                                        <FontAwesomeIcon icon={faArrowRotateLeft} className="icon-inline-left-l"/>
+                                        {'Refund Equpiment'}
+                                    </div>
+
                                     <div className="action action-delete" onClick={showConfirmDeleteEquipment}>
                                         <FontAwesomeIcon icon={faTrash} className="icon-inline-left-l"/>
                                         {'Delete Equpiment'}
@@ -581,6 +602,37 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                     </Button>
                     <Button variant="danger" onClick={handleDeleteExploration}>
                         Delete
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+            {/** Refund Equipment Confirm Modal */}
+            <Modal show={showConfirmRefundEquipmentModal} onHide={() => setshowConfirmRefundEquipmentModal(false)} centered>
+                <Modal.Header closeButton>
+                    <Modal.Title>{`Refund Equipment`}</Modal.Title>
+                </Modal.Header>
+
+                <Modal.Body>
+                    <div className={'mb-3'}>
+                        {'Are you sure you want to refund this Equipment?'}
+                    </div>
+                    <div >
+                        <strong>{item.Name }</strong>?
+                    </div>
+                    <br/>
+                    <p>
+                        <i>
+                            {'This will remove the equipment and refund its costs.'}
+                        </i>
+                    </p>
+                </Modal.Body>
+
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={() => setshowConfirmRefundEquipmentModal(false)}>
+                        Cancel
+                    </Button>
+                    <Button variant="danger" onClick={handleRefundEquipment}>
+                        Refund
                     </Button>
                 </Modal.Footer>
             </Modal>
