@@ -596,7 +596,6 @@ class UserWarband extends DynamicContextObject {
         ]
     }
 
-
     /** 
      * Returns the notes for this warband as string
      * @constructor
