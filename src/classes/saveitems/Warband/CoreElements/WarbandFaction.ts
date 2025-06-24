@@ -20,7 +20,7 @@ interface IWarbandFaction extends IContextObject {
 }
 
 class WarbandFaction extends DynamicContextObject {
-    MyFaction: WarbandProperty | null = null;
+    MyFaction!: WarbandProperty;
     MyPatron: Patron | null = null;
     MyFactionRules : WarbandProperty[] = [];
 

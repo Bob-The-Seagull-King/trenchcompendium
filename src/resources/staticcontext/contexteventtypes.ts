@@ -48,6 +48,7 @@ export interface CallEvents {
     parseOptionFilterDown? : (this: EventRunner, eventSource : any, relayVar : IChoice[],  trackVal : number, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<IChoice[]>; 
     updateModelStats? : (this: EventRunner, eventSource : any, relayVar : ModelStatistics,   context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<ModelStatistics>; 
     returnOptionDisplay? : (this: EventRunner, eventSource : any, relayVar : IChoice, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => JSX.Element;
+    returnWbbOptionDisplay? : (this: EventRunner, eventSource : any, trackVal : IChoice, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<JSX.Element>;
     getLocationRestrictions? : (this: EventRunner, eventSource : any, relayVar : any, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => LocationRestriction[]; 
     getLocationRestrictionsPresentable? : (this: EventRunner, eventSource : any, relayVar : any, trackVal : LocationRestriction[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<string[]>; 
 }

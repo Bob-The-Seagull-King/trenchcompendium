@@ -28,6 +28,7 @@ import { Skill } from "../../classes/feature/ability/Skill";
 import { UserWarband } from "../../classes/saveitems/Warband/UserWarband";
 import { FactionEquipmentRelationship } from "../../classes/relationship/faction/FactionEquipmentRelationship";
 import { WarbandMember } from "../../classes/saveitems/Warband/Purchases/WarbandMember";
+import { returnDescription } from "../../utility/util";
 
 export const BaseContextCallTable : CallEventTable = {
     option_search_viable: {
@@ -1218,6 +1219,49 @@ export const BaseContextCallTable : CallEventTable = {
                     </div>
                 </ErrorBoundary>
             )
+        },
+        async returnWbbOptionDisplay(this: EventRunner, eventSource : any, trackVar : IChoice, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null){
+                        
+            return ( 
+            
+                <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
+                    
+                    <p className={''}>
+                        {returnDescription(trackVar.value, trackVar.value.Description)}
+                    </p>
+                </ErrorBoundary>
+            )
+        },
+        async getWarbandMemberAbilities(this: EventRunner, eventSource : any, relayVar : Ability[], trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            console.log("ASGDHASGHG")
+            const AbilityModule = await import("../../classes/feature/ability/Ability");
+            const DynamicModule = await import("../../classes/options/DynamicOptionContextObject");
+            try {
+                if (context_main != null) {
+                    if (context_main instanceof DynamicModule.DynamicOptionContextObject) {
+                        const optionobj = context_main;
+                        for (let i = 0; i < optionobj.Selections.length; i++) {
+                            const selection = optionobj.Selections[i];
+                            if (selection.SelectedChoice != null) {
+                                if (selection.SelectedChoice.value instanceof AbilityModule.Ability) {
+                                    let ispresent = false;
+                                    for (let j = 0; j < relayVar.length; j++) {
+                                        if (relayVar[j].ID == selection.SelectedChoice.value.ID) {
+                                            ispresent = true;
+                                        }
+                                    }
+                                    if (ispresent == false) {
+                                        relayVar.push(selection.SelectedChoice.value)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            } catch (e) {
+                console.log(e)
+            }
+            return relayVar;
         }
     },
     VariantFactionBase: {

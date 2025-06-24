@@ -40,6 +40,7 @@ const WbbAbilityDisplay: React.FC<WbbAbilityCollapseProps> = ({ ability }) => {
                             <span className={'title-choice'}>
                                 {ability.SelfDynamicProperty.Selections.map((item) => 
                                     <WbbOptionSelect 
+                                        property={ability}
                                         isinner={true}
                                         key={ability.SelfDynamicProperty.Selections.indexOf(item)}
                                         choice={item}

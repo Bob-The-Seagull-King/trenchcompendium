@@ -96,6 +96,7 @@ const WbbWarbandDetailView: React.FC<WbbWarbandDetailViewProps> = ({  onClose })
                                 <span className={'title-choice'}>
                                     {(warband.warband_data.Faction.MyFaction? warband.warband_data.Faction.MyFaction.SelfDynamicProperty.Selections : []).map((item) => 
                                         <WbbOptionSelect 
+                                            property={warband.warband_data.Faction.MyFaction}
                                             key={warband.warband_data.Faction.MyFaction? warband.warband_data.Faction.MyFaction.SelfDynamicProperty.Selections.indexOf(item) : 0}
                                             choice={item}
                                         />

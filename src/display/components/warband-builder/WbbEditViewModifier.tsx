@@ -33,6 +33,7 @@ const WbbEditViewModifier: React.FC<WbbEditViewModifierProps> = ({ warbprop, ind
                     <span className={'title-choice'}>
                         {warbprop.SelfDynamicProperty.Selections.map((item) => 
                             <WbbOptionSelect 
+                                property={warbprop}
                                 isinner={(isinner != undefined) ? isinner : false}
                                 key={warbprop.SelfDynamicProperty.Selections.indexOf(item)}
                                 choice={item}

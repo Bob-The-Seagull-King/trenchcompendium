@@ -73,22 +73,24 @@ class WarbandMember extends DynamicContextObject {
     public async BuildNewProperties(data : IWarbandMember) {
         const all_abils : Ability[] = await this.getContextuallyAvailableAbilities();
         for (let i = 0; i < all_abils.length; i++) {
-        let IsFound = false
-        for (let j = 0; j < data.subproperties.length; j++) {
-            if (data.subproperties[j].object_id == all_abils[i].ID) {
-                const NewRuleProperty = new WarbandProperty(all_abils[i], this, null, data.subproperties[j]);
-                await NewRuleProperty.HandleDynamicProps(all_abils[i], this, null, data.subproperties[j]);
+            let IsFound = false
+            for (let j = 0; j < data.subproperties.length; j++) {
+                if (data.subproperties[j].object_id == all_abils[i].ID) {
+                    const NewRuleProperty = new WarbandProperty(all_abils[i], this, null, data.subproperties[j]);
+                    await NewRuleProperty.HandleDynamicProps(all_abils[i], this, null, data.subproperties[j]);
+                    this.SubProperties.push(NewRuleProperty);
+                    IsFound = true;
+                    break;
+                }
+            }
+            if (IsFound == false) {
+                const NewRuleProperty = new WarbandProperty(all_abils[i], this, null, null);
+                await NewRuleProperty.HandleDynamicProps(all_abils[i], this, null, null);
                 this.SubProperties.push(NewRuleProperty);
-                IsFound = true;
-                break;
             }
         }
-        if (IsFound == false) {
-            const NewRuleProperty = new WarbandProperty(all_abils[i], this, null, null);
-            await NewRuleProperty.HandleDynamicProps(all_abils[i], this, null, null);
-            this.SubProperties.push(NewRuleProperty);
-        }
-    }
+        console.log(this.GetTrueName())
+        console.log(this.SubProperties);
     }
 
     
@@ -109,7 +111,14 @@ class WarbandMember extends DynamicContextObject {
                 BaseList,
                 this
             )
-            for (let i = 0; i < result.length; i++) {
+            const result_fin = await Events.runEvent(
+                "getWarbandMemberAbilities",
+                this,
+                result,
+                BaseList,
+                this
+            )
+            for (let i = 0; i < result_fin.length; i++) {
                 AbilitiesAvailable.push(result[i]);
             }
         } else {
@@ -220,7 +229,7 @@ class WarbandMember extends DynamicContextObject {
      * on class implementation.
      */
     public async GrabSubPackages(event_id : string, source_obj : ContextObject, arrs_extra : any[]) : Promise<ContextPackage[]> { 
-        const subpackages : ContextPackage[] = []     
+        const subpackages : ContextPackage[] = []   
         
         if (this.CurModel) {
             const static_packages : ContextPackage[] = await this.CurModel.GrabContextPackages(event_id, source_obj, arrs_extra);
@@ -264,6 +273,8 @@ class WarbandMember extends DynamicContextObject {
 
         for (let i = 0; i < this.SubProperties.length; i++) {
             const static_packages : ContextPackage[] = await this.SubProperties[i].GrabContextPackages(event_id, source_obj, arrs_extra);
+            console.log("STATIC PACKAGE")
+            console.log(static_packages);
             for (let j = 0; j < static_packages.length; j++) {
                 static_packages[j].callpath.push("WarbandMember")
                 subpackages.push(static_packages[j])
