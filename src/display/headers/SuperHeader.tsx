@@ -73,6 +73,9 @@ const SuperHeader: React.FC<IControllerProp> = (prop) => {
             if (currentScroll === 0) { // is at top
                 setIsShy(false)
                 upScrollTotal.current = 0
+
+                downScrollTotal.current = 0
+                upScrollTotal.current = 0;
             } else {
                 if (delta > 0) { // Scrolling down
                     downScrollTotal.current += Math.abs(delta)
