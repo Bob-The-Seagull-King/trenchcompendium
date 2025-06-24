@@ -103,8 +103,13 @@ const WbbWarbandDetailView: React.FC<WbbWarbandDetailViewProps> = ({  onClose })
                                     )}                        
                                 </span>
                             }
+
+                            {/*
+                            // @TODO: Option like Sultan's Favour goes here
+                            */}
                         </WbbDetailViewCollapse>
                     }
+
                     {warband?.warband_data.GetWarbandFactionOptionsModifiersList().length > 0 &&
                         <WbbDetailViewCollapse title='Faction Selections' initiallyOpen={true}>
                             
