@@ -103,6 +103,9 @@ const SuperHeader: React.FC<IControllerProp> = (prop) => {
             }
 
             lastScrollY.current = currentScroll
+            if( lastScrollY.current < 0 ) {
+                lastScrollY.current = 0
+            }
         }
 
         window.addEventListener('scroll', handleScroll)
