@@ -27,6 +27,7 @@ import RuleDisplay from "../../display/components/features/faction/RuleDisplay";
 import { Skill } from "../../classes/feature/ability/Skill";
 import { UserWarband } from "../../classes/saveitems/Warband/UserWarband";
 import { FactionEquipmentRelationship } from "../../classes/relationship/faction/FactionEquipmentRelationship";
+import { WarbandMember } from "../../classes/saveitems/Warband/Purchases/WarbandMember";
 
 export const BaseContextCallTable : CallEventTable = {
     option_search_viable: {
@@ -647,6 +648,44 @@ export const BaseContextCallTable : CallEventTable = {
                 relayVar.push(await AbilityFactory.CreateAbility(AbilityList, null))
             }
             return relayVar;
+        },
+        async getWarbandMemberAbilities(this: EventRunner, eventSource : any, relayVar : Ability[], trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            
+            const { AbilityFactory } = await import("../../factories/features/AbilityFactory");
+
+            let ValidUpgrade = true;
+
+            if (context_func['removed'] ) {
+                for (let i = 0; i < context_func['removed'].length; i++) {
+                    const curFilter = context_func['removed'][i]
+                    if (curFilter["category"] == "id") {            
+                        if (curFilter["value"].includes(trackVal.CurModel.ID)) {
+                            ValidUpgrade = false;
+                        }
+                    }
+                }
+            }
+
+            if (context_func['required'] ) {
+                for (let i = 0; i < context_func['required'].length; i++) {
+                    const curFilter = context_func['required'][i]
+                    if (curFilter["category"] == "id") {            
+                        if (curFilter["value"].includes(trackVal.CurModel.ID)) {
+                            ValidUpgrade = true;
+                        } else {
+                            ValidUpgrade = false;
+                        }
+                    }
+                }
+            }
+
+            if (ValidUpgrade) {
+                const AbilityList = Requester.MakeRequest(
+                    {searchtype: "id", searchparam: {type: "factionrule", id: context_func["id"]}}
+                ) as IAbility
+                relayVar.push(await AbilityFactory.CreateAbility(AbilityList, null))
+            }
+            return relayVar;
         }
 
     },
@@ -692,6 +731,47 @@ export const BaseContextCallTable : CallEventTable = {
                 }
             }
             return relayVar;
+        },
+        async getWarbandMemberAbilities(this: EventRunner, eventSource : any, relayVar : Ability[], trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            
+            const { AbilityFactory } = await import("../../factories/features/AbilityFactory");
+
+            for (let k = 0; k < context_func['list'].length; k++) {
+                const curUpgrade = context_func['list'][k]
+                let ValidUpgrade = true;
+
+                if (curUpgrade['removed'] ) {
+                    for (let i = 0; i < curUpgrade['removed'].length; i++) {
+                        const curFilter = curUpgrade['removed'][i]
+                        if (curFilter["category"] == "id") {            
+                            if (curFilter["value"].includes(trackVal.CurModel.ID)) {
+                                ValidUpgrade = false;
+                            }
+                        }
+                    }
+                }
+
+                if (curUpgrade['required'] ) {
+                    for (let i = 0; i < curUpgrade['required'].length; i++) {
+                        const curFilter = curUpgrade['required'][i]
+                        if (curFilter["category"] == "id") {            
+                            if (curFilter["value"].includes(trackVal.CurModel.ID)) {
+                                ValidUpgrade = true;
+                            } else {
+                                ValidUpgrade = false;
+                            }
+                        }
+                    }
+                }
+
+                if (ValidUpgrade) {
+                    const AbilityList = Requester.MakeRequest(
+                        {searchtype: "id", searchparam: {type: "ability", id: curUpgrade["id"]}}
+                    ) as IAbility
+                    relayVar.push(await AbilityFactory.CreateAbility(AbilityList, null))
+                }
+            }
+            return relayVar;
         }
 
     },
@@ -699,6 +779,13 @@ export const BaseContextCallTable : CallEventTable = {
         event_priotity: 0,
         async getContextuallyAddedAbilities(this: EventRunner, eventSource : any, relayVar : Ability[], trackVal : Model, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
             if (context_func["id"].includes(trackVal.ID)) {
+                return relayVar.filter(item => !(context_func["abilities"].includes(item.ID)))
+            } else {
+                return relayVar;
+            }
+        },
+        async getWarbandMemberAbilities(this: EventRunner, eventSource : any, relayVar : Ability[], trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            if (context_func["id"].includes(trackVal.CurModel.ID)) {
                 return relayVar.filter(item => !(context_func["abilities"].includes(item.ID)))
             } else {
                 return relayVar;

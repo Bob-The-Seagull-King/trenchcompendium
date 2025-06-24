@@ -2,14 +2,13 @@ import React, { useState } from 'react';
 import { Collapse } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
-
-interface Ability {
-    Name: string;
-    Description: string;
-}
+import { Ability } from '../../../classes/feature/ability/Ability';
+import { WarbandProperty } from '../../../classes/saveitems/Warband/WarbandProperty';
+import { returnDescription } from '../../../utility/util';
+import WbbOptionSelect from './modals/warband/WbbOptionSelect';
 
 interface WbbAbilityCollapseProps {
-    ability: Ability;
+    ability: WarbandProperty;
 }
 
 const WbbAbilityDisplay: React.FC<WbbAbilityCollapseProps> = ({ ability }) => {
@@ -34,8 +33,23 @@ const WbbAbilityDisplay: React.FC<WbbAbilityCollapseProps> = ({ ability }) => {
             <Collapse in={open}>
                 <div className="ability-description">
                     <div className="ability-description-inner">
-                        {ability.Description}
+                        {returnDescription(ability, (ability.SelfDynamicProperty.OptionChoice as Ability).Description)}
+                       
+                        {ability.SelfDynamicProperty.Selections.length > 0 &&
+                    
+                            <span className={'title-choice'}>
+                                {ability.SelfDynamicProperty.Selections.map((item) => 
+                                    <WbbOptionSelect 
+                                        isinner={true}
+                                        key={ability.SelfDynamicProperty.Selections.indexOf(item)}
+                                        choice={item}
+                                    />
+                                )}                        
+                            </span>
+                        }
                     </div>
+                    
+                    
                 </div>
             </Collapse>
         </div>

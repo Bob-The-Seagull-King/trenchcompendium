@@ -12,6 +12,7 @@ import { FactionEquipmentRelationship } from "../../classes/relationship/faction
 import { Model } from "../../classes/feature/model/Model";
 import { Ability } from "../../classes/feature/ability/Ability";
 import { UserWarband } from "../../classes/saveitems/Warband/UserWarband";
+import { WarbandMember } from "../../classes/saveitems/Warband/Purchases/WarbandMember";
 
 /**
  * Events that can be called by the runEvent method,
@@ -33,6 +34,7 @@ export interface CallEvents {
     getModelStatOptions? : (this: EventRunner, eventSource : any, relayVar : ModelStatistics[][], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => ModelStatistics[][]; 
     getContextuallyAddedUpgrades? : (this: EventRunner, eventSource : any, relayVar : ModelUpgradeRelationship[], trackVal : Model, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<ModelUpgradeRelationship[]>; 
     getContextuallyAddedAbilities? : (this: EventRunner, eventSource : any, relayVar : Ability[], trackVal : Model, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<Ability[]>; 
+    getWarbandMemberAbilities? : (this: EventRunner, eventSource : any, relayVar : Ability[], trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<Ability[]>; 
     getContextuallyRelevantKeywordsByID? : (this: EventRunner, eventSource : any, relayVar : string[], trackVal : Model, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<string[]>; 
     modifyEquipmentStats? : (this: EventRunner, eventSource : any, relayVar : EquipmentStats, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<EquipmentStats>; 
     getWarbandLevelFactionRules? : (this: EventRunner, eventSource : any, relayVar : WarbandProperty[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<WarbandProperty[]>; 

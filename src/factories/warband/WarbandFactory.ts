@@ -67,7 +67,7 @@ class WarbandFactory {
         await rule.BuildUpgrade(data.list_upgrades);
         await rule.BuildSkills(data.list_skills);
         await rule.BuildInjuries(data.list_injury);
-        await rule.BuildNewProperties();
+        await rule.BuildNewProperties(data);
         return rule;
     }
 

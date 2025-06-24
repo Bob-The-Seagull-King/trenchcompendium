@@ -19,6 +19,8 @@ import { InjuryFactory } from "../../../../factories/features/InjuryFactory";
 import { Upgrade } from "../../../feature/ability/Upgrade";
 import { Equipment } from "../../../feature/equipment/Equipment";
 import { Keyword } from "../../../feature/glossary/Keyword";
+import { Ability } from "../../../feature/ability/Ability";
+import { EventRunner } from "../../../contextevent/contexteventhandler";
 
 interface IWarbandMember extends IContextObject {
     model: string,
@@ -68,8 +70,55 @@ class WarbandMember extends DynamicContextObject {
     }
     
 
-    public BuildNewProperties() {
-        undefined;
+    public async BuildNewProperties(data : IWarbandMember) {
+        const all_abils : Ability[] = await this.getContextuallyAvailableAbilities();
+        for (let i = 0; i < all_abils.length; i++) {
+        let IsFound = false
+        for (let j = 0; j < data.subproperties.length; j++) {
+            if (data.subproperties[j].object_id == all_abils[i].ID) {
+                const NewRuleProperty = new WarbandProperty(all_abils[i], this, null, data.subproperties[j]);
+                await NewRuleProperty.HandleDynamicProps(all_abils[i], this, null, data.subproperties[j]);
+                this.SubProperties.push(NewRuleProperty);
+                IsFound = true;
+                break;
+            }
+        }
+        if (IsFound == false) {
+            const NewRuleProperty = new WarbandProperty(all_abils[i], this, null, null);
+            await NewRuleProperty.HandleDynamicProps(all_abils[i], this, null, null);
+            this.SubProperties.push(NewRuleProperty);
+        }
+    }
+    }
+
+    
+    public async getContextuallyAvailableAbilities() : Promise<Ability[]> {
+        const AbilitiesAvailable : Ability[] = []
+        const BaseList : Ability[] = []
+        
+        for (let i = 0; i < this.CurModel.Abilities.length; i++) {
+            BaseList.push(this.CurModel.Abilities[i]);
+        }
+
+        if (this.IsMercenary() != true && this.MyContext != null) {
+            const Events : EventRunner = new EventRunner();
+            const result = await Events.runEvent(
+                "getWarbandMemberAbilities",
+                this.MyContext,
+                [],
+                BaseList,
+                this
+            )
+            for (let i = 0; i < result.length; i++) {
+                AbilitiesAvailable.push(result[i]);
+            }
+        } else {
+            for (let i = 0; i < BaseList.length; i++) {
+                AbilitiesAvailable.push(BaseList[i]);
+            }
+        }
+
+        return AbilitiesAvailable;
     }
 
     public async BuildEquipment(data : IWarbandPurchaseEquipment[]) {

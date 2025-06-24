@@ -768,7 +768,7 @@ class UserWarband extends DynamicContextObject {
                 maxcount,
                 this
             )
-            if ((!AddedIDs.includes(BaseRels[i].ID)) && this.GetCountOfEquipmentRel(BaseRels[i].ID) < maxcount || (maxcount == 0 && BaseRels[i].Limit == 0)) {
+            if (this.GetCountOfEquipmentRel(BaseRels[i].ID) < maxcount || (maxcount == 0 && BaseRels[i].Limit == 0)) {
                 if (!containsTag(BaseRels[i].Tags, "exploration_only")) {
                     AddedIDs.push(BaseRels[i].ID)
                     ListOfRels.push(BaseRels[i]);

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import WbbEditViewFighter from "./WbbEditViewFighter";
 import {
     faCheck,
@@ -40,6 +40,7 @@ import { Equipment } from '../../../classes/feature/equipment/Equipment';
 import { Ability } from '../../../classes/feature/ability/Ability';
 import { UpgradesGrouped } from '../../../classes/relationship/model/ModelUpgradeRelationship';
 import { Keyword } from '../../../classes/feature/glossary/Keyword';
+import { WarbandProperty } from '../../../classes/saveitems/Warband/WarbandProperty';
 
 
 interface WbbFighterDetailViewProps {
@@ -54,9 +55,18 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
     
     const [statchoices, setstats] = useState({})
     const [upgrades, setupgrades] = useState<UpgradesGrouped>({})
-    const [abilities, setabilities] = useState<Ability[]>([])
+    const [abilities, setabilities] = useState<WarbandProperty[]>([])
     const [keywordsList, setkeywords] = useState<Keyword[]>([])
     const [BaseString, setBaseString] = useState('')
+
+    
+    useEffect(() => {
+        async function SetModelOptions() {
+            setabilities(fighter.SubProperties);
+        }
+
+        SetModelOptions();
+    }, [fighter]);
 
     // Test Data ***
     const BoolOptions = [
@@ -75,17 +85,6 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
             Description: 'Any Azebs can be converted to SKIRMISHERS at the cost of +5 ducats per model. Unless engaged in melee, when an enemy model declares a charge against any Skirmisher Azeb, they can immediately move D3” in any direction they wish (except within 1” of any enemy or out of the battlefield). After this manoeuvre, the charging model is moved as normal. This may lead to the charger being unable to enter melee. This move cannot be taken by a model that is Down.'
         }
     ];
-    const Abilities = [
-        {
-            Name: 'Skirmisher',
-            Description: 'Any Azebs can be converted to SKIRMISHERS at the cost of +5 ducats per model. Unless engaged in melee, when an enemy model declares a charge against any Skirmisher Azeb, they can immediately move D3” in any direction they wish (except within 1” of any enemy or out of the battlefield). After this manoeuvre, the charging model is moved as normal. This may lead to the charger being unable to enter melee. This move cannot be taken by a model that is Down.'
-        },
-        {
-            Name: 'Mine-setting',
-            Description: 'As an ACTION with +2 DICE, the Sapper can mine a piece of terrain they alone are touching, no bigger than 8” x 8” (an 8” section of trench, a wall,\n' +
-                'a tree, a building etc). If successful, the terrain piece is now mined. Any model (except the Sapper who set the mine) who moves into contact with the terrain piece will trigger the mine. Roll on the Injury Chart to see what happens to the model. The mine has the Keyword SHRAPNEL. After this, the terrain piece is no longer mined.',
-        }
-    ]
     // end Test Data ***
 
     const { playMode } = usePlayMode();
@@ -578,7 +577,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
             {(!playMode) &&
                 <div className={'fighter-card-collapse-wrap'}>
                     <WbbFighterCollapse title="Abilities">
-                        {Abilities.map((ability, index) => (
+                        {abilities.map((ability, index) => (
                             <WbbAbilityDisplay key={index} ability={ability}/>
                         ))}
                     </WbbFighterCollapse>
@@ -620,7 +619,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
 
                     <div className={'play-mode-abilities-wrap'}>
                         <h3>{'Abilities'}</h3>
-                        {Abilities.map((ability, index) => (
+                        {abilities.map((ability, index) => (
                             <WbbAbilityDisplay key={index} ability={ability}/>
                         ))}
                     </div>
