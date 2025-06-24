@@ -6,16 +6,10 @@ import Dropdown from 'react-bootstrap/Dropdown';
 
 // Font Awesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSun, IconDefinition } from '@fortawesome/free-solid-svg-icons'
-import { faMoon } from '@fortawesome/free-solid-svg-icons'
-import { useGlobalState } from '../../../utility/globalstate'
-import { makestringpresentable } from '../../../utility/functions';
 import { ViewCollectionsModel } from '../../../classes/viewmodel/collections/ViewCollectionsModel';
 import { CollectionsListPage } from '../../../classes/viewmodel/pages/CollectionListPage';
 import { DisplayCollectionType, DisplayCollectionDataDex } from '../../pages/DisplayPageStatic';
 import { useNavigate } from 'react-router-dom';
-import GenericCollapsableBlockDisplay from '../../components/generics/GenericCollapsableBlockDisplay';
-import PalleteSwap from './PalleteSwap';
 import GenericLinkedCollapsableBlockDisplay from '../../components/generics/GenericLinkedCollapsableBlockDisplay';
 
 const CompendiumMenuItem = (prop: any) => {

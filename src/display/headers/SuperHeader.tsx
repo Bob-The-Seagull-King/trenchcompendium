@@ -15,7 +15,6 @@ import MenuHeader from './MenuHeader'
 
 import { ControllerController } from '../../classes/_high_level_controllers/ControllerController';
 import OffcanvasMenu from './components/OffCanvasMenu';
-import SettingsMenu from './components/SettingsMenu';
 
 interface IControllerProp {
     controller : ControllerController; // The controller being passed through
@@ -124,8 +123,7 @@ const SuperHeader: React.FC<IControllerProp> = (prop) => {
                 </div>
 
                 <OffcanvasMenu controller={prop.controller} closeFunc={handleClose} responseshow="" showState={show}/>
-                <SettingsMenu controller={prop.controller} closeFunc={handleClosesettings} responseshow=""
-                              showState={showsettings}/>
+
             </>
         </ErrorBoundary>
     )
