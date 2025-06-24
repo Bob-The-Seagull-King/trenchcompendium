@@ -10,7 +10,7 @@ import {
     faArrowUp,
     faArrowLeft,
     faCoins,
-    faEdit, faPen, faFileExport, faDice, faSignature, faPrint
+    faEdit, faPen, faFileExport, faDice, faSignature, faPrint, faArrowRotateLeft
 } from '@fortawesome/free-solid-svg-icons';
 import { usePopover } from '../../../context/PopoverContext';
 import { useWarband } from '../../../context/WarbandContext';
@@ -47,6 +47,7 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
 
     const [showConfirmDeleteFighterModal, setshowConfirmDeleteFighterModal] = useState(false);
     const [showConfirmRenameFighterModal, setshowConfirmRenameFighterModal] = useState(false);
+    const [showConfirmRefundFighterModal, setshowConfirmRefundFighterModal] = useState(false);
     const showConfirmRenameFighter = () => {
         setshowConfirmRenameFighterModal(true);
     }
@@ -73,6 +74,23 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
             }
         })
     }
+
+
+    const showConfirmRefundFighter = () => {
+        setshowConfirmRefundFighterModal(true);
+    }
+    const handleRefundFighter = () => {
+        setshowConfirmRefundFighterModal(true);
+
+        // @TODO: refund fighter
+        /**
+         * This should:
+         * - refund the fighter cost
+         * - refund all equipment of this fighter
+         * - delete the fighter from roster
+         */
+    }
+
     const showConfirmDeleteFighter = () => {
         setshowConfirmDeleteFighterModal(true);
     }
@@ -247,6 +265,7 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
     useEffect(() => {
         if (showConfirmDeleteFighterModal
             || showConfirmRenameFighterModal
+            || showConfirmRefundFighterModal
             || showConfirmDeleteModifierModal
             || showConfirmDeleteExplorationModal
             || showConfirmDeleteEquipmentModal
@@ -262,6 +281,7 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
     }, [
         showConfirmDeleteFighterModal,
         showConfirmRenameFighterModal,
+        showConfirmRefundFighterModal,
         showConfirmDeleteModifierModal,
         showConfirmDeleteExplorationModal,
         showConfirmDeleteEquipmentModal,
@@ -296,13 +316,17 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                         <div className="actions">
                             {type === 'fighter' &&
                                 <>
-                                    <div className="action action-copy" onClick={showConfirmRenameFighter}>
+                                    <div className="action action-rename" onClick={showConfirmRenameFighter}>
                                         <FontAwesomeIcon icon={faEdit} className="icon-inline-left-l"/>
                                         {'Rename Fighter'}
                                     </div>
                                     <div className="action action-copy" onClick={handleCopyFighter}>
                                         <FontAwesomeIcon icon={faCopy} className="icon-inline-left-l"/>
                                         {'Copy Fighter'}
+                                    </div>
+                                    <div className="action action-refund" onClick={handleRefundFighter}>
+                                        <FontAwesomeIcon icon={faArrowRotateLeft} className="icon-inline-left-l"/>
+                                        {'Refund Fighter'}
                                     </div>
                                     <div className="action action-delete" onClick={showConfirmDeleteFighter}>
                                         <FontAwesomeIcon icon={faTrash} className="icon-inline-left-l"/>
@@ -450,6 +474,35 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                     </Button>
                     <Button variant="danger" onClick={handleDeleteFighter}>
                         Delete
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+            {/** Delete Fighter Confirm Modal */}
+            <Modal show={showConfirmRefundFighterModal} onHide={() => setshowConfirmRefundFighterModal(false)} centered>
+                <Modal.Header closeButton>
+                    <Modal.Title>{`Refund Fighter`}</Modal.Title>
+                </Modal.Header>
+
+                <Modal.Body>
+                    {'Are you sure you want to refund '}
+                    <strong>{item.ModelName + ' - ' + item.FighterName}</strong>?
+
+                    <br/>
+                    <br/>
+                    <p>
+                        <i>
+                            {'This will remove the fighter from your roster and refund all costs for the fighter and its equipment.'}
+                        </i>
+                    </p>
+                </Modal.Body>
+
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={() => setshowConfirmRefundFighterModal(false)}>
+                        Cancel
+                    </Button>
+                    <Button variant="danger" onClick={handleRefundFighter}>
+                        Refund
                     </Button>
                 </Modal.Footer>
             </Modal>
