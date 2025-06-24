@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { UserWarband } from "../../../classes/saveitems/Warband/UserWarband";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faChevronLeft, faFloppyDisk, faPen} from "@fortawesome/free-solid-svg-icons";
+import {faChevronLeft, faFloppyDisk, faPen, faTriangleExclamation} from "@fortawesome/free-solid-svg-icons";
 import {useWarband} from "../../../context/WarbandContext";
 import WbbModalEditFighterStatus from "./modals/fighter/WbbEditFighterStatus";
 import WbbTextarea from "./WbbTextarea";
@@ -84,15 +84,35 @@ const WbbWarbandDetailView: React.FC<WbbWarbandDetailViewProps> = ({  onClose })
                         {' | '}
                         {'Mercenary: '}{warband.warband_data.GetNumMercenary()}
                     </div>
+
+                    { warband.warband_data.HasValidationErrors() &&
+                        <div className="detail-section-text-element detail-section-text-element-vaidation-error">
+                            <div className={'alert alert-warning'}>
+                                <div className={'detail-section-text-element-vaidation-error-title'}>
+                                    <FontAwesomeIcon icon={faTriangleExclamation} className="icon-inline-left-l"/>
+                                    {'Your warband is not valid'}
+                                </div>
+
+                                <ul>
+                                    {warband.warband_data.GetValidationErrors().map((item, index) =>
+                                        <li key={index}>
+                                            {item}
+                                        </li>
+                                    )}
+                                </ul>
+                            </div>
+
+                        </div>
+                    }
                 </div>
 
                 {/* Warband level options */}
                 <div className={'WbbDetailViewCollapse-wrap'}>
                     {/* @TODO: only show if warband has options */}
-                    {(warband.warband_data.Faction.MyFaction? warband.warband_data.Faction.MyFaction.SelfDynamicProperty.Selections.length : 0) > 0 &&
+                    {(warband.warband_data.Faction.MyFaction ? warband.warband_data.Faction.MyFaction.SelfDynamicProperty.Selections.length : 0) > 0 &&
                         <WbbDetailViewCollapse title="Warband Options" initiallyOpen={true}>
 
-                            {(warband.warband_data.Faction.MyFaction? warband.warband_data.Faction.MyFaction.SelfDynamicProperty.Selections.length : 0) > 0 &&
+                        {(warband.warband_data.Faction.MyFaction? warband.warband_data.Faction.MyFaction.SelfDynamicProperty.Selections.length : 0) > 0 &&
                                 <span className={'title-choice'}>
                                     {(warband.warband_data.Faction.MyFaction? warband.warband_data.Faction.MyFaction.SelfDynamicProperty.Selections : []).map((item) => 
                                         <WbbOptionSelect 

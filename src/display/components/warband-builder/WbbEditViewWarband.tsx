@@ -1,6 +1,8 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import {UserWarband} from "../../../classes/saveitems/Warband/UserWarband";
 import { useWarband  } from '../../../context/WarbandContext';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faFileExport, faTriangleExclamation} from "@fortawesome/free-solid-svg-icons";
 interface WbbEditViewWarbandProps {
     onClick?: () => void;
     isActive?: boolean;
@@ -13,6 +15,8 @@ const WbbEditViewWarband: React.FC<WbbEditViewWarbandProps> = ({
    }) => {
 
     const { warband } = useWarband();
+
+
 
     if (warband == null) return (<div>Loading...</div>);
 
@@ -33,6 +37,13 @@ const WbbEditViewWarband: React.FC<WbbEditViewWarbandProps> = ({
                 {'Mercenary: '}{warband.warband_data.GetNumMercenary()}
 
             </div>
+
+            { warband.warband_data.HasValidationErrors() &&
+                <div className="meta-item meta-item-vaidation-error">
+                    <FontAwesomeIcon icon={faTriangleExclamation} className="icon-inline-left-l"/>
+                    {'Your warband is not valid'}
+                </div>
+            }
         </div>
     );
 };

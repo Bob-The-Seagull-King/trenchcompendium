@@ -570,6 +570,33 @@ class UserWarband extends DynamicContextObject {
         return this.GetFighters().filter(f => f.model.IsMercenary()).length;
     }
 
+    /**
+     * Does this warband have validation errors
+     *
+     * @return: boolean
+     */
+    HasValidationErrors () {
+        if( this.GetValidationErrors.length > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Returns an array of validation error strings
+     *
+     * @return: array
+     */
+    GetValidationErrors () {
+
+        return [
+            'You need 1 fighter to be the leader of this warband',
+            'You exceeded the limit of the equipment "Wind Amulet"'
+        ]
+    }
+
+
     /** 
      * Returns the notes for this warband as string
      * @constructor
