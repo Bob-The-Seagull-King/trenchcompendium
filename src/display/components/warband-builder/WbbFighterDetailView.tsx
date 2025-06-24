@@ -36,6 +36,7 @@ import WbbModalEditFighterStatus from "./modals/fighter/WbbEditFighterStatus";
 import {IWarbandMember} from "../../../classes/saveitems/Warband/Purchases/WarbandMember";
 import { RealWarbandPurchaseModel } from '../../../classes/saveitems/Warband/Purchases/WarbandPurchase';
 import { returnDescription } from '../../../utility/util';
+import { Equipment } from '../../../classes/feature/equipment/Equipment';
 
 
 interface WbbFighterDetailViewProps {
@@ -63,29 +64,6 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
             CostDucats: 10,
             CostGlory: 0,
             Description: 'Any Azebs can be converted to SKIRMISHERS at the cost of +5 ducats per model. Unless engaged in melee, when an enemy model declares a charge against any Skirmisher Azeb, they can immediately move D3” in any direction they wish (except within 1” of any enemy or out of the battlefield). After this manoeuvre, the charging model is moved as normal. This may lead to the charger being unable to enter melee. This move cannot be taken by a model that is Down.'
-        }
-    ];
-    const GoeticPowers = [
-        {
-            Name: 'Exquisite Pain',
-            Id: 'lorem_id',
-            CostDucats: 15,
-            CostGlory: 0,
-            Description: 'As a GOETIC (1-2) Spell, this model inflicts X BLOOD MARKERS on an enemy model that it can see, where X is the amount of BLOOD MARKERS spent.'
-        },
-        {
-            Name: 'Forbidden Pleasures',
-            Id: 'lorem_id2',
-            CostDucats: 10,
-            CostGlory: 0,
-            Description: 'Before the Battle begins, select one model in your warband without the Keyword DEMONIC. It starts the Battle with three BLOOD MARKERS.'
-        },
-        {
-            Name: 'Call of Flesh',
-            Id: 'lorem_id2',
-            CostDucats: 15,
-            CostGlory: 0,
-            Description: 'As a GOETIC (2) Spell that ends this model’s Activation, beckoning magic fills the air. When the enemy next Activates a model during this Turn, that model must Move as its first ACTION. This Move must be a Retreat if the model started its Activation in Melee Combat with a model other than the caster of this Spell. If that model is Down, it instead Stands and then Moves. During this movement, it moves in a direct path toward the caster of this Spell through any passable terrain, including Dangerous Terrain, Jumping Down etc. The model suffers injuries as normal. It can act normally after taking the prescribed ACTION(S), or attempting to take the prescribed ACTION(S) if it couldn’t, but cannot target the caster of this Spell during this Activation with ranged or melee attacks.'
         }
     ];
     const Abilities = [
@@ -124,6 +102,13 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
     // Equipment
     const [showAddEquipmentModal, setShowAddEquipmentModal] = useState(false);
     const handleAddEquipment = (equipment: any) => {
+        // TODO: Attach equipment to fighter, or pass to backend
+        console.log('Equipment added:', equipment);
+    };
+
+    // Armour
+    const [showAddArmourModal, setShowAddArmourModal] = useState(false);
+    const handleAddArmour = (equipment: any) => {
         // TODO: Attach equipment to fighter, or pass to backend
         console.log('Equipment added:', equipment);
     };
@@ -328,18 +313,17 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                             </>
                         }
 
-                        {/* Goetic Powers */}
-                        {GoeticPowers.length > 0 &&
-                            <>
-                                <h3>{'Goetic Powers'}</h3>
-                                {GoeticPowers.map((option, index) => (
-                                    <WbbOptionItem key={index} option={option}/>
-                                ))}
-                            </>
-                        }
-
                         {/* Ranged Weapons */}
                         <h3>{'Ranged Weapons'}</h3>
+                        {fighter.GetEquipment().filter((item) => 
+                        ((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Category == "ranged")
+                        ).map((equip) => 
+                        (
+                            <WbbEquipmentListItem
+                                key={fighter.GetEquipment().indexOf(equip)}
+                                item={equip.purchase}
+                            />
+                        ))}
                         <div className={'btn btn-add-element btn-block'}
                              onClick={() => setShowAddRangedWeapon(true)}>
                             <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
@@ -348,18 +332,50 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
 
                         {/* Melee Weapons */}
                         <h3>{'Melee Weapons'}</h3>
-                        {/* @TODO: For each Item 
-                        <WbbEquipmentListItem
-                            item={item_trench_knife}
-                        />*/}
+                        {fighter.GetEquipment().filter((item) => 
+                        ((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Category == "melee")
+                        ).map((equip) => 
+                        (
+                            <WbbEquipmentListItem
+                                key={fighter.GetEquipment().indexOf(equip)}
+                                item={equip.purchase}
+                            />
+                        ))}
                         <div className={'btn btn-add-element btn-block'}
                              onClick={() => setShowMeleeWeaponModal(true)}>
                             <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
                             {'Add Melee Weapon'}
                         </div>
+                        
+
+                        {/* Equipment */}
+                        <h3>{'Armour'}</h3>
+                        {fighter.GetEquipment().filter((item) => 
+                        ((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Category == "armour")
+                        ).map((equip) => 
+                        (
+                            <WbbEquipmentListItem
+                                key={fighter.GetEquipment().indexOf(equip)}
+                                item={equip.purchase}
+                            />
+                        ))}
+                        <div className={'btn btn-add-element btn-block'}
+                             onClick={() => setShowAddArmourModal(true)}>
+                            <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
+                            {'Add Armour'}
+                        </div>
 
                         {/* Equipment */}
                         <h3>{'Equipment'}</h3>
+                        {fighter.GetEquipment().filter((item) => 
+                        ((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Category == "equipment")
+                        ).map((equip) => 
+                        (
+                            <WbbEquipmentListItem
+                                key={fighter.GetEquipment().indexOf(equip)}
+                                item={equip.purchase}
+                            />
+                        ))}
                         <div className={'btn btn-add-element btn-block'}
                              onClick={() => setShowAddEquipmentModal(true)}>
                             <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
@@ -367,20 +383,33 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                         </div>
 
                         {/* Equipment Modals */}
-                        <WbbModalAddRangedWeapon
+                        <WbbModalAddEquipment
                             show={showAddRangedWeapon}
                             onClose={() => setShowAddRangedWeapon(false)}
                             onSubmit={handleAddRangedWeapon}
+                            fighter={warbandmember}
+                            category='ranged'
                         />
-                        <WbbModalAddMeleeWeapon
+                        <WbbModalAddEquipment
                             show={showMeleeWeaponModal}
                             onClose={() => setShowMeleeWeaponModal(false)}
                             onSubmit={handleAddMeleeWeapon}
+                            fighter={warbandmember}
+                            category='melee'
+                        />
+                        <WbbModalAddEquipment
+                            show={showAddArmourModal}
+                            onClose={() => setShowAddArmourModal(false)}
+                            onSubmit={handleAddArmour}
+                            fighter={warbandmember}
+                            category='armour'
                         />
                         <WbbModalAddEquipment
                             show={showAddEquipmentModal}
                             onClose={() => setShowAddEquipmentModal(false)}
                             onSubmit={handleAddEquipment}
+                            fighter={warbandmember}
+                            category='equipment'
                         />
                     </WbbFighterCollapse>
                 </div>
@@ -570,14 +599,14 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                     </div>
 
                     <div className={'play-mode-goetic-powers-wrap'}>
-                        {GoeticPowers.length > 0 &&
+                        {/*GoeticPowers.length > 0 &&
                             <>
                                 <h3>{'Goetic Powers'}</h3>
                                 {GoeticPowers.map((option, index) => (
                                     <WbbOptionItem key={index} option={option}/>
                                 ))}
                             </>
-                        }
+                        */}
                     </div>
 
                     <div className={'play-mode-abilities-wrap'}>

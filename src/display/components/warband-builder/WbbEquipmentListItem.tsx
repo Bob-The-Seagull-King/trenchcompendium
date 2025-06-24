@@ -13,7 +13,7 @@ import {
 import WbbContextualPopover from "./WbbContextualPopover";
 import {usePlayMode} from "../../../context/PlayModeContext";
 import {usePrintMode} from "../../../context/PrintModeContext";
-import { WarbandPurchase } from '../../../classes/saveitems/Warband/Purchases/WarbandPurchase';
+import { RealWarbandPurchaseEquipment, WarbandPurchase } from '../../../classes/saveitems/Warband/Purchases/WarbandPurchase';
 import { WarbandEquipment } from '../../../classes/saveitems/Warband/Purchases/WarbandEquipment';
 import { Equipment } from '../../../classes/feature/equipment/Equipment';
 import { getCostType } from '../../../utility/functions';
@@ -32,7 +32,7 @@ const WbbEquipmentListItem: React.FC<EquipmentItemProps> = ({ item }) => {
     const { playMode } = usePlayMode();
     const { printMode } = usePrintMode();
 
-    const ItemValue = ((item.HeldObject as WarbandEquipment).MyEquipment.SelfDynamicProperty.OptionChoice as Equipment)
+    const ItemValue = (((item.HeldObject as WarbandEquipment).MyEquipment.SelfDynamicProperty.OptionChoice as Equipment))
 
     return (
         <div className={`WbbEquipmentListItem ${playMode ? 'play-mode' : ''} ${printMode ? 'print-mode' : ''} `}>

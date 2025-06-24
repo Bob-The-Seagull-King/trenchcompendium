@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import {faXmark} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { RealWarbandPurchaseModel } from '../../../../../classes/saveitems/Warband/Purchases/WarbandPurchase';
 
 interface EquipmentItem {
     id: string;
@@ -14,9 +15,11 @@ interface WbbModalAddEquipmentProps {
     show: boolean;
     onClose: () => void;
     onSubmit: (equipment: EquipmentItem) => void;
+    fighter : RealWarbandPurchaseModel
+    category : string
 }
 
-const WbbModalAddEquipment: React.FC<WbbModalAddEquipmentProps> = ({ show, onClose, onSubmit }) => {
+const WbbModalAddEquipment: React.FC<WbbModalAddEquipmentProps> = ({ show, onClose, onSubmit, fighter, category }) => {
     const [selectedId, setSelectedId] = useState<string | null>(null);
 
     // Example test data — replace with actual equipment list
