@@ -70,7 +70,7 @@ const SuperHeader: React.FC<IControllerProp> = (prop) => {
             const currentScroll = window.scrollY
             const delta = currentScroll - lastScrollY.current
 
-            if (currentScroll === 0) {
+            if (currentScroll === 0) { // is at top
                 setIsShy(false)
                 upScrollTotal.current = 0
             } else {
@@ -124,6 +124,11 @@ const SuperHeader: React.FC<IControllerProp> = (prop) => {
 
                 <OffcanvasMenu controller={prop.controller} closeFunc={handleClose} responseshow="" showState={show}/>
 
+                <div className={'debug'}>
+                    {'downScrollTotal.current: '}{downScrollTotal.current}
+                    {'upScrollTotal.current: '}{upScrollTotal.current}
+                    {'lastScrollY.current: '}{lastScrollY.current}
+                </div>
             </>
         </ErrorBoundary>
     )
