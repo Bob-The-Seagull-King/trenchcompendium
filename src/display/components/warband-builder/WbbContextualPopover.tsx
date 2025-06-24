@@ -88,6 +88,7 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
          * - refund the fighter cost
          * - refund all equipment of this fighter
          * - delete the fighter from roster
+         * - only if pruchased this cycle
          */
     }
 
@@ -189,6 +190,7 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
          * This will:
          * - remove the equipment from the fighter
          * - refund its cost
+         * - only if purchased during this cycle
          */
     }
 
@@ -347,7 +349,7 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                                         <FontAwesomeIcon icon={faCopy} className="icon-inline-left-l"/>
                                         {'Copy Fighter'}
                                     </div>
-                                    <div className="action action-refund" onClick={handleRefundFighter}>
+                                    <div className="action action-refund" onClick={showConfirmRefundFighter}>
                                         <FontAwesomeIcon icon={faArrowRotateLeft} className="icon-inline-left-l"/>
                                         {'Refund Fighter'}
                                     </div>
