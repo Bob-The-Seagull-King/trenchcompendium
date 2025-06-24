@@ -82,8 +82,6 @@ const SuperHeader: React.FC<IControllerProp> = (prop) => {
 
                     upScrollTotal.current = 0
 
-                    console.log('downScrollTotal.current: '+downScrollTotal.current);
-
                     if (downScrollTotal.current >= 55) {
                         setIsShy(true)
                         downScrollTotal.current = 0 // reset after hiding
@@ -93,7 +91,6 @@ const SuperHeader: React.FC<IControllerProp> = (prop) => {
 
                     upScrollTotal.current += Math.abs(delta)
                     downScrollTotal.current = 0
-                    console.log('upScrollTotal.current: '+upScrollTotal.current);
 
                     if (upScrollTotal.current >= 55) {
                         setIsShy(false)
@@ -135,12 +132,6 @@ const SuperHeader: React.FC<IControllerProp> = (prop) => {
                 </div>
 
                 <OffcanvasMenu controller={prop.controller} closeFunc={handleClose} responseshow="" showState={show}/>
-
-                <div className={'debug-lorem'}>
-                    {'downScrollTotal.current: '}{downScrollTotal.current}<br/>
-                    {'upScrollTotal.current: '}{upScrollTotal.current}<br/>
-                    {'lastScrollY.current: '}{lastScrollY.current}
-                </div>
             </>
         </ErrorBoundary>
     )
