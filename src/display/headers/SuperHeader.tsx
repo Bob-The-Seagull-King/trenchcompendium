@@ -124,9 +124,9 @@ const SuperHeader: React.FC<IControllerProp> = (prop) => {
 
                 <OffcanvasMenu controller={prop.controller} closeFunc={handleClose} responseshow="" showState={show}/>
 
-                <div className={'debug'}>
-                    {'downScrollTotal.current: '}{downScrollTotal.current}
-                    {'upScrollTotal.current: '}{upScrollTotal.current}
+                <div className={'debug-lorem'}>
+                    {'downScrollTotal.current: '}{downScrollTotal.current}<br/>
+                    {'upScrollTotal.current: '}{upScrollTotal.current}<br/>
                     {'lastScrollY.current: '}{lastScrollY.current}
                 </div>
             </>
