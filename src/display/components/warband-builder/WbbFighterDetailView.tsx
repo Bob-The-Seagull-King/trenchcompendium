@@ -37,6 +37,9 @@ import {IWarbandMember} from "../../../classes/saveitems/Warband/Purchases/Warba
 import { RealWarbandPurchaseModel } from '../../../classes/saveitems/Warband/Purchases/WarbandPurchase';
 import { returnDescription } from '../../../utility/util';
 import { Equipment } from '../../../classes/feature/equipment/Equipment';
+import { Ability } from '../../../classes/feature/ability/Ability';
+import { UpgradesGrouped } from '../../../classes/relationship/model/ModelUpgradeRelationship';
+import { Keyword } from '../../../classes/feature/glossary/Keyword';
 
 
 interface WbbFighterDetailViewProps {
@@ -48,6 +51,12 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
 
 
     const fighter = warbandmember.model;
+    
+    const [statchoices, setstats] = useState({})
+    const [upgrades, setupgrades] = useState<UpgradesGrouped>({})
+    const [abilities, setabilities] = useState<Ability[]>([])
+    const [keywordsList, setkeywords] = useState<Keyword[]>([])
+    const [BaseString, setBaseString] = useState('')
 
     // Test Data ***
     const BoolOptions = [
