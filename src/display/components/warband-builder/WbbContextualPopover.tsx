@@ -10,7 +10,7 @@ import {
     faArrowUp,
     faArrowLeft,
     faCoins,
-    faEdit, faPen, faFileExport, faDice, faSignature, faPrint, faArrowRotateLeft
+    faEdit, faPen, faFileExport, faDice, faSignature, faPrint, faArrowRotateLeft, faSackDollar
 } from '@fortawesome/free-solid-svg-icons';
 import { usePopover } from '../../../context/PopoverContext';
 import { useWarband } from '../../../context/WarbandContext';
@@ -163,6 +163,11 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
 
     const handleSellEquipment = () => {
         // @TODO: Sell equipment
+        /**
+         * This will:
+         * - remove the equipment from the fighter
+         * - Sell for half its value rounded up
+         */
 
         setshowConfirmSellEquipmentModal(false);
         console.log('handleSellEquipment');
@@ -174,11 +179,11 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
     }
 
     const showConfirmRefundEquipment = () => {
-        setshowConfirmDeleteEquipmentModal(true);
+        setshowConfirmRefundEquipmentModal(true);
     }
 
     const handleRefundEquipment = () => {
-        setshowConfirmDeleteEquipmentModal(false);
+        setshowConfirmRefundEquipmentModal(false);
         // @TODO: refund equipment
         /**
          * This will:
@@ -286,6 +291,7 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
             || showConfirmDeleteExplorationModal
             || showConfirmDeleteEquipmentModal
             || showConfirmSellEquipmentModal
+            || showConfirmRefundEquipmentModal
             || showConfirmMoveEquipmentModal
             || showConfirmDeleteAdvancementModal
             || showConfirmDeleteInjuryModal
@@ -302,6 +308,7 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
         showConfirmDeleteExplorationModal,
         showConfirmDeleteEquipmentModal,
         showConfirmSellEquipmentModal,
+        showConfirmRefundEquipmentModal,
         showConfirmMoveEquipmentModal,
         showConfirmDeleteAdvancementModal,
         showConfirmDeleteInjuryModal,
@@ -401,12 +408,12 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
 
                                     <div className="action action-refund" onClick={showConfirmRefundEquipment}>
                                         <FontAwesomeIcon icon={faArrowRotateLeft} className="icon-inline-left-l"/>
-                                        {'Refund Equpiment'}
+                                        {'Refund Item'}
                                     </div>
 
                                     <div className="action action-delete" onClick={showConfirmDeleteEquipment}>
                                         <FontAwesomeIcon icon={faTrash} className="icon-inline-left-l"/>
-                                        {'Delete Equpiment'}
+                                        {'Delete Item'}
                                     </div>
                                 </>
                             }
@@ -675,6 +682,16 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                     <div >
                         <strong>{item.Name }</strong>?
                     </div>
+
+                    <p>
+                        <i>
+                            {'This will remove this item from your roster and refund half its cost rounded up.'}
+                            <br/>
+                            {'You will receive: '}
+                            {/*    @TODO: add sell value here*/}
+                            {'10 Ducats'}
+                        </i>
+                    </p>
                 </Modal.Body>
 
                 <Modal.Footer>
