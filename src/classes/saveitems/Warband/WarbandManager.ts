@@ -233,7 +233,7 @@ class WarbandManager {
             name: _title,
             source: 'user_warband',
             tags: {},
-            ducat_bank: 0,
+            ducat_bank: 700,
             glory_bank: 0,
             notes: [],
             context: {

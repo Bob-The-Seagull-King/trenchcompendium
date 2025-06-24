@@ -18,7 +18,7 @@ import {usePlayMode} from "../../../context/PlayModeContext";
 import {usePrintMode} from "../../../context/PrintModeContext";
 import {useGlobalState} from "../../../utility/globalstate";
 import { ToolsController } from '../../../classes/_high_level_controllers/ToolsController';
-import { RealWarbandPurchaseModel } from '../../../classes/saveitems/Warband/Purchases/WarbandPurchase';
+import { RealWarbandPurchaseEquipment, RealWarbandPurchaseModel } from '../../../classes/saveitems/Warband/Purchases/WarbandPurchase';
 
 interface WbbContextualPopoverProps {
     id: string;
@@ -82,14 +82,11 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
     const handleRefundFighter = () => {
         setshowConfirmRefundFighterModal(true);
 
-        // @TODO: refund fighter
-        /**
-         * This should:
-         * - refund the fighter cost
-         * - refund all equipment of this fighter
-         * - delete the fighter from roster
-         * - only if pruchased this cycle
-         */
+
+        warband?.warband_data.DeleteFighter(item).then(() => {
+            const Manager : ToolsController = ToolsController.getInstance();
+            Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
+                () => reloadDisplay())})
     }
 
     const showConfirmDeleteFighter = () => {
@@ -98,7 +95,7 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
     const handleDeleteFighter = () => {
         setshowConfirmDeleteFighterModal(false);
 
-        warband?.warband_data.DeleteFighter(item).then(() => {
+        warband?.warband_data.DeleteFighterWithDebt(item, 1).then(() => {
             const Manager : ToolsController = ToolsController.getInstance();
             Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
                 () => reloadDisplay())
@@ -163,15 +160,15 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
     }
 
     const handleSellEquipment = () => {
-        // @TODO: Sell equipment
-        /**
-         * This will:
-         * - remove the equipment from the fighter
-         * - Sell for half its value rounded up
-         */
-
-        setshowConfirmSellEquipmentModal(false);
+        
         console.log('handleSellEquipment');
+
+        warband?.warband_data.DeleteStashWithDebt(item, 0.5).then(() => {
+            const Manager : ToolsController = ToolsController.getInstance();
+            Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
+                () => reloadDisplay())
+        })
+        setshowConfirmSellEquipmentModal(false);
     }
 
     const handleCopyEquipment = () => {
@@ -185,13 +182,14 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
 
     const handleRefundEquipment = () => {
         setshowConfirmRefundEquipmentModal(false);
-        // @TODO: refund equipment
-        /**
-         * This will:
-         * - remove the equipment from the fighter
-         * - refund its cost
-         * - only if purchased during this cycle
-         */
+        
+        console.log('handleRefundEquipment');
+
+        warband?.warband_data.DeleteStash(item).then(() => {
+            const Manager : ToolsController = ToolsController.getInstance();
+            Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
+                () => reloadDisplay())
+        })
     }
 
     const showConfirmDeleteEquipment = () => {
@@ -200,8 +198,14 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
     }
     const handleDeleteEquipment = () => {
         setshowConfirmDeleteEquipmentModal(false);
-        // @TODO: Delete Equipment from Warband
+        
         console.log('handleDeleteEquipment');
+
+        warband?.warband_data.DeleteStashWithDebt(item, 1).then(() => {
+            const Manager : ToolsController = ToolsController.getInstance();
+            Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
+                () => reloadDisplay())
+        })
     }
 
     /** Advancement Actions */
@@ -681,18 +685,16 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                     <div className={'mb-3'}>
                         {'Are you sure you want to sell this Equipment?'}
                     </div>
-                    <div >
-                        <strong>{item.Name }</strong>?
-                    </div>
 
                     <p>
+                        {((item as RealWarbandPurchaseEquipment).purchase != undefined) &&
                         <i>
                             {'This will remove this item from your roster and refund half its cost rounded up.'}
                             <br/>
                             {'You will receive: '}
-                            {/*    @TODO: add sell value here*/}
-                            {'10 Ducats'}
+                            {(item as RealWarbandPurchaseEquipment).purchase.GetTotalDucats() + "Ducats and " + (item as RealWarbandPurchaseEquipment).purchase.GetTotalGlory() + " Glory"}
                         </i>
+                        }
                     </p>
                 </Modal.Body>
 

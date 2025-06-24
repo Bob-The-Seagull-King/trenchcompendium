@@ -6,7 +6,7 @@ import { IWarbandExplorationSet, WarbandExplorationSet } from './CoreElements/Wa
 import { DynamicContextObject } from '../../contextevent/dynamiccontextobject';
 import { ContextObject, IContextObject } from '../../contextevent/contextobject';
 import { IWarbandFaction, WarbandFaction } from './CoreElements/WarbandFaction';
-import { IWarbandPurchaseEquipment, IWarbandPurchaseModel, RealWarbandPurchaseModel, WarbandPurchase } from './Purchases/WarbandPurchase';
+import { IWarbandPurchaseEquipment, IWarbandPurchaseModel, RealWarbandPurchaseEquipment, RealWarbandPurchaseModel, WarbandPurchase } from './Purchases/WarbandPurchase';
 import { IWarbandMember, WarbandMember } from './Purchases/WarbandMember';
 import { WarbandEquipment } from './Purchases/WarbandEquipment';
 import { WarbandFactory } from '../../../factories/warband/WarbandFactory';
@@ -114,8 +114,8 @@ class UserWarband extends DynamicContextObject {
             name: this.Name != undefined? this.Name : "",
             source: this.Source != undefined? this.Source : "",
             tags: this.Tags,
-            ducat_bank: this.GetCostDucatsTotal(),
-            glory_bank: this.GetCostGloryTotal(),
+            ducat_bank: this.Ducats,
+            glory_bank: this.Glory,
             models : modelslist,
             equipment : equipmentlist,
             notes: this.Notes,
@@ -227,7 +227,7 @@ class UserWarband extends DynamicContextObject {
      * Returns the Ducats Value of the Warband Cost as int (without stash)
      */
     public GetCostDucats() {
-        return this.GetDucatCost()  - this.Debts.ducats;
+        return this.GetDucatCost()
     }
 
     /**
@@ -236,21 +236,29 @@ class UserWarband extends DynamicContextObject {
      * @constructor
      */
     public GetCostDucatsTotal () {
-        return this.GetDucatCost() + this.GetDucatCostStash()  - this.Debts.ducats;
+        return this.GetDucatCost() + this.GetDucatCostStash()
+    }
+
+    public GetSumCurrentDucats() {
+        return this.Ducats - this.GetCostDucatsTotal() -  this.Debts.ducats
+    }
+
+    public GetSumCurrentGlory() {
+        return this.Glory - this.GetCostGloryTotal() -  this.Debts.glory
     }
 
     /**
      * Returns the Glory Value of the Warband Cost as int (without stash)
      */
     public GetCostGlory() {
-        return this.GetGloryCost() - this.Debts.glory;
+        return this.GetGloryCost()
     }
 
     /**
      * Returns the Glory Value of the Warband including stash as int
      */
     public GetCostGloryTotal() {
-        return this.GetGloryCost() + this.GetGloryCostStash() - this.Debts.glory;
+        return this.GetGloryCost() + this.GetGloryCostStash()
     }
 
     /**
@@ -379,11 +387,21 @@ class UserWarband extends DynamicContextObject {
         for (let i = 0; i < this.Models.length; i++) {
             if (fighter.model == (this.Models[i].HeldObject as WarbandMember)) {
                 this.Models.splice(i, 1);
-                this.Debts.ducats += fighter.purchase.GetTotalDucats();
-                this.Debts.glory += fighter.purchase.GetTotalGlory();
                 break;
             }
         }
+    }
+
+    public async DeleteFighterWithDebt( fighter : RealWarbandPurchaseModel, debt_mod : number) {
+        const CostVarDucats = fighter.purchase.GetTotalDucats();
+        const CostVarGlory = fighter.purchase.GetTotalGlory();
+
+        try {
+            await this.DeleteFighter(fighter);
+            this.Debts.ducats +=  Math.ceil(CostVarDucats * debt_mod);
+            this.Debts.glory += Math.ceil(CostVarGlory * debt_mod);
+
+        } catch (e) { console.log(e) }
     }
     
     public async AddStash ( stash: FactionEquipmentRelationship ) {
@@ -400,6 +418,28 @@ class UserWarband extends DynamicContextObject {
             custom_rel: stash.SelfData
         }, this, Equipment);
         this.Equipment.push(NewPurchase);
+    }
+    
+    public async DeleteStash( item : RealWarbandPurchaseEquipment ) {
+        
+        for (let i = 0; i < this.Equipment.length; i++) {
+            if (item.equipment == (this.Equipment[i].HeldObject as WarbandEquipment)) {
+                this.Equipment.splice(i, 1);
+                break;
+            }
+        }
+    }
+
+    public async DeleteStashWithDebt( item : RealWarbandPurchaseEquipment, debt_mod : number) {
+        const CostVarDucats = item.purchase.GetTotalDucats();
+        const CostVarGlory = item.purchase.GetTotalGlory();
+
+        try {
+            await this.DeleteStash(item);
+            this.Debts.ducats +=  Math.ceil(CostVarDucats * debt_mod);
+            this.Debts.glory += Math.ceil(CostVarGlory * debt_mod);
+
+        } catch (e) { console.log(e) }
     }
 
     /** @TODO
@@ -504,8 +544,8 @@ class UserWarband extends DynamicContextObject {
         return {
             ValueDucats: this.GetDucatCostStash(),
             ValueGlory: this.GetGloryCostStash(),
-            AmountDucats: 15 /* @TODO */,
-            AmountGlory: 1 /* @TODO */,
+            AmountDucats: this.Ducats - this.GetCostDucatsTotal() -  this.Debts.ducats,
+            AmountGlory: this.Glory - this.GetCostGloryTotal() -  this.Debts.glory,
             Items: []
         }
     }

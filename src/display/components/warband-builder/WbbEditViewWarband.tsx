@@ -25,8 +25,8 @@ const WbbEditViewWarband: React.FC<WbbEditViewWarbandProps> = ({
             <div className={'meta-headline'}>{'Warband'}</div>
             <div className="meta-item"><strong>Faction:</strong> {warband.warband_data.GetFactionName()}</div>
             <div className="meta-item"><strong>Name:</strong> {warband.warband_data.GetWarbandName()}</div>
-            <div className="meta-item"><strong>Rating:</strong> {warband.warband_data.GetCostDucatsTotal()} Ducats
-                | {warband.warband_data.GetCostGloryTotal()} Glory
+            <div className="meta-item"><strong>Rating:</strong> {warband.warband_data.GetSumCurrentDucats()} Ducats
+                | {warband.warband_data.GetSumCurrentGlory()} Glory
             </div>
             <div className="meta-item">
                 <strong>{'Fighters: '}</strong>

@@ -58,7 +58,10 @@ const WbbEquipmentListItem: React.FC<EquipmentItemProps> = ({ item }) => {
                 <WbbContextualPopover
                     id={`equipment-${warband?.warband_data.Equipment.indexOf(item)}`}
                     type="equipment"
-                    item={item}
+                    item={{
+                        purchase: item,
+                        equipment: (item.HeldObject as WarbandEquipment)
+                    } as RealWarbandPurchaseEquipment}
                 />
             }
 
