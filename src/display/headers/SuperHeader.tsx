@@ -80,6 +80,10 @@ const SuperHeader: React.FC<IControllerProp> = (prop) => {
                 if (delta > 0) { // Scrolling down
                     downScrollTotal.current += Math.abs(delta)
 
+                    upScrollTotal.current = 0
+
+                    console.log('downScrollTotal.current: '+downScrollTotal.current);
+
                     if (downScrollTotal.current >= 55) {
                         setIsShy(true)
                         downScrollTotal.current = 0 // reset after hiding
@@ -88,6 +92,8 @@ const SuperHeader: React.FC<IControllerProp> = (prop) => {
                 } else if (delta < 0) { // Scrolling up
 
                     upScrollTotal.current += Math.abs(delta)
+                    downScrollTotal.current = 0
+                    console.log('upScrollTotal.current: '+upScrollTotal.current);
 
                     if (upScrollTotal.current >= 55) {
                         setIsShy(false)
