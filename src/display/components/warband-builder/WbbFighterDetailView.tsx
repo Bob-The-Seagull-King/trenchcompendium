@@ -348,7 +348,6 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                             {returnDescription(fighter, fighter.CurModel.Description)}
                         </p>
 
-
                         {/* Ranged Weapons */}
                         <h3>{'Ranged Weapons'}</h3>
                         {fighter.GetEquipment().filter((item) =>
@@ -384,7 +383,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                         </div>
                         
 
-                        {/* Equipment */}
+                        {/* Armour */}
                         <h3>{'Armour'}</h3>
                         {fighter.GetEquipment().filter((item) => 
                         ((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Category == "armour")
