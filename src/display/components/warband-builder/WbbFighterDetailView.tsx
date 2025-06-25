@@ -67,7 +67,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
     useEffect(() => {
         async function SetModelOptions() {
             setabilities(fighter.SubProperties);
-            setupgrades(await fighter.getContextuallyAvailableUpgrades());
+            setupgrades(await fighter.GetWarbandUpgradeCollections());
             setkeywords(await fighter.getContextuallyAvailableKeywords())
         }
 
