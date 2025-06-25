@@ -521,7 +521,7 @@ class WarbandMember extends DynamicContextObject {
 
     public async getContextuallyAvailableUpgrades() : Promise<UpgradesGrouped> {
         const UpgradesAvailable : ModelUpgradeRelationship[] = []
-        const BaseList : ModelUpgradeRelationship[] = []
+        let BaseList : ModelUpgradeRelationship[] = []
 
         for (let i = 0; i < this.CurModel.UpgradeList.length; i++) {
             BaseList.push(this.CurModel.UpgradeList[i]);
@@ -536,16 +536,13 @@ class WarbandMember extends DynamicContextObject {
                 BaseList,
                 this
             )
-            const result_fin = await Events.runEvent(
+            BaseList = await Events.runEvent(
                 "getWarbandMemberUpgrades",
                 this,
                 result,
                 BaseList,
                 this
             )
-            for (let i = 0; i < result_fin.length; i++) {
-                UpgradesAvailable.push(result[i]);
-            }
         }
 
         for (let i = 0; i < BaseList.length; i++) {
@@ -578,6 +575,38 @@ class WarbandMember extends DynamicContextObject {
         }
 
         return this.SplitUpgrades(UpgradesAvailable);
+    }
+
+    public async getContextuallyAvailableKeywords() : Promise<Keyword[]> {
+        const KeywordsAvailable : Keyword[] = []
+        const BaseList : Keyword[] = []
+
+        for (let i = 0; i < this.CurModel.KeyWord.length; i++) {
+            BaseList.push(this.CurModel.KeyWord[i]);
+        }
+
+        const Events : EventRunner = new EventRunner();
+        if (this.MyContext != null) {
+            const result = await Events.runEvent(
+                "getContextuallyRelevantKeywordsByID",
+                this.MyContext,
+                [],
+                BaseList,
+                this
+            )
+            const result_fin = await Events.runEvent(
+                "getContextuallyRelevantKeywordsByID",
+                this,
+                result,
+                BaseList,
+                this
+            )
+            for (let i = 0; i < result_fin.length; i++) {
+                KeywordsAvailable.push(result[i]);
+            }
+        }
+
+        return (KeywordsAvailable);
     }
 
 }

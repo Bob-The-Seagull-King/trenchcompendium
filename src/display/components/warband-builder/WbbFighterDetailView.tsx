@@ -43,6 +43,8 @@ import { Keyword } from '../../../classes/feature/glossary/Keyword';
 import { WarbandProperty } from '../../../classes/saveitems/Warband/WarbandProperty';
 import RulesModelDisplayCollapse from '../rules-content/RulesModelDisplayCollapse';
 import { makestringpresentable } from '../../../utility/functions';
+import KeywordDisplay from '../features/glossary/KeywordDisplay';
+import GenericHover from '../generics/GenericHover';
 
 
 interface WbbFighterDetailViewProps {
@@ -66,6 +68,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
         async function SetModelOptions() {
             setabilities(fighter.SubProperties);
             setupgrades(await fighter.getContextuallyAvailableUpgrades());
+            setkeywords(await fighter.getContextuallyAvailableKeywords())
         }
 
         SetModelOptions();
@@ -248,9 +251,21 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                     <div className="fighter-meta-entry-simple">
                         <span className="fighter-meta-label">
                             {'Kewords: '}
-                        </span>
+                        </span>                        
                         <span className="fighter-meta-value">
-                            {'SULTANATE, ELITE'}
+                            {keywordsList.map((item, index) => (
+                                <span
+                                    key={`model_keyword_${fighter.ID}_keyword_id_${item.ID}`}
+                                >
+                                    <GenericHover
+                                        titlename={item.Name}
+                                        d_name={item.Name}
+                                        d_type={""}
+                                        d_method={() => <KeywordDisplay data={item} />}
+                                    />
+                                    {index < keywordsList.length - 1 && ", "}
+                                </span>
+                            ))}
                         </span>
                     </div>
 
