@@ -309,7 +309,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                     {Object.keys(upgrades).map((item, index) => (
                         <div className={'fighter-card-collapse-wrap'} key={index}>
                             <WbbFighterCollapse
-                                title={item}
+                                title={makestringpresentable(item)}
                                 initiallyOpen={false}
                             >
                                 <>
