@@ -7,17 +7,11 @@ import {usePrintMode} from "../../../context/PrintModeContext";
 import { ModelUpgradeRelationship } from '../../../classes/relationship/model/ModelUpgradeRelationship';
 import { getCostType } from '../../../utility/functions';
 import { returnDescription } from '../../../utility/util';
+import { MemberUpgradePresentation } from '../../../classes/saveitems/Warband/Purchases/WarbandMember';
 
-interface Option {
-    Name: string;
-    Description: string;
-    CostDucats: number;
-    CostGlory: number;
-    Id: string;
-}
 
 interface WbbOptionItemProps {
-    option: ModelUpgradeRelationship;
+    option: MemberUpgradePresentation;
 }
 
 const WbbOptionItem: React.FC<WbbOptionItemProps> = ({ option }) => {
@@ -47,7 +41,7 @@ const WbbOptionItem: React.FC<WbbOptionItemProps> = ({ option }) => {
             {(!playMode && !printMode) &&
                 <div className="option-title"
                      onClick={(e) => {
-                         if( !option.IsLimitReached() ) {
+                         if( !option.upgrade.IsLimitReached() ) {
                              handleSelectOption();
                          }
                     }}
@@ -58,21 +52,21 @@ const WbbOptionItem: React.FC<WbbOptionItemProps> = ({ option }) => {
                         <input
                             className="form-check-input"
                             type="checkbox"
-                            id={option.ID}
+                            id={option.upgrade.ID}
                             checked={selected}
-                            disabled={option.IsLimitReached()}
+                            disabled={option.upgrade.IsLimitReached()}
                             onClick={(e) => e.stopPropagation()} // prevent collapse toggle
                             onChange={handleSelectOption}
                         />
                     </span>
 
-                    <span className="option-name">{option.UpgradeObject.Name}</span>
+                    <span className="option-name">{option.upgrade.UpgradeObject.Name}</span>
 
                     {/* Displays the cost of the upgrade */}
                     {option.Cost > 0 &&
                         <span className="option-cost">
                             {' - '}
-                            {option.Cost + " " + getCostType(option.CostType)}
+                            {option.upgrade.Cost + " " + getCostType(option.upgrade.CostType)}
                         </span>
                     }
 
@@ -101,7 +95,7 @@ const WbbOptionItem: React.FC<WbbOptionItemProps> = ({ option }) => {
                      onClick={() => {
                          setOpen(!open);
                      }}>
-                    <span className="option-name">{option.UpgradeObject.Name}</span>
+                    <span className="option-name">{option.upgrade.UpgradeObject.Name}</span>
 
                     <span className="collapse-chevron-wrap">
                         <FontAwesomeIcon icon={open ? faChevronUp : faChevronDown}/>
@@ -112,7 +106,7 @@ const WbbOptionItem: React.FC<WbbOptionItemProps> = ({ option }) => {
             <Collapse in={open}>
                 <div className="option-details">
                     <div className="option-details-inner">
-                        {returnDescription(option, option.UpgradeObject.Description)}
+                        {returnDescription(option.upgrade, option.upgrade.UpgradeObject.Description)}
                     </div>
                 </div>
             </Collapse>

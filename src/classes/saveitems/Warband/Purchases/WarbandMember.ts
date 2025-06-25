@@ -30,6 +30,13 @@ export interface MemberAndWarband {
     model: WarbandMember
 }
 
+export interface MemberUpgradePresentation {
+    upgrade : ModelUpgradeRelationship,
+    purchase : WarbandPurchase | null,
+    allowed : boolean
+}
+export type MemberUpgradesGrouped = {[type : string]: MemberUpgradePresentation[]};
+
 interface IWarbandMember extends IContextObject {
     model: string,
     subproperties : IWarbandProperty[],
@@ -578,6 +585,72 @@ class WarbandMember extends DynamicContextObject {
         }
 
         return this.SplitUpgrades(UpgradesAvailable);
+    }
+
+    public async GetWarbandUpgradeCollections() : Promise<MemberUpgradesGrouped> {
+        const Groups : UpgradesGrouped = await this.getContextuallyAvailableUpgrades();
+        const completegroups : MemberUpgradesGrouped = {}
+        const Events : EventRunner = new EventRunner();
+
+        for (let i = 0; i < Object.keys(Groups).length; i++) {
+            const special_cat = Object.keys(Groups)[i]
+
+            for (let j = 0; j < Groups[special_cat].length; j++) {
+
+                let foundpurchase : WarbandPurchase | null = null;
+                for (let k = 0; k < this.Upgrades.length; k++) {
+                    if ((this.Upgrades[k].HeldObject as ModelUpgradeRelationship).ID == Groups[special_cat][j].ID) {
+                        foundpurchase == this.Upgrades[k];
+                    }
+                }
+    
+                let maxcount = Groups[special_cat][i].WarbandLimit;
+                maxcount = await Events.runEvent(
+                    "getUpgradeLimitTrue",
+                    Groups[special_cat][i],
+                    [],
+                    maxcount,
+                    {
+                        warband: this.MyContext,
+                        model: this
+                    }
+                )
+                let canaddupgrade = ((this.MyContext as UserWarband).GetCountOfUpgradeRel(Groups[special_cat][i].ID) < maxcount || ((Groups[special_cat][i].WarbandLimit == 0)))
+                
+                if (canaddupgrade) {
+                    canaddupgrade = await Events.runEvent(
+                        "canModelGetUpgrade",
+                        Groups[special_cat][i],
+                        [],
+                        canaddupgrade,
+                        {
+                            warband: this.MyContext,
+                            model: this
+                        }
+                    )
+                }
+
+                if (completegroups[special_cat]) {
+                    completegroups[special_cat].push(
+                        {
+                            upgrade : Groups[special_cat][i],
+                            purchase : foundpurchase,
+                            allowed : canaddupgrade
+                        }
+                    )
+                } else {
+                    completegroups[special_cat] = [
+                        {
+                            upgrade : Groups[special_cat][i],
+                            purchase : foundpurchase,
+                            allowed : canaddupgrade
+                        }
+                    ]
+                }
+            }
+        }
+        return completegroups;
+
     }
 
     public async getContextuallyAvailableKeywords() : Promise<Keyword[]> {
