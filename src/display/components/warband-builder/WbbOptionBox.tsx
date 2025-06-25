@@ -21,7 +21,15 @@ const WbbOptionBox: React.FC<WbbOptionBoxProps> = ({ title, value, onClick }) =>
 
             <div className="WbbOptionBox-body">
                 <div className="WbbOptionBox-value">
-                    {value}
+                    { value === '' ? (
+                        <>
+                            {'-'}
+                        </>
+                    ):(
+                        <>
+                            {value}
+                        </>
+                    )}
                 </div>
 
                 {!playMode &&

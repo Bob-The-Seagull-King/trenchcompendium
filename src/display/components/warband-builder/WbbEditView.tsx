@@ -248,9 +248,7 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                                                 warbprop={item}
                                                 index={warband?.warband_data.GetModifiersList().indexOf(item)}
                                             />
-                                        )
-                                            
-                                        }
+                                        )}
                                         
 
                                         {!playMode &&
