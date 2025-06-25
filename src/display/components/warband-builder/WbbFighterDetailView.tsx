@@ -352,13 +352,22 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                         <h3>{'Ranged Weapons'}</h3>
                         {fighter.GetEquipment().filter((item) =>
                             ((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Category == "ranged")
-                        ).map((equip) => 
-                        (
-                            <WbbEquipmentListItem
-                                key={fighter.GetEquipment().indexOf(equip)}
-                                item={equip.purchase}
-                            />
-                        ))}
+                        ).length > 0 ? (
+                            <>
+                                {fighter.GetEquipment().filter((item) =>
+                                        ((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Category == "ranged")
+                                    ).map((equip) =>
+                                        (
+                                            <WbbEquipmentListItem
+                                                key={fighter.GetEquipment().indexOf(equip)}
+                                                item={equip.purchase}
+                                            />
+                                ))}
+                            </>
+                        ) : (
+                            <div className={'fighter-items-empty'}>No ranged weapons equipped</div>
+                        )}
+
                         <div className={'btn btn-add-element btn-block'}
                              onClick={() => setShowAddRangedWeapon(true)}>
                             <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
@@ -367,15 +376,25 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
 
                         {/* Melee Weapons */}
                         <h3>{'Melee Weapons'}</h3>
-                        {fighter.GetEquipment().filter((item) => 
-                        ((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Category == "melee")
-                        ).map((equip) => 
-                        (
-                            <WbbEquipmentListItem
-                                key={fighter.GetEquipment().indexOf(equip)}
-                                item={equip.purchase}
-                            />
-                        ))}
+                        {fighter.GetEquipment().filter((item) =>
+                            ((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Category == "melee")
+                        ).length > 0 ? (
+                            <>
+                                {fighter.GetEquipment().filter((item) =>
+                                    ((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Category == "melee")
+                                ).map((equip) =>
+                                    (
+                                        <WbbEquipmentListItem
+                                            key={fighter.GetEquipment().indexOf(equip)}
+                                            item={equip.purchase}
+                                        />
+                                    ))}
+                            </>
+                        ) : (
+                            <div className={'fighter-items-empty'}>No melee weapons equipped</div>
+                        )}
+
+
                         <div className={'btn btn-add-element btn-block'}
                              onClick={() => setShowMeleeWeaponModal(true)}>
                             <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
@@ -385,15 +404,24 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
 
                         {/* Armour */}
                         <h3>{'Armour'}</h3>
-                        {fighter.GetEquipment().filter((item) => 
-                        ((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Category == "armour")
-                        ).map((equip) => 
-                        (
-                            <WbbEquipmentListItem
-                                key={fighter.GetEquipment().indexOf(equip)}
-                                item={equip.purchase}
-                            />
-                        ))}
+                        {fighter.GetEquipment().filter((item) =>
+                            ((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Category == "armour")
+                        ).length ? (
+                            <>
+                                {fighter.GetEquipment().filter((item) =>
+                                    ((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Category == "armour")
+                                ).map((equip) =>
+                                    (
+                                        <WbbEquipmentListItem
+                                            key={fighter.GetEquipment().indexOf(equip)}
+                                            item={equip.purchase}
+                                        />
+                                    ))}
+                            </>
+                        ) : (
+                            <div className={'fighter-items-empty'}>No armour equipped</div>
+                        )}
+
                         <div className={'btn btn-add-element btn-block'}
                              onClick={() => setShowAddArmourModal(true)}>
                             <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
@@ -402,15 +430,24 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
 
                         {/* Equipment */}
                         <h3>{'Equipment'}</h3>
-                        {fighter.GetEquipment().filter((item) => 
-                        ((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Category == "equipment")
-                        ).map((equip) => 
-                        (
-                            <WbbEquipmentListItem
-                                key={fighter.GetEquipment().indexOf(equip)}
-                                item={equip.purchase}
-                            />
-                        ))}
+                        {fighter.GetEquipment().filter((item) =>
+                            ((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Category == "equipment")
+                        ).length > 0 ? (
+                            <>
+                                {fighter.GetEquipment().filter((item) =>
+                                    ((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Category == "equipment")
+                                ).map((equip) =>
+                                    (
+                                        <WbbEquipmentListItem
+                                            key={fighter.GetEquipment().indexOf(equip)}
+                                            item={equip.purchase}
+                                        />
+                                    ))}
+                            </>
+                        ) : (
+                            <div className={'fighter-items-empty'}>No equipment selected</div>
+                        )}
+
                         <div className={'btn btn-add-element btn-block'}
                              onClick={() => setShowAddEquipmentModal(true)}>
                             <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
