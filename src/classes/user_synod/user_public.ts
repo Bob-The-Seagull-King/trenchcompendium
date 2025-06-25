@@ -169,7 +169,7 @@ class SiteUserPublic {
      */
     public async HasUserFriendRequestReceived ( user_id: number ): Promise<boolean> {
 
-        if( this.GetUserId() === user_id) {
+        if( this.GetUserId() == user_id) {
             return false; // cant request yourself
         }
 
