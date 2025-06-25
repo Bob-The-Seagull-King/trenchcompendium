@@ -71,12 +71,12 @@ const WbbOptionItem: React.FC<WbbOptionItemProps> = ({ option }) => {
                     }
 
                     {/* Displays the limit of the upgrade if any */}
-                    { option.GetLimitNumber() > 0 &&
+                    { option.upgrade.GetLimitNumber() > 0 &&
                         <span className='option-limit'>
                             {' - '}
-                            {option.GetLimitNumber()}
+                            {option.upgrade.GetLimitNumber()}
                             {'/'}
-                            {option.GetLimitNumberTotal()}
+                            {option.upgrade.GetLimitNumberTotal()}
                         </span>
                     }
 
