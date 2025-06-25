@@ -300,6 +300,44 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                 </div>
             </div>
 
+            {/*
+              * Other Upgrades
+              * - This is split into goetic and regular upgrades
+              */}
+            {Object.keys(upgrades).length > 0 &&
+                <>
+                    {Object.keys(upgrades).map((item, index) => (
+                        <div className={'fighter-card-collapse-wrap'} key={index}>
+                            <WbbFighterCollapse
+                                title={item === 'goetic' ? 'Goetic' : 'Upgrades'}
+                                initiallyOpen={false}
+                            >
+                                <>
+                                    {item === 'goetic' ?
+                                        (
+                                        <p> {/* Goetic Upgrade Rules */}
+                                            <strong>{'Goetic: '}</strong>
+                                            {/* @TODO: add actual description text */}
+                                            {'This is the text description for the mdoels goetic rules lorem ipsum dolor sit amet constetutor.'}
+                                        </p>
+                                        ) : (
+                                            <p> {/* Other Upgrade Rules */}
+                                                <strong>{'Upgrades: '}</strong>
+                                                {/* @TODO: add actual description text */}
+                                                {'This is the text description for the update rules. You can upgrade any Lion of Jabir into a Fierce Lion of Jabir at the cost of +5 ducats. Fierce Lions are not affected by the Keyword FEAR.'}
+                                            </p>
+                                        )
+                                    }
+
+                                    {upgrades[item].map((subitem, index) => (
+                                        <WbbOptionItem key={index} option={subitem}/>
+                                    ))}
+                                </>
+                            </WbbFighterCollapse>
+                        </div>
+                    ))}
+                </>
+            }
 
             {/* Edit Loadout */}
             {(!playMode) &&
@@ -309,30 +347,12 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                             <strong>Equipment: </strong>
                             {returnDescription(fighter, fighter.CurModel.Description)}
                         </p>
-                        {Object.keys(upgrades).length > 0 &&
-                        <>
-                        {
-                            Object.keys(upgrades).map((item) => (
-                                <RulesModelDisplayCollapse
-                                    key={item}
-                                    name={makestringpresentable(item)}
-                                    state={false}
-                                    has_children={true}
-                                    method={() => <>
-                                        {upgrades[item].map((subitem, index) => (
-                                            <WbbOptionItem key={index} option={subitem}/>
-                                        ))}
-                                    </>
-                                    }
-                                />
-                            ))
-                        }
-                        </>}
+
 
                         {/* Ranged Weapons */}
                         <h3>{'Ranged Weapons'}</h3>
-                        {fighter.GetEquipment().filter((item) => 
-                        ((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Category == "ranged")
+                        {fighter.GetEquipment().filter((item) =>
+                            ((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Category == "ranged")
                         ).map((equip) => 
                         (
                             <WbbEquipmentListItem
@@ -433,7 +453,6 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
 
 
             {/* Edit Campaign Play */}
-
             {(!playMode) &&
                 <div className={'fighter-card-collapse-wrap'}>
                     <WbbFighterCollapse title="Campaign Play">
