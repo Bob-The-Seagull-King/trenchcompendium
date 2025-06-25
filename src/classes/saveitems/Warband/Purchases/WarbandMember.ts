@@ -21,6 +21,9 @@ import { Equipment } from "../../../feature/equipment/Equipment";
 import { Keyword } from "../../../feature/glossary/Keyword";
 import { Ability } from "../../../feature/ability/Ability";
 import { EventRunner } from "../../../contextevent/contexteventhandler";
+import { ModelUpgradeRelationship } from "../../../relationship/model/ModelUpgradeRelationship";
+import { UpgradesGrouped } from "../../../relationship/model/ModelUpgradeRelationship";
+import { UserWarband } from "../UserWarband";
 
 interface IWarbandMember extends IContextObject {
     model: string,
@@ -364,6 +367,19 @@ class WarbandMember extends DynamicContextObject {
         return count;
     }
 
+    public GetUpgradeCount(id : string) {
+        let count = 0;
+        for (let i = 0; i < this.Upgrades.length; i++) {
+            const inter = this.Upgrades[i].CustomInterface
+            if (inter) {
+                if (inter.id == id) {
+                    count ++;
+                }
+            }
+        }
+        return count;
+    }
+
     /**
      * Get the name of the Fighter
      * - i.e. "Steve the fearless"
@@ -478,8 +494,90 @@ class WarbandMember extends DynamicContextObject {
         }
     }
 
+    /**
+     * @TODO this is for stuff like making sure a name isn't a slur
+     * if we decide to filter that stuff.
+     */
     private ApproveNewName(name : string) {
         return true;
+    }
+
+    
+
+    private SplitUpgrades(UpgradeListFull : ModelUpgradeRelationship[]) : UpgradesGrouped {
+
+        const groups : UpgradesGrouped = {}
+
+        for (let i = 0; i < UpgradeListFull.length; i++) {
+            const special_cat = UpgradeListFull[i].GetSpecialCategory()
+            if (groups[special_cat]) {
+                groups[special_cat].push(UpgradeListFull[i])
+            } else {
+                groups[special_cat] = [UpgradeListFull[i]]
+            }
+        }
+        return groups;
+    }
+
+    public async getContextuallyAvailableUpgrades() : Promise<UpgradesGrouped> {
+        const UpgradesAvailable : ModelUpgradeRelationship[] = []
+        const BaseList : ModelUpgradeRelationship[] = []
+
+        for (let i = 0; i < this.CurModel.UpgradeList.length; i++) {
+            BaseList.push(this.CurModel.UpgradeList[i]);
+        }
+
+        const Events : EventRunner = new EventRunner();
+        if (this.IsMercenary() != true && this.MyContext != null) {
+            const result = await Events.runEvent(
+                "getWarbandMemberUpgrades",
+                this.MyContext,
+                [],
+                BaseList,
+                this
+            )
+            const result_fin = await Events.runEvent(
+                "getWarbandMemberUpgrades",
+                this,
+                result,
+                BaseList,
+                this
+            )
+            for (let i = 0; i < result_fin.length; i++) {
+                UpgradesAvailable.push(result[i]);
+            }
+        }
+
+        for (let i = 0; i < BaseList.length; i++) {
+            let maxcount = BaseList[i].WarbandLimit;
+            maxcount = await Events.runEvent(
+                "getUpgradeLimitTrue",
+                BaseList[i],
+                [],
+                maxcount,
+                {
+                    warband: this.MyContext,
+                    model: this
+                }
+            )
+            if ((this.MyContext as UserWarband).GetCountOfUpgradeRel(BaseList[i].ID) < maxcount || ((BaseList[i].WarbandLimit == 0))) {
+                const passfailresult = await Events.runEvent(
+                    "canModelGetUpgrade",
+                    BaseList[i],
+                    [],
+                    maxcount,
+                    {
+                        warband: this.MyContext,
+                        model: this
+                    }
+                )
+                if (passfailresult) {
+                    UpgradesAvailable.push(BaseList[i]);
+                }
+            }
+        }
+
+        return this.SplitUpgrades(UpgradesAvailable);
     }
 
 }

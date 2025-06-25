@@ -719,6 +719,14 @@ class UserWarband extends DynamicContextObject {
         return count;
     }
 
+    public GetCountOfUpgradeRel(id : string) {
+        let count = 0;
+        for (let i = 0; i < this.Models.length; i++) {
+            count += ((this.Models[i].HeldObject as WarbandMember).GetUpgradeCount(id))
+        }
+        return count;
+    }
+
     public GetCountOfEquipmentRel(id : string) {
         let count = 0;
         for (let i = 0; i < this.Equipment.length; i++) {

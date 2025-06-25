@@ -41,6 +41,8 @@ import { Ability } from '../../../classes/feature/ability/Ability';
 import { UpgradesGrouped } from '../../../classes/relationship/model/ModelUpgradeRelationship';
 import { Keyword } from '../../../classes/feature/glossary/Keyword';
 import { WarbandProperty } from '../../../classes/saveitems/Warband/WarbandProperty';
+import RulesModelDisplayCollapse from '../rules-content/RulesModelDisplayCollapse';
+import { makestringpresentable } from '../../../utility/functions';
 
 
 interface WbbFighterDetailViewProps {
@@ -63,29 +65,11 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
     useEffect(() => {
         async function SetModelOptions() {
             setabilities(fighter.SubProperties);
+            setupgrades(await fighter.getContextuallyAvailableUpgrades());
         }
 
         SetModelOptions();
     }, [fighter]);
-
-    // Test Data ***
-    const BoolOptions = [
-        {
-            Name: 'Skirmisher',
-            Id: 'lorem_id',
-            CostDucats: 5,
-            CostGlory: 0,
-            Description: 'Any Azebs can be converted to SKIRMISHERS at the cost of +5 ducats per model. Unless engaged in melee, when an enemy model declares a charge against any Skirmisher Azeb, they can immediately move D3” in any direction they wish (except within 1” of any enemy or out of the battlefield). After this manoeuvre, the charging model is moved as normal. This may lead to the charger being unable to enter melee. This move cannot be taken by a model that is Down.'
-        },
-        {
-            Name: 'Upgrade 2',
-            Id: 'lorem_id2',
-            CostDucats: 10,
-            CostGlory: 0,
-            Description: 'Any Azebs can be converted to SKIRMISHERS at the cost of +5 ducats per model. Unless engaged in melee, when an enemy model declares a charge against any Skirmisher Azeb, they can immediately move D3” in any direction they wish (except within 1” of any enemy or out of the battlefield). After this manoeuvre, the charging model is moved as normal. This may lead to the charger being unable to enter melee. This move cannot be taken by a model that is Down.'
-        }
-    ];
-    // end Test Data ***
 
     const { playMode } = usePlayMode();
 
@@ -310,16 +294,25 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                             <strong>Equipment: </strong>
                             {returnDescription(fighter, fighter.CurModel.Description)}
                         </p>
-
-                        {/* Bool Upgrades */}
-                        {BoolOptions.length > 0 &&
-                            <>
-                                <h3>{'Upgrades'}</h3>
-                                {BoolOptions.map((option, index) => (
-                                    <WbbOptionItem key={index} option={option}/>
-                                ))}
-                            </>
+                        {Object.keys(upgrades).length > 0 &&
+                        <>
+                        {
+                            Object.keys(upgrades).map((item) => (
+                                <RulesModelDisplayCollapse
+                                    key={item}
+                                    name={makestringpresentable(item)}
+                                    state={false}
+                                    has_children={true}
+                                    method={() => <>
+                                        {upgrades[item].map((subitem, index) => (
+                                            <WbbOptionItem key={index} option={subitem}/>
+                                        ))}
+                                    </>
+                                    }
+                                />
+                            ))
                         }
+                        </>}
 
                         {/* Ranged Weapons */}
                         <h3>{'Ranged Weapons'}</h3>
