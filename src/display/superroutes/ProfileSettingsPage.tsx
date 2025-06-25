@@ -9,6 +9,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faChevronLeft, faCircleNotch, faFloppyDisk} from "@fortawesome/free-solid-svg-icons";
 import {ToastContainer, toast} from "react-toastify";
 import { SynodDataCache } from '../../classes/_high_level_controllers/SynodDataCache';
+import PayPalSubButton from "../../classes/user_synod/PayPalSubButton";
 
 
 
@@ -127,6 +128,12 @@ const ProfileSettingsPage: React.FC = () => {
         </div>
     )
 
+
+    // additional handlers on subscription success go here.
+    const handleSubscriptionSuccess = (subId: string) => {
+        alert ('sub successful');
+    };
+
     return (
         <div className="ProfileSettingsPage">
             <ToastContainer
@@ -213,6 +220,12 @@ const ProfileSettingsPage: React.FC = () => {
                                 onChange={(e) => setEmail(e.target.value)}
                             />
                         </Form.Group>
+                    </div>
+
+                    <div className={'col-12'}>
+                        <PayPalSubButton onSuccess={handleSubscriptionSuccess} />
+
+
                     </div>
                 </div>
 
