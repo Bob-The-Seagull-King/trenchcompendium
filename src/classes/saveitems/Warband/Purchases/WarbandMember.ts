@@ -600,7 +600,7 @@ class WarbandMember extends DynamicContextObject {
                 let foundpurchase : WarbandPurchase | null = null;
                 for (let k = 0; k < this.Upgrades.length; k++) {
                     if ((this.Upgrades[k].HeldObject as ModelUpgradeRelationship).ID == Groups[special_cat][j].ID) {
-                        foundpurchase == this.Upgrades[k];
+                        foundpurchase = this.Upgrades[k];
                     }
                 }
     
