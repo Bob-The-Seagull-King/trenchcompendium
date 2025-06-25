@@ -64,10 +64,12 @@ const WbbOptionItem: React.FC<WbbOptionItemProps> = ({ option }) => {
 
                     <span className="option-name">{option.UpgradeObject.Name}</span>
 
-                    <span className="option-cost">
-                        {option.Cost + " " + getCostType(option.CostType)}
-                    </span>
-
+                    {option.Cost > 0 &&
+                        <span className="option-cost">
+                            {' - '}
+                            {option.Cost + " " + getCostType(option.CostType)}
+                        </span>
+                    }
 
                     <span className="collapse-chevron-wrap" onClick={(e) => {
                         e.stopPropagation(); // prevent option from being selected
