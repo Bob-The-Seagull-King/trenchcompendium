@@ -6,6 +6,7 @@
 
 .WbbModalAddItem
     .select-item
+        position: relative
         background-color: $color-bg-3
         border-bottom: 1px solid $color-bg-1
         padding: 10px 10px
@@ -14,6 +15,7 @@
         cursor: pointer
 
         transition: background-color .2s ease
+        font-size: 14px
 
         &:hover
             background-color: $color-highlight-bg-2-50
@@ -23,3 +25,35 @@
 
         &.selected
             background-color: $color-highlight-bg-2
+
+
+        .item-cost
+            white-space: nowrap
+            padding-left: 10px
+
+    &.WbbModalAddFighter
+        .select-item
+            height: 85px
+            display: flex
+            align-items: center
+            padding: 10px 10px 10px 75px
+
+        .model-image-wrap
+            position: absolute
+            z-index: 1
+            top: 0
+            left: 0
+            bottom: 0
+            height: 100%
+            aspect-ratio: 3 / 4
+
+            .model-image
+                position: absolute
+                top: 0
+                left: 0
+                bottom: 0
+                z-index: 1
+                width: 100%
+                height: 100%
+                object-fit: cover
+                object-position: top left

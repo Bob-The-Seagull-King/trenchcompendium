@@ -5,6 +5,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import { FactionModelRelationship } from '../../../../classes/relationship/faction/FactionModelRelationship';
 import { useWarband } from '../../../../context/WarbandContext';
 import { getCostType } from '../../../../utility/functions';
+import SynodModelImage from "../../../../utility/SynodModelImage";
 
 interface Fighter {
     id: string;
@@ -50,7 +51,7 @@ const WbbModalAddFighterMercenary: React.FC<WbbModalAddFighterMercenaryProps> = 
     };
 
     return (
-        <Modal show={show} onHide={onClose} className={'WbbModalAddItem WbbModalAddFighterMercenary'} centered>
+        <Modal show={show} onHide={onClose} className={'WbbModalAddItem WbbModalAddFighter WbbModalAddFighterMercenary'} centered>
             <Modal.Header closeButton={false}>
                 <Modal.Title>Add Mercenary</Modal.Title>
 
@@ -69,6 +70,14 @@ const WbbModalAddFighterMercenary: React.FC<WbbModalAddFighterMercenaryProps> = 
                         className={`select-item ${selectedId === fighter.ID ? 'selected' : ''}`}
                         onClick={() => handleSelect(fighter.ID)}
                     >
+                        <div className={'model-image-wrap'}>
+                            <SynodModelImage
+                                modelSlug={fighter.GetSlug()}
+                                size="small"
+                                className={'model-image'}
+                            />
+                        </div>
+
                         <span className={'item-name'}>
                             {fighter.Model.GetName()}
                         </span>
