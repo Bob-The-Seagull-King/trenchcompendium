@@ -13,11 +13,10 @@ import { EventRunner } from '../../../../../classes/contextevent/contexteventhan
 
 interface WbbEditSelectionProps {
     choice : SelectedOption;
-    isinner?: boolean;
     property : WarbandProperty
 }
 
-const WbbOptionSelect: React.FC<WbbEditSelectionProps> = ({choice, isinner, property}) => {
+const WbbOptionSelect: React.FC<WbbEditSelectionProps> = ({choice,  property}) => {
     const { warband, reloadDisplay, updateKey } = useWarband();
     const [selectedoption, setSelectedoption] = useState<IChoice | null>(choice.GetSelected());
 
@@ -63,7 +62,7 @@ const WbbOptionSelect: React.FC<WbbEditSelectionProps> = ({choice, isinner, prop
     }, [updateKey]);
 
     return (
-        <div className={(isinner != undefined) ? (isinner == true)? 'modifier-inner-body' : 'modifier-body' : 'modifier-body'} key={updateKey}>
+        <div className={'WbbOptionSelect'} key={updateKey}>
             <WbbOptionBox
                 title={choice.Option.Name}
                 value={choice.GetSelectedTitle()}

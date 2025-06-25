@@ -130,6 +130,7 @@ const WbbWarbandDetailView: React.FC<WbbWarbandDetailViewProps> = ({  onClose })
                         </WbbDetailViewCollapse>
                     }
 
+                    {/* Faction Selections */}
                     {warband?.warband_data.GetWarbandFactionOptionsModifiersList().length > 0 &&
                         <WbbDetailViewCollapse title='Faction Selections' initiallyOpen={true}>
                             
@@ -143,6 +144,8 @@ const WbbWarbandDetailView: React.FC<WbbWarbandDetailViewProps> = ({  onClose })
                             )}
                         </WbbDetailViewCollapse>
                     }
+
+                    {/* Faction Special Rules */}
                     {warband?.warband_data.GetWarbandFactionModifiersList().length > 0 &&
                         <WbbDetailViewCollapse title='Faction Special Rules' initiallyOpen={true}>
                             

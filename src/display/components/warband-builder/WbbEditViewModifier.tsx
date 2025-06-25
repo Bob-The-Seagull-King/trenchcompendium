@@ -20,7 +20,8 @@ const WbbEditViewModifier: React.FC<WbbEditViewModifierProps> = ({ warbprop, ind
     if (warband == null) return (<div>Loading...</div>);
 
     return (
-        <div className="WbbEditViewModifier" key={updateKey}>
+        <div className={`WbbEditViewModifier ${isinner != undefined ? 'inner' : ''}`}
+             key={updateKey}>
             <div className={'modifier-title'}>
                 <span className={'title-name'}>
                     {warbprop.GetTrueName()}
@@ -32,7 +33,6 @@ const WbbEditViewModifier: React.FC<WbbEditViewModifierProps> = ({ warbprop, ind
                     {warbprop.SelfDynamicProperty.Selections.map((item) =>
                         <WbbOptionSelect
                             property={warbprop}
-                            isinner={(isinner != undefined) ? isinner : false}
                             key={warbprop.SelfDynamicProperty.Selections.indexOf(item)}
                             choice={item}
                         />
@@ -40,7 +40,7 @@ const WbbEditViewModifier: React.FC<WbbEditViewModifierProps> = ({ warbprop, ind
                 </span>
             }
 
-            <div className={(isinner != undefined) ? (isinner == true)? 'modifier-inner-body' : 'modifier-body' : 'modifier-body'}>
+            <div className={'modifier-body'}>
                 
                 {(warbprop.GetOwnDescription() != null) &&
                 <>
