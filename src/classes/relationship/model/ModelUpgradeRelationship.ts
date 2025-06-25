@@ -94,6 +94,15 @@ class ModelUpgradeRelationship extends StaticOptionContextObject {
     }
 
     /**
+     * Returns the max limit as int for this upgrade
+     * // @TODO: add actual limit number
+     * - 0 if no limit
+     */
+    public GetLimitNumber () {
+        return 2;
+    }
+
+    /**
      * Get the Limit String For this Upgrade
      * @constructor
      */

@@ -64,10 +64,19 @@ const WbbOptionItem: React.FC<WbbOptionItemProps> = ({ option }) => {
 
                     <span className="option-name">{option.UpgradeObject.Name}</span>
 
+                    {/* Displays the cost of the upgrade */}
                     {option.Cost > 0 &&
                         <span className="option-cost">
                             {' - '}
                             {option.Cost + " " + getCostType(option.CostType)}
+                        </span>
+                    }
+
+                    {/* Displays the limit of the upgrade if any */}
+                    { option.GetLimitNumber() > 0 &&
+                        <span className='option-limit'>
+                            {' - '}
+                            {'1/'}{option.GetLimitNumber()}
                         </span>
                     }
 
