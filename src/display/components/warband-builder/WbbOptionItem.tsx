@@ -47,8 +47,11 @@ const WbbOptionItem: React.FC<WbbOptionItemProps> = ({ option }) => {
             {(!playMode && !printMode) &&
                 <div className="option-title"
                      onClick={(e) => {
-                         handleSelectOption();
-                }}>
+                         if( !option.IsLimitReached() ) {
+                             handleSelectOption();
+                         }
+                    }}
+                >
                     <span
                         className="input-wrap"
                     >
@@ -57,6 +60,7 @@ const WbbOptionItem: React.FC<WbbOptionItemProps> = ({ option }) => {
                             type="checkbox"
                             id={option.ID}
                             checked={selected}
+                            disabled={option.IsLimitReached()}
                             onClick={(e) => e.stopPropagation()} // prevent collapse toggle
                             onChange={handleSelectOption}
                         />
@@ -76,7 +80,9 @@ const WbbOptionItem: React.FC<WbbOptionItemProps> = ({ option }) => {
                     { option.GetLimitNumber() > 0 &&
                         <span className='option-limit'>
                             {' - '}
-                            {'1/'}{option.GetLimitNumber()}
+                            {option.GetLimitNumber()}
+                            {'/'}
+                            {option.GetLimitNumberTotal()}
                         </span>
                     }
 
