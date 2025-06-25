@@ -25,6 +25,11 @@ import { ModelUpgradeRelationship } from "../../../relationship/model/ModelUpgra
 import { UpgradesGrouped } from "../../../relationship/model/ModelUpgradeRelationship";
 import { UserWarband } from "../UserWarband";
 
+export interface MemberAndWarband {
+    warband: UserWarband,
+    model: WarbandMember
+}
+
 interface IWarbandMember extends IContextObject {
     model: string,
     subproperties : IWarbandProperty[],
@@ -276,8 +281,6 @@ class WarbandMember extends DynamicContextObject {
 
         for (let i = 0; i < this.SubProperties.length; i++) {
             const static_packages : ContextPackage[] = await this.SubProperties[i].GrabContextPackages(event_id, source_obj, arrs_extra);
-            console.log("STATIC PACKAGE")
-            console.log(static_packages);
             for (let j = 0; j < static_packages.length; j++) {
                 static_packages[j].callpath.push("WarbandMember")
                 subpackages.push(static_packages[j])
@@ -529,20 +532,20 @@ class WarbandMember extends DynamicContextObject {
 
         const Events : EventRunner = new EventRunner();
         if (this.IsMercenary() != true && this.MyContext != null) {
-            const result = await Events.runEvent(
+            BaseList = await Events.runEvent(
                 "getWarbandMemberUpgrades",
                 this.MyContext,
                 [],
                 BaseList,
                 this
             )
-            BaseList = await Events.runEvent(
+            /*BaseList = await Events.runEvent(
                 "getWarbandMemberUpgrades",
                 this,
                 result,
                 BaseList,
                 this
-            )
+            )*/
         }
 
         for (let i = 0; i < BaseList.length; i++) {
@@ -562,7 +565,7 @@ class WarbandMember extends DynamicContextObject {
                     "canModelGetUpgrade",
                     BaseList[i],
                     [],
-                    maxcount,
+                    true,
                     {
                         warband: this.MyContext,
                         model: this
@@ -607,6 +610,17 @@ class WarbandMember extends DynamicContextObject {
         }
 
         return (KeywordsAvailable);
+    }
+
+    public async GetKeywordID(){
+        const KeywordsAvailable = await this.getContextuallyAvailableKeywords();
+        const BaseList : string[] = []
+
+        for (let i = 0; i < KeywordsAvailable.length; i++) {
+            BaseList.push(KeywordsAvailable[i].GetID())
+        }
+
+        return BaseList;
     }
 
 }

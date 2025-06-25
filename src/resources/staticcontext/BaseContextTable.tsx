@@ -602,11 +602,87 @@ export const BaseContextCallTable : CallEventTable = {
             }
 
             return relayVar;
+        },
+        async getWarbandMemberUpgrades(this: EventRunner, eventSource : any, relayVar : ModelUpgradeRelationship[], trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            
+            const { UpgradeFactory } = await import("../../factories/features/UpgradeFactory");
+            
+            for (let k = 0; k < context_func['list'].length; k++) {
+                const curUpgrade = context_func['list'][k]
+                let ValidUpgrade = false;
+
+                if (curUpgrade['filters'] ) {
+                    for (let i = 0; i < curUpgrade['filters'].length; i++) {
+                        const curFilter = curUpgrade['filters'][i]
+                        if (curFilter["type"] == "keyword") {            
+                            if (curFilter['truth'] == true) {
+                                if ((await trackVal.GetKeywordID()).includes(curFilter["value"])) {
+                                    ValidUpgrade = true;
+                                } else {
+                                    ValidUpgrade = false;
+                                    break;
+                                }
+                            } else {
+                                if ((await trackVal.GetKeywordID()).includes(curFilter["value"])) {
+                                    ValidUpgrade = false;
+                                    break;
+                                } else {
+                                    ValidUpgrade = true;
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                if (curUpgrade['models_id'] ) {
+                    for (let i = 0; i < curUpgrade['models_id'].length; i++) {
+                        if (trackVal.CurModel.ID == curUpgrade['models_id'][i]) {
+                            ValidUpgrade = true;
+                            break;
+                        }
+                    }
+                }
+
+
+                if (ValidUpgrade) {
+                    const UpgradeList = Requester.MakeRequest(
+                        {
+                            searchtype: "complex", 
+                            searchparam: {
+                                type: "modelupgraderelationship",
+                                request: {
+                                    operator: 'and',
+                                    terms: [
+                                        {
+                                            item: "model_id_set",
+                                            value: curUpgrade["model_key"].toString(),
+                                            equals: true,
+                                            strict: true
+                                        }
+                                    ],
+                                    subparams: []
+                                }
+                            }
+                        }
+                    ) as IModelUpgradeRelationship[]
+
+                    for (let i = 0; i < UpgradeList.length; i++) {
+                        UpgradeList[i].model_id_set = curUpgrade["models_id"]
+                        relayVar.push(await UpgradeFactory.CreateModelUpgrade(UpgradeList[i], null))
+                    }
+                    
+                }
+            }
+
+            return relayVar;
         }
     },
     faction_remove_upgrades : {
         event_priotity: 1,
         async getContextuallyAddedUpgrades(this: EventRunner, eventSource : any, relayVar : ModelUpgradeRelationship[], trackVal : Model, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            return relayVar.filter(item => !(context_func["upgrades"].includes(item.ID)))
+        },
+        async getWarbandMemberUpgrades(this: EventRunner, eventSource : any, relayVar : ModelUpgradeRelationship[], trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
             return relayVar.filter(item => !(context_func["upgrades"].includes(item.ID)))
         }
     },
@@ -918,15 +994,15 @@ export const BaseContextCallTable : CallEventTable = {
         },
         async parseOptionFilterDown(this: EventRunner, eventSource : any, relayVar : IChoice[], trackVal : number, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
             
-            const { EquipmentFactory } = await import("../../factories/features/EquipmentFactory");
-            const { FactionEquipmentRelationship } = await import("../../classes/relationship/faction/FactionEquipmentRelationship");
+            const EquipmentFactoryModule = await import("../../factories/features/EquipmentFactory");
+            const FactionEquipmentRelationshipModule = await import("../../classes/relationship/faction/FactionEquipmentRelationship");
             
             const NewChoices : IChoice[] = []
             const SubItem = context_func["additions"][trackVal]
             for (let i = 0; i < relayVar.length; i++) {
 
-                const ModelItem = ((relayVar[i].value instanceof FactionEquipmentRelationship)? relayVar[i].value :
-                    await EquipmentFactory.CreateFactionEquipment(relayVar[i].value, null)
+                const ModelItem = ((relayVar[i].value instanceof FactionEquipmentRelationshipModule.FactionEquipmentRelationship)? relayVar[i].value :
+                    await EquipmentFactoryModule.EquipmentFactory.CreateFactionEquipment(relayVar[i].value, null)
                 )
                 if (ModelItem.EquipmentItem == undefined) {
                     continue;
