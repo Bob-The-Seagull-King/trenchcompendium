@@ -33,7 +33,7 @@ import WbbContextualPopover from "./WbbContextualPopover";
 import SynodModelImage from "../../../utility/SynodModelImage";
 import SynodModelImageSource from "../../../utility/SynodModelImageSource";
 import WbbModalEditFighterStatus from "./modals/fighter/WbbEditFighterStatus";
-import {IWarbandMember, MemberUpgradesGrouped} from "../../../classes/saveitems/Warband/Purchases/WarbandMember";
+import {IWarbandMember, MemberUpgradePresentation, MemberUpgradesGrouped} from "../../../classes/saveitems/Warband/Purchases/WarbandMember";
 import { RealWarbandPurchaseModel } from '../../../classes/saveitems/Warband/Purchases/WarbandPurchase';
 import { returnDescription } from '../../../utility/util';
 import { Equipment } from '../../../classes/feature/equipment/Equipment';
@@ -313,7 +313,9 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
               */}
             {Object.keys(upgrades).length > 0 &&
                 <>
-                    {Object.keys(upgrades).map((item, index) => (
+                    {Object.keys(upgrades).filter((item) => (
+                        (!playMode) || (upgrades[item].upgrades.filter((subitem : MemberUpgradePresentation) => subitem.purchase != null).length > 0)
+                    )).map((item, index) => (
                         <div className={'fighter-card-collapse-wrap'} key={index}>
                             <WbbFighterCollapse
                                 title={makestringpresentable(item)}
@@ -326,7 +328,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                                         </p>
                                     }
 
-                                    {upgrades[item].upgrades.map((subitem, index) => (
+                                    {upgrades[item].filter((item) => ((!playMode) || item.purchase != null)).upgrades.map((subitem, index) => (
                                         <WbbOptionItem key={index.toString() + updateKey.toString()} option={subitem} owner={fighter}/>
                                     ))}
                                 </>
