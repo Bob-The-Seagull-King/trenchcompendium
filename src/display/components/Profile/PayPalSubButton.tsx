@@ -1,4 +1,6 @@
 import { useEffect, useRef } from "react";
+import axios from "axios";
+import {SYNOD} from "../../../resources/api-constants";
 
 
 declare const window: Window &
@@ -19,12 +21,37 @@ const PayPalSubButton = ({
     useEffect(() => {
         const scriptId = "paypal-js-sdk";
 
-        const handleApproval = (subscriptionID: string) => {
+        async function handleApproval(subscriptionID: string, planID: string) {
             console.log("Handling approval internally: ", subscriptionID);
+
+            // Create sub in the API
+            const authToken = localStorage.getItem('jwtToken')
+
+            try {
+                const response = await axios.post(`${SYNOD.URL}/wp-json/synod-payment/v1/create-subscription`, {
+                    title: 'Subscription started at ' + new Date().toLocaleString(),
+                    status: 'publish',
+                    meta: {
+                        paypal_subscription_id: subscriptionID,
+                        paypal_plan_id: planID
+                    }
+                }, {
+                    headers: {
+                        Authorization: `Bearer ${authToken}`,
+                        'Content-Type': 'application/json',
+                    }
+                });
+
+                console.log('Subscription created successfully!', response.data.id);
+            } catch (err: any) {
+                console.error('Error creating subscription:', err.response?.data?.message);
+            }
+
+            // outside callback function
             if (onSuccess) {
                 onSuccess(subscriptionID);
             }
-        };
+        }
 
         function renderButton() {
             if (!window.paypal || !paypalRef.current) return;
@@ -41,7 +68,7 @@ const PayPalSubButton = ({
                     },
                     onApprove: function (data: any) {
                         console.log("Subscription approved:", data);
-                        handleApproval(data.subscriptionID);
+                        handleApproval(data.subscriptionID, planId);
                     },
                     onError: function (err: any) {
                         console.error("PayPal error:", err);

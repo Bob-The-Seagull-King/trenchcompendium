@@ -9,7 +9,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faChevronLeft, faCircleNotch, faFloppyDisk} from "@fortawesome/free-solid-svg-icons";
 import {ToastContainer, toast} from "react-toastify";
 import { SynodDataCache } from '../../classes/_high_level_controllers/SynodDataCache';
-import PayPalSubButton from "../../classes/user_synod/PayPalSubButton";
+import ProfileSubscriptionView from "../components/Profile/ProfileSubscriptionView";
 
 
 
@@ -129,10 +129,7 @@ const ProfileSettingsPage: React.FC = () => {
     )
 
 
-    // additional handlers on subscription success go here.
-    const handleSubscriptionSuccess = (subId: string) => {
-        alert ('sub successful');
-    };
+
 
     return (
         <div className="ProfileSettingsPage">
@@ -157,79 +154,82 @@ const ProfileSettingsPage: React.FC = () => {
                             )}>
                                 <FontAwesomeIcon icon={faChevronLeft} className={''}/>
                             </span>
-                            {'Profile Settings'}
+                            {'Account Settings'}
                         </h1>
-
-                        <button onClick={logout} className="btn btn-secondary mb-3">
-                            Log out
-                        </button>
-
-                        {error && <p style={{color: 'red'}}>{error}</p>}
-                        {message && <p style={{color: 'green'}}>{message}</p>}
-
-                        {hasChanges && (
-                            <button className="btn btn-primary btn-save-setting"
-                                disabled={ isLoadingSubmit }
-                                onClick={ (e) => {
-                                    if(!isLoadingSubmit) {
-                                        handleSave();
-                                    }
-                            }}>
-                                {isLoadingSubmit ?(
-                                    <>
-                                        <FontAwesomeIcon icon={faCircleNotch} className={'icon-inline-left-l fa-spin'}/>
-                                        {'Saving'}
-                                    </>
-                                ):(
-                                    <>
-                                        <FontAwesomeIcon icon={faFloppyDisk} className={'icon-inline-left-l'}/>
-                                        {'Save Settings'}
-                                    </>
-                                )}
-                            </button>
-                        )}
                     </div>
 
                     <div className="col-12">
-                        <Form.Group controlId="user-settings-nickname" className="mb-3">
-                        <Form.Label>Username</Form.Label>
-                            <Form.Control
-                                type="text"
-                                placeholder="Enter your nickname"
-                                value={nickname}
-                                onChange={(e) => setNickname(e.target.value)}
-                            />
-                        </Form.Group>
+                        <div className={'profile-settings mb-3'}>
+                            <h2>
+                                {'Your Account'}
+                            </h2>
 
-                        <Form.Group controlId="user-settings-password" className="mb-3">
-                            <Form.Label>New Password</Form.Label>
-                            <Form.Control
-                                type="password"
-                                placeholder="Enter a new password"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                            />
-                        </Form.Group>
+                            <button onClick={logout} className="btn btn-secondary btn-logout">
+                                Log out
+                            </button>
 
-                        <Form.Group controlId="user-settings-email" className="mb-3">
-                            <Form.Label>Email Address</Form.Label>
-                            <Form.Control
-                                type="email"
-                                placeholder="Enter your email"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                            />
-                        </Form.Group>
+                            <Form.Group controlId="user-settings-nickname" className="mb-3">
+                                <Form.Label>Username</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    placeholder="Enter your nickname"
+                                    value={nickname}
+                                    onChange={(e) => setNickname(e.target.value)}
+                                />
+                            </Form.Group>
+
+                            <Form.Group controlId="user-settings-password" className="mb-3">
+                                <Form.Label>New Password</Form.Label>
+                                <Form.Control
+                                    type="password"
+                                    placeholder="Enter a new password"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                />
+                            </Form.Group>
+
+                            <Form.Group controlId="user-settings-email" className="mb-3">
+                                <Form.Label>Email Address</Form.Label>
+                                <Form.Control
+                                    type="email"
+                                    placeholder="Enter your email"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                />
+                            </Form.Group>
+
+                            {hasChanges && (
+                                <button className="btn btn-primary btn-save-setting"
+                                        disabled={isLoadingSubmit}
+                                        onClick={(e) => {
+                                            if (!isLoadingSubmit) {
+                                                handleSave();
+                                            }
+                                        }}>
+                                    {isLoadingSubmit ? (
+                                        <>
+                                            <FontAwesomeIcon icon={faCircleNotch}
+                                                             className={'icon-inline-left-l fa-spin'}/>
+                                            {'Saving'}
+                                        </>
+                                    ) : (
+                                        <>
+                                            <FontAwesomeIcon icon={faFloppyDisk} className={'icon-inline-left-l'}/>
+                                            {'Save Settings'}
+                                        </>
+                                    )}
+                                </button>
+                            )}
+
+                            {error && <p style={{color: 'red'}}>{error}</p>}
+                            {message && <p style={{color: 'green'}}>{message}</p>}
+                        </div>
                     </div>
 
                     <div className={'col-12'}>
-                        <PayPalSubButton onSuccess={handleSubscriptionSuccess} />
-
-
+                        <ProfileSubscriptionView/>
                     </div>
                 </div>
-
-
             </div>
         </div>
     );
