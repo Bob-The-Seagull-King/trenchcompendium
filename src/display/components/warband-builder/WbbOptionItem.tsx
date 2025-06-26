@@ -35,11 +35,11 @@ const WbbOptionItem: React.FC<WbbOptionItemProps> = ({ option, owner }) => {
             owner.DeleteUpgrade(option.purchase).then(() => {
                 option.purchase = null;
                 setkeyvar(keyvar + 1)
-                setcanselect(true);
                 const Manager : ToolsController = ToolsController.getInstance();
                 Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
                     () => {
-                    reloadDisplay()
+                    reloadDisplay()                
+                    setcanselect(true);
                     })
             })
         } else {
