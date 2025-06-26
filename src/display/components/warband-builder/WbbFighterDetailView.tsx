@@ -62,6 +62,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
     const [abilities, setabilities] = useState<WarbandProperty[]>([])
     const [keywordsList, setkeywords] = useState<Keyword[]>([])
     const [BaseString, setBaseString] = useState('')
+    const [modelslug, setmodeslug] = useState(fighter.GetModelSlug())
 
     
     useEffect(() => {
@@ -71,6 +72,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
             setabilities(abilities);
             setupgrades(upgrades);
             setkeywords(await fighter.getContextuallyAvailableKeywords())
+            setmodeslug(fighter.GetModelSlug())
         }
 
         SetModelOptions();
@@ -204,7 +206,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                 {fighter.GetModelSlug() != '' &&
                     <div className={'fighter-image-wrap full'}>
                         <SynodModelImage
-                            modelSlug={fighter.GetModelSlug()}
+                            modelSlug={modelslug}
                             size="medium"
                             className={'fighter-image'}
                         />
