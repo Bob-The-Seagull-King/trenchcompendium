@@ -64,6 +64,7 @@ class DynamicOptionContextObject extends DynamicContextObject {
                     const static_packages : ContextPackage[] = await SelNest.GrabContextPackages(event_id, source_obj, arrs_extra);
                     for (let j = 0; j < static_packages.length; j++) {
                         static_packages[j].callpath.push("DynamicOptionContextObject")
+                        static_packages[j].callpath.push("SelectedChoiceOption")
                         subpackages.push(static_packages[j])
                     }
                 } else if (this.Selections[i].SelectedChoice?.value instanceof ContextObject) {
