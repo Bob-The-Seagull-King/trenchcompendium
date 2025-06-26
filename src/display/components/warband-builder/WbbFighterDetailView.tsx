@@ -238,17 +238,17 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                     {!playMode &&
                         <div className="fighter-meta-entry-simple">
                             <span className="fighter-meta-label">
-                                {'Cost: '}
+                                {'Base Cost: '}
                             </span>
                             <span className="fighter-meta-value">
-                                {warbandmember.purchase.GetTotalDucats() > 0 &&
+                                {warbandmember.purchase.CostType == 0 &&
                                     <>
-                                        {warbandmember.purchase.GetTotalDucats() + " Ducats"}
+                                        {warbandmember.purchase.Cost + " Ducats"}
                                     </>
                                 }
-                                {warbandmember.purchase.GetTotalGlory() > 0 &&
+                                {warbandmember.purchase.CostType == 1 &&
                                     <>
-                                        {warbandmember.purchase.GetTotalGlory() + " Glory Points"}
+                                        {warbandmember.purchase.Cost + " Glory Points"}
                                     </>
                                 }
                             </span>

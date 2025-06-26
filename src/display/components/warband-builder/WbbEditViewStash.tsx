@@ -20,24 +20,24 @@ const WbbEditViewStash: React.FC<WbbEditViewStashProps> = ({ onClick, isActive }
             </div>
 
             <div className="stash-value">
-                <div className={'cost-ducats'}>{stash.ValueDucats + " Ducats"}</div>
-                <div className={'cost-Glory'}>{stash.ValueGlory + " Glory"}</div>
+                <div className={'cost-ducats'}>{stash.AmountDucats + " Ducats"}</div>
+                <div className={'cost-Glory'}>{stash.AmountGlory + " Glory"}</div>
             </div>
 
             <div className={'stash-contents'}>
                 {stash.ValueDucats > 0 &&
-                    <div className={'contents-ducats'}><strong>{'Ducats: '}</strong>{stash.AmountDucats}</div>
+                    <div className={'contents-ducats'}><strong>{'Ducats: '}</strong>{stash.ValueDucats}</div>
                 }
                 {stash.ValueGlory > 0 &&
-                    <div className={'contents-Glory'}><strong>{'Glory Points: '}</strong>{stash.AmountGlory}</div>
+                    <div className={'contents-Glory'}><strong>{'Glory Points: '}</strong>{stash.ValueGlory}</div>
                 }
 
 
-                {stash.Items.length > 0 ? (
+                {warband?.warband_data.Equipment.length > 0 ? (
                     <div className={'stash-item-list'}>
-                        {stash.Items.map((item: any, index: number) => (
+                        {warband?.warband_data.Equipment.map((item: any, index: number) => (
                             <React.Fragment key={index}>
-                                {item.Name}
+                                {item.GetItemName()}
 
                                 {/* Add comma if not the last item */}
                                 {index < stash.Items.length - 1 &&

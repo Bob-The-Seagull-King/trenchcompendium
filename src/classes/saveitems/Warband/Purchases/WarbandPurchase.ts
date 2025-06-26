@@ -170,6 +170,29 @@ class WarbandPurchase {
         return TotalGloryCost;
     }
 
+    public GetOwnItem() {
+
+        if (this.HeldObject instanceof WarbandMember) {
+            return this.HeldObject as WarbandMember;
+        } else if (this.HeldObject instanceof WarbandEquipment) {
+            return this.HeldObject as WarbandEquipment;
+        } else if (this.HeldObject instanceof WarbandProperty) {
+            return this.HeldObject as WarbandProperty;
+        }
+    }
+
+    public GetItemName() {
+        const val = this.GetOwnItem();
+
+        if (val instanceof WarbandMember) {
+            return val.GetTrueName();
+        } else if (this.HeldObject instanceof WarbandEquipment) {
+            return (val as WarbandEquipment).MyEquipment.GetTrueName();
+        } else if (this.HeldObject instanceof WarbandProperty) {
+            return (val as WarbandProperty).SelfDynamicProperty.OptionChoice.GetTrueName();
+        }
+    }
+
 }
 
 export {IWarbandPurchase, WarbandPurchase, IWarbandPurchaseModel, IWarbandPurchaseEquipment, IWarbandPurchaseUpgrade, RealWarbandPurchaseModel, RealWarbandPurchaseEquipment, RealWarbandPurchaseUpgrade}
