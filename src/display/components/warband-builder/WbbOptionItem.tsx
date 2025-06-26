@@ -23,30 +23,33 @@ interface WbbOptionItemProps {
 
 const WbbOptionItem: React.FC<WbbOptionItemProps> = ({ option, owner }) => {
     const [open, setOpen] = useState(false);
+    const [keyvar, setkeyvar] = useState(0);
     const [selected, setSelected] = useState(option.purchase != null);
 
     const { warband, reloadDisplay, updateKey} = useWarband();
 
     const handleSelectOption = () => {
         if (option.purchase != null) {
+            setSelected(false)
             owner.DeleteUpgrade(option.purchase).then(() => {
                 option.purchase = null;
                 const Manager : ToolsController = ToolsController.getInstance();
                 Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
                     () => {
                     reloadDisplay()
-                    setSelected(false)
+                    setkeyvar(keyvar + 1)''
                     })
             })
         } else {
             
+            setSelected(true)
             owner.AddUpgrade(option.upgrade).then((result) => {
                 option.purchase = result;
                 const Manager : ToolsController = ToolsController.getInstance();
                 Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
                     () => {
                         reloadDisplay()
-                        setSelected(true)
+                        setkeyvar(keyvar + 1)
                         })
             })
         }
@@ -65,7 +68,7 @@ const WbbOptionItem: React.FC<WbbOptionItemProps> = ({ option, owner }) => {
     }, [playMode, printMode]);
 
     return (
-        <div className="WbbOptionItem" key={updateKey}>
+        <div className="WbbOptionItem" key={updateKey.toString() + keyvar.toString()}>
             {/* Edit View with options */}
             {(!playMode && !printMode) &&
                 <div className="option-title"
