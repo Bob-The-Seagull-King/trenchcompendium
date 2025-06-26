@@ -589,6 +589,8 @@ class WarbandMember extends DynamicContextObject {
                 }
             }
         }
+        console.log("GOT UPGRADES FOR MODEL " + this.CurModel.GetTrueName());
+        console.log(UpgradesAvailable);
 
         return this.SplitUpgrades(UpgradesAvailable);
     }
