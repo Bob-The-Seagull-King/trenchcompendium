@@ -72,6 +72,8 @@ const WbbOptionItem: React.FC<WbbOptionItemProps> = ({ option, owner }) => {
             {/* Edit View with options */}
             {(!playMode && !printMode) &&
                 <div className="option-title"
+                
+                    key={keyvar.toString() + updateKey.toString()}
                      onClick={(e) => {
                          if( option.allowed || option.purchase != null ) {
                              handleSelectOption();
@@ -85,7 +87,7 @@ const WbbOptionItem: React.FC<WbbOptionItemProps> = ({ option, owner }) => {
                             className="form-check-input"
                             type="checkbox"
                             id={option.upgrade.ID}
-                            key={updateKey}
+                            key={keyvar.toString() + updateKey.toString()}
                             checked={selected}
                             disabled={(!option.allowed) && (option.purchase == null)}
                             onClick={(e) => e.stopPropagation()} // prevent collapse toggle
