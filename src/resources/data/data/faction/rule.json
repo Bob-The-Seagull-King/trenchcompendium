@@ -221,15 +221,6 @@
                     }
                 ]
             },
-            "add_to_model": {   
-                "id": "rl_secretsofthehouseofwisdom",                            
-                "required": [
-                    {
-                        "category": "id",
-                        "value": ["md_jabireanalchemist"]
-                    }
-                ]
-            },
             "faction_add_upgrades": {
                 "list": [{
                 "model_key": "rl_secretsofthehouseofwisdom",
