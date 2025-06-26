@@ -37,7 +37,7 @@ const WbbOptionItem: React.FC<WbbOptionItemProps> = ({ option, owner }) => {
                 Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
                     () => {
                     reloadDisplay()
-                    setkeyvar(keyvar + 1)''
+                    setkeyvar(keyvar + 1)
                     })
             })
         } else {
