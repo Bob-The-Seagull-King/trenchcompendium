@@ -607,7 +607,8 @@ export const BaseContextCallTable : CallEventTable = {
                             }
                         }
                     ) as IModelUpgradeRelationship[]
-
+                    console.log("Upgrade Found List")
+                    console.log(UpgradeList);
                     for (let i = 0; i < UpgradeList.length; i++) {
                         UpgradeList[i].model_id_set = curUpgrade["models_id"]
                         relayVar.push(await UpgradeFactory.CreateModelUpgrade(UpgradeList[i], null))
