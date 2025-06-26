@@ -623,6 +623,8 @@ export const BaseContextCallTable : CallEventTable = {
             const { UpgradeFactory } = await import("../../factories/features/UpgradeFactory");
             
             for (let k = 0; k < context_func['list'].length; k++) {
+                const ExistingIDs : string[] = [];
+
                 const curUpgrade = context_func['list'][k]
                 let ValidUpgrade = false;
 
@@ -656,8 +658,11 @@ export const BaseContextCallTable : CallEventTable = {
                             break;
                         }
                     }
-                }
+                }                
 
+                for (let i = 0; i < relayVar.length; i++) {
+                    ExistingIDs.push(relayVar[i].GetID())
+                }
 
                 if (ValidUpgrade) {
                     const UpgradeList = Requester.MakeRequest(
@@ -682,8 +687,10 @@ export const BaseContextCallTable : CallEventTable = {
                     ) as IModelUpgradeRelationship[]
 
                     for (let i = 0; i < UpgradeList.length; i++) {
-                        UpgradeList[i].model_id_set = curUpgrade["models_id"]
-                        relayVar.push(await UpgradeFactory.CreateModelUpgrade(UpgradeList[i], null))
+                        if (!ExistingIDs.includes(UpgradeList[i].upgrade_id)) {
+                            UpgradeList[i].model_id_set = curUpgrade["models_id"]
+                            relayVar.push(await UpgradeFactory.CreateModelUpgrade(UpgradeList[i], null))
+                        }
                     }
                     
                 }

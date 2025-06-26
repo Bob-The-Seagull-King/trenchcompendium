@@ -659,7 +659,7 @@ class WarbandMember extends DynamicContextObject {
                 if (completegroups[special_cat]) {
                     completegroups[special_cat].upgrades.push(
                             {
-                                upgrade : Groups[special_cat][i],
+                                upgrade : Groups[special_cat][j],
                                 purchase : foundpurchase,
                                 allowed : canaddupgrade
                             }
@@ -669,7 +669,7 @@ class WarbandMember extends DynamicContextObject {
                         {
                             limit: limit_of_category,
                             upgrades: [{
-                                upgrade : Groups[special_cat][i],
+                                upgrade : Groups[special_cat][j],
                                 purchase : foundpurchase,
                                 allowed : canaddupgrade
                             }]
