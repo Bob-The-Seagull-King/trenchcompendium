@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import {faXmark} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import { IChoice } from '../../../../../classes/options/StaticOption';
-import { SelectedOption } from '../../../../../classes/options/SelectedOption';
-import { StaticOption } from '../../../../../classes/options/StaticOption';
+import { IChoice } from '../../../classes/options/StaticOption';
+import { SelectedOption } from '../../../classes/options/SelectedOption';
+import { StaticOption } from '../../../classes/options/StaticOption';
 
 interface RulesEditSelectionProps {
     show: boolean;
