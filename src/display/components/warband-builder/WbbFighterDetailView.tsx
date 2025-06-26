@@ -312,7 +312,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
               * - This is split into goetic and regular upgrades
               */}
             {Object.keys(upgrades).length > 0 &&
-                <>
+                <div className={'figter-upgrades-fullwrap'} key={updateKey.toString()}>
                     {Object.keys(upgrades).filter((item) => (
                         (!playMode) || (upgrades[item].upgrades.filter((subitem : MemberUpgradePresentation) => subitem.purchase != null).length > 0)
                     )).map((item, index) => (
@@ -335,7 +335,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                             </WbbFighterCollapse>
                         </div>
                     ))}
-                </>
+                </div>
             }
 
             {/* Edit Loadout */}
