@@ -351,8 +351,6 @@ class SiteUser {
      * @constructor
      */
     public async GetAchievements () {
-        console.log("GET")
-        console.log(this.Achievements);
         return this.Achievements;
     }
 }

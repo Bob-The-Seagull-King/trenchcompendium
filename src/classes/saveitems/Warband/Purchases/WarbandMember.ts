@@ -83,7 +83,6 @@ class WarbandMember extends DynamicContextObject {
     public constructor(data: IWarbandMember, parent : DynamicContextObject | null)
     {
         super(data, parent)
-        console.log(data);
         this.Notes = data.notes;
         this.IsActive = data.active;
         this.Experience = data.experience;
@@ -348,7 +347,6 @@ class WarbandMember extends DynamicContextObject {
 
     public GetEquipmentAsString() {
         const CurEquip : RealWarbandPurchaseEquipment[] = this.GetEquipment();
-        console.log(CurEquip)
         const returnVal : string[] = [];
 
         for (let i = 0; i < CurEquip.length; i++) {
@@ -675,7 +673,6 @@ class WarbandMember extends DynamicContextObject {
                 }
             }
         }
-        console.log(completegroups)
         return completegroups;
 
     }

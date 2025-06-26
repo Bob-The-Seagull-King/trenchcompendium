@@ -607,8 +607,6 @@ export const BaseContextCallTable : CallEventTable = {
                             }
                         }
                     ) as IModelUpgradeRelationship[]
-                    console.log("Upgrade Found List")
-                    console.log(UpgradeList);
                     for (let i = 0; i < UpgradeList.length; i++) {
                         UpgradeList[i].model_id_set = curUpgrade["models_id"]
                         relayVar.push(await UpgradeFactory.CreateModelUpgrade(UpgradeList[i], null))
@@ -885,9 +883,6 @@ export const BaseContextCallTable : CallEventTable = {
             }
         },
         async getWarbandMemberAbilities(this: EventRunner, eventSource : any, relayVar : Ability[], trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
-            console.log("REMOVE")
-            console.log(trackVal.CurModel.ID)
-            console.log(context_func)
             if (context_func["id"].includes(trackVal.CurModel.ID)) {
                 return relayVar.filter(item => !(context_func["abilities"].includes(item.ID)))
             } else {
@@ -1335,7 +1330,6 @@ export const BaseContextCallTable : CallEventTable = {
             )
         },
         async getWarbandMemberAbilities(this: EventRunner, eventSource : any, relayVar : Ability[], trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
-            console.log("ASGDHASGHG")
             const AbilityModule = await import("../../classes/feature/ability/Ability");
             const DynamicModule = await import("../../classes/options/DynamicOptionContextObject");
             try {

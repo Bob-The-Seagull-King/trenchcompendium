@@ -54,7 +54,10 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
 
     const handleRenameFighter = () => {
         setshowConfirmRenameFighterModal(false);
-
+        console.log("RENAME")
+        console.log(item.model.GetFighterName());
+        console.log(item.model.GetModelName());
+        console.log(fighterName);
         (item as RealWarbandPurchaseModel).model.RenameSelf(fighterName);
         const Manager : ToolsController = ToolsController.getInstance();
         Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
