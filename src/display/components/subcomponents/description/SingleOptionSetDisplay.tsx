@@ -1,28 +1,28 @@
 import '../../../../resources/styles/vendor/bootstrap.css'
 import React, { useEffect, useState } from 'react'
 import { ErrorBoundary } from "react-error-boundary";
-import { StaticOption } from '../../../../classes/options/StaticOption';
+import { IChoice, StaticOption } from '../../../../classes/options/StaticOption';
 import { makestringpresentable } from '../../../../utility/functions';
 import { Form } from 'react-bootstrap';
 import { EventRunner } from '../../../../classes/contextevent/contexteventhandler';
 import ItemRow from './ItemRow';
 import { returnDescription } from '../../../../utility/util';
+import WbbOptionBox from '../../../components/warband-builder/WbbOptionBox';
+import RulesOptionSelection from '../../rules-content/RulesOptionSelectionModal';
 
 const SingleOptionSetDisplay = (props: any) => {
     const OptionSet : StaticOption = props.data
     const OptionUpdate = props.onSelectionChange;
     
-    const [selectedModel, setSelectedModel] = useState(OptionSet.Selections[0]);
+    const [showModal, setshowModal] = useState(false);
+    const [selectedModel, setSelectedModel] = useState<IChoice | null>(null);
     const [displayState, setDisplayState] = useState( <></> );
     const [_keyvar, setkeyvar] = useState(0);
 
-    function updateItem(value: string) {
-        for (let i = 0; i < OptionSet.Selections.length; i++) {
-            if (OptionSet.Selections[i].id == (value)) {
-                setSelectedModel(OptionSet.Selections[i])
-            }
-        }
+    function updateItem(foundOption : IChoice | null) {
+        setSelectedModel(foundOption)
     }
+
     async function SetModelOptions() {
         if (OptionSet.MyStaticObject != null) {
 
@@ -58,26 +58,21 @@ const SingleOptionSetDisplay = (props: any) => {
             <div className={'SingleOptionSetDisplay'}>
                 {OptionSet.Selections.length > 0 &&
                     <>
-                        <h3>
-                            { OptionSet.Name }
-                        </h3>
+                    
+                        <WbbOptionBox
+                            title={OptionSet.Name}
+                            value={selectedModel.display_str}
+                            onClick={() => setshowModal(true)}
+                        />
 
-                        <p>
-                            {
-                                returnDescription(OptionSet, OptionSet.Description)
-                            }
-                        </p>
 
-                        <Form.Group controlId={OptionSet.RefID+'-select'} className={'mb-3'}>
-                            <Form.Label>{'Choose Option'}</Form.Label>
-                            <Form.Select
-                                onChange={(e: { target: { value: any; }; }) => { updateItem(e.target.value)    } }
-                            >
-                                {OptionSet.Selections.map((selec) => (
-                                    <option value={selec.id} key={"modeloption"+(OptionSet.Selections.indexOf(selec).toString())} >{makestringpresentable(selec.display_str)}</option>
-                                ))}
-                            </Form.Select>
-                        </Form.Group>
+                        <RulesOptionSelection
+                            show={showModal}
+                            onClose={() => setshowModal(false)}
+                            currentChoice={selectedModel}
+                            onSubmit={updateItem}
+                            choiceparent={OptionSet}
+                        />
 
                         <div key={_keyvar} className="SingleOptionSetDisplay-Details">
                             {displayState}
