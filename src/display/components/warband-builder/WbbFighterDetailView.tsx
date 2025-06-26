@@ -66,8 +66,10 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
     
     useEffect(() => {
         async function SetModelOptions() {
-            setabilities(fighter.SubProperties);
-            setupgrades(await fighter.GetWarbandUpgradeCollections());
+            const abilities = await fighter.BuildNewProperties()
+            const upgrades = await fighter.GetWarbandUpgradeCollections()
+            setabilities(abilities);
+            setupgrades(upgrades);
             setkeywords(await fighter.getContextuallyAvailableKeywords())
         }
 
@@ -313,14 +315,14 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                                 initiallyOpen={false}
                             >
                                 <>
-                                    <p> {/* Other Upgrade Rules */}
-                                        <strong>{'Upgrades: '}</strong>
-                                        {/* @TODO: add actual description text */}
-                                        {'This is the text description for the update rules. You can upgrade any Lion of Jabir into a Fierce Lion of Jabir at the cost of +5 ducats. Fierce Lions are not affected by the Keyword FEAR.'}
-                                    </p>
+                                    {item != "upgrades" &&
+                                        <p>
+                                            {fighter.GetFighterName() + " can choose up to " + upgrades[item].limit.toString() + " " + makestringpresentable(item) + "."}
+                                        </p>
+                                    }
 
-                                    {upgrades[item].map((subitem, index) => (
-                                        <WbbOptionItem key={index} option={subitem}/>
+                                    {upgrades[item].upgrades.map((subitem, index) => (
+                                        <WbbOptionItem key={index} option={subitem} owner={fighter}/>
                                     ))}
                                 </>
                             </WbbFighterCollapse>
@@ -656,18 +658,11 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                     </div>
 
                     <div className={'play-mode-equipment-wrap'}>
-                        <h3>{'Equipment'}</h3>
+                        <h3>{'Armour'}</h3>
                     </div>
 
-                    <div className={'play-mode-goetic-powers-wrap'}>
-                        {/*GoeticPowers.length > 0 &&
-                            <>
-                                <h3>{'Goetic Powers'}</h3>
-                                {GoeticPowers.map((option, index) => (
-                                    <WbbOptionItem key={index} option={option}/>
-                                ))}
-                            </>
-                        */}
+                    <div className={'play-mode-equipment-wrap'}>
+                        <h3>{'Equipment'}</h3>
                     </div>
 
                     <div className={'play-mode-abilities-wrap'}>
@@ -676,10 +671,6 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                             <WbbAbilityDisplay key={index} ability={ability}/>
                         ))}
                     </div>
-
-                    {/*
-                        @TODO: add upgrades as well as WbbAbilityDisplay
-                    */}
 
                     <div className={'play-mode-advancements-wrap'}>
                         <h3>{'Advancements'}</h3>

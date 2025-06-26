@@ -391,6 +391,21 @@ export const BaseContextCallTable : CallEventTable = {
             return relayVar.concat(StatOptionList);
         }
     },
+    special_category_upgrades: {
+        event_priotity: 0,
+        async getUpgradeCategoryLimit(this: EventRunner, eventSource : any, relayVar : number,  trackVal : string ,context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            if (context_func["upgrades"]) {
+                for (let i = 0; i < context_func["upgrades"].length; i++) {
+                    if (context_func["upgrades"][i].category == trackVal) {
+                        relayVar += context_func["upgrades"][i].count;
+                    }
+                }
+            }
+            
+            return relayVar;
+        }
+            
+    },
     faction_model_count_special: {
         event_priotity: 0,
         async getModelLimitTrue(this: EventRunner, eventSource : any, relayVar : number, trackVal : UserWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
@@ -862,6 +877,9 @@ export const BaseContextCallTable : CallEventTable = {
             }
         },
         async getWarbandMemberAbilities(this: EventRunner, eventSource : any, relayVar : Ability[], trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            console.log("REMOVE")
+            console.log(trackVal.CurModel.ID)
+            console.log(context_func)
             if (context_func["id"].includes(trackVal.CurModel.ID)) {
                 return relayVar.filter(item => !(context_func["abilities"].includes(item.ID)))
             } else {

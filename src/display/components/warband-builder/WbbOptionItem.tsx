@@ -7,14 +7,15 @@ import {usePrintMode} from "../../../context/PrintModeContext";
 import { ModelUpgradeRelationship } from '../../../classes/relationship/model/ModelUpgradeRelationship';
 import { getCostType } from '../../../utility/functions';
 import { returnDescription } from '../../../utility/util';
-import { MemberUpgradePresentation } from '../../../classes/saveitems/Warband/Purchases/WarbandMember';
+import { MemberUpgradePresentation, WarbandMember } from '../../../classes/saveitems/Warband/Purchases/WarbandMember';
 
 
 interface WbbOptionItemProps {
     option: MemberUpgradePresentation;
+    owner : WarbandMember
 }
 
-const WbbOptionItem: React.FC<WbbOptionItemProps> = ({ option }) => {
+const WbbOptionItem: React.FC<WbbOptionItemProps> = ({ option, owner }) => {
     const [open, setOpen] = useState(false);
     const [selected, setSelected] = useState(false);
 
@@ -41,7 +42,7 @@ const WbbOptionItem: React.FC<WbbOptionItemProps> = ({ option }) => {
             {(!playMode && !printMode) &&
                 <div className="option-title"
                      onClick={(e) => {
-                         if( !option.upgrade.IsLimitReached() ) {
+                         if( option.allowed ) {
                              handleSelectOption();
                          }
                     }}
@@ -54,7 +55,7 @@ const WbbOptionItem: React.FC<WbbOptionItemProps> = ({ option }) => {
                             type="checkbox"
                             id={option.upgrade.ID}
                             checked={selected}
-                            disabled={option.upgrade.IsLimitReached()}
+                            disabled={!option.allowed}
                             onClick={(e) => e.stopPropagation()} // prevent collapse toggle
                             onChange={handleSelectOption}
                         />

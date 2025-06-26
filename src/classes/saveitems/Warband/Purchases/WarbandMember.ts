@@ -35,7 +35,12 @@ export interface MemberUpgradePresentation {
     purchase : WarbandPurchase | null,
     allowed : boolean
 }
-export type MemberUpgradesGrouped = {[type : string]: MemberUpgradePresentation[]};
+export type MemberUpgradesGrouped = {[type : string]: 
+    {
+        upgrades: MemberUpgradePresentation[]
+        limit : number
+    }
+};
 
 interface IWarbandMember extends IContextObject {
     model: string,
@@ -85,7 +90,8 @@ class WarbandMember extends DynamicContextObject {
     }
     
 
-    public async BuildNewProperties(data : IWarbandMember) {
+    public async BuildNewProperties(data : IWarbandMember = this.SelfData) {
+        this.SubProperties = [];
         const all_abils : Ability[] = await this.getContextuallyAvailableAbilities();
         for (let i = 0; i < all_abils.length; i++) {
             let IsFound = false
@@ -104,8 +110,8 @@ class WarbandMember extends DynamicContextObject {
                 this.SubProperties.push(NewRuleProperty);
             }
         }
-        console.log(this.GetTrueName())
-        console.log(this.SubProperties);
+
+        return this.SubProperties;
     }
 
     
@@ -546,13 +552,13 @@ class WarbandMember extends DynamicContextObject {
                 BaseList,
                 this
             )
-            /*BaseList = await Events.runEvent(
+            BaseList = await Events.runEvent(
                 "getWarbandMemberUpgrades",
                 this,
-                result,
+                [],
                 BaseList,
                 this
-            )*/
+            )
         }
 
         for (let i = 0; i < BaseList.length; i++) {
@@ -594,6 +600,24 @@ class WarbandMember extends DynamicContextObject {
 
         for (let i = 0; i < Object.keys(Groups).length; i++) {
             const special_cat = Object.keys(Groups)[i]
+            let limit_of_category = 0;
+
+            if (this.MyContext) {
+                limit_of_category = await Events.runEvent(
+                        "getUpgradeCategoryLimit",
+                        (this.MyContext),
+                        [],
+                        limit_of_category,
+                        special_cat
+                    )
+            }
+            limit_of_category = await Events.runEvent(
+                    "getUpgradeCategoryLimit",
+                    (this),
+                    [],
+                    limit_of_category,
+                    special_cat
+                )
 
             for (let j = 0; j < Groups[special_cat].length; j++) {
 
@@ -604,10 +628,10 @@ class WarbandMember extends DynamicContextObject {
                     }
                 }
     
-                let maxcount = Groups[special_cat][i].WarbandLimit;
+                let maxcount = Groups[special_cat][j].WarbandLimit;
                 maxcount = await Events.runEvent(
                     "getUpgradeLimitTrue",
-                    Groups[special_cat][i],
+                    Groups[special_cat][j],
                     [],
                     maxcount,
                     {
@@ -615,12 +639,12 @@ class WarbandMember extends DynamicContextObject {
                         model: this
                     }
                 )
-                let canaddupgrade = ((this.MyContext as UserWarband).GetCountOfUpgradeRel(Groups[special_cat][i].ID) < maxcount || ((Groups[special_cat][i].WarbandLimit == 0)))
+                let canaddupgrade = ((this.MyContext as UserWarband).GetCountOfUpgradeRel(Groups[special_cat][j].ID) < maxcount || ((Groups[special_cat][j].WarbandLimit == 0)))
                 
                 if (canaddupgrade) {
                     canaddupgrade = await Events.runEvent(
                         "canModelGetUpgrade",
-                        Groups[special_cat][i],
+                        Groups[special_cat][j],
                         [],
                         canaddupgrade,
                         {
@@ -631,21 +655,23 @@ class WarbandMember extends DynamicContextObject {
                 }
 
                 if (completegroups[special_cat]) {
-                    completegroups[special_cat].push(
-                        {
-                            upgrade : Groups[special_cat][i],
-                            purchase : foundpurchase,
-                            allowed : canaddupgrade
-                        }
+                    completegroups[special_cat].upgrades.push(
+                            {
+                                upgrade : Groups[special_cat][i],
+                                purchase : foundpurchase,
+                                allowed : canaddupgrade
+                            }
                     )
                 } else {
-                    completegroups[special_cat] = [
+                    completegroups[special_cat] = 
                         {
-                            upgrade : Groups[special_cat][i],
-                            purchase : foundpurchase,
-                            allowed : canaddupgrade
-                        }
-                    ]
+                            limit: limit_of_category,
+                            upgrades: [{
+                                upgrade : Groups[special_cat][i],
+                                purchase : foundpurchase,
+                                allowed : canaddupgrade
+                            }]
+                    }
                 }
             }
         }
