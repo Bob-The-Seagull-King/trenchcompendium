@@ -70,7 +70,7 @@ const WbbOptionItem: React.FC<WbbOptionItemProps> = ({ option, owner }) => {
             {(!playMode && !printMode) &&
                 <div className="option-title"
                      onClick={(e) => {
-                         if( option.allowed ) {
+                         if( option.allowed || option.purchase != null ) {
                              handleSelectOption();
                          }
                     }}
@@ -84,7 +84,7 @@ const WbbOptionItem: React.FC<WbbOptionItemProps> = ({ option, owner }) => {
                             id={option.upgrade.ID}
                             key={updateKey}
                             checked={selected}
-                            disabled={!option.allowed}
+                            disabled={(!option.allowed) && (option.purchase == null)}
                             onClick={(e) => e.stopPropagation()} // prevent collapse toggle
                             onChange={handleSelectOption}
                         />
