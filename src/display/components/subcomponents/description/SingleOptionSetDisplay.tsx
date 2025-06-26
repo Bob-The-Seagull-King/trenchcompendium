@@ -61,7 +61,7 @@ const SingleOptionSetDisplay = (props: any) => {
                     
                         <WbbOptionBox
                             title={OptionSet.Name}
-                            value={selectedModel.display_str}
+                            value={selectedModel? selectedModel.display_str : "-"}
                             onClick={() => setshowModal(true)}
                         />
 
