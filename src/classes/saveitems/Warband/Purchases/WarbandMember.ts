@@ -538,6 +538,7 @@ class WarbandMember extends DynamicContextObject {
     public async getContextuallyAvailableUpgrades() : Promise<UpgradesGrouped> {
         const UpgradesAvailable : ModelUpgradeRelationship[] = []
         let BaseList : ModelUpgradeRelationship[] = []
+        const IDList : string[] = [];
 
         for (let i = 0; i < this.CurModel.UpgradeList.length; i++) {
             BaseList.push(this.CurModel.UpgradeList[i]);
@@ -562,35 +563,11 @@ class WarbandMember extends DynamicContextObject {
         }
 
         for (let i = 0; i < BaseList.length; i++) {
-            let maxcount = BaseList[i].WarbandLimit;
-            maxcount = await Events.runEvent(
-                "getUpgradeLimitTrue",
-                BaseList[i],
-                [],
-                maxcount,
-                {
-                    warband: this.MyContext,
-                    model: this
-                }
-            )
-            if ((this.MyContext as UserWarband).GetCountOfUpgradeRel(BaseList[i].ID) < maxcount || ((BaseList[i].WarbandLimit == 0))) {
-                const passfailresult = await Events.runEvent(
-                    "canModelGetUpgrade",
-                    BaseList[i],
-                    [],
-                    true,
-                    {
-                        warband: this.MyContext,
-                        model: this
-                    }
-                )
-                if (passfailresult) {
-                    UpgradesAvailable.push(BaseList[i]);
-                }
+            if (!IDList.includes(BaseList[i].GetID())) {
+                IDList.push(BaseList[i].GetID())
+                UpgradesAvailable.push(BaseList[i]);
             }
         }
-        console.log("GOT UPGRADES FOR MODEL " + this.CurModel.GetTrueName());
-        console.log(UpgradesAvailable);
 
         return this.SplitUpgrades(UpgradesAvailable);
     }
