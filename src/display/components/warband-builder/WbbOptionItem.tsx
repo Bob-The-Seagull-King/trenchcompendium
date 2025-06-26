@@ -25,6 +25,7 @@ const WbbOptionItem: React.FC<WbbOptionItemProps> = ({ option, owner }) => {
     const [open, setOpen] = useState(false);
     const [keyvar, setkeyvar] = useState(0);
     const [selected, setSelected] = useState(option.purchase != null);
+    const [canselect, setcanselect] = useState(option.allowed || option.purchase != null);
 
     const { warband, reloadDisplay, updateKey} = useWarband();
 
@@ -67,6 +68,11 @@ const WbbOptionItem: React.FC<WbbOptionItemProps> = ({ option, owner }) => {
         }
     }, [playMode, printMode]);
 
+    // Update `open` when playMode changes
+    useEffect(() => {
+        setcanselect(option.allowed || option.purchase != null)
+    }, [updateKey]);
+
     return (
         <div className="WbbOptionItem" key={updateKey.toString() + keyvar.toString()}>
             {/* Edit View with options */}
@@ -75,7 +81,7 @@ const WbbOptionItem: React.FC<WbbOptionItemProps> = ({ option, owner }) => {
                 
                     key={keyvar.toString() + updateKey.toString()}
                      onClick={(e) => {
-                         if( option.allowed || option.purchase != null ) {
+                         if( canselect ) {
                              handleSelectOption();
                          }
                     }}
@@ -89,7 +95,7 @@ const WbbOptionItem: React.FC<WbbOptionItemProps> = ({ option, owner }) => {
                             id={option.upgrade.ID}
                             key={keyvar.toString() + updateKey.toString()}
                             checked={selected}
-                            disabled={(!option.allowed) && (option.purchase == null)}
+                            disabled={(!canselect)}
                             onClick={(e) => e.stopPropagation()} // prevent collapse toggle
                             onChange={handleSelectOption}
                         />
