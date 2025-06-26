@@ -33,11 +33,11 @@ const WbbOptionItem: React.FC<WbbOptionItemProps> = ({ option, owner }) => {
             setSelected(false)
             owner.DeleteUpgrade(option.purchase).then(() => {
                 option.purchase = null;
+                setkeyvar(keyvar + 1)
                 const Manager : ToolsController = ToolsController.getInstance();
                 Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
                     () => {
                     reloadDisplay()
-                    setkeyvar(keyvar + 1)
                     })
             })
         } else {
@@ -45,11 +45,11 @@ const WbbOptionItem: React.FC<WbbOptionItemProps> = ({ option, owner }) => {
             setSelected(true)
             owner.AddUpgrade(option.upgrade).then((result) => {
                 option.purchase = result;
+                setkeyvar(keyvar + 1)
                 const Manager : ToolsController = ToolsController.getInstance();
                 Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
                     () => {
                         reloadDisplay()
-                        setkeyvar(keyvar + 1)
                         })
             })
         }
