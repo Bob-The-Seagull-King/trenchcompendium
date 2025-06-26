@@ -45,6 +45,7 @@ import RulesModelDisplayCollapse from '../rules-content/RulesModelDisplayCollaps
 import { makestringpresentable } from '../../../utility/functions';
 import KeywordDisplay from '../features/glossary/KeywordDisplay';
 import GenericHover from '../generics/GenericHover';
+import { useWarband } from '../../../context/WarbandContext';
 
 
 interface WbbFighterDetailViewProps {
@@ -54,6 +55,7 @@ interface WbbFighterDetailViewProps {
 
 const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmember, onClose }) => {
 
+    const { updatekey } = useWarband();
 
     const fighter = warbandmember.model;
     
@@ -157,7 +159,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
 
     return (
 
-        <div className={`WbbDetailView WbbFighterDetailView fighter-card ${playMode ? 'play-mode' : ''}`}>
+        <div key={updateKey} className={`WbbDetailView WbbFighterDetailView fighter-card ${playMode ? 'play-mode' : ''}`}>
             <div className={'title'}>
                 <div className={'title-back'} onClick={onClose}>
                     <FontAwesomeIcon icon={faChevronLeft} className=""/>
