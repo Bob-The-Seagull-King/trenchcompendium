@@ -499,7 +499,7 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
 
                 <Modal.Body>
                     {'Are you sure you want to delete '}
-                    <strong>{item.model.CurModel.GetTrueName() + ' - ' + item.mode.GetTrueName()}</strong>?
+                    <strong>{(item as RealWarbandPurchaseModel).model.CurModel.GetTrueName() + ' - ' + (item as RealWarbandPurchaseModel).model.GetTrueName()}</strong>?
                 </Modal.Body>
 
                 <Modal.Footer>
