@@ -328,7 +328,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                                         </p>
                                     }
 
-                                    {upgrades[item].filter((item) => ((!playMode) || item.purchase != null)).upgrades.map((subitem, index) => (
+                                    {upgrades[item].upgrades.filter((item) => ((!playMode) || item.purchase != null)).map((subitem, index) => (
                                         <WbbOptionItem key={index.toString() + updateKey.toString()} option={subitem} owner={fighter}/>
                                     ))}
                                 </>
