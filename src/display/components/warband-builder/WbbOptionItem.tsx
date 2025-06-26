@@ -35,6 +35,7 @@ const WbbOptionItem: React.FC<WbbOptionItemProps> = ({ option, owner }) => {
             owner.DeleteUpgrade(option.purchase).then(() => {
                 option.purchase = null;
                 setkeyvar(keyvar + 1)
+                setcanselect(true);
                 const Manager : ToolsController = ToolsController.getInstance();
                 Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
                     () => {
@@ -67,11 +68,6 @@ const WbbOptionItem: React.FC<WbbOptionItemProps> = ({ option, owner }) => {
             setOpen(false);
         }
     }, [playMode, printMode]);
-
-    // Update `open` when playMode changes
-    useEffect(() => {
-        setcanselect(option.allowed || option.purchase != null)
-    }, [updateKey]);
 
     return (
         <div className="WbbOptionItem" key={updateKey.toString() + keyvar.toString()}>
