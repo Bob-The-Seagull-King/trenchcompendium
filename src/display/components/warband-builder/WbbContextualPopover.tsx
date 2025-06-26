@@ -42,7 +42,7 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
 
     /** Fighter Actions */
     const [fighterName, setFighterName] = React.useState(
-        type === 'fighter' && item?.FighterName ? item.FighterName : ''
+        type === 'fighter' && item?.model ? item.model.GetFighterName() : ''
     );
 
     const [showConfirmDeleteFighterModal, setshowConfirmDeleteFighterModal] = useState(false);

@@ -30,7 +30,7 @@ const WbbEditViewFighter: React.FC<WbbEditViewFighterProps> = ({ item, index, on
                 {item.model.CurModel.GetName()}
             </div>
             <div className={'fighter-name'}>
-                {item.model.GetName()}
+                {item.model.GetFighterName()}
             </div>
 
             <div className={'cost-wrap'}>
