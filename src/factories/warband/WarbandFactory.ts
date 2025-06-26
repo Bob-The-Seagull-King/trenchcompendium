@@ -64,10 +64,10 @@ class WarbandFactory {
         const rule = new WarbandMember(data, parent)        
         await rule.BuildModel(data.model)
         await rule.BuildEquipment(data.equipment);
-        await rule.BuildUpgrade(data.list_upgrades);
         await rule.BuildSkills(data.list_skills);
         await rule.BuildInjuries(data.list_injury);
         await rule.BuildNewProperties(data);
+        await rule.BuildUpgrades(data);
         return rule;
     }
 

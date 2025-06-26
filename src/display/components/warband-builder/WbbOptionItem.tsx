@@ -8,6 +8,12 @@ import { ModelUpgradeRelationship } from '../../../classes/relationship/model/Mo
 import { getCostType } from '../../../utility/functions';
 import { returnDescription } from '../../../utility/util';
 import { MemberUpgradePresentation, WarbandMember } from '../../../classes/saveitems/Warband/Purchases/WarbandMember';
+import { ToolsController } from '../../../classes/_high_level_controllers/ToolsController';
+import { useWarband } from '../../../context/WarbandContext';
+import { Upgrade } from '../../../classes/feature/ability/Upgrade';
+import { WarbandProperty } from '../../../classes/saveitems/Warband/WarbandProperty';
+import WbbOptionSelect from './modals/warband/WbbOptionSelect';
+import OptionSetStaticDisplay from '../subcomponents/description/OptionSetStaticDisplay';
 
 
 interface WbbOptionItemProps {
@@ -17,10 +23,33 @@ interface WbbOptionItemProps {
 
 const WbbOptionItem: React.FC<WbbOptionItemProps> = ({ option, owner }) => {
     const [open, setOpen] = useState(false);
-    const [selected, setSelected] = useState(false);
+    const [selected, setSelected] = useState(option.purchase != null);
+
+    const { warband, reloadDisplay, updateKey} = useWarband();
 
     const handleSelectOption = () => {
-        setSelected(!selected);
+        if (option.purchase != null) {
+            owner.DeleteUpgrade(option.purchase).then(() => {
+                option.purchase = null;
+                const Manager : ToolsController = ToolsController.getInstance();
+                Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
+                    () => {
+                    reloadDisplay()
+                    setSelected(false)
+                    })
+            })
+        } else {
+            
+            owner.AddUpgrade(option.upgrade).then((result) => {
+                option.purchase = result;
+                const Manager : ToolsController = ToolsController.getInstance();
+                Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
+                    () => {
+                        reloadDisplay()
+                        setSelected(true)
+                        })
+            })
+        }
     };
 
     const { playMode } = usePlayMode();
@@ -36,8 +65,7 @@ const WbbOptionItem: React.FC<WbbOptionItemProps> = ({ option, owner }) => {
     }, [playMode, printMode]);
 
     return (
-        <div className="WbbOptionItem">
-
+        <div className="WbbOptionItem" key={updateKey}>
             {/* Edit View with options */}
             {(!playMode && !printMode) &&
                 <div className="option-title"
@@ -54,6 +82,7 @@ const WbbOptionItem: React.FC<WbbOptionItemProps> = ({ option, owner }) => {
                             className="form-check-input"
                             type="checkbox"
                             id={option.upgrade.ID}
+                            key={updateKey}
                             checked={selected}
                             disabled={!option.allowed}
                             onClick={(e) => e.stopPropagation()} // prevent collapse toggle
@@ -105,9 +134,32 @@ const WbbOptionItem: React.FC<WbbOptionItemProps> = ({ option, owner }) => {
             }
 
             <Collapse in={open}>
-                <div className="option-details">
+                <div className="option-details" key={updateKey}>
+
                     <div className="option-details-inner">
-                        {returnDescription(option.upgrade, option.upgrade.UpgradeObject.Description)}
+                        {option.purchase?.HeldObject != null &&
+                        <>
+                            {returnDescription(option.purchase?.HeldObject, ((option.purchase?.HeldObject as WarbandProperty).SelfDynamicProperty.OptionChoice as Upgrade).Description)}
+                            
+                            {((option.purchase?.HeldObject as WarbandProperty).SelfDynamicProperty).Selections.length > 0 &&
+                                <span className={'title-choice'}>
+                                    {((option.purchase?.HeldObject as WarbandProperty)).SelfDynamicProperty.Selections.map((item: any) => 
+                                        <WbbOptionSelect 
+                                            property={((option.purchase?.HeldObject as WarbandProperty))}
+                                            key={((option.purchase?.HeldObject as WarbandProperty)).SelfDynamicProperty.Selections.indexOf(item)}
+                                            choice={item}
+                                        />
+                                    )}                        
+                                </span>
+                            }
+                        </>
+                        }{option.purchase?.HeldObject == null &&
+                            <>
+                                {returnDescription(option.upgrade, option.upgrade.UpgradeObject.Description)}
+                                
+                                <OptionSetStaticDisplay data={option.upgrade.UpgradeObject.MyOptions} />
+                            </>
+                        }
                     </div>
                 </div>
             </Collapse>

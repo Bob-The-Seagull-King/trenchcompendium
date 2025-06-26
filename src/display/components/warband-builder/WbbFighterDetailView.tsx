@@ -45,6 +45,7 @@ import RulesModelDisplayCollapse from '../rules-content/RulesModelDisplayCollaps
 import { makestringpresentable } from '../../../utility/functions';
 import KeywordDisplay from '../features/glossary/KeywordDisplay';
 import GenericHover from '../generics/GenericHover';
+import { useWarband } from '../../../context/WarbandContext';
 
 
 interface WbbFighterDetailViewProps {
@@ -54,6 +55,7 @@ interface WbbFighterDetailViewProps {
 
 const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmember, onClose }) => {
 
+    const {warband, updateKey, reloadDisplay } = useWarband();
 
     const fighter = warbandmember.model;
     
@@ -73,6 +75,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
             setupgrades(upgrades);
             setkeywords(await fighter.getContextuallyAvailableKeywords())
             setmodeslug(fighter.GetModelSlug())
+            reloadDisplay()
         }
 
         SetModelOptions();
@@ -176,19 +179,19 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                 </div>
 
                 <div className={'fighter-cost'}>
-                    { fighter.GetTotalCostDucats() > 0 &&
+                    { warbandmember.purchase.GetTotalDucats() > 0 &&
                         <>
-                            {fighter.GetTotalCostDucats() + " D"}
+                            {warbandmember.purchase.GetTotalDucats() + " D"}
                         </>
                     }
-                    { fighter.GetTotalCostDucats() > 0 && fighter.GetTotalCostGlory() > 0 &&
+                    { warbandmember.purchase.GetTotalDucats() > 0 && warbandmember.purchase.GetTotalGlory() > 0 &&
                         <>
                             {" / "}
                         </>
                     }
-                    { fighter.GetTotalCostGlory() > 0 &&
+                    { warbandmember.purchase.GetTotalGlory() > 0 &&
                         <>
-                            {fighter.GetTotalCostGlory() + " G"}
+                            {warbandmember.purchase.GetTotalGlory() + " G"}
                         </>
                     }
                 </div>
@@ -238,14 +241,14 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                                 {'Cost: '}
                             </span>
                             <span className="fighter-meta-value">
-                                {fighter.GetBaseCostDucats() > 0 &&
+                                {warbandmember.purchase.GetTotalDucats() > 0 &&
                                     <>
-                                        {fighter.GetBaseCostDucats() + " Ducats"}
+                                        {warbandmember.purchase.GetTotalDucats() + " Ducats"}
                                     </>
                                 }
-                                {fighter.GetBaseCostGlory() > 0 &&
+                                {warbandmember.purchase.GetTotalGlory() > 0 &&
                                     <>
-                                        {fighter.GetBaseCostGlory() + " Glory Points"}
+                                        {warbandmember.purchase.GetTotalGlory() + " Glory Points"}
                                     </>
                                 }
                             </span>
@@ -324,7 +327,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                                     }
 
                                     {upgrades[item].upgrades.map((subitem, index) => (
-                                        <WbbOptionItem key={index} option={subitem} owner={fighter}/>
+                                        <WbbOptionItem key={index.toString() + updateKey.toString()} option={subitem} owner={fighter}/>
                                     ))}
                                 </>
                             </WbbFighterCollapse>

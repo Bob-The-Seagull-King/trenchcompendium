@@ -9,7 +9,7 @@ import { ContextPackage } from "../../../contextevent/contextpackage";
 import { FactionFactory } from "../../../../factories/features/FactionFactory";
 import { Patron } from "../../../feature/skillgroup/Patron";
 import { Faction } from "../../../feature/faction/Faction";
-import { IWarbandPurchaseEquipment, IWarbandPurchaseUpgrade, RealWarbandPurchaseEquipment, WarbandPurchase } from "./WarbandPurchase";
+import { IWarbandPurchaseEquipment, IWarbandPurchaseUpgrade, RealWarbandPurchaseEquipment, RealWarbandPurchaseUpgrade, WarbandPurchase } from "./WarbandPurchase";
 import { INote } from "../../../Note";
 import { Model } from "../../../feature/model/Model";
 import { ModelFactory } from "../../../../factories/features/ModelFactory";
@@ -24,6 +24,7 @@ import { EventRunner } from "../../../contextevent/contexteventhandler";
 import { ModelUpgradeRelationship } from "../../../relationship/model/ModelUpgradeRelationship";
 import { UpgradesGrouped } from "../../../relationship/model/ModelUpgradeRelationship";
 import { UserWarband } from "../UserWarband";
+import { WarbandFactory } from "../../../../factories/warband/WarbandFactory";
 
 export interface MemberAndWarband {
     warband: UserWarband,
@@ -82,6 +83,7 @@ class WarbandMember extends DynamicContextObject {
     public constructor(data: IWarbandMember, parent : DynamicContextObject | null)
     {
         super(data, parent)
+        console.log(data);
         this.Notes = data.notes;
         this.IsActive = data.active;
         this.Experience = data.experience;
@@ -112,6 +114,22 @@ class WarbandMember extends DynamicContextObject {
         }
 
         return this.SubProperties;
+    }
+    
+
+    public async BuildUpgrades(data : IWarbandMember = this.SelfData) {
+        this.Upgrades = [];
+        for (let i = 0; i < data.list_upgrades.length; i++) {
+            const curUpgrade = data.list_upgrades[i]
+            const upgradeobj = await UpgradeFactory.CreateNewUpgrade(curUpgrade.upgrade.object_id, this)
+            const NewRuleProperty = new WarbandProperty(upgradeobj, this, null, curUpgrade.upgrade);
+            await NewRuleProperty.HandleDynamicProps(upgradeobj, this, null, curUpgrade.upgrade);
+            
+            const NewPurchase : WarbandPurchase = new WarbandPurchase(curUpgrade.purchase, this, NewRuleProperty);
+            this.Upgrades.push(NewPurchase);
+        }
+
+        return this.Upgrades;
     }
 
     
@@ -158,14 +176,6 @@ class WarbandMember extends DynamicContextObject {
             this.Equipment.push(NewPurchase);
         }
 
-    }
-
-    public async BuildUpgrade(data : IWarbandPurchaseUpgrade[]) {
-        for (let i = 0; i < data.length; i++) {            
-            const Value = await UpgradeFactory.CreateNewUpgrade(data[i].upgrade.object_id, this);
-            const NewPurchase : WarbandPurchase = new WarbandPurchase(data[i].purchase, this, Value);
-            this.Equipment.push(NewPurchase);
-        }
     }
 
     public async BuildSkills(data : IWarbandProperty[]) {
@@ -338,6 +348,7 @@ class WarbandMember extends DynamicContextObject {
 
     public GetEquipmentAsString() {
         const CurEquip : RealWarbandPurchaseEquipment[] = this.GetEquipment();
+        console.log(CurEquip)
         const returnVal : string[] = [];
 
         for (let i = 0; i < CurEquip.length; i++) {
@@ -366,8 +377,18 @@ class WarbandMember extends DynamicContextObject {
     }
 
     public GetSubCosts(type : number) {
-        // @TODO
-        return 0;
+        let countvar = 0;
+        for (let i = 0; i < this.Upgrades.length; i++) {
+            if (this.Upgrades[i].CostType == type) {
+                if (type == 0 ) {
+                    countvar += this.Upgrades[i].GetTotalDucats();
+                }
+                if (type == 1 ) {
+                    countvar += this.Upgrades[i].GetTotalGlory();
+                }
+            }
+        }
+        return countvar;
     }
 
     public GetEquipmentCount(id : string) {
@@ -602,7 +623,7 @@ class WarbandMember extends DynamicContextObject {
 
                 let foundpurchase : WarbandPurchase | null = null;
                 for (let k = 0; k < this.Upgrades.length; k++) {
-                    if ((this.Upgrades[k].HeldObject as ModelUpgradeRelationship).ID == Groups[special_cat][j].ID) {
+                    if ((this.Upgrades[k].HeldObject as Upgrade).ID == Groups[special_cat][j].UpgradeObject.ID) {
                         foundpurchase = this.Upgrades[k];
                     }
                 }
@@ -654,6 +675,7 @@ class WarbandMember extends DynamicContextObject {
                 }
             }
         }
+        console.log(completegroups)
         return completegroups;
 
     }
@@ -700,7 +722,37 @@ class WarbandMember extends DynamicContextObject {
 
         return BaseList;
     }
+    
+    public async AddUpgrade ( stash: ModelUpgradeRelationship ) {
+        const CurUpgrade : Upgrade  = await stash.UpgradeObject;
+        
+        const NewRuleProperty = new WarbandProperty(CurUpgrade, this, null, null);
+        await NewRuleProperty.HandleDynamicProps(CurUpgrade, this, null, null);
+        const NewPurchase : WarbandPurchase = new WarbandPurchase({
+            cost_value : stash.Cost,
+            cost_type : stash.CostType,
+            count_limit : true,
+            count_cap : true,
+            sell_item : true,
+            sell_full : true,
+            purchaseid: CurUpgrade.ID,
+            faction_rel_id: stash.ID,
+            custom_rel: stash.SelfData
+        }, this, NewRuleProperty);
+        this.Upgrades.push(NewPurchase);
 
+        return NewPurchase;
+    }
+
+    public async DeleteUpgrade( upgrade : WarbandPurchase ) {
+        
+        for (let i = 0; i < this.Upgrades.length; i++) {
+            if (upgrade == (this.Upgrades[i])) {
+                this.Upgrades.splice(i, 1);
+                break;
+            }
+        }
+    }
 }
 
 export {IWarbandMember, WarbandMember}
