@@ -50,23 +50,23 @@ const ProfileSubscriptionView: React.FC = () => {
 
                     <ul className={'details-list'}>
                         <li>
-                            <img src={TCIcon} alt="Icon" className={'icon'} width={32} height={32}/>
+                            <img src={TCIcon} alt="Icon" className={'icon'} width={20} height={20}/>
                             {'Membership starting from $1,67 monthly'}
                         </li>
                         <li>
-                            <img src={TCIcon} alt="Icon" className={'icon'} width={32} height={32}/>
+                            <img src={TCIcon} alt="Icon" className={'icon'} width={20} height={20}/>
                             {'The first month is free'}
                         </li>
                         <li>
-                            <img src={TCIcon} alt="Icon" className={'icon'} width={32} height={32}/>
+                            <img src={TCIcon} alt="Icon" className={'icon'} width={20} height={20}/>
                             {'Support the project'}
                         </li>
                         <li>
-                            <img src={TCIcon} alt="Icon" className={'icon'} width={32} height={32}/>
+                            <img src={TCIcon} alt="Icon" className={'icon'} width={20} height={20}/>
                             {'Disable Ads'}
                         </li>
                         <li>
-                            <img src={TCIcon} alt="Icon" className={'icon'} width={32} height={32}/>
+                            <img src={TCIcon} alt="Icon" className={'icon'} width={20} height={20}/>
                             {'Unlock extra features for your account'}
                         </li>
                     </ul>
