@@ -243,12 +243,12 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                             <span className="fighter-meta-value">
                                 {warbandmember.purchase.CostType == 0 &&
                                     <>
-                                        {warbandmember.purchase.Cost + " Ducats"}
+                                        {warbandmember.purchase.ItemCost + " Ducats"}
                                     </>
                                 }
                                 {warbandmember.purchase.CostType == 1 &&
                                     <>
-                                        {warbandmember.purchase.Cost + " Glory Points"}
+                                        {warbandmember.purchase.ItemCost + " Glory Points"}
                                     </>
                                 }
                             </span>
