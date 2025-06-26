@@ -24,7 +24,16 @@ const SynodModelImage: React.FC<SynodModelImageProps> = ({ modelSlug, size = 'fu
             setData(IMG_Model) 
             setkeyvar(_keyvar + 1)
         }
-        setData({}) 
+        setData({
+            url: undefined,
+            sourceTitle: '',
+            sourceUrl: '',
+            imageId: 0,
+            modelName: '',
+            modelId: 0,
+            loading: true,
+            error: false,
+        }) 
         SetImageData();
     }, [modelSlug]);
 
