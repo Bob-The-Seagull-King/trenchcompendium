@@ -21,7 +21,7 @@ const ProfileSubscriptionView: React.FC = () => {
     // };
 
     // @TODO: This is a placeholder var -> replace with user status
-    const isSubscribed = false;
+    const isSubscribed = true;
 
     const navigate = useNavigate();
     const { isLoggedIn, userId, authToken, logout } = useAuth();
