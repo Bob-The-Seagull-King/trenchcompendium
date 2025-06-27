@@ -37,7 +37,7 @@ const ProfileSettingsPage: React.FC = () => {
 
 
     useEffect(() => {
-        if ( !userId || !isLoggedIn() ) {
+        if ( !userId || !isLoggedIn ) {
             navigate(`/profile/${userId}`);
             return;
         }

@@ -33,11 +33,11 @@ const FooterMain: React.FC = () => {
     ]
 
     // Account related links
-    const profile_link = isLoggedIn() && userId
+    const profile_link = isLoggedIn && userId
         ? `/profile/${userId}`
         : '/login'
 
-    const account_settings_link = isLoggedIn() && userId
+    const account_settings_link = isLoggedIn && userId
         ? `/profile/${userId}/settings`
         : '/login'
 

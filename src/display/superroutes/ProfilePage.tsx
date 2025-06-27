@@ -31,7 +31,7 @@ import { SynodDataCache } from '../../classes/_high_level_controllers/SynodDataC
 
 const ProfilePage: React.FC = () => {
     const { id } = useParams<{ id?: string }>()
-    const { isLoggedIn, userId, logout } = useAuth()
+    const { isLoggedIn, userId, reloadIsLoggedIn } = useAuth()
 
     const { state } = useLocation();
     
@@ -39,15 +39,6 @@ const ProfilePage: React.FC = () => {
      * Handle Profile picture change
      */
     const navigate = useNavigate()
-
-    /** is this the current site users own profile? */
-    const isOwnProfile = () => {
-        // @TODO: sometimes this returns false even if is own profile
-        console.log('isOwnProfile()')
-        console.log(userData instanceof SiteUser);
-
-        return userData instanceof SiteUser
-    }
 
     /** Loading state when adding a friend via main button on stangers profiles */
     const [loadingAddFriend, setLoadingAddFriend] = useState(false)
@@ -81,8 +72,11 @@ const ProfilePage: React.FC = () => {
     const [userData, setUserData] = React.useState<SiteUser | SiteUserPublic | null>(null)
     const [keyvar, setkeyvar] = useState(0);
 
+    const [isOwnProfile, setisOwnProfile] = useState(userData instanceof SiteUser)
+    
     /** Get user Data function */
-    const fetchUserData = useCallback(async () => {
+    async function fetchUserData() {
+        reloadIsLoggedIn();
         if (!id) return;
 
         if (userId != null) {
@@ -97,22 +91,23 @@ const ProfilePage: React.FC = () => {
 
         let UserData: SiteUserPublic | SiteUser | null = null;
 
-        if (isLoggedIn() && userId === Number(id)) {
+        if (isLoggedIn && Number(userId) === Number(id)) {
             UserData = await UserFactory.CreatePrivateUserByID(Number(id));
         } else {
             UserData = await UserFactory.CreatePublicUserByID(Number(id));
         }
 
         if (UserData != null) {
+            setisOwnProfile(UserData instanceof SiteUser)
             setUserData(UserData);
             setkeyvar(prev => prev + 1); // Only once, after setting data
         }
 
         setLoadingAddFriend(false);
         setIsLoadingFriendslist(false);
-    }, [id, userId]);
+    }
 
-    React.useEffect(() => {
+    useEffect(() => {
         fetchUserData();
     }, [userId, id, state]);
 
@@ -228,7 +223,7 @@ const ProfilePage: React.FC = () => {
                 <div className={'row'}>
                     <div className={'col-12 col-lg-7'}>
                         <div className={'profile-intro'} key={keyvar}>
-                                {(isOwnProfile() ) ? (
+                                {(isOwnProfile) ? (
                                     <div
                                         className={'profile-image-wrap editable'}
                                         onClick={handleOpenPfPDrawer}
@@ -274,7 +269,7 @@ const ProfilePage: React.FC = () => {
 
                                 <div className={'user-interaction'}>
                                     {/* Is current users own profile */}
-                                    {(isOwnProfile() ) ? (
+                                    {(isOwnProfile) ? (
                                         <>
                                             <CustomNavLink
                                                 classes={'btn btn-primary btn-settings'}
@@ -297,7 +292,7 @@ const ProfilePage: React.FC = () => {
                                     ) : (
                                         <>
                                         {/* Logged in user */}
-                                        {isLoggedIn() &&
+                                        {isLoggedIn &&
                                             <>
                                             {(loadingAddFriend) ? (
                                                 // Loading state

@@ -147,7 +147,7 @@ const OffcanvasMenu: React.FC<IControllerProp> = (prop) => {
                             </div>
 
                             {/* Login Nav */}
-                            {!isLoggedIn() &&
+                            {!isLoggedIn &&
                                 <CustomNavLink
                                     link={ROUTES.LOGIN_ROUTE}
                                     runfunc={() => {
@@ -162,7 +162,7 @@ const OffcanvasMenu: React.FC<IControllerProp> = (prop) => {
                             }
 
                             {/* Logged in Nav */}
-                            {isLoggedIn() &&
+                            {isLoggedIn &&
                                 <>
                                     <CustomNavLink
                                         link={'/profile/' + userId}

@@ -5,7 +5,8 @@ import {SiteUser} from "../classes/user_synod/site_user";
 interface AuthContextType {
     authToken: string | null;
     userId: number | null;
-    isLoggedIn: () => boolean;
+    isLoggedIn: boolean;
+    reloadIsLoggedIn: () => void;
     login: (token: string, id: number) => void;
     logout: () => void;
     SiteUser: SiteUser | null,

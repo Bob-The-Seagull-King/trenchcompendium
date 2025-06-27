@@ -71,7 +71,7 @@ const SynodLogin: React.FC<SynodLoginProps> = ({ onLoginSuccess }) => {
             {error && <p style={{ color: 'red' }}>{error}</p>}
             {message && <p style={{ color: 'green' }}>{message}</p>}
 
-            {!isLoggedIn() && (
+            {!isLoggedIn && (
                 <form onSubmit={handleSubmit}>
                     <div className="mb-3">
                         <label htmlFor="synod-login-email" className="form-label">Email address</label>
@@ -112,7 +112,7 @@ const SynodLogin: React.FC<SynodLoginProps> = ({ onLoginSuccess }) => {
                 </form>
             )}
 
-            {isLoggedIn() && (
+            {isLoggedIn && (
                 <div className="alert alert-success mt-3 mb-3">
                     {'You are logged in'}
                 </div>

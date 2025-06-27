@@ -12,14 +12,12 @@ import {useAuth} from "../../utility/AuthContext";
 import SynodImage from "../../utility/SynodImage";
 
 const SynodLoginPage: React.FC = () => {
-    const [authToken, setAuthToken] = useState<string | null>(null);
-    // const [userId, setUserId] = useState<number | null>(null);
 
     const [visbibleLogin, setvisbibleLogin] = useState(true);
     const [visbibleSignup, setvisbibleSignup] = useState(false);
     const [visbibleReset, setvisbibleReset] = useState(false);
 
-    const { userId, isLoggedIn, login, logout } = useAuth();
+    const { userId, login, logout, authToken } = useAuth();
 
     const showLogin = async function () {
         setvisbibleLogin(true);
@@ -43,9 +41,13 @@ const SynodLoginPage: React.FC = () => {
      */
     const navigate = useNavigate()
 
+    function isLoggedIn() {
+        return !!authToken && !!userId;
+    }
+
     useEffect(() => {
         if (isLoggedIn() && userId) {
-            navigate(`/profile/${userId}`)
+            navigate(`/profile/${userId}`,{state: Date.now().toString()})
         }
     }, [userId])
 

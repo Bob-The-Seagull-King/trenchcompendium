@@ -11,6 +11,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     const [SiteUser, setSiteUser] = useState<SiteUser | null>(null);
     const [loadingUser, setLoadingUser] = useState(true);
+    const [isLoggedIn, setIsLoggedIn] = useState((!!authToken && !!userId));
 
     // Load saved credentials from localStorage
     useEffect(() => {
@@ -31,6 +32,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
         setAuthToken(token);
         setUserId(id);
+        setIsLoggedIn((!!authToken && !!userId));
     };
 
     const logout = () => {
@@ -42,7 +44,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
         setAuthToken(null);
         setUserId(null);
+        setIsLoggedIn((!!authToken && !!userId));
     };
+
+
+    const reloadIsLoggedIn = () => {
+        setIsLoggedIn((!!authToken && !!userId));        
+    }
 
     /**
      * Load user data if is logged in
@@ -66,16 +74,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             }
         };
 
+        setIsLoggedIn((!!authToken && !!userId));
         fetchUserData();
     }, [userId]);
-
-    const isLoggedIn = () => {return (!!authToken && !!userId);}
 
     return (
         <AuthContext.Provider value={{
             authToken,
             userId,
             isLoggedIn,
+            reloadIsLoggedIn,
             login,
             logout,
             SiteUser,

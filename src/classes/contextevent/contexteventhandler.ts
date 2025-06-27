@@ -42,7 +42,7 @@ class EventRunner {
         let relay_variable = relayVar;
         let returnVal;
 
-        if (event_id == "x") {
+        if (event_id == "x") { // Used for testing, replace "X" with relevant event to test
             console.log("DEBUG OUTPUT: " + event_id)
             console.log(source_obj.GetTrueName())
             console.log(Events)

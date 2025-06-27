@@ -142,8 +142,6 @@ const ProfilePageFriends: React.FC<ProfilePageFriendsProps> = ({
             if (!res.ok) throw new Error('Search failed');
             const data = await res.json();
 
-            console.log(data);
-
             setSearchResults(data); // Assuming API returns SiteUserPublic[]
         } catch (e) {
             setError('Could not find any users for your query.');
