@@ -672,7 +672,7 @@ class WarbandMember extends DynamicContextObject {
 
         let maxcount = upg.WarbandLimit;
         maxcount = await Events.runEvent(
-            "getUpgradeLimitTrue",
+            "getUpgradeLimitTrue", // @TODO Lane
             upg,
             [],
             maxcount,
@@ -683,23 +683,16 @@ class WarbandMember extends DynamicContextObject {
         )
 
         let canaddupgrade = (await this.GetCountOfUpgradeCategory(category) < limit_of_category || category == "upgrades")
-        console.log("CHECK")
-        console.log(upg);
-        console.log(this.Upgrades);
-        console.log("Required")
         if (canaddupgrade) {
             for (let i = 0; i < upg.RequiredUpgrades.length; i++) {
-                console.log(upg.RequiredUpgrades[i])
                 if (this.HasUpgrade(upg.RequiredUpgrades[i]) == false) {
                     canaddupgrade = false;
                 }
             }
         }
 
-        console.log("Restricted")
         if (canaddupgrade) {
             for (let i = 0; i < upg.Retrictions.length; i++) {
-                console.log(upg.Retrictions[i])
                 if (this.HasUpgrade(upg.Retrictions[i]) == true) {
                     canaddupgrade = false;
                 }
@@ -711,7 +704,7 @@ class WarbandMember extends DynamicContextObject {
         }
         if (canaddupgrade) {
             canaddupgrade = await Events.runEvent(
-                "canModelGetUpgrade",
+                "canModelGetUpgrade", // @TODO Lane
                 upg,
                 [],
                 canaddupgrade,
@@ -749,10 +742,6 @@ class WarbandMember extends DynamicContextObject {
             const upgrade_raw = (this.Upgrades[i].HeldObject);
             if (upgrade_raw != undefined) {
                 const upgrade = (upgrade_raw as any as WarbandProperty).SelfDynamicProperty.OptionChoice as Upgrade;
-                console.log("HasUpgrade")
-                console.log(upgrade);
-                console.log(id)
-                console.log(upgrade.GetID())
                 if (upgrade.GetID() == id) {
                     return true;
                 }
