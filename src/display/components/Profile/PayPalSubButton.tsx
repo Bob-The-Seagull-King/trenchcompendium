@@ -10,17 +10,17 @@ declare const window: Window &
 
 const PayPalSubButton = ({
                              onSuccess,
+                             planId,
                          }: {
     onSuccess?: (subscriptionID: string) => void;
+    planId: string;
 }) => {
     const paypalRef = useRef<HTMLDivElement>(null);
-    const planId = "P-4YK72240DG152144TNBN7EKI"; // Your PayPal Plan ID
-    const clientId =
-        "AREbTEkX_IfbYs5fjuz54_aCppkKrZi_lWfZXIGWt4DSw_gwF9zfQ40gLB8SeUU5yNrehIgeeIG5uuED"; // Your Sandbox Client ID
+
+    const hasRenderedRef = useRef(false); // âœ… Track if already rendered
+    const scriptId = "paypal-js-sdk";
 
     useEffect(() => {
-        const scriptId = "paypal-js-sdk";
-
         async function handleApproval(subscriptionID: string, planID: string) {
             console.log("Handling approval internally: ", subscriptionID);
 
@@ -29,8 +29,6 @@ const PayPalSubButton = ({
 
             try {
                 const response = await axios.post(`${SYNOD.URL}/wp-json/synod-payment/v1/create-subscription`, {
-                    title: 'Subscription started at ' + new Date().toLocaleString(),
-                    status: 'publish',
                     meta: {
                         paypal_subscription_id: subscriptionID,
                         paypal_plan_id: planID
@@ -54,6 +52,9 @@ const PayPalSubButton = ({
         }
 
         function renderButton() {
+            if (hasRenderedRef.current || !paypalRef.current) return;
+
+
             if (!window.paypal || !paypalRef.current) return;
 
             window.paypal
@@ -75,17 +76,20 @@ const PayPalSubButton = ({
                     },
                 })
                 .render(paypalRef.current);
+
+            hasRenderedRef.current = true; // ✅ Mark as rendered
         }
 
         if (!document.getElementById(scriptId)) {
             const script = document.createElement("script");
-            script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}&vault=true&intent=subscription`;
+            script.src = `https://www.paypal.com/sdk/js?client-id=${SYNOD.PP_CLIENT_ID}&vault=true&intent=subscription`;
             script.id = scriptId;
             script.addEventListener("load", renderButton);
             document.body.appendChild(script);
         } else {
             renderButton();
         }
+
     }, [planId, onSuccess]);
 
     return <div ref={paypalRef} />;

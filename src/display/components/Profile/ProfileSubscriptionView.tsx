@@ -3,6 +3,9 @@ import PayPalSubButton from "./PayPalSubButton";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faChevronLeft, faChevronRight, faClose} from "@fortawesome/free-solid-svg-icons";
 import TCIcon from '../../../resources/images/Trench-Companion-Icon.png';
+import {useNavigate} from "react-router-dom";
+import {useAuth} from "../../../utility/AuthContext";
+import {ROUTES} from "../../../resources/routes-constants";
 /**
  * This component shows the subscription management
  *
@@ -20,6 +23,9 @@ const ProfileSubscriptionView: React.FC = () => {
     // @TODO: This is a placeholder var -> replace with user status
     const isSubscribed = false;
 
+    const navigate = useNavigate();
+    const { isLoggedIn, userId, authToken, logout } = useAuth();
+
     return (
         <div className={'ProfileSubscriptionView'}>
 
@@ -34,9 +40,14 @@ const ProfileSubscriptionView: React.FC = () => {
                         <li>{'Subscription ID: '}{'X-362904519-P'}</li>
                     </ul>
 
-                    <button className={'btn btn-primary'}>
+                    <a className={'btn btn-primary'}
+                        href={ROUTES.PAGE_PLAN_SELECTION}
+                       onClick={() => (
+                        navigate(ROUTES.PAGE_PLAN_SELECTION)
+                    )}
+                    >
                         {'Change Plans'}
-                    </button>
+                    </a>
 
                     <button className={'btn btn-secondary secondary-action'}>
                         <FontAwesomeIcon icon={faClose} className="icon-inline-left-s"/>
@@ -71,11 +82,15 @@ const ProfileSubscriptionView: React.FC = () => {
                         </li>
                     </ul>
 
-                    <button className={'btn btn-primary'}>
+                    <a className={'btn btn-primary'}
+                       href={ROUTES.PAGE_PLAN_SELECTION}
+                       onClick={() => (
+                           navigate(ROUTES.PAGE_PLAN_SELECTION)
+                       )}
+                    >
                         {'See Plans'}
                         <FontAwesomeIcon icon={faChevronRight} className="icon-inline-right-l"/>
-                    </button>
-
+                    </a>
                 </>
             )}
 

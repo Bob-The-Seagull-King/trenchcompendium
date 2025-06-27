@@ -1,0 +1,94 @@
+// // // // //
+//
+// Plan selection Items
+// - these are located on the static Plan selection page
+//
+
+.PlanSelectionItem
+    padding: 25px 15px
+    background-color: $color-bg-3
+    margin-bottom: 15px
+
+    .details-list
+        list-style-type: none
+        padding: 0
+        margin-top: 20px
+        margin-bottom: 20px
+
+        .icon
+            height: 20px
+            width: auto
+            margin-right: 5px
+
+    .price-details
+        margin-bottom: 20px
+
+        .price-main
+            font-size: 22px
+        .price-cycle
+            font-size: 16px
+
+        .price-sub
+            font-size: 14px
+
+    .select-plan-btn
+
+.purchaseSubModal
+    &.purchaseSubModalMonthly
+    &.purchaseSubModalYearly
+
+    .benefits-wrap
+        border: 1px solid $color-highlight-bg-2
+        background-color: $color-highlight-bg-2-50
+        padding: 15px
+        margin-bottom: 15px
+
+
+    .benefits-list
+        list-style-type: none
+        padding: 0
+        margin: 0px
+
+        .icon
+            height: 20px
+            width: auto
+            margin-right: 5px
+
+    .details-wrap
+        .details-wrap-headline
+            font-weight: bold
+            margin: 20px 0 10px
+
+        .fine-print
+            font-size: 14px
+            margin-bottom: 5px
+    .details-list
+        padding: 0
+        margin: 0 0 20px
+        list-style-type: none
+
+        > li
+            margin: 3px 0
+        .label
+            font-weight: bold
+            display: inline-block
+            margin-right: 5px
+
+    .submit-wrap
+        position: relative
+        margin-top: 30px
+
+        &.disabled
+            opacity: .3
+            cursor: not-allowed
+
+            &:before
+                content: ""
+                display: block
+                position: absolute
+                z-index: 101
+                top: 0
+                bottom: 0
+                left: 0
+                right: 0
+                width: 100%

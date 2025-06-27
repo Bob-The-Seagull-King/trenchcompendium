@@ -44,6 +44,7 @@ import StaticPremiumMembership from "./display/pages/StaticPremiumMembership";
 import StaticSupporterPacks from "./display/pages/StaticSupporterPacks";
 import StaticCollaborate from "./display/pages/StaticCollaborate";
 import StaticAbout from './display/pages/StaticAbout'
+import StaticPlanSelection from "./display/pages/StaticPlanSelection";
 
 
 const App: React.FC = () => {
@@ -101,6 +102,10 @@ const App: React.FC = () => {
                                 <Route path={ROUTES.PAGE_MEMBERSHIP} element={<StaticPremiumMembership />} /> {/* Withdrawal Page */}
                                 <Route path={ROUTES.PAGE_SUPPORTER_PACKS} element={<StaticSupporterPacks />} /> {/* Withdrawal Page */}
                                 <Route path={ROUTES.PAGE_COLLABORATE} element={<StaticCollaborate />} /> {/* Withdrawal Page */}
+
+                                {/* Static Pages - Membership & Purchases */}
+                                <Route path={ROUTES.PAGE_PLAN_SELECTION} element={<StaticPlanSelection />} /> {/* Membership Plan Selection Page */}
+
 
                             </Routes>
 
