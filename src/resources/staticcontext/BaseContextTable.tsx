@@ -465,19 +465,21 @@ export const BaseContextCallTable : CallEventTable = {
             const { ModelFactory } = await import("../../factories/features/ModelFactory");
             if (trackVal == true) {
                 if (context_func["match"]) {
-                    if (context_func["match"][0]["type"] == "model") {
-                        const ModelItem = await ModelFactory.CreateNewModel(context_func["match"][0]["value"], null)
-                        let prelude = ""
+                    for (let i  = 0; i < context_func["match"].length; i++) {
+                        if (context_func["match"][i]["type"] == "model") {
+                            const ModelItem = await ModelFactory.CreateNewModel(context_func["match"][i]["value"], null)
+                            let prelude = ""
 
-                        if (context_func["match"][0]["modifier"]) {
-                            if (context_func["match"][0]["modifier"] == 'half') {
-                                prelude = "Half your "
+                            if (context_func["match"][i]["modifier"]) {
+                                if (context_func["match"][i]["modifier"] == 'half') {
+                                    prelude = "Half your "
+                                }
+                            } else {
+                                prelude = "Number of "
                             }
-                        } else {
-                            prelude = "Number of "
-                        }
 
-                        return [prelude + ModelItem.Name]
+                            return [prelude + ModelItem.Name]
+                        }
                     }
                 }
                 if (context_func["warband_limit"]) {
@@ -488,7 +490,29 @@ export const BaseContextCallTable : CallEventTable = {
             }
 
             return relayVar;
+        },
+        async getUpgradeLimitTrue(this: EventRunner, eventSource : any, relayVar : number,  trackVal : MemberAndWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            if (context_func["match"]) {
+                
+                for (let i  = 0; i < context_func["match"].length; i++) {
+                    if (context_func["match"][i]["type"] == "model") {
+                        const count = await trackVal.warband.GetCountOfModel(context_func["match"][0]["value"]);
+                        if (context_func["match"][i]["modifier"] == "half") {
+                            return Math.floor(count * 0.5);
+                        }
+                    }
+                }
+            }
+            if (context_func["warband_limit"]) {
+                for (let i = 0; i < context_func["warband_limit"].length; i++) {
+                    /** @TODO When we figure out campaign attatchment and warband limit */
+                    return relayVar;
+                }
+            }
+            
+            return relayVar;
         }
+            
     },
     override_required_upgrade: {
         event_priotity: 1,
