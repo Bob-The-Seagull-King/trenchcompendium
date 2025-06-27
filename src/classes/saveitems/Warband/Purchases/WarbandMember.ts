@@ -619,62 +619,62 @@ class WarbandMember extends DynamicContextObject {
 
             for (let j = 0; j < Groups[special_cat].length; j++) {
 
-                let foundpurchase : WarbandPurchase | null = null;
-                for (let k = 0; k < this.Upgrades.length; k++) {
-                    if ((this.Upgrades[k].HeldObject as Upgrade).ID == Groups[special_cat][j].UpgradeObject.ID) {
-                        foundpurchase = this.Upgrades[k];
-                    }
-                }
-    
-                let maxcount = Groups[special_cat][j].WarbandLimit;
-                maxcount = await Events.runEvent(
-                    "getUpgradeLimitTrue",
-                    Groups[special_cat][j],
-                    [],
-                    maxcount,
-                    {
-                        warband: this.MyContext,
-                        model: this
-                    }
-                )
-                let canaddupgrade = ((this.MyContext as UserWarband).GetCountOfUpgradeRel(Groups[special_cat][j].ID) < maxcount || ((Groups[special_cat][j].WarbandLimit == 0)))
-                
-                if (canaddupgrade) {
-                    canaddupgrade = await Events.runEvent(
-                        "canModelGetUpgrade",
-                        Groups[special_cat][j],
-                        [],
-                        canaddupgrade,
-                        {
-                            warband: this.MyContext,
-                            model: this
-                        }
-                    )
-                }
-
+                const Presentation : MemberUpgradePresentation = await this.CalcGivenPurchase(Groups[special_cat][j]);
                 if (completegroups[special_cat]) {
-                    completegroups[special_cat].upgrades.push(
-                            {
-                                upgrade : Groups[special_cat][j],
-                                purchase : foundpurchase,
-                                allowed : canaddupgrade
-                            }
-                    )
+                    completegroups[special_cat].upgrades.push(Presentation)
                 } else {
                     completegroups[special_cat] = 
                         {
                             limit: limit_of_category,
-                            upgrades: [{
-                                upgrade : Groups[special_cat][j],
-                                purchase : foundpurchase,
-                                allowed : canaddupgrade
-                            }]
+                            upgrades: [Presentation]
                     }
                 }
             }
         }
         return completegroups;
 
+    }
+
+    public async CalcGivenPurchase(upg : ModelUpgradeRelationship): Promise<MemberUpgradePresentation> {
+
+        const Events : EventRunner = new EventRunner();
+        let foundpurchase : WarbandPurchase | null = null;
+        for (let k = 0; k < this.Upgrades.length; k++) {
+            if ((this.Upgrades[k].HeldObject as Upgrade).ID == upg.UpgradeObject.ID) {
+                foundpurchase = this.Upgrades[k];
+            }
+        }
+
+        let maxcount = upg.WarbandLimit;
+        maxcount = await Events.runEvent(
+            "getUpgradeLimitTrue",
+            upg,
+            [],
+            maxcount,
+            {
+                warband: this.MyContext,
+                model: this
+            }
+        )
+        let canaddupgrade = ((this.MyContext as UserWarband).GetCountOfUpgradeRel(upg.ID) < maxcount || ((upg.WarbandLimit == 0)))
+        
+        if (canaddupgrade) {
+            canaddupgrade = await Events.runEvent(
+                "canModelGetUpgrade",
+                upg,
+                [],
+                canaddupgrade,
+                {
+                    warband: this.MyContext,
+                    model: this
+                }
+            )
+        }
+        return {
+            upgrade : upg,
+            purchase : foundpurchase,
+            allowed : canaddupgrade
+        }
     }
 
     public async getContextuallyAvailableKeywords() : Promise<Keyword[]> {

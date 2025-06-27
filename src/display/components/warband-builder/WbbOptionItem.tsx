@@ -25,7 +25,8 @@ const WbbOptionItem: React.FC<WbbOptionItemProps> = ({ option, owner }) => {
     const [open, setOpen] = useState(false);
     const [keyvar, setkeyvar] = useState(0);
     const [selected, setSelected] = useState(option.purchase != null);
-    const [canselect, setcanselect] = useState(option.allowed || option.purchase != null);
+    const [allowed, setAllowed] = useState(option.allowed)
+    const [canselect, setcanselect] = useState(allowed || option.purchase != null);
 
     const { warband, reloadDisplay, updateKey} = useWarband();
 
@@ -35,12 +36,12 @@ const WbbOptionItem: React.FC<WbbOptionItemProps> = ({ option, owner }) => {
             owner.DeleteUpgrade(option.purchase).then(() => {
                 option.purchase = null;
                 setkeyvar(keyvar + 1)
+                owner.CalcGivenPurchase(option.upgrade).then(() => {
                 const Manager : ToolsController = ToolsController.getInstance();
                 Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
-                    () => {
-                    reloadDisplay()                
-                    setcanselect(true);
-                    })
+                () => {
+                    reloadDisplay()
+                    })})
             })
         } else {
             
@@ -48,11 +49,13 @@ const WbbOptionItem: React.FC<WbbOptionItemProps> = ({ option, owner }) => {
             owner.AddUpgrade(option.upgrade).then((result) => {
                 option.purchase = result;
                 setkeyvar(keyvar + 1)
+                
+                owner.CalcGivenPurchase(option.upgrade).then(() => {
                 const Manager : ToolsController = ToolsController.getInstance();
                 Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
                     () => {
                         reloadDisplay()
-                        })
+                        })})
             })
         }
     };
@@ -68,6 +71,17 @@ const WbbOptionItem: React.FC<WbbOptionItemProps> = ({ option, owner }) => {
             setOpen(false);
         }
     }, [playMode, printMode]);
+
+    useEffect(() => {
+        async function CheckAllowed() {
+            setAllowed((await owner.CalcGivenPurchase(option.upgrade)).allowed)
+        }
+        CheckAllowed()
+    }, []);
+
+    useEffect(() => {
+        setcanselect(allowed || option.purchase != null)
+    })
 
     return (
         <div className="WbbOptionItem" key={updateKey.toString() + keyvar.toString()}>
