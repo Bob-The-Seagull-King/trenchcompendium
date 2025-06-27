@@ -1,11 +1,14 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PayPalSubButton from "./PayPalSubButton";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faChevronLeft, faChevronRight, faClose} from "@fortawesome/free-solid-svg-icons";
+import {faChevronLeft, faChevronRight, faClose, faXmark} from "@fortawesome/free-solid-svg-icons";
 import TCIcon from '../../../resources/images/Trench-Companion-Icon.png';
 import {useNavigate} from "react-router-dom";
 import {useAuth} from "../../../utility/AuthContext";
 import {ROUTES} from "../../../resources/routes-constants";
+import Modal from "react-bootstrap/Modal";
+import {SYNOD} from "../../../resources/api-constants";
+import {synodCancelSubscription} from "../../../utility/SynodSubscriptionFunctions";
 /**
  * This component shows the subscription management
  *
@@ -26,6 +29,20 @@ const ProfileSubscriptionView: React.FC = () => {
     const navigate = useNavigate();
     const { isLoggedIn, userId, authToken, logout } = useAuth();
 
+    const [cancelSubModalOpen, setCancelSubModalOpen] = useState(false);
+    const handleCloseCancelSub = () => setCancelSubModalOpen(false);
+
+    const handleCancelSub = async (subscriptionId: string) => {
+        try {
+            const result = await synodCancelSubscription(subscriptionId);
+            alert(result.message || 'Subscription cancelled!');
+            // Optionally reload or update local state here
+        } catch {
+            alert('Could not cancel subscription.');
+        }
+    };
+
+
     return (
         <div className={'ProfileSubscriptionView'}>
 
@@ -37,7 +54,7 @@ const ProfileSubscriptionView: React.FC = () => {
                     <ul className={'details-list'}>
                         <li>{'Subscription Status: '}{'Active'}</li>
                         <li>{'Next Payment: '}{'01.01.2026'}</li>
-                        <li>{'Subscription ID: '}{'X-362904519-P'}</li>
+                        <li>{'Subscription ID: '}{'I-S4UA948NKD4V'}</li>
                     </ul>
 
                     <a className={'btn btn-primary'}
@@ -49,10 +66,47 @@ const ProfileSubscriptionView: React.FC = () => {
                         {'Change Plans'}
                     </a>
 
-                    <button className={'btn btn-secondary secondary-action'}>
+                    <button className={'btn btn-secondary secondary-action'}
+                            onClick={() => setCancelSubModalOpen(true)}
+                    >
                         <FontAwesomeIcon icon={faClose} className="icon-inline-left-s"/>
                         {'Cancel Subscription'}
                     </button>
+
+                    <Modal show={cancelSubModalOpen} size="lg"
+                           contentClassName=""
+                           dialogClassName="" keyboard={true}
+                           onhide={handleCloseCancelSub}
+                           centered>
+                        <Modal.Header closeButton={false}>
+                            <Modal.Title>Cancel your subscription</Modal.Title>
+
+                            <FontAwesomeIcon
+                                icon={faXmark}
+                                className="modal-close-icon"
+                                role="button"
+                                onClick={handleCloseCancelSub}
+                            />
+                        </Modal.Header>
+
+                        <Modal.Body>
+                            <p><i>
+                                {'We are sad to see you go. We hope to see you again in the future.'}
+                            </i></p>
+
+                            <hr />
+
+                            <p>
+                                {'Do you really want to cancel your subscription? '}
+                            </p>
+
+                            <button className={'btn btn-primary'}
+                                    onClick={() => handleCancelSub('I-S4UA948NKD4V')}
+                            >
+                                {'Cancel Subscription'}
+                            </button>
+                        </Modal.Body>
+                    </Modal>
                 </>
             ) : (
                 <>
