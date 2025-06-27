@@ -10,6 +10,8 @@ import {faChevronLeft, faCircleNotch, faFloppyDisk} from "@fortawesome/free-soli
 import {ToastContainer, toast} from "react-toastify";
 import { SynodDataCache } from '../../classes/_high_level_controllers/SynodDataCache';
 import ProfileSubscriptionView from "../components/Profile/ProfileSubscriptionView";
+import {SiteUser} from "../../classes/user_synod/site_user";
+import {UserFactory} from "../../factories/synod/UserFactory";
 
 
 
@@ -119,8 +121,6 @@ const ProfileSettingsPage: React.FC = () => {
             />
         </div>
     )
-
-
 
 
     return (

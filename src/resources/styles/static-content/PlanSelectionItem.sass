@@ -9,6 +9,9 @@
     background-color: $color-bg-3
     margin-bottom: 15px
 
+    &.current-plan
+        border: 1px solid $green
+
     .details-list
         list-style-type: none
         padding: 0
@@ -21,7 +24,7 @@
             margin-right: 5px
 
     .price-details
-        margin-bottom: 20px
+        margin-bottom: 0px
 
         .price-main
             font-size: 22px
@@ -32,6 +35,11 @@
             font-size: 14px
 
     .select-plan-btn
+        margin-top: 20px
+
+    .current-plan-hint
+        i, svg
+            color: $green
 
 .purchaseSubModal
     &.purchaseSubModalMonthly

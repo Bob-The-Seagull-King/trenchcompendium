@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import {SiteUser} from "../classes/user_synod/site_user";
 
 // Define the shape of your global state
 interface AuthContextType {
@@ -7,6 +8,8 @@ interface AuthContextType {
     isLoggedIn: () => boolean;
     login: (token: string, id: number) => void;
     logout: () => void;
+    SiteUser: SiteUser | null,
+    loadingUser: boolean,
 }
 
 // Create the context

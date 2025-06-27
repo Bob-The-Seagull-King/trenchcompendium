@@ -4,7 +4,7 @@
 
 import React, {useState} from 'react'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faChevronLeft, faChevronRight, faClose, faXmark} from "@fortawesome/free-solid-svg-icons";
+import {faCheck, faChevronLeft, faChevronRight, faClose, faXmark} from "@fortawesome/free-solid-svg-icons";
 import {useNavigate} from "react-router-dom";
 import {useAuth} from "../../utility/AuthContext";
 import TCIcon from "../../resources/images/Trench-Companion-Icon.png";
@@ -12,11 +12,12 @@ import StaticFaq from "../static-content/StaticFaq";
 import Modal from "react-bootstrap/Modal";
 import PayPalSubButton from "../components/Profile/PayPalSubButton";
 import {SYNOD} from "../../resources/api-constants";
+import LoadingOverlay from "../components/generics/Loading-Overlay";
 
 const StaticPlanSelection: React.FC = () => {
 
     const navigate = useNavigate();
-    const { isLoggedIn, userId, authToken, logout } = useAuth();
+    const { isLoggedIn, userId, authToken,  loadingUser, SiteUser } = useAuth();
 
     const handleSunscription = (subscriptionID: string) => {
         alert('Subscription successful with ID: '+ subscriptionID);
@@ -28,10 +29,11 @@ const StaticPlanSelection: React.FC = () => {
     /** Monthly */
     const [purchaseMonthlyModalOpen, setPurchaseMonthlyModalOpen] = useState(false);
     const handleClosePurchaseMonthly = () => setPurchaseMonthlyModalOpen(false);
-    const benefitsMothly = [
+    const benefitsMonthly = [
         "Get the first monthly membership for free",
         "Cancel any time - no questions asked",
         "Billed monthly",
+        "Enjoy an ad-free experience",
         "Unlock extra features for your account",
     ];
 
@@ -46,6 +48,7 @@ const StaticPlanSelection: React.FC = () => {
         "Save over 15% on your subscription",
         "Cancel any time - no questions asked",
         "Billed yearly",
+        "Enjoy an ad-free experience",
         "Unlock extra features for your account",
     ];
 
@@ -53,6 +56,21 @@ const StaticPlanSelection: React.FC = () => {
     const [agreePrivacyY, setAgreePrivacyY] = useState(false);
     const isFormValidY = agreeTermsY && agreePrivacyY;
 
+    if( loadingUser || !SiteUser ) {
+        return (
+            <div className={'StaticPlanSelection'}>
+                <div className={'spacer-20'}/>
+                <div className={'spacer-20'}/>
+
+                <LoadingOverlay
+                    message={'Loading your Membership'}
+                />
+
+                <div className={'spacer-20'}/>
+                <div className={'spacer-20'}/>
+            </div>
+        );
+    }
 
     return (
         <div className="StaticPlanSelection page-static">
@@ -71,13 +89,19 @@ const StaticPlanSelection: React.FC = () => {
 
             <div className={'container'}>
 
-                <div className={'PlanSelectionItem'}>
+                <div className={`PlanSelectionItem ${SiteUser.GetPlanID() === SYNOD.PP_PLAN_MONTH_ID ? 'current-plan' : ''}`}>
                     <h2>
-                        {'Trench Companion Plus - Monthly'}
+                        {SYNOD.PLAN_M_NAME}
                     </h2>
+                    { SiteUser.GetPlanID() == SYNOD.PP_PLAN_MONTH_ID && (
+                        <div className={'current-plan-hint'}>
+                            <FontAwesomeIcon icon={faCheck} className="icon-inline-left-l"/>
+                            {'Your Current Plan'}
+                        </div>
+                    )}
 
                     <ul className={'details-list'}>
-                        {benefitsMothly.map((benefit, index) => (
+                        {benefitsMonthly.map((benefit, index) => (
                             <li key={index}>
                                 <img src={TCIcon} alt="Icon" className={'icon'} width={20} height={20}/>
                                 {benefit}
@@ -100,12 +124,15 @@ const StaticPlanSelection: React.FC = () => {
                         </div>
                     </div>
 
-                    <button className={'btn btn-primary'}
-                            onClick={() => setPurchaseMonthlyModalOpen(true)}
-                    >
-                        {'Select Plan'}
-                        <FontAwesomeIcon icon={faChevronRight} className="icon-inline-right-l"/>
-                    </button>
+                    { SiteUser.GetPlanID() != SYNOD.PP_PLAN_MONTH_ID && (
+                        <button className={'btn btn-primary'}
+                                onClick={() => setPurchaseMonthlyModalOpen(true)}
+                        >
+                            {'Select Plan'}
+                            <FontAwesomeIcon icon={faChevronRight} className="icon-inline-right-l"/>
+                        </button>
+                    )}
+
 
                     <Modal show={purchaseMonthlyModalOpen} size="lg"
                            contentClassName="purchaseSubModal purchaseSubModalMonthly"
@@ -113,7 +140,7 @@ const StaticPlanSelection: React.FC = () => {
                            onhide={handleClosePurchaseMonthly}
                            centered>
                         <Modal.Header closeButton={false}>
-                            <Modal.Title>Trench Companion Plus - Monthly</Modal.Title>
+                            <Modal.Title>{SYNOD.PLAN_M_NAME}</Modal.Title>
 
                             <FontAwesomeIcon
                                 icon={faXmark}
@@ -126,7 +153,7 @@ const StaticPlanSelection: React.FC = () => {
                         <Modal.Body >
                             <div className={'benefits-wrap'}>
                                 <ul className={'benefits-list'}>
-                                    {benefitsMothly.map((benefit, index) => (
+                                    {benefitsMonthly.map((benefit, index) => (
                                         <li key={index}>
                                             <img src={TCIcon} alt="Icon" className={'icon'} width={20} height={20}/>
                                             {benefit}
@@ -222,10 +249,17 @@ const StaticPlanSelection: React.FC = () => {
                     </Modal>
                 </div>
 
-                <div className={'PlanSelectionItem'}>
+                <div className={`PlanSelectionItem ${SiteUser.GetPlanID() === SYNOD.PP_PLAN_YEAR_ID ? 'current-plan' : ''}`}>
                     <h2>
-                        {'Trench Companion Plus - Yearly'}
+                        {SYNOD.PLAN_Y_NAME}
                     </h2>
+
+                    { SiteUser.GetPlanID() == SYNOD.PP_PLAN_YEAR_ID && (
+                        <div className={'current-plan-hint'}>
+                            <FontAwesomeIcon icon={faCheck} className="icon-inline-left-l"/>
+                            {'Your Current Plan'}
+                        </div>
+                    )}
 
                     <ul className={'details-list'}>
                         {benefitsYearly.map((benefit, index) => (
@@ -251,21 +285,24 @@ const StaticPlanSelection: React.FC = () => {
                         </div>
                     </div>
 
-                    <button className={'btn btn-primary select-plan-btn'}
-                            onClick={() => setPurchaseYearlyModalOpen(true)}
-                    >
-                        {'Select Plan'}
-                        <FontAwesomeIcon icon={faChevronRight} className="icon-inline-right-l"/>
-                    </button>
+                    { SiteUser.GetPlanID() != SYNOD.PP_PLAN_YEAR_ID && (
+                        <button className={'btn btn-primary select-plan-btn'}
+                                onClick={() => setPurchaseYearlyModalOpen(true)}
+                        >
+                            {'Select Plan'}
+                            <FontAwesomeIcon icon={faChevronRight} className="icon-inline-right-l"/>
+                        </button>
+                    )}
+
                 </div>
 
                 <Modal show={purchaseYearlyModalOpen} size="lg"
                        contentClassName="purchaseSubModal purchaseSubModalYearly"
                        dialogClassName="" keyboard={true}
                        onhide={handleClosePurchaseYearly}
-                centered>
+                       centered>
                     <Modal.Header closeButton={false}>
-                        <Modal.Title>Trench Companion Plus - Yearly</Modal.Title>
+                        <Modal.Title>{SYNOD.PLAN_Y_NAME}</Modal.Title>
 
                         <FontAwesomeIcon
                             icon={faXmark}

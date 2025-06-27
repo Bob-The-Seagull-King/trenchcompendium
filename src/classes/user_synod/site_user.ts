@@ -353,6 +353,59 @@ class SiteUser {
     public async GetAchievements () {
         return this.Achievements;
     }
+
+    /**
+     * Returns the Subscription ID for the user or null
+     * // @TODO: lane, please hook this up to the API data
+     *
+     * @return string | null
+     */
+    public GetSubscriptionID () {
+
+        return 'I-16NGU7DURWJW';
+    }
+
+    /**
+     * Returns the Plan ID for the user or null
+     * // @TODO: lane, please hook this up to the API data
+     *
+     * @return string | null
+     */
+    public GetPlanID () {
+        return 'P-4YK72240DG152144TNBN7EKI';
+    }
+
+
+    /**
+     * Returns the membership state
+     * // @TODO: lane, please hook this up to the API data
+     * @return bool
+     */
+    public IsPremium () {
+        return true;
+    }
+
+    /**
+     * Returns the timestamp when the premium runs out or false
+     * // @TODO: lane, please hook this up to the API data
+     *
+     * @return int | false
+     */
+    public PremiumUntil () {
+        const api_timestamp = 1756305105;
+
+        return api_timestamp * 1000;
+    }
+
+    public PremiumUntilFormat () {
+        const date = new Date(this.PremiumUntil());
+
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const year = date.getFullYear();
+
+        return `${day}.${month}.${year}`;
+    }
 }
 
 export {ISiteUser, SiteUser}

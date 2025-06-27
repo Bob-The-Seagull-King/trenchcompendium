@@ -9,6 +9,7 @@ import {ROUTES} from "../../../resources/routes-constants";
 import Modal from "react-bootstrap/Modal";
 import {SYNOD} from "../../../resources/api-constants";
 import {synodCancelSubscription} from "../../../utility/SynodSubscriptionFunctions";
+import LoadingOverlay from "../generics/Loading-Overlay";
 /**
  * This component shows the subscription management
  *
@@ -27,7 +28,7 @@ const ProfileSubscriptionView: React.FC = () => {
     const isSubscribed = true;
 
     const navigate = useNavigate();
-    const { isLoggedIn, userId, authToken, logout } = useAuth();
+    const { isLoggedIn, userId, authToken, logout, SiteUser, loadingUser } = useAuth();
 
     const [cancelSubModalOpen, setCancelSubModalOpen] = useState(false);
     const handleCloseCancelSub = () => setCancelSubModalOpen(false);
@@ -36,25 +37,60 @@ const ProfileSubscriptionView: React.FC = () => {
         try {
             const result = await synodCancelSubscription(subscriptionId);
             alert(result.message || 'Subscription cancelled!');
+            window.location.reload();
             // Optionally reload or update local state here
         } catch {
             alert('Could not cancel subscription.');
         }
     };
 
+    /**
+     * Fallback, if the user data is still loading
+     */
+    if( loadingUser || !SiteUser ) {
+        return (
+            <div className={'ProfileSubscriptionView'}>
+                <LoadingOverlay
+                    message={'Loading your Membership'}
+                />
+            </div>
+        );
+    }
 
     return (
         <div className={'ProfileSubscriptionView'}>
 
-            { isSubscribed ? (
+            { SiteUser.IsPremium() ? (
                 <>
                     <h3>{'Your Plan'}</h3>
-                    <h4>{'Trench Companion plus monthly'}</h4>{/* @TODO: replace with actual data */}
+                    <h4>
+                        {/* Monthly Sub */}
+                        { SiteUser.GetPlanID() == SYNOD.PP_PLAN_MONTH_ID && (
+                            <>
+                                {SYNOD.PLAN_M_NAME}
+                            </>
+                        )}
+
+                        {/* Yearly Sub */}
+                        { SiteUser.GetPlanID() == SYNOD.PP_PLAN_YEAR_ID && (
+                            <>
+                                {SYNOD.PLAN_Y_NAME}
+                            </>
+                        )}
+
+                        {/* Other Means */}
+                        { (SiteUser.GetPlanID() != SYNOD.PP_PLAN_MONTH_ID && SiteUser.GetPlanID() != SYNOD.PP_PLAN_YEAR_ID )&& (
+                            <>
+                                {'Trench Companion Plus'}
+                            </>
+                        )}
+
+                    </h4>
 
                     <ul className={'details-list'}>
                         <li>{'Subscription Status: '}{'Active'}</li>
-                        <li>{'Next Payment: '}{'01.01.2026'}</li>
-                        <li>{'Subscription ID: '}{'I-S4UA948NKD4V'}</li>
+                        <li>{'Next Payment: '}{SiteUser.PremiumUntilFormat()}</li>
+                        <li>{'Subscription ID: '}{SiteUser.GetSubscriptionID()}</li>
                     </ul>
 
                     <a className={'btn btn-primary'}
@@ -101,7 +137,7 @@ const ProfileSubscriptionView: React.FC = () => {
                             </p>
 
                             <button className={'btn btn-primary'}
-                                    onClick={() => handleCancelSub('I-S4UA948NKD4V')}
+                                    onClick={() => handleCancelSub(SiteUser.GetSubscriptionID())}
                             >
                                 {'Cancel Subscription'}
                             </button>

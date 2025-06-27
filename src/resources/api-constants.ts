@@ -12,6 +12,9 @@ export const SYNOD = {
     DEV: 'http://synod.trench-companion.test', // for reference
     URL: 'https://synod.trench-companion.com', // The currently used API url
 
+    PLAN_M_NAME: 'Trench Companion Plus - Monthly',
+    PLAN_Y_NAME: 'Trench Companion Plus - Yearly',
+
     PP_PLAN_MONTH_ID: 'P-4YK72240DG152144TNBN7EKI', // The Plan-ID for the monthly paypal subscription
     PP_PLAN_MONTH_ID_SANDBOX: 'P-4YK72240DG152144TNBN7EKI', // Reference
     PP_PLAN_MONTH_ID_LIVE: 'P-1RH12116WR818940FNAVTBDI', // Reference

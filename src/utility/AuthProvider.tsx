@@ -1,11 +1,16 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { AuthContext } from './AuthContext';
 import { ToolsController } from '../classes/_high_level_controllers/ToolsController';
+import {SiteUser} from "../classes/user_synod/site_user";
+import {UserFactory} from "../factories/synod/UserFactory";
 
 // Create the provider component
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [authToken, setAuthToken] = useState<string | null>(null);
     const [userId, setUserId] = useState<number | null>(null);
+
+    const [SiteUser, setSiteUser] = useState<SiteUser | null>(null);
+    const [loadingUser, setLoadingUser] = useState(true);
 
     // Load saved credentials from localStorage
     useEffect(() => {
@@ -39,10 +44,43 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setUserId(null);
     };
 
+    /**
+     * Load user data if is logged in
+     */
+    useEffect(() => {
+        const fetchUserData = async () => {
+            if (!userId) {
+                setSiteUser(null);
+                setLoadingUser(false);
+                return;
+            }
+
+            try {
+                const user = await UserFactory.CreatePrivateUserByID(userId);
+                setSiteUser(user);
+            } catch (err) {
+                console.error('Error loading user data:', err);
+                setSiteUser(null);
+            } finally {
+                setLoadingUser(false);
+            }
+        };
+
+        fetchUserData();
+    }, [userId]);
+
     const isLoggedIn = () => {return (!!authToken && !!userId);}
 
     return (
-        <AuthContext.Provider value={{ authToken, userId, isLoggedIn, login, logout }}>
+        <AuthContext.Provider value={{
+            authToken,
+            userId,
+            isLoggedIn,
+            login,
+            logout,
+            SiteUser,
+            loadingUser,
+        }}>
             {children}
         </AuthContext.Provider>
     );
