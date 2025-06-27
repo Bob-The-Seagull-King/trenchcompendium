@@ -14,7 +14,7 @@ interface IModelUpgradeRelationship extends IStaticOptionContextObject {
     upgrade_id : string,
     cost : number,
     cost_type : number,
-    restricted_upgrades : ModelUpgradeRestriction[],
+    restricted_upgrades : string[],
     warband_limit : number,
     required_upgrades : string[]
 }
@@ -32,7 +32,7 @@ class ModelUpgradeRelationship extends StaticOptionContextObject {
     public Cost : number;
     public CostType : number;
     public WarbandLimit : number
-    public Retrictions : ModelUpgradeRestriction[]
+    public Retrictions : string[]
     public RequiredUpgrades : string[]
     /**
      * Assigns parameters and creates a series of description

@@ -682,7 +682,30 @@ class WarbandMember extends DynamicContextObject {
             }
         )
 
-        let canaddupgrade = (await this.GetCountOfUpgradeCategory(category) < limit_of_category)
+        let canaddupgrade = (await this.GetCountOfUpgradeCategory(category) < limit_of_category || category == "upgrades")
+        console.log("CHECK")
+        console.log(upg);
+        console.log(this.Upgrades);
+        console.log("Required")
+        if (canaddupgrade) {
+            for (let i = 0; i < upg.RequiredUpgrades.length; i++) {
+                console.log(upg.RequiredUpgrades[i])
+                if (this.HasUpgrade(upg.RequiredUpgrades[i]) == false) {
+                    canaddupgrade = false;
+                }
+            }
+        }
+
+        console.log("Restricted")
+        if (canaddupgrade) {
+            for (let i = 0; i < upg.Retrictions.length; i++) {
+                console.log(upg.Retrictions[i])
+                if (this.HasUpgrade(upg.Retrictions[i]) == true) {
+                    canaddupgrade = false;
+                }
+            }
+        }
+
         if (canaddupgrade) {
                 canaddupgrade = ((this.MyContext as UserWarband).GetCountOfUpgradeRel(upg.ID) < maxcount || ((upg.WarbandLimit == 0)))
         }
@@ -718,6 +741,24 @@ class WarbandMember extends DynamicContextObject {
             }
         }
         return catcount;
+    }
+
+    public HasUpgrade(id : string) {
+        
+        for (let i = 0; i < this.Upgrades.length; i++) {
+            const upgrade_raw = (this.Upgrades[i].HeldObject);
+            if (upgrade_raw != undefined) {
+                const upgrade = (upgrade_raw as any as WarbandProperty).SelfDynamicProperty.OptionChoice as Upgrade;
+                console.log("HasUpgrade")
+                console.log(upgrade);
+                console.log(id)
+                console.log(upgrade.GetID())
+                if (upgrade.GetID() == id) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public async getContextuallyAvailableKeywords() : Promise<Keyword[]> {
