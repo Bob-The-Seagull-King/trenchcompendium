@@ -48,7 +48,7 @@ const DefaultCampaign = () => {
                             <div className={'col-12 col-md-6'}>
                                 <RulesBannerImage
                                     imageId={210}
-                                    linkUrl={'/compendium/campaign/campaign_rules/br_introduction'}
+                                    linkUrl={'/compendium/campaign/campaign_rules'}
                                     linkText={'Campaign Rules'}
                                 />
                             </div>
