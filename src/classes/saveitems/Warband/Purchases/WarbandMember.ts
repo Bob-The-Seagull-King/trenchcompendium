@@ -683,18 +683,43 @@ class WarbandMember extends DynamicContextObject {
         )
 
         let canaddupgrade = (await this.GetCountOfUpgradeCategory(category) < limit_of_category || category == "upgrades")
+
         if (canaddupgrade) {
-            for (let i = 0; i < upg.RequiredUpgrades.length; i++) {
-                if (this.HasUpgrade(upg.RequiredUpgrades[i]) == false) {
-                    canaddupgrade = false;
+            const careAboutRequired = await Events.runEvent(
+                "getRequiresUpgradesBool", // @TODO Lane
+                upg,
+                [],
+                true,
+                {
+                    warband: this.MyContext,
+                    model: this
+                }
+            )
+            if (careAboutRequired) {
+                for (let i = 0; i < upg.RequiredUpgrades.length; i++) {
+                    if (this.HasUpgrade(upg.RequiredUpgrades[i]) == false) {
+                        canaddupgrade = false;
+                    }
                 }
             }
         }
 
         if (canaddupgrade) {
-            for (let i = 0; i < upg.Retrictions.length; i++) {
-                if (this.HasUpgrade(upg.Retrictions[i]) == true) {
-                    canaddupgrade = false;
+            const careAboutRestricted = await Events.runEvent(
+                "getRestrictedUpgradesBool",
+                upg,
+                [],
+                true,
+                {
+                    warband: this.MyContext,
+                    model: this
+                }
+            )
+            if (careAboutRestricted) {
+                for (let i = 0; i < upg.Retrictions.length; i++) {
+                    if (this.HasUpgrade(upg.Retrictions[i]) == true) {
+                        canaddupgrade = false;
+                    }
                 }
             }
         }

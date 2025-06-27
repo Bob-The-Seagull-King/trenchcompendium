@@ -27,7 +27,7 @@ import RuleDisplay from "../../display/components/features/faction/RuleDisplay";
 import { Skill } from "../../classes/feature/ability/Skill";
 import { UserWarband } from "../../classes/saveitems/Warband/UserWarband";
 import { FactionEquipmentRelationship } from "../../classes/relationship/faction/FactionEquipmentRelationship";
-import { WarbandMember } from "../../classes/saveitems/Warband/Purchases/WarbandMember";
+import { MemberAndWarband, WarbandMember } from "../../classes/saveitems/Warband/Purchases/WarbandMember";
 import { returnDescription } from "../../utility/util";
 
 export const BaseContextCallTable : CallEventTable = {
@@ -506,6 +506,22 @@ export const BaseContextCallTable : CallEventTable = {
                     }
                 }
             }
+            return relayVar;
+        },
+        async getRestrictedUpgradesBool(this: EventRunner, eventSource : any, relayVar : boolean,  trackVal : MemberAndWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+
+            if (context_func["filters"]) {
+
+                for (let i = 0; i < context_func["filters"].length; i++) {
+                    const filter_type = context_func["filters"][i]["type"]
+                    const filter_value = context_func["filters"][i]["value"]
+
+                    if (filter_type == "id") {
+                        relayVar = !(trackVal.model.CurModel.GetID() == filter_value);
+                    }
+                }
+            }
+            
             return relayVar;
         }
     },
