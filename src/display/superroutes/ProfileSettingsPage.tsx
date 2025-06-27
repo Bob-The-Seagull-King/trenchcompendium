@@ -16,7 +16,6 @@ import ProfileSubscriptionView from "../components/Profile/ProfileSubscriptionVi
 const ProfileSettingsPage: React.FC = () => {
     const urlPath = useLocation().pathname;
     const urlSplits = urlPath.split('/');
-    const id  = getID();
     const { isLoggedIn, userId, authToken, logout } = useAuth();
     const navigate = useNavigate();
 
@@ -34,17 +33,10 @@ const ProfileSettingsPage: React.FC = () => {
 
     const [isLoadingSubmit, setisLoadingSubmit] = useState(false)
 
-    function getID() {
-        if (urlSplits.length > 2) {
-            const CurItemID = urlSplits[2]
-            return CurItemID;
-        }
-        return "";
-    }
 
     useEffect(() => {
-        if (id == "" || !userId || !isLoggedIn() || id !== (userId == null? -999 : userId).toString()) {
-            navigate(`/profile/${id}`);
+        if ( !userId || !isLoggedIn() ) {
+            navigate(`/profile/${userId}`);
             return;
         }
 
@@ -70,7 +62,7 @@ const ProfileSettingsPage: React.FC = () => {
                 setError('Failed to load user info.');
                 setLoading(false);
             });
-    }, [id, userId, authToken, navigate]);
+    }, [userId, authToken, navigate]);
 
     const hasChanges =
         nickname !== initialNickname || email !== initialEmail || password.trim() !== '';
@@ -120,7 +112,7 @@ const ProfileSettingsPage: React.FC = () => {
         }
     };
 
-    if (!id || loading ) return (
+    if (!userId || loading ) return (
         <div className="ProfileSettingsPage">
             <LoadingOverlay
                 message={'Loading your settings'}
@@ -150,7 +142,7 @@ const ProfileSettingsPage: React.FC = () => {
                     <div className="col-12">
                         <h1>
                             <span className={'headline-back-btn'} onClick={() => (
-                                navigate('/profile/' + id)
+                                navigate('/profile/' + userId)
                             )}>
                                 <FontAwesomeIcon icon={faChevronLeft} className={''}/>
                             </span>

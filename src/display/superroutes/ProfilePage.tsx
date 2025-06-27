@@ -42,6 +42,10 @@ const ProfilePage: React.FC = () => {
 
     /** is this the current site users own profile? */
     const isOwnProfile = () => {
+        // @TODO: sometimes this returns false even if is own profile
+        console.log('isOwnProfile()')
+        console.log(userData instanceof SiteUser);
+
         return userData instanceof SiteUser
     }
 
