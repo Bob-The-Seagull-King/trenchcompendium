@@ -695,6 +695,24 @@ class UserWarband extends DynamicContextObject {
         return ''
     }
 
+    public async RunEventThroughAllMembers(baseresult : any, event_id : string, arrs: any[], trackVal : any) {
+        
+        const Events : EventRunner = new EventRunner();
+
+        for (let i = 0; i < this.Models.length; i++) {
+            const Model : WarbandMember = this.Models[i].HeldObject as WarbandMember;
+
+            baseresult = await Events.runEvent(
+                event_id,
+                Model,
+                arrs,
+                baseresult,
+                trackVal
+            )
+        }
+
+        return baseresult;
+    }
 
     public GetCountOfModel(id : string) {
         let count = 0;
