@@ -619,7 +619,7 @@ class WarbandMember extends DynamicContextObject {
 
             for (let j = 0; j < Groups[special_cat].length; j++) {
 
-                const Presentation : MemberUpgradePresentation = await this.CalcGivenPurchase(Groups[special_cat][j]);
+                const Presentation : MemberUpgradePresentation = await this.CalcGivenPurchase(Groups[special_cat][j], special_cat, limit_of_category);
                 if (completegroups[special_cat]) {
                     completegroups[special_cat].upgrades.push(Presentation)
                 } else {
@@ -635,9 +635,34 @@ class WarbandMember extends DynamicContextObject {
 
     }
 
-    public async CalcGivenPurchase(upg : ModelUpgradeRelationship): Promise<MemberUpgradePresentation> {
+    public async CalcGivenPurchase(upg : ModelUpgradeRelationship, category : string, limit : number | null = null): Promise<MemberUpgradePresentation> {
 
         const Events : EventRunner = new EventRunner();
+
+        let limit_of_category = 0;
+        if (limit == null) {
+            if (this.MyContext) {
+                limit_of_category = await Events.runEvent(
+                        "getUpgradeCategoryLimit",
+                        (this.MyContext),
+                        [],
+                        limit_of_category,
+                        category
+                    )
+            }
+            limit_of_category = await Events.runEvent(
+                    "getUpgradeCategoryLimit",
+                    (this),
+                    [],
+                    limit_of_category,
+                    category
+                )
+        } else {
+            limit_of_category = limit;
+        }
+
+        
+
         let foundpurchase : WarbandPurchase | null = null;
         for (let k = 0; k < this.Upgrades.length; k++) {
             if ((this.Upgrades[k].HeldObject as Upgrade).ID == upg.UpgradeObject.ID) {
@@ -656,8 +681,11 @@ class WarbandMember extends DynamicContextObject {
                 model: this
             }
         )
-        let canaddupgrade = ((this.MyContext as UserWarband).GetCountOfUpgradeRel(upg.ID) < maxcount || ((upg.WarbandLimit == 0)))
-        
+
+        let canaddupgrade = (await this.GetCountOfUpgradeCategory(category) < limit_of_category)
+        if (canaddupgrade) {
+                canaddupgrade = ((this.MyContext as UserWarband).GetCountOfUpgradeRel(upg.ID) < maxcount || ((upg.WarbandLimit == 0)))
+        }
         if (canaddupgrade) {
             canaddupgrade = await Events.runEvent(
                 "canModelGetUpgrade",
@@ -675,6 +703,21 @@ class WarbandMember extends DynamicContextObject {
             purchase : foundpurchase,
             allowed : canaddupgrade
         }
+    }
+
+    public async GetCountOfUpgradeCategory(cat : string): Promise<number> {
+        let catcount = 0;
+
+        for (let i = 0; i < this.Upgrades.length; i++) {
+            const upgrade_raw = (this.Upgrades[i].HeldObject);
+            if (upgrade_raw != undefined) {
+                const upgrade = (upgrade_raw as any as WarbandProperty).SelfDynamicProperty.OptionChoice as Upgrade;
+                if (upgrade.GetSpecialCategory() == cat) {
+                    catcount += 1;
+                }
+            }
+        }
+        return catcount;
     }
 
     public async getContextuallyAvailableKeywords() : Promise<Keyword[]> {

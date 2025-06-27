@@ -18,10 +18,11 @@ import OptionSetStaticDisplay from '../subcomponents/description/OptionSetStatic
 
 interface WbbOptionItemProps {
     option: MemberUpgradePresentation;
-    owner : WarbandMember
+    owner : WarbandMember;
+    category : string;
 }
 
-const WbbOptionItem: React.FC<WbbOptionItemProps> = ({ option, owner }) => {
+const WbbOptionItem: React.FC<WbbOptionItemProps> = ({ option, owner, category }) => {
     const [open, setOpen] = useState(false);
     const [keyvar, setkeyvar] = useState(0);
     const [selected, setSelected] = useState(option.purchase != null);
@@ -36,7 +37,7 @@ const WbbOptionItem: React.FC<WbbOptionItemProps> = ({ option, owner }) => {
             owner.DeleteUpgrade(option.purchase).then(() => {
                 option.purchase = null;
                 setkeyvar(keyvar + 1)
-                owner.CalcGivenPurchase(option.upgrade).then(() => {
+                owner.CalcGivenPurchase(option.upgrade, category).then(() => {
                 const Manager : ToolsController = ToolsController.getInstance();
                 Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
                 () => {
@@ -50,7 +51,7 @@ const WbbOptionItem: React.FC<WbbOptionItemProps> = ({ option, owner }) => {
                 option.purchase = result;
                 setkeyvar(keyvar + 1)
                 
-                owner.CalcGivenPurchase(option.upgrade).then(() => {
+                owner.CalcGivenPurchase(option.upgrade, category).then(() => {
                 const Manager : ToolsController = ToolsController.getInstance();
                 Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
                     () => {
@@ -74,7 +75,7 @@ const WbbOptionItem: React.FC<WbbOptionItemProps> = ({ option, owner }) => {
 
     useEffect(() => {
         async function CheckAllowed() {
-            setAllowed((await owner.CalcGivenPurchase(option.upgrade)).allowed)
+            setAllowed((await owner.CalcGivenPurchase(option.upgrade, category)).allowed)
         }
         CheckAllowed()
     }, []);

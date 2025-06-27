@@ -19,7 +19,13 @@ class Upgrade extends BaseAddon {
         super(data, parent)        
     }
 
-
+    public GetSpecialCategory() {
+        if (this.Tags['special_category']) {
+            return this.Tags['special_category'].toString();
+        } else {
+            return 'upgrades';
+        }
+    }
 
 }
 
