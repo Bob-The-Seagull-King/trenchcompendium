@@ -63,11 +63,13 @@ const WbbCreateNewPage = (prop: any) => {
                 <div className={'container'}>
                     <div className={'headline-wrap'}>
                         <h1>
-                            <span className={'headline-back-btn'} onClick={() => (
+                            <a className={'headline-back-btn'}
+                               href={'/warband/'}
+                               onClick={() => (
                                 navigate('/warband/')
                             )}>
                                 <FontAwesomeIcon icon={faChevronLeft} className={''}/>
-                            </span>
+                            </a>
                             {'New Warband'}
                         </h1>
                         <h2 className={'sub-headline'}>{'Select Faction'}</h2>

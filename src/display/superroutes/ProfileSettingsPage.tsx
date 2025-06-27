@@ -141,11 +141,12 @@ const ProfileSettingsPage: React.FC = () => {
                 <div className="row">
                     <div className="col-12">
                         <h1>
-                            <span className={'headline-back-btn'} onClick={() => (
+                            <a className={'headline-back-btn'} href={'/profile/' + userId}
+                               onClick={() => (
                                 navigate('/profile/' + userId)
                             )}>
                                 <FontAwesomeIcon icon={faChevronLeft} className={''}/>
-                            </span>
+                            </a>
                             {'Account Settings'}
                         </h1>
                     </div>
