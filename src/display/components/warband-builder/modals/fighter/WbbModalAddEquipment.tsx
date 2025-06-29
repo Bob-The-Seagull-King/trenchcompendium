@@ -96,7 +96,4 @@ const WbbModalAddEquipment: React.FC<WbbModalAddEquipmentProps> = ({ show, onClo
 };
 
 export default WbbModalAddEquipment;
-function useEffect(arg0: () => void, arg1: any[]) {
-    throw new Error('Function not implemented.');
-}
 
