@@ -382,21 +382,26 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                                 </>
                             }
 
-                            {type === 'equipment' &&
+                            {(type === 'equipment' || type === 'equipment_model') &&
                                 <>
-                                    <div
-                                        className={'action action-move-to-stash'} onClick={handleMoveEquipmentToStash}
-                                    >
-                                        <FontAwesomeIcon icon={faArrowUp} className="icon-inline-left-l"/>
-                                        {'Move to Stash'}
-                                    </div>
-
-                                    <div
+                                    {type === 'equipment' &&
+                                        <div
                                         className={'action action-move-to-fighter'} onClick={showConfirmMoveEquipment}
-                                    >
-                                        <FontAwesomeIcon icon={faArrowLeft} className="icon-inline-left-l"/>
-                                        {'Move to Fighter'}
-                                    </div>
+                                        >
+                                            <FontAwesomeIcon icon={faArrowLeft} className="icon-inline-left-l"/>
+                                            {'Move to Fighter'}
+                                        </div>
+                                    }
+                                    {type === 'equipment_model' &&
+
+                                        <div
+                                            className={'action action-move-to-stash'} onClick={handleMoveEquipmentToStash}
+                                        >
+                                            <FontAwesomeIcon icon={faArrowUp} className="icon-inline-left-l"/>
+                                            {'Move to Stash'}
+                                        </div>
+                                    }
+                                    
 
                                     <div
                                         className={'action action-sell'} onClick={showConfirmSellEquipment}
