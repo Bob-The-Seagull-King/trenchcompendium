@@ -46,7 +46,7 @@ import { makestringpresentable } from '../../../utility/functions';
 import KeywordDisplay from '../features/glossary/KeywordDisplay';
 import GenericHover from '../generics/GenericHover';
 import { useWarband } from '../../../context/WarbandContext';
-import { FactionEquipmentRelationship } from 'classes/relationship/faction/FactionEquipmentRelationship';
+import { FactionEquipmentRelationship } from '../../../classes/relationship/faction/FactionEquipmentRelationship';
 
 
 interface WbbFighterDetailViewProps {
