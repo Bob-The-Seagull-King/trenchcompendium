@@ -13,7 +13,7 @@ import {
 import WbbContextualPopover from "./WbbContextualPopover";
 import {usePlayMode} from "../../../context/PlayModeContext";
 import {usePrintMode} from "../../../context/PrintModeContext";
-import { RealWarbandPurchaseEquipment, RealWarbandPurchaseModel, WarbandPurchase } from '../../../classes/saveitems/Warband/Purchases/WarbandPurchase';
+import { RealWarbandPurchaseEquipment, WarbandPurchase } from '../../../classes/saveitems/Warband/Purchases/WarbandPurchase';
 import { WarbandEquipment } from '../../../classes/saveitems/Warband/Purchases/WarbandEquipment';
 import { Equipment } from '../../../classes/feature/equipment/Equipment';
 import { getCostType } from '../../../utility/functions';
@@ -24,22 +24,13 @@ import GenericHover from '../generics/GenericHover';
 
 interface EquipmentItemProps {
     item: WarbandPurchase
-    fighter? : RealWarbandPurchaseModel | null
 }
 
-const WbbEquipmentListItem: React.FC<EquipmentItemProps> = ({ item, fighter }) => {
+const WbbEquipmentListItem: React.FC<EquipmentItemProps> = ({ item }) => {
 
     const { warband } = useWarband();
     const { playMode } = usePlayMode();
     const { printMode } = usePrintMode();
-
-    function GetIDRel() {
-        if (fighter == null || fighter == undefined) {
-            return warband?.warband_data.Equipment.indexOf(item)
-        } else {
-            return fighter.model.Equipment.indexOf(item)
-        }
-    }
 
     const ItemValue = (((item.HeldObject as WarbandEquipment).MyEquipment.SelfDynamicProperty.OptionChoice as Equipment))
 
@@ -65,7 +56,7 @@ const WbbEquipmentListItem: React.FC<EquipmentItemProps> = ({ item, fighter }) =
 
             {(!playMode && !printMode) &&
                 <WbbContextualPopover
-                    id={`equipment-${GetIDRel()}`}
+                    id={`equipment-${warband?.warband_data.Equipment.indexOf(item)}`}
                     type="equipment"
                     item={{
                         purchase: item,
