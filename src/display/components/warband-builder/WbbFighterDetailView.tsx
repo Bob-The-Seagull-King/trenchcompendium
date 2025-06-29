@@ -46,6 +46,7 @@ import { makestringpresentable } from '../../../utility/functions';
 import KeywordDisplay from '../features/glossary/KeywordDisplay';
 import GenericHover from '../generics/GenericHover';
 import { useWarband } from '../../../context/WarbandContext';
+import { FactionEquipmentRelationship } from 'classes/relationship/faction/FactionEquipmentRelationship';
 
 
 interface WbbFighterDetailViewProps {
@@ -88,32 +89,18 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
      */
     // Ranged Weapons
     const [showAddRangedWeapon, setShowAddRangedWeapon] = useState(false);
-    const handleAddRangedWeapon = (weapon: { id: string; name: string }) => {
+    const handleAddEquipment = (weapon: FactionEquipmentRelationship) => {
         // @TODO: Implement logic to add weapon to fighter's equipment
-        console.log('Ranged weapon added:', weapon);
+        console.log('Item added:', weapon);
     };
 
     // Melee Weapons
     const [showMeleeWeaponModal, setShowMeleeWeaponModal] = useState(false);
 
-    const handleAddMeleeWeapon = (weapon: { id: string, name: string }) => {
-        console.log("Selected melee weapon:", weapon);
-        // TODO: Add this weapon to the appropriate fighter or list
-    };
-
     // Equipment
     const [showAddEquipmentModal, setShowAddEquipmentModal] = useState(false);
-    const handleAddEquipment = (equipment: any) => {
-        // TODO: Attach equipment to fighter, or pass to backend
-        console.log('Equipment added:', equipment);
-    };
-
     // Armour
     const [showAddArmourModal, setShowAddArmourModal] = useState(false);
-    const handleAddArmour = (equipment: any) => {
-        // TODO: Attach equipment to fighter, or pass to backend
-        console.log('Equipment added:', equipment);
-    };
 
     /**
      * Campaign Modals
@@ -457,21 +444,21 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                         <WbbModalAddEquipment
                             show={showAddRangedWeapon}
                             onClose={() => setShowAddRangedWeapon(false)}
-                            onSubmit={handleAddRangedWeapon}
+                            onSubmit={handleAddEquipment}
                             fighter={warbandmember}
                             category='ranged'
                         />
                         <WbbModalAddEquipment
                             show={showMeleeWeaponModal}
                             onClose={() => setShowMeleeWeaponModal(false)}
-                            onSubmit={handleAddMeleeWeapon}
+                            onSubmit={handleAddEquipment}
                             fighter={warbandmember}
                             category='melee'
                         />
                         <WbbModalAddEquipment
                             show={showAddArmourModal}
                             onClose={() => setShowAddArmourModal(false)}
-                            onSubmit={handleAddArmour}
+                            onSubmit={handleAddEquipment}
                             fighter={warbandmember}
                             category='armour'
                         />

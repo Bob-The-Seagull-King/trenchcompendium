@@ -848,6 +848,10 @@ class WarbandMember extends DynamicContextObject {
             }
         }
     }
+
+    public async GetModelEquipmentOptions() {
+        return await (this.MyContext as UserWarband).GetFactionEquipmentOptions();
+    }
 }
 
 export {IWarbandMember, WarbandMember}
