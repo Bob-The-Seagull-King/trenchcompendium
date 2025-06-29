@@ -28,6 +28,15 @@ interface WbbContextualPopoverProps {
 }
 
 const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, item, context = null }) => {
+
+    if (type == 'equipment_model' && (context == undefined || context == null)) {
+        return (
+            <>
+                {"Model context not found."}
+            </>
+        )
+    }
+
     const { activePopoverId, setActivePopoverId } = usePopover();
     const { warband, reloadDisplay } = useWarband();
     const { playMode, togglePlayMode } = usePlayMode();
