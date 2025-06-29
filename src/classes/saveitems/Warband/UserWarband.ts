@@ -13,11 +13,12 @@ import { WarbandFactory } from '../../../factories/warband/WarbandFactory';
 import { FactionModelRelationship } from '../../relationship/faction/FactionModelRelationship';
 import { EventRunner } from '../../contextevent/contexteventhandler';
 import { Faction } from '../../feature/faction/Faction';
-import { FactionEquipmentRelationship } from '../../relationship/faction/FactionEquipmentRelationship';
+import { FactionEquipmentRelationship, IFactionEquipmentRelationship } from '../../relationship/faction/FactionEquipmentRelationship';
 import { WarbandProperty } from './WarbandProperty';
 import { ContextPackage } from '../../contextevent/contextpackage';
 import { ToolsController } from '../../_high_level_controllers/ToolsController';
 import { ModelFactory } from '../../../factories/features/ModelFactory';
+import { EquipmentFactory } from '../../../factories/features/EquipmentFactory';
 
 interface WarbandDebt {
     ducats : number,
@@ -428,6 +429,52 @@ class UserWarband extends DynamicContextObject {
                 break;
             }
         }
+    }
+    
+    public async CopyStash( item : RealWarbandPurchaseEquipment ) {
+
+        const IsValidToAdd = await this.AtMaxOfItem(item.purchase.PurchaseInterface);
+
+        if (IsValidToAdd) {
+            return "Warband At Limit For " + item.equipment.MyEquipment.GetTrueName();
+        }
+
+        const Relationship : FactionEquipmentRelationship = await EquipmentFactory.CreateFactionEquipment(item.purchase.CustomInterface as IFactionEquipmentRelationship, this)
+        const Equipment : WarbandEquipment = await WarbandFactory.BuildWarbandEquipmentFromPurchase(Relationship, this);
+        const NewPurchase : WarbandPurchase = new WarbandPurchase({
+            cost_value : Relationship.Cost,
+            cost_type : Relationship.CostType,
+            count_limit : true,
+            count_cap : true,
+            sell_item : true,
+            sell_full : true,
+            purchaseid: Relationship.EquipmentItem.ID,
+            faction_rel_id: Relationship.ID,
+            custom_rel: Relationship.SelfData
+        }, this, Equipment);
+        this.Equipment.push(NewPurchase);
+        
+        return Equipment.MyEquipment.Name + " Sucessfully Duplicated";
+    }
+
+    public async AtMaxOfItem( model : string) {
+        const RefModel : FactionEquipmentRelationship = await EquipmentFactory.CreateNewFactionEquipment(model, null);
+        
+        const eventmon : EventRunner = new EventRunner();
+        let maxcount = RefModel.Limit;
+        maxcount = await eventmon.runEvent(
+            "getEquipmentLimitTrue",
+            RefModel,
+            [],
+            maxcount,
+            this
+        )
+        if (this.GetCountOfEquipmentRel(RefModel.ID) < maxcount || (maxcount == 0 && RefModel.Limit == 0)) {
+            if (!containsTag(RefModel.Tags, "exploration_only")) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public async DeleteStashWithDebt( item : RealWarbandPurchaseEquipment, debt_mod : number) {

@@ -181,8 +181,17 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
     }
 
     const handleCopyEquipment = () => {
-        // @TODO: Copy Equipment for this fighter
-        console.log('handleCopyEquipment');
+
+        warband?.warband_data.CopyStash(item).then((result : string) => {
+            if (result.includes(" Sucessfully Duplicated") == false) {
+                toast.error(result);
+            } else { 
+                const Manager : ToolsController = ToolsController.getInstance();
+                Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
+                    () => reloadDisplay())
+                
+            }
+        })
     }
 
     const showConfirmRefundEquipment = () => {
