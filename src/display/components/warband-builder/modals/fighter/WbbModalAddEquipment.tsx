@@ -67,7 +67,7 @@ const WbbModalAddEquipment: React.FC<WbbModalAddEquipmentProps> = ({ show, onClo
                     <div
                         key={item.ID}
                         className={`select-item ${selectedID === item.ID ? 'selected' : ''}`}
-                        onClick={() => setSelectedId(item.ID)}
+                        onClick={() => setSelectedID(item.ID)}
                     >
                         <span className={'item-name'}>
                             {item.EquipmentItem.GetTrueName()}
