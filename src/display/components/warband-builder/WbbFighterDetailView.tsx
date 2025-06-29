@@ -350,7 +350,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                                             <WbbEquipmentListItem
                                                 key={fighter.GetEquipment().indexOf(equip)}
                                                 item={equip.purchase}
-                                                fighter={fighter}
+                                                fighter={warbandmember}
                                             />
                                 ))}
                             </>
@@ -377,7 +377,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                                         <WbbEquipmentListItem
                                             key={fighter.GetEquipment().indexOf(equip)}
                                             item={equip.purchase}
-                                            fighter={fighter}
+                                            fighter={warbandmember}
                                         />
                                     ))}
                             </>
@@ -406,7 +406,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                                         <WbbEquipmentListItem
                                             key={fighter.GetEquipment().indexOf(equip)}
                                             item={equip.purchase}
-                                            fighter={fighter}
+                                            fighter={warbandmember}
                                         />
                                     ))}
                             </>
@@ -433,7 +433,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                                         <WbbEquipmentListItem
                                             key={fighter.GetEquipment().indexOf(equip)}
                                             item={equip.purchase}
-                                            fighter={fighter}
+                                            fighter={warbandmember}
                                         />
                                     ))}
                             </>
