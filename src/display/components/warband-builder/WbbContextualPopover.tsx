@@ -22,11 +22,12 @@ import { RealWarbandPurchaseEquipment, RealWarbandPurchaseModel } from '../../..
 
 interface WbbContextualPopoverProps {
     id: string;
-    type: 'fighter' | 'injury' | 'advancement' | 'modifier' | 'exploration' | 'equipment' | 'warband';
+    type: 'fighter' | 'injury' | 'advancement' | 'modifier' | 'exploration' | 'equipment' | 'equipment_model' | 'warband';
     item: any;
+    context: RealWarbandPurchaseModel | null;
 }
 
-const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, item }) => {
+const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, item, context }) => {
     const { activePopoverId, setActivePopoverId } = usePopover();
     const { warband, reloadDisplay } = useWarband();
     const { playMode, togglePlayMode } = usePlayMode();

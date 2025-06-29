@@ -66,11 +66,12 @@ const WbbEquipmentListItem: React.FC<EquipmentItemProps> = ({ item, fighter }) =
             {(!playMode && !printMode) &&
                 <WbbContextualPopover
                     id={`equipment-${GetIDRel()}`}
-                    type="equipment"
+                    type={(fighter == null || fighter == undefined)? "equipment" : "equipment_model"}
                     item={{
                         purchase: item,
                         equipment: (item.HeldObject as WarbandEquipment)
                     } as RealWarbandPurchaseEquipment}
+                    context={(fighter == null || fighter == undefined)? null : fighter}
                 />
             }
 
