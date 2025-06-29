@@ -171,7 +171,7 @@ class WarbandMember extends DynamicContextObject {
 
     public async BuildEquipment(data : IWarbandPurchaseEquipment[]) {
         for (let i = 0; i < data.length; i++) {
-            const Model : WarbandEquipment = await new WarbandEquipment(data[i].equipment, this);
+            const Model : WarbandEquipment = await WarbandFactory.CreateWarbandEquipment(data[i].equipment, this);
             const NewPurchase : WarbandPurchase = new WarbandPurchase(data[i].purchase, this, Model);
             this.Equipment.push(NewPurchase);
         }

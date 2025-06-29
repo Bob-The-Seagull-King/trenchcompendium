@@ -350,6 +350,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                                             <WbbEquipmentListItem
                                                 key={fighter.GetEquipment().indexOf(equip)}
                                                 item={equip.purchase}
+                                                fighter={warbandmember}
                                             />
                                 ))}
                             </>
@@ -376,6 +377,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                                         <WbbEquipmentListItem
                                             key={fighter.GetEquipment().indexOf(equip)}
                                             item={equip.purchase}
+                                            fighter={warbandmember}
                                         />
                                     ))}
                             </>
@@ -404,6 +406,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                                         <WbbEquipmentListItem
                                             key={fighter.GetEquipment().indexOf(equip)}
                                             item={equip.purchase}
+                                            fighter={warbandmember}
                                         />
                                     ))}
                             </>
@@ -430,6 +433,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                                         <WbbEquipmentListItem
                                             key={fighter.GetEquipment().indexOf(equip)}
                                             item={equip.purchase}
+                                            fighter={warbandmember}
                                         />
                                     ))}
                             </>
