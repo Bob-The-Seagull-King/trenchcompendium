@@ -865,7 +865,7 @@ class WarbandMember extends DynamicContextObject {
     }
 
     public async AddEquipment(item : FactionEquipmentRelationship) {
-        const Equipment : WarbandEquipment = await WarbandFactory.BuildWarbandEquipmentFromPurchase(stash, this);
+        const Equipment : WarbandEquipment = await WarbandFactory.BuildWarbandEquipmentFromPurchase(item, this);
         const NewPurchase : WarbandPurchase = new WarbandPurchase({
             cost_value : item.Cost,
             cost_type : item.CostType,
