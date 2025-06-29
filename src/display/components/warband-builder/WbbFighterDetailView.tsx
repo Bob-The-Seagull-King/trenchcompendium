@@ -91,7 +91,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
     // Ranged Weapons
     const [showAddRangedWeapon, setShowAddRangedWeapon] = useState(false);
     const handleAddEquipment = (weapon: FactionEquipmentRelationship) => {
-        fighter.AddStash(weapon).then(() => {
+        fighter.AddEquipment(weapon).then(() => {
             const Manager : ToolsController = ToolsController.getInstance();
             Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(() => reloadDisplay())
         })
@@ -331,7 +331,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
             {/* Edit Loadout */}
             {(!playMode) &&
                 <div className={'fighter-card-collapse-wrap'}>
-                    <WbbFighterCollapse title="Equipment" initiallyOpen={true}>
+                    <WbbFighterCollapse title="Equipment" initiallyOpen={true} key={updateKey}>
                         <p> {/* Equipment Rules */}
                             <strong>Equipment: </strong>
                             {returnDescription(fighter, fighter.CurModel.Description)}
