@@ -25,6 +25,7 @@ import { ModelUpgradeRelationship } from "../../../relationship/model/ModelUpgra
 import { UpgradesGrouped } from "../../../relationship/model/ModelUpgradeRelationship";
 import { UserWarband } from "../UserWarband";
 import { WarbandFactory } from "../../../../factories/warband/WarbandFactory";
+import { FactionEquipmentRelationship } from "../../../relationship/faction/FactionEquipmentRelationship";
 
 export interface MemberAndWarband {
     warband: UserWarband,
@@ -383,6 +384,16 @@ class WarbandMember extends DynamicContextObject {
                 }
                 if (type == 1 ) {
                     countvar += this.Upgrades[i].GetTotalGlory();
+                }
+            }
+        }
+        for (let i = 0; i < this.Equipment.length; i++) {
+            if (this.Equipment[i].CostType == type) {
+                if (type == 0 ) {
+                    countvar += this.Equipment[i].GetTotalDucats();
+                }
+                if (type == 1 ) {
+                    countvar += this.Equipment[i].GetTotalGlory();
                 }
             }
         }
@@ -851,6 +862,22 @@ class WarbandMember extends DynamicContextObject {
 
     public async GetModelEquipmentOptions() {
         return await (this.MyContext as UserWarband).GetFactionEquipmentOptions();
+    }
+
+    public async AddEquipment(item : FactionEquipmentRelationship) {
+        const Equipment : WarbandEquipment = await WarbandFactory.BuildWarbandEquipmentFromPurchase(stash, this);
+        const NewPurchase : WarbandPurchase = new WarbandPurchase({
+            cost_value : item.Cost,
+            cost_type : item.CostType,
+            count_limit : true,
+            count_cap : true,
+            sell_item : true,
+            sell_full : true,
+            purchaseid: item.EquipmentItem.ID,
+            faction_rel_id: item.ID,
+            custom_rel: item.SelfData
+        }, this, Equipment);
+        this.Equipment.push(NewPurchase);
     }
 }
 

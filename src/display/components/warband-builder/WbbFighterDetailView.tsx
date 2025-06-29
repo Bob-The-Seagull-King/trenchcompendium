@@ -47,6 +47,7 @@ import KeywordDisplay from '../features/glossary/KeywordDisplay';
 import GenericHover from '../generics/GenericHover';
 import { useWarband } from '../../../context/WarbandContext';
 import { FactionEquipmentRelationship } from '../../../classes/relationship/faction/FactionEquipmentRelationship';
+import { ToolsController } from '../../../classes/_high_level_controllers/ToolsController';
 
 
 interface WbbFighterDetailViewProps {
@@ -90,8 +91,10 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
     // Ranged Weapons
     const [showAddRangedWeapon, setShowAddRangedWeapon] = useState(false);
     const handleAddEquipment = (weapon: FactionEquipmentRelationship) => {
-        // @TODO: Implement logic to add weapon to fighter's equipment
-        console.log('Item added:', weapon);
+        fighter.AddStash(weapon).then(() => {
+            const Manager : ToolsController = ToolsController.getInstance();
+            Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(() => reloadDisplay())
+        })
     };
 
     // Melee Weapons
