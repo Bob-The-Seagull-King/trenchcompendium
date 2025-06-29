@@ -17,7 +17,12 @@ interface ISiteUser {
     friend_requests: IFriend[],
     warbands: ISynodWarband[],
     campaigns: number[],
-    profile_picture: SynodProfilePicData
+    profile_picture: SynodProfilePicData,
+    // Premium
+    is_premium: boolean,
+    plan_id : string,
+    sub_id : string,
+    premium_until : number
 }
 
 export interface ISynodWarband {
@@ -39,6 +44,13 @@ export interface IFriend {
     status: string
 }
 
+export interface PremiumInfo {
+    IsPremium: boolean,
+    PlanId : string,
+    SubId : string,
+    PremiumUntil : number
+}
+
 class SiteUser {
     ID : number;
     Nickname : string;
@@ -49,6 +61,7 @@ class SiteUser {
     Warbands : SumWarband[] = [];
     ProfilePic : SynodProfilePicData;
     Campaigns : number[] = []
+    Premium : PremiumInfo;
     
     public constructor(data: ISiteUser)
     {
@@ -58,6 +71,12 @@ class SiteUser {
         this.Friends = data.friends
         this.Requests = data.friend_requests
         this.Achievements = data.achievements;
+        this.Premium = {
+            IsPremium: data.is_premium,
+            PlanId : data.plan_id,
+            SubId : data.sub_id,
+            PremiumUntil : data.premium_until
+        }
     }
 
     public async GenerateWarbands(data: ISiteUser) {
@@ -111,7 +130,11 @@ class SiteUser {
             friend_requests : this.Requests,
             warbands: warbandlist,
             profile_picture: this.ProfilePic,
-            campaigns: requestfriendlist
+            campaigns: requestfriendlist,
+            is_premium: this.Premium.IsPremium,
+            plan_id : this.Premium.PlanId,
+            sub_id : this.Premium.SubId,
+            premium_until : this.Premium.PremiumUntil
         }
         
         return _objint;
@@ -356,45 +379,38 @@ class SiteUser {
 
     /**
      * Returns the Subscription ID for the user or null
-     * // @TODO: lane, please hook this up to the API data
      *
      * @return string | null
      */
     public GetSubscriptionID () {
-
-        return 'I-16NGU7DURWJW';
+        return this.Premium.SubId;
     }
 
     /**
      * Returns the Plan ID for the user or null
-     * // @TODO: lane, please hook this up to the API data
      *
      * @return string | null
      */
     public GetPlanID () {
-        return 'P-4YK72240DG152144TNBN7EKI';
+        return this.Premium.PlanId
     }
 
 
     /**
      * Returns the membership state
-     * // @TODO: lane, please hook this up to the API data
      * @return bool
      */
     public IsPremium () {
-        return true;
+        return this.Premium.IsPremium;
     }
 
     /**
      * Returns the timestamp when the premium runs out or false
-     * // @TODO: lane, please hook this up to the API data
      *
      * @return int | false
      */
     public PremiumUntil () {
-        const api_timestamp = 1756305105;
-
-        return api_timestamp * 1000;
+        return this.Premium.PremiumUntil;
     }
 
     public PremiumUntilFormat () {
