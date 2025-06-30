@@ -63,7 +63,7 @@ const WbbEquipmentListItem: React.FC<EquipmentItemProps> = ({ item, fighter }) =
                 </div>
             }
 
-            {(!playMode && !printMode) &&
+            {((item.Sellable == true) && (!playMode && !printMode)) &&
                 <WbbContextualPopover
                     id={`equipment-${GetIDRel()}`}
                     type={(fighter == null || fighter == undefined)? "equipment" : "equipment_model"}

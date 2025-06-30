@@ -108,7 +108,7 @@ class WarbandMember extends DynamicContextObject {
             let IsFound = false
             for (let j = 0; j < data.subproperties.length; j++) {
                 if (data.subproperties[j].object_id == all_eq[i].ID) {
-                    const NewEquip = await EquipmentFactory.CreateNewModelEquipment(data.list_modelequipment[j].object_id, this)
+                    const NewEquip = await EquipmentFactory.CreateNewModelEquipment(data.subproperties[j].object_id, this)
                     const NewRuleProperty = new WarbandProperty(NewEquip, this, null, data.subproperties[j]);
                     await NewRuleProperty.HandleDynamicProps(NewEquip, this, null, data.subproperties[j]);
                     this.ModelEquipments.push(NewRuleProperty);
@@ -219,13 +219,12 @@ class WarbandMember extends DynamicContextObject {
                 const MERelationship = (this.ModelEquipments[i].SelfDynamicProperty.OptionChoice as ModelEquipmentRelationship)
                 for (let j = 0; j < MERelationship.EquipmentItems.length; j++) {
                     let IsFound = false
-                    /*
                     for (let k = 0; k < this.Equipment.length; k++) {
                         if (this.Equipment[k].HeldObject.ID == MERelationship.ID + "_" + MERelationship.EquipmentItems[j].ID + "_" + j) {
                             IsFound = true;
                             break;
                         }
-                    }*/
+                    }
                     if (IsFound == false) {
                         const Model : WarbandEquipment = await WarbandFactory.BuildModelEquipmentFromPurchase(MERelationship, MERelationship.EquipmentItems[j], this);
                         const NewPurchase : WarbandPurchase = new WarbandPurchase({
@@ -238,7 +237,7 @@ class WarbandMember extends DynamicContextObject {
                             purchaseid: MERelationship.ID,
                             faction_rel_id: MERelationship.ID,
                             custom_rel: MERelationship.SelfData,
-                            modelpurch: false
+                            modelpurch: true
                         }, this, Model);
                         this.Equipment.push(NewPurchase);
                     }
@@ -1013,11 +1012,13 @@ class WarbandMember extends DynamicContextObject {
     }
     
     public async DirectAddStash( item : RealWarbandPurchaseEquipment) {
+        if (item.purchase.Sellable == false) {return}
         this.Equipment.push(item.purchase);
     }
     
     public async CopyStash( item : RealWarbandPurchaseEquipment ) {
 
+        if (item.purchase.Sellable == false) {return "Cannot sell this item"}
         const IsValidToAdd = await (this.MyContext as UserWarband).AtMaxOfItem(item.purchase.PurchaseInterface);
 
         if (IsValidToAdd) {
@@ -1067,17 +1068,19 @@ class WarbandMember extends DynamicContextObject {
         const CostVarDucats = item.purchase.GetTotalDucats();
         const CostVarGlory = item.purchase.GetTotalGlory();
 
+        if (item.purchase.Sellable == false) {return}
+        const debt = (item.purchase.FullSell == false)? debt_mod : 1;
         try {
             await this.DeleteStash(item);
-            (this.MyContext as UserWarband).Debts.ducats +=  Math.ceil(CostVarDucats * debt_mod);
-            (this.MyContext as UserWarband).Debts.glory += Math.ceil(CostVarGlory * debt_mod);
+            (this.MyContext as UserWarband).Debts.ducats +=  Math.ceil(CostVarDucats * debt);
+            (this.MyContext as UserWarband).Debts.glory += Math.ceil(CostVarGlory * debt);
 
         } catch (e) { console.log(e) }
     }
     
     
     public async DeleteStash( item : RealWarbandPurchaseEquipment ) {
-        
+        if (item.purchase.Sellable == false) {return}
         for (let i = 0; i < this.Equipment.length; i++) {
             if (item.equipment == (this.Equipment[i].HeldObject as WarbandEquipment)) {
                 this.Equipment.splice(i, 1);

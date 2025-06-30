@@ -459,6 +459,7 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
 
                             {(type === 'equipment' || type === 'equipment_model') &&
                                 <>
+                                {(item.purchase as WarbandPurchase).ModelPurchase == false && <>
                                     <div
                                     className={'action action-move-to-fighter'} onClick={showConfirmMoveEquipment}
                                     >
@@ -473,7 +474,7 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                                             <FontAwesomeIcon icon={faArrowUp} className="icon-inline-left-l"/>
                                             {'Move to Stash'}
                                         </div>
-                                    }
+                                    }</>}
                                     
 
                                     <div
@@ -483,6 +484,8 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                                         {'Sell Item'}
                                     </div>
 
+                                    {((item.purchase as WarbandPurchase).ModelPurchase == false) &&
+                                        <>
                                     <div
                                         className={'action action-copy'} onClick={handleCopyEquipment}
                                     >
@@ -499,6 +502,8 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                                         <FontAwesomeIcon icon={faTrash} className="icon-inline-left-l"/>
                                         {'Delete Item'}
                                     </div>
+                                    </>
+                                    }
                                 </>
                             }
 
