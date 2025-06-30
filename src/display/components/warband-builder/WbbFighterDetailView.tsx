@@ -34,7 +34,7 @@ import SynodModelImage from "../../../utility/SynodModelImage";
 import SynodModelImageSource from "../../../utility/SynodModelImageSource";
 import WbbModalEditFighterStatus from "./modals/fighter/WbbEditFighterStatus";
 import {IWarbandMember, MemberUpgradePresentation, MemberUpgradesGrouped} from "../../../classes/saveitems/Warband/Purchases/WarbandMember";
-import { RealWarbandPurchaseModel } from '../../../classes/saveitems/Warband/Purchases/WarbandPurchase';
+import { RealWarbandPurchaseEquipment, RealWarbandPurchaseModel } from '../../../classes/saveitems/Warband/Purchases/WarbandPurchase';
 import { returnDescription } from '../../../utility/util';
 import { Equipment } from '../../../classes/feature/equipment/Equipment';
 import { Ability } from '../../../classes/feature/ability/Ability';
@@ -48,6 +48,8 @@ import GenericHover from '../generics/GenericHover';
 import { useWarband } from '../../../context/WarbandContext';
 import { FactionEquipmentRelationship } from '../../../classes/relationship/faction/FactionEquipmentRelationship';
 import { ToolsController } from '../../../classes/_high_level_controllers/ToolsController';
+import { ModelEquipmentRelationship } from '../../../classes/relationship/model/ModelEquipmentRelationship';
+import WbbOptionSelect from './modals/warband/WbbOptionSelect';
 
 
 interface WbbFighterDetailViewProps {
@@ -64,6 +66,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
     const [statchoices, setstats] = useState({})
     const [upgrades, setupgrades] = useState<MemberUpgradesGrouped>({})
     const [abilities, setabilities] = useState<WarbandProperty[]>([])
+    const [allmodelequip, setAllmodelequip] = useState<RealWarbandPurchaseEquipment[]>([])
     const [keywordsList, setkeywords] = useState<Keyword[]>([])
     const [BaseString, setBaseString] = useState('')
     const [modelslug, setmodeslug] = useState(fighter.GetModelSlug())
@@ -77,6 +80,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
             setupgrades(upgrades);
             setkeywords(await fighter.getContextuallyAvailableKeywords())
             setmodeslug(fighter.GetModelSlug())
+            setAllmodelequip(await fighter.GetAllEquipForShow())
             reloadDisplay()
         }
 
@@ -84,6 +88,15 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
     }, [fighter]);
 
     const { playMode } = usePlayMode();
+
+    useEffect(() => {
+        async function SetDisplayOptions() {
+            setAllmodelequip(await fighter.GetAllEquipForShow())
+            reloadDisplay()
+        }
+
+        SetDisplayOptions();
+    }, [playMode]);
 
     /**
      * Equipment Modals
@@ -336,6 +349,23 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                             <strong>Equipment: </strong>
                             {returnDescription(fighter, fighter.CurModel.Description)}
                         </p>
+
+                        {fighter.ModelEquipments.filter((item) => (item.SelfDynamicProperty.Selections.length > 0)).length > 0 &&
+                            <>
+                                <h3>{'Loadout Options'}</h3>
+                                {fighter.ModelEquipments.filter((item) => (item.SelfDynamicProperty.Selections.length > 0)).map((item) => 
+                                <>
+                                    {item.SelfDynamicProperty.Selections.map((selec) => 
+                                        <WbbOptionSelect 
+                                        property={item}
+                                        key={item.SelfDynamicProperty.Selections.indexOf(selec)}
+                                        choice={selec}
+                                        />
+                                    )}
+                                </>
+                                    )}
+                            </>
+                        }
 
                         {/* Ranged Weapons */}
                         <h3>{'Ranged Weapons'}</h3>
@@ -646,24 +676,88 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                 <div className={'fighter-card-play-mode-info'}>
 
                     <div className={'play-mode-equipment-wrap'}>
-                        {/* @TODO: add all equipment items*/}
-                        <h3>{'Ranged Weapons'}</h3>
+                        {allmodelequip.filter((item) =>
+                            ((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Category == "ranged")
+                        ).length > 0 && (
+                            <>
+                                <h3>{'Ranged Weapons'}</h3>
+                                {allmodelequip.filter((item) =>
+                                        ((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Category == "ranged")
+                                    ).map((equip) =>
+                                        (
+                                            <WbbEquipmentListItem
+                                                key={allmodelequip.indexOf(equip)}
+                                                item={equip.purchase}
+                                                fighter={warbandmember}
+                                            />
+                                ))}
+                            </>
+                        )
+                        }
                     </div>
 
                     <div className={'play-mode-equipment-wrap'}>
-                        <h3>{'Melee Weapons'}</h3>
-                        {/* @TODO: For each Item
-                        <WbbEquipmentListItem
-                            item={item_trench_knife}
-                        /> */}
+                        {allmodelequip.filter((item) =>
+                            ((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Category == "melee")
+                        ).length > 0 && (
+                            <>
+                                <h3>{'Melee Weapons'}</h3>
+                                {allmodelequip.filter((item) =>
+                                        ((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Category == "melee")
+                                    ).map((equip) =>
+                                        (
+                                            <WbbEquipmentListItem
+                                                key={allmodelequip.indexOf(equip)}
+                                                item={equip.purchase}
+                                                fighter={warbandmember}
+                                            />
+                                ))}
+                            </>
+                        )
+                        }
                     </div>
 
                     <div className={'play-mode-equipment-wrap'}>
-                        <h3>{'Armour'}</h3>
+                        
+                        {allmodelequip.filter((item) =>
+                            ((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Category == "armour")
+                        ).length > 0 && (
+                            <>
+                                <h3>{'Armour'}</h3>
+                                {allmodelequip.filter((item) =>
+                                        ((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Category == "armour")
+                                    ).map((equip) =>
+                                        (
+                                            <WbbEquipmentListItem
+                                                key={allmodelequip.indexOf(equip)}
+                                                item={equip.purchase}
+                                                fighter={warbandmember}
+                                            />
+                                ))}
+                            </>
+                        )
+                        }
                     </div>
 
                     <div className={'play-mode-equipment-wrap'}>
-                        <h3>{'Equipment'}</h3>
+                        {allmodelequip.filter((item) =>
+                            ((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Category == "equipment")
+                        ).length > 0 && (
+                            <>
+                                <h3>{'Equipment'}</h3>
+                                {allmodelequip.filter((item) =>
+                                        ((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Category == "equipment")
+                                    ).map((equip) =>
+                                        (
+                                            <WbbEquipmentListItem
+                                                key={allmodelequip.indexOf(equip)}
+                                                item={equip.purchase}
+                                                fighter={warbandmember}
+                                            />
+                                ))}
+                            </>
+                        )
+                        }
                     </div>
 
                     <div className={'play-mode-abilities-wrap'}>

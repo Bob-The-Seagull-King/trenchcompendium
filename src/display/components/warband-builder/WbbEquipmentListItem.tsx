@@ -16,7 +16,7 @@ import {usePrintMode} from "../../../context/PrintModeContext";
 import { RealWarbandPurchaseEquipment, RealWarbandPurchaseModel, WarbandPurchase } from '../../../classes/saveitems/Warband/Purchases/WarbandPurchase';
 import { WarbandEquipment } from '../../../classes/saveitems/Warband/Purchases/WarbandEquipment';
 import { Equipment } from '../../../classes/feature/equipment/Equipment';
-import { getCostType } from '../../../utility/functions';
+import { getCostType, makestringpresentable } from '../../../utility/functions';
 import { useWarband } from '../../../context/WarbandContext';
 import { returnDescription } from '../../../utility/util';
 import KeywordDisplay from '../features/glossary/KeywordDisplay';
@@ -94,7 +94,7 @@ const WbbEquipmentListItem: React.FC<EquipmentItemProps> = ({ item, fighter }) =
                                     Type
                                 </td>
                                 <td>
-                                    {ItemValue.Category}
+                                    {makestringpresentable( ItemValue.Category)}
                                 </td>
                             </tr>
                         }
@@ -109,7 +109,7 @@ const WbbEquipmentListItem: React.FC<EquipmentItemProps> = ({ item, fighter }) =
                             </tr>
                         }
                     </table>
-                    { ItemValue.KeyWord &&
+                    { ItemValue.KeyWord.length > 0 &&
                         <div className={'keywords-wrap'}>
                             <div className={'text-label'}>
                                 {'Keywords'}
@@ -132,7 +132,7 @@ const WbbEquipmentListItem: React.FC<EquipmentItemProps> = ({ item, fighter }) =
                             </div>
                         </div>
                     }
-                    { ItemValue.Description &&
+                    { ItemValue.Description.length > 0 &&
                         <div className={'rules-wrap'}>
                             <div className={'text-label'}>
                                 {'Rules'}

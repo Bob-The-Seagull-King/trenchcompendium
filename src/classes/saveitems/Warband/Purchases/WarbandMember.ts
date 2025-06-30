@@ -1010,6 +1010,58 @@ class WarbandMember extends DynamicContextObject {
         }, this, Equipment);
         this.Equipment.push(NewPurchase);
     }
+
+    public async GetAllEquipForShow() {
+        
+        const options : RealWarbandPurchaseEquipment[] = [ ];
+
+        for (let i = 0; i < this.Equipment.length; i++) {
+            options.push(
+                {
+                    purchase: this.Equipment[i],
+                    equipment: this.Equipment[i].HeldObject as WarbandEquipment
+                }
+            )
+        }
+
+        for (let i = 0; i < this.ModelEquipments.length; i++) {
+            for (let j = 0; j < this.ModelEquipments[i].SelfDynamicProperty.Selections.length; j++) {
+                console.log(this.ModelEquipments[i].SelfDynamicProperty.Selections[j])
+                const SelecCur = this.ModelEquipments[i].SelfDynamicProperty.Selections[j].SelectedChoice;
+                try {
+                    if (SelecCur) {
+                        const Val = SelecCur.value as ModelEquipmentRelationship;
+
+                        for (let k = 0; k < Val.EquipmentItems.length; k++) {
+                            const Model : WarbandEquipment = await WarbandFactory.BuildModelEquipmentFromPurchase(Val, Val.EquipmentItems[k], this);
+                            const NewPurchase : WarbandPurchase = new WarbandPurchase({
+                                cost_value : Val.SaleValue,
+                                cost_type : Val.SaleType,
+                                count_limit : false,
+                                count_cap : false,
+                                sell_item : Val.Removable,
+                                sell_full : true,
+                                purchaseid: Val.ID,
+                                faction_rel_id: Val.ID,
+                                custom_rel: Val.SelfData,
+                                modelpurch: true
+                            }, this, Model);
+
+                            options.push(
+                                {
+                                    purchase: NewPurchase,
+                                    equipment: Model
+                                }
+                            )
+                        }
+
+                    }
+                } catch(e) { console.log(e)}
+            }
+        }
+
+        return options;
+    }
     
     public async DirectAddStash( item : RealWarbandPurchaseEquipment) {
         if (item.purchase.Sellable == false) {return}

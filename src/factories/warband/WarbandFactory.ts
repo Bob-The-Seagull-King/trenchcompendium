@@ -90,7 +90,6 @@ class WarbandFactory {
         await rule.BuildUpgrades(data);
         await rule.BuildModelEquipProperties(data);
         await rule.BuildModelEquipment(false);
-        console.log(rule);
         return rule;
     }
 
