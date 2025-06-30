@@ -325,7 +325,8 @@ class UserWarband extends DynamicContextObject {
                 sell_full : true,
                 purchaseid: fighter[i].Model.ID,
                 faction_rel_id: fighter[i].ID,
-                custom_rel: fighter[i].SelfData
+                custom_rel: fighter[i].SelfData,
+                modelpurch: false
             }, this, Model);
             this.Models.push(NewPurchase);
         }
@@ -405,7 +406,8 @@ class UserWarband extends DynamicContextObject {
             sell_full : true,
             purchaseid: stash.EquipmentItem.ID,
             faction_rel_id: stash.ID,
-            custom_rel: stash.SelfData
+            custom_rel: stash.SelfData,
+            modelpurch: false
         }, this, Equipment);
         this.Equipment.push(NewPurchase);
     }
@@ -439,7 +441,8 @@ class UserWarband extends DynamicContextObject {
             sell_full : true,
             purchaseid: Relationship.EquipmentItem.ID,
             faction_rel_id: Relationship.ID,
-            custom_rel: Relationship.SelfData
+            custom_rel: Relationship.SelfData,
+            modelpurch: false
         }, this, Equipment);
         this.Equipment.push(NewPurchase);
         

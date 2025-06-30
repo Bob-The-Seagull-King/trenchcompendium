@@ -23,7 +23,8 @@ interface IWarbandPurchase {
     sell_full : boolean,
     purchaseid: string,
     faction_rel_id: string,
-    custom_rel?: IFactionModelRelationship | IFactionEquipmentRelationship | IModelUpgradeRelationship
+    custom_rel?: IFactionModelRelationship | IFactionEquipmentRelationship | IModelUpgradeRelationship,
+    modelpurch : boolean
 }
 
 interface IWarbandPurchaseModel {
@@ -70,6 +71,7 @@ class WarbandPurchase {
     CountCap : boolean;
     Sellable : boolean;
     FullSell : boolean;
+    ModelPurchase : boolean;
     
 
     /**
@@ -91,6 +93,11 @@ class WarbandPurchase {
         if (data.custom_rel) {
             this.CustomInterface = data.custom_rel;
         }
+        if (data.modelpurch) {
+            this.ModelPurchase = data.modelpurch;
+        } else {
+            this.ModelPurchase = false;
+        }
     }
 
     public ConvertToInterface() {
@@ -104,7 +111,8 @@ class WarbandPurchase {
             sell_full : this.FullSell,
             purchaseid: this.HeldObject.ID,
             faction_rel_id: this.PurchaseInterface,
-            custom_rel : this.CustomInterface
+            custom_rel : this.CustomInterface,
+            modelpurch : this.ModelPurchase
         }
         
         return _objint;

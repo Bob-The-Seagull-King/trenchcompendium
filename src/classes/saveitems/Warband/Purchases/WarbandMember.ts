@@ -850,7 +850,8 @@ class WarbandMember extends DynamicContextObject {
             sell_full : true,
             purchaseid: CurUpgrade.ID,
             faction_rel_id: stash.ID,
-            custom_rel: stash.SelfData
+            custom_rel: stash.SelfData,
+            modelpurch : true
         }, this, NewRuleProperty);
         this.Upgrades.push(NewPurchase);
 
@@ -934,7 +935,8 @@ class WarbandMember extends DynamicContextObject {
             sell_full : true,
             purchaseid: item.EquipmentItem.ID,
             faction_rel_id: item.ID,
-            custom_rel: item.SelfData
+            custom_rel: item.SelfData,
+            modelpurch : false
         }, this, Equipment);
         this.Equipment.push(NewPurchase);
     }
@@ -968,7 +970,8 @@ class WarbandMember extends DynamicContextObject {
             sell_full : true,
             purchaseid: Relationship.EquipmentItem.ID,
             faction_rel_id: Relationship.ID,
-            custom_rel: Relationship.SelfData
+            custom_rel: Relationship.SelfData,
+            modelpurch : item.purchase.ModelPurchase
         }, this, Equipment);
         this.Equipment.push(NewPurchase);
         
