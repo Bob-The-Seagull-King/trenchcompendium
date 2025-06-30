@@ -34,7 +34,7 @@ export interface MemberAndWarband {
     model: WarbandMember
 }
 
-interface ModelHands {
+export interface ModelHands {
     ranged: number,
     melee : number,
     special : number
@@ -43,7 +43,9 @@ interface ModelHands {
 export interface MemberUpgradePresentation {
     upgrade : ModelUpgradeRelationship,
     purchase : WarbandPurchase | null,
-    allowed : boolean
+    allowed : boolean,
+    cur_count : number,
+    max_count : number
 }
 export type MemberUpgradesGrouped = {[type : string]: 
     {
@@ -64,8 +66,7 @@ interface IWarbandMember extends IContextObject {
     list_modelequipment : IWarbandProperty[],
     experience : number,
     elite : boolean,
-    recruited: boolean,
-    fighterName: string
+    recruited: boolean
 }
 
 class WarbandMember extends DynamicContextObject {
@@ -325,8 +326,7 @@ class WarbandMember extends DynamicContextObject {
             experience : this.Experience,
             list_modelequipment: modelpropset,
             elite : this.Elite,
-            recruited : this.Recruited,
-            fighterName: '' // @TODO: Set Fighter name - initially empty Fighter Name might even be correct
+            recruited : this.Recruited
         }
         
         return _objint;
@@ -506,8 +506,6 @@ class WarbandMember extends DynamicContextObject {
     /**
      * Get the name of the Fighter
      * - i.e. "Steve the fearless"
-     *
-     * // @TODO: This need to be set somewhere
      * @return: string
      */
     GetFighterName () {
@@ -534,39 +532,12 @@ class WarbandMember extends DynamicContextObject {
     }
 
     /**
-     * Return the total cost of the fighter in Ducats
-     * - This includes base cost plus upgrades
-     *
-     * // @TODO: calculate actual ducats value
-     * @return: int
-     */
-    GetTotalCostDucats () {
-
-        const $total = this.GetBaseCostDucats () + 50;
-        return $total;
-
-    }
-
-    /**
      * The base glory cost of the fighter on recruitment
      *
      * @return: int
      */
     GetBaseCostGlory () {
         return 0;
-    }
-
-    /**
-     * Returns the total cost of the fighter in Glory
-     * - This includes base cost plus upgrades
-     *
-     * // @TODO: calculate actual glory value
-     * @return: int
-     */
-    GetTotalCostGlory () {
-
-        const total = this.GetBaseCostGlory() + 2;
-        return total;
     }
 
     /**
@@ -760,7 +731,7 @@ class WarbandMember extends DynamicContextObject {
 
         let maxcount = upg.WarbandLimit;
         maxcount = await Events.runEvent(
-            "getUpgradeLimitTrue", // @TODO Lane
+            "getUpgradeLimitTrue",
             upg,
             [],
             maxcount,
@@ -774,7 +745,7 @@ class WarbandMember extends DynamicContextObject {
 
         if (canaddupgrade) {
             const careAboutRequired = await Events.runEvent(
-                "getRequiresUpgradesBool", // @TODO Lane
+                "getRequiredUpgradesBool",
                 upg,
                 [],
                 true,
@@ -817,7 +788,7 @@ class WarbandMember extends DynamicContextObject {
         }
         if (canaddupgrade) {
             canaddupgrade = await Events.runEvent(
-                "canModelGetUpgrade", // @TODO Lane
+                "canModelGetUpgrade",
                 upg,
                 [],
                 canaddupgrade,
@@ -830,7 +801,9 @@ class WarbandMember extends DynamicContextObject {
         return {
             upgrade : upg,
             purchase : foundpurchase,
-            allowed : canaddupgrade
+            allowed : canaddupgrade,
+            cur_count: (this.MyContext as UserWarband).GetCountOfUpgradeRel(upg.ID),
+            max_count: maxcount
         }
     }
 
@@ -959,7 +932,11 @@ class WarbandMember extends DynamicContextObject {
                     "equipmentHandsCost", // @TODO Lane
                     BaseFactionOptions[i],
                     [],
-                    true,
+                    {
+                        melee: 0,
+                        ranged: 0,
+                        special: 0
+                    },
                     this
                 )
                 CanAdd = this.CompareHands(EquipHands, CurrentHandsAvailable)
@@ -983,15 +960,15 @@ class WarbandMember extends DynamicContextObject {
             special: 0
         }
         const eventmon : EventRunner = new EventRunner();
-        const AvailableHands = await eventmon.runEvent(
+        const AvailableHands : ModelHands = await eventmon.runEvent(
                 "getModelHandsAvailable",
                 this,
                 [],
-                true,
+                BaseHands,
                 this.MyContext
             )
         // @TODO Lane get how many hands they have left
-        return BaseHands;
+        return AvailableHands;
     }
 
     public async AddEquipment(item : FactionEquipmentRelationship) {

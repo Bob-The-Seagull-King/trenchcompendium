@@ -94,37 +94,6 @@ class ModelUpgradeRelationship extends StaticOptionContextObject {
     }
 
     /**
-     * Returns the current uses of this upgrade as int
-     * // @TODO: add actual usage value
-     */
-    public GetLimitNumber () {
-        return 2;
-    }
-
-    /**
-     * Returns the max limit as int for this upgrade
-     - 0 if no limit
-     * // @TODO: add actual limit value
-     *
-     * @return: int
-     */
-    public GetLimitNumberTotal () {
-        return 2;
-    }
-
-    /**
-     * Returns bool if the limit for this upgrade is reached
-     * @return: boolean
-     */
-    public IsLimitReached () {
-        if( this.GetLimitNumber() < this.GetLimitNumberTotal() ) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-
-    /**
      * Get the Limit String For this Upgrade
      * @constructor
      */
