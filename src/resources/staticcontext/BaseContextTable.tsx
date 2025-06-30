@@ -1015,13 +1015,14 @@ export const BaseContextCallTable : CallEventTable = {
         },
         async canModelAddItem(this: EventRunner, eventSource : any, relayVar : boolean,  trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, restrictions : EquipmentRestriction[]) {
             console.log("canModelAddItem")
-            console.log((eventSource as WarbandMember).GetTrueName())
+            console.log((eventSource as ContextObject).GetTrueName())
             console.log(eventSource)
             console.log(relayVar)
             console.log(trackVal)
             console.log(context_func)
             console.log(context_static)
             console.log(context_main)
+            console.log(restrictions)
             
             return relayVar;
         }
