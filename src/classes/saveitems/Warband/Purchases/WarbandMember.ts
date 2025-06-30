@@ -27,6 +27,7 @@ import { UserWarband } from "../UserWarband";
 import { WarbandFactory } from "../../../../factories/warband/WarbandFactory";
 import { FactionEquipmentRelationship, IFactionEquipmentRelationship } from "../../../relationship/faction/FactionEquipmentRelationship";
 import { EquipmentFactory } from "../../../../factories/features/EquipmentFactory";
+import { ModelEquipmentRelationship } from "../../../relationship/model/ModelEquipmentRelationship";
 
 export interface MemberAndWarband {
     warband: UserWarband,
@@ -60,6 +61,7 @@ interface IWarbandMember extends IContextObject {
     list_upgrades : IWarbandPurchaseUpgrade[],
     list_injury : IWarbandProperty[],
     list_skills : IWarbandProperty[],
+    list_modelequipment : IWarbandProperty[],
     experience : number,
     elite : boolean,
     recruited: boolean,
@@ -81,7 +83,7 @@ class WarbandMember extends DynamicContextObject {
     Experience : number;
     Elite : boolean;
     Recruited : boolean;
-    FighterName?: string; // @TODO: Set fighter name
+    ModelEquipments : WarbandProperty[] = [];
 
     /**
      * Assigns parameters and creates a series of description
@@ -99,9 +101,34 @@ class WarbandMember extends DynamicContextObject {
     }
     
 
+    public async BuildModelEquipProperties(data : IWarbandMember = this.SelfData) {
+        const all_eq : ModelEquipmentRelationship[] = this.CurModel.EquipmentList;
+        this.ModelEquipments = [];
+        for (let i = 0; i < all_eq.length; i++) {
+            let IsFound = false
+            for (let j = 0; j < data.subproperties.length; j++) {
+                if (data.subproperties[j].object_id == all_eq[i].ID) {
+                    const NewEquip = await EquipmentFactory.CreateNewModelEquipment(data.list_modelequipment[j].object_id, this)
+                    const NewRuleProperty = new WarbandProperty(NewEquip, this, null, data.subproperties[j]);
+                    await NewRuleProperty.HandleDynamicProps(NewEquip, this, null, data.subproperties[j]);
+                    this.ModelEquipments.push(NewRuleProperty);
+                    IsFound = true;
+                    break;
+                }
+            }
+            if (IsFound == false) {
+                const NewRuleProperty = new WarbandProperty(all_eq[i], this, null, null);
+                await NewRuleProperty.HandleDynamicProps(all_eq[i], this, null, null);
+                this.ModelEquipments.push(NewRuleProperty);
+            }
+        }
+
+        return this.ModelEquipments;
+    }
+
     public async BuildNewProperties(data : IWarbandMember = this.SelfData) {
-        this.SubProperties = [];
         const all_abils : Ability[] = await this.getContextuallyAvailableAbilities();
+        this.SubProperties = [];
         for (let i = 0; i < all_abils.length; i++) {
             let IsFound = false
             for (let j = 0; j < data.subproperties.length; j++) {
@@ -185,6 +212,43 @@ class WarbandMember extends DynamicContextObject {
 
     }
 
+    public async BuildModelEquipment(regenerate : boolean) {
+        for (let i = 0; i < this.ModelEquipments.length; i++) {
+            
+            if ((regenerate == true) || ((this.ModelEquipments[i].SelfDynamicProperty.OptionChoice as ModelEquipmentRelationship).Removable == false)) {
+                const MERelationship = (this.ModelEquipments[i].SelfDynamicProperty.OptionChoice as ModelEquipmentRelationship)
+                for (let j = 0; j < MERelationship.EquipmentItems.length; j++) {
+                    let IsFound = false
+                    /*
+                    for (let k = 0; k < this.Equipment.length; k++) {
+                        if (this.Equipment[k].HeldObject.ID == MERelationship.ID + "_" + MERelationship.EquipmentItems[j].ID + "_" + j) {
+                            IsFound = true;
+                            break;
+                        }
+                    }*/
+                    if (IsFound == false) {
+                        const Model : WarbandEquipment = await WarbandFactory.BuildModelEquipmentFromPurchase(MERelationship, MERelationship.EquipmentItems[j], this);
+                        const NewPurchase : WarbandPurchase = new WarbandPurchase({
+                            cost_value : MERelationship.SaleValue,
+                            cost_type : MERelationship.SaleType,
+                            count_limit : false,
+                            count_cap : false,
+                            sell_item : MERelationship.Removable,
+                            sell_full : true,
+                            purchaseid: MERelationship.ID,
+                            faction_rel_id: MERelationship.ID,
+                            custom_rel: MERelationship.SelfData,
+                            modelpurch: false
+                        }, this, Model);
+                        this.Equipment.push(NewPurchase);
+                    }
+                }
+                    
+            }
+        }
+        return this.Equipment;
+    }
+
     public async BuildSkills(data : IWarbandProperty[]) {
         for (let i = 0; i < data.length; i++) {
             const CurVal = data[i];
@@ -219,9 +283,15 @@ class WarbandMember extends DynamicContextObject {
         for (let i = 0; i < this.Skills.length; i++) {
             skillset.push(this.Skills[i].ConvertToInterface())
         }
+        
         const subpropset : IWarbandProperty[] = [];
         for (let i = 0; i < this.SubProperties.length; i++) {
             subpropset.push(this.SubProperties[i].ConvertToInterface())
+        }
+
+        const modelpropset : IWarbandProperty[] = [];
+        for (let i = 0; i < this.ModelEquipments.length; i++) {
+            subpropset.push(this.ModelEquipments[i].ConvertToInterface())
         }
 
         const equipmentlist : IWarbandPurchaseEquipment[] = []
@@ -254,6 +324,7 @@ class WarbandMember extends DynamicContextObject {
             list_injury : injuryset,
             list_skills : skillset,
             experience : this.Experience,
+            list_modelequipment: modelpropset,
             elite : this.Elite,
             recruited : this.Recruited,
             fighterName: '' // @TODO: Set Fighter name - initially empty Fighter Name might even be correct

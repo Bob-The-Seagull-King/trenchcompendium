@@ -316,6 +316,7 @@ class UserWarband extends DynamicContextObject {
         for (let i = 0; i < fighter.length; i++) { 
             
             const Model : WarbandMember = await WarbandFactory.BuildWarbandMemberFromPurchase(fighter[i], this);
+            await Model.BuildModelEquipment(true);
             const NewPurchase : WarbandPurchase = new WarbandPurchase({
                 cost_value : fighter[i].Cost,
                 cost_type : fighter[i].CostType,

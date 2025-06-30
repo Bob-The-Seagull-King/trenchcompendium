@@ -12,6 +12,8 @@ import { IWarbandFaction, WarbandFaction } from '../../classes/saveitems/Warband
 import { IUserWarband, UserWarband } from '../../classes/saveitems/Warband/UserWarband';
 import { FactionModelRelationship } from '../../classes/relationship/faction/FactionModelRelationship';
 import { FactionEquipmentRelationship } from '../../classes/relationship/faction/FactionEquipmentRelationship';
+import { ModelEquipmentRelationship } from '../../classes/relationship/model/ModelEquipmentRelationship';
+import { Equipment } from '../../classes/feature/equipment/Equipment';
 
 class WarbandFactory {
 
@@ -45,6 +47,24 @@ class WarbandFactory {
         return Equipment;
     }
 
+    static async BuildModelEquipmentFromPurchase(rel: ModelEquipmentRelationship, equipment : Equipment, parent : DynamicContextObject | null) {
+        const data : IWarbandEquipment = {    
+                id: rel.ID + "_" + equipment.ID + "_" + rel.EquipmentItems.indexOf(equipment), // The id of the item
+                name: equipment.GetTrueName(), // The name of the item
+                source: equipment.Source? equipment.Source : "unknown", // The source of the item (core book, homebrew, etc)
+                tags: equipment.Tags,
+                contextdata : equipment.ContextData,            
+                equipment_id: {                    
+                    object_id: equipment.ID,
+                    selections: []
+                },
+                subproperties : []
+            }
+        
+        const Equipment : WarbandEquipment = await WarbandFactory.CreateWarbandEquipment(data, parent);
+        return Equipment;
+    }
+
     static async CreateWarbandExplorationSet(data: IWarbandExplorationSet, parent : DynamicContextObject | null) {
         const rule = new WarbandExplorationSet(data, parent)
         await rule.BuildSkills(data.explorationskills);
@@ -68,6 +88,8 @@ class WarbandFactory {
         await rule.BuildInjuries(data.list_injury);
         await rule.BuildNewProperties(data);
         await rule.BuildUpgrades(data);
+        await rule.BuildModelEquipProperties(data);
+        await rule.BuildModelEquipment(false);
         return rule;
     }
 
@@ -87,6 +109,7 @@ class WarbandFactory {
                 list_upgrades : [],
                 list_injury : [],
                 list_skills : [],
+                list_modelequipment: [],
                 experience : 0,
                 elite : rel.Model.getKeywordIDs().includes("kw_elite"),
                 recruited: false,
