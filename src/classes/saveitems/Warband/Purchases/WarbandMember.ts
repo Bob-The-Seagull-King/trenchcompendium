@@ -17,7 +17,7 @@ import { WarbandEquipment } from "./WarbandEquipment";
 import { UpgradeFactory } from "../../../../factories/features/UpgradeFactory";
 import { InjuryFactory } from "../../../../factories/features/InjuryFactory";
 import { Upgrade } from "../../../feature/ability/Upgrade";
-import { Equipment } from "../../../feature/equipment/Equipment";
+import { Equipment, EquipmentRestriction } from "../../../feature/equipment/Equipment";
 import { Keyword } from "../../../feature/glossary/Keyword";
 import { Ability } from "../../../feature/ability/Ability";
 import { EventRunner } from "../../../contextevent/contexteventhandler";
@@ -918,12 +918,20 @@ class WarbandMember extends DynamicContextObject {
         const eventmon : EventRunner = new EventRunner();
 
         const CurrentHandsAvailable : ModelHands = await this.GetModelHands();
+        
+        const RestrictionList : EquipmentRestriction[] = await eventmon.runEvent(
+            "getEquipmentRestriction",
+            this,
+            [],
+            [],
+            null
+        )
 
         for (let i = 0; i < BaseFactionOptions.length; i++) {
             let CanAdd = await eventmon.runEvent(
                 "canModelAddItem", // @TODO Lane
                 BaseFactionOptions[i],
-                [],
+                [RestrictionList],
                 true,
                 this
             )

@@ -280,6 +280,14 @@ export const BaseContextCallTable : CallEventTable = {
             return relayVar;
         }
     },
+    restriction_override: {
+        event_priotity: 2,
+        getEquipmentRestriction(this: EventRunner, eventSource : any, relayVar : any, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) { 
+            
+            return relayVar;
+        }
+
+    },
     model_equipment_limit : {
         event_priotity: 1,
         async getEquipmentLimitPresentable(this: EventRunner, eventSource : any, relayVar : any, trackVal : EquipmentLimit[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
@@ -1003,6 +1011,18 @@ export const BaseContextCallTable : CallEventTable = {
         },
         getEquipmentRestriction(this: EventRunner, eventSource : any, relayVar : any, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) { 
             relayVar.push(context_func as EquipmentRestriction)
+            return relayVar;
+        },
+        async canModelAddItem(this: EventRunner, eventSource : any, relayVar : boolean,  trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, restrictions : EquipmentRestriction[]) {
+            console.log("canModelAddItem")
+            console.log((eventSource as WarbandMember).GetTrueName())
+            console.log(eventSource)
+            console.log(relayVar)
+            console.log(trackVal)
+            console.log(context_func)
+            console.log(context_static)
+            console.log(context_main)
+            
             return relayVar;
         }
     },
