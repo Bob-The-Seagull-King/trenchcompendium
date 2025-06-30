@@ -218,7 +218,7 @@ class WarbandMember extends DynamicContextObject {
             if ((regenerate == true) || ((this.ModelEquipments[i].SelfDynamicProperty.OptionChoice as ModelEquipmentRelationship).Removable == false)) {
                 const MERelationship = (this.ModelEquipments[i].SelfDynamicProperty.OptionChoice as ModelEquipmentRelationship)
                 for (let j = 0; j < MERelationship.EquipmentItems.length; j++) {
-                    let IsFound = false
+                    const IsFound = false
                     /*
                     for (let k = 0; k < this.Equipment.length; k++) {
                         if (this.Equipment[k].HeldObject.ID == MERelationship.ID + "_" + MERelationship.EquipmentItems[j].ID + "_" + j) {
@@ -226,7 +226,7 @@ class WarbandMember extends DynamicContextObject {
                             break;
                         }
                     }*/
-                    if (IsFound == false) {
+                    if ( !IsFound ) {
                         const Model : WarbandEquipment = await WarbandFactory.BuildModelEquipmentFromPurchase(MERelationship, MERelationship.EquipmentItems[j], this);
                         const NewPurchase : WarbandPurchase = new WarbandPurchase({
                             cost_value : MERelationship.SaleValue,
