@@ -112,8 +112,7 @@ class WarbandFactory {
                 list_modelequipment: [],
                 experience : 0,
                 elite : rel.Model.getKeywordIDs().includes("kw_elite"),
-                recruited: false,
-                fighterName: '' // @TODO: fighter name needs to be set
+                recruited: false
             }
         
         const Model : WarbandMember = await WarbandFactory.CreateWarbandMember(data, parent);
