@@ -304,21 +304,6 @@ class UserWarband extends DynamicContextObject {
         return options;
     }
 
-
-    /** @TODO
-     * Gets the ranged weapon options for a fighter by its ID
-     *
-     * @param fighter_id
-     */
-    public GetRangedWeaponOptions ( fighter_id: string ) {
-
-        // @TODO: get real options
-        const options : any[] = [ ];
-
-
-        return options;
-    }
-
     /**
      * WBB Actions
      */

@@ -33,6 +33,12 @@ export interface MemberAndWarband {
     model: WarbandMember
 }
 
+interface ModelHands {
+    ranged: number,
+    melee : number,
+    special : number
+}
+
 export interface MemberUpgradePresentation {
     upgrade : ModelUpgradeRelationship,
     purchase : WarbandPurchase | null,
@@ -866,20 +872,55 @@ class WarbandMember extends DynamicContextObject {
         const BaseFactionOptions : FactionEquipmentRelationship[] = await (this.MyContext as UserWarband).GetFactionEquipmentOptions();
 
         const eventmon : EventRunner = new EventRunner();
+
+        const CurrentHandsAvailable : ModelHands = await this.GetModelHands();
+
         for (let i = 0; i < BaseFactionOptions.length; i++) {
-            const CanAdd = await eventmon.runEvent(
-                "canModelAddItem",
+            let CanAdd = await eventmon.runEvent(
+                "canModelAddItem", // @TODO Lane
                 BaseFactionOptions[i],
                 [],
                 true,
                 this
             )
             if (CanAdd) {
+                const EquipHands : ModelHands = await eventmon.runEvent(
+                    "equipmentHandsCost", // @TODO Lane
+                    BaseFactionOptions[i],
+                    [],
+                    true,
+                    this
+                )
+                CanAdd = this.CompareHands(EquipHands, CurrentHandsAvailable)
+            }
+            if (CanAdd) {
                 ListOfOptions.push(BaseFactionOptions[i]);
             }
         }
 
         return ListOfOptions;
+    }
+
+    public CompareHands(equipment_need : ModelHands, model_have : ModelHands) {
+        return true; //@TODO Lane compare hands
+    }
+
+    public async GetModelHands() {
+        const BaseHands : ModelHands = {
+            melee: 2,
+            ranged: 2,
+            special: 0
+        }
+        const eventmon : EventRunner = new EventRunner();
+        const AvailableHands = await eventmon.runEvent(
+                "getModelHandsAvailable",
+                this,
+                [],
+                true,
+                this.MyContext
+            )
+        // @TODO Lane get how many hands they have left
+        return BaseHands;
     }
 
     public async AddEquipment(item : FactionEquipmentRelationship) {
