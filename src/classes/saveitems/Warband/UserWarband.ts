@@ -404,6 +404,10 @@ class UserWarband extends DynamicContextObject {
 
         } catch (e) { console.log(e) }
     }
+
+    public async DirectAddStash( item : RealWarbandPurchaseEquipment) {
+        this.Equipment.push(item.purchase);
+    }
     
     public async AddStash ( stash: FactionEquipmentRelationship ) {
         const Equipment : WarbandEquipment = await WarbandFactory.BuildWarbandEquipmentFromPurchase(stash, this);

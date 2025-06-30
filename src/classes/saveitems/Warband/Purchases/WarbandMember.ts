@@ -25,7 +25,8 @@ import { ModelUpgradeRelationship } from "../../../relationship/model/ModelUpgra
 import { UpgradesGrouped } from "../../../relationship/model/ModelUpgradeRelationship";
 import { UserWarband } from "../UserWarband";
 import { WarbandFactory } from "../../../../factories/warband/WarbandFactory";
-import { FactionEquipmentRelationship } from "../../../relationship/faction/FactionEquipmentRelationship";
+import { FactionEquipmentRelationship, IFactionEquipmentRelationship } from "../../../relationship/faction/FactionEquipmentRelationship";
+import { EquipmentFactory } from "../../../../factories/features/EquipmentFactory";
 
 export interface MemberAndWarband {
     warband: UserWarband,
@@ -861,7 +862,24 @@ class WarbandMember extends DynamicContextObject {
     }
 
     public async GetModelEquipmentOptions() {
-        return await (this.MyContext as UserWarband).GetFactionEquipmentOptions();
+        const ListOfOptions : FactionEquipmentRelationship[] = []
+        const BaseFactionOptions : FactionEquipmentRelationship[] = await (this.MyContext as UserWarband).GetFactionEquipmentOptions();
+
+        const eventmon : EventRunner = new EventRunner();
+        for (let i = 0; i < BaseFactionOptions.length; i++) {
+            const CanAdd = await eventmon.runEvent(
+                "canModelAddItem",
+                BaseFactionOptions[i],
+                [],
+                true,
+                this
+            )
+            if (CanAdd) {
+                ListOfOptions.push(BaseFactionOptions[i]);
+            }
+        }
+
+        return ListOfOptions;
     }
 
     public async AddEquipment(item : FactionEquipmentRelationship) {
@@ -878,6 +896,79 @@ class WarbandMember extends DynamicContextObject {
             custom_rel: item.SelfData
         }, this, Equipment);
         this.Equipment.push(NewPurchase);
+    }
+    
+    public async DirectAddStash( item : RealWarbandPurchaseEquipment) {
+        this.Equipment.push(item.purchase);
+    }
+    
+    public async CopyStash( item : RealWarbandPurchaseEquipment ) {
+
+        const IsValidToAdd = await (this.MyContext as UserWarband).AtMaxOfItem(item.purchase.PurchaseInterface);
+
+        if (IsValidToAdd) {
+            return "Warband At Limit For " + item.equipment.MyEquipment.GetTrueName();
+        }
+
+        const CanAddToThisModel = await this.CanAddItem(item.purchase.PurchaseInterface)
+
+        if (!CanAddToThisModel) {
+            return "This model cannot have another " + item.equipment.MyEquipment.GetTrueName();
+        }
+        
+        const Relationship : FactionEquipmentRelationship = await EquipmentFactory.CreateFactionEquipment(item.purchase.CustomInterface as IFactionEquipmentRelationship, this)
+        const Equipment : WarbandEquipment = await WarbandFactory.BuildWarbandEquipmentFromPurchase(Relationship, this);
+        const NewPurchase : WarbandPurchase = new WarbandPurchase({
+            cost_value : Relationship.Cost,
+            cost_type : Relationship.CostType,
+            count_limit : true,
+            count_cap : true,
+            sell_item : true,
+            sell_full : true,
+            purchaseid: Relationship.EquipmentItem.ID,
+            faction_rel_id: Relationship.ID,
+            custom_rel: Relationship.SelfData
+        }, this, Equipment);
+        this.Equipment.push(NewPurchase);
+        
+        return Equipment.MyEquipment.Name + " Sucessfully Duplicated";
+    }
+
+    public async CanAddItem( model : string) {
+        const RefModel : FactionEquipmentRelationship = await EquipmentFactory.CreateNewFactionEquipment(model, null);
+        
+        const eventmon : EventRunner = new EventRunner();
+        const CanAdd = await eventmon.runEvent(
+            "canModelAddItem",
+            RefModel,
+            [],
+            true,
+            this
+        )
+        return CanAdd;
+    }
+
+    public async DeleteStashWithDebt( item : RealWarbandPurchaseEquipment, debt_mod : number) {
+        const CostVarDucats = item.purchase.GetTotalDucats();
+        const CostVarGlory = item.purchase.GetTotalGlory();
+
+        try {
+            await this.DeleteStash(item);
+            (this.MyContext as UserWarband).Debts.ducats +=  Math.ceil(CostVarDucats * debt_mod);
+            (this.MyContext as UserWarband).Debts.glory += Math.ceil(CostVarGlory * debt_mod);
+
+        } catch (e) { console.log(e) }
+    }
+    
+    
+    public async DeleteStash( item : RealWarbandPurchaseEquipment ) {
+        
+        for (let i = 0; i < this.Equipment.length; i++) {
+            if (item.equipment == (this.Equipment[i].HeldObject as WarbandEquipment)) {
+                this.Equipment.splice(i, 1);
+                break;
+            }
+        }
     }
 }
 

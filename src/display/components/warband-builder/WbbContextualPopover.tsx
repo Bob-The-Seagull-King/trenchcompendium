@@ -18,7 +18,8 @@ import {usePlayMode} from "../../../context/PlayModeContext";
 import {usePrintMode} from "../../../context/PrintModeContext";
 import {useGlobalState} from "../../../utility/globalstate";
 import { ToolsController } from '../../../classes/_high_level_controllers/ToolsController';
-import { RealWarbandPurchaseEquipment, RealWarbandPurchaseModel } from '../../../classes/saveitems/Warband/Purchases/WarbandPurchase';
+import { RealWarbandPurchaseEquipment, RealWarbandPurchaseModel, WarbandPurchase } from '../../../classes/saveitems/Warband/Purchases/WarbandPurchase';
+import { WarbandMember } from '../../../classes/saveitems/Warband/Purchases/WarbandMember';
 
 interface WbbContextualPopoverProps {
     id: string;
@@ -36,6 +37,8 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
             </>
         )
     }
+
+    const [selectedFighter, setSelectedFighter] = useState<WarbandPurchase | null>(null);
 
     const { activePopoverId, setActivePopoverId } = usePopover();
     const { warband, reloadDisplay } = useWarband();
@@ -148,8 +151,16 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
 
 
     const handleMoveEquipmentToStash = () => {
-        // @TODO: Move this equipment to stash
-        console.log('handleMoveEquipmentToStash');
+        if (!(context == undefined || context == null )) {
+            context.model.DeleteStash(item).then(() => {
+                warband?.warband_data.DirectAddStash(item).then(() => {
+                const Manager : ToolsController = ToolsController.getInstance();
+                Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
+                    () => reloadDisplay())
+                })
+            })
+            
+        }
     }
 
     const showConfirmMoveEquipment = () => {
@@ -157,41 +168,76 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
         console.log('showConfirmMoveEquipment');
     }
 
-    const handleMoveEquipment = () => { // @TODO: pass new fighter (and maybe old fighter) variable here
-        // @TODO: Move Equipment to fighter
-        setshowConfirmMoveEquipmentModal(false)
-        console.log('handleMoveEquipment');
+    const handleMoveEquipment = () => {
+        if (selectedFighter != null) {
+            console.log(selectedFighter)
+            if (context == undefined || context == null) {
+                warband?.warband_data.DeleteStash(item).then(() => {
+                    (selectedFighter.HeldObject as WarbandMember).DirectAddStash(item).then(() => {
+                    const Manager : ToolsController = ToolsController.getInstance();
+                    Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
+                        () => reloadDisplay())
+                    })
+                })
+            } else {
+                context.model.DeleteStash(item).then(() => {
+                    (selectedFighter.HeldObject as WarbandMember).DirectAddStash(item).then(() => {
+                    const Manager : ToolsController = ToolsController.getInstance();
+                    Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
+                        () => reloadDisplay())
+                    })
+                })
+            }
+            setshowConfirmMoveEquipmentModal(false)
+        }
     }
 
     const showConfirmSellEquipment = () => {
         setshowConfirmSellEquipmentModal(true);
-        console.log('showConfirmSellEquipment');
     }
 
     const handleSellEquipment = () => {
-        
-        console.log('handleSellEquipment');
-
-        warband?.warband_data.DeleteStashWithDebt(item, 0.5).then(() => {
-            const Manager : ToolsController = ToolsController.getInstance();
-            Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
-                () => reloadDisplay())
-        })
+        if (context == undefined || context == null) {
+            warband?.warband_data.DeleteStashWithDebt(item, 0.5).then(() => {
+                const Manager : ToolsController = ToolsController.getInstance();
+                Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
+                    () => reloadDisplay())
+            })
+        } else {
+            context.model.DeleteStashWithDebt(item, 0.5).then(() => {
+                const Manager : ToolsController = ToolsController.getInstance();
+                Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
+                    () => reloadDisplay())
+            })
+        }
         setshowConfirmSellEquipmentModal(false);
     }
 
     const handleCopyEquipment = () => {
 
-        warband?.warband_data.CopyStash(item).then((result : string) => {
-            if (result.includes(" Sucessfully Duplicated") == false) {
-                toast.error(result);
-            } else { 
-                const Manager : ToolsController = ToolsController.getInstance();
-                Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
-                    () => reloadDisplay())
-                
-            }
-        })
+        if (context == undefined || context == null) {
+            warband?.warband_data.CopyStash(item).then((result : string) => {
+                if (result.includes(" Sucessfully Duplicated") == false) {
+                    toast.error(result);
+                } else { 
+                    const Manager : ToolsController = ToolsController.getInstance();
+                    Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
+                        () => reloadDisplay())
+                    
+                }
+            })
+        } else {
+            context.model.CopyStash(item).then((result : string) => {
+                if (result.includes(" Sucessfully Duplicated") == false) {
+                    toast.error(result);
+                } else { 
+                    const Manager : ToolsController = ToolsController.getInstance();
+                    Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
+                        () => reloadDisplay())
+                    
+                }
+            })
+        }
     }
 
     const showConfirmRefundEquipment = () => {
@@ -201,29 +247,40 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
     const handleRefundEquipment = () => {
         setshowConfirmRefundEquipmentModal(false);
         
-        console.log('handleRefundEquipment');
-
-        warband?.warband_data.DeleteStash(item).then(() => {
-            const Manager : ToolsController = ToolsController.getInstance();
-            Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
-                () => reloadDisplay())
-        })
+        if (context == undefined || context == null ) {
+            warband?.warband_data.DeleteStash(item).then(() => {
+                const Manager : ToolsController = ToolsController.getInstance();
+                Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
+                    () => reloadDisplay())
+            })
+        } else {
+            context.model.DeleteStash(item).then(() => {
+                const Manager : ToolsController = ToolsController.getInstance();
+                Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
+                    () => reloadDisplay())
+            })
+        }
     }
 
     const showConfirmDeleteEquipment = () => {
         setshowConfirmDeleteEquipmentModal(true);
-        console.log('showConfirmDeleteEquipment');
     }
     const handleDeleteEquipment = () => {
         setshowConfirmDeleteEquipmentModal(false);
         
-        console.log('handleDeleteEquipment');
-
-        warband?.warband_data.DeleteStashWithDebt(item, 1).then(() => {
-            const Manager : ToolsController = ToolsController.getInstance();
-            Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
-                () => reloadDisplay())
-        })
+        if (context == undefined || context == null) {
+            warband?.warband_data.DeleteStashWithDebt(item, 1).then(() => {
+                const Manager : ToolsController = ToolsController.getInstance();
+                Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
+                    () => reloadDisplay())
+            })
+        } else {
+            context.model.DeleteStashWithDebt(item, 1).then(() => {
+                const Manager : ToolsController = ToolsController.getInstance();
+                Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
+                    () => reloadDisplay())
+            })
+        }
     }
 
     /** Advancement Actions */
@@ -402,14 +459,12 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
 
                             {(type === 'equipment' || type === 'equipment_model') &&
                                 <>
-                                    {type === 'equipment' &&
-                                        <div
-                                        className={'action action-move-to-fighter'} onClick={showConfirmMoveEquipment}
-                                        >
-                                            <FontAwesomeIcon icon={faArrowLeft} className="icon-inline-left-l"/>
-                                            {'Move to Fighter'}
-                                        </div>
-                                    }
+                                    <div
+                                    className={'action action-move-to-fighter'} onClick={showConfirmMoveEquipment}
+                                    >
+                                        <FontAwesomeIcon icon={faArrowLeft} className="icon-inline-left-l"/>
+                                        {'Move to Fighter'}
+                                    </div>
                                     {type === 'equipment_model' &&
 
                                         <div
@@ -738,18 +793,27 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
             </Modal>
 
             {/** Move Equipment to Fighter Confirm Modal */}
-            <Modal show={showConfirmMoveEquipmentModal} onHide={() => setshowConfirmMoveEquipmentModal(false)} centered>
+            <Modal className="WbbEditGoeticSelectionModal" show={showConfirmMoveEquipmentModal} onHide={() => setshowConfirmMoveEquipmentModal(false)} centered>
                 <Modal.Header closeButton>
                     <Modal.Title>{`Move Equipment to Fighter`}</Modal.Title>
                 </Modal.Header>
 
                 <Modal.Body>
                     <div className={'mb-3'}>
-                        {/* @TODO: add options to move equipment here*/}
-                        {'Are you sure you want to Move this Equipment?'}
+                        <div className={'goetic-selection-wrap'}>
+                            {warband?.warband_data.Models.map((discipline) => (
+                            <div
+                                key={discipline.HeldObject.ID + discipline.HeldObject.ID}
+                                className={`select-item ${selectedFighter === discipline ? 'selected' : ''}`}
+                                onClick={() => setSelectedFighter(discipline)}
+                            >
+                                {(discipline.HeldObject as WarbandMember).GetFighterName()}
+                            </div>
+                            ))}
+                        </div>
                     </div>
                     <div >
-                        <strong>{item.Name }</strong>?
+                        <strong>{(item.equipment != undefined)? item.equipment.GetTrueName() : ""}</strong>?
                     </div>
                 </Modal.Body>
 
