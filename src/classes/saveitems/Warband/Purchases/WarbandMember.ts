@@ -933,17 +933,21 @@ class WarbandMember extends DynamicContextObject {
             for (let j = 0; j < RestrictionList.length; j++) {
                 NewRefList.push(RestrictionList[i]);
             }
+
             const EquipRestrictionList : EquipmentRestriction[] = await eventmon.runEvent(
                 "getEquipmentRestriction",
                 BaseFactionOptions[i],
                 [],
-                NewRefList,
+                [],
                 null
             )
+            for (let j = 0; j < EquipRestrictionList.length; j++) {
+                NewRefList.push(EquipRestrictionList[i]);
+            }
             let CanAdd = await eventmon.runEvent(
                 "canModelAddItem", // @TODO Lane
                 BaseFactionOptions[i],
-                [EquipRestrictionList],
+                [NewRefList],
                 true,
                 this
             )
