@@ -28,6 +28,7 @@ import { WarbandFactory } from "../../../../factories/warband/WarbandFactory";
 import { FactionEquipmentRelationship, IFactionEquipmentRelationship } from "../../../relationship/faction/FactionEquipmentRelationship";
 import { EquipmentFactory } from "../../../../factories/features/EquipmentFactory";
 import { ModelEquipmentRelationship } from "../../../relationship/model/ModelEquipmentRelationship";
+import { containsTag } from "utility/functions";
 
 export interface MemberAndWarband {
     warband: UserWarband,
@@ -922,45 +923,48 @@ class WarbandMember extends DynamicContextObject {
         const eventmon : EventRunner = new EventRunner();
 
         const CurrentHandsAvailable : ModelHands = await this.GetModelHands();
+
+        const RestrictionList : EquipmentRestriction[] = await eventmon.runEvent(
+            "getEquipmentRestriction",
+            this,
+            [],
+            [],
+            null
+        )
         
         for (let i = 0; i < BaseFactionOptions.length; i++) {
 
-            const EquipRestrictionList : EquipmentRestriction[] = await eventmon.runEvent(
-                "getEquipmentRestriction",
-                BaseFactionOptions[i],
-                [],
-                [],
-                null
-            )
-            const RestrictionList : EquipmentRestriction[] = await eventmon.runEvent(
-                "getEquipmentRestriction",
-                this,
-                [],
-                [],
-                null
-            )
-            
-            const NewRefList : EquipmentRestriction[] = [];
-
-            for (let j = 0; j < RestrictionList.length; j++) {
-                NewRefList.push(RestrictionList[j]);
-            }
-            for (let j = 0; j < EquipRestrictionList.length; j++) {
-                NewRefList.push(EquipRestrictionList[j]);
-            }
-            
-            let CanAdd = await eventmon.runEvent(
-                "canModelAddItem",
-                this,
-                [NewRefList],
-                true,
-                {
-                    model: this,
-                    item : BaseFactionOptions[i]
-                }
-            )
+            let CanAdd = await this.EquipItemAvailableSpace(BaseFactionOptions[i], CurrentHandsAvailable)
 
             if (CanAdd) {
+
+                const NewRefList : EquipmentRestriction[] = [];
+
+                const EquipRestrictionList : EquipmentRestriction[] = await eventmon.runEvent(
+                    "getEquipmentRestriction",
+                    BaseFactionOptions[i],
+                    [],
+                    [],
+                    null
+                )
+                
+                for (let j = 0; j < RestrictionList.length; j++) {
+                    NewRefList.push(RestrictionList[j]);
+                }
+                for (let j = 0; j < EquipRestrictionList.length; j++) {
+                    NewRefList.push(EquipRestrictionList[j]);
+                }
+            
+                CanAdd = await eventmon.runEvent(
+                    "canModelAddItem",
+                    this,
+                    [NewRefList],
+                    true,
+                    {
+                        model: this,
+                        item : BaseFactionOptions[i]
+                    }
+                )
             
                 CanAdd = await eventmon.runEvent(
                     "canModelAddItem",
@@ -972,20 +976,8 @@ class WarbandMember extends DynamicContextObject {
                         item : BaseFactionOptions[i]
                     }
                 )
-
-                const EquipHands : ModelHands = await eventmon.runEvent(
-                    "equipmentHandsCost", // @TODO Lane
-                    BaseFactionOptions[i],
-                    [],
-                    {
-                        melee: 0,
-                        ranged: 0,
-                        special: 0
-                    },
-                    this
-                )
-                CanAdd = this.CompareHands(EquipHands, CurrentHandsAvailable)
             }
+
             if (CanAdd) {
                 ListOfOptions.push(BaseFactionOptions[i]);
             }
@@ -994,8 +986,60 @@ class WarbandMember extends DynamicContextObject {
         return ListOfOptions;
     }
 
+    public async EquipItemAvailableSpace(item : FactionEquipmentRelationship, model_hands : ModelHands) {
+
+        const EquippedItems = await this.GetAllEquipForShow();
+
+        for (let i = 0; i < EquippedItems.length; i++) {
+            const item : RealWarbandPurchaseEquipment = EquippedItems[i];
+
+            if (
+                containsTag((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Tags, "headgear") &&
+                containsTag(item.equipment.Tags, "headgear")
+            ) {
+                return false;
+            }
+            if (
+                containsTag((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Tags, "grenade") &&
+                containsTag(item.equipment.Tags, "grenade")
+            ) {
+                return false;
+            }
+            if (
+                containsTag((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Tags, "armour") &&
+                containsTag(item.equipment.Tags, "armour")
+            ) {
+                return false;
+            }
+        }
+
+        const eventmon : EventRunner = new EventRunner();
+        const EquipHands : ModelHands = await eventmon.runEvent(
+            "equipmentHandsCost", // @TODO Lane
+            item,
+            [],
+            {
+                melee: 0,
+                ranged: 0,
+                special: 0
+            },
+            this
+        )
+
+        let CanAdd = this.CompareHands(EquipHands, model_hands)
+
+        return CanAdd
+    }
+
     public CompareHands(equipment_need : ModelHands, model_have : ModelHands) {
-        return true; //@TODO Lane compare hands
+        if (
+            (equipment_need.melee > model_have.melee) ||
+            (equipment_need.ranged > model_have.ranged) ||
+            (equipment_need.special > model_have.special)
+        ) {
+            return false;
+        }
+        return true;
     }
 
     public async GetModelHands() {
