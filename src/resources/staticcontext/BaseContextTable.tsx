@@ -1417,7 +1417,9 @@ export const BaseContextCallTable : CallEventTable = {
                             }                  
     
                         }
-                        CanAdd = PassedOne;
+                        if (CanAdd == true) {
+                            CanAdd = PassedOne;
+                        }
                     }
                     
                     if (CurRestriction.banned) {
