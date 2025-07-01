@@ -853,7 +853,7 @@ class UserWarband extends DynamicContextObject {
 
         for (let i = 0; i < BaseRels.length; i++) {
             const IsRestricted : boolean = await this.IsModelRestricted(BaseRels[i]);
-            if (IsRestricted) { continue; };
+            if (IsRestricted) { continue; }
             let maxcount = BaseRels[i].Maximum;
             maxcount = await eventmon.runEvent(
                 "getModelLimitTrue",
