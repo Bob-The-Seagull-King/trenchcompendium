@@ -852,6 +852,8 @@ class UserWarband extends DynamicContextObject {
         )
 
         for (let i = 0; i < BaseRels.length; i++) {
+            const IsRestricted : boolean = await this.IsModelRestricted(BaseRels[i]);
+            if (IsRestricted) { continue; };
             let maxcount = BaseRels[i].Maximum;
             maxcount = await eventmon.runEvent(
                 "getModelLimitTrue",
@@ -866,6 +868,29 @@ class UserWarband extends DynamicContextObject {
         }
 
         return ListOfRels
+    }
+
+    public async IsModelRestricted(model : FactionModelRelationship) : Promise<boolean> {
+        const eventmon : EventRunner = new EventRunner();
+        const AvoidRestriction = await eventmon.runEvent(
+            "avoidModelRestriction",
+            this,
+            [],
+            false,
+            model
+        )
+
+        if (!AvoidRestriction) {
+            for (let i = 0; i < model.Restricted_Models.length; i++) {
+                for (let j = 0; j < model.Restricted_Models[i].upgrade_ids.length; j++) {
+                    if (this.GetCountOfRel(model.Restricted_Models[i].upgrade_ids[j]) > model.Restricted_Models[i].max_count) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
     }
 
     public async GetFactionEquipmentOptions() : Promise<FactionEquipmentRelationship[]> {
