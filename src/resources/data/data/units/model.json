@@ -120,7 +120,7 @@
             "model_equipment_limit": {
                 "maximum": [
                     {
-                        "tag": "weapon",
+                        "tag": "brazen_bull",
                         "res_type": "tag",
                         "value": "brazen_bull",
                         "limit": 2

@@ -282,9 +282,6 @@ export const BaseContextCallTable : CallEventTable = {
         async canModelAddItem(this: EventRunner, eventSource : any, relayVar : boolean,  trackVal : FactionEquipmentRelationship, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, restrictions : EquipmentRestriction[]) {            
             
             let CanAdd = relayVar;
-            console.log(eventSource.ID);
-            console.log(trackVal.ID);
-            console.log(restrictions);
 
             // Removed, required, banned
             if (CanAdd) {
@@ -436,117 +433,6 @@ export const BaseContextCallTable : CallEventTable = {
                     }
                 }
             }
-
-            // Permitted
-            if (CanAdd) {
-                for (let i = 0; i < restrictions.length; i++) {
-                    const CurRestriction : EquipmentRestriction = restrictions[i];
-
-                    if (CurRestriction.permitted) {
-                        for (let j = 0; j < CurRestriction.permitted.length; j++) {
-                            const Requirement = CurRestriction.permitted[j]
-
-                            if (Requirement.category) {
-                                if (trackVal.EquipmentItem.Category != Requirement.category) {
-                                    continue;
-                                }
-                            }
-
-                            if (Requirement.tag) {
-                                if (!containsTag(trackVal.EquipmentItem.Tags, Requirement.tag) && !containsTag(trackVal.Tags, Requirement.tag)) {
-                                    continue;
-                                }
-                            }
-
-                            if (Requirement.res_type == "keyword") {
-                                let Found = false;
-                                const modelkeywords = await (eventSource as WarbandMember).GetKeywordsFull()
-                                console.log("Keywords")
-                                console.log(modelkeywords)
-                                console.log(Requirement)
-                                for (let k = 0; k < modelkeywords.length; k++) {
-                                    if (modelkeywords[k].ID == Requirement.value) {
-                                        Found = true;
-                                    }
-                                }
-                                if (Found == false) {
-                                    CanAdd = false;
-                                }
-                                console.log(CanAdd);
-                            }  
-
-                            if (Requirement.res_type == "id") {
-                                if ((eventSource as WarbandMember).CurModel.ID != Requirement.value) {
-                                    CanAdd = false;
-                                }
-                            }  
-    
-                            if (Requirement.res_type == "equipment") {
-                                let Found = false;
-                                for (let k = 0; k < (eventSource as WarbandMember).GetEquipment().length; k++) {
-                                    if ((eventSource as WarbandMember).GetEquipment()[k].equipment.MyEquipment.SelfDynamicProperty.OptionChoice.ID == Requirement.value) {
-                                        Found = true;
-                                    }
-                                }
-                                if (Found == false) {
-                                    CanAdd = false;
-                                }
-                            }                  
-    
-                            if (Requirement.res_type == "upgrade") {
-                                let Found = false;
-                                for (let k = 0; k < (eventSource as WarbandMember).Upgrades.length; k++) {
-                                    if (((eventSource as WarbandMember).Upgrades[k].HeldObject as WarbandProperty).SelfDynamicProperty.OptionChoice.ID == Requirement.value) {
-                                        Found = true;
-                                    }
-                                }
-                                if (Found == false) {
-                                    CanAdd = false;
-                                }
-                            }                  
-    
-                        }
-                    }
-                    
-                    if (CurRestriction.banned) {
-                        for (let j = 0; j < CurRestriction.banned.length; j++) {
-                            const Requirement = CurRestriction.banned[j]
-
-                            if (Requirement.category) {
-                                if (trackVal.EquipmentItem.Category != Requirement.category) {
-                                    continue;
-                                }
-                            }
-
-                            if (Requirement.tag) {
-                                if (!containsTag(trackVal.EquipmentItem.Tags, Requirement.tag) && !containsTag(trackVal.Tags, Requirement.tag)) {
-                                    continue;
-                                }
-                            }
-
-                            if (Requirement.res_type == "keyword") {
-                                let Found = false;
-                                const modelkeywords = await (eventSource as WarbandMember).GetKeywordsFull()
-                                for (let k = 0; k < modelkeywords.length; k++) {
-                                    if (modelkeywords[k].ID == Requirement.value) {
-                                        Found = true;
-                                    }
-                                }
-                                if (Found == true) {
-                                    CanAdd = false;
-                                }
-                            }  
-
-                            if (Requirement.res_type == "id") {
-                                if ((eventSource as WarbandMember).CurModel.ID == Requirement.value) {
-                                    CanAdd = false;
-                                }
-                            }                  
-                        }
-                    }
-                }
-            }
-
 
             return CanAdd;
         }
@@ -768,7 +654,7 @@ export const BaseContextCallTable : CallEventTable = {
 
                         }
 
-                        if (varcount > LimitMax.limit) {
+                        if (varcount >= LimitMax.limit) {
                             CanAdd = false;
                         }
                     }
@@ -822,7 +708,7 @@ export const BaseContextCallTable : CallEventTable = {
 
                         }
 
-                        if (varcount < LimitMax.limit) {
+                        if (varcount <= LimitMax.limit) {
                             CanAdd = false;
                         }
                     }
@@ -1460,6 +1346,119 @@ export const BaseContextCallTable : CallEventTable = {
         getEquipmentRestriction(this: EventRunner, eventSource : any, relayVar : any, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) { 
             relayVar.push(context_func as EquipmentRestriction)
             return relayVar;
+        },
+        async canModelAddItem(this: EventRunner, eventSource : any, relayVar : boolean,  trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, restrictions : EquipmentRestriction[]) {            
+            
+            let CanAdd = relayVar;
+
+            // Permitted
+            if (CanAdd) {
+                for (let i = 0; i < restrictions.length; i++) {
+                    const CurRestriction : EquipmentRestriction = restrictions[i];
+
+                    if (CurRestriction.permitted) {
+                        for (let j = 0; j < CurRestriction.permitted.length; j++) {
+                            const Requirement = CurRestriction.permitted[j]
+
+                            if (Requirement.category) {
+                                if ((eventSource as FactionEquipmentRelationship).EquipmentItem.Category != Requirement.category) {
+                                    continue;
+                                }
+                            }
+
+                            if (Requirement.tag) {
+                                if (!containsTag((eventSource as FactionEquipmentRelationship).EquipmentItem.Tags, Requirement.tag) && !containsTag((eventSource as FactionEquipmentRelationship).Tags, Requirement.tag)) {
+                                    continue;
+                                }
+                            }
+
+                            if (Requirement.res_type == "keyword") {
+                                let Found = false;
+                                const modelkeywords = await trackVal.GetKeywordsFull()
+                                for (let k = 0; k < modelkeywords.length; k++) {
+                                    if (modelkeywords[k].ID == Requirement.value) {
+                                        Found = true;
+                                    }
+                                }
+                                if (Found == false) {
+                                    CanAdd = false;
+                                }
+                            }  
+
+                            if (Requirement.res_type == "id") {
+                                if (trackVal.CurModel.ID != Requirement.value) {
+                                    CanAdd = false;
+                                }
+                            }  
+    
+                            if (Requirement.res_type == "equipment") {
+                                let Found = false;
+                                for (let k = 0; k < trackVal.GetEquipment().length; k++) {
+                                    if (trackVal.GetEquipment()[k].equipment.MyEquipment.SelfDynamicProperty.OptionChoice.ID == Requirement.value) {
+                                        Found = true;
+                                    }
+                                }
+                                if (Found == false) {
+                                    CanAdd = false;
+                                }
+                            }                  
+    
+                            if (Requirement.res_type == "upgrade") {
+                                let Found = false;
+                                for (let k = 0; k < trackVal.Upgrades.length; k++) {
+                                    if ((trackVal.Upgrades[k].HeldObject as WarbandProperty).SelfDynamicProperty.OptionChoice.ID == Requirement.value) {
+                                        Found = true;
+                                    }
+                                }
+                                if (Found == false) {
+                                    CanAdd = false;
+                                }
+                            }                  
+    
+                        }
+                    }
+                    
+                    if (CurRestriction.banned) {
+                        for (let j = 0; j < CurRestriction.banned.length; j++) {
+                            const Requirement = CurRestriction.banned[j]
+
+                            if (Requirement.category) {
+                                if ((eventSource as FactionEquipmentRelationship).EquipmentItem.Category != Requirement.category) {
+                                    continue;
+                                }
+                            }
+
+                            if (Requirement.tag) {
+                                if (!containsTag((eventSource as FactionEquipmentRelationship).EquipmentItem.Tags, Requirement.tag) && !containsTag((eventSource as FactionEquipmentRelationship).Tags, Requirement.tag)) {
+                                    continue;
+                                }
+                            }
+
+                            if (Requirement.res_type == "keyword") {
+                                let Found = false;
+                                const modelkeywords = await trackVal.GetKeywordsFull()
+                                for (let k = 0; k < modelkeywords.length; k++) {
+                                    if (modelkeywords[k].ID == Requirement.value) {
+                                        Found = true;
+                                    }
+                                }
+                                if (Found == true) {
+                                    CanAdd = false;
+                                }
+                            }  
+
+                            if (Requirement.res_type == "id") {
+                                if (trackVal.CurModel.ID == Requirement.value) {
+                                    CanAdd = false;
+                                }
+                            }                  
+                        }
+                    }
+                }
+            }
+
+
+            return CanAdd;
         }
     },
     faction_choose_equipment: {
