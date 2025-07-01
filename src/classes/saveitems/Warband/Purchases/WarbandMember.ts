@@ -960,7 +960,7 @@ class WarbandMember extends DynamicContextObject {
                     BaseFactionOptions[i],
                     [NewRefList],
                     true,
-                    BaseFactionOptions[i]
+                    this
                 )
 
                 const EquipHands : ModelHands = await eventmon.runEvent(
