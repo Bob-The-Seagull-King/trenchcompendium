@@ -12,7 +12,7 @@ import { FactionEquipmentRelationship } from "../../classes/relationship/faction
 import { Model } from "../../classes/feature/model/Model";
 import { Ability } from "../../classes/feature/ability/Ability";
 import { UserWarband } from "../../classes/saveitems/Warband/UserWarband";
-import { MemberAndWarband, ModelHands, WarbandMember } from "../../classes/saveitems/Warband/Purchases/WarbandMember";
+import { MemberAndItem, MemberAndWarband, ModelHands, WarbandMember } from "../../classes/saveitems/Warband/Purchases/WarbandMember";
 
 /**
  * Events that can be called by the runEvent method,
@@ -48,7 +48,7 @@ export interface CallEvents {
     getRestrictedUpgradesBool? : (this: EventRunner, eventSource : any, relayVar : boolean,  trackVal : MemberAndWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<boolean>; 
     getRequiredUpgradesBool? : (this: EventRunner, eventSource : any, relayVar : boolean,  trackVal : MemberAndWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<boolean>; 
     canModelGetUpgrade? : (this: EventRunner, eventSource : any, relayVar : boolean,  trackVal : MemberAndWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<boolean>; 
-    canModelAddItem? : (this: EventRunner, eventSource : any, relayVar : boolean,  trackVal : FactionEquipmentRelationship, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, restrictions : EquipmentRestriction[]) => Promise<boolean>; 
+    canModelAddItem? : (this: EventRunner, eventSource : any, relayVar : boolean,  trackVal : MemberAndItem, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, restrictions : EquipmentRestriction[]) => Promise<boolean>; 
     equipmentHandsCost? : (this: EventRunner, eventSource : any, relayVar : ModelHands,  trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<ModelHands>; 
     getUpgradeLimitPresentation? : (this: EventRunner, eventSource : any, relayVar : string[], trackVal : boolean, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<string[]>; 
     getUpgradeRestrictionsPresentation? : (this: EventRunner, eventSource : any, relayVar : string[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<string[]>; 

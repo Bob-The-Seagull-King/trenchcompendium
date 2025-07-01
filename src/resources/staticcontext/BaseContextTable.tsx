@@ -27,7 +27,7 @@ import RuleDisplay from "../../display/components/features/faction/RuleDisplay";
 import { Skill } from "../../classes/feature/ability/Skill";
 import { UserWarband } from "../../classes/saveitems/Warband/UserWarband";
 import { FactionEquipmentRelationship } from "../../classes/relationship/faction/FactionEquipmentRelationship";
-import { MemberAndWarband, WarbandMember } from "../../classes/saveitems/Warband/Purchases/WarbandMember";
+import { MemberAndItem, MemberAndWarband, WarbandMember } from "../../classes/saveitems/Warband/Purchases/WarbandMember";
 import { returnDescription } from "../../utility/util";
 
 export const BaseContextCallTable : CallEventTable = {
@@ -279,7 +279,7 @@ export const BaseContextCallTable : CallEventTable = {
             relayVar.push(context_func as EquipmentRestriction)
             return relayVar;
         },
-        async canModelAddItem(this: EventRunner, eventSource : any, relayVar : boolean,  trackVal : FactionEquipmentRelationship, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, restrictions : EquipmentRestriction[]) {            
+        async canModelAddItem(this: EventRunner, eventSource : any, relayVar : boolean,  trackVal : MemberAndItem, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, restrictions : EquipmentRestriction[]) {            
             
             let CanAdd = relayVar;
 
@@ -293,21 +293,21 @@ export const BaseContextCallTable : CallEventTable = {
                             const Requirement = CurRestriction.removed[j]
 
                             if (Requirement.category) {
-                                if (trackVal.EquipmentItem.Category != Requirement.category) {
+                                if (trackVal.item.EquipmentItem.Category != Requirement.category) {
                                     continue;
                                 }
                             }
 
                             if (Requirement.tag) {
-                                if (!containsTag(trackVal.EquipmentItem.Tags, Requirement.tag) && !containsTag(trackVal.Tags, Requirement.tag)) {
+                                if (!containsTag(trackVal.item.EquipmentItem.Tags, Requirement.tag) && !containsTag(trackVal.Tags, Requirement.tag)) {
                                     continue;
                                 }
                             }
     
                             if (Requirement.res_type == "keyword") {
                                 let Found = false;
-                                for (let k = 0; k < trackVal.EquipmentItem.GetKeyWords().length; k++) {
-                                    if (trackVal.EquipmentItem.GetKeyWords()[k].ID == Requirement.value) {
+                                for (let k = 0; k < trackVal.item.EquipmentItem.GetKeyWords().length; k++) {
+                                    if (trackVal.item.EquipmentItem.GetKeyWords()[k].ID == Requirement.value) {
                                         Found = true;
                                     }
                                 }
@@ -317,13 +317,13 @@ export const BaseContextCallTable : CallEventTable = {
                             }                        
     
                             if (Requirement.res_type == "ducat") {
-                                if (trackVal.CostType == 0) {
+                                if (trackVal.item.CostType == 0) {
                                     if (Requirement.param == "maximum" ) {
-                                        if (trackVal.Cost > Number(Requirement.value)) {
+                                        if (trackVal.item.Cost > Number(Requirement.value)) {
                                             CanAdd = false;
                                         }
                                     } else {
-                                        if (trackVal.Cost < Number(Requirement.value)) {
+                                        if (trackVal.item.Cost < Number(Requirement.value)) {
                                             CanAdd = false;
                                         }
                                     }
@@ -335,7 +335,7 @@ export const BaseContextCallTable : CallEventTable = {
                             }
     
                             if (Requirement.res_type == "id") {
-                                if (trackVal.EquipmentItem.ID == Requirement.value) {
+                                if (trackVal.item.EquipmentItem.ID == Requirement.value) {
                                     CanAdd = false;
                                 }
                             }        
@@ -347,21 +347,21 @@ export const BaseContextCallTable : CallEventTable = {
                             const Requirement = CurRestriction.required[j]
 
                             if (Requirement.category) {
-                                if (trackVal.EquipmentItem.Category != Requirement.category) {
+                                if (trackVal.item.EquipmentItem.Category != Requirement.category) {
                                     continue;
                                 }
                             }
 
                             if (Requirement.tag) {
-                                if (!containsTag(trackVal.EquipmentItem.Tags, Requirement.tag) && !containsTag(trackVal.Tags, Requirement.tag)) {
+                                if (!containsTag(trackVal.item.EquipmentItem.Tags, Requirement.tag) && !containsTag(trackVal.item.Tags, Requirement.tag)) {
                                     continue;
                                 }
                             }
     
                             if (Requirement.res_type == "keyword") {
                                 let Found = false;
-                                for (let k = 0; k < trackVal.EquipmentItem.GetKeyWords().length; k++) {
-                                    if (trackVal.EquipmentItem.GetKeyWords()[k].ID == Requirement.value) {
+                                for (let k = 0; k < trackVal.item.EquipmentItem.GetKeyWords().length; k++) {
+                                    if (trackVal.item.EquipmentItem.GetKeyWords()[k].ID == Requirement.value) {
                                         Found = true;
                                     }
                                 }
@@ -371,13 +371,13 @@ export const BaseContextCallTable : CallEventTable = {
                             }       
 
                             if (Requirement.res_type == "tag") {
-                                if (!containsTag(trackVal.EquipmentItem.Tags, Requirement.value.toString()) && !containsTag(trackVal.Tags, Requirement.value.toString())) {
+                                if (!containsTag(trackVal.item.EquipmentItem.Tags, Requirement.value.toString()) && !containsTag(trackVal.item.Tags, Requirement.value.toString())) {
                                     CanAdd = false;
                                 }
                             }
     
                             if (Requirement.res_type == "id") {
-                                if (trackVal.EquipmentItem.ID != Requirement.value) {
+                                if (trackVal.item.EquipmentItem.ID != Requirement.value) {
                                     CanAdd = false;
                                 }
                             }        
@@ -397,21 +397,21 @@ export const BaseContextCallTable : CallEventTable = {
                             const Requirement = CurRestriction.added[j]
 
                             if (Requirement.category) {
-                                if (trackVal.EquipmentItem.Category != Requirement.category) {
+                                if (trackVal.item.EquipmentItem.Category != Requirement.category) {
                                     continue;
                                 }
                             }
 
                             if (Requirement.tag) {
-                                if (!containsTag(trackVal.EquipmentItem.Tags, Requirement.tag) && !containsTag(trackVal.Tags, Requirement.tag)) {
+                                if (!containsTag(trackVal.item.EquipmentItem.Tags, Requirement.tag) && !containsTag(trackVal.item.Tags, Requirement.tag)) {
                                     continue;
                                 }
                             }
 
                             if (Requirement.res_type == "keyword") {
                                 let Found = false;
-                                for (let k = 0; k < trackVal.EquipmentItem.GetKeyWords().length; k++) {
-                                    if (trackVal.EquipmentItem.GetKeyWords()[k].ID == Requirement.value) {
+                                for (let k = 0; k < trackVal.item.EquipmentItem.GetKeyWords().length; k++) {
+                                    if (trackVal.item.EquipmentItem.GetKeyWords()[k].ID == Requirement.value) {
                                         Found = true;
                                     }
                                 }
@@ -425,7 +425,7 @@ export const BaseContextCallTable : CallEventTable = {
                             }
     
                             if (Requirement.res_type == "id") {
-                                if (trackVal.EquipmentItem.ID == Requirement.value) {
+                                if (trackVal.item.EquipmentItem.ID == Requirement.value) {
                                     CanAdd = true;
                                 }
                             }
@@ -599,7 +599,7 @@ export const BaseContextCallTable : CallEventTable = {
             relayVar.push(context_func as EquipmentLimit)
             return relayVar;
         },
-        async canModelAddItem(this: EventRunner, eventSource : any, relayVar : boolean,  trackVal : FactionEquipmentRelationship, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, restrictions : EquipmentRestriction[]) {            
+        async canModelAddItem(this: EventRunner, eventSource : any, relayVar : boolean,  trackVal : MemberAndItem, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, restrictions : EquipmentRestriction[]) {            
             let CanAdd = relayVar;
             
             if (CanAdd) {
@@ -610,13 +610,13 @@ export const BaseContextCallTable : CallEventTable = {
                         const LimitMax = Limits.maximum[i]
                         
                         if (LimitMax.category) {
-                            if (trackVal.EquipmentItem.Category != LimitMax.category) {
+                            if (trackVal.item.EquipmentItem.Category != LimitMax.category) {
                                 continue;
                             }
                         }
 
                         if (LimitMax.tag) {
-                            if (!containsTag(trackVal.EquipmentItem.Tags, LimitMax.tag) && !containsTag(trackVal.Tags, LimitMax.tag)) {
+                            if (!containsTag(trackVal.item.EquipmentItem.Tags, LimitMax.tag) && !containsTag(trackVal.item.Tags, LimitMax.tag)) {
                                 continue;
                             }
                         }
@@ -664,13 +664,13 @@ export const BaseContextCallTable : CallEventTable = {
                         const LimitMax = Limits.minimum[i]
                         
                         if (LimitMax.category) {
-                            if (trackVal.EquipmentItem.Category != LimitMax.category) {
+                            if (trackVal.item.EquipmentItem.Category != LimitMax.category) {
                                 continue;
                             }
                         }
 
                         if (LimitMax.tag) {
-                            if (!containsTag(trackVal.EquipmentItem.Tags, LimitMax.tag) && !containsTag(trackVal.Tags, LimitMax.tag)) {
+                            if (!containsTag(trackVal.item.EquipmentItem.Tags, LimitMax.tag) && !containsTag(trackVal.item.Tags, LimitMax.tag)) {
                                 continue;
                             }
                         }
@@ -1347,7 +1347,7 @@ export const BaseContextCallTable : CallEventTable = {
             relayVar.push(context_func as EquipmentRestriction)
             return relayVar;
         },
-        async canModelAddItem(this: EventRunner, eventSource : any, relayVar : boolean,  trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, restrictions : EquipmentRestriction[]) {            
+        async canModelAddItem(this: EventRunner, eventSource : any, relayVar : boolean,  trackVal : MemberAndItem, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, restrictions : EquipmentRestriction[]) {            
             
             let CanAdd = relayVar;
 
@@ -1374,7 +1374,7 @@ export const BaseContextCallTable : CallEventTable = {
 
                             if (Requirement.res_type == "keyword") {
                                 let Found = false;
-                                const modelkeywords = await trackVal.GetKeywordsFull()
+                                const modelkeywords = await trackVal.model.GetKeywordsFull()
                                 for (let k = 0; k < modelkeywords.length; k++) {
                                     if (modelkeywords[k].ID == Requirement.value) {
                                         Found = true;
@@ -1386,15 +1386,15 @@ export const BaseContextCallTable : CallEventTable = {
                             }  
 
                             if (Requirement.res_type == "id") {
-                                if (trackVal.CurModel.ID != Requirement.value) {
+                                if (trackVal.model.CurModel.ID != Requirement.value) {
                                     CanAdd = false;
                                 }
                             }  
     
                             if (Requirement.res_type == "equipment") {
                                 let Found = false;
-                                for (let k = 0; k < trackVal.GetEquipment().length; k++) {
-                                    if (trackVal.GetEquipment()[k].equipment.MyEquipment.SelfDynamicProperty.OptionChoice.ID == Requirement.value) {
+                                for (let k = 0; k < trackVal.model.GetEquipment().length; k++) {
+                                    if (trackVal.model.GetEquipment()[k].equipment.MyEquipment.SelfDynamicProperty.OptionChoice.ID == Requirement.value) {
                                         Found = true;
                                     }
                                 }
@@ -1405,8 +1405,8 @@ export const BaseContextCallTable : CallEventTable = {
     
                             if (Requirement.res_type == "upgrade") {
                                 let Found = false;
-                                for (let k = 0; k < trackVal.Upgrades.length; k++) {
-                                    if ((trackVal.Upgrades[k].HeldObject as WarbandProperty).SelfDynamicProperty.OptionChoice.ID == Requirement.value) {
+                                for (let k = 0; k < trackVal.model.Upgrades.length; k++) {
+                                    if ((trackVal.model.Upgrades[k].HeldObject as WarbandProperty).SelfDynamicProperty.OptionChoice.ID == Requirement.value) {
                                         Found = true;
                                     }
                                 }
@@ -1436,7 +1436,7 @@ export const BaseContextCallTable : CallEventTable = {
 
                             if (Requirement.res_type == "keyword") {
                                 let Found = false;
-                                const modelkeywords = await trackVal.GetKeywordsFull()
+                                const modelkeywords = await trackVal.model.GetKeywordsFull()
                                 for (let k = 0; k < modelkeywords.length; k++) {
                                     if (modelkeywords[k].ID == Requirement.value) {
                                         Found = true;
@@ -1448,7 +1448,7 @@ export const BaseContextCallTable : CallEventTable = {
                             }  
 
                             if (Requirement.res_type == "id") {
-                                if (trackVal.CurModel.ID == Requirement.value) {
+                                if (trackVal.model.CurModel.ID == Requirement.value) {
                                     CanAdd = false;
                                 }
                             }                  

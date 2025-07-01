@@ -33,6 +33,10 @@ export interface MemberAndWarband {
     warband: UserWarband,
     model: WarbandMember
 }
+export interface MemberAndItem {
+    item: FactionEquipmentRelationship,
+    model: WarbandMember
+}
 
 export interface ModelHands {
     ranged: number,
@@ -950,7 +954,10 @@ class WarbandMember extends DynamicContextObject {
                 this,
                 [NewRefList],
                 true,
-                BaseFactionOptions[i]
+                {
+                    model: this,
+                    item : BaseFactionOptions[i]
+                }
             )
 
             if (CanAdd) {
@@ -960,7 +967,10 @@ class WarbandMember extends DynamicContextObject {
                     BaseFactionOptions[i],
                     [NewRefList],
                     true,
-                    this
+                    {
+                        model: this,
+                        item : BaseFactionOptions[i]
+                    }
                 )
 
                 const EquipHands : ModelHands = await eventmon.runEvent(
