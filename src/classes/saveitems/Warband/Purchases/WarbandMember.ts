@@ -943,11 +943,11 @@ class WarbandMember extends DynamicContextObject {
             }
             
             let CanAdd = await eventmon.runEvent(
-                "canModelAddItem", // @TODO Lane
-                BaseFactionOptions[i],
+                "canModelAddItem",
+                this,
                 [NewRefList],
                 true,
-                this
+                BaseFactionOptions[i]
             )
             if (CanAdd) {
                 const EquipHands : ModelHands = await eventmon.runEvent(

@@ -278,6 +278,268 @@ export const BaseContextCallTable : CallEventTable = {
         getEquipmentRestriction(this: EventRunner, eventSource : any, relayVar : any, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) { 
             relayVar.push(context_func as EquipmentRestriction)
             return relayVar;
+        },
+        async canModelAddItem(this: EventRunner, eventSource : any, relayVar : boolean,  trackVal : FactionEquipmentRelationship, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, restrictions : EquipmentRestriction[]) {            
+            
+            let CanAdd = relayVar;
+
+            // Removed, required, banned
+            if (CanAdd) {
+                for (let i = 0; i < restrictions.length; i++) {
+                    const CurRestriction : EquipmentRestriction = restrictions[i];
+
+                    if (CurRestriction.removed) {
+                        for (let j = 0; j < CurRestriction.removed.length; j++) {
+                            const Requirement = CurRestriction.removed[j]
+
+                            if (Requirement.category) {
+                                if (trackVal.EquipmentItem.Category != Requirement.category) {
+                                    continue;
+                                }
+                            }
+
+                            if (Requirement.tag) {
+                                if (!containsTag(trackVal.EquipmentItem.Tags, Requirement.tag) && !containsTag(trackVal.Tags, Requirement.tag)) {
+                                    continue;
+                                }
+                            }
+    
+                            if (Requirement.res_type == "keyword") {
+                                let Found = false;
+                                for (let k = 0; k < trackVal.EquipmentItem.GetKeyWords().length; k++) {
+                                    if (trackVal.EquipmentItem.GetKeyWords()[k].ID == Requirement.value) {
+                                        Found = true;
+                                    }
+                                }
+                                if (Found == true) {
+                                    CanAdd = false;
+                                }
+                            }                        
+    
+                            if (Requirement.res_type == "ducat") {
+                                if (trackVal.CostType == 0) {
+                                    if (Requirement.param == "maximum" ) {
+                                        if (trackVal.Cost > Number(Requirement.value)) {
+                                            CanAdd = false;
+                                        }
+                                    } else {
+                                        if (trackVal.Cost < Number(Requirement.value)) {
+                                            CanAdd = false;
+                                        }
+                                    }
+                                }
+                            }  
+    
+                            if (Requirement.res_type == "all") {
+                                CanAdd = false;
+                            }
+    
+                            if (Requirement.res_type == "id") {
+                                if (trackVal.EquipmentItem.ID == Requirement.value) {
+                                    CanAdd = false;
+                                }
+                            }        
+                        }
+                    }
+
+                    if (CurRestriction.required) {
+                        for (let j = 0; j < CurRestriction.required.length; j++) {
+                            const Requirement = CurRestriction.required[j]
+
+                            if (Requirement.category) {
+                                if (trackVal.EquipmentItem.Category != Requirement.category) {
+                                    continue;
+                                }
+                            }
+
+                            if (Requirement.tag) {
+                                if (!containsTag(trackVal.EquipmentItem.Tags, Requirement.tag) && !containsTag(trackVal.Tags, Requirement.tag)) {
+                                    continue;
+                                }
+                            }
+    
+                            if (Requirement.res_type == "keyword") {
+                                let Found = false;
+                                for (let k = 0; k < trackVal.EquipmentItem.GetKeyWords().length; k++) {
+                                    if (trackVal.EquipmentItem.GetKeyWords()[k].ID == Requirement.value) {
+                                        Found = true;
+                                    }
+                                }
+                                if (Found == false) {
+                                    CanAdd = false;
+                                }
+                            }       
+
+                            if (Requirement.res_type == "tag") {
+                                if (!containsTag(trackVal.EquipmentItem.Tags, Requirement.value.toString()) && !containsTag(trackVal.Tags, Requirement.value.toString())) {
+                                    CanAdd = false;
+                                }
+                            }
+    
+                            if (Requirement.res_type == "id") {
+                                if (trackVal.EquipmentItem.ID != Requirement.value) {
+                                    CanAdd = false;
+                                }
+                            }        
+                        }
+                    }
+                    
+                    if (CurRestriction.banned) {
+                        for (let j = 0; j < CurRestriction.banned.length; j++) {
+                            const Requirement = CurRestriction.banned[j]
+
+                            if (Requirement.category) {
+                                if (trackVal.EquipmentItem.Category != Requirement.category) {
+                                    continue;
+                                }
+                            }
+
+                            if (Requirement.tag) {
+                                if (!containsTag(trackVal.EquipmentItem.Tags, Requirement.tag) && !containsTag(trackVal.Tags, Requirement.tag)) {
+                                    continue;
+                                }
+                            }
+
+                            if (Requirement.res_type == "keyword") {
+                                let Found = false;
+                                for (let k = 0; k < trackVal.EquipmentItem.GetKeyWords().length; k++) {
+                                    if (trackVal.EquipmentItem.GetKeyWords()[k].ID == Requirement.value) {
+                                        Found = true;
+                                    }
+                                }
+                                if (Found == true) {
+                                    CanAdd = false;
+                                }
+                            }  
+
+                            if (Requirement.res_type == "id") {
+                                if ((eventSource as WarbandMember).CurModel.ID == Requirement.value) {
+                                    CanAdd = false;
+                                }
+                            }                  
+                        }
+                    }
+                }
+            }
+
+            // Added
+            if (!CanAdd) {
+                for (let i = 0; i < restrictions.length; i++) {
+                    const CurRestriction : EquipmentRestriction = restrictions[i];
+
+
+                    if (CurRestriction.added) {
+                        for (let j = 0; j < CurRestriction.added.length; j++) {
+                            const Requirement = CurRestriction.added[j]
+
+                            if (Requirement.category) {
+                                if (trackVal.EquipmentItem.Category != Requirement.category) {
+                                    continue;
+                                }
+                            }
+
+                            if (Requirement.tag) {
+                                if (!containsTag(trackVal.EquipmentItem.Tags, Requirement.tag) && !containsTag(trackVal.Tags, Requirement.tag)) {
+                                    continue;
+                                }
+                            }
+
+                            if (Requirement.res_type == "keyword") {
+                                let Found = false;
+                                for (let k = 0; k < trackVal.EquipmentItem.GetKeyWords().length; k++) {
+                                    if (trackVal.EquipmentItem.GetKeyWords()[k].ID == Requirement.value) {
+                                        Found = true;
+                                    }
+                                }
+                                if (Found == true) {
+                                    CanAdd = true;
+                                }
+                            }
+    
+                            if (Requirement.res_type == "all") {
+                                CanAdd = true;
+                            }
+    
+                            if (Requirement.res_type == "id") {
+                                if (trackVal.EquipmentItem.ID == Requirement.value) {
+                                    CanAdd = true;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Permitted
+            if (CanAdd) {
+                for (let i = 0; i < restrictions.length; i++) {
+                    const CurRestriction : EquipmentRestriction = restrictions[i];
+
+                    if (CurRestriction.permitted) {
+                        for (let j = 0; j < CurRestriction.permitted.length; j++) {
+                            const Requirement = CurRestriction.permitted[j]
+
+                            if (Requirement.category) {
+                                if (trackVal.EquipmentItem.Category != Requirement.category) {
+                                    continue;
+                                }
+                            }
+
+                            if (Requirement.tag) {
+                                if (!containsTag(trackVal.EquipmentItem.Tags, Requirement.tag) && !containsTag(trackVal.Tags, Requirement.tag)) {
+                                    continue;
+                                }
+                            }
+
+                            if (Requirement.res_type == "keyword") {
+                                let Found = false;
+                                for (let k = 0; k < trackVal.EquipmentItem.GetKeyWords().length; k++) {
+                                    if (trackVal.EquipmentItem.GetKeyWords()[k].ID == Requirement.value) {
+                                        Found = true;
+                                    }
+                                }
+                                if (Found == false) {
+                                    CanAdd = false;
+                                }
+                            }  
+
+                            if (Requirement.res_type == "id") {
+                                if ((eventSource as WarbandMember).CurModel.ID != Requirement.value) {
+                                    CanAdd = false;
+                                }
+                            }  
+    
+                            if (Requirement.res_type == "equipment") {
+                                let Found = false;
+                                for (let k = 0; k < (eventSource as WarbandMember).GetEquipment().length; k++) {
+                                    if ((eventSource as WarbandMember).GetEquipment()[k].equipment.MyEquipment.SelfDynamicProperty.OptionChoice.ID == Requirement.value) {
+                                        Found = true;
+                                    }
+                                }
+                                if (Found == false) {
+                                    CanAdd = false;
+                                }
+                            }                  
+    
+                            if (Requirement.res_type == "upgrade") {
+                                let Found = false;
+                                for (let k = 0; k < (eventSource as WarbandMember).Upgrades.length; k++) {
+                                    if (((eventSource as WarbandMember).Upgrades[k].HeldObject as WarbandProperty).SelfDynamicProperty.OptionChoice.ID == Requirement.value) {
+                                        Found = true;
+                                    }
+                                }
+                                if (Found == false) {
+                                    CanAdd = false;
+                                }
+                            }                  
+    
+                        }
+                    }
+                }
+            }
+
+
+            return CanAdd;
         }
     },
     restriction_override: {
@@ -1070,9 +1332,6 @@ export const BaseContextCallTable : CallEventTable = {
         },
         getEquipmentRestriction(this: EventRunner, eventSource : any, relayVar : any, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) { 
             relayVar.push(context_func as EquipmentRestriction)
-            return relayVar;
-        },
-        async canModelAddItem(this: EventRunner, eventSource : any, relayVar : boolean,  trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, restrictions : EquipmentRestriction[]) {            
             return relayVar;
         }
     },
