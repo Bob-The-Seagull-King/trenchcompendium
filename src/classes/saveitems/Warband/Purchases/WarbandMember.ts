@@ -28,7 +28,7 @@ import { WarbandFactory } from "../../../../factories/warband/WarbandFactory";
 import { FactionEquipmentRelationship, IFactionEquipmentRelationship } from "../../../relationship/faction/FactionEquipmentRelationship";
 import { EquipmentFactory } from "../../../../factories/features/EquipmentFactory";
 import { ModelEquipmentRelationship } from "../../../relationship/model/ModelEquipmentRelationship";
-import { containsTag } from "utility/functions";
+import { containsTag } from "../../../../utility/functions";
 
 export interface MemberAndWarband {
     warband: UserWarband,
