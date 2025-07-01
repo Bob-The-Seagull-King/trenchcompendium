@@ -282,6 +282,9 @@ export const BaseContextCallTable : CallEventTable = {
         async canModelAddItem(this: EventRunner, eventSource : any, relayVar : boolean,  trackVal : FactionEquipmentRelationship, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, restrictions : EquipmentRestriction[]) {            
             
             let CanAdd = relayVar;
+            console.log(eventSource.ID);
+            console.log(trackVal.ID);
+            console.log(restrictions);
 
             // Removed, required, banned
             if (CanAdd) {
@@ -458,6 +461,9 @@ export const BaseContextCallTable : CallEventTable = {
                             if (Requirement.res_type == "keyword") {
                                 let Found = false;
                                 const modelkeywords = await (eventSource as WarbandMember).GetKeywordsFull()
+                                console.log("Keywords")
+                                console.log(modelkeywords)
+                                console.log(Requirement)
                                 for (let k = 0; k < modelkeywords.length; k++) {
                                     if (modelkeywords[k].ID == Requirement.value) {
                                         Found = true;
@@ -466,6 +472,7 @@ export const BaseContextCallTable : CallEventTable = {
                                 if (Found == false) {
                                     CanAdd = false;
                                 }
+                                console.log(CanAdd);
                             }  
 
                             if (Requirement.res_type == "id") {
@@ -706,6 +713,124 @@ export const BaseContextCallTable : CallEventTable = {
             relayVar.push(context_func as EquipmentLimit)
             return relayVar;
         },
+        async canModelAddItem(this: EventRunner, eventSource : any, relayVar : boolean,  trackVal : FactionEquipmentRelationship, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, restrictions : EquipmentRestriction[]) {            
+            let CanAdd = relayVar;
+            
+            if (CanAdd) {
+                const Limits : EquipmentLimit = context_func as EquipmentLimit;
+
+                if (Limits.maximum) {
+                    for (let i = 0; i < Limits.maximum.length; i++) {
+                        const LimitMax = Limits.maximum[i]
+                        
+                        if (LimitMax.category) {
+                            if (trackVal.EquipmentItem.Category != LimitMax.category) {
+                                continue;
+                            }
+                        }
+
+                        if (LimitMax.tag) {
+                            if (!containsTag(trackVal.EquipmentItem.Tags, LimitMax.tag) && !containsTag(trackVal.Tags, LimitMax.tag)) {
+                                continue;
+                            }
+                        }
+
+                        let varcount = 0;
+
+                        for (let j = 0; j < (eventSource as WarbandMember).GetEquipment().length; j++) {
+                            const Equip = (eventSource as WarbandMember).GetEquipment()[j].equipment
+                            const EquipObj = (Equip.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment)
+    
+                            if (LimitMax.res_type == "keyword") {
+                                let Found = false;
+                                for (let k = 0; k < EquipObj.KeyWord.length; k++) {
+                                    if (EquipObj.KeyWord[k].ID == LimitMax.value) {
+                                        Found = true;
+                                    }
+                                }
+                                if (Found == true) {
+                                    varcount += 1;
+                                }
+                            }       
+
+                            if (LimitMax.res_type == "tag") {
+                                if (containsTag(EquipObj.Tags, LimitMax.value.toString()) || containsTag(Equip.Tags, LimitMax.value.toString())) {
+                                    varcount += 1;
+                                }
+                            }
+    
+                            if (LimitMax.res_type == "id") {
+                                if (EquipObj.ID != LimitMax.value) {
+                                    varcount += 1;
+                                }
+                            }  
+
+
+                        }
+
+                        if (varcount > LimitMax.limit) {
+                            CanAdd = false;
+                        }
+                    }
+                }
+                if (Limits.minimum) {
+                    for (let i = 0; i < Limits.minimum.length; i++) {
+                        const LimitMax = Limits.minimum[i]
+                        
+                        if (LimitMax.category) {
+                            if (trackVal.EquipmentItem.Category != LimitMax.category) {
+                                continue;
+                            }
+                        }
+
+                        if (LimitMax.tag) {
+                            if (!containsTag(trackVal.EquipmentItem.Tags, LimitMax.tag) && !containsTag(trackVal.Tags, LimitMax.tag)) {
+                                continue;
+                            }
+                        }
+
+                        let varcount = 0;
+
+                        for (let j = 0; j < (eventSource as WarbandMember).GetEquipment().length; j++) {
+                            const Equip = (eventSource as WarbandMember).GetEquipment()[j].equipment
+                            const EquipObj = (Equip.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment)
+    
+                            if (LimitMax.res_type == "keyword") {
+                                let Found = false;
+                                for (let k = 0; k < EquipObj.KeyWord.length; k++) {
+                                    if (EquipObj.KeyWord[k].ID == LimitMax.value) {
+                                        Found = true;
+                                    }
+                                }
+                                if (Found == true) {
+                                    varcount += 1;
+                                }
+                            }       
+
+                            if (LimitMax.res_type == "tag") {
+                                if (containsTag(EquipObj.Tags, LimitMax.value.toString()) || containsTag(Equip.Tags, LimitMax.value.toString())) {
+                                    varcount += 1;
+                                }
+                            }
+    
+                            if (LimitMax.res_type == "id") {
+                                if (EquipObj.ID != LimitMax.value) {
+                                    varcount += 1;
+                                }
+                            }  
+
+
+                        }
+
+                        if (varcount < LimitMax.limit) {
+                            CanAdd = false;
+                        }
+                    }
+                }
+            }
+
+            return CanAdd;
+        }
         
     },
     stat_options: {
