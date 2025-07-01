@@ -1034,11 +1034,11 @@ class WarbandMember extends DynamicContextObject {
         const eventmon : EventRunner = new EventRunner();
         const EquipHands : ModelHands = await eventmon.runEvent(
             "equipmentHandsCost", // @TODO Lane
-            item,
+            faceq,
             [],
             {
-                melee: 0,
-                ranged: 0,
+                melee: faceq.EquipmentItem.Stats["hands_melee"]? faceq.EquipmentItem.Stats["hands_melee"] : 0,
+                ranged: faceq.EquipmentItem.Stats["hands_ranged"]? faceq.EquipmentItem.Stats["hands_ranged"] : 0,
                 special: 0
             },
             this
