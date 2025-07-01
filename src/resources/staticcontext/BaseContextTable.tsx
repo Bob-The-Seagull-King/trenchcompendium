@@ -5,7 +5,7 @@ import { ContextObject } from "../../classes/contextevent/contextobject";
 import { IChoice, QuestionBase, StaticOptionContextObjectQuestion } from "../../classes/options/StaticOption";
 import { containsTag, getCostType, makestringpresentable } from "../../utility/functions";
 import { getTagValue } from "../../utility/functions";
-import { Equipment, EquipmentLimit, EquipmentRestriction, EquipmentStats } from "../../classes/feature/equipment/Equipment";
+import { Equipment, EquipmentLimit, EquipmentRestriction, EquipmentStats, RestrictionSingle } from "../../classes/feature/equipment/Equipment";
 import { Keyword } from "../../classes/feature/glossary/Keyword";
 import { KeywordFactory } from "../../factories/features/KeywordFactory";
 import { ModelStatistics } from "../../classes/feature/model/ModelStats";
@@ -283,8 +283,69 @@ export const BaseContextCallTable : CallEventTable = {
     restriction_override: {
         event_priotity: 2,
         getEquipmentRestriction(this: EventRunner, eventSource : any, relayVar : any, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) { 
+            const totalList : EquipmentRestriction[] = relayVar as EquipmentRestriction[]
             
-            return relayVar;
+            if (context_func["overrides"]) {
+                for (let i = 0 ; i < totalList.length; i++) {
+                    const Restriction : EquipmentRestriction = totalList[i];
+
+                    if (Restriction.removed) {
+                        for (let j = 0; j < Restriction.removed.length; j++) {                        
+                            const CurRes : RestrictionSingle = Restriction.removed[j];
+                            for (let k = 0; k < context_func["overrides"].length; k++) {
+                                if (CurRes.res_type == context_func["overrides"][k].type && CurRes.value == context_func["overrides"][k].model) {
+                                    CurRes.value == (eventSource as ContextObject).ID;
+                                }
+                            }
+                        }
+                    }
+
+                    if (Restriction.required) {
+                        for (let j = 0; j < Restriction.required.length; j++) {                        
+                            const CurRes : RestrictionSingle = Restriction.required[j];
+                            for (let k = 0; k < context_func["overrides"].length; k++) {
+                                if (CurRes.res_type == context_func["overrides"][k].type && CurRes.value == context_func["overrides"][k].model) {
+                                    CurRes.value == (eventSource as ContextObject).ID;
+                                }
+                            }
+                        }
+                    }
+
+                    if (Restriction.added) {
+                        for (let j = 0; j < Restriction.added.length; j++) {                        
+                            const CurRes : RestrictionSingle = Restriction.added[j];
+                            for (let k = 0; k < context_func["overrides"].length; k++) {
+                                if (CurRes.res_type == context_func["overrides"][k].type && CurRes.value == context_func["overrides"][k].model) {
+                                    CurRes.value == (eventSource as ContextObject).ID;
+                                }
+                            }
+                        }
+                    }
+
+                    if (Restriction.permitted) {
+                        for (let j = 0; j < Restriction.permitted.length; j++) {                        
+                            const CurRes : RestrictionSingle = Restriction.permitted[j];
+                            for (let k = 0; k < context_func["overrides"].length; k++) {
+                                if (CurRes.res_type == context_func["overrides"][k].type && CurRes.value == context_func["overrides"][k].model) {
+                                    CurRes.value == (eventSource as ContextObject).ID;
+                                }
+                            }
+                        }
+                    }
+
+                    if (Restriction.banned) {
+                        for (let j = 0; j < Restriction.banned.length; j++) {                        
+                            const CurRes : RestrictionSingle = Restriction.banned[j];
+                            for (let k = 0; k < context_func["overrides"].length; k++) {
+                                if (CurRes.res_type == context_func["overrides"][k].type && CurRes.value == context_func["overrides"][k].model) {
+                                    CurRes.value == (eventSource as ContextObject).ID;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return totalList;
         }
 
     },
