@@ -952,10 +952,10 @@ class WarbandMember extends DynamicContextObject {
                 true,
                 BaseFactionOptions[i]
             )
-            
+
             if (CanAdd) {
             
-                let CanAdd = await eventmon.runEvent(
+                CanAdd = await eventmon.runEvent(
                     "canModelAddItem",
                     BaseFactionOptions[i],
                     [NewRefList],
