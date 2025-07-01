@@ -284,23 +284,15 @@ export const BaseContextCallTable : CallEventTable = {
         event_priotity: 2,
         getEquipmentRestriction(this: EventRunner, eventSource : any, relayVar : any, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) { 
             const totalList : EquipmentRestriction[] = relayVar as EquipmentRestriction[]
-            console.log("RESTRICTION OVVERRIDE")
-            console.log(relayVar);
-            console.log(totalList);
-            console.log(context_func);
             if (context_func["overrides"]) {
                 for (let i = 0 ; i < totalList.length; i++) {
                     const Restriction : EquipmentRestriction = totalList[i];
-                    console.log(Restriction)
                     if (Restriction.removed) {
                         for (let j = 0; j < Restriction.removed.length; j++) {                        
                             const CurRes : RestrictionSingle = Restriction.removed[j];
-                            console.log(CurRes)
                             for (let k = 0; k < context_func["overrides"].length; k++) {
                                 if (CurRes.res_type == context_func["overrides"][k].type && CurRes.value == context_func["overrides"][k].model) {
-                                    console.log("HELPPP")
-                                    console.log((context_static as ContextObject).ID)
-                                    CurRes.value == (context_static as ContextObject).ID;
+                                    CurRes.value = (context_static as ContextObject).ID;
                                 }
                             }
                         }
@@ -309,12 +301,9 @@ export const BaseContextCallTable : CallEventTable = {
                     if (Restriction.required) {
                         for (let j = 0; j < Restriction.required.length; j++) {                        
                             const CurRes : RestrictionSingle = Restriction.required[j];
-                            console.log(CurRes)
                             for (let k = 0; k < context_func["overrides"].length; k++) {
                                 if (CurRes.res_type == context_func["overrides"][k].type && CurRes.value == context_func["overrides"][k].model) {
-                                    console.log("HELPPP")
-                                    console.log((context_static as ContextObject).ID)
-                                    CurRes.value == (context_static as ContextObject).ID;
+                                    CurRes.value = (context_static as ContextObject).ID;
                                 }
                             }
                         }
@@ -323,12 +312,9 @@ export const BaseContextCallTable : CallEventTable = {
                     if (Restriction.added) {
                         for (let j = 0; j < Restriction.added.length; j++) {                        
                             const CurRes : RestrictionSingle = Restriction.added[j];
-                            console.log(CurRes)
                             for (let k = 0; k < context_func["overrides"].length; k++) {
                                 if (CurRes.res_type == context_func["overrides"][k].type && CurRes.value == context_func["overrides"][k].model) {
-                                    console.log("HELPPP")
-                                    console.log((context_static as ContextObject).ID)
-                                    CurRes.value == (context_static as ContextObject).ID;
+                                    CurRes.value = (context_static as ContextObject).ID;
                                 }
                             }
                         }
@@ -337,12 +323,9 @@ export const BaseContextCallTable : CallEventTable = {
                     if (Restriction.permitted) {
                         for (let j = 0; j < Restriction.permitted.length; j++) {                        
                             const CurRes : RestrictionSingle = Restriction.permitted[j];
-                            console.log(CurRes)
                             for (let k = 0; k < context_func["overrides"].length; k++) {
                                 if (CurRes.res_type == context_func["overrides"][k].type && CurRes.value == context_func["overrides"][k].model) {
-                                    console.log("HELPPP")
-                                    console.log((context_static as ContextObject).ID)
-                                    CurRes.value == (context_static as ContextObject).ID;
+                                    CurRes.value = (context_static as ContextObject).ID;
                                 }
                             }
                         }
@@ -351,12 +334,9 @@ export const BaseContextCallTable : CallEventTable = {
                     if (Restriction.banned) {
                         for (let j = 0; j < Restriction.banned.length; j++) {                        
                             const CurRes : RestrictionSingle = Restriction.banned[j];
-                            console.log(CurRes)
                             for (let k = 0; k < context_func["overrides"].length; k++) {
                                 if (CurRes.res_type == context_func["overrides"][k].type && CurRes.value == context_func["overrides"][k].model) {
-                                    console.log("HELPPP")
-                                    console.log((context_static as ContextObject).ID)
-                                    CurRes.value == (context_static as ContextObject).ID;
+                                    CurRes.value = (context_static as ContextObject).ID;
                                 }
                             }
                         }
@@ -1092,17 +1072,7 @@ export const BaseContextCallTable : CallEventTable = {
             relayVar.push(context_func as EquipmentRestriction)
             return relayVar;
         },
-        async canModelAddItem(this: EventRunner, eventSource : any, relayVar : boolean,  trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, restrictions : EquipmentRestriction[]) {
-            console.log("canModelAddItem")
-            console.log((eventSource as ContextObject).GetTrueName())
-            console.log(eventSource)
-            console.log(relayVar)
-            console.log(trackVal)
-            console.log(context_func)
-            console.log(context_static)
-            console.log(context_main)
-            console.log(restrictions)
-            
+        async canModelAddItem(this: EventRunner, eventSource : any, relayVar : boolean,  trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, restrictions : EquipmentRestriction[]) {            
             return relayVar;
         }
     },

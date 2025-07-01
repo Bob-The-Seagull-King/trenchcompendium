@@ -919,7 +919,6 @@ class WarbandMember extends DynamicContextObject {
 
         const CurrentHandsAvailable : ModelHands = await this.GetModelHands();
         
-
         for (let i = 0; i < BaseFactionOptions.length; i++) {
 
             const EquipRestrictionList : EquipmentRestriction[] = await eventmon.runEvent(
@@ -929,7 +928,6 @@ class WarbandMember extends DynamicContextObject {
                 [],
                 null
             )
-
             const RestrictionList : EquipmentRestriction[] = await eventmon.runEvent(
                 "getEquipmentRestriction",
                 this,
@@ -943,7 +941,7 @@ class WarbandMember extends DynamicContextObject {
             for (let j = 0; j < RestrictionList.length; j++) {
                 NewRefList.push(RestrictionList[j]);
             }
-
+            
             let CanAdd = await eventmon.runEvent(
                 "canModelAddItem", // @TODO Lane
                 BaseFactionOptions[i],
@@ -1027,7 +1025,6 @@ class WarbandMember extends DynamicContextObject {
 
         for (let i = 0; i < this.ModelEquipments.length; i++) {
             for (let j = 0; j < this.ModelEquipments[i].SelfDynamicProperty.Selections.length; j++) {
-                console.log(this.ModelEquipments[i].SelfDynamicProperty.Selections[j])
                 const SelecCur = this.ModelEquipments[i].SelfDynamicProperty.Selections[j].SelectedChoice;
                 try {
                     if (SelecCur) {
