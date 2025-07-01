@@ -1026,7 +1026,7 @@ class WarbandMember extends DynamicContextObject {
             this
         )
 
-        let CanAdd = this.CompareHands(EquipHands, model_hands)
+        const CanAdd = this.CompareHands(EquipHands, model_hands)
 
         return CanAdd
     }
