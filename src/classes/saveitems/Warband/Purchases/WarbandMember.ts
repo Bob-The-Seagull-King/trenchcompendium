@@ -986,7 +986,7 @@ class WarbandMember extends DynamicContextObject {
         return ListOfOptions;
     }
 
-    public async EquipItemAvailableSpace(item : FactionEquipmentRelationship, model_hands : ModelHands) {
+    public async EquipItemAvailableSpace(faceq : FactionEquipmentRelationship, model_hands : ModelHands) {
 
         const EquippedItems = await this.GetAllEquipForShow();
 
@@ -995,19 +995,37 @@ class WarbandMember extends DynamicContextObject {
 
             if (
                 containsTag((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Tags, "headgear") &&
-                containsTag(item.equipment.Tags, "headgear")
+                containsTag(faceq.EquipmentItem.Tags, "headgear")
             ) {
                 return false;
             }
             if (
                 containsTag((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Tags, "grenade") &&
-                containsTag(item.equipment.Tags, "grenade")
+                containsTag(faceq.EquipmentItem.Tags, "grenade")
             ) {
                 return false;
             }
             if (
                 containsTag((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Tags, "armour") &&
-                containsTag(item.equipment.Tags, "armour")
+                containsTag(faceq.EquipmentItem.Tags, "armour")
+            ) {
+                return false;
+            }
+            if (
+                containsTag((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Tags, "shield") &&
+                containsTag(faceq.EquipmentItem.Tags, "shield")
+            ) {
+                return false;
+            }
+            if (
+                containsTag((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Tags, "flag") &&
+                containsTag(faceq.EquipmentItem.Tags, "flag")
+            ) {
+                return false;
+            }
+            if (
+                containsTag((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Tags, "instrument") &&
+                containsTag(faceq.EquipmentItem.Tags, "instrument")
             ) {
                 return false;
             }
