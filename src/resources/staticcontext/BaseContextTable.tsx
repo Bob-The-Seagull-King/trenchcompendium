@@ -1357,6 +1357,7 @@ export const BaseContextCallTable : CallEventTable = {
                     const CurRestriction : EquipmentRestriction = restrictions[i];
 
                     if (CurRestriction.permitted) {
+                        let PassedOne = false;
                         for (let j = 0; j < CurRestriction.permitted.length; j++) {
                             const Requirement = CurRestriction.permitted[j]
 
@@ -1380,14 +1381,14 @@ export const BaseContextCallTable : CallEventTable = {
                                         Found = true;
                                     }
                                 }
-                                if (Found == false) {
-                                    CanAdd = false;
+                                if (Found == true) {
+                                    PassedOne = true;
                                 }
                             }  
 
                             if (Requirement.res_type == "id") {
-                                if (trackVal.model.CurModel.ID != Requirement.value) {
-                                    CanAdd = false;
+                                if (trackVal.model.CurModel.ID == Requirement.value) {
+                                    PassedOne = true;
                                 }
                             }  
     
@@ -1398,8 +1399,8 @@ export const BaseContextCallTable : CallEventTable = {
                                         Found = true;
                                     }
                                 }
-                                if (Found == false) {
-                                    CanAdd = false;
+                                if (Found == true) {
+                                    PassedOne = true;
                                 }
                             }                  
     
@@ -1410,12 +1411,13 @@ export const BaseContextCallTable : CallEventTable = {
                                         Found = true;
                                     }
                                 }
-                                if (Found == false) {
-                                    CanAdd = false;
+                                if (Found == true) {
+                                    PassedOne = true;
                                 }
                             }                  
     
                         }
+                        CanAdd = PassedOne;
                     }
                     
                     if (CurRestriction.banned) {
