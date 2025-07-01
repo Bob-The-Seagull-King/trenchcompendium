@@ -299,7 +299,7 @@ export const BaseContextCallTable : CallEventTable = {
                             }
 
                             if (Requirement.tag) {
-                                if (!containsTag(trackVal.item.EquipmentItem.Tags, Requirement.tag) && !containsTag(trackVal.Tags, Requirement.tag)) {
+                                if (!containsTag(trackVal.item.EquipmentItem.Tags, Requirement.tag) && !containsTag(trackVal.item.Tags, Requirement.tag)) {
                                     continue;
                                 }
                             }
