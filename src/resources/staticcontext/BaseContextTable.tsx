@@ -383,42 +383,6 @@ export const BaseContextCallTable : CallEventTable = {
                             }        
                         }
                     }
-                    
-                    if (CurRestriction.banned) {
-                        for (let j = 0; j < CurRestriction.banned.length; j++) {
-                            const Requirement = CurRestriction.banned[j]
-
-                            if (Requirement.category) {
-                                if (trackVal.EquipmentItem.Category != Requirement.category) {
-                                    continue;
-                                }
-                            }
-
-                            if (Requirement.tag) {
-                                if (!containsTag(trackVal.EquipmentItem.Tags, Requirement.tag) && !containsTag(trackVal.Tags, Requirement.tag)) {
-                                    continue;
-                                }
-                            }
-
-                            if (Requirement.res_type == "keyword") {
-                                let Found = false;
-                                for (let k = 0; k < trackVal.EquipmentItem.GetKeyWords().length; k++) {
-                                    if (trackVal.EquipmentItem.GetKeyWords()[k].ID == Requirement.value) {
-                                        Found = true;
-                                    }
-                                }
-                                if (Found == true) {
-                                    CanAdd = false;
-                                }
-                            }  
-
-                            if (Requirement.res_type == "id") {
-                                if ((eventSource as WarbandMember).CurModel.ID == Requirement.value) {
-                                    CanAdd = false;
-                                }
-                            }                  
-                        }
-                    }
                 }
             }
 
@@ -493,8 +457,9 @@ export const BaseContextCallTable : CallEventTable = {
 
                             if (Requirement.res_type == "keyword") {
                                 let Found = false;
-                                for (let k = 0; k < trackVal.EquipmentItem.GetKeyWords().length; k++) {
-                                    if (trackVal.EquipmentItem.GetKeyWords()[k].ID == Requirement.value) {
+                                const modelkeywords = await (eventSource as WarbandMember).GetKeywordsFull()
+                                for (let k = 0; k < modelkeywords.length; k++) {
+                                    if (modelkeywords[k].ID == Requirement.value) {
                                         Found = true;
                                     }
                                 }
@@ -533,6 +498,43 @@ export const BaseContextCallTable : CallEventTable = {
                                 }
                             }                  
     
+                        }
+                    }
+                    
+                    if (CurRestriction.banned) {
+                        for (let j = 0; j < CurRestriction.banned.length; j++) {
+                            const Requirement = CurRestriction.banned[j]
+
+                            if (Requirement.category) {
+                                if (trackVal.EquipmentItem.Category != Requirement.category) {
+                                    continue;
+                                }
+                            }
+
+                            if (Requirement.tag) {
+                                if (!containsTag(trackVal.EquipmentItem.Tags, Requirement.tag) && !containsTag(trackVal.Tags, Requirement.tag)) {
+                                    continue;
+                                }
+                            }
+
+                            if (Requirement.res_type == "keyword") {
+                                let Found = false;
+                                const modelkeywords = await (eventSource as WarbandMember).GetKeywordsFull()
+                                for (let k = 0; k < modelkeywords.length; k++) {
+                                    if (modelkeywords[k].ID == Requirement.value) {
+                                        Found = true;
+                                    }
+                                }
+                                if (Found == true) {
+                                    CanAdd = false;
+                                }
+                            }  
+
+                            if (Requirement.res_type == "id") {
+                                if ((eventSource as WarbandMember).CurModel.ID == Requirement.value) {
+                                    CanAdd = false;
+                                }
+                            }                  
                         }
                     }
                 }
