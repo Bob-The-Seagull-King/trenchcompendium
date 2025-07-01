@@ -970,7 +970,7 @@ class WarbandMember extends DynamicContextObject {
                     "canModelAddItem",
                     BaseFactionOptions[i],
                     [NewRefList],
-                    true,
+                    CanAdd,
                     {
                         model: this,
                         item : BaseFactionOptions[i]
