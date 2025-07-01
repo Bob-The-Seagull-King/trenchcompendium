@@ -1066,6 +1066,25 @@ class WarbandMember extends DynamicContextObject {
             ranged: 2,
             special: 0
         }
+        const MyEquip = await this.GetAllEquipForShow();
+        for (let i = 0; i < MyEquip.length; i++) {
+            const EquipItem = MyEquip[i].equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment;
+            if (EquipItem.Stats["hands_melee"]) {
+                if (BaseHands["melee"] == 0) {
+                    BaseHands["special"] -= EquipItem.Stats["hands_melee"]
+                } else {
+                    BaseHands["melee"] -= EquipItem.Stats["hands_melee"]
+                }
+            }
+            if (EquipItem.Stats["hands_ranged"]) {
+                if (BaseHands["ranged"] == 0) {
+                    BaseHands["special"] -= EquipItem.Stats["hands_ranged"]
+                } else {
+                    BaseHands["ranged"] -= EquipItem.Stats["hands_ranged"]
+                }
+            }
+
+        }
         const eventmon : EventRunner = new EventRunner();
         const AvailableHands : ModelHands = await eventmon.runEvent(
                 "getModelHandsAvailable",
