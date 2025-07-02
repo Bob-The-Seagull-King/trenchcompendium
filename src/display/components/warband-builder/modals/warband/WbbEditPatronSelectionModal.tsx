@@ -66,7 +66,7 @@ const WbbEditPatronSelectionModal: React.FC<WbbEditPatronSelectionProps> = ({
                             className={`select-item ${selectedPatron === (patron) ? 'selected' : ''}`}
                             onClick={() => setSelectedPatron(patron)}
                         >
-                            {patron}
+                            {patron.GetTrueName()}
                         </div>
                     ))}
                 </div>
