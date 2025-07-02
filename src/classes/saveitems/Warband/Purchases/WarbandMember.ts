@@ -392,6 +392,15 @@ class WarbandMember extends DynamicContextObject {
             }
         } 
 
+        const AllKeywords = await this.GetKeywordsFull();
+        for (let i = 0; i < AllKeywords.length; i++) {
+            const static_packages : ContextPackage[] = await AllKeywords[i].GrabContextPackages(event_id, source_obj, arrs_extra);
+            for (let j = 0; j < static_packages.length; j++) {
+                static_packages[j].callpath.push("WarbandMember")
+                subpackages.push(static_packages[j])
+            }
+        } 
+
         return subpackages; 
     }
 
