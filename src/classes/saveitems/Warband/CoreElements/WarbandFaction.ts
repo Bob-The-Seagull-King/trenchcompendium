@@ -159,7 +159,6 @@ class WarbandFaction extends DynamicContextObject {
                 }
             }
         ) as IPatronRelationship[]
-
         for (let i = 0; i < PatronList.length; i++) {
             const Patron = await SkillFactory.CreateNewPatron(PatronList[i].id, this)
             AllPatrons.push(Patron);

@@ -861,17 +861,15 @@ export const BaseContextCallTable : CallEventTable = {
         event_priotity: 0,
             
         async addExtraPatronOptions(this: EventRunner, eventSource : any, relayVar : Patron[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
-            
             const { SkillFactory } = await import("../../factories/features/SkillFactory");
 
-            if (context_func["list"]) {
-                for (let i = 0; i < context_func["list"]; i++) {
+            if (context_func["list"] != undefined) {
+                for (let i = 0; i < context_func["list"].length; i++) {
                     const id : string = context_func["list"][i]
                     const NewPatron : Patron = await SkillFactory.CreateNewPatron(id, null)
                     relayVar.push(NewPatron);
                 }
             }
-            
             return relayVar;
         }
     },

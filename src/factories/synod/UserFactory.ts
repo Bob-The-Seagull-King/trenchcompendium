@@ -86,7 +86,6 @@ class UserFactory {
         synodcache.userObjectCache[_rule.id] = rule;
         await rule.GenerateWarbands(_rule);
         await rule.BuildFriends(_rule)
-        console.log(rule);
         return rule;
     }
 
