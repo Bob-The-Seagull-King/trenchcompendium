@@ -914,9 +914,22 @@ class WarbandMember extends DynamicContextObject {
 
     public async GetModelEquipmentOptions() {
         const ListOfOptions : FactionEquipmentRelationship[] = []
-        const BaseFactionOptions : FactionEquipmentRelationship[] = await (this.MyContext as UserWarband).GetFactionEquipmentOptions();
 
         const eventmon : EventRunner = new EventRunner();
+        const SkipEquip : boolean = await eventmon.runEvent(
+            "overrideMercenarySkip",
+            this,
+            [],
+            this.IsMercenary(),
+            null
+        )
+
+        if (SkipEquip) {
+            return ListOfOptions;
+        }
+
+        const BaseFactionOptions : FactionEquipmentRelationship[] = await (this.MyContext as UserWarband).GetFactionEquipmentOptions();
+
 
         const CurrentHandsAvailable : ModelHands = await this.GetModelHands();
 
