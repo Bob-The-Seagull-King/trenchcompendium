@@ -440,11 +440,7 @@ class WarbandMember extends DynamicContextObject {
     }
 
     public async GetKeywordsFull() {
-        const keywordarr : Keyword[] = [];
-        for (let i = 0; i < this.CurModel.KeyWord.length; i++) {
-            keywordarr.push(this.CurModel.KeyWord[i]);
-        }
-        return keywordarr;
+        return await this.getContextuallyAvailableKeywords();
     }
 
     public async IsKeywordPresent(id : string) {
@@ -1057,16 +1053,33 @@ class WarbandMember extends DynamicContextObject {
     }
 
     public async GetModelHands() {
-        const BaseHands : ModelHands = {
-            melee: 2,
-            ranged: 2,
-            special: 0
-        }
+        const eventmon : EventRunner = new EventRunner();
+        const BaseHands : ModelHands = await eventmon.runEvent(
+            "getModelHandsAvailable",
+            this,
+            [],
+            {
+                melee: 2,
+                ranged: 2,
+                special: 0
+            },
+            {
+                model: this,
+                warband : this.MyContext as UserWarband
+            }
+        )
+
+        let IsStrong = await this.IsKeywordPresent("kw_strong");
 
         const MyEquip = await this.GetAllEquipForShow();
         for (let i = 0; i < MyEquip.length; i++) {
             const EquipItem = MyEquip[i].equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment;
             if (EquipItem.Stats["hands_melee"]) {
+                let meleeval = EquipItem.Stats["hands_melee"];
+                if (IsStrong && meleeval == 2) {
+                    meleeval = 1;
+                    IsStrong = false;
+                }
                 if (BaseHands["melee"] == 0) {
                     BaseHands["special"] -= EquipItem.Stats["hands_melee"]
                 } else {
@@ -1080,21 +1093,23 @@ class WarbandMember extends DynamicContextObject {
                     BaseHands["ranged"] -= EquipItem.Stats["hands_ranged"]
                 }
             }
-
         }
-        const eventmon : EventRunner = new EventRunner();
-        const AvailableHands : ModelHands = await eventmon.runEvent(
-                "getModelHandsAvailable",
-                this,
-                [],
-                BaseHands,
-                {
-                    model: this,
-                    warband : this.MyContext as UserWarband
+        return BaseHands;
+    }
+
+    public async HasTwoHandedMeleeWeapon() {
+        const MyEquip = await this.GetAllEquipForShow();
+        for (let i = 0; i < MyEquip.length; i++) {
+            const EquipItem = MyEquip[i].equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment;
+            if (EquipItem.Stats["hands_melee"]) {
+                let meleeval = EquipItem.Stats["hands_melee"];
+                if (meleeval == 2) {
+                    return true;
                 }
-            )
-        // @TODO Lane get how many hands they have left
-        return AvailableHands;
+            }
+        }
+        return false;
+
     }
 
     public async AddEquipment(item : FactionEquipmentRelationship) {

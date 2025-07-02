@@ -543,19 +543,7 @@
         "name": "STRONG",
         "contextdata": {
             "option_search_viable" : {},
-            "modify_eqiupment_hands": {
-                "mods": [
-                    {
-                        "hand_type": "melee",
-                        "max_count": 1,
-                        "mod_val": -1,
-                        "category": "melee",
-                        "res_type": "stat",
-                        "value": "hands_melee",
-                        "param": 2
-                    }
-                ]
-            }
+            "strong_twohanded_mod": {}
         },
         "description": [            
             {

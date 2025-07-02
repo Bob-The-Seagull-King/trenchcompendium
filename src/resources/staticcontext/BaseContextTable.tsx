@@ -875,84 +875,18 @@ export const BaseContextCallTable : CallEventTable = {
             return relayVar;
         }
     },
-    modify_eqiupment_hands: {
+    strong_twohanded_mod: {
         event_priotity: 1,
-        /**
-         * 
-            "modify_eqiupment_hands": {
-                "mods": [
-                        "hand_type": "melee",
-                        "max_count": 1,
-                        "mod_val": -1,
-                        "category": "melee",
-                        "res_type": "stat",
-                        "value": "hands_melee",
-                        "param": 2
-                ]
-            }
-         */
-        async getModelHandsAvailable(this: EventRunner, eventSource : any, relayVar : ModelHands,  trackVal : MemberAndWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
-            // Hands a model currently has available to it
+        async equipmentHandsCost(this: EventRunner, eventSource : any, relayVar : ModelHands,  trackVal : MemberAndItem, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            console.log("STRONG GUY")
+            const IgnoreStrong = (await trackVal.model.HasTwoHandedMeleeWeapon())
 
-            if (context_func["mods"]) {
-                for (let i = 0; i < context_func["mods"].length; i++){
-                    const mod = context_func["mods"][i];
-                    let found_count = 0;
-
-                    const MyEquip = await trackVal.model.GetAllEquipForShow();
-                    for (let j = 0; j < MyEquip.length; j++) {
-                        const Equipment = MyEquip[i].equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment
-
-                        if (mod["category"]) {
-                            if (Equipment.Category != mod["category"]) {
-                                continue;
-                            }
-                        }
-
-                        if (mod["res_type"] == "stat") {
-                            if (mod["value"] == "hands_melee") {
-                                if (Equipment.Stats.hands_melee) {
-                                    if (Equipment.Stats.hands_melee == mod["param"]) {
-                                        found_count += 1;
-                                    }
-                                }
-                            }
-                        }
-
-                    }
-
-                    if (mod["max_count"] == 0) {
-                        for (let j = 0; j < found_count; j++) {
-                            if (mod["hand_type"] == "melee") {
-                                relayVar.melee -= mod["mod_val"]
-                            }
-                            if (mod["hand_type"] == "ranged") {
-                                relayVar.ranged -= mod["mod_val"]
-                            }
-                            if (mod["hand_type"] == "special") {
-                                relayVar.special -= mod["mod_val"]
-                            }
-                        }
-                    } else {
-                        for (let j = 0; j < Math.min(mod["max_count"], found_count); j++) {
-                            if (mod["hand_type"] == "melee") {
-                                relayVar.melee -= mod["mod_val"]
-                            }
-                            if (mod["hand_type"] == "ranged") {
-                                relayVar.ranged -= mod["mod_val"]
-                            }
-                            if (mod["hand_type"] == "special") {
-                                relayVar.special -= mod["mod_val"]
-                            }                            
-                        }
-                    }
+            if (!IgnoreStrong) {
+                if (relayVar.melee == 2) {
+                    relayVar.melee = 1;
                 }
             }
 
-            return relayVar
-        },
-        async equipmentHandsCost(this: EventRunner, eventSource : any, relayVar : ModelHands,  trackVal : MemberAndItem, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
-            // Hands an equipment piece costs to hold
             return relayVar;
         }
     },
