@@ -937,45 +937,7 @@ class WarbandMember extends DynamicContextObject {
             let CanAdd = await this.EquipItemAvailableSpace(BaseFactionOptions[i], CurrentHandsAvailable)
 
             if (CanAdd) {
-
-                const NewRefList : EquipmentRestriction[] = [];
-
-                const EquipRestrictionList : EquipmentRestriction[] = await eventmon.runEvent(
-                    "getEquipmentRestriction",
-                    BaseFactionOptions[i],
-                    [],
-                    [],
-                    null
-                )
-                
-                for (let j = 0; j < RestrictionList.length; j++) {
-                    NewRefList.push(RestrictionList[j]);
-                }
-                for (let j = 0; j < EquipRestrictionList.length; j++) {
-                    NewRefList.push(EquipRestrictionList[j]);
-                }
-            
-                CanAdd = await eventmon.runEvent(
-                    "canModelAddItem",
-                    this,
-                    [NewRefList],
-                    true,
-                    {
-                        model: this,
-                        item : BaseFactionOptions[i]
-                    }
-                )
-            
-                CanAdd = await eventmon.runEvent(
-                    "canModelAddItem",
-                    BaseFactionOptions[i],
-                    [NewRefList],
-                    CanAdd,
-                    {
-                        model: this,
-                        item : BaseFactionOptions[i]
-                    }
-                )
+                CanAdd = await this.EquipItemCanAdd(BaseFactionOptions[i], RestrictionList)
             }
 
             if (CanAdd) {
@@ -986,54 +948,85 @@ class WarbandMember extends DynamicContextObject {
         return ListOfOptions;
     }
 
+    public async EquipItemCanAdd(faceq : FactionEquipmentRelationship, restriction_list : EquipmentRestriction[]) {
+
+        const eventmon : EventRunner = new EventRunner();
+        const NewRefList : EquipmentRestriction[] = [];
+        const EquipRestrictionList : EquipmentRestriction[] = await eventmon.runEvent(
+            "getEquipmentRestriction",
+            faceq,
+            [],
+            [],
+            null
+        )
+        
+        for (let j = 0; j < restriction_list.length; j++) {
+            NewRefList.push(restriction_list[j]);
+        }
+        for (let j = 0; j < EquipRestrictionList.length; j++) {
+            NewRefList.push(EquipRestrictionList[j]);
+        }
+    
+        let CanAdd = await eventmon.runEvent(
+            "canModelAddItem",
+            this,
+            [NewRefList],
+            true,
+            {
+                model: this,
+                item : faceq
+            }
+        )
+    
+        CanAdd = await eventmon.runEvent(
+            "canModelAddItem",
+            faceq,
+            [NewRefList],
+            CanAdd,
+            {
+                model: this,
+                item : faceq
+            }
+        )
+        return CanAdd
+    }
+
     public async EquipItemAvailableSpace(faceq : FactionEquipmentRelationship, model_hands : ModelHands) {
 
         const EquippedItems = await this.GetAllEquipForShow();
+        const KeyWordList = await this.GetKeywordsFull();
 
         for (let i = 0; i < EquippedItems.length; i++) {
             const item : RealWarbandPurchaseEquipment = EquippedItems[i];
 
             if (
-                containsTag((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Tags, "headgear") &&
-                containsTag(faceq.EquipmentItem.Tags, "headgear")
+                (containsTag((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Tags, "headgear") &&
+                    containsTag(faceq.EquipmentItem.Tags, "headgear")) ||
+                (containsTag((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Tags, "grenade") &&
+                    containsTag(faceq.EquipmentItem.Tags, "grenade")) ||
+                (containsTag((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Tags, "armour") &&
+                    containsTag(faceq.EquipmentItem.Tags, "armour")) ||
+                (containsTag((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Tags, "shield") &&
+                    containsTag(faceq.EquipmentItem.Tags, "shield")) ||
+                (containsTag((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Tags, "flag") &&
+                    containsTag(faceq.EquipmentItem.Tags, "flag")) ||
+                (containsTag((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Tags, "instrument") &&
+                    containsTag(faceq.EquipmentItem.Tags, "instrument"))
             ) {
                 return false;
             }
             if (
-                containsTag((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Tags, "grenade") &&
-                containsTag(faceq.EquipmentItem.Tags, "grenade")
+                (item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).GetKeyWordIDs().includes("kw_heavy") &&
+                (faceq.EquipmentItem.GetKeyWordIDs().includes("kw_heavy")) &&
+                (KeyWordList.filter((item) => item.GetID() == "kw_heavy").length == 0)
             ) {
-                return false;
-            }
-            if (
-                containsTag((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Tags, "armour") &&
-                containsTag(faceq.EquipmentItem.Tags, "armour")
-            ) {
-                return false;
-            }
-            if (
-                containsTag((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Tags, "shield") &&
-                containsTag(faceq.EquipmentItem.Tags, "shield")
-            ) {
-                return false;
-            }
-            if (
-                containsTag((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Tags, "flag") &&
-                containsTag(faceq.EquipmentItem.Tags, "flag")
-            ) {
-                return false;
-            }
-            if (
-                containsTag((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Tags, "instrument") &&
-                containsTag(faceq.EquipmentItem.Tags, "instrument")
-            ) {
-                return false;
+                return false
             }
         }
 
         const eventmon : EventRunner = new EventRunner();
         const EquipHands : ModelHands = await eventmon.runEvent(
-            "equipmentHandsCost", // @TODO Lane
+            "equipmentHandsCost",
             faceq,
             [],
             {
@@ -1066,6 +1059,7 @@ class WarbandMember extends DynamicContextObject {
             ranged: 2,
             special: 0
         }
+
         const MyEquip = await this.GetAllEquipForShow();
         for (let i = 0; i < MyEquip.length; i++) {
             const EquipItem = MyEquip[i].equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment;

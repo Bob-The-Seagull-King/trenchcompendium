@@ -193,6 +193,16 @@ class Equipment extends StaticOptionContextObject {
         return this.KeyWord;
     }
 
+    GetKeyWordIDs () {
+        const arr : string[] = []
+
+        for (let i = 0; i < this.KeyWord.length; i++) {
+            arr.push(this.KeyWord[i].GetID())
+        }
+
+        return arr;
+    }
+
     /**
      *  Return Description as String
      */
