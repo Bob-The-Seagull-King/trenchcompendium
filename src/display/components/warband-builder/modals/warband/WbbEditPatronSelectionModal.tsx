@@ -22,6 +22,7 @@ const WbbEditPatronSelectionModal: React.FC<WbbEditPatronSelectionProps> = ({
     const [patronOptions, setPatronOptions] = useState<Patron[]>([]);
 
     const { warband, reloadDisplay, updateKey } = useWarband();
+    const [keyvar, setkeyvar] = useState(0);
 
     useEffect(() => {
         async function SetDisplayOptions() {
@@ -31,7 +32,7 @@ const WbbEditPatronSelectionModal: React.FC<WbbEditPatronSelectionProps> = ({
                 options = await (warband?.warband_data.GetPatronList());
             }
             setPatronOptions(options)
-            reloadDisplay();
+            setkeyvar(keyvar + 1);
         }
 
 
@@ -56,7 +57,7 @@ const WbbEditPatronSelectionModal: React.FC<WbbEditPatronSelectionProps> = ({
                 />
             </Modal.Header>
 
-            <Modal.Body key={updateKey}>
+            <Modal.Body key={keyvar}>
                 <h6>Select a Patron</h6>
 
                 <div className={'patron-selection-wrap'}>
