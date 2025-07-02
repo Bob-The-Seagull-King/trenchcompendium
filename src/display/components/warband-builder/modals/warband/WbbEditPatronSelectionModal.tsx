@@ -25,7 +25,11 @@ const WbbEditPatronSelectionModal: React.FC<WbbEditPatronSelectionProps> = ({
 
     useEffect(() => {
         async function SetDisplayOptions() {
-            const options : Patron[] = await (warband?.warband_data.GetPatronList());
+            
+            let options : Patron[] = []
+            if (warband) {
+                options = await (warband?.warband_data.GetPatronList());
+            }
             setPatronOptions(options)
             reloadDisplay();
         }
