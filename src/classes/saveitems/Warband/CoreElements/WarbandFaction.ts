@@ -138,7 +138,7 @@ class WarbandFaction extends DynamicContextObject {
     }
 
     public async FindAllPatronOptions() {
-        const AllPatrons: Patron[] = [];
+        let AllPatrons: Patron[] = [];
         const PatronList = Requester.MakeRequest(
             {
                 searchtype: "complex", 
@@ -163,6 +163,17 @@ class WarbandFaction extends DynamicContextObject {
         for (let i = 0; i < PatronList.length; i++) {
             const Patron = await SkillFactory.CreateNewPatron(PatronList[i].id, this)
             AllPatrons.push(Patron);
+        }
+
+        if (this.MyContext) {
+            const eventmon : EventRunner = new EventRunner();
+            AllPatrons = await eventmon.runEvent(
+                "addExtraPatronOptions",
+                this.MyContext,
+                [],
+                AllPatrons,
+                null
+            )
         }
 
         return AllPatrons;

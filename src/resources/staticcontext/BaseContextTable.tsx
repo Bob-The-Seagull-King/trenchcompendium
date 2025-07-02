@@ -29,6 +29,7 @@ import { UserWarband } from "../../classes/saveitems/Warband/UserWarband";
 import { FactionEquipmentRelationship } from "../../classes/relationship/faction/FactionEquipmentRelationship";
 import { MemberAndItem, MemberAndWarband, ModelHands, WarbandMember } from "../../classes/saveitems/Warband/Purchases/WarbandMember";
 import { returnDescription } from "../../utility/util";
+import { Patron } from "../../classes/feature/skillgroup/Patron";
 
 export const BaseContextCallTable : CallEventTable = {
     option_search_viable: {
@@ -855,6 +856,24 @@ export const BaseContextCallTable : CallEventTable = {
             return relayVar;
         }
             
+    },
+    add_patron: {
+        event_priotity: 0,
+            
+        async addExtraPatronOptions(this: EventRunner, eventSource : any, relayVar : Patron[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            
+            const { SkillFactory } = await import("../../factories/features/SkillFactory");
+
+            if (context_func["list"]) {
+                for (let i = 0; i < context_func["list"]; i++) {
+                    const id : string = context_func["list"][i]
+                    const NewPatron : Patron = await SkillFactory.CreateNewPatron(id, null)
+                    relayVar.push(NewPatron);
+                }
+            }
+            
+            return relayVar;
+        }
     },
     modify_eqiupment_hands: {
         event_priotity: 1,

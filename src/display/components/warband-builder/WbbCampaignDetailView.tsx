@@ -22,6 +22,7 @@ const WbbCampaignDetailView: React.FC<WbbCampaignDetailViewProps> = ({ onClose }
     /** Victory Points */
     const [victoryPoints, setVictoryPoints] = useState<number>(warband.warband_data.GetVictoryPoints());
     const [showVictoryPointsModal, setshowVictoryPointsModal] = useState(false);
+    const [keyvar, setKeyvar] = useState(0);
     const handleVictoryPointsUpdate = ( newVP: number ) => {
         setVictoryPoints(newVP)
         // @TODO: Update Victory Points
@@ -35,7 +36,8 @@ const WbbCampaignDetailView: React.FC<WbbCampaignDetailViewProps> = ({ onClose }
         warband?.warband_data.UpdateSelfPatron(newPatron).then(() =>
             {
             const Manager : ToolsController = ToolsController.getInstance();
-            Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(() => reloadDisplay())
+            Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(() => {reloadDisplay()
+            setKeyvar(keyvar + 1)})
         })
     }
 
@@ -66,7 +68,7 @@ const WbbCampaignDetailView: React.FC<WbbCampaignDetailViewProps> = ({ onClose }
                 </div>
             </div>
 
-            <div className={'detail-view-content'} key={updateKey}>
+            <div className={'detail-view-content'} key={setKeyvar.toString() + "_" + updateKey.toString()}>
                 <div className={'detail-section-title'}>
                     {'Campaign Details'}
                 </div>
