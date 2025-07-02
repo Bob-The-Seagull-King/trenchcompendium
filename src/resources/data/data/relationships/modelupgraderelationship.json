@@ -143,6 +143,8 @@
         "cost": 30,
         "cost_type": 0,
         "restricted_upgrades": [
+            "rel_md_up_alchemicalformulae_humanhands",
+            "rel_md_up_alchemicalformulae_massive_size"
         ],
         "warband_limit": 0,
         "required_upgrades":[]

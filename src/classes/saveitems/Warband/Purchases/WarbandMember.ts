@@ -1027,14 +1027,17 @@ class WarbandMember extends DynamicContextObject {
         const eventmon : EventRunner = new EventRunner();
         const EquipHands : ModelHands = await eventmon.runEvent(
             "equipmentHandsCost",
-            faceq,
+            this,
             [],
             {
                 melee: faceq.EquipmentItem.Stats["hands_melee"]? faceq.EquipmentItem.Stats["hands_melee"] : 0,
                 ranged: faceq.EquipmentItem.Stats["hands_ranged"]? faceq.EquipmentItem.Stats["hands_ranged"] : 0,
                 special: 0
             },
-            this
+            {
+                item: faceq,
+                model: this
+            }
         )
 
         const CanAdd = this.CompareHands(EquipHands, model_hands)
@@ -1085,7 +1088,10 @@ class WarbandMember extends DynamicContextObject {
                 this,
                 [],
                 BaseHands,
-                this.MyContext
+                {
+                    model: this,
+                    warband : this.MyContext as UserWarband
+                }
             )
         // @TODO Lane get how many hands they have left
         return AvailableHands;
