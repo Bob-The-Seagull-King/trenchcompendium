@@ -875,21 +875,6 @@ export const BaseContextCallTable : CallEventTable = {
             return relayVar;
         }
     },
-    strong_twohanded_mod: {
-        event_priotity: 1,
-        async equipmentHandsCost(this: EventRunner, eventSource : any, relayVar : ModelHands,  trackVal : MemberAndItem, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
-            console.log("STRONG GUY")
-            const IgnoreStrong = (await trackVal.model.HasTwoHandedMeleeWeapon())
-
-            if (!IgnoreStrong) {
-                if (relayVar.melee == 2) {
-                    relayVar.melee = 1;
-                }
-            }
-
-            return relayVar;
-        }
-    },
     override_required_upgrade: {
         event_priotity: 1,
         async getUpgradeRestrictionsPresentation(this: EventRunner, eventSource : any, relayVar : string[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {

@@ -390,16 +390,7 @@ class WarbandMember extends DynamicContextObject {
                 static_packages[j].callpath.push("WarbandMember")
                 subpackages.push(static_packages[j])
             }
-        } 
-
-        const AllKeywords = await this.GetKeywordsFull();
-        for (let i = 0; i < AllKeywords.length; i++) {
-            const static_packages : ContextPackage[] = await AllKeywords[i].GrabContextPackages(event_id, source_obj, arrs_extra);
-            for (let j = 0; j < static_packages.length; j++) {
-                static_packages[j].callpath.push("WarbandMember")
-                subpackages.push(static_packages[j])
-            }
-        } 
+        }
 
         return subpackages; 
     }
@@ -1043,7 +1034,15 @@ class WarbandMember extends DynamicContextObject {
                 item: faceq,
                 model: this
             }
-        )
+        ) 
+        
+        const IgnoreStrong = (await this.HasTwoHandedMeleeWeapon())
+
+        if (!IgnoreStrong) {
+            if (EquipHands.melee == 2) {
+                EquipHands.melee = 1;
+            }
+        }
 
         const CanAdd = this.CompareHands(EquipHands, model_hands)
 
@@ -1090,9 +1089,9 @@ class WarbandMember extends DynamicContextObject {
                     IsStrong = false;
                 }
                 if (BaseHands["melee"] == 0) {
-                    BaseHands["special"] -= EquipItem.Stats["hands_melee"]
+                    BaseHands["special"] -= meleeval
                 } else {
-                    BaseHands["melee"] -= EquipItem.Stats["hands_melee"]
+                    BaseHands["melee"] -= meleeval
                 }
             }
             if (EquipItem.Stats["hands_ranged"]) {

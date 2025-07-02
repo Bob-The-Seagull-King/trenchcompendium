@@ -542,8 +542,7 @@
         },
         "name": "STRONG",
         "contextdata": {
-            "option_search_viable" : {},
-            "strong_twohanded_mod": {}
+            "option_search_viable" : {}
         },
         "description": [            
             {
