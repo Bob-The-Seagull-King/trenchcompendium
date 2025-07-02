@@ -48,7 +48,7 @@ const StaticAbout: React.FC = () => {
                                         {"Genesis Update (July 2025)"}
                                     </td>
                                     <td>
-                                        {"In this initial release of Trench-Companion a full rules compendium will maintain an up-to-date catalogue of all game rules. Not only that, but the Warband Buidler will allow users to create and maintain warbands effortlessly."}
+                                        {"In this initial release of Trench-Companion a full rules compendium will maintain an up-to-date catalogue of all game rules. Not only that, but the Warband Buidler will allow users to create and maintain warbands effortlessly - stored locally or on our online Synod servers."}
                                     </td>
                                 </tr>
                                 <tr>
@@ -56,7 +56,7 @@ const StaticAbout: React.FC = () => {
                                         {"It Never Ends Update (September 2025)"}
                                     </td>
                                     <td>
-                                        {"In the first major update to Trench-Companion the Campaign Manager and Play Mode will be added. A campaign manager allows users to associate their warbands with a Campaign, tracking progress across games. Not only that, but scenarios can be played out in the Play Mode to track victory points, glorious deeds, and all other manner of game features."}
+                                        {"In the first major update to Trench-Companion the Campaign Manager and Play Mode will be added. A campaign manager allows users to associate their warbands with a Campaign or join a friend's campaign, tracking progress across games. Not only that, but scenarios can be played out in the Play Mode to track victory points, glorious deeds, and all other manner of game features."}
                                     </td>
                                 </tr>
                                 <tr>
@@ -64,7 +64,7 @@ const StaticAbout: React.FC = () => {
                                         {"Pride Cometh Update (January 2026)"}
                                     </td>
                                     <td>
-                                        {"In the second major update the ability for Homebrew Content to be created will be massively expanded. Expansive documentation and guides will be created to help users create their own custom homebrew content and add it to their games. Premium users will also receive a glut of new options and the ability to have their homebrew content hosted for other users to access."}
+                                        {"In the second major update the ability for Homebrew Content to be created will be officially included. Expansive documentation and guides will be made to help users create their own custom homebrew content and add it to their games and share with their fellow players! Premium users will also receive a glut of new cosmetic options and the ability to have their homebrew content hosted for other users to access effortlessly."}
                                     </td>
                                 </tr>
                                 <tr>
