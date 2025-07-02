@@ -223,16 +223,22 @@ class WarbandMember extends DynamicContextObject {
             
             if ((regenerate == true) || ((this.ModelEquipments[i].SelfDynamicProperty.OptionChoice as ModelEquipmentRelationship).Removable == false)) {
                 const MERelationship = (this.ModelEquipments[i].SelfDynamicProperty.OptionChoice as ModelEquipmentRelationship)
+
+                const ListOfIDs : string[] = []
+                for (let j = 0; j < this.Equipment.length; j++) {
+                    ListOfIDs.push(this.Equipment[j].HeldObject.ID)
+                }
                 for (let j = 0; j < MERelationship.EquipmentItems.length; j++) {
                     let IsFound = false
-                    for (let k = 0; k < this.Equipment.length; k++) {
-                        if (this.Equipment[k].HeldObject.ID == MERelationship.ID + "_" + MERelationship.EquipmentItems[j].ID + "_" + j) {
+                    for (let k = 0; k < ListOfIDs.length; k++) {
+                        if (ListOfIDs[k] == MERelationship.ID + "_" + MERelationship.EquipmentItems[j].ID + "_" + j) {
                             IsFound = true;
                             break;
                         }
                     }
+                    
                     if (IsFound == false) {
-                        const Model : WarbandEquipment = await WarbandFactory.BuildModelEquipmentFromPurchase(MERelationship, MERelationship.EquipmentItems[j], this);
+                        const Model : WarbandEquipment = await WarbandFactory.BuildModelEquipmentFromPurchase(MERelationship, MERelationship.EquipmentItems[j], j, this);
                         const NewPurchase : WarbandPurchase = new WarbandPurchase({
                             cost_value : MERelationship.SaleValue,
                             cost_type : MERelationship.SaleType,
@@ -1174,7 +1180,7 @@ class WarbandMember extends DynamicContextObject {
                         const Val = SelecCur.value as ModelEquipmentRelationship;
 
                         for (let k = 0; k < Val.EquipmentItems.length; k++) {
-                            const Model : WarbandEquipment = await WarbandFactory.BuildModelEquipmentFromPurchase(Val, Val.EquipmentItems[k], this);
+                            const Model : WarbandEquipment = await WarbandFactory.BuildModelEquipmentFromPurchase(Val, Val.EquipmentItems[k], k, this);
                             const NewPurchase : WarbandPurchase = new WarbandPurchase({
                                 cost_value : Val.SaleValue,
                                 cost_type : Val.SaleType,

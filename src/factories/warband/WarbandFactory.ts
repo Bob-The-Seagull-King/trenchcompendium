@@ -47,9 +47,9 @@ class WarbandFactory {
         return Equipment;
     }
 
-    static async BuildModelEquipmentFromPurchase(rel: ModelEquipmentRelationship, equipment : Equipment, parent : DynamicContextObject | null) {
+    static async BuildModelEquipmentFromPurchase(rel: ModelEquipmentRelationship, equipment : Equipment, key : number, parent : DynamicContextObject | null) {
         const data : IWarbandEquipment = {    
-                id: rel.ID + "_" + equipment.ID + "_" + rel.EquipmentItems.indexOf(equipment), // The id of the item
+                id: rel.ID + "_" + equipment.ID + "_" + key, // The id of the item
                 name: equipment.GetTrueName(), // The name of the item
                 source: equipment.Source? equipment.Source : "unknown", // The source of the item (core book, homebrew, etc)
                 tags: equipment.Tags,
