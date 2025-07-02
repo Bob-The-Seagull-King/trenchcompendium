@@ -21,9 +21,9 @@ const WbbEditViewCampaign: React.FC<WbbEditViewCampaignProps> = ({
 
             <div className="meta-item mb-2">{warband.warband_data.GetCampaignName()}</div>
             <div className="meta-item"><strong>{'Patron: '}</strong>
-                { (warband.warband_data.GetPatronName() != '') ? (
+                { (warband.warband_data.GetPatron() != null) ? (
                     <>
-                        {warband.warband_data.GetPatron()}
+                        {warband.warband_data.GetPatron().GetTrueName()}
                     </>
                 ): (
                     <>
