@@ -25,7 +25,7 @@ const WbbEditViewCampaign: React.FC<WbbEditViewCampaignProps> = ({
             <div className="meta-item"><strong>{'Patron: '}</strong>
                 { (Patron != null) ? (
                     <>
-                        {Patron?.GetPatron().GetTrueName()}
+                        {Patron?.GetTrueName()}
                     </>
                 ): (
                     <>
