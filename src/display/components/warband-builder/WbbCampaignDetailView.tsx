@@ -8,13 +8,15 @@ import WbbOptionBox from "./WbbOptionBox";
 import WbbEditVictoryPointsModal from "./modals/warband/WbbEditVictoryPointsModal";
 import WbbEditPatronSelectionModal from "./modals/warband/WbbEditPatronSelectionModal";
 import WbbEditCampaignCycleModal from "./modals/warband/WbbEditCampaignCycleModal";
+import { Patron } from '../../../classes/feature/skillgroup/Patron';
+import { ToolsController } from '../../../classes/_high_level_controllers/ToolsController';
 
 interface WbbCampaignDetailViewProps {
     onClose: () => void;
 }
 
 const WbbCampaignDetailView: React.FC<WbbCampaignDetailViewProps> = ({ onClose }) => {
-    const { warband } = useWarband();
+    const { warband, reloadDisplay, updateKey } = useWarband();
     if (warband == null) return (<div>Loading...</div>);
 
     /** Victory Points */
@@ -27,12 +29,14 @@ const WbbCampaignDetailView: React.FC<WbbCampaignDetailViewProps> = ({ onClose }
     }
 
     /** Patron */
-    const [patron, setPatron] = useState<string>(warband.warband_data.GetPatronName());
+    const [patron, setPatron] = useState<Patron | null>(warband? warband?.warband_data.GetPatron() : null);
     const [showPatronModal, setshowPatronModal] = useState(false);
     const handlePatronUpdate = ( newPatron: string ) => {
-        setPatron(newPatron)
-        // @TODO: Update Patron
-        console.log('@TODO: Set new Patron ' + newPatron);
+        warband?.warband_data.UpdateSelfPatron(newPatron).then(() =>
+            {
+            const Manager : ToolsController = ToolsController.getInstance();
+            Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(() => reloadDisplay())
+        })
     }
 
     /** Campaign Cycle */
@@ -62,7 +66,7 @@ const WbbCampaignDetailView: React.FC<WbbCampaignDetailViewProps> = ({ onClose }
                 </div>
             </div>
 
-            <div className={'detail-view-content'}>
+            <div className={'detail-view-content'} key={updateKey}>
                 <div className={'detail-section-title'}>
                     {'Campaign Details'}
                 </div>
@@ -108,7 +112,7 @@ const WbbCampaignDetailView: React.FC<WbbCampaignDetailViewProps> = ({ onClose }
                 {/* Patron */}
                 <WbbOptionBox
                     title={'Patron'}
-                    value={patron}
+                    value={patron? patron.GetTrueName() : ""}
                     onClick={() => setshowPatronModal(true)}
                 />
 

@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import {faXmark} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { Patron } from '../../../../../classes/feature/skillgroup/Patron';
+import { useWarband } from '../../../../../context/WarbandContext';
 
 interface WbbEditPatronSelectionProps {
     show: boolean;
     onClose: () => void;
-    currentPatron: string;
+    currentPatron: Patron | null;
     onSubmit: (newPatron: string) => void;
 }
 
@@ -16,13 +18,24 @@ const WbbEditPatronSelectionModal: React.FC<WbbEditPatronSelectionProps> = ({
                                                                                 currentPatron,
                                                                                 onSubmit
                                                                             }) => {
-    const [selectedPatron, setSelectedPatron] = useState<string>(currentPatron);
+    const [selectedPatron, setSelectedPatron] = useState<Patron | null>(currentPatron);
+    const [patronOptions, setPatronOptions] = useState<Patron[]>([]);
 
-    // @TODO: Get actual Patron Options
-    const patronOptions = ['Sublime Gate', 'Learned Saint', 'Infernal Noble'];
+    const { warband, reloadDisplay, updateKey } = useWarband();
+
+    useEffect(() => {
+        async function SetDisplayOptions() {
+            const options : Patron[] = warband?.warband_data.GetPatronList();
+            setPatronOptions(options)
+            reloadDisplay();
+        }
+
+
+        SetDisplayOptions();
+    }, [show]);
 
     const handleSubmit = () => {
-        onSubmit(selectedPatron);
+        onSubmit(selectedPatron? selectedPatron.ID : "");
         onClose();
     };
 
@@ -39,14 +52,14 @@ const WbbEditPatronSelectionModal: React.FC<WbbEditPatronSelectionProps> = ({
                 />
             </Modal.Header>
 
-            <Modal.Body>
+            <Modal.Body key={updateKey}>
                 <h6>Select a Patron</h6>
 
                 <div className={'patron-selection-wrap'}>
                     {patronOptions.map((patron) => (
                         <div
-                            key={patron}
-                            className={`select-item ${selectedPatron === patron ? 'selected' : ''}`}
+                            key={patron.GetID()}
+                            className={`select-item ${selectedPatron === (patron) ? 'selected' : ''}`}
                             onClick={() => setSelectedPatron(patron)}
                         >
                             {patron}
@@ -72,3 +85,7 @@ const WbbEditPatronSelectionModal: React.FC<WbbEditPatronSelectionProps> = ({
 };
 
 export default WbbEditPatronSelectionModal;
+
+function useEffect(arg0: () => void, arg1: any[]) {
+    throw new Error('Function not implemented.');
+}
