@@ -1102,7 +1102,7 @@ class WarbandMember extends DynamicContextObject {
         for (let i = 0; i < MyEquip.length; i++) {
             const EquipItem = MyEquip[i].equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment;
             if (EquipItem.Stats["hands_melee"]) {
-                let meleeval = EquipItem.Stats["hands_melee"];
+                const meleeval = EquipItem.Stats["hands_melee"];
                 if (meleeval == 2) {
                     return true;
                 }
