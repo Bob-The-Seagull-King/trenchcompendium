@@ -1018,7 +1018,7 @@ class WarbandMember extends DynamicContextObject {
             if (
                 (item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).GetKeyWordIDs().includes("kw_heavy") &&
                 (faceq.EquipmentItem.GetKeyWordIDs().includes("kw_heavy")) &&
-                (KeyWordList.filter((item) => item.GetID() == "kw_heavy").length == 0)
+                (KeyWordList.filter((item) => item.GetID() == "kw_strong").length == 0)
             ) {
                 return false
             }
