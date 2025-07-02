@@ -114,6 +114,10 @@ class WarbandFactory {
                 elite : rel.Model.getKeywordIDs().includes("kw_elite"),
                 recruited: false
             }
+
+        if (rel.Mercenary == true) {
+            data.tags["mercenary"] = true;
+        }
         
         const Model : WarbandMember = await WarbandFactory.CreateWarbandMember(data, parent);
         return Model;

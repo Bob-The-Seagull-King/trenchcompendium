@@ -1786,6 +1786,12 @@ export const BaseContextCallTable : CallEventTable = {
         )
         }
     },
+    modify_equipment_block: {
+        event_priotity: 0,
+        async overrideMercenarySkip(this: EventRunner, eventSource : any, relayVar : boolean, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            return true;
+        }
+    },
     override_stats : {
         event_priotity: 1,        
         async modifyEquipmentStats(this: EventRunner, eventSource : any, relayVar : EquipmentStats, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {

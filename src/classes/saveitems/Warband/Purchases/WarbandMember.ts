@@ -399,6 +399,9 @@ class WarbandMember extends DynamicContextObject {
         if (this.CurModel.Stats.mercenary) {
             return this.CurModel.Stats.mercenary
         }
+        if (containsTag(this.Tags, "mercenary")) {
+            return true;
+        }
         return false;
     }
 
