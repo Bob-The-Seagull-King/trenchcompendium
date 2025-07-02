@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { UserWarband } from "../../../classes/saveitems/Warband/UserWarband";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faChevronLeft, faDownload, faInfoCircle} from "@fortawesome/free-solid-svg-icons";
@@ -36,7 +36,9 @@ const WbbCampaignDetailView: React.FC<WbbCampaignDetailViewProps> = ({ onClose }
         warband?.warband_data.UpdateSelfPatron(newPatron).then(() =>
             {
             const Manager : ToolsController = ToolsController.getInstance();
-            Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(() => {reloadDisplay()
+            Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(() => {
+            setPatron(warband? warband?.warband_data.GetPatron() : null)
+            reloadDisplay()
             setKeyvar(keyvar + 1)})
         })
     }
