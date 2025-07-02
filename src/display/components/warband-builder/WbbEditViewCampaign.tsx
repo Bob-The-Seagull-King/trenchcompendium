@@ -15,15 +15,17 @@ const WbbEditViewCampaign: React.FC<WbbEditViewCampaignProps> = ({
     const { warband } = useWarband();
     if (warband == null) return (<div>Loading...</div>);
 
+    const Patron = warband.warband_data.GetPatron();
+
     return (
         <div className={`WbbEditViewCampaign warband-meta ${isActive ? 'active' : ''}`} onClick={onClick}>
             <div className={'meta-headline'}>{'Campaign'}</div>
 
             <div className="meta-item mb-2">{warband.warband_data.GetCampaignName()}</div>
             <div className="meta-item"><strong>{'Patron: '}</strong>
-                { (warband.warband_data.GetPatron() != null) ? (
+                { (Patron != null) ? (
                     <>
-                        {warband.warband_data.GetPatron().GetTrueName()}
+                        {Patron?.GetPatron().GetTrueName()}
                     </>
                 ): (
                     <>
