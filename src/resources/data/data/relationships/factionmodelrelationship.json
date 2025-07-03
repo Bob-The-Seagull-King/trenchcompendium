@@ -568,7 +568,11 @@
         "mercenary": false,
         "cost" : 65,
         "cost_type" : 0,
-        "restricted_models" : ["md_heretichorister_barbedwirebanshee"],
+        "restricted_models" : [
+            {
+                "upgrade_ids": ["rel_fc_md_barbedwirebanshee_trenchghost"],
+                "max_count": 0
+            }],
         "warband_minimum" : 0,
         "warband_maximum" : 1
     },
@@ -585,7 +589,11 @@
         "mercenary": false,
         "cost" : 65,
         "cost_type" : 0,
-        "restricted_models" : ["md_heretichorister"],
+        "restricted_models" : [
+            {
+                "upgrade_ids": ["rel_fc_md_heretichorister_trenchghost"],
+                "max_count": 0
+            }],
         "warband_minimum" : 0,
         "warband_maximum" : 1
     },
@@ -1484,7 +1492,12 @@
         "mercenary": false,
         "cost" : 130,
         "cost_type" : 0,
-        "restricted_models" : [],
+        "restricted_models" : [
+            {
+                "upgrade_ids": ["rel_fc_md_plagueknight_captain"],
+                "max_count": 0
+            }
+        ],
         "warband_minimum" : 0,
         "warband_maximum" : 1
     },
@@ -1501,7 +1514,12 @@
         "mercenary": false,
         "cost" : 60,
         "cost_type" : 0,
-        "restricted_models" : [],
+        "restricted_models" : [
+            {
+                "upgrade_ids": ["rel_fc_md_lordoftumors"],
+                "max_count": 0
+            }
+        ],
         "warband_minimum" : 0,
         "warband_maximum" : 1
     },
@@ -1705,7 +1723,7 @@
         "mercenary": false,
         "cost" : 115,
         "cost_type" : 0,
-        "restricted_models" : ["md_praetor"],
+        "restricted_models" : [],
         "warband_minimum" : 0,
         "warband_maximum" : 1
     },
@@ -1722,7 +1740,7 @@
         "mercenary": false,
         "cost" : 75,
         "cost_type" : 0,
-        "restricted_models" : ["md_sorcerer"],
+        "restricted_models" : [],
         "warband_minimum" : 0,
         "warband_maximum" : 1
     },

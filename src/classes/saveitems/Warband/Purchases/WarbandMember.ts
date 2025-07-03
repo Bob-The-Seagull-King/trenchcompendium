@@ -17,7 +17,7 @@ import { WarbandEquipment } from "./WarbandEquipment";
 import { UpgradeFactory } from "../../../../factories/features/UpgradeFactory";
 import { InjuryFactory } from "../../../../factories/features/InjuryFactory";
 import { Upgrade } from "../../../feature/ability/Upgrade";
-import { Equipment } from "../../../feature/equipment/Equipment";
+import { Equipment, EquipmentRestriction } from "../../../feature/equipment/Equipment";
 import { Keyword } from "../../../feature/glossary/Keyword";
 import { Ability } from "../../../feature/ability/Ability";
 import { EventRunner } from "../../../contextevent/contexteventhandler";
@@ -28,13 +28,18 @@ import { WarbandFactory } from "../../../../factories/warband/WarbandFactory";
 import { FactionEquipmentRelationship, IFactionEquipmentRelationship } from "../../../relationship/faction/FactionEquipmentRelationship";
 import { EquipmentFactory } from "../../../../factories/features/EquipmentFactory";
 import { ModelEquipmentRelationship } from "../../../relationship/model/ModelEquipmentRelationship";
+import { containsTag } from "../../../../utility/functions";
 
 export interface MemberAndWarband {
     warband: UserWarband,
     model: WarbandMember
 }
+export interface MemberAndItem {
+    item: FactionEquipmentRelationship,
+    model: WarbandMember
+}
 
-interface ModelHands {
+export interface ModelHands {
     ranged: number,
     melee : number,
     special : number
@@ -43,7 +48,9 @@ interface ModelHands {
 export interface MemberUpgradePresentation {
     upgrade : ModelUpgradeRelationship,
     purchase : WarbandPurchase | null,
-    allowed : boolean
+    allowed : boolean,
+    cur_count : number,
+    max_count : number
 }
 export type MemberUpgradesGrouped = {[type : string]: 
     {
@@ -56,7 +63,7 @@ interface IWarbandMember extends IContextObject {
     model: string,
     subproperties : IWarbandProperty[],
     notes : INote[]
-    active : boolean,
+    active : 'active' | 'reserved' | 'lost',
     equipment : IWarbandPurchaseEquipment[],
     list_upgrades : IWarbandPurchaseUpgrade[],
     list_injury : IWarbandProperty[],
@@ -64,8 +71,7 @@ interface IWarbandMember extends IContextObject {
     list_modelequipment : IWarbandProperty[],
     experience : number,
     elite : boolean,
-    recruited: boolean,
-    fighterName: string
+    recruited: boolean
 }
 
 class WarbandMember extends DynamicContextObject {
@@ -73,7 +79,7 @@ class WarbandMember extends DynamicContextObject {
     public readonly boldXpIndices = [2, 4, 7, 10, 14, 18];
 
     Notes : INote[];
-    IsActive : boolean;
+    State :  'active' | 'reserved' | 'lost';
     CurModel! : Model;
     SubProperties : WarbandProperty[] = [];
     Equipment : WarbandPurchase[] = [];
@@ -94,7 +100,11 @@ class WarbandMember extends DynamicContextObject {
     {
         super(data, parent)
         this.Notes = data.notes;
-        this.IsActive = data.active;
+        if (data.active) {
+            this.State = data.active;
+        } else {
+            this.State = 'active'
+        }
         this.Experience = data.experience;
         this.Elite = data.elite;
         this.Recruited = data.recruited;
@@ -108,7 +118,7 @@ class WarbandMember extends DynamicContextObject {
             let IsFound = false
             for (let j = 0; j < data.subproperties.length; j++) {
                 if (data.subproperties[j].object_id == all_eq[i].ID) {
-                    const NewEquip = await EquipmentFactory.CreateNewModelEquipment(data.list_modelequipment[j].object_id, this)
+                    const NewEquip = await EquipmentFactory.CreateNewModelEquipment(data.subproperties[j].object_id, this)
                     const NewRuleProperty = new WarbandProperty(NewEquip, this, null, data.subproperties[j]);
                     await NewRuleProperty.HandleDynamicProps(NewEquip, this, null, data.subproperties[j]);
                     this.ModelEquipments.push(NewRuleProperty);
@@ -217,17 +227,22 @@ class WarbandMember extends DynamicContextObject {
             
             if ((regenerate == true) || ((this.ModelEquipments[i].SelfDynamicProperty.OptionChoice as ModelEquipmentRelationship).Removable == false)) {
                 const MERelationship = (this.ModelEquipments[i].SelfDynamicProperty.OptionChoice as ModelEquipmentRelationship)
+
+                const ListOfIDs : string[] = []
+                for (let j = 0; j < this.Equipment.length; j++) {
+                    ListOfIDs.push(this.Equipment[j].HeldObject.ID)
+                }
                 for (let j = 0; j < MERelationship.EquipmentItems.length; j++) {
-                    const IsFound = false
-                    /*
-                    for (let k = 0; k < this.Equipment.length; k++) {
-                        if (this.Equipment[k].HeldObject.ID == MERelationship.ID + "_" + MERelationship.EquipmentItems[j].ID + "_" + j) {
+                    let IsFound = false
+                    for (let k = 0; k < ListOfIDs.length; k++) {
+                        if (ListOfIDs[k] == MERelationship.ID + "_" + MERelationship.EquipmentItems[j].ID + "_" + j) {
                             IsFound = true;
                             break;
                         }
-                    }*/
-                    if ( !IsFound ) {
-                        const Model : WarbandEquipment = await WarbandFactory.BuildModelEquipmentFromPurchase(MERelationship, MERelationship.EquipmentItems[j], this);
+                    }
+                    
+                    if (IsFound == false) {
+                        const Model : WarbandEquipment = await WarbandFactory.BuildModelEquipmentFromPurchase(MERelationship, MERelationship.EquipmentItems[j], j, this);
                         const NewPurchase : WarbandPurchase = new WarbandPurchase({
                             cost_value : MERelationship.SaleValue,
                             cost_type : MERelationship.SaleType,
@@ -238,7 +253,7 @@ class WarbandMember extends DynamicContextObject {
                             purchaseid: MERelationship.ID,
                             faction_rel_id: MERelationship.ID,
                             custom_rel: MERelationship.SelfData,
-                            modelpurch: false
+                            modelpurch: true
                         }, this, Model);
                         this.Equipment.push(NewPurchase);
                     }
@@ -318,7 +333,7 @@ class WarbandMember extends DynamicContextObject {
             model: modelstring,
             subproperties : subpropset,
             notes : this.Notes,
-            active : this.IsActive,
+            active : this.State,
             equipment : equipmentlist,
             list_upgrades : upgradelist,
             list_injury : injuryset,
@@ -326,8 +341,7 @@ class WarbandMember extends DynamicContextObject {
             experience : this.Experience,
             list_modelequipment: modelpropset,
             elite : this.Elite,
-            recruited : this.Recruited,
-            fighterName: '' // @TODO: Set Fighter name - initially empty Fighter Name might even be correct
+            recruited : this.Recruited
         }
         
         return _objint;
@@ -386,7 +400,7 @@ class WarbandMember extends DynamicContextObject {
                 static_packages[j].callpath.push("WarbandMember")
                 subpackages.push(static_packages[j])
             }
-        } 
+        }
 
         return subpackages; 
     }
@@ -394,6 +408,9 @@ class WarbandMember extends DynamicContextObject {
     public IsMercenary(): boolean {
         if (this.CurModel.Stats.mercenary) {
             return this.CurModel.Stats.mercenary
+        }
+        if (containsTag(this.Tags, "mercenary")) {
+            return true;
         }
         return false;
     }
@@ -436,11 +453,7 @@ class WarbandMember extends DynamicContextObject {
     }
 
     public async GetKeywordsFull() {
-        const keywordarr : Keyword[] = [];
-        for (let i = 0; i < this.CurModel.KeyWord.length; i++) {
-            keywordarr.push(this.CurModel.KeyWord[i]);
-        }
-        return keywordarr;
+        return await this.getContextuallyAvailableKeywords();
     }
 
     public async IsKeywordPresent(id : string) {
@@ -507,8 +520,6 @@ class WarbandMember extends DynamicContextObject {
     /**
      * Get the name of the Fighter
      * - i.e. "Steve the fearless"
-     *
-     * // @TODO: This need to be set somewhere
      * @return: string
      */
     GetFighterName () {
@@ -535,39 +546,12 @@ class WarbandMember extends DynamicContextObject {
     }
 
     /**
-     * Return the total cost of the fighter in Ducats
-     * - This includes base cost plus upgrades
-     *
-     * // @TODO: calculate actual ducats value
-     * @return: int
-     */
-    GetTotalCostDucats () {
-
-        const $total = this.GetBaseCostDucats () + 50;
-        return $total;
-
-    }
-
-    /**
      * The base glory cost of the fighter on recruitment
      *
      * @return: int
      */
     GetBaseCostGlory () {
         return 0;
-    }
-
-    /**
-     * Returns the total cost of the fighter in Glory
-     * - This includes base cost plus upgrades
-     *
-     * // @TODO: calculate actual glory value
-     * @return: int
-     */
-    GetTotalCostGlory () {
-
-        const total = this.GetBaseCostGlory() + 2;
-        return total;
     }
 
     /**
@@ -761,7 +745,7 @@ class WarbandMember extends DynamicContextObject {
 
         let maxcount = upg.WarbandLimit;
         maxcount = await Events.runEvent(
-            "getUpgradeLimitTrue", // @TODO Lane
+            "getUpgradeLimitTrue",
             upg,
             [],
             maxcount,
@@ -775,7 +759,7 @@ class WarbandMember extends DynamicContextObject {
 
         if (canaddupgrade) {
             const careAboutRequired = await Events.runEvent(
-                "getRequiresUpgradesBool", // @TODO Lane
+                "getRequiredUpgradesBool",
                 upg,
                 [],
                 true,
@@ -818,7 +802,7 @@ class WarbandMember extends DynamicContextObject {
         }
         if (canaddupgrade) {
             canaddupgrade = await Events.runEvent(
-                "canModelGetUpgrade", // @TODO Lane
+                "canModelGetUpgrade",
                 upg,
                 [],
                 canaddupgrade,
@@ -831,7 +815,9 @@ class WarbandMember extends DynamicContextObject {
         return {
             upgrade : upg,
             purchase : foundpurchase,
-            allowed : canaddupgrade
+            allowed : canaddupgrade,
+            cur_count: (this.MyContext as UserWarband).GetCountOfUpgradeRel(upg.ID),
+            max_count: maxcount
         }
     }
 
@@ -941,30 +927,41 @@ class WarbandMember extends DynamicContextObject {
 
     public async GetModelEquipmentOptions() {
         const ListOfOptions : FactionEquipmentRelationship[] = []
-        const BaseFactionOptions : FactionEquipmentRelationship[] = await (this.MyContext as UserWarband).GetFactionEquipmentOptions();
 
         const eventmon : EventRunner = new EventRunner();
+        const SkipEquip : boolean = await eventmon.runEvent(
+            "overrideMercenarySkip",
+            this,
+            [],
+            this.IsMercenary(),
+            null
+        )
+
+        if (SkipEquip) {
+            return ListOfOptions;
+        }
+
+        const BaseFactionOptions : FactionEquipmentRelationship[] = await (this.MyContext as UserWarband).GetFactionEquipmentOptions();
+
 
         const CurrentHandsAvailable : ModelHands = await this.GetModelHands();
 
+        const RestrictionList : EquipmentRestriction[] = await eventmon.runEvent(
+            "getEquipmentRestriction",
+            this,
+            [],
+            [],
+            null
+        )
+        
         for (let i = 0; i < BaseFactionOptions.length; i++) {
-            let CanAdd = await eventmon.runEvent(
-                "canModelAddItem", // @TODO Lane
-                BaseFactionOptions[i],
-                [],
-                true,
-                this
-            )
+
+            let CanAdd = await this.EquipItemAvailableSpace(BaseFactionOptions[i], CurrentHandsAvailable)
+
             if (CanAdd) {
-                const EquipHands : ModelHands = await eventmon.runEvent(
-                    "equipmentHandsCost", // @TODO Lane
-                    BaseFactionOptions[i],
-                    [],
-                    true,
-                    this
-                )
-                CanAdd = this.CompareHands(EquipHands, CurrentHandsAvailable)
+                CanAdd = await this.EquipItemCanAdd(BaseFactionOptions[i], RestrictionList)
             }
+
             if (CanAdd) {
                 ListOfOptions.push(BaseFactionOptions[i]);
             }
@@ -973,26 +970,180 @@ class WarbandMember extends DynamicContextObject {
         return ListOfOptions;
     }
 
+    public async EquipItemCanAdd(faceq : FactionEquipmentRelationship, restriction_list : EquipmentRestriction[]) {
+
+        const eventmon : EventRunner = new EventRunner();
+        const NewRefList : EquipmentRestriction[] = [];
+        const EquipRestrictionList : EquipmentRestriction[] = await eventmon.runEvent(
+            "getEquipmentRestriction",
+            faceq,
+            [],
+            [],
+            null
+        )
+        
+        for (let j = 0; j < restriction_list.length; j++) {
+            NewRefList.push(restriction_list[j]);
+        }
+        for (let j = 0; j < EquipRestrictionList.length; j++) {
+            NewRefList.push(EquipRestrictionList[j]);
+        }
+    
+        let CanAdd = await eventmon.runEvent(
+            "canModelAddItem",
+            this,
+            [NewRefList],
+            true,
+            {
+                model: this,
+                item : faceq
+            }
+        )
+    
+        CanAdd = await eventmon.runEvent(
+            "canModelAddItem",
+            faceq,
+            [NewRefList],
+            CanAdd,
+            {
+                model: this,
+                item : faceq
+            }
+        )
+        return CanAdd
+    }
+
+    public async EquipItemAvailableSpace(faceq : FactionEquipmentRelationship, model_hands : ModelHands) {
+
+        const EquippedItems = await this.GetAllEquipForShow();
+        const KeyWordList = await this.GetKeywordsFull();
+
+        for (let i = 0; i < EquippedItems.length; i++) {
+            const item : RealWarbandPurchaseEquipment = EquippedItems[i];
+
+            if (
+                (containsTag((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Tags, "headgear") &&
+                    containsTag(faceq.EquipmentItem.Tags, "headgear")) ||
+                (containsTag((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Tags, "grenade") &&
+                    containsTag(faceq.EquipmentItem.Tags, "grenade")) ||
+                (containsTag((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Tags, "armour") &&
+                    containsTag(faceq.EquipmentItem.Tags, "armour")) ||
+                (containsTag((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Tags, "shield") &&
+                    containsTag(faceq.EquipmentItem.Tags, "shield")) ||
+                (containsTag((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Tags, "flag") &&
+                    containsTag(faceq.EquipmentItem.Tags, "flag")) ||
+                (containsTag((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Tags, "instrument") &&
+                    containsTag(faceq.EquipmentItem.Tags, "instrument"))
+            ) {
+                return false;
+            }
+            if (
+                (item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).GetKeyWordIDs().includes("kw_heavy") &&
+                (faceq.EquipmentItem.GetKeyWordIDs().includes("kw_heavy")) &&
+                (KeyWordList.filter((item) => item.GetID() == "kw_strong").length == 0)
+            ) {
+                return false
+            }
+        }
+
+        const eventmon : EventRunner = new EventRunner();
+        const EquipHands : ModelHands = await eventmon.runEvent(
+            "equipmentHandsCost",
+            this,
+            [],
+            {
+                melee: faceq.EquipmentItem.Stats["hands_melee"]? faceq.EquipmentItem.Stats["hands_melee"] : 0,
+                ranged: faceq.EquipmentItem.Stats["hands_ranged"]? faceq.EquipmentItem.Stats["hands_ranged"] : 0,
+                special: 0
+            },
+            {
+                item: faceq,
+                model: this
+            }
+        ) 
+        
+        const IgnoreStrong = (await this.HasTwoHandedMeleeWeapon())
+
+        if (!IgnoreStrong) {
+            if (EquipHands.melee == 2) {
+                EquipHands.melee = 1;
+            }
+        }
+
+        const CanAdd = this.CompareHands(EquipHands, model_hands)
+
+        return CanAdd
+    }
+
     public CompareHands(equipment_need : ModelHands, model_have : ModelHands) {
-        return true; //@TODO Lane compare hands
+        if (
+            (equipment_need.melee > model_have.melee) ||
+            (equipment_need.ranged > model_have.ranged) ||
+            (equipment_need.special > model_have.special)
+        ) {
+            return false;
+        }
+        return true;
     }
 
     public async GetModelHands() {
-        const BaseHands : ModelHands = {
-            melee: 2,
-            ranged: 2,
-            special: 0
-        }
         const eventmon : EventRunner = new EventRunner();
-        const AvailableHands = await eventmon.runEvent(
-                "getModelHandsAvailable",
-                this,
-                [],
-                true,
-                this.MyContext
-            )
-        // @TODO Lane get how many hands they have left
+        const BaseHands : ModelHands = await eventmon.runEvent(
+            "getModelHandsAvailable",
+            this,
+            [],
+            {
+                melee: 2,
+                ranged: 2,
+                special: 0
+            },
+            {
+                model: this,
+                warband : this.MyContext as UserWarband
+            }
+        )
+
+        let IsStrong = await this.IsKeywordPresent("kw_strong");
+
+        const MyEquip = await this.GetAllEquipForShow();
+        for (let i = 0; i < MyEquip.length; i++) {
+            const EquipItem = MyEquip[i].equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment;
+            if (EquipItem.Stats["hands_melee"]) {
+                let meleeval = EquipItem.Stats["hands_melee"];
+                if (IsStrong && meleeval == 2) {
+                    meleeval = 1;
+                    IsStrong = false;
+                }
+                if (BaseHands["melee"] == 0) {
+                    BaseHands["special"] -= meleeval
+                } else {
+                    BaseHands["melee"] -= meleeval
+                }
+            }
+            if (EquipItem.Stats["hands_ranged"]) {
+                if (BaseHands["ranged"] == 0) {
+                    BaseHands["special"] -= EquipItem.Stats["hands_ranged"]
+                } else {
+                    BaseHands["ranged"] -= EquipItem.Stats["hands_ranged"]
+                }
+            }
+        }
         return BaseHands;
+    }
+
+    public async HasTwoHandedMeleeWeapon() {
+        const MyEquip = await this.GetAllEquipForShow();
+        for (let i = 0; i < MyEquip.length; i++) {
+            const EquipItem = MyEquip[i].equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment;
+            if (EquipItem.Stats["hands_melee"]) {
+                const meleeval = EquipItem.Stats["hands_melee"];
+                if (meleeval == 2) {
+                    return true;
+                }
+            }
+        }
+        return false;
+
     }
 
     public async AddEquipment(item : FactionEquipmentRelationship) {
@@ -1011,13 +1162,66 @@ class WarbandMember extends DynamicContextObject {
         }, this, Equipment);
         this.Equipment.push(NewPurchase);
     }
+
+    public async GetAllEquipForShow() {
+        
+        const options : RealWarbandPurchaseEquipment[] = [ ];
+
+        for (let i = 0; i < this.Equipment.length; i++) {
+            options.push(
+                {
+                    purchase: this.Equipment[i],
+                    equipment: this.Equipment[i].HeldObject as WarbandEquipment
+                }
+            )
+        }
+
+        for (let i = 0; i < this.ModelEquipments.length; i++) {
+            for (let j = 0; j < this.ModelEquipments[i].SelfDynamicProperty.Selections.length; j++) {
+                const SelecCur = this.ModelEquipments[i].SelfDynamicProperty.Selections[j].SelectedChoice;
+                try {
+                    if (SelecCur) {
+                        const Val = SelecCur.value as ModelEquipmentRelationship;
+
+                        for (let k = 0; k < Val.EquipmentItems.length; k++) {
+                            const Model : WarbandEquipment = await WarbandFactory.BuildModelEquipmentFromPurchase(Val, Val.EquipmentItems[k], k, this);
+                            const NewPurchase : WarbandPurchase = new WarbandPurchase({
+                                cost_value : Val.SaleValue,
+                                cost_type : Val.SaleType,
+                                count_limit : false,
+                                count_cap : false,
+                                sell_item : Val.Removable,
+                                sell_full : true,
+                                purchaseid: Val.ID,
+                                faction_rel_id: Val.ID,
+                                custom_rel: Val.SelfData,
+                                modelpurch: true
+                            }, this, Model);
+
+                            options.push(
+                                {
+                                    purchase: NewPurchase,
+                                    equipment: Model
+                                }
+                            )
+                        }
+
+                    }
+                } catch(e) { console.log(e)}
+            }
+        }
+
+        return options;
+    }
     
     public async DirectAddStash( item : RealWarbandPurchaseEquipment) {
+        if (item.purchase.Sellable == false) {return}
         this.Equipment.push(item.purchase);
     }
     
     public async CopyStash( item : RealWarbandPurchaseEquipment ) {
 
+        if (item.purchase.Sellable == false) {return "Cannot sell this item"}
         const IsValidToAdd = await (this.MyContext as UserWarband).AtMaxOfItem(item.purchase.PurchaseInterface);
 
         if (IsValidToAdd) {
@@ -1067,17 +1271,19 @@ class WarbandMember extends DynamicContextObject {
         const CostVarDucats = item.purchase.GetTotalDucats();
         const CostVarGlory = item.purchase.GetTotalGlory();
 
+        if (item.purchase.Sellable == false) {return}
+        const debt = (item.purchase.FullSell == false)? debt_mod : 1;
         try {
             await this.DeleteStash(item);
-            (this.MyContext as UserWarband).Debts.ducats +=  Math.ceil(CostVarDucats * debt_mod);
-            (this.MyContext as UserWarband).Debts.glory += Math.ceil(CostVarGlory * debt_mod);
+            (this.MyContext as UserWarband).Debts.ducats +=  Math.ceil(CostVarDucats * debt);
+            (this.MyContext as UserWarband).Debts.glory += Math.ceil(CostVarGlory * debt);
 
         } catch (e) { console.log(e) }
     }
     
     
     public async DeleteStash( item : RealWarbandPurchaseEquipment ) {
-        
+        if (item.purchase.Sellable == false) {return}
         for (let i = 0; i < this.Equipment.length; i++) {
             if (item.equipment == (this.Equipment[i].HeldObject as WarbandEquipment)) {
                 this.Equipment.splice(i, 1);

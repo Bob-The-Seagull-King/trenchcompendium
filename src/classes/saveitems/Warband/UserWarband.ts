@@ -228,7 +228,7 @@ class UserWarband extends DynamicContextObject {
      * Returns the Ducats Value of the Warband Cost as int (without stash)
      */
     public GetCostDucats() {
-        return this.GetDucatCost()
+        return this.GetDucatRatingCost()
     }
 
     /**
@@ -252,7 +252,7 @@ class UserWarband extends DynamicContextObject {
      * Returns the Glory Value of the Warband Cost as int (without stash)
      */
     public GetCostGlory() {
-        return this.GetGloryCost()
+        return this.GetGloryRatingCost()
     }
 
     /**
@@ -267,7 +267,7 @@ class UserWarband extends DynamicContextObject {
      * Returns bool - Does the warband have Troops?
      */
     public HasTroops () {
-        return this.GetFighters().filter((item) => (!item.model.IsElite() && !item.model.IsMercenary())).length > 0;
+        return this.GetFighters().filter((item) => (!item.model.IsElite() && !item.model.IsMercenary() && item.model.State == "active")).length > 0;
     }
 
     /**
@@ -275,7 +275,7 @@ class UserWarband extends DynamicContextObject {
      * Returns bool - Does the warband have Elites?
      */
     public HasElites () {
-        return this.GetFighters().filter((item) => (item.model.IsElite())).length > 0;
+        return this.GetFighters().filter((item) => (item.model.IsElite() && item.model.State == "active")).length > 0;
     }
 
     /**
@@ -283,7 +283,24 @@ class UserWarband extends DynamicContextObject {
      * Returns bool - Does the warband have mercenaries?
      */
     public HasMercenaries () {
-        return this.GetFighters().filter((item) => (item.model.IsMercenary())).length > 0;
+        return this.GetFighters().filter((item) => (item.model.IsMercenary() && item.model.State == "active")).length > 0;
+    }
+
+
+    /**
+     *
+     * Returns bool - Does the warband have models in reserve?
+     */
+    public HasReserves () {
+        return this.GetFighters().filter((item) => (item.model.State == "reserved")).length > 0;
+    }
+
+    /**
+     *
+     * Returns bool - Does the warband have models in reserve?
+     */
+    public HasGone () {
+        return this.GetFighters().filter((item) => (item.model.State == "lost")).length > 0;
     }
 
     /**
@@ -599,6 +616,17 @@ class UserWarband extends DynamicContextObject {
         return TotalDucatCost
     }
 
+    public GetDucatRatingCost() {
+        
+        let TotalDucatCost = 0;
+        for (let i = 0; i < this.Models.length; i++) {
+            if ((this.Models[i].HeldObject as WarbandMember).State == "active") {
+                TotalDucatCost += this.Models[i].GetTotalDucats();
+            }
+        }
+        return TotalDucatCost
+    }
+
     public GetDucatCostStash() {
         
         let TotalDucatCost = 0;
@@ -613,6 +641,17 @@ class UserWarband extends DynamicContextObject {
         let TotalGloryCost = 0;
         for (let i = 0; i < this.Models.length; i++) {
             TotalGloryCost += this.Models[i].GetTotalGlory();
+        }
+        return TotalGloryCost
+    }
+
+    public GetGloryRatingCost() {
+        
+        let TotalGloryCost = 0;
+        for (let i = 0; i < this.Models.length; i++) {
+            if ((this.Models[i].HeldObject as WarbandMember).State == "active") {
+                TotalGloryCost += this.Models[i].GetTotalGlory();
+            }
         }
         return TotalGloryCost
     }
@@ -632,6 +671,10 @@ class UserWarband extends DynamicContextObject {
      */
     GetNumElite() {
         return this.GetFighters().filter(f => f.model.IsElite()).length;
+    }
+
+    GetNumFielded() {
+        return this.GetFighters().filter(f => f.model.State == "active").length;
     }
 
     /**
@@ -788,6 +831,9 @@ class UserWarband extends DynamicContextObject {
     public GetCountOfEquipmentRel(id : string) {
         let count = 0;
         for (let i = 0; i < this.Equipment.length; i++) {
+            if (this.Equipment[i].CountCap == false || this.Equipment[i].CountLimit == false) {
+                continue;
+            }
             const inter = this.Equipment[i].CustomInterface
             if (inter) {
                 if (inter.id == id) {
@@ -849,6 +895,8 @@ class UserWarband extends DynamicContextObject {
         )
 
         for (let i = 0; i < BaseRels.length; i++) {
+            const IsRestricted : boolean = await this.IsModelRestricted(BaseRels[i]);
+            if (IsRestricted) { continue; }
             let maxcount = BaseRels[i].Maximum;
             maxcount = await eventmon.runEvent(
                 "getModelLimitTrue",
@@ -863,6 +911,29 @@ class UserWarband extends DynamicContextObject {
         }
 
         return ListOfRels
+    }
+
+    public async IsModelRestricted(model : FactionModelRelationship) : Promise<boolean> {
+        const eventmon : EventRunner = new EventRunner();
+        const AvoidRestriction = await eventmon.runEvent(
+            "avoidModelRestriction",
+            this,
+            [],
+            false,
+            model
+        )
+
+        if (!AvoidRestriction) {
+            for (let i = 0; i < model.Restricted_Models.length; i++) {
+                for (let j = 0; j < model.Restricted_Models[i].upgrade_ids.length; j++) {
+                    if (this.GetCountOfRel(model.Restricted_Models[i].upgrade_ids[j]) > model.Restricted_Models[i].max_count) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
     }
 
     public async GetFactionEquipmentOptions() : Promise<FactionEquipmentRelationship[]> {

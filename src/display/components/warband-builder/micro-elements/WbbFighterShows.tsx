@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useWarband} from "../../../../context/WarbandContext";
 import { FactionModelRelationship } from '../../../../classes/relationship/faction/FactionModelRelationship';
 import WbbModalAddFighterElite from '../modals/WbbModalAddFighterElite';
@@ -50,6 +50,8 @@ const WbbFighterShows : React.FC<WbbFighterShow> = ({ playMode, openDetail, deta
         })
     );
 
+    const [keyvar, setkeyvar] = useState(0);
+
     const handleDragEnd = (event: any) => {
         const {active, over} = event;
         warband?.warband_data.ReorganiseFighters(active , over )
@@ -58,11 +60,17 @@ const WbbFighterShows : React.FC<WbbFighterShow> = ({ playMode, openDetail, deta
         Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999)
     };
 
+    useEffect(() => {
+        setkeyvar(keyvar + 1);
+    }, [updateKey]);
+
     return (
-        <div key = {updateKey}>
+        <div key={keyvar}>
             {warband &&
             <>
                 {/* Warband Elites */}
+                {(!playMode || warband.warband_data.HasElites()) &&
+                <>
                 <h3 className={'category-headline'}>Elites</h3>
                 <DndContext
                     sensors={sensors}
@@ -74,7 +82,7 @@ const WbbFighterShows : React.FC<WbbFighterShow> = ({ playMode, openDetail, deta
                         strategy={verticalListSortingStrategy}>
                         {warband.warband_data.GetFighters().map((item, index) => (
                             <>
-                                {item.model.IsElite() &&
+                                {(item.model.IsElite() && (item.model.State == 'active')) &&
                                     <WbbEditViewFighterSortable
                                         key={item.model.ID}
                                         fighter={item}
@@ -91,6 +99,8 @@ const WbbFighterShows : React.FC<WbbFighterShow> = ({ playMode, openDetail, deta
                         ))}
                     </SortableContext>
                 </DndContext>
+                </>
+                }
 
 
                 {!playMode &&
@@ -103,6 +113,8 @@ const WbbFighterShows : React.FC<WbbFighterShow> = ({ playMode, openDetail, deta
 
 
                 {/* Warband Troops */}
+                {(!playMode || warband.warband_data.HasTroops()) &&
+                <>
                 <h3 className={'category-headline'}>Troops</h3>
                 <DndContext
                     sensors={sensors}
@@ -114,7 +126,7 @@ const WbbFighterShows : React.FC<WbbFighterShow> = ({ playMode, openDetail, deta
                         strategy={verticalListSortingStrategy}>
                         {warband.warband_data.GetFighters().map((item, index) => (
                             <>
-                                {(!item.model.IsElite() && (!item.model.IsMercenary())) &&
+                                {((!item.model.IsElite() && (!item.model.IsMercenary())) && (item.model.State == 'active')) &&
                                     <WbbEditViewFighterSortable
                                         key={item.model.ID}
                                         fighter={item}
@@ -131,7 +143,8 @@ const WbbFighterShows : React.FC<WbbFighterShow> = ({ playMode, openDetail, deta
                         ))}
                     </SortableContext>
                 </DndContext>
-
+                </>
+                }
 
                 {!playMode &&
                     <div className={'btn btn-add-element btn-block'}
@@ -156,7 +169,7 @@ const WbbFighterShows : React.FC<WbbFighterShow> = ({ playMode, openDetail, deta
                                 strategy={verticalListSortingStrategy}>
                                 {warband.warband_data.GetFighters().map((item, index) => (
                                     <>
-                                        {item.model.IsMercenary() &&
+                                        {(item.model.IsMercenary() && (item.model.State == 'active')) &&
                                             <WbbEditViewFighterSortable
                                                 key={item.model.ID}
                                                 fighter={item}
@@ -183,6 +196,74 @@ const WbbFighterShows : React.FC<WbbFighterShow> = ({ playMode, openDetail, deta
                         <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
                         {'Add Mercenary'}
                     </div>
+                }
+
+                {(!playMode && warband.warband_data.HasReserves()) &&
+                    <>
+                        {/* Warband Mercenaries */}
+                        <h3 className={'category-headline'}>Reserves</h3>
+                        <DndContext
+                            sensors={sensors}
+                            collisionDetection={closestCenter}
+                            onDragEnd={handleDragEnd}
+                        >
+                            <SortableContext
+                                items={warband.warband_data.GetFighters().map(f => f.model.ID)}
+                                strategy={verticalListSortingStrategy}>
+                                {warband.warband_data.GetFighters().map((item, index) => (
+                                    <>
+                                        {((item.model.State == 'reserved')) &&
+                                            <WbbEditViewFighterSortable
+                                                key={item.model.ID}
+                                                fighter={item}
+                                                index={index}
+                                                onClick={() => openDetail('fighter', item)}
+                                                isActive={
+                                                    detailType === 'fighter' &&
+                                                    warband.warband_data.Models.indexOf(detailPayload?.purchase) ===
+                                                    warband.warband_data.Models.indexOf(item.purchase)
+                                                }
+                                            />
+                                        }
+                                    </>
+                                ))}
+                            </SortableContext>
+                        </DndContext>
+                    </>
+                }
+
+                {(!playMode && warband.warband_data.HasGone()) &&
+                    <>
+                        {/* Warband Mercenaries */}
+                        <h3 className={'category-headline'}>Lost & Captured</h3>
+                        <DndContext
+                            sensors={sensors}
+                            collisionDetection={closestCenter}
+                            onDragEnd={handleDragEnd}
+                        >
+                            <SortableContext
+                                items={warband.warband_data.GetFighters().map(f => f.model.ID)}
+                                strategy={verticalListSortingStrategy}>
+                                {warband.warband_data.GetFighters().map((item, index) => (
+                                    <>
+                                        {((item.model.State == 'lost')) &&
+                                            <WbbEditViewFighterSortable
+                                                key={item.model.ID}
+                                                fighter={item}
+                                                index={index}
+                                                onClick={() => openDetail('fighter', item)}
+                                                isActive={
+                                                    detailType === 'fighter' &&
+                                                    warband.warband_data.Models.indexOf(detailPayload?.purchase) ===
+                                                    warband.warband_data.Models.indexOf(item.purchase)
+                                                }
+                                            />
+                                        }
+                                    </>
+                                ))}
+                            </SortableContext>
+                        </DndContext>
+                    </>
                 }
                 </>
             }

@@ -1193,7 +1193,7 @@
         "id": "eq_musicalinstrument",
         "name": "Musical Instrument",
         "source": "core",
-        "tags": {"trait": true},
+        "tags": {"trait": true, "instrument": true},
         "category": "equipment",
         "distance": null,
         "stats": {
@@ -1225,7 +1225,7 @@
         "id": "eq_angelicinstrument",
         "name": "Angelic Instrument",
         "source": "core",
-        "tags": {"trait": true},
+        "tags": {"trait": true, "instrument": true},
         "category": "equipment",
         "distance": null,
         "stats": {
@@ -1282,7 +1282,7 @@
         "id": "eq_troopflag",
         "name": "Troop Flag",
         "source": "core",
-        "tags": {"trait": true},
+        "tags": {"trait": true, "flag": true},
         "category": "equipment",
         "distance": null,
         "stats": {
@@ -1943,7 +1943,7 @@
         "id": "eq_bannerofdesertwind",
         "name": "Banner of Desert Wind",
         "source": "core",
-        "tags": {"trait": true},
+        "tags": {"trait": true, "flag": true},
         "category": "equipment",
         "distance": null,
         "stats": {
@@ -3308,7 +3308,7 @@
         "id": "eq_standardofmammon",
         "name": "Standard of Mammon",
         "source": "core",
-        "tags": {"trait": true},
+        "tags": {"trait": true, "flag": true},
         "category": "equipment",
         "distance": null,
         "stats": {
@@ -3863,7 +3863,7 @@
         "id": "eq_carnyx",
         "name": "Carnyx",
         "source": "core",
-        "tags": {"trait": true},
+        "tags": {"trait": true, "instrument": true},
         "category": "equipment",
         "distance": null,
         "stats": {
@@ -3932,7 +3932,7 @@
         "id": "eq_bagpipes",
         "name": "Bagpipes",
         "source": "core",
-        "tags": {"trait": true},
+        "tags": {"trait": true, "instrument": true},
         "category": "equipment",
         "distance": null,
         "stats": {
@@ -5588,7 +5588,7 @@
         "id": "eq_greatbannerofnewantioch",
         "name": "Great Banner of New Antioch",
         "source": "core",
-        "tags": {"trait": true},
+        "tags": {"trait": true, "flag": true},
         "category": "equipment",
         "distance": null,
         "stats": {
@@ -6736,7 +6736,7 @@
         "id": "eq_hellskull",
         "name": "Hell Saint's Skull",
         "source": "core",
-        "tags": {"trait": true},
+        "tags": {"trait": true, "flag": true},
         "category": "equipment",
         "distance": null,
         "stats": {

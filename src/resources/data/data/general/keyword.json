@@ -541,7 +541,9 @@
             "category": "model"
         },
         "name": "STRONG",
-        "contextdata": {"option_search_viable" : {}},
+        "contextdata": {
+            "option_search_viable" : {}
+        },
         "description": [            
             {
                 "tags": {"desc_type" : "default"},

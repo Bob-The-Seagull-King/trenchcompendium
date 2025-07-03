@@ -123,12 +123,12 @@ const WbbOptionItem: React.FC<WbbOptionItemProps> = ({ option, owner, category }
                     }
 
                     {/* Displays the limit of the upgrade if any */}
-                    { option.upgrade.GetLimitNumber() > 0 &&
+                    { option.max_count > 0 &&
                         <span className='option-limit'>
                             {' - '}
-                            {option.upgrade.GetLimitNumber()}
+                            {option.cur_count}
                             {'/'}
-                            {option.upgrade.GetLimitNumberTotal()}
+                            {option.max_count}
                         </span>
                     }
 

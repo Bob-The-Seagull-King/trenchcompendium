@@ -47,9 +47,9 @@ class WarbandFactory {
         return Equipment;
     }
 
-    static async BuildModelEquipmentFromPurchase(rel: ModelEquipmentRelationship, equipment : Equipment, parent : DynamicContextObject | null) {
+    static async BuildModelEquipmentFromPurchase(rel: ModelEquipmentRelationship, equipment : Equipment, key : number, parent : DynamicContextObject | null) {
         const data : IWarbandEquipment = {    
-                id: rel.ID + "_" + equipment.ID + "_" + rel.EquipmentItems.indexOf(equipment), // The id of the item
+                id: rel.ID + "_" + equipment.ID + "_" + key, // The id of the item
                 name: equipment.GetTrueName(), // The name of the item
                 source: equipment.Source? equipment.Source : "unknown", // The source of the item (core book, homebrew, etc)
                 tags: equipment.Tags,
@@ -104,7 +104,7 @@ class WarbandFactory {
                 model: rel.Model.ID,
                 subproperties : [],
                 notes : [],
-                active : true,
+                active : 'active',
                 equipment : [],
                 list_upgrades : [],
                 list_injury : [],
@@ -112,9 +112,12 @@ class WarbandFactory {
                 list_modelequipment: [],
                 experience : 0,
                 elite : rel.Model.getKeywordIDs().includes("kw_elite"),
-                recruited: false,
-                fighterName: '' // @TODO: fighter name needs to be set
+                recruited: false
             }
+
+        if (rel.Mercenary == true) {
+            data.tags["mercenary"] = true;
+        }
         
         const Model : WarbandMember = await WarbandFactory.CreateWarbandMember(data, parent);
         return Model;

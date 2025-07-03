@@ -5,7 +5,7 @@ import { ContextObject } from "../../classes/contextevent/contextobject";
 import { IChoice, QuestionBase, StaticOptionContextObjectQuestion } from "../../classes/options/StaticOption";
 import { containsTag, getCostType, makestringpresentable } from "../../utility/functions";
 import { getTagValue } from "../../utility/functions";
-import { Equipment, EquipmentLimit, EquipmentRestriction, EquipmentStats } from "../../classes/feature/equipment/Equipment";
+import { Equipment, EquipmentLimit, EquipmentRestriction, EquipmentStats, RestrictionSingle } from "../../classes/feature/equipment/Equipment";
 import { Keyword } from "../../classes/feature/glossary/Keyword";
 import { KeywordFactory } from "../../factories/features/KeywordFactory";
 import { ModelStatistics } from "../../classes/feature/model/ModelStats";
@@ -27,8 +27,9 @@ import RuleDisplay from "../../display/components/features/faction/RuleDisplay";
 import { Skill } from "../../classes/feature/ability/Skill";
 import { UserWarband } from "../../classes/saveitems/Warband/UserWarband";
 import { FactionEquipmentRelationship } from "../../classes/relationship/faction/FactionEquipmentRelationship";
-import { MemberAndWarband, WarbandMember } from "../../classes/saveitems/Warband/Purchases/WarbandMember";
+import { MemberAndItem, MemberAndWarband, ModelHands, WarbandMember } from "../../classes/saveitems/Warband/Purchases/WarbandMember";
 import { returnDescription } from "../../utility/util";
+import { Patron } from "../../classes/feature/skillgroup/Patron";
 
 export const BaseContextCallTable : CallEventTable = {
     option_search_viable: {
@@ -278,7 +279,231 @@ export const BaseContextCallTable : CallEventTable = {
         getEquipmentRestriction(this: EventRunner, eventSource : any, relayVar : any, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) { 
             relayVar.push(context_func as EquipmentRestriction)
             return relayVar;
+        },
+        async canModelAddItem(this: EventRunner, eventSource : any, relayVar : boolean,  trackVal : MemberAndItem, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, restrictions : EquipmentRestriction[]) {            
+            
+            let CanAdd = relayVar;
+
+            // Removed, required, banned
+            if (CanAdd) {
+                for (let i = 0; i < restrictions.length; i++) {
+                    const CurRestriction : EquipmentRestriction = restrictions[i];
+
+                    if (CurRestriction.removed) {
+                        for (let j = 0; j < CurRestriction.removed.length; j++) {
+                            const Requirement = CurRestriction.removed[j]
+
+                            if (Requirement.category) {
+                                if (trackVal.item.EquipmentItem.Category != Requirement.category) {
+                                    continue;
+                                }
+                            }
+
+                            if (Requirement.tag) {
+                                if (!containsTag(trackVal.item.EquipmentItem.Tags, Requirement.tag) && !containsTag(trackVal.item.Tags, Requirement.tag)) {
+                                    continue;
+                                }
+                            }
+    
+                            if (Requirement.res_type == "keyword") {
+                                let Found = false;
+                                for (let k = 0; k < trackVal.item.EquipmentItem.GetKeyWords().length; k++) {
+                                    if (trackVal.item.EquipmentItem.GetKeyWords()[k].ID == Requirement.value) {
+                                        Found = true;
+                                    }
+                                }
+                                if (Found == true) {
+                                    CanAdd = false;
+                                }
+                            }                        
+    
+                            if (Requirement.res_type == "ducat") {
+                                if (trackVal.item.CostType == 0) {
+                                    if (Requirement.param == "maximum" ) {
+                                        if (trackVal.item.Cost > Number(Requirement.value)) {
+                                            CanAdd = false;
+                                        }
+                                    } else {
+                                        if (trackVal.item.Cost < Number(Requirement.value)) {
+                                            CanAdd = false;
+                                        }
+                                    }
+                                }
+                            }  
+    
+                            if (Requirement.res_type == "all") {
+                                CanAdd = false;
+                            }
+    
+                            if (Requirement.res_type == "id") {
+                                if (trackVal.item.EquipmentItem.ID == Requirement.value) {
+                                    CanAdd = false;
+                                }
+                            }        
+                        }
+                    }
+
+                    if (CurRestriction.required) {
+                        for (let j = 0; j < CurRestriction.required.length; j++) {
+                            const Requirement = CurRestriction.required[j]
+
+                            if (Requirement.category) {
+                                if (trackVal.item.EquipmentItem.Category != Requirement.category) {
+                                    continue;
+                                }
+                            }
+
+                            if (Requirement.tag) {
+                                if (!containsTag(trackVal.item.EquipmentItem.Tags, Requirement.tag) && !containsTag(trackVal.item.Tags, Requirement.tag)) {
+                                    continue;
+                                }
+                            }
+    
+                            if (Requirement.res_type == "keyword") {
+                                let Found = false;
+                                for (let k = 0; k < trackVal.item.EquipmentItem.GetKeyWords().length; k++) {
+                                    if (trackVal.item.EquipmentItem.GetKeyWords()[k].ID == Requirement.value) {
+                                        Found = true;
+                                    }
+                                }
+                                if (Found == false) {
+                                    CanAdd = false;
+                                }
+                            }       
+
+                            if (Requirement.res_type == "tag") {
+                                if (!containsTag(trackVal.item.EquipmentItem.Tags, Requirement.value.toString()) && !containsTag(trackVal.item.Tags, Requirement.value.toString())) {
+                                    CanAdd = false;
+                                }
+                            }
+    
+                            if (Requirement.res_type == "id") {
+                                if (trackVal.item.EquipmentItem.ID != Requirement.value) {
+                                    CanAdd = false;
+                                }
+                            }        
+                        }
+                    }
+                }
+            }
+
+            // Added
+            if (!CanAdd) {
+                for (let i = 0; i < restrictions.length; i++) {
+                    const CurRestriction : EquipmentRestriction = restrictions[i];
+
+
+                    if (CurRestriction.added) {
+                        for (let j = 0; j < CurRestriction.added.length; j++) {
+                            const Requirement = CurRestriction.added[j]
+
+                            if (Requirement.category) {
+                                if (trackVal.item.EquipmentItem.Category != Requirement.category) {
+                                    continue;
+                                }
+                            }
+
+                            if (Requirement.tag) {
+                                if (!containsTag(trackVal.item.EquipmentItem.Tags, Requirement.tag) && !containsTag(trackVal.item.Tags, Requirement.tag)) {
+                                    continue;
+                                }
+                            }
+
+                            if (Requirement.res_type == "keyword") {
+                                let Found = false;
+                                for (let k = 0; k < trackVal.item.EquipmentItem.GetKeyWords().length; k++) {
+                                    if (trackVal.item.EquipmentItem.GetKeyWords()[k].ID == Requirement.value) {
+                                        Found = true;
+                                    }
+                                }
+                                if (Found == true) {
+                                    CanAdd = true;
+                                }
+                            }
+    
+                            if (Requirement.res_type == "all") {
+                                CanAdd = true;
+                            }
+    
+                            if (Requirement.res_type == "id") {
+                                if (trackVal.item.EquipmentItem.ID == Requirement.value) {
+                                    CanAdd = true;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            return CanAdd;
         }
+    },
+    restriction_override: {
+        event_priotity: 2,
+        getEquipmentRestriction(this: EventRunner, eventSource : any, relayVar : any, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) { 
+            const totalList : EquipmentRestriction[] = relayVar as EquipmentRestriction[]
+            if (context_func["overrides"]) {
+                for (let i = 0 ; i < totalList.length; i++) {
+                    const Restriction : EquipmentRestriction = totalList[i];
+                    if (Restriction.removed) {
+                        for (let j = 0; j < Restriction.removed.length; j++) {                        
+                            const CurRes : RestrictionSingle = Restriction.removed[j];
+                            for (let k = 0; k < context_func["overrides"].length; k++) {
+                                if (CurRes.res_type == context_func["overrides"][k].type && CurRes.value == context_func["overrides"][k].model) {
+                                    CurRes.value = (context_static as ContextObject).ID;
+                                }
+                            }
+                        }
+                    }
+
+                    if (Restriction.required) {
+                        for (let j = 0; j < Restriction.required.length; j++) {                        
+                            const CurRes : RestrictionSingle = Restriction.required[j];
+                            for (let k = 0; k < context_func["overrides"].length; k++) {
+                                if (CurRes.res_type == context_func["overrides"][k].type && CurRes.value == context_func["overrides"][k].model) {
+                                    CurRes.value = (context_static as ContextObject).ID;
+                                }
+                            }
+                        }
+                    }
+
+                    if (Restriction.added) {
+                        for (let j = 0; j < Restriction.added.length; j++) {                        
+                            const CurRes : RestrictionSingle = Restriction.added[j];
+                            for (let k = 0; k < context_func["overrides"].length; k++) {
+                                if (CurRes.res_type == context_func["overrides"][k].type && CurRes.value == context_func["overrides"][k].model) {
+                                    CurRes.value = (context_static as ContextObject).ID;
+                                }
+                            }
+                        }
+                    }
+
+                    if (Restriction.permitted) {
+                        for (let j = 0; j < Restriction.permitted.length; j++) {                        
+                            const CurRes : RestrictionSingle = Restriction.permitted[j];
+                            for (let k = 0; k < context_func["overrides"].length; k++) {
+                                if (CurRes.res_type == context_func["overrides"][k].type && CurRes.value == context_func["overrides"][k].model) {
+                                    CurRes.value = (context_static as ContextObject).ID;
+                                }
+                            }
+                        }
+                    }
+
+                    if (Restriction.banned) {
+                        for (let j = 0; j < Restriction.banned.length; j++) {                        
+                            const CurRes : RestrictionSingle = Restriction.banned[j];
+                            for (let k = 0; k < context_func["overrides"].length; k++) {
+                                if (CurRes.res_type == context_func["overrides"][k].type && CurRes.value == context_func["overrides"][k].model) {
+                                    CurRes.value = (context_static as ContextObject).ID;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return totalList;
+        }
+
     },
     model_equipment_limit : {
         event_priotity: 1,
@@ -375,6 +600,124 @@ export const BaseContextCallTable : CallEventTable = {
             relayVar.push(context_func as EquipmentLimit)
             return relayVar;
         },
+        async canModelAddItem(this: EventRunner, eventSource : any, relayVar : boolean,  trackVal : MemberAndItem, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, restrictions : EquipmentRestriction[]) {            
+            let CanAdd = relayVar;
+            
+            if (CanAdd) {
+                const Limits : EquipmentLimit = context_func as EquipmentLimit;
+
+                if (Limits.maximum) {
+                    for (let i = 0; i < Limits.maximum.length; i++) {
+                        const LimitMax = Limits.maximum[i]
+                        
+                        if (LimitMax.category) {
+                            if (trackVal.item.EquipmentItem.Category != LimitMax.category) {
+                                continue;
+                            }
+                        }
+
+                        if (LimitMax.tag) {
+                            if (!containsTag(trackVal.item.EquipmentItem.Tags, LimitMax.tag) && !containsTag(trackVal.item.Tags, LimitMax.tag)) {
+                                continue;
+                            }
+                        }
+
+                        let varcount = 0;
+
+                        for (let j = 0; j < (eventSource as WarbandMember).GetEquipment().length; j++) {
+                            const Equip = (eventSource as WarbandMember).GetEquipment()[j].equipment
+                            const EquipObj = (Equip.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment)
+    
+                            if (LimitMax.res_type == "keyword") {
+                                let Found = false;
+                                for (let k = 0; k < EquipObj.KeyWord.length; k++) {
+                                    if (EquipObj.KeyWord[k].ID == LimitMax.value) {
+                                        Found = true;
+                                    }
+                                }
+                                if (Found == true) {
+                                    varcount += 1;
+                                }
+                            }       
+
+                            if (LimitMax.res_type == "tag") {
+                                if (containsTag(EquipObj.Tags, LimitMax.value.toString()) || containsTag(Equip.Tags, LimitMax.value.toString())) {
+                                    varcount += 1;
+                                }
+                            }
+    
+                            if (LimitMax.res_type == "id") {
+                                if (EquipObj.ID != LimitMax.value) {
+                                    varcount += 1;
+                                }
+                            }  
+
+
+                        }
+
+                        if (varcount >= LimitMax.limit) {
+                            CanAdd = false;
+                        }
+                    }
+                }
+                if (Limits.minimum) {
+                    for (let i = 0; i < Limits.minimum.length; i++) {
+                        const LimitMax = Limits.minimum[i]
+                        
+                        if (LimitMax.category) {
+                            if (trackVal.item.EquipmentItem.Category != LimitMax.category) {
+                                continue;
+                            }
+                        }
+
+                        if (LimitMax.tag) {
+                            if (!containsTag(trackVal.item.EquipmentItem.Tags, LimitMax.tag) && !containsTag(trackVal.item.Tags, LimitMax.tag)) {
+                                continue;
+                            }
+                        }
+
+                        let varcount = 0;
+
+                        for (let j = 0; j < (eventSource as WarbandMember).GetEquipment().length; j++) {
+                            const Equip = (eventSource as WarbandMember).GetEquipment()[j].equipment
+                            const EquipObj = (Equip.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment)
+    
+                            if (LimitMax.res_type == "keyword") {
+                                let Found = false;
+                                for (let k = 0; k < EquipObj.KeyWord.length; k++) {
+                                    if (EquipObj.KeyWord[k].ID == LimitMax.value) {
+                                        Found = true;
+                                    }
+                                }
+                                if (Found == true) {
+                                    varcount += 1;
+                                }
+                            }       
+
+                            if (LimitMax.res_type == "tag") {
+                                if (containsTag(EquipObj.Tags, LimitMax.value.toString()) || containsTag(Equip.Tags, LimitMax.value.toString())) {
+                                    varcount += 1;
+                                }
+                            }
+    
+                            if (LimitMax.res_type == "id") {
+                                if (EquipObj.ID != LimitMax.value) {
+                                    varcount += 1;
+                                }
+                            }  
+
+
+                        }
+
+                        if (varcount <= LimitMax.limit) {
+                            CanAdd = false;
+                        }
+                    }
+                }
+            }
+
+            return CanAdd;
+        }
         
     },
     stat_options: {
@@ -513,6 +856,22 @@ export const BaseContextCallTable : CallEventTable = {
             return relayVar;
         }
             
+    },
+    add_patron: {
+        event_priotity: 0,
+            
+        async addExtraPatronOptions(this: EventRunner, eventSource : any, relayVar : Patron[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            const { SkillFactory } = await import("../../factories/features/SkillFactory");
+
+            if (context_func["list"] != undefined) {
+                for (let i = 0; i < context_func["list"].length; i++) {
+                    const id : string = context_func["list"][i]
+                    const NewPatron : Patron = await SkillFactory.CreateNewPatron(id, null)
+                    relayVar.push(NewPatron);
+                }
+            }
+            return relayVar;
+        }
     },
     override_required_upgrade: {
         event_priotity: 1,
@@ -1004,6 +1363,123 @@ export const BaseContextCallTable : CallEventTable = {
         getEquipmentRestriction(this: EventRunner, eventSource : any, relayVar : any, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) { 
             relayVar.push(context_func as EquipmentRestriction)
             return relayVar;
+        },
+        async canModelAddItem(this: EventRunner, eventSource : any, relayVar : boolean,  trackVal : MemberAndItem, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, restrictions : EquipmentRestriction[]) {            
+            
+            let CanAdd = relayVar;
+
+            // Permitted
+            if (CanAdd) {
+                for (let i = 0; i < restrictions.length; i++) {
+                    const CurRestriction : EquipmentRestriction = restrictions[i];
+
+                    if (CurRestriction.permitted) {
+                        let PassedOne = false;
+                        for (let j = 0; j < CurRestriction.permitted.length; j++) {
+                            const Requirement = CurRestriction.permitted[j]
+
+                            if (Requirement.category) {
+                                if ((eventSource as FactionEquipmentRelationship).EquipmentItem.Category != Requirement.category) {
+                                    continue;
+                                }
+                            }
+
+                            if (Requirement.tag) {
+                                if (!containsTag((eventSource as FactionEquipmentRelationship).EquipmentItem.Tags, Requirement.tag) && !containsTag((eventSource as FactionEquipmentRelationship).Tags, Requirement.tag)) {
+                                    continue;
+                                }
+                            }
+
+                            if (Requirement.res_type == "keyword") {
+                                let Found = false;
+                                const modelkeywords = await trackVal.model.GetKeywordsFull()
+                                for (let k = 0; k < modelkeywords.length; k++) {
+                                    if (modelkeywords[k].ID == Requirement.value) {
+                                        Found = true;
+                                    }
+                                }
+                                if (Found == true) {
+                                    PassedOne = true;
+                                }
+                            }  
+
+                            if (Requirement.res_type == "id") {
+                                if (trackVal.model.CurModel.ID == Requirement.value) {
+                                    PassedOne = true;
+                                }
+                            }  
+    
+                            if (Requirement.res_type == "equipment") {
+                                let Found = false;
+                                for (let k = 0; k < trackVal.model.GetEquipment().length; k++) {
+                                    if (trackVal.model.GetEquipment()[k].equipment.MyEquipment.SelfDynamicProperty.OptionChoice.ID == Requirement.value) {
+                                        Found = true;
+                                    }
+                                }
+                                if (Found == true) {
+                                    PassedOne = true;
+                                }
+                            }                  
+    
+                            if (Requirement.res_type == "upgrade") {
+                                let Found = false;
+                                for (let k = 0; k < trackVal.model.Upgrades.length; k++) {
+                                    if ((trackVal.model.Upgrades[k].HeldObject as WarbandProperty).SelfDynamicProperty.OptionChoice.ID == Requirement.value) {
+                                        Found = true;
+                                    }
+                                }
+                                if (Found == true) {
+                                    PassedOne = true;
+                                }
+                            }                  
+    
+                        }
+                        if (CanAdd == true) {
+                            CanAdd = PassedOne;
+                        }
+                    }
+                    
+                    if (CurRestriction.banned) {
+                        for (let j = 0; j < CurRestriction.banned.length; j++) {
+                            const Requirement = CurRestriction.banned[j]
+
+                            if (Requirement.category) {
+                                if ((eventSource as FactionEquipmentRelationship).EquipmentItem.Category != Requirement.category) {
+                                    continue;
+                                }
+                            }
+
+                            if (Requirement.tag) {
+                                if (!containsTag((eventSource as FactionEquipmentRelationship).EquipmentItem.Tags, Requirement.tag) && !containsTag((eventSource as FactionEquipmentRelationship).Tags, Requirement.tag)) {
+                                    continue;
+                                }
+                            }
+
+                            if (Requirement.res_type == "keyword") {
+                                let Found = false;
+                                const modelkeywords = await trackVal.model.GetKeywordsFull()
+                                for (let k = 0; k < modelkeywords.length; k++) {
+                                    if (modelkeywords[k].ID == Requirement.value) {
+                                        Found = true;
+                                    }
+                                }
+                                if (Found == true) {
+                                    CanAdd = false;
+                                }
+                            }  
+
+                            if (Requirement.res_type == "id") {
+                                if (trackVal.model.CurModel.ID == Requirement.value) {
+                                    CanAdd = false;
+                                }
+                            }                  
+                        }
+                    }
+                }
+            }
+
+
+            return CanAdd;
         }
     },
     faction_choose_equipment: {
@@ -1308,6 +1784,12 @@ export const BaseContextCallTable : CallEventTable = {
                     </div>
                 </ErrorBoundary>
         )
+        }
+    },
+    modify_equipment_block: {
+        event_priotity: 0,
+        async overrideMercenarySkip(this: EventRunner, eventSource : any, relayVar : boolean, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            return true;
         }
     },
     override_stats : {
