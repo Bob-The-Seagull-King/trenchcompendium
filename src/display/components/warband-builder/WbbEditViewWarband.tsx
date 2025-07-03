@@ -35,6 +35,8 @@ const WbbEditViewWarband: React.FC<WbbEditViewWarbandProps> = ({
                 {'Troop: '}{warband.warband_data.GetNumTroop()}
                 {' | '}
                 {'Mercenary: '}{warband.warband_data.GetNumMercenary()}
+                {' | '}
+                {'Fielded: '}{warband.warband_data.GetNumFielded()}
 
             </div>
 

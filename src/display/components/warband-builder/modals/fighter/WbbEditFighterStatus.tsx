@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import {faXmark} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { makestringpresentable } from '../../../../../utility/functions';
 
 interface WbbEditFighterStatusProps {
     show: boolean;
@@ -18,7 +19,7 @@ const WbbModalEditFighterStatus: React.FC<WbbEditFighterStatusProps> = ({
                                                                    }) => {
     const [selectedStatus, setSelectedStatus] = useState<string>(currentStatus);
 
-    const statuses = ['Active', 'Captured', 'Dead'];
+    const statuses = ['active', 'reserved', 'lost'];
 
     const handleSubmit = () => {
         onSubmit(selectedStatus);
@@ -46,7 +47,7 @@ const WbbModalEditFighterStatus: React.FC<WbbEditFighterStatusProps> = ({
                         className={`select-item ${selectedStatus === status ? 'selected' : ''}`}
                         onClick={() => setSelectedStatus(status)}
                     >
-                        {status}
+                        {makestringpresentable(status)}
                     </div>
                 ))}
             </Modal.Body>

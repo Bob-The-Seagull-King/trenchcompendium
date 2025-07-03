@@ -104,7 +104,7 @@ class WarbandFactory {
                 model: rel.Model.ID,
                 subproperties : [],
                 notes : [],
-                active : true,
+                active : 'active',
                 equipment : [],
                 list_upgrades : [],
                 list_injury : [],

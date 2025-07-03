@@ -83,6 +83,8 @@ const WbbWarbandDetailView: React.FC<WbbWarbandDetailViewProps> = ({  onClose })
                         {'Troop: '}{warband.warband_data.GetNumTroop()}
                         {' | '}
                         {'Mercenary: '}{warband.warband_data.GetNumMercenary()}
+                        {' | '}
+                        {'Fielded: '}{warband.warband_data.GetNumFielded()}
                     </div>
 
                     { warband.warband_data.HasValidationErrors() &&

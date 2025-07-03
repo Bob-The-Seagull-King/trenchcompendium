@@ -63,7 +63,7 @@ interface IWarbandMember extends IContextObject {
     model: string,
     subproperties : IWarbandProperty[],
     notes : INote[]
-    active : boolean,
+    active : 'active' | 'reserved' | 'lost',
     equipment : IWarbandPurchaseEquipment[],
     list_upgrades : IWarbandPurchaseUpgrade[],
     list_injury : IWarbandProperty[],
@@ -79,7 +79,7 @@ class WarbandMember extends DynamicContextObject {
     public readonly boldXpIndices = [2, 4, 7, 10, 14, 18];
 
     Notes : INote[];
-    IsActive : boolean;
+    State :  'active' | 'reserved' | 'lost';
     CurModel! : Model;
     SubProperties : WarbandProperty[] = [];
     Equipment : WarbandPurchase[] = [];
@@ -100,7 +100,11 @@ class WarbandMember extends DynamicContextObject {
     {
         super(data, parent)
         this.Notes = data.notes;
-        this.IsActive = data.active;
+        if (data.active) {
+            this.State = data.active;
+        } else {
+            this.State = 'active'
+        }
         this.Experience = data.experience;
         this.Elite = data.elite;
         this.Recruited = data.recruited;
@@ -329,7 +333,7 @@ class WarbandMember extends DynamicContextObject {
             model: modelstring,
             subproperties : subpropset,
             notes : this.Notes,
-            active : this.IsActive,
+            active : this.State,
             equipment : equipmentlist,
             list_upgrades : upgradelist,
             list_injury : injuryset,

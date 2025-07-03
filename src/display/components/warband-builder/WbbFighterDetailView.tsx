@@ -160,7 +160,11 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
     // Fighter status
     const [showStatusModal, setShowStatusModal] = useState(false);
     const handleStatusUpdate = (newStatus: string) => {
-        // @TODO: hook up to class
+        if (newStatus == 'active' || newStatus == 'reserved' || newStatus == 'lost') {
+            fighter.State = newStatus;
+            const Manager : ToolsController = ToolsController.getInstance();
+            Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(() => reloadDisplay())
+        }
     };
 
     return (
@@ -614,7 +618,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                         <h3>{'Fighter Status'}</h3>
                         <div className={'fighter-status'}>
                             <div className={'fighter-status-string'}>
-                                {'Active'}
+                                {makestringpresentable(fighter.State)}
                             </div>
 
                             <div className={'btn btn-primary'} onClick={() => setShowStatusModal(true)}>
@@ -651,7 +655,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                         <WbbModalEditFighterStatus
                             show={showStatusModal}
                             onClose={() => setShowStatusModal(false)}
-                            currentStatus={'Active'} // @TODO: use actual value
+                            currentStatus={fighter.State} 
                             onSubmit={handleStatusUpdate}
                         />
                     </WbbFighterCollapse>
