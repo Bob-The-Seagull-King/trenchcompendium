@@ -933,7 +933,7 @@ class WarbandMember extends DynamicContextObject {
     }
 
     public async AddInjury(inj : Injury) {
-
+        console.log("Add " + inj.ID)
     }
 
     public async GetModelEquipmentOptions() {
