@@ -1680,7 +1680,9 @@ export const BaseContextCallTable : CallEventTable = {
             return ( 
             
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    <RuleDisplay data={relayVar.value} />
+                    {(relayVar != null && relayVar != undefined) &&
+                        <RuleDisplay data={relayVar.value} />
+                    }
                 </ErrorBoundary>
             )
         }
