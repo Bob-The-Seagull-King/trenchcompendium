@@ -7,6 +7,7 @@ import {usePlayMode} from "../../../context/PlayModeContext";
 import { Injury } from '../../../classes/feature/ability/Injury';
 import { WarbandProperty } from '../../../classes/saveitems/Warband/WarbandProperty';
 import { returnDescription } from '../../../utility/util';
+import WbbOptionSelect from './modals/warband/WbbOptionSelect';
 
 const WbbEditViewInjury: React.FC<{ injury: WarbandProperty }> = ({ injury }) => {
 
@@ -29,6 +30,18 @@ const WbbEditViewInjury: React.FC<{ injury: WarbandProperty }> = ({ injury }) =>
             <div className="injury-description">
                 {returnDescription(SelfInjury, SelfInjury.Description)}
             </div>
+            
+            {injury.SelfDynamicProperty.Selections.length > 0 &&
+                <span className={'title-choice'}>
+                    {injury.SelfDynamicProperty.Selections.map((item) => 
+                        <WbbOptionSelect 
+                            property={injury}
+                            key={injury.SelfDynamicProperty.Selections.indexOf(item)}
+                            choice={item}
+                        />
+                    )}                        
+                </span>
+            }
 
             {!playMode &&
                 <WbbContextualPopover

@@ -29,6 +29,7 @@ import { FactionEquipmentRelationship, IFactionEquipmentRelationship } from "../
 import { EquipmentFactory } from "../../../../factories/features/EquipmentFactory";
 import { ModelEquipmentRelationship } from "../../../relationship/model/ModelEquipmentRelationship";
 import { containsTag } from "../../../../utility/functions";
+import { Injury } from "../../../feature/ability/Injury";
 
 export interface MemberAndWarband {
     warband: UserWarband,
@@ -923,6 +924,16 @@ class WarbandMember extends DynamicContextObject {
                 break;
             }
         }
+    }
+
+    public async GetModelInjuryOptions() {
+        const ListOfOptions : Injury[] = [];
+
+        return ListOfOptions;
+    }
+
+    public async AddInjury(inj : Injury) {
+
     }
 
     public async GetModelEquipmentOptions() {

@@ -50,6 +50,7 @@ import { FactionEquipmentRelationship } from '../../../classes/relationship/fact
 import { ToolsController } from '../../../classes/_high_level_controllers/ToolsController';
 import { ModelEquipmentRelationship } from '../../../classes/relationship/model/ModelEquipmentRelationship';
 import WbbOptionSelect from './modals/warband/WbbOptionSelect';
+import { Injury } from '../../../classes/feature/ability/Injury';
 
 
 interface WbbFighterDetailViewProps {
@@ -150,11 +151,11 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
     };
 
     const [showInjuryModal, setShowInjuryModal] = useState(false);
-    const handleAddInjury = (injury: any) => {
-        // if (!selectedFighter) return;
-        // @TODO: hook up to class
-
-        // selectedFighter.AddInjury(injury);
+    const handleAddInjury = (injury: Injury) => {
+        fighter.AddInjury(injury).then(() => {
+            const Manager : ToolsController = ToolsController.getInstance();
+            Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(() => reloadDisplay())
+        });
     };
 
     // Fighter status
@@ -651,6 +652,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                             show={showInjuryModal}
                             onClose={() => setShowInjuryModal(false)}
                             onSubmit={handleAddInjury}
+                            fighter={warbandmember}
                         />
                         <WbbModalEditFighterStatus
                             show={showStatusModal}
