@@ -97,6 +97,9 @@ const ProfilePage: React.FC = () => {
 
         if (isLoggedIn && Number(userId) === Number(id)) {
             UserData = await UserFactory.CreatePrivateUserByID(Number(id));
+            if (UserData == null || UserData == undefined) {
+                UserData = await UserFactory.CreatePublicUserByID(Number(id));                
+            }
         } else {
             UserData = await UserFactory.CreatePublicUserByID(Number(id));
         }

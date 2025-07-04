@@ -53,7 +53,7 @@ class UserFactory {
             
             const response : Response = await fetch(`${SYNOD.URL}/wp-json/synod/v1/user-public/${_val}`)
             if (response) {
-                const json : any = await response.json();              
+                const json : any = await response.json();          
                 userdata = json
                 synodcache.AddPublicCache(_val, json)
             }
@@ -124,9 +124,11 @@ class UserFactory {
             })
 
             if (response) {
-                const json : any = await response.json();              
-                userdata = json
-                synodcache.AddCache(_val, json)
+                if (response.status == 200) {
+                    const json : any = await response.json();              
+                    userdata = json
+                    synodcache.AddCache(_val, json)
+                }
             }
         }
 
