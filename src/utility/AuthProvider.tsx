@@ -17,15 +17,30 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     useEffect(() => {
         const storedToken = localStorage.getItem('jwtToken');
         const storedUserId = localStorage.getItem('synodUserId');
-        if (storedToken && storedUserId) {
-            setAuthToken(storedToken);
-            setUserId(parseInt(storedUserId, 10));
+        const logindate = localStorage.getItem('lastrecordedlogindate');
+        if (storedToken && storedUserId && logindate) {
+            const date_stored = new Date(logindate);
+            const date_cur = new Date(2023, 2, 1);
+            const diff = Math.ceil(Math.abs(date_stored.getTime() - date_cur.getTime()) / (1000 * 3600 * 24)); 
+            if (diff <= 22) {
+                setAuthToken(storedToken);
+                setUserId(parseInt(storedUserId, 10));
+            } else {
+                localStorage.removeItem('jwtToken');
+                localStorage.removeItem('synodUserId');
+                localStorage.removeItem('lastrecordedlogindate');   
+            }
+        } else {
+            localStorage.removeItem('jwtToken');
+            localStorage.removeItem('synodUserId');
+            localStorage.removeItem('lastrecordedlogindate');   
         }
     }, []);
 
     const login = (token: string, id: number) => {
         localStorage.setItem('jwtToken', token);
         localStorage.setItem('synodUserId', id.toString());
+        localStorage.setItem('lastrecordedlogindate', (new Date()).toISOString());
 
         const toolscont : ToolsController = ToolsController.getInstance();
         toolscont.UserWarbandManager.SetLoggedUser(id);
