@@ -30,6 +30,7 @@ import { FactionEquipmentRelationship } from "../../classes/relationship/faction
 import { MemberAndItem, MemberAndWarband, ModelHands, WarbandMember } from "../../classes/saveitems/Warband/Purchases/WarbandMember";
 import { returnDescription } from "../../utility/util";
 import { Patron } from "../../classes/feature/skillgroup/Patron";
+import { Injury } from "../../classes/feature/ability/Injury";
 
 export const BaseContextCallTable : CallEventTable = {
     option_search_viable: {
@@ -2038,6 +2039,12 @@ export const BaseContextCallTable : CallEventTable = {
                 }
             }         
             return relayVar;
+        }
+    },
+    demote: {
+        event_priotity: 0,
+        async onGainInjury(this: EventRunner, eventSource : any, trackVal : Injury, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, member : WarbandMember) {
+            member.Elite = false;
         }
     }
 }

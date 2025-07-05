@@ -48,7 +48,9 @@ class ModelEquipmentRelationship extends StaticOptionContextObject {
     public async BuildOptionEquipment() {
         for (let i = 0; i < this.MyOptions.length; i++) {
             for (let j = 0; j < this.MyOptions[i].Selections.length; j++) {
-                this.MyOptions[i].Selections[j].value = await EquipmentFactory.CreateModelEquipment(this.MyOptions[i].Selections[j].value, this);
+                if (this.MyOptions[i].Selections[j].value.id) {
+                    this.MyOptions[i].Selections[j].value = await EquipmentFactory.CreateModelEquipment(this.MyOptions[i].Selections[j].value, this);
+                }
             }
         }
     }

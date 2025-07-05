@@ -299,6 +299,14 @@ class UserWarband extends DynamicContextObject {
      *
      * Returns bool - Does the warband have models in reserve?
      */
+    public HasDead () {
+        return this.GetFighters().filter((item) => (item.model.State == "dead")).length > 0;
+    }
+
+    /**
+     *
+     * Returns bool - Does the warband have models in reserve?
+     */
     public HasGone () {
         return this.GetFighters().filter((item) => (item.model.State == "lost")).length > 0;
     }

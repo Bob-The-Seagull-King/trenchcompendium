@@ -64,7 +64,7 @@ interface IWarbandMember extends IContextObject {
     model: string,
     subproperties : IWarbandProperty[],
     notes : INote[]
-    active : 'active' | 'reserved' | 'lost',
+    active : 'active' | 'reserved' | 'lost' | 'dead',
     equipment : IWarbandPurchaseEquipment[],
     list_upgrades : IWarbandPurchaseUpgrade[],
     list_injury : IWarbandProperty[],
@@ -72,7 +72,8 @@ interface IWarbandMember extends IContextObject {
     list_modelequipment : IWarbandProperty[],
     experience : number,
     elite : boolean,
-    recruited: boolean
+    recruited: boolean,
+    scar_reserves: number
 }
 
 class WarbandMember extends DynamicContextObject {
@@ -80,7 +81,7 @@ class WarbandMember extends DynamicContextObject {
     public readonly boldXpIndices = [2, 4, 7, 10, 14, 18];
 
     Notes : INote[];
-    State :  'active' | 'reserved' | 'lost';
+    State :  'active' | 'reserved' | 'lost' | 'dead';
     CurModel! : Model;
     SubProperties : WarbandProperty[] = [];
     Equipment : WarbandPurchase[] = [];
@@ -91,6 +92,7 @@ class WarbandMember extends DynamicContextObject {
     Elite : boolean;
     Recruited : boolean;
     ModelEquipments : WarbandProperty[] = [];
+    ScarReserve : number;
 
     /**
      * Assigns parameters and creates a series of description
@@ -105,6 +107,11 @@ class WarbandMember extends DynamicContextObject {
             this.State = data.active;
         } else {
             this.State = 'active'
+        }
+        if (data.scar_reserves) {
+            this.ScarReserve = data.scar_reserves;
+        } else {
+            this.ScarReserve = 0;
         }
         this.Experience = data.experience;
         this.Elite = data.elite;
@@ -342,7 +349,8 @@ class WarbandMember extends DynamicContextObject {
             experience : this.Experience,
             list_modelequipment: modelpropset,
             elite : this.Elite,
-            recruited : this.Recruited
+            recruited : this.Recruited,
+            scar_reserves : this.ScarReserve
         }
         
         return _objint;
@@ -594,7 +602,14 @@ class WarbandMember extends DynamicContextObject {
      * @return: int
      */
     GetBattleScars () {
-        return this.Injuries.length;
+        return this.Injuries.length + this.ScarReserve;
+    }
+
+    public async SetScars(scar_num : number) {
+        const baseNum = this.Injuries.length;
+        this.ScarReserve = scar_num - baseNum;
+
+        await this.CheckIfDead();
     }
 
     public RenameSelf(name : string) {
@@ -927,13 +942,54 @@ class WarbandMember extends DynamicContextObject {
     }
 
     public async GetModelInjuryOptions() {
+        const AllInjuries : Injury[] = await InjuryFactory.GetAllInjury();
         const ListOfOptions : Injury[] = [];
+
+        const eventmon : EventRunner = new EventRunner();
+        for (let i = 0; i < AllInjuries.length; i++) {
+            const Allow = await eventmon.runEvent(
+                "onGainInjury",
+                this,
+                [this],
+                true,
+                AllInjuries[i]
+            )
+            if (Allow) {
+                ListOfOptions.push(AllInjuries[i]);
+            }
+        }
 
         return ListOfOptions;
     }
 
     public async AddInjury(inj : Injury) {
-        console.log("Add " + inj.ID)
+        const NewRuleProperty = new WarbandProperty(inj, this, null, null);
+        await NewRuleProperty.HandleDynamicProps(inj, this, null, null);
+        this.Injuries.push(NewRuleProperty);
+        const eventmon : EventRunner = new EventRunner();
+        await eventmon.runEvent(
+            "onGainInjury",
+            this,
+            [this],
+            null,
+            inj
+        )
+        await this.CheckIfDead();
+    }
+
+    public async CheckIfDead() {
+        const eventmon : EventRunner = new EventRunner();
+        const MaxScars = await eventmon.runEvent(
+            "getMaximumScars",
+            this,
+            [],
+            3,
+            this
+        )
+        
+        if (this.GetBattleScars() >= MaxScars) {
+            this.State = 'dead';
+        }
     }
 
     public async GetModelEquipmentOptions() {

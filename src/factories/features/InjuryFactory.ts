@@ -24,6 +24,20 @@ class InjuryFactory {
         return rule;
     }
 
+    static async GetAllInjury() {
+        const Injuries = Requester.MakeRequest({searchtype: "file", searchparam: {type: "injury"}}) as IInjury[];
+        const InjuryList : Injury[] = []
+
+        for (let i = 0; i < Injuries.length; i++) {
+            const Inj = await InjuryFactory.CreateInjury(Injuries[i], null);
+            if (Inj != null) {
+                InjuryList.push(Inj);
+            }
+        }
+
+        return InjuryList;
+    }
+
     static async CreateNewInjury(_val : string, parent : ContextObject | null) {
         const cache = StaticDataCache.getInstance();
         const isValid = (cache.CheckID('injury', _val))

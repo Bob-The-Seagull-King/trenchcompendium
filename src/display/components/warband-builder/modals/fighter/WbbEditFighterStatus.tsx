@@ -19,7 +19,7 @@ const WbbModalEditFighterStatus: React.FC<WbbEditFighterStatusProps> = ({
                                                                    }) => {
     const [selectedStatus, setSelectedStatus] = useState<string>(currentStatus);
 
-    const statuses = ['active', 'reserved', 'lost'];
+    const statuses = ['active', 'reserved', 'lost', 'dead'];
 
     const handleSubmit = () => {
         onSubmit(selectedStatus);

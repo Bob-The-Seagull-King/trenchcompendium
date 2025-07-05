@@ -112,7 +112,8 @@ class WarbandFactory {
                 list_modelequipment: [],
                 experience : 0,
                 elite : rel.Model.getKeywordIDs().includes("kw_elite"),
-                recruited: false
+                recruited: false,
+                scar_reserves: 0
             }
 
         if (rel.Mercenary == true) {

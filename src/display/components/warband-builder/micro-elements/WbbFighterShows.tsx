@@ -265,6 +265,40 @@ const WbbFighterShows : React.FC<WbbFighterShow> = ({ playMode, openDetail, deta
                         </DndContext>
                     </>
                 }
+                
+                {(!playMode && warband.warband_data.HasDead()) &&
+                    <>
+                        {/* Warband Mercenaries */}
+                        <h3 className={'category-headline'}>Dead</h3>
+                        <DndContext
+                            sensors={sensors}
+                            collisionDetection={closestCenter}
+                            onDragEnd={handleDragEnd}
+                        >
+                            <SortableContext
+                                items={warband.warband_data.GetFighters().map(f => f.model.ID)}
+                                strategy={verticalListSortingStrategy}>
+                                {warband.warband_data.GetFighters().map((item, index) => (
+                                    <>
+                                        {((item.model.State == 'dead')) &&
+                                            <WbbEditViewFighterSortable
+                                                key={item.model.ID}
+                                                fighter={item}
+                                                index={index}
+                                                onClick={() => openDetail('fighter', item)}
+                                                isActive={
+                                                    detailType === 'fighter' &&
+                                                    warband.warband_data.Models.indexOf(detailPayload?.purchase) ===
+                                                    warband.warband_data.Models.indexOf(item.purchase)
+                                                }
+                                            />
+                                        }
+                                    </>
+                                ))}
+                            </SortableContext>
+                        </DndContext>
+                    </>
+                }
                 </>
             }
         </div>
