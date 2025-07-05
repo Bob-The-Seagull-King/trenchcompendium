@@ -7,6 +7,7 @@ import {usePlayMode} from "../../../context/PlayModeContext";
 import { WarbandProperty } from '../../../classes/saveitems/Warband/WarbandProperty';
 import { Skill } from '../../../classes/feature/ability/Skill';
 import { returnDescription } from '../../../utility/util';
+import WbbOptionSelect from './modals/warband/WbbOptionSelect';
 
 const WbbEditViewAdvancement: React.FC<{ advancement: WarbandProperty }> = ({ advancement }) => {
 
@@ -25,6 +26,18 @@ const WbbEditViewAdvancement: React.FC<{ advancement: WarbandProperty }> = ({ ad
             <div className="advancement-description">
                 {returnDescription(SelfSkill, SelfSkill.Description)}
             </div>
+            
+            {advancement.SelfDynamicProperty.Selections.length > 0 &&
+                <span className={'title-choice'}>
+                    {advancement.SelfDynamicProperty.Selections.map((item) => 
+                        <WbbOptionSelect 
+                            property={advancement}
+                            key={advancement.SelfDynamicProperty.Selections.indexOf(item)}
+                            choice={item}
+                        />
+                    )}                        
+                </span>
+            }
 
             {/* actions */}
             { !playMode &&

@@ -51,6 +51,7 @@ import { ToolsController } from '../../../classes/_high_level_controllers/ToolsC
 import { ModelEquipmentRelationship } from '../../../classes/relationship/model/ModelEquipmentRelationship';
 import WbbOptionSelect from './modals/warband/WbbOptionSelect';
 import { Injury } from '../../../classes/feature/ability/Injury';
+import { Skill } from '../../../classes/feature/ability/Skill';
 
 
 interface WbbFighterDetailViewProps {
@@ -141,12 +142,11 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
 
     // Advancements
     const [showAdvancementModal, setShowAdvancementModal] = useState(false);
-    const handleAddAdvancement = (advancement: any) => {
-        // if (!selectedFighter) return;
-
-        // @TODO: hook up to class
-
-        // selectedFighter.AddAdvancement(advancement);
+    const handleAddAdvancement = (advancement: Skill) => {
+        fighter.AddSkill(advancement).then(() => {
+            const Manager : ToolsController = ToolsController.getInstance();
+            Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(() => reloadDisplay())
+        });
     };
 
     const [showInjuryModal, setShowInjuryModal] = useState(false);
@@ -655,6 +655,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                             show={showAdvancementModal}
                             onClose={() => setShowAdvancementModal(false)}
                             onSubmit={handleAddAdvancement}
+                            fighter={warbandmember}
                         />
                         <WbbModalAddInjury
                             show={showInjuryModal}

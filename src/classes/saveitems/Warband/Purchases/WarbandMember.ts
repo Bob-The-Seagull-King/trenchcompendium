@@ -948,7 +948,7 @@ class WarbandMember extends DynamicContextObject {
         const eventmon : EventRunner = new EventRunner();
         for (let i = 0; i < AllInjuries.length; i++) {
             const Allow = await eventmon.runEvent(
-                "onGainInjury",
+                "allowInjuryGain",
                 this,
                 [this],
                 true,
@@ -958,6 +958,12 @@ class WarbandMember extends DynamicContextObject {
                 ListOfOptions.push(AllInjuries[i]);
             }
         }
+
+        return ListOfOptions;
+    }
+
+    public async GetModelSkillOptions() {
+        const ListOfOptions : Skill[] = [];
 
         return ListOfOptions;
     }
@@ -990,6 +996,20 @@ class WarbandMember extends DynamicContextObject {
         if (this.GetBattleScars() >= MaxScars) {
             this.State = 'dead';
         }
+    }
+
+    public async AddSkill(skl : Skill) {
+        const NewRuleProperty = new WarbandProperty(skl, this, null, null);
+        await NewRuleProperty.HandleDynamicProps(skl, this, null, null);
+        this.Skills.push(NewRuleProperty);
+        const eventmon : EventRunner = new EventRunner();
+        await eventmon.runEvent(
+            "onGainSkill",
+            this,
+            [this],
+            null,
+            skl
+        )
     }
 
     public async GetModelEquipmentOptions() {
