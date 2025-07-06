@@ -52,6 +52,8 @@ import { ModelEquipmentRelationship } from '../../../classes/relationship/model/
 import WbbOptionSelect from './modals/warband/WbbOptionSelect';
 import { Injury } from '../../../classes/feature/ability/Injury';
 import { Skill } from '../../../classes/feature/ability/Skill';
+import { ModelStatistics } from '../../../classes/feature/model/ModelStats';
+import WbbEditFighterStatOption from './modals/fighter/WbbFighterStatOption';
 
 
 interface WbbFighterDetailViewProps {
@@ -65,9 +67,10 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
 
     const fighter = warbandmember.model;
     
-    const [statchoices, setstats] = useState({})
+    const [stats, setstats] = useState({})
     const [upgrades, setupgrades] = useState<MemberUpgradesGrouped>({})
     const [abilities, setabilities] = useState<WarbandProperty[]>([])
+    const [statchoices, setStatChoices] = useState<ModelStatistics[][]>([])
     const [allmodelequip, setAllmodelequip] = useState<RealWarbandPurchaseEquipment[]>([])
     const [xpLimit, setXPLimit] = useState<number>(0)
     const [keywordsList, setkeywords] = useState<Keyword[]>([])
@@ -86,6 +89,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
             setkeywords(await fighter.getContextuallyAvailableKeywords())
             setmodeslug(fighter.GetModelSlug())
             setAllmodelequip(await fighter.GetAllEquipForShow())
+            setStatChoices(await fighter.GetStatOptions());
             reloadDisplay()
         }
 
@@ -318,6 +322,25 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                     </div>
                 </div>
             </div>
+
+            {/* Edit Loadout */}
+            {(!playMode && statchoices.length > 0) &&
+                <div className={'fighter-card-collapse-wrap'}>
+                    <WbbFighterCollapse title="Profile Options" initiallyOpen={true} key={updateKey}>
+                        <>
+                            {statchoices.map((item) => 
+                                
+                                    <WbbEditFighterStatOption
+                                        fighter={warbandmember}
+                                        options={item}
+                                        key={statchoices.indexOf(item)}
+                                    />
+                                
+                            )}
+                        </>
+                    </WbbFighterCollapse>
+                </div>
+            }
 
             {/*
               * Other Upgrades

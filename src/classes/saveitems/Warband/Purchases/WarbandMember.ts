@@ -32,6 +32,7 @@ import { containsTag } from "../../../../utility/functions";
 import { Injury } from "../../../feature/ability/Injury";
 import { SkillGroup } from "../../../feature/skillgroup/SkillGroup";
 import { StaticContextObject } from "../../../contextevent/staticcontextobject";
+import { GetStatAsFullString, ModelStatistics } from "../../../feature/model/ModelStats";
 
 export interface SkillSuite {
     skillgroup : StaticContextObject,
@@ -81,7 +82,8 @@ interface IWarbandMember extends IContextObject {
     experience : number,
     elite : boolean,
     recruited: boolean,
-    scar_reserves: number
+    scar_reserves: number,
+    stat_selections : ModelStatistics[]
 }
 
 class WarbandMember extends DynamicContextObject {
@@ -101,6 +103,7 @@ class WarbandMember extends DynamicContextObject {
     Recruited : boolean;
     ModelEquipments : WarbandProperty[] = [];
     ScarReserve : number;
+    Stat_Selections : ModelStatistics[] = [];
 
     /**
      * Assigns parameters and creates a series of description
@@ -120,6 +123,11 @@ class WarbandMember extends DynamicContextObject {
             this.ScarReserve = data.scar_reserves;
         } else {
             this.ScarReserve = 0;
+        }
+        if (data.stat_selections) {
+            for (let i = 0; i < data.stat_selections.length; i++) {
+                this.Stat_Selections.push(data.stat_selections[i]);
+            }
         }
         this.Experience = data.experience;
         this.Elite = data.elite;
@@ -358,7 +366,8 @@ class WarbandMember extends DynamicContextObject {
             list_modelequipment: modelpropset,
             elite : this.Elite,
             recruited : this.Recruited,
-            scar_reserves : this.ScarReserve
+            scar_reserves : this.ScarReserve,
+            stat_selections : this.Stat_Selections
         }
         
         return _objint;
@@ -1096,6 +1105,39 @@ class WarbandMember extends DynamicContextObject {
             NewRuleProperty,
             skl
         )
+    }
+
+    public UpdateStatOption(newstat: ModelStatistics, oldstat : ModelStatistics | null) {
+        if (oldstat == null) {
+            this.Stat_Selections.push(newstat);
+        } else {
+            for (let i = 0; i < this.Stat_Selections.length; i++) {
+                if (GetStatAsFullString(this.Stat_Selections[i]) == GetStatAsFullString(oldstat)) {
+                    
+                    this.Stat_Selections.splice(i, 1);
+                    this.Stat_Selections.push(newstat);
+                    return;
+                }
+            }
+        }
+    }
+
+    public async GetStatOptions() {
+        
+        const EventProc : EventRunner = new EventRunner();
+        const result = await EventProc.runEvent(
+            "getModelStatOptions",
+            this,
+            [],
+            [],
+            null
+        )
+
+        return result;
+    }
+
+    public async GetStats() {
+        // TODO Stats
     }
 
     public async SetExperience(newval : number) {

@@ -113,7 +113,8 @@ class WarbandFactory {
                 experience : 0,
                 elite : rel.Model.getKeywordIDs().includes("kw_elite"),
                 recruited: false,
-                scar_reserves: 0
+                scar_reserves: 0,
+                stat_selections: []
             }
 
         if (rel.Mercenary == true) {
