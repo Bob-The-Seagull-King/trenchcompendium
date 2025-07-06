@@ -590,7 +590,8 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                             <>
                                 <h3>{'Advancements'}</h3>
                                 {fighter.GetSkillsList().map((advancement) => (
-                                    <WbbEditViewAdvancement advancement={advancement} key={advancement.ID + fighter.ID}/>
+                                    <WbbEditViewAdvancement advancement={advancement} key={advancement.ID + fighter.ID}
+                                            fighter={warbandmember}/>
                                 ))}
                                 {fighter.IsElite() &&
                                     <div className={'btn btn-add-element btn-block'}
@@ -605,7 +606,8 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                             <>
                                 <h3>{'Injuries'}</h3>
                                 {fighter.GetInjuriesList().map((injury) => (
-                                    <WbbEditViewInjury injury={injury} key={injury.ID  + fighter.ID}/>
+                                    <WbbEditViewInjury injury={injury} key={injury.ID  + fighter.ID}
+                                            fighter={warbandmember}/>
                                 ))}
                                 {fighter.IsElite() &&
                                     <div className={'btn btn-add-element btn-block'}
@@ -785,14 +787,16 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                     <div className={'play-mode-advancements-wrap'}>
                         <h3>{'Advancements'}</h3>
                         {fighter.GetSkillsList().map((advancement) => (
-                            <WbbEditViewAdvancement advancement={advancement} key={advancement.ID + fighter.ID}/>
+                            <WbbEditViewAdvancement advancement={advancement} key={advancement.ID + fighter.ID}
+                                                fighter={warbandmember}/>
                         ))}
                     </div>
 
                     <div className={'play-mode-injuries-wrap'}>
                         <h3>{'Injuries'}</h3>
                         {fighter.GetInjuriesList().map((injury) => (
-                            <WbbEditViewInjury injury={injury} key={injury.ID + fighter.ID}/>
+                            <WbbEditViewInjury injury={injury} key={injury.ID + fighter.ID}
+                                                fighter={warbandmember}/>
                         ))}
                     </div>
                 </div>

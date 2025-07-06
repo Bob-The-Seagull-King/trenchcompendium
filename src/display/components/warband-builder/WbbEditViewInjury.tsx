@@ -8,8 +8,9 @@ import { Injury } from '../../../classes/feature/ability/Injury';
 import { WarbandProperty } from '../../../classes/saveitems/Warband/WarbandProperty';
 import { returnDescription } from '../../../utility/util';
 import WbbOptionSelect from './modals/warband/WbbOptionSelect';
+import { RealWarbandPurchaseModel } from '../../../classes/saveitems/Warband/Purchases/WarbandPurchase';
 
-const WbbEditViewInjury: React.FC<{ injury: WarbandProperty }> = ({ injury }) => {
+const WbbEditViewInjury: React.FC<{ injury: WarbandProperty, fighter : RealWarbandPurchaseModel }> = ({ injury, fighter }) => {
 
     const { playMode } = usePlayMode();
 
@@ -48,6 +49,7 @@ const WbbEditViewInjury: React.FC<{ injury: WarbandProperty }> = ({ injury }) =>
                     id={`injury-${injury.ID}`}
                     type="injury"
                     item={injury}
+                    context={fighter}
                 />
             }
         </div>

@@ -8,8 +8,9 @@ import { WarbandProperty } from '../../../classes/saveitems/Warband/WarbandPrope
 import { Skill } from '../../../classes/feature/ability/Skill';
 import { returnDescription } from '../../../utility/util';
 import WbbOptionSelect from './modals/warband/WbbOptionSelect';
+import { RealWarbandPurchaseModel } from '../../../classes/saveitems/Warband/Purchases/WarbandPurchase';
 
-const WbbEditViewAdvancement: React.FC<{ advancement: WarbandProperty }> = ({ advancement }) => {
+const WbbEditViewAdvancement: React.FC<{ advancement: WarbandProperty, fighter : RealWarbandPurchaseModel }> = ({ advancement, fighter }) => {
 
     const { playMode } = usePlayMode();
     
@@ -45,6 +46,7 @@ const WbbEditViewAdvancement: React.FC<{ advancement: WarbandProperty }> = ({ ad
                     id={`advancement-${advancement.ID}`}
                     type="advancement"
                     item={advancement}
+                    context={fighter}
                 />
             }
 

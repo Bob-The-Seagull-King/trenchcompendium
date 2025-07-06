@@ -292,8 +292,14 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
     }
     const handleDeleteAdvancement = () => {
         setshowConfirmDeleteAdvancementModal(false);
-        // @TODO: Delete Advancement from Warband
-        console.log('handleDeleteAdvancement');
+        
+        if (context != undefined && context != null ) {
+            context.model.DeleteSkill(item).then(() => {
+                const Manager : ToolsController = ToolsController.getInstance();
+                Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
+                    () => reloadDisplay())
+            })
+        } 
     }
 
     /** Injury Actions */
@@ -304,9 +310,14 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
     }
     const handleDeleteInjury = () => {
         setshowConfirmDeleteInjuryModal(false);
-
-        // @TODO: Delete Injury from Warband
-        console.log('handleDeleteInjury');
+        
+        if (context != undefined && context != null ) {
+            context.model.DeleteInjury(item).then(() => {
+                const Manager : ToolsController = ToolsController.getInstance();
+                Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
+                    () => reloadDisplay())
+            })
+        } 
     }
 
     /** Warband Actions */

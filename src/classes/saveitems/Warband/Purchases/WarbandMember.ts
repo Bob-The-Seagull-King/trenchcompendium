@@ -1031,10 +1031,6 @@ class WarbandMember extends DynamicContextObject {
             )
         }
 
-        console.log(ListOfOptions)
-        console.log(BaseSkillgroups)
-        console.log(Patrons)
-
         return ListOfOptions;
     }
 
@@ -1444,6 +1440,28 @@ class WarbandMember extends DynamicContextObject {
         for (let i = 0; i < this.Equipment.length; i++) {
             if (item.equipment == (this.Equipment[i].HeldObject as WarbandEquipment)) {
                 this.Equipment.splice(i, 1);
+                break;
+            }
+        }
+    }
+    
+    public async DeleteInjury( item : WarbandProperty ) {
+        console.log("DELETE INJURY")
+        console.log(item)
+        for (let i = 0; i < this.Injuries.length; i++) {
+            if (item == (this.Injuries[i])) {
+                this.Injuries.splice(i, 1);
+                break;
+            }
+        }
+    }
+    
+    public async DeleteSkill( item : WarbandProperty ) {
+        console.log("DELETE SKILL")
+        console.log(item)
+        for (let i = 0; i < this.Skills.length; i++) {
+            if (item == (this.Skills[i])) {
+                this.Skills.splice(i, 1);
                 break;
             }
         }
