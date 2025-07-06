@@ -30,11 +30,19 @@ import { EquipmentFactory } from "../../../../factories/features/EquipmentFactor
 import { ModelEquipmentRelationship } from "../../../relationship/model/ModelEquipmentRelationship";
 import { containsTag } from "../../../../utility/functions";
 import { Injury } from "../../../feature/ability/Injury";
+import { SkillGroup } from "../../../feature/skillgroup/SkillGroup";
+import { StaticContextObject } from "../../../contextevent/staticcontextobject";
+
+export interface SkillSuite {
+    skillgroup : StaticContextObject,
+    list : Skill[]
+}
 
 export interface MemberAndWarband {
     warband: UserWarband,
     model: WarbandMember
 }
+
 export interface MemberAndItem {
     item: FactionEquipmentRelationship,
     model: WarbandMember
@@ -963,7 +971,69 @@ class WarbandMember extends DynamicContextObject {
     }
 
     public async GetModelSkillOptions() {
-        const ListOfOptions : Skill[] = [];
+        const ListOfOptions : SkillSuite[] = [];
+        const BaseSkillgroups : SkillGroup[] = await SkillFactory.GetBaseSkills();
+        const Patrons : Patron | null = (this.MyContext as UserWarband).Faction.GetPatronSkills();
+
+        const eventmon : EventRunner = new EventRunner();
+        if (Patrons != null) {
+            const validSkills : Skill[] = [];
+
+            for (let i = 0; i < Patrons.Skills.length; i++) {
+                if (this.Skills.filter((item) => (item.SelfDynamicProperty.OptionChoice.ID == Patrons.Skills[i].ID)).length == 0) {
+
+                    const Allow = await eventmon.runEvent(
+                        "allowSkillGain",
+                        this,
+                        [this],
+                        true,
+                        Patrons.Skills[i]
+                    )
+                    if (Allow) {
+                        validSkills.push(Patrons.Skills[i]);
+                    }
+                }
+            }
+
+            ListOfOptions.push(
+                {
+                    skillgroup: Patrons,
+                    list: validSkills
+                }
+            )
+        }
+        
+        for (let j = 0; j < BaseSkillgroups.length; j++) {
+            const SkillGroup = BaseSkillgroups[j]
+            const validSkills : Skill[] = [];
+
+            for (let i = 0; i < SkillGroup.Skills.length; i++) {
+                if (this.Skills.filter((item) => (item.SelfDynamicProperty.OptionChoice.ID == SkillGroup.Skills[i].ID)).length == 0) {
+
+                    const Allow = await eventmon.runEvent(
+                        "allowSkillGain",
+                        this,
+                        [this],
+                        true,
+                        SkillGroup.Skills[i]
+                    )
+                    if (Allow) {
+                        validSkills.push(SkillGroup.Skills[i]);
+                    }
+                }
+            }
+
+            ListOfOptions.push(
+                {
+                    skillgroup: SkillGroup,
+                    list: validSkills
+                }
+            )
+        }
+
+        console.log(ListOfOptions)
+        console.log(BaseSkillgroups)
+        console.log(Patrons)
 
         return ListOfOptions;
     }

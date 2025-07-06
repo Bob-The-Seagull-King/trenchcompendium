@@ -35,6 +35,20 @@ class SkillFactory {
         const rulenew = await SkillFactory.CreateSkill(ruledata, parent)
         return rulenew;
     }
+
+    static async GetBaseSkills() {
+        const Skills = Requester.MakeRequest({searchtype: "file", searchparam: {type: "skillgroup"}}) as IContextObject[];
+        const SkillList : SkillGroup[] = []
+        console.log(Skills)
+        for (let i = 0; i < Skills.length; i++) {
+            const skl = await SkillFactory.CreateSkillGroup(Skills[i], null);
+            if (skl != null) {
+                SkillList.push(skl);
+            }
+        }
+
+        return SkillList;
+    }
     
     /**
      * Creates an ability based on provided data
@@ -59,7 +73,7 @@ class SkillFactory {
         if (isValid == false) {
             return cache.SkillGroupCache[_val];
         }
-        const ruledata = Requester.MakeRequest({searchtype: "id", searchparam: {type: "group", id: _val}}) as IContextObject
+        const ruledata = Requester.MakeRequest({searchtype: "id", searchparam: {type: "skillgroup", id: _val}}) as IContextObject
         const rulenew = await SkillFactory.CreateSkillGroup(ruledata, parent)
         return rulenew;
     }

@@ -12,6 +12,7 @@ import { Faction } from "../../../feature/faction/Faction";
 import { EventRunner } from "../../../contextevent/contexteventhandler";
 import { Requester } from "../../../../factories/Requester";
 import { Rule } from "../../../feature/faction/Rule";
+import { SkillSuite } from "../Purchases/WarbandMember";
 
 interface IWarbandFaction extends IContextObject {
     faction_property: IWarbandProperty,
@@ -184,6 +185,14 @@ class WarbandFaction extends DynamicContextObject {
         } else {
             const Patron = await SkillFactory.CreateNewPatron(patorn_name, this)
             this.MyPatron = Patron;
+        }
+    }
+
+    public GetPatronSkills() : Patron | null {
+        if (this.MyPatron) {
+            return this.MyPatron
+        } else {
+            return null;
         }
     }
 

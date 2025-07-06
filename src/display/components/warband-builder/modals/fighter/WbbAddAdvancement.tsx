@@ -4,6 +4,9 @@ import {faXmark} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import { Skill } from '../../../../../classes/feature/ability/Skill';
 import { RealWarbandPurchaseModel } from '../../../../../classes/saveitems/Warband/Purchases/WarbandPurchase';
+import { SkillSuite } from '../../../../../classes/saveitems/Warband/Purchases/WarbandMember';
+import { makestringpresentable } from '../../../../../utility/functions';
+import WbbFighterCollapse from '../../WbbFighterCollapse';
 
 
 interface WbbModalAddAdvancementProps {
@@ -16,17 +19,28 @@ interface WbbModalAddAdvancementProps {
 const WbbModalAddAdvancement: React.FC<WbbModalAddAdvancementProps> = ({ show, onClose, onSubmit, fighter }) => {
     const [selectedId, setSelectedId] = useState<string | null>(null);
 
-    const [available, setAvailable] = useState<Skill[]>([]);
+    const [available, setAvailable] = useState<SkillSuite[]>([]);
     const [keyvar, setkevvar] = useState(0);
 
     const handleSubmit = () => {
-        const selected = available.find((a) => a.ID === selectedId);
+        const selected = FindItem(selectedId);
         if (selected) {
             onSubmit(selected);
             setSelectedId(null);
             onClose();
         }
     };
+
+    function FindItem(a : string | null) {
+        for (let i = 0; i < available.length; i++) {
+            for (let j = 0; j < available[i].list.length; j++) {
+                if (available[i].list[j].ID == a) {
+                    return available[i].list[j]
+                }
+            }
+        }
+        return null;
+    }
         
     useEffect(() => {
         async function SetEquipmentOptions() {
@@ -54,15 +68,27 @@ const WbbModalAddAdvancement: React.FC<WbbModalAddAdvancementProps> = ({ show, o
             </Modal.Header>
 
             <Modal.Body>
+                
                 {available.map((adv) => (
-                    <div
-                        key={adv.ID}
-                        className={`select-item ${selectedId === adv.ID ? 'selected' : ''}`}
-                        onClick={() => setSelectedId(adv.ID)}
+                    <WbbFighterCollapse
+                        key={adv.skillgroup.ID}
+                        title={makestringpresentable(adv.skillgroup.GetTrueName())}
+                        initiallyOpen={false}
                     >
-                        <div className="item-name">{adv.GetTrueName()}</div>
+                        <>
+                            {adv.list.map((skl) => 
+                                <div
+                                    key={skl.ID}
+                                    className={`select-item ${selectedId === skl.ID ? 'selected' : ''}`}
+                                    onClick={() => setSelectedId(skl.ID)}
+                                >
+                                    <div className="item-name">{skl.GetTrueName()}</div>
 
-                    </div>
+                                </div>)
+                            }
+                        </>
+                    </WbbFighterCollapse>
+                    
                 ))}
             </Modal.Body>
 
