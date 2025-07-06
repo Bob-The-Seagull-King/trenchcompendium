@@ -14,6 +14,7 @@ import WbbSpecialRule from "./WbbSpecialRule";
 import WbbOptionSelect from './modals/warband/WbbOptionSelect';
 import WbbEditViewModifier from './WbbEditViewModifier';
 import { ToolsController } from '../../../classes/_high_level_controllers/ToolsController';
+import WbbEditViewExtraModifier from './WbbEditViewExtraModifier';
 
 interface WbbWarbandDetailViewProps {
     onClose: () => void;
@@ -125,10 +126,6 @@ const WbbWarbandDetailView: React.FC<WbbWarbandDetailViewProps> = ({  onClose })
                                     )}                        
                                 </span>
                             }
-
-                            {/*
-                            // @TODO: Option like Sultan's Favour goes here
-                            */}
                         </WbbDetailViewCollapse>
                     }
 
@@ -137,7 +134,7 @@ const WbbWarbandDetailView: React.FC<WbbWarbandDetailViewProps> = ({  onClose })
                         <WbbDetailViewCollapse title='Faction Selections' initiallyOpen={true}>
                             
                             {warband?.warband_data.GetWarbandFactionOptionsModifiersList().map((item) =>
-                                <WbbEditViewModifier
+                                <WbbEditViewExtraModifier
                                     key={item.GetTrueName()}
                                     warbprop={item}
                                     isinner={true}

@@ -15,19 +15,17 @@ interface WbbEditViewModifierProps {
     isinner?: boolean;
 }
 
-const WbbEditViewModifier: React.FC<WbbEditViewModifierProps> = ({ warbprop, index, isinner }) => {
+const WbbEditViewExtraModifier: React.FC<WbbEditViewModifierProps> = ({ warbprop, index, isinner }) => {
 
     const { warband, updateKey } = useWarband();
     if (warband == null) return (<div>Loading...</div>);
     const { playMode } = usePlayMode();
 
     return (
-        <div className={`WbbEditViewModifier ${isinner != undefined ? 'inner' : ''}`}
+        <div className={`WbbEditViewExploration ${isinner != undefined ? 'inner' : ''}`}
              key={updateKey}>
-            <div className={'modifier-title'}>
-                <span className={'title-name'}>
+            <div className={'exploration-name'}>
                     {warbprop.GetTrueName()}
-                </span>
             </div>
 
             {warbprop.SelfDynamicProperty.Selections.length > 0 &&
@@ -52,8 +50,16 @@ const WbbEditViewModifier: React.FC<WbbEditViewModifierProps> = ({ warbprop, ind
                 </>
                 }
             </div>
+
+            {(!playMode && warband?.warband_data.HasModifier(warbprop)) &&
+                <WbbContextualPopover
+                    id={`injury-${warbprop.ID}`}
+                    type="modifier"
+                    item={warbprop}
+                />
+            }
         </div>
     );
 };
 
-export default WbbEditViewModifier;
+export default WbbEditViewExtraModifier;

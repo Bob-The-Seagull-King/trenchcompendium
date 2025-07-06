@@ -428,6 +428,20 @@ class UserWarband extends DynamicContextObject {
         }
     }
 
+    public HasModifier(mod : WarbandProperty) {
+        return (this.Modifiers.includes(mod));
+    }
+    
+    public async Deletemod( mod : WarbandProperty ) {
+        
+        for (let i = 0; i < this.Modifiers.length; i++) {
+            if (mod == (this.Modifiers[i])) {
+                this.Modifiers.splice(i, 1);
+                break;
+            }
+        }
+    }
+
     public async DeleteFighterWithDebt( fighter : RealWarbandPurchaseModel, debt_mod : number) {
         const CostVarDucats = fighter.purchase.GetTotalDucats();
         const CostVarGlory = fighter.purchase.GetTotalGlory();

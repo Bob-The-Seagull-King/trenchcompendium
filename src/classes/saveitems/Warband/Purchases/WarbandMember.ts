@@ -1091,9 +1091,9 @@ class WarbandMember extends DynamicContextObject {
         const eventmon : EventRunner = new EventRunner();
         await eventmon.runEvent(
             "onGainSkill",
-            this,
+            skl,
             [this],
-            null,
+            NewRuleProperty,
             skl
         )
     }

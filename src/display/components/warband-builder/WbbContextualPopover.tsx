@@ -125,8 +125,11 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
     const handleDeleteModifier = () => {
         setshowConfirmDeleteModifierModal(false);
 
-        // @TODO: Delete Modifier from Warband
-        console.log('handleDeleteModifier');
+        warband?.warband_data.Deletemod(item).then(() => {
+            const Manager : ToolsController = ToolsController.getInstance();
+            Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
+                () => reloadDisplay())
+        })
     }
 
     /** Exploration Actions */

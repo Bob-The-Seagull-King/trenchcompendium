@@ -7,6 +7,7 @@ import { SelectedOption } from '../../../../../classes/options/SelectedOption';
 import WbbEditViewModifier from '../../WbbEditViewModifier';
 import { useWarband } from '../../../../../context/WarbandContext';
 import { WarbandProperty } from '../../../../../classes/saveitems/Warband/WarbandProperty';
+import WbbEditViewExtraModifier from '../../WbbEditViewExtraModifier';
 
 const WbbModifiersList = () => {
     const { warband, updateKey, reloadDisplay } = useWarband();
@@ -31,7 +32,7 @@ const WbbModifiersList = () => {
             {/* Warband Modifiers */}
             <h3 className={'category-headline'}>Modifiers</h3>
             {modifiers.map((item) =>
-                <WbbEditViewModifier
+                <WbbEditViewExtraModifier
                     key={item.GetTrueName()}
                     warbprop={item}
                     index={modifiers.indexOf(item)}
