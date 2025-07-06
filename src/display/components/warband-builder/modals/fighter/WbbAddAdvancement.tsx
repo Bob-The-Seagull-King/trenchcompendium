@@ -68,28 +68,32 @@ const WbbModalAddAdvancement: React.FC<WbbModalAddAdvancementProps> = ({ show, o
             </Modal.Header>
 
             <Modal.Body>
-                
-                {available.map((adv) => (
-                    <WbbFighterCollapse
-                        key={adv.skillgroup.ID}
-                        title={makestringpresentable(adv.skillgroup.GetTrueName())}
-                        initiallyOpen={false}
-                    >
-                        <>
-                            {adv.list.map((skl) => 
-                                <div
-                                    key={skl.ID}
-                                    className={`select-item ${selectedId === skl.ID ? 'selected' : ''}`}
-                                    onClick={() => setSelectedId(skl.ID)}
-                                >
-                                    <div className="item-name">{skl.GetTrueName()}</div>
+                <div className={"fighter-card"}>
+                    <div  className={'fighter-card-collapse-wrap'} >
+                    {available.map((adv) => (
+                        <WbbFighterCollapse
+                            key={adv.skillgroup.ID}
+                            title={makestringpresentable(adv.skillgroup.GetTrueName())}
+                            initiallyOpen={false}
+                            nopad={true}
+                        >
+                            <>
+                                {adv.list.map((skl) => 
+                                    <div
+                                        key={skl.ID}
+                                        className={`select-item ${selectedId === skl.ID ? 'selected' : ''}`}
+                                        onClick={() => setSelectedId(skl.ID)}
+                                    >
+                                        <div className="item-name">{skl.GetTrueName()}</div>
 
-                                </div>)
-                            }
-                        </>
-                    </WbbFighterCollapse>
-                    
-                ))}
+                                    </div>)
+                                }
+                            </>
+                        </WbbFighterCollapse>
+                        
+                    ))}
+                    </div>
+                </div>
             </Modal.Body>
 
             <Modal.Footer>

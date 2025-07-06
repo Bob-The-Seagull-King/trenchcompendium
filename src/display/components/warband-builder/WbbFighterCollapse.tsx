@@ -7,9 +7,10 @@ interface WbbFighterCollapseProps {
     title: string;
     children: React.ReactNode;
     initiallyOpen?: boolean;
+    nopad?: boolean;
 }
 
-const WbbFighterCollapse: React.FC<WbbFighterCollapseProps> = ({ title, children, initiallyOpen = false }) => {
+const WbbFighterCollapse: React.FC<WbbFighterCollapseProps> = ({ title, children, initiallyOpen = false, nopad=false }) => {
     const [open, setOpen] = useState(initiallyOpen);
 
     return (
@@ -27,7 +28,7 @@ const WbbFighterCollapse: React.FC<WbbFighterCollapseProps> = ({ title, children
 
             <Collapse in={open}>
                 <div className="fighter-card-collapse-content">
-                    <div className={'fighter-card-collapse-content-inner'}>
+                    <div className={nopad? '' : 'fighter-card-collapse-content-inner'}>
                         {children}
                     </div>
                 </div>
