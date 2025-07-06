@@ -33,6 +33,7 @@ import WbbTitle from './micro-elements/WbbTitle';
 import { FactionModelRelationship } from '../../../classes/relationship/faction/FactionModelRelationship';
 import WbbFighterAdds from './micro-elements/WbbFighterAdds';
 import WbbFighterShows from './micro-elements/WbbFighterShows';
+import WbbModifiersList from './modals/warband/WbbModifiersList';
 
 interface WbbEditViewProps {
     warbandData: SumWarband | null;
@@ -240,16 +241,7 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                                             setShowAddFighterMercenaryModal={setShowAddFighterMercenaryModal}
                                         />
 
-                                        {/* Warband Modifiers */}
-                                        <h3 className={'category-headline'}>Modifiers</h3>
-                                        {warband?.warband_data.GetModifiersList().map((item) =>
-                                            <WbbEditViewModifier
-                                                key={item.GetTrueName()}
-                                                warbprop={item}
-                                                index={warband?.warband_data.GetModifiersList().indexOf(item)}
-                                            />
-                                        )}
-                                        
+                                        <WbbModifiersList/>                                        
 
                                         {!playMode &&
                                             <div className={'btn btn-add-element btn-block'}

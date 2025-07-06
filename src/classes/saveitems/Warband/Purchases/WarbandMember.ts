@@ -534,6 +534,26 @@ class WarbandMember extends DynamicContextObject {
         return count;
     }
 
+    public async GetWarbandSkills() {
+        const SkillList : WarbandProperty[] = [];
+        const Events : EventRunner = new EventRunner();
+
+        for (let i = 0; i < this.Skills.length; i++) {
+            const ShowWarband = await Events.runEvent(
+                "showSkillOnWarband",
+                this.Skills[i],
+                [],
+                true,
+                this
+            )
+
+            if (ShowWarband) {
+                SkillList.push(this.Skills[i])
+            }
+        }
+        return SkillList;
+    }
+
     /**
      * Get the name of the Fighter
      * - i.e. "Steve the fearless"

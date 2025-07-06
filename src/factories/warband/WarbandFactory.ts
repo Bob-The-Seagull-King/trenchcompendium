@@ -129,6 +129,7 @@ class WarbandFactory {
         await rule.NewWarbandItems(data)
         await rule.BuildModels(data.models);
         await rule.BuildEquipment(data.equipment);
+        await rule.BuildModifiersSkills(data.modifiers);
         return rule;
     }
 

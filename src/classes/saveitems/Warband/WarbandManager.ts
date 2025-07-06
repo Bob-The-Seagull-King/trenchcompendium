@@ -267,7 +267,8 @@ class WarbandManager {
             debts: {
                 ducats: 0,
                 glory: 0
-            }
+            },
+            modifiers: []
         }
         const new_item : UserWarband = await WarbandFactory.CreateUserWarband(_Item)
 

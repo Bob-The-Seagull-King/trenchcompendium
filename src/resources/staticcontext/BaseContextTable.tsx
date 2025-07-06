@@ -1983,6 +1983,12 @@ export const BaseContextCallTable : CallEventTable = {
             return relayVar;
         }
     },
+    add_onto_warband: {
+        event_priotity: 0,
+        async showSkillOnWarband(this: EventRunner, eventSource : any, relayVar : boolean, trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, member : WarbandMember) {
+            return true;
+        }
+    },
     keyword_mod_remove: {
         event_priotity: 2,
         async getContextuallyRelevantKeywordsByID(this: EventRunner, eventSource : any, relayVar : string[], trackVal : Model, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {

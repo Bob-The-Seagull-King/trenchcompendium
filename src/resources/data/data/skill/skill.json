@@ -508,6 +508,7 @@
         "tags": { "trait": true },
         "contextdata": { 
             "warband_wide": {}, 
+            "add_onto_warband": {},
             "add_extra_model": {
                 "count": 1,
                 "restriction": [
