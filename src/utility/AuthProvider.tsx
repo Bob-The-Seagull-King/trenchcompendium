@@ -20,8 +20,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         const logindate = localStorage.getItem('lastrecordedlogindate');
         if (storedToken && storedUserId && logindate) {
             const date_stored = new Date(logindate);
-            const date_cur = new Date(2023, 2, 1);
-            const diff = Math.ceil(Math.abs(date_stored.getTime() - date_cur.getTime()) / (1000 * 3600 * 24)); 
+            const date_cur = new Date();
+            const diff = Math.ceil(Math.abs(date_cur.getTime() - date_stored.getTime()) / (1000 * 3600 * 24)); 
             if (diff <= 22) {
                 setAuthToken(storedToken);
                 setUserId(parseInt(storedUserId, 10));
