@@ -69,6 +69,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
     const [upgrades, setupgrades] = useState<MemberUpgradesGrouped>({})
     const [abilities, setabilities] = useState<WarbandProperty[]>([])
     const [allmodelequip, setAllmodelequip] = useState<RealWarbandPurchaseEquipment[]>([])
+    const [xpLimit, setXPLimit] = useState<number>(0)
     const [keywordsList, setkeywords] = useState<Keyword[]>([])
     const [BaseString, setBaseString] = useState('')
     const [modelslug, setmodeslug] = useState(fighter.GetModelSlug())
@@ -80,6 +81,8 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
             const upgrades = await fighter.GetWarbandUpgradeCollections()
             setabilities(abilities);
             setupgrades(upgrades);
+            const XPLimit = await fighter.GetXPLimit();
+            setXPLimit(XPLimit)
             setkeywords(await fighter.getContextuallyAvailableKeywords())
             setmodeslug(fighter.GetModelSlug())
             setAllmodelequip(await fighter.GetAllEquipForShow())
@@ -127,8 +130,10 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
     // Experience
     const [showXPModal, setShowXPModal] = useState(false);
     const handleXPSubmit = (newXP: number) => {
-        // if (!selectedFighter) return;
-        // @TODO: hook up to class
+        fighter.SetExperience(newXP).then(() => {
+            const Manager : ToolsController = ToolsController.getInstance();
+            Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(() => reloadDisplay())
+        });
     };
 
     // Battle Scars
@@ -532,7 +537,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                                 </div>
 
                                 <div className={'xp-boxes'} onClick={() => setShowXPModal(true)}>
-                                    {Array.from({length: 18}, (_, i) => {
+                                    {Array.from({length: xpLimit}, (_, i) => {
                                         const level = i + 1;
                                         const isBold = fighter.boldXpIndices.includes(level);
                                         const hasXP = level <= fighter.GetExperiencePoints();
@@ -643,14 +648,13 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                         <WbbEditFighterExperience
                             show={showXPModal}
                             onClose={() => setShowXPModal(false)}
-                            currentXP={fighter.GetExperiencePoints()} // @TODO: use actual XP value
-                            // currentXP={selectedFighter.ExperiencePoints}
+                            currentXP={fighter.GetExperiencePoints()}
                             onSubmit={handleXPSubmit}
                         />
                         <WbbEditBattleScars
                             show={showEditScars}
                             onClose={() => setShowEditScars(false)}
-                            currentScars={fighter.GetBattleScars()} // @TODO: use actual BS value
+                            currentScars={fighter.GetBattleScars()}
                             onSubmit={handleUpdateBattleScars}
                         />
                         <WbbModalAddAdvancement
@@ -777,21 +781,27 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                         }
                     </div>
 
+                    {abilities.length > 0 &&
                     <div className={'play-mode-abilities-wrap'}>
                         <h3>{'Abilities'}</h3>
                         {abilities.map((ability, index) => (
                             <WbbAbilityDisplay key={index} ability={ability}/>
                         ))}
                     </div>
+                    }
 
-                    <div className={'play-mode-advancements-wrap'}>
-                        <h3>{'Advancements'}</h3>
-                        {fighter.GetSkillsList().map((advancement) => (
-                            <WbbEditViewAdvancement advancement={advancement} key={advancement.ID + fighter.ID}
-                                                fighter={warbandmember}/>
-                        ))}
-                    </div>
+                    {fighter.GetSkillsList().length > 0 &&
+                        <div className={'play-mode-advancements-wrap'}>
+                            <h3>{'Advancements'}</h3>
+                            {fighter.GetSkillsList().map((advancement) => (
+                                <WbbEditViewAdvancement advancement={advancement} key={advancement.ID + fighter.ID}
+                                                    fighter={warbandmember}/>
+                            ))}
+                        </div>
 
+                    }
+
+                    {fighter.GetInjuriesList().length > 0 &&
                     <div className={'play-mode-injuries-wrap'}>
                         <h3>{'Injuries'}</h3>
                         {fighter.GetInjuriesList().map((injury) => (
@@ -799,6 +809,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                                                 fighter={warbandmember}/>
                         ))}
                     </div>
+                    }
                 </div>
             }
         </div>

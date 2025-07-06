@@ -1078,6 +1078,15 @@ class WarbandMember extends DynamicContextObject {
         )
     }
 
+    public async SetExperience(newval : number) {
+        this.Experience = newval;
+    }
+
+    // @TODO Lane
+    public async GetXPLimit() {
+        return 18;
+    }
+
     public async GetModelEquipmentOptions() {
         const ListOfOptions : FactionEquipmentRelationship[] = []
 
@@ -1446,8 +1455,6 @@ class WarbandMember extends DynamicContextObject {
     }
     
     public async DeleteInjury( item : WarbandProperty ) {
-        console.log("DELETE INJURY")
-        console.log(item)
         for (let i = 0; i < this.Injuries.length; i++) {
             if (item == (this.Injuries[i])) {
                 this.Injuries.splice(i, 1);
@@ -1457,8 +1464,6 @@ class WarbandMember extends DynamicContextObject {
     }
     
     public async DeleteSkill( item : WarbandProperty ) {
-        console.log("DELETE SKILL")
-        console.log(item)
         for (let i = 0; i < this.Skills.length; i++) {
             if (item == (this.Skills[i])) {
                 this.Skills.splice(i, 1);
