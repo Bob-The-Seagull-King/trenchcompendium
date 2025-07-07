@@ -1135,6 +1135,28 @@ class WarbandMember extends DynamicContextObject {
 
         return result;
     }
+    
+    public async CanChangeRank(): Promise<boolean> {
+        let count = true;
+        if (!this.Elite) {
+            count = await (this.MyContext as UserWarband).CanAddMoreElite()
+        }
+
+        if (count) {
+            const stats = await this.GetStats();
+
+            if (stats.potential != undefined) {
+                if (stats.potential == 2) { return false; }
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public ChangeRank() {
+        this.Elite = !this.Elite;
+    }
 
     public async GetStats() {
         const BaseStats = this.CurModel.Stats;
@@ -1172,6 +1194,12 @@ class WarbandMember extends DynamicContextObject {
 
     // @TODO Lane
     public async GetXPLimit() {
+        const stats = await this.GetStats();
+        if (stats.potential) {
+            if (stats.potential == 0) { return 18; }
+            if (stats.potential == 1) { return 7;}
+            if (stats.potential == 2) { return 0;}
+        }
         return 18;
     }
 

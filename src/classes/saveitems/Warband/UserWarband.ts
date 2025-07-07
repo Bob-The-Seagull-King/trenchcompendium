@@ -718,6 +718,20 @@ class UserWarband extends DynamicContextObject {
         return this.GetFighters().filter(f => f.model.IsElite()).length;
     }
 
+    public async CanAddMoreElite() {
+        
+        const EventProc : EventRunner = new EventRunner();
+        const result = await EventProc.runEvent(
+            "getNumberOfElite",
+            this,
+            [],
+            6,
+            null
+        )
+
+        return this.GetNumElite() < result;
+    }
+
     GetNumFielded() {
         return this.GetFighters().filter(f => f.model.State == "active").length;
     }

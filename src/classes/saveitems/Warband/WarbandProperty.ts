@@ -174,6 +174,7 @@ class WarbandProperty extends DynamicContextObject  {
         
         return _objint;
     }
+
     
     /**
      * Grabs the packages from any sub-objects, based

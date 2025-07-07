@@ -2,7 +2,9 @@ import React, {useEffect, useState} from 'react';
 import WbbEditViewFighter from "./WbbEditViewFighter";
 import {
     faCheck,
+    faChevronDown,
     faChevronLeft,
+    faChevronUp,
     faCopy, faEllipsisVertical,
     faPen,
     faPlus,
@@ -68,6 +70,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
     const fighter = warbandmember.model;
     
     const [stats, setstats] = useState<ModelStatistics>({})
+    const [canchange, setcanchange] = useState(true)
     const [upgrades, setupgrades] = useState<MemberUpgradesGrouped>({})
     const [abilities, setabilities] = useState<WarbandProperty[]>([])
     const [statchoices, setStatChoices] = useState<ModelStatistics[][]>([])
@@ -81,6 +84,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
         async function SetModelOptions() {
             setStatChoices(await fighter.GetStatOptions());
             setstats(await fighter.GetStats())
+            setcanchange(await fighter.CanChangeRank())
             setkeyvar(keyvar + 1);
         }
         SetModelOptions();
@@ -98,6 +102,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
             setmodeslug(fighter.GetModelSlug())
             setAllmodelequip(await fighter.GetAllEquipForShow())
             setStatChoices(await fighter.GetStatOptions());
+            setcanchange(await fighter.CanChangeRank())
             setstats(await fighter.GetStats())
             reloadDisplay()
         }
@@ -183,6 +188,11 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
             const Manager : ToolsController = ToolsController.getInstance();
             Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(() => reloadDisplay())
         }
+    };
+    const handleRankUpdate = () => {
+        fighter.ChangeRank()
+        const Manager : ToolsController = ToolsController.getInstance();
+        Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(() => reloadDisplay())
     };
 
     return (
@@ -679,6 +689,23 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                                 {'Change'}
                             </div>
                         </div>
+
+                        {!fighter.IsMercenary() &&
+                            <>
+                                <h3>{'Fighter Rank'}</h3>
+                                <div className={'fighter-status'}>
+                                    <div className={'fighter-status-string'}>
+                                        {fighter.IsElite()? "Elite" : "Troop"}
+                                    </div>
+                                    {canchange &&
+                                        <div className={'btn btn-primary'} onClick={() => handleRankUpdate()}>
+                                            <FontAwesomeIcon icon={fighter.IsElite()? faChevronDown : faChevronUp} className={'icon-inline-left-l'}/>
+                                            {fighter.IsElite()? "Demote" : "Promote"}
+                                        </div>
+                                    }
+                                </div>
+                            </>
+                        }
 
                         {/* Campaign Modals */}
                         <WbbEditFighterExperience

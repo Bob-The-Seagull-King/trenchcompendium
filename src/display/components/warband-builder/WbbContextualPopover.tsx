@@ -120,7 +120,6 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
 
     const showConfirmDeleteModifier = () => {
         setshowConfirmDeleteModifierModal(true);
-        console.log('setshowConfirmDeleteModifierModal');
     }
     const handleDeleteModifier = () => {
         setshowConfirmDeleteModifierModal(false);
@@ -168,12 +167,10 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
 
     const showConfirmMoveEquipment = () => {
         setshowConfirmMoveEquipmentModal(true);
-        console.log('showConfirmMoveEquipment');
     }
 
     const handleMoveEquipment = () => {
         if (selectedFighter != null) {
-            console.log(selectedFighter)
             if (context == undefined || context == null) {
                 warband?.warband_data.DeleteStash(item).then(() => {
                     (selectedFighter.HeldObject as WarbandMember).DirectAddStash(item).then(() => {
@@ -291,7 +288,6 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
 
     const showConfirmDeleteAdvancement = () => {
         setshowConfirmDeleteAdvancementModal(true);
-        console.log('showConfirmDeleteAdvancement');
     }
     const handleDeleteAdvancement = () => {
         setshowConfirmDeleteAdvancementModal(false);
@@ -308,7 +304,6 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
     /** Injury Actions */
     const [showConfirmDeleteInjuryModal, setshowConfirmDeleteInjuryModal] = useState(false);
     const showConfirmDeleteInjury = () => {
-        console.log('showConfirmDeleteInjury');
         setshowConfirmDeleteInjuryModal(true);
     }
     const handleDeleteInjury = () => {
@@ -327,7 +322,6 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
     const [showConfirmRenameWarbandModal, setshowConfirmRenameWarbandModal] = useState(false);
     const [showConfirmExportWarbandModal, setshowConfirmExportWarbandModal] = useState(false);
     const showConfirmRenameWarband = () => {
-        console.log('showConfirmRenameWarband');
         setshowConfirmRenameWarbandModal(true);
     }
     const handleRenameWarband = () => {
@@ -339,13 +333,11 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
 
     }
     const showConfirmExportWarband = () => {
-        console.log('showConfirmExportWarband');
         setshowConfirmExportWarbandModal(true);
     }
 
     /** Print Mode */
     const handlePrintWarband = () => {
-        console.log('handlePrintWarband');
 
         setPrintMode(true);
 
@@ -362,7 +354,6 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
     const [theme, setTheme] = useGlobalState('theme');
     useEffect(() => {
         const handleAfterPrint = () => {
-            console.log('Resetting print mode and theme');
 
             setPrintMode(false);
             document.body.setAttribute('data-theme', theme);

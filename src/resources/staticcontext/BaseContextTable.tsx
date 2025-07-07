@@ -1935,8 +1935,6 @@ export const BaseContextCallTable : CallEventTable = {
     upgrade_stat: {
         event_priotity: 1,
         async updateModelStats(this: EventRunner, eventSource : any, relayVar : ModelStatistics,   context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
-            console.log(eventSource)
-            console.log("FOUDN")
             for (let i = 0; i < context_func["upgrades"].length; i++) {
                 const contextitem = context_func["upgrades"][i];
 
