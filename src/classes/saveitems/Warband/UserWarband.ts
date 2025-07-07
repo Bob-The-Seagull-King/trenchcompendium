@@ -150,7 +150,30 @@ class UserWarband extends DynamicContextObject {
      * on class implementation.
      */
     public async GrabSubPackages(event_id : string, source_obj : ContextObject, arrs_extra : any[]) : Promise<ContextPackage[]> { 
-        const subpackages : ContextPackage[] = []        
+        const subpackages : ContextPackage[] = []      
+
+        if (this.ContextData) {            
+            for (const key of Object.keys(this.ContextKeys)) {
+                const context_entry = this.ContextData[key]
+                if (context_entry == undefined) {continue;}
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore - dynamic lookup
+                const func = context_entry[event_id];
+                if (func !== undefined) {
+                    const curr_package : ContextPackage = {
+                        priority    : context_entry.event_priotity,
+                        source      : source_obj,
+                        self        : this,
+                        callback    : func,
+                        callbackdict: this.ContextKeys[key],
+                        dyncontext  : this.MyContext,
+                        callpath    : ["UserWarband","WarbandSource"]
+                    }
+
+                    subpackages.push(curr_package);
+                }                
+             }
+        }
 
         if (this.Faction) {
             const static_packages : ContextPackage[] = await this.Faction.GrabContextPackages(event_id, source_obj, arrs_extra);
@@ -420,6 +443,7 @@ class UserWarband extends DynamicContextObject {
             if (fighter.model == (this.Models[i].HeldObject as WarbandMember)) {
                 const FighterItems : WarbandProperty[] = await fighter.model.GetWarbandSkills();
                 for (let j = 0; j < FighterItems.length; j++) {
+                    FighterItems[j].MyContext = this;
                     this.Modifiers.push(FighterItems[j])
                 }
                 this.Models.splice(i, 1);

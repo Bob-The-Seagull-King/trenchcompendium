@@ -503,10 +503,11 @@
     },
     {
         "id": "sk_sultanfavour",
-        "name": "Sultan's Favour",
+        "name": "",
         "source": "core",
         "tags": { "trait": true },
         "contextdata": { 
+            "warband_general_hook": {},
             "warband_wide": {}, 
             "add_onto_warband": {},
             "add_extra_model": {
@@ -528,7 +529,16 @@
             }
         ],
         "options": [
-            
+            {
+                "ref_id" : "ot_sultansfavour",
+                "name" : "Sultan's Favour",
+                "description" : [],
+                "category" : "contextobject",
+                "option_context" : {"basic_option_default":{}},
+                "dyna_only": true,
+                "parent_level": 5,
+                "question_name": "getModelRelationshipsForWarband"
+            }
         ],
         "skill_group": ["pt_sublimegate"]
     },

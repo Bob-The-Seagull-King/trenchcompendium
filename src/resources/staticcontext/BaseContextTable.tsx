@@ -1932,6 +1932,30 @@ export const BaseContextCallTable : CallEventTable = {
             return relayVar;
         }
     },
+    warband_general_hook: {
+        event_priotity: 0,        
+        async getModelRelationshipsForWarband(this: EventRunner, eventSource : any, relayVar : FactionModelRelationship[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : UserWarband) {
+            
+            const FacCheck = sourceband.Faction.MyFaction;
+            const ListOfRels : FactionModelRelationship[] = []
+            let BaseRels : FactionModelRelationship[] = []
+            
+            if (FacCheck != undefined) {
+                BaseRels = ((FacCheck.SelfDynamicProperty).OptionChoice as Faction).Models
+            }
+
+            const eventmon : EventRunner = new EventRunner();
+            BaseRels = await eventmon.runEvent(
+                "getAllFactionModelRelationships",
+                sourceband,
+                [],
+                BaseRels,
+                null
+            )
+
+            return BaseRels.filter((item) => item.Mercenary == false);
+        }
+    },
     upgrade_stat: {
         event_priotity: 1,
         async updateModelStats(this: EventRunner, eventSource : any, relayVar : ModelStatistics,   context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
