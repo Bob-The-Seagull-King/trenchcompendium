@@ -291,7 +291,7 @@ class WarbandMember extends DynamicContextObject {
     public async BuildSkills(data : IWarbandProperty[]) {
         for (let i = 0; i < data.length; i++) {
             const CurVal = data[i];
-            const Value = await SkillFactory.CreateNewSkill(CurVal.object_id, this);
+            const Value = await SkillFactory.CreateNewSkill(CurVal.object_id, this, true);
             const NewLocation = new WarbandProperty(Value, this, null, CurVal);
             await NewLocation.HandleDynamicProps(Value, this, null, CurVal)
             this.Skills.push(NewLocation);

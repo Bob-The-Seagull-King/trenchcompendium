@@ -1788,7 +1788,7 @@ export const BaseContextCallTable : CallEventTable = {
             
             for (let i = 0; i < relayVar.length; i++) {
                 const ModelItem = ((relayVar[i].value instanceof Skill)? relayVar[i].value :
-                    await SkillFactory.CreateSkill(relayVar[i].value, null)
+                    await SkillFactory.CreateSkill(relayVar[i].value, null, true)
                 )
                 relayVar[i].value = ModelItem;
                 relayVar[i].display_str = ModelItem.Name? ModelItem.Name : "";

@@ -12,10 +12,10 @@ class SkillFactory {
      * @param _ability The data in IPlayerAbility format describing the ability
      * @returns A newly created ability
      */
-    static async CreateSkill(_rule: ISkill, parent : ContextObject | null) {
+    static async CreateSkill(_rule: ISkill, parent : ContextObject | null, skipcheck = false) {
         const cache = StaticDataCache.getInstance();
         const isValid = (cache.CheckID('skill', _rule.id))
-        if (isValid == false) {
+        if (isValid == false && !skipcheck) {
             return cache.SkillCache[_rule.id];
         }
         const rule = new Skill(_rule, parent)
@@ -25,14 +25,14 @@ class SkillFactory {
         return rule;
     }
 
-    static async CreateNewSkill(_val : string, parent : ContextObject | null) {
+    static async CreateNewSkill(_val : string, parent : ContextObject | null, skipcheck = false) {
         const cache = StaticDataCache.getInstance();
         const isValid = (cache.CheckID('skill', _val))
-        if (isValid == false) {
+        if (isValid == false && !skipcheck) {
             return cache.SkillCache[_val];
         }
         const ruledata = Requester.MakeRequest({searchtype: "id", searchparam: {type: "skill", id: _val}}) as ISkill
-        const rulenew = await SkillFactory.CreateSkill(ruledata, parent)
+        const rulenew = await SkillFactory.CreateSkill(ruledata, parent, skipcheck)
         return rulenew;
     }
 

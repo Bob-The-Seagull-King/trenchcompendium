@@ -503,7 +503,7 @@
     },
     {
         "id": "sk_sultanfavour",
-        "name": "",
+        "name": "Sultan's Favour",
         "source": "core",
         "tags": { "trait": true },
         "contextdata": { 
@@ -531,7 +531,7 @@
         "options": [
             {
                 "ref_id" : "ot_sultansfavour",
-                "name" : "Sultan's Favour",
+                "name" : "",
                 "description" : [],
                 "category" : "contextobject",
                 "option_context" : {"basic_option_default":{}},
