@@ -2,7 +2,7 @@ import { CompendiumItem, ICompendiumItemData, ItemType } from '../../CompendiumI
 import { containsTag, DescriptionFactory } from '../../../utility/functions';
 import { INote } from '../../Note';
 import { IWarbandContextItem, WarbandContextItem } from './High_Level/WarbandContextItem';
-import { IWarbandExplorationSet, WarbandExplorationSet } from './CoreElements/WarbandExplorationSet';
+import { ExplorationSkillSuite, IWarbandExplorationSet, WarbandExplorationSet } from './CoreElements/WarbandExplorationSet';
 import { DynamicContextObject } from '../../contextevent/dynamiccontextobject';
 import { ContextObject, IContextObject } from '../../contextevent/contextobject';
 import { IWarbandFaction, WarbandFaction } from './CoreElements/WarbandFaction';
@@ -192,6 +192,10 @@ class UserWarband extends DynamicContextObject {
 
     public async UpdateSelfPatron(patron_name : string ) {
         await this.Faction.UpdatePatron(patron_name);
+    }
+
+    public async GetExplorationSkillsInContext(): Promise<ExplorationSkillSuite[]> {
+        return await this.Exploration.GetSkillsInFormat();
     }
 
 

@@ -66,7 +66,8 @@ export interface CallEvents {
     getLocationRestrictionsPresentable? : (this: EventRunner, eventSource : any, relayVar : any, trackVal : LocationRestriction[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<string[]>; 
     onGainInjury? : (this: EventRunner, eventSource : any, trackVal : Injury, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, member : WarbandMember) => Promise<void>; 
     showSkillOnWarband? : (this: EventRunner, eventSource : any, relayVar : boolean, trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, member : WarbandMember) => Promise<boolean>; 
-    getModelRelationshipsForWarband? : (this: EventRunner, eventSource : any, relayVar : FactionModelRelationship[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : UserWarband) => Promise<FactionModelRelationship[]>; 
+    getModelRelationshipsForWarband? : (this: EventRunner, eventSource : any, relayVar : FactionModelRelationship[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : UserWarband) => Promise<FactionModelRelationship[]>;
+    getExplorationSkills? : (this: EventRunner, eventSource : any, relayVar : WarbandProperty[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<WarbandProperty[]>; 
 }
 
 /**

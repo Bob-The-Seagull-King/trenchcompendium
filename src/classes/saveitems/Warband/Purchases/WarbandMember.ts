@@ -768,6 +768,23 @@ class WarbandMember extends DynamicContextObject {
 
     }
 
+    public async GetExplorationSkills() {
+        const Events : EventRunner = new EventRunner();
+        const SkillList : WarbandProperty[] = await Events.runEvent(
+                        "getExplorationSkills",
+                        (this),
+                        [],
+                        [],
+                        null
+                    )
+        for (let i = 0; i < this.Skills.length; i++) {
+            if ((this.Skills[i].SelfDynamicProperty.OptionChoice as Skill).SkillGroups.includes("sg_exploration")) {
+                SkillList.push(this.Skills[i])
+            }
+        }
+        return SkillList;
+    }
+
     public async CalcGivenPurchase(upg : ModelUpgradeRelationship, category : string, limit : number | null = null): Promise<MemberUpgradePresentation> {
 
         const Events : EventRunner = new EventRunner();

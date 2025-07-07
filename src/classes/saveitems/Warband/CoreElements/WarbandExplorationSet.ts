@@ -6,10 +6,18 @@ import { DynamicContextObject} from "../../../contextevent/dynamiccontextobject"
 import { SkillFactory } from "../../../../factories/features/SkillFactory";
 import { ExplorationFactory } from "../../../../factories/features/ExplorationFactory";
 import { ContextPackage } from "../../../contextevent/contextpackage";
+import { UserWarband } from "../UserWarband";
+import { WarbandMember } from "../Purchases/WarbandMember";
 
 interface IWarbandExplorationSet extends IContextObject {
     explorationskills: IWarbandProperty[];
     locations: IWarbandProperty[];
+}
+
+export interface ExplorationSkillSuite {
+    skill: WarbandProperty,
+    count: number,
+    sources : string[]
 }
 
 class WarbandExplorationSet extends DynamicContextObject {
@@ -92,6 +100,53 @@ class WarbandExplorationSet extends DynamicContextObject {
         }
 
         return subpackages; 
+    }
+
+    public async GetSkills() {
+        const SumSkills : WarbandProperty[] = [];
+        for (let i = 0; i < this.Skills.length; i++) {
+            SumSkills.push(this.Skills[i]);
+        }
+        for (let i = 0; i < (this.MyContext as UserWarband).Models.length; i++) {
+            const Mdl = (this.MyContext as UserWarband).Models[i].HeldObject as WarbandMember;
+            const NewSkills = await Mdl.GetExplorationSkills();
+            for (let j = 0; j < NewSkills.length; j++) {
+                SumSkills.push(NewSkills[j])
+            }
+        }
+        return SumSkills;
+    }
+
+    public async GetSkillsInFormat() {
+        const SumSkills : ExplorationSkillSuite[] = [];
+        for (let i = 0; i < this.Skills.length; i++) {
+            this.TryAddToSkillsFormat(SumSkills, this.Skills[i], "Warband Skill")
+        }
+        for (let i = 0; i < (this.MyContext as UserWarband).Models.length; i++) {
+            const Mdl = (this.MyContext as UserWarband).Models[i].HeldObject as WarbandMember;
+            const NewSkills = await Mdl.GetExplorationSkills();
+            for (let j = 0; j < NewSkills.length; j++) {
+                this.TryAddToSkillsFormat(SumSkills, NewSkills[j], "Model: " + Mdl.GetTrueName())
+            }
+        }
+        return SumSkills;
+    }
+
+    private TryAddToSkillsFormat(skillsformatted : ExplorationSkillSuite[], NewSkill : WarbandProperty, source = "Warband") {
+        
+        const selected = skillsformatted.find((i) => i.skill.SelfDynamicProperty.OptionChoice.GetID() === NewSkill.SelfDynamicProperty.OptionChoice.GetID());
+        if (selected) {
+            selected.count += 1;
+            selected.sources.push(source);
+        } else {
+            skillsformatted.push(
+                {
+                    skill: NewSkill,
+                    count: 1,
+                    sources: [source]
+                }
+            )
+        }
     }
 
 

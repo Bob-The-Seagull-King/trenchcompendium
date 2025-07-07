@@ -874,6 +874,24 @@ export const BaseContextCallTable : CallEventTable = {
             return relayVar;
         }
     },
+    get_exploration_skills: {
+        event_priotity: 0,
+        async getExplorationSkills(this: EventRunner, eventSource : any, relayVar : WarbandProperty[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            
+            const { SkillFactory } = await import("../../factories/features/SkillFactory");
+            const WarbandPropModule = await import('../../classes/saveitems/Warband/WarbandProperty');
+            if (context_func["add_skill"]) {
+                for (let i = 0; i < context_func["add_skill"].length; i++) {
+                    const SkillNew : Skill = await SkillFactory.CreateNewSkill(context_func["add_skill"][i], eventSource);                    
+                    const NewRuleProperty = new WarbandPropModule.WarbandProperty(SkillNew, eventSource, null, null);
+                    await NewRuleProperty.HandleDynamicProps(SkillNew, eventSource, null, null);
+                    relayVar.push(NewRuleProperty);
+                }
+            }
+            
+            return relayVar;
+        }
+    },
     override_required_upgrade: {
         event_priotity: 1,
         async getUpgradeRestrictionsPresentation(this: EventRunner, eventSource : any, relayVar : string[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {

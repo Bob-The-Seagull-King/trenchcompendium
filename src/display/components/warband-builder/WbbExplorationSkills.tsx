@@ -1,47 +1,37 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import WbbEditViewFighterSortable from "./modals/WbbEditViewFighterSortable";
 import WbbExplorationSkill from "./WbbExplorationSkill";
+import { useWarband } from '../../../context/WarbandContext';
+import { ExplorationSkillSuite } from '../../../classes/saveitems/Warband/CoreElements/WarbandExplorationSet';
 
 const WbbExplorationSkills: React.FC = () => {
 
-    const explorationSkills = [
-        {
-            Name: 'Extra Dice',
-            ID: 'ex-extra-dice',
-            Description: 'Roll 1 extra Exploration Die',
-            Sources: [
-                'Scavenger - Skill: Jaffar (Assassin)'
-            ]
-        },
-        {
-            Name: 'Duplicate',
-            ID: 'ex-duplicate',
-            Description: 'After you roll, select any Exploration Die and add another die with an identical result, including any modifications, to your total.',
-            Sources: [
-                'Hidden Passages - Legendary exploration location'
-            ]
-        },
-        {
-            Name: 'Re-roll',
-            ID: 'ex-reroll',
-            Description: 'Re-roll any Exploration Dice once.',
-            Sources: [
-                'Warband default',
-                'Friends in High Places- Skill: Steve (Jabieran Alchemist)'
-            ]
+    const {warband, updateKey} = useWarband();
 
+    const [available, setAvailable] = useState<ExplorationSkillSuite[]>([]);
+    const [keyvar, setkevvar] = useState(0);
+    
+    useEffect(() => {
+        async function SetEquipmentOptions() {
+            const options = await warband?.warband_data.GetExplorationSkillsInContext();
+            if (options != undefined) {
+                setAvailable(options)
+                setkevvar(keyvar + 1)
+            }
         }
-    ]
+    
+        SetEquipmentOptions();
+    }, [updateKey]);
 
+    
     return (
         <div className="WbbExplorationSkills">
-            {explorationSkills.map((explorationSkill, index) => (
+            {available.map((explorationSkill, index) => (
                 <WbbExplorationSkill
                     key={index}
-                    Name={explorationSkill.Name}
-                    Description={explorationSkill.Description}
-                    ID={explorationSkill.ID}
-                    Sources={explorationSkill.Sources}
+                    Skill={explorationSkill.skill}
+                    ID={explorationSkill.skill.ID}
+                    Sources={explorationSkill.sources}
                 />
             ))}
         </div>
