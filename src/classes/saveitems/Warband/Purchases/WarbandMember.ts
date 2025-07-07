@@ -204,6 +204,7 @@ class WarbandMember extends DynamicContextObject {
     public async getContextuallyAvailableAbilities() : Promise<Ability[]> {
         const AbilitiesAvailable : Ability[] = []
         const BaseList : Ability[] = []
+        const IDList : string[] = [];
         
         for (let i = 0; i < this.CurModel.Abilities.length; i++) {
             BaseList.push(this.CurModel.Abilities[i]);
@@ -226,11 +227,17 @@ class WarbandMember extends DynamicContextObject {
                 this
             )
             for (let i = 0; i < result_fin.length; i++) {
-                AbilitiesAvailable.push(result[i]);
+                if (!IDList.includes(result[i].ID)) {
+                    IDList.push(result[i].ID)
+                    AbilitiesAvailable.push(result[i]);
+                }
             }
         } else {
             for (let i = 0; i < BaseList.length; i++) {
-                AbilitiesAvailable.push(BaseList[i]);
+                if (!IDList.includes(BaseList[i].ID)) {
+                    IDList.push(BaseList[i].ID)
+                    AbilitiesAvailable.push(BaseList[i]);
+                }
             }
         }
 

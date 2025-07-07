@@ -892,7 +892,7 @@ export const BaseContextCallTable : CallEventTable = {
             }
             return relayVar;
         },
-        async getRestrictedUpgradesBool(this: EventRunner, eventSource : any, relayVar : boolean,  trackVal : MemberAndWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+        async getRequiredUpgradesBool(this: EventRunner, eventSource : any, relayVar : boolean,  trackVal : MemberAndWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
 
             if (context_func["filters"]) {
 
