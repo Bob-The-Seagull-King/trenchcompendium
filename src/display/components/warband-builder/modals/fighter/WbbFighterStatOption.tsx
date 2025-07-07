@@ -30,7 +30,6 @@ const WbbEditFighterStatOption: React.FC<WbbEditFighterStatOptionProps> = ({
     };
     
     useEffect(() => {
-        console.log(fighter.model.Stat_Selections)
         for (let i = 0; i < fighter.model.Stat_Selections.length; i++) {
             for (let j = 0; j < options.length; j++) {
                 if (GetStatAsFullString(fighter.model.Stat_Selections[i]) == GetStatAsFullString(options[j])) {

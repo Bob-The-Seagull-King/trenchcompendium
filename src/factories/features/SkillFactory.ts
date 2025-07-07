@@ -39,7 +39,6 @@ class SkillFactory {
     static async GetBaseSkills() {
         const Skills = Requester.MakeRequest({searchtype: "file", searchparam: {type: "skillgroup"}}) as IContextObject[];
         const SkillList : SkillGroup[] = []
-        console.log(Skills)
         for (let i = 0; i < Skills.length; i++) {
             const skl = await SkillFactory.CreateSkillGroup(Skills[i], null);
             if (skl != null) {

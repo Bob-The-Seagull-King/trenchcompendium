@@ -52,7 +52,7 @@ import { ModelEquipmentRelationship } from '../../../classes/relationship/model/
 import WbbOptionSelect from './modals/warband/WbbOptionSelect';
 import { Injury } from '../../../classes/feature/ability/Injury';
 import { Skill } from '../../../classes/feature/ability/Skill';
-import { ModelStatistics } from '../../../classes/feature/model/ModelStats';
+import { getModelStatArmour, getModelStatMelee, getModelStatMove, getModelStatRanged, ModelStatistics } from '../../../classes/feature/model/ModelStats';
 import WbbEditFighterStatOption from './modals/fighter/WbbFighterStatOption';
 
 
@@ -67,16 +67,24 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
 
     const fighter = warbandmember.model;
     
-    const [stats, setstats] = useState({})
+    const [stats, setstats] = useState<ModelStatistics>({})
     const [upgrades, setupgrades] = useState<MemberUpgradesGrouped>({})
     const [abilities, setabilities] = useState<WarbandProperty[]>([])
     const [statchoices, setStatChoices] = useState<ModelStatistics[][]>([])
     const [allmodelequip, setAllmodelequip] = useState<RealWarbandPurchaseEquipment[]>([])
     const [xpLimit, setXPLimit] = useState<number>(0)
     const [keywordsList, setkeywords] = useState<Keyword[]>([])
-    const [BaseString, setBaseString] = useState('')
     const [modelslug, setmodeslug] = useState(fighter.GetModelSlug())
+    const [keyvar, setkeyvar] = useState(0);
 
+    useEffect(() => {
+        async function SetModelOptions() {
+            setStatChoices(await fighter.GetStatOptions());
+            setstats(await fighter.GetStats())
+            setkeyvar(keyvar + 1);
+        }
+        SetModelOptions();
+    }, [updateKey])
     
     useEffect(() => {
         async function SetModelOptions() {
@@ -90,6 +98,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
             setmodeslug(fighter.GetModelSlug())
             setAllmodelequip(await fighter.GetAllEquipForShow())
             setStatChoices(await fighter.GetStatOptions());
+            setstats(await fighter.GetStats())
             reloadDisplay()
         }
 
@@ -293,23 +302,27 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                     </div>
 
                     {!playMode &&
-                        <div className="fighter-meta-entry-simple">
+                        <div key={keyvar} className="fighter-meta-entry-simple">
                             <span className="fighter-meta-label">
                                 {'Base: '}
                             </span>
                             <span className="fighter-meta-value">
-                                {'32mm'}
+                                {stats.base? stats.base.join('x') + "mm" : "-"}
                             </span>
                         </div>
                     }
 
                 </div>
 
-                <div className={'fighter-card-stats'}>
-                    <ItemStat title={"Movement"} value={'6" / Infantry'}/>
-                    <ItemStat title={"Melee"} value={'+1'}/>
-                    <ItemStat title={"Ranged"} value={'+2'}/>
-                    <ItemStat title={"Armor"} value={'0'}/>
+                <div key={keyvar}  className={'fighter-card-stats'}>
+                    <ItemStat title={"Movement"} value={getModelStatMove(stats)}/>
+                    {stats.melee != undefined &&
+                        <ItemStat title={"Melee"} value={getModelStatMelee(stats)}/>
+                    }
+                    {stats.ranged != undefined &&
+                        <ItemStat title={"Ranged"} value={getModelStatRanged(stats)}/>
+                    }
+                    <ItemStat title={"Armor"} value={getModelStatArmour(stats)}/>
                 </div>
 
                 <div className="fighter-card-meta fighter-card-meta-below">
@@ -704,7 +717,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
 
 
             {/* Abilities */}
-            {(!playMode) &&
+            {(!playMode && abilities.length > 0) &&
                 <div className={'fighter-card-collapse-wrap'}>
                     <WbbFighterCollapse title="Abilities">
                         {abilities.map((ability, index) => (

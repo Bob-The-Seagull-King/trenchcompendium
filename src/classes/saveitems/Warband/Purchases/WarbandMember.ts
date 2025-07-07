@@ -32,7 +32,7 @@ import { containsTag } from "../../../../utility/functions";
 import { Injury } from "../../../feature/ability/Injury";
 import { SkillGroup } from "../../../feature/skillgroup/SkillGroup";
 import { StaticContextObject } from "../../../contextevent/staticcontextobject";
-import { GetStatAsFullString, ModelStatistics } from "../../../feature/model/ModelStats";
+import { GetStatAsFullString, MergeTwoStats, ModelStatistics } from "../../../feature/model/ModelStats";
 
 export interface SkillSuite {
     skillgroup : StaticContextObject,
@@ -1137,7 +1137,33 @@ class WarbandMember extends DynamicContextObject {
     }
 
     public async GetStats() {
-        // TODO Stats
+        const BaseStats = this.CurModel.Stats;
+        let FinStats : ModelStatistics = {};
+
+        if (BaseStats.armour != undefined) {FinStats.armour = BaseStats.armour}
+        if (BaseStats.melee != undefined) {FinStats.melee = BaseStats.melee}
+        if (BaseStats.ranged != undefined) {FinStats.ranged = BaseStats.ranged}
+        if (BaseStats.base != undefined) {FinStats.base = BaseStats.base}
+        if (BaseStats.mercenary != undefined) {FinStats.mercenary = BaseStats.mercenary}
+        if (BaseStats.movement != undefined) {FinStats.movement = BaseStats.movement}
+        if (BaseStats.movetype != undefined) {FinStats.movetype = BaseStats.movetype}
+        if (BaseStats.potential != undefined) {FinStats.potential = BaseStats.potential}
+
+        for (let i = 0; i < this.Stat_Selections.length; i++) {
+            FinStats = MergeTwoStats(FinStats, this.Stat_Selections[i]);
+        }
+        
+        const EventProc : EventRunner = new EventRunner();
+
+        FinStats = await EventProc.runEvent(
+            "updateModelStats",
+            this,
+            [],
+            FinStats,
+            null
+        )
+
+        return FinStats;
     }
 
     public async SetExperience(newval : number) {

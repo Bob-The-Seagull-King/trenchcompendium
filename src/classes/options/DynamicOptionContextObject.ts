@@ -57,6 +57,7 @@ class DynamicOptionContextObject extends DynamicContextObject {
             subpackages.push(static_packages[j])
         }
 
+        console.log(this.Selections);
         for (let i = 0; i < this.Selections.length; i++) {
             if (this.Selections[i].SelectedChoice != null) {
                 const SelNest = this.Selections[i].NestedOption;

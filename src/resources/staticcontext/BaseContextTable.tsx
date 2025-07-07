@@ -1584,6 +1584,31 @@ export const BaseContextCallTable : CallEventTable = {
             return NewChoices
         }
     },
+    new_upgrade: {
+        event_priotity: 0,
+        async parseOptionFilterDown(this: EventRunner, eventSource : any, relayVar : IChoice[], trackVal : number, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            
+            const UpgradeFactoryModule = await import("../../factories/features/UpgradeFactory");
+            const UpgradeModule = await import("../../classes/feature/ability/Upgrade");
+            
+            const NewChoices : IChoice[] = []
+            for (let i = 0; i < relayVar.length; i++) {
+
+                const ModelItem = ((relayVar[i].value instanceof UpgradeModule.Upgrade)? relayVar[i].value :
+                    await UpgradeFactoryModule.UpgradeFactory.CreateUpgrade(relayVar[i].value, null)
+                )
+                relayVar[i].value = ModelItem;
+                relayVar[i].display_str = ModelItem.GetTrueName();
+                NewChoices.push(relayVar[i])
+            }
+
+            NewChoices.sort(function(a, b) {
+                return a.display_str.localeCompare(b.display_str);
+              });
+
+            return NewChoices
+        }
+    },
     model_add_equipment: {
         event_priotity: 0,
         async parseOptionsIntoRelevantType(this: EventRunner, eventSource : any, relayVar : IChoice[],  trackVal : number, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null){
@@ -1910,7 +1935,8 @@ export const BaseContextCallTable : CallEventTable = {
     upgrade_stat: {
         event_priotity: 1,
         async updateModelStats(this: EventRunner, eventSource : any, relayVar : ModelStatistics,   context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
-            
+            console.log(eventSource)
+            console.log("FOUDN")
             for (let i = 0; i < context_func["upgrades"].length; i++) {
                 const contextitem = context_func["upgrades"][i];
 
