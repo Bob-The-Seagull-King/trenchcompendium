@@ -6,8 +6,8 @@ declare global {
     }
 }
 
-const COOKIE_KEY = 'cookieConsent';
-const GA_ID = 'G-YENKW9MDRJ'; // @TODO: Replace with actual GA tag
+const COOKIE_KEY = 'cookie_consent';
+const GA_ID = 'G-YENKW9MDRJ';
 const isProduction = window.location.hostname === 'trench-companion.com';
 
 let initialized = false;
@@ -47,11 +47,18 @@ export const TrackingManager: React.FC = () => {
     useEffect(() => {
         if (!isProduction) return;
 
-        const consent = localStorage.getItem(COOKIE_KEY);
-        if (consent === 'true') {
-            loadGoogleAnalytics();
+        const rawConsent = localStorage.getItem('cookie_consent');
+        if (!rawConsent) return;
+
+        try {
+            const consent = JSON.parse(rawConsent);
+            if (consent.tracking === true) {
+                loadGoogleAnalytics();
+            }
+        } catch (e) {
+            console.error('Invalid cookie consent data:', e);
         }
     }, []);
 
-    return null; // invisible component
+    return null;
 };
