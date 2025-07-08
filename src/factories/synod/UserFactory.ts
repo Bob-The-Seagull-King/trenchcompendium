@@ -79,6 +79,12 @@ class UserFactory {
         const synodcache = SynodDataCache.getInstance();
         
         if (synodcache.userObjectCache[_rule.id]) {
+            const EMERGENCY_OUT = 1000; // If we spend 100 seconds on one user, just give up
+            let count_check = 0;
+            while ((synodcache.CheckCallCache(_rule.id)) && (count_check < EMERGENCY_OUT)) {
+                await delay(100);
+                count_check += 1;
+            }
             return (synodcache.userObjectCache[_rule.id]);
         }
         
@@ -86,6 +92,8 @@ class UserFactory {
         synodcache.userObjectCache[_rule.id] = rule;
         await rule.GenerateWarbands(_rule);
         await rule.BuildFriends(_rule)
+        await rule.BuildRequests(_rule)
+        delete synodcache.callUserDataCache[_rule.id];
         return rule;
     }
 

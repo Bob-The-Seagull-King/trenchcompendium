@@ -29,6 +29,7 @@ class SiteUserPublic {
     Warbands : SumWarband[] = [];
     ProfilePic : SynodProfilePicData;
     Campaigns : number[] = []
+    BuiltRequests: SiteUserPublic[] = [];
     
     public constructor(data: ISiteUserPublic)
     {

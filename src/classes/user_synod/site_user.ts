@@ -58,6 +58,7 @@ class SiteUser {
     Friends : IFriend[] = []
     Requests : IFriend[] = [];
     BuiltFriends : SiteUserPublic[] = [];
+    BuiltRequests : SiteUserPublic[] = [];
     Warbands : SumWarband[] = [];
     ProfilePic : SynodProfilePicData;
     Campaigns : number[] = []
@@ -91,8 +92,6 @@ class SiteUser {
                     }
                 )
             } catch (e) {
-
-                console.log('@TODO: Error if no warbands for user are present');
                 console.log(e);
             }
         }
@@ -104,6 +103,15 @@ class SiteUser {
             const newFriend = await UserFactory.CreatePublicUserByID(data.friends[i].id)
             if (newFriend != null) {
                 this.BuiltFriends.push(newFriend);
+            }
+        }
+    }
+
+    public async BuildRequests(data: ISiteUser) {
+        for (let i = 0; i < data.friend_requests.length; i++) {
+            const newFriend = await UserFactory.CreatePublicUserByID(data.friend_requests[i].id)
+            if (newFriend != null) {
+                this.BuiltRequests.push(newFriend);
             }
         }
     }
@@ -431,7 +439,7 @@ class SiteUser {
      * 'Free Member' if not premium
      */
     public GetUserStatus () {
-        return 'Supporter'
+        return (this.Premium.IsPremium == true)? 'Supporter' : 'Free Member'
     }
 
 }

@@ -4,7 +4,7 @@
  */
 
 
-import React, {useCallback, useEffect, useState} from 'react'
+import React, {useCallback, useEffect, useRef, useState} from 'react'
 import { useParams, useNavigate, useLocation } from 'react-router-dom'
 import { useAuth } from '../../utility/AuthContext'
 import SynodImage from "../../utility/SynodImage";
@@ -34,6 +34,7 @@ const ProfilePage: React.FC = () => {
     const { isLoggedIn, userId, reloadIsLoggedIn } = useAuth()
 
     const { state } = useLocation();
+    const fetchRequestId = useRef(0);
     
     /**
      * Handle Profile picture change
@@ -93,20 +94,33 @@ const ProfilePage: React.FC = () => {
         setLoadingAddFriend(true);
         setIsLoadingFriendslist(true);
 
-        let UserData: SiteUserPublic | SiteUser | null = null;
+        const requestId = ++fetchRequestId.current;
+        if (requestId !== fetchRequestId.current) return;
+        let data: SiteUser | SiteUserPublic | null = null;
 
         if (isLoggedIn && Number(userId) === Number(id)) {
-            UserData = await UserFactory.CreatePrivateUserByID(Number(id));
-            if (UserData == null || UserData == undefined) {
-                UserData = await UserFactory.CreatePublicUserByID(Number(id));                
+            const privateData = await UserFactory.CreatePrivateUserByID(Number(id));
+            if (requestId !== fetchRequestId.current) return; // Abort if a newer request started
+            if (privateData) {
+            console.log("Private user data:", privateData);
+            data = privateData;
             }
-        } else {
-            UserData = await UserFactory.CreatePublicUserByID(Number(id));
         }
 
-        if (UserData != null) {
-            setisOwnProfile(UserData instanceof SiteUser)
-            setUserData(UserData);
+        if (!data) {
+            const publicData = await UserFactory.CreatePublicUserByID(Number(id));
+            console.log(publicData);
+            if (requestId !== fetchRequestId.current) return;
+            if (publicData) {
+            console.log("Public user data:", publicData);
+            data = publicData;
+            }
+        }
+
+        if (requestId === fetchRequestId.current) {
+            console.log("Set User");
+            setUserData(data);
+            setisOwnProfile(data instanceof SiteUser)
             setkeyvar(prev => prev + 1); // Only once, after setting data
         }
 
@@ -117,6 +131,13 @@ const ProfilePage: React.FC = () => {
     useEffect(() => {
         fetchUserData();
     }, [userId, id, state]);
+
+    useEffect(() => {
+        if (isLoggedIn == true) {
+            ++fetchRequestId.current;
+            fetchUserData();
+        }
+    }, [isLoggedIn]);
 
     /** Is current profile user friend of current user */
     const [isFriend, setIsFriend] = useState<boolean | null>(null);

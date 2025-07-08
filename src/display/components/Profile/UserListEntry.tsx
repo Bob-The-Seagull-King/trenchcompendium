@@ -17,12 +17,11 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {OverlayTrigger, Popover} from "react-bootstrap";
+import { SiteUserPublic } from '../../../classes/user_synod/user_public';
+import { SiteUserSearchResult } from './ProfilePageFriends';
 
 interface UserListEntryProps {
-    id: number
-    username: string
-    status: string
-    pfp_url: string
+    friend_obj: SiteUserPublic | SiteUserSearchResult
     is_request?: boolean
     onAccept?: (userId: number) => void;
     onDecline?: (userId: number) => void;
@@ -33,10 +32,7 @@ interface UserListEntryProps {
     onRemoveFriend?: (userId: number) => void;
 }
 
-const UserListEntry: React.FC<UserListEntryProps> = ({ id,
-                                                         username,
-                                                         status,
-                                                         pfp_url,
+const UserListEntry: React.FC<UserListEntryProps> = ({ friend_obj,
                                                          is_request,
                                                          onAccept,
                                                          onDecline,
@@ -89,32 +85,49 @@ const UserListEntry: React.FC<UserListEntryProps> = ({ id,
         onRemoveFriend?.(id)
     };
 
+    // Set values
+    let ID = 0;
+    let Profile_Url = "";
+    let Name = "";
+    let Status = "";
+
+    if (friend_obj instanceof SiteUserPublic) {
+        ID = friend_obj.ID;
+        Profile_Url = friend_obj.ProfilePic.urls["medium"];
+        Name = friend_obj.GetNickname();
+        Status = friend_obj.GetUserStatus();
+    } else {
+        ID = friend_obj.id;
+        Profile_Url = friend_obj.profile_picture_url;
+        Name = friend_obj.nickname;
+        Status = friend_obj.status;
+    }
 
     return (
         <div className="UserListEntry">
             <CustomNavLink
                 classes={'UserListEntry-image-wrap'}
-                link={`/profile/${id}`}
+                link={`/profile/${ID}`}
                 runfunc={() => {
-                    navigate(`/profile/${id}`, {state: Date.now().toString()})
+                    navigate(`/profile/${ID}`, {state: Date.now().toString()})
                 }}>
 
-                <img className={'UserListEntry-image'} src={pfp_url} />
+                <img className={'UserListEntry-image'} src={Profile_Url} />
 
             </CustomNavLink>
 
             <div className={'UserListEntry-text'}>
                 <CustomNavLink
                     classes={'user-name'}
-                    link={`/profile/${id}`}
+                    link={`/profile/${ID}`}
                     runfunc={() => {
-                        navigate(`/profile/${id}`, {state: Date.now().toString()})
+                        navigate(`/profile/${ID}`, {state: Date.now().toString()})
                     }}>
-                    {username}
+                    {Name}
                 </CustomNavLink>
 
                 <div className={'user-status'}>
-                    {status}
+                    {Status}
                 </div>
 
                 { (!is_request && !is_search) &&
@@ -129,7 +142,7 @@ const UserListEntry: React.FC<UserListEntryProps> = ({ id,
                                 <div className={'actions'}>
                                     <div
                                         className={'action action-delete'}
-                                        onClick={() => handleRemoveClick(id)}
+                                        onClick={() => handleRemoveClick(ID)}
                                     >
                                         <FontAwesomeIcon icon={faTrash} className="icon-inline-left-l"/>
                                         {'Remove Friend'}
@@ -153,7 +166,7 @@ const UserListEntry: React.FC<UserListEntryProps> = ({ id,
                                 {'Accepting'}
                             </div>
                         ):(
-                            <div className={'btn btn-primary btn-sm'} onClick={() => handleAccept(id)}>
+                            <div className={'btn btn-primary btn-sm'} onClick={() => handleAccept(ID)}>
                                 <FontAwesomeIcon icon={faCheck} className={'icon-inline-left-s'}/>
                                 {'Accept'}
                             </div>
@@ -165,7 +178,7 @@ const UserListEntry: React.FC<UserListEntryProps> = ({ id,
                                 {'Declining'}
                             </div>
                         ) : (
-                            <div className={'btn btn-secondary btn-sm'} onClick={() => handleDecline(id)}>
+                            <div className={'btn btn-secondary btn-sm'} onClick={() => handleDecline(ID)}>
                                 <FontAwesomeIcon icon={faTimes} className={'icon-inline-left-s'}/>
                                 {'Decline'}
                             </div>

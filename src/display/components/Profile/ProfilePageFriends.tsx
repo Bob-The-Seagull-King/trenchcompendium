@@ -23,7 +23,7 @@ interface ProfilePageFriendsProps {
 }
 
 // For search results in the find friends modal
-interface SiteUserSearchResult {
+export interface SiteUserSearchResult {
     id: number;
     nickname: string;
     profile_picture_url: string;
@@ -65,8 +65,8 @@ const ProfilePageFriends: React.FC<ProfilePageFriendsProps> = ({
         )
     }
 
-    const friends = userData.Friends;
-    const friendRequests = isSiteUser(userData) ? userData.Requests : [];
+    const friends = userData.BuiltFriends;
+    const friendRequests = isSiteUser(userData) ? userData.BuiltRequests : [];
 
     /**
      * Accept a friend request
@@ -189,12 +189,9 @@ const ProfilePageFriends: React.FC<ProfilePageFriendsProps> = ({
 
                             <ul className={'friends-list friends-list_requests'}>
                                 {friendRequests.map((friend) => (
-                                    <li key={friend.id} className={'friend'}>
+                                    <li key={friend.ID} className={'friend'}>
                                         <UserListEntry
-                                            id={friend.id}
-                                            username={friend.nickname}
-                                            status={friend.status} // @TODO: use actual supporter status here
-                                            pfp_url={friend.profile_picture_url}
+                                            friend_obj={friend}
                                             is_request={true}
                                             onAccept={handleAccept}
                                             onDecline={handleDecline}
@@ -212,12 +209,9 @@ const ProfilePageFriends: React.FC<ProfilePageFriendsProps> = ({
                         <ul className={'friends-list'}>
 
                             {friends.map((friend) => (
-                                <li key={friend.id} className={'friend'}>
+                                <li key={friend.ID} className={'friend'}>
                                     <UserListEntry
-                                        id={friend.id}
-                                        username={friend.nickname}
-                                        status={friend.status}  // @TODO: use actual supporter status here
-                                        pfp_url={friend.profile_picture_url}
+                                        friend_obj={friend}
                                         onRemoveFriend={handleRemoveFriend}
                                     />
                                 </li>
@@ -279,10 +273,7 @@ const ProfilePageFriends: React.FC<ProfilePageFriendsProps> = ({
                             {searchResults.map(user => (
                                 <li key={user.id} className={'friend'}>
                                     <UserListEntry
-                                        id={user.id}
-                                        username={user.nickname}
-                                        status={user.status}  // @TODO: use actual supporter status here
-                                        pfp_url={user.profile_picture_url}
+                                        friend_obj={user}
                                         is_search={true}
                                         request_sent={user.request_sent}
                                         is_friend={user.is_friend}
