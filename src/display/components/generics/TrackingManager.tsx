@@ -59,7 +59,11 @@ export const TrackingManager: React.FC = () => {
 
     // Track page views on every route change
     useEffect(() => {
-        if (!isProduction || !window.gtag) return;
+        if (!isProduction) return;
+
+        if (typeof window.gtag !== 'function') {
+            return; // tracking manager not yet loaded
+        }
 
         window.gtag('event', 'page_view', {
             page_path: location.pathname + location.search,
