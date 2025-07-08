@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import {useLocation} from "react-router-dom";
 
 declare global {
     interface Window {
@@ -13,7 +14,7 @@ const isProduction = window.location.hostname === 'trench-companion.com';
 let initialized = false;
 
 export const loadGoogleAnalytics = () => {
-    if (initialized || !isProduction) return;
+    if (initialized) return;
     initialized = true;
 
     const script1 = document.createElement('script');
@@ -32,8 +33,6 @@ export const loadGoogleAnalytics = () => {
 };
 
 export const trackEvent = (action: string, category: string, label?: string, value?: number) => {
-    if (!isProduction) return;
-
     if (typeof window.gtag === 'function') {
         window.gtag('event', action, {
             event_category: category,
@@ -44,21 +43,29 @@ export const trackEvent = (action: string, category: string, label?: string, val
 };
 
 export const TrackingManager: React.FC = () => {
+    const location = useLocation();
+
+    // Load GA on first load if consent is given
     useEffect(() => {
         if (!isProduction) return;
 
-        const rawConsent = localStorage.getItem('cookie_consent');
-        if (!rawConsent) return;
+        const consentRaw = localStorage.getItem(COOKIE_KEY);
+        const consent = consentRaw ? JSON.parse(consentRaw) : null;
 
-        try {
-            const consent = JSON.parse(rawConsent);
-            if (consent.tracking === true) {
-                loadGoogleAnalytics();
-            }
-        } catch (e) {
-            console.error('Invalid cookie consent data:', e);
+        if (consent?.tracking === true) {
+            loadGoogleAnalytics();
         }
     }, []);
 
-    return null;
+    // Track page views on every route change
+    useEffect(() => {
+        if (!isProduction || !window.gtag) return;
+
+        window.gtag('event', 'page_view', {
+            page_path: location.pathname + location.search,
+            page_title: document.title,
+        });
+    }, [location]);
+
+    return null; // invisible component
 };
