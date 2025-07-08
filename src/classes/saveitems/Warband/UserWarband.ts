@@ -475,6 +475,10 @@ class UserWarband extends DynamicContextObject {
         }
     }
 
+    public async DeleteLocation( loc : WarbandProperty ) {
+        await this.Exploration.DeleteLocation(loc)
+    }
+
     public async DeleteFighterWithDebt( fighter : RealWarbandPurchaseModel, debt_mod : number) {
         const CostVarDucats = fighter.purchase.GetTotalDucats();
         const CostVarGlory = fighter.purchase.GetTotalGlory();

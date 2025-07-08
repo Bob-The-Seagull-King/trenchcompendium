@@ -136,13 +136,15 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
 
     const showConfirmDeleteExploration = () => {
         setshowConfirmDeleteExplorationModal(true);
-        console.log('showConfirmDeleteExploration');
     }
     const handleDeleteExploration = () => {
         setshowConfirmDeleteExplorationModal(false);
 
-        // @TODO: Delete Exploration from Warband
-        console.log('handleDeleteExploration');
+        warband?.warband_data.DeleteLocation(item).then(() => {
+            const Manager : ToolsController = ToolsController.getInstance();
+            Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
+                () => reloadDisplay())
+        })
     }
 
     /** Equipment Actions */

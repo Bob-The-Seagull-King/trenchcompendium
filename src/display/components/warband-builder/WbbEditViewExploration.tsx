@@ -56,6 +56,7 @@ const WbbEditViewExploration: React.FC<WbbEditViewExplorationProps> = ({  locati
 
         </div>
     );
+
 };
 
 export default WbbEditViewExploration;
