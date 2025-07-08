@@ -696,6 +696,13 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                                 <div className={'fighter-status'}>
                                     <div className={'fighter-status-string'}>
                                         {fighter.IsElite()? "Elite" : "Troop"}
+
+                                        {fighter.HasLimitedPotential() &&
+                                            <small>
+                                                <br/>
+                                                {'limited potential'}
+                                            </small>
+                                        }
                                     </div>
                                     {canchange &&
                                         <div className={'btn btn-primary'} onClick={() => handleRankUpdate()}>
@@ -703,6 +710,12 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                                             {fighter.IsElite()? "Demote" : "Promote"}
                                         </div>
                                     }
+
+                                    {!canchange && (
+                                        <small>
+                                            {'Cannot be promoted'}
+                                        </small>
+                                    )}
                                 </div>
                             </>
                         }

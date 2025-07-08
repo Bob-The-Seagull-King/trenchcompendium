@@ -458,6 +458,15 @@ class WarbandMember extends DynamicContextObject {
         return this.Elite;
     }
 
+    /**
+     * Does this fighter have limited potential?
+     * @TODO: Hook up data
+     * @return: boolean
+     */
+    public HasLimitedPotential () {
+        return true;
+    }
+
     public GetEquipment() {
         
         const options : RealWarbandPurchaseEquipment[] = [ ];
