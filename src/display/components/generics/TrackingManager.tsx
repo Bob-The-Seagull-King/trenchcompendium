@@ -8,11 +8,12 @@ declare global {
 
 const COOKIE_KEY = 'cookieConsent';
 const GA_ID = 'G-YENKW9MDRJ'; // @TODO: Replace with actual GA tag
+const isProduction = window.location.hostname === 'trench-companion.com';
 
 let initialized = false;
 
 export const loadGoogleAnalytics = () => {
-    if (initialized) return;
+    if (initialized || !isProduction) return;
     initialized = true;
 
     const script1 = document.createElement('script');
@@ -31,6 +32,8 @@ export const loadGoogleAnalytics = () => {
 };
 
 export const trackEvent = (action: string, category: string, label?: string, value?: number) => {
+    if (!isProduction) return;
+
     if (typeof window.gtag === 'function') {
         window.gtag('event', action, {
             event_category: category,
@@ -42,6 +45,8 @@ export const trackEvent = (action: string, category: string, label?: string, val
 
 export const TrackingManager: React.FC = () => {
     useEffect(() => {
+        if (!isProduction) return;
+
         const consent = localStorage.getItem(COOKIE_KEY);
         if (consent === 'true') {
             loadGoogleAnalytics();
