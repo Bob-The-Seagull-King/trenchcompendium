@@ -1258,7 +1258,15 @@ class WarbandMember extends DynamicContextObject {
         
         for (let i = 0; i < BaseFactionOptions.length; i++) {
 
-            let CanAdd = await this.EquipItemAvailableSpace(BaseFactionOptions[i], CurrentHandsAvailable)
+            let CanAdd = (BaseFactionOptions[i].EquipmentItem.Category != "equipment") 
+
+            if (!CanAdd) {
+                CanAdd = !(await this.HasSpecificEquipment(BaseFactionOptions[i].EquipmentItem.GetID()))
+            }
+
+            if (CanAdd) {
+                CanAdd = await this.EquipItemAvailableSpace(BaseFactionOptions[i], CurrentHandsAvailable)
+            }
 
             if (CanAdd) {
                 CanAdd = await this.EquipItemCanAdd(BaseFactionOptions[i], RestrictionList)
@@ -1270,6 +1278,17 @@ class WarbandMember extends DynamicContextObject {
         }
 
         return ListOfOptions;
+    }
+
+    public async HasSpecificEquipment(givenID : string) {        
+        const MyEquip = await this.GetAllEquipForShow();
+        for (let i = 0; i < MyEquip.length; i++) {
+            const EquipItem = MyEquip[i].equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment;
+            if (EquipItem.GetID() == givenID) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public async EquipItemCanAdd(faceq : FactionEquipmentRelationship, restriction_list : EquipmentRestriction[]) {
@@ -1363,12 +1382,40 @@ class WarbandMember extends DynamicContextObject {
                 model: this
             }
         ) 
+
+        
+        const MeleeShield = await this.IncludesShieldComboMelee();
+        const RangedShield = await this.IncludesShieldComboRanged();
+        const HasShield = await this.HasShield();
         
         const IgnoreStrong = (await this.HasTwoHandedMeleeWeapon())
+        const IsStrong = await this.IsKeywordPresent("kw_strong");
 
-        if (!IgnoreStrong) {
+        if (!IgnoreStrong && IsStrong) {
             if (EquipHands.melee == 2) {
                 EquipHands.melee = 1;
+            }
+        }
+
+        if (MeleeShield && containsTag(faceq.EquipmentItem.Tags, "shield")) {
+            if (EquipHands.melee > 0) {
+                EquipHands.melee -= 1;
+            }
+        }
+        if (RangedShield && containsTag(faceq.EquipmentItem.Tags, "shield")) {
+            if (EquipHands.ranged > 0) {
+                EquipHands.ranged -= 1;
+            }
+        }
+
+        if (HasShield) {
+            if (faceq.EquipmentItem.GetKeyWordIDs().includes("kw_shieldcombo")) {
+                if (EquipHands.melee > 0) {
+                    EquipHands.melee -= 1;
+                }
+                if (EquipHands.ranged > 0) {
+                    EquipHands.ranged -= 1;
+                }
             }
         }
 
@@ -1386,6 +1433,28 @@ class WarbandMember extends DynamicContextObject {
             return false;
         }
         return true;
+    }
+
+    public async IncludesShieldComboRanged() {
+        const MyEquip = await this.GetAllEquipForShow();
+        for (let i = 0; i < MyEquip.length; i++) {
+            const EquipItem = MyEquip[i].equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment;
+            if (EquipItem.GetKeyWordIDs().includes("kw_shieldcombo") && EquipItem.Category == "ranged") {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public async IncludesShieldComboMelee() {
+        const MyEquip = await this.GetAllEquipForShow();
+        for (let i = 0; i < MyEquip.length; i++) {
+            const EquipItem = MyEquip[i].equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment;
+            if (EquipItem.GetKeyWordIDs().includes("kw_shieldcombo") && EquipItem.Category == "melee") {
+                return true;
+            }
+        }
+        return false;
     }
 
     public async GetModelHands() {
@@ -1406,6 +1475,8 @@ class WarbandMember extends DynamicContextObject {
         )
 
         let IsStrong = await this.IsKeywordPresent("kw_strong");
+        const MeleeShield = await this.IncludesShieldComboMelee();
+        const RangedShield = await this.IncludesShieldComboRanged();
 
         const MyEquip = await this.GetAllEquipForShow();
         for (let i = 0; i < MyEquip.length; i++) {
@@ -1416,6 +1487,9 @@ class WarbandMember extends DynamicContextObject {
                     meleeval = 1;
                     IsStrong = false;
                 }
+                if (containsTag(EquipItem.Tags, "shield") && MeleeShield) {
+                    meleeval = 0;
+                }
                 if (BaseHands["melee"] == 0) {
                     BaseHands["special"] -= meleeval
                 } else {
@@ -1423,10 +1497,18 @@ class WarbandMember extends DynamicContextObject {
                 }
             }
             if (EquipItem.Stats["hands_ranged"]) {
+                let rangedval = EquipItem.Stats["hands_ranged"];
+                if (IsStrong && rangedval == 2) {
+                    rangedval = 1;
+                    IsStrong = false;
+                }
+                if (containsTag(EquipItem.Tags, "shield") && RangedShield) {
+                    rangedval = 0;
+                }
                 if (BaseHands["ranged"] == 0) {
-                    BaseHands["special"] -= EquipItem.Stats["hands_ranged"]
+                    BaseHands["special"] -= rangedval
                 } else {
-                    BaseHands["ranged"] -= EquipItem.Stats["hands_ranged"]
+                    BaseHands["ranged"] -= rangedval
                 }
             }
         }
@@ -1442,6 +1524,18 @@ class WarbandMember extends DynamicContextObject {
                 if (meleeval == 2) {
                     return true;
                 }
+            }
+        }
+        return false;
+
+    }
+
+    public async HasShield() {
+        const MyEquip = await this.GetAllEquipForShow();
+        for (let i = 0; i < MyEquip.length; i++) {
+            const EquipItem = MyEquip[i].equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment;
+            if (containsTag(EquipItem.Tags, "shield")) {
+                return true;
             }
         }
         return false;
