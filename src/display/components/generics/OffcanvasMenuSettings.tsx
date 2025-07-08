@@ -37,7 +37,7 @@ const OffcanvasMenuSettings: React.FC = () => {
     };
 
 
-    const applyCurse = applycurse === 'true';
+    const applyCurse = applycurse === 'false';
     const handleApplyCurse = () => {
         const newCurse = applycurse === 'true' ? 'false' : 'true';
         localStorage.setItem('applycurse', newCurse);
@@ -46,7 +46,6 @@ const OffcanvasMenuSettings: React.FC = () => {
 
     return (
         <ErrorBoundary fallback={<div>Something went wrong with RulesMenuSettings.tsx</div>}>
-
             <div className={'OffcanvasMenuSettings'}>
                 <div className={'OffcanvasMenuSettings-title'} onClick={() => {
                     setOpen(!open)
@@ -62,6 +61,7 @@ const OffcanvasMenuSettings: React.FC = () => {
                     <div className={'OffcanvasMenuSettings-content'}>
                         <div className={'spacer-20'}></div>
 
+                        {/* Toggle Color Theme */}
                         <div className="form-check form-switch">
                             <input className="form-check-input"
                                    type="checkbox"
@@ -73,6 +73,7 @@ const OffcanvasMenuSettings: React.FC = () => {
                             <label className="form-check-label" htmlFor="theme-switch">{'Dark Mode'}</label>
                         </div>
 
+                        {/* Toggle Show Lore */}
                         <div className="form-check form-switch">
                             <input className="form-check-input"
                                    type="checkbox"
@@ -84,16 +85,17 @@ const OffcanvasMenuSettings: React.FC = () => {
                             <label className="form-check-label" htmlFor="lore-switch">{'Show Lore'}</label>
                         </div>
 
-                        <div className="form-check form-switch">
-                            <input className="form-check-input"
-                                   type="checkbox"
-                                   role="switch"
-                                   id="curse-switch"
-                                   checked={applycurse === 'true'}
-                                   onChange={handleApplyCurse}
-                            />
-                            <label className="form-check-label" htmlFor="curse-switch">{'Apply Curse'}</label>
-                        </div>
+                        {/* Toggle Cursed UI - WIP */}
+                        {/*<div className="form-check form-switch">*/}
+                        {/*    <input className="form-check-input"*/}
+                        {/*           type="checkbox"*/}
+                        {/*           role="switch"*/}
+                        {/*           id="curse-switch"*/}
+                        {/*           checked={applycurse === 'true'}*/}
+                        {/*           onChange={handleApplyCurse}*/}
+                        {/*    />*/}
+                        {/*    <label className="form-check-label" htmlFor="curse-switch">{'Apply Curse'}</label>*/}
+                        {/*</div>*/}
 
                         {/*<div className="form-check form-switch">*/}
                         {/*    <input className="form-check-input"*/}
