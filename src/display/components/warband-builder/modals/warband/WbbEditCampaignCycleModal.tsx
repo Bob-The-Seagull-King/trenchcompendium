@@ -85,7 +85,7 @@ const WbbEditCampaignCycleModal: React.FC<WbbEditCampaignCycleProps> = ({
                             {'Currently Viewing: '}
                         </strong>
 
-                        {'Cycle ' + currentCampaignCycle}
+                        {'Round ' + currentCampaignCycle}
                     </div>
 
                     <div className="cycle-selection-wrap">
@@ -95,13 +95,13 @@ const WbbEditCampaignCycleModal: React.FC<WbbEditCampaignCycleProps> = ({
                                 className={`select-item ${selectedCycle === cycle ? 'selected' : ''}`}
                                 onClick={() => setSelectedCycle(cycle)}
                             >
-                                {`Cycle ${cycle}`}
+                                {`Round ${cycle}`}
 
                                 {(selectedCycle === cycle) &&
                                     <FontAwesomeIcon icon={faCheck} className=""/>
                                 }
 
-                                { (cycleMax == cycle ) ? (
+                                { /*(cycleMax == cycle ) ? (
                                     <>
                                         <FontAwesomeIcon icon={faLockOpen} className="icon-inline-right"/>
                                     </>
@@ -109,11 +109,11 @@ const WbbEditCampaignCycleModal: React.FC<WbbEditCampaignCycleProps> = ({
                                     <>
                                         <FontAwesomeIcon icon={faLock} className="icon-inline-right"/>
                                     </>
-                                )}
+                                )*/}
                             </div>
                         ))}
 
-                        <div className={'select-item select-item-advance'}
+                        {/*<div className={'select-item select-item-advance'}
                              onClick={() => {
                                  setshowCycleModal1(false);
                                  setshowCycleModal2(true);
@@ -122,7 +122,7 @@ const WbbEditCampaignCycleModal: React.FC<WbbEditCampaignCycleProps> = ({
                             {'Advance to Cycle ' + (cycleMax + 1)}
 
                             <FontAwesomeIcon icon={faChevronRight} className=""/>
-                        </div>
+                        </div>*/}
                     </div>
                 </Modal.Body>
 

@@ -25,8 +25,12 @@ const WbbCampaignDetailView: React.FC<WbbCampaignDetailViewProps> = ({ onClose }
     const [keyvar, setKeyvar] = useState(0);
     const handleVictoryPointsUpdate = ( newVP: number ) => {
         setVictoryPoints(newVP)
-        // @TODO: Update Victory Points
-        console.log('@TODO: Set new VP value ' + newVP);
+        warband?.warband_data.SetVP(newVP);
+        const Manager : ToolsController = ToolsController.getInstance();
+        Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(() => {
+        setPatron(warband? warband?.warband_data.GetPatron() : null)
+        reloadDisplay()
+        setKeyvar(keyvar + 1)})
     }
 
     /** Patron */
@@ -52,9 +56,12 @@ const WbbCampaignDetailView: React.FC<WbbCampaignDetailViewProps> = ({ onClose }
 
         setCampaignCycle(newCycle)
         setCampaignCycleMax(newCycleMax)
-
-        // @TODO: Campaign Cycle
-        console.log('@TODO: Set new Campaign Cylce current: ' + newCycle + ' & new Max Cycle: ' + newCycleMax);
+        warband?.warband_data.SetCurrentCycle(newCycle);
+        const Manager : ToolsController = ToolsController.getInstance();
+        Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(() => {
+        setPatron(warband? warband?.warband_data.GetPatron() : null)
+        reloadDisplay()
+        setKeyvar(keyvar + 1)})
     }
 
 
@@ -77,7 +84,7 @@ const WbbCampaignDetailView: React.FC<WbbCampaignDetailViewProps> = ({ onClose }
 
                 <div className={'detail-section-text-element'}>
                     <strong>
-                        {'Campaign Cycle: '}
+                        {'Campaign Round: '}
                     </strong>
                     {warband.warband_data.GetCampaignCycleView()}
                     {' / '}
@@ -86,7 +93,7 @@ const WbbCampaignDetailView: React.FC<WbbCampaignDetailViewProps> = ({ onClose }
 
                 <div className={'detail-section-text-element'}>
                     <strong>
-                        {'Treshold Value: '}
+                        {'Threshold Value: '}
                     </strong>
                     {warband.warband_data.GetCampaignTresholdValue()}
                 </div>
@@ -129,7 +136,7 @@ const WbbCampaignDetailView: React.FC<WbbCampaignDetailViewProps> = ({ onClose }
 
                 {/* Campaign Cycle */}
                 <WbbOptionBox
-                    title={'Campaign Cycle'}
+                    title={'Campaign Round'}
                     value={campaignCycle + ' / '+campaignCycleMax}
                     onClick={() => setshowCampaignCycleModal(true)}
                 />
@@ -147,10 +154,14 @@ const WbbCampaignDetailView: React.FC<WbbCampaignDetailViewProps> = ({ onClose }
                 <WbbTextarea
                     initialText={warband.warband_data.GetCampaignNotes()}
                     title="Campaign Notes"
-                    onSave={(newText) => {
-                        // @TODO Save the newText as campaign Notes
-                        console.log('@TODO Save the newText as campaign Notes', newText);
-                    }}
+                    onSave={(newText : string) => {
+                            warband?.warband_data.SaveNote(newText, 'campaign')
+                            
+                
+                            const Manager : ToolsController = ToolsController.getInstance();
+                            Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
+                                () => reloadDisplay())
+                        }}
                 />
 
 

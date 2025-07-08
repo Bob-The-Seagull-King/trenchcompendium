@@ -49,11 +49,7 @@ const WbbCreateNewDetailsForm: React.FC<{
     const [isLoading, setisLoading] = useState(false)
 
     async function handleSubmit() {
-        const msg : null | SumWarband = await manager.NewItem(warbandName, chosenfaction.ID, {
-            id : "null",
-            value_ducat: warbandStartingDucats,
-            value_glory: warbandStartingGlory
-        })
+        const msg : null | SumWarband = await manager.NewItem(warbandName, chosenfaction.ID, warbandStartingDucats, warbandStartingGlory)
 
         if (msg == null) {
             alert("Warband creation was unsuccessful");

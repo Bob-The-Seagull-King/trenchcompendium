@@ -4,13 +4,13 @@ import { INote } from '../../../Note';
 
 interface IWarbandContextItem {
     id : string,
-    value_ducat: number,
-    value_glory: number
+    victory_points: number,
+    campaign_round: number
 }
 
 class WarbandContextItem {
-    public ValueDucat;
-    public ValueGlory;
+    public VictoryPoints;
+    public CampaignRound;
     public ID;
 
     /**
@@ -21,15 +21,15 @@ class WarbandContextItem {
     public constructor(data: IWarbandContextItem)
     {
         this.ID = data.id;
-        this.ValueDucat = data.value_ducat;
-        this.ValueGlory = data.value_glory;
+        this.VictoryPoints = data.victory_points;
+        this.CampaignRound = data.campaign_round;
     }
 
     public ConvertToInterface() {
         const _objint : IWarbandContextItem = {
             id : this.ID,
-            value_ducat: this.ValueDucat,
-            value_glory: this.ValueGlory
+            victory_points: this.VictoryPoints,
+            campaign_round: this.CampaignRound
         }
         
         return _objint;

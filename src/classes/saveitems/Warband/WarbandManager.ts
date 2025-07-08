@@ -221,7 +221,7 @@ class WarbandManager {
     /**
      * Builds a new item and saves it to the browser
      */
-    public async NewItem(_title : string, fact_id : string, self_context: IWarbandContextItem) {
+    public async NewItem(_title : string, fact_id : string, ducats : number, glory : number) {
 
         if (_title.trim().length <= 0) {
             return null;
@@ -233,13 +233,13 @@ class WarbandManager {
             name: _title,
             source: 'user_warband',
             tags: {},
-            ducat_bank: self_context.value_ducat,
-            glory_bank: self_context.value_glory,
+            ducat_bank: ducats,
+            glory_bank: glory,
             notes: [],
             context: {
                 id: this.CalcID(_title.trim() + "_context"),
-                value_ducat: self_context.value_ducat,
-                value_glory: self_context.value_glory
+                victory_points: 0,
+                campaign_round: 1
             },
             exploration: {
                 explorationskills: [

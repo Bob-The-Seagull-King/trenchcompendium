@@ -54,6 +54,9 @@ class UserWarband extends DynamicContextObject {
     public Debts : WarbandDebt;
     public Modifiers : WarbandProperty[] = [];
 
+    public DucatLimit : number[] = [700,800,900,1000,1100,1200,1300,1400,1500,1600,1700,1800];
+    public ModelLimit : number[] = [10,11,12,13,14,15,16,17,18,19,20,22];
+
     /**
      * Assigns parameters and creates a series of description
      * objects with DescriptionFactory
@@ -621,7 +624,11 @@ class UserWarband extends DynamicContextObject {
      * - uses VP for the currently active cylce
      */
     GetVictoryPoints() {
-        return 12;
+        return this.Context.VictoryPoints;
+    }
+
+    SetVP(num : number) {
+        this.Context.VictoryPoints = num;
     }
 
     /**
@@ -630,7 +637,11 @@ class UserWarband extends DynamicContextObject {
      - This is the campaign cycle that is currently selected for the WBB view
      */
     GetCampaignCycleView() {
-        return 2;
+        return this.Context.CampaignRound;
+    }
+
+    SetCurrentCycle(num : number) {
+        this.Context.CampaignRound = num;
     }
 
     /**
@@ -640,7 +651,7 @@ class UserWarband extends DynamicContextObject {
      * @constructor
      */
     GetCampaignCycleMax() {
-        return 3;
+        return 12;
     }
 
     /**
@@ -648,15 +659,13 @@ class UserWarband extends DynamicContextObject {
      * @constructor
      */
     GetCampaignTresholdValue () {
-        const thresholds = [700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800]; // thresholds per cycle
 
-        return thresholds[this.GetCampaignCycleView() - 1] ?? thresholds[thresholds.length - 1];
+        return this.DucatLimit[this.GetCampaignCycleView() - 1] ?? this.DucatLimit[this.DucatLimit.length - 1];
     }
 
     GetCampaignMaxFieldStrength () {
-        const maxFieldStrengths = [10,11,12,13,14,15,16,17,18,19,20,21,22]; // Max field strength per cycle
 
-        return maxFieldStrengths[this.GetCampaignCycleView() - 1] ?? maxFieldStrengths[maxFieldStrengths.length - 1];
+        return this.ModelLimit[this.GetCampaignCycleView() - 1] ?? this.ModelLimit[this.ModelLimit.length - 1];
     }
 
 
