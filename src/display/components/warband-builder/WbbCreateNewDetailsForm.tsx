@@ -15,13 +15,17 @@ const WbbCreateNewDetailsForm: React.FC<{
     const navigate = useNavigate();
 
     const [warbandName, setWarbandName] = useState('');
+    const [warbandStartingDucats, setWarbandStartingDucats] = useState(700);
+    const [warbandStartingGlory, setWarbandStartingGlory] = useState(0);
+
+
     const [isLoading, setisLoading] = useState(false)
 
     async function handleSubmit() {
         const msg : null | SumWarband = await manager.NewItem(warbandName, chosenfaction.ID, {
             id : "null",
-            value_ducat: 0,
-            value_glory: 0
+            value_ducat: 0, // @TODO: use warbandStartingDucats
+            value_glory: 0 // @TODO: use warbandStartingGlory
         })
 
         if (msg == null) {
@@ -40,35 +44,57 @@ const WbbCreateNewDetailsForm: React.FC<{
                               e.preventDefault();
                               setisLoading(true);
 
-                              if( !isLoading ) {
+                              if (!isLoading) {
                                   handleSubmit();
                               }
                           }}
                     >
                         <h2 className={'mb-3'}>{chosenfaction.Name}</h2>
-                        <label className="form-label">Warband Name</label>
-                        <input
-                            className="form-control mb-3" type={"text"}
-                            value={warbandName}
-                            onChange={(e) => setWarbandName(e.target.value)}
-                            placeholder={'Your awesome warband name'}
-                        />
 
-                        <p><small>
-                            {'You can change the name of your warband at any time.'}
-                        </small>
-                        </p>
+                        <div className={'mb-3'}>
+                            <label className="form-label">Warband Name</label>
+                            <input
+                                className="form-control" type={"text"}
+                                value={warbandName}
+                                onChange={(e) => setWarbandName(e.target.value)}
+                                placeholder={'Your awesome warband name'}
+                            />
+                            <div className="form-text">
+                                {'You can change the name of your warband at any time.'}
+                            </div>
+                        </div>
+
+                        <div className={'mb-3'}>
+                            <label className="form-label">Starting Ducats</label>
+                            <input
+                                className="form-control form-control-sm" type={"number"}
+                                value={warbandStartingDucats}
+                                onChange={(e) => setWarbandStartingDucats(parseInt(e.target.value))}
+                                placeholder={'Unlimited'}
+                            />
+                        </div>
+
+                        <div className={'mb-3'}>
+                            <label className="form-label">Starting Glory</label>
+                            <input
+                                className="form-control form-control-sm" type={"number"}
+                                value={warbandStartingGlory}
+                                onChange={(e) => setWarbandStartingGlory(parseInt(e.target.value))}
+                                placeholder={'Unlimited'}
+                            />
+                        </div>
+
 
                         <button
-                                className="btn btn-primary"
-                                disabled={warbandName.trim() === '' || isLoading }
+                            className="btn btn-primary"
+                            disabled={warbandName.trim() === '' || isLoading}
                         >
-                            { isLoading ? (
+                            {isLoading ? (
                                 <>
                                     <FontAwesomeIcon icon={faCircleNotch} className={'icon-inline-left-l fa-spin'}/>
                                     {'Creating Warband'}
                                 </>
-                            ):(
+                            ) : (
                                 <>
                                     <FontAwesomeIcon icon={faPlus} className={'icon-inline-left-l'}/>
                                     {'Create Warband'}
@@ -80,7 +106,7 @@ const WbbCreateNewDetailsForm: React.FC<{
                 </div>
 
                 <div className={'col-12 col-xl-7'}>
-                    <div className={'faction-image-wrap'}>
+                <div className={'faction-image-wrap'}>
 
                     <SynodFactionImage
                             factionSlug={chosenfaction.ID}
