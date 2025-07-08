@@ -110,13 +110,13 @@ const App: React.FC = () => {
                             </Routes>
 
                             <FooterMain />
+
+                            <TrackingManager />
                         </Router>
                     </PersistGate>
                 </Provider>
 
                 <PrivacyPopup />
-
-                <TrackingManager />
             </AuthProvider>
         </>
     )
