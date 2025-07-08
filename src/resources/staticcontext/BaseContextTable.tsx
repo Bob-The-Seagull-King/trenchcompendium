@@ -1881,6 +1881,26 @@ export const BaseContextCallTable : CallEventTable = {
             return relayVar;
         }
     },
+    get_warband_ducats: {
+        event_priotity: 0,
+        async getStartingDucats(this: EventRunner, eventSource : any, relayVar : number, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null){
+            if (context_func["mod"]) {
+                return relayVar + context_func["mod"]
+            }
+            
+            return relayVar;
+        }
+    },
+    get_warband_glory: {
+        event_priotity: 0,
+        async getStartingGlory(this: EventRunner, eventSource : any, relayVar : number, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            if (context_func["mod"]) {
+                return relayVar + context_func["mod"]
+            }
+
+            return relayVar;
+        }
+    },
     gain_new_model_from_list: {
         event_priotity: 0,
         async onGainLocation(this: EventRunner, eventSource : any, trackVal : WarbandProperty, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) {

@@ -1,11 +1,12 @@
 import { useNavigate } from 'react-router-dom';
 import { SumWarband, WarbandManager } from '../../../classes/saveitems/Warband/WarbandManager';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { UserWarband } from '../../../classes/saveitems/Warband/UserWarband';
 import { Faction } from '../../../classes/feature/faction/Faction';
 import SynodFactionImage from "../../../utility/SynodFactionImage";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faChevronLeft, faCircleNotch, faPlus} from "@fortawesome/free-solid-svg-icons";
+import { EventRunner } from '../../../classes/contextevent/contexteventhandler';
 
 const WbbCreateNewDetailsForm: React.FC<{
     chosenfaction : Faction
@@ -17,6 +18,32 @@ const WbbCreateNewDetailsForm: React.FC<{
     const [warbandName, setWarbandName] = useState('');
     const [warbandStartingDucats, setWarbandStartingDucats] = useState(700);
     const [warbandStartingGlory, setWarbandStartingGlory] = useState(0);
+    const [keyvar, setkeyvar] = useState(0);
+
+    useEffect(() => {
+        async function SetStartingValues() {
+            
+            const eventmon : EventRunner = new EventRunner();
+            const DucatCount = await eventmon.runEvent(
+                "getStartingDucats",
+                chosenfaction,
+                [],
+                700,
+                null
+            )
+            const GloryCount = await eventmon.runEvent(
+                "getStartingGlory",
+                chosenfaction,
+                [],
+                0,
+                null
+            )
+            setWarbandStartingDucats(DucatCount);
+            setWarbandStartingGlory(GloryCount)
+            setkeyvar(keyvar + 1);
+        }
+        SetStartingValues()
+    }, [chosenfaction])
 
 
     const [isLoading, setisLoading] = useState(false)
@@ -24,8 +51,8 @@ const WbbCreateNewDetailsForm: React.FC<{
     async function handleSubmit() {
         const msg : null | SumWarband = await manager.NewItem(warbandName, chosenfaction.ID, {
             id : "null",
-            value_ducat: 0, // @TODO: use warbandStartingDucats
-            value_glory: 0 // @TODO: use warbandStartingGlory
+            value_ducat: warbandStartingDucats,
+            value_glory: warbandStartingGlory
         })
 
         if (msg == null) {
@@ -38,7 +65,7 @@ const WbbCreateNewDetailsForm: React.FC<{
     return (
         <div className={'WbbCreateNewDetailsForm'}>
             <div className={'row'}>
-                <div className={'col-12 col-xl-5'}>
+                <div className={'col-12 col-xl-5'} key={keyvar}>
                     <form className={'warband-options-wrap'}
                           onSubmit={(e) => {
                               e.preventDefault();
@@ -64,7 +91,7 @@ const WbbCreateNewDetailsForm: React.FC<{
                             </div>
                         </div>
 
-                        <div className={'mb-3'}>
+                        <div className={'mb-3'} >
                             <label className="form-label">Starting Ducats</label>
                             <input
                                 className="form-control form-control-sm" type={"number"}
@@ -74,7 +101,7 @@ const WbbCreateNewDetailsForm: React.FC<{
                             />
                         </div>
 
-                        <div className={'mb-3'}>
+                        <div className={'mb-3'} >
                             <label className="form-label">Starting Glory</label>
                             <input
                                 className="form-control form-control-sm" type={"number"}

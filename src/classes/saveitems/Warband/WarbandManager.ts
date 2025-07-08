@@ -233,8 +233,8 @@ class WarbandManager {
             name: _title,
             source: 'user_warband',
             tags: {},
-            ducat_bank: 700,
-            glory_bank: 0,
+            ducat_bank: self_context.value_ducat,
+            glory_bank: self_context.value_glory,
             notes: [],
             context: {
                 id: this.CalcID(_title.trim() + "_context"),
