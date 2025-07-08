@@ -7,7 +7,7 @@ declare global {
 }
 
 const COOKIE_KEY = 'cookieConsent';
-const GA_ID = 'G-XXXXXXXXXX'; // @TODO: Replace with actual GA tag
+const GA_ID = 'G-YENKW9MDRJ'; // @TODO: Replace with actual GA tag
 
 let initialized = false;
 
