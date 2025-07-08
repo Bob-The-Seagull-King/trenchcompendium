@@ -697,7 +697,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                                     <div className={'fighter-status-string'}>
                                         {fighter.IsElite()? "Elite" : "Troop"}
 
-                                        {fighter.HasLimitedPotential() &&
+                                        {(stats.potential != undefined && stats.potential == 1) &&
                                             <small>
                                                 <br/>
                                                 {'limited potential'}
