@@ -422,6 +422,18 @@ class SiteUser {
 
         return `${day}.${month}.${year}`;
     }
+
+    /**
+     * Returns the string of the users supporter status
+     *
+     * @TODO: return actual value
+     * 'Supporter' if is premium
+     * 'Free Member' if not premium
+     */
+    public GetUserStatus () {
+        return 'Supporter'
+    }
+
 }
 
 export {ISiteUser, SiteUser}

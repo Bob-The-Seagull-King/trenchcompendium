@@ -193,7 +193,7 @@ const ProfilePageFriends: React.FC<ProfilePageFriendsProps> = ({
                                         <UserListEntry
                                             id={friend.id}
                                             username={friend.nickname}
-                                            status={friend.status}
+                                            status={friend.status} // @TODO: use actual supporter status here
                                             pfp_url={friend.profile_picture_url}
                                             is_request={true}
                                             onAccept={handleAccept}
@@ -216,7 +216,7 @@ const ProfilePageFriends: React.FC<ProfilePageFriendsProps> = ({
                                     <UserListEntry
                                         id={friend.id}
                                         username={friend.nickname}
-                                        status={friend.status}
+                                        status={friend.status}  // @TODO: use actual supporter status here
                                         pfp_url={friend.profile_picture_url}
                                         onRemoveFriend={handleRemoveFriend}
                                     />
@@ -281,7 +281,7 @@ const ProfilePageFriends: React.FC<ProfilePageFriendsProps> = ({
                                     <UserListEntry
                                         id={user.id}
                                         username={user.nickname}
-                                        status={user.status}
+                                        status={user.status}  // @TODO: use actual supporter status here
                                         pfp_url={user.profile_picture_url}
                                         is_search={true}
                                         request_sent={user.request_sent}

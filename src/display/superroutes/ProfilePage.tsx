@@ -271,7 +271,7 @@ const ProfilePage: React.FC = () => {
                                 </h1>
 
                                 <h2 className={'profile-sub'}>
-                                    {'Supporter'}
+                                    {userData?.GetUserStatus() || 'Loading...'}
                                 </h2>
 
                                 <div className={'user-interaction'}>

@@ -219,6 +219,17 @@ class SiteUserPublic {
     public async GetAchievements () {
         return this.Achievements;
     }
+
+    /**
+     * Returns the string of the users supporter status
+     *
+     * @TODO: return actual value
+     * 'Supporter' if is premium
+     * 'Free Member' if not premium
+     */
+    public GetUserStatus () {
+        return 'Supporter'
+    }
 }
 
 export {ISiteUserPublic, SiteUserPublic}
