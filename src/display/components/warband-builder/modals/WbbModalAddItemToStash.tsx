@@ -3,6 +3,8 @@ import { FactionEquipmentRelationship } from '../../../../classes/relationship/f
 import React, { useEffect, useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { getCostType } from '../../../../utility/functions';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faXmark} from "@fortawesome/free-solid-svg-icons";
 
 interface Item {
     id: string;
@@ -48,8 +50,15 @@ const WbbModalAddItemToStash: React.FC<WbbModalAddItemToStashProps> = ({ show, o
 
     return (
         <Modal show={show} key={keyvar} onHide={onClose} className="WbbModalAddItem WbbModalAddItemToStash" centered>
-            <Modal.Header closeButton>
+            <Modal.Header closeButton={false}>
                 <Modal.Title>Add Item to Stash</Modal.Title>
+
+                <FontAwesomeIcon
+                    icon={faXmark}
+                    className="modal-close-icon"
+                    role="button"
+                    onClick={onClose}
+                />
             </Modal.Header>
 
             <Modal.Body>
