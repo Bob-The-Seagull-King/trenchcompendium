@@ -96,12 +96,9 @@ const RulesEquipmentStats: React.FC<RulesEquipmentStatsProps> = (props : RulesEq
                                     {'Modifiers'}
                                 </td>
                                 <td>
-                                    {abilityObject.Modifiers.map((item) => (
-                                        <div className=''
-                                             key={"equipment_modifier_" + abilityObject.ID + "_modifier_id_" + item}>
-                                            {item + ", "}
-                                        </div>
-                                    )) /* Modifiers */}
+                                    <div>
+                                        {abilityObject.Modifiers.join(', ')}
+                                    </div>
                                 </td>
                             </tr>
                         }
