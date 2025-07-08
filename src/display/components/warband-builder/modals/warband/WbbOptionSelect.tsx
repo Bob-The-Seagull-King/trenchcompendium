@@ -13,10 +13,11 @@ import { EventRunner } from '../../../../../classes/contextevent/contexteventhan
 
 interface WbbEditSelectionProps {
     choice : SelectedOption;
-    property : WarbandProperty
+    property : WarbandProperty;
+    overrideplay? : boolean
 }
 
-const WbbOptionSelect: React.FC<WbbEditSelectionProps> = ({choice,  property}) => {
+const WbbOptionSelect: React.FC<WbbEditSelectionProps> = ({choice,  property, overrideplay}) => {
     const { warband, reloadDisplay, updateKey } = useWarband();
     const [selectedoption, setSelectedoption] = useState<IChoice | null>(choice.GetSelected());
 
@@ -26,7 +27,7 @@ const WbbOptionSelect: React.FC<WbbEditSelectionProps> = ({choice,  property}) =
 
 
     const handleSubmit = (foundOption : IChoice | null) => {
-        if (foundOption != null) {
+        if (foundOption != null && overrideplay != true) {
             setSelectedoption(foundOption)
             choice.SelectOption(foundOption? foundOption.id : null);
             property.RegenerateSubProperties().then(() =>{
@@ -60,13 +61,14 @@ const WbbOptionSelect: React.FC<WbbEditSelectionProps> = ({choice,  property}) =
     useEffect(() => {
             SetModelOptions();
     }, [updateKey]);
-
+    
     return (
         <div className={'WbbOptionSelect'} key={updateKey}>
             <WbbOptionBox
                 title={choice.Option.Name}
                 value={choice.GetSelectedTitle()}
                 onClick={() => setshowModal(true)}
+                overrideplay={overrideplay}
             />
 
             <WbbEditSelectionModal

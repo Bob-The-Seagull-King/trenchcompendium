@@ -438,7 +438,8 @@
         "tags": {
             "exploration_table": "et_commonlocations"
         },
-        "contextdata": {"location_rule_option": {}},
+        "contextdata": {"location_rule_option": {},
+                "exploration_option": {}},
         "description": [            
             {
                 "tags": {"desc_type" : "default"},

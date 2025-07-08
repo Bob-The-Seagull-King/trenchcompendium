@@ -23,19 +23,6 @@ const WbbEditViewExploration: React.FC<WbbEditViewExplorationProps> = ({  locati
                 {location.GetOwnName()}
             </div>
 
-
-            {location.SelfDynamicProperty.Selections.length > 0 &&
-                <span className={'title-choice'}>
-                    {location.SelfDynamicProperty.Selections.map((item) =>
-                        <WbbOptionSelect
-                            property={location}
-                            key={location.SelfDynamicProperty.Selections.indexOf(item)}
-                            choice={item}
-                        />
-                    )}
-                </span>
-            }
-
             <div className={'modifier-body'}>
                 
                 {(location.GetOwnDescription() != null) &&
@@ -46,6 +33,19 @@ const WbbEditViewExploration: React.FC<WbbEditViewExplorationProps> = ({  locati
                 </>
                 }
             </div>
+
+            {location.SelfDynamicProperty.Selections.length > 0 &&
+                <span className={'title-choice'}>
+                    {location.SelfDynamicProperty.Selections.map((item) =>
+                        <WbbOptionSelect
+                            overrideplay={true}
+                            property={location}
+                            key={location.SelfDynamicProperty.Selections.indexOf(item)}
+                            choice={item}
+                        />
+                    )}
+                </span>
+            }
 
             {/* actions */}
             <WbbContextualPopover

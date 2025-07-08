@@ -14,12 +14,13 @@ import { FactionModelRelationship } from '../../relationship/faction/FactionMode
 import { EventRunner } from '../../contextevent/contexteventhandler';
 import { Faction } from '../../feature/faction/Faction';
 import { FactionEquipmentRelationship, IFactionEquipmentRelationship } from '../../relationship/faction/FactionEquipmentRelationship';
-import { IWarbandProperty, WarbandProperty } from './WarbandProperty';
+import { ISelectedOption, IWarbandProperty, WarbandProperty } from './WarbandProperty';
 import { ContextPackage } from '../../contextevent/contextpackage';
 import { ToolsController } from '../../_high_level_controllers/ToolsController';
 import { ModelFactory } from '../../../factories/features/ModelFactory';
 import { EquipmentFactory } from '../../../factories/features/EquipmentFactory';
 import { SkillFactory } from '../../../factories/features/SkillFactory';
+import { ExplorationLocation } from '../../feature/exploration/ExplorationLocation';
 
 interface WarbandDebt {
     ducats : number,
@@ -576,17 +577,12 @@ class UserWarband extends DynamicContextObject {
         } catch (e) { console.log(e) }
     }
 
-    /** @TODO
+    /**
      * Adds an exploration location to a Roster
      *
-     * @param location
-     * @param option
-     * @constructor
      */
-    public  AddExplorationLocation ( location: object, option: object) {
-
-        return false;
-
+    public async AddExplorationLocation ( location: ExplorationLocation, option: ISelectedOption[]) {
+        await this.Exploration.AddExplorationLocation(location, option);
     }
 
 

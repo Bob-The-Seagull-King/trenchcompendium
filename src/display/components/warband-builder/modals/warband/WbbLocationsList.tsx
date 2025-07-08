@@ -6,10 +6,12 @@ import { IChoice } from '../../../../../classes/options/StaticOption';
 import { SelectedOption } from '../../../../../classes/options/SelectedOption';
 import WbbEditViewModifier from '../../WbbEditViewModifier';
 import { useWarband } from '../../../../../context/WarbandContext';
-import { WarbandProperty } from '../../../../../classes/saveitems/Warband/WarbandProperty';
+import { ISelectedOption, WarbandProperty } from '../../../../../classes/saveitems/Warband/WarbandProperty';
 import WbbEditViewExtraModifier from '../../WbbEditViewExtraModifier';
 import WbbModalAddExplorationLocation from '../WbbModalAddExplorationLocation';
 import WbbEditViewExploration from '../../WbbEditViewExploration';
+import { ExplorationLocation } from '../../../../../classes/feature/exploration/ExplorationLocation';
+import { ToolsController } from '../../../../../classes/_high_level_controllers/ToolsController';
 
 const WbbLocationsList = () => {
     const { warband, updateKey, reloadDisplay } = useWarband();
@@ -19,10 +21,12 @@ const WbbLocationsList = () => {
 
     // Exploration Location Modal
     const [showAddExplorationModal, setShowAddExplorationModal] = useState(false);
-    const handleAddExplorationLocation = (location: any) => {
+    const handleAddExplorationLocation = (location: ExplorationLocation, selectedOptions : ISelectedOption[]) => {
         if (!warband) { return; }
-        console.log("ADD EXPLORATION LOCATION")
-        //warband.warband_data.AddExplorationLocation(location, selectedOptions);
+        warband.warband_data.AddExplorationLocation(location, selectedOptions).then(() => {
+            const Manager : ToolsController = ToolsController.getInstance();
+            Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(() => reloadDisplay())
+        })
     };
     
     useEffect(() => {

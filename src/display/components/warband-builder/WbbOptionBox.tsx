@@ -7,9 +7,10 @@ interface WbbOptionBoxProps {
     title: string;
     value: string | number;
     onClick: () => void;
+    overrideplay? : boolean
 }
 
-const WbbOptionBox: React.FC<WbbOptionBoxProps> = ({ title, value, onClick }) => {
+const WbbOptionBox: React.FC<WbbOptionBoxProps> = ({ title, value, onClick, overrideplay }) => {
 
     const { playMode, togglePlayMode } = usePlayMode();
 
@@ -32,7 +33,7 @@ const WbbOptionBox: React.FC<WbbOptionBoxProps> = ({ title, value, onClick }) =>
                     )}
                 </div>
 
-                {!playMode &&
+                {(!playMode && overrideplay != true) &&
                     <div className="btn btn-primary" onClick={onClick}>
                         <FontAwesomeIcon icon={faPen} className={'icon-inline-left'}/>
                         {'Change'}

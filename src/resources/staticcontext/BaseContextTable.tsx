@@ -1801,7 +1801,6 @@ export const BaseContextCallTable : CallEventTable = {
             if (Permissions.allowed) {
                 for (let j = 0; j < Permissions.allowed.length; j++) {
                     const Requirement = Permissions.allowed[j]
-                    console.log(Requirement)
                     if (Requirement.type == "faction") {
                         let Found = false;
                         for (let k = 0; k < Requirement.value.length; k++) {
@@ -1881,6 +1880,21 @@ export const BaseContextCallTable : CallEventTable = {
             
             return relayVar;
         }
+    },
+    exploration_option: {
+        event_priotity: 0,
+        async returnWbbOptionDisplay(this: EventRunner, eventSource : any, trackVar : IChoice, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null){
+                        
+            return ( 
+            
+                <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
+                    
+                    <p className={''}>
+                        {returnDescription(trackVar.value, trackVar.value.Description)}
+                    </p>
+                </ErrorBoundary>
+            )
+        },
     },
     ability_option: {
         event_priotity: 0,

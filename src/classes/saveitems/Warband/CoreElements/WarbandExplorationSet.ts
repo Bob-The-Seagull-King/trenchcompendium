@@ -1,7 +1,7 @@
 import { Skill } from "../../../feature/ability/Skill";
 import { ContextObject, IContextObject } from "../../../contextevent/contextobject";
 import { DynamicOptionContextObject } from "../../../options/DynamicOptionContextObject";
-import { IWarbandProperty, WarbandProperty } from "../WarbandProperty";
+import { ISelectedOption, IWarbandProperty, WarbandProperty } from "../WarbandProperty";
 import { DynamicContextObject} from "../../../contextevent/dynamiccontextobject";
 import { SkillFactory } from "../../../../factories/features/SkillFactory";
 import { ExplorationFactory } from "../../../../factories/features/ExplorationFactory";
@@ -235,6 +235,28 @@ class WarbandExplorationSet extends DynamicContextObject {
                 options: OptionList
             }
         )
+    }
+
+    
+    public async AddExplorationLocation ( location: ExplorationLocation, option: ISelectedOption[]) {
+
+        const Selections : IWarbandProperty = {
+            object_id: location.GetID(),
+            selections: option
+        }
+
+        const NewRuleProperty = new WarbandProperty(location, this, null, Selections);
+        await NewRuleProperty.HandleDynamicProps(location, this, null, Selections);
+        this.Locations.push(NewRuleProperty);
+        const eventmon : EventRunner = new EventRunner();
+        await eventmon.runEvent(
+            "onGainLocation",
+            this,
+            [this],
+            null,
+            location
+        )
+
     }
 
 }
