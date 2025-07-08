@@ -116,8 +116,7 @@ const App: React.FC = () => {
 
                 <PrivacyPopup />
 
-                {/* @TODO: add tracking data in component*/}
-                {/*<TrackingManager />*/}
+                <TrackingManager />
             </AuthProvider>
         </>
     )
