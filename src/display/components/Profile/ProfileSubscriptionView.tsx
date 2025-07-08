@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import PayPalSubButton from "./PayPalSubButton";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faChevronLeft, faChevronRight, faClose, faXmark} from "@fortawesome/free-solid-svg-icons";
+import {faChevronLeft, faChevronRight, faClose, faFileInvoice, faXmark} from "@fortawesome/free-solid-svg-icons";
 import TCIcon from '../../../resources/images/Trench-Companion-Icon.png';
 import {useNavigate} from "react-router-dom";
 import {useAuth} from "../../../utility/AuthContext";
@@ -57,6 +57,44 @@ const ProfileSubscriptionView: React.FC = () => {
         );
     }
 
+    /**
+     * Invoices Modal
+     */
+    const [invoices, setInvoices] = useState<any[]>([]);
+    const [loadingInvoices, setLoadingInvoices] = useState(false);
+    const [invoiceModalOpen, setInvoiceModalOpen] = useState(false);
+
+    const fetchInvoicesForUser = async (): Promise<any[]> => {
+        const token = localStorage.getItem('jwtToken');
+        const response = await fetch(`${SYNOD.URL}/wp-json/synod-payment/v1/user-invoices`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+
+        if (!response.ok) throw new Error('Failed to load invoices');
+        return await response.json();
+    };
+
+    useEffect(() => {
+        if (invoiceModalOpen) {
+            setLoadingInvoices(true);
+            // Replace with your real fetch logic
+            fetchInvoicesForUser()
+                .then((data) => {
+                    setInvoices(data);
+                })
+                .catch((err) => {
+                    console.error('Error fetching invoices:', err);
+                })
+                .finally(() => {
+                    setLoadingInvoices(false);
+                });
+        }
+    }, [invoiceModalOpen]);
+
+
+
     return (
         <div className={'ProfileSubscriptionView'}>
 
@@ -91,6 +129,12 @@ const ProfileSubscriptionView: React.FC = () => {
                         <li>{'Subscription Status: '}{'Active'}</li>
                         <li>{'Next Payment: '}{SiteUser.PremiumUntilFormat()}</li>
                         <li>{'Subscription ID: '}{SiteUser.GetSubscriptionID()}</li>
+                        <li className={'clickable'} onClick={
+                            () => setInvoiceModalOpen(true)
+                        }>
+                            <FontAwesomeIcon icon={faFileInvoice} className="icon-inline-left"/>
+                            {'Your Invoices'}
+                        </li>
                     </ul>
 
                     <a className={'btn btn-primary'}
@@ -137,9 +181,63 @@ const ProfileSubscriptionView: React.FC = () => {
                             </p>
 
                             <button className={'btn btn-primary'}
-                                    onClick={() => handleCancelSub(SiteUser.GetSubscriptionID())}
+                                onClick={() => handleCancelSub(SiteUser.GetSubscriptionID())}
                             >
                                 {'Cancel Subscription'}
+                            </button>
+                        </Modal.Body>
+                    </Modal>
+
+                    <Modal show={invoiceModalOpen} size="lg"
+                           contentClassName=""
+                           dialogClassName="" keyboard={true}
+                           onhide={setInvoiceModalOpen}
+                           centered>
+                        <Modal.Header closeButton={false}>
+                            <Modal.Title>Your Invoices</Modal.Title>
+
+                            <FontAwesomeIcon
+                                icon={faXmark}
+                                className="modal-close-icon"
+                                role="button"
+                                onClick={
+                                    () => setInvoiceModalOpen(false)
+                                }
+                            />
+                        </Modal.Header>
+
+                        <Modal.Body>
+                            {loadingInvoices ? (
+                                <div className={'LoadingOverlay-wrap-150'}>
+                                    <LoadingOverlay
+                                        message={'Loading your Invoices'}
+                                    />
+                                </div>
+
+                            ) : (
+                                <div className={'ProfileInvoiceList'}>
+                                    {invoices.length === 0 ? (
+                                        <p>No invoices found.</p>
+                                    ) : (
+                                        <ul className="invoice-list">
+                                            {invoices.map((invoice, i) => (
+                                                <li className="invoice-item" key={i}>
+                                                    <a href={invoice.invoice_pdf_url} target={'_blank'} rel={'noreferrer'} download>
+                                                        {'Transaction-ID: ' + invoice.paypal_transaction_id}
+                                                    </a>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    )}
+                                </div>
+                            )}
+
+                            <button className={'btn btn-primary'}
+                                onClick={
+                                    () => setInvoiceModalOpen(false)
+                                }
+                            >
+                                {'Close'}
                             </button>
                         </Modal.Body>
                     </Modal>

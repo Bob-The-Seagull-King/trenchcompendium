@@ -29,5 +29,33 @@
                 width: auto
                 margin-right: 5px
 
+            &.clickable
+                cursor: pointer
+
     .secondary-action
         margin-left: 15px
+
+// Invoice List in the Modal on the profile page
+.ProfileInvoiceList
+    .invoice-list
+        list-style-type: none
+        padding: 0
+        margin: 0 0 15px 0
+
+        .invoice-item
+            > a
+                display: block
+                padding: 10px
+                background-color: $color-bg-3
+                color: $color-text
+                border-bottom: 1px solid $color-bg-1
+                text-decoration: none
+
+                &:hover
+                    //color: $color-highlight
+                    background-color: $color-bg-4
+
+
+            &:last-of-type
+                > a
+                    border-bottom: 0
