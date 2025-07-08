@@ -1881,6 +1881,22 @@ export const BaseContextCallTable : CallEventTable = {
             return relayVar;
         }
     },
+    gain_new_model_from_list: {
+        event_priotity: 0,
+        async onGainLocation(this: EventRunner, eventSource : any, trackVal : WarbandProperty, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) {
+            
+            
+            const { ModelFactory } = await import("../../factories/features/ModelFactory");
+            if (context_func["count"] && context_func["id"]) {
+                for (let i = 0; i < context_func["count"]; i++) {
+                    for (let j = 0; j < context_func["id"].length; j++) {
+                        const NewModel = await ModelFactory.CreateNewFactionModel(context_func["id"][j], null);
+                        await warband.AddFighter([NewModel]);
+                    }
+                }
+            }
+        }
+    },
     exploration_option: {
         event_priotity: 0,
         async returnWbbOptionDisplay(this: EventRunner, eventSource : any, trackVar : IChoice, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null){

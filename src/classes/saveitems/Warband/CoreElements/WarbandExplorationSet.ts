@@ -260,9 +260,9 @@ class WarbandExplorationSet extends DynamicContextObject {
         await eventmon.runEvent(
             "onGainLocation",
             this,
-            [this],
+            [this.MyContext as UserWarband],
             null,
-            location
+            NewRuleProperty
         )
 
     }
