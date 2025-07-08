@@ -95,7 +95,7 @@ const App: React.FC = () => {
 
                                 {/* Static Pages - Trench Companion */}
                                 <Route path={ROUTES.PAGE_CONTACT} element={<StaticContact />} /> {/* Contact Page */}
-                                <Route path={ROUTES.COMPANION_ABOUT} element={<StaticAbout />} /> {/* Contact Page */}
+                                <Route path={ROUTES.COMPANION_ABOUT} element={<StaticAbout />} /> {/* About Page */}
 
 
                                 {/* Static Pages - Content */}
