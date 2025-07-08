@@ -49,10 +49,9 @@ const WbbEditPage = (prop: any) => {
                 </>
             }
             {_currentItem == null &&
-            
-                <div className={'warbands-loading-wrap'}>
+                <div className={'LoadingOverlay-wrap-100vh'}>
                     <LoadingOverlay
-                        message={'Loading your warbands'}
+                        message={'Loading your warband'}
                     />
                 </div>
             }
