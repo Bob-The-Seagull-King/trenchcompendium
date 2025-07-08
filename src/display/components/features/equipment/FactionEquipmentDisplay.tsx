@@ -85,22 +85,19 @@ const FactionEquipmentDisplay = (props: any) => {
                     </div>
 
                     {(factionequipmentObject.Limit != 0) &&
-                        <>
                         <div className="armoury-element-restriction armoury-element-limit">
                             {
                                 "LIMIT: " +  factionequipmentObject.Limit
                             }
                         </div>
-                        </>
-                    }{(equiprestrictions.length > 0) &&
-                    <>
+                    }
+                    {(equiprestrictions.length > 0) &&
                         <div className="armoury-element-restriction">
                             {
                                 equiprestrictions.join(', ') + ' only'
                             }
                         </div>
-                    </>
-                }
+                    }
                 </div>
         </ErrorBoundary>
     )

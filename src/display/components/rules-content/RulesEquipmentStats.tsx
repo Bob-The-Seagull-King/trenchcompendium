@@ -34,6 +34,7 @@ const RulesEquipmentStats: React.FC<RulesEquipmentStatsProps> = (props : RulesEq
                 setstatlist(result_upgrades);
             }
             setkeyvar((prev) => prev + 1);
+
         }
 
         SetModelOptions();
@@ -54,6 +55,7 @@ const RulesEquipmentStats: React.FC<RulesEquipmentStatsProps> = (props : RulesEq
 
     return (
         <>
+            {/* @TODO: also check if restrictions are set and then show the table */}
             {statlist && (RangeVal != "" || (HandValMelee != "" || HandValRange != "") || abilityObject.Modifiers.length > 0) &&
                 <table key={_keyvar} className={'rules-equipment-stats-table'}>
                     <tbody>
@@ -95,18 +97,50 @@ const RulesEquipmentStats: React.FC<RulesEquipmentStatsProps> = (props : RulesEq
                                 </td>
                                 <td>
                                     {abilityObject.Modifiers.map((item) => (
-                                        <div className='' key={"equipment_modifier_"+abilityObject.ID+"_modifier_id_"+item}>
-                                            {item+", "}
+                                        <div className=''
+                                             key={"equipment_modifier_" + abilityObject.ID + "_modifier_id_" + item}>
+                                            {item + ", "}
                                         </div>
                                     )) /* Modifiers */}
                                 </td>
                             </tr>
                         }
+
+                        <tr>
+                            <td className={'label-cell'}>
+                                {'Cost'}
+                            </td>
+                            <td>
+                                {/* @TODO: add actual value and cost type*/}
+                                8 Glory
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td className={'label-cell'}>
+                                {'Restrictions'}
+                            </td>
+                            <td>
+                                {/* @TODO: add actual Limits here */}
+
+                                {/* @TODO: add Limit number here like in FactionEquipmentDisplay*/}
+                                <span className={'text-limit'}>
+                                    LIMIT: 1
+                                </span>
+
+                                {/* @TODO: break if limit AND other restrictions apply */}
+                                <br/>
+
+                                {/* @TODO: add other restrictions here like in FactionEquipmentDisplay */}
+                                <span>
+                                    Alchemists only
+                                </span>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             }
         </>
-
     )
 };
 
