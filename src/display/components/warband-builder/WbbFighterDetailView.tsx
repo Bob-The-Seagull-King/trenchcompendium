@@ -757,7 +757,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
 
             {/* Play Mode Content */}
             {(playMode) &&
-                <div className={'fighter-card-play-mode-info'}>
+                <div className={'fighter-card-play-mode-info'}  key={keyvar}>
 
                     <div className={'play-mode-equipment-wrap'}>
                         {allmodelequip.filter((item) =>
@@ -865,7 +865,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                     }
 
                     {fighter.GetInjuriesList().length > 0 &&
-                    <div className={'play-mode-injuries-wrap'}>
+                    <div className={'play-mode-injuries-wrap'} >
                         <h3>{'Injuries'}</h3>
                         {fighter.GetInjuriesList().map((injury) => (
                             <WbbEditViewInjury injury={injury} key={injury.ID + fighter.ID}
