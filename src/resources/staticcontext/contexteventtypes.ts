@@ -14,6 +14,7 @@ import { Ability } from "../../classes/feature/ability/Ability";
 import { UserWarband } from "../../classes/saveitems/Warband/UserWarband";
 import { MemberAndItem, MemberAndWarband, ModelHands, WarbandMember } from "../../classes/saveitems/Warband/Purchases/WarbandMember";
 import { Patron } from "../../classes/feature/skillgroup/Patron";
+import { Injury } from "../../classes/feature/ability/Injury";
 
 /**
  * Events that can be called by the runEvent method,
@@ -63,6 +64,12 @@ export interface CallEvents {
     returnWbbOptionDisplay? : (this: EventRunner, eventSource : any, trackVal : IChoice, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<JSX.Element>;
     getLocationRestrictions? : (this: EventRunner, eventSource : any, relayVar : any, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => LocationRestriction[]; 
     getLocationRestrictionsPresentable? : (this: EventRunner, eventSource : any, relayVar : any, trackVal : LocationRestriction[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<string[]>; 
+    onGainInjury? : (this: EventRunner, eventSource : any, trackVal : Injury, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, member : WarbandMember) => Promise<void>; 
+    onGainLocation? : (this: EventRunner, eventSource : any, trackVal : WarbandProperty, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) => Promise<void>; 
+    showSkillOnWarband? : (this: EventRunner, eventSource : any, relayVar : boolean, trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, member : WarbandMember) => Promise<boolean>; 
+    getModelRelationshipsForWarband? : (this: EventRunner, eventSource : any, relayVar : FactionModelRelationship[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : UserWarband) => Promise<FactionModelRelationship[]>;
+    getExplorationSkills? : (this: EventRunner, eventSource : any, relayVar : WarbandProperty[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<WarbandProperty[]>; 
+    canChooseOptionLocation? : (this: EventRunner, eventSource : any, relayVar : boolean, trackVal: UserWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<boolean>; 
 }
 
 /**

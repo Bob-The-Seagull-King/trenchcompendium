@@ -102,6 +102,23 @@
         "warband_maximum" : 0
     },
     {
+        "id": "rel_fc_md_azeb_explore",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {"option_search_viable": {}},
+        "options": [],
+        "faction_id" : [],
+        "model_id" : "md_azeb",
+        "captain" : false,
+        "mercenary": false,
+        "cost" : 0,
+        "cost_type" : 0,
+        "restricted_models" : [],
+        "warband_minimum" : 1,
+        "warband_maximum" : 1
+    },
+    {
         "id": "rel_fc_md_assassinacolyte",
         "source": "core",
         "tags": {},
@@ -783,6 +800,25 @@
         "warband_maximum" : 0
     },
     {
+        "id": "rel_fc_md_wretched_explore",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {
+            "option_search_viable": {}
+        },
+        "options": [],
+        "faction_id" : [],
+        "model_id" : "md_wretched",
+        "captain" : false,
+        "mercenary": false,
+        "cost" : 0,
+        "cost_type" : 0,
+        "restricted_models" : [],
+        "warband_minimum" : 1,
+        "warband_maximum" : 1
+    },
+    {
         "id": "rel_fc_md_sineater",
         "source": "core",
         "tags": {},
@@ -951,6 +987,23 @@
         "restricted_models" : [],
         "warband_minimum" : 0,
         "warband_maximum" : 0
+    },
+    {
+        "id": "rel_fc_md_ecclesiasticprisoner_explore",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {"option_search_viable": {}},
+        "options": [],
+        "faction_id" : [],
+        "model_id" : "md_ecclesiasticprisoner",
+        "captain" : false,
+        "mercenary": false,
+        "cost" : 0,
+        "cost_type" : 0,
+        "restricted_models" : [],
+        "warband_minimum" : 1,
+        "warband_maximum" : 1
     },
     {
         "id": "rel_fc_md_ecclesiasticprisoner_tenthplague",
@@ -1609,6 +1662,23 @@
         "warband_maximum" : 0
     },
     {
+        "id": "rel_fc_md_grailthrall_explore",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {"option_search_viable": {}},
+        "options": [],
+        "faction_id" : [],
+        "model_id" : "md_grailthrall",
+        "captain" : false,
+        "mercenary": false,
+        "cost" : 0,
+        "cost_type" : 0,
+        "restricted_models" : [],
+        "warband_minimum" : 1,
+        "warband_maximum" : 1
+    },
+    {
         "id": "rel_fc_md_grailthrall_bereaved",
         "source": "core",
         "tags": {},
@@ -1821,6 +1891,25 @@
         "restricted_models" : [],
         "warband_minimum" : 0,
         "warband_maximum" : 0
+    },
+    {
+        "id": "rel_fc_md_wretched_court_explore",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {
+            "option_search_viable": {}
+        },
+        "options": [],
+        "faction_id" : [],
+        "model_id" : "md_wretched_court",
+        "captain" : false,
+        "mercenary": false,
+        "cost" : 0,
+        "cost_type" : 0,
+        "restricted_models" : [],
+        "warband_minimum" : 1,
+        "warband_maximum" : 1
     },
     {
         "id": "rel_fc_md_pitlocust",

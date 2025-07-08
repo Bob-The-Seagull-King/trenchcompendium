@@ -14,17 +14,12 @@ interface IWarbandProperty {
     selections: ISelectedOption[]
 }
 
-interface ISelectedOption {
+export interface ISelectedOption {
     option_refID : string,
     selection_ID : string | null,
     suboption? : IWarbandProperty
 }
 
-///// TODO
-
-///// HANDLE EXTRA PROPERTY WHEN SELECTED WARBANDPROPERTY OPTION IS ITSELF SOMETHING WITH OPTIONS
-///// Property collect all subproperties loop including parents
-///// Base selected objects are included in context events, but their subselected options aren't
 /**
  * basic dunamicoptioncontextobject should be modified so any given selection
  * can contain a basic object IF its selection is one, and if the selected object
@@ -174,6 +169,7 @@ class WarbandProperty extends DynamicContextObject  {
         
         return _objint;
     }
+
     
     /**
      * Grabs the packages from any sub-objects, based
@@ -192,6 +188,10 @@ class WarbandProperty extends DynamicContextObject  {
             return (this.SelfDynamicProperty.OptionChoice as any).Description;
         }
         return null;
+    }
+
+    public GetOwnName() {
+        return (this.SelfDynamicProperty.OptionChoice).GetTrueName();
     }
 
 }

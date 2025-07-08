@@ -12,6 +12,7 @@ import { Faction } from "../../../feature/faction/Faction";
 import { EventRunner } from "../../../contextevent/contexteventhandler";
 import { Requester } from "../../../../factories/Requester";
 import { Rule } from "../../../feature/faction/Rule";
+import { SkillSuite } from "../Purchases/WarbandMember";
 
 interface IWarbandFaction extends IContextObject {
     faction_property: IWarbandProperty,
@@ -38,6 +39,26 @@ class WarbandFaction extends DynamicContextObject {
         const Value = await FactionFactory.CreateNewFaction(faction_property.object_id, this);
         this.MyFaction = new WarbandProperty(Value, this, null, faction_property);
         await this.MyFaction.HandleDynamicProps(Value, this, null, faction_property);
+    }
+
+    public GetFaction() {
+        if (this.MyFaction != undefined) {
+            return this.MyFaction.SelfDynamicProperty.OptionChoice as Faction;
+        } else {
+            return null;
+        }
+    }
+
+    public async GetFactionBase() {
+        if (this.MyFaction != undefined) {
+            const ID = this.GetFaction()?.ContextKeys["VariantFactionBase"]
+            if (ID) {
+                const BaseFac : Faction = await FactionFactory.CreateNewFaction(ID.faction_base_id, null)
+                return BaseFac;
+            }
+        } else {
+            return null;
+        }
     }
 
     public async BuildPatron(patron_id : string | undefined) {        
@@ -184,6 +205,14 @@ class WarbandFaction extends DynamicContextObject {
         } else {
             const Patron = await SkillFactory.CreateNewPatron(patorn_name, this)
             this.MyPatron = Patron;
+        }
+    }
+
+    public GetPatronSkills() : Patron | null {
+        if (this.MyPatron) {
+            return this.MyPatron
+        } else {
+            return null;
         }
     }
 

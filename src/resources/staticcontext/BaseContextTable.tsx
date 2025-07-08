@@ -30,6 +30,7 @@ import { FactionEquipmentRelationship } from "../../classes/relationship/faction
 import { MemberAndItem, MemberAndWarband, ModelHands, WarbandMember } from "../../classes/saveitems/Warband/Purchases/WarbandMember";
 import { returnDescription } from "../../utility/util";
 import { Patron } from "../../classes/feature/skillgroup/Patron";
+import { Injury } from "../../classes/feature/ability/Injury";
 
 export const BaseContextCallTable : CallEventTable = {
     option_search_viable: {
@@ -873,6 +874,24 @@ export const BaseContextCallTable : CallEventTable = {
             return relayVar;
         }
     },
+    get_exploration_skills: {
+        event_priotity: 0,
+        async getExplorationSkills(this: EventRunner, eventSource : any, relayVar : WarbandProperty[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            
+            const { SkillFactory } = await import("../../factories/features/SkillFactory");
+            const WarbandPropModule = await import('../../classes/saveitems/Warband/WarbandProperty');
+            if (context_func["add_skill"]) {
+                for (let i = 0; i < context_func["add_skill"].length; i++) {
+                    const SkillNew : Skill = await SkillFactory.CreateNewSkill(context_func["add_skill"][i], eventSource);                    
+                    const NewRuleProperty = new WarbandPropModule.WarbandProperty(SkillNew, eventSource, null, null);
+                    await NewRuleProperty.HandleDynamicProps(SkillNew, eventSource, null, null);
+                    relayVar.push(NewRuleProperty);
+                }
+            }
+            
+            return relayVar;
+        }
+    },
     override_required_upgrade: {
         event_priotity: 1,
         async getUpgradeRestrictionsPresentation(this: EventRunner, eventSource : any, relayVar : string[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
@@ -891,7 +910,7 @@ export const BaseContextCallTable : CallEventTable = {
             }
             return relayVar;
         },
-        async getRestrictedUpgradesBool(this: EventRunner, eventSource : any, relayVar : boolean,  trackVal : MemberAndWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+        async getRequiredUpgradesBool(this: EventRunner, eventSource : any, relayVar : boolean,  trackVal : MemberAndWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
 
             if (context_func["filters"]) {
 
@@ -1583,6 +1602,31 @@ export const BaseContextCallTable : CallEventTable = {
             return NewChoices
         }
     },
+    new_upgrade: {
+        event_priotity: 0,
+        async parseOptionFilterDown(this: EventRunner, eventSource : any, relayVar : IChoice[], trackVal : number, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            
+            const UpgradeFactoryModule = await import("../../factories/features/UpgradeFactory");
+            const UpgradeModule = await import("../../classes/feature/ability/Upgrade");
+            
+            const NewChoices : IChoice[] = []
+            for (let i = 0; i < relayVar.length; i++) {
+
+                const ModelItem = ((relayVar[i].value instanceof UpgradeModule.Upgrade)? relayVar[i].value :
+                    await UpgradeFactoryModule.UpgradeFactory.CreateUpgrade(relayVar[i].value, null)
+                )
+                relayVar[i].value = ModelItem;
+                relayVar[i].display_str = ModelItem.GetTrueName();
+                NewChoices.push(relayVar[i])
+            }
+
+            NewChoices.sort(function(a, b) {
+                return a.display_str.localeCompare(b.display_str);
+              });
+
+            return NewChoices
+        }
+    },
     model_add_equipment: {
         event_priotity: 0,
         async parseOptionsIntoRelevantType(this: EventRunner, eventSource : any, relayVar : IChoice[],  trackVal : number, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null){
@@ -1680,7 +1724,9 @@ export const BaseContextCallTable : CallEventTable = {
             return ( 
             
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    <RuleDisplay data={relayVar.value} />
+                    {(relayVar != null && relayVar != undefined) &&
+                        <RuleDisplay data={relayVar.value} />
+                    }
                 </ErrorBoundary>
             )
         }
@@ -1749,6 +1795,34 @@ export const BaseContextCallTable : CallEventTable = {
             const StringCollection : string[] = AddedCollection;
 
             return relayVar.concat(StringCollection);
+        },
+        async canChooseOptionLocation(this: EventRunner, eventSource : any, relayVar : boolean, trackVal: UserWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            const Permissions = context_func as LocationRestriction
+            if (Permissions.allowed) {
+                for (let j = 0; j < Permissions.allowed.length; j++) {
+                    const Requirement = Permissions.allowed[j]
+                    if (Requirement.type == "faction") {
+                        let Found = false;
+                        for (let k = 0; k < Requirement.value.length; k++) {
+                            const BaseFac = await trackVal.GetFactionBase();
+                            if (BaseFac) {
+                                if (BaseFac.ID == Requirement.value[k]) {
+                                    Found = true;
+                                }
+                            }
+                            if (trackVal.GetFaction()?.ID == Requirement.value[k]){
+                                    Found = true;
+                                }
+                        }
+
+                        if (Found == false) {
+                            return false;
+                        }
+                    }
+                }
+            }
+
+            return relayVar;
         }
     },
     skill_option: {
@@ -1760,7 +1834,7 @@ export const BaseContextCallTable : CallEventTable = {
             
             for (let i = 0; i < relayVar.length; i++) {
                 const ModelItem = ((relayVar[i].value instanceof Skill)? relayVar[i].value :
-                    await SkillFactory.CreateSkill(relayVar[i].value, null)
+                    await SkillFactory.CreateSkill(relayVar[i].value, null, true)
                 )
                 relayVar[i].value = ModelItem;
                 relayVar[i].display_str = ModelItem.Name? ModelItem.Name : "";
@@ -1806,6 +1880,37 @@ export const BaseContextCallTable : CallEventTable = {
             
             return relayVar;
         }
+    },
+    gain_new_model_from_list: {
+        event_priotity: 0,
+        async onGainLocation(this: EventRunner, eventSource : any, trackVal : WarbandProperty, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) {
+            
+            
+            const { ModelFactory } = await import("../../factories/features/ModelFactory");
+            if (context_func["count"] && context_func["id"]) {
+                for (let i = 0; i < context_func["count"]; i++) {
+                    for (let j = 0; j < context_func["id"].length; j++) {
+                        const NewModel = await ModelFactory.CreateNewFactionModel(context_func["id"][j], null);
+                        await warband.AddFighter([NewModel]);
+                    }
+                }
+            }
+        }
+    },
+    exploration_option: {
+        event_priotity: 0,
+        async returnWbbOptionDisplay(this: EventRunner, eventSource : any, trackVar : IChoice, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null){
+                        
+            return ( 
+            
+                <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
+                    
+                    <p className={''}>
+                        {returnDescription(trackVar.value, trackVar.value.Description)}
+                    </p>
+                </ErrorBoundary>
+            )
+        },
     },
     ability_option: {
         event_priotity: 0,
@@ -1904,10 +2009,33 @@ export const BaseContextCallTable : CallEventTable = {
             return relayVar;
         }
     },
+    warband_general_hook: {
+        event_priotity: 0,        
+        async getModelRelationshipsForWarband(this: EventRunner, eventSource : any, relayVar : FactionModelRelationship[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : UserWarband) {
+            
+            const FacCheck = sourceband.Faction.MyFaction;
+            const ListOfRels : FactionModelRelationship[] = []
+            let BaseRels : FactionModelRelationship[] = []
+            
+            if (FacCheck != undefined) {
+                BaseRels = ((FacCheck.SelfDynamicProperty).OptionChoice as Faction).Models
+            }
+
+            const eventmon : EventRunner = new EventRunner();
+            BaseRels = await eventmon.runEvent(
+                "getAllFactionModelRelationships",
+                sourceband,
+                [],
+                BaseRels,
+                null
+            )
+
+            return BaseRels.filter((item) => item.Mercenary == false);
+        }
+    },
     upgrade_stat: {
         event_priotity: 1,
         async updateModelStats(this: EventRunner, eventSource : any, relayVar : ModelStatistics,   context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
-            
             for (let i = 0; i < context_func["upgrades"].length; i++) {
                 const contextitem = context_func["upgrades"][i];
 
@@ -1980,6 +2108,12 @@ export const BaseContextCallTable : CallEventTable = {
             return relayVar;
         }
     },
+    add_onto_warband: {
+        event_priotity: 0,
+        async showSkillOnWarband(this: EventRunner, eventSource : any, relayVar : boolean, trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, member : WarbandMember) {
+            return true;
+        }
+    },
     keyword_mod_remove: {
         event_priotity: 2,
         async getContextuallyRelevantKeywordsByID(this: EventRunner, eventSource : any, relayVar : string[], trackVal : Model, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
@@ -2036,6 +2170,12 @@ export const BaseContextCallTable : CallEventTable = {
                 }
             }         
             return relayVar;
+        }
+    },
+    demote: {
+        event_priotity: 0,
+        async onGainInjury(this: EventRunner, eventSource : any, trackVal : Injury, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, member : WarbandMember) {
+            member.Elite = false;
         }
     }
 }

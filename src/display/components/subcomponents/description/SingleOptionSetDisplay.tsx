@@ -9,6 +9,7 @@ import ItemRow from './ItemRow';
 import { returnDescription } from '../../../../utility/util';
 import WbbOptionBox from '../../../components/warband-builder/WbbOptionBox';
 import RulesOptionSelection from '../../rules-content/RulesOptionSelectionModal';
+import RulesOptionBox from '../../rules-content/RulesOptionBox';
 
 const SingleOptionSetDisplay = (props: any) => {
     const OptionSet : StaticOption = props.data
@@ -30,18 +31,20 @@ const SingleOptionSetDisplay = (props: any) => {
                 OptionUpdate(OptionSet.RefID, selectedModel);
             }
 
-            const EventProc: EventRunner = new EventRunner();
-            
-            const result = await EventProc.runEvent(
-                "returnOptionDisplay",
-                OptionSet.MyStaticObject,
-                [],
-                null,
-                selectedModel
-            );
-            if (result != null) {
-                setDisplayState(result)
-                setkeyvar((prev) => prev + 1);
+            if (selectedModel != null) {
+                const EventProc: EventRunner = new EventRunner();
+                
+                const result = await EventProc.runEvent(
+                    "returnOptionDisplay",
+                    OptionSet.MyStaticObject,
+                    [],
+                    null,
+                    selectedModel
+                );
+                if (result != null) {
+                    setDisplayState(result)
+                    setkeyvar((prev) => prev + 1);
+                }
             }
         }
 
@@ -59,7 +62,7 @@ const SingleOptionSetDisplay = (props: any) => {
                 {OptionSet.Selections.length > 0 &&
                     <>
                     
-                        <WbbOptionBox
+                        <RulesOptionBox
                             title={OptionSet.Name}
                             value={selectedModel? selectedModel.display_str : "-"}
                             onClick={() => setshowModal(true)}

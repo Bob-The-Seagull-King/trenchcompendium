@@ -152,18 +152,20 @@ const RulesModelDisplay = (props: any) => {
             /* UPGRADES */
             if (parentfaction != undefined) {
                 const result_upgrades = await factionmodelObject.getContextuallyAvailableUpgrades(parentfaction);
-                if (bonusselections != undefined && (Object.entries(bonusselections).length > 0)) {
+                if (bonusselections != undefined && (Object.entries(bonusselections).filter((item) => (item[1] != null)).length > 0)) {
                     for (const [optionSetId, selectedObject] of Object.entries(bonusselections)) {
-                        if ((selectedObject as IChoice).value instanceof ContextObject) {
-                        const Events : EventRunner = new EventRunner();
-                        const result = await Events.runEvent(
-                            "getContextuallyAddedUpgrades",
-                            (selectedObject as IChoice).value,
-                            [],
-                            result_upgrades,
-                            modelcollectionObject
-                        )
-                        setupgrades(SplitUpgrades(result))
+                        if (selectedObject != null && selectedObject != undefined) {
+                            if ((selectedObject as IChoice).value instanceof ContextObject) {
+                            const Events : EventRunner = new EventRunner();
+                            const result = await Events.runEvent(
+                                "getContextuallyAddedUpgrades",
+                                (selectedObject as IChoice).value,
+                                [],
+                                result_upgrades,
+                                modelcollectionObject
+                            )
+                            setupgrades(SplitUpgrades(result))
+                            }
                         }
                     }
                 } else {
@@ -177,8 +179,9 @@ const RulesModelDisplay = (props: any) => {
             let cur_abilities = modelcollectionObject.Abilities
             if (parentfaction != undefined) {
                 const result_abilities = await factionmodelObject.getContextuallyAvailableAbilities(parentfaction);
-                if (bonusselections != undefined && (Object.entries(bonusselections).length > 0)) {
+                if (bonusselections != undefined && (Object.entries(bonusselections).filter((item) => (item[1] != null)).length > 0)) {
                     for (const [optionSetId, selectedObject] of Object.entries(bonusselections)) {
+                        if (selectedObject != null && selectedObject != undefined) {
                         if ((selectedObject as IChoice).value instanceof ContextObject) {
                         const Events : EventRunner = new EventRunner();
                         const result = await Events.runEvent(
@@ -190,7 +193,7 @@ const RulesModelDisplay = (props: any) => {
                         )
                         cur_abilities = result
                         setabilities(result)
-                        }
+                        }}
                     }
                 } else {
                     cur_abilities = result_abilities

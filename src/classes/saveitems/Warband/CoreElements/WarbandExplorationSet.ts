@@ -1,15 +1,43 @@
 import { Skill } from "../../../feature/ability/Skill";
 import { ContextObject, IContextObject } from "../../../contextevent/contextobject";
 import { DynamicOptionContextObject } from "../../../options/DynamicOptionContextObject";
-import { IWarbandProperty, WarbandProperty } from "../WarbandProperty";
+import { ISelectedOption, IWarbandProperty, WarbandProperty } from "../WarbandProperty";
 import { DynamicContextObject} from "../../../contextevent/dynamiccontextobject";
 import { SkillFactory } from "../../../../factories/features/SkillFactory";
 import { ExplorationFactory } from "../../../../factories/features/ExplorationFactory";
 import { ContextPackage } from "../../../contextevent/contextpackage";
+import { UserWarband } from "../UserWarband";
+import { WarbandMember } from "../Purchases/WarbandMember";
+import { ExplorationTable } from "../../../feature/exploration/ExplorationTable";
+import { ExplorationLocation } from "../../../feature/exploration/ExplorationLocation";
+import { StaticOption } from "../../../options/StaticOption";
+import { IChoice } from "../../../options/StaticOption";
+import { EventRunner } from "../../../contextevent/contexteventhandler";
 
 interface IWarbandExplorationSet extends IContextObject {
     explorationskills: IWarbandProperty[];
     locations: IWarbandProperty[];
+}
+
+export interface ExplorationSkillSuite {
+    skill: WarbandProperty,
+    count: number,
+    sources : string[]
+}
+
+export interface ExplorationTableSuite {
+    table : ExplorationTable,
+    valid_locs : FilteredLocation[]
+}
+
+export interface FilteredLocation {
+    location : ExplorationLocation,
+    options : FilteredOptions[]
+}
+
+export interface FilteredOptions {
+    baseopt : StaticOption
+    selection_valid : IChoice[]
 }
 
 class WarbandExplorationSet extends DynamicContextObject {
@@ -94,6 +122,150 @@ class WarbandExplorationSet extends DynamicContextObject {
         return subpackages; 
     }
 
+    public async GetSkills() {
+        const SumSkills : WarbandProperty[] = [];
+        for (let i = 0; i < this.Skills.length; i++) {
+            SumSkills.push(this.Skills[i]);
+        }
+        for (let i = 0; i < (this.MyContext as UserWarband).Models.length; i++) {
+            const Mdl = (this.MyContext as UserWarband).Models[i].HeldObject as WarbandMember;
+            const NewSkills = await Mdl.GetExplorationSkills();
+            for (let j = 0; j < NewSkills.length; j++) {
+                SumSkills.push(NewSkills[j])
+            }
+        }
+        return SumSkills;
+    }
+
+    public async GetSkillsInFormat() {
+        const SumSkills : ExplorationSkillSuite[] = [];
+        for (let i = 0; i < this.Skills.length; i++) {
+            this.TryAddToSkillsFormat(SumSkills, this.Skills[i], "Warband Skill")
+        }
+        for (let i = 0; i < (this.MyContext as UserWarband).Models.length; i++) {
+            const Mdl = (this.MyContext as UserWarband).Models[i].HeldObject as WarbandMember;
+            const NewSkills = await Mdl.GetExplorationSkills();
+            for (let j = 0; j < NewSkills.length; j++) {
+                this.TryAddToSkillsFormat(SumSkills, NewSkills[j], "Model: " + Mdl.GetTrueName())
+            }
+        }
+        return SumSkills;
+    }
+
+    private TryAddToSkillsFormat(skillsformatted : ExplorationSkillSuite[], NewSkill : WarbandProperty, source = "Warband") {
+        
+        const selected = skillsformatted.find((i) => i.skill.SelfDynamicProperty.OptionChoice.GetID() === NewSkill.SelfDynamicProperty.OptionChoice.GetID());
+        if (selected) {
+            selected.count += 1;
+            selected.sources.push(source);
+        } else {
+            skillsformatted.push(
+                {
+                    skill: NewSkill,
+                    count: 1,
+                    sources: [source]
+                }
+            )
+        }
+    }
+
+    public async GetValidNewLocations() {
+        const LocationSuite : ExplorationTableSuite[] = []
+
+        const TableList : ExplorationTable[] = await ExplorationFactory.GetAllTables();
+
+        for (let i = 0; i < TableList.length; i++) {
+            const ValidLocs : FilteredLocation[] = []
+
+            for (let j = 0; j < TableList[i].ExplorationLocations.length; j++) {
+                const selected = this.Locations.find((k) => k.SelfDynamicProperty.OptionChoice.GetID() === TableList[i].ExplorationLocations[j].GetID());
+
+                if (!selected) {
+                    const ValidLoc : FilteredLocation = await this.GetValidOptionsForLocation(TableList[i].ExplorationLocations[j]);
+                    ValidLocs.push(
+                        ValidLoc
+                    )
+                }
+            }
+
+            LocationSuite.push(
+                {
+                    table: TableList[i],
+                    valid_locs: ValidLocs
+                }
+            )
+        }
+
+        return LocationSuite;
+    }
+
+    public async GetValidOptionsForLocation(explor_loc : ExplorationLocation) : Promise<FilteredLocation> {
+        const eventmon : EventRunner = new EventRunner();
+        const OptionList : FilteredOptions[] = []
+
+        for (let i = 0; i < explor_loc.MyOptions.length; i++) {
+            const ValidSelections: IChoice[] = [];
+
+            for (let j = 0; j < explor_loc.MyOptions[i].Selections.length; j++) {
+                if (explor_loc.MyOptions[i].Selections[j].value instanceof ContextObject) {
+                    const IsValid = await eventmon.runEvent(
+                        "canChooseOptionLocation",
+                        explor_loc.MyOptions[i].Selections[j].value,
+                        [],
+                        true,
+                        this.MyContext as UserWarband
+                    )
+
+                    if (IsValid) { ValidSelections.push(explor_loc.MyOptions[i].Selections[j]) }
+                } else { ValidSelections.push(explor_loc.MyOptions[i].Selections[j]) }
+            }
+            if (ValidSelections.length > 0) {
+                OptionList.push(
+                    {
+                        baseopt: explor_loc.MyOptions[i],
+                        selection_valid: ValidSelections
+                    }
+                )
+            }
+        }
+
+        return (
+            {
+                location: explor_loc,
+                options: OptionList
+            }
+        )
+    }
+
+    public async DeleteLocation( mod : WarbandProperty ) {
+        for (let i = 0; i < this.Locations.length; i++) {
+            if (mod == (this.Locations[i])) {
+                this.Locations.splice(i, 1);
+                break;
+            }
+        }
+    }
+    
+    public async AddExplorationLocation ( location: ExplorationLocation, option: ISelectedOption[]) {
+
+        const Selections : IWarbandProperty = {
+            object_id: location.GetID(),
+            selections: option
+        }
+
+        const NewRuleProperty = new WarbandProperty(location, this, null, Selections);
+        await NewRuleProperty.HandleDynamicProps(location, this, null, Selections);
+        this.Locations.push(NewRuleProperty);
+        const eventmon : EventRunner = new EventRunner();
+        await eventmon.runEvent(
+            "onGainLocation",
+            this,
+            [this.MyContext as UserWarband],
+            null,
+            NewRuleProperty
+        )
+
+    }
 
 }
 

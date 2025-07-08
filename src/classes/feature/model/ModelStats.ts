@@ -208,3 +208,16 @@ export function getModelStatArmour(stats: StatInput): string {
 
     return armour.map(a => a.toString()).join('/');
 }
+
+export function GetStatAsFullString(statset : ModelStatistics) : string {
+    const val : string[] = [];
+
+    if (statset.movement != undefined) {val.push("Movement: " + statset.movement + "\"")}
+    if (statset.movetype != undefined) {val.push("Move Type: " + statset.movetype)}
+    if (statset.melee != undefined) {val.push("Melee: " + statset.melee)}
+    if (statset.ranged != undefined) {val.push("Ranged: " + statset.ranged)}
+    if (statset.armour != undefined) {val.push("Armour: " + statset.armour)}
+    if (statset.base != undefined) {val.push("Base: " + statset.base.join('x') + "mm")}
+
+    return val.join(', ');
+}

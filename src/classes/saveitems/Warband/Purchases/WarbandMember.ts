@@ -29,11 +29,21 @@ import { FactionEquipmentRelationship, IFactionEquipmentRelationship } from "../
 import { EquipmentFactory } from "../../../../factories/features/EquipmentFactory";
 import { ModelEquipmentRelationship } from "../../../relationship/model/ModelEquipmentRelationship";
 import { containsTag } from "../../../../utility/functions";
+import { Injury } from "../../../feature/ability/Injury";
+import { SkillGroup } from "../../../feature/skillgroup/SkillGroup";
+import { StaticContextObject } from "../../../contextevent/staticcontextobject";
+import { GetStatAsFullString, MergeTwoStats, ModelStatistics } from "../../../feature/model/ModelStats";
+
+export interface SkillSuite {
+    skillgroup : StaticContextObject,
+    list : Skill[]
+}
 
 export interface MemberAndWarband {
     warband: UserWarband,
     model: WarbandMember
 }
+
 export interface MemberAndItem {
     item: FactionEquipmentRelationship,
     model: WarbandMember
@@ -63,7 +73,7 @@ interface IWarbandMember extends IContextObject {
     model: string,
     subproperties : IWarbandProperty[],
     notes : INote[]
-    active : 'active' | 'reserved' | 'lost',
+    active : 'active' | 'reserved' | 'lost' | 'dead',
     equipment : IWarbandPurchaseEquipment[],
     list_upgrades : IWarbandPurchaseUpgrade[],
     list_injury : IWarbandProperty[],
@@ -71,7 +81,9 @@ interface IWarbandMember extends IContextObject {
     list_modelequipment : IWarbandProperty[],
     experience : number,
     elite : boolean,
-    recruited: boolean
+    recruited: boolean,
+    scar_reserves: number,
+    stat_selections : ModelStatistics[]
 }
 
 class WarbandMember extends DynamicContextObject {
@@ -79,7 +91,7 @@ class WarbandMember extends DynamicContextObject {
     public readonly boldXpIndices = [2, 4, 7, 10, 14, 18];
 
     Notes : INote[];
-    State :  'active' | 'reserved' | 'lost';
+    State :  'active' | 'reserved' | 'lost' | 'dead';
     CurModel! : Model;
     SubProperties : WarbandProperty[] = [];
     Equipment : WarbandPurchase[] = [];
@@ -90,6 +102,8 @@ class WarbandMember extends DynamicContextObject {
     Elite : boolean;
     Recruited : boolean;
     ModelEquipments : WarbandProperty[] = [];
+    ScarReserve : number;
+    Stat_Selections : ModelStatistics[] = [];
 
     /**
      * Assigns parameters and creates a series of description
@@ -104,6 +118,16 @@ class WarbandMember extends DynamicContextObject {
             this.State = data.active;
         } else {
             this.State = 'active'
+        }
+        if (data.scar_reserves) {
+            this.ScarReserve = data.scar_reserves;
+        } else {
+            this.ScarReserve = 0;
+        }
+        if (data.stat_selections) {
+            for (let i = 0; i < data.stat_selections.length; i++) {
+                this.Stat_Selections.push(data.stat_selections[i]);
+            }
         }
         this.Experience = data.experience;
         this.Elite = data.elite;
@@ -180,6 +204,7 @@ class WarbandMember extends DynamicContextObject {
     public async getContextuallyAvailableAbilities() : Promise<Ability[]> {
         const AbilitiesAvailable : Ability[] = []
         const BaseList : Ability[] = []
+        const IDList : string[] = [];
         
         for (let i = 0; i < this.CurModel.Abilities.length; i++) {
             BaseList.push(this.CurModel.Abilities[i]);
@@ -202,11 +227,17 @@ class WarbandMember extends DynamicContextObject {
                 this
             )
             for (let i = 0; i < result_fin.length; i++) {
-                AbilitiesAvailable.push(result[i]);
+                if (!IDList.includes(result[i].ID)) {
+                    IDList.push(result[i].ID)
+                    AbilitiesAvailable.push(result[i]);
+                }
             }
         } else {
             for (let i = 0; i < BaseList.length; i++) {
-                AbilitiesAvailable.push(BaseList[i]);
+                if (!IDList.includes(BaseList[i].ID)) {
+                    IDList.push(BaseList[i].ID)
+                    AbilitiesAvailable.push(BaseList[i]);
+                }
             }
         }
 
@@ -267,7 +298,7 @@ class WarbandMember extends DynamicContextObject {
     public async BuildSkills(data : IWarbandProperty[]) {
         for (let i = 0; i < data.length; i++) {
             const CurVal = data[i];
-            const Value = await SkillFactory.CreateNewSkill(CurVal.object_id, this);
+            const Value = await SkillFactory.CreateNewSkill(CurVal.object_id, this, true);
             const NewLocation = new WarbandProperty(Value, this, null, CurVal);
             await NewLocation.HandleDynamicProps(Value, this, null, CurVal)
             this.Skills.push(NewLocation);
@@ -341,7 +372,9 @@ class WarbandMember extends DynamicContextObject {
             experience : this.Experience,
             list_modelequipment: modelpropset,
             elite : this.Elite,
-            recruited : this.Recruited
+            recruited : this.Recruited,
+            scar_reserves : this.ScarReserve,
+            stat_selections : this.Stat_Selections
         }
         
         return _objint;
@@ -517,6 +550,26 @@ class WarbandMember extends DynamicContextObject {
         return count;
     }
 
+    public async GetWarbandSkills() {
+        const SkillList : WarbandProperty[] = [];
+        const Events : EventRunner = new EventRunner();
+
+        for (let i = 0; i < this.Skills.length; i++) {
+            const ShowWarband = await Events.runEvent(
+                "showSkillOnWarband",
+                this.Skills[i],
+                [],
+                true,
+                this
+            )
+
+            if (ShowWarband) {
+                SkillList.push(this.Skills[i])
+            }
+        }
+        return SkillList;
+    }
+
     /**
      * Get the name of the Fighter
      * - i.e. "Steve the fearless"
@@ -593,7 +646,14 @@ class WarbandMember extends DynamicContextObject {
      * @return: int
      */
     GetBattleScars () {
-        return this.Injuries.length;
+        return this.Injuries.length + this.ScarReserve;
+    }
+
+    public async SetScars(scar_num : number) {
+        const baseNum = this.Injuries.length;
+        this.ScarReserve = scar_num - baseNum;
+
+        await this.CheckIfDead();
     }
 
     public RenameSelf(name : string) {
@@ -706,6 +766,23 @@ class WarbandMember extends DynamicContextObject {
         }
         return completegroups;
 
+    }
+
+    public async GetExplorationSkills() {
+        const Events : EventRunner = new EventRunner();
+        const SkillList : WarbandProperty[] = await Events.runEvent(
+                        "getExplorationSkills",
+                        (this),
+                        [],
+                        [],
+                        null
+                    )
+        for (let i = 0; i < this.Skills.length; i++) {
+            if ((this.Skills[i].SelfDynamicProperty.OptionChoice as Skill).SkillGroups.includes("sg_exploration")) {
+                SkillList.push(this.Skills[i])
+            }
+        }
+        return SkillList;
     }
 
     public async CalcGivenPurchase(upg : ModelUpgradeRelationship, category : string, limit : number | null = null): Promise<MemberUpgradePresentation> {
@@ -925,6 +1002,231 @@ class WarbandMember extends DynamicContextObject {
         }
     }
 
+    public async GetModelInjuryOptions() {
+        const AllInjuries : Injury[] = await InjuryFactory.GetAllInjury();
+        const ListOfOptions : Injury[] = [];
+
+        const eventmon : EventRunner = new EventRunner();
+        for (let i = 0; i < AllInjuries.length; i++) {
+            const Allow = await eventmon.runEvent(
+                "allowInjuryGain",
+                this,
+                [this],
+                true,
+                AllInjuries[i]
+            )
+            if (Allow) {
+                ListOfOptions.push(AllInjuries[i]);
+            }
+        }
+
+        return ListOfOptions;
+    }
+
+    public async GetModelSkillOptions() {
+        const ListOfOptions : SkillSuite[] = [];
+        const BaseSkillgroups : SkillGroup[] = await SkillFactory.GetBaseSkills();
+        const Patrons : Patron | null = (this.MyContext as UserWarband).Faction.GetPatronSkills();
+
+        const eventmon : EventRunner = new EventRunner();
+        if (Patrons != null) {
+            const validSkills : Skill[] = [];
+
+            for (let i = 0; i < Patrons.Skills.length; i++) {
+                if (this.Skills.filter((item) => (item.SelfDynamicProperty.OptionChoice.ID == Patrons.Skills[i].ID)).length == 0) {
+
+                    const Allow = await eventmon.runEvent(
+                        "allowSkillGain",
+                        this,
+                        [this],
+                        true,
+                        Patrons.Skills[i]
+                    )
+                    if (Allow) {
+                        validSkills.push(Patrons.Skills[i]);
+                    }
+                }
+            }
+
+            ListOfOptions.push(
+                {
+                    skillgroup: Patrons,
+                    list: validSkills
+                }
+            )
+        }
+        
+        for (let j = 0; j < BaseSkillgroups.length; j++) {
+            const SkillGroup = BaseSkillgroups[j]
+            const validSkills : Skill[] = [];
+
+            for (let i = 0; i < SkillGroup.Skills.length; i++) {
+                if (this.Skills.filter((item) => (item.SelfDynamicProperty.OptionChoice.ID == SkillGroup.Skills[i].ID)).length == 0) {
+
+                    const Allow = await eventmon.runEvent(
+                        "allowSkillGain",
+                        this,
+                        [this],
+                        true,
+                        SkillGroup.Skills[i]
+                    )
+                    if (Allow) {
+                        validSkills.push(SkillGroup.Skills[i]);
+                    }
+                }
+            }
+
+            ListOfOptions.push(
+                {
+                    skillgroup: SkillGroup,
+                    list: validSkills
+                }
+            )
+        }
+
+        return ListOfOptions;
+    }
+
+    public async AddInjury(inj : Injury) {
+        const NewRuleProperty = new WarbandProperty(inj, this, null, null);
+        await NewRuleProperty.HandleDynamicProps(inj, this, null, null);
+        this.Injuries.push(NewRuleProperty);
+        const eventmon : EventRunner = new EventRunner();
+        await eventmon.runEvent(
+            "onGainInjury",
+            this,
+            [this],
+            null,
+            inj
+        )
+        await this.CheckIfDead();
+    }
+
+    public async CheckIfDead() {
+        const eventmon : EventRunner = new EventRunner();
+        const MaxScars = await eventmon.runEvent(
+            "getMaximumScars",
+            this,
+            [],
+            3,
+            this
+        )
+        
+        if (this.GetBattleScars() >= MaxScars) {
+            this.State = 'dead';
+        }
+    }
+
+    public async AddSkill(skl : Skill) {
+        const NewRuleProperty = new WarbandProperty(skl, this, null, null);
+        await NewRuleProperty.HandleDynamicProps(skl, this, null, null);
+        this.Skills.push(NewRuleProperty);
+        const eventmon : EventRunner = new EventRunner();
+        await eventmon.runEvent(
+            "onGainSkill",
+            skl,
+            [this],
+            NewRuleProperty,
+            skl
+        )
+    }
+
+    public UpdateStatOption(newstat: ModelStatistics, oldstat : ModelStatistics | null) {
+        if (oldstat == null) {
+            this.Stat_Selections.push(newstat);
+        } else {
+            for (let i = 0; i < this.Stat_Selections.length; i++) {
+                if (GetStatAsFullString(this.Stat_Selections[i]) == GetStatAsFullString(oldstat)) {
+                    
+                    this.Stat_Selections.splice(i, 1);
+                    this.Stat_Selections.push(newstat);
+                    return;
+                }
+            }
+        }
+    }
+
+    public async GetStatOptions() {
+        
+        const EventProc : EventRunner = new EventRunner();
+        const result = await EventProc.runEvent(
+            "getModelStatOptions",
+            this,
+            [],
+            [],
+            null
+        )
+
+        return result;
+    }
+    
+    public async CanChangeRank(): Promise<boolean> {
+        let count = true;
+        if (!this.Elite) {
+            count = await (this.MyContext as UserWarband).CanAddMoreElite()
+        }
+
+        if (count) {
+            const stats = await this.GetStats();
+
+            if (stats.potential != undefined) {
+                if (stats.potential == 2) { return false; }
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public ChangeRank() {
+        this.Elite = !this.Elite;
+    }
+
+    public async GetStats() {
+        const BaseStats = this.CurModel.Stats;
+        let FinStats : ModelStatistics = {};
+
+        if (BaseStats.armour != undefined) {FinStats.armour = BaseStats.armour}
+        if (BaseStats.melee != undefined) {FinStats.melee = BaseStats.melee}
+        if (BaseStats.ranged != undefined) {FinStats.ranged = BaseStats.ranged}
+        if (BaseStats.base != undefined) {FinStats.base = BaseStats.base}
+        if (BaseStats.mercenary != undefined) {FinStats.mercenary = BaseStats.mercenary}
+        if (BaseStats.movement != undefined) {FinStats.movement = BaseStats.movement}
+        if (BaseStats.movetype != undefined) {FinStats.movetype = BaseStats.movetype}
+        if (BaseStats.potential != undefined) {FinStats.potential = BaseStats.potential}
+
+        for (let i = 0; i < this.Stat_Selections.length; i++) {
+            FinStats = MergeTwoStats(FinStats, this.Stat_Selections[i]);
+        }
+        
+        const EventProc : EventRunner = new EventRunner();
+
+        FinStats = await EventProc.runEvent(
+            "updateModelStats",
+            this,
+            [],
+            FinStats,
+            null
+        )
+
+        return FinStats;
+    }
+
+    public async SetExperience(newval : number) {
+        this.Experience = newval;
+    }
+
+    // @TODO Lane
+    public async GetXPLimit() {
+        const stats = await this.GetStats();
+        if (stats.potential) {
+            if (stats.potential == 0) { return 18; }
+            if (stats.potential == 1) { return 7;}
+            if (stats.potential == 2) { return 0;}
+        }
+        return 18;
+    }
+
     public async GetModelEquipmentOptions() {
         const ListOfOptions : FactionEquipmentRelationship[] = []
 
@@ -956,7 +1258,15 @@ class WarbandMember extends DynamicContextObject {
         
         for (let i = 0; i < BaseFactionOptions.length; i++) {
 
-            let CanAdd = await this.EquipItemAvailableSpace(BaseFactionOptions[i], CurrentHandsAvailable)
+            let CanAdd = (BaseFactionOptions[i].EquipmentItem.Category != "equipment") 
+
+            if (!CanAdd) {
+                CanAdd = !(await this.HasSpecificEquipment(BaseFactionOptions[i].EquipmentItem.GetID()))
+            }
+
+            if (CanAdd) {
+                CanAdd = await this.EquipItemAvailableSpace(BaseFactionOptions[i], CurrentHandsAvailable)
+            }
 
             if (CanAdd) {
                 CanAdd = await this.EquipItemCanAdd(BaseFactionOptions[i], RestrictionList)
@@ -968,6 +1278,17 @@ class WarbandMember extends DynamicContextObject {
         }
 
         return ListOfOptions;
+    }
+
+    public async HasSpecificEquipment(givenID : string) {        
+        const MyEquip = await this.GetAllEquipForShow();
+        for (let i = 0; i < MyEquip.length; i++) {
+            const EquipItem = MyEquip[i].equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment;
+            if (EquipItem.GetID() == givenID) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public async EquipItemCanAdd(faceq : FactionEquipmentRelationship, restriction_list : EquipmentRestriction[]) {
@@ -1061,12 +1382,40 @@ class WarbandMember extends DynamicContextObject {
                 model: this
             }
         ) 
+
+        
+        const MeleeShield = await this.IncludesShieldComboMelee();
+        const RangedShield = await this.IncludesShieldComboRanged();
+        const HasShield = await this.HasShield();
         
         const IgnoreStrong = (await this.HasTwoHandedMeleeWeapon())
+        const IsStrong = await this.IsKeywordPresent("kw_strong");
 
-        if (!IgnoreStrong) {
+        if (!IgnoreStrong && IsStrong) {
             if (EquipHands.melee == 2) {
                 EquipHands.melee = 1;
+            }
+        }
+
+        if (MeleeShield && containsTag(faceq.EquipmentItem.Tags, "shield")) {
+            if (EquipHands.melee > 0) {
+                EquipHands.melee -= 1;
+            }
+        }
+        if (RangedShield && containsTag(faceq.EquipmentItem.Tags, "shield")) {
+            if (EquipHands.ranged > 0) {
+                EquipHands.ranged -= 1;
+            }
+        }
+
+        if (HasShield) {
+            if (faceq.EquipmentItem.GetKeyWordIDs().includes("kw_shieldcombo")) {
+                if (EquipHands.melee > 0) {
+                    EquipHands.melee -= 1;
+                }
+                if (EquipHands.ranged > 0) {
+                    EquipHands.ranged -= 1;
+                }
             }
         }
 
@@ -1084,6 +1433,28 @@ class WarbandMember extends DynamicContextObject {
             return false;
         }
         return true;
+    }
+
+    public async IncludesShieldComboRanged() {
+        const MyEquip = await this.GetAllEquipForShow();
+        for (let i = 0; i < MyEquip.length; i++) {
+            const EquipItem = MyEquip[i].equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment;
+            if (EquipItem.GetKeyWordIDs().includes("kw_shieldcombo") && EquipItem.Category == "ranged") {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public async IncludesShieldComboMelee() {
+        const MyEquip = await this.GetAllEquipForShow();
+        for (let i = 0; i < MyEquip.length; i++) {
+            const EquipItem = MyEquip[i].equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment;
+            if (EquipItem.GetKeyWordIDs().includes("kw_shieldcombo") && EquipItem.Category == "melee") {
+                return true;
+            }
+        }
+        return false;
     }
 
     public async GetModelHands() {
@@ -1104,6 +1475,8 @@ class WarbandMember extends DynamicContextObject {
         )
 
         let IsStrong = await this.IsKeywordPresent("kw_strong");
+        const MeleeShield = await this.IncludesShieldComboMelee();
+        const RangedShield = await this.IncludesShieldComboRanged();
 
         const MyEquip = await this.GetAllEquipForShow();
         for (let i = 0; i < MyEquip.length; i++) {
@@ -1114,6 +1487,9 @@ class WarbandMember extends DynamicContextObject {
                     meleeval = 1;
                     IsStrong = false;
                 }
+                if (containsTag(EquipItem.Tags, "shield") && MeleeShield) {
+                    meleeval = 0;
+                }
                 if (BaseHands["melee"] == 0) {
                     BaseHands["special"] -= meleeval
                 } else {
@@ -1121,10 +1497,18 @@ class WarbandMember extends DynamicContextObject {
                 }
             }
             if (EquipItem.Stats["hands_ranged"]) {
+                let rangedval = EquipItem.Stats["hands_ranged"];
+                if (IsStrong && rangedval == 2) {
+                    rangedval = 1;
+                    IsStrong = false;
+                }
+                if (containsTag(EquipItem.Tags, "shield") && RangedShield) {
+                    rangedval = 0;
+                }
                 if (BaseHands["ranged"] == 0) {
-                    BaseHands["special"] -= EquipItem.Stats["hands_ranged"]
+                    BaseHands["special"] -= rangedval
                 } else {
-                    BaseHands["ranged"] -= EquipItem.Stats["hands_ranged"]
+                    BaseHands["ranged"] -= rangedval
                 }
             }
         }
@@ -1140,6 +1524,18 @@ class WarbandMember extends DynamicContextObject {
                 if (meleeval == 2) {
                     return true;
                 }
+            }
+        }
+        return false;
+
+    }
+
+    public async HasShield() {
+        const MyEquip = await this.GetAllEquipForShow();
+        for (let i = 0; i < MyEquip.length; i++) {
+            const EquipItem = MyEquip[i].equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment;
+            if (containsTag(EquipItem.Tags, "shield")) {
+                return true;
             }
         }
         return false;
@@ -1287,6 +1683,24 @@ class WarbandMember extends DynamicContextObject {
         for (let i = 0; i < this.Equipment.length; i++) {
             if (item.equipment == (this.Equipment[i].HeldObject as WarbandEquipment)) {
                 this.Equipment.splice(i, 1);
+                break;
+            }
+        }
+    }
+    
+    public async DeleteInjury( item : WarbandProperty ) {
+        for (let i = 0; i < this.Injuries.length; i++) {
+            if (item == (this.Injuries[i])) {
+                this.Injuries.splice(i, 1);
+                break;
+            }
+        }
+    }
+    
+    public async DeleteSkill( item : WarbandProperty ) {
+        for (let i = 0; i < this.Skills.length; i++) {
+            if (item == (this.Skills[i])) {
+                this.Skills.splice(i, 1);
                 break;
             }
         }

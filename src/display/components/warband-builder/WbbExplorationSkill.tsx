@@ -1,15 +1,15 @@
+import { WarbandProperty } from '../../../classes/saveitems/Warband/WarbandProperty'
 import React from 'react'
+import { returnDescription } from '../../../utility/util'
 
 interface WbbExplorationSkillProps {
-    Name: string
-    Description: string
+    Skill: WarbandProperty
     ID: string
     Sources: string[]
 }
 
 const WbbExplorationSkill: React.FC<WbbExplorationSkillProps> = ({
-                                                                     Name,
-                                                                     Description,
+                                                                     Skill,
                                                                      ID,
                                                                      Sources
 }) => {
@@ -17,7 +17,7 @@ const WbbExplorationSkill: React.FC<WbbExplorationSkillProps> = ({
         <div className="WbbExplorationSkill" data-skill-id={ID}>
             <div className={'WbbExplorationSkill-title'}>
                 <span className={'WbbExplorationSkill-title-name'}>
-                    {Name}
+                    {Skill.GetOwnName()}
                 </span>
 
                 <span className={'WbbExplorationSkill-title-num'}>
@@ -33,7 +33,7 @@ const WbbExplorationSkill: React.FC<WbbExplorationSkillProps> = ({
                         </strong>
                     </div>
                     <div>
-                        {Description}
+                        {returnDescription( Skill, Skill.GetOwnDescription())}
                     </div>
                 </div>
 

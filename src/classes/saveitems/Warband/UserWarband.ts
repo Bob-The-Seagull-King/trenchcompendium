@@ -2,7 +2,7 @@ import { CompendiumItem, ICompendiumItemData, ItemType } from '../../CompendiumI
 import { containsTag, DescriptionFactory } from '../../../utility/functions';
 import { INote } from '../../Note';
 import { IWarbandContextItem, WarbandContextItem } from './High_Level/WarbandContextItem';
-import { IWarbandExplorationSet, WarbandExplorationSet } from './CoreElements/WarbandExplorationSet';
+import { ExplorationSkillSuite, ExplorationTableSuite, IWarbandExplorationSet, WarbandExplorationSet } from './CoreElements/WarbandExplorationSet';
 import { DynamicContextObject } from '../../contextevent/dynamiccontextobject';
 import { ContextObject, IContextObject } from '../../contextevent/contextobject';
 import { IWarbandFaction, WarbandFaction } from './CoreElements/WarbandFaction';
@@ -14,11 +14,13 @@ import { FactionModelRelationship } from '../../relationship/faction/FactionMode
 import { EventRunner } from '../../contextevent/contexteventhandler';
 import { Faction } from '../../feature/faction/Faction';
 import { FactionEquipmentRelationship, IFactionEquipmentRelationship } from '../../relationship/faction/FactionEquipmentRelationship';
-import { WarbandProperty } from './WarbandProperty';
+import { ISelectedOption, IWarbandProperty, WarbandProperty } from './WarbandProperty';
 import { ContextPackage } from '../../contextevent/contextpackage';
 import { ToolsController } from '../../_high_level_controllers/ToolsController';
 import { ModelFactory } from '../../../factories/features/ModelFactory';
 import { EquipmentFactory } from '../../../factories/features/EquipmentFactory';
+import { SkillFactory } from '../../../factories/features/SkillFactory';
+import { ExplorationLocation } from '../../feature/exploration/ExplorationLocation';
 
 interface WarbandDebt {
     ducats : number,
@@ -35,7 +37,8 @@ interface IUserWarband extends IContextObject {
     models : IWarbandPurchaseModel[],
     equipment : IWarbandPurchaseEquipment[],
     notes : INote[],
-    debts : WarbandDebt
+    debts : WarbandDebt,
+    modifiers: IWarbandProperty[]
 }
 
 class UserWarband extends DynamicContextObject {
@@ -49,6 +52,7 @@ class UserWarband extends DynamicContextObject {
     public Models : WarbandPurchase[] = [];
     public Equipment : WarbandPurchase[] = [];
     public Debts : WarbandDebt;
+    public Modifiers : WarbandProperty[] = [];
 
     /**
      * Assigns parameters and creates a series of description
@@ -95,6 +99,16 @@ class UserWarband extends DynamicContextObject {
 
     }
 
+    public async BuildModifiersSkills(data : IWarbandProperty[]) {
+        for (let i = 0; i < data.length; i++) {
+            const CurVal = data[i];
+            const Value = await SkillFactory.CreateNewSkill(CurVal.object_id, this, true);
+            const NewLocation = new WarbandProperty(Value, this, null, CurVal);
+            await NewLocation.HandleDynamicProps(Value, this, null, CurVal)
+            this.Modifiers.push(NewLocation);
+        }
+    }
+
     public ConvertToInterface() {
         const modelslist : IWarbandPurchaseModel[] = []
         for (let i = 0; i < this.Models.length; i++) {
@@ -104,6 +118,11 @@ class UserWarband extends DynamicContextObject {
         const equipmentlist : IWarbandPurchaseEquipment[] = []
         for (let i = 0; i < this.Equipment.length; i++) {
             equipmentlist.push(this.Equipment[i].ConvertToInterfaceEquipment())
+        }
+
+        const propertylist : IWarbandProperty[] = []
+        for (let i = 0; i < this.Modifiers.length; i++) {
+            propertylist.push(this.Modifiers[i].ConvertToInterface())
         }
 
         const _objint : IUserWarband = {
@@ -120,7 +139,8 @@ class UserWarband extends DynamicContextObject {
             models : modelslist,
             equipment : equipmentlist,
             notes: this.Notes,
-            debts: this.Debts
+            debts: this.Debts,
+            modifiers: propertylist
         }
         
         return _objint;
@@ -131,7 +151,30 @@ class UserWarband extends DynamicContextObject {
      * on class implementation.
      */
     public async GrabSubPackages(event_id : string, source_obj : ContextObject, arrs_extra : any[]) : Promise<ContextPackage[]> { 
-        const subpackages : ContextPackage[] = []        
+        const subpackages : ContextPackage[] = []      
+
+        if (this.ContextData) {            
+            for (const key of Object.keys(this.ContextKeys)) {
+                const context_entry = this.ContextData[key]
+                if (context_entry == undefined) {continue;}
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore - dynamic lookup
+                const func = context_entry[event_id];
+                if (func !== undefined) {
+                    const curr_package : ContextPackage = {
+                        priority    : context_entry.event_priotity,
+                        source      : source_obj,
+                        self        : this,
+                        callback    : func,
+                        callbackdict: this.ContextKeys[key],
+                        dyncontext  : this.MyContext,
+                        callpath    : ["UserWarband","WarbandSource"]
+                    }
+
+                    subpackages.push(curr_package);
+                }                
+             }
+        }
 
         if (this.Faction) {
             const static_packages : ContextPackage[] = await this.Faction.GrabContextPackages(event_id, source_obj, arrs_extra);
@@ -150,6 +193,18 @@ class UserWarband extends DynamicContextObject {
 
     public async UpdateSelfPatron(patron_name : string ) {
         await this.Faction.UpdatePatron(patron_name);
+    }
+
+    public async GetExplorationSkillsInContext(): Promise<ExplorationSkillSuite[]> {
+        return await this.Exploration.GetSkillsInFormat();
+    }
+
+    public GetLocations() : WarbandProperty[] {
+        return this.Exploration.Locations;
+    }
+
+    public async GetAvailableLocations() : Promise<ExplorationTableSuite[]> {
+        return await this.Exploration.GetValidNewLocations();
     }
 
 
@@ -207,21 +262,17 @@ class UserWarband extends DynamicContextObject {
     }
 
     /**
-     * Returns the Name of the Base-Faction as string
-     *
-     * @TODO:
+     * Returns the Base-Faction
      */
-    public GetFactionBaseName () {
-        return 'The Iron Sultanate';
+    public async GetFactionBase () {
+        return await this.Faction.GetFactionBase();
     }
 
     /**
-     * Returns the Name of the Faction Variant as string
-     *
-     * @TODO:
+     * Returns the Faction
      */
-    public GetFactionVariantName () {
-        return 'The Iron Sultanate';
+    public GetFaction () {
+        return this.Faction.GetFaction();
     }
 
     /** 
@@ -293,6 +344,14 @@ class UserWarband extends DynamicContextObject {
      */
     public HasReserves () {
         return this.GetFighters().filter((item) => (item.model.State == "reserved")).length > 0;
+    }
+
+    /**
+     *
+     * Returns bool - Does the warband have models in reserve?
+     */
+    public HasDead () {
+        return this.GetFighters().filter((item) => (item.model.State == "dead")).length > 0;
     }
 
     /**
@@ -391,10 +450,33 @@ class UserWarband extends DynamicContextObject {
         
         for (let i = 0; i < this.Models.length; i++) {
             if (fighter.model == (this.Models[i].HeldObject as WarbandMember)) {
+                const FighterItems : WarbandProperty[] = await fighter.model.GetWarbandSkills();
+                for (let j = 0; j < FighterItems.length; j++) {
+                    FighterItems[j].MyContext = this;
+                    this.Modifiers.push(FighterItems[j])
+                }
                 this.Models.splice(i, 1);
                 break;
             }
         }
+    }
+
+    public HasModifier(mod : WarbandProperty) {
+        return (this.Modifiers.includes(mod));
+    }
+    
+    public async Deletemod( mod : WarbandProperty ) {
+        
+        for (let i = 0; i < this.Modifiers.length; i++) {
+            if (mod == (this.Modifiers[i])) {
+                this.Modifiers.splice(i, 1);
+                break;
+            }
+        }
+    }
+
+    public async DeleteLocation( loc : WarbandProperty ) {
+        await this.Exploration.DeleteLocation(loc)
     }
 
     public async DeleteFighterWithDebt( fighter : RealWarbandPurchaseModel, debt_mod : number) {
@@ -499,17 +581,12 @@ class UserWarband extends DynamicContextObject {
         } catch (e) { console.log(e) }
     }
 
-    /** @TODO
+    /**
      * Adds an exploration location to a Roster
      *
-     * @param location
-     * @param option
-     * @constructor
      */
-    public  AddExplorationLocation ( location: object, option: object) {
-
-        return false;
-
+    public async AddExplorationLocation ( location: ExplorationLocation, option: ISelectedOption[]) {
+        await this.Exploration.AddExplorationLocation(location, option);
     }
 
 
@@ -671,6 +748,20 @@ class UserWarband extends DynamicContextObject {
      */
     GetNumElite() {
         return this.GetFighters().filter(f => f.model.IsElite()).length;
+    }
+
+    public async CanAddMoreElite() {
+        
+        const EventProc : EventRunner = new EventRunner();
+        const result = await EventProc.runEvent(
+            "getNumberOfElite",
+            this,
+            [],
+            6,
+            null
+        )
+
+        return this.GetNumElite() < result;
     }
 
     GetNumFielded() {
@@ -982,8 +1073,20 @@ class UserWarband extends DynamicContextObject {
         return ListOfRels
     }
 
-    public GetModifiersList() {
+    public async GetModifiersList() {
         const PropertyList : WarbandProperty[] = [];
+
+        for (let i = 0; i < this.Models.length; i++) {
+            const Mods = await (this.Models[i].HeldObject as WarbandMember).GetWarbandSkills();
+            for (let j = 0; j < Mods.length; j++) {
+                PropertyList.push(Mods[i])
+            }
+        }
+
+        for (let i = 0; i < this.Modifiers.length; i++) {
+            PropertyList.push(this.Modifiers[i])    
+        }
+
         return PropertyList;
     }
 

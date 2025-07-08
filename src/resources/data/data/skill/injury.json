@@ -91,7 +91,7 @@
     },
     {
         "id": "in_lostaneye",
-        "name": "",
+        "name": "Lost An Eye",
         "source": "core",
         "tags": {
         },
@@ -167,7 +167,8 @@
         "tags": {
         },
         "contextdata": {
-            "keyword_mod_remove": {"mods": [{"type": "remove", "value": "kw_elite"}]}
+            "keyword_mod_remove": {"mods": [{"type": "remove", "value": "kw_elite"}]},
+            "demote": {}
          },
         "description": [            
             {

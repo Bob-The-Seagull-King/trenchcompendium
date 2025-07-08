@@ -168,7 +168,7 @@ class StaticOptionTypeList extends StaticOption {
 
 interface IStaticOptionContextObjectList extends IStaticOption {
     parent_level : number, // how many levels above this object to start a search from
-    question : StaticOptionContextObjectQuestion, // the question to use in filtering context objects
+    question? : StaticOptionContextObjectQuestion, // the question to use in filtering context objects
     question_name : string, // string name of the event to run
 }
 
@@ -186,7 +186,7 @@ interface QuestionBase { // To meet a question, all parameters must be met
 
 class StaticOptionContextObjectList extends StaticOption {
     public ParentRefLevel : number;
-    public Question : StaticOptionContextObjectQuestion;
+    public Question : StaticOptionContextObjectQuestion | null;
     public QuestionName : string;
 
     public constructor(data : IStaticOptionContextObjectList, parent :  StaticOptionContextObject) {
@@ -194,7 +194,9 @@ class StaticOptionContextObjectList extends StaticOption {
 
         this.QuestionName = data.question_name;
         this.ParentRefLevel = data.parent_level;
-        this.Question = data.question;
+        if (data.question) {
+            this.Question = data.question;
+        } else { this.Question = null; }
     }
 
     /**
@@ -202,7 +204,6 @@ class StaticOptionContextObjectList extends StaticOption {
      * to choose from.
      */
     public async FindChoices() {
-        
         const NewSelections : IChoice[] = [];
         let OptionContextList : ContextObject[] = []
 
@@ -211,7 +212,7 @@ class StaticOptionContextObjectList extends StaticOption {
         if ((this.DynaForce == true && RelevantContextObject != null) || (this.DynaForce == false)) {
             if (RelevantContextObject != null) {
                 const Events : EventRunner = new EventRunner();
-                OptionContextList = await Events.runEvent(this.QuestionName, RelevantContextObject, [], [], this.Question)
+                OptionContextList = await Events.runEvent(this.QuestionName, RelevantContextObject, [RelevantContextObject], [], this.Question)
 
                 for (let i = 0; i < OptionContextList.length; i++) {
                     if (OptionContextList[i] != this.MyStaticObject) {

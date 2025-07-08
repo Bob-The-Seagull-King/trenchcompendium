@@ -61,6 +61,14 @@ class FactionModelRelationship extends StaticOptionContextObject {
         this.Model = await ModelFactory.CreateNewModel(model_id, null);
     }
 
+    public GetTrueName() {
+        if (this.Model.Name) {
+            return this.Model.Name + (this.Captain == true? " (C)" : "");
+        } else {
+            return "";
+        }
+    }
+
     public async GetFactions(data : string[]) {
         for (let i = 0; i < data.length; i++) {
             this.Factions.push(await FactionFactory.CreateNewFaction(data[i], null))

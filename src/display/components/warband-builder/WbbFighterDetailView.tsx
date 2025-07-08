@@ -2,7 +2,9 @@ import React, {useEffect, useState} from 'react';
 import WbbEditViewFighter from "./WbbEditViewFighter";
 import {
     faCheck,
+    faChevronDown,
     faChevronLeft,
+    faChevronUp,
     faCopy, faEllipsisVertical,
     faPen,
     faPlus,
@@ -50,6 +52,10 @@ import { FactionEquipmentRelationship } from '../../../classes/relationship/fact
 import { ToolsController } from '../../../classes/_high_level_controllers/ToolsController';
 import { ModelEquipmentRelationship } from '../../../classes/relationship/model/ModelEquipmentRelationship';
 import WbbOptionSelect from './modals/warband/WbbOptionSelect';
+import { Injury } from '../../../classes/feature/ability/Injury';
+import { Skill } from '../../../classes/feature/ability/Skill';
+import { getModelStatArmour, getModelStatMelee, getModelStatMove, getModelStatRanged, ModelStatistics } from '../../../classes/feature/model/ModelStats';
+import WbbEditFighterStatOption from './modals/fighter/WbbFighterStatOption';
 
 
 interface WbbFighterDetailViewProps {
@@ -63,14 +69,26 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
 
     const fighter = warbandmember.model;
     
-    const [statchoices, setstats] = useState({})
+    const [stats, setstats] = useState<ModelStatistics>({})
+    const [canchange, setcanchange] = useState(true)
     const [upgrades, setupgrades] = useState<MemberUpgradesGrouped>({})
     const [abilities, setabilities] = useState<WarbandProperty[]>([])
+    const [statchoices, setStatChoices] = useState<ModelStatistics[][]>([])
     const [allmodelequip, setAllmodelequip] = useState<RealWarbandPurchaseEquipment[]>([])
+    const [xpLimit, setXPLimit] = useState<number>(0)
     const [keywordsList, setkeywords] = useState<Keyword[]>([])
-    const [BaseString, setBaseString] = useState('')
     const [modelslug, setmodeslug] = useState(fighter.GetModelSlug())
+    const [keyvar, setkeyvar] = useState(0);
 
+    useEffect(() => {
+        async function SetModelOptions() {
+            setStatChoices(await fighter.GetStatOptions());
+            setstats(await fighter.GetStats())
+            setcanchange(await fighter.CanChangeRank())
+            setkeyvar(keyvar + 1);
+        }
+        SetModelOptions();
+    }, [updateKey])
     
     useEffect(() => {
         async function SetModelOptions() {
@@ -78,9 +96,14 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
             const upgrades = await fighter.GetWarbandUpgradeCollections()
             setabilities(abilities);
             setupgrades(upgrades);
+            const XPLimit = await fighter.GetXPLimit();
+            setXPLimit(XPLimit)
             setkeywords(await fighter.getContextuallyAvailableKeywords())
             setmodeslug(fighter.GetModelSlug())
             setAllmodelequip(await fighter.GetAllEquipForShow())
+            setStatChoices(await fighter.GetStatOptions());
+            setcanchange(await fighter.CanChangeRank())
+            setstats(await fighter.GetStats())
             reloadDisplay()
         }
 
@@ -125,46 +148,51 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
     // Experience
     const [showXPModal, setShowXPModal] = useState(false);
     const handleXPSubmit = (newXP: number) => {
-        // if (!selectedFighter) return;
-        // @TODO: hook up to class
+        fighter.SetExperience(newXP).then(() => {
+            const Manager : ToolsController = ToolsController.getInstance();
+            Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(() => reloadDisplay())
+        });
     };
 
     // Battle Scars
     const [showEditScars, setShowEditScars] = useState(false);
     const handleUpdateBattleScars = (newScars: number) => {
-        // @TODO: hook up to class
-
-        // if (fighter) {
-        //     fighter.BattleScars = newScars;
-        // }
+        fighter.SetScars(newScars).then(() => {
+            const Manager : ToolsController = ToolsController.getInstance();
+            Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(() => reloadDisplay())
+        });
     };
 
     // Advancements
     const [showAdvancementModal, setShowAdvancementModal] = useState(false);
-    const handleAddAdvancement = (advancement: any) => {
-        // if (!selectedFighter) return;
-
-        // @TODO: hook up to class
-
-        // selectedFighter.AddAdvancement(advancement);
+    const handleAddAdvancement = (advancement: Skill) => {
+        fighter.AddSkill(advancement).then(() => {
+            const Manager : ToolsController = ToolsController.getInstance();
+            Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(() => reloadDisplay())
+        });
     };
 
     const [showInjuryModal, setShowInjuryModal] = useState(false);
-    const handleAddInjury = (injury: any) => {
-        // if (!selectedFighter) return;
-        // @TODO: hook up to class
-
-        // selectedFighter.AddInjury(injury);
+    const handleAddInjury = (injury: Injury) => {
+        fighter.AddInjury(injury).then(() => {
+            const Manager : ToolsController = ToolsController.getInstance();
+            Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(() => reloadDisplay())
+        });
     };
 
     // Fighter status
     const [showStatusModal, setShowStatusModal] = useState(false);
     const handleStatusUpdate = (newStatus: string) => {
-        if (newStatus == 'active' || newStatus == 'reserved' || newStatus == 'lost') {
+        if (newStatus == 'active' || newStatus == 'reserved' || newStatus == 'lost' || newStatus == 'dead') {
             fighter.State = newStatus;
             const Manager : ToolsController = ToolsController.getInstance();
             Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(() => reloadDisplay())
         }
+    };
+    const handleRankUpdate = () => {
+        fighter.ChangeRank()
+        const Manager : ToolsController = ToolsController.getInstance();
+        Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(() => reloadDisplay())
     };
 
     return (
@@ -284,23 +312,27 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                     </div>
 
                     {!playMode &&
-                        <div className="fighter-meta-entry-simple">
+                        <div key={keyvar} className="fighter-meta-entry-simple">
                             <span className="fighter-meta-label">
                                 {'Base: '}
                             </span>
                             <span className="fighter-meta-value">
-                                {'32mm'}
+                                {stats.base? stats.base.join('x') + "mm" : "-"}
                             </span>
                         </div>
                     }
 
                 </div>
 
-                <div className={'fighter-card-stats'}>
-                    <ItemStat title={"Movement"} value={'6" / Infantry'}/>
-                    <ItemStat title={"Melee"} value={'+1'}/>
-                    <ItemStat title={"Ranged"} value={'+2'}/>
-                    <ItemStat title={"Armor"} value={'0'}/>
+                <div key={keyvar}  className={'fighter-card-stats'}>
+                    <ItemStat title={"Movement"} value={getModelStatMove(stats)}/>
+                    {stats.melee != undefined &&
+                        <ItemStat title={"Melee"} value={getModelStatMelee(stats)}/>
+                    }
+                    {stats.ranged != undefined &&
+                        <ItemStat title={"Ranged"} value={getModelStatRanged(stats)}/>
+                    }
+                    <ItemStat title={"Armor"} value={getModelStatArmour(stats)}/>
                 </div>
 
                 <div className="fighter-card-meta fighter-card-meta-below">
@@ -313,6 +345,25 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                     </div>
                 </div>
             </div>
+
+            {/* Edit Loadout */}
+            {(!playMode && statchoices.length > 0) &&
+                <div className={'fighter-card-collapse-wrap'}>
+                    <WbbFighterCollapse title="Profile Options" initiallyOpen={true} key={updateKey}>
+                        <>
+                            {statchoices.map((item) => 
+                                
+                                    <WbbEditFighterStatOption
+                                        fighter={warbandmember}
+                                        options={item}
+                                        key={statchoices.indexOf(item)}
+                                    />
+                                
+                            )}
+                        </>
+                    </WbbFighterCollapse>
+                </div>
+            }
 
             {/*
               * Other Upgrades
@@ -532,7 +583,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                                 </div>
 
                                 <div className={'xp-boxes'} onClick={() => setShowXPModal(true)}>
-                                    {Array.from({length: 18}, (_, i) => {
+                                    {Array.from({length: xpLimit}, (_, i) => {
                                         const level = i + 1;
                                         const isBold = fighter.boldXpIndices.includes(level);
                                         const hasXP = level <= fighter.GetExperiencePoints();
@@ -551,16 +602,18 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                         }
 
                         {/* Battle Scars */}
-                        {fighter.IsElite() &&
+                        {(fighter.IsElite() || fighter.Injuries.length > 0) &&
                             <div className={'battle-scars'}>
 
                                 <h3></h3>
 
-                                <div className={'btn btn-primary btn-sm edit-battle-scar-btn'}
-                                     onClick={() => setShowEditScars(true)}>
-                                    <FontAwesomeIcon icon={faPen} className="icon-inline-left-l"/>
-                                    {'Edit'}
-                                </div>
+                                {fighter.IsElite() &&
+                                    <div className={'btn btn-primary btn-sm edit-battle-scar-btn'}
+                                        onClick={() => setShowEditScars(true)}>
+                                        <FontAwesomeIcon icon={faPen} className="icon-inline-left-l"/>
+                                        {'Edit'}
+                                    </div>
+                                }
 
                                 <div className="battle-scar-boxes" onClick={() => setShowEditScars(true)}>
                                     {Array.from({length: 3}, (_, i) => {
@@ -584,30 +637,39 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                         }
 
                         {/* Advancements & Injuries */}
-                        {fighter.IsElite() &&
+                        {(fighter.IsElite() || fighter.Skills.length > 0) &&
                             <>
                                 <h3>{'Advancements'}</h3>
                                 {fighter.GetSkillsList().map((advancement) => (
-                                    <WbbEditViewAdvancement advancement={advancement} key={advancement.ID + fighter.ID}/>
+                                    <WbbEditViewAdvancement advancement={advancement} key={advancement.ID + fighter.ID}
+                                            fighter={warbandmember}/>
                                 ))}
-                                <div className={'btn btn-add-element btn-block'}
-                                     onClick={() => setShowAdvancementModal(true)}>
-                                    <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
-                                    {'Add Advancement'}
-                                </div>
-
-                                <h3>{'Injuries'}</h3>
-                                {fighter.GetInjuriesList().map((injury) => (
-                                    <WbbEditViewInjury injury={injury} key={injury.ID  + fighter.ID}/>
-                                ))}
-
-                                <div className={'btn btn-add-element btn-block'}
-                                     onClick={() => setShowInjuryModal(true)}>
-                                    <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
-                                    {'Add Injury'}
-                                </div>
+                                {fighter.IsElite() &&
+                                    <div className={'btn btn-add-element btn-block'}
+                                        onClick={() => setShowAdvancementModal(true)}>
+                                        <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
+                                        {'Add Advancement'}
+                                    </div>
+                                }
                             </>
                         }
+                        {(fighter.IsElite() || fighter.Injuries.length > 0) &&
+                            <>
+                                <h3>{'Injuries'}</h3>
+                                {fighter.GetInjuriesList().map((injury) => (
+                                    <WbbEditViewInjury injury={injury} key={injury.ID  + fighter.ID}
+                                            fighter={warbandmember}/>
+                                ))}
+                                {fighter.IsElite() &&
+                                    <div className={'btn btn-add-element btn-block'}
+                                        onClick={() => setShowInjuryModal(true)}>
+                                        <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
+                                        {'Add Injury'}
+                                    </div>
+                                }
+                            </>
+                        }
+                        
 
 
                         {/*
@@ -628,29 +690,47 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                             </div>
                         </div>
 
+                        {!fighter.IsMercenary() &&
+                            <>
+                                <h3>{'Fighter Rank'}</h3>
+                                <div className={'fighter-status'}>
+                                    <div className={'fighter-status-string'}>
+                                        {fighter.IsElite()? "Elite" : "Troop"}
+                                    </div>
+                                    {canchange &&
+                                        <div className={'btn btn-primary'} onClick={() => handleRankUpdate()}>
+                                            <FontAwesomeIcon icon={fighter.IsElite()? faChevronDown : faChevronUp} className={'icon-inline-left-l'}/>
+                                            {fighter.IsElite()? "Demote" : "Promote"}
+                                        </div>
+                                    }
+                                </div>
+                            </>
+                        }
+
                         {/* Campaign Modals */}
                         <WbbEditFighterExperience
                             show={showXPModal}
                             onClose={() => setShowXPModal(false)}
-                            currentXP={fighter.GetExperiencePoints()} // @TODO: use actual XP value
-                            // currentXP={selectedFighter.ExperiencePoints}
+                            currentXP={fighter.GetExperiencePoints()}
                             onSubmit={handleXPSubmit}
                         />
                         <WbbEditBattleScars
                             show={showEditScars}
                             onClose={() => setShowEditScars(false)}
-                            currentScars={fighter.GetBattleScars()} // @TODO: use actual BS value
+                            currentScars={fighter.GetBattleScars()}
                             onSubmit={handleUpdateBattleScars}
                         />
                         <WbbModalAddAdvancement
                             show={showAdvancementModal}
                             onClose={() => setShowAdvancementModal(false)}
                             onSubmit={handleAddAdvancement}
+                            fighter={warbandmember}
                         />
                         <WbbModalAddInjury
                             show={showInjuryModal}
                             onClose={() => setShowInjuryModal(false)}
                             onSubmit={handleAddInjury}
+                            fighter={warbandmember}
                         />
                         <WbbModalEditFighterStatus
                             show={showStatusModal}
@@ -664,7 +744,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
 
 
             {/* Abilities */}
-            {(!playMode) &&
+            {(!playMode && abilities.length > 0) &&
                 <div className={'fighter-card-collapse-wrap'}>
                     <WbbFighterCollapse title="Abilities">
                         {abilities.map((ability, index) => (
@@ -677,7 +757,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
 
             {/* Play Mode Content */}
             {(playMode) &&
-                <div className={'fighter-card-play-mode-info'}>
+                <div className={'fighter-card-play-mode-info'}  key={keyvar}>
 
                     <div className={'play-mode-equipment-wrap'}>
                         {allmodelequip.filter((item) =>
@@ -764,26 +844,35 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                         }
                     </div>
 
+                    {abilities.length > 0 &&
                     <div className={'play-mode-abilities-wrap'}>
                         <h3>{'Abilities'}</h3>
                         {abilities.map((ability, index) => (
                             <WbbAbilityDisplay key={index} ability={ability}/>
                         ))}
                     </div>
+                    }
 
-                    <div className={'play-mode-advancements-wrap'}>
-                        <h3>{'Advancements'}</h3>
-                        {fighter.GetSkillsList().map((advancement) => (
-                            <WbbEditViewAdvancement advancement={advancement} key={advancement.ID + fighter.ID}/>
-                        ))}
-                    </div>
+                    {fighter.GetSkillsList().length > 0 &&
+                        <div className={'play-mode-advancements-wrap'}>
+                            <h3>{'Advancements'}</h3>
+                            {fighter.GetSkillsList().map((advancement) => (
+                                <WbbEditViewAdvancement advancement={advancement} key={advancement.ID + fighter.ID}
+                                                    fighter={warbandmember}/>
+                            ))}
+                        </div>
 
-                    <div className={'play-mode-injuries-wrap'}>
+                    }
+
+                    {fighter.GetInjuriesList().length > 0 &&
+                    <div className={'play-mode-injuries-wrap'} >
                         <h3>{'Injuries'}</h3>
                         {fighter.GetInjuriesList().map((injury) => (
-                            <WbbEditViewInjury injury={injury} key={injury.ID + fighter.ID}/>
+                            <WbbEditViewInjury injury={injury} key={injury.ID + fighter.ID}
+                                                fighter={warbandmember}/>
                         ))}
                     </div>
+                    }
                 </div>
             }
         </div>

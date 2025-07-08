@@ -60,8 +60,6 @@ class SiteUserPublic {
                     }
                 )
             } catch (e) {
-
-                console.log('@TODO: Error if no warbands for user are present');
                 console.log(e);
             }
         }

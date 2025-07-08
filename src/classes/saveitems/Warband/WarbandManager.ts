@@ -242,7 +242,12 @@ class WarbandManager {
                 value_glory: self_context.value_glory
             },
             exploration: {
-                explorationskills: [],
+                explorationskills: [
+                    {                        
+                        object_id: "es_reroll",
+                        selections: []
+                    }
+                ],
                 locations: [],
                 contextdata: {},
                 id: this.CalcID(_title.trim() + "_exploration"),
@@ -267,7 +272,8 @@ class WarbandManager {
             debts: {
                 ducats: 0,
                 glory: 0
-            }
+            },
+            modifiers: []
         }
         const new_item : UserWarband = await WarbandFactory.CreateUserWarband(_Item)
 

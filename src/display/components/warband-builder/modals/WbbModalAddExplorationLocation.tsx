@@ -1,68 +1,78 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import {faXmark} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-
-interface ExplorationOption {
-    id: string;
-    name: string;
-}
-
-interface ExplorationLocation {
-    id: string;
-    name: string;
-    options?: ExplorationOption[];
-}
+import { ExplorationLocation } from '../../../../classes/feature/exploration/ExplorationLocation';
+import { useWarband } from '../../../../context/WarbandContext';
+import { ExplorationTableSuite, FilteredLocation } from '../../../../classes/saveitems/Warband/CoreElements/WarbandExplorationSet';
+import WbbFighterCollapse from '../WbbFighterCollapse';
+import { makestringpresentable } from '../../../../utility/functions';
+import { ISelectedOption } from '../../../../classes/saveitems/Warband/WarbandProperty';
 
 interface WbbModalAddExplorationLocationProps {
     show: boolean;
     onClose: () => void;
-    onSubmit: (location: ExplorationLocation, selectedOptions: ExplorationOption[]) => void;
+    onSubmit: (location: ExplorationLocation, options : ISelectedOption[] ) => void;
 }
 
 const WbbModalAddExplorationLocation: React.FC<WbbModalAddExplorationLocationProps> = ({ show, onClose, onSubmit }) => {
-    const [selectedLocationId, setSelectedLocationId] = useState<string | null>(null);
-    const [selectedOptionId, setSelectedOptionId] = useState<string | null>(null);
+    const { warband, updateKey, reloadDisplay } = useWarband();
 
-    // @TODO: get actual location data
-    // Sample data – replace with actual locations & options
-    const availableLocations: ExplorationLocation[] = [
-        {
-            id: 'loc1',
-            name: 'Moonshine Stash',
-            options: [
-                { id: 'opt1', name: 'Distribute' },
-                { id: 'opt2', name: 'Destroy' }
-            ]
-        },
-        {
-            id: 'loc2',
-            name: 'Heavy Weapons Cache',
-            options: [
-                { id: 'opt3', name: 'Surplus' },
-                { id: 'opt4', name: 'Specialise' }
-            ]
-        },
-        {
-            id: 'loc3',
-            name: 'Fallen Soldier' // No options
-        }
-    ];
+    const [selectedLocation, setSelectedLocation] = useState<FilteredLocation | null>(null);
+    const [selectedOptionIds, setSelectedOptionIds] = useState<ISelectedOption[]>([]);
+    const [availableoptions, setavailableoptions] = useState<ExplorationTableSuite[]>([]);
 
-    const selectedLocation = availableLocations.find(loc => loc.id === selectedLocationId);
+    const [isubmitdisabled, setisubmitdisabled] = useState<boolean>(true);
+    const [keyvar, setkeyvar] = useState(0);
 
     const handleSubmit = () => {
         if (selectedLocation) {
-            const selectedOptions = selectedLocation.options?.filter(opt => opt.id === selectedOptionId) || [];
-            onSubmit(selectedLocation, selectedOptions);
-            setSelectedLocationId(null);
-            setSelectedOptionId(null);
+            onSubmit(selectedLocation.location, selectedOptionIds);
+            setSelectedLocation(null);
+            setSelectedOptionIds([]);
             onClose();
         }
     };
 
-    const isSubmitDisabled = !selectedLocationId ||
-        (selectedLocation?.options && selectedLocation.options.length > 0 && !selectedOptionId);
+    function UpdateSelectedOptionIDs(newoption : ISelectedOption) {
+        let found = false
+        for (let i = 0; i < selectedOptionIds.length; i++) {
+            if (selectedOptionIds[i].option_refID == newoption.option_refID) {
+                found = true;
+                selectedOptionIds[i].selection_ID = newoption.selection_ID;
+            }
+        }
+        if (found == false) {
+            selectedOptionIds.push(newoption);
+        }
+        RedoSubmitDisabled()
+        setkeyvar(keyvar + 1)
+    }
+
+    useEffect(() => {
+        async function RunGetLocations() {
+            const Locations : ExplorationTableSuite[] | undefined = await warband?.warband_data.GetAvailableLocations();
+            if (Locations != undefined) {
+                setavailableoptions(Locations);
+            }
+            setkeyvar(keyvar + 1)
+        }
+
+        RunGetLocations()
+    }, [updateKey]);
+        
+    useEffect(() => {
+        async function RunUpdate() {
+            RedoSubmitDisabled();
+            setkeyvar(keyvar + 1)
+        }
+
+        RunUpdate()
+    }, [updateKey, selectedOptionIds, selectedLocation]);
+
+    function RedoSubmitDisabled() {
+        setisubmitdisabled(!selectedLocation?.location.GetID() || (selectedLocation?.options && selectedLocation.options.length > 0 && (selectedLocation.options.length != selectedOptionIds.length )));
+    } 
 
     return (
         <Modal show={show} onHide={onClose} className="WbbModalAddItem WbbModalAddExplorationLocation" centered>
@@ -78,41 +88,64 @@ const WbbModalAddExplorationLocation: React.FC<WbbModalAddExplorationLocationPro
             </Modal.Header>
 
             <Modal.Body>
-                <div className="exploration-locations">
-                    <h6>Select Exploration Location:</h6>
-                    {availableLocations.map((loc) => (
-                        <div
-                            key={loc.id}
-                            className={`select-item ${selectedLocationId === loc.id ? 'selected' : ''}`}
-                            onClick={() => {
-                                setSelectedLocationId(loc.id);
-                                setSelectedOptionId(null); // reset when switching location
-                            }}
+                <div className={"fighter-card"}>
+                    <div  className={'fighter-card-collapse-wrap'} >
+                    {availableoptions.map((adv) => (
+                        <WbbFighterCollapse
+                            key={adv.table.ID}
+                            title={makestringpresentable(adv.table.GetTrueName())}
+                            initiallyOpen={false}
+                            nopad={true}
                         >
-                            {loc.name}
-                        </div>
+                            <>
+                                {adv.valid_locs.map((loc) => 
+                                    <div
+                                        key={loc.location.ID}
+                                        className={`select-item ${(selectedLocation? selectedLocation.location.ID : "") === loc.location.ID ? 'selected' : ''}`}
+                                        onClick={() => {
+                                            setSelectedLocation(loc);
+                                            setSelectedOptionIds([]); // reset when switching location
+                                        }}
+                                    >
+                                        <div className="item-name">{loc.location.GetTrueName()}</div>
+
+                                    </div>)
+                                }
+                            </>
+                        </WbbFighterCollapse>
+                        
                     ))}
+                    </div>
                 </div>
 
-                {selectedLocation?.options && (
+                {selectedLocation != null &&
+                <>
+                {
+                ((selectedLocation.options.length) > 0) && (
                     <div className="exploration-options mt-3">
-                        <h6>Select an Option for {selectedLocation.name}:</h6>
-                        {selectedLocation.options.map(opt => (
-                            <div
-                                key={opt.id}
-                                className={`select-item ${selectedOptionId === opt.id ? 'selected' : ''}`}
-                                onClick={() => setSelectedOptionId(opt.id)}
-                            >
-                                {opt.name}
-                            </div>
-                        ))}
+                        <h6>Select Options for {selectedLocation?.location.GetTrueName()}:</h6>
+                        {selectedLocation.options.map(opt => 
+                        <>
+                            {opt.selection_valid.map(choice => (
+                                <div
+                                    key={opt.baseopt.RefID + choice.id}
+                                    className={`select-item ${ (
+                                        selectedOptionIds.find((k) => k.option_refID == opt.baseopt.RefID && k.selection_ID == choice.id)
+                                    ) ? 'selected' : ''}`}
+                                    onClick={() => UpdateSelectedOptionIDs({option_refID: opt.baseopt.RefID, selection_ID: choice.id})}
+                                >
+                                    {choice.display_str}
+                                </div>
+                            ))}
+                        </>)}
                     </div>
                 )}
+                </>}
             </Modal.Body>
 
             <Modal.Footer>
                 <Button variant="secondary" onClick={onClose}>Cancel</Button>
-                <Button variant="primary" onClick={handleSubmit} disabled={isSubmitDisabled}>
+                <Button variant="primary" key={keyvar} onClick={handleSubmit} disabled={isubmitdisabled}>
                     Add Location
                 </Button>
             </Modal.Footer>

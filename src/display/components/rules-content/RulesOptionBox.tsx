@@ -3,16 +3,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faCheck, faPen} from '@fortawesome/free-solid-svg-icons';
 import {usePlayMode} from "../../../context/PlayModeContext";
 
-interface WbbOptionBoxProps {
+interface RulesOptionBoxProps {
     title: string;
     value: string | number;
     onClick: () => void;
-    overrideplay? : boolean
 }
 
-const WbbOptionBox: React.FC<WbbOptionBoxProps> = ({ title, value, onClick, overrideplay }) => {
-
-    const { playMode, togglePlayMode } = usePlayMode();
+const RulesOptionBox: React.FC<RulesOptionBoxProps> = ({ title, value, onClick }) => {
 
     return (
         <div className="WbbOptionBox">
@@ -33,15 +30,13 @@ const WbbOptionBox: React.FC<WbbOptionBoxProps> = ({ title, value, onClick, over
                     )}
                 </div>
 
-                {(!playMode && overrideplay != true) &&
-                    <div className="btn btn-primary" onClick={onClick}>
-                        <FontAwesomeIcon icon={faPen} className={'icon-inline-left'}/>
-                        {'Change'}
-                    </div>
-                }
+                <div className="btn btn-primary" onClick={onClick}>
+                    <FontAwesomeIcon icon={faPen} className={'icon-inline-left'}/>
+                    {'Change'}
+                </div>
             </div>
         </div>
     );
 };
 
-export default WbbOptionBox;
+export default RulesOptionBox;

@@ -4,50 +4,59 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCopy, faEllipsisVertical, faTrash, faXmark} from "@fortawesome/free-solid-svg-icons";
 import {useWarband} from "../../../context/WarbandContext";
 import WbbContextualPopover from "./WbbContextualPopover";
+import { WarbandProperty } from '../../../classes/saveitems/Warband/WarbandProperty';
+import { returnDescription } from '../../../utility/util';
+import WbbOptionSelect from './modals/warband/WbbOptionSelect';
 
 interface WbbEditViewExplorationProps {
-    index: number;
+    location : WarbandProperty;
 }
 
-const WbbEditViewExploration: React.FC<WbbEditViewExplorationProps> = ({ index }) => {
+const WbbEditViewExploration: React.FC<WbbEditViewExplorationProps> = ({  location }) => {
 
     const { warband } = useWarband();
     if (warband == null) return (<div>Loading...</div>);
 
-    // @TODO: Test Data
-    const exploration = {
-        Name: 'Moonshine Stash',
-        Id: 'ex_moonshine_stash',
-        Choice: 'Distribute',
-        LocationType: 'Common Location'
-    };
-
-
     return (
         <div className="WbbEditViewExploration">
             <div className={'exploration-name'}>
-                {exploration.Name}
+                {location.GetOwnName()}
             </div>
 
-            <div className={'exploration-location'}>
-                {exploration.LocationType}
+            <div className={'modifier-body'}>
+                
+                {(location.GetOwnDescription() != null) &&
+                <>
+                    {
+                        returnDescription(location, location.GetOwnDescription())
+                    }
+                </>
+                }
             </div>
 
-            {exploration.Choice &&
-                <div className={'exploration-choice'}>
-                    {'Choice: '}{exploration.Choice}
-                </div>
+            {location.SelfDynamicProperty.Selections.length > 0 &&
+                <span className={'title-choice'}>
+                    {location.SelfDynamicProperty.Selections.map((item) =>
+                        <WbbOptionSelect
+                            overrideplay={true}
+                            property={location}
+                            key={location.SelfDynamicProperty.Selections.indexOf(item)}
+                            choice={item}
+                        />
+                    )}
+                </span>
             }
 
             {/* actions */}
             <WbbContextualPopover
-                id={`exploration-${exploration.Id}`}
+                id={`exploration-${location.ID}`}
                 type="exploration"
-                item={exploration}
+                item={location}
             />
 
         </div>
     );
+
 };
 
 export default WbbEditViewExploration;

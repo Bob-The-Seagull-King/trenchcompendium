@@ -120,13 +120,15 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
 
     const showConfirmDeleteModifier = () => {
         setshowConfirmDeleteModifierModal(true);
-        console.log('setshowConfirmDeleteModifierModal');
     }
     const handleDeleteModifier = () => {
         setshowConfirmDeleteModifierModal(false);
 
-        // @TODO: Delete Modifier from Warband
-        console.log('handleDeleteModifier');
+        warband?.warband_data.Deletemod(item).then(() => {
+            const Manager : ToolsController = ToolsController.getInstance();
+            Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
+                () => reloadDisplay())
+        })
     }
 
     /** Exploration Actions */
@@ -134,13 +136,15 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
 
     const showConfirmDeleteExploration = () => {
         setshowConfirmDeleteExplorationModal(true);
-        console.log('showConfirmDeleteExploration');
     }
     const handleDeleteExploration = () => {
         setshowConfirmDeleteExplorationModal(false);
 
-        // @TODO: Delete Exploration from Warband
-        console.log('handleDeleteExploration');
+        warband?.warband_data.DeleteLocation(item).then(() => {
+            const Manager : ToolsController = ToolsController.getInstance();
+            Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
+                () => reloadDisplay())
+        })
     }
 
     /** Equipment Actions */
@@ -165,12 +169,10 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
 
     const showConfirmMoveEquipment = () => {
         setshowConfirmMoveEquipmentModal(true);
-        console.log('showConfirmMoveEquipment');
     }
 
     const handleMoveEquipment = () => {
         if (selectedFighter != null) {
-            console.log(selectedFighter)
             if (context == undefined || context == null) {
                 warband?.warband_data.DeleteStash(item).then(() => {
                     (selectedFighter.HeldObject as WarbandMember).DirectAddStash(item).then(() => {
@@ -288,32 +290,40 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
 
     const showConfirmDeleteAdvancement = () => {
         setshowConfirmDeleteAdvancementModal(true);
-        console.log('showConfirmDeleteAdvancement');
     }
     const handleDeleteAdvancement = () => {
         setshowConfirmDeleteAdvancementModal(false);
-        // @TODO: Delete Advancement from Warband
-        console.log('handleDeleteAdvancement');
+        
+        if (context != undefined && context != null ) {
+            context.model.DeleteSkill(item).then(() => {
+                const Manager : ToolsController = ToolsController.getInstance();
+                Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
+                    () => reloadDisplay())
+            })
+        } 
     }
 
     /** Injury Actions */
     const [showConfirmDeleteInjuryModal, setshowConfirmDeleteInjuryModal] = useState(false);
     const showConfirmDeleteInjury = () => {
-        console.log('showConfirmDeleteInjury');
         setshowConfirmDeleteInjuryModal(true);
     }
     const handleDeleteInjury = () => {
         setshowConfirmDeleteInjuryModal(false);
-
-        // @TODO: Delete Injury from Warband
-        console.log('handleDeleteInjury');
+        
+        if (context != undefined && context != null ) {
+            context.model.DeleteInjury(item).then(() => {
+                const Manager : ToolsController = ToolsController.getInstance();
+                Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
+                    () => reloadDisplay())
+            })
+        } 
     }
 
     /** Warband Actions */
     const [showConfirmRenameWarbandModal, setshowConfirmRenameWarbandModal] = useState(false);
     const [showConfirmExportWarbandModal, setshowConfirmExportWarbandModal] = useState(false);
     const showConfirmRenameWarband = () => {
-        console.log('showConfirmRenameWarband');
         setshowConfirmRenameWarbandModal(true);
     }
     const handleRenameWarband = () => {
@@ -325,13 +335,11 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
 
     }
     const showConfirmExportWarband = () => {
-        console.log('showConfirmExportWarband');
         setshowConfirmExportWarbandModal(true);
     }
 
     /** Print Mode */
     const handlePrintWarband = () => {
-        console.log('handlePrintWarband');
 
         setPrintMode(true);
 
@@ -348,7 +356,6 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
     const [theme, setTheme] = useGlobalState('theme');
     useEffect(() => {
         const handleAfterPrint = () => {
-            console.log('Resetting print mode and theme');
 
             setPrintMode(false);
             document.body.setAttribute('data-theme', theme);

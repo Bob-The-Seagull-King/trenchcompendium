@@ -635,6 +635,7 @@
         "tags": {"trait": true
                 },
         "contextdata": {
+            "new_upgrade": {}
         },
         "description": [            
             {

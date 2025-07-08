@@ -1,37 +1,58 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import {faXmark} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { Skill } from '../../../../../classes/feature/ability/Skill';
+import { RealWarbandPurchaseModel } from '../../../../../classes/saveitems/Warband/Purchases/WarbandPurchase';
+import { SkillSuite } from '../../../../../classes/saveitems/Warband/Purchases/WarbandMember';
+import { makestringpresentable } from '../../../../../utility/functions';
+import WbbFighterCollapse from '../../WbbFighterCollapse';
 
-interface Advancement {
-    id: string;
-    name: string;
-    description?: string;
-}
 
 interface WbbModalAddAdvancementProps {
     show: boolean;
     onClose: () => void;
-    onSubmit: (advancement: Advancement) => void;
+    onSubmit: (advancement: Skill) => void;
+    fighter : RealWarbandPurchaseModel
 }
 
-const WbbModalAddAdvancement: React.FC<WbbModalAddAdvancementProps> = ({ show, onClose, onSubmit }) => {
+const WbbModalAddAdvancement: React.FC<WbbModalAddAdvancementProps> = ({ show, onClose, onSubmit, fighter }) => {
     const [selectedId, setSelectedId] = useState<string | null>(null);
 
-    const availableAdvancements: Advancement[] = [
-        { id: 'adv1', name: 'Stand Firm', description: 'Treat first Down as Minor Hit' },
-        { id: 'adv2', name: 'Crack Shot', description: 'Ranged attacks gain +1 dice'},
-        { id: 'adv3', name: 'Resilient', description: 'Ignore 1 injury per battle' },
-    ];
+    const [available, setAvailable] = useState<SkillSuite[]>([]);
+    const [keyvar, setkevvar] = useState(0);
 
     const handleSubmit = () => {
-        const selected = availableAdvancements.find((a) => a.id === selectedId);
+        const selected = FindItem(selectedId);
         if (selected) {
             onSubmit(selected);
             setSelectedId(null);
             onClose();
         }
     };
+
+    function FindItem(a : string | null) {
+        for (let i = 0; i < available.length; i++) {
+            for (let j = 0; j < available[i].list.length; j++) {
+                if (available[i].list[j].ID == a) {
+                    return available[i].list[j]
+                }
+            }
+        }
+        return null;
+    }
+        
+    useEffect(() => {
+        async function SetEquipmentOptions() {
+            const options = await fighter.model.GetModelSkillOptions()
+            if (options != undefined) {
+                setAvailable(options)
+                setkevvar(keyvar + 1)
+            }
+        }
+    
+        SetEquipmentOptions();
+    }, [show]);
 
     return (
         <Modal show={show} onHide={onClose} className="WbbModalAddItem WbbModalAddAdvancement" centered>
@@ -47,16 +68,32 @@ const WbbModalAddAdvancement: React.FC<WbbModalAddAdvancementProps> = ({ show, o
             </Modal.Header>
 
             <Modal.Body>
-                {availableAdvancements.map((adv) => (
-                    <div
-                        key={adv.id}
-                        className={`select-item ${selectedId === adv.id ? 'selected' : ''}`}
-                        onClick={() => setSelectedId(adv.id)}
-                    >
-                        <div className="item-name">{adv.name}</div>
+                <div className={"fighter-card"}>
+                    <div  className={'fighter-card-collapse-wrap'} >
+                    {available.map((adv) => (
+                        <WbbFighterCollapse
+                            key={adv.skillgroup.ID}
+                            title={makestringpresentable(adv.skillgroup.GetTrueName())}
+                            initiallyOpen={false}
+                            nopad={true}
+                        >
+                            <>
+                                {adv.list.map((skl) => 
+                                    <div
+                                        key={skl.ID}
+                                        className={`select-item ${selectedId === skl.ID ? 'selected' : ''}`}
+                                        onClick={() => setSelectedId(skl.ID)}
+                                    >
+                                        <div className="item-name">{skl.GetTrueName()}</div>
 
+                                    </div>)
+                                }
+                            </>
+                        </WbbFighterCollapse>
+                        
+                    ))}
                     </div>
-                ))}
+                </div>
             </Modal.Body>
 
             <Modal.Footer>

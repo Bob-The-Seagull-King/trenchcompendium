@@ -438,7 +438,9 @@
         "tags": {
             "exploration_table": "et_commonlocations"
         },
-        "contextdata": {"location_rule_option": {}},
+        "contextdata": {"location_rule_option": {},
+                "exploration_option": {}
+                },
         "description": [            
             {
                 "tags": {"desc_type" : "default"},
@@ -528,7 +530,7 @@
             },
             "gain_new_model_from_list": {
                 "count": 1,
-                "id": ["md_ecclesiasticprisoner"]
+                "id": ["rel_fc_md_ecclesiasticprisoner_explore"]
             }
         },
         "description": [             
@@ -557,7 +559,7 @@
             },
             "gain_new_model_from_list": {
                 "count": 1,
-                "id": ["md_azeb"]
+                "id": ["rel_fc_md_azeb_explore"]
             }
         },
         "description": [            
@@ -586,7 +588,7 @@
             },
             "gain_new_model_from_list": {
                 "count": 1,
-                "id": ["md_wretched"]
+                "id": ["rel_fc_md_wretched_explore"]
             }
         },
         "description": [           
@@ -615,7 +617,7 @@
             },
             "gain_new_model_from_list": {
                 "count": 1,
-                "id": ["md_wretched_court"]
+                "id": ["rel_fc_md_wretched_court_explore"]
             }
         },
         "description": [           
@@ -644,7 +646,7 @@
             },
             "gain_new_model_from_list": {
                 "count": 1,
-                "id": ["md_grailthrall"]
+                "id": ["rel_fc_md_grailthrall_explore"]
             }
         },
         "description": [            

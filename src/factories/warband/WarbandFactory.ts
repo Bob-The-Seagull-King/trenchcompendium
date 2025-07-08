@@ -112,7 +112,9 @@ class WarbandFactory {
                 list_modelequipment: [],
                 experience : 0,
                 elite : rel.Model.getKeywordIDs().includes("kw_elite"),
-                recruited: false
+                recruited: false,
+                scar_reserves: 0,
+                stat_selections: []
             }
 
         if (rel.Mercenary == true) {
@@ -128,6 +130,7 @@ class WarbandFactory {
         await rule.NewWarbandItems(data)
         await rule.BuildModels(data.models);
         await rule.BuildEquipment(data.equipment);
+        await rule.BuildModifiersSkills(data.modifiers);
         return rule;
     }
 

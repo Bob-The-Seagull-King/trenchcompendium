@@ -1,37 +1,45 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import {faXmark} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { Injury } from '../../../../../classes/feature/ability/Injury';
+import { RealWarbandPurchaseModel } from '../../../../../classes/saveitems/Warband/Purchases/WarbandPurchase';
 
-interface Injury {
-    id: string;
-    name: string;
-    description?: string;
-}
 
 interface WbbModalAddInjuryProps {
     show: boolean;
     onClose: () => void;
     onSubmit: (injury: Injury) => void;
+    fighter : RealWarbandPurchaseModel
 }
 
-const WbbModalAddInjury: React.FC<WbbModalAddInjuryProps> = ({ show, onClose, onSubmit }) => {
+const WbbModalAddInjury: React.FC<WbbModalAddInjuryProps> = ({ show, onClose, onSubmit, fighter }) => {
     const [selectedId, setSelectedId] = useState<string | null>(null);
 
-    const availableInjuries: Injury[] = [
-        { id: 'inj1', name: 'Hand Wound', description: '-1 DICE for melee attacks' },
-        { id: 'inj2', name: 'Blind Eye', description: '-1 to Ranged Accuracy' },
-        { id: 'inj3', name: 'Cracked Rib', description: '-1 Toughness' }
-    ];
+    const [available, setAvailable] = useState<Injury[]>([]);
+    const [keyvar, setkevvar] = useState(0);
 
+    
     const handleSubmit = () => {
-        const selected = availableInjuries.find((i) => i.id === selectedId);
+        const selected = available.find((i) => i.ID === selectedId);
         if (selected) {
             onSubmit(selected);
             setSelectedId(null); // reset
             onClose();
         }
     };
+    
+    useEffect(() => {
+        async function SetEquipmentOptions() {
+            const options = await fighter.model.GetModelInjuryOptions()
+            if (options != undefined) {
+                setAvailable(options)
+                setkevvar(keyvar + 1)
+            }
+        }
+    
+        SetEquipmentOptions();
+    }, [show]);
 
     return (
         <Modal show={show} onHide={onClose} className="WbbModalAddItem WbbModalAddInjury" centered>
@@ -46,14 +54,14 @@ const WbbModalAddInjury: React.FC<WbbModalAddInjuryProps> = ({ show, onClose, on
                 />
             </Modal.Header>
 
-            <Modal.Body>
-                {availableInjuries.map((injury) => (
+            <Modal.Body key={keyvar}>
+                {available.map((injury) => (
                     <div
-                        key={injury.id}
-                        className={`select-item ${selectedId === injury.id ? 'selected' : ''}`}
-                        onClick={() => setSelectedId(injury.id)}
+                        key={injury.ID}
+                        className={`select-item ${selectedId === injury.ID ? 'selected' : ''}`}
+                        onClick={() => setSelectedId(injury.ID)}
                     >
-                        <span className="item-name">{injury.name}</span>
+                        <span className="item-name">{injury.Name}</span>
                     </div>
                 ))}
             </Modal.Body>

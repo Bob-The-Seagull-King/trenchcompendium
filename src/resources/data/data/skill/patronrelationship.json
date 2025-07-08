@@ -1,7 +1,7 @@
 [
     {
         "id": "pt_sublimegate",
-        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_fidaiofalamut","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_defendersoftheironwall"]
+        "faction_id": ["fc_cultoftheblackgrail","fc_ironsultanate","fc_ironsultanate_fv_fidaiofalamut","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_defendersoftheironwall"]
     },
     {
         "id": "pt_infernalnoble",

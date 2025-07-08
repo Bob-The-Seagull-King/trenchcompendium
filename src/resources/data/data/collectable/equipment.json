@@ -822,7 +822,7 @@
         "category": "melee",
         "distance": null,
         "stats": {
-            "hands_melee": 2,
+            "hands_melee": 0,
             "melee": true
         },
         "contextdata": {
