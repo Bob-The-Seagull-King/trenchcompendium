@@ -215,9 +215,6 @@ class StaticOptionContextObjectList extends StaticOption {
                 OptionContextList = await Events.runEvent(this.QuestionName, RelevantContextObject, [RelevantContextObject], [], this.Question)
 
                 for (let i = 0; i < OptionContextList.length; i++) {
-                    console.log(OptionContextList[i])
-                    console.log(OptionContextList[i].ID)
-                    console.log(OptionContextList[i].GetTrueName())
                     if (OptionContextList[i] != this.MyStaticObject) {
                         NewSelections.push({
                             id: OptionContextList[i].ID,

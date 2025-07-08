@@ -8,6 +8,11 @@ import { ExplorationFactory } from "../../../../factories/features/ExplorationFa
 import { ContextPackage } from "../../../contextevent/contextpackage";
 import { UserWarband } from "../UserWarband";
 import { WarbandMember } from "../Purchases/WarbandMember";
+import { ExplorationTable } from "../../../feature/exploration/ExplorationTable";
+import { ExplorationLocation } from "../../../feature/exploration/ExplorationLocation";
+import { StaticOption } from "../../../options/StaticOption";
+import { IChoice } from "../../../options/StaticOption";
+import { EventRunner } from "../../../contextevent/contexteventhandler";
 
 interface IWarbandExplorationSet extends IContextObject {
     explorationskills: IWarbandProperty[];
@@ -18,6 +23,21 @@ export interface ExplorationSkillSuite {
     skill: WarbandProperty,
     count: number,
     sources : string[]
+}
+
+export interface ExplorationTableSuite {
+    table : ExplorationTable,
+    valid_locs : FilteredLocation[]
+}
+
+export interface FilteredLocation {
+    location : ExplorationLocation,
+    options : FilteredOptions[]
+}
+
+export interface FilteredOptions {
+    baseopt : StaticOption
+    selection_valid : IChoice[]
 }
 
 class WarbandExplorationSet extends DynamicContextObject {
@@ -149,6 +169,73 @@ class WarbandExplorationSet extends DynamicContextObject {
         }
     }
 
+    public async GetValidNewLocations() {
+        const LocationSuite : ExplorationTableSuite[] = []
+
+        const TableList : ExplorationTable[] = await ExplorationFactory.GetAllTables();
+
+        for (let i = 0; i < TableList.length; i++) {
+            const ValidLocs : FilteredLocation[] = []
+
+            for (let j = 0; j < TableList[i].ExplorationLocations.length; j++) {
+                const selected = this.Locations.find((k) => k.SelfDynamicProperty.OptionChoice.GetID() === TableList[i].ExplorationLocations[j].GetID());
+
+                if (!selected) {
+                    const ValidLoc : FilteredLocation = await this.GetValidOptionsForLocation(TableList[i].ExplorationLocations[j]);
+                    ValidLocs.push(
+                        ValidLoc
+                    )
+                }
+            }
+
+            LocationSuite.push(
+                {
+                    table: TableList[i],
+                    valid_locs: ValidLocs
+                }
+            )
+        }
+
+        return LocationSuite;
+    }
+
+    public async GetValidOptionsForLocation(explor_loc : ExplorationLocation) : Promise<FilteredLocation> {
+        const eventmon : EventRunner = new EventRunner();
+        const OptionList : FilteredOptions[] = []
+
+        for (let i = 0; i < explor_loc.MyOptions.length; i++) {
+            const ValidSelections: IChoice[] = [];
+
+            for (let j = 0; j < explor_loc.MyOptions[i].Selections.length; j++) {
+                if (explor_loc.MyOptions[i].Selections[j].value instanceof ContextObject) {
+                    const IsValid = await eventmon.runEvent(
+                        "canChooseOptionLocation",
+                        explor_loc.MyOptions[i].Selections[j].value,
+                        [],
+                        true,
+                        this.MyContext as UserWarband
+                    )
+
+                    if (IsValid) { ValidSelections.push(explor_loc.MyOptions[i].Selections[j]) }
+                } else { ValidSelections.push(explor_loc.MyOptions[i].Selections[j]) }
+            }
+            if (ValidSelections.length > 0) {
+                OptionList.push(
+                    {
+                        baseopt: explor_loc.MyOptions[i],
+                        selection_valid: ValidSelections
+                    }
+                )
+            }
+        }
+
+        return (
+            {
+                location: explor_loc,
+                options: OptionList
+            }
+        )
+    }
 
 }
 

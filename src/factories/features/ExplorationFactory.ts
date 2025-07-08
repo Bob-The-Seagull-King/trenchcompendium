@@ -55,6 +55,19 @@ class ExplorationFactory {
         return rule;
     }
 
+    static async GetAllTables() {
+        const Locations = Requester.MakeRequest({searchtype: "file", searchparam: {type: "explorationtable"}}) as IContextObject[];
+        const LocationsList : ExplorationTable[] = []
+        for (let i = 0; i < Locations.length; i++) {
+            const skl = await ExplorationFactory.CreateExplorationTable(Locations[i], null);
+            if (skl != null) {
+                LocationsList.push(skl);
+            }
+        }
+
+        return LocationsList;
+    }
+
     static async CreateNewExplorationLocation(_val : string, parent : ContextObject | null) {
         const cache = StaticDataCache.getInstance();
         const isValid = (cache.CheckID('explorationlocation', _val))

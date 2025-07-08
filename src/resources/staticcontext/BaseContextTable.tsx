@@ -1795,6 +1795,35 @@ export const BaseContextCallTable : CallEventTable = {
             const StringCollection : string[] = AddedCollection;
 
             return relayVar.concat(StringCollection);
+        },
+        async canChooseOptionLocation(this: EventRunner, eventSource : any, relayVar : boolean, trackVal: UserWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            const Permissions = context_func as LocationRestriction
+            if (Permissions.allowed) {
+                for (let j = 0; j < Permissions.allowed.length; j++) {
+                    const Requirement = Permissions.allowed[j]
+                    console.log(Requirement)
+                    if (Requirement.type == "faction") {
+                        let Found = false;
+                        for (let k = 0; k < Requirement.value.length; k++) {
+                            const BaseFac = await trackVal.GetFactionBase();
+                            if (BaseFac) {
+                                if (BaseFac.ID == Requirement.value[k]) {
+                                    Found = true;
+                                }
+                            }
+                            if (trackVal.GetFaction()?.ID == Requirement.value[k]){
+                                    Found = true;
+                                }
+                        }
+
+                        if (Found == false) {
+                            return false;
+                        }
+                    }
+                }
+            }
+
+            return relayVar;
         }
     },
     skill_option: {

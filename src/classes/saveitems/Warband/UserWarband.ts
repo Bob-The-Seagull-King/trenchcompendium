@@ -2,7 +2,7 @@ import { CompendiumItem, ICompendiumItemData, ItemType } from '../../CompendiumI
 import { containsTag, DescriptionFactory } from '../../../utility/functions';
 import { INote } from '../../Note';
 import { IWarbandContextItem, WarbandContextItem } from './High_Level/WarbandContextItem';
-import { ExplorationSkillSuite, IWarbandExplorationSet, WarbandExplorationSet } from './CoreElements/WarbandExplorationSet';
+import { ExplorationSkillSuite, ExplorationTableSuite, IWarbandExplorationSet, WarbandExplorationSet } from './CoreElements/WarbandExplorationSet';
 import { DynamicContextObject } from '../../contextevent/dynamiccontextobject';
 import { ContextObject, IContextObject } from '../../contextevent/contextobject';
 import { IWarbandFaction, WarbandFaction } from './CoreElements/WarbandFaction';
@@ -198,6 +198,14 @@ class UserWarband extends DynamicContextObject {
         return await this.Exploration.GetSkillsInFormat();
     }
 
+    public GetLocations() : WarbandProperty[] {
+        return this.Exploration.Locations;
+    }
+
+    public async GetAvailableLocations() : Promise<ExplorationTableSuite[]> {
+        return await this.Exploration.GetValidNewLocations();
+    }
+
 
     /**
      * GETTERS
@@ -253,21 +261,17 @@ class UserWarband extends DynamicContextObject {
     }
 
     /**
-     * Returns the Name of the Base-Faction as string
-     *
-     * @TODO:
+     * Returns the Base-Faction
      */
-    public GetFactionBaseName () {
-        return 'The Iron Sultanate';
+    public async GetFactionBase () {
+        return await this.Faction.GetFactionBase();
     }
 
     /**
-     * Returns the Name of the Faction Variant as string
-     *
-     * @TODO:
+     * Returns the Faction
      */
-    public GetFactionVariantName () {
-        return 'The Iron Sultanate';
+    public GetFaction () {
+        return this.Faction.GetFaction();
     }
 
     /** 

@@ -1,22 +1,38 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { useWarband } from '../../../../context/WarbandContext';
 import { usePrintMode } from '../../../../context/PrintModeContext';
 import logoDarkMode from "../../../../resources/images/trench-companion-logo-white-v2.png";
 import logoLightMode from "../../../../resources/images/trench-companion-logo-black-v2.png";
 import {UserWarband} from "../../../../classes/saveitems/Warband/UserWarband";
+import { Faction } from '../../../../classes/feature/faction/Faction';
 
 const WbbPrintViewSimpleOverview: React.FC = () => {
     const { printMode } = usePrintMode();
 
-    const { warband } = useWarband();
+    const { warband, updateKey } = useWarband();
 
     if (!warband ) return <div>Loading Warband...</div>;
 
     const stash = warband.warband_data.GetStash();
     const fighters = warband.warband_data.GetFighters();
 
+    const [basevariant, setbasevariant] = useState<Faction | null>(null)
+    const [keyvar, setkeyvar] = useState(0)
+    
+    useEffect(() => {
+        async function RunGetLocations() {
+            const facbase = await warband?.warband_data.GetFactionBase();
+            if (facbase != undefined) {
+                setbasevariant(facbase);
+            }
+            setkeyvar(keyvar + 1)
+        }
+
+        RunGetLocations()
+    }, [updateKey]);
+
     return (
-        <div className="WbbPrintViewSimpleOverview">
+        <div className="WbbPrintViewSimpleOverview" key={keyvar}>
             <div className={'page-fill'}>
                 <div className={'logo-wrap'}>
                     <img src={logoLightMode}
@@ -45,7 +61,7 @@ const WbbPrintViewSimpleOverview: React.FC = () => {
                                 {'Faction'}
                             </div>
                             <div className={'warband-value'}>
-                                {warband.warband_data.GetFactionBaseName()}
+                                {basevariant?.GetTrueName()}
                             </div>
                         </div>
                     </div>
@@ -55,7 +71,7 @@ const WbbPrintViewSimpleOverview: React.FC = () => {
                                 {'Variant'}
                             </div>
                             <div className={'warband-value'}>
-                                {warband.warband_data.GetFactionVariantName()}
+                                {warband.warband_data.GetFaction()?.GetTrueName()}
                             </div>
                         </div>
                     </div>

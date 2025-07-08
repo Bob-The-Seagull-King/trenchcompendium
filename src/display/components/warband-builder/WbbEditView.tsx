@@ -34,6 +34,7 @@ import { FactionModelRelationship } from '../../../classes/relationship/faction/
 import WbbFighterAdds from './micro-elements/WbbFighterAdds';
 import WbbFighterShows from './micro-elements/WbbFighterShows';
 import WbbModifiersList from './modals/warband/WbbModifiersList';
+import WbbLocationsList from './modals/warband/WbbLocationsList';
 
 interface WbbEditViewProps {
     warbandData: SumWarband | null;
@@ -134,13 +135,6 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
     const [showAddFighterMercenaryModal, setShowAddFighterMercenaryModal] = useState(false);
     
 
-    // Exploration Location Modal
-    const [showAddExplorationModal, setShowAddExplorationModal] = useState(false);
-    const handleAddExplorationLocation = (location: any, selectedOptions: any[]) => {
-        if (!warband) { return; } // Guard
-
-        warband.warband_data.AddExplorationLocation(location, selectedOptions);
-    };
 
     // Modifier Modal
     const [showAddModifierModal, setShowAddModifierModal] = useState(false);
@@ -253,20 +247,7 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                                         }
 
                                         {!playMode &&
-                                            <>
-                                                {/* Warband Exploration Locations */}
-                                                <h3 className={'category-headline'}>Exploration Locations</h3>
-
-                                                <WbbEditViewExploration
-                                                    index={123}
-                                                />
-
-                                                <div className={'btn btn-add-element btn-block'}
-                                                     onClick={() => setShowAddExplorationModal(true)}>
-                                                    <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
-                                                    {'Add Exploration Location'}
-                                                </div>
-                                            </>
+                                            <WbbLocationsList/>
                                         }
                                     </div>
 
@@ -321,11 +302,6 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                                     show={showAddModifierModal}
                                     onClose={() => setShowAddModifierModal(false)}
                                     onSubmit={handleAddModifier}
-                                />
-                                <WbbModalAddExplorationLocation
-                                    show={showAddExplorationModal}
-                                    onClose={() => setShowAddExplorationModal(false)}
-                                    onSubmit={handleAddExplorationLocation}
                                 />
                             </>
                         }

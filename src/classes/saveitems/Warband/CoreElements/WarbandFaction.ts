@@ -41,6 +41,26 @@ class WarbandFaction extends DynamicContextObject {
         await this.MyFaction.HandleDynamicProps(Value, this, null, faction_property);
     }
 
+    public GetFaction() {
+        if (this.MyFaction != undefined) {
+            return this.MyFaction.SelfDynamicProperty.OptionChoice as Faction;
+        } else {
+            return null;
+        }
+    }
+
+    public async GetFactionBase() {
+        if (this.MyFaction != undefined) {
+            const ID = this.GetFaction()?.ContextKeys["VariantFactionBase"]
+            if (ID) {
+                const BaseFac : Faction = await FactionFactory.CreateNewFaction(ID.faction_base_id, null)
+                return BaseFac;
+            }
+        } else {
+            return null;
+        }
+    }
+
     public async BuildPatron(patron_id : string | undefined) {        
         if (patron_id) {
             this.MyPatron = await SkillFactory.CreateNewPatron(patron_id, this);
