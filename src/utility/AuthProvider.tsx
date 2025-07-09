@@ -3,6 +3,7 @@ import { AuthContext } from './AuthContext';
 import { ToolsController } from '../classes/_high_level_controllers/ToolsController';
 import {SiteUser} from "../classes/user_synod/site_user";
 import {UserFactory} from "../factories/synod/UserFactory";
+import { SYNOD } from '../resources/api-constants';
 
 // Create the provider component
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -22,9 +23,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             const date_stored = new Date(logindate);
             const date_cur = new Date();
             const diff = Math.ceil(Math.abs(date_cur.getTime() - date_stored.getTime()) / (1000 * 3600 * 24)); 
-            if (diff <= 22) {
+            if (diff <= 14) {
                 setAuthToken(storedToken);
                 setUserId(parseInt(storedUserId, 10));
+                UpdateTokenValue();
             } else {
                 localStorage.removeItem('jwtToken');
                 localStorage.removeItem('synodUserId');
@@ -36,6 +38,21 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             localStorage.removeItem('lastrecordedlogindate');   
         }
     }, []);
+
+    async function UpdateTokenValue() {
+        const token = localStorage.getItem('jwtToken')
+        const response = await fetch(`${SYNOD.URL}/wp-json/synod-auth/v1/refresh`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            },
+        })
+        const json : any = await response.json();
+        localStorage.setItem('jwtToken', json.token);
+        localStorage.setItem('lastrecordedlogindate', (new Date()).toISOString());
+        setAuthToken(json.token);
+    }
 
     const login = (token: string, id: number) => {
         localStorage.setItem('jwtToken', token);
