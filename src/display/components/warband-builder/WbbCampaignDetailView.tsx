@@ -21,6 +21,7 @@ const WbbCampaignDetailView: React.FC<WbbCampaignDetailViewProps> = ({ onClose }
 
     /** Victory Points */
     const [victoryPoints, setVictoryPoints] = useState<number>(warband.warband_data.GetVictoryPoints());
+    const [ducatlimit, setducatlimit] = useState<number>(700);
     const [showVictoryPointsModal, setshowVictoryPointsModal] = useState(false);
     const [keyvar, setKeyvar] = useState(0);
     const handleVictoryPointsUpdate = ( newVP: number ) => {
@@ -46,6 +47,16 @@ const WbbCampaignDetailView: React.FC<WbbCampaignDetailViewProps> = ({ onClose }
             setKeyvar(keyvar + 1)})
         })
     }
+
+    useEffect(() => {
+        async function RunDucatCheck() {
+           const threshhold = await warband?.warband_data.GetCampaignTresholdValue()
+           setducatlimit(threshhold)
+           setKeyvar(keyvar + 1)
+        }
+
+        RunDucatCheck();
+    }, [updateKey])
 
     /** Campaign Cycle */
     const [campaignCycle, setCampaignCycle] = useState<number>(warband.warband_data.GetCampaignCycleView());
@@ -87,15 +98,13 @@ const WbbCampaignDetailView: React.FC<WbbCampaignDetailViewProps> = ({ onClose }
                         {'Campaign Round: '}
                     </strong>
                     {warband.warband_data.GetCampaignCycleView()}
-                    {' / '}
-                    {warband.warband_data.GetCampaignCycleMax()}
                 </div>
 
                 <div className={'detail-section-text-element'}>
                     <strong>
                         {'Threshold Value: '}
                     </strong>
-                    {warband.warband_data.GetCampaignTresholdValue()}
+                    {ducatlimit}
                 </div>
 
                 <div className={'detail-section-text-element'}>
@@ -137,7 +146,7 @@ const WbbCampaignDetailView: React.FC<WbbCampaignDetailViewProps> = ({ onClose }
                 {/* Campaign Cycle */}
                 <WbbOptionBox
                     title={'Campaign Round'}
-                    value={campaignCycle + ' / '+campaignCycleMax}
+                    value={campaignCycle}
                     onClick={() => setshowCampaignCycleModal(true)}
                 />
 

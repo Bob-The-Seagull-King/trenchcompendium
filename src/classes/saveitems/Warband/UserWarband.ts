@@ -787,9 +787,17 @@ class UserWarband extends DynamicContextObject {
      * Returns the Threshold value for the currently viewed campaign cycle
      * @constructor
      */
-    GetCampaignTresholdValue () {
-
-        return this.DucatLimit[this.GetCampaignCycleView() - 1] ?? this.DucatLimit[this.DucatLimit.length - 1];
+    async GetCampaignTresholdValue () {
+        const base = this.DucatLimit[this.GetCampaignCycleView() - 1] ?? this.DucatLimit[this.DucatLimit.length - 1];
+        const eventmon : EventRunner = new EventRunner();
+        const DucatCount = await eventmon.runEvent(
+            "getStartingDucats",
+            this,
+            [],
+            base,
+            null
+        )
+        return DucatCount
     }
 
     GetCampaignMaxFieldStrength () {

@@ -69,7 +69,7 @@ const WbbEditCampaignCycleModal: React.FC<WbbEditCampaignCycleProps> = ({
         <>
             <Modal show={showCycleModal1} onHide={handleAbort} className="WbbEditCampaignCycleModal" centered>
                 <Modal.Header closeButton={false}>
-                    <Modal.Title>Edit Campaign Cycle</Modal.Title>
+                    <Modal.Title>Edit Campaign Round</Modal.Title>
 
                     <FontAwesomeIcon
                         icon={faXmark}
@@ -80,6 +80,15 @@ const WbbEditCampaignCycleModal: React.FC<WbbEditCampaignCycleProps> = ({
                 </Modal.Header>
 
                 <Modal.Body>
+                    <h6>Set Round</h6>
+                    <input
+                        type="number"
+                        className="form-control"
+                        value={selectedCycle}
+                        onChange={(e) => setSelectedCycle(parseInt(e.target.value) || 0)}
+                        min={0}
+                    />
+                    {/*
                     <div className={'cycle-hint-above'}>
                         <strong>
                             {'Currently Viewing: '}
@@ -109,11 +118,11 @@ const WbbEditCampaignCycleModal: React.FC<WbbEditCampaignCycleProps> = ({
                                     <>
                                         <FontAwesomeIcon icon={faLock} className="icon-inline-right"/>
                                     </>
-                                )*/}
+                                )}
                             </div>
                         ))}
 
-                        {/*<div className={'select-item select-item-advance'}
+                        {<div className={'select-item select-item-advance'}
                              onClick={() => {
                                  setshowCycleModal1(false);
                                  setshowCycleModal2(true);
@@ -122,8 +131,8 @@ const WbbEditCampaignCycleModal: React.FC<WbbEditCampaignCycleProps> = ({
                             {'Advance to Cycle ' + (cycleMax + 1)}
 
                             <FontAwesomeIcon icon={faChevronRight} className=""/>
-                        </div>*/}
-                    </div>
+                        </div>}
+                    </div> */}
                 </Modal.Body>
 
                 <Modal.Footer>
