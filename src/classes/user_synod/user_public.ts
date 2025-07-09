@@ -16,7 +16,8 @@ interface ISiteUserPublic {
     friends: IFriend[],
     warbands: ISynodWarband[],
     campaigns: number[],
-    profile_picture: SynodProfilePicData
+    profile_picture: SynodProfilePicData,
+    is_premium: boolean
 }
 
 class SiteUserPublic {
@@ -30,6 +31,7 @@ class SiteUserPublic {
     ProfilePic : SynodProfilePicData;
     Campaigns : number[] = []
     BuiltRequests: SiteUserPublic[] = [];
+    Premium : boolean;
     
     public constructor(data: ISiteUserPublic)
     {
@@ -38,6 +40,7 @@ class SiteUserPublic {
         this.ProfilePic = data.profile_picture;
         this.Friends = data.friends;
         this.Achievements = data.achievements;
+        this.Premium = data.is_premium;
     }
 
     public async BuildFriends(data: ISiteUserPublic) {
@@ -82,6 +85,7 @@ class SiteUserPublic {
         }
 
         const _objint : ISiteUserPublic = {
+            is_premium: this.Premium,
             id : this.ID,
             nickname : this.Nickname,
             achievements: this.Achievements,
@@ -229,7 +233,7 @@ class SiteUserPublic {
      * 'Free Member' if not premium
      */
     public GetUserStatus () {
-        return 'Supporter'
+        return (this.Premium == true)? 'Supporter' : 'Free Member'
     }
 }
 
