@@ -1916,7 +1916,54 @@ export const BaseContextCallTable : CallEventTable = {
             return relayVar;
         }
     },
+    is_model_fireteam: {
+        event_priotity: 0,
+        async getFireteamOptionsFromWarbandModel(this: EventRunner, eventSource : any, relayVar : WarbandMember[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : WarbandMember, staticself : StaticOptionContextObjectList) {
+
+            const warband = sourceband.MyContext as UserWarband;
+            const Models = warband.GetFighters();
+            
+            for (let i = 0; i < Models.length; i++) {
+                let isValid = true;
+
+                if (Models[i].model == sourceband) {
+                    isValid = false;
+                }
+                if (staticself.MyStaticObject) {
+                    const Found = warband.IsModelInThisFireteam(staticself.MyStaticObject, Models[i].model)
+                    if (Found) {
+                        isValid = false;
+                    }
+                }
+
+                if (isValid) {
+                    relayVar.push(Models[i].model)
+                }
+            }
+
+            return relayVar;
+        },
+        async getSingleFireteamMember(this: EventRunner, eventSource : any, relayVar : WarbandMember[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : WarbandMember, staticself : StaticOptionContextObjectList) {
+            return [sourceband];
+        }
+    },
     add_fireteam_warband: {
+        event_priotity: 0,        
+        async getAllFireteamOptions(this: EventRunner, eventSource : any, relayVar : Fireteam[], trackVal : UserWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            
+            const FireteamModule = await import("../../factories/features/FireteamFactory")
+
+            if (context_func["type"] && context_func["count"]) {
+                for (let i = 0; i < context_func["count"]; i++) {
+                    const NewFireteam = await FireteamModule.FireteamFactory.CreateNewFireteam(context_func["type"], eventSource, context_func["type"] + "_" + context_static.GetID() + "_" + i);
+                    relayVar.push(NewFireteam);
+                }
+            }
+
+            return relayVar;
+        }
+    },
+    add_fireteam_model: {
         event_priotity: 0,        
         async getAllFireteamOptions(this: EventRunner, eventSource : any, relayVar : Fireteam[], trackVal : UserWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
             
@@ -1961,7 +2008,7 @@ export const BaseContextCallTable : CallEventTable = {
     exploration_option: {
         event_priotity: 0,
         async returnWbbOptionDisplay(this: EventRunner, eventSource : any, trackVar : IChoice, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null){
-                console.log(trackVar)        
+    
             return ( 
             
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
@@ -2077,7 +2124,6 @@ export const BaseContextCallTable : CallEventTable = {
     warband_general_hook: {
         event_priotity: 0,        
         async getModelRelationshipsForWarband(this: EventRunner, eventSource : any, relayVar : FactionModelRelationship[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : UserWarband, staticself : StaticOptionContextObjectList) {
-            console.log("HELP")
             if (staticself.MyStaticObject != null) {
                 if (staticself.MyStaticObject == context_static ) {
                     return relayVar;

@@ -123,10 +123,7 @@ class UserWarband extends DynamicContextObject {
     }
     
     public IsModelInThisFireteam(fireteam : StaticOptionContextObject, model : WarbandMember) {
-        console.log(fireteam)
-        console.log(model)
         for (let i = 0; i < this.Fireteams.length; i++) {
-            console.log(this.Fireteams[i])
             if (this.Fireteams[i].ID == fireteam.ID) {
                 for (let j = 0; j < this.Fireteams[i].SelfDynamicProperty.Selections.length; j++) {
                     if (this.Fireteams[i].SelfDynamicProperty.Selections[j].SelectedChoice) {
@@ -142,13 +139,22 @@ class UserWarband extends DynamicContextObject {
 
     public async BuildModifiersFireteam(data : IWarbandProperty[]) {
         const eventmon : EventRunner = new EventRunner();
-        const all_eq : Fireteam[] = await eventmon.runEvent(
+        let all_eq : Fireteam[] = await eventmon.runEvent(
             "getAllFireteamOptions",
             this,
             [],
             [],
             this
         )
+        for (let i = 0; i < this.Models.length; i++) {
+            all_eq = await eventmon.runEvent(
+                "getAllFireteamOptions",
+                this.Models[i].HeldObject as WarbandMember,
+                [],
+                all_eq,
+                this
+            )
+        }
         this.Fireteams = [];
         for (let i = 0; i < all_eq.length; i++) {
             let IsFound = false
@@ -1192,7 +1198,13 @@ class UserWarband extends DynamicContextObject {
     }
 
     public async GetFireteams() {
-        return this.Fireteams;
+        const PropertyList : WarbandProperty[] = [];
+
+        for (let i = 0; i < this.Fireteams.length; i++) {
+            PropertyList.push(this.Fireteams[i])    
+        }
+
+        return PropertyList;
     }
 
     public GetWarbandFactionModifiersList() {

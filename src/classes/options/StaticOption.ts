@@ -13,6 +13,7 @@ interface IStaticOption {
     category : string, // Used to determine if the option is basic or uses context objects
     contextvars : ContextEventEntry, // Variables used for events.
     dyna_only? : boolean // Ensures it only gets active if the parent can be found
+    autoselect?: boolean
 }
 
 interface IChoice {
@@ -35,6 +36,7 @@ class StaticOption {
     public Category : string;
     public ContextVars : ContextEventEntry;
     public DynaForce : boolean;
+    public AutoSelect : boolean;
     
     public Description;
     public Selections : IChoice[] = [];
@@ -50,6 +52,7 @@ class StaticOption {
         this.MyStaticObject = parent;
         this.Description = DescriptionFactory(data.description, this);
         this.DynaForce = (data.dyna_only != undefined)? data.dyna_only : false;
+        this.AutoSelect = (data.autoselect != undefined)? data.autoselect : false;
     }
 
     /**
@@ -216,6 +219,7 @@ class StaticOptionContextObjectList extends StaticOption {
 
         const RelevantContextObject : ContextObject | null = this.FindContextObject()
 
+            console.log(RelevantContextObject);
         if ((this.DynaForce == true && RelevantContextObject != null) || (this.DynaForce == false)) {
             if (RelevantContextObject != null) {
                 const Events : EventRunner = new EventRunner();

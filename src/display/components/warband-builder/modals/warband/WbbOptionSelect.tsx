@@ -69,7 +69,7 @@ const WbbOptionSelect: React.FC<WbbEditSelectionProps> = ({choice,  property, ov
                 title={choice.Option.Name}
                 value={choice.GetSelectedTitle()}
                 onClick={() => setshowModal(true)}
-                overrideplay={overrideplay}
+                overrideplay={overrideplay || choice.Option.AutoSelect}
             />
 
             <WbbEditSelectionModal

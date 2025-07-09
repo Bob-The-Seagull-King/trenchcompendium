@@ -63,13 +63,23 @@ class WarbandProperty extends DynamicContextObject  {
                 await CurSelection.GetSelectionChoices();
                 for (let j = 0; j < selection_vals.selections.length; j++) {
                     if (selection_vals.selections[j].option_refID == CurSelection.Option.RefID) {
-                        CurSelection.SelectOption(selection_vals.selections[j].selection_ID)
+                        if (CurSelection.Option.AutoSelect == true && CurSelection.SelectionSet.length > 0) {
+                            CurSelection.SelectOption(CurSelection.SelectionSet[0].id);
+                        }
                         const subselect = selection_vals.selections[j].suboption;
                         if (subselect != undefined) {
                             await this.GenerateSubProperties(subselect, CurSelection)
                         }
                         break;
                     }
+                }
+            }
+        } else {
+            for (let i = 0; i < this.SelfDynamicProperty.Selections.length; i++) {
+                const CurSelection = this.SelfDynamicProperty.Selections[i];
+                await CurSelection.GetSelectionChoices();
+                if (CurSelection.Option.AutoSelect == true && CurSelection.SelectionSet.length > 0) {
+                    CurSelection.SelectOption(CurSelection.SelectionSet[0].id);
                 }
             }
         }

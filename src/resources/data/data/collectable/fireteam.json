@@ -47,7 +47,19 @@
                 "self_ask": true,
                 "option_context" : {"basic_option_default":{}},
                 "dyna_only": true,
-                "parent_level": 5,
+                "parent_level": 1,
+                "autoselect": true,
+                "question_name": "getSingleFireteamMember"
+            },
+            {
+                "ref_id" : "ot_fireteammember_b",
+                "name" : "",
+                "description" : [],
+                "category" : "contextobject",
+                "self_ask": true,
+                "option_context" : {"basic_option_default":{}},
+                "dyna_only": true,
+                "parent_level": 1,
                 "question_name": "getFireteamOptionsFromWarbandModel"
             }
         ]

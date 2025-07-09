@@ -109,16 +109,13 @@ const ProfilePage: React.FC = () => {
 
         if (!data) {
             const publicData = await UserFactory.CreatePublicUserByID(Number(id));
-            console.log(publicData);
             if (requestId !== fetchRequestId.current) return;
             if (publicData) {
-            console.log("Public user data:", publicData);
             data = publicData;
             }
         }
 
         if (requestId === fetchRequestId.current) {
-            console.log("Set User");
             setUserData(data);
             setisOwnProfile(data instanceof SiteUser)
             setkeyvar(prev => prev + 1); // Only once, after setting data
