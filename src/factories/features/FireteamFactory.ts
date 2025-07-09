@@ -6,6 +6,7 @@ import { SkillGroup } from '../../classes/feature/skillgroup/SkillGroup';
 import { IPatron, Patron } from '../../classes/feature/skillgroup/Patron';
 import { IBaseAddon } from '../../classes/feature/ability/BaseAddon';
 import { Fireteam } from '../../classes/feature/ability/Fireteam';
+import { ContextEventVals } from '../../resources/staticcontext/contexteventtypes';
 
 class FireteamFactory {
 
@@ -22,8 +23,9 @@ class FireteamFactory {
         return rule;
     }
 
-    static async CreateNewFireteam(_val : string, parent : ContextObject | null, special_id : string) {
+    static async CreateNewFireteam(_val : string, parent : ContextObject | null, special_id : string, bonus_context : ContextEventVals) {
         const ruledata = Requester.MakeRequest({searchtype: "id", searchparam: {type: "fireteam", id: _val}}) as IBaseAddon
+        ruledata.contextdata = Object.assign({}, ruledata.contextdata, bonus_context);
         const rulenew = await FireteamFactory.CreateFireteam(ruledata, parent, special_id)
         return rulenew;
     }

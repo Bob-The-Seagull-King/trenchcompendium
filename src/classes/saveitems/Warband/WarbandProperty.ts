@@ -65,6 +65,9 @@ class WarbandProperty extends DynamicContextObject  {
                     if (selection_vals.selections[j].option_refID == CurSelection.Option.RefID) {
                         if (CurSelection.Option.AutoSelect == true && CurSelection.SelectionSet.length > 0) {
                             CurSelection.SelectOption(CurSelection.SelectionSet[0].id);
+                        } else {
+                            
+                            CurSelection.SelectOption(selection_vals.selections[j].selection_ID)
                         }
                         const subselect = selection_vals.selections[j].suboption;
                         if (subselect != undefined) {

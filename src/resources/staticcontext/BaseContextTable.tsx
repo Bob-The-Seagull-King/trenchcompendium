@@ -1920,7 +1920,19 @@ export const BaseContextCallTable : CallEventTable = {
         event_priotity: 0,
         async getFireteamOptionsFromWarbandModel(this: EventRunner, eventSource : any, relayVar : WarbandMember[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : WarbandMember, staticself : StaticOptionContextObjectList) {
 
+            console.log("getFireteamOptionsFromWarbandModel")
+            console.log(eventSource)
+            console.log(relayVar)
+            console.log(context_func)
+            console.log(context_static)
+            console.log(context_main)
+            console.log(sourceband)
+            console.log(staticself)
+
             const warband = sourceband.MyContext as UserWarband;
+            if (warband == null) {
+                return relayVar;
+            }
             const Models = warband.GetFighters();
             
             for (let i = 0; i < Models.length; i++) {
@@ -1929,10 +1941,26 @@ export const BaseContextCallTable : CallEventTable = {
                 if (Models[i].model == sourceband) {
                     isValid = false;
                 }
-                if (staticself.MyStaticObject) {
-                    const Found = warband.IsModelInThisFireteam(staticself.MyStaticObject, Models[i].model)
-                    if (Found) {
-                        isValid = false;
+
+                if (context_static.ContextKeys["added_context"]) {
+                    const cntxt = context_static.ContextKeys["added_context"]
+                    if (cntxt["restriction"]) {
+                        for (let j = 0; j < cntxt["restriction"].length; j++) {
+                            if (cntxt["restriction"][j]["rest_type"] == "elite") {
+                                if (cntxt["restriction"][j]["value"] != Models[i].model.IsElite()) {
+                                    isValid = false;
+                                }
+                            }
+                        }
+                    }
+                }
+             
+                if (isValid) {
+                    if (staticself.MyStaticObject) {
+                        const Found = warband.IsModelInThisFireteam(staticself.MyStaticObject, Models[i].model)
+                        if (Found) {
+                            isValid = false;
+                        }
                     }
                 }
 
@@ -1955,7 +1983,7 @@ export const BaseContextCallTable : CallEventTable = {
 
             if (context_func["type"] && context_func["count"]) {
                 for (let i = 0; i < context_func["count"]; i++) {
-                    const NewFireteam = await FireteamModule.FireteamFactory.CreateNewFireteam(context_func["type"], eventSource, context_func["type"] + "_" + context_static.GetID() + "_" + i);
+                    const NewFireteam = await FireteamModule.FireteamFactory.CreateNewFireteam(context_func["type"], eventSource, context_func["type"] + "_" + context_static.GetID() + "_" + i, {"added_context" : context_func});
                     relayVar.push(NewFireteam);
                 }
             }
@@ -1971,7 +1999,7 @@ export const BaseContextCallTable : CallEventTable = {
 
             if (context_func["type"] && context_func["count"]) {
                 for (let i = 0; i < context_func["count"]; i++) {
-                    const NewFireteam = await FireteamModule.FireteamFactory.CreateNewFireteam(context_func["type"], eventSource, context_func["type"] + "_" + context_static.GetID() + "_" + i);
+                    const NewFireteam = await FireteamModule.FireteamFactory.CreateNewFireteam(context_func["type"], eventSource, context_func["type"] + "_" + context_static.GetID() + "_" + eventSource.GetID() + "_" + i, {"added_context" : context_func});
                     relayVar.push(NewFireteam);
                 }
             }

@@ -1938,17 +1938,7 @@
         "source": "core",
         "tags": { "trait": true},
         "contextdata": {
-            "add_fireteam_model" : { 
-                "type": "standard", 
-                "count": 1, 
-                "restriction": [
-                    {
-                        "type": "keyword",
-                        "have": false,
-                        "value": "kw_elite"
-                    }
-                ]
-            }
+            "add_fireteam_model" : { "type": "ft_model", "count": 1, "restriction": [ { "rest_type": "elite", "value": false }]}
         },
         "description": [            
             {

@@ -167,9 +167,10 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
     const [showAdvancementModal, setShowAdvancementModal] = useState(false);
     const handleAddAdvancement = (advancement: Skill) => {
         fighter.AddSkill(advancement).then(() => {
+            warband?.warband_data.RebuildProperties().then(() => {
             const Manager : ToolsController = ToolsController.getInstance();
             Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(() => reloadDisplay())
-        });
+        })});
     };
 
     const [showInjuryModal, setShowInjuryModal] = useState(false);
