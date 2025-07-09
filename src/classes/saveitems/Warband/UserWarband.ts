@@ -27,6 +27,11 @@ interface WarbandDebt {
     glory : number
 }
 
+export interface WarbandAlert {
+    title: string,
+    content: string
+}
+
 interface IUserWarband extends IContextObject {
     id : string,
     ducat_bank : number,
@@ -208,6 +213,17 @@ class UserWarband extends DynamicContextObject {
 
     public async GetAvailableLocations() : Promise<ExplorationTableSuite[]> {
         return await this.Exploration.GetValidNewLocations();
+    }
+
+    public async GetWarbandAlerts() : Promise<WarbandAlert[]> {
+        const AlertList: WarbandAlert[] = []
+
+        AlertList.push({
+            title: "Test Alert",
+            content: "This alert is just a test, don't worry!"
+        })
+
+        return AlertList
     }
 
 
