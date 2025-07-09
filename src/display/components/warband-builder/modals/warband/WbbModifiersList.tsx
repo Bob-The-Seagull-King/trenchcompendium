@@ -14,12 +14,15 @@ const WbbModifiersList = () => {
 
     const [keyvar, setkeyvar] = useState(0);
     const [modifiers, setmodifiers] = useState<WarbandProperty[]>([]);
+    const [fireteams, setfireteams] = useState<WarbandProperty[]>([]);
 
     useEffect(() => {
         async function RunUpdate() {
             if (warband) {
                 const Modifiers = await warband?.warband_data.GetModifiersList();
+                const Fireteams = await warband?.warband_data.GetFireteams();
                 setmodifiers(Modifiers);
+                setfireteams(Fireteams)
             }
             setkeyvar(keyvar + 1);
         }
@@ -30,14 +33,32 @@ const WbbModifiersList = () => {
     return (
         <div key={keyvar}>        
             {/* Warband Modifiers */}
-            <h3 className={'category-headline'}>Modifiers</h3>
-            {modifiers.map((item) =>
-                <WbbEditViewExtraModifier
-                    key={item.GetTrueName()}
-                    warbprop={item}
-                    index={modifiers.indexOf(item)}
-                />
-            )}
+            {modifiers.length > 0 &&
+                <>
+                    <h3 className={'category-headline'}>Modifiers</h3>
+                    {modifiers.map((item) =>
+                        <WbbEditViewExtraModifier
+                            key={item.GetTrueName()}
+                            warbprop={item}
+                            index={modifiers.indexOf(item)}
+                        />
+                    )}
+                </>
+            } 
+            {/* Warband Modifiers */}
+            {fireteams.length > 0 &&
+                <>
+                    <h3 className={'category-headline'}>Fireteams</h3>
+                    {fireteams.map((item) =>
+                        <WbbEditViewExtraModifier
+                            key={item.GetTrueName()}
+                            warbprop={item}
+                            index={modifiers.indexOf(item)}
+                        />
+                    )}
+                </>
+            }
+            
         </div>
     );
 };

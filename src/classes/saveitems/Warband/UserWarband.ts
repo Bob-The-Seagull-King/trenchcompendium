@@ -1187,12 +1187,12 @@ class UserWarband extends DynamicContextObject {
         for (let i = 0; i < this.Modifiers.length; i++) {
             PropertyList.push(this.Modifiers[i])    
         }
-        
-        for (let i = 0; i < this.Fireteams.length; i++) {
-            PropertyList.push(this.Fireteams[i])    
-        }
 
         return PropertyList;
+    }
+
+    public async GetFireteams() {
+        return this.Fireteams;
     }
 
     public GetWarbandFactionModifiersList() {

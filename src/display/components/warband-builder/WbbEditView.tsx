@@ -235,16 +235,7 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                                             setShowAddFighterMercenaryModal={setShowAddFighterMercenaryModal}
                                         />
 
-                                        <WbbModifiersList/>                                        
-
-                                        {!playMode &&
-                                            <div className={'btn btn-add-element btn-block'}
-                                                 onClick={() => setShowAddModifierModal(true)}
-                                            >
-                                                <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
-                                                {'Add Modifier'}
-                                            </div>
-                                        }
+                                        <WbbModifiersList/>
 
                                         {!playMode &&
                                             <WbbLocationsList/>

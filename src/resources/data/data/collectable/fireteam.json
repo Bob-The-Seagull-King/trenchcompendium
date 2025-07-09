@@ -5,18 +5,7 @@
         "source": "core",
         "tags": {"trait": true},
         "contextdata": {"is_fireteam": {}},
-        "description": [              
-            {
-                "tags": {"desc_type" : "paragraph"},
-                "content": "This model is part of a Fireteam made up of two models. All models that are part of this Fireteam can be activated at the same time without the opponent getting their turn in between. They can take their ACTIONS in any order they wish, switching between the two models.",
-                "glossary": [{"val": "ACTIONS", "id": "kw_action"}]
-            },
-            {
-                "tags": {"desc_type" : "paragraph"},
-                "content": "Note that if the activation of either member of the Fireteam forcefully ends (due to a failed RISKY ACTION for example), it ends both Activations. Allies cannot be part of a Fireteam.",
-                "glossary": [{"val": "RISKY ACTION", "id": "kw_riskyaction"}]
-            }
-        ],
+        "description": [],
         "options": [
             {
                 "ref_id" : "ot_fireteammember_a",
@@ -48,18 +37,7 @@
         "source": "core",
         "tags": {"trait": true},
         "contextdata": {"is_model_fireteam": {}},
-        "description": [              
-            {
-                "tags": {"desc_type" : "paragraph"},
-                "content": "This model is part of a Fireteam made up of two models. All models that are part of this Fireteam can be activated at the same time without the opponent getting their turn in between. They can take their ACTIONS in any order they wish, switching between the two models.",
-                "glossary": [{"val": "ACTIONS", "id": "kw_action"}]
-            },
-            {
-                "tags": {"desc_type" : "paragraph"},
-                "content": "Note that if the activation of either member of the Fireteam forcefully ends (due to a failed RISKY ACTION for example), it ends both Activations. Allies cannot be part of a Fireteam.",
-                "glossary": [{"val": "RISKY ACTION", "id": "kw_riskyaction"}]
-            }
-        ],
+        "description": [],
         "options": [
             {
                 "ref_id" : "ot_fireteammember_a",
@@ -80,17 +58,7 @@
         "source": "core",
         "tags": {"trait": true},
         "contextdata": {"is_fireteam": {}},
-        "description": [                
-            {
-                "tags": {"desc_type" : "paragraph"},
-                "content": "This model is part of a Fireteam made up of two models. All models that are part of this Fireteam can be activated at the same time without the opponent getting their turn in between. They can take their ACTIONS in any order they wish, switching between the two models.",
-                "glossary": [{"val": "ACTIONS", "id": "kw_action"}]
-            },
-            {
-                "tags": {"desc_type" : "paragraph"},
-                "content": "Note that if the activation of either member of the Fireteam forcefully ends (due to a failed RISKY ACTION for example), it ends both Activations. Allies cannot be part of a Fireteam.",
-                "glossary": [{"val": "RISKY ACTION", "id": "kw_riskyaction"}]
-            },
+        "description": [
             {
                 "tags": {"desc_type" : "paragraph"},
                 "content": "If a model in the FIRETEAM makes any kind of Attack ACTION (ranged or melee) against an opponent, where the other member of their FIRETEAM has already hit it with an attack ACTION during the same activation, the cost of a Bloodbath is reduced to three BLOOD MARKERS against this opponent, whether the model is standing or Down.",

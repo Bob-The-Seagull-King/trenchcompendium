@@ -568,7 +568,7 @@ class WarbandMember extends DynamicContextObject {
                 "showSkillOnWarband",
                 this.Skills[i],
                 [],
-                true,
+                false,
                 this
             )
 
