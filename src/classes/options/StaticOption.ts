@@ -219,14 +219,12 @@ class StaticOptionContextObjectList extends StaticOption {
 
         const RelevantContextObject : ContextObject | null = this.FindContextObject()
 
-            console.log(RelevantContextObject);
         if ((this.DynaForce == true && RelevantContextObject != null) || (this.DynaForce == false)) {
             if (RelevantContextObject != null) {
                 const Events : EventRunner = new EventRunner();
                 if (this.SelfAsk && this.MyStaticObject) {
                     OptionContextList = await Events.runEvent(this.QuestionName, this.MyStaticObject, [RelevantContextObject, this], [], this.Question)
                 } else {
-                    console.log(this.QuestionName);
                     OptionContextList = await Events.runEvent(this.QuestionName, RelevantContextObject, [RelevantContextObject, this], [], this.Question)
                 }
 

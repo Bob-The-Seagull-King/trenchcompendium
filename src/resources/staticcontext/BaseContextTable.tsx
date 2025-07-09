@@ -1901,10 +1901,27 @@ export const BaseContextCallTable : CallEventTable = {
             for (let i = 0; i < Models.length; i++) {
                 let isValid = true;
 
+                if (context_static.ContextKeys["added_context"]) {
+                    const cntxt = context_static.ContextKeys["added_context"]
+                    if (cntxt["exclusive"]) {
+                        if (cntxt["exclusive"] == true) {
+                            const Found = await sourceband.IsModelInOtherFireteam(Models[i].model)
+                            if (Found) {
+                                isValid = false;
+                            }
+                        }
+                    }
+                }
+
                 if (staticself.MyStaticObject) {
                     const Found = sourceband.IsModelInThisFireteam(staticself.MyStaticObject, Models[i].model)
                     if (Found) {
                         isValid = false;
+                    } else {
+                        const NewFound = await sourceband.IsModelInExclusiveFireteam(Models[i].model)
+                        if (NewFound) {
+                            isValid = false;
+                        }
                     }
                 }
 
@@ -1919,15 +1936,6 @@ export const BaseContextCallTable : CallEventTable = {
     is_model_fireteam: {
         event_priotity: 0,
         async getFireteamOptionsFromWarbandModel(this: EventRunner, eventSource : any, relayVar : WarbandMember[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : WarbandMember, staticself : StaticOptionContextObjectList) {
-
-            console.log("getFireteamOptionsFromWarbandModel")
-            console.log(eventSource)
-            console.log(relayVar)
-            console.log(context_func)
-            console.log(context_static)
-            console.log(context_main)
-            console.log(sourceband)
-            console.log(staticself)
 
             const warband = sourceband.MyContext as UserWarband;
             if (warband == null) {
@@ -1944,6 +1952,15 @@ export const BaseContextCallTable : CallEventTable = {
 
                 if (context_static.ContextKeys["added_context"]) {
                     const cntxt = context_static.ContextKeys["added_context"]
+                    if (cntxt["exclusive"]) {
+                        if (cntxt["exclusive"] == true) {
+                            console.log("DGASJGDAS")
+                            const Found = await warband.IsModelInOtherFireteam(Models[i].model)
+                            if (Found) {
+                                isValid = false;
+                            }
+                        }
+                    }
                     if (cntxt["restriction"]) {
                         for (let j = 0; j < cntxt["restriction"].length; j++) {
                             if (cntxt["restriction"][j]["rest_type"] == "elite") {
@@ -1960,6 +1977,11 @@ export const BaseContextCallTable : CallEventTable = {
                         const Found = warband.IsModelInThisFireteam(staticself.MyStaticObject, Models[i].model)
                         if (Found) {
                             isValid = false;
+                        } else {
+                            const NewFound = await warband.IsModelInExclusiveFireteam(Models[i].model)
+                            if (NewFound) {
+                                isValid = false;
+                            }
                         }
                     }
                 }

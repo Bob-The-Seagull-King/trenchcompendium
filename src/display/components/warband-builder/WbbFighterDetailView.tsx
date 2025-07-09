@@ -176,9 +176,10 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
     const [showInjuryModal, setShowInjuryModal] = useState(false);
     const handleAddInjury = (injury: Injury) => {
         fighter.AddInjury(injury).then(() => {
+            warband?.warband_data.RebuildProperties().then(() => {
             const Manager : ToolsController = ToolsController.getInstance();
             Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(() => reloadDisplay())
-        });
+        })});
     };
 
     // Fighter status

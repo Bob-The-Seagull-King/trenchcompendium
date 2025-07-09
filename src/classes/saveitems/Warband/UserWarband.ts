@@ -137,6 +137,33 @@ class UserWarband extends DynamicContextObject {
         return false;
     }
 
+    public async IsModelInOtherFireteam(model : WarbandMember) : Promise<boolean> {
+        
+        for (let i = 0; i < this.Fireteams.length; i++) {
+            if (this.IsModelInThisFireteam(this.Fireteams[i].SelfDynamicProperty.OptionChoice, model)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public async IsModelInExclusiveFireteam(model : WarbandMember) : Promise<boolean> {
+
+        for (let i = 0; i < this.Fireteams.length; i++) {
+            if (this.Fireteams[i].SelfDynamicProperty.OptionChoice.ContextKeys["added_context"]) {
+                    const cntxt = this.Fireteams[i].SelfDynamicProperty.OptionChoice.ContextKeys["added_context"]
+                    if (cntxt["exclusive"]) {
+                        if (cntxt["exclusive"] == true) {
+                            if (this.IsModelInThisFireteam(this.Fireteams[i].SelfDynamicProperty.OptionChoice, model)) {
+                                return true;
+                            }
+                        }
+                    }
+                }
+        }
+        return false;
+    }
+
     public async BuildModifiersFireteam(data : IWarbandProperty[]) {
         const eventmon : EventRunner = new EventRunner();
         let all_eq : Fireteam[] = await eventmon.runEvent(
@@ -173,6 +200,10 @@ class UserWarband extends DynamicContextObject {
                 await NewRuleProperty.HandleDynamicProps(all_eq[i], this, null, null);
                 this.Fireteams.push(NewRuleProperty);
             }
+        }
+
+        for (let i = 0; i < this.Fireteams.length; i++) {
+            await this.Fireteams[i].SelfDynamicProperty.ReloadOption();
         }
 
         return this.Fireteams;

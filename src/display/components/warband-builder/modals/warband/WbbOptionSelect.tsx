@@ -40,6 +40,7 @@ const WbbOptionSelect: React.FC<WbbEditSelectionProps> = ({choice,  property, ov
 
     
     async function SetModelOptions() {
+        await property.SelfDynamicProperty.ReloadOption();
         if (choice.SelectedChoice != null) {
             
             const EventProc: EventRunner = new EventRunner();

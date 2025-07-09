@@ -61,7 +61,7 @@ const WbbEditSelectionModal: React.FC<WbbEditSelectionProps> = ({
                     Cancel
                 </Button>
                 <Button variant="primary" onClick={handleSubmit} disabled={selectedGoetic === currentChoice}>
-                    Update Discipline
+                    Update Selection
                 </Button>
             </Modal.Footer>
         </Modal>
