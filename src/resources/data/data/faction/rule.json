@@ -63,7 +63,7 @@
         "tags": { },
         "contextdata": {
             "add_to_warband": {},
-            "add_fireteam_warband" : { "type": "standard", "count": 1 }
+            "add_fireteam_warband" : { "type": "ft_standard", "count": 1 }
          },
         "name": "Killing Squad",
         "description":  [
@@ -469,7 +469,7 @@
         "tags": { },
         "contextdata": { 
 
-            "add_fireteam_warband" : { "type": "antioch", "count": 2 }
+            "add_fireteam_warband" : { "type": "ft_antioch", "count": 2 }
         },
         "name": "New Antioch Fireteams",
         "description":  [
@@ -1656,7 +1656,7 @@
         "tags": { },
         "contextdata": { 
 
-            "add_fireteam_warband" : { "type": "antioch", "count": 1 }
+            "add_fireteam_warband" : { "type": "ft_antioch", "count": 1 }
         },
         "name": "Loose Organisation",
         "description":  [
@@ -1750,7 +1750,7 @@
         "tags": { },
         "contextdata": { 
 
-            "add_fireteam_warband" : { "type": "antioch", "count": 3 }
+            "add_fireteam_warband" : { "type": "ft_antioch", "count": 3 }
         },
         "name": "Expert Fireteams",
         "description":  [

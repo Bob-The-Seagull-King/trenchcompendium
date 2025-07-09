@@ -125,6 +125,7 @@ class WarbandProperty extends DynamicContextObject  {
         if (this.SelfDynamicProperty.Selections[selection_index] != undefined) {
             this.SelfDynamicProperty.Selections[selection_index].SelectOption(selection_id);
             await this.RegenerateSubProperties();
+            await this.SelfDynamicProperty.ReloadOption();
         }
     }
 

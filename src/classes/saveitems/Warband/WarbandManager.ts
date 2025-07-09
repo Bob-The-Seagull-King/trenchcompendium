@@ -178,7 +178,7 @@ class WarbandManager {
         } else {
             const Item : null | SumWarband = this.GetItemByID(String(id));
             if (Item != null) {
-                await this.UpdateWarbandSynod(id, Item)
+                this.UpdateWarbandSynod(id, Item)
             }
         }
     }
@@ -273,7 +273,8 @@ class WarbandManager {
                 ducats: 0,
                 glory: 0
             },
-            modifiers: []
+            modifiers: [],
+            fireteams: []
         }
         const new_item : UserWarband = await WarbandFactory.CreateUserWarband(_Item)
 

@@ -211,7 +211,7 @@
         "source": "core",
         "tags": {"trait": true, "takwin": true},
         "contextdata": {
-            "add_fireteam_model" : { "type": "standard", "count": 1 }
+            "add_fireteam_model" : { "type": "ft_model", "count": 1, "exclusive": true }
         },
         "description": [           
             {
@@ -615,7 +615,7 @@
         "source": "core",
         "tags": {"trait": true},
         "contextdata": {
-            "add_fireteam_model" : { "type": "standard", "count": 1 }
+            "add_fireteam_model" : { "type": "ft_model", "count": 1 }
         },
         "description": [           
             {

@@ -114,6 +114,9 @@ class DataResponder {
             case "factionvariant": {
                 return RelevantSet.factionvariantdata.concat(data)
             }
+            case "fireteam": {
+                return RelevantSet.fireteamdata.concat(data)
+            }
             case "factionrule": {
                 return RelevantSet.factionruledata.concat(data)
             }

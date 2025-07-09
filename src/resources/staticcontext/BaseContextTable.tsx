@@ -2,7 +2,7 @@ import { DynamicContextObject } from "../../classes/contextevent/dynamiccontexto
 import { CallEventTable, ContextEventEntry } from "./contexteventtypes";
 import { EventRunner } from "../../classes/contextevent/contexteventhandler";
 import { ContextObject } from "../../classes/contextevent/contextobject";
-import { IChoice, QuestionBase, StaticOptionContextObjectQuestion } from "../../classes/options/StaticOption";
+import { IChoice, QuestionBase, StaticOptionContextObjectList, StaticOptionContextObjectQuestion } from "../../classes/options/StaticOption";
 import { containsTag, getCostType, makestringpresentable } from "../../utility/functions";
 import { getTagValue } from "../../utility/functions";
 import { Equipment, EquipmentLimit, EquipmentRestriction, EquipmentStats, RestrictionSingle } from "../../classes/feature/equipment/Equipment";
@@ -31,6 +31,7 @@ import { MemberAndItem, MemberAndWarband, ModelHands, WarbandMember } from "../.
 import { returnDescription } from "../../utility/util";
 import { Patron } from "../../classes/feature/skillgroup/Patron";
 import { Injury } from "../../classes/feature/ability/Injury";
+import { Fireteam } from "../../classes/feature/ability/Fireteam";
 
 export const BaseContextCallTable : CallEventTable = {
     option_search_viable: {
@@ -1891,6 +1892,46 @@ export const BaseContextCallTable : CallEventTable = {
             return relayVar;
         }
     },
+    is_fireteam: {
+        event_priotity: 0,
+        async getFireteamOptionsFromWarband(this: EventRunner, eventSource : any, relayVar : WarbandMember[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : UserWarband, staticself : StaticOptionContextObjectList) {
+
+            const Models = sourceband.GetFighters();
+            
+            for (let i = 0; i < Models.length; i++) {
+                let isValid = true;
+
+                if (staticself.MyStaticObject) {
+                    const Found = sourceband.IsModelInThisFireteam(staticself.MyStaticObject, Models[i].model)
+                    if (Found) {
+                        isValid = false;
+                    }
+                }
+
+                if (isValid) {
+                    relayVar.push(Models[i].model)
+                }
+            }
+
+            return relayVar;
+        }
+    },
+    add_fireteam_warband: {
+        event_priotity: 0,        
+        async getAllFireteamOptions(this: EventRunner, eventSource : any, relayVar : Fireteam[], trackVal : UserWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            
+            const FireteamModule = await import("../../factories/features/FireteamFactory")
+
+            if (context_func["type"] && context_func["count"]) {
+                for (let i = 0; i < context_func["count"]; i++) {
+                    const NewFireteam = await FireteamModule.FireteamFactory.CreateNewFireteam(context_func["type"], eventSource, context_func["type"] + "_" + context_static.GetID() + "_" + i);
+                    relayVar.push(NewFireteam);
+                }
+            }
+
+            return relayVar;
+        }
+    },
     get_warband_glory: {
         event_priotity: 0,
         async getStartingGlory(this: EventRunner, eventSource : any, relayVar : number, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
@@ -1920,7 +1961,7 @@ export const BaseContextCallTable : CallEventTable = {
     exploration_option: {
         event_priotity: 0,
         async returnWbbOptionDisplay(this: EventRunner, eventSource : any, trackVar : IChoice, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null){
-                        
+                console.log(trackVar)        
             return ( 
             
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
@@ -1965,7 +2006,11 @@ export const BaseContextCallTable : CallEventTable = {
             )
         },
         async returnWbbOptionDisplay(this: EventRunner, eventSource : any, trackVar : IChoice, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null){
-                        
+            const AbilityModule = await import("../../classes/feature/ability/Ability")
+           
+            if (!(trackVar instanceof AbilityModule.Ability)) {
+                return (<></>);
+            }   
             return ( 
             
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
@@ -2031,10 +2076,15 @@ export const BaseContextCallTable : CallEventTable = {
     },
     warband_general_hook: {
         event_priotity: 0,        
-        async getModelRelationshipsForWarband(this: EventRunner, eventSource : any, relayVar : FactionModelRelationship[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : UserWarband) {
-            
+        async getModelRelationshipsForWarband(this: EventRunner, eventSource : any, relayVar : FactionModelRelationship[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : UserWarband, staticself : StaticOptionContextObjectList) {
+            console.log("HELP")
+            if (staticself.MyStaticObject != null) {
+                if (staticself.MyStaticObject == context_static ) {
+                    return relayVar;
+                }
+            }
+
             const FacCheck = sourceband.Faction.MyFaction;
-            const ListOfRels : FactionModelRelationship[] = []
             let BaseRels : FactionModelRelationship[] = []
             
             if (FacCheck != undefined) {
@@ -2050,7 +2100,7 @@ export const BaseContextCallTable : CallEventTable = {
                 null
             )
 
-            return BaseRels.filter((item) => item.Mercenary == false);
+            return BaseRels.filter((item) => item.Mercenary == false && item.Maximum != 0);
         }
     },
     upgrade_stat: {

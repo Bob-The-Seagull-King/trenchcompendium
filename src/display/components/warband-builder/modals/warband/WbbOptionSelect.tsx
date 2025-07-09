@@ -30,10 +30,11 @@ const WbbOptionSelect: React.FC<WbbEditSelectionProps> = ({choice,  property, ov
         if (foundOption != null && overrideplay != true) {
             setSelectedoption(foundOption)
             choice.SelectOption(foundOption? foundOption.id : null);
-            property.RegenerateSubProperties().then(() =>{
+            property.RegenerateSubProperties().then(() => 
+            property.SelfDynamicProperty.ReloadOption().then(() =>{
             const Manager : ToolsController = ToolsController.getInstance();
             Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
-                () => reloadDisplay())})
+                () => reloadDisplay())}))
         }
     };
 

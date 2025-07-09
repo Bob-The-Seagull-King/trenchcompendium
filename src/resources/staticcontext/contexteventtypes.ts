@@ -1,4 +1,4 @@
-import { IChoice, StaticOption, StaticOptionContextObjectQuestion } from "../../classes/options/StaticOption";
+import { IChoice, StaticOption, StaticOptionContextObjectList, StaticOptionContextObjectQuestion } from "../../classes/options/StaticOption";
 import { EventRunner } from "../../classes/contextevent/contexteventhandler";
 import { DynamicContextObject } from "../../classes/contextevent/dynamiccontextobject";
 import { ContextObject } from "../../classes/contextevent/contextobject";
@@ -15,6 +15,8 @@ import { UserWarband } from "../../classes/saveitems/Warband/UserWarband";
 import { MemberAndItem, MemberAndWarband, ModelHands, WarbandMember } from "../../classes/saveitems/Warband/Purchases/WarbandMember";
 import { Patron } from "../../classes/feature/skillgroup/Patron";
 import { Injury } from "../../classes/feature/ability/Injury";
+import { Fireteam } from "../../classes/feature/ability/Fireteam";
+import { StaticOptionContextObject } from "../../classes/options/StaticOptionContextObject";
 
 /**
  * Events that can be called by the runEvent method,
@@ -67,11 +69,13 @@ export interface CallEvents {
     onGainInjury? : (this: EventRunner, eventSource : any, trackVal : Injury, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, member : WarbandMember) => Promise<void>; 
     onGainLocation? : (this: EventRunner, eventSource : any, trackVal : WarbandProperty, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) => Promise<void>; 
     showSkillOnWarband? : (this: EventRunner, eventSource : any, relayVar : boolean, trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, member : WarbandMember) => Promise<boolean>; 
-    getModelRelationshipsForWarband? : (this: EventRunner, eventSource : any, relayVar : FactionModelRelationship[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : UserWarband) => Promise<FactionModelRelationship[]>;
+    getModelRelationshipsForWarband? : (this: EventRunner, eventSource : any, relayVar : FactionModelRelationship[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : UserWarband, staticself : StaticOptionContextObjectList) => Promise<FactionModelRelationship[]>;
+    getFireteamOptionsFromWarband? : (this: EventRunner, eventSource : any, relayVar : WarbandMember[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : UserWarband, staticself : StaticOptionContextObjectList) => Promise<WarbandMember[]>;
     getExplorationSkills? : (this: EventRunner, eventSource : any, relayVar : WarbandProperty[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<WarbandProperty[]>; 
     canChooseOptionLocation? : (this: EventRunner, eventSource : any, relayVar : boolean, trackVal: UserWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<boolean>; 
     getStartingDucats? : (this: EventRunner, eventSource : any, relayVar : number, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<number>; 
     getStartingGlory? : (this: EventRunner, eventSource : any, relayVar : number, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<number>; 
+    getAllFireteamOptions? : (this: EventRunner, eventSource : any, relayVar : Fireteam[], trackVal : UserWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<Fireteam[]>; 
 }
 
 /**

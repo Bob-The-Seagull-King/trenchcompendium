@@ -290,14 +290,8 @@
         "source": "core",
         "tags": {"trait": true},
         "contextdata": {
-            "form_fireteam": {
-                "restriction": [
-                    {
-                        "rest_type": "keyword",
-                        "value": "kw_elite"
-                    }
-                ]
-            }
+            
+            "add_fireteam_model" : { "type": "ft_model", "count": 1, "restriction": [ { "rest_type": "keyword", "value": "kw_elite" }]}
         },
         "description": [            
             {

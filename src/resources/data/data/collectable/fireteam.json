@@ -1,0 +1,129 @@
+[
+    {
+        "id": "ft_standard",
+        "name": "Fireteam",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {"is_fireteam": {}},
+        "description": [              
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "This model is part of a Fireteam made up of two models. All models that are part of this Fireteam can be activated at the same time without the opponent getting their turn in between. They can take their ACTIONS in any order they wish, switching between the two models.",
+                "glossary": [{"val": "ACTIONS", "id": "kw_action"}]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Note that if the activation of either member of the Fireteam forcefully ends (due to a failed RISKY ACTION for example), it ends both Activations. Allies cannot be part of a Fireteam.",
+                "glossary": [{"val": "RISKY ACTION", "id": "kw_riskyaction"}]
+            }
+        ],
+        "options": [
+            {
+                "ref_id" : "ot_fireteammember_a",
+                "name" : "",
+                "description" : [],
+                "self_ask": true,
+                "category" : "contextobject",
+                "option_context" : {"is_fireteam":{}},
+                "dyna_only": true,
+                "parent_level": 5,
+                "question_name": "getFireteamOptionsFromWarband"
+            },
+            {
+                "ref_id" : "ot_fireteammember_b",
+                "name" : "",
+                "description" : [],
+                "self_ask": true,
+                "category" : "contextobject",
+                "option_context" : {"is_fireteam":{}},
+                "dyna_only": true,
+                "parent_level": 5,
+                "question_name": "getFireteamOptionsFromWarband"
+            }
+        ]
+    },
+    {
+        "id": "ft_model",
+        "name": "Model Fireteam",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {"is_model_fireteam": {}},
+        "description": [              
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "This model is part of a Fireteam made up of two models. All models that are part of this Fireteam can be activated at the same time without the opponent getting their turn in between. They can take their ACTIONS in any order they wish, switching between the two models.",
+                "glossary": [{"val": "ACTIONS", "id": "kw_action"}]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Note that if the activation of either member of the Fireteam forcefully ends (due to a failed RISKY ACTION for example), it ends both Activations. Allies cannot be part of a Fireteam.",
+                "glossary": [{"val": "RISKY ACTION", "id": "kw_riskyaction"}]
+            }
+        ],
+        "options": [
+            {
+                "ref_id" : "ot_fireteammember_a",
+                "name" : "",
+                "description" : [],
+                "category" : "contextobject",
+                "self_ask": true,
+                "option_context" : {"basic_option_default":{}},
+                "dyna_only": true,
+                "parent_level": 5,
+                "question_name": "getFireteamOptionsFromWarbandModel"
+            }
+        ]
+    },
+    {
+        "id": "ft_antioch",
+        "name": "Antioch Fireteam",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {"is_fireteam": {}},
+        "description": [                
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "This model is part of a Fireteam made up of two models. All models that are part of this Fireteam can be activated at the same time without the opponent getting their turn in between. They can take their ACTIONS in any order they wish, switching between the two models.",
+                "glossary": [{"val": "ACTIONS", "id": "kw_action"}]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Note that if the activation of either member of the Fireteam forcefully ends (due to a failed RISKY ACTION for example), it ends both Activations. Allies cannot be part of a Fireteam.",
+                "glossary": [{"val": "RISKY ACTION", "id": "kw_riskyaction"}]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "If a model in the FIRETEAM makes any kind of Attack ACTION (ranged or melee) against an opponent, where the other member of their FIRETEAM has already hit it with an attack ACTION during the same activation, the cost of a Bloodbath is reduced to three BLOOD MARKERS against this opponent, whether the model is standing or Down.",
+                "glossary": [
+                    {"val": "FIRETEAM", "id": "kw_fireteam"},
+                    {"val": "ACTION", "id": "kw_action"},
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"}
+                ]
+            }
+        ],
+        "options": [
+            {
+                "ref_id" : "ot_fireteammember_a",
+                "name" : "",
+                "description" : [],
+                "category" : "contextobject",
+                "option_context" : {"is_fireteam":{}},
+                "self_ask": true,
+                "dyna_only": true,
+                "parent_level": 5,
+                "question_name": "getFireteamOptionsFromWarband"
+            },
+            {
+                "ref_id" : "ot_fireteammember_b",
+                "name" : "",
+                "description" : [],
+                "category" : "contextobject",
+                "option_context" : {"is_fireteam":{}},
+                "self_ask": true,
+                "dyna_only": true,
+                "parent_level": 5,
+                "question_name": "getFireteamOptionsFromWarband"
+            }
+        ]
+    }
+]

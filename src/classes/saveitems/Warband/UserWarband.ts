@@ -21,6 +21,9 @@ import { ModelFactory } from '../../../factories/features/ModelFactory';
 import { EquipmentFactory } from '../../../factories/features/EquipmentFactory';
 import { SkillFactory } from '../../../factories/features/SkillFactory';
 import { ExplorationLocation } from '../../feature/exploration/ExplorationLocation';
+import { Fireteam } from '../../feature/ability/Fireteam';
+import { FireteamFactory } from '../../../factories/features/FireteamFactory';
+import { StaticOptionContextObject } from '../../options/StaticOptionContextObject';
 
 interface WarbandDebt {
     ducats : number,
@@ -43,7 +46,8 @@ interface IUserWarband extends IContextObject {
     equipment : IWarbandPurchaseEquipment[],
     notes : INote[],
     debts : WarbandDebt,
-    modifiers: IWarbandProperty[]
+    modifiers: IWarbandProperty[],
+    fireteams: IWarbandProperty[]
 }
 
 class UserWarband extends DynamicContextObject {
@@ -58,6 +62,7 @@ class UserWarband extends DynamicContextObject {
     public Equipment : WarbandPurchase[] = [];
     public Debts : WarbandDebt;
     public Modifiers : WarbandProperty[] = [];
+    public Fireteams : WarbandProperty[] = [];
 
     public DucatLimit : number[] = [700,800,900,1000,1100,1200,1300,1400,1500,1600,1700,1800];
     public ModelLimit : number[] = [10,11,12,13,14,15,16,17,18,19,20,22];
@@ -116,6 +121,56 @@ class UserWarband extends DynamicContextObject {
             this.Modifiers.push(NewLocation);
         }
     }
+    
+    public IsModelInThisFireteam(fireteam : StaticOptionContextObject, model : WarbandMember) {
+        console.log(fireteam)
+        console.log(model)
+        for (let i = 0; i < this.Fireteams.length; i++) {
+            console.log(this.Fireteams[i])
+            if (this.Fireteams[i].ID == fireteam.ID) {
+                for (let j = 0; j < this.Fireteams[i].SelfDynamicProperty.Selections.length; j++) {
+                    if (this.Fireteams[i].SelfDynamicProperty.Selections[j].SelectedChoice) {
+                        if (this.Fireteams[i].SelfDynamicProperty.Selections[j].SelectedChoice?.value == model) {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    public async BuildModifiersFireteam(data : IWarbandProperty[]) {
+        const eventmon : EventRunner = new EventRunner();
+        const all_eq : Fireteam[] = await eventmon.runEvent(
+            "getAllFireteamOptions",
+            this,
+            [],
+            [],
+            this
+        )
+        this.Fireteams = [];
+        for (let i = 0; i < all_eq.length; i++) {
+            let IsFound = false
+            for (let j = 0; j < data.length; j++) {
+                if (data[j].object_id == all_eq[i].ID) {
+                    const NewRuleProperty = new WarbandProperty(all_eq[i], this, null, data[j]);
+                    await NewRuleProperty.HandleDynamicProps(all_eq[i], this, null, data[j]);
+                    await NewRuleProperty.SelfDynamicProperty.ReloadOption();
+                    this.Fireteams.push(NewRuleProperty);
+                    IsFound = true;
+                    break;
+                }
+            }
+            if (IsFound == false) {
+                const NewRuleProperty = new WarbandProperty(all_eq[i], this, null, null);
+                await NewRuleProperty.HandleDynamicProps(all_eq[i], this, null, null);
+                this.Fireteams.push(NewRuleProperty);
+            }
+        }
+
+        return this.Fireteams;
+    }
 
     public ConvertToInterface() {
         const modelslist : IWarbandPurchaseModel[] = []
@@ -130,7 +185,15 @@ class UserWarband extends DynamicContextObject {
 
         const propertylist : IWarbandProperty[] = []
         for (let i = 0; i < this.Modifiers.length; i++) {
-            propertylist.push(this.Modifiers[i].ConvertToInterface())
+            const int = this.Modifiers[i].ConvertToInterface()
+            if (int != undefined) {
+                propertylist.push(this.Modifiers[i].ConvertToInterface())
+            }
+        }
+
+        const fireteamlist : IWarbandProperty[] = []
+        for (let i = 0; i < this.Fireteams.length; i++) {
+            fireteamlist.push(this.Fireteams[i].ConvertToInterface())
         }
 
         const _objint : IUserWarband = {
@@ -148,7 +211,8 @@ class UserWarband extends DynamicContextObject {
             equipment : equipmentlist,
             notes: this.Notes,
             debts: this.Debts,
-            modifiers: propertylist
+            modifiers: propertylist,
+            fireteams: fireteamlist
         }
         
         return _objint;
@@ -190,7 +254,7 @@ class UserWarband extends DynamicContextObject {
                 static_packages[j].callpath.push("UserWarband")
                 subpackages.push(static_packages[j])
             }
-        }
+        } 
 
         return subpackages; 
     }
@@ -426,6 +490,14 @@ class UserWarband extends DynamicContextObject {
             }, this, Model);
             this.Models.push(NewPurchase);
         }
+
+        await this.BuildModifiersFireteam(this.SelfData.fireteams);
+    }
+
+    public async RebuildProperties() {
+        
+        await this.BuildModifiersSkills(this.SelfData.modifiers);
+        await this.BuildModifiersFireteam(this.SelfData.fireteams);
     }
 
     public async DuplicateFighter( fighter : RealWarbandPurchaseModel ) {
@@ -443,6 +515,8 @@ class UserWarband extends DynamicContextObject {
         const NewPurchase : WarbandPurchase = new WarbandPurchase(fighter.purchase.ConvertToInterface(), this, NewMember);
         this.Models.push(NewPurchase);
 
+
+        await this.BuildModifiersFireteam(this.SelfData.fireteams);
         return fighter.model.Name + " Sucessfully Duplicated";
 
     }
@@ -478,6 +552,8 @@ class UserWarband extends DynamicContextObject {
                 break;
             }
         }
+
+        await this.BuildModifiersFireteam(this.SelfData.fireteams);
     }
 
     public HasModifier(mod : WarbandProperty) {
@@ -1110,6 +1186,10 @@ class UserWarband extends DynamicContextObject {
 
         for (let i = 0; i < this.Modifiers.length; i++) {
             PropertyList.push(this.Modifiers[i])    
+        }
+        
+        for (let i = 0; i < this.Fireteams.length; i++) {
+            PropertyList.push(this.Fireteams[i])    
         }
 
         return PropertyList;

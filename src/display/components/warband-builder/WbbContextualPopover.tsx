@@ -67,10 +67,11 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
 
     const handleRenameFighter = () => {
         setshowConfirmRenameFighterModal(false);
-        (item).RenameSelf(fighterName);
+        (item).model.RenameSelf(fighterName);
+        warband?.warband_data.RebuildProperties().then(() => {
         const Manager : ToolsController = ToolsController.getInstance();
         Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
-            () => reloadDisplay())
+            () => reloadDisplay())})
     }
 
     const handleCopyFighter = () => {
@@ -79,9 +80,10 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
             if (result.includes(" Sucessfully Duplicated") == false) {
                 toast.error(result);
             } else { 
+                warband?.warband_data.RebuildProperties().then(() => {
                 const Manager : ToolsController = ToolsController.getInstance();
                 Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
-                    () => reloadDisplay())
+                    () => reloadDisplay())})
                 
             }
         })
@@ -95,10 +97,11 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
         setshowConfirmRefundFighterModal(true);
 
 
-        warband?.warband_data.DeleteFighter(item).then(() => {
+        warband?.warband_data.DeleteFighter(item).then(() =>
+            warband?.warband_data.RebuildProperties().then(() => {
             const Manager : ToolsController = ToolsController.getInstance();
             Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
-                () => reloadDisplay())})
+                () => reloadDisplay())}))
     }
 
     const showConfirmDeleteFighter = () => {

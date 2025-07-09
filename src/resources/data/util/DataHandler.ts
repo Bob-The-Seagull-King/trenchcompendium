@@ -15,6 +15,7 @@ import en_modeldata from '../data/units/model.json'
 import en_modelvariantdata from '../data/units/modelvariant.json'
 import en_upgradedata from '../data/units/upgrade.json'
 
+import en_fireteamdata from '../data/collectable/fireteam.json'
 import en_equipmentdata from '../data/collectable/equipment.json'
 
 import en_factiondata from '../data/faction/faction.json'
@@ -65,6 +66,7 @@ export interface DataSetTC {
     modelvariantdata : any,
     upgradedata : any,
     modelupgraderelationship : any,
+    fireteamdata : any,
     equipmentdata : any,
     modelequipmentrelationship : any,
     factiondata : any,
@@ -103,6 +105,7 @@ export const DataByLanguageTable : LanguageDataTable = {
         modelvariantdata : en_modelvariantdata,    
         upgradedata : en_upgradedata,
         modelupgraderelationship : en_modelupgraderelationship,  
+        fireteamdata : en_fireteamdata,
         equipmentdata : en_equipmentdata,  
         modelequipmentrelationship : en_modelequipmentrelationship,
         factiondata : en_factiondata,
