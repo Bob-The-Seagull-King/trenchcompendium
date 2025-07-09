@@ -5,6 +5,8 @@ import React, { useEffect, useState } from 'react'
 import {Equipment, EquipmentStats} from '../../../classes/feature/equipment/Equipment';
 import { FactionEquipmentRelationship } from '../../../classes/relationship/faction/FactionEquipmentRelationship';
 import { ModelEquipmentRelationship } from '../../../classes/relationship/model/ModelEquipmentRelationship';
+import { EventRunner } from '../../../classes/contextevent/contexteventhandler';
+import { getCostType } from '../../../utility/functions';
 
 
 interface RulesEquipmentStatsProps {
@@ -21,6 +23,10 @@ const RulesEquipmentStats: React.FC<RulesEquipmentStatsProps> = (props : RulesEq
 
     const abilityObject = props.baseobject;
     const [statlist, setstatlist] = useState<EquipmentStats>(abilityObject.Stats)
+    const [cost, setcost] = useState<number | null>(null)
+    const [costtype, setcosttype] = useState<number | null>(null)
+    const [limit, setlimit] = useState<number | null>(null)
+    const [equiprestrictions, setEquipRestrictions] = useState([])
     const baseequip = abilityObject;
     const [_keyvar, setkeyvar] = useState(0);
 
@@ -30,8 +36,43 @@ const RulesEquipmentStats: React.FC<RulesEquipmentStatsProps> = (props : RulesEq
             
             /* stats */
             if (props.facrelObject != undefined) {
+                setcost(props.facrelObject.Cost)
+                setcosttype(props.facrelObject.CostType)
+                setlimit(props.facrelObject.Limit)
                 const result_upgrades = await props.facrelObject.getFactionEquipmentStats();
                 setstatlist(result_upgrades);
+                
+                const EventProc: EventRunner = new EventRunner();
+                
+                if (props.facrelObject.RestrictedEquipment != null) {
+                    const result_presentation = await EventProc.runEvent(
+                        "getEquipmentRestrictionPresentable",
+                        props.facrelObject,
+                        [],
+                        [],
+                        props.facrelObject.RestrictedEquipment
+                    );
+                    setEquipRestrictions(result_presentation);
+                    setkeyvar((prev) => prev + 1);
+                } else {
+                    const result = await EventProc.runEvent(
+                        "getEquipmentRestriction",
+                        props.facrelObject,
+                        [],
+                        [],
+                        null
+                    );
+                    props.facrelObject.RestrictedEquipment = result;
+                    const result_presentation = await EventProc.runEvent(
+                        "getEquipmentRestrictionPresentable",
+                        props.facrelObject,
+                        [],
+                        [],
+                        props.facrelObject.RestrictedEquipment
+                    );
+                    setEquipRestrictions(result_presentation);
+                    setkeyvar((prev) => prev + 1);
+                }
             }
             setkeyvar((prev) => prev + 1);
 
@@ -55,8 +96,7 @@ const RulesEquipmentStats: React.FC<RulesEquipmentStatsProps> = (props : RulesEq
 
     return (
         <>
-            {/* @TODO: also check if restrictions are set and then show the table */}
-            {statlist && (RangeVal != "" || (HandValMelee != "" || HandValRange != "") || abilityObject.Modifiers.length > 0) &&
+            {statlist && (RangeVal != "" || (HandValMelee != "" || HandValRange != "") || abilityObject.Modifiers.length > 0 || (cost != null && costtype != null) || (limit != null && equiprestrictions != null)) &&
                 <table key={_keyvar} className={'rules-equipment-stats-table'}>
                     <tbody>
                         {RangeVal != "" &&
@@ -102,38 +142,38 @@ const RulesEquipmentStats: React.FC<RulesEquipmentStatsProps> = (props : RulesEq
                                 </td>
                             </tr>
                         }
-
+                        {(costtype != null && cost != null) &&
                         <tr>
                             <td className={'label-cell'}>
                                 {'Cost'}
                             </td>
                             <td>
-                                {/* @TODO: add actual value and cost type*/}
-                                8 Glory
+                                {cost + " " + getCostType(costtype)}
                             </td>
                         </tr>
+                        }
 
+                        {(limit != null && equiprestrictions != null) &&
                         <tr>
                             <td className={'label-cell'}>
                                 {'Restrictions'}
                             </td>
                             <td>
-                                {/* @TODO: add actual Limits here */}
-
-                                {/* @TODO: add Limit number here like in FactionEquipmentDisplay*/}
                                 <span className={'text-limit'}>
-                                    LIMIT: 1
+                                    LIMIT: {limit}
                                 </span>
 
-                                {/* @TODO: break if limit AND other restrictions apply */}
                                 <br/>
-
-                                {/* @TODO: add other restrictions here like in FactionEquipmentDisplay */}
-                                <span>
-                                    Alchemists only
-                                </span>
+                                {(equiprestrictions.length > 0) &&
+                                    <span>
+                                        {
+                                            equiprestrictions.join(', ') + ' only'
+                                        }
+                                    </span>
+                                }
                             </td>
                         </tr>
+                        }
                     </tbody>
                 </table>
             }
