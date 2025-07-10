@@ -58,7 +58,7 @@ class WarbandConsumable extends DynamicContextObject  {
             "runConsumableSelect",
             this,
             [this.MyContext],
-            [],
+            null,
             this
         )
     }

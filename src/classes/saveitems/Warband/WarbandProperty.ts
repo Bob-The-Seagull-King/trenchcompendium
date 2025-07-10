@@ -1,5 +1,5 @@
 import { CompendiumItem, ICompendiumItemData, ItemType } from '../../CompendiumItem'
-import { DescriptionFactory } from '../../../utility/functions';
+import { DescriptionFactory, GetWarbandOrNull } from '../../../utility/functions';
 import { INote } from '../../Note';
 import { IWarbandContextItem, WarbandContextItem } from './High_Level/WarbandContextItem';
 import { DynamicOptionContextObject } from '../../options/DynamicOptionContextObject';
@@ -54,10 +54,15 @@ class WarbandProperty extends DynamicContextObject  {
         
     }
 
-    public SendConsumablesUp() {
+    public async SendConsumablesUp() {
         for (let i = 0; i < this.Consumables.length; i++) {
             if (this.Consumables[i].SelectItem != null) {
-                (this.MyContext as UserWarband).Consumables.push(this.Consumables[i])
+                const Warband = await GetWarbandOrNull(this.Consumables[i]);
+                console.log("WARBAND")
+                console.log(Warband)
+                if (Warband != null) {
+                    Warband.Consumables.push(this.Consumables[i])
+                }
             }
         }
     }

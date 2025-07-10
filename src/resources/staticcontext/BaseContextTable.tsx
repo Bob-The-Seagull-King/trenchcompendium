@@ -3,7 +3,7 @@ import { CallEventTable, ContextEventEntry } from "./contexteventtypes";
 import { EventRunner } from "../../classes/contextevent/contexteventhandler";
 import { ContextObject } from "../../classes/contextevent/contextobject";
 import { IChoice, QuestionBase, StaticOptionContextObjectList, StaticOptionContextObjectQuestion } from "../../classes/options/StaticOption";
-import { containsTag, getCostType, makestringpresentable } from "../../utility/functions";
+import { containsTag, getCostType, GetWarbandOrNull, makestringpresentable } from "../../utility/functions";
 import { getTagValue } from "../../utility/functions";
 import { Equipment, EquipmentLimit, EquipmentRestriction, EquipmentStats, RestrictionSingle } from "../../classes/feature/equipment/Equipment";
 import { Keyword } from "../../classes/feature/glossary/Keyword";
@@ -2042,12 +2042,16 @@ export const BaseContextCallTable : CallEventTable = {
     },
     single_exploration_glory_item: {
         event_priotity: 0,
+        async runConsumableSelect(this: EventRunner, eventSource : any, trackVal : WarbandConsumable, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : WarbandConsumable) {
+            const ContWarband = await GetWarbandOrNull(sourceband);
+            if (ContWarband == null) { return }
+
+            await ContWarband.AddStash(trackVal.SelectItem as any);
+        },
         async getConsumableOptionsList(this: EventRunner, eventSource : any, relayVar : IChoice[], trackVal : WarbandConsumable, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : UserWarband) {
 
             if (sourceband) {
             const OptionList = await (sourceband).GetFactionEquipmentOptions(true);
-                console.log("LIST OF OPTIONS")
-                console.log(OptionList);
                 for (let i = 0; i < OptionList.length; i++) {
                     if (OptionList[i].CostType == 1 && OptionList[i].Cost < context_func["cost"]) {
                         relayVar.push(

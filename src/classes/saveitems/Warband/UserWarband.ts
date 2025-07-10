@@ -625,7 +625,7 @@ class UserWarband extends DynamicContextObject {
         
         for (let i = 0; i < this.Modifiers.length; i++) {
             if (mod == (this.Modifiers[i])) {
-                mod.SendConsumablesUp();
+                await mod.SendConsumablesUp();
                 this.Modifiers.splice(i, 1);
                 break;
             }
@@ -1260,9 +1260,6 @@ class UserWarband extends DynamicContextObject {
                 this
             )
             if (this.GetCountOfEquipmentRel(BaseRels[i].ID) < maxcount || (maxcount == 0 && BaseRels[i].Limit == 0)) {
-                console.log(BaseRels[i].Name)
-                console.log(maxcount);
-                console.log(this.GetCountOfEquipmentRel(BaseRels[i].ID))
                 if (!containsTag(BaseRels[i].Tags, "exploration_only") || use_exploration) {
                     AddedIDs.push(BaseRels[i].ID)
                     ListOfRels.push(BaseRels[i]);

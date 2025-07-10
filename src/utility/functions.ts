@@ -21,6 +21,8 @@ import { SkillGroup } from "../classes/feature/skillgroup/SkillGroup";
 import { Ability } from "../classes/feature/ability/Ability";
 import { Model } from "../classes/feature/model/Model";
 import { Upgrade } from "../classes/feature/ability/Upgrade";
+import { ContextObject } from "../classes/contextevent/contextobject";
+import { UserWarband } from "../classes/saveitems/Warband/UserWarband";
 
 /**
  * Returns a capitalized version of a given string
@@ -32,6 +34,25 @@ export function capitalizeString(stringVal: string) {
         return stringVal[0].toUpperCase() + stringVal.slice(1).toLowerCase();
     }
     return "";
+}
+
+export async function GetWarbandOrNull(object : ContextObject): Promise<null | UserWarband> {
+    const { UserWarband } = await import("../classes/saveitems/Warband/UserWarband");
+    let baseobject : ContextObject = object;
+    if (object instanceof UserWarband) {
+            return object;
+        }
+    for (let i = 0; i < 10; i++) {
+        const tempobject : ContextObject | null = baseobject.MyContext;
+        console.log(tempobject)
+        if (tempobject != null) {
+            baseobject = tempobject;
+            if (tempobject instanceof UserWarband) {
+                return tempobject;
+            }
+        }
+    }
+    return null;
 }
 
 export function isstringdataID(stringval : string ) {
