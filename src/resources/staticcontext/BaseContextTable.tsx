@@ -2066,7 +2066,7 @@ export const BaseContextCallTable : CallEventTable = {
 
             if (context_func["single_exploration_glory_item"]) {
                 const Tags = context_static.Tags;
-                Tags["type"] == "equipment"
+                Tags["consumable_type_equipment"] = true
                 const NewData = {
                     id: context_static.GetID(), 
                     name: context_static.GetTrueName(),

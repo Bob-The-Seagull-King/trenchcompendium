@@ -12,6 +12,8 @@ import { WarbandEquipment } from '../../../classes/saveitems/Warband/Purchases/W
 import { Equipment } from '../../../classes/feature/equipment/Equipment';
 import { ToolsController } from '../../../classes/_high_level_controllers/ToolsController';
 import { ErrorBoundary } from "react-error-boundary";
+import { WarbandConsumable } from '../../../classes/saveitems/Warband/WarbandConsumable';
+import WbbConsumableSelect from './modals/warband/WbbConsumableSelect';
 
 interface WbbStashDetailViewProps {
     onClose: () => void;
@@ -195,7 +197,27 @@ const WbbStashDetailView: React.FC<WbbStashDetailViewProps> = ({ onClose }) => {
                         category='equipment'
                     />
                 </div>
+                {warband?.warband_data.GetConsumablesEquipment().length > 0 &&
+                    <>
+                        <div className={'stash-items-title'}>
+                            {'One-Off Purchases'}
+                        </div>
+
+                        <div className="stash-items-wrap">
+                            <div className={'stash-items-category'}>
+                                {warband?.warband_data.GetConsumablesEquipment().map((item: WarbandConsumable, index: number) => (
+                                    <WbbConsumableSelect
+                                        key={index}
+                                        property={item}
+                                    />
+                                ))}
+                            </div>
+                        </div>
+                    </>
+                }
+                
             </div>
+            
 
         </div>
         </ErrorBoundary>

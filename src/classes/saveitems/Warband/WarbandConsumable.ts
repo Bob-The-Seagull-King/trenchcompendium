@@ -49,6 +49,19 @@ class WarbandConsumable extends DynamicContextObject  {
         this.AssociateID = base_obj.associate_id;
     }
 
+    public async OnSelect(option : IChoice) {
+        this.SelectItem = option.value;
+        
+        const eventmon : EventRunner = new EventRunner();
+        await eventmon.runEvent(
+            "runConsumableSelect",
+            this,
+            [this.MyContext],
+            [],
+            this
+        )
+    }
+
     public async GrabOptions() {
         console.log("CREATED")
         console.log(this)

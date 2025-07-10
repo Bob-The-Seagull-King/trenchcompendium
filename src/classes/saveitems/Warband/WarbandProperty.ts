@@ -54,6 +54,14 @@ class WarbandProperty extends DynamicContextObject  {
         
     }
 
+    public SendConsumablesUp() {
+        for (let i = 0; i < this.Consumables.length; i++) {
+            if (this.Consumables[i].SelectItem != null) {
+                (this.MyContext as UserWarband).Consumables.push(this.Consumables[i])
+            }
+        }
+    }
+
     public async BuildConsumables(data: IWarbandConsumable[]) {
         console.log(data);
         if (this.MyContext != null && data != undefined) {

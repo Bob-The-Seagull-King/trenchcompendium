@@ -622,6 +622,7 @@ class UserWarband extends DynamicContextObject {
         
         for (let i = 0; i < this.Modifiers.length; i++) {
             if (mod == (this.Modifiers[i])) {
+                mod.SendConsumablesUp();
                 this.Modifiers.splice(i, 1);
                 break;
             }
@@ -630,6 +631,30 @@ class UserWarband extends DynamicContextObject {
 
     public async DeleteLocation( loc : WarbandProperty ) {
         await this.Exploration.DeleteLocation(loc)
+    }
+
+    public GetConsumablesEquipment() {
+        const ConsumableList : WarbandConsumable[] = []
+
+        for (let i = 0; i < this.Consumables.length; i++) {
+            if (containsTag(this.Consumables[i].Tags, "consumable_type_equipment")) {
+                ConsumableList.push(this.Consumables[i]);
+            }
+        }
+
+        for (let j = 0; j < this.Exploration.Locations.length; j++) {
+            
+            for (let i = 0; i < this.Exploration.Locations[j].Consumables.length; i++) {
+            console.log(this.Exploration.Locations[j].Consumables[i])
+                if (containsTag(this.Exploration.Locations[j].Consumables[i].Tags, "consumable_type_equipment")) {
+                    ConsumableList.push(this.Exploration.Locations[j].Consumables[i]);
+                }
+            }
+
+        }
+        console.log("GEKKO")
+
+        return ConsumableList;
     }
 
     public async DeleteFighterWithDebt( fighter : RealWarbandPurchaseModel, debt_mod : number) {

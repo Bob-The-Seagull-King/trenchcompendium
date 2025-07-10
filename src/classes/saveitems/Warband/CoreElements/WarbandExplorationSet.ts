@@ -242,6 +242,7 @@ class WarbandExplorationSet extends DynamicContextObject {
     public async DeleteLocation( mod : WarbandProperty ) {
         for (let i = 0; i < this.Locations.length; i++) {
             if (mod == (this.Locations[i])) {
+                mod.SendConsumablesUp();
                 this.Locations.splice(i, 1);
                 break;
             }
