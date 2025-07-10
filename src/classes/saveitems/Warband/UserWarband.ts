@@ -94,8 +94,8 @@ class UserWarband extends DynamicContextObject {
     }
 
     public async NewWarbandItems(data : IUserWarband) {
-        this.Exploration = await WarbandFactory.CreateWarbandExplorationSet(data.exploration, this);
         this.Faction = await WarbandFactory.CreateWarbandFaction(data.faction, this);
+        this.Exploration = await WarbandFactory.CreateWarbandExplorationSet(data.exploration, this);
     }
 
     public async BuildModels(data : IWarbandPurchaseModel[]) {
@@ -652,7 +652,6 @@ class UserWarband extends DynamicContextObject {
             }
 
         }
-        console.log("GEKKO")
 
         return ConsumableList;
     }
@@ -1219,7 +1218,7 @@ class UserWarband extends DynamicContextObject {
         return false;
     }
 
-    public async GetFactionEquipmentOptions() : Promise<FactionEquipmentRelationship[]> {
+    public async GetFactionEquipmentOptions(use_exploration = false) : Promise<FactionEquipmentRelationship[]> {
         const FacCheck = this.Faction.MyFaction;
         const ListOfRels : FactionEquipmentRelationship[] = []
         const AddedIDs : string[] = [];
@@ -1231,7 +1230,7 @@ class UserWarband extends DynamicContextObject {
         }
 
         for (let i = 0; i < RefRels.length; i++) {
-            if (!containsTag(RefRels[i].Tags, "exploration_only")) {
+            if (!containsTag(RefRels[i].Tags, "exploration_only") || use_exploration) {
                 BaseRels.push(RefRels[i]);
             }
         }
@@ -1255,7 +1254,7 @@ class UserWarband extends DynamicContextObject {
                 this
             )
             if (this.GetCountOfEquipmentRel(BaseRels[i].ID) < maxcount || (maxcount == 0 && BaseRels[i].Limit == 0)) {
-                if (!containsTag(BaseRels[i].Tags, "exploration_only")) {
+                if (!containsTag(BaseRels[i].Tags, "exploration_only") || use_exploration) {
                     AddedIDs.push(BaseRels[i].ID)
                     ListOfRels.push(BaseRels[i]);
                 }

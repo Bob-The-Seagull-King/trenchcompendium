@@ -63,8 +63,6 @@ class WarbandConsumable extends DynamicContextObject  {
     }
 
     public async GrabOptions() {
-        console.log("CREATED")
-        console.log(this)
         const eventmon : EventRunner = new EventRunner();
         this.Options = await eventmon.runEvent(
             "getConsumableOptionsList",
@@ -73,7 +71,6 @@ class WarbandConsumable extends DynamicContextObject  {
             [],
             this
         )
-        this.Options = [];
     }
 
     public async GrabItem(warband_data : IWarbandConsumable) {

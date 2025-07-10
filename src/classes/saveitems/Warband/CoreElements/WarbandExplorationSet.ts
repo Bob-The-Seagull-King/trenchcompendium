@@ -57,9 +57,9 @@ class WarbandExplorationSet extends DynamicContextObject {
     public async BuildSkills(data : IWarbandProperty[]) {
         for (let i = 0; i < data.length; i++) {
             const CurVal = data[i];
-            const Value = await SkillFactory.CreateNewSkill(CurVal.object_id, this);
-            const NewSkill = new WarbandProperty(Value, this, null, CurVal);
-            await NewSkill.HandleDynamicProps(Value, this, null, CurVal);
+            const Value = await SkillFactory.CreateNewSkill(CurVal.object_id, this.MyContext? this.MyContext as UserWarband : null);
+            const NewSkill = new WarbandProperty(Value, this.MyContext? this.MyContext as UserWarband : null, null, CurVal);
+            await NewSkill.HandleDynamicProps(Value, this.MyContext? this.MyContext as UserWarband : null, null, CurVal);
             await NewSkill.BuildConsumables(CurVal.consumables);
             this.Skills.push(NewSkill);
         }
@@ -68,9 +68,9 @@ class WarbandExplorationSet extends DynamicContextObject {
     public async BuildLocations(data : IWarbandProperty[]) {
         for (let i = 0; i < data.length; i++) {
             const CurVal = data[i];
-            const Value = await ExplorationFactory.CreateNewExplorationLocation(CurVal.object_id, this);
-            const NewLocation = new WarbandProperty(Value, this, null, CurVal);
-            await NewLocation.HandleDynamicProps(Value, this, null, CurVal);
+            const Value = await ExplorationFactory.CreateNewExplorationLocation(CurVal.object_id, this.MyContext? this.MyContext as UserWarband : null);
+            const NewLocation = new WarbandProperty(Value, this.MyContext? this.MyContext as UserWarband : null, null, CurVal);
+            await NewLocation.HandleDynamicProps(Value, this.MyContext? this.MyContext as UserWarband : null, null, CurVal);
             await NewLocation.BuildConsumables(CurVal.consumables);
             this.Locations.push(NewLocation);
         }
@@ -257,8 +257,8 @@ class WarbandExplorationSet extends DynamicContextObject {
             consumables: []
         }
 
-        const NewRuleProperty = new WarbandProperty(location, this, null, Selections);
-        await NewRuleProperty.HandleDynamicProps(location, this, null, Selections);
+        const NewRuleProperty = new WarbandProperty(location, this.MyContext? this.MyContext as UserWarband : null, null, Selections);
+        await NewRuleProperty.HandleDynamicProps(location, this.MyContext? this.MyContext as UserWarband : null, null, Selections);
         this.Locations.push(NewRuleProperty);
         const eventmon : EventRunner = new EventRunner();
         await eventmon.runEvent(

@@ -12,7 +12,7 @@ import { WarbandProperty } from '../../../../../classes/saveitems/Warband/Warban
 import { EventRunner } from '../../../../../classes/contextevent/contexteventhandler';
 import { WarbandConsumable } from '../../../../../classes/saveitems/Warband/WarbandConsumable';
 import { ContextObject } from '../../../../../classes/contextevent/contextobject';
-import WbbEditConsumableModal from './WbbEditConsumableModal copy';
+import WbbEditConsumableModal from './WbbEditConsumableModal';
 
 interface WbbEditSelectionProps {
     property : WarbandConsumable;

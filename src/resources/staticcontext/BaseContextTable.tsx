@@ -2053,7 +2053,28 @@ export const BaseContextCallTable : CallEventTable = {
             console.log(context_static);
             console.log(sourceband);
             console.log();
-            
+            console.log(sourceband.MyContext);
+
+            if (sourceband) {
+            const OptionList = await (sourceband).GetFactionEquipmentOptions(true);
+
+                        console.log("STARTED")
+                for (let i = 0; i < OptionList.length; i++) {
+                    if (OptionList[i].CostType == 1 && OptionList[i].Cost < context_func["cost"]) {
+                        console.log("FOUND")
+                        console.log(context_func["cost"])
+                        console.log(OptionList[i])
+                        relayVar.push(
+                            {
+                                display_str: OptionList[i].EquipmentItem.GetTrueName() + " " + OptionList[i].Cost + " Glory",
+                                id: OptionList[i].ID,
+                                value: OptionList[i]
+                            }
+                        )
+                    }
+                }
+            }
+            console.log(relayVar);
             return relayVar;
         }
     },
