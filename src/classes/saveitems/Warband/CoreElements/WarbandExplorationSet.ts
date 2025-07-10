@@ -60,6 +60,7 @@ class WarbandExplorationSet extends DynamicContextObject {
             const Value = await SkillFactory.CreateNewSkill(CurVal.object_id, this);
             const NewSkill = new WarbandProperty(Value, this, null, CurVal);
             await NewSkill.HandleDynamicProps(Value, this, null, CurVal);
+            await NewSkill.BuildConsumables(CurVal.consumables);
             this.Skills.push(NewSkill);
         }
     }
@@ -70,6 +71,7 @@ class WarbandExplorationSet extends DynamicContextObject {
             const Value = await ExplorationFactory.CreateNewExplorationLocation(CurVal.object_id, this);
             const NewLocation = new WarbandProperty(Value, this, null, CurVal);
             await NewLocation.HandleDynamicProps(Value, this, null, CurVal);
+            await NewLocation.BuildConsumables(CurVal.consumables);
             this.Locations.push(NewLocation);
         }
     }
@@ -250,7 +252,8 @@ class WarbandExplorationSet extends DynamicContextObject {
 
         const Selections : IWarbandProperty = {
             object_id: location.GetID(),
-            selections: option
+            selections: option,
+            consumables: []
         }
 
         const NewRuleProperty = new WarbandProperty(location, this, null, Selections);

@@ -35,6 +35,7 @@ class WarbandEquipment extends DynamicContextObject {
         
         this.MyEquipment = new WarbandProperty(Value, this, null, equipment_property);
         await this.MyEquipment.HandleDynamicProps(Value, this, null, equipment_property)
+        await this.MyEquipment.BuildConsumables(equipment_property.consumables)
     }
     
     public BuildNewProperties() {
@@ -54,7 +55,8 @@ class WarbandEquipment extends DynamicContextObject {
         } else {
             EquipmentDat = {
                 object_id: "",
-                selections: []
+                selections: [],
+                consumables: []
             }
         }
 

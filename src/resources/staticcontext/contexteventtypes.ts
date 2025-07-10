@@ -17,6 +17,7 @@ import { Patron } from "../../classes/feature/skillgroup/Patron";
 import { Injury } from "../../classes/feature/ability/Injury";
 import { Fireteam } from "../../classes/feature/ability/Fireteam";
 import { StaticOptionContextObject } from "../../classes/options/StaticOptionContextObject";
+import { WarbandConsumable } from "../../classes/saveitems/Warband/WarbandConsumable";
 
 /**
  * Events that can be called by the runEvent method,
@@ -77,7 +78,8 @@ export interface CallEvents {
     canChooseOptionLocation? : (this: EventRunner, eventSource : any, relayVar : boolean, trackVal: UserWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<boolean>; 
     getStartingDucats? : (this: EventRunner, eventSource : any, relayVar : number, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<number>; 
     getStartingGlory? : (this: EventRunner, eventSource : any, relayVar : number, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<number>; 
-    getAllFireteamOptions? : (this: EventRunner, eventSource : any, relayVar : Fireteam[], trackVal : UserWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<Fireteam[]>; 
+    getAllFireteamOptions? : (this: EventRunner, eventSource : any, relayVar : Fireteam[], trackVal : UserWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<Fireteam[]>;
+    getConsumableOptionsList? : (this: EventRunner, eventSource : any, relayVar : IChoice[], trackVal : WarbandConsumable, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : UserWarband) => Promise<IChoice[]>; 
 }
 
 /**

@@ -32,6 +32,7 @@ import { returnDescription } from "../../utility/util";
 import { Patron } from "../../classes/feature/skillgroup/Patron";
 import { Injury } from "../../classes/feature/ability/Injury";
 import { Fireteam } from "../../classes/feature/ability/Fireteam";
+import { WarbandConsumable } from "../../classes/saveitems/Warband/WarbandConsumable";
 
 export const BaseContextCallTable : CallEventTable = {
     option_search_viable: {
@@ -886,6 +887,7 @@ export const BaseContextCallTable : CallEventTable = {
                     const SkillNew : Skill = await SkillFactory.CreateNewSkill(context_func["add_skill"][i], eventSource);                    
                     const NewRuleProperty = new WarbandPropModule.WarbandProperty(SkillNew, eventSource, null, null);
                     await NewRuleProperty.HandleDynamicProps(SkillNew, eventSource, null, null);
+                    await NewRuleProperty.BuildConsumables([]);
                     relayVar.push(NewRuleProperty);
                 }
             }
@@ -2037,6 +2039,49 @@ export const BaseContextCallTable : CallEventTable = {
             }
 
             return relayVar;
+        }
+    },
+    single_exploration_glory_item: {
+        event_priotity: 0,
+        async getConsumableOptionsList(this: EventRunner, eventSource : any, relayVar : IChoice[], trackVal : WarbandConsumable, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : UserWarband) {
+            console.log("CONSUMABLE OPTIONS LIST");
+            console.log(eventSource);
+            console.log(relayVar);
+            console.log(trackVal);
+            console.log(context_func);
+            console.log(context_main);
+            console.log(context_static);
+            console.log(sourceband);
+            console.log();
+            
+            return relayVar;
+        }
+    },
+    consumable: {
+        event_priotity: 0,
+        async onGainLocation(this: EventRunner, eventSource : any, trackVal : WarbandProperty, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) {
+            
+            
+            const {WarbandConsumable} = await import("../../classes/saveitems/Warband/WarbandConsumable");
+
+            if (context_func["single_exploration_glory_item"]) {
+                const Tags = context_static.Tags;
+                Tags["type"] == "equipment"
+                const NewData = {
+                    id: context_static.GetID(), 
+                    name: context_static.GetTrueName(),
+                    source: context_static.Source? context_static.Source : "",
+                    tags: Tags,
+                    contextdata: {"single_exploration_glory_item" : context_func["single_exploration_glory_item"]},
+                    associate_id : context_static.GetID(),
+                    object_id:  null,
+                    object_type :  null
+                }
+                const CreateNewConsumable = new WarbandConsumable(NewData, warband);
+                await CreateNewConsumable.GrabOptions();
+                console.log(trackVal)
+                trackVal.Consumables.push(CreateNewConsumable);
+            }
         }
     },
     gain_new_model_from_list: {

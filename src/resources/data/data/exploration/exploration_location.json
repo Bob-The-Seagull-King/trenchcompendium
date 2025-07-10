@@ -2306,7 +2306,7 @@
             "consumable": {
                 
                 "single_exploration_glory_item": {
-                    "cost": 99
+                    "cost": 999999
                 }
             }
         },

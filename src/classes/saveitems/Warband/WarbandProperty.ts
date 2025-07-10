@@ -8,10 +8,13 @@ import { DynamicContextObject } from '../../contextevent/dynamiccontextobject';
 import { StaticOptionContextObject } from '../../options/StaticOptionContextObject';
 import { ContextPackage } from '../../contextevent/contextpackage';
 import { SelectedOption } from '../../options/SelectedOption';
+import { IWarbandConsumable, WarbandConsumable } from './WarbandConsumable';
+import { UserWarband } from './UserWarband';
 
 interface IWarbandProperty {
     object_id: string,
     selections: ISelectedOption[]
+    consumables : IWarbandConsumable[];
 }
 
 export interface ISelectedOption {
@@ -37,6 +40,7 @@ export interface ISelectedOption {
 class WarbandProperty extends DynamicContextObject  {
     public SelfDynamicProperty! : DynamicOptionContextObject;
     public SubProperties : WarbandProperty[] = [];
+    public Consumables : WarbandConsumable[] = [];
 
     /**
      * Assigns parameters and creates a series of description
@@ -48,6 +52,19 @@ class WarbandProperty extends DynamicContextObject  {
         super(base_obj.SelfData, parent);
         this.ContextKeys = {}
         
+    }
+
+    public async BuildConsumables(data: IWarbandConsumable[]) {
+        console.log(data);
+        if (this.MyContext != null && data != undefined) {
+            for (let i = 0; i < data.length; i++) {
+                const CurVal = data[i]
+                const NewConsumable = new WarbandConsumable(CurVal, this.MyContext as UserWarband);
+                await NewConsumable.GrabItem(CurVal);
+                await NewConsumable.GrabOptions();
+                this.Consumables.push(NewConsumable);
+            }
+        }
     }
 
     public async HandleDynamicProps(base_obj : StaticOptionContextObject, parent : DynamicContextObject | null, dyna_obj : DynamicOptionContextObject | null, selection_vals: IWarbandProperty | null) {
@@ -93,6 +110,7 @@ class WarbandProperty extends DynamicContextObject  {
         if (Nested != null) {
             const NewSkill = new WarbandProperty(Nested.OptionChoice, this, Nested, selection_vals);
             await NewSkill.HandleDynamicProps(Nested.OptionChoice, this, Nested, selection_vals)
+            await NewSkill.BuildConsumables(selection_vals.consumables)
             this.SubProperties.push(NewSkill);
         }
     }
@@ -118,14 +136,16 @@ class WarbandProperty extends DynamicContextObject  {
                         CurSelection.NestedOption, 
                         {
                         object_id: CurSelection.Option.RefID,
-                        selections: selectionarray
+                        selections: selectionarray,
+                        consumables: []
                         });
                     await NewSkill.HandleDynamicProps(CurSelection.NestedOption.OptionChoice, 
                         this, 
                         CurSelection.NestedOption, 
                         {
                         object_id: CurSelection.Option.RefID,
-                        selections: selectionarray
+                        selections: selectionarray,
+                        consumables: []
                         })
                     RegenProperties.push(NewSkill);
                 }
@@ -176,9 +196,15 @@ class WarbandProperty extends DynamicContextObject  {
             }
         }
 
+        const consumablelist : IWarbandConsumable[] = [];
+        for (let i = 0; i < this.Consumables.length; i++) {
+            consumablelist.push(this.Consumables[i].ConvertToInterface())
+        }
+
         const _objint : IWarbandProperty = {
             object_id: this.SelfDynamicProperty.OptionChoice.ID,
-            selections: selectionarray
+            selections: selectionarray,
+            consumables: consumablelist
         }
         
         return _objint;

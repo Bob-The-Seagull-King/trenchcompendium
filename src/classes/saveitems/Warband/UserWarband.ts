@@ -24,6 +24,7 @@ import { ExplorationLocation } from '../../feature/exploration/ExplorationLocati
 import { Fireteam } from '../../feature/ability/Fireteam';
 import { FireteamFactory } from '../../../factories/features/FireteamFactory';
 import { StaticOptionContextObject } from '../../options/StaticOptionContextObject';
+import { IWarbandConsumable, WarbandConsumable } from './WarbandConsumable';
 
 interface WarbandDebt {
     ducats : number,
@@ -47,7 +48,8 @@ interface IUserWarband extends IContextObject {
     notes : INote[],
     debts : WarbandDebt,
     modifiers: IWarbandProperty[],
-    fireteams: IWarbandProperty[]
+    fireteams: IWarbandProperty[],
+    consumables: IWarbandConsumable[]
 }
 
 class UserWarband extends DynamicContextObject {
@@ -63,6 +65,7 @@ class UserWarband extends DynamicContextObject {
     public Debts : WarbandDebt;
     public Modifiers : WarbandProperty[] = [];
     public Fireteams : WarbandProperty[] = [];
+    public Consumables : WarbandConsumable[] = [];
 
     public DucatLimit : number[] = [700,800,900,1000,1100,1200,1300,1400,1500,1600,1700,1800];
     public ModelLimit : number[] = [10,11,12,13,14,15,16,17,18,19,20,22];
@@ -118,7 +121,18 @@ class UserWarband extends DynamicContextObject {
             const Value = await SkillFactory.CreateNewSkill(CurVal.object_id, this, true);
             const NewLocation = new WarbandProperty(Value, this, null, CurVal);
             await NewLocation.HandleDynamicProps(Value, this, null, CurVal)
+            await NewLocation.BuildConsumables(CurVal.consumables)
             this.Modifiers.push(NewLocation);
+        }
+    }
+    
+    public async BuildConsumables(data: IWarbandConsumable[]) {
+        for (let i = 0; i < data.length; i++) {
+            const CurVal = data[i]
+            const NewConsumable = new WarbandConsumable(CurVal, this);
+            await NewConsumable.GrabItem(CurVal);
+            await NewConsumable.GrabOptions();
+            this.Consumables.push(NewConsumable);
         }
     }
     
@@ -189,6 +203,7 @@ class UserWarband extends DynamicContextObject {
                 if (data[j].object_id == all_eq[i].ID) {
                     const NewRuleProperty = new WarbandProperty(all_eq[i], this, null, data[j]);
                     await NewRuleProperty.HandleDynamicProps(all_eq[i], this, null, data[j]);
+                    await NewRuleProperty.BuildConsumables(data[j].consumables)
                     await NewRuleProperty.SelfDynamicProperty.ReloadOption();
                     this.Fireteams.push(NewRuleProperty);
                     IsFound = true;
@@ -198,6 +213,7 @@ class UserWarband extends DynamicContextObject {
             if (IsFound == false) {
                 const NewRuleProperty = new WarbandProperty(all_eq[i], this, null, null);
                 await NewRuleProperty.HandleDynamicProps(all_eq[i], this, null, null);
+                await NewRuleProperty.BuildConsumables([])
                 this.Fireteams.push(NewRuleProperty);
             }
         }
@@ -232,6 +248,10 @@ class UserWarband extends DynamicContextObject {
         for (let i = 0; i < this.Fireteams.length; i++) {
             fireteamlist.push(this.Fireteams[i].ConvertToInterface())
         }
+        const consumablelist : IWarbandConsumable[] = []
+        for (let i = 0; i < this.Consumables.length; i++) {
+            consumablelist.push(this.Consumables[i].ConvertToInterface())
+        }
 
         const _objint : IUserWarband = {
             id : this.ID,
@@ -249,7 +269,8 @@ class UserWarband extends DynamicContextObject {
             notes: this.Notes,
             debts: this.Debts,
             modifiers: propertylist,
-            fireteams: fireteamlist
+            fireteams: fireteamlist,
+            consumables: consumablelist
         }
         
         return _objint;

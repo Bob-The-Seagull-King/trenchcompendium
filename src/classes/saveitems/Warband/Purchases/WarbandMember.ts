@@ -145,6 +145,7 @@ class WarbandMember extends DynamicContextObject {
                     const NewEquip = await EquipmentFactory.CreateNewModelEquipment(data.subproperties[j].object_id, this)
                     const NewRuleProperty = new WarbandProperty(NewEquip, this, null, data.subproperties[j]);
                     await NewRuleProperty.HandleDynamicProps(NewEquip, this, null, data.subproperties[j]);
+                    await NewRuleProperty.BuildConsumables(data.subproperties[j].consumables);
                     this.ModelEquipments.push(NewRuleProperty);
                     IsFound = true;
                     break;
@@ -153,6 +154,7 @@ class WarbandMember extends DynamicContextObject {
             if (IsFound == false) {
                 const NewRuleProperty = new WarbandProperty(all_eq[i], this, null, null);
                 await NewRuleProperty.HandleDynamicProps(all_eq[i], this, null, null);
+                await NewRuleProperty.BuildConsumables([]);
                 this.ModelEquipments.push(NewRuleProperty);
             }
         }
@@ -169,6 +171,7 @@ class WarbandMember extends DynamicContextObject {
                 if (data.subproperties[j].object_id == all_abils[i].ID) {
                     const NewRuleProperty = new WarbandProperty(all_abils[i], this, null, data.subproperties[j]);
                     await NewRuleProperty.HandleDynamicProps(all_abils[i], this, null, data.subproperties[j]);
+                    await NewRuleProperty.BuildConsumables(data.subproperties[j].consumables);
                     this.SubProperties.push(NewRuleProperty);
                     IsFound = true;
                     break;
@@ -177,6 +180,7 @@ class WarbandMember extends DynamicContextObject {
             if (IsFound == false) {
                 const NewRuleProperty = new WarbandProperty(all_abils[i], this, null, null);
                 await NewRuleProperty.HandleDynamicProps(all_abils[i], this, null, null);
+                await NewRuleProperty.BuildConsumables([]);
                 this.SubProperties.push(NewRuleProperty);
             }
         }
@@ -192,6 +196,7 @@ class WarbandMember extends DynamicContextObject {
             const upgradeobj = await UpgradeFactory.CreateNewUpgrade(curUpgrade.upgrade.object_id, this)
             const NewRuleProperty = new WarbandProperty(upgradeobj, this, null, curUpgrade.upgrade);
             await NewRuleProperty.HandleDynamicProps(upgradeobj, this, null, curUpgrade.upgrade);
+            await NewRuleProperty.BuildConsumables(curUpgrade.upgrade.consumables);
             
             const NewPurchase : WarbandPurchase = new WarbandPurchase(curUpgrade.purchase, this, NewRuleProperty);
             this.Upgrades.push(NewPurchase);
@@ -301,6 +306,7 @@ class WarbandMember extends DynamicContextObject {
             const Value = await SkillFactory.CreateNewSkill(CurVal.object_id, this, true);
             const NewLocation = new WarbandProperty(Value, this, null, CurVal);
             await NewLocation.HandleDynamicProps(Value, this, null, CurVal)
+            await NewLocation.BuildConsumables(CurVal.consumables)
             this.Skills.push(NewLocation);
         }
     }
@@ -311,6 +317,7 @@ class WarbandMember extends DynamicContextObject {
             const Value = await InjuryFactory.CreateNewInjury(CurVal.object_id, this);
             const NewLocation = new WarbandProperty(Value, this, null, CurVal);
             await NewLocation.HandleDynamicProps(Value, this, null, CurVal);
+            await NewLocation.BuildConsumables(CurVal.consumables)
             this.Injuries.push(NewLocation);
         }
     }
@@ -984,6 +991,7 @@ class WarbandMember extends DynamicContextObject {
         
         const NewRuleProperty = new WarbandProperty(CurUpgrade, this, null, null);
         await NewRuleProperty.HandleDynamicProps(CurUpgrade, this, null, null);
+        await NewRuleProperty.BuildConsumables([])
         const NewPurchase : WarbandPurchase = new WarbandPurchase({
             cost_value : stash.Cost,
             cost_type : stash.CostType,
@@ -1099,6 +1107,7 @@ class WarbandMember extends DynamicContextObject {
     public async AddInjury(inj : Injury) {
         const NewRuleProperty = new WarbandProperty(inj, this, null, null);
         await NewRuleProperty.HandleDynamicProps(inj, this, null, null);
+        await NewRuleProperty.BuildConsumables([]);
         this.Injuries.push(NewRuleProperty);
         const eventmon : EventRunner = new EventRunner();
         await eventmon.runEvent(
@@ -1129,6 +1138,7 @@ class WarbandMember extends DynamicContextObject {
     public async AddSkill(skl : Skill) {
         const NewRuleProperty = new WarbandProperty(skl, this, null, null);
         await NewRuleProperty.HandleDynamicProps(skl, this, null, null);
+        await NewRuleProperty.BuildConsumables([]);
         this.Skills.push(NewRuleProperty);
         const eventmon : EventRunner = new EventRunner();
         await eventmon.runEvent(

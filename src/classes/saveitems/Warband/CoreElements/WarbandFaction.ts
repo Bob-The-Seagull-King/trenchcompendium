@@ -39,6 +39,7 @@ class WarbandFaction extends DynamicContextObject {
         const Value = await FactionFactory.CreateNewFaction(faction_property.object_id, this);
         this.MyFaction = new WarbandProperty(Value, this, null, faction_property);
         await this.MyFaction.HandleDynamicProps(Value, this, null, faction_property);
+        await this.MyFaction.BuildConsumables(faction_property.consumables);
     }
 
     public GetFaction() {
@@ -105,7 +106,8 @@ class WarbandFaction extends DynamicContextObject {
         } else {
             FactionData = {
                 object_id: "",
-                selections: []
+                selections: [],
+                consumables: []
             }
         }
         const _objint : IWarbandFaction = {

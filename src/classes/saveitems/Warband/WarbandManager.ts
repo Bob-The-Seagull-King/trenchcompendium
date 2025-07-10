@@ -243,7 +243,8 @@ class WarbandManager {
             },
             exploration: {
                 explorationskills: [
-                    {                        
+                    {        
+                        consumables: [],                
                         object_id: "es_reroll",
                         selections: []
                     }
@@ -257,6 +258,7 @@ class WarbandManager {
             },
             faction: {
                 faction_property: {
+                    consumables: [],
                     object_id: fact_id,
                     selections: []
                 },
@@ -274,7 +276,8 @@ class WarbandManager {
                 glory: 0
             },
             modifiers: [],
-            fireteams: []
+            fireteams: [],
+            consumables: []
         }
         const new_item : UserWarband = await WarbandFactory.CreateUserWarband(_Item)
 

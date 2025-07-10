@@ -36,7 +36,8 @@ class WarbandFactory {
                 source: rel.EquipmentItem.Source? rel.EquipmentItem.Source : "unknown", // The source of the item (core book, homebrew, etc)
                 tags: rel.EquipmentItem.Tags,
                 contextdata : rel.EquipmentItem.ContextData,            
-                equipment_id: {                    
+                equipment_id: {      
+                    consumables: [],              
                     object_id: rel.EquipmentItem.ID,
                     selections: []
                 },
@@ -56,6 +57,7 @@ class WarbandFactory {
                 contextdata : equipment.ContextData,            
                 equipment_id: {                    
                     object_id: equipment.ID,
+                    consumables: [],
                     selections: []
                 },
                 subproperties : []
