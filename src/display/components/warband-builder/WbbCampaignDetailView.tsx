@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { UserWarband } from "../../../classes/saveitems/Warband/UserWarband";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faChevronLeft, faDownload, faInfoCircle} from "@fortawesome/free-solid-svg-icons";
+import {faCheck, faChevronLeft, faDownload, faExclamation, faGift, faInfoCircle, faPen, faTimes} from "@fortawesome/free-solid-svg-icons";
 import {useWarband} from "../../../context/WarbandContext";
 import WbbTextarea from "./WbbTextarea";
 import WbbOptionBox from "./WbbOptionBox";
@@ -10,6 +10,7 @@ import WbbEditPatronSelectionModal from "./modals/warband/WbbEditPatronSelection
 import WbbEditCampaignCycleModal from "./modals/warband/WbbEditCampaignCycleModal";
 import { Patron } from '../../../classes/feature/skillgroup/Patron';
 import { ToolsController } from '../../../classes/_high_level_controllers/ToolsController';
+import WbbEditFailedPromotionsModal from './modals/warband/WbbEditFailedPromotionsModal';
 
 interface WbbCampaignDetailViewProps {
     onClose: () => void;
@@ -70,7 +71,17 @@ const WbbCampaignDetailView: React.FC<WbbCampaignDetailViewProps> = ({ onClose }
         warband?.warband_data.SetCurrentCycle(newCycle);
         const Manager : ToolsController = ToolsController.getInstance();
         Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(() => {
-        setPatron(warband? warband?.warband_data.GetPatron() : null)
+        reloadDisplay()
+        setKeyvar(keyvar + 1)})
+    }
+
+    const [failedpromotions, setfailedpromotions] = useState<number>(warband.warband_data.Context.FailedPromotions);
+    const [showFailedPromotionsModal, setshowFailedPromotionsModal] = useState(false);
+    const handleFailedpromotionsUpdate = ( newCycle: number ) => {
+        setfailedpromotions(newCycle)
+        warband?.warband_data.SetCurrentCycle(newCycle);
+        const Manager : ToolsController = ToolsController.getInstance();
+        Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(() => {
         reloadDisplay()
         setKeyvar(keyvar + 1)})
     }
@@ -158,6 +169,47 @@ const WbbCampaignDetailView: React.FC<WbbCampaignDetailViewProps> = ({ onClose }
                     onSubmit={handleCampaignCycleUpdate}
                 />
 
+                {/* Failed Promotions */}
+                <div className={'WbbFighterDetailView'}>
+                    <div className="WbbOptionBox">
+                        <div className="WbbOptionBox-title">
+                            {'Failed Promotions'}
+                        </div>
+                    </div>
+                    <div className={'battle-scars'}>
+                        
+                        <div className={'btn btn-primary btn-sm edit-battle-scar-btn'}
+                            onClick={() => setshowFailedPromotionsModal(true)}>
+                            <FontAwesomeIcon icon={faPen} className="icon-inline-left-l"/>
+                            {'Edit'}
+                        </div>
+
+                        <div className="battle-scar-boxes" onClick={() => setshowFailedPromotionsModal(true)}>
+                            {Array.from({length: 6}, (_, i) => {
+                                const index = i + 1;
+                                const isChecked = index <= failedpromotions;
+                                const isSkull = index === 6;
+
+                                return (
+                                    <div key={index} className="battle-scar-box">
+                                        {isSkull &&
+                                            <FontAwesomeIcon icon={faGift} className={'skull-icon'}/>
+                                        }
+                                        {isChecked &&
+                                            <FontAwesomeIcon icon={faCheck}/>
+                                        }
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </div>
+                </div>
+                <WbbEditFailedPromotionsModal
+                    show={showFailedPromotionsModal}
+                    onClose={() => setshowFailedPromotionsModal(false)}
+                    currentVP={failedpromotions}
+                    onSubmit={handleFailedpromotionsUpdate}
+                />
 
                 {/* Notes textarea */}
                 <WbbTextarea

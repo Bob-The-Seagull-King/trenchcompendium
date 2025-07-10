@@ -239,7 +239,8 @@ class WarbandManager {
             context: {
                 id: this.CalcID(_title.trim() + "_context"),
                 victory_points: 0,
-                campaign_round: 1
+                campaign_round: 1,
+                failed_promotions: 0
             },
             exploration: {
                 explorationskills: [
