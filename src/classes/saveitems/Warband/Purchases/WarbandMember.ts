@@ -851,6 +851,26 @@ class WarbandMember extends DynamicContextObject {
         let canaddupgrade = (await this.GetCountOfUpgradeCategory(category) < limit_of_category || category == "upgrades")
 
         if (canaddupgrade) {
+            let maxccurcostount = upg.Cost;
+            maxccurcostount = await Events.runEvent(
+                "getCostOfUpgrade",
+                upg,
+                [],
+                maxccurcostount,
+                {
+                    warband: this.MyContext,
+                    model: this
+                }
+            )
+
+            if (upg.CostType == 0) {
+                canaddupgrade = (this.MyContext as UserWarband).GetSumCurrentDucats() >= maxccurcostount;
+            }
+            if (upg.CostType == 1) {
+                canaddupgrade = (this.MyContext as UserWarband).GetSumCurrentGlory() >= maxccurcostount;
+            }
+        }
+        if (canaddupgrade) {
             const careAboutRequired = await Events.runEvent(
                 "getRequiredUpgradesBool",
                 upg,

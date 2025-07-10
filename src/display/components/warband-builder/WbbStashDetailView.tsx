@@ -63,8 +63,8 @@ const WbbStashDetailView: React.FC<WbbStashDetailViewProps> = ({ onClose }) => {
 
             <div key={updateKey} className={'detail-view-content'}>
                 <div className="stash-summary mb-3" key={stashkey}>
-                    <div><strong>Spare Ducats:</strong> {stash.AmountDucats || 0}</div>
-                    <div><strong>Spare Glory:</strong> {stash.AmountGlory || 0}</div>
+                    <div><strong>Spare Ducats:</strong> {(stash.AmountDucats > 10e10? "Unlimited" : stash.AmountDucats) || 0}</div>
+                    <div><strong>Spare Glory:</strong> {(stash.AmountGlory  > 10e10? "Unlimited" : stash.AmountGlory) || 0}</div>
                     <div><strong>Value:</strong> {stash.ValueDucats} Ducats / {stash.ValueGlory} Glory</div>
                 </div>
 

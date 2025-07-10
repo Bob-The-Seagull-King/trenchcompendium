@@ -49,6 +49,9 @@ const WbbCreateNewDetailsForm: React.FC<{
     const [isLoading, setisLoading] = useState(false)
 
     async function handleSubmit() {
+        console.log("SUBMIT")
+        console.log(warbandStartingDucats)
+        console.log(warbandStartingGlory)
         const msg : null | SumWarband = await manager.NewItem(warbandName, chosenfaction.ID, warbandStartingDucats, warbandStartingGlory)
 
         if (msg == null) {

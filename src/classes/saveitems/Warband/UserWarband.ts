@@ -561,12 +561,28 @@ class UserWarband extends DynamicContextObject {
         await this.Faction.RebuildProperties();
     }
 
-    public async DuplicateFighter( fighter : RealWarbandPurchaseModel ) {
+    public async DuplicateFighter( fighter : RealWarbandPurchaseModel, count_cost = true ) {
 
         const IsValidToAdd = await this.AtMaxOfModel(fighter.purchase.PurchaseInterface);
 
         if (IsValidToAdd) {
             return "Warband At Limit For " + fighter.model.CurModel.GetTrueName();
+        }
+
+        if (count_cost == true) {
+            let canaddupgrade = true;
+            const maxccurcostount = fighter.purchase.ItemCost;
+
+            if (fighter.purchase.CostType == 0) {
+                canaddupgrade = (this).GetSumCurrentDucats() >= maxccurcostount;
+            }
+            if (fighter.purchase.CostType == 1) {
+                canaddupgrade = (this).GetSumCurrentGlory() >= maxccurcostount;
+            }
+
+            if (!canaddupgrade) {
+                return "Warband Cannot Afford " + fighter.model.CurModel.GetTrueName();
+            }
         }
         
         const milliseconds = Date.now();
@@ -1164,7 +1180,7 @@ class UserWarband extends DynamicContextObject {
         return ListOfRels.filter(item => (((item.Mercenary == false)) && !(item.Model.getKeywordIDs().includes("kw_elite"))))
     }
 
-    public async GetFighterOptions() : Promise<FactionModelRelationship[]> {
+    public async GetFighterOptions(count_cost = true) : Promise<FactionModelRelationship[]> {
         const FacCheck = this.Faction.MyFaction;
         const ListOfRels : FactionModelRelationship[] = []
         let BaseRels : FactionModelRelationship[] = []
@@ -1194,7 +1210,30 @@ class UserWarband extends DynamicContextObject {
                 this
             )
             if (this.GetCountOfRel(BaseRels[i].ID) < maxcount || ((BaseRels[i].Minimum == 0 && BaseRels[i].Maximum == 0))) {
-                ListOfRels.push(BaseRels[i]);
+                if (count_cost == true) {
+                    let canaddupgrade = true;
+                    let maxccurcostount = BaseRels[i].Cost;
+                    maxccurcostount = await eventmon.runEvent(
+                        "getCostOfModel",
+                        BaseRels[i],
+                        [],
+                        maxccurcostount,
+                        this
+                    )
+
+                    if (BaseRels[i].CostType == 0) {
+                        canaddupgrade = (this).GetSumCurrentDucats() >= maxccurcostount;
+                    }
+                    if (BaseRels[i].CostType == 1) {
+                        canaddupgrade = (this).GetSumCurrentGlory() >= maxccurcostount;
+                    }
+
+                    if (canaddupgrade) {
+                        ListOfRels.push(BaseRels[i]);
+                    }
+                } else {
+                    ListOfRels.push(BaseRels[i]);
+                }
             }
         }
 
@@ -1224,7 +1263,7 @@ class UserWarband extends DynamicContextObject {
         return false;
     }
 
-    public async GetFactionEquipmentOptions(use_exploration = false) : Promise<FactionEquipmentRelationship[]> {
+    public async GetFactionEquipmentOptions(use_exploration = false, count_cost = true) : Promise<FactionEquipmentRelationship[]> {
         const FacCheck = this.Faction.MyFaction;
         const ListOfRels : FactionEquipmentRelationship[] = []
         const AddedIDs : string[] = [];
@@ -1261,8 +1300,33 @@ class UserWarband extends DynamicContextObject {
             )
             if (this.GetCountOfEquipmentRel(BaseRels[i].ID) < maxcount || (maxcount == 0 && BaseRels[i].Limit == 0)) {
                 if (!containsTag(BaseRels[i].Tags, "exploration_only") || use_exploration) {
-                    AddedIDs.push(BaseRels[i].ID)
-                    ListOfRels.push(BaseRels[i]);
+
+                    if (count_cost == true) {
+                        let canaddupgrade = true;
+                        let maxccurcostount = BaseRels[i].Cost;
+                        maxccurcostount = await eventmon.runEvent(
+                            "getCostOfEquipment",
+                            BaseRels[i],
+                            [],
+                            maxccurcostount,
+                            this
+                        )
+
+                        if (BaseRels[i].CostType == 0) {
+                            canaddupgrade = (this).GetSumCurrentDucats() >= maxccurcostount;
+                        }
+                        if (BaseRels[i].CostType == 1) {
+                            canaddupgrade = (this).GetSumCurrentGlory() >= maxccurcostount;
+                        }
+
+                        if (canaddupgrade) {
+                            AddedIDs.push(BaseRels[i].ID)
+                            ListOfRels.push(BaseRels[i]);
+                        }
+                    } else {
+                        AddedIDs.push(BaseRels[i].ID)
+                        ListOfRels.push(BaseRels[i]);
+                    }
                 }
             }
         }

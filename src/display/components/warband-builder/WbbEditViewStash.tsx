@@ -20,8 +20,8 @@ const WbbEditViewStash: React.FC<WbbEditViewStashProps> = ({ onClick, isActive }
             </div>
 
             <div className="stash-value">
-                <div className={'cost-ducats'}>{stash.AmountDucats + " Ducats"}</div>
-                <div className={'cost-Glory'}>{stash.AmountGlory + " Glory"}</div>
+                <div className={'cost-ducats'}>{(stash.AmountDucats > 10e10? "Unlimited" : stash.AmountDucats) + " Ducats"}</div>
+                <div className={'cost-Glory'}>{(stash.AmountGlory  > 10e10? "Unlimited" : stash.AmountGlory) + " Glory"}</div>
             </div>
 
             <div className={'stash-contents'}>
