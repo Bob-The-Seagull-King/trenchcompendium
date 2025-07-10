@@ -76,6 +76,17 @@ class WarbandExplorationSet extends DynamicContextObject {
         }
     }
 
+    public async RebuildProperties() {
+        for (let i = 0; i < this.Locations.length; i++) {
+            const CurVal = this.Locations[i]
+            await CurVal.RegenerateOptions();
+        }
+        for (let i = 0; i < this.Skills.length; i++) {
+            const CurVal = this.Skills[i]
+            await CurVal.RegenerateOptions();
+        }
+    }
+
     public ConvertToInterface() {
         const skillset : IWarbandProperty[] = [];
         for (let i = 0; i < this.Skills.length; i++) {

@@ -47,6 +47,7 @@ class WarbandConsumable extends DynamicContextObject  {
     {
         super(base_obj, parent);
         this.AssociateID = base_obj.associate_id;
+        this.SelectType = base_obj.object_type;
     }
 
     public async OnSelect(option : IChoice) {
@@ -74,6 +75,8 @@ class WarbandConsumable extends DynamicContextObject  {
     }
 
     public async GrabItem(warband_data : IWarbandConsumable) {
+        console.log("Consumable : Grab Item")
+        console.log(warband_data);
         if (warband_data.object_id && warband_data.object_type) {
             switch (warband_data.object_type) {
                 case "faction_equipment":
@@ -97,7 +100,7 @@ class WarbandConsumable extends DynamicContextObject  {
             contextdata: this.ContextKeys,
             associate_id : this.AssociateID,
             object_id: this.SelectItem? this.SelectItem.ID : null,
-            object_type: this.SelectItem? this.SelectItem.ID : null
+            object_type: this.SelectType? this.SelectType : null
         }
         
         return _objint;

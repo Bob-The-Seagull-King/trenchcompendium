@@ -204,7 +204,7 @@ class UserWarband extends DynamicContextObject {
                     const NewRuleProperty = new WarbandProperty(all_eq[i], this, null, data[j]);
                     await NewRuleProperty.HandleDynamicProps(all_eq[i], this, null, data[j]);
                     await NewRuleProperty.BuildConsumables(data[j].consumables)
-                    await NewRuleProperty.SelfDynamicProperty.ReloadOption();
+                    await NewRuleProperty.RegenerateOptions();
                     this.Fireteams.push(NewRuleProperty);
                     IsFound = true;
                     break;
@@ -219,7 +219,7 @@ class UserWarband extends DynamicContextObject {
         }
 
         for (let i = 0; i < this.Fireteams.length; i++) {
-            await this.Fireteams[i].SelfDynamicProperty.ReloadOption();
+            await this.Fireteams[i].RegenerateOptions();
         }
 
         return this.Fireteams;
@@ -549,6 +549,7 @@ class UserWarband extends DynamicContextObject {
             this.Models.push(NewPurchase);
         }
 
+        await this.RebuildProperties()
         await this.BuildModifiersFireteam(this.SelfData.fireteams);
     }
 
@@ -556,6 +557,8 @@ class UserWarband extends DynamicContextObject {
         
         await this.BuildModifiersSkills(this.SelfData.modifiers);
         await this.BuildModifiersFireteam(this.SelfData.fireteams);
+        await this.Exploration.RebuildProperties();
+        await this.Faction.RebuildProperties();
     }
 
     public async DuplicateFighter( fighter : RealWarbandPurchaseModel ) {
@@ -574,7 +577,7 @@ class UserWarband extends DynamicContextObject {
         this.Models.push(NewPurchase);
 
 
-        await this.BuildModifiersFireteam(this.SelfData.fireteams);
+        await this.RebuildProperties()
         return fighter.model.Name + " Sucessfully Duplicated";
 
     }
@@ -611,7 +614,7 @@ class UserWarband extends DynamicContextObject {
             }
         }
 
-        await this.BuildModifiersFireteam(this.SelfData.fireteams);
+        await this.RebuildProperties()
     }
 
     public HasModifier(mod : WarbandProperty) {
@@ -627,10 +630,12 @@ class UserWarband extends DynamicContextObject {
                 break;
             }
         }
+        await this.RebuildProperties()
     }
 
     public async DeleteLocation( loc : WarbandProperty ) {
         await this.Exploration.DeleteLocation(loc)
+        await this.RebuildProperties()
     }
 
     public GetConsumablesEquipment() {
@@ -645,7 +650,6 @@ class UserWarband extends DynamicContextObject {
         for (let j = 0; j < this.Exploration.Locations.length; j++) {
             
             for (let i = 0; i < this.Exploration.Locations[j].Consumables.length; i++) {
-            console.log(this.Exploration.Locations[j].Consumables[i])
                 if (containsTag(this.Exploration.Locations[j].Consumables[i].Tags, "consumable_type_equipment")) {
                     ConsumableList.push(this.Exploration.Locations[j].Consumables[i]);
                 }
@@ -697,6 +701,7 @@ class UserWarband extends DynamicContextObject {
                 break;
             }
         }
+        await this.RebuildProperties()
     }
     
     public async CopyStash( item : RealWarbandPurchaseEquipment ) {
@@ -723,6 +728,7 @@ class UserWarband extends DynamicContextObject {
         }, this, Equipment);
         this.Equipment.push(NewPurchase);
         
+        await this.RebuildProperties()
         return Equipment.MyEquipment.Name + " Sucessfully Duplicated";
     }
 
@@ -1254,6 +1260,9 @@ class UserWarband extends DynamicContextObject {
                 this
             )
             if (this.GetCountOfEquipmentRel(BaseRels[i].ID) < maxcount || (maxcount == 0 && BaseRels[i].Limit == 0)) {
+                console.log(BaseRels[i].Name)
+                console.log(maxcount);
+                console.log(this.GetCountOfEquipmentRel(BaseRels[i].ID))
                 if (!containsTag(BaseRels[i].Tags, "exploration_only") || use_exploration) {
                     AddedIDs.push(BaseRels[i].ID)
                     ListOfRels.push(BaseRels[i]);

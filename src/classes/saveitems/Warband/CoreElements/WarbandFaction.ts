@@ -49,6 +49,14 @@ class WarbandFaction extends DynamicContextObject {
             return null;
         }
     }
+    
+
+    public async RebuildProperties() {
+        for (let i = 0; i < this.MyFactionRules.length; i++) {
+            const CurVal = this.MyFactionRules[i]
+            await CurVal.RegenerateOptions();
+        }
+    }
 
     public async GetFactionBase() {
         if (this.MyFaction != undefined) {

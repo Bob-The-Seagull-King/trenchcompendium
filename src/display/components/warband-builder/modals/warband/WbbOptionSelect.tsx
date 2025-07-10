@@ -31,7 +31,7 @@ const WbbOptionSelect: React.FC<WbbEditSelectionProps> = ({choice,  property, ov
             setSelectedoption(foundOption)
             choice.SelectOption(foundOption? foundOption.id : null);
             property.RegenerateSubProperties().then(() => 
-            property.SelfDynamicProperty.ReloadOption().then(() =>{
+            property.RegenerateOptions().then(() =>{
             const Manager : ToolsController = ToolsController.getInstance();
             Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
                 () => reloadDisplay())}))
@@ -40,7 +40,7 @@ const WbbOptionSelect: React.FC<WbbEditSelectionProps> = ({choice,  property, ov
 
     
     async function SetModelOptions() {
-        await property.SelfDynamicProperty.ReloadOption();
+        await property.RegenerateOptions();
         if (choice.SelectedChoice != null) {
             
             const EventProc: EventRunner = new EventRunner();

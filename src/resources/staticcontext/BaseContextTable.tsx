@@ -1956,7 +1956,6 @@ export const BaseContextCallTable : CallEventTable = {
                     const cntxt = context_static.ContextKeys["added_context"]
                     if (cntxt["exclusive"]) {
                         if (cntxt["exclusive"] == true) {
-                            console.log("DGASJGDAS")
                             const Found = await warband.IsModelInOtherFireteam(Models[i].model)
                             if (Found) {
                                 isValid = false;
@@ -2044,26 +2043,13 @@ export const BaseContextCallTable : CallEventTable = {
     single_exploration_glory_item: {
         event_priotity: 0,
         async getConsumableOptionsList(this: EventRunner, eventSource : any, relayVar : IChoice[], trackVal : WarbandConsumable, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : UserWarband) {
-            console.log("CONSUMABLE OPTIONS LIST");
-            console.log(eventSource);
-            console.log(relayVar);
-            console.log(trackVal);
-            console.log(context_func);
-            console.log(context_main);
-            console.log(context_static);
-            console.log(sourceband);
-            console.log();
-            console.log(sourceband.MyContext);
 
             if (sourceband) {
             const OptionList = await (sourceband).GetFactionEquipmentOptions(true);
-
-                        console.log("STARTED")
+                console.log("LIST OF OPTIONS")
+                console.log(OptionList);
                 for (let i = 0; i < OptionList.length; i++) {
                     if (OptionList[i].CostType == 1 && OptionList[i].Cost < context_func["cost"]) {
-                        console.log("FOUND")
-                        console.log(context_func["cost"])
-                        console.log(OptionList[i])
                         relayVar.push(
                             {
                                 display_str: OptionList[i].EquipmentItem.GetTrueName() + " " + OptionList[i].Cost + " Glory",
@@ -2074,7 +2060,6 @@ export const BaseContextCallTable : CallEventTable = {
                     }
                 }
             }
-            console.log(relayVar);
             return relayVar;
         }
     },
@@ -2096,11 +2081,10 @@ export const BaseContextCallTable : CallEventTable = {
                     contextdata: {"single_exploration_glory_item" : context_func["single_exploration_glory_item"]},
                     associate_id : context_static.GetID(),
                     object_id:  null,
-                    object_type :  null
+                    object_type :  "faction_equipment"
                 }
                 const CreateNewConsumable = new WarbandConsumable(NewData, warband);
                 await CreateNewConsumable.GrabOptions();
-                console.log(trackVal)
                 trackVal.Consumables.push(CreateNewConsumable);
             }
         }

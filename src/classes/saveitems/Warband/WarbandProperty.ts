@@ -166,7 +166,7 @@ class WarbandProperty extends DynamicContextObject  {
         if (this.SelfDynamicProperty.Selections[selection_index] != undefined) {
             this.SelfDynamicProperty.Selections[selection_index].SelectOption(selection_id);
             await this.RegenerateSubProperties();
-            await this.SelfDynamicProperty.ReloadOption();
+            await this.RegenerateOptions();
         }
     }
 
@@ -218,6 +218,12 @@ class WarbandProperty extends DynamicContextObject  {
         return _objint;
     }
 
+    public async RegenerateOptions() {
+        await this.SelfDynamicProperty.ReloadOption();
+        for (let i = 0; i < this.Consumables.length; i++) {
+            await this.Consumables[i].GrabOptions()
+        }
+    }
     
     /**
      * Grabs the packages from any sub-objects, based
