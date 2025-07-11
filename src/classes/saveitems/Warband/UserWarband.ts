@@ -549,7 +549,6 @@ class UserWarband extends DynamicContextObject {
         }
 
         await this.RebuildProperties()
-        await this.BuildModifiersFireteam(this.SelfData.fireteams);
     }
 
     public async RebuildProperties() {

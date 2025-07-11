@@ -39,23 +39,28 @@ const WbbFighterAdds : React.FC<WbbModalAddFighterEliteProps> = ({
     };
     return (
         <>
+        {showAddFighterTroopModal &&
             <WbbModalAddFighterTroop
                 show={showAddFighterTroopModal}
                 onClose={() => onCloseTroop()}
                 onSubmit={handleFighterSubmit}
             />
-
+        }
+        {showAddFighterEliteModal &&
             <WbbModalAddFighterElite
                 show={showAddFighterEliteModal}
                 onClose={() => onCloseElite()}
                 onSubmit={handleFighterSubmit}
             />
-
+        }
+        
+        {showAddFighterMercenaryModal &&
             <WbbModalAddFighterMercenary
                 show={showAddFighterMercenaryModal}
                 onClose={() => onCloseMercenary()}
                 onSubmit={handleFighterSubmit}
             />
+        }
         </>
     )
 };
