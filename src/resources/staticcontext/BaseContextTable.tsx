@@ -2078,7 +2078,7 @@ export const BaseContextCallTable : CallEventTable = {
                 const Tags = context_static.Tags;
                 Tags["consumable_type_equipment"] = true
                 const NewData = {
-                    id: context_static.GetID(), 
+                    id: context_static.GetID() + Date.now().toString(), 
                     name: context_static.GetTrueName(),
                     source: context_static.Source? context_static.Source : "",
                     tags: Tags,

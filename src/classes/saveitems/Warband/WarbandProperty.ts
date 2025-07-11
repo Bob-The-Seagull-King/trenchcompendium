@@ -58,8 +58,6 @@ class WarbandProperty extends DynamicContextObject  {
         for (let i = 0; i < this.Consumables.length; i++) {
             if (this.Consumables[i].SelectItem != null) {
                 const Warband = await GetWarbandOrNull(this.Consumables[i]);
-                console.log("WARBAND")
-                console.log(Warband)
                 if (Warband != null) {
                     Warband.Consumables.push(this.Consumables[i])
                 }
@@ -68,7 +66,6 @@ class WarbandProperty extends DynamicContextObject  {
     }
 
     public async BuildConsumables(data: IWarbandConsumable[]) {
-        console.log(data);
         if (this.MyContext != null && data != undefined) {
             for (let i = 0; i < data.length; i++) {
                 const CurVal = data[i]

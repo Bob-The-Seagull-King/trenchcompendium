@@ -252,7 +252,6 @@ class UserWarband extends DynamicContextObject {
         for (let i = 0; i < this.Consumables.length; i++) {
             consumablelist.push(this.Consumables[i].ConvertToInterface())
         }
-
         const _objint : IUserWarband = {
             id : this.ID,
             context : this.Context.ConvertToInterface(),

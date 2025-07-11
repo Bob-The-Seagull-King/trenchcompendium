@@ -44,7 +44,6 @@ export async function GetWarbandOrNull(object : ContextObject): Promise<null | U
         }
     for (let i = 0; i < 10; i++) {
         const tempobject : ContextObject | null = baseobject.MyContext;
-        console.log(tempobject)
         if (tempobject != null) {
             baseobject = tempobject;
             if (tempobject instanceof UserWarband) {

@@ -75,13 +75,11 @@ class WarbandConsumable extends DynamicContextObject  {
     }
 
     public async GrabItem(warband_data : IWarbandConsumable) {
-        console.log("Consumable : Grab Item")
-        console.log(warband_data);
         if (warband_data.object_id && warband_data.object_type) {
             switch (warband_data.object_type) {
                 case "faction_equipment":
                     this.SelectItem = await EquipmentFactory.CreateNewFactionEquipment(warband_data.object_id, null)
-                    this.SelectType = warband_data.object_id
+                    this.SelectType = "faction_equipment"
                     return;
                 default:
                     return;
