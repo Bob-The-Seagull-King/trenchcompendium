@@ -32,6 +32,7 @@ class SiteUserPublic {
     Campaigns : number[] = []
     BuiltRequests: SiteUserPublic[] = [];
     Premium : boolean;
+    SelfData : ISiteUserPublic;
     
     public constructor(data: ISiteUserPublic)
     {
@@ -41,12 +42,24 @@ class SiteUserPublic {
         this.Friends = data.friends;
         this.Achievements = data.achievements;
         this.Premium = data.is_premium;
+        this.SelfData = data;
     }
 
-    public async BuildFriends(data: ISiteUserPublic) {
-        for (let i = 0; i < data.friends.length; i++) {
-            const newFriend = await UserFactory.CreatePublicUserByID(data.friends[i].id)
-            if (newFriend != null) {
+    public async BuildFriends() {
+        this.BuiltFriends = []
+        for (let i = 0; i < this.SelfData.friends.length; i++) {
+            const newFriend = await UserFactory.CreatePublicUserByID(this.SelfData.friends[i].id)
+            if (newFriend != null && this.BuiltFriends.filter((item) => item.ID == newFriend.ID ).length == 0) {
+                this.BuiltFriends.push(newFriend);
+            }
+        }
+    }
+    
+    public async ReBuildFriends() {
+        this.BuiltFriends = []
+        for (let i = 0; i < this.SelfData.friends.length; i++) {
+            const newFriend = await UserFactory.CreatePublicUserByID(this.SelfData.friends[i].id)
+            if (newFriend != null && this.BuiltFriends.filter((item) => item.ID == newFriend.ID ).length == 0) {
                 this.BuiltFriends.push(newFriend);
             }
         }

@@ -14,31 +14,30 @@ class UserFactory {
      * 
      */
 
-    static async BuildUserPublic(_rule: ISiteUserPublic) {
+    static async BuildUserPublic(_rule: ISiteUserPublic, skipcache = false) {
         
         const synodcache = SynodDataCache.getInstance();
         
-        if (synodcache.publicObjectCache[_rule.id]) {
+        if (synodcache.publicObjectCache[_rule.id] && skipcache == false) {
             return (synodcache.publicObjectCache[_rule.id]);
         }
         
         const rule = new SiteUserPublic(_rule)
         synodcache.publicObjectCache[_rule.id] = rule;
-        await rule.BuildFriends(_rule);
         await rule.BuildWarbands(_rule);
         return rule;
     }
 
-    static async CreatePublicUserByID(_val : number) {
+    static async CreatePublicUserByID(_val : number, skipcache = false) {
 
         const synodcache : SynodDataCache = SynodDataCache.getInstance();
         let userdata : ISiteUserPublic | undefined = undefined;
 
-        if (synodcache.CheckPublicCache(_val)) {
+        if (synodcache.CheckPublicCache(_val) && skipcache == false) {
             userdata = (synodcache.publicDataCache[_val]);
         }
 
-        if (synodcache.CheckPublicCallCache(_val)) {
+        if (synodcache.CheckPublicCallCache(_val) && skipcache == false) {
             const EMERGENCY_OUT = 1000; // If we spend 100 seconds on one user, just give up
             let count_check = 0;
             while ((!synodcache.CheckPublicCache(_val)) && (count_check < EMERGENCY_OUT)) {
@@ -48,7 +47,7 @@ class UserFactory {
             userdata = (synodcache.publicDataCache[_val]);
         }
 
-        if (!synodcache.CheckPublicCache(_val)) {
+        if (!synodcache.CheckPublicCache(_val) || skipcache == true) {
             synodcache.AddPublicCallCache(_val);
             
             const response : Response = await fetch(`${SYNOD.URL}/wp-json/synod/v1/user-public/${_val}`)
@@ -61,7 +60,7 @@ class UserFactory {
 
         if (userdata != undefined) {
             try {
-                const user = await UserFactory.BuildUserPublic(userdata)
+                const user = await UserFactory.BuildUserPublic(userdata, skipcache)
                 return user;
             } catch (e) {console.log(e)}
         }
@@ -75,10 +74,10 @@ class UserFactory {
      * 
      */
 
-    static async BuildUserPrivate(_rule: ISiteUser) {
+    static async BuildUserPrivate(_rule: ISiteUser, skipcache = false) {
         const synodcache = SynodDataCache.getInstance();
         
-        if (synodcache.userObjectCache[_rule.id]) {
+        if (synodcache.userObjectCache[_rule.id] && skipcache == false) {
             const EMERGENCY_OUT = 1000; // If we spend 100 seconds on one user, just give up
             let count_check = 0;
             while ((synodcache.CheckCallCache(_rule.id)) && (count_check < EMERGENCY_OUT)) {
@@ -91,22 +90,20 @@ class UserFactory {
         const rule = new SiteUser(_rule)
         synodcache.userObjectCache[_rule.id] = rule;
         await rule.GenerateWarbands(_rule);
-        await rule.BuildFriends(_rule)
-        await rule.BuildRequests(_rule)
         delete synodcache.callUserDataCache[_rule.id];
         return rule;
     }
 
-    static async CreatePrivateUserByID(_val : number) {
+    static async CreatePrivateUserByID(_val : number, skipcache = false) {
 
         const synodcache : SynodDataCache = SynodDataCache.getInstance();
         let userdata : ISiteUser | undefined = undefined;
 
-        if (synodcache.CheckCache(_val)) {
+        if (synodcache.CheckCache(_val)  && skipcache == false) {
             userdata = (synodcache.userDataCache[_val]);
         }
 
-        if (synodcache.CheckCallCache(_val)) {
+        if (synodcache.CheckCallCache(_val)  && skipcache == false) {
             const EMERGENCY_OUT = 1000; // If we spend 100 seconds on one user, just give up
             let count_check = 0;
             while ((!synodcache.CheckCache(_val)) && (count_check < EMERGENCY_OUT)) {
@@ -116,7 +113,7 @@ class UserFactory {
             userdata = (synodcache.userDataCache[_val]);
         }
 
-        if (!synodcache.CheckCache(_val)) {
+        if (!synodcache.CheckCache(_val) || skipcache == true) {
             synodcache.AddCallCache(_val);
 
 
@@ -141,7 +138,7 @@ class UserFactory {
         }
 
         if (userdata != undefined) {
-            const user = await UserFactory.BuildUserPrivate(userdata)
+            const user = await UserFactory.BuildUserPrivate(userdata, skipcache)
             return user;
         }
 

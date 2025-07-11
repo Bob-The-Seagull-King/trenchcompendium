@@ -25,6 +25,7 @@ interface UserListEntryProps {
     is_request?: boolean
     onAccept?: (userId: number) => void;
     onDecline?: (userId: number) => void;
+    canremove?: boolean;
     is_search?: boolean;
     request_sent?: boolean;
     is_friend?: boolean;
@@ -37,6 +38,7 @@ const UserListEntry: React.FC<UserListEntryProps> = ({ friend_obj,
                                                          onAccept,
                                                          onDecline,
                                                          is_search,
+                                                         canremove = false,
                                                          request_sent,
                                                          is_friend,
                                                          onAddFriend,
@@ -130,7 +132,7 @@ const UserListEntry: React.FC<UserListEntryProps> = ({ friend_obj,
                     {Status}
                 </div>
 
-                { (!is_request && !is_search) &&
+                { (!is_request && !is_search && canremove) &&
                     <OverlayTrigger
                         trigger="click"
                         placement="left"

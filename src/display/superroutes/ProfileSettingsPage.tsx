@@ -69,6 +69,12 @@ const ProfileSettingsPage: React.FC = () => {
     const hasChanges =
         nickname !== initialNickname || email !== initialEmail || password.trim() !== '';
 
+    const handleLogout = async () => {
+        const id = userId
+        logout();
+        navigate(`/profile/${id}`);
+        return;
+    }
     const handleSave = async () => {
         setisLoadingSubmit(true);
 
@@ -157,7 +163,7 @@ const ProfileSettingsPage: React.FC = () => {
                                 {'Your Account'}
                             </h2>
 
-                            <button onClick={logout} className="btn btn-secondary btn-logout">
+                            <button onClick={handleLogout} className="btn btn-secondary btn-logout">
                                 Log out
                             </button>
 

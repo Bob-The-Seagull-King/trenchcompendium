@@ -63,6 +63,7 @@ class SiteUser {
     ProfilePic : SynodProfilePicData;
     Campaigns : number[] = []
     Premium : PremiumInfo;
+    SelfData : ISiteUser;
     
     public constructor(data: ISiteUser)
     {
@@ -78,6 +79,7 @@ class SiteUser {
             SubId : data.sub_id,
             PremiumUntil : data.premium_until
         }
+        this.SelfData = data
     }
 
     public async GenerateWarbands(data: ISiteUser) {
@@ -98,20 +100,46 @@ class SiteUser {
     }
 
 
-    public async BuildFriends(data: ISiteUser) {
-        for (let i = 0; i < data.friends.length; i++) {
-            const newFriend = await UserFactory.CreatePublicUserByID(data.friends[i].id)
-            if (newFriend != null) {
+    public async BuildFriends() {
+        this.BuiltFriends = []
+        for (let i = 0; i < this.SelfData.friends.length; i++) {
+            const newFriend = await UserFactory.CreatePublicUserByID(this.SelfData.friends[i].id)
+            if (newFriend != null && this.BuiltFriends.filter((item) => item.ID == newFriend.ID ).length == 0) {
                 this.BuiltFriends.push(newFriend);
             }
         }
     }
 
-    public async BuildRequests(data: ISiteUser) {
-        for (let i = 0; i < data.friend_requests.length; i++) {
-            const newFriend = await UserFactory.CreatePublicUserByID(data.friend_requests[i].id)
-            if (newFriend != null) {
+    public async ReBuildFriends() {
+        const NewData = await UserFactory.CreatePrivateUserByID(this.ID);
+        if (NewData != null) {
+            this.BuiltFriends = []
+            for (let i = 0; i < NewData.SelfData.friends.length; i++) {
+                const newFriend = await UserFactory.CreatePublicUserByID(NewData.SelfData.friends[i].id)
+                if (newFriend != null && this.BuiltFriends.filter((item) => item.ID == newFriend.ID ).length == 0) {
+                    this.BuiltFriends.push(newFriend);
+                }
+            }
+        }
+    }
+
+    public async BuildRequests() {
+        for (let i = 0; i < this.SelfData.friend_requests.length; i++) {
+            const newFriend = await UserFactory.CreatePublicUserByID(this.SelfData.friend_requests[i].id)
+            if (newFriend != null  && this.BuiltRequests.filter((item) => item.ID == newFriend.ID ).length == 0) {
                 this.BuiltRequests.push(newFriend);
+            }
+        }
+    }
+
+    public async ReBuildRequests() {
+        const NewData = await UserFactory.CreatePrivateUserByID(this.ID);
+        if (NewData != null) {
+            for (let i = 0; i < NewData.SelfData.friend_requests.length; i++) {
+                const newFriend = await UserFactory.CreatePublicUserByID(NewData.SelfData.friend_requests[i].id)
+                if (newFriend != null  && this.BuiltRequests.filter((item) => item.ID == newFriend.ID ).length == 0) {
+                    this.BuiltRequests.push(newFriend);
+                }
             }
         }
     }

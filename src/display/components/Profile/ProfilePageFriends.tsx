@@ -43,39 +43,52 @@ const ProfilePageFriends: React.FC<ProfilePageFriendsProps> = ({
                                                                    reload
 }) => {
 
-    /**
-     * Loading state
-     */
-    if (isLoading || !userData) {
-        return (
-            <div className={'profile-card'}>
-                <div className={'profile-card-head'}>
-                    {'Friends'}
-                </div>
 
-                <div className={'profile-card-content'}>
-                    <div className={'profile-card-loading'}>
+    const [friends, setfriends] = useState<SiteUserPublic[] | null>(null)
+    const [friendRequests, setfriendRequests] = useState<SiteUserPublic[] | null>(null)
+    const [alertvar, setalertvar] = useState(0)
 
-                        <LoadingOverlay
-                            message={'Loading friends'}
-                        />
-                    </div>
-                </div>
-            </div>
-        )
-    }
+    useEffect(() => {
+        async function RunFriendsGet() {
+            if (userData != null) {
+                await userData.BuildFriends();
+                setfriends(userData.BuiltFriends)
+                if (userData instanceof SiteUser) {
+                    await userData.BuildRequests();
+                    setfriendRequests(userData.BuiltRequests)
+                }
+            }
 
-    const friends = userData.BuiltFriends;
-    const friendRequests = isSiteUser(userData) ? userData.BuiltRequests : [];
+        }
+        RunFriendsGet()
+    }, [userData])
+
+    useEffect(() => {
+        async function RunFriendsGetNew() {
+            if (userData != null) {
+                await userData.ReBuildFriends();
+                setfriends(userData.BuiltFriends)
+                if (userData instanceof SiteUser) {
+                    await userData.ReBuildRequests();
+                    setfriendRequests(userData.BuiltRequests)
+                }
+            }
+
+        }
+        RunFriendsGetNew()
+    }, [alertvar])
 
     /**
      * Accept a friend request
      * @param user_id
      */
     const handleAccept = async (user_id: number) => {
-        if( isSiteUser(userData) ) {
-            await userData.acceptFriendRequest(user_id); // accept the request
-            toast.success('Friend request accepted')
+        if (userData != null) {
+            if( isSiteUser(userData) ) {
+                await userData.acceptFriendRequest(user_id); // accept the request
+                setalertvar(alertvar + 1)
+                toast.success('Friend request accepted')
+            }
         }
 
         console.log('handleAccept finished');
@@ -87,9 +100,12 @@ const ProfilePageFriends: React.FC<ProfilePageFriendsProps> = ({
      * @param user_id
      */
     const handleDecline = async (user_id: number) => {
-        if( isSiteUser(userData) ) {
-            await userData.declineFriendRequest(user_id);
-            toast.success('Friend request declined')
+        if (userData != null) {
+            if( isSiteUser(userData) ) {
+                await userData.declineFriendRequest(user_id);
+                setalertvar(alertvar + 1)
+                toast.success('Friend request declined')
+            }
         }
 
         console.log('handleDecline finished');
@@ -98,9 +114,12 @@ const ProfilePageFriends: React.FC<ProfilePageFriendsProps> = ({
     }
 
     const handleRemoveFriend = async ( user_id: number) => {
-        if( isSiteUser(userData) ) {
-            await userData.removeFriend(user_id);
-            toast.success('Friend removed')
+        if (userData != null) {
+            if( userData instanceof SiteUser ) {
+                await userData.removeFriend(user_id);
+                setalertvar(alertvar + 1)
+                toast.success('Friend removed')
+            }
         }
 
         reload();
@@ -153,6 +172,29 @@ const ProfilePageFriends: React.FC<ProfilePageFriendsProps> = ({
 
 
 
+    /**
+     * Loading state
+     */
+    if (isLoading || !userData ) {
+        return (
+            <div className={'profile-card'}>
+                <div className={'profile-card-head'}>
+                    {'Friends'}
+                </div>
+
+                <div className={'profile-card-content'}>
+                    <div className={'profile-card-loading'}>
+
+                        <LoadingOverlay
+                            message={'Loading friends'}
+                        />
+                    </div>
+                </div>
+            </div>
+        )
+    }
+
+
     return (
         <div className="ProfilePageFriends">
             <ToastContainer
@@ -181,30 +223,35 @@ const ProfilePageFriends: React.FC<ProfilePageFriendsProps> = ({
 
                 <div className={'profile-card-content'}>
                     {/* Friend Requests*/}
-                    {friendRequests.length > 0 && (
+                    {friendRequests != null &&
                         <>
-                            <div className={'friend-requests-headline'}>
-                                {'New friend requests:'}
-                            </div>
+                        {friendRequests.length > 0 && (
+                            <>
+                                <div className={'friend-requests-headline'}>
+                                    {'New friend requests:'}
+                                </div>
 
-                            <ul className={'friends-list friends-list_requests'}>
-                                {friendRequests.map((friend) => (
-                                    <li key={friend.ID} className={'friend'}>
-                                        <UserListEntry
-                                            friend_obj={friend}
-                                            is_request={true}
-                                            onAccept={handleAccept}
-                                            onDecline={handleDecline}
-                                        />
-                                    </li>
-                                ))}
-                            </ul>
+                                <ul className={'friends-list friends-list_requests'}>
+                                    {friendRequests.map((friend) => (
+                                        <li key={friend.ID} className={'friend'}>
+                                            <UserListEntry
+                                                friend_obj={friend}
+                                                is_request={true}
+                                                onAccept={handleAccept}
+                                                onDecline={handleDecline}
+                                            />
+                                        </li>
+                                    ))}
+                                </ul>
 
-                            <hr />
-                        </>
-                    )}
+                                <hr />
+                            </>
+                        )}</>
+                    }
 
                     {/* Friends */}
+                    {friends != null &&
+                        <>
                     {friends.length > 0 ? (
                         <ul className={'friends-list'}>
 
@@ -213,6 +260,7 @@ const ProfilePageFriends: React.FC<ProfilePageFriendsProps> = ({
                                     <UserListEntry
                                         friend_obj={friend}
                                         onRemoveFriend={handleRemoveFriend}
+                                        canremove={userData instanceof SiteUser}
                                     />
                                 </li>
                             ))}
@@ -221,7 +269,19 @@ const ProfilePageFriends: React.FC<ProfilePageFriendsProps> = ({
                         <div className="friends-list-empty">
                             {'No friends connected'}
                         </div>
-                    )}
+                    )}</>}
+
+                    {friends == null &&
+                        
+                    <div className={'profile-card-content'}>
+                        <div className={'profile-card-loading'}>
+
+                            <LoadingOverlay
+                                message={'Loading friends'}
+                            />
+                        </div>
+                    </div>
+                    }
 
 
                 </div>
