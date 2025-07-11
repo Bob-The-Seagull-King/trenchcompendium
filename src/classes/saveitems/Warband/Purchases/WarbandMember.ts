@@ -1132,7 +1132,7 @@ class WarbandMember extends DynamicContextObject {
         const eventmon : EventRunner = new EventRunner();
         await eventmon.runEvent(
             "onGainInjury",
-            this,
+            NewRuleProperty,
             [this],
             null,
             inj

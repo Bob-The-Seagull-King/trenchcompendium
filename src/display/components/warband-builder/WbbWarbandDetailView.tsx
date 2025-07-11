@@ -111,7 +111,6 @@ const WbbWarbandDetailView: React.FC<WbbWarbandDetailViewProps> = ({  onClose })
 
                 {/* Warband level options */}
                 <div className={'WbbDetailViewCollapse-wrap'}>
-                    {/* @TODO: only show if warband has options */}
                     {(warband.warband_data.Faction.MyFaction ? warband.warband_data.Faction.MyFaction.SelfDynamicProperty.Selections.length : 0) > 0 &&
                         <WbbDetailViewCollapse title="Warband Options" initiallyOpen={true}>
 
