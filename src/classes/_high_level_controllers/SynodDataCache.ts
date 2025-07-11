@@ -5,6 +5,7 @@ import { WarbandManager } from '../saveitems/Warband/WarbandManager';
 import { ISiteUser, SiteUser } from '../user_synod/site_user';
 import { IAchievement } from '../user_synod/user_achievements';
 import { ISiteUserPublic, SiteUserPublic } from '../user_synod/user_public';
+import { IUserWarband } from '../saveitems/Warband/UserWarband';
 
 /**
  * Stores non image data from Synod, to prevent uneeded 
@@ -55,6 +56,17 @@ class SynodDataCache {
 
     public AddAchievementCache(key : number, data : IAchievement) { this.achievmentDataCache[key] = data; }
     public AddAchievementCallCache(key : number) { this.callAchievmentCache[key] = true; }
+
+    /* WARBANDS */
+    
+    warbandDataCache: Record<number, IUserWarband> = {};
+    callWarbandCache: Record<number, boolean> = {};
+        
+    public CheckWarbandCache(key : number) { return (this.warbandDataCache[key]) }
+    public CheckWarbandCallCache(key : number) { return (this.callWarbandCache[key]) }
+
+    public AddWarbandCache(key : number, data : IUserWarband) { this.warbandDataCache[key] = data; }
+    public AddWarbandCallCache(key : number) { this.callWarbandCache[key] = true; }
 }
 
 export {SynodDataCache}

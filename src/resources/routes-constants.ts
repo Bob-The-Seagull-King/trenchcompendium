@@ -46,6 +46,7 @@ export const ROUTES = {
     // Warband Builder Routes //
     WBB_EDIT : '/edit/*',
     WBB_NEW : '/new/*',
+    WBB_VIEW : '/view/*',
 
     // Static pages - legal stuff //
     PAGE_LEGAL : '/page/legal-notice',

@@ -14,6 +14,11 @@ import { FactionModelRelationship } from '../../classes/relationship/faction/Fac
 import { FactionEquipmentRelationship } from '../../classes/relationship/faction/FactionEquipmentRelationship';
 import { ModelEquipmentRelationship } from '../../classes/relationship/model/ModelEquipmentRelationship';
 import { Equipment } from '../../classes/feature/equipment/Equipment';
+import { SumWarband } from '../../classes/saveitems/Warband/WarbandManager';
+import { SynodDataCache } from '../../classes/_high_level_controllers/SynodDataCache';
+import { SYNOD } from '../../resources/api-constants';
+
+const delay = (ms: number | undefined) => new Promise(res => setTimeout(res, ms));
 
 class WarbandFactory {
 
@@ -137,6 +142,48 @@ class WarbandFactory {
         await rule.BuildConsumables(data.consumables);
         await rule.RebuildProperties();
         return rule;
+    }
+
+    static async GetWarbandPublicByID( _val : number) : Promise<SumWarband | null> {
+        const synodcache : SynodDataCache = SynodDataCache.getInstance();
+        let userdata : any = undefined;
+
+        if (synodcache.CheckWarbandCache(_val)) {
+            userdata = (synodcache.warbandDataCache[_val]);
+        }
+
+        if (synodcache.CheckWarbandCallCache(_val)) {
+            const EMERGENCY_OUT = 1000; // If we spend 100 seconds on one user, just give up
+            let count_check = 0;
+            while ((!synodcache.CheckWarbandCache(_val)) && (count_check < EMERGENCY_OUT)) {
+                await delay(100);
+                count_check += 1;
+            }                   
+            userdata = (synodcache.warbandDataCache[_val]);
+        }
+
+        if (!synodcache.CheckWarbandCache(_val)) {
+            synodcache.AddWarbandCallCache(_val);
+            
+            const response : Response = await fetch(`${SYNOD.URL}/wp-json/wp/v2/warband/${_val}`)
+            if (response) {
+                const json : any = await response.json();          
+                userdata = json.warband_data
+                synodcache.AddWarbandCache(_val, json.warband_data)
+            }
+        }
+
+        if (userdata != undefined) {
+            try {
+                const user = await WarbandFactory.CreateUserWarband(JSON.parse(userdata) as IUserWarband)
+                return {
+                    id: _val,
+                    warband_data: user
+                };
+            } catch (e) {console.log(e)}
+        }
+
+        return null;
     }
 
 }
