@@ -1705,9 +1705,8 @@ class WarbandMember extends DynamicContextObject {
     public async DeleteStashWithDebt( item : RealWarbandPurchaseEquipment, debt_mod : number) {
         const CostVarDucats = item.purchase.GetTotalDucats();
         const CostVarGlory = item.purchase.GetTotalGlory();
-
         if (item.purchase.Sellable == false) {return}
-        const debt = (item.purchase.FullSell == false)? debt_mod : 1;
+        const debt = (item.purchase.FullSell == false)? debt_mod : 0;
         try {
             await this.DeleteStash(item);
             (this.MyContext as UserWarband).Debts.ducats +=  Math.ceil(CostVarDucats * debt);
