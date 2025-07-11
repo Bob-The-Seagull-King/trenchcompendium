@@ -9,14 +9,17 @@ import {faCircleNotch} from "@fortawesome/free-solid-svg-icons";
 
 interface LoadingOverlayProps {
     message?: string
+    override? : boolean
 }
 
-const LoadingOverlay: React.FC<LoadingOverlayProps> = ({ message = 'Loading' }) => {
+const LoadingOverlay: React.FC<LoadingOverlayProps> = ({ message = 'Loading', override = false }) => {
 
     return (
         <div className="LoadingOverlay">
             <div className="LoadingOverlay-inner">
-                <FontAwesomeIcon icon={faCircleNotch} className="fa-spin"/>
+                {(override == undefined || override == false) &&
+                    <FontAwesomeIcon icon={faCircleNotch} className="fa-spin"/>
+                }
                 <div className={'text'}>
                     {message}
                 </div>

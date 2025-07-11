@@ -17,6 +17,7 @@ const WbbViewPage = (prop: any) => {
     const urlPath = useLocation().pathname;
     const urlSplits = urlPath.split('/');
     const [_currentItem, returnItem] = useState<SumWarband | null>(null);
+    const [emergency, setemergency] = useState<boolean>(false);
     const [keyval, setKeyVal] = useState(0);
     
     async function grabItemFromURL() {
@@ -32,7 +33,9 @@ const WbbViewPage = (prop: any) => {
     
     useEffect(() => {
         async function SetWarband() {
-            returnItem(await grabItemFromURL())
+            const Item = await grabItemFromURL()
+            setemergency(true)
+            returnItem(Item)
             setKeyVal((prev) => (prev + 1))
         }
         SetWarband();
@@ -52,9 +55,18 @@ const WbbViewPage = (prop: any) => {
             }
             {_currentItem == null &&
                 <div className={'LoadingOverlay-wrap-100vh'}>
-                    <LoadingOverlay
-                        message={'Loading your warband'}
-                    />
+                    {emergency == true &&
+                        <LoadingOverlay
+                            message={'Warband not found'}
+                            override={true}
+                        />
+                    }
+                    {emergency == false &&
+                        <LoadingOverlay
+                            message={'Loading your warband'}
+                        />
+                    }
+                    
                 </div>
             }
         </div>

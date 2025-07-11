@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import WbbEditView from "../components/warband-builder/WbbEditView";
 import { SumWarband, WarbandManager } from '../../classes/saveitems/Warband/WarbandManager';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import WarbandItemViewDisplay from '../components/features/saveitem/Warband/WarbandItemViewDisplay';
 import {PrintModeProvider} from "../../context/PrintModeContext";
 import PageMetaInformation from "../components/generics/PageMetaInformation";
@@ -18,18 +18,23 @@ const WbbEditPage = (prop: any) => {
     const [_currentItem, returnItem] = useState<SumWarband | null>(null);
     const [keyval, setKeyVal] = useState(0);
     
+    const navigate = useNavigate();
+
     function grabItemFromURL() {
         const CurItemID = urlSplits.slice(-1)[0]
 
         const ItemCurrent = Manager.GetItemByID(CurItemID);
+        if (ItemCurrent == null ) {
+            navigate(`/warband/view/${CurItemID}`)
+        }
         return ItemCurrent
     }
     
     useEffect(() => {
         async function SetWarband() {
             await Manager.GetItemsAll();
-
-            returnItem(grabItemFromURL())
+            const Item = grabItemFromURL()
+            returnItem(Item)
             setKeyVal((prev) => (prev + 1))
         }
         SetWarband();
