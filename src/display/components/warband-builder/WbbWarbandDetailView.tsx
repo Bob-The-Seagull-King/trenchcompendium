@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { UserWarband } from "../../../classes/saveitems/Warband/UserWarband";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faChevronLeft, faFloppyDisk, faPen, faTriangleExclamation} from "@fortawesome/free-solid-svg-icons";
@@ -22,9 +22,23 @@ interface WbbWarbandDetailViewProps {
 
 const WbbWarbandDetailView: React.FC<WbbWarbandDetailViewProps> = ({  onClose }) => {
 
-    const { warband, reloadDisplay } = useWarband();
+    const { warband, reloadDisplay, updateKey } = useWarband();
     if (warband == null) return (<div>Loading...</div>);
 
+
+    const [warbandErrors, setwarbanderrors] = useState<string[]>([])
+    const [keyvar, setkeyvar] = useState(0)
+
+    useEffect(() => {
+        async function RunErrorCheck() {
+            const Errors = await warband?.warband_data.GetValidationErrors()
+            if (Errors) {
+                setwarbanderrors(Errors )
+                setkeyvar(keyvar + 1)
+            }
+        }
+        RunErrorCheck();
+    }, [updateKey])
 
 
     return (
@@ -88,7 +102,7 @@ const WbbWarbandDetailView: React.FC<WbbWarbandDetailViewProps> = ({  onClose })
                         {'Fielded: '}{warband.warband_data.GetNumFielded()}
                     </div>
 
-                    { warband.warband_data.HasValidationErrors() &&
+                    { warbandErrors.length > 0 &&
                         <div className="detail-section-text-element detail-section-text-element-validation-error">
                             <div className={'alert alert-warning'}>
                                 <div className={'detail-section-text-element-validation-error-title'}>
@@ -97,7 +111,7 @@ const WbbWarbandDetailView: React.FC<WbbWarbandDetailViewProps> = ({  onClose })
                                 </div>
 
                                 <ul>
-                                    {warband.warband_data.GetValidationErrors().map((item, index) =>
+                                    {warbandErrors.map((item, index) =>
                                         <li key={index}>
                                             {item}
                                         </li>

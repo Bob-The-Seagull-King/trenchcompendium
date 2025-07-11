@@ -10,7 +10,7 @@ import { IWarbandPurchaseEquipment, IWarbandPurchaseModel, RealWarbandPurchaseEq
 import { IWarbandMember, WarbandMember } from './Purchases/WarbandMember';
 import { WarbandEquipment } from './Purchases/WarbandEquipment';
 import { WarbandFactory } from '../../../factories/warband/WarbandFactory';
-import { FactionModelRelationship } from '../../relationship/faction/FactionModelRelationship';
+import { FactionModelRelationship, IFactionModelRelationship } from '../../relationship/faction/FactionModelRelationship';
 import { EventRunner } from '../../contextevent/contexteventhandler';
 import { Faction } from '../../feature/faction/Faction';
 import { FactionEquipmentRelationship, IFactionEquipmentRelationship } from '../../relationship/faction/FactionEquipmentRelationship';
@@ -997,29 +997,31 @@ class UserWarband extends DynamicContextObject {
     }
 
     /**
-     * Does this warband have validation errors
-     *
-     * @return: boolean
-     */
-    HasValidationErrors () {
-        if( this.GetValidationErrors.length > 0) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /**
      * Returns an array of validation error strings
      *
      * @return: array
      */
-    GetValidationErrors () {
+    public async GetValidationErrors () {
 
-        return [
-            'You need 1 fighter to be the leader of this warband',
-            'You exceeded the limit of the equipment "Wind Amulet"'
-        ]
+        const AlertList : string[] = []
+        /**
+         * @TODO LANE Get Errors Alerts Working
+         */
+
+        let CaptainFound = false
+        for (let i = 0; i < this.Models.length; i++) {
+            if ((this.Models[i].CustomInterface as IFactionModelRelationship).captain) {
+                if ((this.Models[i].CustomInterface as IFactionModelRelationship).captain == true) {
+                    CaptainFound = true;
+                }
+            }
+        }
+
+        if (CaptainFound == false) {
+            AlertList.push("Your warband lacks a Leader")
+        }
+
+        return AlertList
     }
 
     /** 

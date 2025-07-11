@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {UserWarband} from "../../../classes/saveitems/Warband/UserWarband";
 import { useWarband  } from '../../../context/WarbandContext';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -14,11 +14,25 @@ const WbbEditViewWarband: React.FC<WbbEditViewWarbandProps> = ({
        isActive
    }) => {
 
-    const { warband } = useWarband();
+    const { warband, updateKey } = useWarband();
 
 
 
     if (warband == null) return (<div>Loading...</div>);
+
+    const [warbandErrors, setwarbanderrors] = useState<string[]>([])
+    const [keyvar, setkeyvar] = useState(0)
+
+    useEffect(() => {
+        async function RunErrorCheck() {
+            const Errors = await warband?.warband_data.GetValidationErrors()
+            if (Errors) {
+                setwarbanderrors(Errors )
+                setkeyvar(keyvar + 1)
+            }
+        }
+        RunErrorCheck();
+    }, [updateKey])
 
     return (
         <div className={`WbbEditViewWarband warband-meta ${isActive ? 'active' : ''}`} onClick={onClick}>
@@ -39,13 +53,14 @@ const WbbEditViewWarband: React.FC<WbbEditViewWarbandProps> = ({
                 {'Fielded: '}{warband.warband_data.GetNumFielded()}
 
             </div>
-
-            { warband.warband_data.HasValidationErrors() &&
-                <div className="meta-item meta-item-vaidation-error">
-                    <FontAwesomeIcon icon={faTriangleExclamation} className="icon-inline-left-l"/>
-                    {'Your warband is not valid'}
-                </div>
-            }
+            <div key={keyvar}>
+                { warbandErrors.length > 0 &&
+                    <div className="meta-item meta-item-vaidation-error">
+                        <FontAwesomeIcon icon={faTriangleExclamation} className="icon-inline-left-l"/>
+                        {'Your warband is not valid'}
+                    </div>
+                }
+            </div>
         </div>
     );
 };

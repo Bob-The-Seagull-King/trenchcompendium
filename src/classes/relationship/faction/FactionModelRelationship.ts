@@ -63,7 +63,7 @@ class FactionModelRelationship extends StaticOptionContextObject {
 
     public GetTrueName() {
         if (this.Model.Name) {
-            return this.Model.Name + (this.Captain == true? " (C)" : "");
+            return this.Model.Name + (this.Captain == true? " (Leader)" : "");
         } else {
             return "";
         }

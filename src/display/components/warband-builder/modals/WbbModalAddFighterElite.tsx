@@ -78,7 +78,7 @@ const WbbModalAddFighterElite: React.FC<WbbModalAddFighterEliteProps> = ({ show,
                         </div>
 
                         <span className={'item-name'}>
-                            {fighter.Model.GetName()}
+                            {fighter.Model.GetName() + (fighter.Captain? " (Leader)":"")}
                         </span>
                         <span className={'item-cost'}>
                             {fighter.Cost + " " + getCostType(fighter.CostType)}
