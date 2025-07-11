@@ -1067,7 +1067,7 @@
         "id": "eq_gasmask",
         "name": "Gas Mask",
         "source": "core",
-        "tags": {"trait": true, "headgear": true},
+        "tags": {"trait": true},
         "category": "equipment",
         "distance": null,
         "stats": {
