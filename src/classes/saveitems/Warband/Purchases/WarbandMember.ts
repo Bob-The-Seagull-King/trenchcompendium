@@ -1689,16 +1689,57 @@ class WarbandMember extends DynamicContextObject {
     }
 
     public async CanAddItem( model : string) {
+        const ListOfOptions : FactionEquipmentRelationship[] = []
+
         const RefModel : FactionEquipmentRelationship = await EquipmentFactory.CreateNewFactionEquipment(model, null);
-        
+
         const eventmon : EventRunner = new EventRunner();
-        const CanAdd = await eventmon.runEvent(
-            "canModelAddItem",
-            RefModel,
+
+        const SkipEquip : boolean = await eventmon.runEvent(
+            "overrideMercenarySkip",
+            this,
             [],
-            true,
-            this
+            this.IsMercenary(),
+            null
         )
+
+        if (SkipEquip) {
+            return ListOfOptions;
+        }
+
+        const CurrentHandsAvailable : ModelHands = await this.GetModelHands();
+
+        const RestrictionList : EquipmentRestriction[] = await eventmon.runEvent(
+            "getEquipmentRestriction",
+            this,
+            [],
+            [],
+            null
+        )
+        
+        let CanAdd = (RefModel.EquipmentItem.Category != "equipment") 
+
+        if (!CanAdd) {
+            CanAdd = !(await this.HasSpecificEquipment(RefModel.EquipmentItem.GetID()))
+        }
+
+        if (CanAdd) {
+            CanAdd = await this.EquipItemAvailableSpace(RefModel, CurrentHandsAvailable)
+        }
+
+        if (CanAdd) {
+            CanAdd = await this.EquipItemCanAdd(RefModel, RestrictionList)
+        }
+
+        if (CanAdd) {
+            CanAdd = await eventmon.runEvent(
+                "canModelAddItem",
+                RefModel,
+                [],
+                true,
+                this
+            )
+        }
         return CanAdd;
     }
 
@@ -1714,7 +1755,6 @@ class WarbandMember extends DynamicContextObject {
 
         } catch (e) { console.log(e) }
     }
-    
     
     public async DeleteStash( item : RealWarbandPurchaseEquipment ) {
         if (item.purchase.Sellable == false) {return}

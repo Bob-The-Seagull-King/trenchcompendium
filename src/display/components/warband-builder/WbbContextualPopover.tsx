@@ -20,6 +20,7 @@ import {useGlobalState} from "../../../utility/globalstate";
 import { ToolsController } from '../../../classes/_high_level_controllers/ToolsController';
 import { RealWarbandPurchaseEquipment, RealWarbandPurchaseModel, WarbandPurchase } from '../../../classes/saveitems/Warband/Purchases/WarbandPurchase';
 import { WarbandMember } from '../../../classes/saveitems/Warband/Purchases/WarbandMember';
+import WbbMoveEquipmentToFighterModal from './modals/warband/WbbMoveEquipmentToFighterModal';
 
 interface WbbContextualPopoverProps {
     id: string;
@@ -37,8 +38,6 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
             </>
         )
     }
-
-    const [selectedFighter, setSelectedFighter] = useState<WarbandPurchase | null>(null);
 
     const { activePopoverId, setActivePopoverId } = usePopover();
     const { warband, reloadDisplay } = useWarband();
@@ -174,7 +173,7 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
         setshowConfirmMoveEquipmentModal(true);
     }
 
-    const handleMoveEquipment = () => {
+    const handleMoveEquipment = (selectedFighter : WarbandPurchase) => {
         if (selectedFighter != null) {
             if (context == undefined || context == null) {
                 warband?.warband_data.DeleteStash(item).then(() => {
@@ -808,39 +807,13 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
             </Modal>
 
             {/** Move Equipment to Fighter Confirm Modal */}
-            <Modal className="WbbEditGoeticSelectionModal" show={showConfirmMoveEquipmentModal} onHide={() => setshowConfirmMoveEquipmentModal(false)} centered>
-                <Modal.Header closeButton>
-                    <Modal.Title>{`Move Equipment to Fighter`}</Modal.Title>
-                </Modal.Header>
-
-                <Modal.Body>
-                    <div className={'mb-3'}>
-                        <div className={'goetic-selection-wrap'}>
-                            {warband?.warband_data.Models.map((discipline) => (
-                            <div
-                                key={discipline.HeldObject.ID + discipline.HeldObject.ID}
-                                className={`select-item ${selectedFighter === discipline ? 'selected' : ''}`}
-                                onClick={() => setSelectedFighter(discipline)}
-                            >
-                                {(discipline.HeldObject as WarbandMember).GetFighterName()}
-                            </div>
-                            ))}
-                        </div>
-                    </div>
-                    <div >
-                        <strong>{(item.equipment != undefined)? item.equipment.GetTrueName() : ""}</strong>?
-                    </div>
-                </Modal.Body>
-
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={() => setshowConfirmMoveEquipmentModal(false)}>
-                        Cancel
-                    </Button>
-                    <Button variant="primary" onClick={handleMoveEquipment}>
-                        Move Equipment
-                    </Button>
-                </Modal.Footer>
-            </Modal>
+            <WbbMoveEquipmentToFighterModal 
+                show={showConfirmMoveEquipmentModal}
+                onClose={() => setshowConfirmMoveEquipmentModal(false)}
+                onSubmit={handleMoveEquipment}
+                warband={warband? warband.warband_data : null}
+                contextItem={item}
+            />
 
             {/** Delete Advancement Confirm Modal */}
             <Modal show={showConfirmDeleteAdvancementModal} onHide={() => setshowConfirmDeleteAdvancementModal(false)} centered>
