@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {UserWarband} from "../../../classes/saveitems/Warband/UserWarband";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faChevronLeft, faPlus} from "@fortawesome/free-solid-svg-icons";
+import {faChevronLeft, faCoins, faPlus, faTrophy} from "@fortawesome/free-solid-svg-icons";
 import WbbEquipmentListItem from "./WbbEquipmentListItem";
 import WbbModalAddRangedWeapon from "./modals/fighter/WbbAddRangedWeapon";
 import WbbModalAddItemToStash from "./modals/WbbModalAddItemToStash";
@@ -14,6 +14,7 @@ import { ToolsController } from '../../../classes/_high_level_controllers/ToolsC
 import { ErrorBoundary } from "react-error-boundary";
 import { WarbandConsumable } from '../../../classes/saveitems/Warband/WarbandConsumable';
 import WbbConsumableSelect from './modals/warband/WbbConsumableSelect';
+import WbbEditStashAmountModal from './modals/warband/WbbEditStashAmountModal';
 
 interface WbbStashDetailViewProps {
     onClose: () => void;
@@ -34,6 +35,11 @@ const WbbStashDetailView: React.FC<WbbStashDetailViewProps> = ({ onClose }) => {
     const [showArmourAddItemToStash, setShowArmourAddItemToStash] = useState(false);
     const [showEquipAddItemToStash, setShowEquipAddItemToStash] = useState(false);
     const [showExplorationAddItemToStash, setShowExplorationAddItemToStash] = useState(false);
+
+    
+    const [showAddDucats, setShowAddDucats] = useState(false);
+    const [showAddGlory, setShowAddGlory] = useState(false);
+    
     const handleAddItemToStash = (item: FactionEquipmentRelationship) => {
         if (!warband) { return; } // Guard
         
@@ -41,6 +47,14 @@ const WbbStashDetailView: React.FC<WbbStashDetailViewProps> = ({ onClose }) => {
             const Manager : ToolsController = ToolsController.getInstance();
             Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(() => reloadDisplay())
         })
+    };
+
+    const handleUpdateStash = (newval: number, type : number) => {
+        if (!warband) { return; } // Guard
+        
+        warband.warband_data.AddStashValue(newval, type)
+        const Manager : ToolsController = ToolsController.getInstance();
+        Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(() => reloadDisplay())
     };
 
     
@@ -64,10 +78,29 @@ const WbbStashDetailView: React.FC<WbbStashDetailViewProps> = ({ onClose }) => {
 
             <div key={updateKey} className={'detail-view-content'}>
                 <div className="stash-summary mb-3" key={stashkey}>
+                    <div><strong>Value:</strong> {stash.ValueDucats} Ducats / {stash.ValueGlory} Glory</div>
                     <div><strong>Spare Ducats:</strong> {(stash.AmountDucats > 10e10? "Unlimited" : stash.AmountDucats) || 0}</div>
                     <div><strong>Spare Glory:</strong> {(stash.AmountGlory  > 10e10? "Unlimited" : stash.AmountGlory) || 0}</div>
-                    <div><strong>Value:</strong> {stash.ValueDucats} Ducats / {stash.ValueGlory} Glory</div>
+                    <div style={{marginTop:"0.25rem"}}>
+                        {(stash.AmountDucats < 10e10) &&
+                        <div className={'btn btn-primary btn-sm edit-battle-scar-btn'}
+                            onClick={() => setShowAddDucats(true)}
+                            style={{marginRight:"0.5rem"}}>
+                            <FontAwesomeIcon icon={faCoins} className="icon-inline-left-l"/>
+                            {'Add Ducats'}
+                        </div>
+                        }
+                        {stash.AmountGlory < 10e10 &&
+                        <div className={'btn btn-primary btn-sm edit-battle-scar-btn'}
+                            onClick={() => setShowAddGlory(true)}>
+                            <FontAwesomeIcon icon={faTrophy} className="icon-inline-left-l"/>
+                            {'Add Glory'}
+                        </div>
+                        }
+                    </div>
                 </div>
+
+                
 
                 <div className={'stash-items-title'}>
                     {'Stashed Items'}
@@ -215,6 +248,22 @@ const WbbStashDetailView: React.FC<WbbStashDetailViewProps> = ({ onClose }) => {
                         onSubmit={handleAddItemToStash}
                         category=''
                         exploration={true}
+                    />
+
+                    
+                    <WbbEditStashAmountModal
+                        show={showAddDucats}
+                        onClose={() => setShowAddDucats(false)}
+                        currentcount={stash.AmountDucats}
+                        costtype={0}
+                        onSubmit={handleUpdateStash}
+                    />
+                    <WbbEditStashAmountModal
+                        show={showAddGlory}
+                        onClose={() => setShowAddGlory(false)}
+                        currentcount={stash.AmountGlory}
+                        costtype={1}
+                        onSubmit={handleUpdateStash}
                     />
                 </div>
                 {warband?.warband_data.GetConsumablesEquipment().length > 0 &&
