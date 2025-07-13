@@ -33,6 +33,7 @@ const WbbStashDetailView: React.FC<WbbStashDetailViewProps> = ({ onClose }) => {
     const [showMeleeAddItemToStash, setShowMeleeAddItemToStash] = useState(false);
     const [showArmourAddItemToStash, setShowArmourAddItemToStash] = useState(false);
     const [showEquipAddItemToStash, setShowEquipAddItemToStash] = useState(false);
+    const [showExplorationAddItemToStash, setShowExplorationAddItemToStash] = useState(false);
     const handleAddItemToStash = (item: FactionEquipmentRelationship) => {
         if (!warband) { return; } // Guard
         
@@ -168,12 +169,20 @@ const WbbStashDetailView: React.FC<WbbStashDetailViewProps> = ({ onClose }) => {
                             {'Add Equipment'}
                         </div>
                     </div>
+                    <div className={'stash-items-category'}>
+                        <div className={'btn btn-add-element btn-block'}
+                             onClick={() => setShowExplorationAddItemToStash(true)}>
+                            <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
+                            {'Add Exploration-Only Item'}
+                        </div>
+                    </div>
 
                     <WbbModalAddItemToStash
                         show={showRangedAddItemToStash}
                         onClose={() => setShowRangedAddItemToStash(false)}
                         onSubmit={handleAddItemToStash}
                         category='ranged'
+                        exploration={false}
                     />
 
                     <WbbModalAddItemToStash
@@ -181,6 +190,7 @@ const WbbStashDetailView: React.FC<WbbStashDetailViewProps> = ({ onClose }) => {
                         onClose={() => setShowMeleeAddItemToStash(false)}
                         onSubmit={handleAddItemToStash}
                         category='melee'
+                        exploration={false}
                     />
 
                     <WbbModalAddItemToStash
@@ -188,6 +198,7 @@ const WbbStashDetailView: React.FC<WbbStashDetailViewProps> = ({ onClose }) => {
                         onClose={() => setShowArmourAddItemToStash(false)}
                         onSubmit={handleAddItemToStash}
                         category='armour'
+                        exploration={false}
                     />
 
                     <WbbModalAddItemToStash
@@ -195,6 +206,15 @@ const WbbStashDetailView: React.FC<WbbStashDetailViewProps> = ({ onClose }) => {
                         onClose={() => setShowEquipAddItemToStash(false)}
                         onSubmit={handleAddItemToStash}
                         category='equipment'
+                        exploration={false}
+                    />
+
+                    <WbbModalAddItemToStash
+                        show={showExplorationAddItemToStash}
+                        onClose={() => setShowExplorationAddItemToStash(false)}
+                        onSubmit={handleAddItemToStash}
+                        category=''
+                        exploration={true}
                     />
                 </div>
                 {warband?.warband_data.GetConsumablesEquipment().length > 0 &&

@@ -2,7 +2,7 @@ import { useWarband } from '../../../../context/WarbandContext';
 import { FactionEquipmentRelationship } from '../../../../classes/relationship/faction/FactionEquipmentRelationship';
 import React, { useEffect, useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
-import { getCostType } from '../../../../utility/functions';
+import { containsTag, getCostType } from '../../../../utility/functions';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faXmark} from "@fortawesome/free-solid-svg-icons";
 
@@ -18,9 +18,10 @@ interface WbbModalAddItemToStashProps {
     onClose: () => void;
     onSubmit: (weapon: FactionEquipmentRelationship) => void;
     category : string;
+    exploration : boolean;
 }
 
-const WbbModalAddItemToStash: React.FC<WbbModalAddItemToStashProps> = ({ show, onClose, onSubmit, category }) => {
+const WbbModalAddItemToStash: React.FC<WbbModalAddItemToStashProps> = ({ show, onClose, onSubmit, category, exploration }) => {
     const [selectedId, setSelectedId] = useState<string | null>(null);
     
     const { warband } = useWarband();
@@ -38,9 +39,13 @@ const WbbModalAddItemToStash: React.FC<WbbModalAddItemToStashProps> = ({ show, o
     
     useEffect(() => {
         async function SetEquipmentOptions() {
-            const options = await warband?.warband_data.GetFactionEquipmentOptions()
+            const options = await warband?.warband_data.GetFactionEquipmentOptions(exploration)
             if (options != undefined) {
-                setListofOptions(options.filter((item : FactionEquipmentRelationship) => item.EquipmentItem.Category == category))
+                if (category.length > 0) {
+                    setListofOptions(options.filter((item : FactionEquipmentRelationship) => item.EquipmentItem.Category == category))
+                } else {
+                    setListofOptions(options.filter((item : FactionEquipmentRelationship) => containsTag(item.Tags, 'exploration_only')));
+                }
                 setkevvar(keyvar + 1)
             }
         }
