@@ -107,7 +107,7 @@ const WbbWarbandDetailView: React.FC<WbbWarbandDetailViewProps> = ({  onClose })
                             <div className={'alert alert-warning'}>
                                 <div className={'detail-section-text-element-validation-error-title'}>
                                     <FontAwesomeIcon icon={faTriangleExclamation} className="icon-inline-left-l"/>
-                                    {'Your warband is not valid'}
+                                    {'The warband is not valid'}
                                 </div>
 
                                 <ul>

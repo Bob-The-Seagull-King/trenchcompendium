@@ -18,6 +18,7 @@ const WbbCreateNewDetailsForm: React.FC<{
     const [warbandName, setWarbandName] = useState('');
     const [warbandStartingDucats, setWarbandStartingDucats] = useState(700);
     const [warbandStartingGlory, setWarbandStartingGlory] = useState(0);
+    const [isunrestricted, setIsUnrestricted] = useState(false);
     const [keyvar, setkeyvar] = useState(0);
 
     useEffect(() => {
@@ -45,11 +46,10 @@ const WbbCreateNewDetailsForm: React.FC<{
         SetStartingValues()
     }, [chosenfaction])
 
-
     const [isLoading, setisLoading] = useState(false)
 
     async function handleSubmit() {
-        const msg : null | SumWarband = await manager.NewItem(warbandName, chosenfaction.ID, warbandStartingDucats, warbandStartingGlory)
+        const msg : null | SumWarband = await manager.NewItem(warbandName, chosenfaction.ID, warbandStartingDucats, warbandStartingGlory, isunrestricted)
 
         if (msg == null) {
             alert("Warband creation was unsuccessful");
@@ -105,6 +105,20 @@ const WbbCreateNewDetailsForm: React.FC<{
                                 onChange={(e) => setWarbandStartingGlory(parseInt(e.target.value))}
                                 placeholder={'Unlimited'}
                             />
+                        </div>
+
+                        <div className={'mb-3'} >
+                            <label className="form-label">
+                                Remove Restrictions
+                                <input
+                                type="checkbox"
+                                value={"unchecked"}
+                                onChange={(e) => setIsUnrestricted((e.target.checked))}
+                                style={{marginLeft:"0.25rem"}}
+                                />
+                            </label>
+                            <div className="form-text">If restrictions are removed, the builder will not check limitations on number, cost, available hands, and other rules on equipment and model selection.</div>
+                            
                         </div>
 
 

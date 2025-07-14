@@ -221,10 +221,15 @@ class WarbandManager {
     /**
      * Builds a new item and saves it to the browser
      */
-    public async NewItem(_title : string, fact_id : string, ducats : number, glory : number) {
+    public async NewItem(_title : string, fact_id : string, ducats : number, glory : number, isrestricted : boolean) {
 
         if (_title.trim().length <= 0) {
             return null;
+        }
+
+        const rest_list : string[] = [];
+        if (isrestricted == true) {
+            rest_list.push("unrestricted")
         }
 
         const _Item : IUserWarband = {
@@ -278,7 +283,8 @@ class WarbandManager {
             },
             modifiers: [],
             fireteams: [],
-            consumables: []
+            consumables: [],
+            restrictions_list: rest_list
         }
         const new_item : UserWarband = await WarbandFactory.CreateUserWarband(_Item)
 

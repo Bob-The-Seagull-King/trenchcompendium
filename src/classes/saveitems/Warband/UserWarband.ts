@@ -49,7 +49,8 @@ interface IUserWarband extends IContextObject {
     debts : WarbandDebt,
     modifiers: IWarbandProperty[],
     fireteams: IWarbandProperty[],
-    consumables: IWarbandConsumable[]
+    consumables: IWarbandConsumable[],
+    restrictions_list : string[]
 }
 
 class UserWarband extends DynamicContextObject {
@@ -66,6 +67,8 @@ class UserWarband extends DynamicContextObject {
     public Modifiers : WarbandProperty[] = [];
     public Fireteams : WarbandProperty[] = [];
     public Consumables : WarbandConsumable[] = [];
+    public Restrictions : string[] = [];
+    public IsUnRestricted : boolean;
 
     public DucatLimit : number[] = [700,800,900,1000,1100,1200,1300,1400,1500,1600,1700,1800];
     public ModelLimit : number[] = [10,11,12,13,14,15,16,17,18,19,20,22];
@@ -91,6 +94,12 @@ class UserWarband extends DynamicContextObject {
                 glory: 0
             }
         }
+        if (data.restrictions_list != undefined) {
+            this.Restrictions = data.restrictions_list;
+        } else {
+            this.Restrictions = []
+        }
+        this.IsUnRestricted = (this.Restrictions.includes("unrestricted"))
     }
 
     public async NewWarbandItems(data : IUserWarband) {
@@ -100,7 +109,7 @@ class UserWarband extends DynamicContextObject {
 
     public async BuildModels(data : IWarbandPurchaseModel[]) {
         for (let i = 0; i < data.length; i++) {
-            const Model : WarbandMember = await WarbandFactory.CreateWarbandMember(data[i].model, this);
+            const Model : WarbandMember = await WarbandFactory.CreateWarbandMember(data[i].model, this, this.IsUnRestricted);
             const NewPurchase : WarbandPurchase = new WarbandPurchase(data[i].purchase, this, Model);
             this.Models.push(NewPurchase);
         }
@@ -269,7 +278,8 @@ class UserWarband extends DynamicContextObject {
             debts: this.Debts,
             modifiers: propertylist,
             fireteams: fireteamlist,
-            consumables: consumablelist
+            consumables: consumablelist,
+            restrictions_list: this.Restrictions
         }
         
         return _objint;
@@ -531,7 +541,7 @@ class UserWarband extends DynamicContextObject {
     public async AddFighter ( fighter: FactionModelRelationship[] ) {
         for (let i = 0; i < fighter.length; i++) { 
             
-            const Model : WarbandMember = await WarbandFactory.BuildWarbandMemberFromPurchase(fighter[i], this);
+            const Model : WarbandMember = await WarbandFactory.BuildWarbandMemberFromPurchase(fighter[i], this, this.IsUnRestricted);
             await Model.BuildModelEquipment(true);
             const NewPurchase : WarbandPurchase = new WarbandPurchase({
                 cost_value : fighter[i].Cost,
@@ -584,7 +594,7 @@ class UserWarband extends DynamicContextObject {
         }
         
         const milliseconds = Date.now();
-        const NewMember : WarbandMember = await WarbandFactory.CreateWarbandMember((fighter.model.ConvertToInterface()), this);
+        const NewMember : WarbandMember = await WarbandFactory.CreateWarbandMember((fighter.model.ConvertToInterface()), this, this.IsUnRestricted);
         NewMember.Name = fighter.model.Name
         NewMember.ID =  NewMember.CurModel.ID + "_" + this.Models.length + "_" + milliseconds.toString()
         const NewPurchase : WarbandPurchase = new WarbandPurchase(fighter.purchase.ConvertToInterface(), this, NewMember);
@@ -1025,8 +1035,12 @@ class UserWarband extends DynamicContextObject {
         }
 
         if (CaptainFound == false) {
-            AlertList.push("Your warband lacks a Leader")
+            AlertList.push("The warband lacks a Leader")
         }
+        
+        if (this.IsUnRestricted == true) {
+            AlertList.push("The warband has been set to Unrestricted mode")
+        } 
 
         return AlertList
     }
@@ -1206,6 +1220,10 @@ class UserWarband extends DynamicContextObject {
             null
         )
 
+        if (this.IsUnRestricted) {
+            return BaseRels;
+        }
+
         for (let i = 0; i < BaseRels.length; i++) {
             const IsRestricted : boolean = await this.IsModelRestricted(BaseRels[i]);
             if (IsRestricted) { continue; }
@@ -1283,7 +1301,7 @@ class UserWarband extends DynamicContextObject {
         }
 
         for (let i = 0; i < RefRels.length; i++) {
-            if (!containsTag(RefRels[i].Tags, "exploration_only") || use_exploration) {
+            if (!containsTag(RefRels[i].Tags, "exploration_only") || use_exploration || this.IsUnRestricted) {
                 BaseRels.push(RefRels[i]);
             }
         }
@@ -1296,6 +1314,10 @@ class UserWarband extends DynamicContextObject {
             BaseRels,
             null
         )
+        
+        if (this.IsUnRestricted) {
+            return BaseRels;
+        }
 
         for (let i = 0; i < BaseRels.length; i++) {
             let maxcount = BaseRels[i].Limit;

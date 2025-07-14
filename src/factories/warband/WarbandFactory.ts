@@ -87,8 +87,8 @@ class WarbandFactory {
         return rule;
     }
     
-    static async CreateWarbandMember(data: IWarbandMember, parent : DynamicContextObject | null) {
-        const rule = new WarbandMember(data, parent)        
+    static async CreateWarbandMember(data: IWarbandMember, parent : DynamicContextObject | null, restricted : boolean) {
+        const rule = new WarbandMember(data, parent, restricted)        
         await rule.BuildModel(data.model)
         await rule.BuildEquipment(data.equipment);
         await rule.BuildSkills(data.list_skills);
@@ -100,7 +100,7 @@ class WarbandFactory {
         return rule;
     }
 
-    static async BuildWarbandMemberFromPurchase(rel: FactionModelRelationship, parent : UserWarband) {
+    static async BuildWarbandMemberFromPurchase(rel: FactionModelRelationship, parent : UserWarband, restricted : boolean) {
         const milliseconds = Date.now();
         const data : IWarbandMember = {
                 id: rel.Model.ID + "_" + parent.Models.length + "_" + milliseconds.toString(), // The id of the item
@@ -128,7 +128,7 @@ class WarbandFactory {
             data.tags["mercenary"] = true;
         }
         
-        const Model : WarbandMember = await WarbandFactory.CreateWarbandMember(data, parent);
+        const Model : WarbandMember = await WarbandFactory.CreateWarbandMember(data, parent, restricted);
         return Model;
     }
     

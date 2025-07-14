@@ -104,13 +104,14 @@ class WarbandMember extends DynamicContextObject {
     ModelEquipments : WarbandProperty[] = [];
     ScarReserve : number;
     Stat_Selections : ModelStatistics[] = [];
+    IsUnRestricted : boolean;
 
     /**
      * Assigns parameters and creates a series of description
      * objects with DescriptionFactory
      * @param data Object data in IAction format
      */
-    public constructor(data: IWarbandMember, parent : DynamicContextObject | null)
+    public constructor(data: IWarbandMember, parent : DynamicContextObject | null, restricted : boolean)
     {
         super(data, parent)
         this.Notes = data.notes;
@@ -132,6 +133,7 @@ class WarbandMember extends DynamicContextObject {
         this.Experience = data.experience;
         this.Elite = data.elite;
         this.Recruited = data.recruited;
+        this.IsUnRestricted = restricted;
     }
     
 
@@ -847,7 +849,15 @@ class WarbandMember extends DynamicContextObject {
                 model: this
             }
         )
-
+        if (this.IsUnRestricted == true) {
+            return {
+            upgrade : upg,
+            purchase : foundpurchase,
+            allowed : true,
+            cur_count: (this.MyContext as UserWarband).GetCountOfUpgradeRel(upg.ID),
+            max_count: maxcount
+        }
+        }
         let canaddupgrade = (await this.GetCountOfUpgradeCategory(category) < limit_of_category || category == "upgrades")
 
         if (canaddupgrade) {
@@ -1070,7 +1080,9 @@ class WarbandMember extends DynamicContextObject {
             const validSkills : Skill[] = [];
 
             for (let i = 0; i < Patrons.Skills.length; i++) {
-                if (this.Skills.filter((item) => (item.SelfDynamicProperty.OptionChoice.ID == Patrons.Skills[i].ID)).length == 0) {
+                if (this.IsUnRestricted == true) {
+                    validSkills.push(Patrons.Skills[i]);
+                }else if (this.Skills.filter((item) => (item.SelfDynamicProperty.OptionChoice.ID == Patrons.Skills[i].ID)).length == 0) {
 
                     const Allow = await eventmon.runEvent(
                         "allowSkillGain",
@@ -1284,6 +1296,9 @@ class WarbandMember extends DynamicContextObject {
 
         const BaseFactionOptions : FactionEquipmentRelationship[] = await (this.MyContext as UserWarband).GetFactionEquipmentOptions();
 
+        if (this.IsUnRestricted == true) {
+            return BaseFactionOptions;
+        }
 
         const CurrentHandsAvailable : ModelHands = await this.GetModelHands();
 
@@ -1689,6 +1704,9 @@ class WarbandMember extends DynamicContextObject {
     }
 
     public async CanAddItem( model : string) {
+        if (this.IsUnRestricted) {
+            return true;
+        }
         const ListOfOptions : FactionEquipmentRelationship[] = []
 
         const RefModel : FactionEquipmentRelationship = await EquipmentFactory.CreateNewFactionEquipment(model, null);

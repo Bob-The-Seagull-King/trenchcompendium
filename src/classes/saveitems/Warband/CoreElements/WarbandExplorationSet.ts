@@ -193,7 +193,7 @@ class WarbandExplorationSet extends DynamicContextObject {
             for (let j = 0; j < TableList[i].ExplorationLocations.length; j++) {
                 const selected = this.Locations.find((k) => k.SelfDynamicProperty.OptionChoice.GetID() === TableList[i].ExplorationLocations[j].GetID());
 
-                if (!selected) {
+                if (!selected || (this.MyContext as UserWarband).IsUnRestricted) {
                     const ValidLoc : FilteredLocation = await this.GetValidOptionsForLocation(TableList[i].ExplorationLocations[j]);
                     ValidLocs.push(
                         ValidLoc
