@@ -40,18 +40,25 @@ const WbbEditStashAmountModal: React.FC<WbbEditVictoryPointsProps> = ({
             </Modal.Header>
 
             <Modal.Body>
-                <input
-                    type="number"
-                    className="form-control"
-                    value={selectedcost}
-                    onChange={(e) => setSelectedcost(parseInt(e.target.value) || 0)}
-                    min={currentcount * -1}
-                />
-                <h6>Current {getCostType(costtype)}: {currentcount} New {getCostType(costtype)}: {currentcount + selectedcost}</h6>
+                <div className="mb-3">
+                    <label htmlFor={'add-cost-input'}>
+                        {'Add X '+ getCostType(costtype) + ' to your stash'}
+                    </label>
+
+                    <input
+                        type="number" id={'add-cost-input'}
+                        className="form-control"
+                        value={selectedcost}
+                        onChange={(e) => setSelectedcost(parseInt(e.target.value) || 0)}
+                        min={currentcount * -1}
+                    />
+
+                    <div className="form-text">Current {getCostType(costtype)}: {currentcount} New {getCostType(costtype)}: {currentcount + selectedcost}</div>
+                </div>
             </Modal.Body>
 
             <Modal.Footer>
-                <Button variant="secondary" onClick={onClose}>
+            <Button variant="secondary" onClick={onClose}>
                     Cancel
                 </Button>
                 <Button
