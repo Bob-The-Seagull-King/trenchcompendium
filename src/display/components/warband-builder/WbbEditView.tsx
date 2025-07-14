@@ -133,6 +133,7 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
     const [showAddFighterTroopModal, setShowAddFighterTroopModal] = useState(false);
     const [showAddFighterEliteModal, setShowAddFighterEliteModal] = useState(false);
     const [showAddFighterMercenaryModal, setShowAddFighterMercenaryModal] = useState(false);
+    const [showAddFighterCustomModal, setShowAddFighterCustomModal] = useState(false);
     
 
 
@@ -233,6 +234,7 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                                             setShowAddFighterEliteModal={setShowAddFighterEliteModal}
                                             setShowAddFighterTroopModal={setShowAddFighterTroopModal}
                                             setShowAddFighterMercenaryModal={setShowAddFighterMercenaryModal}
+                                            setShowAddFighterCustomModal={setShowAddFighterCustomModal}
                                         />
 
                                         <WbbModifiersList/>
@@ -285,9 +287,11 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                                     showAddFighterEliteModal={showAddFighterEliteModal}
                                     showAddFighterTroopModal={showAddFighterTroopModal}
                                     showAddFighterMercenaryModal={showAddFighterMercenaryModal}
+                                    showAddFighterCustomModal={showAddFighterCustomModal}
                                     onCloseMercenary={() => setShowAddFighterMercenaryModal(false)}
                                     onCloseElite={() => setShowAddFighterEliteModal(false)}
                                     onCloseTroop={() => setShowAddFighterTroopModal(false)}
+                                    onCloseCustom={() => setShowAddFighterCustomModal(false)}
                                 />
                                 <WbbModalAddModifier
                                     show={showAddModifierModal}

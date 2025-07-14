@@ -5,24 +5,30 @@ import WbbModalAddFighterElite from '../modals/WbbModalAddFighterElite';
 import WbbModalAddFighterMercenary from '../modals/WbbModalAddFighterMercenary';
 import WbbModalAddFighterTroop from '../modals/WbbModalAddFighterTroop';
 import { ToolsController } from '../../../../classes/_high_level_controllers/ToolsController';
+import WbbModalAddFighterCustom from '../modals/WbbModalAddFighterCustom';
+import { Model } from '../../../../classes/feature/model/Model';
 
 
 interface WbbModalAddFighterEliteProps {
     showAddFighterEliteModal: boolean;
     showAddFighterTroopModal: boolean;
     showAddFighterMercenaryModal: boolean;
+    showAddFighterCustomModal: boolean;
     onCloseTroop: () => void;
     onCloseElite: () => void;
     onCloseMercenary: () => void;
+    onCloseCustom: () => void;
 }
 
 const WbbFighterAdds : React.FC<WbbModalAddFighterEliteProps> = ({
                                                                      showAddFighterEliteModal,
                                                                      showAddFighterTroopModal,
                                                                      showAddFighterMercenaryModal,
+                                                                     showAddFighterCustomModal,
                                                                      onCloseTroop,
                                                                      onCloseElite,
-                                                                     onCloseMercenary
+                                                                     onCloseMercenary,
+                                                                     onCloseCustom
 }) => {
 
     const { warband, updateKey, reloadDisplay } = useWarband();
@@ -37,6 +43,17 @@ const WbbFighterAdds : React.FC<WbbModalAddFighterEliteProps> = ({
         }
         );
     };
+
+    const handleCustomFighterSubmit = (newFighter : Model, cost : number, costtype : number) => {
+        if (!warband) { return; } // Guard
+
+        warband.warband_data.AddCustomFighter(newFighter, cost, costtype).then(() => {
+            const Manager : ToolsController = ToolsController.getInstance();
+            Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
+                () => reloadDisplay())
+        });
+
+    }
     return (
         <>
         {showAddFighterTroopModal &&
@@ -59,6 +76,14 @@ const WbbFighterAdds : React.FC<WbbModalAddFighterEliteProps> = ({
                 show={showAddFighterMercenaryModal}
                 onClose={() => onCloseMercenary()}
                 onSubmit={handleFighterSubmit}
+            />
+        }
+        
+        {showAddFighterCustomModal &&
+            <WbbModalAddFighterCustom
+                show={showAddFighterCustomModal}
+                onClose={() => onCloseCustom()}
+                onSubmit={handleCustomFighterSubmit}
             />
         }
         </>

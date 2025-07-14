@@ -54,6 +54,28 @@ class ModelFactory {
         return rule;
     }
 
+    
+        
+    static async GetAllModels() {
+        const models = Requester.MakeRequest({searchtype: "file", searchparam: {type: "model"}}) as IModel[];
+        const ModelList : ModelCollection[] = []
+        for (let i = 0; i < models.length; i++) {
+            const skl = await ModelFactory.CreateModelCollection(models[i], null);
+            if (skl != null) {
+                ModelList.push(skl);
+            }
+        }
+
+        const ModelIndividual : Model[] = [];
+
+        for (let i = 0; i < ModelList.length; i++) {
+            for (let j = 0; j < ModelList[i].SubModelsList.length; j++) {
+                ModelIndividual.push(ModelList[i].SubModelsList[j].model)
+            }
+        }
+        return ModelIndividual;
+    }
+
     static async CreateNewModel(_val : string, parent : ContextObject | null) {
         const cache = StaticDataCache.getInstance();
         const isValid = (cache.CheckID('model', _val))

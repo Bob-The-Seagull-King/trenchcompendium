@@ -25,6 +25,8 @@ import { Fireteam } from '../../feature/ability/Fireteam';
 import { FireteamFactory } from '../../../factories/features/FireteamFactory';
 import { StaticOptionContextObject } from '../../options/StaticOptionContextObject';
 import { IWarbandConsumable, WarbandConsumable } from './WarbandConsumable';
+import { Model } from '../../feature/model/Model';
+import { Equipment } from '../../feature/equipment/Equipment';
 
 interface WarbandDebt {
     ducats : number,
@@ -534,6 +536,32 @@ class UserWarband extends DynamicContextObject {
      * WBB Actions
      */
 
+    public async AddCustomFighter (model : Model, cost : number, costtype : number) {
+
+        if (!this.Restrictions.includes("custom_fighter")) {
+            this.Restrictions.push("custom_fighter")
+        }
+        const FactionmodelInterface : IFactionModelRelationship = {
+            id: model.GetID() + "_" + Date.now().toString(),
+            name: model.GetTrueName(),
+            source: "Warband_Custom",
+            tags: {},
+            contextdata : {},
+            options : [],
+            faction_id : [],
+            model_id : model.GetID(),
+            captain : false,
+            mercenary : model.Stats.mercenary? model.Stats.mercenary : false,
+            cost : cost,
+            cost_type : costtype,
+            restricted_models : [],
+            warband_minimum : 0,
+            warband_maximum : 0
+        }
+        const FacEquip : FactionModelRelationship = await ModelFactory.CreateFactionModel(FactionmodelInterface, this)
+        await this.AddFighter([FacEquip])
+    }
+
     /**
      * Adds a fighter to the Roster
      * @param fighter
@@ -706,6 +734,26 @@ class UserWarband extends DynamicContextObject {
         } else {
             this.Ducats += newval;
         }
+    }
+
+    public async CustomStash( item : Equipment, cost : number, costtype : number) {
+        if (!this.Restrictions.includes("custom_equipment")) {
+            this.Restrictions.push("custom_equipment")
+        }
+        const FactionequipmentInterface : IFactionEquipmentRelationship = {
+            id: item.GetID() + "_" + Date.now().toString(),
+            name: item.GetTrueName(),
+            source: "Warband Custom",
+            tags: {},
+            contextdata : {},
+            faction_id : [],
+            equipment_id : item.GetID(),
+            cost : cost,
+            costtype : costtype,
+            limit : 0
+        }
+        const FacEquip : FactionEquipmentRelationship = await EquipmentFactory.CreateFactionEquipment(FactionequipmentInterface, this)
+        await this.AddStash(FacEquip)
     }
     
     public async AddStash ( stash: FactionEquipmentRelationship ) {
@@ -1040,6 +1088,14 @@ class UserWarband extends DynamicContextObject {
         
         if (this.IsUnRestricted == true) {
             AlertList.push("The warband has been set to Unrestricted mode")
+        } 
+
+        if (this.Restrictions.includes("custom_equipment") == true) {
+            AlertList.push("The warband has been given a custom piece of equipment")
+        } 
+
+        if (this.Restrictions.includes("custom_fighter") == true) {
+            AlertList.push("The warband has been given a custom fighter")
         } 
 
         return AlertList

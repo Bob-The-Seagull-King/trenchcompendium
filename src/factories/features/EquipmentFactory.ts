@@ -26,6 +26,18 @@ class EquipmentFactory {
         await rule.BuildFactionEquipment(_rule.id);
         return rule;
     }
+        
+    static async GetAllEquipment() {
+        const models = Requester.MakeRequest({searchtype: "file", searchparam: {type: "equipment"}}) as IEquipment[];
+        const ModelList : Equipment[] = []
+        for (let i = 0; i < models.length; i++) {
+            const skl = await EquipmentFactory.CreateEquipment(models[i], null);
+            if (skl != null) {
+                ModelList.push(skl);
+            }
+        }
+        return ModelList;
+    }
 
     static async CreateNewEquipment(_val : string, parent : ContextObject | null) {
         const cache = StaticDataCache.getInstance();

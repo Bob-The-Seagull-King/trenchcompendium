@@ -1319,7 +1319,7 @@ class WarbandMember extends DynamicContextObject {
             }
 
             if (CanAdd) {
-                CanAdd = await this.EquipItemAvailableSpace(BaseFactionOptions[i], CurrentHandsAvailable)
+                CanAdd = await this.EquipItemAvailableSpace(BaseFactionOptions[i].EquipmentItem, CurrentHandsAvailable)
             }
 
             if (CanAdd) {
@@ -1388,7 +1388,7 @@ class WarbandMember extends DynamicContextObject {
         return CanAdd
     }
 
-    public async EquipItemAvailableSpace(faceq : FactionEquipmentRelationship, model_hands : ModelHands) {
+    public async EquipItemAvailableSpace(faceq : Equipment, model_hands : ModelHands) {
 
         const EquippedItems = await this.GetAllEquipForShow();
         const KeyWordList = await this.GetKeywordsFull();
@@ -1398,23 +1398,23 @@ class WarbandMember extends DynamicContextObject {
 
             if (
                 (containsTag((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Tags, "headgear") &&
-                    containsTag(faceq.EquipmentItem.Tags, "headgear")) ||
+                    containsTag(faceq.Tags, "headgear")) ||
                 (containsTag((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Tags, "grenade") &&
-                    containsTag(faceq.EquipmentItem.Tags, "grenade")) ||
+                    containsTag(faceq.Tags, "grenade")) ||
                 (containsTag((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Tags, "armour") &&
-                    containsTag(faceq.EquipmentItem.Tags, "armour")) ||
+                    containsTag(faceq.Tags, "armour")) ||
                 (containsTag((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Tags, "shield") &&
-                    containsTag(faceq.EquipmentItem.Tags, "shield")) ||
+                    containsTag(faceq.Tags, "shield")) ||
                 (containsTag((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Tags, "flag") &&
-                    containsTag(faceq.EquipmentItem.Tags, "flag")) ||
+                    containsTag(faceq.Tags, "flag")) ||
                 (containsTag((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Tags, "instrument") &&
-                    containsTag(faceq.EquipmentItem.Tags, "instrument"))
+                    containsTag(faceq.Tags, "instrument"))
             ) {
                 return false;
             }
             if (
                 (item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).GetKeyWordIDs().includes("kw_heavy") &&
-                (faceq.EquipmentItem.GetKeyWordIDs().includes("kw_heavy")) &&
+                (faceq.GetKeyWordIDs().includes("kw_heavy")) &&
                 (KeyWordList.filter((item) => item.GetID() == "kw_strong").length == 0)
             ) {
                 return false
@@ -1427,8 +1427,8 @@ class WarbandMember extends DynamicContextObject {
             this,
             [],
             {
-                melee: faceq.EquipmentItem.Stats["hands_melee"]? faceq.EquipmentItem.Stats["hands_melee"] : 0,
-                ranged: faceq.EquipmentItem.Stats["hands_ranged"]? faceq.EquipmentItem.Stats["hands_ranged"] : 0,
+                melee: faceq.Stats["hands_melee"]? faceq.Stats["hands_melee"] : 0,
+                ranged: faceq.Stats["hands_ranged"]? faceq.Stats["hands_ranged"] : 0,
                 special: 0
             },
             {
@@ -1451,19 +1451,19 @@ class WarbandMember extends DynamicContextObject {
             }
         }
 
-        if (MeleeShield && containsTag(faceq.EquipmentItem.Tags, "shield")) {
+        if (MeleeShield && containsTag(faceq.Tags, "shield")) {
             if (EquipHands.melee > 0) {
                 EquipHands.melee -= 1;
             }
         }
-        if (RangedShield && containsTag(faceq.EquipmentItem.Tags, "shield")) {
+        if (RangedShield && containsTag(faceq.Tags, "shield")) {
             if (EquipHands.ranged > 0) {
                 EquipHands.ranged -= 1;
             }
         }
 
         if (HasShield) {
-            if (faceq.EquipmentItem.GetKeyWordIDs().includes("kw_shieldcombo")) {
+            if (faceq.GetKeyWordIDs().includes("kw_shieldcombo")) {
                 if (EquipHands.melee > 0) {
                     EquipHands.melee -= 1;
                 }
@@ -1742,7 +1742,7 @@ class WarbandMember extends DynamicContextObject {
         }
 
         if (CanAdd) {
-            CanAdd = await this.EquipItemAvailableSpace(RefModel, CurrentHandsAvailable)
+            CanAdd = await this.EquipItemAvailableSpace(RefModel.EquipmentItem, CurrentHandsAvailable)
         }
 
         if (CanAdd) {
