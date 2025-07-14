@@ -45,7 +45,9 @@ const WbbEquipmentListItem: React.FC<EquipmentItemProps> = ({ item, fighter }) =
 
     return (
         <div className={`WbbEquipmentListItem ${playMode ? 'play-mode' : ''} ${printMode ? 'print-mode' : ''} `}>
-            <div className="equipment-name">{ItemValue.GetTrueName()}</div>
+            <div className="equipment-name">{ItemValue.GetTrueName()}
+                {(item.CustomInterface != undefined) ? item.CustomInterface.tags["is_custom"]? " (Manually Added)" : "" : ""}
+            </div>
 
             {(!playMode || printMode) &&
                 <div className="equipment-cost">

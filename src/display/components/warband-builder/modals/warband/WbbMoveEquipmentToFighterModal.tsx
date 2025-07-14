@@ -39,9 +39,13 @@ const WbbMoveEquipmentToFighterModal: React.FC<WbbEditSelectionProps> = ({
             if (contextItem.purchase != undefined && contextItem.equipment != undefined && warband != null) {
                 const FighterList = warband.GetFighters()
                 for (let i = 0; i < FighterList.length; i++) {
-                    const validtoadd = await FighterList[i].model.CanAddItem(contextItem.purchase.PurchaseInterface)
-                    if (validtoadd) {
-                        NewList.push(FighterList[i].purchase)
+                    if (contextItem.purchase.CustomInterface.tags["is_custom"]) {
+                            NewList.push(FighterList[i].purchase)
+                    } else {
+                        const validtoadd = await FighterList[i].model.CanAddItem(contextItem.purchase.PurchaseInterface)
+                        if (validtoadd) {
+                            NewList.push(FighterList[i].purchase)
+                        }
                     }
                 }
             }

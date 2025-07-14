@@ -1678,7 +1678,10 @@ class WarbandMember extends DynamicContextObject {
             return "Warband At Limit For " + item.equipment.MyEquipment.GetTrueName();
         }
 
-        const CanAddToThisModel = await this.CanAddItem(item.purchase.PurchaseInterface)
+        let CanAddToThisModel = true
+        if ((item.purchase.CustomInterface as IFactionEquipmentRelationship).tags['is_custom']) {
+            CanAddToThisModel = await this.CanAddItem(item.purchase.PurchaseInterface)
+        }
 
         if (!CanAddToThisModel) {
             return "This model cannot have another " + item.equipment.MyEquipment.GetTrueName();
@@ -1704,11 +1707,10 @@ class WarbandMember extends DynamicContextObject {
     }
 
     public async CanAddItem( model : string) {
+        console.log(model)
         if (this.IsUnRestricted) {
             return true;
         }
-        const ListOfOptions : FactionEquipmentRelationship[] = []
-
         const RefModel : FactionEquipmentRelationship = await EquipmentFactory.CreateNewFactionEquipment(model, null);
 
         const eventmon : EventRunner = new EventRunner();
@@ -1722,7 +1724,7 @@ class WarbandMember extends DynamicContextObject {
         )
 
         if (SkipEquip) {
-            return ListOfOptions;
+            return true;
         }
 
         const CurrentHandsAvailable : ModelHands = await this.GetModelHands();

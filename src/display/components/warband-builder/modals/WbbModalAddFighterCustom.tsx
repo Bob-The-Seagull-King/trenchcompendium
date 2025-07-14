@@ -20,7 +20,7 @@ interface WbbModalAddFighterTroopProps {
 const WbbModalAddFighterCustom: React.FC<WbbModalAddFighterTroopProps> = ({ show, onClose, onSubmit }) => {
     
     const [selectedId, setSelectedId] = useState<string | null>(null);
-    const [cost, setCost] = useState<number>(0);
+    const [cost, setCost] = useState<number>(1);
     const [costType, setCostType] = useState<0 | 1>(0); // 0 == ducats, 1 == glory
 
     const { warband } = useWarband();
