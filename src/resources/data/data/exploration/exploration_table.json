@@ -4,6 +4,7 @@
         "name": "Common Locations",
         "source": "core",
         "tags": {},
+        "rarity": 1,
         "contextdata": {}
     },
     {
@@ -11,6 +12,7 @@
         "name": "Rare Locations",
         "source": "core",
         "tags": {},
+        "rarity": 5,
         "contextdata": {}
     },
     {
@@ -18,6 +20,7 @@
         "name": "Legendary Locations",
         "source": "core",
         "tags": {},
+        "rarity": 10,
         "contextdata": {}
     }
 ]

@@ -3,7 +3,7 @@ import { StaticDataCache } from '../../classes/_high_level_controllers/StaticDat
 import { IKeyword, Keyword } from '../../classes/feature/glossary/Keyword';
 import { ContextObject, IContextObject } from '../../classes/contextevent/contextobject';
 import { Ability, IAbility } from '../../classes/feature/ability/Ability';
-import { ExplorationTable } from '../../classes/feature/exploration/ExplorationTable';
+import { ExplorationTable, IExplorationTable } from '../../classes/feature/exploration/ExplorationTable';
 import { ExplorationLocation, IExplorationLocation } from '../../classes/feature/exploration/ExplorationLocation';
 
 class ExplorationFactory {
@@ -13,7 +13,7 @@ class ExplorationFactory {
      * @param _ability The data in IPlayerAbility format describing the ability
      * @returns A newly created ability
      */
-    static async CreateExplorationTable(_rule: IContextObject, parent : ContextObject | null) {
+    static async CreateExplorationTable(_rule: IExplorationTable, parent : ContextObject | null) {
         const cache = StaticDataCache.getInstance();
         const isValid = (cache.CheckID('explorationtable', _rule.id))
         if (isValid == false) {
@@ -31,7 +31,7 @@ class ExplorationFactory {
         if (isValid == false) {
             return cache.ExplorationTableCache[_val];
         }
-        const ruledata = Requester.MakeRequest({searchtype: "id", searchparam: {type: "explorationtable", id: _val}}) as IContextObject
+        const ruledata = Requester.MakeRequest({searchtype: "id", searchparam: {type: "explorationtable", id: _val}}) as IExplorationTable
         const rulenew = await ExplorationFactory.CreateExplorationTable(ruledata, parent)
         return rulenew;
     }
@@ -56,7 +56,7 @@ class ExplorationFactory {
     }
 
     static async GetAllTables() {
-        const Locations = Requester.MakeRequest({searchtype: "file", searchparam: {type: "explorationtable"}}) as IContextObject[];
+        const Locations = Requester.MakeRequest({searchtype: "file", searchparam: {type: "explorationtable"}}) as IExplorationTable[];
         const LocationsList : ExplorationTable[] = []
         for (let i = 0; i < Locations.length; i++) {
             const skl = await ExplorationFactory.CreateExplorationTable(Locations[i], null);
