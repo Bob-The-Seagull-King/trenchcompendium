@@ -250,7 +250,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                 }
             </div>
 
-            <div className={'fighter-card-main-area'} key={keyvar}>
+            <div className={'fighter-card-main-area'}>
                 {fighter.GetModelSlug() != '' &&
                     <div className={'fighter-image-wrap full'}>
                         <SynodModelImage
