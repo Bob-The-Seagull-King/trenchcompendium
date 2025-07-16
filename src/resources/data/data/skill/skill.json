@@ -533,10 +533,11 @@
                 "ref_id" : "ot_sultansfavour",
                 "name" : "",
                 "description" : [],
+                "self_ask": true,
                 "category" : "contextobject",
                 "option_context" : {"basic_option_default":{}},
                 "dyna_only": true,
-                "parent_level": 5,
+                "parent_level": 7,
                 "question_name": "getModelRelationshipsForWarband"
             }
         ],

@@ -197,6 +197,7 @@ class StaticOptionContextObjectList extends StaticOption {
     public constructor(data : IStaticOptionContextObjectList, parent :  StaticOptionContextObject) {
         super(data, parent)
 
+
         this.QuestionName = data.question_name;
         this.ParentRefLevel = data.parent_level;
         if (data.self_ask) {
@@ -218,14 +219,17 @@ class StaticOptionContextObjectList extends StaticOption {
         let OptionContextList : ContextObject[] = []
 
         const RelevantContextObject : ContextObject | null = this.FindContextObject()
-
         if ((this.DynaForce == true && RelevantContextObject != null) || (this.DynaForce == false)) {
             if (RelevantContextObject != null) {
                 const Events : EventRunner = new EventRunner();
-                if (this.SelfAsk && this.MyStaticObject) {
-                    OptionContextList = await Events.runEvent(this.QuestionName, this.MyStaticObject, [RelevantContextObject, this], [], this.Question)
-                } else {
-                    OptionContextList = await Events.runEvent(this.QuestionName, RelevantContextObject, [RelevantContextObject, this], [], this.Question)
+                try {
+                    if (this.SelfAsk && this.MyStaticObject) {
+                        OptionContextList = await Events.runEvent(this.QuestionName, this.MyStaticObject, [RelevantContextObject, this], [], this.Question)
+                    } else {
+                        OptionContextList = await Events.runEvent(this.QuestionName, RelevantContextObject, [RelevantContextObject, this], [], this.Question)
+                    }
+                } catch(e) {
+                    undefined;
                 }
 
                 for (let i = 0; i < OptionContextList.length; i++) {

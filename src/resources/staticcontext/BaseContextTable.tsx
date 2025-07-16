@@ -33,6 +33,7 @@ import { Patron } from "../../classes/feature/skillgroup/Patron";
 import { Injury } from "../../classes/feature/ability/Injury";
 import { Fireteam } from "../../classes/feature/ability/Fireteam";
 import { WarbandConsumable } from "../../classes/saveitems/Warband/WarbandConsumable";
+import { DynamicOptionContextObject } from "../../classes/options/DynamicOptionContextObject";
 
 export const BaseContextCallTable : CallEventTable = {
     option_search_viable: {
@@ -138,6 +139,13 @@ export const BaseContextCallTable : CallEventTable = {
             return relayVar
         }
     
+    },
+    set_arms: {
+        event_priotity: 0,
+        async getModelHandsAvailable(this: EventRunner, eventSource : any, relayVar : ModelHands,  trackVal : MemberAndWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            const ContextHands = context_func as ModelHands            
+            return ContextHands;
+        }
     },
     find_hands : {
         event_priotity: 0,
@@ -2257,24 +2265,24 @@ export const BaseContextCallTable : CallEventTable = {
             return relayVar;
         }
     },
+    add_extra_equipment: {
+        event_priotity: 0,
+        async getEquipmentLimitTrue(this: EventRunner, eventSource : any, relayVar: number, trackVal : UserWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, ref_equip : FactionEquipmentRelationship) {
+            const ContextObj = (context_main as DynamicOptionContextObject)
+
+            for (let i = 0; i < ContextObj.Selections.length; i++) {
+                if (ContextObj.Selections[i].SelectedChoice != null) {
+                    if (ContextObj.Selections[i].SelectedChoice?.id == ref_equip.ID) {
+                        relayVar += context_func["count"]
+                    }
+                }
+            }
+            return relayVar;
+        }
+    },
     warband_general_hook: {
         event_priotity: 0,       
         async getEquipmentRelationshipsForWarband(this: EventRunner, eventSource : any, relayVar : FactionEquipmentRelationship[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : UserWarband, staticself : StaticOptionContextObjectList) {
-            
-            console.log("STARTED")
-            console.log(eventSource)
-            console.log(relayVar)
-            console.log(context_func)
-            console.log(context_static)
-            console.log(context_main)
-            console.log(sourceband)
-            console.log(staticself)
-            console.log("ENDED")
-            if (staticself.MyStaticObject != null) {
-                if (staticself.MyStaticObject == context_static ) {
-                    return relayVar;
-                }
-            }
             const FacCheck = sourceband.Faction.MyFaction;
             let BaseRels : FactionEquipmentRelationship[] = []
             
@@ -2290,24 +2298,17 @@ export const BaseContextCallTable : CallEventTable = {
                 BaseRels,
                 null
             )
-
             return BaseRels.filter((item) => item.Limit != 0);
             
         },
         async getModelRelationshipsForWarband(this: EventRunner, eventSource : any, relayVar : FactionModelRelationship[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : UserWarband, staticself : StaticOptionContextObjectList) {
-            if (staticself.MyStaticObject != null) {
-                if (staticself.MyStaticObject == context_static ) {
-                    return relayVar;
-                }
-            }
-
             const FacCheck = sourceband.Faction.MyFaction;
             let BaseRels : FactionModelRelationship[] = []
             
             if (FacCheck != undefined) {
                 BaseRels = ((FacCheck.SelfDynamicProperty).OptionChoice as Faction).Models
             }
-
+            
             const eventmon : EventRunner = new EventRunner();
             BaseRels = await eventmon.runEvent(
                 "getAllFactionModelRelationships",

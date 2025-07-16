@@ -2663,7 +2663,16 @@
         "source": "core",
         "tags": {},
         "name": "Ducal Winged Armour",
-        "contextdata": {      
+        "contextdata": {     
+                    
+            "faction_eq_restriction": {
+                "permitted": [
+                    {
+                        "res_type": "equipment",
+                        "value": "eq_knighthood"
+                    }
+                ]
+            } 
         },
         "faction_id": ["fc_newantioch","fc_newantioch_fv_expeditionaryforcedofabyssinia","fc_newantioch_fv_kingdomofalbaassaultdetatchment","fc_newantioch_fc_stortruppenofthefreestateofprussia","fc_newantioch_fc_eirerangers","fc_newantioch_fv_papalstatesinterventionforce"],
         "equipment_id": "eq_ducalwingedarmour",

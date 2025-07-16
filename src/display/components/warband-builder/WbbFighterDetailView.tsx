@@ -768,7 +768,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
 
             {/* Abilities */}
             {(!playMode && abilities.length > 0) &&
-                <div className={'fighter-card-collapse-wrap'} key={keyvar}>
+                <div className={'fighter-card-collapse-wrap'}>
                     <WbbFighterCollapse title="Abilities">
                         {abilities.map((ability, index) => (
                             <WbbAbilityDisplay key={index} ability={ability}/>

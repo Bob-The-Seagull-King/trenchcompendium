@@ -325,6 +325,14 @@ class UserWarband extends DynamicContextObject {
             }
         } 
 
+        for (let i = 0; i < this.Models.length; i++) {
+            const static_packages : ContextPackage[] = await (this.Models[i].HeldObject as WarbandMember).GrabWarbandubPackages(event_id, source_obj, arrs_extra);
+            for (let j = 0; j < static_packages.length; j++) {
+                static_packages[j].callpath.push("UserWarband")
+                subpackages.push(static_packages[j])
+            }
+        }
+
         return subpackages; 
     }
 
@@ -757,7 +765,7 @@ class UserWarband extends DynamicContextObject {
             costtype : costtype,
             limit : 0
         }
-        const FacEquip : FactionEquipmentRelationship = await EquipmentFactory.CreateFactionEquipment(FactionequipmentInterface, this)
+        const FacEquip : FactionEquipmentRelationship = await EquipmentFactory.CreateFactionEquipment(FactionequipmentInterface, this, true)
         await this.AddStash(FacEquip)
     }
     
@@ -797,7 +805,7 @@ class UserWarband extends DynamicContextObject {
             return "Warband At Limit For " + item.equipment.MyEquipment.GetTrueName();
         }
 
-        const Relationship : FactionEquipmentRelationship = await EquipmentFactory.CreateFactionEquipment(item.purchase.CustomInterface as IFactionEquipmentRelationship, this)
+        const Relationship : FactionEquipmentRelationship = await EquipmentFactory.CreateFactionEquipment(item.purchase.CustomInterface as IFactionEquipmentRelationship, this, true)
         const Equipment : WarbandEquipment = await WarbandFactory.BuildWarbandEquipmentFromPurchase(Relationship, this);
         const NewPurchase : WarbandPurchase = new WarbandPurchase({
             cost_value : Relationship.Cost,
@@ -1387,7 +1395,14 @@ class UserWarband extends DynamicContextObject {
             maxcount = await eventmon.runEvent(
                 "getEquipmentLimitTrue",
                 BaseRels[i],
-                [],
+                [BaseRels[i]],
+                maxcount,
+                this
+            )
+            maxcount = await eventmon.runEvent(
+                "getEquipmentLimitTrue",
+                this,
+                [BaseRels[i]],
                 maxcount,
                 this
             )

@@ -10,12 +10,17 @@ class StaticOptionFactory {
      * @returns A newly created object
      */
     static CreateStaticOption(_option: IStaticOption, _parent : StaticOptionContextObject) {
+        
+
         if (_option.category == "type") {
             const option = new StaticOptionTypeList(_option as IStaticOptionTypeList, _parent)
             return option;
         }
 
         if (_option.category == "contextobject") {
+            
+        
+
             const option = new StaticOptionContextObjectList(_option as IStaticOptionContextObjectList, _parent)
             return option;
         }

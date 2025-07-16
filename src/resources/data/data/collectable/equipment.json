@@ -2751,7 +2751,17 @@
             "bonus_ability": {
                 "action_type": ["dash"]
             },
-            "restrict_other_items": { "shield": true }
+            "restrict_other_items": { "shield": true },
+            "add_stat_option": {
+                "type": "base",
+                "direction": "increase",
+                "option": 
+                    [
+                        {
+                            "base": [40]
+                        }
+                    ]
+            }
         },
         "description": [       
             {
@@ -5208,6 +5218,7 @@
                 "category" : "contextobject",
                 "option_context" : {"basic_option_default":{}},
                 "dyna_only": true,
+                "self_ask": true, 
                 "parent_level": 7,
                 "question_name": "getEquipmentRelationshipsForWarband"
             }],
@@ -5365,15 +5376,6 @@
             "upgrade_stat": {"upgrades": [{"stat": "armour", "value": -3}]},
             "bonus_ability": {
                 "action_type": ["dash"]
-            },
-            "permission_check": {
-                "requirements": [
-                    {
-                        "type": "equipment",
-                        "value": "eq_knighthood",
-                        "truth": true
-                    }
-                ]
             }
         },
         "description": [       
@@ -5554,7 +5556,7 @@
         "stats": {
         },
         "contextdata": {
-            "set_arms": {"ranged": 0, "melee": 0}
+            "set_arms": {"ranged": 0, "melee": 0, "special": 0}
         },
         "description": [            
             {
@@ -5621,8 +5623,8 @@
             "bonus_ability": {
                 "action_type": ["dash","attack_melee"]
             },
-            "cancel_item": {
-                "ability": ["ab_oraclebeastcloak"]
+            "equipment_remove_ability": {
+                "action_id": ["ab_oraclebeastcloak"]
             }
         },
         "description": [       

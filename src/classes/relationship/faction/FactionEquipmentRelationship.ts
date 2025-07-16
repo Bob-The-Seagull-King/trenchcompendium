@@ -40,8 +40,8 @@ class FactionEquipmentRelationship extends StaticContextObject {
         this.Limit = data.limit;
     }
 
-    public async MakeItem(id : string) {
-        this.EquipmentItem = await EquipmentFactory.CreateNewEquipment(id, null);
+    public async MakeItem(id : string, skipcheck = false) {
+        this.EquipmentItem = await EquipmentFactory.CreateNewEquipment(id, null, skipcheck);
     }
 
     public async GetFactions(data : string[]) {

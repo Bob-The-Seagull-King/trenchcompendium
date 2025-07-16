@@ -447,6 +447,33 @@ class WarbandMember extends DynamicContextObject {
 
         return subpackages; 
     }
+    /**
+     * Grabs the packages from any sub-objects, based
+     * on class implementation.
+     */
+    public async GrabWarbandubPackages(event_id : string, source_obj : ContextObject, arrs_extra : any[]) : Promise<ContextPackage[]> { 
+        const subpackages : ContextPackage[] = []   
+        
+        const newSkills = await this.GetWarbandSkills()
+        for (let i = 0; i < newSkills.length; i++) {
+            const static_packages : ContextPackage[] = await newSkills[i].GrabContextPackages(event_id, source_obj, arrs_extra);
+            for (let j = 0; j < static_packages.length; j++) {
+                static_packages[j].callpath.push("WarbandMember")
+                subpackages.push(static_packages[j])
+            }
+        } 
+
+        const newEquipment = await this.GetWarbandEquipment()
+        for (let i = 0; i < newEquipment.length; i++) {
+            const static_packages : ContextPackage[] = await (newEquipment[i].HeldObject as Equipment).GrabContextPackages(event_id, source_obj, arrs_extra);
+            for (let j = 0; j < static_packages.length; j++) {
+                static_packages[j].callpath.push("WarbandMember")
+                subpackages.push(static_packages[j])
+            }
+        }
+
+        return subpackages; 
+    }
 
     public IsMercenary(): boolean {
         if (this.CurModel.Stats.mercenary) {
@@ -1640,7 +1667,6 @@ class WarbandMember extends DynamicContextObject {
             modelpurch : false
         }, this, Equipment);
         this.Equipment.push(NewPurchase);
-        console.log(NewPurchase)
     }
 
     public async GetAllEquipForShow() {
@@ -1717,7 +1743,7 @@ class WarbandMember extends DynamicContextObject {
             return "This model cannot have another " + item.equipment.MyEquipment.GetTrueName();
         }
         
-        const Relationship : FactionEquipmentRelationship = await EquipmentFactory.CreateFactionEquipment(item.purchase.CustomInterface as IFactionEquipmentRelationship, this)
+        const Relationship : FactionEquipmentRelationship = await EquipmentFactory.CreateFactionEquipment(item.purchase.CustomInterface as IFactionEquipmentRelationship, this, true)
         const Equipment : WarbandEquipment = await WarbandFactory.BuildWarbandEquipmentFromPurchase(Relationship, this);
         const NewPurchase : WarbandPurchase = new WarbandPurchase({
             cost_value : Relationship.Cost,
