@@ -22,6 +22,7 @@ import { returnDescription } from '../../../utility/util';
 import KeywordDisplay from '../features/glossary/KeywordDisplay';
 import GenericHover from '../generics/GenericHover';
 import { EventRunner } from '../../../classes/contextevent/contexteventhandler';
+import WbbOptionSelect from './modals/warband/WbbOptionSelect';
 
 interface EquipmentItemProps {
     item: WarbandPurchase
@@ -181,8 +182,21 @@ const WbbEquipmentListItem: React.FC<EquipmentItemProps> = ({ item, fighter }) =
                             </div>
                         </div>
                     }
+                    
+                    
                 </div>
             }
+            {(item.HeldObject as WarbandEquipment).MyEquipment.SelfDynamicProperty.Selections.length > 0 &&
+                        <span className={'title-choice'}>
+                            {(item.HeldObject as WarbandEquipment).MyEquipment.SelfDynamicProperty.Selections.map((option) => 
+                                <WbbOptionSelect 
+                                    property={(item.HeldObject as WarbandEquipment).MyEquipment}
+                                    key={(item.HeldObject as WarbandEquipment).MyEquipment.SelfDynamicProperty.Selections.indexOf(option)}
+                                    choice={option}
+                                />
+                            )}                        
+                        </span>
+                    }
         </div>
     );
 };

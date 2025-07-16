@@ -2258,7 +2258,42 @@ export const BaseContextCallTable : CallEventTable = {
         }
     },
     warband_general_hook: {
-        event_priotity: 0,        
+        event_priotity: 0,       
+        async getEquipmentRelationshipsForWarband(this: EventRunner, eventSource : any, relayVar : FactionEquipmentRelationship[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : UserWarband, staticself : StaticOptionContextObjectList) {
+            
+            console.log("STARTED")
+            console.log(eventSource)
+            console.log(relayVar)
+            console.log(context_func)
+            console.log(context_static)
+            console.log(context_main)
+            console.log(sourceband)
+            console.log(staticself)
+            console.log("ENDED")
+            if (staticself.MyStaticObject != null) {
+                if (staticself.MyStaticObject == context_static ) {
+                    return relayVar;
+                }
+            }
+            const FacCheck = sourceband.Faction.MyFaction;
+            let BaseRels : FactionEquipmentRelationship[] = []
+            
+            if (FacCheck != undefined) {
+                BaseRels = ((FacCheck.SelfDynamicProperty).OptionChoice as Faction).EquipmentItems
+            }
+
+            const eventmon : EventRunner = new EventRunner();
+            BaseRels = await eventmon.runEvent(
+                "getAllFactionEquipmentRelationships",
+                sourceband,
+                [],
+                BaseRels,
+                null
+            )
+
+            return BaseRels.filter((item) => item.Limit != 0);
+            
+        },
         async getModelRelationshipsForWarband(this: EventRunner, eventSource : any, relayVar : FactionModelRelationship[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : UserWarband, staticself : StaticOptionContextObjectList) {
             if (staticself.MyStaticObject != null) {
                 if (staticself.MyStaticObject == context_static ) {
@@ -2364,6 +2399,9 @@ export const BaseContextCallTable : CallEventTable = {
     add_onto_warband: {
         event_priotity: 0,
         async showSkillOnWarband(this: EventRunner, eventSource : any, relayVar : boolean, trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, member : WarbandMember) {
+            return true;
+        },
+        async showEquipmentOnWarband(this: EventRunner, eventSource : any, relayVar : boolean, trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, member : WarbandMember) {
             return true;
         }
     },

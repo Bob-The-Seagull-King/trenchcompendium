@@ -589,6 +589,26 @@ class WarbandMember extends DynamicContextObject {
         return SkillList;
     }
 
+    public async GetWarbandEquipment() {
+        const SkillList : WarbandPurchase[] = [];
+        const Events : EventRunner = new EventRunner();
+
+        for (let i = 0; i < this.Equipment.length; i++) {
+            const ShowWarband = await Events.runEvent(
+                "showEquipmentOnWarband",
+                this.Equipment[i].HeldObject as WarbandEquipment,
+                [],
+                false,
+                this
+            )
+
+            if (ShowWarband) {
+                SkillList.push(this.Equipment[i])
+            }
+        }
+        return SkillList;
+    }
+
     /**
      * Get the name of the Fighter
      * - i.e. "Steve the fearless"
@@ -1620,6 +1640,7 @@ class WarbandMember extends DynamicContextObject {
             modelpurch : false
         }, this, Equipment);
         this.Equipment.push(NewPurchase);
+        console.log(NewPurchase)
     }
 
     public async GetAllEquipForShow() {

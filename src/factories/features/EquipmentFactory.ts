@@ -15,10 +15,10 @@ class EquipmentFactory {
      * @param _ability The data in IPlayerAbility format describing the ability
      * @returns A newly created ability
      */
-    static async CreateEquipment(_rule: IEquipment, parent : ContextObject | null) {
+    static async CreateEquipment(_rule: IEquipment, parent : ContextObject | null, skipcheck = false) {
         const cache = StaticDataCache.getInstance();
         const isValid = (cache.CheckID('equipment', _rule.id))
-        if (isValid == false) {
+        if (isValid == false && !skipcheck) {
             return cache.EquipmentCache[_rule.id];
         }
         const rule = new Equipment(_rule, parent)
@@ -39,10 +39,10 @@ class EquipmentFactory {
         return ModelList;
     }
 
-    static async CreateNewEquipment(_val : string, parent : ContextObject | null) {
+    static async CreateNewEquipment(_val : string, parent : ContextObject | null, skipcheck = false) {
         const cache = StaticDataCache.getInstance();
         const isValid = (cache.CheckID('equipment', _val))
-        if (isValid == false) {
+        if (isValid == false && !skipcheck) {
             return cache.EquipmentCache[_val];
         }
         const ruledata = Requester.MakeRequest({searchtype: "id", searchparam: {type: "equipment", id: _val}}) as IEquipment

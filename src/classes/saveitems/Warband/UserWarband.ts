@@ -661,6 +661,11 @@ class UserWarband extends DynamicContextObject {
                     FighterItems[j].MyContext = this;
                     this.Modifiers.push(FighterItems[j])
                 }
+                const EquipmentItems : WarbandPurchase[] = await fighter.model.GetWarbandEquipment();
+                for (let j = 0; j < EquipmentItems.length; j++) {
+                    EquipmentItems[j].HeldObject.MyContext = this;
+                    this.Equipment.push(EquipmentItems[j])
+                }
                 this.Models.splice(i, 1);
                 break;
             }
