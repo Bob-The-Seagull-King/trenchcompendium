@@ -243,7 +243,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
 
                 {!playMode &&
                     <WbbContextualPopover
-                        id={`fighter-detail-`} // @TODO: add unique fighter index identifier to distinguish fighter with the same model / name
+                        id={`fighter-detail-`+fighter.ID} 
                         type="fighter"
                         item={fighter}
                     />
