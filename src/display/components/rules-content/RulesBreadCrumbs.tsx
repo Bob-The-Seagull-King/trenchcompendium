@@ -25,6 +25,9 @@ const RulesBreadCrumbs: React.FC = () => {
             const breaditems : breadcrumbitem[] = []
             let sumurl = ""
             for (let i = 1; i < splits.length; i++) {
+                if (splits[i].length === 0) {
+                    continue;
+                }
                 sumurl += "/"
                 sumurl += splits[i]
                 let titlenm = BreadcrumbPresentable(splits[i]);
@@ -53,9 +56,8 @@ const RulesBreadCrumbs: React.FC = () => {
                         .slice() // clone array
                         .reverse() // show root first
                         .map((crumb, index, arr) => (
-                            <>
+                            <React.Fragment key={crumb.url + "_" + index.toString() + "_" + crumb.title}>
                                 <CustomNavLink
-                                    key={crumb.url}
                                     link={crumb.url}
                                     runfunc={() => {
                                         navigate(`${crumb.url}`)
@@ -66,7 +68,7 @@ const RulesBreadCrumbs: React.FC = () => {
                                 </CustomNavLink>
 
                                 {index < arr.length - 1 && <span className="breadcrumb-separator"> / </span>}
-                            </>
+                            </React.Fragment>
                     ))}
                 </nav>
             </div>
