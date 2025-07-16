@@ -876,6 +876,28 @@ export const BaseContextCallTable : CallEventTable = {
             return relayVar;
         }
     },
+    unique : {
+        event_priotity: 0,
+        async cantSwapItemFromModel(this: EventRunner, eventSource : any, relayVar: boolean, trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            return true;
+        }
+    },
+    unremovable: {
+        event_priotity: 0,
+        async canRemoveItemFromModel(this: EventRunner, eventSource : any, relayVar: boolean, trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            return false;
+        }
+    },
+    add_scars: {
+        event_priotity: 0,
+        async getMaximumScars(this: EventRunner, eventSource : any, relayVar: number, trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            
+            if (context_func["value"]) {
+                relayVar += context_func["value"]
+            }
+            return relayVar;
+        }
+    },
     get_exploration_skills: {
         event_priotity: 0,
         async getExplorationSkills(this: EventRunner, eventSource : any, relayVar : WarbandProperty[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
@@ -1207,6 +1229,16 @@ export const BaseContextCallTable : CallEventTable = {
             return relayVar;
         }
 
+    },
+    equipment_remove_ability: {
+        event_priotity: 1,
+        async getWarbandMemberAbilities(this: EventRunner, eventSource : any, relayVar : Ability[], trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            let List : Ability[] = []
+            if (context_func['action_id'] ) {
+                List = relayVar.filter((item) => (context_func['action_id'].includes(item.ID) == false))
+            }
+            return List;
+        }
     },
     true_add_to_model: {
         event_priotity: 0,
@@ -2307,6 +2339,7 @@ export const BaseContextCallTable : CallEventTable = {
             return relayVar;
         }
     },
+    
     keyword_mod: {
         event_priotity: 1,
         async getContextuallyRelevantKeywordsByID(this: EventRunner, eventSource : any, relayVar : string[], trackVal : Model, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {

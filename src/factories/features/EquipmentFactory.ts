@@ -97,7 +97,9 @@ class EquipmentFactory {
             return cache.FactionEquipmentCache[_val];
         }
         const ruledata = Requester.MakeRequest({searchtype: "id", searchparam: {type: "factionequipmentrelationship", id: _val}}) as IFactionEquipmentRelationship
-        
+        if (ruledata.id == undefined) {
+            return null;
+        }
         const rulenew = await EquipmentFactory.CreateFactionEquipment(ruledata, parent)
         return rulenew;
     }

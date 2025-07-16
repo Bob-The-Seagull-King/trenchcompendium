@@ -7,13 +7,11 @@
         "category": "equipment",
         "distance": null,
         "stats": {
-            "hands_melee": 2,
+            "hands_melee": 0,
             "melee": true
         },
         "contextdata": {
-            "get_weapon": {}, 
-            "find_hands": {"required": false},
-            "custom_attack_type": {"range": 0}},
+            "get_weapon": {}},
         "description": [            
             {
                 "tags": {"desc_type" : "paragraph"},
@@ -101,14 +99,6 @@
                     {
                         "check_type": "tag",
                         "value": "eq_alchemicalammunition"
-                    }
-                ]
-            },
-            "ranged_bonus_conditional" : { 
-                "condition" : [
-                    {
-                        "bonus_type": "dice",
-                        "value": 1
                     }
                 ]
             }
@@ -263,8 +253,7 @@
             "hands_ranged": 1
         },
         "contextdata": {
-            "upgrade_stat": {"upgrades": [{"stat": "armour", "value": -1}]},
-            "find_hands": { "required": true, "both_kits": true }
+            "upgrade_stat": {"upgrades": [{"stat": "armour", "value": -1}]}
         },
         "description": [       
             {
@@ -326,8 +315,7 @@
         },
         "contextdata": {
             "get_weapon": {},
-            "off_hand_functional": {},
-            "used_special_characteristic": {"character": "ranged"}
+            "off_hand_functional": {}
         },
         "description": [            
             {
@@ -357,8 +345,7 @@
             "melee": true
         },
         "contextdata": {
-            "get_weapon": {},
-            "injury_bonus": {"bonuses": [{"type": "dice", "value": 1}]}
+            "get_weapon": {}
         },
         "description": [    
             {
@@ -391,8 +378,7 @@
             "melee": true
         },
         "contextdata": {
-            "get_weapon": {},
-            "injury_bonus": {"bonuses": [{"type": "dice", "value": 1}]}
+            "get_weapon": {}
         },
         "description": [    
             {
@@ -425,8 +411,8 @@
             "ranged": true
         },
         "contextdata": {
-            "get_weapon": {},
-            "injury_bonus": {"bonuses": [{"type": "dice", "value": 1}]}},
+            "get_weapon": {}
+            },
         "description": [ 
             {
                 "tags": {"desc_type" : "paragraph"},
@@ -458,8 +444,7 @@
             "ranged": true
         },
         "contextdata": {
-            "get_weapon": {},
-            "injury_bonus": {"bonuses": [{"type": "dice", "value": -1}]}},
+            "get_weapon": {}},
         "description": [ 
             {
                 "tags": {"desc_type" : "paragraph"},
@@ -491,9 +476,7 @@
             "ranged": true
         },
         "contextdata": {
-            "get_weapon": {},
-            "injury_bonus": {"bonuses": [{"type": "dice", "value": -1, "condition_type": "range", "condition_value": "long"}]},
-            "hit_bonus": {"bonuses": [{"type": "dice", "value": 1, "condition_type": "range", "condition_value": "long"},{"type": "dice", "value": 1}]}},
+            "get_weapon": {}},
         "description": [ 
             {
                 "tags": {"desc_type" : "paragraph"},
@@ -551,8 +534,7 @@
             "ranged": true
         },
         "contextdata": {
-            "get_weapon": {},
-            "hit_bonus": {"bonuses": [{"type": "dice", "value": 1}]}},
+            "get_weapon": {}},
         "description": [ 
             {
                 "tags": {"desc_type" : "paragraph"},
@@ -682,9 +664,7 @@
         },
         "contextdata": {
             "get_weapon": {},
-            "injury_bonus": {"bonuses": [{"type": "dice", "value": -1, "condition_type": "range", "condition_value": "long"}]},
-            "ignore_armour": {},
-            "auto_hit": {}},
+            "ignore_armour": {}},
         "description": [ 
             {
                 "tags": {"desc_type" : "paragraph"},
@@ -718,8 +698,7 @@
             "ranged": true
         },
         "contextdata": {
-            "get_weapon": {},
-            "added_dice": {"value": 1}},
+            "get_weapon": {}},
         "description": [ 
             {
                 "tags": {"desc_type" : "paragraph"},
@@ -792,8 +771,7 @@
             "melee": true
         },
         "contextdata": {
-            "get_weapon": {},
-            "hit_bonus": {"bonuses": [{"type": "dice", "value": -1}]}
+            "get_weapon": {}
         },
         "description": [   
             {
@@ -886,8 +864,7 @@
             "melee": true
         },
         "contextdata": {
-            "get_weapon": {},
-            "injury_bonus": {"bonuses": [{"type": "flat", "value": 1}]}
+            "get_weapon": {}
         },
         "description": [   
         ],
@@ -947,8 +924,7 @@
             "melee": true
         },
         "contextdata": {
-            "get_weapon": {},
-            "injury_bonus": {"bonuses": [{"type": "flat", "value": 2}]}
+            "get_weapon": {}
         },
         "description": [ 
             {
@@ -978,8 +954,7 @@
             "melee": true
         },
         "contextdata": {
-            "get_weapon": {},
-            "injury_bonus": {"bonuses": [{"type": "flat", "value": 1}]}
+            "get_weapon": {}
         },
         "description": [ 
             {
@@ -1104,10 +1079,10 @@
         "category": "equipment",
         "distance": null,
         "stats": {
-            "hands_melee": 2,
+            "hands_melee": 0,
             "melee": true
         },
-        "contextdata": {"get_weapon": {}, "find_hands": {"required": false}},
+        "contextdata": {"get_weapon": {}},
         "description": [            
             {
                 "tags": {"desc_type" : "paragraph"},
@@ -1382,7 +1357,6 @@
         },
         "contextdata": {
             "get_weapon": {},
-            "injury_bonus": {"bonuses": [{"type": "flat", "value": 1}]},
             "extra_attack": {"value": 2}
         },
         "description": [ 
@@ -1520,8 +1494,7 @@
             "melee": true
         },
         "contextdata": {
-            "get_weapon": {},
-            "injury_bonus": {"bonuses": [{"type": "flat", "value": 1}]}
+            "get_weapon": {}
         },
         "description": [            
             {
@@ -1552,7 +1525,6 @@
         },
         "contextdata": {
             "get_weapon": {"ignore": true},
-            "injury_bonus": {"bonuses": [{"type": "dice", "value": 1}]},
             "ignore_armour": {}
         },
         "description": [            
@@ -1586,8 +1558,7 @@
             "ranged": true
         },
         "contextdata": {
-            "get_weapon": {},
-            "hit_bonus": {"bonuses": [{"type": "dice", "value": 1}]}},
+            "get_weapon": {}},
         "description": [ 
             {
                 "tags": {"desc_type" : "paragraph"},
@@ -1619,7 +1590,7 @@
         "contextdata": {
             "upgrade_stat": {"upgrades": [{"stat": "armour", "value": -2}]},
             "super_armour": {},
-            "unremovable": {},
+            "unique": {},
             "add_scars": {"value": 1}
         },
         "description": [       
@@ -1713,7 +1684,6 @@
         },
         "contextdata": {
             "get_weapon": {},
-            "injury_bonus": {"bonuses": [{"type": "dice", "value": 2}]},
             "ignore_armour": {},
             "stationary": {}
         },
@@ -1753,7 +1723,6 @@
         },
         "contextdata": {
             "upgrade_stat": {"upgrades": [{"stat": "armour", "value": -1}]},
-            "find_hands": { "required": true, "both_kits": true },
             "ignore_element": {"element": ["kw_fire"]}
         },
         "description": [       
@@ -1853,8 +1822,7 @@
             "ranged": true
         },
         "contextdata": {
-            "get_weapon": {},
-            "injury_bonus": {"bonuses": [{"type": "dice", "value": -1}]}},
+            "get_weapon": {}},
         "description": [ 
             {
                 "tags": {"desc_type" : "paragraph"},
@@ -1886,9 +1854,7 @@
             "ranged": true
         },
         "contextdata": {
-            "get_weapon": {},
-            "injury_bonus": {"bonuses": [{"type": "dice", "value": 2, "condition_type": "range", "condition_value": "short"}]},
-            "hit_bonus": {"bonuses": [{"type": "dice", "value": 1}]}},
+            "get_weapon": {}},
         "description": [ 
             {
                 "tags": {"desc_type" : "paragraph"},
@@ -1921,7 +1887,6 @@
             "hands_ranged": 1
         },
         "contextdata": {
-            "find_hands": { "required": true, "both_kits": true }
         },
         "description": [       
             {
@@ -1987,7 +1952,7 @@
         "description": [            
             {
                 "tags": {"desc_type" : "paragraph"},
-                "content": "Sultanate Sapper Corps are experts at using explosive charges to overcome defended enemy positions such as walls, bunkers, casemates and pillboxes. Experts at timing the fuses of their bombs, many a battle has been turned thanks to a well-timed blast.",
+                "content": "After deployment, but before the battle starts, select one piece of scenery that is not a Scenario Objective that grants Victory Points, in contact with any models, nor inside the enemy Deployment Zone. Declare the existence of the Charges and write on a piece of paper which scenery piece it is planted on. The scenery piece can be no bigger than 8” x 8” (an 8” section of trench, a wall, a tree, a building etc). The Sappers have placed explosive charges here before the battle. Whenever you Activate one of your models, you can declare you are detonating the Charges by revealing the name of the scenery piece. For each model that is touching or on top of the scenery piece, roll on the Injury Chart to see what happens to it. The Charge has the Keyword SHRAPNEL. After this, the scenery piece is removed from the game. Models on top of the scenery piece fall (as per Falling rules) and might need to roll on the Injury Chart if they fell more than 2”.",
                 "glossary": [
                     {"val": "SHRAPNEL", "id": "kw_shrapnel"}
                 ]
@@ -2014,7 +1979,8 @@
             
         },
         "contextdata": {
-            "warband_wide": {}
+            "warband_wide": {},
+            "stationary": {}
         },
         "description": [            
             {
@@ -2053,8 +2019,6 @@
         "contextdata": {
             "get_weapon": {},
             "off_hand_functional": {},
-            "used_special_characteristic": {"character": "ranged"},
-            "injury_bonus": {"bonuses": [{"type": "dice", "value": -1}]},
             "extra_attack": {"value": 2}
         },
         "description": [             
@@ -2172,9 +2136,7 @@
             "ranged": true
         },
         "contextdata": {
-            "get_weapon": {},
-            "injury_bonus": {"bonuses": [{"type": "dice", "value": -1, "condition_type": "range", "condition_value": "long"}]},
-            "hit_bonus": {"bonuses": [{"type": "dice", "value": 1, "condition_type": "range", "condition_value": "long"},{"type": "dice", "value": 1}]}},
+            "get_weapon": {}},
         "description": [ 
             {
                 "tags": {"desc_type" : "paragraph"},
@@ -2243,9 +2205,7 @@
         },
         "contextdata": {
             "get_weapon": {},
-            "off_hand_functional": {},
-            "used_special_characteristic": {"character": "ranged"},
-            "hit_bonus": {"bonuses": [{"type": "dice", "value": 1, "condition_type": "cover"}]}
+            "off_hand_functional": {}
         },
         "description": [            
             {
@@ -2278,7 +2238,6 @@
         },
         "contextdata": {
             "get_weapon": {},
-            "injury_bonus": {"bonuses": [{"type": "dice", "value": -1}]},
             "ignore_armour": {},
             "ignore_cover": {}},
         "description": [ 
@@ -2383,7 +2342,6 @@
         },
         "contextdata": {
             "get_weapon": {},
-            "injury_bonus": {"bonuses": [{"type": "dice", "value": 1}]},
             "ignore_armour": {},
             "activated": {}},
         "description": [ 
@@ -2419,7 +2377,6 @@
         },
         "contextdata": {
             "get_weapon": {},
-            "injury_bonus": {"bonuses": [{"type": "dice", "value": 1}]},
             "ignore_armour": {}},
         "description": [  
             {
@@ -2488,9 +2445,7 @@
             "melee": true
         },
         "contextdata": {
-            "get_weapon": {},
-            "hit_bonus": {"bonuses": [{"type": "dice", "value": -1}]},
-            "injury_bonus": {"bonuses": [{"type": "dice", "value": -1}]}
+            "get_weapon": {}
         },
         "description": [   
             {
@@ -2523,8 +2478,7 @@
             "melee": true
         },
         "contextdata": {
-            "get_weapon": {},
-            "injury_bonus": {"bonuses": [{"type": "flat", "value": 2}]}
+            "get_weapon": {}
         },
         "description": [   
             {
@@ -2591,8 +2545,7 @@
             "melee": true
         },
         "contextdata": {
-            "get_weapon": {},
-            "injury_bonus": {"bonuses": [{"type": "dice", "value": 1}]}
+            "get_weapon": {}
         },
         "description": [   
             {
@@ -2663,8 +2616,7 @@
         },
         "contextdata": {
             "get_weapon": {},
-            "ignore_armour": {},
-            "injury_bonus": {"bonuses": [{"type": "dice", "value": 1}]}
+            "ignore_armour": {}
         },
         "description": [   
             {
@@ -2698,8 +2650,7 @@
             "melee": true
         },
         "contextdata": {
-            "get_weapon": {},
-            "hit_bonus": {"bonuses": [{"type": "dice", "value": 1, "condition_type": "off-hand", "condition_value": false}]}
+            "get_weapon": {}
         },
         "description": [       
             {
@@ -2733,9 +2684,7 @@
         },
         "contextdata": {
             "get_weapon": {},
-            "ignore_armour": {"condition": [
-                {"type": "enemy", "value": "Is Down"}
-                ]}
+            "ignore_armour": {}
         },
         "description": [    
             {
@@ -2768,7 +2717,6 @@
             "hands_ranged": 1
         },
         "contextdata": {
-            "find_hands": { "required": true, "both_kits": true }
         },
         "description": [       
             {
@@ -2840,7 +2788,6 @@
         },
         "contextdata": {
             "upgrade_stat": {"upgrades": [{"stat": "armour", "value": -1}]},
-            "find_hands": { "required": true, "both_kits": true },
             "super_armour": {}
         },
         "description": [       
@@ -3070,8 +3017,7 @@
         "stats": {
         },
         "contextdata": {
-            "keyword_ignore": {"value": "kw_fear"},
-            "self_defense_injury" : {"type": "dice", "val": -1}
+            "keyword_ignore": {"value": "kw_fear"}
         },
         "description": [       
             {
@@ -3378,8 +3324,7 @@
             "melee": true
         },
         "contextdata": {
-            "get_weapon": {},
-            "injury_bonus": {"bonuses": [{"type": "dice", "value": 1}]}
+            "get_weapon": {}
         },
         "description": [    
             {
@@ -3442,9 +3387,7 @@
             "ranged": true
         },
         "contextdata": {
-            "get_weapon": {},
-            "hit_bonus": {"bonuses": [{"type": "dice", "value": 1}]},
-            "injury_bonus": {"bonuses": [{"type": "dice", "value": 1}]}},
+            "get_weapon": {}},
         "description": [ 
             {
                 "tags": {"desc_type" : "paragraph"},
@@ -3514,7 +3457,6 @@
         },
         "contextdata": {
             "get_weapon": {},
-            "injury_bonus": {"bonuses": [{"type": "dice", "value": 1}]},
             "ignore_cover": {}
         },
         "description": [ 
@@ -3551,7 +3493,6 @@
         },
         "contextdata": {
             "get_weapon": {},
-            "injury_bonus": {"bonuses": [{"type": "dice", "value": 1}]},
             "extra_attack": {"value": 2}},
         "description": [ 
             {
@@ -3746,7 +3687,6 @@
         "stats": {
         },
         "contextdata": {
-            "custom_attack_type": {"range": 0}
         },
         "description": [       
             {
@@ -3777,7 +3717,6 @@
         "stats": {
         },
         "contextdata": {
-            
             "set_stat": { "upgrades": [{"stat": "potential", "value": 0}]}
         },
         "description": [       
@@ -3906,8 +3845,7 @@
             "melee": true
         },
         "contextdata": {
-            "get_weapon": {},
-            "injury_bonus": {"bonuses": [{"type": "dice", "value": 1}]}
+            "get_weapon": {}
         },
         "description": [             
             {
@@ -4010,8 +3948,7 @@
             "melee": true
         },
         "contextdata": {
-            "get_weapon": {},
-            "injury_bonus": {"bonuses": [{"type": "dice", "value": 1}]}
+            "get_weapon": {}
         },
         "description": [             
             {
@@ -4044,8 +3981,7 @@
             "melee": true
         },
         "contextdata": {
-            "get_weapon": {},
-            "injury_bonus": {"bonuses": [{"type": "flat", "value": 1}]}
+            "get_weapon": {}
         },
         "description": [             
             {
@@ -4142,8 +4078,7 @@
         "stats": {
         },
         "contextdata": {
-            "keyword_ignore": {"value": "kw_fear"},
-            "upgrade_stat": {"upgrades": [{"stat": "melee", "value": 1}]}
+            "keyword_ignore": {"value": "kw_fear"}
         },
         "description": [       
             {
@@ -4277,8 +4212,7 @@
             "ranged": true
         },
         "contextdata": {
-            "get_weapon": {},
-            "hit_bonus": {"bonuses": [{"type": "dice", "value": 1}]}},
+            "get_weapon": {}},
         "description": [           
             {
                 "tags": {"desc_type" : "paragraph"}, 
@@ -4312,8 +4246,7 @@
             "ranged": true
         },
         "contextdata": {
-            "get_weapon": {},
-            "hit_bonus": {"bonuses": [{"type": "dice", "value": 2}]}},
+            "get_weapon": {}},
         "description": [           
             {
                 "tags": {"desc_type" : "paragraph"}, 
@@ -4380,8 +4313,7 @@
             "melee": true
         },
         "contextdata": {
-            "get_weapon": {},
-            "injury_bonus": {"bonuses": [{"type": "dice", "value": 2}]}
+            "get_weapon": {}
         },
         "description": [    
             {
@@ -4416,8 +4348,7 @@
             "hands_ranged": 1
         },
         "contextdata": {
-            "upgrade_stat": {"upgrades": [{"stat": "armour", "value": -1}]},
-            "find_hands": { "required": true, "both_kits": true }
+            "upgrade_stat": {"upgrades": [{"stat": "armour", "value": -1}]}
         },
         "description": [       
             {
@@ -4641,8 +4572,7 @@
             "ranged": true
         },
         "contextdata": {
-            "get_weapon": {},
-            "custom_attack_type": {"range": 0}},
+            "get_weapon": {}},
         "description": [  
             {
                 "tags": {"desc_type" : "paragraph"},
@@ -4673,11 +4603,7 @@
         "contextdata": {
             "get_weapon": {},
             "ignore_cover": {},
-            "ignore_range": {},
-            "hit_bonus": {"bonuses": [
-                {"type": "dice", "value": 1, "condition_type": "range", "condition_value": "long"},
-                {"type": "dice", "value": 1, "condition_type": "cover", "condition_value": true}
-            ]}},
+            "ignore_range": {}},
         "description": [       
             {
                 "tags": {"desc_type" : "paragraph"},
@@ -4799,8 +4725,7 @@
             "melee": true
         },
         "contextdata": {
-            "get_weapon": {},
-            "base_dice": {"value": -1}},
+            "get_weapon": {}},
         "description": [ 
             {
                 "tags": {"desc_type" : "paragraph"},
@@ -4833,8 +4758,7 @@
             "melee": true
         },
         "contextdata": {
-            "get_weapon": {},
-            "injury_bonus": {"bonuses": [{"type": "flat", "value": 2, "condition_type": "activated", "condition_value": false}]}
+            "get_weapon": {}
         },
         "description": [   
             {
@@ -4864,8 +4788,7 @@
             "melee": true
         },
         "contextdata": {
-            "get_weapon": {},
-            "base_dice": {"value": 1}
+            "get_weapon": {}
         },
         "description": [   
             {
@@ -4955,7 +4878,7 @@
         },
         "contextdata": {
             "upgrade_stat": {"upgrades": [{"stat": "ranged", "value": 1}]},
-            "bonus_ability": {
+            "equipment_remove_ability": {
                 "action_id": ["ab_hateful"]
             }
         },
@@ -5223,8 +5146,7 @@
         },
         "contextdata": {
             "get_weapon": {},
-            "ignore_armour": {"condition": [{"value": 1}]},
-            "injury_bonus": {"bonuses": [{"type": "dice", "value": -1}]}},
+            "ignore_armour": {"condition": [{"value": 1}]}},
         "description": [           
             {
                 "tags": {"desc_type" : "paragraph"},
@@ -5322,8 +5244,7 @@
             "melee": true
         },
         "contextdata": {
-            "get_weapon": {},
-            "injury_bonus": {"bonuses": [{"type": "dice", "value": 2}]}
+            "get_weapon": {}
         },
         "description": [             
             {
@@ -5356,8 +5277,7 @@
             "melee": true
         },
         "contextdata": {
-            "get_weapon": {},
-            "injury_bonus": {"bonuses": [{"type": "dice", "value": 2}]}
+            "get_weapon": {}
         },
         "description": [    
             {
@@ -5520,8 +5440,7 @@
                 {"stat": "movetype", "value": 1}
                 ]},
             "upgrade_stat": {"upgrades": [{"stat": "armour", "value": -2}]},
-            "ignore_element": {"element": ["kw_shrapnel"]},
-            "custom_attack_type": {"range": 0}
+            "ignore_element": {"element": ["kw_shrapnel"]}
         },
         "description": [       
             {
@@ -6071,9 +5990,7 @@
         },
         "contextdata": {
             "get_weapon": {},
-            "ignore_armour": {},
-            "injury_bonus": {"bonuses": [{"type": "dice", "value": 1}]},
-            "hit_bonus": {"bonuses": [{"type": "dice", "value": 1}]}
+            "ignore_armour": {}
         },
         "description": [       
             {
@@ -6103,8 +6020,7 @@
             "melee": true
         },
         "contextdata": {
-            "get_weapon": {},
-            "injury_bonus": {"bonuses": [{"type": "dice", "value": 1}]}
+            "get_weapon": {}
         },
         "description": [       
             {
@@ -6136,9 +6052,7 @@
         },
         "contextdata": {
             "get_weapon": {},
-            "ignore_armour": {},
-            "injury_bonus": {"bonuses": [{"type": "dice", "value": 1}]},
-            "hit_bonus": {"bonuses": [{"type": "dice", "value": 1}]}
+            "ignore_armour": {}
         },
         "description": [       
             {
@@ -6167,8 +6081,7 @@
             "melee": true
         },
         "contextdata": {
-            "get_weapon": {},
-            "injury_bonus": {"bonuses": [{"type": "dice", "value": 1}]}
+            "get_weapon": {}
         },
         "description": [       
             {
@@ -6278,8 +6191,7 @@
             "melee": true
         },
         "contextdata": {
-            "get_weapon": {},
-            "injury_bonus": {"bonuses": [{"type": "flat", "value": 1}]}
+            "get_weapon": {}
         },
         "description": [   
             {
@@ -6401,8 +6313,7 @@
         },
         "contextdata": {
             "get_weapon": {},
-            "base_dice": {"value": 1},
-            "hit_bonus": {"bonuses": [{"type": "dice", "value": 1}]}
+            "base_dice": {"value": 1}
         },
         "description": [             
             {
@@ -6432,8 +6343,7 @@
         },
         "contextdata": {
             "get_weapon": {},
-            "base_dice": {"value": 1},
-            "injury_bonus": {"bonuses": [{"type": "dice", "value": 1}]}
+            "base_dice": {"value": 1}
         },
         "description": [             
             {
@@ -6601,8 +6511,6 @@
         },
         "contextdata": {
             "get_weapon": {},
-            "injury_bonus": {"bonuses": [{"type": "dice", "value": 1}]},
-            "hit_bonus": {"bonuses": [{"type": "dice", "value": 1}]},
             "ignore_armour": {}
         },
         "description": [             
@@ -6665,8 +6573,7 @@
             "melee": true
         },
         "contextdata": {
-            "get_weapon": {},
-            "injury_bonus": {"bonuses": [{"type": "flat", "value": 1}]}
+            "get_weapon": {}
         },
         "description": [   
             {

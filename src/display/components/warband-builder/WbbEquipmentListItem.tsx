@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {Button, Modal, OverlayTrigger, Popover} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {
@@ -21,6 +21,7 @@ import { useWarband } from '../../../context/WarbandContext';
 import { returnDescription } from '../../../utility/util';
 import KeywordDisplay from '../features/glossary/KeywordDisplay';
 import GenericHover from '../generics/GenericHover';
+import { EventRunner } from '../../../classes/contextevent/contexteventhandler';
 
 interface EquipmentItemProps {
     item: WarbandPurchase
@@ -29,9 +30,44 @@ interface EquipmentItemProps {
 
 const WbbEquipmentListItem: React.FC<EquipmentItemProps> = ({ item, fighter }) => {
 
-    const { warband } = useWarband();
+    const { warband, updateKey } = useWarband();
     const { playMode } = usePlayMode();
     const { printMode } = usePrintMode();
+
+    const [canRemove, setCanRemove] = useState(item.Sellable);
+    const [cantSwap, setCantSwap] = useState(false);
+    const [keyvar, setKeyvar] = useState(0);
+
+    useEffect(() => {
+
+        async function GetCanRemove() {
+            if (fighter !== null && fighter != undefined) {
+            
+                const eventmon : EventRunner = new EventRunner();
+                const CanRemove = await eventmon.runEvent(
+                    "canRemoveItemFromModel",
+                    item.HeldObject as WarbandEquipment,
+                    [],
+                    item.Sellable,
+                    fighter
+                )
+
+                const noSwap = await eventmon.runEvent(
+                    "cantSwapItemFromModel",
+                    item.HeldObject as WarbandEquipment,
+                    [],
+                    item.Sellable,
+                    fighter
+                )
+
+                setCanRemove(CanRemove)
+                setCantSwap(noSwap)
+                setKeyvar((prev) => prev + 1)
+            }
+        }
+
+        GetCanRemove();
+    }, [updateKey])
 
     function GetIDRel() {
         if (fighter == null || fighter == undefined) {
@@ -44,7 +80,7 @@ const WbbEquipmentListItem: React.FC<EquipmentItemProps> = ({ item, fighter }) =
     const ItemValue = (((item.HeldObject as WarbandEquipment).MyEquipment.SelfDynamicProperty.OptionChoice as Equipment))
 
     return (
-        <div className={`WbbEquipmentListItem ${playMode ? 'play-mode' : ''} ${printMode ? 'print-mode' : ''} `}>
+        <div className={`WbbEquipmentListItem ${playMode ? 'play-mode' : ''} ${printMode ? 'print-mode' : ''} `} key={keyvar}>
             <div className="equipment-name">{ItemValue.GetTrueName()}
                 {(item.CustomInterface != undefined) ? item.CustomInterface.tags["is_custom"]? " (Manually Added)" : "" : ""}
             </div>
@@ -65,7 +101,7 @@ const WbbEquipmentListItem: React.FC<EquipmentItemProps> = ({ item, fighter }) =
                 </div>
             }
 
-            {((item.Sellable == true) && (!playMode && !printMode)) &&
+            {((canRemove == true) && (!playMode && !printMode)) &&
                 <WbbContextualPopover
                     id={`equipment-${GetIDRel()}`}
                     type={(fighter == null || fighter == undefined)? "equipment" : "equipment_model"}
@@ -74,6 +110,7 @@ const WbbEquipmentListItem: React.FC<EquipmentItemProps> = ({ item, fighter }) =
                         equipment: (item.HeldObject as WarbandEquipment)
                     } as RealWarbandPurchaseEquipment}
                     context={(fighter == null || fighter == undefined)? null : fighter}
+                    contextuallimit={cantSwap}
                 />
             }
 

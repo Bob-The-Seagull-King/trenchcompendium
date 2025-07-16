@@ -81,6 +81,9 @@ export interface CallEvents {
     getAllFireteamOptions? : (this: EventRunner, eventSource : any, relayVar : Fireteam[], trackVal : UserWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<Fireteam[]>;
     getConsumableOptionsList? : (this: EventRunner, eventSource : any, relayVar : IChoice[], trackVal : WarbandConsumable, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : UserWarband) => Promise<IChoice[]>; 
     runConsumableSelect? : (this: EventRunner, eventSource : any, trackVal : WarbandConsumable, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : WarbandConsumable) => Promise<void>;
+    getMaximumScars? : (this: EventRunner, eventSource : any, relayVar: number, trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<number>;
+    canRemoveItemFromModel? : (this: EventRunner, eventSource : any, relayVar: boolean, trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<boolean>;
+    cantSwapItemFromModel? : (this: EventRunner, eventSource : any, relayVar: boolean, trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<boolean>;
 }
 
 /**

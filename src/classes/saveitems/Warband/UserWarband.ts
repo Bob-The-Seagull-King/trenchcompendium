@@ -119,7 +119,6 @@ class UserWarband extends DynamicContextObject {
 
     public async BuildEquipment(data : IWarbandPurchaseEquipment[]) {
         for (let i = 0; i < data.length; i++) {
-            console.log(data)
             const Model : WarbandEquipment = await WarbandFactory.CreateWarbandEquipment(data[i].equipment, this);
             const NewPurchase : WarbandPurchase = new WarbandPurchase(data[i].purchase, this, Model);
             this.Equipment.push(NewPurchase);
@@ -814,8 +813,10 @@ class UserWarband extends DynamicContextObject {
     }
 
     public async AtMaxOfItem( model : string) {
-        const RefModel : FactionEquipmentRelationship = await EquipmentFactory.CreateNewFactionEquipment(model, null);
-        
+        const RefModel : FactionEquipmentRelationship | null = await EquipmentFactory.CreateNewFactionEquipment(model, null);
+        if (RefModel == null) {
+            return false;
+        }
         const eventmon : EventRunner = new EventRunner();
         let maxcount = RefModel.Limit;
         maxcount = await eventmon.runEvent(

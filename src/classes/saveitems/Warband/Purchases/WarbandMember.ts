@@ -33,6 +33,7 @@ import { Injury } from "../../../feature/ability/Injury";
 import { SkillGroup } from "../../../feature/skillgroup/SkillGroup";
 import { StaticContextObject } from "../../../contextevent/staticcontextobject";
 import { GetStatAsFullString, MergeTwoStats, ModelStatistics } from "../../../feature/model/ModelStats";
+import { KeywordFactory } from "../../../../factories/features/KeywordFactory";
 
 export interface SkillSuite {
     skillgroup : StaticContextObject,
@@ -229,14 +230,14 @@ class WarbandMember extends DynamicContextObject {
             const result_fin = await Events.runEvent(
                 "getWarbandMemberAbilities",
                 this,
+                [],
                 result,
-                BaseList,
                 this
             )
             for (let i = 0; i < result_fin.length; i++) {
-                if (!IDList.includes(result[i].ID)) {
-                    IDList.push(result[i].ID)
-                    AbilitiesAvailable.push(result[i]);
+                if (!IDList.includes(result_fin[i].ID)) {
+                    IDList.push(result_fin[i].ID)
+                    AbilitiesAvailable.push(result_fin[i]);
                 }
             }
         } else {
@@ -348,7 +349,7 @@ class WarbandMember extends DynamicContextObject {
         for (let i = 0; i < this.ModelEquipments.length; i++) {
             subpropset.push(this.ModelEquipments[i].ConvertToInterface())
         }
-
+        
         const equipmentlist : IWarbandPurchaseEquipment[] = []
         for (let i = 0; i < this.Equipment.length; i++) {
             equipmentlist.push(this.Equipment[i].ConvertToInterfaceEquipment())
@@ -975,10 +976,9 @@ class WarbandMember extends DynamicContextObject {
 
     public async getContextuallyAvailableKeywords() : Promise<Keyword[]> {
         const KeywordsAvailable : Keyword[] = []
-        const BaseList : Keyword[] = []
 
         for (let i = 0; i < this.CurModel.KeyWord.length; i++) {
-            BaseList.push(this.CurModel.KeyWord[i]);
+            KeywordsAvailable.push(this.CurModel.KeyWord[i]);
         }
 
         const Events : EventRunner = new EventRunner();
@@ -987,18 +987,19 @@ class WarbandMember extends DynamicContextObject {
                 "getContextuallyRelevantKeywordsByID",
                 this.MyContext,
                 [],
-                BaseList,
+                [],
                 this
             )
             const result_fin = await Events.runEvent(
                 "getContextuallyRelevantKeywordsByID",
                 this,
+                [],
                 result,
-                BaseList,
                 this
             )
             for (let i = 0; i < result_fin.length; i++) {
-                KeywordsAvailable.push(result[i]);
+                const Keyword = await KeywordFactory.CreateNewKeyword(result[i], null)
+                KeywordsAvailable.push(Keyword);
             }
         }
 
@@ -1154,6 +1155,16 @@ class WarbandMember extends DynamicContextObject {
 
     public async CheckIfDead() {
         const eventmon : EventRunner = new EventRunner();
+        const MaxScars = await this.GetMaxScars()
+        
+        if (this.GetBattleScars() >= MaxScars) {
+            this.State = 'dead';
+        }
+    }
+
+    public async GetMaxScars() {
+        
+        const eventmon : EventRunner = new EventRunner();
         const MaxScars = await eventmon.runEvent(
             "getMaximumScars",
             this,
@@ -1161,10 +1172,8 @@ class WarbandMember extends DynamicContextObject {
             3,
             this
         )
-        
-        if (this.GetBattleScars() >= MaxScars) {
-            this.State = 'dead';
-        }
+
+        return MaxScars;
     }
 
     public async AddSkill(skl : Skill) {
@@ -1707,12 +1716,13 @@ class WarbandMember extends DynamicContextObject {
     }
 
     public async CanAddItem( model : string) {
-        console.log(model)
         if (this.IsUnRestricted) {
             return true;
         }
-        const RefModel : FactionEquipmentRelationship = await EquipmentFactory.CreateNewFactionEquipment(model, null);
-
+        const RefModel : FactionEquipmentRelationship | null = await EquipmentFactory.CreateNewFactionEquipment(model, null);
+        if (RefModel == null) {
+            return false;
+        }
         const eventmon : EventRunner = new EventRunner();
 
         const SkipEquip : boolean = await eventmon.runEvent(
@@ -1755,7 +1765,7 @@ class WarbandMember extends DynamicContextObject {
             CanAdd = await eventmon.runEvent(
                 "canModelAddItem",
                 RefModel,
-                [],
+                [[]],
                 true,
                 this
             )

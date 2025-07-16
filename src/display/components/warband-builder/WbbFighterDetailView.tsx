@@ -76,16 +76,23 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
     const [statchoices, setStatChoices] = useState<ModelStatistics[][]>([])
     const [allmodelequip, setAllmodelequip] = useState<RealWarbandPurchaseEquipment[]>([])
     const [xpLimit, setXPLimit] = useState<number>(0)
+    const [scarLimit, setScarLimit] = useState<number>(3)
     const [keywordsList, setkeywords] = useState<Keyword[]>([])
     const [modelslug, setmodeslug] = useState(fighter.GetModelSlug())
     const [keyvar, setkeyvar] = useState(0);
 
     useEffect(() => {
         async function SetModelOptions() {
+            const abilities = await fighter.BuildNewProperties()
+            setabilities(abilities);
             setStatChoices(await fighter.GetStatOptions());
             setstats(await fighter.GetStats())
+            setkeywords(await fighter.getContextuallyAvailableKeywords())
             setcanchange(await fighter.CanChangeRank())
-            setkeyvar(keyvar + 1);
+            setScarLimit(await fighter.GetMaxScars())
+            const XPLimit = await fighter.GetXPLimit();
+            setXPLimit(XPLimit)
+            setkeyvar((prev) => prev + 1);
         }
         SetModelOptions();
     }, [updateKey])
@@ -93,8 +100,8 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
     useEffect(() => {
         async function SetModelOptions() {
             const abilities = await fighter.BuildNewProperties()
-            const upgrades = await fighter.GetWarbandUpgradeCollections()
             setabilities(abilities);
+            const upgrades = await fighter.GetWarbandUpgradeCollections()
             setupgrades(upgrades);
             const XPLimit = await fighter.GetXPLimit();
             setXPLimit(XPLimit)
@@ -104,6 +111,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
             setStatChoices(await fighter.GetStatOptions());
             setcanchange(await fighter.CanChangeRank())
             setstats(await fighter.GetStats())
+            setScarLimit(await fighter.GetMaxScars())
             reloadDisplay()
         }
 
@@ -242,7 +250,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                 }
             </div>
 
-            <div className={'fighter-card-main-area'}>
+            <div className={'fighter-card-main-area'} key={keyvar}>
                 {fighter.GetModelSlug() != '' &&
                     <div className={'fighter-image-wrap full'}>
                         <SynodModelImage
@@ -294,7 +302,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                     
                     <div className="fighter-meta-entry-simple">
                         <span className="fighter-meta-label">
-                            {'Kewords: '}
+                            {'Keywords: '}
                         </span>                        
                         <span className="fighter-meta-value">
                             {keywordsList.map((item, index) => (
@@ -314,7 +322,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                     </div>
 
                     {!playMode &&
-                        <div key={keyvar} className="fighter-meta-entry-simple">
+                        <div className="fighter-meta-entry-simple">
                             <span className="fighter-meta-label">
                                 {'Base: '}
                             </span>
@@ -326,7 +334,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
 
                 </div>
 
-                <div key={keyvar}  className={'fighter-card-stats'}>
+                <div  className={'fighter-card-stats'}>
                     <ItemStat title={"Movement"} value={getModelStatMove(stats)}/>
                     {stats.melee != undefined &&
                         <ItemStat title={"Melee"} value={getModelStatMelee(stats)}/>
@@ -618,10 +626,10 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                                 }
 
                                 <div className="battle-scar-boxes" onClick={() => setShowEditScars(true)}>
-                                    {Array.from({length: 3}, (_, i) => {
+                                    {Array.from({length: scarLimit}, (_, i) => {
                                         const index = i + 1;
                                         const isChecked = index <= fighter.GetBattleScars();
-                                        const isSkull = index === 3;
+                                        const isSkull = index === scarLimit;
 
                                         return (
                                             <div key={index} className="battle-scar-box">
@@ -760,7 +768,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
 
             {/* Abilities */}
             {(!playMode && abilities.length > 0) &&
-                <div className={'fighter-card-collapse-wrap'}>
+                <div className={'fighter-card-collapse-wrap'} key={keyvar}>
                     <WbbFighterCollapse title="Abilities">
                         {abilities.map((ability, index) => (
                             <WbbAbilityDisplay key={index} ability={ability}/>
