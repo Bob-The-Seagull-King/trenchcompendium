@@ -26,7 +26,41 @@ const WbbModalAddFighterCustom: React.FC<WbbModalAddFighterTroopProps> = ({ show
     const { warband } = useWarband();
     const [listofoptions, setListofOptions] = useState<Model[]>([])
     const [keyvar, setkevvar] = useState(0);
-    
+
+    // filter for selected faction
+    const [selectedFaction, setSelectedFaction] = useState<string>('all');
+
+    // get Faction options
+    const factions = Array.from(new Set(
+        listofoptions
+            .flatMap(f => (f as any).Models?.map((rel: any) => rel.Faction?.Name) || [])
+            .filter(Boolean)
+    ));
+
+
+    const factionMap = new Map<string, string>(); // Map<ID, Name>
+
+    listofoptions.forEach((model: any) => {
+        model.Models?.forEach((rel: any) => {
+            rel.Factions?.forEach((faction: any) => {
+                if (faction.ID && faction.Name) {
+                    factionMap.set(faction.ID, faction.Name);
+                }
+            });
+        });
+    });
+
+    const factionOptions = Array.from(factionMap.entries()); // [ [id, name], ... ]
+
+
+    // filter fighters based on selected faction
+    const filteredFighters = selectedFaction === 'all'
+        ? listofoptions
+        : listofoptions.filter((model: any) =>
+            model.Models?.some((rel: any) =>
+                rel.Factions?.some((f: any) => f.ID === selectedFaction)
+            )
+        );
 
     const handleSelect = (id: string) => {
         setSelectedId(id);
@@ -57,9 +91,9 @@ const WbbModalAddFighterCustom: React.FC<WbbModalAddFighterTroopProps> = ({ show
 
 
     return (
-        <Modal show={show} onHide={onClose} className={'WbbModalAddItem WbbModalAddFighter WbbModalAddFighterTroop'} centered>
+        <Modal show={show} onHide={onClose} className={'WbbModalAddItem WbbModalAddFighter WbbModalAddFighterCustom'} centered>
             <Modal.Header closeButton={false}>
-                <Modal.Title>Add Custom Troop</Modal.Title>
+                <Modal.Title>Add Custom Fighter</Modal.Title>
 
                 <FontAwesomeIcon
                     icon={faXmark}
@@ -70,7 +104,24 @@ const WbbModalAddFighterCustom: React.FC<WbbModalAddFighterTroopProps> = ({ show
             </Modal.Header>
 
             <Modal.Body>
-                {listofoptions.map((fighter) => (
+                <div className="mb-3">
+                    <label htmlFor="factionSelect" className="form-label">Faction</label>
+                    <select
+                        id="factionSelect"
+                        className="form-select"
+                        value={selectedFaction}
+                        onChange={(e) => setSelectedFaction(e.target.value)}
+                    >
+                        <option value="all">All</option>
+                        {factionOptions.map(([id, name]) => (
+                            <option key={id} value={id}>{name}</option>
+                        ))}
+                    </select>
+                </div>
+
+                <hr/>
+
+                {filteredFighters.map((fighter) => (
                     <div
                         key={fighter.ID}
                         className={`select-item ${selectedId === fighter.ID ? 'selected' : ''}`}

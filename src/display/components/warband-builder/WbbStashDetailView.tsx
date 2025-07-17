@@ -89,12 +89,19 @@ const WbbStashDetailView: React.FC<WbbStashDetailViewProps> = ({ onClose }) => {
 
             <div key={updateKey} className={'detail-view-content'}>
                 <div className="stash-summary mb-3" key={stashkey}>
-                    <div><strong>Value:</strong> {stash.ValueDucats} Ducats / {stash.ValueGlory} Glory</div>
-                    <div><strong>Spare Ducats:</strong> {(stash.AmountDucats > 10e10? "Unlimited" : stash.AmountDucats) || 0}</div>
-                    <div><strong>Spare Glory:</strong> {(stash.AmountGlory  > 10e10? "Unlimited" : stash.AmountGlory) || 0}</div>
-                    <div style={{marginTop:"0.25rem"}}>
+                    <div>
+                        <strong>Value:</strong> {stash.ValueDucats} Ducats / {stash.ValueGlory} Glory
+                    </div>
+                    <div>
+                        <strong>Spare Ducats:</strong> {(stash.AmountDucats > 10e10? "Unlimited" : stash.AmountDucats) || 0}
+                    </div>
+                    <div>
+                        <strong>Spare Glory:</strong> {(stash.AmountGlory  > 10e10? "Unlimited" : stash.AmountGlory) || 0}
+                    </div>
+
+                    <div className={'mt-2'}>
                         {(stash.AmountDucats < 10e10) &&
-                        <div className={'btn btn-primary btn-sm edit-battle-scar-btn'}
+                        <div className={'btn btn-primary'}
                             onClick={() => setShowAddDucats(true)}
                             style={{marginRight:"0.5rem"}}>
                             <FontAwesomeIcon icon={faCoins} className="icon-inline-left-l"/>
@@ -102,7 +109,7 @@ const WbbStashDetailView: React.FC<WbbStashDetailViewProps> = ({ onClose }) => {
                         </div>
                         }
                         {stash.AmountGlory < 10e10 &&
-                        <div className={'btn btn-primary btn-sm edit-battle-scar-btn'}
+                        <div className={'btn btn-primary'}
                             onClick={() => setShowAddGlory(true)}>
                             <FontAwesomeIcon icon={faTrophy} className="icon-inline-left-l"/>
                             {'Add Glory'}
@@ -213,12 +220,26 @@ const WbbStashDetailView: React.FC<WbbStashDetailViewProps> = ({ onClose }) => {
                             {'Add Equipment'}
                         </div>
                     </div>
+
                     <div className={'stash-items-category'}>
+                        {/* @TODO: Show Exploration only items here*/}
+                        {/*{ false ? (*/}
+                        {/*    <>*/}
+                        {/*        {'@Lane add list items here'}*/}
+                        {/*    </>*/}
+                        {/*): (*/}
+                        {/*    <div className={'stash-items-empty'}>No exploration only items in stash.</div>*/}
+                        {/*)}*/}
+
+                        <div className={'stash-items-empty'}>No exploration only items in stash.</div>
+
                         <div className={'btn btn-add-element btn-block'}
                              onClick={() => setShowExplorationAddItemToStash(true)}>
                             <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
                             {'Add Exploration-Only Item'}
                         </div>
+
+                        {/* @TODO: remove this. It has been moved to warband tab*/}
                         <div className={'btn btn-add-element btn-block'}
                              onClick={() => setShowCustomitemAddToStash(true)}>
                             <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
@@ -287,6 +308,7 @@ const WbbStashDetailView: React.FC<WbbStashDetailViewProps> = ({ onClose }) => {
                         onSubmit={handleUpdateStash}
                     />
                 </div>
+
                 {warband?.warband_data.GetConsumablesEquipment().length > 0 &&
                     <>
                         <div className={'stash-items-title'}>
