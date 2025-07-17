@@ -220,12 +220,26 @@ const WbbStashDetailView: React.FC<WbbStashDetailViewProps> = ({ onClose }) => {
                             {'Add Equipment'}
                         </div>
                     </div>
+
                     <div className={'stash-items-category'}>
+                        {/* @TODO: Show Exploration only items here*/}
+                        {/*{ false ? (*/}
+                        {/*    <>*/}
+                        {/*        {'@Lane add list items here'}*/}
+                        {/*    </>*/}
+                        {/*): (*/}
+                        {/*    <div className={'stash-items-empty'}>No exploration only items in stash.</div>*/}
+                        {/*)}*/}
+
+                        <div className={'stash-items-empty'}>No exploration only items in stash.</div>
+
                         <div className={'btn btn-add-element btn-block'}
                              onClick={() => setShowExplorationAddItemToStash(true)}>
                             <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
                             {'Add Exploration-Only Item'}
                         </div>
+
+                        {/* @TODO: remove this. It has been moved to warband tab*/}
                         <div className={'btn btn-add-element btn-block'}
                              onClick={() => setShowCustomitemAddToStash(true)}>
                             <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
@@ -294,6 +308,7 @@ const WbbStashDetailView: React.FC<WbbStashDetailViewProps> = ({ onClose }) => {
                         onSubmit={handleUpdateStash}
                     />
                 </div>
+
                 {warband?.warband_data.GetConsumablesEquipment().length > 0 &&
                     <>
                         <div className={'stash-items-title'}>

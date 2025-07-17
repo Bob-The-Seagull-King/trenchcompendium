@@ -78,7 +78,8 @@ const WbbFighterAdds : React.FC<WbbModalAddFighterEliteProps> = ({
                 onSubmit={handleFighterSubmit}
             />
         }
-        
+
+        {/* @TODO: this is moved to Warband tab*/}
         {showAddFighterCustomModal &&
             <WbbModalAddFighterCustom
                 show={showAddFighterCustomModal}

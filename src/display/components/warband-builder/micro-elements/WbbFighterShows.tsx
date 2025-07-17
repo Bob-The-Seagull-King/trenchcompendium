@@ -300,7 +300,8 @@ const WbbFighterShows : React.FC<WbbFighterShow> = ({ playMode, openDetail, deta
                         </DndContext>
                     </>
                 }
-                
+
+                {/* @TODO: this is moved to Warband tab*/}
                 {!playMode &&
                     <div className={'btn btn-add-element btn-block'}
                             onClick={() => setShowAddFighterCustomModal(true)}>
