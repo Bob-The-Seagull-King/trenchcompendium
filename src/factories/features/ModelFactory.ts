@@ -5,6 +5,7 @@ import { ContextObject } from '../../classes/contextevent/contextobject';
 import { IModel, Model } from '../../classes/feature/model/Model';
 import { IVariantModel, ModelCollection } from '../../classes/feature/model/ModelCollection';
 import { FactionModelRelationship, IFactionModelRelationship } from '../../classes/relationship/faction/FactionModelRelationship';
+import { byPropertiesOf } from '../../utility/functions';
 
 class ModelFactory {
 
@@ -83,6 +84,7 @@ class ModelFactory {
                 }
             }) as IModel[]
         }
+        models.sort(byPropertiesOf<IModel>(["name", "id"]))
         const ModelList : ModelCollection[] = []
         for (let i = 0; i < models.length; i++) {
             const skl = await ModelFactory.CreateModelCollection(models[i], null);

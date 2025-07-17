@@ -6,6 +6,7 @@ import { Ability, IAbility } from '../../classes/feature/ability/Ability';
 import { Equipment, IEquipment } from '../../classes/feature/equipment/Equipment';
 import { IModelEquipmentRelationship, ModelEquipmentRelationship } from '../../classes/relationship/model/ModelEquipmentRelationship';
 import { IFactionEquipmentRelationship, FactionEquipmentRelationship } from '../../classes/relationship/faction/FactionEquipmentRelationship';
+import { byPropertiesOf } from '../../utility/functions';
 
 
 class EquipmentFactory {
@@ -62,6 +63,7 @@ class EquipmentFactory {
                 }
             }) as IEquipment[]
         }
+        models.sort(byPropertiesOf<IEquipment>(["name", "id"]))
         const ModelList : Equipment[] = []
         for (let i = 0; i < models.length; i++) {
             const skl = await EquipmentFactory.CreateEquipment(models[i], null);
