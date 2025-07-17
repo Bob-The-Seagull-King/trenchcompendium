@@ -150,6 +150,21 @@ export const BaseContextCallTable : CallEventTable = {
             return ContextHands;
         }
     },
+    add_arms: {
+        event_priotity: 0,
+        async getModelHandsAvailable(this: EventRunner, eventSource : any, relayVar : ModelHands,  trackVal : MemberAndWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {  
+            if (context_func["ranged"]) {
+                relayVar.ranged += context_func["ranged"]
+            }          
+            if (context_func["melee"]) {
+                relayVar.melee += context_func["melee"]
+            }         
+            if (context_func["special"]) {
+                relayVar.melee += context_func["special"]
+            }         
+            return relayVar;
+        }
+    },
     find_hands : {
         event_priotity: 0,
         getPresentationHandeddness(this: EventRunner, eventSource : any, relayVar : any, trackVal : any, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
@@ -2290,7 +2305,6 @@ export const BaseContextCallTable : CallEventTable = {
             if (context_func["model_purchases"]) {
                 for (let i = 0; i < context_func["model_purchases"].length; i++) {
                     const ModelName = context_func["model_purchases"][i]
-                    console.log(ModelName)
                     const ModelFaction = await FacModModule.ModelFactory.CreateNewFactionModel(ModelName, null)
                     await warband.AddFighter([ModelFaction]);
                 }
@@ -2301,15 +2315,8 @@ export const BaseContextCallTable : CallEventTable = {
     add_upgrade: {
         event_priotity: 0,
         async getWarbandMemberUpgrades(this: EventRunner, eventSource : any, relayVar : ModelUpgradeRelationship[], trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
-            console.log("Add Upgrade")
-            console.log(eventSource)
-            console.log(relayVar)
-            console.log(context_func)
-            console.log(context_static)
-            console.log(context_main)
 
             const UpgradeFactoryModule = await import("../../factories/features/UpgradeFactory")
-            const UpgradeModelModule = await import("../../classes/relationship/model/ModelUpgradeRelationship")
             
             const ContextObj = (context_main as DynamicOptionContextObject)
 
@@ -2503,7 +2510,6 @@ export const BaseContextCallTable : CallEventTable = {
             if (context_func['mods']) {
                 for (let i = 0; i < context_func['mods'].length; i++) {
                     const rel_mod = context_func['mods'][i]
-                    console.log(rel_mod)
 
                     if (rel_mod['type'] == 'add') {
                         if (!relayVar.includes(rel_mod['value'])) {
@@ -2590,6 +2596,85 @@ export const BaseContextCallTable : CallEventTable = {
         event_priotity: 0,
         async onGainInjury(this: EventRunner, eventSource : any, trackVal : Injury, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, member : WarbandMember) {
             member.Elite = false;
+        }
+    },
+    kill_character: {
+        event_priotity: 0,
+        async onGainInjury(this: EventRunner, eventSource : any, trackVal : Injury, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, member : WarbandMember) {
+            
+            const MaxScars = await member.GetMaxScars()
+            member.SetScars(MaxScars)
+        }
+    },
+    capture_character: {
+        event_priotity: 0,
+        async onGainInjury(this: EventRunner, eventSource : any, trackVal : Injury, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, member : WarbandMember) {
+            member.State = 'lost'
+        }
+    },
+    strip_equipment: {
+        event_priotity: 0,
+        async onGainInjury(this: EventRunner, eventSource : any, trackVal : Injury, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, member : WarbandMember) {
+            await member.EmptyStash();
+        }
+    },
+    ignore_scar: {
+        event_priotity: 0,
+        
+        async careAboutInjury(this: EventRunner, eventSource : any, relayVar: boolean, trackVal : Injury, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, member : WarbandMember) {
+            if (context_func["requirements"]) {
+                for (let i = 0; i < context_func["requirements"].length; i++) {
+                    const CurReq = context_func["requirements"][i];
+
+                    if (CurReq["type"] == "id") {
+                        if (member.CurModel.ID == CurReq["value"]) {
+                            return false;
+                        }
+                    }
+                }
+            }
+            return relayVar;
+        },
+        async onGainInjury(this: EventRunner, eventSource : any, trackVal : Injury, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, member : WarbandMember) {
+            if (context_func["requirements"]) {
+                let IgnoreScar = false
+                for (let i = 0; i < context_func["requirements"].length; i++) {
+                    const CurReq = context_func["requirements"][i];
+
+                    if (CurReq["type"] == "id") {
+                        if (member.CurModel.ID == CurReq["value"]) {
+                            IgnoreScar = true;
+                        }
+                    }
+                }
+
+                if (IgnoreScar) {                    
+                    member.ScarReserve -= 1
+                }
+            } else {     
+                member.ScarReserve -= 1
+            }
+        }
+    },
+    auto_retire: {
+        event_priotity: 1,
+        async onGainInjury(this: EventRunner, eventSource : any, trackVal : Injury, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, member : WarbandMember) {
+            
+            if (member.GetInjuriesList().filter((item) => item.ID == context_func["id"]).length >= context_func["count"]) {
+                
+                const eventmon : EventRunner = new EventRunner();
+                const Value = await eventmon.runEvent(
+                    "careAboutInjury",
+                    eventSource,
+                    [member],
+                    true,
+                    trackVal
+                )
+
+                if (Value) {
+                    member.State = 'lost'
+                }
+            }
         }
     }
 }

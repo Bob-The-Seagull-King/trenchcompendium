@@ -6,9 +6,7 @@
         "tags": {
         },
         "contextdata": {
-            "on_pick": {
-                "kill_character": {}
-            }
+            "kill_character": {}
          },
         "description": [            
             {
@@ -26,10 +24,8 @@
         "tags": {
         },
         "contextdata": {
-            "on_pick": {
-                "capture_character": {},
-                "strip_equipment": {}
-            }
+            "capture_character": {},
+            "strip_equipment": {}
          },
         "description": [            
             {
@@ -104,6 +100,10 @@
                         "value": "md_sniperpriest"
                     }
                 ]
+            },
+            "auto_retire": {
+                "id": "in_lostaneye",
+                "count": 2
             }
          },
         "description": [            
@@ -146,7 +146,7 @@
         "tags": {
         },
         "contextdata": {
-            "keyword_mod_remove": {"mods": [{"type": "remove", "value": "kw_infiltrator"}]}
+            "keyword_mod": {"mods": [{"type": "remove", "value": "kw_infiltrator"}]}
          },
         "description": [            
             {
@@ -459,11 +459,8 @@
         "tags": {
         },
         "contextdata": {
-            "ignore_scar": {
-            },
-            "on_pick": {
-                "strip_equipment": {}
-            }
+            "ignore_scar": { "requirements": [{"type": "delay"}]},
+            "strip_equipment": {}
          },
         "description": [            
             {

@@ -1204,7 +1204,6 @@ class WarbandMember extends DynamicContextObject {
     }
 
     public async CheckIfDead() {
-        const eventmon : EventRunner = new EventRunner();
         const MaxScars = await this.GetMaxScars()
         
         if (this.GetBattleScars() >= MaxScars) {
@@ -1831,10 +1830,25 @@ class WarbandMember extends DynamicContextObject {
         return CanAdd;
     }
 
+    public async EmptyStash() {
+        const TempArr : WarbandPurchase[] = [];
+        for (let i = 0; i < this.Equipment.length; i++) {
+            TempArr.push(this.Equipment[i])
+        }
+        for (let i = 0; i < TempArr.length; i++) {
+            this.DeleteStashWithDebt(
+                {
+                    purchase: TempArr[i],
+                    equipment: TempArr[i].HeldObject as WarbandEquipment
+                }, 1
+            )
+        }
+    }
+
     public async DeleteStashWithDebt( item : RealWarbandPurchaseEquipment, debt_mod : number) {
         const CostVarDucats = item.purchase.GetTotalDucats();
         const CostVarGlory = item.purchase.GetTotalGlory();
-        if (item.purchase.Sellable == false) {return}
+        if (item.purchase.Sellable == false) { return; }
         const debt = (item.purchase.FullSell == false)? debt_mod : 0;
         try {
             await this.DeleteStash(item);

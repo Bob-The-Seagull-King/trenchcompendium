@@ -1231,6 +1231,7 @@ class UserWarband extends DynamicContextObject {
     public GetCountOfRel(id : string) {
         let count = 0;
         for (let i = 0; i < this.Models.length; i++) {
+            if ((this.Models[i].HeldObject as WarbandMember).State == 'dead') { continue; }
             const inter = this.Models[i].CustomInterface
             if (inter) {
                 if (inter.id == id) {
