@@ -85,9 +85,11 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
         async function SetModelOptions() {
             const abilities = await fighter.BuildNewProperties()
             setabilities(abilities);
+            const upgrades = await fighter.GetWarbandUpgradeCollections()
+            setupgrades(upgrades);
+            setkeywords(await fighter.getContextuallyAvailableKeywords())
             setStatChoices(await fighter.GetStatOptions());
             setstats(await fighter.GetStats())
-            setkeywords(await fighter.getContextuallyAvailableKeywords())
             setcanchange(await fighter.CanChangeRank())
             setScarLimit(await fighter.GetMaxScars())
             const XPLimit = await fighter.GetXPLimit();

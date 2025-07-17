@@ -2751,7 +2751,15 @@
             "bonus_ability": {
                 "action_type": ["dash"]
             },
-            "restrict_other_items": { "shield": true },
+            "model_equipment_restriction": {
+                "removed": [
+                    {
+                        "tag": "shield",
+                        "res_type": "all",
+                        "value": ""
+                    }
+                ]
+            },
             "add_stat_option": {
                 "type": "base",
                 "direction": "increase",
@@ -5658,15 +5666,8 @@
         "stats": {
         },
         "contextdata": {
+            "warband_general_hook": {},
             "add_upgrade": {
-                "requirements": [
-                    {
-                        "type": "tag",
-                        "value": "special_category",
-                        "subvalue": "goetic"
-                    }
-                ],
-                "count": 1
             }
         },
         "description": [       
@@ -5681,7 +5682,25 @@
                 "content": "Each Auxia Sorcerer carries a book copied from the Koraktor, the original tome of Goetic Magic, said to have been written by angel Samael, who is also known as ‘Venom of God’. The reason an Angel would have authored such a book is unknown, if the story is even true at all."
             }
         ],
-        "options": [],
+        "options": [
+            {
+                "ref_id" : "ot_koraktor",
+                "name" : "",
+                "description" : [],
+                "category" : "contextobject",
+                "option_context" : {"basic_option_default":{}, 
+                "requirements": [
+                    {
+                        "type": "tag",
+                        "value": "special_category",
+                        "subvalue": "goetic"
+                    }
+                ]},
+                "dyna_only": true,
+                "self_ask": true, 
+                "parent_level": 7,
+                "question_name": "getAllUpgradesOfType"
+            }],
         "keywords": [],
         "modifiers": []
     },
@@ -6239,7 +6258,16 @@
                 {"stat": "base", "value": [50]},
                 {"stat": "armour", "value": -3}
                 ]},
-            "keyword_add": {"value": ["kw_strong"]}
+            "keyword_add": {"value": ["kw_strong"]},
+            "model_equipment_restriction": {
+                "removed": [
+                    {
+                        "tag": "shield",
+                        "res_type": "all",
+                        "value": ""
+                    }
+                ]
+            }
         },
         "description": [       
             {
@@ -6614,8 +6642,7 @@
         "stats": {
         },
         "contextdata": {
-            "keyword_mod": {"mods": [{"type": "add", "value": "kw_golem"}]},
-            "keyword_mod_remove": {"mods": [{"type": "remove", "value": "kw_tough"}]} },
+            "keyword_mod": {"mods": [{"type": "add", "value": "kw_tough"},{"type": "remove", "value": "kw_infiltrator"}]}},
         "description": [            
             {
                 "tags": {"desc_type" : "paragraph"},
@@ -6698,7 +6725,7 @@
         "stats": {
         },
         "contextdata": {
-            "keyword_add": {"value": ["kw_strong"]}},
+            "keyword_mod": {"mods": [{"type": "add", "value": "kw_strong"}]}},
         "description": [            
             {
                 "tags": {"desc_type" : "paragraph"},

@@ -85,6 +85,7 @@ const WbbViewFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warband
             setStatChoices(await fighter.GetStatOptions());
             setstats(await fighter.GetStats())
             setcanchange(await fighter.CanChangeRank())
+            setkeywords(await fighter.getContextuallyAvailableKeywords())
             setkeyvar(keyvar + 1);
         }
         SetModelOptions();

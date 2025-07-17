@@ -562,7 +562,7 @@
             "movetype": 0,
             "potential": 0
         },
-        "keywords" : ["kw_elite","kw_infiltrator","kw_elite"],
+        "keywords" : ["kw_elite","kw_infiltrator"],
         "abilities" : ["ab_hide","ab_stealthgenerator"]
     },
     {

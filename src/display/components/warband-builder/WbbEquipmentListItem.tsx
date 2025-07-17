@@ -57,7 +57,7 @@ const WbbEquipmentListItem: React.FC<EquipmentItemProps> = ({ item, fighter }) =
                     "cantSwapItemFromModel",
                     item.HeldObject as WarbandEquipment,
                     [],
-                    item.Sellable,
+                    false,
                     fighter
                 )
 

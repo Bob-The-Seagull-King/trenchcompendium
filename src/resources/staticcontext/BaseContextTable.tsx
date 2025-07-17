@@ -34,6 +34,9 @@ import { Injury } from "../../classes/feature/ability/Injury";
 import { Fireteam } from "../../classes/feature/ability/Fireteam";
 import { WarbandConsumable } from "../../classes/saveitems/Warband/WarbandConsumable";
 import { DynamicOptionContextObject } from "../../classes/options/DynamicOptionContextObject";
+import { IUpgrade, Upgrade } from "../../classes/feature/ability/Upgrade";
+import { WarbandEquipment } from "../../classes/saveitems/Warband/Purchases/WarbandEquipment";
+import { WarbandPurchase } from "../../classes/saveitems/Warband/Purchases/WarbandPurchase";
 
 export const BaseContextCallTable : CallEventTable = {
     option_search_viable: {
@@ -2280,6 +2283,90 @@ export const BaseContextCallTable : CallEventTable = {
             return relayVar;
         }
     },
+    add_extra_model: {
+        event_priotity: 0,
+        async onGainEquipment(this: EventRunner, eventSource : any, trackVal : WarbandPurchase, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband, equipmentHolder : any) {
+            const FacModModule = await import("../../factories/features/ModelFactory")
+            if (context_func["model_purchases"]) {
+                for (let i = 0; i < context_func["model_purchases"].length; i++) {
+                    const ModelName = context_func["model_purchases"][i]
+                    console.log(ModelName)
+                    const ModelFaction = await FacModModule.ModelFactory.CreateNewFactionModel(ModelName, null)
+                    await warband.AddFighter([ModelFaction]);
+                }
+                trackVal.CountCap = false;
+            }
+        }
+    },
+    add_upgrade: {
+        event_priotity: 0,
+        async getWarbandMemberUpgrades(this: EventRunner, eventSource : any, relayVar : ModelUpgradeRelationship[], trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            console.log("Add Upgrade")
+            console.log(eventSource)
+            console.log(relayVar)
+            console.log(context_func)
+            console.log(context_static)
+            console.log(context_main)
+
+            const UpgradeFactoryModule = await import("../../factories/features/UpgradeFactory")
+            const UpgradeModelModule = await import("../../classes/relationship/model/ModelUpgradeRelationship")
+            
+            const ContextObj = (context_main as DynamicOptionContextObject)
+
+            for (let i = 0; i < ContextObj.Selections.length; i++) {
+                const contextual_use = ContextObj.Selections[i].SelectedChoice
+                if (contextual_use != null) {
+                    
+                    const UpgradeList = Requester.MakeRequest(
+                        {
+                            searchtype: "complex", 
+                            searchparam: {
+                                type: "modelupgraderelationship",
+                                request: {
+                                    operator: 'and',
+                                    terms: [
+                                        {
+                                            item: "upgrade_id",
+                                            value: contextual_use.id,
+                                            equals: true,
+                                            strict: true
+                                        }
+                                    ],
+                                    subparams: []
+                                }
+                            }
+                        }
+                    ) as IModelUpgradeRelationship[]
+
+                    if (UpgradeList.length > 0) {
+                        const UpgradeModel = await UpgradeFactoryModule.UpgradeFactory.CreateModelUpgrade(UpgradeList[0], null)
+                        relayVar.push(UpgradeModel)
+                    } else {
+                        const MUR = {
+                            id: "rel_md_up"+contextual_use.id+"_contextualadd_"+Date.now().toString(),
+                            source: "core",
+                            tags: {},
+                            name: "",
+                            contextdata: {},
+                            options: [],
+                            model_id_set: [],
+                            upgrade_id: contextual_use.id,
+                            cost: 15,
+                            cost_type: 0,
+                            restricted_upgrades: [
+                            ],
+                            warband_limit: 0,
+                            required_upgrades:[]
+                        }
+                        const UpgradeModel = await UpgradeFactoryModule.UpgradeFactory.CreateModelUpgrade(MUR, null)
+                        relayVar.push(UpgradeModel)
+                    }
+                }
+            }
+
+            return relayVar;
+        }
+    },
     warband_general_hook: {
         event_priotity: 0,       
         async getEquipmentRelationshipsForWarband(this: EventRunner, eventSource : any, relayVar : FactionEquipmentRelationship[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : UserWarband, staticself : StaticOptionContextObjectList) {
@@ -2299,6 +2386,40 @@ export const BaseContextCallTable : CallEventTable = {
                 null
             )
             return BaseRels.filter((item) => item.Limit != 0);
+            
+        },       
+        async getAllUpgradesOfType(this: EventRunner, eventSource : any, relayVar : Upgrade[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : UserWarband, staticself : StaticOptionContextObjectList) {
+            const UpgradeFactoryModule = await import("../../factories/features/UpgradeFactory")
+            
+            for (let i = 0; i < staticself.OptionContext.requirements.length; i++) {
+                const UpgradeList = Requester.MakeRequest(
+                    {
+                        searchtype: "complex", 
+                        searchparam: {
+                            type: "upgrade",
+                            request: {
+                                operator: 'and',
+                                terms: [
+                                    {
+                                        item: "tags",
+                                        value: staticself.OptionContext.requirements[i].value,
+                                        equals: true,
+                                        strict: true,
+                                        istag : true,
+                                        tagvalue: staticself.OptionContext.requirements[i].subvalue
+                                    }
+                                ],
+                                subparams: []
+                            }
+                        }
+                    }
+                ) as IUpgrade[]
+                for (let j = 0; j < UpgradeList.length; j++) {
+                    const Upgrade = await UpgradeFactoryModule.UpgradeFactory.CreateUpgrade(UpgradeList[j], null)
+                    relayVar.push(Upgrade)
+                }
+            }
+            return relayVar
             
         },
         async getModelRelationshipsForWarband(this: EventRunner, eventSource : any, relayVar : FactionModelRelationship[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : UserWarband, staticself : StaticOptionContextObjectList) {
@@ -2382,6 +2503,7 @@ export const BaseContextCallTable : CallEventTable = {
             if (context_func['mods']) {
                 for (let i = 0; i < context_func['mods'].length; i++) {
                     const rel_mod = context_func['mods'][i]
+                    console.log(rel_mod)
 
                     if (rel_mod['type'] == 'add') {
                         if (!relayVar.includes(rel_mod['value'])) {
@@ -2389,7 +2511,7 @@ export const BaseContextCallTable : CallEventTable = {
                         }
                     }
                     if (rel_mod['type'] == 'remove') {
-                        relayVar = relayVar.filter(item => !(item != rel_mod['value']))
+                        relayVar = relayVar.filter(item => (item != rel_mod['value']))
                     }
                     
                 }

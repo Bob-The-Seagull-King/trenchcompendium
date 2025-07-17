@@ -731,8 +731,11 @@ class UserWarband extends DynamicContextObject {
 
         try {
             await this.DeleteFighter(fighter);
-            this.Debts.ducats +=  Math.ceil(CostVarDucats * debt_mod);
-            this.Debts.glory += Math.ceil(CostVarGlory * debt_mod);
+            if (fighter.purchase.CountCap == true) {
+                this.Debts.ducats +=  Math.ceil(CostVarDucats * debt_mod);
+                this.Debts.glory += Math.ceil(CostVarGlory * debt_mod);
+            }
+
 
         } catch (e) { console.log(e) }
     }
@@ -784,6 +787,14 @@ class UserWarband extends DynamicContextObject {
             modelpurch: false
         }, this, Equipment);
         this.Equipment.push(NewPurchase);
+        const eventmon : EventRunner = new EventRunner();
+        await eventmon.runEvent(
+            "onGainEquipment",
+            Equipment,
+            [this, this],
+            null,
+            NewPurchase
+        )
     }
     
     public async DeleteStash( item : RealWarbandPurchaseEquipment ) {
@@ -853,8 +864,10 @@ class UserWarband extends DynamicContextObject {
 
         try {
             await this.DeleteStash(item);
-            this.Debts.ducats +=  Math.ceil(CostVarDucats * debt_mod);
-            this.Debts.glory += Math.ceil(CostVarGlory * debt_mod);
+            if (item.purchase.CountCap == true) {
+                this.Debts.ducats +=  Math.ceil(CostVarDucats * debt_mod);
+                this.Debts.glory += Math.ceil(CostVarGlory * debt_mod);
+            }
 
         } catch (e) { console.log(e) }
     }
@@ -990,6 +1003,9 @@ class UserWarband extends DynamicContextObject {
         let TotalDucatCost = 0;
         for (let i = 0; i < this.Models.length; i++) {
             if ((this.Models[i].HeldObject as WarbandMember).State == "active") {
+                if (this.Models[i].CountCap == false) {
+                    continue;
+                }
                 TotalDucatCost += this.Models[i].GetTotalDucats();
             }
         }
@@ -1000,6 +1016,9 @@ class UserWarband extends DynamicContextObject {
         
         let TotalDucatCost = 0;
         for (let i = 0; i < this.Equipment.length; i++) {
+            if (this.Equipment[i].CountCap == false) {
+                continue;
+            }
             TotalDucatCost += this.Equipment[i].GetTotalDucats();
         }
         return TotalDucatCost
@@ -1009,6 +1028,9 @@ class UserWarband extends DynamicContextObject {
         
         let TotalGloryCost = 0;
         for (let i = 0; i < this.Models.length; i++) {
+            if (this.Models[i].CountCap == false) {
+                continue;
+            }
             TotalGloryCost += this.Models[i].GetTotalGlory();
         }
         return TotalGloryCost
@@ -1018,6 +1040,7 @@ class UserWarband extends DynamicContextObject {
         
         let TotalGloryCost = 0;
         for (let i = 0; i < this.Models.length; i++) {
+            if (this.Models[i].CountCap == false) {continue;}
             if ((this.Models[i].HeldObject as WarbandMember).State == "active") {
                 TotalGloryCost += this.Models[i].GetTotalGlory();
             }
@@ -1029,6 +1052,7 @@ class UserWarband extends DynamicContextObject {
         
         let TotalGloryCost = 0;
         for (let i = 0; i < this.Equipment.length; i++) {
+            if (this.Equipment[i].CountCap == false) {continue;}
             TotalGloryCost += this.Equipment[i].GetTotalGlory();
         }
         return TotalGloryCost

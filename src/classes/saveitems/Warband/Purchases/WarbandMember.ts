@@ -548,6 +548,7 @@ class WarbandMember extends DynamicContextObject {
     public GetSubCosts(type : number) {
         let countvar = 0;
         for (let i = 0; i < this.Upgrades.length; i++) {
+            if (this.Upgrades[i].CountCap == false) {continue;}
             if (this.Upgrades[i].CostType == type) {
                 if (type == 0 ) {
                     countvar += this.Upgrades[i].GetTotalDucats();
@@ -558,6 +559,7 @@ class WarbandMember extends DynamicContextObject {
             }
         }
         for (let i = 0; i < this.Equipment.length; i++) {
+            if (this.Equipment[i].CountCap == false) {continue;}
             if (this.Equipment[i].CostType == type) {
                 if (type == 0 ) {
                     countvar += this.Equipment[i].GetTotalDucats();
@@ -1023,9 +1025,10 @@ class WarbandMember extends DynamicContextObject {
 
     public async getContextuallyAvailableKeywords() : Promise<Keyword[]> {
         const KeywordsAvailable : Keyword[] = []
+        const BaseList : string[] = []
 
         for (let i = 0; i < this.CurModel.KeyWord.length; i++) {
-            KeywordsAvailable.push(this.CurModel.KeyWord[i]);
+            BaseList.push(this.CurModel.KeyWord[i].ID);
         }
 
         const Events : EventRunner = new EventRunner();
@@ -1034,7 +1037,7 @@ class WarbandMember extends DynamicContextObject {
                 "getContextuallyRelevantKeywordsByID",
                 this.MyContext,
                 [],
-                [],
+                BaseList,
                 this
             )
             const result_fin = await Events.runEvent(
@@ -1045,7 +1048,7 @@ class WarbandMember extends DynamicContextObject {
                 this
             )
             for (let i = 0; i < result_fin.length; i++) {
-                const Keyword = await KeywordFactory.CreateNewKeyword(result[i], null)
+                const Keyword = await KeywordFactory.CreateNewKeyword(result_fin[i], null)
                 KeywordsAvailable.push(Keyword);
             }
         }
@@ -1667,6 +1670,14 @@ class WarbandMember extends DynamicContextObject {
             modelpurch : false
         }, this, Equipment);
         this.Equipment.push(NewPurchase);
+        const eventmon : EventRunner = new EventRunner();
+        await eventmon.runEvent(
+            "onGainEquipment",
+            Equipment,
+            [this.MyContext, this],
+            null,
+            NewPurchase
+        )
     }
 
     public async GetAllEquipForShow() {
@@ -1827,8 +1838,10 @@ class WarbandMember extends DynamicContextObject {
         const debt = (item.purchase.FullSell == false)? debt_mod : 0;
         try {
             await this.DeleteStash(item);
-            (this.MyContext as UserWarband).Debts.ducats +=  Math.ceil(CostVarDucats * debt);
-            (this.MyContext as UserWarband).Debts.glory += Math.ceil(CostVarGlory * debt);
+            if (item.purchase.CountCap == true) {
+                (this.MyContext as UserWarband).Debts.ducats +=  Math.ceil(CostVarDucats * debt);
+                (this.MyContext as UserWarband).Debts.glory += Math.ceil(CostVarGlory * debt);
+            }
 
         } catch (e) { console.log(e) }
     }
