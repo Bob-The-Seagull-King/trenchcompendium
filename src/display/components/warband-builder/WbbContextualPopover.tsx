@@ -623,7 +623,12 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
 
                 <Modal.Body>
                     {'Are you sure you want to refund '}
-                    <strong>{item.ModelName + ' - ' + item.FighterName}</strong>?
+                    {(item as RealWarbandPurchaseModel).model != undefined &&
+
+                    <strong>
+                        {(item as RealWarbandPurchaseModel).model.CurModel.GetTrueName() + ' - ' + (item as RealWarbandPurchaseModel).model.GetTrueName()}
+                    </strong>
+                    }
 
                     <br/>
                     <br/>
@@ -732,9 +737,11 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                     <div className={'mb-3'}>
                         {'Are you sure you want to refund this Equipment?'}
                     </div>
-                    <div >
-                        <strong>{item.Name }</strong>?
-                    </div>
+                    {item.equipment &&
+                        <div >
+                            <strong>{item.equipment.Name }</strong>?
+                        </div>
+                    }
                     <br/>
                     <p>
                         <i>
@@ -763,9 +770,11 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                     <div className={'mb-3'}>
                         {'Are you sure you want to delete this Equipment?'}
                     </div>
-                    <div >
-                        <strong>{item.Name }</strong>?
-                    </div>
+                    {item.equipment &&
+                        <div >
+                            <strong>{item.equipment.Name }</strong>?
+                        </div>
+                    }
                 </Modal.Body>
 
                 <Modal.Footer>
@@ -795,7 +804,7 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                             {'This will remove this item from your roster and refund half its cost rounded up.'}
                             <br/>
                             {'You will receive: '}
-                            {(item as RealWarbandPurchaseEquipment).purchase.GetTotalDucats() + "Ducats and " + (item as RealWarbandPurchaseEquipment).purchase.GetTotalGlory() + " Glory"}
+                            {(item as RealWarbandPurchaseEquipment).purchase.GetTotalDucats() + " Ducats and " + (item as RealWarbandPurchaseEquipment).purchase.GetTotalGlory() + " Glory"}
                         </i>
                         }
                     </p>

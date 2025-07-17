@@ -203,7 +203,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
 
                 <div className={'title-text fighter-name'}>
                     {fighter.GetModelName()}
-                    { fighter.GetFighterName() != '' &&
+                    { fighter.GetFighterName() != fighter.GetModelName() &&
                         <>
                             {' - ' + fighter.GetFighterName()}
                         </>
@@ -233,7 +233,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                     <WbbContextualPopover
                         id={`fighter-detail-`+fighter.ID} 
                         type="fighter"
-                        item={fighter}
+                        item={warbandmember}
                     />
                 }
             </div>
@@ -255,7 +255,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                             {'Name: '}
                         </span>
                         <span className="fighter-meta-value">
-                            {fighter.GetFighterName()}
+                            {fighter.GetFighterName() == fighter.GetModelName()?  "-" : fighter.GetFighterName()}
                         </span>
                     </div>
 
