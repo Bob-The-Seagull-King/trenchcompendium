@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { containsTag, getCostType } from '../../../../utility/functions';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faXmark} from "@fortawesome/free-solid-svg-icons";
+import {faCoins, faTrophy, faXmark} from "@fortawesome/free-solid-svg-icons";
 import { Equipment } from '../../../../classes/feature/equipment/Equipment';
 import { EquipmentFactory } from '../../../../factories/features/EquipmentFactory';
 
@@ -159,6 +159,35 @@ const WbbEquipmentAddCustomStash: React.FC<WbbModalAddItemToStashProps> = ({ sho
                         {'No items found for the selected filters.'}
                     </>
                 )}
+
+                <hr/>
+                
+                <input
+                    type="number" id={'add-cost-input'}
+                    className="form-control"
+                    defaultValue={0}
+                    onChange={(e) => setCost(parseInt(e.target.value) || 0)}
+                    min={0}
+                />
+
+                
+                <div className={'mt-2'} style={{width:"100%"}}>
+                    <Button className={'btn btn-primary ' + (costType == 0? 'perma-active':'')}
+                        onClick={() => setCostType(0)}
+                        style={{width:"50%"}}
+                        active={costType == 0}>
+                        <FontAwesomeIcon icon={faCoins} className="icon-inline-left-l"/>
+                        {'Spend Ducats'}
+                    </Button>
+                    <Button className={'btn btn-primary ' + (costType == 1? 'perma-active':'')}
+                        onClick={() => setCostType(1)}
+                        style={{width:"50%"}}
+                        active={costType == 1}>
+                        <FontAwesomeIcon icon={faTrophy} className="icon-inline-left-l"/>
+                        {'Spend Glory'}
+                    </Button>
+                </div>
+
 
             </Modal.Body>
 
