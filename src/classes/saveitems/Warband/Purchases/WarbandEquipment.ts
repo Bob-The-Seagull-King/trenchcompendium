@@ -10,6 +10,7 @@ import { FactionFactory } from "../../../../factories/features/FactionFactory";
 import { Patron } from "../../../feature/skillgroup/Patron";
 import { Faction } from "../../../feature/faction/Faction";
 import { EquipmentFactory } from "../../../../factories/features/EquipmentFactory";
+import { Equipment } from "../../../feature/equipment/Equipment";
 
 interface IWarbandEquipment extends IContextObject {
     equipment_id: IWarbandProperty,
@@ -103,6 +104,9 @@ class WarbandEquipment extends DynamicContextObject {
         return 0;
     }
 
+    public GetEquipmentItem() : Equipment {
+        return this.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment
+    }
 
 }
 

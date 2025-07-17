@@ -2757,16 +2757,25 @@
                         "res_type": "all",
                         "value": ""
                     }
+                ],
+                "banned": [
+                    {
+                        "tag": "shield",
+                        "res_type": "all",
+                        "value": ""
+                    }
                 ]
             },
             "add_stat_option": {
                 "type": "base",
                 "direction": "increase",
-                "option": 
+                "options": 
                     [
-                        {
-                            "base": [40]
-                        }
+                        [
+                            {
+                                "base": [40]
+                            }
+                        ]
                     ]
             }
         },
@@ -3929,7 +3938,35 @@
         "stats": {
         },
         "contextdata": {
-            "upgrade_stat": {"upgrades": [{"stat": "armour", "value": -3}]}
+            "upgrade_stat": {"upgrades": [{"stat": "armour", "value": -3}]},
+            "model_equipment_restriction": {
+                "removed": [
+                    {
+                        "tag": "shield",
+                        "res_type": "all",
+                        "value": ""
+                    }
+                ],
+                "banned": [
+                    {
+                        "tag": "shield",
+                        "res_type": "all",
+                        "value": ""
+                    }
+                ]
+            },
+            "add_stat_option": {
+                "type": "base",
+                "direction": "increase",
+                "options": 
+                    [
+                        [
+                            {
+                                "base": [40]
+                            }
+                        ]
+                    ]
+            }
         },
         "description": [       
             {
@@ -6260,6 +6297,13 @@
             "keyword_add": {"value": ["kw_strong"]},
             "model_equipment_restriction": {
                 "removed": [
+                    {
+                        "tag": "shield",
+                        "res_type": "all",
+                        "value": ""
+                    }
+                ],
+                "banned": [
                     {
                         "tag": "shield",
                         "res_type": "all",

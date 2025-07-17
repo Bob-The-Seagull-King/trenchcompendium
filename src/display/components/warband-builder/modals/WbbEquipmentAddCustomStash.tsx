@@ -55,9 +55,6 @@ const WbbEquipmentAddCustomStash: React.FC<WbbModalAddItemToStashProps> = ({ sho
         SetEquipmentOptions();
     }, [show]);
 
-    // console.log('listofoptions');
-    // console.log(listofoptions);
-
     const factionMap = new Map<string, string>();
 
     listofoptions.forEach((eq: any) => {

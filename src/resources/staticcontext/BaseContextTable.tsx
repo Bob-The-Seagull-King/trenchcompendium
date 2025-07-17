@@ -313,6 +313,7 @@ export const BaseContextCallTable : CallEventTable = {
             
             let CanAdd = relayVar;
 
+
             // Removed, required, banned
             if (CanAdd) {
                 for (let i = 0; i < restrictions.length; i++) {
@@ -321,7 +322,6 @@ export const BaseContextCallTable : CallEventTable = {
                     if (CurRestriction.removed) {
                         for (let j = 0; j < CurRestriction.removed.length; j++) {
                             const Requirement = CurRestriction.removed[j]
-
                             if (Requirement.category) {
                                 if (trackVal.item.EquipmentItem.Category != Requirement.category) {
                                     continue;
@@ -462,6 +462,22 @@ export const BaseContextCallTable : CallEventTable = {
                         }
                     }
                 }
+            }
+            if (CanAdd) {
+                for (let i = 0; i < restrictions.length; i++) {
+                    const CurRestriction : EquipmentRestriction = restrictions[i];
+
+                    if (CurRestriction.banned) {
+                        for (let j = 0; j < CurRestriction.banned.length; j++) {
+                            const Requirement = CurRestriction.banned[j]
+                            
+                            if (trackVal.model.HasEquipmentFollowingRestriction(Requirement)) {
+                                CanAdd = false;
+                            }
+                        }
+                    }
+                }
+                
             }
 
             return CanAdd;
@@ -760,6 +776,39 @@ export const BaseContextCallTable : CallEventTable = {
                     StatOptionList.push(context_func["options"][i])
                 }
             }
+            return relayVar.concat(StatOptionList);
+        },
+        async getMemberModelStatOptions(this: EventRunner, eventSource : any, relayVar : ModelStatistics[][], trackVal: WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null)  
+        {
+            const StatOptionList: ModelStatistics[][] = []
+
+            if (context_func["options"]) {
+                for (let i = 0; i < context_func["options"].length; i++) {
+                    StatOptionList.push(context_func["options"][i])
+                }
+            }
+            return relayVar.concat(StatOptionList);
+        }
+    },
+    add_stat_option: {
+        event_priotity: 1,
+        async getMemberModelStatOptions(this: EventRunner, eventSource : any, relayVar : ModelStatistics[][], trackVal: WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null)  
+        {
+            const StatOptionList: ModelStatistics[][] = []
+            const CurStats = await trackVal.CurModel.Stats;
+
+            if (context_func["options"]) {
+                for (let i = 0; i < context_func["options"].length; i++) {
+                    const NewStats : ModelStatistics[] = context_func["options"][i]
+                    if (context_func["type"] == "base") { 
+                        NewStats.push({
+                            base: CurStats.base
+                        })
+                    }
+                    StatOptionList.push(NewStats)
+                }
+            }
+
             return relayVar.concat(StatOptionList);
         }
     },
