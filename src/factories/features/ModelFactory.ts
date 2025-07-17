@@ -56,8 +56,33 @@ class ModelFactory {
 
     
         
-    static async GetAllModels() {
-        const models = Requester.MakeRequest({searchtype: "file", searchparam: {type: "model"}}) as IModel[];
+    static async GetAllModels(showspecial = false) {
+        let models : IModel[] = []
+        if (showspecial) {
+            models = Requester.MakeRequest({searchtype: "file", searchparam: {type: "model"}}) as IModel[];
+        } else {
+            models = Requester.MakeRequest(
+            {
+                searchtype: "complex", 
+                searchparam: {
+                    type: "model",
+                    request: {
+                        operator: 'and',
+                        terms: [
+                            {
+                                item: "tags",
+                                value: "dontshow",
+                                equals: false,
+                                strict: true,
+                                istag : true,
+                                tagvalue: true
+                            }
+                        ],
+                        subparams: []
+                    }
+                }
+            }) as IModel[]
+        }
         const ModelList : ModelCollection[] = []
         for (let i = 0; i < models.length; i++) {
             const skl = await ModelFactory.CreateModelCollection(models[i], null);

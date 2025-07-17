@@ -2457,7 +2457,7 @@
         "id": "md_beastofnomansland",
         "name": "Beast of No Man's Land",
         "source": "core",
-        "tags": {},
+        "tags": {"dontshow": true},
         "contextdata": {            
             "model_equipment_restriction": {
                 "removed": [
@@ -2521,7 +2521,7 @@
         "id": "md_thedragon",
         "name": "The Dragon",
         "source": "core",
-        "tags": {},
+        "tags": {"dontshow": true},
         "contextdata": { 
             "stat_options": { 
                 "options": [
@@ -2635,7 +2635,7 @@
         "id": "md_thepeasant",
         "name": "The Peasant",
         "source": "core",
-        "tags": {},
+        "tags": {"dontshow": true},
         "contextdata": { 
         },
         "description": [

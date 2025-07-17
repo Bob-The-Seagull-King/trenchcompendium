@@ -13,22 +13,18 @@ interface WbbModalAddFighterEliteProps {
     showAddFighterEliteModal: boolean;
     showAddFighterTroopModal: boolean;
     showAddFighterMercenaryModal: boolean;
-    showAddFighterCustomModal: boolean;
     onCloseTroop: () => void;
     onCloseElite: () => void;
     onCloseMercenary: () => void;
-    onCloseCustom: () => void;
 }
 
 const WbbFighterAdds : React.FC<WbbModalAddFighterEliteProps> = ({
                                                                      showAddFighterEliteModal,
                                                                      showAddFighterTroopModal,
                                                                      showAddFighterMercenaryModal,
-                                                                     showAddFighterCustomModal,
                                                                      onCloseTroop,
                                                                      onCloseElite,
-                                                                     onCloseMercenary,
-                                                                     onCloseCustom
+                                                                     onCloseMercenary
 }) => {
 
     const { warband, updateKey, reloadDisplay } = useWarband();
@@ -43,16 +39,6 @@ const WbbFighterAdds : React.FC<WbbModalAddFighterEliteProps> = ({
         }
         );
     };
-
-    const handleCustomFighterSubmit = (newFighter : Model, cost : number, costtype : number) => {
-        if (!warband) { return; } // Guard
-
-        warband.warband_data.AddCustomFighter(newFighter, cost, costtype).then(() => {
-            const Manager : ToolsController = ToolsController.getInstance();
-            Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
-                () => reloadDisplay())
-        });
-    }
 
     return (
         <>
@@ -79,14 +65,6 @@ const WbbFighterAdds : React.FC<WbbModalAddFighterEliteProps> = ({
             />
         }
 
-        {/* @TODO: this is moved to Warband tab*/}
-        {showAddFighterCustomModal &&
-            <WbbModalAddFighterCustom
-                show={showAddFighterCustomModal}
-                onClose={() => onCloseCustom()}
-                onSubmit={handleCustomFighterSubmit}
-            />
-        }
         </>
     )
 };

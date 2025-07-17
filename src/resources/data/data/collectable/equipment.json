@@ -6483,7 +6483,7 @@
         "id": "eq_gunturret",
         "name": "Gun Turret",
         "source": "core",
-        "tags": {},
+        "tags": {"dontshow": true},
         "category": "field",
         "distance": 24,
         "stats": {
@@ -6538,7 +6538,7 @@
         "id": "eq_mortar",
         "name": "Mortar",
         "source": "core",
-        "tags": {},
+        "tags": {"dontshow": true},
         "category": "field",
         "distance": 36,
         "stats": {

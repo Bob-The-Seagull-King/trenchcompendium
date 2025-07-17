@@ -17,6 +17,10 @@ import { ToolsController } from '../../../classes/_high_level_controllers/ToolsC
 import WbbEditViewExtraModifier from './WbbEditViewExtraModifier';
 import { Form } from 'react-bootstrap';
 import {usePlayMode} from "../../../context/PlayModeContext";
+import WbbModalAddFighterCustom from './modals/WbbModalAddFighterCustom';
+import { Model } from '../../../classes/feature/model/Model';
+import WbbEquipmentAddCustomStash from './modals/WbbEquipmentAddCustomStash';
+import { Equipment } from '../../../classes/feature/equipment/Equipment';
 
 interface WbbWarbandDetailViewProps {
     onClose: () => void;
@@ -32,8 +36,10 @@ const WbbWarbandDetailView: React.FC<WbbWarbandDetailViewProps> = ({  onClose })
 
     // Does this warband have advanced options enabled?
     // @TODO: Lane: Save this to the warband and use it to toggle the display of advanced options
-    const [warbandEnableAdvancedOptions, setWarbandEnableAdvancedOptions] = useState<boolean>(false);
+    const [warbandEnableAdvancedOptions, setWarbandEnableAdvancedOptions] = useState<boolean>(warband.warband_data.IsWarbandCustom());
 
+    const [showAddFighterCustomModal, setShowAddFighterCustomModal] = useState(false);
+    const [showCustomitemAddToStash, setShowCustomitemAddToStash] = useState(false);
     const [warbandErrors, setwarbanderrors] = useState<string[]>([])
     const [keyvar, setkeyvar] = useState(0)
 
@@ -48,6 +54,26 @@ const WbbWarbandDetailView: React.FC<WbbWarbandDetailViewProps> = ({  onClose })
         RunErrorCheck();
     }, [updateKey])
 
+
+    
+    const handleCustomItemToStash = (item: Equipment, cost : number, costtype : number) => {
+        if (!warband) { return; } // Guard
+        
+        warband.warband_data.CustomStash(item, cost, costtype).then(() => {
+            const Manager : ToolsController = ToolsController.getInstance();
+            Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(() => reloadDisplay())
+        })
+    };
+
+    const handleCustomFighterSubmit = (newFighter : Model, cost : number, costtype : number) => {
+        if (!warband) { return; } // Guard
+
+        warband.warband_data.AddCustomFighter(newFighter, cost, costtype).then(() => {
+            const Manager : ToolsController = ToolsController.getInstance();
+            Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
+                () => reloadDisplay())
+        });
+    }
 
     return (
         <div className="WbbDetailView WbbWarbandDetailView">
@@ -238,17 +264,14 @@ const WbbWarbandDetailView: React.FC<WbbWarbandDetailViewProps> = ({  onClose })
                             {warbandEnableAdvancedOptions &&
                                 <>
                                     <hr/>
-
-                                    {/* @TODO: Lane hook up the modal here */}
                                     <div className={'btn btn-add-element btn-block mb-3'}
-                                         onClick={() => alert("TODO: Open add custom fighter modal")}>
+                                         onClick={() => setShowAddFighterCustomModal(true)}>
                                         <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
                                         {'Add Custom Fighter'}
                                     </div>
 
-                                    {/* @TODO: Lane hook up the modal here */}
                                     <div className={'btn btn-add-element btn-block mb-3'}
-                                         onClick={() => alert("TODO: Open add custom item modal")}>
+                                         onClick={() => setShowCustomitemAddToStash(true)}>
                                         <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
                                         {'Add Custom Item'}
                                     </div>
@@ -260,6 +283,21 @@ const WbbWarbandDetailView: React.FC<WbbWarbandDetailViewProps> = ({  onClose })
                     }
                 </div>
 
+                {showAddFighterCustomModal &&
+                    <WbbModalAddFighterCustom
+                        show={showAddFighterCustomModal}
+                        onClose={() => setShowAddFighterCustomModal(false)}
+                        onSubmit={handleCustomFighterSubmit}
+                    />
+                }
+                {showCustomitemAddToStash &&
+                    
+                    <WbbEquipmentAddCustomStash
+                        show={showCustomitemAddToStash}
+                        onClose={() => setShowCustomitemAddToStash(false)}
+                        onSubmit={handleCustomItemToStash}
+                    />
+                }
             </div>
         </div>
     );

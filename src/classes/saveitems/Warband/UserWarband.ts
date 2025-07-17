@@ -1140,6 +1140,23 @@ class UserWarband extends DynamicContextObject {
         return AlertList
     }
 
+    public IsWarbandCustom() {
+        
+        if (this.IsUnRestricted == true) {
+            return true
+        } 
+
+        if (this.Restrictions.includes("custom_equipment") == true) {
+            return true
+        } 
+
+        if (this.Restrictions.includes("custom_fighter") == true) {
+            return true
+        } 
+
+        return false;
+    }
+
     /** 
      * Returns the notes for this warband as string
      * @constructor
@@ -1227,6 +1244,7 @@ class UserWarband extends DynamicContextObject {
         }
         return count;
     }
+    
 
     public GetCountOfRel(id : string) {
         let count = 0;
