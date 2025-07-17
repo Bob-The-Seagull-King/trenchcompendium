@@ -52,8 +52,8 @@ const WbbFighterAdds : React.FC<WbbModalAddFighterEliteProps> = ({
             Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
                 () => reloadDisplay())
         });
-
     }
+
     return (
         <>
         {showAddFighterTroopModal &&
