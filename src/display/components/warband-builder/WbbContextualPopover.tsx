@@ -27,9 +27,10 @@ interface WbbContextualPopoverProps {
     type: 'fighter' | 'injury' | 'advancement' | 'modifier' | 'exploration' | 'equipment' | 'equipment_model' | 'warband';
     item: any;
     context?: RealWarbandPurchaseModel | null;
+    contextuallimit?: boolean;
 }
 
-const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, item, context = null }) => {
+const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, item, context = null, contextuallimit = false }) => {
 
     if (type == 'equipment_model' && (context == undefined || context == null)) {
         return (
@@ -469,6 +470,9 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                             {(type === 'equipment' || type === 'equipment_model') &&
                                 <>
                                 {(item.purchase as WarbandPurchase).ModelPurchase == false && <>
+                                {contextuallimit != true &&
+                                    <>
+                                    
                                     <div
                                     className={'action action-move-to-fighter'} onClick={showConfirmMoveEquipment}
                                     >
@@ -484,7 +488,8 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                                             {'Move to Stash'}
                                         </div>
                                     }</>}
-                                    
+                                    </>
+                                }
 
                                     <div
                                         className={'action action-sell'} onClick={showConfirmSellEquipment}

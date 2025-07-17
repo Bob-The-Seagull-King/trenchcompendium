@@ -14,6 +14,7 @@ interface IStaticOption {
     contextvars : ContextEventEntry, // Variables used for events.
     dyna_only? : boolean // Ensures it only gets active if the parent can be found
     autoselect?: boolean
+    option_context : ContextEventVals // Used for choice generating methods.
 }
 
 interface IChoice {
@@ -42,6 +43,7 @@ class StaticOption {
     public Selections : IChoice[] = [];
 
     public MyStaticObject : StaticOptionContextObject | null;
+    public OptionContext;
 
     public constructor(data : IStaticOption, parent : StaticOptionContextObject) {
         this.ContextVars = data.contextvars;
@@ -53,6 +55,7 @@ class StaticOption {
         this.Description = DescriptionFactory(data.description, this);
         this.DynaForce = (data.dyna_only != undefined)? data.dyna_only : false;
         this.AutoSelect = (data.autoselect != undefined)? data.autoselect : false;
+        this.OptionContext = data.option_context;
     }
 
     /**
@@ -98,7 +101,6 @@ interface IStaticOptionTypeList extends IStaticOption {
     strictness : 'loose' | 'free_form' | 'strict', // How limited should input be (allow anything to only from chosen options)
     predefined_options : string[] // Any preset options
     data_search? : IRequest, // Search request to find additional values
-    option_context : ContextEventVals // Used for choice generating methods.
 }
 
 class StaticOptionTypeList extends StaticOption {
@@ -107,7 +109,6 @@ class StaticOptionTypeList extends StaticOption {
     public Strictness;
     public PresetOptions;
     public DataSearch : IRequest | null = null;
-    public OptionContext;
 
     public constructor(data : IStaticOptionTypeList, parent :  StaticOptionContextObject) {
         super(data, parent)
@@ -115,7 +116,6 @@ class StaticOptionTypeList extends StaticOption {
         this.EntryType = data.type;
         this.Strictness = data.strictness;
         this.PresetOptions = data.predefined_options;
-        this.OptionContext = data.option_context;
 
         if (data.data_search) {
             this.DataSearch = data.data_search;
@@ -197,6 +197,7 @@ class StaticOptionContextObjectList extends StaticOption {
     public constructor(data : IStaticOptionContextObjectList, parent :  StaticOptionContextObject) {
         super(data, parent)
 
+
         this.QuestionName = data.question_name;
         this.ParentRefLevel = data.parent_level;
         if (data.self_ask) {
@@ -218,14 +219,17 @@ class StaticOptionContextObjectList extends StaticOption {
         let OptionContextList : ContextObject[] = []
 
         const RelevantContextObject : ContextObject | null = this.FindContextObject()
-
         if ((this.DynaForce == true && RelevantContextObject != null) || (this.DynaForce == false)) {
             if (RelevantContextObject != null) {
                 const Events : EventRunner = new EventRunner();
-                if (this.SelfAsk && this.MyStaticObject) {
-                    OptionContextList = await Events.runEvent(this.QuestionName, this.MyStaticObject, [RelevantContextObject, this], [], this.Question)
-                } else {
-                    OptionContextList = await Events.runEvent(this.QuestionName, RelevantContextObject, [RelevantContextObject, this], [], this.Question)
+                try {
+                    if (this.SelfAsk && this.MyStaticObject) {
+                        OptionContextList = await Events.runEvent(this.QuestionName, this.MyStaticObject, [RelevantContextObject, this], [], this.Question)
+                    } else {
+                        OptionContextList = await Events.runEvent(this.QuestionName, RelevantContextObject, [RelevantContextObject, this], [], this.Question)
+                    }
+                } catch(e) {
+                    undefined;
                 }
 
                 for (let i = 0; i < OptionContextList.length; i++) {

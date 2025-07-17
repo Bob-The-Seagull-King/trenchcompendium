@@ -8,18 +8,24 @@ import { ExplorationLocation, IExplorationLocation } from './ExplorationLocation
 import { Requester } from '../../../factories/Requester';
 import { ExplorationFactory } from '../../../factories/features/ExplorationFactory';
 
+interface IExplorationTable extends IContextObject {
+    rarity : number
+}
+
 
 class ExplorationTable extends StaticContextObject {
     public ExplorationLocations : ExplorationLocation[] = [];
+    public Rarity : number;
 
     /**
      * Assigns parameters and creates a series of description
      * objects with DescriptionFactory
      * @param data Object data in IAbility format
      */
-    public constructor(data: IContextObject, parent : ContextObject | null)
+    public constructor(data: IExplorationTable, parent : ContextObject | null)
     {
         super(data, parent)
+        this.Rarity = data.rarity
     }
 
     
@@ -57,5 +63,5 @@ class ExplorationTable extends StaticContextObject {
 
 }
 
-export {ExplorationTable}
+export {ExplorationTable, IExplorationTable}
 

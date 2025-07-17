@@ -639,7 +639,11 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
                             </td>
                             <td>
                                 <Link to={'/compendium/campaign/explorationtable/et_commonlocations'} className="">
-                                    {'Common or Rare Exploration Locations'}
+                                    {'Common'}
+                                </Link>
+                                {' or '}
+                                <Link to={'/compendium/campaign/explorationtable/et_rarelocations'} className="">
+                                    {'Rare Exploration Locations'}
                                 </Link>
                             </td>
                         </tr>
@@ -648,7 +652,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
                                 {'6-9'}
                             </td>
                             <td>
-                                <Link to={'/compendium/campaign/explorationtable/et_commonlocations'} className="">
+                                <Link to={'/compendium/campaign/explorationtable/et_rarelocations'} className="">
                                     {'Rare Exploration Locations'}
                                 </Link>
                             </td>
@@ -658,8 +662,12 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
                                 {'10+'}
                             </td>
                             <td>
-                                <Link to={'/compendium/campaign/explorationtable/et_commonlocations'} className="">
-                                    {'Rare or Legendary Exploration Locations'}
+                                <Link to={'/compendium/campaign/explorationtable/et_rarelocations'} className="">
+                                    {'Rare'}
+                                </Link>
+                                {' or '}
+                                <Link to={'/compendium/campaign/explorationtable/et_legendarylocations'} className="">
+                                    {'Legendary Exploration Locations'}
                                 </Link>
                             </td>
                         </tr>

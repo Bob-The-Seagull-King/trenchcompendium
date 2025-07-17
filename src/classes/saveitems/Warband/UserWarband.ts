@@ -119,7 +119,6 @@ class UserWarband extends DynamicContextObject {
 
     public async BuildEquipment(data : IWarbandPurchaseEquipment[]) {
         for (let i = 0; i < data.length; i++) {
-            console.log(data)
             const Model : WarbandEquipment = await WarbandFactory.CreateWarbandEquipment(data[i].equipment, this);
             const NewPurchase : WarbandPurchase = new WarbandPurchase(data[i].purchase, this, Model);
             this.Equipment.push(NewPurchase);
@@ -325,6 +324,14 @@ class UserWarband extends DynamicContextObject {
                 subpackages.push(static_packages[j])
             }
         } 
+
+        for (let i = 0; i < this.Models.length; i++) {
+            const static_packages : ContextPackage[] = await (this.Models[i].HeldObject as WarbandMember).GrabWarbandubPackages(event_id, source_obj, arrs_extra);
+            for (let j = 0; j < static_packages.length; j++) {
+                static_packages[j].callpath.push("UserWarband")
+                subpackages.push(static_packages[j])
+            }
+        }
 
         return subpackages; 
     }
@@ -662,6 +669,11 @@ class UserWarband extends DynamicContextObject {
                     FighterItems[j].MyContext = this;
                     this.Modifiers.push(FighterItems[j])
                 }
+                const EquipmentItems : WarbandPurchase[] = await fighter.model.GetWarbandEquipment();
+                for (let j = 0; j < EquipmentItems.length; j++) {
+                    EquipmentItems[j].HeldObject.MyContext = this;
+                    this.Equipment.push(EquipmentItems[j])
+                }
                 this.Models.splice(i, 1);
                 break;
             }
@@ -719,8 +731,11 @@ class UserWarband extends DynamicContextObject {
 
         try {
             await this.DeleteFighter(fighter);
-            this.Debts.ducats +=  Math.ceil(CostVarDucats * debt_mod);
-            this.Debts.glory += Math.ceil(CostVarGlory * debt_mod);
+            if (fighter.purchase.CountCap == true) {
+                this.Debts.ducats +=  Math.ceil(CostVarDucats * debt_mod);
+                this.Debts.glory += Math.ceil(CostVarGlory * debt_mod);
+            }
+
 
         } catch (e) { console.log(e) }
     }
@@ -753,7 +768,7 @@ class UserWarband extends DynamicContextObject {
             costtype : costtype,
             limit : 0
         }
-        const FacEquip : FactionEquipmentRelationship = await EquipmentFactory.CreateFactionEquipment(FactionequipmentInterface, this)
+        const FacEquip : FactionEquipmentRelationship = await EquipmentFactory.CreateFactionEquipment(FactionequipmentInterface, this, true)
         await this.AddStash(FacEquip)
     }
     
@@ -772,6 +787,14 @@ class UserWarband extends DynamicContextObject {
             modelpurch: false
         }, this, Equipment);
         this.Equipment.push(NewPurchase);
+        const eventmon : EventRunner = new EventRunner();
+        await eventmon.runEvent(
+            "onGainEquipment",
+            Equipment,
+            [this, this],
+            null,
+            NewPurchase
+        )
     }
     
     public async DeleteStash( item : RealWarbandPurchaseEquipment ) {
@@ -793,7 +816,7 @@ class UserWarband extends DynamicContextObject {
             return "Warband At Limit For " + item.equipment.MyEquipment.GetTrueName();
         }
 
-        const Relationship : FactionEquipmentRelationship = await EquipmentFactory.CreateFactionEquipment(item.purchase.CustomInterface as IFactionEquipmentRelationship, this)
+        const Relationship : FactionEquipmentRelationship = await EquipmentFactory.CreateFactionEquipment(item.purchase.CustomInterface as IFactionEquipmentRelationship, this, true)
         const Equipment : WarbandEquipment = await WarbandFactory.BuildWarbandEquipmentFromPurchase(Relationship, this);
         const NewPurchase : WarbandPurchase = new WarbandPurchase({
             cost_value : Relationship.Cost,
@@ -814,8 +837,10 @@ class UserWarband extends DynamicContextObject {
     }
 
     public async AtMaxOfItem( model : string) {
-        const RefModel : FactionEquipmentRelationship = await EquipmentFactory.CreateNewFactionEquipment(model, null);
-        
+        const RefModel : FactionEquipmentRelationship | null = await EquipmentFactory.CreateNewFactionEquipment(model, null);
+        if (RefModel == null) {
+            return false;
+        }
         const eventmon : EventRunner = new EventRunner();
         let maxcount = RefModel.Limit;
         maxcount = await eventmon.runEvent(
@@ -839,8 +864,10 @@ class UserWarband extends DynamicContextObject {
 
         try {
             await this.DeleteStash(item);
-            this.Debts.ducats +=  Math.ceil(CostVarDucats * debt_mod);
-            this.Debts.glory += Math.ceil(CostVarGlory * debt_mod);
+            if (item.purchase.CountCap == true) {
+                this.Debts.ducats +=  Math.ceil(CostVarDucats * debt_mod);
+                this.Debts.glory += Math.ceil(CostVarGlory * debt_mod);
+            }
 
         } catch (e) { console.log(e) }
     }
@@ -976,6 +1003,9 @@ class UserWarband extends DynamicContextObject {
         let TotalDucatCost = 0;
         for (let i = 0; i < this.Models.length; i++) {
             if ((this.Models[i].HeldObject as WarbandMember).State == "active") {
+                if (this.Models[i].CountCap == false) {
+                    continue;
+                }
                 TotalDucatCost += this.Models[i].GetTotalDucats();
             }
         }
@@ -986,6 +1016,9 @@ class UserWarband extends DynamicContextObject {
         
         let TotalDucatCost = 0;
         for (let i = 0; i < this.Equipment.length; i++) {
+            if (this.Equipment[i].CountCap == false) {
+                continue;
+            }
             TotalDucatCost += this.Equipment[i].GetTotalDucats();
         }
         return TotalDucatCost
@@ -995,6 +1028,9 @@ class UserWarband extends DynamicContextObject {
         
         let TotalGloryCost = 0;
         for (let i = 0; i < this.Models.length; i++) {
+            if (this.Models[i].CountCap == false) {
+                continue;
+            }
             TotalGloryCost += this.Models[i].GetTotalGlory();
         }
         return TotalGloryCost
@@ -1004,6 +1040,7 @@ class UserWarband extends DynamicContextObject {
         
         let TotalGloryCost = 0;
         for (let i = 0; i < this.Models.length; i++) {
+            if (this.Models[i].CountCap == false) {continue;}
             if ((this.Models[i].HeldObject as WarbandMember).State == "active") {
                 TotalGloryCost += this.Models[i].GetTotalGlory();
             }
@@ -1015,6 +1052,7 @@ class UserWarband extends DynamicContextObject {
         
         let TotalGloryCost = 0;
         for (let i = 0; i < this.Equipment.length; i++) {
+            if (this.Equipment[i].CountCap == false) {continue;}
             TotalGloryCost += this.Equipment[i].GetTotalGlory();
         }
         return TotalGloryCost
@@ -1193,6 +1231,7 @@ class UserWarband extends DynamicContextObject {
     public GetCountOfRel(id : string) {
         let count = 0;
         for (let i = 0; i < this.Models.length; i++) {
+            if ((this.Models[i].HeldObject as WarbandMember).State == 'dead') { continue; }
             const inter = this.Models[i].CustomInterface
             if (inter) {
                 if (inter.id == id) {
@@ -1381,7 +1420,14 @@ class UserWarband extends DynamicContextObject {
             maxcount = await eventmon.runEvent(
                 "getEquipmentLimitTrue",
                 BaseRels[i],
-                [],
+                [BaseRels[i]],
+                maxcount,
+                this
+            )
+            maxcount = await eventmon.runEvent(
+                "getEquipmentLimitTrue",
+                this,
+                [BaseRels[i]],
                 maxcount,
                 this
             )

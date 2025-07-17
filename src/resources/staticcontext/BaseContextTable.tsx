@@ -33,6 +33,10 @@ import { Patron } from "../../classes/feature/skillgroup/Patron";
 import { Injury } from "../../classes/feature/ability/Injury";
 import { Fireteam } from "../../classes/feature/ability/Fireteam";
 import { WarbandConsumable } from "../../classes/saveitems/Warband/WarbandConsumable";
+import { DynamicOptionContextObject } from "../../classes/options/DynamicOptionContextObject";
+import { IUpgrade, Upgrade } from "../../classes/feature/ability/Upgrade";
+import { WarbandEquipment } from "../../classes/saveitems/Warband/Purchases/WarbandEquipment";
+import { WarbandPurchase } from "../../classes/saveitems/Warband/Purchases/WarbandPurchase";
 
 export const BaseContextCallTable : CallEventTable = {
     option_search_viable: {
@@ -138,6 +142,28 @@ export const BaseContextCallTable : CallEventTable = {
             return relayVar
         }
     
+    },
+    set_arms: {
+        event_priotity: 0,
+        async getModelHandsAvailable(this: EventRunner, eventSource : any, relayVar : ModelHands,  trackVal : MemberAndWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            const ContextHands = context_func as ModelHands            
+            return ContextHands;
+        }
+    },
+    add_arms: {
+        event_priotity: 0,
+        async getModelHandsAvailable(this: EventRunner, eventSource : any, relayVar : ModelHands,  trackVal : MemberAndWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {  
+            if (context_func["ranged"]) {
+                relayVar.ranged += context_func["ranged"]
+            }          
+            if (context_func["melee"]) {
+                relayVar.melee += context_func["melee"]
+            }         
+            if (context_func["special"]) {
+                relayVar.melee += context_func["special"]
+            }         
+            return relayVar;
+        }
     },
     find_hands : {
         event_priotity: 0,
@@ -876,6 +902,28 @@ export const BaseContextCallTable : CallEventTable = {
             return relayVar;
         }
     },
+    unique : {
+        event_priotity: 0,
+        async cantSwapItemFromModel(this: EventRunner, eventSource : any, relayVar: boolean, trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            return true;
+        }
+    },
+    unremovable: {
+        event_priotity: 0,
+        async canRemoveItemFromModel(this: EventRunner, eventSource : any, relayVar: boolean, trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            return false;
+        }
+    },
+    add_scars: {
+        event_priotity: 0,
+        async getMaximumScars(this: EventRunner, eventSource : any, relayVar: number, trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            
+            if (context_func["value"]) {
+                relayVar += context_func["value"]
+            }
+            return relayVar;
+        }
+    },
     get_exploration_skills: {
         event_priotity: 0,
         async getExplorationSkills(this: EventRunner, eventSource : any, relayVar : WarbandProperty[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
@@ -1207,6 +1255,16 @@ export const BaseContextCallTable : CallEventTable = {
             return relayVar;
         }
 
+    },
+    equipment_remove_ability: {
+        event_priotity: 1,
+        async getWarbandMemberAbilities(this: EventRunner, eventSource : any, relayVar : Ability[], trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            let List : Ability[] = []
+            if (context_func['action_id'] ) {
+                List = relayVar.filter((item) => (context_func['action_id'].includes(item.ID) == false))
+            }
+            return List;
+        }
     },
     true_add_to_model: {
         event_priotity: 0,
@@ -2225,22 +2283,160 @@ export const BaseContextCallTable : CallEventTable = {
             return relayVar;
         }
     },
-    warband_general_hook: {
-        event_priotity: 0,        
-        async getModelRelationshipsForWarband(this: EventRunner, eventSource : any, relayVar : FactionModelRelationship[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : UserWarband, staticself : StaticOptionContextObjectList) {
-            if (staticself.MyStaticObject != null) {
-                if (staticself.MyStaticObject == context_static ) {
-                    return relayVar;
+    add_extra_equipment: {
+        event_priotity: 0,
+        async getEquipmentLimitTrue(this: EventRunner, eventSource : any, relayVar: number, trackVal : UserWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, ref_equip : FactionEquipmentRelationship) {
+            const ContextObj = (context_main as DynamicOptionContextObject)
+
+            for (let i = 0; i < ContextObj.Selections.length; i++) {
+                if (ContextObj.Selections[i].SelectedChoice != null) {
+                    if (ContextObj.Selections[i].SelectedChoice?.id == ref_equip.ID) {
+                        relayVar += context_func["count"]
+                    }
+                }
+            }
+            return relayVar;
+        }
+    },
+    add_extra_model: {
+        event_priotity: 0,
+        async onGainEquipment(this: EventRunner, eventSource : any, trackVal : WarbandPurchase, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband, equipmentHolder : any) {
+            const FacModModule = await import("../../factories/features/ModelFactory")
+            if (context_func["model_purchases"]) {
+                for (let i = 0; i < context_func["model_purchases"].length; i++) {
+                    const ModelName = context_func["model_purchases"][i]
+                    const ModelFaction = await FacModModule.ModelFactory.CreateNewFactionModel(ModelName, null)
+                    await warband.AddFighter([ModelFaction]);
+                }
+                trackVal.CountCap = false;
+            }
+        }
+    },
+    add_upgrade: {
+        event_priotity: 0,
+        async getWarbandMemberUpgrades(this: EventRunner, eventSource : any, relayVar : ModelUpgradeRelationship[], trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+
+            const UpgradeFactoryModule = await import("../../factories/features/UpgradeFactory")
+            
+            const ContextObj = (context_main as DynamicOptionContextObject)
+
+            for (let i = 0; i < ContextObj.Selections.length; i++) {
+                const contextual_use = ContextObj.Selections[i].SelectedChoice
+                if (contextual_use != null) {
+                    
+                    const UpgradeList = Requester.MakeRequest(
+                        {
+                            searchtype: "complex", 
+                            searchparam: {
+                                type: "modelupgraderelationship",
+                                request: {
+                                    operator: 'and',
+                                    terms: [
+                                        {
+                                            item: "upgrade_id",
+                                            value: contextual_use.id,
+                                            equals: true,
+                                            strict: true
+                                        }
+                                    ],
+                                    subparams: []
+                                }
+                            }
+                        }
+                    ) as IModelUpgradeRelationship[]
+
+                    if (UpgradeList.length > 0) {
+                        const UpgradeModel = await UpgradeFactoryModule.UpgradeFactory.CreateModelUpgrade(UpgradeList[0], null)
+                        relayVar.push(UpgradeModel)
+                    } else {
+                        const MUR = {
+                            id: "rel_md_up"+contextual_use.id+"_contextualadd_"+Date.now().toString(),
+                            source: "core",
+                            tags: {},
+                            name: "",
+                            contextdata: {},
+                            options: [],
+                            model_id_set: [],
+                            upgrade_id: contextual_use.id,
+                            cost: 15,
+                            cost_type: 0,
+                            restricted_upgrades: [
+                            ],
+                            warband_limit: 0,
+                            required_upgrades:[]
+                        }
+                        const UpgradeModel = await UpgradeFactoryModule.UpgradeFactory.CreateModelUpgrade(MUR, null)
+                        relayVar.push(UpgradeModel)
+                    }
                 }
             }
 
+            return relayVar;
+        }
+    },
+    warband_general_hook: {
+        event_priotity: 0,       
+        async getEquipmentRelationshipsForWarband(this: EventRunner, eventSource : any, relayVar : FactionEquipmentRelationship[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : UserWarband, staticself : StaticOptionContextObjectList) {
+            const FacCheck = sourceband.Faction.MyFaction;
+            let BaseRels : FactionEquipmentRelationship[] = []
+            
+            if (FacCheck != undefined) {
+                BaseRels = ((FacCheck.SelfDynamicProperty).OptionChoice as Faction).EquipmentItems
+            }
+
+            const eventmon : EventRunner = new EventRunner();
+            BaseRels = await eventmon.runEvent(
+                "getAllFactionEquipmentRelationships",
+                sourceband,
+                [],
+                BaseRels,
+                null
+            )
+            return BaseRels.filter((item) => item.Limit != 0);
+            
+        },       
+        async getAllUpgradesOfType(this: EventRunner, eventSource : any, relayVar : Upgrade[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : UserWarband, staticself : StaticOptionContextObjectList) {
+            const UpgradeFactoryModule = await import("../../factories/features/UpgradeFactory")
+            
+            for (let i = 0; i < staticself.OptionContext.requirements.length; i++) {
+                const UpgradeList = Requester.MakeRequest(
+                    {
+                        searchtype: "complex", 
+                        searchparam: {
+                            type: "upgrade",
+                            request: {
+                                operator: 'and',
+                                terms: [
+                                    {
+                                        item: "tags",
+                                        value: staticself.OptionContext.requirements[i].value,
+                                        equals: true,
+                                        strict: true,
+                                        istag : true,
+                                        tagvalue: staticself.OptionContext.requirements[i].subvalue
+                                    }
+                                ],
+                                subparams: []
+                            }
+                        }
+                    }
+                ) as IUpgrade[]
+                for (let j = 0; j < UpgradeList.length; j++) {
+                    const Upgrade = await UpgradeFactoryModule.UpgradeFactory.CreateUpgrade(UpgradeList[j], null)
+                    relayVar.push(Upgrade)
+                }
+            }
+            return relayVar
+            
+        },
+        async getModelRelationshipsForWarband(this: EventRunner, eventSource : any, relayVar : FactionModelRelationship[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : UserWarband, staticself : StaticOptionContextObjectList) {
             const FacCheck = sourceband.Faction.MyFaction;
             let BaseRels : FactionModelRelationship[] = []
             
             if (FacCheck != undefined) {
                 BaseRels = ((FacCheck.SelfDynamicProperty).OptionChoice as Faction).Models
             }
-
+            
             const eventmon : EventRunner = new EventRunner();
             BaseRels = await eventmon.runEvent(
                 "getAllFactionModelRelationships",
@@ -2307,6 +2503,7 @@ export const BaseContextCallTable : CallEventTable = {
             return relayVar;
         }
     },
+    
     keyword_mod: {
         event_priotity: 1,
         async getContextuallyRelevantKeywordsByID(this: EventRunner, eventSource : any, relayVar : string[], trackVal : Model, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
@@ -2320,7 +2517,7 @@ export const BaseContextCallTable : CallEventTable = {
                         }
                     }
                     if (rel_mod['type'] == 'remove') {
-                        relayVar = relayVar.filter(item => !(item != rel_mod['value']))
+                        relayVar = relayVar.filter(item => (item != rel_mod['value']))
                     }
                     
                 }
@@ -2331,6 +2528,9 @@ export const BaseContextCallTable : CallEventTable = {
     add_onto_warband: {
         event_priotity: 0,
         async showSkillOnWarband(this: EventRunner, eventSource : any, relayVar : boolean, trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, member : WarbandMember) {
+            return true;
+        },
+        async showEquipmentOnWarband(this: EventRunner, eventSource : any, relayVar : boolean, trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, member : WarbandMember) {
             return true;
         }
     },
@@ -2396,6 +2596,85 @@ export const BaseContextCallTable : CallEventTable = {
         event_priotity: 0,
         async onGainInjury(this: EventRunner, eventSource : any, trackVal : Injury, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, member : WarbandMember) {
             member.Elite = false;
+        }
+    },
+    kill_character: {
+        event_priotity: 0,
+        async onGainInjury(this: EventRunner, eventSource : any, trackVal : Injury, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, member : WarbandMember) {
+            
+            const MaxScars = await member.GetMaxScars()
+            member.SetScars(MaxScars)
+        }
+    },
+    capture_character: {
+        event_priotity: 0,
+        async onGainInjury(this: EventRunner, eventSource : any, trackVal : Injury, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, member : WarbandMember) {
+            member.State = 'lost'
+        }
+    },
+    strip_equipment: {
+        event_priotity: 0,
+        async onGainInjury(this: EventRunner, eventSource : any, trackVal : Injury, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, member : WarbandMember) {
+            await member.EmptyStash();
+        }
+    },
+    ignore_scar: {
+        event_priotity: 0,
+        
+        async careAboutInjury(this: EventRunner, eventSource : any, relayVar: boolean, trackVal : Injury, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, member : WarbandMember) {
+            if (context_func["requirements"]) {
+                for (let i = 0; i < context_func["requirements"].length; i++) {
+                    const CurReq = context_func["requirements"][i];
+
+                    if (CurReq["type"] == "id") {
+                        if (member.CurModel.ID == CurReq["value"]) {
+                            return false;
+                        }
+                    }
+                }
+            }
+            return relayVar;
+        },
+        async onGainInjury(this: EventRunner, eventSource : any, trackVal : Injury, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, member : WarbandMember) {
+            if (context_func["requirements"]) {
+                let IgnoreScar = false
+                for (let i = 0; i < context_func["requirements"].length; i++) {
+                    const CurReq = context_func["requirements"][i];
+
+                    if (CurReq["type"] == "id") {
+                        if (member.CurModel.ID == CurReq["value"]) {
+                            IgnoreScar = true;
+                        }
+                    }
+                }
+
+                if (IgnoreScar) {                    
+                    member.ScarReserve -= 1
+                }
+            } else {     
+                member.ScarReserve -= 1
+            }
+        }
+    },
+    auto_retire: {
+        event_priotity: 1,
+        async onGainInjury(this: EventRunner, eventSource : any, trackVal : Injury, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, member : WarbandMember) {
+            
+            if (member.GetInjuriesList().filter((item) => item.ID == context_func["id"]).length >= context_func["count"]) {
+                
+                const eventmon : EventRunner = new EventRunner();
+                const Value = await eventmon.runEvent(
+                    "careAboutInjury",
+                    eventSource,
+                    [member],
+                    true,
+                    trackVal
+                )
+
+                if (Value) {
+                    member.State = 'lost'
+                }
+            }
         }
     }
 }

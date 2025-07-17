@@ -38,9 +38,9 @@ class ModelEquipmentRelationship extends StaticOptionContextObject {
         }
     }
 
-    public async BuildEquipment(equipment : string[]) {
+    public async BuildEquipment(equipment : string[], skipcheck = true) {
         for (let i = 0; i < equipment.length; i++) {
-            const EquipObj = await  EquipmentFactory.CreateNewEquipment(equipment[i], this);
+            const EquipObj = await  EquipmentFactory.CreateNewEquipment(equipment[i], this, skipcheck);
             this.EquipmentItems.push(EquipObj);
         }
     }

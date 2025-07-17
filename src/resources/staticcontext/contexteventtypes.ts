@@ -18,6 +18,9 @@ import { Injury } from "../../classes/feature/ability/Injury";
 import { Fireteam } from "../../classes/feature/ability/Fireteam";
 import { StaticOptionContextObject } from "../../classes/options/StaticOptionContextObject";
 import { WarbandConsumable } from "../../classes/saveitems/Warband/WarbandConsumable";
+import { Upgrade } from "../../classes/feature/ability/Upgrade";
+import { WarbandEquipment } from "../../classes/saveitems/Warband/Purchases/WarbandEquipment";
+import { WarbandPurchase } from "../../classes/saveitems/Warband/Purchases/WarbandPurchase";
 
 /**
  * Events that can be called by the runEvent method,
@@ -69,8 +72,13 @@ export interface CallEvents {
     getLocationRestrictionsPresentable? : (this: EventRunner, eventSource : any, relayVar : any, trackVal : LocationRestriction[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<string[]>; 
     onGainInjury? : (this: EventRunner, eventSource : any, trackVal : Injury, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, member : WarbandMember) => Promise<void>; 
     onGainLocation? : (this: EventRunner, eventSource : any, trackVal : WarbandProperty, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) => Promise<void>; 
+    onGainEquipment? : (this: EventRunner, eventSource : any, trackVal : WarbandPurchase, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband, equipmentHolder : any) => Promise<void>; 
+    careAboutInjury? : (this: EventRunner, eventSource : any, relayVar: boolean, trackVal : Injury, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, member : WarbandMember) => Promise<boolean>; 
     showSkillOnWarband? : (this: EventRunner, eventSource : any, relayVar : boolean, trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, member : WarbandMember) => Promise<boolean>; 
+    showEquipmentOnWarband? : (this: EventRunner, eventSource : any, relayVar : boolean, trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, member : WarbandMember) => Promise<boolean>; 
     getModelRelationshipsForWarband? : (this: EventRunner, eventSource : any, relayVar : FactionModelRelationship[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : UserWarband, staticself : StaticOptionContextObjectList) => Promise<FactionModelRelationship[]>;
+    getEquipmentRelationshipsForWarband? : (this: EventRunner, eventSource : any, relayVar : FactionEquipmentRelationship[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : UserWarband, staticself : StaticOptionContextObjectList) => Promise<FactionEquipmentRelationship[]>;
+    getAllUpgradesOfType? : (this: EventRunner, eventSource : any, relayVar : Upgrade[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : UserWarband, staticself : StaticOptionContextObjectList) => Promise<Upgrade[]>;
     getFireteamOptionsFromWarband? : (this: EventRunner, eventSource : any, relayVar : WarbandMember[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : UserWarband, staticself : StaticOptionContextObjectList) => Promise<WarbandMember[]>;
     getFireteamOptionsFromWarbandModel? : (this: EventRunner, eventSource : any, relayVar : WarbandMember[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : WarbandMember, staticself : StaticOptionContextObjectList) => Promise<WarbandMember[]>;
     getSingleFireteamMember? : (this: EventRunner, eventSource : any, relayVar : WarbandMember[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : WarbandMember, staticself : StaticOptionContextObjectList) => Promise<WarbandMember[]>;
@@ -81,6 +89,10 @@ export interface CallEvents {
     getAllFireteamOptions? : (this: EventRunner, eventSource : any, relayVar : Fireteam[], trackVal : UserWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<Fireteam[]>;
     getConsumableOptionsList? : (this: EventRunner, eventSource : any, relayVar : IChoice[], trackVal : WarbandConsumable, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : UserWarband) => Promise<IChoice[]>; 
     runConsumableSelect? : (this: EventRunner, eventSource : any, trackVal : WarbandConsumable, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : WarbandConsumable) => Promise<void>;
+    getMaximumScars? : (this: EventRunner, eventSource : any, relayVar: number, trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<number>;
+    canRemoveItemFromModel? : (this: EventRunner, eventSource : any, relayVar: boolean, trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<boolean>;
+    cantSwapItemFromModel? : (this: EventRunner, eventSource : any, relayVar: boolean, trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<boolean>;
+    getEquipmentLimitTrue? : (this: EventRunner, eventSource : any, relayVar: number, trackVal : UserWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, ref_equip : FactionEquipmentRelationship) => Promise<number>;
 }
 
 /**
