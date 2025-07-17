@@ -81,6 +81,15 @@ const WbbModalAddEquipment: React.FC<WbbModalAddEquipmentProps> = ({ show, onClo
                         </span>
                     </div>
                 ))}
+                {available.length == 0 &&
+                    <div
+                        className={`select-item`}
+                    >
+                        <span className={'item-name'}>
+                            {"None Available"}
+                        </span>
+                    </div>                    
+                }
             </Modal.Body>
 
             <Modal.Footer>
