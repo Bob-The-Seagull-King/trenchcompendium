@@ -20,17 +20,13 @@ const WbbEditViewStash: React.FC<WbbEditViewStashProps> = ({ onClick, isActive }
             </div>
 
             <div className="stash-value">
-                <div className={'cost-ducats'}>{(stash.AmountDucats > 10e10? "Unlimited" : stash.AmountDucats) + " Ducats"}</div>
-                <div className={'cost-Glory'}>{(stash.AmountGlory  > 10e10? "Unlimited" : stash.AmountGlory) + " Glory"}</div>
+                <div className={'cost-ducats'}>{(stash.TotalDucats) + " Ducats"}</div>
+                <div className={'cost-Glory'}>{stash.TotalGlory + " Glory"}</div>
             </div>
 
             <div className={'stash-contents'}>
-                {stash.ValueDucats > 0 &&
-                    <div className={'contents-ducats'}><strong>{'Ducats: '}</strong>{stash.ValueDucats}</div>
-                }
-                {stash.ValueGlory > 0 &&
-                    <div className={'contents-Glory'}><strong>{'Glory Points: '}</strong>{stash.ValueGlory}</div>
-                }
+                <div className={'contents-ducats'}><strong>{'Ducats: '}</strong>{(stash.AmountDucats > 10e10? "Unlimited" : stash.AmountDucats)}</div>
+                <div className={'contents-Glory'}><strong>{'Glory Points: '}</strong>{(stash.AmountGlory  > 10e10? "Unlimited" : stash.AmountGlory)}</div>
 
 
                 {warband?.warband_data.Equipment.length > 0 ? (
