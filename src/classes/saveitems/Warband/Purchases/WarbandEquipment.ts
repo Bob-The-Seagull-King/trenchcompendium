@@ -72,7 +72,7 @@ class WarbandEquipment extends DynamicContextObject {
             equipment_id: EquipmentDat,
             subproperties : subpropset  
         }
-        
+        this.SelfData = _objint;
         return _objint;
     }
     

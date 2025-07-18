@@ -19,7 +19,6 @@ interface WbbEditSelectionProps {
 
 const WbbOptionSelect: React.FC<WbbEditSelectionProps> = ({choice,  property, overrideplay}) => {
     const { warband, reloadDisplay, updateKey } = useWarband();
-    const [selectedoption, setSelectedoption] = useState<IChoice | null>(choice.GetSelected());
 
     const [showModal, setshowModal] = useState(false);
     const [displayState, setDisplayState] = useState( <></> );
@@ -28,7 +27,6 @@ const WbbOptionSelect: React.FC<WbbEditSelectionProps> = ({choice,  property, ov
 
     const handleSubmit = (foundOption : IChoice | null) => {
         if (foundOption != null && overrideplay != true) {
-            setSelectedoption(foundOption)
             choice.SelectOption(foundOption? foundOption.id : null);
             property.RegenerateSubProperties().then(() => 
             property.RegenerateOptions().then(() =>{

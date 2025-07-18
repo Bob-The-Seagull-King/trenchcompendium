@@ -107,7 +107,7 @@ class SiteUserPublic {
             profile_picture: this.ProfilePic,
             campaigns: requestfriendlist
         }
-        
+        this.SelfData = _objint
         return _objint;
     }
 

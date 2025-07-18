@@ -100,6 +100,8 @@ class WarbandConsumable extends DynamicContextObject  {
             object_id: this.SelectItem? this.SelectItem.ID : null,
             object_type: this.SelectType? this.SelectType : null
         }
+
+        this.SelfData = _objint;
         
         return _objint;
     }

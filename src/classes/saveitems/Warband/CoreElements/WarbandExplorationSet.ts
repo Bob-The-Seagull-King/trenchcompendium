@@ -105,7 +105,7 @@ class WarbandExplorationSet extends DynamicContextObject {
             source: this.Source != undefined? this.Source : "",
             tags: this.Tags
         }
-        
+        this.SelfData = _objint;
         return _objint;
     }
     

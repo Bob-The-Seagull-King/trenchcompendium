@@ -386,6 +386,8 @@ class WarbandMember extends DynamicContextObject {
             scar_reserves : this.ScarReserve,
             stat_selections : this.Stat_Selections
         }
+
+        this.SelfData = _objint;
         
         return _objint;
     }
