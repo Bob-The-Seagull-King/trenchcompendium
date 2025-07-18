@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
-import {faXmark} from "@fortawesome/free-solid-svg-icons";
+import {faCircleNotch, faPlus, faXmark} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {useModalSubmitWithLoading} from "../../../../../utility/useModalSubmitWithLoading";
 
 interface MeleeWeapon {
     id: string;
@@ -25,14 +26,16 @@ const WbbModalAddMeleeWeapon: React.FC<WbbModalAddMeleeWeaponProps> = ({ show, o
         { id: 'mw3', name: 'Great Sword', costDucats: 20 },
     ];
 
-    const handleSubmit = () => {
+    // handlesubmit in this callback for delayed submission with loading state
+    const { handleSubmit, isSubmitting } = useModalSubmitWithLoading(() => {
         const weapon = availableWeapons.find(w => w.id === selectedId);
         if (weapon) {
             onSubmit(weapon);
             setSelectedId(null);
             onClose();
         }
-    };
+    });
+
 
     return (
         <Modal show={show} onHide={onClose} className="WbbModalAddItem WbbModalAddMeleeWeapon" centered>
@@ -77,8 +80,14 @@ const WbbModalAddMeleeWeapon: React.FC<WbbModalAddMeleeWeaponProps> = ({ show, o
                 <Button variant="secondary" onClick={onClose}>
                     Cancel
                 </Button>
-                <Button variant="primary" onClick={handleSubmit} disabled={!selectedId}>
-                    Add Weapon
+
+                <Button variant="primary" onClick={handleSubmit} disabled={!selectedId || isSubmitting}>
+                    {isSubmitting ? (
+                        <FontAwesomeIcon icon={faCircleNotch} className={'icon-inline-left fa-spin '} />
+                    ): (
+                        <FontAwesomeIcon icon={faPlus} className={'icon-inline-left'} />
+                    )}
+                    {'Add Weapon'}
                 </Button>
             </Modal.Footer>
         </Modal>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
-import {faXmark} from "@fortawesome/free-solid-svg-icons";
+import {faCircleNotch, faPlus, faXmark} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import { ExplorationLocation } from '../../../../classes/feature/exploration/ExplorationLocation';
 import { useWarband } from '../../../../context/WarbandContext';
@@ -8,6 +8,7 @@ import { ExplorationTableSuite, FilteredLocation } from '../../../../classes/sav
 import WbbFighterCollapse from '../WbbFighterCollapse';
 import { makestringpresentable } from '../../../../utility/functions';
 import { ISelectedOption } from '../../../../classes/saveitems/Warband/WarbandProperty';
+import {useModalSubmitWithLoading} from "../../../../utility/useModalSubmitWithLoading";
 
 interface WbbModalAddExplorationLocationProps {
     show: boolean;
@@ -25,14 +26,15 @@ const WbbModalAddExplorationLocation: React.FC<WbbModalAddExplorationLocationPro
     const [isubmitdisabled, setisubmitdisabled] = useState<boolean>(true);
     const [keyvar, setkeyvar] = useState(0);
 
-    const handleSubmit = () => {
+    // handlesubmit in this callback for delayed submission with loading state
+    const { handleSubmit, isSubmitting } = useModalSubmitWithLoading(() => {
         if (selectedLocation) {
             onSubmit(selectedLocation.location, selectedOptionIds);
             setSelectedLocation(null);
             setSelectedOptionIds([]);
             onClose();
         }
-    };
+    });
 
     function UpdateSelectedOptionIDs(newoption : ISelectedOption) {
         let found = false
@@ -145,8 +147,14 @@ const WbbModalAddExplorationLocation: React.FC<WbbModalAddExplorationLocationPro
 
             <Modal.Footer>
                 <Button variant="secondary" onClick={onClose}>Cancel</Button>
-                <Button variant="primary" key={keyvar} onClick={handleSubmit} disabled={isubmitdisabled}>
-                    Add Location
+
+                <Button variant="primary" onClick={handleSubmit} disabled={isubmitdisabled || isSubmitting}>
+                    {isSubmitting ? (
+                        <FontAwesomeIcon icon={faCircleNotch} className={'icon-inline-left fa-spin '} />
+                    ): (
+                        <FontAwesomeIcon icon={faPlus} className={'icon-inline-left'} />
+                    )}
+                    {'Add Location'}
                 </Button>
             </Modal.Footer>
         </Modal>

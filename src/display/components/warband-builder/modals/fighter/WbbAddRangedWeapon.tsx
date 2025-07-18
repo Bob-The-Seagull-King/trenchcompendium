@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
-import {faXmark} from "@fortawesome/free-solid-svg-icons";
+import {faCircleNotch, faPlus, faXmark} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {useModalSubmitWithLoading} from "../../../../../utility/useModalSubmitWithLoading";
 
 interface RangedWeapon {
     id: string;
@@ -25,14 +26,16 @@ const WbbModalAddRangedWeapon: React.FC<WbbModalAddRangedWeaponProps> = ({ show,
         { id: 'rw3', name: 'Machine Gun', costGlory: 5 },
     ];
 
-    const handleSubmit = () => {
+    // handlesubmit in this callback for delayed submission with loading state
+    const { handleSubmit, isSubmitting } = useModalSubmitWithLoading(() => {
         const selected = availableWeapons.find((w) => w.id === selectedId);
         if (selected) {
             onSubmit(selected);
             setSelectedId(null); // reset
             onClose();
         }
-    };
+    });
+
 
     return (
         <Modal show={show} onHide={onClose} className="WbbModalAddItem WbbModalAddRangedWeapon" centered>
@@ -75,8 +78,13 @@ const WbbModalAddRangedWeapon: React.FC<WbbModalAddRangedWeaponProps> = ({ show,
 
             <Modal.Footer>
                 <Button variant="secondary" onClick={onClose}>Cancel</Button>
-                <Button variant="primary" onClick={handleSubmit} disabled={!selectedId}>
-                    Add Weapon
+                <Button variant="primary" onClick={handleSubmit} disabled={!selectedId || isSubmitting}>
+                    {isSubmitting ? (
+                        <FontAwesomeIcon icon={faCircleNotch} className={'icon-inline-left fa-spin '} />
+                    ): (
+                        <FontAwesomeIcon icon={faPlus} className={'icon-inline-left'} />
+                    )}
+                    {'Add Weapon'}
                 </Button>
             </Modal.Footer>
         </Modal>

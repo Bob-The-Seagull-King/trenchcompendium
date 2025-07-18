@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Button, FormControl } from 'react-bootstrap';
-import {faXmark} from "@fortawesome/free-solid-svg-icons";
+import {faCircleNotch, faPlus, faXmark} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {useModalSubmitWithLoading} from "../../../../../utility/useModalSubmitWithLoading";
 
 interface WbbEditFighterExperienceProps {
     show: boolean;
@@ -17,10 +18,12 @@ const WbbEditFighterExperience: React.FC<WbbEditFighterExperienceProps> = ({ sho
         setXp(currentXP); // reset when modal opens
     }, [currentXP]);
 
-    const handleSubmit = () => {
+
+    // handlesubmit in this callback for delayed submission with loading state
+    const { handleSubmit, isSubmitting } = useModalSubmitWithLoading(() => {
         onSubmit(xp);
         onClose();
-    };
+    });
 
     return (
         <Modal show={show} onHide={onClose} className="WbbModalAddItem WbbEditFighterExperience" centered>
@@ -62,7 +65,13 @@ const WbbEditFighterExperience: React.FC<WbbEditFighterExperienceProps> = ({ sho
 
             <Modal.Footer>
                 <Button variant="secondary" onClick={onClose}>Cancel</Button>
-                <Button variant="primary" onClick={handleSubmit}>Save</Button>
+
+                <Button variant="primary" onClick={handleSubmit} disabled={isSubmitting}>
+                    {isSubmitting && (
+                        <FontAwesomeIcon icon={faCircleNotch} className={'icon-inline-left fa-spin '} />
+                    )}
+                    {'Save Experience'}
+                </Button>
             </Modal.Footer>
         </Modal>
     );

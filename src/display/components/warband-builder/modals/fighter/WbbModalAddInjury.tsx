@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
-import {faXmark} from "@fortawesome/free-solid-svg-icons";
+import {faCircleNotch, faPlus, faXmark} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import { Injury } from '../../../../../classes/feature/ability/Injury';
 import { RealWarbandPurchaseModel } from '../../../../../classes/saveitems/Warband/Purchases/WarbandPurchase';
+import {useModalSubmitWithLoading} from "../../../../../utility/useModalSubmitWithLoading";
 
 
 interface WbbModalAddInjuryProps {
@@ -19,16 +20,17 @@ const WbbModalAddInjury: React.FC<WbbModalAddInjuryProps> = ({ show, onClose, on
     const [available, setAvailable] = useState<Injury[]>([]);
     const [keyvar, setkevvar] = useState(0);
 
-    
-    const handleSubmit = () => {
+    // handlesubmit in this callback for delayed submission with loading state
+    const { handleSubmit, isSubmitting } = useModalSubmitWithLoading(() => {
         const selected = available.find((i) => i.ID === selectedId);
         if (selected) {
             onSubmit(selected);
             setSelectedId(null); // reset
             onClose();
         }
-    };
-    
+    });
+
+
     useEffect(() => {
         async function SetEquipmentOptions() {
             const options = await fighter.model.GetModelInjuryOptions()
@@ -68,8 +70,13 @@ const WbbModalAddInjury: React.FC<WbbModalAddInjuryProps> = ({ show, onClose, on
 
             <Modal.Footer>
                 <Button variant="secondary" onClick={onClose}>Cancel</Button>
-                <Button variant="primary" onClick={handleSubmit} disabled={!selectedId}>
-                    Add Injury
+                <Button variant="primary" onClick={handleSubmit} disabled={!selectedId || isSubmitting}>
+                    {isSubmitting ? (
+                        <FontAwesomeIcon icon={faCircleNotch} className={'icon-inline-left fa-spin '} />
+                    ): (
+                        <FontAwesomeIcon icon={faPlus} className={'icon-inline-left'} />
+                    )}
+                    {'Add Injury'}
                 </Button>
             </Modal.Footer>
         </Modal>

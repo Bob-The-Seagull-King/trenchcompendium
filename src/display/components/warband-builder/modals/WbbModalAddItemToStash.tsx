@@ -4,7 +4,8 @@ import React, { useEffect, useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { containsTag, getCostType } from '../../../../utility/functions';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faXmark} from "@fortawesome/free-solid-svg-icons";
+import {faCircleNotch, faPlus, faXmark} from "@fortawesome/free-solid-svg-icons";
+import {useModalSubmitWithLoading} from "../../../../utility/useModalSubmitWithLoading";
 
 interface Item {
     id: string;
@@ -28,15 +29,16 @@ const WbbModalAddItemToStash: React.FC<WbbModalAddItemToStashProps> = ({ show, o
     const [listofoptions, setListofOptions] = useState<FactionEquipmentRelationship[]>([])
     const [keyvar, setkevvar] = useState(0);
 
-    const handleSubmit = () => {
+    // handlesubmit in this callback for delayed submission with loading state
+    const { handleSubmit, isSubmitting } = useModalSubmitWithLoading(() => {
         const weapon = listofoptions.find(w => w.ID === selectedId);
         if (weapon) {
             onSubmit(weapon);
             setSelectedId(null);
             onClose();
         }
-    };
-    
+    });
+
     useEffect(() => {
         async function SetEquipmentOptions() {
             const options = await warband?.warband_data.GetFactionEquipmentOptions(exploration)
@@ -91,8 +93,14 @@ const WbbModalAddItemToStash: React.FC<WbbModalAddItemToStashProps> = ({ show, o
                 <Button variant="secondary" onClick={onClose}>
                     Cancel
                 </Button>
-                <Button variant="primary" onClick={handleSubmit} disabled={!selectedId}>
-                    Add item
+
+                <Button variant="primary" onClick={handleSubmit} disabled={!selectedId || isSubmitting}>
+                    {isSubmitting ? (
+                        <FontAwesomeIcon icon={faCircleNotch} className={'icon-inline-left fa-spin '} />
+                    ): (
+                        <FontAwesomeIcon icon={faPlus} className={'icon-inline-left'} />
+                    )}
+                    {'Add item'}
                 </Button>
             </Modal.Footer>
         </Modal>

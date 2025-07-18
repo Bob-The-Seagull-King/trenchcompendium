@@ -5,6 +5,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import { RealWarbandPurchaseModel } from '../../../../../classes/saveitems/Warband/Purchases/WarbandPurchase';
 import { FactionEquipmentRelationship } from '../../../../../classes/relationship/faction/FactionEquipmentRelationship';
 import { getCostType } from '../../../../../utility/functions';
+import {useModalSubmitWithLoading} from "../../../../../utility/useModalSubmitWithLoading";
 
 interface EquipmentItem {
     id: string;
@@ -27,29 +28,15 @@ const WbbModalAddEquipment: React.FC<WbbModalAddEquipmentProps> = ({ show, onClo
     const [available, setAvailable] = useState<FactionEquipmentRelationship[]>([]);
     const [keyvar, setkevvar] = useState(0);
 
-    // Tracks if the modal is submitting to show a loading state
-    const [isSubmitting, setIsSubmitting] = useState(false);
-
-    const handleSubmit = () => {
-        setIsSubmitting(true); // show loading state
-
-        // delay the submission to wait for animation to start
-        setTimeout(() => {
-
-            const selected = available.find(w => w.ID === selectedID);
-            if (selected) {
-                onSubmit(selected);
-                setSelectedID(null)
-                onClose();
-            }
-
-            // delay loading state removal to simulate processing time
-            setTimeout(() => {
-                setIsSubmitting(false); // remove loading state
-            }, 1000);
-
-        }, 100);
-    };
+    // handlesubmit in this callback for delayed submission with loading state
+    const { handleSubmit, isSubmitting } = useModalSubmitWithLoading(() => {
+        const selected = available.find(w => w.ID === selectedID);
+        if (selected) {
+            onSubmit(selected);
+            setSelectedID(null)
+            onClose();
+        }
+    });
     
     
     useEffect(() => {

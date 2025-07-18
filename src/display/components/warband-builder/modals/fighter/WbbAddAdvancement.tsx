@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
-import {faXmark} from "@fortawesome/free-solid-svg-icons";
+import {faCircleNotch, faPlus, faXmark} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import { Skill } from '../../../../../classes/feature/ability/Skill';
 import { RealWarbandPurchaseModel } from '../../../../../classes/saveitems/Warband/Purchases/WarbandPurchase';
 import { SkillSuite } from '../../../../../classes/saveitems/Warband/Purchases/WarbandMember';
 import { makestringpresentable } from '../../../../../utility/functions';
 import WbbFighterCollapse from '../../WbbFighterCollapse';
+import {useModalSubmitWithLoading} from "../../../../../utility/useModalSubmitWithLoading";
 
 
 interface WbbModalAddAdvancementProps {
@@ -22,14 +23,15 @@ const WbbModalAddAdvancement: React.FC<WbbModalAddAdvancementProps> = ({ show, o
     const [available, setAvailable] = useState<SkillSuite[]>([]);
     const [keyvar, setkevvar] = useState(0);
 
-    const handleSubmit = () => {
+    // handlesubmit in this callback for delayed submission with loading state
+    const { handleSubmit, isSubmitting } = useModalSubmitWithLoading(() => {
         const selected = FindItem(selectedId);
         if (selected) {
             onSubmit(selected);
             setSelectedId(null);
             onClose();
         }
-    };
+    });
 
     function FindItem(a : string | null) {
         for (let i = 0; i < available.length; i++) {
@@ -98,8 +100,13 @@ const WbbModalAddAdvancement: React.FC<WbbModalAddAdvancementProps> = ({ show, o
 
             <Modal.Footer>
                 <Button variant="secondary" onClick={onClose}>Cancel</Button>
-                <Button variant="primary" onClick={handleSubmit} disabled={!selectedId}>
-                    Add Advancement
+                <Button variant="primary" onClick={handleSubmit} disabled={!selectedId || isSubmitting}>
+                    {isSubmitting ? (
+                        <FontAwesomeIcon icon={faCircleNotch} className={'icon-inline-left fa-spin '} />
+                    ): (
+                        <FontAwesomeIcon icon={faPlus} className={'icon-inline-left'} />
+                    )}
+                    {'Add Advancement'}
                 </Button>
             </Modal.Footer>
         </Modal>

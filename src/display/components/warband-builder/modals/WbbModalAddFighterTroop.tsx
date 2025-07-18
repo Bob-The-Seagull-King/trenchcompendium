@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
-import {faXmark} from "@fortawesome/free-solid-svg-icons";
+import {faCircleNotch, faPlus, faXmark} from "@fortawesome/free-solid-svg-icons";
 import { FactionModelRelationship } from '../../../../classes/relationship/faction/FactionModelRelationship';
 import { useWarband } from '../../../../context/WarbandContext';
 import { getCostType } from '../../../../utility/functions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import SynodModelImageSource from "../../../../utility/SynodModelImageSource";
 import SynodModelImage from "../../../../utility/SynodModelImage";
+import {useModalSubmitWithLoading} from "../../../../utility/useModalSubmitWithLoading";
 
 interface Fighter {
     id: string;
@@ -42,14 +43,15 @@ const WbbModalAddFighterTroop: React.FC<WbbModalAddFighterTroopProps> = ({ show,
         SetModelOptions();
     }, [show]);
 
-    const handleSubmit = () => {
+    // handlesubmit in this callback for delayed submission with loading state
+    const { handleSubmit, isSubmitting } = useModalSubmitWithLoading(() => {
         if (selectedId) {
             const selected = listofoptions.filter((f) => f.ID === selectedId);
             onSubmit(selected);
             setSelectedId(null); // clear selection
             onClose();
         }
-    };
+    });
 
     return (
         <Modal show={show} onHide={onClose} className={'WbbModalAddItem WbbModalAddFighter WbbModalAddFighterTroop'} centered>
@@ -93,8 +95,14 @@ const WbbModalAddFighterTroop: React.FC<WbbModalAddFighterTroopProps> = ({ show,
                 <Button variant="secondary" onClick={onClose}>
                     Cancel
                 </Button>
-                <Button variant="primary" onClick={handleSubmit} disabled={!selectedId}>
-                    Add Fighter
+
+                <Button variant="primary" onClick={handleSubmit} disabled={!selectedId || isSubmitting}>
+                    {isSubmitting ? (
+                        <FontAwesomeIcon icon={faCircleNotch} className={'icon-inline-left fa-spin '} />
+                    ): (
+                        <FontAwesomeIcon icon={faPlus} className={'icon-inline-left'} />
+                    )}
+                    {'Add Fighter'}
                 </Button>
             </Modal.Footer>
         </Modal>
