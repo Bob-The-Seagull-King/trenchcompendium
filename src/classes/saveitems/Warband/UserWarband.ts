@@ -38,6 +38,16 @@ export interface WarbandAlert {
     content: string
 }
 
+export interface CachedFacRelData {
+    facrel : FactionEquipmentRelationship,
+    limit : number,
+    restrictions : string[],
+    count_cur : number,
+    cost: number
+}
+
+export type CachedFactionEquipment = {[type : string]: CachedFacRelData};
+
 interface IUserWarband extends IContextObject {
     id : string,
     ducat_bank : number,
@@ -71,6 +81,7 @@ class UserWarband extends DynamicContextObject {
     public Consumables : WarbandConsumable[] = [];
     public Restrictions : string[] = [];
     public IsUnRestricted : boolean;
+    public EquipmentRelCahce : CachedFactionEquipment = {}
 
     public DucatLimit : number[] = [700,800,900,1000,1100,1200,1300,1400,1500,1600,1700,1800];
     public ModelLimit : number[] = [10,11,12,13,14,15,16,17,18,19,20,22];
@@ -1486,13 +1497,14 @@ class UserWarband extends DynamicContextObject {
         return options;
     }
 
-    public async GetFactionEquipmentOptions(use_exploration = false, count_cost = true) : Promise<FactionEquipmentRelationship[]> {
+    public async GetFactionEquipmentOptions(use_exploration = false, count_cost = true, get_base = false) : Promise<FactionEquipmentRelationship[]> {
         const FacCheck = this.Faction.MyFaction;
         const ListOfRels : FactionEquipmentRelationship[] = []
         const AddedIDs : string[] = [];
         let BaseRels : FactionEquipmentRelationship[] = []
         let RefRels : FactionEquipmentRelationship[] = []
-        
+        this.EquipmentRelCahce = {}
+
         if (FacCheck != undefined) {
             RefRels = ((FacCheck.SelfDynamicProperty).OptionChoice as Faction).EquipmentItems
         }
@@ -1512,7 +1524,7 @@ class UserWarband extends DynamicContextObject {
             null
         )
         
-        if (this.IsUnRestricted) {
+        if (this.IsUnRestricted ) {
             return BaseRels;
         }
 
@@ -1530,17 +1542,14 @@ class UserWarband extends DynamicContextObject {
             for (let j = 0; j < BaseEquipRestrictionList.length; j++) { NewRefList.push(BaseEquipRestrictionList[j]); }
             for (let j = 0; j < FactionEquipRestrictionList.length; j++) { NewRefList.push(FactionEquipRestrictionList[j]); }
 
-            const canadd = await eventmon.runEvent(
-                "canWarbandAddItem",
-                this,
-                [NewRefList, BaseRels[i]],
-                true,
-                this
+            const StringOfRestrictions = await eventmon.runEvent(
+                "getEquipmentRestrictionPresentable",
+                BaseRels[i],
+                [],
+                [],
+                NewRefList
             )
-
-            if (!canadd) {
-                continue;
-            }
+            
             let maxcount = BaseRels[i].Limit;
             maxcount = await eventmon.runEvent(
                 "getEquipmentLimitTrue",
@@ -1556,19 +1565,47 @@ class UserWarband extends DynamicContextObject {
                 maxcount,
                 this
             )
+
+            let maxccurcostount = BaseRels[i].Cost;
+            maxccurcostount = await eventmon.runEvent(
+                "getCostOfEquipment",
+                BaseRels[i],
+                [],
+                maxccurcostount,
+                this
+            )
+
+            this.EquipmentRelCahce[BaseRels[i].ID] = {
+                limit: maxcount,
+                cost : maxccurcostount,
+                facrel: BaseRels[i],
+                restrictions: StringOfRestrictions,
+                count_cur: this.GetCountOfEquipmentRel(BaseRels[i].ID)
+            }
+
+            if (get_base == true) {
+                AddedIDs.push(BaseRels[i].ID)
+                ListOfRels.push(BaseRels[i]);
+                continue;
+            }
+
+            const canadd = await eventmon.runEvent(
+                "canWarbandAddItem",
+                this,
+                [NewRefList, BaseRels[i]],
+                true,
+                this
+            )
+
+            if (!canadd) {
+                continue;
+            }
+            
             if (this.GetCountOfEquipmentRel(BaseRels[i].ID) < maxcount || (maxcount == 0 && BaseRels[i].Limit == 0)) {
                 if (!containsTag(BaseRels[i].Tags, "exploration_only") || use_exploration) {
 
                     if (count_cost == true) {
                         let canaddupgrade = true;
-                        let maxccurcostount = BaseRels[i].Cost;
-                        maxccurcostount = await eventmon.runEvent(
-                            "getCostOfEquipment",
-                            BaseRels[i],
-                            [],
-                            maxccurcostount,
-                            this
-                        )
 
                         if (BaseRels[i].CostType == 0) {
                             canaddupgrade = (this).GetSumCurrentDucats() >= maxccurcostount;

@@ -906,7 +906,7 @@ export const BaseContextCallTable : CallEventTable = {
         },
         async canWarbandAddItem(this: EventRunner, eventSource : any, relayVar : boolean,  trackVal : UserWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, restrictions : EquipmentRestriction[], item: FactionEquipmentRelationship) {            
             let CanAdd = relayVar;
-
+            
             if (CanAdd) {
 
                 if (context_func["ignore"]) {
@@ -924,6 +924,16 @@ export const BaseContextCallTable : CallEventTable = {
                 if (Limits.maximum) {
                     for (let i = 0; i < Limits.maximum.length; i++) {
                         const LimitMax = Limits.maximum[i]
+                        
+                        if (context_func["ignore"]) {
+                            for (let i = 0; i < context_func["ignore"].length; i++) {
+                                if (context_func["ignore"][i]["type"] == "id") {
+                                    if (item.EquipmentItem.ID == context_func["ignore"][i]["value"]) {
+                                        return true;
+                                    }
+                                }
+                            }
+                        }
                         
                         if (LimitMax.category) {
                             if (item.EquipmentItem.Category != LimitMax.category) {
@@ -952,6 +962,22 @@ export const BaseContextCallTable : CallEventTable = {
                             const Equip = Allequip[j].equipment
                             const EquipObj = (Equip.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment)
     
+                        
+                            if (context_func["ignore"]) {
+                                let DoSkip = false;
+                                for (let j = 0; j < context_func["ignore"].length; j++) {
+                                    if (context_func["ignore"][j]["type"] == "id") {
+                                        if (EquipObj.ID == context_func["ignore"][j]["value"]) {
+                                            DoSkip = true;
+                                            break;
+                                        }
+                                    }
+                                }
+                                if (DoSkip) {
+                                    continue;
+                                }
+                            }
+
                             if (LimitMax.res_type == "keyword") {
                                 let Found = false;
                                 for (let k = 0; k < EquipObj.KeyWord.length; k++) {
@@ -1006,6 +1032,21 @@ export const BaseContextCallTable : CallEventTable = {
                         for (let j = 0; j < Allequip.length; j++) {
                             const Equip = Allequip[j].equipment
                             const EquipObj = (Equip.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment)
+                        
+                            if (context_func["ignore"]) {
+                                let DoSkip = false;
+                                for (let j = 0; j < context_func["ignore"].length; j++) {
+                                    if (context_func["ignore"][j]["type"] == "id") {
+                                        if (EquipObj.ID == context_func["ignore"][j]["value"]) {
+                                            DoSkip = true;
+                                            break;
+                                        }
+                                    }
+                                }
+                                if (DoSkip) {
+                                    continue;
+                                }
+                            }
     
                             if (LimitMax.res_type == "keyword") {
                                 let Found = false;
@@ -1040,7 +1081,6 @@ export const BaseContextCallTable : CallEventTable = {
                     }
                 }
             }
-
             return CanAdd;
         }
         

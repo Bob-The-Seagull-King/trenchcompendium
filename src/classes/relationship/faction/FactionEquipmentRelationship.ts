@@ -99,7 +99,7 @@ class FactionEquipmentRelationship extends StaticContextObject {
      */
     public GetRestrictionString() {
         // return 'Assassins only';
-        return '';
+        return [];
     }
 
     public GetCostString() {

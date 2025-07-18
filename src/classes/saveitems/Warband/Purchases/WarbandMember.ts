@@ -1454,7 +1454,7 @@ class WarbandMember extends DynamicContextObject {
         return 18;
     }
 
-    public async GetModelEquipmentOptions() {
+    public async GetModelEquipmentOptions(getbase = false) {
         const ListOfOptions : FactionEquipmentRelationship[] = []
 
         const eventmon : EventRunner = new EventRunner();
@@ -1470,9 +1470,9 @@ class WarbandMember extends DynamicContextObject {
             return ListOfOptions;
         }
 
-        const BaseFactionOptions : FactionEquipmentRelationship[] = await (this.MyContext as UserWarband).GetFactionEquipmentOptions();
+        const BaseFactionOptions : FactionEquipmentRelationship[] = await (this.MyContext as UserWarband).GetFactionEquipmentOptions(false, true, getbase);
 
-        if (this.IsUnRestricted == true) {
+        if (this.IsUnRestricted == true || getbase == true) {
             return BaseFactionOptions;
         }
 
@@ -1877,7 +1877,8 @@ class WarbandMember extends DynamicContextObject {
 
         if (UnarmedFlag) {
             const UnarmedVal = await EquipmentFactory.CreateNewModelEquipment("rel_unarmed", null)
-            const Unarmed : WarbandEquipment = await WarbandFactory.BuildModelEquipmentFromPurchase(UnarmedVal, UnarmedVal.EquipmentItems[0], 1, this);
+            const UnarmedObj = await EquipmentFactory.CreateNewEquipment("eq_unarmed", null)
+            const Unarmed : WarbandEquipment = await WarbandFactory.BuildModelEquipmentFromPurchase(UnarmedVal, UnarmedObj, 0, this);
             const NewPurchase : WarbandPurchase = new WarbandPurchase({
                 cost_value : 0,
                 cost_type : 0,

@@ -6,6 +6,7 @@ import { RealWarbandPurchaseModel } from '../../../../../classes/saveitems/Warba
 import { FactionEquipmentRelationship } from '../../../../../classes/relationship/faction/FactionEquipmentRelationship';
 import { getCostType } from '../../../../../utility/functions';
 import {useModalSubmitWithLoading} from "../../../../../utility/useModalSubmitWithLoading";
+import { useWarband } from '../../../../../context/WarbandContext';
 
 interface EquipmentItem {
     id: string;
@@ -25,7 +26,9 @@ interface WbbModalAddEquipmentProps {
 const WbbModalAddEquipment: React.FC<WbbModalAddEquipmentProps> = ({ show, onClose, onSubmit, fighter, category }) => {
     const [selectedID, setSelectedID] = useState<string | null>(null);
 
+    const { warband } = useWarband();
     const [available, setAvailable] = useState<FactionEquipmentRelationship[]>([]);
+    const [fullavailable, setFullAvailable] = useState<FactionEquipmentRelationship[]>([]);
     const [keyvar, setkevvar] = useState(0);
 
     // handlesubmit in this callback for delayed submission with loading state
@@ -42,8 +45,10 @@ const WbbModalAddEquipment: React.FC<WbbModalAddEquipmentProps> = ({ show, onClo
     useEffect(() => {
         async function SetEquipmentOptions() {
             const options = await fighter.model.GetModelEquipmentOptions()
+            const fulloptions = await fighter.model.GetModelEquipmentOptions(true)
             if (options != undefined) {
                 setAvailable(options.filter((item : FactionEquipmentRelationship) => item.EquipmentItem.Category == category))
+                setFullAvailable(fulloptions.filter((item : FactionEquipmentRelationship) => item.EquipmentItem.Category == category))
                 setkevvar(keyvar + 1)
             }
         }
@@ -65,62 +70,67 @@ const WbbModalAddEquipment: React.FC<WbbModalAddEquipmentProps> = ({ show, onClo
             </Modal.Header>
 
             <Modal.Body>
-                {/*
-                 * @TODO: Change the list so that all items are shown and items that are not available are shown as disabled
-                 * - show ALL items in the list
-                 * - if not available, show as disabled (add .disabled)
-                 * - if disabled, do not allow selection
-                 * - if disabled, mark the corresponding span with the class .disabled-reason
-                 * ---> .item-restriction, .item-cost, .item-limit
-                */}
-                {available.map((item) => (
+                {fullavailable.map((item) => (
                     <div
                         key={item.ID}
-                        className={`select-item ${selectedID === item.ID ? 'selected' : ''}`}
-                        onClick={() => setSelectedID(item.ID)}
-                    >{/* @TODO: Only select if not disabled */}
+                        className={`select-item ${selectedID === item.ID ? 'selected' : ''} ${available.includes(item)? '' : 'disabled'}`}
+                        onClick={() => {
+                            if (available.includes(item)) {
+                                setSelectedID(item.ID)
+                            }
+                        }}
+                    >
                         <span className={'item-left'}>
                             <span className={'item-name'}>
                                 {item.EquipmentItem.GetTrueName()}
                             </span>
 
-                            {item.GetRestrictionString() != '' &&
-                                <span className={'item-restriction'}>
-                                    {item.GetRestrictionString()}
-                                </span>
-                            }
+                            
+                            
+                            
                         </span>
 
                         <span className={'item-right'}>
                             <span className={'item-cost'}>
                                 {item.Cost &&
                                     <>
-                                        {item.GetCostString()}
+                                    {
+                                        warband?
+                                            warband.warband_data.EquipmentRelCahce[item.ID]? 
+                                                warband.warband_data.EquipmentRelCahce[item.ID].cost + " " + getCostType(item.CostType)
+                                                : item.GetCostString() : item.GetCostString()
+                                    }
                                     </>
                                 }
                             </span>
 
-                            {item.GetLimit() > 0 &&
+                            {(warband? warband.warband_data.EquipmentRelCahce[item.ID]? 
+                                (warband.warband_data.EquipmentRelCahce[item.ID].limit )
+                                : item.GetLimit() : item.GetLimit()) > 0 &&
                                 <span className={'item-limit'}>
-                                    {/* @TODO: Show number of selections in this warband*/}
-                                    {/*Limit: {'1'}/{item.GetLimit()}*/}
-                                    Limit: {item.GetLimit()}
+                                    Limit: {
+                                        warband?
+                                            warband.warband_data.EquipmentRelCahce[item.ID]? 
+                                                ( warband.warband_data.EquipmentRelCahce[item.ID].count_cur + "/" + warband.warband_data.EquipmentRelCahce[item.ID].limit )
+                                                : item.GetLimit() : item.GetLimit()
+                                    }
+                                </span>
+                            }
+                            {(warband? warband.warband_data.EquipmentRelCahce[item.ID]? 
+                                (warband.warband_data.EquipmentRelCahce[item.ID].restrictions )
+                                : item.GetRestrictionString() : item.GetRestrictionString()).length > 0 &&
+                                <span className={'item-limit'}>
+                                    Restrictions: {
+                                        (warband?
+                                            warband.warband_data.EquipmentRelCahce[item.ID]? 
+                                                ( warband.warband_data.EquipmentRelCahce[item.ID].restrictions )
+                                                : item.GetRestrictionString() : item.GetRestrictionString()).join(', ')
+                                    }
                                 </span>
                             }
                         </span>
                     </div>
                 ))}
-
-                {/* This can stay as a fallback if the user opens a model where no options are possible. */}
-                {available.length == 0 &&
-                    <div
-                        className={`select-item`}
-                    >
-                        <span className={'item-name'}>
-                            {"None Available"}
-                        </span>
-                    </div>                    
-                }
             </Modal.Body>
 
             <Modal.Footer>
