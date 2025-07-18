@@ -72,6 +72,10 @@ const WbbWarbandListItem: React.FC<WbbWarbandListItemProps> = ({ item, manager, 
     return (
         <div className={'col-12 col-lg-6'}>
             <div className={'WbbWarbandListItem'}>
+                {isDeleting &&
+                    <LoadingOverlay message={"Deleting"}/>
+                }
+
                 <CustomNavLink
                     classes={'WbbWarbandListItem-link'}
                     link={`/warband/edit/${item.id}`}
@@ -80,12 +84,7 @@ const WbbWarbandListItem: React.FC<WbbWarbandListItemProps> = ({ item, manager, 
                     }}
                 >
                     <div className={'warband-item-text-wrap'}>
-                        {isDeleting &&
-                            <>
-                            <br/> <br/> <br/> <br/>
-                            <LoadingOverlay message={"Deleting"}/>
-                            </>
-                        }
+
                         {!isDeleting &&
                             <>
                             <div className={'item-name'}>
