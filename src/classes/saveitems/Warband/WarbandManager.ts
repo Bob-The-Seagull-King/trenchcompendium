@@ -4,6 +4,7 @@ import { IWarbandContextItem } from './High_Level/WarbandContextItem';
 import { UserWarband, IUserWarband } from './UserWarband';
 import { UserFactory } from '../../../factories/synod/UserFactory';
 import { SYNOD } from '../../../resources/api-constants';
+import { EventRunner } from '../../contextevent/contexteventhandler';
 
 export interface ISumWarband {
     id : number // -1 means LOCAL warband
@@ -287,6 +288,15 @@ class WarbandManager {
             restrictions_list: rest_list
         }
         const new_item : UserWarband = await WarbandFactory.CreateUserWarband(_Item)
+        
+        const eventmon : EventRunner = new EventRunner();
+        await eventmon.runEvent(
+            "onWarbandBuild",
+            new_item,
+            [],
+            null,
+            new_item
+        )
 
         if (this.UserProfile != null) {
             const id  = await this.CreateWarbandSynod(new_item.ConvertToInterface())

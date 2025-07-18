@@ -216,6 +216,8 @@ class WarbandProperty extends DynamicContextObject  {
             selections: selectionarray,
             consumables: consumablelist
         }
+
+        this.SelfData = _objint;
         
         return _objint;
     }

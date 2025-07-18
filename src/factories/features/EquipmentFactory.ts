@@ -6,6 +6,7 @@ import { Ability, IAbility } from '../../classes/feature/ability/Ability';
 import { Equipment, IEquipment } from '../../classes/feature/equipment/Equipment';
 import { IModelEquipmentRelationship, ModelEquipmentRelationship } from '../../classes/relationship/model/ModelEquipmentRelationship';
 import { IFactionEquipmentRelationship, FactionEquipmentRelationship } from '../../classes/relationship/faction/FactionEquipmentRelationship';
+import { byPropertiesOf } from '../../utility/functions';
 
 
 class EquipmentFactory {
@@ -27,8 +28,42 @@ class EquipmentFactory {
         return rule;
     }
         
-    static async GetAllEquipment() {
-        const models = Requester.MakeRequest({searchtype: "file", searchparam: {type: "equipment"}}) as IEquipment[];
+    static async GetAllEquipment(showspecial = false) {
+        let models : IEquipment[] = []
+        if (showspecial) {
+            const models = Requester.MakeRequest({searchtype: "file", searchparam: {type: "equipment"}}) as IEquipment[];
+        } else {
+            models = Requester.MakeRequest(
+            {
+                searchtype: "complex", 
+                searchparam: {
+                    type: "equipment",
+                    request: {
+                        operator: 'and',
+                        terms: [
+                            {
+                                item: "tags",
+                                value: "model",
+                                equals: false,
+                                strict: true,
+                                istag : true,
+                                tagvalue: true
+                            },
+                            {
+                                item: "tags",
+                                value: "dontshow",
+                                equals: false,
+                                strict: true,
+                                istag : true,
+                                tagvalue: true
+                            }
+                        ],
+                        subparams: []
+                    }
+                }
+            }) as IEquipment[]
+        }
+        models.sort(byPropertiesOf<IEquipment>(["name", "id"]))
         const ModelList : Equipment[] = []
         for (let i = 0; i < models.length; i++) {
             const skl = await EquipmentFactory.CreateEquipment(models[i], null);

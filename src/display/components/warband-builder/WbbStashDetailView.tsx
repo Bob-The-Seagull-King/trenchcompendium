@@ -36,7 +36,6 @@ const WbbStashDetailView: React.FC<WbbStashDetailViewProps> = ({ onClose }) => {
     const [showArmourAddItemToStash, setShowArmourAddItemToStash] = useState(false);
     const [showEquipAddItemToStash, setShowEquipAddItemToStash] = useState(false);
     const [showExplorationAddItemToStash, setShowExplorationAddItemToStash] = useState(false);
-    const [showCustomitemAddToStash, setShowCustomitemAddToStash] = useState(false);
 
     
     const [showAddDucats, setShowAddDucats] = useState(false);
@@ -57,15 +56,6 @@ const WbbStashDetailView: React.FC<WbbStashDetailViewProps> = ({ onClose }) => {
         warband.warband_data.AddStashValue(newval, type)
         const Manager : ToolsController = ToolsController.getInstance();
         Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(() => reloadDisplay())
-    };
-    
-    const handleCustomItemToStash = (item: Equipment, cost : number, costtype : number) => {
-        if (!warband) { return; } // Guard
-        
-        warband.warband_data.CustomStash(item, cost, costtype).then(() => {
-            const Manager : ToolsController = ToolsController.getInstance();
-            Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(() => reloadDisplay())
-        })
     };
 
     
@@ -238,13 +228,6 @@ const WbbStashDetailView: React.FC<WbbStashDetailViewProps> = ({ onClose }) => {
                             <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
                             {'Add Exploration-Only Item'}
                         </div>
-
-                        {/* @TODO: remove this. It has been moved to warband tab*/}
-                        <div className={'btn btn-add-element btn-block'}
-                             onClick={() => setShowCustomitemAddToStash(true)}>
-                            <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
-                            {'Add Custom-Purchase'}
-                        </div>
                     </div>
 
                     <WbbModalAddItemToStash
@@ -285,11 +268,6 @@ const WbbStashDetailView: React.FC<WbbStashDetailViewProps> = ({ onClose }) => {
                         onSubmit={handleAddItemToStash}
                         category=''
                         exploration={true}
-                    />
-                    <WbbEquipmentAddCustomStash
-                        show={showCustomitemAddToStash}
-                        onClose={() => setShowCustomitemAddToStash(false)}
-                        onSubmit={handleCustomItemToStash}
                     />
 
                     

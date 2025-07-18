@@ -26,7 +26,7 @@ import { FireteamFactory } from '../../../factories/features/FireteamFactory';
 import { StaticOptionContextObject } from '../../options/StaticOptionContextObject';
 import { IWarbandConsumable, WarbandConsumable } from './WarbandConsumable';
 import { Model } from '../../feature/model/Model';
-import { Equipment } from '../../feature/equipment/Equipment';
+import { Equipment, EquipmentRestriction } from '../../feature/equipment/Equipment';
 
 interface WarbandDebt {
     ducats : number,
@@ -105,11 +105,13 @@ class UserWarband extends DynamicContextObject {
     }
 
     public async NewWarbandItems(data : IUserWarband) {
+        if (data == undefined) {return;}
         this.Faction = await WarbandFactory.CreateWarbandFaction(data.faction, this);
         this.Exploration = await WarbandFactory.CreateWarbandExplorationSet(data.exploration, this);
     }
 
     public async BuildModels(data : IWarbandPurchaseModel[]) {
+        if (data == undefined) {return;}
         for (let i = 0; i < data.length; i++) {
             const Model : WarbandMember = await WarbandFactory.CreateWarbandMember(data[i].model, this, this.IsUnRestricted);
             const NewPurchase : WarbandPurchase = new WarbandPurchase(data[i].purchase, this, Model);
@@ -118,6 +120,7 @@ class UserWarband extends DynamicContextObject {
     }
 
     public async BuildEquipment(data : IWarbandPurchaseEquipment[]) {
+        if (data == undefined) {return;}
         for (let i = 0; i < data.length; i++) {
             const Model : WarbandEquipment = await WarbandFactory.CreateWarbandEquipment(data[i].equipment, this);
             const NewPurchase : WarbandPurchase = new WarbandPurchase(data[i].purchase, this, Model);
@@ -127,6 +130,7 @@ class UserWarband extends DynamicContextObject {
     }
 
     public async BuildModifiersSkills(data : IWarbandProperty[]) {
+        if (data == undefined) {return;}
         for (let i = 0; i < data.length; i++) {
             const CurVal = data[i];
             const Value = await SkillFactory.CreateNewSkill(CurVal.object_id, this, true);
@@ -138,6 +142,7 @@ class UserWarband extends DynamicContextObject {
     }
     
     public async BuildConsumables(data: IWarbandConsumable[]) {
+        if (data == undefined) {return;}
         for (let i = 0; i < data.length; i++) {
             const CurVal = data[i]
             const NewConsumable = new WarbandConsumable(CurVal, this);
@@ -283,7 +288,7 @@ class UserWarband extends DynamicContextObject {
             consumables: consumablelist,
             restrictions_list: this.Restrictions
         }
-        
+        this.SelfData = _objint;
         return _objint;
     }
 
@@ -1108,12 +1113,29 @@ class UserWarband extends DynamicContextObject {
     public async GetValidationErrors () {
 
         const AlertList : string[] = []
-        /**
-         * @TODO LANE Get Errors Alerts Working
-         */
 
+        const EventProc : EventRunner = new EventRunner();
         let CaptainFound = false
-        for (let i = 0; i < this.Models.length; i++) {
+        for (let i = 0; i < this.Models.length; i++) {        
+            const result = await EventProc.runEvent(
+                "validateModelForWarband",
+                this,
+                [this],
+                [],
+                this.Models[i]
+            )
+            const result_fin = await EventProc.runEvent(
+                "validateModelForWarband",
+                this.Models[i].HeldObject as WarbandMember,
+                [this],
+                result,
+                this.Models[i]
+            ) 
+
+            for (let j = 0; j < result_fin.length; j++) {
+                AlertList.push(result_fin[j])
+            }
+
             if ((this.Models[i].CustomInterface as IFactionModelRelationship).captain) {
                 if ((this.Models[i].CustomInterface as IFactionModelRelationship).captain == true) {
                     CaptainFound = true;
@@ -1137,7 +1159,58 @@ class UserWarband extends DynamicContextObject {
             AlertList.push("The warband has been given a custom fighter")
         } 
 
+        const ErrorsInModelCount = await this.GetModelCountErrors();
+
+        for (let i = 0; i < ErrorsInModelCount.length; i++) {
+            AlertList.push(ErrorsInModelCount[i])
+        }
+
         return AlertList
+    }
+
+    public async GetModelCountErrors() {
+        const FacCheck = this.Faction.MyFaction;
+        const ListOfRels : string[] = []
+        let BaseRels : FactionModelRelationship[] = []
+        
+        if (FacCheck != undefined) {
+            BaseRels = ((FacCheck.SelfDynamicProperty).OptionChoice as Faction).Models
+        }
+
+        const eventmon : EventRunner = new EventRunner();
+        BaseRels = await eventmon.runEvent(
+            "getAllFactionModelRelationships",
+            this,
+            [],
+            BaseRels,
+            null
+        )
+
+        for (let i = 0; i < BaseRels.length; i++) {
+            
+            if (this.GetCountOfRel(BaseRels[i].ID) < BaseRels[i].Minimum && ((BaseRels[i].Maximum != 0))) {
+                ListOfRels.push("Your warband has too few " + BaseRels[i].Model.GetTrueName())
+            }
+        }
+
+        return ListOfRels;
+    }
+
+    public IsWarbandCustom() {
+        
+        if (this.IsUnRestricted == true) {
+            return true
+        } 
+
+        if (this.Restrictions.includes("custom_equipment") == true) {
+            return true
+        } 
+
+        if (this.Restrictions.includes("custom_fighter") == true) {
+            return true
+        } 
+
+        return false;
     }
 
     /** 
@@ -1227,6 +1300,7 @@ class UserWarband extends DynamicContextObject {
         }
         return count;
     }
+    
 
     public GetCountOfRel(id : string) {
         let count = 0;
@@ -1385,6 +1459,31 @@ class UserWarband extends DynamicContextObject {
         return false;
     }
 
+    public GetAllEquipment() {
+        
+        const options : RealWarbandPurchaseEquipment[] = [ ];
+
+        for (let i = 0; i < this.Equipment.length; i++) {
+            options.push(
+                {
+                    purchase: this.Equipment[i],
+                    equipment: this.Equipment[i].HeldObject as WarbandEquipment
+                }
+            )
+        }
+
+        for (let i = 0; i < this.Models.length; i++) {
+            const ModelEquip = (this.Models[i].GetOwnItem() as WarbandMember).GetEquipment()
+            for (let j = 0; j < ModelEquip.length; j++) {
+                options.push(
+                    ModelEquip[j]
+                )
+            }
+        }
+
+        return options;
+    }
+
     public async GetFactionEquipmentOptions(use_exploration = false, count_cost = true) : Promise<FactionEquipmentRelationship[]> {
         const FacCheck = this.Faction.MyFaction;
         const ListOfRels : FactionEquipmentRelationship[] = []
@@ -1415,7 +1514,31 @@ class UserWarband extends DynamicContextObject {
             return BaseRels;
         }
 
+        const FactionEquipRestrictionList : EquipmentRestriction[] = await eventmon.runEvent(
+            "getEquipmentRestriction", this, [], [], null )
+
         for (let i = 0; i < BaseRels.length; i++) {
+            
+            const NewRefList : EquipmentRestriction[] = [];
+            const EquipRestrictionList : EquipmentRestriction[] = await eventmon.runEvent(
+                "getEquipmentRestriction",BaseRels[i],[], [], null )
+            const BaseEquipRestrictionList : EquipmentRestriction[] = await eventmon.runEvent(
+                "getEquipmentRestriction", BaseRels[i].EquipmentItem, [], [], null )
+            for (let j = 0; j < EquipRestrictionList.length; j++) { NewRefList.push(EquipRestrictionList[j]); }
+            for (let j = 0; j < BaseEquipRestrictionList.length; j++) { NewRefList.push(BaseEquipRestrictionList[j]); }
+            for (let j = 0; j < FactionEquipRestrictionList.length; j++) { NewRefList.push(FactionEquipRestrictionList[j]); }
+
+            const canadd = await eventmon.runEvent(
+                "canWarbandAddItem",
+                this,
+                [NewRefList, BaseRels[i]],
+                true,
+                this
+            )
+
+            if (!canadd) {
+                continue;
+            }
             let maxcount = BaseRels[i].Limit;
             maxcount = await eventmon.runEvent(
                 "getEquipmentLimitTrue",

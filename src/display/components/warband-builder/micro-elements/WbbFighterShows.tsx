@@ -35,11 +35,10 @@ interface WbbFighterShow {
     detailPayload : any,
     setShowAddFighterEliteModal:(type : boolean) => void,
     setShowAddFighterTroopModal:(type : boolean) => void,
-    setShowAddFighterMercenaryModal:(type : boolean) => void,
-    setShowAddFighterCustomModal:(type : boolean) => void
+    setShowAddFighterMercenaryModal:(type : boolean) => void
 }
 
-const WbbFighterShows : React.FC<WbbFighterShow> = ({ playMode, openDetail, detailType, detailPayload, setShowAddFighterEliteModal, setShowAddFighterTroopModal, setShowAddFighterMercenaryModal, setShowAddFighterCustomModal }) => {
+const WbbFighterShows : React.FC<WbbFighterShow> = ({ playMode, openDetail, detailType, detailPayload, setShowAddFighterEliteModal, setShowAddFighterTroopModal, setShowAddFighterMercenaryModal }) => {
 
     const { warband, updateKey, reloadDisplay } = useWarband();
 
@@ -299,15 +298,6 @@ const WbbFighterShows : React.FC<WbbFighterShow> = ({ playMode, openDetail, deta
                             </SortableContext>
                         </DndContext>
                     </>
-                }
-
-                {/* @TODO: this is moved to Warband tab*/}
-                {!playMode &&
-                    <div className={'btn btn-add-element btn-block'}
-                            onClick={() => setShowAddFighterCustomModal(true)}>
-                        <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
-                        {'Add Custom Fighter'}
-                    </div>
                 }
                 </>
             }

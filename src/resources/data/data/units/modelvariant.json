@@ -762,6 +762,14 @@
                         "value": true
                     }
                 ]
+            },
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_wretched"
+                    }
+                ]
             }
         },
         "base_id": "md_wretched",

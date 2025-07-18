@@ -128,7 +128,7 @@ class WarbandFaction extends DynamicContextObject {
             faction_rules : ruleset,
             patron_id: PatronID,
         }
-        
+        this.SelfData = _objint;
         return _objint;
     }
     

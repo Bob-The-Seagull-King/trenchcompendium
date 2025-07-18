@@ -172,7 +172,7 @@ class SiteUser {
             sub_id : this.Premium.SubId,
             premium_until : this.Premium.PremiumUntil
         }
-        
+        this.SelfData = _objint;
         return _objint;
     }
 

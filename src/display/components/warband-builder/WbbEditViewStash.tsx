@@ -40,7 +40,7 @@ const WbbEditViewStash: React.FC<WbbEditViewStashProps> = ({ onClick, isActive }
                                 {item.GetItemName()}
 
                                 {/* Add comma if not the last item */}
-                                {index < stash.Items.length &&
+                                {index < warband?.warband_data.Equipment.length -1 &&
                                     <>
                                         {', '}
                                     </>
