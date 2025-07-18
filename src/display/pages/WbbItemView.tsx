@@ -112,11 +112,6 @@ const WbbItemView = (prop: any) => {
 
                                 <WbbTitle/>
 
-                                <WbbContextualPopover
-                                    id={'warband-actions'}
-                                    type="warband"
-                                    item={Warband}
-                                />
                             </div>
                         </div>
 
