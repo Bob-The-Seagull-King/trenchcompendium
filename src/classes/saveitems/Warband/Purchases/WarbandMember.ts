@@ -1808,6 +1808,7 @@ class WarbandMember extends DynamicContextObject {
             custom_rel: item.SelfData,
             modelpurch : false
         }, this, Equipment);
+        await Equipment.BuildNewProperties(this, NewPurchase)
         this.Equipment.push(NewPurchase);
         const eventmon : EventRunner = new EventRunner();
         await eventmon.runEvent(

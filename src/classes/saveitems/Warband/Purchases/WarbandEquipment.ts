@@ -14,15 +14,23 @@ import { Equipment } from "../../../feature/equipment/Equipment";
 import { EventRunner } from "../../../contextevent/contexteventhandler";
 import { WarbandMember } from "./WarbandMember";
 import { Keyword } from "../../../feature/glossary/Keyword";
+import { RealWarbandPurchaseModel, WarbandPurchase } from "./WarbandPurchase";
 
 interface IWarbandEquipment extends IContextObject {
     equipment_id: IWarbandProperty,
     subproperties : IWarbandProperty[]
 }
 
+export interface WarbandEquipmentCache {
+    CanRemove : boolean,
+    CanSwap : boolean,
+    KeywordsCache : Keyword[]
+}
+
 class WarbandEquipment extends DynamicContextObject {
     MyEquipment!: WarbandProperty;
     SubProperties : WarbandProperty[] = [];
+    EquipmentCache : WarbandEquipmentCache | null = null;
 
     /**
      * Assigns parameters and creates a series of description
@@ -41,8 +49,38 @@ class WarbandEquipment extends DynamicContextObject {
         await this.MyEquipment.BuildConsumables(equipment_property.consumables)
     }
     
-    public BuildNewProperties() {
-        undefined;
+    public async BuildNewProperties(fighter : WarbandMember, Purchase : WarbandPurchase) {
+        
+        const eventmon : EventRunner = new EventRunner();
+        const CanRemove = await eventmon.runEvent(
+            "canRemoveItemFromModel",
+            this,
+            [],
+            Purchase.Sellable,
+            fighter
+        )
+
+        const noSwap = await eventmon.runEvent(
+            "cantSwapItemFromModel",
+            this,
+            [],
+            false,
+            fighter
+        )
+
+        const keywords = await eventmon.runEvent(
+            "findFinalKeywordsForEquipment",
+            fighter,
+            [this],
+            this.GetEquipmentItem().GetKeyWords(),
+            null
+        )
+
+        this.EquipmentCache = {
+            CanRemove: CanRemove,
+            CanSwap: noSwap,
+            KeywordsCache : keywords
+        }
     }
 
     public ConvertToInterface() {

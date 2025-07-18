@@ -81,7 +81,11 @@ class UserWarband extends DynamicContextObject {
     public Consumables : WarbandConsumable[] = [];
     public Restrictions : string[] = [];
     public IsUnRestricted : boolean;
-    public EquipmentRelCahce : CachedFactionEquipment = {}
+    public EquipmentRelCache : CachedFactionEquipment = {}
+
+    public DumpCache() {
+        this.EquipmentRelCache = {}
+    }
 
     public DucatLimit : number[] = [700,800,900,1000,1100,1200,1300,1400,1500,1600,1700,1800];
     public ModelLimit : number[] = [10,11,12,13,14,15,16,17,18,19,20,22];
@@ -1503,7 +1507,6 @@ class UserWarband extends DynamicContextObject {
         const AddedIDs : string[] = [];
         let BaseRels : FactionEquipmentRelationship[] = []
         let RefRels : FactionEquipmentRelationship[] = []
-        this.EquipmentRelCahce = {}
 
         if (FacCheck != undefined) {
             RefRels = ((FacCheck.SelfDynamicProperty).OptionChoice as Faction).EquipmentItems
@@ -1534,53 +1537,60 @@ class UserWarband extends DynamicContextObject {
         for (let i = 0; i < BaseRels.length; i++) {
             
             const NewRefList : EquipmentRestriction[] = [];
-            const EquipRestrictionList : EquipmentRestriction[] = await eventmon.runEvent(
-                "getEquipmentRestriction",BaseRels[i],[], [], null )
-            const BaseEquipRestrictionList : EquipmentRestriction[] = await eventmon.runEvent(
-                "getEquipmentRestriction", BaseRels[i].EquipmentItem, [], [], null )
-            for (let j = 0; j < EquipRestrictionList.length; j++) { NewRefList.push(EquipRestrictionList[j]); }
-            for (let j = 0; j < BaseEquipRestrictionList.length; j++) { NewRefList.push(BaseEquipRestrictionList[j]); }
-            for (let j = 0; j < FactionEquipRestrictionList.length; j++) { NewRefList.push(FactionEquipRestrictionList[j]); }
-
-            const StringOfRestrictions = await eventmon.runEvent(
-                "getEquipmentRestrictionPresentable",
-                BaseRels[i],
-                [],
-                [],
-                NewRefList
-            )
-            
             let maxcount = BaseRels[i].Limit;
-            maxcount = await eventmon.runEvent(
-                "getEquipmentLimitTrue",
-                BaseRels[i],
-                [BaseRels[i]],
-                maxcount,
-                this
-            )
-            maxcount = await eventmon.runEvent(
-                "getEquipmentLimitTrue",
-                this,
-                [BaseRels[i]],
-                maxcount,
-                this
-            )
-
             let maxccurcostount = BaseRels[i].Cost;
-            maxccurcostount = await eventmon.runEvent(
-                "getCostOfEquipment",
-                BaseRels[i],
-                [],
-                maxccurcostount,
-                this
-            )
 
-            this.EquipmentRelCahce[BaseRels[i].ID] = {
-                limit: maxcount,
-                cost : maxccurcostount,
-                facrel: BaseRels[i],
-                restrictions: StringOfRestrictions,
-                count_cur: this.GetCountOfEquipmentRel(BaseRels[i].ID)
+            if (this.EquipmentRelCache[BaseRels[i].ID] == null ) {
+
+                const EquipRestrictionList : EquipmentRestriction[] = await eventmon.runEvent(
+                    "getEquipmentRestriction",BaseRels[i],[], [], null )
+                const BaseEquipRestrictionList : EquipmentRestriction[] = await eventmon.runEvent(
+                    "getEquipmentRestriction", BaseRels[i].EquipmentItem, [], [], null )
+                for (let j = 0; j < EquipRestrictionList.length; j++) { NewRefList.push(EquipRestrictionList[j]); }
+                for (let j = 0; j < BaseEquipRestrictionList.length; j++) { NewRefList.push(BaseEquipRestrictionList[j]); }
+                for (let j = 0; j < FactionEquipRestrictionList.length; j++) { NewRefList.push(FactionEquipRestrictionList[j]); }
+
+                const StringOfRestrictions = await eventmon.runEvent(
+                    "getEquipmentRestrictionPresentable",
+                    BaseRels[i],
+                    [],
+                    [],
+                    NewRefList
+                )
+                
+                maxcount = await eventmon.runEvent(
+                    "getEquipmentLimitTrue",
+                    BaseRels[i],
+                    [BaseRels[i]],
+                    maxcount,
+                    this
+                )
+                maxcount = await eventmon.runEvent(
+                    "getEquipmentLimitTrue",
+                    this,
+                    [BaseRels[i]],
+                    maxcount,
+                    this
+                )
+
+                maxccurcostount = await eventmon.runEvent(
+                    "getCostOfEquipment",
+                    BaseRels[i],
+                    [],
+                    maxccurcostount,
+                    this
+                )
+
+                this.EquipmentRelCache[BaseRels[i].ID] = {
+                    limit: maxcount,
+                    cost : maxccurcostount,
+                    facrel: BaseRels[i],
+                    restrictions: StringOfRestrictions,
+                    count_cur: this.GetCountOfEquipmentRel(BaseRels[i].ID)
+                }
+            } else {
+                maxcount = this.EquipmentRelCache[BaseRels[i].ID].limit,
+                maxccurcostount = this.EquipmentRelCache[BaseRels[i].ID].cost
             }
 
             if (get_base == true) {
@@ -1601,7 +1611,7 @@ class UserWarband extends DynamicContextObject {
                 continue;
             }
             
-            if (this.GetCountOfEquipmentRel(BaseRels[i].ID) < maxcount || (maxcount == 0 && BaseRels[i].Limit == 0)) {
+            if (this.EquipmentRelCache[BaseRels[i].ID].count_cur < maxcount || (maxcount == 0 && BaseRels[i].Limit == 0)) {
                 if (!containsTag(BaseRels[i].Tags, "exploration_only") || use_exploration) {
 
                     if (count_cost == true) {

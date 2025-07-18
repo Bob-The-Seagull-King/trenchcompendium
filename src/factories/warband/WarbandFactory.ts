@@ -30,7 +30,6 @@ class WarbandFactory {
     static async CreateWarbandEquipment(data: IWarbandEquipment, parent : DynamicContextObject | null) {
         const rule = new WarbandEquipment(data, parent)
         await rule.BuildEquipment(data.equipment_id)
-        await rule.BuildNewProperties();
         return rule;
     }
 

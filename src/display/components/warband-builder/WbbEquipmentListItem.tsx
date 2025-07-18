@@ -46,35 +46,15 @@ const WbbEquipmentListItem: React.FC<EquipmentItemProps> = ({ item, fighter }) =
 
         async function GetCanRemove() {
             if (fighter !== null && fighter != undefined) {
-            
-                const eventmon : EventRunner = new EventRunner();
-                const CanRemove = await eventmon.runEvent(
-                    "canRemoveItemFromModel",
-                    item.HeldObject as WarbandEquipment,
-                    [],
-                    item.Sellable,
-                    fighter
-                )
-
-                const noSwap = await eventmon.runEvent(
-                    "cantSwapItemFromModel",
-                    item.HeldObject as WarbandEquipment,
-                    [],
-                    false,
-                    fighter
-                )
-
-                const keywords = await eventmon.runEvent(
-                    "findFinalKeywordsForEquipment",
-                    fighter.model,
-                    [item.HeldObject as WarbandEquipment],
-                    ItemValue.GetKeyWords(),
-                    null
-                )
-
-                setCanRemove(CanRemove)
-                setKeywordList(keywords)
-                setCantSwap(noSwap)
+                if ((item.HeldObject as WarbandEquipment).EquipmentCache == null) {
+                    await (item.HeldObject as WarbandEquipment).BuildNewProperties(fighter.model, item)
+                }
+                const cache = (item.HeldObject as WarbandEquipment).EquipmentCache
+                if (cache != null) {
+                    setCanRemove(cache.CanRemove)
+                    setCantSwap(cache.CanSwap)
+                    setKeywordList(cache.KeywordsCache)
+                }
                 setKeyvar((prev) => prev + 1)
             }
         }
