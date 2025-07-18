@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
-import {faXmark} from "@fortawesome/free-solid-svg-icons";
+import {faCircleNotch, faPlus, faXmark} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {useModalSubmitWithLoading} from "../../../../../utility/useModalSubmitWithLoading";
 
 interface WbbEditBattleScarsProps {
     show: boolean;
@@ -17,10 +18,11 @@ const WbbEditBattleScars: React.FC<WbbEditBattleScarsProps> = ({ show, onClose, 
         setScars(currentScars); // reset state when modal opens
     }, [show, currentScars]);
 
-    const handleSubmit = () => {
+    // handlesubmit in this callback for delayed submission with loading state
+    const { handleSubmit, isSubmitting } = useModalSubmitWithLoading(() => {
         onSubmit(scars);
         onClose();
-    };
+    });
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = parseInt(e.target.value, 10);
@@ -63,8 +65,11 @@ const WbbEditBattleScars: React.FC<WbbEditBattleScarsProps> = ({ show, onClose, 
                 <Button variant="secondary" onClick={onClose}>
                     Cancel
                 </Button>
-                <Button variant="primary" onClick={handleSubmit} disabled={scars < 0}>
-                    Save Changes
+                <Button variant="primary" onClick={handleSubmit} disabled={scars < 0 || isSubmitting}>
+                    {isSubmitting && (
+                        <FontAwesomeIcon icon={faCircleNotch} className={'icon-inline-left fa-spin '} />
+                    )}
+                    {'Save Battle Scars'}
                 </Button>
             </Modal.Footer>
         </Modal>

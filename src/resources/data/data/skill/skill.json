@@ -769,7 +769,7 @@
     },
     {
         "id": "sk_farshot",
-        "name": "Farshot",
+        "name": "Far Shot",
         "source": "core",
         "tags": { "trait": true, "bonus": true, "modifier": true },
         "contextdata": { 

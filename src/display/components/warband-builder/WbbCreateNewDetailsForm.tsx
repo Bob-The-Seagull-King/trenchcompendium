@@ -87,7 +87,7 @@ const WbbCreateNewDetailsForm: React.FC<{
                             </div>
                         </div>
 
-                        <div className={'mb-3'} >
+                        <div className={'mb-3'}>
                             <label className="form-label">Starting Ducats</label>
                             <input
                                 className="form-control form-control-sm" type={"number"}
@@ -97,7 +97,7 @@ const WbbCreateNewDetailsForm: React.FC<{
                             />
                         </div>
 
-                        <div className={'mb-3'} >
+                        <div className={'mb-3'}>
                             <label className="form-label">Starting Glory</label>
                             <input
                                 className="form-control form-control-sm" type={"number"}
@@ -107,18 +107,22 @@ const WbbCreateNewDetailsForm: React.FC<{
                             />
                         </div>
 
-                        <div className={'mb-3'} >
-                            <label className="form-label">
-                                Remove Restrictions
+                        <div className={'mb-3'}>
+                            <div className="form-check form-switch">
                                 <input
-                                type="checkbox"
-                                value={"unchecked"}
-                                onChange={(e) => setIsUnrestricted((e.target.checked))}
-                                style={{marginLeft:"0.25rem"}}
+                                    className="form-check-input"
+                                    type="checkbox"
+                                    id="removeRestrictions"
+                                    checked={isunrestricted}
+                                    onChange={(e) => setIsUnrestricted(e.target.checked)}
                                 />
-                            </label>
-                            <div className="form-text">If restrictions are removed, the builder will not check limitations on number, cost, available hands, and other rules on equipment and model selection.</div>
-                            
+                                <label className="form-check-label" htmlFor="removeRestrictions">
+                                    {'Remove Restrictions'}
+                                </label>
+                            </div>
+                            <div className="form-text">
+                                {'If restrictions are removed, the builder will not check limitations on number, cost, available hands, and other rules on equipment and model selection.'}
+                            </div>
                         </div>
 
 
@@ -143,9 +147,9 @@ const WbbCreateNewDetailsForm: React.FC<{
                 </div>
 
                 <div className={'col-12 col-xl-7'}>
-                <div className={'faction-image-wrap'}>
+                    <div className={'faction-image-wrap'}>
 
-                    <SynodFactionImage
+                        <SynodFactionImage
                             factionSlug={chosenfaction.ID}
                             size={'full'}
                         />

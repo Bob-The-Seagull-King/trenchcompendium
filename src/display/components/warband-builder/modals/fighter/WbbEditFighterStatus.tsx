@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
-import {faXmark} from "@fortawesome/free-solid-svg-icons";
+import {faCircleNotch, faPlus, faXmark} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import { makestringpresentable } from '../../../../../utility/functions';
+import {useModalSubmitWithLoading} from "../../../../../utility/useModalSubmitWithLoading";
 
 interface WbbEditFighterStatusProps {
     show: boolean;
@@ -21,10 +22,11 @@ const WbbModalEditFighterStatus: React.FC<WbbEditFighterStatusProps> = ({
 
     const statuses = ['active', 'reserved', 'lost', 'dead'];
 
-    const handleSubmit = () => {
+    // handlesubmit in this callback for delayed submission with loading state
+    const { handleSubmit, isSubmitting } = useModalSubmitWithLoading(() => {
         onSubmit(selectedStatus);
         onClose();
-    };
+    });
 
     return (
         <Modal show={show} onHide={onClose} className="WbbModalAddItem WbbEditFighterStatus" centered>
@@ -56,8 +58,11 @@ const WbbModalEditFighterStatus: React.FC<WbbEditFighterStatusProps> = ({
                 <Button variant="secondary" onClick={onClose}>
                     Cancel
                 </Button>
-                <Button variant="primary" onClick={handleSubmit} disabled={selectedStatus === currentStatus}>
-                    Update Status
+                <Button variant="primary" onClick={handleSubmit} disabled={(selectedStatus === currentStatus) || isSubmitting}>
+                    {isSubmitting && (
+                        <FontAwesomeIcon icon={faCircleNotch} className={'icon-inline-left fa-spin '} />
+                    )}
+                    {'Update Status'}
                 </Button>
             </Modal.Footer>
         </Modal>

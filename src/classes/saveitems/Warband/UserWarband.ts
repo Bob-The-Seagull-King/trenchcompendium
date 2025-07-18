@@ -986,10 +986,12 @@ class UserWarband extends DynamicContextObject {
     GetStash() {
 
         return {
-            ValueDucats: this.GetDucatCostStash(),
-            ValueGlory: this.GetGloryCostStash(),
-            AmountDucats: this.Ducats - this.GetCostDucatsTotal() -  this.Debts.ducats,
-            AmountGlory: this.Glory - this.GetCostGloryTotal() -  this.Debts.glory,
+            ValueDucats: this.GetDucatCostStash(), // stash value in ducats
+            ValueGlory: this.GetGloryCostStash(), // stash value in glory
+            AmountDucats: this.Ducats - this.GetCostDucatsTotal() -  this.Debts.ducats,  // unspent ducats
+            AmountGlory: this.Glory - this.GetCostGloryTotal() -  this.Debts.glory, // unspent glory
+            TotalDucats: this.Ducats -  this.GetCostDucatsTotal() + this.GetDucatCostStash(), // total stash value in ducats
+            TotalGlory: this.Glory -  this.GetCostGloryTotal() + this.GetGloryCostStash(), // total stash value in glory
             Items: []
         }
     }

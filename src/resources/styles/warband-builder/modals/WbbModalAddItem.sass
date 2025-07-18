@@ -13,7 +13,7 @@
         display: flex
         justify-content: space-between
         cursor: pointer
-
+        align-items: center
         transition: background-color .2s ease
 
         @media(max-width: 575px)
@@ -28,10 +28,32 @@
         &.selected
             background-color: $color-highlight-bg-2
 
+        &.disabled // an element that is not selectable
+            opacity: 0.5
+            .disabled-reason // a string that shows why the item is disabled
+                color: $red
+
+        .item-left
+            padding-right: 10px
+            display: flex
+            flex-direction: column
+            justify-content: center
+            align-items: stretch
+
+        .item-right
+            font-size: 12px
+            display: flex
+            flex-direction: column
+            justify-content: center
+            align-items: stretch
+            text-align: right
 
         .item-cost
             white-space: nowrap
             padding-left: 10px
+        .item-restriction
+            font-size: 12px
+
 
     &.WbbModalAddFighter
         .select-item

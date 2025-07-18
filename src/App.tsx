@@ -45,6 +45,7 @@ import StaticSupporterPacks from "./display/pages/StaticSupporterPacks";
 import StaticCollaborate from "./display/pages/StaticCollaborate";
 import StaticAbout from './display/pages/StaticAbout'
 import StaticPlanSelection from "./display/pages/StaticPlanSelection";
+import {AdsManager} from "./display/components/generics/AdsManager";
 
 
 const App: React.FC = () => {
@@ -111,6 +112,7 @@ const App: React.FC = () => {
 
                             <FooterMain />
 
+                            <AdsManager />
                             <TrackingManager />
                         </Router>
                     </PersistGate>
