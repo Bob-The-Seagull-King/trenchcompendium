@@ -98,7 +98,8 @@ class FactionEquipmentRelationship extends StaticContextObject {
      * @TODO: return the restriction as a string e.g. "Assassins only"
      */
     public GetRestrictionString() {
-        return 'Assassins only';
+        // return 'Assassins only';
+        return '';
     }
 
     public GetCostString() {

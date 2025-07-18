@@ -75,8 +75,8 @@ const WbbModalAddEquipment: React.FC<WbbModalAddEquipmentProps> = ({ show, onClo
                     <div
                         key={item.ID}
                         className={`select-item ${selectedID === item.ID ? 'selected' : ''}`}
-                        onClick={() => setSelectedID(item.ID)} {/* @TODO: Only select if not disabled */}
-                    >
+                        onClick={() => setSelectedID(item.ID)}
+                    >{/* @TODO: Only select if not disabled */}
                         <span className={'item-left'}>
                             <span className={'item-name'}>
                                 {item.EquipmentItem.GetTrueName()}
@@ -101,7 +101,8 @@ const WbbModalAddEquipment: React.FC<WbbModalAddEquipmentProps> = ({ show, onClo
                             {item.GetLimit() > 0 &&
                                 <span className={'item-limit'}>
                                     {/* @TODO: Show number of selections in this warband*/}
-                                    Limit: {'1'}/{item.GetLimit()}
+                                    {/*Limit: {'1'}/{item.GetLimit()}*/}
+                                    Limit: {item.GetLimit()}
                                 </span>
                             }
                         </span>
