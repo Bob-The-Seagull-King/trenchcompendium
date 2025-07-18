@@ -24,6 +24,7 @@ import WbbWarbandDetailView from '../components/warband-builder/WbbWarbandDetail
 import WbbViewStashDetailView from '../components/warband-builder/WbbViewStashDetailView';
 import WbbViewCampaignDetailView from '../components/warband-builder/WbbViewCampaignDetailView copy';
 import WbbViewLocations from '../components/warband-builder/modals/warband/WbbViewLocations';
+import WbbContextualPopover from "../components/warband-builder/WbbContextualPopover";
 
 const WbbItemView = (prop: any) => {
     
@@ -111,6 +112,11 @@ const WbbItemView = (prop: any) => {
 
                                 <WbbTitle/>
 
+                                <WbbContextualPopover
+                                    id={'warband-actions'}
+                                    type="warband"
+                                    item={Warband}
+                                />
                             </div>
                         </div>
 
