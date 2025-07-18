@@ -183,13 +183,11 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
 
                                         <WbbTitle/>
 
-                                        <div className={'wbb-actions'}>
-                                            <WbbContextualPopover
-                                                id={'warabnd-actions'}
-                                                type="warband"
-                                                item={warband}
-                                            />
-                                        </div>
+                                        <WbbContextualPopover
+                                            id={'warband-actions'}
+                                            type="warband"
+                                            item={warband}
+                                        />
 
                                     </div>
                                 </div>
