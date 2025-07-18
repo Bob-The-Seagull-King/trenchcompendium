@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Button } from 'react-bootstrap';
-import {faXmark} from "@fortawesome/free-solid-svg-icons";
+import {faCircleNotch, faPlus, faXmark} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import { RealWarbandPurchaseModel } from '../../../../../classes/saveitems/Warband/Purchases/WarbandPurchase';
 import { FactionEquipmentRelationship } from '../../../../../classes/relationship/faction/FactionEquipmentRelationship';
@@ -27,13 +27,28 @@ const WbbModalAddEquipment: React.FC<WbbModalAddEquipmentProps> = ({ show, onClo
     const [available, setAvailable] = useState<FactionEquipmentRelationship[]>([]);
     const [keyvar, setkevvar] = useState(0);
 
+    // Tracks if the modal is submitting to show a loading state
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
     const handleSubmit = () => {
-        const selected = available.find(w => w.ID === selectedID);
-        if (selected) {
-            onSubmit(selected);
-            setSelectedID(null)
-            onClose();
-        }
+        setIsSubmitting(true); // show loading state
+
+        // delay the submission to wait for animation to start
+        setTimeout(() => {
+
+            const selected = available.find(w => w.ID === selectedID);
+            if (selected) {
+                onSubmit(selected);
+                setSelectedID(null)
+                onClose();
+            }
+
+            // delay loading state removal to simulate processing time
+            setTimeout(() => {
+                setIsSubmitting(false); // remove loading state
+            }, 1000);
+
+        }, 100);
     };
     
     
@@ -125,8 +140,13 @@ const WbbModalAddEquipment: React.FC<WbbModalAddEquipmentProps> = ({ show, onClo
                 <Button variant="secondary" onClick={onClose}>
                     Cancel
                 </Button>
-                <Button variant="primary" onClick={handleSubmit} disabled={!selectedID}>
-                    Add Equipment
+                <Button variant="primary" onClick={handleSubmit} disabled={!selectedID || isSubmitting}>
+                    {isSubmitting ? (
+                        <FontAwesomeIcon icon={faCircleNotch} className={'icon-inline-left fa-spin '} />
+                    ): (
+                        <FontAwesomeIcon icon={faPlus} className={'icon-inline-left'} />
+                    )}
+                    {'Add Equipment'}
                 </Button>
             </Modal.Footer>
         </Modal>
