@@ -288,7 +288,7 @@ class UserWarband extends DynamicContextObject {
             consumables: consumablelist,
             restrictions_list: this.Restrictions
         }
-        
+        this.SelfData = _objint;
         return _objint;
     }
 
