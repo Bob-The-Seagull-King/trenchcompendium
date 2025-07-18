@@ -601,10 +601,10 @@ class WarbandMember extends DynamicContextObject {
         return false;
     }
 
-    public GetSubCosts(type : number) {
+    public GetSubCosts(type : number, overridecap = false) {
         let countvar = 0;
         for (let i = 0; i < this.Upgrades.length; i++) {
-            if (this.Upgrades[i].CountCap == false) {continue;}
+            if (this.Upgrades[i].CountCap == false && (overridecap == false)) {continue;}
             if (this.Upgrades[i].CostType == type) {
                 if (type == 0 ) {
                     countvar += this.Upgrades[i].GetTotalDucats();

@@ -427,7 +427,10 @@
         "source": "core",
         "tags": { },
         "contextdata": { 
-            "add_to_warband": {}
+            "add_to_warband": {},
+            "add_to_model": {
+                "id": "rl_siegejezzailteams"
+            }
         },
         "name": "Siege Jezzail Teams",
         "description":  [

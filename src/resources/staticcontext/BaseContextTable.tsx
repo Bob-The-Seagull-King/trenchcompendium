@@ -180,6 +180,43 @@ export const BaseContextCallTable : CallEventTable = {
             return { "melee" : MeleePresentation, "range" : RangePresentation};
         }
     },
+    validate_final_unit: {
+        event_priotity: 0,        
+        async validateModelForWarband(this: EventRunner, eventSource : any, relayVar: string[], trackVal : WarbandPurchase, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : UserWarband) {
+            
+            if (context_func["exception"]) {
+                for (let i = 0; i < context_func["exception"].length; i++) {
+                    const CurExp = context_func["exception"][i]
+
+                    if (CurExp['type'] == 'id') {
+                        if ((trackVal.HeldObject as WarbandMember).CurModel.ID == CurExp['value']) {
+                            return relayVar;
+                        }
+                    }
+                }
+            }
+            if (context_func["requirements"]) {
+                for (let i = 0; i < context_func["requirements"].length; i++) {
+                    const CurExp = context_func["requirements"][i]
+
+                    if (CurExp['type'] == 'ducats') {
+                        const ducatVal = trackVal.GetTotalDucats(true);
+                        const needVal = CurExp['value']
+                        if (CurExp['subvalue'] == 'minimum') {
+                            if (needVal > ducatVal) {
+                                relayVar.push(
+                                    "The model " + (trackVal.HeldObject as WarbandMember).GetTrueName() + " must be worth at least " + needVal + " ducats."
+                                )
+                            }
+                        }
+
+                    }
+                }
+            }
+            
+            return relayVar;
+        }
+    },
     model_equipment_restriction : {
         event_priotity: 0,        
         async getEquipmentRestrictionPresentable(this: EventRunner, eventSource : any, relayVar : any, trackVal : EquipmentRestriction[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) 

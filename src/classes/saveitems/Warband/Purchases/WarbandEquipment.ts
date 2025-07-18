@@ -99,8 +99,7 @@ class WarbandEquipment extends DynamicContextObject {
         return subpackages; 
     }
 
-    public GetSubCosts(type : number) {
-        // @TODO
+    public GetSubCosts(type : number, overridecap = false) {
         return 0;
     }
 

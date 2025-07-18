@@ -148,16 +148,16 @@ class WarbandPurchase {
         return _objint;
     }
 
-    public GetTotalDucats() {
+    public GetTotalDucats(overridecap = false) {
         let TotalDucatCost = 0;
         if (this.CostType == 0) {
             TotalDucatCost += this.ItemCost;
         }
 
         if (this.HeldObject instanceof WarbandMember) {
-            TotalDucatCost += this.HeldObject.GetSubCosts(0);
+            TotalDucatCost += this.HeldObject.GetSubCosts(0, overridecap);
         } else if (this.HeldObject instanceof WarbandEquipment) {
-            TotalDucatCost += this.HeldObject.GetSubCosts(0);
+            TotalDucatCost += this.HeldObject.GetSubCosts(0, overridecap);
         }
 
         return TotalDucatCost;

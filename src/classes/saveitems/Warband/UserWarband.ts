@@ -1108,12 +1108,29 @@ class UserWarband extends DynamicContextObject {
     public async GetValidationErrors () {
 
         const AlertList : string[] = []
-        /**
-         * @TODO LANE Get Errors Alerts Working
-         */
 
+        const EventProc : EventRunner = new EventRunner();
         let CaptainFound = false
-        for (let i = 0; i < this.Models.length; i++) {
+        for (let i = 0; i < this.Models.length; i++) {        
+            const result = await EventProc.runEvent(
+                "validateModelForWarband",
+                this,
+                [this],
+                [],
+                this.Models[i]
+            )
+            const result_fin = await EventProc.runEvent(
+                "validateModelForWarband",
+                this.Models[i].HeldObject as WarbandMember,
+                [this],
+                result,
+                this.Models[i]
+            ) 
+
+            for (let j = 0; j < result_fin.length; j++) {
+                AlertList.push(result_fin[j])
+            }
+
             if ((this.Models[i].CustomInterface as IFactionModelRelationship).captain) {
                 if ((this.Models[i].CustomInterface as IFactionModelRelationship).captain == true) {
                     CaptainFound = true;
