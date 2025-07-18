@@ -63,24 +63,52 @@ const WbbModalAddEquipment: React.FC<WbbModalAddEquipmentProps> = ({ show, onClo
             </Modal.Header>
 
             <Modal.Body>
+                {/*
+                 * @TODO: Change the list so that all items are shown and items that are not available are shown as disabled
+                 * - show ALL items in the list
+                 * - if not available, show as disabled (add .disabled)
+                 * - if disabled, do not allow selection
+                 * - if disabled, mark the corresponding span with the class .disabled-reason
+                 * ---> .item-restriction, .item-cost, .item-limit
+                */}
                 {available.map((item) => (
                     <div
                         key={item.ID}
                         className={`select-item ${selectedID === item.ID ? 'selected' : ''}`}
-                        onClick={() => setSelectedID(item.ID)}
+                        onClick={() => setSelectedID(item.ID)} {/* @TODO: Only select if not disabled */}
                     >
-                        <span className={'item-name'}>
-                            {item.EquipmentItem.GetTrueName()}
+                        <span className={'item-left'}>
+                            <span className={'item-name'}>
+                                {item.EquipmentItem.GetTrueName()}
+                            </span>
+
+                            {item.GetRestrictionString() != '' &&
+                                <span className={'item-restriction'}>
+                                    {item.GetRestrictionString()}
+                                </span>
+                            }
                         </span>
-                        <span className={'item-cost'}>
-                            {item.Cost &&
-                                <>
-                                    {item.Cost + " " + getCostType(item.CostType)}
-                                </>
+
+                        <span className={'item-right'}>
+                            <span className={'item-cost'}>
+                                {item.Cost &&
+                                    <>
+                                        {item.GetCostString()}
+                                    </>
+                                }
+                            </span>
+
+                            {item.GetLimit() > 0 &&
+                                <span className={'item-limit'}>
+                                    {/* @TODO: Show number of selections in this warband*/}
+                                    Limit: {'1'}/{item.GetLimit()}
+                                </span>
                             }
                         </span>
                     </div>
                 ))}
+
+                {/* This can stay as a fallback if the user opens a model where no options are possible. */}
                 {available.length == 0 &&
                     <div
                         className={`select-item`}

@@ -10,6 +10,7 @@ import { StaticContextObject } from '../../contextevent/staticcontextobject';
 import { EventRunner } from '../../contextevent/contexteventhandler';
 import { Faction } from '../../feature/faction/Faction';
 import { FactionFactory } from '../../../factories/features/FactionFactory';
+import {getCostType} from "../../../utility/functions";
 
 interface IFactionEquipmentRelationship extends IContextObject {
     faction_id : string[],
@@ -83,6 +84,26 @@ class FactionEquipmentRelationship extends StaticContextObject {
         )
     }
 
+    /**
+     * Returns the limit value for this item
+     * @return {number} The limit value
+     */
+    public GetLimit() {
+        return this.Limit;
+    }
+
+    /**
+     * Returns the limit value for this item
+     * @return {string} The restriction value as a string
+     * @TODO: return the restriction as a string e.g. "Assassins only"
+     */
+    public GetRestrictionString() {
+        return 'Assassins only';
+    }
+
+    public GetCostString() {
+        return this.Cost + " " + getCostType(this.CostType)
+    }
 }
 
 export {IFactionEquipmentRelationship, FactionEquipmentRelationship}
