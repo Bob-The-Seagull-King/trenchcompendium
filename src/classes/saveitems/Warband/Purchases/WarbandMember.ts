@@ -1822,8 +1822,12 @@ class WarbandMember extends DynamicContextObject {
     public async GetAllEquipForShow() {
         
         const options : RealWarbandPurchaseEquipment[] = [ ];
+        let UnarmedFlag = true;
 
         for (let i = 0; i < this.Equipment.length; i++) {
+            if ((this.Equipment[i].HeldObject as WarbandEquipment).GetEquipmentItem().Category == "melee") {
+                UnarmedFlag = false;
+            }
             options.push(
                 {
                     purchase: this.Equipment[i],
@@ -1860,11 +1864,39 @@ class WarbandMember extends DynamicContextObject {
                                     equipment: Model
                                 }
                             )
+
+                            if (Model.GetEquipmentItem().Category == "melee") {
+                                UnarmedFlag = false;
+                            }
                         }
 
                     }
                 } catch(e) { console.log(e)}
             }
+        }
+
+        if (UnarmedFlag) {
+            const UnarmedVal = await EquipmentFactory.CreateNewModelEquipment("rel_unarmed", null)
+            const Unarmed : WarbandEquipment = await WarbandFactory.BuildModelEquipmentFromPurchase(UnarmedVal, UnarmedVal.EquipmentItems[0], 1, this);
+            const NewPurchase : WarbandPurchase = new WarbandPurchase({
+                cost_value : 0,
+                cost_type : 0,
+                count_limit : false,
+                count_cap : false,
+                sell_item : false,
+                sell_full : true,
+                purchaseid: UnarmedVal.ID,
+                faction_rel_id: UnarmedVal.ID,
+                custom_rel: UnarmedVal.SelfData,
+                modelpurch: true
+            }, this, Unarmed);
+
+            options.push(
+                {
+                    purchase: NewPurchase,
+                    equipment: Unarmed
+                }
+            )
         }
 
         return options;

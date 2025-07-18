@@ -1,5 +1,16 @@
 [
     {
+        "id": "rel_unarmed",
+        "source": "core",
+        "tags": {},
+        "name": "Unarmed",
+        "contextdata": {},
+        "options": [],
+        "model_id": [],
+        "mandatory_equipment": ["eq_unarmed"],
+        "removable": false
+    },
+    {
         "id": "rel_md_eq_sultanatesapper",
         "source": "core",
         "tags": {},

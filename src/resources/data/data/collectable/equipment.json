@@ -2441,7 +2441,6 @@
         "category": "melee",
         "distance": null,
         "stats": {
-            "hands_melee": 1,
             "melee": true
         },
         "contextdata": {
