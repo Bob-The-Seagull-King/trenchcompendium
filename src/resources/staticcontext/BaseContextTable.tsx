@@ -602,6 +602,37 @@ export const BaseContextCallTable : CallEventTable = {
         }
 
     },
+    eq_limit: {
+        event_priotity: 1,
+        async canModelAddItem(this: EventRunner, eventSource : any, relayVar : boolean,  trackVal : MemberAndItem, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, restrictions : EquipmentRestriction[]) {            
+            let CanAdd = relayVar;
+
+            if (trackVal.item != context_func['id']) {
+                return CanAdd;
+            }
+
+            if (CanAdd) {
+                
+                let varcount = 0;
+
+                for (let j = 0; j < (trackVal.model).GetEquipment().length; j++) {
+                    const Equip = (trackVal.model).GetEquipment()[j].equipment
+                    const EquipObj = (Equip.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment)
+                    if (EquipObj.ID == context_func["id"]) {
+                        varcount += 1;
+                    }
+
+
+                }
+
+                if (varcount >= context_func["count"]) {
+                    CanAdd = false;
+                }
+            }
+
+            return CanAdd;
+        }
+    },
     model_equipment_limit : {
         event_priotity: 1,
         async getEquipmentLimitPresentable(this: EventRunner, eventSource : any, relayVar : any, trackVal : EquipmentLimit[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
@@ -713,6 +744,12 @@ export const BaseContextCallTable : CallEventTable = {
                             }
                         }
 
+                        if (LimitMax.id) {
+                            if (trackVal.item.EquipmentItem.ID != LimitMax.id) {
+                                continue;
+                            }
+                        }
+
                         if (LimitMax.tag) {
                             if (!containsTag(trackVal.item.EquipmentItem.Tags, LimitMax.tag) && !containsTag(trackVal.item.Tags, LimitMax.tag)) {
                                 continue;
@@ -721,8 +758,8 @@ export const BaseContextCallTable : CallEventTable = {
 
                         let varcount = 0;
 
-                        for (let j = 0; j < (eventSource as WarbandMember).GetEquipment().length; j++) {
-                            const Equip = (eventSource as WarbandMember).GetEquipment()[j].equipment
+                        for (let j = 0; j < (trackVal.model).GetEquipment().length; j++) {
+                            const Equip = (trackVal.model).GetEquipment()[j].equipment
                             const EquipObj = (Equip.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment)
     
                             if (LimitMax.res_type == "keyword") {
@@ -767,6 +804,12 @@ export const BaseContextCallTable : CallEventTable = {
                             }
                         }
 
+                        if (LimitMax.id) {
+                            if (trackVal.item.EquipmentItem.ID != LimitMax.id) {
+                                continue;
+                            }
+                        }
+
                         if (LimitMax.tag) {
                             if (!containsTag(trackVal.item.EquipmentItem.Tags, LimitMax.tag) && !containsTag(trackVal.item.Tags, LimitMax.tag)) {
                                 continue;
@@ -775,8 +818,8 @@ export const BaseContextCallTable : CallEventTable = {
 
                         let varcount = 0;
 
-                        for (let j = 0; j < (eventSource as WarbandMember).GetEquipment().length; j++) {
-                            const Equip = (eventSource as WarbandMember).GetEquipment()[j].equipment
+                        for (let j = 0; j < (trackVal.model).GetEquipment().length; j++) {
+                            const Equip = (trackVal.model).GetEquipment()[j].equipment
                             const EquipObj = (Equip.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment)
     
                             if (LimitMax.res_type == "keyword") {

@@ -53,6 +53,7 @@ interface EquipmentLimit {
 }
 
 interface LimitSingle {
+    id?: string,
     category? : string,
     tag? : string,
     res_type : string,

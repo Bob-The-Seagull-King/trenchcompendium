@@ -1519,12 +1519,13 @@
         "category": "ranged",
         "distance": 36,
         "stats": {
-            "hands_ranged": 2,
             "ranged": true
         },
         "contextdata": {
             "get_weapon": {"ignore": true},
-            "ignore_armour": {}
+            "ignore_armour": {},
+            
+            "eq_limit": {"count": 1, "id": "eq_rocketpropelledgrenade"}
         },
         "description": [            
             {
