@@ -1087,6 +1087,10 @@ class WarbandMember extends DynamicContextObject {
             BaseList.push(this.CurModel.KeyWord[i].ID);
         }
 
+        if (!BaseList.includes("kw_elite") && this.IsElite()) {
+            BaseList.push("kw_elite")
+        }
+
         const Events : EventRunner = new EventRunner();
         if (this.MyContext != null) {
             const result = await Events.runEvent(

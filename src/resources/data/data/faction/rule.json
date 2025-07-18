@@ -1933,7 +1933,8 @@
         "tags": { },
         "contextdata": { 
             "remove_from_model": {
-                "id": ["ab_assaultdrill"]
+                "id": ["md_shocktrooper"],
+                "abilities": ["ab_assaultdrill"]
             }
         },
         "name": "Light Melee",
@@ -2248,17 +2249,18 @@
         "tags": { },
         "contextdata": { 
             "warband_equipment_limit": {
+                
+                "ignore": [
+                    {
+                        "type": "id",
+                        "value": "eq_satchelcharge"
+                    }
+                ],
                 "maximum": [
                     {
                         "category": "ranged",
                         "res_type": "keyword",
                         "value": "kw_heavy",
-                        "ignore": [
-                            {
-                                "type": "id",
-                                "value": "eq_satchelcharge"
-                            }
-                        ],
                         "limit": 3
                     }
                 ]

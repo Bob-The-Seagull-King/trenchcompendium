@@ -362,6 +362,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                     </WbbFighterCollapse>
                 </div>
             }
+            
 
             {/*
               * Other Upgrades
@@ -383,17 +384,18 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                                             {fighter.GetFighterName() + " can choose up to " + complexstate.upgrades[item].limit.toString() + " " + makestringpresentable(item) + "."}
                                         </p>
                                     }
-
-                                    {complexstate.upgrades[item].upgrades.filter((item) => ((!playMode) || item.purchase != null)).map((subitem, index) => (
-                                        <WbbOptionItem key={index.toString() + updateKey.toString()} option={subitem} owner={fighter} category={item}/>
-                                    ))}
+                                    
+                                    <div key={complexstate.keyvar}>
+                                        {complexstate.upgrades[item].upgrades.filter((item) => ((!playMode) || item.purchase != null)).map((subitem, index) => (
+                                            <WbbOptionItem key={index.toString() + updateKey.toString()} option={subitem} owner={fighter} category={item}/>
+                                        ))}
+                                    </div>
                                 </>
                             </WbbFighterCollapse>
                         </div>
                     ))}
                 </>
             }
-
             {/* Edit Loadout */}
             {(!playMode) &&
                 <div className={'fighter-card-collapse-wrap'}>

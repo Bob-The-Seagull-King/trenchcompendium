@@ -180,6 +180,21 @@ export const BaseContextCallTable : CallEventTable = {
             return { "melee" : MeleePresentation, "range" : RangePresentation};
         }
     },
+    add_armoury_item: {
+        event_priotity: 0,
+        async onWarbandBuild(this: EventRunner, eventSource : any, trackVal : UserWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            const faceqmodule = await import("../../factories/features/EquipmentFactory")
+            
+            if (context_func["free_purchases"]) {
+                for (let i = 0; i < context_func["free_purchases"].length; i++) {
+                    const NewItem = await faceqmodule.EquipmentFactory.CreateNewFactionEquipment(context_func["free_purchases"][i], null, false);
+                    if (NewItem != null) {
+                        await trackVal.AddStash(NewItem);
+                    }
+                }
+            }
+        }
+    },
     validate_final_unit: {
         event_priotity: 0,        
         async validateModelForWarband(this: EventRunner, eventSource : any, relayVar: string[], trackVal : WarbandPurchase, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : UserWarband) {
@@ -762,6 +777,153 @@ export const BaseContextCallTable : CallEventTable = {
 
                         for (let j = 0; j < (eventSource as WarbandMember).GetEquipment().length; j++) {
                             const Equip = (eventSource as WarbandMember).GetEquipment()[j].equipment
+                            const EquipObj = (Equip.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment)
+    
+                            if (LimitMax.res_type == "keyword") {
+                                let Found = false;
+                                for (let k = 0; k < EquipObj.KeyWord.length; k++) {
+                                    if (EquipObj.KeyWord[k].ID == LimitMax.value) {
+                                        Found = true;
+                                    }
+                                }
+                                if (Found == true) {
+                                    varcount += 1;
+                                }
+                            }       
+
+                            if (LimitMax.res_type == "tag") {
+                                if (containsTag(EquipObj.Tags, LimitMax.value.toString()) || containsTag(Equip.Tags, LimitMax.value.toString())) {
+                                    varcount += 1;
+                                }
+                            }
+    
+                            if (LimitMax.res_type == "id") {
+                                if (EquipObj.ID != LimitMax.value) {
+                                    varcount += 1;
+                                }
+                            }  
+
+
+                        }
+
+                        if (varcount <= LimitMax.limit) {
+                            CanAdd = false;
+                        }
+                    }
+                }
+            }
+
+            return CanAdd;
+        }
+        
+    },
+    warband_equipment_limit : {
+        event_priotity: 1,
+        getEquipmentLimit(this: EventRunner, eventSource : any, relayVar : any, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            relayVar.push(context_func as EquipmentLimit)
+            return relayVar;
+        },
+        async canWarbandAddItem(this: EventRunner, eventSource : any, relayVar : boolean,  trackVal : UserWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, restrictions : EquipmentRestriction[], item: FactionEquipmentRelationship) {            
+            let CanAdd = relayVar;
+
+            if (CanAdd) {
+
+                if (context_func["ignore"]) {
+                    for (let i = 0; i < context_func["ignore"].length; i++) {
+                        if (context_func["ignore"][i]["type"] == "id") {
+                            if (item.EquipmentItem.ID == context_func["ignore"][i]["value"]) {
+                                return true;
+                            }
+                        }
+                    }
+                }
+
+                const Limits : EquipmentLimit = context_func as EquipmentLimit;
+
+                if (Limits.maximum) {
+                    for (let i = 0; i < Limits.maximum.length; i++) {
+                        const LimitMax = Limits.maximum[i]
+                        
+                        if (LimitMax.category) {
+                            if (item.EquipmentItem.Category != LimitMax.category) {
+                                continue;
+                            }
+                        }
+
+                        if (LimitMax.tag) {
+                            if (!containsTag(item.EquipmentItem.Tags, LimitMax.tag) && !containsTag(item.Tags, LimitMax.tag)) {
+                                continue;
+                            }
+                        }
+
+                        
+                        if (LimitMax.res_type == "keyword") {
+                            if (item.EquipmentItem.GetKeyWords().filter((item) => item.ID == LimitMax.value).length == 0) {
+                                continue;
+                            }
+                        }
+
+                        let varcount = 0;
+
+                        const Allequip = (eventSource as UserWarband).GetAllEquipment()
+
+                        for (let j = 0; j < Allequip.length; j++) {
+                            const Equip = Allequip[j].equipment
+                            const EquipObj = (Equip.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment)
+    
+                            if (LimitMax.res_type == "keyword") {
+                                let Found = false;
+                                for (let k = 0; k < EquipObj.KeyWord.length; k++) {
+                                    if (EquipObj.KeyWord[k].ID == LimitMax.value) {
+                                        Found = true;
+                                    }
+                                }
+                                if (Found == true) {
+                                    varcount += 1;
+                                }
+                            }       
+
+                            if (LimitMax.res_type == "tag") {
+                                if (containsTag(EquipObj.Tags, LimitMax.value.toString()) || containsTag(Equip.Tags, LimitMax.value.toString())) {
+                                    varcount += 1;
+                                }
+                            }
+    
+                            if (LimitMax.res_type == "id") {
+                                if (EquipObj.ID != LimitMax.value) {
+                                    varcount += 1;
+                                }
+                            }  
+
+
+                        }
+
+                        if (varcount >= LimitMax.limit) {
+                            CanAdd = false;
+                        }
+                    }
+                }
+                if (Limits.minimum) {
+                    for (let i = 0; i < Limits.minimum.length; i++) {
+                        const LimitMax = Limits.minimum[i]
+                        
+                        if (LimitMax.category) {
+                            if (item.EquipmentItem.Category != LimitMax.category) {
+                                continue;
+                            }
+                        }
+
+                        if (LimitMax.tag) {
+                            if (!containsTag(item.EquipmentItem.Tags, LimitMax.tag) && !containsTag(item.Tags, LimitMax.tag)) {
+                                continue;
+                            }
+                        }
+
+                        let varcount = 0;
+                        const Allequip = (eventSource as UserWarband).GetAllEquipment()
+
+                        for (let j = 0; j < Allequip.length; j++) {
+                            const Equip = Allequip[j].equipment
                             const EquipObj = (Equip.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment)
     
                             if (LimitMax.res_type == "keyword") {
