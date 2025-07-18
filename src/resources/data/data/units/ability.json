@@ -317,7 +317,7 @@
             "equipment_add_keyword": {
                 "equip_check": [
                     {
-                        "check_type": "tag",
+                        "check_type": "id",
                         "value": "eq_jezzail"
                     }
                 ],
@@ -1181,7 +1181,7 @@
                 ]
             }
         ],
-        "options": []
+        "options": [ ]
     },
     {
         "id": "ab_finishthefallen",
@@ -1887,14 +1887,15 @@
         "source": "core",
         "tags": {"trait": true},
         "contextdata": {
-            "override_equipment_keyword": {
-                "overrides": [
+            "equipment_add_keyword": {
+                "equip_check": [
                     {
-                        "id": "eq_satchelcharge",
-                        "remove": [
-                            "kw_heavy"
-                        ]
+                        "check_type": "id",
+                        "value": "eq_satchelcharge"
                     }
+                ],
+                "removals": [
+                    "kw_heavy"
                 ]
             }
          },

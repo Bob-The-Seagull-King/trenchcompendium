@@ -23,6 +23,7 @@ import KeywordDisplay from '../features/glossary/KeywordDisplay';
 import GenericHover from '../generics/GenericHover';
 import { EventRunner } from '../../../classes/contextevent/contexteventhandler';
 import WbbOptionSelect from './modals/warband/WbbOptionSelect';
+import { Keyword } from '../../../classes/feature/glossary/Keyword';
 
 interface EquipmentItemProps {
     item: WarbandPurchase
@@ -37,8 +38,10 @@ const WbbEquipmentListItem: React.FC<EquipmentItemProps> = ({ item, fighter }) =
 
     const [canRemove, setCanRemove] = useState(item.Sellable);
     const [cantSwap, setCantSwap] = useState(false);
+    const [keywordlist, setKeywordList] = useState<Keyword[]>([]);
     const [keyvar, setKeyvar] = useState(0);
 
+    const ItemValue = (((item.HeldObject as WarbandEquipment).MyEquipment.SelfDynamicProperty.OptionChoice as Equipment))
     useEffect(() => {
 
         async function GetCanRemove() {
@@ -61,7 +64,16 @@ const WbbEquipmentListItem: React.FC<EquipmentItemProps> = ({ item, fighter }) =
                     fighter
                 )
 
+                const keywords = await eventmon.runEvent(
+                    "findFinalKeywordsForEquipment",
+                    fighter.model,
+                    [item.HeldObject as WarbandEquipment],
+                    ItemValue.GetKeyWords(),
+                    null
+                )
+
                 setCanRemove(CanRemove)
+                setKeywordList(keywords)
                 setCantSwap(noSwap)
                 setKeyvar((prev) => prev + 1)
             }
@@ -78,7 +90,6 @@ const WbbEquipmentListItem: React.FC<EquipmentItemProps> = ({ item, fighter }) =
         }
     }
 
-    const ItemValue = (((item.HeldObject as WarbandEquipment).MyEquipment.SelfDynamicProperty.OptionChoice as Equipment))
 
     return (
         <div className={`WbbEquipmentListItem ${playMode ? 'play-mode' : ''} ${printMode ? 'print-mode' : ''} `} key={keyvar}>
@@ -149,14 +160,14 @@ const WbbEquipmentListItem: React.FC<EquipmentItemProps> = ({ item, fighter }) =
                             </tr>
                         }
                     </table>
-                    { ItemValue.KeyWord.length > 0 &&
+                    { keywordlist.length > 0 &&
                         <div className={'keywords-wrap'}>
                             <div className={'text-label'}>
                                 {'Keywords'}
                             </div>
                             <div className={'keywords'}>
                                 <p className={'keywords'}>
-                                    {ItemValue.GetKeyWords().map((item, index) => (
+                                    {keywordlist.map((item, index) => (
                                         <span className='' key={"equipment_keyword_" + ItemValue.GetID() + "_keyword_id"}>
                                         <GenericHover
                                             d_colour={'grey'}
@@ -165,7 +176,7 @@ const WbbEquipmentListItem: React.FC<EquipmentItemProps> = ({ item, fighter }) =
                                             d_type={""}
                                             d_method={() => <KeywordDisplay data={item}/>}
                                         />
-                                        {index < ItemValue.GetKeyWords().length - 1 && ", "}
+                                        {index < keywordlist.length - 1 && ", "}
                                     </span>
                                     )) /* Keywords */}
                                 </p>

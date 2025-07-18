@@ -11,6 +11,9 @@ import { Patron } from "../../../feature/skillgroup/Patron";
 import { Faction } from "../../../feature/faction/Faction";
 import { EquipmentFactory } from "../../../../factories/features/EquipmentFactory";
 import { Equipment } from "../../../feature/equipment/Equipment";
+import { EventRunner } from "../../../contextevent/contexteventhandler";
+import { WarbandMember } from "./WarbandMember";
+import { Keyword } from "../../../feature/glossary/Keyword";
 
 interface IWarbandEquipment extends IContextObject {
     equipment_id: IWarbandProperty,
@@ -73,6 +76,24 @@ class WarbandEquipment extends DynamicContextObject {
         return _objint;
     }
     
+
+    public async GetKeywords() : Promise<Keyword[]> {
+        
+        if (this.MyContext instanceof WarbandMember) {
+        const eventmon : EventRunner = new EventRunner();
+            const keywords = await eventmon.runEvent(
+                "findFinalKeywordsForEquipment",
+                this.MyContext,
+                [this],
+                this.GetEquipmentItem().GetKeyWords(),
+                null
+            )
+            return keywords;
+        } else {
+            return this.GetEquipmentItem().GetKeyWords();
+        }
+    }
+
     /**
      * Grabs the packages from any sub-objects, based
      * on class implementation.

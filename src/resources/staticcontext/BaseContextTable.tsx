@@ -36,7 +36,7 @@ import { WarbandConsumable } from "../../classes/saveitems/Warband/WarbandConsum
 import { DynamicOptionContextObject } from "../../classes/options/DynamicOptionContextObject";
 import { IUpgrade, Upgrade } from "../../classes/feature/ability/Upgrade";
 import { WarbandEquipment } from "../../classes/saveitems/Warband/Purchases/WarbandEquipment";
-import { WarbandPurchase } from "../../classes/saveitems/Warband/Purchases/WarbandPurchase";
+import { RealWarbandPurchaseModel, WarbandPurchase } from "../../classes/saveitems/Warband/Purchases/WarbandPurchase";
 
 export const BaseContextCallTable : CallEventTable = {
     option_search_viable: {
@@ -523,7 +523,7 @@ export const BaseContextCallTable : CallEventTable = {
                         for (let j = 0; j < CurRestriction.banned.length; j++) {
                             const Requirement = CurRestriction.banned[j]
                             
-                            if (trackVal.model.HasEquipmentFollowingRestriction(Requirement)) {
+                            if (await trackVal.model.HasEquipmentFollowingRestriction(Requirement)) {
                                 CanAdd = false;
                             }
                         }
@@ -816,6 +816,44 @@ export const BaseContextCallTable : CallEventTable = {
             return CanAdd;
         }
         
+    },
+    equipment_add_keyword: {
+        event_priotity: 0,
+        async findFinalKeywordsForEquipment(this: EventRunner, eventSource : any, relayVar: Keyword[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, coreitem : WarbandEquipment) {
+            const keywordmodule = await import("../../factories/features/KeywordFactory")
+            if (context_func["equip_check"]) {
+                let DoApply = false;
+
+                for (let i = 0; i < context_func["equip_check"].length; i++) {
+                    if(context_func["equip_check"][i]["check_type"] == "id") {
+                        if (coreitem.GetEquipmentItem().ID == context_func["equip_check"][i]["value"]) {
+                            DoApply = true;
+                        }
+                    }
+                }
+
+                if (DoApply) {
+                    
+                    if (context_func["removals"]) {
+                        const NewKeys = relayVar.filter((item) => (!context_func["removals"].includes(item.GetID())))
+                        relayVar = NewKeys;
+                    }
+                    if (context_func["additions"]) {
+                        for (let i = 0; i < context_func["additions"].length; i++) {
+                            if (relayVar.filter((item) => (context_func["additions"][i] == (item.GetID()))).length == 0) {
+                                const NewKeyword = await keywordmodule.KeywordFactory.CreateNewKeyword(context_func["additions"][i], null)
+
+                                if (NewKeyword != null) {
+                                    relayVar.push(NewKeyword)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+            return relayVar;
+        }
     },
     warband_equipment_limit : {
         event_priotity: 1,

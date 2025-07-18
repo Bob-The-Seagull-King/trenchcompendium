@@ -390,7 +390,7 @@ class WarbandMember extends DynamicContextObject {
         return _objint;
     }
 
-    public HasEquipmentFollowingRestriction(rest : RestrictionSingle) : boolean {
+    public async HasEquipmentFollowingRestriction(rest : RestrictionSingle) : Promise<boolean> {
         for (let i = 0; i < this.Equipment.length; i++) {
             const equip = this.Equipment[i].HeldObject as WarbandEquipment;
             const equipitem = equip.GetEquipmentItem()
@@ -409,8 +409,9 @@ class WarbandMember extends DynamicContextObject {
 
             if (rest.res_type == "keyword") {
                 let Found = false;
-                for (let k = 0; k < equipitem.GetKeyWords().length; k++) {
-                    if (equipitem.GetKeyWords()[k].ID == rest.value) {
+                const keywordlist = await equip.GetKeywords()
+                for (let k = 0; k < keywordlist.length; k++) {
+                    if (keywordlist[k].ID == rest.value) {
                         Found = true;
                     }
                 }
@@ -1606,7 +1607,7 @@ class WarbandMember extends DynamicContextObject {
                 return false;
             }
             if (
-                (item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).GetKeyWordIDs().includes("kw_heavy") &&
+                ((await item.equipment.GetKeywords()).filter((item) => item.ID == "kw_heavy").length > 0) &&
                 (faceq.GetKeyWordIDs().includes("kw_heavy")) &&
                 (KeyWordList.filter((item) => item.GetID() == "kw_strong").length == 0)
             ) {
@@ -1685,8 +1686,9 @@ class WarbandMember extends DynamicContextObject {
     public async IncludesShieldComboRanged() {
         const MyEquip = await this.GetAllEquipForShow();
         for (let i = 0; i < MyEquip.length; i++) {
+            const KeywordList = await MyEquip[i].equipment.GetKeywords()
             const EquipItem = MyEquip[i].equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment;
-            if (EquipItem.GetKeyWordIDs().includes("kw_shieldcombo") && EquipItem.Category == "ranged") {
+            if (KeywordList.filter((item) => item.ID == "kw_shieldcombo").length > 0 && EquipItem.Category == "ranged") {
                 return true;
             }
         }
@@ -1696,8 +1698,9 @@ class WarbandMember extends DynamicContextObject {
     public async IncludesShieldComboMelee() {
         const MyEquip = await this.GetAllEquipForShow();
         for (let i = 0; i < MyEquip.length; i++) {
+            const KeywordList = await MyEquip[i].equipment.GetKeywords()
             const EquipItem = MyEquip[i].equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment;
-            if (EquipItem.GetKeyWordIDs().includes("kw_shieldcombo") && EquipItem.Category == "melee") {
+            if (KeywordList.filter((item) => item.ID == "kw_shieldcombo").length > 0 && EquipItem.Category == "melee") {
                 return true;
             }
         }

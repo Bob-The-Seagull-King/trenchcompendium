@@ -20,7 +20,8 @@ import { StaticOptionContextObject } from "../../classes/options/StaticOptionCon
 import { WarbandConsumable } from "../../classes/saveitems/Warband/WarbandConsumable";
 import { Upgrade } from "../../classes/feature/ability/Upgrade";
 import { WarbandEquipment } from "../../classes/saveitems/Warband/Purchases/WarbandEquipment";
-import { WarbandPurchase } from "../../classes/saveitems/Warband/Purchases/WarbandPurchase";
+import { RealWarbandPurchaseModel, WarbandPurchase } from "../../classes/saveitems/Warband/Purchases/WarbandPurchase";
+import { Keyword } from "../../classes/feature/glossary/Keyword";
 
 /**
  * Events that can be called by the runEvent method,
@@ -97,6 +98,7 @@ export interface CallEvents {
     getEquipmentLimitTrue? : (this: EventRunner, eventSource : any, relayVar: number, trackVal : UserWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, ref_equip : FactionEquipmentRelationship) => Promise<number>;
     validateModelForWarband? : (this: EventRunner, eventSource : any, relayVar: string[], trackVal : WarbandPurchase, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : UserWarband) => Promise<string[]>;
     onWarbandBuild? : (this: EventRunner, eventSource : any, trackVal : UserWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<void>; 
+    findFinalKeywordsForEquipment? : (this: EventRunner, eventSource : any, relayVar: Keyword[],  context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, coreitem : WarbandEquipment) => Promise<Keyword[]>;
     
 }
 
