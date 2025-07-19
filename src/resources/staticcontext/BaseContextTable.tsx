@@ -1252,8 +1252,16 @@ export const BaseContextCallTable : CallEventTable = {
             }
             if (context_func["warband_limit"]) {
                 for (let i = 0; i < context_func["warband_limit"].length; i++) {
-                    /** @TODO When we figure out campaign attatchment and warband limit */
-                    return relayVar;
+                    
+                    const CurThresh = await trackVal.warband.GetCampaignTresholdValue()
+                    let CurSize = relayVar;
+                    for (let i = 0; i < context_func["warband_limit"].length; i++) {
+                        if (context_func["warband_limit"][i]["size"] <= CurThresh) {
+                            CurSize = context_func["warband_limit"][i]["value"]
+                        }
+                        
+                    }
+                    return CurSize;
                 }
             }
             
