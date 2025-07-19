@@ -365,7 +365,6 @@ export const BaseContextCallTable : CallEventTable = {
             
             let CanAdd = relayVar;
 
-
             // Removed, required, banned
             if (CanAdd) {
                 for (let i = 0; i < restrictions.length; i++) {
@@ -425,9 +424,9 @@ export const BaseContextCallTable : CallEventTable = {
                     }
 
                     if (CurRestriction.required) {
+                        let HasMet = false;
                         for (let j = 0; j < CurRestriction.required.length; j++) {
                             const Requirement = CurRestriction.required[j]
-
                             if (Requirement.category) {
                                 if (trackVal.item.EquipmentItem.Category != Requirement.category) {
                                     continue;
@@ -447,22 +446,25 @@ export const BaseContextCallTable : CallEventTable = {
                                         Found = true;
                                     }
                                 }
-                                if (Found == false) {
-                                    CanAdd = false;
+                                if (Found == true) {
+                                    HasMet = true;
                                 }
-                            }       
+                            } 
 
                             if (Requirement.res_type == "tag") {
-                                if (!containsTag(trackVal.item.EquipmentItem.Tags, Requirement.value.toString()) && !containsTag(trackVal.item.Tags, Requirement.value.toString())) {
-                                    CanAdd = false;
+                                if (containsTag(trackVal.item.EquipmentItem.Tags, Requirement.value.toString()) || containsTag(trackVal.item.Tags, Requirement.value.toString())) {
+                                    HasMet = true;
                                 }
                             }
     
                             if (Requirement.res_type == "id") {
-                                if (trackVal.item.EquipmentItem.ID != Requirement.value) {
-                                    CanAdd = false;
+                                if (trackVal.item.EquipmentItem.ID == Requirement.value) {
+                                    HasMet = true;
                                 }
-                            }        
+                            }       
+                        }
+                        if (HasMet == false) {
+                            CanAdd = false
                         }
                     }
                 }
@@ -531,7 +533,6 @@ export const BaseContextCallTable : CallEventTable = {
                 }
                 
             }
-
             return CanAdd;
         }
     },

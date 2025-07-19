@@ -2708,7 +2708,7 @@
         "id": "eq_heavyballisticshield",
         "name": "Heavy Ballistic Shield",
         "source": "core",
-        "tags": {"trait": true, "shield": true},
+        "tags": {"trait": true},
         "category": "armour",
         "distance": null,
         "stats": {

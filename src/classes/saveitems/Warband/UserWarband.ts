@@ -1186,24 +1186,34 @@ class UserWarband extends DynamicContextObject {
 
         const EventProc : EventRunner = new EventRunner();
         let CaptainFound = false
-        for (let i = 0; i < this.Models.length; i++) {        
-            const result = await EventProc.runEvent(
-                "validateModelForWarband",
-                this,
-                [this],
-                [],
-                this.Models[i]
-            )
-            const result_fin = await EventProc.runEvent(
-                "validateModelForWarband",
-                this.Models[i].HeldObject as WarbandMember,
-                [this],
-                result,
-                this.Models[i]
-            ) 
+        for (let i = 0; i < this.Models.length; i++) {   
+            if ((this.Models[i].HeldObject as WarbandMember).IsMercenary()) {
+                continue;
+            }    
+            let finalsource = [] 
+            const CheckList = (this.Models[i].HeldObject as WarbandMember).GeneralCache.validation_check
+            if (CheckList != null) {
+                finalsource = CheckList
+            } else {
+                const result = await EventProc.runEvent(
+                    "validateModelForWarband",
+                    this,
+                    [this],
+                    [],
+                    this.Models[i]
+                )
+                const result_fin = await EventProc.runEvent(
+                    "validateModelForWarband",
+                    this.Models[i].HeldObject as WarbandMember,
+                    [this],
+                    result,
+                    this.Models[i]
+                ) 
+                finalsource = result_fin
+            }
 
-            for (let j = 0; j < result_fin.length; j++) {
-                AlertList.push(result_fin[j])
+            for (let j = 0; j < finalsource.length; j++) {
+                AlertList.push(finalsource[j])
             }
 
             if ((this.Models[i].CustomInterface as IFactionModelRelationship).captain) {
@@ -1472,7 +1482,6 @@ class UserWarband extends DynamicContextObject {
 
         for (let i = 0; i < BaseRels.length; i++) {
             const IsRestricted : boolean = await this.IsModelRestricted(BaseRels[i]);
-            if (IsRestricted) { continue; }
             let maxcount = BaseRels[i].Maximum;
             let canaddupgrade = true;
             let maxccurcostount = BaseRels[i].Cost;
@@ -1520,6 +1529,7 @@ class UserWarband extends DynamicContextObject {
                 }
             }
 
+            if (IsRestricted) { continue; }
             if (this.IsUnRestricted || canaddupgrade) {
                 ListOfRels.push(BaseRels[i]);
             }

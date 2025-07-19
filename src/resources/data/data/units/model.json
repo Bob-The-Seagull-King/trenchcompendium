@@ -1190,11 +1190,6 @@
             "model_equipment_restriction": {
                 "removed": [
                     {
-                        "category": "equipment",
-                        "res_type": "all",
-                        "value": ""
-                    },
-                    {
                         "category": "melee",
                         "res_type": "all",
                         "value": ""
@@ -1208,6 +1203,13 @@
                         "category": "armour",
                         "res_type": "all",
                         "value": ""
+                    }
+                ],
+                "required": [
+                    {
+                        "category": "equipment",
+                        "res_type": "id",
+                        "value": "eq_martyrdomdevice"
                     }
                 ]
             }
@@ -2166,7 +2168,7 @@
             "model_equipment_limit": {
                 "maximum": [
                     {
-                        "tag": "weapon",
+                        "category": "equipment",
                         "res_type": "id",
                         "value": "eq_graildevotee",
                         "limit": 1

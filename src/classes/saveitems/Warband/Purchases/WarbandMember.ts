@@ -85,7 +85,8 @@ export interface GeneralModelCache {
     max_scars?: number,
     stat_options?: ModelStatistics[][],
     final_stats?: ModelStatistics,
-    equipment_options?: FactionEquipmentRelationship[]
+    equipment_options?: FactionEquipmentRelationship[],
+    validation_check?: string[]
 }
 
 interface IWarbandMember extends IContextObject {
@@ -1148,6 +1149,9 @@ class WarbandMember extends DynamicContextObject {
         const BaseList : string[] = []
 
         for (let i = 0; i < this.CurModel.KeyWord.length; i++) {
+            if (this.CurModel.KeyWord[i].ID == "kw_elite" && !this.IsElite()) {
+                continue;
+            }
             BaseList.push(this.CurModel.KeyWord[i].ID);
         }
 
@@ -2037,16 +2041,18 @@ class WarbandMember extends DynamicContextObject {
         }
         const eventmon : EventRunner = new EventRunner();
 
-        const SkipEquip : boolean = await eventmon.runEvent(
-            "overrideMercenarySkip",
-            this,
-            [],
-            this.IsMercenary(),
-            null
-        )
+        if (this.IsMercenary()) {
+            const SkipEquip : boolean = await eventmon.runEvent(
+                "overrideMercenarySkip",
+                this,
+                [],
+                false,
+                null
+            )
 
-        if (SkipEquip) {
-            return true;
+            if (!SkipEquip) {
+                return false;
+            }
         }
 
         const CurrentHandsAvailable : ModelHands = await this.GetModelHands();
