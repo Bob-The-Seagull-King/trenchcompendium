@@ -43,10 +43,29 @@ export interface CachedFacRelData {
     limit : number,
     restrictions : string[],
     count_cur : number,
-    cost: number
+    cost: number,
+    canadd : boolean
+}
+export interface CachedModelRelData {
+    facrel : FactionModelRelationship,
+    limit : number,
+    avoid_restriction : boolean,
+    count_cur : number,
+    cost: number,
+    canadd : boolean
+}
+
+export interface GeneralEventCache {
+    fireteam_list? : Fireteam[],
+    faction_equip_rel? : FactionEquipmentRelationship[],
+    fac_equip_rest?: EquipmentRestriction[],
+    fac_model_rel?: FactionModelRelationship[],
+    max_elite? : number,
+    base_ducats?: number
 }
 
 export type CachedFactionEquipment = {[type : string]: CachedFacRelData};
+export type CachedFactionModel = {[type : string]: CachedModelRelData};
 
 interface IUserWarband extends IContextObject {
     id : string,
@@ -82,9 +101,16 @@ class UserWarband extends DynamicContextObject {
     public Restrictions : string[] = [];
     public IsUnRestricted : boolean;
     public EquipmentRelCache : CachedFactionEquipment = {}
+    public ModelRelCache : CachedFactionModel = {}
+    public GeneralCache : GeneralEventCache = {}
 
     public DumpCache() {
         this.EquipmentRelCache = {}
+        this.ModelRelCache = {}
+        this.GeneralCache = {}
+        for (let i = 0; i < this.Models.length; i++) {
+            (this.Models[i].HeldObject as WarbandMember).GeneralCache = {}
+        }
     }
 
     public DucatLimit : number[] = [700,800,900,1000,1100,1200,1300,1400,1500,1600,1700,1800];
@@ -211,21 +237,20 @@ class UserWarband extends DynamicContextObject {
 
     public async BuildModifiersFireteam(data : IWarbandProperty[]) {
         const eventmon : EventRunner = new EventRunner();
-        let all_eq : Fireteam[] = await eventmon.runEvent(
-            "getAllFireteamOptions",
-            this,
-            [],
-            [],
-            this
-        )
-        for (let i = 0; i < this.Models.length; i++) {
+        let all_eq : Fireteam[] = []
+        if (this.GeneralCache.fireteam_list != null) {
+            all_eq = this.GeneralCache.fireteam_list
+        } else {
             all_eq = await eventmon.runEvent(
                 "getAllFireteamOptions",
-                this.Models[i].HeldObject as WarbandMember,
+                this,
                 [],
-                all_eq,
+                [],
                 this
             )
+        }
+        for (let i = 0; i < this.Models.length; i++) {
+            all_eq = await (this.Models[i].HeldObject as WarbandMember).GetFireteams(all_eq)
         }
         this.Fireteams = [];
         for (let i = 0; i < all_eq.length; i++) {
@@ -667,13 +692,17 @@ class UserWarband extends DynamicContextObject {
         
         const eventmon : EventRunner = new EventRunner();
         let maxcount = RefModel.Maximum;
-        maxcount = await eventmon.runEvent(
-            "getModelLimitTrue",
-            RefModel,
-            [],
-            maxcount,
-            this
-        )
+        if (this.ModelRelCache[RefModel.ID] != null) {
+            maxcount = this.ModelRelCache[RefModel.ID].limit
+        } else {
+            maxcount = await eventmon.runEvent(
+                "getModelLimitTrue",
+                RefModel,
+                [],
+                maxcount,
+                this
+            )
+        }
         if (this.GetCountOfRel(RefModel.ID) < maxcount || ((RefModel.Minimum == 0 && RefModel.Maximum == 0))) {
             return false;
         }
@@ -863,14 +892,22 @@ class UserWarband extends DynamicContextObject {
         }
         const eventmon : EventRunner = new EventRunner();
         let maxcount = RefModel.Limit;
-        maxcount = await eventmon.runEvent(
-            "getEquipmentLimitTrue",
-            RefModel,
-            [],
-            maxcount,
-            this
-        )
-        if (this.GetCountOfEquipmentRel(RefModel.ID) < maxcount || (maxcount == 0 && RefModel.Limit == 0)) {
+        let curcount = 0;
+
+        if (this.EquipmentRelCache[RefModel.ID] != null) {
+            maxcount = this.EquipmentRelCache[RefModel.ID].limit
+            curcount = this.EquipmentRelCache[RefModel.ID].count_cur
+        } else {
+            maxcount = await eventmon.runEvent(
+                "getEquipmentLimitTrue",
+                RefModel,
+                [],
+                maxcount,
+                this
+            )
+            curcount = this.GetCountOfEquipmentRel(RefModel.ID)
+        }
+        if (curcount < maxcount || (maxcount == 0 && RefModel.Limit == 0)) {
             if (!containsTag(RefModel.Tags, "exploration_only")) {
                 return false;
             }
@@ -969,14 +1006,23 @@ class UserWarband extends DynamicContextObject {
     async GetCampaignTresholdValue () {
         const base = this.DucatLimit[this.GetCampaignCycleView() - 1] ?? this.DucatLimit[this.DucatLimit.length - 1];
         const eventmon : EventRunner = new EventRunner();
-        const DucatCount = await eventmon.runEvent(
-            "getStartingDucats",
-            this,
-            [],
-            base,
-            null
-        )
-        return DucatCount
+        let DucatCount = base
+        if (this.GeneralCache.base_ducats != null) {
+            DucatCount = this.GeneralCache.base_ducats
+        } else {
+            DucatCount = await eventmon.runEvent(
+                "getStartingDucats",
+                this,
+                [],
+                base,
+                null
+            )
+        }
+        if (DucatCount != undefined) {
+            return DucatCount
+        } else {
+            return base
+        }
     }
 
     GetCampaignMaxFieldStrength () {
@@ -1091,13 +1137,20 @@ class UserWarband extends DynamicContextObject {
     public async CanAddMoreElite() {
         
         const EventProc : EventRunner = new EventRunner();
-        const result = await EventProc.runEvent(
-            "getNumberOfElite",
-            this,
-            [],
-            6,
-            null
-        )
+        let result = 6
+
+        if (this.GeneralCache.max_elite != null) {
+            result = this.GeneralCache.max_elite
+        } else {
+        
+            result = await EventProc.runEvent(
+                "getNumberOfElite",
+                this,
+                [],
+                6,
+                null
+            )
+        }
 
         return this.GetNumElite() < result;
     }
@@ -1195,13 +1248,18 @@ class UserWarband extends DynamicContextObject {
         }
 
         const eventmon : EventRunner = new EventRunner();
-        BaseRels = await eventmon.runEvent(
-            "getAllFactionModelRelationships",
-            this,
-            [],
-            BaseRels,
-            null
-        )
+
+        if (this.GeneralCache.fac_model_rel != null) {
+            BaseRels = this.GeneralCache.fac_model_rel
+        } else {
+            BaseRels = await eventmon.runEvent(
+                "getAllFactionModelRelationships",
+                this,
+                [],
+                BaseRels,
+                null
+            )
+        }
 
         for (let i = 0; i < BaseRels.length; i++) {
             
@@ -1399,13 +1457,18 @@ class UserWarband extends DynamicContextObject {
         }
 
         const eventmon : EventRunner = new EventRunner();
-        BaseRels = await eventmon.runEvent(
-            "getAllFactionModelRelationships",
-            this,
-            [],
-            BaseRels,
-            null
-        )
+
+        if (this.GeneralCache.fac_model_rel != null) {
+            BaseRels = this.GeneralCache.fac_model_rel
+        } else {
+            BaseRels = await eventmon.runEvent(
+                "getAllFactionModelRelationships",
+                this,
+                [],
+                BaseRels,
+                null
+            )
+        }       
 
         if (this.IsUnRestricted) {
             return BaseRels;
@@ -1415,38 +1478,54 @@ class UserWarband extends DynamicContextObject {
             const IsRestricted : boolean = await this.IsModelRestricted(BaseRels[i]);
             if (IsRestricted) { continue; }
             let maxcount = BaseRels[i].Maximum;
-            maxcount = await eventmon.runEvent(
-                "getModelLimitTrue",
-                BaseRels[i],
-                [],
-                maxcount,
-                this
-            )
-            if (this.GetCountOfRel(BaseRels[i].ID) < maxcount || ((BaseRels[i].Minimum == 0 && BaseRels[i].Maximum == 0))) {
-                if (count_cost == true) {
-                    let canaddupgrade = true;
-                    let maxccurcostount = BaseRels[i].Cost;
-                    maxccurcostount = await eventmon.runEvent(
-                        "getCostOfModel",
-                        BaseRels[i],
-                        [],
-                        maxccurcostount,
-                        this
-                    )
-
+            let canaddupgrade = true;
+            let maxccurcostount = BaseRels[i].Cost;
+            let countofmodel = 0
+            
+            if (this.ModelRelCache[BaseRels[i].ID]) {
+                maxcount = this.ModelRelCache[BaseRels[i].ID].limit
+                canaddupgrade = this.ModelRelCache[BaseRels[i].ID].canadd
+                countofmodel = this.ModelRelCache[BaseRels[i].ID].count_cur
+                maxccurcostount = this.ModelRelCache[BaseRels[i].ID].cost
+            } else {
+                maxcount = await eventmon.runEvent(
+                    "getModelLimitTrue",
+                    BaseRels[i],
+                    [],
+                    maxcount,
+                    this
+                )
+                maxccurcostount = await eventmon.runEvent(
+                    "getCostOfModel",
+                    BaseRels[i],
+                    [],
+                    maxccurcostount,
+                    this
+                )
+                if (! (countofmodel < maxcount || ((BaseRels[i].Minimum == 0 && BaseRels[i].Maximum == 0)))) {
+                    canaddupgrade = false;
+                }
+                if (count_cost == true && canaddupgrade) {
                     if (BaseRels[i].CostType == 0) {
                         canaddupgrade = (this).GetSumCurrentDucats() >= maxccurcostount;
                     }
                     if (BaseRels[i].CostType == 1) {
                         canaddupgrade = (this).GetSumCurrentGlory() >= maxccurcostount;
                     }
-
-                    if (canaddupgrade) {
-                        ListOfRels.push(BaseRels[i]);
-                    }
-                } else {
-                    ListOfRels.push(BaseRels[i]);
                 }
+                this.ModelRelCache[BaseRels[i].ID] = {
+                    avoid_restriction: IsRestricted,
+                    canadd: canaddupgrade,
+                    cost: maxccurcostount,
+                    count_cur: countofmodel,
+                    facrel: BaseRels[i],
+                    limit: maxcount
+                }
+            }
+
+
+            if (canaddupgrade) {
+                ListOfRels.push(BaseRels[i]);
             }
         }
 
@@ -1455,14 +1534,21 @@ class UserWarband extends DynamicContextObject {
 
     public async IsModelRestricted(model : FactionModelRelationship) : Promise<boolean> {
         const eventmon : EventRunner = new EventRunner();
-        const AvoidRestriction = await eventmon.runEvent(
-            "avoidModelRestriction",
-            this,
-            [],
-            false,
-            model
-        )
+        let AvoidRestriction = false;
+        let relcount = 0
 
+        if (this.ModelRelCache[model.ID] != null) {
+            AvoidRestriction = this.ModelRelCache[model.ID].avoid_restriction
+            relcount = this.ModelRelCache[model.ID].count_cur
+        } else {
+            AvoidRestriction = await eventmon.runEvent(
+                "avoidModelRestriction",
+                this,
+                [],
+                false,
+                model
+            )
+        }
         if (!AvoidRestriction) {
             for (let i = 0; i < model.Restricted_Models.length; i++) {
                 for (let j = 0; j < model.Restricted_Models[i].upgrade_ids.length; j++) {
@@ -1517,28 +1603,40 @@ class UserWarband extends DynamicContextObject {
                 BaseRels.push(RefRels[i]);
             }
         }
-
         const eventmon : EventRunner = new EventRunner();
-        BaseRels = await eventmon.runEvent(
-            "getAllFactionEquipmentRelationships",
-            this,
-            [],
-            BaseRels,
-            null
-        )
+        if (this.GeneralCache.faction_equip_rel != null) {
+            BaseRels = this.GeneralCache.faction_equip_rel
+        } else {
+            
+            BaseRels = await eventmon.runEvent(
+                "getAllFactionEquipmentRelationships",
+                this,
+                [],
+                BaseRels,
+                null
+            )
+        }
+
         
         if (this.IsUnRestricted ) {
             return BaseRels;
         }
 
-        const FactionEquipRestrictionList : EquipmentRestriction[] = await eventmon.runEvent(
-            "getEquipmentRestriction", this, [], [], null )
+        let FactionEquipRestrictionList : EquipmentRestriction[] = []
+        if (this.GeneralCache.fac_equip_rest != null) {
+            FactionEquipRestrictionList = this.GeneralCache.fac_equip_rest
+        } else {
+            
+            FactionEquipRestrictionList  = await eventmon.runEvent(
+                "getEquipmentRestriction", this, [], [], null )
+        }
 
         for (let i = 0; i < BaseRels.length; i++) {
             
             const NewRefList : EquipmentRestriction[] = [];
             let maxcount = BaseRels[i].Limit;
             let maxccurcostount = BaseRels[i].Cost;
+            let canadd = true;
 
             if (this.EquipmentRelCache[BaseRels[i].ID] == null ) {
 
@@ -1580,17 +1678,26 @@ class UserWarband extends DynamicContextObject {
                     maxccurcostount,
                     this
                 )
+                canadd = await eventmon.runEvent(
+                    "canWarbandAddItem",
+                    this,
+                    [NewRefList, BaseRels[i]],
+                    true,
+                    this
+                )
 
                 this.EquipmentRelCache[BaseRels[i].ID] = {
                     limit: maxcount,
                     cost : maxccurcostount,
                     facrel: BaseRels[i],
                     restrictions: StringOfRestrictions,
-                    count_cur: this.GetCountOfEquipmentRel(BaseRels[i].ID)
+                    count_cur: this.GetCountOfEquipmentRel(BaseRels[i].ID),
+                    canadd : canadd
                 }
             } else {
                 maxcount = this.EquipmentRelCache[BaseRels[i].ID].limit,
                 maxccurcostount = this.EquipmentRelCache[BaseRels[i].ID].cost
+                canadd = this.EquipmentRelCache[BaseRels[i].ID].canadd
             }
 
             if (get_base == true) {
@@ -1598,14 +1705,6 @@ class UserWarband extends DynamicContextObject {
                 ListOfRels.push(BaseRels[i]);
                 continue;
             }
-
-            const canadd = await eventmon.runEvent(
-                "canWarbandAddItem",
-                this,
-                [NewRefList, BaseRels[i]],
-                true,
-                this
-            )
 
             if (!canadd) {
                 continue;

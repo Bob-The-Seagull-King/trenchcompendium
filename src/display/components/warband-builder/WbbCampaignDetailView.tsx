@@ -52,8 +52,10 @@ const WbbCampaignDetailView: React.FC<WbbCampaignDetailViewProps> = ({ onClose }
     useEffect(() => {
         async function RunDucatCheck() {
            const threshhold = await warband?.warband_data.GetCampaignTresholdValue()
-           setducatlimit(threshhold)
-           setKeyvar(keyvar + 1)
+           if (threshhold != undefined) {
+            setducatlimit(threshhold)
+            setKeyvar(keyvar + 1)
+           }
         }
 
         RunDucatCheck();

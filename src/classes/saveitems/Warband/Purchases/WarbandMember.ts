@@ -34,6 +34,7 @@ import { SkillGroup } from "../../../feature/skillgroup/SkillGroup";
 import { StaticContextObject } from "../../../contextevent/staticcontextobject";
 import { GetStatAsFullString, MergeTwoStats, ModelStatistics } from "../../../feature/model/ModelStats";
 import { KeywordFactory } from "../../../../factories/features/KeywordFactory";
+import { Fireteam } from "../../../feature/ability/Fireteam";
 
 export interface SkillSuite {
     skillgroup : StaticContextObject,
@@ -69,6 +70,23 @@ export type MemberUpgradesGrouped = {[type : string]:
         limit : number
     }
 };
+
+export interface GeneralModelCache {
+    fireteam_list?: Fireteam[],
+    abilities_list?: Ability[],
+    warband_skills?: WarbandProperty[],
+    show_equipment?: WarbandPurchase[],
+    available_upgrades?: UpgradesGrouped,
+    upgrade_collections?: MemberUpgradesGrouped,
+    exploration_skills?: WarbandProperty[],
+    keyword_list?: Keyword[],
+    injury_options? : Injury[],
+    skills_available? : SkillSuite[],
+    max_scars?: number,
+    stat_options?: ModelStatistics[][],
+    final_stats?: ModelStatistics,
+    equipment_options?: FactionEquipmentRelationship[]
+}
 
 interface IWarbandMember extends IContextObject {
     model: string,
@@ -106,6 +124,7 @@ class WarbandMember extends DynamicContextObject {
     ScarReserve : number;
     Stat_Selections : ModelStatistics[] = [];
     IsUnRestricted : boolean;
+    GeneralCache : GeneralModelCache = {}
 
     /**
      * Assigns parameters and creates a series of description
@@ -165,6 +184,22 @@ class WarbandMember extends DynamicContextObject {
         return this.ModelEquipments;
     }
 
+    public async GetFireteams(all_eq : Fireteam[]) {
+        const eventmon : EventRunner = new EventRunner();
+        if (this.GeneralCache.fireteam_list != null) {
+            all_eq = [...all_eq, ...this.GeneralCache.fireteam_list]
+        } else {
+            all_eq = await eventmon.runEvent(
+                "getAllFireteamOptions",
+                this,
+                [],
+                all_eq,
+                this.MyContext as UserWarband
+            )
+        }
+        return all_eq
+    }
+
     public async BuildNewProperties(data : IWarbandMember = this.SelfData) {
         const all_abils : Ability[] = await this.getContextuallyAvailableAbilities();
         this.SubProperties = [];
@@ -210,6 +245,9 @@ class WarbandMember extends DynamicContextObject {
 
     
     public async getContextuallyAvailableAbilities() : Promise<Ability[]> {
+        if (this.GeneralCache.abilities_list != null) {
+            return this.GeneralCache.abilities_list
+        }
         const AbilitiesAvailable : Ability[] = []
         const BaseList : Ability[] = []
         const IDList : string[] = [];
@@ -248,7 +286,7 @@ class WarbandMember extends DynamicContextObject {
                 }
             }
         }
-
+        this.GeneralCache.abilities_list = AbilitiesAvailable;
         return AbilitiesAvailable;
     }
 
@@ -660,6 +698,9 @@ class WarbandMember extends DynamicContextObject {
     public async GetWarbandSkills() {
         const SkillList : WarbandProperty[] = [];
         const Events : EventRunner = new EventRunner();
+        if (this.GeneralCache.warband_skills != null) {
+            return this.GeneralCache.warband_skills
+        }
 
         for (let i = 0; i < this.Skills.length; i++) {
             const ShowWarband = await Events.runEvent(
@@ -674,10 +715,14 @@ class WarbandMember extends DynamicContextObject {
                 SkillList.push(this.Skills[i])
             }
         }
+        this.GeneralCache.warband_skills = SkillList;
         return SkillList;
     }
 
     public async GetWarbandEquipment() {
+        if (this.GeneralCache.show_equipment != null) {
+            return this.GeneralCache.show_equipment
+        }
         const SkillList : WarbandPurchase[] = [];
         const Events : EventRunner = new EventRunner();
 
@@ -694,6 +739,7 @@ class WarbandMember extends DynamicContextObject {
                 SkillList.push(this.Equipment[i])
             }
         }
+        this.GeneralCache.show_equipment = SkillList;
         return SkillList;
     }
 
@@ -815,6 +861,9 @@ class WarbandMember extends DynamicContextObject {
     }
 
     public async getContextuallyAvailableUpgrades() : Promise<UpgradesGrouped> {
+        if (this.GeneralCache.available_upgrades != null) {
+            return this.GeneralCache.available_upgrades
+        }
         const UpgradesAvailable : ModelUpgradeRelationship[] = []
         let BaseList : ModelUpgradeRelationship[] = []
         const IDList : string[] = [];
@@ -847,11 +896,15 @@ class WarbandMember extends DynamicContextObject {
                 UpgradesAvailable.push(BaseList[i]);
             }
         }
+        this.GeneralCache.available_upgrades = this.SplitUpgrades(UpgradesAvailable)
 
-        return this.SplitUpgrades(UpgradesAvailable);
+        return this.GeneralCache.available_upgrades;
     }
 
     public async GetWarbandUpgradeCollections() : Promise<MemberUpgradesGrouped> {
+        if (this.GeneralCache.upgrade_collections != null) {
+            return this.GeneralCache.upgrade_collections
+        }
         const Groups : UpgradesGrouped = await this.getContextuallyAvailableUpgrades();
         const completegroups : MemberUpgradesGrouped = {}
         const Events : EventRunner = new EventRunner();
@@ -891,11 +944,15 @@ class WarbandMember extends DynamicContextObject {
                 }
             }
         }
+        this.GeneralCache.upgrade_collections = completegroups
         return completegroups;
 
     }
 
     public async GetExplorationSkills() {
+        if (this.GeneralCache.exploration_skills != null) {
+            return this.GeneralCache.exploration_skills
+        }
         const Events : EventRunner = new EventRunner();
         const SkillList : WarbandProperty[] = await Events.runEvent(
                         "getExplorationSkills",
@@ -909,6 +966,7 @@ class WarbandMember extends DynamicContextObject {
                 SkillList.push(this.Skills[i])
             }
         }
+        this.GeneralCache.exploration_skills = SkillList
         return SkillList;
     }
 
@@ -1083,6 +1141,9 @@ class WarbandMember extends DynamicContextObject {
     }
 
     public async getContextuallyAvailableKeywords() : Promise<Keyword[]> {
+        if (this.GeneralCache.keyword_list != null) {
+            return this.GeneralCache.keyword_list
+        }
         const KeywordsAvailable : Keyword[] = []
         const BaseList : string[] = []
 
@@ -1115,7 +1176,7 @@ class WarbandMember extends DynamicContextObject {
                 KeywordsAvailable.push(Keyword);
             }
         }
-
+        this.GeneralCache.keyword_list = KeywordsAvailable
         return (KeywordsAvailable);
     }
 
@@ -1164,6 +1225,9 @@ class WarbandMember extends DynamicContextObject {
     }
 
     public async GetModelInjuryOptions() {
+        if (this.GeneralCache.injury_options != null) {
+            return this.GeneralCache.injury_options
+        }
         const AllInjuries : Injury[] = await InjuryFactory.GetAllInjury();
         const ListOfOptions : Injury[] = [];
 
@@ -1180,11 +1244,14 @@ class WarbandMember extends DynamicContextObject {
                 ListOfOptions.push(AllInjuries[i]);
             }
         }
-
+        this.GeneralCache.injury_options = ListOfOptions
         return ListOfOptions;
     }
 
     public async GetModelSkillOptions() {
+        if (this.GeneralCache.skills_available != null) {
+            return this.GeneralCache.skills_available
+        }
         const ListOfOptions : SkillSuite[] = [];
         const BaseSkillgroups : SkillGroup[] = await SkillFactory.GetBaseSkills();
         const Patrons : Patron | null = (this.MyContext as UserWarband).Faction.GetPatronSkills();
@@ -1246,7 +1313,7 @@ class WarbandMember extends DynamicContextObject {
                 }
             )
         }
-
+        this.GeneralCache.skills_available = ListOfOptions
         return ListOfOptions;
     }
 
@@ -1275,6 +1342,9 @@ class WarbandMember extends DynamicContextObject {
     }
 
     public async GetMaxScars() {
+        if (this.GeneralCache.max_scars != null) {
+            return this.GeneralCache.max_scars
+        }
         
         const eventmon : EventRunner = new EventRunner();
         const MaxScars = await eventmon.runEvent(
@@ -1284,6 +1354,8 @@ class WarbandMember extends DynamicContextObject {
             3,
             this
         )
+
+        this.GeneralCache.max_scars = MaxScars;
 
         return MaxScars;
     }
@@ -1319,7 +1391,9 @@ class WarbandMember extends DynamicContextObject {
     }
 
     public async GetStatOptions()  : Promise<ModelStatistics[][]> {
-        
+        if (this.GeneralCache.stat_options != null) {
+            return this.GeneralCache.stat_options
+        }
         const seen = new Set<string>();
         const EventProc : EventRunner = new EventRunner();
         const results: ModelStatistics[][]  = await EventProc.runEvent(
@@ -1358,7 +1432,7 @@ class WarbandMember extends DynamicContextObject {
             Output.push(MS);
             }
         }
-
+        this.GeneralCache.stat_options = Output
         return Output;
     }
     
@@ -1408,6 +1482,9 @@ class WarbandMember extends DynamicContextObject {
     }
 
     public async GetStats() {
+        if (this.GeneralCache.final_stats != null) {
+            return this.GeneralCache.final_stats
+        }
         await this.ValidateStatSelection()
         const BaseStats = this.CurModel.Stats;
         let FinStats : ModelStatistics = {};
@@ -1435,7 +1512,7 @@ class WarbandMember extends DynamicContextObject {
             FinStats,
             null
         )
-
+        this.GeneralCache.final_stats = FinStats
         return FinStats;
     }
 
@@ -1443,7 +1520,6 @@ class WarbandMember extends DynamicContextObject {
         this.Experience = newval;
     }
 
-    // @TODO Lane
     public async GetXPLimit() {
         const stats = await this.GetStats();
         if (stats.potential) {
@@ -1455,6 +1531,9 @@ class WarbandMember extends DynamicContextObject {
     }
 
     public async GetModelEquipmentOptions(getbase = false) {
+        if (this.GeneralCache.equipment_options != null) {
+            return this.GeneralCache.equipment_options
+        }
         const ListOfOptions : FactionEquipmentRelationship[] = []
 
         const eventmon : EventRunner = new EventRunner();
@@ -1506,6 +1585,8 @@ class WarbandMember extends DynamicContextObject {
                 ListOfOptions.push(BaseFactionOptions[i]);
             }
         }
+
+        this.GeneralCache.equipment_options = ListOfOptions;
 
         return ListOfOptions;
     }
