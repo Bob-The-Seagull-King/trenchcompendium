@@ -975,7 +975,7 @@
                 ]
             }
         },
-        "faction_id": ["fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
+        "faction_id": ["fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_alchemistarmour",
         "cost": 50,
         "costtype": 0,
