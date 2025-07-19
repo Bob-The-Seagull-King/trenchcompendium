@@ -982,6 +982,27 @@
         "limit": 1
     },
     {
+        "id": "rel_fc_eq_alchemistarmour_how",
+        "source": "core",
+        "tags": {},
+        "name": "Alchemist Armour",
+        "contextdata": {            
+            "faction_eq_restriction": {
+                "permitted": [
+                    {
+                        "res_type": "keyword",
+                        "value": "kw_elite"
+                    }
+                ]
+            }
+        },
+        "faction_id": ["fc_ironsultanate_fv_houseofwisdom"],
+        "equipment_id": "eq_alchemistarmour",
+        "cost": 50,
+        "costtype": 0,
+        "limit": 2
+    },
+    {
         "id": "rel_fc_eq_heavyballisticshield",
         "source": "core",
         "tags": {},
