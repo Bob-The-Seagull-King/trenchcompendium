@@ -721,36 +721,41 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                         }
 
                         {/* Campaign Modals */}
+                        {showXPModal &&
                         <WbbEditFighterExperience
                             show={showXPModal}
                             onClose={() => setShowXPModal(false)}
                             currentXP={fighter.GetExperiencePoints()}
                             onSubmit={handleXPSubmit}
-                        />
+                        />}
+                        {showEditScars &&
                         <WbbEditBattleScars
                             show={showEditScars}
                             onClose={() => setShowEditScars(false)}
                             currentScars={fighter.GetBattleScars()}
                             onSubmit={handleUpdateBattleScars}
-                        />
+                        />}
+                        {showAdvancementModal &&
                         <WbbModalAddAdvancement
                             show={showAdvancementModal}
                             onClose={() => setShowAdvancementModal(false)}
                             onSubmit={handleAddAdvancement}
                             fighter={warbandmember}
-                        />
+                        />}
+                        {showInjuryModal &&
                         <WbbModalAddInjury
                             show={showInjuryModal}
                             onClose={() => setShowInjuryModal(false)}
                             onSubmit={handleAddInjury}
                             fighter={warbandmember}
-                        />
+                        />}
+                        {showStatusModal &&
                         <WbbModalEditFighterStatus
                             show={showStatusModal}
                             onClose={() => setShowStatusModal(false)}
                             currentStatus={fighter.State} 
                             onSubmit={handleStatusUpdate}
-                        />
+                        />}
                     </WbbFighterCollapse>
                 </div>
             }
