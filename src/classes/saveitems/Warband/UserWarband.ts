@@ -1470,10 +1470,6 @@ class UserWarband extends DynamicContextObject {
             )
         }       
 
-        if (this.IsUnRestricted) {
-            return BaseRels;
-        }
-
         for (let i = 0; i < BaseRels.length; i++) {
             const IsRestricted : boolean = await this.IsModelRestricted(BaseRels[i]);
             if (IsRestricted) { continue; }
@@ -1485,8 +1481,8 @@ class UserWarband extends DynamicContextObject {
             if (this.ModelRelCache[BaseRels[i].ID]) {
                 maxcount = this.ModelRelCache[BaseRels[i].ID].limit
                 canaddupgrade = this.ModelRelCache[BaseRels[i].ID].canadd
-                countofmodel = this.ModelRelCache[BaseRels[i].ID].count_cur
                 maxccurcostount = this.ModelRelCache[BaseRels[i].ID].cost
+                countofmodel = this.ModelRelCache[BaseRels[i].ID].count_cur
             } else {
                 maxcount = await eventmon.runEvent(
                     "getModelLimitTrue",
@@ -1502,10 +1498,11 @@ class UserWarband extends DynamicContextObject {
                     maxccurcostount,
                     this
                 )
+                countofmodel = this.GetCountOfRel(BaseRels[i].ID)
                 if (! (countofmodel < maxcount || ((BaseRels[i].Minimum == 0 && BaseRels[i].Maximum == 0)))) {
                     canaddupgrade = false;
                 }
-                if (count_cost == true && canaddupgrade) {
+                if (count_cost == true && canaddupgrade == true) {
                     if (BaseRels[i].CostType == 0) {
                         canaddupgrade = (this).GetSumCurrentDucats() >= maxccurcostount;
                     }
@@ -1523,10 +1520,10 @@ class UserWarband extends DynamicContextObject {
                 }
             }
 
-
-            if (canaddupgrade) {
+            if (this.IsUnRestricted || canaddupgrade) {
                 ListOfRels.push(BaseRels[i]);
             }
+
         }
 
         return ListOfRels

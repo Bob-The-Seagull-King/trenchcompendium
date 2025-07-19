@@ -7,6 +7,7 @@ import { useWarband } from '../../../../context/WarbandContext';
 import { getCostType } from '../../../../utility/functions';
 import SynodModelImage from "../../../../utility/SynodModelImage";
 import {useModalSubmitWithLoading} from "../../../../utility/useModalSubmitWithLoading";
+import { CachedFactionModel } from '../../../../classes/saveitems/Warband/UserWarband';
 
 interface Fighter {
     id: string;
@@ -23,6 +24,7 @@ const WbbModalAddFighterElite: React.FC<WbbModalAddFighterEliteProps> = ({ show,
     const [selectedId, setSelectedId] = useState<string | null>(null);
     const { warband } = useWarband();
     const [listofoptions, setListofOptions] = useState<FactionModelRelationship[]>([])
+    const [cache, setCache] = useState<CachedFactionModel>({});
     const [keyvar, setkevvar] = useState(0);
 
     const handleSelect = (id: string) => {
@@ -34,6 +36,15 @@ const WbbModalAddFighterElite: React.FC<WbbModalAddFighterEliteProps> = ({ show,
             const options = await warband?.warband_data.GetEliteFighterOptions()
             if (options != undefined) {
                 setListofOptions(options)
+                const tempcache = warband? warband.warband_data.ModelRelCache : {}
+                const keys = Object.keys(tempcache)
+                const fincache : CachedFactionModel = {}
+                for (let i = 0; i < keys.length; i++) {
+                    if ((tempcache[keys[i]].facrel.Model.getKeywordIDs().includes("kw_elite"))) {
+                        fincache[keys[i]] = tempcache[keys[i]]
+                    }
+                }
+                setCache(fincache)
                 setkevvar(keyvar + 1)
             }
         }
@@ -66,28 +77,32 @@ const WbbModalAddFighterElite: React.FC<WbbModalAddFighterEliteProps> = ({ show,
             </Modal.Header>
 
             <Modal.Body>
-                {listofoptions.map((fighter) => (
+                {Object.keys(cache).map((item, index) => (
                     <div
-                        key={fighter.ID}
-                        className={`select-item ${selectedId === fighter.ID ? 'selected' : ''}`}
-                        onClick={() => handleSelect(fighter.ID)}
+                        key={cache[item].facrel.ID}
+                        className={`select-item ${selectedId === cache[item].facrel.ID ? 'selected' : ''} ${listofoptions.includes(cache[item].facrel)? '' : 'disabled'}`}
+                        onClick={() => {
+                            if (listofoptions.includes(cache[item].facrel)) {
+                                setSelectedId(cache[item].facrel.ID)
+                            }
+                        }}
                     >
                         <div className={'model-image-wrap'}>
                             <SynodModelImage
-                                modelSlug={fighter.GetSlug()}
+                                modelSlug={cache[item].facrel.GetSlug()}
                                 size="small"
                                 className={'model-image'}
                             />
                         </div>
-
                         <span className={'item-name'}>
-                            {fighter.Model.GetName() + (fighter.Captain? " (Leader)":"")}
+                            {cache[item].facrel.Model.GetTrueName() + (cache[item].facrel.Captain? " (Leader)":"")}
                         </span>
                         <span className={'item-cost'}>
-                            {fighter.Cost + " " + getCostType(fighter.CostType)}
+                            {cache[item].facrel.Cost + " " + getCostType(cache[item].facrel.CostType)}
                         </span>
                     </div>
                 ))}
+                
             </Modal.Body>
 
             <Modal.Footer>

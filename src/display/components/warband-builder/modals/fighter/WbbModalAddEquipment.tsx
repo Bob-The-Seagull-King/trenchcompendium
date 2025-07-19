@@ -84,10 +84,6 @@ const WbbModalAddEquipment: React.FC<WbbModalAddEquipmentProps> = ({ show, onClo
                             <span className={'item-name'}>
                                 {cache[item].facrel.EquipmentItem.GetTrueName()}
                             </span>
-
-                            
-                            
-                            
                         </span>
 
                         <span className={'item-right'}>

@@ -72,21 +72,20 @@ const WbbMoveEquipmentToFighterModal: React.FC<WbbEditSelectionProps> = ({
             <Modal.Body>
                 <div className={'mb-3'}>
                     <div className={'goetic-selection-wrap'} key={keyvar}>
-                        {fighterlist.map((discipline) => (
+                        {warband?.Models.map((discipline) => (
                         <div
                             key={discipline.HeldObject.ID + discipline.HeldObject.ID}
-                            className={`select-item ${selectedFighter === discipline ? 'selected' : ''}`}
-                            onClick={() => setSelectedFighter(discipline)}
+                            className={`select-item ${selectedFighter === discipline ? 'selected' : ''} ${fighterlist.includes(discipline) ? '' : ' disabled'}`}
+                            onClick={() => {
+                                if (fighterlist.includes(discipline)) {
+                                    setSelectedFighter(discipline)
+                                }
+                            }}
                         >
                             {(discipline.HeldObject as WarbandMember).GetFighterName()}
                         </div>
                         ))}
-                        {fighterlist.length == 0 &&
-                        <div
-                            className={`select-item`}
-                        >{"No Models Can Equip This Item"}
-                        </div>
-                            }
+                        
                     </div>
                 </div>
                 <div >
