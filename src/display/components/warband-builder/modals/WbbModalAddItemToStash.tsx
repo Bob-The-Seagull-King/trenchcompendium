@@ -45,14 +45,27 @@ const WbbModalAddItemToStash: React.FC<WbbModalAddItemToStashProps> = ({ show, o
         async function SetEquipmentOptions() {
             if (Object.keys(cache).length == 0) {
                 const options = await warband?.warband_data.GetFactionEquipmentOptions(exploration)
+                const tempcache = warband? warband.warband_data.EquipmentRelCache : {}
+                const keys = Object.keys(tempcache)
+                const fincache : CachedFactionEquipment = {}
                 if (options != undefined) {
                     if (category.length > 0) {
                         setListofOptions(options.filter((item : FactionEquipmentRelationship) => item.EquipmentItem.Category == category))
-                    setCache(warband? warband.warband_data.EquipmentRelCache : {})
+                        
+                        for (let i = 0; i < keys.length; i++) {
+                            if ((tempcache[keys[i]].facrel.EquipmentItem.Category == category)) {
+                                fincache[keys[i]] = tempcache[keys[i]]
+                            }
+                        }
                     } else {
                         setListofOptions(options.filter((item : FactionEquipmentRelationship) => containsTag(item.Tags, 'exploration_only')));
-                    setCache(warband? warband.warband_data.EquipmentRelCache : {})
+                        for (let i = 0; i < keys.length; i++) {
+                            if (containsTag(tempcache[keys[i]].facrel.Tags, 'exploration_only')) {
+                                fincache[keys[i]] = tempcache[keys[i]]
+                            }
+                        }
                     }
+                    setCache(fincache)
                     setkevvar(keyvar + 1)
                 }
             }

@@ -17,6 +17,7 @@ import { Equipment } from '../../classes/feature/equipment/Equipment';
 import { SumWarband } from '../../classes/saveitems/Warband/WarbandManager';
 import { SynodDataCache } from '../../classes/_high_level_controllers/SynodDataCache';
 import { SYNOD } from '../../resources/api-constants';
+import { containsTag } from '../../utility/functions';
 
 const delay = (ms: number | undefined) => new Promise(res => setTimeout(res, ms));
 
@@ -34,11 +35,16 @@ class WarbandFactory {
     }
 
     static async BuildWarbandEquipmentFromPurchase(rel: FactionEquipmentRelationship, parent : DynamicContextObject | null) {
+        
+        const newtags = rel.EquipmentItem.Tags
+        if (containsTag((rel).Tags, 'exploration_only')) {
+            newtags["exploration_only"] = true
+        }
         const data : IWarbandEquipment = {    
                 id: rel.EquipmentItem.ID, // The id of the item
                 name: rel.EquipmentItem.GetTrueName(), // The name of the item
                 source: rel.EquipmentItem.Source? rel.EquipmentItem.Source : "unknown", // The source of the item (core book, homebrew, etc)
-                tags: rel.EquipmentItem.Tags,
+                tags: newtags,
                 contextdata : rel.EquipmentItem.ContextData,            
                 equipment_id: {      
                     consumables: [],              

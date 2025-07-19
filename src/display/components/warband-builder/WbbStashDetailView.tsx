@@ -16,6 +16,7 @@ import { WarbandConsumable } from '../../../classes/saveitems/Warband/WarbandCon
 import WbbConsumableSelect from './modals/warband/WbbConsumableSelect';
 import WbbEditStashAmountModal from './modals/warband/WbbEditStashAmountModal';
 import WbbEquipmentAddCustomStash from './modals/WbbEquipmentAddCustomStash';
+import { containsTag } from '../../../utility/functions';
 
 interface WbbStashDetailViewProps {
     onClose: () => void;
@@ -115,11 +116,13 @@ const WbbStashDetailView: React.FC<WbbStashDetailViewProps> = ({ onClose }) => {
                 <div className="stash-items-wrap">
                     <div className={'stash-items-category'}>
                         {warband?.warband_data.Equipment.filter(item =>
-                                (((item.HeldObject as WarbandEquipment).MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Category == "ranged")
+                                (((item.HeldObject as WarbandEquipment).GetEquipmentItem()).Category == "ranged" && 
+                                !containsTag(((item.HeldObject as WarbandEquipment)).Tags, 'exploration_only'))
                                 ).length > 0 ? (
                             <>
                                 {warband?.warband_data.Equipment.filter(item =>
-                                (((item.HeldObject as WarbandEquipment).MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Category == "ranged")
+                                (((item.HeldObject as WarbandEquipment).GetEquipmentItem()).Category == "ranged" && 
+                                !containsTag(((item.HeldObject as WarbandEquipment)).Tags, 'exploration_only'))
                                 ).map((item: WarbandPurchase, index: number) => (
                                     <WbbEquipmentListItem
                                         key={index}
@@ -139,11 +142,13 @@ const WbbStashDetailView: React.FC<WbbStashDetailViewProps> = ({ onClose }) => {
 
                     <div className={'stash-items-category'}>
                         {warband?.warband_data.Equipment.filter(item =>
-                                (((item.HeldObject as WarbandEquipment).MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Category == "melee")
+                                (((item.HeldObject as WarbandEquipment).GetEquipmentItem()).Category == "melee" && 
+                                !containsTag(((item.HeldObject as WarbandEquipment).GetEquipmentItem()).Tags, 'exploration_only'))
                                 ).length > 0 ? (
                             <>
                                 {warband?.warband_data.Equipment.filter(item =>
-                                (((item.HeldObject as WarbandEquipment).MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Category == "melee")
+                                (((item.HeldObject as WarbandEquipment).GetEquipmentItem()).Category == "melee" && 
+                                !containsTag(((item.HeldObject as WarbandEquipment).GetEquipmentItem()).Tags, 'exploration_only'))
                                 ).map((item: WarbandPurchase, index: number) => (
                                     <WbbEquipmentListItem
                                         key={index}
@@ -163,11 +168,13 @@ const WbbStashDetailView: React.FC<WbbStashDetailViewProps> = ({ onClose }) => {
 
                     <div className={'stash-items-category'}>
                         {warband?.warband_data.Equipment.filter(item =>
-                                (((item.HeldObject as WarbandEquipment).MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Category == "armour")
+                                (((item.HeldObject as WarbandEquipment).GetEquipmentItem()).Category == "armour" && 
+                                !containsTag(((item.HeldObject as WarbandEquipment)).Tags, 'exploration_only'))
                                 ).length > 0 ? (
                             <>
                                 {warband?.warband_data.Equipment.filter(item =>
-                                (((item.HeldObject as WarbandEquipment).MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Category == "armour")
+                                (((item.HeldObject as WarbandEquipment).GetEquipmentItem()).Category == "armour" && 
+                                !containsTag(((item.HeldObject as WarbandEquipment)).Tags, 'exploration_only'))
                                 ).map((item: WarbandPurchase, index: number) => (
                                     <WbbEquipmentListItem
                                         key={index}
@@ -187,11 +194,13 @@ const WbbStashDetailView: React.FC<WbbStashDetailViewProps> = ({ onClose }) => {
 
                     <div className={'stash-items-category'}>
                         {warband?.warband_data.Equipment.filter(item =>
-                                (((item.HeldObject as WarbandEquipment).MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Category == "equipment")
+                                (((item.HeldObject as WarbandEquipment).GetEquipmentItem()).Category == "equipment" && 
+                                !containsTag(((item.HeldObject as WarbandEquipment)).Tags, 'exploration_only'))
                                 ).length > 0 ? (
                             <>
                                 {warband?.warband_data.Equipment.filter(item =>
-                                (((item.HeldObject as WarbandEquipment).MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Category == "equipment")
+                                (((item.HeldObject as WarbandEquipment).GetEquipmentItem()).Category == "equipment" && 
+                                !containsTag(((item.HeldObject as WarbandEquipment)).Tags, 'exploration_only'))
                                 ).map((item: WarbandPurchase, index: number) => (
                                     <WbbEquipmentListItem
                                         key={index}
@@ -210,16 +219,22 @@ const WbbStashDetailView: React.FC<WbbStashDetailViewProps> = ({ onClose }) => {
                     </div>
 
                     <div className={'stash-items-category'}>
-                        {/* @TODO: Show Exploration only items here*/}
-                        {/*{ false ? (*/}
-                        {/*    <>*/}
-                        {/*        {'@Lane add list items here'}*/}
-                        {/*    </>*/}
-                        {/*): (*/}
-                        {/*    <div className={'stash-items-empty'}>No exploration only items in stash.</div>*/}
-                        {/*)}*/}
-
-                        <div className={'stash-items-empty'}>No exploration only items in stash.</div>
+                        {warband?.warband_data.Equipment.filter(item =>
+                                (containsTag(((item.HeldObject as WarbandEquipment)).Tags, 'exploration_only'))
+                                ).length > 0 ? (
+                            <>
+                                {warband?.warband_data.Equipment.filter(item =>
+                                (containsTag(((item.HeldObject as WarbandEquipment)).Tags, 'exploration_only'))
+                                ).map((item: WarbandPurchase, index: number) => (
+                                    <WbbEquipmentListItem
+                                        key={index}
+                                        item={item}
+                                    />
+                                ))}
+                            </>
+                        ) : (
+                            <div className={'stash-items-empty'}>No exploration only items in stash.</div>
+                        )}
 
                         <div className={'btn btn-add-element btn-block'}
                              onClick={() => setShowExplorationAddItemToStash(true)}>

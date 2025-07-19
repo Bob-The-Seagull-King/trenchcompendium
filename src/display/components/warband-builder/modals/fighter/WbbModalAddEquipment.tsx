@@ -47,8 +47,17 @@ const WbbModalAddEquipment: React.FC<WbbModalAddEquipmentProps> = ({ show, onClo
         async function SetEquipmentOptions() {
             const options = await fighter.model.GetModelEquipmentOptions()
             if (options != undefined) {
+                const tempcache = warband? warband.warband_data.EquipmentRelCache : {}
+                const keys = Object.keys(tempcache)
+                const fincache : CachedFactionEquipment = {}
+                
+                for (let i = 0; i < keys.length; i++) {
+                    if ((tempcache[keys[i]].facrel.EquipmentItem.Category == category)) {
+                        fincache[keys[i]] = tempcache[keys[i]]
+                    }
+                }
                 setAvailable(options.filter((item : FactionEquipmentRelationship) => item.EquipmentItem.Category == category))
-                setCache(warband? warband.warband_data.EquipmentRelCache : {})
+                setCache(fincache)
                 setkevvar(keyvar + 1)
             }
         }
