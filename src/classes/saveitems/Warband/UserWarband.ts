@@ -1741,7 +1741,7 @@ class UserWarband extends DynamicContextObject {
         for (let i = 0; i < this.Models.length; i++) {
             const Mods = await (this.Models[i].HeldObject as WarbandMember).GetWarbandSkills();
             for (let j = 0; j < Mods.length; j++) {
-                PropertyList.push(Mods[i])
+                PropertyList.push(Mods[j])
             }
         }
 
