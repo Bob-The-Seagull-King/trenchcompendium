@@ -673,6 +673,12 @@ class UserWarband extends DynamicContextObject {
                 return "Warband Cannot Afford " + fighter.model.CurModel.GetTrueName();
             }
         }
+
+        const Check = await fighter.model.CanCopySelf();
+
+        if (Check.length > 0) {
+            return Check;
+        }
         
         const milliseconds = Date.now();
         const NewMember : WarbandMember = await WarbandFactory.CreateWarbandMember((fighter.model.ConvertToInterface()), this, this.IsUnRestricted);

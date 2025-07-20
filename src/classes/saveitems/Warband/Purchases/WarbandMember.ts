@@ -21,7 +21,7 @@ import { Equipment, EquipmentRestriction, RestrictionSingle } from "../../../fea
 import { Keyword } from "../../../feature/glossary/Keyword";
 import { Ability } from "../../../feature/ability/Ability";
 import { EventRunner } from "../../../contextevent/contexteventhandler";
-import { ModelUpgradeRelationship } from "../../../relationship/model/ModelUpgradeRelationship";
+import { IModelUpgradeRelationship, ModelUpgradeRelationship } from "../../../relationship/model/ModelUpgradeRelationship";
 import { UpgradesGrouped } from "../../../relationship/model/ModelUpgradeRelationship";
 import { UserWarband } from "../UserWarband";
 import { WarbandFactory } from "../../../../factories/warband/WarbandFactory";
@@ -87,6 +87,7 @@ export interface GeneralModelCache {
     final_stats?: ModelStatistics,
     equipment_options?: FactionEquipmentRelationship[],
     validation_check?: string[]
+    can_copy_self?: string
 }
 
 interface IWarbandMember extends IContextObject {
@@ -429,6 +430,56 @@ class WarbandMember extends DynamicContextObject {
         this.SelfData = _objint;
         
         return _objint;
+    }
+
+    public async CanCopySelf() {
+        if (this.GeneralCache.can_copy_self != null) {
+            return this.GeneralCache.can_copy_self
+        }
+        let checkVal = ""
+
+        for (let i = 0; i < this.Equipment.length; i++) {
+            
+            const IsValidToAdd = await (this.MyContext as UserWarband).AtMaxOfItem(this.Equipment[i].PurchaseInterface);
+
+            if (IsValidToAdd) {
+                checkVal = "Warband At Limit For " + (this.Equipment[i].HeldObject as WarbandEquipment).MyEquipment.GetTrueName();
+            }
+
+            if (checkVal.length > 0) {
+                this.GeneralCache.can_copy_self = checkVal;
+                return checkVal;
+            }
+        }
+
+        const Events = new EventRunner()
+        for (let i = 0; i < this.Upgrades.length; i++) {
+
+            const upg = await UpgradeFactory.CreateModelUpgrade(this.Upgrades[i].CustomInterface as IModelUpgradeRelationship, null)
+            let maxcount = upg.WarbandLimit;
+            maxcount = await Events.runEvent(
+                "getUpgradeLimitTrue",
+                upg,
+                [],
+                maxcount,
+                {
+                    warband: this.MyContext,
+                    model: this
+                }
+            )
+
+            if (maxcount >= (this.MyContext as UserWarband).GetCountOfUpgradeRel(upg.ID)) {
+                checkVal = "Warband At Limit For " + upg.UpgradeObject.GetTrueName();
+            }
+
+            if (checkVal.length > 0) {
+                this.GeneralCache.can_copy_self = checkVal;
+                return checkVal;
+            }
+        }
+
+        this.GeneralCache.can_copy_self = checkVal;
+        return checkVal;
     }
 
     public async HasEquipmentFollowingRestriction(rest : RestrictionSingle) : Promise<boolean> {
@@ -1993,9 +2044,8 @@ class WarbandMember extends DynamicContextObject {
         if (item.purchase.Sellable == false) {return}
         this.Equipment.push(item.purchase);
     }
-    
-    public async CopyStash( item : RealWarbandPurchaseEquipment ) {
 
+    public async CanAddNewItem(item : RealWarbandPurchaseEquipment) {
         if (item.purchase.Sellable == false) {return "Cannot sell this item"}
         const IsValidToAdd = await (this.MyContext as UserWarband).AtMaxOfItem(item.purchase.PurchaseInterface);
 
@@ -2010,6 +2060,17 @@ class WarbandMember extends DynamicContextObject {
 
         if (!CanAddToThisModel) {
             return "This model cannot have another " + item.equipment.MyEquipment.GetTrueName();
+        }
+
+        return ''
+
+    }
+    
+    public async CopyStash( item : RealWarbandPurchaseEquipment ) {
+
+        const Check = await this.CanAddNewItem(item)
+        if (Check.length > 0) {
+            return Check;
         }
         
         const Relationship : FactionEquipmentRelationship = await EquipmentFactory.CreateFactionEquipment(item.purchase.CustomInterface as IFactionEquipmentRelationship, this, true)
