@@ -10,7 +10,7 @@ import {
     faArrowUp,
     faArrowLeft,
     faCoins,
-    faEdit, faPen, faFileExport, faDice, faSignature, faPrint, faArrowRotateLeft, faSackDollar
+    faEdit, faPen, faFileExport, faDice, faSignature, faPrint, faArrowRotateLeft, faSackDollar, faXmark
 } from '@fortawesome/free-solid-svg-icons';
 import { usePopover } from '../../../context/PopoverContext';
 import { useWarband } from '../../../context/WarbandContext';
@@ -856,8 +856,15 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
 
             {/** Delete Injury Confirm Modal */}
             <Modal show={showConfirmDeleteInjuryModal} onHide={() => setshowConfirmDeleteInjuryModal(false)} centered>
-                <Modal.Header closeButton>
+                <Modal.Header closeButton={false}>
                     <Modal.Title>{`Delete Injury`}</Modal.Title>
+
+                    <FontAwesomeIcon
+                        icon={faXmark}
+                        className="modal-close-icon"
+                        role="button"
+                        onClick={() => setshowConfirmDeleteInjuryModal(false)}
+                    />
                 </Modal.Header>
 
                 <Modal.Body>
@@ -881,8 +888,15 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
 
             {/** Rename Warband Modal */}
             <Modal show={showConfirmRenameWarbandModal} onHide={() => setshowConfirmRenameWarbandModal(false)} centered>
-                <Modal.Header closeButton>
+                <Modal.Header closeButton={false}>
                     <Modal.Title>{`Rename Warband`}</Modal.Title>
+
+                    <FontAwesomeIcon
+                        icon={faXmark}
+                        className="modal-close-icon"
+                        role="button"
+                        onClick={() => setshowConfirmRenameWarbandModal(false)}
+                    />
                 </Modal.Header>
 
                 <Modal.Body>
@@ -908,8 +922,15 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
 
             {/** Export Warband Modal */}
             <Modal show={showConfirmExportWarbandModal} onHide={() => setshowConfirmExportWarbandModal(false)} centered>
-                <Modal.Header closeButton>
+                <Modal.Header closeButton={false}>
                     <Modal.Title>{`Export Warband`}</Modal.Title>
+
+                    <FontAwesomeIcon
+                        icon={faXmark}
+                        className="modal-close-icon"
+                        role="button"
+                        onClick={() => setshowConfirmExportWarbandModal(false)}
+                    />
                 </Modal.Header>
 
                 <Modal.Body>
