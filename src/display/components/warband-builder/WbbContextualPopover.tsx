@@ -934,9 +934,52 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                 </Modal.Header>
 
                 <Modal.Body>
-                    <div className="mb-3">
+                    
                     {/* @TODO: add warband Export here */}
+                    <div className={'WbbExportWarband'}>
+                        ## Warband ##
+
+                        ## Elites ##
+
+                        ** Praetor - Fightername **
+                        133 Ducats | 4 Glory
+                        Goetic: Choice 1, Choice
+                        Weapons: Malebranche Sword
+                        Armor: Reinforced Armour, Trench shield
+                        Equipment: Lorem, Ipsum
+                        Advancements: loremipsum dolor
+                        Injuries: dolor sit amet
+
+                        ** Sorceror - Fightername 2 **
+                        133 Ducats
+                        Goetic: Choice 1, Choice
+                        Weapons: Malebranche Sword
+                        Armor: Reinforced Armour, Trench shield
+                        Equipment: Lorem, Ipsum
+
+
+                        ## Troops ##
+
+                        ** Wretched - Olaf **
+                        35 Ducats
+                        Weapons: Trench Knife
+
+                        ** Yoke Fiend - Yalf **
+                        35 Ducats
+                        Weapons: Torture Instrument
+
+                        ## Modifiers ##
+
+                        ** Modifier Name **
+                        Lorem modifier choice
+
+                        ## Exploration Locations ##
+
+                        ** Location name **
+                        Lorem location choice
                     </div>
+
+
                 </Modal.Body>
 
                 <Modal.Footer>
