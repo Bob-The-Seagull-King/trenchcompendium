@@ -40,6 +40,12 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
         )
     }
 
+    // Wrapper function to stop event propagation from this popover
+    const withStopPropagation = (fn: () => void) => (e: React.MouseEvent) => {
+        e.stopPropagation();
+        fn();
+    };
+
     const { activePopoverId, setActivePopoverId } = usePopover();
     const { warband, reloadDisplay } = useWarband();
     const { playMode, togglePlayMode } = usePlayMode();
@@ -430,19 +436,23 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                         <div className="actions">
                             {type === 'fighter' &&
                                 <>
-                                    <div className="action action-rename" onClick={showConfirmRenameFighter}>
+                                    <div className="action action-rename"
+                                         onClick={withStopPropagation(showConfirmRenameFighter)}>
                                         <FontAwesomeIcon icon={faEdit} className="icon-inline-left-l"/>
                                         {'Rename Fighter'}
                                     </div>
-                                    <div className="action action-copy" onClick={handleCopyFighter}>
+                                    <div className="action action-copy"
+                                         onClick={withStopPropagation(handleCopyFighter)}>
                                         <FontAwesomeIcon icon={faCopy} className="icon-inline-left-l"/>
                                         {'Copy Fighter'}
                                     </div>
-                                    <div className="action action-refund" onClick={showConfirmRefundFighter}>
+                                    <div className="action action-refund"
+                                         onClick={withStopPropagation(showConfirmRefundFighter)}>
                                         <FontAwesomeIcon icon={faArrowRotateLeft} className="icon-inline-left-l"/>
                                         {'Refund Fighter'}
                                     </div>
-                                    <div className="action action-delete" onClick={showConfirmDeleteFighter}>
+                                    <div className="action action-delete"
+                                         onClick={withStopPropagation(showConfirmDeleteFighter)}>
                                         <FontAwesomeIcon icon={faTrash} className="icon-inline-left-l"/>
                                         {'Delete Fighter'}
                                     </div>
@@ -590,9 +600,22 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
             {/* Fighter interactions */}
             {/** Delete Fighter Confirm Modal */}
             <Modal show={showConfirmDeleteFighterModal} onHide={() => setshowConfirmDeleteFighterModal(false)} centered>
-                <Modal.Header closeButton>
+                <Modal.Header closeButton={false}>
                     <Modal.Title>{`Delete Fighter`}</Modal.Title>
+
+                    <FontAwesomeIcon
+                        icon={faXmark}
+                        className="modal-close-icon"
+                        role="button"
+                        onClick={
+                            (e) => {
+                                e.stopPropagation();
+                                setshowConfirmDeleteFighterModal(false);
+                            }
+                        }
+                    />
                 </Modal.Header>
+
 
                 <Modal.Body>
                     {'Are you sure you want to delete '}
@@ -606,19 +629,36 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                 </Modal.Body>
 
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={() => setshowConfirmDeleteFighterModal(false)}>
+                    <Button variant="secondary" onClick={
+                        (e) => {
+                            e.stopPropagation();
+                            setshowConfirmDeleteFighterModal(false);
+                        }
+                    }>
                         Cancel
                     </Button>
-                    <Button variant="danger" onClick={handleDeleteFighter}>
+                    <Button variant="danger" onClick={withStopPropagation(handleDeleteFighter)}>
                         Delete
                     </Button>
                 </Modal.Footer>
             </Modal>
 
-            {/** Delete Fighter Confirm Modal */}
+            {/** Refund Fighter Confirm Modal */}
             <Modal show={showConfirmRefundFighterModal} onHide={() => setshowConfirmRefundFighterModal(false)} centered>
-                <Modal.Header closeButton>
+                <Modal.Header closeButton={false}>
                     <Modal.Title>{`Refund Fighter`}</Modal.Title>
+
+                    <FontAwesomeIcon
+                        icon={faXmark}
+                        className="modal-close-icon"
+                        role="button"
+                        onClick={
+                            (e) => {
+                                e.stopPropagation();
+                                setshowConfirmRefundFighterModal(false);
+                            }
+                        }
+                    />
                 </Modal.Header>
 
                 <Modal.Body>
@@ -640,10 +680,15 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                 </Modal.Body>
 
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={() => setshowConfirmRefundFighterModal(false)}>
+                    <Button variant="secondary" onClick={
+                        (e) => {
+                            e.stopPropagation();
+                            setshowConfirmRefundFighterModal(false);
+                        }
+                    }>
                         Cancel
                     </Button>
-                    <Button variant="danger" onClick={handleRefundFighter}>
+                    <Button variant="danger" onClick={withStopPropagation(handleRefundFighter)}>
                         Refund
                     </Button>
                 </Modal.Footer>
@@ -651,8 +696,20 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
 
             {/** Rename Fighter Confirm Modal */}
             <Modal show={showConfirmRenameFighterModal} onHide={() => setshowConfirmRenameFighterModal(false)} centered>
-                <Modal.Header closeButton>
+                <Modal.Header closeButton={false}>
                     <Modal.Title>{`Rename Fighter`}</Modal.Title>
+
+                    <FontAwesomeIcon
+                        icon={faXmark}
+                        className="modal-close-icon"
+                        role="button"
+                        onClick={
+                            (e) => {
+                                e.stopPropagation();
+                                setshowConfirmRenameFighterModal(false);
+                            }
+                        }
+                    />
                 </Modal.Header>
 
                 <Modal.Body>
@@ -667,10 +724,15 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                 </Modal.Body>
 
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={() => setshowConfirmRenameFighterModal(false)}>
+                    <Button variant="secondary" onClick={
+                        (e) => {
+                            e.stopPropagation();
+                            setshowConfirmRenameFighterModal(false);
+                        }
+                    }>
                         Cancel
                     </Button>
-                    <Button variant="primary" onClick={handleRenameFighter}>
+                    <Button variant="primary" onClick={withStopPropagation(handleRenameFighter)}>
                         Rename
                     </Button>
                 </Modal.Footer>
@@ -679,9 +741,17 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
 
             {/** Delete Modifier Confirm Modal */}
             <Modal show={showConfirmDeleteModifierModal} onHide={() => setshowConfirmDeleteModifierModal(false)} centered>
-                <Modal.Header closeButton>
+                <Modal.Header closeButton={false}>
                     <Modal.Title>{`Delete Modifier`}</Modal.Title>
+
+                    <FontAwesomeIcon
+                        icon={faXmark}
+                        className="modal-close-icon"
+                        role="button"
+                        onClick={() => setshowConfirmDeleteModifierModal(false)}
+                    />
                 </Modal.Header>
+
 
                 <Modal.Body>
                     <div className={'mb-3'}>
@@ -704,8 +774,15 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
 
             {/** Delete Exploration Confirm Modal */}
             <Modal show={showConfirmDeleteExplorationModal} onHide={() => setshowConfirmDeleteExplorationModal(false)} centered>
-                <Modal.Header closeButton>
-                    <Modal.Title>{`Delete Exploration`}</Modal.Title>
+                <Modal.Header closeButton={false}>
+                    <Modal.Title>{`Delete Exploration Location`}</Modal.Title>
+
+                    <FontAwesomeIcon
+                        icon={faXmark}
+                        className="modal-close-icon"
+                        role="button"
+                        onClick={() => setshowConfirmDeleteExplorationModal(false)}
+                    />
                 </Modal.Header>
 
                 <Modal.Body>
@@ -729,8 +806,15 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
 
             {/** Refund Equipment Confirm Modal */}
             <Modal show={showConfirmRefundEquipmentModal} onHide={() => setshowConfirmRefundEquipmentModal(false)} centered>
-                <Modal.Header closeButton>
+                <Modal.Header closeButton={false}>
                     <Modal.Title>{`Refund Equipment`}</Modal.Title>
+
+                    <FontAwesomeIcon
+                        icon={faXmark}
+                        className="modal-close-icon"
+                        role="button"
+                        onClick={() => setshowConfirmRefundEquipmentModal(false)}
+                    />
                 </Modal.Header>
 
                 <Modal.Body>
@@ -762,8 +846,15 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
 
             {/** Delete Equipment Confirm Modal */}
             <Modal show={showConfirmDeleteEquipmentModal} onHide={() => setshowConfirmDeleteEquipmentModal(false)} centered>
-                <Modal.Header closeButton>
+                <Modal.Header closeButton={false}>
                     <Modal.Title>{`Delete Equipment`}</Modal.Title>
+
+                    <FontAwesomeIcon
+                        icon={faXmark}
+                        className="modal-close-icon"
+                        role="button"
+                        onClick={() => setshowConfirmDeleteEquipmentModal(false)}
+                    />
                 </Modal.Header>
 
                 <Modal.Body>
@@ -789,8 +880,15 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
 
             {/** Sell Equipment Confirm Modal */}
             <Modal show={showConfirmSellEquipmentModal} onHide={() => setshowConfirmSellEquipmentModal(false)} centered>
-                <Modal.Header closeButton>
+                <Modal.Header closeButton={false}>
                     <Modal.Title>{`Sell Equipment`}</Modal.Title>
+
+                    <FontAwesomeIcon
+                        icon={faXmark}
+                        className="modal-close-icon"
+                        role="button"
+                        onClick={() => setshowConfirmSellEquipmentModal(false)}
+                    />
                 </Modal.Header>
 
                 <Modal.Body>
@@ -831,8 +929,15 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
 
             {/** Delete Advancement Confirm Modal */}
             <Modal show={showConfirmDeleteAdvancementModal} onHide={() => setshowConfirmDeleteAdvancementModal(false)} centered>
-                <Modal.Header closeButton>
+                <Modal.Header closeButton={false}>
                     <Modal.Title>{`Delete Advancement`}</Modal.Title>
+
+                    <FontAwesomeIcon
+                        icon={faXmark}
+                        className="modal-close-icon"
+                        role="button"
+                        onClick={() => setshowConfirmDeleteAdvancementModal(false)}
+                    />
                 </Modal.Header>
 
                 <Modal.Body>
@@ -934,7 +1039,7 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                 </Modal.Header>
 
                 <Modal.Body>
-                    
+
                     {/* @TODO: add warband Export here */}
                     <div className={'WbbExportWarband'}>
                         ## Warband ##
