@@ -443,6 +443,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                                                     item={equip.purchase}
                                                     fighter={warbandmember}
                                                 />
+
                                     ))}
                                 </>
                             ) : (

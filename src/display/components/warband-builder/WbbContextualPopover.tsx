@@ -484,7 +484,7 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                                     <>
                                     
                                     <div
-                                    className={'action action-move-to-fighter'} onClick={showConfirmMoveEquipment}
+                                    className={'action action-move-to-fighter'} onClick={withStopPropagation(showConfirmMoveEquipment)}
                                     >
                                         <FontAwesomeIcon icon={faArrowLeft} className="icon-inline-left-l"/>
                                         {'Move to Fighter'}
@@ -492,7 +492,7 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                                     {type === 'equipment_model' &&
 
                                         <div
-                                            className={'action action-move-to-stash'} onClick={handleMoveEquipmentToStash}
+                                            className={'action action-move-to-stash'} onClick={withStopPropagation(handleMoveEquipmentToStash)}
                                         >
                                             <FontAwesomeIcon icon={faArrowUp} className="icon-inline-left-l"/>
                                             {'Move to Stash'}
@@ -502,7 +502,7 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                                 }
 
                                     <div
-                                        className={'action action-sell'} onClick={showConfirmSellEquipment}
+                                        className={'action action-sell'} onClick={withStopPropagation(showConfirmSellEquipment)}
                                     >
                                         <FontAwesomeIcon icon={faCoins} className="icon-inline-left-l"/>
                                         {'Sell Item'}
@@ -511,18 +511,18 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                                     {((item.purchase as WarbandPurchase).ModelPurchase == false) &&
                                         <>
                                     <div
-                                        className={'action action-copy'} onClick={handleCopyEquipment}
+                                        className={'action action-copy'} onClick={withStopPropagation(handleCopyEquipment)}
                                     >
                                         <FontAwesomeIcon icon={faCopy} className="icon-inline-left-l"/>
                                         {'Copy Item'}
                                     </div>
 
-                                    <div className="action action-refund" onClick={showConfirmRefundEquipment}>
+                                    <div className="action action-refund" onClick={withStopPropagation(showConfirmRefundEquipment)}>
                                         <FontAwesomeIcon icon={faArrowRotateLeft} className="icon-inline-left-l"/>
                                         {'Refund Item'}
                                     </div>
 
-                                    <div className="action action-delete" onClick={showConfirmDeleteEquipment}>
+                                    <div className="action action-delete" onClick={withStopPropagation(showConfirmDeleteEquipment)}>
                                         <FontAwesomeIcon icon={faTrash} className="icon-inline-left-l"/>
                                         {'Delete Item'}
                                     </div>
@@ -952,7 +952,12 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                         icon={faXmark}
                         className="modal-close-icon"
                         role="button"
-                        onClick={() => setshowConfirmDeleteAdvancementModal(false)}
+                        onClick={
+                            (e) => {
+                                e.stopPropagation();
+                                setshowConfirmDeleteAdvancementModal(false);
+                            }
+                        }
                     />
                 </Modal.Header>
 
@@ -966,10 +971,15 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                 </Modal.Body>
 
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={() => setshowConfirmDeleteAdvancementModal(false)}>
+                    <Button variant="secondary" onClick={
+                        (e) => {
+                            e.stopPropagation();
+                            setshowConfirmDeleteAdvancementModal(false);
+                        }
+                    }>
                         Cancel
                     </Button>
-                    <Button variant="danger" onClick={handleDeleteAdvancement}>
+                    <Button variant="danger" onClick={withStopPropagation(handleDeleteAdvancement)}>
                         Delete
                     </Button>
                 </Modal.Footer>

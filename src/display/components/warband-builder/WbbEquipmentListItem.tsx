@@ -24,6 +24,9 @@ import GenericHover from '../generics/GenericHover';
 import { EventRunner } from '../../../classes/contextevent/contexteventhandler';
 import WbbOptionSelect from './modals/warband/WbbOptionSelect';
 import { Keyword } from '../../../classes/feature/glossary/Keyword';
+import RulesEquipmentStats from "../rules-content/RulesEquipmentStats";
+import RulesEquipmentMain from "../rules-content/RulesEquipmentMain";
+import RulesOverlay from "../rules-content/RulesOverlay";
 
 interface EquipmentItemProps {
     item: WarbandPurchase
@@ -35,6 +38,9 @@ const WbbEquipmentListItem: React.FC<EquipmentItemProps> = ({ item, fighter }) =
     const { warband, updateKey } = useWarband();
     const { playMode } = usePlayMode();
     const { printMode } = usePrintMode();
+
+    const [showDetailsModal, setShowDetailsModal] = useState(false);
+
 
     const [canRemove, setCanRemove] = useState(item.Sellable);
     const [cantSwap, setCantSwap] = useState(false);
@@ -72,7 +78,45 @@ const WbbEquipmentListItem: React.FC<EquipmentItemProps> = ({ item, fighter }) =
 
 
     return (
-        <div className={`WbbEquipmentListItem ${playMode ? 'play-mode' : ''} ${printMode ? 'print-mode' : ''} `} key={keyvar}>
+        <div className={`WbbEquipmentListItem ${playMode ? 'play-mode' : ''} ${printMode ? 'print-mode' : ''} `}
+             key={keyvar}
+            onClick={() => setShowDetailsModal(true)}
+        >
+
+            <Modal show={showDetailsModal} onHide={() => setShowDetailsModal(false)} className="" centered>
+                <Modal.Header closeButton={false}>
+                    <Modal.Title>@TODO: ITEM NAME</Modal.Title>
+
+                    <FontAwesomeIcon
+                        icon={faXmark}
+                        className="modal-close-icon"
+                        role="button"
+                        onClick={
+                            (e) => {
+                                e.stopPropagation();
+                                setShowDetailsModal(false);
+                            }
+                        }
+                    />
+                </Modal.Header>
+
+                <Modal.Body>
+                    @TODO: ITEM DETAILS
+                    {/* @TODO: Hook up Equipment to this: */}
+                    {/* <div className={'rules-equipment-main'}>*/}
+                    {/* Stats */}
+                    {/*<RulesEquipmentStats*/}
+                    {/*    facrelObject={factionequipmentObject}*/}
+                    {/*    baseobject={factionequipmentObject.EquipmentItem}*/}
+                    {/*/>*/}
+                    {/*<RulesEquipmentMain data={factionequipmentObject.EquipmentItem}/>*/}
+                    {/*</div>*/}
+                </Modal.Body>
+            </Modal>
+
+
+
+
             <div className="equipment-name">{ItemValue.GetTrueName()}
                 {(item.CustomInterface != undefined) ? item.CustomInterface.tags["is_custom"]? " (Manually Added)" : "" : ""}
             </div>
