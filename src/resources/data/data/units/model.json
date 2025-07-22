@@ -480,7 +480,7 @@
         "id": "md_trenchdog",
         "name": "Trench Dog",
         "source": "core",
-        "tags": {},
+        "tags": {"dog": true},
         "contextdata": {
             "unarmed_penalty_remove": {}
         },
@@ -1146,6 +1146,44 @@
         },
         "keywords" : ["kw_pilgrim","kw_elite","kw_strong","kw_tough"],
         "abilities" : ["ab_miracleofregeneration","ab_bodyguard_pilgrim"]
+    },
+    {
+        "id": "md_crimsoncommunicant",
+        "name": "Crimson Communicant",
+        "source": "westfalia",
+        "tags": {},
+        "contextdata": {},
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Communicant can be equipped with any weapon, armour and equipment from the New Antioch armoury. They always carry an Atonement Bell (see below).",
+                "glossary": [{"val": "New Antioch", "id": "kw_antioch"}]
+            }
+        ],
+        "lore": [      
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "Wracked with an aching sense of loss and despair, the Crimson Communicants find solace to their pain in the company of the grim Red Brigade. Numb to lesser physical sensations, they actively seek grevious wounds on the battlefield to forget their mental anguish. As a parting gift when leaving the Mendelist monastery, they are each gifted an Atonement Bell."
+                    }
+                ]
+            }
+        ],
+        "team": "faithful",
+        "stats" : {            
+            "movement": 6,
+            "melee": 1,
+            "ranged": -1,
+            "base": [40],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 1
+        },
+        "keywords" : ["kw_antioch","kw_elite","kw_strong","kw_tough"],
+        "abilities" : ["ab_strengththroughpain"]
     },
     {
         "id": "md_trenchpilgrim",

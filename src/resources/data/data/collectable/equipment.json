@@ -1284,6 +1284,103 @@
         "modifiers": []
     },
     {
+        "id": "eq_redbanner",
+        "name": "Red Banner",
+        "source": "westfalia",
+        "tags": {"trait": true, "flag": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+            "hands_melee": 1,
+            "hands_ranged": 1
+        },
+        "contextdata": {"warband_wide": {},
+        "keyword_mod": {"mods": [
+            {"type": "add", "value": "kw_leader"}
+        ]}},
+        "description": [            
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "This is the only banner the Red Brigade Warband can buy. As long as the model carrying this banner is not taken Out of Action, they have the Keyword LEADER, giving the Warband +2 DICE to Morale checks (+1 DICE for the banner and +1 DICE for the LEADER keyword). This gives the cumulative bonus for Morale checks even if another model in the Warband has the same Keyword. In addition, the flag acts as a polearm in melee, but takes only 1 hand.Melee attacks made against this model are made with -1 DICE if the attacking model Charged this turn.",
+                "glossary": [
+                    {"val": "-1 DICE", "id": "kw_minusdice"}
+                    ,   {"val": "+1 DICE", "id": "kw_plusdice"}
+                    ,   {"val": "+2 DICE", "id": "kw_plusdice"}
+                    ,   {"val": "LEADER", "id": "kw_leader"}
+                ]
+            }
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "The Red Brigade carries a patched red standard into battle, made from the blood-soaked cloak of St. Ernest. No soldier of the Brigade will ever leave the battle as long as this holy banner is still flying. When the last survivor of the Brigade is sent back to New Antioch, they take this flag with them."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_atonementbell",
+        "name": "Atonement Bell",
+        "source": "westfalia",
+        "tags": {"trait": true},
+        "category": "melee",
+        "distance": null,
+        "stats": {
+            "hands_melee": 1,
+            "hands_ranged": 1
+        },
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "This bell always takes the use of one hand of the Communicant. The Communicant can make an off-hand attack with the Bell. It causes no damage, but any enemy on a 40mm base or smaller hit with an Atonement Bell can be moved D3 inches from the Communicant into any direction the Communicant chooses. This can break them out of melee combat (allowing free attacks), trigger Falling damage, into dangerous terrain, etc. It cannot be made to move the model into another Melee combat, however."
+            }
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "A Crimson Communicant can channel the sorrow of the Second Meta-Christ through the sound of the bell, causing all to flee in despair."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_bloodcloak",
+        "name": "Blood Cloak",
+        "source": "westfalia",
+        "tags": {"trait": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {"warband_wide": {},
+        "keyword_mod": {"mods": [
+            {"type": "add", "value": "kw_skirmisher"}
+        ]}},
+        "description": [            
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Models wearing a Blood Cloak gains the keyword SKIRMISHER",
+                "glossary": [
+                    {"val": "SKIRMISHER", "id": "kw_skirmisher"}
+                ]
+            }
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "These cloaks are given to the veteran members of the Brigade in recognition for surviving enemy assaults. They make the outline of the warrior hidden in a blood-red haze, and many an enemy charge has been confounded by the crimson mist."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
         "id": "eq_binoculars",
         "name": "Binoculars",
         "source": "core",

@@ -437,6 +437,25 @@
         "options": []
     },
     {
+        "id": "ab_strengththroughpain",
+        "name": "Strength Through Pain",
+        "source": "core",
+        "tags": {"action": true},
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Crimson Communicant adds +1 DICE to its Melee charactertistic for each 1 BLOOD MARKER it currently has. Your opponent cannot spend any of the Crimson Communicant's BLOOD MARKERs on its Melee Attack ACTION rolls.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"},
+                    {"val": "ACTION", "id": "kw_action"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
         "id": "ab_mercydog",
         "name": "Mercy Dog",
         "source": "core",
@@ -445,10 +464,39 @@
         "description": [            
             {
                 "tags": {"desc_type" : "default"},
-                "content": "Mercy dogs carry a Medi-Kit which can be used by any friendly model on themselves within 1\" of the dog. Mercy dogs can also drag any model within 1\" that is Down at ½ speed with them, both with normal movement or when dashing -if this takes the model out of melee combat, this does not trigger a free melee attack ACTION.",
+                "content": "Mercy dogs carry a Medi-Kit which can be used by any friendly model on themselves within 1\" of the dog. Mercy dogs can also drag any model (unless it has a base size of 40mm or greater) within 1\" that is Down at ½ speed with them, both with normal movement or when dashing -if this takes the model out of melee combat, this does not trigger a free melee attack ACTION.",
                 "glossary": [
                     {"val": "ACTION", "id": "kw_action"}
                 ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_brigadedog",
+        "name": "Brigade Dog",
+        "source": "westfalia",
+        "tags": {"action": true, "heal": true},
+        "contextdata": {
+            "model_equipment_restriction": {
+                "added": [
+                    {
+                        "category": "ranged",
+                        "res_type": "id",
+                        "value": "eq_molotovcocktail"
+                    },
+                    {
+                        "category": "ranged",
+                        "res_type": "id",
+                        "value": "eq_grenades"
+                    }
+                ]
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You may buy any dog Grenades or Molotov Cocktails. While the dogs themselves cannot use these, any other model in the Warband (though not a Combat Medic or other dogs) may use them if they are within 1\" of the dog at any point during their Activation."
             }
         ],
         "options": []

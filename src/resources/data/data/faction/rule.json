@@ -2967,5 +2967,203 @@
             }
         ],
         "options": []
+    },
+    {
+        "id": "rl_molotovcocktails",
+        "source": "westfailia",
+        "tags": { },
+        "contextdata": {   
+        },
+        "name": "Molotov Cocktails",
+        "description":  [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Red Brigade can purchase Molotov Cocktails as part of their Armoury at the cost of 5 ducats."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_wearandtear",
+        "source": "westfailia",
+        "tags": { },
+        "contextdata": {   
+        },
+        "name": "Wear and Tear",
+        "description":  [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Red Brigade Warband starts every game with 1 BLOOD MARKER for each 200 full ducats of the total Warband cost. Your opponent can distribute these between your troops, but can only give 1 BLOOD MARKER per model as long as there are no troops with no BLOOD MARKERs left. Max BLOOD MARKERs per model is 2.",
+                "glossary": [
+                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_noretreat",
+        "source": "westfailia",
+        "tags": { },
+        "contextdata": {   
+            "add_to_model": {
+                "id": "rl_noretreat"
+            }
+        },
+        "name": "No Retreat",
+        "description":  [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "No members of this Warband can ever leave Melee Combat voluntarily."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_trenchdogs",
+        "source": "westfailia",
+        "tags": { },
+        "contextdata": {   
+            "faction_remove_upgrades": {
+                "upgrades": ["rel_md_up_trenchdog_fireteam"]
+            },
+            "faction_add_upgrades": {
+                "list": [{
+                "model_key": "rl_trenchdogs",
+                "models_id": ["md_trenchdog","md_trenchdog_guarddog","md_trenchdog_mercydog","md_trenchdog_attackdog"]}]
+            },
+            "true_add_to_model": {  
+                "list": [
+                    {
+                        "id": "ab_brigadedog",                            
+                        "required": [
+                            {
+                                "category": "id",
+                                "value": ["md_trenchdog","md_trenchdog_guarddog","md_trenchdog_mercydog","md_trenchdog_attackdog"]
+                            }
+                        ] 
+                    }
+                ]
+            },
+            "faction_model_count_group": {
+                "filter": [
+                    {
+                        "tag": "dog"
+                    }
+                ],
+                "exceed": [
+                    {
+                        "tag": "tag",
+                        "value" : "dog",
+                        "subvalue": false
+                    }
+                ]
+            }
+        },
+        "name": "Trench Dogs",
+        "description":  [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Red Brigade may buy several differenc types of Trench Dogs as detailed in the Troops section of the faction. The number of dogs may not exceed the number of other models. If this happens due to casualties, you cannot buy more dogs until this condition is met once more."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_gloryhounds",
+        "source": "westfailia",
+        "tags": { },
+        "contextdata": {   
+            "add_to_model": {
+                "id": "rl_gloryhounds",                         
+                "required": [
+                    {
+                        "category": "id",
+                        "value": ["md_trenchdog","md_trenchdog_guarddog","md_trenchdog_mercydog","md_trenchdog_attackdog"]
+                    }
+                ]
+            }
+        },
+        "name": "Glory Hounds",
+        "description":  [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Soldiers of New Antioch love heroic stories and improbable tall tales. Any dog that is part of the Red Brigade earns 2 Glory Points instead of 1 when they perform any Glorious Deed. Limited to 2 additional Glory Points per game."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_rememberthefallen",
+        "source": "westfailia",
+        "tags": { },
+        "contextdata": { 
+            "extra_step": {
+                "stage": 3,
+                "id": "stage_rememberthefallen"
+            }
+        },
+        "name": "Remember the Fallen",
+        "description":  [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "After the battle, instead of taking the Exploration option or Reinforcement option, the Red Brigade may recover all the weapons, armour, and equipment of all the warriors of their own Warband who died in the battle. This does not include Allies & Mercenaries since they are not Blood Pledges. This allows you to recover even weapons, armour, and equipment that would normally be exclusive to some warriors such as Machine Armour of the Heavy Mechanised Infantry. Note that this does not allow you to exceed the LIMIT of any items - items that would break the rule must be sold."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_liveofftheland",
+        "source": "westfailia",
+        "tags": { },
+        "contextdata": { 
+            "step_limit": {
+                "count": 1,
+                "id": "stage_reinforcements"
+            }
+        },
+        "name": "Live off the Lane",
+        "description":  [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Most of the time the Red Brigade operates deep within hostile territory. When playing campaigns, the Red Brigade cannot call for Reinforcements if it did so after their last game. Instead they must choose the Exploration or Remember the Fallen option."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_gunsblazing",
+        "source": "westfailia",
+        "tags": { },
+        "contextdata": { 
+            "faction_add_upgrades": {
+                "list": [{
+                "model_key": "rl_gunsblazing",
+                "models_id": ["md_lieutenant"]}]
+            }
+        },
+        "name": "Guns Blazing",
+        "description":  [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "It is the tradition of the Brigade officers to practise the two-pistol fighting style of St. Ernest. Lieutenants of the Warband can buy the Gunslinger Skill for the cost of 5 ducats."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_displeasureofthechurch",
+        "source": "westfailia",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Displeasure of the Church",
+        "description":  [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Few members fo the clergy are willing to serve in the unit due to the disregard of their lives they show. Your warband can have a maximum of two such characters, so you can either have 1 Trench Cleric and 1 Sniper Priest, or 2 Sniper Priests but no Trench Cleric."
+            }
+        ],
+        "options": []
     }
 ]

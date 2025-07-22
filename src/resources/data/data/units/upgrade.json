@@ -629,6 +629,24 @@
         "options": []
     },
     {
+        "id": "up_trenchdog_guarddog",
+        "name": "Guard Dog",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {
+        },
+        "description": [         
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "No infiltrator can be placed within 12\" of a Guard Dog, and you can charge any enemy within 4\" of this dog even if it is out of sight.",
+                "glossary": [
+                    {"val": "infiltrator", "id": "kw_infiltrator"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
         "id": "up_heretictrooper_hereticlegionnaire",
         "name": "Heretic Legionnaire",
         "source": "core",
@@ -1950,6 +1968,27 @@
                 "content": "The model gains the DEMONIC keyword.",
                 "glossary": [
                     {"val": "DEMONIC", "id": "kw_demonic"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_gunsblazing",
+        "name": "Gunslinger",
+        "source": "westfalia",
+        "tags": {"trait": true
+                },
+        "contextdata": {
+            "bonus_ability": {
+                "bonus_type": ["equipment", "weapon", "pistol"]
+            } },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "If armed with two pistols, this model can make ranged attack ACTIONS with both of them when making a ranged attack. In addition, this model suffers no penalty when using a pistol as an Off-Hand weapon.",
+                "glossary": [
+                    {"val": "ACTIONS", "id": "kw_action"}
                 ]
             }
         ],

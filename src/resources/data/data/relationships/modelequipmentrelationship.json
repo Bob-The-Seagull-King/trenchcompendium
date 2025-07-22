@@ -33,6 +33,17 @@
         "removable": false
     },
     {
+        "id": "rel_md_eq_crimsoncommunicant",
+        "source": "core",
+        "tags": {},
+        "name": "Crimson Communicant Equipment",
+        "contextdata": {},
+        "options": [],
+        "model_id": ["md_crimsoncommunicant"],
+        "mandatory_equipment": ["eq_atonementbell"],
+        "removable": false
+    },
+    {
         "id": "rel_md_eq_mamlukfarisbase",
         "source": "core",
         "tags": {},

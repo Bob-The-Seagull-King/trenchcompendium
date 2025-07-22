@@ -1148,6 +1148,82 @@ export const BaseContextCallTable : CallEventTable = {
         }
             
     },
+    faction_model_count_group: {
+        event_priotity: 0,
+        async getModelLimitTrue(this: EventRunner, eventSource : FactionModelRelationship, relayVar : number, trackVal : UserWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+
+            if (context_func["filter"]) {
+                for (let i = 0 ; i < context_func["filter"].length; i++) {
+                    const CurVal = context_func["filter"][i];
+                    if (CurVal["tag"]) {
+                        if (!containsTag((eventSource).Tags, CurVal["tag"]) && !containsTag((eventSource).Model.Tags, CurVal["tag"])) {
+                            return relayVar;
+                        }
+                    }
+                }
+            }
+
+            if (context_func["match"]) {
+                for (let i = 0 ; i < context_func["match"].length; i++) {
+                    if (context_func["match"][i]["type"] == "model") {
+                        const MatchVal = trackVal.GetCountOfModel(context_func["match"][i]["value"])
+                        return MatchVal;
+                    }
+                }
+            }
+            if (context_func["exceed"]) {
+                for (let i = 0 ; i < context_func["exceed"].length; i++) {
+                    if (context_func["exceed"][i]["type"] == "keyword") {
+                        const MatchVal = await trackVal.GetCountOfKeyword(context_func["exceed"][i]["value"])
+                        return MatchVal
+                    }
+                    if (context_func["exceed"][i]["tag"] == "tag") {
+                        const MatchVal = await trackVal.GetCountOfTag(context_func["exceed"][i]["value"], context_func["exceed"][i]["subvalue"])
+                        return MatchVal
+                    }
+                }
+            }
+            if (context_func["warband_limit"]) {
+                const CurThresh = await trackVal.GetCampaignTresholdValue()
+                let CurSize = relayVar;
+                for (let i = 0; i < context_func["warband_limit"].length; i++) {
+                    if (context_func["warband_limit"][i]["size"] <= CurThresh) {
+                        CurSize = context_func["warband_limit"][i]["value"]
+                    }
+                    
+                }
+                return CurSize;
+            }
+            
+            return relayVar;
+        },
+        async getModelLimitPresentation(this: EventRunner, eventSource : any, relayVar : string[], trackVal : boolean, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            
+            const { ModelFactory } = await import("../../factories/features/ModelFactory");
+            const { KeywordFactory } = await import("../../factories/features/KeywordFactory");
+            if (trackVal == true) {
+                if (context_func["match"]) {
+                    if (context_func["match"][0]["type"] == "model") {
+                        const ModelItem = await ModelFactory.CreateNewModel(context_func["match"][0]["value"], null)
+                        return ["Number of " + ModelItem.Name]
+                    }
+                }
+                if (context_func["exceed"]) {
+                    if (context_func["exceed"][0]["type"] == "keyword") {
+                        const KeywordItem = await KeywordFactory.CreateNewKeyword(context_func["exceed"][0]["value"], null)
+                        return ["Must be outnumbered by models with the keyword " + KeywordItem.Name]
+                    }
+                }
+                if (context_func["warband_limit"]) {
+                    for (let i = 0; i < context_func["warband_limit"].length; i++) {
+                        relayVar.push("( " + context_func["warband_limit"][i]["value"] + " in a warband worth over " + context_func["warband_limit"][i]["size"] + " ducats)")
+                    }
+                }
+            }
+            
+            return relayVar;
+        }
+    },
     faction_model_count_special: {
         event_priotity: 0,
         async getModelLimitTrue(this: EventRunner, eventSource : any, relayVar : number, trackVal : UserWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {

@@ -241,7 +241,7 @@
         "id": "md_trenchdog_guarddog",
         "name": "Guard Dog",
         "source": "core",
-        "tags": {},
+        "tags": {"dog": true},
         "contextdata": {
             },
         "base_id": "md_trenchdog",
@@ -264,10 +264,38 @@
         "new_abilities" : ["ab_guarddog"]
     },
     {
+        "id": "md_trenchdog_attackdog",
+        "name": "Attack Dog",
+        "source": "westfalia",
+        "tags": {"dog": true},
+        "contextdata": {
+            },
+        "base_id": "md_trenchdog",
+        "variant_name": "Guard",
+        "lore": [                      
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "A great many animals serve in the trenches alongside the soldiers. Wardogs are by far the most common, but tame ocelots, barbary apes, small bears, and other unusual pets abound, while the forces of Hell keep Hellhounds and other infernal beasts as pets."
+            },   
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "These ferocious hounds are trained by the Brigade to accompany their masters into the fray."
+            }
+        ],
+        "team": "none",
+        "stats" : {
+            "melee": 1
+        },
+        "cut_keywords" : [],
+        "keywords" : [],
+        "cut_abilities" : [],
+        "new_abilities" : []
+    },
+    {
         "id": "md_trenchdog_mercydog",
         "name": "Mercy Dog",
         "source": "core",
-        "tags": {},
+        "tags": {"dog": true},
         "contextdata": {
             },
         "base_id": "md_trenchdog",
@@ -293,7 +321,7 @@
         "id": "md_trenchdog_martyrdomdog",
         "name": "Martyrdom Dog",
         "source": "core",
-        "tags": {},
+        "tags": {"dog": true},
         "contextdata": {
             },
         "base_id": "md_trenchdog",
@@ -319,7 +347,7 @@
         "id": "md_trenchdog_hellhound",
         "name": "Hellhound",
         "source": "core",
-        "tags": {},
+        "tags": {"dog": true},
         "contextdata": {
             },
         "base_id": "md_trenchdog",

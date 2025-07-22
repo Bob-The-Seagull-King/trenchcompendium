@@ -1445,6 +1445,17 @@ class UserWarband extends DynamicContextObject {
         return count;
     }
 
+    public async GetCountOfTag(id : string, truthval : boolean) {
+        let count = 0;
+        for (let i = 0; i < this.Models.length; i++) {
+            const istruth = await (this.Models[i].HeldObject as WarbandMember).IsTagPresent(id)
+            if (istruth == truthval) {
+                count ++;
+            }
+        }
+        return count;
+    }
+
     public async GetEliteFighterOptions() : Promise<FactionModelRelationship[]> {
         const ListOfRels : FactionModelRelationship[] = await this.GetFighterOptions();
 

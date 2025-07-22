@@ -694,6 +694,12 @@ class WarbandMember extends DynamicContextObject {
         return false;
     }
 
+    public async IsTagPresent(id : string) {
+        const tags = this.Tags
+        const subtags = this.CurModel.Tags
+        return ((containsTag(tags, id)) || (containsTag(subtags, id)))
+    }
+
     public GetSubCosts(type : number, overridecap = false) {
         let countvar = 0;
         for (let i = 0; i < this.Upgrades.length; i++) {
