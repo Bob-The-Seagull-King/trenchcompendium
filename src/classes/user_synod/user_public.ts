@@ -241,7 +241,6 @@ class SiteUserPublic {
     /**
      * Returns the string of the users supporter status
      *
-     * @TODO: return actual value
      * 'Supporter' if is premium
      * 'Free Member' if not premium
      */
