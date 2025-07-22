@@ -4,10 +4,12 @@ import {faCircleNotch, faPlus, faXmark} from "@fortawesome/free-solid-svg-icons"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import { RealWarbandPurchaseModel } from '../../../../../classes/saveitems/Warband/Purchases/WarbandPurchase';
 import { FactionEquipmentRelationship } from '../../../../../classes/relationship/faction/FactionEquipmentRelationship';
-import { getCostType } from '../../../../../utility/functions';
+import {getCostType, makestringpresentable} from '../../../../../utility/functions';
 import {useModalSubmitWithLoading} from "../../../../../utility/useModalSubmitWithLoading";
 import { useWarband } from '../../../../../context/WarbandContext';
 import { CachedFactionEquipment } from '../../../../../classes/saveitems/Warband/UserWarband';
+import WbbEquipmentListItem from "../../WbbEquipmentListItem";
+import WbbEquipmentDetails from "../../micro-elements/WbbEquipmentDetails";
 
 interface EquipmentItem {
     id: string;
@@ -42,7 +44,7 @@ const WbbModalAddEquipment: React.FC<WbbModalAddEquipmentProps> = ({ show, onClo
         }
     });
     
-    
+    console.log(cache);
     useEffect(() => {
         async function SetEquipmentOptions() {
             const options = await fighter.model.GetModelEquipmentOptions()
@@ -56,6 +58,7 @@ const WbbModalAddEquipment: React.FC<WbbModalAddEquipmentProps> = ({ show, onClo
                         fincache[keys[i]] = tempcache[keys[i]]
                     }
                 }
+
                 setAvailable(options.filter((item : FactionEquipmentRelationship) => item.EquipmentItem.Category == category))
                 setCache(fincache)
                 setkevvar(keyvar + 1)
@@ -82,41 +85,54 @@ const WbbModalAddEquipment: React.FC<WbbModalAddEquipmentProps> = ({ show, onClo
                 {Object.keys(cache).map((item, index) => (
                     <div
                         key={cache[item].facrel.ID}
-                        className={`select-item ${selectedID === cache[item].facrel.ID ? 'selected' : ''} ${available.includes(cache[item].facrel)? '' : 'disabled'}`}
-                        onClick={() => {
-                            if (available.includes(cache[item].facrel)) {
-                                setSelectedID(cache[item].facrel.ID)
-                            }
-                        }}
+                        className={'select-item-wrap'}
                     >
+                        <div
+
+                            className={`select-item ${selectedID === cache[item].facrel.ID ? 'selected' : ''} ${available.includes(cache[item].facrel) ? '' : 'disabled'}`}
+                            onClick={() => {
+                                if (available.includes(cache[item].facrel)) {
+                                    setSelectedID(cache[item].facrel.ID)
+                                }
+                            }}
+                        >
                         <span className={'item-left'}>
                             <span className={'item-name'}>
                                 {cache[item].facrel.EquipmentItem.GetTrueName()}
                             </span>
                         </span>
-
-                        <span className={'item-right'}>
-                            <span className={'item-cost'}>
-                                {cache[item].facrel.Cost &&
-                                    <>
-                                    {cache[item].cost + " " + getCostType(cache[item].facrel.CostType) }
-                                    </>
-                                }
-                            </span>
-
-                            {((cache[item].limit > 0)) &&
-                                <span className={'item-limit'}>
-                                    Limit: {( cache[item].count_cur + "/" + cache[item].limit ) }
-                                </span>
-                            }
-                            {((cache[item].restrictions )).length > 0 &&
-                                <span className={'item-limit'}>
-                                    Restrictions: {
-                                        (( cache[item].restrictions )).join(', ')
+                            <span className={'item-right'}>
+                                <span className={'item-cost'}>
+                                    {cache[item].facrel.Cost &&
+                                        <>
+                                            {cache[item].cost + " " + getCostType(cache[item].facrel.CostType)}
+                                        </>
                                     }
                                 </span>
-                            }
-                        </span>
+
+                                    {((cache[item].limit > 0)) &&
+                                        <span className={'item-limit'}>
+                                        Limit: {(cache[item].count_cur + "/" + cache[item].limit)}
+                                    </span>
+                                    }
+                                    {((cache[item].restrictions)).length > 0 &&
+                                        <span className={'item-limit'}>
+                                        Restrictions: {
+                                            ((cache[item].restrictions)).join(', ')
+                                        }
+                                    </span>
+                                    }
+                            </span>
+
+
+                        </div>
+
+                        {selectedID === cache[item].facrel.ID &&
+                            <WbbEquipmentDetails
+                                equipment={cache[item].facrel.EquipmentItem}
+                                showType={false}
+                            />
+                        }
                     </div>
                 ))}
             </Modal.Body>
@@ -127,9 +143,9 @@ const WbbModalAddEquipment: React.FC<WbbModalAddEquipmentProps> = ({ show, onClo
                 </Button>
                 <Button variant="primary" onClick={handleSubmit} disabled={!selectedID || isSubmitting}>
                     {isSubmitting ? (
-                        <FontAwesomeIcon icon={faCircleNotch} className={'icon-inline-left fa-spin '} />
-                    ): (
-                        <FontAwesomeIcon icon={faPlus} className={'icon-inline-left'} />
+                        <FontAwesomeIcon icon={faCircleNotch} className={'icon-inline-left fa-spin '}/>
+                    ) : (
+                        <FontAwesomeIcon icon={faPlus} className={'icon-inline-left'}/>
                     )}
                     {'Add Equipment'}
                 </Button>

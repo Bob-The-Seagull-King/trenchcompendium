@@ -163,13 +163,13 @@ const WbbEquipmentListItem: React.FC<EquipmentItemProps> = ({ item, fighter }) =
                             </div>
                         </div>
                     }
-                    { ItemValue.Description.length > 0 &&
+                    { ItemValue.GetDescription() &&
                         <div className={'rules-wrap'}>
                             <div className={'text-label'}>
                                 {'Rules'}
                             </div>
                             <div className={'rules'}>
-                                {returnDescription(ItemValue, ItemValue.Description)}
+                                {ItemValue.GetDescription()}
                             </div>
                         </div>
                     }
@@ -177,17 +177,18 @@ const WbbEquipmentListItem: React.FC<EquipmentItemProps> = ({ item, fighter }) =
                     
                 </div>
             }
+
             {(item.HeldObject as WarbandEquipment).MyEquipment.SelfDynamicProperty.Selections.length > 0 &&
-                        <span className={'title-choice'}>
-                            {(item.HeldObject as WarbandEquipment).MyEquipment.SelfDynamicProperty.Selections.map((option) => 
-                                <WbbOptionSelect 
-                                    property={(item.HeldObject as WarbandEquipment).MyEquipment}
-                                    key={(item.HeldObject as WarbandEquipment).MyEquipment.SelfDynamicProperty.Selections.indexOf(option)}
-                                    choice={option}
-                                />
-                            )}                        
-                        </span>
-                    }
+                <span className={'title-choice'}>
+                    {(item.HeldObject as WarbandEquipment).MyEquipment.SelfDynamicProperty.Selections.map((option) =>
+                        <WbbOptionSelect
+                            property={(item.HeldObject as WarbandEquipment).MyEquipment}
+                            key={(item.HeldObject as WarbandEquipment).MyEquipment.SelfDynamicProperty.Selections.indexOf(option)}
+                            choice={option}
+                        />
+                    )}
+                </span>
+            }
         </div>
     );
 };
