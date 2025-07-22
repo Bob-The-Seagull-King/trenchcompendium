@@ -113,7 +113,12 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                 keyvar: prev.keyvar + 1
             }));
         }
-        SetModelOptions();
+
+        if (!warband?.warband_data.Models.includes(warbandmember.purchase)) {
+            onClose();
+        } else {
+            SetModelOptions();
+        }
     }, [updateKey, fighter, playMode])
 
 
