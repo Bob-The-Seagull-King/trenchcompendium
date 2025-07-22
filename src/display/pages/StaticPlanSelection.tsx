@@ -125,7 +125,7 @@ const StaticPlanSelection: React.FC = () => {
                     </div>
 
                     { SiteUser.GetPlanID() != SYNOD.PP_PLAN_MONTH_ID && (
-                        <button className={'btn btn-primary'}
+                        <button className={'btn btn-primary select-plan-btn'}
                                 onClick={() => setPurchaseMonthlyModalOpen(true)}
                         >
                             {'Select Plan'}
