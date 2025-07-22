@@ -100,7 +100,7 @@ const WbbOverviewPage = (prop: any) => {
                         </div>
                     }
 
-                    
+
                     {isLoading ? (
                         <div className={'warbands-loading-wrap'}>
                             <LoadingOverlay

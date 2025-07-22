@@ -621,11 +621,29 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                     {'Are you sure you want to delete '}
                     {(item as RealWarbandPurchaseModel).model != undefined &&
 
-                    <strong>
-                        {(item as RealWarbandPurchaseModel).model.CurModel.GetTrueName() + ' - ' + (item as RealWarbandPurchaseModel).model.GetTrueName()}
-                    </strong>
+                        <strong>
+                            {(item as RealWarbandPurchaseModel).model.CurModel.GetTrueName() + ' - ' + (item as RealWarbandPurchaseModel).model.GetTrueName()}
+                        </strong>
                     }
                     {"?"}
+
+                    <p className={'mt-4 small'}>
+                        <i>
+                            {'This will remove the fighter from your roster.'}
+
+                            <ul>
+                                <li>
+                                    {'All Equipment will be removed.'}
+                                </li>
+                                <li>
+                                    {'The costs will not be refunded'}
+                                </li>
+                                <li>
+                                    {'You will not be able to recover this fighter.'}
+                                </li>
+                            </ul>
+                        </i>
+                    </p>
                 </Modal.Body>
 
                 <Modal.Footer>
@@ -670,9 +688,7 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                     </strong>
                     }
 
-                    <br/>
-                    <br/>
-                    <p>
+                    <p className={'mt-4 small'}>
                         <i>
                             {'This will remove the fighter from your roster and refund all costs for the fighter and its equipment.'}
                         </i>
