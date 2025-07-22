@@ -610,7 +610,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                         {(fighter.IsElite() || fighter.Injuries.length > 0) &&
                             <div className={'battle-scars'}>
 
-                                <h3></h3>
+                                <h3>{'Battle Scars'}</h3>
 
                                 {fighter.IsElite() &&
                                     <div className={'btn btn-primary btn-sm edit-battle-scar-btn'}
@@ -730,14 +730,16 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                         <WbbEditFighterExperience
                             show={showXPModal}
                             onClose={() => setShowXPModal(false)}
-                            currentXP={fighter.GetExperiencePoints()}
+                            fighter={fighter}
+                            maxXP={complexstate.xpLimit}
                             onSubmit={handleXPSubmit}
                         />}
                         {showEditScars &&
                         <WbbEditBattleScars
                             show={showEditScars}
                             onClose={() => setShowEditScars(false)}
-                            currentScars={fighter.GetBattleScars()}
+                            fighter={fighter}
+                            maxScars={complexstate.scarLimit}
                             onSubmit={handleUpdateBattleScars}
                         />}
                         {showAdvancementModal &&
