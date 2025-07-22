@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import WbbWarbandListItem from "../components/warband-builder/WbbWarbandListItem";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCopy, faPlus} from "@fortawesome/free-solid-svg-icons";
+import {faCopy, faPlus, faUser} from "@fortawesome/free-solid-svg-icons";
 import {useNavigate} from "react-router-dom";
 import { SumWarband, WarbandManager } from '../../classes/saveitems/Warband/WarbandManager';
 import CustomNavLink from '../components/subcomponents/interactables/CustomNavLink';
 import { UserWarband } from '../../classes/saveitems/Warband/UserWarband';
 import PageMetaInformation from "../components/generics/PageMetaInformation";
 import LoadingOverlay from "../components/generics/Loading-Overlay";
+import {useAuth} from "../../utility/AuthContext";
 
 
 /**
@@ -20,6 +21,7 @@ import LoadingOverlay from "../components/generics/Loading-Overlay";
 const WbbOverviewPage = (prop: any) => {
     const Manager : WarbandManager = prop.manager;
     const navigate = useNavigate();
+    const { userId, isLoggedIn } = useAuth()
 
     const [allwarbands, setwarbands] = useState<SumWarband[]>([])
     const [keyvar, setkeyvar] = useState(0);
@@ -77,6 +79,28 @@ const WbbOverviewPage = (prop: any) => {
                 </div>
 
                 <div className={'row'} key={keyvar}>
+
+                    { (!isLoading && !isLoggedIn )&&
+                        <div className={'col-12 col-lg-6'}>
+                            <div className={'login-alert'}>
+                                <h3>
+                                    {'You are not logged in'}
+                                </h3>
+                                <p>
+                                    {'Log in or create an account in order to save your warbands permanently across devices.'}
+                                </p>
+
+                                <a href={'/login'} className={'btn btn-primary'}>
+                                    <FontAwesomeIcon
+                                        icon={faUser}
+                                        className="icon-inline-left-l"/>
+                                    {'Login'}
+                                </a>
+                            </div>
+                        </div>
+                    }
+
+                    
                     {isLoading ? (
                         <div className={'warbands-loading-wrap'}>
                             <LoadingOverlay
@@ -90,6 +114,8 @@ const WbbOverviewPage = (prop: any) => {
                             ))}
                         </>
                     )}
+
+
 
                     {!isLoading &&
                         <div className={'col-12 col-lg-6'}>
