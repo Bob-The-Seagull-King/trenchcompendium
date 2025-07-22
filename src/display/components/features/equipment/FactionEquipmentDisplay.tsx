@@ -57,11 +57,10 @@ const FactionEquipmentDisplay = (props: any) => {
         }, []);
 
     return (
-        <ErrorBoundary fallback={<div>Something went wrong with FactionModelDisplay.tsx</div>}>
+        <ErrorBoundary fallback={<div>Something went wrong with FactionEquipmentDisplay.tsx</div>}>
                 <div className="armoury-element-cell">
                     <RulesOverlay
                         titlename={factionequipmentObject.EquipmentItem.Name}
-                        d_name={factionequipmentObject.EquipmentItem.Name}
                         d_method={() =>
                             
                             <div className={'rules-equipment-main'}>                    

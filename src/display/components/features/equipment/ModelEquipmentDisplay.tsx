@@ -101,7 +101,6 @@ const ModelEquipmentDisplay = (props: any) => {
                                                         }
                                                         <RulesOverlay
                                                         titlename={subsubitem.Name}
-                                                        d_name={subsubitem.Name}
                                                         d_method={() =>
                                                             
                                                             <div className={'rules-equipment-main'}>                    

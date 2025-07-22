@@ -479,7 +479,6 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
                     <>
                         <RulesOverlay
                             titlename={component.Name}
-                            d_name={component.Name}
                             d_method={() =>
                                 
                                 <div className={'rules-equipment-main'}>                    
@@ -520,7 +519,6 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
                     <>
                         <RulesOverlay
                             titlename={component.Name}
-                            d_name={component.Name}
                             d_method={() =>
                                 
                                 <div className={'skill-description'}>
@@ -581,7 +579,6 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
                 {component !== null &&
                     <RulesOverlay
                         titlename={component.Name}
-                        d_name={component.Name}
                         d_method={() =>
                         <ModelDisplay data={component} />
                     }/>
