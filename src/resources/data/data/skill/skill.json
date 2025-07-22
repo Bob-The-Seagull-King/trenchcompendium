@@ -819,7 +819,7 @@
         "description": [            
             {
                 "tags": {"desc_type" : "default"},
-                "content": "Add +1 DICE to the Melee Characteristic of this model.",
+                "content": "Add +1 DICE to the Ranged Characteristic of this model.",
                 "glossary": [{"val": "+1 DICE", "id": "kw_plusdice"}]
             }
         ],
