@@ -676,6 +676,21 @@ class WarbandMember extends DynamicContextObject {
         for (let i = 0; i < CurEquip.length; i++) {
             returnVal.push(CurEquip[i].equipment.MyEquipment.SelfDynamicProperty.GetTrueName())
         }
+        for (let i = 0; i < this.ModelEquipments.length; i++) {
+            for (let j = 0; j < this.ModelEquipments[i].SelfDynamicProperty.Selections.length; j++) {
+                const SelecCur = this.ModelEquipments[i].SelfDynamicProperty.Selections[j].SelectedChoice;
+                try {
+                    if (SelecCur) {
+                        const Val = SelecCur.value as ModelEquipmentRelationship;
+
+                        for (let k = 0; k < Val.EquipmentItems.length; k++) {
+                            returnVal.push(Val.EquipmentItems[k].GetTrueName())
+                        }
+
+                    }
+                } catch(e) { console.log(e)}
+            }
+        }
 
         return returnVal.join(', ');
     }
