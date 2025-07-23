@@ -9,7 +9,7 @@ import { useParams, useNavigate, useLocation } from 'react-router-dom'
 import { useAuth } from '../../utility/AuthContext'
 import SynodImage from "../../utility/SynodImage";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCheck, faCog, faDownload, faPlus, faQrcode} from "@fortawesome/free-solid-svg-icons";
+import {faCheck, faCog, faDownload, faPen, faPlus, faQrcode} from "@fortawesome/free-solid-svg-icons";
 import ProfilePageAchievements from "../components/Profile/ProfilePageAchievements";
 import ProfilePageFriends from "../components/Profile/ProfilePageFriends";
 import ProfilePageCampaigns from "../components/Profile/ProfilePageCampaigns";
@@ -257,6 +257,10 @@ const ProfilePage: React.FC = () => {
                                             size="large"
                                             className="profile-image"
                                         />
+
+                                        <div className={'edit-indicator'}>
+                                            <FontAwesomeIcon icon={faPen} />
+                                        </div>
                                     </div>
                                 ):(
                                     <>
