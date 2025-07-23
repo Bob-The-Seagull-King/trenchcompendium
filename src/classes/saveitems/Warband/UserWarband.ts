@@ -1505,7 +1505,7 @@ class UserWarband extends DynamicContextObject {
             let canaddupgrade = true;
             let maxccurcostount = BaseRels[i].Cost;
             let countofmodel = 0
-            let maxofgroup = BaseRels[i].Maximum;
+            let maxofgroup = -1;
             let countofgroup = 0;
             
             if (this.ModelRelCache[BaseRels[i].ID]) {
@@ -1537,18 +1537,18 @@ class UserWarband extends DynamicContextObject {
                     maxccurcostount,
                     this
                 )
+                countofmodel = this.GetCountOfRel(BaseRels[i].ID)
                 countofgroup = await eventmon.runEvent(
                     "getCountOfGroup",
                     BaseRels[i],
                     [],
-                    this.GetCountOfRel(BaseRels[i].ID),
+                    countofmodel,
                     this
                 )
-                countofmodel = this.GetCountOfRel(BaseRels[i].ID)
                 if (! (countofmodel < maxcount || ((BaseRels[i].Minimum == 0 && BaseRels[i].Maximum == -1)))) {
                     canaddupgrade = false;
                 }
-                if (!(countofgroup < maxofgroup || ((BaseRels[i].Minimum == 0 && BaseRels[i].Maximum == -1)))) {
+                if (!(countofgroup < maxofgroup || maxofgroup < 0 || ((BaseRels[i].Minimum == 0 && BaseRels[i].Maximum == -1)))) {
                     canaddupgrade = false;
                 }
                 if (count_cost == true && canaddupgrade == true) {
