@@ -66,8 +66,8 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
     const [detailPayload, setDetailPayload] = useState<any>(null);
 
     const openDetail = (type: DetailType, payload: any = null) => {
-        setDetailType(type);
         setDetailPayload(payload);
+        setDetailType(type);
 
         // Only push history if detail view was not open
         if (detailType === null) {
@@ -76,9 +76,9 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
     };
 
     const closeDetail = () => {
-        setDetailType(null);
         setDetailPayload(null);
-
+        setDetailType(null);
+        
         // Recover old history state
         window.history.replaceState({}, '');
     };
