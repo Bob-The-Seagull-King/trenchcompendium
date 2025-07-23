@@ -199,6 +199,7 @@ class WarbandPurchase {
         } else if (this.HeldObject instanceof WarbandProperty) {
             return (val as WarbandProperty).SelfDynamicProperty.OptionChoice.GetTrueName();
         }
+        return val? val.GetTrueName() : "";
     }
 
 }

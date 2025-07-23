@@ -21,6 +21,8 @@ import { ToolsController } from '../../../classes/_high_level_controllers/ToolsC
 import { RealWarbandPurchaseEquipment, RealWarbandPurchaseModel, WarbandPurchase } from '../../../classes/saveitems/Warband/Purchases/WarbandPurchase';
 import { WarbandMember } from '../../../classes/saveitems/Warband/Purchases/WarbandMember';
 import WbbMoveEquipmentToFighterModal from './modals/warband/WbbMoveEquipmentToFighterModal';
+import { UserWarband } from '../../../classes/saveitems/Warband/UserWarband';
+import {SumWarband, WarbandManager} from "../../../classes/saveitems/Warband/WarbandManager";
 
 interface WbbContextualPopoverProps {
     id: string;
@@ -1068,46 +1070,16 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
 
                     {/* @TODO: add warband Export here */}
                     <div className={'WbbExportWarband'}>
-                        ## Warband ##
+                        {(item as SumWarband).warband_data &&
+                            <>
+                                {(item as SumWarband).warband_data.BuildExport().map((line, index) => (
+                                <pre key={index} style={{ margin: 0, padding: 0, lineHeight: '1', width:"100%",whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>
+                                    {line}
+                                </pre>
+                                ))}
+                            </>
 
-                        ## Elites ##
-
-                        ** Praetor - Fightername **
-                        133 Ducats | 4 Glory
-                        Goetic: Choice 1, Choice
-                        Weapons: Malebranche Sword
-                        Armor: Reinforced Armour, Trench shield
-                        Equipment: Lorem, Ipsum
-                        Advancements: loremipsum dolor
-                        Injuries: dolor sit amet
-
-                        ** Sorceror - Fightername 2 **
-                        133 Ducats
-                        Goetic: Choice 1, Choice
-                        Weapons: Malebranche Sword
-                        Armor: Reinforced Armour, Trench shield
-                        Equipment: Lorem, Ipsum
-
-
-                        ## Troops ##
-
-                        ** Wretched - Olaf **
-                        35 Ducats
-                        Weapons: Trench Knife
-
-                        ** Yoke Fiend - Yalf **
-                        35 Ducats
-                        Weapons: Torture Instrument
-
-                        ## Modifiers ##
-
-                        ** Modifier Name **
-                        Lorem modifier choice
-
-                        ## Exploration Locations ##
-
-                        ** Location name **
-                        Lorem location choice
+                        }
                     </div>
 
 
