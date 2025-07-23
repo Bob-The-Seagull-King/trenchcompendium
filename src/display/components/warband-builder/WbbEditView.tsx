@@ -90,31 +90,37 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
 
     const [detailType, setDetailType] = useState<DetailType>(null);
     const [detailPayload, setDetailPayload] = useState<any>(null);
-    const openDetail = (type: DetailType, payload: any = null) => { // Sets the detail type and payload and uses navigation to enable default browser nav
+
+    const openDetail = (type: DetailType, payload: any = null) => {
         setDetailType(type);
         setDetailPayload(payload);
 
-        const params = new URLSearchParams();
-
-        if (type === 'fighter' && payload?.Slug) {
-            params.set('fighter', payload.Slug);
-        } else if (type) {
-            params.set(type, '');
-        }
-
-        // Nur pushen, wenn von "null" kommend
+        // Nur History pushen, wenn vorher keine Detailansicht offen war
         if (detailType === null) {
-            navigate(`${location.pathname}?${params.toString()}`, { replace: false });
-        } else {
-            // ersetze die URL statt neuen Eintrag zu erzeugen
-            navigate(`${location.pathname}?${params.toString()}`, { replace: true });
+            window.history.pushState({ detailOpen: true }, '');
         }
     };
+
     const closeDetail = () => {
         setDetailType(null);
         setDetailPayload(null);
-        navigate(location.pathname, { replace: false }); // remove search params
+
+        // Stelle ursprünglichen State wieder her, ohne neue URL
+        window.history.replaceState({}, '');
     };
+
+    useEffect(() => {
+        const handlePopState = (e: PopStateEvent) => {
+            if (detailType !== null) {
+                closeDetail();
+            }
+        };
+
+        window.addEventListener('popstate', handlePopState);
+        return () => window.removeEventListener('popstate', handlePopState);
+    }, [detailType]);
+
+
 
     // scroll to top when item is selected
     const selectedItemWrapRef = useRef<HTMLDivElement>(null);
