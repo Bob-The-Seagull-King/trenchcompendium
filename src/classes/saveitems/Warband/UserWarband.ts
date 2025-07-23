@@ -1930,7 +1930,7 @@ class UserWarband extends DynamicContextObject {
                 LineList.push("  ")
                 LineList.push(troops[i].model.GetTrueName() + " - " + troops[i].model.GetModelName() + "  " + troops[i].purchase.GetTotalDucats().toString() + " Ducats | " + troops[i].purchase.GetTotalGlory().toString() + " Glory")
                 if (troops[i].model.Upgrades.length > 0) {
-                    LineList.push("    " + "Upgrades & Choices: ")
+                    LineList.push("  " + "Upgrades & Choices: ")
                     const UpgradesList : string[] = []
                     for (let j = 0; j < troops[i].model.Upgrades.length; j++) {
                         UpgradesList.push(troops[i].model.Upgrades[j].GetItemName())
