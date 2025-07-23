@@ -1280,9 +1280,17 @@
     {
         "id": "rel_fc_md_trenchcleric_redbrigade",
         "source": "core",
-        "tags": {},
+        "tags": {"displeasedfaith": true},
         "name": "",
-        "contextdata": {"option_search_viable": {}},
+        "contextdata": {"option_search_viable": {},
+        "faction_model_count_group": {
+            "filter": [
+                {
+                    "tag": "displeasedfaith"
+                }
+            ],
+            "number": 2
+        }},
         "options": [],
         "faction_id" : ["fc_newantioch_fv_redbrigade"],
         "model_id" : "md_trenchcleric",
@@ -1290,11 +1298,7 @@
         "mercenary": false,
         "cost" : 60,
         "cost_type" : 0,
-        "restricted_models" : [
-            {
-                "upgrade_ids": ["rel_fc_md_sniperpriest"],
-                "max_count": 1
-            }],
+        "restricted_models" : [],
         "warband_minimum" : 0,
         "warband_maximum" : 1
     },
@@ -1352,9 +1356,16 @@
     {
         "id": "rel_fc_md_sniperpriest",
         "source": "core",
-        "tags": {},
+        "tags": {"displeasedfaith": true},
         "name": "",
-        "contextdata": {"option_search_viable": {}},
+        "contextdata": {"option_search_viable": {},
+            "filter": [
+                {
+                    "tag": "displeasedfaith"
+                }
+            ],
+            "number": 2
+        },
         "options": [],
         "faction_id" : ["fc_newantioch","fc_newantioch_fv_kingdomofalbaassaultdetatchment","fc_newantioch_fc_eirerangers","fc_newantioch_fv_papalstatesinterventionforce","fc_newantioch_fv_papalstatesinterventionforce"],
         "model_id" : "md_sniperpriest",

@@ -52,7 +52,9 @@ export interface CachedModelRelData {
     avoid_restriction : boolean,
     count_cur : number,
     cost: number,
-    canadd : boolean
+    canadd : boolean,
+    group_cur : number,
+    group_limit: number
 }
 
 export interface GeneralEventCache {
@@ -1503,18 +1505,29 @@ class UserWarband extends DynamicContextObject {
             let canaddupgrade = true;
             let maxccurcostount = BaseRels[i].Cost;
             let countofmodel = 0
+            let maxofgroup = BaseRels[i].Maximum;
+            let countofgroup = 0;
             
             if (this.ModelRelCache[BaseRels[i].ID]) {
                 maxcount = this.ModelRelCache[BaseRels[i].ID].limit
                 canaddupgrade = this.ModelRelCache[BaseRels[i].ID].canadd
                 maxccurcostount = this.ModelRelCache[BaseRels[i].ID].cost
                 countofmodel = this.ModelRelCache[BaseRels[i].ID].count_cur
+                countofgroup = this.ModelRelCache[BaseRels[i].ID].group_cur
+                maxofgroup = this.ModelRelCache[BaseRels[i].ID].group_limit
             } else {
                 maxcount = await eventmon.runEvent(
                     "getModelLimitTrue",
                     BaseRels[i],
                     [],
                     maxcount,
+                    this
+                )
+                maxofgroup = await eventmon.runEvent(
+                    "getGroupLimitTrue",
+                    BaseRels[i],
+                    [],
+                    maxofgroup,
                     this
                 )
                 maxccurcostount = await eventmon.runEvent(
@@ -1524,14 +1537,18 @@ class UserWarband extends DynamicContextObject {
                     maxccurcostount,
                     this
                 )
-                countofmodel = await eventmon.runEvent(
+                countofgroup = await eventmon.runEvent(
                     "getCountOfGroup",
                     BaseRels[i],
                     [],
                     this.GetCountOfRel(BaseRels[i].ID),
                     this
                 )
+                countofmodel = this.GetCountOfRel(BaseRels[i].ID)
                 if (! (countofmodel < maxcount || ((BaseRels[i].Minimum == 0 && BaseRels[i].Maximum == -1)))) {
+                    canaddupgrade = false;
+                }
+                if (countofgroup >= maxofgroup) {
                     canaddupgrade = false;
                 }
                 if (count_cost == true && canaddupgrade == true) {
