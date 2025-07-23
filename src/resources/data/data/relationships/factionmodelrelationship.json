@@ -99,7 +99,7 @@
         "cost_type" : 0,
         "restricted_models" : [],
         "warband_minimum" : 0,
-        "warband_maximum" : 0
+        "warband_maximum" : -1
     },
     {
         "id": "rel_fc_md_azeb_explore",
@@ -133,7 +133,7 @@
         "cost_type" : 0,
         "restricted_models" : [],
         "warband_minimum" : 0,
-        "warband_maximum" : 0
+        "warband_maximum" : -1
     },
     {
         "id": "rel_fc_md_sultanatesapper",
@@ -320,7 +320,7 @@
         "cost_type" : 0,
         "restricted_models" : [],
         "warband_minimum" : 0,
-        "warband_maximum" : 0
+        "warband_maximum" : -1
     },
     {
         "id": "rel_fc_md_takwincreation",
@@ -629,7 +629,7 @@
         "cost_type" : 0,
         "restricted_models" : [],
         "warband_minimum" : 0,
-        "warband_maximum" : 0
+        "warband_maximum" : -1
     },
     {
         "id": "rel_fc_md_annointedheavyinfantry",
@@ -969,7 +969,7 @@
         "cost_type" : 0,
         "restricted_models" : [],
         "warband_minimum" : 0,
-        "warband_maximum" : 0
+        "warband_maximum" : -1
     },
     {
         "id": "rel_fc_md_ecclesiasticprisoner",
@@ -986,7 +986,7 @@
         "cost_type" : 0,
         "restricted_models" : [],
         "warband_minimum" : 0,
-        "warband_maximum" : 0
+        "warband_maximum" : -1
     },
     {
         "id": "rel_fc_md_ecclesiasticprisoner_explore",
@@ -1037,7 +1037,7 @@
         "cost_type" : 0,
         "restricted_models" : [],
         "warband_minimum" : 0,
-        "warband_maximum" : 0
+        "warband_maximum" : -1
     },
     {
         "id": "rel_fc_md_stigmaticnun",
@@ -1398,7 +1398,7 @@
         "cost_type" : 0,
         "restricted_models" : [],
         "warband_minimum" : 0,
-        "warband_maximum" : 0
+        "warband_maximum" : -1
     },
     {
         "id": "rel_fc_md_shocktrooper",
@@ -1680,7 +1680,7 @@
         "cost_type" : 0,
         "restricted_models" : [],
         "warband_minimum" : 0,
-        "warband_maximum" : 0
+        "warband_maximum" : -1
     },
     {
         "id": "rel_fc_md_grailthrall_explore",
@@ -1714,7 +1714,7 @@
         "cost_type" : 0,
         "restricted_models" : [],
         "warband_minimum" : 0,
-        "warband_maximum" : 0
+        "warband_maximum" : -1
     },
     {
         "id": "rel_fc_md_grailthrall_flythrall",
@@ -1731,7 +1731,7 @@
         "cost_type" : 0,
         "restricted_models" : [],
         "warband_minimum" : 0,
-        "warband_maximum" : 0
+        "warband_maximum" : -1
     },
     {
         "id": "rel_fc_md_heraldofbeelzebub",
@@ -1884,7 +1884,7 @@
         "cost_type" : 0,
         "restricted_models" : [],
         "warband_minimum" : 0,
-        "warband_maximum" : 0
+        "warband_maximum" : -1
     },
     {
         "id": "rel_fc_md_wretched_court",
@@ -1975,7 +1975,21 @@
         "source": "westfalia",
         "tags": {},
         "name": "",
-        "contextdata": {"option_search_viable": {}},
+        "contextdata": {"option_search_viable": {},
+            "faction_model_count_group": {
+                "filter": [
+                    {
+                        "tag": "dog"
+                    }
+                ],
+                "exceed": [
+                    {
+                        "type": "tag",
+                        "value" : "dog",
+                        "subvalue": false
+                    }
+                ]
+            }},
         "options": [],
         "faction_id" : ["fc_newantioch_fv_redbrigade"],
         "model_id" : "md_trenchdog",
@@ -1992,7 +2006,22 @@
         "source": "westfalia",
         "tags": {},
         "name": "",
-        "contextdata": {"option_search_viable": {}},
+        "contextdata": {"option_search_viable": {},
+            "faction_model_count_group": {
+                "filter": [
+                    {
+                        "tag": "dog"
+                    }
+                ],
+                "exceed": [
+                    {
+                        "type": "tag",
+                        "value" : "dog",
+                        "subvalue": false
+                    }
+                ],
+                "cap": 1
+            }},
         "options": [],
         "faction_id" : ["fc_newantioch_fv_redbrigade"],
         "model_id" : "md_trenchdog_guarddog",
@@ -2009,7 +2038,22 @@
         "source": "westfalia",
         "tags": {},
         "name": "",
-        "contextdata": {"option_search_viable": {}},
+        "contextdata": {"option_search_viable": {},
+            "faction_model_count_group": {
+                "filter": [
+                    {
+                        "tag": "dog"
+                    }
+                ],
+                "exceed": [
+                    {
+                        "type": "tag",
+                        "value" : "dog",
+                        "subvalue": false
+                    }
+                ],
+                "cap": 2
+            }},
         "options": [],
         "faction_id" : ["fc_newantioch_fv_redbrigade"],
         "model_id" : "md_trenchdog_mercydog",
@@ -2026,7 +2070,21 @@
         "source": "westfalia",
         "tags": {},
         "name": "",
-        "contextdata": {"option_search_viable": {}},
+        "contextdata": {"option_search_viable": {},
+            "faction_model_count_group": {
+                "filter": [
+                    {
+                        "tag": "dog"
+                    }
+                ],
+                "exceed": [
+                    {
+                        "type": "tag",
+                        "value" : "dog",
+                        "subvalue": false
+                    }
+                ]
+            }},
         "options": [],
         "faction_id" : ["fc_newantioch_fv_redbrigade"],
         "model_id" : "md_trenchdog_attackdog",

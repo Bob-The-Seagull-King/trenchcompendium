@@ -709,7 +709,7 @@ class UserWarband extends DynamicContextObject {
                 this
             )
         }
-        if (this.GetCountOfRel(RefModel.ID) < maxcount || ((RefModel.Minimum == 0 && RefModel.Maximum == 0))) {
+        if (this.GetCountOfRel(RefModel.ID) < maxcount || ((RefModel.Minimum == 0 && RefModel.Maximum == -1))) {
             return false;
         }
         return true;
@@ -1279,7 +1279,7 @@ class UserWarband extends DynamicContextObject {
 
         for (let i = 0; i < BaseRels.length; i++) {
             
-            if (this.GetCountOfRel(BaseRels[i].ID) < BaseRels[i].Minimum && ((BaseRels[i].Maximum != 0))) {
+            if (this.GetCountOfRel(BaseRels[i].ID) < BaseRels[i].Minimum && ((BaseRels[i].Maximum != -1))) {
                 ListOfRels.push("Your warband has too few " + BaseRels[i].Model.GetTrueName())
             }
         }
@@ -1525,7 +1525,7 @@ class UserWarband extends DynamicContextObject {
                     this
                 )
                 countofmodel = this.GetCountOfRel(BaseRels[i].ID)
-                if (! (countofmodel < maxcount || ((BaseRels[i].Minimum == 0 && BaseRels[i].Maximum == 0)))) {
+                if (! (countofmodel < maxcount || ((BaseRels[i].Minimum == 0 && BaseRels[i].Maximum == -1)))) {
                     canaddupgrade = false;
                 }
                 if (count_cost == true && canaddupgrade == true) {

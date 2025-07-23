@@ -1151,13 +1151,16 @@ export const BaseContextCallTable : CallEventTable = {
     faction_model_count_group: {
         event_priotity: 0,
         async getModelLimitTrue(this: EventRunner, eventSource : FactionModelRelationship, relayVar : number, trackVal : UserWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
-
+            let cap = 999999;
+            if (context_func["cap"]) {
+                cap = context_func["cap"]
+            }
             if (context_func["filter"]) {
                 for (let i = 0 ; i < context_func["filter"].length; i++) {
                     const CurVal = context_func["filter"][i];
                     if (CurVal["tag"]) {
                         if (!containsTag((eventSource).Tags, CurVal["tag"]) && !containsTag((eventSource).Model.Tags, CurVal["tag"])) {
-                            return relayVar;
+                            return Math.min(cap, relayVar);
                         }
                     }
                 }
@@ -1167,7 +1170,7 @@ export const BaseContextCallTable : CallEventTable = {
                 for (let i = 0 ; i < context_func["match"].length; i++) {
                     if (context_func["match"][i]["type"] == "model") {
                         const MatchVal = trackVal.GetCountOfModel(context_func["match"][i]["value"])
-                        return MatchVal;
+                        return Math.min(cap, MatchVal);
                     }
                 }
             }
@@ -1175,11 +1178,12 @@ export const BaseContextCallTable : CallEventTable = {
                 for (let i = 0 ; i < context_func["exceed"].length; i++) {
                     if (context_func["exceed"][i]["type"] == "keyword") {
                         const MatchVal = await trackVal.GetCountOfKeyword(context_func["exceed"][i]["value"])
-                        return MatchVal
+                        return Math.min(cap, MatchVal);
                     }
-                    if (context_func["exceed"][i]["tag"] == "tag") {
+                    if (context_func["exceed"][i]["type"] == "tag") {
                         const MatchVal = await trackVal.GetCountOfTag(context_func["exceed"][i]["value"], context_func["exceed"][i]["subvalue"])
-                        return MatchVal
+                        
+                        return Math.min(cap, MatchVal);
                     }
                 }
             }
@@ -1192,7 +1196,7 @@ export const BaseContextCallTable : CallEventTable = {
                     }
                     
                 }
-                return CurSize;
+                 return Math.min(cap, CurSize);
             }
             
             return relayVar;

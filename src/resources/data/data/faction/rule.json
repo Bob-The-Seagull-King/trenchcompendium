@@ -3044,20 +3044,6 @@
                         ] 
                     }
                 ]
-            },
-            "faction_model_count_group": {
-                "filter": [
-                    {
-                        "tag": "dog"
-                    }
-                ],
-                "exceed": [
-                    {
-                        "tag": "tag",
-                        "value" : "dog",
-                        "subvalue": false
-                    }
-                ]
             }
         },
         "name": "Trench Dogs",
