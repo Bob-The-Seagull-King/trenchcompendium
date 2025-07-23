@@ -1255,10 +1255,6 @@ export const BaseContextCallTable : CallEventTable = {
                         return CurVal["newval"]
                     }
                 }
-                if (context_func["exceed"][0]["type"] == "keyword") {
-                    const MatchVal = await trackVal.GetCountOfKeyword(context_func["exceed"][0]["value"])
-                    return MatchVal
-                }
             }
             if (context_func["match"]) {
                 if (context_func["match"][0]["type"] == "model") {
