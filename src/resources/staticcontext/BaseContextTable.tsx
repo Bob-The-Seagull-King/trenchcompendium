@@ -1155,19 +1155,22 @@ export const BaseContextCallTable : CallEventTable = {
                 for (let i = 0 ; i < context_func["match"].length; i++) {
                     if (context_func["match"][i]["type"] == "model") {
                         const MatchVal = trackVal.GetCountOfModel(context_func["match"][i]["value"])
-                        MatchVal
+                        return MatchVal
                     }
                 }
+            }
+            if (context_func["number"]) {
+                return context_func["number"]
             }
             if (context_func["exceed"]) {
                 for (let i = 0 ; i < context_func["exceed"].length; i++) {
                     if (context_func["exceed"][i]["type"] == "keyword") {
                         const MatchVal = await trackVal.GetCountOfKeyword(context_func["exceed"][i]["value"])
-                        MatchVal
+                        return MatchVal
                     }
                     if (context_func["exceed"][i]["type"] == "tag") {
                         const MatchVal = await trackVal.GetCountOfTag(context_func["exceed"][i]["value"], context_func["exceed"][i]["subvalue"])
-                        MatchVal
+                        return MatchVal
                     }
                 }
             }
