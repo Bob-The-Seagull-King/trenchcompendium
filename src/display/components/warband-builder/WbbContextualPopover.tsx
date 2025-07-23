@@ -1071,14 +1071,14 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                     {/* @TODO: add warband Export here */}
                     <div className={'WbbExportWarband'}>
                         {(item as SumWarband).warband_data &&
-                            <>
+                            <pre style={{ margin: 0, padding: 0, lineHeight: '1', width:"100%",whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>
                             {/* @TODO  MAKE THIS NICE PLEASE */}
                                 {(item as SumWarband).warband_data.BuildExport().map((line, index) => (
-                                <pre key={index} style={{ margin: 0, padding: 0, lineHeight: '1', width:"100%",whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>
+                                <div key={index} >
                                     {line}
-                                </pre>
+                                </div>
                                 ))}
-                            </>
+                            </pre>
 
                         }
                     </div>
