@@ -1201,7 +1201,7 @@ export const BaseContextCallTable : CallEventTable = {
                     }
                     if (CurVal["id"]) {
                         let curcount = 0;
-                        for (let j = 0; i < CurVal["id"].length; j++) {
+                        for (let j = 0; j < CurVal["id"].length; j++) {
                             const MatchVal = await trackVal.GetCountOfModel(CurVal["id"][j])
                             curcount += MatchVal;
                         }
