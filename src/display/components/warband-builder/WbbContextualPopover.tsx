@@ -413,7 +413,7 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
         showConfirmExportWarbandModal
     ]);
     return (
-        <>
+        <div onClick={(e) => e.stopPropagation()}>
             <ToastContainer
                 position="bottom-right"
                 autoClose={5000}
@@ -903,7 +903,12 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                         icon={faXmark}
                         className="modal-close-icon"
                         role="button"
-                        onClick={() => setshowConfirmSellEquipmentModal(false)}
+                        onClick={
+                            (e) => {
+                                e.stopPropagation();
+                                setshowConfirmSellEquipmentModal(false);
+                            }
+                        }
                     />
                 </Modal.Header>
 
@@ -925,10 +930,15 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                 </Modal.Body>
 
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={() => setshowConfirmSellEquipmentModal(false)}>
+                    <Button variant="secondary" onClick={
+                        (e) => {
+                            e.stopPropagation();
+                            setshowConfirmSellEquipmentModal(false);
+                        }
+                    }>
                         Cancel
                     </Button>
-                    <Button variant="primary" onClick={handleSellEquipment}>
+                    <Button variant="primary" onClick={withStopPropagation(handleSellEquipment)}>
                         Sell Equipment
                     </Button>
                 </Modal.Footer>
@@ -1119,7 +1129,7 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                     </Button>
                 </Modal.Footer>
             </Modal>
-        </>
+        </div>
     );
 };
 

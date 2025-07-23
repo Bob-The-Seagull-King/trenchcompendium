@@ -64,44 +64,47 @@ const WbbMoveEquipmentToFighterModal: React.FC<WbbEditSelectionProps> = ({
     };
 
     return (
-        <Modal className="WbbEditGoeticSelectionModal" show={show} onHide={onClose} centered>
-            <Modal.Header closeButton>
-                <Modal.Title>{`Move Equipment to Fighter`}</Modal.Title>
-            </Modal.Header>
+        <div onClick={(e) => e.stopPropagation()}>
+            <Modal className="WbbEditGoeticSelectionModal" show={show} onHide={onClose} centered >
+                <Modal.Header closeButton>
+                    <Modal.Title>{`Move Equipment to Fighter`}</Modal.Title>
+                </Modal.Header>
 
-            <Modal.Body>
-                <div className={'mb-3'}>
-                    <div className={'goetic-selection-wrap'} key={keyvar}>
-                        {warband?.Models.map((discipline) => (
-                        <div
-                            key={discipline.HeldObject.ID + discipline.HeldObject.ID}
-                            className={`select-item ${selectedFighter === discipline ? 'selected' : ''} ${fighterlist.includes(discipline) ? '' : ' disabled'}`}
-                            onClick={() => {
-                                if (fighterlist.includes(discipline)) {
-                                    setSelectedFighter(discipline)
-                                }
-                            }}
-                        >
-                            {(discipline.HeldObject as WarbandMember).GetFighterName()}
+                <Modal.Body>
+                    <div className={'mb-3'}>
+                        <div className={'goetic-selection-wrap'} key={keyvar}>
+                            {warband?.Models.map((discipline) => (
+                            <div
+                                key={discipline.HeldObject.ID + discipline.HeldObject.ID}
+                                className={`select-item ${selectedFighter === discipline ? 'selected' : ''} ${fighterlist.includes(discipline) ? '' : ' disabled'}`}
+                                onClick={() => {
+                                    if (fighterlist.includes(discipline)) {
+                                        setSelectedFighter(discipline)
+                                    }
+                                }}
+                            >
+                                {(discipline.HeldObject as WarbandMember).GetFighterName()}
+                            </div>
+                            ))}
+
                         </div>
-                        ))}
-                        
                     </div>
-                </div>
-                <div >
-                    <strong>Move {(contextItem.equipment != undefined)? contextItem.equipment.GetTrueName() : ""}</strong>?
-                </div>
-            </Modal.Body>
+                    <div >
+                        <strong>Move {(contextItem.equipment != undefined)? contextItem.equipment.GetTrueName() : ""}</strong>?
+                    </div>
+                </Modal.Body>
 
-            <Modal.Footer>
-                <Button variant="secondary" onClick={onClose}>
-                    Cancel
-                </Button>
-                <Button variant="primary" onClick={handleSubmit}>
-                    Move Equipment
-                </Button>
-            </Modal.Footer>
-        </Modal>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={onClose}>
+                        Cancel
+                    </Button>
+                    <Button variant="primary" onClick={handleSubmit}>
+                        Move Equipment
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+        </div>
+
     );
 };
 
