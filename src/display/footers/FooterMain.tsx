@@ -3,7 +3,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPlus} from "@fortawesome/free-solid-svg-icons";
 import CustomNavLink from "../components/subcomponents/interactables/CustomNavLink";
 import {ROUTES} from "../../resources/routes-constants";
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import {useAuth} from "../../utility/AuthContext";
 
 
@@ -11,6 +11,13 @@ const FooterMain: React.FC = () => {
 
     const navigate = useNavigate();
     const { userId, isLoggedIn } = useAuth()
+
+
+    /** Hide Footer in Warband Builder */
+    const location = useLocation();
+    const isInsideWarbandRoute = location.pathname.startsWith('/warband/') && location.pathname !== '/warband';
+
+
 
     // main rules related links
     const rules_links = [
@@ -121,33 +128,36 @@ const FooterMain: React.FC = () => {
 
     return (
         <footer className="FooterMain">
-            <div className={'footer-upper'}>
-                <div className={'container'}>
-                    <div className={'row'}>
-                        {footer_link_lists.map((list, i) => (
-                            <div className={'col-12 col-sm-6 col-lg-3'} key={i}>
-                                <div className={'footer-link-list'}>
-                                    <h6>{list.title}</h6>
-                                    <ul>
-                                        {list.links.map((linkItem, j) => (
-                                            <li key={j}>
-                                                <CustomNavLink
-                                                    link={linkItem.link}
-                                                    runfunc={() => {
-                                                        navigate(linkItem.link)
-                                                    }}>
-                                                    {linkItem.title}
-                                                </CustomNavLink>
-                                            </li>
-                                        ))}
-                                    </ul>
+            {!isInsideWarbandRoute &&
+                <div className={'footer-upper'}>
+                    <div className={'container'}>
+                        <div className={'row'}>
+                            {footer_link_lists.map((list, i) => (
+                                <div className={'col-12 col-sm-6 col-lg-3'} key={i}>
+                                    <div className={'footer-link-list'}>
+                                        <h6>{list.title}</h6>
+                                        <ul>
+                                            {list.links.map((linkItem, j) => (
+                                                <li key={j}>
+                                                    <CustomNavLink
+                                                        link={linkItem.link}
+                                                        runfunc={() => {
+                                                            navigate(linkItem.link)
+                                                        }}>
+                                                        {linkItem.title}
+                                                    </CustomNavLink>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
                                 </div>
-                            </div>
-                        ))}
+                            ))}
 
+                        </div>
                     </div>
                 </div>
-            </div>
+            }
+
 
             <div className={'footer-bar'}>
                 <div className={'container'}>
