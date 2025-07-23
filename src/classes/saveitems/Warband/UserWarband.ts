@@ -1565,7 +1565,9 @@ class UserWarband extends DynamicContextObject {
                     cost: maxccurcostount,
                     count_cur: countofmodel,
                     facrel: BaseRels[i],
-                    limit: maxcount
+                    limit: maxcount,
+                    group_cur: countofgroup,
+                    group_limit: maxofgroup
                 }
             }
 
