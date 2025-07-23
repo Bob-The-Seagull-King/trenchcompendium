@@ -1548,7 +1548,7 @@ class UserWarband extends DynamicContextObject {
                 if (! (countofmodel < maxcount || ((BaseRels[i].Minimum == 0 && BaseRels[i].Maximum == -1)))) {
                     canaddupgrade = false;
                 }
-                if (countofgroup >= maxofgroup) {
+                if (!(countofgroup < maxofgroup || ((BaseRels[i].Minimum == 0 && BaseRels[i].Maximum == -1)))) {
                     canaddupgrade = false;
                 }
                 if (count_cost == true && canaddupgrade == true) {
