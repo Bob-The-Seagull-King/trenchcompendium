@@ -1907,10 +1907,6 @@ class WarbandMember extends DynamicContextObject {
             }
             if (EquipItem.Stats["hands_ranged"]) {
                 let rangedval = EquipItem.Stats["hands_ranged"];
-                if (IsStrong && rangedval == 2) {
-                    rangedval = 1;
-                    IsStrong = false;
-                }
                 if (containsTag(EquipItem.Tags, "shield") && RangedShield) {
                     rangedval = 0;
                 }
