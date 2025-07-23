@@ -46,6 +46,8 @@ import StaticCollaborate from "./display/pages/StaticCollaborate";
 import StaticAbout from './display/pages/StaticAbout'
 import StaticPlanSelection from "./display/pages/StaticPlanSelection";
 import {AdsManager} from "./display/components/generics/AdsManager";
+import BlogListPage from "./display/pages/BlogListPage";
+import BlogArticlePage from "./display/pages/BlogArticlePage";
 
 
 const App: React.FC = () => {
@@ -107,7 +109,9 @@ const App: React.FC = () => {
                                 {/* Static Pages - Membership & Purchases */}
                                 <Route path={ROUTES.PAGE_PLAN_SELECTION} element={<StaticPlanSelection />} /> {/* Membership Plan Selection Page */}
 
-
+                                {/* Blog Pages */}
+                                <Route path="/blog" element={<BlogListPage />} />
+                                <Route path="/blog/:slug" element={<BlogArticlePage />} />
                             </Routes>
 
                             <FooterMain />
