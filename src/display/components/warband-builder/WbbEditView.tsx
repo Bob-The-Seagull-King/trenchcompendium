@@ -59,32 +59,6 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
         }
     }, [warbandData]);
 
-    /** Enable Browser Navigation for all detail types */
-    // useEffect(() => {
-    //     const searchParams = new URLSearchParams(location.search);
-    //
-    //     if (searchParams.has('fighter')) {
-    //         const fighterId = searchParams.get('fighter');
-    //         const fighter = warband?.warband_data.GetFighters().find(f => f.model.ID === fighterId);
-    //         if (fighter) {
-    //             setDetailType('fighter');
-    //             setDetailPayload(fighter);
-    //         }
-    //     } else if (searchParams.has('stash')) {
-    //         setDetailType('stash');
-    //         setDetailPayload(null);
-    //     } else if (searchParams.has('campaign')) {
-    //         setDetailType('campaign');
-    //         setDetailPayload(null);
-    //     } else if (searchParams.has('warband')) {
-    //         setDetailType('warband');
-    //         setDetailPayload(null);
-    //     } else {
-    //         setDetailType(null);
-    //         setDetailPayload(null);
-    //     }
-    // }, [location.search, warband]);
-
     //** Start Detail view stuff
     type DetailType = 'fighter' | 'stash' | 'warband' | 'campaign' | null;
 
@@ -95,7 +69,7 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
         setDetailType(type);
         setDetailPayload(payload);
 
-        // Nur History pushen, wenn vorher keine Detailansicht offen war
+        // Only push history if detail view was not open
         if (detailType === null) {
             window.history.pushState({ detailOpen: true }, '');
         }
@@ -105,7 +79,7 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
         setDetailType(null);
         setDetailPayload(null);
 
-        // Stelle ursprünglichen State wieder her, ohne neue URL
+        // Recover old history state
         window.history.replaceState({}, '');
     };
 
