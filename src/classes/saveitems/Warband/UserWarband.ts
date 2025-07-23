@@ -1806,7 +1806,9 @@ class UserWarband extends DynamicContextObject {
 
     public async GetFireteams() {
         const PropertyList : WarbandProperty[] = [];
-
+        if (this.GeneralCache.fireteam_list == null) {
+            await this.BuildModifiersFireteam(this.ConvertToInterface().fireteams);
+        }
         for (let i = 0; i < this.Fireteams.length; i++) {
             PropertyList.push(this.Fireteams[i])    
         }
