@@ -15,8 +15,10 @@ const FooterMain: React.FC = () => {
 
     /** Hide Footer in Warband Builder */
     const location = useLocation();
-    const isInsideWarbandRoute = location.pathname.startsWith('/warband/') && location.pathname !== '/warband';
-
+    const isInsideWarbandRoute =
+        location.pathname.startsWith('/warband/') &&
+        location.pathname !== '/warband' &&
+        location.pathname !== '/warband/';
 
 
     // main rules related links
