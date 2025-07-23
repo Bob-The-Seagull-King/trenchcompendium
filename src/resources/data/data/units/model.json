@@ -2048,7 +2048,7 @@
             "potential": 0
         },
         "keywords" : ["kw_antioch"],
-        "abilities" : ["ab_battlefielddemolition","ab_fortify","ab_demineengineer"]
+        "abilities" : ["ab_battlefielddemolition","ab_fortifyeng","ab_demineengineer"]
     },
     {
         "id": "md_amalgam",
