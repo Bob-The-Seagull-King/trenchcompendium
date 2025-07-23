@@ -27,6 +27,8 @@ import { Keyword } from '../../../classes/feature/glossary/Keyword';
 import RulesEquipmentStats from "../rules-content/RulesEquipmentStats";
 import RulesEquipmentMain from "../rules-content/RulesEquipmentMain";
 import RulesOverlay from "../rules-content/RulesOverlay";
+import WbbEquipmentStats from './modals/warband/WbbEquipmentStats';
+import WbbEquipmentMain from './modals/warband/WbbEquipmentMain';
 
 interface EquipmentItemProps {
     item: WarbandPurchase
@@ -85,7 +87,7 @@ const WbbEquipmentListItem: React.FC<EquipmentItemProps> = ({ item, fighter }) =
 
             <Modal show={showDetailsModal} onHide={() => setShowDetailsModal(false)} className="" centered>
                 <Modal.Header closeButton={false}>
-                    <Modal.Title>@TODO: ITEM NAME</Modal.Title>
+                    <Modal.Title>{ItemValue.GetTrueName()}</Modal.Title>
 
                     <FontAwesomeIcon
                         icon={faXmark}
@@ -101,16 +103,15 @@ const WbbEquipmentListItem: React.FC<EquipmentItemProps> = ({ item, fighter }) =
                 </Modal.Header>
 
                 <Modal.Body>
-                    @TODO: ITEM DETAILS
-                    {/* @TODO: Hook up Equipment to this: */}
-                    {/* <div className={'rules-equipment-main'}>*/}
-                    {/* Stats */}
-                    {/*<RulesEquipmentStats*/}
-                    {/*    facrelObject={factionequipmentObject}*/}
-                    {/*    baseobject={factionequipmentObject.EquipmentItem}*/}
-                    {/*/>*/}
-                    {/*<RulesEquipmentMain data={factionequipmentObject.EquipmentItem}/>*/}
-                    {/*</div>*/}
+                    <div className={'rules-equipment-main'}>
+                        <WbbEquipmentStats
+                        item={item}
+                        fighter={fighter}
+                        />
+                        <WbbEquipmentMain
+                        item={item}
+                        keywords={keywordlist}/>
+                    </div>
                 </Modal.Body>
             </Modal>
 
