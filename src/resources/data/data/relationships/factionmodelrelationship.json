@@ -1280,13 +1280,13 @@
     {
         "id": "rel_fc_md_trenchcleric_redbrigade",
         "source": "core",
-        "tags": {"displeasedfaith": true},
+        "tags": {},
         "name": "",
         "contextdata": {"option_search_viable": {},
         "faction_model_count_group": {
             "filter": [
                 {
-                    "tag": "displeasedfaith"
+                    "id": ["md_trenchcleric","md_sniperpriest"]
                 }
             ],
             "number": 2
@@ -1356,12 +1356,12 @@
     {
         "id": "rel_fc_md_sniperpriest",
         "source": "core",
-        "tags": {"displeasedfaith": true},
+        "tags": {},
         "name": "",
         "contextdata": {"option_search_viable": {},
             "filter": [
                 {
-                    "tag": "displeasedfaith"
+                    "id": ["md_trenchcleric","md_sniperpriest"]
                 }
             ],
             "number": 2

@@ -1151,6 +1151,10 @@ export const BaseContextCallTable : CallEventTable = {
     faction_model_count_group: {
         event_priotity: 0,
         async getGroupLimitTrue(this: EventRunner, eventSource : FactionModelRelationship, relayVar : number, trackVal : UserWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            
+            if (context_func["number"]) {
+                return context_func["number"]
+            }
             if (context_func["match"]) {
                 for (let i = 0 ; i < context_func["match"].length; i++) {
                     if (context_func["match"][i]["type"] == "model") {
@@ -1158,9 +1162,6 @@ export const BaseContextCallTable : CallEventTable = {
                         return MatchVal
                     }
                 }
-            }
-            if (context_func["number"]) {
-                return context_func["number"]
             }
             if (context_func["exceed"]) {
                 for (let i = 0 ; i < context_func["exceed"].length; i++) {
@@ -1198,6 +1199,15 @@ export const BaseContextCallTable : CallEventTable = {
                         
                         return MatchVal
                     }
+                    if (CurVal["id"]) {
+                        let curcount = 0;
+                        for (let j = 0; i < CurVal["id"].length; j++) {
+                            const MatchVal = await trackVal.GetCountOfModel(CurVal["id"][j])
+                            curcount += MatchVal;
+                        }
+                        
+                        return curcount
+                    }
                 }
             }
             
@@ -1208,15 +1218,6 @@ export const BaseContextCallTable : CallEventTable = {
         event_priotity: 0,
         async getModelLimitTrue(this: EventRunner, eventSource : any, relayVar : number, trackVal : UserWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
 
-            if (context_func["change"]) {
-                for (let i = 0; i < context_func["change"].length; i++) {
-                    const CurVal = context_func["change"][i]
-                    const MatchVal = await trackVal.GetCountOfModel(CurVal["id"])
-                    if (MatchVal > 0) {
-                        return CurVal["newval"]
-                    }
-                }
-            }
             if (context_func["match"]) {
                 if (context_func["match"][0]["type"] == "model") {
                     const MatchVal = trackVal.GetCountOfModel(context_func["match"][0]["value"])
