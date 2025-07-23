@@ -60,30 +60,30 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
     }, [warbandData]);
 
     /** Enable Browser Navigation for all detail types */
-    useEffect(() => {
-        const searchParams = new URLSearchParams(location.search);
-
-        if (searchParams.has('fighter')) {
-            const fighterId = searchParams.get('fighter');
-            const fighter = warband?.warband_data.GetFighters().find(f => f.model.ID === fighterId);
-            if (fighter) {
-                setDetailType('fighter');
-                setDetailPayload(fighter);
-            }
-        } else if (searchParams.has('stash')) {
-            setDetailType('stash');
-            setDetailPayload(null);
-        } else if (searchParams.has('campaign')) {
-            setDetailType('campaign');
-            setDetailPayload(null);
-        } else if (searchParams.has('warband')) {
-            setDetailType('warband');
-            setDetailPayload(null);
-        } else {
-            setDetailType(null);
-            setDetailPayload(null);
-        }
-    }, [location.search, warband]);
+    // useEffect(() => {
+    //     const searchParams = new URLSearchParams(location.search);
+    //
+    //     if (searchParams.has('fighter')) {
+    //         const fighterId = searchParams.get('fighter');
+    //         const fighter = warband?.warband_data.GetFighters().find(f => f.model.ID === fighterId);
+    //         if (fighter) {
+    //             setDetailType('fighter');
+    //             setDetailPayload(fighter);
+    //         }
+    //     } else if (searchParams.has('stash')) {
+    //         setDetailType('stash');
+    //         setDetailPayload(null);
+    //     } else if (searchParams.has('campaign')) {
+    //         setDetailType('campaign');
+    //         setDetailPayload(null);
+    //     } else if (searchParams.has('warband')) {
+    //         setDetailType('warband');
+    //         setDetailPayload(null);
+    //     } else {
+    //         setDetailType(null);
+    //         setDetailPayload(null);
+    //     }
+    // }, [location.search, warband]);
 
     //** Start Detail view stuff
     type DetailType = 'fighter' | 'stash' | 'warband' | 'campaign' | null;
@@ -94,20 +94,21 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
         setDetailType(type);
         setDetailPayload(payload);
 
-        let query = '';
+        const params = new URLSearchParams();
 
         if (type === 'fighter' && payload?.Slug) {
-            query = `?fighter=${payload.Slug}`;
-        } else if (type === 'stash') {
-            query = `?stash`;
-        } else if (type === 'campaign') {
-            query = `?campaign`;
-        } else if (type === 'warband') {
-            query = `?warband`;
+            params.set('fighter', payload.Slug);
+        } else if (type) {
+            params.set(type, '');
         }
 
-        // Always preserve the full pathname (like /warband/edit/WarbandName)
-        navigate(`${location.pathname}${query}`, { replace: false });
+        // Nur pushen, wenn von "null" kommend
+        if (detailType === null) {
+            navigate(`${location.pathname}?${params.toString()}`, { replace: false });
+        } else {
+            // ersetze die URL statt neuen Eintrag zu erzeugen
+            navigate(`${location.pathname}?${params.toString()}`, { replace: true });
+        }
     };
     const closeDetail = () => {
         setDetailType(null);
