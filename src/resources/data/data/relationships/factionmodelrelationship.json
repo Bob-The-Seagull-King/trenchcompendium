@@ -1358,13 +1358,7 @@
         "source": "core",
         "tags": {},
         "name": "",
-        "contextdata": {"option_search_viable": {},
-            "filter": [
-                {
-                    "id": ["md_trenchcleric","md_sniperpriest"]
-                }
-            ],
-            "number": 2
+        "contextdata": {"option_search_viable": {}
         },
         "options": [],
         "faction_id" : ["fc_newantioch","fc_newantioch_fv_kingdomofalbaassaultdetatchment","fc_newantioch_fc_eirerangers","fc_newantioch_fv_papalstatesinterventionforce","fc_newantioch_fv_papalstatesinterventionforce"],
@@ -1383,13 +1377,13 @@
         "tags": {},
         "name": "",
         "contextdata": {"option_search_viable": {},
-        "faction_model_count_special": {
-            "change": [
+        "faction_model_count_group": {
+            "filter": [
                 {
-                    "id" : "rel_fc_md_trenchcleric_redbrigade",
-                    "newval": 1
+                    "id": ["md_trenchcleric","md_sniperpriest"]
                 }
-            ]
+            ],
+            "number": 2
         }},
         "options": [],
         "faction_id" : ["fc_newantioch_fv_redbrigade"],
