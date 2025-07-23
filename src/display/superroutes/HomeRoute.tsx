@@ -32,27 +32,58 @@ const HomeRoute: React.FC = () => {
 
                     <div className={'spacer-20'}></div>
 
-                    <div className={'row'}>
-                        <div className={'col-12 col-md-6'}>
-                            <MenuComponent Title={"Rules Compendium"} Route={"compendium/"} bgImageID={17}/>
+                    <div className={'narrow-content'}>
+                        <h1>{'Trench Companion'}</h1>
+                        <div className={'sub-headline'}>
+                            {'Your digital assistant for the world of Trench Crusad'}
                         </div>
 
-                        <div className={'col-12 col-md-6'}>
-                            <MenuComponent Title={"Warband Builder"} Route={"warband/"} bgImageID={15}/>
+                        <div className={'spacer-20'}></div>
 
+                        <p className={'intro-text'}>
+                            {'Build your warband, access the full rules, and stay up to date — all in one place.\n' +
+                                'Trench Companion is a free, community-made tool designed to support players on and off the battlefield.'}
+                        </p>
+
+                        <div className={'row main-links'}>
+                            <div className={'col-12 col-md-6'}>
+                                <MenuComponent Title={"Rules Compendium"} Route={"compendium/"} bgImageID={17}/>
+                            </div>
+
+                            <div className={'col-12 col-md-6'}>
+                                <MenuComponent Title={"Warband Builder"} Route={"warband/"} bgImageID={15}/>
+
+                            </div>
+
+                            <div className={'col-12 col-md-6'}>
+                                <MenuComponent Title={"Campaign Manager"} Route={"campaign/"} bgImageID={16}
+                                               comingSoon={true}
+                                />
+                            </div>
+
+                            <div className={'col-12 col-md-6'}>
+                                <MenuComponent Title={"Play Mode"} Route={"play/"} bgImageID={19}
+                                               comingSoon={true}
+                                />
+                            </div>
                         </div>
 
-                        <div className={'col-12 col-md-6'}>
-                            <MenuComponent Title={"Campaign Manager"} Route={"campaign/"} bgImageID={16} comingSoon={true}/>
-                        </div>
+                        <hr/>
 
-                        <div className={'col-12 col-md-6'}>
-                            <MenuComponent Title={"Play Mode"} Route={"play/"} bgImageID={19} comingSoon={true}/>
-                        </div>
+                        <h2>{'What is Trench Companion?'}</h2>
+
+                        <p>
+                            {'Trench Companion is a community-driven, free-to-use web app created by and for fans of Trench Crusade.\n' +
+                                'Version 1 will launch in August 2025, starting with the Warband Builder and Compendium.\n' +
+                                'Campaign mode, Scenario Tracker, and more features are already in development.\n' +
+                                '\n' +
+                                'Want to support the project? Consider a small monthly contribution — it helps us keep going.'}
+                        </p>
                     </div>
 
+                    <div className={'spacer-20'}></div>
+                    <div className={'spacer-20'}></div>
 
-                    
                 </div>
             </div>
         </ErrorBoundary>

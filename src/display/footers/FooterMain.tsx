@@ -67,10 +67,10 @@ const FooterMain: React.FC = () => {
             title: 'Premium Membership',
             link: ROUTES.PAGE_MEMBERSHIP
         },
-        {
-            title: 'Supporter Packs',
-            link: ROUTES.PAGE_SUPPORTER_PACKS
-        },
+        // {
+        //     title: 'Supporter Packs',
+        //     link: ROUTES.PAGE_SUPPORTER_PACKS
+        // },
         {
             title: 'Collaborations',
             link: ROUTES.PAGE_COLLABORATE
