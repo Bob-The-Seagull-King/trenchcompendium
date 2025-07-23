@@ -10,7 +10,7 @@ import {
     faArrowUp,
     faArrowLeft,
     faCoins,
-    faEdit, faPen, faFileExport, faDice, faSignature, faPrint, faArrowRotateLeft, faSackDollar, faXmark
+    faEdit, faPen, faFileExport, faDice, faSignature, faPrint, faArrowRotateLeft, faSackDollar, faXmark, faCheck
 } from '@fortawesome/free-solid-svg-icons';
 import { usePopover } from '../../../context/PopoverContext';
 import { useWarband } from '../../../context/WarbandContext';
@@ -53,7 +53,8 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
     const { playMode, togglePlayMode } = usePlayMode();
     const { setPrintMode } = usePrintMode();
     const [newname, setName] = useState("")
-
+    const [exportFull, setExportFull] = useState<boolean>(true); // export options
+    const [exportCopySuccess, setExportCopySuccess] = useState<boolean>(false); // export copied to clipboard
     const isActive = activePopoverId === id;
 
     const handleToggle = () => {
@@ -414,6 +415,7 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
         showConfirmRenameWarbandModal,
         showConfirmExportWarbandModal
     ]);
+
     return (
         <div onClick={(e) => e.stopPropagation()}>
             <ToastContainer
@@ -1077,23 +1079,78 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                 </Modal.Header>
 
                 <Modal.Body>
-
-                    {/* @TODO: add warband Export here */}
                     <div className={'WbbExportWarband'}>
-                        {(item as SumWarband).warband_data &&
-                            <pre style={{ margin: 0, padding: 0, lineHeight: '1', width:"100%",whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>
-                            {/* @TODO  MAKE THIS NICE PLEASE */}
-                                {(item as SumWarband).warband_data.BuildExport().map((line, index) => (
-                                <div key={index} >
-                                    {line}
-                                </div>
-                                ))}
+
+
+                        <div className={'mb-1'}>
+                            <label>
+                                {'Export Style'}
+                            </label>
+                        </div>
+
+                        <div className="btn-group" role="group">
+                            <button
+                                type="button"
+                                className={`btn btn-secondary ${exportFull ? 'active' : ''}`}
+                                onClick={() => setExportFull(true)}
+                            >
+                                Full
+                            </button>
+                            <button
+                                type="button"
+                                className={`btn btn-secondary ${!exportFull ? 'active' : ''}`}
+                                onClick={() => setExportFull(false)}
+                            >
+                                Compact
+                            </button>
+                        </div>
+
+
+                        <hr/>
+
+                        <button
+                            className={`btn btn-primary btn-copy mb-3 w-100 ${exportCopySuccess ? 'copy-success' : ''}`}
+                            onClick={() => {
+                                const exportText = (item as SumWarband).warband_data.BuildExport(exportFull).join('\n');
+                                navigator.clipboard.writeText(exportText);
+                                setExportCopySuccess(true);
+                                setTimeout(() => setExportCopySuccess(false), 4000);
+                            }}
+                        >
+
+                            {exportCopySuccess ? (
+                                <>
+                                    <FontAwesomeIcon icon={faCheck} className={'icon-inline-left-l'}/>
+                                    {'Copied'}
+                                </>
+                            ): (
+                                <>
+                                    <FontAwesomeIcon icon={faCopy} className={'icon-inline-left-l'}/>
+                                    {'Copy to Clipboard'}
+                                </>
+                            )}
+                        </button>
+
+                        <div className={'export-wrap'}>
+                            {(item as SumWarband).warband_data &&
+                                <pre style={{
+                                    margin: 0,
+                                    padding: 0,
+                                    lineHeight: '1',
+                                    width: "100%",
+                                    whiteSpace: 'pre-wrap',
+                                    wordBreak: 'break-word'
+                                }}>
+                                    {(item as SumWarband).warband_data.BuildExport(exportFull).map((line, index) => (
+                                        <div key={index}>
+                                            {line}
+                                        </div>
+                                    ))}
                             </pre>
 
-                        }
+                            }
+                        </div>
                     </div>
-
-
                 </Modal.Body>
 
                 <Modal.Footer>
