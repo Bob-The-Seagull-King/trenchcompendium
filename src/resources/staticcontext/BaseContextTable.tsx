@@ -1201,6 +1201,21 @@ export const BaseContextCallTable : CallEventTable = {
             
             return relayVar;
         },
+        async getCountOfGroup(this: EventRunner, eventSource : any, relayVar : number,  trackVal : UserWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            
+            if (context_func["filter"]) {
+                for (let i = 0 ; i < context_func["filter"].length; i++) {
+                    const CurVal = context_func["filter"][i];
+                    if (CurVal["tag"]) {
+                        const MatchVal = await trackVal.GetCountOfTag(CurVal["tag"], true)
+                        
+                        return MatchVal
+                    }
+                }
+            }
+            
+            return relayVar;
+        },
         async getModelLimitPresentation(this: EventRunner, eventSource : any, relayVar : string[], trackVal : boolean, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
             
             const { ModelFactory } = await import("../../factories/features/ModelFactory");
@@ -1232,6 +1247,19 @@ export const BaseContextCallTable : CallEventTable = {
         event_priotity: 0,
         async getModelLimitTrue(this: EventRunner, eventSource : any, relayVar : number, trackVal : UserWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
 
+            if (context_func["change"]) {
+                for (let i = 0; i < context_func["change"].length; i++) {
+                    const CurVal = context_func["change"][i]
+                    const MatchVal = await trackVal.GetCountOfModel(CurVal["id"])
+                    if (MatchVal > 0) {
+                        return CurVal["newval"]
+                    }
+                }
+                if (context_func["exceed"][0]["type"] == "keyword") {
+                    const MatchVal = await trackVal.GetCountOfKeyword(context_func["exceed"][0]["value"])
+                    return MatchVal
+                }
+            }
             if (context_func["match"]) {
                 if (context_func["match"][0]["type"] == "model") {
                     const MatchVal = trackVal.GetCountOfModel(context_func["match"][0]["value"])

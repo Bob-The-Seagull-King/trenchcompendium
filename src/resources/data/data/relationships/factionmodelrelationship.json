@@ -1356,7 +1356,32 @@
         "name": "",
         "contextdata": {"option_search_viable": {}},
         "options": [],
-        "faction_id" : ["fc_newantioch","fc_newantioch_fv_redbrigade","fc_newantioch_fv_kingdomofalbaassaultdetatchment","fc_newantioch_fc_eirerangers","fc_newantioch_fv_papalstatesinterventionforce","fc_newantioch_fv_papalstatesinterventionforce"],
+        "faction_id" : ["fc_newantioch","fc_newantioch_fv_kingdomofalbaassaultdetatchment","fc_newantioch_fc_eirerangers","fc_newantioch_fv_papalstatesinterventionforce","fc_newantioch_fv_papalstatesinterventionforce"],
+        "model_id" : "md_sniperpriest",
+        "captain" : false,
+        "mercenary": false,
+        "cost" : 50,
+        "cost_type" : 0,
+        "restricted_models" : [],
+        "warband_minimum" : 0,
+        "warband_maximum" : 2
+    },
+    {
+        "id": "rel_fc_md_sniperpriest_red_brigade",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {"option_search_viable": {},
+        "faction_model_count_special": {
+            "change": [
+                {
+                    "id" : "rel_fc_md_trenchcleric_redbrigade",
+                    "newval": 1
+                }
+            ]
+        }},
+        "options": [],
+        "faction_id" : ["fc_newantioch_fv_redbrigade"],
         "model_id" : "md_sniperpriest",
         "captain" : false,
         "mercenary": false,

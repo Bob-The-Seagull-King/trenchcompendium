@@ -482,7 +482,32 @@
         "source": "core",
         "tags": {"dog": true},
         "contextdata": {
-            "unarmed_penalty_remove": {}
+            "unarmed_penalty_remove": {},
+            
+            "model_equipment_restriction": {
+                "removed": [
+                    {
+                        "category": "equipment",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "melee",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "ranged",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "armour",
+                        "res_type": "all",
+                        "value": ""
+                    }
+                ]
+            }
         },
         "description": [
             {

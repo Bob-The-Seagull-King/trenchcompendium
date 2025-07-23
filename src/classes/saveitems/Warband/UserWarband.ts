@@ -1524,7 +1524,13 @@ class UserWarband extends DynamicContextObject {
                     maxccurcostount,
                     this
                 )
-                countofmodel = this.GetCountOfRel(BaseRels[i].ID)
+                countofmodel = await eventmon.runEvent(
+                    "getCountOfGroup",
+                    BaseRels[i],
+                    [],
+                    this.GetCountOfRel(BaseRels[i].ID),
+                    this
+                )
                 if (! (countofmodel < maxcount || ((BaseRels[i].Minimum == 0 && BaseRels[i].Maximum == -1)))) {
                     canaddupgrade = false;
                 }
