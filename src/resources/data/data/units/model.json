@@ -2089,9 +2089,7 @@
         "contextdata": {
             
             "set_arms": {"ranged": 0, "melee": 0, "special": 6},
-            "weapon_duplicate_limit": {
-                "limit": 2
-            },
+            "no_shield_combo": {},
             "model_equipment_restriction": {
                 "removed": [
                     {
@@ -2110,6 +2108,20 @@
                         "category": "armour",
                         "res_type": "id",
                         "value": "eq_trenchshield"
+                    }
+                ]
+            },
+            "model_equipment_limit": {
+                "maximum": [
+                    {
+                        "res_type": "keyword",
+                        "value": "kw_heavy",
+                        "limit": 2
+                    },
+                    {
+                        "res_type": "self",
+                        "value": "",
+                        "limit": 2
                     }
                 ]
             }
@@ -3022,7 +3034,7 @@
         "source": "core",
         "tags": {},
         "contextdata": {
-            "set_arms": {"ranged": 0, "melee": 3, "special": 0},
+            "set_arms": { "melee": 3, "ranged": 0, "special": 0},
             "model_equipment_restriction": {
                 "removed": [
                     {
@@ -3039,6 +3051,16 @@
                         "category": "ranged",
                         "res_type": "all",
                         "value": ""
+                    }
+                ]
+            },
+            "model_equipment_limit": {
+                "maximum": [
+                    {
+                        "res_type": "stat",
+                        "value": "hands_melee",
+                        "subvalue": 2,
+                        "limit": 1
                     }
                 ]
             }

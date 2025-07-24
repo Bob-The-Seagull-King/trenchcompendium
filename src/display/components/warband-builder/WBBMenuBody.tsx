@@ -47,7 +47,7 @@ const WBBMenuBody: React.FC<WBBMenuBodyProps> = ({ controller, onBack, onNavigat
                 SetOfWarbands.push(
                     {
                         title: tools.UserWarbandManager.CurWarbands()[i].warband_data.Name,
-                        slug: 'view/'+tools.UserWarbandManager.CurWarbands()[i].id
+                        slug: 'detail/'+tools.UserWarbandManager.CurWarbands()[i].id
                     }
                 )
             }

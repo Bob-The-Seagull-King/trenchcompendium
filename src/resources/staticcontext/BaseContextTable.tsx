@@ -146,8 +146,16 @@ export const BaseContextCallTable : CallEventTable = {
     set_arms: {
         event_priotity: 0,
         async getModelHandsAvailable(this: EventRunner, eventSource : any, relayVar : ModelHands,  trackVal : MemberAndWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
-            const ContextHands = context_func as ModelHands            
-            return ContextHands;
+            if (context_func["ranged"] != undefined) {
+                relayVar.ranged = context_func["ranged"]
+            }          
+            if (context_func["melee"] != undefined) {
+                relayVar.melee = context_func["melee"]
+            }         
+            if (context_func["special"]) {
+                relayVar.special = context_func["special"]
+            }            
+            return relayVar;
         }
     },
     add_arms: {
@@ -260,6 +268,19 @@ export const BaseContextCallTable : CallEventTable = {
             }
             
             return relayVar;
+        }
+    },
+    override_equipment_limit: {
+        event_priotity: 0,
+        
+        async getEquipmentLimitRaw(this: EventRunner, eventSource : any, relayVar: number, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            return context_func["count"]
+        }
+    },
+    no_shield_combo: {
+        event_priotity: 0,
+        async countShieldCombo(this: EventRunner, eventSource : any, relayVar : boolean,  trackVal : MemberAndWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            return false;
         }
     },
     model_equipment_restriction : {
@@ -413,19 +434,7 @@ export const BaseContextCallTable : CallEventTable = {
                                 if (!containsTag(trackVal.item.EquipmentItem.Tags, Requirement.tag) && !containsTag(trackVal.item.Tags, Requirement.tag)) {
                                     continue;
                                 }
-                            }
-    
-                            if (Requirement.res_type == "keyword") {
-                                let Found = false;
-                                for (let k = 0; k < trackVal.item.EquipmentItem.GetKeyWords().length; k++) {
-                                    if (trackVal.item.EquipmentItem.GetKeyWords()[k].ID == Requirement.value) {
-                                        Found = true;
-                                    }
-                                }
-                                if (Found == true) {
-                                    CanAdd = false;
-                                }
-                            }                        
+                            }                      
     
                             if (Requirement.res_type == "ducat") {
                                 if (trackVal.item.CostType == 0) {
@@ -440,6 +449,18 @@ export const BaseContextCallTable : CallEventTable = {
                                     }
                                 }
                             }  
+    
+                            if (Requirement.res_type == "keyword") {
+                                let Found = false;
+                                for (let k = 0; k < trackVal.item.EquipmentItem.GetKeyWords().length; k++) {
+                                    if (trackVal.item.EquipmentItem.GetKeyWords()[k].ID == Requirement.value) {
+                                        Found = true;
+                                    }
+                                }
+                                if (Found == true) {
+                                    CanAdd = false;
+                                }
+                            } 
     
                             if (Requirement.res_type == "all") {
                                 CanAdd = false;
@@ -798,6 +819,32 @@ export const BaseContextCallTable : CallEventTable = {
                             }
                         }
 
+                        if (LimitMax.res_type == "stat") {
+                            if (LimitMax.value == "hands_melee") {
+                                if (trackVal.item.EquipmentItem.Stats[LimitMax.value] != LimitMax.subvalue) {
+                                    continue;
+                                }
+                            }
+                        }
+                        
+                        if (LimitMax.res_type == "keyword") {
+                            let Found = false;
+                            for (let k = 0; k < trackVal.item.EquipmentItem.KeyWord.length; k++) {
+                                if (trackVal.item.EquipmentItem.KeyWord[k].ID == LimitMax.value) {
+                                    Found = true;
+                                }
+                            }
+                            if (Found == false) {
+                                continue
+                            }
+                        }  
+    
+                        if (LimitMax.res_type == "id") {
+                            if (trackVal.item.EquipmentItem.ID != LimitMax.value) {
+                                continue
+                            }
+                        }  
+
                         let varcount = 0;
 
                         for (let j = 0; j < (trackVal.model).GetEquipment().length; j++) {
@@ -823,7 +870,13 @@ export const BaseContextCallTable : CallEventTable = {
                             }
     
                             if (LimitMax.res_type == "id") {
-                                if (EquipObj.ID != LimitMax.value) {
+                                if (EquipObj.ID == LimitMax.value) {
+                                    varcount += 1;
+                                }
+                            } 
+    
+                            if (LimitMax.res_type == "self") {
+                                if (EquipObj.ID == trackVal.item.EquipmentItem.ID) {
                                     varcount += 1;
                                 }
                             } 
@@ -831,6 +884,14 @@ export const BaseContextCallTable : CallEventTable = {
                             if (LimitMax.res_type == "category") {
                                 if (EquipObj.Category == LimitMax.category) {
                                     varcount += 1;
+                                }
+                            } 
+    
+                            if (LimitMax.res_type == "stat") {
+                                if (LimitMax.value == "hands_melee") {
+                                    if (EquipObj.Stats[LimitMax.value] == LimitMax.subvalue) {
+                                        varcount += 1;
+                                    }
                                 }
                             }  
 
@@ -863,6 +924,12 @@ export const BaseContextCallTable : CallEventTable = {
                                 continue;
                             }
                         }
+                        
+                        if (LimitMax.res_type == "id") {
+                            if (trackVal.item.EquipmentItem.ID != LimitMax.value) {
+                                continue
+                            }
+                        }  
 
                         let varcount = 0;
 
@@ -897,6 +964,14 @@ export const BaseContextCallTable : CallEventTable = {
                             if (LimitMax.res_type == "category") {
                                 if (EquipObj.Category == LimitMax.category) {
                                     varcount += 1;
+                                }
+                            }  
+    
+                            if (LimitMax.res_type == "stat") {
+                                if (LimitMax.value == "hands_melee") {
+                                    if (EquipObj.Stats[LimitMax.value] == LimitMax.subvalue) {
+                                        varcount += 1;
+                                    }
                                 }
                             }  
 

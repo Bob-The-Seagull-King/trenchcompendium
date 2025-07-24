@@ -58,6 +58,7 @@ interface LimitSingle {
     tag? : string,
     res_type : string,
     value : string,
+    subvalue?: string | number,
     limit: number
 }
 

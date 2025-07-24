@@ -1650,7 +1650,15 @@ class WarbandMember extends DynamicContextObject {
             }
 
             if (!CanAdd) {
-                CanAdd = !(await this.HasSpecificEquipment(BaseFactionOptions[i].EquipmentItem.GetID()))
+                const EquipmentLimit = await eventmon.runEvent(
+                    "getEquipmentLimitRaw",
+                    BaseFactionOptions[i].EquipmentItem,
+                    [],
+                    1,
+                    null 
+                )
+                const CurCount = await this.HasSpecificEquipment(BaseFactionOptions[i].EquipmentItem.GetID())
+                CanAdd = !(await CurCount >= (EquipmentLimit ))
             }
 
             if (CanAdd) {
@@ -1673,13 +1681,14 @@ class WarbandMember extends DynamicContextObject {
 
     public async HasSpecificEquipment(givenID : string) {        
         const MyEquip = await this.GetAllEquipForShow();
+        let count = 0;
         for (let i = 0; i < MyEquip.length; i++) {
             const EquipItem = MyEquip[i].equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment;
             if (EquipItem.GetID() == givenID) {
-                return true;
+                count ++;
             }
         }
-        return false;
+        return count;
     }
 
     public async EquipItemCanAdd(faceq : FactionEquipmentRelationship, restriction_list : EquipmentRestriction[]) {
@@ -1793,9 +1802,24 @@ class WarbandMember extends DynamicContextObject {
             }
         ) 
 
+        let MeleeShield = false
+        let RangedShield = false
+        const IsShield = await eventmon.runEvent(
+            "countShieldCombo",
+            this,
+            [],
+            true,
+            {
+                model: this,
+                warband : this.MyContext as UserWarband
+            }
+        ) 
+
+        if (IsShield) {
+            MeleeShield = await this.IncludesShieldComboMelee();
+            RangedShield = await this.IncludesShieldComboRanged();
+        }
         
-        const MeleeShield = await this.IncludesShieldComboMelee();
-        const RangedShield = await this.IncludesShieldComboRanged();
         const HasShield = await this.HasShield();
         
         const IgnoreStrong = (await this.HasTwoHandedMeleeWeapon())
@@ -1829,6 +1853,13 @@ class WarbandMember extends DynamicContextObject {
             }
         }
 
+        if (model_hands.melee <= 0 &&
+            model_hands.ranged <= 0 &&
+            EquipHands.melee > 0 && EquipHands.ranged > 0
+        ) {
+            EquipHands.special-= Math.max( EquipHands.melee, EquipHands.ranged)
+        }
+
         const CanAdd = this.CompareHands(EquipHands, model_hands)
 
         return CanAdd
@@ -1840,6 +1871,9 @@ class WarbandMember extends DynamicContextObject {
             (equipment_need.ranged > model_have.ranged) ||
             (equipment_need.special > model_have.special)
         ) {
+            if ((equipment_need.melee + equipment_need.ranged + equipment_need.special) <= model_have.special) {
+                return true;
+            }
             return false;
         }
         return true;
@@ -1887,14 +1921,31 @@ class WarbandMember extends DynamicContextObject {
         )
 
         let IsStrong = await this.IsKeywordPresent("kw_strong");
-        const MeleeShield = await this.IncludesShieldComboMelee();
-        const RangedShield = await this.IncludesShieldComboRanged();
+        let MeleeShield = false
+        let RangedShield = false
+
+        const IsShield = await eventmon.runEvent(
+            "countShieldCombo",
+            this,
+            [],
+            true,
+            {
+                model: this,
+                warband : this.MyContext as UserWarband
+            }
+        ) 
+
+        if (IsShield) {
+            MeleeShield = await this.IncludesShieldComboMelee();
+            RangedShield = await this.IncludesShieldComboRanged();
+        }
 
         const MyEquip = await this.GetAllEquipForShow();
         for (let i = 0; i < MyEquip.length; i++) {
             const EquipItem = MyEquip[i].equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment;
+            let meleeval = (EquipItem.Stats["hands_melee"] != undefined)? EquipItem.Stats["hands_melee"] : 0;
+            let rangedval = (EquipItem.Stats["hands_ranged"] != undefined)? EquipItem.Stats["hands_ranged"] : 0;
             if (EquipItem.Stats["hands_melee"]) {
-                let meleeval = EquipItem.Stats["hands_melee"];
                 if (IsStrong && meleeval == 2) {
                     meleeval = 1;
                     IsStrong = false;
@@ -1902,22 +1953,25 @@ class WarbandMember extends DynamicContextObject {
                 if (containsTag(EquipItem.Tags, "shield") && MeleeShield) {
                     meleeval = 0;
                 }
-                if (BaseHands["melee"] == 0) {
-                    BaseHands["special"] -= meleeval
-                } else {
-                    BaseHands["melee"] -= meleeval
-                }
             }
             if (EquipItem.Stats["hands_ranged"]) {
-                let rangedval = EquipItem.Stats["hands_ranged"];
                 if (containsTag(EquipItem.Tags, "shield") && RangedShield) {
                     rangedval = 0;
                 }
-                if (BaseHands["ranged"] == 0) {
-                    BaseHands["special"] -= rangedval
-                } else {
-                    BaseHands["ranged"] -= rangedval
-                }
+            }
+            let specialflag = false
+            if (BaseHands["melee"] != 0) {
+                BaseHands["melee"] -= meleeval
+            } else {
+                specialflag = true
+            }
+            if (BaseHands["ranged"] != 0 ) {
+                BaseHands["ranged"] -= rangedval
+            } else {
+                specialflag = true
+            }
+            if (specialflag) {
+                BaseHands["special"] -= Math.max(rangedval, meleeval)
             }
         }
         return BaseHands;
@@ -2143,13 +2197,20 @@ class WarbandMember extends DynamicContextObject {
             this,
             [],
             [],
-            null
+            null 
         )
         
         let CanAdd = (RefModel.EquipmentItem.Category != "equipment") 
 
         if (!CanAdd) {
-            CanAdd = !(await this.HasSpecificEquipment(RefModel.EquipmentItem.GetID()))
+            const EquipmentLimit = await eventmon.runEvent(
+                "getEquipmentLimitRaw",
+                RefModel.EquipmentItem,
+                [],
+                1,
+                null 
+            )
+            CanAdd = !(await this.HasSpecificEquipment(RefModel.EquipmentItem.GetID()) >= (EquipmentLimit ))
         }
 
         if (CanAdd) {
