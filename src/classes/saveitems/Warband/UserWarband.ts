@@ -986,12 +986,15 @@ class UserWarband extends DynamicContextObject {
     }
 
     /**
-     * @TODO: Return the Campaign Cycle of the connected campaign
-     - can use Campaign Info
+     * Return the campaign cycle of this warband
      - This is the campaign cycle that is currently selected for the WBB view
      */
     GetCampaignCycleView() {
-        return this.Context.CampaignRound;
+        if(this.Context.CampaignRound) {
+            return this.Context.CampaignRound;
+        }
+
+        return 1;
     }
 
     SetCurrentCycle(num : number) {
@@ -999,9 +1002,7 @@ class UserWarband extends DynamicContextObject {
     }
 
     /**
-     * @TODO: return the maximum campaign cycle, that is possible for this Warband
-     * - This returns the maximum campaign cycle this warband has advanced to
-     * - simultaneously this is the only cycle, which can be edited
+     * This returns the maximum campaign cycle for this warband
      * @constructor
      */
     GetCampaignCycleMax() {

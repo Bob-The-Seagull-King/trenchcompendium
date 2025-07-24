@@ -99,7 +99,7 @@ const WbbWarbandListItem: React.FC<WbbWarbandListItemProps> = ({ item, manager, 
                             <div className={'item-campaign'}>
                                 {item.warband_data.GetCampaignName()}
                                 <br />
-                                {'Campaign Cycle: ' + item.warband_data.GetCampaignCycleMax()}
+                                {'Campaign Cycle: ' + item.warband_data.GetCampaignCycleView()}
                             </div>
                             </>
                     </div>
