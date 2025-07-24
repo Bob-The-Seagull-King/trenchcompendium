@@ -58,7 +58,7 @@ import {
     getModelStatArmour,
     getModelStatMelee,
     getModelStatMove,
-    getModelStatRanged, getModelStatRangedWithModifiers,
+    getModelStatRanged, 
     ModelStatistics
 } from '../../../classes/feature/model/ModelStats';
 import WbbEditFighterStatOption from './modals/fighter/WbbFighterStatOption';
