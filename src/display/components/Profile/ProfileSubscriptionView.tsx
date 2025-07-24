@@ -271,7 +271,7 @@ const ProfileSubscriptionView: React.FC = () => {
                     <ul className={'details-list'}>
                         <li>
                             <img src={TCIcon} alt="Icon" className={'icon'} width={20} height={20}/>
-                            {'Membership starting from $1,67 monthly'}
+                            {'Membership starting from $1,99 monthly'}
                         </li>
                         <li>
                             <img src={TCIcon} alt="Icon" className={'icon'} width={20} height={20}/>

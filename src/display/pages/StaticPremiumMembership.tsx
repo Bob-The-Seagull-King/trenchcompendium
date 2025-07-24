@@ -31,7 +31,7 @@ const StaticPremiumMembership: React.FC = () => {
                                 {'Only $1.99'}
                             </h3>
                             <p>
-                                {"It's a small, recurring monthly contribution — but it makes a big difference. Your support helps us keep the app alive, improving, and ad-free."}
+                                {"It's a small, recurring monthly contribution — but it makes a big difference. Your support helps us keep the app alive and improving."}
                             </p>
                         </>
                     }
