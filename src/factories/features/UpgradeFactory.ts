@@ -13,10 +13,10 @@ class UpgradeFactory {
      * @param _ability The data in IPlayerAbility format describing the ability
      * @returns A newly created ability
      */
-    static async CreateUpgrade(_rule: IUpgrade, parent : ContextObject | null) {
+    static async CreateUpgrade(_rule: IUpgrade, parent : ContextObject | null, skipcheck = false) {
         const cache = StaticDataCache.getInstance();
         const isValid = (cache.CheckID('upgrade', _rule.id))
-        if (isValid == false) {
+        if (isValid == false && !skipcheck) {
             return cache.UpgradeCache[_rule.id];
         }
         const rule = new Upgrade(_rule, parent)
@@ -25,14 +25,14 @@ class UpgradeFactory {
         return rule;
     }
 
-    static async CreateNewUpgrade(_val : string, parent : ContextObject | null) {
+    static async CreateNewUpgrade(_val : string, parent : ContextObject | null, skipcheck = false) {
         const cache = StaticDataCache.getInstance();
         const isValid = (cache.CheckID('upgrade', _val))
-        if (isValid == false) {
+        if (isValid == false && !skipcheck) {
             return cache.UpgradeCache[_val];
         }
         const ruledata = Requester.MakeRequest({searchtype: "id", searchparam: {type: "upgrade", id: _val}}) as IUpgrade
-        const rulenew = await UpgradeFactory.CreateUpgrade(ruledata, parent);
+        const rulenew = await UpgradeFactory.CreateUpgrade(ruledata, parent, skipcheck);
         return rulenew;
     }
 

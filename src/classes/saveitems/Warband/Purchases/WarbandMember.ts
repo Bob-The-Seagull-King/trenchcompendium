@@ -17,7 +17,7 @@ import { WarbandEquipment } from "./WarbandEquipment";
 import { UpgradeFactory } from "../../../../factories/features/UpgradeFactory";
 import { InjuryFactory } from "../../../../factories/features/InjuryFactory";
 import { Upgrade } from "../../../feature/ability/Upgrade";
-import { Equipment, EquipmentRestriction, RestrictionSingle } from "../../../feature/equipment/Equipment";
+import { deepCopyEquipmentRestriction, Equipment, EquipmentRestriction, RestrictionSingle } from "../../../feature/equipment/Equipment";
 import { Keyword } from "../../../feature/glossary/Keyword";
 import { Ability } from "../../../feature/ability/Ability";
 import { EventRunner } from "../../../contextevent/contexteventhandler";
@@ -233,7 +233,7 @@ class WarbandMember extends DynamicContextObject {
         this.Upgrades = [];
         for (let i = 0; i < data.list_upgrades.length; i++) {
             const curUpgrade = data.list_upgrades[i]
-            const upgradeobj = await UpgradeFactory.CreateNewUpgrade(curUpgrade.upgrade.object_id, this)
+            const upgradeobj = await UpgradeFactory.CreateNewUpgrade(curUpgrade.upgrade.object_id, this, true)
             const NewRuleProperty = new WarbandProperty(upgradeobj, this, null, curUpgrade.upgrade);
             await NewRuleProperty.HandleDynamicProps(upgradeobj, this, null, curUpgrade.upgrade);
             await NewRuleProperty.BuildConsumables(curUpgrade.upgrade.consumables);
@@ -1268,7 +1268,7 @@ class WarbandMember extends DynamicContextObject {
     }
     
     public async AddUpgrade ( stash: ModelUpgradeRelationship ) {
-        const CurUpgrade : Upgrade  = await stash.UpgradeObject;
+        const CurUpgrade : Upgrade  = await UpgradeFactory.CreateUpgrade(stash.UpgradeObject.SelfData, this, true)
         
         const NewRuleProperty = new WarbandProperty(CurUpgrade, this, null, null);
         await NewRuleProperty.HandleDynamicProps(CurUpgrade, this, null, null);
@@ -1718,29 +1718,38 @@ class WarbandMember extends DynamicContextObject {
             null
         )
         for (let j = 0; j < restriction_list.length; j++) {
-            NewRefList.push(restriction_list[j]);
+            NewRefList.push(deepCopyEquipmentRestriction(restriction_list[j]));
         }
         for (let j = 0; j < EquipRestrictionList.length; j++) {
-            NewRefList.push(EquipRestrictionList[j]);
+            NewRefList.push(deepCopyEquipmentRestriction(EquipRestrictionList[j]));
         }
         for (let j = 0; j < BaseEquipRestrictionList.length; j++) {
-            NewRefList.push(BaseEquipRestrictionList[j]);
+            NewRefList.push(deepCopyEquipmentRestriction(BaseEquipRestrictionList[j]));
         }
+        const FinalEquipRestrictionList : EquipmentRestriction[] = await eventmon.runEvent(
+            "modEquipmentRestriction",
+            this,
+            [],
+            NewRefList,
+            this
+        )
+
         let CanAdd = await eventmon.runEvent(
             "canModelAddItem",
             this,
-            [NewRefList],
+            [FinalEquipRestrictionList],
             true,
             {
                 model: this,
                 item : faceq
             }
         )
+
     
         CanAdd = await eventmon.runEvent(
             "canModelAddItem",
             faceq,
-            [NewRefList],
+            [FinalEquipRestrictionList],
             CanAdd,
             {
                 model: this,
@@ -1751,7 +1760,7 @@ class WarbandMember extends DynamicContextObject {
         CanAdd = await eventmon.runEvent(
             "canModelAddItem",
             faceq.EquipmentItem,
-            [NewRefList],
+            [FinalEquipRestrictionList],
             CanAdd,
             {
                 model: this,

@@ -605,8 +605,8 @@ export const BaseContextCallTable : CallEventTable = {
         }
     },
     restriction_override: {
-        event_priotity: 2,
-        getEquipmentRestriction(this: EventRunner, eventSource : any, relayVar : any, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) { 
+        event_priotity: 1,
+        modEquipmentRestriction(this: EventRunner, eventSource : any, relayVar : any, trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) { 
             const totalList : EquipmentRestriction[] = relayVar as EquipmentRestriction[]
             if (context_func["overrides"]) {
                 for (let i = 0 ; i < totalList.length; i++) {
@@ -616,7 +616,7 @@ export const BaseContextCallTable : CallEventTable = {
                             const CurRes : RestrictionSingle = Restriction.removed[j];
                             for (let k = 0; k < context_func["overrides"].length; k++) {
                                 if (CurRes.res_type == context_func["overrides"][k].type && CurRes.value == context_func["overrides"][k].model) {
-                                    CurRes.value = (context_static as ContextObject).ID;
+                                    CurRes.value = (trackVal).CurModel.ID;
                                 }
                             }
                         }
@@ -627,7 +627,7 @@ export const BaseContextCallTable : CallEventTable = {
                             const CurRes : RestrictionSingle = Restriction.required[j];
                             for (let k = 0; k < context_func["overrides"].length; k++) {
                                 if (CurRes.res_type == context_func["overrides"][k].type && CurRes.value == context_func["overrides"][k].model) {
-                                    CurRes.value = (context_static as ContextObject).ID;
+                                    CurRes.value = (trackVal).CurModel.ID;
                                 }
                             }
                         }
@@ -638,7 +638,7 @@ export const BaseContextCallTable : CallEventTable = {
                             const CurRes : RestrictionSingle = Restriction.added[j];
                             for (let k = 0; k < context_func["overrides"].length; k++) {
                                 if (CurRes.res_type == context_func["overrides"][k].type && CurRes.value == context_func["overrides"][k].model) {
-                                    CurRes.value = (context_static as ContextObject).ID;
+                                    CurRes.value = (trackVal).CurModel.ID;
                                 }
                             }
                         }
@@ -649,7 +649,7 @@ export const BaseContextCallTable : CallEventTable = {
                             const CurRes : RestrictionSingle = Restriction.permitted[j];
                             for (let k = 0; k < context_func["overrides"].length; k++) {
                                 if (CurRes.res_type == context_func["overrides"][k].type && CurRes.value == context_func["overrides"][k].model) {
-                                    CurRes.value = (context_static as ContextObject).ID;
+                                    CurRes.value = (trackVal).CurModel.ID;
                                 }
                             }
                         }
@@ -660,7 +660,7 @@ export const BaseContextCallTable : CallEventTable = {
                             const CurRes : RestrictionSingle = Restriction.banned[j];
                             for (let k = 0; k < context_func["overrides"].length; k++) {
                                 if (CurRes.res_type == context_func["overrides"][k].type && CurRes.value == context_func["overrides"][k].model) {
-                                    CurRes.value = (context_static as ContextObject).ID;
+                                    CurRes.value = (trackVal).CurModel.ID;
                                 }
                             }
                         }
@@ -703,7 +703,7 @@ export const BaseContextCallTable : CallEventTable = {
         }
     },
     model_equipment_limit : {
-        event_priotity: 1,
+        event_priotity: 2,
         async getEquipmentLimitPresentable(this: EventRunner, eventSource : any, relayVar : any, trackVal : EquipmentLimit[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
             
             const { EquipmentFactory } = await import("../../factories/features/EquipmentFactory");
@@ -903,7 +903,6 @@ export const BaseContextCallTable : CallEventTable = {
 
 
                         }
-
                         if (varcount >= LimitMax.limit) {
                             CanAdd = false;
                         }
@@ -2674,6 +2673,60 @@ export const BaseContextCallTable : CallEventTable = {
                             const NewFound = await warband.IsModelInExclusiveFireteam(Models[i].model)
                             if (NewFound) {
                                 isValid = false;
+                            }
+                        }
+                    }
+                }
+
+                if (isValid) {
+                    relayVar.push(Models[i].model)
+                }
+            }
+
+            return relayVar;
+        },
+        async getSingleFireteamMember(this: EventRunner, eventSource : any, relayVar : WarbandMember[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : WarbandMember, staticself : StaticOptionContextObjectList) {
+            return [sourceband];
+        }
+    },
+    model_attatch: {
+        event_priotity: 0,
+        async getMemberOptionsFromWarbandModel(this: EventRunner, eventSource : any, relayVar : WarbandMember[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : WarbandMember, staticself : StaticOptionContextObjectList) {
+            
+            const warband = sourceband.MyContext as UserWarband;
+            if (warband == null) {
+                return relayVar;
+            }
+            const Models = warband.GetFighters();
+            
+            for (let i = 0; i < Models.length; i++) {
+                let isValid = true;
+
+                if (Models[i].model == sourceband) {
+                    isValid = false;
+                }
+                
+                if (context_func) {
+                    const cntxt = context_func
+                    if (cntxt["restriction"]) {
+                        for (let j = 0; j < cntxt["restriction"].length; j++) {
+                            if (cntxt["restriction"][j]["rest_type"] == "elite") {
+                                if (cntxt["restriction"][j]["value"] != Models[i].model.IsElite()) {
+                                    isValid = false;
+                                }
+                            }
+                            if (cntxt["restriction"][j]["rest_type"] == "id") {
+                                if (cntxt["restriction"][j]["value"] != (Models[i].model.ID == cntxt["restriction"][j]["subvalue"])) {
+                                    isValid = false;
+                                }
+                            }
+                            if (cntxt["restriction"][j]["rest_type"] == "stat") {
+                                const stats = await Models[i].model.GetStats();
+                                if (cntxt["restriction"][j]["value"] == "base" && stats.base) {
+                                    if (cntxt["restriction"][j]["direction"] != (Math.max(...cntxt["restriction"][j]["subvalue"]) < (Math.max(...stats.base)))) {
+                                        isValid = false; 
+                                    }
+                                }
                             }
                         }
                     }

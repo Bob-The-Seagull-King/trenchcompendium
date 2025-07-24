@@ -47,6 +47,16 @@ interface RestrictionSingle {
     param? : any
 }
 
+export function deepCopyEquipmentRestriction(original: EquipmentRestriction): EquipmentRestriction {
+    return {
+        required: original.required?.map(r => ({ ...r })),
+        removed: original.removed?.map(r => ({ ...r })),
+        added: original.added?.map(r => ({ ...r })),
+        permitted: original.permitted?.map(r => ({ ...r })),
+        banned: original.banned?.map(r => ({ ...r }))
+    };
+}
+
 interface EquipmentLimit {
     maximum?: LimitSingle[],
     minimum?: LimitSingle[]

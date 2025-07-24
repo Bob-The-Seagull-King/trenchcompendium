@@ -465,7 +465,7 @@
             "model_equipment_limit": {
                 "maximum": [
                     {
-                        "tag": "weapon",
+                        "tag": "brazen_bull",
                         "res_type": "tag",
                         "value": "brazen_bull",
                         "limit": 1
@@ -533,9 +533,17 @@
         "source": "core",
         "tags": {"trait": true, "special_category": "secrets_of_the_house_of_wisdom"},
         "contextdata": {
-            "keyword_add": {"value": ["kw_infiltrator"]},
-            "model_attatch": {"restrictions": []},
-            "warband_wide": {}
+            "warband_general_hook": {},
+            "warband_wide": {}, 
+            "add_onto_warband": {},
+            "model_attatch": {
+                "apply_to_attatch": {
+                    "keyword_add": {"value": ["kw_infiltrator"]}
+                },
+                "restriction": [ 
+                    { "rest_type": "stat", "value": "base", "subvalue": [32], "direction": false },
+                    { "rest_type": "id", "value": false, "subvalue": "md_jabireanalchemist" }
+                ]}
         },
         "description": [           
             {
@@ -546,7 +554,30 @@
                 ]
             }
         ],
-        "options": []
+        "options": [
+            {
+                "ref_id" : "ot_cartographyandgeography_a",
+                "name" : "",
+                "description" : [],
+                "category" : "contextobject",
+                "self_ask": true,
+                "option_context" : {"basic_option_default":{}},
+                "dyna_only": true,
+                "parent_level": 1,
+                "question_name": "getMemberOptionsFromWarbandModel"
+            },
+            {
+                "ref_id" : "ot_cartographyandgeography_b",
+                "name" : "",
+                "description" : [],
+                "category" : "contextobject",
+                "self_ask": true,
+                "option_context" : {"basic_option_default":{}},
+                "dyna_only": true,
+                "parent_level": 1,
+                "question_name": "getMemberOptionsFromWarbandModel"
+            }
+        ]
     },
     {
         "id": "up_secrets_secretsoftakwin",
@@ -592,8 +623,10 @@
         "tags": {"trait": true, "special_category": "secrets_of_the_house_of_wisdom"},
         "contextdata": {
             "keyword_add": {"value": ["kw_fear"]},
-            "model_attatch": {"restrictions": []},
-            "warband_wide": {}
+            "model_attatch": {},
+            "warband_general_hook": {},
+            "warband_wide": {}, 
+            "add_onto_warband": {}
         },
         "description": [           
             {
@@ -605,7 +638,18 @@
                 ]
             }
         ],
-        "options": []
+        "options": [
+            {
+                "ref_id" : "ot_philosophypoetrytheology_a",
+                "name" : "",
+                "description" : [],
+                "category" : "contextobject",
+                "self_ask": true,
+                "option_context" : {"basic_option_default":{}},
+                "dyna_only": true,
+                "parent_level": 1,
+                "question_name": "getMemberOptionsFromWarbandModel"
+            }]
     },
     {
         "id": "up_trenchdog_fireteam",
