@@ -54,7 +54,13 @@ import { ModelEquipmentRelationship } from '../../../classes/relationship/model/
 import WbbOptionSelect from './modals/warband/WbbOptionSelect';
 import { Injury } from '../../../classes/feature/ability/Injury';
 import { Skill } from '../../../classes/feature/ability/Skill';
-import { getModelStatArmour, getModelStatMelee, getModelStatMove, getModelStatRanged, ModelStatistics } from '../../../classes/feature/model/ModelStats';
+import {
+    getModelStatArmour,
+    getModelStatMelee,
+    getModelStatMove,
+    getModelStatRanged, getModelStatRangedWithModifiers,
+    ModelStatistics
+} from '../../../classes/feature/model/ModelStats';
 import WbbEditFighterStatOption from './modals/fighter/WbbFighterStatOption';
 
 
@@ -328,14 +334,26 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                 </div>
 
                 <div  className={'fighter-card-stats'}>
-                    <ItemStat title={"Movement"} value={getModelStatMove(complexstate.stats)}/>
+                    <ItemStat
+                        title={"Movement"}
+                        value={getModelStatMove(complexstate.stats)}
+                    />
                     {complexstate.stats.melee != undefined &&
-                        <ItemStat title={"Melee"} value={getModelStatMelee(complexstate.stats)}/>
+                        <ItemStat
+                            title={"Melee"}
+                            value={getModelStatMelee(complexstate.stats)}
+                        />
                     }
                     {complexstate.stats.ranged != undefined &&
-                        <ItemStat title={"Ranged"} value={getModelStatRanged(complexstate.stats)}/>
+                        <ItemStat
+                            title={"Ranged"}
+                            value={getModelStatRanged(complexstate.stats)}
+                        />
                     }
-                    <ItemStat title={"Armor"} value={getModelStatArmour(complexstate.stats)}/>
+                    <ItemStat
+                        title={"Armor"}
+                        value={getModelStatArmour(complexstate.stats)}
+                    />
                 </div>
 
                 <div className="fighter-card-meta fighter-card-meta-below">

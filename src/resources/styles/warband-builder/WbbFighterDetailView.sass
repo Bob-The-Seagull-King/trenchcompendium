@@ -43,9 +43,22 @@
     .fighter-card-stats
         margin-bottom: 0
 
+        .modified
+            .stat-value
+                color: $blue
+            &.modified-positive
+                .stat-value
+                    color: $green
+            &.modified-negative
+                .stat-value
+                    color: $color-highlight
+
+
     &.play-mode
         .fighter-card-stats
             margin-bottom: 30px
+
+
     .fighter-card-collapse-wrap
 
         h3
