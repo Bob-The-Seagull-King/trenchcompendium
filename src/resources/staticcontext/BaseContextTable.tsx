@@ -424,6 +424,7 @@ export const BaseContextCallTable : CallEventTable = {
                     }
 
                     if (CurRestriction.required) {
+                        let isRelevantAtAll = false;
                         let HasMet = false;
                         for (let j = 0; j < CurRestriction.required.length; j++) {
                             const Requirement = CurRestriction.required[j]
@@ -438,6 +439,8 @@ export const BaseContextCallTable : CallEventTable = {
                                     continue;
                                 }
                             }
+                            
+                            isRelevantAtAll = true;
     
                             if (Requirement.res_type == "keyword") {
                                 let Found = false;
@@ -463,7 +466,7 @@ export const BaseContextCallTable : CallEventTable = {
                                 }
                             }       
                         }
-                        if (HasMet == false) {
+                        if (HasMet == false && isRelevantAtAll == true) {
                             CanAdd = false
                         }
                     }
