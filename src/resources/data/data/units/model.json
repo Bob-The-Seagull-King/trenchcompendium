@@ -104,7 +104,12 @@
             "model_equipment_restriction": {
                 "required": [
                     {
-                        "tag": "weapon",
+                        "category": "ranged",
+                        "res_type": "keyword",
+                        "value": "kw_heavy"
+                    },
+                    {
+                        "category": "melee",
                         "res_type": "keyword",
                         "value": "kw_heavy"
                     }
