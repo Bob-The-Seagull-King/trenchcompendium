@@ -548,7 +548,7 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                                 <>
                                     <div className="action action-delete" onClick={showConfirmDeleteInjury}>
                                         <FontAwesomeIcon icon={faTrash} className="icon-inline-left-l"/>
-                                        {'Delete Injury'}
+                                        {'Remove Injury'}
                                     </div>
                                 </>
                             }
