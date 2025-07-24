@@ -788,6 +788,10 @@ export const BaseContextCallTable : CallEventTable = {
                                 if (EquipObj.ID != LimitMax.value) {
                                     varcount += 1;
                                 }
+                            } 
+    
+                            if (LimitMax.res_type == "all") {
+                                varcount += 1;
                             }  
 
 
