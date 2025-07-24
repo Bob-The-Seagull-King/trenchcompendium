@@ -126,9 +126,20 @@ const ProfileSubscriptionView: React.FC = () => {
                     </h4>
 
                     <ul className={'details-list'}>
-                        <li>{'Subscription Status: '}{'Active'}</li>
+                        <li>{'Membership Status: '}{'Active'}</li>
                         <li>{'Next Payment: '}{SiteUser.PremiumUntilFormat()}</li>
-                        <li>{'Subscription ID: '}{SiteUser.GetSubscriptionID()}</li>
+                        <li>{'Subscription ID: '}
+                            { SiteUser.GetSubscriptionID() ? (
+                                <>
+                                    {SiteUser.GetSubscriptionID()}
+                                </>
+                            ):(
+                                <>
+                                    {'No active subscription'}
+                                </>
+                            ) }
+
+                        </li>
                         <li className={'clickable'} onClick={
                             () => setInvoiceModalOpen(true)
                         }>
