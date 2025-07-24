@@ -103,15 +103,6 @@
                     }
                 ]
             },
-            "add_to_model": {   
-                "id": "rl_artofassassination",                            
-                "required": [
-                    {
-                        "category": "id",
-                        "value": ["md_sultanateassassin","md_sultanateassassin_mv_masterassassin"]
-                    }
-                ]
-            },
             "faction_add_upgrades": {
                 "list": [{
                 "model_key": "rl_artofassassination",

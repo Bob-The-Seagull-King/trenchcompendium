@@ -230,7 +230,7 @@
         "source": "core",
         "tags": {"trait": true, "takwin": true},
         "contextdata": {
-            "override_equipment_restriction": {
+            "model_equipment_restriction": {
                 "added": [
                     {
                         "category": "melee",
@@ -417,7 +417,7 @@
         "source": "core",
         "tags": {"trait": true, "takwin": true},
         "contextdata": {
-            "override_equipment_restriction": {
+            "model_equipment_restriction": {
                 "added": [
                     {
                         "category": "equipment",
@@ -425,7 +425,7 @@
                         "value": ""
                     }
                 ],
-                "removed": [
+                "banned": [
                     {
                         "category": "equipment",
                         "res_type": "id",
@@ -454,12 +454,11 @@
             "set_stat": { "upgrades" : [
                 {"stat": "base", "value": [60]}
                 ]},
-            "override_equipment_restriction": {
-                "added": [
+            "restriction_override": {
+                "overrides": [
                     {
-                        "tag": "brazen_bull",
-                        "res_type": "",
-                        "value": ""
+                    "type": "id",
+                    "model": "md_brazenbull"
                     }
                 ]
             },
@@ -506,7 +505,7 @@
         "source": "core",
         "tags": {"action": true, "special_category": "secrets_of_the_house_of_wisdom"},
         "contextdata": {
-            "override_equipment_restriction": {
+            "model_equipment_restriction": {
                 "removed": [
                     {
                         "res_type": "id",
@@ -555,7 +554,6 @@
         "source": "core",
         "tags": {"trait": true, "special_category": "secrets_of_the_house_of_wisdom"},
         "contextdata": {
-            "model_attatch": {"restrictions": [{"type": "id", "value": "md_takwincreation"}]}
         },
         "description": [           
             {
@@ -623,24 +621,6 @@
                 "content": "The dog gains an ability to form a FIRETEAM with any 1 model in your Warband.",
                 "glossary": [
                     {"val": "FIRETEAM", "id": "kw_fireteam"}
-                ]
-            }
-        ],
-        "options": []
-    },
-    {
-        "id": "up_trenchdog_guarddog",
-        "name": "Guard Dog",
-        "source": "core",
-        "tags": {"trait": true},
-        "contextdata": {
-        },
-        "description": [         
-            {
-                "tags": {"desc_type" : "default"},
-                "content": "No infiltrator can be placed within 12\" of a Guard Dog, and you can charge any enemy within 4\" of this dog even if it is out of sight.",
-                "glossary": [
-                    {"val": "infiltrator", "id": "kw_infiltrator"}
                 ]
             }
         ],
@@ -753,7 +733,7 @@
             "set_stat": { "upgrades" : [
                 {"stat": "armour", "value": -3}
                 ]},                
-            "override_equipment_restriction": {
+            "model_equipment_restriction": {
                 "removed": [
                     {
                         "category": "equipment",
@@ -849,7 +829,7 @@
         "tags": {"trait": true},
         "contextdata": {
            "keyword_ignore": {"value": "kw_fear"},            
-           "override_equipment_restriction": {
+           "model_equipment_restriction": {
                "removed": [
                    {
                        "category": "ranged",
@@ -962,7 +942,7 @@
         "tags": {"trait": true},
         "contextdata": {
            "keyword_ignore": {"value": "kw_fear"},            
-           "override_equipment_restriction": {
+           "model_equipment_restriction": {
                "required": [
                    {
                        "category": "armour",

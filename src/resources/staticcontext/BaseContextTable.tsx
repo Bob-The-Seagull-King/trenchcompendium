@@ -590,6 +590,12 @@ export const BaseContextCallTable : CallEventTable = {
                             if (await trackVal.model.HasEquipmentFollowingRestriction(Requirement)) {
                                 CanAdd = false;
                             }
+    
+                            if (Requirement.res_type == "id") {
+                                if (trackVal.item.EquipmentItem.ID == Requirement.value) {
+                                    CanAdd = false;
+                                }
+                            }
                         }
                     }
                 }
@@ -3155,8 +3161,14 @@ export const BaseContextCallTable : CallEventTable = {
                     relayVar.ranged = contextitem["value"]
                 }
 
-                if (contextitem["stat"] == 'base') {                    
-                    relayVar.base = contextitem["value"]
+                if (contextitem["stat"] == 'base') {  
+                    if (relayVar.base) {
+                        if (Math.max(...relayVar.base) < Math.max(contextitem["value"])) { 
+                            relayVar.base = contextitem["value"]
+                        }
+                    } else {
+                        relayVar.base = contextitem["value"]
+                    }
                 }
 
                 if (contextitem["stat"] == 'movetype') {                    
