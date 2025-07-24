@@ -29,43 +29,47 @@ const RulesOptionSelection: React.FC<RulesEditSelectionProps> = ({
     };
 
     return (
-        <Modal show={show} onHide={onClose} className="WbbEditGoeticSelectionModal" centered>
-            <Modal.Header closeButton={false}>
-                <Modal.Title>Edit Option</Modal.Title>
+        <div onClick={(e) => {
+            e.stopPropagation();
+        }}>
+            <Modal show={show} onHide={onClose} className="RulesOptionSelection RulesOptionSelection-Modal" centered>
+                <Modal.Header closeButton={false}>
+                    <Modal.Title>Edit Option</Modal.Title>
 
-                <FontAwesomeIcon
-                    icon={faXmark}
-                    className="modal-close-icon"
-                    role="button"
-                    onClick={onClose}
-                />
-            </Modal.Header>
+                    <FontAwesomeIcon
+                        icon={faXmark}
+                        className="modal-close-icon"
+                        role="button"
+                        onClick={onClose}
+                    />
+                </Modal.Header>
 
-            <Modal.Body>
-                <h6>Select Option</h6>
+                <Modal.Body>
+                    <h6>Select Option</h6>
 
-                <div className={'goetic-selection-wrap'}>
-                    {choiceparent.Selections.map((discipline) => (
-                        <div
-                            key={discipline.id + discipline.display_str}
-                            className={`select-item ${selectedGoetic === discipline ? 'selected' : ''}`}
-                            onClick={() => setSelectedGoetic(discipline)}
-                        >
-                            {discipline.display_str}
-                        </div>
-                    ))}
-                </div>
-            </Modal.Body>
+                    <div className={'goetic-selection-wrap'}>
+                        {choiceparent.Selections.map((discipline) => (
+                            <div
+                                key={discipline.id + discipline.display_str}
+                                className={`select-item ${selectedGoetic === discipline ? 'selected' : ''}`}
+                                onClick={() => setSelectedGoetic(discipline)}
+                            >
+                                {discipline.display_str}
+                            </div>
+                        ))}
+                    </div>
+                </Modal.Body>
 
-            <Modal.Footer>
-                <Button variant="secondary" onClick={onClose}>
-                    Cancel
-                </Button>
-                <Button variant="primary" onClick={handleSubmit} disabled={selectedGoetic === currentChoice}>
-                    Update Discipline
-                </Button>
-            </Modal.Footer>
-        </Modal>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={onClose}>
+                        Cancel
+                    </Button>
+                    <Button variant="primary" onClick={handleSubmit} disabled={selectedGoetic === currentChoice}>
+                        Update Discipline
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+        </div>
     );
 };
 

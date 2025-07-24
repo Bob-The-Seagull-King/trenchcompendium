@@ -15,7 +15,9 @@ const WbbOptionBox: React.FC<WbbOptionBoxProps> = ({ title, value, onClick, over
     const { playMode, togglePlayMode } = usePlayMode();
 
     return (
-        <div className="WbbOptionBox">
+        <div className="WbbOptionBox" onClick={(e) => {
+            e.stopPropagation();
+        }}>
             <div className="WbbOptionBox-title">
                 {title}
             </div>
