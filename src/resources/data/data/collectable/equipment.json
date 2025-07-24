@@ -4604,6 +4604,7 @@
         "stats": {
         },
         "contextdata": {
+            "override_equipment_limit" : {"count": 2},
             "bonus_ability": {
                 "action_type": ["attack"]
             }

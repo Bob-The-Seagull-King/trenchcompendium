@@ -270,6 +270,13 @@ export const BaseContextCallTable : CallEventTable = {
             return relayVar;
         }
     },
+    override_equipment_limit: {
+        event_priotity: 0,
+        
+        async getEquipmentLimitRaw(this: EventRunner, eventSource : any, relayVar: number, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            return context_func["count"]
+        }
+    },
     no_shield_combo: {
         event_priotity: 0,
         async countShieldCombo(this: EventRunner, eventSource : any, relayVar : boolean,  trackVal : MemberAndWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
@@ -830,7 +837,13 @@ export const BaseContextCallTable : CallEventTable = {
                             if (Found == false) {
                                 continue
                             }
-                        }   
+                        }  
+    
+                        if (LimitMax.res_type == "id") {
+                            if (trackVal.item.EquipmentItem.ID != LimitMax.value) {
+                                continue
+                            }
+                        }  
 
                         let varcount = 0;
 
@@ -911,6 +924,12 @@ export const BaseContextCallTable : CallEventTable = {
                                 continue;
                             }
                         }
+                        
+                        if (LimitMax.res_type == "id") {
+                            if (trackVal.item.EquipmentItem.ID != LimitMax.value) {
+                                continue
+                            }
+                        }  
 
                         let varcount = 0;
 

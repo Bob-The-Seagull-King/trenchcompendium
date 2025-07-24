@@ -1650,7 +1650,15 @@ class WarbandMember extends DynamicContextObject {
             }
 
             if (!CanAdd) {
-                CanAdd = !(await this.HasSpecificEquipment(BaseFactionOptions[i].EquipmentItem.GetID()))
+                const EquipmentLimit = await eventmon.runEvent(
+                    "getEquipmentLimitRaw",
+                    BaseFactionOptions[i].EquipmentItem,
+                    [],
+                    1,
+                    null 
+                )
+                const CurCount = await this.HasSpecificEquipment(BaseFactionOptions[i].EquipmentItem.GetID())
+                CanAdd = !(await CurCount >= (EquipmentLimit ))
             }
 
             if (CanAdd) {
@@ -1673,13 +1681,14 @@ class WarbandMember extends DynamicContextObject {
 
     public async HasSpecificEquipment(givenID : string) {        
         const MyEquip = await this.GetAllEquipForShow();
+        let count = 0;
         for (let i = 0; i < MyEquip.length; i++) {
             const EquipItem = MyEquip[i].equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment;
             if (EquipItem.GetID() == givenID) {
-                return true;
+                count ++;
             }
         }
-        return false;
+        return count;
     }
 
     public async EquipItemCanAdd(faceq : FactionEquipmentRelationship, restriction_list : EquipmentRestriction[]) {
@@ -2188,13 +2197,20 @@ class WarbandMember extends DynamicContextObject {
             this,
             [],
             [],
-            null
+            null 
         )
         
         let CanAdd = (RefModel.EquipmentItem.Category != "equipment") 
 
         if (!CanAdd) {
-            CanAdd = !(await this.HasSpecificEquipment(RefModel.EquipmentItem.GetID()))
+            const EquipmentLimit = await eventmon.runEvent(
+                "getEquipmentLimitRaw",
+                RefModel.EquipmentItem,
+                [],
+                1,
+                null 
+            )
+            CanAdd = !(await this.HasSpecificEquipment(RefModel.EquipmentItem.GetID()) >= (EquipmentLimit ))
         }
 
         if (CanAdd) {
