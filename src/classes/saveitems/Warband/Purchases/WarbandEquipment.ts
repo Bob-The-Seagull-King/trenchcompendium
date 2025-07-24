@@ -15,6 +15,7 @@ import { EventRunner } from "../../../contextevent/contexteventhandler";
 import { WarbandMember } from "./WarbandMember";
 import { Keyword } from "../../../feature/glossary/Keyword";
 import { RealWarbandPurchaseModel, WarbandPurchase } from "./WarbandPurchase";
+import { containsTag } from "../../../../utility/functions";
 
 interface IWarbandEquipment extends IContextObject {
     equipment_id: IWarbandProperty,
@@ -47,6 +48,12 @@ class WarbandEquipment extends DynamicContextObject {
         this.MyEquipment = new WarbandProperty(Value, this, null, equipment_property);
         await this.MyEquipment.HandleDynamicProps(Value, this, null, equipment_property)
         await this.MyEquipment.BuildConsumables(equipment_property.consumables)
+    }
+    
+    public IsTagPresent(id : string) {
+        const tags = this.Tags
+        const subtags = this.GetEquipmentItem().Tags
+        return ((containsTag(tags, id)) || (containsTag(subtags, id)))
     }
     
     public async BuildNewProperties(fighter : WarbandMember, Purchase : WarbandPurchase) {

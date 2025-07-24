@@ -24,9 +24,9 @@ const WarbandListEntry: React.FC<WarbandListEntryProps> = ({
         <div className="WarbandListEntry">
             <CustomNavLink
                 classes={'WarbandListEntry-image-wrap'}
-                link={`/warband/view/${warband.id}`}
+                link={`/warband/detail/${warband.id}`}
                 runfunc={() => {
-                    navigate(`/warband/view/${warband.id}`)
+                    navigate(`/warband/detail/${warband.id}`)
                 }}>
 
                 <SynodFactionImage

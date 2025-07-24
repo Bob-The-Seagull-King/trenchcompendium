@@ -11,6 +11,7 @@ import WbbEditCampaignCycleModal from "./modals/warband/WbbEditCampaignCycleModa
 import { Patron } from '../../../classes/feature/skillgroup/Patron';
 import { ToolsController } from '../../../classes/_high_level_controllers/ToolsController';
 import WbbEditFailedPromotionsModal from './modals/warband/WbbEditFailedPromotionsModal';
+import { usePlayMode } from '../../../context/PlayModeContext';
 
 interface WbbCampaignDetailViewProps {
     onClose: () => void;
@@ -19,6 +20,7 @@ interface WbbCampaignDetailViewProps {
 const WbbCampaignDetailView: React.FC<WbbCampaignDetailViewProps> = ({ onClose }) => {
     const { warband, reloadDisplay, updateKey } = useWarband();
     if (warband == null) return (<div>Loading...</div>);
+    const {playMode, viewmode} = usePlayMode();
 
     /** Victory Points */
     const [victoryPoints, setVictoryPoints] = useState<number>(warband.warband_data.GetVictoryPoints());
@@ -180,11 +182,13 @@ const WbbCampaignDetailView: React.FC<WbbCampaignDetailViewProps> = ({ onClose }
                     </div>
                     <div className={'battle-scars'}>
                         
+                        {(!playMode) &&
                         <div className={'btn btn-primary btn-sm edit-battle-scar-btn'}
                             onClick={() => setshowFailedPromotionsModal(true)}>
                             <FontAwesomeIcon icon={faPen} className="icon-inline-left-l"/>
                             {'Edit'}
                         </div>
+                        }
 
                         <div className="battle-scar-boxes" onClick={() => setshowFailedPromotionsModal(true)}>
                             {Array.from({length: 6}, (_, i) => {

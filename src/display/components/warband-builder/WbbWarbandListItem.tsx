@@ -78,9 +78,9 @@ const WbbWarbandListItem: React.FC<WbbWarbandListItemProps> = ({ item, manager, 
 
                 <CustomNavLink
                     classes={'WbbWarbandListItem-link'}
-                    link={`/warband/edit/${item.id}`}
+                    link={`/warband/detail/${item.id}`}
                     runfunc={() => {
-                        navigate('/warband/edit/' + item.id);
+                        navigate('/warband/detail/' + item.id);
                     }}
                 >
                     <div className={'warband-item-text-wrap'}>

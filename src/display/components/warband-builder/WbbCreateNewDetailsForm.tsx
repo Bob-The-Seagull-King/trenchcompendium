@@ -54,7 +54,7 @@ const WbbCreateNewDetailsForm: React.FC<{
         if (msg == null) {
             alert("Warband creation was unsuccessful");
         } else {
-            navigate('/warband/edit/' + msg.id);
+            navigate('/warband/detail/' + msg.id);
         }
     }
 

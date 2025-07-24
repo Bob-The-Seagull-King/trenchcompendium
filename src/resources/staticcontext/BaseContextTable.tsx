@@ -232,6 +232,36 @@ export const BaseContextCallTable : CallEventTable = {
             return relayVar;
         }
     },
+    validate_final_unit_equipment: {
+        event_priotity: 0,        
+        async validateModelForWarband(this: EventRunner, eventSource : any, relayVar: string[], trackVal : WarbandPurchase, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : UserWarband) {
+            
+            if (context_func["requirements"]) {
+                for (let i = 0; i < context_func["requirements"].length; i++) {
+                    const CurExp = context_func["requirements"][i]
+
+                    if (CurExp['tag']) {
+                        const equipment = await (trackVal.HeldObject as WarbandMember).GetAllEquipForShow()
+                        let isfound = false;
+                        for (let j = 0; j < equipment.length; j ++) {
+                            if (equipment[j].equipment.IsTagPresent(CurExp['tag'])) {
+                                isfound = true
+                                break;
+                            }
+                        }
+                        if (CurExp['value'] == !isfound) {
+                            relayVar.push(
+                                "The model " + (trackVal.HeldObject as WarbandMember).GetTrueName() + " must " + (CurExp["value"] == true ? "be" : "not be") + " equipped with " + makestringpresentable( CurExp["tag"])
+                            )
+                        }
+
+                    }
+                }
+            }
+            
+            return relayVar;
+        }
+    },
     model_equipment_restriction : {
         event_priotity: 0,        
         async getEquipmentRestrictionPresentable(this: EventRunner, eventSource : any, relayVar : any, trackVal : EquipmentRestriction[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) 
@@ -419,11 +449,20 @@ export const BaseContextCallTable : CallEventTable = {
                                 if (trackVal.item.EquipmentItem.ID == Requirement.value) {
                                     CanAdd = false;
                                 }
-                            }        
+                            }   
+    
+                            if (Requirement.res_type == "restricted") {
+                                if (trackVal.item.RestrictedEquipment) {
+                                    if (trackVal.item.RestrictedEquipment.length > 0) {
+                                        CanAdd = false;
+                                    }
+                                }
+                            }      
                         }
                     }
 
                     if (CurRestriction.required) {
+                        let isRelevantAtAll = false;
                         let HasMet = false;
                         for (let j = 0; j < CurRestriction.required.length; j++) {
                             const Requirement = CurRestriction.required[j]
@@ -438,6 +477,8 @@ export const BaseContextCallTable : CallEventTable = {
                                     continue;
                                 }
                             }
+                            
+                            isRelevantAtAll = true;
     
                             if (Requirement.res_type == "keyword") {
                                 let Found = false;
@@ -463,7 +504,7 @@ export const BaseContextCallTable : CallEventTable = {
                                 }
                             }       
                         }
-                        if (HasMet == false) {
+                        if (HasMet == false && isRelevantAtAll == true) {
                             CanAdd = false
                         }
                     }
@@ -785,6 +826,12 @@ export const BaseContextCallTable : CallEventTable = {
                                 if (EquipObj.ID != LimitMax.value) {
                                     varcount += 1;
                                 }
+                            } 
+    
+                            if (LimitMax.res_type == "category") {
+                                if (EquipObj.Category == LimitMax.category) {
+                                    varcount += 1;
+                                }
                             }  
 
 
@@ -843,6 +890,12 @@ export const BaseContextCallTable : CallEventTable = {
     
                             if (LimitMax.res_type == "id") {
                                 if (EquipObj.ID != LimitMax.value) {
+                                    varcount += 1;
+                                }
+                            }  
+    
+                            if (LimitMax.res_type == "category") {
+                                if (EquipObj.Category == LimitMax.category) {
                                     varcount += 1;
                                 }
                             }  
@@ -2007,7 +2060,6 @@ export const BaseContextCallTable : CallEventTable = {
                 }
             }
 
-
             return CanAdd;
         }
     },
@@ -2374,6 +2426,12 @@ export const BaseContextCallTable : CallEventTable = {
         event_priotity: 0,
         async overrideMercenarySkip(this: EventRunner, eventSource : any, relayVar : boolean, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
             return true;
+        }
+    },
+    mercenary_add_equipment: {
+        event_priotity: 0,
+        async overrideMercenarySkip(this: EventRunner, eventSource : any, relayVar : boolean, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            return false;
         }
     },
     override_stats : {

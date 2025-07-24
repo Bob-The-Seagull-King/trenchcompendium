@@ -44,7 +44,6 @@ const WbbModalAddEquipment: React.FC<WbbModalAddEquipmentProps> = ({ show, onClo
         }
     });
     
-    console.log(cache);
     useEffect(() => {
         async function SetEquipmentOptions() {
             const options = await fighter.model.GetModelEquipmentOptions()
