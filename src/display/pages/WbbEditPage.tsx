@@ -8,6 +8,7 @@ import PageMetaInformation from "../components/generics/PageMetaInformation";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
 import LoadingOverlay from '../components/generics/Loading-Overlay';
+import { WarbandFactory } from '../../factories/warband/WarbandFactory';
 
 const WbbEditPage = (prop: any) => {
     const Manager : WarbandManager = prop.manager;
@@ -17,23 +18,31 @@ const WbbEditPage = (prop: any) => {
     const urlSplits = urlPath.split('/');
     const [_currentItem, returnItem] = useState<SumWarband | null>(null);
     const [keyval, setKeyVal] = useState(0);
+    const [viewtype, setviewtype] = useState(false)
     
     const navigate = useNavigate();
 
-    function grabItemFromURL() {
+    async function grabItemFromURL() {
         const CurItemID = urlSplits.slice(-1)[0]
+        if (!isNaN(Number(CurItemID))) {
+            const ItemCurrent = Manager.GetItemByID(CurItemID);
+            if (ItemCurrent == null ) {
+                const ItemOther = await WarbandFactory.GetWarbandPublicByID(Number(CurItemID))
+                setviewtype(true)
+                return ItemOther
+            }
+            return ItemCurrent
 
-        const ItemCurrent = Manager.GetItemByID(CurItemID);
-        if (ItemCurrent == null ) {
-            navigate(`/warband/view/${CurItemID}`)
+        } else {
+            return null
         }
-        return ItemCurrent
+
     }
     
     useEffect(() => {
         async function SetWarband() {
             await Manager.GetItemsAll();
-            const Item = grabItemFromURL()
+            const Item = await grabItemFromURL()
             returnItem(Item)
             setKeyVal((prev) => (prev + 1))
         }
@@ -49,6 +58,7 @@ const WbbEditPage = (prop: any) => {
                         <WbbEditView
                             warbandData={_currentItem}
                             manager={Manager}
+                            view={viewtype}
                         />
                     </PrintModeProvider>
                 </>

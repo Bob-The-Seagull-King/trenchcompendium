@@ -44,9 +44,8 @@ export const ROUTES = {
     COMP_CAMPAIGN_SKILLS : '/skills/*',
 
     // Warband Builder Routes //
-    WBB_EDIT : '/edit/*',
     WBB_NEW : '/new/*',
-    WBB_VIEW : '/view/*',
+    WBB_VIEW : '/detail/*',
 
     // Static pages - legal stuff //
     PAGE_LEGAL : '/page/legal-notice',

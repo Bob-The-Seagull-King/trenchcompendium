@@ -3,6 +3,7 @@ import React, { createContext, useContext } from 'react';
 interface PlayModeContextType {
     playMode: boolean;
     togglePlayMode: () => void;
+    viewmode: boolean
 }
 
 const PlayModeContext = createContext<PlayModeContextType | undefined>(undefined);

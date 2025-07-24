@@ -17,6 +17,7 @@ import WbbConsumableSelect from './modals/warband/WbbConsumableSelect';
 import WbbEditStashAmountModal from './modals/warband/WbbEditStashAmountModal';
 import WbbEquipmentAddCustomStash from './modals/WbbEquipmentAddCustomStash';
 import { containsTag } from '../../../utility/functions';
+import { usePlayMode } from '../../../context/PlayModeContext';
 
 interface WbbStashDetailViewProps {
     onClose: () => void;
@@ -26,6 +27,7 @@ interface WbbStashDetailViewProps {
 const WbbStashDetailView: React.FC<WbbStashDetailViewProps> = ({ onClose }) => {
 
     const { warband, updateKey, reloadDisplay } = useWarband();
+    const { playMode } = usePlayMode();
     if (warband == null) return (<div>Loading...</div>);
 
     const [stash, setStash] = useState(warband.warband_data.GetStash())
@@ -89,6 +91,7 @@ const WbbStashDetailView: React.FC<WbbStashDetailViewProps> = ({ onClose }) => {
                     <div>
                         <strong>Value of items:</strong> {stash.ValueDucats} Ducats / {stash.ValueGlory} Glory
                     </div>
+                    {!playMode &&
                     <div className={'mt-2'}>
                         {(stash.AmountDucats < 10e10) &&
                             <div className={'btn btn-primary'}
@@ -106,13 +109,14 @@ const WbbStashDetailView: React.FC<WbbStashDetailViewProps> = ({ onClose }) => {
                             </div>
                         }
                     </div>
+                    }
                 </div>
 
 
                 <div className={'stash-items-title'}>
                     {'Stashed Items'}
                 </div>
-
+                {!playMode &&
                 <div className="stash-items-wrap">
                     <div className={'stash-items-category'}>
                         {warband?.warband_data.Equipment.filter(item =>
@@ -299,7 +303,104 @@ const WbbStashDetailView: React.FC<WbbStashDetailViewProps> = ({ onClose }) => {
                         onSubmit={handleUpdateStash}
                     />
                 </div>
+                }
+                {playMode &&
+                <div className="stash-items-wrap">
+                    <div className={'stash-items-category'}>
+                        {warband?.warband_data.Equipment.filter(item =>
+                                (((item.HeldObject as WarbandEquipment).GetEquipmentItem()).Category == "ranged" && 
+                                !containsTag(((item.HeldObject as WarbandEquipment)).Tags, 'exploration_only'))
+                                ).length > 0 &&
+                            <>
+                                {warband?.warband_data.Equipment.filter(item =>
+                                (((item.HeldObject as WarbandEquipment).GetEquipmentItem()).Category == "ranged" && 
+                                !containsTag(((item.HeldObject as WarbandEquipment)).Tags, 'exploration_only'))
+                                ).map((item: WarbandPurchase, index: number) => (
+                                    <WbbEquipmentListItem
+                                        key={index}
+                                        item={item}
+                                    />
+                                ))}
+                            </>
+                        }
+                    </div>
 
+                    <div className={'stash-items-category'}>
+                        {warband?.warband_data.Equipment.filter(item =>
+                                (((item.HeldObject as WarbandEquipment).GetEquipmentItem()).Category == "melee" && 
+                                !containsTag(((item.HeldObject as WarbandEquipment).GetEquipmentItem()).Tags, 'exploration_only'))
+                                ).length > 0 && 
+                            <>
+                                {warband?.warband_data.Equipment.filter(item =>
+                                (((item.HeldObject as WarbandEquipment).GetEquipmentItem()).Category == "melee" && 
+                                !containsTag(((item.HeldObject as WarbandEquipment).GetEquipmentItem()).Tags, 'exploration_only'))
+                                ).map((item: WarbandPurchase, index: number) => (
+                                    <WbbEquipmentListItem
+                                        key={index}
+                                        item={item}
+                                    />
+                                ))}
+                            </>
+                        }
+                    </div>
+
+                    <div className={'stash-items-category'}>
+                        {warband?.warband_data.Equipment.filter(item =>
+                                (((item.HeldObject as WarbandEquipment).GetEquipmentItem()).Category == "armour" && 
+                                !containsTag(((item.HeldObject as WarbandEquipment)).Tags, 'exploration_only'))
+                                ).length > 0 &&
+                            <>
+                                {warband?.warband_data.Equipment.filter(item =>
+                                (((item.HeldObject as WarbandEquipment).GetEquipmentItem()).Category == "armour" && 
+                                !containsTag(((item.HeldObject as WarbandEquipment)).Tags, 'exploration_only'))
+                                ).map((item: WarbandPurchase, index: number) => (
+                                    <WbbEquipmentListItem
+                                        key={index}
+                                        item={item}
+                                    />
+                                ))}
+                            </>
+                        }
+                    </div>
+
+                    <div className={'stash-items-category'}>
+                        {warband?.warband_data.Equipment.filter(item =>
+                                (((item.HeldObject as WarbandEquipment).GetEquipmentItem()).Category == "equipment" && 
+                                !containsTag(((item.HeldObject as WarbandEquipment)).Tags, 'exploration_only'))
+                                ).length > 0 &&
+                            <>
+                                {warband?.warband_data.Equipment.filter(item =>
+                                (((item.HeldObject as WarbandEquipment).GetEquipmentItem()).Category == "equipment" && 
+                                !containsTag(((item.HeldObject as WarbandEquipment)).Tags, 'exploration_only'))
+                                ).map((item: WarbandPurchase, index: number) => (
+                                    <WbbEquipmentListItem
+                                        key={index}
+                                        item={item}
+                                    />
+                                ))}
+                            </>
+                        }
+                    </div>
+
+                    <div className={'stash-items-category'}>
+                        {warband?.warband_data.Equipment.filter(item =>
+                                (containsTag(((item.HeldObject as WarbandEquipment)).Tags, 'exploration_only'))
+                                ).length > 0 &&
+                            <>
+                                {warband?.warband_data.Equipment.filter(item =>
+                                (containsTag(((item.HeldObject as WarbandEquipment)).Tags, 'exploration_only'))
+                                ).map((item: WarbandPurchase, index: number) => (
+                                    <WbbEquipmentListItem
+                                        key={index}
+                                        item={item}
+                                    />
+                                ))}
+                            </>
+                        }
+                    </div>
+                </div>
+
+                }
                 {warband?.warband_data.GetConsumablesEquipment().length > 0 &&
                     <>
                         <div className={'stash-items-title'}>

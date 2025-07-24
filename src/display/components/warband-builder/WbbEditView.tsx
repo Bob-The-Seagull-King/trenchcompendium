@@ -38,12 +38,13 @@ import WbbLocationsList from './modals/warband/WbbLocationsList';
 
 interface WbbEditViewProps {
     warbandData: SumWarband | null;
-    manager : WarbandManager
+    manager : WarbandManager;
+    view : boolean
 }
 
 
 
-const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
+const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData, view }) => {
 
     /** Set Navigation */
     const navigate = useNavigate();
@@ -106,7 +107,6 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
             query = `?warband`;
         }
 
-        // Always preserve the full pathname (like /warband/edit/WarbandName)
         navigate(`${location.pathname}${query}`, { replace: false });
     };
     const closeDetail = () => {
@@ -144,10 +144,12 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
     };
 
 
+    /** View Mode */
+    const [viewmode, setViewMode] = useState(view);
 
     /** Play mode */
-    const [playMode, setPlayMode] = useState(false);
-    const togglePlayMode = () => setPlayMode(prev => !prev);
+    const [playMode, setPlayMode] = useState(view);
+    const togglePlayMode = () => setPlayMode(prev => (view? view : !prev));
 
 
     /** Print Mode */
@@ -170,7 +172,7 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
             {/* The Warband List */}
             {(warband !== null) ? (
                 <WarbandProvider warband={warband}>
-                    <PopoverProvider> <PlayModeProvider value={{ playMode, togglePlayMode }}>
+                    <PopoverProvider> <PlayModeProvider value={{ playMode, togglePlayMode, viewmode }}>
                         <PageMetaInformation
                             title={warband.warband_data.GetWarbandName() + ' - Warband Manager'}
                             description={'Manage your warband with Trench Companion, the official resource for Trench Crusade.'}
@@ -209,14 +211,14 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                                             isActive={detailType === 'warband'}
                                         />
 
-                                        {!playMode &&
+                                        {(!playMode || viewmode) &&
                                             <WbbEditViewStash
                                                 onClick={() => openDetail('stash', null)}
                                                 isActive={detailType === 'stash'}
                                             />
                                         }
 
-                                        {!playMode &&
+                                        {(!playMode || viewmode) &&
                                             <WbbEditViewCampaign
                                                 onClick={() => openDetail('campaign', null)}
                                                 isActive={detailType === 'campaign'}
@@ -235,7 +237,7 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
 
                                         <WbbModifiersList/>
 
-                                        {!playMode &&
+                                        {(!playMode || viewmode) &&
                                             <WbbLocationsList/>
                                         }
                                     </div>
