@@ -162,7 +162,6 @@ const ProfileSubscriptionView: React.FC = () => {
                                 {'Reactivate Plan'}
                             </>
                         ) }
-                        {'Change Plans'}
                     </a>
 
                     {SiteUser.GetSubscriptionID() &&
