@@ -35,7 +35,7 @@ const HomeRoute: React.FC = () => {
                     <div className={'narrow-content'}>
                         <h1>{'Trench Companion'}</h1>
                         <div className={'sub-headline'}>
-                            {'Your digital assistant for the world of Trench Crusad'}
+                            {'Your digital assistant for the world of Trench Crusade'}
                         </div>
 
                         <div className={'spacer-20'}></div>
