@@ -335,6 +335,7 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
     /** Warband Actions */
     const [showConfirmRenameWarbandModal, setshowConfirmRenameWarbandModal] = useState(false);
     const [showConfirmExportWarbandModal, setshowConfirmExportWarbandModal] = useState(false);
+    const [showConfirmDeleteWarbandModal, setshowConfirmDeleteWarbandModal] = useState(false);
     const showConfirmRenameWarband = () => {
         setshowConfirmRenameWarbandModal(true);
     }
@@ -349,6 +350,19 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
     const showConfirmExportWarband = () => {
         setshowConfirmExportWarbandModal(true);
     }
+
+    /** Delete a warband  **/
+    const [deleteConfirmInput, setDeleteConfirmInput] = useState('');
+
+    // deletes the warband
+    const handleDeleteWarband = () => {
+        if( deleteConfirmInput == 'confirm') {
+            alert ('@TODO: delete');
+            // @TODO: Lane
+            // delete the warband and redirect to "your warbands"
+        }
+    }
+
 
     /** Print Mode */
     const handlePrintWarband = () => {
@@ -575,21 +589,27 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                                         </div>
                                     }
 
-                                    <div className="action action-rename" onClick={showConfirmRenameWarband}>
+                                    <div className="action" onClick={showConfirmRenameWarband}>
                                         <FontAwesomeIcon icon={faEdit} className="icon-inline-left-l"/>
                                         {'Rename Warband'}
                                     </div>
-                                    <div className="action action-rename" onClick={showConfirmExportWarband}>
+                                    <div className="action" onClick={showConfirmExportWarband}>
                                         <FontAwesomeIcon icon={faFileExport} className="icon-inline-left-l"/>
                                         {'Export Warband'}
                                     </div>
-                                    <div className="action action-rename" onClick={() => {
+                                    <div className="action" onClick={() => {
                                         setActivePopoverId(null);
                                         handlePrintWarband();
                                     }}>
                                         <FontAwesomeIcon icon={faPrint} className="icon-inline-left-l"/>
                                         {'Print Warband'}
                                     </div>
+
+                                    {/* @TODO: include this to enable delete option*/}
+                                    {/*<div className="action" onClick={() => setshowConfirmDeleteWarbandModal(true)}>*/}
+                                    {/*    <FontAwesomeIcon icon={faTrash} className="icon-inline-left-l"/>*/}
+                                    {/*    {'Delete Warband'}*/}
+                                    {/*</div>*/}
                                 </>
                             }
                         </div>
@@ -1061,6 +1081,52 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                     </Button>
                     <Button variant="primary" onClick={handleRenameWarband}>
                         Rename
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+            {/** Delete Warband Modal */}
+            <Modal show={showConfirmDeleteWarbandModal} onHide={() => setshowConfirmDeleteWarbandModal(false)} centered>
+                <Modal.Header closeButton={false}>
+                    <Modal.Title>{`Delete Warband`}</Modal.Title>
+
+                    <FontAwesomeIcon
+                        icon={faXmark}
+                        className="modal-close-icon"
+                        role="button"
+                        onClick={() => setshowConfirmDeleteWarbandModal(false)}
+                    />
+                </Modal.Header>
+
+                <Modal.Body>
+                    <p >
+                        {'Do you really want to delete this warband?'}
+                    </p>
+
+                    <div className={'mb-3'}>
+                        <label className="form-label small" htmlFor={'delete-warband-confirm'}>
+                            {"Type 'confirm' to delete your warband."}
+                        </label>
+                        <input
+                            type="text" id={'delete-warband-confirm'}
+                            className="form-control"
+                            placeholder=""
+                            value={deleteConfirmInput}
+                            onChange={(e) => setDeleteConfirmInput(e.target.value)}
+                        />
+
+                    </div>
+                </Modal.Body>
+
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={() => setshowConfirmDeleteWarbandModal(false)}>
+                        Cancel
+                    </Button>
+                    <Button variant="primary"
+                            onClick={handleDeleteWarband}
+                            disabled={deleteConfirmInput !== 'confirm'}
+                    >
+                        Delete
                     </Button>
                 </Modal.Footer>
             </Modal>
