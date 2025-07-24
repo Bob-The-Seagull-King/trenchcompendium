@@ -138,7 +138,6 @@ const ProfileSubscriptionView: React.FC = () => {
                                     {'No active subscription'}
                                 </>
                             ) }
-
                         </li>
                         <li className={'clickable'} onClick={
                             () => setInvoiceModalOpen(true)
@@ -154,15 +153,27 @@ const ProfileSubscriptionView: React.FC = () => {
                         navigate(ROUTES.PAGE_PLAN_SELECTION)
                     )}
                     >
+                        { SiteUser.GetSubscriptionID() ? (
+                            <>
+                                {'Change Plans'}
+                            </>
+                        ):(
+                            <>
+                                {'Reactivate Plan'}
+                            </>
+                        ) }
                         {'Change Plans'}
                     </a>
 
-                    <button className={'btn btn-secondary secondary-action'}
-                            onClick={() => setCancelSubModalOpen(true)}
-                    >
-                        <FontAwesomeIcon icon={faClose} className="icon-inline-left-s"/>
-                        {'Cancel Subscription'}
-                    </button>
+                    {SiteUser.GetSubscriptionID() &&
+                        <button className={'btn btn-secondary secondary-action'}
+                                onClick={() => setCancelSubModalOpen(true)}
+                        >
+                            <FontAwesomeIcon icon={faClose} className="icon-inline-left-s"/>
+                            {'Cancel Subscription'}
+                        </button>
+                    }
+
 
                     <Modal show={cancelSubModalOpen} size="lg"
                            contentClassName=""
