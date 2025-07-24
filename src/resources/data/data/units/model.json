@@ -439,13 +439,39 @@
         "name": "Scripture Guardian",
         "source": "core",
         "tags": {},
-        "contextdata": {
-            "mercenary_add_equipment": {
-                "additions": [
+        "contextdata": {     
+            "mercenary_add_equipment": {},
+            "model_equipment_restriction": {
+                "removed": [
                     {
-                        "type": "melee",
-                        "hands": 2,
-                        "unrestricted": true
+                        "category": "equipment",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "armour",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "ranged",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "melee",
+                        "res_type": "restricted",
+                        "value": ""
+                    }
+                ]
+            },
+            "model_equipment_limit": {
+                "maximum": [
+                    {
+                        "category": "melee",
+                        "res_type": "category",
+                        "value": "",
+                        "limit": 1
                     }
                 ]
             }
@@ -2757,7 +2783,7 @@
                 "maximum": [
                     {
                         "category": "ranged",
-                        "res_type": "all",
+                        "res_type": "category",
                         "value": "",
                         "limit": 1
                     }

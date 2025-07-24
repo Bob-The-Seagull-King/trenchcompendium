@@ -1621,11 +1621,8 @@ class WarbandMember extends DynamicContextObject {
             null
         )
 
-        if (SkipEquip) {
-            return ListOfOptions;
-        }
-
         const BaseFactionOptions : FactionEquipmentRelationship[] = await (this.MyContext as UserWarband).GetFactionEquipmentOptions(false, true, getbase);
+
 
         if (this.IsUnRestricted == true || getbase == true) {
             return BaseFactionOptions;
@@ -1642,8 +1639,15 @@ class WarbandMember extends DynamicContextObject {
         )
         
         for (let i = 0; i < BaseFactionOptions.length; i++) {
+            let CanAdd = true;
 
-            let CanAdd = (BaseFactionOptions[i].EquipmentItem.Category != "equipment") 
+            if (SkipEquip) {
+                continue;
+            }
+
+            if (CanAdd) {
+                CanAdd = (BaseFactionOptions[i].EquipmentItem.Category != "equipment") 
+            }
 
             if (!CanAdd) {
                 CanAdd = !(await this.HasSpecificEquipment(BaseFactionOptions[i].EquipmentItem.GetID()))
@@ -1705,7 +1709,6 @@ class WarbandMember extends DynamicContextObject {
         for (let j = 0; j < BaseEquipRestrictionList.length; j++) {
             NewRefList.push(BaseEquipRestrictionList[j]);
         }
-    
         let CanAdd = await eventmon.runEvent(
             "canModelAddItem",
             this,

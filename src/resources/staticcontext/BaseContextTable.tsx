@@ -449,7 +449,15 @@ export const BaseContextCallTable : CallEventTable = {
                                 if (trackVal.item.EquipmentItem.ID == Requirement.value) {
                                     CanAdd = false;
                                 }
-                            }        
+                            }   
+    
+                            if (Requirement.res_type == "restricted") {
+                                if (trackVal.item.RestrictedEquipment) {
+                                    if (trackVal.item.RestrictedEquipment.length > 0) {
+                                        CanAdd = false;
+                                    }
+                                }
+                            }      
                         }
                     }
 
@@ -820,8 +828,10 @@ export const BaseContextCallTable : CallEventTable = {
                                 }
                             } 
     
-                            if (LimitMax.res_type == "all") {
-                                varcount += 1;
+                            if (LimitMax.res_type == "category") {
+                                if (EquipObj.Category == LimitMax.category) {
+                                    varcount += 1;
+                                }
                             }  
 
 
@@ -880,6 +890,12 @@ export const BaseContextCallTable : CallEventTable = {
     
                             if (LimitMax.res_type == "id") {
                                 if (EquipObj.ID != LimitMax.value) {
+                                    varcount += 1;
+                                }
+                            }  
+    
+                            if (LimitMax.res_type == "category") {
+                                if (EquipObj.Category == LimitMax.category) {
                                     varcount += 1;
                                 }
                             }  
@@ -2044,7 +2060,6 @@ export const BaseContextCallTable : CallEventTable = {
                 }
             }
 
-
             return CanAdd;
         }
     },
@@ -2411,6 +2426,12 @@ export const BaseContextCallTable : CallEventTable = {
         event_priotity: 0,
         async overrideMercenarySkip(this: EventRunner, eventSource : any, relayVar : boolean, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
             return true;
+        }
+    },
+    mercenary_add_equipment: {
+        event_priotity: 0,
+        async overrideMercenarySkip(this: EventRunner, eventSource : any, relayVar : boolean, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            return false;
         }
     },
     override_stats : {
