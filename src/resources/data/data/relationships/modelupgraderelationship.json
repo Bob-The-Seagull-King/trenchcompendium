@@ -291,6 +291,7 @@
         "cost": 15,
         "cost_type": 0,
         "restricted_upgrades": [
+            "up_alchemicalformulae_hawkeyes"
         ],
         "warband_limit": 0,
         "required_upgrades":[]
@@ -307,6 +308,7 @@
         "cost": 10,
         "cost_type": 0,
         "restricted_upgrades": [
+            "up_alchemicalformulae_hypnoticeyes"
         ],
         "warband_limit": 0,
         "required_upgrades":[]

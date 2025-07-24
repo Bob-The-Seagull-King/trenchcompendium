@@ -1839,6 +1839,40 @@ export const BaseContextCallTable : CallEventTable = {
         }
 
     },
+    stash_equipment: {
+        event_priotity: 0,
+        async onGainUpgrade(this: EventRunner, eventSource : any, trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) {
+            const equipment = trackVal.GetEquipment();
+
+            for (let i = 0; i < equipment.length; i++) {
+                const curequip = equipment[i];
+                await trackVal.DeleteStash(curequip);
+                await warband.DirectAddStash(curequip)
+            }
+        }
+    },
+    reset_scar: {
+        event_priotity: 0,
+        async onGainUpgrade(this: EventRunner, eventSource : any, trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) {
+            const injuries = trackVal.GetInjuriesList();
+
+            for (let i = 0; i < injuries.length; i++) {
+                await trackVal.DeleteInjury(injuries[i])
+            }
+            trackVal.ScarReserve = 0;
+        }
+    },
+    reset_skill: {
+        event_priotity: 0,
+        async onGainUpgrade(this: EventRunner, eventSource : any, trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) {
+            const skills = trackVal.GetSkillsList();
+
+            for (let i = 0; i < skills.length; i++) {
+                await trackVal.DeleteSkill(skills[i])
+            }
+            trackVal.Experience = 0;
+        }
+    },
     equipment_remove_ability: {
         event_priotity: 1,
         async getWarbandMemberAbilities(this: EventRunner, eventSource : any, relayVar : Ability[], trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
@@ -1847,6 +1881,18 @@ export const BaseContextCallTable : CallEventTable = {
                 List = relayVar.filter((item) => (context_func['action_id'].includes(item.ID) == false))
             }
             return List;
+        }
+    },
+    override_upgrade_restriction: {
+        event_priotity: 0,
+        async getRestrictedUpgradesBool(this: EventRunner, eventSource : any, relayVar : boolean,  trackVal : MemberAndWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, refUpg : ModelUpgradeRelationship) {
+            
+            for (let i = 0; i < context_func["id"].length; i++) {
+                if (refUpg.ID == context_func["id"][i]) {
+                    return false;
+                }
+            }
+            return relayVar;
         }
     },
     true_add_to_model: {

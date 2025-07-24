@@ -341,9 +341,9 @@
         "tags": {"trait": true, "takwin": true},
         "contextdata": {
             "override_upgrade_restriction": {
-                "added": [
-                    "up_alchemicalformulae_hypnoticeyes",
-                    "up_alchemicalformulae_hawkeyes"
+                "id": [
+                    "rel_md_up_alchemicalformulae_hawkeyes",
+                    "rel_md_up_alchemicalformulae_hypnoticeyes"
                 ]
             }
         },
@@ -732,7 +732,8 @@
             "activated": {},
             "set_stat": { "upgrades" : [
                 {"stat": "armour", "value": -3}
-                ]},                
+                ]},     
+            "stash_equipment": {},           
             "model_equipment_restriction": {
                 "removed": [
                     {
@@ -804,10 +805,8 @@
         "tags": {"trait": true},
         "contextdata": {
             "upgrade_stat": { "upgrades": [{"stat": "melee", "value": 1}]},
-            "on_pick": {
-                "reset_scar": {},
-                "reset_skill": {}
-            }
+            "reset_scar": {},
+            "reset_skill": {}
         },
         "description": [           
             {

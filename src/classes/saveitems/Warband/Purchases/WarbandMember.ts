@@ -1143,8 +1143,8 @@ class WarbandMember extends DynamicContextObject {
         if (canaddupgrade) {
             const careAboutRestricted = await Events.runEvent(
                 "getRestrictedUpgradesBool",
-                upg,
-                [],
+                this,
+                [upg],
                 true,
                 {
                     warband: this.MyContext,
@@ -1286,6 +1286,14 @@ class WarbandMember extends DynamicContextObject {
             modelpurch : true
         }, this, NewRuleProperty);
         this.Upgrades.push(NewPurchase);
+        const eventmon : EventRunner = new EventRunner();
+        await eventmon.runEvent(
+            "onGainUpgrade",
+            NewRuleProperty,
+            [this.MyContext],
+            null,
+            this
+        )
 
         return NewPurchase;
     }
