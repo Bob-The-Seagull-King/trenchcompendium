@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import WbbWarbandListItem from "../components/warband-builder/WbbWarbandListItem";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCopy, faPlus, faUser} from "@fortawesome/free-solid-svg-icons";
+import {faCopy, faPlus, faUser, faXmark} from "@fortawesome/free-solid-svg-icons";
 import {useNavigate} from "react-router-dom";
 import { SumWarband, WarbandManager } from '../../classes/saveitems/Warband/WarbandManager';
 import CustomNavLink from '../components/subcomponents/interactables/CustomNavLink';
@@ -9,6 +9,7 @@ import { UserWarband } from '../../classes/saveitems/Warband/UserWarband';
 import PageMetaInformation from "../components/generics/PageMetaInformation";
 import LoadingOverlay from "../components/generics/Loading-Overlay";
 import {useAuth} from "../../utility/AuthContext";
+import {Button, Modal} from "react-bootstrap";
 
 
 /**
@@ -52,6 +53,11 @@ const WbbOverviewPage = (prop: any) => {
 
     };
 
+    const [showDropdown, setShowDropdown] = useState(false);
+    const [showImportModal, setShowImportModal] = useState(false);
+    const toggleDropdown = () => setShowDropdown(!showDropdown);
+    const closeDropdown = () => setShowDropdown(false);
+
     return (
         <div className={'WbbOverviewPage'}>
             <div className={'container'}>
@@ -63,24 +69,41 @@ const WbbOverviewPage = (prop: any) => {
 
                     <h1>{'Your Warbands'}</h1>
 
-                    
-                    <CustomNavLink
-                        classes={'btn btn-primary btn-new-warband'}
-                        runfunc={handleCreateNew}
-                        link={'/warband/new'}>
-                        <FontAwesomeIcon
-                            icon={faPlus}
-                            className="icon-inline-left-l"/>
 
-                        <span className={'new-warband-label'}>
-                            {'New Warband'}
-                        </span>
-                    </CustomNavLink>
+                    <div className="btn-group warband-actions-btn-group" role="group"
+                         aria-label="Global warband actions">
+                        <CustomNavLink
+                            classes={'btn btn-primary btn-new-warband'}
+                            runfunc={handleCreateNew}
+                            link={'/warband/new'}
+                        >
+                            <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
+                            <span className={'new-warband-label'}>{'New Warband'}</span>
+                        </CustomNavLink>
+
+                        {/* @TODO: iclude to show import UI */}
+                        {/*<div className="btn-group" role="group">*/}
+                        {/*    <button*/}
+                        {/*        type="button"*/}
+                        {/*        className="btn btn-primary dropdown-toggle"*/}
+                        {/*        onClick={toggleDropdown}*/}
+                        {/*    >*/}
+                        {/*    </button>*/}
+                        {/*    {showDropdown && (*/}
+                        {/*        <ul className="dropdown-menu dropdown-menu-end show" aria-labelledby="wbb-global-actions-group">*/}
+                        {/*            <li className={'dropdown-item'} onClick={() => setShowImportModal(true)}>*/}
+                        {/*                {'Import Warband'}*/}
+                        {/*            </li>*/}
+                        {/*        </ul>*/}
+                        {/*    )}*/}
+                        {/*</div>*/}
+                    </div>
                 </div>
+
 
                 <div className={'row'} key={keyvar}>
 
-                    { (!isLoading && !isLoggedIn )&&
+                    {(!isLoading && !isLoggedIn) &&
                         <div className={'col-12 col-lg-6'}>
                             <div className={'login-alert'}>
                                 <h3>
@@ -110,11 +133,11 @@ const WbbOverviewPage = (prop: any) => {
                     ) : (
                         <>
                             {allwarbands.map(item => (
-                                <WbbWarbandListItem key={item.warband_data.ID} item={item} manager={Manager} parentfunc={updateSelf}/>
+                                <WbbWarbandListItem key={item.warband_data.ID} item={item} manager={Manager}
+                                                    parentfunc={updateSelf}/>
                             ))}
                         </>
                     )}
-
 
 
                     {!isLoading &&
@@ -133,6 +156,46 @@ const WbbOverviewPage = (prop: any) => {
                     }
                 </div>
             </div>
+
+            {/** Upload / Import Warband file */}
+            {/* @TODO: implement warband import here */}
+            <Modal show={showImportModal} onHide={() => setShowImportModal(false)} centered>
+                <Modal.Header closeButton={false}>
+                    <Modal.Title>{`Import Warband`}</Modal.Title>
+
+                    <FontAwesomeIcon
+                        icon={faXmark}
+                        className="modal-close-icon"
+                        role="button"
+                        onClick={ () => setShowImportModal(false) }
+                    />
+                </Modal.Header>
+
+                <Modal.Body>
+
+                    <div className="mb-3">
+                        <label htmlFor="import-file-select" className="form-label">
+                            {'Select a file'}
+                        </label>
+                        <input
+                            className="form-control"
+                            type="file"
+                            id="import-file-select"
+                            onChange={() => alert('file selected')}
+                        />
+                    </div>
+
+                    <div className="mb-3">
+                        <button
+                            onClick={() => alert('@TODO: Import functionality')}
+                            className={'btn btn-primary'}
+
+                        >
+                            {'Import Warband'}
+                        </button>
+                    </div>
+                </Modal.Body>
+            </Modal>
         </div>
     );
 };
