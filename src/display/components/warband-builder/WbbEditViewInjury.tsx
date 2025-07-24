@@ -1,7 +1,7 @@
-import React from 'react';
-import {OverlayTrigger, Popover} from "react-bootstrap";
+import React, {useState} from 'react';
+import {Modal, OverlayTrigger, Popover} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCopy, faEllipsisVertical, faTrash} from "@fortawesome/free-solid-svg-icons";
+import {faCopy, faEllipsisVertical, faTrash, faXmark} from "@fortawesome/free-solid-svg-icons";
 import WbbContextualPopover from "./WbbContextualPopover";
 import {usePlayMode} from "../../../context/PlayModeContext";
 import { Injury } from '../../../classes/feature/ability/Injury';
@@ -15,9 +15,12 @@ const WbbEditViewInjury: React.FC<{ injury: WarbandProperty, fighter : RealWarba
     const { playMode } = usePlayMode();
 
     const SelfInjury : Injury = injury.SelfDynamicProperty.OptionChoice as Injury;
+    const [showDetailsModal, setShowDetailsModal] = useState(false);
 
     return (
-        <div className={`WbbEditViewInjury ${playMode ? 'play-mode' : ''}`}>
+        <div className={`WbbEditViewInjury ${playMode ? 'play-mode' : ''}`}
+             onClick={!playMode ? () => setShowDetailsModal(true) : undefined}
+        >
             <div className="injury-title">
                 <strong>{injury.Name}</strong>
             </div>
@@ -52,6 +55,42 @@ const WbbEditViewInjury: React.FC<{ injury: WarbandProperty, fighter : RealWarba
                     context={fighter}
                 />
             }
+
+            <Modal show={showDetailsModal} onHide={() => setShowDetailsModal(false)} className="WbbEditViewInjury-Modal" centered>
+                <Modal.Header closeButton={false}>
+                    <Modal.Title>{injury.Name}</Modal.Title>
+
+                    <FontAwesomeIcon
+                        icon={faXmark}
+                        className="modal-close-icon"
+                        role="button"
+                        onClick={
+                            (e) => {
+                                e.stopPropagation();
+                                setShowDetailsModal(false);
+                            }
+                        }
+                    />
+                </Modal.Header>
+
+                <Modal.Body>
+                    <div className="injury-description">
+                        {returnDescription(SelfInjury, SelfInjury.Description)}
+                    </div>
+
+                    {injury.SelfDynamicProperty.Selections.length > 0 &&
+                        <span className={'title-choice'}>
+                            {injury.SelfDynamicProperty.Selections.map((item) =>
+                                <WbbOptionSelect
+                                    property={injury}
+                                    key={injury.SelfDynamicProperty.Selections.indexOf(item)}
+                                    choice={item}
+                                />
+                            )}
+                        </span>
+                    }
+                </Modal.Body>
+            </Modal>
         </div>
     );
 };
