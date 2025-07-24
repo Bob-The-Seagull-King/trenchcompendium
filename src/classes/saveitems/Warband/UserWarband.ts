@@ -1871,10 +1871,20 @@ class UserWarband extends DynamicContextObject {
         this.Models.splice(adjustedIndex, 0, NewSet);
     }
 
-    public BuildExport() {
-        if (this.GeneralCache.exportval != null) {
+    public BuildExport(full = true) {
+
+        let full_mode = null // cache busting
+
+        if (this.GeneralCache.exportval != null
+            && full_mode != null
+            && (full_mode == full))
+        {
             return this.GeneralCache.exportval
         }
+
+        full_mode = full;  // cache the mode
+
+
         const LineList : string[] = [];
         const elite = this.GetFighters().filter((item) => (item.model.IsElite() && item.model.State == "active"))
         const troops = this.GetFighters().filter((item) => (!item.model.IsElite() && item.model.State == "active"))
@@ -1885,14 +1895,16 @@ class UserWarband extends DynamicContextObject {
         LineList.push("## Warband " + this.GetTrueName() + " ##")
         LineList.push(" ")
         LineList.push(this.GetDucatRatingCost().toString() + " Ducats | "+ this.GetGloryRatingCost().toString() + " Glory" )
-        LineList.push(" ")
         LineList.push("Patron: " + this.GetPatronName())
         if (elite.length > 0) {
+            LineList.push(" ")
             LineList.push(" ")
             LineList.push("## Elites ##")
             for (let i = 0; i < elite.length; i++) {
                 LineList.push("  ")
-                LineList.push(elite[i].model.GetTrueName() + " - " + elite[i].model.GetModelName() + "  " + elite[i].purchase.GetTotalDucats().toString() + " Ducats | " + elite[i].purchase.GetTotalGlory().toString() + " Glory")
+                LineList.push(elite[i].model.GetTrueName() + " - " + elite[i].model.GetModelName())
+
+                LineList.push("• Cost: "+elite[i].purchase.GetTotalDucats().toString() + " Ducats | " + elite[i].purchase.GetTotalGlory().toString() + " Glory")
                 if (elite[i].model.Upgrades.length > 0) {
                     LineList.push("  " + "Upgrades & Choices: ")
                     const UpgradesList : string[] = []
@@ -1902,246 +1914,242 @@ class UserWarband extends DynamicContextObject {
                     LineList.push("    " + UpgradesList.join(', '))
                 }
                 if (elite[i].model.Equipment.length > 0) {
-                    LineList.push("  Equipment: ")
-                    LineList.push("    " + elite[i].model.GetEquipmentAsString())
+                    LineList.push("• Equipment: "+ elite[i].model.GetEquipmentAsString())
                 }
                 if (elite[i].model.Skills.length > 0) {
-                    LineList.push("  Skills: ")
                     const UpgradesList : string[] = []
                     for (let j = 0; j < elite[i].model.Skills.length; j++) {
                         UpgradesList.push(elite[i].model.Skills[j].SelfDynamicProperty.OptionChoice.GetTrueName())
                     }
-                    LineList.push("    " + UpgradesList.join(', '))
+                    LineList.push("• Skills: " + UpgradesList.join(', '))
                 }
                 if (elite[i].model.Injuries.length > 0) {
-                    LineList.push("  " + "Injuries: ")
                     const UpgradesList : string[] = []
                     for (let j = 0; j < elite[i].model.Injuries.length; j++) {
                         UpgradesList.push(elite[i].model.Injuries[j].SelfDynamicProperty.OptionChoice.GetTrueName())
                     }
-                    LineList.push("    " + UpgradesList.join(', '))
+                    LineList.push("• Injuries: " + UpgradesList.join(', '))
                 }
             }
         }
+
         if (troops.length > 0) {
+            LineList.push("  ")
             LineList.push("  ")
             LineList.push("## Troops ##")
             for (let i = 0; i < troops.length; i++) {
                 LineList.push("  ")
-                LineList.push(troops[i].model.GetTrueName() + " - " + troops[i].model.GetModelName() + "  " + troops[i].purchase.GetTotalDucats().toString() + " Ducats | " + troops[i].purchase.GetTotalGlory().toString() + " Glory")
+                LineList.push(troops[i].model.GetTrueName() + " - " + troops[i].model.GetModelName())
+                LineList.push("• Cost: " + troops[i].purchase.GetTotalDucats().toString() + " Ducats | " + troops[i].purchase.GetTotalGlory().toString() + " Glory")
                 if (troops[i].model.Upgrades.length > 0) {
-                    LineList.push("  " + "Upgrades & Choices: ")
                     const UpgradesList : string[] = []
                     for (let j = 0; j < troops[i].model.Upgrades.length; j++) {
                         UpgradesList.push(troops[i].model.Upgrades[j].GetItemName())
                     }
-                    LineList.push("    " + UpgradesList.join(', '))
+                    LineList.push("• Upgrades & Choices: " + UpgradesList.join(', '))
                 }
                 if (troops[i].model.Equipment.length > 0) {
-                    LineList.push("  " + "Equipment: ")
-                    LineList.push("    " + troops[i].model.GetEquipmentAsString())
+                    LineList.push("• Equipment: " + troops[i].model.GetEquipmentAsString())
                 }
                 if (troops[i].model.Skills.length > 0) {
-                    LineList.push("    " + "Skills: ")
                     const UpgradesList : string[] = []
                     for (let j = 0; j < troops[i].model.Skills.length; j++) {
                         UpgradesList.push(troops[i].model.Skills[j].SelfDynamicProperty.OptionChoice.GetTrueName())
                     }
-                    LineList.push("    " + UpgradesList.join(', '))
+                    LineList.push("• Skills: " + UpgradesList.join(', '))
                 }
                 if (troops[i].model.Injuries.length > 0) {
-                    LineList.push("  " + "Injuries: ")
                     const UpgradesList : string[] = []
                     for (let j = 0; j < troops[i].model.Injuries.length; j++) {
                         UpgradesList.push(troops[i].model.Injuries[j].SelfDynamicProperty.OptionChoice.GetTrueName())
                     }
-                    LineList.push("    " + UpgradesList.join(', '))
+                    LineList.push("• Injuries: " + UpgradesList.join(', '))
                 }
             }
         }
         if (mercenaries.length > 0) {
             LineList.push("  ")
+            LineList.push("  ")
             LineList.push("## Mercenaries ##")
             for (let i = 0; i < mercenaries.length; i++) {
                 LineList.push("  ")
-                LineList.push(mercenaries[i].model.GetTrueName() + " - " + mercenaries[i].model.GetModelName() + "  " + mercenaries[i].purchase.GetTotalDucats().toString() + " Ducats | " + mercenaries[i].purchase.GetTotalGlory().toString() + " Glory")
+                LineList.push(mercenaries[i].model.GetTrueName() + " - " + mercenaries[i].model.GetModelName())
+                LineList.push("• Cost: " + mercenaries[i].purchase.GetTotalDucats().toString() + " Ducats | " + mercenaries[i].purchase.GetTotalGlory().toString() + " Glory")
                 if (mercenaries[i].model.Upgrades.length > 0) {
-                    LineList.push("  " + "Upgrades & Choices: ")
                     const UpgradesList : string[] = []
                     for (let j = 0; j < mercenaries[i].model.Upgrades.length; j++) {
                         UpgradesList.push(mercenaries[i].model.Upgrades[j].GetItemName())
                     }
-                    LineList.push("    " + UpgradesList.join(', '))
+                    LineList.push("• Upgrades & Choices: " + UpgradesList.join(', '))
                 }
                 if (mercenaries[i].model.Equipment.length > 0) {
-                    LineList.push("  " + "Equipment: ")
-                    LineList.push("    " + mercenaries[i].model.GetEquipmentAsString())
+                    LineList.push("• Equipment: " + mercenaries[i].model.GetEquipmentAsString())
                 }
                 if (mercenaries[i].model.Skills.length > 0) {
-                    LineList.push("  " + "Skills: ")
                     const UpgradesList : string[] = []
                     for (let j = 0; j < mercenaries[i].model.Skills.length; j++) {
                         UpgradesList.push(mercenaries[i].model.Skills[j].SelfDynamicProperty.OptionChoice.GetTrueName())
                     }
-                    LineList.push("    " + UpgradesList.join(', '))
+                    LineList.push("• Skills: " + UpgradesList.join(', '))
                 }
                 if (mercenaries[i].model.Injuries.length > 0) {
-                    LineList.push("  " + "Injuries: ")
                     const UpgradesList : string[] = []
                     for (let j = 0; j < mercenaries[i].model.Injuries.length; j++) {
                         UpgradesList.push(mercenaries[i].model.Injuries[j].SelfDynamicProperty.OptionChoice.GetTrueName())
                     }
-                    LineList.push("    " + UpgradesList.join(', '))
+                    LineList.push("• Injuries: " + UpgradesList.join(', '))
                 }
             }
         }
-        if (reserves.length > 0) {
+
+        if (reserves.length > 0 && full) {
+            LineList.push("  ")
             LineList.push("  ")
             LineList.push("## Reserves ##")
             for (let i = 0; i < reserves.length; i++) {
                 LineList.push("  ")
-                LineList.push(reserves[i].model.GetTrueName() + " - " + reserves[i].model.GetModelName() + "  " + reserves[i].purchase.GetTotalDucats().toString() + " Ducats | " + reserves[i].purchase.GetTotalGlory().toString() + " Glory")
+                LineList.push(reserves[i].model.GetTrueName() + " - " + reserves[i].model.GetModelName())
+                LineList.push("• Cost: " + reserves[i].purchase.GetTotalDucats().toString() + " Ducats | " + reserves[i].purchase.GetTotalGlory().toString() + " Glory")
                 if (reserves[i].model.Upgrades.length > 0) {
-                    LineList.push("  " + "Upgrades & Choices: ")
                     const UpgradesList : string[] = []
                     for (let j = 0; j < reserves[i].model.Upgrades.length; j++) {
                         UpgradesList.push(reserves[i].model.Upgrades[j].GetItemName())
                     }
-                    LineList.push("    " + UpgradesList.join(', '))
+                    LineList.push("• Upgrades & Choices: " + UpgradesList.join(', '))
                 }
                 if (reserves[i].model.Equipment.length > 0) {
-                    LineList.push("  " + "Equipment: ")
-                    LineList.push("    " + reserves[i].model.GetEquipmentAsString())
+                    LineList.push("• Equipment: " + reserves[i].model.GetEquipmentAsString())
                 }
                 if (reserves[i].model.Skills.length > 0) {
-                    LineList.push("  " + "Skills: ")
                     const UpgradesList : string[] = []
                     for (let j = 0; j < reserves[i].model.Skills.length; j++) {
                         UpgradesList.push(reserves[i].model.Skills[j].SelfDynamicProperty.OptionChoice.GetTrueName())
                     }
-                    LineList.push("    " + UpgradesList.join(', '))
+                    LineList.push("• Skills: " + UpgradesList.join(', '))
                 }
                 if (reserves[i].model.Injuries.length > 0) {
-                    LineList.push("  " + "Injuries: ")
                     const UpgradesList : string[] = []
                     for (let j = 0; j < reserves[i].model.Injuries.length; j++) {
                         UpgradesList.push(reserves[i].model.Injuries[j].SelfDynamicProperty.OptionChoice.GetTrueName())
                     }
-                    LineList.push("    " + UpgradesList.join(', '))
+                    LineList.push("• Injuries: " + UpgradesList.join(', '))
                 }
             }
         }
-        if (lost.length > 0) {
+
+        if (lost.length > 0 && full) {
+            LineList.push("  ")
             LineList.push("  ")
             LineList.push("## Lost & Captured ##")
             for (let i = 0; i < lost.length; i++) {
                 LineList.push("  ")
-                LineList.push(lost[i].model.GetTrueName() + " - " + lost[i].model.GetModelName() + "  " + lost[i].purchase.GetTotalDucats().toString() + " Ducats | " + lost[i].purchase.GetTotalGlory().toString() + " Glory")
+                LineList.push(lost[i].model.GetTrueName() + " - " + lost[i].model.GetModelName())
+                LineList.push("• Cost: " + lost[i].purchase.GetTotalDucats().toString() + " Ducats | " + lost[i].purchase.GetTotalGlory().toString() + " Glory")
                 if (lost[i].model.Upgrades.length > 0) {
-                    LineList.push("  " + "Upgrades & Choices: ")
                     const UpgradesList : string[] = []
                     for (let j = 0; j < lost[i].model.Upgrades.length; j++) {
                         UpgradesList.push(lost[i].model.Upgrades[j].GetItemName())
                     }
-                    LineList.push("    " + UpgradesList.join(', '))
+                    LineList.push("• Upgrades & Choices: " + UpgradesList.join(', '))
                 }
                 if (lost[i].model.Equipment.length > 0) {
-                    LineList.push("  " + "Equipment: ")
-                    LineList.push("    " + lost[i].model.GetEquipmentAsString())
+                    LineList.push("• Equipment: " + lost[i].model.GetEquipmentAsString())
                 }
                 if (lost[i].model.Skills.length > 0) {
-                    LineList.push("  " + "Skills: ")
                     const UpgradesList : string[] = []
                     for (let j = 0; j < lost[i].model.Skills.length; j++) {
                         UpgradesList.push(lost[i].model.Skills[j].SelfDynamicProperty.OptionChoice.GetTrueName())
                     }
-                    LineList.push("    " + UpgradesList.join(', '))
+                    LineList.push("• Skills: " + UpgradesList.join(', '))
                 }
                 if (lost[i].model.Injuries.length > 0) {
-                    LineList.push("  " + "Injuries: ")
                     const UpgradesList : string[] = []
                     for (let j = 0; j < lost[i].model.Injuries.length; j++) {
                         UpgradesList.push(lost[i].model.Injuries[j].SelfDynamicProperty.OptionChoice.GetTrueName())
                     }
-                    LineList.push("    " + UpgradesList.join(', '))
+                    LineList.push("• Injuries: " + UpgradesList.join(', '))
                 }
             }
         }
-        if (dead.length > 0) {
+        if (dead.length > 0 && full) {
+            LineList.push("  " )
             LineList.push("  " )
             LineList.push("## Dead ##")
             for (let i = 0; i < dead.length; i++) {
-                LineList.push("  ")
-                LineList.push("  " + dead[i].model.GetTrueName() + " - " + dead[i].model.GetModelName() + "  " + dead[i].purchase.GetTotalDucats().toString() + " Ducats | " + dead[i].purchase.GetTotalGlory().toString() + " Glory")
+                LineList.push("• Cost: ")
+                LineList.push(dead[i].model.GetTrueName() + " - " + dead[i].model.GetModelName())
+                LineList.push("  " + dead[i].purchase.GetTotalDucats().toString() + " Ducats | " + dead[i].purchase.GetTotalGlory().toString() + " Glory")
                 if (dead[i].model.Upgrades.length > 0) {
-                    LineList.push("  " + "Upgrades & Choices: ")
                     const UpgradesList : string[] = []
                     for (let j = 0; j < dead[i].model.Upgrades.length; j++) {
                         UpgradesList.push(dead[i].model.Upgrades[j].GetItemName())
                     }
-                    LineList.push("    " + UpgradesList.join(', '))
+                    LineList.push("• Upgrades & Choices: " + UpgradesList.join(', '))
                 }
                 if (dead[i].model.Equipment.length > 0) {
-                    LineList.push("  " + "Equipment: ")
-                    LineList.push("    " + dead[i].model.GetEquipmentAsString())
+                    LineList.push("• Equipment: " + dead[i].model.GetEquipmentAsString())
                 }
                 if (dead[i].model.Skills.length > 0) {
-                    LineList.push("  " + "Skills: ")
                     const UpgradesList : string[] = []
                     for (let j = 0; j < dead[i].model.Skills.length; j++) {
                         UpgradesList.push(dead[i].model.Skills[j].SelfDynamicProperty.OptionChoice.GetTrueName())
                     }
-                    LineList.push("    " + UpgradesList.join(', '))
+                    LineList.push("• Skills: " + UpgradesList.join(', '))
                 }
                 if (dead[i].model.Injuries.length > 0) {
-                    LineList.push("  " + "Injuries: ")
                     const UpgradesList : string[] = []
                     for (let j = 0; j < dead[i].model.Injuries.length; j++) {
                         UpgradesList.push(dead[i].model.Injuries[j].SelfDynamicProperty.OptionChoice.GetTrueName())
                     }
-                    LineList.push("    " + UpgradesList.join(', '))
+                    LineList.push("• Injuries: " + UpgradesList.join(', '))
                 }
             }
         }
-        if (this.GetAllEquipment().length > 0) {
+        if (this.GetAllEquipment().length > 0 && full) {
 
             LineList.push("  " )
+            LineList.push("  " )
             LineList.push("## Stash ##")
+            LineList.push("  " )
 
             const UpgradesList : string[] = []
             for (let j = 0; j < this.GetAllEquipment().length; j++) {
                 UpgradesList.push(this.GetAllEquipment()[j].equipment.GetTrueName())
             }
-            LineList.push("  " + UpgradesList.join(', '))
+            LineList.push(UpgradesList.join(', '))
         }
+
         if (this.Modifiers.length > 0) {
 
             LineList.push("  ")
+            LineList.push("  ")
             LineList.push("## Modifiers ##")
+            LineList.push("  ")
 
             for (let j = 0; j < this.Modifiers.length; j++) {
-                LineList.push("  ")
                 LineList.push(this.Modifiers[j].SelfDynamicProperty.OptionChoice.GetTrueName())
                 for (let k = 0; k < this.Modifiers[j].SelfDynamicProperty.Selections.length; k++) {
                     const mod = this.Modifiers[j].SelfDynamicProperty.Selections[k].SelectedChoice
                     if (mod != null) {
-                        LineList.push("    " + mod.display_str)
+                        LineList.push("• " + mod.display_str)
                     }
                 }
             }
         }
-        if (this.Fireteams.length > 0) {
+
+        if (this.Fireteams.length > 0 && full) {
 
             LineList.push("  ")
+            LineList.push("  ")
             LineList.push("## Fireteams ##")
+            LineList.push("  ")
 
             for (let j = 0; j < this.Fireteams.length; j++) {
-                LineList.push("  ")
                 LineList.push(this.Fireteams[j].SelfDynamicProperty.OptionChoice.GetTrueName())
                 for (let k = 0; k < this.Fireteams[j].SelfDynamicProperty.Selections.length; k++) {
                     const mod = this.Fireteams[j].SelfDynamicProperty.Selections[k].SelectedChoice
                     if (mod != null) {
-                        LineList.push("    " + mod.display_str)
+                        LineList.push("• " + mod.display_str)
                     }
                 }
             }
@@ -2150,15 +2158,16 @@ class UserWarband extends DynamicContextObject {
         if (Locations.length > 0) {
 
             LineList.push("  ")
+            LineList.push("  ")
             LineList.push("## Locations ##")
+            LineList.push("  ")
 
             for (let j = 0; j < Locations.length; j++) {
-                LineList.push("  ")
                 LineList.push(Locations[j].SelfDynamicProperty.OptionChoice.GetTrueName())
                 for (let k = 0; k < Locations[j].SelfDynamicProperty.Selections.length; k++) {
                     const mod = Locations[j].SelfDynamicProperty.Selections[k].SelectedChoice
                     if (mod != null) {
-                        LineList.push("    " + mod.display_str)
+                        LineList.push("• " + mod.display_str)
                     }
                 }
             }

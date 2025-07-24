@@ -80,25 +80,33 @@ const ProfilePageAchievements: React.FC<ProfilePageAchievementsProps> = ({ userD
                 </div>
 
                 <div className={'profile-card-content'}>
-                    <ul className={'achievement-list'}>
-                        {achievements.map((achievement) => (
-                            <OverlayTrigger
-                                key={achievement.id}
-                                trigger="click"
-                                placement="top"
-                                overlay={renderPopover(achievement)}
-                                rootClose // closes the popover when clicking outside
-                            >
-                                <li className={'achievement'} style={{ cursor: 'pointer' }}>
-                                    <img
-                                        src={achievement.image_url}
-                                        alt={achievement.name}
-                                        className={'achievement-image'}
-                                    />
-                                </li>
-                            </OverlayTrigger>
-                        ))}
-                    </ul>
+                    { achievements.length > 0 ? (
+                        <ul className={'achievement-list'}>
+
+
+                            {achievements.map((achievement) => (
+                                <OverlayTrigger
+                                    key={achievement.id}
+                                    trigger="click"
+                                    placement="top"
+                                    overlay={renderPopover(achievement)}
+                                    rootClose // closes the popover when clicking outside
+                                >
+                                    <li className={'achievement'} style={{ cursor: 'pointer' }}>
+                                        <img
+                                            src={achievement.image_url}
+                                            alt={achievement.name}
+                                            className={'achievement-image'}
+                                        />
+                                    </li>
+                                </OverlayTrigger>
+                            ))}
+                        </ul>
+                    ):(
+                        <div className={'px-4 py-4'}>
+                            {'No Achievements collected'}
+                        </div>
+                    )}
                 </div>
             </div>
         </div>

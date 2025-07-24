@@ -63,9 +63,14 @@ const StaticPremiumMembership: React.FC = () => {
                             <h2>
                                 {'Upload Your Own Images'}
                             </h2>
+                            <h3>
+                                {'Coming Soon'}
+                            </h3>
 
                             <p>
-                                {"Premium members can personalize their experience by uploading custom images to their warbands and profiles. Showcase your painted miniatures  — and make your creations truly yours. It's your warband, your style."}
+                                {"Premium members will be able to personalize their experience by uploading custom images to their warbands and profiles. Showcase your painted miniatures  — and make your creations truly yours. It's your warband, your style."}
+                                <br/><br/>
+                                {"Only with your support, we will be able to create this feature."}
                             </p>
                         </>
                     }
@@ -79,9 +84,12 @@ const StaticPremiumMembership: React.FC = () => {
                             <h2>
                                 {'Premium Visual Customization'}
                             </h2>
+                            <h3>
+                                {'Coming Soon'}
+                            </h3>
 
                             <p>
-                                {"As a premium member, you get access to exclusive UI skins and profile picture options. Match your interface to your favorite faction, theme, or personal aesthetic — and stand out with a unique visual style across the app."}
+                                {"As a premium member, you will be able to get access to exclusive UI skins and profile picture options. Match your interface to your favorite faction, theme, or personal aesthetic — and stand out with a unique visual style across the app."}
                             </p>
                         </>
                     }

@@ -88,11 +88,10 @@ const WbbModalAddEquipment: React.FC<WbbModalAddEquipmentProps> = ({ show, onClo
                         className={'select-item-wrap'}
                     >
                         <div
-
                             className={`select-item ${selectedID === cache[item].facrel.ID ? 'selected' : ''} ${available.includes(cache[item].facrel) ? '' : 'disabled'}`}
                             onClick={() => {
                                 if (available.includes(cache[item].facrel)) {
-                                    setSelectedID(cache[item].facrel.ID)
+                                    setSelectedID(prev => prev === cache[item].facrel.ID ? null : cache[item].facrel.ID)
                                 }
                             }}
                         >

@@ -6,6 +6,16 @@
 .home-screen
     padding-top: 40px
 
+    h1
+        margin-bottom: 5px
+
+    .sub-headline
+        font-style: italic
+
+    .main-links
+        margin-top: 30px
+        margin-bottom: 30px
+
     .home-link-primary
         position: relative
         display: block
@@ -63,23 +73,30 @@
             @media(max-width: 350px)
                 font-size: 24px
 
-        //&.coming-soon
-        //    .title
-        //        opacity: 0.5
-        //    img
-        //        opacity: 0.5
-        //
-        //.coming-soon-label
-        //    position: absolute
-        //    z-index: 5
-        //    top: 50%
-        //    left: 30px
-        //    right: 30px
-        //    text-align: center
-        //    transform-origin: center center
-        //    transform: rotate(-30deg) translateY(-50%)
-        //
-        //    font-family: $font-headline
-        //    font-size: 32px
-        //    color: $color-highlight
-        //    //font-weight: bold
+        &.coming-soon
+            .title
+                opacity: 0.5
+            img
+                opacity: 0.5
+
+            &:hover:after
+                background-color: rgba(0,0,0,0.4)
+
+        .coming-soon-label
+            position: absolute
+            z-index: 5
+            top: 50%
+            left: 30px
+            right: 30px
+            text-align: center
+            transform-origin: center center
+            transform: rotate(-30deg) translateY(-50%)
+
+            font-family: $font-headline
+            font-size: 38px
+            color: $color-highlight
+            //font-weight: bold
+            text-shadow: 1px 1px 3px #000
+
+            @media (max-width: 991px) and (min-width: 768px)
+                font-size: 28px

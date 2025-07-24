@@ -82,7 +82,7 @@ const WbbEquipmentListItem: React.FC<EquipmentItemProps> = ({ item, fighter }) =
     return (
         <div className={`WbbEquipmentListItem ${playMode ? 'play-mode' : ''} ${printMode ? 'print-mode' : ''} `}
              key={keyvar}
-            onClick={() => setShowDetailsModal(true)}
+            onClick={!playMode ? () => setShowDetailsModal(true) : undefined}
         >
 
             <Modal show={showDetailsModal} onHide={() => setShowDetailsModal(false)} className="" centered>
@@ -114,8 +114,6 @@ const WbbEquipmentListItem: React.FC<EquipmentItemProps> = ({ item, fighter }) =
                     </div>
                 </Modal.Body>
             </Modal>
-
-
 
 
             <div className="equipment-name">{ItemValue.GetTrueName()}

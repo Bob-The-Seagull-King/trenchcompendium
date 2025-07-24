@@ -64,6 +64,10 @@ export const ROUTES = {
 
     PAGE_PLAN_SELECTION : '/page/plan-selection', // will let users select and purchase membership plans
 
+    // Blog posts
+    PAGE_BLOG_BASE: '/blog',
+    PAGE_BLOG_ARTICLE: '/blog/:slug',
+
     // Main Site URL
     MAIN : 'https://trench-companion.com'
 

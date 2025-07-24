@@ -63,13 +63,17 @@ const OffcanvasMenu: React.FC<IControllerProp> = (prop) => {
             title: 'Premium Membership',
             link: ROUTES.PAGE_MEMBERSHIP
         },
-        {
-            title: 'Supporter Packs',
-            link: ROUTES.PAGE_SUPPORTER_PACKS
-        },
+        // { // disabled until we have created supporter packs
+        //     title: 'Supporter Packs',
+        //     link: ROUTES.PAGE_SUPPORTER_PACKS
+        // },
         {
             title: 'Collaboration',
             link: ROUTES.PAGE_COLLABORATE
+        },
+        {
+            title: 'Blog',
+            link: ROUTES.PAGE_BLOG_BASE
         },
     ]
 

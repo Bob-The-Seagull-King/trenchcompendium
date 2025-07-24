@@ -60,60 +60,42 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData, view }) => {
         }
     }, [warbandData]);
 
-    /** Enable Browser Navigation for all detail types */
-    useEffect(() => {
-        const searchParams = new URLSearchParams(location.search);
-
-        if (searchParams.has('fighter')) {
-            const fighterId = searchParams.get('fighter');
-            const fighter = warband?.warband_data.GetFighters().find(f => f.model.ID === fighterId);
-            if (fighter) {
-                setDetailType('fighter');
-                setDetailPayload(fighter);
-            }
-        } else if (searchParams.has('stash')) {
-            setDetailType('stash');
-            setDetailPayload(null);
-        } else if (searchParams.has('campaign')) {
-            setDetailType('campaign');
-            setDetailPayload(null);
-        } else if (searchParams.has('warband')) {
-            setDetailType('warband');
-            setDetailPayload(null);
-        } else {
-            setDetailType(null);
-            setDetailPayload(null);
-        }
-    }, [location.search, warband]);
-
     //** Start Detail view stuff
     type DetailType = 'fighter' | 'stash' | 'warband' | 'campaign' | null;
 
     const [detailType, setDetailType] = useState<DetailType>(null);
     const [detailPayload, setDetailPayload] = useState<any>(null);
-    const openDetail = (type: DetailType, payload: any = null) => { // Sets the detail type and payload and uses navigation to enable default browser nav
-        setDetailType(type);
+
+    const openDetail = (type: DetailType, payload: any = null) => {
         setDetailPayload(payload);
+        setDetailType(type);
 
-        let query = '';
-
-        if (type === 'fighter' && payload?.Slug) {
-            query = `?fighter=${payload.Slug}`;
-        } else if (type === 'stash') {
-            query = `?stash`;
-        } else if (type === 'campaign') {
-            query = `?campaign`;
-        } else if (type === 'warband') {
-            query = `?warband`;
+        // Only push history if detail view was not open
+        if (detailType === null) {
+            window.history.pushState({ detailOpen: true }, '');
         }
+    };
 
-        navigate(`${location.pathname}${query}`, { replace: false });
-    };
     const closeDetail = () => {
-        setDetailType(null);
         setDetailPayload(null);
-        navigate(location.pathname, { replace: false }); // remove search params
+        setDetailType(null);
+        
+        // Recover old history state
+        window.history.replaceState({}, '');
     };
+
+    useEffect(() => {
+        const handlePopState = (e: PopStateEvent) => {
+            if (detailType !== null) {
+                closeDetail();
+            }
+        };
+
+        window.addEventListener('popstate', handlePopState);
+        return () => window.removeEventListener('popstate', handlePopState);
+    }, [detailType]);
+
+
 
     // scroll to top when item is selected
     const selectedItemWrapRef = useRef<HTMLDivElement>(null);

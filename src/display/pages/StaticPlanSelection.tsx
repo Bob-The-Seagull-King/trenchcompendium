@@ -59,15 +59,11 @@ const StaticPlanSelection: React.FC = () => {
     if( loadingUser || !SiteUser ) {
         return (
             <div className={'StaticPlanSelection'}>
-                <div className={'spacer-20'}/>
-                <div className={'spacer-20'}/>
-
-                <LoadingOverlay
-                    message={'Loading your Membership'}
-                />
-
-                <div className={'spacer-20'}/>
-                <div className={'spacer-20'}/>
+                <div className={'LoadingOverlay-wrap-100vh'}>
+                    <LoadingOverlay
+                        message={'Loading your Membership'}
+                    />
+                </div>
             </div>
         );
     }
