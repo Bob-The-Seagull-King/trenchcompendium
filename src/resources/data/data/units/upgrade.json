@@ -1213,6 +1213,7 @@
             "description" : [],
             "category" : "type",
             "type" : "text",
+            "hide": true,
             "strictness" : "strict",
             "predefined_options" : [],
             "option_context" : {"basic_option_default":{}},

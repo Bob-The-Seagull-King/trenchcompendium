@@ -15,6 +15,7 @@ interface IStaticOption {
     dyna_only? : boolean // Ensures it only gets active if the parent can be found
     autoselect?: boolean
     option_context : ContextEventVals // Used for choice generating methods.
+    hide?: boolean
 }
 
 interface IChoice {
@@ -34,6 +35,7 @@ the ability to ask questions in order to get selection options.
 class StaticOption {
     public RefID : string;
     public Name : string;
+    public HideSearch : boolean;
     public Category : string;
     public ContextVars : ContextEventEntry;
     public DynaForce : boolean;
@@ -53,6 +55,7 @@ class StaticOption {
 
         this.MyStaticObject = parent;
         this.Description = DescriptionFactory(data.description, this);
+        this.HideSearch = (data.hide != undefined)? data.hide : false;
         this.DynaForce = (data.dyna_only != undefined)? data.dyna_only : false;
         this.AutoSelect = (data.autoselect != undefined)? data.autoselect : false;
         this.OptionContext = data.option_context;

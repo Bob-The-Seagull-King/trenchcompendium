@@ -1728,13 +1728,76 @@ class WarbandMember extends DynamicContextObject {
 
         for (let i = 0; i < AddedOptions.length; i++) {
 
+            const countcurrent = (this.MyContext as UserWarband).GetCountOfEquipmentRel(AddedOptions[i].ID)
+            let oblimit = 1
+            let maxccurcostount = AddedOptions[i].Cost;
+            let canadd = true;
+            const restrictionlists : EquipmentRestriction[] = []
+            const EquipRestrictionList : EquipmentRestriction[] = await eventmon.runEvent(
+                "getEquipmentRestriction",AddedOptions[i],[], [], null )
+            const BaseEquipRestrictionList : EquipmentRestriction[] = await eventmon.runEvent(
+                "getEquipmentRestriction", AddedOptions[i].EquipmentItem, [], [], null )
+            for (let j = 0; j < EquipRestrictionList.length; j++) { restrictionlists.push(EquipRestrictionList[j]); }
+            for (let j = 0; j < BaseEquipRestrictionList.length; j++) { restrictionlists.push(BaseEquipRestrictionList[j]); }
+
+            const StringOfRestrictions = await eventmon.runEvent(
+                "getEquipmentRestrictionPresentable",
+                AddedOptions[i],
+                [],
+                [],
+                restrictionlists
+            )
+            
+            oblimit = await eventmon.runEvent(
+                "getEquipmentLimitTrue",
+                AddedOptions[i],
+                [AddedOptions[i]],
+                oblimit,
+                this.MyContext as UserWarband
+            )
+            
+            oblimit = await eventmon.runEvent(
+                "getEquipmentLimitTrue",
+                this.MyContext as UserWarband,
+                [AddedOptions[i]],
+                oblimit,
+                this.MyContext as UserWarband
+            )
+
+            maxccurcostount = await eventmon.runEvent(
+                "getCostOfEquipment",
+                AddedOptions[i],
+                [],
+                maxccurcostount,
+                this.MyContext as UserWarband
+            )
+
+            canadd = await eventmon.runEvent(
+                "canWarbandAddItem",
+                this.MyContext as UserWarband,
+                [restrictionlists, AddedOptions[i]],
+                true,
+                this.MyContext as UserWarband
+            )
+            if (countcurrent < oblimit || (oblimit == 0 && AddedOptions[i].Limit == 0)) {
+                
+                if (AddedOptions[i].CostType == 0) {
+                    canadd = (this.MyContext as UserWarband).GetSumCurrentDucats() >= maxccurcostount;
+                }
+                if (AddedOptions[i].CostType == 1) {
+                    canadd = (this.MyContext as UserWarband).GetSumCurrentGlory() >= maxccurcostount;
+                }
+            } else {
+                canadd = false;
+            }
+
             fincache[AddedOptions[i].ID] = {
-                canadd: true,
-                cost: AddedOptions[i].Cost,
-                count_cur: 0,
-                limit: 1,
+                canadd: canadd,
+                cost: maxccurcostount,
+                count_cur: countcurrent,
+                limit: oblimit,
                 facrel: AddedOptions[i],
-                restrictions: []
+                restrictions: StringOfRestrictions
             }
 
         }
@@ -1759,19 +1822,14 @@ class WarbandMember extends DynamicContextObject {
 
         const BaseFactionOptions : FactionEquipmentRelationship[] = await (this.MyContext as UserWarband).GetFactionEquipmentOptions(false, true, getbase);
 
-        const AddedOptions : FactionEquipmentRelationship[] = await eventmon.runEvent(
-            "getAddedModelEquipmentOptions",
-            this,
-            [],
-            [],
-            null
-        )
         const NewOptions : FactionEquipmentRelationship[] = []
-        console.log("NEW OPTIONS")
-        console.log(AddedOptions)
+        const cachespecial = await this.GetSpecialCache();
+        const cachekeys = Object.keys(cachespecial)
 
-        for (let i = 0; i < AddedOptions.length; i++) {
-            NewOptions.push(AddedOptions[i])
+        for (let i = 0; i < cachekeys.length; i++) {
+            if (cachespecial[cachekeys[i]].canadd) {
+                NewOptions.push(cachespecial[cachekeys[i]].facrel)
+            }
         }
         for (let i = 0; i < BaseFactionOptions.length; i++) {
             NewOptions.push(BaseFactionOptions[i])

@@ -67,7 +67,7 @@ class DynamicOptionContextObject extends DynamicContextObject {
                         static_packages[j].callpath.push("SelectedChoiceOption")
                         subpackages.push(static_packages[j])
                     }
-                } else if (this.Selections[i].SelectedChoice?.value instanceof ContextObject) {
+                } else if (this.Selections[i].SelectedChoice?.value instanceof ContextObject && (this.Selections[i].Option.HideSearch == false)) {
                     const static_packages : ContextPackage[] = await this.Selections[i].SelectedChoice?.value.GrabContextPackages(event_id, source_obj, arrs_extra);
                     for (let j = 0; j < static_packages.length; j++) {
                         static_packages[j].callpath.push("DynamicOptionContextObject")
