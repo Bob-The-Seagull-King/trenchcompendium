@@ -3059,15 +3059,18 @@ export const BaseContextCallTable : CallEventTable = {
     },
     purchase_modifier_equipment: {
         event_priotity: 0,        
-        async onGainSkill(this: EventRunner, eventSource : any, trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) {
-            /*const alllist = warband.GetEntireWarbandEquipment()
-            
+        async onRemoveSkill(this: EventRunner, eventSource : any, trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband, id : string) {
+            const alllist = warband.GetEntireWarbandEquipment()
+            const appliedMods = new Map<WarbandEquipment, Set<number>>();
+
             for (let o = 0; o < alllist.length; o++) {
                 const CurEq = alllist[o].purchase
+                const CurEqItem = CurEq.HeldObject as WarbandEquipment
+
                 if (CurEq.Sellable == false) {
                     continue;
                 }
-                const CurEqItem = CurEq.HeldObject as WarbandEquipment
+
                 if (context_func["mod"]) {
                     for (let k = 0; k < context_func["mod"].length; k++) {
                         let CanAdd = false
@@ -3084,7 +3087,7 @@ export const BaseContextCallTable : CallEventTable = {
                                 }
                                 if (Cur["cost"]) {
                                     if (Cur['req_mod'] == ">=") {
-                                        if ( Number(CurEq.ItemCost) < Number(Cur["cost"]) || Number(Cur["costtype"]) != Number(CurEq.CostType)) {
+                                        if ( Number(CurEq.ItemCost - context_func["mod"][k]["cost"]) < Number(Cur["cost"]) || Number(Cur["costtype"]) != Number(CurEq.CostType)) {
                                             AllCriteria = false;
                                         }
                                     }
@@ -3096,12 +3099,71 @@ export const BaseContextCallTable : CallEventTable = {
                             CanAdd = true;
                         }
                         if (CanAdd) {
-                            CurEq.ItemCost += context_func["mod"][k]["cost"]
+                            if (!appliedMods.has(CurEqItem)) {
+                                appliedMods.set(CurEqItem, new Set());
+                            }
+                            const modsForItem = appliedMods.get(CurEqItem)!;
+                            if (!modsForItem.has(k)) {
+                                CurEq.ItemCost -= context_func["mod"][k]["cost"];
+                                modsForItem.add(k);
+                            }
                         }
                     }
                 }
-            }*/
-            console.log("dumped")
+            }
+        },
+        async onGainSkill(this: EventRunner, eventSource : any, trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) {
+            const alllist = warband.GetEntireWarbandEquipment()
+            const appliedMods = new Map<WarbandEquipment, Set<number>>();
+
+            for (let o = 0; o < alllist.length; o++) {
+                const CurEq = alllist[o].purchase
+                const CurEqItem = CurEq.HeldObject as WarbandEquipment
+
+                if (CurEq.Sellable == false) {
+                    continue;
+                }
+
+                if (context_func["mod"]) {
+                    for (let k = 0; k < context_func["mod"].length; k++) {
+                        let CanAdd = false
+                        let AllCriteria = true
+
+                        if (context_func["mod"][k]["requirements"]) {
+                            for (let i = 0; i < context_func["mod"][k]["requirements"].length; i++) {
+                                const Cur = context_func["mod"][k]["requirements"][i]
+
+                                if (Cur["category"]) {
+                                    if (Cur["category"] != CurEqItem.GetEquipmentItem().Category) {
+                                        AllCriteria = false;
+                                    }
+                                }
+                                if (Cur["cost"]) {
+                                    if (Cur['req_mod'] == ">=") {
+                                        if ( Number(CurEq.ItemCost - context_func["mod"][k]["cost"]) < Number(Cur["cost"]) || Number(Cur["costtype"]) != Number(CurEq.CostType)) {
+                                            AllCriteria = false;
+                                        }
+                                    }
+                                }
+                            }
+
+                        }
+                        if (AllCriteria) {
+                            CanAdd = true;
+                        }
+                        if (CanAdd) {
+                            if (!appliedMods.has(CurEqItem)) {
+                                appliedMods.set(CurEqItem, new Set());
+                            }
+                            const modsForItem = appliedMods.get(CurEqItem)!;
+                            if (!modsForItem.has(k)) {
+                                CurEq.ItemCost += context_func["mod"][k]["cost"];
+                                modsForItem.add(k);
+                            }
+                        }
+                    }
+                }
+            }
         },
         async getCostOfEquipment(this: EventRunner, eventSource : any, relayVar: number, trackVal: UserWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, coreitem : FactionEquipmentRelationship) {
             

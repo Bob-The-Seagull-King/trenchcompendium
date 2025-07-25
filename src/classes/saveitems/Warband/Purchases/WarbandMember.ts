@@ -302,7 +302,8 @@ class WarbandMember extends DynamicContextObject {
         return AbilitiesAvailable;
     }
 
-    public async BuildEquipment(data : IWarbandPurchaseEquipment[]) {
+    public async BuildEquipment(data : IWarbandPurchaseEquipment[] = this.SelfData.equipment) {
+        this.Equipment = [];
         for (let i = 0; i < data.length; i++) {
             const Model : WarbandEquipment = await WarbandFactory.CreateWarbandEquipment(data[i].equipment, this);
             const NewPurchase : WarbandPurchase = new WarbandPurchase(data[i].purchase, this, Model);
@@ -2234,9 +2235,13 @@ class WarbandMember extends DynamicContextObject {
                 modelpur = true;
             }
         }
+        let itemcost = item.Cost;
+        if ((this.MyContext as UserWarband).EquipmentRelCache[item.ID] != null) {
+            itemcost = (this.MyContext as UserWarband).EquipmentRelCache[item.ID].cost
+        }
         const Equipment : WarbandEquipment = await WarbandFactory.BuildWarbandEquipmentFromPurchase(item, this);
         const NewPurchase : WarbandPurchase = new WarbandPurchase({
-            cost_value : item.Cost,
+            cost_value : itemcost,
             cost_type : item.CostType,
             count_limit : true,
             count_cap : true,

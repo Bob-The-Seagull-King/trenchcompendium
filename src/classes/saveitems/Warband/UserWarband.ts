@@ -170,8 +170,9 @@ class UserWarband extends DynamicContextObject {
         }
     }
 
-    public async BuildEquipment(data : IWarbandPurchaseEquipment[]) {
+    public async BuildEquipment(data : IWarbandPurchaseEquipment[] = this.SelfData.equipitem) {
         if (data == undefined) {return;}
+        this.Equipment = [];
         for (let i = 0; i < data.length; i++) {
             const Model : WarbandEquipment = await WarbandFactory.CreateWarbandEquipment(data[i].equipment, this);
             const NewPurchase : WarbandPurchase = new WarbandPurchase(data[i].purchase, this, Model);
@@ -890,9 +891,13 @@ class UserWarband extends DynamicContextObject {
     }
     
     public async AddStash ( stash: FactionEquipmentRelationship ) {
+        let itemcost = stash.Cost;
+        if ((this).EquipmentRelCache[stash.ID] != null) {
+            itemcost = (this).EquipmentRelCache[stash.ID].cost
+        }
         const Equipment : WarbandEquipment = await WarbandFactory.BuildWarbandEquipmentFromPurchase(stash, this);
         const NewPurchase : WarbandPurchase = new WarbandPurchase({
-            cost_value : stash.Cost,
+            cost_value : itemcost,
             cost_type : stash.CostType,
             count_limit : true,
             count_cap : true,
