@@ -1222,22 +1222,44 @@
                 "searchparam":    {
                     "type": "factionequipmentrelationship",
                     "request":    {
-                        "operator": "or",
+                        "operator": "and",
                         "terms": [
-                            {             
-                                "item": "faction_id",
-                                "value": "fc_newantioch",
-                                "equals": true,
-                                "strict": true
-                            },
-                            {             
-                                "item": "faction_id",
-                                "value": "fc_hereticlegion",
-                                "equals": true,
-                                "strict": true
-                            }
                         ],
                         "subparams": [
+                        {
+                            "operator": "or",
+                            "terms": [
+                                {             
+                                    "item": "faction_id",
+                                    "value": "fc_newantioch",
+                                    "equals": true,
+                                    "strict": true
+                                },
+                                {             
+                                    "item": "faction_id",
+                                    "value": "fc_hereticlegion",
+                                    "equals": true,
+                                    "strict": true
+                                }
+                            ],
+                            "subparams": [
+                                
+                            ]
+                        },
+                        {
+                            "operator": "and",
+                            "terms": [
+                                {             
+                                    "item": "faction_id",
+                                    "value": "fc_cultoftheblackgrail",
+                                    "equals": false,
+                                    "strict": true
+                                }
+                            ],
+                            "subparams": [
+                                
+                            ]
+                        }
                             
                         ]
                     }
@@ -1499,6 +1521,7 @@
             "category" : "type",
             "type" : "text",
             "strictness" : "strict",
+            "hide": true,
             "predefined_options" : [],
             "option_context" : {"basic_option_default":{}},
             "data_search" : {      
@@ -1506,28 +1529,50 @@
                 "searchparam":    {
                     "type": "factionequipmentrelationship",
                     "request":    {
-                        "operator": "or",
+                        "operator": "and",
                         "terms": [
-                            {             
-                                "item": "faction_id",
-                                "value": "fc_newantioch",
-                                "equals": true,
-                                "strict": true
-                            },
-                            {             
-                                "item": "faction_id",
-                                "value": "fc_trenchpilgrim",
-                                "equals": true,
-                                "strict": true
-                            },
-                            {             
-                                "item": "faction_id",
-                                "value": "fc_ironsultanate",
-                                "equals": true,
-                                "strict": true
-                            }
                         ],
                         "subparams": [
+                        {
+                            "operator": "or",
+                            "terms": [
+                                {             
+                                    "item": "faction_id",
+                                    "value": "fc_newantioch",
+                                    "equals": true,
+                                    "strict": true
+                                },
+                                {             
+                                    "item": "faction_id",
+                                    "value": "fc_trenchpilgrim",
+                                    "equals": true,
+                                    "strict": true
+                                },
+                                {             
+                                    "item": "faction_id",
+                                    "value": "fc_ironsultanate",
+                                    "equals": true,
+                                    "strict": true
+                                }
+                            ],
+                            "subparams": [
+                                
+                            ]
+                        },
+                        {
+                            "operator": "and",
+                            "terms": [
+                                {             
+                                    "item": "faction_id",
+                                    "value": "fc_courtofthesevenheadedserpent",
+                                    "equals": false,
+                                    "strict": true
+                                }
+                            ],
+                            "subparams": [
+                                
+                            ]
+                        }
                             
                         ]
                     }
@@ -1871,11 +1916,9 @@
         "id": "up_goetic_greed_bodyofgold",
         "name": "Body of Gold",
         "source": "core",
-        "tags": {"trait": true, "special_category": "goetic"
-                },
+        "tags": {"trait": true, "special_category": "goetic" },
         "contextdata": {
-            "keyword_mod": {"mods": [{"type": "add", "value": "kw_golem"}]},
-            "keyword_mod_remove": {"mods": [{"type": "remove", "value": "kw_tough"}]}
+            "keyword_mod": {"mods": [{"type": "add", "value": "kw_golem"},{"type": "remove", "value": "kw_tough"}]}
         },
         "description": [          
             {
