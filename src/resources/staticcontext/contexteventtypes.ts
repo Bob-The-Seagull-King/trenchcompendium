@@ -84,6 +84,7 @@ export interface CallEvents {
     onGainUpgrade? : (this: EventRunner, eventSource : any, trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) => Promise<void>; 
     onGainSkill? : (this: EventRunner, eventSource : any, trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) => Promise<void>; 
     onRemoveUpgrade? : (this: EventRunner, eventSource : any, trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband, id : string) => Promise<void>; 
+    onRemoveSkill? : (this: EventRunner, eventSource : any, trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband, id : string) => Promise<void>; 
     careAboutInjury? : (this: EventRunner, eventSource : any, relayVar: boolean, trackVal : Injury, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, member : WarbandMember) => Promise<boolean>; 
     showSkillOnWarband? : (this: EventRunner, eventSource : any, relayVar : boolean, trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, member : WarbandMember) => Promise<boolean>; 
     showEquipmentOnWarband? : (this: EventRunner, eventSource : any, relayVar : boolean, trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, member : WarbandMember) => Promise<boolean>; 
@@ -112,6 +113,7 @@ export interface CallEvents {
     onWarbandBuild? : (this: EventRunner, eventSource : any, trackVal : UserWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<void>; 
     findFinalKeywordsForEquipment? : (this: EventRunner, eventSource : any, relayVar: Keyword[],  context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, coreitem : WarbandEquipment) => Promise<Keyword[]>;
     getnewrange? : (this: EventRunner, eventSource : any, relayVar: number,  context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, coreitem : WarbandEquipment) => Promise<number>;
+    getCostOfEquipment? : (this: EventRunner, eventSource : any, relayVar: number, trackVal: UserWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, coreitem : FactionEquipmentRelationship) => Promise<number>;
     getNumberOfElite? : (this: EventRunner, eventSource : any, relayVar: number, trackVal: UserWarband,  context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<number>;
     
 }

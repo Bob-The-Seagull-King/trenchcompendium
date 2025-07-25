@@ -3057,6 +3057,90 @@ export const BaseContextCallTable : CallEventTable = {
             return relayVar;
         }
     },
+    purchase_modifier_equipment: {
+        event_priotity: 0,        
+        async onGainSkill(this: EventRunner, eventSource : any, trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) {
+            /*const alllist = warband.GetEntireWarbandEquipment()
+            
+            for (let o = 0; o < alllist.length; o++) {
+                const CurEq = alllist[o].purchase
+                if (CurEq.Sellable == false) {
+                    continue;
+                }
+                const CurEqItem = CurEq.HeldObject as WarbandEquipment
+                if (context_func["mod"]) {
+                    for (let k = 0; k < context_func["mod"].length; k++) {
+                        let CanAdd = false
+                        let AllCriteria = true
+
+                        if (context_func["mod"][k]["requirements"]) {
+                            for (let i = 0; i < context_func["mod"][k]["requirements"].length; i++) {
+                                const Cur = context_func["mod"][k]["requirements"][i]
+
+                                if (Cur["category"]) {
+                                    if (Cur["category"] != CurEqItem.GetEquipmentItem().Category) {
+                                        AllCriteria = false;
+                                    }
+                                }
+                                if (Cur["cost"]) {
+                                    if (Cur['req_mod'] == ">=") {
+                                        if ( Number(CurEq.ItemCost) < Number(Cur["cost"]) || Number(Cur["costtype"]) != Number(CurEq.CostType)) {
+                                            AllCriteria = false;
+                                        }
+                                    }
+                                }
+                            }
+
+                        }
+                        if (AllCriteria) {
+                            CanAdd = true;
+                        }
+                        if (CanAdd) {
+                            CurEq.ItemCost += context_func["mod"][k]["cost"]
+                        }
+                    }
+                }
+            }*/
+            console.log("dumped")
+        },
+        async getCostOfEquipment(this: EventRunner, eventSource : any, relayVar: number, trackVal: UserWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, coreitem : FactionEquipmentRelationship) {
+            
+            let HoldVar = relayVar;
+            if (context_func["mod"]) {
+                for (let k = 0; k < context_func["mod"].length; k++) {
+                    let CanAdd = false
+                    let AllCriteria = true
+
+                    if (context_func["mod"][k]["requirements"]) {
+                        for (let i = 0; i < context_func["mod"][k]["requirements"].length; i++) {
+                            const Cur = context_func["mod"][k]["requirements"][i]
+
+                            if (Cur["category"]) {
+                                if (Cur["category"] != coreitem.EquipmentItem.Category) {
+                                    AllCriteria = false;
+                                }
+                            }
+                            if (Cur["cost"]) {
+                                if (Cur['req_mod'] == ">=") {
+                                    if ( Number(coreitem.Cost) < Number(Cur["cost"]) || Number(Cur["costtype"]) != Number(coreitem.CostType)) {
+                                        AllCriteria = false;
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+                    if (AllCriteria) {
+                        CanAdd = true;
+                    }
+                    if (CanAdd) {
+                        HoldVar += context_func["mod"][k]["cost"]
+                    }
+                }
+            }
+            return HoldVar;
+        }
+    },
     add_extra_equipment: {
         event_priotity: 0,
         async getEquipmentLimitTrue(this: EventRunner, eventSource : any, relayVar: number, trackVal : UserWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, ref_equip : FactionEquipmentRelationship) {

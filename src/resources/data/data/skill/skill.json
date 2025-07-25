@@ -1154,6 +1154,7 @@
         "tags": { "trait": true },
         "contextdata": {
             "warband_wide": {},
+            "add_onto_warband": {},
             "purchase_modifier_equipment": {
                 "mod": [
                     {
@@ -1164,6 +1165,7 @@
                             },
                             {
                                 "cost": 20,
+                                "costtype": 0,
                                 "req_mod": ">="
                             }
                         ]
@@ -1207,6 +1209,7 @@
         "tags": { "trait": true },
         "contextdata": {
             "warband_wide": {},
+            "add_onto_warband": {},
             "purchase_modifier_equipment": {
                 "mod": [
                     {
@@ -1229,6 +1232,7 @@
                             },
                             {
                                 "cost": 20,
+                                "costtype": 0,
                                 "req_mod": ">="
                             }
                         ]
@@ -1253,6 +1257,7 @@
         "tags": { "trait": true },
         "contextdata": {
             "warband_wide": {},
+            "add_onto_warband": {},
             "purchase_modifier_equipment": {
                 "mod": [
                     {
@@ -1263,6 +1268,7 @@
                             },
                             {
                                 "cost": 20,
+                                "costtype": 0,
                                 "req_mod": ">="
                             }
                         ]

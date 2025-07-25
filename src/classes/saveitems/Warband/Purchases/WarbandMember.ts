@@ -2518,6 +2518,14 @@ class WarbandMember extends DynamicContextObject {
                 break;
             }
         }
+        const eventmon : EventRunner = new EventRunner();
+        await eventmon.runEvent(
+            "onRemoveSkill",
+            item,
+            [this.MyContext],
+            null,
+            this
+        )
     }
 }
 

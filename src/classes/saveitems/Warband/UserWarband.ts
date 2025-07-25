@@ -1679,6 +1679,19 @@ class UserWarband extends DynamicContextObject {
         return false;
     }
 
+    public GetEntireWarbandEquipment() {
+        let options : RealWarbandPurchaseEquipment[] = [ ];
+
+        options = [...options, ...this.GetAllEquipment()]
+
+        for (let i = 0; i < this.Models.length; i++) {
+            const Mod = this.Models[i].HeldObject as WarbandMember;
+            options = [...options, ...Mod.GetEquipment()]
+        }
+
+        return options;
+    }
+
     public GetAllEquipment() {
         
         const options : RealWarbandPurchaseEquipment[] = [ ];
@@ -1791,7 +1804,15 @@ class UserWarband extends DynamicContextObject {
                 maxccurcostount = await eventmon.runEvent(
                     "getCostOfEquipment",
                     BaseRels[i],
-                    [],
+                    [BaseRels[i]],
+                    maxccurcostount,
+                    this
+                )
+
+                maxccurcostount = await eventmon.runEvent(
+                    "getCostOfEquipment",
+                    this,
+                    [BaseRels[i]],
                     maxccurcostount,
                     this
                 )
