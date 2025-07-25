@@ -20,6 +20,7 @@ const WbbEquipmentStats: React.FC<EquipmentItemProps> = (props : EquipmentItemPr
 
 
     const abilityObject = (((props.item.HeldObject as WarbandEquipment).MyEquipment.SelfDynamicProperty.OptionChoice as Equipment))
+    const warbadnequip = (((props.item.HeldObject as WarbandEquipment)))
     const [statlist] = useState<EquipmentStats>(abilityObject.Stats)
     const [cost] = useState<number>(props.item.ItemCost)
     const [costtype] = useState<number>(props.item.CostType)
@@ -28,9 +29,7 @@ const WbbEquipmentStats: React.FC<EquipmentItemProps> = (props : EquipmentItemPr
     
 
     /** Range */
-    let RangeVal = ""
-    if (baseequip.Distance > 0) {RangeVal += baseequip.Distance.toString() + "\""}
-    if (statlist.melee == true) {RangeVal += "Melee"}
+    const RangeVal = warbadnequip.GetRange();
 
     /** Hands */
     let HandValMelee = ""

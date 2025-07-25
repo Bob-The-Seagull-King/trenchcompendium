@@ -792,11 +792,26 @@
         "tags": { "trait": true, "bonus": true, "modifier": true },
         "contextdata": { 
             "equipment_modifier": {
-                "equipment_type": ["ranged"],
-                "modifier_type": { "range": 6 },
-                "modifier_condition": {
-                    "tag": ["pistol","rifle","jezzail"]
-                }
+                "equipment_type": [
+                    {
+                        "res_type": "tag",
+                        "value": "pistol"
+                    },
+                    {
+                        "res_type": "tag",
+                        "value": "rifle"
+                    },
+                    {
+                        "res_type": "tag",
+                        "value": "jezzail"
+                    }
+                ],
+                "modifier_type": [
+                    {
+                        "type": "range",
+                        "value": 6
+                    }
+                ]
             } },
         "description": [            
             {
@@ -981,6 +996,7 @@
         "source": "core",
         "tags": { "trait": true, "faction": true},
         "contextdata": {      
+            "add_onto_warband": {},
             "get_elite_count_cap": { "modify_value": 1 }       
         },
         "description": [            

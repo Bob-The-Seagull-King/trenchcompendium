@@ -111,6 +111,8 @@ export interface CallEvents {
     validateModelForWarband? : (this: EventRunner, eventSource : any, relayVar: string[], trackVal : WarbandPurchase, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : UserWarband) => Promise<string[]>;
     onWarbandBuild? : (this: EventRunner, eventSource : any, trackVal : UserWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<void>; 
     findFinalKeywordsForEquipment? : (this: EventRunner, eventSource : any, relayVar: Keyword[],  context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, coreitem : WarbandEquipment) => Promise<Keyword[]>;
+    getnewrange? : (this: EventRunner, eventSource : any, relayVar: number,  context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, coreitem : WarbandEquipment) => Promise<number>;
+    getNumberOfElite? : (this: EventRunner, eventSource : any, relayVar: number, trackVal: UserWarband,  context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<number>;
     
 }
 

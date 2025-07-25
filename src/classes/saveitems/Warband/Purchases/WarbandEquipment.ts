@@ -25,7 +25,8 @@ interface IWarbandEquipment extends IContextObject {
 export interface WarbandEquipmentCache {
     CanRemove : boolean,
     CanSwap : boolean,
-    KeywordsCache : Keyword[]
+    KeywordsCache : Keyword[],
+    range: number
 }
 
 class WarbandEquipment extends DynamicContextObject {
@@ -83,10 +84,19 @@ class WarbandEquipment extends DynamicContextObject {
             null
         )
 
+        const rangenew = await eventmon.runEvent(
+            "getnewrange",
+            fighter,
+            [this],
+            this.GetEquipmentItem().Distance,
+            null
+        )
+
         this.EquipmentCache = {
             CanRemove: CanRemove,
             CanSwap: noSwap,
-            KeywordsCache : keywords
+            KeywordsCache : keywords,
+            range: rangenew
         }
     }
 
@@ -138,6 +148,30 @@ class WarbandEquipment extends DynamicContextObject {
             return this.GetEquipmentItem().GetKeyWords();
         }
     }
+
+    /**
+     *  Return Range as String
+     */
+    GetRange () {
+        if (this.EquipmentCache) {
+            let rangestring = '';
+
+            if( this.EquipmentCache?.range ) {
+                rangestring += this.EquipmentCache?.range+'"';
+            }
+
+            if( this.EquipmentCache?.range && this.GetEquipmentItem().Stats.melee ) {
+                rangestring += ' / ';
+            }
+
+            if( this.GetEquipmentItem().Stats.melee ) {
+                rangestring += 'Melee';
+            }
+            return rangestring;
+        } else {
+            return this.GetEquipmentItem().GetRange();
+        }
+        }
 
     /**
      * Grabs the packages from any sub-objects, based

@@ -3318,6 +3318,49 @@ export const BaseContextCallTable : CallEventTable = {
             return relayVar;
         }
     },
+    equipment_modifier: {
+        event_priotity: 0,
+        
+        async getnewrange(this: EventRunner, eventSource : any, relayVar: number,  context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, coreitem : WarbandEquipment) {
+
+            let DoCare = false;
+            if (context_func["equipment_type"]) {
+                for (let i = 0; i < context_func["equipment_type"].length; i++) {
+                    const Cur = context_func["equipment_type"][i]
+
+                    if (Cur["res_type"] == "tag") {
+                        if (containsTag(coreitem.MyEquipment.SelfDynamicProperty.OptionChoice.Tags, Cur["value"])) {
+                            DoCare = true;
+                        }
+                    }
+                }
+            }
+
+            if (DoCare) {
+                if (context_func["modifier_type"]) {
+                    for (let i = 0; i < context_func["modifier_type"].length; i++) {
+                        const Cur = context_func["modifier_type"][i]
+
+                        if (Cur["type"] == "range") {
+                            relayVar += Cur["value"]
+                        }
+                    }
+                }
+
+            }
+            
+            return relayVar;
+        }
+    },
+    get_elite_count_cap: {
+        event_priotity: 0,
+        async getNumberOfElite(this: EventRunner, eventSource : any, relayVar: number, trackVal: UserWarband,  context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            if (context_func["modify_value"]) {
+                return relayVar + context_func["modify_value"]
+            }
+            return relayVar;
+        }
+    },
     add_onto_warband: {
         event_priotity: 0,
         async showSkillOnWarband(this: EventRunner, eventSource : any, relayVar : boolean, trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, member : WarbandMember) {

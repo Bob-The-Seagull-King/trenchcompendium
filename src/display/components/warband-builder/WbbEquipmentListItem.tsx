@@ -47,6 +47,7 @@ const WbbEquipmentListItem: React.FC<EquipmentItemProps> = ({ item, fighter }) =
     const [canRemove, setCanRemove] = useState(item.Sellable);
     const [cantSwap, setCantSwap] = useState(false);
     const [keywordlist, setKeywordList] = useState<Keyword[]>([]);
+    const [range, setrange] = useState<string>("");
     const [keyvar, setKeyvar] = useState(0);
 
     const ItemValue = (((item.HeldObject as WarbandEquipment).MyEquipment.SelfDynamicProperty.OptionChoice as Equipment))
@@ -62,6 +63,7 @@ const WbbEquipmentListItem: React.FC<EquipmentItemProps> = ({ item, fighter }) =
                     setCanRemove(cache.CanRemove)
                     setCantSwap(cache.CanSwap)
                     setKeywordList(cache.KeywordsCache)
+                    setrange((item.HeldObject as WarbandEquipment).GetRange())
                 }
                 setKeyvar((prev) => prev + 1)
             }
@@ -152,13 +154,13 @@ const WbbEquipmentListItem: React.FC<EquipmentItemProps> = ({ item, fighter }) =
             {(playMode && !printMode)  &&
                 <div className={'equipment-details'}>
                     <table>
-                        { ItemValue.GetRange() &&
+                        { range != "" &&
                             <tr>
                                 <td>
                                     Range
                                 </td>
                                 <td>
-                                    {ItemValue.GetRange()}
+                                    {range}
                                 </td>
                             </tr>
                         }

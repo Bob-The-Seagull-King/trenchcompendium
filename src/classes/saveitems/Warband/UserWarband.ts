@@ -112,7 +112,14 @@ class UserWarband extends DynamicContextObject {
         this.ModelRelCache = {}
         this.GeneralCache = {}
         for (let i = 0; i < this.Models.length; i++) {
-            (this.Models[i].HeldObject as WarbandMember).GeneralCache = {}
+            const Mod = this.Models[i].HeldObject as WarbandMember
+            Mod.GeneralCache = {}
+            for (let j = 0; j < Mod.Equipment.length; j++) {
+                (Mod.Equipment[j].HeldObject as WarbandEquipment).EquipmentCache = null
+            }
+        }
+        for (let i = 0; i < this.Equipment.length; i++) {
+            (this.Equipment[i].HeldObject as WarbandEquipment).EquipmentCache = null
         }
     }
 
@@ -1210,7 +1217,7 @@ class UserWarband extends DynamicContextObject {
                 this,
                 [],
                 6,
-                null
+                this
             )
         }
 
