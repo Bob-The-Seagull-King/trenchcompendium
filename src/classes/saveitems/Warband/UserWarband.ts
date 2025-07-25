@@ -211,6 +211,32 @@ class UserWarband extends DynamicContextObject {
         return false;
     }
 
+    public GetAttatchementsForModel(model : WarbandMember) {
+        const fighters = this.GetUsableFighters();
+        const list : WarbandProperty[] = []
+        for (let i = 0; i < fighters.length; i++) {
+            const newlist = fighters[i].model.GetObjectsWithAttatch()
+            for (let j = 0 ; j < newlist.length; j++) {
+                let IsFound = false;
+
+                for (let k = 0; k < newlist[j].SelfDynamicProperty.Selections.length; k++) {
+                    const selec = newlist[j].SelfDynamicProperty.Selections[k]
+                    if (selec.SelectedChoice != null) {
+                        if (selec.SelectedChoice.value == model) {
+                            IsFound = true;
+                            break;
+                        }
+                    }
+                }
+                if (IsFound) {
+                
+                    list.push(newlist[j])
+                }
+            }
+        }
+        return list;
+    }
+
     public async IsModelInOtherFireteam(model : WarbandMember) : Promise<boolean> {
         
         for (let i = 0; i < this.Fireteams.length; i++) {
@@ -583,6 +609,25 @@ class UserWarband extends DynamicContextObject {
                     model: this.Models[i].HeldObject as WarbandMember
                 }
             )
+        }
+
+        return options;
+    }
+    /**
+     * Get the Fighters for this warbands
+     */
+    public GetUsableFighters() {
+        const options : RealWarbandPurchaseModel[] = [ ];
+
+        for (let i = 0; i < this.Models.length; i++) {
+            if ((this.Models[i].HeldObject as WarbandMember).State == "active" || (this.Models[i].HeldObject as WarbandMember).State == "reserved") {
+                options.push(
+                    {
+                        purchase: this.Models[i],
+                        model: this.Models[i].HeldObject as WarbandMember
+                    }
+                )
+            }
         }
 
         return options;

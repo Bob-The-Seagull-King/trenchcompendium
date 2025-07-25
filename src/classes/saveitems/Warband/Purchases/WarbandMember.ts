@@ -35,6 +35,8 @@ import { StaticContextObject } from "../../../contextevent/staticcontextobject";
 import { GetStatAsFullString, MergeTwoStats, ModelStatistics } from "../../../feature/model/ModelStats";
 import { KeywordFactory } from "../../../../factories/features/KeywordFactory";
 import { Fireteam } from "../../../feature/ability/Fireteam";
+import { StaticOption } from "../../../options/StaticOption";
+import { ContextEventVals } from "../../../../resources/staticcontext/contexteventtypes";
 
 export interface SkillSuite {
     skillgroup : StaticContextObject,
@@ -87,7 +89,8 @@ export interface GeneralModelCache {
     final_stats?: ModelStatistics,
     equipment_options?: FactionEquipmentRelationship[],
     validation_check?: string[]
-    can_copy_self?: string
+    can_copy_self?: string,
+    attatchments?: WarbandProperty[]
 }
 
 interface IWarbandMember extends IContextObject {
@@ -432,6 +435,23 @@ class WarbandMember extends DynamicContextObject {
         return _objint;
     }
 
+    public GetObjectsWithAttatch() {
+        const List : WarbandProperty[] = []
+        for (let i = 0; i < this.Upgrades.length; i++) {
+            const obj = (this.Upgrades[i].HeldObject as WarbandProperty)
+            if (obj.SelfDynamicProperty.OptionChoice.ContextKeys["model_attatch"]) {
+                List.push(this.Upgrades[i].HeldObject as WarbandProperty)
+            }
+        }
+
+        return List;
+    }
+
+    public GetOwnAttatchements() {
+        const list = (this.MyContext as UserWarband).GetAttatchementsForModel(this)
+        return list;
+    }
+
     public async CanCopySelf() {
         if (this.GeneralCache.can_copy_self != null) {
             return this.GeneralCache.can_copy_self
@@ -619,6 +639,33 @@ class WarbandMember extends DynamicContextObject {
                 static_packages[j].callpath.push("WarbandMember")
                 subpackages.push(static_packages[j])
             }
+        }
+
+        const attatchments = await this.GetOwnAttatchements();
+        
+        for (let i = 0; i < attatchments.length; i++) {
+            const attachementkeys = (attatchments[i]).SelfDynamicProperty.OptionChoice.ContextKeys["model_attatch"]["apply_to_attatch"] as ContextEventVals
+            if (attachementkeys == undefined) { continue;}
+            for (const key of Object.keys(attachementkeys)) {
+                const context_entry = this.ContextData[key]
+                if (context_entry == undefined) {continue;}
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore - dynamic lookup
+                const func = context_entry[event_id];
+                if (func !== undefined) {
+                    const curr_package : ContextPackage = {
+                        priority    : context_entry.event_priotity,
+                        source      : source_obj,
+                        self        : attatchments[i],
+                        callback    : func,
+                        callbackdict: attachementkeys[key],
+                        dyncontext  : attatchments[i].MyContext,
+                        callpath    : ["StaticContextObject"]
+                    }
+
+                    subpackages.push(curr_package);
+                }                
+             }
         }
 
         return subpackages; 
