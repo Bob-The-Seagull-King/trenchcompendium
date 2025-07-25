@@ -1462,11 +1462,13 @@
         "source": "core",
         "tags": { "trait": true },
         "contextdata": {
+            "warband_general_hook": {},
             "warband_wide": {}, 
+            "add_onto_warband": {},
             "add_extra_equipment": {
                 "count": 1,
                 "restriction": []
-            } },
+            }  },
         "description": [            
             {
                 "tags": {"desc_type" : "default"},
@@ -1477,7 +1479,17 @@
             }
         ],
         "options": [
-            
+            {
+                "ref_id" : "ot_knowledgeofscience",
+                "name" : "",
+                "description" : [],
+                "self_ask": true,
+                "category" : "contextobject",
+                "option_context" : {"basic_option_default":{}},
+                "dyna_only": true,
+                "parent_level": 7,
+                "question_name": "getEquipmentRelationshipsForWarband"
+            }
         ],
         "skill_group": ["pt_learnedsaint"]
     },
@@ -1595,7 +1607,9 @@
         "name": "Walk with God",
         "source": "core",
         "tags": { "trait": true },
-        "contextdata": {},
+        "contextdata": {
+            "skill_option": {}
+        },
         "description": [            
             {
                 "tags": {"desc_type" : "default"},
@@ -1937,7 +1951,9 @@
         "source": "core",
         "tags": { "trait": true },
         "contextdata": {
+            "warband_general_hook": {},
             "warband_wide": {}, 
+            "add_onto_warband": {},
             "add_extra_equipment": {
                 "count": 1,
                 "restriction": []
@@ -1952,6 +1968,17 @@
             }
         ],
         "options": [
+            {
+                "ref_id" : "ot_moneycanbuyanything",
+                "name" : "",
+                "description" : [],
+                "self_ask": true,
+                "category" : "contextobject",
+                "option_context" : {"basic_option_default":{}},
+                "dyna_only": true,
+                "parent_level": 7,
+                "question_name": "getEquipmentRelationshipsForWarband"
+            }
             
         ],
         "skill_group": ["pt_mammon"]
