@@ -396,18 +396,19 @@
         "name": "Exotic Wares",
         "source": "core",
         "tags": { },
-        "contextdata": {"additions": [
+        "contextdata": {
+            "model_add_equipment": {
+                "additions": [
                     {
-                        "list": "fc_newantioch",
                         "count": 1,
                         "option_id": 0,
                         "restriction": [
                             { "category": "melee" },
-                            { "category": "ranged" },
-                            { "category": "armour" }
+                            { "category": "ranged" }
                         ]
                     }
-                ] },
+                ]
+            } },
         "description": [            
             {
                 "tags": {"desc_type" : "default"},
@@ -420,6 +421,7 @@
             "description" : [],
             "category" : "type",
             "type" : "text",
+            "hide": true,
             "strictness" : "strict",
             "predefined_options" : [],
             "option_context" : {"basic_option_default":{}},
@@ -434,6 +436,12 @@
                                 "item": "faction_id",
                                 "value": "fc_newantioch",
                                 "equals": true,
+                                "strict": true
+                            },
+                            {             
+                                "item": "faction_id",
+                                "value": "fc_ironsultanate",
+                                "equals": false,
                                 "strict": true
                             }
                         ],
@@ -510,7 +518,7 @@
             "warband_general_hook": {},
             "warband_wide": {}, 
             "add_onto_warband": {},
-            "add_extra_model": {
+            "model_limit_increase": {
                 "count": 1,
                 "restriction": [
                     {
@@ -535,7 +543,17 @@
                 "description" : [],
                 "self_ask": true,
                 "category" : "contextobject",
-                "option_context" : {"basic_option_default":{}},
+                "option_context" : {"basic_option_default":{},
+                    "filter": {
+                        "restriction": [
+                            {
+                                "res_type": "keyword",
+                                "val": "kw_elite",
+                                "subvalue" : false
+                            }
+                        ]
+                        }
+                    },
                 "dyna_only": true,
                 "parent_level": 7,
                 "question_name": "getModelRelationshipsForWarband"
@@ -876,9 +894,16 @@
         "source": "core",
         "tags": { "trait": true, "bonus": true, "modifier": true },
         "contextdata": { 
-            "equipment_modifier": {
-                "equipment_type": ["ranged"],
-                "modifier_type": { "keyword": "kw_assault" }
+            "equipment_add_keyword": {
+                "equip_check": [
+                    {
+                        "check_type": "category",
+                        "value": "ranged"
+                    }
+                ],
+                "additions": [
+                    "kw_assault"
+                ]
             } },
         "description": [            
             {
@@ -918,7 +943,7 @@
         "source": "core",
         "tags": { "trait": true},
         "contextdata": {             
-            "upgrade_character_stat": { "upgrades": [{"stat": "scars", "value": 1}]} 
+            "add_scars": { "value": 1} 
         },
         "description": [            
             {
@@ -1311,7 +1336,7 @@
         "source": "core",
         "tags": { "trait": true },
         "contextdata": {             
-            "upgrade_character_stat": { "upgrades": [{"stat": "scars", "value": 1}]} 
+            "add_scars": { "value": 1} 
         },
         "description": [            
             {
@@ -1486,8 +1511,10 @@
         "source": "core",
         "tags": { "trait": true },
         "contextdata": {
+            "warband_general_hook": {},
             "warband_wide": {}, 
-            "add_extra_model": {
+            "add_onto_warband": {},
+            "model_limit_increase": {
                 "count": 1,
                 "restriction": [
                     {
@@ -1495,7 +1522,7 @@
                         "val": "kw_ELITE"
                     }
                 ]
-            } },
+            }  },
         "description": [            
             {
                 "tags": {"desc_type" : "default"},
@@ -1506,7 +1533,27 @@
             }
         ],
         "options": [
-            
+            {
+                "ref_id" : "ot_organisationalskills",
+                "name" : "",
+                "description" : [],
+                "self_ask": true,
+                "category" : "contextobject",
+                "option_context" : {"basic_option_default":{},
+                    "filter": {
+                        "restriction": [
+                            {
+                                "res_type": "keyword",
+                                "val": "kw_elite",
+                                "subvalue" : false
+                            }
+                        ]
+                        }
+                    },
+                "dyna_only": true,
+                "parent_level": 7,
+                "question_name": "getModelRelationshipsForWarband"
+            }
         ],
         "skill_group": ["pt_learnedsaint"]
     },

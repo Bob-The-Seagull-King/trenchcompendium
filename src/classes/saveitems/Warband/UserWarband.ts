@@ -752,7 +752,14 @@ class UserWarband extends DynamicContextObject {
             maxcount = await eventmon.runEvent(
                 "getModelLimitTrue",
                 RefModel,
-                [],
+                [RefModel],
+                maxcount,
+                this
+            )
+            maxcount = await eventmon.runEvent(
+                "getModelLimitTrue",
+                this,
+                [RefModel],
                 maxcount,
                 this
             )
@@ -1566,7 +1573,14 @@ class UserWarband extends DynamicContextObject {
                 maxcount = await eventmon.runEvent(
                     "getModelLimitTrue",
                     BaseRels[i],
-                    [],
+                    [BaseRels[i]],
+                    maxcount,
+                    this
+                )
+                maxcount = await eventmon.runEvent(
+                    "getModelLimitTrue",
+                    this,
+                    [BaseRels[i]],
                     maxcount,
                     this
                 )

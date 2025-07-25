@@ -659,6 +659,11 @@ class WarbandMember extends DynamicContextObject {
         const newSkills = await this.GetWarbandSkills()
         for (let i = 0; i < newSkills.length; i++) {
             const static_packages : ContextPackage[] = await newSkills[i].GrabContextPackages(event_id, source_obj, arrs_extra);
+            if (event_id == "getModelLimitTrue") {
+                console.log(event_id)
+                console.log(newSkills[i])
+                console.log(static_packages)
+                }
             for (let j = 0; j < static_packages.length; j++) {
                 static_packages[j].callpath.push("WarbandMember")
                 subpackages.push(static_packages[j])
@@ -1551,9 +1556,9 @@ class WarbandMember extends DynamicContextObject {
         await eventmon.runEvent(
             "onGainSkill",
             skl,
-            [this],
-            NewRuleProperty,
-            skl
+            [this.MyContext],
+            null,
+            NewRuleProperty
         )
     }
 

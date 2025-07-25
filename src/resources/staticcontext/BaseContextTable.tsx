@@ -1000,12 +1000,19 @@ export const BaseContextCallTable : CallEventTable = {
         event_priotity: 0,
         async findFinalKeywordsForEquipment(this: EventRunner, eventSource : any, relayVar: Keyword[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, coreitem : WarbandEquipment) {
             const keywordmodule = await import("../../factories/features/KeywordFactory")
+            const IDLIST : string[] = []
+            const newList : Keyword[] = []
             if (context_func["equip_check"]) {
                 let DoApply = false;
 
                 for (let i = 0; i < context_func["equip_check"].length; i++) {
                     if(context_func["equip_check"][i]["check_type"] == "id") {
                         if (coreitem.GetEquipmentItem().ID == context_func["equip_check"][i]["value"]) {
+                            DoApply = true;
+                        }
+                    }
+                    if(context_func["equip_check"][i]["check_type"] == "category") {
+                        if (coreitem.GetEquipmentItem().Category == context_func["equip_check"][i]["value"]) {
                             DoApply = true;
                         }
                     }
@@ -1023,12 +1030,19 @@ export const BaseContextCallTable : CallEventTable = {
                                 const NewKeyword = await keywordmodule.KeywordFactory.CreateNewKeyword(context_func["additions"][i], null)
 
                                 if (NewKeyword != null) {
-                                    relayVar.push(NewKeyword)
+                                    if (!IDLIST.includes(NewKeyword.ID)) {
+                                        IDLIST.push(NewKeyword.ID)
+                                        newList.push(NewKeyword)
+                                    }
                                 }
                             }
                         }
                     }
                 }
+            }
+
+            for (let i = 0; i < newList.length; i++) {
+                relayVar.push(newList[i])
             }
             
             return relayVar;
@@ -1347,6 +1361,23 @@ export const BaseContextCallTable : CallEventTable = {
             }
             
             return relayVar;
+        }
+    },
+    model_limit_increase: {
+        event_priotity: 1,
+        async getModelLimitTrue(this: EventRunner, eventSource : any, relayVar : number, trackVal : UserWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, refmodel : FactionModelRelationship) {
+            const DynamicModule = await import("../../classes/options/DynamicOptionContextObject");
+            if (context_main instanceof DynamicModule.DynamicOptionContextObject) {
+                for (let i = 0; i < context_main.Selections.length; i++) {
+                    const selection = context_main.Selections[i];
+                    if (selection.SelectedChoice != null) {
+                        if (selection.SelectedChoice.value.ID == refmodel.ID) {
+                            return relayVar + context_func["count"];
+                        }
+                    }
+                }
+            }
+            return relayVar
         }
     },
     faction_model_count_special: {
@@ -1758,6 +1789,15 @@ export const BaseContextCallTable : CallEventTable = {
         },
         async getWarbandMemberUpgrades(this: EventRunner, eventSource : any, relayVar : ModelUpgradeRelationship[], trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
             return relayVar.filter(item => !(context_func["upgrades"].includes(item.ID)))
+        }
+    },
+    gain_ducats: {
+        event_priotity: 0,
+        
+        async onGainSkill(this: EventRunner, eventSource : any, trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) {
+            if (context_func["value"]) {
+                warband.Ducats += context_func["value"]
+            }
         }
     },
     add_to_model: {
@@ -3166,6 +3206,7 @@ export const BaseContextCallTable : CallEventTable = {
         async getModelRelationshipsForWarband(this: EventRunner, eventSource : any, relayVar : FactionModelRelationship[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : UserWarband, staticself : StaticOptionContextObjectList) {
             const FacCheck = sourceband.Faction.MyFaction;
             let BaseRels : FactionModelRelationship[] = []
+            const FinRels : FactionModelRelationship[] = []
             
             if (FacCheck != undefined) {
                 BaseRels = ((FacCheck.SelfDynamicProperty).OptionChoice as Faction).Models
@@ -3179,8 +3220,25 @@ export const BaseContextCallTable : CallEventTable = {
                 BaseRels,
                 null
             )
+            BaseRels = BaseRels.filter((item) => item.Mercenary == false && item.Maximum != 0);
+            const Cur = staticself.OptionContext["filter"]
 
-            return BaseRels.filter((item) => item.Mercenary == false && item.Maximum != 0);
+            for (let i = 0; i < BaseRels.length; i++) {
+                let IsValid = true;
+                for (let j = 0; j < Cur["restriction"].length; j++) {
+                    const fil = Cur["restriction"][j]
+
+                    if (fil["res_type"] == "keyword") {
+                        IsValid = (fil["subvalue"] == (BaseRels[i].Model.getKeywordIDs().includes(fil["val"])))
+                    }
+
+                }
+                if (IsValid) {
+                    FinRels.push(BaseRels[i])
+                }
+            }
+
+            return FinRels
         }
     },
     upgrade_stat: {
