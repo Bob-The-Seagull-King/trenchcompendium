@@ -2226,6 +2226,14 @@ class WarbandMember extends DynamicContextObject {
     }
 
     public async AddEquipment(item : FactionEquipmentRelationship) {
+        const SpecialAddons = await this.GetSpecialCache();
+        const cachekeys = Object.keys(SpecialAddons)
+        let modelpur = false
+        for (let i = 0; i < cachekeys.length; i++) {
+            if (SpecialAddons[cachekeys[i]].facrel == item) {
+                modelpur = true;
+            }
+        }
         const Equipment : WarbandEquipment = await WarbandFactory.BuildWarbandEquipmentFromPurchase(item, this);
         const NewPurchase : WarbandPurchase = new WarbandPurchase({
             cost_value : item.Cost,
@@ -2233,11 +2241,11 @@ class WarbandMember extends DynamicContextObject {
             count_limit : true,
             count_cap : true,
             sell_item : true,
-            sell_full : true,
+            sell_full : false,
             purchaseid: item.EquipmentItem.ID,
             faction_rel_id: item.ID,
             custom_rel: item.SelfData,
-            modelpurch : false
+            modelpurch : modelpur
         }, this, Equipment);
         await Equipment.BuildNewProperties(this, NewPurchase)
         this.Equipment.push(NewPurchase);
