@@ -1067,8 +1067,9 @@
         "id": "up_plagueknightcompanionofthefly_base",
         "name": "Knight Companion of the Fly",
         "source": "core",
-        "tags": {"trait": true, "special_category": "knight_ranks" },
+        "tags": {"trait": true, "special_category": "knight_ranks"},
         "contextdata": {
+            "new_upgrade": {}
         },
         "description": [            
             {

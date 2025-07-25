@@ -2388,6 +2388,22 @@ export const BaseContextCallTable : CallEventTable = {
               });
 
             return NewChoices
+        },
+        async getAddedModelEquipmentOptions(this: EventRunner, eventSource : any, relayVar : FactionEquipmentRelationship[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            const prop = context_main as DynamicOptionContextObject;
+            console.log(prop)
+            for (let i = 0; i < prop.Selections.length; i++) {
+                console.log(prop.Selections[i])
+                console.log(prop.Selections[i].SelectedChoice)
+                if (prop.Selections[i].SelectedChoice != null) {
+                    console.log("ADDED")
+                    console.log(prop.Selections[i].SelectedChoice?.value)
+                    relayVar.push(prop.Selections[i].SelectedChoice?.value)
+                }
+            }
+            console.log("FIN")
+            console.log(relayVar);
+            return relayVar
         }
     },
     faction_rule_option: {
@@ -3175,6 +3191,8 @@ export const BaseContextCallTable : CallEventTable = {
     upgrade_stat: {
         event_priotity: 1,
         async updateModelStats(this: EventRunner, eventSource : any, relayVar : ModelStatistics,   context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            console.log("FLY")
+            
             for (let i = 0; i < context_func["upgrades"].length; i++) {
                 const contextitem = context_func["upgrades"][i];
 

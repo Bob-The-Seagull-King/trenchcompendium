@@ -50,11 +50,18 @@ const WbbModalAddEquipment: React.FC<WbbModalAddEquipmentProps> = ({ show, onClo
             if (options != undefined) {
                 const tempcache = warband? warband.warband_data.EquipmentRelCache : {}
                 const keys = Object.keys(tempcache)
+                const specialcache = await fighter.model.GetSpecialCache()
+                const specialkeys = Object.keys(specialcache)
                 const fincache : CachedFactionEquipment = {}
                 
                 for (let i = 0; i < keys.length; i++) {
                     if ((tempcache[keys[i]].facrel.EquipmentItem.Category == category)) {
                         fincache[keys[i]] = tempcache[keys[i]]
+                    }
+                }
+                for (let i = 0; i < specialkeys.length; i++) {
+                    if ((specialcache[specialkeys[i]].facrel.EquipmentItem.Category == category)) {
+                        fincache[specialkeys[i]] = specialcache[specialkeys[i]]
                     }
                 }
 

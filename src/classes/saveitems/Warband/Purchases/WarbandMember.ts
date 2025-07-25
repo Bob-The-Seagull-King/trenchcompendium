@@ -23,7 +23,7 @@ import { Ability } from "../../../feature/ability/Ability";
 import { EventRunner } from "../../../contextevent/contexteventhandler";
 import { IModelUpgradeRelationship, ModelUpgradeRelationship } from "../../../relationship/model/ModelUpgradeRelationship";
 import { UpgradesGrouped } from "../../../relationship/model/ModelUpgradeRelationship";
-import { UserWarband } from "../UserWarband";
+import { CachedFactionEquipment, UserWarband } from "../UserWarband";
 import { WarbandFactory } from "../../../../factories/warband/WarbandFactory";
 import { FactionEquipmentRelationship, IFactionEquipmentRelationship } from "../../../relationship/faction/FactionEquipmentRelationship";
 import { EquipmentFactory } from "../../../../factories/features/EquipmentFactory";
@@ -90,7 +90,8 @@ export interface GeneralModelCache {
     equipment_options?: FactionEquipmentRelationship[],
     validation_check?: string[]
     can_copy_self?: string,
-    attatchments?: WarbandProperty[]
+    attatchments?: WarbandProperty[],
+    special_cache?: CachedFactionEquipment
 }
 
 interface IWarbandMember extends IContextObject {
@@ -615,7 +616,7 @@ class WarbandMember extends DynamicContextObject {
         }  
 
         for (let i = 0; i < this.Upgrades.length; i++) {
-            const static_packages : ContextPackage[] = await (this.Upgrades[i].HeldObject as Upgrade).GrabContextPackages(event_id, source_obj, arrs_extra);
+            const static_packages : ContextPackage[] = await (this.Upgrades[i].HeldObject as WarbandProperty).GrabContextPackages(event_id, source_obj, arrs_extra);
             for (let j = 0; j < static_packages.length; j++) {
                 static_packages[j].callpath.push("WarbandMember")
                 subpackages.push(static_packages[j])
@@ -1711,6 +1712,36 @@ class WarbandMember extends DynamicContextObject {
         return 18;
     }
 
+    public async GetSpecialCache() {
+        if (this.GeneralCache.special_cache != null) {
+            return this.GeneralCache.special_cache
+        }
+        const fincache : CachedFactionEquipment = {}
+        const eventmon : EventRunner = new EventRunner();
+        const AddedOptions : FactionEquipmentRelationship[] = await eventmon.runEvent(
+            "getAddedModelEquipmentOptions",
+            this,
+            [],
+            [],
+            null
+        )
+
+        for (let i = 0; i < AddedOptions.length; i++) {
+
+            fincache[AddedOptions[i].ID] = {
+                canadd: true,
+                cost: AddedOptions[i].Cost,
+                count_cur: 0,
+                limit: 1,
+                facrel: AddedOptions[i],
+                restrictions: []
+            }
+
+        }
+        this.GeneralCache.special_cache = fincache
+        return fincache
+    }
+
     public async GetModelEquipmentOptions(getbase = false) {
         if (this.GeneralCache.equipment_options != null) {
             return this.GeneralCache.equipment_options
@@ -1728,9 +1759,22 @@ class WarbandMember extends DynamicContextObject {
 
         const BaseFactionOptions : FactionEquipmentRelationship[] = await (this.MyContext as UserWarband).GetFactionEquipmentOptions(false, true, getbase);
 
+        const AddedOptions : FactionEquipmentRelationship[] = await eventmon.runEvent(
+            "getAddedModelEquipmentOptions",
+            this,
+            [],
+            [],
+            null
+        )
+        const NewOptions : FactionEquipmentRelationship[] = []
+        console.log("NEW OPTIONS")
+        console.log(AddedOptions)
 
-        if (this.IsUnRestricted == true || getbase == true) {
-            return BaseFactionOptions;
+        for (let i = 0; i < AddedOptions.length; i++) {
+            NewOptions.push(AddedOptions[i])
+        }
+        for (let i = 0; i < BaseFactionOptions.length; i++) {
+            NewOptions.push(BaseFactionOptions[i])
         }
 
         const CurrentHandsAvailable : ModelHands = await this.GetModelHands();
@@ -1743,39 +1787,44 @@ class WarbandMember extends DynamicContextObject {
             null
         )
         
-        for (let i = 0; i < BaseFactionOptions.length; i++) {
+        for (let i = 0; i < NewOptions.length; i++) {
             let CanAdd = true;
 
             if (SkipEquip) {
                 continue;
             }
 
+            if (this.IsUnRestricted == true || getbase == true) {
+                ListOfOptions.push(NewOptions[i]);
+                continue;
+            }
+
             if (CanAdd) {
-                CanAdd = (BaseFactionOptions[i].EquipmentItem.Category != "equipment") 
+                CanAdd = (NewOptions[i].EquipmentItem.Category != "equipment") 
             }
 
             if (!CanAdd) {
                 const EquipmentLimit = await eventmon.runEvent(
                     "getEquipmentLimitRaw",
-                    BaseFactionOptions[i].EquipmentItem,
+                    NewOptions[i].EquipmentItem,
                     [],
                     1,
                     null 
                 )
-                const CurCount = await this.HasSpecificEquipment(BaseFactionOptions[i].EquipmentItem.GetID())
+                const CurCount = await this.HasSpecificEquipment(NewOptions[i].EquipmentItem.GetID())
                 CanAdd = !(await CurCount >= (EquipmentLimit ))
             }
 
             if (CanAdd) {
-                CanAdd = await this.EquipItemAvailableSpace(BaseFactionOptions[i].EquipmentItem, CurrentHandsAvailable)
+                CanAdd = await this.EquipItemAvailableSpace(NewOptions[i].EquipmentItem, CurrentHandsAvailable)
             }
 
             if (CanAdd) {
-                CanAdd = await this.EquipItemCanAdd(BaseFactionOptions[i], RestrictionList)
+                CanAdd = await this.EquipItemCanAdd(NewOptions[i], RestrictionList)
             }
 
             if (CanAdd) {
-                ListOfOptions.push(BaseFactionOptions[i]);
+                ListOfOptions.push(NewOptions[i]);
             }
         }
 
