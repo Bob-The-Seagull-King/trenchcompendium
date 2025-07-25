@@ -37,6 +37,7 @@ import { DynamicOptionContextObject } from "../../classes/options/DynamicOptionC
 import { IUpgrade, Upgrade } from "../../classes/feature/ability/Upgrade";
 import { WarbandEquipment } from "../../classes/saveitems/Warband/Purchases/WarbandEquipment";
 import { RealWarbandPurchaseModel, WarbandPurchase } from "../../classes/saveitems/Warband/Purchases/WarbandPurchase";
+import { ModelEquipmentRelationship } from "../../classes/relationship/model/ModelEquipmentRelationship";
 
 export const BaseContextCallTable : CallEventTable = {
     option_search_viable: {
@@ -2687,6 +2688,41 @@ export const BaseContextCallTable : CallEventTable = {
         },
         async getSingleFireteamMember(this: EventRunner, eventSource : any, relayVar : WarbandMember[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : WarbandMember, staticself : StaticOptionContextObjectList) {
             return [sourceband];
+        }
+    },
+    change_model_equipment: {
+        event_priotity: 0,
+        async onGainUpgrade(this: EventRunner, eventSource : any, trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) {
+            await trackVal.BuildModelEquipProperties();
+            await trackVal.BuildModelEquipment(true);
+        },
+        async onRemoveUpgrade(this: EventRunner, eventSource : any, trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) {
+            await trackVal.BuildModelEquipProperties();
+            await trackVal.BuildModelEquipment(true);
+        },
+        async getModelEquipmentInfo(this: EventRunner, eventSource : any, relayVar : ModelEquipmentRelationship[], trackVal: WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            if (!trackVal.UpgradeAsIDs().includes(context_static.ID)) {
+                return relayVar;
+            }
+            
+            const modelequipfactorymodule = await import("../../factories/features/EquipmentFactory");
+            const list : ModelEquipmentRelationship[] = []
+            if (context_func["removed"]) {
+                for (let i = 0; i < relayVar.length; i++) {
+                    if (!context_func["removed"].includes(relayVar[i].ID)) {
+                        list.push(relayVar[i])
+                    }
+                }
+            }
+            if(context_func["added"]) {
+                for (let i = 0; i < context_func["added"].length; i++) {
+                    if (!relayVar.includes(context_func["added"][i])) {
+                        const newequip = await modelequipfactorymodule.EquipmentFactory.CreateNewModelEquipment(context_func["added"][i], trackVal, true);
+                        list.push(newequip)
+                    }
+                }
+            }
+            return list;
         }
     },
     model_attatch: {

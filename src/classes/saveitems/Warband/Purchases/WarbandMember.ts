@@ -163,16 +163,23 @@ class WarbandMember extends DynamicContextObject {
     
 
     public async BuildModelEquipProperties(data : IWarbandMember = this.SelfData) {
-        const all_eq : ModelEquipmentRelationship[] = this.CurModel.EquipmentList;
+        const eventmon : EventRunner = new EventRunner();
+        const all_eq : ModelEquipmentRelationship[] = await eventmon.runEvent(
+                "getModelEquipmentInfo",
+                this,
+                [],
+                this.CurModel.EquipmentList,
+                this
+            )
         this.ModelEquipments = [];
         for (let i = 0; i < all_eq.length; i++) {
             let IsFound = false
-            for (let j = 0; j < data.subproperties.length; j++) {
-                if (data.subproperties[j].object_id == all_eq[i].ID) {
-                    const NewEquip = await EquipmentFactory.CreateNewModelEquipment(data.subproperties[j].object_id, this)
-                    const NewRuleProperty = new WarbandProperty(NewEquip, this, null, data.subproperties[j]);
-                    await NewRuleProperty.HandleDynamicProps(NewEquip, this, null, data.subproperties[j]);
-                    await NewRuleProperty.BuildConsumables(data.subproperties[j].consumables);
+            for (let j = 0; j < data.list_modelequipment.length; j++) {
+                if (data.list_modelequipment[j].object_id == all_eq[i].ID) {
+                    const NewEquip = await EquipmentFactory.CreateNewModelEquipment(data.list_modelequipment[j].object_id, this)
+                    const NewRuleProperty = new WarbandProperty(NewEquip, this, null, data.list_modelequipment[j]);
+                    await NewRuleProperty.HandleDynamicProps(NewEquip, this, null, data.list_modelequipment[j]);
+                    await NewRuleProperty.BuildConsumables(data.list_modelequipment[j].consumables);
                     this.ModelEquipments.push(NewRuleProperty);
                     IsFound = true;
                     break;
@@ -185,7 +192,6 @@ class WarbandMember extends DynamicContextObject {
                 this.ModelEquipments.push(NewRuleProperty);
             }
         }
-
         return this.ModelEquipments;
     }
 
@@ -341,6 +347,32 @@ class WarbandMember extends DynamicContextObject {
                     }
                 }
                     
+            }
+        }
+        for (let i = 0; i < this.Equipment.length; i++) {
+            if (this.Equipment[i].ModelPurchase == false) {
+                continue;
+            }
+            const Equip = this.Equipment[i].HeldObject as WarbandEquipment;
+            let IsFound = false
+            for (let j = 0; j < this.ModelEquipments.length; j++) {
+                const CurModEq = (this.ModelEquipments[j].SelfDynamicProperty.OptionChoice as ModelEquipmentRelationship)
+                for (let k = 0; k < CurModEq.EquipmentItems.length; k++) { 
+                    if (CurModEq.EquipmentItems[k].ID == Equip.MyEquipment.SelfDynamicProperty.OptionChoice.GetID()) {
+                        IsFound = true;
+                        break;
+                    }
+                }
+                if (IsFound == true) {
+                    break;
+                }
+            }
+            if (IsFound == false) {
+                await this.DeleteStash(
+                    {
+                        purchase:    this.Equipment[i],
+                        equipment: this.Equipment[i].HeldObject as WarbandEquipment
+                    }, true)
             }
         }
         return this.Equipment;
@@ -1345,6 +1377,16 @@ class WarbandMember extends DynamicContextObject {
         return NewPurchase;
     }
 
+    public UpgradeAsIDs() {
+        const list : string[] = []
+
+        for (let i = 0; i < this.Upgrades.length; i++) {
+            list.push((this.Upgrades[i].HeldObject as WarbandProperty).GetOwnID())
+        }
+
+        return list;
+    }
+
     public async DeleteUpgrade( upgrade : WarbandPurchase ) {
         
         for (let i = 0; i < this.Upgrades.length; i++) {
@@ -1353,6 +1395,14 @@ class WarbandMember extends DynamicContextObject {
                 break;
             }
         }
+        const eventmon : EventRunner = new EventRunner();
+        await eventmon.runEvent(
+            "onRemoveUpgrade",
+            upgrade.HeldObject as WarbandProperty,
+            [this.MyContext],
+            null,
+            this
+        )
     }
 
     public async GetModelInjuryOptions() {
@@ -2327,8 +2377,8 @@ class WarbandMember extends DynamicContextObject {
         } catch (e) { console.log(e) }
     }
     
-    public async DeleteStash( item : RealWarbandPurchaseEquipment ) {
-        if (item.purchase.Sellable == false) {return}
+    public async DeleteStash( item : RealWarbandPurchaseEquipment, override_safety = false ) {
+        if (item.purchase.Sellable == false && !override_safety) {return}
         for (let i = 0; i < this.Equipment.length; i++) {
             if (item.equipment == (this.Equipment[i].HeldObject as WarbandEquipment)) {
                 this.Equipment.splice(i, 1);

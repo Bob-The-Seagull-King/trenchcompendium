@@ -252,6 +252,10 @@ class WarbandProperty extends DynamicContextObject  {
         return (this.SelfDynamicProperty.OptionChoice).GetTrueName();
     }
 
+    public GetOwnID() {
+        return (this.SelfDynamicProperty.OptionChoice).GetID();
+    }
+
 }
 
 export {IWarbandProperty, WarbandProperty}
