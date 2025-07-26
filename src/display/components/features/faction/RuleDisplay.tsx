@@ -90,7 +90,6 @@ const RuleDisplay = (props: any) => {
                             <>
                                 { ( showCollapse || !showSimple ) &&
                                     <div className="RuleDisplay-upgradeoptions">
-                                        {/* @TODO: Change the headline string to a matching headline */}
                                         <RulesCollapsibleContent
                                             headline={makestringpresentable(item)}
                                             content={

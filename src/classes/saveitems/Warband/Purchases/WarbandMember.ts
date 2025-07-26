@@ -91,7 +91,9 @@ export interface GeneralModelCache {
     validation_check?: string[]
     can_copy_self?: string,
     attatchments?: WarbandProperty[],
-    special_cache?: CachedFactionEquipment
+    special_cache?: CachedFactionEquipment,
+    upgrade_budget_ducats? : number,
+    upgrade_budget_glory? : number
 }
 
 interface IWarbandMember extends IContextObject {
@@ -725,15 +727,6 @@ class WarbandMember extends DynamicContextObject {
         return this.Elite;
     }
 
-    /**
-     * Does this fighter have limited potential?
-     * @TODO: Hook up data
-     * @return: boolean
-     */
-    public HasLimitedPotential () {
-        return true;
-    }
-
     public GetEquipment() {
         
         const options : RealWarbandPurchaseEquipment[] = [ ];
@@ -797,7 +790,24 @@ class WarbandMember extends DynamicContextObject {
     }
 
     public GetSubCosts(type : number, overridecap = false) {
+        let countvar = this.GetUpgradeCosts(type, overridecap);
+        for (let i = 0; i < this.Equipment.length; i++) {
+            if (this.Equipment[i].CountCap == false && !overridecap) {continue;}
+            if (this.Equipment[i].CostType == type) {
+                if (type == 0 ) {
+                    countvar += this.Equipment[i].GetTotalDucats();
+                }
+                if (type == 1 ) {
+                    countvar += this.Equipment[i].GetTotalGlory();
+                }
+            }
+        }
+        return countvar;
+    }
+
+    public GetUpgradeCosts(type : number, overridecap = false) {
         let countvar = 0;
+        
         for (let i = 0; i < this.Upgrades.length; i++) {
             if (this.Upgrades[i].CountCap == false && (overridecap == false)) {continue;}
             if (this.Upgrades[i].CostType == type) {
@@ -809,18 +819,8 @@ class WarbandMember extends DynamicContextObject {
                 }
             }
         }
-        for (let i = 0; i < this.Equipment.length; i++) {
-            if (this.Equipment[i].CountCap == false) {continue;}
-            if (this.Equipment[i].CostType == type) {
-                if (type == 0 ) {
-                    countvar += this.Equipment[i].GetTotalDucats();
-                }
-                if (type == 1 ) {
-                    countvar += this.Equipment[i].GetTotalGlory();
-                }
-            }
-        }
         return countvar;
+
     }
 
     public GetEquipmentCount(id : string) {
@@ -1124,6 +1124,58 @@ class WarbandMember extends DynamicContextObject {
         return SkillList;
     }
 
+    public async GetUpgradeBudgetDucats() {
+        if (this.GeneralCache.upgrade_budget_ducats != null) {
+            return this.GeneralCache.upgrade_budget_ducats
+        }
+
+        const Events : EventRunner = new EventRunner();
+        let UpgradeBud = await Events.runEvent(
+            "getUpgradeBudget",
+            (this.MyContext as UserWarband),
+            [0],
+            0,
+            this
+        )
+        UpgradeBud = await Events.runEvent(
+            "getUpgradeBudget",
+            (this),
+            [0],
+            UpgradeBud,
+            this
+        )
+
+        this.GeneralCache.upgrade_budget_ducats = UpgradeBud;
+        return UpgradeBud;
+        
+    }
+
+    public async GetUpgradeBudgetGlory() {
+        if (this.GeneralCache.upgrade_budget_glory != null) {
+            return this.GeneralCache.upgrade_budget_glory
+        }
+
+        const Events : EventRunner = new EventRunner();
+        let UpgradeBud = await Events.runEvent(
+            "getUpgradeBudget",
+            (this.MyContext as UserWarband),
+            [1],
+            0,
+            this
+        )
+        UpgradeBud = await Events.runEvent(
+            "getUpgradeBudget",
+            (this),
+            [1],
+            UpgradeBud,
+            this
+        )
+
+        this.GeneralCache.upgrade_budget_glory = UpgradeBud ;
+        return UpgradeBud;
+        
+    }
+
     public async CalcGivenPurchase(upg : ModelUpgradeRelationship, category : string, limit : number | null = null): Promise<MemberUpgradePresentation> {
 
         const Events : EventRunner = new EventRunner();
@@ -1195,6 +1247,8 @@ class WarbandMember extends DynamicContextObject {
             )
 
             if (upg.CostType == 0) {
+                const ducatbudget = await this.GetUpgradeBudgetDucats()
+                console.log(ducatbudget); // @TODO Lane Get the budget to lower costs
                 canaddupgrade = (this.MyContext as UserWarband).GetSumCurrentDucats() >= maxccurcostount;
             }
             if (upg.CostType == 1) {

@@ -551,10 +551,12 @@ class UserWarband extends DynamicContextObject {
         return this.GetDucatCost() + this.GetDucatCostStash()
     }
 
+    // The total ducats available for a warband to spend @TODO Lane this is where you sort budget stuff I think
     public GetSumCurrentDucats() {
         return this.Ducats - this.GetCostDucatsTotal() -  this.Debts.ducats
     }
 
+    // The total glory available for a warband to spend @TODO Lane this is where you sort budget stuff I think
     public GetSumCurrentGlory() {
         return this.Glory - this.GetCostGloryTotal() -  this.Debts.glory
     }
@@ -1029,19 +1031,6 @@ class UserWarband extends DynamicContextObject {
     }
 
 
-    /** @TODO
-     * Adds a modifier item to a warband
-     *
-     * @param modifier
-     * @param option
-     */
-    public AddModifier ( modifier: object, option: object) {
-
-        return false;
-
-    }
-
-
     /**
      * Campaign Data
      * - This Data could be retrieved from a campaign object.
@@ -1055,7 +1044,6 @@ class UserWarband extends DynamicContextObject {
     }
 
     /**
-     * @TODO: Return the Vistory Points for this Warband
      * - can use Campaign Info
      * - uses VP for the currently active cylce
      */
@@ -1134,7 +1122,6 @@ class UserWarband extends DynamicContextObject {
     }
 
     /**
-     * @TODO get stash Data
      */
     GetStash() {
 
