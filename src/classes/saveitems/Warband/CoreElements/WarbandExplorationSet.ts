@@ -40,9 +40,14 @@ export interface FilteredOptions {
     selection_valid : IChoice[]
 }
 
+export interface GeneralLocationCache {
+    exploration_skills?: WarbandProperty[]
+}
+
 class WarbandExplorationSet extends DynamicContextObject {
     Skills : WarbandProperty[] = [];
     Locations : WarbandProperty[] = [];
+    GeneralCache : GeneralLocationCache = {}
 
     /**
      * Assigns parameters and creates a series of description
@@ -162,10 +167,52 @@ class WarbandExplorationSet extends DynamicContextObject {
                 this.TryAddToSkillsFormat(SumSkills, NewSkills[j], "Model: " + Mdl.GetTrueName())
             }
         }
+        
+        const Events : EventRunner = new EventRunner();
+        const SkillList : WarbandProperty[] = await Events.runEvent(
+                "getExplorationSkills",
+                (this),
+                [],
+                [],
+                null
+            )
+        for (let j = 0; j < SkillList.length; j++) {
+            this.TryAddToSkillsFormat(SumSkills, SkillList[j], "Location")
+        }
+        const NewSkills = await (this.MyContext as UserWarband).GetSelfExplorationSkills();
+        for (let j = 0; j < NewSkills.length; j++) {
+            this.TryAddToSkillsFormat(SumSkills, NewSkills[j], "Warband")
+        }
         return SumSkills;
     }
 
-    private TryAddToSkillsFormat(skillsformatted : ExplorationSkillSuite[], NewSkill : WarbandProperty, source = "Warband") {
+    public async GetWarbandModifiers() {
+        if (this.GeneralCache.exploration_skills != null) {
+            return this.GeneralCache.exploration_skills
+        }
+
+
+        const SkillList : WarbandProperty[] = [];
+        const Events : EventRunner = new EventRunner();
+
+        for (let i = 0; i < this.Locations.length; i++) {
+            const ShowWarband = await Events.runEvent(
+                "showSkillOnWarband",
+                this.Locations[i],
+                [],
+                false,
+                this
+            )
+
+            if (ShowWarband) {
+                SkillList.push(this.Locations[i])
+            }
+        }
+        this.GeneralCache.exploration_skills = SkillList;
+        return SkillList;
+    }
+
+    public TryAddToSkillsFormat(skillsformatted : ExplorationSkillSuite[], NewSkill : WarbandProperty, source = "Warband") {
         
         const selected = skillsformatted.find((i) => i.skill.SelfDynamicProperty.OptionChoice.GetID() === NewSkill.SelfDynamicProperty.OptionChoice.GetID());
         if (selected) {

@@ -1542,7 +1542,7 @@ export const BaseContextCallTable : CallEventTable = {
     get_exploration_skills: {
         event_priotity: 0,
         async getExplorationSkills(this: EventRunner, eventSource : any, relayVar : WarbandProperty[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
-            
+
             const { SkillFactory } = await import("../../factories/features/SkillFactory");
             const WarbandPropModule = await import('../../classes/saveitems/Warband/WarbandProperty');
             if (context_func["add_skill"]) {
@@ -1793,10 +1793,31 @@ export const BaseContextCallTable : CallEventTable = {
     },
     gain_ducats: {
         event_priotity: 0,
-        
         async onGainSkill(this: EventRunner, eventSource : any, trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) {
             if (context_func["value"]) {
                 warband.Ducats += context_func["value"]
+            }
+        },
+        async onGainLocation(this: EventRunner, eventSource : any, trackVal : WarbandProperty, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) {
+            let IsMe = false
+            if (trackVal.SelfDynamicProperty.OptionChoice.ID == context_static.GetID()) {
+                IsMe = true
+            }
+            if (!IsMe) {
+                for (let i = 0; i < trackVal.SelfDynamicProperty.Selections.length; i++) {
+                    const CurSel = trackVal.SelfDynamicProperty.Selections[i]
+                    if (CurSel.SelectedChoice != null) {
+                        if (CurSel.SelectedChoice.value.ID == context_static.GetID()) {
+                            IsMe = true;
+                        }
+                        
+                    }
+                }
+            }
+            if (IsMe) {
+                if (context_func["count"]) {
+                    warband.AddStashValue(context_func["count"],0)
+                }
             }
         }
     },
@@ -2236,6 +2257,7 @@ export const BaseContextCallTable : CallEventTable = {
         event_priotity: 0,
         async getAllFactionEquipmentRelationships(this: EventRunner, eventSource : any, relayVar : FactionEquipmentRelationship[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
             const EquipRelModule = await import("../../classes/relationship/faction/FactionEquipmentRelationship");
+            const EquipFactoryModule = await import("../../factories/features/EquipmentFactory")
             const DynamicModule = await import("../../classes/options/DynamicOptionContextObject");
             try {
                 if (context_main != null) {
@@ -2261,6 +2283,15 @@ export const BaseContextCallTable : CallEventTable = {
                 }
             } catch (e) {
                 console.log(e)
+            }
+
+            if (context_func["ids"]) {
+                for (let i = 0; i < context_func["ids"].length; i++) {
+                    const NewEq = await EquipFactoryModule.EquipmentFactory.CreateNewFactionEquipment(context_func["ids"][i], null, true)
+                    if (NewEq) {
+                        relayVar.push(NewEq);
+                    }
+                }
             }
             return relayVar;
         },
@@ -2885,7 +2916,7 @@ export const BaseContextCallTable : CallEventTable = {
             if (sourceband) {
             const OptionList = await (sourceband).GetFactionEquipmentOptions(true);
                 for (let i = 0; i < OptionList.length; i++) {
-                    if (OptionList[i].CostType == 1 && OptionList[i].Cost < context_func["cost"]) {
+                    if (OptionList[i].CostType == 1 && OptionList[i].Cost <= context_func["cost"]) {
                         relayVar.push(
                             {
                                 display_str: OptionList[i].EquipmentItem.GetTrueName() + " " + OptionList[i].Cost + " Glory",
@@ -2899,43 +2930,100 @@ export const BaseContextCallTable : CallEventTable = {
             return relayVar;
         }
     },
+
     consumable: {
         event_priotity: 0,
         async onGainLocation(this: EventRunner, eventSource : any, trackVal : WarbandProperty, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) {
-            
-            
+             
             const {WarbandConsumable} = await import("../../classes/saveitems/Warband/WarbandConsumable");
-
-            if (context_func["single_exploration_glory_item"]) {
-                const Tags = context_static.Tags;
-                Tags["consumable_type_equipment"] = true
-                const NewData = {
-                    id: context_static.GetID() + Date.now().toString(), 
-                    name: context_static.GetTrueName(),
-                    source: context_static.Source? context_static.Source : "",
-                    tags: Tags,
-                    contextdata: {"single_exploration_glory_item" : context_func["single_exploration_glory_item"]},
-                    associate_id : context_static.GetID(),
-                    object_id:  null,
-                    object_type :  "faction_equipment"
-                }
-                const CreateNewConsumable = new WarbandConsumable(NewData, warband);
-                await CreateNewConsumable.GrabOptions();
-                trackVal.Consumables.push(CreateNewConsumable);
+            let IsMe = false
+            if (trackVal.SelfDynamicProperty.OptionChoice.ID == context_static.GetID()) {
+                IsMe = true
             }
+            if (!IsMe) {
+                for (let i = 0; i < trackVal.SelfDynamicProperty.Selections.length; i++) {
+                    const CurSel = trackVal.SelfDynamicProperty.Selections[i]
+                    if (CurSel.SelectedChoice != null) {
+                        if (CurSel.SelectedChoice.value.ID == context_static.GetID()) {
+                            IsMe = true;
+                        }
+                        
+                    }
+                }
+            }
+            if (IsMe) {
+
+                        if (context_func["single_exploration_glory_item"]) {
+                            const Tags = context_static.Tags;
+                            Tags["consumable_type_equipment"] = true
+                            const NewData = {
+                                id: context_static.GetID() + Date.now().toString(), 
+                                name: context_static.GetTrueName(),
+                                source: context_static.Source? context_static.Source : "",
+                                tags: Tags,
+                                contextdata: {"single_exploration_glory_item" : context_func["single_exploration_glory_item"]},
+                                associate_id : context_static.GetID(),
+                                object_id:  null,
+                                object_type :  "faction_equipment"
+                            }
+                            const CreateNewConsumable = new WarbandConsumable(NewData, warband);
+                            await CreateNewConsumable.GrabOptions();
+                            trackVal.Consumables.push(CreateNewConsumable);
+                        }
+                    }
+        }
+    },
+    gain_glory: {
+        event_priotity: 0,
+        async onGainLocation(this: EventRunner, eventSource : any, trackVal : WarbandProperty, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) {
+            let IsMe = false
+            if (trackVal.SelfDynamicProperty.OptionChoice.ID == context_static.GetID()) {
+                IsMe = true
+            }
+            if (!IsMe) {
+                for (let i = 0; i < trackVal.SelfDynamicProperty.Selections.length; i++) {
+                    const CurSel = trackVal.SelfDynamicProperty.Selections[i]
+                    if (CurSel.SelectedChoice != null) {
+                        if (CurSel.SelectedChoice.value.ID == context_static.GetID()) {
+                            IsMe = true;
+                        }
+                        
+                    }
+                }
+            }
+            if (IsMe) {
+                        if (context_func["count"]) {
+                            warband.AddStashValue(context_func["count"],1)
+                        }
+                    }
         }
     },
     gain_new_model_from_list: {
         event_priotity: 0,
         async onGainLocation(this: EventRunner, eventSource : any, trackVal : WarbandProperty, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) {
-            
-            
-            const { ModelFactory } = await import("../../factories/features/ModelFactory");
-            if (context_func["count"] && context_func["id"]) {
-                for (let i = 0; i < context_func["count"]; i++) {
-                    for (let j = 0; j < context_func["id"].length; j++) {
-                        const NewModel = await ModelFactory.CreateNewFactionModel(context_func["id"][j], null);
-                        await warband.AddFighter([NewModel]);
+            let IsMe = false
+            if (trackVal.SelfDynamicProperty.OptionChoice.ID == context_static.GetID()) {
+                IsMe = true
+            }
+            if (!IsMe) {
+                for (let i = 0; i < trackVal.SelfDynamicProperty.Selections.length; i++) {
+                    const CurSel = trackVal.SelfDynamicProperty.Selections[i]
+                    if (CurSel.SelectedChoice != null) {
+                        if (CurSel.SelectedChoice.value.ID == context_static.GetID()) {
+                            IsMe = true;
+                        }
+                        
+                    }
+                }
+            }
+            if (IsMe) {
+                const { ModelFactory } = await import("../../factories/features/ModelFactory");
+                if (context_func["count"] && context_func["id"]) {
+                    for (let i = 0; i < context_func["count"]; i++) {
+                        for (let j = 0; j < context_func["id"].length; j++) {
+                            const NewModel = await ModelFactory.CreateNewFactionModel(context_func["id"][j], null);
+                            await warband.AddFighter([NewModel]);
+                        }
                     }
                 }
             }
@@ -3510,6 +3598,7 @@ export const BaseContextCallTable : CallEventTable = {
     add_onto_warband: {
         event_priotity: 0,
         async showSkillOnWarband(this: EventRunner, eventSource : any, relayVar : boolean, trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, member : WarbandMember) {
+
             return true;
         },
         async showEquipmentOnWarband(this: EventRunner, eventSource : any, relayVar : boolean, trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, member : WarbandMember) {

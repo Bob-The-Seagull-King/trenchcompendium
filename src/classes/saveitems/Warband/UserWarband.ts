@@ -7,7 +7,7 @@ import { DynamicContextObject } from '../../contextevent/dynamiccontextobject';
 import { ContextObject, IContextObject } from '../../contextevent/contextobject';
 import { IWarbandFaction, WarbandFaction } from './CoreElements/WarbandFaction';
 import { IWarbandPurchaseEquipment, IWarbandPurchaseModel, RealWarbandPurchaseEquipment, RealWarbandPurchaseModel, WarbandPurchase } from './Purchases/WarbandPurchase';
-import { IWarbandMember, WarbandMember } from './Purchases/WarbandMember';
+import { IWarbandMember, SkillSuite, WarbandMember } from './Purchases/WarbandMember';
 import { WarbandEquipment } from './Purchases/WarbandEquipment';
 import { WarbandFactory } from '../../../factories/warband/WarbandFactory';
 import { FactionModelRelationship, IFactionModelRelationship } from '../../relationship/faction/FactionModelRelationship';
@@ -27,6 +27,7 @@ import { StaticOptionContextObject } from '../../options/StaticOptionContextObje
 import { IWarbandConsumable, WarbandConsumable } from './WarbandConsumable';
 import { Model } from '../../feature/model/Model';
 import { Equipment, EquipmentRestriction } from '../../feature/equipment/Equipment';
+import { Skill } from '../../feature/ability/Skill';
 
 interface WarbandDebt {
     ducats : number,
@@ -64,7 +65,8 @@ export interface GeneralEventCache {
     fac_model_rel?: FactionModelRelationship[],
     max_elite? : number,
     base_ducats?: number,
-    exportval? : string[]
+    exportval? : string[],
+    exploration_skills?: WarbandProperty[]
 }
 
 export type CachedFactionEquipment = {[type : string]: CachedFacRelData};
@@ -428,6 +430,22 @@ class UserWarband extends DynamicContextObject {
 
     public async GetExplorationSkillsInContext(): Promise<ExplorationSkillSuite[]> {
         return await this.Exploration.GetSkillsInFormat();
+    }
+
+    public async GetSelfExplorationSkills()  {
+        if (this.GeneralCache.exploration_skills != null) {
+            return this.GeneralCache.exploration_skills
+        }
+        const Events : EventRunner = new EventRunner();
+        const SkillList : WarbandProperty[] = await Events.runEvent(
+                "getExplorationSkills",
+                (this),
+                [],
+                [],
+                null
+            )
+        this.GeneralCache.exploration_skills = SkillList
+        return SkillList;
     }
 
     public GetLocations() : WarbandProperty[] {
@@ -1889,6 +1907,11 @@ class UserWarband extends DynamicContextObject {
             for (let j = 0; j < Mods.length; j++) {
                 PropertyList.push(Mods[j])
             }
+        }
+        
+        const Mods = await (this.Exploration).GetWarbandModifiers();
+        for (let j = 0; j < Mods.length; j++) {
+            PropertyList.push(Mods[j])
         }
 
         for (let i = 0; i < this.Modifiers.length; i++) {

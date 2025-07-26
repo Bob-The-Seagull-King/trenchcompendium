@@ -1431,6 +1431,23 @@
         "warband_maximum" : -1
     },
     {
+        "id": "rel_fc_md_yeoman_survivor",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {"option_search_viable": {}},
+        "options": [],
+        "faction_id" : [],
+        "model_id" : "md_yeoman_survivor",
+        "captain" : false,
+        "mercenary": false,
+        "cost" : 0,
+        "cost_type" : 0,
+        "restricted_models" : [],
+        "warband_minimum" : 0,
+        "warband_maximum" : -1
+    },
+    {
         "id": "rel_fc_md_shocktrooper",
         "source": "core",
         "tags": {},
