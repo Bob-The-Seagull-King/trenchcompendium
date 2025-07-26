@@ -3064,7 +3064,7 @@ export const BaseContextCallTable : CallEventTable = {
                     for (let i = 0; i < context_func["count"]; i++) {
                         for (let j = 0; j < context_func["id"].length; j++) {
                             const NewModel = await ModelFactory.CreateNewFactionModel(context_func["id"][j], null);
-                            await warband.AddFighter([NewModel]);
+                            await warband.AddFighter([NewModel], true);
                         }
                     }
                 }

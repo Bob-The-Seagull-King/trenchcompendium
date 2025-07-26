@@ -47,7 +47,7 @@ const WbbOptionItem: React.FC<WbbOptionItemProps> = ({ option, owner, category }
         } else {
             
             setSelected(true)
-            owner.AddUpgrade(option.upgrade).then((result) => {
+            owner.AddUpgrade(option).then((result) => {
                 option.purchase = result;
                 setkeyvar(keyvar + 1)
                 

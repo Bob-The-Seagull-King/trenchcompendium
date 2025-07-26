@@ -547,18 +547,17 @@ class UserWarband extends DynamicContextObject {
      * Returns the total Ducats Value including stash as int
      * @constructor
      */
-    public GetCostDucatsTotal () {
-        return this.GetDucatCost() + this.GetDucatCostStash()
+    public GetCostDucatsTotal (discount = false) {
+        return this.GetDucatCost(discount) + this.GetDucatCostStash(discount)
     }
 
-    // The total ducats available for a warband to spend @TODO Lane this is where you sort budget stuff I think
     public GetSumCurrentDucats() {
-        return this.Ducats - this.GetCostDucatsTotal() -  this.Debts.ducats
+        return this.Ducats - this.GetCostDucatsTotal(true) -  this.Debts.ducats
     }
 
     // The total glory available for a warband to spend @TODO Lane this is where you sort budget stuff I think
     public GetSumCurrentGlory() {
-        return this.Glory - this.GetCostGloryTotal() -  this.Debts.glory
+        return this.Glory - this.GetCostGloryTotal(true) -  this.Debts.glory
     }
 
     /**
@@ -571,8 +570,8 @@ class UserWarband extends DynamicContextObject {
     /**
      * Returns the Glory Value of the Warband including stash as int
      */
-    public GetCostGloryTotal() {
-        return this.GetGloryCost() + this.GetGloryCostStash()
+    public GetCostGloryTotal(discount = false) {
+        return this.GetGloryCost(discount) + this.GetGloryCostStash(discount)
     }
 
     /**
@@ -695,7 +694,7 @@ class UserWarband extends DynamicContextObject {
      * Adds a fighter to the Roster
      * @param fighter
      */
-    public async AddFighter ( fighter: FactionModelRelationship[] ) {
+    public async AddFighter ( fighter: FactionModelRelationship[], free = false ) {
         for (let i = 0; i < fighter.length; i++) { 
             
             const Model : WarbandMember = await WarbandFactory.BuildWarbandMemberFromPurchase(fighter[i], this, this.IsUnRestricted);
@@ -705,6 +704,7 @@ class UserWarband extends DynamicContextObject {
                 cost_type : fighter[i].CostType,
                 count_limit : true,
                 count_cap : true,
+                discount: (free)? fighter[i].Cost : 0,
                 sell_item : true,
                 sell_full : true,
                 purchaseid: fighter[i].Model.ID,
@@ -923,6 +923,7 @@ class UserWarband extends DynamicContextObject {
             count_cap : true,
             sell_item : true,
             sell_full : true,
+            discount: 0,
             purchaseid: stash.EquipmentItem.ID,
             faction_rel_id: stash.ID,
             custom_rel: stash.SelfData,
@@ -965,6 +966,7 @@ class UserWarband extends DynamicContextObject {
             cost_type : Relationship.CostType,
             count_limit : true,
             count_cap : true,
+            discount: 0,
             sell_item : true,
             sell_full : true,
             purchaseid: Relationship.EquipmentItem.ID,
@@ -1128,19 +1130,19 @@ class UserWarband extends DynamicContextObject {
         return {
             ValueDucats: this.GetDucatCostStash(), // stash value in ducats
             ValueGlory: this.GetGloryCostStash(), // stash value in glory
-            AmountDucats: this.Ducats - this.GetCostDucatsTotal() -  this.Debts.ducats,  // unspent ducats
-            AmountGlory: this.Glory - this.GetCostGloryTotal() -  this.Debts.glory, // unspent glory
-            TotalDucats: this.Ducats -  this.GetCostDucatsTotal() + this.GetDucatCostStash(), // total stash value in ducats
-            TotalGlory: this.Glory -  this.GetCostGloryTotal() + this.GetGloryCostStash(), // total stash value in glory
+            AmountDucats: this.GetSumCurrentDucats(),  // unspent ducats
+            AmountGlory: this.GetSumCurrentGlory(), // unspent glory
+            TotalDucats: this.GetDucatCostStash(), // total stash value in ducats
+            TotalGlory: this.GetGloryCostStash(), // total stash value in glory
             Items: []
         }
     }
 
-    public GetDucatCost() {
+    public GetDucatCost(discount = false) {
         
         let TotalDucatCost = 0;
         for (let i = 0; i < this.Models.length; i++) {
-            TotalDucatCost += this.Models[i].GetTotalDucats();
+            TotalDucatCost += this.Models[i].GetTotalDucats(false, discount);
         }
         return TotalDucatCost
     }
@@ -1159,26 +1161,26 @@ class UserWarband extends DynamicContextObject {
         return TotalDucatCost
     }
 
-    public GetDucatCostStash() {
+    public GetDucatCostStash(discount = false) {
         
         let TotalDucatCost = 0;
         for (let i = 0; i < this.Equipment.length; i++) {
             if (this.Equipment[i].CountCap == false) {
                 continue;
             }
-            TotalDucatCost += this.Equipment[i].GetTotalDucats();
+            TotalDucatCost += this.Equipment[i].GetTotalDucats(false, discount);
         }
         return TotalDucatCost
     }
 
-    public GetGloryCost() {
+    public GetGloryCost(discount = false) {
         
         let TotalGloryCost = 0;
         for (let i = 0; i < this.Models.length; i++) {
             if (this.Models[i].CountCap == false) {
                 continue;
             }
-            TotalGloryCost += this.Models[i].GetTotalGlory();
+            TotalGloryCost += this.Models[i].GetTotalGlory(false, discount);
         }
         return TotalGloryCost
     }
@@ -1195,12 +1197,12 @@ class UserWarband extends DynamicContextObject {
         return TotalGloryCost
     }
 
-    public GetGloryCostStash() {
+    public GetGloryCostStash(discount = false) {
         
         let TotalGloryCost = 0;
         for (let i = 0; i < this.Equipment.length; i++) {
             if (this.Equipment[i].CountCap == false) {continue;}
-            TotalGloryCost += this.Equipment[i].GetTotalGlory();
+            TotalGloryCost += this.Equipment[i].GetTotalGlory(false, discount);
         }
         return TotalGloryCost
     }

@@ -199,8 +199,13 @@ class WarbandEquipment extends DynamicContextObject {
         return subpackages; 
     }
 
-    public GetSubCosts(type : number, overridecap = false) {
+    public GetSubCosts(type : number, overridecap = false, discount = false) {
         return 0;
+    }
+
+    public GetTotalDiscounts(type : number) {
+        return 0
+        
     }
 
     public GetEquipmentItem() : Equipment {

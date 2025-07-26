@@ -64,7 +64,8 @@ export interface MemberUpgradePresentation {
     purchase : WarbandPurchase | null,
     allowed : boolean,
     cur_count : number,
-    max_count : number
+    max_count : number,
+    discount : number
 }
 export type MemberUpgradesGrouped = {[type : string]: 
     {
@@ -345,6 +346,7 @@ class WarbandMember extends DynamicContextObject {
                             purchaseid: MERelationship.ID,
                             faction_rel_id: MERelationship.ID,
                             custom_rel: MERelationship.SelfData,
+                            discount: 0,
                             modelpurch: true
                         }, this, Model);
                         this.Equipment.push(NewPurchase);
@@ -789,33 +791,51 @@ class WarbandMember extends DynamicContextObject {
         return ((containsTag(tags, id)) || (containsTag(subtags, id)))
     }
 
-    public GetSubCosts(type : number, overridecap = false) {
-        let countvar = this.GetUpgradeCosts(type, overridecap);
+    
+
+    public GetTotalDiscounts(type : number) {
+        let countvar = 0;
+        for (let i = 0; i < this.Equipment.length; i++) {
+            if (this.Equipment[i].CostType == type) {
+                countvar += this.Equipment[i].GetTotalDiscount(type);
+            }
+        }
+        for (let i = 0; i < this.Upgrades.length; i++) {
+            if (this.Upgrades[i].CostType == type) {
+                countvar += this.Upgrades[i].GetTotalDiscount(type);
+            }
+        }
+        return countvar;
+        
+    }
+
+    public GetSubCosts(type : number, overridecap = false, discount = false) {
+        let countvar = this.GetUpgradeCosts(type, overridecap, discount);
         for (let i = 0; i < this.Equipment.length; i++) {
             if (this.Equipment[i].CountCap == false && !overridecap) {continue;}
             if (this.Equipment[i].CostType == type) {
                 if (type == 0 ) {
-                    countvar += this.Equipment[i].GetTotalDucats();
+                    countvar += this.Equipment[i].GetTotalDucats(overridecap, discount);
                 }
                 if (type == 1 ) {
-                    countvar += this.Equipment[i].GetTotalGlory();
+                    countvar += this.Equipment[i].GetTotalGlory(overridecap, discount);
                 }
             }
         }
         return countvar;
     }
 
-    public GetUpgradeCosts(type : number, overridecap = false) {
+    public GetUpgradeCosts(type : number, overridecap = false, discount = false) {
         let countvar = 0;
         
         for (let i = 0; i < this.Upgrades.length; i++) {
             if (this.Upgrades[i].CountCap == false && (overridecap == false)) {continue;}
             if (this.Upgrades[i].CostType == type) {
                 if (type == 0 ) {
-                    countvar += this.Upgrades[i].GetTotalDucats();
+                    countvar += this.Upgrades[i].GetTotalDucats(overridecap, discount);
                 }
                 if (type == 1 ) {
-                    countvar += this.Upgrades[i].GetTotalGlory();
+                    countvar += this.Upgrades[i].GetTotalGlory(overridecap, discount);
                 }
             }
         }
@@ -1145,6 +1165,13 @@ class WarbandMember extends DynamicContextObject {
             this
         )
 
+        let discounts = 0;
+        for (let i = 0; i < this.Upgrades.length; i++) {
+            discounts += this.Upgrades[i].GetTotalDiscount(0)
+        }
+
+        UpgradeBud -= discounts
+
         this.GeneralCache.upgrade_budget_ducats = UpgradeBud;
         return UpgradeBud;
         
@@ -1170,6 +1197,13 @@ class WarbandMember extends DynamicContextObject {
             UpgradeBud,
             this
         )
+
+        let discounts = 0;
+        for (let i = 0; i < this.Upgrades.length; i++) {
+            discounts += this.Upgrades[i].GetTotalDiscount(1)
+        }
+
+        UpgradeBud -= discounts
 
         this.GeneralCache.upgrade_budget_glory = UpgradeBud ;
         return UpgradeBud;
@@ -1228,10 +1262,12 @@ class WarbandMember extends DynamicContextObject {
             purchase : foundpurchase,
             allowed : true,
             cur_count: (this.MyContext as UserWarband).GetCountOfUpgradeRel(upg.ID),
-            max_count: maxcount
+            max_count: maxcount,
+            discount : 0
         }
         }
         let canaddupgrade = (await this.GetCountOfUpgradeCategory(category) < limit_of_category || category == "upgrades")
+        let discount_val = 0;
 
         if (canaddupgrade) {
             let maxccurcostount = upg.Cost;
@@ -1248,11 +1284,21 @@ class WarbandMember extends DynamicContextObject {
 
             if (upg.CostType == 0) {
                 const ducatbudget = await this.GetUpgradeBudgetDucats()
-                console.log(ducatbudget); // @TODO Lane Get the budget to lower costs
-                canaddupgrade = (this.MyContext as UserWarband).GetSumCurrentDucats() >= maxccurcostount;
+                if (ducatbudget > maxccurcostount) {
+                    discount_val = maxccurcostount
+                } else {
+                    discount_val = ducatbudget
+                }
+                canaddupgrade = (this.MyContext as UserWarband).GetSumCurrentDucats() >= (maxccurcostount - discount_val);
             }
             if (upg.CostType == 1) {
-                canaddupgrade = (this.MyContext as UserWarband).GetSumCurrentGlory() >= maxccurcostount;
+                const glorybudget = await this.GetUpgradeBudgetGlory()
+                if (glorybudget > maxccurcostount) {
+                    discount_val = maxccurcostount
+                } else {
+                    discount_val = glorybudget
+                }
+                canaddupgrade = (this.MyContext as UserWarband).GetSumCurrentGlory() >= (maxccurcostount - discount_val);
             }
         }
         if (canaddupgrade) {
@@ -1315,7 +1361,8 @@ class WarbandMember extends DynamicContextObject {
             purchase : foundpurchase,
             allowed : canaddupgrade,
             cur_count: (this.MyContext as UserWarband).GetCountOfUpgradeRel(upg.ID),
-            max_count: maxcount
+            max_count: maxcount,
+            discount : discount_val
         }
     }
 
@@ -1402,7 +1449,8 @@ class WarbandMember extends DynamicContextObject {
         return BaseList;
     }
     
-    public async AddUpgrade ( stash: ModelUpgradeRelationship ) {
+    public async AddUpgrade ( op : MemberUpgradePresentation ) {
+        const stash = op.upgrade;
         const CurUpgrade : Upgrade  = await UpgradeFactory.CreateUpgrade(stash.UpgradeObject.SelfData, this, true)
         
         const NewRuleProperty = new WarbandProperty(CurUpgrade, this, null, null);
@@ -1417,6 +1465,7 @@ class WarbandMember extends DynamicContextObject {
             sell_full : true,
             purchaseid: CurUpgrade.ID,
             faction_rel_id: stash.ID,
+            discount: op.discount,
             custom_rel: stash.SelfData,
             modelpurch : true
         }, this, NewRuleProperty);
@@ -2298,6 +2347,7 @@ class WarbandMember extends DynamicContextObject {
             cost_value : itemcost,
             cost_type : item.CostType,
             count_limit : true,
+            discount: 0,
             count_cap : true,
             sell_item : true,
             sell_full : false,
@@ -2352,6 +2402,7 @@ class WarbandMember extends DynamicContextObject {
                                 sell_item : Val.Removable,
                                 sell_full : true,
                                 purchaseid: Val.ID,
+                                discount: 0,
                                 faction_rel_id: Val.ID,
                                 custom_rel: Val.SelfData,
                                 modelpurch: true
@@ -2385,6 +2436,7 @@ class WarbandMember extends DynamicContextObject {
                 count_cap : false,
                 sell_item : false,
                 sell_full : true,
+                discount: 0,
                 purchaseid: UnarmedVal.ID,
                 faction_rel_id: UnarmedVal.ID,
                 custom_rel: UnarmedVal.SelfData,
@@ -2441,6 +2493,7 @@ class WarbandMember extends DynamicContextObject {
             cost_value : Relationship.Cost,
             cost_type : Relationship.CostType,
             count_limit : true,
+            discount: 0,
             count_cap : true,
             sell_item : true,
             sell_full : true,
