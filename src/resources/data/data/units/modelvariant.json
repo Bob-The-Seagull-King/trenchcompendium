@@ -347,6 +347,7 @@
         "source": "core",
         "tags": {"dog": true},
         "contextdata": {
+            "mercenary_add_equipment": {},
             "model_equipment_restriction": {
                 "removed": [
                     {
