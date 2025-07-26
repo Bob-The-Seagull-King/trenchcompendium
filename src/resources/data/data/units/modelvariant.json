@@ -379,6 +379,10 @@
                     {
                     "type": "id",
                     "model": "md_trenchdog"
+                    },
+                    {
+                    "type": "id",
+                    "model": "md_ecclesiasticprisoner"
                     }
                 ]
             }
