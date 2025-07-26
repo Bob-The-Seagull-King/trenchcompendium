@@ -348,6 +348,24 @@
         "restricted_models" : [],
         "warband_minimum" : 0,
         "warband_maximum" : 2
+    },
+    {
+        "id": "rel_fc_md_takwincreation_golem",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {
+        },
+        "options": [],
+        "faction_id" : [],
+        "model_id" : "md_takwincreation_golem",
+        "captain" : false,
+        "mercenary": false,
+        "cost" : 40,
+        "cost_type" : 0,
+        "restricted_models" : [],
+        "warband_minimum" : 0,
+        "warband_maximum" : -1
     },    
     {
         "id": "rel_fc_md_yuzbasicaptain_mv_silahdar",

@@ -1463,7 +1463,7 @@
             "location_rule_option": {},
             "gain_new_model_from_list": {
                 "count": 1,
-                "id": ["md_takwincreation_golem"]
+                "id": ["rel_fc_md_takwincreation_golem"]
             }
         },
         "description": [            
