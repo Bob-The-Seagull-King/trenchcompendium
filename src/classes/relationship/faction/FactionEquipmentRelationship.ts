@@ -92,16 +92,6 @@ class FactionEquipmentRelationship extends StaticContextObject {
         return this.Limit;
     }
 
-    /**
-     * Returns the limit value for this item
-     * @return {string} The restriction value as a string
-     * @TODO: return the restriction as a string e.g. "Assassins only"
-     */
-    public GetRestrictionString() {
-        // return 'Assassins only';
-        return [];
-    }
-
     public GetCostString() {
         return this.Cost + " " + getCostType(this.CostType)
     }

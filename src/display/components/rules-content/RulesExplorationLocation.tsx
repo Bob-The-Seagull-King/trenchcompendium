@@ -65,14 +65,10 @@ const RulesExplorationLocation = (props: any) => {
                         {explorationLocationObject.MyOptions.map((item) => (
                             <React.Fragment key={explorationLocationObject.Name + "-" + item.RefID}>
 
-                                {/* @TODO: Output the options as strings here. */}
-                                {/* - I don't know how to do that */}
-
                                 {item.Selections.map((selec) => (
                                     <li key={item.Selections.indexOf(selec).toString()} className={'exploration-location-option'}>
                                         <strong>{selec.value.Name + ": "}</strong>
                                         {returnDescription(selec.value, selec.value.Description)}
-                                        {/* Option Text goes here */}
                                     </li>
                                 ))}
                             </React.Fragment>

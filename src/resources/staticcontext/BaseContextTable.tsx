@@ -271,6 +271,23 @@ export const BaseContextCallTable : CallEventTable = {
             return relayVar;
         }
     },
+    upgrade_budget_free: {
+        event_priotity: 0,        
+        async getUpgradeBudget(this: EventRunner, eventSource : any, relayVar : number,  trackVal : WarbandMember ,context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, costtype : number) {
+            
+            if (costtype == 0) {
+                if (context_func["ducats"]) {
+                    return relayVar += context_func["ducats"]
+                }
+            }
+            if (costtype == 1) {
+                if (context_func["glory"]) {
+                    return relayVar += context_func["glory"]
+                }
+            }
+            return relayVar;
+        }
+    },
     validate_final_unit_upgrades: {
         event_priotity: 0,        
         async validateModelForWarband(this: EventRunner, eventSource : any, relayVar: string[], trackVal : WarbandPurchase, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : UserWarband) {

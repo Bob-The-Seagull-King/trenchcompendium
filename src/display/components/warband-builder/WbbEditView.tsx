@@ -122,7 +122,6 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData, view }) => {
     const [showAddModifierModal, setShowAddModifierModal] = useState(false);
     const handleAddModifier = (modifier: any, selectedOption: any) => {
         if (!warband) { return; } // Guard
-        warband.warband_data.AddModifier( modifier, selectedOption );
     };
 
 

@@ -1006,19 +1006,6 @@ class UserWarband extends DynamicContextObject {
     }
 
 
-    /** @TODO
-     * Adds a modifier item to a warband
-     *
-     * @param modifier
-     * @param option
-     */
-    public AddModifier ( modifier: object, option: object) {
-
-        return false;
-
-    }
-
-
     /**
      * Campaign Data
      * - This Data could be retrieved from a campaign object.
@@ -1032,7 +1019,6 @@ class UserWarband extends DynamicContextObject {
     }
 
     /**
-     * @TODO: Return the Vistory Points for this Warband
      * - can use Campaign Info
      * - uses VP for the currently active cylce
      */
@@ -1111,7 +1097,6 @@ class UserWarband extends DynamicContextObject {
     }
 
     /**
-     * @TODO get stash Data
      */
     GetStash() {
 
