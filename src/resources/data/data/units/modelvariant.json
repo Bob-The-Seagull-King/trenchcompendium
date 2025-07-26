@@ -1075,17 +1075,18 @@
         "source": "core",
         "tags": {},
         "contextdata": {
-            "upgrade_limit": {
-                "limits": [
-                    {
-                        "type": "ducats",
-                        "value": 60
-                    }
-                ]
-            },
             "upgrade_budget_free": {
                 "ducats": 60
-            }
+            },
+            "validate_final_unit_upgrades": {
+                "requirements": [
+                    {
+                        "type": "ducats",
+                        "value": 60,
+                        "subvalue": "maximum"
+                    }
+                ]
+            } 
         },
         "description": [
             {

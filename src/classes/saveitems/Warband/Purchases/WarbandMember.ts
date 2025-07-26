@@ -796,18 +796,7 @@ class WarbandMember extends DynamicContextObject {
     }
 
     public GetSubCosts(type : number, overridecap = false) {
-        let countvar = 0;
-        for (let i = 0; i < this.Upgrades.length; i++) {
-            if (this.Upgrades[i].CountCap == false && (overridecap == false)) {continue;}
-            if (this.Upgrades[i].CostType == type) {
-                if (type == 0 ) {
-                    countvar += this.Upgrades[i].GetTotalDucats();
-                }
-                if (type == 1 ) {
-                    countvar += this.Upgrades[i].GetTotalGlory();
-                }
-            }
-        }
+        let countvar = this.GetUpgradeCosts(type, overridecap);
         for (let i = 0; i < this.Equipment.length; i++) {
             if (this.Equipment[i].CountCap == false) {continue;}
             if (this.Equipment[i].CostType == type) {
@@ -820,6 +809,23 @@ class WarbandMember extends DynamicContextObject {
             }
         }
         return countvar;
+    }
+
+    public GetUpgradeCosts(type : number, overridecap = false) {
+        let countvar = 0;
+        for (let i = 0; i < this.Upgrades.length; i++) {
+            if (this.Upgrades[i].CountCap == false && (overridecap == false)) {continue;}
+            if (this.Upgrades[i].CostType == type) {
+                if (type == 0 ) {
+                    countvar += this.Upgrades[i].GetTotalDucats();
+                }
+                if (type == 1 ) {
+                    countvar += this.Upgrades[i].GetTotalGlory();
+                }
+            }
+        }
+        return countvar;
+
     }
 
     public GetEquipmentCount(id : string) {

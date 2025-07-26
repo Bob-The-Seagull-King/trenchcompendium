@@ -271,6 +271,31 @@ export const BaseContextCallTable : CallEventTable = {
             return relayVar;
         }
     },
+    validate_final_unit_upgrades: {
+        event_priotity: 0,        
+        async validateModelForWarband(this: EventRunner, eventSource : any, relayVar: string[], trackVal : WarbandPurchase, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : UserWarband) {
+            if (context_func["requirements"]) {
+                for (let i = 0; i < context_func["requirements"].length; i++) {
+                    const CurExp = context_func["requirements"][i]
+
+                    if (CurExp['type'] == 'ducats') {
+                        const ducatVal = (trackVal.HeldObject as WarbandMember).GetUpgradeCosts(0, true);
+                        const needVal = CurExp['value']
+                        if (CurExp['subvalue'] == 'maximum') {
+                            if (needVal < ducatVal) {
+                                relayVar.push(
+                                    "The model " + (trackVal.HeldObject as WarbandMember).GetTrueName() + " must have upgrades worth no more than " + needVal + " ducats."
+                                )
+                            }
+                        }
+
+                    }
+                }
+            }
+            
+            return relayVar;
+        }
+    },
     override_equipment_limit: {
         event_priotity: 0,
         
