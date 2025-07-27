@@ -2623,6 +2623,7 @@ class WarbandMember extends DynamicContextObject {
                 break;
             }
         }
+        await this.CheckIfDead();
     }
     
     public async DeleteSkill( item : WarbandProperty ) {
