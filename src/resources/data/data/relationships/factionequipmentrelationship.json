@@ -1265,7 +1265,7 @@
         },
         "faction_id": ["fc_cultoftheblackgrail"],
         "equipment_id": "eq_blackgrailshield",
-        "cost": 25,
+        "cost": 20,
         "costtype": 0,
         "limit": 0
     },
