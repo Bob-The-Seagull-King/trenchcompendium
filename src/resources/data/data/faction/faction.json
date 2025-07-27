@@ -219,7 +219,7 @@
                 "content": "At the head of such warbands stand the knights of the Order of the Fly: those most depraved men and women who willingly embrace the Black Grail and whose devotion Beelzebub finds sufficient. They are granted weapons, armour and equipment corrupted by the hand of the Archfiend in exchange for sacrifices brought to the altars of Beelzebub, which these warbands build wherever they go, objects of grisly horror constructed from the remains of their victims shaped into the form of monstrous flies."
             }
         ],
-        "rules": ["rl_infectionmarkers","rl_grailmorale"],
+        "rules": ["rl_infectionmarkers","rl_grailmorale","rl_theorderofthefly"],
         "options": []
     },
     {

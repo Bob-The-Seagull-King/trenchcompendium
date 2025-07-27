@@ -2297,6 +2297,62 @@
         "options": []
     },
     {
+        "id": "rl_theorderofthefly",
+        "source": "core",
+        "tags": { },
+        "contextdata": {   
+        },
+        "name": "The Order of the Fly",
+        "description":  [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "When your warband is created, you must choose whether it will be led by a Lord of Tumours or a Plague Knight."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [
+                    {
+                        "tags": {"desc_type" : "list"},
+                        "content": "",
+                        "subcontent": [
+                            
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Lord of Tumours: "
+                                    },{
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "Your warband must include a Lord of Tumours when it is created. Your warband may include up to one Lord of Tumours and up to two Plague Knights."
+                                    }
+                                ]
+                            },{
+                                "tags": {"desc_type" : "default"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Plague Knight: "
+                                    },{
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "Your warband must include a Plague Knight when it is created and may include up to three. ",
+                                        "glossary": [
+                                            {"val": "ACTION", "id": "kw_action"}
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
         "id": "rl_grailmorale",
         "source": "core",
         "tags": { },
