@@ -8,6 +8,7 @@ import { SkillSuite } from '../../../../../classes/saveitems/Warband/Purchases/W
 import { makestringpresentable } from '../../../../../utility/functions';
 import WbbFighterCollapse from '../../WbbFighterCollapse';
 import {useModalSubmitWithLoading} from "../../../../../utility/useModalSubmitWithLoading";
+import { useWarband } from '../../../../../context/WarbandContext';
 
 
 interface WbbModalAddAdvancementProps {
@@ -20,6 +21,7 @@ interface WbbModalAddAdvancementProps {
 const WbbModalAddAdvancement: React.FC<WbbModalAddAdvancementProps> = ({ show, onClose, onSubmit, fighter }) => {
     const [selectedId, setSelectedId] = useState<string | null>(null);
 
+    const { warband } = useWarband();
     const [available, setAvailable] = useState<SkillSuite[]>([]);
     const [keyvar, setkevvar] = useState(0);
 
@@ -72,6 +74,9 @@ const WbbModalAddAdvancement: React.FC<WbbModalAddAdvancementProps> = ({ show, o
             <Modal.Body>
                 <div className={"fighter-card"}>
                     <div  className={'fighter-card-collapse-wrap'} >
+                        {warband?.warband_data.GetPatron() == null &&
+                            <div className="form-text">No patron is selected</div>
+                        }
                     {available.map((adv) => (
                         <WbbFighterCollapse
                             key={adv.skillgroup.ID}
