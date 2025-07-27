@@ -116,7 +116,7 @@ export interface CallEvents {
     getnewrange? : (this: EventRunner, eventSource : any, relayVar: number,  context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, coreitem : WarbandEquipment) => Promise<number>;
     getCostOfEquipment? : (this: EventRunner, eventSource : any, relayVar: number, trackVal: UserWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, coreitem : FactionEquipmentRelationship) => Promise<number>;
     getNumberOfElite? : (this: EventRunner, eventSource : any, relayVar: number, trackVal: UserWarband,  context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<number>;
-    
+    getExplorationLimit? : (this: EventRunner, eventSource : any, relayVar: number, trackVal: UserWarband,  context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<number>;
 }
 
 /**

@@ -270,11 +270,57 @@
             "location_option": "el_trenchshrine"
         },
         "contextdata": {
+            "validate_location": {
+                "removed": [
+                    {
+                        "type": "faction",
+                        "value": ["fc_cultoftheblackgrail"]
+                    }
+                ]
+            },
             "gain_all_from_list": {
-                "count": 1,
-                "obey_restriction": true,
                 "obey_faction": true,
-                "id": ["eq_troopflag"]
+                "obey_restriction": true,
+                "id": ["rel_fc_eq_troopflag"]
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Add a "
+            },
+            {
+                "tags": {"desc_type" : "equipmentslim"},
+                "content": "eq_troopflag"
+            },        
+            {
+                "tags": {"desc_type" : "default"},
+                "content": " to your Warband’s roster for free. You cannot exceed your Warband’s LIMIT on Troop Flags in this way.",
+                "glossary": [{"val": "LIMIT", "id": "kw_limit"}]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "el_trenchshrine_standard_grail",
+        "name": "Standard",
+        "source": "core",
+        "tags": {
+            "location_option": "el_trenchshrine"
+        },
+        "contextdata": {
+            "validate_location": {
+                "allowed": [
+                    {
+                        "type": "faction",
+                        "value": ["fc_cultoftheblackgrail"]
+                    }
+                ]
+            },
+            "gain_all_from_list": {
+                "obey_faction": true,
+                "obey_restriction": true,
+                "id": ["rel_fc_eq_troopflag_grail"]
             }
         },
         "description": [            
@@ -304,7 +350,7 @@
         "contextdata": {
             "gain_all_from_list": {
                 "count": 1,
-                "id": ["eq_fieldshrine"]
+                "id": ["rel_fc_eq_fieldshrine"]
             }
         },
         "description": [            
@@ -970,7 +1016,7 @@
                 "obey_faction": true,
                 "obey_restriction": true,
                 "alternate_value": true,
-                "id": ["eq_siegejezzail","eq_alchemicalammunition","eq_cloakofalamut"]
+                "id": ["rel_fc_eq_siegejezzail","rel_fc_eq_alchemicalammunition","rel_fc_eq_cloakofalamut"]
             }
         },
         "description": [     
@@ -1017,7 +1063,7 @@
                 "obey_faction": true,
                 "obey_restriction": true,
                 "alternate_value": true,
-                "id": ["eq_automaticrifle"]
+                "id": ["rel_fc_eq_automaticrifle"]
             }
         },
         "description": [         
@@ -1048,7 +1094,7 @@
                 "obey_faction": true,
                 "obey_restriction": true,
                 "alternate_value": true,
-                "id": ["eq_fieldshrine","eq_corruptionbelcher"]
+                "id": ["rel_fc_eq_fieldshrine","rel_fc_eq_corruptionbelcher"]
             }
         },
         "description": [          
@@ -1087,7 +1133,7 @@
                 "obey_faction": true,
                 "obey_restriction": true,
                 "alternate_value": true,
-                "id": ["eq_ophidianrifle"]
+                "id": ["rel_fc_eq_ophidianrifle"]
             }
         },
         "description": [    
@@ -1718,18 +1764,7 @@
         "contextdata": {
             "location_rule_option": {},
             "gain_all_from_list": {
-                "count": 1,
-                "add_to_purchase_context": {                    
-                    "faction_eq_restriction": {
-                        "banned": [
-                            {
-                                "res_type": "keyword",
-                                "value": "kw_elite"
-                            }
-                        ]
-                    } 
-                },
-                "id": ["eq_saintsreliquary"]
+                "id": ["rel_fc_eq_saintsreliquary"]
             }
         },
         "description": [            
@@ -2272,7 +2307,7 @@
     },
     {
         "id": "el_blacknetworkcontact",
-        "name": "Black Market",
+        "name": "Black Network Contact",
         "source": "core",
         "tags": {
             "exploration_table": "et_legendarylocations"
@@ -2379,8 +2414,7 @@
                 ]
             },
             "gain_all_from_list": {
-                "count": 1,
-                "id": ["eq_faithfulskull"]
+                "id": ["rel_fc_eq_faithfulskull"]
             }
         },
         "description": [               
@@ -2426,8 +2460,7 @@
                 ]
             },
             "gain_all_from_list": {
-                "count": 1,
-                "id": ["eq_hellskull"]
+                "id": ["rel_fc_eq_hellskull"]
             }
         },
         "description": [             
@@ -2468,8 +2501,7 @@
         },
         "contextdata": {"location_rule_option": {},
         "gain_all_from_list": {
-            "count": 1,
-            "id": ["eq_lockofsamsonshair"]
+            "id": ["rel_fc_eq_samsonshair"]
         }},
         "description": [                 
             {

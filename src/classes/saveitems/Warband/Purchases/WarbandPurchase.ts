@@ -176,9 +176,9 @@ class WarbandPurchase {
         let TotalDucatCost = 0;
         if (this.CostType == 0) {
             TotalDucatCost += this.ItemCost;
-        }
-        if (discount) {
-            TotalDucatCost -= this.Discount;
+            if (discount) {
+                TotalDucatCost -= this.Discount;
+            }
         }
 
         if (this.HeldObject instanceof WarbandMember) {
@@ -194,6 +194,9 @@ class WarbandPurchase {
         let TotalGloryCost = 0;
         if (this.CostType == 1) {
             TotalGloryCost += this.ItemCost;
+            if (discount) {
+                TotalGloryCost -= this.Discount;
+            }
         }
 
         if (this.HeldObject instanceof WarbandMember) {

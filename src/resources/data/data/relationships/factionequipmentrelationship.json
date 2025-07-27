@@ -3892,5 +3892,62 @@
         "cost": 10,
         "costtype": 0,
         "limit": 4
+    },
+    {
+        "id": "rel_fc_eq_saintsreliquary",
+        "source": "core",
+        "tags": {},
+        "name": "Saints Reliquary",
+        "contextdata": {           
+            "faction_eq_restriction": {
+                "permitted": [
+                    {
+                        "res_type": "keyword",
+                        "value": "kw_elite"
+                    }
+                ]
+            }   
+        },
+        "faction_id": [],
+        "equipment_id": "eq_saintsreliquary",
+        "cost": 0,
+        "costtype": 1,
+        "limit": 1
+    },{
+        "id": "rel_fc_eq_faithfulskull",
+        "source": "core",
+        "tags": {},
+        "name": "Saint's Skull of the Faithful",
+        "contextdata": {          
+        },
+        "faction_id": [],
+        "equipment_id": "eq_faithfulskull",
+        "cost": 0,
+        "costtype": 1,
+        "limit": 1
+    },{
+        "id": "rel_fc_eq_hellskull",
+        "source": "core",
+        "tags": {},
+        "name": "Saint's Skull of Hell",
+        "contextdata": {          
+        },
+        "faction_id": [],
+        "equipment_id": "eq_hellskull",
+        "cost": 0,
+        "costtype": 1,
+        "limit": 1
+    },{
+        "id": "rel_fc_eq_samsonshair",
+        "source": "core",
+        "tags": {},
+        "name": "Lock of Samson's Hair",
+        "contextdata": {          
+        },
+        "faction_id": [],
+        "equipment_id": "eq_lockofsamsonshair",
+        "cost": 0,
+        "costtype": 1,
+        "limit": 1
     }
 ]

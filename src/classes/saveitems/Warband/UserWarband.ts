@@ -66,7 +66,8 @@ export interface GeneralEventCache {
     max_elite? : number,
     base_ducats?: number,
     exportval? : string[],
-    exploration_skills?: WarbandProperty[]
+    exploration_skills?: WarbandProperty[],
+    exploration_limit?: number
 }
 
 export type CachedFactionEquipment = {[type : string]: CachedFacRelData};
@@ -403,6 +404,14 @@ class UserWarband extends DynamicContextObject {
 
         if (this.Faction) {
             const static_packages : ContextPackage[] = await this.Faction.GrabContextPackages(event_id, source_obj, arrs_extra);
+            for (let j = 0; j < static_packages.length; j++) {
+                static_packages[j].callpath.push("UserWarband")
+                subpackages.push(static_packages[j])
+            }
+        } 
+
+        if (this.Exploration) {
+            const static_packages : ContextPackage[] = await this.Exploration.GrabContextPackages(event_id, source_obj, arrs_extra);
             for (let j = 0; j < static_packages.length; j++) {
                 static_packages[j].callpath.push("UserWarband")
                 subpackages.push(static_packages[j])
@@ -910,7 +919,7 @@ class UserWarband extends DynamicContextObject {
         await this.AddStash(FacEquip)
     }
     
-    public async AddStash ( stash: FactionEquipmentRelationship ) {
+    public async AddStash ( stash: FactionEquipmentRelationship, free = false ) {
         let itemcost = stash.Cost;
         if ((this).EquipmentRelCache[stash.ID] != null) {
             itemcost = (this).EquipmentRelCache[stash.ID].cost
@@ -923,7 +932,7 @@ class UserWarband extends DynamicContextObject {
             count_cap : true,
             sell_item : true,
             sell_full : true,
-            discount: 0,
+            discount: (free)? itemcost : 0,
             purchaseid: stash.EquipmentItem.ID,
             faction_rel_id: stash.ID,
             custom_rel: stash.SelfData,
@@ -1871,12 +1880,17 @@ class UserWarband extends DynamicContextObject {
                         }
                         if (BaseRels[i].CostType == 1) {
                             canaddupgrade = (this).GetSumCurrentGlory() >= maxccurcostount;
+                            if (containsTag(BaseRels[i].Tags, "exploration_only")) {
+                                const explore_limit = await this.GetExplorationLimit()
+                                canaddupgrade = maxccurcostount <= explore_limit;
+                            }
                         }
 
                         if (canaddupgrade) {
                             AddedIDs.push(BaseRels[i].ID)
                             ListOfRels.push(BaseRels[i]);
                         }
+
                     } else {
                         AddedIDs.push(BaseRels[i].ID)
                         ListOfRels.push(BaseRels[i]);
@@ -1886,6 +1900,23 @@ class UserWarband extends DynamicContextObject {
         }
 
         return ListOfRels
+    }
+
+    public async GetExplorationLimit() {
+        
+        if (this.GeneralCache.exploration_limit != null) {
+            return this.GeneralCache.exploration_limit
+        }
+        const Events : EventRunner = new EventRunner();
+        const ExploreLimit : number = await Events.runEvent(
+                "getExplorationLimit",
+                this,
+                [],
+                0,
+                this
+            )
+        this.GeneralCache.exploration_limit = ExploreLimit
+        return ExploreLimit;
     }
 
     public async GetModifiersList() {

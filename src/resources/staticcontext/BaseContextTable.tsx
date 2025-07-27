@@ -2570,6 +2570,18 @@ export const BaseContextCallTable : CallEventTable = {
                     <ExplorationLocationDisplay data={relayVar.value} />
                 </ErrorBoundary>
             )
+        },
+        async returnWbbOptionDisplay(this: EventRunner, eventSource : any, trackVar : IChoice, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null){
+    
+            return ( 
+            
+                <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
+                    
+                    <p className={''}>
+                        {returnDescription(trackVar.value, trackVar.value.Description)}
+                    </p>
+                </ErrorBoundary>
+            )
         }
     },
     validate_location : {
@@ -2616,8 +2628,13 @@ export const BaseContextCallTable : CallEventTable = {
                     const Requirement = Permissions.allowed[j]
                     if (Requirement.type == "faction") {
                         let Found = false;
+                        let BaseFac = null
+                        if (Requirement.base_only == true) {
+                            BaseFac = await trackVal.GetFaction();
+                        } else {
+                            BaseFac = await trackVal.GetFactionBase();
+                        }
                         for (let k = 0; k < Requirement.value.length; k++) {
-                            const BaseFac = await trackVal.GetFactionBase();
                             if (BaseFac) {
                                 if (BaseFac.ID == Requirement.value[k]) {
                                     Found = true;
@@ -2629,6 +2646,34 @@ export const BaseContextCallTable : CallEventTable = {
                         }
 
                         if (Found == false) {
+                            return false;
+                        }
+                    }
+                }
+            }
+            if (Permissions.removed) {
+                for (let j = 0; j < Permissions.removed.length; j++) {
+                    const Requirement = Permissions.removed[j]
+                    if (Requirement.type == "faction") {
+                        let Found = false;
+                        let BaseFac = null
+                        if (Requirement.base_only == true) {
+                            BaseFac = await trackVal.GetFaction();
+                        } else {
+                            BaseFac = await trackVal.GetFactionBase();
+                        }
+                        for (let k = 0; k < Requirement.value.length; k++) {
+                            if (BaseFac) {
+                                if (BaseFac.ID == Requirement.value[k]) {
+                                    Found = true;
+                                }
+                            }
+                            if (trackVal.GetFaction()?.ID == Requirement.value[k]){
+                                    Found = true;
+                                }
+                        }
+
+                        if (Found == true) {
                             return false;
                         }
                     }
@@ -2994,7 +3039,11 @@ export const BaseContextCallTable : CallEventTable = {
                 }
             }
             if (IsMe) {
-
+                let count = 1;
+                if (context_func["count"]) {
+                    count = context_func["count"]
+                }
+                for (let k = 0; k < count; k++) {
                         if (context_func["single_exploration_glory_item"]) {
                             const Tags = context_static.Tags;
                             Tags["consumable_type_equipment"] = true
@@ -3013,6 +3062,7 @@ export const BaseContextCallTable : CallEventTable = {
                             trackVal.Consumables.push(CreateNewConsumable);
                         }
                     }
+                }
         }
     },
     gain_glory: {
@@ -3038,6 +3088,69 @@ export const BaseContextCallTable : CallEventTable = {
                             warband.AddStashValue(context_func["count"],1)
                         }
                     }
+        }
+    },
+    gain_all_from_list: {
+        event_priotity: 0,
+        async onGainLocation(this: EventRunner, eventSource : any, trackVal : WarbandProperty, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) {
+            let IsMe = false
+            if (trackVal.SelfDynamicProperty.OptionChoice.ID == context_static.GetID()) {
+                IsMe = true
+            }
+            if (!IsMe) {
+                for (let i = 0; i < trackVal.SelfDynamicProperty.Selections.length; i++) {
+                    const CurSel = trackVal.SelfDynamicProperty.Selections[i]
+                    if (CurSel.SelectedChoice != null) {
+                        if (CurSel.SelectedChoice.value.ID == context_static.GetID()) {
+                            IsMe = true;
+                        }
+                        
+                    }
+                }
+            }
+            if (IsMe) {
+                const { EquipmentFactory } = await import("../../factories/features/EquipmentFactory");
+                const List = await warband.GetFactionEquipmentOptions(true, false, true);
+                const ids = List.map(obj => obj.ID);
+                const FilterList = await warband.GetFactionEquipmentOptions(true, false, false);
+                const filterids = FilterList.map(obj => obj.ID);
+                if (context_func["id"]) {
+                    for (let j = 0; j < context_func["id"].length; j++) {
+                        const NewModel = await EquipmentFactory.CreateNewFactionEquipment(context_func["id"][j], null, true);
+                        if (NewModel) {
+                            let canadd = true;
+                            if (context_func["obey_faction"]) {
+                                if (!ids.includes(context_func["id"][j])) {
+                                    canadd = false;
+                                }
+                            }
+                            if (context_func["obey_restriction"]) {
+                                if (!filterids.includes(context_func["id"][j])) {
+                                    canadd = false;
+                                }
+                            }
+                            if ( canadd) {
+                                await warband.AddStash(NewModel, true);
+                            } else {
+                                if (context_func["alternate_value"] == true) {
+                                    warband.AddStashValue(NewModel.Cost, NewModel.CostType)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    set_exploration_purchase_cap: {
+        event_priotity: 0,
+        async getExplorationLimit(this: EventRunner, eventSource : any, relayVar: number, trackVal: UserWarband,  context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+
+            if (relayVar < context_func["cost"]) {
+                return context_func["cost"]
+            }
+            
+            return relayVar;
         }
     },
     gain_new_model_from_list: {
