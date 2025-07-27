@@ -1623,7 +1623,16 @@
         "source": "core",
         "tags": {},
         "name": "",
-        "contextdata": {"option_search_viable": {}},
+        "contextdata": {"option_search_viable": {},
+    
+        "faction_model_count_group": {
+            "filter": [
+                {
+                    "id": ["md_lordoftumors","md_plagueknight"]
+                }
+            ],
+            "number": 3
+        }},
         "options": [],
         "faction_id" : ["fc_cultoftheblackgrail"],
         "model_id" : "md_lordoftumors",
@@ -1641,11 +1650,20 @@
         "warband_maximum" : 1
     },
     {
-        "id": "rel_fc_md_plagueknight_captain",
+        "id": "rel_fc_md_plagueknight",
         "source": "core",
         "tags": {},
         "name": "",
-        "contextdata": {"option_search_viable": {}},
+        "contextdata": {"option_search_viable": {},
+    
+        "faction_model_count_group": {
+            "filter": [
+                {
+                    "id": ["md_lordoftumors","md_plagueknight"]
+                }
+            ],
+            "number": 3
+        }},
         "options": [],
         "faction_id" : ["fc_cultoftheblackgrail"],
         "model_id" : "md_plagueknight",
@@ -1660,24 +1678,7 @@
             }
         ],
         "warband_minimum" : 0,
-        "warband_maximum" : 1
-    },
-    {
-        "id": "rel_fc_md_plagueknight",
-        "source": "core",
-        "tags": {},
-        "name": "",
-        "contextdata": {"option_search_viable": {}},
-        "options": [],
-        "faction_id" : ["fc_cultoftheblackgrail","fc_cultoftheblackgrail_fv_dirgeofthegreathegemon"],
-        "model_id" : "md_plagueknight",
-        "captain" : false,
-        "mercenary": false,
-        "cost" : 60,
-        "cost_type" : 0,
-        "restricted_models" : [],
-        "warband_minimum" : 0,
-        "warband_maximum" : 2
+        "warband_maximum" : 3
     },
     {
         "id": "rel_fc_md_corpseguard",

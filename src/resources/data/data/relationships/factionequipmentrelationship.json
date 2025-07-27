@@ -1267,7 +1267,7 @@
         "equipment_id": "eq_blackgrailshield",
         "cost": 25,
         "costtype": 0,
-        "limit": 1
+        "limit": 0
     },
     {
         "id": "rel_fc_eq_windamulet",
