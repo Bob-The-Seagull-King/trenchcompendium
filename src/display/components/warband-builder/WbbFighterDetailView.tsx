@@ -360,7 +360,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                         title={"Armour"}
                         value={getModelStatArmour(complexstate.stats)}
                         base={fighter.CurModel.Stats.armour}
-                        raw={complexstate.stats.armour * -1}
+                        raw={complexstate.stats.armour?  complexstate.stats.armour * -1 : null}
                     />
                 </div>
 
