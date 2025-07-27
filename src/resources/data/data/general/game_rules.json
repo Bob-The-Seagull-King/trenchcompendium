@@ -323,7 +323,7 @@
                                     "content": "",
                                     "subcontent": [
                                         {
-                                            "tags": {"desc_type" : "table_item"},
+                                            "tags": {"desc_type" : "table_item_wrap"},
                                             "content": "2-6"
                                         },
                                         {
@@ -337,7 +337,7 @@
                                     "content": "",
                                     "subcontent": [
                                         {
-                                            "tags": {"desc_type" : "table_item"},
+                                            "tags": {"desc_type" : "table_item_wrap"},
                                             "content": "7-11"
                                         },
                                         {
@@ -351,7 +351,7 @@
                                     "content": "",
                                     "subcontent": [
                                         {
-                                            "tags": {"desc_type" : "table_item"},
+                                            "tags": {"desc_type" : "table_item_wrap"},
                                             "content": "12"
                                         },
                                         {

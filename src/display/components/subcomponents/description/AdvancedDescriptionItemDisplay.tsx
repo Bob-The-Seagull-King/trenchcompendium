@@ -169,6 +169,21 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
                 )
 
             }
+            case "table_item_wrap": {
+                return (
+                    <td className="table_item text-nowrap">
+                        <span>
+                            {ConvertContentWithGlossary((item.Glossary), item.Content?.toString() || "")}
+                        </span>
+                        <span>
+                            {item.SubContent?.map((subitem) => (
+                               <AdvancedDescriptionItemDisplay key="descriptionsubitem" data={subitem} parent={parentItem}/>
+                            ))}
+                        </span>
+                    </td>
+                )
+
+            }
             case "table_headitem": {
                 return (
                     <th>
