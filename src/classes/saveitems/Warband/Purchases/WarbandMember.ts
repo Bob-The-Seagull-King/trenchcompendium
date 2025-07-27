@@ -340,7 +340,7 @@ class WarbandMember extends DynamicContextObject {
                             cost_value : MERelationship.SaleValue,
                             cost_type : MERelationship.SaleType,
                             count_limit : false,
-                            count_cap : SaleValue == 0? false : true,
+                            count_cap : MERelationship.SaleValue == 0? false : true,
                             sell_item : MERelationship.Removable,
                             sell_full : true,
                             purchaseid: MERelationship.ID,
