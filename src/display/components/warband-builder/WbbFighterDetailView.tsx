@@ -337,22 +337,30 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                     <ItemStat
                         title={"Movement"}
                         value={getModelStatMove(complexstate.stats)}
+                        base={fighter.CurModel.Stats.movement}
+                        raw={complexstate.stats.movement}
                     />
                     {complexstate.stats.melee != undefined &&
                         <ItemStat
                             title={"Melee"}
                             value={getModelStatMelee(complexstate.stats)}
+                            base={fighter.CurModel.Stats.melee}
+                            raw={complexstate.stats.melee}
                         />
                     }
                     {complexstate.stats.ranged != undefined &&
                         <ItemStat
                             title={"Ranged"}
                             value={getModelStatRanged(complexstate.stats)}
+                            base={fighter.CurModel.Stats.ranged}
+                            raw={complexstate.stats.ranged}
                         />
                     }
                     <ItemStat
-                        title={"Armor"}
+                        title={"Armour"}
                         value={getModelStatArmour(complexstate.stats)}
+                        base={fighter.CurModel.Stats.armour}
+                        raw={complexstate.stats.armour}
                     />
                 </div>
 

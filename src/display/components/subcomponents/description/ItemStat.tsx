@@ -5,12 +5,22 @@ import { ErrorBoundary } from "react-error-boundary";
 const ItemStat = (props: any) => {
     const Title = props.title;
     const Content = props.value;
+    const BaseVal = props.base;
+    const RawVal = props.raw;
 
+    let modified = false;
+    let modifiedPositive = false;
+    let modifiedNegative = false;
+    if (BaseVal == null || BaseVal == undefined) {
+        modified = true;
+    } else {
+        modified = (BaseVal != RawVal)
+    }
 
-    // @TODO: set modified values here
-    const modified = false; // if at all modified
-    const modifiedPositive = false; // if modified positvely (optional)
-    const modifiedNegative = false; // if modified negatively (optional)
+    if (modified) {
+        modifiedNegative = BaseVal > RawVal
+        modifiedPositive = RawVal > BaseVal
+    }
 
     return (
         
