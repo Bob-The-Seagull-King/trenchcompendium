@@ -1624,6 +1624,8 @@ class WarbandMember extends DynamicContextObject {
         
         if (this.GetBattleScars() >= MaxScars) {
             this.State = 'dead';
+        } else if (this.State == 'dead') {
+            this.State = 'reserved';
         }
     }
 
