@@ -23,6 +23,7 @@ import { WarbandMember } from '../../../classes/saveitems/Warband/Purchases/Warb
 import WbbMoveEquipmentToFighterModal from './modals/warband/WbbMoveEquipmentToFighterModal';
 import { UserWarband } from '../../../classes/saveitems/Warband/UserWarband';
 import {SumWarband, WarbandManager} from "../../../classes/saveitems/Warband/WarbandManager";
+import { useNavigate } from 'react-router-dom';
 
 interface WbbContextualPopoverProps {
     id: string;
@@ -41,6 +42,8 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
             </>
         )
     }
+
+    const navigate = useNavigate(); 
 
     // Wrapper function to stop event propagation from this popover
     const withStopPropagation = (fn: () => void) => (e: React.MouseEvent) => {
@@ -357,9 +360,11 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
     // deletes the warband
     const handleDeleteWarband = () => {
         if( deleteConfirmInput == 'confirm') {
-            alert ('@TODO: delete');
-            // @TODO: Lane
-            // delete the warband and redirect to "your warbands"
+            
+            const Manager : ToolsController = ToolsController.getInstance();
+            Manager.UserWarbandManager.DeletePack(item.id).then(() =>
+                    navigate("./warband", {state: Date.now().toString()}););
+            
         }
     }
 
@@ -605,11 +610,10 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                                         {'Print Warband'}
                                     </div>
 
-                                    {/* @TODO: include this to enable delete option*/}
-                                    {/*<div className="action" onClick={() => setshowConfirmDeleteWarbandModal(true)}>*/}
-                                    {/*    <FontAwesomeIcon icon={faTrash} className="icon-inline-left-l"/>*/}
-                                    {/*    {'Delete Warband'}*/}
-                                    {/*</div>*/}
+                                    <div className="action" onClick={() => setshowConfirmDeleteWarbandModal(true)}>
+                                        <FontAwesomeIcon icon={faTrash} className="icon-inline-left-l"/>
+                                        {'Delete Warband'}
+                                    </div>
                                 </>
                             }
                         </div>
