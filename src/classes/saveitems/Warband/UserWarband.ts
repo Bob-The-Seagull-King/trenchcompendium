@@ -1769,9 +1769,6 @@ class UserWarband extends DynamicContextObject {
         }
 
         
-        if (this.IsUnRestricted ) {
-            return BaseRels;
-        }
 
         let FactionEquipRestrictionList : EquipmentRestriction[] = []
         if (this.GeneralCache.fac_equip_rest != null) {
@@ -1859,7 +1856,7 @@ class UserWarband extends DynamicContextObject {
                 canadd = this.EquipmentRelCache[BaseRels[i].ID].canadd
             }
 
-            if (get_base == true) {
+            if (get_base == true || this.IsUnRestricted == true) {
                 AddedIDs.push(BaseRels[i].ID)
                 ListOfRels.push(BaseRels[i]);
                 continue;
