@@ -187,7 +187,7 @@
                                         "content": "",
                                         "subcontent": [
                                             {
-                                                "tags": {"desc_type" : "table_item"_wrap},
+                                                "tags": {"desc_type" : "table_item_wrap"},
                                                 "content": "5"
                                             },
                                             {
