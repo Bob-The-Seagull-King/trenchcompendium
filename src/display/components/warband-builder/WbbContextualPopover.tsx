@@ -1040,6 +1040,9 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                     <div className={'mb-3'}>
                         {'Are you sure you want to delete this Injury?'}
                     </div>
+                    <div className={'mb-3'}>
+                        {'Removing an injury will reduce the number of Scars the model suffers.'}
+                    </div>
                     <div >
                         <strong>{item.Name }</strong>?
                     </div>
