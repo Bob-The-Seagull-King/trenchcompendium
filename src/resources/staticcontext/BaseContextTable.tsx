@@ -2137,6 +2137,11 @@ export const BaseContextCallTable : CallEventTable = {
                         if (Requirement.res_type == "equipment") {
                             const EquipItem = await EquipmentModule.EquipmentFactory.CreateNewEquipment(Requirement.value.toString(), null)
                             NewStringParts.push(""+(EquipItem.Name))
+                        }   
+
+                        if (Requirement.res_type == "equipment_keyword") {
+                            const ValKey : Keyword = KeywordFactory.CreateNewKeyword(Requirement.value.toString(), null)
+                            NewStringParts.push(""+(ValKey.Name))
                         }                  
 
                         if (Requirement.res_type == "upgrade") {
@@ -2228,6 +2233,21 @@ export const BaseContextCallTable : CallEventTable = {
                                 for (let k = 0; k < trackVal.model.GetEquipment().length; k++) {
                                     if (trackVal.model.GetEquipment()[k].equipment.MyEquipment.SelfDynamicProperty.OptionChoice.ID == Requirement.value) {
                                         Found = true;
+                                    }
+                                }
+                                if (Found == true) {
+                                    PassedOne = true;
+                                }
+                            }    
+                            if (Requirement.res_type == "equipment_keyword") {
+                                let Found = false;
+                                const Equipmentlist = await trackVal.model.GetAllEquipForShow()
+                                for (let k = 0; k < Equipmentlist.length; k++) {
+                                    const Keywords = await Equipmentlist[k].equipment.GetKeywords();
+                                    const ids = Keywords.map(obj => obj.ID);
+                                    if (ids.includes( Requirement.value.toString())) {
+                                        Found = true;
+                                        k = Equipmentlist.length;
                                     }
                                 }
                                 if (Found == true) {

@@ -559,6 +559,14 @@
         "tags": {   },
         "name": "Bayonet",
         "contextdata": {    
+            "faction_eq_restriction": {
+                "permitted": [
+                    {
+                        "res_type": "equipment_keyword",
+                        "value": "kw_bayonetlug"
+                    }
+                ]
+            }  
         },
         "faction_id": ["fc_cultoftheblackgrail","fc_cultoftheblackgrail_fv_dirgeofthegreathegemon","fc_newantioch","fc_newantioch_fv_redbrigade","fc_newantioch_fv_expeditionaryforcedofabyssinia","fc_newantioch_fv_kingdomofalbaassaultdetatchment","fc_newantioch_fc_stortruppenofthefreestateofprussia","fc_newantioch_fc_eirerangers","fc_newantioch_fv_papalstatesinterventionforce","fc_trenchpilgrim","fc_trenchpilgrim_fv_warpilgimageofsaintmethodius","fc_trenchpilgrim_fv_cavalcadeofthetenthplague","fc_trenchpilgrim_fv_processionofthesacredaffliction","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_bayonet",
