@@ -30,21 +30,7 @@ const HomeRoute: React.FC = () => {
                         description={'The official resource for Trench Crusade'}
                     />
 
-                    <div className={'spacer-20'}></div>
-
                     <div className={'narrow-content'}>
-                        <h1>{'Trench Companion'}</h1>
-                        <div className={'sub-headline'}>
-                            {'Your digital assistant for the world of Trench Crusade'}
-                        </div>
-
-                        <div className={'spacer-20'}></div>
-
-                        <p className={'intro-text'}>
-                            {'Build your warband, access the full rules, and stay up to date — all in one place.\n' +
-                                'Trench Companion is a free, community-made tool designed to support players on and off the battlefield.'}
-                        </p>
-
                         <div className={'row main-links'}>
                             <div className={'col-12 col-md-6'}>
                                 <MenuComponent Title={"Rules Compendium"} Route={"compendium/"} bgImageID={17}/>
@@ -68,7 +54,23 @@ const HomeRoute: React.FC = () => {
                             </div>
                         </div>
 
+                        <h1>{'Trench Companion'}</h1>
+                        <div className={'sub-headline'}>
+                            {'Your digital assistant for the world of Trench Crusade'}
+                        </div>
+
+                        <div className={'spacer-20'}></div>
+
+                        <p className={'intro-text'}>
+                            {'Build your warband, access the full rules, and stay up to date — all in one place.\n' +
+                                'Trench Companion is a free, community-made tool designed to support players on and off the battlefield.'}
+                        </p>
+
+                        <div className={'spacer-20'}></div>
+
                         <hr/>
+
+                        <div className={'spacer-20'}></div>
 
                         <h2>{'What is Trench Companion?'}</h2>
 
