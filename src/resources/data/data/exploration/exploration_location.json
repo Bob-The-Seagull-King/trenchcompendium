@@ -237,6 +237,7 @@
             "description" : [],
             "category" : "type",
             "type" : "text",
+            "single": true,
             "strictness" : "strict",
             "predefined_options" : [],
             "option_context" : {"basic_option_default":{}},

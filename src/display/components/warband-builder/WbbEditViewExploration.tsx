@@ -38,7 +38,7 @@ const WbbEditViewExploration: React.FC<WbbEditViewExplorationProps> = ({  locati
                 <span className={'title-choice'}>
                     {location.SelfDynamicProperty.Selections.map((item) =>
                         <WbbOptionSelect
-                            overrideplay={true}
+                            overrideplay={false}
                             property={location}
                             key={location.SelfDynamicProperty.Selections.indexOf(item)}
                             choice={item}
