@@ -166,6 +166,17 @@ class WarbandMember extends DynamicContextObject {
     }
     
 
+    public async RebuildProperties() {
+        
+        await this.BuildEquipment(this.SelfData.equipment);
+        await this.BuildSkills(this.SelfData.list_skills);
+        await this.BuildInjuries(this.SelfData.list_injury);
+        await this.BuildNewProperties(this.SelfData);
+        await this.BuildUpgrades(this.SelfData);
+        await this.BuildModelEquipProperties(this.SelfData);
+        await this.BuildModelEquipment(false);
+    }
+
     public async BuildModelEquipProperties(data : IWarbandMember = this.SelfData) {
         const eventmon : EventRunner = new EventRunner();
         const all_eq : ModelEquipmentRelationship[] = await eventmon.runEvent(
@@ -652,6 +663,38 @@ class WarbandMember extends DynamicContextObject {
             }
         }
 
+        const attatchments = await this.GetOwnAttatchements();
+        const attatchment_keys = ["model_attatch", "warband_attatch"]
+        for (let i = 0; i < attatchments.length; i++) {
+            const attatchconsts = (attatchments[i]).SelfDynamicProperty.OptionChoice.ContextKeys
+
+            for (let j = 0; j < attatchment_keys.length; j++) {
+                if (attatchconsts[attatchment_keys[j]] == undefined) { continue;}
+                const attachementkeys = attatchconsts[attatchment_keys[j]]["apply_to_attatch"] as ContextEventVals
+                if (attachementkeys == undefined) { continue;}
+                for (const key of Object.keys(attachementkeys)) {
+                    const context_entry = this.ContextData[key]
+                    if (context_entry == undefined) {continue;}
+                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                    // @ts-ignore - dynamic lookup
+                    const func = context_entry[event_id];
+                    if (func !== undefined) {
+                        const curr_package : ContextPackage = {
+                            priority    : context_entry.event_priotity,
+                            source      : source_obj,
+                            self        : attatchments[i],
+                            callback    : func,
+                            callbackdict: attachementkeys[key],
+                            dyncontext  : attatchments[i].MyContext,
+                            callpath    : ["StaticContextObject","Attachment"]
+                        }
+
+                        subpackages.push(curr_package);
+                    }                
+                }
+            }
+        }
+
         return subpackages; 
     }
     /**
@@ -676,38 +719,6 @@ class WarbandMember extends DynamicContextObject {
             for (let j = 0; j < static_packages.length; j++) {
                 static_packages[j].callpath.push("WarbandMember")
                 subpackages.push(static_packages[j])
-            }
-        }
-
-        const attatchments = await this.GetOwnAttatchements();
-        const attatchment_keys = ["model_attatch", "warband_attatch"]
-        for (let i = 0; i < attatchments.length; i++) {
-            const attatchconsts = (attatchments[i]).SelfDynamicProperty.OptionChoice.ContextKeys
-
-            for (let j = 0; j < attatchment_keys.length; j++) {
-                if (attatchconsts[attatchment_keys[j]] == undefined) { continue;}
-                const attachementkeys = attatchconsts[attatchment_keys[j]]["apply_to_attatch"] as ContextEventVals
-                if (attachementkeys == undefined) { continue;}
-                for (const key of Object.keys(attachementkeys)) {
-                    const context_entry = this.ContextData[key]
-                    if (context_entry == undefined) {continue;}
-                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                    // @ts-ignore - dynamic lookup
-                    const func = context_entry[event_id];
-                    if (func !== undefined) {
-                        const curr_package : ContextPackage = {
-                            priority    : context_entry.event_priotity,
-                            source      : source_obj,
-                            self        : attatchments[i],
-                            callback    : func,
-                            callbackdict: attachementkeys[key],
-                            dyncontext  : attatchments[i].MyContext,
-                            callpath    : ["StaticContextObject"]
-                        }
-
-                        subpackages.push(curr_package);
-                    }                
-                }
             }
         }
 

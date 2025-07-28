@@ -2085,6 +2085,9 @@ export const BaseContextCallTable : CallEventTable = {
         }
 
     },
+    selection_add_to_model: {
+        event_priotity: 0
+    },
     remove_from_model: {
         event_priotity: 0,
         async getContextuallyAddedAbilities(this: EventRunner, eventSource : any, relayVar : Ability[], trackVal : Model, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {

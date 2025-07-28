@@ -44,7 +44,7 @@ class EventRunner {
 
         if (event_id == "") { // Used for testing, replace "X" with relevant event to test
             console.log("DEBUG OUTPUT: " + event_id)
-            console.log(source_obj.GetTrueName())
+            console.log(source_obj)
             console.log(Events)
         }
 

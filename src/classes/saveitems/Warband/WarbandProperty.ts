@@ -41,6 +41,7 @@ class WarbandProperty extends DynamicContextObject  {
     public SelfDynamicProperty! : DynamicOptionContextObject;
     public SubProperties : WarbandProperty[] = [];
     public Consumables : WarbandConsumable[] = [];
+    public StoredSelectionVals : IWarbandProperty | null = null;
 
     /**
      * Assigns parameters and creates a series of description
@@ -51,7 +52,7 @@ class WarbandProperty extends DynamicContextObject  {
     {
         super(base_obj.SelfData, parent);
         this.ContextKeys = {}
-        
+        this.StoredSelectionVals = selection_vals;
     }
 
     public async SendConsumablesUp() {
@@ -226,6 +227,32 @@ class WarbandProperty extends DynamicContextObject  {
         await this.SelfDynamicProperty.ReloadOption();
         for (let i = 0; i < this.Consumables.length; i++) {
             await this.Consumables[i].GrabOptions()
+        }
+        await this.ReSelectPicks();
+    }
+
+    public async ReSelectPicks() {
+        const selection_vals = this.StoredSelectionVals
+        if (selection_vals != null) {
+            for (let i = 0; i < this.SelfDynamicProperty.Selections.length; i++) {
+                const CurSelection = this.SelfDynamicProperty.Selections[i];
+                await CurSelection.GetSelectionChoices();
+                for (let j = 0; j < selection_vals.selections.length; j++) {
+                    if (selection_vals.selections[j].option_refID == CurSelection.Option.RefID) {
+                        if (CurSelection.Option.AutoSelect == true && CurSelection.SelectionSet.length > 0) {
+                            CurSelection.SelectOption(CurSelection.SelectionSet[0].id);
+                        } else {
+                            
+                            CurSelection.SelectOption(selection_vals.selections[j].selection_ID)
+                        }
+                        const subselect = selection_vals.selections[j].suboption;
+                        if (subselect != undefined) {
+                            await this.GenerateSubProperties(subselect, CurSelection)
+                        }
+                        break;
+                    }
+                }
+            }
         }
     }
     
