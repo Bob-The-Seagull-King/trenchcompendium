@@ -6,7 +6,7 @@ import { ExplorationLocation } from '../../../../classes/feature/exploration/Exp
 import { useWarband } from '../../../../context/WarbandContext';
 import { ExplorationTableSuite, FilteredLocation } from '../../../../classes/saveitems/Warband/CoreElements/WarbandExplorationSet';
 import WbbFighterCollapse from '../WbbFighterCollapse';
-import { makestringpresentable } from '../../../../utility/functions';
+import { containsTag, makestringpresentable } from '../../../../utility/functions';
 import { ISelectedOption } from '../../../../classes/saveitems/Warband/WarbandProperty';
 import {useModalSubmitWithLoading} from "../../../../utility/useModalSubmitWithLoading";
 
@@ -73,7 +73,7 @@ const WbbModalAddExplorationLocation: React.FC<WbbModalAddExplorationLocationPro
     }, [updateKey, selectedOptionIds, selectedLocation]);
 
     function RedoSubmitDisabled() {
-        setisubmitdisabled(!selectedLocation?.location.GetID() || (selectedLocation?.options && selectedLocation.options.length > 0 && (selectedLocation.options.length != selectedOptionIds.length )));
+        setisubmitdisabled(!selectedLocation?.location.GetID() || (!(containsTag(selectedLocation.location.Tags, 'unforced')) && selectedLocation?.options && selectedLocation.options.length > 0 && (selectedLocation.options.length != selectedOptionIds.length )));
     } 
 
     return (

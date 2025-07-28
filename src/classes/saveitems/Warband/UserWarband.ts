@@ -221,10 +221,39 @@ class UserWarband extends DynamicContextObject {
         }
         return false;
     }
+    
+    public GetObjectsWithAttatch() {
+        const List : WarbandProperty[] = []
+        const newlist = this.Exploration.GetObjectsWithAttatch()
+        for (let i = 0; i < newlist.length; i++) {
+            List.push(newlist[i])
+        }
+
+        return List;
+    }
 
     public GetAttatchementsForModel(model : WarbandMember) {
         const fighters = this.GetUsableFighters();
         const list : WarbandProperty[] = []
+        const baselist = this.GetObjectsWithAttatch()
+        for (let i = 0; i < baselist.length; i++) {
+            let IsFound = false;
+
+                for (let k = 0; k < baselist[i].SelfDynamicProperty.Selections.length; k++) {
+                    const selec = baselist[i].SelfDynamicProperty.Selections[k]
+                    if (selec.SelectedChoice != null) {
+                        if (selec.SelectedChoice.value == model) {
+                            IsFound = true;
+                            break;
+                        }
+                    }
+                }
+                if (IsFound) {
+                
+                    list.push(baselist[i])
+                }
+        }
+
         for (let i = 0; i < fighters.length; i++) {
             const newlist = fighters[i].model.GetObjectsWithAttatch()
             for (let j = 0 ; j < newlist.length; j++) {

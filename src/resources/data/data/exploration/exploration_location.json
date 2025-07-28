@@ -2574,14 +2574,21 @@
         "name": "Sample of Holy DNA",
         "source": "core",
         "tags": {
-            "exploration_table": "et_legendarylocations"
+            "exploration_table": "et_legendarylocations",
+            "unforced": true
         },
         "contextdata": {
-            "location_rule_option": {},
-            "activated": {},
-            "use_on_model": {
-                "add_upgrade": {
-                    "id": ["up_holydna"]
+            "warband_general_hook": {},
+            "warband_wide": {}, 
+            "model_attatch": {
+                "apply_to_attatch": {
+                "true_add_to_model": {  
+                    "list": [
+                            {
+                                "id": "ab_holydna"
+                            }
+                        ]
+                    }
                 }
             }
         },
@@ -2597,7 +2604,18 @@
             }
         ],
         "location_value": 26,
-        "options": [  ]
+        "options": [ {
+                "ref_id" : "ot_sampleofholydna_a",
+                "name" : "",
+                "description" : [],
+                "category" : "contextobject",
+                "self_ask": true,
+                "option_context" : {"basic_option_default":{}},
+                "dyna_only": true,
+                "parent_level": 3,
+                "single": true,
+                "question_name": "getMemberOptionsFromWarband"
+            } ]
     },
     {
         "id": "el_golgothatektites",

@@ -2003,26 +2003,6 @@
         "options": []
     },
     {
-        "id": "up_holydna",
-        "name": "Sample of Holy DNA",
-        "source": "core",
-        "tags": {"trait": true},
-        "contextdata": {
-        },
-        "description": [           
-            {
-                "tags": {"desc_type" : "default"},
-                "content": "When this model is activated, one INFECTION MARKER or BLOOD MARKER the model has becomes a BLESSINGS MARKER instead.",
-                "glossary": [
-                    {"val": "INFECTION MARKER", "id": "kw_infectionmarker"},
-                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"},
-                    {"val": "BLESSINGS MARKER", "id": "kw_blessingmarker"}
-                ]
-            }
-        ],
-        "options": []
-    },
-    {
         "id": "up_fruit",
         "name": "Eat of the Fruit",
         "source": "core",

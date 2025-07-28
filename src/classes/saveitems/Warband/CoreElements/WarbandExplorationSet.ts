@@ -73,7 +73,7 @@ class WarbandExplorationSet extends DynamicContextObject {
     public async BuildLocations(data : IWarbandProperty[]) {
         for (let i = 0; i < data.length; i++) {
             const CurVal = data[i];
-            const Value = await ExplorationFactory.CreateNewExplorationLocation(CurVal.object_id, this.MyContext? this.MyContext as UserWarband : null);
+            const Value = await ExplorationFactory.CreateNewExplorationLocation(CurVal.object_id, this.MyContext? this.MyContext as UserWarband : null, true);
             const NewLocation = new WarbandProperty(Value, this.MyContext? this.MyContext as UserWarband : null, null, CurVal);
             await NewLocation.HandleDynamicProps(Value, this.MyContext? this.MyContext as UserWarband : null, null, CurVal);
             await NewLocation.BuildConsumables(CurVal.consumables);
@@ -229,10 +229,22 @@ class WarbandExplorationSet extends DynamicContextObject {
         }
     }
 
+    public GetObjectsWithAttatch() {
+        const List : WarbandProperty[] = []
+        for (let i = 0; i < this.Locations.length; i++) {
+            const obj = (this.Locations[i])
+            if (obj.SelfDynamicProperty.OptionChoice.ContextKeys["model_attatch"]) {
+                List.push(this.Locations[i])
+            }
+        }
+
+        return List;
+    }
+
     public async GetValidNewLocations() {
         const LocationSuite : ExplorationTableSuite[] = []
 
-        const TableList : ExplorationTable[] = await ExplorationFactory.GetAllTables();
+        const TableList : ExplorationTable[] = await ExplorationFactory.GetAllTables(this, true);
 
         for (let i = 0; i < TableList.length; i++) {
             const ValidLocs : FilteredLocation[] = []
