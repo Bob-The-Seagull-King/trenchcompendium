@@ -44,7 +44,7 @@ const CompendiumBasePage: React.FC<IControllerProp> = (prop: any) => {
                 <div className={'row'}>
                     <div className={'col-12 col-md-6'}>
                         <RulesBannerImage
-                            imageId={164}
+                            imageId={2849}
                             linkUrl={'/compendium/game'}
                             linkText={'Playtest Rules v1.6'}
                         />
@@ -68,7 +68,7 @@ const CompendiumBasePage: React.FC<IControllerProp> = (prop: any) => {
 
                     <div className={'col-12 col-md-6'}>
                         <RulesBannerImage
-                            imageId={161}
+                            imageId={2853}
                             linkUrl={'/compendium/scenario'}
                             linkText={'Scenarios'}
                         />
@@ -76,7 +76,7 @@ const CompendiumBasePage: React.FC<IControllerProp> = (prop: any) => {
 
                     <div className={'col-12 col-md-6'}>
                         <RulesBannerImage
-                            imageId={162}
+                            imageId={2846}
                             linkUrl={'/compendium/campaign'}
                             linkText={'Campaigns v1.6.3'}
                         />
@@ -85,7 +85,7 @@ const CompendiumBasePage: React.FC<IControllerProp> = (prop: any) => {
 
                 <div className={'row'}>
                     <div className={'col-12'}>
-                        <SynodImageSources imageIds={[164, 166, 165, 161, 162]} />
+                        <SynodImageSources imageIds={[2849, 166, 165, 2853, 2846]} />
                     </div>
                 </div>
 

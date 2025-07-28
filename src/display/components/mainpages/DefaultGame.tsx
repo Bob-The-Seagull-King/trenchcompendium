@@ -33,7 +33,7 @@ const DefaultGame = () => {
                         <div className={'row '}>
                             <div className={'col-12 col-md-6'}>
                                 <RulesBannerImage
-                                    imageId={164}
+                                    imageId={2845}
                                     linkUrl={'/compendium/game/rules/gr_introduction'}
                                     linkText={'Game Rules'}
                                 />

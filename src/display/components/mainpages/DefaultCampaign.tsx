@@ -11,6 +11,7 @@ import CustomNavLink from '../subcomponents/interactables/CustomNavLink';
 import { Faction } from '../../../classes/feature/faction/Faction';
 import RulesBannerImage from '../rules-content/RulesBannerImage';
 import PageMetaInformation from "../generics/PageMetaInformation";
+import SynodImageSources from "../../../utility/SynodImageSources";
 
 const DefaultCampaign = () => {
     
@@ -47,7 +48,7 @@ const DefaultCampaign = () => {
                         <div className={'row '}>
                             <div className={'col-12 col-md-6'}>
                                 <RulesBannerImage
-                                    imageId={210}
+                                    imageId={2849}
                                     linkUrl={'/compendium/campaign/campaign_rules'}
                                     linkText={'Campaign Rules'}
                                 />
@@ -55,31 +56,37 @@ const DefaultCampaign = () => {
 
                             <div className={'col-12 col-md-6'}>
                                 <RulesBannerImage
-                                    imageId={212}
+                                    imageId={2852}
                                     linkUrl={'/compendium/campaign/patron'}
                                     linkText={'Patrons'}
                                 />
                             </div>
                             <div className={'col-12 col-md-6'}>
                                 <RulesBannerImage
-                                    imageId={216}
+                                    imageId={2848}
                                     linkUrl={'/compendium/campaign/explorationtable'}
                                     linkText={'Exploration'}
                                 />
                             </div>
                             <div className={'col-12 col-md-6'}>
                                 <RulesBannerImage
-                                    imageId={228}
+                                    imageId={2850}
                                     linkUrl={'/compendium/campaign/skills'}
                                     linkText={'Skills'}
                                 />
                             </div>
                             <div className={'col-12 col-md-6'}>
                                 <RulesBannerImage
-                                    imageId={225}
+                                    imageId={2851}
                                     linkUrl={'/compendium/campaign/injury'}
                                     linkText={'Injuries'}
                                 />
+                            </div>
+                        </div>
+
+                        <div className={'row'}>
+                            <div className={'col-12'}>
+                                <SynodImageSources imageIds={[2849, 2852, 2848, 2851, 2850]}/>
                             </div>
                         </div>
                     </div>

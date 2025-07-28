@@ -33,22 +33,22 @@ const HomeRoute: React.FC = () => {
                     <div className={'narrow-content'}>
                         <div className={'row main-links'}>
                             <div className={'col-12 col-md-6'}>
-                                <MenuComponent Title={"Rules Compendium"} Route={"compendium/"} bgImageID={17}/>
+                                <MenuComponent Title={"Rules Compendium"} Route={"compendium/"} bgImageID={2844}/>
                             </div>
 
                             <div className={'col-12 col-md-6'}>
-                                <MenuComponent Title={"Warband Builder"} Route={"warband/"} bgImageID={15}/>
+                                <MenuComponent Title={"Warband Builder"} Route={"warband/"} bgImageID={2840}/>
 
                             </div>
 
                             <div className={'col-12 col-md-6'}>
-                                <MenuComponent Title={"Campaign Manager"} Route={"campaign/"} bgImageID={16}
+                                <MenuComponent Title={"Campaign Manager"} Route={"campaign/"} bgImageID={2841}
                                                comingSoon={true}
                                 />
                             </div>
 
                             <div className={'col-12 col-md-6'}>
-                                <MenuComponent Title={"Play Mode"} Route={"play/"} bgImageID={19}
+                                <MenuComponent Title={"Play Mode"} Route={"play/"} bgImageID={2842}
                                                comingSoon={true}
                                 />
                             </div>
