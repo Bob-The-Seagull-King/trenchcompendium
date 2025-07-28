@@ -16,6 +16,7 @@ interface IStaticOption {
     autoselect?: boolean
     option_context : ContextEventVals // Used for choice generating methods.
     hide?: boolean
+    single?: boolean
 }
 
 interface IChoice {
@@ -40,6 +41,7 @@ class StaticOption {
     public ContextVars : ContextEventEntry;
     public DynaForce : boolean;
     public AutoSelect : boolean;
+    public Single : boolean;
     
     public Description;
     public Selections : IChoice[] = [];
@@ -56,6 +58,7 @@ class StaticOption {
         this.MyStaticObject = parent;
         this.Description = DescriptionFactory(data.description, this);
         this.HideSearch = (data.hide != undefined)? data.hide : false;
+        this.Single = (data.single != undefined)? data.single : false;
         this.DynaForce = (data.dyna_only != undefined)? data.dyna_only : false;
         this.AutoSelect = (data.autoselect != undefined)? data.autoselect : false;
         this.OptionContext = data.option_context;

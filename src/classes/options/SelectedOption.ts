@@ -36,6 +36,10 @@ class SelectedOption {
         return this.SelectedChoice;
     }
 
+    public CanChange() {
+        return (this.Option.Single == false || this.SelectedChoice == null)
+    }
+
     /**
      * Given a specific id, set the current choice
      * to one of this object's Option's selections.
