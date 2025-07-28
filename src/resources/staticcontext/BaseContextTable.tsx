@@ -2044,6 +2044,7 @@ export const BaseContextCallTable : CallEventTable = {
         },
         async getWarbandMemberAbilities(this: EventRunner, eventSource : any, relayVar : Ability[], trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
             
+            console.log("TEST ABILITIES")
             const { AbilityFactory } = await import("../../factories/features/AbilityFactory");
 
             for (let k = 0; k < context_func['list'].length; k++) {
@@ -2084,6 +2085,9 @@ export const BaseContextCallTable : CallEventTable = {
             return relayVar;
         }
 
+    },
+    selection_add_to_model: {
+        event_priotity: 0
     },
     remove_from_model: {
         event_priotity: 0,

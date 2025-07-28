@@ -269,7 +269,6 @@ class UserWarband extends DynamicContextObject {
                     }
                 }
                 if (IsFound) {
-                
                     list.push(newlist[j])
                 }
             }
@@ -762,6 +761,10 @@ class UserWarband extends DynamicContextObject {
         await this.BuildModifiersFireteam(this.SelfData.fireteams);
         await this.Exploration.RebuildProperties();
         await this.Faction.RebuildProperties();
+        const fighter = this.GetFighters();
+        for (let i = 0; i < fighter.length; i ++) {
+            await fighter[i].model.RebuildProperties();
+        }
     }
 
     public async DuplicateFighter( fighter : RealWarbandPurchaseModel, count_cost = true ) {
