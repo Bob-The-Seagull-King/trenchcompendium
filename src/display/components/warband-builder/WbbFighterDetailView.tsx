@@ -359,8 +359,8 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                     <ItemStat
                         title={"Armour"}
                         value={getModelStatArmour(complexstate.stats)}
-                        base={fighter.CurModel.Stats.armour}
-                        raw={complexstate.stats.armour?  complexstate.stats.armour * -1 : null}
+                        base={(fighter.CurModel.Stats.armour != undefined || fighter.CurModel.Stats.armour != null)? fighter.CurModel.Stats.armour : 0}
+                        raw={complexstate.stats.armour?  complexstate.stats.armour * -1 : 0}
                     />
                 </div>
 
