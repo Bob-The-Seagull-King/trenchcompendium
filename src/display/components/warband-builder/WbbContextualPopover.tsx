@@ -951,7 +951,7 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                             {'This will remove this item from your roster and refund half its cost rounded up.'}
                             <br/>
                             {'You will receive: '}
-                            {(item as RealWarbandPurchaseEquipment).purchase.GetTotalDucats() + " Ducats and " + (item as RealWarbandPurchaseEquipment).purchase.GetTotalGlory() + " Glory"}
+                            {Math.floor((item as RealWarbandPurchaseEquipment).purchase.GetTotalDucats()/2) + " Ducats and " + (item as RealWarbandPurchaseEquipment).purchase.GetTotalGlory() + " Glory"}
                         </i>
                         }
                     </p>

@@ -2081,7 +2081,6 @@ class WarbandMember extends DynamicContextObject {
     }
 
     public async EquipItemAvailableSpace(faceq : Equipment, model_hands : ModelHands) {
-
         const EquippedItems = await this.GetAllEquipForShow();
         const KeyWordList = await this.GetKeywordsFull();
 
@@ -2151,6 +2150,7 @@ class WarbandMember extends DynamicContextObject {
         
         const IgnoreStrong = (await this.HasTwoHandedMeleeWeapon())
         const IsStrong = await this.IsKeywordPresent("kw_strong");
+
 
         if (!IgnoreStrong && IsStrong) {
             if (EquipHands.melee == 2) {
@@ -2289,12 +2289,12 @@ class WarbandMember extends DynamicContextObject {
             let specialflag = false
             if (BaseHands["melee"] != 0) {
                 BaseHands["melee"] -= meleeval
-            } else {
+            } else if (meleeval > 0) {
                 specialflag = true
             }
             if (BaseHands["ranged"] != 0 ) {
                 BaseHands["ranged"] -= rangedval
-            } else {
+            } else if (rangedval > 0) {
                 specialflag = true
             }
             if (specialflag) {
