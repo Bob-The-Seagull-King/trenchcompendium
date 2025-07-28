@@ -20,6 +20,7 @@
             "description" : [],
             "category" : "type",
             "type" : "text",
+            "single": true,
             "strictness" : "strict",
             "predefined_options" : [],
             "option_context" : {"basic_option_default":{}},
@@ -68,6 +69,26 @@
                 "tags": {"desc_type" : "default"},
                 "content": "During the next battle, your warband rolls Morale checks with +2 DICE.",
                 "glossary": [{"val": "+2 DICE", "id": "kw_plusdice"}]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "el_moonshinestash_sell",
+        "name": "Sell",
+        "source": "core",
+        "tags": {
+            "location_option": "el_moonshinestash"
+        },
+        "contextdata": {
+            "gain_ducats": {
+                "count": 120
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Gain 30 additional ducats."
             }
         ],
         "options": []
@@ -129,6 +150,7 @@
             "description" : [],
             "category" : "type",
             "type" : "text",
+            "single": true,
             "strictness" : "strict",
             "predefined_options" : [],
             "option_context" : {"basic_option_default":{}},
@@ -411,6 +433,7 @@
             "description" : [],
             "category" : "type",
             "type" : "text",
+            "single": true,
             "strictness" : "strict",
             "predefined_options" : [],
             "option_context" : {"basic_option_default":{}},
@@ -507,6 +530,7 @@
             "description" : [],
             "category" : "type",
             "type" : "text",
+            "single": true,
             "strictness" : "strict",
             "predefined_options" : [],
             "option_context" : {"basic_option_default":{}},
@@ -811,6 +835,7 @@
             "ref_id" : "ot_trenchmerchant",
             "name" : "",
             "description" : [],
+            "single": true,
             "category" : "type",
             "type" : "text",
             "strictness" : "strict",
@@ -928,6 +953,7 @@
             "description" : [],
             "category" : "type",
             "type" : "text",
+            "single": true,
             "strictness" : "strict",
             "predefined_options" : [],
             "option_context" : {"basic_option_default":{}},
@@ -1166,6 +1192,7 @@
             "description" : [],
             "category" : "type",
             "type" : "text",
+            "single": true,
             "strictness" : "strict",
             "predefined_options" : [],
             "option_context" : {"basic_option_default":{}},
@@ -1293,6 +1320,7 @@
         "options": [{
             "ref_id" : "ot_warbandstrongbox",
             "name" : "",
+            "single": true,
             "description" : [],
             "category" : "type",
             "type" : "text",
@@ -1556,6 +1584,7 @@
             "description" : [],
             "category" : "type",
             "type" : "text",
+            "single": true,
             "strictness" : "strict",
             "predefined_options" : [],
             "option_context" : {"basic_option_default":{}},
@@ -1642,6 +1671,7 @@
         "options": [{
             "ref_id" : "ot_stashofdrugsanderotica",
             "name" : "",
+            "single": true,
             "description" : [],
             "category" : "type",
             "type" : "text",
@@ -1809,6 +1839,7 @@
             "ref_id" : "ot_highrankingcaptain",
             "name" : "",
             "description" : [],
+            "single": true,
             "category" : "type",
             "type" : "text",
             "strictness" : "strict",
@@ -1993,6 +2024,7 @@
             "ref_id" : "ot_esotericlibrary",
             "name" : "",
             "description" : [],
+            "single": true,
             "category" : "type",
             "type" : "text",
             "strictness" : "strict",
@@ -2172,6 +2204,7 @@
             "name" : "",
             "description" : [],
             "category" : "type",
+            "single": true,
             "type" : "text",
             "strictness" : "strict",
             "predefined_options" : [],
@@ -2371,6 +2404,7 @@
             "ref_id" : "ot_skullofasaint",
             "name" : "",
             "description" : [],
+            "single": true,
             "category" : "type",
             "type" : "text",
             "strictness" : "strict",
@@ -2584,6 +2618,7 @@
             "ref_id" : "ot_golgothatektites",
             "name" : "",
             "description" : [],
+            "single": true,
             "category" : "type",
             "type" : "text",
             "strictness" : "strict",
