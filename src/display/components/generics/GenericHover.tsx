@@ -22,7 +22,6 @@ const GenericHover = (props: any) => {
       <OverlayTrigger placement={'auto'} 
         overlay={
         <Popover.Body bsPrefix="empty" className="popover rules-popover-element" id="tooltip">
-          <div className=''>
             <div className={DisplayType}>
                 <div className="popover-headline">
                     {ruleName || ""}
@@ -31,7 +30,6 @@ const GenericHover = (props: any) => {
                   {displayMethod()}
                 </div>
             </div>
-          </div>
         </Popover.Body>
         }>
         <span className='rules-popover-link'>{DisplayName}</span>
