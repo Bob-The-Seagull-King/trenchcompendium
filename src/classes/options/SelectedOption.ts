@@ -1,6 +1,9 @@
+import { EventRunner } from "../contextevent/contexteventhandler";
 import { DynamicOptionContextObject } from "./DynamicOptionContextObject";
 import { IChoice, StaticOption } from "./StaticOption"
 import { StaticOptionContextObject } from "./StaticOptionContextObject";
+import { UserWarband } from "../saveitems/Warband/UserWarband";
+import { GetWarbandOrNull } from "../../utility/functions";
 
 /*
 In a DynamicOptionContextObject, each option in the respective
@@ -38,6 +41,20 @@ class SelectedOption {
 
     public CanChange() {
         return (this.Option.Single == false || this.SelectedChoice == null)
+    }
+
+    public async UserUpdateSelection(_id : string | null) {
+        this.SelectOption(_id)
+        
+        const warband : UserWarband | null = await GetWarbandOrNull(this.MyParent)
+        const Events = new EventRunner()
+        await Events.runEvent(
+            "onSelectPropertyValue",
+            this.MyParent,
+            [warband],
+            null,
+            this
+        )
     }
 
     /**

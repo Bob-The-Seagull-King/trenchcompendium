@@ -3013,6 +3013,52 @@ export const BaseContextCallTable : CallEventTable = {
             return [sourceband];
         }
     },
+    warband_attatch: {
+        event_priotity: 0,
+        async getMemberOptionsFromWarband(this: EventRunner, eventSource : any, relayVar : WarbandMember[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : UserWarband, staticself : StaticOptionContextObjectList) {
+            const warband = sourceband;
+            if (warband == null) {
+                return relayVar;
+            }
+            const Models = warband.GetFighters();
+            
+            for (let i = 0; i < Models.length; i++) {
+                let isValid = true;
+                
+                if (context_func) {
+                    const cntxt = context_func
+                    if (cntxt["restriction"]) {
+                        for (let j = 0; j < cntxt["restriction"].length; j++) {
+                            if (cntxt["restriction"][j]["rest_type"] == "elite") {
+                                if (cntxt["restriction"][j]["value"] != Models[i].model.IsElite()) {
+                                    isValid = false;
+                                }
+                            }
+                            if (cntxt["restriction"][j]["rest_type"] == "id") {
+                                if (cntxt["restriction"][j]["value"] != (Models[i].model.ID == cntxt["restriction"][j]["subvalue"])) {
+                                    isValid = false;
+                                }
+                            }
+                            if (cntxt["restriction"][j]["rest_type"] == "stat") {
+                                const stats = await Models[i].model.GetStats();
+                                if (cntxt["restriction"][j]["value"] == "base" && stats.base) {
+                                    if (cntxt["restriction"][j]["direction"] != (Math.max(...cntxt["restriction"][j]["subvalue"]) < (Math.max(...stats.base)))) {
+                                        isValid = false; 
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if (isValid) {
+                    relayVar.push(Models[i].model)
+                }
+            }
+
+            return relayVar;
+        }
+    },
     add_fireteam_warband: {
         event_priotity: 0,        
         async getAllFireteamOptions(this: EventRunner, eventSource : any, relayVar : Fireteam[], trackVal : UserWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {

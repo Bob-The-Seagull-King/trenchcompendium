@@ -27,12 +27,12 @@ const WbbOptionSelect: React.FC<WbbEditSelectionProps> = ({choice,  property, ov
 
     const handleSubmit = (foundOption : IChoice | null) => {
         if (foundOption != null && overrideplay != true) {
-            choice.SelectOption(foundOption? foundOption.id : null);
+            choice.UserUpdateSelection((foundOption? foundOption.id : null)).then(() => { 
             property.RegenerateSubProperties().then(() => 
             property.RegenerateOptions().then(() =>{
             const Manager : ToolsController = ToolsController.getInstance();
             Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
-                () => reloadDisplay())}))
+                () => reloadDisplay())}))})
         }
     };
 

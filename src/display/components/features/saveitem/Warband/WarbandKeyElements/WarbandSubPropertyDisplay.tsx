@@ -67,15 +67,17 @@ const WarbandSubPropertyDisplay = (props: any) => {
         let IsFound = false;
         for (let i = 0; i < MySelection.Option.Selections.length; i++) {
             if (MySelection.Option.Selections[i].id == (value)) {
-                MySelection.SelectOption((value));
-                IsFound = true;
+                MySelection.UserUpdateSelection((value)).then(() => {  
+                    IsFound = true;
+                    setSelectedModel(MySelection.SelectedChoice)
+                });
                 break;
             }
         }
         if (IsFound == false) {
             MySelection.SelectOption(null);
+            setSelectedModel(MySelection.SelectedChoice)
         }        
-        setSelectedModel(MySelection.SelectedChoice)
         
         updateObj();
     }

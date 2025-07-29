@@ -233,7 +233,7 @@ class WarbandExplorationSet extends DynamicContextObject {
         const List : WarbandProperty[] = []
         for (let i = 0; i < this.Locations.length; i++) {
             const obj = (this.Locations[i])
-            if (obj.SelfDynamicProperty.OptionChoice.ContextKeys["model_attatch"]) {
+            if (obj.SelfDynamicProperty.OptionChoice.ContextKeys["warband_attatch"]) {
                 List.push(this.Locations[i])
             }
         }
