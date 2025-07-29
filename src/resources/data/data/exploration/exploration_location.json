@@ -111,7 +111,10 @@
             },
             "warband_general_hook": {},
             "warband_wide": {}, 
-            "warband_attatch": { },
+            "warband_attatch": {
+                "restriction": [ 
+                    { "rest_type": "elite", "value": true }
+                ] },
             "gain_experience": {
                 "gains": 1
             }
