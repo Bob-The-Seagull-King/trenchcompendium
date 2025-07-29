@@ -9,6 +9,8 @@ import WbbFighterCollapse from '../WbbFighterCollapse';
 import { containsTag, makestringpresentable } from '../../../../utility/functions';
 import { ISelectedOption } from '../../../../classes/saveitems/Warband/WarbandProperty';
 import {useModalSubmitWithLoading} from "../../../../utility/useModalSubmitWithLoading";
+import WbbGeneralCollapse from "../WbbGeneralCollapse";
+import {returnDescription} from "../../../../utility/util";
 
 interface WbbModalAddExplorationLocationProps {
     show: boolean;
@@ -74,7 +76,16 @@ const WbbModalAddExplorationLocation: React.FC<WbbModalAddExplorationLocationPro
 
     function RedoSubmitDisabled() {
         setisubmitdisabled(!selectedLocation?.location.GetID() || (!(containsTag(selectedLocation.location.Tags, 'unforced')) && selectedLocation?.options && selectedLocation.options.length > 0 && (selectedLocation.options.length != selectedOptionIds.length )));
-    } 
+    }
+
+    // will select and deselect a location on click
+    function handleLocationClick(loc : FilteredLocation) {
+        if(selectedLocation == loc) {
+            setSelectedLocation(null);
+        } else {
+            setSelectedLocation(loc);
+        }
+    }
 
     return (
         <Modal show={show} onHide={onClose} className="WbbModalAddItem WbbModalAddExplorationLocation" centered>
@@ -90,59 +101,95 @@ const WbbModalAddExplorationLocation: React.FC<WbbModalAddExplorationLocationPro
             </Modal.Header>
 
             <Modal.Body>
-                <div className={"fighter-card"}>
-                    <div  className={'fighter-card-collapse-wrap'} >
-                    {availableoptions.map((adv) => (
-                        <WbbFighterCollapse
-                            key={adv.table.ID}
-                            title={makestringpresentable(adv.table.GetTrueName())}
-                            initiallyOpen={false}
-                            nopad={true}
-                        >
-                            <>
-                                {adv.valid_locs.map((loc) => 
+                <div  className={'WbbGeneralCollapse-wrap'} >
+                {availableoptions.map((adv) => (
+                    <WbbGeneralCollapse
+                        key={adv.table.ID}
+                        title={makestringpresentable(adv.table.GetTrueName())}
+                        initiallyOpen={false}
+                        nopad={true}
+                    >
+                        <>
+                            {adv.valid_locs.map((loc) =>
+                                <>
+                                    {/* Select Row */}
                                     <div
                                         key={loc.location.ID}
                                         className={`select-item ${(selectedLocation? selectedLocation.location.ID : "") === loc.location.ID ? 'selected' : ''}`}
                                         onClick={() => {
-                                            setSelectedLocation(loc);
+                                            handleLocationClick(loc);
                                             setSelectedOptionIds([]); // reset when switching location
                                         }}
                                     >
-                                        <div className="item-name">{loc.location.GetTrueName()}</div>
+                                        <div className="item-name">
+                                            {loc.location.TableValue+' - '+loc.location.GetTrueName()}
+                                        </div>
 
-                                    </div>)
-                                }
-                            </>
-                        </WbbFighterCollapse>
-                        
-                    ))}
-                    </div>
+                                    </div>
+
+                                    {/* Level 1 Sub-Display when selected */}
+                                    {((selectedLocation ? selectedLocation.location.ID : "") === loc.location.ID) &&
+                                        <div className={'WbbGeneralCollapse-sub-1'}>
+
+                                            {/* Location Description Text */}
+                                            {(loc.location.Description != null) &&
+                                                <div className={'description-wrap'}>
+                                                    {
+                                                        returnDescription(location, loc.location.Description)
+                                                    }
+                                                </div>
+                                            }
+
+                                            {/* options for selected location */}
+                                            {(selectedLocation != null && selectedLocation.options.length > 0) &&
+                                                <div className="">
+                                                    <label className={'mb-2'}>
+                                                        Select Options for {selectedLocation?.location.GetTrueName()}:
+                                                    </label>
+
+                                                    {/* options */}
+                                                    {selectedLocation.options.map(opt =>
+                                                        <>
+                                                            {opt.selection_valid.map(choice => (
+                                                                <>
+                                                                    {/* option select */}
+                                                                    <div
+                                                                        key={opt.baseopt.RefID + choice.id}
+                                                                        className={`select-item ${ (
+                                                                            selectedOptionIds.find((k) => k.option_refID == opt.baseopt.RefID && k.selection_ID == choice.id)
+                                                                        ) ? 'selected' : ''}`}
+                                                                        onClick={() => UpdateSelectedOptionIDs({option_refID: opt.baseopt.RefID, selection_ID: choice.id})}
+                                                                    >
+                                                                        {choice.display_str}
+                                                                    </div>
+
+                                                                    {/* option details */}
+                                                                    {(
+                                                                        selectedOptionIds.find((k) => k.option_refID == opt.baseopt.RefID && k.selection_ID == choice.id)
+                                                                    ) &&
+                                                                        <div className={'WbbGeneralCollapse-sub-2'}>
+                                                                            <div className={'description-wrap'}>
+                                                                            Lorem ipsum dolor
+                                                                            {/* @TODO: Add description here    */}
+                                                                            </div>
+                                                                        </div>
+
+                                                                    }
+                                                                </>
+                                                            ))}
+                                                        </>)}
+                                                </div>
+                                            }
+                                        </div>
+                                    }
+                                </>
+                            )}
+                        </>
+                    </WbbGeneralCollapse>
+                ))}
                 </div>
 
-                {selectedLocation != null &&
-                <>
-                {
-                ((selectedLocation.options.length) > 0) && (
-                    <div className="exploration-options mt-3">
-                        <h6>Select Options for {selectedLocation?.location.GetTrueName()}:</h6>
-                        {selectedLocation.options.map(opt => 
-                        <>
-                            {opt.selection_valid.map(choice => (
-                                <div
-                                    key={opt.baseopt.RefID + choice.id}
-                                    className={`select-item ${ (
-                                        selectedOptionIds.find((k) => k.option_refID == opt.baseopt.RefID && k.selection_ID == choice.id)
-                                    ) ? 'selected' : ''}`}
-                                    onClick={() => UpdateSelectedOptionIDs({option_refID: opt.baseopt.RefID, selection_ID: choice.id})}
-                                >
-                                    {choice.display_str}
-                                </div>
-                            ))}
-                        </>)}
-                    </div>
-                )}
-                </>}
+
             </Modal.Body>
 
             <Modal.Footer>

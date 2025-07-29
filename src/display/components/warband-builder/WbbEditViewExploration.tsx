@@ -19,12 +19,22 @@ const WbbEditViewExploration: React.FC<WbbEditViewExplorationProps> = ({  locati
 
     return (
         <div className="WbbEditViewExploration">
-            <div className={'exploration-name'}>
-                {location.GetOwnName()}
+            <div className={'WbbEditViewExploration-title'}>
+                <div className={'exploration-name'}>
+                    {location.GetOwnName()}
+                </div>
+
+                {/* actions */}
+                <WbbContextualPopover
+                    id={`exploration-${location.ID}`}
+                    type="exploration"
+                    item={location}
+                />
             </div>
 
-            <div className={'modifier-body'}>
-                
+
+            <div className={'exploration-body'}>
+
                 {(location.GetOwnDescription() != null) &&
                 <>
                     {
@@ -32,28 +42,20 @@ const WbbEditViewExploration: React.FC<WbbEditViewExplorationProps> = ({  locati
                     }
                 </>
                 }
+
+                {location.SelfDynamicProperty.Selections.length > 0 &&
+                    <>
+                        {location.SelfDynamicProperty.Selections.map((item) =>
+                            <WbbOptionSelect
+                                overrideplay={false}
+                                property={location}
+                                key={location.SelfDynamicProperty.Selections.indexOf(item)}
+                                choice={item}
+                            />
+                        )}
+                    </>
+                }
             </div>
-
-            {location.SelfDynamicProperty.Selections.length > 0 &&
-                <span className={'title-choice'}>
-                    {location.SelfDynamicProperty.Selections.map((item) =>
-                        <WbbOptionSelect
-                            overrideplay={false}
-                            property={location}
-                            key={location.SelfDynamicProperty.Selections.indexOf(item)}
-                            choice={item}
-                        />
-                    )}
-                </span>
-            }
-
-            {/* actions */}
-            <WbbContextualPopover
-                id={`exploration-${location.ID}`}
-                type="exploration"
-                item={location}
-            />
-
         </div>
     );
 
