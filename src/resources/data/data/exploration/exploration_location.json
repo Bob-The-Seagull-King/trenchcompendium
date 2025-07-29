@@ -2582,7 +2582,7 @@
             "warband_wide": {}, 
             "model_attatch": {
                 "apply_to_attatch": {
-                "selection_add_to_model": {  
+                "true_add_to_model": {  
                     "list": [
                             {
                                 "id": "ab_holydna"
@@ -2613,6 +2613,7 @@
                 "option_context" : {"basic_option_default":{}},
                 "dyna_only": true,
                 "parent_level": 3,
+                "hide": true,
                 "single": true,
                 "question_name": "getMemberOptionsFromWarband"
             } ]
@@ -2761,6 +2762,7 @@
             "option_context" : {"basic_option_default":{}},
             "dyna_only": true,
             "parent_level": 3,
+            "hide": true,
             "single": true,
             "question_name": "getMemberOptionsFromWarband"
         }  ]

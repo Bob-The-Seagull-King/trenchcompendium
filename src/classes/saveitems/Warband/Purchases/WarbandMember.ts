@@ -167,7 +167,7 @@ class WarbandMember extends DynamicContextObject {
     
 
     public async RebuildProperties() {
-        
+        this.GeneralCache = {}
         await this.BuildEquipment(this.SelfData.equipment);
         await this.BuildSkills(this.SelfData.list_skills);
         await this.BuildInjuries(this.SelfData.list_injury);
