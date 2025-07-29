@@ -5,6 +5,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import { Injury } from '../../../../../classes/feature/ability/Injury';
 import { RealWarbandPurchaseModel } from '../../../../../classes/saveitems/Warband/Purchases/WarbandPurchase';
 import {useModalSubmitWithLoading} from "../../../../../utility/useModalSubmitWithLoading";
+import {returnDescription} from "../../../../../utility/util";
 
 
 interface WbbModalAddInjuryProps {
@@ -30,6 +31,7 @@ const WbbModalAddInjury: React.FC<WbbModalAddInjuryProps> = ({ show, onClose, on
         }
     });
 
+    // console.log(available);
 
     useEffect(() => {
         async function SetEquipmentOptions() {
@@ -42,6 +44,15 @@ const WbbModalAddInjury: React.FC<WbbModalAddInjuryProps> = ({ show, onClose, on
     
         SetEquipmentOptions();
     }, [show]);
+
+    function handleSelect ( ID: string ) {
+        if( selectedId == ID ) {
+            setSelectedId(null)
+
+        } else {
+            setSelectedId(ID)
+        }
+    }
 
     return (
         <Modal show={show} onHide={onClose} className="WbbModalAddItem WbbModalAddInjury" centered>
@@ -58,13 +69,24 @@ const WbbModalAddInjury: React.FC<WbbModalAddInjuryProps> = ({ show, onClose, on
 
             <Modal.Body key={keyvar}>
                 {available.map((injury) => (
-                    <div
-                        key={injury.ID}
-                        className={`select-item ${selectedId === injury.ID ? 'selected' : ''}`}
-                        onClick={() => setSelectedId(injury.ID)}
-                    >
-                        <span className="item-name">{injury.Name}</span>
-                    </div>
+                    <>
+                        <div
+                            key={injury.ID}
+                            className={`select-item ${selectedId === injury.ID ? 'selected' : ''}`}
+                            onClick={() => handleSelect(injury.ID)}
+                        >
+                            <span className="item-name">
+                                {injury.TableVal + ' - ' + injury.Name}
+                            </span>
+                        </div>
+
+                        {selectedId === injury.ID &&
+                            <div className={'select-item-details'}>
+                                {returnDescription(injury, injury.Description)}
+                            </div>
+                        }
+                    </>
+
                 ))}
             </Modal.Body>
 
