@@ -31,8 +31,6 @@ const WbbModalAddInjury: React.FC<WbbModalAddInjuryProps> = ({ show, onClose, on
         }
     });
 
-    // console.log(available);
-
     useEffect(() => {
         async function SetEquipmentOptions() {
             const options = await fighter.model.GetModelInjuryOptions()

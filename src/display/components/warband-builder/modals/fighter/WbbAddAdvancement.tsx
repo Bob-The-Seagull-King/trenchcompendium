@@ -37,8 +37,6 @@ const WbbModalAddAdvancement: React.FC<WbbModalAddAdvancementProps> = ({ show, o
         }
     });
 
-    console.log(available);
-
     function FindItem(a : string | null) {
         for (let i = 0; i < available.length; i++) {
             for (let j = 0; j < available[i].list.length; j++) {
