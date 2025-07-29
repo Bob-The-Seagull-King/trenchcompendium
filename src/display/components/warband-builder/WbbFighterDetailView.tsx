@@ -456,16 +456,16 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                         {/* Ranged Weapons */}
                         <h3>{'Ranged Weapons'}</h3>
                         <div>
-                            {fighter.GetEquipment().filter((item) =>
+                            {complexstate.allmodelequip.filter((item) =>
                                 ((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Category == "ranged")
                             ).length > 0 ? (
                                 <>
-                                    {fighter.GetEquipment().filter((item) =>
+                                    {complexstate.allmodelequip.filter((item) =>
                                             ((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Category == "ranged")
                                         ).map((equip) =>
                                             (
                                                 <WbbEquipmentListItem
-                                                    key={fighter.GetEquipment().indexOf(equip)}
+                                                    key={complexstate.allmodelequip.indexOf(equip)}
                                                     item={equip.purchase}
                                                     fighter={warbandmember}
                                                 />
@@ -486,16 +486,16 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                         {/* Melee Weapons */}
                         <h3>{'Melee Weapons'}</h3>
                         <div>
-                            {fighter.GetEquipment().filter((item) =>
+                            {complexstate.allmodelequip.filter((item) =>
                                 ((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Category == "melee")
                             ).length > 0 ? (
                                 <>
-                                    {fighter.GetEquipment().filter((item) =>
+                                    {complexstate.allmodelequip.filter((item) =>
                                         ((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Category == "melee")
                                     ).map((equip) =>
                                         (
                                             <WbbEquipmentListItem
-                                                key={fighter.GetEquipment().indexOf(equip)}
+                                                key={complexstate.allmodelequip.indexOf(equip)}
                                                 item={equip.purchase}
                                                 fighter={warbandmember}
                                             />
@@ -517,16 +517,16 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                         <h3>{'Armour'}</h3>
 
                         <div>
-                            {fighter.GetEquipment().filter((item) =>
+                            {complexstate.allmodelequip.filter((item) =>
                                 ((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Category == "armour")
                             ).length ? (
                                 <>
-                                    {fighter.GetEquipment().filter((item) =>
+                                    {complexstate.allmodelequip.filter((item) =>
                                         ((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Category == "armour")
                                     ).map((equip) =>
                                         (
                                             <WbbEquipmentListItem
-                                                key={fighter.GetEquipment().indexOf(equip)}
+                                                key={complexstate.allmodelequip.indexOf(equip)}
                                                 item={equip.purchase}
                                                 fighter={warbandmember}
                                             />
@@ -546,16 +546,16 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                         {/* Equipment */}
                         <h3>{'Equipment'}</h3>
                         <div>
-                            {fighter.GetEquipment().filter((item) =>
+                            {complexstate.allmodelequip.filter((item) =>
                                 ((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Category == "equipment")
                             ).length > 0 ? (
                                 <>
-                                    {fighter.GetEquipment().filter((item) =>
+                                    {complexstate.allmodelequip.filter((item) =>
                                         ((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Category == "equipment")
                                     ).map((equip) =>
                                         (
                                             <WbbEquipmentListItem
-                                                key={fighter.GetEquipment().indexOf(equip)}
+                                                key={complexstate.allmodelequip.indexOf(equip)}
                                                 item={equip.purchase}
                                                 fighter={warbandmember}
                                             />
