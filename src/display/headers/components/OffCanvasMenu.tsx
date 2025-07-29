@@ -130,7 +130,7 @@ const OffcanvasMenu: React.FC<IControllerProp> = (prop) => {
                                 </span>
 
                                 <SynodImage
-                                    imageId={17}
+                                    imageId={2844}
                                     className={''}
                                     size={'large'}
                                 />
@@ -144,7 +144,7 @@ const OffcanvasMenu: React.FC<IControllerProp> = (prop) => {
                                 </span>
 
                                 <SynodImage
-                                    imageId={15}
+                                    imageId={2840}
                                     className={''}
                                     size={'large'}
                                 />

@@ -64,7 +64,7 @@ const StaticCollaborate: React.FC = () => {
                             </p>
                         </>
                     }
-                    imageId={271}
+                    imageId={2869}
                 />
 
                 <h2>
