@@ -83,7 +83,17 @@ const WbbMoveEquipmentToFighterModal: React.FC<WbbEditSelectionProps> = ({
                                     }
                                 }}
                             >
-                                {(discipline.HeldObject as WarbandMember).GetFighterName()}
+                                {((discipline.HeldObject as WarbandMember).GetFighterName() == (discipline.HeldObject as WarbandMember).GetModelName()) ? (
+                                    <>
+                                        {(discipline.HeldObject as WarbandMember).GetFighterName()}
+                                    </>
+                                ) : (
+                                    <>
+                                        {(discipline.HeldObject as WarbandMember).GetModelName()}
+                                        {' - '}
+                                        {(discipline.HeldObject as WarbandMember).GetFighterName()}
+                                    </>
+                                )}
                             </div>
                             ))}
 
