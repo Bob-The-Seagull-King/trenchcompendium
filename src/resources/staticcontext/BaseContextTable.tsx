@@ -2611,7 +2611,7 @@ export const BaseContextCallTable : CallEventTable = {
                             {trackVar.value.SelfDynamicProperty.Selections.map((item : any) =>
                                 <WbbOptionSelect
                                     overrideplay={false}
-                                    property={location}
+                                    property={trackVar.value}
                                     key={trackVar.value.SelfDynamicProperty.Selections.indexOf(item)}
                                     choice={item}
                                 />
