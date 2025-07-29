@@ -396,6 +396,10 @@ class WarbandMember extends DynamicContextObject {
     }
 
     public async BuildSkills(data : IWarbandProperty[]) {
+        console.log(this.ID)
+        console.log("Before")
+        console.log(Date.now().toString())
+        console.log(this.Skills)
         for (let i = 0; i < data.length; i++) {
             const CurVal = data[i];
             const Value = await SkillFactory.CreateNewSkill(CurVal.object_id, this, true);
@@ -404,9 +408,17 @@ class WarbandMember extends DynamicContextObject {
             await NewLocation.BuildConsumables(CurVal.consumables)
             this.Skills.push(NewLocation);
         }
+        console.log(this.ID)
+        console.log("After")
+        console.log(Date.now().toString())
+        console.log(this.Skills)
     }
 
     public async BuildInjuries(data : IWarbandProperty[]) {
+        console.log(this.ID)
+        console.log("Before")
+        console.log(Date.now().toString())
+        console.log(this.Injuries)
         for (let i = 0; i < data.length; i++) {
             const CurVal = data[i];
             const Value = await InjuryFactory.CreateNewInjury(CurVal.object_id, this);
@@ -415,6 +427,10 @@ class WarbandMember extends DynamicContextObject {
             await NewLocation.BuildConsumables(CurVal.consumables)
             this.Injuries.push(NewLocation);
         }
+        console.log(this.ID)
+        console.log("After")
+        console.log(Date.now().toString())
+        console.log(this.Injuries)
     }
 
     public async BuildModel(data : string) {
