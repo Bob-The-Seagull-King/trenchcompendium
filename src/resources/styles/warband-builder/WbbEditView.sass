@@ -3,6 +3,7 @@
 // The main styles for the Warband Edit view
 //
 
+
 .WbbEditView
     position: relative
     min-height: calc(100vh - 55px)
@@ -52,6 +53,9 @@
         margin-bottom: 30px
         background-color: $color-highlight-bg
         //background-color: transparent
+
+        @media(max-width: 767px)
+            margin-bottom: 45px
 
         > .container
             position: relative

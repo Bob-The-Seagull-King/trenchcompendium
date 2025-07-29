@@ -1,0 +1,51 @@
+// // // // //
+//
+// Image credit popover
+//
+.image-credit
+    position: absolute
+    z-index: 39
+    bottom: 0
+    right: 0
+    display: block
+    padding: 10px
+
+.image-credit-icon
+    font-size: 14px
+    color: #fff
+    opacity: .5
+    transition: .2s ease
+    cursor: help
+
+    &:hover
+        opacity: 1
+
+.popover.image-credit-popover
+    background-color: $color-bg-1
+    margin-bottom: -15px
+
+    .image-credit-popover-content
+        padding: 5px
+
+    .image-credit-link
+        color: $color-text
+        text-decoration: none
+
+// Specific Placeholders
+
+.FactionCollectionDisplay
+    .image-credit
+        margin-bottom: 10px
+
+
+.WbbEditView
+    .image-credit
+        margin-bottom: 10px
+        z-index: 39
+        top: 0
+        right: 5px
+
+        @media(max-width: 767px)
+            top: 5px
+.pfp-option
+    .image-credit

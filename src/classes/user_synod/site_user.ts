@@ -35,6 +35,8 @@ export interface ProfilePictureOption {
     available: boolean
     url: string
     tier: string
+    source_url: string
+    source_title: string
 }
 
 export interface IFriend {

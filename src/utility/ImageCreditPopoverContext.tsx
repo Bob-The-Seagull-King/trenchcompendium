@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, {createContext, useContext, useEffect, useState} from 'react';
 
 interface ImageCreditPopoverContextType {
     activeId: string | null;
@@ -13,6 +13,23 @@ const ImageCreditPopoverContext = createContext<ImageCreditPopoverContextType>({
 
 export const ImageCreditPopoverProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [activeId, setActiveId] = useState<string | null>(null);
+
+    useEffect(() => {
+        function handleDocumentClick(e: MouseEvent) {
+            const target = e.target as HTMLElement;
+            if (!target.closest('.image-credit-popover') && !target.closest('.image-credit')) {
+                setActiveId(null);
+            }
+        }
+
+        if (activeId !== null) {
+            document.addEventListener('mousedown', handleDocumentClick);
+        }
+
+        return () => {
+            document.removeEventListener('mousedown', handleDocumentClick);
+        };
+    }, [activeId]);
 
     return (
         <ImageCreditPopoverContext.Provider value={{ activeId, setActiveId }}>
