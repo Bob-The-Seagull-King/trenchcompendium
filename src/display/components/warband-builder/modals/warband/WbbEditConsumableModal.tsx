@@ -56,7 +56,7 @@ const WbbEditConsumableModal: React.FC<WbbEditSelectionProps> = ({
                     ))}
                     {choiceparent.Options.length == 0 &&
                         <div
-                            className={`select-item ${selectedGoetic === discipline ? 'selected' : ''}`}
+                            className="select-item"
                         >
                             {"No options are currently available to select"}
                         </div>
