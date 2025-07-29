@@ -182,15 +182,7 @@ class WarbandProperty extends DynamicContextObject  {
             this.SelfDynamicProperty.Selections[selection_index].SelectOption(selection_id);
             await this.RegenerateSubProperties();
             await this.RegenerateOptions();
-            const eventmon : EventRunner = new EventRunner();
-            const wbn : UserWarband | null = await GetWarbandOrNull(this.SelfDynamicProperty);
-            await eventmon.runEvent(
-                "onSelectPropertyValue",
-                this.SelfDynamicProperty,
-                [wbn],
-                null,
-                this
-            )
+            
         }
     }
 
