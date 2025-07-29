@@ -10,7 +10,7 @@ import { ContextPackage } from '../../contextevent/contextpackage';
 import { SelectedOption } from '../../options/SelectedOption';
 import { IWarbandConsumable, WarbandConsumable } from './WarbandConsumable';
 import { UserWarband } from './UserWarband';
-import { EventRunner } from 'classes/contextevent/contexteventhandler';
+import { EventRunner } from '../../contextevent/contexteventhandler';
 
 interface IWarbandProperty {
     object_id: string,
