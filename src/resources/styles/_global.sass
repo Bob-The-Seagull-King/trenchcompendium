@@ -150,13 +150,22 @@ a.synod-image-source
 .image-credit-icon
     font-size: 14px
     color: #fff
-    opacity: .75
+    opacity: .5
+    transition: .2s ease
+    cursor: help
+    &:hover
+        opacity: 1
 
 .popover.image-credit-popover
     background-color: $color-bg-1
+    margin-bottom: -15px
 
     .image-credit-popover-content
         padding: 5px
+
+    .image-credit-link
+        color: $color-text
+        text-decoration: none
 
 // loading images
 .ghost-image

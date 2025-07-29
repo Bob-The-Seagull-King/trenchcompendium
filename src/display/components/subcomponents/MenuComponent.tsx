@@ -54,7 +54,7 @@ const MenuComponent: React.FC<MenuComponentProps> = ({ Title, Route, bgImageID =
 
                     {/* only if bgImageID is defined*/}
                     {bgImageID > 0 &&
-                        <SynodImage
+                        <SynodImageWithCredit
                             imageId={bgImageID}
                             className={''}
                             size={'large'}

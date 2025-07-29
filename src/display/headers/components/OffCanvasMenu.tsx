@@ -19,6 +19,7 @@ import SynodImage from "../../../utility/SynodImage";
 import CustomNavLink from "../../components/subcomponents/interactables/CustomNavLink";
 import {ROUTES} from "../../../resources/routes-constants";
 import {useAuth} from "../../../utility/AuthContext";
+import SynodImageWithCredit from "../../../utility/SynodImageWithCredits";
 
 interface IControllerProp {
     controller : ControllerController; // The controller being passed through
@@ -129,7 +130,7 @@ const OffcanvasMenu: React.FC<IControllerProp> = (prop) => {
                                     {'Compendium'}
                                 </span>
 
-                                <SynodImage
+                                <SynodImageWithCredit
                                     imageId={2844}
                                     className={''}
                                     size={'large'}
@@ -143,7 +144,7 @@ const OffcanvasMenu: React.FC<IControllerProp> = (prop) => {
                                     {'Warband Builder'}
                                 </span>
 
-                                <SynodImage
+                                <SynodImageWithCredit
                                     imageId={2840}
                                     className={''}
                                     size={'large'}

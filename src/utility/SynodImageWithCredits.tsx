@@ -2,9 +2,10 @@ import React, {useEffect, useState} from 'react';
 import { useSynodImageData } from './useSynodImageData';
 import {useGlobalState} from "./globalstate";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCamera} from "@fortawesome/free-solid-svg-icons";
+import {faCamera, faChevronRight, faLink} from "@fortawesome/free-solid-svg-icons";
 import {Popover} from "react-bootstrap";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import {useImageCreditPopover} from "./ImageCreditPopoverContext";
 
 interface SynodImageWithCreditProps {
     imageId: number;
@@ -14,6 +15,9 @@ interface SynodImageWithCreditProps {
 
 const SynodImageWithCredit: React.FC<SynodImageWithCreditProps> = ({ imageId, size = 'medium', className = '' }) => {
     const { url, sourceTitle, sourceUrl } = useSynodImageData(imageId, size);
+    const { activeId, setActiveId } = useImageCreditPopover();
+
+    const isOpen = activeId === imageId.toString();
 
     const fallback =
         'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
@@ -58,21 +62,34 @@ const SynodImageWithCredit: React.FC<SynodImageWithCreditProps> = ({ imageId, si
                     }}
                 >
                     <OverlayTrigger
-                        placement={'top-start'}
+                        placement={'top-end'}
                         trigger="click"
                         rootClose
+                        show={isOpen}
                         overlay={
                             <Popover.Body bsPrefix="credit" className="popover image-credit-popover" id="tooltip">
-                                <div className="popover-headline">
-                                    {'Image Credit'}
-                                </div>
+
                                 <div className="popover-content">
-                                    {sourceTitle}
+                                    <div className={'mb-2'}>
+                                        <strong>{'Image Credit'}</strong>
+                                    </div>
+                                    <a target="_blank" rel="noopener noreferrer"
+                                       href={sourceUrl}
+                                       className={'image-credit-link'}>
+                                        {sourceTitle || sourceUrl}
+                                        <FontAwesomeIcon icon={faChevronRight} className={'icon-inline-right'}/>
+                                    </a>
                                 </div>
                             </Popover.Body>
                         }>
 
-                        <span className={'image-credit'}>
+                        <span className={'image-credit'}
+                              onClick={(e) => {
+                                  e.stopPropagation();
+                                  e.preventDefault();
+                                  setActiveId(isOpen ? null : imageId.toString());
+                              }}
+                        >
                             <FontAwesomeIcon icon={faCamera} className={'image-credit-icon'}/>
                         </span>
                     </OverlayTrigger>
