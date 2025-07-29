@@ -24,6 +24,7 @@ import { RealWarbandPurchaseModel, WarbandPurchase } from "../../classes/saveite
 import { Keyword } from "../../classes/feature/glossary/Keyword";
 import { ModelEquipmentRelationship } from "../../classes/relationship/model/ModelEquipmentRelationship";
 import { SelectedOption } from "../../classes/options/SelectedOption";
+import { DynamicOptionContextObject } from "../../classes/options/DynamicOptionContextObject";
 
 /**
  * Events that can be called by the runEvent method,
@@ -85,7 +86,7 @@ export interface CallEvents {
     onGainEquipment? : (this: EventRunner, eventSource : any, trackVal : WarbandPurchase, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband, equipmentHolder : any) => Promise<void>; 
     onGainUpgrade? : (this: EventRunner, eventSource : any, trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) => Promise<void>; 
     onGainSkill? : (this: EventRunner, eventSource : any, trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) => Promise<void>; 
-    onSelectPropertyValue? : (this: EventRunner, eventSource : any, trackVal : SelectedOption, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband | null) => Promise<void>; 
+    onSelectPropertyValue? : (this: EventRunner, eventSource : any, trackVal : SelectedOption, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, hostobj : DynamicOptionContextObject, warband : UserWarband | null) => Promise<void>; 
     onRemoveUpgrade? : (this: EventRunner, eventSource : any, trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband, id : string) => Promise<void>; 
     onRemoveSkill? : (this: EventRunner, eventSource : any, trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband, id : string) => Promise<void>; 
     careAboutInjury? : (this: EventRunner, eventSource : any, relayVar: boolean, trackVal : Injury, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, member : WarbandMember) => Promise<boolean>; 

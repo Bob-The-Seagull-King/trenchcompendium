@@ -51,7 +51,7 @@ class SelectedOption {
         await Events.runEvent(
             "onSelectPropertyValue",
             this.MyParent,
-            [warband],
+            [this.MyParent, warband],
             null,
             this
         )

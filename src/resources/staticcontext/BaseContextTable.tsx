@@ -38,6 +38,7 @@ import { IUpgrade, Upgrade } from "../../classes/feature/ability/Upgrade";
 import { WarbandEquipment } from "../../classes/saveitems/Warband/Purchases/WarbandEquipment";
 import { RealWarbandPurchaseModel, WarbandPurchase } from "../../classes/saveitems/Warband/Purchases/WarbandPurchase";
 import { ModelEquipmentRelationship } from "../../classes/relationship/model/ModelEquipmentRelationship";
+import { SelectedOption } from "../../classes/options/SelectedOption";
 
 export const BaseContextCallTable : CallEventTable = {
     option_search_viable: {
@@ -3011,6 +3012,25 @@ export const BaseContextCallTable : CallEventTable = {
         },
         async getSingleFireteamMember(this: EventRunner, eventSource : any, relayVar : WarbandMember[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : WarbandMember, staticself : StaticOptionContextObjectList) {
             return [sourceband];
+        }
+    },
+    gain_experience: {
+        event_priotity: 0,    
+        async onSelectPropertyValue(this: EventRunner, eventSource : any, trackVal : SelectedOption, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null ,hostobj : DynamicOptionContextObject, warband : UserWarband | null) {
+            const ModelModule = await import("../../classes/saveitems/Warband/Purchases/WarbandMember")
+            
+            for (let i = 0; i < hostobj.Selections.length; i++) {
+                const cur = hostobj.Selections[i]
+                if (cur == trackVal) {
+                    if (cur.SelectedChoice != null) {
+                        if (cur.SelectedChoice.value instanceof ModelModule.WarbandMember) {
+                            if (context_func["gains"]) {
+                                cur.SelectedChoice.value.Experience += context_func["gains"]
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     warband_attatch: {
