@@ -1994,7 +1994,10 @@
             "actviated": {},
             "scar_heal": {
                 "all": true
-            }
+            },
+            "warband_general_hook": {},
+            "warband_wide": {}, 
+            "warband_attatch": {}
         },
         "description": [            
             {
