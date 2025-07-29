@@ -23,6 +23,7 @@ import { SiteUserPublic } from '../../classes/user_synod/user_public';
 import {SYNOD} from "../../resources/api-constants";
 import {toast, ToastContainer} from "react-toastify";
 import { SynodDataCache } from '../../classes/_high_level_controllers/SynodDataCache';
+import SynodImageWithCredit from "../../utility/SynodImageWithCredits";
 
 /**
  * On this page, any user can see a profile.
@@ -252,7 +253,7 @@ const ProfilePage: React.FC = () => {
                                         className={'profile-image-wrap editable'}
                                         onClick={handleOpenPfPDrawer}
                                     >
-                                        <SynodImage
+                                        <SynodImageWithCredit
                                             imageId={userData?.GetProfilePictureImageId() || 0}
                                             size="large"
                                             className="profile-image"

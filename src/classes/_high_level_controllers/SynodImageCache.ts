@@ -14,6 +14,9 @@ export interface SynodProfilePicData {
     urls: any; // Record<string, string>
     id: number; // the identifier of the image post
     image_id: number // the id of the image
+    source_url: string // source url for credits
+    source_title: string  // source title for credits
+
 }
 
 /**

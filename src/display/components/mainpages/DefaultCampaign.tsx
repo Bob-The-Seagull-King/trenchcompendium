@@ -84,11 +84,6 @@ const DefaultCampaign = () => {
                             </div>
                         </div>
 
-                        <div className={'row'}>
-                            <div className={'col-12'}>
-                                <SynodImageSources imageIds={[2849, 2852, 2848, 2851, 2850]}/>
-                            </div>
-                        </div>
                     </div>
                 </ErrorBoundary>
             )

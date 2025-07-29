@@ -43,8 +43,6 @@ const ProfileChangeProfilePictureDrawer: React.FC<ProfileChangeProfilePictureDra
         fetchUserAndOptions()
     }, [userId])
 
-    console.log(options);
-
     const handleProfilePictureChange = async (newProfilePictureId: number) => {
         if (!user) return // userData is your SiteUser instance
 

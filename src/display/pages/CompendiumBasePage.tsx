@@ -82,13 +82,6 @@ const CompendiumBasePage: React.FC<IControllerProp> = (prop: any) => {
                         />
                     </div>
                 </div>
-
-                <div className={'row'}>
-                    <div className={'col-12'}>
-                        <SynodImageSources imageIds={[2849, 166, 165, 2853, 2846]} />
-                    </div>
-                </div>
-
             </div>
 
         </ErrorBoundary>
