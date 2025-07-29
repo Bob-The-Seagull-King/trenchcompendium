@@ -51,27 +51,33 @@ const SynodImageWithCredit: React.FC<SynodImageWithCreditProps> = ({ imageId, si
             />
 
             {sourceTitle && (
-                <OverlayTrigger
-                    placement={'top-start'}
-                    delay={{ show: 100, hide: 300 }}
-                    overlay={
-                        <Popover.Body bsPrefix="credit" className="popover image-credit-popover" id="tooltip">
-                            <div className="popover-headline">
-                                {'Image Credit'}
-                            </div>
-                            <div className="popover-content">
-                                {sourceTitle}
-                            </div>
-                        </Popover.Body>
-                    }>
-                    <span className={'image-credit'}>
-                        <FontAwesomeIcon icon={faCamera} className={'image-credit-icon'}/>
-                    </span>
-                </OverlayTrigger>
+                <span className={'image-credit-wrap'}
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        e.preventDefault();
+                    }}
+                >
+                    <OverlayTrigger
+                        placement={'top-start'}
+                        trigger="click"
+                        rootClose
+                        overlay={
+                            <Popover.Body bsPrefix="credit" className="popover image-credit-popover" id="tooltip">
+                                <div className="popover-headline">
+                                    {'Image Credit'}
+                                </div>
+                                <div className="popover-content">
+                                    {sourceTitle}
+                                </div>
+                            </Popover.Body>
+                        }>
 
+                        <span className={'image-credit'}>
+                            <FontAwesomeIcon icon={faCamera} className={'image-credit-icon'}/>
+                        </span>
+                    </OverlayTrigger>
+                </span>
             )}
-
-
         </>
 
     );
