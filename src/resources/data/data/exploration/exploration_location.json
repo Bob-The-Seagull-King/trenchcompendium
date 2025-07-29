@@ -2575,7 +2575,7 @@
         "contextdata": {
             "warband_general_hook": {},
             "warband_wide": {}, 
-            "warband_attatch": {
+            "model_attatch": {
                 "apply_to_attatch": {
                 "true_add_to_model": {  
                     "list": [
@@ -2732,7 +2732,7 @@
         "contextdata": {
             "warband_general_hook": {},
             "warband_wide": {}, 
-            "warband_attatch": {
+            "model_attatch": {
                 "apply_to_attatch": {
                 "true_add_to_model": {  
                     "list": [

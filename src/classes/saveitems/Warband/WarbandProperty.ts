@@ -10,7 +10,6 @@ import { ContextPackage } from '../../contextevent/contextpackage';
 import { SelectedOption } from '../../options/SelectedOption';
 import { IWarbandConsumable, WarbandConsumable } from './WarbandConsumable';
 import { UserWarband } from './UserWarband';
-import { EventRunner } from '../../contextevent/contexteventhandler';
 
 interface IWarbandProperty {
     object_id: string,
@@ -182,7 +181,6 @@ class WarbandProperty extends DynamicContextObject  {
             this.SelfDynamicProperty.Selections[selection_index].SelectOption(selection_id);
             await this.RegenerateSubProperties();
             await this.RegenerateOptions();
-            
         }
     }
 
