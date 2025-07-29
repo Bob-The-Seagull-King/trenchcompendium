@@ -2739,7 +2739,13 @@
             "warband_wide": {}, 
             "model_attatch": {
                 "apply_to_attatch": {
-                    "keyword_add": {"value": ["kw_demonic"]}
+                "true_add_to_model": {  
+                    "list": [
+                            {
+                                "id": "ab_fruitofgoodandevil"
+                            }
+                        ]
+                    }
                 }
             }
         },

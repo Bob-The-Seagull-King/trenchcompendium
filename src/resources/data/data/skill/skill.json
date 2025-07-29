@@ -360,6 +360,7 @@
             "category" : "type",
             "type" : "text",
             "strictness" : "strict",
+            "single": true,
             "predefined_options" : [],
             "option_context" : {"basic_option_default":{}},
             "data_search" : {      
@@ -1630,6 +1631,7 @@
                 "description" : [],
                 "category" : "type",
                 "type" : "text",
+                "single": true,
                 "strictness" : "strict",
                 "predefined_options" : [],
                 "option_context" : {"basic_option_default":{}},
