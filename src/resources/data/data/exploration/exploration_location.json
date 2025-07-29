@@ -1516,19 +1516,7 @@
             }
         ],
         "location_value": 12,
-        "options": [  {
-            "ref_id" : "ot_ransackedalchemistworkshop_a",
-            "name" : "",
-            "description" : [],
-            "category" : "contextobject",
-            "self_ask": true,
-            "option_context" : {"basic_option_default":{}},
-            "dyna_only": true,
-            "parent_level": 3,
-            "hide": true,
-            "single": true,
-            "question_name": "getMemberOptionsFromWarband"
-        }]
+        "options": [ ]
     },
     {
         "id": "el_blackmarket",
@@ -2006,19 +1994,7 @@
             }
         ],
         "location_value": 32,
-        "options": [  {
-            "ref_id" : "ot_abandonedressurectionmachine_a",
-            "name" : "",
-            "description" : [],
-            "category" : "contextobject",
-            "self_ask": true,
-            "option_context" : {"basic_option_default":{}},
-            "dyna_only": true,
-            "parent_level": 3,
-            "hide": true,
-            "single": true,
-            "question_name": "getMemberOptionsFromWarband"
-        } ]
+        "options": [ ]
     },
     {
         "id": "el_battlefieldofcorpses",
