@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { Collapse } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
+import {faChevronDown, faChevronUp, faTriangleExclamation} from '@fortawesome/free-solid-svg-icons';
 import {usePlayMode} from "../../../context/PlayModeContext";
 import {usePrintMode} from "../../../context/PrintModeContext";
 import { ModelUpgradeRelationship } from '../../../classes/relationship/model/ModelUpgradeRelationship';
@@ -24,6 +24,7 @@ interface WbbOptionItemProps {
 
 const WbbOptionItem: React.FC<WbbOptionItemProps> = ({ option, owner, category }) => {
     const [open, setOpen] = useState(false);
+    const [showWarning, setShowWarning] = useState(true); // optional warning if selections inside need to be made
     const [keyvar, setkeyvar] = useState(0);
     const [selected, setSelected] = useState(option.purchase != null);
     const [allowed, setAllowed] = useState(option.allowed)
@@ -121,6 +122,11 @@ const WbbOptionItem: React.FC<WbbOptionItemProps> = ({ option, owner, category }
                             {option.upgrade.Cost + " " + getCostType(option.upgrade.CostType)}
                         </span>
                     }
+
+                    { showWarning &&
+                        <FontAwesomeIcon icon={faTriangleExclamation} className="icon-inline-right-l icon-wraning"/>
+                    }
+
 
                     {/* Displays the limit of the upgrade if any */}
                     { option.max_count > 0 &&
