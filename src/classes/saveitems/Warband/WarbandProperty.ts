@@ -66,6 +66,17 @@ class WarbandProperty extends DynamicContextObject  {
         }
     }
 
+    public HaveEmptyOptions() {
+
+        for (let i = 0; i < this.SelfDynamicProperty.Selections.length; i++) {
+            if (this.SelfDynamicProperty.Selections[i].SelectedChoice == null) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public async BuildConsumables(data: IWarbandConsumable[]) {
         if (this.MyContext != null && data != undefined) {
             for (let i = 0; i < data.length; i++) {

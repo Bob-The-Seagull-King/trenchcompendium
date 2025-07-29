@@ -24,7 +24,7 @@ interface WbbOptionItemProps {
 
 const WbbOptionItem: React.FC<WbbOptionItemProps> = ({ option, owner, category }) => {
     const [open, setOpen] = useState(false);
-    const [showWarning, setShowWarning] = useState(true); // optional warning if selections inside need to be made
+    const [showWarning, setShowWarning] = useState(false); 
     const [keyvar, setkeyvar] = useState(0);
     const [selected, setSelected] = useState(option.purchase != null);
     const [allowed, setAllowed] = useState(option.allowed)
@@ -77,6 +77,9 @@ const WbbOptionItem: React.FC<WbbOptionItemProps> = ({ option, owner, category }
     useEffect(() => {
         async function CheckAllowed() {
             setAllowed((await owner.CalcGivenPurchase(option.upgrade, category)).allowed)
+            if (option.purchase) {
+                setShowWarning((option.purchase.HeldObject as WarbandProperty).HaveEmptyOptions())
+            }
         }
         CheckAllowed()
     }, []);

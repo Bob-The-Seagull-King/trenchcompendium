@@ -1211,7 +1211,7 @@
         ],
         "options": [{
             "ref_id" : "ot_rottencross",
-            "name" : "Rotten Cross Selections",
+            "name" : "Rotten Cross Expanded Armoury Option",
             "description" : [],
             "category" : "type",
             "type" : "text",
