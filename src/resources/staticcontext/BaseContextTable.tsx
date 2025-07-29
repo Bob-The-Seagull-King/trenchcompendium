@@ -39,6 +39,7 @@ import { WarbandEquipment } from "../../classes/saveitems/Warband/Purchases/Warb
 import { RealWarbandPurchaseModel, WarbandPurchase } from "../../classes/saveitems/Warband/Purchases/WarbandPurchase";
 import { ModelEquipmentRelationship } from "../../classes/relationship/model/ModelEquipmentRelationship";
 import { SelectedOption } from "../../classes/options/SelectedOption";
+import WbbOptionSelect from "../../display/components/warband-builder/modals/warband/WbbOptionSelect";
 
 export const BaseContextCallTable : CallEventTable = {
     option_search_viable: {
@@ -2603,6 +2604,20 @@ export const BaseContextCallTable : CallEventTable = {
                     
                     <p className={''}>
                         {returnDescription(trackVar.value, trackVar.value.Description)}
+                        
+
+                    {trackVar.value.SelfDynamicProperty.Selections.length > 0 &&
+                        <>
+                            {trackVar.value.SelfDynamicProperty.Selections.map((item) =>
+                                <WbbOptionSelect
+                                    overrideplay={false}
+                                    property={location}
+                                    key={trackVar.value.SelfDynamicProperty.Selections.indexOf(item)}
+                                    choice={item}
+                                />
+                            )}
+                        </>
+                    }
                     </p>
                 </ErrorBoundary>
             )
