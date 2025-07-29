@@ -32,7 +32,7 @@ const RulesOptionSelection: React.FC<RulesEditSelectionProps> = ({
         <div onClick={(e) => {
             e.stopPropagation();
         }}>
-            <Modal show={show} onHide={onClose} className="RulesOptionSelection RulesOptionSelection-Modal" centered>
+            <Modal show={show} onHide={onClose} className="WbbEditGoeticSelectionModal" centered>
                 <Modal.Header closeButton={false}>
                     <Modal.Title>Edit Option</Modal.Title>
 
