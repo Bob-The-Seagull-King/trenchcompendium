@@ -2229,7 +2229,7 @@
         "description":  [
             {
             "tags": {"desc_type" : "default"},
-            "content": "The warband may include up to two Holy Warriors (use Trench Cleric characteristics) and they can each choose to replace their “Onwards, Christian Soldiers!” ability with one of the \"BLessed Palm\" or \"God's Mercy\" abilities."
+            "content": "The warband may include up to two Holy Warriors (use Trench Cleric characteristics) and they can each choose to replace their “Onwards, Christian Soldiers!” ability with one of the \"Blessed Palm\" or \"God's Mercy\" abilities."
         }
         ],
         "options": []
