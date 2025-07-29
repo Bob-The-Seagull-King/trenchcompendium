@@ -3050,6 +3050,33 @@ export const BaseContextCallTable : CallEventTable = {
             }
         }
     },
+    scar_heal: {
+        event_priotity: 0,    
+        async onSelectPropertyValue(this: EventRunner, eventSource : any, trackVal : SelectedOption, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null ,hostobj : DynamicOptionContextObject, warband : UserWarband | null) {
+            const ModelModule = await import("../../classes/saveitems/Warband/Purchases/WarbandMember")
+            
+            for (let i = 0; i < hostobj.Selections.length; i++) {
+                const cur = hostobj.Selections[i]
+                if (cur == trackVal) {
+                    if (cur.SelectedChoice != null) {
+                        if (cur.SelectedChoice.value instanceof ModelModule.WarbandMember) {
+                            if (context_func["count"] ) {
+                                if (cur.SelectedChoice.value.GetBattleScars() > context_func["count"]) {
+                                    cur.SelectedChoice.value.ScarReserve -= context_func["count"]
+                                } 
+                                if (cur.SelectedChoice.value.GetBattleScars() < 0) {
+                                    cur.SelectedChoice.value.ScarReserve = cur.SelectedChoice.value.GetInjuriesList().length * -1
+                                }
+                            }
+                            if (context_func["all"] ) {
+                                cur.SelectedChoice.value.ScarReserve = cur.SelectedChoice.value.GetInjuriesList().length * -1
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
     warband_attatch: {
         event_priotity: 0,
         async getMemberOptionsFromWarband(this: EventRunner, eventSource : any, relayVar : WarbandMember[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : UserWarband, staticself : StaticOptionContextObjectList) {
