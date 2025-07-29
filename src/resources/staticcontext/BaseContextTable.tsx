@@ -3066,7 +3066,7 @@ export const BaseContextCallTable : CallEventTable = {
         async getConsumableOptionsList(this: EventRunner, eventSource : any, relayVar : IChoice[], trackVal : WarbandConsumable, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : UserWarband) {
 
             if (sourceband) {
-            const OptionList = await (sourceband).GetFactionEquipmentOptions(true);
+            const OptionList = await (sourceband).GetFactionEquipmentOptions(true, true, false, false);
                 for (let i = 0; i < OptionList.length; i++) {
                     if (OptionList[i].CostType == 1 && OptionList[i].Cost <= context_func["cost"]) {
                         relayVar.push(

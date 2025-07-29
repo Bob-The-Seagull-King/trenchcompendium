@@ -1770,7 +1770,7 @@ class UserWarband extends DynamicContextObject {
         return options;
     }
 
-    public async GetFactionEquipmentOptions(use_exploration = false, count_cost = true, get_base = false) : Promise<FactionEquipmentRelationship[]> {
+    public async GetFactionEquipmentOptions(use_exploration = false, count_cost = true, get_base = false, exploration_cap = true) : Promise<FactionEquipmentRelationship[]> {
         const FacCheck = this.Faction.MyFaction;
         const ListOfRels : FactionEquipmentRelationship[] = []
         const AddedIDs : string[] = [];
@@ -1909,7 +1909,7 @@ class UserWarband extends DynamicContextObject {
                         }
                         if (BaseRels[i].CostType == 1) {
                             canaddupgrade = (this).GetSumCurrentGlory() >= maxccurcostount;
-                            if (containsTag(BaseRels[i].Tags, "exploration_only")) {
+                            if (containsTag(BaseRels[i].Tags, "exploration_only") && exploration_cap) {
                                 const explore_limit = await this.GetExplorationLimit()
                                 canaddupgrade = maxccurcostount <= explore_limit;
                             }
