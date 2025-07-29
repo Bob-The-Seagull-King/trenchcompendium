@@ -45,7 +45,7 @@ const WbbEditConsumableModal: React.FC<WbbEditSelectionProps> = ({
                 <h6>Select Option</h6>
 
                 <div className={'goetic-selection-wrap'}>
-                    {choiceparent.Options.map((discipline) => (
+                {choiceparent.Options.map((discipline) => (
                         <div
                             key={discipline.id + discipline.display_str}
                             className={`select-item ${selectedGoetic === discipline ? 'selected' : ''}`}
@@ -54,6 +54,13 @@ const WbbEditConsumableModal: React.FC<WbbEditSelectionProps> = ({
                             {discipline.display_str}
                         </div>
                     ))}
+                    {choiceparent.Options.length == 0 &&
+                        <div
+                            className={`select-item ${selectedGoetic === discipline ? 'selected' : ''}`}
+                        >
+                            {"No options are currently available to select"}
+                        </div>
+                    }
                 </div>
             </Modal.Body>
 
