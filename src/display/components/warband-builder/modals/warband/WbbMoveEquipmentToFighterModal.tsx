@@ -66,8 +66,19 @@ const WbbMoveEquipmentToFighterModal: React.FC<WbbEditSelectionProps> = ({
     return (
         <div onClick={(e) => e.stopPropagation()}>
             <Modal className="WbbEditGoeticSelectionModal" show={show} onHide={onClose} centered >
-                <Modal.Header closeButton>
-                    <Modal.Title>{`Move Equipment to Fighter`}</Modal.Title>
+                <Modal.Header closeButton={false}>
+                    <Modal.Title>
+                        {`Move Equipment to Fighter`}
+                    </Modal.Title>
+
+                    <FontAwesomeIcon
+                        icon={faXmark}
+                        className="modal-close-icon"
+                        role="button"
+                        onClick={
+                            () => onClose()
+                        }
+                    />
                 </Modal.Header>
 
                 <Modal.Body>
