@@ -396,7 +396,6 @@ class WarbandMember extends DynamicContextObject {
     }
 
     public async BuildSkills(data : IWarbandProperty[]) {
-        this.Skills = []
         for (let i = 0; i < data.length; i++) {
             const CurVal = data[i];
             const Value = await SkillFactory.CreateNewSkill(CurVal.object_id, this, true);
@@ -408,7 +407,6 @@ class WarbandMember extends DynamicContextObject {
     }
 
     public async BuildInjuries(data : IWarbandProperty[]) {
-        this.Injuries = []
         for (let i = 0; i < data.length; i++) {
             const CurVal = data[i];
             const Value = await InjuryFactory.CreateNewInjury(CurVal.object_id, this);
