@@ -1490,11 +1490,11 @@
         "contextdata": {
             "location_rule_option": {},
             "actviated": {},
-            "use_on_model": {
-                "scar_heal": {
-                    "count": 1
-                }
-            }
+            "scar_heal": {
+                "count": 1
+            },
+            "warband_general_hook": {},
+            "warband_attatch": { }
         },
         "description": [            
             {
@@ -1503,7 +1503,19 @@
             }
         ],
         "location_value": 12,
-        "options": [  ]
+        "options": [  {
+            "ref_id" : "ot_ransackedalchemistworkshop_a",
+            "name" : "",
+            "description" : [],
+            "category" : "contextobject",
+            "self_ask": true,
+            "option_context" : {"basic_option_default":{}},
+            "dyna_only": true,
+            "parent_level": 3,
+            "hide": true,
+            "single": true,
+            "question_name": "getMemberOptionsFromWarband"
+        } ]
     },
     {
         "id": "el_blackmarket",
@@ -1965,13 +1977,12 @@
             "exploration_table": "et_rarelocations"
         },
         "contextdata": {
-            "location_rule_option": {},
-            "activated": {},
-            "use_on_model": {
-                "scar_heal": {
-                    "all": true
-                }
-            }
+            "actviated": {},
+            "scar_heal": {
+                "all": true
+            },
+            "warband_general_hook": {},
+            "warband_attatch": { }
         },
         "description": [            
             {
@@ -1980,7 +1991,19 @@
             }
         ],
         "location_value": 32,
-        "options": [  ]
+        "options": [   {
+            "ref_id" : "ot_abandonedressurectionmachine_a",
+            "name" : "",
+            "description" : [],
+            "category" : "contextobject",
+            "self_ask": true,
+            "option_context" : {"basic_option_default":{}},
+            "dyna_only": true,
+            "parent_level": 3,
+            "hide": true,
+            "single": true,
+            "question_name": "getMemberOptionsFromWarband"
+        }  ]
     },
     {
         "id": "el_battlefieldofcorpses",
@@ -2580,7 +2603,7 @@
         "contextdata": {
             "warband_general_hook": {},
             "warband_wide": {}, 
-            "model_attatch": {
+            "warband_attatch": {
                 "apply_to_attatch": {
                 "true_add_to_model": {  
                     "list": [
@@ -2737,7 +2760,7 @@
         "contextdata": {
             "warband_general_hook": {},
             "warband_wide": {}, 
-            "model_attatch": {
+            "warband_attatch": {
                 "apply_to_attatch": {
                 "true_add_to_model": {  
                     "list": [
