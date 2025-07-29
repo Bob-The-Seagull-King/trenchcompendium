@@ -2597,15 +2597,8 @@ export const BaseContextCallTable : CallEventTable = {
             )
         },
         async returnWbbOptionDisplay(this: EventRunner, eventSource : any, trackVar : IChoice, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null){
-    
-            return ( 
-            
-                <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    
-                    <p className={''}>
-                        {returnDescription(trackVar.value, trackVar.value.Description)}
-                        
-
+            /**
+             * 
                     {trackVar.value.SelfDynamicProperty.Selections.length > 0 &&
                         <>
                             {trackVar.value.SelfDynamicProperty.Selections.map((item : any) =>
@@ -2618,6 +2611,15 @@ export const BaseContextCallTable : CallEventTable = {
                             )}
                         </>
                     }
+             */
+            return ( 
+            
+                <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
+                    
+                    <p className={''}>
+                        {returnDescription(trackVar.value, trackVar.value.Description)}
+                        
+
                     </p>
                 </ErrorBoundary>
             )
