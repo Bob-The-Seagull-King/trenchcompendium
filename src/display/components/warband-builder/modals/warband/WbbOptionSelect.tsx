@@ -39,7 +39,6 @@ const WbbOptionSelect: React.FC<WbbEditSelectionProps> = ({choice,  property, ov
 
     
     async function SetModelOptions() {
-        console.log(choice)
         await property.RegenerateOptions();
         if (choice.SelectedChoice != null) {
             
