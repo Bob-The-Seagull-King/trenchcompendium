@@ -13,6 +13,7 @@ import Modal from "react-bootstrap/Modal";
 import PayPalSubButton from "../components/Profile/PayPalSubButton";
 import {SYNOD} from "../../resources/api-constants";
 import LoadingOverlay from "../components/generics/Loading-Overlay";
+import PageMetaInformation from "../components/generics/PageMetaInformation";
 
 const StaticPlanSelection: React.FC = () => {
 
@@ -70,6 +71,11 @@ const StaticPlanSelection: React.FC = () => {
 
     return (
         <div className="StaticPlanSelection page-static">
+            <PageMetaInformation
+                title={'Supporter Plans'}
+                description={'Choose your Trench Companion supporter plan and help us build the best companion app for Trench Crusade. Unlock exclusive perks and go ad-free.'}
+            />
+
             <div className={'container'}>
                 <h1>
                     <a className={'headline-back-btn'}

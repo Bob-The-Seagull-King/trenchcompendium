@@ -4,6 +4,7 @@
 
 import React from 'react';
 import { Helmet } from 'react-helmet';
+import DevMetaBlock from "./DevMetaBlock";
 
 interface PageMetaInformationProps {
     title: string;
@@ -72,6 +73,8 @@ const PageMetaInformation: React.FC<PageMetaInformationProps> = ({
             {ogUrl && <meta property="og:url" content={ogUrl}/>}
 
             <meta property="og:type" content="website"/>
+
+            <DevMetaBlock />
         </Helmet>
     );
 };

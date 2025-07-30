@@ -24,6 +24,7 @@ import {SYNOD} from "../../resources/api-constants";
 import {toast, ToastContainer} from "react-toastify";
 import { SynodDataCache } from '../../classes/_high_level_controllers/SynodDataCache';
 import SynodImageWithCredit from "../../utility/SynodImageWithCredits";
+import PageMetaInformation from "../components/generics/PageMetaInformation";
 
 /**
  * On this page, any user can see a profile.
@@ -230,6 +231,14 @@ const ProfilePage: React.FC = () => {
 
     if (!id) return null
 
+    // Get meta description for user
+    function getMetaDescription(user: SiteUser | SiteUserPublic | null): string {
+        if (!user) return 'User profile on Trench Companion';
+
+        // @TODO: add user stats to the meta information
+        return 'View the public profile of '+userData?.GetNickname()+': Warband stats, achievements, friends, and more from the Trench Companion community.'
+    }
+
     return (
         <div className="ProfilePage">
             <ToastContainer
@@ -242,6 +251,11 @@ const ProfilePage: React.FC = () => {
                 pauseOnFocusLoss
                 draggable
                 pauseOnHover
+            />
+
+            <PageMetaInformation
+                title={`${userData?.GetNickname() || 'User'} - Profile Page`}
+                description={getMetaDescription(userData)}
             />
 
             <div className={'container'}>

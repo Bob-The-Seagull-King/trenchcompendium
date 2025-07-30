@@ -7,10 +7,16 @@ import React from 'react'
 import StaticParagraph from "../static-content/StaticParagraph";
 import StaticImageText1 from "../static-content/StaticImageText-1";
 import StaticFaq from "../static-content/StaticFaq";
+import PageMetaInformation from "../components/generics/PageMetaInformation";
 
 const StaticPremiumMembership: React.FC = () => {
     return (
         <div className="StaticPremiumMembership page-static">
+            <PageMetaInformation
+                title={'Premium Membership'}
+                description={'Support the Trench Companion app and unlock exclusive perks with our premium membership. Enjoy an ad-free experience while helping us improve and expand the platform.'}
+            />
+
             <div className={'container content-narrow'}>
                 <h1 className={'mb-2'}>{'Support Trench Companion'}</h1>
                 <h2  className={'mb-4'}>{'- Premium Membership'}</h2>

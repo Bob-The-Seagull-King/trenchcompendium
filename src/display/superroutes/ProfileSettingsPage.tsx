@@ -12,6 +12,7 @@ import { SynodDataCache } from '../../classes/_high_level_controllers/SynodDataC
 import ProfileSubscriptionView from "../components/Profile/ProfileSubscriptionView";
 import {SiteUser} from "../../classes/user_synod/site_user";
 import {UserFactory} from "../../factories/synod/UserFactory";
+import PageMetaInformation from "../components/generics/PageMetaInformation";
 
 
 
@@ -131,6 +132,11 @@ const ProfileSettingsPage: React.FC = () => {
 
     return (
         <div className="ProfileSettingsPage">
+            <PageMetaInformation
+                title={'User Settings'}
+                description={'Adjust your personal settings, manage your profile, and tailor your Trench Companion experience'}
+            />
+
             <ToastContainer
                 position="bottom-right"
                 autoClose={5000}
