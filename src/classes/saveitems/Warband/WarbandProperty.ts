@@ -193,9 +193,9 @@ class WarbandProperty extends DynamicContextObject  {
             if (sel_val != undefined) { if (sel_val != null) { sel_id = sel_val.id; } }
             let warband_subitem = null;
             if (sel_item.NestedOption != null) {
-                for (let j = 0; j < this.SubProperties.length; i++) {
-                    if (this.SubProperties[i].SelfDynamicProperty == sel_item.NestedOption) {
-                        warband_subitem = this.SubProperties[i].ConvertToInterface();
+                for (let j = 0; j < this.SubProperties.length; j++) {
+                    if (this.SubProperties[j].SelfDynamicProperty == sel_item.NestedOption) {
+                        warband_subitem = this.SubProperties[j].ConvertToInterface();
                         break;
                     }
                 }

@@ -71,6 +71,7 @@ class SelectedOption {
                 this.SelectedChoice = this.SelectionSet[i]
                 const SelectedVal = this.SelectedChoice.value;
                 if ((SelectedVal instanceof StaticOptionContextObject)) {
+                    SelectedVal.MyContext = this.MyParent;
                     this.HandleObjectDynamics(this.SelectedChoice);
                 } else {
                     this.NestedOption = null;

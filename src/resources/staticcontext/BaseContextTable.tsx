@@ -3068,6 +3068,7 @@ export const BaseContextCallTable : CallEventTable = {
     warband_attatch: {
         event_priotity: 0,
         async getMemberOptionsFromWarband(this: EventRunner, eventSource : any, relayVar : WarbandMember[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : UserWarband, staticself : StaticOptionContextObjectList) {
+            
             const warband = sourceband;
             if (warband == null) {
                 return relayVar;

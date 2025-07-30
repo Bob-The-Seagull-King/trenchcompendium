@@ -39,6 +39,7 @@ const WbbOptionSelect: React.FC<WbbEditSelectionProps> = ({choice,  property, ov
 
     
     async function SetModelOptions() {
+        console.log(choice)
         await property.RegenerateOptions();
         if (choice.SelectedChoice != null) {
             
@@ -58,7 +59,6 @@ const WbbOptionSelect: React.FC<WbbEditSelectionProps> = ({choice,  property, ov
                 false,
                 choice.SelectedChoice
             );
-            console.log(choice)
             setDisplayOptions(doshow)
             if (result != null) {
                 setDisplayState(result)
@@ -92,20 +92,18 @@ const WbbOptionSelect: React.FC<WbbEditSelectionProps> = ({choice,  property, ov
             <div key={_keyvar} className="SingleOptionSetDisplay-Details">
                 {displayState}
             </div>
-            {(property.SubProperties.length > 0 && displayOptions) &&
+            {(choice.NestedOption && displayOptions) &&
                 <>
-                    {property.SubProperties.length > 0 &&
+                    {choice.NestedOption.Selections.length > 0 &&
                         <>
-                            {property.SubProperties.map((item : WarbandProperty) =>
-                                <div key={property.SubProperties.indexOf(item)}>
-                                {item.SelfDynamicProperty.Selections.map((subitem) =>
-                                        <WbbOptionSelect
-                                            overrideplay={false}
-                                            property={item}
-                                            key={item.SelfDynamicProperty.Selections.indexOf(subitem)}
-                                            choice={subitem}
-                                        />
-                                    )}
+                            {choice.NestedOption.Selections.map((item : SelectedOption) =>
+                                <div key={choice.NestedOption?.Selections.indexOf(item)}>
+                                     <WbbOptionSelect
+                                        overrideplay={false}
+                                        property={property}
+                                        key={choice.NestedOption?.Selections.indexOf(item)}
+                                        choice={item}
+                                    />
                                 </div >
                             )}
                         </>

@@ -61,9 +61,6 @@ class ExplorationTable extends StaticContextObject {
                 const Location = await ExplorationFactory.CreateExplorationLocation(LocationList[i], this, skipcheck)
                 this.ExplorationLocations.push(Location)
             } catch(e) {
-                console.log(LocationList[i])
-                console.log(LocationList[i].options)
-                console.log(LocationList[i].options.length)
                 console.log(e)
             }
         }
