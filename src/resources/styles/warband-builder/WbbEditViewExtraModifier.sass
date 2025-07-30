@@ -1,0 +1,37 @@
+// // // // //
+//
+// Ability Display in WBB
+//
+
+
+.WbbAbilityDisplay
+    margin-bottom: 15px
+
+    .ability-title
+        position: relative
+        background-color: $bg-color-card-2-el
+
+        padding: 0 50px 0 15px
+        height: 44px
+        line-height: 44px
+        font-weight: bold
+
+    .ability-description
+        background-color: $bg-color-card-3
+
+    .ability-description-inner
+        padding: 15px
+
+body[data-print="print"]
+    .ability-title
+        padding: 10px 10px 5px 10px
+        background-color: $bg-color-card-2
+        font-weight: bold
+        height: unset
+        line-height: unset
+    .collapse-chevron-wrap
+        display: none !important
+
+    .ability-description
+        .ability-description-inner
+            padding: 0 10px 10px 10px
