@@ -64,7 +64,7 @@ const FactionCollectionDisplay = (props: any) => {
         <ErrorBoundary fallback={<div>Something went wrong with FactionCollectionDisplay.tsx</div>}>
             <PageMetaInformation
                 title={selectedModel.faction.GetTrueName()}
-                description={selectedModel.faction.Description}
+                description={selectedModel.faction.Description[0].Content}
                 ogImage={url}
             />
 
