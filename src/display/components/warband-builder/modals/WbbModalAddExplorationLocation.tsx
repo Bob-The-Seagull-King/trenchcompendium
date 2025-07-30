@@ -170,18 +170,15 @@ const WbbModalAddExplorationLocation: React.FC<WbbModalAddExplorationLocationPro
 
                                                                     {/* option details */}
                                                                     {(
-                                                                        selectedOptionIds.find((k) => k.option_refID == opt.baseopt.RefID && k.selection_ID == choice.id)
+                                                                        selectedOptionIds.find((k) => k.option_refID == opt.baseopt.RefID && k.selection_ID == choice.id) && (choice.value.Description != null)
                                                                     ) &&
                                                                         <div className={'WbbGeneralCollapse-sub-2'}>
                                                                             <div className={'description-wrap'}>
-                                                                            {(choice.value.Description != null) &&
                                                                                 <div className={'description-wrap'}>
                                                                                     {
                                                                                         returnDescription(choice.value, choice.value.Description)
                                                                                     }
                                                                                 </div>
-                                                                            }
-
                                                                             </div>
                                                                         </div>
 
