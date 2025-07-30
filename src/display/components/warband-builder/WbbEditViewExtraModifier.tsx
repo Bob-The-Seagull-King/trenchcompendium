@@ -60,26 +60,28 @@ const WbbEditViewExtraModifier: React.FC<WbbEditViewModifierProps> = ({ warbprop
             </div>
 
             <Collapse in={open}>
-                <div className={'WbbEditViewExtraModifier-body'}>
-                    {warbprop.SelfDynamicProperty.Selections.length > 0 &&
-                        <>
-                        {warbprop.SelfDynamicProperty.Selections.map((item) =>
-                            <WbbOptionSelect
-                                property={warbprop}
-                                key={warbprop.SelfDynamicProperty.Selections.indexOf(item)}
-                                choice={item}
-                            />
-                        )}
-                    </>
-                    }
-
-                    {(warbprop.GetOwnDescription() != null) &&
-                    <>
-                        {
-                            returnDescription(warbprop, warbprop.GetOwnDescription())
+                <div>
+                    <div className={'WbbEditViewExtraModifier-body'}>
+                        {warbprop.SelfDynamicProperty.Selections.length > 0 &&
+                            <>
+                            {warbprop.SelfDynamicProperty.Selections.map((item) =>
+                                <WbbOptionSelect
+                                    property={warbprop}
+                                    key={warbprop.SelfDynamicProperty.Selections.indexOf(item)}
+                                    choice={item}
+                                />
+                            )}
+                        </>
                         }
-                    </>
-                    }
+
+                        {(warbprop.GetOwnDescription() != null) &&
+                        <>
+                            {
+                                returnDescription(warbprop, warbprop.GetOwnDescription())
+                            }
+                        </>
+                        }
+                    </div>
                 </div>
             </Collapse>
         </div>
