@@ -22,6 +22,7 @@ const WbbOptionSelect: React.FC<WbbEditSelectionProps> = ({choice,  property, ov
 
     const [showModal, setshowModal] = useState(false);
     const [displayState, setDisplayState] = useState( <></> );
+    const [displayOptions, setDisplayOptions] = useState(false);
     const [_keyvar, setkeyvar] = useState(0);
 
 
@@ -50,6 +51,15 @@ const WbbOptionSelect: React.FC<WbbEditSelectionProps> = ({choice,  property, ov
                 null,
                 choice.SelectedChoice
             );
+            const doshow = await EventProc.runEvent(
+                "showWbbOptionOptions",
+                property,
+                [],
+                false,
+                choice.SelectedChoice
+            );
+            console.log(choice)
+            setDisplayOptions(doshow)
             if (result != null) {
                 setDisplayState(result)
                 setkeyvar((prev) => prev + 1);
@@ -82,6 +92,26 @@ const WbbOptionSelect: React.FC<WbbEditSelectionProps> = ({choice,  property, ov
             <div key={_keyvar} className="SingleOptionSetDisplay-Details">
                 {displayState}
             </div>
+            {(property.SubProperties.length > 0 && displayOptions) &&
+                <>
+                    {property.SubProperties.length > 0 &&
+                        <>
+                            {property.SubProperties.map((item : WarbandProperty) =>
+                                <div key={property.SubProperties.indexOf(item)}>
+                                {item.SelfDynamicProperty.Selections.map((subitem) =>
+                                        <WbbOptionSelect
+                                            overrideplay={false}
+                                            property={item}
+                                            key={item.SelfDynamicProperty.Selections.indexOf(subitem)}
+                                            choice={subitem}
+                                        />
+                                    )}
+                                </div >
+                            )}
+                        </>
+                    }
+                </>
+            }
         </div>
     );
 };

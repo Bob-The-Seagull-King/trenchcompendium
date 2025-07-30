@@ -2596,22 +2596,11 @@ export const BaseContextCallTable : CallEventTable = {
                 </ErrorBoundary>
             )
         },
+        async showWbbOptionOptions(this: EventRunner, eventSource : any, relayVar: boolean, trackVal : IChoice, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            return true;
+        },
         async returnWbbOptionDisplay(this: EventRunner, eventSource : any, trackVar : IChoice, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null){
-            /**
-             * 
-                    {trackVar.value.SelfDynamicProperty.Selections.length > 0 &&
-                        <>
-                            {trackVar.value.SelfDynamicProperty.Selections.map((item : any) =>
-                                <WbbOptionSelect
-                                    overrideplay={false}
-                                    property={trackVar.value}
-                                    key={trackVar.value.SelfDynamicProperty.Selections.indexOf(item)}
-                                    choice={item}
-                                />
-                            )}
-                        </>
-                    }
-             */
+            
             return ( 
             
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
@@ -2619,7 +2608,6 @@ export const BaseContextCallTable : CallEventTable = {
                     <p className={''}>
                         {returnDescription(trackVar.value, trackVar.value.Description)}
                         
-
                     </p>
                 </ErrorBoundary>
             )
