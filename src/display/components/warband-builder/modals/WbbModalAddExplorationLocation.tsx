@@ -84,6 +84,11 @@ const WbbModalAddExplorationLocation: React.FC<WbbModalAddExplorationLocationPro
             setSelectedLocation(null);
         } else {
             setSelectedLocation(loc);
+            for (let i = 0; i < loc.options.length; i++) {
+                if (loc.options[i].selection_valid.length == 1) {
+                    UpdateSelectedOptionIDs({option_refID: loc.options[i].baseopt.RefID, selection_ID: loc.options[i].selection_valid[0].id})
+                }
+            }
         }
     }
 
@@ -117,8 +122,8 @@ const WbbModalAddExplorationLocation: React.FC<WbbModalAddExplorationLocationPro
                                         key={loc.location.ID}
                                         className={`select-item ${(selectedLocation? selectedLocation.location.ID : "") === loc.location.ID ? 'selected' : ''}`}
                                         onClick={() => {
-                                            handleLocationClick(loc);
                                             setSelectedOptionIds([]); // reset when switching location
+                                            handleLocationClick(loc);
                                         }}
                                     >
                                         <div className="item-name">
@@ -169,8 +174,14 @@ const WbbModalAddExplorationLocation: React.FC<WbbModalAddExplorationLocationPro
                                                                     ) &&
                                                                         <div className={'WbbGeneralCollapse-sub-2'}>
                                                                             <div className={'description-wrap'}>
-                                                                            Lorem ipsum dolor
-                                                                            {/* @TODO: Add description here    */}
+                                                                            {(choice.value.Description != null) &&
+                                                                                <div className={'description-wrap'}>
+                                                                                    {
+                                                                                        returnDescription(choice.value, choice.value.Description)
+                                                                                    }
+                                                                                </div>
+                                                                            }
+
                                                                             </div>
                                                                         </div>
 
