@@ -10,6 +10,9 @@ import {SiteUserPublic} from "../../../classes/user_synod/user_public";
 import LoadingOverlay from "../generics/Loading-Overlay";
 import {UserWarband} from "../../../classes/saveitems/Warband/UserWarband";
 import { SumWarband } from '../../../classes/saveitems/Warband/WarbandManager';
+import FighterCardImageWrap from "../rules-content/FighterCard/FighterCardImageWrap";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faChevronDown} from "@fortawesome/free-solid-svg-icons";
 
 interface ProfilePageWarbandsProps {
     userData: SiteUser | SiteUserPublic | null;
@@ -21,6 +24,11 @@ const ProfilePageWarbands: React.FC<ProfilePageWarbandsProps> = ({ userData }) =
 
     const [warbands, setWarbands] = useState<SumWarband[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
+
+    // "show all" settings
+    const [showAll, setShowAll] = useState(false);
+    const maxVisible = 10;
+
 
     useEffect(() => {
         const loadWarbands = async () => {
@@ -75,17 +83,28 @@ const ProfilePageWarbands: React.FC<ProfilePageWarbandsProps> = ({ userData }) =
                 <div className={'profile-card-content'}>
                     {warbands.length > 0 ? (
                         <ul className={'warbands-list'}>
-                            {warbands.map((warband) => (
+                            {(showAll ? warbands : warbands.slice(0, maxVisible)).map((warband) => (
                                 <li key={warband.warband_data.GetId()} className={'warband'}>
-                                    <WarbandListEntry
-                                        warband={warband}
-                                    />
+                                    <WarbandListEntry warband={warband} />
                                 </li>
                             ))}
                         </ul>
                     ) : (
                         <div className="warbands-list-empty">
                             {'No warbands found for this user.'}
+                        </div>
+                    )}
+
+                    {warbands.length > maxVisible && !showAll && (
+                        <div className={'show-more-button-wrap'}
+                             onClick={() => setShowAll(true)}
+                        >
+                            <div
+                                className={'show-more-button'}
+                                >
+                                {'Show all warbands'}
+                                <FontAwesomeIcon icon={faChevronDown} className={'icon-inline-right-l'} />
+                            </div>
                         </div>
                     )}
                 </div>
