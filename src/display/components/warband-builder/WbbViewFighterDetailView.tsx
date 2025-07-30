@@ -29,7 +29,6 @@ import WbbEditFighterStatus from "./modals/fighter/WbbEditFighterStatus";
 import WbbOptionItem from "./WbbOptionItem";
 import WbbAbilityDisplay from "./WbbAbilityDisplay";
 import {OverlayTrigger, Popover} from "react-bootstrap";
-import {usePlayMode} from "../../../context/PlayModeContext";
 import SynodImage from "../../../utility/SynodImage";
 import WbbContextualPopover from "./WbbContextualPopover";
 import SynodModelImage from "../../../utility/SynodModelImage";
@@ -56,6 +55,7 @@ import { Injury } from '../../../classes/feature/ability/Injury';
 import { Skill } from '../../../classes/feature/ability/Skill';
 import { getModelStatArmour, getModelStatMelee, getModelStatMove, getModelStatRanged, ModelStatistics } from '../../../classes/feature/model/ModelStats';
 import WbbEditFighterStatOption from './modals/fighter/WbbFighterStatOption';
+import {useWbbMode} from "../../../context/WbbModeContext";
 
 
 interface WbbFighterDetailViewProps {
@@ -111,7 +111,7 @@ const WbbViewFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warband
         SetModelOptions();
     }, [fighter]);
 
-    const { playMode } = usePlayMode();
+    const { play_mode, edit_mode, view_mode, print_mode, setMode, mode } = useWbbMode(); // play mode v2
 
     useEffect(() => {
         async function SetDisplayOptions() {
@@ -120,7 +120,7 @@ const WbbViewFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warband
         }
 
         SetDisplayOptions();
-    }, [playMode]);
+    }, [mode]);
 
     /**
      * Equipment Modals
@@ -200,7 +200,7 @@ const WbbViewFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warband
 
     return (
 
-        <div className={`WbbDetailView WbbFighterDetailView fighter-card ${playMode ? 'play-mode' : ''}`}>
+        <div className={`WbbDetailView WbbFighterDetailView fighter-card ${play_mode ? 'play-mode' : ''}`}>
             <div className={'title'}>
                 <div className={'title-back'} onClick={onClose}>
                     <FontAwesomeIcon icon={faChevronLeft} className=""/>
@@ -343,7 +343,7 @@ const WbbViewFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warband
             {Object.keys(upgrades).length > 0 &&
                 <>
                     {Object.keys(upgrades).filter((item) => (
-                        (!playMode) || (upgrades[item].upgrades.filter((subitem : MemberUpgradePresentation) => subitem.purchase != null).length > 0)
+                        (edit_mode) || (upgrades[item].upgrades.filter((subitem : MemberUpgradePresentation) => subitem.purchase != null).length > 0)
                     )).map((item, index) => (
                         <div className={'fighter-card-collapse-wrap'} key={index}>
                             <WbbFighterCollapse
@@ -351,7 +351,7 @@ const WbbViewFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warband
                                 initiallyOpen={false}
                             >
                                 <>
-                                    {upgrades[item].upgrades.filter((item) => ((!playMode) || item.purchase != null)).map((subitem, index) => (
+                                    {upgrades[item].upgrades.filter((item) => ((edit_mode) || item.purchase != null)).map((subitem, index) => (
                                         <WbbOptionItem key={index.toString() + updateKey.toString()} option={subitem} owner={fighter} category={item}/>
                                     ))}
                                 </>
@@ -365,7 +365,7 @@ const WbbViewFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warband
 
 
             {/* Play Mode Content */}
-            {(playMode) &&
+            {(play_mode) &&
                 <div className={'fighter-card-play-mode-info'}  key={keyvar}>
 
                     <div className={'play-mode-equipment-wrap'}>

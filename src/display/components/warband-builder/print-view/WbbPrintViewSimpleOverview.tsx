@@ -1,13 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import { useWarband } from '../../../../context/WarbandContext';
-import { usePrintMode } from '../../../../context/PrintModeContext';
 import logoDarkMode from "../../../../resources/images/trench-companion-logo-white-v2.png";
 import logoLightMode from "../../../../resources/images/trench-companion-logo-black-v2.png";
 import {UserWarband} from "../../../../classes/saveitems/Warband/UserWarband";
 import { Faction } from '../../../../classes/feature/faction/Faction';
 
 const WbbPrintViewSimpleOverview: React.FC = () => {
-    const { printMode } = usePrintMode();
 
     const { warband, updateKey } = useWarband();
 

@@ -35,16 +35,16 @@ import WbbFighterAdds from './micro-elements/WbbFighterAdds';
 import WbbFighterShows from './micro-elements/WbbFighterShows';
 import WbbModifiersList from './modals/warband/WbbModifiersList';
 import WbbLocationsList from './modals/warband/WbbLocationsList';
+import {useWbbMode} from "../../../context/WbbModeContext";
 
 interface WbbEditViewProps {
     warbandData: SumWarband | null;
     manager : WarbandManager;
-    view : boolean
 }
 
 
 
-const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData, view }) => {
+const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
 
     /** Set Navigation */
     const navigate = useNavigate();
@@ -115,7 +115,9 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData, view }) => {
     const [showAddFighterTroopModal, setShowAddFighterTroopModal] = useState(false);
     const [showAddFighterEliteModal, setShowAddFighterEliteModal] = useState(false);
     const [showAddFighterMercenaryModal, setShowAddFighterMercenaryModal] = useState(false);
-    
+
+    // theme
+    const [theme, setTheme] = useGlobalState('theme');
 
 
     // Modifier Modal
@@ -125,20 +127,13 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData, view }) => {
     };
 
 
-    /** View Mode */
-    const [viewmode, setViewMode] = useState(view);
+    /**
+     * View Modes v2
+     */
+    const { play_mode, edit_mode, view_mode, print_mode, setMode } = useWbbMode();
 
-    /** Play mode */
-    const [playMode, setPlayMode] = useState(view);
-    const togglePlayMode = () => setPlayMode(prev => (view? view : !prev));
-
-
-    /** Print Mode */
-    const [theme, setTheme] = useGlobalState('theme');
-
-    const { printMode, setPrintMode } = usePrintMode();
     const exitPrintMode = () => {
-        setPrintMode(false);
+        setMode('edit');
 
         // Restore previous theme
         document.body.setAttribute('data-theme', theme);
@@ -149,17 +144,17 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData, view }) => {
 
 
     return (
-        <div className={`WbbEditView ${printMode ? 'print-mode' : ''}`}>
+        <div className={`WbbEditView ${print_mode ? 'print-mode' : ''}`}>
             {/* The Warband List */}
             {(warband !== null) ? (
                 <WarbandProvider warband={warband}>
-                    <PopoverProvider> <PlayModeProvider value={{ playMode, togglePlayMode, viewmode }}>
+                    <PopoverProvider>
                         <PageMetaInformation
                             title={warband.warband_data.GetWarbandName() + ' - Warband Manager'}
                             description={'Manage your warband with Trench Companion, the official resource for Trench Crusade.'}
                         />
 
-                        {!printMode &&
+                        {!print_mode &&
                             <>
                                 <div className={`warband-title ${detailType ? 'details-open' : ''}`}>
                                     <div className={'container'}>
@@ -192,14 +187,14 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData, view }) => {
                                             isActive={detailType === 'warband'}
                                         />
 
-                                        {(!playMode || viewmode) &&
+                                        {(edit_mode || view_mode) &&
                                             <WbbEditViewStash
                                                 onClick={() => openDetail('stash', null)}
                                                 isActive={detailType === 'stash'}
                                             />
                                         }
 
-                                        {(!playMode || viewmode) &&
+                                        {(edit_mode || view_mode) &&
                                             <WbbEditViewCampaign
                                                 onClick={() => openDetail('campaign', null)}
                                                 isActive={detailType === 'campaign'}
@@ -207,7 +202,6 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData, view }) => {
                                         }
 
                                         <WbbFighterShows 
-                                            playMode={playMode}
                                             openDetail={openDetail}
                                             detailType={detailType}
                                             detailPayload={detailPayload}
@@ -218,7 +212,7 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData, view }) => {
 
                                         <WbbModifiersList/>
 
-                                        {(!playMode || viewmode) &&
+                                        {(edit_mode || view_mode) &&
                                             <WbbLocationsList/>
                                         }
                                     </div>
@@ -279,7 +273,7 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData, view }) => {
                         }
 
                         {/* Print Mode */}
-                        {printMode &&
+                        {print_mode &&
                             <>
                                 <div className={'container'}>
                                     <div className={'exit-print-view'} onClick={exitPrintMode}>
@@ -292,7 +286,7 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData, view }) => {
                             </>
                         }
 
-                    </PlayModeProvider> </PopoverProvider>
+                    </PopoverProvider>
                 </WarbandProvider>
             ) : (
                 <div className={'WbbLoadingOverlay'}>

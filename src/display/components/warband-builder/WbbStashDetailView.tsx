@@ -18,6 +18,7 @@ import WbbEditStashAmountModal from './modals/warband/WbbEditStashAmountModal';
 import WbbEquipmentAddCustomStash from './modals/WbbEquipmentAddCustomStash';
 import { containsTag } from '../../../utility/functions';
 import { usePlayMode } from '../../../context/PlayModeContext';
+import {useWbbMode} from "../../../context/WbbModeContext";
 
 interface WbbStashDetailViewProps {
     onClose: () => void;
@@ -27,8 +28,11 @@ interface WbbStashDetailViewProps {
 const WbbStashDetailView: React.FC<WbbStashDetailViewProps> = ({ onClose }) => {
 
     const { warband, updateKey, reloadDisplay } = useWarband();
-    const { playMode } = usePlayMode();
+    const { play_mode, edit_mode, view_mode, print_mode, setMode } = useWbbMode(); // play mode v2
     if (warband == null) return (<div>Loading...</div>);
+
+    console.log('edit_mode');
+    console.log(edit_mode);
 
     const [stash, setStash] = useState(warband.warband_data.GetStash())
 
@@ -91,24 +95,26 @@ const WbbStashDetailView: React.FC<WbbStashDetailViewProps> = ({ onClose }) => {
                     <div>
                         <strong>Value of items:</strong> {stash.ValueDucats} Ducats / {stash.ValueGlory} Glory
                     </div>
-                    {!playMode &&
-                    <div className={'mt-2'}>
-                        {(stash.AmountDucats < 10e10) &&
-                            <div className={'btn btn-primary'}
-                                 onClick={() => setShowAddDucats(true)}
-                                 style={{marginRight: "0.5rem"}}>
-                                <FontAwesomeIcon icon={faCoins} className="icon-inline-left-l"/>
-                                {'Add Ducats'}
-                            </div>
-                        }
-                        {stash.AmountGlory < 10e10 &&
-                            <div className={'btn btn-primary'}
-                                 onClick={() => setShowAddGlory(true)}>
-                                <FontAwesomeIcon icon={faTrophy} className="icon-inline-left-l"/>
-                                {'Add Glory'}
-                            </div>
-                        }
-                    </div>
+
+                    {/* Add Ducats and Glory Buttons*/}
+                    {edit_mode &&
+                        <div className={'mt-2'}>
+                            {(stash.AmountDucats < 10e10) &&
+                                <div className={'btn btn-primary'}
+                                     onClick={() => setShowAddDucats(true)}
+                                     style={{marginRight: "0.5rem"}}>
+                                    <FontAwesomeIcon icon={faCoins} className="icon-inline-left-l"/>
+                                    {'Add Ducats'}
+                                </div>
+                            }
+                            {stash.AmountGlory < 10e10 &&
+                                <div className={'btn btn-primary'}
+                                     onClick={() => setShowAddGlory(true)}>
+                                    <FontAwesomeIcon icon={faTrophy} className="icon-inline-left-l"/>
+                                    {'Add Glory'}
+                                </div>
+                            }
+                        </div>
                     }
                 </div>
 
@@ -116,16 +122,16 @@ const WbbStashDetailView: React.FC<WbbStashDetailViewProps> = ({ onClose }) => {
                 <div className={'stash-items-title'}>
                     {'Stashed Items'}
                 </div>
-                {!playMode &&
-                <div className="stash-items-wrap">
+
+                <div className="stash-items-wrap dd">
                     <div className={'stash-items-category'}>
                         {warband?.warband_data.Equipment.filter(item =>
-                                (((item.HeldObject as WarbandEquipment).GetEquipmentItem()).Category == "ranged" && 
+                                (((item.HeldObject as WarbandEquipment).GetEquipmentItem()).Category == "ranged" &&
                                 !containsTag(((item.HeldObject as WarbandEquipment)).Tags, 'exploration_only'))
                                 ).length > 0 ? (
                             <>
                                 {warband?.warband_data.Equipment.filter(item =>
-                                (((item.HeldObject as WarbandEquipment).GetEquipmentItem()).Category == "ranged" && 
+                                (((item.HeldObject as WarbandEquipment).GetEquipmentItem()).Category == "ranged" &&
                                 !containsTag(((item.HeldObject as WarbandEquipment)).Tags, 'exploration_only'))
                                 ).map((item: WarbandPurchase, index: number) => (
                                     <WbbEquipmentListItem
@@ -137,21 +143,24 @@ const WbbStashDetailView: React.FC<WbbStashDetailViewProps> = ({ onClose }) => {
                         ) : (
                             <div className={'stash-items-empty'}>No ranged items in stash.</div>
                         )}
-                        <div className={'btn btn-add-element btn-block'}
-                             onClick={() => setShowRangedAddItemToStash(true)}>
-                            <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
-                            {'Add Ranged Weapon'}
-                        </div>
+
+                        {edit_mode &&
+                            <div className={'btn btn-add-element btn-block'}
+                                 onClick={() => setShowRangedAddItemToStash(true)}>
+                                <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
+                                {'Add Ranged Weapon'}
+                            </div>
+                        }
                     </div>
 
                     <div className={'stash-items-category'}>
                         {warband?.warband_data.Equipment.filter(item =>
-                                (((item.HeldObject as WarbandEquipment).GetEquipmentItem()).Category == "melee" && 
+                                (((item.HeldObject as WarbandEquipment).GetEquipmentItem()).Category == "melee" &&
                                 !containsTag(((item.HeldObject as WarbandEquipment).GetEquipmentItem()).Tags, 'exploration_only'))
                                 ).length > 0 ? (
                             <>
                                 {warband?.warband_data.Equipment.filter(item =>
-                                (((item.HeldObject as WarbandEquipment).GetEquipmentItem()).Category == "melee" && 
+                                (((item.HeldObject as WarbandEquipment).GetEquipmentItem()).Category == "melee" &&
                                 !containsTag(((item.HeldObject as WarbandEquipment).GetEquipmentItem()).Tags, 'exploration_only'))
                                 ).map((item: WarbandPurchase, index: number) => (
                                     <WbbEquipmentListItem
@@ -163,21 +172,24 @@ const WbbStashDetailView: React.FC<WbbStashDetailViewProps> = ({ onClose }) => {
                         ) : (
                             <div className={'stash-items-empty'}>No melee items in stash.</div>
                         )}
-                        <div className={'btn btn-add-element btn-block'}
-                             onClick={() => setShowMeleeAddItemToStash(true)}>
-                            <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
-                            {'Add Melee Weapon'}
-                        </div>
+
+                        {edit_mode &&
+                            <div className={'btn btn-add-element btn-block'}
+                                 onClick={() => setShowMeleeAddItemToStash(true)}>
+                                <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
+                                {'Add Melee Weapon'}
+                            </div>
+                        }
                     </div>
 
                     <div className={'stash-items-category'}>
                         {warband?.warband_data.Equipment.filter(item =>
-                                (((item.HeldObject as WarbandEquipment).GetEquipmentItem()).Category == "armour" && 
+                                (((item.HeldObject as WarbandEquipment).GetEquipmentItem()).Category == "armour" &&
                                 !containsTag(((item.HeldObject as WarbandEquipment)).Tags, 'exploration_only'))
                                 ).length > 0 ? (
                             <>
                                 {warband?.warband_data.Equipment.filter(item =>
-                                (((item.HeldObject as WarbandEquipment).GetEquipmentItem()).Category == "armour" && 
+                                (((item.HeldObject as WarbandEquipment).GetEquipmentItem()).Category == "armour" &&
                                 !containsTag(((item.HeldObject as WarbandEquipment)).Tags, 'exploration_only'))
                                 ).map((item: WarbandPurchase, index: number) => (
                                     <WbbEquipmentListItem
@@ -189,21 +201,24 @@ const WbbStashDetailView: React.FC<WbbStashDetailViewProps> = ({ onClose }) => {
                         ) : (
                             <div className={'stash-items-empty'}>No armour in stash.</div>
                         )}
-                        <div className={'btn btn-add-element btn-block'}
-                             onClick={() => setShowArmourAddItemToStash(true)}>
-                            <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
-                            {'Add Armour'}
-                        </div>
+
+                        {edit_mode &&
+                            <div className={'btn btn-add-element btn-block'}
+                                 onClick={() => setShowArmourAddItemToStash(true)}>
+                                <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
+                                {'Add Armour'}
+                            </div>
+                        }
                     </div>
 
                     <div className={'stash-items-category'}>
                         {warband?.warband_data.Equipment.filter(item =>
-                                (((item.HeldObject as WarbandEquipment).GetEquipmentItem()).Category == "equipment" && 
+                                (((item.HeldObject as WarbandEquipment).GetEquipmentItem()).Category == "equipment" &&
                                 !containsTag(((item.HeldObject as WarbandEquipment)).Tags, 'exploration_only'))
                                 ).length > 0 ? (
                             <>
                                 {warband?.warband_data.Equipment.filter(item =>
-                                (((item.HeldObject as WarbandEquipment).GetEquipmentItem()).Category == "equipment" && 
+                                (((item.HeldObject as WarbandEquipment).GetEquipmentItem()).Category == "equipment" &&
                                 !containsTag(((item.HeldObject as WarbandEquipment)).Tags, 'exploration_only'))
                                 ).map((item: WarbandPurchase, index: number) => (
                                     <WbbEquipmentListItem
@@ -215,11 +230,14 @@ const WbbStashDetailView: React.FC<WbbStashDetailViewProps> = ({ onClose }) => {
                         ) : (
                             <div className={'stash-items-empty'}>No equipment in stash.</div>
                         )}
-                        <div className={'btn btn-add-element btn-block'}
-                             onClick={() => setShowEquipAddItemToStash(true)}>
-                            <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
-                            {'Add Equipment'}
-                        </div>
+
+                        {edit_mode &&
+                            <div className={'btn btn-add-element btn-block'}
+                                 onClick={() => setShowEquipAddItemToStash(true)}>
+                                <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
+                                {'Add Equipment'}
+                            </div>
+                        }
                     </div>
 
                     <div className={'stash-items-category'}>
@@ -240,167 +258,78 @@ const WbbStashDetailView: React.FC<WbbStashDetailViewProps> = ({ onClose }) => {
                             <div className={'stash-items-empty'}>No exploration only items in stash.</div>
                         )}
 
-                        <div className={'btn btn-add-element btn-block'}
-                             onClick={() => setShowExplorationAddItemToStash(true)}>
-                            <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
-                            {'Add Exploration-Only Item'}
-                        </div>
-                    </div>
-
-                    <WbbModalAddItemToStash
-                        show={showRangedAddItemToStash}
-                        onClose={() => setShowRangedAddItemToStash(false)}
-                        onSubmit={handleAddItemToStash}
-                        category='ranged'
-                        exploration={false}
-                    />
-
-                    <WbbModalAddItemToStash
-                        show={showMeleeAddItemToStash}
-                        onClose={() => setShowMeleeAddItemToStash(false)}
-                        onSubmit={handleAddItemToStash}
-                        category='melee'
-                        exploration={false}
-                    />
-
-                    <WbbModalAddItemToStash
-                        show={showArmourAddItemToStash}
-                        onClose={() => setShowArmourAddItemToStash(false)}
-                        onSubmit={handleAddItemToStash}
-                        category='armour'
-                        exploration={false}
-                    />
-
-                    <WbbModalAddItemToStash
-                        show={showEquipAddItemToStash}
-                        onClose={() => setShowEquipAddItemToStash(false)}
-                        onSubmit={handleAddItemToStash}
-                        category='equipment'
-                        exploration={false}
-                    />
-
-                    <WbbModalAddItemToStash
-                        show={showExplorationAddItemToStash}
-                        onClose={() => setShowExplorationAddItemToStash(false)}
-                        onSubmit={handleAddItemToStash}
-                        category=''
-                        exploration={true}
-                    />
-
-                    
-                    <WbbEditStashAmountModal
-                        show={showAddDucats}
-                        onClose={() => setShowAddDucats(false)}
-                        currentcount={stash.AmountDucats}
-                        costtype={0}
-                        onSubmit={handleUpdateStash}
-                    />
-                    <WbbEditStashAmountModal
-                        show={showAddGlory}
-                        onClose={() => setShowAddGlory(false)}
-                        currentcount={stash.AmountGlory}
-                        costtype={1}
-                        onSubmit={handleUpdateStash}
-                    />
-                </div>
-                }
-                {playMode &&
-                <div className="stash-items-wrap">
-                    <div className={'stash-items-category'}>
-                        {warband?.warband_data.Equipment.filter(item =>
-                                (((item.HeldObject as WarbandEquipment).GetEquipmentItem()).Category == "ranged" && 
-                                !containsTag(((item.HeldObject as WarbandEquipment)).Tags, 'exploration_only'))
-                                ).length > 0 &&
-                            <>
-                                {warband?.warband_data.Equipment.filter(item =>
-                                (((item.HeldObject as WarbandEquipment).GetEquipmentItem()).Category == "ranged" && 
-                                !containsTag(((item.HeldObject as WarbandEquipment)).Tags, 'exploration_only'))
-                                ).map((item: WarbandPurchase, index: number) => (
-                                    <WbbEquipmentListItem
-                                        key={index}
-                                        item={item}
-                                    />
-                                ))}
-                            </>
+                        {edit_mode &&
+                            <div className={'btn btn-add-element btn-block'}
+                                 onClick={() => setShowExplorationAddItemToStash(true)}>
+                                <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
+                                {'Add Exploration-Only Item'}
+                            </div>
                         }
                     </div>
 
-                    <div className={'stash-items-category'}>
-                        {warband?.warband_data.Equipment.filter(item =>
-                                (((item.HeldObject as WarbandEquipment).GetEquipmentItem()).Category == "melee" && 
-                                !containsTag(((item.HeldObject as WarbandEquipment).GetEquipmentItem()).Tags, 'exploration_only'))
-                                ).length > 0 && 
-                            <>
-                                {warband?.warband_data.Equipment.filter(item =>
-                                (((item.HeldObject as WarbandEquipment).GetEquipmentItem()).Category == "melee" && 
-                                !containsTag(((item.HeldObject as WarbandEquipment).GetEquipmentItem()).Tags, 'exploration_only'))
-                                ).map((item: WarbandPurchase, index: number) => (
-                                    <WbbEquipmentListItem
-                                        key={index}
-                                        item={item}
-                                    />
-                                ))}
-                            </>
-                        }
-                    </div>
+                    {edit_mode &&
+                        <>
 
-                    <div className={'stash-items-category'}>
-                        {warband?.warband_data.Equipment.filter(item =>
-                                (((item.HeldObject as WarbandEquipment).GetEquipmentItem()).Category == "armour" && 
-                                !containsTag(((item.HeldObject as WarbandEquipment)).Tags, 'exploration_only'))
-                                ).length > 0 &&
-                            <>
-                                {warband?.warband_data.Equipment.filter(item =>
-                                (((item.HeldObject as WarbandEquipment).GetEquipmentItem()).Category == "armour" && 
-                                !containsTag(((item.HeldObject as WarbandEquipment)).Tags, 'exploration_only'))
-                                ).map((item: WarbandPurchase, index: number) => (
-                                    <WbbEquipmentListItem
-                                        key={index}
-                                        item={item}
-                                    />
-                                ))}
-                            </>
-                        }
-                    </div>
+                        <WbbModalAddItemToStash
+                            show={showRangedAddItemToStash}
+                            onClose={() => setShowRangedAddItemToStash(false)}
+                            onSubmit={handleAddItemToStash}
+                            category='ranged'
+                            exploration={false}
+                        />
 
-                    <div className={'stash-items-category'}>
-                        {warband?.warband_data.Equipment.filter(item =>
-                                (((item.HeldObject as WarbandEquipment).GetEquipmentItem()).Category == "equipment" && 
-                                !containsTag(((item.HeldObject as WarbandEquipment)).Tags, 'exploration_only'))
-                                ).length > 0 &&
-                            <>
-                                {warband?.warband_data.Equipment.filter(item =>
-                                (((item.HeldObject as WarbandEquipment).GetEquipmentItem()).Category == "equipment" && 
-                                !containsTag(((item.HeldObject as WarbandEquipment)).Tags, 'exploration_only'))
-                                ).map((item: WarbandPurchase, index: number) => (
-                                    <WbbEquipmentListItem
-                                        key={index}
-                                        item={item}
-                                    />
-                                ))}
-                            </>
-                        }
-                    </div>
+                        <WbbModalAddItemToStash
+                            show={showMeleeAddItemToStash}
+                            onClose={() => setShowMeleeAddItemToStash(false)}
+                            onSubmit={handleAddItemToStash}
+                            category='melee'
+                            exploration={false}
+                        />
 
-                    <div className={'stash-items-category'}>
-                        {warband?.warband_data.Equipment.filter(item =>
-                                (containsTag(((item.HeldObject as WarbandEquipment)).Tags, 'exploration_only'))
-                                ).length > 0 &&
-                            <>
-                                {warband?.warband_data.Equipment.filter(item =>
-                                (containsTag(((item.HeldObject as WarbandEquipment)).Tags, 'exploration_only'))
-                                ).map((item: WarbandPurchase, index: number) => (
-                                    <WbbEquipmentListItem
-                                        key={index}
-                                        item={item}
-                                    />
-                                ))}
-                            </>
-                        }
-                    </div>
+                        <WbbModalAddItemToStash
+                            show={showArmourAddItemToStash}
+                            onClose={() => setShowArmourAddItemToStash(false)}
+                            onSubmit={handleAddItemToStash}
+                            category='armour'
+                            exploration={false}
+                        />
+
+                        <WbbModalAddItemToStash
+                            show={showEquipAddItemToStash}
+                            onClose={() => setShowEquipAddItemToStash(false)}
+                            onSubmit={handleAddItemToStash}
+                            category='equipment'
+                            exploration={false}
+                        />
+
+                        <WbbModalAddItemToStash
+                            show={showExplorationAddItemToStash}
+                            onClose={() => setShowExplorationAddItemToStash(false)}
+                            onSubmit={handleAddItemToStash}
+                            category=''
+                            exploration={true}
+                        />
+
+
+                        <WbbEditStashAmountModal
+                            show={showAddDucats}
+                            onClose={() => setShowAddDucats(false)}
+                            currentcount={stash.AmountDucats}
+                            costtype={0}
+                            onSubmit={handleUpdateStash}
+                        />
+                        <WbbEditStashAmountModal
+                            show={showAddGlory}
+                            onClose={() => setShowAddGlory(false)}
+                            currentcount={stash.AmountGlory}
+                            costtype={1}
+                            onSubmit={handleUpdateStash}
+                        />
+                        </>
+                    }
                 </div>
 
-                }
+                {/* @TODO: check if edit mode restriction is needed */}
                 {warband?.warband_data.GetConsumablesEquipment().length > 0 &&
                     <>
                         <div className={'stash-items-title'}>

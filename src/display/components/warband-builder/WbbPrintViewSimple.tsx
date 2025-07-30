@@ -1,15 +1,16 @@
 import React from 'react';
 import { useWarband } from '../../../context/WarbandContext';
-import { usePrintMode } from '../../../context/PrintModeContext';
 import WbbPrintViewSimpleOverview from "./print-view/WbbPrintViewSimpleOverview";
 import WbbPrintViewSimpleFighter from "./print-view/WbbPrintViewSimpleFighter";
 import WbbEditViewFighter from "./WbbEditViewFighter";
+import {useWbbMode} from "../../../context/WbbModeContext";
 
 const WbbPrintViewSimple: React.FC = () => {
     const { warband } = useWarband();
-    const { printMode } = usePrintMode();
 
-    if (!warband || !printMode) return null;
+    const { play_mode, edit_mode, view_mode, print_mode, mode, setMode } = useWbbMode(); // play mode v2
+
+    if (!warband || !print_mode) return null;
 
     const stash = warband.warband_data.GetStash();
     const fighters = warband.warband_data.GetFighters();

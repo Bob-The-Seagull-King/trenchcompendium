@@ -24,6 +24,7 @@ import WbbMoveEquipmentToFighterModal from './modals/warband/WbbMoveEquipmentToF
 import { UserWarband } from '../../../classes/saveitems/Warband/UserWarband';
 import {SumWarband, WarbandManager} from "../../../classes/saveitems/Warband/WarbandManager";
 import { useNavigate } from 'react-router-dom';
+import {useWbbMode} from "../../../context/WbbModeContext";
 
 interface WbbContextualPopoverProps {
     id: string;
@@ -53,8 +54,8 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
 
     const { activePopoverId, setActivePopoverId } = usePopover();
     const { warband, reloadDisplay } = useWarband();
-    const { playMode, togglePlayMode } = usePlayMode();
-    const { setPrintMode } = usePrintMode();
+    const { play_mode, edit_mode, view_mode, print_mode, setMode, isOwner } = useWbbMode(); // play mode v2
+
     const [newname, setName] = useState("")
     const [exportFull, setExportFull] = useState<boolean>(true); // export options
     const [exportCopySuccess, setExportCopySuccess] = useState<boolean>(false); // export copied to clipboard
@@ -372,7 +373,7 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
     /** Print Mode */
     const handlePrintWarband = () => {
 
-        setPrintMode(true);
+        setMode('print');
 
         // Switch to print theme
         document.body.setAttribute('data-theme', 'light');
@@ -388,7 +389,7 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
     useEffect(() => {
         const handleAfterPrint = () => {
 
-            setPrintMode(false);
+            setMode('edit');
             document.body.setAttribute('data-theme', theme);
             document.body.setAttribute('data-print', '');
 
@@ -574,34 +575,39 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
 
                             {type === 'warband' &&
                                 <>
-                                    {playMode &&
-                                        <div className="action action-rename" onClick={() => {
+                                    {play_mode &&
+                                        <div className="action" onClick={() => {
                                             setActivePopoverId(null);
-                                            togglePlayMode();
+                                            setMode('edit');
                                         }}>
                                             <FontAwesomeIcon icon={faPen} className="icon-inline-left-l"/>
                                             {'Enter Edit Mode'}
                                         </div>
                                     }
 
-                                    {!playMode &&
-                                        <div className="action action-rename" onClick={() => {
+                                    {(edit_mode || view_mode) &&
+                                        <div className="action" onClick={() => {
                                             setActivePopoverId(null);
-                                            togglePlayMode();
+                                            setMode('play');
+
                                         }}>
                                             <FontAwesomeIcon icon={faDice} className="icon-inline-left-l"/>
                                             {'Enter Play Mode'}
                                         </div>
                                     }
 
-                                    <div className="action" onClick={showConfirmRenameWarband}>
-                                        <FontAwesomeIcon icon={faEdit} className="icon-inline-left-l"/>
-                                        {'Rename Warband'}
-                                    </div>
+                                    {isOwner &&
+                                        <div className="action" onClick={showConfirmRenameWarband}>
+                                            <FontAwesomeIcon icon={faEdit} className="icon-inline-left-l"/>
+                                            {'Rename Warband'}
+                                        </div>
+                                    }
+
                                     <div className="action" onClick={showConfirmExportWarband}>
                                         <FontAwesomeIcon icon={faFileExport} className="icon-inline-left-l"/>
                                         {'Export Warband'}
                                     </div>
+
                                     <div className="action" onClick={() => {
                                         setActivePopoverId(null);
                                         handlePrintWarband();
@@ -610,10 +616,12 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                                         {'Print Warband'}
                                     </div>
 
-                                    <div className="action" onClick={() => setshowConfirmDeleteWarbandModal(true)}>
-                                        <FontAwesomeIcon icon={faTrash} className="icon-inline-left-l"/>
-                                        {'Delete Warband'}
-                                    </div>
+                                    {isOwner &&
+                                        <div className="action" onClick={() => setshowConfirmDeleteWarbandModal(true)}>
+                                            <FontAwesomeIcon icon={faTrash} className="icon-inline-left-l"/>
+                                            {'Delete Warband'}
+                                        </div>
+                                    }
                                 </>
                             }
                         </div>
@@ -1059,84 +1067,88 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
             </Modal>
 
             {/** Rename Warband Modal */}
-            <Modal show={showConfirmRenameWarbandModal} onHide={() => setshowConfirmRenameWarbandModal(false)} centered>
-                <Modal.Header closeButton={false}>
-                    <Modal.Title>{`Rename Warband`}</Modal.Title>
+            { isOwner &&
+                <Modal show={showConfirmRenameWarbandModal} onHide={() => setshowConfirmRenameWarbandModal(false)} centered>
+                    <Modal.Header closeButton={false}>
+                        <Modal.Title>{`Rename Warband`}</Modal.Title>
 
-                    <FontAwesomeIcon
-                        icon={faXmark}
-                        className="modal-close-icon"
-                        role="button"
-                        onClick={() => setshowConfirmRenameWarbandModal(false)}
-                    />
-                </Modal.Header>
-
-                <Modal.Body>
-                    <div className="mb-3">
-                        <label className="form-label">Warband Name</label>
-                        <input type="text" className="form-control"
-                               placeholder="Warband Name"
-                               defaultValue={warband?.warband_data.GetWarbandName()}
-                               onChange={(e) => {setName(e.target.value)}}
+                        <FontAwesomeIcon
+                            icon={faXmark}
+                            className="modal-close-icon"
+                            role="button"
+                            onClick={() => setshowConfirmRenameWarbandModal(false)}
                         />
-                    </div>
-                </Modal.Body>
+                    </Modal.Header>
 
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={() => setshowConfirmRenameWarbandModal(false)}>
-                        Cancel
-                    </Button>
-                    <Button variant="primary" onClick={handleRenameWarband}>
-                        Rename
-                    </Button>
-                </Modal.Footer>
-            </Modal>
+                    <Modal.Body>
+                        <div className="mb-3">
+                            <label className="form-label">Warband Name</label>
+                            <input type="text" className="form-control"
+                                   placeholder="Warband Name"
+                                   defaultValue={warband?.warband_data.GetWarbandName()}
+                                   onChange={(e) => {setName(e.target.value)}}
+                            />
+                        </div>
+                    </Modal.Body>
+
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={() => setshowConfirmRenameWarbandModal(false)}>
+                            Cancel
+                        </Button>
+                        <Button variant="primary" onClick={handleRenameWarband}>
+                            Rename
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+            }
 
             {/** Delete Warband Modal */}
-            <Modal show={showConfirmDeleteWarbandModal} onHide={() => setshowConfirmDeleteWarbandModal(false)} centered>
-                <Modal.Header closeButton={false}>
-                    <Modal.Title>{`Delete Warband`}</Modal.Title>
+            { isOwner &&
+                <Modal show={showConfirmDeleteWarbandModal} onHide={() => setshowConfirmDeleteWarbandModal(false)} centered>
+                    <Modal.Header closeButton={false}>
+                        <Modal.Title>{`Delete Warband`}</Modal.Title>
 
-                    <FontAwesomeIcon
-                        icon={faXmark}
-                        className="modal-close-icon"
-                        role="button"
-                        onClick={() => setshowConfirmDeleteWarbandModal(false)}
-                    />
-                </Modal.Header>
-
-                <Modal.Body>
-                    <p >
-                        {'Do you really want to delete this warband?'}
-                    </p>
-
-                    <div className={'mb-3'}>
-                        <label className="form-label small" htmlFor={'delete-warband-confirm'}>
-                            {"Type 'confirm' to delete your warband."}
-                        </label>
-                        <input
-                            type="text" id={'delete-warband-confirm'}
-                            className="form-control"
-                            placeholder=""
-                            value={deleteConfirmInput}
-                            onChange={(e) => setDeleteConfirmInput(e.target.value)}
+                        <FontAwesomeIcon
+                            icon={faXmark}
+                            className="modal-close-icon"
+                            role="button"
+                            onClick={() => setshowConfirmDeleteWarbandModal(false)}
                         />
+                    </Modal.Header>
 
-                    </div>
-                </Modal.Body>
+                    <Modal.Body>
+                        <p >
+                            {'Do you really want to delete this warband?'}
+                        </p>
 
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={() => setshowConfirmDeleteWarbandModal(false)}>
-                        Cancel
-                    </Button>
-                    <Button variant="primary"
-                            onClick={handleDeleteWarband}
-                            disabled={deleteConfirmInput !== 'confirm'}
-                    >
-                        Delete
-                    </Button>
-                </Modal.Footer>
-            </Modal>
+                        <div className={'mb-3'}>
+                            <label className="form-label small" htmlFor={'delete-warband-confirm'}>
+                                {"Type 'confirm' to delete your warband."}
+                            </label>
+                            <input
+                                type="text" id={'delete-warband-confirm'}
+                                className="form-control"
+                                placeholder=""
+                                value={deleteConfirmInput}
+                                onChange={(e) => setDeleteConfirmInput(e.target.value)}
+                            />
+
+                        </div>
+                    </Modal.Body>
+
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={() => setshowConfirmDeleteWarbandModal(false)}>
+                            Cancel
+                        </Button>
+                        <Button variant="primary"
+                                onClick={handleDeleteWarband}
+                                disabled={deleteConfirmInput !== 'confirm'}
+                        >
+                            Delete
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+            }
 
             {/** Export Warband Modal */}
             <Modal show={showConfirmExportWarbandModal} onHide={() => setshowConfirmExportWarbandModal(false)} centered>

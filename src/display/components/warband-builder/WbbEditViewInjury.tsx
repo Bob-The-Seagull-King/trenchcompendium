@@ -3,29 +3,29 @@ import {Modal, OverlayTrigger, Popover} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCopy, faEllipsisVertical, faTrash, faXmark} from "@fortawesome/free-solid-svg-icons";
 import WbbContextualPopover from "./WbbContextualPopover";
-import {usePlayMode} from "../../../context/PlayModeContext";
 import { Injury } from '../../../classes/feature/ability/Injury';
 import { WarbandProperty } from '../../../classes/saveitems/Warband/WarbandProperty';
 import { returnDescription } from '../../../utility/util';
 import WbbOptionSelect from './modals/warband/WbbOptionSelect';
 import { RealWarbandPurchaseModel } from '../../../classes/saveitems/Warband/Purchases/WarbandPurchase';
+import {useWbbMode} from "../../../context/WbbModeContext";
 
 const WbbEditViewInjury: React.FC<{ injury: WarbandProperty, fighter : RealWarbandPurchaseModel }> = ({ injury, fighter }) => {
 
-    const { playMode } = usePlayMode();
+    const { play_mode, edit_mode, view_mode, print_mode, setMode } = useWbbMode(); // play mode v2
 
     const SelfInjury : Injury = injury.SelfDynamicProperty.OptionChoice as Injury;
     const [showDetailsModal, setShowDetailsModal] = useState(false);
 
     return (
-        <div className={`WbbEditViewInjury ${playMode ? 'play-mode' : ''}`}
-             onClick={!playMode ? () => setShowDetailsModal(true) : undefined}
+        <div className={`WbbEditViewInjury ${play_mode ? 'play-mode' : ''}`}
+             onClick={!play_mode ? () => setShowDetailsModal(true) : undefined}
         >
             <div className="injury-title">
                 <strong>{injury.Name}</strong>
             </div>
 
-            {!playMode &&
+            {!play_mode &&
                 <div className="injury-source">
                     {"Elite Injuries Chart #" + SelfInjury.TableVal}
                 </div>
@@ -47,7 +47,7 @@ const WbbEditViewInjury: React.FC<{ injury: WarbandProperty, fighter : RealWarba
                 </span>
             }
 
-            {!playMode &&
+            {!play_mode &&
                 <WbbContextualPopover
                     id={`injury-${injury.ID}`}
                     type="injury"

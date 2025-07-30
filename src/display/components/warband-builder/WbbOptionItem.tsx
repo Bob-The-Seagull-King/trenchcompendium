@@ -2,8 +2,6 @@ import React, {useEffect, useState} from 'react';
 import { Collapse } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faChevronDown, faChevronUp, faTriangleExclamation} from '@fortawesome/free-solid-svg-icons';
-import {usePlayMode} from "../../../context/PlayModeContext";
-import {usePrintMode} from "../../../context/PrintModeContext";
 import { ModelUpgradeRelationship } from '../../../classes/relationship/model/ModelUpgradeRelationship';
 import { getCostType } from '../../../utility/functions';
 import { returnDescription } from '../../../utility/util';
@@ -14,6 +12,7 @@ import { Upgrade } from '../../../classes/feature/ability/Upgrade';
 import { WarbandProperty } from '../../../classes/saveitems/Warband/WarbandProperty';
 import WbbOptionSelect from './modals/warband/WbbOptionSelect';
 import OptionSetStaticDisplay from '../subcomponents/description/OptionSetStaticDisplay';
+import {useWbbMode} from "../../../context/WbbModeContext";
 
 
 interface WbbOptionItemProps {
@@ -62,17 +61,17 @@ const WbbOptionItem: React.FC<WbbOptionItemProps> = ({ option, owner, category }
         }
     };
 
-    const { playMode } = usePlayMode();
-    const { printMode } = usePrintMode();
+    const { play_mode, edit_mode, view_mode, print_mode, mode, setMode } = useWbbMode(); // play mode v2
 
-    // Update `open` when playMode changes
+
+    // Update `open` when Mode changes
     useEffect(() => {
-        if (playMode || printMode) {
+        if (play_mode || print_mode) {
             setOpen(true);
         } else {
             setOpen(false);
         }
-    }, [playMode, printMode]);
+    }, [mode]);
 
     useEffect(() => {
         async function CheckAllowed() {
@@ -91,7 +90,7 @@ const WbbOptionItem: React.FC<WbbOptionItemProps> = ({ option, owner, category }
     return (
         <div className="WbbOptionItem" key={updateKey.toString() + keyvar.toString()}>
             {/* Edit View with options */}
-            {(!playMode && !printMode) &&
+            {(view_mode || edit_mode) &&
                 <div className="option-title"
                 
                     key={keyvar.toString() + updateKey.toString()}
@@ -151,7 +150,7 @@ const WbbOptionItem: React.FC<WbbOptionItemProps> = ({ option, owner, category }
             }
 
             {/* Play mode view without options*/}
-            {(playMode || printMode) &&
+            {(play_mode || print_mode) &&
                 <div className="option-title"
                      onClick={() => {
                          setOpen(!open);

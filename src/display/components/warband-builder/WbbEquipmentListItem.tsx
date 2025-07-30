@@ -11,8 +11,6 @@ import {
     faXmark
 } from "@fortawesome/free-solid-svg-icons";
 import WbbContextualPopover from "./WbbContextualPopover";
-import {usePlayMode} from "../../../context/PlayModeContext";
-import {usePrintMode} from "../../../context/PrintModeContext";
 import { RealWarbandPurchaseEquipment, RealWarbandPurchaseModel, WarbandPurchase } from '../../../classes/saveitems/Warband/Purchases/WarbandPurchase';
 import { WarbandEquipment } from '../../../classes/saveitems/Warband/Purchases/WarbandEquipment';
 import { Equipment } from '../../../classes/feature/equipment/Equipment';
@@ -29,6 +27,7 @@ import RulesEquipmentMain from "../rules-content/RulesEquipmentMain";
 import RulesOverlay from "../rules-content/RulesOverlay";
 import WbbEquipmentStats from './modals/warband/WbbEquipmentStats';
 import WbbEquipmentMain from './modals/warband/WbbEquipmentMain';
+import {useWbbMode} from "../../../context/WbbModeContext";
 
 interface EquipmentItemProps {
     item: WarbandPurchase
@@ -38,8 +37,7 @@ interface EquipmentItemProps {
 const WbbEquipmentListItem: React.FC<EquipmentItemProps> = ({ item, fighter }) => {
 
     const { warband, updateKey } = useWarband();
-    const { playMode } = usePlayMode();
-    const { printMode } = usePrintMode();
+    const { play_mode, edit_mode, view_mode, print_mode, mode, setMode } = useWbbMode(); // play mode v2
 
     const [showDetailsModal, setShowDetailsModal] = useState(false);
 
@@ -82,9 +80,9 @@ const WbbEquipmentListItem: React.FC<EquipmentItemProps> = ({ item, fighter }) =
 
 
     return (
-        <div className={`WbbEquipmentListItem ${playMode ? 'play-mode' : ''} ${printMode ? 'print-mode' : ''} `}
+        <div className={`WbbEquipmentListItem ${play_mode ? 'play-mode' : ''} ${print_mode ? 'print-mode' : ''} `}
              key={keyvar}
-            onClick={!playMode ? () => setShowDetailsModal(true) : undefined}
+            onClick={!play_mode ? () => setShowDetailsModal(true) : undefined}
         >
 
             <Modal show={showDetailsModal} onHide={() => setShowDetailsModal(false)} className="" centered>
@@ -122,7 +120,7 @@ const WbbEquipmentListItem: React.FC<EquipmentItemProps> = ({ item, fighter }) =
                 {(item.CustomInterface != undefined) ? item.CustomInterface.tags["is_custom"]? " (Manually Added)" : "" : ""}
             </div>
 
-            {(!playMode || printMode) &&
+            {(!play_mode || print_mode) &&
                 <div className="equipment-cost">
                     {item.ItemCost > 0 &&
                         <>
@@ -132,13 +130,13 @@ const WbbEquipmentListItem: React.FC<EquipmentItemProps> = ({ item, fighter }) =
                 </div>
             }
 
-            {(!playMode || printMode) &&
+            {(!play_mode || print_mode) &&
                 <div className={'equipment-modifiers'}>
                     {ItemValue.GetModifiers()}
                 </div>
             }
 
-            {((canRemove == true) && (!playMode && !printMode)) &&
+            {((canRemove == true) && (edit_mode)) &&
                 <WbbContextualPopover
                     id={`equipment-${GetIDRel()}`}
                     type={(fighter == null || fighter == undefined)? "equipment" : "equipment_model"}
@@ -151,7 +149,7 @@ const WbbEquipmentListItem: React.FC<EquipmentItemProps> = ({ item, fighter }) =
                 />
             }
 
-            {(playMode && !printMode)  &&
+            {play_mode  &&
                 <div className={'equipment-details'}>
                     <table>
                         { range != "" &&

@@ -15,6 +15,7 @@ import { WarbandProperty } from '../../../classes/saveitems/Warband/WarbandPrope
 import { returnDescription } from '../../../utility/util';
 import WbbOptionSelect from './modals/warband/WbbOptionSelect';
 import { usePlayMode } from '../../../context/PlayModeContext';
+import {useWbbMode} from "../../../context/WbbModeContext";
 
 interface WbbEditViewModifierProps {
     warbprop: WarbandProperty;
@@ -26,7 +27,7 @@ const WbbEditViewExtraModifier: React.FC<WbbEditViewModifierProps> = ({ warbprop
 
     const { warband, updateKey } = useWarband();
     if (warband == null) return (<div>Loading...</div>);
-    const { playMode } = usePlayMode();
+    const { play_mode, edit_mode, view_mode, print_mode, setMode } = useWbbMode(); // play mode v2
     const [open, setOpen] = useState(false);
 
     return (
@@ -41,11 +42,12 @@ const WbbEditViewExtraModifier: React.FC<WbbEditViewModifierProps> = ({ warbprop
 
 
                 {/* Show collapse and popover icon states*/}
-                {(!playMode && warband?.warband_data.HasModifier(warbprop)) ? (
+                {(edit_mode && warband?.warband_data.HasModifier(warbprop)) ? (
                     <>
                         <span className={'collapse-chevron-wrap mx-4'}>
                             <FontAwesomeIcon icon={open ? faChevronUp : faChevronDown} className=""/>
                         </span>
+
                         <WbbContextualPopover
                             id={`WbbEditViewExtraModifier-${warbprop.ID}`}
                             type="modifier"

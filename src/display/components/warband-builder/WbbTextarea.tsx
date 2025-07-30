@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faFloppyDisk, faPen} from '@fortawesome/free-solid-svg-icons';
-import {usePlayMode} from "../../../context/PlayModeContext";
+import {useWbbMode} from "../../../context/WbbModeContext";
 
 interface WbbTextareaProps {
     initialText: string;
@@ -11,8 +11,7 @@ interface WbbTextareaProps {
 
 const WbbTextarea: React.FC<WbbTextareaProps> = ({ initialText, title, onSave }) => {
 
-    const { playMode, togglePlayMode } = usePlayMode();
-
+    const { play_mode, edit_mode, view_mode, print_mode, mode, setMode } = useWbbMode(); // play mode v2
 
     const [text, setText] = useState<string>(initialText);
 
@@ -29,7 +28,7 @@ const WbbTextarea: React.FC<WbbTextareaProps> = ({ initialText, title, onSave })
             <div className={'WbbTextarea-title'}>
                 {title}
 
-                { !playMode &&
+                { edit_mode &&
                     <>
                         {(!showTextarea) ? (
                             <div className={'btn btn-primary btn-sm'}

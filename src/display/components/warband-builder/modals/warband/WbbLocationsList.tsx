@@ -13,11 +13,11 @@ import WbbEditViewExploration from '../../WbbEditViewExploration';
 import { ExplorationLocation } from '../../../../../classes/feature/exploration/ExplorationLocation';
 import { ToolsController } from '../../../../../classes/_high_level_controllers/ToolsController';
 import { usePlayMode } from '../../../../../context/PlayModeContext';
+import {useWbbMode} from "../../../../../context/WbbModeContext";
 
 const WbbLocationsList = () => {
     const { warband, updateKey, reloadDisplay } = useWarband();
-    const { playMode } = usePlayMode();
-
+    const { play_mode, edit_mode, view_mode, print_mode, setMode } = useWbbMode(); // play mode v2
     const [keyvar, setkeyvar] = useState(0);
     const [locations, setlocations] = useState<WarbandProperty[]>([]);
 
@@ -56,7 +56,7 @@ const WbbLocationsList = () => {
                 />
             )}
 
-            {!playMode &&
+            {edit_mode &&
             <div className={'btn btn-add-element btn-block'}
                     onClick={() => setShowAddExplorationModal(true)}>
                 <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
@@ -64,7 +64,7 @@ const WbbLocationsList = () => {
             </div>
             }
             
-            {!playMode &&
+            {edit_mode &&
             <WbbModalAddExplorationLocation
                 show={showAddExplorationModal}
                 onClose={() => setShowAddExplorationModal(false)}

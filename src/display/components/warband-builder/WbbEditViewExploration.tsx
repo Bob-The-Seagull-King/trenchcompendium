@@ -14,7 +14,7 @@ import WbbContextualPopover from "./WbbContextualPopover";
 import { WarbandProperty } from '../../../classes/saveitems/Warband/WarbandProperty';
 import { returnDescription } from '../../../utility/util';
 import WbbOptionSelect from './modals/warband/WbbOptionSelect';
-import {usePlayMode} from "../../../context/PlayModeContext";
+import {useWbbMode} from "../../../context/WbbModeContext";
 
 interface WbbEditViewExplorationProps {
     location : WarbandProperty;
@@ -25,7 +25,7 @@ const WbbEditViewExploration: React.FC<WbbEditViewExplorationProps> = ({  locati
     const { warband } = useWarband();
     if (warband == null) return (<div>Loading...</div>);
     const [open, setOpen] = useState(false);
-    const { playMode } = usePlayMode();
+    const { play_mode, edit_mode, view_mode, print_mode, setMode } = useWbbMode(); // play mode v2
 
     return (
         <div className="WbbEditViewExploration">

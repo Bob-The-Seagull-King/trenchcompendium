@@ -29,7 +29,6 @@ import WbbEditFighterStatus from "./modals/fighter/WbbEditFighterStatus";
 import WbbOptionItem from "./WbbOptionItem";
 import WbbAbilityDisplay from "./WbbAbilityDisplay";
 import {OverlayTrigger, Popover} from "react-bootstrap";
-import {usePlayMode} from "../../../context/PlayModeContext";
 import SynodImage from "../../../utility/SynodImage";
 import WbbContextualPopover from "./WbbContextualPopover";
 import SynodModelImage from "../../../utility/SynodModelImage";
@@ -62,6 +61,7 @@ import {
     ModelStatistics
 } from '../../../classes/feature/model/ModelStats';
 import WbbEditFighterStatOption from './modals/fighter/WbbFighterStatOption';
+import {useWbbMode} from "../../../context/WbbModeContext";
 
 
 interface WbbFighterDetailViewProps {
@@ -89,8 +89,8 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
         keyvar: 0
         });
 
-    const { playMode } = usePlayMode();
-    
+    const { play_mode, edit_mode, view_mode, print_mode, mode, setMode } = useWbbMode(); // play mode v2
+
     useEffect(() => {
         async function SetModelOptions() {
             
@@ -125,7 +125,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
         } else {
             SetModelOptions();
         }
-    }, [updateKey, fighter, playMode])
+    }, [updateKey, fighter, mode])
 
 
     /**
@@ -206,7 +206,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
 
     return (
 
-        <div className={`WbbDetailView WbbFighterDetailView fighter-card ${playMode ? 'play-mode' : ''}`}>
+        <div className={`WbbDetailView WbbFighterDetailView fighter-card ${play_mode ? 'play-mode' : ''}`}>
             <div className={'title'}>
                 <div className={'title-back'} onClick={onClose}>
                     <FontAwesomeIcon icon={faChevronLeft} className=""/>
@@ -240,7 +240,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                     }
                 </div>
 
-                {!playMode &&
+                {edit_mode &&
                     <WbbContextualPopover
                         id={`fighter-detail-`+fighter.ID} 
                         type="fighter"
@@ -279,26 +279,24 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                         </span>
                     </div>
 
-                    {!playMode &&
-                        <div className="fighter-meta-entry-simple">
-                            <span className="fighter-meta-label">
-                                {'Base Cost: '}
-                            </span>
-                            <span className="fighter-meta-value">
-                                {warbandmember.purchase.CostType == 0 &&
-                                    <>
-                                        {warbandmember.purchase.ItemCost + " Ducats"}
-                                    </>
-                                }
-                                {warbandmember.purchase.CostType == 1 &&
-                                    <>
-                                        {warbandmember.purchase.ItemCost + " Glory Points"}
-                                    </>
-                                }
-                            </span>
-                        </div>
-                    }
-                    
+                    <div className="fighter-meta-entry-simple">
+                        <span className="fighter-meta-label">
+                            {'Base Cost: '}
+                        </span>
+                        <span className="fighter-meta-value">
+                            {warbandmember.purchase.CostType == 0 &&
+                                <>
+                                    {warbandmember.purchase.ItemCost + " Ducats"}
+                                </>
+                            }
+                            {warbandmember.purchase.CostType == 1 &&
+                                <>
+                                    {warbandmember.purchase.ItemCost + " Glory Points"}
+                                </>
+                            }
+                        </span>
+                    </div>
+
                     <div className="fighter-meta-entry-simple">
                         <span className="fighter-meta-label">
                             {'Keywords: '}
@@ -320,7 +318,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                         </span>
                     </div>
 
-                    {!playMode &&
+                    {edit_mode &&
                         <div className="fighter-meta-entry-simple">
                             <span className="fighter-meta-label">
                                 {'Base: '}
@@ -376,7 +374,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
             </div>
 
             {/* Edit Loadout */}
-            {(!playMode && complexstate.statchoices.length > 0) &&
+            {(edit_mode && complexstate.statchoices.length > 0) &&
                 <div className={'fighter-card-collapse-wrap'}>
                     <WbbFighterCollapse title="Profile Options" initiallyOpen={true} key={updateKey}>
                         <>
@@ -402,7 +400,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
             {Object.keys(complexstate.upgrades).length > 0 &&
                 <>
                     {Object.keys(complexstate.upgrades).filter((item) => (
-                        (!playMode) || (complexstate.upgrades[item].upgrades.filter((subitem : MemberUpgradePresentation) => subitem.purchase != null).length > 0)
+                        (edit_mode) || (complexstate.upgrades[item].upgrades.filter((subitem : MemberUpgradePresentation) => subitem.purchase != null).length > 0)
                     )).map((item, index) => (
                         <div className={'fighter-card-collapse-wrap'} key={index}>
                             <WbbFighterCollapse
@@ -417,7 +415,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                                     }
                                     
                                     <div key={complexstate.keyvar}>
-                                        {complexstate.upgrades[item].upgrades.filter((item) => ((!playMode) || item.purchase != null)).map((subitem, index) => (
+                                        {complexstate.upgrades[item].upgrades.filter((item) => ((edit_mode) || item.purchase != null)).map((subitem, index) => (
                                             <WbbOptionItem key={index.toString() + updateKey.toString()} option={subitem} owner={fighter} category={item}/>
                                         ))}
                                     </div>
@@ -427,8 +425,9 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                     ))}
                 </>
             }
+
             {/* Edit Loadout */}
-            {(!playMode) &&
+            {(edit_mode) &&
                 <div className={'fighter-card-collapse-wrap'}>
                     <WbbFighterCollapse title="Equipment" initiallyOpen={true} key={updateKey}>
                         <p> {/* Equipment Rules */}
@@ -607,7 +606,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
 
 
             {/* Edit Campaign Play */}
-            {(!playMode) &&
+            {edit_mode &&
                 <div className={'fighter-card-collapse-wrap'}>
                     <WbbFighterCollapse title="Campaign Play">
 
@@ -804,7 +803,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
 
 
             {/* Abilities */}
-            {(!playMode && complexstate.abilities.length > 0) &&
+            {(edit_mode && complexstate.abilities.length > 0) &&
                 <div className={'fighter-card-collapse-wrap'}>
                     <WbbFighterCollapse title="Abilities">
                         <div key={complexstate.keyvar}>
@@ -818,7 +817,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
 
 
             {/* Play Mode Content */}
-            {(playMode) &&
+            {(play_mode) &&
                 <div className={'fighter-card-play-mode-info'}  key={complexstate.keyvar}>
 
                     <div className={'play-mode-equipment-wrap'}>

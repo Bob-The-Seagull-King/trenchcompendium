@@ -16,11 +16,11 @@ import WbbEditViewModifier from './WbbEditViewModifier';
 import { ToolsController } from '../../../classes/_high_level_controllers/ToolsController';
 import WbbEditViewExtraModifier from './WbbEditViewExtraModifier';
 import { Form } from 'react-bootstrap';
-import {usePlayMode} from "../../../context/PlayModeContext";
 import WbbModalAddFighterCustom from './modals/WbbModalAddFighterCustom';
 import { Model } from '../../../classes/feature/model/Model';
 import WbbEquipmentAddCustomStash from './modals/WbbEquipmentAddCustomStash';
 import { Equipment } from '../../../classes/feature/equipment/Equipment';
+import {useWbbMode} from "../../../context/WbbModeContext";
 
 interface WbbWarbandDetailViewProps {
     onClose: () => void;
@@ -32,7 +32,7 @@ const WbbWarbandDetailView: React.FC<WbbWarbandDetailViewProps> = ({  onClose })
     if (warband == null) return (<div>Loading...</div>);
 
 
-    const { playMode } = usePlayMode();
+    const { play_mode, edit_mode, view_mode, print_mode, setMode } = useWbbMode(); // play mode v2
 
     // Does this warband have advanced options enabled?
     // @TODO: Lane: Save this to the warband and use it to toggle the display of advanced options
@@ -242,7 +242,7 @@ const WbbWarbandDetailView: React.FC<WbbWarbandDetailViewProps> = ({  onClose })
                         />
                     </WbbDetailViewCollapse>
 
-                    { !playMode &&
+                    { edit_mode &&
                         <WbbDetailViewCollapse title="Advanced Options" initiallyOpen={false}>
                             <div className="form-check form-switch">
                                 <input
@@ -277,8 +277,6 @@ const WbbWarbandDetailView: React.FC<WbbWarbandDetailViewProps> = ({  onClose })
                                     </div>
                                 </>
                             }
-
-
                         </WbbDetailViewCollapse>
                     }
                 </div>
