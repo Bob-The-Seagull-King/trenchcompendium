@@ -20,7 +20,7 @@ interface IVariantFaction extends IStaticOptionContextObject {
     base_id: string
 }
 
-interface FactionVar {
+export interface FactionVar {
     var_name: string,
     faction: Faction
 }

@@ -200,6 +200,11 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         returnDisplay(item: any) {
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
+                    
+                    <PageMetaInformation
+                                title={item.GetTrueName()}
+                                description={item.GetDescription()}
+                            />
                     {(item instanceof BookRule) &&
                         <>
                             <h1 className="">
@@ -360,6 +365,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
             return (
                 
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
+                    
                     {(item instanceof Equipment) &&
                         <RulesEquipmentEntry
                             equipment={item}
