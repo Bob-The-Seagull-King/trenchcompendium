@@ -54,9 +54,11 @@ class StaticOptionContextObject extends StaticContextObject {
     public BuildOptions(data : IStaticOption[]) {
         const OptionSet : StaticOption[] = []
 
-        for (let i = 0; i < data.length; i++) {
-            const newOption : StaticOption = StaticOptionFactory.CreateStaticOption(data[i], this)
-            OptionSet.push(newOption);
+        if (data != undefined) {
+            for (let i = 0; i < data.length; i++) {
+                const newOption : StaticOption = StaticOptionFactory.CreateStaticOption(data[i], this)
+                OptionSet.push(newOption);
+            }
         }
 
         return OptionSet;

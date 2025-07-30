@@ -57,7 +57,15 @@ class ExplorationTable extends StaticContextObject {
         LocationList.sort(byPropertiesOf<IExplorationLocation>(["location_value"]))
 
         for (let i = 0; i < LocationList.length; i++) {
-            this.ExplorationLocations.push(await ExplorationFactory.CreateExplorationLocation(LocationList[i], this, skipcheck))
+            try {
+                const Location = await ExplorationFactory.CreateExplorationLocation(LocationList[i], this, skipcheck)
+                this.ExplorationLocations.push(Location)
+            } catch(e) {
+                console.log(LocationList[i])
+                console.log(LocationList[i].options)
+                console.log(LocationList[i].options.length)
+                console.log(e)
+            }
         }
     }
 
