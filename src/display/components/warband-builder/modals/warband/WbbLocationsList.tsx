@@ -45,10 +45,12 @@ const WbbLocationsList = () => {
     return (
         <div key={keyvar}>        
             {/* Warband Exploration Locations */}
-            <h3 className={'category-headline'}>Exploration Locations</h3>
+            {(locations.length > 0 || edit_mode) &&
+                <h3 className={'category-headline'}>Exploration Locations</h3>
+            }
 
 
-            {locations.map((item, index) => 
+            {locations.map((item, index) =>
                 <WbbEditViewExploration
                     key={index}
                     location={item}
@@ -64,11 +66,11 @@ const WbbLocationsList = () => {
             }
             
             {edit_mode &&
-            <WbbModalAddExplorationLocation
-                show={showAddExplorationModal}
-                onClose={() => setShowAddExplorationModal(false)}
-                onSubmit={handleAddExplorationLocation}
-            />
+                <WbbModalAddExplorationLocation
+                    show={showAddExplorationModal}
+                    onClose={() => setShowAddExplorationModal(false)}
+                    onSubmit={handleAddExplorationLocation}
+                />
             }
         </div>
     );

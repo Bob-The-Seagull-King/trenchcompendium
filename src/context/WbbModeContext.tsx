@@ -21,7 +21,7 @@ export const WbbModeProvider: React.FC<{
     const [mode, _setMode] = useState<ModeType>(isOwner ? 'edit' : 'view');
 
     const setMode = (newMode: ModeType) => {
-        if (!isOwner && (newMode === 'edit' || newMode === 'play')) {
+        if (!isOwner && (newMode === 'edit')) {
             _setMode('view');
         } else {
             _setMode(newMode);

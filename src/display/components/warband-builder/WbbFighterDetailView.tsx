@@ -427,7 +427,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
             }
 
             {/* Edit Loadout */}
-            {(edit_mode) &&
+            {(!play_mode) &&
                 <div className={'fighter-card-collapse-wrap'}>
                     <WbbFighterCollapse title="Equipment" initiallyOpen={true} key={updateKey}>
                         <p> {/* Equipment Rules */}
@@ -476,11 +476,13 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                             )}
                         </div>
 
-                        <div className={'btn btn-add-element btn-block'}
-                             onClick={() => setShowAddRangedWeapon(true)}>
-                            <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
-                            {'Add Ranged Weapon'}
-                        </div>
+                        {edit_mode &&
+                            <div className={'btn btn-add-element btn-block'}
+                                 onClick={() => setShowAddRangedWeapon(true)}>
+                                <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
+                                {'Add Ranged Weapon'}
+                            </div>
+                        }
 
                         {/* Melee Weapons */}
                         <h3>{'Melee Weapons'}</h3>
@@ -505,11 +507,13 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                             )}
                         </div>
 
-                        <div className={'btn btn-add-element btn-block'}
-                             onClick={() => setShowMeleeWeaponModal(true)}>
-                            <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
-                            {'Add Melee Weapon'}
-                        </div>
+                        {edit_mode &&
+                            <div className={'btn btn-add-element btn-block'}
+                                 onClick={() => setShowMeleeWeaponModal(true)}>
+                                <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
+                                {'Add Melee Weapon'}
+                            </div>
+                        }
                         
 
                         {/* Armour */}
@@ -536,11 +540,13 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                             )}
                         </div>
 
-                        <div className={'btn btn-add-element btn-block'}
-                             onClick={() => setShowAddArmourModal(true)}>
-                            <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
-                            {'Add Armour'}
-                        </div>
+                        {edit_mode &&
+                            <div className={'btn btn-add-element btn-block'}
+                                 onClick={() => setShowAddArmourModal(true)}>
+                                <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
+                                {'Add Armour'}
+                            </div>
+                        }
 
                         {/* Equipment */}
                         <h3>{'Equipment'}</h3>
@@ -565,11 +571,13 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                             )}
                         </div>
 
-                        <div className={'btn btn-add-element btn-block'}
-                             onClick={() => setShowAddEquipmentModal(true)}>
-                            <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
-                            {'Add Equipment'}
-                        </div>
+                        {edit_mode &&
+                            <div className={'btn btn-add-element btn-block'}
+                                 onClick={() => setShowAddEquipmentModal(true)}>
+                                <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
+                                {'Add Equipment'}
+                            </div>
+                        }
 
                         {/* Equipment Modals */}
                         <WbbModalAddEquipment
@@ -606,7 +614,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
 
 
             {/* Edit Campaign Play */}
-            {edit_mode &&
+            { !play_mode &&
                 <div className={'fighter-card-collapse-wrap'}>
                     <WbbFighterCollapse title="Campaign Play">
 
@@ -615,13 +623,17 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                             <div className={'experience'}>
                                 <h3>{'Experience'}</h3>
 
-                                <div className={'btn btn-primary btn-sm edit-xp-btn'}
-                                     onClick={() => setShowXPModal(true)}>
-                                    <FontAwesomeIcon icon={faPen} className="icon-inline-left-l"/>
-                                    {'Edit'}
-                                </div>
+                                {edit_mode &&
+                                    <div className={'btn btn-primary btn-sm edit-xp-btn'}
+                                         onClick={() => setShowXPModal(true)}>
+                                        <FontAwesomeIcon icon={faPen} className="icon-inline-left-l"/>
+                                        {'Edit'}
+                                    </div>
+                                }
 
-                                <div className={'xp-boxes'} onClick={() => setShowXPModal(true)}>
+                                <div className={'xp-boxes'}
+                                     onClick={edit_mode ? () => setShowXPModal(true) : undefined}
+                                >
                                     {Array.from({length: complexstate.xpLimit}, (_, i) => {
                                         const level = i + 1;
                                         const isBold = fighter.boldXpIndices.includes(level);
@@ -646,7 +658,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
 
                                 <h3>{'Battle Scars'}</h3>
 
-                                {fighter.IsElite() &&
+                                {(fighter.IsElite() && edit_mode) &&
                                     <div className={'btn btn-primary btn-sm edit-battle-scar-btn'}
                                         onClick={() => setShowEditScars(true)}>
                                         <FontAwesomeIcon icon={faPen} className="icon-inline-left-l"/>
@@ -654,7 +666,9 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                                     </div>
                                 }
 
-                                <div className="battle-scar-boxes" onClick={() => setShowEditScars(true)}>
+                                <div className="battle-scar-boxes"
+                                     onClick={edit_mode ? () => setShowEditScars(true) : undefined}
+                                >
                                     {Array.from({length: complexstate.scarLimit}, (_, i) => {
                                         const index = i + 1;
                                         const isChecked = index <= fighter.GetBattleScars();
@@ -679,11 +693,25 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                         {(fighter.IsElite() || fighter.Skills.length > 0) &&
                             <>
                                 <h3>{'Advancements'}</h3>
-                                {fighter.GetSkillsList().map((advancement) => (
-                                    <WbbEditViewAdvancement advancement={advancement} key={advancement.ID + fighter.ID}
-                                            fighter={warbandmember}/>
-                                ))}
-                                {fighter.IsElite() &&
+                                { fighter.GetSkillsList().length > 0 ? (
+                                    <>
+                                        {fighter.GetSkillsList().map((advancement) => (
+                                            <WbbEditViewAdvancement advancement={advancement} key={advancement.ID + fighter.ID}
+                                                                    fighter={warbandmember}/>
+                                        ))}
+                                    </>
+                                ):(
+                                    <>
+                                        {view_mode &&
+                                            <>
+                                                {'No advancements'}
+                                            </>
+                                        }
+                                    </>
+                                )}
+
+
+                                {(fighter.IsElite() && edit_mode) &&
                                     <div className={'btn btn-add-element btn-block'}
                                         onClick={() => setShowAdvancementModal(true)}>
                                         <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
@@ -695,11 +723,25 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                         {(fighter.IsElite() || fighter.Injuries.length > 0) &&
                             <>
                                 <h3>{'Injuries'}</h3>
-                                {fighter.GetInjuriesList().map((injury) => (
-                                    <WbbEditViewInjury injury={injury} key={injury.ID  + fighter.ID}
-                                            fighter={warbandmember}/>
-                                ))}
-                                {fighter.IsElite() &&
+
+                                {fighter.GetInjuriesList().length > 0 ? (
+                                    <>
+                                        {fighter.GetInjuriesList().map((injury) => (
+                                            <WbbEditViewInjury injury={injury} key={injury.ID  + fighter.ID}
+                                                               fighter={warbandmember}/>
+                                        ))}
+                                    </>
+                                ):(
+                                    <>
+                                        {view_mode &&
+                                            <>
+                                                {'No Injuries'}
+                                            </>
+                                        }
+                                    </>
+                                )}
+
+                                {(fighter.IsElite() && edit_mode) &&
                                     <div className={'btn btn-add-element btn-block'}
                                         onClick={() => setShowInjuryModal(true)}>
                                         <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
@@ -709,24 +751,19 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                             </>
                         }
                         
-
-
-                        {/*
-                        - Active
-                        - Captured
-                        - Dead
-                        */}
+                        {/* Fighert Status */}
                         <h3>{'Fighter Status'}</h3>
                         <div className={'fighter-status'}>
                             <div className={'fighter-status-string'}>
                                 {makestringpresentable(fighter.State)}
                             </div>
 
-                            <div className={'btn btn-primary'} onClick={() => setShowStatusModal(true)}>
-                                <FontAwesomeIcon icon={faPen} className={'icon-inline-left-l'}/>
-
-                                {'Change'}
-                            </div>
+                            {edit_mode &&
+                                <div className={'btn btn-primary'} onClick={() => setShowStatusModal(true)}>
+                                    <FontAwesomeIcon icon={faPen} className={'icon-inline-left-l'}/>
+                                    {'Change'}
+                                </div>
+                            }
                         </div>
 
                         {!fighter.IsMercenary() &&
@@ -743,7 +780,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                                             </small>
                                         }
                                     </div>
-                                    {complexstate.canchange &&
+                                    {(complexstate.canchange && edit_mode ) &&
                                         <div className={'btn btn-primary'} onClick={() => handleRankUpdate()}>
                                             <FontAwesomeIcon icon={fighter.IsElite()? faChevronDown : faChevronUp} className={'icon-inline-left-l'}/>
                                             {fighter.IsElite()? "Demote" : "Promote"}
@@ -803,7 +840,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
 
 
             {/* Abilities */}
-            {(edit_mode && complexstate.abilities.length > 0) &&
+            {(!play_mode && complexstate.abilities.length > 0) &&
                 <div className={'fighter-card-collapse-wrap'}>
                     <WbbFighterCollapse title="Abilities">
                         <div key={complexstate.keyvar}>

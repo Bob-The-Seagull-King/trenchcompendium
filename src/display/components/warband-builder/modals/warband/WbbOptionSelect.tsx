@@ -10,6 +10,7 @@ import { useWarband } from '../../../../../context/WarbandContext';
 import { ToolsController } from '../../../../../classes/_high_level_controllers/ToolsController';
 import { WarbandProperty } from '../../../../../classes/saveitems/Warband/WarbandProperty';
 import { EventRunner } from '../../../../../classes/contextevent/contexteventhandler';
+import {useWbbMode} from "../../../../../context/WbbModeContext";
 
 interface WbbEditSelectionProps {
     choice : SelectedOption;
@@ -24,6 +25,7 @@ const WbbOptionSelect: React.FC<WbbEditSelectionProps> = ({choice,  property, ov
     const [displayState, setDisplayState] = useState( <></> );
     const [displayOptions, setDisplayOptions] = useState(false);
     const [_keyvar, setkeyvar] = useState(0);
+    const { play_mode, edit_mode, view_mode, print_mode, setMode } = useWbbMode(); // play mode v2
 
 
     const handleSubmit = (foundOption : IChoice | null) => {
@@ -80,13 +82,16 @@ const WbbOptionSelect: React.FC<WbbEditSelectionProps> = ({choice,  property, ov
                 overrideplay={overrideplay || choice.Option.AutoSelect || (!choice.CanChange() && choice.SelectedChoice != null)}
             />
 
-            <WbbEditSelectionModal
-                show={showModal}
-                onClose={() => setshowModal(false)}
-                currentChoice={choice.GetSelected()}
-                onSubmit={handleSubmit}
-                choiceparent={choice}
-            />
+            {edit_mode &&
+                <WbbEditSelectionModal
+                    show={showModal}
+                    onClose={() => setshowModal(false)}
+                    currentChoice={choice.GetSelected()}
+                    onSubmit={handleSubmit}
+                    choiceparent={choice}
+                />
+            }
+
 
             <div key={_keyvar} className="SingleOptionSetDisplay-Details">
                 {displayState}
