@@ -18,9 +18,11 @@ const WbbOptionBox: React.FC<WbbOptionBoxProps> = ({ title, value, onClick, over
         <div className="WbbOptionBox" onClick={(e) => {
             e.stopPropagation();
         }}>
-            <div className="WbbOptionBox-title">
-                {title}
-            </div>
+            {title &&
+                <div className="WbbOptionBox-title">
+                    {title}
+                </div>
+            }
 
             <div className="WbbOptionBox-body">
                 <div className="WbbOptionBox-value">
