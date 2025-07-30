@@ -84,11 +84,6 @@ const WbbModalAddExplorationLocation: React.FC<WbbModalAddExplorationLocationPro
             setSelectedLocation(null);
         } else {
             setSelectedLocation(loc);
-            for (let i = 0; i < loc.options.length; i++) {
-                if (loc.options[i].selection_valid.length == 1) {
-                    UpdateSelectedOptionIDs({option_refID: loc.options[i].baseopt.RefID, selection_ID: loc.options[i].selection_valid[0].id})
-                }
-            }
         }
     }
 
@@ -122,8 +117,8 @@ const WbbModalAddExplorationLocation: React.FC<WbbModalAddExplorationLocationPro
                                         key={loc.location.ID}
                                         className={`select-item ${(selectedLocation? selectedLocation.location.ID : "") === loc.location.ID ? 'selected' : ''}`}
                                         onClick={() => {
-                                            setSelectedOptionIds([]); // reset when switching location
                                             handleLocationClick(loc);
+                                            setSelectedOptionIds([]); // reset when switching location
                                         }}
                                     >
                                         <div className="item-name">
