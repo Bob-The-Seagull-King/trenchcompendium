@@ -12,7 +12,6 @@ import WbbModalAddExplorationLocation from '../WbbModalAddExplorationLocation';
 import WbbEditViewExploration from '../../WbbEditViewExploration';
 import { ExplorationLocation } from '../../../../../classes/feature/exploration/ExplorationLocation';
 import { ToolsController } from '../../../../../classes/_high_level_controllers/ToolsController';
-import { usePlayMode } from '../../../../../context/PlayModeContext';
 import {useWbbMode} from "../../../../../context/WbbModeContext";
 
 const WbbLocationsList = () => {

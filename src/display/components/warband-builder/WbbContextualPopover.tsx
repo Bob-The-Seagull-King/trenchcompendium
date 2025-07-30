@@ -14,8 +14,6 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { usePopover } from '../../../context/PopoverContext';
 import { useWarband } from '../../../context/WarbandContext';
-import {usePlayMode} from "../../../context/PlayModeContext";
-import {usePrintMode} from "../../../context/PrintModeContext";
 import {useGlobalState} from "../../../utility/globalstate";
 import { ToolsController } from '../../../classes/_high_level_controllers/ToolsController';
 import { RealWarbandPurchaseEquipment, RealWarbandPurchaseModel, WarbandPurchase } from '../../../classes/saveitems/Warband/Purchases/WarbandPurchase';

@@ -17,7 +17,6 @@ import WbbConsumableSelect from './modals/warband/WbbConsumableSelect';
 import WbbEditStashAmountModal from './modals/warband/WbbEditStashAmountModal';
 import WbbEquipmentAddCustomStash from './modals/WbbEquipmentAddCustomStash';
 import { containsTag } from '../../../utility/functions';
-import { usePlayMode } from '../../../context/PlayModeContext';
 import {useWbbMode} from "../../../context/WbbModeContext";
 
 interface WbbStashDetailViewProps {

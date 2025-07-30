@@ -14,7 +14,6 @@ import WbbContextualPopover from "./WbbContextualPopover";
 import { WarbandProperty } from '../../../classes/saveitems/Warband/WarbandProperty';
 import { returnDescription } from '../../../utility/util';
 import WbbOptionSelect from './modals/warband/WbbOptionSelect';
-import { usePlayMode } from '../../../context/PlayModeContext';
 import {useWbbMode} from "../../../context/WbbModeContext";
 
 interface WbbEditViewModifierProps {
