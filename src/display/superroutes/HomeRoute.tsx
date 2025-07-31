@@ -13,6 +13,7 @@ import logo from '../../resources/images/compendium.png'
 import MenuComponent from '../components/subcomponents/MenuComponent';
 import MenuOutLink from '../components/subcomponents/MenuOutLink';
 import PageMetaInformation from "../components/generics/PageMetaInformation";
+import RulesBannerImage from "../components/rules-content/RulesBannerImage";
 
 
 
@@ -63,23 +64,44 @@ const HomeRoute: React.FC = () => {
 
                         <p className={'intro-text'}>
                             {'Build your warband, access the full rules, and stay up to date — all in one place.\n' +
-                                'Trench Companion is a free, community-made tool designed to support players on and off the battlefield.'}
+                                'Trench Companion is a free, community-made tool designed to support players on and off the battlefield.\n' +
+                                'It is a passion project created by a small team of developers with the goal to create a tool that keeps the Game alive and connected. \n' +
+                                'Want to support our project and help us improve Trench Companion? Consider a small monthly contribution — it helps us keep going.'
+                            }
                         </p>
 
-                        <div className={'spacer-20'}></div>
+                        <div className={'row '}>
+                            <div className={'col-12 col-md-6'}>
+                                <RulesBannerImage
+                                    imageId={2848}
+                                    linkUrl={'/blog'}
+                                    linkText={'Blog'}
+                                />
+                            </div>
+                            <div className={'col-12 col-md-6'}>
+                                <RulesBannerImage
+                                    imageId={2900}
+                                    linkUrl={'/page/premium-membership'}
+                                    linkText={'How to support'}
+                                />
+                            </div>
+                            <div className={'col-12 col-md-6'}>
+                                <RulesBannerImage
+                                    imageId={2899}
+                                    linkUrl={'/about'}
+                                    linkText={'About'}
+                                />
+                            </div>
+                        </div>
+                    </div>
 
-                        <hr/>
+                    <div className={'spacer-20'}></div>
 
-                        <div className={'spacer-20'}></div>
-
-                        <h2>{'What is Trench Companion?'}</h2>
+                    <div className={'narrow-content'}>
+                        <h2>{'Trench Companion Alpha is live!'}</h2>
 
                         <p>
-                            {'Trench Companion is a community-driven, free-to-use web app created by and for fans of Trench Crusade.\n' +
-                                'Version 1 will launch in August 2025, starting with the Warband Builder and Compendium.\n' +
-                                'Campaign mode, Scenario Tracker, and more features are already in development.\n' +
-                                '\n' +
-                                'Want to support the project? Consider a small monthly contribution — it helps us keep going.'}
+                            {'We’re proud to announce the alpha release of the Trench Companion app — a major milestone in our journey to support Trench Crusade players with powerful tools for the rules, warband management and more. This early version is just the beginning, and we’re excited to share it with you. For a full breakdown of features, known issues, and what’s next, check out our detailed blog post.'}
                         </p>
                     </div>
 

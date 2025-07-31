@@ -4,80 +4,110 @@
 
 
 import React from 'react'
-import imageroadmap from '../../resources/images/Roadmap.png'
+import RulesBannerImage from "../components/rules-content/RulesBannerImage";
 
 const StaticAbout: React.FC = () => {
     return (
-        <div className="StaticAbout page-static">
-            <div className={'container'}>
-                <h1>About the Trench Companion</h1>
+        <div className="StaticAbout page-static ">
+            <div className={'narrow-content'}>
+                <div className={'container'}>
 
-                <div className={'rules-scenario-summary rules-card'}>
-                    <div className={'rules-scenario-summary-title rules-card-title'}>
+                    <h1>About the Trench Companion</h1>
+
+                    <h2>
                         What Is This?
-                    </div>
-                                
-                    <div className={'rules-card-content'}>
-                        <p>
-                            {"The Trench-Companion is a 3rd-Party tool for players and lovers of Trench Crusade. This site aims to be the one-stop source for game information and the easiest place to create and maintain your own warbands, campaigns, and a place to access all manner of Trench Crusade content."}
-                        </p>
-                        <hr/>
-                        <p>
-                            {"Development on the Trench-Companion is continual and we plan to release updates and expand on the functionality present well into the future. Not only that, but we aim to maintain the site as the most up-to-date resource for Trench-Crusade available."}
-                        </p>
-                    </div>
-                </div>
+                    </h2>
 
-                <div className={'rules-scenario-summary rules-card'}>
-                    <div className={'rules-scenario-summary-title rules-card-title'}>
+                    <p>
+                        {"The Trench-Companion is a 3rd-Party tool for players and lovers of Trench Crusade. This site aims to be the one-stop source for game information and the easiest place to create and maintain your own warbands, campaigns, and a place to access all manner of Trench Crusade content."}
+                    </p>
+                    <hr/>
+                    <p>
+                        {"Development on the Trench-Companion is continual and we plan to release updates and expand on the functionality present well into the future. Not only that, but we aim to maintain the site as the most up-to-date resource for Trench-Crusade available."}
+                    </p>
+
+                    <div className={'spacer-20'}></div>
+                    <div className={'spacer-20'}></div>
+
+                    <h2 style={{maxWidth: '575px', marginLeft: 'auto', marginRight: 'auto'}}>
                         Future Plans
+                    </h2>
+
+                    <div className={'StaticTimeline'}>
+                        <div className={'timeline-entry'}>
+                            <h3>
+                                {'Genesis'}
+                            </h3>
+                            <h4>
+                                {'July 2025'}
+                            </h4>
+                            <p>
+                                {'In this initial release of Trench-Companion a full rules compendium will maintain an up-to-date catalogue of all game rules. Not only that, but the Warband Buidler will allow users to create and maintain warbands effortlessly - stored locally or on our online Synod servers.'}
+                            </p>
+                        </div>
+
+
+                        <div className={'timeline-entry'}>
+                            <h3>
+                                {'It Never Ends Update'}
+                            </h3>
+                            <h4>
+                                {'September 2025'}
+                            </h4>
+                            <p>
+                                {'In the first major update to Trench-Companion the Campaign Manager and Play Mode will be added. A campaign manager allows users to associate their warbands with a Campaign or join a friend\'s campaign, tracking progress across games. Not only that, but scenarios can be played out in the Play Mode to track victory points, glorious deeds, and all other manner of game features.'}
+                            </p>
+                        </div>
+
+                        <div className={'timeline-entry'}>
+                            <h3>
+                                {'Pride Cometh Update '}
+                            </h3>
+                            <h4>
+                                {'January 2026'}
+                            </h4>
+
+                            <p>
+                                {'In the second major update the ability for Homebrew Content to be created will be officially included. Expansive documentation and guides will be made to help users create their own custom homebrew content and add it to their games and share with their fellow players! Premium users will also receive a glut of new cosmetic options and the ability to have their homebrew content hosted for other users to access effortlessly.'}
+                            </p>
+                        </div>
+
+                        <div className={'timeline-entry'}>
+                            <h3>
+                                {'Ḩ̶̨̹̰͖̈́́̃ï̵̭̍̾͆͆ś̴̡̨̠̤̠̏̎͆ ̸̜̎̿̃͘A̷̧͈̅r̸̭̠̬̺̘̓́̏r̵̲̬͐i̸̝̍̔v̷̨̻̙̘̝̆̏̔͘a̴͉͙̲͒̐̿͆̀l̴̬̪̏̏̀ ̶̢̲̮̼͎̒̀̈́͂̂I̷̩͎̊̀̕s̶͇̺̘̟̀̾̀̄ ̶͇̻̃͌͒̕͜U̷̡̦̜͆̓͐p̷͉̆̋ọ̶̎̌̽̍ṋ̷̥͘ ̴̙̝͉̪̀Ǔ̴̳͈͉̬̌̃s̵̮͒̋̿'}
+                            </h3>
+                            <h4>
+                                <del>
+                                    {'2̷̧̨̺͚͚̿́̓̋͝0̴̛̗̽2̶̰͉̜̈́̿̒6̶̨̣͓̬̓̑'}
+                                </del>
+                            </h4>
+
+                            <p>
+                                {'What comes next lies shrouded in mystery. As the world of Trench Crusade evolves, we are preparing for something greater — new features, expanded systems, and gifts yet unnamed. No promises, only omens. Expect the unexpected.'}
+                            </p>
+                        </div>
                     </div>
 
-                    <div className={'rules-scenario-summary-content rules-card-content'}>
-                        <p> 
-                            <img src={imageroadmap}
-                                alt="Trench Companion Roadmap"
-                                className={'rules-banner-image-element'}
-                                style={{width:"100%"}}
+
+                    <h2>
+                        {'Do you want to know more?'}
+                    </h2>
+
+                    <div className={'row '}>
+                        <div className={'col-12 col-md-6'}>
+                            <RulesBannerImage
+                                imageId={2899}
+                                linkUrl={'/blog'}
+                                linkText={'Blog'}
                             />
-                        </p> 
-                        <table className={'rules-scenario-summary-table rules-card-table'}>
-                            <tbody>
-                                <tr>
-                                    <td className={'label-cell'}>
-                                        {"Genesis Update (July 2025)"}
-                                    </td>
-                                    <td>
-                                        {"In this initial release of Trench-Companion a full rules compendium will maintain an up-to-date catalogue of all game rules. Not only that, but the Warband Buidler will allow users to create and maintain warbands effortlessly - stored locally or on our online Synod servers."}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td className={'label-cell'}>
-                                        {"It Never Ends Update (September 2025)"}
-                                    </td>
-                                    <td>
-                                        {"In the first major update to Trench-Companion the Campaign Manager and Play Mode will be added. A campaign manager allows users to associate their warbands with a Campaign or join a friend's campaign, tracking progress across games. Not only that, but scenarios can be played out in the Play Mode to track victory points, glorious deeds, and all other manner of game features."}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td className={'label-cell'}>
-                                        {"Pride Cometh Update (January 2026)"}
-                                    </td>
-                                    <td>
-                                        {"In the second major update the ability for Homebrew Content to be created will be officially included. Expansive documentation and guides will be made to help users create their own custom homebrew content and add it to their games and share with their fellow players! Premium users will also receive a glut of new cosmetic options and the ability to have their homebrew content hosted for other users to access effortlessly."}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td className={'label-cell'}>
-                                        {"??? Update (???)"}
-                                    </td>
-                                    <td>
-                                        {"Who knows what the future holds for the Trench Companion."}
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        
+                        </div>
+                        <div className={'col-12 col-md-6'}>
+                            <RulesBannerImage
+                                imageId={2900}
+                                linkUrl={'/page/premium-membership'}
+                                linkText={'How to support'}
+                            />
+                        </div>
                     </div>
                 </div>
             </div>
