@@ -2604,11 +2604,12 @@ export const BaseContextCallTable : CallEventTable = {
             return ( 
             
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    
+                    {trackVar.value != undefined &&
                     <p className={''}>
                         {returnDescription(trackVar.value, trackVar.value.Description)}
                         
                     </p>
+                    }
                 </ErrorBoundary>
             )
         }
@@ -3355,10 +3356,11 @@ export const BaseContextCallTable : CallEventTable = {
             return ( 
             
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
-                    
+                    {trackVar.value != undefined &&
                     <p className={''}>
                         {returnDescription(trackVar.value, trackVar.value.Description)}
                     </p>
+                    }
                 </ErrorBoundary>
             )
         },
@@ -3398,7 +3400,7 @@ export const BaseContextCallTable : CallEventTable = {
         async returnWbbOptionDisplay(this: EventRunner, eventSource : any, trackVar : IChoice, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null){
             const AbilityModule = await import("../../classes/feature/ability/Ability")
            
-            if (!(trackVar instanceof AbilityModule.Ability)) {
+            if (!(trackVar.value instanceof AbilityModule.Ability)) {
                 return (<></>);
             }   
             return ( 
