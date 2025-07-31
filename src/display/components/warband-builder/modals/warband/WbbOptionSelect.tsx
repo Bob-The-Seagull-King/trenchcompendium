@@ -96,19 +96,23 @@ const WbbOptionSelect: React.FC<WbbEditSelectionProps> = ({choice,  property, ov
             <div key={_keyvar} className="SingleOptionSetDisplay-Details">
                 {displayState}
             </div>
-            {(choice.NestedOption && displayOptions) &&
+            {(property.SubProperties && displayOptions) &&
                 <>
-                    {choice.NestedOption.Selections.length > 0 &&
+                    {property.SubProperties.length > 0 &&
                         <>
-                            {choice.NestedOption.Selections.map((item : SelectedOption) =>
-                                <div key={choice.NestedOption?.Selections.indexOf(item)}>
-                                     <WbbOptionSelect
-                                        overrideplay={false}
-                                        property={property}
-                                        key={choice.NestedOption?.Selections.indexOf(item)}
-                                        choice={item}
-                                    />
-                                </div >
+                            {property.SubProperties.map((item : WarbandProperty) =>
+                                <div key={property.SubProperties.indexOf(item)}>
+                                    {item.SelfDynamicProperty.Selections.map((subitem : SelectedOption) => 
+                                        <WbbOptionSelect
+                                                overrideplay={false}
+                                                property={item}
+                                                key={item.SelfDynamicProperty.Selections.indexOf(subitem)}
+                                                choice={subitem}
+                                            />
+                                    )
+
+                                    }
+                                </div>
                             )}
                         </>
                     }

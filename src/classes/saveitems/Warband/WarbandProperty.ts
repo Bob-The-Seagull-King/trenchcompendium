@@ -96,6 +96,8 @@ class WarbandProperty extends DynamicContextObject  {
             this.SelfDynamicProperty = new DynamicOptionContextObject(base_obj.SelfData, base_obj, this);  
             await this.SelfDynamicProperty.BuildSelections();  
         }
+        
+        this.SubProperties = []
         if (selection_vals != null) {
             for (let i = 0; i < this.SelfDynamicProperty.Selections.length; i++) {
                 const CurSelection = this.SelfDynamicProperty.Selections[i];
@@ -247,6 +249,8 @@ class WarbandProperty extends DynamicContextObject  {
     public async ReSelectPicks() {
         this.ConvertToInterface();
         const selection_vals = this.StoredSelectionVals
+        
+        this.SubProperties = []
         if (selection_vals != null) {
             for (let i = 0; i < this.SelfDynamicProperty.Selections.length; i++) {
                 const CurSelection = this.SelfDynamicProperty.Selections[i];
