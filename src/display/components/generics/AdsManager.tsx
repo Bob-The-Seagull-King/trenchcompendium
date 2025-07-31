@@ -16,6 +16,8 @@ const isProduction = false;
 export const AdsManager: React.FC = () => {
     const [consent, setConsent] = useState<boolean | null>(null);
 
+    console.log(consent);
+
     useEffect(() => {
         if (!isProduction) return;
 
@@ -24,7 +26,7 @@ export const AdsManager: React.FC = () => {
     }, []);
 
     useEffect(() => {
-        if (!isProduction || consent !== true) return;
+        if (!isProduction ) return;
 
         if (typeof window.ezstandalone !== 'undefined' && window.ezstandalone.cmd) {
             window.ezstandalone?.cmd.push(() => {
@@ -33,12 +35,25 @@ export const AdsManager: React.FC = () => {
         }
     }, [consent]);
 
-    if (consent !== true) return null;
+    if (!isProduction) return null;
 
     return (
-        <div
-            id="ezoic-pub-ad-placeholder-118"
-            style={{ position: 'fixed', bottom: 0, width: '100%', zIndex: 1000 }}
-        />
+        <>
+            <div className={'AdsManager'}>
+                <div className={'Ads-text-below'}>
+                    {'❤️ Support Trench Companion for an ad-free experience'}
+                </div>
+
+                <div
+                    id="ezoic-pub-ad-placeholder-118"
+                    className={'ads-placeholder'}
+                />
+            </div>
+
+            <div className={'AdsManager-bottom-spacer'}>
+            </div>
+        </>
+
+
     );
 };
