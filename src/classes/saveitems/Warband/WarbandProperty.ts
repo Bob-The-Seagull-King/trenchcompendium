@@ -105,7 +105,6 @@ class WarbandProperty extends DynamicContextObject  {
                         if (CurSelection.Option.AutoSelect == true && CurSelection.SelectionSet.length > 0) {
                             CurSelection.SelectOption(CurSelection.SelectionSet[0].id);
                         } else {
-                            
                             CurSelection.SelectOption(selection_vals.selections[j].selection_ID)
                         }
                         const subselect = selection_vals.selections[j].suboption;
@@ -138,6 +137,7 @@ class WarbandProperty extends DynamicContextObject  {
     }
 
     public async RegenerateSubProperties( ) {
+        this.ConvertToInterface();
         const RegenProperties : WarbandProperty[] = []
         for (let i = 0; i < this.SelfDynamicProperty.Selections.length; i++) {
             const CurSelection = this.SelfDynamicProperty.Selections[i]
@@ -230,6 +230,7 @@ class WarbandProperty extends DynamicContextObject  {
         }
 
         this.SelfData = _objint;
+        this.StoredSelectionVals = _objint;
         
         return _objint;
     }
@@ -239,10 +240,12 @@ class WarbandProperty extends DynamicContextObject  {
         for (let i = 0; i < this.Consumables.length; i++) {
             await this.Consumables[i].GrabOptions()
         }
+        
         await this.ReSelectPicks();
     }
 
     public async ReSelectPicks() {
+        this.ConvertToInterface();
         const selection_vals = this.StoredSelectionVals
         if (selection_vals != null) {
             for (let i = 0; i < this.SelfDynamicProperty.Selections.length; i++) {
@@ -253,7 +256,6 @@ class WarbandProperty extends DynamicContextObject  {
                         if (CurSelection.Option.AutoSelect == true && CurSelection.SelectionSet.length > 0) {
                             CurSelection.SelectOption(CurSelection.SelectionSet[0].id);
                         } else {
-                            
                             CurSelection.SelectOption(selection_vals.selections[j].selection_ID)
                         }
                         const subselect = selection_vals.selections[j].suboption;

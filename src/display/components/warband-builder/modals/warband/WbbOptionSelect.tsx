@@ -31,7 +31,6 @@ const WbbOptionSelect: React.FC<WbbEditSelectionProps> = ({choice,  property, ov
     const handleSubmit = (foundOption : IChoice | null) => {
         if (foundOption != null && overrideplay != true) {
             choice.UserUpdateSelection((foundOption? foundOption.id : null)).then(() => { 
-            property.ConvertToInterface();
             property.RegenerateSubProperties().then(() => 
             property.RegenerateOptions().then(() =>{
             const Manager : ToolsController = ToolsController.getInstance();
