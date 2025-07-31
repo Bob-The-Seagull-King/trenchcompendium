@@ -19,11 +19,11 @@ const StaticAbout: React.FC = () => {
                     </h2>
 
                     <p>
-                        {"The Trench-Companion is a 3rd-Party tool for players and lovers of Trench Crusade. This site aims to be the one-stop source for game information and the easiest place to create and maintain your own warbands, campaigns, and a place to access all manner of Trench Crusade content."}
+                        {"Trench Companion is a fan-made tool designed to support players of Trench Crusade. From building your warband to running full campaigns, it brings all game content into one place — streamlined, accessible, and always up to date."}
                     </p>
                     <hr/>
                     <p>
-                        {"Development on the Trench-Companion is continual and we plan to release updates and expand on the functionality present well into the future. Not only that, but we aim to maintain the site as the most up-to-date resource for Trench-Crusade available."}
+                        {"We’re developing Trench Companion continuously, with new features and content planned well into the future. Below, you’ll find a roadmap showing our current release stages and what’s coming next."}
                     </p>
 
                     <div className={'spacer-20'}></div>

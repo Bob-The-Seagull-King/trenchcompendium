@@ -75,7 +75,7 @@ const HomeRoute: React.FC = () => {
 
                         <div className={'spacer-20'}></div>
 
-                        
+
                         <div className={'row '}>
                             <div className={'col-12 col-md-6'}>
                                 <RulesBannerImage
