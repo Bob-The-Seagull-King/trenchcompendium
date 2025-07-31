@@ -64,12 +64,18 @@ const HomeRoute: React.FC = () => {
 
                         <p className={'intro-text'}>
                             {'Build your warband, access the full rules, and stay up to date — all in one place.\n' +
-                                'Trench Companion is a free, community-made tool designed to support players on and off the battlefield.\n' +
-                                'It is a passion project created by a small team of developers with the goal to create a tool that keeps the Game alive and connected. \n' +
-                                'Want to support our project and help us improve Trench Companion? Consider a small monthly contribution — it helps us keep going.'
-                            }
+                                'Trench Companion is the evolution of the  '}<a
+                            href={'https://trenchcompendium.netlify.app/'} rel={"noreferrer noopener nofollow"}
+                            target={'_blank'}>Trench
+                            Compendium</a>{': a free, community-made tool crafted to support players both on and off the battlefield.\n' +
+                            'It is a passion project created by a small team of developers with the goal to create a tool that keeps the Game alive and connected. \n' +
+                            'If you enjoy what we’re building and want to see it grow, consider supporting us with a small monthly contribution — every bit helps.'
+                        }
                         </p>
 
+                        <div className={'spacer-20'}></div>
+
+                        
                         <div className={'row '}>
                             <div className={'col-12 col-md-6'}>
                                 <RulesBannerImage

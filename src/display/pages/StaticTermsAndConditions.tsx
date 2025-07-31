@@ -18,7 +18,7 @@ const StaticTermsAndConditions: React.FC = () => {
 
                 <h2>2. Operator Information</h2>
                 <p>
-                    This website is operated by Trench Compaion LLC, as detailed in the <a href={ROUTES.PAGE_LEGAL}>Legal Notice</a> page.
+                    This website is operated by Momentum Digital, David Leusch, as detailed in the <a href={ROUTES.PAGE_LEGAL}>Legal Notice</a> page.
                 </p>
 
                 <h2>3. Eligibility</h2>

@@ -12,32 +12,32 @@ const StaticLegalNotice: React.FC = () => {
 
                 <h2>Website Operator</h2>
                 <p>
-                    Lane Edwards-Brown<br/>
-                    Trench Companion LLC<br/>
-                    Musterstraße 12<br/>
-                    12345 Musterstadt<br/>
-                    New Zealand
+                    David Leusch<br/>
+                    Momentum Digital<br/>
+                    Zeppelinstr. 5b<br/>
+                    48147 Münster<br/>
+                    Germany
                 </p>
 
                 <h2>Represented by</h2>
                 <p>Lane Edwards-Brown (Managing Director)</p>
+                <p>David Leusch (Managing Director)</p>
 
                 <h2>Contact Information</h2>
                 <p>
-                    Phone: +49 123 456789<br/>
+                    Phone: +49 251 931 33551<br/>
                     Email: info@trench-companion.com
                 </p>
 
                 <h2>VAT Identification Number</h2>
                 <p>
                     VAT ID according to § 27 a of the German VAT Act (UStG):<br/>
-                    DE123456789
+                    DE344283265
                 </p>
 
                 <h2>Register Information</h2>
                 <p>
                     Company Register: Amtsgericht Münster<br/>
-                    Registration Number: HRB 123456
                 </p>
 
                 <h2>Disclaimer</h2>
