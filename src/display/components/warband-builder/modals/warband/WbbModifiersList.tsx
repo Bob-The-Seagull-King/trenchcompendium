@@ -15,6 +15,7 @@ const WbbModifiersList = () => {
     const [keyvar, setkeyvar] = useState(0);
     const [modifiers, setmodifiers] = useState<WarbandProperty[]>([]);
     const [fireteams, setfireteams] = useState<WarbandProperty[]>([]);
+    const [locations, setlocations] = useState<WarbandProperty[]>([]);
 
     useEffect(() => {
         async function RunUpdate() {
@@ -23,6 +24,7 @@ const WbbModifiersList = () => {
                 const Fireteams = await warband?.warband_data.GetFireteams();
                 setmodifiers(Modifiers);
                 setfireteams(Fireteams)
+                setlocations(warband?.warband_data.ModifiersLoc)
             }
             setkeyvar(keyvar + 1);
         }
@@ -50,6 +52,19 @@ const WbbModifiersList = () => {
                 <>
                     <h3 className={'category-headline'}>Fireteams</h3>
                     {fireteams.map((item) =>
+                        <WbbEditViewExtraModifier
+                            key={item.GetTrueName()}
+                            warbprop={item}
+                            index={modifiers.indexOf(item)}
+                        />
+                    )}
+                </>
+            }
+            {/* Warband Modifiers */}
+            {locations.length > 0 &&
+                <>
+                    <h3 className={'category-headline'}>Exploration Choices</h3>
+                    {locations.map((item) =>
                         <WbbEditViewExtraModifier
                             key={item.GetTrueName()}
                             warbprop={item}

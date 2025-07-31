@@ -28,6 +28,7 @@ import { IWarbandConsumable, WarbandConsumable } from './WarbandConsumable';
 import { Model } from '../../feature/model/Model';
 import { Equipment, EquipmentRestriction } from '../../feature/equipment/Equipment';
 import { Skill } from '../../feature/ability/Skill';
+import { ExplorationFactory } from '../../../factories/features/ExplorationFactory';
 
 interface WarbandDebt {
     ducats : number,
@@ -85,6 +86,7 @@ interface IUserWarband extends IContextObject {
     notes : INote[],
     debts : WarbandDebt,
     modifiers: IWarbandProperty[],
+    modifiersloc: IWarbandProperty[],
     fireteams: IWarbandProperty[],
     consumables: IWarbandConsumable[],
     restrictions_list : string[]
@@ -102,6 +104,7 @@ class UserWarband extends DynamicContextObject {
     public Equipment : WarbandPurchase[] = [];
     public Debts : WarbandDebt;
     public Modifiers : WarbandProperty[] = [];
+    public ModifiersLoc : WarbandProperty[] = [];
     public Fireteams : WarbandProperty[] = [];
     public Consumables : WarbandConsumable[] = [];
     public Restrictions : string[] = [];
@@ -193,6 +196,23 @@ class UserWarband extends DynamicContextObject {
             await NewLocation.HandleDynamicProps(Value, this, null, CurVal)
             await NewLocation.BuildConsumables(CurVal.consumables)
             this.Modifiers.push(NewLocation);
+        }
+    }
+
+    public async BuildModifiersLoc(data : IWarbandProperty[]) {
+        console.log(data);
+        if (data == undefined) {return;}
+        for (let i = 0; i < data.length; i++) {
+            try {
+                const CurVal = data[i];
+                const Value = await ExplorationFactory.CreateNewExplorationLocation(CurVal.object_id, this, true);
+                const NewLocation = new WarbandProperty(Value, this, null, CurVal);
+                await NewLocation.HandleDynamicProps(Value, this, null, CurVal)
+                await NewLocation.BuildConsumables(CurVal.consumables)
+                this.Modifiers.push(NewLocation);
+            } catch(e) {
+                console.log(e)
+            }
         }
     }
     
@@ -368,6 +388,14 @@ class UserWarband extends DynamicContextObject {
             }
         }
 
+        const propertyloclist : IWarbandProperty[] = []
+        for (let i = 0; i < this.ModifiersLoc.length; i++) {
+            const int = this.ModifiersLoc[i].ConvertToInterface()
+            if (int != undefined) {
+                propertyloclist.push(this.ModifiersLoc[i].ConvertToInterface())
+            }
+        }
+
         const fireteamlist : IWarbandProperty[] = []
         for (let i = 0; i < this.Fireteams.length; i++) {
             fireteamlist.push(this.Fireteams[i].ConvertToInterface())
@@ -392,6 +420,7 @@ class UserWarband extends DynamicContextObject {
             notes: this.Notes,
             debts: this.Debts,
             modifiers: propertylist,
+            modifiersloc: propertyloclist,
             fireteams: fireteamlist,
             consumables: consumablelist,
             restrictions_list: this.Restrictions
@@ -758,6 +787,7 @@ class UserWarband extends DynamicContextObject {
     public async RebuildProperties() {
         
         await this.BuildModifiersSkills(this.SelfData.modifiers);
+        await this.BuildModifiersLoc(this.SelfData.modifiersloc);
         await this.BuildModifiersFireteam(this.SelfData.fireteams);
         await this.Exploration.RebuildProperties();
         await this.Faction.RebuildProperties();
