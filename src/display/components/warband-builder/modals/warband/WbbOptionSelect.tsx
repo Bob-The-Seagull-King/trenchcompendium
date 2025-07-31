@@ -15,10 +15,11 @@ import {useWbbMode} from "../../../../../context/WbbModeContext";
 interface WbbEditSelectionProps {
     choice : SelectedOption;
     property : WarbandProperty;
+    hypeproperty? : WarbandProperty;
     overrideplay? : boolean
 }
 
-const WbbOptionSelect: React.FC<WbbEditSelectionProps> = ({choice,  property, overrideplay}) => {
+const WbbOptionSelect: React.FC<WbbEditSelectionProps> = ({choice,  property, hypeproperty, overrideplay}) => {
     const { warband, reloadDisplay, updateKey } = useWarband();
 
     const [showModal, setshowModal] = useState(false);
@@ -31,11 +32,21 @@ const WbbOptionSelect: React.FC<WbbEditSelectionProps> = ({choice,  property, ov
     const handleSubmit = (foundOption : IChoice | null) => {
         if (foundOption != null && overrideplay != true) {
             choice.UserUpdateSelection((foundOption? foundOption.id : null)).then(() => { 
-            property.RegenerateSubProperties().then(() => 
-            property.RegenerateOptions().then(() =>{
-            const Manager : ToolsController = ToolsController.getInstance();
-            Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
-                () => reloadDisplay())}))})
+            if (hypeproperty != undefined) {
+                hypeproperty.RegenerateSubProperties().then(() => 
+                hypeproperty.RegenerateOptions().then(() =>{
+                const Manager : ToolsController = ToolsController.getInstance();
+                Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
+                    () => reloadDisplay())}))
+            
+            } else {
+                property.RegenerateSubProperties().then(() => 
+                property.RegenerateOptions().then(() =>{
+                const Manager : ToolsController = ToolsController.getInstance();
+                Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
+                    () => reloadDisplay())}))
+                
+            }})
         }
     };
 
@@ -96,28 +107,6 @@ const WbbOptionSelect: React.FC<WbbEditSelectionProps> = ({choice,  property, ov
             <div key={_keyvar} className="SingleOptionSetDisplay-Details">
                 {displayState}
             </div>
-            {(property.SubProperties && displayOptions) &&
-                <>
-                    {property.SubProperties.length > 0 &&
-                        <>
-                            {property.SubProperties.map((item : WarbandProperty) =>
-                                <div key={property.SubProperties.indexOf(item)}>
-                                    {item.SelfDynamicProperty.Selections.map((subitem : SelectedOption) => 
-                                        <WbbOptionSelect
-                                                overrideplay={false}
-                                                property={item}
-                                                key={item.SelfDynamicProperty.Selections.indexOf(subitem)}
-                                                choice={subitem}
-                                            />
-                                    )
-
-                                    }
-                                </div>
-                            )}
-                        </>
-                    }
-                </>
-            }
         </div>
     );
 };

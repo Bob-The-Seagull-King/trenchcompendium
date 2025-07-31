@@ -90,6 +90,7 @@ class WarbandProperty extends DynamicContextObject  {
     }
 
     public async HandleDynamicProps(base_obj : StaticOptionContextObject, parent : DynamicContextObject | null, dyna_obj : DynamicOptionContextObject | null, selection_vals: IWarbandProperty | null) {
+
         if (dyna_obj != null) {
             this.SelfDynamicProperty = dyna_obj;
         } else {
@@ -127,12 +128,11 @@ class WarbandProperty extends DynamicContextObject  {
         }
     }
 
+    // ITS IN HERE, KILL IT
     public async GenerateSubProperties(selection_vals: IWarbandProperty, self_selection : SelectedOption) {
         const Nested = self_selection.NestedOption
         if (Nested != null) {
             let found = false
-            console.log(Nested.OptionChoice.ID)
-            console.log(this.SubProperties)
             for (let i = 0; i < this.SubProperties.length; i++) {
                 if (this.SubProperties[i].ID == Nested.OptionChoice.ID) {
                     found = true;

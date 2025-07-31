@@ -3255,6 +3255,9 @@ export const BaseContextCallTable : CallEventTable = {
                     }
         }
     },
+    add_as_modifier: {
+        event_priotity: 0
+    },
     gain_all_from_list: {
         event_priotity: 0,
         async onGainLocation(this: EventRunner, eventSource : any, trackVal : WarbandProperty, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) {
