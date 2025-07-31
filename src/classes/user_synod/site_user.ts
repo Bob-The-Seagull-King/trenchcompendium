@@ -468,7 +468,7 @@ class SiteUser {
      * 'Free Member' if not premium
      */
     public GetUserStatus () {
-        return (this.Premium.IsPremium == true)? 'Supporter' : 'Free Member'
+        return (this.Premium.IsPremium == true)? '❤️ Supporter' : 'Free Member'
     }
 
 }

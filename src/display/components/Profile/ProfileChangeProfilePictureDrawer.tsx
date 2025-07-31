@@ -94,7 +94,7 @@ const ProfileChangeProfilePictureDrawer: React.FC<ProfileChangeProfilePictureDra
 
                                     onClick={opt.available ? () => handleProfilePictureChange(opt.id) : undefined}
                                 >
-                                    { (!opt.available && opt.id !== user.GetProfilePictureId() ) &&
+                                    { (opt.id !== user.GetProfilePictureId() ) &&
                                         <>
                                             {opt.tier == 'premium' &&
                                                 <FontAwesomeIcon icon={faStar} className={'premium-icon'} />
