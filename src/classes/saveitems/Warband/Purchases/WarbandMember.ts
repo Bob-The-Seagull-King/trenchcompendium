@@ -168,6 +168,7 @@ class WarbandMember extends DynamicContextObject {
 
     public async RebuildProperties() {
         this.GeneralCache = {}
+        this.ConvertToInterface();
         await this.BuildEquipment(this.SelfData.equipment);
         await this.BuildSkills(this.SelfData.list_skills);
         await this.BuildInjuries(this.SelfData.list_injury);
@@ -331,11 +332,12 @@ class WarbandMember extends DynamicContextObject {
             
             if ((regenerate == true) || ((this.ModelEquipments[i].SelfDynamicProperty.OptionChoice as ModelEquipmentRelationship).Removable == false)) {
                 const MERelationship = (this.ModelEquipments[i].SelfDynamicProperty.OptionChoice as ModelEquipmentRelationship)
-
+                
                 const ListOfIDs : string[] = []
                 for (let j = 0; j < this.Equipment.length; j++) {
                     ListOfIDs.push(this.Equipment[j].HeldObject.ID)
                 }
+                
                 for (let j = 0; j < MERelationship.EquipmentItems.length; j++) {
                     let IsFound = false
                     for (let k = 0; k < ListOfIDs.length; k++) {
