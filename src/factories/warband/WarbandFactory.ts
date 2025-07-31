@@ -92,7 +92,7 @@ class WarbandFactory {
         return rule;
     }
     
-    static async CreateWarbandMember(data: IWarbandMember, parent : DynamicContextObject | null, restricted : boolean) {
+    static async CreateWarbandMember(data: IWarbandMember, parent : DynamicContextObject | null, restricted : boolean, regen = false) {
         const rule = new WarbandMember(data, parent, restricted)        
         await rule.BuildModel(data.model)
         await rule.BuildEquipment(data.equipment);
@@ -101,7 +101,7 @@ class WarbandFactory {
         await rule.BuildNewProperties(data);
         await rule.BuildUpgrades(data);
         await rule.BuildModelEquipProperties(data);
-        await rule.BuildModelEquipment(false);
+        await rule.BuildModelEquipment(regen);
         return rule;
     }
 
@@ -133,7 +133,7 @@ class WarbandFactory {
             data.tags["mercenary"] = true;
         }
         
-        const Model : WarbandMember = await WarbandFactory.CreateWarbandMember(data, parent, restricted);
+        const Model : WarbandMember = await WarbandFactory.CreateWarbandMember(data, parent, restricted, true);
         return Model;
     }
     
