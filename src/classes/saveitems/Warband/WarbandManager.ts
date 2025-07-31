@@ -283,6 +283,7 @@ class WarbandManager {
                 glory: 0
             },
             modifiers: [],
+            modifiersloc: [],
             fireteams: [],
             consumables: [],
             restrictions_list: rest_list

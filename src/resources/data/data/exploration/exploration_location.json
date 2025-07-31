@@ -109,6 +109,7 @@
                     }
                 ]
             },
+            "add_as_modifier": {},
             "warband_general_hook": {},
             "warband_wide": {}, 
             "warband_attatch": {

@@ -143,6 +143,7 @@ class WarbandFactory {
         await rule.BuildModels(data.models);
         await rule.BuildEquipment(data.equipment);
         await rule.BuildModifiersSkills(data.modifiers);
+        await rule.BuildModifiersLoc(data.modifiersloc);
         await rule.BuildModifiersFireteam(data.fireteams);
         await rule.BuildConsumables(data.consumables);
         await rule.RebuildProperties();
