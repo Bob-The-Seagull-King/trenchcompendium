@@ -183,6 +183,7 @@ export function getModelStatRanged(stats: StatInput): string {
         .map(val => (val > 0 ? '+' : val < 0 ? '-' : '') + Math.abs(val))
         .join('/');
 }
+
 /**
  * Returns the string for the Models Melee Stat
  * @param stats
@@ -221,3 +222,5 @@ export function GetStatAsFullString(statset : ModelStatistics) : string {
 
     return val.join(', ');
 }
+
+

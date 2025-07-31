@@ -3,6 +3,7 @@ import React from 'react';
 import SynodImage from "../../../utility/SynodImage";
 import { useNavigate } from 'react-router-dom';
 import CustomNavLink from '../subcomponents/interactables/CustomNavLink';
+import SynodImageWithCredit from "../../../utility/SynodImageWithCredits";
 
 interface RulesBannerImageProps {
     imageId: number;
@@ -24,7 +25,7 @@ const RulesBannerImage: React.FC<RulesBannerImageProps> = ({ imageId, linkUrl, l
                             SpecificNavigtateOut(linkUrl)
                         }}
                         classes={'RulesBannerImage'}  >
-            <SynodImage
+            <SynodImageWithCredit
                 imageId={imageId}
                 size="large"
                 className="rules-banner-image-element"

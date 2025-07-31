@@ -7,7 +7,7 @@ import { DynamicContextObject } from '../../contextevent/dynamiccontextobject';
 import { ContextObject, IContextObject } from '../../contextevent/contextobject';
 import { IWarbandFaction, WarbandFaction } from './CoreElements/WarbandFaction';
 import { IWarbandPurchaseEquipment, IWarbandPurchaseModel, RealWarbandPurchaseEquipment, RealWarbandPurchaseModel, WarbandPurchase } from './Purchases/WarbandPurchase';
-import { IWarbandMember, WarbandMember } from './Purchases/WarbandMember';
+import { IWarbandMember, SkillSuite, WarbandMember } from './Purchases/WarbandMember';
 import { WarbandEquipment } from './Purchases/WarbandEquipment';
 import { WarbandFactory } from '../../../factories/warband/WarbandFactory';
 import { FactionModelRelationship, IFactionModelRelationship } from '../../relationship/faction/FactionModelRelationship';
@@ -25,6 +25,10 @@ import { Fireteam } from '../../feature/ability/Fireteam';
 import { FireteamFactory } from '../../../factories/features/FireteamFactory';
 import { StaticOptionContextObject } from '../../options/StaticOptionContextObject';
 import { IWarbandConsumable, WarbandConsumable } from './WarbandConsumable';
+import { Model } from '../../feature/model/Model';
+import { Equipment, EquipmentRestriction } from '../../feature/equipment/Equipment';
+import { Skill } from '../../feature/ability/Skill';
+import { ExplorationFactory } from '../../../factories/features/ExplorationFactory';
 
 interface WarbandDebt {
     ducats : number,
@@ -35,6 +39,40 @@ export interface WarbandAlert {
     title: string,
     content: string
 }
+
+export interface CachedFacRelData {
+    facrel : FactionEquipmentRelationship,
+    limit : number,
+    restrictions : string[],
+    count_cur : number,
+    cost: number,
+    canadd : boolean
+}
+export interface CachedModelRelData {
+    facrel : FactionModelRelationship,
+    limit : number,
+    avoid_restriction : boolean,
+    count_cur : number,
+    cost: number,
+    canadd : boolean,
+    group_cur : number,
+    group_limit: number
+}
+
+export interface GeneralEventCache {
+    fireteam_list? : Fireteam[],
+    faction_equip_rel? : FactionEquipmentRelationship[],
+    fac_equip_rest?: EquipmentRestriction[],
+    fac_model_rel?: FactionModelRelationship[],
+    max_elite? : number,
+    base_ducats?: number,
+    exportval? : string[],
+    exploration_skills?: WarbandProperty[],
+    exploration_limit?: number
+}
+
+export type CachedFactionEquipment = {[type : string]: CachedFacRelData};
+export type CachedFactionModel = {[type : string]: CachedModelRelData};
 
 interface IUserWarband extends IContextObject {
     id : string,
@@ -48,8 +86,10 @@ interface IUserWarband extends IContextObject {
     notes : INote[],
     debts : WarbandDebt,
     modifiers: IWarbandProperty[],
+    modifiersloc: IWarbandProperty[],
     fireteams: IWarbandProperty[],
-    consumables: IWarbandConsumable[]
+    consumables: IWarbandConsumable[],
+    restrictions_list : string[]
 }
 
 class UserWarband extends DynamicContextObject {
@@ -64,8 +104,30 @@ class UserWarband extends DynamicContextObject {
     public Equipment : WarbandPurchase[] = [];
     public Debts : WarbandDebt;
     public Modifiers : WarbandProperty[] = [];
+    public ModifiersLoc : WarbandProperty[] = [];
     public Fireteams : WarbandProperty[] = [];
     public Consumables : WarbandConsumable[] = [];
+    public Restrictions : string[] = [];
+    public IsUnRestricted : boolean;
+    public EquipmentRelCache : CachedFactionEquipment = {}
+    public ModelRelCache : CachedFactionModel = {}
+    public GeneralCache : GeneralEventCache = {}
+
+    public DumpCache() {
+        this.EquipmentRelCache = {}
+        this.ModelRelCache = {}
+        this.GeneralCache = {}
+        for (let i = 0; i < this.Models.length; i++) {
+            const Mod = this.Models[i].HeldObject as WarbandMember
+            Mod.GeneralCache = {}
+            for (let j = 0; j < Mod.Equipment.length; j++) {
+                (Mod.Equipment[j].HeldObject as WarbandEquipment).EquipmentCache = null
+            }
+        }
+        for (let i = 0; i < this.Equipment.length; i++) {
+            (this.Equipment[i].HeldObject as WarbandEquipment).EquipmentCache = null
+        }
+    }
 
     public DucatLimit : number[] = [700,800,900,1000,1100,1200,1300,1400,1500,1600,1700,1800];
     public ModelLimit : number[] = [10,11,12,13,14,15,16,17,18,19,20,22];
@@ -91,22 +153,32 @@ class UserWarband extends DynamicContextObject {
                 glory: 0
             }
         }
+        if (data.restrictions_list != undefined) {
+            this.Restrictions = data.restrictions_list;
+        } else {
+            this.Restrictions = []
+        }
+        this.IsUnRestricted = (this.Restrictions.includes("unrestricted"))
     }
 
     public async NewWarbandItems(data : IUserWarband) {
+        if (data == undefined) {return;}
         this.Faction = await WarbandFactory.CreateWarbandFaction(data.faction, this);
         this.Exploration = await WarbandFactory.CreateWarbandExplorationSet(data.exploration, this);
     }
 
     public async BuildModels(data : IWarbandPurchaseModel[]) {
+        if (data == undefined) {return;}
         for (let i = 0; i < data.length; i++) {
-            const Model : WarbandMember = await WarbandFactory.CreateWarbandMember(data[i].model, this);
+            const Model : WarbandMember = await WarbandFactory.CreateWarbandMember(data[i].model, this, this.IsUnRestricted);
             const NewPurchase : WarbandPurchase = new WarbandPurchase(data[i].purchase, this, Model);
             this.Models.push(NewPurchase);
         }
     }
 
-    public async BuildEquipment(data : IWarbandPurchaseEquipment[]) {
+    public async BuildEquipment(data : IWarbandPurchaseEquipment[] = this.SelfData.equipitem) {
+        if (data == undefined) {return;}
+        this.Equipment = [];
         for (let i = 0; i < data.length; i++) {
             const Model : WarbandEquipment = await WarbandFactory.CreateWarbandEquipment(data[i].equipment, this);
             const NewPurchase : WarbandPurchase = new WarbandPurchase(data[i].purchase, this, Model);
@@ -116,6 +188,7 @@ class UserWarband extends DynamicContextObject {
     }
 
     public async BuildModifiersSkills(data : IWarbandProperty[]) {
+        if (data == undefined) {return;}
         for (let i = 0; i < data.length; i++) {
             const CurVal = data[i];
             const Value = await SkillFactory.CreateNewSkill(CurVal.object_id, this, true);
@@ -125,8 +198,26 @@ class UserWarband extends DynamicContextObject {
             this.Modifiers.push(NewLocation);
         }
     }
+
+    public async BuildModifiersLoc(data : IWarbandProperty[]) {
+        console.log(data);
+        if (data == undefined) {return;}
+        for (let i = 0; i < data.length; i++) {
+            try {
+                const CurVal = data[i];
+                const Value = await ExplorationFactory.CreateNewExplorationLocation(CurVal.object_id, this, true);
+                const NewLocation = new WarbandProperty(Value, this, null, CurVal);
+                await NewLocation.HandleDynamicProps(Value, this, null, CurVal)
+                await NewLocation.BuildConsumables(CurVal.consumables)
+                this.Modifiers.push(NewLocation);
+            } catch(e) {
+                console.log(e)
+            }
+        }
+    }
     
     public async BuildConsumables(data: IWarbandConsumable[]) {
+        if (data == undefined) {return;}
         for (let i = 0; i < data.length; i++) {
             const CurVal = data[i]
             const NewConsumable = new WarbandConsumable(CurVal, this);
@@ -149,6 +240,60 @@ class UserWarband extends DynamicContextObject {
             }
         }
         return false;
+    }
+    
+    public GetObjectsWithAttatch() {
+        const List : WarbandProperty[] = []
+        const newlist = this.Exploration.GetObjectsWithAttatch()
+        for (let i = 0; i < newlist.length; i++) {
+            List.push(newlist[i])
+        }
+
+        return List;
+    }
+
+    public GetAttatchementsForModel(model : WarbandMember) {
+        const fighters = this.GetUsableFighters();
+        const list : WarbandProperty[] = []
+        const baselist = this.GetObjectsWithAttatch()
+        for (let i = 0; i < baselist.length; i++) {
+            let IsFound = false;
+
+                for (let k = 0; k < baselist[i].SelfDynamicProperty.Selections.length; k++) {
+                    const selec = baselist[i].SelfDynamicProperty.Selections[k]
+                    if (selec.SelectedChoice != null) {
+                        if (selec.SelectedChoice.value == model) {
+                            IsFound = true;
+                            break;
+                        }
+                    }
+                }
+                if (IsFound) {
+                
+                    list.push(baselist[i])
+                }
+        }
+
+        for (let i = 0; i < fighters.length; i++) {
+            const newlist = fighters[i].model.GetObjectsWithAttatch()
+            for (let j = 0 ; j < newlist.length; j++) {
+                let IsFound = false;
+
+                for (let k = 0; k < newlist[j].SelfDynamicProperty.Selections.length; k++) {
+                    const selec = newlist[j].SelfDynamicProperty.Selections[k]
+                    if (selec.SelectedChoice != null) {
+                        if (selec.SelectedChoice.value == model) {
+                            IsFound = true;
+                            break;
+                        }
+                    }
+                }
+                if (IsFound) {
+                    list.push(newlist[j])
+                }
+            }
+        }
+        return list;
     }
 
     public async IsModelInOtherFireteam(model : WarbandMember) : Promise<boolean> {
@@ -180,21 +325,20 @@ class UserWarband extends DynamicContextObject {
 
     public async BuildModifiersFireteam(data : IWarbandProperty[]) {
         const eventmon : EventRunner = new EventRunner();
-        let all_eq : Fireteam[] = await eventmon.runEvent(
-            "getAllFireteamOptions",
-            this,
-            [],
-            [],
-            this
-        )
-        for (let i = 0; i < this.Models.length; i++) {
+        let all_eq : Fireteam[] = []
+        if (this.GeneralCache.fireteam_list != null) {
+            all_eq = this.GeneralCache.fireteam_list
+        } else {
             all_eq = await eventmon.runEvent(
                 "getAllFireteamOptions",
-                this.Models[i].HeldObject as WarbandMember,
+                this,
                 [],
-                all_eq,
+                [],
                 this
             )
+        }
+        for (let i = 0; i < this.Models.length; i++) {
+            all_eq = await (this.Models[i].HeldObject as WarbandMember).GetFireteams(all_eq)
         }
         this.Fireteams = [];
         for (let i = 0; i < all_eq.length; i++) {
@@ -244,6 +388,14 @@ class UserWarband extends DynamicContextObject {
             }
         }
 
+        const propertyloclist : IWarbandProperty[] = []
+        for (let i = 0; i < this.ModifiersLoc.length; i++) {
+            const int = this.ModifiersLoc[i].ConvertToInterface()
+            if (int != undefined) {
+                propertyloclist.push(this.ModifiersLoc[i].ConvertToInterface())
+            }
+        }
+
         const fireteamlist : IWarbandProperty[] = []
         for (let i = 0; i < this.Fireteams.length; i++) {
             fireteamlist.push(this.Fireteams[i].ConvertToInterface())
@@ -268,10 +420,12 @@ class UserWarband extends DynamicContextObject {
             notes: this.Notes,
             debts: this.Debts,
             modifiers: propertylist,
+            modifiersloc: propertyloclist,
             fireteams: fireteamlist,
-            consumables: consumablelist
+            consumables: consumablelist,
+            restrictions_list: this.Restrictions
         }
-        
+        this.SelfData = _objint;
         return _objint;
     }
 
@@ -313,6 +467,22 @@ class UserWarband extends DynamicContextObject {
             }
         } 
 
+        if (this.Exploration) {
+            const static_packages : ContextPackage[] = await this.Exploration.GrabContextPackages(event_id, source_obj, arrs_extra);
+            for (let j = 0; j < static_packages.length; j++) {
+                static_packages[j].callpath.push("UserWarband")
+                subpackages.push(static_packages[j])
+            }
+        } 
+
+        for (let i = 0; i < this.Models.length; i++) {
+            const static_packages : ContextPackage[] = await (this.Models[i].HeldObject as WarbandMember).GrabWarbandubPackages(event_id, source_obj, arrs_extra);
+            for (let j = 0; j < static_packages.length; j++) {
+                static_packages[j].callpath.push("UserWarband")
+                subpackages.push(static_packages[j])
+            }
+        }
+
         return subpackages; 
     }
 
@@ -326,6 +496,22 @@ class UserWarband extends DynamicContextObject {
 
     public async GetExplorationSkillsInContext(): Promise<ExplorationSkillSuite[]> {
         return await this.Exploration.GetSkillsInFormat();
+    }
+
+    public async GetSelfExplorationSkills()  {
+        if (this.GeneralCache.exploration_skills != null) {
+            return this.GeneralCache.exploration_skills
+        }
+        const Events : EventRunner = new EventRunner();
+        const SkillList : WarbandProperty[] = await Events.runEvent(
+                "getExplorationSkills",
+                (this),
+                [],
+                [],
+                null
+            )
+        this.GeneralCache.exploration_skills = SkillList
+        return SkillList;
     }
 
     public GetLocations() : WarbandProperty[] {
@@ -427,16 +613,17 @@ class UserWarband extends DynamicContextObject {
      * Returns the total Ducats Value including stash as int
      * @constructor
      */
-    public GetCostDucatsTotal () {
-        return this.GetDucatCost() + this.GetDucatCostStash()
+    public GetCostDucatsTotal (discount = false) {
+        return this.GetDucatCost(discount) + this.GetDucatCostStash(discount)
     }
 
     public GetSumCurrentDucats() {
-        return this.Ducats - this.GetCostDucatsTotal() -  this.Debts.ducats
+        return this.Ducats - this.GetCostDucatsTotal(true) -  this.Debts.ducats
     }
 
+    // The total glory available for a warband to spend @TODO Lane this is where you sort budget stuff I think
     public GetSumCurrentGlory() {
-        return this.Glory - this.GetCostGloryTotal() -  this.Debts.glory
+        return this.Glory - this.GetCostGloryTotal(true) -  this.Debts.glory
     }
 
     /**
@@ -449,8 +636,8 @@ class UserWarband extends DynamicContextObject {
     /**
      * Returns the Glory Value of the Warband including stash as int
      */
-    public GetCostGloryTotal() {
-        return this.GetGloryCost() + this.GetGloryCostStash()
+    public GetCostGloryTotal(discount = false) {
+        return this.GetGloryCost(discount) + this.GetGloryCostStash(discount)
     }
 
     /**
@@ -519,25 +706,71 @@ class UserWarband extends DynamicContextObject {
 
         return options;
     }
+    /**
+     * Get the Fighters for this warbands
+     */
+    public GetUsableFighters() {
+        const options : RealWarbandPurchaseModel[] = [ ];
+
+        for (let i = 0; i < this.Models.length; i++) {
+            if ((this.Models[i].HeldObject as WarbandMember).State == "active" || (this.Models[i].HeldObject as WarbandMember).State == "reserved") {
+                options.push(
+                    {
+                        purchase: this.Models[i],
+                        model: this.Models[i].HeldObject as WarbandMember
+                    }
+                )
+            }
+        }
+
+        return options;
+    }
 
     /**
      * WBB Actions
      */
 
+    public async AddCustomFighter (model : Model, cost : number, costtype : number) {
+
+        if (!this.Restrictions.includes("custom_fighter")) {
+            this.Restrictions.push("custom_fighter")
+        }
+        const FactionmodelInterface : IFactionModelRelationship = {
+            id: model.GetID() + "_" + Date.now().toString(),
+            name: model.GetTrueName(),
+            source: "Warband_Custom",
+            tags: {},
+            contextdata : {},
+            options : [],
+            faction_id : [],
+            model_id : model.GetID(),
+            captain : false,
+            mercenary : model.Stats.mercenary? model.Stats.mercenary : false,
+            cost : cost,
+            cost_type : costtype,
+            restricted_models : [],
+            warband_minimum : 0,
+            warband_maximum : 0
+        }
+        const FacEquip : FactionModelRelationship = await ModelFactory.CreateFactionModel(FactionmodelInterface, this)
+        await this.AddFighter([FacEquip])
+    }
+
     /**
      * Adds a fighter to the Roster
      * @param fighter
      */
-    public async AddFighter ( fighter: FactionModelRelationship[] ) {
+    public async AddFighter ( fighter: FactionModelRelationship[], free = false ) {
         for (let i = 0; i < fighter.length; i++) { 
             
-            const Model : WarbandMember = await WarbandFactory.BuildWarbandMemberFromPurchase(fighter[i], this);
+            const Model : WarbandMember = await WarbandFactory.BuildWarbandMemberFromPurchase(fighter[i], this, this.IsUnRestricted);
             await Model.BuildModelEquipment(true);
             const NewPurchase : WarbandPurchase = new WarbandPurchase({
                 cost_value : fighter[i].Cost,
                 cost_type : fighter[i].CostType,
                 count_limit : true,
                 count_cap : true,
+                discount: (free)? fighter[i].Cost : 0,
                 sell_item : true,
                 sell_full : true,
                 purchaseid: fighter[i].Model.ID,
@@ -549,15 +782,19 @@ class UserWarband extends DynamicContextObject {
         }
 
         await this.RebuildProperties()
-        await this.BuildModifiersFireteam(this.SelfData.fireteams);
     }
 
     public async RebuildProperties() {
         
         await this.BuildModifiersSkills(this.SelfData.modifiers);
+        await this.BuildModifiersLoc(this.SelfData.modifiersloc);
         await this.BuildModifiersFireteam(this.SelfData.fireteams);
         await this.Exploration.RebuildProperties();
         await this.Faction.RebuildProperties();
+        const fighter = this.GetFighters();
+        for (let i = 0; i < fighter.length; i ++) {
+            await fighter[i].model.RebuildProperties();
+        }
     }
 
     public async DuplicateFighter( fighter : RealWarbandPurchaseModel, count_cost = true ) {
@@ -583,9 +820,15 @@ class UserWarband extends DynamicContextObject {
                 return "Warband Cannot Afford " + fighter.model.CurModel.GetTrueName();
             }
         }
+
+        const Check = await fighter.model.CanCopySelf();
+
+        if (Check.length > 0) {
+            return Check;
+        }
         
         const milliseconds = Date.now();
-        const NewMember : WarbandMember = await WarbandFactory.CreateWarbandMember((fighter.model.ConvertToInterface()), this);
+        const NewMember : WarbandMember = await WarbandFactory.CreateWarbandMember((fighter.model.ConvertToInterface()), this, this.IsUnRestricted);
         NewMember.Name = fighter.model.Name
         NewMember.ID =  NewMember.CurModel.ID + "_" + this.Models.length + "_" + milliseconds.toString()
         const NewPurchase : WarbandPurchase = new WarbandPurchase(fighter.purchase.ConvertToInterface(), this, NewMember);
@@ -602,14 +845,25 @@ class UserWarband extends DynamicContextObject {
         
         const eventmon : EventRunner = new EventRunner();
         let maxcount = RefModel.Maximum;
-        maxcount = await eventmon.runEvent(
-            "getModelLimitTrue",
-            RefModel,
-            [],
-            maxcount,
-            this
-        )
-        if (this.GetCountOfRel(RefModel.ID) < maxcount || ((RefModel.Minimum == 0 && RefModel.Maximum == 0))) {
+        if (this.ModelRelCache[RefModel.ID] != null) {
+            maxcount = this.ModelRelCache[RefModel.ID].limit
+        } else {
+            maxcount = await eventmon.runEvent(
+                "getModelLimitTrue",
+                RefModel,
+                [RefModel],
+                maxcount,
+                this
+            )
+            maxcount = await eventmon.runEvent(
+                "getModelLimitTrue",
+                this,
+                [RefModel],
+                maxcount,
+                this
+            )
+        }
+        if (this.GetCountOfRel(RefModel.ID) < maxcount || ((RefModel.Minimum == 0 && RefModel.Maximum == -1))) {
             return false;
         }
         return true;
@@ -623,6 +877,11 @@ class UserWarband extends DynamicContextObject {
                 for (let j = 0; j < FighterItems.length; j++) {
                     FighterItems[j].MyContext = this;
                     this.Modifiers.push(FighterItems[j])
+                }
+                const EquipmentItems : WarbandPurchase[] = await fighter.model.GetWarbandEquipment();
+                for (let j = 0; j < EquipmentItems.length; j++) {
+                    EquipmentItems[j].HeldObject.MyContext = this;
+                    this.Equipment.push(EquipmentItems[j])
                 }
                 this.Models.splice(i, 1);
                 break;
@@ -681,8 +940,11 @@ class UserWarband extends DynamicContextObject {
 
         try {
             await this.DeleteFighter(fighter);
-            this.Debts.ducats +=  Math.ceil(CostVarDucats * debt_mod);
-            this.Debts.glory += Math.ceil(CostVarGlory * debt_mod);
+            if (fighter.purchase.CountCap == true) {
+                this.Debts.ducats +=  Math.ceil(CostVarDucats * debt_mod);
+                this.Debts.glory += Math.ceil(CostVarGlory * debt_mod);
+            }
+
 
         } catch (e) { console.log(e) }
     }
@@ -690,22 +952,63 @@ class UserWarband extends DynamicContextObject {
     public async DirectAddStash( item : RealWarbandPurchaseEquipment) {
         this.Equipment.push(item.purchase);
     }
+
+    public AddStashValue(newval : number, type : number) {
+        if (type == 1) {
+            this.Glory += newval;
+        } else {
+            this.Ducats += newval;
+        }
+    }
+
+    public async CustomStash( item : Equipment, cost : number, costtype : number) {
+        if (!this.Restrictions.includes("custom_equipment")) {
+            this.Restrictions.push("custom_equipment")
+        }
+        const FactionequipmentInterface : IFactionEquipmentRelationship = {
+            id: item.GetID() + "_" + Date.now().toString(),
+            name: item.GetTrueName(),
+            source: "Warband Custom",
+            tags: {"is_custom": true},
+            contextdata : {},
+            faction_id : [],
+            equipment_id : item.GetID(),
+            cost : cost,
+            costtype : costtype,
+            limit : 0
+        }
+        const FacEquip : FactionEquipmentRelationship = await EquipmentFactory.CreateFactionEquipment(FactionequipmentInterface, this, true)
+        await this.AddStash(FacEquip)
+    }
     
-    public async AddStash ( stash: FactionEquipmentRelationship ) {
+    public async AddStash ( stash: FactionEquipmentRelationship, free = false ) {
+        let itemcost = stash.Cost;
+        if ((this).EquipmentRelCache[stash.ID] != null) {
+            itemcost = (this).EquipmentRelCache[stash.ID].cost
+        }
         const Equipment : WarbandEquipment = await WarbandFactory.BuildWarbandEquipmentFromPurchase(stash, this);
         const NewPurchase : WarbandPurchase = new WarbandPurchase({
-            cost_value : stash.Cost,
+            cost_value : itemcost,
             cost_type : stash.CostType,
             count_limit : true,
             count_cap : true,
             sell_item : true,
             sell_full : true,
+            discount: (free)? itemcost : 0,
             purchaseid: stash.EquipmentItem.ID,
             faction_rel_id: stash.ID,
             custom_rel: stash.SelfData,
             modelpurch: false
         }, this, Equipment);
         this.Equipment.push(NewPurchase);
+        const eventmon : EventRunner = new EventRunner();
+        await eventmon.runEvent(
+            "onGainEquipment",
+            Equipment,
+            [this, this],
+            null,
+            NewPurchase
+        )
     }
     
     public async DeleteStash( item : RealWarbandPurchaseEquipment ) {
@@ -727,13 +1030,14 @@ class UserWarband extends DynamicContextObject {
             return "Warband At Limit For " + item.equipment.MyEquipment.GetTrueName();
         }
 
-        const Relationship : FactionEquipmentRelationship = await EquipmentFactory.CreateFactionEquipment(item.purchase.CustomInterface as IFactionEquipmentRelationship, this)
+        const Relationship : FactionEquipmentRelationship = await EquipmentFactory.CreateFactionEquipment(item.purchase.CustomInterface as IFactionEquipmentRelationship, this, true)
         const Equipment : WarbandEquipment = await WarbandFactory.BuildWarbandEquipmentFromPurchase(Relationship, this);
         const NewPurchase : WarbandPurchase = new WarbandPurchase({
             cost_value : Relationship.Cost,
             cost_type : Relationship.CostType,
             count_limit : true,
             count_cap : true,
+            discount: 0,
             sell_item : true,
             sell_full : true,
             purchaseid: Relationship.EquipmentItem.ID,
@@ -748,18 +1052,28 @@ class UserWarband extends DynamicContextObject {
     }
 
     public async AtMaxOfItem( model : string) {
-        const RefModel : FactionEquipmentRelationship = await EquipmentFactory.CreateNewFactionEquipment(model, null);
-        
+        const RefModel : FactionEquipmentRelationship | null = await EquipmentFactory.CreateNewFactionEquipment(model, null);
+        if (RefModel == null) {
+            return false;
+        }
         const eventmon : EventRunner = new EventRunner();
         let maxcount = RefModel.Limit;
-        maxcount = await eventmon.runEvent(
-            "getEquipmentLimitTrue",
-            RefModel,
-            [],
-            maxcount,
-            this
-        )
-        if (this.GetCountOfEquipmentRel(RefModel.ID) < maxcount || (maxcount == 0 && RefModel.Limit == 0)) {
+        let curcount = 0;
+
+        if (this.EquipmentRelCache[RefModel.ID] != null) {
+            maxcount = this.EquipmentRelCache[RefModel.ID].limit
+            curcount = this.EquipmentRelCache[RefModel.ID].count_cur
+        } else {
+            maxcount = await eventmon.runEvent(
+                "getEquipmentLimitTrue",
+                RefModel,
+                [],
+                maxcount,
+                this
+            )
+            curcount = this.GetCountOfEquipmentRel(RefModel.ID)
+        }
+        if (curcount < maxcount || (maxcount == 0 && RefModel.Limit == 0)) {
             if (!containsTag(RefModel.Tags, "exploration_only")) {
                 return false;
             }
@@ -773,8 +1087,10 @@ class UserWarband extends DynamicContextObject {
 
         try {
             await this.DeleteStash(item);
-            this.Debts.ducats +=  Math.ceil(CostVarDucats * debt_mod);
-            this.Debts.glory += Math.ceil(CostVarGlory * debt_mod);
+            if (item.purchase.CountCap == true) {
+                this.Debts.ducats +=  Math.ceil(CostVarDucats * debt_mod);
+                this.Debts.glory += Math.ceil(CostVarGlory * debt_mod);
+            }
 
         } catch (e) { console.log(e) }
     }
@@ -785,19 +1101,6 @@ class UserWarband extends DynamicContextObject {
      */
     public async AddExplorationLocation ( location: ExplorationLocation, option: ISelectedOption[]) {
         await this.Exploration.AddExplorationLocation(location, option);
-    }
-
-
-    /** @TODO
-     * Adds a modifier item to a warband
-     *
-     * @param modifier
-     * @param option
-     */
-    public AddModifier ( modifier: object, option: object) {
-
-        return false;
-
     }
 
 
@@ -814,7 +1117,6 @@ class UserWarband extends DynamicContextObject {
     }
 
     /**
-     * @TODO: Return the Vistory Points for this Warband
      * - can use Campaign Info
      * - uses VP for the currently active cylce
      */
@@ -827,12 +1129,15 @@ class UserWarband extends DynamicContextObject {
     }
 
     /**
-     * @TODO: Return the Campaign Cycle of the connected campaign
-     - can use Campaign Info
+     * Return the campaign cycle of this warband
      - This is the campaign cycle that is currently selected for the WBB view
      */
     GetCampaignCycleView() {
-        return this.Context.CampaignRound;
+        if(this.Context.CampaignRound) {
+            return this.Context.CampaignRound;
+        }
+
+        return 1;
     }
 
     SetCurrentCycle(num : number) {
@@ -840,9 +1145,7 @@ class UserWarband extends DynamicContextObject {
     }
 
     /**
-     * @TODO: return the maximum campaign cycle, that is possible for this Warband
-     * - This returns the maximum campaign cycle this warband has advanced to
-     * - simultaneously this is the only cycle, which can be edited
+     * This returns the maximum campaign cycle for this warband
      * @constructor
      */
     GetCampaignCycleMax() {
@@ -856,14 +1159,23 @@ class UserWarband extends DynamicContextObject {
     async GetCampaignTresholdValue () {
         const base = this.DucatLimit[this.GetCampaignCycleView() - 1] ?? this.DucatLimit[this.DucatLimit.length - 1];
         const eventmon : EventRunner = new EventRunner();
-        const DucatCount = await eventmon.runEvent(
-            "getStartingDucats",
-            this,
-            [],
-            base,
-            null
-        )
-        return DucatCount
+        let DucatCount = base
+        if (this.GeneralCache.base_ducats != null) {
+            DucatCount = this.GeneralCache.base_ducats
+        } else {
+            DucatCount = await eventmon.runEvent(
+                "getStartingDucats",
+                this,
+                [],
+                base,
+                null
+            )
+        }
+        if (DucatCount != undefined) {
+            return DucatCount
+        } else {
+            return base
+        }
     }
 
     GetCampaignMaxFieldStrength () {
@@ -883,24 +1195,25 @@ class UserWarband extends DynamicContextObject {
     }
 
     /**
-     * @TODO get stash Data
      */
     GetStash() {
 
         return {
-            ValueDucats: this.GetDucatCostStash(),
-            ValueGlory: this.GetGloryCostStash(),
-            AmountDucats: this.Ducats - this.GetCostDucatsTotal() -  this.Debts.ducats,
-            AmountGlory: this.Glory - this.GetCostGloryTotal() -  this.Debts.glory,
+            ValueDucats: this.GetDucatCostStash(), // stash value in ducats
+            ValueGlory: this.GetGloryCostStash(), // stash value in glory
+            AmountDucats: this.GetSumCurrentDucats(),  // unspent ducats
+            AmountGlory: this.GetSumCurrentGlory(), // unspent glory
+            TotalDucats: this.GetDucatCostStash(), // total stash value in ducats
+            TotalGlory: this.GetGloryCostStash(), // total stash value in glory
             Items: []
         }
     }
 
-    public GetDucatCost() {
+    public GetDucatCost(discount = false) {
         
         let TotalDucatCost = 0;
         for (let i = 0; i < this.Models.length; i++) {
-            TotalDucatCost += this.Models[i].GetTotalDucats();
+            TotalDucatCost += this.Models[i].GetTotalDucats(false, discount);
         }
         return TotalDucatCost
     }
@@ -910,26 +1223,35 @@ class UserWarband extends DynamicContextObject {
         let TotalDucatCost = 0;
         for (let i = 0; i < this.Models.length; i++) {
             if ((this.Models[i].HeldObject as WarbandMember).State == "active") {
+                if (this.Models[i].CountCap == false) {
+                    continue;
+                }
                 TotalDucatCost += this.Models[i].GetTotalDucats();
             }
         }
         return TotalDucatCost
     }
 
-    public GetDucatCostStash() {
+    public GetDucatCostStash(discount = false) {
         
         let TotalDucatCost = 0;
         for (let i = 0; i < this.Equipment.length; i++) {
-            TotalDucatCost += this.Equipment[i].GetTotalDucats();
+            if (this.Equipment[i].CountCap == false) {
+                continue;
+            }
+            TotalDucatCost += this.Equipment[i].GetTotalDucats(false, discount);
         }
         return TotalDucatCost
     }
 
-    public GetGloryCost() {
+    public GetGloryCost(discount = false) {
         
         let TotalGloryCost = 0;
         for (let i = 0; i < this.Models.length; i++) {
-            TotalGloryCost += this.Models[i].GetTotalGlory();
+            if (this.Models[i].CountCap == false) {
+                continue;
+            }
+            TotalGloryCost += this.Models[i].GetTotalGlory(false, discount);
         }
         return TotalGloryCost
     }
@@ -938,6 +1260,7 @@ class UserWarband extends DynamicContextObject {
         
         let TotalGloryCost = 0;
         for (let i = 0; i < this.Models.length; i++) {
+            if (this.Models[i].CountCap == false) {continue;}
             if ((this.Models[i].HeldObject as WarbandMember).State == "active") {
                 TotalGloryCost += this.Models[i].GetTotalGlory();
             }
@@ -945,11 +1268,12 @@ class UserWarband extends DynamicContextObject {
         return TotalGloryCost
     }
 
-    public GetGloryCostStash() {
+    public GetGloryCostStash(discount = false) {
         
         let TotalGloryCost = 0;
         for (let i = 0; i < this.Equipment.length; i++) {
-            TotalGloryCost += this.Equipment[i].GetTotalGlory();
+            if (this.Equipment[i].CountCap == false) {continue;}
+            TotalGloryCost += this.Equipment[i].GetTotalGlory(false, discount);
         }
         return TotalGloryCost
     }
@@ -965,13 +1289,20 @@ class UserWarband extends DynamicContextObject {
     public async CanAddMoreElite() {
         
         const EventProc : EventRunner = new EventRunner();
-        const result = await EventProc.runEvent(
-            "getNumberOfElite",
-            this,
-            [],
-            6,
-            null
-        )
+        let result = 6
+
+        if (this.GeneralCache.max_elite != null) {
+            result = this.GeneralCache.max_elite
+        } else {
+        
+            result = await EventProc.runEvent(
+                "getNumberOfElite",
+                this,
+                [],
+                6,
+                this
+            )
+        }
 
         return this.GetNumElite() < result;
     }
@@ -1004,12 +1335,39 @@ class UserWarband extends DynamicContextObject {
     public async GetValidationErrors () {
 
         const AlertList : string[] = []
-        /**
-         * @TODO LANE Get Errors Alerts Working
-         */
 
+        const EventProc : EventRunner = new EventRunner();
         let CaptainFound = false
-        for (let i = 0; i < this.Models.length; i++) {
+        for (let i = 0; i < this.Models.length; i++) {   
+            if ((this.Models[i].HeldObject as WarbandMember).IsMercenary()) {
+                continue;
+            }    
+            let finalsource = [] 
+            const CheckList = (this.Models[i].HeldObject as WarbandMember).GeneralCache.validation_check
+            if (CheckList != null) {
+                finalsource = CheckList
+            } else {
+                const result = await EventProc.runEvent(
+                    "validateModelForWarband",
+                    this,
+                    [this],
+                    [],
+                    this.Models[i]
+                )
+                const result_fin = await EventProc.runEvent(
+                    "validateModelForWarband",
+                    this.Models[i].HeldObject as WarbandMember,
+                    [this],
+                    result,
+                    this.Models[i]
+                ) 
+                finalsource = result_fin
+            }
+
+            for (let j = 0; j < finalsource.length; j++) {
+                AlertList.push(finalsource[j])
+            }
+
             if ((this.Models[i].CustomInterface as IFactionModelRelationship).captain) {
                 if ((this.Models[i].CustomInterface as IFactionModelRelationship).captain == true) {
                     CaptainFound = true;
@@ -1018,10 +1376,78 @@ class UserWarband extends DynamicContextObject {
         }
 
         if (CaptainFound == false) {
-            AlertList.push("Your warband lacks a Leader")
+            AlertList.push("The warband lacks a Leader")
+        }
+        
+        if (this.IsUnRestricted == true) {
+            AlertList.push("The warband has been set to Unrestricted mode")
+        } 
+
+        if (this.Restrictions.includes("custom_equipment") == true) {
+            AlertList.push("The warband has been given a custom piece of equipment")
+        } 
+
+        if (this.Restrictions.includes("custom_fighter") == true) {
+            AlertList.push("The warband has been given a custom fighter")
+        } 
+
+        const ErrorsInModelCount = await this.GetModelCountErrors();
+
+        for (let i = 0; i < ErrorsInModelCount.length; i++) {
+            AlertList.push(ErrorsInModelCount[i])
         }
 
         return AlertList
+    }
+
+    public async GetModelCountErrors() {
+        const FacCheck = this.Faction.MyFaction;
+        const ListOfRels : string[] = []
+        let BaseRels : FactionModelRelationship[] = []
+        
+        if (FacCheck != undefined) {
+            BaseRels = ((FacCheck.SelfDynamicProperty).OptionChoice as Faction).Models
+        }
+
+        const eventmon : EventRunner = new EventRunner();
+
+        if (this.GeneralCache.fac_model_rel != null) {
+            BaseRels = this.GeneralCache.fac_model_rel
+        } else {
+            BaseRels = await eventmon.runEvent(
+                "getAllFactionModelRelationships",
+                this,
+                [],
+                BaseRels,
+                null
+            )
+        }
+
+        for (let i = 0; i < BaseRels.length; i++) {
+            
+            if (this.GetCountOfRel(BaseRels[i].ID) < BaseRels[i].Minimum && ((BaseRels[i].Maximum != -1))) {
+                ListOfRels.push("Your warband has too few " + BaseRels[i].Model.GetTrueName())
+            }
+        }
+
+        return ListOfRels;
+    }
+
+    public IsWarbandCustom() {
+        
+        if (this.IsUnRestricted == true) {
+            return true
+        } 
+
+        if (this.Restrictions.includes("custom_equipment") == true) {
+            return true
+        } 
+
+        if (this.Restrictions.includes("custom_fighter") == true) {
+            return true
+        } 
+
+        return false;
     }
 
     /** 
@@ -1111,10 +1537,12 @@ class UserWarband extends DynamicContextObject {
         }
         return count;
     }
+    
 
     public GetCountOfRel(id : string) {
         let count = 0;
         for (let i = 0; i < this.Models.length; i++) {
+            if ((this.Models[i].HeldObject as WarbandMember).State == 'dead') { continue; }
             const inter = this.Models[i].CustomInterface
             if (inter) {
                 if (inter.id == id) {
@@ -1163,6 +1591,17 @@ class UserWarband extends DynamicContextObject {
         return count;
     }
 
+    public async GetCountOfTag(id : string, truthval : boolean) {
+        let count = 0;
+        for (let i = 0; i < this.Models.length; i++) {
+            const istruth = await (this.Models[i].HeldObject as WarbandMember).IsTagPresent(id)
+            if (istruth == truthval) {
+                count ++;
+            }
+        }
+        return count;
+    }
+
     public async GetEliteFighterOptions() : Promise<FactionModelRelationship[]> {
         const ListOfRels : FactionModelRelationship[] = await this.GetFighterOptions();
 
@@ -1191,51 +1630,103 @@ class UserWarband extends DynamicContextObject {
         }
 
         const eventmon : EventRunner = new EventRunner();
-        BaseRels = await eventmon.runEvent(
-            "getAllFactionModelRelationships",
-            this,
-            [],
-            BaseRels,
-            null
-        )
+
+        if (this.GeneralCache.fac_model_rel != null) {
+            BaseRels = this.GeneralCache.fac_model_rel
+        } else {
+            BaseRels = await eventmon.runEvent(
+                "getAllFactionModelRelationships",
+                this,
+                [],
+                BaseRels,
+                null
+            )
+        }       
 
         for (let i = 0; i < BaseRels.length; i++) {
             const IsRestricted : boolean = await this.IsModelRestricted(BaseRels[i]);
-            if (IsRestricted) { continue; }
             let maxcount = BaseRels[i].Maximum;
-            maxcount = await eventmon.runEvent(
-                "getModelLimitTrue",
-                BaseRels[i],
-                [],
-                maxcount,
-                this
-            )
-            if (this.GetCountOfRel(BaseRels[i].ID) < maxcount || ((BaseRels[i].Minimum == 0 && BaseRels[i].Maximum == 0))) {
-                if (count_cost == true) {
-                    let canaddupgrade = true;
-                    let maxccurcostount = BaseRels[i].Cost;
-                    maxccurcostount = await eventmon.runEvent(
-                        "getCostOfModel",
-                        BaseRels[i],
-                        [],
-                        maxccurcostount,
-                        this
-                    )
-
+            let canaddupgrade = true;
+            let maxccurcostount = BaseRels[i].Cost;
+            let countofmodel = 0
+            let maxofgroup = -1;
+            let countofgroup = 0;
+            
+            if (this.ModelRelCache[BaseRels[i].ID]) {
+                maxcount = this.ModelRelCache[BaseRels[i].ID].limit
+                canaddupgrade = this.ModelRelCache[BaseRels[i].ID].canadd
+                maxccurcostount = this.ModelRelCache[BaseRels[i].ID].cost
+                countofmodel = this.ModelRelCache[BaseRels[i].ID].count_cur
+                countofgroup = this.ModelRelCache[BaseRels[i].ID].group_cur
+                maxofgroup = this.ModelRelCache[BaseRels[i].ID].group_limit
+            } else {
+                maxcount = await eventmon.runEvent(
+                    "getModelLimitTrue",
+                    BaseRels[i],
+                    [BaseRels[i]],
+                    maxcount,
+                    this
+                )
+                maxcount = await eventmon.runEvent(
+                    "getModelLimitTrue",
+                    this,
+                    [BaseRels[i]],
+                    maxcount,
+                    this
+                )
+                maxofgroup = await eventmon.runEvent(
+                    "getGroupLimitTrue",
+                    BaseRels[i],
+                    [],
+                    maxofgroup,
+                    this
+                )
+                maxccurcostount = await eventmon.runEvent(
+                    "getCostOfModel",
+                    BaseRels[i],
+                    [],
+                    maxccurcostount,
+                    this
+                )
+                countofmodel = this.GetCountOfRel(BaseRels[i].ID)
+                countofgroup = await eventmon.runEvent(
+                    "getCountOfGroup",
+                    BaseRels[i],
+                    [],
+                    countofmodel,
+                    this
+                )
+                if (! (countofmodel < maxcount || ((BaseRels[i].Minimum == 0 && BaseRels[i].Maximum == -1)))) {
+                    canaddupgrade = false;
+                }
+                if (!(countofgroup < maxofgroup || maxofgroup < 0)) {
+                    canaddupgrade = false;
+                }
+                if (count_cost == true && canaddupgrade == true) {
                     if (BaseRels[i].CostType == 0) {
                         canaddupgrade = (this).GetSumCurrentDucats() >= maxccurcostount;
                     }
                     if (BaseRels[i].CostType == 1) {
                         canaddupgrade = (this).GetSumCurrentGlory() >= maxccurcostount;
                     }
-
-                    if (canaddupgrade) {
-                        ListOfRels.push(BaseRels[i]);
-                    }
-                } else {
-                    ListOfRels.push(BaseRels[i]);
+                }
+                this.ModelRelCache[BaseRels[i].ID] = {
+                    avoid_restriction: IsRestricted,
+                    canadd: canaddupgrade,
+                    cost: maxccurcostount,
+                    count_cur: countofmodel,
+                    facrel: BaseRels[i],
+                    limit: maxcount,
+                    group_cur: countofgroup,
+                    group_limit: maxofgroup
                 }
             }
+
+            if (IsRestricted) { continue; }
+            if (this.IsUnRestricted || canaddupgrade) {
+                ListOfRels.push(BaseRels[i]);
+            }
+
         }
 
         return ListOfRels
@@ -1243,14 +1734,21 @@ class UserWarband extends DynamicContextObject {
 
     public async IsModelRestricted(model : FactionModelRelationship) : Promise<boolean> {
         const eventmon : EventRunner = new EventRunner();
-        const AvoidRestriction = await eventmon.runEvent(
-            "avoidModelRestriction",
-            this,
-            [],
-            false,
-            model
-        )
+        let AvoidRestriction = false;
+        let relcount = 0
 
+        if (this.ModelRelCache[model.ID] != null) {
+            AvoidRestriction = this.ModelRelCache[model.ID].avoid_restriction
+            relcount = this.ModelRelCache[model.ID].count_cur
+        } else {
+            AvoidRestriction = await eventmon.runEvent(
+                "avoidModelRestriction",
+                this,
+                [],
+                false,
+                model
+            )
+        }
         if (!AvoidRestriction) {
             for (let i = 0; i < model.Restricted_Models.length; i++) {
                 for (let j = 0; j < model.Restricted_Models[i].upgrade_ids.length; j++) {
@@ -1264,66 +1762,194 @@ class UserWarband extends DynamicContextObject {
         return false;
     }
 
-    public async GetFactionEquipmentOptions(use_exploration = false, count_cost = true) : Promise<FactionEquipmentRelationship[]> {
+    public GetEntireWarbandEquipment() {
+        let options : RealWarbandPurchaseEquipment[] = [ ];
+
+        options = [...options, ...this.GetAllEquipment()]
+
+        for (let i = 0; i < this.Models.length; i++) {
+            const Mod = this.Models[i].HeldObject as WarbandMember;
+            options = [...options, ...Mod.GetEquipment()]
+        }
+
+        return options;
+    }
+
+    public GetAllEquipment() {
+        
+        const options : RealWarbandPurchaseEquipment[] = [ ];
+
+        for (let i = 0; i < this.Equipment.length; i++) {
+            options.push(
+                {
+                    purchase: this.Equipment[i],
+                    equipment: this.Equipment[i].HeldObject as WarbandEquipment
+                }
+            )
+        }
+
+        for (let i = 0; i < this.Models.length; i++) {
+            const ModelEquip = (this.Models[i].GetOwnItem() as WarbandMember).GetEquipment()
+            for (let j = 0; j < ModelEquip.length; j++) {
+                options.push(
+                    ModelEquip[j]
+                )
+            }
+        }
+
+        return options;
+    }
+
+    public async GetFactionEquipmentOptions(use_exploration = false, count_cost = true, get_base = false, exploration_cap = true) : Promise<FactionEquipmentRelationship[]> {
         const FacCheck = this.Faction.MyFaction;
         const ListOfRels : FactionEquipmentRelationship[] = []
         const AddedIDs : string[] = [];
         let BaseRels : FactionEquipmentRelationship[] = []
         let RefRels : FactionEquipmentRelationship[] = []
-        
+
         if (FacCheck != undefined) {
             RefRels = ((FacCheck.SelfDynamicProperty).OptionChoice as Faction).EquipmentItems
         }
 
         for (let i = 0; i < RefRels.length; i++) {
-            if (!containsTag(RefRels[i].Tags, "exploration_only") || use_exploration) {
+            if (!containsTag(RefRels[i].Tags, "exploration_only") || use_exploration || this.IsUnRestricted) {
                 BaseRels.push(RefRels[i]);
             }
         }
-
         const eventmon : EventRunner = new EventRunner();
-        BaseRels = await eventmon.runEvent(
-            "getAllFactionEquipmentRelationships",
-            this,
-            [],
-            BaseRels,
-            null
-        )
+        if (this.GeneralCache.faction_equip_rel != null) {
+            BaseRels = this.GeneralCache.faction_equip_rel
+        } else {
+            
+            BaseRels = await eventmon.runEvent(
+                "getAllFactionEquipmentRelationships",
+                this,
+                [],
+                BaseRels,
+                null
+            )
+        }
+
+        
+
+        let FactionEquipRestrictionList : EquipmentRestriction[] = []
+        if (this.GeneralCache.fac_equip_rest != null) {
+            FactionEquipRestrictionList = this.GeneralCache.fac_equip_rest
+        } else {
+            
+            FactionEquipRestrictionList  = await eventmon.runEvent(
+                "getEquipmentRestriction", this, [], [], null )
+        }
 
         for (let i = 0; i < BaseRels.length; i++) {
+            
+            const NewRefList : EquipmentRestriction[] = [];
             let maxcount = BaseRels[i].Limit;
-            maxcount = await eventmon.runEvent(
-                "getEquipmentLimitTrue",
-                BaseRels[i],
-                [],
-                maxcount,
-                this
-            )
-            if (this.GetCountOfEquipmentRel(BaseRels[i].ID) < maxcount || (maxcount == 0 && BaseRels[i].Limit == 0)) {
+            let maxccurcostount = BaseRels[i].Cost;
+            let canadd = true;
+
+            if (this.EquipmentRelCache[BaseRels[i].ID] == null ) {
+
+                const EquipRestrictionList : EquipmentRestriction[] = await eventmon.runEvent(
+                    "getEquipmentRestriction",BaseRels[i],[], [], null )
+                const BaseEquipRestrictionList : EquipmentRestriction[] = await eventmon.runEvent(
+                    "getEquipmentRestriction", BaseRels[i].EquipmentItem, [], [], null )
+                for (let j = 0; j < EquipRestrictionList.length; j++) { NewRefList.push(EquipRestrictionList[j]); }
+                for (let j = 0; j < BaseEquipRestrictionList.length; j++) { NewRefList.push(BaseEquipRestrictionList[j]); }
+                for (let j = 0; j < FactionEquipRestrictionList.length; j++) { NewRefList.push(FactionEquipRestrictionList[j]); }
+
+                const StringOfRestrictions = await eventmon.runEvent(
+                    "getEquipmentRestrictionPresentable",
+                    BaseRels[i],
+                    [],
+                    [],
+                    NewRefList
+                )
+                
+                maxcount = await eventmon.runEvent(
+                    "getEquipmentLimitTrue",
+                    BaseRels[i],
+                    [BaseRels[i]],
+                    maxcount,
+                    this
+                )
+                maxcount = await eventmon.runEvent(
+                    "getEquipmentLimitTrue",
+                    this,
+                    [BaseRels[i]],
+                    maxcount,
+                    this
+                )
+
+                maxccurcostount = await eventmon.runEvent(
+                    "getCostOfEquipment",
+                    BaseRels[i],
+                    [BaseRels[i]],
+                    maxccurcostount,
+                    this
+                )
+
+                maxccurcostount = await eventmon.runEvent(
+                    "getCostOfEquipment",
+                    this,
+                    [BaseRels[i]],
+                    maxccurcostount,
+                    this
+                )
+                canadd = await eventmon.runEvent(
+                    "canWarbandAddItem",
+                    this,
+                    [NewRefList, BaseRels[i]],
+                    true,
+                    this
+                )
+
+                this.EquipmentRelCache[BaseRels[i].ID] = {
+                    limit: maxcount,
+                    cost : maxccurcostount,
+                    facrel: BaseRels[i],
+                    restrictions: StringOfRestrictions,
+                    count_cur: this.GetCountOfEquipmentRel(BaseRels[i].ID),
+                    canadd : canadd
+                }
+            } else {
+                maxcount = this.EquipmentRelCache[BaseRels[i].ID].limit,
+                maxccurcostount = this.EquipmentRelCache[BaseRels[i].ID].cost
+                canadd = this.EquipmentRelCache[BaseRels[i].ID].canadd
+            }
+
+            if (get_base == true || this.IsUnRestricted == true) {
+                AddedIDs.push(BaseRels[i].ID)
+                ListOfRels.push(BaseRels[i]);
+                continue;
+            }
+
+            if (!canadd) {
+                continue;
+            }
+            
+            if (this.EquipmentRelCache[BaseRels[i].ID].count_cur < maxcount || (maxcount == 0 && BaseRels[i].Limit == 0)) {
                 if (!containsTag(BaseRels[i].Tags, "exploration_only") || use_exploration) {
 
                     if (count_cost == true) {
                         let canaddupgrade = true;
-                        let maxccurcostount = BaseRels[i].Cost;
-                        maxccurcostount = await eventmon.runEvent(
-                            "getCostOfEquipment",
-                            BaseRels[i],
-                            [],
-                            maxccurcostount,
-                            this
-                        )
 
                         if (BaseRels[i].CostType == 0) {
                             canaddupgrade = (this).GetSumCurrentDucats() >= maxccurcostount;
                         }
                         if (BaseRels[i].CostType == 1) {
                             canaddupgrade = (this).GetSumCurrentGlory() >= maxccurcostount;
+                            if (containsTag(BaseRels[i].Tags, "exploration_only") && exploration_cap) {
+                                const explore_limit = await this.GetExplorationLimit()
+                                canaddupgrade = maxccurcostount <= explore_limit;
+                            }
                         }
 
                         if (canaddupgrade) {
                             AddedIDs.push(BaseRels[i].ID)
                             ListOfRels.push(BaseRels[i]);
                         }
+
                     } else {
                         AddedIDs.push(BaseRels[i].ID)
                         ListOfRels.push(BaseRels[i]);
@@ -1335,14 +1961,36 @@ class UserWarband extends DynamicContextObject {
         return ListOfRels
     }
 
+    public async GetExplorationLimit() {
+        
+        if (this.GeneralCache.exploration_limit != null) {
+            return this.GeneralCache.exploration_limit
+        }
+        const Events : EventRunner = new EventRunner();
+        const ExploreLimit : number = await Events.runEvent(
+                "getExplorationLimit",
+                this,
+                [],
+                0,
+                this
+            )
+        this.GeneralCache.exploration_limit = ExploreLimit
+        return ExploreLimit;
+    }
+
     public async GetModifiersList() {
         const PropertyList : WarbandProperty[] = [];
 
         for (let i = 0; i < this.Models.length; i++) {
             const Mods = await (this.Models[i].HeldObject as WarbandMember).GetWarbandSkills();
             for (let j = 0; j < Mods.length; j++) {
-                PropertyList.push(Mods[i])
+                PropertyList.push(Mods[j])
             }
+        }
+        
+        const Mods = await (this.Exploration).GetWarbandModifiers();
+        for (let j = 0; j < Mods.length; j++) {
+            PropertyList.push(Mods[j])
         }
 
         for (let i = 0; i < this.Modifiers.length; i++) {
@@ -1354,7 +2002,9 @@ class UserWarband extends DynamicContextObject {
 
     public async GetFireteams() {
         const PropertyList : WarbandProperty[] = [];
-
+        if (this.GeneralCache.fireteam_list == null) {
+            await this.BuildModifiersFireteam(this.ConvertToInterface().fireteams);
+        }
         for (let i = 0; i < this.Fireteams.length; i++) {
             PropertyList.push(this.Fireteams[i])    
         }
@@ -1414,6 +2064,311 @@ class UserWarband extends DynamicContextObject {
 
         // Insert the member at the new position
         this.Models.splice(adjustedIndex, 0, NewSet);
+    }
+
+    public BuildExport(full = true) {
+
+        let full_mode = null // cache busting
+
+        if (this.GeneralCache.exportval != null
+            && full_mode != null
+            && (full_mode == full))
+        {
+            return this.GeneralCache.exportval
+        }
+
+        full_mode = full;  // cache the mode
+
+
+        const LineList : string[] = [];
+        const elite = this.GetFighters().filter((item) => (item.model.IsElite() && item.model.State == "active"))
+        const troops = this.GetFighters().filter((item) => (!item.model.IsElite() && item.model.State == "active"))
+        const mercenaries = this.GetFighters().filter((item) => (item.model.IsMercenary() && item.model.State == "active"))
+        const reserves = this.GetFighters().filter((item) => (item.model.State == "reserved"))
+        const lost = this.GetFighters().filter((item) => (item.model.State == "lost"))
+        const dead = this.GetFighters().filter((item) => (item.model.State == "dead"))
+        LineList.push("## Warband " + this.GetTrueName() + " ##")
+        LineList.push(" ")
+        LineList.push(this.GetDucatRatingCost().toString() + " Ducats | "+ this.GetGloryRatingCost().toString() + " Glory" )
+        LineList.push("Patron: " + this.GetPatronName())
+        if (elite.length > 0) {
+            LineList.push(" ")
+            LineList.push(" ")
+            LineList.push("## Elites ##")
+            for (let i = 0; i < elite.length; i++) {
+                LineList.push("  ")
+                LineList.push(elite[i].model.GetTrueName() + " - " + elite[i].model.GetModelName())
+
+                LineList.push("• Cost: "+elite[i].purchase.GetTotalDucats().toString() + " Ducats | " + elite[i].purchase.GetTotalGlory().toString() + " Glory")
+                if (elite[i].model.Upgrades.length > 0) {
+                    LineList.push("  " + "Upgrades & Choices: ")
+                    const UpgradesList : string[] = []
+                    for (let j = 0; j < elite[i].model.Upgrades.length; j++) {
+                        UpgradesList.push(elite[i].model.Upgrades[j].GetItemName())
+                    }
+                    LineList.push("    " + UpgradesList.join(', '))
+                }
+                if (elite[i].model.Equipment.length > 0) {
+                    LineList.push("• Equipment: "+ elite[i].model.GetEquipmentAsString())
+                }
+                if (elite[i].model.Skills.length > 0) {
+                    const UpgradesList : string[] = []
+                    for (let j = 0; j < elite[i].model.Skills.length; j++) {
+                        UpgradesList.push(elite[i].model.Skills[j].SelfDynamicProperty.OptionChoice.GetTrueName())
+                    }
+                    LineList.push("• Skills: " + UpgradesList.join(', '))
+                }
+                if (elite[i].model.Injuries.length > 0) {
+                    const UpgradesList : string[] = []
+                    for (let j = 0; j < elite[i].model.Injuries.length; j++) {
+                        UpgradesList.push(elite[i].model.Injuries[j].SelfDynamicProperty.OptionChoice.GetTrueName())
+                    }
+                    LineList.push("• Injuries: " + UpgradesList.join(', '))
+                }
+            }
+        }
+
+        if (troops.length > 0) {
+            LineList.push("  ")
+            LineList.push("  ")
+            LineList.push("## Troops ##")
+            for (let i = 0; i < troops.length; i++) {
+                LineList.push("  ")
+                LineList.push(troops[i].model.GetTrueName() + " - " + troops[i].model.GetModelName())
+                LineList.push("• Cost: " + troops[i].purchase.GetTotalDucats().toString() + " Ducats | " + troops[i].purchase.GetTotalGlory().toString() + " Glory")
+                if (troops[i].model.Upgrades.length > 0) {
+                    const UpgradesList : string[] = []
+                    for (let j = 0; j < troops[i].model.Upgrades.length; j++) {
+                        UpgradesList.push(troops[i].model.Upgrades[j].GetItemName())
+                    }
+                    LineList.push("• Upgrades & Choices: " + UpgradesList.join(', '))
+                }
+                if (troops[i].model.Equipment.length > 0) {
+                    LineList.push("• Equipment: " + troops[i].model.GetEquipmentAsString())
+                }
+                if (troops[i].model.Skills.length > 0) {
+                    const UpgradesList : string[] = []
+                    for (let j = 0; j < troops[i].model.Skills.length; j++) {
+                        UpgradesList.push(troops[i].model.Skills[j].SelfDynamicProperty.OptionChoice.GetTrueName())
+                    }
+                    LineList.push("• Skills: " + UpgradesList.join(', '))
+                }
+                if (troops[i].model.Injuries.length > 0) {
+                    const UpgradesList : string[] = []
+                    for (let j = 0; j < troops[i].model.Injuries.length; j++) {
+                        UpgradesList.push(troops[i].model.Injuries[j].SelfDynamicProperty.OptionChoice.GetTrueName())
+                    }
+                    LineList.push("• Injuries: " + UpgradesList.join(', '))
+                }
+            }
+        }
+        if (mercenaries.length > 0) {
+            LineList.push("  ")
+            LineList.push("  ")
+            LineList.push("## Mercenaries ##")
+            for (let i = 0; i < mercenaries.length; i++) {
+                LineList.push("  ")
+                LineList.push(mercenaries[i].model.GetTrueName() + " - " + mercenaries[i].model.GetModelName())
+                LineList.push("• Cost: " + mercenaries[i].purchase.GetTotalDucats().toString() + " Ducats | " + mercenaries[i].purchase.GetTotalGlory().toString() + " Glory")
+                if (mercenaries[i].model.Upgrades.length > 0) {
+                    const UpgradesList : string[] = []
+                    for (let j = 0; j < mercenaries[i].model.Upgrades.length; j++) {
+                        UpgradesList.push(mercenaries[i].model.Upgrades[j].GetItemName())
+                    }
+                    LineList.push("• Upgrades & Choices: " + UpgradesList.join(', '))
+                }
+                if (mercenaries[i].model.Equipment.length > 0) {
+                    LineList.push("• Equipment: " + mercenaries[i].model.GetEquipmentAsString())
+                }
+                if (mercenaries[i].model.Skills.length > 0) {
+                    const UpgradesList : string[] = []
+                    for (let j = 0; j < mercenaries[i].model.Skills.length; j++) {
+                        UpgradesList.push(mercenaries[i].model.Skills[j].SelfDynamicProperty.OptionChoice.GetTrueName())
+                    }
+                    LineList.push("• Skills: " + UpgradesList.join(', '))
+                }
+                if (mercenaries[i].model.Injuries.length > 0) {
+                    const UpgradesList : string[] = []
+                    for (let j = 0; j < mercenaries[i].model.Injuries.length; j++) {
+                        UpgradesList.push(mercenaries[i].model.Injuries[j].SelfDynamicProperty.OptionChoice.GetTrueName())
+                    }
+                    LineList.push("• Injuries: " + UpgradesList.join(', '))
+                }
+            }
+        }
+
+        if (reserves.length > 0 && full) {
+            LineList.push("  ")
+            LineList.push("  ")
+            LineList.push("## Reserves ##")
+            for (let i = 0; i < reserves.length; i++) {
+                LineList.push("  ")
+                LineList.push(reserves[i].model.GetTrueName() + " - " + reserves[i].model.GetModelName())
+                LineList.push("• Cost: " + reserves[i].purchase.GetTotalDucats().toString() + " Ducats | " + reserves[i].purchase.GetTotalGlory().toString() + " Glory")
+                if (reserves[i].model.Upgrades.length > 0) {
+                    const UpgradesList : string[] = []
+                    for (let j = 0; j < reserves[i].model.Upgrades.length; j++) {
+                        UpgradesList.push(reserves[i].model.Upgrades[j].GetItemName())
+                    }
+                    LineList.push("• Upgrades & Choices: " + UpgradesList.join(', '))
+                }
+                if (reserves[i].model.Equipment.length > 0) {
+                    LineList.push("• Equipment: " + reserves[i].model.GetEquipmentAsString())
+                }
+                if (reserves[i].model.Skills.length > 0) {
+                    const UpgradesList : string[] = []
+                    for (let j = 0; j < reserves[i].model.Skills.length; j++) {
+                        UpgradesList.push(reserves[i].model.Skills[j].SelfDynamicProperty.OptionChoice.GetTrueName())
+                    }
+                    LineList.push("• Skills: " + UpgradesList.join(', '))
+                }
+                if (reserves[i].model.Injuries.length > 0) {
+                    const UpgradesList : string[] = []
+                    for (let j = 0; j < reserves[i].model.Injuries.length; j++) {
+                        UpgradesList.push(reserves[i].model.Injuries[j].SelfDynamicProperty.OptionChoice.GetTrueName())
+                    }
+                    LineList.push("• Injuries: " + UpgradesList.join(', '))
+                }
+            }
+        }
+
+        if (lost.length > 0 && full) {
+            LineList.push("  ")
+            LineList.push("  ")
+            LineList.push("## Lost & Captured ##")
+            for (let i = 0; i < lost.length; i++) {
+                LineList.push("  ")
+                LineList.push(lost[i].model.GetTrueName() + " - " + lost[i].model.GetModelName())
+                LineList.push("• Cost: " + lost[i].purchase.GetTotalDucats().toString() + " Ducats | " + lost[i].purchase.GetTotalGlory().toString() + " Glory")
+                if (lost[i].model.Upgrades.length > 0) {
+                    const UpgradesList : string[] = []
+                    for (let j = 0; j < lost[i].model.Upgrades.length; j++) {
+                        UpgradesList.push(lost[i].model.Upgrades[j].GetItemName())
+                    }
+                    LineList.push("• Upgrades & Choices: " + UpgradesList.join(', '))
+                }
+                if (lost[i].model.Equipment.length > 0) {
+                    LineList.push("• Equipment: " + lost[i].model.GetEquipmentAsString())
+                }
+                if (lost[i].model.Skills.length > 0) {
+                    const UpgradesList : string[] = []
+                    for (let j = 0; j < lost[i].model.Skills.length; j++) {
+                        UpgradesList.push(lost[i].model.Skills[j].SelfDynamicProperty.OptionChoice.GetTrueName())
+                    }
+                    LineList.push("• Skills: " + UpgradesList.join(', '))
+                }
+                if (lost[i].model.Injuries.length > 0) {
+                    const UpgradesList : string[] = []
+                    for (let j = 0; j < lost[i].model.Injuries.length; j++) {
+                        UpgradesList.push(lost[i].model.Injuries[j].SelfDynamicProperty.OptionChoice.GetTrueName())
+                    }
+                    LineList.push("• Injuries: " + UpgradesList.join(', '))
+                }
+            }
+        }
+        if (dead.length > 0 && full) {
+            LineList.push("  " )
+            LineList.push("  " )
+            LineList.push("## Dead ##")
+            for (let i = 0; i < dead.length; i++) {
+                LineList.push("• Cost: ")
+                LineList.push(dead[i].model.GetTrueName() + " - " + dead[i].model.GetModelName())
+                LineList.push("  " + dead[i].purchase.GetTotalDucats().toString() + " Ducats | " + dead[i].purchase.GetTotalGlory().toString() + " Glory")
+                if (dead[i].model.Upgrades.length > 0) {
+                    const UpgradesList : string[] = []
+                    for (let j = 0; j < dead[i].model.Upgrades.length; j++) {
+                        UpgradesList.push(dead[i].model.Upgrades[j].GetItemName())
+                    }
+                    LineList.push("• Upgrades & Choices: " + UpgradesList.join(', '))
+                }
+                if (dead[i].model.Equipment.length > 0) {
+                    LineList.push("• Equipment: " + dead[i].model.GetEquipmentAsString())
+                }
+                if (dead[i].model.Skills.length > 0) {
+                    const UpgradesList : string[] = []
+                    for (let j = 0; j < dead[i].model.Skills.length; j++) {
+                        UpgradesList.push(dead[i].model.Skills[j].SelfDynamicProperty.OptionChoice.GetTrueName())
+                    }
+                    LineList.push("• Skills: " + UpgradesList.join(', '))
+                }
+                if (dead[i].model.Injuries.length > 0) {
+                    const UpgradesList : string[] = []
+                    for (let j = 0; j < dead[i].model.Injuries.length; j++) {
+                        UpgradesList.push(dead[i].model.Injuries[j].SelfDynamicProperty.OptionChoice.GetTrueName())
+                    }
+                    LineList.push("• Injuries: " + UpgradesList.join(', '))
+                }
+            }
+        }
+        if (this.GetAllEquipment().length > 0 && full) {
+
+            LineList.push("  " )
+            LineList.push("  " )
+            LineList.push("## Stash ##")
+            LineList.push("  " )
+
+            const UpgradesList : string[] = []
+            for (let j = 0; j < this.GetAllEquipment().length; j++) {
+                UpgradesList.push(this.GetAllEquipment()[j].equipment.GetTrueName())
+            }
+            LineList.push(UpgradesList.join(', '))
+        }
+
+        if (this.Modifiers.length > 0) {
+
+            LineList.push("  ")
+            LineList.push("  ")
+            LineList.push("## Modifiers ##")
+            LineList.push("  ")
+
+            for (let j = 0; j < this.Modifiers.length; j++) {
+                LineList.push(this.Modifiers[j].SelfDynamicProperty.OptionChoice.GetTrueName())
+                for (let k = 0; k < this.Modifiers[j].SelfDynamicProperty.Selections.length; k++) {
+                    const mod = this.Modifiers[j].SelfDynamicProperty.Selections[k].SelectedChoice
+                    if (mod != null) {
+                        LineList.push("• " + mod.display_str)
+                    }
+                }
+            }
+        }
+
+        if (this.Fireteams.length > 0 && full) {
+
+            LineList.push("  ")
+            LineList.push("  ")
+            LineList.push("## Fireteams ##")
+            LineList.push("  ")
+
+            for (let j = 0; j < this.Fireteams.length; j++) {
+                LineList.push(this.Fireteams[j].SelfDynamicProperty.OptionChoice.GetTrueName())
+                for (let k = 0; k < this.Fireteams[j].SelfDynamicProperty.Selections.length; k++) {
+                    const mod = this.Fireteams[j].SelfDynamicProperty.Selections[k].SelectedChoice
+                    if (mod != null) {
+                        LineList.push("• " + mod.display_str)
+                    }
+                }
+            }
+        }
+        const Locations = this.GetLocations();
+        if (Locations.length > 0) {
+
+            LineList.push("  ")
+            LineList.push("  ")
+            LineList.push("## Locations ##")
+            LineList.push("  ")
+
+            for (let j = 0; j < Locations.length; j++) {
+                LineList.push(Locations[j].SelfDynamicProperty.OptionChoice.GetTrueName())
+                for (let k = 0; k < Locations[j].SelfDynamicProperty.Selections.length; k++) {
+                    const mod = Locations[j].SelfDynamicProperty.Selections[k].SelectedChoice
+                    if (mod != null) {
+                        LineList.push("• " + mod.display_str)
+                    }
+                }
+            }
+        }
+        this.GeneralCache.exportval = LineList
+        return LineList
     }
 }
 

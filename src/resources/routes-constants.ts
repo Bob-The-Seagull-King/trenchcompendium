@@ -44,9 +44,8 @@ export const ROUTES = {
     COMP_CAMPAIGN_SKILLS : '/skills/*',
 
     // Warband Builder Routes //
-    WBB_EDIT : '/edit/*',
     WBB_NEW : '/new/*',
-    WBB_VIEW : '/view/*',
+    WBB_VIEW : '/detail/*',
 
     // Static pages - legal stuff //
     PAGE_LEGAL : '/page/legal-notice',
@@ -64,6 +63,10 @@ export const ROUTES = {
     PAGE_COLLABORATE: '/page/collaboration', // will show fluff and contact for B2B partners
 
     PAGE_PLAN_SELECTION : '/page/plan-selection', // will let users select and purchase membership plans
+
+    // Blog posts
+    PAGE_BLOG_BASE: '/blog',
+    PAGE_BLOG_ARTICLE: '/blog/:slug',
 
     // Main Site URL
     MAIN : 'https://trench-companion.com'

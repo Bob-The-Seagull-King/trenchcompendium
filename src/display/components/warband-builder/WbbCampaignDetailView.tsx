@@ -11,6 +11,7 @@ import WbbEditCampaignCycleModal from "./modals/warband/WbbEditCampaignCycleModa
 import { Patron } from '../../../classes/feature/skillgroup/Patron';
 import { ToolsController } from '../../../classes/_high_level_controllers/ToolsController';
 import WbbEditFailedPromotionsModal from './modals/warband/WbbEditFailedPromotionsModal';
+import {useWbbMode} from "../../../context/WbbModeContext";
 
 interface WbbCampaignDetailViewProps {
     onClose: () => void;
@@ -19,6 +20,7 @@ interface WbbCampaignDetailViewProps {
 const WbbCampaignDetailView: React.FC<WbbCampaignDetailViewProps> = ({ onClose }) => {
     const { warband, reloadDisplay, updateKey } = useWarband();
     if (warband == null) return (<div>Loading...</div>);
+    const { play_mode, edit_mode, view_mode, print_mode, mode, setMode } = useWbbMode(); // play mode v2
 
     /** Victory Points */
     const [victoryPoints, setVictoryPoints] = useState<number>(warband.warband_data.GetVictoryPoints());
@@ -52,8 +54,10 @@ const WbbCampaignDetailView: React.FC<WbbCampaignDetailViewProps> = ({ onClose }
     useEffect(() => {
         async function RunDucatCheck() {
            const threshhold = await warband?.warband_data.GetCampaignTresholdValue()
-           setducatlimit(threshhold)
-           setKeyvar(keyvar + 1)
+           if (threshhold != undefined) {
+            setducatlimit(threshhold)
+            setKeyvar(keyvar + 1)
+           }
         }
 
         RunDucatCheck();
@@ -177,14 +181,17 @@ const WbbCampaignDetailView: React.FC<WbbCampaignDetailViewProps> = ({ onClose }
                         </div>
                     </div>
                     <div className={'battle-scars'}>
-                        
-                        <div className={'btn btn-primary btn-sm edit-battle-scar-btn'}
-                            onClick={() => setshowFailedPromotionsModal(true)}>
-                            <FontAwesomeIcon icon={faPen} className="icon-inline-left-l"/>
-                            {'Edit'}
-                        </div>
+                        {edit_mode &&
+                            <div className={'btn btn-primary btn-sm edit-battle-scar-btn'}
+                                onClick={() => setshowFailedPromotionsModal(true)}>
+                                <FontAwesomeIcon icon={faPen} className="icon-inline-left-l"/>
+                                {'Edit'}
+                            </div>
+                        }
 
-                        <div className="battle-scar-boxes" onClick={() => setshowFailedPromotionsModal(true)}>
+                        <div className="battle-scar-boxes"
+                             onClick={edit_mode ? () => setshowFailedPromotionsModal(true) : undefined}
+                        >
                             {Array.from({length: 6}, (_, i) => {
                                 const index = i + 1;
                                 const isChecked = index <= failedpromotions;
@@ -204,12 +211,15 @@ const WbbCampaignDetailView: React.FC<WbbCampaignDetailViewProps> = ({ onClose }
                         </div>
                     </div>
                 </div>
-                <WbbEditFailedPromotionsModal
-                    show={showFailedPromotionsModal}
-                    onClose={() => setshowFailedPromotionsModal(false)}
-                    currentVP={failedpromotions}
-                    onSubmit={handleFailedpromotionsUpdate}
-                />
+
+                {edit_mode &&
+                    <WbbEditFailedPromotionsModal
+                        show={showFailedPromotionsModal}
+                        onClose={() => setshowFailedPromotionsModal(false)}
+                        currentVP={failedpromotions}
+                        onSubmit={handleFailedpromotionsUpdate}
+                    />
+                }
 
                 {/* Notes textarea */}
                 <WbbTextarea

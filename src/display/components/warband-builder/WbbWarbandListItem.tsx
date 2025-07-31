@@ -8,6 +8,7 @@ import { SumWarband, WarbandManager } from '../../../classes/saveitems/Warband/W
 import SynodImage from "../../../utility/SynodImage";
 import SynodFactionImage from "../../../utility/SynodFactionImage";
 import CustomNavLink from '../subcomponents/interactables/CustomNavLink';
+import LoadingOverlay from '../generics/Loading-Overlay';
 
 /**
  * This is a list item of a warband for the WBB overview page.
@@ -27,6 +28,7 @@ const WbbWarbandListItem: React.FC<WbbWarbandListItemProps> = ({ item, manager, 
     const navigate = useNavigate();
     const [showPopover, setShowPopover] = useState(false);
     const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+    const [isDeleting, setIsDeleting] = useState(false);
 
     /**
      *
@@ -53,8 +55,10 @@ const WbbWarbandListItem: React.FC<WbbWarbandListItemProps> = ({ item, manager, 
      */
     const handleConfirmDelete = () => {
         setShowDeleteConfirm(false);
-        manager.DeletePack(item.id);
-        parentfunc();
+        setIsDeleting(true)
+        manager.DeletePack(item.id).then(() =>
+         parentfunc());
+       
     };
 
     /**
@@ -67,32 +71,37 @@ const WbbWarbandListItem: React.FC<WbbWarbandListItemProps> = ({ item, manager, 
 
     return (
         <div className={'col-12 col-lg-6'}>
-            <div className={'WbbWarbandListItem'}>
+            <div className={`WbbWarbandListItem ${isDeleting ? 'is-loading' : ''}`}>
+                {isDeleting &&
+                    <LoadingOverlay message={"Deleting"}/>
+                }
+
                 <CustomNavLink
                     classes={'WbbWarbandListItem-link'}
-                    link={`/warband/edit/${item.id}`}
+                    link={`/warband/detail/${item.id}`}
                     runfunc={() => {
-                        navigate('/warband/edit/' + item.id);
+                        navigate('/warband/detail/' + item.id);
                     }}
                 >
                     <div className={'warband-item-text-wrap'}>
-                        <div className={'item-name'}>
-                            {item.warband_data.Name}
-                        </div>
+                            <>
+                            <div className={'item-name'}>
+                                {item.warband_data.Name}
+                            </div>
+                            <div className={'item-faction'}>
+                                {(item.warband_data.Faction.MyFaction)? item.warband_data.Faction.MyFaction.SelfDynamicProperty.OptionChoice.Name : ""}
+                            </div>
 
-                        <div className={'item-faction'}>
-                            {(item.warband_data.Faction.MyFaction)? item.warband_data.Faction.MyFaction.SelfDynamicProperty.OptionChoice.Name : ""}
-                        </div>
+                            <div className={'item-cost'}>
+                                {item.warband_data.GetCostDucats() + " Ducats" + " | " + item.warband_data.GetCostGlory() + " Glory" }
+                            </div>
 
-                        <div className={'item-cost'}>
-                            {item.warband_data.GetCostDucats() + " Ducats" + " | " + item.warband_data.GetCostGlory() + " Glory" }
-                        </div>
-
-                        <div className={'item-campaign'}>
-                            {item.warband_data.GetCampaignName()}
-                            <br />
-                            {'Campaign Cycle: ' + item.warband_data.GetCampaignCycleMax()}
-                        </div>
+                            <div className={'item-campaign'}>
+                                {item.warband_data.GetCampaignName()}
+                                <br />
+                                {'Campaign Cycle: ' + item.warband_data.GetCampaignCycleView()}
+                            </div>
+                            </>
                     </div>
 
                     <div className={'warband-item-image-wrap'}>

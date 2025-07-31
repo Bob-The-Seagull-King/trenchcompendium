@@ -1,5 +1,6 @@
 import React from 'react'
 import SynodImage from '../../utility/SynodImage'
+import SynodImageWithCredit from "../../utility/SynodImageWithCredits";
 
 
 // clasName = 'swap' -> changes image and text positions
@@ -13,7 +14,9 @@ const StaticImageText1: React.FC<StaticImageTextProps> = ({ content, imageId, cl
     return (
         <div className={`StaticImageText1 ${className}`}>
             <div className={'image-wrap'}>
-                <SynodImage imageId={imageId} size="full" />
+                <SynodImageWithCredit
+                    imageId={imageId} size="full"
+                />
             </div>
 
             <div className={'text-wrap'}>

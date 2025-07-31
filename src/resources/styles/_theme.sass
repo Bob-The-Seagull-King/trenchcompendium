@@ -276,7 +276,7 @@ input.form-control
         text-decoration: none
 
 .btn.btn-primary
-    background-color: $color-highlight-bg
+    background-color: $color-highlight-bg !important
     color: $color-text
     outline: none
 
@@ -292,6 +292,10 @@ input.form-control
     &.disabled
         opacity: 0.5
         background-color: $color-highlight-bg
+
+.btn.btn-primary.perma-active
+        background-color: $color-highlight !important
+        color: $color-text
 
 .btn.btn-tertiary
     background-color: $color-highlight-bg-2

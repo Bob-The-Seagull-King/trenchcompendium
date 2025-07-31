@@ -291,6 +291,7 @@
         "cost": 15,
         "cost_type": 0,
         "restricted_upgrades": [
+            "up_alchemicalformulae_hawkeyes"
         ],
         "warband_limit": 0,
         "required_upgrades":[]
@@ -307,6 +308,7 @@
         "cost": 10,
         "cost_type": 0,
         "restricted_upgrades": [
+            "up_alchemicalformulae_hypnoticeyes"
         ],
         "warband_limit": 0,
         "required_upgrades":[]
@@ -471,16 +473,48 @@
         ]
     },
     {
+        "id": "rel_md_up_gunsblazing",
+        "source": "westfalia",
+        "tags": {},
+        "name": "",
+        "contextdata": {},
+        "options": [],
+        "model_id_set": ["rl_gunsblazing"],
+        "upgrade_id": "up_gunsblazing",
+        "cost": 5,
+        "cost_type": 0,
+        "restricted_upgrades": [
+        ],
+        "warband_limit": 0,
+        "required_upgrades":[]
+    },
+    {
         "id": "rel_md_up_trenchdog_fireteam",
         "source": "core",
         "tags": {},
         "name": "",
         "contextdata": {},
         "options": [],
-        "model_id_set": ["md_trenchdog","md_trenchdog_guarddog","md_trenchdog_mercydog","md_trenchdog_martyrdomdog","md_trenchdog_hellhound"],
+        "model_id_set": ["md_trenchdog","md_trenchdog_guarddog","md_trenchdog_mercydog","md_trenchdog_martyrdomdog","md_trenchdog_hellhound","md_trenchdog_attackdog"],
         "upgrade_id": "up_trenchdog_fireteam",
         "cost": 1,
         "cost_type": 1,
+        "restricted_upgrades": [
+        ],
+        "warband_limit": 0,
+        "required_upgrades":[]
+    },
+    {
+        "id": "rel_md_up_trenchdog_fireteam_brigade",
+        "source": "westfalia",
+        "tags": {},
+        "name": "",
+        "contextdata": {},
+        "options": [],
+        "model_id_set": ["rl_trenchdogs"],
+        "upgrade_id": "up_trenchdog_fireteam",
+        "cost": 5,
+        "cost_type": 0,
         "restricted_upgrades": [
         ],
         "warband_limit": 0,

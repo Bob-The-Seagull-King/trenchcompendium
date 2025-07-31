@@ -4,6 +4,7 @@
 
 import React from 'react';
 import { Helmet } from 'react-helmet';
+import DevMetaBlock from "./DevMetaBlock";
 
 interface PageMetaInformationProps {
     title: string;
@@ -41,7 +42,6 @@ const PageMetaInformation: React.FC<PageMetaInformationProps> = ({
         ogImage = 'https://synod.trench-companion.com/wp-content/uploads/2025/05/Trench-Companion-Share.png';
     }
 
-
     return (
         <Helmet>
             <title>{title}</title>
@@ -72,6 +72,8 @@ const PageMetaInformation: React.FC<PageMetaInformationProps> = ({
             {ogUrl && <meta property="og:url" content={ogUrl}/>}
 
             <meta property="og:type" content="website"/>
+
+            <DevMetaBlock />
         </Helmet>
     );
 };

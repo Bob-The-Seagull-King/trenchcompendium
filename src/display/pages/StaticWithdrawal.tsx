@@ -52,9 +52,11 @@ const StaticWithdrawal: React.FC = () => {
 
                 <pre style={{ whiteSpace: 'pre-wrap' }}>
                     {`To:
-[Your Company Name]
-[Address]
-[Email Address]
+David Leusch
+Momentum Digital
+Zeppelinstr. 5b
+48147 Münster
+Germany
 
 I hereby withdraw from the contract I concluded for the provision of the following service:
 

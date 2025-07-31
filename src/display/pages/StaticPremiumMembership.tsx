@@ -7,16 +7,44 @@ import React from 'react'
 import StaticParagraph from "../static-content/StaticParagraph";
 import StaticImageText1 from "../static-content/StaticImageText-1";
 import StaticFaq from "../static-content/StaticFaq";
+import PageMetaInformation from "../components/generics/PageMetaInformation";
+import {useNavigate} from "react-router-dom";
+import CustomNavLink from "../components/subcomponents/interactables/CustomNavLink";
+import SynodImage from "../../utility/SynodImage";
 
 const StaticPremiumMembership: React.FC = () => {
+
+    const navigate = useNavigate();
+
+
     return (
         <div className="StaticPremiumMembership page-static">
+            <PageMetaInformation
+                title={'Premium Membership'}
+                description={'Support the Trench Companion app and unlock exclusive perks with our premium membership. Enjoy an ad-free experience while helping us improve and expand the platform.'}
+            />
+
             <div className={'container content-narrow'}>
-                <h1>{'Premium Membership'}</h1>
+                <h1 className={'mb-2'}>{'Support Trench Companion'}</h1>
+                <h2  className={'mb-4'}>{'- Premium Membership'}</h2>
 
                 <StaticParagraph content={
                     <>
-                        {'Our premium membership is the best way to support the ongoing development of this app. By subscribing, you help us improve features, release updates faster, and keep the platform sustainable — all while unlocking exclusive perks and removing all ads along the way. We aim to provide all content for free - your support is completely voluntary. Thank you for supporting independent development! ❤️'}
+                        <strong>
+                            {'Trench Companion is a labor of love — built by and for the Trench Crusade community.'}
+                        </strong><br/>
+                        {'Our Premium Membership exists for one reason: to keep this project alive and growing. It helps cover server costs, fund development time, and lets us focus on creating the tools and features you actually care about. You’ll unlock small perks with your supporter status, but most importantly, you’re making this app possible. No paywalls. No tricks. Just community-powered progress. Thank you. ❤️'}
+
+                        <span className={'d-block spacer-20'} />
+
+                        <CustomNavLink
+                            classes={'btn btn-primary'}
+                            link={`/page/plan-selection`}
+                            runfunc={() => {
+                                navigate(`/page/plan-selection`)
+                            }}>
+                            {'Support the Project'}
+                        </CustomNavLink>
                     </>
                 }/>
 
@@ -31,12 +59,13 @@ const StaticPremiumMembership: React.FC = () => {
                                 {'Only $1.99'}
                             </h3>
                             <p>
-                                {"It's a small, recurring monthly contribution — but it makes a big difference. Your support helps us keep the app alive, improving, and ad-free."}
+                                {"It's a small, recurring monthly contribution — but it makes a big difference. Your support helps us keep the app alive and improving."}
+
                             </p>
                         </>
                     }
 
-                    imageId={262}
+                    imageId={2854}
                 />
 
 
@@ -53,7 +82,48 @@ const StaticPremiumMembership: React.FC = () => {
                         </>
                     }
 
-                    imageId={263}
+                    imageId={2756}
+                    className={'swap'}
+                />
+
+                <StaticImageText1
+                    content={
+                        <>
+                            <h2 className={'mb-1'}>
+                                {'Customize your Experience'}
+                            </h2>
+                            <h3 className={'mb-3'}>
+                                {'Coming Soon'}
+                            </h3>
+
+                            <p>
+                                {"Premium members will be able to personalize their experience by uploading custom images to their warbands and profiles. Showcase your painted miniatures  — and make your creations truly yours. It's your warband, your style."}
+                                <br/><br/>
+                                {"Only with your support, we will be able to create this feature."}
+                            </p>
+                        </>
+                    }
+
+                    imageId={2888}
+                />
+
+                <StaticImageText1
+                    content={
+                        <>
+                            <h2 className={'mb-1'}>
+                                {'Additional Benefits'}
+                            </h2>
+                            <h3 className={'mb-3'}>
+                                {'Coming Soon'}
+                            </h3>
+
+                            <p>
+                                {"As we develop new features for everybody, we don't want to forget about our most saintly supporters. We plan to create excluive and interesting features and benefits for our supporters - inside our app and beyond it. We aim to provide the most value possible for our supporters."}
+                            </p>
+                        </>
+                    }
+
+                    imageId={2856}
                     className={'swap'}
                 />
 
@@ -61,34 +131,18 @@ const StaticPremiumMembership: React.FC = () => {
                     content={
                         <>
                             <h2>
-                                {'Upload Your Own Images'}
+                                {'No Ads, Just Game'}
                             </h2>
 
                             <p>
-                                {"Premium members can personalize their experience by uploading custom images to their warbands and profiles. Showcase your painted miniatures  — and make your creations truly yours. It's your warband, your style."}
+                                {'Ads help us cover basic server and maintenance costs – but if you\'re supporting us directly, we’re happy to turn them off entirely for you.'}
+                                <br/><br/>
+                                {"As a supporter, you'll enjoy a completely ad-free experience. We disable all ads for premium members to keep your interface clean, focused, and immersive — so you can explore, build, and play without distraction."}
                             </p>
                         </>
                     }
 
-                    imageId={264}
-                />
-
-                <StaticImageText1
-                    content={
-                        <>
-                            <h2>
-                                {'Premium Visual Customization'}
-                            </h2>
-
-                            <p>
-                                {"As a premium member, you get access to exclusive UI skins and profile picture options. Match your interface to your favorite faction, theme, or personal aesthetic — and stand out with a unique visual style across the app."}
-                            </p>
-                        </>
-                    }
-
-                    imageId={265}
-                    className={'swap'}
-
+                    imageId={38}
                 />
 
                 <h2>
@@ -101,6 +155,15 @@ const StaticPremiumMembership: React.FC = () => {
                     <>
                         {'Currently the payment is realized by using PayPal Subscription. '}
                     </>
+                    }
+                />
+
+                <StaticFaq
+                    title={'How can I subscribe?'}
+                    content={
+                        <>
+                            {'You find the subscription options in your profile settings.'}
+                        </>
                     }
                 />
 
@@ -126,13 +189,11 @@ const StaticPremiumMembership: React.FC = () => {
                     title={'What happens to my customization options, when I cancel my subscription?'}
                     content={
                         <>
-                            {'Your Profile status and customization options will be reset to the ones available to free members.'}
+                            {'Your Profile status and customization options will be reset to the ones available to free members after your last billing cycle has ended.'}
                         </>
                     }
                 />
             </div>
-
-
         </div>
     )
 }

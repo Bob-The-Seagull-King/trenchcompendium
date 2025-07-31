@@ -121,6 +121,12 @@ class FactionModelRelationship extends StaticOptionContextObject {
      * Get the Availability String
      */
     public getAvailabilityString () : string {
+        if (this.Maximum == -1) {
+            return "Unlimited"
+        }
+        if (this.Maximum == this.Minimum) {
+            return this.Minimum.toString()
+        }
         return this.Minimum.toString() + "-" + this.Maximum.toString();
     }
 

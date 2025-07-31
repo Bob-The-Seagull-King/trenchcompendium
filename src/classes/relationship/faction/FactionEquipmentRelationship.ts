@@ -10,6 +10,7 @@ import { StaticContextObject } from '../../contextevent/staticcontextobject';
 import { EventRunner } from '../../contextevent/contexteventhandler';
 import { Faction } from '../../feature/faction/Faction';
 import { FactionFactory } from '../../../factories/features/FactionFactory';
+import {getCostType} from "../../../utility/functions";
 
 interface IFactionEquipmentRelationship extends IContextObject {
     faction_id : string[],
@@ -40,8 +41,8 @@ class FactionEquipmentRelationship extends StaticContextObject {
         this.Limit = data.limit;
     }
 
-    public async MakeItem(id : string) {
-        this.EquipmentItem = await EquipmentFactory.CreateNewEquipment(id, null);
+    public async MakeItem(id : string, skipcheck = false) {
+        this.EquipmentItem = await EquipmentFactory.CreateNewEquipment(id, null, skipcheck);
     }
 
     public async GetFactions(data : string[]) {
@@ -83,6 +84,17 @@ class FactionEquipmentRelationship extends StaticContextObject {
         )
     }
 
+    /**
+     * Returns the limit value for this item
+     * @return {number} The limit value
+     */
+    public GetLimit() {
+        return this.Limit;
+    }
+
+    public GetCostString() {
+        return this.Cost + " " + getCostType(this.CostType)
+    }
 }
 
 export {IFactionEquipmentRelationship, FactionEquipmentRelationship}

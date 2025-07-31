@@ -1,0 +1,50 @@
+// // // // //
+//
+// General collapsible elements in the WBB view
+//
+
+.WbbGeneralCollapse-wrap
+    margin: -16px
+
+.WbbGeneralCollapse
+    position: relative
+
+    .WbbGeneralCollapse-title
+        position: relative
+        display: flex
+        justify-content: space-between
+        padding: 15px 15px
+
+        background-color: $color-bg-2
+        cursor: pointer
+        font-size: 16px
+        font-weight: bold
+        border-bottom: 1px solid $color-bg-1
+
+    &:first-of-type .WbbGeneralCollapse-title
+        border-top: 1px solid $color-bg-1
+    .WbbGeneralCollapse-content
+        background-color: $color-bg-3
+
+        .WbbGeneralCollapse-inner
+            padding: 20px 15px 20px 15px
+
+
+    // the first sub-level of a Wbb Collapsible element
+    .WbbGeneralCollapse-sub-1
+        background-color: $color-bg-4
+        border-bottom: 1px solid $color-bg-1
+
+        padding: 15px
+
+        .description-wrap
+            font-size: 14px
+            margin-bottom: 15px
+
+    .WbbGeneralCollapse-sub-2
+        padding: 15px
+        background-color: $color-bg-4
+
+        border-right: 1px solid  $color-bg-1
+        border-left: 1px solid  $color-bg-1
+        border-bottom: 1px solid  $color-bg-1

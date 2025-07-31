@@ -24,12 +24,12 @@ import {CSS} from '@dnd-kit/utilities';
 import WbbEditViewFighterSortable from "../modals/WbbEditViewFighterSortable";
 import { WarbandMember } from '../../../../classes/saveitems/Warband/Purchases/WarbandMember';
 import { ToolsController } from '../../../../classes/_high_level_controllers/ToolsController';
+import {useWbbMode} from "../../../../context/WbbModeContext";
 
 
 type DetailType = 'fighter' | 'stash' | 'warband' | 'campaign' | null;
 
 interface WbbFighterShow {
-    playMode : boolean,
     openDetail: (type: DetailType, payload?: any) => void,
     detailType : DetailType,
     detailPayload : any,
@@ -38,9 +38,10 @@ interface WbbFighterShow {
     setShowAddFighterMercenaryModal:(type : boolean) => void
 }
 
-const WbbFighterShows : React.FC<WbbFighterShow> = ({ playMode, openDetail, detailType, detailPayload, setShowAddFighterEliteModal, setShowAddFighterTroopModal, setShowAddFighterMercenaryModal }) => {
+const WbbFighterShows : React.FC<WbbFighterShow> = ({ openDetail, detailType, detailPayload, setShowAddFighterEliteModal, setShowAddFighterTroopModal, setShowAddFighterMercenaryModal }) => {
 
     const { warband, updateKey, reloadDisplay } = useWarband();
+    const { play_mode, edit_mode, view_mode, print_mode, setMode } = useWbbMode();
 
     const sensors = useSensors(
         useSensor(PointerSensor, {
@@ -69,7 +70,7 @@ const WbbFighterShows : React.FC<WbbFighterShow> = ({ playMode, openDetail, deta
             {warband &&
             <>
                 {/* Warband Elites */}
-                {(!playMode || warband.warband_data.HasElites()) &&
+                {(edit_mode || warband.warband_data.HasElites()) &&
                 <>
                 <h3 className={'category-headline'}>Elites</h3>
                 <DndContext
@@ -102,8 +103,8 @@ const WbbFighterShows : React.FC<WbbFighterShow> = ({ playMode, openDetail, deta
                 </>
                 }
 
-
-                {!playMode &&
+                {/* Add Elite Button */}
+                {edit_mode &&
                     <div className={'btn btn-add-element btn-block'}
                             onClick={() => setShowAddFighterEliteModal(true)}>
                         <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
@@ -113,7 +114,7 @@ const WbbFighterShows : React.FC<WbbFighterShow> = ({ playMode, openDetail, deta
 
 
                 {/* Warband Troops */}
-                {(!playMode || warband.warband_data.HasTroops()) &&
+                {(edit_mode || warband.warband_data.HasTroops()) &&
                 <>
                 <h3 className={'category-headline'}>Troops</h3>
                 <DndContext
@@ -146,7 +147,8 @@ const WbbFighterShows : React.FC<WbbFighterShow> = ({ playMode, openDetail, deta
                 </>
                 }
 
-                {!playMode &&
+                {/* Add Troop Button */}
+                {edit_mode &&
                     <div className={'btn btn-add-element btn-block'}
                             onClick={() => setShowAddFighterTroopModal(true)}>
                         <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
@@ -155,7 +157,7 @@ const WbbFighterShows : React.FC<WbbFighterShow> = ({ playMode, openDetail, deta
                 }
 
 
-                {(!playMode || warband.warband_data.HasMercenaries()) &&
+                {(edit_mode || warband.warband_data.HasMercenaries()) &&
                     <>
                         {/* Warband Mercenaries */}
                         <h3 className={'category-headline'}>Mercenaries</h3>
@@ -189,8 +191,8 @@ const WbbFighterShows : React.FC<WbbFighterShow> = ({ playMode, openDetail, deta
                     </>
                 }
 
-
-                {!playMode &&
+                {/* Add mercenary btn */}
+                {edit_mode &&
                     <div className={'btn btn-add-element btn-block'}
                             onClick={() => setShowAddFighterMercenaryModal(true)}>
                         <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
@@ -198,9 +200,9 @@ const WbbFighterShows : React.FC<WbbFighterShow> = ({ playMode, openDetail, deta
                     </div>
                 }
 
-                {(!playMode && warband.warband_data.HasReserves()) &&
+                {((edit_mode || view_mode) && warband.warband_data.HasReserves()) &&
                     <>
-                        {/* Warband Mercenaries */}
+                        {/* Warband Reserve Members */}
                         <h3 className={'category-headline'}>Reserves</h3>
                         <DndContext
                             sensors={sensors}
@@ -232,9 +234,9 @@ const WbbFighterShows : React.FC<WbbFighterShow> = ({ playMode, openDetail, deta
                     </>
                 }
 
-                {(!playMode && warband.warband_data.HasGone()) &&
+                {((edit_mode || view_mode) && warband.warband_data.HasGone()) &&
                     <>
-                        {/* Warband Mercenaries */}
+                        {/* Warband Lost & Captured Members */}
                         <h3 className={'category-headline'}>Lost & Captured</h3>
                         <DndContext
                             sensors={sensors}
@@ -266,9 +268,9 @@ const WbbFighterShows : React.FC<WbbFighterShow> = ({ playMode, openDetail, deta
                     </>
                 }
                 
-                {(!playMode && warband.warband_data.HasDead()) &&
+                {((edit_mode || view_mode) && warband.warband_data.HasDead()) &&
                     <>
-                        {/* Warband Mercenaries */}
+                        {/* Warband Dead Members */}
                         <h3 className={'category-headline'}>Dead</h3>
                         <DndContext
                             sensors={sensors}

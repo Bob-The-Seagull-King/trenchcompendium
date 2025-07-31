@@ -4,6 +4,7 @@ import { ErrorBoundary } from "react-error-boundary";
 import { useNavigate } from 'react-router-dom';
 import CustomNavLink from './interactables/CustomNavLink';
 import SynodImage from "../../../utility/SynodImage";
+import SynodImageWithCredit from "../../../utility/SynodImageWithCredits";
 
 
 interface MenuComponentProps {
@@ -36,7 +37,7 @@ const MenuComponent: React.FC<MenuComponentProps> = ({ Title, Route, bgImageID =
 
                     {/* only if bgImageID is defined*/}
                     {bgImageID > 0 &&
-                        <SynodImage
+                        <SynodImageWithCredit
                             imageId={bgImageID}
                             className={''}
                             size={'large'}
@@ -53,16 +54,16 @@ const MenuComponent: React.FC<MenuComponentProps> = ({ Title, Route, bgImageID =
 
                     {/* only if bgImageID is defined*/}
                     {bgImageID > 0 &&
-                        <SynodImage
+                        <SynodImageWithCredit
                             imageId={bgImageID}
                             className={''}
                             size={'large'}
                         />
                     }
 
-                    {/*<div className={'coming-soon-label'}>*/}
-                    {/*    {'Coming soon'}*/}
-                    {/*</div>*/}
+                    <div className={'coming-soon-label'}>
+                        {'Coming soon'}
+                    </div>
                 </div>
             }
 

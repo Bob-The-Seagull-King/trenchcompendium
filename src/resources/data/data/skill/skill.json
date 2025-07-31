@@ -360,6 +360,7 @@
             "category" : "type",
             "type" : "text",
             "strictness" : "strict",
+            "single": true,
             "predefined_options" : [],
             "option_context" : {"basic_option_default":{}},
             "data_search" : {      
@@ -396,18 +397,19 @@
         "name": "Exotic Wares",
         "source": "core",
         "tags": { },
-        "contextdata": {"additions": [
+        "contextdata": {
+            "model_add_equipment": {
+                "additions": [
                     {
-                        "list": "fc_newantioch",
                         "count": 1,
                         "option_id": 0,
                         "restriction": [
                             { "category": "melee" },
-                            { "category": "ranged" },
-                            { "category": "armour" }
+                            { "category": "ranged" }
                         ]
                     }
-                ] },
+                ]
+            } },
         "description": [            
             {
                 "tags": {"desc_type" : "default"},
@@ -420,6 +422,7 @@
             "description" : [],
             "category" : "type",
             "type" : "text",
+            "hide": true,
             "strictness" : "strict",
             "predefined_options" : [],
             "option_context" : {"basic_option_default":{}},
@@ -434,6 +437,12 @@
                                 "item": "faction_id",
                                 "value": "fc_newantioch",
                                 "equals": true,
+                                "strict": true
+                            },
+                            {             
+                                "item": "faction_id",
+                                "value": "fc_ironsultanate",
+                                "equals": false,
                                 "strict": true
                             }
                         ],
@@ -510,7 +519,7 @@
             "warband_general_hook": {},
             "warband_wide": {}, 
             "add_onto_warband": {},
-            "add_extra_model": {
+            "model_limit_increase": {
                 "count": 1,
                 "restriction": [
                     {
@@ -533,10 +542,21 @@
                 "ref_id" : "ot_sultansfavour",
                 "name" : "",
                 "description" : [],
+                "self_ask": true,
                 "category" : "contextobject",
-                "option_context" : {"basic_option_default":{}},
+                "option_context" : {"basic_option_default":{},
+                    "filter": {
+                        "restriction": [
+                            {
+                                "res_type": "keyword",
+                                "val": "kw_elite",
+                                "subvalue" : false
+                            }
+                        ]
+                        }
+                    },
                 "dyna_only": true,
-                "parent_level": 5,
+                "parent_level": 7,
                 "question_name": "getModelRelationshipsForWarband"
             }
         ],
@@ -768,16 +788,31 @@
     },
     {
         "id": "sk_farshot",
-        "name": "Farshot",
+        "name": "Far Shot",
         "source": "core",
         "tags": { "trait": true, "bonus": true, "modifier": true },
         "contextdata": { 
             "equipment_modifier": {
-                "equipment_type": ["ranged"],
-                "modifier_type": { "range": 6 },
-                "modifier_condition": {
-                    "tag": ["pistol","rifle","jezzail"]
-                }
+                "equipment_type": [
+                    {
+                        "res_type": "tag",
+                        "value": "pistol"
+                    },
+                    {
+                        "res_type": "tag",
+                        "value": "rifle"
+                    },
+                    {
+                        "res_type": "tag",
+                        "value": "jezzail"
+                    }
+                ],
+                "modifier_type": [
+                    {
+                        "type": "range",
+                        "value": 6
+                    }
+                ]
             } },
         "description": [            
             {
@@ -818,7 +853,7 @@
         "description": [            
             {
                 "tags": {"desc_type" : "default"},
-                "content": "Add +1 DICE to the Melee Characteristic of this model.",
+                "content": "Add +1 DICE to the Ranged Characteristic of this model.",
                 "glossary": [{"val": "+1 DICE", "id": "kw_plusdice"}]
             }
         ],
@@ -875,9 +910,16 @@
         "source": "core",
         "tags": { "trait": true, "bonus": true, "modifier": true },
         "contextdata": { 
-            "equipment_modifier": {
-                "equipment_type": ["ranged"],
-                "modifier_type": { "keyword": "kw_assault" }
+            "equipment_add_keyword": {
+                "equip_check": [
+                    {
+                        "check_type": "category",
+                        "value": "ranged"
+                    }
+                ],
+                "additions": [
+                    "kw_assault"
+                ]
             } },
         "description": [            
             {
@@ -917,7 +959,7 @@
         "source": "core",
         "tags": { "trait": true},
         "contextdata": {             
-            "upgrade_character_stat": { "upgrades": [{"stat": "scars", "value": 1}]} 
+            "add_scars": { "value": 1} 
         },
         "description": [            
             {
@@ -955,6 +997,7 @@
         "source": "core",
         "tags": { "trait": true, "faction": true},
         "contextdata": {      
+            "add_onto_warband": {},
             "get_elite_count_cap": { "modify_value": 1 }       
         },
         "description": [            
@@ -1112,6 +1155,7 @@
         "tags": { "trait": true },
         "contextdata": {
             "warband_wide": {},
+            "add_onto_warband": {},
             "purchase_modifier_equipment": {
                 "mod": [
                     {
@@ -1122,6 +1166,7 @@
                             },
                             {
                                 "cost": 20,
+                                "costtype": 0,
                                 "req_mod": ">="
                             }
                         ]
@@ -1165,6 +1210,7 @@
         "tags": { "trait": true },
         "contextdata": {
             "warband_wide": {},
+            "add_onto_warband": {},
             "purchase_modifier_equipment": {
                 "mod": [
                     {
@@ -1175,6 +1221,7 @@
                             },
                             {
                                 "cost": 20,
+                                "costtype": 0,
                                 "req_mod": ">="
                             }
                         ]
@@ -1187,6 +1234,7 @@
                             },
                             {
                                 "cost": 20,
+                                "costtype": 0,
                                 "req_mod": ">="
                             }
                         ]
@@ -1211,6 +1259,7 @@
         "tags": { "trait": true },
         "contextdata": {
             "warband_wide": {},
+            "add_onto_warband": {},
             "purchase_modifier_equipment": {
                 "mod": [
                     {
@@ -1221,6 +1270,7 @@
                             },
                             {
                                 "cost": 20,
+                                "costtype": 0,
                                 "req_mod": ">="
                             }
                         ]
@@ -1310,7 +1360,7 @@
         "source": "core",
         "tags": { "trait": true },
         "contextdata": {             
-            "upgrade_character_stat": { "upgrades": [{"stat": "scars", "value": 1}]} 
+            "add_scars": { "value": 1} 
         },
         "description": [            
             {
@@ -1420,11 +1470,13 @@
         "source": "core",
         "tags": { "trait": true },
         "contextdata": {
+            "warband_general_hook": {},
             "warband_wide": {}, 
+            "add_onto_warband": {},
             "add_extra_equipment": {
                 "count": 1,
                 "restriction": []
-            } },
+            }  },
         "description": [            
             {
                 "tags": {"desc_type" : "default"},
@@ -1435,7 +1487,17 @@
             }
         ],
         "options": [
-            
+            {
+                "ref_id" : "ot_knowledgeofscience",
+                "name" : "",
+                "description" : [],
+                "self_ask": true,
+                "category" : "contextobject",
+                "option_context" : {"basic_option_default":{}},
+                "dyna_only": true,
+                "parent_level": 7,
+                "question_name": "getEquipmentRelationshipsForWarband"
+            }
         ],
         "skill_group": ["pt_learnedsaint"]
     },
@@ -1485,8 +1547,10 @@
         "source": "core",
         "tags": { "trait": true },
         "contextdata": {
+            "warband_general_hook": {},
             "warband_wide": {}, 
-            "add_extra_model": {
+            "add_onto_warband": {},
+            "model_limit_increase": {
                 "count": 1,
                 "restriction": [
                     {
@@ -1494,7 +1558,7 @@
                         "val": "kw_ELITE"
                     }
                 ]
-            } },
+            }  },
         "description": [            
             {
                 "tags": {"desc_type" : "default"},
@@ -1505,7 +1569,27 @@
             }
         ],
         "options": [
-            
+            {
+                "ref_id" : "ot_organisationalskills",
+                "name" : "",
+                "description" : [],
+                "self_ask": true,
+                "category" : "contextobject",
+                "option_context" : {"basic_option_default":{},
+                    "filter": {
+                        "restriction": [
+                            {
+                                "res_type": "keyword",
+                                "val": "kw_elite",
+                                "subvalue" : false
+                            }
+                        ]
+                        }
+                    },
+                "dyna_only": true,
+                "parent_level": 7,
+                "question_name": "getModelRelationshipsForWarband"
+            }
         ],
         "skill_group": ["pt_learnedsaint"]
     },
@@ -1531,7 +1615,9 @@
         "name": "Walk with God",
         "source": "core",
         "tags": { "trait": true },
-        "contextdata": {},
+        "contextdata": {
+            "skill_option": {}
+        },
         "description": [            
             {
                 "tags": {"desc_type" : "default"},
@@ -1545,6 +1631,7 @@
                 "description" : [],
                 "category" : "type",
                 "type" : "text",
+                "single": true,
                 "strictness" : "strict",
                 "predefined_options" : [],
                 "option_context" : {"basic_option_default":{}},
@@ -1873,7 +1960,9 @@
         "source": "core",
         "tags": { "trait": true },
         "contextdata": {
+            "warband_general_hook": {},
             "warband_wide": {}, 
+            "add_onto_warband": {},
             "add_extra_equipment": {
                 "count": 1,
                 "restriction": []
@@ -1888,6 +1977,17 @@
             }
         ],
         "options": [
+            {
+                "ref_id" : "ot_moneycanbuyanything",
+                "name" : "",
+                "description" : [],
+                "self_ask": true,
+                "category" : "contextobject",
+                "option_context" : {"basic_option_default":{}},
+                "dyna_only": true,
+                "parent_level": 7,
+                "question_name": "getEquipmentRelationshipsForWarband"
+            }
             
         ],
         "skill_group": ["pt_mammon"]

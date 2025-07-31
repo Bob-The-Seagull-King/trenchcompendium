@@ -49,13 +49,13 @@ function InitApplyCurse() {
     const applycurse = localStorage.getItem('applycurse');
 
     if (applycurse != null) {
-        if (applycurse === "true") {
-            return 'true'
+        if (applycurse === "false") {
+            return 'false'
         } else {
             return 'false'
         }
     }
-    return 'true'
+    return 'false'
 }
 
 export {useGlobalState, InitTheme};

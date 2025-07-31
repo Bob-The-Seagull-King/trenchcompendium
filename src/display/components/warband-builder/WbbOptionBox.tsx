@@ -1,7 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faCheck, faPen} from '@fortawesome/free-solid-svg-icons';
-import {usePlayMode} from "../../../context/PlayModeContext";
+import {useWbbMode} from "../../../context/WbbModeContext";
 
 interface WbbOptionBoxProps {
     title: string;
@@ -12,13 +12,17 @@ interface WbbOptionBoxProps {
 
 const WbbOptionBox: React.FC<WbbOptionBoxProps> = ({ title, value, onClick, overrideplay }) => {
 
-    const { playMode, togglePlayMode } = usePlayMode();
+    const { play_mode, edit_mode, view_mode, print_mode, mode, setMode } = useWbbMode(); // play mode v2
 
     return (
-        <div className="WbbOptionBox">
-            <div className="WbbOptionBox-title">
-                {title}
-            </div>
+        <div className="WbbOptionBox" onClick={(e) => {
+            e.stopPropagation();
+        }}>
+            {title &&
+                <div className="WbbOptionBox-title">
+                    {title}
+                </div>
+            }
 
             <div className="WbbOptionBox-body">
                 <div className="WbbOptionBox-value">
@@ -33,7 +37,8 @@ const WbbOptionBox: React.FC<WbbOptionBoxProps> = ({ title, value, onClick, over
                     )}
                 </div>
 
-                {(!playMode && overrideplay != true) &&
+                {/* @TODO: what is overrideplay used for? */}
+                {(edit_mode && overrideplay != true) &&
                     <div className="btn btn-primary" onClick={onClick}>
                         <FontAwesomeIcon icon={faPen} className={'icon-inline-left'}/>
                         {'Change'}

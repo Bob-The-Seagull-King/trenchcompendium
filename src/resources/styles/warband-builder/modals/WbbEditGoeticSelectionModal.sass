@@ -12,6 +12,11 @@
         background-color: $color-bg-1
         cursor: pointer
 
+        &.disabled // an element that is not selectable
+            opacity: 0.5
+            .disabled-reason // a string that shows why the item is disabled
+                color: $red
+
         &:hover
             background-color: $color-highlight-bg-2-50
 

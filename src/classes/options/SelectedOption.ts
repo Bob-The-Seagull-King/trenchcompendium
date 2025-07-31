@@ -1,6 +1,9 @@
+import { EventRunner } from "../contextevent/contexteventhandler";
 import { DynamicOptionContextObject } from "./DynamicOptionContextObject";
 import { IChoice, StaticOption } from "./StaticOption"
 import { StaticOptionContextObject } from "./StaticOptionContextObject";
+import { UserWarband } from "../saveitems/Warband/UserWarband";
+import { GetWarbandOrNull } from "../../utility/functions";
 
 /*
 In a DynamicOptionContextObject, each option in the respective
@@ -36,6 +39,25 @@ class SelectedOption {
         return this.SelectedChoice;
     }
 
+    public CanChange() {
+        return (this.Option.Single == false || this.SelectedChoice == null)
+    }
+
+    public async UserUpdateSelection(_id : string | null) {
+        this.SelectOption(_id)
+        
+        const warband : UserWarband | null = await GetWarbandOrNull(this.MyParent)
+        const Events = new EventRunner()
+        await Events.runEvent(
+            "onSelectPropertyValue",
+            this.MyParent,
+            [this.MyParent, warband],
+            null,
+            this
+        )
+        console.log(this)
+    }
+
     /**
      * Given a specific id, set the current choice
      * to one of this object's Option's selections.
@@ -50,6 +72,7 @@ class SelectedOption {
                 this.SelectedChoice = this.SelectionSet[i]
                 const SelectedVal = this.SelectedChoice.value;
                 if ((SelectedVal instanceof StaticOptionContextObject)) {
+                    SelectedVal.MyContext = this.MyParent;
                     this.HandleObjectDynamics(this.SelectedChoice);
                 } else {
                     this.NestedOption = null;

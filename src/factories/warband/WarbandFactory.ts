@@ -17,6 +17,7 @@ import { Equipment } from '../../classes/feature/equipment/Equipment';
 import { SumWarband } from '../../classes/saveitems/Warband/WarbandManager';
 import { SynodDataCache } from '../../classes/_high_level_controllers/SynodDataCache';
 import { SYNOD } from '../../resources/api-constants';
+import { containsTag } from '../../utility/functions';
 
 const delay = (ms: number | undefined) => new Promise(res => setTimeout(res, ms));
 
@@ -30,16 +31,20 @@ class WarbandFactory {
     static async CreateWarbandEquipment(data: IWarbandEquipment, parent : DynamicContextObject | null) {
         const rule = new WarbandEquipment(data, parent)
         await rule.BuildEquipment(data.equipment_id)
-        await rule.BuildNewProperties();
         return rule;
     }
 
     static async BuildWarbandEquipmentFromPurchase(rel: FactionEquipmentRelationship, parent : DynamicContextObject | null) {
+        
+        const newtags = rel.EquipmentItem.Tags
+        if (containsTag((rel).Tags, 'exploration_only')) {
+            newtags["exploration_only"] = true
+        }
         const data : IWarbandEquipment = {    
                 id: rel.EquipmentItem.ID, // The id of the item
                 name: rel.EquipmentItem.GetTrueName(), // The name of the item
                 source: rel.EquipmentItem.Source? rel.EquipmentItem.Source : "unknown", // The source of the item (core book, homebrew, etc)
-                tags: rel.EquipmentItem.Tags,
+                tags: newtags,
                 contextdata : rel.EquipmentItem.ContextData,            
                 equipment_id: {      
                     consumables: [],              
@@ -87,8 +92,8 @@ class WarbandFactory {
         return rule;
     }
     
-    static async CreateWarbandMember(data: IWarbandMember, parent : DynamicContextObject | null) {
-        const rule = new WarbandMember(data, parent)        
+    static async CreateWarbandMember(data: IWarbandMember, parent : DynamicContextObject | null, restricted : boolean, regen = false) {
+        const rule = new WarbandMember(data, parent, restricted)        
         await rule.BuildModel(data.model)
         await rule.BuildEquipment(data.equipment);
         await rule.BuildSkills(data.list_skills);
@@ -96,11 +101,11 @@ class WarbandFactory {
         await rule.BuildNewProperties(data);
         await rule.BuildUpgrades(data);
         await rule.BuildModelEquipProperties(data);
-        await rule.BuildModelEquipment(false);
+        await rule.BuildModelEquipment(regen);
         return rule;
     }
 
-    static async BuildWarbandMemberFromPurchase(rel: FactionModelRelationship, parent : UserWarband) {
+    static async BuildWarbandMemberFromPurchase(rel: FactionModelRelationship, parent : UserWarband, restricted : boolean) {
         const milliseconds = Date.now();
         const data : IWarbandMember = {
                 id: rel.Model.ID + "_" + parent.Models.length + "_" + milliseconds.toString(), // The id of the item
@@ -128,7 +133,7 @@ class WarbandFactory {
             data.tags["mercenary"] = true;
         }
         
-        const Model : WarbandMember = await WarbandFactory.CreateWarbandMember(data, parent);
+        const Model : WarbandMember = await WarbandFactory.CreateWarbandMember(data, parent, restricted, true);
         return Model;
     }
     
@@ -138,6 +143,7 @@ class WarbandFactory {
         await rule.BuildModels(data.models);
         await rule.BuildEquipment(data.equipment);
         await rule.BuildModifiersSkills(data.modifiers);
+        await rule.BuildModifiersLoc(data.modifiersloc);
         await rule.BuildModifiersFireteam(data.fireteams);
         await rule.BuildConsumables(data.consumables);
         await rule.RebuildProperties();

@@ -1,5 +1,16 @@
 [
     {
+        "id": "rel_unarmed",
+        "source": "core",
+        "tags": {},
+        "name": "Unarmed",
+        "contextdata": {},
+        "options": [],
+        "model_id": [],
+        "mandatory_equipment": ["eq_unarmed"],
+        "removable": false
+    },
+    {
         "id": "rel_md_eq_sultanatesapper",
         "source": "core",
         "tags": {},
@@ -19,6 +30,17 @@
         "options": [],
         "model_id": ["md_trenchdog_mercydog"],
         "mandatory_equipment": ["eq_medikit"],
+        "removable": false
+    },
+    {
+        "id": "rel_md_eq_crimsoncommunicant",
+        "source": "core",
+        "tags": {},
+        "name": "Crimson Communicant Equipment",
+        "contextdata": {},
+        "options": [],
+        "model_id": ["md_crimsoncommunicant"],
+        "mandatory_equipment": ["eq_atonementbell"],
         "removable": false
     },
     {
@@ -338,7 +360,7 @@
         "contextdata": {},
         "options": [],
         "model_id": ["md_combatengineer"],
-        "mandatory_equipment": ["eq_engineerbodyarmour"],
+        "mandatory_equipment": ["eq_engineerbodyarmour","eq_shovel"],
         "removable": false
     },
     {

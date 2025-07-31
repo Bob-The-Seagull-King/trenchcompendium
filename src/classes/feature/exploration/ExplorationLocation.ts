@@ -21,6 +21,7 @@ interface LocationRestriction {
 
 interface RestrictionSingle {
     tag? : string,
+    base_only?: boolean,
     type : string,
     value : string[]
 }

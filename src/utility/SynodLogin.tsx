@@ -22,7 +22,6 @@ const SynodLogin: React.FC<SynodLoginProps> = ({ onLoginSuccess }) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
-    const [message, setMessage] = useState('')
     const [isLoading, setIsLoading] = useState(false)
 
 
@@ -32,7 +31,6 @@ const SynodLogin: React.FC<SynodLoginProps> = ({ onLoginSuccess }) => {
         e.preventDefault()
         setIsLoading(true)
         setError('')
-        setMessage('')
 
         if (!email || !password) {
             setError('Please fill out all fields')
@@ -68,8 +66,13 @@ const SynodLogin: React.FC<SynodLoginProps> = ({ onLoginSuccess }) => {
         <>
             <h1 className={'mt-3'}>Login</h1>
 
-            {error && <p style={{ color: 'red' }}>{error}</p>}
-            {message && <p style={{ color: 'green' }}>{message}</p>}
+            {error &&
+                <div className={'alert alert-danger small'} role="alert">
+                    <strong>{'Login failed'}</strong>
+                    <br/>
+                    {'Incorrect email or password.'}
+                </div>
+            }
 
             {!isLoggedIn && (
                 <form onSubmit={handleSubmit}>

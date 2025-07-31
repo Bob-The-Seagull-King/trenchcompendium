@@ -317,7 +317,7 @@
             "equipment_add_keyword": {
                 "equip_check": [
                     {
-                        "check_type": "tag",
+                        "check_type": "id",
                         "value": "eq_jezzail"
                     }
                 ],
@@ -437,6 +437,25 @@
         "options": []
     },
     {
+        "id": "ab_strengththroughpain",
+        "name": "Strength Through Pain",
+        "source": "core",
+        "tags": {"action": true},
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Crimson Communicant adds +1 DICE to its Melee charactertistic for each 1 BLOOD MARKER it currently has. Your opponent cannot spend any of the Crimson Communicant's BLOOD MARKERs on its Melee Attack ACTION rolls.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"},
+                    {"val": "ACTION", "id": "kw_action"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
         "id": "ab_mercydog",
         "name": "Mercy Dog",
         "source": "core",
@@ -445,10 +464,39 @@
         "description": [            
             {
                 "tags": {"desc_type" : "default"},
-                "content": "Mercy dogs carry a Medi-Kit which can be used by any friendly model on themselves within 1\" of the dog. Mercy dogs can also drag any model within 1\" that is Down at ½ speed with them, both with normal movement or when dashing -if this takes the model out of melee combat, this does not trigger a free melee attack ACTION.",
+                "content": "Mercy dogs carry a Medi-Kit which can be used by any friendly model on themselves within 1\" of the dog. Mercy dogs can also drag any model (unless it has a base size of 40mm or greater) within 1\" that is Down at ½ speed with them, both with normal movement or when dashing -if this takes the model out of melee combat, this does not trigger a free melee attack ACTION.",
                 "glossary": [
                     {"val": "ACTION", "id": "kw_action"}
                 ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_brigadedog",
+        "name": "Brigade Dog",
+        "source": "westfalia",
+        "tags": {"action": true, "heal": true},
+        "contextdata": {
+            "model_equipment_restriction": {
+                "added": [
+                    {
+                        "category": "ranged",
+                        "res_type": "id",
+                        "value": "eq_molotovcocktail"
+                    },
+                    {
+                        "category": "ranged",
+                        "res_type": "id",
+                        "value": "eq_grenades"
+                    }
+                ]
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You may buy any dog Grenades or Molotov Cocktails. While the dogs themselves cannot use these, any other model in the Warband (though not a Combat Medic or other dogs) may use them if they are within 1\" of the dog at any point during their Activation."
             }
         ],
         "options": []
@@ -547,6 +595,7 @@
                 "type" : "text",
                 "strictness" : "strict",
                 "predefined_options" : [],
+                "single": true,
                 "option_context" : {"basic_option_default":{}},
                 "data_search" : {      
                     "searchtype": "complex",
@@ -1181,7 +1230,7 @@
                 ]
             }
         ],
-        "options": []
+        "options": [ ]
     },
     {
         "id": "ab_finishthefallen",
@@ -1490,6 +1539,7 @@
                 "name" : "Holy Powers",
                 "description" : [],
                 "category" : "type",
+                "single": true,
                 "type" : "text",
                 "strictness" : "strict",
                 "predefined_options" : [],
@@ -1542,6 +1592,7 @@
                 "description" : [],
                 "category" : "type",
                 "type" : "text",
+                "single": true,
                 "strictness" : "strict",
                 "predefined_options" : [],
                 "option_context" : {"basic_option_default":{}},
@@ -1598,6 +1649,7 @@
                 "name" : "Holy Powers",
                 "description" : [],
                 "category" : "type",
+                "single": true,
                 "type" : "text",
                 "strictness" : "strict",
                 "predefined_options" : [],
@@ -1662,6 +1714,7 @@
                 "description" : [],
                 "category" : "type",
                 "type" : "text",
+                "single": true,
                 "strictness" : "strict",
                 "predefined_options" : [],
                 "option_context" : {"basic_option_default":{}},
@@ -1887,14 +1940,15 @@
         "source": "core",
         "tags": {"trait": true},
         "contextdata": {
-            "override_equipment_keyword": {
-                "overrides": [
+            "equipment_add_keyword": {
+                "equip_check": [
                     {
-                        "id": "eq_satchelcharge",
-                        "remove": [
-                            "kw_heavy"
-                        ]
+                        "check_type": "id",
+                        "value": "eq_satchelcharge"
                     }
+                ],
+                "removals": [
+                    "kw_heavy"
                 ]
             }
          },
@@ -1910,7 +1964,7 @@
         "options": []
     },
     {
-        "id": "ab_fortify",
+        "id": "ab_fortifyeng",
         "name": "Fortify",
         "source": "core",
         "tags": {"action": true},
@@ -2578,5 +2632,115 @@
             }
         ],
         "options": []
+    },
+    {
+        "id": "ab_holydna",
+        "name": "Sample of Holy DNA",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {
+        },
+        "description": [           
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "When this model is activated, one INFECTION MARKER or BLOOD MARKER the model has becomes a BLESSINGS MARKER instead.",
+                "glossary": [
+                    {"val": "INFECTION MARKER", "id": "kw_infectionmarker"},
+                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"},
+                    {"val": "BLESSINGS MARKER", "id": "kw_blessingmarker"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_fruitofgoodandevil",
+        "name": "Fruit from the Tree of Good and Evil Knowledge",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {
+            "keyword_add": {"value": ["kw_demonic"]},
+            "skill_option": {}
+        },
+        "description": [           
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Any model eating this fruit will immediately gain any Skill of your choice normally available to your Warband/this model (including any Exploration Skill). In addition the model will gain the Keyword DEMONIC.",
+                "glossary": [
+                    {"val": "DEMONIC", "id": "kw_demonic"}
+                ]
+            }
+        ],
+        "options": [
+            {
+                "ref_id" : "ot_walkwithgod",
+                "name" : "",
+                "description" : [],
+                "category" : "type",
+                "type" : "text",
+                "strictness" : "strict",
+                "single": true,
+                "predefined_options" : [],
+                "option_context" : {"basic_option_default":{}},
+                "data_search" : 
+                
+            {      
+                "searchtype": "complex",
+                "searchparam":    {
+                    "type": "skill",
+                    "request":    {
+                        "operator": "and",
+                        "terms": [
+                            {
+                                "item": "tags",
+                                "value": "patron",
+                                "equals": false,
+                                "strict": true,
+                                "istag" : true,
+                                "tagvalue": ""
+                            }
+                        ],
+                        "subparams": [
+                            {
+                                "operator": "or",
+                                "terms": [
+                                    {             
+                                        "item": "skill_group",
+                                        "value": "sg_meleeandstrength",
+                                        "equals": true,
+                                        "strict": true
+                                    },
+                                    {             
+                                        "item": "skill_group",
+                                        "value": "sg_exploration",
+                                        "equals": true,
+                                        "strict": true
+                                    },
+                                    {             
+                                        "item": "skill_group",
+                                        "value": "sg_ranged",
+                                        "equals": true,
+                                        "strict": true
+                                    },
+                                    {             
+                                        "item": "skill_group",
+                                        "value": "sg_stealthandspeed",
+                                        "equals": true,
+                                        "strict": true
+                                    },
+                                    {             
+                                        "item": "skill_group",
+                                        "value": "sg_wildcard",
+                                        "equals": true,
+                                        "strict": true
+                                    }
+                                ],
+                                "subparams": []
+                            }
+                        ]
+                    }
+                }   
+            }
+            }]
     }
 ]

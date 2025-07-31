@@ -6,6 +6,7 @@ import { Ability } from '../../../classes/feature/ability/Ability';
 import { WarbandProperty } from '../../../classes/saveitems/Warband/WarbandProperty';
 import { returnDescription } from '../../../utility/util';
 import WbbOptionSelect from './modals/warband/WbbOptionSelect';
+import {useWbbMode} from "../../../context/WbbModeContext";
 
 interface WbbAbilityCollapseProps {
     ability: WarbandProperty;
@@ -13,6 +14,7 @@ interface WbbAbilityCollapseProps {
 
 const WbbAbilityDisplay: React.FC<WbbAbilityCollapseProps> = ({ ability }) => {
     const [open, setOpen] = useState(true);
+    const { play_mode, edit_mode, view_mode, print_mode, setMode } = useWbbMode(); // play mode v2
 
     return (
         <div className="WbbAbilityDisplay">

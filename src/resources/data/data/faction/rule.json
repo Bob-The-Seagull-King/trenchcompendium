@@ -103,15 +103,6 @@
                     }
                 ]
             },
-            "add_to_model": {   
-                "id": "rl_artofassassination",                            
-                "required": [
-                    {
-                        "category": "id",
-                        "value": ["md_sultanateassassin","md_sultanateassassin_mv_masterassassin"]
-                    }
-                ]
-            },
             "faction_add_upgrades": {
                 "list": [{
                 "model_key": "rl_artofassassination",
@@ -427,7 +418,10 @@
         "source": "core",
         "tags": { },
         "contextdata": { 
-            "add_to_warband": {}
+            "add_to_warband": {},
+            "add_to_model": {
+                "id": "rl_siegejezzailteams"
+            }
         },
         "name": "Siege Jezzail Teams",
         "description":  [
@@ -1930,7 +1924,8 @@
         "tags": { },
         "contextdata": { 
             "remove_from_model": {
-                "id": ["ab_assaultdrill"]
+                "id": ["md_shocktrooper"],
+                "abilities": ["ab_assaultdrill"]
             }
         },
         "name": "Light Melee",
@@ -2234,7 +2229,7 @@
         "description":  [
             {
             "tags": {"desc_type" : "default"},
-            "content": "The warband may include up to two Holy Warriors (use Trench Cleric characteristics) and they can each choose to replace their “Onwards, Christian Soldiers!” ability with one of the \"BLessed Palm\" or \"God's Mercy\" abilities."
+            "content": "The warband may include up to two Holy Warriors (use Trench Cleric characteristics) and they can each choose to replace their “Onwards, Christian Soldiers!” ability with one of the \"Blessed Palm\" or \"God's Mercy\" abilities."
         }
         ],
         "options": []
@@ -2245,17 +2240,18 @@
         "tags": { },
         "contextdata": { 
             "warband_equipment_limit": {
+                
+                "ignore": [
+                    {
+                        "type": "id",
+                        "value": "eq_satchelcharge"
+                    }
+                ],
                 "maximum": [
                     {
                         "category": "ranged",
                         "res_type": "keyword",
                         "value": "kw_heavy",
-                        "ignore": [
-                            {
-                                "type": "id",
-                                "value": "eq_satchelcharge"
-                            }
-                        ],
                         "limit": 3
                     }
                 ]
@@ -2295,6 +2291,62 @@
                 "glossary": [
                     {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"},
                     {"val": "INFECTION MARKERS", "id": "kw_infectionmarker"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_theorderofthefly",
+        "source": "core",
+        "tags": { },
+        "contextdata": {   
+        },
+        "name": "The Order of the Fly",
+        "description":  [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "When your warband is created, you must choose whether it will be led by a Lord of Tumours or a Plague Knight."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [
+                    {
+                        "tags": {"desc_type" : "list"},
+                        "content": "",
+                        "subcontent": [
+                            
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Lord of Tumours: "
+                                    },{
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "Your warband must include a Lord of Tumours when it is created. Your warband may include up to one Lord of Tumours and up to two Plague Knights."
+                                    }
+                                ]
+                            },{
+                                "tags": {"desc_type" : "default"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Plague Knight: "
+                                    },{
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "Your warband must include a Plague Knight when it is created and may include up to three. ",
+                                        "glossary": [
+                                            {"val": "ACTION", "id": "kw_action"}
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
                 ]
             }
         ],
@@ -2959,6 +3011,190 @@
             {
                 "tags": {"desc_type" : "paragraph"},
                 "content": "Many of the warriors of the Court have access to a selection of devastating Spells and other Powers as detailed in the list below which can be purchased at the indicated cost when the model is initially purchased. Depending on the type of model and which Deadly Sin the warband is dedicated to, the selection available to you may vary. All such limitations are clearly marked below."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_molotovcocktails",
+        "source": "westfailia",
+        "tags": { },
+        "contextdata": {   
+        },
+        "name": "Molotov Cocktails",
+        "description":  [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Red Brigade can purchase Molotov Cocktails as part of their Armoury at the cost of 5 ducats."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_wearandtear",
+        "source": "westfailia",
+        "tags": { },
+        "contextdata": {   
+        },
+        "name": "Wear and Tear",
+        "description":  [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Red Brigade Warband starts every game with 1 BLOOD MARKER for each 200 full ducats of the total Warband cost. Your opponent can distribute these between your troops, but can only give 1 BLOOD MARKER per model as long as there are no troops with no BLOOD MARKERs left. Max BLOOD MARKERs per model is 2.",
+                "glossary": [
+                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_noretreat",
+        "source": "westfailia",
+        "tags": { },
+        "contextdata": {   
+            "add_to_model": {
+                "id": "rl_noretreat"
+            }
+        },
+        "name": "No Retreat",
+        "description":  [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "No members of this Warband can ever leave Melee Combat voluntarily."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_trenchdogs",
+        "source": "westfailia",
+        "tags": { },
+        "contextdata": {   
+            "faction_remove_upgrades": {
+                "upgrades": ["rel_md_up_trenchdog_fireteam"]
+            },
+            "faction_add_upgrades": {
+                "list": [{
+                "model_key": "rl_trenchdogs",
+                "models_id": ["md_trenchdog","md_trenchdog_guarddog","md_trenchdog_mercydog","md_trenchdog_attackdog"]}]
+            },
+            "true_add_to_model": {  
+                "list": [
+                    {
+                        "id": "ab_brigadedog",                            
+                        "required": [
+                            {
+                                "category": "id",
+                                "value": ["md_trenchdog","md_trenchdog_guarddog","md_trenchdog_mercydog","md_trenchdog_attackdog"]
+                            }
+                        ] 
+                    }
+                ]
+            }
+        },
+        "name": "Trench Dogs",
+        "description":  [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Red Brigade may buy several differenc types of Trench Dogs as detailed in the Troops section of the faction. The number of dogs may not exceed the number of other models. If this happens due to casualties, you cannot buy more dogs until this condition is met once more."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_gloryhounds",
+        "source": "westfailia",
+        "tags": { },
+        "contextdata": {   
+            "add_to_model": {
+                "id": "rl_gloryhounds",                         
+                "required": [
+                    {
+                        "category": "id",
+                        "value": ["md_trenchdog","md_trenchdog_guarddog","md_trenchdog_mercydog","md_trenchdog_attackdog"]
+                    }
+                ]
+            }
+        },
+        "name": "Glory Hounds",
+        "description":  [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Soldiers of New Antioch love heroic stories and improbable tall tales. Any dog that is part of the Red Brigade earns 2 Glory Points instead of 1 when they perform any Glorious Deed. Limited to 2 additional Glory Points per game."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_rememberthefallen",
+        "source": "westfailia",
+        "tags": { },
+        "contextdata": { 
+            "extra_step": {
+                "stage": 3,
+                "id": "stage_rememberthefallen"
+            }
+        },
+        "name": "Remember the Fallen",
+        "description":  [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "After the battle, instead of taking the Exploration option or Reinforcement option, the Red Brigade may recover all the weapons, armour, and equipment of all the warriors of their own Warband who died in the battle. This does not include Allies & Mercenaries since they are not Blood Pledges. This allows you to recover even weapons, armour, and equipment that would normally be exclusive to some warriors such as Machine Armour of the Heavy Mechanised Infantry. Note that this does not allow you to exceed the LIMIT of any items - items that would break the rule must be sold."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_liveofftheland",
+        "source": "westfailia",
+        "tags": { },
+        "contextdata": { 
+            "step_limit": {
+                "count": 1,
+                "id": "stage_reinforcements"
+            }
+        },
+        "name": "Live off the Land",
+        "description":  [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Most of the time the Red Brigade operates deep within hostile territory. When playing campaigns, the Red Brigade cannot call for Reinforcements if it did so after their last game. Instead they must choose the Exploration or Remember the Fallen option."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_gunsblazing",
+        "source": "westfailia",
+        "tags": { },
+        "contextdata": { 
+            "faction_add_upgrades": {
+                "list": [{
+                "model_key": "rl_gunsblazing",
+                "models_id": ["md_lieutenant"]}]
+            }
+        },
+        "name": "Guns Blazing",
+        "description":  [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "It is the tradition of the Brigade officers to practise the two-pistol fighting style of St. Ernest. Lieutenants of the Warband can buy the Gunslinger Skill for the cost of 5 ducats."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_displeasureofthechurch",
+        "source": "westfailia",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Displeasure of the Church",
+        "description":  [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Few members fo the clergy are willing to serve in the unit due to the disregard of their lives they show. Your warband can have a maximum of two such characters, so you can either have 1 Trench Cleric and 1 Sniper Priest, or 2 Sniper Priests but no Trench Cleric."
             }
         ],
         "options": []

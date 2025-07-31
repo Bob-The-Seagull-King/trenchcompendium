@@ -31,7 +31,14 @@ h1, h2, h3, h4
 .spacer-20
     height: 20px
 
-
+// global content:
+.narrow-content
+    @media(min-width: 786px) and (max-width: 1199px)
+        margin: auto
+        width: 80%
+    @media(min-width: 1200px)
+        margin: auto
+        width: 80%
 
 h1
     .headline-back-btn
@@ -40,6 +47,7 @@ h1
         font-size: 0.6em
         margin-right: 0.4em
         color: currentColor
+
         i,svg
             margin-bottom: 0.15em
 
@@ -78,6 +86,11 @@ h1
 .icon-inline-right-l
     font-size: 1em
     margin-left: .3em
+
+// global warning icon color
+.icon-wraning
+    color: $yellow
+
 
 .popup-trigger-text
     cursor: pointer
@@ -130,6 +143,8 @@ a.synod-image-source
     text-decoration: none
     opacity: .85
 
+
+// loading images
 .ghost-image
     position: relative
     overflow: hidden
@@ -180,3 +195,5 @@ a.synod-image-source
 .hide-lg-up
     @media (min-width: 992px)
         display: none
+
+

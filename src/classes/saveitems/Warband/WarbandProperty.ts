@@ -41,6 +41,7 @@ class WarbandProperty extends DynamicContextObject  {
     public SelfDynamicProperty! : DynamicOptionContextObject;
     public SubProperties : WarbandProperty[] = [];
     public Consumables : WarbandConsumable[] = [];
+    public StoredSelectionVals : IWarbandProperty | null = null;
 
     /**
      * Assigns parameters and creates a series of description
@@ -51,7 +52,7 @@ class WarbandProperty extends DynamicContextObject  {
     {
         super(base_obj.SelfData, parent);
         this.ContextKeys = {}
-        
+        this.StoredSelectionVals = selection_vals;
     }
 
     public async SendConsumablesUp() {
@@ -63,6 +64,17 @@ class WarbandProperty extends DynamicContextObject  {
                 }
             }
         }
+    }
+
+    public HaveEmptyOptions() {
+
+        for (let i = 0; i < this.SelfDynamicProperty.Selections.length; i++) {
+            if (this.SelfDynamicProperty.Selections[i].SelectedChoice == null) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public async BuildConsumables(data: IWarbandConsumable[]) {
@@ -78,12 +90,14 @@ class WarbandProperty extends DynamicContextObject  {
     }
 
     public async HandleDynamicProps(base_obj : StaticOptionContextObject, parent : DynamicContextObject | null, dyna_obj : DynamicOptionContextObject | null, selection_vals: IWarbandProperty | null) {
+
         if (dyna_obj != null) {
             this.SelfDynamicProperty = dyna_obj;
         } else {
             this.SelfDynamicProperty = new DynamicOptionContextObject(base_obj.SelfData, base_obj, this);  
             await this.SelfDynamicProperty.BuildSelections();  
         }
+        
         if (selection_vals != null) {
             for (let i = 0; i < this.SelfDynamicProperty.Selections.length; i++) {
                 const CurSelection = this.SelfDynamicProperty.Selections[i];
@@ -93,7 +107,6 @@ class WarbandProperty extends DynamicContextObject  {
                         if (CurSelection.Option.AutoSelect == true && CurSelection.SelectionSet.length > 0) {
                             CurSelection.SelectOption(CurSelection.SelectionSet[0].id);
                         } else {
-                            
                             CurSelection.SelectOption(selection_vals.selections[j].selection_ID)
                         }
                         const subselect = selection_vals.selections[j].suboption;
@@ -115,17 +128,31 @@ class WarbandProperty extends DynamicContextObject  {
         }
     }
 
+    // ITS IN HERE, KILL IT
     public async GenerateSubProperties(selection_vals: IWarbandProperty, self_selection : SelectedOption) {
         const Nested = self_selection.NestedOption
         if (Nested != null) {
-            const NewSkill = new WarbandProperty(Nested.OptionChoice, this, Nested, selection_vals);
-            await NewSkill.HandleDynamicProps(Nested.OptionChoice, this, Nested, selection_vals)
-            await NewSkill.BuildConsumables(selection_vals.consumables)
-            this.SubProperties.push(NewSkill);
+            let found = false
+            for (let i = 0; i < this.SubProperties.length; i++) {
+                if (this.SubProperties[i].ID == Nested.OptionChoice.ID) {
+                    found = true;
+                    const NewSkill = this.SubProperties[i]
+                    await NewSkill.HandleDynamicProps(Nested.OptionChoice, this, Nested, selection_vals)
+                    await NewSkill.BuildConsumables(selection_vals.consumables)
+                    break;
+                }
+            }
+            if (found == false) {
+                const NewSkill = new WarbandProperty(Nested.OptionChoice, this, Nested, selection_vals);
+                await NewSkill.HandleDynamicProps(Nested.OptionChoice, this, Nested, selection_vals)
+                await NewSkill.BuildConsumables(selection_vals.consumables)
+                this.SubProperties.push(NewSkill);
+            }
         }
     }
 
     public async RegenerateSubProperties( ) {
+        this.ConvertToInterface();
         const RegenProperties : WarbandProperty[] = []
         for (let i = 0; i < this.SelfDynamicProperty.Selections.length; i++) {
             const CurSelection = this.SelfDynamicProperty.Selections[i]
@@ -181,9 +208,9 @@ class WarbandProperty extends DynamicContextObject  {
             if (sel_val != undefined) { if (sel_val != null) { sel_id = sel_val.id; } }
             let warband_subitem = null;
             if (sel_item.NestedOption != null) {
-                for (let j = 0; j < this.SubProperties.length; i++) {
-                    if (this.SubProperties[i].SelfDynamicProperty == sel_item.NestedOption) {
-                        warband_subitem = this.SubProperties[i].ConvertToInterface();
+                for (let j = 0; j < this.SubProperties.length; j++) {
+                    if (this.SubProperties[j].SelfDynamicProperty == sel_item.NestedOption) {
+                        warband_subitem = this.SubProperties[j].ConvertToInterface();
                         break;
                     }
                 }
@@ -216,6 +243,9 @@ class WarbandProperty extends DynamicContextObject  {
             selections: selectionarray,
             consumables: consumablelist
         }
+
+        this.SelfData = _objint;
+        this.StoredSelectionVals = _objint;
         
         return _objint;
     }
@@ -224,6 +254,34 @@ class WarbandProperty extends DynamicContextObject  {
         await this.SelfDynamicProperty.ReloadOption();
         for (let i = 0; i < this.Consumables.length; i++) {
             await this.Consumables[i].GrabOptions()
+        }
+        
+        await this.ReSelectPicks();
+    }
+
+    public async ReSelectPicks() {
+        this.ConvertToInterface();
+        const selection_vals = this.StoredSelectionVals
+        
+        if (selection_vals != null) {
+            for (let i = 0; i < this.SelfDynamicProperty.Selections.length; i++) {
+                const CurSelection = this.SelfDynamicProperty.Selections[i];
+                await CurSelection.GetSelectionChoices();
+                for (let j = 0; j < selection_vals.selections.length; j++) {
+                    if (selection_vals.selections[j].option_refID == CurSelection.Option.RefID) {
+                        if (CurSelection.Option.AutoSelect == true && CurSelection.SelectionSet.length > 0) {
+                            CurSelection.SelectOption(CurSelection.SelectionSet[0].id);
+                        } else {
+                            CurSelection.SelectOption(selection_vals.selections[j].selection_ID)
+                        }
+                        const subselect = selection_vals.selections[j].suboption;
+                        if (subselect != undefined) {
+                            await this.GenerateSubProperties(subselect, CurSelection)
+                        }
+                        break;
+                    }
+                }
+            }
         }
     }
     
@@ -248,6 +306,10 @@ class WarbandProperty extends DynamicContextObject  {
 
     public GetOwnName() {
         return (this.SelfDynamicProperty.OptionChoice).GetTrueName();
+    }
+
+    public GetOwnID() {
+        return (this.SelfDynamicProperty.OptionChoice).GetID();
     }
 
 }

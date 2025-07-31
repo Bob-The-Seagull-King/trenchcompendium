@@ -67,6 +67,9 @@ const RulesModelDisplay = (props: any) => {
         if ((minimum[0] == undefined) || (maximum[0] == undefined)) {
             return "";
         }
+        if (maximum[0] == "-1") {
+            return "Unlimited"
+        }
         if (minimum[0] == maximum[0]) {
             if (minimum[0] == "0") {
                 return "Unlimited"

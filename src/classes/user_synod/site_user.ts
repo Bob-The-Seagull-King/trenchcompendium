@@ -35,6 +35,8 @@ export interface ProfilePictureOption {
     available: boolean
     url: string
     tier: string
+    source_url: string
+    source_title: string
 }
 
 export interface IFriend {
@@ -172,7 +174,7 @@ class SiteUser {
             sub_id : this.Premium.SubId,
             premium_until : this.Premium.PremiumUntil
         }
-        
+        this.SelfData = _objint;
         return _objint;
     }
 
@@ -450,7 +452,7 @@ class SiteUser {
     }
 
     public PremiumUntilFormat () {
-        const date = new Date(this.PremiumUntil());
+        const date = new Date(this.PremiumUntil() * 1000);
 
         const day = String(date.getDate()).padStart(2, '0');
         const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -462,12 +464,11 @@ class SiteUser {
     /**
      * Returns the string of the users supporter status
      *
-     * @TODO: return actual value
      * 'Supporter' if is premium
      * 'Free Member' if not premium
      */
     public GetUserStatus () {
-        return (this.Premium.IsPremium == true)? 'Supporter' : 'Free Member'
+        return (this.Premium.IsPremium == true)? '❤️ Supporter' : 'Free Member'
     }
 
 }

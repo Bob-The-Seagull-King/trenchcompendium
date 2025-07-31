@@ -18,6 +18,7 @@ const WbbCreateNewDetailsForm: React.FC<{
     const [warbandName, setWarbandName] = useState('');
     const [warbandStartingDucats, setWarbandStartingDucats] = useState(700);
     const [warbandStartingGlory, setWarbandStartingGlory] = useState(0);
+    const [isunrestricted, setIsUnrestricted] = useState(false);
     const [keyvar, setkeyvar] = useState(0);
 
     useEffect(() => {
@@ -45,16 +46,15 @@ const WbbCreateNewDetailsForm: React.FC<{
         SetStartingValues()
     }, [chosenfaction])
 
-
     const [isLoading, setisLoading] = useState(false)
 
     async function handleSubmit() {
-        const msg : null | SumWarband = await manager.NewItem(warbandName, chosenfaction.ID, warbandStartingDucats, warbandStartingGlory)
+        const msg : null | SumWarband = await manager.NewItem(warbandName, chosenfaction.ID, warbandStartingDucats, warbandStartingGlory, isunrestricted)
 
         if (msg == null) {
             alert("Warband creation was unsuccessful");
         } else {
-            navigate('/warband/edit/' + msg.id);
+            navigate('/warband/detail/' + msg.id);
         }
     }
 
@@ -87,7 +87,7 @@ const WbbCreateNewDetailsForm: React.FC<{
                             </div>
                         </div>
 
-                        <div className={'mb-3'} >
+                        <div className={'mb-3'}>
                             <label className="form-label">Starting Ducats</label>
                             <input
                                 className="form-control form-control-sm" type={"number"}
@@ -97,7 +97,7 @@ const WbbCreateNewDetailsForm: React.FC<{
                             />
                         </div>
 
-                        <div className={'mb-3'} >
+                        <div className={'mb-3'}>
                             <label className="form-label">Starting Glory</label>
                             <input
                                 className="form-control form-control-sm" type={"number"}
@@ -105,6 +105,24 @@ const WbbCreateNewDetailsForm: React.FC<{
                                 onChange={(e) => setWarbandStartingGlory(parseInt(e.target.value))}
                                 placeholder={'Unlimited'}
                             />
+                        </div>
+
+                        <div className={'mb-3'}>
+                            <div className="form-check form-switch">
+                                <input
+                                    className="form-check-input"
+                                    type="checkbox"
+                                    id="removeRestrictions"
+                                    checked={isunrestricted}
+                                    onChange={(e) => setIsUnrestricted(e.target.checked)}
+                                />
+                                <label className="form-check-label" htmlFor="removeRestrictions">
+                                    {'Remove Restrictions'}
+                                </label>
+                            </div>
+                            <div className="form-text">
+                                {'If restrictions are removed, the builder will not check limitations on number, cost, available hands, and other rules on equipment and model selection.'}
+                            </div>
                         </div>
 
 
@@ -129,9 +147,9 @@ const WbbCreateNewDetailsForm: React.FC<{
                 </div>
 
                 <div className={'col-12 col-xl-7'}>
-                <div className={'faction-image-wrap'}>
+                    <div className={'faction-image-wrap'}>
 
-                    <SynodFactionImage
+                        <SynodFactionImage
                             factionSlug={chosenfaction.ID}
                             size={'full'}
                         />

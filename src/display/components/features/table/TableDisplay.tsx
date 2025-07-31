@@ -13,6 +13,7 @@ const TableDisplay = (props: any) => {
     const TableObject: TableBody = props.data
     const DisplayColour : string = props.d_colour;
     const DisplayType : string = props.d_type;
+    const DisplayNumber : string = props.d_number? props.d_number : false;
 
     const BackgroundClass = DisplayType+"background"+getColour(DisplayColour)
 
@@ -33,7 +34,7 @@ const TableDisplay = (props: any) => {
                 </thead>
                 <tbody>
                     {TableObject.Items.map((item) => (
-                    <tr key={"rowtabledesc"}>
+                    <tr key={"rowtabledesc"} className={(DisplayNumber)? "text-nowrap" : ""}>
                         {item.Description.map((val) => (
                             <td key={"itemtabledesc"} className="tableText">
                                 <div className="tablecontent">

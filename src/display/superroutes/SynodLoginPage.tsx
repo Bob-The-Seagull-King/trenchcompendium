@@ -54,7 +54,7 @@ const SynodLoginPage: React.FC = () => {
     return (
         <div className="SynodLoginPage">
             <SynodImage
-                imageId={250}
+                imageId={2854}
                 className={'login-bg'}
                 size={'full'}
             />

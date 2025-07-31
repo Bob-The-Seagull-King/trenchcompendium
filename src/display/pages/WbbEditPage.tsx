@@ -3,11 +3,12 @@ import WbbEditView from "../components/warband-builder/WbbEditView";
 import { SumWarband, WarbandManager } from '../../classes/saveitems/Warband/WarbandManager';
 import { useLocation, useNavigate } from 'react-router-dom';
 import WarbandItemViewDisplay from '../components/features/saveitem/Warband/WarbandItemViewDisplay';
-import {PrintModeProvider} from "../../context/PrintModeContext";
 import PageMetaInformation from "../components/generics/PageMetaInformation";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
 import LoadingOverlay from '../components/generics/Loading-Overlay';
+import { WarbandFactory } from '../../factories/warband/WarbandFactory';
+import {WbbModeProvider} from "../../context/WbbModeContext";
 
 const WbbEditPage = (prop: any) => {
     const Manager : WarbandManager = prop.manager;
@@ -17,23 +18,40 @@ const WbbEditPage = (prop: any) => {
     const urlSplits = urlPath.split('/');
     const [_currentItem, returnItem] = useState<SumWarband | null>(null);
     const [keyval, setKeyVal] = useState(0);
-    
+
+    const [isWarbandOwner, setIsWarbandOwner] = useState(false);
+
+
     const navigate = useNavigate();
 
-    function grabItemFromURL() {
+    async function grabItemFromURL() {
         const CurItemID = urlSplits.slice(-1)[0]
+        if (!isNaN(Number(CurItemID))) {
+            const ItemCurrent = Manager.GetItemByID(CurItemID);
+            if (ItemCurrent == null ) {
+                const ItemOther = await WarbandFactory.GetWarbandPublicByID(Number(CurItemID))
 
-        const ItemCurrent = Manager.GetItemByID(CurItemID);
-        if (ItemCurrent == null ) {
-            navigate(`/warband/view/${CurItemID}`)
+                // @TODO: Lane: Is this the right place to set ownership?
+                setIsWarbandOwner(false)
+
+                return ItemOther
+            }
+
+            // @TODO: Lane: Is this the right place to set ownership?
+            setIsWarbandOwner(true)
+
+            return ItemCurrent
+
+        } else {
+            return null
         }
-        return ItemCurrent
+
     }
-    
+
     useEffect(() => {
         async function SetWarband() {
             await Manager.GetItemsAll();
-            const Item = grabItemFromURL()
+            const Item = await grabItemFromURL()
             returnItem(Item)
             setKeyVal((prev) => (prev + 1))
         }
@@ -45,12 +63,12 @@ const WbbEditPage = (prop: any) => {
         <div className={'WbbEditPage'} key={keyval}>
             {_currentItem != null &&
                 <>
-                    <PrintModeProvider>
+                    <WbbModeProvider isOwner={isWarbandOwner}>
                         <WbbEditView
                             warbandData={_currentItem}
                             manager={Manager}
                         />
-                    </PrintModeProvider>
+                    </WbbModeProvider>
                 </>
             }
             {_currentItem == null &&

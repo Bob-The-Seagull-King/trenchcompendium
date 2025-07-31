@@ -126,9 +126,19 @@ const ProfileSubscriptionView: React.FC = () => {
                     </h4>
 
                     <ul className={'details-list'}>
-                        <li>{'Subscription Status: '}{'Active'}</li>
+                        <li>{'Membership Status: '}{'Active'}</li>
                         <li>{'Next Payment: '}{SiteUser.PremiumUntilFormat()}</li>
-                        <li>{'Subscription ID: '}{SiteUser.GetSubscriptionID()}</li>
+                        <li>{'Subscription ID: '}
+                            { SiteUser.GetSubscriptionID() ? (
+                                <>
+                                    {SiteUser.GetSubscriptionID()}
+                                </>
+                            ):(
+                                <>
+                                    {'No active subscription'}
+                                </>
+                            ) }
+                        </li>
                         <li className={'clickable'} onClick={
                             () => setInvoiceModalOpen(true)
                         }>
@@ -143,15 +153,26 @@ const ProfileSubscriptionView: React.FC = () => {
                         navigate(ROUTES.PAGE_PLAN_SELECTION)
                     )}
                     >
-                        {'Change Plans'}
+                        { SiteUser.GetSubscriptionID() ? (
+                            <>
+                                {'Change Plans'}
+                            </>
+                        ):(
+                            <>
+                                {'Reactivate Plan'}
+                            </>
+                        ) }
                     </a>
 
-                    <button className={'btn btn-secondary secondary-action'}
-                            onClick={() => setCancelSubModalOpen(true)}
-                    >
-                        <FontAwesomeIcon icon={faClose} className="icon-inline-left-s"/>
-                        {'Cancel Subscription'}
-                    </button>
+                    {SiteUser.GetSubscriptionID() &&
+                        <button className={'btn btn-secondary secondary-action'}
+                                onClick={() => setCancelSubModalOpen(true)}
+                        >
+                            <FontAwesomeIcon icon={faClose} className="icon-inline-left-s"/>
+                            {'Cancel Subscription'}
+                        </button>
+                    }
+
 
                     <Modal show={cancelSubModalOpen} size="lg"
                            contentClassName=""
@@ -250,7 +271,7 @@ const ProfileSubscriptionView: React.FC = () => {
                     <ul className={'details-list'}>
                         <li>
                             <img src={TCIcon} alt="Icon" className={'icon'} width={20} height={20}/>
-                            {'Membership starting from $1,67 monthly'}
+                            {'Membership starting from $1,99 monthly'}
                         </li>
                         <li>
                             <img src={TCIcon} alt="Icon" className={'icon'} width={20} height={20}/>

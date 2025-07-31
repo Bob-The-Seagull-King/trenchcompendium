@@ -440,8 +440,84 @@
             
         ],
         "team": "hell",
-        "cut_rules" : [],
+        "cut_rules" : ["rl_theorderofthefly"],
         "rules" : ["rl_theexecutor","rl_thelamenters","rl_thefallen","rl_thelost","rl_thebereaved","rl_dishonoured","rl_hegemonslastblessing","rl_hegemonswill"],
+        "options": []
+    },
+    {
+        "id": "fc_newantioch_fv_redbrigade",
+        "name": "The Red Brigade",
+        "source": "westfalia",
+        "tags": {},
+        "contextdata": {
+            "faction_keyword": {"name": "kw_antioch"}
+        },
+        "base_id": "fc_newantioch",
+        "description": [     
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The Red Brigade is made of volunteers who have lost someone close to them in the battles of the Great War. The unit was founded by St. Ernest, the sole survivor of the second battle of Acre; where he lost his brother Wilhelm to the forces of the Heresiarch Berenguer."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "It is said that when his brother fell in comabt Ernest donned the blood-stained helmet of Wilhelm and returned to the fray to kill Heretics until there were no more left to slay. As silence finally fell over the battlefield, Ernest was the sole survivor of either side. Seeing this as an ordained miracle by the Almighty, he gathered the rest of his brother's bloodied armour and returned to the Principality of New Antioch. There he began recruiting volunteers for his vendetta. As a gifted orator driven by the anguish of his loss, Ernest soon gathered a following of many bereaved soldiers like himself. Thus the first Red Brigade was formed and Ernest led his unofficial warband into the No Man's Land on a hunt for Heretics, through ambush and deep strikes at the vulnerable enemy supply lines. His bloodsoaked warriors soon began to resemble their leader in appearance which earned the unit its name."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Their skill and cunning on the battleifled caught the attention of the thrine of New Antioch and the Red Brigade was recognised as an official unit in the ducal armed forces. Since those times the Red Brigade has been used as the personal special operations force by the Duke of New Antioch. These driven soldiers undertake the most dangerous missions where unsustainable casualties would make it impossible to use the regular units. To join the Red Brigade a soldier has to volunteer, bringing to the recruiting officer a piece of kit tarnished by the blood of fallen comrades as proof of their right to serve as a 'Blood Pledge', as the soldiers of the Brigade are known."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "As a unit under the direct command of the Duke, the Red Brigade is granted many privileges while garrisoned within the city, in addition to arms and provisions from the city's stores. Their barracks are located at the ducal palace, and before the Red Brigade leaves for a mission they dine at the table of the Duke and his closest officers, in a lavish banquet known as the Feat of the Dead Men."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Due to their propensity for hunting high-value targets, the Red Brigade is supplied with warhounds from the kennels of the Duke. These loyal beasts give solace and companionship to the troopers and have been trained to provide the soldiers with grenades in the heat of battle when the Red Brigade strive to take heavily defended enemy stringpoints and trenches. Malinois, wolfhounds and mastiffs are especially popular and much-loved by the soldiery of the unit."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The Red Brigade are a grim and silent unit, haunted by their losses and long patrols in enemy territory. Often yearning to be reunited with their lost ones; they are willing to accept missions where death is almost certain. This self-destructive attitude chafes many members of the clergy, who do not condone the existence of the unit; as suicide is a motal sin. However, the Brigade has proven itself to be so useful to the Duke that the red-armoured troops have seen continuous service for decades."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "After each fray it is the task of the Quartermaster of the Brigade to gather the arms and red armour of the fallen and redistribute it so new recruits will have a real, tangible link to the fallen. But when faces with a battle where the commander of the Brigade sees there is no hope of survival, it is customary to dispatch one of their soldiers back to New Antioch in order to notify the Duke of the unit's demise. This messenger is chosen by drawing lots and the selected soldier takes the dogtags of the entire unit back to the Home of All Our Hopes, to be hung from the walls of the Chapel of Remembrance; there to join the thousands that have given their lives for the Brigade before."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The last member of the Brigade then asks for a personal audience with the ruling duke or duchess. The traditional greeting in such circumstances by the survivor is as follows:"
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "\"The Red Brigade has fallen\""
+                    }
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "To which the rule of New ANtioch solemnly answers:"
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "\"And the Red Bridage will rise anew\""
+                    }
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "And thus the recruitment of the new Red Brigade commences and the cycle of violence, revenge, and blood begins once more."
+            }
+        ],
+        "team": "faithful",
+        "cut_rules" : [],
+        "rules" : ["rl_molotovcocktails","rl_wearandtear","rl_noretreat","rl_trenchdogs","rl_gloryhounds","rl_rememberthefallen","rl_liveofftheland","rl_gunsblazing","rl_displeasureofthechurch"],
         "options": []
     }
 ]

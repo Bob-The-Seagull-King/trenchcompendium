@@ -200,6 +200,11 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
         returnDisplay(item: any) {
             return (
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
+                    
+                    <PageMetaInformation
+                                title={item.GetTrueName()}
+                                description={item.GetDescription()}
+                            />
                     {(item instanceof BookRule) &&
                         <>
                             <h1 className="">
@@ -360,6 +365,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
             return (
                 
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
+                    
                     {(item instanceof Equipment) &&
                         <RulesEquipmentEntry
                             equipment={item}
@@ -639,7 +645,11 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
                             </td>
                             <td>
                                 <Link to={'/compendium/campaign/explorationtable/et_commonlocations'} className="">
-                                    {'Common or Rare Exploration Locations'}
+                                    {'Common'}
+                                </Link>
+                                {' or '}
+                                <Link to={'/compendium/campaign/explorationtable/et_rarelocations'} className="">
+                                    {'Rare Exploration Locations'}
                                 </Link>
                             </td>
                         </tr>
@@ -648,7 +658,7 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
                                 {'6-9'}
                             </td>
                             <td>
-                                <Link to={'/compendium/campaign/explorationtable/et_commonlocations'} className="">
+                                <Link to={'/compendium/campaign/explorationtable/et_rarelocations'} className="">
                                     {'Rare Exploration Locations'}
                                 </Link>
                             </td>
@@ -658,8 +668,12 @@ export const DisplayCollectionDataDex : DisplayCollectionDataTable = {
                                 {'10+'}
                             </td>
                             <td>
-                                <Link to={'/compendium/campaign/explorationtable/et_commonlocations'} className="">
-                                    {'Rare or Legendary Exploration Locations'}
+                                <Link to={'/compendium/campaign/explorationtable/et_rarelocations'} className="">
+                                    {'Rare'}
+                                </Link>
+                                {' or '}
+                                <Link to={'/compendium/campaign/explorationtable/et_legendarylocations'} className="">
+                                    {'Legendary Exploration Locations'}
                                 </Link>
                             </td>
                         </tr>

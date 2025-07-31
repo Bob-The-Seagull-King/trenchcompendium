@@ -169,6 +169,21 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
                 )
 
             }
+            case "table_item_wrap": {
+                return (
+                    <td className="table_item text-nowrap">
+                        <span>
+                            {ConvertContentWithGlossary((item.Glossary), item.Content?.toString() || "")}
+                        </span>
+                        <span>
+                            {item.SubContent?.map((subitem) => (
+                               <AdvancedDescriptionItemDisplay key="descriptionsubitem" data={subitem} parent={parentItem}/>
+                            ))}
+                        </span>
+                    </td>
+                )
+
+            }
             case "table_headitem": {
                 return (
                     <th>
@@ -479,7 +494,6 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
                     <>
                         <RulesOverlay
                             titlename={component.Name}
-                            d_name={component.Name}
                             d_method={() =>
                                 
                                 <div className={'rules-equipment-main'}>                    
@@ -520,7 +534,6 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
                     <>
                         <RulesOverlay
                             titlename={component.Name}
-                            d_name={component.Name}
                             d_method={() =>
                                 
                                 <div className={'skill-description'}>
@@ -581,7 +594,6 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
                 {component !== null &&
                     <RulesOverlay
                         titlename={component.Name}
-                        d_name={component.Name}
                         d_method={() =>
                         <ModelDisplay data={component} />
                     }/>

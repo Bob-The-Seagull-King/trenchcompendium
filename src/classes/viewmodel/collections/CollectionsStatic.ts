@@ -22,6 +22,7 @@ import { IInjury } from "../../feature/ability/Injury";
 import { InjuryFactory } from "../../../factories/features/InjuryFactory";
 import { SkillFactory } from "../../../factories/features/SkillFactory";
 import { IPatron } from "../../feature/skillgroup/Patron";
+import { IExplorationTable } from "../../feature/exploration/ExplorationTable";
 
 export interface CollectionType {
     searchId      : string,
@@ -182,12 +183,12 @@ export const CollectionDataDex : CollectionDataTable = {
     explorationtable: {
         searchId: 'explorationtable', 
         pageName: 'explorationtable',
-        sort: ["id"],
+        sort: ["rarity","id"],
         async postSearch(model : ViewCollectionsModel) {
             model.CleanupItems();
             model.CleanupCollection();
             let i = 0;
-            model.dataresults.sort(byPropertiesOf<IContextObject>(["id"]))
+            model.dataresults.sort(byPropertiesOf<IExplorationTable>(["rarity","id"]))
             for (i = 0; i < model.dataresults.length; i++) {
                 const summonNew = await ExplorationFactory.CreateExplorationTable(model.dataresults[i], null);
                 const ItemNew = new ViewTableItem(summonNew, getColour('default'));

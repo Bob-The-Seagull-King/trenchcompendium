@@ -1,0 +1,39 @@
+
+$desktop-height: 100px
+$mobile-height: 70px
+
+.AdsManager
+    position: fixed
+    bottom: 0
+    left: 0
+    right: 0
+    z-index: 101
+
+    height: $desktop-height
+    border-top: 1px solid $color-bg-0
+    background-color: $color-bg-1
+
+    @media (max-width: 768px)
+        height: $mobile-height
+
+    .Ads-text-below
+        position: absolute
+        z-index: 0
+        height: 100%
+        width: 100%
+        text-align: center
+        padding: 5px 15px
+
+        display: flex
+        justify-content: center
+        align-items: center
+
+    .ads-placeholder
+        position: relative
+        z-index: 5
+
+
+.AdsManager-bottom-spacer
+    height: $desktop-height
+    @media (max-width: 768px)
+        height: $mobile-height

@@ -12,12 +12,12 @@ import { SynodDataCache } from '../../classes/_high_level_controllers/SynodDataC
 import ProfileSubscriptionView from "../components/Profile/ProfileSubscriptionView";
 import {SiteUser} from "../../classes/user_synod/site_user";
 import {UserFactory} from "../../factories/synod/UserFactory";
+import PageMetaInformation from "../components/generics/PageMetaInformation";
 
 
 
 const ProfileSettingsPage: React.FC = () => {
     const urlPath = useLocation().pathname;
-    const urlSplits = urlPath.split('/');
     const { isLoggedIn, userId, authToken, logout } = useAuth();
     const navigate = useNavigate();
 
@@ -34,7 +34,6 @@ const ProfileSettingsPage: React.FC = () => {
     const [error, setError] = useState('');
 
     const [isLoadingSubmit, setisLoadingSubmit] = useState(false)
-
 
     useEffect(() => {
         if ( !userId || !isLoggedIn ) {
@@ -120,7 +119,7 @@ const ProfileSettingsPage: React.FC = () => {
         }
     };
 
-    if (!userId || loading ) return (
+    if (userId === undefined || loading) return (
         <div className="ProfileSettingsPage">
             <LoadingOverlay
                 message={'Loading your settings'}
@@ -131,6 +130,11 @@ const ProfileSettingsPage: React.FC = () => {
 
     return (
         <div className="ProfileSettingsPage">
+            <PageMetaInformation
+                title={'User Settings'}
+                description={'Adjust your personal settings, manage your profile, and tailor your Trench Companion experience'}
+            />
+
             <ToastContainer
                 position="bottom-right"
                 autoClose={5000}

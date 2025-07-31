@@ -1,0 +1,38 @@
+
+
+.StaticTimeline
+    position: relative
+
+    max-width: 575px
+    margin: 0 auto
+
+    &:before
+        content: ""
+        display: block
+        width: 3px
+        height: 100%
+        background-color: $color-text
+        top: 7px
+        left: 0
+        position: absolute
+
+    .timeline-entry
+        position: relative
+        margin-left: 20px
+        padding: 15px
+        margin-bottom: 45px
+        background-color: $color-bg-2
+
+
+        &:before
+            content: ""
+            display: block
+            width: 15px
+            height: 15px
+            border-radius: 50%
+
+            background-color: $color-highlight
+            top: 7px
+            left: -26px
+            position: absolute
+

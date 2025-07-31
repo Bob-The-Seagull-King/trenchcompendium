@@ -19,6 +19,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {OverlayTrigger, Popover} from "react-bootstrap";
 import { SiteUserPublic } from '../../../classes/user_synod/user_public';
 import { SiteUserSearchResult } from './ProfilePageFriends';
+import ImageCredits from "../../../utility/ImageCredits";
 
 interface UserListEntryProps {
     friend_obj: SiteUserPublic | SiteUserSearchResult
@@ -89,18 +90,22 @@ const UserListEntry: React.FC<UserListEntryProps> = ({ friend_obj,
 
     // Set values
     let ID = 0;
-    let Profile_Url = "";
+    let Pfp_Url = "";
+    let Pfp_Cred_Title = "";
+    let Pfp_Cred_URL = "";
     let Name = "";
     let Status = "";
 
     if (friend_obj instanceof SiteUserPublic) {
         ID = friend_obj.ID;
-        Profile_Url = friend_obj.ProfilePic.urls["medium"];
+        Pfp_Url = friend_obj.ProfilePic.urls["medium"];
+        Pfp_Cred_Title = friend_obj.ProfilePic.source_title;
+        Pfp_Cred_URL = friend_obj.ProfilePic.source_url;
         Name = friend_obj.GetNickname();
         Status = friend_obj.GetUserStatus();
     } else {
         ID = friend_obj.id;
-        Profile_Url = friend_obj.profile_picture_url;
+        Pfp_Url = friend_obj.profile_picture_url;
         Name = friend_obj.nickname;
         Status = friend_obj.status;
     }
@@ -114,7 +119,14 @@ const UserListEntry: React.FC<UserListEntryProps> = ({ friend_obj,
                     navigate(`/profile/${ID}`, {state: Date.now().toString()})
                 }}>
 
-                <img className={'UserListEntry-image'} src={Profile_Url} />
+                { (Pfp_Cred_Title && Pfp_Cred_URL) &&
+                    <ImageCredits
+                        sourceTitle={Pfp_Cred_Title}
+                        sourceUrl={Pfp_Cred_URL}
+                        popoverSlug={Pfp_Url+ID}
+                    />
+                }
+                <img className={'UserListEntry-image'} src={Pfp_Url} />
 
             </CustomNavLink>
 

@@ -4,6 +4,7 @@ import { IWarbandContextItem } from './High_Level/WarbandContextItem';
 import { UserWarband, IUserWarband } from './UserWarband';
 import { UserFactory } from '../../../factories/synod/UserFactory';
 import { SYNOD } from '../../../resources/api-constants';
+import { EventRunner } from '../../contextevent/contexteventhandler';
 
 export interface ISumWarband {
     id : number // -1 means LOCAL warband
@@ -221,10 +222,15 @@ class WarbandManager {
     /**
      * Builds a new item and saves it to the browser
      */
-    public async NewItem(_title : string, fact_id : string, ducats : number, glory : number) {
+    public async NewItem(_title : string, fact_id : string, ducats : number, glory : number, isrestricted : boolean) {
 
         if (_title.trim().length <= 0) {
             return null;
+        }
+
+        const rest_list : string[] = [];
+        if (isrestricted == true) {
+            rest_list.push("unrestricted")
         }
 
         const _Item : IUserWarband = {
@@ -234,7 +240,7 @@ class WarbandManager {
             source: 'user_warband',
             tags: {},
             ducat_bank: isNaN(ducats)? 123e34 : ducats,
-            glory_bank: isNaN(glory)? 123e34 : ducats,
+            glory_bank: isNaN(glory)? 123e34 : glory,
             notes: [],
             context: {
                 id: this.CalcID(_title.trim() + "_context"),
@@ -277,10 +283,21 @@ class WarbandManager {
                 glory: 0
             },
             modifiers: [],
+            modifiersloc: [],
             fireteams: [],
-            consumables: []
+            consumables: [],
+            restrictions_list: rest_list
         }
         const new_item : UserWarband = await WarbandFactory.CreateUserWarband(_Item)
+        
+        const eventmon : EventRunner = new EventRunner();
+        await eventmon.runEvent(
+            "onWarbandBuild",
+            new_item,
+            [],
+            null,
+            new_item
+        )
 
         if (this.UserProfile != null) {
             const id  = await this.CreateWarbandSynod(new_item.ConvertToInterface())

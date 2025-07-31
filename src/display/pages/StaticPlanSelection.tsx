@@ -13,6 +13,7 @@ import Modal from "react-bootstrap/Modal";
 import PayPalSubButton from "../components/Profile/PayPalSubButton";
 import {SYNOD} from "../../resources/api-constants";
 import LoadingOverlay from "../components/generics/Loading-Overlay";
+import PageMetaInformation from "../components/generics/PageMetaInformation";
 
 const StaticPlanSelection: React.FC = () => {
 
@@ -59,21 +60,22 @@ const StaticPlanSelection: React.FC = () => {
     if( loadingUser || !SiteUser ) {
         return (
             <div className={'StaticPlanSelection'}>
-                <div className={'spacer-20'}/>
-                <div className={'spacer-20'}/>
-
-                <LoadingOverlay
-                    message={'Loading your Membership'}
-                />
-
-                <div className={'spacer-20'}/>
-                <div className={'spacer-20'}/>
+                <div className={'LoadingOverlay-wrap-100vh'}>
+                    <LoadingOverlay
+                        message={'Loading your Membership'}
+                    />
+                </div>
             </div>
         );
     }
 
     return (
         <div className="StaticPlanSelection page-static">
+            <PageMetaInformation
+                title={'Supporter Plans'}
+                description={'Choose your Trench Companion supporter plan and help us build the best companion app for Trench Crusade. Unlock exclusive perks and go ad-free.'}
+            />
+
             <div className={'container'}>
                 <h1>
                     <a className={'headline-back-btn'}
@@ -125,7 +127,7 @@ const StaticPlanSelection: React.FC = () => {
                     </div>
 
                     { SiteUser.GetPlanID() != SYNOD.PP_PLAN_MONTH_ID && (
-                        <button className={'btn btn-primary'}
+                        <button className={'btn btn-primary select-plan-btn'}
                                 onClick={() => setPurchaseMonthlyModalOpen(true)}
                         >
                             {'Select Plan'}

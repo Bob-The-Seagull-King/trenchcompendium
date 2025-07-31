@@ -5,7 +5,7 @@ import { ErrorBoundary } from "react-error-boundary";
 // Classes
 import { Form } from 'react-bootstrap';
 import { makestringpresentable } from '../../../../utility/functions';
-import { FactionCollection } from '../../../../classes/feature/faction/FactionCollection';
+import { FactionCollection, FactionVar } from '../../../../classes/feature/faction/FactionCollection';
 import FactionDisplay from './FactionDisplay';
 import { useLocation } from 'react-router-dom';
 import SynodFactionImage from "../../../../utility/SynodFactionImage";
@@ -19,7 +19,7 @@ const FactionCollectionDisplay = (props: any) => {
     const urlPath = useLocation().pathname;
     const urlSplits = urlPath.split('/');
 
-    const [selectedModel, setSelectedModel] = useState(GetBase());
+    const [selectedModel, setSelectedModel] = useState<FactionVar>(GetBase());
     const [_keyvar, setkeyvar] = useState(0);
 
     function GetBase() {
@@ -63,8 +63,8 @@ const FactionCollectionDisplay = (props: any) => {
     return (
         <ErrorBoundary fallback={<div>Something went wrong with FactionCollectionDisplay.tsx</div>}>
             <PageMetaInformation
-                title={factioncollectionObject.GetDisplayName()}
-                description={factioncollectionObject.GetDescription()}
+                title={selectedModel.faction.GetTrueName()}
+                description={selectedModel.faction.Description[0].Content}
                 ogImage={url}
             />
 

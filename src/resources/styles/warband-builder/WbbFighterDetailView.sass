@@ -43,9 +43,22 @@
     .fighter-card-stats
         margin-bottom: 0
 
+        .modified
+            .stat-value
+                color: $blue
+            &.modified-positive
+                .stat-value
+                    color: $green
+            &.modified-negative
+                .stat-value
+                    color: $color-highlight
+
+
     &.play-mode
         .fighter-card-stats
             margin-bottom: 30px
+
+
     .fighter-card-collapse-wrap
 
         h3
@@ -62,28 +75,7 @@
             top: 0
             right: 0
 
-    .xp-boxes
-        display: flex
-        flex-wrap: wrap
-        gap: 5px
 
-        .xp-box
-            position: relative
-            height: 15px
-            width: 15px
-            border: 1px solid $color-text
-
-            @media(max-width: 380px)
-                height: 11px
-                width: 11px
-            &.xp-box-bold
-                border: 1px solid $color-highlight-text
-
-            i, svg
-                position: absolute
-                top: 50%
-                left: 50%
-                transform: translate(-50%, -50%)
 
 
     // Battle Scar Boxes
@@ -96,37 +88,7 @@
             top: 0
             right: 0
 
-    .battle-scar-boxes
-        display: flex
-        flex-wrap: wrap
-        gap: 5px
 
-        .battle-scar-box
-            position: relative
-            height: 35px
-            width: 35px
-            border: 1px solid $color-text
-
-            @media(max-width: 380px)
-                height: 11px
-                width: 11px
-
-            &:last-of-type
-                border: 1px solid $color-highlight-text
-
-            .skull-icon
-                opacity: .25
-                z-index: 1
-                color: $color-highlight-text
-                font-size: 22px
-
-            i, svg
-                font-size: 18px
-                position: absolute
-                z-index: 2
-                top: 50%
-                left: 50%
-                transform: translate(-50%, -50%)
 
     &.play-mode
         .fighter-card-play-mode-info
@@ -137,3 +99,76 @@
 
             h3
                 margin: 20px 0
+
+// // //
+// XP Boxes global
+
+.xp-boxes
+    display: flex
+    flex-wrap: wrap
+    gap: 5px
+
+    .xp-box
+        position: relative
+        height: 15px
+        width: 15px
+        border: 1px solid $color-text
+
+        @media(max-width: 380px)
+            height: 11px
+            width: 11px
+        &.xp-box-bold
+            border: 1px solid $color-highlight-text
+
+        i, svg
+            position: absolute
+            top: 50%
+            left: 50%
+            transform: translate(-50%, -50%)
+
+
+.WbbEditFighterExperience
+    .plusxp
+        color: $green
+    .minusxp
+        color: $color-highlight-text
+
+// // //
+// Battle Scar Boxes global
+.battle-scar-boxes
+    display: flex
+    flex-wrap: wrap
+    gap: 5px
+
+    .battle-scar-box
+        position: relative
+        height: 35px
+        width: 35px
+        border: 1px solid $color-text
+
+        @media(max-width: 380px)
+            height: 11px
+            width: 11px
+
+        &:last-of-type
+            border: 1px solid $color-highlight-text
+
+        .skull-icon
+            opacity: .25
+            z-index: 1
+            color: $color-highlight-text
+            font-size: 22px
+
+        i, svg
+            font-size: 18px
+            position: absolute
+            z-index: 2
+            top: 50%
+            left: 50%
+            transform: translate(-50%, -50%)
+
+.WbbEditBattleScars
+    .plusscar
+        color: $color-highlight-text
+    .minusscar
+        opacity: 0.3

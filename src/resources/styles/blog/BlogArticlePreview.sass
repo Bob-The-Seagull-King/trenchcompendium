@@ -1,0 +1,28 @@
+// // // // //
+//
+// Blog Article Preview Item
+//
+
+.BlogArticlePreview
+    cursor: pointer
+    background-color: $color-bg-2
+    padding: 15px 15px 15px 15px
+    transition: background-color .2s ease
+
+    display: flex
+    flex-direction: column
+    justify-content: flex-start
+    height: 100% /* Damit Grid o.ä. die Höhe vorgibt */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1)
+
+    &:hover
+        background-color: $color-bg-3
+
+    .excerpt
+        overflow: hidden
+        text-overflow: ellipsis
+        display: -webkit-box
+        -webkit-line-clamp: 4 /* Anzahl der sichtbaren Zeilen */
+        -webkit-box-orient: vertical
+        line-height: 1.4em
+        max-height: calc(1.4em * 4) /* fallback für nicht-supportende Browser */

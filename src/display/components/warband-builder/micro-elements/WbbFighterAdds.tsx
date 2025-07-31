@@ -5,6 +5,8 @@ import WbbModalAddFighterElite from '../modals/WbbModalAddFighterElite';
 import WbbModalAddFighterMercenary from '../modals/WbbModalAddFighterMercenary';
 import WbbModalAddFighterTroop from '../modals/WbbModalAddFighterTroop';
 import { ToolsController } from '../../../../classes/_high_level_controllers/ToolsController';
+import WbbModalAddFighterCustom from '../modals/WbbModalAddFighterCustom';
+import { Model } from '../../../../classes/feature/model/Model';
 
 
 interface WbbModalAddFighterEliteProps {
@@ -37,25 +39,32 @@ const WbbFighterAdds : React.FC<WbbModalAddFighterEliteProps> = ({
         }
         );
     };
+
     return (
         <>
+        {showAddFighterTroopModal &&
             <WbbModalAddFighterTroop
                 show={showAddFighterTroopModal}
                 onClose={() => onCloseTroop()}
                 onSubmit={handleFighterSubmit}
             />
-
+        }
+        {showAddFighterEliteModal &&
             <WbbModalAddFighterElite
                 show={showAddFighterEliteModal}
                 onClose={() => onCloseElite()}
                 onSubmit={handleFighterSubmit}
             />
-
+        }
+        
+        {showAddFighterMercenaryModal &&
             <WbbModalAddFighterMercenary
                 show={showAddFighterMercenaryModal}
                 onClose={() => onCloseMercenary()}
                 onSubmit={handleFighterSubmit}
             />
+        }
+
         </>
     )
 };

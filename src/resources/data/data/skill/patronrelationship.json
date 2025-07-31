@@ -1,7 +1,7 @@
 [
     {
         "id": "pt_sublimegate",
-        "faction_id": ["fc_cultoftheblackgrail","fc_ironsultanate","fc_ironsultanate_fv_fidaiofalamut","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_defendersoftheironwall"]
+        "faction_id": ["fc_ironsultanate","fc_ironsultanate_fv_fidaiofalamut","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_defendersoftheironwall"]
     },
     {
         "id": "pt_infernalnoble",
@@ -13,15 +13,15 @@
     },
     {
         "id": "pt_learnedsaint",
-        "faction_id": ["fc_newantioch_fv_expeditionaryforcedofabyssinia","fc_newantioch_fv_kingdomofalbaassaultdetatchment","fc_newantioch_fc_stortruppenofthefreestateofprussia","fc_newantioch_fc_eirerangers","fc_newantioch","fc_newantioch_fv_papalstatesinterventionforce","fc_trenchpilgrim","fc_trenchpilgrim_fv_cavalcadeofthetenthplague","fc_trenchpilgrim_fv_processionofthesacredaffliction","fc_trenchpilgrim_fv_warpilgimageofsaintmethodius"]
+        "faction_id": ["fc_newantioch_fv_expeditionaryforcedofabyssinia","fc_newantioch_fv_kingdomofalbaassaultdetatchment","fc_newantioch_fc_stortruppenofthefreestateofprussia","fc_newantioch_fc_eirerangers","fc_newantioch","fc_newantioch_fv_redbrigade","fc_newantioch_fv_papalstatesinterventionforce","fc_trenchpilgrim","fc_trenchpilgrim_fv_cavalcadeofthetenthplague","fc_trenchpilgrim_fv_processionofthesacredaffliction","fc_trenchpilgrim_fv_warpilgimageofsaintmethodius"]
     },
     {
         "id": "pt_warriorsaint",
-        "faction_id": ["fc_newantioch_fv_expeditionaryforcedofabyssinia","fc_newantioch_fv_kingdomofalbaassaultdetatchment","fc_newantioch_fc_stortruppenofthefreestateofprussia","fc_newantioch","fc_newantioch_fv_papalstatesinterventionforce","fc_trenchpilgrim","fc_trenchpilgrim_fv_cavalcadeofthetenthplague","fc_trenchpilgrim_fv_processionofthesacredaffliction"]
+        "faction_id": ["fc_newantioch_fv_expeditionaryforcedofabyssinia","fc_newantioch_fv_kingdomofalbaassaultdetatchment","fc_newantioch_fc_stortruppenofthefreestateofprussia","fc_newantioch","fc_newantioch_fv_redbrigade","fc_newantioch_fv_papalstatesinterventionforce","fc_trenchpilgrim","fc_trenchpilgrim_fv_cavalcadeofthetenthplague","fc_trenchpilgrim_fv_processionofthesacredaffliction"]
     },
     {
         "id": "pt_temporallord",
-        "faction_id": ["fc_newantioch_fv_expeditionaryforcedofabyssinia","fc_newantioch_fv_kingdomofalbaassaultdetatchment","fc_newantioch_fc_stortruppenofthefreestateofprussia","fc_newantioch","fc_newantioch_fv_papalstatesinterventionforce"]
+        "faction_id": ["fc_newantioch_fv_expeditionaryforcedofabyssinia","fc_newantioch_fv_kingdomofalbaassaultdetatchment","fc_newantioch_fc_stortruppenofthefreestateofprussia","fc_newantioch","fc_newantioch_fv_redbrigade","fc_newantioch_fv_papalstatesinterventionforce"]
     },
     {
         "id": "pt_orderofthefly",

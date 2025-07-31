@@ -10,31 +10,43 @@ import { useWarband } from '../../../../../context/WarbandContext';
 import { ToolsController } from '../../../../../classes/_high_level_controllers/ToolsController';
 import { WarbandProperty } from '../../../../../classes/saveitems/Warband/WarbandProperty';
 import { EventRunner } from '../../../../../classes/contextevent/contexteventhandler';
+import {useWbbMode} from "../../../../../context/WbbModeContext";
 
 interface WbbEditSelectionProps {
     choice : SelectedOption;
     property : WarbandProperty;
+    hypeproperty? : WarbandProperty;
     overrideplay? : boolean
 }
 
-const WbbOptionSelect: React.FC<WbbEditSelectionProps> = ({choice,  property, overrideplay}) => {
+const WbbOptionSelect: React.FC<WbbEditSelectionProps> = ({choice,  property, hypeproperty, overrideplay}) => {
     const { warband, reloadDisplay, updateKey } = useWarband();
-    const [selectedoption, setSelectedoption] = useState<IChoice | null>(choice.GetSelected());
 
     const [showModal, setshowModal] = useState(false);
     const [displayState, setDisplayState] = useState( <></> );
+    const [displayOptions, setDisplayOptions] = useState(false);
     const [_keyvar, setkeyvar] = useState(0);
+    const { play_mode, edit_mode, view_mode, print_mode, setMode } = useWbbMode(); // play mode v2
 
 
     const handleSubmit = (foundOption : IChoice | null) => {
         if (foundOption != null && overrideplay != true) {
-            setSelectedoption(foundOption)
-            choice.SelectOption(foundOption? foundOption.id : null);
-            property.RegenerateSubProperties().then(() => 
-            property.RegenerateOptions().then(() =>{
-            const Manager : ToolsController = ToolsController.getInstance();
-            Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
-                () => reloadDisplay())}))
+            choice.UserUpdateSelection((foundOption? foundOption.id : null)).then(() => { 
+            if (hypeproperty != undefined) {
+                hypeproperty.RegenerateSubProperties().then(() => 
+                hypeproperty.RegenerateOptions().then(() =>{
+                const Manager : ToolsController = ToolsController.getInstance();
+                Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
+                    () => reloadDisplay())}))
+            
+            } else {
+                property.RegenerateSubProperties().then(() => 
+                property.RegenerateOptions().then(() =>{
+                const Manager : ToolsController = ToolsController.getInstance();
+                Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
+                    () => reloadDisplay())}))
+                
+            }})
         }
     };
 
@@ -52,6 +64,14 @@ const WbbOptionSelect: React.FC<WbbEditSelectionProps> = ({choice,  property, ov
                 null,
                 choice.SelectedChoice
             );
+            const doshow = await EventProc.runEvent(
+                "showWbbOptionOptions",
+                property,
+                [],
+                false,
+                choice.SelectedChoice
+            );
+            setDisplayOptions(doshow)
             if (result != null) {
                 setDisplayState(result)
                 setkeyvar((prev) => prev + 1);
@@ -70,16 +90,19 @@ const WbbOptionSelect: React.FC<WbbEditSelectionProps> = ({choice,  property, ov
                 title={choice.Option.Name}
                 value={choice.GetSelectedTitle()}
                 onClick={() => setshowModal(true)}
-                overrideplay={overrideplay || choice.Option.AutoSelect}
+                overrideplay={overrideplay || choice.Option.AutoSelect || (!choice.CanChange() && choice.SelectedChoice != null)}
             />
 
-            <WbbEditSelectionModal
-                show={showModal}
-                onClose={() => setshowModal(false)}
-                currentChoice={choice.GetSelected()}
-                onSubmit={handleSubmit}
-                choiceparent={choice}
-            />
+            {edit_mode &&
+                <WbbEditSelectionModal
+                    show={showModal}
+                    onClose={() => setshowModal(false)}
+                    currentChoice={choice.GetSelected()}
+                    onSubmit={handleSubmit}
+                    choiceparent={choice}
+                />
+            }
+
 
             <div key={_keyvar} className="SingleOptionSetDisplay-Details">
                 {displayState}

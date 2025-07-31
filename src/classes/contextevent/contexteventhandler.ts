@@ -35,16 +35,16 @@ class EventRunner {
         relayVar : any, 
         trackVal : any) : Promise<any>
         {
+
         const Events : ContextPackage[] = await source_obj.GrabContextPackages(event_id, source_obj, arrs_extra);
-        Events.sort((a, b) => a.priority > b.priority ? -1 : a.priority > b.priority ? 1 : 0)
-        
+        Events.sort((a, b) => a.priority < b.priority ? -1 : a.priority > b.priority ? 1 : 0)
         // Initialize the return value
         let relay_variable = relayVar;
         let returnVal;
 
         if (event_id == "") { // Used for testing, replace "X" with relevant event to test
             console.log("DEBUG OUTPUT: " + event_id)
-            console.log(source_obj.GetTrueName())
+            console.log(source_obj)
             console.log(Events)
         }
 

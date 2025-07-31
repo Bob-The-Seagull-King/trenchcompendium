@@ -19,6 +19,7 @@ import SynodImage from "../../../utility/SynodImage";
 import CustomNavLink from "../../components/subcomponents/interactables/CustomNavLink";
 import {ROUTES} from "../../../resources/routes-constants";
 import {useAuth} from "../../../utility/AuthContext";
+import SynodImageWithCredit from "../../../utility/SynodImageWithCredits";
 
 interface IControllerProp {
     controller : ControllerController; // The controller being passed through
@@ -60,16 +61,20 @@ const OffcanvasMenu: React.FC<IControllerProp> = (prop) => {
     // Set list of secondary nav links
     const secondary_links = [
         {
-            title: 'Premium Membership',
+            title: 'Support us',
             link: ROUTES.PAGE_MEMBERSHIP
         },
-        {
-            title: 'Supporter Packs',
-            link: ROUTES.PAGE_SUPPORTER_PACKS
-        },
+        // { // disabled until we have created supporter packs
+        //     title: 'Supporter Packs',
+        //     link: ROUTES.PAGE_SUPPORTER_PACKS
+        // },
         {
             title: 'Collaboration',
             link: ROUTES.PAGE_COLLABORATE
+        },
+        {
+            title: 'Blog',
+            link: ROUTES.PAGE_BLOG_BASE
         },
     ]
 
@@ -125,8 +130,8 @@ const OffcanvasMenu: React.FC<IControllerProp> = (prop) => {
                                     {'Compendium'}
                                 </span>
 
-                                <SynodImage
-                                    imageId={17}
+                                <SynodImageWithCredit
+                                    imageId={2844}
                                     className={''}
                                     size={'large'}
                                 />
@@ -139,8 +144,8 @@ const OffcanvasMenu: React.FC<IControllerProp> = (prop) => {
                                     {'Warband Builder'}
                                 </span>
 
-                                <SynodImage
-                                    imageId={15}
+                                <SynodImageWithCredit
+                                    imageId={2840}
                                     className={''}
                                     size={'large'}
                                 />

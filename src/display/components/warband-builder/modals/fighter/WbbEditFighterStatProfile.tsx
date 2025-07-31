@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
-import {faXmark} from "@fortawesome/free-solid-svg-icons";
+import {faCircleNotch, faPlus, faXmark} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import { makestringpresentable } from '../../../../../utility/functions';
 import { GetStatAsFullString, ModelStatistics } from '../../../../../classes/feature/model/ModelStats';
 import { RealWarbandPurchaseModel } from '../../../../../classes/saveitems/Warband/Purchases/WarbandPurchase';
+import {useModalSubmitWithLoading} from "../../../../../utility/useModalSubmitWithLoading";
 
 interface WbbEditFighterStats {
     show: boolean;
@@ -25,12 +26,14 @@ const WbbEditFighterStatProfile: React.FC<WbbEditFighterStats> = ({
                                                                    }) => {
     const [selectedStatus, setSelectedStatus] = useState<ModelStatistics | null>(currentStatus);
 
-    const handleSubmit = () => {
+    // handlesubmit in this callback for delayed submission with loading state
+    const { handleSubmit, isSubmitting } = useModalSubmitWithLoading(() => {
         if (selectedStatus) {
             onSubmit(selectedStatus);
             onClose();
         }
-    };
+    });
+
 
     return (
         <Modal show={show} onHide={onClose} className="WbbModalAddItem WbbEditFighterStatus" centered>
@@ -63,8 +66,11 @@ const WbbEditFighterStatProfile: React.FC<WbbEditFighterStats> = ({
                 <Button variant="secondary" onClick={onClose}>
                     Cancel
                 </Button>
-                <Button variant="primary" onClick={handleSubmit} disabled={selectedStatus === currentStatus}>
-                    Update Stat Profile
+                <Button variant="primary" onClick={handleSubmit} disabled={(selectedStatus === currentStatus) || isSubmitting}>
+                    {isSubmitting && (
+                        <FontAwesomeIcon icon={faCircleNotch} className={'icon-inline-left fa-spin '} />
+                    )}
+                    {'Update Stat Profile'}
                 </Button>
             </Modal.Footer>
         </Modal>

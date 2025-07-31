@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {Button, Modal, OverlayTrigger, Popover} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {
@@ -11,8 +11,6 @@ import {
     faXmark
 } from "@fortawesome/free-solid-svg-icons";
 import WbbContextualPopover from "./WbbContextualPopover";
-import {usePlayMode} from "../../../context/PlayModeContext";
-import {usePrintMode} from "../../../context/PrintModeContext";
 import { RealWarbandPurchaseEquipment, RealWarbandPurchaseModel, WarbandPurchase } from '../../../classes/saveitems/Warband/Purchases/WarbandPurchase';
 import { WarbandEquipment } from '../../../classes/saveitems/Warband/Purchases/WarbandEquipment';
 import { Equipment } from '../../../classes/feature/equipment/Equipment';
@@ -21,6 +19,15 @@ import { useWarband } from '../../../context/WarbandContext';
 import { returnDescription } from '../../../utility/util';
 import KeywordDisplay from '../features/glossary/KeywordDisplay';
 import GenericHover from '../generics/GenericHover';
+import { EventRunner } from '../../../classes/contextevent/contexteventhandler';
+import WbbOptionSelect from './modals/warband/WbbOptionSelect';
+import { Keyword } from '../../../classes/feature/glossary/Keyword';
+import RulesEquipmentStats from "../rules-content/RulesEquipmentStats";
+import RulesEquipmentMain from "../rules-content/RulesEquipmentMain";
+import RulesOverlay from "../rules-content/RulesOverlay";
+import WbbEquipmentStats from './modals/warband/WbbEquipmentStats';
+import WbbEquipmentMain from './modals/warband/WbbEquipmentMain';
+import {useWbbMode} from "../../../context/WbbModeContext";
 
 interface EquipmentItemProps {
     item: WarbandPurchase
@@ -29,9 +36,39 @@ interface EquipmentItemProps {
 
 const WbbEquipmentListItem: React.FC<EquipmentItemProps> = ({ item, fighter }) => {
 
-    const { warband } = useWarband();
-    const { playMode } = usePlayMode();
-    const { printMode } = usePrintMode();
+    const { warband, updateKey } = useWarband();
+    const { play_mode, edit_mode, view_mode, print_mode, mode, setMode } = useWbbMode(); // play mode v2
+
+    const [showDetailsModal, setShowDetailsModal] = useState(false);
+
+
+    const [canRemove, setCanRemove] = useState(item.Sellable);
+    const [cantSwap, setCantSwap] = useState(false);
+    const [keywordlist, setKeywordList] = useState<Keyword[]>([]);
+    const [range, setrange] = useState<string>("");
+    const [keyvar, setKeyvar] = useState(0);
+
+    const ItemValue = (((item.HeldObject as WarbandEquipment).MyEquipment.SelfDynamicProperty.OptionChoice as Equipment))
+    useEffect(() => {
+
+        async function GetCanRemove() {
+            if (fighter !== null && fighter != undefined) {
+                if ((item.HeldObject as WarbandEquipment).EquipmentCache == null) {
+                    await (item.HeldObject as WarbandEquipment).BuildNewProperties(fighter.model, item)
+                }
+                const cache = (item.HeldObject as WarbandEquipment).EquipmentCache
+                if (cache != null) {
+                    setCanRemove(cache.CanRemove)
+                    setCantSwap(cache.CanSwap)
+                    setKeywordList(cache.KeywordsCache)
+                    setrange((item.HeldObject as WarbandEquipment).GetRange())
+                }
+                setKeyvar((prev) => prev + 1)
+            }
+        }
+
+        GetCanRemove();
+    }, [updateKey])
 
     function GetIDRel() {
         if (fighter == null || fighter == undefined) {
@@ -41,13 +78,49 @@ const WbbEquipmentListItem: React.FC<EquipmentItemProps> = ({ item, fighter }) =
         }
     }
 
-    const ItemValue = (((item.HeldObject as WarbandEquipment).MyEquipment.SelfDynamicProperty.OptionChoice as Equipment))
 
     return (
-        <div className={`WbbEquipmentListItem ${playMode ? 'play-mode' : ''} ${printMode ? 'print-mode' : ''} `}>
-            <div className="equipment-name">{ItemValue.GetTrueName()}</div>
+        <div className={`WbbEquipmentListItem ${play_mode ? 'play-mode' : ''} ${print_mode ? 'print-mode' : ''} `}
+             key={keyvar}
+            onClick={!play_mode ? () => setShowDetailsModal(true) : undefined}
+        >
 
-            {(!playMode || printMode) &&
+            <Modal show={showDetailsModal} onHide={() => setShowDetailsModal(false)} className="" centered>
+                <Modal.Header closeButton={false}>
+                    <Modal.Title>{ItemValue.GetTrueName()}</Modal.Title>
+
+                    <FontAwesomeIcon
+                        icon={faXmark}
+                        className="modal-close-icon"
+                        role="button"
+                        onClick={
+                            (e) => {
+                                e.stopPropagation();
+                                setShowDetailsModal(false);
+                            }
+                        }
+                    />
+                </Modal.Header>
+
+                <Modal.Body>
+                    <div className={'rules-equipment-main'}>
+                        <WbbEquipmentStats
+                        item={item}
+                        fighter={fighter}
+                        />
+                        <WbbEquipmentMain
+                        item={item}
+                        keywords={keywordlist}/>
+                    </div>
+                </Modal.Body>
+            </Modal>
+
+
+            <div className="equipment-name">{ItemValue.GetTrueName()}
+                {(item.CustomInterface != undefined) ? item.CustomInterface.tags["is_custom"]? " (Manually Added)" : "" : ""}
+            </div>
+
+            {(!play_mode || print_mode) &&
                 <div className="equipment-cost">
                     {item.ItemCost > 0 &&
                         <>
@@ -57,13 +130,13 @@ const WbbEquipmentListItem: React.FC<EquipmentItemProps> = ({ item, fighter }) =
                 </div>
             }
 
-            {(!playMode || printMode) &&
+            {(!play_mode || print_mode) &&
                 <div className={'equipment-modifiers'}>
                     {ItemValue.GetModifiers()}
                 </div>
             }
 
-            {((item.Sellable == true) && (!playMode && !printMode)) &&
+            {((canRemove == true) && (edit_mode)) &&
                 <WbbContextualPopover
                     id={`equipment-${GetIDRel()}`}
                     type={(fighter == null || fighter == undefined)? "equipment" : "equipment_model"}
@@ -72,19 +145,20 @@ const WbbEquipmentListItem: React.FC<EquipmentItemProps> = ({ item, fighter }) =
                         equipment: (item.HeldObject as WarbandEquipment)
                     } as RealWarbandPurchaseEquipment}
                     context={(fighter == null || fighter == undefined)? null : fighter}
+                    contextuallimit={cantSwap}
                 />
             }
 
-            {(playMode && !printMode)  &&
+            {play_mode  &&
                 <div className={'equipment-details'}>
                     <table>
-                        { ItemValue.GetRange() &&
+                        { range != "" &&
                             <tr>
                                 <td>
                                     Range
                                 </td>
                                 <td>
-                                    {ItemValue.GetRange()}
+                                    {range}
                                 </td>
                             </tr>
                         }
@@ -109,14 +183,14 @@ const WbbEquipmentListItem: React.FC<EquipmentItemProps> = ({ item, fighter }) =
                             </tr>
                         }
                     </table>
-                    { ItemValue.KeyWord.length > 0 &&
+                    { keywordlist.length > 0 &&
                         <div className={'keywords-wrap'}>
                             <div className={'text-label'}>
                                 {'Keywords'}
                             </div>
                             <div className={'keywords'}>
                                 <p className={'keywords'}>
-                                    {ItemValue.GetKeyWords().map((item, index) => (
+                                    {keywordlist.map((item, index) => (
                                         <span className='' key={"equipment_keyword_" + ItemValue.GetID() + "_keyword_id"}>
                                         <GenericHover
                                             d_colour={'grey'}
@@ -125,24 +199,38 @@ const WbbEquipmentListItem: React.FC<EquipmentItemProps> = ({ item, fighter }) =
                                             d_type={""}
                                             d_method={() => <KeywordDisplay data={item}/>}
                                         />
-                                        {index < ItemValue.GetKeyWords().length - 1 && ", "}
+                                        {index < keywordlist.length - 1 && ", "}
                                     </span>
                                     )) /* Keywords */}
                                 </p>
                             </div>
                         </div>
                     }
-                    { ItemValue.Description.length > 0 &&
+                    { ItemValue.GetDescription() &&
                         <div className={'rules-wrap'}>
                             <div className={'text-label'}>
                                 {'Rules'}
                             </div>
                             <div className={'rules'}>
-                                {returnDescription(ItemValue, ItemValue.Description)}
+                                {ItemValue.GetDescription()}
                             </div>
                         </div>
                     }
+                    
+                    
                 </div>
+            }
+
+            {(item.HeldObject as WarbandEquipment).MyEquipment.SelfDynamicProperty.Selections.length > 0 &&
+                <span className={'title-choice'}>
+                    {(item.HeldObject as WarbandEquipment).MyEquipment.SelfDynamicProperty.Selections.map((option) =>
+                        <WbbOptionSelect
+                            property={(item.HeldObject as WarbandEquipment).MyEquipment}
+                            key={(item.HeldObject as WarbandEquipment).MyEquipment.SelfDynamicProperty.Selections.indexOf(option)}
+                            choice={option}
+                        />
+                    )}
+                </span>
             }
         </div>
     );

@@ -13,7 +13,6 @@ import { ToolsController } from '../../classes/_high_level_controllers/ToolsCont
 import WbbOverviewPage from '../pages/WbbOverviewPage';
 import WbbCreateNewPage from '../pages/WbbCreateNewPage';
 import WbbEditPage from '../pages/WbbEditPage';
-import WbbViewPage from '../pages/WbbViewPage';
 
 interface IControllerProp {
     controller : ToolsController; // The controller being passed through
@@ -41,10 +40,8 @@ const WarbandRoute: React.FC<IControllerProp> = (prop) => {
             <div key={_keyval} className="WarbandRoute">
                 <Routes>
                     <Route path={ROUTES.HOME_ROUTE} element={<WbbOverviewPage manager={prop.controller.UserWarbandManager} />} />
-                    <Route path={ROUTES.WBB_EDIT} element={<WbbEditPage manager={prop.controller.UserWarbandManager} />} />
+                    <Route path={ROUTES.WBB_VIEW} element={<WbbEditPage manager={prop.controller.UserWarbandManager} />} />
                     <Route path={ROUTES.WBB_NEW} element={<WbbCreateNewPage manager={prop.controller.UserWarbandManager} />} />
-                    <Route path={ROUTES.WBB_VIEW} element={<WbbViewPage />} />
-                    {/*<Route path={ROUTES.HOME_ROUTE} element={<ToolsSavedItem manager={prop.controller.UserWarbandManager} />} />*/}
                 </Routes>
                 {/*<WarbandTestBlock />*/}
             </div>

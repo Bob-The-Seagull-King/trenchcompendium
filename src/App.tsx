@@ -45,6 +45,10 @@ import StaticSupporterPacks from "./display/pages/StaticSupporterPacks";
 import StaticCollaborate from "./display/pages/StaticCollaborate";
 import StaticAbout from './display/pages/StaticAbout'
 import StaticPlanSelection from "./display/pages/StaticPlanSelection";
+import {AdsManager} from "./display/components/generics/AdsManager";
+import BlogListPage from "./display/pages/BlogListPage";
+import BlogArticlePage from "./display/pages/BlogArticlePage";
+import {ImageCreditPopoverProvider} from "./utility/ImageCreditPopoverContext";
 
 
 const App: React.FC = () => {
@@ -75,42 +79,47 @@ const App: React.FC = () => {
                 <Provider store={store}>
                     <PersistGate loading={null} persistor={persistor}>
                         <Router >
-                            <SuperHeader controller={compendiumcontroller}/>
+                            <ImageCreditPopoverProvider>
 
-                            <ScrollToTop/>
+                                <SuperHeader controller={compendiumcontroller}/>
 
-                            <Routes>
-                                <Route path={ROUTES.HOME_ROUTE} element={<HomeRoute />} />
-                                <Route path={ROUTES.COMPENDIUM_ROUTE} element={<CompendiumRoute controller={compendiumcontroller} />} />
-                                <Route path={ROUTES.WARBAND_ROUTE} element={<WarbandRoute controller={toolcontroller} />} />
-                                <Route path={ROUTES.LOGIN_ROUTE} element={<SynodLoginPage />} /> {/* Login Page */}
-                                <Route path={ROUTES.PROFILE_SETTINGS_ROUTE} element={<ProfileSettingsPage />} /> {/* Edit Profile Page */}
-                                <Route path={ROUTES.PROFILE_VIEW_ROUTE} element={<ProfilePage />} />
+                                <ScrollToTop/>
 
-                                {/* Static Pages - Legal */}
-                                <Route path={ROUTES.PAGE_LEGAL} element={<StaticLegalNotice />} /> {/* Legal Notice Page */}
-                                <Route path={ROUTES.PAGE_PRIVCACY} element={<StaticPrivacy />} /> {/* Privacy Page */}
-                                <Route path={ROUTES.PAGE_TERMS} element={<StaticTermsAndConditions />} /> {/* Terms and Conditions */}
-                                <Route path={ROUTES.PAGE_WITHDRAWAL} element={<StaticWithdrawal />} /> {/* Withdrawal Page */}
+                                <Routes>
+                                    <Route path={ROUTES.HOME_ROUTE} element={<HomeRoute />} />
+                                    <Route path={ROUTES.COMPENDIUM_ROUTE} element={<CompendiumRoute controller={compendiumcontroller} />} />
+                                    <Route path={ROUTES.WARBAND_ROUTE} element={<WarbandRoute controller={toolcontroller} />} />
+                                    <Route path={ROUTES.LOGIN_ROUTE} element={<SynodLoginPage />} /> {/* Login Page */}
+                                    <Route path={ROUTES.PROFILE_SETTINGS_ROUTE} element={<ProfileSettingsPage />} />
+                                    <Route path={ROUTES.PROFILE_VIEW_ROUTE} element={<ProfilePage />} />
 
-                                {/* Static Pages - Trench Companion */}
-                                <Route path={ROUTES.PAGE_CONTACT} element={<StaticContact />} /> {/* Contact Page */}
-                                <Route path={ROUTES.COMPANION_ABOUT} element={<StaticAbout />} /> {/* About Page */}
+                                    {/* Static Pages - Legal */}
+                                    <Route path={ROUTES.PAGE_LEGAL} element={<StaticLegalNotice />} /> {/* Legal Notice Page */}
+                                    <Route path={ROUTES.PAGE_PRIVCACY} element={<StaticPrivacy />} /> {/* Privacy Page */}
+                                    <Route path={ROUTES.PAGE_TERMS} element={<StaticTermsAndConditions />} /> {/* Terms and Conditions */}
+                                    <Route path={ROUTES.PAGE_WITHDRAWAL} element={<StaticWithdrawal />} /> {/* Withdrawal Page */}
 
-
-                                {/* Static Pages - Content */}
-                                <Route path={ROUTES.PAGE_MEMBERSHIP} element={<StaticPremiumMembership />} /> {/* Withdrawal Page */}
-                                <Route path={ROUTES.PAGE_SUPPORTER_PACKS} element={<StaticSupporterPacks />} /> {/* Withdrawal Page */}
-                                <Route path={ROUTES.PAGE_COLLABORATE} element={<StaticCollaborate />} /> {/* Withdrawal Page */}
-
-                                {/* Static Pages - Membership & Purchases */}
-                                <Route path={ROUTES.PAGE_PLAN_SELECTION} element={<StaticPlanSelection />} /> {/* Membership Plan Selection Page */}
+                                    {/* Static Pages - Trench Companion */}
+                                    <Route path={ROUTES.PAGE_CONTACT} element={<StaticContact />} /> {/* Contact Page */}
+                                    <Route path={ROUTES.COMPANION_ABOUT} element={<StaticAbout />} /> {/* About Page */}
 
 
-                            </Routes>
+                                    {/* Static Pages - Content */}
+                                    <Route path={ROUTES.PAGE_MEMBERSHIP} element={<StaticPremiumMembership />} /> {/* Withdrawal Page */}
+                                    <Route path={ROUTES.PAGE_SUPPORTER_PACKS} element={<StaticSupporterPacks />} /> {/* Withdrawal Page */}
+                                    <Route path={ROUTES.PAGE_COLLABORATE} element={<StaticCollaborate />} /> {/* Withdrawal Page */}
 
-                            <FooterMain />
+                                    {/* Static Pages - Membership & Purchases */}
+                                    <Route path={ROUTES.PAGE_PLAN_SELECTION} element={<StaticPlanSelection />} /> {/* Membership Plan Selection Page */}
 
+                                    {/* Blog Pages */}
+                                    <Route path="/blog" element={<BlogListPage />} />
+                                    <Route path="/blog/:slug" element={<BlogArticlePage />} />
+                                </Routes>
+
+                                <FooterMain />
+                            </ImageCreditPopoverProvider>
+                            <AdsManager />
                             <TrackingManager />
                         </Router>
                     </PersistGate>

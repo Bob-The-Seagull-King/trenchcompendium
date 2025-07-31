@@ -3,9 +3,9 @@ import {Button, Modal, OverlayTrigger, Popover} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCopy, faEllipsisVertical, faTrash, faXmark} from "@fortawesome/free-solid-svg-icons";
 import WbbContextualPopover from "./WbbContextualPopover";
-import {usePlayMode} from "../../../context/PlayModeContext";
 import { RealWarbandPurchaseModel } from '../../../classes/saveitems/Warband/Purchases/WarbandPurchase';
 import { useWarband } from '../../../context/WarbandContext';
+import {useWbbMode} from "../../../context/WbbModeContext";
 
 
 /**
@@ -21,11 +21,11 @@ interface WbbEditViewFighterProps {
 }
 const WbbEditViewFighter: React.FC<WbbEditViewFighterProps> = ({ item, index, onClick, isActive }) => {
 
-    const { playMode } = usePlayMode();
     const { warband } = useWarband();
+    const { play_mode, edit_mode, view_mode, print_mode, mode, setMode } = useWbbMode(); // play mode v2
 
     return (
-        <div className={`WbbEditViewFighter ${isActive ? 'active' : ''} ${playMode ? 'play-mode' : ''}`} onClick={onClick}>
+        <div className={`WbbEditViewFighter ${isActive ? 'active' : ''} ${play_mode ? 'play-mode' : ''}`} onClick={onClick}>
             <div className={'model-name'}>
                 {item.model.CurModel.GetName()}
             </div>
@@ -42,7 +42,7 @@ const WbbEditViewFighter: React.FC<WbbEditViewFighterProps> = ({ item, index, on
                 }
             </div>
 
-            {!playMode &&
+            {edit_mode &&
                 <WbbContextualPopover
                     id={`fighter-${warband? warband.warband_data.Models.indexOf(item.purchase) : 0}`}
                     type="fighter"

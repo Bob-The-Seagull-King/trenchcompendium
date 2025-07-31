@@ -23,6 +23,7 @@ interface IWarbandPurchase {
     sell_full : boolean,
     purchaseid: string,
     faction_rel_id: string,
+    discount: number,
     custom_rel?: IFactionModelRelationship | IFactionEquipmentRelationship | IModelUpgradeRelationship,
     modelpurch : boolean
 }
@@ -69,6 +70,7 @@ class WarbandPurchase {
 
     CountLimit : boolean;
     CountCap : boolean;
+    Discount : number;
     Sellable : boolean;
     FullSell : boolean;
     ModelPurchase : boolean;
@@ -87,11 +89,17 @@ class WarbandPurchase {
         this.CostType = data.cost_type;
         this.CountLimit = data.count_limit;
         this.CountCap = data.count_cap;
+        this.Discount = data.discount;
         this.Sellable = data.sell_item;
         this.FullSell = data.sell_full;
         this.PurchaseInterface = data.faction_rel_id;
         if (data.custom_rel) {
             this.CustomInterface = data.custom_rel;
+        }
+        if (data.discount) {
+            this.Discount = data.discount;
+        } else {
+            this.Discount = 0;
         }
         if (data.modelpurch) {
             this.ModelPurchase = data.modelpurch;
@@ -110,6 +118,7 @@ class WarbandPurchase {
             sell_item : this.Sellable,
             sell_full : this.FullSell,
             purchaseid: this.HeldObject.ID,
+            discount: this.Discount,
             faction_rel_id: this.PurchaseInterface,
             custom_rel : this.CustomInterface,
             modelpurch : this.ModelPurchase
@@ -148,31 +157,52 @@ class WarbandPurchase {
         return _objint;
     }
 
-    public GetTotalDucats() {
-        let TotalDucatCost = 0;
-        if (this.CostType == 0) {
-            TotalDucatCost += this.ItemCost;
+    public GetTotalDiscount(type : number) {
+        let TotalCost = 0;
+        if (this.CostType == type) {
+            TotalCost += this.Discount;
         }
 
         if (this.HeldObject instanceof WarbandMember) {
-            TotalDucatCost += this.HeldObject.GetSubCosts(0);
+            TotalCost += this.HeldObject.GetTotalDiscounts(type);
         } else if (this.HeldObject instanceof WarbandEquipment) {
-            TotalDucatCost += this.HeldObject.GetSubCosts(0);
+            TotalCost += this.HeldObject.GetTotalDiscounts(type);
+        }
+
+        return TotalCost;
+    }
+
+    public GetTotalDucats(overridecap = false, discount = false) {
+        let TotalDucatCost = 0;
+        if (this.CostType == 0) {
+            TotalDucatCost += this.ItemCost;
+            if (discount) {
+                TotalDucatCost -= this.Discount;
+            }
+        }
+
+        if (this.HeldObject instanceof WarbandMember) {
+            TotalDucatCost += this.HeldObject.GetSubCosts(0, overridecap, discount);
+        } else if (this.HeldObject instanceof WarbandEquipment) {
+            TotalDucatCost += this.HeldObject.GetSubCosts(0, overridecap, discount);
         }
 
         return TotalDucatCost;
     }
 
-    public GetTotalGlory() {
+    public GetTotalGlory(overridecap = false, discount = false) {
         let TotalGloryCost = 0;
         if (this.CostType == 1) {
             TotalGloryCost += this.ItemCost;
+            if (discount) {
+                TotalGloryCost -= this.Discount;
+            }
         }
 
         if (this.HeldObject instanceof WarbandMember) {
-            TotalGloryCost += this.HeldObject.GetSubCosts(1);
+            TotalGloryCost += this.HeldObject.GetSubCosts(1, overridecap, discount);
         } else if (this.HeldObject instanceof WarbandEquipment) {
-            TotalGloryCost += this.HeldObject.GetSubCosts(1);
+            TotalGloryCost += this.HeldObject.GetSubCosts(1, overridecap, discount);
         }
 
         return TotalGloryCost;
@@ -199,6 +229,7 @@ class WarbandPurchase {
         } else if (this.HeldObject instanceof WarbandProperty) {
             return (val as WarbandProperty).SelfDynamicProperty.OptionChoice.GetTrueName();
         }
+        return val? val.GetTrueName() : "";
     }
 
 }

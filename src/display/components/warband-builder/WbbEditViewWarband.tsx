@@ -57,7 +57,7 @@ const WbbEditViewWarband: React.FC<WbbEditViewWarbandProps> = ({
                 { warbandErrors.length > 0 &&
                     <div className="meta-item meta-item-vaidation-error">
                         <FontAwesomeIcon icon={faTriangleExclamation} className="icon-inline-left-l"/>
-                        {'Your warband is not valid'}
+                        {'The warband is not valid'}
                     </div>
                 }
             </div>

@@ -8,22 +8,28 @@ import { ExplorationLocation, IExplorationLocation } from './ExplorationLocation
 import { Requester } from '../../../factories/Requester';
 import { ExplorationFactory } from '../../../factories/features/ExplorationFactory';
 
+interface IExplorationTable extends IContextObject {
+    rarity : number
+}
+
 
 class ExplorationTable extends StaticContextObject {
     public ExplorationLocations : ExplorationLocation[] = [];
+    public Rarity : number;
 
     /**
      * Assigns parameters and creates a series of description
      * objects with DescriptionFactory
      * @param data Object data in IAbility format
      */
-    public constructor(data: IContextObject, parent : ContextObject | null)
+    public constructor(data: IExplorationTable, parent : ContextObject | null)
     {
         super(data, parent)
+        this.Rarity = data.rarity
     }
 
     
-    public async BuildFactionEquipment(id : string) {
+    public async BuildFactionEquipment(id : string, skipcheck = false) {
         const LocationList = Requester.MakeRequest(
             {
                 searchtype: "complex", 
@@ -51,11 +57,16 @@ class ExplorationTable extends StaticContextObject {
         LocationList.sort(byPropertiesOf<IExplorationLocation>(["location_value"]))
 
         for (let i = 0; i < LocationList.length; i++) {
-            this.ExplorationLocations.push(await ExplorationFactory.CreateExplorationLocation(LocationList[i], this))
+            try {
+                const Location = await ExplorationFactory.CreateExplorationLocation(LocationList[i], this, skipcheck)
+                this.ExplorationLocations.push(Location)
+            } catch(e) {
+                console.log(e)
+            }
         }
     }
 
 }
 
-export {ExplorationTable}
+export {ExplorationTable, IExplorationTable}
 

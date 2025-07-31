@@ -9,7 +9,7 @@ import { useParams, useNavigate, useLocation } from 'react-router-dom'
 import { useAuth } from '../../utility/AuthContext'
 import SynodImage from "../../utility/SynodImage";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCheck, faCog, faDownload, faPlus, faQrcode} from "@fortawesome/free-solid-svg-icons";
+import {faCheck, faCog, faDownload, faHeart, faPen, faPlus, faQrcode} from "@fortawesome/free-solid-svg-icons";
 import ProfilePageAchievements from "../components/Profile/ProfilePageAchievements";
 import ProfilePageFriends from "../components/Profile/ProfilePageFriends";
 import ProfilePageCampaigns from "../components/Profile/ProfilePageCampaigns";
@@ -23,6 +23,8 @@ import { SiteUserPublic } from '../../classes/user_synod/user_public';
 import {SYNOD} from "../../resources/api-constants";
 import {toast, ToastContainer} from "react-toastify";
 import { SynodDataCache } from '../../classes/_high_level_controllers/SynodDataCache';
+import SynodImageWithCredit from "../../utility/SynodImageWithCredits";
+import PageMetaInformation from "../components/generics/PageMetaInformation";
 
 /**
  * On this page, any user can see a profile.
@@ -41,9 +43,11 @@ const ProfilePage: React.FC = () => {
      */
     const navigate = useNavigate()
 
-    if (Number.isNaN(Number(id))) {
-        navigate('/', {state: Date.now().toString()})
-    }
+    useEffect(() => {
+        if (!id || Number.isNaN(Number(id))) {
+            navigate('/', { state: Date.now().toString() });
+        }
+    }, [id, navigate]);
 
     /** Loading state when adding a friend via main button on stangers profiles */
     const [loadingAddFriend, setLoadingAddFriend] = useState(false)
@@ -229,6 +233,14 @@ const ProfilePage: React.FC = () => {
 
     if (!id) return null
 
+    // Get meta description for user
+    function getMetaDescription(user: SiteUser | SiteUserPublic | null): string {
+        if (!user) return 'User profile on Trench Companion';
+
+        // @TODO: add user stats to the meta information
+        return 'View the public profile of '+userData?.GetNickname()+': Warband stats, achievements, friends, and more from the Trench Companion community.'
+    }
+
     return (
         <div className="ProfilePage">
             <ToastContainer
@@ -243,6 +255,11 @@ const ProfilePage: React.FC = () => {
                 pauseOnHover
             />
 
+            <PageMetaInformation
+                title={`${userData?.GetNickname() || 'User'} - Profile Page`}
+                description={getMetaDescription(userData)}
+            />
+
             <div className={'container'}>
                 <div className={'row'}>
                     <div className={'col-12 col-lg-7'}>
@@ -252,11 +269,15 @@ const ProfilePage: React.FC = () => {
                                         className={'profile-image-wrap editable'}
                                         onClick={handleOpenPfPDrawer}
                                     >
-                                        <SynodImage
+                                        <SynodImageWithCredit
                                             imageId={userData?.GetProfilePictureImageId() || 0}
                                             size="large"
                                             className="profile-image"
                                         />
+
+                                        <div className={'edit-indicator'}>
+                                            <FontAwesomeIcon icon={faPen} />
+                                        </div>
                                     </div>
                                 ):(
                                     <>
@@ -288,6 +309,7 @@ const ProfilePage: React.FC = () => {
                                 </h1>
 
                                 <h2 className={'profile-sub'}>
+
                                     {userData?.GetUserStatus() || 'Loading...'}
                                 </h2>
 

@@ -1,7 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faCheck, faPen} from '@fortawesome/free-solid-svg-icons';
-import {usePlayMode} from "../../../context/PlayModeContext";
 
 interface RulesOptionBoxProps {
     title: string;

@@ -230,7 +230,7 @@
         "source": "core",
         "tags": {"trait": true, "takwin": true},
         "contextdata": {
-            "override_equipment_restriction": {
+            "model_equipment_restriction": {
                 "added": [
                     {
                         "category": "melee",
@@ -341,9 +341,9 @@
         "tags": {"trait": true, "takwin": true},
         "contextdata": {
             "override_upgrade_restriction": {
-                "added": [
-                    "up_alchemicalformulae_hypnoticeyes",
-                    "up_alchemicalformulae_hawkeyes"
+                "id": [
+                    "rel_md_up_alchemicalformulae_hawkeyes",
+                    "rel_md_up_alchemicalformulae_hypnoticeyes"
                 ]
             }
         },
@@ -417,7 +417,7 @@
         "source": "core",
         "tags": {"trait": true, "takwin": true},
         "contextdata": {
-            "override_equipment_restriction": {
+            "model_equipment_restriction": {
                 "added": [
                     {
                         "category": "equipment",
@@ -425,7 +425,7 @@
                         "value": ""
                     }
                 ],
-                "removed": [
+                "banned": [
                     {
                         "category": "equipment",
                         "res_type": "id",
@@ -454,19 +454,18 @@
             "set_stat": { "upgrades" : [
                 {"stat": "base", "value": [60]}
                 ]},
-            "override_equipment_restriction": {
-                "added": [
+            "restriction_override": {
+                "overrides": [
                     {
-                        "tag": "brazen_bull",
-                        "res_type": "",
-                        "value": ""
+                    "type": "id",
+                    "model": "md_brazenbull"
                     }
                 ]
             },
             "model_equipment_limit": {
                 "maximum": [
                     {
-                        "tag": "weapon",
+                        "tag": "brazen_bull",
                         "res_type": "tag",
                         "value": "brazen_bull",
                         "limit": 1
@@ -506,7 +505,7 @@
         "source": "core",
         "tags": {"action": true, "special_category": "secrets_of_the_house_of_wisdom"},
         "contextdata": {
-            "override_equipment_restriction": {
+            "model_equipment_restriction": {
                 "removed": [
                     {
                         "res_type": "id",
@@ -534,9 +533,17 @@
         "source": "core",
         "tags": {"trait": true, "special_category": "secrets_of_the_house_of_wisdom"},
         "contextdata": {
-            "keyword_add": {"value": ["kw_infiltrator"]},
-            "model_attatch": {"restrictions": []},
-            "warband_wide": {}
+            "warband_general_hook": {},
+            "warband_wide": {}, 
+            "add_onto_warband": {},
+            "model_attatch": {
+                "apply_to_attatch": {
+                    "keyword_add": {"value": ["kw_infiltrator"]}
+                },
+                "restriction": [ 
+                    { "rest_type": "stat", "value": "base", "subvalue": [32], "direction": false },
+                    { "rest_type": "id", "value": false, "subvalue": "md_jabireanalchemist" }
+                ]}
         },
         "description": [           
             {
@@ -547,7 +554,32 @@
                 ]
             }
         ],
-        "options": []
+        "options": [
+            {
+                "ref_id" : "ot_cartographyandgeography_a",
+                "name" : "",
+                "description" : [],
+                "category" : "contextobject",
+                "self_ask": true,
+                "option_context" : {"basic_option_default":{}},
+                "dyna_only": true,
+                "hide": true,
+                "parent_level": 1,
+                "question_name": "getMemberOptionsFromWarbandModel"
+            },
+            {
+                "ref_id" : "ot_cartographyandgeography_b",
+                "name" : "",
+                "description" : [],
+                "category" : "contextobject",
+                "self_ask": true,
+                "option_context" : {"basic_option_default":{}},
+                "dyna_only": true,
+                "hide": true,
+                "parent_level": 1,
+                "question_name": "getMemberOptionsFromWarbandModel"
+            }
+        ]
     },
     {
         "id": "up_secrets_secretsoftakwin",
@@ -555,7 +587,6 @@
         "source": "core",
         "tags": {"trait": true, "special_category": "secrets_of_the_house_of_wisdom"},
         "contextdata": {
-            "model_attatch": {"restrictions": [{"type": "id", "value": "md_takwincreation"}]}
         },
         "description": [           
             {
@@ -594,8 +625,10 @@
         "tags": {"trait": true, "special_category": "secrets_of_the_house_of_wisdom"},
         "contextdata": {
             "keyword_add": {"value": ["kw_fear"]},
-            "model_attatch": {"restrictions": []},
-            "warband_wide": {}
+            "model_attatch": {},
+            "warband_general_hook": {},
+            "warband_wide": {}, 
+            "add_onto_warband": {}
         },
         "description": [           
             {
@@ -607,7 +640,18 @@
                 ]
             }
         ],
-        "options": []
+        "options": [
+            {
+                "ref_id" : "ot_philosophypoetrytheology_a",
+                "name" : "",
+                "description" : [],
+                "category" : "contextobject",
+                "self_ask": true,
+                "option_context" : {"basic_option_default":{}},
+                "dyna_only": true,
+                "parent_level": 1,
+                "question_name": "getMemberOptionsFromWarbandModel"
+            }]
     },
     {
         "id": "up_trenchdog_fireteam",
@@ -734,8 +778,9 @@
             "activated": {},
             "set_stat": { "upgrades" : [
                 {"stat": "armour", "value": -3}
-                ]},                
-            "override_equipment_restriction": {
+                ]},     
+            "stash_equipment": {},           
+            "model_equipment_restriction": {
                 "removed": [
                     {
                         "category": "equipment",
@@ -806,10 +851,8 @@
         "tags": {"trait": true},
         "contextdata": {
             "upgrade_stat": { "upgrades": [{"stat": "melee", "value": 1}]},
-            "on_pick": {
-                "reset_scar": {},
-                "reset_skill": {}
-            }
+            "reset_scar": {},
+            "reset_skill": {}
         },
         "description": [           
             {
@@ -831,7 +874,7 @@
         "tags": {"trait": true},
         "contextdata": {
            "keyword_ignore": {"value": "kw_fear"},            
-           "override_equipment_restriction": {
+           "model_equipment_restriction": {
                "removed": [
                    {
                        "category": "ranged",
@@ -944,7 +987,7 @@
         "tags": {"trait": true},
         "contextdata": {
            "keyword_ignore": {"value": "kw_fear"},            
-           "override_equipment_restriction": {
+           "model_equipment_restriction": {
                "required": [
                    {
                        "category": "armour",
@@ -1026,8 +1069,9 @@
         "id": "up_plagueknightcompanionofthefly_base",
         "name": "Knight Companion of the Fly",
         "source": "core",
-        "tags": {"trait": true, "special_category": "knight_ranks" },
+        "tags": {"trait": true, "special_category": "knight_ranks"},
         "contextdata": {
+            "new_upgrade": {}
         },
         "description": [            
             {
@@ -1167,10 +1211,11 @@
         ],
         "options": [{
             "ref_id" : "ot_rottencross",
-            "name" : "Rotten Cross Selections",
+            "name" : "Rotten Cross Expanded Armoury Option",
             "description" : [],
             "category" : "type",
             "type" : "text",
+            "hide": true,
             "strictness" : "strict",
             "predefined_options" : [],
             "option_context" : {"basic_option_default":{}},
@@ -1179,22 +1224,44 @@
                 "searchparam":    {
                     "type": "factionequipmentrelationship",
                     "request":    {
-                        "operator": "or",
+                        "operator": "and",
                         "terms": [
-                            {             
-                                "item": "faction_id",
-                                "value": "fc_newantioch",
-                                "equals": true,
-                                "strict": true
-                            },
-                            {             
-                                "item": "faction_id",
-                                "value": "fc_hereticlegion",
-                                "equals": true,
-                                "strict": true
-                            }
                         ],
                         "subparams": [
+                        {
+                            "operator": "or",
+                            "terms": [
+                                {             
+                                    "item": "faction_id",
+                                    "value": "fc_newantioch",
+                                    "equals": true,
+                                    "strict": true
+                                },
+                                {             
+                                    "item": "faction_id",
+                                    "value": "fc_hereticlegion",
+                                    "equals": true,
+                                    "strict": true
+                                }
+                            ],
+                            "subparams": [
+                                
+                            ]
+                        },
+                        {
+                            "operator": "and",
+                            "terms": [
+                                {             
+                                    "item": "faction_id",
+                                    "value": "fc_cultoftheblackgrail",
+                                    "equals": false,
+                                    "strict": true
+                                }
+                            ],
+                            "subparams": [
+                                
+                            ]
+                        }
                             
                         ]
                     }
@@ -1456,6 +1523,7 @@
             "category" : "type",
             "type" : "text",
             "strictness" : "strict",
+            "hide": true,
             "predefined_options" : [],
             "option_context" : {"basic_option_default":{}},
             "data_search" : {      
@@ -1463,28 +1531,50 @@
                 "searchparam":    {
                     "type": "factionequipmentrelationship",
                     "request":    {
-                        "operator": "or",
+                        "operator": "and",
                         "terms": [
-                            {             
-                                "item": "faction_id",
-                                "value": "fc_newantioch",
-                                "equals": true,
-                                "strict": true
-                            },
-                            {             
-                                "item": "faction_id",
-                                "value": "fc_trenchpilgrim",
-                                "equals": true,
-                                "strict": true
-                            },
-                            {             
-                                "item": "faction_id",
-                                "value": "fc_ironsultanate",
-                                "equals": true,
-                                "strict": true
-                            }
                         ],
                         "subparams": [
+                        {
+                            "operator": "or",
+                            "terms": [
+                                {             
+                                    "item": "faction_id",
+                                    "value": "fc_newantioch",
+                                    "equals": true,
+                                    "strict": true
+                                },
+                                {             
+                                    "item": "faction_id",
+                                    "value": "fc_trenchpilgrim",
+                                    "equals": true,
+                                    "strict": true
+                                },
+                                {             
+                                    "item": "faction_id",
+                                    "value": "fc_ironsultanate",
+                                    "equals": true,
+                                    "strict": true
+                                }
+                            ],
+                            "subparams": [
+                                
+                            ]
+                        },
+                        {
+                            "operator": "and",
+                            "terms": [
+                                {             
+                                    "item": "faction_id",
+                                    "value": "fc_courtofthesevenheadedserpent",
+                                    "equals": false,
+                                    "strict": true
+                                }
+                            ],
+                            "subparams": [
+                                
+                            ]
+                        }
                             
                         ]
                     }
@@ -1828,11 +1918,9 @@
         "id": "up_goetic_greed_bodyofgold",
         "name": "Body of Gold",
         "source": "core",
-        "tags": {"trait": true, "special_category": "goetic"
-                },
+        "tags": {"trait": true, "special_category": "goetic" },
         "contextdata": {
-            "keyword_mod": {"mods": [{"type": "add", "value": "kw_golem"}]},
-            "keyword_mod_remove": {"mods": [{"type": "remove", "value": "kw_tough"}]}
+            "keyword_mod": {"mods": [{"type": "add", "value": "kw_golem"},{"type": "remove", "value": "kw_tough"}]}
         },
         "description": [          
             {
@@ -1917,26 +2005,6 @@
         "options": []
     },
     {
-        "id": "up_holydna",
-        "name": "Sample of Holy DNA",
-        "source": "core",
-        "tags": {"trait": true},
-        "contextdata": {
-        },
-        "description": [           
-            {
-                "tags": {"desc_type" : "default"},
-                "content": "When this model is activated, one INFECTION MARKER or BLOOD MARKER the model has becomes a BLESSINGS MARKER instead.",
-                "glossary": [
-                    {"val": "INFECTION MARKER", "id": "kw_infectionmarker"},
-                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"},
-                    {"val": "BLESSINGS MARKER", "id": "kw_blessingmarker"}
-                ]
-            }
-        ],
-        "options": []
-    },
-    {
         "id": "up_fruit",
         "name": "Eat of the Fruit",
         "source": "core",
@@ -1950,6 +2018,27 @@
                 "content": "The model gains the DEMONIC keyword.",
                 "glossary": [
                     {"val": "DEMONIC", "id": "kw_demonic"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_gunsblazing",
+        "name": "Gunslinger",
+        "source": "westfalia",
+        "tags": {"trait": true
+                },
+        "contextdata": {
+            "bonus_ability": {
+                "bonus_type": ["equipment", "weapon", "pistol"]
+            } },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "If armed with two pistols, this model can make ranged attack ACTIONS with both of them when making a ranged attack. In addition, this model suffers no penalty when using a pistol as an Off-Hand weapon.",
+                "glossary": [
+                    {"val": "ACTIONS", "id": "kw_action"}
                 ]
             }
         ],

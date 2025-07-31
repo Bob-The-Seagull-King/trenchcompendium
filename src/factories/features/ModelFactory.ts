@@ -5,6 +5,7 @@ import { ContextObject } from '../../classes/contextevent/contextobject';
 import { IModel, Model } from '../../classes/feature/model/Model';
 import { IVariantModel, ModelCollection } from '../../classes/feature/model/ModelCollection';
 import { FactionModelRelationship, IFactionModelRelationship } from '../../classes/relationship/faction/FactionModelRelationship';
+import { byPropertiesOf } from '../../utility/functions';
 
 class ModelFactory {
 
@@ -52,6 +53,54 @@ class ModelFactory {
         await rule.BuildModelEquipment(_rule.id);
         await rule.BuildFactionModels(_rule.id);
         return rule;
+    }
+
+    
+        
+    static async GetAllModels(showspecial = false) {
+        let models : IModel[] = []
+        if (showspecial) {
+            models = Requester.MakeRequest({searchtype: "file", searchparam: {type: "model"}}) as IModel[];
+        } else {
+            models = Requester.MakeRequest(
+            {
+                searchtype: "complex", 
+                searchparam: {
+                    type: "model",
+                    request: {
+                        operator: 'and',
+                        terms: [
+                            {
+                                item: "tags",
+                                value: "dontshow",
+                                equals: false,
+                                strict: true,
+                                istag : true,
+                                tagvalue: true
+                            }
+                        ],
+                        subparams: []
+                    }
+                }
+            }) as IModel[]
+        }
+        models.sort(byPropertiesOf<IModel>(["name", "id"]))
+        const ModelList : ModelCollection[] = []
+        for (let i = 0; i < models.length; i++) {
+            const skl = await ModelFactory.CreateModelCollection(models[i], null);
+            if (skl != null) {
+                ModelList.push(skl);
+            }
+        }
+
+        const ModelIndividual : Model[] = [];
+
+        for (let i = 0; i < ModelList.length; i++) {
+            for (let j = 0; j < ModelList[i].SubModelsList.length; j++) {
+                ModelIndividual.push(ModelList[i].SubModelsList[j].model)
+            }
+        }
+        return ModelIndividual;
     }
 
     static async CreateNewModel(_val : string, parent : ContextObject | null) {

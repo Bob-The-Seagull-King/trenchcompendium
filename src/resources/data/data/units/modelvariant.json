@@ -218,7 +218,15 @@
         "name": "Sipahi Automaton Cavalry",
         "source": "core",
         "tags": {},
-        "contextdata": {},
+        "contextdata": {
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_mamlukfaris"
+                    }
+                ]
+            }},
         "base_id": "md_mamlukfaris",
         "variant_name": "Defenders_Of_The_Iron_Wall",
         "lore": [   
@@ -241,7 +249,7 @@
         "id": "md_trenchdog_guarddog",
         "name": "Guard Dog",
         "source": "core",
-        "tags": {},
+        "tags": {"dog": true},
         "contextdata": {
             },
         "base_id": "md_trenchdog",
@@ -264,11 +272,55 @@
         "new_abilities" : ["ab_guarddog"]
     },
     {
+        "id": "md_trenchdog_attackdog",
+        "name": "Attack Dog",
+        "source": "westfalia",
+        "tags": {"dog": true},
+        "contextdata": {
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_trenchdog"
+                    }
+                ]
+            }
+            },
+        "base_id": "md_trenchdog",
+        "variant_name": "Guard",
+        "lore": [                      
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "A great many animals serve in the trenches alongside the soldiers. Wardogs are by far the most common, but tame ocelots, barbary apes, small bears, and other unusual pets abound, while the forces of Hell keep Hellhounds and other infernal beasts as pets."
+            },   
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "These ferocious hounds are trained by the Brigade to accompany their masters into the fray."
+            }
+        ],
+        "team": "none",
+        "stats" : {
+            "melee": 1
+        },
+        "cut_keywords" : [],
+        "keywords" : [],
+        "cut_abilities" : [],
+        "new_abilities" : []
+    },
+    {
         "id": "md_trenchdog_mercydog",
         "name": "Mercy Dog",
         "source": "core",
-        "tags": {},
+        "tags": {"dog": true},
         "contextdata": {
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_trenchdog"
+                    }
+                ]
+            }
             },
         "base_id": "md_trenchdog",
         "variant_name": "Mercy",
@@ -293,8 +345,47 @@
         "id": "md_trenchdog_martyrdomdog",
         "name": "Martyrdom Dog",
         "source": "core",
-        "tags": {},
+        "tags": {"dog": true},
         "contextdata": {
+            "mercenary_add_equipment": {},
+            "model_equipment_restriction": {
+                "removed": [
+                    {
+                        "category": "melee",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "ranged",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "armour",
+                        "res_type": "all",
+                        "value": ""
+                    }
+                ],
+                "required": [
+                    {
+                        "category": "equipment",
+                        "res_type": "id",
+                        "value": "eq_martyrdomdevice"
+                    }
+                ]
+            },
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_trenchdog"
+                    },
+                    {
+                    "type": "id",
+                    "model": "md_ecclesiasticprisoner"
+                    }
+                ]
+            }
             },
         "base_id": "md_trenchdog",
         "variant_name": "Martyrdom",
@@ -319,8 +410,16 @@
         "id": "md_trenchdog_hellhound",
         "name": "Hellhound",
         "source": "core",
-        "tags": {},
+        "tags": {"dog": true},
         "contextdata": {
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_trenchdog"
+                    }
+                ]
+            }
             },
         "base_id": "md_trenchdog",
         "variant_name": "Hellhound",
@@ -349,6 +448,14 @@
         "source": "core",
         "tags": {},
         "contextdata": {
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_annointedheavyinfantry"
+                    }
+                ]
+            }
             },
         "base_id": "md_annointedheavyinfantry",
         "variant_name": "Trench_Ghost",
@@ -378,6 +485,14 @@
         "source": "core",
         "tags": {},
         "contextdata": {
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_heretichorister"
+                    }
+                ]
+            }
             },
         "base_id": "md_heretichorister",
         "variant_name": "Trench_Ghost",
@@ -395,6 +510,14 @@
         "source": "core",
         "tags": {},
         "contextdata": {
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_hereticpriest"
+                    }
+                ]
+            }
             },
         "base_id": "md_hereticpriest",
         "variant_name": "Knights_of_Avarice",
@@ -412,6 +535,14 @@
         "source": "core",
         "tags": {},
         "contextdata": {
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_artillerywitch"
+                    }
+                ]
+            }
             },
         "base_id": "md_artillerywitch",
         "variant_name": "Knights_of_Avarice",
@@ -429,7 +560,15 @@
         "source": "core",
         "tags": {},
         "contextdata": {
-            "modify_equipment_block": {}  },
+            "modify_equipment_block": {}  ,
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_combatmedic"
+                    }
+                ]
+            }},
         "base_id": "md_combatmedic",
         "variant_name": "Trench_Pilgrim",
         "team": "faithful",
@@ -447,7 +586,15 @@
         "name": "Ecclesiastic Prisoner (Sacred Affliction)",
         "source": "core",
         "tags": {},
-        "contextdata": {},
+        "contextdata": {
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_ecclesiaticprisoner"
+                    }
+                ]
+            }},
         "base_id": "md_ecclesiasticprisoner",
         "variant_name": "Procession_of_the_Sacred_Affliction",
         "team": "faithful",
@@ -462,7 +609,15 @@
         "name": "War Prophet (Cavalcade of the Tenth Plague)",
         "source": "core",
         "tags": {},
-        "contextdata": {},
+        "contextdata": {
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_warprophet"
+                    }
+                ]
+            }},
         "base_id": "md_warprophet",
         "variant_name": "Cavalcade_of_the_Tenth_Plague",
         "team": "faithful",
@@ -517,6 +672,14 @@
                         "limit": 2
                     }
                 ]
+            },
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_anchoriteshrine"
+                    }
+                ]
             }
         },
         "base_id": "md_anchoriteshrine",
@@ -535,7 +698,15 @@
         "name": "Stigmatic Nun (War Pilgrimage of Saint Methodius)",
         "source": "core",
         "tags": {},
-        "contextdata": {},
+        "contextdata": {
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_stigmaticnun"
+                    }
+                ]
+            }},
         "base_id": "md_stigmaticnun",
         "variant_name": "War_Pilgrimage_of_Saint_Methodius",
         "team": "faithful",
@@ -550,7 +721,15 @@
         "name": "Lector",
         "source": "core",
         "tags": {},
-        "contextdata": {},
+        "contextdata": {
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_trenchcleric"
+                    }
+                ]
+            }},
         "base_id": "md_trenchcleric",
         "variant_name": "Papal_States_Intervention_Force",
         "team": "faithful",
@@ -565,7 +744,15 @@
         "name": "Eire Warrior Priest",
         "source": "core",
         "tags": {},
-        "contextdata": {},
+        "contextdata": {
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_trenchcleric"
+                    }
+                ]
+            }},
         "base_id": "md_trenchcleric",
         "variant_name": "Eire_Rangers",
         "team": "faithful",
@@ -580,7 +767,15 @@
         "name": "Holy Warrior",
         "source": "core",
         "tags": {},
-        "contextdata": {},
+        "contextdata": {
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_trenchcleric"
+                    }
+                ]
+            }},
         "base_id": "md_trenchcleric",
         "variant_name": "Expeditionary_Forced_of_Abyssinia",
         "team": "faithful",
@@ -595,7 +790,15 @@
         "name": "Eire Lieutenant",
         "source": "core",
         "tags": {},
-        "contextdata": {},
+        "contextdata": {
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_lieutenant"
+                    }
+                ]
+            }},
         "base_id": "md_lieutenant",
         "variant_name": "Eire_Rangers",
         "team": "faithful",
@@ -610,7 +813,15 @@
         "name": "Highland Lieutenant",
         "source": "core",
         "tags": {},
-        "contextdata": {},
+        "contextdata": {
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_lieutenant"
+                    }
+                ]
+            }},
         "base_id": "md_lieutenant",
         "variant_name": "Alba",
         "team": "faithful",
@@ -625,7 +836,15 @@
         "name": "Highland Mechanised Infantry",
         "source": "core",
         "tags": {},
-        "contextdata": {},
+        "contextdata": {
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_mechanisedheavyinfantry"
+                    }
+                ]
+            }},
         "base_id": "md_mechanisedheavyinfantry",
         "variant_name": "Alba",
         "team": "faithful",
@@ -643,7 +862,15 @@
         "name": "Abyssinian Mechanised Infantry",
         "source": "core",
         "tags": {},
-        "contextdata": {},
+        "contextdata": {
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_mechanisedheavyinfantry"
+                    }
+                ]
+            }},
         "base_id": "md_mechanisedheavyinfantry",
         "variant_name": "Expeditionary_Forced_of_Abyssinia",
         "team": "faithful",
@@ -670,7 +897,15 @@
         "name": "Fly Thrall",
         "source": "core",
         "tags": {},
-        "contextdata": {},
+        "contextdata": {
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_grailthrall"
+                    }
+                ]
+            }},
         "base_id": "md_grailthrall",
         "variant_name": "Base",
         "team": "hell",
@@ -689,6 +924,14 @@
         "source": "core",
         "tags": {},
         "contextdata": {
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_grailthrall"
+                    }
+                ]
+            },
             "model_equipment_restriction": {
                 "removed": [    
                     {
@@ -736,7 +979,15 @@
         "name": "Executor",
         "source": "core",
         "tags": {},
-        "contextdata": {},
+        "contextdata": {
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_plagueknight"
+                    }
+                ]
+            }},
         "base_id": "md_plagueknight",
         "variant_name": "Dirge_of_the_Great_Hegemon",
         "team": "hell",
@@ -760,6 +1011,14 @@
                     {
                         "tag": "weapon",
                         "value": true
+                    }
+                ]
+            },
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_wretched"
                     }
                 ]
             }
@@ -792,7 +1051,15 @@
         "name": "Yeoman",
         "source": "core",
         "tags": {},
-        "contextdata": { },
+        "contextdata": { 
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_yeoman"
+                    }
+                ]
+            }},
         "base_id": "md_yeoman",
         "variant_name": "Exploration",
         "team": "faithful",
@@ -808,17 +1075,18 @@
         "source": "core",
         "tags": {},
         "contextdata": {
-            "upgrade_limit": {
-                "limits": [
-                    {
-                        "type": "ducats",
-                        "value": 60
-                    }
-                ]
-            },
             "upgrade_budget_free": {
                 "ducats": 60
-            }
+            },
+            "validate_final_unit_upgrades": {
+                "requirements": [
+                    {
+                        "type": "ducats",
+                        "value": 60,
+                        "subvalue": "maximum"
+                    }
+                ]
+            } 
         },
         "description": [
             {

@@ -7,7 +7,6 @@ import WbbContextualPopover from "./WbbContextualPopover";
 import { WarbandProperty } from '../../../classes/saveitems/Warband/WarbandProperty';
 import { returnDescription } from '../../../utility/util';
 import WbbOptionSelect from './modals/warband/WbbOptionSelect';
-import { usePlayMode } from '../../../context/PlayModeContext';
 
 interface WbbEditViewModifierProps {
     warbprop: WarbandProperty;
@@ -19,7 +18,7 @@ const WbbEditViewModifier: React.FC<WbbEditViewModifierProps> = ({ warbprop, ind
 
     const { warband, updateKey } = useWarband();
     if (warband == null) return (<div>Loading...</div>);
-    const { playMode } = usePlayMode();
+
 
     return (
         <div className={`WbbEditViewModifier ${isinner != undefined ? 'inner' : ''}`}
