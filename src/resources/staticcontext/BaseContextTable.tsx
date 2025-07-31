@@ -1521,7 +1521,7 @@ export const BaseContextCallTable : CallEventTable = {
                     if (context_func["match"][i]["type"] == "model") {
                         const count = await trackVal.warband.GetCountOfModel(context_func["match"][0]["value"]);
                         if (context_func["match"][i]["modifier"] == "half") {
-                            return Math.floor(count * 0.5);
+                            return Math.ceil(count * 0.5);
                         }
                     }
                 }
