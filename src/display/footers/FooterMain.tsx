@@ -64,7 +64,7 @@ const FooterMain: React.FC = () => {
             link: account_settings_link
         },
         {
-            title: 'Premium Membership',
+            title: 'Support us',
             link: ROUTES.PAGE_MEMBERSHIP
         },
         // {

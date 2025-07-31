@@ -8,8 +8,15 @@ import StaticParagraph from "../static-content/StaticParagraph";
 import StaticImageText1 from "../static-content/StaticImageText-1";
 import StaticFaq from "../static-content/StaticFaq";
 import PageMetaInformation from "../components/generics/PageMetaInformation";
+import {useNavigate} from "react-router-dom";
+import CustomNavLink from "../components/subcomponents/interactables/CustomNavLink";
+import SynodImage from "../../utility/SynodImage";
 
 const StaticPremiumMembership: React.FC = () => {
+
+    const navigate = useNavigate();
+
+
     return (
         <div className="StaticPremiumMembership page-static">
             <PageMetaInformation
@@ -23,10 +30,21 @@ const StaticPremiumMembership: React.FC = () => {
 
                 <StaticParagraph content={
                     <>
-                        <div><strong>
+                        <strong>
                             {'Trench Companion is a labor of love — built by and for the Trench Crusade community.'}
-                        </strong></div>
+                        </strong><br/>
                         {'Our Premium Membership exists for one reason: to keep this project alive and growing. It helps cover server costs, fund development time, and lets us focus on creating the tools and features you actually care about. You’ll unlock small perks with your supporter status, but most importantly, you’re making this app possible. No paywalls. No tricks. Just community-powered progress. Thank you. ❤️'}
+
+                        <span className={'d-block spacer-20'} />
+
+                        <CustomNavLink
+                            classes={'btn btn-primary'}
+                            link={`/page/plan-selection`}
+                            runfunc={() => {
+                                navigate(`/page/plan-selection`)
+                            }}>
+                            {'Support the Project'}
+                        </CustomNavLink>
                     </>
                 }/>
 

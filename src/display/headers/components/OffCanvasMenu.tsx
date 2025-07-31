@@ -61,7 +61,7 @@ const OffcanvasMenu: React.FC<IControllerProp> = (prop) => {
     // Set list of secondary nav links
     const secondary_links = [
         {
-            title: 'Premium Membership',
+            title: 'Support us',
             link: ROUTES.PAGE_MEMBERSHIP
         },
         // { // disabled until we have created supporter packs
