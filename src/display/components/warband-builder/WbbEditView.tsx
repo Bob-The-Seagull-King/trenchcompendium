@@ -34,6 +34,7 @@ import WbbFighterShows from './micro-elements/WbbFighterShows';
 import WbbModifiersList from './modals/warband/WbbModifiersList';
 import WbbLocationsList from './modals/warband/WbbLocationsList';
 import {useWbbMode} from "../../../context/WbbModeContext";
+import WbbUserinfo from "./WbbUserinfo";
 
 interface WbbEditViewProps {
     warbandData: SumWarband | null;
@@ -157,7 +158,7 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                                 <div className={`warband-title ${detailType ? 'details-open' : ''}`}>
                                     <div className={'container'}>
 
-                                        <WbbTitle/>
+                                        <WbbTitle />
 
                                         <WbbContextualPopover
                                             id={'warband-actions'}
@@ -179,6 +180,9 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
 
                                     <div className={`warband-wrap ${detailType ? 'details-open' : ''}`}>
                                         {/* Warband Meta */}
+
+                                        <WbbUserinfo/>
+
 
                                         <WbbEditViewWarband
                                             onClick={() => openDetail('warband', null)}
