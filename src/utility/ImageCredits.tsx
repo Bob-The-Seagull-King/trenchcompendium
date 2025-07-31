@@ -17,18 +17,8 @@ const ImageCredits: React.FC<ImageCreditsProps> = ({ sourceTitle, sourceUrl, pop
 
     const isOpen = activeId === popoverSlug;
 
-    const handleClick = (e: React.MouseEvent) => {
-        e.stopPropagation();
-        e.preventDefault();
-        setActiveId(isOpen ? null : popoverSlug);
-    };
-
     return sourceTitle ? (
         <span className={'image-credit-wrap'}
-              onClick={(e) => {
-                  e.stopPropagation();
-                  e.preventDefault();
-              }}
         >
                     <OverlayTrigger
                         placement={'top-end'}
@@ -36,7 +26,11 @@ const ImageCredits: React.FC<ImageCreditsProps> = ({ sourceTitle, sourceUrl, pop
                         rootClose
                         show={isOpen}
                         overlay={
-                            <Popover.Body bsPrefix="credit" className="popover image-credit-popover" id="tooltip">
+                            <Popover.Body bsPrefix="credit"
+                                          className="popover image-credit-popover"
+                                          id="tooltip"
+                                          onClick={(e) => e.stopPropagation()}
+                            >
 
                                 <div className="popover-content">
                                     <div className={'mb-2'}>
