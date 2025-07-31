@@ -90,7 +90,7 @@ const App: React.FC = () => {
                                     <Route path={ROUTES.COMPENDIUM_ROUTE} element={<CompendiumRoute controller={compendiumcontroller} />} />
                                     <Route path={ROUTES.WARBAND_ROUTE} element={<WarbandRoute controller={toolcontroller} />} />
                                     <Route path={ROUTES.LOGIN_ROUTE} element={<SynodLoginPage />} /> {/* Login Page */}
-                                    <Route path={ROUTES.PROFILE_SETTINGS_ROUTE} element={<ProfileSettingsPage />} /> {/* Edit Profile Page */}
+                                    <Route path={ROUTES.PROFILE_SETTINGS_ROUTE} element={<ProfileSettingsPage />} />
                                     <Route path={ROUTES.PROFILE_VIEW_ROUTE} element={<ProfilePage />} />
 
                                     {/* Static Pages - Legal */}

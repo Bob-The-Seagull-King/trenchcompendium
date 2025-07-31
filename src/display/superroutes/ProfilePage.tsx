@@ -43,9 +43,11 @@ const ProfilePage: React.FC = () => {
      */
     const navigate = useNavigate()
 
-    if (Number.isNaN(Number(id))) {
-        navigate('/', {state: Date.now().toString()})
-    }
+    useEffect(() => {
+        if (!id || Number.isNaN(Number(id))) {
+            navigate('/', { state: Date.now().toString() });
+        }
+    }, [id, navigate]);
 
     /** Loading state when adding a friend via main button on stangers profiles */
     const [loadingAddFriend, setLoadingAddFriend] = useState(false)

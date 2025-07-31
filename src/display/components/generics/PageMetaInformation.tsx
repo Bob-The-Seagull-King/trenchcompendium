@@ -42,7 +42,6 @@ const PageMetaInformation: React.FC<PageMetaInformationProps> = ({
         ogImage = 'https://synod.trench-companion.com/wp-content/uploads/2025/05/Trench-Companion-Share.png';
     }
 
-
     return (
         <Helmet>
             <title>{title}</title>

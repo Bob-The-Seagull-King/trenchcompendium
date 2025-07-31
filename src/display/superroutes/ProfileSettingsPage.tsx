@@ -18,7 +18,6 @@ import PageMetaInformation from "../components/generics/PageMetaInformation";
 
 const ProfileSettingsPage: React.FC = () => {
     const urlPath = useLocation().pathname;
-    const urlSplits = urlPath.split('/');
     const { isLoggedIn, userId, authToken, logout } = useAuth();
     const navigate = useNavigate();
 
@@ -35,7 +34,6 @@ const ProfileSettingsPage: React.FC = () => {
     const [error, setError] = useState('');
 
     const [isLoadingSubmit, setisLoadingSubmit] = useState(false)
-
 
     useEffect(() => {
         if ( !userId || !isLoggedIn ) {
@@ -121,7 +119,7 @@ const ProfileSettingsPage: React.FC = () => {
         }
     };
 
-    if (!userId || loading ) return (
+    if (userId === undefined || loading) return (
         <div className="ProfileSettingsPage">
             <LoadingOverlay
                 message={'Loading your settings'}
