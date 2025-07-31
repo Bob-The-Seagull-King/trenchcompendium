@@ -97,7 +97,6 @@ class WarbandProperty extends DynamicContextObject  {
             await this.SelfDynamicProperty.BuildSelections();  
         }
         
-        this.SubProperties = []
         if (selection_vals != null) {
             for (let i = 0; i < this.SelfDynamicProperty.Selections.length; i++) {
                 const CurSelection = this.SelfDynamicProperty.Selections[i];
@@ -131,10 +130,24 @@ class WarbandProperty extends DynamicContextObject  {
     public async GenerateSubProperties(selection_vals: IWarbandProperty, self_selection : SelectedOption) {
         const Nested = self_selection.NestedOption
         if (Nested != null) {
-            const NewSkill = new WarbandProperty(Nested.OptionChoice, this, Nested, selection_vals);
-            await NewSkill.HandleDynamicProps(Nested.OptionChoice, this, Nested, selection_vals)
-            await NewSkill.BuildConsumables(selection_vals.consumables)
-            this.SubProperties.push(NewSkill);
+            let found = false
+            console.log(Nested.OptionChoice.ID)
+            console.log(this.SubProperties)
+            for (let i = 0; i < this.SubProperties.length; i++) {
+                if (this.SubProperties[i].ID == Nested.OptionChoice.ID) {
+                    found = true;
+                    const NewSkill = this.SubProperties[i]
+                    await NewSkill.HandleDynamicProps(Nested.OptionChoice, this, Nested, selection_vals)
+                    await NewSkill.BuildConsumables(selection_vals.consumables)
+                    break;
+                }
+            }
+            if (found == false) {
+                const NewSkill = new WarbandProperty(Nested.OptionChoice, this, Nested, selection_vals);
+                await NewSkill.HandleDynamicProps(Nested.OptionChoice, this, Nested, selection_vals)
+                await NewSkill.BuildConsumables(selection_vals.consumables)
+                this.SubProperties.push(NewSkill);
+            }
         }
     }
 
@@ -250,7 +263,6 @@ class WarbandProperty extends DynamicContextObject  {
         this.ConvertToInterface();
         const selection_vals = this.StoredSelectionVals
         
-        this.SubProperties = []
         if (selection_vals != null) {
             for (let i = 0; i < this.SelfDynamicProperty.Selections.length; i++) {
                 const CurSelection = this.SelfDynamicProperty.Selections[i];
