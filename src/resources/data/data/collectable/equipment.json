@@ -2108,7 +2108,6 @@
         "category": "ranged",
         "distance": 12,
         "stats": {
-            "hands_melee": 1,
             "hands_ranged": 1,
             "ranged": true,
             "melee": true
