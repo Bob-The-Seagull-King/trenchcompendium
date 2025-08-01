@@ -1405,15 +1405,7 @@
         "source": "core",
         "tags": {},
         "name": "Hashashin Leaf",
-        "contextdata": {           
-            "faction_eq_restriction": {
-                "permitted": [
-                    {
-                        "res_type": "id",
-                        "value": "md_sultanateassassin"
-                    }
-                ]
-            }      
+        "contextdata": {     
         },
         "faction_id": ["fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_hashashinleaf",

@@ -95,7 +95,7 @@
     },
     {
         "id": "el_moonshinestash_destroy",
-        "name": "Destroy",
+        "name": "Destroy the Stash",
         "source": "core",
         "tags": {
             "location_option": "el_moonshinestash"
@@ -2353,7 +2353,7 @@
     },
     {
         "id": "el_jabireanalchemicalbooks_study",
-        "name": "Keep",
+        "name": "Study",
         "source": "core",
         "tags": {
             "location_option": "el_jabireanalchemicalbooks"

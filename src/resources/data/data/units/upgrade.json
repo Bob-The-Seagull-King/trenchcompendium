@@ -144,7 +144,7 @@
         "source": "core",
         "tags": {
             "trait": true,
-            "check_tag": "takwin"
+            "takwin": true
         },
         "contextdata": {
             "set_stat": { "upgrades" : [
@@ -165,7 +165,7 @@
         "name": "Elemental Resistance",
         "source": "core",
         "tags": {"trait": true,
-        "check_tag": "takwin"},
+        "takwin": true},
         "contextdata": {
             "ignore_element": {"element": ["kw_fire","kw_gas"]}
         },

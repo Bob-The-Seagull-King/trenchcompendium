@@ -65,7 +65,8 @@ export interface MemberUpgradePresentation {
     allowed : boolean,
     cur_count : number,
     max_count : number,
-    discount : number
+    discount : number,
+    cost: number
 }
 export type MemberUpgradesGrouped = {[type : string]: 
     {
@@ -765,6 +766,22 @@ class WarbandMember extends DynamicContextObject {
         return options;
     }
 
+    public GetUpgrades() {
+        
+        const options : RealWarbandPurchaseUpgrade[] = [ ];
+
+        for (let i = 0; i < this.Upgrades.length; i++) {
+            options.push(
+                {
+                    purchase: this.Upgrades[i],
+                    upgrade: this.Upgrades[i].HeldObject as WarbandProperty
+                }
+            )
+        }
+
+        return options;
+    }
+
     public GetEquipmentAsString() {
         const CurEquip : RealWarbandPurchaseEquipment[] = this.GetEquipment();
         const returnVal : string[] = [];
@@ -1276,6 +1293,37 @@ class WarbandMember extends DynamicContextObject {
                 model: this
             }
         )
+        let maxccurcostount = upg.Cost;
+        maxccurcostount = await Events.runEvent(
+            "getCostOfUpgrade",
+            upg,
+            [upg],
+            maxccurcostount,
+            {
+                warband: this.MyContext,
+                model: this
+            }
+        )
+        maxccurcostount = await Events.runEvent(
+            "getCostOfUpgrade",
+            this,
+            [upg],
+            maxccurcostount,
+            {
+                warband: this.MyContext,
+                model: this
+            }
+        )
+        maxccurcostount = await Events.runEvent(
+            "getCostOfUpgrade",
+            this.MyContext as UserWarband,
+            [upg],
+            maxccurcostount,
+            {
+                warband: this.MyContext,
+                model: this
+            }
+        )
         if (this.IsUnRestricted == true) {
             return {
             upgrade : upg,
@@ -1283,24 +1331,15 @@ class WarbandMember extends DynamicContextObject {
             allowed : true,
             cur_count: (this.MyContext as UserWarband).GetCountOfUpgradeRel(upg.ID),
             max_count: maxcount,
-            discount : 0
+            discount : 0,
+            cost: maxccurcostount
         }
         }
         let canaddupgrade = (await this.GetCountOfUpgradeCategory(category) < limit_of_category || category == "upgrades")
         let discount_val = 0;
 
         if (canaddupgrade) {
-            let maxccurcostount = upg.Cost;
-            maxccurcostount = await Events.runEvent(
-                "getCostOfUpgrade",
-                upg,
-                [],
-                maxccurcostount,
-                {
-                    warband: this.MyContext,
-                    model: this
-                }
-            )
+            
 
             if (upg.CostType == 0) {
                 const ducatbudget = await this.GetUpgradeBudgetDucats()
@@ -1382,7 +1421,8 @@ class WarbandMember extends DynamicContextObject {
             allowed : canaddupgrade,
             cur_count: (this.MyContext as UserWarband).GetCountOfUpgradeRel(upg.ID),
             max_count: maxcount,
-            discount : discount_val
+            discount : discount_val,
+            cost: maxccurcostount
         }
     }
 
@@ -1470,6 +1510,7 @@ class WarbandMember extends DynamicContextObject {
     }
     
     public async AddUpgrade ( op : MemberUpgradePresentation ) {
+        const itemcost = op.cost;
         const stash = op.upgrade;
         const CurUpgrade : Upgrade  = await UpgradeFactory.CreateUpgrade(stash.UpgradeObject.SelfData, this, true)
         
@@ -1477,7 +1518,7 @@ class WarbandMember extends DynamicContextObject {
         await NewRuleProperty.HandleDynamicProps(CurUpgrade, this, null, null);
         await NewRuleProperty.BuildConsumables([])
         const NewPurchase : WarbandPurchase = new WarbandPurchase({
-            cost_value : stash.Cost,
+            cost_value : itemcost,
             cost_type : stash.CostType,
             count_limit : true,
             count_cap : true,
