@@ -1324,6 +1324,35 @@ class WarbandMember extends DynamicContextObject {
                 model: this
             }
         )
+        let canaddupgrade = (await this.GetCountOfUpgradeCategory(category) < limit_of_category || category == "upgrades")
+        let discount_val = await Events.runEvent(
+            "getDiscountOfUpgrade",
+            upg,
+            [upg],
+            maxccurcostount,
+            {
+                warband: this.MyContext,
+                model: this
+            }
+        );
+        if (upg.CostType == 0) {
+            const ducatbudget = await this.GetUpgradeBudgetDucats()
+            if (ducatbudget > maxccurcostount) {
+                discount_val += maxccurcostount
+            } else {
+                discount_val += ducatbudget
+            }
+            canaddupgrade = (this.MyContext as UserWarband).GetSumCurrentDucats() >= (maxccurcostount - discount_val);
+        }
+        if (upg.CostType == 1) {
+            const glorybudget = await this.GetUpgradeBudgetGlory()
+            if (glorybudget > maxccurcostount) {
+                discount_val += maxccurcostount
+            } else {
+                discount_val += glorybudget
+            }
+            canaddupgrade = (this.MyContext as UserWarband).GetSumCurrentGlory() >= (maxccurcostount - discount_val);
+        }
         if (this.IsUnRestricted == true) {
             return {
             upgrade : upg,
@@ -1331,35 +1360,11 @@ class WarbandMember extends DynamicContextObject {
             allowed : true,
             cur_count: (this.MyContext as UserWarband).GetCountOfUpgradeRel(upg.ID),
             max_count: maxcount,
-            discount : 0,
+            discount : discount_val,
             cost: maxccurcostount
         }
         }
-        let canaddupgrade = (await this.GetCountOfUpgradeCategory(category) < limit_of_category || category == "upgrades")
-        let discount_val = 0;
 
-        if (canaddupgrade) {
-            
-
-            if (upg.CostType == 0) {
-                const ducatbudget = await this.GetUpgradeBudgetDucats()
-                if (ducatbudget > maxccurcostount) {
-                    discount_val = maxccurcostount
-                } else {
-                    discount_val = ducatbudget
-                }
-                canaddupgrade = (this.MyContext as UserWarband).GetSumCurrentDucats() >= (maxccurcostount - discount_val);
-            }
-            if (upg.CostType == 1) {
-                const glorybudget = await this.GetUpgradeBudgetGlory()
-                if (glorybudget > maxccurcostount) {
-                    discount_val = maxccurcostount
-                } else {
-                    discount_val = glorybudget
-                }
-                canaddupgrade = (this.MyContext as UserWarband).GetSumCurrentGlory() >= (maxccurcostount - discount_val);
-            }
-        }
         if (canaddupgrade) {
             const careAboutRequired = await Events.runEvent(
                 "getRequiredUpgradesBool",

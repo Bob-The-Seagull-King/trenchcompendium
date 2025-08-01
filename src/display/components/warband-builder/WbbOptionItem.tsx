@@ -121,7 +121,7 @@ const WbbOptionItem: React.FC<WbbOptionItemProps> = ({ option, owner, category }
                     {option.upgrade.Cost > 0 &&
                         <span className="option-cost">
                             {' - '}
-                            {option.cost + " " + getCostType(option.upgrade.CostType)}
+                            {((option.discount < 0 && option.purchase == null)? option.cost - option.discount : option.cost) + " " + getCostType(option.upgrade.CostType)}
                         </span>
                     }
 
@@ -134,7 +134,7 @@ const WbbOptionItem: React.FC<WbbOptionItemProps> = ({ option, owner, category }
                     { option.max_count > 0 &&
                         <span className='option-limit'>
                             {' - '}
-                            {option.cur_count}
+                            { option.cur_count}
                             {'/'}
                             {option.max_count}
                         </span>
