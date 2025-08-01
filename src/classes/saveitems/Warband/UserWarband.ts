@@ -1951,7 +1951,7 @@ class UserWarband extends DynamicContextObject {
                         }
                         if (BaseRels[i].CostType == 1) {
                             canaddupgrade = (this).GetSumCurrentGlory() >= maxccurcostount;
-                            if (containsTag(BaseRels[i].Tags, "exploration_only") && exploration_cap) {
+                            if (containsTag(BaseRels[i].Tags, "exploration_only") && exploration_cap && canaddupgrade == true) {
                                 const explore_limit = await this.GetExplorationLimit()
                                 canaddupgrade = maxccurcostount <= explore_limit;
                             }
