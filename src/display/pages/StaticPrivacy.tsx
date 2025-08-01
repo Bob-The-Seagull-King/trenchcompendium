@@ -4,7 +4,7 @@
  */
 
 import React, {useState} from 'react'
-import PrivacyPopup from "../components/generics/PrivacyPopup";
+import {TrackingManager} from "../components/generics/TrackingManager";
 
 const StaticPrivacy: React.FC = () => {
 
@@ -13,8 +13,7 @@ const StaticPrivacy: React.FC = () => {
     return (
         <div className="StaticPrivacy page-static">
             <div className={'container'}>
-
-                <PrivacyPopup forceShow={forceShowPrivacy}/>
+                <TrackingManager forceShow={forceShowPrivacy}/>
 
                 <h1>
                     {'Privacy Policy for Trench Companion'}
