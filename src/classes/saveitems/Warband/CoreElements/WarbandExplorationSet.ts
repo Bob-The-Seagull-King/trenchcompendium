@@ -317,6 +317,14 @@ class WarbandExplorationSet extends DynamicContextObject {
                 break;
             }
         }
+        const eventmon : EventRunner = new EventRunner();
+        await eventmon.runEvent(
+            "onRemoveLocation",
+            mod,
+            [this.MyContext],
+            null,
+            this
+        )
     }
     
     public async AddExplorationLocation ( location: ExplorationLocation, option: ISelectedOption[]) {

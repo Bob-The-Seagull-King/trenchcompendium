@@ -6,7 +6,7 @@ import { ExplorationSkillSuite, ExplorationTableSuite, IWarbandExplorationSet, W
 import { DynamicContextObject } from '../../contextevent/dynamiccontextobject';
 import { ContextObject, IContextObject } from '../../contextevent/contextobject';
 import { IWarbandFaction, WarbandFaction } from './CoreElements/WarbandFaction';
-import { IWarbandPurchaseEquipment, IWarbandPurchaseModel, RealWarbandPurchaseEquipment, RealWarbandPurchaseModel, WarbandPurchase } from './Purchases/WarbandPurchase';
+import { IWarbandPurchaseEquipment, IWarbandPurchaseModel, RealWarbandPurchaseEquipment, RealWarbandPurchaseModel, RealWarbandPurchaseUpgrade, WarbandPurchase } from './Purchases/WarbandPurchase';
 import { IWarbandMember, SkillSuite, WarbandMember } from './Purchases/WarbandMember';
 import { WarbandEquipment } from './Purchases/WarbandEquipment';
 import { WarbandFactory } from '../../../factories/warband/WarbandFactory';
@@ -1770,6 +1770,18 @@ class UserWarband extends DynamicContextObject {
         for (let i = 0; i < this.Models.length; i++) {
             const Mod = this.Models[i].HeldObject as WarbandMember;
             options = [...options, ...Mod.GetEquipment()]
+        }
+
+        return options;
+    }
+
+    public GetEntireWarbandUpgrade() {
+        let options : RealWarbandPurchaseUpgrade[] = [ ];
+
+
+        for (let i = 0; i < this.Models.length; i++) {
+            const Mod = this.Models[i].HeldObject as WarbandMember;
+            options = [...options, ...Mod.GetUpgrades()]
         }
 
         return options;

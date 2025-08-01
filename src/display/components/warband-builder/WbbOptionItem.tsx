@@ -121,7 +121,7 @@ const WbbOptionItem: React.FC<WbbOptionItemProps> = ({ option, owner, category }
                     {option.upgrade.Cost > 0 &&
                         <span className="option-cost">
                             {' - '}
-                            {option.upgrade.Cost + " " + getCostType(option.upgrade.CostType)}
+                            {option.cost + " " + getCostType(option.upgrade.CostType)}
                         </span>
                     }
 

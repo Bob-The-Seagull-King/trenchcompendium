@@ -3623,6 +3623,153 @@ export const BaseContextCallTable : CallEventTable = {
             return HoldVar;
         }
     },
+    purchase_modifier_upgrade: {
+        event_priotity: 0,        
+        async onRemoveLocation(this: EventRunner, eventSource : any, trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband, id : string) {
+            const alllist = warband.GetEntireWarbandUpgrade()
+            const appliedMods = new Map<WarbandProperty, Set<number>>();
+
+            for (let o = 0; o < alllist.length; o++) {
+                const CurEq = alllist[o].purchase
+                const CurEqItem = alllist[o].upgrade
+
+                if (CurEq.Sellable == false) {
+                    continue;
+                }
+
+                if (context_func["mod"]) {
+                    for (let k = 0; k < context_func["mod"].length; k++) {
+                        let CanAdd = false
+                        let AllCriteria = true
+
+                        if (context_func["mod"][k]["requirements"]) {
+                            for (let i = 0; i < context_func["mod"][k]["requirements"].length; i++) {
+                                const Cur = context_func["mod"][k]["requirements"][i]
+
+                                if (Cur["tag"]) {
+                                if (!containsTag(CurEqItem.Tags, Cur["tag"]) && !containsTag((CurEqItem.SelfDynamicProperty.OptionChoice as ModelUpgradeRelationship).UpgradeObject.Tags, Cur["tag"])) {
+                                    AllCriteria = false;
+                                }
+                                }
+                                if (Cur["cost"]) {
+                                    if (Cur['req_mod'] == ">=") {
+                                        if ( Number(CurEq.ItemCost - context_func["mod"][k]["cost"]) < Number(Cur["cost"]) || Number(Cur["costtype"]) != Number(CurEq.CostType)) {
+                                            AllCriteria = false;
+                                        }
+                                    }
+                                }
+                            }
+
+                        }
+                        if (AllCriteria) {
+                            CanAdd = true;
+                        }
+                        if (CanAdd) {
+                            if (!appliedMods.has(CurEqItem)) {
+                                appliedMods.set(CurEqItem, new Set());
+                            }
+                            const modsForItem = appliedMods.get(CurEqItem)!;
+                            if (!modsForItem.has(k)) {
+                                CurEq.ItemCost -= context_func["mod"][k]["cost"];
+                                modsForItem.add(k);
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        async onGainLocation(this: EventRunner, eventSource : any, trackVal : WarbandProperty, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) {
+            const alllist = warband.GetEntireWarbandUpgrade()
+            const appliedMods = new Map<WarbandProperty, Set<number>>();
+
+            for (let o = 0; o < alllist.length; o++) {
+                const CurEq = alllist[o].purchase
+                const CurEqItem = alllist[o].upgrade
+
+                if (CurEq.Sellable == false) {
+                    continue;
+                }
+
+                if (context_func["mod"]) {
+                    for (let k = 0; k < context_func["mod"].length; k++) {
+                        let CanAdd = false
+                        let AllCriteria = true
+
+                        if (context_func["mod"][k]["requirements"]) {
+                            for (let i = 0; i < context_func["mod"][k]["requirements"].length; i++) {
+                                const Cur = context_func["mod"][k]["requirements"][i]
+
+                                if (Cur["tag"]) {
+                                if (!containsTag(CurEqItem.Tags, Cur["tag"]) && !containsTag((CurEqItem.SelfDynamicProperty.OptionChoice as ModelUpgradeRelationship).UpgradeObject.Tags, Cur["tag"])) {
+                                    AllCriteria = false;
+                                }
+                                }
+                                if (Cur["cost"]) {
+                                    if (Cur['req_mod'] == ">=") {
+                                        if ( Number(CurEq.ItemCost - context_func["mod"][k]["cost"]) < Number(Cur["cost"]) || Number(Cur["costtype"]) != Number(CurEq.CostType)) {
+                                            AllCriteria = false;
+                                        }
+                                    }
+                                }
+                            }
+
+                        }
+                        if (AllCriteria) {
+                            CanAdd = true;
+                        }
+                        if (CanAdd) {
+                            if (!appliedMods.has(CurEqItem)) {
+                                appliedMods.set(CurEqItem, new Set());
+                            }
+                            const modsForItem = appliedMods.get(CurEqItem)!;
+                            if (!modsForItem.has(k)) {
+                                CurEq.ItemCost += context_func["mod"][k]["cost"];
+                                modsForItem.add(k);
+                            }
+                        }
+                    }
+                }
+            }
+        },        
+        async getCostOfUpgrade(this: EventRunner, eventSource : any, relayVar: number, trackVal: MemberAndWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, coreitem : ModelUpgradeRelationship) {
+            
+            let HoldVar = relayVar;
+            console.log(HoldVar)
+            if (context_func["mod"]) {
+                for (let k = 0; k < context_func["mod"].length; k++) {
+                    let CanAdd = false
+                    let AllCriteria = true
+
+                    if (context_func["mod"][k]["requirements"]) {
+                        for (let i = 0; i < context_func["mod"][k]["requirements"].length; i++) {
+                            const Cur = context_func["mod"][k]["requirements"][i]
+                            if (Cur["tag"]) {
+                                if (!containsTag(coreitem.Tags, Cur["tag"]) && !containsTag(coreitem.UpgradeObject.Tags, Cur["tag"])) {
+                                    AllCriteria = false;
+                                }
+                            }
+                            if (Cur["cost"]) {
+                                if (Cur['req_mod'] == ">=") {
+                                    if ( Number(coreitem.Cost) < Number(Cur["cost"]) || Number(Cur["costtype"]) != Number(coreitem.CostType)) {
+                                        AllCriteria = false;
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+                    if (AllCriteria) {
+                        CanAdd = true;
+                    }
+                    if (CanAdd) {
+                        HoldVar += context_func["mod"][k]["cost"]
+                    }
+                }
+            }
+            console.log(HoldVar)
+            return HoldVar;
+        }
+    },
     add_extra_equipment: {
         event_priotity: 0,
         async getEquipmentLimitTrue(this: EventRunner, eventSource : any, relayVar: number, trackVal : UserWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, ref_equip : FactionEquipmentRelationship) {
