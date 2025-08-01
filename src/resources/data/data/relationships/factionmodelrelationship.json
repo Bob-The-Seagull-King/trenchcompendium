@@ -1270,7 +1270,7 @@
         "options": [],
         "faction_id" : ["fc_newantioch_fc_eirerangers"],
         "model_id" : "md_lieutenant_eire",
-        "captain" : false,
+        "captain" : true,
         "mercenary": false,
         "cost" : 70,
         "cost_type" : 0,
