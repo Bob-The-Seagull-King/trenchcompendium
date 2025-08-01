@@ -5,10 +5,15 @@
 
 import React from 'react'
 import RulesBannerImage from "../components/rules-content/RulesBannerImage";
+import PageMetaInformation from "../components/generics/PageMetaInformation";
 
 const StaticAbout: React.FC = () => {
     return (
         <div className="StaticAbout page-static ">
+            <PageMetaInformation
+                title={'About trench companion'}
+                description={'Trench Companion is a fan-made tool designed to support players of Trench Crusade. From building your warband to running full campaigns'}
+            />
             <div className={'narrow-content'}>
                 <div className={'container'}>
 

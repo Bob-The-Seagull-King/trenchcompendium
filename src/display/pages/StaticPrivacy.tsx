@@ -5,6 +5,7 @@
 
 import React, {useState} from 'react'
 import {TrackingManager} from "../components/generics/TrackingManager";
+import PageMetaInformation from "../components/generics/PageMetaInformation";
 
 const StaticPrivacy: React.FC = () => {
 
@@ -12,6 +13,11 @@ const StaticPrivacy: React.FC = () => {
 
     return (
         <div className="StaticPrivacy page-static">
+            <PageMetaInformation
+                title={'Privacy'}
+                description={'We value your privacy - Privacy Policy for Trench Companion'}
+            />
+
             <div className={'container'}>
                 <TrackingManager forceShow={forceShowPrivacy}/>
 

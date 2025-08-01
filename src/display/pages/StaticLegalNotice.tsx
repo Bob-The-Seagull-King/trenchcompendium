@@ -3,11 +3,17 @@
  */
 
 import React from 'react'
+import PageMetaInformation from "../components/generics/PageMetaInformation";
 
 const StaticLegalNotice: React.FC = () => {
     return (
         <div className="StaticLegalNotice page-static">
             <div className={'container'}>
+                <PageMetaInformation
+                    title={'Legal Notice'}
+                    description={'Trench Companion legal notice'}
+                />
+
                 <h1>Legal Notice</h1>
 
                 <h2>Website Operator</h2>

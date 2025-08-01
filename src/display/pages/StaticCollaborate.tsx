@@ -7,12 +7,16 @@ import React from 'react'
 import StaticParagraph from "../static-content/StaticParagraph";
 import StaticImageText1 from "../static-content/StaticImageText-1";
 import StaticFaq from "../static-content/StaticFaq";
+import PageMetaInformation from "../components/generics/PageMetaInformation";
 
 const StaticCollaborate: React.FC = () => {
     return (
         <div className="StaticCollaborate page-static">
             <div className={'container content-narrow'}>
-
+                <PageMetaInformation
+                    title={'Collaborate with us'}
+                    description={'Trench Companion collaboration'}
+                />
                 <h1>Collaboration</h1>
 
                 <StaticParagraph content={

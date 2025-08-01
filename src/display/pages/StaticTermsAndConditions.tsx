@@ -4,10 +4,15 @@
 
 import React from 'react'
 import {ROUTES} from "../../resources/routes-constants";
+import PageMetaInformation from "../components/generics/PageMetaInformation";
 
 const StaticTermsAndConditions: React.FC = () => {
     return (
         <div className="StaticTermsAndConditions page-static">
+            <PageMetaInformation
+                title={'Terms and conditions'}
+                description={'Trennch Companion terms and conditions for using our app'}
+            />
             <div className={'container'}>
                 <h1>Terms and Conditions</h1>
 

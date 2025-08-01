@@ -4,11 +4,17 @@
 
 import React from 'react'
 import {ROUTES} from "../../resources/routes-constants";
+import PageMetaInformation from "../components/generics/PageMetaInformation";
 
 const StaticWithdrawal: React.FC = () => {
     return (
         <div className="StaticWithdrawal page-static">
             <div className={'container'}>
+                <PageMetaInformation
+                    title={'Right of Withdrawal'}
+                    description={' If you are a consumer residing in the European Union and you purchase a paid supporter membership ...'}
+                />
+
                 <h1>Right of Withdrawal</h1>
 
                 <h2>1. Withdrawal Policy</h2>
