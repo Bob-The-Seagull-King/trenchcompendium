@@ -28,7 +28,7 @@
         "cost_type": 0,
         "restricted_upgrades": [
         ],
-        "warband_limit": 0,
+        "warband_limit": 3,
         "required_upgrades":[]
     },
     {
