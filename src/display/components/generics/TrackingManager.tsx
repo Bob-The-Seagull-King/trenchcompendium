@@ -29,17 +29,10 @@ export const TrackingManager: React.FC = () => {
         if (!isProduction) return;
 
         let attempts = 0;
-        console.log('trying to send pageview 1');
 
         const interval = setInterval(() => {
-            console.log('trying to send pageview 2');
-
             attempts++;
             if (typeof window.gtag === 'function') {
-                console.log('trying to send pageview 3');
-                console.log(location);
-                console.log(document.title);
-
                 window.gtag('event', 'page_view', {
                     page_path: location.pathname + location.search,
                     page_title: document.title,
