@@ -652,8 +652,19 @@ export const BaseContextCallTable : CallEventTable = {
     },
     restriction_override: {
         event_priotity: 1,
-        modEquipmentRestriction(this: EventRunner, eventSource : any, relayVar : any, trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) { 
+        modEquipmentRestriction(this: EventRunner, eventSource : any, relayVar : any, trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, refeq : FactionEquipmentRelationship) { 
             const totalList : EquipmentRestriction[] = relayVar as EquipmentRestriction[]
+            if (context_func["exception"]) {
+                for (let k = 0; k < context_func["exception"].length; k++) {
+                    const CurVal = context_func["exception"][k]
+                    if (CurVal["equipment"]) {
+                        if (refeq.EquipmentItem.ID == CurVal["equipment"]) {
+                            return totalList;
+                        }
+                    }
+                }
+                
+            }
             if (context_func["overrides"]) {
                 for (let i = 0 ; i < totalList.length; i++) {
                     const Restriction : EquipmentRestriction = totalList[i];

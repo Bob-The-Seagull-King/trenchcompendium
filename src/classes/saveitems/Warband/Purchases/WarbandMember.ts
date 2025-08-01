@@ -2102,7 +2102,7 @@ class WarbandMember extends DynamicContextObject {
         const FinalEquipRestrictionList : EquipmentRestriction[] = await eventmon.runEvent(
             "modEquipmentRestriction",
             this,
-            [],
+            [faceq],
             NewRefList,
             this
         )

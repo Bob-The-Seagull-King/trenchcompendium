@@ -5,16 +5,12 @@
         "source": "core",
         "tags": {},
         "contextdata": {
-            "model_equipment_restriction": {
-                "removed": [
-                    {
-                        "category": "armour",
-                        "res_type": "id",
-                        "value": "eq_reinforcedarmour"
-                    }
-                ]
-            },
             "restriction_override": {
+                "exception": [
+                    {
+                        "equipment": "eq_reinforcedarmour"
+                    }
+                ],
                 "overrides": [
                     {
                     "type": "id",
