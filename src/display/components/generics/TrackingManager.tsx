@@ -24,19 +24,20 @@ export const trackEvent = (action: string, category: string, label?: string, val
 export const TrackingManager: React.FC = () => {
     const location = useLocation();
 
-    // Load GA on first load if consent is given
-    useEffect(() => {
-        if (!isProduction) return;
-    }, []);
-
     // Track page views on every route change
     useEffect(() => {
         if (!isProduction) return;
 
         let attempts = 0;
+        console.log('trying to send pageview 1');
+
         const interval = setInterval(() => {
+            console.log('trying to send pageview 2');
+
             attempts++;
             if (typeof window.gtag === 'function') {
+                console.log('trying to send pageview 3');
+
                 window.gtag('event', 'page_view', {
                     page_path: location.pathname + location.search,
                     page_title: document.title,
