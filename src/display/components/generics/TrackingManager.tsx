@@ -33,6 +33,9 @@ export const TrackingManager: React.FC = () => {
         const interval = setInterval(() => {
             attempts++;
             if (typeof window.gtag === 'function') {
+
+                console.log(location);
+
                 window.gtag('event', 'page_view', {
                     page_path: location.pathname + location.search,
                     page_title: document.title,
