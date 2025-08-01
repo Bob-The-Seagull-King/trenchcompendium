@@ -7,31 +7,10 @@ declare global {
     }
 }
 
-const COOKIE_KEY = 'cookie_consent';
-const GA_ID = 'G-YENKW9MDRJ';
+// only send on prod server
 const isProduction = window.location.hostname === 'trench-companion.com';
 
-let initialized = false;
-
-export const loadGoogleAnalytics = () => {
-    if (initialized) return;
-    initialized = true;
-
-    const script1 = document.createElement('script');
-    script1.async = true;
-    script1.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
-    document.head.appendChild(script1);
-
-    const script2 = document.createElement('script');
-    script2.innerHTML = `
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', '${GA_ID}', { send_page_view: false });
-    `;
-    document.head.appendChild(script2);
-};
-
+// allows for manual event triggers
 export const trackEvent = (action: string, category: string, label?: string, value?: number) => {
     if (typeof window.gtag === 'function') {
         window.gtag('event', action, {
@@ -45,20 +24,17 @@ export const trackEvent = (action: string, category: string, label?: string, val
 export const TrackingManager: React.FC = () => {
     const location = useLocation();
 
+    console.log('Tracking manager loaded')
+
     // Load GA on first load if consent is given
     useEffect(() => {
         if (!isProduction) return;
-
-        const consentRaw = localStorage.getItem(COOKIE_KEY);
-        const consent = consentRaw ? JSON.parse(consentRaw) : null;
-
-        if (consent?.tracking === true) {
-            loadGoogleAnalytics();
-        }
     }, []);
 
     // Track page views on every route change
     useEffect(() => {
+        console.log('Trying to send page view')
+
         if (!isProduction) return;
 
         if (typeof window.gtag !== 'function') {

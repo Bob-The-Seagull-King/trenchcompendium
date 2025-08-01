@@ -8,14 +8,13 @@ import PrivacyPopup from "../components/generics/PrivacyPopup";
 
 const StaticPrivacy: React.FC = () => {
 
-    const [showPopup, setShowPopup] = useState(false);
-
+    const [forceShowPrivacy, setForceShowPrivacy] = useState<number>(0);
 
     return (
         <div className="StaticPrivacy page-static">
             <div className={'container'}>
 
-                <PrivacyPopup forceShow={showPopup}/>
+                <PrivacyPopup forceShow={forceShowPrivacy}/>
 
                 <h1>
                     {'Privacy Policy for Trench Companion'}
@@ -39,7 +38,7 @@ const StaticPrivacy: React.FC = () => {
                     }
 
                     <br/>
-                    <div className={'btn btn-secondary btn-sm mt-3 mb-3'} onClick={() => setShowPopup(true)}>
+                    <div className={'btn btn-secondary btn-sm mt-3 mb-3'} onClick={() => setForceShowPrivacy(Date.now())}>
                         {'Change Privacy Settings'}
                     </div>
                 </p>
