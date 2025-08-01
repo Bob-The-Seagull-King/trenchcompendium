@@ -24,8 +24,6 @@ export const trackEvent = (action: string, category: string, label?: string, val
 export const TrackingManager: React.FC = () => {
     const location = useLocation();
 
-    console.log('Tracking manager loaded')
-
     // Load GA on first load if consent is given
     useEffect(() => {
         if (!isProduction) return;
@@ -33,18 +31,23 @@ export const TrackingManager: React.FC = () => {
 
     // Track page views on every route change
     useEffect(() => {
-        console.log('Trying to send page view')
-
         if (!isProduction) return;
 
-        if (typeof window.gtag !== 'function') {
-            return; // tracking manager not yet loaded
-        }
+        let attempts = 0;
+        const interval = setInterval(() => {
+            attempts++;
+            if (typeof window.gtag === 'function') {
+                window.gtag('event', 'page_view', {
+                    page_path: location.pathname + location.search,
+                    page_title: document.title,
+                });
+                clearInterval(interval);
+            } else if (attempts > 20) {
+                clearInterval(interval);
+            }
+        }, 250);
 
-        window.gtag('event', 'page_view', {
-            page_path: location.pathname + location.search,
-            page_title: document.title,
-        });
+        return () => clearInterval(interval);
     }, [location]);
 
     return null; // invisible component

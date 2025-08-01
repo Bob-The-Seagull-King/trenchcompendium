@@ -91,9 +91,6 @@ const PrivacyPopup: React.FC<PrivacyPopupProps> = ({ forceShow }) => {
         if (
             typeof window.gtag === 'function'
         ) {
-            console.log('Consent sent')
-
-
             window.gtag('consent', 'update', {
                 ad_storage: thisConsent.marketing ? 'granted' : 'denied',
                 analytics_storage: thisConsent.essential ? 'granted' : 'denied',
