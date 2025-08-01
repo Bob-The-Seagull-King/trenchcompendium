@@ -32,14 +32,20 @@ export const TrackingManager: React.FC = () => {
 
         const interval = setInterval(() => {
             attempts++;
+
             if (typeof window.gtag === 'function') {
 
                 console.log(location);
+                console.log(document.title);
 
-                window.gtag('event', 'page_view', {
-                    page_path: location.pathname + location.search,
-                    page_title: document.title,
-                });
+                const timeout = setTimeout(() => {
+                    if (typeof window.gtag === 'function') {
+                        window.gtag('event', 'page_view', {
+                            page_path: location.pathname + location.search,
+                            page_title: document.title,
+                        });
+                    }
+                }, 100);
                 clearInterval(interval);
             } else if (attempts > 20) {
                 clearInterval(interval);
