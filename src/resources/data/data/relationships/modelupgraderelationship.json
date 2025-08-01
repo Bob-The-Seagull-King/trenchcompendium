@@ -6,7 +6,7 @@
         "name": "",
         "contextdata": {},
         "options": [],
-        "model_id_set": ["md_azeb"],
+        "model_id_set": ["md_azeb","md_azeb_mv_acolyte"],
         "upgrade_id": "up_skirmisher",
         "cost": 5,
         "cost_type": 0,
@@ -28,7 +28,7 @@
         "cost_type": 0,
         "restricted_upgrades": [
         ],
-        "warband_limit": 0,
+        "warband_limit": 3,
         "required_upgrades":[]
     },
     {
