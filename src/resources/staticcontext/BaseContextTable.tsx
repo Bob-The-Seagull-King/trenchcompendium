@@ -3258,11 +3258,12 @@ export const BaseContextCallTable : CallEventTable = {
     add_as_modifier: {
         event_priotity: 0,
         async onGainLocation(this: EventRunner, eventSource : any, trackVal : WarbandProperty, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) {
-            return; // Removed temporarily until this can be sorted out
-            const warbandpropmodule = await import("../../classes/saveitems/Warband/WarbandProperty")
-            const NewLocation = new warbandpropmodule.WarbandProperty((context_main as any).OptionChoice, warband, (context_main as any), null);
-            await NewLocation.HandleDynamicProps((context_main as any).OptionChoice, warband, (context_main as any), null)
-            warband.ModifiersLoc.push(NewLocation);
+            const {ExplorationLocation} = await import("../../classes/feature/exploration/ExplorationLocation")
+            const val = context_static
+            if (val != null && !containsTag(val.Tags, "secondarylevel") ) {
+                val.Tags["secondarylevel"] = true
+                await warband.AddExplorationLocation(val as ExplorationLocation, [])
+            }
         }
     },
     gain_all_from_list: {
