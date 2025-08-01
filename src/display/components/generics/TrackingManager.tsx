@@ -81,23 +81,13 @@ export const TrackingManager: React.FC<TrackingManager> = ({ forceShow }) => {
 
         let attempts = 0;
 
-        console.log('start attempting to set pageview');
-
         // defer sending
         const interval = setInterval(() => {
             attempts++;
 
-            console.log('attempting to set pageview ' + attempts);
-            console.log(window.gtag);
-            console.log(hasSentConsent.current);
-
             // wait for gtag to be loaded and consent to be sent
             if (typeof window.gtag === 'function' && hasSentConsent.current) {
                 const title = document.title?.trim();
-
-                console.log('setting pageview at');
-                console.log(location.pathname);
-                console.log(document.title);
 
                 // wait for document title or after long loads
                 if( title || attempts > 19 ) {
@@ -108,7 +98,6 @@ export const TrackingManager: React.FC<TrackingManager> = ({ forceShow }) => {
                                 page_title: document.title,
                             });
 
-                            console.log('pageview was set');
                         }
                     }, 200);
                     clearInterval(interval);
@@ -160,27 +149,37 @@ export const TrackingManager: React.FC<TrackingManager> = ({ forceShow }) => {
 
     // applies the consent
     const applyConsent = ( thisConsent: ConsentPreferences ) => {
-        console.log('trying to apply consent');
+        let attempts = 0;
 
-        if (
-            typeof window.gtag === 'function'
-        ) {
-            console.log('applying consent');
+        const interval = setInterval(() => {
+            attempts++;
 
-            window.gtag('consent', 'update', {
-                ad_storage: thisConsent.marketing ? 'granted' : 'denied',
-                analytics_storage: thisConsent.essential ? 'granted' : 'denied',
-                ad_user_data: thisConsent.marketing ? 'granted' : 'denied',
-                ad_personalization: thisConsent.marketing ? 'granted' : 'denied',
-                functionality_storage: thisConsent.tracking ? 'granted' : 'denied',
-                personalization_storage: thisConsent.tracking ? 'granted' : 'denied',
-                security_storage: thisConsent.tracking ? 'granted' : 'denied'
-            });
+            // apply if gtag is loaded
+            if (
+                typeof window.gtag === 'function'
+            ) {
 
-            window.gtag('event', 'consent_sent');
+                window.gtag('consent', 'update', {
+                    ad_storage: thisConsent.marketing ? 'granted' : 'denied',
+                    analytics_storage: thisConsent.essential ? 'granted' : 'denied',
+                    ad_user_data: thisConsent.marketing ? 'granted' : 'denied',
+                    ad_personalization: thisConsent.marketing ? 'granted' : 'denied',
+                    functionality_storage: thisConsent.tracking ? 'granted' : 'denied',
+                    personalization_storage: thisConsent.tracking ? 'granted' : 'denied',
+                    security_storage: thisConsent.tracking ? 'granted' : 'denied'
+                });
 
-            hasSentConsent.current = true;
-        }
+                window.gtag('event', 'consent_sent');
+
+                hasSentConsent.current = true;
+                clearInterval(interval);
+            }
+
+            if (attempts > 20) {
+                console.warn('gtag not ready: consent not applied');
+                clearInterval(interval);
+            }
+        }, 250);
     }
 
 
