@@ -37,6 +37,8 @@ export const TrackingManager: React.FC = () => {
             attempts++;
             if (typeof window.gtag === 'function') {
                 console.log('trying to send pageview 3');
+                console.log(location);
+                console.log(document.title);
 
                 window.gtag('event', 'page_view', {
                     page_path: location.pathname + location.search,
