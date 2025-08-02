@@ -496,7 +496,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                                     ).map((equip) =>
                                         (
                                             <WbbEquipmentListItem
-                                                key={complexstate.allmodelequip.indexOf(equip)}
+                                                key={complexstate.allmodelequip.indexOf(equip).toString() + "_" + equip.equipment.ID}
                                                 item={equip.purchase}
                                                 fighter={warbandmember}
                                             />
