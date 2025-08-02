@@ -3781,6 +3781,18 @@ export const BaseContextCallTable : CallEventTable = {
             return HoldVar;
         }
     },
+    mod_self_cost: {
+        event_priotity: 0,       
+        async getDiscountOfUpgrade(this: EventRunner, eventSource : any, relayVar: number, trackVal: MemberAndWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, coreitem : ModelUpgradeRelationship) {
+            
+            if (context_static == coreitem) {
+                if (context_func["mod"]) {
+                    return relayVar + context_func["mod"]
+                }
+            }
+            return relayVar;
+        }
+    },
     add_extra_equipment: {
         event_priotity: 0,
         async getEquipmentLimitTrue(this: EventRunner, eventSource : any, relayVar: number, trackVal : UserWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, ref_equip : FactionEquipmentRelationship) {

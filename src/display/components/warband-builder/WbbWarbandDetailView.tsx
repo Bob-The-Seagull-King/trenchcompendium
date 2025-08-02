@@ -34,9 +34,8 @@ const WbbWarbandDetailView: React.FC<WbbWarbandDetailViewProps> = ({  onClose })
 
     const { play_mode, edit_mode, view_mode, print_mode, setMode } = useWbbMode(); // play mode v2
 
-    // Does this warband have advanced options enabled?
-    // @TODO: Lane: Save this to the warband and use it to toggle the display of advanced options
     const [warbandEnableAdvancedOptions, setWarbandEnableAdvancedOptions] = useState<boolean>(warband.warband_data.IsWarbandCustom());
+    const [warbandEnableOpenExploration, setWarbandEnableOpenExploration] = useState<boolean>(warband.warband_data.IsWarbandExplorationOnly());
 
     const [showAddFighterCustomModal, setShowAddFighterCustomModal] = useState(false);
     const [showCustomitemAddToStash, setShowCustomitemAddToStash] = useState(false);
@@ -53,6 +52,20 @@ const WbbWarbandDetailView: React.FC<WbbWarbandDetailViewProps> = ({  onClose })
         }
         RunErrorCheck();
     }, [updateKey])
+
+    useEffect(() => {
+        if (warbandEnableOpenExploration == true) {
+            if (!warband.warband_data.Restrictions.includes("open_exploration")) {
+                warband.warband_data.Restrictions.push("open_exploration")
+                warband.warband_data.DumpCache()
+            }
+        } else {
+            if (warband.warband_data.Restrictions.includes("open_exploration")) {
+                warband.warband_data.Restrictions = warband.warband_data.Restrictions.filter(item => item !== "open_exploration");
+                warband.warband_data.DumpCache()
+            }
+        }
+    }, [warbandEnableOpenExploration])
 
 
     
@@ -244,6 +257,23 @@ const WbbWarbandDetailView: React.FC<WbbWarbandDetailViewProps> = ({  onClose })
 
                     { edit_mode &&
                         <WbbDetailViewCollapse title="Advanced Options" initiallyOpen={false}>
+                            <div className="form-check form-switch">
+                                <input
+                                    className="form-check-input"
+                                    type="checkbox"
+                                    id="customModeToggle"
+                                    checked={warbandEnableOpenExploration}
+                                    onChange={(e) => setWarbandEnableOpenExploration(e.target.checked)}
+                                />
+                                <label className="form-check-label" htmlFor="customModeToggle">
+                                    {'Enable Open Exploration'}
+                                </label>
+
+                            </div>
+                            <div className="form-text">
+                                {'Allowing for Open Exlporation means your warband will no longer be restricted by the need for certain items to be purchased during the Exploration Phase, perfect for one-off games.'}
+                            </div>
+
                             <div className="form-check form-switch">
                                 <input
                                     className="form-check-input"

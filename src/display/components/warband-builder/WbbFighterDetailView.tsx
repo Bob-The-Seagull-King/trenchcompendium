@@ -62,6 +62,8 @@ import {
 } from '../../../classes/feature/model/ModelStats';
 import WbbEditFighterStatOption from './modals/fighter/WbbFighterStatOption';
 import {useWbbMode} from "../../../context/WbbModeContext";
+import WbbDetailViewCollapse from './WbbDetailViewCollapse';
+import WbbTextarea from './WbbTextarea';
 
 
 interface WbbFighterDetailViewProps {
@@ -496,7 +498,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                                     ).map((equip) =>
                                         (
                                             <WbbEquipmentListItem
-                                                key={complexstate.allmodelequip.indexOf(equip)}
+                                                key={complexstate.allmodelequip.indexOf(equip).toString() + "_" + equip.equipment.ID}
                                                 item={equip.purchase}
                                                 fighter={warbandmember}
                                             />
@@ -612,6 +614,35 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                 </div>
             }
 
+            {/* Notes textarea */}
+            <WbbDetailViewCollapse title="Notes & Lore" initiallyOpen={false}>
+                <WbbTextarea
+                    initialText={warbandmember.model.GetWarbandNotes()}
+                    title={warbandmember.model.GetTrueName() + " Notes"}
+                    onSave={(newText : string) => {
+                        warbandmember.model.SaveNote(newText, 'notes')
+                        
+            
+                        const Manager : ToolsController = ToolsController.getInstance();
+                        Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
+                            () => reloadDisplay())
+                    }}
+                />
+
+                {/* Lore  textarea */}
+                <WbbTextarea
+                    initialText={warbandmember.model.GetLore()}
+                    title={warbandmember.model.GetTrueName() + " Lore"}
+                    onSave={(newText : string) => {
+                        warbandmember.model.SaveNote(newText, 'lore')
+                        
+            
+                        const Manager : ToolsController = ToolsController.getInstance();
+                        Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
+                            () => reloadDisplay())
+                    }}
+                />
+            </WbbDetailViewCollapse>
 
             {/* Edit Campaign Play */}
             { !play_mode &&

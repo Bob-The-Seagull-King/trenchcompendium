@@ -599,11 +599,15 @@
         "source": "core",
         "tags": {},
         "name": "",
-        "contextdata": {},
+        "contextdata": {
+            "mod_self_cost": {
+                "mod": -45
+            }
+        },
         "options": [],
         "model_id_set": ["md_trenchpilgrim"],
         "upgrade_id": "up_resurrection",
-        "cost": 45,
+        "cost": 15,
         "cost_type": 0,
         "restricted_upgrades": [
         ],

@@ -2108,7 +2108,6 @@
         "category": "ranged",
         "distance": 12,
         "stats": {
-            "hands_melee": 1,
             "hands_ranged": 1,
             "ranged": true,
             "melee": true
@@ -2804,7 +2803,7 @@
         "id": "eq_heavyballisticshield",
         "name": "Heavy Ballistic Shield",
         "source": "core",
-        "tags": {"trait": true},
+        "tags": {"trait": true, "shield": true},
         "category": "armour",
         "distance": null,
         "stats": {

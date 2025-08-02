@@ -10,6 +10,27 @@
             {
                 "tags": {"desc_type" : "paragraph"},
                 "content": "This page collects a series of frequent rules questions and answers from the Trench Crusade Discord Server. Answers provided here are those confirmed by the development team themselves. Official FAQ documents are documented in other Errata sections."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [
+                    
+                        {
+                            "tags": {"desc_type" : "default"},
+                            "content": "Special thanks to "
+                        },
+                                            
+                        {
+                            "tags": {"desc_type" : "link", "external": true, "url": "https://atrollinthetrenches.com/"},
+                            "content": "A Troll In The Trenches"
+                        },                       
+                    
+                        {
+                            "tags": {"desc_type" : "default"},
+                            "content": " for compiling this work."
+                        }
+                ]
             }
         ],
         "sections": [

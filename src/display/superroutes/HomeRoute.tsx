@@ -14,6 +14,7 @@ import MenuComponent from '../components/subcomponents/MenuComponent';
 import MenuOutLink from '../components/subcomponents/MenuOutLink';
 import PageMetaInformation from "../components/generics/PageMetaInformation";
 import RulesBannerImage from "../components/rules-content/RulesBannerImage";
+import ConfirmationModal from "../components/generics/ConfirmationModal";
 
 
 
