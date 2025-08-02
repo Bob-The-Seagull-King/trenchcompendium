@@ -1450,6 +1450,15 @@ class UserWarband extends DynamicContextObject {
         return false;
     }
 
+    public IsWarbandExplorationOnly() {
+        
+        if (this.Restrictions.includes("open_exploration") == true) {
+            return true
+        } 
+
+        return false;
+    }
+
     /** 
      * Returns the notes for this warband as string
      * @constructor
@@ -1812,7 +1821,7 @@ class UserWarband extends DynamicContextObject {
         return options;
     }
 
-    public async GetFactionEquipmentOptions(use_exploration = false, count_cost = true, get_base = false, exploration_cap = true) : Promise<FactionEquipmentRelationship[]> {
+    public async GetFactionEquipmentOptions(use_explor = false, count_cost = true, get_base = false, exploration_cap = true) : Promise<FactionEquipmentRelationship[]> {
         const FacCheck = this.Faction.MyFaction;
         const ListOfRels : FactionEquipmentRelationship[] = []
         const AddedIDs : string[] = [];
@@ -1821,6 +1830,14 @@ class UserWarband extends DynamicContextObject {
 
         if (FacCheck != undefined) {
             RefRels = ((FacCheck.SelfDynamicProperty).OptionChoice as Faction).EquipmentItems
+        }
+
+        let use_exploration = use_explor
+        if (use_exploration == false) {
+            use_exploration = this.IsWarbandExplorationOnly()
+        }
+        if (exploration_cap == true) {
+            exploration_cap = !this.IsWarbandExplorationOnly()
         }
 
         for (let i = 0; i < RefRels.length; i++) {
