@@ -13,8 +13,5 @@ This document lists issues known to exist in the Trench Companion and are curren
   - *Tektites* : Unimplimented
   - *Heavy Weapons Cache* : Partially Implimented
   - *Ruined House* : Unimplimented
-  - *Fallen Soldier* : Unimplimented
-  - *Snipers Nest* : Partially Implimented
-  - *Fallen Knight* : Unimplimented
   - *Warband Strongbox* : Unimplimented
   - *Battlefield of Corpses* : Unimplimented
