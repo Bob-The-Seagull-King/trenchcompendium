@@ -2846,18 +2846,11 @@
                 "action_type": ["dash"]
             },
             "model_equipment_restriction": {
-                "removed": [
+                "required": [
                     {
                         "tag": "shield",
-                        "res_type": "all",
-                        "value": ""
-                    }
-                ],
-                "banned": [
-                    {
-                        "tag": "shield",
-                        "res_type": "all",
-                        "value": ""
+                        "res_type": "id",
+                        "value": "eq_heavyballisticshield"
                     }
                 ]
             },
@@ -3600,7 +3593,7 @@
         ],
         "options": [],
         "keywords": ["kw_heavy","kw_heavy","kw_blast"],
-        "modifiers": ["+2D to Injuries","Ignore Cover"]
+        "modifiers": ["+1D to Injuries","Ignore Cover"]
     },
     {
         "id": "eq_autocannon",
@@ -4035,18 +4028,11 @@
         "contextdata": {
             "upgrade_stat": {"upgrades": [{"stat": "armour", "value": -3}]},
             "model_equipment_restriction": {
-                "removed": [
+                "required": [
                     {
                         "tag": "shield",
-                        "res_type": "all",
-                        "value": ""
-                    }
-                ],
-                "banned": [
-                    {
-                        "tag": "shield",
-                        "res_type": "all",
-                        "value": ""
+                        "res_type": "id",
+                        "value": "eq_heavyballisticshield"
                     }
                 ]
             },
