@@ -1019,12 +1019,14 @@
                     }
                 ]
             },
-            "gain_new_item_from_list": {
-                "count": 1,
-                "obey_faction": true,
-                "obey_restriction": true,
-                "alternate_value": true,
-                "id": ["eq_sniperrifle", "eq_sniperscope"]
+            "consumable": {
+                "gain_new_item_from_list": {
+                    "count": 1,
+                    "obey_faction": true,
+                    "obey_restriction": true,
+                    "alternate_value": true,
+                    "id": ["eq_sniperrifle", "eq_sniperscope"]
+                }
             }
         },
         "description": [            

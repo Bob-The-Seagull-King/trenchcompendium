@@ -3193,7 +3193,36 @@ export const BaseContextCallTable : CallEventTable = {
             return relayVar;
         }
     },
+    gain_new_item_from_list: {
+        event_priotity: 0,
+        async runConsumableSelect(this: EventRunner, eventSource : any, trackVal : WarbandConsumable, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : WarbandConsumable) {
+            const ContWarband = await GetWarbandOrNull(sourceband);
+            if (ContWarband == null) { return }
 
+            await ContWarband.AddStash(trackVal.SelectItem as any, true);
+        },
+        async getConsumableOptionsList(this: EventRunner, eventSource : any, relayVar : IChoice[], trackVal : WarbandConsumable, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : UserWarband) {
+
+            if (sourceband) {
+                const OptionList = await (sourceband).GetFactionEquipmentOptions(true, false, true, false);
+                for (let j = 0; j < context_func["id"].length; j++) {
+                    const curitem = context_func["id"][j]
+                    for (let i = 0; i < OptionList.length; i++) {
+                        if (curitem == OptionList[i].EquipmentItem.ID) {
+                            relayVar.push(
+                                {
+                                    display_str: OptionList[i].EquipmentItem.GetTrueName() + " " + OptionList[i].Cost + " " + getCostType(OptionList[i].CostType),
+                                    id: OptionList[i].ID,
+                                    value: OptionList[i]
+                                }
+                            )
+                        }
+                    }
+                }
+            }
+            return relayVar;
+        }
+    },
     consumable: {
         event_priotity: 0,
         async onGainLocation(this: EventRunner, eventSource : any, trackVal : WarbandProperty, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) {
@@ -3229,6 +3258,23 @@ export const BaseContextCallTable : CallEventTable = {
                                 source: context_static.Source? context_static.Source : "",
                                 tags: Tags,
                                 contextdata: {"single_exploration_glory_item" : context_func["single_exploration_glory_item"]},
+                                associate_id : context_static.GetID(),
+                                object_id:  null,
+                                object_type :  "faction_equipment"
+                            }
+                            const CreateNewConsumable = new WarbandConsumable(NewData, warband);
+                            await CreateNewConsumable.GrabOptions();
+                            trackVal.Consumables.push(CreateNewConsumable);
+                        }
+                        if (context_func["gain_new_item_from_list"]) {
+                            const Tags = context_static.Tags;
+                            Tags["consumable_type_equipment"] = true
+                            const NewData = {
+                                id: context_static.GetID() + Date.now().toString(), 
+                                name: context_static.GetTrueName(),
+                                source: context_static.Source? context_static.Source : "",
+                                tags: Tags,
+                                contextdata: {"gain_new_item_from_list" : context_func["gain_new_item_from_list"]},
                                 associate_id : context_static.GetID(),
                                 object_id:  null,
                                 object_type :  "faction_equipment"
