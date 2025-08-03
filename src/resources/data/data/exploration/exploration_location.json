@@ -767,27 +767,28 @@
         },
         "contextdata": {
             "location_rule_option": {},
-            "gain_new_item": {
-                "count": 1,
-                "obey_restriction": true,
-                "obey_faction": true,
-                "limitations": {
-                    "required": [
-                        {
-                            "category": "ranged",
-                            "res_type": "ducats",
-                            "value": 15
-                        }
-                    ]
+            "consumable": {
+                "gain_new_item_from_list": {
+                    "count": 1,
+                    "obey_faction": true,
+                    "required": false,
+                    "id": ["eq_medikit","eq_mountaineerkit","eq_shovel"]
+                },
+                "gain_new_item": {
+                    "count": 1,
+                    "obey_restriction": true,
+                    "obey_faction": true,
+                    "limitations": {
+                        "category": ["ranged"],
+                        "cost": [{
+                                "type": 0,
+                                "value": 15,
+                                "subval" : "max"
+                            }]
+                    }
                 }
             },
-            "gain_new_item_from_list": {
-                "count": 1,
-                "obey_faction": true,
-                "required": false,
-                "id": ["eq_medikit","eq_mountaineerkit","eq_shovel"]
-            },
-            "gain_all_from_list": {
+            "gain_all_from_list_find": {
                 "id": ["eq_combathelmet","eq_standardarmour"]
             }
         },
@@ -1246,17 +1247,19 @@
     },
     {
         "id": "el_fallenknight_loot",
-        "name": "Report",
+        "name": "Loot",
         "source": "core",
         "tags": {
             "location_option": "el_fallenknight"
         },
         "contextdata": {
-            "gain_new_item_from_list": {
-                "count": 1,
-                "id": ["eq_swordaxe","eq_trenchpolearm"]
+            "consumable": {
+                "gain_new_item_from_list": {
+                    "count": 1,
+                    "id": ["eq_swordaxe","eq_trenchpolearm"]
+                }
             },
-            "gain_all_from_list": {
+            "gain_all_from_list_find": {
                 "id": ["eq_combathelmet","eq_trenchshield","eq_reinforcedarmour"]
             }
         },
