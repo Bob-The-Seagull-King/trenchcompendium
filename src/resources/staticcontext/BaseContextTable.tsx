@@ -3213,6 +3213,19 @@ export const BaseContextCallTable : CallEventTable = {
                             canadd = false;
                         }
                     }
+                    
+                    if (context_func["limitations"]["keyword"]) {
+                        let isvalid = false;
+                        const keylist = OptionList[i].EquipmentItem.GetKeyWordIDs();
+                        for (let k = 0; k < context_func["limitations"]["keyword"].length; k++) {
+                            if (keylist.includes(context_func["limitations"]["keyword"][k])) {
+                                isvalid = true;
+                            }
+                        }
+                        if (!isvalid) {
+                            canadd = false;
+                        }
+                    }
 
                     if (context_func["limitations"]["cost"]) {
                         let isvalid = false;

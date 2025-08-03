@@ -208,23 +208,15 @@
             "location_option": "el_heavyweaponscache"
         },
         "contextdata": {
-            "gain_new_item": {
-                "count": 1,
-                "obey_restriction": true,
-                "obey_faction": true,
-                "limitations": {
-                    "required": [
-                        {
-                            "category": "melee",
-                            "res_type": "keyword",
-                            "value": "kw_heavy"
-                        },
-                        {
-                            "category": "ranged",
-                            "res_type": "keyword",
-                            "value": "kw_heavy"
-                        }
-                    ]
+            "consumable": {
+                "gain_new_item": {
+                    "count": 1,
+                    "obey_restriction": true,
+                    "obey_faction": true,
+                    "limitations": {
+                        "category": ["ranged","melee"],
+                        "keyword": ["kw_heavy"]
+                    }
                 }
             }
 
