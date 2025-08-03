@@ -3600,7 +3600,7 @@
         ],
         "options": [],
         "keywords": ["kw_heavy","kw_heavy","kw_blast"],
-        "modifiers": ["+2D to Injuries","Ignore Cover"]
+        "modifiers": ["+1D to Injuries","Ignore Cover"]
     },
     {
         "id": "eq_autocannon",
