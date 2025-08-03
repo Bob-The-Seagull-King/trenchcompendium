@@ -654,6 +654,16 @@ export const BaseContextCallTable : CallEventTable = {
         event_priotity: 1,
         modEquipmentRestriction(this: EventRunner, eventSource : any, relayVar : any, trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, refeq : FactionEquipmentRelationship) { 
             const totalList : EquipmentRestriction[] = relayVar as EquipmentRestriction[]
+            
+            console.log("Mod Restriction")
+            console.log(eventSource)
+            console.log(relayVar)
+            console.log(trackVal)
+            console.log(context_func)
+            console.log(context_static)
+            console.log(context_main)
+            console.log(refeq)
+            
             if (context_func["exception"]) {
                 for (let k = 0; k < context_func["exception"].length; k++) {
                     const CurVal = context_func["exception"][k]
