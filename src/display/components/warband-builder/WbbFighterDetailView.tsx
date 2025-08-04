@@ -615,7 +615,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
             }
 
             {/* Notes textarea */}
-            <WbbDetailViewCollapse title="Notes & Lore" initiallyOpen={false}>
+            <WbbDetailViewCollapse title="Notes & Lore" initiallyOpen={false} key={complexstate.keyvar}>
                 <WbbTextarea
                     initialText={warbandmember.model.GetWarbandNotes()}
                     title={warbandmember.model.GetTrueName() + " Notes"}
