@@ -1205,9 +1205,10 @@ class UserWarband extends DynamicContextObject {
     }
 
     /**
+     * Get the stashed currency as object
+     *
      */
     GetStash() {
-
         return {
             ValueDucats: this.GetDucatCostStash(), // stash value in ducats
             ValueGlory: this.GetGloryCostStash(), // stash value in glory

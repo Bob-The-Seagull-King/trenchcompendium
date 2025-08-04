@@ -82,7 +82,7 @@ const WbbPrintViewSimpleOverview: React.FC = () => {
                                 {'Pay Chest'}
                             </div>
                             <div className={'warband-value'}>
-                                {stash.ValueDucats}
+                                {stash.AmountDucats}
                             </div>
                         </div>
                     </div>
@@ -93,7 +93,7 @@ const WbbPrintViewSimpleOverview: React.FC = () => {
                                 {'Glory Points'}
                             </div>
                             <div className={'warband-value'}>
-                                {stash.ValueGlory}
+                                {stash.AmountGlory}
                             </div>
                         </div>
                     </div>
@@ -101,11 +101,10 @@ const WbbPrintViewSimpleOverview: React.FC = () => {
                     <div className={'col-3'}>
                         <div className={'warband-campaign warband-box'}>
                             <div className={'warband-label'}>
-                                {'Campaign Points'}
+                                {'Victory Points'}
                             </div>
                             <div className={'warband-value'}>
-                                {/* @TODO: Add campaign points*/}
-                                {'0'}
+                                {warband.warband_data.GetVictoryPoints()}
                             </div>
                         </div>
                     </div>
@@ -116,7 +115,6 @@ const WbbPrintViewSimpleOverview: React.FC = () => {
                                 {'Warband Rating'}
                             </div>
                             <div className={'warband-value'}>
-
                                 {warband.warband_data.GetCostDucats()}{' Ducats'}
                                 {' | '}
                                 {warband.warband_data.GetCostGlory()}{' Glory'}
