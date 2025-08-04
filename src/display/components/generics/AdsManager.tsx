@@ -10,7 +10,7 @@ declare global {
 }
 
 const COOKIE_KEY = 'ezoic_ads_consent';
-const isProduction = true;
+const isProduction = false;
 // const isProduction = window.location.hostname === 'trench-companion.com';
 
 export const AdsManager: React.FC = () => {
