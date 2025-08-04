@@ -10,19 +10,20 @@ declare global {
 }
 
 const COOKIE_KEY = 'ezoic_ads_consent';
-const isProduction = false;
+const isProduction = true;
 // const isProduction = window.location.hostname === 'trench-companion.com';
 
 export const AdsManager: React.FC = () => {
     const [consent, setConsent] = useState<boolean | null>(null);
 
-    useEffect(() => {
-        if (!isProduction) return;
+    // useEffect(() => {
+    //     if (!isProduction) return;
+    //
+    //     const val = localStorage.getItem(COOKIE_KEY);
+    //     setConsent(val === 'true');
+    // }, []);
 
-        const val = localStorage.getItem(COOKIE_KEY);
-        setConsent(val === 'true');
-    }, []);
-
+    // Show ads in placeholde - check if this is needed?
     useEffect(() => {
         if (!isProduction ) return;
 
