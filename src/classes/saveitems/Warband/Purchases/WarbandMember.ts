@@ -587,7 +587,7 @@ class WarbandMember extends DynamicContextObject {
                 }
             )
 
-            if (maxcount >= (this.MyContext as UserWarband).GetCountOfUpgradeRel(upg.ID)) {
+            if (maxcount != 0 && maxcount <= (this.MyContext as UserWarband).GetCountOfUpgradeRel(upg.ID)) {
                 checkVal = "Warband At Limit For " + upg.UpgradeObject.GetTrueName();
             }
 
