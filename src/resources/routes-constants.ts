@@ -69,6 +69,11 @@ export const ROUTES = {
     PAGE_BLOG_ARTICLE: '/blog/:slug',
 
     // Main Site URL
-    MAIN : 'https://trench-companion.com'
+    MAIN : 'https://trench-companion.com',
 
+    // Campaign Manager Routes
+    CAMPAIGNS_BASE: '/campaigns',
+    CAMPAIGNS_OVERVIEW: '/campaigns',
+    CAMPAIGN_DETAIL: (id: string | number) => `/campaigns/${id}`,
+    CAMPAIGN_NEW: '/campaigns/new',
 }

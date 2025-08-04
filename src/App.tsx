@@ -48,6 +48,9 @@ import {AdsManager} from "./display/components/generics/AdsManager";
 import BlogListPage from "./display/pages/BlogListPage";
 import BlogArticlePage from "./display/pages/BlogArticlePage";
 import {ImageCreditPopoverProvider} from "./utility/ImageCreditPopoverContext";
+import CampaignManager from "./display/campaign-manager/CampaignManager";
+import CampaignSetup from "./display/campaign-manager/CampaignSetup";
+import CampaignOverview from "./display/campaign-manager/CampaignOverview";
 
 
 const App: React.FC = () => {
@@ -114,6 +117,11 @@ const App: React.FC = () => {
                                     {/* Blog Pages */}
                                     <Route path="/blog" element={<BlogListPage />} />
                                     <Route path="/blog/:slug" element={<BlogArticlePage />} />
+
+                                    {/* Campaign Manager Routes*/}
+                                    <Route path="/campaigns" element={<CampaignOverview />} />
+                                    <Route path="/campaigns/new" element={<CampaignSetup />} />
+                                    <Route path="/campaigns/:id" element={<CampaignManager />} />
                                 </Routes>
 
                                 <FooterMain />
