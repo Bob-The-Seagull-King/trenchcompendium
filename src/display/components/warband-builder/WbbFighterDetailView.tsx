@@ -615,8 +615,9 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
             }
 
             {/* Notes textarea */}
-            <WbbDetailViewCollapse title="Notes & Lore" initiallyOpen={false}>
+            <WbbDetailViewCollapse title="Notes & Lore" initiallyOpen={false} >
                 <WbbTextarea
+                    key={complexstate.keyvar}
                     initialText={warbandmember.model.GetWarbandNotes()}
                     title={warbandmember.model.GetTrueName() + " Notes"}
                     onSave={(newText : string) => {
@@ -632,6 +633,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                 {/* Lore  textarea */}
                 <WbbTextarea
                     initialText={warbandmember.model.GetLore()}
+                    key={complexstate.keyvar}
                     title={warbandmember.model.GetTrueName() + " Lore"}
                     onSave={(newText : string) => {
                         warbandmember.model.SaveNote(newText, 'lore')

@@ -200,7 +200,7 @@ export const BaseContextCallTable : CallEventTable = {
                 for (let i = 0; i < context_func["free_purchases"].length; i++) {
                     const NewItem = await faceqmodule.EquipmentFactory.CreateNewFactionEquipment(context_func["free_purchases"][i], null, false);
                     if (NewItem != null) {
-                        await trackVal.AddStash(NewItem);
+                        await trackVal.AddStash(NewItem, true);
                     }
                 }
             }
