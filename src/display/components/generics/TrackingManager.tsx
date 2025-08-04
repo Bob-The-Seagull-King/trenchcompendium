@@ -17,13 +17,24 @@ declare global {
 const isProduction = window.location.hostname === 'trench-companion.com';
 
 // allows for manual event triggers
-export const trackEvent = (action: string, category: string, label?: string, value?: number) => {
+export const trackEvent = (
+    action: string,
+    category: string,
+    label?: string,
+    value?: number
+) => {
     if (typeof window.gtag === 'function') {
-        window.gtag('event', action, {
+        const eventData: Record<string, any> = {
             event_category: category,
-            event_label: label,
-            value: value
-        });
+            event_label: label
+        };
+
+        if (typeof value === 'number') {
+            eventData.value = value;
+            eventData.currency = 'USD';
+        }
+
+        window.gtag('event', action, eventData);
     }
 };
 

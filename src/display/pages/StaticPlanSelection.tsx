@@ -14,17 +14,41 @@ import PayPalSubButton from "../components/Profile/PayPalSubButton";
 import {SYNOD} from "../../resources/api-constants";
 import LoadingOverlay from "../components/generics/Loading-Overlay";
 import PageMetaInformation from "../components/generics/PageMetaInformation";
+import {trackEvent} from "../components/generics/TrackingManager";
 
 const StaticPlanSelection: React.FC = () => {
 
     const navigate = useNavigate();
     const { isLoggedIn, userId, authToken,  loadingUser, SiteUser } = useAuth();
 
-    const handleSunscription = (subscriptionID: string) => {
+    const handleSunscription = (subscriptionID: string, planID: string) => {
+
+        // Send tracking event
+        let label = ''
+        let value = 0
+
+        if (planID == SYNOD.PP_PLAN_MONTH_ID) {
+            label = 'monthly_plan'
+            value = 199 / 100
+        }
+        if (planID == SYNOD.PP_PLAN_YEAR_ID) {
+            label = 'yearly_plan'
+            value = 1999 / 100
+        }
+
+        trackEvent(
+            'purchase',
+            'subscription',
+            label,
+            value
+        );
+
         alert('Subscription successful with ID: '+ subscriptionID);
 
         // Fallback:
-        window.location.reload();
+        setTimeout(() => {
+            window.location.reload();
+        }, 1500);
     };
 
     /** Monthly */
@@ -243,7 +267,7 @@ const StaticPlanSelection: React.FC = () => {
                                 <PayPalSubButton
                                     planId={SYNOD.PP_PLAN_MONTH_ID}
                                     onSuccess={(subscriptionID) => {
-                                        handleSunscription(subscriptionID);
+                                        handleSunscription(subscriptionID, SYNOD.PP_PLAN_MONTH_ID);
                                     }}
                                 />
                             </div>
@@ -404,7 +428,7 @@ const StaticPlanSelection: React.FC = () => {
                             <PayPalSubButton
                                 planId={SYNOD.PP_PLAN_YEAR_ID}
                                 onSuccess={(subscriptionID) => {
-                                    handleSunscription(subscriptionID);
+                                    handleSunscription(subscriptionID, SYNOD.PP_PLAN_YEAR_ID);
                                 }}
                             />
                         </div>
