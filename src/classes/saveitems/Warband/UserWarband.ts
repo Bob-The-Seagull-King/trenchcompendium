@@ -2339,18 +2339,34 @@ class UserWarband extends DynamicContextObject {
                 }
             }
         }
-        if (this.GetAllEquipment().length > 0 && full) {
+        if (full) {
 
             LineList.push("  " )
             LineList.push("  " )
             LineList.push("## Stash ##")
             LineList.push("  " )
 
-            const UpgradesList : string[] = []
-            for (let j = 0; j < this.GetAllEquipment().length; j++) {
-                UpgradesList.push(this.GetAllEquipment()[j].equipment.GetTrueName())
+            // add stashed ducats and glory
+            const stash = this.GetStash();
+
+            LineList.push("Stashed Ducats: " + (stash.AmountDucats > 10e10? "Unlimited" : stash.AmountDucats))
+            LineList.push("Unspent Glory: " + (stash.AmountGlory  > 10e10? "Unlimited" : stash.AmountGlory))
+
+
+            // Add stashed Equipment
+            if( this.GetAllEquipment().length > 0) {
+                LineList.push("  " )
+
+                const UpgradesList : string[] = []
+                for (let j = 0; j < this.GetAllEquipment().length; j++) {
+                    UpgradesList.push(this.GetAllEquipment()[j].equipment.GetTrueName())
+                }
+                LineList.push(UpgradesList.join(', '))
             }
-            LineList.push(UpgradesList.join(', '))
+
+
+
+
         }
 
         if (this.Modifiers.length > 0) {
