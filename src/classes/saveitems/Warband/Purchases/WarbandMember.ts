@@ -150,10 +150,10 @@ class WarbandMember extends DynamicContextObject {
     }
 
     /**
-     * Returns the lore for this warband as string
-     * @constructor
+     * Returns the lore for this fighter as string
+     * @TODO: return lore only for this fighter
      */
-    GetLore () {
+    public GetLore () {
         for (let i = 0; i < this.Notes.length; i++) {
             if (this.Notes[i].title == 'lore') {
                 return this.Notes[i].text
@@ -161,7 +161,34 @@ class WarbandMember extends DynamicContextObject {
         }
         return ''
     }
-    
+
+    /**
+     * Set the Lore text for this fighter
+     * @TODO: Set actual Lore for this fighter
+     * @param text
+     */
+    public SetLore (text: string) {
+        return true;
+    }
+
+    /**
+     * Returns the Notes for this fighter as string
+     * @TODO: return lore only for this fighter
+     */
+    public GetNotes () {
+        return '';
+    }
+    /**
+     * Set the Notes text for this fighter
+     * @TODO: Set actual notes for this fighter
+     * @param text
+     */
+    public SetNotes (text: string) {
+        return true;
+    }
+
+
+
     public SaveNote(text_new : string, title : string) {
         let note : INote | null = null;
         for (let i = 0; i < this.Notes.length; i++) {
