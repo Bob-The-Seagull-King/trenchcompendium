@@ -540,9 +540,19 @@ class UserWarband extends DynamicContextObject {
 
     /**
      * Gets the ID of this warband
-     * @constructor
+     * - like /ghmghmghm1753371797204
      */
     public GetId(): any {
+        return this.ID;
+    }
+
+    /**
+     * Gets the ID of this warband
+     * - Like 2670
+     *
+     * @TODO: Use Post ID as is presented in the URL
+     */
+    public GetPostId(): any {
         return this.ID;
     }
 
@@ -2396,6 +2406,20 @@ class UserWarband extends DynamicContextObject {
                 }
             }
         }
+
+        /**
+         * Add link to the list
+         * - Check if is integer first
+         */
+        if (Number.isInteger(Number(this.GetPostId()))) {
+            LineList.push("  ")
+            LineList.push("---")
+            LineList.push(" ")
+            LineList.push("View online:")
+            LineList.push("https://trench-companion.com/warband/detail/" + this.GetPostId())
+        }
+
+
         this.GeneralCache.exportval = LineList
         return LineList
     }
