@@ -4,18 +4,22 @@
  */
 
 import React, {useState} from 'react'
-import PrivacyPopup from "../components/generics/PrivacyPopup";
+import {TrackingManager} from "../components/generics/TrackingManager";
+import PageMetaInformation from "../components/generics/PageMetaInformation";
 
 const StaticPrivacy: React.FC = () => {
 
-    const [showPopup, setShowPopup] = useState(false);
-
+    const [forceShowPrivacy, setForceShowPrivacy] = useState<number>(0);
 
     return (
         <div className="StaticPrivacy page-static">
-            <div className={'container'}>
+            <PageMetaInformation
+                title={'Privacy'}
+                description={'We value your privacy - Privacy Policy for Trench Companion'}
+            />
 
-                <PrivacyPopup forceShow={showPopup}/>
+            <div className={'container'}>
+                <TrackingManager forceShow={forceShowPrivacy}/>
 
                 <h1>
                     {'Privacy Policy for Trench Companion'}
@@ -39,7 +43,7 @@ const StaticPrivacy: React.FC = () => {
                     }
 
                     <br/>
-                    <div className={'btn btn-secondary btn-sm mt-3 mb-3'} onClick={() => setShowPopup(true)}>
+                    <div className={'btn btn-secondary btn-sm mt-3 mb-3'} onClick={() => setForceShowPrivacy(Date.now())}>
                         {'Change Privacy Settings'}
                     </div>
                 </p>

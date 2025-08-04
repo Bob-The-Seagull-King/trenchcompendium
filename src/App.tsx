@@ -30,7 +30,6 @@ import {AuthProvider} from "./utility/AuthProvider";
 import WbbOverviewPage from "./display/pages/WbbOverviewPage";
 import WbbCreateNewPage from "./display/pages/WbbCreateNewPage";
 import WbbEditPage from "./display/pages/WbbEditPage";
-import PrivacyPopup from "./display/components/generics/PrivacyPopup";
 import {TrackingManager} from "./display/components/generics/TrackingManager";
 import ProfileSettingsPage from "./display/superroutes/ProfileSettingsPage";
 import ProfilePage from "./display/superroutes/ProfilePage";
@@ -125,7 +124,6 @@ const App: React.FC = () => {
                     </PersistGate>
                 </Provider>
 
-                <PrivacyPopup />
             </AuthProvider>
         </>
     )

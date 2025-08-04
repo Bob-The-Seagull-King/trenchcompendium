@@ -4,11 +4,17 @@
 
 
 import React from 'react'
+import PageMetaInformation from "../components/generics/PageMetaInformation";
 
 const StaticContact: React.FC = () => {
     return (
         <div className="StaticContact page-static">
             <div className={'container'}>
+                <PageMetaInformation
+                    title={'Contact us'}
+                    description={'Trench Companion - Contact info'}
+                />
+
                 <h1>Contact</h1>
 
                 <div className={'row'}>
