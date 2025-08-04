@@ -1374,7 +1374,7 @@ class WarbandMember extends DynamicContextObject {
             "getDiscountOfUpgrade",
             upg,
             [upg],
-            maxccurcostount,
+            0,
             {
                 warband: this.MyContext,
                 model: this

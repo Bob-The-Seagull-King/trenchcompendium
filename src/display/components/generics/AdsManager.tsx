@@ -16,7 +16,6 @@ const isProduction = false;
 export const AdsManager: React.FC = () => {
     const [consent, setConsent] = useState<boolean | null>(null);
 
-    console.log(consent);
 
     useEffect(() => {
         if (!isProduction) return;
