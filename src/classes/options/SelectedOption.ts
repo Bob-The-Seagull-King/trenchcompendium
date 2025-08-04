@@ -55,7 +55,6 @@ class SelectedOption {
             null,
             this
         )
-        console.log(this)
     }
 
     /**

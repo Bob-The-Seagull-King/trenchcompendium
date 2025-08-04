@@ -200,7 +200,7 @@ class UserWarband extends DynamicContextObject {
     }
 
     public async BuildModifiersLoc(data : IWarbandProperty[]) {
-        console.log(data);
+        
         if (data == undefined) {return;}
         for (let i = 0; i < data.length; i++) {
             try {
