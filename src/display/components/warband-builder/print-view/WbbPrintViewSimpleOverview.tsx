@@ -59,7 +59,9 @@ const WbbPrintViewSimpleOverview: React.FC = () => {
                                 {'Faction'}
                             </div>
                             <div className={'warband-value'}>
-                                {basevariant?.GetTrueName()}
+                                {/* @TODO: Output base faction name here */}
+                                {/* Like 'Black Grail or Court of the... '*/}
+                                {warband.warband_data.GetFactionName()}
                             </div>
                         </div>
                     </div>
@@ -69,7 +71,10 @@ const WbbPrintViewSimpleOverview: React.FC = () => {
                                 {'Variant'}
                             </div>
                             <div className={'warband-value'}>
-                                {warband.warband_data.GetFaction()?.GetTrueName()}
+                                {/* @TODO: Output variant name or "None" here*/}
+                                {/* @TODO: Output Choice of Sin for court here*/}
+                                {/* Like "Dirge of the great Hegemon", "None" or "Greed" */}
+                                {warband.warband_data.GetFactionName()}
                             </div>
                         </div>
                     </div>
