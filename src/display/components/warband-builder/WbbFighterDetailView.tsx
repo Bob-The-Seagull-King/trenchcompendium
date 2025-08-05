@@ -614,37 +614,6 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                 </div>
             }
 
-            {/* Notes textarea */}
-            <WbbDetailViewCollapse title="Notes & Lore" initiallyOpen={false} >
-                <WbbTextarea
-                    key={complexstate.keyvar}
-                    initialText={warbandmember.model.GetWarbandNotes()}
-                    title={warbandmember.model.GetTrueName() + " Notes"}
-                    onSave={(newText : string) => {
-                        warbandmember.model.SaveNote(newText, 'notes')
-                        
-            
-                        const Manager : ToolsController = ToolsController.getInstance();
-                        Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
-                            () => reloadDisplay())
-                    }}
-                />
-
-                {/* Lore  textarea */}
-                <WbbTextarea
-                    initialText={warbandmember.model.GetLore()}
-                    key={complexstate.keyvar}
-                    title={warbandmember.model.GetTrueName() + " Lore"}
-                    onSave={(newText : string) => {
-                        warbandmember.model.SaveNote(newText, 'lore')
-                        
-            
-                        const Manager : ToolsController = ToolsController.getInstance();
-                        Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
-                            () => reloadDisplay())
-                    }}
-                />
-            </WbbDetailViewCollapse>
 
             {/* Edit Campaign Play */}
             { !play_mode &&
@@ -829,6 +798,36 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                             </>
                         }
 
+                        <h3>Notes & Lore</h3>
+                        {/* @TODO: fix this please */}
+                        {/* Notes textarea */}
+                        <WbbTextarea
+                            initialText={warbandmember.model.GetWarbandNotes()}
+                            title={"Notes"}
+                            onSave={(newText : string) => {
+                                warbandmember.model.SaveNote(newText, 'notes')
+
+                                const Manager : ToolsController = ToolsController.getInstance();
+                                Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
+                                    () => reloadDisplay())
+                            }}
+                        />
+
+                        {/* @TODO: fix this please */}
+                        {/* Lore  textarea */}
+                        <WbbTextarea
+                            initialText={warbandmember.model.GetLore()}
+                            title={"Lore"}
+                            onSave={(newText : string) => {
+                                warbandmember.model.SaveNote(newText, 'lore')
+
+
+                                const Manager : ToolsController = ToolsController.getInstance();
+                                Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
+                                    () => reloadDisplay())
+                            }}
+                        />
+
                         {/* Campaign Modals */}
                         {showXPModal &&
                         <WbbEditFighterExperience
@@ -867,6 +866,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                             currentStatus={fighter.State} 
                             onSubmit={handleStatusUpdate}
                         />}
+
                     </WbbFighterCollapse>
                 </div>
             }
@@ -1003,6 +1003,32 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                                                 fighter={warbandmember}/>
                         ))}
                     </div>
+                    }
+
+                    {/* @TODO: check this please*/}
+                    {warbandmember.model.GetLore() != '' || warbandmember.model.GetWarbandNotes() != '' &&
+                    <div className={'play-mode-notes-wrap'}>
+                        <h3>{'Notes & Lore'}</h3>
+                            {warbandmember.model.GetWarbandNotes() != '' &&
+                                <WbbTextarea
+                                    initialText={warbandmember.model.GetWarbandNotes()}
+                                    title={"Notes"}
+                                    onSave={(newText: string) => {
+                                        fighter.SetNotes(newText);
+                                    }}
+                                />
+                            }
+
+                            {warbandmember.model.GetLore() != '' &&
+                                <WbbTextarea
+                                    initialText={warbandmember.model.GetLore()}
+                                    title={"Lore"}
+                                    onSave={(newText: string) => {
+                                        fighter.SetLore(newText);
+                                    }}
+                                />
+                            }
+                        </div>
                     }
                 </div>
             }
