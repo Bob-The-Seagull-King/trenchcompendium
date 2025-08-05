@@ -51,7 +51,7 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
     };
 
     const { activePopoverId, setActivePopoverId } = usePopover();
-    const { warband, reloadDisplay } = useWarband();
+    const { warband, reloadDisplay, modalIsOpen, setModalIsOpen } = useWarband();
     const { play_mode, edit_mode, view_mode, print_mode, setMode, isOwner } = useWbbMode(); // play mode v2
 
     const [newname, setName] = useState("")
@@ -402,22 +402,23 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
 
     /** Hides popover when a modal is opened */
     useEffect(() => {
-        if (showConfirmDeleteFighterModal
-            || showConfirmRenameFighterModal
-            || showConfirmRefundFighterModal
-            || showConfirmDeleteModifierModal
-            || showConfirmDeleteExplorationModal
-            || showConfirmDeleteEquipmentModal
-            || showConfirmSellEquipmentModal
-            || showConfirmRefundEquipmentModal
-            || showConfirmMoveEquipmentModal
-            || showConfirmDeleteAdvancementModal
-            || showConfirmDeleteInjuryModal
-            || showConfirmRenameWarbandModal
-            || showConfirmExportWarbandModal
-        ) {
-            setActivePopoverId(null);
-        }
+        const isAnyModalOpen =
+            showConfirmDeleteFighterModal ||
+            showConfirmRenameFighterModal ||
+            showConfirmRefundFighterModal ||
+            showConfirmDeleteModifierModal ||
+            showConfirmDeleteExplorationModal ||
+            showConfirmDeleteEquipmentModal ||
+            showConfirmSellEquipmentModal ||
+            showConfirmRefundEquipmentModal ||
+            showConfirmMoveEquipmentModal ||
+            showConfirmDeleteAdvancementModal ||
+            showConfirmDeleteInjuryModal ||
+            showConfirmRenameWarbandModal ||
+            showConfirmExportWarbandModal;
+
+        setActivePopoverId(null);
+        setModalIsOpen(isAnyModalOpen);
     }, [
         showConfirmDeleteFighterModal,
         showConfirmRenameFighterModal,

@@ -40,8 +40,9 @@ interface WbbFighterShow {
 
 const WbbFighterShows : React.FC<WbbFighterShow> = ({ openDetail, detailType, detailPayload, setShowAddFighterEliteModal, setShowAddFighterTroopModal, setShowAddFighterMercenaryModal }) => {
 
-    const { warband, updateKey, reloadDisplay } = useWarband();
+    const { warband, updateKey, reloadDisplay, modalIsOpen } = useWarband();
     const { play_mode, edit_mode, view_mode, print_mode, setMode } = useWbbMode();
+
 
     const sensors = useSensors(
         useSensor(PointerSensor, {
@@ -80,7 +81,9 @@ const WbbFighterShows : React.FC<WbbFighterShow> = ({ openDetail, detailType, de
                 >
                     <SortableContext
                         items={warband.warband_data.GetFighters().map(f => f.model.ID)}
-                        strategy={verticalListSortingStrategy}>
+                        strategy={verticalListSortingStrategy}
+                        disabled={modalIsOpen}
+                    >
                         {warband.warband_data.GetFighters().map((item, index) => (
                             <>
                                 {(item.model.IsElite() && (item.model.State == 'active')) &&
@@ -124,7 +127,9 @@ const WbbFighterShows : React.FC<WbbFighterShow> = ({ openDetail, detailType, de
                 >
                     <SortableContext
                         items={warband.warband_data.GetFighters().map(f => f.model.ID)}
-                        strategy={verticalListSortingStrategy}>
+                        strategy={verticalListSortingStrategy}
+                        disabled={modalIsOpen}
+                    >
                         {warband.warband_data.GetFighters().map((item, index) => (
                             <>
                                 {((!item.model.IsElite() && (!item.model.IsMercenary())) && (item.model.State == 'active')) &&
@@ -168,7 +173,9 @@ const WbbFighterShows : React.FC<WbbFighterShow> = ({ openDetail, detailType, de
                         >
                             <SortableContext
                                 items={warband.warband_data.GetFighters().map(f => f.model.ID)}
-                                strategy={verticalListSortingStrategy}>
+                                strategy={verticalListSortingStrategy}
+                                disabled={modalIsOpen}
+                            >
                                 {warband.warband_data.GetFighters().map((item, index) => (
                                     <>
                                         {(item.model.IsMercenary() && (item.model.State == 'active')) &&
@@ -211,7 +218,9 @@ const WbbFighterShows : React.FC<WbbFighterShow> = ({ openDetail, detailType, de
                         >
                             <SortableContext
                                 items={warband.warband_data.GetFighters().map(f => f.model.ID)}
-                                strategy={verticalListSortingStrategy}>
+                                strategy={verticalListSortingStrategy}
+                                disabled={modalIsOpen}
+                            >
                                 {warband.warband_data.GetFighters().map((item, index) => (
                                     <>
                                         {((item.model.State == 'reserved')) &&
@@ -245,7 +254,9 @@ const WbbFighterShows : React.FC<WbbFighterShow> = ({ openDetail, detailType, de
                         >
                             <SortableContext
                                 items={warband.warband_data.GetFighters().map(f => f.model.ID)}
-                                strategy={verticalListSortingStrategy}>
+                                strategy={verticalListSortingStrategy}
+                                disabled={modalIsOpen}
+                            >
                                 {warband.warband_data.GetFighters().map((item, index) => (
                                     <>
                                         {((item.model.State == 'lost')) &&
@@ -279,7 +290,9 @@ const WbbFighterShows : React.FC<WbbFighterShow> = ({ openDetail, detailType, de
                         >
                             <SortableContext
                                 items={warband.warband_data.GetFighters().map(f => f.model.ID)}
-                                strategy={verticalListSortingStrategy}>
+                                strategy={verticalListSortingStrategy}
+                                disabled={modalIsOpen}
+                            >
                                 {warband.warband_data.GetFighters().map((item, index) => (
                                     <>
                                         {((item.model.State == 'dead')) &&
