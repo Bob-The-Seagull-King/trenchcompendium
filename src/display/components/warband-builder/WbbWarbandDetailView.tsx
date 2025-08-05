@@ -270,7 +270,7 @@ const WbbWarbandDetailView: React.FC<WbbWarbandDetailViewProps> = ({  onClose })
                                 </label>
 
                             </div>
-                            <div className="form-text">
+                            <div className="form-text mb-3">
                                 {'Allowing for Open Exlporation means your warband will no longer be restricted by the need for certain items to be purchased during the Exploration Phase, perfect for one-off games.'}
                             </div>
 
