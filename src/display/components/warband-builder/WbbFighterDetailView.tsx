@@ -661,7 +661,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                                 <h3>{'Battle Scars'}</h3>
 
                                 {(fighter.IsElite() && edit_mode) &&
-                                    <div className={'btn btn-primary btn-sm edit-battle-scar-btn'}
+                                    <div className={'btn btn-primary btn-sm edit-btn'}
                                         onClick={() => setShowEditScars(true)}>
                                         <FontAwesomeIcon icon={faPen} className="icon-inline-left-l"/>
                                         {'Edit'}
@@ -679,7 +679,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                                         return (
                                             <div key={index} className="battle-scar-box">
                                                 {isSkull &&
-                                                    <FontAwesomeIcon icon={faSkull} className={'skull-icon'}/>
+                                                    <FontAwesomeIcon icon={faSkull} className={'final-icon'}/>
                                                 }
                                                 {isChecked &&
                                                     <FontAwesomeIcon icon={faTimes}/>

@@ -79,11 +79,12 @@
 
 
     // Battle Scar Boxes
-    .battle-scars
+    .battle-scars,
+    .failed-promo
         position: relative
         margin-bottom: 30px
 
-        .edit-battle-scar-btn
+        .edit-btn
             position: absolute
             top: 0
             right: 0
@@ -134,13 +135,16 @@
         color: $color-highlight-text
 
 // // //
-// Battle Scar Boxes global
-.battle-scar-boxes
+// Battle Scar & failed promotion Boxes global
+//
+.battle-scar-boxes,
+.failed-promo-boxes
     display: flex
     flex-wrap: wrap
     gap: 5px
 
-    .battle-scar-box
+    .battle-scar-box,
+    .failed-promo-box
         position: relative
         height: 35px
         width: 35px
@@ -153,7 +157,7 @@
         &:last-of-type
             border: 1px solid $color-highlight-text
 
-        .skull-icon
+        .final-icon
             opacity: .25
             z-index: 1
             color: $color-highlight-text
@@ -167,8 +171,14 @@
             left: 50%
             transform: translate(-50%, -50%)
 
-.WbbEditBattleScars
     .plusscar
         color: $color-highlight-text
     .minusscar
         opacity: 0.3
+
+    .plusfailed
+        color: $green
+    .minusfailed
+        opacity: 0.3
+
+.WbbEditFailedPromotionModal

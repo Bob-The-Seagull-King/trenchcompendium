@@ -200,7 +200,7 @@ const WbbPrintViewSimpleFighter: React.FC<WbbPrintViewSimpleFighterProps> = ({ f
                                         return (
                                             <div key={index} className="battle-scar-box">
                                                 {isSkull &&
-                                                    <FontAwesomeIcon icon={faSkull} className={'skull-icon'}/>
+                                                    <FontAwesomeIcon icon={faSkull} className={'final-icon'}/>
                                                 }
                                                 {isChecked &&
                                                     <FontAwesomeIcon icon={faTimes}/>
