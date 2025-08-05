@@ -1976,7 +1976,7 @@
         "id": "eq_ironwallkalkan",
         "name": "Iron Wall Kalkan",
         "source": "core",
-        "tags": {"trait": true, "brazen_bull": true},
+        "tags": {"trait": true},
         "category": "armour",
         "distance": null,
         "stats": {
