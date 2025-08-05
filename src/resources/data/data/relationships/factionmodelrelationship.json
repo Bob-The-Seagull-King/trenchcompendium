@@ -1795,7 +1795,7 @@
         "model_id" : "md_grailthrall_bereaved",
         "captain" : false,
         "mercenary": false,
-        "cost" : 25,
+        "cost" : 30,
         "cost_type" : 0,
         "restricted_models" : [],
         "warband_minimum" : 0,
