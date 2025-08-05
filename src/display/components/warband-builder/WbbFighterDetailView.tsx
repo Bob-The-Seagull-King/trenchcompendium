@@ -1014,7 +1014,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                                     initialText={warbandmember.model.GetWarbandNotes()}
                                     title={"Notes"}
                                     onSave={(newText: string) => {
-                                        fighter.SetNotes(newText);
+                                        // fighter.SetNotes(newText);
                                     }}
                                 />
                             }
@@ -1024,7 +1024,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                                     initialText={warbandmember.model.GetLore()}
                                     title={"Lore"}
                                     onSave={(newText: string) => {
-                                        fighter.SetLore(newText);
+                                        // fighter.SetLore(newText);
                                     }}
                                 />
                             }
