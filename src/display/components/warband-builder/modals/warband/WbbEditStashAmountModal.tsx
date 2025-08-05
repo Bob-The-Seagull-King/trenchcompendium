@@ -59,8 +59,6 @@ const WbbEditStashAmountModal: React.FC<WbbEditVictoryPointsProps> = ({
                             }
                         </>
                     }
-
-
                 </div>
 
                 <div className="mb-3">
