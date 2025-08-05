@@ -1282,6 +1282,7 @@ class UserWarband extends DynamicContextObject {
         }
         return TotalGloryCost
     }
+    
 
     public GetGloryCostStash(discount = false) {
         
@@ -1554,8 +1555,8 @@ class UserWarband extends DynamicContextObject {
 
     public GetCountOfModel(id : string) {
         let count = 0;
-        for (let i = 0; i < this.Models.length; i++) {
-            if ((this.Models[i].HeldObject as WarbandMember).CurModel.ID == id) {
+        for (let i = 0; i < this.GetUsableFighters().length; i++) {
+            if ((this.GetUsableFighters()[i].model).CurModel.ID == id) {
                 count ++;
             }
         }
@@ -1565,9 +1566,9 @@ class UserWarband extends DynamicContextObject {
 
     public GetCountOfRel(id : string) {
         let count = 0;
-        for (let i = 0; i < this.Models.length; i++) {
-            if ((this.Models[i].HeldObject as WarbandMember).State == 'dead') { continue; }
-            const inter = this.Models[i].CustomInterface
+        for (let i = 0; i < this.GetUsableFighters().length; i++) {
+            if ((this.GetUsableFighters()[i].model).State == 'dead') { continue; }
+            const inter = this.GetUsableFighters()[i].purchase.CustomInterface
             if (inter) {
                 if (inter.id == id) {
                     count ++;
@@ -1579,8 +1580,8 @@ class UserWarband extends DynamicContextObject {
 
     public GetCountOfUpgradeRel(id : string) {
         let count = 0;
-        for (let i = 0; i < this.Models.length; i++) {
-            count += ((this.Models[i].HeldObject as WarbandMember).GetUpgradeCount(id))
+        for (let i = 0; i < this.GetUsableFighters().length; i++) {
+            count += ((this.GetUsableFighters()[i].model).GetUpgradeCount(id))
         }
         return count;
     }
@@ -1598,16 +1599,16 @@ class UserWarband extends DynamicContextObject {
                 }
             }
         }
-        for (let i = 0; i < this.Models.length; i++) {
-            count += ((this.Models[i].HeldObject as WarbandMember).GetEquipmentCount(id))
+        for (let i = 0; i < this.GetUsableFighters().length; i++) {
+            count += ((this.GetUsableFighters()[i].model).GetEquipmentCount(id))
         }
         return count;
     }
 
     public async GetCountOfKeyword(id : string) {
         let count = 0;
-        for (let i = 0; i < this.Models.length; i++) {
-            const istruth = await (this.Models[i].HeldObject as WarbandMember).IsKeywordPresent(id)
+        for (let i = 0; i < this.GetUsableFighters().length; i++) {
+            const istruth = await (this.GetUsableFighters()[i].model).IsKeywordPresent(id)
             if (istruth) {
                 count ++;
             }
@@ -1617,8 +1618,8 @@ class UserWarband extends DynamicContextObject {
 
     public async GetCountOfTag(id : string, truthval : boolean) {
         let count = 0;
-        for (let i = 0; i < this.Models.length; i++) {
-            const istruth = await (this.Models[i].HeldObject as WarbandMember).IsTagPresent(id)
+        for (let i = 0; i < this.GetUsableFighters().length; i++) {
+            const istruth = await (this.GetUsableFighters()[i].model).IsTagPresent(id)
             if (istruth == truthval) {
                 count ++;
             }
