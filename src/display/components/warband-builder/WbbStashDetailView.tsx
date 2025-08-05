@@ -30,9 +30,6 @@ const WbbStashDetailView: React.FC<WbbStashDetailViewProps> = ({ onClose }) => {
     const { play_mode, edit_mode, view_mode, print_mode, setMode } = useWbbMode(); // play mode v2
     if (warband == null) return (<div>Loading...</div>);
 
-    console.log('edit_mode');
-    console.log(edit_mode);
-
     const [stash, setStash] = useState(warband.warband_data.GetStash())
 
     const [stashkey, setstashkey] = useState(0)
@@ -103,14 +100,14 @@ const WbbStashDetailView: React.FC<WbbStashDetailViewProps> = ({ onClose }) => {
                                      onClick={() => setShowAddDucats(true)}
                                      style={{marginRight: "0.5rem"}}>
                                     <FontAwesomeIcon icon={faCoins} className="icon-inline-left-l"/>
-                                    {'Add Ducats'}
+                                    {'Edit Ducats'}
                                 </div>
                             }
                             {stash.AmountGlory < 10e10 &&
                                 <div className={'btn btn-primary'}
                                      onClick={() => setShowAddGlory(true)}>
                                     <FontAwesomeIcon icon={faTrophy} className="icon-inline-left-l"/>
-                                    {'Add Glory'}
+                                    {'Edit Glory'}
                                 </div>
                             }
                         </div>
