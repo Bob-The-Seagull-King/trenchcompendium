@@ -1688,7 +1688,7 @@
             "number": 3
         }},
         "options": [],
-        "faction_id" : ["fc_cultoftheblackgrail"],
+        "faction_id" : ["fc_cultoftheblackgrail","fc_cultoftheblackgrail_fv_dirgeofthegreathegemon"],
         "model_id" : "md_plagueknight",
         "captain" : false,
         "mercenary": false,
