@@ -59,7 +59,9 @@ const WbbPrintViewSimpleOverview: React.FC = () => {
                                 {'Faction'}
                             </div>
                             <div className={'warband-value'}>
-                                {basevariant?.GetTrueName()}
+                                {/* @TODO: Output base faction name here */}
+                                {/* Like 'Black Grail or Court of the... '*/}
+                                {warband.warband_data.GetFactionName()}
                             </div>
                         </div>
                     </div>
@@ -69,7 +71,10 @@ const WbbPrintViewSimpleOverview: React.FC = () => {
                                 {'Variant'}
                             </div>
                             <div className={'warband-value'}>
-                                {warband.warband_data.GetFaction()?.GetTrueName()}
+                                {/* @TODO: Output variant name or "None" here*/}
+                                {/* @TODO: Output Choice of Sin for court here*/}
+                                {/* Like "Dirge of the great Hegemon", "None" or "Greed" */}
+                                {warband.warband_data.GetFactionName()}
                             </div>
                         </div>
                     </div>
@@ -82,7 +87,7 @@ const WbbPrintViewSimpleOverview: React.FC = () => {
                                 {'Pay Chest'}
                             </div>
                             <div className={'warband-value'}>
-                                {stash.ValueDucats}
+                                {stash.AmountDucats}
                             </div>
                         </div>
                     </div>
@@ -93,7 +98,7 @@ const WbbPrintViewSimpleOverview: React.FC = () => {
                                 {'Glory Points'}
                             </div>
                             <div className={'warband-value'}>
-                                {stash.ValueGlory}
+                                {stash.AmountGlory}
                             </div>
                         </div>
                     </div>
@@ -101,11 +106,10 @@ const WbbPrintViewSimpleOverview: React.FC = () => {
                     <div className={'col-3'}>
                         <div className={'warband-campaign warband-box'}>
                             <div className={'warband-label'}>
-                                {'Campaign Points'}
+                                {'Victory Points'}
                             </div>
                             <div className={'warband-value'}>
-                                {/* @TODO: Add campaign points*/}
-                                {'0'}
+                                {warband.warband_data.GetVictoryPoints()}
                             </div>
                         </div>
                     </div>
@@ -116,7 +120,6 @@ const WbbPrintViewSimpleOverview: React.FC = () => {
                                 {'Warband Rating'}
                             </div>
                             <div className={'warband-value'}>
-
                                 {warband.warband_data.GetCostDucats()}{' Ducats'}
                                 {' | '}
                                 {warband.warband_data.GetCostGlory()}{' Glory'}

@@ -540,9 +540,19 @@ class UserWarband extends DynamicContextObject {
 
     /**
      * Gets the ID of this warband
-     * @constructor
+     * - like /ghmghmghm1753371797204
      */
     public GetId(): any {
+        return this.ID;
+    }
+
+    /**
+     * Gets the ID of this warband
+     * - Like 2670
+     *
+     * @TODO: Use Post ID as is presented in the URL
+     */
+    public GetPostId(): any {
         return this.ID;
     }
 
@@ -1195,9 +1205,10 @@ class UserWarband extends DynamicContextObject {
     }
 
     /**
+     * Get the stashed currency as object
+     *
      */
     GetStash() {
-
         return {
             ValueDucats: this.GetDucatCostStash(), // stash value in ducats
             ValueGlory: this.GetGloryCostStash(), // stash value in glory
@@ -2329,18 +2340,34 @@ class UserWarband extends DynamicContextObject {
                 }
             }
         }
-        if (this.GetAllEquipment().length > 0 && full) {
+        if (full) {
 
             LineList.push("  " )
             LineList.push("  " )
             LineList.push("## Stash ##")
             LineList.push("  " )
 
-            const UpgradesList : string[] = []
-            for (let j = 0; j < this.GetAllEquipment().length; j++) {
-                UpgradesList.push(this.GetAllEquipment()[j].equipment.GetTrueName())
+            // add stashed ducats and glory
+            const stash = this.GetStash();
+
+            LineList.push("Stashed Ducats: " + (stash.AmountDucats > 10e10? "Unlimited" : stash.AmountDucats))
+            LineList.push("Unspent Glory: " + (stash.AmountGlory  > 10e10? "Unlimited" : stash.AmountGlory))
+
+
+            // Add stashed Equipment
+            if( this.GetAllEquipment().length > 0) {
+                LineList.push("  " )
+
+                const UpgradesList : string[] = []
+                for (let j = 0; j < this.GetAllEquipment().length; j++) {
+                    UpgradesList.push(this.GetAllEquipment()[j].equipment.GetTrueName())
+                }
+                LineList.push(UpgradesList.join(', '))
             }
-            LineList.push(UpgradesList.join(', '))
+
+
+
+
         }
 
         if (this.Modifiers.length > 0) {
@@ -2396,6 +2423,20 @@ class UserWarband extends DynamicContextObject {
                 }
             }
         }
+
+        /**
+         * Add link to the list
+         * - Check if is integer first
+         */
+        if (Number.isInteger(Number(this.GetPostId()))) {
+            LineList.push("  ")
+            LineList.push("---")
+            LineList.push(" ")
+            LineList.push("View online:")
+            LineList.push("https://trench-companion.com/warband/detail/" + this.GetPostId())
+        }
+
+
         this.GeneralCache.exportval = LineList
         return LineList
     }
