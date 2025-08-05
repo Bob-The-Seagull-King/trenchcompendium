@@ -1179,6 +1179,7 @@ class WarbandMember extends DynamicContextObject {
         }
         const Groups : UpgradesGrouped = await this.getContextuallyAvailableUpgrades();
         const completegroups : MemberUpgradesGrouped = {}
+        const foundIDS : string[] = []
         const Events : EventRunner = new EventRunner();
 
         for (let i = 0; i < Object.keys(Groups).length; i++) {
@@ -1205,6 +1206,7 @@ class WarbandMember extends DynamicContextObject {
             for (let j = 0; j < Groups[special_cat].length; j++) {
 
                 const Presentation : MemberUpgradePresentation = await this.CalcGivenPurchase(Groups[special_cat][j], special_cat, limit_of_category);
+                foundIDS.push(Groups[special_cat][j].ID)
                 if (completegroups[special_cat]) {
                     completegroups[special_cat].upgrades.push(Presentation)
                 } else {
@@ -1216,9 +1218,164 @@ class WarbandMember extends DynamicContextObject {
                 }
             }
         }
+
+        for (let i = 0; i < this.Upgrades.length; i++) {
+            if (this.Upgrades[i].CustomInterface != undefined) {
+                const upgraw = await UpgradeFactory.CreateModelUpgrade(this.Upgrades[i].CustomInterface as IModelUpgradeRelationship, this);
+
+                if (!foundIDS.includes(upgraw.ID)) {
+                    const special_cat = upgraw.GetSpecialCategory()
+                    let limit_of_category = 0;
+                    if (this.MyContext) {
+                        limit_of_category = await Events.runEvent(
+                                "getUpgradeCategoryLimit",
+                                (this.MyContext),
+                                [],
+                                limit_of_category,
+                                special_cat
+                            )
+                    }
+                    limit_of_category = await Events.runEvent(
+                            "getUpgradeCategoryLimit",
+                            (this),
+                            [],
+                            limit_of_category,
+                            special_cat
+                        )
+
+
+                    const Presentation : MemberUpgradePresentation = await this.CaclExistingPurchase(this.Upgrades[i], upgraw, special_cat, limit_of_category);
+                    foundIDS.push(upgraw.ID)
+                    if (completegroups[special_cat]) {
+                        completegroups[special_cat].upgrades.push(Presentation)
+                    } else {
+                        completegroups[special_cat] = 
+                            {
+                                limit: limit_of_category,
+                                upgrades: [Presentation]
+                        }
+                    }
+
+                }
+            }
+        }        
+
         this.GeneralCache.upgrade_collections = completegroups
         return completegroups;
 
+    }
+    
+
+    public async CaclExistingPurchase(upg : WarbandPurchase, upgraw : ModelUpgradeRelationship, category: string, limit : number | null): Promise<MemberUpgradePresentation> {
+        const Events = new EventRunner();
+        let limit_of_category = 0;
+        if (limit == null) {
+            if (this.MyContext) {
+                limit_of_category = await Events.runEvent(
+                        "getUpgradeCategoryLimit",
+                        (this.MyContext),
+                        [],
+                        limit_of_category,
+                        category
+                    )
+            }
+            limit_of_category = await Events.runEvent(
+                    "getUpgradeCategoryLimit",
+                    (this),
+                    [],
+                    limit_of_category,
+                    category
+                )
+        } else {
+            limit_of_category = limit;
+        }
+
+        let foundpurchase : WarbandPurchase | null = null;
+        for (let k = 0; k < this.Upgrades.length; k++) {
+            if ((this.Upgrades[k].HeldObject as Upgrade).ID == upgraw.UpgradeObject.ID) {
+                foundpurchase = this.Upgrades[k];
+            }
+        }
+
+        let maxcount = upgraw.WarbandLimit;
+        maxcount = await Events.runEvent(
+            "getUpgradeLimitTrue",
+            upgraw,
+            [],
+            maxcount,
+            {
+                warband: this.MyContext,
+                model: this
+            }
+        )
+        let maxccurcostount = upgraw.Cost;
+        maxccurcostount = await Events.runEvent(
+            "getCostOfUpgrade",
+            upgraw,
+            [upg],
+            maxccurcostount,
+            {
+                warband: this.MyContext,
+                model: this
+            }
+        )
+        maxccurcostount = await Events.runEvent(
+            "getCostOfUpgrade",
+            this,
+            [upg],
+            maxccurcostount,
+            {
+                warband: this.MyContext,
+                model: this
+            }
+        )
+        maxccurcostount = await Events.runEvent(
+            "getCostOfUpgrade",
+            this.MyContext as UserWarband,
+            [upg],
+            maxccurcostount,
+            {
+                warband: this.MyContext,
+                model: this
+            }
+        )
+        
+        let discount_val = await Events.runEvent(
+            "getDiscountOfUpgrade",
+            upgraw,
+            [upgraw],
+            0,
+            {
+                warband: this.MyContext,
+                model: this
+            }
+        );
+        if (upg.CostType == 0) {
+            const ducatbudget = await this.GetUpgradeBudgetDucats()
+            if (ducatbudget > maxccurcostount) {
+                discount_val += maxccurcostount
+            } else {
+                discount_val += ducatbudget
+            }
+        }
+        if (upg.CostType == 1) {
+            const glorybudget = await this.GetUpgradeBudgetGlory()
+            if (glorybudget > maxccurcostount) {
+                discount_val += maxccurcostount
+            } else {
+                discount_val += glorybudget
+            }
+        }
+
+        return {
+            upgrade : upgraw,
+            purchase : upg,
+            allowed : false,
+            cur_count: (this.MyContext as UserWarband).GetCountOfUpgradeRel(upgraw.ID),
+            max_count: maxcount,
+            discount : discount_val,
+            cost: maxccurcostount
+        }
     }
 
     public async GetExplorationSkills() {
