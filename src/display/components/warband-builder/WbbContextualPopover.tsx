@@ -10,7 +10,7 @@ import {
     faArrowUp,
     faArrowLeft,
     faCoins,
-    faEdit, faPen, faFileExport, faDice, faSignature, faPrint, faArrowRotateLeft, faSackDollar, faXmark, faCheck
+    faEdit, faPen, faFileExport, faDice, faSignature, faPrint, faArrowRotateLeft, faSackDollar, faXmark, faCheck, faExclamationTriangle
 } from '@fortawesome/free-solid-svg-icons';
 import { usePopover } from '../../../context/PopoverContext';
 import { useWarband } from '../../../context/WarbandContext';
@@ -912,10 +912,17 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                         {'Are you sure you want to delete this Equipment?'}
                     </div>
                     {item.equipment &&
-                        <div >
-                            <strong>{item.equipment.Name }</strong>?
+                        <div>
+                            <strong>{item.equipment.Name}</strong>?
                         </div>
                     }
+                    <br/>
+                    <p>
+                        <FontAwesomeIcon icon={faExclamationTriangle} className={'icon-inline-left-l icon-wraning'}/>
+                        <i>
+                            {'This will remove the equipment and NOT refund its costs.'}
+                        </i>
+                    </p>
                 </Modal.Body>
 
                 <Modal.Footer>
