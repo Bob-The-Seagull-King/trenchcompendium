@@ -194,7 +194,7 @@ const WbbPrintViewSimpleFighter: React.FC<WbbPrintViewSimpleFighterProps> = ({ f
                                 <div className="battle-scar-boxes">
                                     {Array.from({length: 3}, (_, i) => {
                                         const index = i + 1;
-                                        const isChecked = index <= fighter.model.Injuries.length;
+                                        const isChecked = index <= fighter.model.GetBattleScars();
                                         const isSkull = index === 3;
 
                                         return (
