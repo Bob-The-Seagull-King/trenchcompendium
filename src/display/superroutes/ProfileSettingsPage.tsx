@@ -135,18 +135,6 @@ const ProfileSettingsPage: React.FC = () => {
                 description={'Adjust your personal settings, manage your profile, and tailor your Trench Companion experience'}
             />
 
-            <ToastContainer
-                position="bottom-right"
-                autoClose={5000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-            />
-
             <div className="container">
                 <div className="row">
                     <div className="col-12">

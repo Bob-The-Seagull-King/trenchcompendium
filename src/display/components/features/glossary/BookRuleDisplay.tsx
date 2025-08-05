@@ -63,19 +63,6 @@ const BookRuleDisplay = (props: any) => {
     return (
         <ErrorBoundary fallback={<div>Something went wrong with BookRuleDisplay.tsx</div>}>
             <div className={`book-rules-wrap ${applycurse === 'true' ? 'glitch' : ''}`}>
-                <ToastContainer
-                            position="top-center"
-                            autoClose={5000}
-                            hideProgressBar={false}
-                            newestOnTop={false}
-                            closeOnClick
-                            rtl={false}
-                            pauseOnFocusLoss
-                            draggable
-                            pauseOnHover
-                            />
-
-
                 { ruleObject.Sections != undefined && ruleObject.Sections?.length > 0 && (
                     <>
                         {/* Page Anchors */}
