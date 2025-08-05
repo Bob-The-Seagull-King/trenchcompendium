@@ -123,7 +123,6 @@ const App: React.FC = () => {
                         </Router>
                     </PersistGate>
                 </Provider>
-
             </AuthProvider>
         </>
     )
