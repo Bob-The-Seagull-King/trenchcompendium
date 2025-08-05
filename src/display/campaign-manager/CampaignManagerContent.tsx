@@ -5,6 +5,7 @@ import LoadingOverlay from "../components/generics/Loading-Overlay";
 import CampaignSummary from "./components/CampaignSummary";
 import CampaignWarbands from "./components/CampaignWarbands";
 import CampaignPlayers from "./components/CampaignPlayers";
+import CMManagePanel from "./components/CMManagePanel";
 
 const CampaignManagerContent: React.FC = () => {
     const { userId, isLoggedIn } = useAuth()
@@ -33,12 +34,12 @@ const CampaignManagerContent: React.FC = () => {
             <div className={'CampaignManager-main'}>
                 <div className={'container'}>
                     <div className={'row'}>
-                        <div className={'col-12 col-md-8'}>
+                        <div className={'col-12 col-md-7'}>
                             <CampaignSummary />
-
                         </div>
 
-                        <div className={'col-12 col-md-4'}>
+                        <div className={'col-12 col-md-5'}>
+                            <CMManagePanel />
                             <CampaignWarbands />
                             <CampaignPlayers />
                         </div>

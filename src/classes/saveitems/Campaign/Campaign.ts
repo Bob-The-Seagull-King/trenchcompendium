@@ -47,7 +47,9 @@ export class Campaign {
      * Returns the global campaign notes as string
      */
     GetNotes () {
-        return '';
+        return "This is a test campaign created for demonstration purposes.\n" +
+            "Feel free to explore all features without consequences.\n" +
+            "Data will not be saved permanently.";
     }
 
     /**
@@ -57,24 +59,30 @@ export class Campaign {
     GetWarbands () {
         return [
             {
-                warbandImageId: 1,
+                warbandName: 'Serpentis Voluptia',
+                warbandImageId: 2905,
+                warbandId: 3,
                 warbandImageURL: 'https://synod.trench-companion.com/wp-content/uploads/2025/07/Black-Grail-Dirge-Faction-Image.jpg',
                 playerName: 'Player 1 name',
                 playerProfileUrl: 'lorem',
                 playerId: 3,
                 playerImageId: 2,
                 playerImageURL: 'https://synod.trench-companion.com/wp-content/uploads/2025/07/Chorister-Profile-Picture.jpg',
-                warbandRating: '699 Ducats | 2 Glory'
+                warbandRating: '699 Ducats | 2 Glory',
+                warbandRound: 2
             },
             {
-                warbandImageId: 1,
+                warbandName: 'The knights of the holy father and son',
+                warbandImageId: 2877,
+                warbandId: 3,
                 warbandImageURL: 'https://synod.trench-companion.com/wp-content/uploads/2025/05/Court-of-the-seven-headed-serpent-Faction-Image-2.jpg',
                 playerName: 'Player 2 name',
                 playerProfileUrl: 'lorem',
                 playerId: 3,
                 playerImageId: 2,
                 playerImageURL: 'https://synod.trench-companion.com/wp-content/uploads/2025/07/Yuzbasi-Captain-Profile-Picture-300x300.jpg',
-                warbandRating: '680 Ducats | 0 Glory'
+                warbandRating: '680 Ducats | 0 Glory',
+                warbandRound: 3
             }
         ]
 
@@ -104,5 +112,43 @@ export class Campaign {
                 playerImageURL: 'https://synod.trench-companion.com/wp-content/uploads/2025/07/Yuzbasi-Captain-Profile-Picture-300x300.jpg',
             }
         ]
+    }
+
+    /**
+     * This should create an announcement for this campaign at the current timestamp
+     * @TODO: add functionality
+     */
+    public CreateAnnouncement ( announcement: string ) {
+        // @TODO: create announcement here
+
+        return;
+    }
+
+    /**
+     * Returns the most recent announcement for this campaign with date
+     * @TODO:
+     */
+    public GetLatestAnnouncement () {
+
+        return ({
+            date: '17.05.2025',
+            text: "Welcome to the new campaign!\n" +
+                "Here are the initial rules:\n" +
+                "- No cheating\n" +
+                "- Report all bugs\n" +
+                "- Have fun!\n" +
+                "Let the games begin!"
+        });
+    }
+
+    /**
+     * Invita players to a campaign
+     *
+     * @TODO
+     */
+    public InvitePlayers(playerIDs: string[]) {
+        alert(playerIDs.join(', '));
+        // @TODO
+        return;
     }
 }

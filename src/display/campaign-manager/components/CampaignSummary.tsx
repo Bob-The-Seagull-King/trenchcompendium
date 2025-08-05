@@ -2,6 +2,8 @@ import React from 'react';
 import {useCampaign} from "../../../context/CampaignContext";
 import CMTextarea from "../micro-components/CMTextarea";
 import {useAuth} from "../../../utility/AuthContext";
+import CMLatestAnnouncement from "./CMLatestAnnouncement";
+import CMProgressGraph from "./CMProgressGraph";
 
 const CampaignSummary: React.FC = () => {
     const { campaign } = useCampaign();
@@ -51,6 +53,10 @@ const CampaignSummary: React.FC = () => {
                         canEdit={campaign.IsAdmin(userId ? userId : 0)}
                     />
                 </div>
+
+                <CMLatestAnnouncement />
+
+                <CMProgressGraph />
 
             </div>
         </div>

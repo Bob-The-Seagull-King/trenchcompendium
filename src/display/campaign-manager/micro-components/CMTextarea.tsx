@@ -30,7 +30,7 @@ const CMTextarea: React.FC<CMTextareaProps> = ({ initialText, title, onSave, can
 
     return (
         <div className="CMTextarea">
-            <div className={'WbbTextarea-title'}>
+            <div className={'CMTextarea-title'}>
                 {title}
 
                 {canEdit &&
