@@ -83,7 +83,7 @@ const WbbCampaignDetailView: React.FC<WbbCampaignDetailViewProps> = ({ onClose }
     const [showFailedPromotionsModal, setshowFailedPromotionsModal] = useState(false);
     const handleFailedpromotionsUpdate = ( newCycle: number ) => {
         setfailedpromotions(newCycle)
-        warband?.warband_data.SetCurrentFailedPromotions(newCycle);
+        warband?.warband_data.SetCurrentCycle(newCycle);
         const Manager : ToolsController = ToolsController.getInstance();
         Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(() => {
         reloadDisplay()

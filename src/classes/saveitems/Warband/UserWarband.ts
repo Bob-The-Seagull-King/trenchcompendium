@@ -1154,10 +1154,6 @@ class UserWarband extends DynamicContextObject {
         this.Context.CampaignRound = num;
     }
 
-    SetCurrentFailedPromotions(num : number) {
-        this.Context.FailedPromotions = num;
-    }
-
     /**
      * This returns the maximum campaign cycle for this warband
      * @constructor
