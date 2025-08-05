@@ -799,6 +799,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                         }
 
                         <h3>Notes & Lore</h3>
+                        <div key={complexstate.keyvar}>
                         {/* Notes textarea */}
                         <WbbTextarea
                             initialText={warbandmember.model.GetWarbandNotes()}
@@ -825,6 +826,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                                     () => reloadDisplay())
                             }}
                         />
+                        </div>
 
                         {/* Campaign Modals */}
                         {showXPModal &&
