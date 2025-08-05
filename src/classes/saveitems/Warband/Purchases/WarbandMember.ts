@@ -1350,6 +1350,22 @@ class WarbandMember extends DynamicContextObject {
                 model: this
             }
         );
+        if (upg.CostType == 0) {
+            const ducatbudget = await this.GetUpgradeBudgetDucats()
+            if (ducatbudget > maxccurcostount) {
+                discount_val += maxccurcostount
+            } else {
+                discount_val += ducatbudget
+            }
+        }
+        if (upg.CostType == 1) {
+            const glorybudget = await this.GetUpgradeBudgetGlory()
+            if (glorybudget > maxccurcostount) {
+                discount_val += maxccurcostount
+            } else {
+                discount_val += glorybudget
+            }
+        }
 
         return {
             upgrade : upgraw,
