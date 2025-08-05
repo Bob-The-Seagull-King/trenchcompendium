@@ -151,7 +151,6 @@ class WarbandMember extends DynamicContextObject {
 
     /**
      * Returns the lore for this fighter as string
-     * @TODO: return lore only for this fighter
      */
     public GetLore () {
         for (let i = 0; i < this.Notes.length; i++) {
@@ -164,29 +163,19 @@ class WarbandMember extends DynamicContextObject {
 
     /**
      * Set the Lore text for this fighter
-     * @TODO: Set actual Lore for this fighter
      * @param text
      */
     public SetLore (text: string) {
-        return true;
+        this.SaveNote(text, "lore")
     }
-
-    /**
-     * Returns the Notes for this fighter as string
-     * @TODO: return lore only for this fighter
-     */
-    public GetNotes () {
-        return '';
-    }
+    
     /**
      * Set the Notes text for this fighter
-     * @TODO: Set actual notes for this fighter
      * @param text
      */
     public SetNotes (text: string) {
-        return true;
+        this.SaveNote(text, "notes")
     }
-
 
 
     public SaveNote(text_new : string, title : string) {

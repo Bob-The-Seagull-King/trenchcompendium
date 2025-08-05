@@ -799,9 +799,9 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                         }
 
                         <h3>Notes & Lore</h3>
-                        {/* @TODO: fix this please */}
                         {/* Notes textarea */}
                         <WbbTextarea
+                            key={complexstate.keyvar}
                             initialText={warbandmember.model.GetWarbandNotes()}
                             title={"Notes"}
                             onSave={(newText : string) => {
@@ -812,10 +812,10 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                                     () => reloadDisplay())
                             }}
                         />
-
-                        {/* @TODO: fix this please */}
+                        
                         {/* Lore  textarea */}
                         <WbbTextarea
+                            key={complexstate.keyvar}
                             initialText={warbandmember.model.GetLore()}
                             title={"Lore"}
                             onSave={(newText : string) => {
