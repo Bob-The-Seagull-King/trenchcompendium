@@ -54,15 +54,20 @@ const BaseHeader: React.FC<IControllerProp> = (prop: any) => {
                 <button className="open-offcanvas-nav-btn" onClick={handleShow}>
                     <FontAwesomeIcon icon={faBars} className=""/>
                 </button>
-                <div className="logo-wrap">
+
+                <CustomNavLink
+                    link={'/'}
+                    runfunc={() => NavigateHome()}
+                    classes={'logo-wrap'}
+                >
                     <img src={theme === 'dark' ? logoDarkMode : logoLightMode}
                          alt="Trench Companion Logo"
                          className={'logo'}
                          onClick={() => NavigateHome()}
                     />
-                </div>
+                </CustomNavLink>
 
-                <CustomNavLink 
+                <CustomNavLink
                     link={ROUTES.LOGIN_ROUTE}
                     runfunc={() => NavigateLogin()}
                     classes={'header-login-btn'}
