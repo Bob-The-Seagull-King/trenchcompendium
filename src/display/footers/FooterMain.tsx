@@ -57,7 +57,7 @@ const FooterMain: React.FC = () => {
         },
         {
             title: 'Your Warbands',
-            link: ROUTES.WARBAND_ROUTE
+            link: '/warband/'
         },
         {
             title: 'Account Settings',

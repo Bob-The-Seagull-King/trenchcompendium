@@ -90,7 +90,7 @@ const WbbEditBattleScars: React.FC<WbbEditBattleScarsProps> = ({ show, onClose, 
                             <div key={index} className="battle-scar-box">
                                 {/* Show skull icon on the last scar */}
                                 {isSkull &&
-                                    <FontAwesomeIcon icon={faSkull} className={'skull-icon'}/>
+                                    <FontAwesomeIcon icon={faSkull} className={'final-icon'}/>
                                 }
 
                                 { minusScar ? (

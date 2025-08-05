@@ -1646,7 +1646,7 @@
         "warband_maximum" : 1
     },
     {
-        "id": "rel_fc_md_plagueknight",
+        "id": "rel_fc_md_plagueknight_leader",
         "source": "core",
         "tags": {},
         "name": "",
@@ -1670,7 +1670,34 @@
         "restricted_models" : [
         ],
         "warband_minimum" : 0,
-        "warband_maximum" : 3
+        "warband_maximum" : 1
+    },
+    {
+        "id": "rel_fc_md_plagueknight",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {"option_search_viable": {},
+    
+        "faction_model_count_group": {
+            "filter": [
+                {
+                    "id": ["md_lordoftumors","md_plagueknight"]
+                }
+            ],
+            "number": 3
+        }},
+        "options": [],
+        "faction_id" : ["fc_cultoftheblackgrail","fc_cultoftheblackgrail_fv_dirgeofthegreathegemon"],
+        "model_id" : "md_plagueknight",
+        "captain" : false,
+        "mercenary": false,
+        "cost" : 60,
+        "cost_type" : 0,
+        "restricted_models" : [
+        ],
+        "warband_minimum" : 0,
+        "warband_maximum" : 2
     },
     {
         "id": "rel_fc_md_corpseguard",
@@ -1768,7 +1795,7 @@
         "model_id" : "md_grailthrall_bereaved",
         "captain" : false,
         "mercenary": false,
-        "cost" : 25,
+        "cost" : 30,
         "cost_type" : 0,
         "restricted_models" : [],
         "warband_minimum" : 0,

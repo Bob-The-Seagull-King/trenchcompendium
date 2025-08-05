@@ -48,6 +48,7 @@ import {AdsManager} from "./display/components/generics/AdsManager";
 import BlogListPage from "./display/pages/BlogListPage";
 import BlogArticlePage from "./display/pages/BlogArticlePage";
 import {ImageCreditPopoverProvider} from "./utility/ImageCreditPopoverContext";
+import {ToastContainer} from "react-toastify";
 
 
 const App: React.FC = () => {
@@ -120,10 +121,19 @@ const App: React.FC = () => {
                             </ImageCreditPopoverProvider>
                             <AdsManager />
                             <TrackingManager />
+
+                            <ToastContainer
+                                position="bottom-right"
+                                autoClose={5000}
+                                hideProgressBar={false}
+                                closeOnClick
+                                rtl={false}
+                                pauseOnFocusLoss
+                                pauseOnHover
+                            />
                         </Router>
                     </PersistGate>
                 </Provider>
-
             </AuthProvider>
         </>
     )

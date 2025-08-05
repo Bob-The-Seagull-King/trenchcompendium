@@ -74,18 +74,6 @@ const ScenarioDisplay = (props: any) => {
         <ErrorBoundary fallback={<div>Something went wrong with ScenarioDisplay.tsx</div>}>
 
             <div>
-                <ToastContainer
-                    position="top-center"
-                    autoClose={5000}
-                    hideProgressBar={false}
-                    newestOnTop={false}
-                    closeOnClick
-                    rtl={false}
-                    pauseOnFocusLoss
-                    draggable
-                    pauseOnHover
-                />
-
                 {GetContents(scenarioObject)}
 
 

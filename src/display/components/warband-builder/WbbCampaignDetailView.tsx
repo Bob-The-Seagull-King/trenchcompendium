@@ -180,16 +180,16 @@ const WbbCampaignDetailView: React.FC<WbbCampaignDetailViewProps> = ({ onClose }
                             {'Failed Promotions'}
                         </div>
                     </div>
-                    <div className={'battle-scars'}>
+                    <div className={'failed-promo'}>
                         {edit_mode &&
-                            <div className={'btn btn-primary btn-sm edit-battle-scar-btn'}
+                            <div className={'btn btn-primary btn-sm edit-btn'}
                                 onClick={() => setshowFailedPromotionsModal(true)}>
                                 <FontAwesomeIcon icon={faPen} className="icon-inline-left-l"/>
                                 {'Edit'}
                             </div>
                         }
 
-                        <div className="battle-scar-boxes"
+                        <div className="failed-promo-boxes"
                              onClick={edit_mode ? () => setshowFailedPromotionsModal(true) : undefined}
                         >
                             {Array.from({length: 6}, (_, i) => {
@@ -198,9 +198,9 @@ const WbbCampaignDetailView: React.FC<WbbCampaignDetailViewProps> = ({ onClose }
                                 const isSkull = index === 6;
 
                                 return (
-                                    <div key={index} className="battle-scar-box">
+                                    <div key={index} className="failed-promo-box">
                                         {isSkull &&
-                                            <FontAwesomeIcon icon={faGift} className={'skull-icon'}/>
+                                            <FontAwesomeIcon icon={faGift} className={'final-icon'}/>
                                         }
                                         {isChecked &&
                                             <FontAwesomeIcon icon={faCheck}/>
@@ -216,7 +216,7 @@ const WbbCampaignDetailView: React.FC<WbbCampaignDetailViewProps> = ({ onClose }
                     <WbbEditFailedPromotionsModal
                         show={showFailedPromotionsModal}
                         onClose={() => setshowFailedPromotionsModal(false)}
-                        currentVP={failedpromotions}
+                        currentFails={failedpromotions}
                         onSubmit={handleFailedpromotionsUpdate}
                     />
                 }

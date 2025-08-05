@@ -101,17 +101,7 @@ const FactionDisplay = (props: any) => {
 
     return (
         <ErrorBoundary fallback={<div>Something went wrong with FactionDisplay.tsx</div>}>
-            <ToastContainer
-                position="top-center"
-                autoClose={5000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-            />
+
 
 
             {GetContents(factionObject, factioncol)}

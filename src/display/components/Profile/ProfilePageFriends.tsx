@@ -197,17 +197,7 @@ const ProfilePageFriends: React.FC<ProfilePageFriendsProps> = ({
 
     return (
         <div className="ProfilePageFriends">
-            <ToastContainer
-                position="bottom-right"
-                autoClose={5000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-            />
+
 
             <div className={'profile-card'}>
                 <div className={'profile-card-head'}>

@@ -243,17 +243,7 @@ const ProfilePage: React.FC = () => {
 
     return (
         <div className="ProfilePage">
-            <ToastContainer
-                position="bottom-right"
-                autoClose={5000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-            />
+
 
             <PageMetaInformation
                 title={`${userData?.GetNickname() || 'User'} - Profile Page`}

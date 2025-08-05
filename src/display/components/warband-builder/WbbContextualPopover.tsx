@@ -10,7 +10,7 @@ import {
     faArrowUp,
     faArrowLeft,
     faCoins,
-    faEdit, faPen, faFileExport, faDice, faSignature, faPrint, faArrowRotateLeft, faSackDollar, faXmark, faCheck
+    faEdit, faPen, faFileExport, faDice, faSignature, faPrint, faArrowRotateLeft, faSackDollar, faXmark, faCheck, faExclamationTriangle
 } from '@fortawesome/free-solid-svg-icons';
 import { usePopover } from '../../../context/PopoverContext';
 import { useWarband } from '../../../context/WarbandContext';
@@ -51,7 +51,7 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
     };
 
     const { activePopoverId, setActivePopoverId } = usePopover();
-    const { warband, reloadDisplay } = useWarband();
+    const { warband, reloadDisplay, modalIsOpen, setModalIsOpen } = useWarband();
     const { play_mode, edit_mode, view_mode, print_mode, setMode, isOwner } = useWbbMode(); // play mode v2
 
     const [newname, setName] = useState("")
@@ -402,22 +402,23 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
 
     /** Hides popover when a modal is opened */
     useEffect(() => {
-        if (showConfirmDeleteFighterModal
-            || showConfirmRenameFighterModal
-            || showConfirmRefundFighterModal
-            || showConfirmDeleteModifierModal
-            || showConfirmDeleteExplorationModal
-            || showConfirmDeleteEquipmentModal
-            || showConfirmSellEquipmentModal
-            || showConfirmRefundEquipmentModal
-            || showConfirmMoveEquipmentModal
-            || showConfirmDeleteAdvancementModal
-            || showConfirmDeleteInjuryModal
-            || showConfirmRenameWarbandModal
-            || showConfirmExportWarbandModal
-        ) {
-            setActivePopoverId(null);
-        }
+        const isAnyModalOpen =
+            showConfirmDeleteFighterModal ||
+            showConfirmRenameFighterModal ||
+            showConfirmRefundFighterModal ||
+            showConfirmDeleteModifierModal ||
+            showConfirmDeleteExplorationModal ||
+            showConfirmDeleteEquipmentModal ||
+            showConfirmSellEquipmentModal ||
+            showConfirmRefundEquipmentModal ||
+            showConfirmMoveEquipmentModal ||
+            showConfirmDeleteAdvancementModal ||
+            showConfirmDeleteInjuryModal ||
+            showConfirmRenameWarbandModal ||
+            showConfirmExportWarbandModal;
+
+        setActivePopoverId(null);
+        setModalIsOpen(isAnyModalOpen);
     }, [
         showConfirmDeleteFighterModal,
         showConfirmRenameFighterModal,
@@ -436,17 +437,7 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
 
     return (
         <div onClick={(e) => e.stopPropagation()}>
-            <ToastContainer
-                position="bottom-right"
-                autoClose={5000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-            />
+
             <OverlayTrigger
                 trigger="click"
                 placement="left"
@@ -912,10 +903,17 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                         {'Are you sure you want to delete this Equipment?'}
                     </div>
                     {item.equipment &&
-                        <div >
-                            <strong>{item.equipment.Name }</strong>?
+                        <div>
+                            <strong>{item.equipment.Name}</strong>?
                         </div>
                     }
+                    <br/>
+                    <p>
+                        <FontAwesomeIcon icon={faExclamationTriangle} className={'icon-inline-left-l icon-wraning'}/>
+                        <i>
+                            {'This will remove the equipment and NOT refund its costs.'}
+                        </i>
+                    </p>
                 </Modal.Body>
 
                 <Modal.Footer>
