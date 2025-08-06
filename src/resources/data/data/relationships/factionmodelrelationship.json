@@ -1335,7 +1335,7 @@
         "cost_type" : 0,
         "restricted_models" : [],
         "warband_minimum" : 0,
-        "warband_maximum" : 1
+        "warband_maximum" : 2
     },
     {
         "id": "rel_fc_md_trenchcleric_eire",

@@ -882,7 +882,7 @@
         "name": "Halberd-Gun",
         "source": "core",
         "tags": {"action": true, "weapon": true, "eq_alchemicalammunition": true},
-        "category": "ranged",
+        "category": "melee",
         "distance": 24,
         "stats": {
             "hands_ranged": 2,
@@ -1876,7 +1876,7 @@
     },
     {
         "id": "eq_ironcapriote",
-        "name": "Iron Capriote",
+        "name": "Iron Capirote",
         "source": "core",
         "tags": {"trait": true, "headgear": true},
         "category": "equipment",
