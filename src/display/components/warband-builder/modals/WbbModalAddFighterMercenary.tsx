@@ -78,12 +78,6 @@ const WbbModalAddFighterMercenary: React.FC<WbbModalAddFighterMercenaryProps> = 
             </Modal.Header>
 
             <Modal.Body>
-
-                <div className="rules-card ">
-                    <div className={'rules-card-content form-text'}>
-                        {'Trench Dogs and their variants are considered Exploration-Items, not regular mercenaries.'}
-                    </div>
-                </div>
                 {Object.keys(cache).map((item, index) => (
                     <div
                         key={cache[item].facrel.ID}
@@ -109,6 +103,12 @@ const WbbModalAddFighterMercenary: React.FC<WbbModalAddFighterMercenaryProps> = 
                         </span>
                     </div>
                 ))}
+
+                <div className="rules-card ">
+                    <div className={'rules-card-content form-text'}>
+                        {'Trench Dogs and their variants are considered Exploration-Items, not regular mercenaries.'}
+                    </div>
+                </div>
             </Modal.Body>
 
             <Modal.Footer>
