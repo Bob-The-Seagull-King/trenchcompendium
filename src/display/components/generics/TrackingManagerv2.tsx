@@ -22,10 +22,10 @@ const GTM_ID = "GTM-NFVT7W7X"; // Deine echte GTM‑ID
 
 export default function TrackingManager() {
     const consentSentRef = useRef(false);
+    const gtmLoadedRef = useRef(false);
     const location = useLocation();
 
     useEffect(() => {
-        // dataLayer und gtag initialisieren
         window.dataLayer = window.dataLayer || [];
         if (typeof window.gtag !== "function") {
             window.gtag = (...args: any[]) => {
@@ -33,7 +33,6 @@ export default function TrackingManager() {
             };
         }
 
-        // Default‑Consent (Consent Mode v2) setzen
         window.gtag?.("consent", "default", {
             ad_storage: "denied",
             analytics_storage: "denied",
@@ -48,7 +47,10 @@ export default function TrackingManager() {
             const script = document.createElement("script");
             script.async = true;
             script.src = `https://www.googletagmanager.com/gtm.js?id=${GTM_ID}`;
+            script.onload = () => { gtmLoadedRef.current = true; };
             document.head.appendChild(script);
+        } else {
+            gtmLoadedRef.current = true;
         }
 
         // Funktion zum Aktualisieren des Consent‑Status
@@ -67,6 +69,15 @@ export default function TrackingManager() {
                     ad_personalization: "granted",
                 });
                 window.dataLayer!.push({ event: "ezoic_consent_granted" });
+                window.dataLayer!.push({ event: "consent_sent" });
+
+                // -------- WICHTIG! --------
+                // GA4 initialisieren
+                window.gtag?.("config", GTM_ID, {
+                    page_path: window.location.pathname + window.location.search,
+                    page_title: document.title,
+                });
+                // --------------------------
 
                 // ggf. die von Ezoic geforderte _ezconsent‑Variable setzen
                 // window._ezconsent = { ... };
@@ -75,7 +86,6 @@ export default function TrackingManager() {
 
         // Event‑Listener für benutzerdefiniertes Ezoic‑Event
         const listener = (event: Event) => {
-            // Typische Ezoic‑Events haben ein detail‑Feld
             const detail = (event as CustomEvent)?.detail;
             if (detail) {
                 applyConsent(detail);
@@ -90,7 +100,6 @@ export default function TrackingManager() {
             });
         }
 
-        // Globale Callback‑Funktion definieren, falls Ezoic sie aufruft
         window.EzConsentCallback = applyConsent;
 
         return () => {
@@ -103,15 +112,16 @@ export default function TrackingManager() {
         let attempts = 0;
         const interval = setInterval(() => {
             attempts++;
-
-            // gtag muss definiert und Consent gesendet worden sein
-            if (typeof window.gtag === "function" && consentSentRef.current) {
+            if (
+                typeof window.gtag === "function" &&
+                consentSentRef.current &&
+                gtmLoadedRef.current
+            ) {
                 const title = document.title?.trim();
-                // auf aussagekräftigen Titel warten oder nach mehreren Versuchen fortfahren
                 if (title || attempts > 19) {
-                    const timeout = setTimeout(() => {
+                    setTimeout(() => {
                         if (typeof window.gtag === "function") {
-                            window.gtag("event", "page_view", {
+                            window.gtag("config", GTM_ID, {
                                 page_path: location.pathname + location.search,
                                 page_title: document.title,
                             });
