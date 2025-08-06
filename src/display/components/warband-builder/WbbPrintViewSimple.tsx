@@ -33,26 +33,6 @@ const WbbPrintViewSimple: React.FC = () => {
                             }
                         </>
                     ))}
-
-                    {warband.warband_data.GetFighters().map((item, index) => (
-                        <>
-                            {item.model.IsElite() &&
-                                <WbbPrintViewSimpleFighter key={'print-elites' + index}
-                                                           fighter={item}
-                                />
-                            }
-                        </>
-                    ))}
-
-                    {warband.warband_data.GetFighters().map((item, index) => (
-                        <>
-                            {item.model.IsElite() &&
-                                <WbbPrintViewSimpleFighter key={'print-elites' + index}
-                                                           fighter={item}
-                                />
-                            }
-                        </>
-                    ))}
                 </div>
             }
 
@@ -62,7 +42,7 @@ const WbbPrintViewSimple: React.FC = () => {
 
                     {warband.warband_data.GetFighters().map((item, index) => (
                         <>
-                            {(!item.model.IsElite() && !item.model.IsMercenary()) &&
+                            {(item.model.IsTroop()) &&
                                 <WbbPrintViewSimpleFighter
                                     key={'print-troop' + index}
                                     fighter={item}

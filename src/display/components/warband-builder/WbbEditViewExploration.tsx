@@ -18,13 +18,14 @@ import {useWbbMode} from "../../../context/WbbModeContext";
 
 interface WbbEditViewExplorationProps {
     location : WarbandProperty;
+    initiallyOpen?: boolean;
 }
 
-const WbbEditViewExploration: React.FC<WbbEditViewExplorationProps> = ({  location }) => {
+const WbbEditViewExploration: React.FC<WbbEditViewExplorationProps> = ({  location, initiallyOpen }) => {
 
     const { warband } = useWarband();
     if (warband == null) return (<div>Loading...</div>);
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState<boolean>(initiallyOpen ?? false);
     const { play_mode, edit_mode, view_mode, print_mode, setMode } = useWbbMode(); // play mode v2
 
     return (

@@ -791,6 +791,22 @@ class WarbandMember extends DynamicContextObject {
         return subpackages; 
     }
 
+    /**
+     * Is this fighter a Troop?
+     */
+    public IsTroop(): boolean {
+
+        if( !this.IsElite() && !this.IsMercenary()) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Is this fighter a mercenary?
+     * @constructor
+     */
     public IsMercenary(): boolean {
         if (this.CurModel.Stats.mercenary) {
             return this.CurModel.Stats.mercenary
