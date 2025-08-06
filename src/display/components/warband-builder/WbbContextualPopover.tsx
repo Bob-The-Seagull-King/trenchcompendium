@@ -63,6 +63,14 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
         setActivePopoverId(isActive ? null : id);
     };
 
+    useEffect(() => {
+        if(isActive) {
+            setModalIsOpen(true)
+        } else {
+            setModalIsOpen(false)
+        }
+    }, [isActive]);
+
 
     /** Fighter Actions */
     const [fighterName, setFighterName] = React.useState(
