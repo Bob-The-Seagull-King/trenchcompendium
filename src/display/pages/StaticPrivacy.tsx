@@ -16,7 +16,7 @@ declare global {
 }
 
 const StaticPrivacy: React.FC = () => {
-
+    const [forceShowPrivacy, setForceShowPrivacy] = useState<number>(0);
     const handleCMP = () => {
         if (
             typeof window !== "undefined" &&
@@ -35,7 +35,7 @@ const StaticPrivacy: React.FC = () => {
             />
 
             <div className={'container'}>
-                {/*<TrackingManager forceShow={forceShowPrivacy}/>*/}
+                <TrackingManager forceShow={forceShowPrivacy}/>
 
                 <h1>
                     {'Privacy Policy for Trench Companion'}
@@ -59,7 +59,12 @@ const StaticPrivacy: React.FC = () => {
                     }
 
                     <br/>
-                    <div className={'btn btn-secondary btn-sm mt-3 mb-3'} onClick={() => handleCMP()}>
+                    <div className={'btn btn-secondary btn-sm me-3 my-3'} onClick={() => handleCMP()}>
+                        {'Change Ads Settings'}
+                    </div>
+
+                    <div className={'btn btn-secondary btn-sm me-3 my-3'}
+                         onClick={() => setForceShowPrivacy(Date.now())}>
                         {'Change Privacy Settings'}
                     </div>
                 </p>
@@ -69,7 +74,7 @@ const StaticPrivacy: React.FC = () => {
                 </h2>
 
                 <p>
-                    {
+                {
                         'The personal information that you are asked to provide, and the reasons why you are asked to provide it, will be made clear to you at the point we ask you to provide your personal information.\n' +
                         'If you contact us directly, we may receive additional information about you such as your name, email address, phone number, the contents of the message and/or attachments you may send us, and any other information you may choose to provide.\n' +
                         'When you register for an Account, we may ask for your contact information, including items such as name, company name, address, email address, and telephone number.'
