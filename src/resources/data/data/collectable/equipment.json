@@ -2561,6 +2561,38 @@
         "modifiers": ["-1D to Hit","-1D to Injuries"]
     },
     {
+        "id": "eq_unarmed_nopenalty",
+        "name": "Unarmed",
+        "source": "core",
+        "tags": {"action": true, "weapon": true,"unarmed": true},
+        "category": "melee",
+        "distance": null,
+        "stats": {
+            "melee": true
+        },
+        "contextdata": {
+            "get_weapon": {}
+        },
+        "description": [   
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Note that you can never fight with unarmed as an Off-Hand weapon to get an additional attack in melee. These rules simply cover all instances where the model fights unarmed and has no other Melee Actions in their profile.",
+                "glossary": [
+                    {"val": "-1 DICE", "id": "kw_minusdice"}
+                ]
+            }  
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Fighting unarmed in the Great War is nigh-suicidal, but some troops carry no melee weapons or their weapons have been lost in the heat of the battle. In such cases, a warrior is forced to defend themselves with fists, kicks and their bare teeth."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
         "id": "eq_sacrificialknife",
         "name": "Sacrificial Knife",
         "source": "core",

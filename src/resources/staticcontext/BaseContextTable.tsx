@@ -1493,6 +1493,15 @@ export const BaseContextCallTable : CallEventTable = {
             return relayVar;
         }
     },
+    unarmed_penalty_remove: {
+        event_priotity: 0,
+        async getUnarmedItemObj(this: EventRunner, eventSource : any, relayVar: string,  context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            return "eq_unarmed_nopenalty"
+        },
+        async getUnarmedItemRel(this: EventRunner, eventSource : any, relayVar: string,  context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            return "rel_unarmed_nopenalty"
+        }
+    },
     faction_upgrade_count_special: {
         event_priotity: 0,
         async getUpgradeLimitPresentation(this: EventRunner, eventSource : any, relayVar : string[], trackVal : boolean, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {

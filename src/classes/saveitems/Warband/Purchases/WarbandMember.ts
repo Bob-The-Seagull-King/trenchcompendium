@@ -2714,8 +2714,23 @@ class WarbandMember extends DynamicContextObject {
         }
 
         if (UnarmedFlag) {
-            const UnarmedVal = await EquipmentFactory.CreateNewModelEquipment("rel_unarmed", null)
-            const UnarmedObj = await EquipmentFactory.CreateNewEquipment("eq_unarmed", null)
+            const eventmon : EventRunner = new EventRunner();
+            const GetItemRel : string = await eventmon.runEvent(
+                "getUnarmedItemRel",
+                this,
+                [],
+                "rel_unarmed",
+                null
+            )
+            const GetItemID : string = await eventmon.runEvent(
+                "getUnarmedItemObj",
+                this,
+                [],
+                "eq_unarmed",
+                null
+            )
+            const UnarmedVal = await EquipmentFactory.CreateNewModelEquipment(GetItemRel, null)
+            const UnarmedObj = await EquipmentFactory.CreateNewEquipment(GetItemID, null)
             const Unarmed : WarbandEquipment = await WarbandFactory.BuildModelEquipmentFromPurchase(UnarmedVal, UnarmedObj, 0, this);
             const NewPurchase : WarbandPurchase = new WarbandPurchase({
                 cost_value : 0,
