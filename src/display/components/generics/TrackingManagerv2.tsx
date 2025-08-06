@@ -33,13 +33,7 @@ export default function TrackingManager() {
             };
         }
 
-        window.gtag?.("consent", "default", {
-            ad_storage: "denied",
-            analytics_storage: "denied",
-            ad_user_data: "denied",
-            ad_personalization: "denied",
-            wait_for_update: 500,
-        });
+
 
         // GTM‑Snippet einmalig laden
         if (!window.__gtm_loaded) {
@@ -53,14 +47,29 @@ export default function TrackingManager() {
             gtmLoadedRef.current = true;
         }
 
+        console.log('applying consent default 1');
+
+        window.gtag?.("consent", "default", {
+            ad_storage: "denied",
+            analytics_storage: "denied",
+            ad_user_data: "denied",
+            ad_personalization: "denied",
+            wait_for_update: 500,
+        });
+        
+
         // Funktion zum Aktualisieren des Consent‑Status
         const applyConsent = (consent: any) => {
+            console.log('applying consent 1');
+
             if (
                 !consentSentRef.current &&
                 (consent?.status === "accepted" ||
                     consent?.status === "given" ||
                     consent?.status === true)
             ) {
+                console.log('applying consent 2');
+
                 consentSentRef.current = true;
                 window.gtag?.("consent", "update", {
                     ad_storage: "granted",
@@ -109,6 +118,8 @@ export default function TrackingManager() {
 
     // Page‑View‑Tracking bei Änderung des Standortes
     useEffect(() => {
+        console.log('trying to send page view 1');
+
         let attempts = 0;
         const interval = setInterval(() => {
             attempts++;
@@ -117,10 +128,13 @@ export default function TrackingManager() {
                 consentSentRef.current &&
                 gtmLoadedRef.current
             ) {
+                console.log('trying to send page view 2');
+
                 const title = document.title?.trim();
                 if (title || attempts > 19) {
                     setTimeout(() => {
                         if (typeof window.gtag === "function") {
+                            console.log('page view is sent now');
                             window.gtag("config", GTM_ID, {
                                 page_path: location.pathname + location.search,
                                 page_title: document.title,
