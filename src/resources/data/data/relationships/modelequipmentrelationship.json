@@ -11,6 +11,17 @@
         "removable": false
     },
     {
+        "id": "rel_unarmed_nopenalty",
+        "source": "core",
+        "tags": {},
+        "name": "Unarmed",
+        "contextdata": {},
+        "options": [],
+        "model_id": [],
+        "mandatory_equipment": ["eq_unarmed_nopenalty"],
+        "removable": false
+    },
+    {
         "id": "rel_md_eq_sultanatesapper",
         "source": "core",
         "tags": {},

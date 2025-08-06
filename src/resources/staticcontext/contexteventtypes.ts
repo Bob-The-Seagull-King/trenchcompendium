@@ -125,6 +125,8 @@ export interface CallEvents {
     getDiscountOfUpgrade? : (this: EventRunner, eventSource : any, relayVar: number, trackVal: MemberAndWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, coreitem : ModelUpgradeRelationship) => Promise<number>;
     getNumberOfElite? : (this: EventRunner, eventSource : any, relayVar: number, trackVal: UserWarband,  context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<number>;
     getExplorationLimit? : (this: EventRunner, eventSource : any, relayVar: number, trackVal: UserWarband,  context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<number>;
+    getUnarmedItemObj? : (this: EventRunner, eventSource : any, relayVar: string,  context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<string>;
+    getUnarmedItemRel? : (this: EventRunner, eventSource : any, relayVar: string,  context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) => Promise<string>;
 }
 
 /**
