@@ -1855,7 +1855,7 @@
     },
     {
         "id": "el_highrankingcaptain",
-        "name": "High-Ranking Captain",
+        "name": "High-Ranking Captive",
         "source": "core",
         "tags": {
             "exploration_table": "et_rarelocations"
