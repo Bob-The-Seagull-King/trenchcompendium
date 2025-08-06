@@ -78,6 +78,9 @@ const WbbModalAddFighterMercenary: React.FC<WbbModalAddFighterMercenaryProps> = 
             </Modal.Header>
 
             <Modal.Body>
+                    <div className={'form-text'}>
+                        {'Trench Dogs and their variants are considered Exploration-Items, not regular mercenaries.'}
+                    </div>
                 {Object.keys(cache).map((item, index) => (
                     <div
                         key={cache[item].facrel.ID}
