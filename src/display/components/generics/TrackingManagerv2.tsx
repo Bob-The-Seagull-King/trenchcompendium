@@ -1,11 +1,13 @@
 import { useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 
-// einheitliche Erweiterung des Window‑Objekts
+/**
+ * Globale Typdefinitionen
+ */
 declare global {
     interface Window {
-        dataLayer?: any[];
-        gtag?: (...args: any[]) => void;
+        dataLayer: any[];
+        gtag?: (...args: any[]) => void; // optional!
         __gtm_loaded?: boolean;
         __ez?: {
             consentManager?: {
@@ -13,42 +15,31 @@ declare global {
             };
         };
         EzConsentCallback?: (consent: any) => void;
-        // hier ggf. auch die von Ezoic geforderte _ezconsent‑Variable deklarieren
-        // _ezconsent?: any;
     }
 }
 
-const GTM_ID = "GTM-NFVT7W7X"; // Deine echte GTM‑ID
+// GTM‑Container‑ID
+const GTM_ID = "GTM-NFVT7W7X";
 
-export default function TrackingManager() {
-    const consentSentRef = useRef(false);
+// Falls Sie GA4 außerhalb des GTM verwenden, können Sie hier optional
+// eine Mess‑ID angeben (beginnend mit "G-"). Standard: leer lassen.
+const GA_MEASUREMENT_ID: string | undefined = undefined;
+
+export default function TrackingManagerv2() {
+    const consentGrantedRef = useRef(false);
     const gtmLoadedRef = useRef(false);
     const location = useLocation();
 
     useEffect(() => {
+        // DataLayer und gtag Stub initialisieren
         window.dataLayer = window.dataLayer || [];
         if (typeof window.gtag !== "function") {
             window.gtag = (...args: any[]) => {
-                window.dataLayer!.push(args);
+                window.dataLayer.push(args);
             };
         }
 
-
-
-        // GTM‑Snippet einmalig laden
-        if (!window.__gtm_loaded) {
-            window.__gtm_loaded = true;
-            const script = document.createElement("script");
-            script.async = true;
-            script.src = `https://www.googletagmanager.com/gtm.js?id=${GTM_ID}`;
-            script.onload = () => { gtmLoadedRef.current = true; };
-            document.head.appendChild(script);
-        } else {
-            gtmLoadedRef.current = true;
-        }
-
-        console.log('applying consent default 1');
-
+        // Consent-Default setzen, bevor Google-Tags geladen werden
         window.gtag?.("consent", "default", {
             ad_storage: "denied",
             analytics_storage: "denied",
@@ -57,45 +48,73 @@ export default function TrackingManager() {
             wait_for_update: 500,
         });
 
+        // Tag Manager laden (nur einmal)
+        if (!window.__gtm_loaded) {
+            window.__gtm_loaded = true;
+            const script = document.createElement("script");
+            script.async = true;
+            script.src = `https://www.googletagmanager.com/gtm.js?id=${GTM_ID}`;
+            script.onload = () => {
+                gtmLoadedRef.current = true;
+            };
+            document.head.appendChild(script);
+        } else {
+            gtmLoadedRef.current = true;
+        }
 
-        // Funktion zum Aktualisieren des Consent‑Status
+        /**
+         * Consent‑Update anhand des Ezoic‑Consent‑Objekts.
+         * Ezoic übergibt gewöhnlich Booleans für marketing/statistics:contentReference[oaicite:5]{index=5}.
+         */
         const applyConsent = (consent: any) => {
-            console.log('applying consent 1');
-            console.log(consentSentRef);
-            console.log(consent);
-
-            if (
-                !consentSentRef.current &&
-                (consent?.status === "accepted" ||
+            // Bestimmen, ob Analytics/Ads erlaubt sind:
+            const analyticsOk =
+                typeof consent?.statistics === "boolean"
+                    ? consent.statistics
+                    : consent?.status === "accepted" ||
                     consent?.status === "given" ||
-                    consent?.status === true)
-            ) {
-                console.log('applying consent 2');
+                    consent?.status === true;
+            const marketingOk =
+                typeof consent?.marketing === "boolean"
+                    ? consent.marketing
+                    : analyticsOk;
 
-                consentSentRef.current = true;
+            // Wenn beide Kategorien (Statistics/Marketing) abgelehnt wurden, bleiben wir bei denied.
+            if (analyticsOk || marketingOk) {
+                consentGrantedRef.current = true;
                 window.gtag?.("consent", "update", {
-                    ad_storage: "granted",
-                    analytics_storage: "granted",
-                    ad_user_data: "granted",
-                    ad_personalization: "granted",
+                    analytics_storage: analyticsOk ? "granted" : "denied",
+                    ad_storage: marketingOk ? "granted" : "denied",
+                    ad_user_data: marketingOk ? "granted" : "denied",
+                    ad_personalization: marketingOk ? "granted" : "denied",
                 });
-                window.dataLayer!.push({ event: "ezoic_consent_granted" });
-                window.dataLayer!.push({ event: "consent_sent" });
 
-                // -------- WICHTIG! --------
-                // GA4 initialisieren
-                window.gtag?.("config", GTM_ID, {
-                    page_path: window.location.pathname + window.location.search,
-                    page_title: document.title,
-                });
-                // --------------------------
+                // optionales Event für GTM, falls Trigger benötigt werden
+                window.dataLayer.push({ event: "ezoic_consent_granted" });
+                window.dataLayer.push({ event: "consent_sent" });
 
-                // ggf. die von Ezoic geforderte _ezconsent‑Variable setzen
-                // window._ezconsent = { ... };
+                // Falls Sie GA4 ohne GTM nutzen: nach Consent gtag.js laden und konfigurieren
+                if (GA_MEASUREMENT_ID) {
+                    // gtag.js laden (falls noch nicht vorhanden)
+                    const existingScript = document.querySelector(
+                        `script[src*="gtag/js?id=${GA_MEASUREMENT_ID}"]`
+                    );
+                    if (!existingScript) {
+                        const gtagScript = document.createElement("script");
+                        gtagScript.async = true;
+                        gtagScript.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
+                        document.head.appendChild(gtagScript);
+                    }
+                    // gtag initialisieren und GA konfigurieren
+                    window.gtag?.("js", new Date());
+                    window.gtag?.("config", GA_MEASUREMENT_ID, {
+                        // send_page_view: false könnte gesetzt werden, wenn Sie Pageviews selbst steuern
+                    });
+                }
             }
         };
 
-        // Event‑Listener für benutzerdefiniertes Ezoic‑Event
+        // Listener für den benutzerdefinierten Ezoic‑Event
         const listener = (event: Event) => {
             const detail = (event as CustomEvent)?.detail;
             if (detail) {
@@ -104,13 +123,14 @@ export default function TrackingManager() {
         };
         window.addEventListener("ezoic_consent", listener);
 
-        // Consent sofort abrufen, falls Ezoic‑API vorhanden ist
+        // Consent direkt abrufen (falls Ezoic‑API vorhanden)
         if (window.__ez?.consentManager?.getConsentData) {
             window.__ez.consentManager.getConsentData((consent: any) => {
                 applyConsent(consent);
             });
         }
 
+        // Callback registrieren, falls Ezoic dieses aufruft
         window.EzConsentCallback = applyConsent;
 
         return () => {
@@ -118,38 +138,28 @@ export default function TrackingManager() {
         };
     }, []);
 
-    // Page‑View‑Tracking bei Änderung des Standortes
+    // Seitenaufrufe bei URL‑Wechsel an den DataLayer pushen (für GA4 in GTM)
     useEffect(() => {
-        console.log('trying to send page view 1');
-
+        // Warten, bis Consent und GTM geladen sind
         let attempts = 0;
         const interval = setInterval(() => {
             attempts++;
-            if (
-                typeof window.gtag === "function" &&
-                consentSentRef.current &&
-                gtmLoadedRef.current
-            ) {
-                console.log('trying to send page view 2');
-
+            if (consentGrantedRef.current && gtmLoadedRef.current) {
                 const title = document.title?.trim();
                 if (title || attempts > 19) {
-                    setTimeout(() => {
-                        if (typeof window.gtag === "function") {
-                            console.log('page view is sent now');
-                            window.gtag("config", GTM_ID, {
-                                page_path: location.pathname + location.search,
-                                page_title: document.title,
-                            });
-                        }
-                    }, 200);
+                    // Push eines page_view Events, das in Ihrem GTM ausgelöst werden kann
+                    window.dataLayer.push({
+                        event: "page_view",
+                        page_path: location.pathname + location.search,
+                        page_title: document.title,
+                    });
                     clearInterval(interval);
                 }
-            } else if (attempts > 20) {
+            }
+            if (attempts > 20) {
                 clearInterval(interval);
             }
         }, 250);
-
         return () => clearInterval(interval);
     }, [location]);
 
