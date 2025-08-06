@@ -18,7 +18,7 @@ declare global {
     }
 }
 
-const GTM_ID = "GTM‑NFVT7W7X"; // Deine echte GTM‑ID
+const GTM_ID = "GTM-NFVT7W7X"; // Deine echte GTM‑ID
 
 export default function TrackingManager() {
     const consentSentRef = useRef(false);
