@@ -253,6 +253,18 @@ const WbbWarbandDetailView: React.FC<WbbWarbandDetailViewProps> = ({  onClose })
                                     () => reloadDisplay())
                             }}
                         />
+                        <WbbTextarea
+                            initialText={warband.warband_data.GetCampaignNotes()}
+                            title="Campaign Notes"
+                            onSave={(newText : string) => {
+                                warband?.warband_data.SaveNote(newText, 'campaign')
+                                
+                    
+                                const Manager : ToolsController = ToolsController.getInstance();
+                                Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
+                                    () => reloadDisplay())
+                            }}
+                        />
                     </WbbDetailViewCollapse>
 
                     { edit_mode &&

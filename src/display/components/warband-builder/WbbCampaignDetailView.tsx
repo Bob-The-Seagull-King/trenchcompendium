@@ -222,21 +222,6 @@ const WbbCampaignDetailView: React.FC<WbbCampaignDetailViewProps> = ({ onClose }
                 }
 
                 {/* Notes textarea */}
-                <div key={keyvar}>
-                    <WbbTextarea
-                        initialText={warband.warband_data.GetCampaignNotes()}
-                        title="Campaign Notes"
-                        onSave={(newText : string) => {
-                            warband?.warband_data.SaveNote(newText, 'campaign')
-                            
-                
-                            const Manager : ToolsController = ToolsController.getInstance();
-                            Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
-                                () => reloadDisplay())
-                        }}
-                    />
-                </div>
-
                 <div className={'info-box'}>
                     <FontAwesomeIcon icon={faInfoCircle} className="info-box-icon"/>
 
