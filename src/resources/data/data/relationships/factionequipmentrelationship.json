@@ -1666,7 +1666,7 @@
         "source": "core",
         "tags": {
         },
-        "name": "Iron Capriote",
+        "name": "Iron Capirote",
         "contextdata": {  
         },
         "faction_id": ["fc_trenchpilgrim","fc_trenchpilgrim_fv_warpilgimageofsaintmethodius","fc_trenchpilgrim_fv_cavalcadeofthetenthplague"],
@@ -3444,7 +3444,7 @@
         },
         "faction_id": ["fc_trenchpilgrim_fv_warpilgimageofsaintmethodius"],
         "equipment_id": "eq_pistonlegs",
-        "cost": 5,
+        "cost": 10,
         "costtype": 0,
         "limit": 0
     },
