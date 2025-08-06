@@ -49,6 +49,7 @@ import BlogListPage from "./display/pages/BlogListPage";
 import BlogArticlePage from "./display/pages/BlogArticlePage";
 import {ImageCreditPopoverProvider} from "./utility/ImageCreditPopoverContext";
 import {ToastContainer} from "react-toastify";
+import TrackingManagerv2 from "./display/components/generics/TrackingManagerv2";
 
 
 const App: React.FC = () => {
@@ -120,7 +121,8 @@ const App: React.FC = () => {
                                 <FooterMain />
                             </ImageCreditPopoverProvider>
                             <AdsManager />
-                            <TrackingManager />
+                            {/*<TrackingManager />*/}
+                            <TrackingManagerv2 />
 
                             <ToastContainer
                                 position="bottom-right"
