@@ -56,8 +56,8 @@ const WbbCampaignDetailView: React.FC<WbbCampaignDetailViewProps> = ({ onClose }
            const threshhold = await warband?.warband_data.GetCampaignTresholdValue()
            if (threshhold != undefined) {
             setducatlimit(threshhold)
-            setKeyvar(keyvar + 1)
            }
+           setKeyvar(keyvar + 1)
         }
 
         RunDucatCheck();
@@ -222,11 +222,11 @@ const WbbCampaignDetailView: React.FC<WbbCampaignDetailViewProps> = ({ onClose }
                 }
 
                 {/* Notes textarea */}
-                <WbbTextarea
-                    key={setKeyvar.toString() + "_" + updateKey.toString()}
-                    initialText={warband.warband_data.GetCampaignNotes()}
-                    title="Campaign Notes"
-                    onSave={(newText : string) => {
+                <div key={keyvar}>
+                    <WbbTextarea
+                        initialText={warband.warband_data.GetCampaignNotes()}
+                        title="Campaign Notes"
+                        onSave={(newText : string) => {
                             warband?.warband_data.SaveNote(newText, 'campaign')
                             
                 
@@ -234,8 +234,8 @@ const WbbCampaignDetailView: React.FC<WbbCampaignDetailViewProps> = ({ onClose }
                             Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
                                 () => reloadDisplay())
                         }}
-                />
-
+                    />
+                </div>
 
                 <div className={'info-box'}>
                     <FontAwesomeIcon icon={faInfoCircle} className="info-box-icon"/>
