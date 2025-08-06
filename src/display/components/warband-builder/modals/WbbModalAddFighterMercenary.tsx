@@ -79,8 +79,8 @@ const WbbModalAddFighterMercenary: React.FC<WbbModalAddFighterMercenaryProps> = 
 
             <Modal.Body>
 
-                <div className="rules-card rules-card-content">
-                    <div className={'form-text'}>
+                <div className="rules-card ">
+                    <div className={'rules-card-content form-text'}>
                         {'Trench Dogs and their variants are considered Exploration-Items, not regular mercenaries.'}
                     </div>
                 </div>
