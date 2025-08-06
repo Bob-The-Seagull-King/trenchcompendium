@@ -59,7 +59,6 @@ const WbbCampaignDetailView: React.FC<WbbCampaignDetailViewProps> = ({ onClose }
            if (threshhold != undefined) {
             setducatlimit(threshhold)
            }
-           setcampaigntext(warband? warband?.warband_data.GetCampaignNotes() : "")
            setKeyvar(keyvar + 1)
         }
 
