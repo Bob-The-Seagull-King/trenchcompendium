@@ -56,11 +56,13 @@ export default function TrackingManager() {
             ad_personalization: "denied",
             wait_for_update: 500,
         });
-        
+
 
         // Funktion zum Aktualisieren des Consent‑Status
         const applyConsent = (consent: any) => {
             console.log('applying consent 1');
+            console.log(consentSentRef);
+            console.log(consent);
 
             if (
                 !consentSentRef.current &&
