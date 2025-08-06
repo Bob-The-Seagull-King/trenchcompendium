@@ -223,6 +223,7 @@ const WbbCampaignDetailView: React.FC<WbbCampaignDetailViewProps> = ({ onClose }
 
                 {/* Notes textarea */}
                 <WbbTextarea
+                    key={setKeyvar.toString() + "_" + updateKey.toString()}
                     initialText={warband.warband_data.GetCampaignNotes()}
                     title="Campaign Notes"
                     onSave={(newText : string) => {
