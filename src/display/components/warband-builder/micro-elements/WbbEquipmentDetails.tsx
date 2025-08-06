@@ -16,6 +16,7 @@ const WbbEquipmentDetails: React.FC<WbbEquipmentDetailsProps> = ({ equipment, sh
     return (
         <div className={'WbbEquipmentDetails equipment-details'}>
             <table>
+                {equipment.GetRange() != "" &&
                 <tr>
                     <td>
                         Range
@@ -24,6 +25,7 @@ const WbbEquipmentDetails: React.FC<WbbEquipmentDetailsProps> = ({ equipment, sh
                         {equipment.GetRange()}
                     </td>
                 </tr>
+                }
 
                 {(equipment.Category && showType) &&
                     <tr>

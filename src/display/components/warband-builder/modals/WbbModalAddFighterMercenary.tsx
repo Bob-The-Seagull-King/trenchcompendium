@@ -103,6 +103,14 @@ const WbbModalAddFighterMercenary: React.FC<WbbModalAddFighterMercenaryProps> = 
                         </span>
                     </div>
                 ))}
+                {
+                    /** TODO Handle Style */
+                }
+                <div className="rules-card ">
+                    <div className={'rules-card-content form-text'}>
+                        {'Trench Dogs and their variants are considered Exploration-Items, not regular mercenaries.'}
+                    </div>
+                </div>
             </Modal.Body>
 
             <Modal.Footer>

@@ -64,6 +64,7 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
     };
 
 
+
     /** Fighter Actions */
     const [fighterName, setFighterName] = React.useState(
         type === 'fighter' && item?.model ? item.model.GetFighterName() : ''
@@ -417,8 +418,17 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
             showConfirmRenameWarbandModal ||
             showConfirmExportWarbandModal;
 
-        setActivePopoverId(null);
-        setModalIsOpen(isAnyModalOpen);
+        if(isAnyModalOpen) {
+            setActivePopoverId(null);
+            setModalIsOpen(true);
+        } else {
+            if( isActive ) {
+                setModalIsOpen(true);
+            } else {
+                setModalIsOpen(false);
+            }
+        }
+
     }, [
         showConfirmDeleteFighterModal,
         showConfirmRenameFighterModal,
@@ -432,8 +442,10 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
         showConfirmDeleteAdvancementModal,
         showConfirmDeleteInjuryModal,
         showConfirmRenameWarbandModal,
-        showConfirmExportWarbandModal
+        showConfirmExportWarbandModal,
+        isActive
     ]);
+
 
     return (
         <div onClick={(e) => e.stopPropagation()}>

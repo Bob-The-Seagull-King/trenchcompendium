@@ -7,6 +7,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCircleNotch, faPlus, faXmark} from "@fortawesome/free-solid-svg-icons";
 import {useModalSubmitWithLoading} from "../../../../utility/useModalSubmitWithLoading";
 import { CachedFactionEquipment } from '../../../../classes/saveitems/Warband/UserWarband';
+import WbbEquipmentDetails from "../micro-elements/WbbEquipmentDetails";
 
 interface Item {
     id: string;
@@ -93,42 +94,69 @@ const WbbModalAddItemToStash: React.FC<WbbModalAddItemToStashProps> = ({ show, o
                 {Object.keys(cache).map((item, index) => (
                     <div
                         key={cache[item].facrel.ID}
-                        className={`select-item ${selectedId === cache[item].facrel.ID ? 'selected' : ''} ${listofoptions.map(obj => obj.ID).includes(item)? '' : 'disabled'}`}
-                        onClick={() => {
-                            if (listofoptions.map(obj => obj.ID).includes(item)) {
-                                setSelectedId(cache[item].facrel.ID)
-                            }
-                        }}
+                        className={'select-item-wrap'}
                     >
-                        <span className={'item-left'}>
-                            <span className={'item-name'}>
-                                {cache[item].facrel.EquipmentItem.GetTrueName()}
-                            </span>
-                            
-                        </span>
-
-                        <span className={'item-right'}>
-                            <span className={'item-cost'}>
-                                {cache[item].facrel.Cost &&
-                                    <>
-                                    {cache[item].cost + " " + getCostType(cache[item].facrel.CostType) }
-                                    </>
+                        <div
+                            className={`select-item ${selectedId === cache[item].facrel.ID ? 'selected' : ''} ${listofoptions.map(obj => obj.ID).includes(item)? '' : 'disabled'}`}
+                            onClick={() => {
+                                if (listofoptions.map(obj => obj.ID).includes(item)) {
+                                    setSelectedId(cache[item].facrel.ID)
                                 }
+                            }}
+                        >
+                            <span className={'item-left'}>
+                                <span className={'item-name'}>
+                                    {cache[item].facrel.EquipmentItem.GetTrueName()}
+                                </span>
+
                             </span>
 
-                            {((cache[item].limit > 0)) &&
-                                <span className={'item-limit'}>
-                                    Limit: {( cache[item].count_cur + "/" + cache[item].limit ) }
-                                </span>
-                            }
-                            {((cache[item].restrictions )).length > 0 &&
-                                <span className={'item-limit'}>
-                                    Restrictions: {
-                                        (( cache[item].restrictions )).join(', ')
+                            <span className={'item-right'}>
+                                <span className={'item-cost'}>
+                                    {cache[item].facrel.Cost &&
+                                        <>
+                                        {cache[item].cost + " " + getCostType(cache[item].facrel.CostType) }
+                                        </>
                                     }
                                 </span>
-                            }
-                        </span>
+
+                                {((cache[item].limit > 0)) &&
+                                    <span className={'item-limit'}>
+                                        Limit: {( cache[item].count_cur + "/" + cache[item].limit ) }
+                                    </span>
+                                }
+                                {((cache[item].restrictions )).length > 0 &&
+                                    <span className={'item-limit'}>
+                                        Restrictions: {
+                                            (( cache[item].restrictions )).join(', ')
+                                        }
+                                    </span>
+                                }
+                            </span>
+                        </div>
+
+                        {selectedId === cache[item].facrel.ID &&
+                            <div className={'details-wrap'}>
+                                <WbbEquipmentDetails
+                                    equipment={cache[item].facrel.EquipmentItem}
+                                    showType={false}
+                                />
+
+                                <div className={'details-quick-action'}>
+                                    <Button variant="primary"
+                                            onClick={handleSubmit} disabled={!selectedId || isSubmitting}
+                                            className={' mb-3 btn-sm w-100'}
+                                    >
+                                        {isSubmitting ? (
+                                            <FontAwesomeIcon icon={faCircleNotch} className={'icon-inline-left fa-spin '}/>
+                                        ) : (
+                                            <FontAwesomeIcon icon={faPlus} className={'icon-inline-left'}/>
+                                        )}
+                                        {'Add Equipment'}
+                                    </Button>
+                                </div>
+                            </div>
+                        }
                     </div>
                 ))}
             </Modal.Body>
@@ -136,15 +164,6 @@ const WbbModalAddItemToStash: React.FC<WbbModalAddItemToStashProps> = ({ show, o
             <Modal.Footer>
                 <Button variant="secondary" onClick={onClose}>
                     Cancel
-                </Button>
-
-                <Button variant="primary" onClick={handleSubmit} disabled={!selectedId || isSubmitting}>
-                    {isSubmitting ? (
-                        <FontAwesomeIcon icon={faCircleNotch} className={'icon-inline-left fa-spin '} />
-                    ): (
-                        <FontAwesomeIcon icon={faPlus} className={'icon-inline-left'} />
-                    )}
-                    {'Add item'}
                 </Button>
             </Modal.Footer>
         </Modal>

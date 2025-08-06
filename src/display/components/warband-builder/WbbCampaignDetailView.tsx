@@ -51,13 +51,15 @@ const WbbCampaignDetailView: React.FC<WbbCampaignDetailViewProps> = ({ onClose }
         })
     }
 
+    const [campaigntext, setcampaigntext] = useState(warband? warband?.warband_data.GetCampaignNotes() : "");
+
     useEffect(() => {
         async function RunDucatCheck() {
            const threshhold = await warband?.warband_data.GetCampaignTresholdValue()
            if (threshhold != undefined) {
             setducatlimit(threshhold)
-            setKeyvar(keyvar + 1)
            }
+           setKeyvar(keyvar + 1)
         }
 
         RunDucatCheck();
@@ -222,19 +224,19 @@ const WbbCampaignDetailView: React.FC<WbbCampaignDetailViewProps> = ({ onClose }
                 }
 
                 {/* Notes textarea */}
+                
                 <WbbTextarea
-                    initialText={warband.warband_data.GetCampaignNotes()}
-                    title="Campaign Notes"
-                    onSave={(newText : string) => {
+                        initialText={campaigntext}
+                        title="Campaign Notes"
+                        onSave={(newText : string) => {
                             warband?.warband_data.SaveNote(newText, 'campaign')
-                            
+                            setcampaigntext(newText);
                 
                             const Manager : ToolsController = ToolsController.getInstance();
                             Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
                                 () => reloadDisplay())
                         }}
-                />
-
+                    />
 
                 <div className={'info-box'}>
                     <FontAwesomeIcon icon={faInfoCircle} className="info-box-icon"/>

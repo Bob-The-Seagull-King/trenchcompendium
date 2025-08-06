@@ -1505,7 +1505,7 @@ class UserWarband extends DynamicContextObject {
         let note : INote | null = null;
         for (let i = 0; i < this.Notes.length; i++) {
             if (this.Notes[i].title == title) {
-
+                note = this.Notes[i]
                 this.Notes[i].text == text_new;
                 break;
             }
