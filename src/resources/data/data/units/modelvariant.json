@@ -915,6 +915,32 @@
         "new_abilities" : []
     },
     {
+        "id": "md_grailthrall_flybereaved",
+        "name": "Fly Bereaved",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_grailthrall"
+                    }
+                ]
+            }},
+        "base_id": "md_grailthrall",
+        "variant_name": "Base",
+        "team": "hell",
+        "cut_keywords" : [],
+        "keywords" : [],
+        "stats" : {
+            "movement": 6,
+            "movetype": 1
+        },
+        "cut_abilities" : ["ab_undeadfortitude"],
+        "new_abilities" : []
+    },
+    {
         "id": "md_grailthrall_bereaved",
         "name": "Bereaved",
         "source": "core",
@@ -937,6 +963,11 @@
                     },
                     {
                         "category": "armour",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "equipment",
                         "res_type": "all",
                         "value": ""
                     }
