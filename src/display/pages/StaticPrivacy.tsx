@@ -7,9 +7,25 @@ import React, {useState} from 'react'
 import {TrackingManager} from "../components/generics/TrackingManager";
 import PageMetaInformation from "../components/generics/PageMetaInformation";
 
+declare global {
+    interface Window {
+        ezCMP?: {
+            generateCMPFromPrivacyCenter?: () => void;
+        };
+    }
+}
+
 const StaticPrivacy: React.FC = () => {
 
-    const [forceShowPrivacy, setForceShowPrivacy] = useState<number>(0);
+    const handleCMP = () => {
+        if (
+            typeof window !== "undefined" &&
+            window.ezCMP &&
+            typeof window.ezCMP.generateCMPFromPrivacyCenter === "function"
+        ) {
+            window.ezCMP.generateCMPFromPrivacyCenter();
+        }
+    }
 
     return (
         <div className="StaticPrivacy page-static">
@@ -19,7 +35,7 @@ const StaticPrivacy: React.FC = () => {
             />
 
             <div className={'container'}>
-                <TrackingManager forceShow={forceShowPrivacy}/>
+                {/*<TrackingManager forceShow={forceShowPrivacy}/>*/}
 
                 <h1>
                     {'Privacy Policy for Trench Companion'}
@@ -43,7 +59,7 @@ const StaticPrivacy: React.FC = () => {
                     }
 
                     <br/>
-                    <div className={'btn btn-secondary btn-sm mt-3 mb-3'} onClick={() => setForceShowPrivacy(Date.now())}>
+                    <div className={'btn btn-secondary btn-sm mt-3 mb-3'} onClick={() => handleCMP()}>
                         {'Change Privacy Settings'}
                     </div>
                 </p>
