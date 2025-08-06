@@ -121,8 +121,8 @@ const App: React.FC = () => {
                                 <FooterMain />
                             </ImageCreditPopoverProvider>
                             <AdsManager />
-                            {/*<TrackingManager />*/}
-                            <TrackingManagerv2 />
+                            <TrackingManager />
+                            {/*<TrackingManagerv2 />*/}
 
                             <ToastContainer
                                 position="bottom-right"
