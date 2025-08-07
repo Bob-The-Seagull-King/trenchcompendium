@@ -63,7 +63,7 @@ const WbbEditStashAmountModal: React.FC<WbbEditVictoryPointsProps> = ({
 
                 <div className="mb-3">
                     <label htmlFor={'add-cost-input'}>
-                        {'Edit ' + getCostType(costtype) + ' in your stash'}
+                        {'Add ' + getCostType(costtype) + ' to your stash'}
                     </label>
 
                     <input

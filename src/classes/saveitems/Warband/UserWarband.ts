@@ -627,11 +627,16 @@ class UserWarband extends DynamicContextObject {
         return this.GetDucatCost(discount) + this.GetDucatCostStash(discount)
     }
 
+    /**
+     * Number of unspent ducats
+     */
     public GetSumCurrentDucats() {
         return this.Ducats - this.GetCostDucatsTotal(true) -  this.Debts.ducats
     }
 
-    // The total glory available for a warband to spend @TODO Lane this is where you sort budget stuff I think
+    /**
+     * Number of unspent glory
+     */
     public GetSumCurrentGlory() {
         return this.Glory - this.GetCostGloryTotal(true) -  this.Debts.glory
     }
@@ -1218,8 +1223,8 @@ class UserWarband extends DynamicContextObject {
             ValueGlory: this.GetGloryCostStash(), // stash value in glory
             AmountDucats: this.GetSumCurrentDucats(),  // unspent ducats
             AmountGlory: this.GetSumCurrentGlory(), // unspent glory
-            TotalDucats: this.GetDucatCostStash(), // total stash value in ducats
-            TotalGlory: this.GetGloryCostStash(), // total stash value in glory
+            TotalDucats: this.GetDucatTotalStash(), // total stash value in ducats
+            TotalGlory: this.GetGloryTotalStash(), // total stash value in glory
             Items: []
         }
     }
@@ -1247,6 +1252,10 @@ class UserWarband extends DynamicContextObject {
         return TotalDucatCost
     }
 
+    /**
+     * Gets the value of stashed items in ducats
+     * @param discount
+     */
     public GetDucatCostStash(discount = false) {
         
         let TotalDucatCost = 0;
@@ -1282,8 +1291,11 @@ class UserWarband extends DynamicContextObject {
         }
         return TotalGloryCost
     }
-    
 
+    /**
+     * Gets the value of stashed items in glory
+     * @param discount
+     */
     public GetGloryCostStash(discount = false) {
         
         let TotalGloryCost = 0;
@@ -1292,6 +1304,22 @@ class UserWarband extends DynamicContextObject {
             TotalGloryCost += this.Equipment[i].GetTotalGlory(false, discount);
         }
         return TotalGloryCost
+    }
+
+    /**
+     * Returns the total value of stashed ducats and items as ducats
+     * @constructor
+     */
+    public GetDucatTotalStash () {
+        return this.GetDucatCostStash() + this.GetSumCurrentDucats();
+    }
+
+    /**
+     * Returns the total value of stashed glory and items as glory
+     * @constructor
+     */
+    public GetGloryTotalStash () {
+        return this.GetGloryCostStash() + this.GetSumCurrentGlory();
     }
 
     /**
