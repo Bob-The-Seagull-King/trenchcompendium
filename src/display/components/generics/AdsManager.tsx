@@ -10,7 +10,7 @@ declare global {
     }
 }
 
-// const isProduction = true;
+//const isProduction = false;
 const isProduction = window.location.hostname === 'trench-companion.com';
 
 export const AdsManager: React.FC = () => {

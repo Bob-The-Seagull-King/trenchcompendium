@@ -7,6 +7,10 @@ This document lists issues known to exist in the Trench Companion and are curren
 
 ## Warband Builder Issues
 
+### **General Problems**
+- **[Interaction and Data]**
+  - *Warband selections can unselect when other saves/additions are made.*
+
 ### **Exploration Locations**
 - **[Unimplimented Locations]** 
   - *Angelic Instrument* : Unimplimented
