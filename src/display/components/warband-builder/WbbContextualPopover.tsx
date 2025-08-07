@@ -1131,7 +1131,7 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
 
                         <div className={'mb-3'}>
                             <label className="form-label small" htmlFor={'delete-warband-confirm'}>
-                                {"Type 'confirm' to delete your warband."}
+                                {"Type 'Confirm' to delete your warband."}
                             </label>
                             <input
                                 type="text" id={'delete-warband-confirm'}
@@ -1150,7 +1150,7 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                         </Button>
                         <Button variant="primary"
                                 onClick={handleDeleteWarband}
-                                disabled={deleteConfirmInput !== 'confirm'}
+                                disabled={deleteConfirmInput !== 'Confirm'}
                         >
                             Delete
                         </Button>
