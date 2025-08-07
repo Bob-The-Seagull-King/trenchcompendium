@@ -375,7 +375,6 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
         setMode('print');
 
         // Switch to print theme
-        document.body.setAttribute('data-theme', 'light');
         document.body.setAttribute('data-print', 'print');
 
         setTimeout(() => {
@@ -389,7 +388,6 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
         const handleAfterPrint = () => {
 
             setMode('edit');
-            document.body.setAttribute('data-theme', theme);
             document.body.setAttribute('data-print', '');
 
         };
