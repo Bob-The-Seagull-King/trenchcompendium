@@ -66,7 +66,7 @@ export class Campaign {
                 playerName: 'Player 1 name',
                 playerProfileUrl: 'lorem',
                 playerId: 3,
-                playerImageId: 2,
+                playerImageId: 2828,
                 playerImageURL: 'https://synod.trench-companion.com/wp-content/uploads/2025/07/Chorister-Profile-Picture.jpg',
                 warbandRating: '699 Ducats | 2 Glory',
                 warbandRound: 2
@@ -79,13 +79,23 @@ export class Campaign {
                 playerName: 'Player 2 name',
                 playerProfileUrl: 'lorem',
                 playerId: 3,
-                playerImageId: 2,
+                playerImageId: 2818,
                 playerImageURL: 'https://synod.trench-companion.com/wp-content/uploads/2025/07/Yuzbasi-Captain-Profile-Picture-300x300.jpg',
                 warbandRating: '680 Ducats | 0 Glory',
                 warbandRound: 3
             }
         ]
+    }
 
+    /**
+     * This returns a dummy game
+     * @TODO
+     */
+    GetDummyGame () {
+        return {
+            warbands: this.GetWarbands(),
+            date: '04.07.2025'
+        };
     }
 
     /**

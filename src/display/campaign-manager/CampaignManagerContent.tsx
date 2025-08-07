@@ -6,6 +6,7 @@ import CampaignSummary from "./components/CampaignSummary";
 import CampaignWarbands from "./components/CampaignWarbands";
 import CampaignPlayers from "./components/CampaignPlayers";
 import CMManagePanel from "./components/CMManagePanel";
+import CMHistory from "./components/CMHistory";
 
 const CampaignManagerContent: React.FC = () => {
     const { userId, isLoggedIn } = useAuth()
@@ -36,6 +37,8 @@ const CampaignManagerContent: React.FC = () => {
                     <div className={'row'}>
                         <div className={'col-12 col-md-7'}>
                             <CampaignSummary />
+
+                            <CMHistory />
                         </div>
 
                         <div className={'col-12 col-md-5'}>
