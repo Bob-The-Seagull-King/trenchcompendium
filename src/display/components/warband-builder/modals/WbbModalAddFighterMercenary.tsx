@@ -8,6 +8,7 @@ import { getCostType } from '../../../../utility/functions';
 import SynodModelImage from "../../../../utility/SynodModelImage";
 import {useModalSubmitWithLoading} from "../../../../utility/useModalSubmitWithLoading";
 import { CachedFactionModel } from '../../../../classes/saveitems/Warband/UserWarband';
+import AlertCustom from "../../generics/AlertCustom";
 
 interface Fighter {
     id: string;
@@ -103,14 +104,12 @@ const WbbModalAddFighterMercenary: React.FC<WbbModalAddFighterMercenaryProps> = 
                         </span>
                     </div>
                 ))}
-                {
-                    /** TODO Handle Style */
-                }
-                <div className="rules-card ">
-                    <div className={'rules-card-content form-text'}>
-                        {'Trench Dogs and their variants are considered Exploration-Items, not regular mercenaries.'}
-                    </div>
-                </div>
+                <AlertCustom
+                    type={'tip'}
+                    className={'mx-3 my-3'}
+                >
+                    {'Trench Dogs and their variants are considered Exploration-Items, not regular mercenaries.'}
+                </AlertCustom>
             </Modal.Body>
 
             <Modal.Footer>

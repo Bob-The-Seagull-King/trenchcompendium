@@ -6,7 +6,8 @@
 
 // // // // //
 // Light Theme
-body[data-theme='light']
+body[data-theme='light'],
+body[data-print="print"]
 
     --colour_yellow_main: #FEAE00
     --colour_blue_main: #00A2FF
@@ -67,7 +68,7 @@ body[data-theme='light']
 
 // // // // //
 // Dark Theme
-body[data-theme='dark']
+body[data-theme='dark']:not([data-print="print"])
 
     --colour_yellow_main: #FEAE00
     --colour_blue_main: #00A2FF

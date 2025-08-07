@@ -42,8 +42,12 @@ export const WarbandProvider: React.FC<{ children: ReactNode, warband: SumWarban
     );
 };
 
+/* Use this when warband will 100% be defined */
 export const useWarband = () => {
     const context = useContext(WarbandContext);
     if (!context) throw new Error('useWarband must be used within WarbandProvider');
     return context;
 };
+
+/* Use this when warband may be undefined */
+export const useOptionalWarband = () => useContext(WarbandContext);

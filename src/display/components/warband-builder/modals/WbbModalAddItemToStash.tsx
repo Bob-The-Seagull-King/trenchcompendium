@@ -94,7 +94,7 @@ const WbbModalAddItemToStash: React.FC<WbbModalAddItemToStashProps> = ({ show, o
                 {Object.keys(cache).map((item, index) => (
                     <div
                         key={cache[item].facrel.ID}
-                        className={'select-item-wrap'}
+                        className={'select-items-wrap'}
                     >
                         <div
                             className={`select-item ${selectedId === cache[item].facrel.ID ? 'selected' : ''} ${listofoptions.map(obj => obj.ID).includes(item)? '' : 'disabled'}`}
@@ -108,7 +108,6 @@ const WbbModalAddItemToStash: React.FC<WbbModalAddItemToStashProps> = ({ show, o
                                 <span className={'item-name'}>
                                     {cache[item].facrel.EquipmentItem.GetTrueName()}
                                 </span>
-
                             </span>
 
                             <span className={'item-right'}>

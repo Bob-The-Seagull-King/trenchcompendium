@@ -143,10 +143,10 @@ const WbbPrintViewSimpleFighter: React.FC<WbbPrintViewSimpleFighterProps> = ({ f
                                     {'Movement'}
                                 </td>
                                 <td>
-                                    {'Ranged'}
+                                    {'Melee'}
                                 </td>
                                 <td>
-                                    {'Melee'}
+                                    {'Ranged'}
                                 </td>
                                 <td>
                                     {'Armour'}

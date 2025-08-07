@@ -101,7 +101,7 @@ const WbbModalAddExplorationLocation: React.FC<WbbModalAddExplorationLocationPro
             </Modal.Header>
 
             <Modal.Body>
-                <div  className={'WbbGeneralCollapse-wrap'} >
+                <div  className={'WbbGeneralCollapse-wrap px-3 mb-0 mt-0'} >
                 {availableoptions.map((adv) => (
                     <WbbGeneralCollapse
                         key={adv.table.ID}
@@ -191,8 +191,6 @@ const WbbModalAddExplorationLocation: React.FC<WbbModalAddExplorationLocationPro
                     </WbbGeneralCollapse>
                 ))}
                 </div>
-
-
             </Modal.Body>
 
             <Modal.Footer>

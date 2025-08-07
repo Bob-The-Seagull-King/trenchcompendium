@@ -370,36 +370,35 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
 
 
     /** Print Mode */
+    // Trigger print mode from the popover
     const handlePrintWarband = () => {
-
+        // Switch UI to print mode
         setMode('print');
-
-        // Switch to print theme
-        document.body.setAttribute('data-theme', 'light');
         document.body.setAttribute('data-print', 'print');
 
-        setTimeout(() => {
-            window.print();
-        }, 200);
+        // Add ?print=true to the URL and push a new history entry:contentReference[oaicite:0]{index=0}
+        const url = new URL(window.location.href);
+        url.searchParams.set('print', 'true');
+        window.history.pushState({}, '', url.toString());
+
+        // Open the print dialog after a brief delay
+        setTimeout(() => window.print(), 200);
     };
 
-    // Listen to print ending (using window events)
-    const [theme, setTheme] = useGlobalState('theme');
+    // Handle end of printing – revert back to edit mode
     useEffect(() => {
+        // The afterprint event fires when printing or print preview closes:contentReference[oaicite:1]{index=1}
         const handleAfterPrint = () => {
-
             setMode('edit');
-            document.body.setAttribute('data-theme', theme);
-            document.body.setAttribute('data-print', '');
-
+            document.body.removeAttribute('data-print');
         };
 
         window.addEventListener('afterprint', handleAfterPrint);
-
         return () => {
             window.removeEventListener('afterprint', handleAfterPrint);
         };
     }, []);
+    /** End Print Mode */
 
     /** Hides popover when a modal is opened */
     useEffect(() => {
@@ -416,6 +415,7 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
             showConfirmDeleteAdvancementModal ||
             showConfirmDeleteInjuryModal ||
             showConfirmRenameWarbandModal ||
+            showConfirmDeleteWarbandModal ||
             showConfirmExportWarbandModal;
 
         if(isAnyModalOpen) {
@@ -442,6 +442,7 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
         showConfirmDeleteAdvancementModal,
         showConfirmDeleteInjuryModal,
         showConfirmRenameWarbandModal,
+        showConfirmDeleteWarbandModal,
         showConfirmExportWarbandModal,
         isActive
     ]);
@@ -1131,7 +1132,7 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
 
                         <div className={'mb-3'}>
                             <label className="form-label small" htmlFor={'delete-warband-confirm'}>
-                                {"Type 'confirm' to delete your warband."}
+                                {"Type 'Confirm' to delete your warband."}
                             </label>
                             <input
                                 type="text" id={'delete-warband-confirm'}
@@ -1150,7 +1151,7 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                         </Button>
                         <Button variant="primary"
                                 onClick={handleDeleteWarband}
-                                disabled={deleteConfirmInput !== 'confirm'}
+                                disabled={deleteConfirmInput !== 'Confirm'}
                         >
                             Delete
                         </Button>
