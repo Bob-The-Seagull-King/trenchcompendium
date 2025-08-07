@@ -49,7 +49,6 @@ import BlogListPage from "./display/pages/BlogListPage";
 import BlogArticlePage from "./display/pages/BlogArticlePage";
 import {ImageCreditPopoverProvider} from "./utility/ImageCreditPopoverContext";
 import {ToastContainer} from "react-toastify";
-import TrackingManagerv2 from "./display/components/generics/TrackingManagerv2";
 import HeadScripts from "./display/components/generics/HeadScripts";
 
 
