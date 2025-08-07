@@ -416,6 +416,7 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
             showConfirmDeleteAdvancementModal ||
             showConfirmDeleteInjuryModal ||
             showConfirmRenameWarbandModal ||
+            showConfirmDeleteWarbandModal ||
             showConfirmExportWarbandModal;
 
         if(isAnyModalOpen) {
@@ -442,6 +443,7 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
         showConfirmDeleteAdvancementModal,
         showConfirmDeleteInjuryModal,
         showConfirmRenameWarbandModal,
+        showConfirmDeleteWarbandModal,
         showConfirmExportWarbandModal,
         isActive
     ]);
