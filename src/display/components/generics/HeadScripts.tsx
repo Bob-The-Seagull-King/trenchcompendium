@@ -7,7 +7,7 @@ import { Helmet } from 'react-helmet';
  * @constructor
  */
 export default function HeadScripts() {
-    const isProduction = window.location.hostname === 'trench-companion.com';
+    const isProduction = false// = window.location.hostname === 'trench-companion.com';
 
 
     if (!isProduction) return null
