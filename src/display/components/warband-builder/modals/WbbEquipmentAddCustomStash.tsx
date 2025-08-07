@@ -167,7 +167,6 @@ const WbbEquipmentAddCustomStash: React.FC<WbbModalAddItemToStashProps> = ({ sho
                     className="form-control"
                     defaultValue={0}
                     onChange={(e) => setCost(parseInt(e.target.value) || 0)}
-                    min={0}
                 />
 
                 

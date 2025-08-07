@@ -69,7 +69,6 @@ const WbbEditVictoryPointsModal: React.FC<WbbEditVictoryPointsProps> = ({
                         setSelectedVP(val === '' ? undefined : parseInt(val));
                     }}
                     onFocus={(e) => e.target.select()}
-                    min={0}
                 />
 
                 {(selectedVP && selectedVP < 0) &&
