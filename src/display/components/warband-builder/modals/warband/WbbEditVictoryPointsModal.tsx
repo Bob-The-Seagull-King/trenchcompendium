@@ -71,7 +71,7 @@ const WbbEditVictoryPointsModal: React.FC<WbbEditVictoryPointsProps> = ({
                     onFocus={(e) => e.target.select()}
                 />
 
-                {(selectedVP && selectedVP < 0) &&
+                {(typeof selectedVP === 'number' && selectedVP < 0) && (
                     <div className={'alert alert-warning my-3'}>
                         <strong>
                             {'Caution'}
@@ -80,7 +80,7 @@ const WbbEditVictoryPointsModal: React.FC<WbbEditVictoryPointsProps> = ({
                             {'You cannot have negative Victory points'}
                         </div>
                     </div>
-                }
+                )}
             </Modal.Body>
 
             <Modal.Footer>
