@@ -4246,7 +4246,9 @@
         "stats": {
         },
         "contextdata": {
-            "keyword_ignore": {"value": "kw_fear"}
+            "keyword_ignore": {"value": "kw_fear"},
+            
+            "upgrade_stat": {"upgrades": [{"stat": "melee", "value": 1}]}
         },
         "description": [       
             {
