@@ -205,7 +205,11 @@ class WarbandProperty extends DynamicContextObject  {
             const sel_item = this.SelfDynamicProperty.Selections[i]
             const sel_val = sel_item.SelectedChoice;
             let sel_id = null
-            if (sel_val != undefined) { if (sel_val != null) { sel_id = sel_val.id; } }
+            if (sel_val != undefined && sel_val != null) { 
+                sel_id = sel_val.id; 
+            } else {
+                sel_id = sel_item.SelectedID;
+            }
             let warband_subitem = null;
             if (sel_item.NestedOption != null) {
                 for (let j = 0; j < this.SubProperties.length; j++) {
