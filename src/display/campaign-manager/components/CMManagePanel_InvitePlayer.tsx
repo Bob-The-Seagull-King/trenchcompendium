@@ -86,11 +86,11 @@ const CMManagePanel_InvitePlayer: React.FC = () => {
                                     <div className={'player-name'}>
                                         {player.name}
                                     </div>
-                                        {player.isInCampaign &&
-                                            <div className={'player-status'}>
-                                                {'Joined'}
-                                            </div>
-                                        }
+                                    {player.isInCampaign && // If player is already in campaign
+                                        <div className={'player-status'}>
+                                            {'Joined'}
+                                        </div>
+                                    }
                                     {(player.isInvited ) && // @TODO: If player is invited
                                         <div className={'player-status'}>
                                             {'Invited'}
