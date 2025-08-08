@@ -9,13 +9,16 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCircleNotch} from "@fortawesome/free-solid-svg-icons";
 import LoadingOverlay from "../components/generics/Loading-Overlay";
 import CampaignManagerContent from "./CampaignManagerContent";
+import {PopoverProvider} from "../../context/PopoverContext";
 
 const CampaignManager: React.FC = () => {
     const { userId, isLoggedIn } = useAuth()
 
     return (
         <CampaignProvider>
-            <CampaignManagerContent />
+            <PopoverProvider>
+                <CampaignManagerContent />
+            </PopoverProvider>
         </CampaignProvider>
     );
 };

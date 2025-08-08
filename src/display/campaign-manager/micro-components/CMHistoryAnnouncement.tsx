@@ -1,6 +1,8 @@
 import React, {useState} from "react";
 import {useCampaign} from "../../../context/CampaignContext";
 import CMPlayerSmall from "./CMPlayerSmall";
+import WbbContextualPopover from "../../components/warband-builder/WbbContextualPopover";
+import CMContextualPopover from "../components/CMContextualPopover";
 
 type CMHistoryAnnouncementProps = {
     announcement: {
@@ -30,7 +32,15 @@ const CMHistoryAnnouncement: React.FC<CMHistoryAnnouncementProps> = ({ announcem
 
     return (
         <div className="CMHistoryAnnouncement">
-            <h3 className={'CMHistoryAnnouncement-title'}>{announcement.title}</h3>
+            <h3 className={'CMHistoryAnnouncement-title'}>
+                {announcement.title}
+
+                <CMContextualPopover
+                    id={`announcement-${announcement.title}`}
+                    type="announcement"
+                    item={announcement} // this is a placeholder
+                />
+            </h3>
             <div className={'CMHistoryAnnouncement-date'}>{announcement.date}</div>
 
             <CMPlayerSmall

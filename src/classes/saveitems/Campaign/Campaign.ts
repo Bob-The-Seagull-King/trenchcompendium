@@ -142,6 +142,7 @@ export class Campaign {
 
         return ({
             date: '17.05.2025',
+            title: 'Welcome',
             text: "Welcome to the new campaign!\n" +
                 "Here are the initial rules:\n" +
                 "- No cheating\n" +
