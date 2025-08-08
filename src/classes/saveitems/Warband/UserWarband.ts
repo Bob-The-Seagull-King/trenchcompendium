@@ -1533,17 +1533,15 @@ class UserWarband extends DynamicContextObject {
         let note : INote | null = null;
         for (let i = 0; i < this.Notes.length; i++) {
             if (this.Notes[i].title == title) {
-                note = this.Notes[i]
-                this.Notes[i].text == text_new;
+                
+                this.Notes.splice(i, 1);
             }
         }
-        if (note == null) {
-            note = {
-                text: text_new,
-                title: title
-            }
-            this.Notes.push(note);
+        note = {
+            text: text_new,
+            title: title
         }
+        this.Notes.push(note);
         
 
     }
