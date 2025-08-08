@@ -540,7 +540,7 @@ class UserWarband extends DynamicContextObject {
 
     /**
      * Gets the ID of this warband
-     * - like /ghmghmghm1753371797204
+     * - like prussiantest1754653258679
      */
     public GetId(): any {
         return this.ID;
@@ -549,8 +549,7 @@ class UserWarband extends DynamicContextObject {
     /**
      * Gets the ID of this warband
      * - Like 2670
-     *
-     * @TODO: Use Post ID as is presented in the URL
+     * @TODO: Lane, can you hook up the public post ID here, please?
      */
     public GetPostId(): any {
         return this.ID;
@@ -2158,10 +2157,13 @@ class UserWarband extends DynamicContextObject {
         const reserves = this.GetFighters().filter((item) => (item.model.State == "reserved"))
         const lost = this.GetFighters().filter((item) => (item.model.State == "lost"))
         const dead = this.GetFighters().filter((item) => (item.model.State == "dead"))
-        LineList.push("## Warband " + this.GetTrueName() + " ##")
+        LineList.push("## " + this.GetTrueName() + " ##")
         LineList.push(" ")
-        LineList.push(this.GetDucatRatingCost().toString() + " Ducats | "+ this.GetGloryRatingCost().toString() + " Glory" )
+
+        LineList.push("Faction: " + this.GetFactionName() )
+        LineList.push("Rating: " + this.GetDucatRatingCost().toString() + " Ducats | "+ this.GetGloryRatingCost().toString() + " Glory" )
         LineList.push("Patron: " + this.GetPatronName())
+
         if (elite.length > 0) {
             LineList.push(" ")
             LineList.push(" ")
