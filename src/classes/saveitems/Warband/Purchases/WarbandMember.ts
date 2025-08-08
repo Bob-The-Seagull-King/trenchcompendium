@@ -182,18 +182,15 @@ class WarbandMember extends DynamicContextObject {
         let note : INote | null = null;
         for (let i = 0; i < this.Notes.length; i++) {
             if (this.Notes[i].title == title) {
-
-                this.Notes[i].text == text_new;
-                break;
+                
+                this.Notes.splice(i, 1);
             }
         }
-        if (note == null) {
-            note = {
-                text: text_new,
-                title: title
-            }
-            this.Notes.push(note);
+        note = {
+            text: text_new,
+            title: title
         }
+        this.Notes.push(note);
 
     }
 
