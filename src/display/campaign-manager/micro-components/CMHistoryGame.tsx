@@ -3,6 +3,7 @@ import SynodImageWithCredit from "../../../utility/SynodImageWithCredits";
 import React from "react";
 import {useNavigate} from "react-router-dom";
 import CustomNavLink from "../../components/subcomponents/interactables/CustomNavLink";
+import CMPlayerSmall from "./CMPlayerSmall";
 
 
 interface CMHistoryGameProps {
@@ -67,28 +68,15 @@ const CMHistoryGame: React.FC<CMHistoryGameProps> = (game) => {
 
                 <div className={'CMHistoryGame-Players'}>
                 {game.game.warbands.map((warband, index) => (
-                        <div className={'CMHistoryPlayer'} key={index}>
-                            <CustomNavLink
-                                classes={'player-image-wrap'}
-                                link={`/profile/${warband.playerId}`}
-                                runfunc={() => {
-                                    navigate(`/profile/${warband.playerId}`, {state: Date.now().toString()})
-                                }}>
-                                <SynodImageWithCredit
-                                    imageId={warband.playerImageId}
-                                    className={''}
-                                />
-                            </CustomNavLink>
+                    <CMPlayerSmall
+                        key={index}
+                        player={{
+                            playerId: warband.playerId,
+                            playerName: warband.playerName,
+                            playerImageId: warband.playerImageId
+                        }}
+                    />
 
-                            <CustomNavLink
-                                classes={'CMHistoryPlayer-name'}
-                                link={`/profile/${warband.playerId}`}
-                                runfunc={() => {
-                                    navigate(`/profile/${warband.playerId}`, {state: Date.now().toString()})
-                                }}>
-                                {warband.playerName}
-                            </CustomNavLink>
-                        </div>
                     ))}
                 </div>
 
