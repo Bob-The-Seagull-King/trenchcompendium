@@ -1507,7 +1507,6 @@ class UserWarband extends DynamicContextObject {
             if (this.Notes[i].title == title) {
                 note = this.Notes[i]
                 this.Notes[i].text == text_new;
-                break;
             }
         }
         if (note == null) {
@@ -1517,6 +1516,7 @@ class UserWarband extends DynamicContextObject {
             }
             this.Notes.push(note);
         }
+        
 
     }
 
