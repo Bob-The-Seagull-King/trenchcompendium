@@ -807,7 +807,7 @@
             }
         },
         "options": [],
-        "faction_id" : ["fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion","fc_hereticlegion_fv_hereticnavalraidingparty"],
+        "faction_id" : ["fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion","fc_hereticlegion_fv_hereticnavalraidingparty","fc_hereticlegion_fv_trenchghosts"],
         "model_id" : "md_wretched",
         "captain" : false,
         "mercenary": false,

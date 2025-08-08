@@ -131,6 +131,8 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
      */
     const { play_mode, edit_mode, view_mode, print_mode, setMode } = useWbbMode();
 
+    /** Print Mode */
+    // Manually exit print mode
     const exitPrintMode = () => {
         setMode('edit');
 
@@ -139,7 +141,60 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
 
         // Remove print data attribute
         document.body.removeAttribute('data-print');
+        // Remove the ?print parameter from the URL and push the change into history
+        const url = new URL(window.location.href);
+        url.searchParams.delete('print');
+        window.history.pushState({}, '', url.toString());
     };
+
+    // Central helper to update the mode based on the current URL
+    const updatePrintModeFromUrl = () => {
+        // Parse the current query string; URL.searchParams returns a URLSearchParams object:contentReference[oaicite:2]{index=2}
+        const params = new URLSearchParams(window.location.search);
+        const isPrint = params.get('print') === 'true';
+
+        if (isPrint) {
+            // Switch to print mode if ?print=true is present
+            setMode('print');
+            document.body.setAttribute('data-print', 'print');
+        } else {
+            // Otherwise ensure edit mode
+            setMode('edit');
+            document.body.removeAttribute('data-print');
+        }
+    };
+
+    // On initial mount and whenever the route or search string changes, apply the correct mode
+    useEffect(() => {
+        updatePrintModeFromUrl();
+    }, [location.pathname, location.search]);
+
+    // Listen for back/forward navigation; the popstate event fires when the user moves within the history stack:contentReference[oaicite:3]{index=3}
+    useEffect(() => {
+        const handlePopState = () => {
+            updatePrintModeFromUrl();
+        };
+
+        window.addEventListener('popstate', handlePopState);
+        return () => {
+            window.removeEventListener('popstate', handlePopState);
+        };
+    }, []);
+
+    // Optionally intercept calls to history.pushState so that programmatic URL changes also update the mode.
+    // pushState itself does not emit a popstate event:contentReference[oaicite:4]{index=4}.
+    useEffect(() => {
+        const originalPushState = window.history.pushState;
+        window.history.pushState = function (...args) {
+            originalPushState.apply(this, args);
+            updatePrintModeFromUrl();
+        };
+
+        return () => {
+            window.history.pushState = originalPushState;
+        };
+    }, []);
+    /** End Print Mode */
 
 
     return (

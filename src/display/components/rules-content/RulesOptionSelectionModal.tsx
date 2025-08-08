@@ -32,7 +32,7 @@ const RulesOptionSelection: React.FC<RulesEditSelectionProps> = ({
         <div onClick={(e) => {
             e.stopPropagation();
         }}>
-            <Modal show={show} onHide={onClose} className="WbbEditGoeticSelectionModal" centered>
+            <Modal show={show} onHide={onClose} className="WbbModalAddItem" centered>
                 <Modal.Header closeButton={false}>
                     <Modal.Title>Edit Option</Modal.Title>
 
@@ -45,9 +45,7 @@ const RulesOptionSelection: React.FC<RulesEditSelectionProps> = ({
                 </Modal.Header>
 
                 <Modal.Body>
-                    <h6>Select Option</h6>
-
-                    <div className={'goetic-selection-wrap'}>
+                    <div className={'select-items-wrap'}>
                         {choiceparent.Selections.map((discipline) => (
                             <div
                                 key={discipline.id + discipline.display_str}
