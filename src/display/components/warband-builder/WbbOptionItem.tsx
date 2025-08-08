@@ -95,7 +95,7 @@ const WbbOptionItem: React.FC<WbbOptionItemProps> = ({ option, owner, category }
                 
                     key={keyvar.toString() + updateKey.toString()}
                      onClick={(e) => {
-                         if( canselect ) {
+                         if( canselect && edit_mode ) {
                              handleSelectOption();
                          }
                     }}
