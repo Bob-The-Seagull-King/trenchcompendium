@@ -75,9 +75,11 @@ const WbbPrintViewSimpleOverview: React.FC = () => {
                                 {'Faction'}
                             </div>
                             <div className={'warband-value'}>
-                                {/* @TODO: Output base faction name here */}
-                                {/* Like 'Black Grail or Court of the... '*/}
-                                {warband.warband_data.GetFactionName()}
+                                {basevariant &&
+                                    <>
+                                        {basevariant.GetFactionName()}
+                                    </>
+                                }
                             </div>
                         </div>
                     </div>
@@ -87,10 +89,23 @@ const WbbPrintViewSimpleOverview: React.FC = () => {
                                 {'Variant'}
                             </div>
                             <div className={'warband-value'}>
-                                {/* @TODO: Output variant name or "None" here*/}
-                                {/* @TODO: Output Choice of Sin for court here*/}
-                                {/* Like "Dirge of the great Hegemon", "None" or "Greed" */}
                                 {warband.warband_data.GetFactionName()}
+                                {warband.warband_data.Faction.MyFactionRules.map(
+                                    (item : WarbandProperty) =>
+                                        <div key={warband.warband_data.Faction.MyFactionRules.indexOf(item)}>
+                                            {item.SelfDynamicProperty.Selections.map((sel) =>
+                                            <div key={item.SelfDynamicProperty.Selections.indexOf(sel)}>
+                                                {sel.SelectedChoice != null &&
+                                                <>
+                                                    {sel.SelectedChoice.display_str}
+                                                </>}
+                                            </div>)
+
+                                            }
+                                        </div>
+                                )
+
+                                }
                             </div>
                         </div>
                     </div>
@@ -207,7 +222,36 @@ const WbbPrintViewSimpleOverview: React.FC = () => {
                                 {'Modifiers'}
                             </div>
                             <div className={'warband-value'}>
-                                {/* @TODO: add modifiers here */}
+                                {warband.warband_data.Modifiers.map(
+                                    (item : WarbandProperty) =>
+                                        <div key={warband.warband_data.Modifiers.indexOf(item)}>
+                                            {item.SelfDynamicProperty.OptionChoice.GetTrueName()}
+                                            {item.SelfDynamicProperty.Selections.map((sel) =>
+                                            <div key={item.SelfDynamicProperty.Selections.indexOf(sel)}>
+                                                {sel.SelectedChoice != null &&
+                                                <>
+                                                    {sel.SelectedChoice.display_str}
+                                                </>}
+                                            </div>)
+
+                                            }
+                                        </div>
+                                )}
+                                {warband.warband_data.Fireteams.map(
+                                    (item : WarbandProperty) =>
+                                        <div key={warband.warband_data.Fireteams.indexOf(item)}>
+                                            {item.SelfDynamicProperty.OptionChoice.GetTrueName()}
+                                            {item.SelfDynamicProperty.Selections.map((sel) =>
+                                            <div key={item.SelfDynamicProperty.Selections.indexOf(sel)}>
+                                                {sel.SelectedChoice != null &&
+                                                <>
+                                                    {sel.SelectedChoice.display_str}
+                                                </>}
+                                            </div>)
+
+                                            }
+                                        </div>
+                                )}
                             </div>
                         </div>
                     </div>
