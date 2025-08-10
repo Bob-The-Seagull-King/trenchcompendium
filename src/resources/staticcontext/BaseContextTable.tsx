@@ -3233,6 +3233,41 @@ export const BaseContextCallTable : CallEventTable = {
             return relayVar;
         }
     },
+    gain_replaced_item: {
+        event_priotity: 0,
+        async onGainLocation(this: EventRunner, eventSource : any, trackVal : WarbandProperty, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) {
+            let IsMe = false
+            if (trackVal.SelfDynamicProperty.OptionChoice.ID == context_static.GetID()) {
+                IsMe = true
+            }
+            if (!IsMe) {
+                for (let i = 0; i < trackVal.SelfDynamicProperty.Selections.length; i++) {
+                    const CurSel = trackVal.SelfDynamicProperty.Selections[i]
+                    if (CurSel.SelectedChoice != null) {
+                        if (CurSel.SelectedChoice.value.ID == context_static.GetID()) {
+                            IsMe = true;
+                        }
+                        
+                    }
+                }
+            }
+            if (IsMe) {
+                const { EquipmentFactory } = await import("../../factories/features/EquipmentFactory");
+                const OptionList = await warband.GetFactionEquipmentOptions(true, false, true, false);
+                const FalseID = context_func["treat_as"]
+                for (let i = 0; i < OptionList.length; i++) {
+                    if (OptionList[i].EquipmentItem.GetID() == FalseID) {
+                        const NewData = OptionList[i].SelfData;
+                        NewData.equipment_id = context_func["id"]
+                        NewData.id = "rel_special_context_" + context_func["id"]
+                        const NewModel = await EquipmentFactory.CreateFactionEquipment(NewData, warband, true);
+                        await warband.AddStash(NewModel, true);
+                        break;
+                    }
+                }
+            }
+        }
+    },
     gain_new_item: {
         event_priotity: 0,
         async runConsumableSelect(this: EventRunner, eventSource : any, trackVal : WarbandConsumable, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : WarbandConsumable, origin : WarbandProperty | null) {

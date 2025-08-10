@@ -1436,13 +1436,10 @@
         },
         "contextdata": {
             "location_rule_option": {},
-            "gain_all_from_list": {
-                "count": 1,
-                "obey_restriction": true,
-                "obey_faction": true,
+            "gain_replaced_item": {
                 "treat_as": "eq_musicalinstrument",
                 "auto_replace": true,
-                "id": ["eq_angelicinstrument"]
+                "id": "eq_angelicinstrument"
             }
         },
         "description": [            
