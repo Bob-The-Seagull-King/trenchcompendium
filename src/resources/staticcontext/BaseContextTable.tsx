@@ -3257,11 +3257,13 @@ export const BaseContextCallTable : CallEventTable = {
                 const FalseID = context_func["treat_as"]
                 for (let i = 0; i < OptionList.length; i++) {
                     if (OptionList[i].EquipmentItem.GetID() == FalseID) {
-                        const NewData = OptionList[i].SelfData;
+                        const NewData = Requester.MakeRequest({searchtype: "id", searchparam: {type: "factionequipmentrelationship", id: OptionList[i].GetID()}})
                         NewData.equipment_id = context_func["id"]
                         NewData.id = "rel_special_context_" + context_func["id"]
                         const NewModel = await EquipmentFactory.CreateFactionEquipment(NewData, warband, true);
-                        await warband.AddStash(NewModel, true);
+                        NewModel.SelfData = OptionList[i].SelfData;
+                        console.log(OptionList[i])
+                        await warband.AddStash(NewModel, true, OptionList[i]);
                         break;
                     }
                 }
@@ -3587,9 +3589,26 @@ export const BaseContextCallTable : CallEventTable = {
         async onGainLocation(this: EventRunner, eventSource : any, trackVal : WarbandProperty, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) {
             const {ExplorationLocation} = await import("../../classes/feature/exploration/ExplorationLocation")
             const val = context_static
-            if (val != null && !containsTag(val.Tags, "secondarylevel") ) {
-                val.Tags["secondarylevel"] = true
-                await warband.AddExplorationLocation(val as ExplorationLocation, [])
+            let IsMe = false
+            if (trackVal.SelfDynamicProperty.OptionChoice.ID == context_static.GetID()) {
+                IsMe = true
+            }
+            if (!IsMe) {
+                for (let i = 0; i < trackVal.SelfDynamicProperty.Selections.length; i++) {
+                    const CurSel = trackVal.SelfDynamicProperty.Selections[i]
+                    if (CurSel.SelectedChoice != null) {
+                        if (CurSel.SelectedChoice.value.ID == context_static.GetID()) {
+                            IsMe = true;
+                        }
+                        
+                    }
+                }
+            }
+            if (IsMe) {
+                if (val != null && !containsTag(val.Tags, "secondarylevel") ) {
+                    val.Tags["secondarylevel"] = true
+                    await warband.AddExplorationLocation(val as ExplorationLocation, [])
+                }
             }
         }
     },

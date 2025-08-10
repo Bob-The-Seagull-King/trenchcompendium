@@ -995,10 +995,17 @@ class UserWarband extends DynamicContextObject {
         await this.AddStash(FacEquip)
     }
     
-    public async AddStash ( stash: FactionEquipmentRelationship, free = false ) {
+    public async AddStash ( stash: FactionEquipmentRelationship, free = false, replace : null | FactionEquipmentRelationship = null) {
         let itemcost = stash.Cost;
         if ((this).EquipmentRelCache[stash.ID] != null) {
             itemcost = (this).EquipmentRelCache[stash.ID].cost
+        }
+        let purchase_fac_id = stash.ID
+        let purchase_custom_id = stash.SelfData
+        if (replace != null) {
+            purchase_fac_id = replace.ID
+            purchase_custom_id = replace.SelfData
+
         }
         const Equipment : WarbandEquipment = await WarbandFactory.BuildWarbandEquipmentFromPurchase(stash, this);
         const NewPurchase : WarbandPurchase = new WarbandPurchase({
@@ -1010,8 +1017,8 @@ class UserWarband extends DynamicContextObject {
             sell_full : true,
             discount: (free)? itemcost : 0,
             purchaseid: stash.EquipmentItem.ID,
-            faction_rel_id: stash.ID,
-            custom_rel: stash.SelfData,
+            faction_rel_id: purchase_fac_id,
+            custom_rel: purchase_custom_id,
             modelpurch: false
         }, this, Equipment);
         this.Equipment.push(NewPurchase);
