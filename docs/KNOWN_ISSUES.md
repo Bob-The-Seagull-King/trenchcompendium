@@ -10,11 +10,4 @@ This document lists issues known to exist in the Trench Companion and are curren
 ### **General Problems**
 - **[Interaction and Data]**
   - *Warband selections can unselect when other saves/additions are made.*
-
-### **Exploration Locations**
-- **[Unimplimented Locations]** 
-  - *Angelic Instrument* : Unimplimented
-  - *Tektites* : Unimplimented
-  - *Ruined House* : Unimplimented
-  - *Warband Strongbox* : Unimplimented
-  - *Battlefield of Corpses* : Unimplimented
+  - *Model Stat Choices (base size) not properly saved*
