@@ -18,6 +18,8 @@ const WbbPrintViewSimpleOverview: React.FC = () => {
 
     const [basevariant, setbasevariant] = useState<Faction | null>(null)
     const [keyvar, setkeyvar] = useState(0)
+
+    const [locations, setlocations] = useState<WarbandProperty[]>([]);
     
     useEffect(() => {
         async function RunGetLocations() {
@@ -25,24 +27,14 @@ const WbbPrintViewSimpleOverview: React.FC = () => {
             if (facbase != undefined) {
                 setbasevariant(facbase);
             }
-            setkeyvar(keyvar + 1)
-        }
-
-        RunGetLocations()
-    }, [updateKey]);
-
-    const [locations, setlocations] = useState<WarbandProperty[]>([]);
-
-    useEffect(() => {
-        async function RunUpdate() {
             if (warband) {
                 const Modifiers = warband?.warband_data.GetLocations();
                 setlocations(Modifiers);
             }
-            setkeyvar(keyvar + 1);
+            setkeyvar(keyvar + 1)
         }
 
-        RunUpdate()
+        RunGetLocations()
     }, [updateKey]);
 
     return (
