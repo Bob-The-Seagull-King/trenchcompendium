@@ -81,7 +81,7 @@ class WarbandProperty extends DynamicContextObject  {
         if (this.MyContext != null && data != undefined) {
             for (let i = 0; i < data.length; i++) {
                 const CurVal = data[i]
-                const NewConsumable = new WarbandConsumable(CurVal, this.MyContext as UserWarband);
+                const NewConsumable = new WarbandConsumable(CurVal, this.MyContext as UserWarband, this);
                 await NewConsumable.GrabItem(CurVal);
                 await NewConsumable.GrabOptions();
                 this.Consumables.push(NewConsumable);

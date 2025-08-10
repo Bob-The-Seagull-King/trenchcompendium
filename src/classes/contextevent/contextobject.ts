@@ -35,6 +35,16 @@ class ContextObject extends CompendiumItem {
     }
 
     /**
+     * Gets the name of an object to display outwards.
+     */
+    public GetPresentationName() {
+        if (this.Name != undefined) {
+            return this.Name;
+        }
+        return "name_unidentified";
+    }
+
+    /**
      * Grab context packages from this object, and potentially any child objects.
      */
     public async GrabContextPackages(event_id : string, source_obj : ContextObject, arrs_extra : any[]) : Promise<ContextPackage[]> { return []; }

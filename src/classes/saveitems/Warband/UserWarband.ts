@@ -220,7 +220,7 @@ class UserWarband extends DynamicContextObject {
         if (data == undefined) {return;}
         for (let i = 0; i < data.length; i++) {
             const CurVal = data[i]
-            const NewConsumable = new WarbandConsumable(CurVal, this);
+            const NewConsumable = new WarbandConsumable(CurVal, this, null);
             await NewConsumable.GrabItem(CurVal);
             await NewConsumable.GrabOptions();
             this.Consumables.push(NewConsumable);

@@ -56,6 +56,22 @@ class WarbandEquipment extends DynamicContextObject {
         const subtags = this.GetEquipmentItem().Tags
         return ((containsTag(tags, id)) || (containsTag(subtags, id)))
     }
+
+    /**
+     * Gets the name of an object to display outwards.
+     */
+    public GetPresentationName() {
+        if (this.Name != undefined) {
+            if (this.MyContext != null) {
+                if (this.MyContext instanceof WarbandMember) {
+                    return this.Name + " (" + this.MyContext.GetTrueName() + ")";
+                }
+            }
+            return this.Name;
+        }
+        return "name_unidentified";
+    }
+
     
     public async BuildNewProperties(fighter : WarbandMember, Purchase : WarbandPurchase) {
         

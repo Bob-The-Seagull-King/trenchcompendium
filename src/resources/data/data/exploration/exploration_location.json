@@ -483,10 +483,14 @@
             "location_option": "el_ruinedhouse"
         },
         "contextdata": {
-            "spend_ducats": {
-                "count": 30,
-                "obey_restriction": true,
-                "obey_faction": true
+            "location_rule_option": {},
+            "consumable": {
+                "spend_money": {
+                    "type": 0,
+                    "count": 30,
+                    "obey_restriction": true,
+                    "obey_faction": true
+                }
             }
 
         },
@@ -1378,10 +1382,14 @@
             "location_option": "el_warbandstrongbox"
         },
         "contextdata": {
-            "spend_ducats": {
-                "count": 120,
-                "obey_restriction": true,
-                "obey_faction": true
+            "location_rule_option": {},
+            "consumable": {
+                "spend_money": {
+                    "type": 0,
+                    "count": 120,
+                    "obey_restriction": true,
+                    "obey_faction": true
+                }
             }
         },
         "description": [            
@@ -1401,10 +1409,14 @@
             "location_option": "el_warbandstrongbox"
         },
         "contextdata": {
-            "spend_glory": {
-                "count": 9,
-                "obey_restriction": true,
-                "obey_faction": true
+            "location_rule_option": {},
+            "consumable": {
+                "spend_money": {
+                    "type": 1,
+                    "count": 9,
+                    "obey_restriction": true,
+                    "obey_faction": true
+                }
             }
         },
         "description": [            
@@ -2037,9 +2049,15 @@
             "exploration_table": "et_legendarylocations"
         },
         "contextdata": {
-            "spend_ducats": {
-                "count": 100,
-                "limit": 2
+            "location_rule_option": {},
+            "consumable": {
+                "spend_money": {
+                    "type": 0,
+                    "count": 100,
+                    "limit": 2,
+                    "obey_faction": false,
+                    "include_self": false
+                }
             }
         },
         "description": [            
@@ -2720,12 +2738,12 @@
             "location_option": "el_golgothatektites"
         },
         "contextdata": {
-            "use_on_equipment": {
-                "required": [
-                    {
-                        "type": "category",
-                        "value": "armour"
-                    }
+            "warband_general_hook": {},
+            "warband_wide": {}, 
+            "add_as_modifier": {},
+            "warband_attatch": {
+                "restriction_eq": [ 
+                    { "rest_type": "category", "value": "armour" }
                 ]
             }
         },
@@ -2741,7 +2759,19 @@
                 ]
             }
         ],
-        "options": []
+        "options": [{
+            "ref_id" : "ot_golgothatektites_apply",
+            "name" : "",
+            "description" : [],
+            "category" : "contextobject",
+            "self_ask": true,
+            "option_context" : {"basic_option_default":{}},
+            "dyna_only": true,
+            "parent_level": 3,
+            "hide": true,
+            "single": true,
+            "question_name": "getEquipmentOptionsFromWarband"
+        }]
     },
     {
         "id": "el_golgothatektites_turnin",
@@ -2759,11 +2789,14 @@
                     }
                 ]
             },
-            "spend_glory": {
-                "count": 15,
-                "add_faction": [
-                    "fc_trenchpilgrim"
-                ]
+            "consumable": {
+                "spend_money": {
+                    "type": 1,
+                    "count": 15,
+                    "obey_faction": false,
+                    "include_self": false,
+                    "include_faction": ["fc_trenchpilgrim","fc_newantioch"]
+                }
             }
         },
         "description": [            
