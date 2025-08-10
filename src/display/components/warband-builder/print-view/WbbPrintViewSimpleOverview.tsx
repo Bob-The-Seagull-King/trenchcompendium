@@ -77,7 +77,7 @@ const WbbPrintViewSimpleOverview: React.FC = () => {
                             <div className={'warband-value'}>
                                 {basevariant &&
                                     <>
-                                        {basevariant.GetFactionName()}
+                                        {basevariant.GetTrueName()}
                                     </>
                                 }
                             </div>
