@@ -1032,7 +1032,7 @@ class UserWarband extends DynamicContextObject {
         )
     }
     
-    public async DeleteStash( item : RealWarbandPurchaseEquipment ) {
+    public async DeleteStash( item : RealWarbandPurchaseEquipment, override_safety = false ) {
         
         for (let i = 0; i < this.Equipment.length; i++) {
             if (item.equipment == (this.Equipment[i].HeldObject as WarbandEquipment)) {

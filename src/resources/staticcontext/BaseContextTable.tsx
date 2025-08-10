@@ -3254,6 +3254,8 @@ export const BaseContextCallTable : CallEventTable = {
             if (IsMe) {
                 const { EquipmentFactory } = await import("../../factories/features/EquipmentFactory");
                 const OptionList = await warband.GetFactionEquipmentOptions(true, false, true, false);
+                const List = await warband.GetFactionEquipmentOptions(true, false);
+                const ids = List.map(obj => obj.ID);
                 const FalseID = context_func["treat_as"]
                 for (let i = 0; i < OptionList.length; i++) {
                     if (OptionList[i].EquipmentItem.GetID() == FalseID) {
@@ -3262,7 +3264,23 @@ export const BaseContextCallTable : CallEventTable = {
                         NewData.id = "rel_special_context_" + context_func["id"]
                         const NewModel = await EquipmentFactory.CreateFactionEquipment(NewData, warband, true);
                         NewModel.SelfData = OptionList[i].SelfData;
-                        console.log(OptionList[i])
+                        
+                        if (context_func["auto_replace"]) {
+                            if (context_func["auto_replace"] == true) {
+                                if (warband.GetCountOfEquipmentRel(OptionList[i].GetID()) > 0 && !ids.includes(OptionList[i].GetID())) {
+                                    const list = warband.GetAllEquipment();
+
+                                    for (let k = 0; k < list.length; k++) {
+                                        if (list[k].purchase.PurchaseInterface == OptionList[i].GetID()) {
+                                            if (list[k].equipment.MyContext != null ) {
+                                                await (list[k].equipment.MyContext as any).DeleteStash(list[k]);
+                                                break;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
                         await warband.AddStash(NewModel, true, OptionList[i]);
                         break;
                     }
