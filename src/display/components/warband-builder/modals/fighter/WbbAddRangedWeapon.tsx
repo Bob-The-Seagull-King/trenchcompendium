@@ -38,7 +38,7 @@ const WbbModalAddRangedWeapon: React.FC<WbbModalAddRangedWeaponProps> = ({ show,
 
 
     return (
-        <Modal show={show} onHide={onClose} className="WbbModalAddItem WbbModalAddRangedWeapon" centered>
+        <Modal show={show} onHide={onClose} className="WbbModal WbbModalSelect WbbModalAddRangedWeapon" centered>
             <Modal.Header closeButton={false}>
                 <Modal.Title>Select Ranged Weapon</Modal.Title>
 

@@ -91,7 +91,7 @@ const WbbModalAddFighterCustom: React.FC<WbbModalAddFighterTroopProps> = ({ show
 
 
     return (
-        <Modal show={show} onHide={onClose} className={'WbbModalAddItem WbbModalAddFighter WbbModalAddFighterCustom'} centered>
+        <Modal show={show} onHide={onClose} className={'WbbModal WbbModalSelect WbbModalSelect_Fighter WbbModalAddFighterCustom'} centered>
             <Modal.Header closeButton={false}>
                 <Modal.Title>Add Custom Fighter</Modal.Title>
 
@@ -104,8 +104,8 @@ const WbbModalAddFighterCustom: React.FC<WbbModalAddFighterTroopProps> = ({ show
             </Modal.Header>
 
             <Modal.Body>
-                <div className="mb-3">
-                    <label htmlFor="factionSelect" className="form-label">Faction</label>
+                <div className="my-3 mx-3">
+                    <label htmlFor="factionSelect" className="form-label">Filter by Faction</label>
                     <select
                         id="factionSelect"
                         className="form-select"
@@ -119,7 +119,7 @@ const WbbModalAddFighterCustom: React.FC<WbbModalAddFighterTroopProps> = ({ show
                     </select>
                 </div>
 
-                <hr/>
+                <div className={'my-4'}></div>
 
                 {filteredFighters.map((fighter) => (
                     <div
@@ -140,38 +140,39 @@ const WbbModalAddFighterCustom: React.FC<WbbModalAddFighterTroopProps> = ({ show
                         </span>
                     </div>
                 ))}
-                
-                <hr/>
-                <input
-                    type="number" id={'add-cost-input'}
-                    className="form-control"
-                    defaultValue={0}
-                    onChange={(e) => setCost(parseInt(e.target.value) || 0)}
-                    min={0}
-                />
 
-                
-                <div className={'mt-2'} style={{width:"100%"}}>
-                    <Button className={'btn btn-primary ' + (costType == 0 ? 'perma-active':'')}
-                        onClick={() => setCostType(0)}
-                        style={{width:"50%"}}
-                        active={costType == 0}>
-                        <FontAwesomeIcon icon={faCoins} className="icon-inline-left-l"/>
-                        {'Spend Ducats'}
-                    </Button>
-                    <Button className={'btn btn-primary ' + (costType == 1? 'perma-active':'')}
-                        onClick={() => setCostType(1)}
-                        style={{width:"50%"}}
-                        active={costType == 1}>
-                        <FontAwesomeIcon icon={faTrophy} className="icon-inline-left-l"/>
-                        {'Spend Glory'}
-                    </Button>
+                <div className={'px-3'}>
+                    <input
+                        type="number" id={'add-cost-input'}
+                        className="form-control my-3"
+                        defaultValue={0}
+                        onChange={(e) => setCost(parseInt(e.target.value) || 0)}
+                        min={0}
+                    />
+
+                    <div className={'my-3'}>
+                        <div className={'mt-2'} style={{width: "100%"}}>
+                            <Button className={'btn btn-primary ' + (costType == 0 ? 'perma-active' : '')}
+                                    onClick={() => setCostType(0)}
+                                    style={{width: "50%"}}
+                                    active={costType == 0}>
+                                <FontAwesomeIcon icon={faCoins} className="icon-inline-left-l"/>
+                                {'Spend Ducats'}
+                            </Button>
+                            <Button className={'btn btn-primary ' + (costType == 1 ? 'perma-active' : '')}
+                                    onClick={() => setCostType(1)}
+                                    style={{width: "50%"}}
+                                    active={costType == 1}>
+                                <FontAwesomeIcon icon={faTrophy} className="icon-inline-left-l"/>
+                                {'Spend Glory'}
+                            </Button>
+                        </div>
+                    </div>
                 </div>
-
             </Modal.Body>
 
             <Modal.Footer>
-                <Button variant="secondary" onClick={onClose}>
+            <Button variant="secondary" onClick={onClose}>
                     Cancel
                 </Button>
                 <Button variant="primary" onClick={handleSubmit} disabled={!selectedId}>

@@ -31,7 +31,7 @@ const WbbEditSelectionModal: React.FC<WbbEditSelectionProps> = ({
         <div onClick={(e) => {
             e.stopPropagation();
         }}>
-            <Modal show={show} onHide={onClose} className="WbbEditSelectionModal WbbModalAddItem" centered>
+            <Modal show={show} onHide={onClose} className="WbbModal WbbModalSelect WbbEditSelectionModal" centered>
                 <Modal.Header closeButton={false}>
                     <Modal.Title>Edit Option</Modal.Title>
 

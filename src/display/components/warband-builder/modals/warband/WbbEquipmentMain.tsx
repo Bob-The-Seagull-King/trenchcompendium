@@ -20,7 +20,7 @@ const WbbEquipmentMain: React.FC<EquipmentItemProps> = (props : EquipmentItemPro
     const abilityObject = (((props.item.HeldObject as WarbandEquipment).MyEquipment.SelfDynamicProperty.OptionChoice as Equipment))
     
     return (
-        <div className={'RulesEquipmentMain'}>
+        <div className={'WbbEquipmentMain'}>
             {/* Keywords */}
             {abilityObject.KeyWord.length > 0 &&
                 <>

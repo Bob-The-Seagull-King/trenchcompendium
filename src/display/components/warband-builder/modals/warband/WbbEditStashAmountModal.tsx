@@ -29,7 +29,7 @@ const WbbEditStashAmountModal: React.FC<WbbEditVictoryPointsProps> = ({
     };
 
     return (
-        <Modal show={show} onHide={onClose} className="WbbModalEdit WbbModalEditCurrency" centered>
+        <Modal show={show} onHide={onClose} className="WbbModalEdit WbbEditStashAmountModal" centered>
             <Modal.Header closeButton={false}>
                 <Modal.Title>Edit Stashed {getCostType(costtype)}</Modal.Title>
 

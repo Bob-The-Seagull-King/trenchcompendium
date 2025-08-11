@@ -36,7 +36,7 @@ const WbbEditFighterExperience: React.FC<WbbEditFighterExperienceProps> = ({ sho
     });
 
     return (
-        <Modal show={show} onHide={onClose} className="WbbModalAddItem WbbEditFighterExperience" centered>
+        <Modal show={show} onHide={onClose} className="WbbEditFighterExperience" centered>
             <Modal.Header closeButton={false}>
                 <Modal.Title>Set Experience Points</Modal.Title>
 

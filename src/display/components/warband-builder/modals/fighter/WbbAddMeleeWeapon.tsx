@@ -38,7 +38,7 @@ const WbbModalAddMeleeWeapon: React.FC<WbbModalAddMeleeWeaponProps> = ({ show, o
 
 
     return (
-        <Modal show={show} onHide={onClose} className="WbbModalAddItem WbbModalAddMeleeWeapon" centered>
+        <Modal show={show} onHide={onClose} className="WbbModal WbbModalSelect WbbModalAddMeleeWeapon" centered>
             <Modal.Header closeButton={false}>
                 <Modal.Title>Select Melee Weapon</Modal.Title>
 

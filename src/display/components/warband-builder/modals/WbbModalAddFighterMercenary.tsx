@@ -66,7 +66,7 @@ const WbbModalAddFighterMercenary: React.FC<WbbModalAddFighterMercenaryProps> = 
     });
 
     return (
-        <Modal show={show} onHide={onClose} className={'WbbModalAddItem WbbModalAddFighter WbbModalAddFighterMercenary'} centered>
+        <Modal show={show} onHide={onClose} className={'WbbModal WbbModalSelect WbbModalSelect_Fighter  WbbModalAddFighterMercenary'} centered>
             <Modal.Header closeButton={false}>
                 <Modal.Title>Add Mercenary</Modal.Title>
 

@@ -41,7 +41,7 @@ const WbbEditBattleScars: React.FC<WbbEditBattleScarsProps> = ({ show, onClose, 
     };
 
     return (
-        <Modal show={show} onHide={onClose} className="WbbModalEdit WbbEditBattleScars" centered>
+        <Modal show={show} onHide={onClose} className="WbbModal WbbModalSelect WbbEditBattleScars" centered>
             <Modal.Header closeButton={false}>
                 <Modal.Title>Edit Battle Scars</Modal.Title>
 

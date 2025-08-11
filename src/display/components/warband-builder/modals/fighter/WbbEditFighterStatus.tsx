@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
-import {faCircleNotch, faPlus, faXmark} from "@fortawesome/free-solid-svg-icons";
+import {faCheckCircle, faCircleNotch, faPlus, faXmark} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import { makestringpresentable } from '../../../../../utility/functions';
 import {useModalSubmitWithLoading} from "../../../../../utility/useModalSubmitWithLoading";
@@ -29,7 +29,7 @@ const WbbModalEditFighterStatus: React.FC<WbbEditFighterStatusProps> = ({
     });
 
     return (
-        <Modal show={show} onHide={onClose} className="WbbModalAddItem WbbEditFighterStatus" centered>
+        <Modal show={show} onHide={onClose} className="WbbModal WbbModalSelect WbbEditFighterStatus" centered>
             <Modal.Header closeButton={false}>
                 <Modal.Title>Edit Fighter Status</Modal.Title>
 
@@ -42,14 +42,18 @@ const WbbModalEditFighterStatus: React.FC<WbbEditFighterStatusProps> = ({
             </Modal.Header>
 
             <Modal.Body>
-                <h6>{'Select Fighter Status'}</h6>
                 {statuses.map((status) => (
                     <div
                         key={status}
                         className={`select-item ${selectedStatus === status ? 'selected' : ''}`}
                         onClick={() => setSelectedStatus(status)}
                     >
-                        {makestringpresentable(status)}
+                        <span>
+                            {currentStatus === status &&
+                            <FontAwesomeIcon icon={faCheckCircle} className={'icon-inline-left-l'}/>
+                            }
+                            {makestringpresentable(status)}
+                        </span>
                     </div>
                 ))}
             </Modal.Body>
