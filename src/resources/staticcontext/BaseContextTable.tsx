@@ -1169,6 +1169,12 @@ export const BaseContextCallTable : CallEventTable = {
                             const EquipObj = (Equip.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment)
     
                         
+                            if (LimitMax.category) {
+                                if (EquipObj.Category != LimitMax.category) {
+                                    continue;
+                                }
+                            }
+                        
                             if (context_func["ignore"]) {
                                 let DoSkip = false;
                                 for (let j = 0; j < context_func["ignore"].length; j++) {
