@@ -112,6 +112,7 @@ class UserWarband extends DynamicContextObject {
     public EquipmentRelCache : CachedFactionEquipment = {}
     public ModelRelCache : CachedFactionModel = {}
     public GeneralCache : GeneralEventCache = {}
+    public PostID : number;
 
     public DumpCache() {
         this.EquipmentRelCache = {}
@@ -137,10 +138,11 @@ class UserWarband extends DynamicContextObject {
      * objects with DescriptionFactory
      * @param data Object data in IAction format
      */
-    public constructor(data: IUserWarband)
+    public constructor(data: IUserWarband, pubID : number)
     {
         super(data, null)
         this.ID = data.id;
+        this.PostID = pubID;
         this.Context = new WarbandContextItem(data.context);
         this.Ducats = data.ducat_bank;
         this.Glory = data.glory_bank;
@@ -549,10 +551,9 @@ class UserWarband extends DynamicContextObject {
     /**
      * Gets the ID of this warband
      * - Like 2670
-     * @TODO: Lane, can you hook up the public post ID here, please?
      */
     public GetPostId(): any {
-        return this.ID;
+        return this.PostID;
     }
 
     public GetPatron() {

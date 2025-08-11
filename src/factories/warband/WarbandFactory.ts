@@ -137,8 +137,8 @@ class WarbandFactory {
         return Model;
     }
     
-    static async CreateUserWarband(data: IUserWarband) {
-        const rule = new UserWarband(data);
+    static async CreateUserWarband(data: IUserWarband, postID : number) {
+        const rule = new UserWarband(data, postID);
         await rule.NewWarbandItems(data)
         await rule.BuildModels(data.models);
         await rule.BuildEquipment(data.equipment);
@@ -181,7 +181,7 @@ class WarbandFactory {
 
         if (userdata != undefined) {
             try {
-                const user = await WarbandFactory.CreateUserWarband(JSON.parse(userdata) as IUserWarband)
+                const user = await WarbandFactory.CreateUserWarband(JSON.parse(userdata) as IUserWarband, _val)
                 return {
                     id: _val,
                     warband_data: user
