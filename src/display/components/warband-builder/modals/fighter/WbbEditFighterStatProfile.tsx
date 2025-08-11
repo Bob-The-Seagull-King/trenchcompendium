@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
-import {faCircleNotch, faPlus, faXmark} from "@fortawesome/free-solid-svg-icons";
+import {faCheckCircle, faCircleNotch, faPlus, faXmark} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import { makestringpresentable } from '../../../../../utility/functions';
 import { GetStatAsFullString, ModelStatistics } from '../../../../../classes/feature/model/ModelStats';
@@ -36,7 +36,7 @@ const WbbEditFighterStatProfile: React.FC<WbbEditFighterStats> = ({
 
 
     return (
-        <Modal show={show} onHide={onClose} className="WbbModalAddItem WbbEditFighterStatus" centered>
+        <Modal show={show} onHide={onClose} className="WbbModal WbbModalSelect WbbEditFighterStatProfile" centered>
             <Modal.Header closeButton={false}>
                 <Modal.Title>Edit Fighter Stat Profile</Modal.Title>
 
@@ -49,15 +49,18 @@ const WbbEditFighterStatProfile: React.FC<WbbEditFighterStats> = ({
             </Modal.Header>
 
             <Modal.Body>
-                <h6>{'Select Fighter Status'}</h6>
                 {options.map((stat) => (
                     <div
                         key={stat.toString()}
                         className={`select-item ${selectedStatus === stat ? 'selected' : ''}`}
                         onClick={() => setSelectedStatus(stat)}
                     >
-                        
-                        {stat? GetStatAsFullString(stat) : "-"}
+                        <span>
+                            {currentStatus === stat &&
+                                <FontAwesomeIcon icon={faCheckCircle} className={'icon-inline-left-l'}/>
+                            }
+                            {stat ? GetStatAsFullString(stat) : "-"}
+                        </span>
                     </div>
                 ))}
             </Modal.Body>
