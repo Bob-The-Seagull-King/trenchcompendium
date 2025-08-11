@@ -112,6 +112,7 @@ class UserWarband extends DynamicContextObject {
     public EquipmentRelCache : CachedFactionEquipment = {}
     public ModelRelCache : CachedFactionModel = {}
     public GeneralCache : GeneralEventCache = {}
+    public PostID : number;
 
     public DumpCache() {
         this.EquipmentRelCache = {}
@@ -137,10 +138,11 @@ class UserWarband extends DynamicContextObject {
      * objects with DescriptionFactory
      * @param data Object data in IAction format
      */
-    public constructor(data: IUserWarband)
+    public constructor(data: IUserWarband, pubID : number)
     {
         super(data, null)
         this.ID = data.id;
+        this.PostID = pubID;
         this.Context = new WarbandContextItem(data.context);
         this.Ducats = data.ducat_bank;
         this.Glory = data.glory_bank;
@@ -220,7 +222,7 @@ class UserWarband extends DynamicContextObject {
         if (data == undefined) {return;}
         for (let i = 0; i < data.length; i++) {
             const CurVal = data[i]
-            const NewConsumable = new WarbandConsumable(CurVal, this);
+            const NewConsumable = new WarbandConsumable(CurVal, this, null);
             await NewConsumable.GrabItem(CurVal);
             await NewConsumable.GrabOptions();
             this.Consumables.push(NewConsumable);
@@ -483,6 +485,14 @@ class UserWarband extends DynamicContextObject {
             }
         }
 
+        for (let i = 0; i < this.Equipment.length; i++) {
+            const static_packages : ContextPackage[] = await (this.Equipment[i].HeldObject as WarbandEquipment).GrabWarbandubPackages(event_id, source_obj, arrs_extra);
+            for (let j = 0; j < static_packages.length; j++) {
+                static_packages[j].callpath.push("UserWarband")
+                subpackages.push(static_packages[j])
+            }
+        }
+
         return subpackages; 
     }
 
@@ -540,7 +550,7 @@ class UserWarband extends DynamicContextObject {
 
     /**
      * Gets the ID of this warband
-     * - like /ghmghmghm1753371797204
+     * - like prussiantest1754653258679
      */
     public GetId(): any {
         return this.ID;
@@ -549,11 +559,9 @@ class UserWarband extends DynamicContextObject {
     /**
      * Gets the ID of this warband
      * - Like 2670
-     *
-     * @TODO: Use Post ID as is presented in the URL
      */
     public GetPostId(): any {
-        return this.ID;
+        return this.PostID;
     }
 
     public GetPatron() {
@@ -996,10 +1004,17 @@ class UserWarband extends DynamicContextObject {
         await this.AddStash(FacEquip)
     }
     
-    public async AddStash ( stash: FactionEquipmentRelationship, free = false ) {
+    public async AddStash ( stash: FactionEquipmentRelationship, free = false, replace : null | FactionEquipmentRelationship = null) {
         let itemcost = stash.Cost;
         if ((this).EquipmentRelCache[stash.ID] != null) {
             itemcost = (this).EquipmentRelCache[stash.ID].cost
+        }
+        let purchase_fac_id = stash.ID
+        let purchase_custom_id = stash.SelfData
+        if (replace != null) {
+            purchase_fac_id = replace.ID
+            purchase_custom_id = replace.SelfData
+
         }
         const Equipment : WarbandEquipment = await WarbandFactory.BuildWarbandEquipmentFromPurchase(stash, this);
         const NewPurchase : WarbandPurchase = new WarbandPurchase({
@@ -1011,8 +1026,8 @@ class UserWarband extends DynamicContextObject {
             sell_full : true,
             discount: (free)? itemcost : 0,
             purchaseid: stash.EquipmentItem.ID,
-            faction_rel_id: stash.ID,
-            custom_rel: stash.SelfData,
+            faction_rel_id: purchase_fac_id,
+            custom_rel: purchase_custom_id,
             modelpurch: false
         }, this, Equipment);
         this.Equipment.push(NewPurchase);
@@ -1026,7 +1041,7 @@ class UserWarband extends DynamicContextObject {
         )
     }
     
-    public async DeleteStash( item : RealWarbandPurchaseEquipment ) {
+    public async DeleteStash( item : RealWarbandPurchaseEquipment, override_safety = false ) {
         
         for (let i = 0; i < this.Equipment.length; i++) {
             if (item.equipment == (this.Equipment[i].HeldObject as WarbandEquipment)) {
@@ -1533,18 +1548,16 @@ class UserWarband extends DynamicContextObject {
         let note : INote | null = null;
         for (let i = 0; i < this.Notes.length; i++) {
             if (this.Notes[i].title == title) {
-                note = this.Notes[i]
-                this.Notes[i].text == text_new;
-                break;
+                
+                this.Notes.splice(i, 1);
             }
         }
-        if (note == null) {
-            note = {
-                text: text_new,
-                title: title
-            }
-            this.Notes.push(note);
+        note = {
+            text: text_new,
+            title: title
         }
+        this.Notes.push(note);
+        
 
     }
 
@@ -2160,10 +2173,13 @@ class UserWarband extends DynamicContextObject {
         const reserves = this.GetFighters().filter((item) => (item.model.State == "reserved"))
         const lost = this.GetFighters().filter((item) => (item.model.State == "lost"))
         const dead = this.GetFighters().filter((item) => (item.model.State == "dead"))
-        LineList.push("## Warband " + this.GetTrueName() + " ##")
+        LineList.push("## " + this.GetTrueName() + " ##")
         LineList.push(" ")
-        LineList.push(this.GetDucatRatingCost().toString() + " Ducats | "+ this.GetGloryRatingCost().toString() + " Glory" )
+
+        LineList.push("Faction: " + this.GetFactionName() )
+        LineList.push("Rating: " + this.GetDucatRatingCost().toString() + " Ducats | "+ this.GetGloryRatingCost().toString() + " Glory" )
         LineList.push("Patron: " + this.GetPatronName())
+
         if (elite.length > 0) {
             LineList.push(" ")
             LineList.push(" ")

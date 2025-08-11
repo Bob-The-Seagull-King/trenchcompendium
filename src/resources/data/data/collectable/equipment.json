@@ -583,7 +583,7 @@
         ],
         "options": [],
         "keywords": ["kw_grenade","kw_assault","kw_shrapnel","kw_blast"],
-        "modifiers": []
+        "modifiers": ["Blast 2\""]
     },
     {
         "id": "eq_incendiarygrenades",
@@ -722,7 +722,7 @@
         ],
         "options": [],
         "keywords": ["kw_heavy","kw_blast"],
-        "modifiers": []
+        "modifiers": ["Blast 3\""]
     },
     {
         "id": "eq_flamecannon",
@@ -1741,6 +1741,50 @@
         "modifiers": []
     },
     {
+        "id": "eq_promotion",
+        "name": "Promotion",
+        "source": "core",
+        "tags": {"trait": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {
+            "warband_general_hook": {},
+            "warband_wide": {}, 
+            "add_onto_warband": {},
+            "add_extra_equipment": {
+                "count": 1,
+                "restriction": []
+            } 
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": " You can increase the LIMIT of any Weapon or Armour by 1. This benefit remains even if the Promoted model is lost."
+            }
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Glorious deeds on the battlefield may earn the most determined, ruthless and deadly officers a rank amongst the Holy Orders of the Church, Knighthood of the Teutonic Orders, or a title of Hellknight from one of the Dukes or Princes of Hell. Such a warrior will be allowed to carry the heraldic device of their house upon their wargear, and they have many privileges when it comes to allocating the most precious weapons and armour."
+            }
+        ],
+        "options": [ {
+            "ref_id" : "ot_promotion",
+            "name" : "",
+            "description" : [],
+            "self_ask": true,
+            "category" : "contextobject",
+            "option_context" : {"basic_option_default":{}},
+            "dyna_only": true,
+            "parent_level": 7,
+            "question_name": "getEquipmentRelationshipsForWarband"
+        }],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
         "id": "eq_fieldhospital",
         "name": "Field Hospital",
         "source": "core",
@@ -2353,7 +2397,7 @@
         ],
         "options": [],
         "keywords": ["kw_grenade","kw_assault","kw_gas","kw_blast"],
-        "modifiers": []
+        "modifiers": ["Blast 3\""]
     },
     {
         "id": "eq_grenadelauncher",
@@ -2387,7 +2431,7 @@
         ],
         "options": [],
         "keywords": ["kw_heavy","kw_shrapnel","kw_blast"],
-        "modifiers": ["Ignore Cover"]
+        "modifiers": ["Ignore Cover","Blast 3\""]
     },
     {
         "id": "eq_gasgrenadelauncher",
@@ -2423,7 +2467,7 @@
         ],
         "options": [],
         "keywords": ["kw_heavy","kw_gas","kw_blast"],
-        "modifiers": ["Ignore Cover", "Ignore Armour", "-1D to Injuries"]
+        "modifiers": ["Ignore Cover", "Ignore Armour", "-1D to Injuries","Blast 3\""]
     },
     {
         "id": "eq_satchelcharge",
@@ -2457,7 +2501,7 @@
         ],
         "options": [],
         "keywords": ["kw_heavy","kw_consumable","kw_blast"],
-        "modifiers": ["Ignore Cover","+1D to Injuries"]
+        "modifiers": ["Ignore Cover","+1D to Injuries","Blast 3\""]
     },
     {
         "id": "eq_antimaterialrifle",
@@ -3556,7 +3600,7 @@
         ],
         "options": [],
         "keywords": ["kw_heavy","kw_shrapnel"],
-        "modifiers": ["+1D to Injuries","+1D to Hit"]
+        "modifiers": ["+1D to Injuries","+1D to Hit","Blast 3\""]
     },
     {
         "id": "eq_sacrificiallamb",
@@ -3625,7 +3669,7 @@
         ],
         "options": [],
         "keywords": ["kw_heavy","kw_heavy","kw_blast"],
-        "modifiers": ["+1D to Injuries","Ignore Cover"]
+        "modifiers": ["+1D to Injuries","Ignore Cover","Blast 3\""]
     },
     {
         "id": "eq_autocannon",
@@ -3692,7 +3736,7 @@
         ],
         "options": [],
         "keywords": ["kw_blast","kw_gas"],
-        "modifiers": ["Ignore Armour"]
+        "modifiers": ["Ignore Armour","Blast 6\""]
     },
     {
         "id": "eq_gasfilter",
@@ -4737,7 +4781,7 @@
         "source": "core",
         "tags": {"action": true, "weapon": true},
         "category": "ranged",
-        "distance": 10,
+        "distance": 18,
         "stats": {
             "hands_ranged": 2,
             "ranged": true
@@ -4747,13 +4791,13 @@
         "description": [  
             {
                 "tags": {"desc_type" : "paragraph"},
-                "content": "A primitive matchlock weapon that is simple enough that even a yoke fiend is capable of operating it."
+                "content": "If a model equipped with an arquebus has two hands free, it can use it in melee combat as if it were a trench club."
             }
         ],
         "lore": [            
             {
                 "tags": {"desc_type" : "italic"},
-                "content": "A relic firearm of a bygone era, this weapon is loaded with rusty nails, lead shot, grenade shrapnel and shell pieces, some Mourners carry this weapon and form an honour guard of sorts for the Procession."
+                "content": "A primitive matchlock weapon that is simple enough that even a yoke fiend is capable of operating it."
             }
         ],
         "options": [],
@@ -5139,7 +5183,7 @@
         ],
         "options": [],
         "keywords": ["kw_grenade","kw_assault","kw_shrapnel","kw_blast"],
-        "modifiers": []
+        "modifiers": ["Blast 2\""]
     },
     {
         "id": "eq_tormentorchain",
@@ -5204,7 +5248,7 @@
         ],
         "options": [],
         "keywords": ["kw_grenade","kw_blast"],
-        "modifiers": ["Double Blood Markers"]
+        "modifiers": ["Double Blood Markers","Blast 3\""]
     },
     {
         "id": "eq_themarkofcain",
@@ -6323,7 +6367,7 @@
         "lore": [ ],
         "options": [],
         "keywords": ["kw_blast","kw_shrapnel"],
-        "modifiers": []
+        "modifiers": ["Blast 3\""]
     },
     {
         "id": "eq_artillerywitchinfernalgasbomb",
@@ -6363,7 +6407,7 @@
         "lore": [ ],
         "options": [],
         "keywords": ["kw_blast","kw_gas"],
-        "modifiers": ["Ignore Armour"]
+        "modifiers": ["Ignore Armour","Blast 3\""]
     },
     {
         "id": "eq_sineatertenderizermaul",
@@ -6500,7 +6544,7 @@
         "lore": [  ],
         "options": [],
         "keywords": ["kw_consumable"],
-        "modifiers": []
+        "modifiers": ["Blast 3\""]
     },
     {
         "id": "eq_catherinewheel",
@@ -6698,7 +6742,7 @@
         "lore": [ ],
         "options": [],
         "keywords": ["kw_shrapnel","kw_riskyaction","kw_blast"],
-        "modifiers": []
+        "modifiers": ["Blast 3\""]
     },
     {
         "id": "eq_thedragon_stomp",

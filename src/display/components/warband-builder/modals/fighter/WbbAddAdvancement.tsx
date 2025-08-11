@@ -72,7 +72,7 @@ const WbbModalAddAdvancement: React.FC<WbbModalAddAdvancementProps> = ({ show, o
 
 
     return (
-        <Modal show={show} onHide={onClose} className="WbbModalAddItem WbbModalAddAdvancement" centered>
+        <Modal show={show} onHide={onClose} className="WbbModal WbbModalSelect WbbModalAddAdvancement" centered>
             <Modal.Header closeButton={false}>
                 <Modal.Title>Select Advancement</Modal.Title>
 
@@ -85,50 +85,47 @@ const WbbModalAddAdvancement: React.FC<WbbModalAddAdvancementProps> = ({ show, o
             </Modal.Header>
 
             <Modal.Body>
-                <div  className={'WbbGeneralCollapse-wrap'} >
-                    {warband?.warband_data.GetPatron() == null &&
-                        <div className="alert alert-warning my-4 mx-4">
-                            {'No patron selected'}
-                        </div>
-                    }
+                {warband?.warband_data.GetPatron() == null &&
+                    <div className="alert alert-warning my-4 mx-4">
+                        {'No patron selected'}
+                    </div>
+                }
 
-                    {available.map((adv) => (
-                        <WbbGeneralCollapse
-                            key={adv.skillgroup.ID}
-                            title={makestringpresentable(adv.skillgroup.GetTrueName())}
-                            initiallyOpen={false}
-                            nopad={true}
-                        >
-                            <>
-                                {adv.list.map((skl) =>
-                                    <>
-                                        <div
-                                            key={skl.ID}
-                                            className={`select-item ${selectedId === skl.ID ? 'selected' : ''}`}
-                                            onClick={() => handleSelect(skl.ID)}
-                                        >
-                                            <div className="item-name">
-                                                { skl.TableVal != -1 &&
-                                                    <>
-                                                        {skl.TableVal + ' - '}
-                                                    </>
-                                                }
-                                                {skl.GetTrueName()}
-                                            </div>
+                {available.map((adv) => (
+                    <WbbGeneralCollapse
+                        key={adv.skillgroup.ID}
+                        title={makestringpresentable(adv.skillgroup.GetTrueName())}
+                        initiallyOpen={false}
+                        nopad={true}
+                    >
+                        <>
+                            {adv.list.map((skl) =>
+                                <>
+                                    <div
+                                        key={skl.ID}
+                                        className={`select-item ${selectedId === skl.ID ? 'selected' : ''}`}
+                                        onClick={() => handleSelect(skl.ID)}
+                                    >
+                                        <div className="item-name">
+                                            { skl.TableVal != -1 &&
+                                                <>
+                                                    {skl.TableVal + ' - '}
+                                                </>
+                                            }
+                                            {skl.GetTrueName()}
                                         </div>
+                                    </div>
 
-                                        {selectedId === skl.ID &&
-                                            <div className={'select-item-details'}>
-                                                {returnDescription(skl, skl.Description)}
-                                            </div>
-                                        }
-                                    </>
-                                )}
-                            </>
-                        </WbbGeneralCollapse>
-
-                    ))}
-                </div>
+                                    {selectedId === skl.ID &&
+                                        <div className={'select-item-details'}>
+                                            {returnDescription(skl, skl.Description)}
+                                        </div>
+                                    }
+                                </>
+                            )}
+                        </>
+                    </WbbGeneralCollapse>
+                ))}
             </Modal.Body>
 
             <Modal.Footer>

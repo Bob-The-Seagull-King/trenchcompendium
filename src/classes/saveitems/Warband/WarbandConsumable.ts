@@ -11,6 +11,7 @@ import { SelectedOption } from '../../options/SelectedOption';
 import { IChoice } from '../../options/StaticOption';
 import { EquipmentFactory } from '../../../factories/features/EquipmentFactory';
 import { EventRunner } from '../../contextevent/contexteventhandler';
+import { WarbandProperty } from './WarbandProperty';
 
 interface IWarbandConsumable extends IContextObject {
     associate_id : string,
@@ -37,17 +38,19 @@ class WarbandConsumable extends DynamicContextObject  {
     public AssociateID : string;
     public SelectType : string | null = null;
     public Options : IChoice[] = [];
+    public MyOrigin : WarbandProperty | null = null;
 
     /**
      * Assigns parameters and creates a series of description
      * objects with DescriptionFactory
      * @param data Object data in IAction format
      */
-    public constructor(base_obj : IWarbandConsumable, parent : DynamicContextObject | null)
+    public constructor(base_obj : IWarbandConsumable, parent : DynamicContextObject | null, origin : WarbandProperty | null)
     {
         super(base_obj, parent);
         this.AssociateID = base_obj.associate_id;
         this.SelectType = base_obj.object_type;
+        this.MyOrigin = origin;
     }
 
     public async OnSelect(option : IChoice) {
@@ -57,7 +60,7 @@ class WarbandConsumable extends DynamicContextObject  {
         await eventmon.runEvent(
             "runConsumableSelect",
             this,
-            [this.MyContext],
+            [this.MyContext, this.MyOrigin],
             null,
             this
         )
@@ -68,7 +71,7 @@ class WarbandConsumable extends DynamicContextObject  {
         this.Options = await eventmon.runEvent(
             "getConsumableOptionsList",
             this,
-            [this.MyContext],
+            [this.MyContext, this.MyOrigin],
             [],
             this
         )

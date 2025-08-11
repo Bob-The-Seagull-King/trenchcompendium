@@ -53,7 +53,7 @@ const WbbModalAddInjury: React.FC<WbbModalAddInjuryProps> = ({ show, onClose, on
     }
 
     return (
-        <Modal show={show} onHide={onClose} className="WbbModalAddItem WbbModalAddInjury" centered>
+        <Modal show={show} onHide={onClose} className="WbbModal WbbModalSelect WbbModalAddInjury" centered>
             <Modal.Header closeButton={false}>
                 <Modal.Title>Select Injury</Modal.Title>
 

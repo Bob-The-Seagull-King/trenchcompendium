@@ -243,7 +243,7 @@ class StaticOptionContextObjectList extends StaticOption {
                         NewSelections.push({
                             id: OptionContextList[i].ID,
                             value: OptionContextList[i],
-                            display_str : OptionContextList[i].GetTrueName()
+                            display_str : OptionContextList[i].GetPresentationName()
                         })
                     }
                 }

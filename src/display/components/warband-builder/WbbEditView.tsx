@@ -119,12 +119,6 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
     const [theme, setTheme] = useGlobalState('theme');
 
 
-    // Modifier Modal
-    const [showAddModifierModal, setShowAddModifierModal] = useState(false);
-    const handleAddModifier = (modifier: any, selectedOption: any) => {
-        if (!warband) { return; } // Guard
-    };
-
 
     /**
      * View Modes v2
@@ -320,11 +314,6 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                                     onCloseMercenary={() => setShowAddFighterMercenaryModal(false)}
                                     onCloseElite={() => setShowAddFighterEliteModal(false)}
                                     onCloseTroop={() => setShowAddFighterTroopModal(false)}
-                                />
-                                <WbbModalAddModifier
-                                    show={showAddModifierModal}
-                                    onClose={() => setShowAddModifierModal(false)}
-                                    onSubmit={handleAddModifier}
                                 />
                             </>
                         }

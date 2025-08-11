@@ -78,7 +78,7 @@ const WbbModalAddItemToStash: React.FC<WbbModalAddItemToStashProps> = ({ show, o
     }, [show]);
 
     return (
-        <Modal show={show} key={keyvar} onHide={onClose} className="WbbModalAddItem WbbModalAddItemToStash" centered>
+        <Modal show={show} key={keyvar} onHide={onClose} className="WbbModal WbbModalSelect WbbModalAddItemToStash" centered>
             <Modal.Header closeButton={false}>
                 <Modal.Title>Add Item to Stash</Modal.Title>
 
@@ -91,13 +91,14 @@ const WbbModalAddItemToStash: React.FC<WbbModalAddItemToStashProps> = ({ show, o
             </Modal.Header>
 
             <Modal.Body>
+                <div
+                    className={'select-items-wrap'}
+                >
                 {Object.keys(cache).map((item, index) => (
-                    <div
-                        key={cache[item].facrel.ID}
-                        className={'select-items-wrap'}
-                    >
+                    <React.Fragment key={cache[item].facrel.ID}>
                         <div
                             className={`select-item ${selectedId === cache[item].facrel.ID ? 'selected' : ''} ${listofoptions.map(obj => obj.ID).includes(item)? '' : 'disabled'}`}
+
                             onClick={() => {
                                 if (listofoptions.map(obj => obj.ID).includes(item)) {
                                     setSelectedId(cache[item].facrel.ID)
@@ -156,8 +157,9 @@ const WbbModalAddItemToStash: React.FC<WbbModalAddItemToStashProps> = ({ show, o
                                 </div>
                             </div>
                         }
-                    </div>
-                ))}
+                    </React.Fragment>
+                    ))}
+                </div>
             </Modal.Body>
 
             <Modal.Footer>

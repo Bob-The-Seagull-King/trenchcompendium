@@ -65,7 +65,7 @@ const WbbModalAddFighterTroop: React.FC<WbbModalAddFighterTroopProps> = ({ show,
     });
 
     return (
-        <Modal show={show} onHide={onClose} className={'WbbModalAddItem WbbModalAddFighter WbbModalAddFighterTroop'} centered>
+        <Modal show={show} onHide={onClose} className={'WbbModal WbbModalSelect WbbModalSelect_Fighter WbbModalAddFighterTroop'} centered>
             <Modal.Header closeButton={false}>
                 <Modal.Title>Add Troop</Modal.Title>
 

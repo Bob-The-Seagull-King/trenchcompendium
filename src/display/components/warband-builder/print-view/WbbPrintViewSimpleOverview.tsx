@@ -18,31 +18,24 @@ const WbbPrintViewSimpleOverview: React.FC = () => {
 
     const [basevariant, setbasevariant] = useState<Faction | null>(null)
     const [keyvar, setkeyvar] = useState(0)
+
+    const [locations, setlocations] = useState<WarbandProperty[]>([]);
     
     useEffect(() => {
         async function RunGetLocations() {
             const facbase = await warband?.warband_data.GetFactionBase();
+            console.log(warband?.warband_data.Faction.MyFactionRules)
             if (facbase != undefined) {
                 setbasevariant(facbase);
+            }
+            if (warband) {
+                const Modifiers = warband?.warband_data.GetLocations();
+                setlocations(Modifiers);
             }
             setkeyvar(keyvar + 1)
         }
 
         RunGetLocations()
-    }, [updateKey]);
-
-    const [locations, setlocations] = useState<WarbandProperty[]>([]);
-
-    useEffect(() => {
-        async function RunUpdate() {
-            if (warband) {
-                const Modifiers = warband?.warband_data.GetLocations();
-                setlocations(Modifiers);
-            }
-            setkeyvar(keyvar + 1);
-        }
-
-        RunUpdate()
     }, [updateKey]);
 
     return (
@@ -75,9 +68,16 @@ const WbbPrintViewSimpleOverview: React.FC = () => {
                                 {'Faction'}
                             </div>
                             <div className={'warband-value'}>
-                                {/* @TODO: Output base faction name here */}
-                                {/* Like 'Black Grail or Court of the... '*/}
-                                {warband.warband_data.GetFactionName()}
+                                {basevariant != null &&
+                                    <>
+                                        {basevariant.GetTrueName()}
+                                    </>
+                                }
+                                {basevariant == null &&
+                                    <>  
+                                        {warband.warband_data.GetFactionName()}
+                                    </>
+                                }
                             </div>
                         </div>
                     </div>
@@ -87,10 +87,26 @@ const WbbPrintViewSimpleOverview: React.FC = () => {
                                 {'Variant'}
                             </div>
                             <div className={'warband-value'}>
-                                {/* @TODO: Output variant name or "None" here*/}
-                                {/* @TODO: Output Choice of Sin for court here*/}
-                                {/* Like "Dirge of the great Hegemon", "None" or "Greed" */}
-                                {warband.warband_data.GetFactionName()}
+                                {basevariant != null &&
+                                    <>
+                                        {(basevariant.GetTrueName() != warband.warband_data.GetFactionName())? warband.warband_data.GetFactionName() : "Base"}
+                                    </>
+                                }
+                                {basevariant == null &&
+                                    <>  
+                                        {"Base"}
+                                    </>
+                                }
+                                {warband.warband_data.Faction.MyFaction.SelfDynamicProperty.Selections.map((sel) =>
+                                    <div key={warband.warband_data.Faction.MyFaction.SelfDynamicProperty.Selections.indexOf(sel)}>
+                                        {sel.Option.Name}
+                                        {sel.SelectedChoice != null &&
+                                        <>
+                                            {" - " + sel.SelectedChoice.display_str}
+                                        </>
+                                        }
+                                    </div>) 
+                                }
                             </div>
                         </div>
                     </div>
@@ -207,7 +223,36 @@ const WbbPrintViewSimpleOverview: React.FC = () => {
                                 {'Modifiers'}
                             </div>
                             <div className={'warband-value'}>
-                                {/* @TODO: add modifiers here */}
+                                {warband.warband_data.Modifiers.map(
+                                    (item : WarbandProperty) =>
+                                        <div key={warband.warband_data.Modifiers.indexOf(item)}>
+                                            {item.SelfDynamicProperty.OptionChoice.GetTrueName()}
+                                            {item.SelfDynamicProperty.Selections.map((sel) =>
+                                            <div key={item.SelfDynamicProperty.Selections.indexOf(sel)}>
+                                                {sel.SelectedChoice != null &&
+                                                <>
+                                                    {"- " + sel.SelectedChoice.display_str}
+                                                </>}
+                                            </div>)
+
+                                            }
+                                        </div>
+                                )}
+                                {warband.warband_data.Fireteams.map(
+                                    (item : WarbandProperty) =>
+                                        <div key={warband.warband_data.Fireteams.indexOf(item)}>
+                                            {item.SelfDynamicProperty.OptionChoice.GetTrueName()}
+                                            {item.SelfDynamicProperty.Selections.map((sel) =>
+                                            <div key={item.SelfDynamicProperty.Selections.indexOf(sel)}>
+                                                {sel.SelectedChoice != null &&
+                                                <>
+                                                    {"- " + sel.SelectedChoice.display_str}
+                                                </>}
+                                            </div>)
+
+                                            }
+                                        </div>
+                                )}
                             </div>
                         </div>
                     </div>

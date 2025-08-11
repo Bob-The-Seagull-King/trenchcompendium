@@ -103,9 +103,9 @@ const StaticPlanSelection: React.FC = () => {
             <div className={'container'}>
                 <h1>
                     <a className={'headline-back-btn'}
-                       href={'/profile/' + userId+'/settings'}
+                       href={'/profile/' + userId+''}
                        onClick={() => (
-                           navigate('/profile/' + userId+'/settings')
+                           navigate('/profile/' + userId+'')
                        )}>
                         <FontAwesomeIcon icon={faChevronLeft} className={''}/>
                     </a>

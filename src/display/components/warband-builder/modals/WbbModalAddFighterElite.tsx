@@ -64,7 +64,7 @@ const WbbModalAddFighterElite: React.FC<WbbModalAddFighterEliteProps> = ({ show,
     });
 
     return (
-        <Modal show={show} onHide={onClose} key={keyvar} className={'WbbModalAddItem WbbModalAddFighter WbbModalAddFighterElite'} centered>
+        <Modal show={show} onHide={onClose} key={keyvar} className={'WbbModal WbbModalSelect WbbModalSelect_Fighter WbbModalAddFighterElite'} centered>
             <Modal.Header closeButton={false}>
                 <Modal.Title>Add Elite</Modal.Title>
 

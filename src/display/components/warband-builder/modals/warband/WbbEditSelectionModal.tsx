@@ -31,7 +31,7 @@ const WbbEditSelectionModal: React.FC<WbbEditSelectionProps> = ({
         <div onClick={(e) => {
             e.stopPropagation();
         }}>
-            <Modal show={show} onHide={onClose} className="WbbEditSelectionModal" centered>
+            <Modal show={show} onHide={onClose} className="WbbModal WbbModalSelect WbbEditSelectionModal" centered>
                 <Modal.Header closeButton={false}>
                     <Modal.Title>Edit Option</Modal.Title>
 
@@ -44,8 +44,6 @@ const WbbEditSelectionModal: React.FC<WbbEditSelectionProps> = ({
                 </Modal.Header>
 
                 <Modal.Body>
-                    <h6>Select Option</h6>
-
                     <div className={'selection-wrap'}>
                         {choiceparent.Option.Selections.map((discipline) => (
                             <div
