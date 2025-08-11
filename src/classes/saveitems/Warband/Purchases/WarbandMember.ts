@@ -2913,8 +2913,8 @@ class WarbandMember extends DynamicContextObject {
         try {
             await this.DeleteStash(item);
             if (item.purchase.CountCap == true) {
-                (this.MyContext as UserWarband).Debts.ducats +=  Math.ceil(CostVarDucats * debt);
-                (this.MyContext as UserWarband).Debts.glory += Math.ceil(CostVarGlory * debt);
+                (this.MyContext as UserWarband).Debts.ducats +=  Math.floor(CostVarDucats * debt);
+                (this.MyContext as UserWarband).Debts.glory += Math.floor(CostVarGlory * debt);
             }
 
         } catch (e) { console.log(e) }
