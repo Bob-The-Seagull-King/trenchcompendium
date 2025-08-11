@@ -2722,7 +2722,7 @@
             } 
         },
         "faction_id": ["fc_newantioch","fc_newantioch_fv_redbrigade","fc_newantioch_fv_expeditionaryforcedofabyssinia","fc_newantioch_fv_kingdomofalbaassaultdetatchment","fc_newantioch_fc_stortruppenofthefreestateofprussia","fc_newantioch_fc_eirerangers","fc_newantioch_fv_papalstatesinterventionforce"],
-        "equipment_id": "eq_ducalwingedarmour",
+        "equipment_id": "eq_promotion",
         "cost": 6,
         "costtype": 1,
         "limit": 1

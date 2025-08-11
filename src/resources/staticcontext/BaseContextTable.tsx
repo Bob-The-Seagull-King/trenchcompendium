@@ -4204,7 +4204,6 @@ export const BaseContextCallTable : CallEventTable = {
         event_priotity: 0,
         async getEquipmentLimitTrue(this: EventRunner, eventSource : any, relayVar: number, trackVal : UserWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, ref_equip : FactionEquipmentRelationship) {
             const ContextObj = (context_main as DynamicOptionContextObject)
-
             for (let i = 0; i < ContextObj.Selections.length; i++) {
                 if (ContextObj.Selections[i].SelectedChoice != null) {
                     if (ContextObj.Selections[i].SelectedChoice?.id == ref_equip.ID) {
@@ -4294,6 +4293,7 @@ export const BaseContextCallTable : CallEventTable = {
     warband_general_hook: {
         event_priotity: 0,       
         async getEquipmentRelationshipsForWarband(this: EventRunner, eventSource : any, relayVar : FactionEquipmentRelationship[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : UserWarband, staticself : StaticOptionContextObjectList) {
+
             const FacCheck = sourceband.Faction.MyFaction;
             let BaseRels : FactionEquipmentRelationship[] = []
             

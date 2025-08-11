@@ -485,6 +485,14 @@ class UserWarband extends DynamicContextObject {
             }
         }
 
+        for (let i = 0; i < this.Equipment.length; i++) {
+            const static_packages : ContextPackage[] = await (this.Equipment[i].HeldObject as WarbandEquipment).GrabWarbandubPackages(event_id, source_obj, arrs_extra);
+            for (let j = 0; j < static_packages.length; j++) {
+                static_packages[j].callpath.push("UserWarband")
+                subpackages.push(static_packages[j])
+            }
+        }
+
         return subpackages; 
     }
 

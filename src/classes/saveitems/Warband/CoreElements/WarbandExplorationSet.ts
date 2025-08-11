@@ -158,7 +158,7 @@ class WarbandExplorationSet extends DynamicContextObject {
     public async GetSkillsInFormat() {
         const SumSkills : ExplorationSkillSuite[] = [];
         for (let i = 0; i < this.Skills.length; i++) {
-            this.TryAddToSkillsFormat(SumSkills, this.Skills[i], "Warband Skill")
+            this.TryAddToSkillsFormat(SumSkills, this.Skills[i], "Skill")
         }
         for (let i = 0; i < (this.MyContext as UserWarband).Models.length; i++) {
             const Mdl = (this.MyContext as UserWarband).Models[i].HeldObject as WarbandMember;
@@ -168,20 +168,9 @@ class WarbandExplorationSet extends DynamicContextObject {
             }
         }
         
-        const Events : EventRunner = new EventRunner();
-        const SkillList : WarbandProperty[] = await Events.runEvent(
-                "getExplorationSkills",
-                (this),
-                [],
-                [],
-                null
-            )
-        for (let j = 0; j < SkillList.length; j++) {
-            this.TryAddToSkillsFormat(SumSkills, SkillList[j], "Location")
-        }
         const NewSkills = await (this.MyContext as UserWarband).GetSelfExplorationSkills();
         for (let j = 0; j < NewSkills.length; j++) {
-            this.TryAddToSkillsFormat(SumSkills, NewSkills[j], "Warband")
+            this.TryAddToSkillsFormat(SumSkills, NewSkills[j], "Location")
         }
         return SumSkills;
     }
