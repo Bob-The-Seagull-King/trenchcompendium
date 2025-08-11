@@ -24,6 +24,7 @@ const WbbPrintViewSimpleOverview: React.FC = () => {
     useEffect(() => {
         async function RunGetLocations() {
             const facbase = await warband?.warband_data.GetFactionBase();
+            console.log(warband?.warband_data.Faction.MyFactionRules)
             if (facbase != undefined) {
                 setbasevariant(facbase);
             }
@@ -67,9 +68,14 @@ const WbbPrintViewSimpleOverview: React.FC = () => {
                                 {'Faction'}
                             </div>
                             <div className={'warband-value'}>
-                                {basevariant &&
+                                {basevariant != null &&
                                     <>
                                         {basevariant.GetTrueName()}
+                                    </>
+                                }
+                                {basevariant == null &&
+                                    <>  
+                                        {warband.warband_data.GetFactionName()}
                                     </>
                                 }
                             </div>
@@ -81,22 +87,25 @@ const WbbPrintViewSimpleOverview: React.FC = () => {
                                 {'Variant'}
                             </div>
                             <div className={'warband-value'}>
-                                {warband.warband_data.GetFactionName()}
-                                {warband.warband_data.Faction.MyFactionRules.map(
-                                    (item : WarbandProperty) =>
-                                        <div key={warband.warband_data.Faction.MyFactionRules.indexOf(item)}>
-                                            {item.SelfDynamicProperty.Selections.map((sel) =>
-                                            <div key={item.SelfDynamicProperty.Selections.indexOf(sel)}>
-                                                {sel.SelectedChoice != null &&
-                                                <>
-                                                    {sel.SelectedChoice.display_str}
-                                                </>}
-                                            </div>)
-
-                                            }
-                                        </div>
-                                )
-
+                                {basevariant != null &&
+                                    <>
+                                        {(basevariant.GetTrueName() != warband.warband_data.GetFactionName())? warband.warband_data.GetFactionName() : "Base"}
+                                    </>
+                                }
+                                {basevariant == null &&
+                                    <>  
+                                        {"Base"}
+                                    </>
+                                }
+                                {warband.warband_data.Faction.MyFaction.SelfDynamicProperty.Selections.map((sel) =>
+                                    <div key={warband.warband_data.Faction.MyFaction.SelfDynamicProperty.Selections.indexOf(sel)}>
+                                        {sel.Option.Name}
+                                        {sel.SelectedChoice != null &&
+                                        <>
+                                            {" - " + sel.SelectedChoice.display_str}
+                                        </>
+                                        }
+                                    </div>) 
                                 }
                             </div>
                         </div>
@@ -222,7 +231,7 @@ const WbbPrintViewSimpleOverview: React.FC = () => {
                                             <div key={item.SelfDynamicProperty.Selections.indexOf(sel)}>
                                                 {sel.SelectedChoice != null &&
                                                 <>
-                                                    {sel.SelectedChoice.display_str}
+                                                    {"- " + sel.SelectedChoice.display_str}
                                                 </>}
                                             </div>)
 
@@ -237,7 +246,7 @@ const WbbPrintViewSimpleOverview: React.FC = () => {
                                             <div key={item.SelfDynamicProperty.Selections.indexOf(sel)}>
                                                 {sel.SelectedChoice != null &&
                                                 <>
-                                                    {sel.SelectedChoice.display_str}
+                                                    {"- " + sel.SelectedChoice.display_str}
                                                 </>}
                                             </div>)
 
