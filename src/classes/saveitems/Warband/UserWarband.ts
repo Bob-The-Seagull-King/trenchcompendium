@@ -964,8 +964,8 @@ class UserWarband extends DynamicContextObject {
         try {
             await this.DeleteFighter(fighter);
             if (fighter.purchase.CountCap == true) {
-                this.Debts.ducats +=  Math.ceil(CostVarDucats * debt_mod);
-                this.Debts.glory += Math.ceil(CostVarGlory * debt_mod);
+                this.Debts.ducats +=  Math.floor(CostVarDucats * debt_mod);
+                this.Debts.glory += Math.floor(CostVarGlory * debt_mod);
             }
 
 
@@ -1118,8 +1118,8 @@ class UserWarband extends DynamicContextObject {
         try {
             await this.DeleteStash(item);
             if (item.purchase.CountCap == true) {
-                this.Debts.ducats +=  Math.ceil(CostVarDucats * debt_mod);
-                this.Debts.glory += Math.ceil(CostVarGlory * debt_mod);
+                this.Debts.ducats +=  Math.floor(CostVarDucats * debt_mod);
+                this.Debts.glory += Math.floor(CostVarGlory * debt_mod);
             }
 
         } catch (e) { console.log(e) }
