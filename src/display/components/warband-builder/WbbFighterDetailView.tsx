@@ -378,7 +378,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
             <div className={'fighter-card-collapse-wrap'}>
                 {/* Profile Options */}
                 {(edit_mode && complexstate.statchoices.length > 0) &&
-                    <WbbFighterCollapse title="Profile Options" initiallyOpen={true} key={updateKey}>
+                    <WbbFighterCollapse title="Profile Options" initiallyOpen={true}>
                         <>
                             {complexstate.statchoices.map((item) =>
 
