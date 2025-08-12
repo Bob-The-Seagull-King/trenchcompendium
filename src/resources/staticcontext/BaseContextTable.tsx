@@ -4230,6 +4230,7 @@ export const BaseContextCallTable : CallEventTable = {
                     const ModelFaction = await FacModModule.ModelFactory.CreateNewFactionModel(ModelName, null)
                     await warband.AddFighter([ModelFaction]);
                 }
+                trackVal.Discount = trackVal.ItemCost;
                 trackVal.CountCap = false;
             }
         }

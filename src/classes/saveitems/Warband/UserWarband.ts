@@ -1630,7 +1630,7 @@ class UserWarband extends DynamicContextObject {
     public GetCountOfEquipmentRel(id : string) {
         let count = 0;
         for (let i = 0; i < this.Equipment.length; i++) {
-            if (this.Equipment[i].CountCap == false || this.Equipment[i].CountLimit == false) {
+            if (this.Equipment[i].CountLimit == false) {
                 continue;
             }
             const inter = this.Equipment[i].CustomInterface
