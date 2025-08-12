@@ -254,12 +254,12 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                                             />
                                         }
 
-                                        {(edit_mode || view_mode) &&
-                                            <WbbEditViewExplorationLocations
-                                                onClick={() => openDetail('exploration', null)}
-                                                isActive={detailType === 'exploration'}
-                                            />
-                                        }
+                                        {/*{(edit_mode || view_mode) &&*/}
+                                        {/*    <WbbEditViewExplorationLocations*/}
+                                        {/*        onClick={() => openDetail('exploration', null)}*/}
+                                        {/*        isActive={detailType === 'exploration'}*/}
+                                        {/*    />*/}
+                                        {/*}*/}
 
                                         <WbbFighterShows 
                                             openDetail={openDetail}
