@@ -405,7 +405,8 @@
                         "option_id": 0,
                         "restriction": [
                             { "category": "melee" },
-                            { "category": "ranged" }
+                            { "category": "ranged" },
+                            { "category": "armour" }
                         ]
                     }
                 ]
