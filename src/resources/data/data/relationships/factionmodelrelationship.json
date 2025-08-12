@@ -591,27 +591,6 @@
         "warband_maximum" : 1
     },
     {
-        "id": "rel_fc_md_heretichorister_trenchghost",
-        "source": "core",
-        "tags": {},
-        "name": "",
-        "contextdata": {"option_search_viable": {}},
-        "options": [],
-        "faction_id" : ["fc_hereticlegion_fv_trenchghosts"],
-        "model_id" : "md_heretichorister",
-        "captain" : false,
-        "mercenary": false,
-        "cost" : 65,
-        "cost_type" : 0,
-        "restricted_models" : [
-            {
-                "upgrade_ids": ["rel_fc_md_barbedwirebanshee_trenchghost"],
-                "max_count": 0
-            }],
-        "warband_minimum" : 0,
-        "warband_maximum" : 1
-    },
-    {
         "id": "rel_fc_md_barbedwirebanshee_trenchghost",
         "source": "core",
         "tags": {},
@@ -624,11 +603,7 @@
         "mercenary": false,
         "cost" : 65,
         "cost_type" : 0,
-        "restricted_models" : [
-            {
-                "upgrade_ids": ["rel_fc_md_heretichorister_trenchghost"],
-                "max_count": 0
-            }],
+        "restricted_models" : [],
         "warband_minimum" : 0,
         "warband_maximum" : 1
     },
