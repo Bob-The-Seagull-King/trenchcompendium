@@ -1067,6 +1067,11 @@ export const BaseContextCallTable : CallEventTable = {
                             DoApply = true;
                         }
                     }
+                    if(context_func["equip_check"][i]["check_type"] == "tag") {
+                        if (containsTag( coreitem.GetEquipmentItem().Tags, context_func["equip_check"][i]["tag"])) {
+                            DoApply = true;
+                        }
+                    }
                     if(context_func["equip_check"][i]["check_type"] == "category") {
                         if (coreitem.GetEquipmentItem().Category == context_func["equip_check"][i]["value"]) {
                             DoApply = true;
@@ -4230,6 +4235,7 @@ export const BaseContextCallTable : CallEventTable = {
                     const ModelFaction = await FacModModule.ModelFactory.CreateNewFactionModel(ModelName, null)
                     await warband.AddFighter([ModelFaction]);
                 }
+                trackVal.Discount = trackVal.ItemCost;
                 trackVal.CountCap = false;
             }
         }

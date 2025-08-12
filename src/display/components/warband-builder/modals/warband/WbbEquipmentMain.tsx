@@ -9,6 +9,7 @@ import {Equipment, EquipmentStats} from '../../../../../classes/feature/equipmen
 import { Keyword } from '../../../../../classes/feature/glossary/Keyword';
 import { WarbandPurchase, RealWarbandPurchaseModel } from '../../../../../classes/saveitems/Warband/Purchases/WarbandPurchase';
 import { WarbandEquipment } from '../../../../../classes/saveitems/Warband/Purchases/WarbandEquipment';
+import {useGlobalState} from "../../../../../utility/globalstate";
 
 interface EquipmentItemProps {
     item: WarbandPurchase
@@ -18,7 +19,10 @@ interface EquipmentItemProps {
 const WbbEquipmentMain: React.FC<EquipmentItemProps> = (props : EquipmentItemProps) => {
 
     const abilityObject = (((props.item.HeldObject as WarbandEquipment).MyEquipment.SelfDynamicProperty.OptionChoice as Equipment))
-    
+    const [loreshow] = useGlobalState('loreshow');
+
+    console.log(loreshow);
+
     return (
         <div className={'WbbEquipmentMain'}>
             {/* Keywords */}
@@ -50,7 +54,7 @@ const WbbEquipmentMain: React.FC<EquipmentItemProps> = (props : EquipmentItemPro
             }
 
             {/* Lore Text */}
-            {abilityObject.Lore.length > 0 &&
+            {(abilityObject.Lore.length > 0 && (loreshow && loreshow != 'false')) &&
                 <div className={'text-element text-lore'}>
                     <div className={'text-label'}>
                         {'Lore'}

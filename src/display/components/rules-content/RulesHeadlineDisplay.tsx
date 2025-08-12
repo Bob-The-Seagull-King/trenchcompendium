@@ -10,16 +10,7 @@ function runToast( anchor = "" )
 {
     navigator.clipboard.writeText(window.location.origin + window.location.pathname + "#"+anchor)
 
-    toast.error("Link Copied!", {
-        position: "bottom-right",
-        autoClose: 4000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: false,
-        progress: undefined,
-        type: "success"
-    });
+    toast.success("Link Copied!");
 }
 
 interface RulesHeadlineProps {
