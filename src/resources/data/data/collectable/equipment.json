@@ -1553,14 +1553,6 @@
         "stats": {
         },
         "contextdata": {
-            "equipment_add_to": {
-                "equip_check": [
-                    {
-                        "check_type": "id",
-                        "value": "eq_sniperrifle"
-                    }
-                ]
-            }
         },
         "description": [            
             {
