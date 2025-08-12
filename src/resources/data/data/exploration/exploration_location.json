@@ -2657,11 +2657,11 @@
         "description": [            
             {
                 "tags": {"desc_type" : "default"},
-                "content": "You find a sample of Holy DNA. You can treat any one model in your Warband with it. When this model is activated, one INFECTION MARKER or BLOOD MARKER the model has becomes a BLESSINGS MARKER instead.",
+                "content": "You find a sample of Holy DNA. You can treat any one model in your Warband with it. When this model is activated, one INFECTION MARKER or BLOOD MARKER the model has becomes a BLESSING MARKER instead.",
                 "glossary": [
                     {"val": "INFECTION MARKER", "id": "kw_infectionmarker"},
                     {"val": "BLOOD MARKER", "id": "kw_bloodmarker"},
-                    {"val": "BLESSINGS MARKER", "id": "kw_blessingmarker"}
+                    {"val": "BLESSING MARKER", "id": "kw_blessingmarker"}
                 ]
             }
         ],
