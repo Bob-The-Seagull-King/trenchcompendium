@@ -35,6 +35,8 @@ import WbbModifiersList from './modals/warband/WbbModifiersList';
 import WbbLocationsList from './modals/warband/WbbLocationsList';
 import {useWbbMode} from "../../../context/WbbModeContext";
 import WbbUserinfo from "./WbbUserinfo";
+import WbbEditViewExplorationLocations from "./WbbEditViewExplorationLocations";
+import WbbExplorationDetailView from "./WbbExplorationDetailView";
 
 interface WbbEditViewProps {
     warbandData: SumWarband | null;
@@ -60,7 +62,7 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
     }, [warbandData]);
 
     //** Start Detail view stuff
-    type DetailType = 'fighter' | 'stash' | 'warband' | 'campaign' | null;
+    type DetailType = 'fighter' | 'stash' | 'warband' | 'campaign' | 'exploration' | null;
 
     const [detailType, setDetailType] = useState<DetailType>(null);
     const [detailPayload, setDetailPayload] = useState<any>(null);
@@ -252,6 +254,13 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                                             />
                                         }
 
+                                        {(edit_mode || view_mode) &&
+                                            <WbbEditViewExplorationLocations
+                                                onClick={() => openDetail('exploration', null)}
+                                                isActive={detailType === 'exploration'}
+                                            />
+                                        }
+
                                         <WbbFighterShows 
                                             openDetail={openDetail}
                                             detailType={detailType}
@@ -294,6 +303,13 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                                         {/* The Campaign Detail View */}
                                         {detailType === 'campaign' && (
                                             <WbbCampaignDetailView
+                                                onClose={closeDetail}
+                                            />
+                                        )}
+
+                                        {/* The Campaign Detail View */}
+                                        {detailType === 'exploration' && (
+                                            <WbbExplorationDetailView
                                                 onClose={closeDetail}
                                             />
                                         )}

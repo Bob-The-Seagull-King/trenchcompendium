@@ -27,7 +27,7 @@ import { ToolsController } from '../../../../classes/_high_level_controllers/Too
 import {useWbbMode} from "../../../../context/WbbModeContext";
 
 
-type DetailType = 'fighter' | 'stash' | 'warband' | 'campaign' | null;
+type DetailType = 'fighter' | 'stash' | 'warband' | 'campaign' | 'exploration' | null;
 
 interface WbbFighterShow {
     openDetail: (type: DetailType, payload?: any) => void,
