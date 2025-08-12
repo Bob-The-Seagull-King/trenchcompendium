@@ -3902,7 +3902,7 @@
         },
         "faction_id": ["fc_newantioch_fv_redbrigade"],
         "equipment_id": "eq_redbanner",
-        "cost": 1,
+        "cost": 2,
         "costtype": 1,
         "limit": 1
     },
