@@ -583,37 +583,11 @@
         "source": "core",
         "tags": {},
         "contextdata": {
-            "model_equipment_restriction": {
-                "removed": [
-                    {
-                        "category": "melee",
-                        "res_type": "all",
-                        "value": ""
-                    },
-                    {
-                        "category": "ranged",
-                        "res_type": "all",
-                        "value": ""
-                    },
-                    {
-                        "category": "armour",
-                        "res_type": "all",
-                        "value": ""
-                    }
-                ],
-                "required": [
-                    {
-                        "category": "equipment",
-                        "res_type": "id",
-                        "value": "eq_martyrdomdevice"
-                    }
-                ]
-            },
             "restriction_override": {
                 "overrides": [
                     {
                     "type": "id",
-                    "model": "md_ecclesiaticprisoner"
+                    "model": "md_ecclesiasticprisoner"
                     }
                 ]
             }},

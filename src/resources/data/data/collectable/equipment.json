@@ -1733,50 +1733,6 @@
         "modifiers": []
     },
     {
-        "id": "eq_promotion",
-        "name": "Promotion",
-        "source": "core",
-        "tags": {"trait": true},
-        "category": "equipment",
-        "distance": null,
-        "stats": {
-        },
-        "contextdata": {
-            "warband_general_hook": {},
-            "warband_wide": {}, 
-            "add_onto_warband": {},
-            "add_extra_equipment": {
-                "count": 1,
-                "restriction": []
-            } 
-        },
-        "description": [            
-            {
-                "tags": {"desc_type" : "paragraph"},
-                "content": " You can increase the LIMIT of any Weapon or Armour by 1. This benefit remains even if the Promoted model is lost."
-            }
-        ],
-        "lore": [            
-            {
-                "tags": {"desc_type" : "italic"},
-                "content": "Glorious deeds on the battlefield may earn the most determined, ruthless and deadly officers a rank amongst the Holy Orders of the Church, Knighthood of the Teutonic Orders, or a title of Hellknight from one of the Dukes or Princes of Hell. Such a warrior will be allowed to carry the heraldic device of their house upon their wargear, and they have many privileges when it comes to allocating the most precious weapons and armour."
-            }
-        ],
-        "options": [ {
-            "ref_id" : "ot_promotion",
-            "name" : "",
-            "description" : [],
-            "self_ask": true,
-            "category" : "contextobject",
-            "option_context" : {"basic_option_default":{}},
-            "dyna_only": true,
-            "parent_level": 7,
-            "question_name": "getEquipmentRelationshipsForWarband"
-        }],
-        "keywords": [],
-        "modifiers": []
-    },
-    {
         "id": "eq_fieldhospital",
         "name": "Field Hospital",
         "source": "core",

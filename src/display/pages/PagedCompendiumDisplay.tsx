@@ -25,6 +25,7 @@ const PagedCompendiumDisplay = (prop: any) => {
     const urlPath = useLocation().pathname;
     const urlSplits = urlPath.split('/');
     const [_curItem, setCurItem] = useState<any>(null);
+    const [isloading, setloading] = useState(true);
     const [_keyval, setKeyVal] = useState(0);
     const [slugname, setslugname] = useState("Loading");
     
@@ -33,6 +34,7 @@ const PagedCompendiumDisplay = (prop: any) => {
             await ViewPageController.initCollection();
             setslugname("No Items Found")
             setCurItem(InitStateSet());
+            setloading(false)
             setKeyVal((prev) => prev + 1);
         }
     
@@ -42,6 +44,7 @@ const PagedCompendiumDisplay = (prop: any) => {
     useEffect(() => {
         setCurItem(null)
         setCurItem(GetCurrentItem())
+        setloading(false)
         setKeyVal(_keyval+1)
     }, [state]);
 
@@ -97,12 +100,12 @@ const PagedCompendiumDisplay = (prop: any) => {
         <ErrorBoundary fallback={<div>Something went wrong with PagedDisplayCompendium.tsx</div>}>
             <div className="PagedCompendiumDisplay" key={_keyval}>
                 <div className={'rules-content-main'}>
-                    {((_curItem == null) && (DisplayPage.defaultpage)) &&
+                    {((_curItem == null) && (isloading == false) && (DisplayPage.defaultpage)) &&
                         <>
                             {DisplayPage.defaultpage(ViewPageController)}
                         </>
                     }
-                    {(((_curItem == undefined) || (_curItem == null)) && (!DisplayPage.defaultpage)) &&
+                    {(((_curItem == undefined) || (_curItem == null)) &&  (isloading == false) && (!DisplayPage.defaultpage)) &&
                         <h1 className="">{slugname}</h1>
                     }
                     {((_curItem != undefined) && (_curItem != null)) &&

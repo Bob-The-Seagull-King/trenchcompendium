@@ -2342,7 +2342,7 @@ class WarbandMember extends DynamicContextObject {
             NewRefList,
             this
         )
-
+        
         let CanAdd = await eventmon.runEvent(
             "canModelAddItem",
             this,

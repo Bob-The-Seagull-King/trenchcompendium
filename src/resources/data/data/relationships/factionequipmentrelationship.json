@@ -2703,7 +2703,7 @@
                     },
                     {
                         "res_type": "equipment",
-                        "value": "eq_promotion"
+                        "value": "eq_battlefieldtitle"
                     }
                 ]
             } 
@@ -2711,28 +2711,6 @@
         "faction_id": ["fc_newantioch","fc_newantioch_fv_redbrigade","fc_newantioch_fv_expeditionaryforcedofabyssinia","fc_newantioch_fv_kingdomofalbaassaultdetatchment","fc_newantioch_fc_stortruppenofthefreestateofprussia","fc_newantioch_fc_eirerangers","fc_newantioch_fv_papalstatesinterventionforce"],
         "equipment_id": "eq_ducalwingedarmour",
         "cost": 8,
-        "costtype": 1,
-        "limit": 1
-    },
-    {
-        "id": "rel_fc_eq_promotion",
-        "source": "core",
-        "tags": {"exploration_only": true},
-        "name": "Promotion",
-        "contextdata": {     
-                    
-            "faction_eq_restriction": {
-                "permitted": [
-                    {
-                        "res_type": "keyword",
-                        "value": "kw_elite"
-                    }
-                ]
-            } 
-        },
-        "faction_id": ["fc_newantioch","fc_newantioch_fv_redbrigade","fc_newantioch_fv_expeditionaryforcedofabyssinia","fc_newantioch_fv_kingdomofalbaassaultdetatchment","fc_newantioch_fc_stortruppenofthefreestateofprussia","fc_newantioch_fc_eirerangers","fc_newantioch_fv_papalstatesinterventionforce"],
-        "equipment_id": "eq_promotion",
-        "cost": 6,
         "costtype": 1,
         "limit": 1
     },

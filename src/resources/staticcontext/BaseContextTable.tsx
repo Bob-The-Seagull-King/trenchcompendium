@@ -1068,7 +1068,7 @@ export const BaseContextCallTable : CallEventTable = {
                         }
                     }
                     if(context_func["equip_check"][i]["check_type"] == "tag") {
-                        if (containsTag( coreitem.GetEquipmentItem().Tags, context_func["equip_check"][i]["tag"])) {
+                        if (containsTag( coreitem.GetEquipmentItem().Tags, context_func["equip_check"][i]["value"])) {
                             DoApply = true;
                         }
                     }
