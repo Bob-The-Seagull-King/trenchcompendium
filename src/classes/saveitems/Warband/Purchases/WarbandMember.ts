@@ -2050,12 +2050,13 @@ class WarbandMember extends DynamicContextObject {
         const SelectionOptions = await this.GetStatOptions();
 
         const StatSelections : ModelStatistics[] = [];
-
+        
         for (let i =0; i < this.Stat_Selections.length; i++) {
             let IsValid = false;
 
             for (let j = 0; j < SelectionOptions.length; j++) {
-                if (SelectionOptions[j].includes(this.Stat_Selections[i])) {
+                const outputs = SelectionOptions[j].map(obj => GetStatAsFullString(obj));
+                if (outputs.includes(GetStatAsFullString(this.Stat_Selections[i]))) {
                     IsValid = true;
                 }
             }
@@ -2064,7 +2065,6 @@ class WarbandMember extends DynamicContextObject {
                 StatSelections.push(this.Stat_Selections[i])
             }
         }
-
         this.Stat_Selections = StatSelections;
     }
 
