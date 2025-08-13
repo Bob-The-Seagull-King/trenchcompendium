@@ -1054,6 +1054,60 @@ export const BaseContextCallTable : CallEventTable = {
     },
     equipment_add_keyword: {
         event_priotity: 0,
+        async findFinalKeywordsForFactionEquipment(this: EventRunner, eventSource : any, relayVar: Keyword[],  context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, coreitem : Equipment) {
+            const keywordmodule = await import("../../factories/features/KeywordFactory")
+            const IDLIST : string[] = []
+            const newList : Keyword[] = []
+            if (context_func["equip_check"]) {
+                let DoApply = false;
+
+                for (let i = 0; i < context_func["equip_check"].length; i++) {
+                    if(context_func["equip_check"][i]["check_type"] == "id") {
+                        if (coreitem.ID == context_func["equip_check"][i]["value"]) {
+                            DoApply = true;
+                        }
+                    }
+                    if(context_func["equip_check"][i]["check_type"] == "tag") {
+                        if (containsTag( coreitem.Tags, context_func["equip_check"][i]["value"])) {
+                            DoApply = true;
+                        }
+                    }
+                    if(context_func["equip_check"][i]["check_type"] == "category") {
+                        if (coreitem.Category == context_func["equip_check"][i]["value"]) {
+                            DoApply = true;
+                        }
+                    }
+                }
+
+                if (DoApply) {
+                    
+                    if (context_func["removals"]) {
+                        const NewKeys = relayVar.filter((item) => (!context_func["removals"].includes(item.GetID())))
+                        relayVar = NewKeys;
+                    }
+                    if (context_func["additions"]) {
+                        for (let i = 0; i < context_func["additions"].length; i++) {
+                            if (relayVar.filter((item) => (context_func["additions"][i] == (item.GetID()))).length == 0) {
+                                const NewKeyword = await keywordmodule.KeywordFactory.CreateNewKeyword(context_func["additions"][i], null)
+
+                                if (NewKeyword != null) {
+                                    if (!IDLIST.includes(NewKeyword.ID)) {
+                                        IDLIST.push(NewKeyword.ID)
+                                        newList.push(NewKeyword)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            for (let i = 0; i < newList.length; i++) {
+                relayVar.push(newList[i])
+            }
+            
+            return relayVar;
+        },
         async findFinalKeywordsForEquipment(this: EventRunner, eventSource : any, relayVar: Keyword[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, coreitem : WarbandEquipment) {
             const keywordmodule = await import("../../factories/features/KeywordFactory")
             const IDLIST : string[] = []

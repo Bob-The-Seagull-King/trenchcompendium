@@ -2448,7 +2448,7 @@
             }
         ],
         "options": [],
-        "keywords": ["kw_heavy","kw_consumable","kw_blast"],
+        "keywords": ["kw_heavy","kw_consumable","kw_blast","kw_grenade"],
         "modifiers": ["Ignore Cover","+1D to Injuries","Blast 3\""]
     },
     {
