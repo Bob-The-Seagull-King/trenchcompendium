@@ -2152,6 +2152,13 @@ class UserWarband extends DynamicContextObject {
         this.Models.splice(adjustedIndex, 0, NewSet);
     }
 
+    /**
+     * Builds the export text for copy-paste warband summary
+     * - uses the "full" parameter to toggle between a full and compact list
+     *
+     * @param full
+     * @constructor
+     */
     public BuildExport(full = true) {
 
         let full_mode = null // cache busting
@@ -2488,6 +2495,62 @@ class UserWarband extends DynamicContextObject {
 
         this.GeneralCache.exportval = LineList
         return LineList
+    }
+
+
+    /**
+     * Returns a JSON export to use with TTS
+     *
+     * @constructor
+     */
+    public BuildExportJSON () {
+
+        // @TODO: create JSON in this structure:
+        // - warband-id (8511)
+        // - warband-url ('https://trench-companion.com/warband/detail/8511')
+        // - warband-name ('Lorem ipsum dolor sit')
+        // - ducat-bank (123)
+        // - glory-bank (2)
+        // - ducat-rating (699)
+        // - glory-rating (2)
+        // - models []
+        // - - model-name ('Plague knight')
+        // - - model-id ('md_plagueknight')
+        // - - name ('Olaf')
+        // - - stat-move ('6"/Infantry')
+        // - - stat-melee('+1D')
+        // - - stat-ranged ('0')
+        // - - stat-armour ('-2')
+        // - - cost
+        // - - - ducats (120)
+        // - - - glory (3)
+        // - - equipment []
+        // - - - equipment-name ('Locust Spitter')
+        // - - - equipment-id ('eq_locustspitter')
+        // - - - equipment-type ('melee weapon' | 'ranged weapon' | 'armour' | 'equipment')
+        // - - abilities []
+        // - - - ability-name ('On My Command!')
+        // - - - ability-id ('ab_onmycommand')
+        // - - upgrades []
+        // - - - upgrade-name ('Rapid Assault')
+        // - - - upgrade-id ('up_rapidassault')
+        // - - advancements []
+        // - - - advancement-name ('Relentless Charge')
+        // - - - advancement-id ('sk_relentlesscharge')
+        // - - injuries []
+        // - - - injury-name ('Paranoid')
+        // - - - injury-id ('in_paranoid')
+        // - - keywords []
+        // - - - keyword-name ('Strong')
+        // - - - keyword-id ('kw_strong')
+
+        const LineList : string[] = [];
+
+        LineList.push(" ")
+        LineList.push("This feature will be available soon")
+        LineList.push(" ")
+
+        return LineList;
     }
 }
 

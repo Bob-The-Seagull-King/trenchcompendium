@@ -23,6 +23,7 @@ import { UserWarband } from '../../../classes/saveitems/Warband/UserWarband';
 import {SumWarband, WarbandManager} from "../../../classes/saveitems/Warband/WarbandManager";
 import { useNavigate } from 'react-router-dom';
 import {useWbbMode} from "../../../context/WbbModeContext";
+import AlertCustom from "../generics/AlertCustom";
 
 interface WbbContextualPopoverProps {
     id: string;
@@ -55,8 +56,35 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
     const { play_mode, edit_mode, view_mode, print_mode, setMode, isOwner } = useWbbMode(); // play mode v2
 
     const [newname, setName] = useState("")
-    const [exportFull, setExportFull] = useState<boolean>(true); // export options
+
+    // Export Type
+    const [exportType, setExportType] = useState<'full' | 'compact' | 'tts-json'>('full');
+    // Export Text
+    const [exportText, setExportText] = useState<string>('');
     const [exportCopySuccess, setExportCopySuccess] = useState<boolean>(false); // export copied to clipboard
+
+    // change export text based on type
+    useEffect(() => {
+        // Guard check -> Only do if item is SumWarband
+        if (
+            !item ||
+            typeof item !== 'object' ||
+            !item.warband_data ||
+            typeof item.warband_data.BuildExport !== 'function'
+        ) {
+            return;
+        }
+
+        if (exportType === 'full') {
+            setExportText((item as SumWarband).warband_data.BuildExport(true).join('\n'));
+        } else if (exportType === 'compact') {
+            setExportText((item as SumWarband).warband_data.BuildExport(false).join('\n'));
+        } else if (exportType === 'tts-json') {
+            setExportText((item as SumWarband).warband_data.BuildExportJSON().join('\n'));
+        }
+    }, [exportType, item]);
+
+
     const isActive = activePopoverId === id;
 
     const handleToggle = () => {
@@ -1185,17 +1213,24 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                         <div className="btn-group" role="group">
                             <button
                                 type="button"
-                                className={`btn btn-secondary ${exportFull ? 'active' : ''}`}
-                                onClick={() => setExportFull(true)}
+                                className={`btn btn-secondary ${exportType == 'full' ? 'active' : ''}`}
+                                onClick={() => setExportType('full')}
                             >
                                 Full
                             </button>
                             <button
                                 type="button"
-                                className={`btn btn-secondary ${!exportFull ? 'active' : ''}`}
-                                onClick={() => setExportFull(false)}
+                                className={`btn btn-secondary ${exportType == 'compact' ? 'active' : ''}`}
+                                onClick={() => setExportType('compact')}
                             >
                                 Compact
+                            </button>
+                            <button
+                                type="button"
+                                className={`btn btn-secondary ${exportType == 'tts-json' ? 'active' : ''}`}
+                                onClick={() => setExportType('tts-json')}
+                            >
+                                TTS
                             </button>
                         </div>
 
@@ -1205,10 +1240,11 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                         <button
                             className={`btn btn-primary btn-copy mb-3 w-100 ${exportCopySuccess ? 'copy-success' : ''}`}
                             onClick={() => {
-                                const exportText = (item as SumWarband).warband_data.BuildExport(exportFull).join('\n');
-                                navigator.clipboard.writeText(exportText);
-                                setExportCopySuccess(true);
-                                setTimeout(() => setExportCopySuccess(false), 4000);
+                                if(exportText) {
+                                    navigator.clipboard.writeText(exportText);
+                                    setExportCopySuccess(true);
+                                    setTimeout(() => setExportCopySuccess(false), 4000);
+                                }
                             }}
                         >
 
@@ -1235,15 +1271,36 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                                     whiteSpace: 'pre-wrap',
                                     wordBreak: 'break-word'
                                 }}>
-                                    {(item as SumWarband).warband_data.BuildExport(exportFull).map((line, index) => (
-                                        <div key={index}>
-                                            {line}
-                                        </div>
-                                    ))}
+                                    <div >
+                                        {exportText}
+                                    </div>
                             </pre>
-
                             }
                         </div>
+
+                        <AlertCustom
+                            type={'info'}
+                            className={'mt-3'}
+                        >
+                            <>
+                                <div>
+                                    <strong>
+                                        {'Tabletop simulator export'}
+                                    </strong>
+                                </div>
+                                <p>
+                                    {'You can use the following mod to import your warband into TTS. Follow the instructions in the mod for more details.'}
+                                </p>
+                                <a
+                                    href={'https://steamcommunity.com/sharedfiles/filedetails/?id=3491693177 '}
+                                    rel="noopener noreferrer nofollow" target={'_blank'}
+                                >
+                                    {'Trench Crusade - Scriber >'}
+                                </a>
+                            </>
+                        </AlertCustom>
+
+
                     </div>
                 </Modal.Body>
 
