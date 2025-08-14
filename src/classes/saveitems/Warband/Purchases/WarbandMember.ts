@@ -2050,12 +2050,13 @@ class WarbandMember extends DynamicContextObject {
         const SelectionOptions = await this.GetStatOptions();
 
         const StatSelections : ModelStatistics[] = [];
-
+        
         for (let i =0; i < this.Stat_Selections.length; i++) {
             let IsValid = false;
 
             for (let j = 0; j < SelectionOptions.length; j++) {
-                if (SelectionOptions[j].includes(this.Stat_Selections[i])) {
+                const outputs = SelectionOptions[j].map(obj => GetStatAsFullString(obj));
+                if (outputs.includes(GetStatAsFullString(this.Stat_Selections[i]))) {
                     IsValid = true;
                 }
             }
@@ -2064,7 +2065,6 @@ class WarbandMember extends DynamicContextObject {
                 StatSelections.push(this.Stat_Selections[i])
             }
         }
-
         this.Stat_Selections = StatSelections;
     }
 
@@ -2383,6 +2383,16 @@ class WarbandMember extends DynamicContextObject {
         const EquippedItems = await this.GetAllEquipForShow();
         const KeyWordList = await this.GetKeywordsFull();
 
+        const eventmon : EventRunner = new EventRunner();
+        const keywords : Keyword[] = await eventmon.runEvent(
+            "findFinalKeywordsForFactionEquipment",
+            this,
+            [faceq],
+            faceq.GetKeyWords(),
+            null
+        )
+        const keywordids = keywords.map(obj => obj.ID)
+
         for (let i = 0; i < EquippedItems.length; i++) {
             const item : RealWarbandPurchaseEquipment = EquippedItems[i];
 
@@ -2404,14 +2414,13 @@ class WarbandMember extends DynamicContextObject {
             }
             if (
                 ((await item.equipment.GetKeywords()).filter((item) => item.ID == "kw_heavy").length > 0) &&
-                (faceq.GetKeyWordIDs().includes("kw_heavy")) &&
+                (keywordids.includes("kw_heavy")) &&
                 (KeyWordList.filter((item) => item.GetID() == "kw_strong").length == 0)
             ) {
                 return false
             }
         }
 
-        const eventmon : EventRunner = new EventRunner();
         const EquipHands : ModelHands = await eventmon.runEvent(
             "equipmentHandsCost",
             this,

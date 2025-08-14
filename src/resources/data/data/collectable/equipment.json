@@ -2448,7 +2448,7 @@
             }
         ],
         "options": [],
-        "keywords": ["kw_heavy","kw_consumable","kw_blast"],
+        "keywords": ["kw_heavy","kw_consumable","kw_blast","kw_grenade"],
         "modifiers": ["Ignore Cover","+1D to Injuries","Blast 3\""]
     },
     {
@@ -4050,6 +4050,15 @@
         "stats": {
         },
         "contextdata": {
+            "restriction_override": {
+                "overrides": [
+                    {
+                        "type": "equipment",
+                        "value": "eq_machinearmour",
+                        "replace": "eq_highlandmachinearmour"
+                    }
+                ]
+            },
             "upgrade_stat": {"upgrades": [{"stat": "armour", "value": -3}]},
             "model_equipment_restriction": {
                 "required": [
