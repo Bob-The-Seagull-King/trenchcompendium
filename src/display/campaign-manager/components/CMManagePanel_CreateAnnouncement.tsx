@@ -10,6 +10,7 @@ const CMManagePanel_CreateAnnouncement: React.FC = () => {
     const { campaign } = useCampaign();
 
     const [show, setShow] = useState<boolean>(false);
+    const [announcementTitle, setAnnouncementTitle] = useState<string>('');
     const [announcement, setAnnouncement] = useState<string>('');
 
     // handler function
@@ -41,12 +42,25 @@ const CMManagePanel_CreateAnnouncement: React.FC = () => {
                 </Modal.Header>
 
                 <Modal.Body>
+
+                    <div className={'mb-3'}>
+                        <label className="form-label">
+                            {'Announcement title'}
+                        </label>
+                        <input
+                            className="form-control form-control-sm"
+                            type="text"
+                            value={announcementTitle}
+                            onChange={(e) => setAnnouncementTitle(e.target.value)}
+                            placeholder="Announcement title"
+                            required
+                        />
+                    </div>
                     <label
                         htmlFor={'announcement-textarea'}
                     >
-                        {'Create an announcement for all players to see.'}
+                        {'Announcement text'}
                     </label>
-
                     <textarea
                         id="announcement-textarea"
                         className="form-control mt-2"
@@ -54,6 +68,7 @@ const CMManagePanel_CreateAnnouncement: React.FC = () => {
                         onChange={(e) => setAnnouncement(e.target.value)}
                         rows={5}
                         placeholder="Enter your message here..."
+                        required
                     />
                 </Modal.Body>
 
