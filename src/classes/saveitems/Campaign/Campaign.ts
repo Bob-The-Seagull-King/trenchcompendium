@@ -14,7 +14,13 @@ export class Campaign {
     }
 
 
-
+    /**
+     * Returns the ID of the Campaign
+     *
+     */
+    GetID () {
+        return this.id;
+    }
 
     /**
      * Get Campaign Name
@@ -25,10 +31,18 @@ export class Campaign {
 
     /**
      * Returns the user ID of the Admin
-     * @constructor
+     * @TODO
      */
     GetAdminID () {
         return 3;
+    }
+
+    /**
+     * Returns the username of the admin
+     * @TODO
+     */
+    GetAdminUserName () {
+        return 'Emitoo'
     }
 
     /**
@@ -46,7 +60,7 @@ export class Campaign {
     /**
      * Returns the global campaign notes as string
      */
-    GetNotes () {
+    GetDescription () {
         return "This is a test campaign created for demonstration purposes.\n" +
             "Feel free to explore all features without consequences.\n" +
             "Data will not be saved permanently.";

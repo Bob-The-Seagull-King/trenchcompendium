@@ -7,6 +7,7 @@ import {useNavigate} from "react-router-dom";
 
 
 type CMPlayerSmallProps = {
+    useNav?: boolean; // should this be a navigatable element?
     player: {
         playerId: number;
         playerName: string;
@@ -17,32 +18,53 @@ type CMPlayerSmallProps = {
 /**
  * The history Panel in the Campaign Manager
  */
-const CMPlayerSmall: React.FC<CMPlayerSmallProps> = ( player) => {
+const CMPlayerSmall: React.FC<CMPlayerSmallProps> = ({ useNav = true, player }) => {
 
     const { campaign } = useCampaign();
     const navigate = useNavigate();
+
+    if( !useNav ) {
+        return (
+            <div className="CMPlayerSmall">
+                <div
+                    className={'player-image-wrap'}
+                >
+                    <SynodImageWithCredit
+                        imageId={player.playerImageId}
+                        className={''}
+                    />
+                </div>
+
+                <div
+                    className={'CMHistoryPlayer-name'}
+                >
+                    {player.playerName}
+                </div>
+            </div>
+        )
+    }
 
     return (
         <div className="CMPlayerSmall">
             <CustomNavLink
                 classes={'player-image-wrap'}
-                link={`/profile/${player.player.playerId}`}
+                link={`/profile/${player.playerId}`}
                 runfunc={() => {
-                    navigate(`/profile/${player.player.playerId}`, {state: Date.now().toString()})
+                    navigate(`/profile/${player.playerId}`, {state: Date.now().toString()})
                 }}>
                 <SynodImageWithCredit
-                    imageId={player.player.playerImageId}
+                    imageId={player.playerImageId}
                     className={''}
                 />
             </CustomNavLink>
 
             <CustomNavLink
                 classes={'CMHistoryPlayer-name'}
-                link={`/profile/${player.player.playerId}`}
+                link={`/profile/${player.playerId}`}
                 runfunc={() => {
-                    navigate(`/profile/${player.player.playerId}`, {state: Date.now().toString()})
+                    navigate(`/profile/${player.playerId}`, {state: Date.now().toString()})
                 }}>
-                {player.player.playerName}
+                {player.playerName}
             </CustomNavLink>
         </div>
     );
