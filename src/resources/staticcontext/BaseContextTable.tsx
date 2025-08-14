@@ -676,6 +676,9 @@ export const BaseContextCallTable : CallEventTable = {
                                 if (CurRes.res_type == context_func["overrides"][k].type && CurRes.value == context_func["overrides"][k].model) {
                                     CurRes.value = (trackVal).CurModel.ID;
                                 }
+                                if (CurRes.res_type == context_func["overrides"][k].type && CurRes.value == context_func["overrides"][k].value) {
+                                    CurRes.value = refeq.EquipmentItem.ID;
+                                }
                             }
                         }
                     }
@@ -686,6 +689,9 @@ export const BaseContextCallTable : CallEventTable = {
                             for (let k = 0; k < context_func["overrides"].length; k++) {
                                 if (CurRes.res_type == context_func["overrides"][k].type && CurRes.value == context_func["overrides"][k].model) {
                                     CurRes.value = (trackVal).CurModel.ID;
+                                }
+                                if (CurRes.res_type == context_func["overrides"][k].type && CurRes.value == context_func["overrides"][k].value) {
+                                    CurRes.value = refeq.EquipmentItem.ID;
                                 }
                             }
                         }
@@ -698,6 +704,9 @@ export const BaseContextCallTable : CallEventTable = {
                                 if (CurRes.res_type == context_func["overrides"][k].type && CurRes.value == context_func["overrides"][k].model) {
                                     CurRes.value = (trackVal).CurModel.ID;
                                 }
+                                if (CurRes.res_type == context_func["overrides"][k].type && CurRes.value == context_func["overrides"][k].value) {
+                                    CurRes.value = refeq.EquipmentItem.ID;
+                                }
                             }
                         }
                     }
@@ -709,6 +718,9 @@ export const BaseContextCallTable : CallEventTable = {
                                 if (CurRes.res_type == context_func["overrides"][k].type && CurRes.value == context_func["overrides"][k].model) {
                                     CurRes.value = (trackVal).CurModel.ID;
                                 }
+                                if (CurRes.res_type == context_func["overrides"][k].type && CurRes.value == context_func["overrides"][k].value) {
+                                    CurRes.value = context_func["overrides"][k].replace;
+                                }
                             }
                         }
                     }
@@ -719,6 +731,9 @@ export const BaseContextCallTable : CallEventTable = {
                             for (let k = 0; k < context_func["overrides"].length; k++) {
                                 if (CurRes.res_type == context_func["overrides"][k].type && CurRes.value == context_func["overrides"][k].model) {
                                     CurRes.value = (trackVal).CurModel.ID;
+                                }
+                                if (CurRes.res_type == context_func["overrides"][k].type && CurRes.value == context_func["overrides"][k].value) {
+                                    CurRes.value = context_func["overrides"][k].replace;
                                 }
                             }
                         }

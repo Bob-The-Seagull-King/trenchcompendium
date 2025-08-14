@@ -4050,6 +4050,15 @@
         "stats": {
         },
         "contextdata": {
+            "restriction_override": {
+                "overrides": [
+                    {
+                        "type": "equipment",
+                        "value": "eq_machinearmour",
+                        "replace": "eq_highlandmachinearmour"
+                    }
+                ]
+            },
             "upgrade_stat": {"upgrades": [{"stat": "armour", "value": -3}]},
             "model_equipment_restriction": {
                 "required": [
