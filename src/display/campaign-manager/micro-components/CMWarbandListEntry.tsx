@@ -3,6 +3,7 @@ import SynodImageWithCredit from "../../../utility/SynodImageWithCredits";
 import CMRoundNumber from "./CMRoundNumber";
 import {useNavigate} from "react-router-dom";
 import CustomNavLink from "../../components/subcomponents/interactables/CustomNavLink";
+import CMContextualPopover from "../components/CMContextualPopover";
 
 // @TODO: this is only dummy data
 interface CMWarbandListEntryProps {
@@ -63,6 +64,12 @@ const CMWarbandListEntry: React.FC<CMWarbandListEntryProps> = ({ warband }) => {
                     {warband.playerName}
                 </CustomNavLink>
             </div>
+
+            <CMContextualPopover
+                id={`warband-${warband.playerId}`}
+                type="warband"
+                item={warband} // this is a placeholder
+            />
 
         </div>
     );

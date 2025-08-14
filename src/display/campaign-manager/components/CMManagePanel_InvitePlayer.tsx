@@ -5,6 +5,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCheckCircle, faEnvelopeCircleCheck, faUserCheck, faXmark} from "@fortawesome/free-solid-svg-icons";
 import {useCampaign} from "../../../context/CampaignContext";
 import SynodImageWithCredit from "../../../utility/SynodImageWithCredits";
+import CMContextualPopover from "./CMContextualPopover";
 
 interface DummyPlayer {
     id: string;
@@ -68,7 +69,11 @@ const CMManagePanel_InvitePlayer: React.FC = () => {
                         {dummyPlayers.map(player => (
                             <li
                                 key={player.id}
-                                className={`player-item ${selectedPlayerIds.includes(player.id) ? 'selected' : ''} ${player.isInCampaign ? 'already-in' : ''}`}
+                                className={`player-item 
+                                ${selectedPlayerIds.includes(player.id) ? 'selected' : ''} 
+                                ${player.isInCampaign ? 'already-in' : ''}
+                                ${player.isInvited ? 'invited' : ''}
+                                `}
                                 onClick={() => {
                                     if(!player.isInCampaign && !player.isInvited) {
                                         toggleSelect(player.id);
@@ -96,12 +101,15 @@ const CMManagePanel_InvitePlayer: React.FC = () => {
                                             {'Invited'}
                                         </div>
                                     }
-                            </div>
+                                </div>
 
-
-
+                                {/* @TODO: use actual player data*/}
                                 {player.isInvited &&
-                                    <FontAwesomeIcon icon={faEnvelopeCircleCheck} className={'player-icon'}/>
+                                    <CMContextualPopover
+                                        id={`player-invite-${2}`}
+                                        type="player-invite"
+                                        item={player} // this is a placeholder
+                                    />
                                 }
 
                                 {player.isInCampaign &&

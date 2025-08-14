@@ -33,6 +33,15 @@
         &.selected
             background-color: $green_50
 
+        &.invited,
+        &.already-in
+            cursor: default
+            .player-image-wrap,
+            .player-text
+                opacity: 0.5
+
+            &:hover
+                background-color: $color-bg-2
     .player-image-wrap
         position: relative
         width: 75px

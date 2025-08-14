@@ -11,6 +11,7 @@ import {
 import SynodImageWithCredit from "../../../utility/SynodImageWithCredits";
 import { useCampaign } from "../../../context/CampaignContext";
 import CMPlayerSmall from "../micro-components/CMPlayerSmall";
+import CMContextualPopover from "./CMContextualPopover";
 
 interface DummyWarband {
     warbandImageId: number;
@@ -217,8 +218,17 @@ const CMManagePanel_AddWarband: React.FC = () => {
                                                                     <div>{'Joined'}</div>
                                                                 )}
                                                             </div>
+
                                                             {wb.isInvited && (
-                                                                <FontAwesomeIcon icon={faEnvelopeCircleCheck} className={'warband-icon'}/>
+                                                                <>
+                                                                    {/* @TODO: use actual warband ID here*/}
+                                                                    <CMContextualPopover
+                                                                        id={`warband-invite-${2}`}
+                                                                        type="warband-invite"
+                                                                        item={wb} // this is a placeholder
+                                                                    />
+                                                                </>
+
                                                             )}
 
                                                             {wb.isInCampaign && (
@@ -228,6 +238,7 @@ const CMManagePanel_AddWarband: React.FC = () => {
                                                             {isSelected &&
                                                                 <FontAwesomeIcon icon={faCheckCircle} className={'warband-icon warband-icon-selected'}/>
                                                             }
+
 
                                                         </li>
                                                     );

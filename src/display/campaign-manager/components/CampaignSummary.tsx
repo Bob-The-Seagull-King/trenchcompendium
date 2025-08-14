@@ -48,7 +48,7 @@ const CampaignSummary: React.FC = () => {
                 <div className={'CampaignSummary-notes'}>
                     <CMTextarea
                         initialText={campaign.GetDescription()}
-                        title={'Notes'}
+                        title={'Description'}
                         onSave={ () => alert('CM Notes ->text changed')}
                         canEdit={campaign.IsAdmin(userId ? userId : 0)}
                     />

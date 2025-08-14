@@ -4,6 +4,7 @@ import React from 'react';
 import {useNavigate} from "react-router-dom";
 import SynodImageWithCredit from "../../../utility/SynodImageWithCredits";
 import CustomNavLink from "../../components/subcomponents/interactables/CustomNavLink";
+import CMContextualPopover from "../components/CMContextualPopover";
 
 // @TODO: this is only dummy data
 interface CMPlayerListEntryProps {
@@ -50,6 +51,12 @@ const CMPlayerListEntry: React.FC<CMPlayerListEntryProps> = ({ player }) => {
             <div className={'user-status'}>
                 {player.playerStatus}
             </div>
+
+            <CMContextualPopover
+                id={`player-${player.playerId}`}
+                type="player"
+                item={player} // this is a placeholder
+            />
         </div>
     );
 };
