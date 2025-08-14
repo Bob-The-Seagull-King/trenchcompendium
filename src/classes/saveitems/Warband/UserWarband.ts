@@ -2509,10 +2509,10 @@ class UserWarband extends DynamicContextObject {
         // - warband-id (8511)
         // - warband-url ('https://trench-companion.com/warband/detail/8511')
         // - warband-name ('Lorem ipsum dolor sit')
-        // - ducat-bank (123)
-        // - glory-bank (2)
-        // - ducat-rating (699)
-        // - glory-rating (2)
+        // - ducat-bank (123) // unspent ducats
+        // - glory-bank (2) // unspent glory
+        // - ducat-rating (699) // active fighters and equip
+        // - glory-rating (2) // active fighters and equip
         // - models []
         // - - model-name ('Plague knight')
         // - - model-id ('md_plagueknight')
