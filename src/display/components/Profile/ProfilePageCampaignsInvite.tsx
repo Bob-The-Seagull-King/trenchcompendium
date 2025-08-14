@@ -29,6 +29,9 @@ const ProfilePageCampaignsInvite: React.FC<ProfilePageCampaignsInviteProps> = ({
     const navigate = useNavigate();
     const [loadingButton, setLoadingButton] = useState<'accept' | 'decline' | null>(null);
 
+    // placeholder
+    const [hasInvites] = useState<boolean>(false);
+
 
     const handleDeclineInvite = async () => {
         setLoadingButton('decline');
@@ -52,6 +55,9 @@ const ProfilePageCampaignsInvite: React.FC<ProfilePageCampaignsInviteProps> = ({
         }
     };
 
+    if( !hasInvites ) {
+        return null
+    }
 
     return (
         <div className="ProfilePageCampaignsInvite">
