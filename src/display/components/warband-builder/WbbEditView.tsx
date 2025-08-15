@@ -125,7 +125,7 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
     /**
      * View Modes v2
      */
-    const { play_mode, edit_mode, view_mode, print_mode, setMode } = useWbbMode();
+    const { mode, play_mode, edit_mode, view_mode, print_mode, setMode } = useWbbMode();
 
     /** Print Mode */
     // Manually exit print mode
@@ -154,8 +154,10 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
             setMode('print');
             document.body.setAttribute('data-print', 'print');
         } else {
-            // Otherwise ensure edit mode
-            setMode('edit');
+            if (print_mode) {
+                // Otherwise ensure edit mode
+                setMode('edit');
+            }
             document.body.removeAttribute('data-print');
         }
     };

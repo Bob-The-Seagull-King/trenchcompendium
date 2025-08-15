@@ -2248,6 +2248,10 @@ export const BaseContextCallTable : CallEventTable = {
                         if (Requirement.res_type == "equipment_keyword") {
                             const ValKey : Keyword = KeywordFactory.CreateNewKeyword(Requirement.value.toString(), null)
                             NewStringParts.push(""+(ValKey.Name))
+                        }  
+
+                        if (Requirement.res_type == "equipment_tag") {
+                            NewStringParts.push(""+(makestringpresentable(Requirement.value.toString())))
                         }                  
 
                         if (Requirement.res_type == "upgrade") {
@@ -2359,7 +2363,28 @@ export const BaseContextCallTable : CallEventTable = {
                                 if (Found == true) {
                                     PassedOne = true;
                                 }
-                            }                  
+                            }     
+                            
+
+                            if (Requirement.res_type == "equipment_tag") {
+                                let Found = false;
+                                const Equipmentlist = await trackVal.model.GetAllEquipForShow()
+                                for (let k = 0; k < Equipmentlist.length; k++) {
+                                    const Keywords = await Equipmentlist[k].equipment.GetKeywords();
+                                    const ids = Keywords.map(obj => obj.ID);
+                                    const refinterface = Equipmentlist[k].purchase.CustomInterface
+                                    if (
+                                        (containsTag(refinterface? refinterface.tags : {}, Requirement.value.toString())) ||
+                                        (containsTag(Equipmentlist[k].equipment.GetEquipmentItem().Tags, Requirement.value.toString()))
+                                    ) {
+                                        Found = true;
+                                        k = Equipmentlist.length;
+                                    }
+                                }
+                                if (Found == true) {
+                                    PassedOne = true;
+                                }
+                            }                   
     
                             if (Requirement.res_type == "upgrade") {
                                 let Found = false;
