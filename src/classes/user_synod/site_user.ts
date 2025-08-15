@@ -471,6 +471,29 @@ class SiteUser {
         return (this.Premium.IsPremium == true)? '❤️ Supporter' : 'Free Member'
     }
 
+    /**
+     * Returns the number of global notifications
+     * @TODO: return actual notification number
+     */
+    public numNotificationsGlobal () {
+        return 0;
+    }
+    /**
+     * Returns the number of profile notifications
+     * @TODO: return actual notification number
+     */
+    public numNotificationsProfile () {
+        return 0;
+    }
+    /**
+     * Returns the number of warbands notifications
+     * - This is all notifications for all of users warbands
+     * @TODO: return actual notification number
+     */
+    public numNotificationsWarbands () {
+        return 0;
+    }
+
 }
 
 export {ISiteUser, SiteUser}
