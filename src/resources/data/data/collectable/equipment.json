@@ -885,7 +885,6 @@
         "category": "melee",
         "distance": 24,
         "stats": {
-            "hands_ranged": 2,
             "hands_melee": 2,
             "ranged": true,
             "melee": true
