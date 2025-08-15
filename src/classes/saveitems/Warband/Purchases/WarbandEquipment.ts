@@ -173,7 +173,6 @@ class WarbandEquipment extends DynamicContextObject {
         this.SelfData = _objint;
         return _objint;
     }
-    
 
     public async GetKeywords() : Promise<Keyword[]> {
         

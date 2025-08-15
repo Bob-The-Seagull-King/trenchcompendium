@@ -1425,8 +1425,8 @@
         "faction_eq_restriction": {
             "permitted": [
                 {
-                    "res_type": "equipment",
-                    "value": "eq_sniperrifle"
+                    "res_type": "equipment_tag",
+                    "value": "rifle"
                 }
             ]
         }  
