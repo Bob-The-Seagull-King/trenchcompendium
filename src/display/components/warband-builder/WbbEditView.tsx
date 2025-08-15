@@ -326,11 +326,12 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                                         )}
 
                                         {/* The Post Ganme Helper View */}
-                                        {detailType === 'post-game' && (
-                                            <WbbPostGameDetailView
-                                                onClose={closeDetail}
-                                            />
-                                        )}
+                                        {/* @TODO this is the post game helper detail view WIP */}
+                                        {/*{detailType === 'post-game' && (*/}
+                                        {/*    <WbbPostGameDetailView*/}
+                                        {/*        onClose={closeDetail}*/}
+                                        {/*    />*/}
+                                        {/*)}*/}
 
                                         {/* Empty Fallback */}
                                         {detailType === null && (
