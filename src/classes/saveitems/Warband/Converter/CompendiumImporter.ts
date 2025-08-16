@@ -1,6 +1,9 @@
+import { SkillFactory } from "../../../../factories/features/SkillFactory";
 import { ConvertCompendiumToCompanionID } from "../../../../resources/staticcontext/importdata/compendiumdata";
 import { ToolsController } from "../../../_high_level_controllers/ToolsController";
+import { UserWarband } from "../UserWarband";
 import { SumWarband, WarbandManager } from "../WarbandManager";
+import { WarbandProperty } from "../WarbandProperty";
 
 
 class CompendiumImporter {
@@ -73,7 +76,7 @@ class CompendiumImporter {
         // Locations
 
         // (Exploration) Modifiers
-        await this.BuildExplorationSkills(JSONVal.Modifiers)
+        await this.BuildExplorationSkills(JSONVal.Modifiers, NewWarband.warband_data)
 
         // Notes
         NewWarband.warband_data.SaveNote(JSONVal.Notes, "notes")
@@ -82,8 +85,22 @@ class CompendiumImporter {
         return true;
     }
 
-    public async BuildExplorationSkills(SkillSet : JSON) {
-        console.log(SkillSet)
+    public async BuildExplorationSkills(SkillSet : any, wb : UserWarband) {
+        let FoundDefault = false;
+        for (let i = 0; i < SkillSet.length; i++) {
+            const mod_id = ConvertCompendiumToCompanionID(SkillSet[i].id);
+
+            if (mod_id == "es_reroll" && FoundDefault == false) {
+                FoundDefault = true;
+                continue;
+            }
+            
+            const Value = await SkillFactory.CreateNewSkill(mod_id, wb);
+            const NewSkill = new WarbandProperty(Value, wb, null, null);
+            await NewSkill.HandleDynamicProps(Value, wb, null, null);
+            wb.Exploration.Skills.push(NewSkill);
+            
+        }
     }
 
 }

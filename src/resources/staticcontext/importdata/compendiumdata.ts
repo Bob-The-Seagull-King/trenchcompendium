@@ -32,5 +32,14 @@ export const CompendiumDataConvertTable : NameToNameTable = {
     "fv_kingdomofalbaassaultdetachment" : "fc_newantioch_fv_kingdomofalbaassaultdetatchment",
     "fv_expeditionaryforcesofabyssinia" : "fc_newantioch_fv_expeditionaryforcedofabyssinia",
     "fv_theredbrigade" : "fc_newantioch_fv_redbrigade",
-    "fv_dirgeofthegreathegemon" : "fc_cultoftheblackgrail_fv_dirgeofthegreathegemon"
+    "fv_dirgeofthegreathegemon" : "fc_cultoftheblackgrail_fv_dirgeofthegreathegemon",
+    "em_extradice" : "es_extradice",
+    "em_duplicate" : "es_duplicate",
+    "em_split" : "es_split",
+    "em_reroll" : "es_reroll",
+    "em_setdice" : "es_setdice",
+    "em_seek" : "es_seek",
+    "em_circleback" : "es_circleback",
+    "em_combine" : "es_combine",
+    "em_lucky" : "es_lucky"
 }
