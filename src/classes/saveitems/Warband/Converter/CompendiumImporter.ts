@@ -51,8 +51,8 @@ class CompendiumImporter {
 
     private async ConvertImportToWarband(_content : string): Promise<boolean> {
         const JSONVal = JSON.parse(_content);
-        console.log(JSONVal);
         
+        // Initial Setup
         const fac_id = ConvertCompendiumToCompanionID(JSONVal.Faction.ID);
         const budget_ducats = JSONVal.DucatTotal + JSONVal.PayChest + JSONVal.DucatLost;
         const budget_glory = JSONVal.GloryTotal;
@@ -62,7 +62,28 @@ class CompendiumImporter {
 
         if (NewWarband == null) { return false; }
 
+        // Debts
+        NewWarband.warband_data.Debts.ducats += JSONVal.DucatLost;
+        NewWarband.warband_data.Debts.glory += JSONVal.GloryLost;
+
+        // Models
+        
+        // Stash
+
+        // Locations
+
+        // (Exploration) Modifiers
+        await this.BuildExplorationSkills(JSONVal.Modifiers)
+
+        // Notes
+        NewWarband.warband_data.SaveNote(JSONVal.Notes, "notes")
+
+        await this.UserWarbandManager.UpdateItemInfo(NewWarband.id)
         return true;
+    }
+
+    public async BuildExplorationSkills(SkillSet : JSON) {
+        console.log(SkillSet)
     }
 
 }
