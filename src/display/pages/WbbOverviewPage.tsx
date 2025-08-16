@@ -60,6 +60,16 @@ const WbbOverviewPage = (prop: any) => {
     const toggleDropdown = () => setShowDropdown(!showDropdown);
     const closeDropdown = () => setShowDropdown(false);
 
+    async function HandleImport() {
+        const Result = await CompendiumImporter.getInstance().readFileOnUpload(imported)
+        if (Result == true) {
+            setwarbands(Manager.CurWarbands());
+            setShowImportModal(false);
+            setkeyvar((prev) => prev + 1);
+            
+        }
+    }
+
     return (
         <div className={'WbbOverviewPage'}>
             <div className={'container'}>
@@ -94,7 +104,7 @@ const WbbOverviewPage = (prop: any) => {
                             {showDropdown && (
                                 <ul className="dropdown-menu dropdown-menu-end show" aria-labelledby="wbb-global-actions-group">
                                     <li className={'dropdown-item'} onClick={() => setShowImportModal(true)}>
-                                        {'Import Warband'}
+                                        {'Import Compendium Warband'}
                                     </li>
                                 </ul>
                             )}
@@ -160,10 +170,9 @@ const WbbOverviewPage = (prop: any) => {
             </div>
 
             {/** Upload / Import Warband file */}
-            {/* @TODO: implement warband import here */}
             <Modal show={showImportModal} onHide={() => setShowImportModal(false)} centered>
                 <Modal.Header closeButton={false}>
-                    <Modal.Title>{`Import Warband`}</Modal.Title>
+                    <Modal.Title>{`Import Compendium Warband`}</Modal.Title>
 
                     <FontAwesomeIcon
                         icon={faXmark}
@@ -190,7 +199,7 @@ const WbbOverviewPage = (prop: any) => {
 
                     <div className="mb-3">
                         <button
-                            onClick={() => CompendiumImporter.getInstance().readFileOnUpload(imported)}
+                            onClick={() => HandleImport()}
                             className={'btn btn-primary'}
 
                         >

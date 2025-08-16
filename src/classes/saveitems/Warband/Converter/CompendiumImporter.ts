@@ -1,5 +1,6 @@
+import { ConvertCompendiumToCompanionID } from "../../../../resources/staticcontext/importdata/compendiumdata";
 import { ToolsController } from "../../../_high_level_controllers/ToolsController";
-import { WarbandManager } from "../WarbandManager";
+import { SumWarband, WarbandManager } from "../WarbandManager";
 
 
 class CompendiumImporter {
@@ -35,10 +36,10 @@ class CompendiumImporter {
 
             const fileReader = new FileReader();
 
-            fileReader.onloadend = () => {
+            fileReader.onloadend = async() => {
                 try {
-                    this.ConvertImportToWarband( fileReader.result ? fileReader.result.toString() : "" );
-                    resolve(true);
+                    const finresult : boolean = await this.ConvertImportToWarband( fileReader.result ? fileReader.result.toString() : "" );
+                    resolve(finresult);
                 } catch (e) {
                     resolve(false);
                 }
@@ -48,9 +49,20 @@ class CompendiumImporter {
         });
     }
 
-    private ConvertImportToWarband(_content : string) {
-        console.log("FOUND")
-        console.log(_content)
+    private async ConvertImportToWarband(_content : string): Promise<boolean> {
+        const JSONVal = JSON.parse(_content);
+        console.log(JSONVal);
+        
+        const fac_id = ConvertCompendiumToCompanionID(JSONVal.Faction.ID);
+        const budget_ducats = JSONVal.DucatTotal + JSONVal.PayChest + JSONVal.DucatLost;
+        const budget_glory = JSONVal.GloryTotal;
+        const wb_name = JSONVal.Name;
+
+        const NewWarband : SumWarband | null = await this.UserWarbandManager.NewItem(wb_name, fac_id, budget_ducats, budget_glory, false);
+
+        if (NewWarband == null) { return false; }
+
+        return true;
     }
 
 }
