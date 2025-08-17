@@ -7,6 +7,9 @@ import { UserWarband } from "../UserWarband";
 import { SumWarband, WarbandManager } from "../WarbandManager";
 import { WarbandProperty } from "../WarbandProperty";
 import { EquipmentFactory } from "../../../../factories/features/EquipmentFactory";
+import { FactionModelRelationship } from "../../../relationship/faction/FactionModelRelationship";
+import { ModelFactory } from "../../../../factories/features/ModelFactory";
+import { WarbandPurchase } from "../Purchases/WarbandPurchase";
 
 
 class CompendiumImporter {
@@ -73,6 +76,13 @@ class CompendiumImporter {
         NewWarband.warband_data.Debts.glory += JSONVal.GloryLost;
 
         // Models
+        const ModelOptionList = await (NewWarband.warband_data).GetFighterOptions(false);
+        const ModelFullList = await ModelFactory.GetAllFactionModel([], []);
+        for (let i = 0; i < JSONVal.Members.length; i++) {
+            const mod_id = ConvertCompendiumToCompanionID(JSONVal.Members[i].Model.ID);
+            const item_costtype = JSONVal.Members[i].CostType == "ducats"? 0 : 1;
+            await this.BuildModel(mod_id, NewWarband.warband_data, JSONVal.Members[i].Cost, item_costtype, ModelOptionList, ModelFullList, JSONVal.Members[i]);
+        }
         
         // Stash
         const OptionList = await (NewWarband.warband_data).GetFactionEquipmentOptions(true, false, true, false);
@@ -130,12 +140,8 @@ class CompendiumImporter {
 
             if (FacRel != null) {
                 let isfree = false;
-                if (cost_val == 0) {
-                    isfree = true;
-                }
-                if (cost_val > 0) {
-                    FacRel.Cost = cost_val
-                }
+                if (cost_val == 0) { isfree = true;}
+                if (cost_val > 0) {FacRel.Cost = cost_val}
                 FacRel.CostType = cost_type;
                 await wb.AddStash(FacRel, isfree, null);
             }
@@ -144,6 +150,48 @@ class CompendiumImporter {
             console.log(e)
             console.log(item_id)
         }
+    }
+
+    public async BuildModel(item_id : string, wb : UserWarband, cost_val : number, cost_type : number, options : FactionModelRelationship[], fulloptions : FactionModelRelationship[], data : any) {
+        const op_id = options.map(obj => obj.Model.ID)
+        try {
+            
+            let FacRel : FactionModelRelationship | null = null;
+            if (op_id.includes(item_id)) {
+                for (let i = 0; i < options.length; i++) {
+                    if (options[i].Model.ID == item_id) {
+                        FacRel = options[i]
+                        break;
+                    }
+                }
+            } else {
+                for (let i = 0; i < fulloptions.length; i++) {
+                    if (fulloptions[i].Model.ID == item_id) {
+                        FacRel = fulloptions[i]                        
+                        break;
+                    }
+                }
+            }
+            if (FacRel != null) {
+                let isfree = false;
+                if (cost_val == 0) {isfree = true;}
+                if (cost_val > 0) {FacRel.Cost = cost_val}
+                FacRel.CostType = cost_type;
+                const Added : WarbandPurchase[] = await wb.AddFighter([FacRel], isfree);
+                for (let j = 0; j < Added.length; j++) { await this.BuildModelFull(Added[j], wb, data);}
+            }
+
+        } catch (e) {
+            console.log(e)
+            console.log(item_id)
+        }
+    }
+
+    public async BuildModelFull(mdl : WarbandPurchase, wb : UserWarband, data : any) {
+        console.log("New Guy")
+        console.log(mdl)
+        console.log(wb)
+        console.log(data)
     }
 
     public async BuildExplorationSkills(SkillSet : any, wb : UserWarband) {
