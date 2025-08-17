@@ -10,6 +10,7 @@ import { EquipmentFactory } from "../../../../factories/features/EquipmentFactor
 import { FactionModelRelationship } from "../../../relationship/faction/FactionModelRelationship";
 import { ModelFactory } from "../../../../factories/features/ModelFactory";
 import { WarbandPurchase } from "../Purchases/WarbandPurchase";
+import { WarbandMember } from "../Purchases/WarbandMember";
 
 
 class CompendiumImporter {
@@ -188,10 +189,15 @@ class CompendiumImporter {
     }
 
     public async BuildModelFull(mdl : WarbandPurchase, wb : UserWarband, data : any) {
-        console.log("New Guy")
-        console.log(mdl)
-        console.log(wb)
-        console.log(data)
+        const GetModel = mdl.HeldObject as WarbandMember;
+
+        GetModel.Name = data.Name;
+        GetModel.Elite = data.Elite;
+        GetModel.Experience = data.Experience;
+        GetModel.SaveNote(data.Notes, "notes")
+        if (data.Reserve == true) {
+            GetModel.State = "reserved";
+        }
     }
 
     public async BuildExplorationSkills(SkillSet : any, wb : UserWarband) {
