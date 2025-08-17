@@ -136,7 +136,7 @@ const WbbModalAddFighterCustom: React.FC<WbbModalAddFighterTroopProps> = ({ show
                         </div>
 
                         <span className={'item-name'}>
-                            {fighter.GetName() + (fighter.Tags['held_variant_name'] != undefined? " " + makestringpresentable(fighter.Tags['held_variant_name']) : "")}
+                            {fighter.GetName() + (fighter.Tags['held_variant_name'] != undefined? " (" + makestringpresentable(fighter.Tags['held_variant_name'].toString()) + ")" : "")}
                         </span>
                     </div>
                 ))}
