@@ -10,8 +10,10 @@ import { EquipmentFactory } from "../../../../factories/features/EquipmentFactor
 import { FactionModelRelationship } from "../../../relationship/faction/FactionModelRelationship";
 import { ModelFactory } from "../../../../factories/features/ModelFactory";
 import { WarbandPurchase } from "../Purchases/WarbandPurchase";
-import { WarbandMember } from "../Purchases/WarbandMember";
+import { MemberUpgradePresentation, WarbandMember } from "../Purchases/WarbandMember";
 import { InjuryFactory } from "../../../../factories/features/InjuryFactory";
+import { ModelUpgradeRelationship } from "../../../relationship/model/ModelUpgradeRelationship";
+import { UpgradeFactory } from "../../../../factories/features/UpgradeFactory";
 
 
 class CompendiumImporter {
@@ -218,6 +220,21 @@ class CompendiumImporter {
         }
 
         // Upgrades
+        const BaseList = await (GetModel).GetWarbandUpgradeCollections();
+        const OptionList : MemberUpgradePresentation[] = []
+        const GroupList = Object.keys(BaseList);
+
+        for (let i = 0; i < GroupList.length; i++) {
+            for (let j = 0; j < BaseList[GroupList[i]].upgrades.length; j++) {
+                OptionList.push(BaseList[GroupList[i]].upgrades[j])
+            }
+        }
+        
+        const FullList = await UpgradeFactory.GetAllModelUpgrade();
+        for (let i = 0; i < data.Upgrades.length; i++) {
+            const mod_id = ConvertCompendiumToCompanionID(data.Upgrades[i].ID);
+            await this.BuildModelUpgrade(mod_id, GetModel, data.Upgrades[i].Cost, OptionList, FullList);
+        }
 
         // General
         GetModel.Name = data.Name;
@@ -244,6 +261,41 @@ class CompendiumImporter {
             await md.AddSkill(NewSkill);
         } catch (e) {
             console.log(e)
+        }
+    }
+
+    public async BuildModelUpgrade(item_id : string, md : WarbandMember, cost_val : number, options : MemberUpgradePresentation[], fulloptions : ModelUpgradeRelationship[]) {
+        const op_id = options.map(obj => obj.upgrade.UpgradeObject.ID)
+        try {
+            if (op_id.includes(item_id)) {
+                for (let i = 0; i < options.length; i++) {
+                    if (options[i].upgrade.UpgradeObject.ID == item_id) {
+                        await md.AddUpgrade(options[i]);
+                        break;
+                    }
+                }
+            } else {
+                for (let i = 0; i < fulloptions.length; i++) {
+                    if (fulloptions[i].UpgradeObject.ID == item_id) {
+                        const memup : MemberUpgradePresentation = {
+                            allowed: true,
+                            cost: cost_val,
+                            cur_count: 0,
+                            discount: 0,
+                            max_count: 1,
+                            purchase: null,
+                            upgrade: fulloptions[i]
+                        }
+                        
+                        await md.AddUpgrade(memup);
+                        break;
+                    }
+                }
+            }
+
+        } catch (e) {
+            console.log(e)
+            console.log(item_id)
         }
     }
 
