@@ -61,6 +61,7 @@ const WbbOverviewPage = (prop: any) => {
     const closeDropdown = () => setShowDropdown(false);
 
     async function HandleImport() {
+        /** TODO David This is where we can do success and failure notifications */
         const Result = await CompendiumImporter.getInstance().readFileOnUpload(imported)
         if (Result == true) {
             setwarbands(Manager.CurWarbands());
