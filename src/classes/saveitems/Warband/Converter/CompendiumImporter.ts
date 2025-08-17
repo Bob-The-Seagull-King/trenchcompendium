@@ -11,6 +11,7 @@ import { FactionModelRelationship } from "../../../relationship/faction/FactionM
 import { ModelFactory } from "../../../../factories/features/ModelFactory";
 import { WarbandPurchase } from "../Purchases/WarbandPurchase";
 import { WarbandMember } from "../Purchases/WarbandMember";
+import { InjuryFactory } from "../../../../factories/features/InjuryFactory";
 
 
 class CompendiumImporter {
@@ -197,12 +198,10 @@ class CompendiumImporter {
         refoptions : FactionEquipmentRelationship[], reffulloptions : FactionEquipmentRelationship[]) {
         const GetModel = mdl.HeldObject as WarbandMember;
 
-        GetModel.Name = data.Name;
-        GetModel.Elite = data.Elite;
-        GetModel.Experience = data.Experience;
-        GetModel.SaveNote(data.Notes, "notes")
-        if (data.Reserve == true) {
-            GetModel.State = "reserved";
+        // Injuries
+        for (let i = 0; i < data.Injuries.length; i++) {
+            const mod_id = ConvertCompendiumToCompanionID(data.Injuries[i].ID);
+            await this.BuildInjury(mod_id, GetModel);
         }
 
         // Equipment
@@ -213,11 +212,41 @@ class CompendiumImporter {
         }
 
         // Skills
-
-        // Injuries
+        for (let i = 0; i < data.Skills.length; i++) {
+            const mod_id = ConvertCompendiumToCompanionID(data.Skills[i].id);
+            await this.BuildSkill(mod_id, GetModel);
+        }
 
         // Upgrades
+
+        // General
+        GetModel.Name = data.Name;
+        GetModel.Elite = data.Elite;
+        GetModel.Experience = data.Experience;
+        GetModel.SaveNote(data.Notes, "notes")
+        if (data.Reserve == true) {
+            GetModel.State = "reserved";
+        }
     }
+
+    public async BuildInjury(injury_id : string, md : WarbandMember) {
+        try {
+            const NewInjury = await InjuryFactory.CreateNewInjury(injury_id, md);
+            await md.AddInjury(NewInjury);
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    public async BuildSkill(skill_id : string, md : WarbandMember) {
+        try {
+            const NewSkill = await SkillFactory.CreateNewSkill(skill_id, md);
+            await md.AddSkill(NewSkill);
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
 
     public async BuildModelEquipment(item_id : string, md : WarbandMember, cost_val : number, cost_type : number, options : FactionEquipmentRelationship[], fulloptions : FactionEquipmentRelationship[]) {
         const op_id = options.map(obj => obj.EquipmentItem.ID)
