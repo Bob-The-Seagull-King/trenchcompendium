@@ -80,8 +80,8 @@ class CompendiumImporter {
         const ModelFullList = await ModelFactory.GetAllFactionModel([], []);
         for (let i = 0; i < JSONVal.Members.length; i++) {
             const mod_id = ConvertCompendiumToCompanionID(JSONVal.Members[i].Model.ID);
-            const item_costtype = JSONVal.Members[i].CostType == "ducats"? 0 : 1;
-            await this.BuildModel(mod_id, NewWarband.warband_data, JSONVal.Members[i].Cost, item_costtype, ModelOptionList, ModelFullList, JSONVal.Members[i]);
+            const item_costtype = JSONVal.Members[i].Model.CostType == "ducats"? 0 : 1;
+            await this.BuildModel(mod_id, NewWarband.warband_data, JSONVal.Members[i].Model.Cost, item_costtype, ModelOptionList, ModelFullList, JSONVal.Members[i]);
         }
         
         // Stash
