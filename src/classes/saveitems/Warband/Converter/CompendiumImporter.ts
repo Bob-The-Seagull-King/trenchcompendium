@@ -1,3 +1,4 @@
+import { ExplorationFactory } from "../../../../factories/features/ExplorationFactory";
 import { SkillFactory } from "../../../../factories/features/SkillFactory";
 import { ConvertCompendiumToCompanionID } from "../../../../resources/staticcontext/importdata/compendiumdata";
 import { ToolsController } from "../../../_high_level_controllers/ToolsController";
@@ -74,6 +75,10 @@ class CompendiumImporter {
         // Stash
 
         // Locations
+        for (let i = 0; i < JSONVal.Locations.length; i++) {
+            const mod_id = ConvertCompendiumToCompanionID(JSONVal.Locations[i].id);
+            await this.BuildLocation(mod_id, NewWarband.warband_data);
+        }
 
         // (Exploration) Modifiers
         await this.BuildExplorationSkills(JSONVal.Modifiers, NewWarband.warband_data)
@@ -85,6 +90,15 @@ class CompendiumImporter {
         return true;
     }
 
+    public async BuildLocation(location_id : string, wb : UserWarband) {
+        try {
+            const NewLocation = await ExplorationFactory.CreateNewExplorationLocation(location_id, wb, true);
+            await wb.Exploration.AddExplorationLocation(NewLocation, []);
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
     public async BuildExplorationSkills(SkillSet : any, wb : UserWarband) {
         let FoundDefault = false;
         for (let i = 0; i < SkillSet.length; i++) {
@@ -94,12 +108,14 @@ class CompendiumImporter {
                 FoundDefault = true;
                 continue;
             }
-            
-            const Value = await SkillFactory.CreateNewSkill(mod_id, wb);
-            const NewSkill = new WarbandProperty(Value, wb, null, null);
-            await NewSkill.HandleDynamicProps(Value, wb, null, null);
-            wb.Exploration.Skills.push(NewSkill);
-            
+            try {
+                const Value = await SkillFactory.CreateNewSkill(mod_id, wb);
+                const NewSkill = new WarbandProperty(Value, wb, null, null);
+                await NewSkill.HandleDynamicProps(Value, wb, null, null);
+                wb.Exploration.Skills.push(NewSkill);
+            } catch(e) {
+                console.log(e)
+            }
         }
     }
 
