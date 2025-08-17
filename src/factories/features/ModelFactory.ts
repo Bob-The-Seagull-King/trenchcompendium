@@ -5,7 +5,7 @@ import { ContextObject } from '../../classes/contextevent/contextobject';
 import { IModel, Model } from '../../classes/feature/model/Model';
 import { IVariantModel, ModelCollection } from '../../classes/feature/model/ModelCollection';
 import { FactionModelRelationship, IFactionModelRelationship } from '../../classes/relationship/faction/FactionModelRelationship';
-import { byPropertiesOf } from '../../utility/functions';
+import { byPropertiesOf, isValidList } from '../../utility/functions';
 
 class ModelFactory {
 
@@ -150,6 +150,23 @@ class ModelFactory {
         const basedata = Requester.MakeRequest({searchtype: "id", searchparam: {type: "model", id: vardata.base_id}}) as IModel
         const rulenew = await ModelFactory.CreateVariantModel(basedata, vardata, parent)
         return rulenew;
+    }
+    
+
+    static async GetAllFactionModel(removelist : string[], includelist : string[]) {
+        const models = Requester.MakeRequest({searchtype: "file", searchparam: {type: "factionmodelrelationship"}}) as IFactionModelRelationship[];
+        models.sort(byPropertiesOf<IFactionModelRelationship>(["name", "id"]))
+        const ModelList : FactionModelRelationship[] = []
+        for (let i = 0; i < models.length; i++) {
+            if (!isValidList(models[i].faction_id, removelist, includelist)) {
+                continue;
+            }
+            const skl = await ModelFactory.CreateFactionModel(models[i], null);
+            if (skl != null) {
+                ModelList.push(skl);
+            }
+        }
+        return ModelList;
     }
 
     static async CreateFactionModel(_rule: IFactionModelRelationship, parent : ContextObject | null) {

@@ -2,6 +2,7 @@ import { ItemManager } from '../saveitems/itemmanager';
 import { ContentPackManager } from '../contentpacks/contentmanager'
 import { ScenarioGenerator } from '../feature/scenario/ScenarioGenerator';
 import { WarbandManager } from '../saveitems/Warband/WarbandManager';
+import { CompendiumImporter } from '../saveitems/Warband/Converter/CompendiumImporter';
 
 /**
  * Contains the Controller objects for 'Tools' pages.
@@ -13,7 +14,6 @@ class ToolsController {
     
     private static instance: ToolsController;
     //ContentManager;
-    //SaveItemManager;
     RandomScenarioManager;
     UserWarbandManager
 

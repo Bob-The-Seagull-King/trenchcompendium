@@ -784,6 +784,7 @@ class UserWarband extends DynamicContextObject {
      * @param fighter
      */
     public async AddFighter ( fighter: FactionModelRelationship[], free = false ) {
+        const Added : WarbandPurchase[] = []
         for (let i = 0; i < fighter.length; i++) { 
             
             const Model : WarbandMember = await WarbandFactory.BuildWarbandMemberFromPurchase(fighter[i], this, this.IsUnRestricted);
@@ -802,9 +803,11 @@ class UserWarband extends DynamicContextObject {
                 modelpurch: false
             }, this, Model);
             this.Models.push(NewPurchase);
+            Added.push(NewPurchase)
         }
 
         await this.RebuildProperties()
+        return Added;
     }
 
     public async RebuildProperties() {

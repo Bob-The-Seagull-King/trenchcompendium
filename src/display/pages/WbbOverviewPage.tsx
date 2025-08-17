@@ -10,6 +10,7 @@ import PageMetaInformation from "../components/generics/PageMetaInformation";
 import LoadingOverlay from "../components/generics/Loading-Overlay";
 import {useAuth} from "../../utility/AuthContext";
 import {Button, Modal} from "react-bootstrap";
+import { CompendiumImporter } from '../../classes/saveitems/Warband/Converter/CompendiumImporter';
 
 
 /**
@@ -25,6 +26,7 @@ const WbbOverviewPage = (prop: any) => {
     const { userId, isLoggedIn } = useAuth()
 
     const [allwarbands, setwarbands] = useState<SumWarband[]>([])
+    const [imported, setImported] = useState<File | undefined>(undefined)
     const [keyvar, setkeyvar] = useState(0);
     const [isLoading, setisloading] = useState(false);
 
@@ -58,6 +60,17 @@ const WbbOverviewPage = (prop: any) => {
     const toggleDropdown = () => setShowDropdown(!showDropdown);
     const closeDropdown = () => setShowDropdown(false);
 
+    async function HandleImport() {
+        /** TODO David This is where we can do success and failure notifications */
+        const Result = await CompendiumImporter.getInstance().readFileOnUpload(imported)
+        if (Result == true) {
+            setwarbands(Manager.CurWarbands());
+            setShowImportModal(false);
+            setkeyvar((prev) => prev + 1);
+            
+        }
+    }
+
     return (
         <div className={'WbbOverviewPage'}>
             <div className={'container'}>
@@ -82,21 +95,21 @@ const WbbOverviewPage = (prop: any) => {
                         </CustomNavLink>
 
                         {/* @TODO: iclude to show import UI */}
-                        {/*<div className="btn-group" role="group">*/}
-                        {/*    <button*/}
-                        {/*        type="button"*/}
-                        {/*        className="btn btn-primary dropdown-toggle"*/}
-                        {/*        onClick={toggleDropdown}*/}
-                        {/*    >*/}
-                        {/*    </button>*/}
-                        {/*    {showDropdown && (*/}
-                        {/*        <ul className="dropdown-menu dropdown-menu-end show" aria-labelledby="wbb-global-actions-group">*/}
-                        {/*            <li className={'dropdown-item'} onClick={() => setShowImportModal(true)}>*/}
-                        {/*                {'Import Warband'}*/}
-                        {/*            </li>*/}
-                        {/*        </ul>*/}
-                        {/*    )}*/}
-                        {/*</div>*/}
+                        <div className="btn-group" role="group">
+                            <button
+                                type="button"
+                                className="btn btn-primary dropdown-toggle"
+                                onClick={toggleDropdown}
+                            >
+                            </button>
+                            {showDropdown && (
+                                <ul className="dropdown-menu dropdown-menu-end show" aria-labelledby="wbb-global-actions-group">
+                                    <li className={'dropdown-item'} onClick={() => setShowImportModal(true)}>
+                                        {'Import Compendium Warband'}
+                                    </li>
+                                </ul>
+                            )}
+                        </div>
                     </div>
                 </div>
 
@@ -158,10 +171,9 @@ const WbbOverviewPage = (prop: any) => {
             </div>
 
             {/** Upload / Import Warband file */}
-            {/* @TODO: implement warband import here */}
             <Modal show={showImportModal} onHide={() => setShowImportModal(false)} centered>
                 <Modal.Header closeButton={false}>
-                    <Modal.Title>{`Import Warband`}</Modal.Title>
+                    <Modal.Title>{`Import Compendium Warband`}</Modal.Title>
 
                     <FontAwesomeIcon
                         icon={faXmark}
@@ -181,13 +193,14 @@ const WbbOverviewPage = (prop: any) => {
                             className="form-control"
                             type="file"
                             id="import-file-select"
-                            onChange={() => alert('file selected')}
+                            accept='.json'
+                            onChange={(e) => setImported(e.target.files? e.target.files[0] : undefined)}
                         />
                     </div>
 
                     <div className="mb-3">
                         <button
-                            onClick={() => alert('@TODO: Import functionality')}
+                            onClick={() => HandleImport()}
                             className={'btn btn-primary'}
 
                         >

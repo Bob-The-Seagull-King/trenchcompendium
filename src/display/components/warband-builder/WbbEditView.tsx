@@ -37,6 +37,7 @@ import {useWbbMode} from "../../../context/WbbModeContext";
 import WbbUserinfo from "./WbbUserinfo";
 import WbbEditViewExplorationLocations from "./WbbEditViewExplorationLocations";
 import WbbExplorationDetailView from "./WbbExplorationDetailView";
+import WbbPostGameDetailView from "./WbbPostGameDetailView";
 
 interface WbbEditViewProps {
     warbandData: SumWarband | null;
@@ -62,7 +63,7 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
     }, [warbandData]);
 
     //** Start Detail view stuff
-    type DetailType = 'fighter' | 'stash' | 'warband' | 'campaign' | 'exploration' | null;
+    type DetailType = 'fighter' | 'stash' | 'warband' | 'campaign' | 'exploration' | 'post-game' | null;
 
     const [detailType, setDetailType] = useState<DetailType>(null);
     const [detailPayload, setDetailPayload] = useState<any>(null);
@@ -256,6 +257,7 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                                             />
                                         }
 
+                                        {/* @TODO: This is a new exploration tab. */}
                                         {/*{(edit_mode || view_mode) &&*/}
                                         {/*    <WbbEditViewExplorationLocations*/}
                                         {/*        onClick={() => openDetail('exploration', null)}*/}
@@ -263,7 +265,14 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                                         {/*    />*/}
                                         {/*}*/}
 
-                                        <WbbFighterShows 
+                                        {/* @TODO: This opens the post-game helper. */}
+                                        {/*<button*/}
+                                        {/*    onClick={() => openDetail('post-game', null)}*/}
+                                        {/*>*/}
+                                        {/*    {'open post game helper'}*/}
+                                        {/*</button>*/}
+
+                                        <WbbFighterShows
                                             openDetail={openDetail}
                                             detailType={detailType}
                                             detailPayload={detailPayload}
@@ -315,6 +324,14 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                                                 onClose={closeDetail}
                                             />
                                         )}
+
+                                        {/* The Post Ganme Helper View */}
+                                        {/* @TODO this is the post game helper detail view WIP */}
+                                        {/*{detailType === 'post-game' && (*/}
+                                        {/*    <WbbPostGameDetailView*/}
+                                        {/*        onClose={closeDetail}*/}
+                                        {/*    />*/}
+                                        {/*)}*/}
 
                                         {/* Empty Fallback */}
                                         {detailType === null && (
