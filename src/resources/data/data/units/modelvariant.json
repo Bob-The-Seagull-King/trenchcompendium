@@ -1088,7 +1088,7 @@
                 ]
             }},
         "base_id": "md_yeoman",
-        "variant_name": "Exploration",
+        "variant_name": "Exploration_Survivor",
         "team": "faithful",
         "stats" : {},
         "cut_keywords" : [],

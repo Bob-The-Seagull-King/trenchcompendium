@@ -129,6 +129,7 @@ class ModelFactory {
         }
         const BasedModelData : IModel = ModelCollection.MergeModels(_base, varaint);
         const rule = new Model(BasedModelData, parent)
+        rule.Tags["held_variant_name"] = varaint.variant_name;
         cache.AddToCache('model', rule);
         const Base = await ModelFactory.CreateModel(_base, parent);
         rule.BaseModel = Base;
