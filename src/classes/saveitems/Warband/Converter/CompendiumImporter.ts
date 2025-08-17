@@ -1,3 +1,4 @@
+import { FactionEquipmentRelationship } from "../../../relationship/faction/FactionEquipmentRelationship";
 import { ExplorationFactory } from "../../../../factories/features/ExplorationFactory";
 import { SkillFactory } from "../../../../factories/features/SkillFactory";
 import { ConvertCompendiumToCompanionID } from "../../../../resources/staticcontext/importdata/compendiumdata";
@@ -5,6 +6,7 @@ import { ToolsController } from "../../../_high_level_controllers/ToolsControlle
 import { UserWarband } from "../UserWarband";
 import { SumWarband, WarbandManager } from "../WarbandManager";
 import { WarbandProperty } from "../WarbandProperty";
+import { EquipmentFactory } from "../../../../factories/features/EquipmentFactory";
 
 
 class CompendiumImporter {
@@ -73,6 +75,13 @@ class CompendiumImporter {
         // Models
         
         // Stash
+        const OptionList = await (NewWarband.warband_data).GetFactionEquipmentOptions(true, false, true, false);
+        const FullList = await EquipmentFactory.GetAllFactionEquipment(true, [], []);
+        for (let i = 0; i < JSONVal.Armoury.length; i++) {
+            const mod_id = ConvertCompendiumToCompanionID(JSONVal.Armoury[i].ID);
+            const item_costtype = JSONVal.Armoury[i].CostType == "ducats"? 0 : 1;
+            await this.BuildEquipment(mod_id, NewWarband.warband_data, JSONVal.Armoury[i].Cost, item_costtype, OptionList, FullList);
+        }
 
         // Locations
         for (let i = 0; i < JSONVal.Locations.length; i++) {
@@ -99,6 +108,44 @@ class CompendiumImporter {
         }
     }
 
+    public async BuildEquipment(item_id : string, wb : UserWarband, cost_val : number, cost_type : number, options : FactionEquipmentRelationship[], fulloptions : FactionEquipmentRelationship[]) {
+        const op_id = options.map(obj => obj.EquipmentItem.ID)
+        try {
+            let FacRel : FactionEquipmentRelationship | null = null;
+            if (op_id.includes(item_id)) {
+                for (let i = 0; i < options.length; i++) {
+                    if (options[i].EquipmentItem.ID == item_id) {
+                        FacRel = options[i]
+                        break;
+                    }
+                }
+            } else {
+                for (let i = 0; i < fulloptions.length; i++) {
+                    if (fulloptions[i].EquipmentItem.ID == item_id) {
+                        FacRel = fulloptions[i]                        
+                        break;
+                    }
+                }
+            }
+
+            if (FacRel != null) {
+                let isfree = false;
+                if (cost_val == 0) {
+                    isfree = true;
+                }
+                if (cost_val > 0) {
+                    FacRel.Cost = cost_val
+                }
+                FacRel.CostType = cost_type;
+                await wb.AddStash(FacRel, isfree, null);
+            }
+
+        } catch (e) {
+            console.log(e)
+            console.log(item_id)
+        }
+    }
+
     public async BuildExplorationSkills(SkillSet : any, wb : UserWarband) {
         let FoundDefault = false;
         for (let i = 0; i < SkillSet.length; i++) {
@@ -115,6 +162,7 @@ class CompendiumImporter {
                 wb.Exploration.Skills.push(NewSkill);
             } catch(e) {
                 console.log(e)
+                console.log(SkillSet[i].id)
             }
         }
     }
