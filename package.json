@@ -62,9 +62,7 @@
   "reactSnap": {
     "skipThirdPartyRequests": true,
     "inlineCss": true,
-    "include": [
-      "/"
-    ]
+    "include": [ ]
   },
   "eslintConfig": {
     "extends": "react-app"
