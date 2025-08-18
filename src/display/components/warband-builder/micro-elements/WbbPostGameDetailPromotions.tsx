@@ -28,6 +28,9 @@ const WbbPostGameDetailPromotions: React.FC = () => {
     useEffect(() => {
         // Calc Dice Pool
         const pool = 1 + (hasWon ? 1 : 0) + gloriousDeeds.length;
+
+        // @TODO: Add Showoff wildcard skill +1
+
         setDicePool(pool);
 
         // Calculated value for newFailedPromotionDice
@@ -98,6 +101,8 @@ const WbbPostGameDetailPromotions: React.FC = () => {
                         {deed.name}{': '}{'+1'}{' Dice'}
                     </div>
                 ))}
+
+                {/* @TODO: Add Showoff wildcard skill +1 */}
 
                 <div className={'pool-total'}>
                     {'Total Promotion Dice: '}

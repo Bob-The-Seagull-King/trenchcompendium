@@ -3,7 +3,7 @@ import {useWbbMode} from "../../../../context/WbbModeContext";
 import {GloriousDeed, usePostGame} from "../../../../context/PostGameContext";
 import React, {useEffect, useState} from "react";
 
-// Dummy Deeds
+// Dummy Deeds @TODO: Add actual deeds
 const availableDeeds: GloriousDeed[] = [
     { id: "d1", name: "Reaper" },
     { id: "d2", name: "Sharpshooter" },
