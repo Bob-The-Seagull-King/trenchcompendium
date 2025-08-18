@@ -52,11 +52,15 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && react-snap",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint --cache .",
     "format": "prettier --check ."
+  },
+  "reactSnap": {
+    "skipThirdPartyRequests": true,
+    "inlineCss": true
   },
   "eslintConfig": {
     "extends": "react-app"
