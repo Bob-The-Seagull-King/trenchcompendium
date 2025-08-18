@@ -7,7 +7,7 @@ interface IWarbandContextItem {
     victory_points: number,
     campaign_round: number,
     failed_promotions: number,
-    stored_ratings?: StoredRatings
+    stored_ratings: StoredRatings
 }
 
 interface StoredRatings {
