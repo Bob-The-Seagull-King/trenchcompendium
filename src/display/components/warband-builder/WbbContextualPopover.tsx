@@ -387,12 +387,10 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
 
     // deletes the warband
     const handleDeleteWarband = () => {
-        if( deleteConfirmInput == 'confirm') {
-            
+        if( deleteConfirmInput == 'Confirm') {
             const Manager : ToolsController = ToolsController.getInstance();
             Manager.UserWarbandManager.DeletePack(item.id).then(() =>
                     navigate("/warband", {state: Date.now().toString()}));
-            
         }
     }
 
