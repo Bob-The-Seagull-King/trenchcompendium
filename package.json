@@ -57,12 +57,11 @@
     "eject": "react-scripts eject",
     "lint": "eslint --cache .",
     "format": "prettier --check .",
-    "postbuild": "react-snap"
+    "postbuild": "react-snap && exit 0"
   },
   "reactSnap": {
     "skipThirdPartyRequests": true,
-    "inlineCss": true,
-    "include": [ ]
+    "inlineCss": true
   },
   "eslintConfig": {
     "extends": "react-app"
