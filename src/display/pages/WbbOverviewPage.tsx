@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import WbbWarbandListItem from "../components/warband-builder/WbbWarbandListItem";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCopy, faPlus, faUser, faXmark} from "@fortawesome/free-solid-svg-icons";
+import {faCopy, faPlus, faUser, faXmark, faUpload, faCircleNotch} from "@fortawesome/free-solid-svg-icons";
 import {useNavigate} from "react-router-dom";
 import { SumWarband, WarbandManager } from '../../classes/saveitems/Warband/WarbandManager';
 import CustomNavLink from '../components/subcomponents/interactables/CustomNavLink';
@@ -11,6 +11,8 @@ import LoadingOverlay from "../components/generics/Loading-Overlay";
 import {useAuth} from "../../utility/AuthContext";
 import {Button, Modal} from "react-bootstrap";
 import { CompendiumImporter } from '../../classes/saveitems/Warband/Converter/CompendiumImporter';
+import {toast} from "react-toastify";
+import AlertCustom from "../components/generics/AlertCustom";
 
 
 /**
@@ -57,18 +59,25 @@ const WbbOverviewPage = (prop: any) => {
 
     const [showDropdown, setShowDropdown] = useState(false);
     const [showImportModal, setShowImportModal] = useState(false);
+    const [loadingImportModal, setLoadingImportModal] = useState(false);
     const toggleDropdown = () => setShowDropdown(!showDropdown);
     const closeDropdown = () => setShowDropdown(false);
 
     async function HandleImport() {
-        /** TODO David This is where we can do success and failure notifications */
+        setLoadingImportModal(true);
+
         const Result = await CompendiumImporter.getInstance().readFileOnUpload(imported)
         if (Result == true) {
             setwarbands(Manager.CurWarbands());
             setShowImportModal(false);
             setkeyvar((prev) => prev + 1);
-            
+            toast.success('Warband successfully imported')
+        } else {
+            toast.error('Error: Warband could not be imported.')
         }
+
+        setLoadingImportModal(false);
+
     }
 
     return (
@@ -94,7 +103,6 @@ const WbbOverviewPage = (prop: any) => {
                             <span className={'new-warband-label'}>{'New Warband'}</span>
                         </CustomNavLink>
 
-                        {/* @TODO: iclude to show import UI */}
                         <div className="btn-group" role="group">
                             <button
                                 type="button"
@@ -104,7 +112,10 @@ const WbbOverviewPage = (prop: any) => {
                             </button>
                             {showDropdown && (
                                 <ul className="dropdown-menu dropdown-menu-end show" aria-labelledby="wbb-global-actions-group">
-                                    <li className={'dropdown-item'} onClick={() => setShowImportModal(true)}>
+                                    <li className={'dropdown-item'} onClick={() => {
+                                        setShowDropdown(false);
+                                        setShowImportModal(true);
+                                    }}>
                                         {'Import Compendium Warband'}
                                     </li>
                                 </ul>
@@ -198,12 +209,36 @@ const WbbOverviewPage = (prop: any) => {
                         />
                     </div>
 
+                    <AlertCustom
+                        type={'info'}
+                        className={'my-3'}
+                    >
+                        <div className={'fw-bold mb-2'}>
+                            {'How to import compendium Warbands'}
+                        </div>
+                        <p>
+                            {'You can import your warbands from the old trench compendium by following these steps:'}
+                        </p>
+                        <ol>
+                            <li>{'Download your warband as JSON from the compendium'}</li>
+                            <li>{'Upload the JSON file above'}</li>
+                            <li>{'Click "Import Warband" below'}</li>
+                            <li>{'Check if the warband imported all details correctly'}</li>
+                        </ol>
+                    </AlertCustom>
+
+
                     <div className="mb-3">
                         <button
                             onClick={() => HandleImport()}
                             className={'btn btn-primary'}
 
                         >
+                            { loadingImportModal ? (
+                                <FontAwesomeIcon icon={faCircleNotch} className={'fa-spin me-2'}/>
+                            ):(
+                                <FontAwesomeIcon icon={faUpload} className={'me-2'}/>
+                            )}
                             {'Import Warband'}
                         </button>
                     </div>
