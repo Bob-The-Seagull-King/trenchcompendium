@@ -22,6 +22,8 @@ import PostGameContext, {GloriousDeed} from "../../../context/PostGameContext";
 import WbbPostGameDetailGame from "./micro-elements/WbbPostGameDetailGame";
 import {RealWarbandPurchaseModel} from "../../../classes/saveitems/Warband/Purchases/WarbandPurchase";
 import WbbPostGameDetailCustom from "./micro-elements/WbbPostGameDetailCustom";
+import WbbPostGameDetailSalvageGolem from "./micro-elements/WbbPostGameDetailSalvageGolem";
+import WbbPostGameDetailKnighthood from "./micro-elements/WbbPostGameDetailKnighthood";
 
 interface WbbPostGameDetailViewProps {
     onClose: () => void;
@@ -90,6 +92,9 @@ const WbbPostGameDetailView: React.FC<WbbPostGameDetailViewProps> = ({ onClose }
                     </h3>
                     {/* Warband Exploration */}
                     <WbbPostGameDetailExploration/>
+
+                    <WbbPostGameDetailSalvageGolem />
+                    <WbbPostGameDetailKnighthood />
 
                     {/* Custom Setting */}
                     <WbbPostGameDetailCustom/>

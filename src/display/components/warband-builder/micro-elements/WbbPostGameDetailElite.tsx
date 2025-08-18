@@ -27,6 +27,15 @@ const WbbPostGameDetailElite: React.FC<WbbPostGameDetailEliteProps> = ( {fighter
     const [showAdvancementModal, setshowAdvancementModal] = useState(false);
     const [showInjuryModal, setshowInjuryModal] = useState(false);
 
+    {/* @TODO: move the true value to postgame so only one use is available */}
+    {/* @TODO: handle the use of the field hospital. It negates a battle scar or adds another one */}
+    const [fieldHospitalUsed, setfieldHospitalUsed] = useState(false);
+    const [fieldHospitalResult, setFieldHospitalResult] = useState<string>("");
+
+    // @TODO: handle the user of the resurrectionEngine
+    const [resEngineUsed, setresEngineUsed] = useState(false);
+
+
     const [fighterDeeds, setFighterDeeds] = useState<string[]>([]);
     const [takingPart, setTakingPart] = useState(false);
     const [customXP, setCustomXP] = useState(0);
@@ -138,7 +147,7 @@ const WbbPostGameDetailElite: React.FC<WbbPostGameDetailEliteProps> = ( {fighter
                     <div className="WbbPostGameDetailElite-injuries-detail">
                         <WbbOptionBox
                             title="Rolled Injury"
-                            value="Leg Wound"
+                            value="-"
                             onClick={() => setshowInjuryModal(true)}
                         />
 
@@ -166,6 +175,86 @@ const WbbPostGameDetailElite: React.FC<WbbPostGameDetailEliteProps> = ( {fighter
                                 );
                             })}
                         </div>
+
+                        {/* @TODO: show only when field hospital is unlocked and prerequisites are met*/}
+                        <div className={'form-check my-3'}>
+                            <input
+                                className="form-check-input"
+                                type="checkbox"
+                                id={`field-hospital-${fighter.model.ID}`}
+                                checked={fieldHospitalUsed}
+                                onChange={() => setfieldHospitalUsed(!fieldHospitalUsed)}
+                            />
+                            <label className="form-check-label" htmlFor={`field-hospital-${fighter.model.ID}`}>
+                                {'Use field hospital'}
+                            </label>
+                        </div>
+
+                        {fieldHospitalUsed &&
+                            <div className="my-3">
+                                <label className="fw-bold d-block mb-2">Field Hospital Result</label>
+
+                                <div className="form-check">
+                                    <input
+                                        className="form-check-input"
+                                        type="radio"
+                                        name="field-hospital-result"
+                                        id="field-hospital-success"
+                                        value="success"
+                                        checked={fieldHospitalResult === "success"}
+                                        onChange={(e) => setFieldHospitalResult(e.target.value)}
+                                    />
+                                    <label className="form-check-label" htmlFor="field-hospital-success">
+                                        {'Success:'}{' No battle scar suffered'}
+                                    </label>
+                                </div>
+
+                                <div className="form-check">
+                                    <input
+                                        className="form-check-input"
+                                        type="radio"
+                                        name="field-hospital-result"
+                                        id="field-hospital-noresult"
+                                        value="no-result"
+                                        checked={fieldHospitalResult === "no-result"}
+                                        onChange={(e) => setFieldHospitalResult(e.target.value)}
+                                    />
+                                    <label className="form-check-label" htmlFor="field-hospital-noresult">
+                                        No Result
+                                    </label>
+                                </div>
+
+                                <div className="form-check">
+                                    <input
+                                        className="form-check-input"
+                                        type="radio"
+                                        name="field-hospital-result"
+                                        id="field-hospital-criticalfail"
+                                        value="critical-failure"
+                                        checked={fieldHospitalResult === "critical-failure"}
+                                        onChange={(e) => setFieldHospitalResult(e.target.value)}
+                                    />
+                                    <label className="form-check-label" htmlFor="field-hospital-criticalfail">
+                                        {'Critical Failure:'}{' +1 Battle Scar'}
+                                    </label>
+                                </div>
+                            </div>
+                        }
+
+                        {/* @TODO: only show if res engine is unlocked AND fighter gains the last battle scar */}
+                        <div className={'form-check my-3'}>
+                            <input
+                                className="form-check-input"
+                                type="checkbox"
+                                id={`res-eninge-${fighter.model.ID}`}
+                                checked={resEngineUsed}
+                                onChange={() => setresEngineUsed(!resEngineUsed)}
+                            />
+                            <label className="form-check-label" htmlFor={`res-eninge-${fighter.model.ID}`}>
+                                {'Use Resurrection Engine'}
+                            </label>
+                        </div>
+
                     </div>
                 )}
             </div>
@@ -178,7 +267,7 @@ const WbbPostGameDetailElite: React.FC<WbbPostGameDetailEliteProps> = ( {fighter
                     {/* XP Boxes */}
                     <div className="xp-boxes">
                         {/* @TODO: Get actual Max length*/}
-                        {Array.from({ length: 18 }, (_, i) => {
+                        {Array.from({length: 18}, (_, i) => {
                             const level = i + 1;
                             const isBold = xpboldXpIndices.includes(level);
                             const isFilled = level <= xp; // xp = current value from state
@@ -189,7 +278,7 @@ const WbbPostGameDetailElite: React.FC<WbbPostGameDetailEliteProps> = ( {fighter
                                     key={level}
                                     className={`xp-box${isBold ? " xp-box-bold" : ""}${isFilled ? " xp-filled" : ""}${isNew ? " plusxp" : ""}`}
                                 >
-                                    {isFilled && <FontAwesomeIcon icon={faCheck} />}
+                                    {isFilled && <FontAwesomeIcon icon={faCheck}/>}
                                 </div>
                             );
                         })}
@@ -211,7 +300,7 @@ const WbbPostGameDetailElite: React.FC<WbbPostGameDetailEliteProps> = ( {fighter
                                     onChange={(e) => setTakingPart(e.target.checked)}
                                 />
                                 <label className="form-check-label" htmlFor={`xp-taking-part-${fighter.model.ID}`}>
-                                    {'Taking part'}
+                                    {'Taking part'}{' (+1XP)'}
                                 </label>
                             </div>
 
@@ -226,7 +315,7 @@ const WbbPostGameDetailElite: React.FC<WbbPostGameDetailEliteProps> = ( {fighter
                                         onChange={() => toggleFighterDeed(deed.id)}
                                     />
                                     <label className="form-check-label" htmlFor={`deed-${deed.id}-${fighter.model.ID}`}>
-                                        {deed.name}
+                                        {deed.name}{' (+1XP)'}
                                     </label>
                                 </div>
                             ))}

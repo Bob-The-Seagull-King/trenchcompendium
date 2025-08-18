@@ -249,7 +249,7 @@
         "contextdata": {
             },
         "base_id": "md_trenchdog",
-        "variant_name": "Guard",
+        "variant_name": "Base",
         "lore": [                      
             {
                 "tags": {"desc_type" : "italic"},
@@ -283,7 +283,7 @@
             }
             },
         "base_id": "md_trenchdog",
-        "variant_name": "Guard",
+        "variant_name": "Base",
         "lore": [                      
             {
                 "tags": {"desc_type" : "italic"},
@@ -319,7 +319,7 @@
             }
             },
         "base_id": "md_trenchdog",
-        "variant_name": "Mercy",
+        "variant_name": "Base",
         "lore": [                      
             {
                 "tags": {"desc_type" : "italic"},
@@ -384,7 +384,7 @@
             }
             },
         "base_id": "md_trenchdog",
-        "variant_name": "Martyrdom",
+        "variant_name": "Base",
         "lore": [                      
             {
                 "tags": {"desc_type" : "italic"},
@@ -418,7 +418,7 @@
             }
             },
         "base_id": "md_trenchdog",
-        "variant_name": "Hellhound",
+        "variant_name": "Base",
         "lore": [                      
             {
                 "tags": {"desc_type" : "italic"},
@@ -929,7 +929,7 @@
                 ]
             }},
         "base_id": "md_grailthrall",
-        "variant_name": "Base",
+        "variant_name": "Dirge_of_the_Great_Hegemon",
         "team": "hell",
         "cut_keywords" : [],
         "keywords" : [],
@@ -1051,7 +1051,7 @@
             }
         },
         "base_id": "md_wretched",
-        "variant_name": "Base",
+        "variant_name": "Court_Of_The_Seven_Headed_Serpent",
         "team": "hell",
         "lore": [               
             {
@@ -1075,7 +1075,7 @@
     },
     {
         "id": "md_yeoman_survivor",
-        "name": "Yeoman",
+        "name": "Survivor Yeoman",
         "source": "core",
         "tags": {},
         "contextdata": { 
@@ -1088,7 +1088,7 @@
                 ]
             }},
         "base_id": "md_yeoman",
-        "variant_name": "Exploration",
+        "variant_name": "Common_Exploration",
         "team": "faithful",
         "stats" : {},
         "cut_keywords" : [],

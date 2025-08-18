@@ -3,7 +3,7 @@ import { Modal, Button } from 'react-bootstrap';
 import {faCoins, faTrophy, faXmark} from "@fortawesome/free-solid-svg-icons";
 import { FactionModelRelationship } from '../../../../classes/relationship/faction/FactionModelRelationship';
 import { useWarband } from '../../../../context/WarbandContext';
-import { getCostType } from '../../../../utility/functions';
+import { getCostType, makestringpresentable } from '../../../../utility/functions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import SynodModelImageSource from "../../../../utility/SynodModelImageSource";
 import SynodModelImage from "../../../../utility/SynodModelImage";
@@ -136,7 +136,7 @@ const WbbModalAddFighterCustom: React.FC<WbbModalAddFighterTroopProps> = ({ show
                         </div>
 
                         <span className={'item-name'}>
-                            {fighter.GetName()}
+                            {fighter.GetName() + (fighter.Tags['held_variant_name'] != undefined? " (" + makestringpresentable(fighter.Tags['held_variant_name'].toString()) + ")" : "")}
                         </span>
                     </div>
                 ))}
