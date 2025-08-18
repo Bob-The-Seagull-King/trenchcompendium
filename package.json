@@ -60,6 +60,7 @@
     "postbuild": "react-snap"
   },
   "reactSnap": {
+    "skipThirdPartyRequests": true,
     "inlineCss": true
   },
   "eslintConfig": {
