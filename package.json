@@ -57,12 +57,12 @@
     "eject": "react-scripts eject",
     "lint": "eslint --cache .",
     "format": "prettier --check .",
-    "postbuild": "react-snap && exit 0"
+    "postbuild": "npm run prerender",
+    "prerender": "react-snap && exit 0"
   },
   "reactSnap": {
     "skipThirdPartyRequests": true,
-    "inlineCss": true,
-    "puppeteerArgs": ["--no-sandbox", "--disable-setuid-sandbox", "--disable-dev-shm-usage"]
+    "inlineCss": true
   },
   "eslintConfig": {
     "extends": "react-app"
