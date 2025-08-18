@@ -7,6 +7,13 @@ import { ContextPackage } from "./contextpackage";
  */
 class StaticContextObject extends ContextObject {
 
+    /**
+     * Gets the event context packages of itself and any sub objects
+     * @param event_id the ID name of the event
+     * @param source_obj where the event is being called from
+     * @param arrs_extra any extra arguments unique to the call
+     * @returns an array of context packages to be run by the even handler
+     */
     public async GrabContextPackages(event_id : string, source_obj : ContextObject, arrs_extra : any[]) { 
         const StaticEvents : ContextPackage[] = [];
         if (this.ContextData) {         

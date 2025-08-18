@@ -1,13 +1,7 @@
-/**
- * skill
- */
-import { IStaticOptionContextObject, StaticOptionContextObject } from '../../options/StaticOptionContextObject';
-import { DescriptionFactory } from '../../../utility/functions';
 import { ContextObject, IContextObject } from '../../contextevent/contextobject';
-import { StaticContextObject } from '../../contextevent/staticcontextobject';
 import { BaseAddon, IBaseAddon } from './BaseAddon';
-import { EventRunner } from '../../contextevent/contexteventhandler';
 
+// A fireteam, which comes in several different types
 class Fireteam extends BaseAddon {
 
     /**

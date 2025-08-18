@@ -1,4 +1,4 @@
-import {ContentPack, IContentPack } from './contentpack'
+import {ContentPack } from './contentpack'
 import { useContentPackStore } from '../../store/contentpacks'
 
 class ContentPackManager {
@@ -16,7 +16,7 @@ class ContentPackManager {
      * the manager's array of Content Packs.
      */
     public SetStorage() {
-        localStorage.setItem('contentpackstorage_sitename', JSON.stringify(this.PackList));
+        localStorage.setItem('contentpackstorage_trenchcompanion', JSON.stringify(this.PackList));
     }
 
     /**
