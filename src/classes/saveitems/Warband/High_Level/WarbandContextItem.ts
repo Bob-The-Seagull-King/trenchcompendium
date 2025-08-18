@@ -6,7 +6,17 @@ interface IWarbandContextItem {
     id : string,
     victory_points: number,
     campaign_round: number,
-    failed_promotions: number
+    failed_promotions: number,
+    stored_ratings?: StoredRatings
+}
+
+interface StoredRatings {
+    rating_ducat : number,
+    rating_glory : number,
+    stash_rating_ducat : number,
+    stash_rating_glory : number,
+    spare_ducat : number,
+    spare_glory : number
 }
 
 class WarbandContextItem {
@@ -14,6 +24,7 @@ class WarbandContextItem {
     public CampaignRound;
     public ID;
     public FailedPromotions;
+    public Ratings : StoredRatings;
 
     /**
      * Assigns parameters and creates a series of description
@@ -26,6 +37,18 @@ class WarbandContextItem {
         this.VictoryPoints = data.victory_points;
         this.CampaignRound = data.campaign_round;
         this.FailedPromotions = data.failed_promotions;
+        if (data.stored_ratings) {
+            this.Ratings = data.stored_ratings
+        } else {
+            this.Ratings = {
+            rating_ducat : 0,
+            rating_glory : 0,
+            stash_rating_ducat : 0,
+            stash_rating_glory : 0,
+            spare_ducat : 0,
+            spare_glory : 0
+            }
+        }
     }
 
     public ConvertToInterface() {
@@ -33,7 +56,8 @@ class WarbandContextItem {
             id : this.ID,
             victory_points: this.VictoryPoints,
             campaign_round: this.CampaignRound,
-            failed_promotions: this.FailedPromotions
+            failed_promotions: this.FailedPromotions,
+            stored_ratings : this.Ratings
         }
         
         return _objint;

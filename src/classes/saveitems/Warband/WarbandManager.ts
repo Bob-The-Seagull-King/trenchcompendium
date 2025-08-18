@@ -246,7 +246,15 @@ class WarbandManager {
                 id: this.CalcID(_title.trim() + "_context"),
                 victory_points: 0,
                 campaign_round: 1,
-                failed_promotions: 0
+                failed_promotions: 0,
+                stored_ratings: {
+                    rating_ducat: 0,
+                    rating_glory: 0,
+                    spare_ducat: isNaN(ducats)? 0 : ducats,
+                    spare_glory: isNaN(glory)? 0 : glory,
+                    stash_rating_ducat: 0,
+                    stash_rating_glory: 0
+                }
             },
             exploration: {
                 explorationskills: [

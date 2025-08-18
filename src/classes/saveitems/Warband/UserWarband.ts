@@ -406,6 +406,16 @@ class UserWarband extends DynamicContextObject {
         for (let i = 0; i < this.Consumables.length; i++) {
             consumablelist.push(this.Consumables[i].ConvertToInterface())
         }
+
+        // Store Warband Ducats/Glory
+        this.Context.Ratings.rating_ducat = this.GetDucatRatingCost();
+        this.Context.Ratings.rating_glory = this.GetGloryRatingCost();
+        this.Context.Ratings.spare_ducat = this.GetSumCurrentDucats();
+        this.Context.Ratings.spare_glory = this.GetSumCurrentGlory();
+        this.Context.Ratings.stash_rating_ducat = this.GetDucatCostStash();
+        this.Context.Ratings.stash_rating_glory = this.GetGloryCostStash();
+        //
+
         const _objint : IUserWarband = {
             id : this.ID,
             context : this.Context.ConvertToInterface(),
