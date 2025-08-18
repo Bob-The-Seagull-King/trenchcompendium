@@ -57,8 +57,7 @@
     "eject": "react-scripts eject",
     "lint": "eslint --cache .",
     "format": "prettier --check .",
-    "postbuild": "npm run prerender",
-    "prerender": "react-snap && exit 0"
+    "postbuild": "CI=false react-snap && exit 0"
   },
   "reactSnap": {
     "skipThirdPartyRequests": true,
