@@ -52,7 +52,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && react-snap",
+    "build": "react-scripts build && react-snap && exit 0",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint --cache .",
