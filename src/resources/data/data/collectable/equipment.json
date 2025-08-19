@@ -3689,7 +3689,7 @@
         "id": "eq_gasfilter",
         "name": "Gas Filter",
         "source": "core",
-        "tags": {"trait": true, "headgear": true},
+        "tags": {"trait": true},
         "category": "equipment",
         "distance": null,
         "stats": {
@@ -6506,7 +6506,7 @@
         "id": "eq_catherinewheel",
         "name": "Catherine Wheel",
         "source": "core",
-        "tags": {"action": true, "weapon": true, "model": true},
+        "tags": {"action": true, "weapon": true, "model": true, "methodius": true},
         "category": "melee",
         "distance": null,
         "stats": {
