@@ -1504,7 +1504,9 @@
                         "option_id": 0,
                         "restriction": [
                             { "category": "melee" },
-                            { "category": "ranged" }
+                            { "category": "ranged" },
+                            { "category": "armour" },
+                            { "antitag": "shield" }
                         ]
                     }
                 ]
@@ -2032,13 +2034,25 @@
         "contextdata": {
             "bonus_ability": {
                 "bonus_type": ["equipment", "weapon", "pistol"]
-            } },
+            },
+            "equipment_add_keyword": {
+                "equip_check": [
+                    {
+                        "check_type": "tag",
+                        "value": "pistol"
+                    }
+                ],
+                "additions": [
+                    "kw_assault"
+                ]
+            }  },
         "description": [            
             {
                 "tags": {"desc_type" : "default"},
-                "content": "If armed with two pistols, this model can make ranged attack ACTIONS with both of them when making a ranged attack. In addition, this model suffers no penalty when using a pistol as an Off-Hand weapon.",
+                "content": "If armed with two “pistols”, this model can make Ranged Attack ACTIONS with both of them when Making a Ranged Attack. In addition, this model suffers no penalty when using a “pistol” as an Off-Hand weapon. It gives normal “pistols” the character uses the Keyword ASSAULT.",
                 "glossary": [
-                    {"val": "ACTIONS", "id": "kw_action"}
+                    {"val": "ACTIONS", "id": "kw_action"},
+                    {"val": "ASSAULT", "id": "kw_assault"}
                 ]
             }
         ],

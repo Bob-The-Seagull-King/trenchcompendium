@@ -51,6 +51,8 @@ import {ImageCreditPopoverProvider} from "./utility/ImageCreditPopoverContext";
 import CampaignManager from "./display/campaign-manager/CampaignManager";
 import CampaignSetup from "./display/campaign-manager/CampaignSetup";
 import CampaignOverview from "./display/campaign-manager/CampaignOverview";
+import {ToastContainer} from "react-toastify";
+import HeadScripts from "./display/components/generics/HeadScripts";
 
 
 const App: React.FC = () => {
@@ -78,6 +80,8 @@ const App: React.FC = () => {
     return (
         <>
             <AuthProvider>
+                <HeadScripts />
+
                 <Provider store={store}>
                     <PersistGate loading={null} persistor={persistor}>
                         <Router >
@@ -128,10 +132,20 @@ const App: React.FC = () => {
                             </ImageCreditPopoverProvider>
                             <AdsManager />
                             <TrackingManager />
+                            {/*<TrackingManagerv2 />*/}
+
+                            <ToastContainer
+                                position="bottom-right"
+                                autoClose={5000}
+                                hideProgressBar={false}
+                                closeOnClick
+                                rtl={false}
+                                pauseOnFocusLoss
+                                pauseOnHover
+                            />
                         </Router>
                     </PersistGate>
                 </Provider>
-
             </AuthProvider>
         </>
     )

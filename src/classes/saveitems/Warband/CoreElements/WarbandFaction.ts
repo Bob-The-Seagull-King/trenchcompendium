@@ -236,6 +236,15 @@ class WarbandFaction extends DynamicContextObject {
         return '';
     }
 
+    public async GetSelfBaseName() {
+        const basefac = await this.GetFactionBase();
+        if (basefac != undefined) {
+            return basefac.GetTrueName();
+        }
+
+        return '';
+    }
+
     public GetModifierProperties() {
         const PropertyList : WarbandProperty[] = [];
 

@@ -84,7 +84,7 @@ const ProfilePageWarbands: React.FC<ProfilePageWarbandsProps> = ({ userData }) =
                     {warbands.length > 0 ? (
                         <ul className={'warbands-list'}>
                             {(showAll ? warbands : warbands.slice(0, maxVisible)).map((warband) => (
-                                <li key={warband.warband_data.GetId()} className={'warband'}>
+                                <li key={warband.warband_data.GetPostId()} className={'warband'}>
                                     <WarbandListEntry warband={warband} />
                                 </li>
                             ))}

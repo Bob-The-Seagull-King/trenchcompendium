@@ -5,6 +5,8 @@ import { ContextObject } from '../../classes/contextevent/contextobject';
 import { Ability, IAbility } from '../../classes/feature/ability/Ability';
 import { IUpgrade, Upgrade } from '../../classes/feature/ability/Upgrade';
 import { ModelUpgradeRelationship, IModelUpgradeRelationship } from '../../classes/relationship/model/ModelUpgradeRelationship';
+import { isValidList } from '../../utility/functions';
+import { byPropertiesOf } from '../../utility/functions';
 
 class UpgradeFactory {
 
@@ -46,6 +48,20 @@ class UpgradeFactory {
         cache.AddToCache('modelupgrade', rule);
         await rule.BuildUpgrade(_rule.upgrade_id);
         return rule;
+    }
+
+    
+    static async GetAllModelUpgrade() {
+        const models = Requester.MakeRequest({searchtype: "file", searchparam: {type: "modelupgraderelationship"}}) as IModelUpgradeRelationship[];
+        models.sort(byPropertiesOf<IModelUpgradeRelationship>(["name", "id"]))
+        const ModelList : ModelUpgradeRelationship[] = []
+        for (let i = 0; i < models.length; i++) {
+            const skl = await UpgradeFactory.CreateModelUpgrade(models[i], null);
+            if (skl != null) {
+                ModelList.push(skl);
+            }
+        }
+        return ModelList;
     }
 
 }

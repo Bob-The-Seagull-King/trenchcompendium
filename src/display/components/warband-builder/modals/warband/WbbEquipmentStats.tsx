@@ -41,7 +41,7 @@ const WbbEquipmentStats: React.FC<EquipmentItemProps> = (props : EquipmentItemPr
     return (
         <>
             {statlist && (RangeVal != "" || (HandValMelee != "" || HandValRange != "") || abilityObject.Modifiers.length > 0 || (cost != null && costtype != null) ) &&
-                <table className={'rules-equipment-stats-table'}>
+                <table className={'WbbEquipmentStats'}>
                     <tbody>
                         {RangeVal != "" &&
                             <tr>

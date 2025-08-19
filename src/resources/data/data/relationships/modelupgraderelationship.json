@@ -601,7 +601,7 @@
         "name": "",
         "contextdata": {
             "mod_self_cost": {
-                "mod": -45
+                "mod": -30
             }
         },
         "options": [],
@@ -846,7 +846,7 @@
         "name": "",
         "contextdata": {},
         "options": [],
-        "model_id_set": ["md_plagueknight"],
+        "model_id_set": ["md_plagueknight","md_plagueknight_executor"],
         "upgrade_id": "up_plagueknightcompanionofthefly_base",
         "cost": 5,
         "cost_type": 0,
@@ -864,7 +864,7 @@
         "name": "",
         "contextdata": {},
         "options": [],
-        "model_id_set": ["md_plagueknight"],
+        "model_id_set": ["md_plagueknight","md_plagueknight_executor"],
         "upgrade_id": "up_plagueknightrottencross",
         "cost": 5,
         "cost_type": 0,
@@ -882,7 +882,7 @@
         "name": "",
         "contextdata": {},
         "options": [],
-        "model_id_set": ["md_plagueknight"],
+        "model_id_set": ["md_plagueknight","md_plagueknight_executor"],
         "upgrade_id": "up_plagueknightalmoner",
         "cost": 10,
         "cost_type": 0,

@@ -7,9 +7,25 @@ import React, {useState} from 'react'
 import {TrackingManager} from "../components/generics/TrackingManager";
 import PageMetaInformation from "../components/generics/PageMetaInformation";
 
-const StaticPrivacy: React.FC = () => {
+declare global {
+    interface Window {
+        ezCMP?: {
+            generateCMPFromPrivacyCenter?: () => void;
+        };
+    }
+}
 
+const StaticPrivacy: React.FC = () => {
     const [forceShowPrivacy, setForceShowPrivacy] = useState<number>(0);
+    const handleCMP = () => {
+        if (
+            typeof window !== "undefined" &&
+            window.ezCMP &&
+            typeof window.ezCMP.generateCMPFromPrivacyCenter === "function"
+        ) {
+            window.ezCMP.generateCMPFromPrivacyCenter();
+        }
+    }
 
     return (
         <div className="StaticPrivacy page-static">
@@ -43,7 +59,12 @@ const StaticPrivacy: React.FC = () => {
                     }
 
                     <br/>
-                    <div className={'btn btn-secondary btn-sm mt-3 mb-3'} onClick={() => setForceShowPrivacy(Date.now())}>
+                    <div className={'btn btn-secondary btn-sm me-3 my-3'} onClick={() => handleCMP()}>
+                        {'Change Ads Settings'}
+                    </div>
+
+                    <div className={'btn btn-secondary btn-sm me-3 my-3'}
+                         onClick={() => setForceShowPrivacy(Date.now())}>
                         {'Change Privacy Settings'}
                     </div>
                 </p>
@@ -53,7 +74,7 @@ const StaticPrivacy: React.FC = () => {
                 </h2>
 
                 <p>
-                    {
+                {
                         'The personal information that you are asked to provide, and the reasons why you are asked to provide it, will be made clear to you at the point we ask you to provide your personal information.\n' +
                         'If you contact us directly, we may receive additional information about you such as your name, email address, phone number, the contents of the message and/or attachments you may send us, and any other information you may choose to provide.\n' +
                         'When you register for an Account, we may ask for your contact information, including items such as name, company name, address, email address, and telephone number.'
@@ -95,6 +116,30 @@ const StaticPrivacy: React.FC = () => {
                     {
                         'Like any other website, Trench Companion uses ‘cookies\'. These cookies are used to store information including visitors\' preferences, and the pages on the website that the visitor accessed or visited. The information is used to optimize the users\' experience by customizing our web page content based on visitors\' browser type and/or other information.'
                     }
+                </p>
+
+                <h2>Ezoic Services</h2>
+                <p>
+                    Ezoic Services<br/>
+                    {'This website uses the services of Ezoic Inc. (“Ezoic”), including to manage third-party interest-based advertising. Ezoic may employ a variety of technologies on this website, including tools to serve content, display advertisements and enable advertising to visitors of this website, which may utilize first and third-party cookies.'}
+                    <br/>{'A cookie is a small text file sent to your device by a web server that enables the website to remember information about your browsing activity. First-party cookies are created by the site you are visiting, while third-party cookies are set by domains other than the one you\'re visiting. Ezoic and our partners may place third-party cookies, tags, beacons, pixels, and similar technologies to monitor interactions with advertisements and optimize ad targeting.  Please note that disabling cookies may limit access to certain content and features on the website, and rejecting cookies does not eliminate advertisements but will result in non-personalized advertising. You can find more information about cookies and how to manage them '}
+                    <a rel={"noreferrer noopener nofollow"} href="https://allaboutcookies.org/" target="_blank">here</a>.
+                    <br/>The following information may be collected, used, and stored in a cookie when serving personalized ads:
+                </p>
+                <ul>
+                    <li>IP address</li>
+                    <li>Operating system type and version</li>
+                    <li>Device type</li>
+                    <li>Language preferences</li>
+                    <li>Web browser type</li>
+                    <li>Email (in a hashed or encrypted form)</li>
+                </ul>
+                <p>
+                    {'Ezoic and its partners may use this data in combination with information that has been independently collected to deliver targeted advertisements across various platforms and websites. Ezoic’s partners may also gather additional data, such as unique IDs, advertising IDs, geolocation data, usage data, device information, traffic data, referral sources, and interactions between users and websites or advertisements, to create audience segments for targeted advertising across different devices, browsers, and apps. You can find more information about interest-based advertising and how to manage them '}
+                <a rel={"noreferrer noopener nofollow"} href="https://youradchoices.com/" target="_blank">here</a>.
+                <br/>
+                    {'You can view Ezoic’s privacy policy '}<a rel={"noreferrer noopener nofollow"} href="https://ezoic.com/privacy/" target="_blank">here</a>{', or for additional information about Ezoic’s advertising and other partners, you can view Ezoic’s advertising partners '}<a rel={"noreferrer noopener nofollow"} href="https://www.ezoic.com/privacy-policy/advertising-partners/" target="_blank">here</a>.
+
                 </p>
 
                 <h2>

@@ -69,7 +69,7 @@ class SiteUserPublic {
         for (let i = 0; i < data.warbands.length; i++) {
             if (this.Warbands.filter((val : SumWarband) => val.id == data.warbands[i].id).length > 0) { continue; }
             try {
-                const newarband : UserWarband = await WarbandFactory.CreateUserWarband(JSON.parse(data.warbands[i].warband_data))
+                const newarband : UserWarband = await WarbandFactory.CreateUserWarband(JSON.parse(data.warbands[i].warband_data), data.warbands[i].id)
                 this.Warbands.push(
                     {
                         id: data.warbands[i].id,

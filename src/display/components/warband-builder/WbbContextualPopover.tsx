@@ -10,7 +10,7 @@ import {
     faArrowUp,
     faArrowLeft,
     faCoins,
-    faEdit, faPen, faFileExport, faDice, faSignature, faPrint, faArrowRotateLeft, faSackDollar, faXmark, faCheck
+    faEdit, faPen, faFileExport, faDice, faSignature, faPrint, faArrowRotateLeft, faSackDollar, faXmark, faCheck, faExclamationTriangle
 } from '@fortawesome/free-solid-svg-icons';
 import { usePopover } from '../../../context/PopoverContext';
 import { useWarband } from '../../../context/WarbandContext';
@@ -23,6 +23,7 @@ import { UserWarband } from '../../../classes/saveitems/Warband/UserWarband';
 import {SumWarband, WarbandManager} from "../../../classes/saveitems/Warband/WarbandManager";
 import { useNavigate } from 'react-router-dom';
 import {useWbbMode} from "../../../context/WbbModeContext";
+import AlertCustom from "../generics/AlertCustom";
 
 interface WbbContextualPopoverProps {
     id: string;
@@ -51,17 +52,50 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
     };
 
     const { activePopoverId, setActivePopoverId } = usePopover();
-    const { warband, reloadDisplay } = useWarband();
+    const { warband, reloadDisplay, modalIsOpen, setModalIsOpen } = useWarband();
     const { play_mode, edit_mode, view_mode, print_mode, setMode, isOwner } = useWbbMode(); // play mode v2
 
     const [newname, setName] = useState("")
-    const [exportFull, setExportFull] = useState<boolean>(true); // export options
+
+    // Export Type
+    const [exportType, setExportType] = useState<'full' | 'compact' | 'tts-json'>('full');
+    // Export Text
+    const [exportText, setExportText] = useState<string>('');
     const [exportCopySuccess, setExportCopySuccess] = useState<boolean>(false); // export copied to clipboard
+
+    // change export text based on type
+    useEffect(() => {
+
+        async function TTSExport() {
+            const TTS_Export = await (item as SumWarband).warband_data.BuildExportJSON()
+            setExportText(TTS_Export.join('\n'));
+        }
+        // Guard check -> Only do if item is SumWarband
+        if (
+            !item ||
+            typeof item !== 'object' ||
+            !item.warband_data ||
+            typeof item.warband_data.BuildExport !== 'function'
+        ) {
+            return;
+        }
+
+        if (exportType === 'full') {
+            setExportText((item as SumWarband).warband_data.BuildExport(true).join('\n'));
+        } else if (exportType === 'compact') {
+            setExportText((item as SumWarband).warband_data.BuildExport(false).join('\n'));
+        } else if (exportType === 'tts-json') {
+            TTSExport();
+        }
+    }, [exportType, item]);
+
+
     const isActive = activePopoverId === id;
 
     const handleToggle = () => {
         setActivePopoverId(isActive ? null : id);
     };
+
 
 
     /** Fighter Actions */
@@ -358,66 +392,74 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
 
     // deletes the warband
     const handleDeleteWarband = () => {
-        if( deleteConfirmInput == 'confirm') {
-            
+        if( deleteConfirmInput == 'Confirm') {
             const Manager : ToolsController = ToolsController.getInstance();
             Manager.UserWarbandManager.DeletePack(item.id).then(() =>
                     navigate("/warband", {state: Date.now().toString()}));
-            
         }
     }
 
 
     /** Print Mode */
+    // Trigger print mode from the popover
     const handlePrintWarband = () => {
-
+        // Switch UI to print mode
         setMode('print');
-
-        // Switch to print theme
-        document.body.setAttribute('data-theme', 'light');
         document.body.setAttribute('data-print', 'print');
 
-        setTimeout(() => {
-            window.print();
-        }, 200);
+        // Add ?print=true to the URL and push a new history entry:contentReference[oaicite:0]{index=0}
+        const url = new URL(window.location.href);
+        url.searchParams.set('print', 'true');
+        window.history.pushState({}, '', url.toString());
+
+        // Open the print dialog after a brief delay
+        setTimeout(() => window.print(), 200);
     };
 
-    // Listen to print ending (using window events)
-    const [theme, setTheme] = useGlobalState('theme');
+    // Handle end of printing – revert back to edit mode
     useEffect(() => {
+        // The afterprint event fires when printing or print preview closes:contentReference[oaicite:1]{index=1}
         const handleAfterPrint = () => {
-
             setMode('edit');
-            document.body.setAttribute('data-theme', theme);
-            document.body.setAttribute('data-print', '');
-
+            document.body.removeAttribute('data-print');
         };
 
         window.addEventListener('afterprint', handleAfterPrint);
-
         return () => {
             window.removeEventListener('afterprint', handleAfterPrint);
         };
     }, []);
+    /** End Print Mode */
 
     /** Hides popover when a modal is opened */
     useEffect(() => {
-        if (showConfirmDeleteFighterModal
-            || showConfirmRenameFighterModal
-            || showConfirmRefundFighterModal
-            || showConfirmDeleteModifierModal
-            || showConfirmDeleteExplorationModal
-            || showConfirmDeleteEquipmentModal
-            || showConfirmSellEquipmentModal
-            || showConfirmRefundEquipmentModal
-            || showConfirmMoveEquipmentModal
-            || showConfirmDeleteAdvancementModal
-            || showConfirmDeleteInjuryModal
-            || showConfirmRenameWarbandModal
-            || showConfirmExportWarbandModal
-        ) {
+        const isAnyModalOpen =
+            showConfirmDeleteFighterModal ||
+            showConfirmRenameFighterModal ||
+            showConfirmRefundFighterModal ||
+            showConfirmDeleteModifierModal ||
+            showConfirmDeleteExplorationModal ||
+            showConfirmDeleteEquipmentModal ||
+            showConfirmSellEquipmentModal ||
+            showConfirmRefundEquipmentModal ||
+            showConfirmMoveEquipmentModal ||
+            showConfirmDeleteAdvancementModal ||
+            showConfirmDeleteInjuryModal ||
+            showConfirmRenameWarbandModal ||
+            showConfirmDeleteWarbandModal ||
+            showConfirmExportWarbandModal;
+
+        if(isAnyModalOpen) {
             setActivePopoverId(null);
+            setModalIsOpen(true);
+        } else {
+            if( isActive ) {
+                setModalIsOpen(true);
+            } else {
+                setModalIsOpen(false);
+            }
         }
+
     }, [
         showConfirmDeleteFighterModal,
         showConfirmRenameFighterModal,
@@ -431,22 +473,15 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
         showConfirmDeleteAdvancementModal,
         showConfirmDeleteInjuryModal,
         showConfirmRenameWarbandModal,
-        showConfirmExportWarbandModal
+        showConfirmDeleteWarbandModal,
+        showConfirmExportWarbandModal,
+        isActive
     ]);
+
 
     return (
         <div onClick={(e) => e.stopPropagation()}>
-            <ToastContainer
-                position="bottom-right"
-                autoClose={5000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-            />
+
             <OverlayTrigger
                 trigger="click"
                 placement="left"
@@ -912,10 +947,17 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                         {'Are you sure you want to delete this Equipment?'}
                     </div>
                     {item.equipment &&
-                        <div >
-                            <strong>{item.equipment.Name }</strong>?
+                        <div>
+                            <strong>{item.equipment.Name}</strong>?
                         </div>
                     }
+                    <br/>
+                    <p>
+                        <FontAwesomeIcon icon={faExclamationTriangle} className={'icon-inline-left-l icon-wraning'}/>
+                        <i>
+                            {'This will remove the equipment and NOT refund its costs.'}
+                        </i>
+                    </p>
                 </Modal.Body>
 
                 <Modal.Footer>
@@ -1121,7 +1163,7 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
 
                         <div className={'mb-3'}>
                             <label className="form-label small" htmlFor={'delete-warband-confirm'}>
-                                {"Type 'confirm' to delete your warband."}
+                                {"Type 'Confirm' to delete your warband."}
                             </label>
                             <input
                                 type="text" id={'delete-warband-confirm'}
@@ -1140,7 +1182,7 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                         </Button>
                         <Button variant="primary"
                                 onClick={handleDeleteWarband}
-                                disabled={deleteConfirmInput !== 'confirm'}
+                                disabled={deleteConfirmInput !== 'Confirm'}
                         >
                             Delete
                         </Button>
@@ -1174,17 +1216,24 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                         <div className="btn-group" role="group">
                             <button
                                 type="button"
-                                className={`btn btn-secondary ${exportFull ? 'active' : ''}`}
-                                onClick={() => setExportFull(true)}
+                                className={`btn btn-secondary ${exportType == 'full' ? 'active' : ''}`}
+                                onClick={() => setExportType('full')}
                             >
                                 Full
                             </button>
                             <button
                                 type="button"
-                                className={`btn btn-secondary ${!exportFull ? 'active' : ''}`}
-                                onClick={() => setExportFull(false)}
+                                className={`btn btn-secondary ${exportType == 'compact' ? 'active' : ''}`}
+                                onClick={() => setExportType('compact')}
                             >
                                 Compact
+                            </button>
+                            <button
+                                type="button"
+                                className={`btn btn-secondary ${exportType == 'tts-json' ? 'active' : ''}`}
+                                onClick={() => setExportType('tts-json')}
+                            >
+                                TTS
                             </button>
                         </div>
 
@@ -1194,10 +1243,11 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                         <button
                             className={`btn btn-primary btn-copy mb-3 w-100 ${exportCopySuccess ? 'copy-success' : ''}`}
                             onClick={() => {
-                                const exportText = (item as SumWarband).warband_data.BuildExport(exportFull).join('\n');
-                                navigator.clipboard.writeText(exportText);
-                                setExportCopySuccess(true);
-                                setTimeout(() => setExportCopySuccess(false), 4000);
+                                if(exportText) {
+                                    navigator.clipboard.writeText(exportText);
+                                    setExportCopySuccess(true);
+                                    setTimeout(() => setExportCopySuccess(false), 4000);
+                                }
                             }}
                         >
 
@@ -1224,15 +1274,36 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                                     whiteSpace: 'pre-wrap',
                                     wordBreak: 'break-word'
                                 }}>
-                                    {(item as SumWarband).warband_data.BuildExport(exportFull).map((line, index) => (
-                                        <div key={index}>
-                                            {line}
-                                        </div>
-                                    ))}
+                                    <div >
+                                        {exportText}
+                                    </div>
                             </pre>
-
                             }
                         </div>
+
+                        <AlertCustom
+                            type={'info'}
+                            className={'mt-3'}
+                        >
+                            <>
+                                <div>
+                                    <strong>
+                                        {'Tabletop simulator export'}
+                                    </strong>
+                                </div>
+                                <p>
+                                    {'You can use the following mod to import your warband into TTS. Follow the instructions in the mod for more details.'}
+                                </p>
+                                <a
+                                    href={'https://steamcommunity.com/sharedfiles/filedetails/?id=3491693177 '}
+                                    rel="noopener noreferrer nofollow" target={'_blank'}
+                                >
+                                    {'Trench Crusade - Scriber >'}
+                                </a>
+                            </>
+                        </AlertCustom>
+
+
                     </div>
                 </Modal.Body>
 

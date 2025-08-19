@@ -103,6 +103,25 @@ class WarbandManager {
         }
         return null;
     }  
+    
+    /**
+     * @param _name The name of the item to find
+     * @returns The first instance of a item with that name
+     */
+    public GetItemByBaseID(_name : string) {
+        let i = 0;
+        for (i=0; i < this.CurWarbands().length ; i++) {
+            try {
+                const nameval = this.CurWarbands()[i].warband_data.ID 
+                if ((nameval != undefined? nameval : "" ).trim() == _name) {
+                    return this.CurWarbands()[i]
+                }
+            } catch (e) {
+                console.log("Broken Save Item Found")
+            }
+        }
+        return null;
+    }  
 
     /**
      * @param _name The name of the item to find
@@ -134,7 +153,7 @@ class WarbandManager {
                 TempList.push(
                     {
                         id: ItemList[i].id,
-                        warband_data:    await WarbandFactory.CreateUserWarband(ItemList[i].warband_data)
+                        warband_data:    await WarbandFactory.CreateUserWarband(ItemList[i].warband_data, ItemList[i].id)
                     })
             }
             this.ListOfWarbands = TempList;
@@ -246,7 +265,15 @@ class WarbandManager {
                 id: this.CalcID(_title.trim() + "_context"),
                 victory_points: 0,
                 campaign_round: 1,
-                failed_promotions: 0
+                failed_promotions: 0,
+                stored_ratings: {
+                    rating_ducat: 0,
+                    rating_glory: 0,
+                    spare_ducat: isNaN(ducats)? 0 : ducats,
+                    spare_glory: isNaN(glory)? 0 : glory,
+                    stash_rating_ducat: 0,
+                    stash_rating_glory: 0
+                }
             },
             exploration: {
                 explorationskills: [
@@ -288,19 +315,20 @@ class WarbandManager {
             consumables: [],
             restrictions_list: rest_list
         }
-        const new_item : UserWarband = await WarbandFactory.CreateUserWarband(_Item)
-        
-        const eventmon : EventRunner = new EventRunner();
-        await eventmon.runEvent(
-            "onWarbandBuild",
-            new_item,
-            [],
-            null,
-            new_item
-        )
 
         if (this.UserProfile != null) {
-            const id  = await this.CreateWarbandSynod(new_item.ConvertToInterface())
+            const id  = await this.CreateWarbandSynod(_Item)
+            
+            const new_item : UserWarband = await WarbandFactory.CreateUserWarband(_Item, id)
+            
+            const eventmon : EventRunner = new EventRunner();
+            await eventmon.runEvent(
+                "onWarbandBuild",
+                new_item,
+                [],
+                null,
+                new_item
+            )
             const NewSum : SumWarband = {
                     id: Number(id),
                     warband_data: new_item
@@ -308,8 +336,19 @@ class WarbandManager {
             this.CurWarbands().push(NewSum)
             return NewSum;
         } else {
+            const ID = this.GetIDLocal()
+            const new_item : UserWarband = await WarbandFactory.CreateUserWarband(_Item, ID)
+            
+            const eventmon : EventRunner = new EventRunner();
+            await eventmon.runEvent(
+                "onWarbandBuild",
+                new_item,
+                [],
+                null,
+                new_item
+            )
             const NewSum : SumWarband = {
-                    id: this.GetIDLocal(),
+                    id: ID,
                     warband_data: new_item
                 }
             this.WarbandItemList.push(NewSum)
@@ -375,12 +414,13 @@ class WarbandManager {
      * Recreates a copy of the item as a new item.
      */
     public async DuplicateItem(_Item : UserWarband) {  
-        const NewMember : UserWarband = await WarbandFactory.CreateUserWarband((_Item.ConvertToInterface()));
-        NewMember.Name = _Item.Name + " - Copy"
-        NewMember.ID = this.CalcID(NewMember.Name);
 
         if (this.UserProfile != null) {
-            const id  = await this.CreateWarbandSynod(NewMember.ConvertToInterface())
+            const ID_Get = _Item.ConvertToInterface()
+            ID_Get.name = _Item.Name + " - Copy"
+            ID_Get.id =  this.CalcID(ID_Get.name);
+            const id  = await this.CreateWarbandSynod(ID_Get)
+            const NewMember : UserWarband = await WarbandFactory.CreateUserWarband((ID_Get), id);
             
             this.CurWarbands().push(
                 {
@@ -388,10 +428,15 @@ class WarbandManager {
                     warband_data: NewMember
                 })
         } else {
+            const ID = this.GetIDLocal();
+            const ID_Get = _Item.ConvertToInterface()
+            ID_Get.name = _Item.Name + " - Copy"
+            ID_Get.id =  this.CalcID(ID_Get.name);
+            const NewMember : UserWarband = await WarbandFactory.CreateUserWarband((ID_Get), ID);
 
             this.CurWarbands().push(
                 {
-                    id: this.GetIDLocal(),
+                    id: ID,
                     warband_data: NewMember
                 })
             this.SetStorage();

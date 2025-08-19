@@ -51,9 +51,25 @@ $header_logo_padding: ($header_height - $header_logo_height) / 2
         padding: 10px
         margin-right: 5px
         height: $header_height + px
+        cursor: pointer
+        position: relative
 
         &:hover
             color: currentColor
+
+        .notification-num
+            position: absolute
+            top: 10px
+            left: 0px
+            background-color: $color-highlight-bg
+            border-radius: 50%
+            height: 20px
+            width: 20px
+            line-height: 20px
+            font-size: 14px
+            text-align: center
+            color: $color-text
+
 
     .logo-wrap
         padding: $header_logo_padding + px 5px
@@ -78,3 +94,51 @@ $header_logo_padding: ($header_height - $header_logo_height) / 2
         @media(max-width: 450px)
             .logo
                 max-width: calc(100vw - 130px)
+
+.header-user-popover
+    position: relative
+    padding: 0
+
+    &:before
+        content: ""
+        display: block
+        position: absolute
+        z-index: 0
+        top: -15px
+        right: 10px
+        width: 0px
+        height: 0px
+        border-style: solid
+        border-width: 0 10px 15px 10px
+        border-color: transparent transparent $color-highlight-bg-2 transparent
+        transform: rotate(0deg)
+
+    .user-name
+        padding: 10px 15px
+        background-color: $color-highlight-bg-2
+    .element
+        display: block
+        padding: 8px 15px
+        color: $color-text
+        text-decoration: none
+        cursor: pointer
+
+        &:hover
+            text-decoration: none
+            background-color: $color-bg-3
+            color: $color-highlight-text
+
+            .notification-num-inline
+                color: $color-text
+        .notification-num-inline
+            display: inline-block
+            color: $color-text
+
+            margin-left: 10px
+            background-color: $color-highlight-bg
+            border-radius: 50%
+            height: 16px
+            width: 16px
+            line-height: 16px
+            font-size: 14px
+            text-align: center

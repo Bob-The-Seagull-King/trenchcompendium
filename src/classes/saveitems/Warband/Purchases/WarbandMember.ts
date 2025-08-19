@@ -151,7 +151,6 @@ class WarbandMember extends DynamicContextObject {
 
     /**
      * Returns the lore for this fighter as string
-     * @TODO: return lore only for this fighter
      */
     public GetLore () {
         for (let i = 0; i < this.Notes.length; i++) {
@@ -164,47 +163,34 @@ class WarbandMember extends DynamicContextObject {
 
     /**
      * Set the Lore text for this fighter
-     * @TODO: Set actual Lore for this fighter
      * @param text
      */
     public SetLore (text: string) {
-        return true;
+        this.SaveNote(text, "lore")
     }
-
-    /**
-     * Returns the Notes for this fighter as string
-     * @TODO: return lore only for this fighter
-     */
-    public GetNotes () {
-        return '';
-    }
+    
     /**
      * Set the Notes text for this fighter
-     * @TODO: Set actual notes for this fighter
      * @param text
      */
     public SetNotes (text: string) {
-        return true;
+        this.SaveNote(text, "notes")
     }
-
 
 
     public SaveNote(text_new : string, title : string) {
         let note : INote | null = null;
         for (let i = 0; i < this.Notes.length; i++) {
             if (this.Notes[i].title == title) {
-
-                this.Notes[i].text == text_new;
-                break;
+                
+                this.Notes.splice(i, 1);
             }
         }
-        if (note == null) {
-            note = {
-                text: text_new,
-                title: title
-            }
-            this.Notes.push(note);
+        note = {
+            text: text_new,
+            title: title
         }
+        this.Notes.push(note);
 
     }
 
@@ -802,6 +788,22 @@ class WarbandMember extends DynamicContextObject {
         return subpackages; 
     }
 
+    /**
+     * Is this fighter a Troop?
+     */
+    public IsTroop(): boolean {
+
+        if( !this.IsElite() && !this.IsMercenary()) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Is this fighter a mercenary?
+     * @constructor
+     */
     public IsMercenary(): boolean {
         if (this.CurModel.Stats.mercenary) {
             return this.CurModel.Stats.mercenary
@@ -1190,6 +1192,7 @@ class WarbandMember extends DynamicContextObject {
         }
         const Groups : UpgradesGrouped = await this.getContextuallyAvailableUpgrades();
         const completegroups : MemberUpgradesGrouped = {}
+        const foundIDS : string[] = []
         const Events : EventRunner = new EventRunner();
 
         for (let i = 0; i < Object.keys(Groups).length; i++) {
@@ -1216,6 +1219,7 @@ class WarbandMember extends DynamicContextObject {
             for (let j = 0; j < Groups[special_cat].length; j++) {
 
                 const Presentation : MemberUpgradePresentation = await this.CalcGivenPurchase(Groups[special_cat][j], special_cat, limit_of_category);
+                foundIDS.push(Groups[special_cat][j].ID)
                 if (completegroups[special_cat]) {
                     completegroups[special_cat].upgrades.push(Presentation)
                 } else {
@@ -1227,9 +1231,164 @@ class WarbandMember extends DynamicContextObject {
                 }
             }
         }
+
+        for (let i = 0; i < this.Upgrades.length; i++) {
+            if (this.Upgrades[i].CustomInterface != undefined) {
+                const upgraw = await UpgradeFactory.CreateModelUpgrade(this.Upgrades[i].CustomInterface as IModelUpgradeRelationship, this);
+
+                if (!foundIDS.includes(upgraw.ID)) {
+                    const special_cat = upgraw.GetSpecialCategory()
+                    let limit_of_category = 0;
+                    if (this.MyContext) {
+                        limit_of_category = await Events.runEvent(
+                                "getUpgradeCategoryLimit",
+                                (this.MyContext),
+                                [],
+                                limit_of_category,
+                                special_cat
+                            )
+                    }
+                    limit_of_category = await Events.runEvent(
+                            "getUpgradeCategoryLimit",
+                            (this),
+                            [],
+                            limit_of_category,
+                            special_cat
+                        )
+
+
+                    const Presentation : MemberUpgradePresentation = await this.CaclExistingPurchase(this.Upgrades[i], upgraw, special_cat, limit_of_category);
+                    foundIDS.push(upgraw.ID)
+                    if (completegroups[special_cat]) {
+                        completegroups[special_cat].upgrades.push(Presentation)
+                    } else {
+                        completegroups[special_cat] = 
+                            {
+                                limit: limit_of_category,
+                                upgrades: [Presentation]
+                        }
+                    }
+
+                }
+            }
+        }        
+
         this.GeneralCache.upgrade_collections = completegroups
         return completegroups;
 
+    }
+    
+
+    public async CaclExistingPurchase(upg : WarbandPurchase, upgraw : ModelUpgradeRelationship, category: string, limit : number | null): Promise<MemberUpgradePresentation> {
+        const Events = new EventRunner();
+        let limit_of_category = 0;
+        if (limit == null) {
+            if (this.MyContext) {
+                limit_of_category = await Events.runEvent(
+                        "getUpgradeCategoryLimit",
+                        (this.MyContext),
+                        [],
+                        limit_of_category,
+                        category
+                    )
+            }
+            limit_of_category = await Events.runEvent(
+                    "getUpgradeCategoryLimit",
+                    (this),
+                    [],
+                    limit_of_category,
+                    category
+                )
+        } else {
+            limit_of_category = limit;
+        }
+
+        let foundpurchase : WarbandPurchase | null = null;
+        for (let k = 0; k < this.Upgrades.length; k++) {
+            if ((this.Upgrades[k].HeldObject as Upgrade).ID == upgraw.UpgradeObject.ID) {
+                foundpurchase = this.Upgrades[k];
+            }
+        }
+
+        let maxcount = upgraw.WarbandLimit;
+        maxcount = await Events.runEvent(
+            "getUpgradeLimitTrue",
+            upgraw,
+            [],
+            maxcount,
+            {
+                warband: this.MyContext,
+                model: this
+            }
+        )
+        let maxccurcostount = upgraw.Cost;
+        maxccurcostount = await Events.runEvent(
+            "getCostOfUpgrade",
+            upgraw,
+            [upg],
+            maxccurcostount,
+            {
+                warband: this.MyContext,
+                model: this
+            }
+        )
+        maxccurcostount = await Events.runEvent(
+            "getCostOfUpgrade",
+            this,
+            [upg],
+            maxccurcostount,
+            {
+                warband: this.MyContext,
+                model: this
+            }
+        )
+        maxccurcostount = await Events.runEvent(
+            "getCostOfUpgrade",
+            this.MyContext as UserWarband,
+            [upg],
+            maxccurcostount,
+            {
+                warband: this.MyContext,
+                model: this
+            }
+        )
+        
+        let discount_val = await Events.runEvent(
+            "getDiscountOfUpgrade",
+            upgraw,
+            [upgraw],
+            0,
+            {
+                warband: this.MyContext,
+                model: this
+            }
+        );
+        if (upg.CostType == 0) {
+            const ducatbudget = await this.GetUpgradeBudgetDucats()
+            if (ducatbudget > maxccurcostount) {
+                discount_val += maxccurcostount
+            } else {
+                discount_val += ducatbudget
+            }
+        }
+        if (upg.CostType == 1) {
+            const glorybudget = await this.GetUpgradeBudgetGlory()
+            if (glorybudget > maxccurcostount) {
+                discount_val += maxccurcostount
+            } else {
+                discount_val += glorybudget
+            }
+        }
+
+        return {
+            upgrade : upgraw,
+            purchase : upg,
+            allowed : false,
+            cur_count: (this.MyContext as UserWarband).GetCountOfUpgradeRel(upgraw.ID),
+            max_count: maxcount,
+            discount : discount_val,
+            cost: maxccurcostount
+        }
     }
 
     public async GetExplorationSkills() {
@@ -1891,12 +2050,13 @@ class WarbandMember extends DynamicContextObject {
         const SelectionOptions = await this.GetStatOptions();
 
         const StatSelections : ModelStatistics[] = [];
-
+        
         for (let i =0; i < this.Stat_Selections.length; i++) {
             let IsValid = false;
 
             for (let j = 0; j < SelectionOptions.length; j++) {
-                if (SelectionOptions[j].includes(this.Stat_Selections[i])) {
+                const outputs = SelectionOptions[j].map(obj => GetStatAsFullString(obj));
+                if (outputs.includes(GetStatAsFullString(this.Stat_Selections[i]))) {
                     IsValid = true;
                 }
             }
@@ -1905,7 +2065,6 @@ class WarbandMember extends DynamicContextObject {
                 StatSelections.push(this.Stat_Selections[i])
             }
         }
-
         this.Stat_Selections = StatSelections;
     }
 
@@ -2183,7 +2342,7 @@ class WarbandMember extends DynamicContextObject {
             NewRefList,
             this
         )
-
+        
         let CanAdd = await eventmon.runEvent(
             "canModelAddItem",
             this,
@@ -2224,6 +2383,16 @@ class WarbandMember extends DynamicContextObject {
         const EquippedItems = await this.GetAllEquipForShow();
         const KeyWordList = await this.GetKeywordsFull();
 
+        const eventmon : EventRunner = new EventRunner();
+        const keywords : Keyword[] = await eventmon.runEvent(
+            "findFinalKeywordsForFactionEquipment",
+            this,
+            [faceq],
+            faceq.GetKeyWords(),
+            null
+        )
+        const keywordids = keywords.map(obj => obj.ID)
+
         for (let i = 0; i < EquippedItems.length; i++) {
             const item : RealWarbandPurchaseEquipment = EquippedItems[i];
 
@@ -2245,14 +2414,13 @@ class WarbandMember extends DynamicContextObject {
             }
             if (
                 ((await item.equipment.GetKeywords()).filter((item) => item.ID == "kw_heavy").length > 0) &&
-                (faceq.GetKeyWordIDs().includes("kw_heavy")) &&
+                (keywordids.includes("kw_heavy")) &&
                 (KeyWordList.filter((item) => item.GetID() == "kw_strong").length == 0)
             ) {
                 return false
             }
         }
 
-        const eventmon : EventRunner = new EventRunner();
         const EquipHands : ModelHands = await eventmon.runEvent(
             "equipmentHandsCost",
             this,
@@ -2568,8 +2736,23 @@ class WarbandMember extends DynamicContextObject {
         }
 
         if (UnarmedFlag) {
-            const UnarmedVal = await EquipmentFactory.CreateNewModelEquipment("rel_unarmed", null)
-            const UnarmedObj = await EquipmentFactory.CreateNewEquipment("eq_unarmed", null)
+            const eventmon : EventRunner = new EventRunner();
+            const GetItemRel : string = await eventmon.runEvent(
+                "getUnarmedItemRel",
+                this,
+                [],
+                "rel_unarmed",
+                null
+            )
+            const GetItemID : string = await eventmon.runEvent(
+                "getUnarmedItemObj",
+                this,
+                [],
+                "eq_unarmed",
+                null
+            )
+            const UnarmedVal = await EquipmentFactory.CreateNewModelEquipment(GetItemRel, null)
+            const UnarmedObj = await EquipmentFactory.CreateNewEquipment(GetItemID, null)
             const Unarmed : WarbandEquipment = await WarbandFactory.BuildModelEquipmentFromPurchase(UnarmedVal, UnarmedObj, 0, this);
             const NewPurchase : WarbandPurchase = new WarbandPurchase({
                 cost_value : 0,
@@ -2739,8 +2922,8 @@ class WarbandMember extends DynamicContextObject {
         try {
             await this.DeleteStash(item);
             if (item.purchase.CountCap == true) {
-                (this.MyContext as UserWarband).Debts.ducats +=  Math.ceil(CostVarDucats * debt);
-                (this.MyContext as UserWarband).Debts.glory += Math.ceil(CostVarGlory * debt);
+                (this.MyContext as UserWarband).Debts.ducats +=  Math.floor(CostVarDucats * debt);
+                (this.MyContext as UserWarband).Debts.glory += Math.floor(CostVarGlory * debt);
             }
 
         } catch (e) { console.log(e) }

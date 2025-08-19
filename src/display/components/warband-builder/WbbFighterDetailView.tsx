@@ -375,39 +375,36 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                 </div>
             </div>
 
-            {/* Edit Loadout */}
-            {(edit_mode && complexstate.statchoices.length > 0) &&
-                <div className={'fighter-card-collapse-wrap'}>
-                    <WbbFighterCollapse title="Profile Options" initiallyOpen={true} key={updateKey}>
+            <div className={'fighter-card-collapse-wrap'}>
+                {/* Profile Options */}
+                {(edit_mode && complexstate.statchoices.length > 0) &&
+                    <WbbFighterCollapse title="Profile Options" initiallyOpen={true}>
                         <>
-                            {complexstate.statchoices.map((item) => 
-                                
+                            {complexstate.statchoices.map((item) =>
+
                                     <WbbEditFighterStatOption
                                         fighter={warbandmember}
                                         options={item}
                                         key={complexstate.statchoices.indexOf(item)}
                                     />
-                                
                             )}
                         </>
                     </WbbFighterCollapse>
-                </div>
-            }
-            
+                }
 
-            {/*
-              * Other Upgrades
-              * - This is split into goetic and regular upgrades
-              */}
-            {Object.keys(complexstate.upgrades).length > 0 &&
-                <>
-                    {Object.keys(complexstate.upgrades).filter((item) => (
-                        (edit_mode) || (complexstate.upgrades[item].upgrades.filter((subitem : MemberUpgradePresentation) => subitem.purchase != null).length > 0)
-                    )).map((item, index) => (
-                        <div className={'fighter-card-collapse-wrap'} key={index}>
+                {/*
+                  * Other Upgrades
+                  * - This is split into goetic and regular upgrades
+                  */}
+                {Object.keys(complexstate.upgrades).length > 0 &&
+                    <>
+                        {Object.keys(complexstate.upgrades).filter((item) => (
+                            (edit_mode) || (complexstate.upgrades[item].upgrades.filter((subitem : MemberUpgradePresentation) => subitem.purchase != null).length > 0)
+                        )).map((item, index) => (
                             <WbbFighterCollapse
                                 title={makestringpresentable(item)}
                                 initiallyOpen={false}
+                                key={index}
                             >
                                 <>
                                     {item != "upgrades" &&
@@ -415,7 +412,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                                             {fighter.GetFighterName() + " can choose up to " + complexstate.upgrades[item].limit.toString() + " " + makestringpresentable(item) + "."}
                                         </p>
                                     }
-                                    
+
                                     <div key={complexstate.keyvar}>
                                         {complexstate.upgrades[item].upgrades.filter((item) => ((edit_mode) || item.purchase != null)).map((subitem, index) => (
                                             <WbbOptionItem key={index.toString() + updateKey.toString()} option={subitem} owner={fighter} category={item}/>
@@ -423,14 +420,12 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                                     </div>
                                 </>
                             </WbbFighterCollapse>
-                        </div>
-                    ))}
-                </>
-            }
+                        ))}
+                    </>
+                }
 
-            {/* Edit Loadout */}
-            {(!play_mode) &&
-                <div className={'fighter-card-collapse-wrap'}>
+                {/* Edit Loadout */}
+                {(!play_mode) &&
                     <WbbFighterCollapse title="Equipment" initiallyOpen={true} key={updateKey}>
                         <p> {/* Equipment Rules */}
                             <strong>Equipment: </strong>
@@ -440,10 +435,10 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                         {fighter.ModelEquipments.filter((item) => (item.SelfDynamicProperty.Selections.length > 0)).length > 0 &&
                             <>
                                 <h3>{'Loadout Options'}</h3>
-                                {fighter.ModelEquipments.filter((item) => (item.SelfDynamicProperty.Selections.length > 0)).map((item) => 
+                                {fighter.ModelEquipments.filter((item) => (item.SelfDynamicProperty.Selections.length > 0)).map((item) =>
                                 <>
-                                    {item.SelfDynamicProperty.Selections.map((selec) => 
-                                        <WbbOptionSelect 
+                                    {item.SelfDynamicProperty.Selections.map((selec) =>
+                                        <WbbOptionSelect
                                         property={item}
                                         key={item.SelfDynamicProperty.Selections.indexOf(selec)}
                                         choice={selec}
@@ -516,7 +511,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                                 {'Add Melee Weapon'}
                             </div>
                         }
-                        
+
 
                         {/* Armour */}
                         <h3>{'Armour'}</h3>
@@ -611,13 +606,11 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                             category='equipment'
                         />
                     </WbbFighterCollapse>
-                </div>
-            }
+                }
 
 
-            {/* Edit Campaign Play */}
-            { !play_mode &&
-                <div className={'fighter-card-collapse-wrap'}>
+                {/* Edit Campaign Play */}
+                { !play_mode &&
                     <WbbFighterCollapse title="Campaign Play">
 
                         {/* Experience */}
@@ -661,8 +654,8 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                                 <h3>{'Battle Scars'}</h3>
 
                                 {(fighter.IsElite() && edit_mode) &&
-                                    <div className={'btn btn-primary btn-sm edit-battle-scar-btn'}
-                                         onClick={() => setShowEditScars(true)}>
+                                    <div className={'btn btn-primary btn-sm edit-btn'}
+                                        onClick={() => setShowEditScars(true)}>
                                         <FontAwesomeIcon icon={faPen} className="icon-inline-left-l"/>
                                         {'Edit'}
                                     </div>
@@ -679,7 +672,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                                         return (
                                             <div key={index} className="battle-scar-box">
                                                 {isSkull &&
-                                                    <FontAwesomeIcon icon={faSkull} className={'skull-icon'}/>
+                                                    <FontAwesomeIcon icon={faSkull} className={'final-icon'}/>
                                                 }
                                                 {isChecked &&
                                                     <FontAwesomeIcon icon={faTimes}/>
@@ -695,15 +688,14 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                         {(fighter.IsElite() || fighter.Skills.length > 0) &&
                             <>
                                 <h3>{'Advancements'}</h3>
-                                {fighter.GetSkillsList().length > 0 ? (
+                                { fighter.GetSkillsList().length > 0 ? (
                                     <>
                                         {fighter.GetSkillsList().map((advancement) => (
-                                            <WbbEditViewAdvancement advancement={advancement}
-                                                                    key={advancement.ID + fighter.ID}
+                                            <WbbEditViewAdvancement advancement={advancement} key={advancement.ID + fighter.ID}
                                                                     fighter={warbandmember}/>
                                         ))}
                                     </>
-                                ) : (
+                                ):(
                                     <>
                                         {view_mode &&
                                             <>
@@ -716,7 +708,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
 
                                 {(fighter.IsElite() && edit_mode) &&
                                     <div className={'btn btn-add-element btn-block'}
-                                         onClick={() => setShowAdvancementModal(true)}>
+                                        onClick={() => setShowAdvancementModal(true)}>
                                         <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
                                         {'Add Advancement'}
                                     </div>
@@ -730,11 +722,11 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                                 {fighter.GetInjuriesList().length > 0 ? (
                                     <>
                                         {fighter.GetInjuriesList().map((injury) => (
-                                            <WbbEditViewInjury injury={injury} key={injury.ID + fighter.ID}
+                                            <WbbEditViewInjury injury={injury} key={injury.ID  + fighter.ID}
                                                                fighter={warbandmember}/>
                                         ))}
                                     </>
-                                ) : (
+                                ):(
                                     <>
                                         {view_mode &&
                                             <>
@@ -746,7 +738,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
 
                                 {(fighter.IsElite() && edit_mode) &&
                                     <div className={'btn btn-add-element btn-block'}
-                                         onClick={() => setShowInjuryModal(true)}>
+                                        onClick={() => setShowInjuryModal(true)}>
                                         <FontAwesomeIcon icon={faPlus} className="icon-inline-left-l"/>
                                         {'Add Injury'}
                                     </div>
@@ -774,7 +766,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                                 <h3>{'Fighter Rank'}</h3>
                                 <div className={'fighter-status'}>
                                     <div className={'fighter-status-string'}>
-                                        {fighter.IsElite() ? "Elite" : "Troop"}
+                                        {fighter.IsElite()? "Elite" : "Troop"}
 
                                         {(complexstate.stats.potential != undefined && complexstate.stats.potential == 1) &&
                                             <small>
@@ -783,11 +775,10 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                                             </small>
                                         }
                                     </div>
-                                    {(complexstate.canchange && edit_mode) &&
+                                    {(complexstate.canchange && edit_mode ) &&
                                         <div className={'btn btn-primary'} onClick={() => handleRankUpdate()}>
-                                            <FontAwesomeIcon icon={fighter.IsElite() ? faChevronDown : faChevronUp}
-                                                             className={'icon-inline-left-l'}/>
-                                            {fighter.IsElite() ? "Demote" : "Promote"}
+                                            <FontAwesomeIcon icon={fighter.IsElite()? faChevronDown : faChevronUp} className={'icon-inline-left-l'}/>
+                                            {fighter.IsElite()? "Demote" : "Promote"}
                                         </div>
                                     }
 
@@ -800,83 +791,81 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                             </>
                         }
 
-                        <h3>{'Notes & Lore'}</h3>
+                        <h3>Notes & Lore</h3>
+                        <div key={complexstate.keyvar}>
+                        {/* Notes textarea */}
                         <WbbTextarea
-                            initialText={fighter.GetNotes()}
+                            initialText={warbandmember.model.GetWarbandNotes()}
                             title={"Notes"}
-                            onSave={(newText: string) => {
-                                fighter.SetNotes(newText);
-                                // warbandmember.model.SaveNote(newText, 'notes')
-                                //
-                                //
-                                // const Manager : ToolsController = ToolsController.getInstance();
-                                // Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
-                                //     () => reloadDisplay())
+                            onSave={(newText : string) => {
+                                warbandmember.model.SaveNote(newText, 'notes')
+
+                                const Manager : ToolsController = ToolsController.getInstance();
+                                Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
+                                    () => reloadDisplay())
                             }}
                         />
 
                         {/* Lore  textarea */}
                         <WbbTextarea
-                            initialText={fighter.GetLore()}
+                            initialText={warbandmember.model.GetLore()}
                             title={"Lore"}
-                            onSave={(newText: string) => {
+                            onSave={(newText : string) => {
+                                warbandmember.model.SaveNote(newText, 'lore')
 
-                                fighter.SetLore(newText);
-                                // warbandmember.model.SaveNote(newText, 'lore')
-                                //
-                                //
-                                // const Manager : ToolsController = ToolsController.getInstance();
-                                // Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
-                                //     () => reloadDisplay())
+
+                                const Manager : ToolsController = ToolsController.getInstance();
+                                Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
+                                    () => reloadDisplay())
                             }}
                         />
+                        </div>
 
                         {/* Campaign Modals */}
                         {showXPModal &&
-                            <WbbEditFighterExperience
-                                show={showXPModal}
-                                onClose={() => setShowXPModal(false)}
-                                fighter={fighter}
-                                maxXP={complexstate.xpLimit}
-                                onSubmit={handleXPSubmit}
-                            />}
+                        <WbbEditFighterExperience
+                            show={showXPModal}
+                            onClose={() => setShowXPModal(false)}
+                            fighter={fighter}
+                            maxXP={complexstate.xpLimit}
+                            onSubmit={handleXPSubmit}
+                        />}
                         {showEditScars &&
-                            <WbbEditBattleScars
-                                show={showEditScars}
-                                onClose={() => setShowEditScars(false)}
-                                fighter={fighter}
-                                maxScars={complexstate.scarLimit}
-                                onSubmit={handleUpdateBattleScars}
-                            />}
+                        <WbbEditBattleScars
+                            show={showEditScars}
+                            onClose={() => setShowEditScars(false)}
+                            fighter={fighter}
+                            maxScars={complexstate.scarLimit}
+                            onSubmit={handleUpdateBattleScars}
+                        />}
                         {showAdvancementModal &&
-                            <WbbModalAddAdvancement
-                                show={showAdvancementModal}
-                                onClose={() => setShowAdvancementModal(false)}
-                                onSubmit={handleAddAdvancement}
-                                fighter={warbandmember}
-                            />}
+                        <WbbModalAddAdvancement
+                            show={showAdvancementModal}
+                            onClose={() => setShowAdvancementModal(false)}
+                            onSubmit={handleAddAdvancement}
+                            fighter={warbandmember}
+                        />}
                         {showInjuryModal &&
-                            <WbbModalAddInjury
-                                show={showInjuryModal}
-                                onClose={() => setShowInjuryModal(false)}
-                                onSubmit={handleAddInjury}
-                                fighter={warbandmember}
-                            />}
+                        <WbbModalAddInjury
+                            show={showInjuryModal}
+                            onClose={() => setShowInjuryModal(false)}
+                            onSubmit={handleAddInjury}
+                            fighter={warbandmember}
+                        />}
                         {showStatusModal &&
-                            <WbbModalEditFighterStatus
-                                show={showStatusModal}
-                                onClose={() => setShowStatusModal(false)}
-                                currentStatus={fighter.State}
-                                onSubmit={handleStatusUpdate}
-                            />}
+                        <WbbModalEditFighterStatus
+                            show={showStatusModal}
+                            onClose={() => setShowStatusModal(false)}
+                            currentStatus={fighter.State}
+                            onSubmit={handleStatusUpdate}
+                        />}
+
                     </WbbFighterCollapse>
-                </div>
-            }
+                }
 
 
-            {/* Abilities */}
-            {(!play_mode && complexstate.abilities.length > 0) &&
-                <div className={'fighter-card-collapse-wrap'}>
+                {/* Abilities */}
+                {(!play_mode && complexstate.abilities.length > 0) &&
                     <WbbFighterCollapse title="Abilities">
                         <div key={complexstate.keyvar}>
                             {complexstate.abilities.map((ability, index) => (
@@ -884,8 +873,8 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                             ))}
                         </div>
                     </WbbFighterCollapse>
-                </div>
-            }
+                }
+            </div>
 
 
             {/* Play Mode Content */}
@@ -895,10 +884,10 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                     <div className={'play-mode-equipment-wrap'}>
                         {complexstate.allmodelequip.filter((item) =>
                             ((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Category == "ranged")
-                        ).length > 0 && (
-                            <>
-                                <h3>{'Ranged Weapons'}</h3>
-                                {complexstate.allmodelequip.filter((item) =>
+                            ).length > 0 && (
+                                <>
+                                    <h3>{'Ranged Weapons'}</h3>
+                                    {complexstate.allmodelequip.filter((item) =>
                                         ((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Category == "ranged")
                                     ).map((equip) =>
                                         (
@@ -907,35 +896,31 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                                                 item={equip.purchase}
                                                 fighter={warbandmember}
                                             />
-                                ))}
-                            </>
-                        )
+                                        ))}
+                                </>
+                            )
                         }
-                    </div>
 
-                    <div className={'play-mode-equipment-wrap'}>
                         {complexstate.allmodelequip.filter((item) =>
                             ((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Category == "melee")
-                        ).length > 0 && (
-                            <>
-                                <h3>{'Melee Weapons'}</h3>
-                                {complexstate.allmodelequip.filter((item) =>
-                                        ((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Category == "melee")
-                                    ).map((equip) =>
-                                        (
-                                            <WbbEquipmentListItem
-                                                key={complexstate.allmodelequip.indexOf(equip)}
-                                                item={equip.purchase}
-                                                fighter={warbandmember}
-                                            />
-                                ))}
-                            </>
-                        )
+                            ).length > 0 && (
+                                <>
+                                    <h3>{'Melee Weapons'}</h3>
+                                    {complexstate.allmodelequip.filter((item) =>
+                                            ((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Category == "melee")
+                                        ).map((equip) =>
+                                            (
+                                                <WbbEquipmentListItem
+                                                    key={complexstate.allmodelequip.indexOf(equip)}
+                                                    item={equip.purchase}
+                                                    fighter={warbandmember}
+                                                />
+                                    ))}
+                                </>
+                            )
                         }
-                    </div>
 
-                    <div className={'play-mode-equipment-wrap'}>
-                        
+
                         {complexstate.allmodelequip.filter((item) =>
                             ((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Category == "armour")
                         ).length > 0 && (
@@ -954,9 +939,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                             </>
                         )
                         }
-                    </div>
 
-                    <div className={'play-mode-equipment-wrap'}>
                         {complexstate.allmodelequip.filter((item) =>
                             ((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Category == "equipment")
                         ).length > 0 && (
@@ -1007,26 +990,26 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                     </div>
                     }
 
-                    {fighter.GetLore() != '' || fighter.GetNotes() != '' &&
-                        <div className={'play-mode-notes-wrap'}>
-                            <h3>{'Notes & Lore'}</h3>
-
-                            {fighter.GetNotes() != '' &&
+                    {/* @TODO: check this please*/}
+                    {warbandmember.model.GetLore() != '' || warbandmember.model.GetWarbandNotes() != '' &&
+                    <div className={'play-mode-notes-wrap'}>
+                        <h3>{'Notes & Lore'}</h3>
+                            {warbandmember.model.GetWarbandNotes() != '' &&
                                 <WbbTextarea
-                                    initialText={fighter.GetNotes()}
+                                    initialText={warbandmember.model.GetWarbandNotes()}
                                     title={"Notes"}
                                     onSave={(newText: string) => {
-                                        fighter.SetNotes(newText);
+                                        // fighter.SetNotes(newText);
                                     }}
                                 />
                             }
 
-                            {fighter.GetLore() != '' &&
+                            {warbandmember.model.GetLore() != '' &&
                                 <WbbTextarea
-                                    initialText={fighter.GetLore()}
+                                    initialText={warbandmember.model.GetLore()}
                                     title={"Lore"}
                                     onSave={(newText: string) => {
-                                        fighter.SetLore(newText);
+                                        // fighter.SetLore(newText);
                                     }}
                                 />
                             }

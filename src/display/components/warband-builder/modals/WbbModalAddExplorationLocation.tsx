@@ -88,7 +88,7 @@ const WbbModalAddExplorationLocation: React.FC<WbbModalAddExplorationLocationPro
     }
 
     return (
-        <Modal show={show} onHide={onClose} className="WbbModalAddItem WbbModalAddExplorationLocation" centered>
+        <Modal show={show} onHide={onClose} className="WbbModal WbbModalSelect WbbModalSelect_Exploration WbbModalAddExplorationLocation" centered>
             <Modal.Header closeButton={false}>
                 <Modal.Title>Select Exploration Location</Modal.Title>
 
@@ -101,7 +101,6 @@ const WbbModalAddExplorationLocation: React.FC<WbbModalAddExplorationLocationPro
             </Modal.Header>
 
             <Modal.Body>
-                <div  className={'WbbGeneralCollapse-wrap'} >
                 {availableoptions.map((adv) => (
                     <WbbGeneralCollapse
                         key={adv.table.ID}
@@ -115,7 +114,10 @@ const WbbModalAddExplorationLocation: React.FC<WbbModalAddExplorationLocationPro
                                     {/* Select Row */}
                                     <div
                                         key={loc.location.ID}
-                                        className={`select-item ${(selectedLocation? selectedLocation.location.ID : "") === loc.location.ID ? 'selected' : ''}`}
+                                        className={`select-item 
+                                            ${(selectedLocation? selectedLocation.location.ID : "") === loc.location.ID ? 'selected details-open' : ''}
+                                        
+                                        `}
                                         onClick={() => {
                                             handleLocationClick(loc);
                                             setSelectedOptionIds([]); // reset when switching location
@@ -129,11 +131,11 @@ const WbbModalAddExplorationLocation: React.FC<WbbModalAddExplorationLocationPro
 
                                     {/* Level 1 Sub-Display when selected */}
                                     {((selectedLocation ? selectedLocation.location.ID : "") === loc.location.ID) &&
-                                        <div className={'WbbGeneralCollapse-sub-1'}>
+                                        <div className={'select-item-details'}>
 
                                             {/* Location Description Text */}
                                             {(loc.location.Description != null) &&
-                                                <div className={'description-wrap'}>
+                                                <div className={'exploration-description'}>
                                                     {
                                                         returnDescription(location, loc.location.Description)
                                                     }
@@ -155,9 +157,12 @@ const WbbModalAddExplorationLocation: React.FC<WbbModalAddExplorationLocationPro
                                                                     {/* option select */}
                                                                     <div
                                                                         key={opt.baseopt.RefID + choice.id}
-                                                                        className={`select-item ${ (
-                                                                            selectedOptionIds.find((k) => k.option_refID == opt.baseopt.RefID && k.selection_ID == choice.id)
-                                                                        ) ? 'selected' : ''}`}
+                                                                        className={`select-item 
+                                                                        ${(selectedOptionIds.find((k) => k.option_refID == opt.baseopt.RefID && k.selection_ID == choice.id)
+                                                                        ) ? 'selected' : ''}
+                                                                        ${(selectedOptionIds.find((k) => k.option_refID == opt.baseopt.RefID && k.selection_ID == choice.id) && (choice.value.Description != null)
+                                                                        ) ? 'details-open' : ''}
+                                                                        `}
                                                                         onClick={() => UpdateSelectedOptionIDs({option_refID: opt.baseopt.RefID, selection_ID: choice.id})}
                                                                     >
                                                                         {choice.display_str}
@@ -167,16 +172,11 @@ const WbbModalAddExplorationLocation: React.FC<WbbModalAddExplorationLocationPro
                                                                     {(
                                                                         selectedOptionIds.find((k) => k.option_refID == opt.baseopt.RefID && k.selection_ID == choice.id) && (choice.value.Description != null)
                                                                     ) &&
-                                                                        <div className={'WbbGeneralCollapse-sub-2'}>
-                                                                            <div className={'description-wrap'}>
-                                                                                <div className={'description-wrap'}>
-                                                                                    {
-                                                                                        returnDescription(choice.value, choice.value.Description)
-                                                                                    }
-                                                                                </div>
-                                                                            </div>
+                                                                        <div className={'select-item-details'}>
+                                                                            {
+                                                                                returnDescription(choice.value, choice.value.Description)
+                                                                            }
                                                                         </div>
-
                                                                     }
                                                                 </>
                                                             ))}
@@ -190,9 +190,6 @@ const WbbModalAddExplorationLocation: React.FC<WbbModalAddExplorationLocationPro
                         </>
                     </WbbGeneralCollapse>
                 ))}
-                </div>
-
-
             </Modal.Body>
 
             <Modal.Footer>

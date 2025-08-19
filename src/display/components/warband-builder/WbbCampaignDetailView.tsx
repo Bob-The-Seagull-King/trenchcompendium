@@ -51,13 +51,15 @@ const WbbCampaignDetailView: React.FC<WbbCampaignDetailViewProps> = ({ onClose }
         })
     }
 
+    const [campaigntext, setcampaigntext] = useState(warband? warband?.warband_data.GetCampaignNotes() : "");
+
     useEffect(() => {
         async function RunDucatCheck() {
            const threshhold = await warband?.warband_data.GetCampaignTresholdValue()
            if (threshhold != undefined) {
             setducatlimit(threshhold)
-            setKeyvar(keyvar + 1)
            }
+           setKeyvar(keyvar + 1)
         }
 
         RunDucatCheck();
@@ -83,7 +85,7 @@ const WbbCampaignDetailView: React.FC<WbbCampaignDetailViewProps> = ({ onClose }
     const [showFailedPromotionsModal, setshowFailedPromotionsModal] = useState(false);
     const handleFailedpromotionsUpdate = ( newCycle: number ) => {
         setfailedpromotions(newCycle)
-        warband?.warband_data.SetCurrentCycle(newCycle);
+        warband?.warband_data.SetCurrentFailedPromotions(newCycle);
         const Manager : ToolsController = ToolsController.getInstance();
         Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(() => {
         reloadDisplay()
@@ -180,16 +182,16 @@ const WbbCampaignDetailView: React.FC<WbbCampaignDetailViewProps> = ({ onClose }
                             {'Failed Promotions'}
                         </div>
                     </div>
-                    <div className={'battle-scars'}>
+                    <div className={'failed-promo'}>
                         {edit_mode &&
-                            <div className={'btn btn-primary btn-sm edit-battle-scar-btn'}
+                            <div className={'btn btn-primary btn-sm edit-btn'}
                                 onClick={() => setshowFailedPromotionsModal(true)}>
                                 <FontAwesomeIcon icon={faPen} className="icon-inline-left-l"/>
                                 {'Edit'}
                             </div>
                         }
 
-                        <div className="battle-scar-boxes"
+                        <div className="failed-promo-boxes"
                              onClick={edit_mode ? () => setshowFailedPromotionsModal(true) : undefined}
                         >
                             {Array.from({length: 6}, (_, i) => {
@@ -198,9 +200,9 @@ const WbbCampaignDetailView: React.FC<WbbCampaignDetailViewProps> = ({ onClose }
                                 const isSkull = index === 6;
 
                                 return (
-                                    <div key={index} className="battle-scar-box">
+                                    <div key={index} className="failed-promo-box">
                                         {isSkull &&
-                                            <FontAwesomeIcon icon={faGift} className={'skull-icon'}/>
+                                            <FontAwesomeIcon icon={faGift} className={'final-icon'}/>
                                         }
                                         {isChecked &&
                                             <FontAwesomeIcon icon={faCheck}/>
@@ -216,25 +218,25 @@ const WbbCampaignDetailView: React.FC<WbbCampaignDetailViewProps> = ({ onClose }
                     <WbbEditFailedPromotionsModal
                         show={showFailedPromotionsModal}
                         onClose={() => setshowFailedPromotionsModal(false)}
-                        currentVP={failedpromotions}
+                        currentFails={failedpromotions}
                         onSubmit={handleFailedpromotionsUpdate}
                     />
                 }
 
                 {/* Notes textarea */}
+                
                 <WbbTextarea
-                    initialText={warband.warband_data.GetCampaignNotes()}
-                    title="Campaign Notes"
-                    onSave={(newText : string) => {
+                        initialText={campaigntext}
+                        title="Campaign Notes"
+                        onSave={(newText : string) => {
                             warband?.warband_data.SaveNote(newText, 'campaign')
-                            
+                            setcampaigntext(newText);
                 
                             const Manager : ToolsController = ToolsController.getInstance();
                             Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
                                 () => reloadDisplay())
                         }}
-                />
-
+                    />
 
                 <div className={'info-box'}>
                     <FontAwesomeIcon icon={faInfoCircle} className="info-box-icon"/>

@@ -591,27 +591,6 @@
         "warband_maximum" : 1
     },
     {
-        "id": "rel_fc_md_heretichorister_trenchghost",
-        "source": "core",
-        "tags": {},
-        "name": "",
-        "contextdata": {"option_search_viable": {}},
-        "options": [],
-        "faction_id" : ["fc_hereticlegion_fv_trenchghosts"],
-        "model_id" : "md_heretichorister",
-        "captain" : false,
-        "mercenary": false,
-        "cost" : 65,
-        "cost_type" : 0,
-        "restricted_models" : [
-            {
-                "upgrade_ids": ["rel_fc_md_barbedwirebanshee_trenchghost"],
-                "max_count": 0
-            }],
-        "warband_minimum" : 0,
-        "warband_maximum" : 1
-    },
-    {
         "id": "rel_fc_md_barbedwirebanshee_trenchghost",
         "source": "core",
         "tags": {},
@@ -624,11 +603,7 @@
         "mercenary": false,
         "cost" : 65,
         "cost_type" : 0,
-        "restricted_models" : [
-            {
-                "upgrade_ids": ["rel_fc_md_heretichorister_trenchghost"],
-                "max_count": 0
-            }],
+        "restricted_models" : [],
         "warband_minimum" : 0,
         "warband_maximum" : 1
     },
@@ -807,7 +782,7 @@
             }
         },
         "options": [],
-        "faction_id" : ["fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion","fc_hereticlegion_fv_hereticnavalraidingparty"],
+        "faction_id" : ["fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion","fc_hereticlegion_fv_hereticnavalraidingparty","fc_hereticlegion_fv_trenchghosts"],
         "model_id" : "md_wretched",
         "captain" : false,
         "mercenary": false,
@@ -878,9 +853,9 @@
         "contextdata": {"option_search_viable": {}},
         "options": [],
         "faction_id" : ["fc_hereticlegion_fv_knightsofavarice"],
-        "model_id" : "md_goeticwarlock",
+        "model_id" : "md_goeticwarlock_mv_knightsofavarice",
         "captain" : false,
-        "mercenary": true,
+        "mercenary": false,
         "cost" : 110,
         "cost_type" : 0,
         "restricted_models" : [],
@@ -1335,7 +1310,7 @@
         "cost_type" : 0,
         "restricted_models" : [],
         "warband_minimum" : 0,
-        "warband_maximum" : 1
+        "warband_maximum" : 2
     },
     {
         "id": "rel_fc_md_trenchcleric_eire",
@@ -1646,7 +1621,7 @@
         "warband_maximum" : 1
     },
     {
-        "id": "rel_fc_md_plagueknight",
+        "id": "rel_fc_md_plagueknight_leader",
         "source": "core",
         "tags": {},
         "name": "",
@@ -1670,7 +1645,34 @@
         "restricted_models" : [
         ],
         "warband_minimum" : 0,
-        "warband_maximum" : 3
+        "warband_maximum" : 1
+    },
+    {
+        "id": "rel_fc_md_plagueknight",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {"option_search_viable": {},
+    
+        "faction_model_count_group": {
+            "filter": [
+                {
+                    "id": ["md_lordoftumors","md_plagueknight"]
+                }
+            ],
+            "number": 3
+        }},
+        "options": [],
+        "faction_id" : ["fc_cultoftheblackgrail","fc_cultoftheblackgrail_fv_dirgeofthegreathegemon"],
+        "model_id" : "md_plagueknight",
+        "captain" : false,
+        "mercenary": false,
+        "cost" : 60,
+        "cost_type" : 0,
+        "restricted_models" : [
+        ],
+        "warband_minimum" : 0,
+        "warband_maximum" : 2
     },
     {
         "id": "rel_fc_md_corpseguard",
@@ -1768,7 +1770,7 @@
         "model_id" : "md_grailthrall_bereaved",
         "captain" : false,
         "mercenary": false,
-        "cost" : 25,
+        "cost" : 30,
         "cost_type" : 0,
         "restricted_models" : [],
         "warband_minimum" : 0,
@@ -1781,11 +1783,28 @@
         "name": "",
         "contextdata": {"option_search_viable": {}},
         "options": [],
-        "faction_id" : ["fc_cultoftheblackgrail","fc_cultoftheblackgrail_fv_dirgeofthegreathegemon"],
+        "faction_id" : ["fc_cultoftheblackgrail"],
         "model_id" : "md_grailthrall_flythrall",
         "captain" : false,
         "mercenary": false,
         "cost" : 25,
+        "cost_type" : 0,
+        "restricted_models" : [],
+        "warband_minimum" : 0,
+        "warband_maximum" : -1
+    },
+    {
+        "id": "rel_fc_md_grailthrall_flybereaved",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {"option_search_viable": {}},
+        "options": [],
+        "faction_id" : ["fc_cultoftheblackgrail_fv_dirgeofthegreathegemon"],
+        "model_id" : "md_grailthrall_flybereaved",
+        "captain" : false,
+        "mercenary": false,
+        "cost" : 30,
         "cost_type" : 0,
         "restricted_models" : [],
         "warband_minimum" : 0,

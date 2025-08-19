@@ -1,5 +1,4 @@
 import { TableBody } from "../feature/table/tablebody";
-import { CompendiumItem } from "../CompendiumItem";
 import { GlossaryRule } from "../feature/glossary/Glossary"
 import { Keyword } from "../feature/glossary/Keyword";
 import { ModelCollection } from "../feature/model/ModelCollection";
@@ -13,7 +12,6 @@ import { Faction } from "../feature/faction/Faction";
 import { FactionCollection } from "../feature/faction/FactionCollection";
 import { Rule } from "../feature/faction/Rule";
 import { FactionModelRelationship } from "../relationship/faction/FactionModelRelationship";
-import { Requester } from "../../factories/Requester";
 import { FactionEquipmentRelationship } from "../relationship/faction/FactionEquipmentRelationship";
 import { Scenario } from "../feature/scenario/Scenario";
 import { GloriousDeed } from "../feature/scenario/GloriousDeed";
@@ -59,7 +57,12 @@ class StaticDataCache {
     public SkillGroupCache :  {[tokenid: string]: SkillGroup} = {};
     public PatronCache :  {[tokenid: string]: Patron} = {};
 
-
+    /**
+     * Checks if an ID is already present in the cache.
+     * @param cachename The cache to look in
+     * @param id_val The ID to check for
+     * @returns True if the item exists, false otherwise.
+     */
     public CheckID(cachename : string, id_val : string) {
         switch (cachename) {
             case 'glossary': 
@@ -114,6 +117,11 @@ class StaticDataCache {
         }
     }
 
+    /**
+     * Adds an object to its respective cache
+     * @param cachename Which cache to store in
+     * @param obj The object to cache
+     */
     public AddToCache(cachename : string, obj : any) {
         switch (cachename) {
             case 'glossary': 
@@ -240,7 +248,7 @@ class StaticDataCache {
         }
     } 
 
-
+    // Gets the single instance of this cache
     public static getInstance(): StaticDataCache {
         if (!StaticDataCache.instance) {
           StaticDataCache.instance = new StaticDataCache();

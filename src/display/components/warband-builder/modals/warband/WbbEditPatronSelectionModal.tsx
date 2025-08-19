@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Button } from 'react-bootstrap';
-import {faXmark} from "@fortawesome/free-solid-svg-icons";
+import {faCheckCircle, faXmark} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import { Patron } from '../../../../../classes/feature/skillgroup/Patron';
 import { useWarband } from '../../../../../context/WarbandContext';
+import {makestringpresentable} from "../../../../../utility/functions";
 
 interface WbbEditPatronSelectionProps {
     show: boolean;
@@ -45,7 +46,7 @@ const WbbEditPatronSelectionModal: React.FC<WbbEditPatronSelectionProps> = ({
     };
 
     return (
-        <Modal show={show} onHide={onClose} className="WbbEditPatronSelectionModal" centered>
+        <Modal show={show} onHide={onClose} className="WbbModal WbbModalSelect WbbEditPatronSelectionModal" centered>
             <Modal.Header closeButton={false}>
                 <Modal.Title>Edit Patron</Modal.Title>
 
@@ -58,8 +59,6 @@ const WbbEditPatronSelectionModal: React.FC<WbbEditPatronSelectionProps> = ({
             </Modal.Header>
 
             <Modal.Body key={keyvar}>
-                <h6>Select a Patron</h6>
-
                 <div className={'patron-selection-wrap'}>
                     {patronOptions.map((patron) => (
                         <div
@@ -67,7 +66,13 @@ const WbbEditPatronSelectionModal: React.FC<WbbEditPatronSelectionProps> = ({
                             className={`select-item ${selectedPatron === (patron) ? 'selected' : ''}`}
                             onClick={() => setSelectedPatron(patron)}
                         >
-                            {patron.GetTrueName()}
+                            <span>
+                                {currentPatron === patron &&
+                                    <FontAwesomeIcon icon={faCheckCircle} className={'icon-inline-left-l'}/>
+                                }
+                                {patron.GetTrueName()}
+                            </span>
+
                         </div>
                     ))}
                 </div>

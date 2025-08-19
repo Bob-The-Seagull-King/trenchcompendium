@@ -6,7 +6,7 @@ import { Ability, IAbility } from '../../classes/feature/ability/Ability';
 import { Equipment, IEquipment } from '../../classes/feature/equipment/Equipment';
 import { IModelEquipmentRelationship, ModelEquipmentRelationship } from '../../classes/relationship/model/ModelEquipmentRelationship';
 import { IFactionEquipmentRelationship, FactionEquipmentRelationship } from '../../classes/relationship/faction/FactionEquipmentRelationship';
-import { byPropertiesOf } from '../../utility/functions';
+import { byPropertiesOf, isValidList } from '../../utility/functions';
 
 
 class EquipmentFactory {
@@ -108,6 +108,22 @@ class EquipmentFactory {
         const ruledata = Requester.MakeRequest({searchtype: "id", searchparam: {type: "modelequipmentrelationship", id: _val}}) as IModelEquipmentRelationship
         const rulenew = await EquipmentFactory.CreateModelEquipment(ruledata, parent, skipcheck)
         return rulenew;
+    }
+
+    static async GetAllFactionEquipment(skipcheck = false, removelist : string[], includelist : string[]) {
+        const models = Requester.MakeRequest({searchtype: "file", searchparam: {type: "factionequipmentrelationship"}}) as IFactionEquipmentRelationship[];
+        models.sort(byPropertiesOf<IFactionEquipmentRelationship>(["name", "id"]))
+        const ModelList : FactionEquipmentRelationship[] = []
+        for (let i = 0; i < models.length; i++) {
+            if (!isValidList(models[i].faction_id, removelist, includelist)) {
+                continue;
+            }
+            const skl = await EquipmentFactory.CreateFactionEquipment(models[i], null, skipcheck);
+            if (skl != null) {
+                ModelList.push(skl);
+            }
+        }
+        return ModelList;
     }
 
     static async CreateFactionEquipment(_rule: IFactionEquipmentRelationship, parent : ContextObject | null, skipcheck = false) {

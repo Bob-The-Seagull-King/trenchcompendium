@@ -75,7 +75,7 @@ const WbbModalAddEquipment: React.FC<WbbModalAddEquipmentProps> = ({ show, onClo
     }, [show]);
 
     return (
-        <Modal key={keyvar} show={show} onHide={onClose} className="WbbModalAddItem WbbModalAddEquipment" centered>
+        <Modal key={keyvar} show={show} onHide={onClose} className="WbbModal WbbModalSelect WbbModalAddEquipment" centered>
             <Modal.Header closeButton={false}>
                 <Modal.Title>Select Equipment</Modal.Title>
 
@@ -89,9 +89,8 @@ const WbbModalAddEquipment: React.FC<WbbModalAddEquipmentProps> = ({ show, onClo
 
             <Modal.Body>
                 {Object.keys(cache).map((item, index) => (
-                    <div
+                    <React.Fragment
                         key={cache[item].facrel.ID}
-                        className={'select-item-wrap'}
                     >
                         <div
                             className={`select-item ${selectedID === cache[item].facrel.ID ? 'selected' : ''} ${available.includes(cache[item].facrel) ? '' : 'disabled'}`}
@@ -101,11 +100,11 @@ const WbbModalAddEquipment: React.FC<WbbModalAddEquipmentProps> = ({ show, onClo
                                 }
                             }}
                         >
-                        <span className={'item-left'}>
-                            <span className={'item-name'}>
-                                {cache[item].facrel.EquipmentItem.GetTrueName()}
+                            <span className={'item-left'}>
+                                <span className={'item-name'}>
+                                    {cache[item].facrel.EquipmentItem.GetTrueName()}
+                                </span>
                             </span>
-                        </span>
                             <span className={'item-right'}>
                                 <span className={'item-cost'}>
                                     {cache[item].facrel.Cost &&
@@ -128,31 +127,37 @@ const WbbModalAddEquipment: React.FC<WbbModalAddEquipmentProps> = ({ show, onClo
                                     </span>
                                     }
                             </span>
-
-
                         </div>
 
                         {selectedID === cache[item].facrel.ID &&
-                            <WbbEquipmentDetails
-                                equipment={cache[item].facrel.EquipmentItem}
-                                showType={false}
-                            />
+                            <div className={'details-wrap'}>
+                                <WbbEquipmentDetails
+                                    equipment={cache[item].facrel.EquipmentItem}
+                                    showType={false}
+                                />
+
+                                <div className={'details-quick-action'}>
+                                    <Button variant="primary"
+                                            onClick={handleSubmit} disabled={!selectedID || isSubmitting}
+                                            className={' mb-3 btn-sm w-100'}
+                                    >
+                                        {isSubmitting ? (
+                                            <FontAwesomeIcon icon={faCircleNotch} className={'icon-inline-left fa-spin '}/>
+                                        ) : (
+                                            <FontAwesomeIcon icon={faPlus} className={'icon-inline-left'}/>
+                                        )}
+                                        {'Add Equipment'}
+                                    </Button>
+                                </div>
+                            </div>
                         }
-                    </div>
+                    </React.Fragment>
                 ))}
             </Modal.Body>
 
             <Modal.Footer>
                 <Button variant="secondary" onClick={onClose}>
                     Cancel
-                </Button>
-                <Button variant="primary" onClick={handleSubmit} disabled={!selectedID || isSubmitting}>
-                    {isSubmitting ? (
-                        <FontAwesomeIcon icon={faCircleNotch} className={'icon-inline-left fa-spin '}/>
-                    ) : (
-                        <FontAwesomeIcon icon={faPlus} className={'icon-inline-left'}/>
-                    )}
-                    {'Add Equipment'}
                 </Button>
             </Modal.Footer>
         </Modal>

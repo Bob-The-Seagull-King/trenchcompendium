@@ -1,6 +1,5 @@
 import { ContextEventEntry } from "../../resources/staticcontext/contexteventtypes";
 import { ContextObject } from "./contextobject";
-import { DynamicContextObject } from "./dynamiccontextobject";
 
 interface ContextPackage {
 	priority    : number;   // The priority for the event, determining which order events take place in.

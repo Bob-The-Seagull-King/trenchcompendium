@@ -36,6 +36,18 @@ export function capitalizeString(stringVal: string) {
     return "";
 }
 
+export function isValidList(listA: string[], bannedList: string[], requiredList: string[]): boolean {
+    const hasBanned = bannedList.some(item => listA.includes(item));
+    if (hasBanned) return false;
+
+    if (requiredList.length > 0) {
+        const hasRequired = requiredList.some(item => listA.includes(item));
+        if (!hasRequired) return false;
+    }
+
+    return true;
+}
+
 export async function GetWarbandOrNull(object : ContextObject): Promise<null | UserWarband> {
     const { UserWarband } = await import("../classes/saveitems/Warband/UserWarband");
     let baseobject : ContextObject = object;

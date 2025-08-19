@@ -249,7 +249,7 @@
         "contextdata": {
             },
         "base_id": "md_trenchdog",
-        "variant_name": "Guard",
+        "variant_name": "Base",
         "lore": [                      
             {
                 "tags": {"desc_type" : "italic"},
@@ -283,7 +283,7 @@
             }
             },
         "base_id": "md_trenchdog",
-        "variant_name": "Guard",
+        "variant_name": "Base",
         "lore": [                      
             {
                 "tags": {"desc_type" : "italic"},
@@ -319,7 +319,7 @@
             }
             },
         "base_id": "md_trenchdog",
-        "variant_name": "Mercy",
+        "variant_name": "Base",
         "lore": [                      
             {
                 "tags": {"desc_type" : "italic"},
@@ -384,7 +384,7 @@
             }
             },
         "base_id": "md_trenchdog",
-        "variant_name": "Martyrdom",
+        "variant_name": "Base",
         "lore": [                      
             {
                 "tags": {"desc_type" : "italic"},
@@ -418,7 +418,7 @@
             }
             },
         "base_id": "md_trenchdog",
-        "variant_name": "Hellhound",
+        "variant_name": "Base",
         "lore": [                      
             {
                 "tags": {"desc_type" : "italic"},
@@ -578,6 +578,33 @@
         "new_abilities" : []
     },
     {
+        "id": "md_goeticwarlock_mv_knightsofavarice",
+        "name": "Goetic Warlock",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "modify_equipment_block": {}  ,
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_goeticwarlock"
+                    }
+                ]
+            }},
+        "base_id": "md_goeticwarlock",
+        "variant_name": "Knights_of_Avarice",
+        "team": "hell",
+        "stats" : {
+            "potential": 0,
+            "mercenary": false
+        },
+        "cut_keywords" : [],
+        "keywords" : [],
+        "cut_abilities" : [],
+        "new_abilities" : []
+    },
+    {
         "id": "md_ecclesiasticprisoner_sacredaffliction",
         "name": "Ecclesiastic Prisoner (Sacred Affliction)",
         "source": "core",
@@ -587,7 +614,7 @@
                 "overrides": [
                     {
                     "type": "id",
-                    "model": "md_ecclesiaticprisoner"
+                    "model": "md_ecclesiasticprisoner"
                     }
                 ]
             }},
@@ -915,6 +942,32 @@
         "new_abilities" : []
     },
     {
+        "id": "md_grailthrall_flybereaved",
+        "name": "Fly Bereaved",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_grailthrall"
+                    }
+                ]
+            }},
+        "base_id": "md_grailthrall",
+        "variant_name": "Dirge_of_the_Great_Hegemon",
+        "team": "hell",
+        "cut_keywords" : [],
+        "keywords" : [],
+        "stats" : {
+            "movement": 6,
+            "movetype": 1
+        },
+        "cut_abilities" : ["ab_undeadfortitude"],
+        "new_abilities" : []
+    },
+    {
         "id": "md_grailthrall_bereaved",
         "name": "Bereaved",
         "source": "core",
@@ -937,6 +990,11 @@
                     },
                     {
                         "category": "armour",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "equipment",
                         "res_type": "all",
                         "value": ""
                     }
@@ -1020,7 +1078,7 @@
             }
         },
         "base_id": "md_wretched",
-        "variant_name": "Base",
+        "variant_name": "Court_Of_The_Seven_Headed_Serpent",
         "team": "hell",
         "lore": [               
             {
@@ -1044,7 +1102,7 @@
     },
     {
         "id": "md_yeoman_survivor",
-        "name": "Yeoman",
+        "name": "Survivor Yeoman",
         "source": "core",
         "tags": {},
         "contextdata": { 
@@ -1057,7 +1115,7 @@
                 ]
             }},
         "base_id": "md_yeoman",
-        "variant_name": "Exploration",
+        "variant_name": "Common_Exploration",
         "team": "faithful",
         "stats" : {},
         "cut_keywords" : [],

@@ -8,6 +8,7 @@ import { WarbandPurchase } from '../../../../../classes/saveitems/Warband/Purcha
 import { UserWarband } from '../../../../../classes/saveitems/Warband/UserWarband';
 import { WarbandMember } from '../../../../../classes/saveitems/Warband/Purchases/WarbandMember';
 import { useWarband } from '../../../../../context/WarbandContext';
+import AlertCustom from "../../../generics/AlertCustom";
 
 interface WbbEditSelectionProps {
     show: boolean;
@@ -65,7 +66,7 @@ const WbbMoveEquipmentToFighterModal: React.FC<WbbEditSelectionProps> = ({
 
     return (
         <div onClick={(e) => e.stopPropagation()}>
-            <Modal className="WbbEditGoeticSelectionModal" show={show} onHide={onClose} centered >
+            <Modal className="WbbModal WbbModalSelect" show={show} onHide={onClose} centered >
                 <Modal.Header closeButton={false}>
                     <Modal.Title>
                         {`Move Equipment to Fighter`}
@@ -85,34 +86,65 @@ const WbbMoveEquipmentToFighterModal: React.FC<WbbEditSelectionProps> = ({
                     <div className={'mb-3'}>
                         <div className={'goetic-selection-wrap'} key={keyvar}>
                             {warband?.Models.map((discipline) => (
-                            <div
-                                key={discipline.HeldObject.ID + discipline.HeldObject.ID}
-                                className={`select-item ${selectedFighter === discipline ? 'selected' : ''} ${fighterlist.includes(discipline) ? '' : ' disabled'}`}
-                                onClick={() => {
-                                    if (fighterlist.includes(discipline)) {
-                                        setSelectedFighter(discipline)
-                                    }
-                                }}
-                            >
-                                {((discipline.HeldObject as WarbandMember).GetFighterName() == (discipline.HeldObject as WarbandMember).GetModelName()) ? (
-                                    <>
-                                        {(discipline.HeldObject as WarbandMember).GetFighterName()}
-                                    </>
-                                ) : (
-                                    <>
-                                        {(discipline.HeldObject as WarbandMember).GetModelName()}
-                                        {' - '}
-                                        {(discipline.HeldObject as WarbandMember).GetFighterName()}
-                                    </>
-                                )}
-                            </div>
+                                <div
+                                    key={discipline.HeldObject.ID + discipline.HeldObject.ID}
+                                    className={`select-item ${selectedFighter === discipline ? 'selected' : ''} ${fighterlist.includes(discipline) ? '' : ' disabled'}`}
+                                    onClick={() => {
+                                        if (fighterlist.includes(discipline)) {
+                                            setSelectedFighter(discipline)
+                                        }
+                                    }}
+                                >
+                                    {((discipline.HeldObject as WarbandMember).GetFighterName() == (discipline.HeldObject as WarbandMember).GetModelName()) ? (
+                                        <>
+                                            {(discipline.HeldObject as WarbandMember).GetFighterName()}
+                                        </>
+                                    ) : (
+                                        <>
+                                            {(discipline.HeldObject as WarbandMember).GetModelName()}
+                                            {' - '}
+                                            {(discipline.HeldObject as WarbandMember).GetFighterName()}
+                                        </>
+                                    )}
+                                </div>
                             ))}
-
                         </div>
                     </div>
-                    <div >
-                        <strong>Move {(contextItem.equipment != undefined)? contextItem.equipment.GetTrueName() : ""}</strong>?
-                    </div>
+
+
+                    { (selectedFighter) ? (
+                        <AlertCustom
+                            type={'info'}
+                            className={'my-3 mx-3'}
+                        >
+                            <>
+                                <div>
+                                    {'Moving '}
+                                    {(contextItem.equipment != undefined)? contextItem.equipment.GetTrueName() : ""}
+                                    {' to'}
+                                </div>
+
+                                <div>
+                                    {(selectedFighter.HeldObject as WarbandMember).GetFighterName()}
+                                    {' - '}
+                                    {(selectedFighter.HeldObject as WarbandMember).GetModelName()}
+                                </div>
+
+                            </>
+                        </AlertCustom>
+                    ): (
+                        <AlertCustom
+                            type={'warning'}
+                            className={'my-3 mx-3'}
+                        >
+                            <strong>
+                                {'Choose a target fighter'}
+                            </strong>
+                        </AlertCustom>
+                    )}
+
+
+
                 </Modal.Body>
 
                 <Modal.Footer>

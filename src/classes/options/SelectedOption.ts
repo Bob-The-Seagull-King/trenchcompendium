@@ -18,6 +18,7 @@ class SelectedOption {
     public SelectedChoice : IChoice | null = null;
     public MyParent : DynamicOptionContextObject;
     public NestedOption : DynamicOptionContextObject | null = null;
+    public SelectedID : null | string = null;
 
     public constructor(option : StaticOption, parent : DynamicOptionContextObject) {
         this.Option = option;
@@ -62,6 +63,7 @@ class SelectedOption {
      * to one of this object's Option's selections.
      */
     public SelectOption(_id : string | null) {
+        this.SelectedID = _id;
         if (_id == null) {
             this.SelectedChoice = null;
             this.NestedOption = null;

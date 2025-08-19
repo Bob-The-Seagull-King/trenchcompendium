@@ -1,8 +1,24 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import WbbAbilityDisplay from "../WbbAbilityDisplay";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCheck, faSkull, faTimes} from "@fortawesome/free-solid-svg-icons";
-import { RealWarbandPurchaseModel } from '../../../../classes/saveitems/Warband/Purchases/WarbandPurchase';
+import {
+    RealWarbandPurchaseEquipment,
+    RealWarbandPurchaseModel
+} from '../../../../classes/saveitems/Warband/Purchases/WarbandPurchase';
+import GenericHover from "../../generics/GenericHover";
+import KeywordDisplay from "../../features/glossary/KeywordDisplay";
+import {Keyword} from "../../../../classes/feature/glossary/Keyword";
+import {
+    getModelStatArmour,
+    getModelStatMelee,
+    getModelStatMove,
+    getModelStatRanged,
+    ModelStatistics
+} from "../../../../classes/feature/model/ModelStats";
+import {MemberUpgradesGrouped} from "../../../../classes/saveitems/Warband/Purchases/WarbandMember";
+import {WarbandProperty} from "../../../../classes/saveitems/Warband/WarbandProperty";
+import {useWarband} from "../../../../context/WarbandContext";
 
 interface WbbPrintViewSimpleFighterProps {
     fighter: RealWarbandPurchaseModel;
@@ -11,7 +27,69 @@ interface WbbPrintViewSimpleFighterProps {
 const WbbPrintViewSimpleFighter: React.FC<WbbPrintViewSimpleFighterProps> = ({ fighter }) => {
 
     const boldXpIndices = [2, 4, 7, 10, 14, 18];
+    const [keywordsList, setkeywords] = useState<Keyword[]>([])
+    const [stats, setstats] = useState<ModelStatistics>({})
+    const {warband, updateKey, reloadDisplay } = useWarband();
 
+    const [complexstate, setComplexState] = useState({
+        stats: {} as ModelStatistics,
+        canchange: true as boolean,
+        upgrades: {} as MemberUpgradesGrouped,
+        abilities: [] as WarbandProperty[],
+        statchoices: [] as ModelStatistics[][],
+        allmodelequip: [] as RealWarbandPurchaseEquipment[],
+        xpLimit: 0 as number,
+        scarLimit: 3 as number,
+        keywordsList: [] as Keyword[],
+        modelslug: fighter.model.GetModelSlug() as string,
+        keyvar: 0
+    });
+
+    useEffect(() => {
+        async function SetModelOptions() {
+            // setStatChoices(await fighter.GetStatOptions());
+            setstats(await fighter.model.GetStats())
+            // setcanchange(await fighter.CanChangeRank())
+            setkeywords(await fighter.model.getContextuallyAvailableKeywords())
+            // setkeyvar(keyvar + 1);
+        }
+        SetModelOptions();
+    }, [])
+
+    useEffect(() => {
+        async function SetModelOptions() {
+
+            const abilitiesnew = await fighter.model.BuildNewProperties()
+            const upgradesnew = await fighter.model.GetWarbandUpgradeCollections()
+            const XPLimitNew = await fighter.model.GetXPLimit();
+            const keywordsnew = await fighter.model.getContextuallyAvailableKeywords()
+            const modelslugnew = fighter.model.GetModelSlug()
+            const allEquip = await fighter.model.GetAllEquipForShow()
+            const statchoicenew = await fighter.model.GetStatOptions()
+            const canchangenew = await fighter.model.CanChangeRank()
+            const statsnew = await fighter.model.GetStats()
+            const scarlimitnew = await fighter.model.GetMaxScars()
+
+            setComplexState((prev) => ({
+                stats: statsnew,
+                canchange: canchangenew,
+                upgrades: upgradesnew,
+                abilities: abilitiesnew,
+                statchoices: statchoicenew,
+                allmodelequip: allEquip,
+                xpLimit: XPLimitNew,
+                scarLimit: scarlimitnew,
+                keywordsList: keywordsnew,
+                modelslug: modelslugnew,
+                keyvar: prev.keyvar + 1
+            }));
+        }
+        if (!warband?.warband_data.Models.includes(fighter.purchase)) {
+            return;
+        } else {
+            SetModelOptions();
+        }
+    }, [updateKey, fighter])
 
     return (
         <div className="WbbPrintViewSimpleFighter">
@@ -38,8 +116,19 @@ const WbbPrintViewSimpleFighter: React.FC<WbbPrintViewSimpleFighterProps> = ({ f
                             {'Keywords:'}
                         </span>
                         <span className={'inline-value'}>
-                            {/* @TODO: Add fighter keywords */}
-                            {'STRONG, TOUGH'}
+                            {keywordsList.map((item, index) => (
+                                <span
+                                    key={`model_keyword_keyword_id_${item.ID}`}
+                                >
+                                    <GenericHover
+                                        titlename={item.Name}
+                                        d_name={item.Name}
+                                        d_type={""}
+                                        d_method={() => <KeywordDisplay data={item} />}
+                                    />
+                                    {index < keywordsList.length - 1 && ", "}
+                                </span>
+                            ))}
                         </span>
                     </div>
                 </div>
@@ -54,10 +143,10 @@ const WbbPrintViewSimpleFighter: React.FC<WbbPrintViewSimpleFighterProps> = ({ f
                                     {'Movement'}
                                 </td>
                                 <td>
-                                    {'Ranged'}
+                                    {'Melee'}
                                 </td>
                                 <td>
-                                    {'Melee'}
+                                    {'Ranged'}
                                 </td>
                                 <td>
                                     {'Armour'}
@@ -69,27 +158,22 @@ const WbbPrintViewSimpleFighter: React.FC<WbbPrintViewSimpleFighterProps> = ({ f
                             </tr>
                             <tr className={'table-stats-row'}>
                                 <td>
-                                    {/* @ TODO add values*/}
-                                    {'6" / Infantry'}
+                                    {getModelStatMove(stats)}
                                 </td>
                                 <td>
-                                    {/* @ TODO add values*/}
-                                    {'+2D'}
+                                    {getModelStatMelee(stats)}
                                 </td>
                                 <td>
-                                    {/* @ TODO add values*/}
-                                    {'-1D'}
+                                    {getModelStatRanged(stats)}
                                 </td>
                                 <td>
-                                    {/* @ TODO add values*/}
-                                    {'-2'}
+                                    {getModelStatArmour(stats)}
                                 </td>
 
                                 <td>
-                                    {/* @ TODO add values*/}
-                                    {'100'}{' Ducats'}
+                                    {fighter.purchase.GetTotalDucats()}{' Ducats'}
                                     {' | '}
-                                    {'2'}{' Glory Points'}
+                                    {fighter.purchase.GetTotalGlory()}{' Glory Points'}
                                 </td>
                             </tr>
                         </tbody>
@@ -127,8 +211,15 @@ const WbbPrintViewSimpleFighter: React.FC<WbbPrintViewSimpleFighterProps> = ({ f
                         {'Abilities:'}
                     </span>
                     <span className={'inline-value'}>
-                        {/* @TODO: Add fighter Abilities as concat list*/}
-                        {'Mine-Setting, Fortify Position, De-Mine'}
+                        {complexstate.abilities.length > 0 && (
+                            <>
+                                {complexstate.abilities
+                                    .map((ability, index) => (
+                                        <span key={index}>{ability.Name}</span>
+                                    ))
+                                    .reduce<React.ReactNode[]>((acc, curr) => acc.length === 0 ? [curr] : [...acc, ', ', curr], [])}
+                            </>
+                        )}
                     </span>
                 </div>
 
@@ -194,13 +285,13 @@ const WbbPrintViewSimpleFighter: React.FC<WbbPrintViewSimpleFighterProps> = ({ f
                                 <div className="battle-scar-boxes">
                                     {Array.from({length: 3}, (_, i) => {
                                         const index = i + 1;
-                                        const isChecked = index <= fighter.model.Injuries.length;
+                                        const isChecked = index <= fighter.model.GetBattleScars();
                                         const isSkull = index === 3;
 
                                         return (
                                             <div key={index} className="battle-scar-box">
                                                 {isSkull &&
-                                                    <FontAwesomeIcon icon={faSkull} className={'skull-icon'}/>
+                                                    <FontAwesomeIcon icon={faSkull} className={'final-icon'}/>
                                                 }
                                                 {isChecked &&
                                                     <FontAwesomeIcon icon={faTimes}/>

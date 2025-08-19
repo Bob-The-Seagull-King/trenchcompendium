@@ -1,18 +1,11 @@
-/**
- * 
- * For any given MODEL, its ModelCollection contains the base
- * as well as building any relevant variant models
- * 
- */
-import { IStaticOptionContextObject, StaticOptionContextObject } from '../../options/StaticOptionContextObject';
-import { DescriptionFactory } from '../../../utility/functions';
-import { ContextObject, IContextObject } from '../../contextevent/contextobject';
+import { ContextObject } from '../../contextevent/contextobject';
 import { BaseAddon, IBaseAddon } from './BaseAddon';
 
 interface IAbility extends IBaseAddon {
     ability_category? : string
 }
 
+// Model abilities, including traits and actions
 class Ability extends BaseAddon {
     /**
      * Assigns parameters and creates a series of description

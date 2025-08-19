@@ -1,5 +1,3 @@
-import { ItemManager } from '../saveitems/itemmanager';
-import { ContentPackManager } from '../contentpacks/contentmanager'
 import { ScenarioGenerator } from '../feature/scenario/ScenarioGenerator';
 import { WarbandManager } from '../saveitems/Warband/WarbandManager';
 
@@ -12,8 +10,7 @@ class ToolsController {
    
     
     private static instance: ToolsController;
-    //ContentManager;
-    //SaveItemManager;
+    
     RandomScenarioManager;
     UserWarbandManager
 
@@ -27,6 +24,7 @@ class ToolsController {
         this.UserWarbandManager.GetItemsAll();
     }
 
+    // Gets the single instance of the cache
     public static getInstance(): ToolsController {
         if (!ToolsController.instance) {
             ToolsController.instance = new ToolsController();

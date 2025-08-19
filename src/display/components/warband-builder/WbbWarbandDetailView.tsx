@@ -21,6 +21,7 @@ import { Model } from '../../../classes/feature/model/Model';
 import WbbEquipmentAddCustomStash from './modals/WbbEquipmentAddCustomStash';
 import { Equipment } from '../../../classes/feature/equipment/Equipment';
 import {useWbbMode} from "../../../context/WbbModeContext";
+import AlertCustom from "../generics/AlertCustom";
 
 interface WbbWarbandDetailViewProps {
     onClose: () => void;
@@ -149,24 +150,22 @@ const WbbWarbandDetailView: React.FC<WbbWarbandDetailViewProps> = ({  onClose })
                         {'Fielded: '}{warband.warband_data.GetNumFielded()}
                     </div>
 
-                    { warbandErrors.length > 0 &&
-                        <div className="detail-section-text-element detail-section-text-element-validation-error">
-                            <div className={'alert alert-warning'}>
-                                <div className={'detail-section-text-element-validation-error-title'}>
-                                    <FontAwesomeIcon icon={faTriangleExclamation} className="icon-inline-left-l"/>
-                                    {'The warband is not valid'}
-                                </div>
-
-                                <ul>
-                                    {warbandErrors.map((item, index) =>
-                                        <li key={index}>
-                                            {item}
-                                        </li>
-                                    )}
-                                </ul>
-                            </div>
-
-                        </div>
+                    {warbandErrors.length > 0 &&
+                        <AlertCustom
+                            type={'warning'}
+                            className={'my-3'}
+                        >
+                            <h6>
+                                {'The warband is not valid'}
+                            </h6>
+                            <ul className={'my-1 px-3'}>
+                                {warbandErrors.map((item, index) =>
+                                    <li key={index}>
+                                        {item}
+                                    </li>
+                                )}
+                            </ul>
+                        </AlertCustom>
                     }
                 </div>
 
@@ -270,7 +269,7 @@ const WbbWarbandDetailView: React.FC<WbbWarbandDetailViewProps> = ({  onClose })
                                 </label>
 
                             </div>
-                            <div className="form-text">
+                            <div className="form-text mb-3">
                                 {'Allowing for Open Exlporation means your warband will no longer be restricted by the need for certain items to be purchased during the Exploration Phase, perfect for one-off games.'}
                             </div>
 

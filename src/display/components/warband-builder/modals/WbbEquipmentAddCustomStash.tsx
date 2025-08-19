@@ -93,7 +93,7 @@ const WbbEquipmentAddCustomStash: React.FC<WbbModalAddItemToStashProps> = ({ sho
 
 
     return (
-        <Modal show={show} key={keyvar} onHide={onClose} className="WbbModalAddItem WbbModalAddItemToStash WbbModalAddItemToStashCustom" centered>
+        <Modal show={show} key={keyvar} onHide={onClose} className="WbbModal WbbModalSelect WbbEquipmentAddCustomStash" centered>
             <Modal.Header closeButton={false}>
                 <Modal.Title>Add Item to Stash</Modal.Title>
 
@@ -106,8 +106,8 @@ const WbbEquipmentAddCustomStash: React.FC<WbbModalAddItemToStashProps> = ({ sho
             </Modal.Header>
 
             <Modal.Body>
-                <div className="mb-3">
-                    <label htmlFor="factionSelect" className="form-label">Faction</label>
+                <div className="my-3 mx-3">
+                    <label htmlFor="factionSelect" className="form-label">Filter by Faction</label>
                     <select
                         id="factionSelect"
                         className="form-select"
@@ -121,8 +121,9 @@ const WbbEquipmentAddCustomStash: React.FC<WbbModalAddItemToStashProps> = ({ sho
                     </select>
                 </div>
 
-                <div className="mb-3">
-                    <label htmlFor="categorySelect" className="form-label">Category</label>
+
+                <div className="my-3 mx-3">
+                    <label htmlFor="categorySelect" className="form-label">Filter by Category</label>
                     <select
                         id="categorySelect"
                         className="form-select"
@@ -138,9 +139,9 @@ const WbbEquipmentAddCustomStash: React.FC<WbbModalAddItemToStashProps> = ({ sho
                     </select>
                 </div>
 
-                <hr />
+                <div className={'my-4'}></div>
 
-                { filteredItems.length > 0 ? (
+                {filteredItems.length > 0 ? (
                     <>
                         {filteredItems.map((item) => (
                             <div
@@ -154,38 +155,39 @@ const WbbEquipmentAddCustomStash: React.FC<WbbModalAddItemToStashProps> = ({ sho
                             </div>
                         ))}
                     </>
-                ): (
+                ) : (
                     <>
                         {'No items found for the selected filters.'}
                     </>
                 )}
 
                 <hr/>
-                
-                <input
-                    type="number" id={'add-cost-input'}
-                    className="form-control"
-                    defaultValue={0}
-                    onChange={(e) => setCost(parseInt(e.target.value) || 0)}
-                    min={0}
-                />
 
-                
-                <div className={'mt-2'} style={{width:"100%"}}>
-                    <Button className={'btn btn-primary ' + (costType == 0? 'perma-active':'')}
-                        onClick={() => setCostType(0)}
-                        style={{width:"50%"}}
-                        active={costType == 0}>
-                        <FontAwesomeIcon icon={faCoins} className="icon-inline-left-l"/>
-                        {'Spend Ducats'}
-                    </Button>
-                    <Button className={'btn btn-primary ' + (costType == 1? 'perma-active':'')}
-                        onClick={() => setCostType(1)}
-                        style={{width:"50%"}}
-                        active={costType == 1}>
-                        <FontAwesomeIcon icon={faTrophy} className="icon-inline-left-l"/>
-                        {'Spend Glory'}
-                    </Button>
+                <div className={'px-3'}>
+                    <input
+                        type="number" id={'add-cost-input'}
+                        className="form-control my-3"
+                        defaultValue={0}
+                        onChange={(e) => setCost(parseInt(e.target.value) || 0)}
+                    />
+
+
+                    <div className={'my-3'}>
+                        <Button className={'btn btn-primary ' + (costType == 0 ? 'perma-active' : '')}
+                                onClick={() => setCostType(0)}
+                                style={{width: "50%"}}
+                                active={costType == 0}>
+                            <FontAwesomeIcon icon={faCoins} className="icon-inline-left-l"/>
+                            {'Spend Ducats'}
+                        </Button>
+                        <Button className={'btn btn-primary ' + (costType == 1 ? 'perma-active' : '')}
+                                onClick={() => setCostType(1)}
+                                style={{width: "50%"}}
+                                active={costType == 1}>
+                            <FontAwesomeIcon icon={faTrophy} className="icon-inline-left-l"/>
+                            {'Spend Glory'}
+                        </Button>
+                    </div>
                 </div>
 
 

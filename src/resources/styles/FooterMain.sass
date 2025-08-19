@@ -4,6 +4,10 @@
 //
 
 .FooterMain
+    body[data-print="print"] &
+        display: none
+    @media print
+        display: none
 
     .footer-upper
         background-color: $color-bg-2

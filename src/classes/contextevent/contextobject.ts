@@ -9,8 +9,8 @@ interface IContextObject extends ICompendiumItemData {
 
 class ContextObject extends CompendiumItem {
 
-    public SelfData : any;
-    public ContextKeys : ContextEventVals = {}
+    public SelfData : any; // The interface data, used as reference
+    public ContextKeys : ContextEventVals = {} // The values that correlate to the context data table
     public readonly ContextData : CallEventTable = BaseContextCallTable; // The table searched through in Events
 
     public MyContext : ContextObject | null = null; // The parent object, if any
@@ -28,6 +28,16 @@ class ContextObject extends CompendiumItem {
      * Gets the name of an object to display outwards.
      */
     public GetTrueName() {
+        if (this.Name != undefined) {
+            return this.Name;
+        }
+        return "name_unidentified";
+    }
+
+    /**
+     * Gets the name of an object to display outwards.
+     */
+    public GetPresentationName() {
         if (this.Name != undefined) {
             return this.Name;
         }

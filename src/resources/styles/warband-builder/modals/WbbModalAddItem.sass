@@ -5,10 +5,13 @@
 
 
 .WbbModalAddItem
+    .modal-body
+        padding: 0
+
     .select-item
         position: relative
-        background-color: $color-bg-3
-        border-bottom: 1px solid $color-bg-1
+        background-color: $color-bg-2
+        border-bottom: 1px solid $color-bg-0
         padding: 10px 10px
         display: flex
         justify-content: space-between
@@ -27,6 +30,7 @@
 
         &.selected
             background-color: $color-highlight-bg-2
+            border-bottom: 0
 
         &.disabled // an element that is not selectable
             opacity: 0.5
@@ -51,14 +55,16 @@
         .item-cost
             white-space: nowrap
             padding-left: 10px
+
         .item-restriction
             font-size: 12px
 
     .select-item-details
         padding: 15px
         background-color: $color-bg-4
-        border-bottom: 1px solid $color-bg-1
+        border-bottom: 1px solid $color-bg-0
         font-size: 14px
+        border-left: 3px solid $color-highlight-bg-2
 
     &.WbbModalAddFighter
         .select-item
@@ -86,3 +92,10 @@
                 height: 100%
                 object-fit: cover
                 object-position: top left
+
+    .details-wrap
+        background-color: $bg-color-card-3
+
+        .details-quick-action
+            margin-top: 5px
+            padding: 0 15px 0

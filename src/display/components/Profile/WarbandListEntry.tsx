@@ -50,9 +50,9 @@ const WarbandListEntry: React.FC<WarbandListEntryProps> = ({
                 </div>
 
                 <div className={'warband-value'}>
-                    {warband.warband_data.GetCostDucatsTotal() + ' Ductas'}
+                    {warband.warband_data.GetCostDucats() + ' Ducats'}
                     {' | '}
-                    {warband.warband_data.GetCostGloryTotal() + ' Glory'}
+                    {warband.warband_data.GetCostGlory() + ' Glory'}
                 </div>
             </div>
         </div>

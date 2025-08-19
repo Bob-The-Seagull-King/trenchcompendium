@@ -7,7 +7,6 @@ import { CollectionsListPage } from "./../viewmodel/pages/CollectionListPage"
  */
 class ControllerController {
 
-    
     private static instance: ControllerController;
    
     GlossaryCollectionController;
@@ -44,6 +43,7 @@ class ControllerController {
         this.ErrataRulesCollectionController = new CollectionsListPage('errata');
     }    
 
+    // Gets the single instance of this cache
     public static getInstance(): ControllerController {
         if (!ControllerController.instance) {
             ControllerController.instance = new ControllerController();

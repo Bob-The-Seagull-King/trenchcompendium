@@ -1,0 +1,86 @@
+// // // // //
+//
+// v2 Modal styles
+// Modals for selecting items
+//
+
+.WbbModalSelect
+    .modal-body
+        padding: 0
+
+    .selection-wrap
+
+    .select-item
+        position: relative
+        background-color: $color-bg-2
+        border-bottom: 1px solid $color-bg-0
+        padding: 10px 10px
+        display: flex
+        justify-content: space-between
+        cursor: pointer
+        align-items: center
+        transition: background-color .2s ease
+
+        @media(max-width: 575px)
+            font-size: 14px
+
+        &:hover
+            background-color: $color-highlight-bg-2-50
+
+        &:last-of-type
+            border-bottom: none
+
+        &.selected
+            background-color: $color-highlight-bg-2
+
+        &.disabled // an element that is not selectable
+            opacity: 0.5
+            .disabled-reason // a string that shows why the item is disabled
+                color: $red
+
+        .item-left
+            padding-right: 10px
+            display: flex
+            flex-direction: column
+            justify-content: center
+            align-items: stretch
+
+        .item-right
+            font-size: 12px
+            display: flex
+            flex-direction: column
+            justify-content: center
+            align-items: stretch
+            text-align: right
+
+        .item-cost
+            white-space: nowrap
+            padding-left: 10px
+
+        .item-restriction
+            font-size: 12px
+
+        &.details-open
+            border-bottom: none
+
+    .select-item-details
+        padding: 15px
+        background-color: $color-bg-3
+        border-bottom: 1px solid $color-bg-0
+        font-size: 14px
+        border-left: 3px solid $color-highlight-bg-2
+
+        .select-item-details
+            background-color: $bg-color-card-3
+
+    .details-wrap
+        background-color: $color-bg-3
+
+        .details-quick-action
+            margin-top: 5px
+            padding: 0 15px 0
+
+
+    .WbbGeneralCollapse-title
+        background-color: $color-bg-1
+        border-color: $color-bg-0

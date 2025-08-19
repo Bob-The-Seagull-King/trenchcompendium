@@ -121,7 +121,7 @@ const WbbViewCampaignDetailView: React.FC<WbbCampaignDetailViewProps> = ({ onClo
                                 return (
                                     <div key={index} className="battle-scar-box">
                                         {isSkull &&
-                                            <FontAwesomeIcon icon={faGift} className={'skull-icon'}/>
+                                            <FontAwesomeIcon icon={faGift} className={'final-icon'}/>
                                         }
                                         {isChecked &&
                                             <FontAwesomeIcon icon={faCheck}/>

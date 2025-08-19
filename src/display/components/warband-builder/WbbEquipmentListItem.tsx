@@ -85,7 +85,7 @@ const WbbEquipmentListItem: React.FC<EquipmentItemProps> = ({ item, fighter }) =
             onClick={!play_mode ? () => setShowDetailsModal(true) : undefined}
         >
 
-            <Modal show={showDetailsModal} onHide={() => setShowDetailsModal(false)} className="" centered>
+            <Modal show={showDetailsModal} onHide={() => setShowDetailsModal(false)} className="WbbEquipmentListItem-Detail" centered>
                 <Modal.Header closeButton={false}>
                     <Modal.Title>{ItemValue.GetTrueName()}</Modal.Title>
 
@@ -103,15 +103,14 @@ const WbbEquipmentListItem: React.FC<EquipmentItemProps> = ({ item, fighter }) =
                 </Modal.Header>
 
                 <Modal.Body>
-                    <div className={'rules-equipment-main'}>
-                        <WbbEquipmentStats
-                        item={item}
-                        fighter={fighter}
-                        />
-                        <WbbEquipmentMain
-                        item={item}
-                        keywords={keywordlist}/>
-                    </div>
+                    <WbbEquipmentStats
+                    item={item}
+                    fighter={fighter}
+                    />
+
+                    <WbbEquipmentMain
+                    item={item}
+                    keywords={keywordlist}/>
                 </Modal.Body>
             </Modal>
 

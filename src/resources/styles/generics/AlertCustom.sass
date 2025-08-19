@@ -1,0 +1,50 @@
+// // // // //
+//
+// A custom alert with icons
+//
+
+.AlertCustom
+    font-size: 14px
+    padding: 15px 10px 15px 15px
+    background-color: $bg-color-card-2
+    border-left: 2px solid $bg-color-card-2
+    position: relative
+
+    .AlertCustom-inner
+        position: relative
+        z-index: 3
+
+    .AlertCustom-icon
+        position: absolute
+        top: 5px
+        left: 5px
+        z-index: 1
+        opacity: 0.2
+        font-size: 42px
+
+    &.AlertCustom-info
+        padding-left: 20px
+        border-color: $blue
+        > .AlertCustom-icon
+            color: $blue
+
+    &.AlertCustom-tip
+        padding-left: 20px
+        border-color: $bg-color-card-3
+        > .AlertCustom-icon
+            color: $bg-color-card-3
+            opacity: 0.5
+
+    &.AlertCustom-warning
+        padding-left: 20px
+        border-color: $yellow
+        > .AlertCustom-icon
+            color: $yellow
+
+    &.AlertCustom-danger
+        padding-left: 20px
+        border-color: $color-highlight-text
+        > .AlertCustom-icon
+            color: $color-highlight-text
+
+

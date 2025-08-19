@@ -56,6 +56,49 @@ class WarbandEquipment extends DynamicContextObject {
         const subtags = this.GetEquipmentItem().Tags
         return ((containsTag(tags, id)) || (containsTag(subtags, id)))
     }
+
+    /**
+     * Gets the name of an object to display outwards.
+     */
+    public GetPresentationName() {
+        if (this.Name != undefined) {
+            if (this.MyContext != null) {
+                if (this.MyContext instanceof WarbandMember) {
+                    return this.Name + " (" + this.MyContext.GetTrueName() + ")";
+                }
+            }
+            return this.Name;
+        }
+        return "name_unidentified";
+    }
+
+    
+    /**
+     * Grabs the packages from any sub-objects, based
+     * on class implementation.
+     */
+    public async GrabWarbandubPackages(event_id : string, source_obj : ContextObject, arrs_extra : any[]) : Promise<ContextPackage[]> { 
+        const subpackages : ContextPackage[] = []   
+        
+        
+        const Events : EventRunner = new EventRunner();
+        const ShowWarband = await Events.runEvent(
+            "showEquipmentOnWarband",
+            this,
+            [],
+            false,
+            this
+        )
+        if (ShowWarband == true) {
+            const static_packages : ContextPackage[] = await (this).GrabContextPackages(event_id, source_obj, arrs_extra);
+            for (let j = 0; j < static_packages.length; j++) {
+                static_packages[j].callpath.push("WarbandEquipment")
+                subpackages.push(static_packages[j])
+            }
+        }
+
+        return subpackages; 
+    }
     
     public async BuildNewProperties(fighter : WarbandMember, Purchase : WarbandPurchase) {
         
@@ -130,7 +173,6 @@ class WarbandEquipment extends DynamicContextObject {
         this.SelfData = _objint;
         return _objint;
     }
-    
 
     public async GetKeywords() : Promise<Keyword[]> {
         

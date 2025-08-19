@@ -8,6 +8,7 @@ import { getCostType } from '../../../../utility/functions';
 import SynodModelImage from "../../../../utility/SynodModelImage";
 import {useModalSubmitWithLoading} from "../../../../utility/useModalSubmitWithLoading";
 import { CachedFactionModel } from '../../../../classes/saveitems/Warband/UserWarband';
+import AlertCustom from "../../generics/AlertCustom";
 
 interface Fighter {
     id: string;
@@ -65,7 +66,7 @@ const WbbModalAddFighterMercenary: React.FC<WbbModalAddFighterMercenaryProps> = 
     });
 
     return (
-        <Modal show={show} onHide={onClose} className={'WbbModalAddItem WbbModalAddFighter WbbModalAddFighterMercenary'} centered>
+        <Modal show={show} onHide={onClose} className={'WbbModal WbbModalSelect WbbModalSelect_Fighter  WbbModalAddFighterMercenary'} centered>
             <Modal.Header closeButton={false}>
                 <Modal.Title>Add Mercenary</Modal.Title>
 
@@ -103,6 +104,12 @@ const WbbModalAddFighterMercenary: React.FC<WbbModalAddFighterMercenaryProps> = 
                         </span>
                     </div>
                 ))}
+                <AlertCustom
+                    type={'tip'}
+                    className={'mx-3 my-3'}
+                >
+                    {'Trench Dogs and their variants are considered Exploration-Items, not regular mercenaries.'}
+                </AlertCustom>
             </Modal.Body>
 
             <Modal.Footer>

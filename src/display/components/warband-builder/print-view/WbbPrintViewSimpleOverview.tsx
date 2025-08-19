@@ -4,6 +4,8 @@ import logoDarkMode from "../../../../resources/images/trench-companion-logo-whi
 import logoLightMode from "../../../../resources/images/trench-companion-logo-black-v2.png";
 import {UserWarband} from "../../../../classes/saveitems/Warband/UserWarband";
 import { Faction } from '../../../../classes/feature/faction/Faction';
+import {WarbandProperty} from "../../../../classes/saveitems/Warband/WarbandProperty";
+import WbbEditViewExploration from "../WbbEditViewExploration";
 
 const WbbPrintViewSimpleOverview: React.FC = () => {
 
@@ -16,12 +18,19 @@ const WbbPrintViewSimpleOverview: React.FC = () => {
 
     const [basevariant, setbasevariant] = useState<Faction | null>(null)
     const [keyvar, setkeyvar] = useState(0)
+
+    const [locations, setlocations] = useState<WarbandProperty[]>([]);
     
     useEffect(() => {
         async function RunGetLocations() {
             const facbase = await warband?.warband_data.GetFactionBase();
+            console.log(warband?.warband_data.Faction.MyFactionRules)
             if (facbase != undefined) {
                 setbasevariant(facbase);
+            }
+            if (warband) {
+                const Modifiers = warband?.warband_data.GetLocations();
+                setlocations(Modifiers);
             }
             setkeyvar(keyvar + 1)
         }
@@ -59,7 +68,16 @@ const WbbPrintViewSimpleOverview: React.FC = () => {
                                 {'Faction'}
                             </div>
                             <div className={'warband-value'}>
-                                {basevariant?.GetTrueName()}
+                                {basevariant != null &&
+                                    <>
+                                        {basevariant.GetTrueName()}
+                                    </>
+                                }
+                                {basevariant == null &&
+                                    <>  
+                                        {warband.warband_data.GetFactionName()}
+                                    </>
+                                }
                             </div>
                         </div>
                     </div>
@@ -69,7 +87,26 @@ const WbbPrintViewSimpleOverview: React.FC = () => {
                                 {'Variant'}
                             </div>
                             <div className={'warband-value'}>
-                                {warband.warband_data.GetFaction()?.GetTrueName()}
+                                {basevariant != null &&
+                                    <>
+                                        {(basevariant.GetTrueName() != warband.warband_data.GetFactionName())? warband.warband_data.GetFactionName() : "Base"}
+                                    </>
+                                }
+                                {basevariant == null &&
+                                    <>  
+                                        {"Base"}
+                                    </>
+                                }
+                                {warband.warband_data.Faction.MyFaction.SelfDynamicProperty.Selections.map((sel) =>
+                                    <div key={warband.warband_data.Faction.MyFaction.SelfDynamicProperty.Selections.indexOf(sel)}>
+                                        {sel.Option.Name}
+                                        {sel.SelectedChoice != null &&
+                                        <>
+                                            {" - " + sel.SelectedChoice.display_str}
+                                        </>
+                                        }
+                                    </div>) 
+                                }
                             </div>
                         </div>
                     </div>
@@ -82,7 +119,7 @@ const WbbPrintViewSimpleOverview: React.FC = () => {
                                 {'Pay Chest'}
                             </div>
                             <div className={'warband-value'}>
-                                {stash.ValueDucats}
+                                {stash.AmountDucats}
                             </div>
                         </div>
                     </div>
@@ -93,7 +130,7 @@ const WbbPrintViewSimpleOverview: React.FC = () => {
                                 {'Glory Points'}
                             </div>
                             <div className={'warband-value'}>
-                                {stash.ValueGlory}
+                                {stash.AmountGlory}
                             </div>
                         </div>
                     </div>
@@ -101,11 +138,10 @@ const WbbPrintViewSimpleOverview: React.FC = () => {
                     <div className={'col-3'}>
                         <div className={'warband-campaign warband-box'}>
                             <div className={'warband-label'}>
-                                {'Campaign Points'}
+                                {'Victory Points'}
                             </div>
                             <div className={'warband-value'}>
-                                {/* @TODO: Add campaign points*/}
-                                {'0'}
+                                {warband.warband_data.GetVictoryPoints()}
                             </div>
                         </div>
                     </div>
@@ -116,7 +152,6 @@ const WbbPrintViewSimpleOverview: React.FC = () => {
                                 {'Warband Rating'}
                             </div>
                             <div className={'warband-value'}>
-
                                 {warband.warband_data.GetCostDucats()}{' Ducats'}
                                 {' | '}
                                 {warband.warband_data.GetCostGlory()}{' Glory'}
@@ -132,7 +167,7 @@ const WbbPrintViewSimpleOverview: React.FC = () => {
                                 {'Notes'}
                             </div>
                             <div className={'warband-value'}>
-                                {/* @TODO: add warband notes here */}
+                                {warband.warband_data.GetWarbandNotes()}
                             </div>
                         </div>
                     </div>
@@ -143,13 +178,18 @@ const WbbPrintViewSimpleOverview: React.FC = () => {
                                 {'Stash'}
                             </div>
                             <div className={'warband-value'}>
-                                {stash.Items.length > 0
-                                    ? stash.Items.map((item: any, idx: number) => (
-                                        <div className={'warband-value-item'} key={idx}>
-                                            {item.Name}
-                                        </div>
-                                    ))
-                                    : ''}
+                                {warband?.warband_data.Equipment.map((item: any, index: number) => (
+                                    <React.Fragment key={index}>
+                                        {item.GetItemName()}
+
+                                        {/* Add comma if not the last item */}
+                                        {index < warband?.warband_data.Equipment.length -1 &&
+                                            <>
+                                                {', '}
+                                            </>
+                                        }
+                                    </React.Fragment>
+                                ))}
                             </div>
                         </div>
                     </div>
@@ -161,10 +201,18 @@ const WbbPrintViewSimpleOverview: React.FC = () => {
                     <div className={'col-6'}>
                         <div className={'warband-exploration warband-box '}>
                             <div className={'warband-label'}>
-                                {'Exploration'}
+                                {'Exploration Locations'}
                             </div>
                             <div className={'warband-value'}>
-                                {/* @TODO: add exploration locations here */}
+                                {locations.length > 0 &&
+                                    <>
+                                        {locations.map((location, index) =>
+                                            <div key={index}>
+                                                {location.GetOwnName()}
+                                            </div>
+                                        )}
+                                    </>
+                                }
                             </div>
                         </div>
                     </div>
@@ -175,7 +223,36 @@ const WbbPrintViewSimpleOverview: React.FC = () => {
                                 {'Modifiers'}
                             </div>
                             <div className={'warband-value'}>
-                                {/* @TODO: add modifiers here */}
+                                {warband.warband_data.Modifiers.map(
+                                    (item : WarbandProperty) =>
+                                        <div key={warband.warband_data.Modifiers.indexOf(item)}>
+                                            {item.SelfDynamicProperty.OptionChoice.GetTrueName()}
+                                            {item.SelfDynamicProperty.Selections.map((sel) =>
+                                            <div key={item.SelfDynamicProperty.Selections.indexOf(sel)}>
+                                                {sel.SelectedChoice != null &&
+                                                <>
+                                                    {"- " + sel.SelectedChoice.display_str}
+                                                </>}
+                                            </div>)
+
+                                            }
+                                        </div>
+                                )}
+                                {warband.warband_data.Fireteams.map(
+                                    (item : WarbandProperty) =>
+                                        <div key={warband.warband_data.Fireteams.indexOf(item)}>
+                                            {item.SelfDynamicProperty.OptionChoice.GetTrueName()}
+                                            {item.SelfDynamicProperty.Selections.map((sel) =>
+                                            <div key={item.SelfDynamicProperty.Selections.indexOf(sel)}>
+                                                {sel.SelectedChoice != null &&
+                                                <>
+                                                    {"- " + sel.SelectedChoice.display_str}
+                                                </>}
+                                            </div>)
+
+                                            }
+                                        </div>
+                                )}
                             </div>
                         </div>
                     </div>

@@ -1,7 +1,16 @@
 import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCheck, faChevronLeft, faChevronRight, faLock, faLockOpen, faXmark} from "@fortawesome/free-solid-svg-icons";
+import {
+    faArrowRight,
+    faCheck,
+    faChevronLeft,
+    faChevronRight, faExclamationTriangle,
+    faLock,
+    faLockOpen,
+    faXmark
+} from "@fortawesome/free-solid-svg-icons";
+import {getCostType} from "../../../../../utility/functions";
 
 interface WbbEditCampaignCycleProps {
     show: boolean;
@@ -12,16 +21,15 @@ interface WbbEditCampaignCycleProps {
 }
 
 const WbbEditCampaignCycleModal: React.FC<WbbEditCampaignCycleProps> = ({
-                                                                            show,
-                                                                            onClose,
-                                                                            currentCampaignCycle,
-                                                                            currentCampaignCycleMax,
-                                                                            onSubmit
-                                                                        }) => {
-    const [selectedCycle, setSelectedCycle] = useState<number>(currentCampaignCycle);
-    const [cycleMax, setCycleMax] = useState<number>(currentCampaignCycleMax);
+                        show,
+                        onClose,
+                        currentCampaignCycle,
+                        currentCampaignCycleMax,
+                        onSubmit
+                    }) => {
 
-    const cycleOptions = Array.from({ length: currentCampaignCycleMax }, (_, i) => i + 1);
+    const [selectedCycle, setSelectedCycle] = useState<number | undefined>(currentCampaignCycle);
+    const [cycleMax, setCycleMax] = useState<number>(currentCampaignCycleMax);
 
     const [showCycleModal1, setshowCycleModal1] = useState<boolean>(show);
     const [showCycleModal2, setshowCycleModal2] = useState<boolean>(false);
@@ -36,9 +44,11 @@ const WbbEditCampaignCycleModal: React.FC<WbbEditCampaignCycleProps> = ({
 
     // select a new active cycle
     const handleSelectCycle = () => {
-        onSubmit(selectedCycle, cycleMax);
-        handleClose();
-        onClose();
+        if(selectedCycle) {
+            onSubmit(selectedCycle, cycleMax);
+            handleClose();
+            onClose();
+        }
     };
 
     // Advance to next cycle
@@ -67,7 +77,7 @@ const WbbEditCampaignCycleModal: React.FC<WbbEditCampaignCycleProps> = ({
 
     return (
         <>
-            <Modal show={showCycleModal1} onHide={handleAbort} className="WbbEditCampaignCycleModal" centered>
+            <Modal show={showCycleModal1} onHide={handleAbort} className="WbbModalEdit WbbEditCampaignCycleModal" centered>
                 <Modal.Header closeButton={false}>
                     <Modal.Title>Edit Campaign Round</Modal.Title>
 
@@ -80,59 +90,47 @@ const WbbEditCampaignCycleModal: React.FC<WbbEditCampaignCycleProps> = ({
                 </Modal.Header>
 
                 <Modal.Body>
-                    <h6>Set Round</h6>
-                    <input
-                        type="number"
-                        className="form-control"
-                        value={selectedCycle}
-                        onChange={(e) => setSelectedCycle(parseInt(e.target.value) || 0)}
-                        min={0}
-                    />
-                    {/*
-                    <div className={'cycle-hint-above'}>
-                        <strong>
-                            {'Currently Viewing: '}
-                        </strong>
+                    <div className={'mb-3'}>
+                        {'Campaign Round: ' + currentCampaignCycle }
 
-                        {'Round ' + currentCampaignCycle}
+                        {(selectedCycle != undefined && selectedCycle > 0 && selectedCycle != currentCampaignCycle) &&
+                            <>
+                                <FontAwesomeIcon icon={faArrowRight} className={`icon-inline-right mb-1`}/>
+
+                                <span className={`${selectedCycle && selectedCycle > currentCampaignCycle ? 'plus-text' : 'minus-text'} mx-1`}>
+                                    {' '}{selectedCycle}
+                                </span>
+                            </>
+                        }
                     </div>
 
-                    <div className="cycle-selection-wrap">
-                        {cycleOptions.map((cycle) => (
-                            <div
-                                key={cycle}
-                                className={`select-item ${selectedCycle === cycle ? 'selected' : ''}`}
-                                onClick={() => setSelectedCycle(cycle)}
-                            >
-                                {`Round ${cycle}`}
+                    <label htmlFor={'set-campaign-round-input'}>
+                        {'Set Campaign Round'}
+                    </label>
+                    <input
+                        id={'set-campaign-round-input'}
+                        type="number"
+                        className="form-control"
+                        value={selectedCycle ?? ''}
+                        onChange={(e) => {
+                            const val = e.target.value;
+                            setSelectedCycle(val === '' ? undefined : parseInt(val));
+                        }}
+                        onFocus={(e) => e.target.select()}
+                        min={0}
+                    />
 
-                                {(selectedCycle === cycle) &&
-                                    <FontAwesomeIcon icon={faCheck} className=""/>
-                                }
-
-                                { /*(cycleMax == cycle ) ? (
-                                    <>
-                                        <FontAwesomeIcon icon={faLockOpen} className="icon-inline-right"/>
-                                    </>
-                                ) : (
-                                    <>
-                                        <FontAwesomeIcon icon={faLock} className="icon-inline-right"/>
-                                    </>
-                                )}
+                    {(!selectedCycle || selectedCycle < 0) &&
+                        <div className={'alert alert-warning my-3'}>
+                            <strong>
+                                {'Caution'}
+                            </strong>
+                            <div className={'small'}>
+                                {'You need to select a valid number for the campaign cycle'}
                             </div>
-                        ))}
+                        </div>
+                    }
 
-                        {<div className={'select-item select-item-advance'}
-                             onClick={() => {
-                                 setshowCycleModal1(false);
-                                 setshowCycleModal2(true);
-                             }}
-                        >
-                            {'Advance to Cycle ' + (cycleMax + 1)}
-
-                            <FontAwesomeIcon icon={faChevronRight} className=""/>
-                        </div>}
-                    </div> */}
                 </Modal.Body>
 
                 <Modal.Footer>
@@ -141,10 +139,10 @@ const WbbEditCampaignCycleModal: React.FC<WbbEditCampaignCycleProps> = ({
                     </Button>
                     <Button
                         variant="primary"
+                        disabled={selectedCycle === currentCampaignCycle || !selectedCycle || selectedCycle < 1}
                         onClick={() => {
                             handleSelectCycle();
                         }}
-                        disabled={selectedCycle === currentCampaignCycle}
                     >
                         Update Cycle
                     </Button>

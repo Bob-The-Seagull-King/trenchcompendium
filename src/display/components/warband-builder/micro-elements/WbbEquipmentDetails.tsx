@@ -14,8 +14,9 @@ interface WbbEquipmentDetailsProps {
 const WbbEquipmentDetails: React.FC<WbbEquipmentDetailsProps> = ({ equipment, showType }) => {
 
     return (
-        <div className={'WbbEquipmentDetails equipment-details'}>
+        <div className={'WbbEquipmentDetails'}>
             <table>
+                {equipment.GetRange() != "" &&
                 <tr>
                     <td>
                         Range
@@ -24,6 +25,7 @@ const WbbEquipmentDetails: React.FC<WbbEquipmentDetailsProps> = ({ equipment, sh
                         {equipment.GetRange()}
                     </td>
                 </tr>
+                }
 
                 {(equipment.Category && showType) &&
                     <tr>

@@ -583,7 +583,7 @@
         ],
         "options": [],
         "keywords": ["kw_grenade","kw_assault","kw_shrapnel","kw_blast"],
-        "modifiers": []
+        "modifiers": ["Blast 2\""]
     },
     {
         "id": "eq_incendiarygrenades",
@@ -722,7 +722,7 @@
         ],
         "options": [],
         "keywords": ["kw_heavy","kw_blast"],
-        "modifiers": []
+        "modifiers": ["Blast 3\""]
     },
     {
         "id": "eq_flamecannon",
@@ -882,10 +882,9 @@
         "name": "Halberd-Gun",
         "source": "core",
         "tags": {"action": true, "weapon": true, "eq_alchemicalammunition": true},
-        "category": "ranged",
+        "category": "melee",
         "distance": 24,
         "stats": {
-            "hands_ranged": 2,
             "hands_melee": 2,
             "ranged": true,
             "melee": true
@@ -1553,14 +1552,6 @@
         "stats": {
         },
         "contextdata": {
-            "equipment_add_to": {
-                "equip_check": [
-                    {
-                        "check_type": "id",
-                        "value": "eq_sniperrifle"
-                    }
-                ]
-            }
         },
         "description": [            
             {
@@ -1876,7 +1867,7 @@
     },
     {
         "id": "eq_ironcapriote",
-        "name": "Iron Capriote",
+        "name": "Iron Capirote",
         "source": "core",
         "tags": {"trait": true, "headgear": true},
         "category": "equipment",
@@ -1976,7 +1967,7 @@
         "id": "eq_ironwallkalkan",
         "name": "Iron Wall Kalkan",
         "source": "core",
-        "tags": {"trait": true, "brazen_bull": true},
+        "tags": {"trait": true},
         "category": "armour",
         "distance": null,
         "stats": {
@@ -2353,7 +2344,7 @@
         ],
         "options": [],
         "keywords": ["kw_grenade","kw_assault","kw_gas","kw_blast"],
-        "modifiers": []
+        "modifiers": ["Blast 3\""]
     },
     {
         "id": "eq_grenadelauncher",
@@ -2387,7 +2378,7 @@
         ],
         "options": [],
         "keywords": ["kw_heavy","kw_shrapnel","kw_blast"],
-        "modifiers": ["Ignore Cover"]
+        "modifiers": ["Ignore Cover","Blast 3\""]
     },
     {
         "id": "eq_gasgrenadelauncher",
@@ -2423,7 +2414,7 @@
         ],
         "options": [],
         "keywords": ["kw_heavy","kw_gas","kw_blast"],
-        "modifiers": ["Ignore Cover", "Ignore Armour", "-1D to Injuries"]
+        "modifiers": ["Ignore Cover", "Ignore Armour", "-1D to Injuries","Blast 3\""]
     },
     {
         "id": "eq_satchelcharge",
@@ -2456,8 +2447,8 @@
             }
         ],
         "options": [],
-        "keywords": ["kw_heavy","kw_consumable","kw_blast"],
-        "modifiers": ["Ignore Cover","+1D to Injuries"]
+        "keywords": ["kw_heavy","kw_consumable","kw_blast","kw_grenade"],
+        "modifiers": ["Ignore Cover","+1D to Injuries","Blast 3\""]
     },
     {
         "id": "eq_antimaterialrifle",
@@ -2559,6 +2550,38 @@
         "options": [],
         "keywords": [],
         "modifiers": ["-1D to Hit","-1D to Injuries"]
+    },
+    {
+        "id": "eq_unarmed_nopenalty",
+        "name": "Unarmed",
+        "source": "core",
+        "tags": {"action": true, "weapon": true,"unarmed": true},
+        "category": "melee",
+        "distance": null,
+        "stats": {
+            "melee": true
+        },
+        "contextdata": {
+            "get_weapon": {}
+        },
+        "description": [   
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Note that you can never fight with unarmed as an Off-Hand weapon to get an additional attack in melee. These rules simply cover all instances where the model fights unarmed and has no other Melee Actions in their profile.",
+                "glossary": [
+                    {"val": "-1 DICE", "id": "kw_minusdice"}
+                ]
+            }  
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Fighting unarmed in the Great War is nigh-suicidal, but some troops carry no melee weapons or their weapons have been lost in the heat of the battle. In such cases, a warrior is forced to defend themselves with fists, kicks and their bare teeth."
+            }
+        ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
     },
     {
         "id": "eq_sacrificialknife",
@@ -3524,7 +3547,7 @@
         ],
         "options": [],
         "keywords": ["kw_heavy","kw_shrapnel"],
-        "modifiers": ["+1D to Injuries","+1D to Hit"]
+        "modifiers": ["+1D to Injuries","+1D to Hit","Blast 3\""]
     },
     {
         "id": "eq_sacrificiallamb",
@@ -3593,7 +3616,7 @@
         ],
         "options": [],
         "keywords": ["kw_heavy","kw_heavy","kw_blast"],
-        "modifiers": ["+1D to Injuries","Ignore Cover"]
+        "modifiers": ["+1D to Injuries","Ignore Cover","Blast 3\""]
     },
     {
         "id": "eq_autocannon",
@@ -3660,7 +3683,7 @@
         ],
         "options": [],
         "keywords": ["kw_blast","kw_gas"],
-        "modifiers": ["Ignore Armour"]
+        "modifiers": ["Ignore Armour","Blast 6\""]
     },
     {
         "id": "eq_gasfilter",
@@ -4026,6 +4049,15 @@
         "stats": {
         },
         "contextdata": {
+            "restriction_override": {
+                "overrides": [
+                    {
+                        "type": "equipment",
+                        "value": "eq_machinearmour",
+                        "replace": "eq_highlandmachinearmour"
+                    }
+                ]
+            },
             "upgrade_stat": {"upgrades": [{"stat": "armour", "value": -3}]},
             "model_equipment_restriction": {
                 "required": [
@@ -4214,7 +4246,9 @@
         "stats": {
         },
         "contextdata": {
-            "keyword_ignore": {"value": "kw_fear"}
+            "keyword_ignore": {"value": "kw_fear"},
+            
+            "upgrade_stat": {"upgrades": [{"stat": "melee", "value": 1}]}
         },
         "description": [       
             {
@@ -4703,7 +4737,7 @@
         "source": "core",
         "tags": {"action": true, "weapon": true},
         "category": "ranged",
-        "distance": 10,
+        "distance": 18,
         "stats": {
             "hands_ranged": 2,
             "ranged": true
@@ -4713,13 +4747,13 @@
         "description": [  
             {
                 "tags": {"desc_type" : "paragraph"},
-                "content": "A primitive matchlock weapon that is simple enough that even a yoke fiend is capable of operating it."
+                "content": "If a model equipped with an arquebus has two hands free, it can use it in melee combat as if it were a trench club."
             }
         ],
         "lore": [            
             {
                 "tags": {"desc_type" : "italic"},
-                "content": "A relic firearm of a bygone era, this weapon is loaded with rusty nails, lead shot, grenade shrapnel and shell pieces, some Mourners carry this weapon and form an honour guard of sorts for the Procession."
+                "content": "A primitive matchlock weapon that is simple enough that even a yoke fiend is capable of operating it."
             }
         ],
         "options": [],
@@ -5105,7 +5139,7 @@
         ],
         "options": [],
         "keywords": ["kw_grenade","kw_assault","kw_shrapnel","kw_blast"],
-        "modifiers": []
+        "modifiers": ["Blast 2\""]
     },
     {
         "id": "eq_tormentorchain",
@@ -5170,7 +5204,7 @@
         ],
         "options": [],
         "keywords": ["kw_grenade","kw_blast"],
-        "modifiers": ["Double Blood Markers"]
+        "modifiers": ["Double Blood Markers","Blast 3\""]
     },
     {
         "id": "eq_themarkofcain",
@@ -6289,7 +6323,7 @@
         "lore": [ ],
         "options": [],
         "keywords": ["kw_blast","kw_shrapnel"],
-        "modifiers": []
+        "modifiers": ["Blast 3\""]
     },
     {
         "id": "eq_artillerywitchinfernalgasbomb",
@@ -6329,7 +6363,7 @@
         "lore": [ ],
         "options": [],
         "keywords": ["kw_blast","kw_gas"],
-        "modifiers": ["Ignore Armour"]
+        "modifiers": ["Ignore Armour","Blast 3\""]
     },
     {
         "id": "eq_sineatertenderizermaul",
@@ -6466,7 +6500,7 @@
         "lore": [  ],
         "options": [],
         "keywords": ["kw_consumable"],
-        "modifiers": []
+        "modifiers": ["Blast 3\""]
     },
     {
         "id": "eq_catherinewheel",
@@ -6664,7 +6698,7 @@
         "lore": [ ],
         "options": [],
         "keywords": ["kw_shrapnel","kw_riskyaction","kw_blast"],
-        "modifiers": []
+        "modifiers": ["Blast 3\""]
     },
     {
         "id": "eq_thedragon_stomp",

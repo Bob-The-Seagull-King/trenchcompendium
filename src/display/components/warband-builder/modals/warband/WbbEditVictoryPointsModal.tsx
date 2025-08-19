@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
-import {faXmark} from "@fortawesome/free-solid-svg-icons";
+import {faArrowRight, faXmark} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 interface WbbEditVictoryPointsProps {
@@ -16,11 +16,14 @@ const WbbEditVictoryPointsModal: React.FC<WbbEditVictoryPointsProps> = ({
                                                                             currentVP,
                                                                             onSubmit
                                                                         }) => {
-    const [selectedVP, setSelectedVP] = useState<number>(currentVP);
+
+    const [selectedVP, setSelectedVP] = useState<number | undefined>(currentVP);
 
     const handleSubmit = () => {
-        onSubmit(selectedVP);
-        onClose();
+        if(selectedVP) {
+            onSubmit(selectedVP);
+            onClose();
+        }
     };
 
     return (
@@ -37,14 +40,47 @@ const WbbEditVictoryPointsModal: React.FC<WbbEditVictoryPointsProps> = ({
             </Modal.Header>
 
             <Modal.Body>
-                <h6>Set Victory Points</h6>
+                <div className={'mb-3'}>
+                    {'Victory Points: ' + currentVP}
+
+                    {(selectedVP != undefined && selectedVP > 0 && selectedVP != currentVP) &&
+                        <>
+                            <FontAwesomeIcon icon={faArrowRight} className={`icon-inline-right mb-1`}/>
+
+                            <span
+                                className={`${selectedVP && selectedVP > currentVP ? 'plus-text' : 'minus-text'} mx-1`}
+                            >
+                                {' '}{selectedVP}
+                            </span>
+                        </>
+                    }
+                </div>
+
+                <label htmlFor={'set-victory-points-input'}>
+                    {'Set Victory Points'}
+                </label>
                 <input
+                    id={'set-victory-points-input'}
                     type="number"
                     className="form-control"
-                    value={selectedVP}
-                    onChange={(e) => setSelectedVP(parseInt(e.target.value) || 0)}
-                    min={0}
+                    value={selectedVP ?? ''}
+                    onChange={(e) => {
+                        const val = e.target.value;
+                        setSelectedVP(val === '' ? undefined : parseInt(val));
+                    }}
+                    onFocus={(e) => e.target.select()}
                 />
+
+                {(typeof selectedVP === 'number' && selectedVP < 0) && (
+                    <div className={'alert alert-warning my-3'}>
+                        <strong>
+                            {'Caution'}
+                        </strong>
+                        <div className={'small'}>
+                            {'You cannot have negative Victory points'}
+                        </div>
+                    </div>
+                )}
             </Modal.Body>
 
             <Modal.Footer>

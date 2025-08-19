@@ -41,7 +41,7 @@ const WbbEditBattleScars: React.FC<WbbEditBattleScarsProps> = ({ show, onClose, 
     };
 
     return (
-        <Modal show={show} onHide={onClose} className="WbbModalEdit WbbEditBattleScars" centered>
+        <Modal show={show} onHide={onClose} className="WbbModal WbbModalSelect WbbEditBattleScars" centered>
             <Modal.Header closeButton={false}>
                 <Modal.Title>Edit Battle Scars</Modal.Title>
 
@@ -90,7 +90,7 @@ const WbbEditBattleScars: React.FC<WbbEditBattleScarsProps> = ({ show, onClose, 
                             <div key={index} className="battle-scar-box">
                                 {/* Show skull icon on the last scar */}
                                 {isSkull &&
-                                    <FontAwesomeIcon icon={faSkull} className={'skull-icon'}/>
+                                    <FontAwesomeIcon icon={faSkull} className={'final-icon'}/>
                                 }
 
                                 { minusScar ? (

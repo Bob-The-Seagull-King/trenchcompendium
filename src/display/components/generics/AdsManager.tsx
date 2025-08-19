@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import {useAuth} from "../../../utility/AuthContext";
 
 declare global {
     interface Window {
@@ -9,21 +10,15 @@ declare global {
     }
 }
 
-const COOKIE_KEY = 'ezoic_ads_consent';
-const isProduction = false;
-// const isProduction = window.location.hostname === 'trench-companion.com';
+//const isProduction = false;
+const isProduction = window.location.hostname === 'trench-companion.com';
 
 export const AdsManager: React.FC = () => {
     const [consent, setConsent] = useState<boolean | null>(null);
+    const { isLoggedIn, userId, authToken,  loadingUser, SiteUser } = useAuth();
 
-    // useEffect(() => {
-    //     if (!isProduction) return;
-    //
-    //     const val = localStorage.getItem(COOKIE_KEY);
-    //     setConsent(val === 'true');
-    // }, []);
 
-    // Show ads in placeholde - check if this is needed?
+    // Show ads in placeholder - check if this is needed?
     useEffect(() => {
         if (!isProduction ) return;
 
@@ -34,7 +29,7 @@ export const AdsManager: React.FC = () => {
         }
     }, [consent]);
 
-    if (!isProduction) return null;
+    if (!isProduction || SiteUser?.Premium.IsPremium) return null;
 
     return (
         <>

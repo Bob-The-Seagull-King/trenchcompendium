@@ -483,10 +483,14 @@
             "location_option": "el_ruinedhouse"
         },
         "contextdata": {
-            "spend_ducats": {
-                "count": 30,
-                "obey_restriction": true,
-                "obey_faction": true
+            "location_rule_option": {},
+            "consumable": {
+                "spend_money": {
+                    "type": 0,
+                    "count": 30,
+                    "obey_restriction": true,
+                    "obey_faction": true
+                }
             }
 
         },
@@ -1121,7 +1125,7 @@
         "options": []
     },
     {
-        "id": "el_survivor_blackgrail",
+        "id": "el_snipersnest_blackgrail",
         "name": "Black Grail",
         "source": "core",
         "tags": {
@@ -1160,7 +1164,7 @@
         "options": []
     },
     {
-        "id": "el_survivor_court",
+        "id": "el_snipersnest_court",
         "name": "The Court",
         "source": "core",
         "tags": {
@@ -1378,10 +1382,14 @@
             "location_option": "el_warbandstrongbox"
         },
         "contextdata": {
-            "spend_ducats": {
-                "count": 120,
-                "obey_restriction": true,
-                "obey_faction": true
+            "location_rule_option": {},
+            "consumable": {
+                "spend_money": {
+                    "type": 0,
+                    "count": 120,
+                    "obey_restriction": true,
+                    "obey_faction": true
+                }
             }
         },
         "description": [            
@@ -1401,10 +1409,14 @@
             "location_option": "el_warbandstrongbox"
         },
         "contextdata": {
-            "spend_glory": {
-                "count": 9,
-                "obey_restriction": true,
-                "obey_faction": true
+            "location_rule_option": {},
+            "consumable": {
+                "spend_money": {
+                    "type": 1,
+                    "count": 9,
+                    "obey_restriction": true,
+                    "obey_faction": true
+                }
             }
         },
         "description": [            
@@ -1424,13 +1436,10 @@
         },
         "contextdata": {
             "location_rule_option": {},
-            "gain_all_from_list": {
-                "count": 1,
-                "obey_restriction": true,
-                "obey_faction": true,
+            "gain_replaced_item": {
                 "treat_as": "eq_musicalinstrument",
                 "auto_replace": true,
-                "id": ["eq_angelicinstrument"]
+                "id": "eq_angelicinstrument"
             }
         },
         "description": [            
@@ -1855,7 +1864,7 @@
     },
     {
         "id": "el_highrankingcaptain",
-        "name": "High-Ranking Captain",
+        "name": "High-Ranking Captive",
         "source": "core",
         "tags": {
             "exploration_table": "et_rarelocations"
@@ -1875,6 +1884,7 @@
             "single": true,
             "category" : "type",
             "type" : "text",
+            "hide": true,
             "strictness" : "strict",
             "predefined_options" : [],
             "option_context" : {"basic_option_default":{}},
@@ -2036,9 +2046,15 @@
             "exploration_table": "et_legendarylocations"
         },
         "contextdata": {
-            "spend_ducats": {
-                "count": 100,
-                "limit": 2
+            "location_rule_option": {},
+            "consumable": {
+                "spend_money": {
+                    "type": 0,
+                    "count": 100,
+                    "limit": 2,
+                    "obey_faction": false,
+                    "include_self": false
+                }
             }
         },
         "description": [            
@@ -2641,11 +2657,11 @@
         "description": [            
             {
                 "tags": {"desc_type" : "default"},
-                "content": "You find a sample of Holy DNA. You can treat any one model in your Warband with it. When this model is activated, one INFECTION MARKER or BLOOD MARKER the model has becomes a BLESSINGS MARKER instead.",
+                "content": "You find a sample of Holy DNA. You can treat any one model in your Warband with it. When this model is activated, one INFECTION MARKER or BLOOD MARKER the model has becomes a BLESSING MARKER instead.",
                 "glossary": [
                     {"val": "INFECTION MARKER", "id": "kw_infectionmarker"},
                     {"val": "BLOOD MARKER", "id": "kw_bloodmarker"},
-                    {"val": "BLESSINGS MARKER", "id": "kw_blessingmarker"}
+                    {"val": "BLESSING MARKER", "id": "kw_blessingmarker"}
                 ]
             }
         ],
@@ -2719,12 +2735,12 @@
             "location_option": "el_golgothatektites"
         },
         "contextdata": {
-            "use_on_equipment": {
-                "required": [
-                    {
-                        "type": "category",
-                        "value": "armour"
-                    }
+            "warband_general_hook": {},
+            "warband_wide": {}, 
+            "add_as_modifier": {},
+            "warband_attatch": {
+                "restriction_eq": [ 
+                    { "rest_type": "category", "value": "armour" }
                 ]
             }
         },
@@ -2740,7 +2756,19 @@
                 ]
             }
         ],
-        "options": []
+        "options": [{
+            "ref_id" : "ot_golgothatektites_apply",
+            "name" : "",
+            "description" : [],
+            "category" : "contextobject",
+            "self_ask": true,
+            "option_context" : {"basic_option_default":{}},
+            "dyna_only": true,
+            "parent_level": 3,
+            "hide": true,
+            "single": true,
+            "question_name": "getEquipmentOptionsFromWarband"
+        }]
     },
     {
         "id": "el_golgothatektites_turnin",
@@ -2758,11 +2786,14 @@
                     }
                 ]
             },
-            "spend_glory": {
-                "count": 15,
-                "add_faction": [
-                    "fc_trenchpilgrim"
-                ]
+            "consumable": {
+                "spend_money": {
+                    "type": 1,
+                    "count": 15,
+                    "obey_faction": false,
+                    "include_self": false,
+                    "include_faction": ["fc_trenchpilgrim","fc_newantioch"]
+                }
             }
         },
         "description": [            

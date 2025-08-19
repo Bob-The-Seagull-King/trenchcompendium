@@ -35,6 +35,9 @@ import WbbModifiersList from './modals/warband/WbbModifiersList';
 import WbbLocationsList from './modals/warband/WbbLocationsList';
 import {useWbbMode} from "../../../context/WbbModeContext";
 import WbbUserinfo from "./WbbUserinfo";
+import WbbEditViewExplorationLocations from "./WbbEditViewExplorationLocations";
+import WbbExplorationDetailView from "./WbbExplorationDetailView";
+import WbbPostGameDetailView from "./WbbPostGameDetailView";
 
 interface WbbEditViewProps {
     warbandData: SumWarband | null;
@@ -60,7 +63,7 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
     }, [warbandData]);
 
     //** Start Detail view stuff
-    type DetailType = 'fighter' | 'stash' | 'warband' | 'campaign' | null;
+    type DetailType = 'fighter' | 'stash' | 'warband' | 'campaign' | 'exploration' | 'post-game' | null;
 
     const [detailType, setDetailType] = useState<DetailType>(null);
     const [detailPayload, setDetailPayload] = useState<any>(null);
@@ -119,18 +122,14 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
     const [theme, setTheme] = useGlobalState('theme');
 
 
-    // Modifier Modal
-    const [showAddModifierModal, setShowAddModifierModal] = useState(false);
-    const handleAddModifier = (modifier: any, selectedOption: any) => {
-        if (!warband) { return; } // Guard
-    };
-
 
     /**
      * View Modes v2
      */
-    const { play_mode, edit_mode, view_mode, print_mode, setMode } = useWbbMode();
+    const { mode, play_mode, edit_mode, view_mode, print_mode, setMode } = useWbbMode();
 
+    /** Print Mode */
+    // Manually exit print mode
     const exitPrintMode = () => {
         setMode('edit');
 
@@ -139,7 +138,62 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
 
         // Remove print data attribute
         document.body.removeAttribute('data-print');
+        // Remove the ?print parameter from the URL and push the change into history
+        const url = new URL(window.location.href);
+        url.searchParams.delete('print');
+        window.history.pushState({}, '', url.toString());
     };
+
+    // Central helper to update the mode based on the current URL
+    const updatePrintModeFromUrl = () => {
+        // Parse the current query string; URL.searchParams returns a URLSearchParams object:contentReference[oaicite:2]{index=2}
+        const params = new URLSearchParams(window.location.search);
+        const isPrint = params.get('print') === 'true';
+
+        if (isPrint) {
+            // Switch to print mode if ?print=true is present
+            setMode('print');
+            document.body.setAttribute('data-print', 'print');
+        } else {
+            if (print_mode) {
+                // Otherwise ensure edit mode
+                setMode('edit');
+            }
+            document.body.removeAttribute('data-print');
+        }
+    };
+
+    // On initial mount and whenever the route or search string changes, apply the correct mode
+    useEffect(() => {
+        updatePrintModeFromUrl();
+    }, [location.pathname, location.search]);
+
+    // Listen for back/forward navigation; the popstate event fires when the user moves within the history stack:contentReference[oaicite:3]{index=3}
+    useEffect(() => {
+        const handlePopState = () => {
+            updatePrintModeFromUrl();
+        };
+
+        window.addEventListener('popstate', handlePopState);
+        return () => {
+            window.removeEventListener('popstate', handlePopState);
+        };
+    }, []);
+
+    // Optionally intercept calls to history.pushState so that programmatic URL changes also update the mode.
+    // pushState itself does not emit a popstate event:contentReference[oaicite:4]{index=4}.
+    useEffect(() => {
+        const originalPushState = window.history.pushState;
+        window.history.pushState = function (...args) {
+            originalPushState.apply(this, args);
+            updatePrintModeFromUrl();
+        };
+
+        return () => {
+            window.history.pushState = originalPushState;
+        };
+    }, []);
+    /** End Print Mode */
 
 
     return (
@@ -203,7 +257,22 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                                             />
                                         }
 
-                                        <WbbFighterShows 
+                                        {/* @TODO: This is a new exploration tab. */}
+                                        {/*{(edit_mode || view_mode) &&*/}
+                                        {/*    <WbbEditViewExplorationLocations*/}
+                                        {/*        onClick={() => openDetail('exploration', null)}*/}
+                                        {/*        isActive={detailType === 'exploration'}*/}
+                                        {/*    />*/}
+                                        {/*}*/}
+
+                                        {/* @TODO: This opens the post-game helper. */}
+                                        {/*<button*/}
+                                        {/*    onClick={() => openDetail('post-game', null)}*/}
+                                        {/*>*/}
+                                        {/*    {'open post game helper'}*/}
+                                        {/*</button>*/}
+
+                                        <WbbFighterShows
                                             openDetail={openDetail}
                                             detailType={detailType}
                                             detailPayload={detailPayload}
@@ -249,6 +318,21 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                                             />
                                         )}
 
+                                        {/* The Campaign Detail View */}
+                                        {detailType === 'exploration' && (
+                                            <WbbExplorationDetailView
+                                                onClose={closeDetail}
+                                            />
+                                        )}
+
+                                        {/* The Post Ganme Helper View */}
+                                        {/* @TODO this is the post game helper detail view WIP */}
+                                        {/*{detailType === 'post-game' && (*/}
+                                        {/*    <WbbPostGameDetailView*/}
+                                        {/*        onClose={closeDetail}*/}
+                                        {/*    />*/}
+                                        {/*)}*/}
+
                                         {/* Empty Fallback */}
                                         {detailType === null && (
                                             <div className={'selected-item-empty'}>
@@ -265,11 +349,6 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                                     onCloseMercenary={() => setShowAddFighterMercenaryModal(false)}
                                     onCloseElite={() => setShowAddFighterEliteModal(false)}
                                     onCloseTroop={() => setShowAddFighterTroopModal(false)}
-                                />
-                                <WbbModalAddModifier
-                                    show={showAddModifierModal}
-                                    onClose={() => setShowAddModifierModal(false)}
-                                    onSubmit={handleAddModifier}
                                 />
                             </>
                         }
