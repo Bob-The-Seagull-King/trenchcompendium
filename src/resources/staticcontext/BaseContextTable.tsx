@@ -2518,35 +2518,50 @@ export const BaseContextCallTable : CallEventTable = {
                 if (ModelItem.EquipmentItem == undefined) {
                     continue;
                 }
+                let is_added = false
                 for (let j = 0; j < SubItem["restriction"].length; j++) {
                     if (SubItem["restriction"][j].category) {
                         if ( (ModelItem.EquipmentItem.Category == SubItem["restriction"][j].category)) {
-                            NewChoices.push(relayVar[i])
-
-                            const EventProc: EventRunner = new EventRunner();
-
-                            const result = await EventProc.runEvent(
-                                "getEquipmentRestriction",
-                                ModelItem,
-                                [],
-                                [],
-                                null
-                            );
-                            ModelItem.RestrictedEquipment = result;
-
-                            const result_presentation = await EventProc.runEvent(
-                                "getEquipmentRestrictionPresentable",
-                                ModelItem,
-                                [],
-                                [],
-                                ModelItem.RestrictedEquipment
-                            );
-
-                            relayVar[i].display_str = ModelItem.Name + (" (" + ModelItem.Cost.toString() + " " + getCostType(ModelItem.CostType) + ") ") + (ModelItem.Limit != 0? " (Limit " + ModelItem.Limit + ")" : "") + (result_presentation.length > 0? " (" + result_presentation.join(', ') + " only)" : "")
-
+                            is_added = true;
+                        }
+                    } 
+                    if (SubItem["restriction"][j].antitag) {
+                        if (containsTag(ModelItem.EquipmentItem.Tags, SubItem["restriction"][j].antitag)) {
+                            is_added = false;
                             break;
                         }
-                    }
+                    } 
+                    if (SubItem["restriction"][j].tag) {
+                        if (containsTag(ModelItem.EquipmentItem.Tags, SubItem["restriction"][j].antitag)) {
+                            is_added = true;
+                        }
+                    } 
+                }
+                if (is_added == true) {
+                    NewChoices.push(relayVar[i])
+
+                        const EventProc: EventRunner = new EventRunner();
+
+                        const result = await EventProc.runEvent(
+                            "getEquipmentRestriction",
+                            ModelItem,
+                            [],
+                            [],
+                            null
+                        );
+                        ModelItem.RestrictedEquipment = result;
+
+                        const result_presentation = await EventProc.runEvent(
+                            "getEquipmentRestrictionPresentable",
+                            ModelItem,
+                            [],
+                            [],
+                            ModelItem.RestrictedEquipment
+                        );
+
+                        relayVar[i].display_str = ModelItem.Name + (" (" + ModelItem.Cost.toString() + " " + getCostType(ModelItem.CostType) + ") ") + (ModelItem.Limit != 0? " (Limit " + ModelItem.Limit + ")" : "") + (result_presentation.length > 0? " (" + result_presentation.join(', ') + " only)" : "")
+
+                        break;
                 }
             }
 
