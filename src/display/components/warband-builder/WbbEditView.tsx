@@ -35,9 +35,12 @@ import WbbModifiersList from './modals/warband/WbbModifiersList';
 import WbbLocationsList from './modals/warband/WbbLocationsList';
 import {useWbbMode} from "../../../context/WbbModeContext";
 import WbbUserinfo from "./WbbUserinfo";
-import WbbEditViewExplorationLocations from "./WbbEditViewExplorationLocations";
-import WbbExplorationDetailView from "./WbbExplorationDetailView";
+// import WbbEditViewExplorationLocations from "./WbbEditViewExplorationLocations";
+// import WbbExplorationDetailView from "./WbbExplorationDetailView";
 import WbbPostGameDetailView from "./WbbPostGameDetailView";
+import WbbExplorationDetailView from "./WbbExplorationDetailView";
+import WbbEditViewExplorationLocations from "./WbbEditViewExplorationLocations";
+import WbbGameReportDetailView from "./GameReporter/WbbGameReporterDetailView";
 
 interface WbbEditViewProps {
     warbandData: SumWarband | null;
@@ -63,7 +66,7 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
     }, [warbandData]);
 
     //** Start Detail view stuff
-    type DetailType = 'fighter' | 'stash' | 'warband' | 'campaign' | 'exploration' | 'post-game' | null;
+    type DetailType = 'fighter' | 'stash' | 'warband' | 'campaign' | 'exploration' | 'post-game' | 'game-report' | null;
 
     const [detailType, setDetailType] = useState<DetailType>(null);
     const [detailPayload, setDetailPayload] = useState<any>(null);
@@ -258,19 +261,24 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                                         }
 
                                         {/* @TODO: This is a new exploration tab. */}
-                                        {/*{(edit_mode || view_mode) &&*/}
-                                        {/*    <WbbEditViewExplorationLocations*/}
-                                        {/*        onClick={() => openDetail('exploration', null)}*/}
-                                        {/*        isActive={detailType === 'exploration'}*/}
-                                        {/*    />*/}
-                                        {/*}*/}
+                                        {(edit_mode || view_mode) &&
+                                            <WbbEditViewExplorationLocations
+                                                onClick={() => openDetail('exploration', null)}
+                                                isActive={detailType === 'exploration'}
+                                            />
+                                        }
 
                                         {/* @TODO: This opens the post-game helper. */}
-                                        {/*<button*/}
-                                        {/*    onClick={() => openDetail('post-game', null)}*/}
-                                        {/*>*/}
-                                        {/*    {'open post game helper'}*/}
-                                        {/*</button>*/}
+                                        <button
+                                            onClick={() => openDetail('post-game', null)}
+                                        >
+                                            {'open post game helper'}
+                                        </button>
+                                        <button
+                                            onClick={() => openDetail('game-report', null)}
+                                        >
+                                            {'open game reporter'}
+                                        </button>
 
                                         <WbbFighterShows
                                             openDetail={openDetail}
@@ -325,13 +333,21 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                                             />
                                         )}
 
-                                        {/* The Post Ganme Helper View */}
+                                        {/* The Post Game Helper View */}
                                         {/* @TODO this is the post game helper detail view WIP */}
-                                        {/*{detailType === 'post-game' && (*/}
-                                        {/*    <WbbPostGameDetailView*/}
-                                        {/*        onClose={closeDetail}*/}
-                                        {/*    />*/}
-                                        {/*)}*/}
+                                        {detailType === 'post-game' && (
+                                            <WbbPostGameDetailView
+                                                onClose={closeDetail}
+                                            />
+                                        )}
+
+                                        {/* The Game reporter View */}
+                                        {/* @TODO this is the Game reporter detail view WIP */}
+                                        {detailType === 'game-report' && (
+                                            <WbbGameReportDetailView
+                                                onClose={closeDetail}
+                                            />
+                                        )}
 
                                         {/* Empty Fallback */}
                                         {detailType === null && (

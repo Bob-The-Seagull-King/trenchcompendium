@@ -5,25 +5,18 @@ import {faCheck, faChevronLeft, faDownload, faExclamation, faGift, faInfoCircle,
 import {useWarband} from "../../../context/WarbandContext";
 import WbbTextarea from "./WbbTextarea";
 import WbbOptionBox from "./WbbOptionBox";
-import WbbEditVictoryPointsModal from "./modals/warband/WbbEditVictoryPointsModal";
-import WbbEditPatronSelectionModal from "./modals/warband/WbbEditPatronSelectionModal";
-import WbbEditCampaignCycleModal from "./modals/warband/WbbEditCampaignCycleModal";
-import { Patron } from '../../../classes/feature/skillgroup/Patron';
-import { ToolsController } from '../../../classes/_high_level_controllers/ToolsController';
-import WbbEditFailedPromotionsModal from './modals/warband/WbbEditFailedPromotionsModal';
 import {useWbbMode} from "../../../context/WbbModeContext";
-import WbbEditViewExplorationLocations from "./WbbEditViewExplorationLocations";
 import WbbLocationsList from "./modals/warband/WbbLocationsList";
-import WbbPostGameDetailElite from "./micro-elements/WbbPostGameDetailElite";
-import WbbPostGameDetailTroopInjuries from "./micro-elements/WbbPostGameDetailTroopInjuries";
-import WbbPostGameDetailPromotions from "./micro-elements/WbbPostGameDetailPromotions";
-import WbbPostGameDetailExploration from "./micro-elements/WbbPostGameDetailExploration";
+import WbbPostGameDetailElite from "./PostGame/WbbPostGameDetailElite";
+import WbbPostGameDetailTroopInjuries from "./PostGame/WbbPostGameDetailTroopInjuries";
+import WbbPostGameDetailPromotions from "./PostGame/WbbPostGameDetailPromotions";
+import WbbPostGameDetailExploration from "./PostGame/WbbPostGameDetailExploration";
 import PostGameContext, {GloriousDeed} from "../../../context/PostGameContext";
-import WbbPostGameDetailGame from "./micro-elements/WbbPostGameDetailGame";
+import WbbPostGameDetailGame from "./PostGame/WbbPostGameDetailGame";
 import {RealWarbandPurchaseModel} from "../../../classes/saveitems/Warband/Purchases/WarbandPurchase";
-import WbbPostGameDetailCustom from "./micro-elements/WbbPostGameDetailCustom";
-import WbbPostGameDetailSalvageGolem from "./micro-elements/WbbPostGameDetailSalvageGolem";
-import WbbPostGameDetailKnighthood from "./micro-elements/WbbPostGameDetailKnighthood";
+import WbbPostGameDetailCustom from "./PostGame/WbbPostGameDetailCustom";
+import WbbPostGameDetailSalvageGolem from "./PostGame/WbbPostGameDetailSalvageGolem";
+import WbbPostGameDetailKnighthood from "./PostGame/WbbPostGameDetailKnighthood";
 
 interface WbbPostGameDetailViewProps {
     onClose: () => void;
