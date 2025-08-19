@@ -578,6 +578,33 @@
         "new_abilities" : []
     },
     {
+        "id": "md_goeticwarlock_mv_knightsofavarice",
+        "name": "Goetic Warlock",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "modify_equipment_block": {}  ,
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_goeticwarlock"
+                    }
+                ]
+            }},
+        "base_id": "md_goeticwarlock",
+        "variant_name": "Knights_of_Avarice",
+        "team": "hell",
+        "stats" : {
+            "potential": 0,
+            "mercenary": false
+        },
+        "cut_keywords" : [],
+        "keywords" : [],
+        "cut_abilities" : [],
+        "new_abilities" : []
+    },
+    {
         "id": "md_ecclesiasticprisoner_sacredaffliction",
         "name": "Ecclesiastic Prisoner (Sacred Affliction)",
         "source": "core",
