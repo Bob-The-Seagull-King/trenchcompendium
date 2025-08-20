@@ -2935,6 +2935,8 @@ export const BaseContextCallTable : CallEventTable = {
             for (let i = 0; i < Models.length; i++) {
                 let isValid = true;
 
+                if (Models[i].model.IsMercenary()) {continue;}
+
                 if (context_static.ContextKeys["added_context"]) {
                     const cntxt = context_static.ContextKeys["added_context"]
                     if (cntxt["exclusive"]) {
@@ -2979,6 +2981,8 @@ export const BaseContextCallTable : CallEventTable = {
             
             for (let i = 0; i < Models.length; i++) {
                 let isValid = true;
+                
+                if (Models[i].model.IsMercenary()) {continue;}
 
                 if (Models[i].model == sourceband) {
                     isValid = false;
