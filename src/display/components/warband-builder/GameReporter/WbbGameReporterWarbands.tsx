@@ -5,6 +5,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faXmark} from "@fortawesome/free-solid-svg-icons";
 import {returnDescription} from "../../../../utility/util";
 import WbbOptionSelect from "../modals/warband/WbbOptionSelect";
+import {useWarband} from "../../../../context/WarbandContext";
 
 const availableWarbands = [
     { id: "w1", name: "Iron Fists" },
@@ -15,6 +16,7 @@ const availableWarbands = [
 const WbbGameReporterWarbands: React.FC = () => {
     const { state, addWarband, removeWarband } = useWbbGameReportDetailView();
     const [showWarbandsModal, setShowWarbandsModal] = useState(false);
+    const { warband } = useWarband(); // users Warband
 
     const handleAddWarband = (id: string) => {
         const warband = availableWarbands.find((w) => w.id === id);
@@ -33,12 +35,14 @@ const WbbGameReporterWarbands: React.FC = () => {
                 {state.warbands.map((w) => (
                     <li key={w.id} className="list-group-item d-flex justify-content-between align-items-center">
                         {w.name}
-                        <button
-                            className="btn btn-sm btn-outline-danger"
-                            onClick={() => removeWarband(w.id)}
-                        >
-                            Remove
-                        </button>
+                        {(warband && warband.warband_data.GetPostId() != w.id ) &&
+                            <button
+                                className="btn btn-sm btn-outline-danger"
+                                onClick={() => removeWarband(w.id)}
+                            >
+                                Remove
+                            </button>
+                        }
                     </li>
                 ))}
             </ul>

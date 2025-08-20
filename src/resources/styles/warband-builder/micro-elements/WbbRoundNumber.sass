@@ -1,9 +1,8 @@
-// // // // //
-//
-// Campaign round number
-//
 
-.CMRoundNumber
+.WbbRoundNumber
+    position: relative
+    display: inline-block
+    z-index: 2
     font-family: $font-headline
     font-size: 18px
     width: 40px
@@ -39,3 +38,13 @@
         &:before
             width: 30px
             height: 30px
+
+    &.state-previous
+        &:before
+            border-color: $color-text-muted
+            background-color: $color-bg-3
+    &.state-next
+        opacity: 0.5
+        &:before
+            border-color: $color-text-muted
+            background-color: $color-bg-3

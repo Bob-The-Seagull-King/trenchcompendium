@@ -41,6 +41,7 @@ import WbbPostGameDetailView from "./WbbPostGameDetailView";
 import WbbExplorationDetailView from "./WbbExplorationDetailView";
 import WbbEditViewExplorationLocations from "./WbbEditViewExplorationLocations";
 import WbbGameReportDetailView from "./GameReporter/WbbGameReporterDetailView";
+import WbbRoundIndicator from "./WbbRoundIndicator";
 
 interface WbbEditViewProps {
     warbandData: SumWarband | null;
@@ -233,6 +234,10 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                                     />
                                 </div>
 
+                                <WbbRoundIndicator
+                                    detailsOpen={detailType}
+                                />
+
                                 <div className={'container WbbEditViewMain'}>
 
                                     <div className={`warband-wrap ${detailType ? 'details-open' : ''}`}>
@@ -268,17 +273,7 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                                             />
                                         }
 
-                                        {/* @TODO: This opens the post-game helper. */}
-                                        <button
-                                            onClick={() => openDetail('post-game', null)}
-                                        >
-                                            {'open post game helper'}
-                                        </button>
-                                        <button
-                                            onClick={() => openDetail('game-report', null)}
-                                        >
-                                            {'open game reporter'}
-                                        </button>
+
 
                                         <WbbFighterShows
                                             openDetail={openDetail}
@@ -323,6 +318,8 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                                         {detailType === 'campaign' && (
                                             <WbbCampaignDetailView
                                                 onClose={closeDetail}
+                                                openGameReporter={() => openDetail('game-report', null)}
+                                                openPostGame={() => openDetail('post-game', null)}
                                             />
                                         )}
 
