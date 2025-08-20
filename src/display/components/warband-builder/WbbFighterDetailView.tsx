@@ -396,30 +396,34 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                   * Other Upgrades
                   * - This is split into goetic and regular upgrades
                   */}
-                {Object.keys(complexstate.upgrades).length > 0 &&
+                {(Object.keys(complexstate.upgrades).length > 0 && !play_mode) &&
                     <>
                         {Object.keys(complexstate.upgrades).filter((item) => (
                             (edit_mode) || (complexstate.upgrades[item].upgrades.filter((subitem : MemberUpgradePresentation) => subitem.purchase != null).length > 0)
                         )).map((item, index) => (
-                            <WbbFighterCollapse
-                                title={makestringpresentable(item)}
-                                initiallyOpen={false}
-                                key={index}
-                            >
-                                <>
-                                    {item != "upgrades" &&
-                                        <p>
-                                            {fighter.GetFighterName() + " can choose up to " + complexstate.upgrades[item].limit.toString() + " " + makestringpresentable(item) + "."}
-                                        </p>
-                                    }
+                            <>
+                                {complexstate.upgrades[item].limit > 0 &&
+                                    <WbbFighterCollapse
+                                        title={makestringpresentable(item)}
+                                        initiallyOpen={false}
+                                        key={index}
+                                    >
+                                        <>
+                                            {item != "upgrades" &&
+                                                <p>
+                                                    {fighter.GetFighterName() + " can choose up to " + complexstate.upgrades[item].limit.toString() + " " + makestringpresentable(item) + "."}
+                                                </p>
+                                            }
 
-                                    <div key={complexstate.keyvar}>
-                                        {complexstate.upgrades[item].upgrades.filter((item) => ((edit_mode) || item.purchase != null)).map((subitem, index) => (
-                                            <WbbOptionItem key={index.toString() + updateKey.toString()} option={subitem} owner={fighter} category={item}/>
-                                        ))}
-                                    </div>
-                                </>
-                            </WbbFighterCollapse>
+                                            <div key={complexstate.keyvar}>
+                                                {complexstate.upgrades[item].upgrades.filter((item) => ((edit_mode) || item.purchase != null)).map((subitem, index) => (
+                                                    <WbbOptionItem key={index.toString() + updateKey.toString()} option={subitem} owner={fighter} category={item}/>
+                                                ))}
+                                            </div>
+                                        </>
+                                    </WbbFighterCollapse>
+                                }
+                            </>
                         ))}
                     </>
                 }
