@@ -396,30 +396,36 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                   * Other Upgrades
                   * - This is split into goetic and regular upgrades
                   */}
-                {Object.keys(complexstate.upgrades).length > 0 &&
+                {(Object.keys(complexstate.upgrades).length > 0 && !play_mode) &&
                     <>
+                        {/* For each type of upgrades */}
                         {Object.keys(complexstate.upgrades).filter((item) => (
                             (edit_mode) || (complexstate.upgrades[item].upgrades.filter((subitem : MemberUpgradePresentation) => subitem.purchase != null).length > 0)
                         )).map((item, index) => (
-                            <WbbFighterCollapse
-                                title={makestringpresentable(item)}
-                                initiallyOpen={false}
-                                key={index}
-                            >
-                                <>
-                                    {item != "upgrades" &&
-                                        <p>
-                                            {fighter.GetFighterName() + " can choose up to " + complexstate.upgrades[item].limit.toString() + " " + makestringpresentable(item) + "."}
-                                        </p>
-                                    }
+                            <>
+                                {/* If Goetic and has 0 options -> do not show */}
+                                {(complexstate.upgrades[item].limit > 0 || item != "goetic" )&&
+                                    <WbbFighterCollapse
+                                        title={makestringpresentable(item)}
+                                        initiallyOpen={false}
+                                        key={index}
+                                    >
+                                        <>
+                                            {item != "upgrades" &&
+                                                <p>
+                                                    {fighter.GetFighterName() + " can choose up to " + complexstate.upgrades[item].limit.toString() + " " + makestringpresentable(item) + "."}
+                                                </p>
+                                            }
 
-                                    <div key={complexstate.keyvar}>
-                                        {complexstate.upgrades[item].upgrades.filter((item) => ((edit_mode) || item.purchase != null)).map((subitem, index) => (
-                                            <WbbOptionItem key={index.toString() + updateKey.toString()} option={subitem} owner={fighter} category={item}/>
-                                        ))}
-                                    </div>
-                                </>
-                            </WbbFighterCollapse>
+                                            <div key={complexstate.keyvar}>
+                                                {complexstate.upgrades[item].upgrades.filter((item) => ((edit_mode) || item.purchase != null)).map((subitem, index) => (
+                                                    <WbbOptionItem key={index.toString() + updateKey.toString()} option={subitem} owner={fighter} category={item}/>
+                                                ))}
+                                            </div>
+                                        </>
+                                    </WbbFighterCollapse>
+                                }
+                            </>
                         ))}
                     </>
                 }
@@ -881,6 +887,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
             {(play_mode) &&
                 <div className={'fighter-card-play-mode-info'}  key={complexstate.keyvar}>
 
+                    {/* Equip in play mode */}
                     <div className={'play-mode-equipment-wrap'}>
                         {complexstate.allmodelequip.filter((item) =>
                             ((item.equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment).Category == "ranged")
@@ -960,6 +967,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                         }
                     </div>
 
+                    {/* Abilities in Play mode */}
                     {complexstate.abilities.length > 0 &&
                     <div className={'play-mode-abilities-wrap'}>
                         <h3>{'Abilities'}</h3>
@@ -969,6 +977,31 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                     </div>
                     }
 
+                    {/* Upgrades & Goetic in play mode */}
+                    {Object.keys(complexstate.upgrades).length > 0 &&
+                        <>
+                            {Object.keys(complexstate.upgrades).filter((item) => (
+                                (edit_mode) || (complexstate.upgrades[item].upgrades.filter((subitem: MemberUpgradePresentation) => subitem.purchase != null).length > 0)
+                            )).map((item, index) => (
+                                    <div className={'play-mode-upgrades-wrap'}
+                                        key={complexstate.keyvar}
+                                    >
+                                        {item == "upgrades" ? (
+                                            <h3>{'Upgrades'}</h3>
+                                        ) :(
+                                            <h3>{'Goetic'}</h3>
+                                        )}
+
+                                        {complexstate.upgrades[item].upgrades.filter((item) => ((edit_mode) || item.purchase != null)).map((subitem, index) => (
+                                            <WbbOptionItem key={index.toString() + updateKey.toString()}
+                                                           option={subitem} owner={fighter} category={item}/>
+                                        ))}
+                                    </div>
+                            ))}
+                        </>
+                    }
+
+                    {/* Skills / Advancements in play mode */}
                     {fighter.GetSkillsList().length > 0 &&
                         <div className={'play-mode-advancements-wrap'}>
                             <h3>{'Advancements'}</h3>
@@ -980,6 +1013,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
 
                     }
 
+                    {/* Injuries in play mode */}
                     {fighter.GetInjuriesList().length > 0 &&
                     <div className={'play-mode-injuries-wrap'} >
                         <h3>{'Injuries'}</h3>
