@@ -1271,8 +1271,7 @@ class WarbandMember extends DynamicContextObject {
 
                 }
             }
-        }        
-
+        }       
         this.GeneralCache.upgrade_collections = completegroups
         return completegroups;
 
@@ -1573,7 +1572,7 @@ class WarbandMember extends DynamicContextObject {
             } else {
                 discount_val += ducatbudget
             }
-            canaddupgrade = (this.MyContext as UserWarband).GetSumCurrentDucats() >= (maxccurcostount - discount_val);
+            canaddupgrade = canaddupgrade && (this.MyContext as UserWarband).GetSumCurrentDucats() >= (maxccurcostount - discount_val);
         }
         if (upg.CostType == 1) {
             const glorybudget = await this.GetUpgradeBudgetGlory()
@@ -1582,7 +1581,7 @@ class WarbandMember extends DynamicContextObject {
             } else {
                 discount_val += glorybudget
             }
-            canaddupgrade = (this.MyContext as UserWarband).GetSumCurrentGlory() >= (maxccurcostount - discount_val);
+            canaddupgrade = canaddupgrade && (this.MyContext as UserWarband).GetSumCurrentGlory() >= (maxccurcostount - discount_val);
         }
         if (this.IsUnRestricted == true) {
             return {
@@ -1637,7 +1636,7 @@ class WarbandMember extends DynamicContextObject {
         }
 
         if (canaddupgrade) {
-                canaddupgrade = ((this.MyContext as UserWarband).GetCountOfUpgradeRel(upg.ID) < maxcount || ((upg.WarbandLimit == 0)))
+            canaddupgrade = canaddupgrade && ((this.MyContext as UserWarband).GetCountOfUpgradeRel(upg.ID) < maxcount || ((upg.WarbandLimit == 0)))
         }
         if (canaddupgrade) {
             canaddupgrade = await Events.runEvent(

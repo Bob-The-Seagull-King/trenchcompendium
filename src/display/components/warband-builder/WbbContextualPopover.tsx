@@ -65,6 +65,11 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
 
     // change export text based on type
     useEffect(() => {
+
+        async function TTSExport() {
+            const TTS_Export = await (item as SumWarband).warband_data.BuildExportJSON()
+            setExportText(TTS_Export.join('\n'));
+        }
         // Guard check -> Only do if item is SumWarband
         if (
             !item ||
@@ -80,7 +85,7 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
         } else if (exportType === 'compact') {
             setExportText((item as SumWarband).warband_data.BuildExport(false).join('\n'));
         } else if (exportType === 'tts-json') {
-            setExportText((item as SumWarband).warband_data.BuildExportJSON().join('\n'));
+            TTSExport();
         }
     }, [exportType, item]);
 

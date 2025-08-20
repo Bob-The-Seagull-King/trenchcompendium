@@ -578,6 +578,33 @@
         "new_abilities" : []
     },
     {
+        "id": "md_goeticwarlock_mv_knightsofavarice",
+        "name": "Goetic Warlock",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "modify_equipment_block": {}  ,
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_goeticwarlock"
+                    }
+                ]
+            }},
+        "base_id": "md_goeticwarlock",
+        "variant_name": "Knights_of_Avarice",
+        "team": "hell",
+        "stats" : {
+            "potential": 0,
+            "mercenary": false
+        },
+        "cut_keywords" : [],
+        "keywords" : [],
+        "cut_abilities" : [],
+        "new_abilities" : []
+    },
+    {
         "id": "md_ecclesiasticprisoner_sacredaffliction",
         "name": "Ecclesiastic Prisoner (Sacred Affliction)",
         "source": "core",
@@ -678,6 +705,12 @@
                 ]
             }
         },
+        "description": [    
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You can only buy two pieces of equipment made for Shrine Anchorites. Each Anchorite is equipped with a special suit of armour (reflected in the profile), a Combat Helmet, and a Bonebreaker Mace. These pieces of equipment are built into the integrity of its construction and cannot be removed or lost in any way. The shrine is also equipped with a Catherine Wheel, which you may swap out for another of its special Anchorite Weapons. The Anchorite may make one attack ACTION with each of these weapons in Melee Combat and may make no other attacks during its Activation (so it can make two attacks per Activation)."
+            }
+        ],
         "base_id": "md_anchoriteshrine",
         "variant_name": "War_Pilgrimage_of_Saint_Methodius",
         "team": "faithful",

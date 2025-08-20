@@ -103,6 +103,25 @@ class WarbandManager {
         }
         return null;
     }  
+    
+    /**
+     * @param _name The name of the item to find
+     * @returns The first instance of a item with that name
+     */
+    public GetItemByBaseID(_name : string) {
+        let i = 0;
+        for (i=0; i < this.CurWarbands().length ; i++) {
+            try {
+                const nameval = this.CurWarbands()[i].warband_data.ID 
+                if ((nameval != undefined? nameval : "" ).trim() == _name) {
+                    return this.CurWarbands()[i]
+                }
+            } catch (e) {
+                console.log("Broken Save Item Found")
+            }
+        }
+        return null;
+    }  
 
     /**
      * @param _name The name of the item to find

@@ -1125,7 +1125,7 @@
         "options": []
     },
     {
-        "id": "el_survivor_blackgrail",
+        "id": "el_snipersnest_blackgrail",
         "name": "Black Grail",
         "source": "core",
         "tags": {
@@ -1164,7 +1164,7 @@
         "options": []
     },
     {
-        "id": "el_survivor_court",
+        "id": "el_snipersnest_court",
         "name": "The Court",
         "source": "core",
         "tags": {

@@ -274,7 +274,7 @@
     {
         "id": "rel_md_eq_anchoriteshrine_saintmethodius_wheel",
         "source": "core",
-        "tags": {},
+        "tags": {"methodius": true},
         "name": "Anchorite Shrine Equipment",
         "contextdata": {},
         "options": [],

@@ -29,6 +29,8 @@ import { Model } from '../../feature/model/Model';
 import { Equipment, EquipmentRestriction } from '../../feature/equipment/Equipment';
 import { Skill } from '../../feature/ability/Skill';
 import { ExplorationFactory } from '../../../factories/features/ExplorationFactory';
+import { SumWarband, WarbandManager } from './WarbandManager';
+import { ConvertToTTSExport } from './Converter/TTSExporter';
 
 interface WarbandDebt {
     ducats : number,
@@ -2518,56 +2520,20 @@ class UserWarband extends DynamicContextObject {
      *
      * @constructor
      */
-    public BuildExportJSON () {
+    public async BuildExportJSON () {
 
-        // @TODO: create JSON in this structure:
-        // - warband-id (8511)
-        // - warband-url ('https://trench-companion.com/warband/detail/8511')
-        // - warband-name ('Lorem ipsum dolor sit')
-        // - ducat-bank (123) // unspent ducats
-        // - glory-bank (2) // unspent glory
-        // - ducat-rating (699) // active fighters and equip
-        // - glory-rating (2) // active fighters and equip
-        // - models []
-        // - - model-name ('Plague knight')
-        // - - model-id ('md_plagueknight')
-        // - - name ('Olaf')
-        // - - stat-move ('6"/Infantry')
-        // - - stat-melee('+1D')
-        // - - stat-ranged ('0')
-        // - - stat-armour ('-2')
-        // - - cost
-        // - - - ducats (120)
-        // - - - glory (3)
-        // - - equipment []
-        // - - - equipment-name ('Locust Spitter')
-        // - - - equipment-id ('eq_locustspitter')
-        // - - - equipment-type ('melee weapon' | 'ranged weapon' | 'armour' | 'equipment')
-        // - - abilities []
-        // - - - ability-name ('On My Command!')
-        // - - - ability-id ('ab_onmycommand')
-        // - - upgrades []
-        // - - - upgrade-name ('Rapid Assault')
-        // - - - upgrade-id ('up_rapidassault')
-        // - - advancements []
-        // - - - advancement-name ('Relentless Charge')
-        // - - - advancement-id ('sk_relentlesscharge')
-        // - - injuries []
-        // - - - injury-name ('Paranoid')
-        // - - - injury-id ('in_paranoid')
-        // - - keywords []
-        // - - - keyword-name ('Strong')
-        // - - - keyword-id ('kw_strong')
+        this.ConvertToInterface();
+        const WbManager : WarbandManager = ToolsController.getInstance().UserWarbandManager;
+        const WBUser : SumWarband | null = WbManager.GetItemByBaseID(this.ID);
 
-        const LineList : string[] = [];
+        if (WBUser == null) {return ["Something Went Wrong"]}
 
-        LineList.push(" ")
-        LineList.push("This feature will be available soon")
-        LineList.push(" ")
+        const EXPORT = await ConvertToTTSExport(WBUser);
+        return [JSON.stringify(EXPORT, null, 2)];
 
-        return LineList;
     }
 }
+
 
 export {IUserWarband, UserWarband}
 
