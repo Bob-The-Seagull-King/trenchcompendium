@@ -2524,13 +2524,13 @@ export const BaseContextCallTable : CallEventTable = {
                         if ( (ModelItem.EquipmentItem.Category == SubItem["restriction"][j].category)) {
                             is_added = true;
                         }
-                    } 
+                    }/* 
                     if (SubItem["restriction"][j].antitag != undefined && SubItem["restriction"][j].antitag != null) {
                         if (containsTag(ModelItem.EquipmentItem.Tags, SubItem["restriction"][j].antitag)) {
                             is_added = false;
                             break;
                         }
-                    } 
+                    } */
                     if (SubItem["restriction"][j].tag) {
                         if (containsTag(ModelItem.EquipmentItem.Tags, SubItem["restriction"][j].tag)) {
                             is_added = true;
