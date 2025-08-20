@@ -2518,19 +2518,19 @@ export const BaseContextCallTable : CallEventTable = {
                 if (ModelItem.EquipmentItem == undefined) {
                     continue;
                 }
-                let is_added = false
+                let is_added = true
                 for (let j = 0; j < SubItem["restriction"].length; j++) {
                     if (SubItem["restriction"][j].category) {
                         if ( (ModelItem.EquipmentItem.Category == SubItem["restriction"][j].category)) {
                             is_added = true;
                         }
-                    }/* 
+                    }
                     if (SubItem["restriction"][j].antitag != undefined && SubItem["restriction"][j].antitag != null) {
                         if (containsTag(ModelItem.EquipmentItem.Tags, SubItem["restriction"][j].antitag)) {
                             is_added = false;
                             break;
                         }
-                    } */
+                    }
                     if (SubItem["restriction"][j].tag) {
                         if (containsTag(ModelItem.EquipmentItem.Tags, SubItem["restriction"][j].tag)) {
                             is_added = true;
