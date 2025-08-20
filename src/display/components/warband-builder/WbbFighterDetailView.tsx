@@ -398,11 +398,13 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                   */}
                 {(Object.keys(complexstate.upgrades).length > 0 && !play_mode) &&
                     <>
+                        {/* For each type of upgrades */}
                         {Object.keys(complexstate.upgrades).filter((item) => (
                             (edit_mode) || (complexstate.upgrades[item].upgrades.filter((subitem : MemberUpgradePresentation) => subitem.purchase != null).length > 0)
                         )).map((item, index) => (
                             <>
-                                {complexstate.upgrades[item].limit > 0 &&
+                                {/* If Goetic and has 0 options -> do not show */}
+                                {(complexstate.upgrades[item].limit > 0 || item != "goetic" )&&
                                     <WbbFighterCollapse
                                         title={makestringpresentable(item)}
                                         initiallyOpen={false}
