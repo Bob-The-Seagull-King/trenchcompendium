@@ -2467,6 +2467,8 @@ export const BaseContextCallTable : CallEventTable = {
                                         }
                                     }
                                     if (ispresent == false) {
+                                        console.log("IS PRESENT")
+                                        console.log(selection.SelectedChoice.value.ID)
                                         relayVar.push(selection.SelectedChoice.value)
                                     }
                                 }
@@ -2511,14 +2513,13 @@ export const BaseContextCallTable : CallEventTable = {
             const NewChoices : IChoice[] = []
             const SubItem = context_func["additions"][trackVal]
             for (let i = 0; i < relayVar.length; i++) {
-
                 const ModelItem = ((relayVar[i].value instanceof FactionEquipmentRelationshipModule.FactionEquipmentRelationship)? relayVar[i].value :
                     await EquipmentFactoryModule.EquipmentFactory.CreateFactionEquipment(relayVar[i].value, null)
                 )
                 if (ModelItem.EquipmentItem == undefined) {
                     continue;
                 }
-                let is_added = true
+                let is_added = false
                 for (let j = 0; j < SubItem["restriction"].length; j++) {
                     if (SubItem["restriction"][j].category) {
                         if ( (ModelItem.EquipmentItem.Category == SubItem["restriction"][j].category)) {
@@ -2560,11 +2561,8 @@ export const BaseContextCallTable : CallEventTable = {
                         );
 
                         relayVar[i].display_str = ModelItem.Name + (" (" + ModelItem.Cost.toString() + " " + getCostType(ModelItem.CostType) + ") ") + (ModelItem.Limit != 0? " (Limit " + ModelItem.Limit + ")" : "") + (result_presentation.length > 0? " (" + result_presentation.join(', ') + " only)" : "")
-
-                        break;
                 }
             }
-
             NewChoices.sort(function(a, b) {
                 return a.display_str.localeCompare(b.display_str);
               });
