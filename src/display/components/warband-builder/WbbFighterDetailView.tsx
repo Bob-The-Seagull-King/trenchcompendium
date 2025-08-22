@@ -1024,7 +1024,6 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                     </div>
                     }
 
-                    {/* @TODO: check this please*/}
                     {warbandmember.model.GetLore() != '' || warbandmember.model.GetWarbandNotes() != '' &&
                     <div className={'play-mode-notes-wrap'}>
                         <h3>{'Notes & Lore'}</h3>
@@ -1033,7 +1032,11 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                                     initialText={warbandmember.model.GetWarbandNotes()}
                                     title={"Notes"}
                                     onSave={(newText: string) => {
-                                        // fighter.SetNotes(newText);
+                                        warbandmember.model.SaveNote(newText, 'notes')
+
+                                        const Manager : ToolsController = ToolsController.getInstance();
+                                        Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
+                                            () => reloadDisplay())
                                     }}
                                 />
                             }
@@ -1043,7 +1046,11 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                                     initialText={warbandmember.model.GetLore()}
                                     title={"Lore"}
                                     onSave={(newText: string) => {
-                                        // fighter.SetLore(newText);
+                                        warbandmember.model.SaveNote(newText, 'lore')
+
+                                        const Manager : ToolsController = ToolsController.getInstance();
+                                        Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
+                                            () => reloadDisplay())
                                     }}
                                 />
                             }

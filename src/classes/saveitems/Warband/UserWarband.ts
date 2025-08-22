@@ -2426,14 +2426,14 @@ class UserWarband extends DynamicContextObject {
             LineList.push("Stashed Ducats: " + (stash.AmountDucats > 10e10? "Unlimited" : stash.AmountDucats))
             LineList.push("Unspent Glory: " + (stash.AmountGlory  > 10e10? "Unlimited" : stash.AmountGlory))
 
-
             // Add stashed Equipment
-            if( this.GetAllEquipment().length > 0) {
+            if( this.Equipment.length > 0) {
                 LineList.push("  " )
 
                 const UpgradesList : string[] = []
-                for (let j = 0; j < this.GetAllEquipment().length; j++) {
-                    UpgradesList.push(this.GetAllEquipment()[j].equipment.GetTrueName())
+                for (let j = 0; j < this.Equipment.length; j++) {
+                    const rel_equip = this.Equipment[j].HeldObject as WarbandEquipment
+                    UpgradesList.push(rel_equip.GetTrueName())
                 }
                 LineList.push(UpgradesList.join(', '))
             }

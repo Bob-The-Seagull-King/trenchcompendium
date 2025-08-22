@@ -2554,7 +2554,16 @@ class WarbandMember extends DynamicContextObject {
             }
         )
 
-        let IsStrong = await this.IsKeywordPresent("kw_strong");
+        const IsStrong = await this.IsKeywordPresent("kw_strong");
+        let strongcount = await eventmon.runEvent(
+            "getCountofStrong",
+            this,
+            [],
+            (IsStrong == true)? 1 : 0,
+            {
+                model: this,
+                warband : this.MyContext as UserWarband
+            })
         let MeleeShield = false
         let RangedShield = false
 
@@ -2580,9 +2589,9 @@ class WarbandMember extends DynamicContextObject {
             let meleeval = (EquipItem.Stats["hands_melee"] != undefined)? EquipItem.Stats["hands_melee"] : 0;
             let rangedval = (EquipItem.Stats["hands_ranged"] != undefined)? EquipItem.Stats["hands_ranged"] : 0;
             if (EquipItem.Stats["hands_melee"]) {
-                if (IsStrong && meleeval == 2) {
+                if ((strongcount > 0) && meleeval == 2) {
                     meleeval = 1;
-                    IsStrong = false;
+                    strongcount -= 1;
                 }
                 if (containsTag(EquipItem.Tags, "shield") && MeleeShield) {
                     meleeval = 0;
@@ -2612,15 +2621,29 @@ class WarbandMember extends DynamicContextObject {
     }
 
     public async HasTwoHandedMeleeWeapon() {
+        const eventmon : EventRunner = new EventRunner();
         const MyEquip = await this.GetAllEquipForShow();
+        const IsStrong = await this.IsKeywordPresent("kw_strong");
+        let strongcount = await eventmon.runEvent(
+            "getCountofStrong",
+            this,
+            [],
+            (IsStrong == true)? 1 : 0,
+            {
+                model: this,
+                warband : this.MyContext as UserWarband
+            })
         for (let i = 0; i < MyEquip.length; i++) {
             const EquipItem = MyEquip[i].equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment;
             if (EquipItem.Stats["hands_melee"]) {
                 const meleeval = EquipItem.Stats["hands_melee"];
                 if (meleeval == 2) {
-                    return true;
+                    strongcount -= 1;
                 }
             }
+        }
+        if (strongcount <= 0) {
+            return true;
         }
         return false;
 
