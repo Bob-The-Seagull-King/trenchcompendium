@@ -218,6 +218,12 @@ const WbbWarbandDetailView: React.FC<WbbWarbandDetailViewProps> = ({  onClose })
                         </WbbDetailViewCollapse>
                     }
 
+                    <WbbDetailViewCollapse title="Exploration Skills" initiallyOpen={true}>
+
+                        <WbbExplorationSkills />
+
+                    </WbbDetailViewCollapse>
+
                     {/* Notes textarea */}
                     <WbbDetailViewCollapse title="Notes & Lore" initiallyOpen={false}>
                         <WbbTextarea

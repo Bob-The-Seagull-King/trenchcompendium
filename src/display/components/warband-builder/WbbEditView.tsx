@@ -32,7 +32,7 @@ import { FactionModelRelationship } from '../../../classes/relationship/faction/
 import WbbFighterAdds from './micro-elements/WbbFighterAdds';
 import WbbFighterShows from './micro-elements/WbbFighterShows';
 import WbbModifiersList from './modals/warband/WbbModifiersList';
-import WbbLocationsList from './Exploration/WbbLocationsList';
+import WbbLocationsList from './modals/warband/WbbLocationsList';
 import {useWbbMode} from "../../../context/WbbModeContext";
 import WbbUserinfo from "./WbbUserinfo";
 import WbbEditViewExplorationLocations from "./WbbEditViewExplorationLocations";
@@ -257,13 +257,13 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                                             />
                                         }
 
-                                        {/* Exploration Tab*/}
-                                        {(edit_mode || view_mode) &&
-                                            <WbbEditViewExplorationLocations
-                                                onClick={() => openDetail('exploration', null)}
-                                                isActive={detailType === 'exploration'}
-                                            />
-                                        }
+                                        {/* @TODO: This is a new exploration tab. */}
+                                        {/*{(edit_mode || view_mode) &&*/}
+                                        {/*    <WbbEditViewExplorationLocations*/}
+                                        {/*        onClick={() => openDetail('exploration', null)}*/}
+                                        {/*        isActive={detailType === 'exploration'}*/}
+                                        {/*    />*/}
+                                        {/*}*/}
 
                                         {/* @TODO: This opens the post-game helper. */}
                                         {/*<button*/}
@@ -282,6 +282,10 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                                         />
 
                                         <WbbModifiersList/>
+
+                                        {(edit_mode || view_mode) &&
+                                            <WbbLocationsList/>
+                                        }
                                     </div>
 
                                     <div className={'selected-item-wrap'} ref={selectedItemWrapRef}>
@@ -314,13 +318,12 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                                             />
                                         )}
 
-                                        {/* The Campaign Exploration View */}
+                                        {/* The Campaign Detail View */}
                                         {detailType === 'exploration' && (
                                             <WbbExplorationDetailView
                                                 onClose={closeDetail}
                                             />
                                         )}
-
 
                                         {/* The Post Ganme Helper View */}
                                         {/* @TODO this is the post game helper detail view WIP */}

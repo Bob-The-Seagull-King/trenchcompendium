@@ -2,17 +2,17 @@ import React, { useEffect, useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import {faPlus, faXmark} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import { IChoice } from '../../../../classes/options/StaticOption';
-import { SelectedOption } from '../../../../classes/options/SelectedOption';
-import WbbEditViewModifier from '../WbbEditViewModifier';
-import { useWarband } from '../../../../context/WarbandContext';
-import { ISelectedOption, WarbandProperty } from '../../../../classes/saveitems/Warband/WarbandProperty';
-import WbbEditViewExtraModifier from '../WbbEditViewExtraModifier';
-import WbbModalAddExplorationLocation from '../modals/WbbModalAddExplorationLocation';
-import WbbEditViewExploration from '../WbbEditViewExploration';
-import { ExplorationLocation } from '../../../../classes/feature/exploration/ExplorationLocation';
-import { ToolsController } from '../../../../classes/_high_level_controllers/ToolsController';
-import {useWbbMode} from "../../../../context/WbbModeContext";
+import { IChoice } from '../../../../../classes/options/StaticOption';
+import { SelectedOption } from '../../../../../classes/options/SelectedOption';
+import WbbEditViewModifier from '../../WbbEditViewModifier';
+import { useWarband } from '../../../../../context/WarbandContext';
+import { ISelectedOption, WarbandProperty } from '../../../../../classes/saveitems/Warband/WarbandProperty';
+import WbbEditViewExtraModifier from '../../WbbEditViewExtraModifier';
+import WbbModalAddExplorationLocation from '../WbbModalAddExplorationLocation';
+import WbbEditViewExploration from '../../WbbEditViewExploration';
+import { ExplorationLocation } from '../../../../../classes/feature/exploration/ExplorationLocation';
+import { ToolsController } from '../../../../../classes/_high_level_controllers/ToolsController';
+import {useWbbMode} from "../../../../../context/WbbModeContext";
 
 const WbbLocationsList = () => {
     const { warband, updateKey, reloadDisplay } = useWarband();
@@ -46,7 +46,7 @@ const WbbLocationsList = () => {
         <div key={keyvar}>        
             {/* Warband Exploration Locations */}
             {(locations.length > 0 || edit_mode) &&
-                <h3 className={'mb-3'}>Exploration Locations</h3>
+                <h3 className={'category-headline'}>Exploration Locations</h3>
             }
 
 

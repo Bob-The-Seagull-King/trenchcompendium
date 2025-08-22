@@ -13,7 +13,7 @@ import { ToolsController } from '../../../classes/_high_level_controllers/ToolsC
 import WbbEditFailedPromotionsModal from './modals/warband/WbbEditFailedPromotionsModal';
 import {useWbbMode} from "../../../context/WbbModeContext";
 import WbbEditViewExplorationLocations from "./WbbEditViewExplorationLocations";
-import WbbLocationsList from "./Exploration/WbbLocationsList";
+import WbbLocationsList from "./modals/warband/WbbLocationsList";
 import WbbPostGameDetailElite from "./micro-elements/WbbPostGameDetailElite";
 import WbbPostGameDetailTroopInjuries from "./micro-elements/WbbPostGameDetailTroopInjuries";
 import WbbPostGameDetailPromotions from "./micro-elements/WbbPostGameDetailPromotions";
