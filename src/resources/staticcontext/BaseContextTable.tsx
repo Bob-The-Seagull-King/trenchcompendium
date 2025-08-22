@@ -4310,6 +4310,15 @@ export const BaseContextCallTable : CallEventTable = {
             return HoldVar;
         }
     },
+    strong_count: {
+        event_priotity: 0,
+        async getCountofStrong(this: EventRunner, eventSource : any, relayVar : number,  trackVal : MemberAndWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            if (context_func["value"]) {
+                return context_func["value"]
+            }
+            return relayVar
+        }
+    },
     mod_self_cost: {
         event_priotity: 0,       
         async getDiscountOfUpgrade(this: EventRunner, eventSource : any, relayVar: number, trackVal: MemberAndWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, coreitem : ModelUpgradeRelationship) {

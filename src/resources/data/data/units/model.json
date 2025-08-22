@@ -2087,7 +2087,7 @@
         "source": "core",
         "tags": {},
         "contextdata": {
-            
+            "strong_count": {"value": 2},
             "set_arms": {"ranged": 0, "melee": 0, "special": 6},
             "no_shield_combo": {},
             "model_equipment_restriction": {
