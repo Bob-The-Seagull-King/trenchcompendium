@@ -2132,7 +2132,7 @@ class WarbandMember extends DynamicContextObject {
 
         for (let i = 0; i < AddedOptions.length; i++) {
 
-            const countcurrent = (this.MyContext as UserWarband).GetCountOfEquipmentRel(AddedOptions[i].ID)
+            const countcurrent = (this).GetEquipmentCount(AddedOptions[i].ID)
             let oblimit = 1
             let maxccurcostount = AddedOptions[i].Cost;
             let canadd = true;
