@@ -1,9 +1,4 @@
-/* modelupgraderelationship */
-
-import { IStaticOptionContextObject, StaticOptionContextObject } from '../../options/StaticOptionContextObject';
 import { ContextObject, IContextObject } from '../../contextevent/contextobject';
-import { Model } from '../../feature/model/Model';
-import { ModelFactory } from '../../../factories/features/ModelFactory';
 import { Equipment, EquipmentRestriction, EquipmentStats } from '../../feature/equipment/Equipment';
 import { EquipmentFactory } from '../../../factories/features/EquipmentFactory';
 import { StaticContextObject } from '../../contextevent/staticcontextobject';
@@ -20,17 +15,15 @@ interface IFactionEquipmentRelationship extends IContextObject {
     limit : number
 }
 
-
 class FactionEquipmentRelationship extends StaticContextObject {
     
+    public Factions : Faction[] = [];
     public EquipmentItem! : Equipment;
 
     public Cost : number;
     public CostType : number;
     public Limit : number
 
-    public Factions : Faction[] = [];
-    
     public RestrictedEquipment : EquipmentRestriction[] | null = null;
     
     public constructor(data: IFactionEquipmentRelationship, parent : ContextObject | null)
@@ -41,10 +34,12 @@ class FactionEquipmentRelationship extends StaticContextObject {
         this.Limit = data.limit;
     }
 
+    // Build the equipment item
     public async MakeItem(id : string, skipcheck = false) {
         this.EquipmentItem = await EquipmentFactory.CreateNewEquipment(id, null, skipcheck);
     }
 
+    // Build the factions that use this equipment relationship
     public async GetFactions(data : string[]) {
         data.sort()
         for (let i = 0; i < data.length; i++) {
@@ -52,6 +47,7 @@ class FactionEquipmentRelationship extends StaticContextObject {
         }
     }
 
+    // Get the stats of the equipment within a FactionEquipment context
     public async getFactionEquipmentStats() : Promise<EquipmentStats> {
         const FinalStats : EquipmentStats = {}
 
@@ -72,6 +68,7 @@ class FactionEquipmentRelationship extends StaticContextObject {
         return result;
     }
     
+    // Update the equipment restrictions within a faction context
     public async RunEquipmentRestriction() {
         const EventProc : EventRunner = new EventRunner();
 
@@ -92,6 +89,7 @@ class FactionEquipmentRelationship extends StaticContextObject {
         return this.Limit;
     }
 
+    // Get the cost of this item in a human readable string
     public GetCostString() {
         return this.Cost + " " + getCostType(this.CostType)
     }

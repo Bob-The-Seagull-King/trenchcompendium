@@ -1,15 +1,10 @@
-/* modelupgraderelationship */
-
 import { IStaticOptionContextObject, StaticOptionContextObject } from '../../options/StaticOptionContextObject';
-import { ContextObject, IContextObject } from '../../contextevent/contextobject';
+import { ContextObject } from '../../contextevent/contextobject';
 import { Model } from '../../feature/model/Model';
 import { ModelFactory } from '../../../factories/features/ModelFactory';
-import { Equipment } from '../../feature/equipment/Equipment';
-import { EquipmentFactory } from '../../../factories/features/EquipmentFactory';
 import { Faction } from '../../feature/faction/Faction';
 import { FactionFactory } from '../../../factories/features/FactionFactory';
 import {getCostType} from "../../../utility/functions";
-import {GetPresentationStatistic, PresentModelStatistics} from "../../feature/model/ModelStats";
 import { ModelUpgradeRelationship, UpgradesGrouped } from '../model/ModelUpgradeRelationship';
 import { EventRunner } from '../../contextevent/contexteventhandler';
 import { Ability } from '../../feature/ability/Ability';
@@ -57,10 +52,12 @@ class FactionModelRelationship extends StaticOptionContextObject {
         this.Maximum = data.warband_maximum;
     }
 
+    // Build the model in this relationship
     public async BuildModel(model_id : string) {        
         this.Model = await ModelFactory.CreateNewModel(model_id, null);
     }
 
+    // Return the name of the model, updated to reflect that it's a leader
     public GetTrueName() {
         if (this.Model.Name) {
             return this.Model.Name + (this.Captain == true? " (Leader)" : "");
@@ -69,12 +66,14 @@ class FactionModelRelationship extends StaticOptionContextObject {
         }
     }
 
+    // Create the factions that use this model relationship
     public async GetFactions(data : string[]) {
         for (let i = 0; i < data.length; i++) {
             this.Factions.push(await FactionFactory.CreateNewFaction(data[i], null))
         }
     }
 
+    // For any options in this relationship, build the models (they will always be models)
     public async BuildOptionModel() {
         for (let i = 0; i < this.MyOptions.length; i++) {
             for (let j = 0; j < this.MyOptions[i].Selections.length; j++) {
@@ -93,7 +92,6 @@ class FactionModelRelationship extends StaticOptionContextObject {
         }
         this.BuildOptionModel();
     }
-
 
     /**
      * Outputs
