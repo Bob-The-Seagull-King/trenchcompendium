@@ -1,4 +1,4 @@
-import { ICompendiumItemData, CompendiumItem, ItemType } from '../../CompendiumItem'
+import { ICompendiumItemData, CompendiumItem } from '../../CompendiumItem'
 import { DescriptionFactory } from '../../../utility/functions';
 
 interface IGlossaryRule extends ICompendiumItemData {
@@ -11,7 +11,7 @@ class GlossaryRule extends CompendiumItem {
     /**
      * Assigns parameters and creates a series of description
      * objects with DescriptionFactory
-     * @param data Object data in IPlayerAbility format
+     * @param data Object data in IGlossaryRule format
      */
     public constructor(data: IGlossaryRule)
     {

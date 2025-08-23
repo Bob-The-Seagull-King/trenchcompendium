@@ -62,7 +62,7 @@ class SkillFactory {
         }
         const rule = new SkillGroup(_rule, parent)
         cache.AddToCache('skillgroup', rule);
-        await rule.BuildFactionEquipment(_rule.id);
+        await rule.BuildGroupSkills(_rule.id);
         return rule;
     }
 
@@ -89,7 +89,7 @@ class SkillFactory {
         }
         const rule = new Patron(_rule, parent)
         cache.AddToCache('patron', rule);
-        await rule.BuildFactionEquipment(_rule.id);
+        await rule.BuildPatronSkills(_rule.id);
         await rule.BuildFactionList(_rule.id)
         return rule;
     }
