@@ -5820,6 +5820,14 @@
         "contextdata": {
             "warband_general_hook": {},
             "add_upgrade": {
+            },
+            "special_category_upgrades": {
+                "upgrades": [
+                    {
+                        "category": "goetic",
+                        "count": 1
+                    }
+                ]
             }
         },
         "description": [       
