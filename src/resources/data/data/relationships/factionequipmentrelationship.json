@@ -1638,7 +1638,7 @@
         },
         "faction_id": ["fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom"],
         "equipment_id": "eq_sultanategrandcannon",
-        "cost": 12,
+        "cost": 10,
         "costtype": 1,
         "limit": 0
     },
