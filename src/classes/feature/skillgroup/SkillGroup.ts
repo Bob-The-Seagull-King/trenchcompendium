@@ -23,8 +23,8 @@ class SkillGroup extends StaticContextObject {
         super(data, parent)
     }
 
-    
-    public async BuildFactionEquipment(id : string) {
+    // Build the skills a group has
+    public async BuildGroupSkills(id : string) {
         const LocationList = Requester.MakeRequest(
             {
                 searchtype: "complex", 
@@ -45,7 +45,6 @@ class SkillGroup extends StaticContextObject {
                 }
             }
         ) as ISkill[]
-
 
         for (let i = 0; i < LocationList.length; i++) {
             this.Skills.push( await SkillFactory.CreateSkill(LocationList[i], this))

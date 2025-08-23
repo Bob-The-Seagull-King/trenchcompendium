@@ -373,7 +373,7 @@
         "source": "core",
         "tags": {},
         "contextdata": {
-            
+            "unarmed_penalty_remove": {},
             "model_equipment_restriction": {
                 "removed": [
                     {

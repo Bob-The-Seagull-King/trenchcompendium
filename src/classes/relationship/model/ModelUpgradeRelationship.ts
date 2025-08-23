@@ -1,11 +1,9 @@
 /* modelupgraderelationship */
 
 import { IStaticOptionContextObject, StaticOptionContextObject } from '../../options/StaticOptionContextObject';
-import {DescriptionFactory, getCostType} from '../../../utility/functions';
-import { ContextObject, IContextObject } from '../../contextevent/contextobject';
-import { Model } from '../../feature/model/Model';
+import { getCostType} from '../../../utility/functions';
+import { ContextObject } from '../../contextevent/contextobject';
 import { Upgrade } from '../../feature/ability/Upgrade';
-import { ModelFactory } from '../../../factories/features/ModelFactory';
 import { UpgradeFactory } from '../../../factories/features/UpgradeFactory';
 import { EventRunner } from '../../contextevent/contexteventhandler';
 
@@ -19,13 +17,6 @@ interface IModelUpgradeRelationship extends IStaticOptionContextObject {
     required_upgrades : string[]
 }
 
-interface ModelUpgradeRestriction {
-    upgrade_ids : string[],
-    max_count : 0
-}
-
-
-
 class ModelUpgradeRelationship extends StaticOptionContextObject {
 
     public UpgradeObject! : Upgrade;
@@ -35,9 +26,8 @@ class ModelUpgradeRelationship extends StaticOptionContextObject {
     public Retrictions : string[]
     public RequiredUpgrades : string[]
     /**
-     * Assigns parameters and creates a series of description
-     * objects with DescriptionFactory
-     * @param data Object data in IAbility format
+     * Assigns parameters and creates a series of objects
+     * @param data Object data in IModelUpgradeRelationship format
      */
     public constructor(data: IModelUpgradeRelationship, parent : ContextObject | null)
     {
@@ -49,10 +39,12 @@ class ModelUpgradeRelationship extends StaticOptionContextObject {
         this.RequiredUpgrades = data.required_upgrades;
     }
 
+    // Create the relevant upgrade object
     public async BuildUpgrade(upgrade_id : string) {
         this.UpgradeObject = await UpgradeFactory.CreateNewUpgrade(upgrade_id, null);
     }
 
+    // Take restrictions and convert them into a human readable format
     public async GetRestrictions() {
         const restrictions : string[] = [];
         
@@ -73,6 +65,7 @@ class ModelUpgradeRelationship extends StaticOptionContextObject {
         return result.join(',');
     }
 
+    // Get the special category of this upgrade, or return 'upgrades' if none
     public GetSpecialCategory() {
         if (this.UpgradeObject.Tags['special_category']) {
             return this.UpgradeObject.Tags['special_category'].toString();
@@ -109,6 +102,4 @@ class ModelUpgradeRelationship extends StaticOptionContextObject {
 }
 
 export {IModelUpgradeRelationship, ModelUpgradeRelationship}
-
-
 export type UpgradesGrouped = {[type : string]: ModelUpgradeRelationship[]};

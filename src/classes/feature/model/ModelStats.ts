@@ -1,5 +1,6 @@
 import {getMoveType} from "../../../utility/functions";
 
+// Raw stat profile of a model
 interface ModelStatistics {
     movement?: number,
     melee?: number, 
@@ -11,6 +12,7 @@ interface ModelStatistics {
     mercenary?: boolean
 }
 
+// Variant of the stat profile for use in displaying
 interface PresentModelStatistics {
     movement?: number[],
     melee?: number[], 
@@ -22,6 +24,8 @@ interface PresentModelStatistics {
     mercenary?: boolean[]
 }
 
+// Given a baselist, override any stats with their equivilent addonlist,
+// but leave any stats not given by the addonlist the same.
 export function MergeTwoStats(baseList: ModelStatistics, addonList : ModelStatistics) {
     const MergedList : ModelStatistics = {}
     
@@ -46,6 +50,8 @@ export function MergeTwoStats(baseList: ModelStatistics, addonList : ModelStatis
     return MergedList
 }
 
+// Given a stat profile and a list of selected stat options, create a 
+// presentation statistics instance.
 export function GetPresentationStatistic(base_stats : ModelStatistics, stat_options : ModelStatistics[][]) {
     const finalstats : PresentModelStatistics = {}
     const movement_op = []  
@@ -136,13 +142,13 @@ export function GetPresentationStatistic(base_stats : ModelStatistics, stat_opti
     return finalstats
 }
 
+// Check if the statistics item has one property.
 export function hasOnlyOneProperty(stat: ModelStatistics): boolean {
     const definedProps = Object.values(stat).filter(value => value !== undefined);
     return definedProps.length === 1;
 }
 
 export {ModelStatistics, PresentModelStatistics}
-
 
 /**
  * Normalize stats for models and presentmodels that take differenty types
@@ -210,6 +216,7 @@ export function getModelStatArmour(stats: StatInput): string {
     return armour.map(a => a.toString()).join('/');
 }
 
+// Return a single string with the full stat profile
 export function GetStatAsFullString(statset : ModelStatistics) : string {
     const val : string[] = [];
 

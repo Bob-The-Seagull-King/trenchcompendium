@@ -21,7 +21,7 @@ class ExplorationFactory {
         }
         const rule = new ExplorationTable(_rule, parent)
         cache.AddToCache('explorationtable', rule);        
-        await rule.BuildFactionEquipment(_rule.id, skipcheck);
+        await rule.BuildTableLocations(_rule.id, skipcheck);
         return rule;
     }
 

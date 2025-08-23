@@ -138,7 +138,7 @@ class Scenario extends StaticContextObject {
     /**
      * Assigns parameters and creates a series of description
      * objects with DescriptionFactory
-     * @param data Object data in IAbility format
+     * @param data Object data in IScenario format
      */
     public constructor(data: IScenario, parent : ContextObject | null)
     {
@@ -171,6 +171,7 @@ class Scenario extends StaticContextObject {
         this.BuildOptionalDeeds(data.glorious_deeds.optional_deeds);
     }
 
+    // Builds the unique rule objects for a scenario
     public async BuildRules(rules : string[]) {
         for (let i = 0; i < rules.length; i++) {
             const RuleObj = await RuleFactory.CreateNewScenarioRule(rules[i], this);
@@ -178,6 +179,7 @@ class Scenario extends StaticContextObject {
         }
     }
     
+    // Builds a scenario's glorious deeds
     public BuildDeeds(deeds : string[]) {
         for (let i = 0; i < deeds.length; i++) {
             const DeedObj = GloriousDeedFactory.CreateNewGloriousDeed(deeds[i], this);
@@ -185,6 +187,7 @@ class Scenario extends StaticContextObject {
         }
     }
     
+    // Builds any optional deeds a scenario can have
     public BuildOptionalDeeds(deeds : string[]) {
         for (let i = 0; i < deeds.length; i++) {
             const DeedObj = GloriousDeedFactory.CreateNewGloriousDeed(deeds[i], this);
