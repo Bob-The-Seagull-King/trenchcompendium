@@ -29,6 +29,8 @@ import WbbExploration_Selection_FallenSoldier from "./Exploration/WbbExploration
 import WbbExploration_Selection_GloryPurchase from "./Exploration/WbbExploration_Selection_GloryPurchase";
 import WbbExploration_Selection_MultiEquipment from "./Exploration/WbbExploration_Selection_MultiEquipment";
 import WbbExploration_Selection_DieRollResult from "./Exploration/WbbExploration_Selection_DieRollResult";
+import WbbConsumableSelect from './modals/warband/WbbConsumableSelect';
+import { WarbandConsumable } from '../../../classes/saveitems/Warband/WarbandConsumable';
 
 interface WbbEditViewExplorationProps {
     location : WarbandProperty;
