@@ -117,6 +117,18 @@ const WbbEditViewExploration: React.FC<WbbEditViewExplorationProps> = ({  locati
                             )}
                         </>
                         }
+                        {location.Consumables.length > 0 &&
+                        <div className="stash-items-wrap">
+                            <div className={'stash-items-category'}>
+                                {location.Consumables.map((item: WarbandConsumable, index: number) => (
+                                    <WbbConsumableSelect
+                                        key={index}
+                                        property={item}
+                                    />
+                                ))}
+                            </div>
+                        </div>
+                        }
 
                         {/* Show additional Selection Options for the location */}
 
