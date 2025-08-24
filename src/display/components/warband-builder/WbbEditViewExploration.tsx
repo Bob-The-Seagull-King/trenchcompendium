@@ -105,6 +105,17 @@ const WbbEditViewExploration: React.FC<WbbEditViewExplorationProps> = ({  locati
                                 ) }
                             </ul>
                         }
+                        {location.SelfDynamicProperty.Selections.length > 0 &&
+                            <>
+                            {location.SelfDynamicProperty.Selections.map((item) =>
+                                <WbbOptionSelect
+                                    property={location}
+                                    key={location.SelfDynamicProperty.Selections.indexOf(item)}
+                                    choice={item}
+                                />
+                            )}
+                        </>
+                        }
 
                         {/* Show additional Selection Options for the location */}
 
