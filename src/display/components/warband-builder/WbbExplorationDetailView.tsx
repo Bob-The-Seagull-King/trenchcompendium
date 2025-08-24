@@ -13,7 +13,9 @@ import { ToolsController } from '../../../classes/_high_level_controllers/ToolsC
 import WbbEditFailedPromotionsModal from './modals/warband/WbbEditFailedPromotionsModal';
 import {useWbbMode} from "../../../context/WbbModeContext";
 import WbbEditViewExplorationLocations from "./WbbEditViewExplorationLocations";
-import WbbLocationsList from "./modals/warband/WbbLocationsList";
+import WbbLocationsList from "./Exploration/WbbLocationsList";
+import WbbExplorationSkills from "./WbbExplorationSkills";
+import WbbDetailViewCollapse from "./WbbDetailViewCollapse";
 
 interface WbbCampaignDetailViewProps {
     onClose: () => void;
@@ -23,6 +25,15 @@ const WbbExplorationDetailView: React.FC<WbbCampaignDetailViewProps> = ({ onClos
     const { warband, reloadDisplay, updateKey } = useWarband();
     if (warband == null) return (<div>Loading...</div>);
     const { play_mode, edit_mode, view_mode, print_mode, mode, setMode } = useWbbMode(); // play mode v2
+
+    const cycle = warband.warband_data.GetCampaignCycleView();
+    // Mapping-Funktion
+    const getExplorationTableText = (cycle: number): string => {
+        if (cycle <= 2) return "Common Exploration Locations";
+        if (cycle <= 5) return "Common or Rare Exploration Locations";
+        if (cycle <= 9) return "Rare Exploration Locations";
+        return "Rare or Legendary Exploration Locations"; // 10+
+    };
 
     return (
         <div className="WbbDetailView WbbExplorationDetailView">
@@ -37,13 +48,33 @@ const WbbExplorationDetailView: React.FC<WbbCampaignDetailViewProps> = ({ onClos
             </div>
 
             <div className={'detail-view-content'}>
-                <div className={'detail-section-title'}>
-                    {'Exploration Details'}
+                <div className={'WbbExplorationDetailView-summary'}>
+                    <div>
+                        <strong>
+                            {'Campaign round: '}
+                        </strong>
+                        {warband.warband_data.GetCampaignCycleView()}
+                    </div>
+                    <div>
+                        <strong>
+                            {'Available exploration tables: '}
+                        </strong>
+                        {getExplorationTableText(cycle)}
+                    </div>
                 </div>
 
-                {(edit_mode || view_mode) &&
-                    <WbbLocationsList/>
-                }
+
+                <div className={'WbbDetailViewCollapse-wrap'}>
+                    <WbbDetailViewCollapse title="Exploration Skills" initiallyOpen={false}>
+                        <WbbExplorationSkills />
+                    </WbbDetailViewCollapse>
+
+                    {(edit_mode || view_mode) &&
+                        <WbbDetailViewCollapse title="Exploration Locations" initiallyOpen={true}>
+                            <WbbLocationsList/>
+                        </WbbDetailViewCollapse>
+                    }
+                </div>
             </div>
         </div>
     );

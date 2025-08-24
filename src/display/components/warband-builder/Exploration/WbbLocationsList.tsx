@@ -2,32 +2,42 @@ import React, { useEffect, useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import {faPlus, faXmark} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import { IChoice } from '../../../../../classes/options/StaticOption';
-import { SelectedOption } from '../../../../../classes/options/SelectedOption';
-import WbbEditViewModifier from '../../WbbEditViewModifier';
-import { useWarband } from '../../../../../context/WarbandContext';
-import { ISelectedOption, WarbandProperty } from '../../../../../classes/saveitems/Warband/WarbandProperty';
-import WbbEditViewExtraModifier from '../../WbbEditViewExtraModifier';
-import WbbModalAddExplorationLocation from '../WbbModalAddExplorationLocation';
-import WbbEditViewExploration from '../../WbbEditViewExploration';
-import { ExplorationLocation } from '../../../../../classes/feature/exploration/ExplorationLocation';
-import { ToolsController } from '../../../../../classes/_high_level_controllers/ToolsController';
-import {useWbbMode} from "../../../../../context/WbbModeContext";
+import { IChoice } from '../../../../classes/options/StaticOption';
+import { SelectedOption } from '../../../../classes/options/SelectedOption';
+import WbbEditViewModifier from '../WbbEditViewModifier';
+import { useWarband } from '../../../../context/WarbandContext';
+import { ISelectedOption, WarbandProperty } from '../../../../classes/saveitems/Warband/WarbandProperty';
+import WbbEditViewExtraModifier from '../WbbEditViewExtraModifier';
+import WbbModalAddExplorationLocation from '../modals/WbbModalAddExplorationLocation';
+import WbbEditViewExploration from '../WbbEditViewExploration';
+import { ExplorationLocation } from '../../../../classes/feature/exploration/ExplorationLocation';
+import { ToolsController } from '../../../../classes/_high_level_controllers/ToolsController';
+import {useWbbMode} from "../../../../context/WbbModeContext";
+import WbbEditViewExplorationUnstored from '../WbbEditViewExplorationUnstored';
+import { ExplorationTableSuite, FilteredLocation } from '../../../../classes/saveitems/Warband/CoreElements/WarbandExplorationSet';
+
+export interface LocationHold {
+    loc : ExplorationLocation,
+    suite : FilteredLocation
+}
 
 const WbbLocationsList = () => {
     const { warband, updateKey, reloadDisplay } = useWarband();
     const { play_mode, edit_mode, view_mode, print_mode, setMode } = useWbbMode(); // play mode v2
     const [keyvar, setkeyvar] = useState(0);
     const [locations, setlocations] = useState<WarbandProperty[]>([]);
+    const [templocations, settemplocations] = useState<LocationHold[]>([]);
 
     // Exploration Location Modal
     const [showAddExplorationModal, setShowAddExplorationModal] = useState(false);
-    const handleAddExplorationLocation = (location: ExplorationLocation, selectedOptions : ISelectedOption[]) => {
+
+    const handleSaveExplorationLocation = (location: ExplorationLocation, optionsuite : FilteredLocation) => {
         if (!warband) { return; }
-        warband.warband_data.AddExplorationLocation(location, selectedOptions).then(() => {
-            const Manager : ToolsController = ToolsController.getInstance();
-            Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(() => reloadDisplay())
-        })
+        settemplocations([{
+            loc: location,
+            suite: optionsuite
+        }])
+        reloadDisplay()
     };
     
     useEffect(() => {
@@ -46,7 +56,7 @@ const WbbLocationsList = () => {
         <div key={keyvar}>        
             {/* Warband Exploration Locations */}
             {(locations.length > 0 || edit_mode) &&
-                <h3 className={'category-headline'}>Exploration Locations</h3>
+                <h3 className={'mb-3'}>Exploration Locations</h3>
             }
 
 
@@ -54,6 +64,14 @@ const WbbLocationsList = () => {
                 <WbbEditViewExploration
                     key={index}
                     location={item}
+                />
+            )}
+
+            {templocations.map((item, index) =>
+                <WbbEditViewExplorationUnstored
+                    key={index}
+                    location={item}
+                    clear={() => settemplocations([])}
                 />
             )}
 
@@ -69,7 +87,7 @@ const WbbLocationsList = () => {
                 <WbbModalAddExplorationLocation
                     show={showAddExplorationModal}
                     onClose={() => setShowAddExplorationModal(false)}
-                    onSubmit={handleAddExplorationLocation}
+                    onSubmit={handleSaveExplorationLocation}
                 />
             }
         </div>

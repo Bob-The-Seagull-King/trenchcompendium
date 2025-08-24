@@ -960,7 +960,7 @@ class UserWarband extends DynamicContextObject {
                 ConsumableList.push(this.Consumables[i]);
             }
         }
-
+        /*
         for (let j = 0; j < this.Exploration.Locations.length; j++) {
             
             for (let i = 0; i < this.Exploration.Locations[j].Consumables.length; i++) {
@@ -969,7 +969,7 @@ class UserWarband extends DynamicContextObject {
                 }
             }
 
-        }
+        }*/
 
         return ConsumableList;
     }
