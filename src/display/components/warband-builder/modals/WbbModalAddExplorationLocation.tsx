@@ -144,44 +144,55 @@ const WbbModalAddExplorationLocation: React.FC<WbbModalAddExplorationLocationPro
 
                                             {/* options for selected location */}
                                             {(selectedLocation != null && selectedLocation.options.length > 0) &&
-                                                <div className="">
-                                                    <label className={'mb-2'}>
-                                                        Select Options for {selectedLocation?.location.GetTrueName()}:
-                                                    </label>
-
+                                                <ul className="exploration-description-options">
                                                     {/* options */}
                                                     {selectedLocation.options.map(opt =>
+
                                                         <>
                                                             {opt.selection_valid.map(choice => (
                                                                 <>
-                                                                    {/* option select */}
-                                                                    <div
-                                                                        key={opt.baseopt.RefID + choice.id}
-                                                                        className={`select-item 
-                                                                        ${(selectedOptionIds.find((k) => k.option_refID == opt.baseopt.RefID && k.selection_ID == choice.id)
-                                                                        ) ? 'selected' : ''}
-                                                                        ${(selectedOptionIds.find((k) => k.option_refID == opt.baseopt.RefID && k.selection_ID == choice.id) && (choice.value.Description != null)
-                                                                        ) ? 'details-open' : ''}
-                                                                        `}
-                                                                        onClick={() => UpdateSelectedOptionIDs({option_refID: opt.baseopt.RefID, selection_ID: choice.id})}
-                                                                    >
-                                                                        {choice.display_str}
-                                                                    </div>
+                                                                    {/* @TODO: Show all option (even unavailable ones) here */}
+                                                                    <li className={'exploration-description-option'}>
+                                                                        <span className={'option-name'}>
+                                                                            {'Surplus:'}
+                                                                        </span>
+                                                                        <span className={'option-description'}>
+                                                                            {'Choose one HEAVY weapon in your Warband’s Armoury. Add one of those weapons to your Warband’s roster for free. You cannot exceed the LIMIT on a weapon in this way'}
+                                                                        </span>
+                                                                    </li>
 
-                                                                    {/* option details */}
-                                                                    {(
-                                                                        selectedOptionIds.find((k) => k.option_refID == opt.baseopt.RefID && k.selection_ID == choice.id) && (choice.value.Description != null)
-                                                                    ) &&
-                                                                        <div className={'select-item-details'}>
-                                                                            {
-                                                                                returnDescription(choice.value, choice.value.Description)
-                                                                            }
-                                                                        </div>
-                                                                    }
+                                                                    {/* @TODO: remove - this is for reference */}
+                                                                    {/*/!* option select *!/*/}
+                                                                    {/*<div*/}
+                                                                    {/*    key={opt.baseopt.RefID + choice.id}*/}
+                                                                    {/*    className={`select-item */}
+                                                                    {/*    ${(selectedOptionIds.find((k) => k.option_refID == opt.baseopt.RefID && k.selection_ID == choice.id)*/}
+                                                                    {/*    ) ? 'selected' : ''}*/}
+                                                                    {/*    ${(selectedOptionIds.find((k) => k.option_refID == opt.baseopt.RefID && k.selection_ID == choice.id) && (choice.value.Description != null)*/}
+                                                                    {/*    ) ? 'details-open' : ''}*/}
+                                                                    {/*    `}*/}
+                                                                    {/*    onClick={() => UpdateSelectedOptionIDs({*/}
+                                                                    {/*        option_refID: opt.baseopt.RefID,*/}
+                                                                    {/*        selection_ID: choice.id*/}
+                                                                    {/*    })}*/}
+                                                                    {/*>*/}
+                                                                    {/*    {choice.display_str}*/}
+                                                                    {/*</div>*/}
+
+                                                                    {/*/!* option details *!/*/}
+                                                                    {/*{(*/}
+                                                                    {/*        selectedOptionIds.find((k) => k.option_refID == opt.baseopt.RefID && k.selection_ID == choice.id) && (choice.value.Description != null)*/}
+                                                                    {/*    ) &&*/}
+                                                                    {/*    <div className={'select-item-details'}>*/}
+                                                                    {/*        {*/}
+                                                                    {/*            returnDescription(choice.value, choice.value.Description)*/}
+                                                                    {/*        }*/}
+                                                                    {/*    </div>*/}
+                                                                    {/*}*/}
                                                                 </>
                                                             ))}
                                                         </>)}
-                                                </div>
+                                                </ul>
                                             }
                                         </div>
                                     }
