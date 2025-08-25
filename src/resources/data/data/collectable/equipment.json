@@ -4981,7 +4981,7 @@
         "id": "eq_crownofhellfire",
         "name": "Crown of Hellfire",
         "source": "core",
-        "tags": {"trait": true, "headgear": true},
+        "tags": {"trait": true},
         "category": "equipment",
         "distance": null,
         "stats": {

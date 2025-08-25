@@ -162,7 +162,7 @@ class WarbandEquipment extends DynamicContextObject {
         }
 
         const _objint : IWarbandEquipment = {
-            contextdata : this.ContextKeys,            
+            contextdata : {},            
             id: this.ID,
             name: this.Name != undefined? this.Name : "",
             source: this.Source != undefined? this.Source : "",
