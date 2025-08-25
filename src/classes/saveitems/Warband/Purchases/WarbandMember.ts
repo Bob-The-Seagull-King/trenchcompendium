@@ -521,7 +521,7 @@ class WarbandMember extends DynamicContextObject {
         }
 
         const _objint : IWarbandMember = {
-            contextdata : this.ContextKeys,            
+            contextdata : {},            
             id: this.ID,
             name: this.Name != undefined? this.Name : "",
             source: this.Source != undefined? this.Source : "",
