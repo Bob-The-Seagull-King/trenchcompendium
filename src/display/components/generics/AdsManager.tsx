@@ -35,6 +35,7 @@ export const AdsManager: React.FC = () => {
         <>
             <div className={'AdsManager'}>
                 <div className={'Ads-text-below'}>
+                    {'⚠️ Due to the volume of warbands created, we are migrating databases, you may experience issues with creating new warbands - please hold!'}
                     {'❤️ Support Trench Companion for an ad-free experience'}
                 </div>
 
