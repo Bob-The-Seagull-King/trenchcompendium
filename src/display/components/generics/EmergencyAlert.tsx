@@ -1,39 +1,53 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {useLocation} from "react-router-dom";
-import Modal from "react-bootstrap/Modal";
-import {ROUTES} from "../../../resources/routes-constants";
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import {Popover} from "react-bootstrap";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faInfoCircle} from "@fortawesome/free-solid-svg-icons";
+import React, { useEffect, useState } from 'react';
+import {useAuth} from "../../../utility/AuthContext";
 
-export const EmergencyAlert: React.FC = () => {
-    // show the popup
-    const [showPopup, setShowPopup] = useState(true);
+declare global {
+    interface Window {
+        ezstandalone?: {
+            cmd: Array<() => void>;
+            showAds: (id: number) => void;
+        };
+    }
+}
 
-    // handle click accept some
-    const handleClose = () => {
-        setShowPopup(false);
-    };
+//const isProduction = false;
+const isProduction = window.location.hostname === 'trench-companion.com';
+
+export const AdsManager: React.FC = () => {
+    const [consent, setConsent] = useState<boolean | null>(null);
+    const { isLoggedIn, userId, authToken,  loadingUser, SiteUser } = useAuth();
 
 
-    // return the privacy modal maybe
-    if (!showPopup) return null;
+    // Show ads in placeholder - check if this is needed?
+    useEffect(() => {
+        if (!isProduction ) return;
+
+        if (typeof window.ezstandalone !== 'undefined' && window.ezstandalone.cmd) {
+            window.ezstandalone?.cmd.push(() => {
+                window.ezstandalone?.showAds(118);
+            });
+        }
+    }, [consent]);
+
+    if (!(!isProduction || SiteUser?.Premium.IsPremium)) return null;
 
     return (
-        <Modal className={'privacy-popup'} show={showPopup} onHide={ () => setShowPopup(false)}>
-            <div className="privacy-popup-inner">
-                <h3>{'We are experiencing Technical Difficulties'}</h3>
-                <p>
-                    {'Due to a high volume of warbands being created, we are currently migrating databases. This should be resolved soon, but in the mean time expect difficulties with creating new warbands. Stand by!'}
-
-                </p>
-
-
-                <div className="privacy-popup-actions">
-                    <button className="btn btn-primary btn-block" onClick={handleClose}>Close</button>
+        <>
+            <div className={'AdsManager'}>
+                <div className={'Ads-text-below'}>
+                    {'⚠️ Due to a high volume of warbands, we are migrating databases. During this time we expect difficulties with creating new warbands, please stand by!'}
                 </div>
+
+                <div
+                    id="ezoic-pub-ad-placeholder-118"
+                    className={'ads-placeholder'}
+                />
             </div>
-        </Modal>
+
+            <div className={'AdsManager-bottom-spacer'}>
+            </div>
+        </>
+
+
     );
 };
