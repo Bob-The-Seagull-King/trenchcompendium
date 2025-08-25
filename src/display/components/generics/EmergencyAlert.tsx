@@ -13,7 +13,7 @@ declare global {
 //const isProduction = false;
 const isProduction = window.location.hostname === 'trench-companion.com';
 
-export const AdsManager: React.FC = () => {
+export const EmergencyAlert: React.FC = () => {
     const [consent, setConsent] = useState<boolean | null>(null);
     const { isLoggedIn, userId, authToken,  loadingUser, SiteUser } = useAuth();
 
@@ -29,14 +29,13 @@ export const AdsManager: React.FC = () => {
         }
     }, [consent]);
 
-    if (!isProduction || SiteUser?.Premium.IsPremium) return null;
+    if (!(!isProduction || SiteUser?.Premium.IsPremium)) return null;
 
     return (
         <>
             <div className={'AdsManager'}>
                 <div className={'Ads-text-below'}>
                     {'⚠️ Due to a high volume of warbands, we are migrating databases. During this time we expect difficulties with creating new warbands, please stand by!'}
-                    {'❤️ Support Trench Companion for an ad-free experience'}
                 </div>
 
                 <div
