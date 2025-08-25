@@ -50,6 +50,7 @@ import BlogArticlePage from "./display/pages/BlogArticlePage";
 import {ImageCreditPopoverProvider} from "./utility/ImageCreditPopoverContext";
 import {ToastContainer} from "react-toastify";
 import HeadScripts from "./display/components/generics/HeadScripts";
+import { EmergencyAlert } from './display/components/generics/EmergencyAlert'
 
 
 const App: React.FC = () => {
@@ -124,6 +125,7 @@ const App: React.FC = () => {
                             </ImageCreditPopoverProvider>
                             <AdsManager />
                             <TrackingManager />
+                            <EmergencyAlert />
                             {/*<TrackingManagerv2 />*/}
 
                             <ToastContainer
