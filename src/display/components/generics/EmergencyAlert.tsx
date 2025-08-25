@@ -13,7 +13,7 @@ declare global {
 //const isProduction = false;
 const isProduction = window.location.hostname === 'trench-companion.com';
 
-export const AdsManager: React.FC = () => {
+export const EmergencyAlert: React.FC = () => {
     const [consent, setConsent] = useState<boolean | null>(null);
     const { isLoggedIn, userId, authToken,  loadingUser, SiteUser } = useAuth();
 
