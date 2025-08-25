@@ -17,9 +17,10 @@ interface WbbEditSelectionProps {
     property : WarbandProperty;
     hypeproperty? : WarbandProperty;
     overrideplay? : boolean
+    hidedesc?: boolean
 }
 
-const WbbOptionSelect: React.FC<WbbEditSelectionProps> = ({choice,  property, hypeproperty, overrideplay}) => {
+const WbbOptionSelect: React.FC<WbbEditSelectionProps> = ({choice,  property, hypeproperty, overrideplay, hidedesc = false}) => {
     const { warband, reloadDisplay, updateKey } = useWarband();
 
     const [showModal, setshowModal] = useState(false);
@@ -103,10 +104,11 @@ const WbbOptionSelect: React.FC<WbbEditSelectionProps> = ({choice,  property, hy
                 />
             }
 
-
+            {!hidedesc &&
             <div key={_keyvar} className="SingleOptionSetDisplay-Details">
                 {displayState}
             </div>
+            }
         </div>
     );
 };

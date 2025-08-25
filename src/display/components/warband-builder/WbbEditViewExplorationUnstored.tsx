@@ -7,11 +7,12 @@ import {
     faCopy,
     faEllipsisVertical,
     faTrash,
+    faTriangleExclamation,
     faXmark
 } from "@fortawesome/free-solid-svg-icons";
 import {useWarband} from "../../../context/WarbandContext";
 import WbbContextualPopover from "./WbbContextualPopover";
-import { WarbandProperty } from '../../../classes/saveitems/Warband/WarbandProperty';
+import { ISelectedOption, WarbandProperty } from '../../../classes/saveitems/Warband/WarbandProperty';
 import { returnDescription } from '../../../utility/util';
 import WbbOptionSelect from './modals/warband/WbbOptionSelect';
 import {useWbbMode} from "../../../context/WbbModeContext";
@@ -29,27 +30,51 @@ import WbbExploration_Selection_FallenSoldier from "./Exploration/WbbExploration
 import WbbExploration_Selection_GloryPurchase from "./Exploration/WbbExploration_Selection_GloryPurchase";
 import WbbExploration_Selection_MultiEquipment from "./Exploration/WbbExploration_Selection_MultiEquipment";
 import WbbExploration_Selection_DieRollResult from "./Exploration/WbbExploration_Selection_DieRollResult";
-import WbbConsumableSelect from './modals/warband/WbbConsumableSelect';
-import { WarbandConsumable } from '../../../classes/saveitems/Warband/WarbandConsumable';
+import { ExplorationLocation } from '../../../classes/feature/exploration/ExplorationLocation';
+import { ToolsController } from '../../../classes/_high_level_controllers/ToolsController';
+import { LocationHold } from './Exploration/WbbLocationsList';
+import { containsTag } from '../../../utility/functions';
 
 interface WbbEditViewExplorationProps {
-    location : WarbandProperty;
+    location : LocationHold;
     initiallyOpen?: boolean;
+    clear: () => void;
 }
 
-const WbbEditViewExploration: React.FC<WbbEditViewExplorationProps> = ({  location, initiallyOpen }) => {
+const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({  location, initiallyOpen, clear }) => {
 
-    const { warband } = useWarband();
+    const { warband, reloadDisplay} = useWarband();
     if (warband == null) return (<div>Loading...</div>);
 
     // @TODO: set initially open if this exploration location has NOT been applied yet
     const [open, setOpen] = useState<boolean>(initiallyOpen ?? true);
+    const [selectedOptions, setselectedOptions] = useState<ISelectedOption[]>([]);
+    const [cansave, setcansave] = useState<boolean>(!location.loc?.GetID() || (!(containsTag(location.suite.location.Tags, 'unforced')) && location.suite?.options && location.suite.options.length > 0 && (location.suite.options.length != selectedOptions.length )));
+    
+    
     const { play_mode, edit_mode, view_mode, print_mode, setMode } = useWbbMode(); // play mode v2
 
     // Handler to apply an exploration location
     const handleApply = () => {
-        // @TODO
-        alert('Apply Exploration now');
+        if (!warband) { return; }
+        warband.warband_data.AddExplorationLocation(location.loc, selectedOptions).then(() => {
+            const Manager : ToolsController = ToolsController.getInstance();
+            Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(() => {clear(); reloadDisplay()})
+        })
+    }
+    
+    function UpdateSelectedOptionIDs(newoption : ISelectedOption) {
+        let found = false
+        for (let i = 0; i < selectedOptions.length; i++) {
+            if (selectedOptions[i].option_refID == newoption.option_refID) {
+                found = true;
+                selectedOptions[i].selection_ID = newoption.selection_ID;
+            }
+        }
+        if (found == false) {
+            selectedOptions.push(newoption);
+        }
+        setcansave(!location.loc?.GetID() || (!(containsTag(location.suite.location.Tags, 'unforced')) && location.suite?.options && location.suite.options.length > 0 && (location.suite.options.length != selectedOptions.length )))
     }
 
 
@@ -59,20 +84,14 @@ const WbbEditViewExploration: React.FC<WbbEditViewExplorationProps> = ({  locati
                  onClick={() => setOpen(!open)}
             >
                 <div className={'exploration-name'}>
-                    {location.GetOwnName()}
+                    {location.loc.GetName()}
+                    <FontAwesomeIcon icon={faTriangleExclamation} className="icon-inline-right-l icon-wraning"/>
                 </div>
 
                 {/* Collapse icon */}
-                <span className={'collapse-chevron-wrap mx-4'}>
+                <span className={'collapse-chevron-wrap mx-1'}>
                     <FontAwesomeIcon icon={open ? faChevronUp : faChevronDown} className=""/>
                 </span>
-
-                {/* actions */}
-                <WbbContextualPopover
-                    id={`exploration-${location.ID}`}
-                    type="exploration"
-                    item={location}
-                />
             </div>
 
             <Collapse in={open}>
@@ -80,60 +99,47 @@ const WbbEditViewExploration: React.FC<WbbEditViewExplorationProps> = ({  locati
                     <div className={'exploration-body'}>
                         {/* Main description text */}
                         <div className={'exploration-description'}>
-                            {(location.GetOwnDescription() != null) &&
+                            {(location.loc.Description != null) &&
                                 <>
                                     {
-                                        returnDescription(location, location.GetOwnDescription())
+                                        returnDescription(location.loc, location.loc.Description)
                                     }
                                 </>
                             }
                         </div>
-
-                        {(location.SelfDynamicProperty.Selections.length > 0 ) && 
+                        {/* Show option descriptions if any */}
+                        {(location.loc.MyOptions.length > 0 )  &&
                             <ul className={'exploration-description-options'}>
-                                {location.SelfDynamicProperty.Selections.map((item) => 
-                                    <div key={location.SelfDynamicProperty.Selections.indexOf(item)}>
-                                        {item.SelectedChoice != null && <>
-                                        <li  className={'exploration-description-option'}>
+                                {location.loc.MyOptions.map((item) => 
+                                    <div key={location.loc.MyOptions.indexOf(item)}>
+                                        {item.Selections.map((choice) => 
+                                        <li key={item.Selections.indexOf(choice)} className={'exploration-description-option'}>
                                             <span className={'option-name'}>
-                                                {item.SelectedChoice.display_str}
+                                                {choice.display_str}
                                             </span>
                                             <span className={'option-description'}>
-                                                {returnDescription(item.SelectedChoice.value, item.SelectedChoice.value.Description)}
+                                                {returnDescription(choice.value, choice.value.Description)}
                                             </span>
-                                        </li></>
+                                        </li>)
+
                                         }
                                     </div>   
                                 ) }
                             </ul>
                         }
-                        {location.SelfDynamicProperty.Selections.length > 0 &&
+
+                        {/* Show option Radio 1 */}
+                        { (location.suite.options.length > 0) &&
                             <>
-                            {location.SelfDynamicProperty.Selections.map((item) =>
-                                <div
-                                    key={location.SelfDynamicProperty.Selections.indexOf(item)}>
-                                        {((!(item.Option.Single == true && item.SelectedChoice != null))) &&
-                                        <WbbOptionSelect
-                                            property={location}
-                                            hidedesc={true}
-                                            choice={item}
-                                        />
-                                        }
-                                </div>
-                            )}
-                        </>
-                        }
-                        {location.Consumables.length > 0 &&
-                        <div className="stash-items-wrap">
-                            <div className={'stash-items-category'}>
-                                {location.Consumables.map((item: WarbandConsumable, index: number) => (
-                                    <WbbConsumableSelect
-                                        key={index}
-                                        property={item}
+                                {location.suite.options.map((item) =>
+                                    <WbbExploration_OptionSelect_Radio
+                                        key={location.suite.options.indexOf(item)}
+                                        options={item}
+                                        onChange={UpdateSelectedOptionIDs}
                                     />
-                                ))}
-                            </div>
-                        </div>
+                                )}
+                                
+                            </>
                         }
 
                         {/* Show additional Selection Options for the location */}
@@ -216,10 +222,20 @@ const WbbEditViewExploration: React.FC<WbbEditViewExplorationProps> = ({  locati
 
 
 
-                            {/*<div className={'alert-exploration alert-exploration-success'}>
-                                {@TODO: Add descriptive text what this has done }
-                                {'XY and Z has been added to your to your stash'}
-                            </div>*/}
+                        {/* Bottom info and apply action */}
+                        {/*<div className={'alert-exploration alert-exploration-info'}>
+                            { @TODO: Add descriptive text what this will do}
+                            {'This will add XY and Z to your stash'}
+                        </div>*/}
+
+                        {/* @TODO: disable if necessary options are not made*/}
+                        <button
+                            className={'btn btn-primary'}
+                            onClick={handleApply}
+                            disabled={cansave}
+                        >
+                            {'Save Exploration'}
+                        </button>
 
                         {/* @TODO: remove - this is for reference */}
                         {/*{location.SelfDynamicProperty.Selections.length > 0 &&*/}
@@ -242,4 +258,4 @@ const WbbEditViewExploration: React.FC<WbbEditViewExplorationProps> = ({  locati
 
 };
 
-export default WbbEditViewExploration;
+export default WbbEditViewExplorationUnstored;
