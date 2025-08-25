@@ -110,12 +110,16 @@ const WbbEditViewExploration: React.FC<WbbEditViewExplorationProps> = ({  locati
                         {location.SelfDynamicProperty.Selections.length > 0 &&
                             <>
                             {location.SelfDynamicProperty.Selections.map((item) =>
-                                <WbbOptionSelect
-                                    property={location}
-                                    hidedesc={true}
-                                    key={location.SelfDynamicProperty.Selections.indexOf(item)}
-                                    choice={item}
-                                />
+                                <div
+                                    key={location.SelfDynamicProperty.Selections.indexOf(item)}>
+                                        {((!(item.Option.Single == true && item.SelectedChoice != null))) &&
+                                        <WbbOptionSelect
+                                            property={location}
+                                            hidedesc={true}
+                                            choice={item}
+                                        />
+                                        }
+                                </div>
                             )}
                         </>
                         }
