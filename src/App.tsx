@@ -51,6 +51,7 @@ import {ImageCreditPopoverProvider} from "./utility/ImageCreditPopoverContext";
 import {ToastContainer} from "react-toastify";
 import HeadScripts from "./display/components/generics/HeadScripts";
 import { EmergencyAlert } from './display/components/generics/EmergencyAlert'
+import MaintananceNotice from "./display/components/generics/MaintananceNotice";
 
 
 const App: React.FC = () => {
@@ -88,6 +89,8 @@ const App: React.FC = () => {
                                 <SuperHeader controller={compendiumcontroller}/>
 
                                 <ScrollToTop/>
+
+                                {/*<MaintananceNotice />*/}
 
                                 <Routes>
                                     <Route path={ROUTES.HOME_ROUTE} element={<HomeRoute />} />
