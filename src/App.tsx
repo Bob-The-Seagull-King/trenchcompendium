@@ -128,7 +128,7 @@ const App: React.FC = () => {
                             </ImageCreditPopoverProvider>
                             <AdsManager />
                             <TrackingManager />
-                            <EmergencyAlert />
+                            {/*<EmergencyAlert />*/}
                             {/*<TrackingManagerv2 />*/}
 
                             <ToastContainer
