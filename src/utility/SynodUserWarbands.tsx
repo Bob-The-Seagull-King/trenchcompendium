@@ -26,7 +26,7 @@ const SynodUserWarbands: React.FC = () => {
             }
 
             try {
-                const response = await axios.get(`${SYNOD.URL}/wp-json/wp/v2/warbands/by-user/${userId}`);
+                const response = await axios.get(`${SYNOD.URL}/wp-json/synod/v1/warbands/by-user/${userId}`);
                 setWarbands(response.data);
             } catch (err: any) {
                 setError(err.response?.data?.message || 'Failed to fetch warbands');
