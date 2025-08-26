@@ -90,7 +90,7 @@ const App: React.FC = () => {
 
                                 <ScrollToTop/>
 
-                                <MaintananceNotice />
+                                {/*<MaintananceNotice />*/}
 
                                 <Routes>
                                     <Route path={ROUTES.HOME_ROUTE} element={<HomeRoute />} />
