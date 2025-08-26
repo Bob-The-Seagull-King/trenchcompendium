@@ -19,7 +19,7 @@ const SynodGetWarband = ({ WarbandId }: SynodWarbandURLProps): string => {
     useEffect(() => {
 
 
-        fetch(`${SYNOD.URL}/wp-json/wp/v2/warband/${WarbandId}`)
+        fetch(`${SYNOD.URL}/wp-json/synod/v1/warband/${WarbandId}`)
             .then(res => res.json())
             .then(data => {
 

@@ -171,7 +171,7 @@ class WarbandFactory {
         if (!synodcache.CheckWarbandCache(_val)) {
             synodcache.AddWarbandCallCache(_val);
             
-            const response : Response = await fetch(`${SYNOD.URL}/wp-json/wp/v2/warband/${_val}`)
+            const response : Response = await fetch(`${SYNOD.URL}/wp-json/synod/v1/warband/${_val}`)
             if (response) {
                 const json : any = await response.json();          
                 userdata = json.warband_data
