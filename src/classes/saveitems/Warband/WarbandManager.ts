@@ -359,7 +359,7 @@ class WarbandManager {
 
     public async CreateWarbandSynod(wb_data : IUserWarband) {
         const token = localStorage.getItem('jwtToken')
-        const response = await fetch(`${SYNOD.URL}/wp-json/wp/v2/warband/`, {
+        const response = await fetch(`${SYNOD.URL}/wp-json/synod/v1/warband/create`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${token}`,
@@ -379,7 +379,7 @@ class WarbandManager {
 
     public async UpdateWarbandSynod(id : number, wb_data : SumWarband) {
         const token = localStorage.getItem('jwtToken')
-        const response = await fetch(`${SYNOD.URL}/wp-json/wp/v2/warband/`+String(id), {
+        const response = await fetch(`${SYNOD.URL}/wp-json/synod/v1/warband/update/`+String(id), {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${token}`,
@@ -396,7 +396,7 @@ class WarbandManager {
 
     public async DeleteWarbandSynod(id : number) {
         const token = localStorage.getItem('jwtToken')
-        const response = await fetch(`${SYNOD.URL}/wp-json/wp/v2/warband/`+String(id), {
+        const response = await fetch(`${SYNOD.URL}/wp-json/synod/v1/warband/`+String(id), {
             method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${token}`,

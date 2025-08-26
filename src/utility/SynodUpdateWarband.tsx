@@ -27,7 +27,7 @@ const SynodUpdateWarband: React.FC = () => {
         }
 
         try {
-            const response = await axios.post(`${SYNOD.URL}/wp-json/wp/v2/warband/${warbandId}`, {
+            const response = await axios.post(`${SYNOD.URL}/wp-json/synod/v1/warband/update/${warbandId}`, {
                 meta: {
                     warband_data: JSON.stringify(parsedData),
                 }

@@ -24,7 +24,7 @@ const SynodCreateWarband: React.FC = () => {
         }
 
         try {
-            const response = await axios.post(`${SYNOD.URL}/wp-json/wp/v2/warband`, {
+            const response = await axios.post(`${SYNOD.URL}/wp-json/synod/v1/warband/create`, {
                 title: 'Warband created at ' + new Date().toLocaleString(),
                 status: 'publish',
                 meta: {
