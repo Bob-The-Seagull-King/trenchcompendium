@@ -383,7 +383,7 @@ class WarbandMember extends DynamicContextObject {
             const NewPurchase : WarbandPurchase = new WarbandPurchase(data[i].purchase, this, Model);
             this.Equipment.push(NewPurchase);
         }
-
+        
     }
 
     public async BuildModelEquipment(regenerate : boolean) {
@@ -2662,14 +2662,16 @@ class WarbandMember extends DynamicContextObject {
     }
 
     public async AddEquipment(item : FactionEquipmentRelationship) {
+        const modelpur = false
+        /*
+        
         const SpecialAddons = await this.GetSpecialCache();
         const cachekeys = Object.keys(SpecialAddons)
-        let modelpur = false
         for (let i = 0; i < cachekeys.length; i++) {
             if (SpecialAddons[cachekeys[i]].facrel == item) {
                 modelpur = true;
             }
-        }
+        }*/
         let itemcost = item.Cost;
         if ((this.MyContext as UserWarband).EquipmentRelCache[item.ID] != null) {
             itemcost = (this.MyContext as UserWarband).EquipmentRelCache[item.ID].cost
