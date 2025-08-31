@@ -1938,6 +1938,11 @@ export const BaseContextCallTable : CallEventTable = {
     },
     gain_ducats: {
         event_priotity: 0,
+        async getLocationMessage(this: EventRunner, eventSource : any, relayVar : string[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            relayVar.push("The warband gains " + context_func["count"] + " ducats.");
+
+            return relayVar;
+        },
         async onGainSkill(this: EventRunner, eventSource : any, trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) {
             if (context_func["value"]) {
                 warband.Ducats += context_func["value"]
@@ -3165,6 +3170,12 @@ export const BaseContextCallTable : CallEventTable = {
     },
     gain_experience: {
         event_priotity: 0,    
+        async getLocationMessage(this: EventRunner, eventSource : any, relayVar : string[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            const count = context_static != null? (context_static as any).MyOptions.length : 0
+            relayVar.push( (count) + " ELITE model" + (count > 1? "s" : "") + " gain " + context_func["gains"] + " experience.");
+
+            return relayVar;
+        },
         async onSelectPropertyValue(this: EventRunner, eventSource : any, trackVal : SelectedOption, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null ,hostobj : DynamicOptionContextObject, warband : UserWarband | null) {
             const ModelModule = await import("../../classes/saveitems/Warband/Purchases/WarbandMember")
             
