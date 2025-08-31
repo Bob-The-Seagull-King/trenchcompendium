@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Button, Collapse, Modal, OverlayTrigger, Popover} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {
@@ -12,7 +12,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import {useWarband} from "../../../context/WarbandContext";
 import WbbContextualPopover from "./WbbContextualPopover";
-import { ISelectedOption, WarbandProperty } from '../../../classes/saveitems/Warband/WarbandProperty';
+import { ISelectedOption, IWarbandProperty, WarbandProperty } from '../../../classes/saveitems/Warband/WarbandProperty';
 import { returnDescription } from '../../../utility/util';
 import WbbOptionSelect from './modals/warband/WbbOptionSelect';
 import {useWbbMode} from "../../../context/WbbModeContext";
@@ -34,6 +34,10 @@ import { ExplorationLocation } from '../../../classes/feature/exploration/Explor
 import { ToolsController } from '../../../classes/_high_level_controllers/ToolsController';
 import { LocationHold } from './Exploration/WbbLocationsList';
 import { containsTag } from '../../../utility/functions';
+import { EventRunner } from '../../../classes/contextevent/contexteventhandler';
+import { WarbandConsumable } from '../../../classes/saveitems/Warband/WarbandConsumable';
+import WbbConsumableSelect from './modals/warband/WbbConsumableSelect';
+import { ContextObject } from '../../../classes/contextevent/contextobject';
 
 interface WbbEditViewExplorationProps {
     location : LocationHold;
@@ -43,21 +47,62 @@ interface WbbEditViewExplorationProps {
 
 const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({  location, initiallyOpen, clear }) => {
 
-    const { warband, reloadDisplay} = useWarband();
+    const { warband, reloadDisplay, updateKey} = useWarband();
     if (warband == null) return (<div>Loading...</div>);
-
-    // @TODO: set initially open if this exploration location has NOT been applied yet
+    
     const [open, setOpen] = useState<boolean>(initiallyOpen ?? true);
+    const [keyvar, setkeyvar] = useState(0);
+    const [updateState, setUpdateState] = useState(0);
+    const [contextMessage, setContextMessage] = useState<string[]>([]);
     const [selectedOptions, setselectedOptions] = useState<ISelectedOption[]>([]);
     const [cansave, setcansave] = useState<boolean>(!location.loc?.GetID() || (!(containsTag(location.suite.location.Tags, 'unforced')) && location.suite?.options && location.suite.options.length > 0 && (location.suite.options.length != selectedOptions.length )));
     
+    useEffect(() => {
+        async function GetMessage() {
+            /*
+            const EventProc : EventRunner = new EventRunner();
+
+            let MessageList : string[]  = await EventProc.runEvent(
+                "getLocationMessage",
+                location.loc ,
+                [],
+                [],
+                null
+            )
+            
+            for (let i = 0; i < selectedOptions.length; i++) {
+                const value = location.loc.MyOptions.filter((item) => item.RefID == selectedOptions[i].option_refID)
+
+                if (value.length > 0) {
+                    const option = value[0].Selections.filter((item) => item.id == selectedOptions[i].selection_ID)
+                    if (option.length > 0) {
+                        if (option[0].value instanceof ContextObject) {
+                            MessageList = await EventProc.runEvent(
+                                "getLocationMessage",
+                                option[0].value,
+                                [],
+                                [],
+                                null
+                            )
+                        }
+                    }
+                }
+                selectedOptions[i].option_refID
+            }
+
+            setContextMessage(MessageList);
+            setkeyvar(keyvar + 1);*/
+        }
+
+        GetMessage();
+    }, [updateState]);
     
     const { play_mode, edit_mode, view_mode, print_mode, setMode } = useWbbMode(); // play mode v2
 
     // Handler to apply an exploration location
     const handleApply = () => {
         if (!warband) { return; }
-        warband.warband_data.AddExplorationLocation(location.loc, selectedOptions).then(() => {
+        warband.warband_data.Exploration.AddExplorationLocation(location.loc, selectedOptions).then(() => {
             const Manager : ToolsController = ToolsController.getInstance();
             Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(() => {clear(); reloadDisplay()})
         })
@@ -75,6 +120,7 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
             selectedOptions.push(newoption);
         }
         setcansave(!location.loc?.GetID() || (!(containsTag(location.suite.location.Tags, 'unforced')) && location.suite?.options && location.suite.options.length > 0 && (location.suite.options.length != selectedOptions.length )))
+        setUpdateState(updateState + 1);
     }
 
 
@@ -141,6 +187,7 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
                                 
                             </>
                         }
+
 
                         {/* Show additional Selection Options for the location */}
 
@@ -219,14 +266,21 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
                         {/*    }}*/}
                         {/*/>*/}
 
-
-
+                        {contextMessage.length == 0 &&
+                        <br/>
+                        }
 
                         {/* Bottom info and apply action */}
-                        {/*<div className={'alert-exploration alert-exploration-info'}>
-                            { @TODO: Add descriptive text what this will do}
-                            {'This will add XY and Z to your stash'}
-                        </div>*/}
+                        {contextMessage.length > 0 &&
+                        <div key={keyvar} className={'alert-exploration alert-exploration-info'}>
+                            <ul>
+                                {contextMessage.map((item, index) => 
+                                <li key={index}>
+                                    {item}
+                                </li>)}
+                            </ul>
+                        </div>
+                        }
 
                         {/* @TODO: disable if necessary options are not made*/}
                         <button
