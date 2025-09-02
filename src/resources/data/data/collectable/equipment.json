@@ -591,7 +591,7 @@
         "source": "core",
         "tags": {"action": true, "weapon": true, "grenade": true},
         "category": "ranged",
-        "distance": 8,
+        "distance": 8,  
         "stats": {
             "ranged": true
         },
@@ -614,7 +614,7 @@
             }
         ],
         "options": [],
-        "keywords": ["kw_grenade","kw_assault"],
+        "keywords": ["kw_grenade","kw_assault","kw_fire"],
         "modifiers": []
     },
     {
@@ -1392,9 +1392,9 @@
         "description": [            
             {
                 "tags": {"desc_type" : "paragraph"},
-                "content": "Any enemy Infiltrator cannot be placed closer than 16\" of this model.",
+                "content": "Any enemy INFILTRATOR cannot be placed closer than 16\" of this model.",
                 "glossary": [
-                    {"val": "Infiltrator", "id": "kw_infiltrator"}
+                    {"val": "INFILTRATOR", "id": "kw_infiltrator"}
                 ]
             }
         ],
@@ -1927,7 +1927,7 @@
             }
         ],
         "options": [],
-        "keywords": ["kw_fire","kw_assault"],
+        "keywords": ["kw_fire","kw_assault","kw_grenade"],
         "modifiers": ["-1D to Injuries"]
     },
     {
@@ -2048,7 +2048,7 @@
         ],
         "lore": [            
             {
-                "tags": {"desc_type" : "paragraph"},
+                "tags": {"desc_type" : "italic"},
                 "content": "Sultanate Sapper Corps are experts at using explosive charges to overcome defended enemy positions such as walls, bunkers, casemates and pillboxes. Experts at timing the fuses of their bombs, many a battle has been turned thanks to a well-timed blast."
             }
         ],
@@ -2083,7 +2083,7 @@
         ],
         "lore": [            
             {
-                "tags": {"desc_type" : "paragraph"},
+                "tags": {"desc_type" : "italic"},
                 "content": "Shaped into a likeness of the wondrous Anqā bird, and Created by the Imperial School of Military Engineering in association with the House of Wisdom, these movable defensive walls are light and extraordinarily resistant to all damage thanks to a richly-decorated ceramic layer on their outer surface and a secret compound of aramic and alchemical steel at its core. A Sapper can carry one on their back to battle, and with a single press of a button the guard unfolds by spreading its metalling wings and revealing a face of beautiful yet frightening countenance."
             }
         ],
@@ -2119,7 +2119,7 @@
         ],
         "lore": [        
             {
-                "tags": {"desc_type" : "paragraph"},
+                "tags": {"desc_type" : "italic"},
                 "content": "Automatic pistols are symbols of prestige owing to their rarity and cost. They are excellent weapons when storming trenches or fighting in hand-to-hand combat. They boast a high rate of fire, though they can be hard to control even for the best sharpshooters since they usually lack a stock."
             }  
         ],
@@ -2452,7 +2452,7 @@
     },
     {
         "id": "eq_antimaterialrifle",
-        "name": "Anti-Material Rifle",
+        "name": "Anti-Materiel Rifle",
         "source": "core",
         "tags": {"action": true, "weapon": true, "rifle": true},
         "category": "ranged",
@@ -2702,7 +2702,7 @@
         "description": [   
             {
                 "tags": {"desc_type" : "paragraph"},
-                "content": "Tartarus Claws always come as a pair and do not allow the use of any other melee weapons. You can make two Attack ACTIONS with the Claws without the usual -1 DICE for the second attack. If the opponent is taken Down or Out of Action with the Claws you may immediately move the model up to 3”. If the move takes you into contact with another enemy model, this counts as a charge and you can make a second Melee Attack ACTION with the claws. You can only do this follow-up move once per Activation.",
+                "content": "Tartarus Claws always come as a pair and do not allow the use of any other melee weapons or shield. You can make two Attack ACTIONS with the Claws without the usual -1 DICE for the second attack. If the opponent is taken Down or Out of Action with either of the Claws you may immediately move the model up to 6” in any direction. If the move takes you into contact with another enemy model, this counts as a charge and you can make a second Melee Attack ACTION with both claws. You can only do this follow-up move once per Activation",
                 "glossary": [
                     {"val": "-1 DICE", "id": "kw_minusdice"},
                     {"val": "ACTION", "id": "kw_action"},
@@ -2717,7 +2717,7 @@
             }
         ],
         "options": [],
-        "keywords": [],
+        "keywords": ["kw_cumbersome"],
         "modifiers": []
     },
     {
@@ -4105,39 +4105,6 @@
         "modifiers": []
     },
     {
-        "id": "eq_tanksplittersword",
-        "name": "Tank-Splitter Sword",
-        "source": "core",
-        "tags": {"action": true, "weapon": true},
-        "category": "melee",
-        "distance": null,
-        "stats": {
-            "hands_melee": 2,
-            "melee": true
-        },
-        "contextdata": {
-            "get_weapon": {}
-        },
-        "description": [             
-            {
-                "tags": {"desc_type" : "paragraph"},
-                "content": "dds +1 DICE to injury rolls. If the model the sword hits has an armour modifier from any source other than a shield, the player may set one die of the injury roll to a 6 before the roll is made. The rest of the dice for the injury roll are rolled as normal.",
-                "glossary": [
-                    {"val": "+1 DICE", "id": "kw_plusdice"}
-                ]
-            }   
-        ],
-        "lore": [            
-            {
-                "tags": {"desc_type" : "italic"},
-                "content": "It takes years of gruelling Mensur practice and field drills to acquire the required precision and speed to use the specialist tank-splitter swords of the Gardekorps. Despite their great size (often over 6 feet long!) they are remarkably light, and due to the large quantities of Orichalcum used in their forging process, they are virtually unbreakable. They are often used to disable tanks and other armoured vehicles by either slicing their armour open or disabling them with an accurate swing to sever their tracks. Before any battle they are treated with a special metal-melting chemical compound which melts the armour, making it far deadlier against armoured targets than those who wear none."
-            }
-        ],
-        "options": [],
-        "keywords": ["kw_critical","kw_cumbersome"],
-        "modifiers": ["+1D to Injuries"]
-    },
-    {
         "id": "eq_lochaberaxe",
         "name": "Lochaber Axe",
         "source": "core",
@@ -4356,7 +4323,8 @@
                 "content": "This weapon automatically hits and it ignores armour. Because this weapon has the Keyword GAS, it inflicts an additional BLOOD MARKER on a hit.",
                 "glossary": [
                     {"val": "GAS", "id": "kw_gas"},
-                    {"val": "INFECTION MARKERS", "id": "kw_infectionmarker"}
+                    {"val": "INFECTION MARKERS", "id": "kw_infectionmarker"},
+                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"}
                 ]
             }
         ],
@@ -5192,7 +5160,8 @@
                 "content": "You can aim the Demonic Aura Grenade against either a 1mmx1mm point on the ground or an enemy model within range. Next, take a Ranged Attack ACTION. If the roll fails (ie. you roll 6 or less), the Demonic Aura Grenade lands 1\" away from its intended location, multiplied by the number representing the degree of failure (for example, if you rolled 5, the grenade lands 2\" away, as 7-5=2). The direction is decided by your opponent. The Demonic Aura Grenade ignores armour and its BLAST ignores interposing scenery. This weapon causes double BLOOD MARKERS.",
                 "glossary": [
                     {"val": "BLAST", "id": "kw_blast"},
-                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"}
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"},
+                    {"val": "ACTION", "id": "kw_action"}
                 ]
             }  
         ],
@@ -5301,7 +5270,7 @@
             }
         ],
         "options": [],
-        "keywords": [],
+        "keywords": ["kw_consumable"],
         "modifiers": []
     },
     {

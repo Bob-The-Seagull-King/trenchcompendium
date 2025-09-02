@@ -3230,7 +3230,7 @@
         "id": "rel_fc_methodius_eq_antimaterialrifle",
         "source": "core",
         "tags": {"methodius": true},
-        "name": "Anti-Material Rifle",
+        "name": "Anti-Materiel Rifle",
         "contextdata": {  
             "faction_eq_restriction": {
                 "permitted": [
