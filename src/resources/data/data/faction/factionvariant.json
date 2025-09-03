@@ -348,7 +348,7 @@
         ],
         "team": "faithful",
         "cut_rules" : [],
-        "rules" : ["rl_rampantcharge","rl_meleefocused","rl_highlandmachinearmour","rl_highlandstrength","rl_strainedsupply","rl_bagpipes","rl_brave","rl_claymoresmiths","rl_lightlyarmoured"],
+        "rules" : ["rl_rampantcharge","rl_meleefocused_alba","rl_highlandmachinearmour","rl_highlandstrength","rl_strainedsupply","rl_bagpipes","rl_brave","rl_claymoresmiths","rl_lightlyarmoured"],
         "options": []
     },
     {
