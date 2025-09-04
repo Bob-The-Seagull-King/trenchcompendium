@@ -199,6 +199,39 @@ export async function convertstringIDtoName(stringval : string) {
     }
 }
 
+
+export function DoesContainRestrictionType(restriction_list : any[], type_val : string) : boolean {
+    for (let i = 0; i < restriction_list.length; i++) {
+        const temp = restriction_list[i]
+        if (temp.added) {
+            for (let j = 0; j < temp.added.length; j++) {
+                if (temp.added[j].res_type == type_val) {return true;}
+            }
+        }
+        if (temp.banned) {
+            for (let j = 0; j < temp.banned.length; j++) {
+                if (temp.banned[j].res_type == type_val) {return true;}
+            }
+        }
+        if (temp.permitted) {
+            for (let j = 0; j < temp.permitted.length; j++) {
+                if (temp.permitted[j].res_type == type_val) {return true;}
+            }
+        }
+        if (temp.removed) {
+            for (let j = 0; j < temp.removed.length; j++) {
+                if (temp.removed[j].res_type == type_val) {return true;}
+            }
+        }
+        if (temp.required) {
+            for (let j = 0; j < temp.required.length; j++) {
+                if (temp.required[j].res_type == type_val) {return true;}
+            }
+        }
+    }
+    return false;
+}
+
 /**
  * Takes a long string featuring underscores and turns it
  * into a form usable on the frontend.

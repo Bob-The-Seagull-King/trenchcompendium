@@ -3,7 +3,7 @@ import { CallEventTable, ContextEventEntry } from "./contexteventtypes";
 import { EventRunner } from "../../classes/contextevent/contexteventhandler";
 import { ContextObject } from "../../classes/contextevent/contextobject";
 import { IChoice, QuestionBase, StaticOptionContextObjectList, StaticOptionContextObjectQuestion } from "../../classes/options/StaticOption";
-import { containsTag, getCostType, GetWarbandOrNull, makestringpresentable } from "../../utility/functions";
+import { containsTag, DoesContainRestrictionType, getCostType, GetWarbandOrNull, makestringpresentable } from "../../utility/functions";
 import { getTagValue } from "../../utility/functions";
 import { Equipment, EquipmentLimit, EquipmentRestriction, EquipmentStats, RestrictionSingle } from "../../classes/feature/equipment/Equipment";
 import { Keyword } from "../../classes/feature/glossary/Keyword";
@@ -2494,8 +2494,6 @@ export const BaseContextCallTable : CallEventTable = {
                                         }
                                     }
                                     if (ispresent == false) {
-                                        console.log("IS PRESENT")
-                                        console.log(selection.SelectedChoice.value.ID)
                                         relayVar.push(selection.SelectedChoice.value)
                                     }
                                 }
@@ -2537,6 +2535,7 @@ export const BaseContextCallTable : CallEventTable = {
             const EquipmentFactoryModule = await import("../../factories/features/EquipmentFactory");
             const FactionEquipmentRelationshipModule = await import("../../classes/relationship/faction/FactionEquipmentRelationship");
             
+            const EventProc: EventRunner = new EventRunner();
             const NewChoices : IChoice[] = []
             const SubItem = context_func["additions"][trackVal]
             for (let i = 0; i < relayVar.length; i++) {
@@ -2559,6 +2558,21 @@ export const BaseContextCallTable : CallEventTable = {
                             break;
                         }
                     }
+                    if (SubItem["restriction"][j].res_type != undefined && SubItem["restriction"][j].res_type != null) {
+                        
+                        const result = await EventProc.runEvent(
+                            "getEquipmentRestriction",
+                            ModelItem,
+                            [],
+                            [],
+                            null
+                        );
+
+                        if (DoesContainRestrictionType(result, SubItem["restriction"][j].res_type)) {
+                            is_added = false;
+                            break;
+                        }
+                    }
                     if (SubItem["restriction"][j].tag) {
                         if (containsTag(ModelItem.EquipmentItem.Tags, SubItem["restriction"][j].tag)) {
                             is_added = true;
@@ -2568,7 +2582,6 @@ export const BaseContextCallTable : CallEventTable = {
                 if (is_added == true) {
                     NewChoices.push(relayVar[i])
 
-                        const EventProc: EventRunner = new EventRunner();
 
                         const result = await EventProc.runEvent(
                             "getEquipmentRestriction",
