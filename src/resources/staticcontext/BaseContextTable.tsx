@@ -2236,6 +2236,44 @@ export const BaseContextCallTable : CallEventTable = {
         }
 
     },
+    faction_extra_eq_restriction: {
+        event_priotity: 1,
+        async canWarbandAddItem(this: EventRunner, eventSource : any, relayVar : boolean,  trackVal : UserWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, restrictions : EquipmentRestriction[], item: FactionEquipmentRelationship) {            
+            const CanAdd = relayVar;
+            if (CanAdd) {
+
+                for (let i = 0; i < restrictions.length; i++) {
+                    const newrest = restrictions[i]
+
+                    if (newrest.removed) {
+                        for (let j = 0; j < newrest.removed.length; j++) {
+                            const newval = newrest.removed[j]
+
+                            if (newval.category) {
+                                if ((item).EquipmentItem.Category != newval.category) {
+                                    continue;
+                                }
+                            }
+
+                            if (newval.tag) {
+                                if (!containsTag((item).EquipmentItem.Tags, newval.tag) && !containsTag((item).Tags, newval.tag)) {
+                                    continue;
+                                }
+                            }
+                            
+                            if (newval.res_type == "keyword") {
+                                if (item.EquipmentItem.GetKeyWords().filter((item) => item.ID == newval.value).length != 0) {
+                                    return false;
+                                }
+                            }
+                            
+                        }
+                    }
+                }
+            }
+            return CanAdd;
+        }
+    },
     faction_eq_restriction: {
         event_priotity: 0,        
         async getEquipmentRestrictionPresentable(this: EventRunner, eventSource : any, relayVar : any, trackVal : EquipmentRestriction[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) 
@@ -2546,6 +2584,15 @@ export const BaseContextCallTable : CallEventTable = {
                     continue;
                 }
                 let is_added = false
+
+                const result = await EventProc.runEvent(
+                    "getEquipmentRestriction",
+                    ModelItem,
+                    [],
+                    [],
+                    null
+                );
+
                 for (let j = 0; j < SubItem["restriction"].length; j++) {
                     if (SubItem["restriction"][j].category) {
                         if ( (ModelItem.EquipmentItem.Category == SubItem["restriction"][j].category)) {
@@ -2559,15 +2606,7 @@ export const BaseContextCallTable : CallEventTable = {
                         }
                     }
                     if (SubItem["restriction"][j].res_type != undefined && SubItem["restriction"][j].res_type != null) {
-                        
-                        const result = await EventProc.runEvent(
-                            "getEquipmentRestriction",
-                            ModelItem,
-                            [],
-                            [],
-                            null
-                        );
-
+                    
                         if (DoesContainRestrictionType(result, SubItem["restriction"][j].res_type)) {
                             is_added = false;
                             break;
@@ -2579,7 +2618,9 @@ export const BaseContextCallTable : CallEventTable = {
                         }
                     } 
                 }
+                
                 if (is_added == true) {
+
                     NewChoices.push(relayVar[i])
 
 
