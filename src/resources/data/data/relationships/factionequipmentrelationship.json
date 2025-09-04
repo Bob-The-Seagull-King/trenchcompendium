@@ -406,7 +406,7 @@
                 ]
             } 
         },
-        "faction_id": ["fc_cultoftheblackgrail","fc_cultoftheblackgrail_fv_dirgeofthegreathegemon"],
+        "faction_id": ["fc_cultoftheblackgrail"],
         "equipment_id": "eq_machinegun",
         "cost": 50,
         "costtype": 0,
