@@ -1164,5 +1164,28 @@
         },
         "cut_abilities" : ["ab_artificialbody"],
         "new_abilities" : []
+    },
+    {
+        "id": "md_heretictrooper_mine",
+        "name": "Sarcophagus Mine",
+        "source": "core",
+        "tags": {},
+        "contextdata": { 
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_heretictrooper"
+                    }
+                ]
+            }},
+        "base_id": "md_heretictrooper",
+        "variant_name": "Sarcophagus_Mine",
+        "team": "hell",
+        "stats" : {},
+        "cut_keywords" : [],
+        "keywords" : [],
+        "cut_abilities" : [],
+        "new_abilities" : []
     }
 ]

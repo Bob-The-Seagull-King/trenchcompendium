@@ -3,7 +3,7 @@ import { CallEventTable, ContextEventEntry } from "./contexteventtypes";
 import { EventRunner } from "../../classes/contextevent/contexteventhandler";
 import { ContextObject } from "../../classes/contextevent/contextobject";
 import { IChoice, QuestionBase, StaticOptionContextObjectList, StaticOptionContextObjectQuestion } from "../../classes/options/StaticOption";
-import { containsTag, getCostType, GetWarbandOrNull, makestringpresentable } from "../../utility/functions";
+import { containsTag, DoesContainRestrictionType, getCostType, GetWarbandOrNull, makestringpresentable } from "../../utility/functions";
 import { getTagValue } from "../../utility/functions";
 import { Equipment, EquipmentLimit, EquipmentRestriction, EquipmentStats, RestrictionSingle } from "../../classes/feature/equipment/Equipment";
 import { Keyword } from "../../classes/feature/glossary/Keyword";
@@ -1622,7 +1622,7 @@ export const BaseContextCallTable : CallEventTable = {
                     if (context_func["match"][i]["type"] == "model") {
                         const count = await trackVal.warband.GetCountOfModel(context_func["match"][0]["value"]);
                         if (context_func["match"][i]["modifier"] == "half") {
-                            return Math.ceil(count * 0.5);
+                            return Math.floor(count * 0.5);
                         }
                     }
                 }
@@ -2063,6 +2063,28 @@ export const BaseContextCallTable : CallEventTable = {
             }
         }
     },
+    replace_model: {
+        event_priotity: 0,
+        async onGainUpgrade(this: EventRunner, eventSource : any, trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) {
+            
+            const { ModelFactory } = await import("../../factories/features/ModelFactory");
+            
+            if (context_func["new_id"]) {
+                const NewModel = await ModelFactory.CreateNewModel(context_func["new_id"], null);
+                trackVal.Tags["original_model_id"] = trackVal.CurModel.GetID();
+                trackVal.CurModel = NewModel;
+            }
+        },
+        async onRemoveUpgrade(this: EventRunner, eventSource : any, trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband, id : string) {
+
+            const { ModelFactory } = await import("../../factories/features/ModelFactory");
+            const oldval = trackVal.Tags["original_model_id"]
+            if (oldval != null) {
+                const NewModel = await ModelFactory.CreateNewModel(oldval as string, null);
+                trackVal.CurModel = NewModel;
+            }
+        }
+    },
     reset_scar: {
         event_priotity: 0,
         async onGainUpgrade(this: EventRunner, eventSource : any, trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) {
@@ -2213,6 +2235,44 @@ export const BaseContextCallTable : CallEventTable = {
             }
         }
 
+    },
+    faction_extra_eq_restriction: {
+        event_priotity: 1,
+        async canWarbandAddItem(this: EventRunner, eventSource : any, relayVar : boolean,  trackVal : UserWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, restrictions : EquipmentRestriction[], item: FactionEquipmentRelationship) {            
+            const CanAdd = relayVar;
+            if (CanAdd) {
+
+                for (let i = 0; i < restrictions.length; i++) {
+                    const newrest = restrictions[i]
+
+                    if (newrest.removed) {
+                        for (let j = 0; j < newrest.removed.length; j++) {
+                            const newval = newrest.removed[j]
+
+                            if (newval.category) {
+                                if ((item).EquipmentItem.Category != newval.category) {
+                                    continue;
+                                }
+                            }
+
+                            if (newval.tag) {
+                                if (!containsTag((item).EquipmentItem.Tags, newval.tag) && !containsTag((item).Tags, newval.tag)) {
+                                    continue;
+                                }
+                            }
+                            
+                            if (newval.res_type == "keyword") {
+                                if (item.EquipmentItem.GetKeyWords().filter((item) => item.ID == newval.value).length != 0) {
+                                    return false;
+                                }
+                            }
+                            
+                        }
+                    }
+                }
+            }
+            return CanAdd;
+        }
     },
     faction_eq_restriction: {
         event_priotity: 0,        
@@ -2472,8 +2532,6 @@ export const BaseContextCallTable : CallEventTable = {
                                         }
                                     }
                                     if (ispresent == false) {
-                                        console.log("IS PRESENT")
-                                        console.log(selection.SelectedChoice.value.ID)
                                         relayVar.push(selection.SelectedChoice.value)
                                     }
                                 }
@@ -2515,6 +2573,7 @@ export const BaseContextCallTable : CallEventTable = {
             const EquipmentFactoryModule = await import("../../factories/features/EquipmentFactory");
             const FactionEquipmentRelationshipModule = await import("../../classes/relationship/faction/FactionEquipmentRelationship");
             
+            const EventProc: EventRunner = new EventRunner();
             const NewChoices : IChoice[] = []
             const SubItem = context_func["additions"][trackVal]
             for (let i = 0; i < relayVar.length; i++) {
@@ -2525,6 +2584,15 @@ export const BaseContextCallTable : CallEventTable = {
                     continue;
                 }
                 let is_added = false
+
+                const result = await EventProc.runEvent(
+                    "getEquipmentRestriction",
+                    ModelItem,
+                    [],
+                    [],
+                    null
+                );
+
                 for (let j = 0; j < SubItem["restriction"].length; j++) {
                     if (SubItem["restriction"][j].category) {
                         if ( (ModelItem.EquipmentItem.Category == SubItem["restriction"][j].category)) {
@@ -2537,16 +2605,24 @@ export const BaseContextCallTable : CallEventTable = {
                             break;
                         }
                     }
+                    if (SubItem["restriction"][j].res_type != undefined && SubItem["restriction"][j].res_type != null) {
+                    
+                        if (DoesContainRestrictionType(result, SubItem["restriction"][j].res_type)) {
+                            is_added = false;
+                            break;
+                        }
+                    }
                     if (SubItem["restriction"][j].tag) {
                         if (containsTag(ModelItem.EquipmentItem.Tags, SubItem["restriction"][j].tag)) {
                             is_added = true;
                         }
                     } 
                 }
+                
                 if (is_added == true) {
+
                     NewChoices.push(relayVar[i])
 
-                        const EventProc: EventRunner = new EventRunner();
 
                         const result = await EventProc.runEvent(
                             "getEquipmentRestriction",

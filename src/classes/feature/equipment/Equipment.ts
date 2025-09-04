@@ -49,6 +49,7 @@ interface RestrictionSingle {
     param? : any
 }
 
+
 // Creates a proper copy of an equipment restriction,
 // used when an object needs to customise or overwrite
 // a restriction without changing the original.

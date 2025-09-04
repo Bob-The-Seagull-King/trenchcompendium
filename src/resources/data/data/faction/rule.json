@@ -866,7 +866,8 @@
                             { "category": "melee" },
                             { "category": "ranged" },
                             { "category": "armour" },
-                            { "category": "equipment" }
+                            { "category": "equipment" },
+                            { "res_type": "id" }
                         ]
                     },
                     {
@@ -877,7 +878,8 @@
                             { "category": "melee" },
                             { "category": "ranged" },
                             { "category": "armour" },
-                            { "category": "equipment" }
+                            { "category": "equipment" },
+                            { "res_type": "id" }
                         ]
                     }
                 ]
@@ -966,7 +968,7 @@
         "source": "core",
         "tags": { },
         "contextdata": { 
-            
+            "faction_extra_eq_restriction": {},
             "faction_eq_restriction": {
                 "removed": [
                     {

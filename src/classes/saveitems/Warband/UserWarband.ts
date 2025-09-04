@@ -1943,6 +1943,7 @@ class UserWarband extends DynamicContextObject {
             FactionEquipRestrictionList  = await eventmon.runEvent(
                 "getEquipmentRestriction", this, [], [], null )
         }
+        console.log(FactionEquipRestrictionList)
 
         for (let i = 0; i < BaseRels.length; i++) {
             

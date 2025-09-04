@@ -164,7 +164,7 @@
         ],
         "team": "hell",
         "cut_rules" : [],
-        "rules" : ["rl_worshipmammon","rl_mammonschosen","rl_corruptmerchants","rl_infernalrivalry","rl_goeticwarlocks","rl_debtorstomammon"],
+        "rules" : ["rl_preservetheloot","rl_worshipmammon","rl_mammonschosen","rl_corruptmerchants","rl_infernalrivalry","rl_goeticwarlocks","rl_debtorstomammon"],
         "options": []
     },
     {

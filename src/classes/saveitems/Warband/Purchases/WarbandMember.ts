@@ -2248,6 +2248,8 @@ class WarbandMember extends DynamicContextObject {
             [],
             null
         )
+
+        console.log(NewOptions);
         
         for (let i = 0; i < NewOptions.length; i++) {
             let CanAdd = true;

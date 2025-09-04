@@ -406,7 +406,7 @@
                 ]
             } 
         },
-        "faction_id": ["fc_cultoftheblackgrail","fc_cultoftheblackgrail_fv_dirgeofthegreathegemon"],
+        "faction_id": ["fc_cultoftheblackgrail"],
         "equipment_id": "eq_machinegun",
         "cost": 50,
         "costtype": 0,
@@ -2628,7 +2628,8 @@
     {
         "id": "rel_fc_eq_themarkofcain",
         "source": "core",
-        "tags": {},
+        "tags": {
+            "exploration_only": true},
         "name": "Mark of Cain",
         "contextdata": {            
             "faction_eq_restriction": {
@@ -2649,7 +2650,8 @@
     {
         "id": "rel_fc_eq_battlefieldtitle",
         "source": "core",
-        "tags": {},
+        "tags": {
+            "exploration_only": true},
         "name": "Battlefield Title",
         "contextdata": {            
             "faction_eq_restriction": {
@@ -2717,7 +2719,8 @@
     {
         "id": "rel_fc_eq_executionersaxe",
         "source": "core",
-        "tags": {},
+        "tags": {
+            "exploration_only": true},
         "name": "Executioner's Axe",
         "contextdata": {   
         },
@@ -2730,7 +2733,8 @@
     {
         "id": "rel_fc_eq_armourofcobar",
         "source": "core",
-        "tags": {},
+        "tags": {
+            "exploration_only": true},
         "name": "Armour of Cobar",
         "contextdata": {            
             "faction_eq_restriction": {
