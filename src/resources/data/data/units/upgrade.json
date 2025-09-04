@@ -776,6 +776,7 @@
         "tags": {"action": true },
         "contextdata": {
             "activated": {},
+            "replace_model": { "new_id" : "md_heretictrooper_mine"},
             "set_stat": { "upgrades" : [
                 {"stat": "armour", "value": -3}
                 ]},     

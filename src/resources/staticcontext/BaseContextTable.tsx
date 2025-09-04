@@ -2063,6 +2063,28 @@ export const BaseContextCallTable : CallEventTable = {
             }
         }
     },
+    replace_model: {
+        event_priotity: 0,
+        async onGainUpgrade(this: EventRunner, eventSource : any, trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) {
+            
+            const { ModelFactory } = await import("../../factories/features/ModelFactory");
+            
+            if (context_func["new_id"]) {
+                const NewModel = await ModelFactory.CreateNewModel(context_func["new_id"], null);
+                trackVal.Tags["original_model_id"] = trackVal.CurModel.GetID();
+                trackVal.CurModel = NewModel;
+            }
+        },
+        async onRemoveUpgrade(this: EventRunner, eventSource : any, trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband, id : string) {
+
+            const { ModelFactory } = await import("../../factories/features/ModelFactory");
+            const oldval = trackVal.Tags["original_model_id"]
+            if (oldval != null) {
+                const NewModel = await ModelFactory.CreateNewModel(oldval as string, null);
+                trackVal.CurModel = NewModel;
+            }
+        }
+    },
     reset_scar: {
         event_priotity: 0,
         async onGainUpgrade(this: EventRunner, eventSource : any, trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) {
