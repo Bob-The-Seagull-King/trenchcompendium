@@ -204,28 +204,53 @@ export function DoesContainRestrictionType(restriction_list : any[], type_val : 
     for (let i = 0; i < restriction_list.length; i++) {
         const temp = restriction_list[i]
         if (temp.added) {
+            let found_bad = false;
+            let found_good = false;
             for (let j = 0; j < temp.added.length; j++) {
-                if (temp.added[j].res_type == type_val) {return true;}
+                if (temp.added[j].res_type == type_val) {found_bad = true;} else {found_good = true}
+            }
+            if (found_bad == true && found_good == false) {
+                return true;
             }
         }
         if (temp.banned) {
+            let found_bad = false;
+            let found_good = false;
             for (let j = 0; j < temp.banned.length; j++) {
-                if (temp.banned[j].res_type == type_val) {return true;}
+                if (temp.banned[j].res_type == type_val) {found_bad = true;} else {found_good = true}
+            }
+            if (found_bad == true && found_good == false) {
+                return true;
             }
         }
         if (temp.permitted) {
+            let found_bad = false;
+            let found_good = false;
             for (let j = 0; j < temp.permitted.length; j++) {
-                if (temp.permitted[j].res_type == type_val) {return true;}
+                if (temp.permitted[j].res_type == type_val) {found_bad = true;} else {found_good = true}
+            }
+            if (found_bad == true && found_good == false) {
+                return true;
             }
         }
         if (temp.removed) {
+            let found_bad = false;
+            let found_good = false;
             for (let j = 0; j < temp.removed.length; j++) {
-                if (temp.removed[j].res_type == type_val) {return true;}
+                if (temp.removed[j].res_type == type_val) {found_bad = true;} else {found_good = true}
+            }
+            if (found_bad == true && found_good == false) {
+                return true;
             }
         }
         if (temp.required) {
+            let found_bad = false;
+            let found_good = false;
             for (let j = 0; j < temp.required.length; j++) {
-                if (temp.required[j].res_type == type_val) {return true;}
+                if (temp.required[j].res_type == type_val) {found_bad = true;} else {found_good = true}
+            }
+            if (found_bad == true && found_good == false) {
+                return true;
             }
         }
     }
