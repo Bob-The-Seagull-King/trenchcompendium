@@ -2045,6 +2045,15 @@
         "source": "core",
         "tags": {},
         "contextdata": {
+            "model_equipment_restriction": {
+                "removed": [                    
+                    {
+                        "tag": "shield",
+                        "res_type": "all",
+                        "value": ""
+                    }
+                ]
+            }
             
         },
         "description": [
