@@ -2667,12 +2667,12 @@
         "equipment_id": "eq_battlefieldtitle",
         "cost": 6,
         "costtype": 1,
-        "limit": 1
+        "limit": 1 
     },
     {
         "id": "rel_fc_eq_bookofbattleprayers",
         "source": "core",
-        "tags": {},
+        "tags": {"exploration_only": true},
         "name": "Book of Battle Prayers",
         "contextdata": {            
             "faction_eq_restriction": {
