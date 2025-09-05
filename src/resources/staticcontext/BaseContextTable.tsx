@@ -3169,8 +3169,9 @@ export const BaseContextCallTable : CallEventTable = {
                                     isValid = false;
                                 }
                             }
+
                             if (cntxt["restriction"][j]["rest_type"] == "id") {
-                                if (cntxt["restriction"][j]["value"] != (Models[i].model.ID == cntxt["restriction"][j]["subvalue"])) {
+                                if (cntxt["restriction"][j]["value"] != (Models[i].model.CurModel.ID == cntxt["restriction"][j]["subvalue"])) {
                                     isValid = false;
                                 }
                             }
@@ -3216,8 +3217,9 @@ export const BaseContextCallTable : CallEventTable = {
                                     isValid = false;
                                 }
                             }
+
                             if (cntxt["restriction"][j]["rest_type"] == "id") {
-                                if (cntxt["restriction"][j]["value"] != (Models[i].model.ID == cntxt["restriction"][j]["subvalue"])) {
+                                if (cntxt["restriction"][j]["value"] != (Models[i].model.CurModel.ID == cntxt["restriction"][j]["subvalue"])) {
                                     isValid = false;
                                 }
                             }

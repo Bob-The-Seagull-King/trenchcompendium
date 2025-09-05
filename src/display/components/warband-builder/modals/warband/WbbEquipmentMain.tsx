@@ -21,7 +21,6 @@ const WbbEquipmentMain: React.FC<EquipmentItemProps> = (props : EquipmentItemPro
     const abilityObject = (((props.item.HeldObject as WarbandEquipment).MyEquipment.SelfDynamicProperty.OptionChoice as Equipment))
     const [loreshow] = useGlobalState('loreshow');
 
-    console.log(loreshow);
 
     return (
         <div className={'WbbEquipmentMain'}>
