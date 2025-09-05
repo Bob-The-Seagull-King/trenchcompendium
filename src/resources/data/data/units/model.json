@@ -1520,7 +1520,7 @@
             "potential": 0
         },
         "keywords" : ["kw_antioch"],
-        "abilities" : ["ab_finishthefallen","ab_expertmedic"]
+        "abilities" : ["ab_finishthefallen","ab_expertmedic","ab_conventconditioning"]
     },
     {
         "id": "md_witchburner",
