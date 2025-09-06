@@ -246,7 +246,7 @@ export const BaseContextCallTable : CallEventTable = {
     validate_final_unit_equipment: {
         event_priotity: 0,        
         async validateModelForWarband(this: EventRunner, eventSource : any, relayVar: string[], trackVal : WarbandPurchase, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : UserWarband) {
-            
+            const faceqmodule = await import("../../factories/features/EquipmentFactory")
             if (context_func["requirements"]) {
                 for (let i = 0; i < context_func["requirements"].length; i++) {
                     const CurExp = context_func["requirements"][i]
@@ -260,6 +260,23 @@ export const BaseContextCallTable : CallEventTable = {
                                 break;
                             }
                         }
+
+                        if (CurExp["exception"]) {
+                            for (let j = 0; j < CurExp['exception'].length; j++) {
+                                const Excep = CurExp['exception'][j]
+
+                                if (Excep['id']) {
+                                    for (let k = 0; k < equipment.length; k++) {
+                                        if ((equipment[k].equipment.GetEquipmentItem().GetID() == Excep['id']) == Excep['value']) {
+                                            isfound = CurExp['value']
+                                            break;
+                                        }
+                                    }
+                                }
+
+                            }
+                        }
+
                         if (CurExp['value'] == !isfound) {
                             relayVar.push(
                                 "The model " + (trackVal.HeldObject as WarbandMember).GetTrueName() + " must " + (CurExp["value"] == true ? "be" : "not be") + " equipped with " + makestringpresentable( CurExp["tag"])
@@ -267,6 +284,36 @@ export const BaseContextCallTable : CallEventTable = {
                         }
 
                     }
+                }
+            }
+            if (context_func["requirements_single"]) {
+                let isfound = false;
+                for (let i = 0; i < context_func["requirements_single"].length; i++) {
+                    const CurExp = context_func["requirements_single"][i]
+
+                    if (CurExp['id']) {
+                        const equipment = await (trackVal.HeldObject as WarbandMember).GetAllEquipForShow()
+                        
+                        for (let j = 0; j < equipment.length; j ++) {
+                            if ((equipment[j].equipment.GetEquipmentItem().GetID() == CurExp['id']) == CurExp['value']) {
+                                isfound = true
+                                break;
+                            }
+                        }
+
+                    }
+                }                
+                if (!isfound) {
+                    let StrVal = "The model " + (trackVal.HeldObject as WarbandMember).GetTrueName() + " must either: "
+                    
+                    for (let i = 0; i < context_func["requirements_single"].length; i++) {
+                        const CurExp = context_func["requirements_single"][i]
+                        if (CurExp['id']) {
+                            const NewItem = await faceqmodule.EquipmentFactory.CreateNewEquipment(CurExp['id'], null);
+                            StrVal += " " + (CurExp["value"] == true ? "Be" : "Not be") + " equipped with " + NewItem.GetTrueName() + "."
+                        }
+                    }
+                    relayVar.push(StrVal)
                 }
             }
             
