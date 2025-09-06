@@ -8,7 +8,7 @@ import { getTagValue } from "../../utility/functions";
 import { Equipment, EquipmentLimit, EquipmentRestriction, EquipmentStats, RestrictionSingle } from "../../classes/feature/equipment/Equipment";
 import { Keyword } from "../../classes/feature/glossary/Keyword";
 import { KeywordFactory } from "../../factories/features/KeywordFactory";
-import { ModelStatistics } from "../../classes/feature/model/ModelStats";
+import { areModelStatisticsEqual, ModelStatistics } from "../../classes/feature/model/ModelStats";
 import { IModelUpgradeRelationship, ModelUpgradeRelationship } from "../../classes/relationship/model/ModelUpgradeRelationship";
 import { Requester } from "../../factories/Requester";
 import { UpgradeFactory } from "../../factories/features/UpgradeFactory";
@@ -1463,6 +1463,33 @@ export const BaseContextCallTable : CallEventTable = {
             }
 
             return relayVar.concat(StatOptionList);
+        }
+    },
+    remove_stat_option: {
+        event_priotity: 2,
+        async getMemberModelStatOptions(this: EventRunner, eventSource : any, relayVar : ModelStatistics[][], trackVal: WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null)  
+        {
+            const StatOptionList: ModelStatistics[][] = []
+            const CurStats = await trackVal.CurModel.Stats;
+            if (context_func["options"]) {
+                for (let i = 0; i < context_func["options"].length; i++) {
+                    const NewStats : ModelStatistics[] = context_func["options"][i]
+                    if (context_func["type"] == "base") { 
+
+                        NewStats.push({
+                            base: CurStats.base
+                        })
+                    }
+                    StatOptionList.push(NewStats)
+                }
+            }
+
+            return relayVar.filter(array1 =>
+                !StatOptionList.some(array2 =>
+                    array1.length === array2.length && 
+                    array1.every((item1, index) => areModelStatisticsEqual(item1, array2[index]))
+                )
+            );
         }
     },
     special_category_upgrades: {

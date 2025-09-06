@@ -24,6 +24,17 @@ interface PresentModelStatistics {
     mercenary?: boolean[]
 }
 
+export function areModelStatisticsEqual(a: ModelStatistics, b: ModelStatistics): boolean {
+    return a.melee === b.melee &&
+           a.ranged === b.ranged &&
+           a.base?.toString() === b.base?.toString() &&
+           a.armour === b.armour &&
+           a.movetype === b.movetype &&
+           a.potential === b.potential &&
+           a.mercenary === b.mercenary;
+}
+
+
 // Given a baselist, override any stats with their equivilent addonlist,
 // but leave any stats not given by the addonlist the same.
 export function MergeTwoStats(baseList: ModelStatistics, addonList : ModelStatistics) {

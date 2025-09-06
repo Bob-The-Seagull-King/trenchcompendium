@@ -920,7 +920,19 @@
                "added": [
                 "rel_md_eq_mechanisedheavyinfantry_advanced"
                ]
-           }
+           },
+            "remove_stat_option": {
+                "type": "base",
+                "direction": "increase",
+                "options": 
+                    [
+                        [
+                            {
+                                "base": [40]
+                            }
+                        ]
+                    ]
+            }
         },
         "description": [           
             {
@@ -947,7 +959,19 @@
                "added": [
                 "rel_md_eq_mechanisedheavyinfantry_advanced"
                ]
-           }
+           },
+            "remove_stat_option": {
+                "type": "base",
+                "direction": "increase",
+                "options": 
+                    [
+                        [
+                            {
+                                "base": [40]
+                            }
+                        ]
+                    ]
+            }
         },
         "description": [           
             {
