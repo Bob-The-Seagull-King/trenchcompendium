@@ -1956,6 +1956,14 @@
         "source": "core",
         "tags": {},
         "contextdata": {
+            "validate_final_unit_equipment": {
+                "requirements": [
+                    {
+                        "category": "ranged",
+                        "value": true
+                    }
+                ]
+            } 
             
         },
         "description": [

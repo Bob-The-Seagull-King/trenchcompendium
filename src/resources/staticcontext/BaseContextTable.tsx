@@ -250,39 +250,54 @@ export const BaseContextCallTable : CallEventTable = {
             if (context_func["requirements"]) {
                 for (let i = 0; i < context_func["requirements"].length; i++) {
                     const CurExp = context_func["requirements"][i]
+                    const equipment = await (trackVal.HeldObject as WarbandMember).GetAllEquipForShow()
+                    let isfound = false;
 
                     if (CurExp['tag']) {
-                        const equipment = await (trackVal.HeldObject as WarbandMember).GetAllEquipForShow()
-                        let isfound = false;
                         for (let j = 0; j < equipment.length; j ++) {
                             if (equipment[j].equipment.IsTagPresent(CurExp['tag'])) {
                                 isfound = true
                                 break;
                             }
                         }
+                    }
 
-                        if (CurExp["exception"]) {
-                            for (let j = 0; j < CurExp['exception'].length; j++) {
-                                const Excep = CurExp['exception'][j]
-
-                                if (Excep['id']) {
-                                    for (let k = 0; k < equipment.length; k++) {
-                                        if ((equipment[k].equipment.GetEquipmentItem().GetID() == Excep['id']) == Excep['value']) {
-                                            isfound = CurExp['value']
-                                            break;
-                                        }
-                                    }
-                                }
-
+                    if (CurExp['category']) {
+                        for (let j = 0; j < equipment.length; j ++) {
+                            if (equipment[j].equipment.GetEquipmentItem().Category == CurExp['category']) {
+                                isfound = true
+                                break;
                             }
                         }
+                    }
+                    
+                    if (CurExp["exception"]) {
+                        for (let j = 0; j < CurExp['exception'].length; j++) {
+                            const Excep = CurExp['exception'][j]
 
-                        if (CurExp['value'] == !isfound) {
+                            if (Excep['id']) {
+                                for (let k = 0; k < equipment.length; k++) {
+                                    if ((equipment[k].equipment.GetEquipmentItem().GetID() == Excep['id']) == Excep['value']) {
+                                        isfound = CurExp['value']
+                                        break;
+                                    }
+                                }
+                            }
+
+                        }
+                    }
+                    
+                    if (CurExp['value'] == !isfound) {
+                        if (CurExp['tag']) {
                             relayVar.push(
                                 "The model " + (trackVal.HeldObject as WarbandMember).GetTrueName() + " must " + (CurExp["value"] == true ? "be" : "not be") + " equipped with " + makestringpresentable( CurExp["tag"])
                             )
                         }
-
+                        if (CurExp['category']) {
+                            relayVar.push(
+                                "The model " + (trackVal.HeldObject as WarbandMember).GetTrueName() + " must " + (CurExp["value"] == true ? "be" : "not be") + " equipped with " + makestringpresentable( CurExp["category"]) + " equipment"
+                            )
+                        }
                     }
                 }
             }
