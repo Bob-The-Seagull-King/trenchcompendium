@@ -1520,7 +1520,7 @@
             "potential": 0
         },
         "keywords" : ["kw_antioch"],
-        "abilities" : ["ab_finishthefallen","ab_expertmedic"]
+        "abilities" : ["ab_finishthefallen","ab_expertmedic","ab_conventconditioning"]
     },
     {
         "id": "md_witchburner",
@@ -1956,6 +1956,14 @@
         "source": "core",
         "tags": {},
         "contextdata": {
+            "validate_final_unit_equipment": {
+                "requirements": [
+                    {
+                        "category": "ranged",
+                        "value": true
+                    }
+                ]
+            } 
             
         },
         "description": [
@@ -2045,6 +2053,15 @@
         "source": "core",
         "tags": {},
         "contextdata": {
+            "model_equipment_restriction": {
+                "removed": [                    
+                    {
+                        "tag": "shield",
+                        "res_type": "all",
+                        "value": ""
+                    }
+                ]
+            }
             
         },
         "description": [

@@ -624,7 +624,6 @@
         "source": "core",
         "tags": {"trait": true, "special_category": "secrets_of_the_house_of_wisdom"},
         "contextdata": {
-            "keyword_add": {"value": ["kw_fear"]},
             "model_attatch": {},
             "warband_general_hook": {},
             "warband_wide": {}, 
@@ -921,7 +920,19 @@
                "added": [
                 "rel_md_eq_mechanisedheavyinfantry_advanced"
                ]
-           }
+           },
+            "remove_stat_option": {
+                "type": "base",
+                "direction": "increase",
+                "options": 
+                    [
+                        [
+                            {
+                                "base": [40]
+                            }
+                        ]
+                    ]
+            }
         },
         "description": [           
             {
@@ -948,7 +959,19 @@
                "added": [
                 "rel_md_eq_mechanisedheavyinfantry_advanced"
                ]
-           }
+           },
+            "remove_stat_option": {
+                "type": "base",
+                "direction": "increase",
+                "options": 
+                    [
+                        [
+                            {
+                                "base": [40]
+                            }
+                        ]
+                    ]
+            }
         },
         "description": [           
             {

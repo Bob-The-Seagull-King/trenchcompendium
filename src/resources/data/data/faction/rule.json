@@ -291,6 +291,14 @@
                                     "value": "fc_ironsultanate",
                                     "equals": false,
                                     "strict": true
+                                },
+                                {             
+                                    "item": "tags",
+                                    "value": "exploration_only",
+                                    "equals": false,
+                                    "strict": true,
+                                    "istag": true,
+                                    "tagvalue": true
                                 }
                             ],
                             "subparams": []
@@ -325,6 +333,14 @@
                                     "value": "fc_ironsultanate",
                                     "equals": false,
                                     "strict": true
+                                },
+                                {             
+                                    "item": "tags",
+                                    "value": "exploration_only",
+                                    "equals": false,
+                                    "strict": true,
+                                    "istag": true,
+                                    "tagvalue": true
                                 }
                             ],
                             "subparams": []
@@ -920,6 +936,14 @@
                                     "value": "fc_hereticlegion",
                                     "equals": false,
                                     "strict": true
+                                },
+                                {             
+                                    "item": "tags",
+                                    "value": "exploration_only",
+                                    "equals": false,
+                                    "strict": true,
+                                    "istag": true,
+                                    "tagvalue": true
                                 }
                             ],
                             "subparams": []
@@ -954,6 +978,14 @@
                                     "value": "fc_hereticlegion",
                                     "equals": false,
                                     "strict": true
+                                },
+                                {             
+                                    "item": "tags",
+                                    "value": "exploration_only",
+                                    "equals": false,
+                                    "strict": true,
+                                    "istag": true,
+                                    "tagvalue": true
                                 }
                             ],
                             "subparams": []

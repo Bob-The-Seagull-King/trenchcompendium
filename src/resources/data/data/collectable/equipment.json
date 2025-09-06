@@ -2834,6 +2834,18 @@
             "hands_ranged": 1
         },
         "contextdata": {
+            "validate_final_unit_equipment": {
+                "requirements_single": [
+                    {
+                        "id": "eq_machinearmour",
+                        "value": true
+                    },
+                    {
+                        "id": "eq_highlandmachinearmour",
+                        "value": true
+                    }
+                ]
+            } 
         },
         "description": [       
             {
@@ -2868,6 +2880,20 @@
             "bonus_ability": {
                 "action_type": ["dash"]
             },
+            "validate_final_unit_equipment": {
+                "requirements": [
+                    {
+                        "tag": "shield",
+                        "value": false,
+                        "exception": [                            
+                            {
+                                "id": "eq_heavyballisticshield",
+                                "value": true
+                            }
+                        ]
+                    }
+                ]
+            } ,
             "model_equipment_restriction": {
                 "required": [
                     {

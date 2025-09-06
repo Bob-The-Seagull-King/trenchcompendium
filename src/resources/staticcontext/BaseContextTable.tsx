@@ -8,7 +8,7 @@ import { getTagValue } from "../../utility/functions";
 import { Equipment, EquipmentLimit, EquipmentRestriction, EquipmentStats, RestrictionSingle } from "../../classes/feature/equipment/Equipment";
 import { Keyword } from "../../classes/feature/glossary/Keyword";
 import { KeywordFactory } from "../../factories/features/KeywordFactory";
-import { ModelStatistics } from "../../classes/feature/model/ModelStats";
+import { areModelStatisticsEqual, ModelStatistics } from "../../classes/feature/model/ModelStats";
 import { IModelUpgradeRelationship, ModelUpgradeRelationship } from "../../classes/relationship/model/ModelUpgradeRelationship";
 import { Requester } from "../../factories/Requester";
 import { UpgradeFactory } from "../../factories/features/UpgradeFactory";
@@ -246,27 +246,89 @@ export const BaseContextCallTable : CallEventTable = {
     validate_final_unit_equipment: {
         event_priotity: 0,        
         async validateModelForWarband(this: EventRunner, eventSource : any, relayVar: string[], trackVal : WarbandPurchase, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : UserWarband) {
-            
+            const faceqmodule = await import("../../factories/features/EquipmentFactory")
             if (context_func["requirements"]) {
                 for (let i = 0; i < context_func["requirements"].length; i++) {
                     const CurExp = context_func["requirements"][i]
+                    const equipment = await (trackVal.HeldObject as WarbandMember).GetAllEquipForShow()
+                    let isfound = false;
 
                     if (CurExp['tag']) {
-                        const equipment = await (trackVal.HeldObject as WarbandMember).GetAllEquipForShow()
-                        let isfound = false;
                         for (let j = 0; j < equipment.length; j ++) {
                             if (equipment[j].equipment.IsTagPresent(CurExp['tag'])) {
                                 isfound = true
                                 break;
                             }
                         }
-                        if (CurExp['value'] == !isfound) {
+                    }
+
+                    if (CurExp['category']) {
+                        for (let j = 0; j < equipment.length; j ++) {
+                            if (equipment[j].equipment.GetEquipmentItem().Category == CurExp['category']) {
+                                isfound = true
+                                break;
+                            }
+                        }
+                    }
+                    
+                    if (CurExp["exception"]) {
+                        for (let j = 0; j < CurExp['exception'].length; j++) {
+                            const Excep = CurExp['exception'][j]
+
+                            if (Excep['id']) {
+                                for (let k = 0; k < equipment.length; k++) {
+                                    if ((equipment[k].equipment.GetEquipmentItem().GetID() == Excep['id']) == Excep['value']) {
+                                        isfound = CurExp['value']
+                                        break;
+                                    }
+                                }
+                            }
+
+                        }
+                    }
+                    
+                    if (CurExp['value'] == !isfound) {
+                        if (CurExp['tag']) {
                             relayVar.push(
                                 "The model " + (trackVal.HeldObject as WarbandMember).GetTrueName() + " must " + (CurExp["value"] == true ? "be" : "not be") + " equipped with " + makestringpresentable( CurExp["tag"])
                             )
                         }
+                        if (CurExp['category']) {
+                            relayVar.push(
+                                "The model " + (trackVal.HeldObject as WarbandMember).GetTrueName() + " must " + (CurExp["value"] == true ? "be" : "not be") + " equipped with " + makestringpresentable( CurExp["category"]) + " equipment"
+                            )
+                        }
+                    }
+                }
+            }
+            if (context_func["requirements_single"]) {
+                let isfound = false;
+                for (let i = 0; i < context_func["requirements_single"].length; i++) {
+                    const CurExp = context_func["requirements_single"][i]
+
+                    if (CurExp['id']) {
+                        const equipment = await (trackVal.HeldObject as WarbandMember).GetAllEquipForShow()
+                        
+                        for (let j = 0; j < equipment.length; j ++) {
+                            if ((equipment[j].equipment.GetEquipmentItem().GetID() == CurExp['id']) == CurExp['value']) {
+                                isfound = true
+                                break;
+                            }
+                        }
 
                     }
+                }                
+                if (!isfound) {
+                    let StrVal = "The model " + (trackVal.HeldObject as WarbandMember).GetTrueName() + " must either: "
+                    
+                    for (let i = 0; i < context_func["requirements_single"].length; i++) {
+                        const CurExp = context_func["requirements_single"][i]
+                        if (CurExp['id']) {
+                            const NewItem = await faceqmodule.EquipmentFactory.CreateNewEquipment(CurExp['id'], null);
+                            StrVal += " " + (CurExp["value"] == true ? "Be" : "Not be") + " equipped with " + NewItem.GetTrueName() + "."
+                        }
+                    }
+                    relayVar.push(StrVal)
                 }
             }
             
@@ -1416,6 +1478,33 @@ export const BaseContextCallTable : CallEventTable = {
             }
 
             return relayVar.concat(StatOptionList);
+        }
+    },
+    remove_stat_option: {
+        event_priotity: 2,
+        async getMemberModelStatOptions(this: EventRunner, eventSource : any, relayVar : ModelStatistics[][], trackVal: WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null)  
+        {
+            const StatOptionList: ModelStatistics[][] = []
+            const CurStats = await trackVal.CurModel.Stats;
+            if (context_func["options"]) {
+                for (let i = 0; i < context_func["options"].length; i++) {
+                    const NewStats : ModelStatistics[] = context_func["options"][i]
+                    if (context_func["type"] == "base") { 
+
+                        NewStats.push({
+                            base: CurStats.base
+                        })
+                    }
+                    StatOptionList.push(NewStats)
+                }
+            }
+
+            return relayVar.filter(array1 =>
+                !StatOptionList.some(array2 =>
+                    array1.length === array2.length && 
+                    array1.every((item1, index) => areModelStatisticsEqual(item1, array2[index]))
+                )
+            );
         }
     },
     special_category_upgrades: {
@@ -3169,8 +3258,9 @@ export const BaseContextCallTable : CallEventTable = {
                                     isValid = false;
                                 }
                             }
+
                             if (cntxt["restriction"][j]["rest_type"] == "id") {
-                                if (cntxt["restriction"][j]["value"] != (Models[i].model.ID == cntxt["restriction"][j]["subvalue"])) {
+                                if (cntxt["restriction"][j]["value"] != (Models[i].model.CurModel.ID == cntxt["restriction"][j]["subvalue"])) {
                                     isValid = false;
                                 }
                             }
@@ -3216,8 +3306,9 @@ export const BaseContextCallTable : CallEventTable = {
                                     isValid = false;
                                 }
                             }
+
                             if (cntxt["restriction"][j]["rest_type"] == "id") {
-                                if (cntxt["restriction"][j]["value"] != (Models[i].model.ID == cntxt["restriction"][j]["subvalue"])) {
+                                if (cntxt["restriction"][j]["value"] != (Models[i].model.CurModel.ID == cntxt["restriction"][j]["subvalue"])) {
                                     isValid = false;
                                 }
                             }
