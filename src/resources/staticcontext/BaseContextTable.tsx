@@ -26,7 +26,7 @@ import { Ability, IAbility } from "../../classes/feature/ability/Ability";
 import RuleDisplay from "../../display/components/features/faction/RuleDisplay";
 import { Skill } from "../../classes/feature/ability/Skill";
 import { UserWarband } from "../../classes/saveitems/Warband/UserWarband";
-import { FactionEquipmentRelationship } from "../../classes/relationship/faction/FactionEquipmentRelationship";
+import { FactionEquipmentRelationship, IFactionEquipmentRelationship } from "../../classes/relationship/faction/FactionEquipmentRelationship";
 import { MemberAndItem, MemberAndWarband, ModelHands, WarbandMember } from "../../classes/saveitems/Warband/Purchases/WarbandMember";
 import { returnDescription } from "../../utility/util";
 import { Patron } from "../../classes/feature/skillgroup/Patron";
@@ -990,8 +990,27 @@ export const BaseContextCallTable : CallEventTable = {
 
                         for (let j = 0; j < (trackVal.model).GetEquipment().length; j++) {
                             const Equip = (trackVal.model).GetEquipment()[j].equipment
+                            const EquipRel = (trackVal.model).GetEquipment()[j].purchase.CustomInterface
+                            let refeq = null
+                            if (EquipRel != undefined) {
+                                refeq = (EquipRel).tags
+                            }
                             const EquipObj = (Equip.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment)
     
+                            if (LimitMax.tag) {
+
+                                if (((refeq != null? !containsTag(refeq, LimitMax.tag) : true )) && !containsTag(EquipObj.Tags, LimitMax.tag) && !containsTag(Equip.Tags, LimitMax.tag)) {
+                                    
+                                    continue;
+                                }
+                            }
+                            
+                            if (LimitMax.category) {
+                                if (LimitMax.category != EquipObj.Category) {
+                                    continue;
+                                }
+                            }
+                            
                             if (LimitMax.res_type == "keyword") {
                                 let Found = false;
                                 for (let k = 0; k < EquipObj.KeyWord.length; k++) {
@@ -1005,7 +1024,7 @@ export const BaseContextCallTable : CallEventTable = {
                             }       
 
                             if (LimitMax.res_type == "tag") {
-                                if (containsTag(EquipObj.Tags, LimitMax.value.toString()) || containsTag(Equip.Tags, LimitMax.value.toString())) {
+                                if (((refeq != null? containsTag(refeq, LimitMax.value.toString()) : false )) || containsTag(EquipObj.Tags, LimitMax.value.toString()) || containsTag(Equip.Tags, LimitMax.value.toString())) {
                                     varcount += 1;
                                 }
                             }
