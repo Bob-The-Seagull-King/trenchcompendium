@@ -4042,12 +4042,11 @@
             "hands_ranged": 1
         },
         "contextdata": {
-            "keyword_add": {"value": ["kw_fear"]}
         },
         "description": [              
             {
                 "tags": {"desc_type" : "paragraph"},
-                "content": "Any friendly models within 4\" of the musician who is not Down can add +1 DICE to their Dash ACTIONS. Musical Instruments take one hand to use at all times as if it were a weapon. The wielder of the instrument also causes FEAR.",
+                "content": "Any friendly models within 4\" of the musician who is not Down can add +1 DICE to their Dash ACTIONS. Musical Instruments take one hand to use at all times as if it were a weapon. All friendly models within 4\" of the model ignore FEAR.",
                 "glossary": [
                     {"val": "+1 DICE", "id": "kw_plusdice"},
                     {"val": "ACTIONS", "id": "kw_action"},
@@ -4110,7 +4109,7 @@
         "description": [       
             {
                 "tags": {"desc_type" : "paragraph"},
-                "content": "Grants a -3 modifier to all injury rolls against the model wearing this armour, and treats Down Injury results as a Minor Hit instead (note that the TOUGH Keyword ability to avoid Out of Action with Down overrides this). The machine armour worn by the warbands of Alba do not impose a penalty to Dash. Machine armour cannot be combined with any shield. Models wearing Machine Armour may have a base size of 40mm if you wish, unless the model wearing it is already on 50mm or bigger base.",
+                "content": "Grants a -3 modifier to all injury rolls against the model wearing this armour, and treats Down Injury results as a Minor Hit instead (note that the TOUGH Keyword ability to avoid Out of Action with Down overrides this). The machine armour worn by the warbands of Alba do not impose a penalty to Charge. Machine armour cannot be combined with any shield. Models wearing Machine Armour may have a base size of 40mm if you wish, unless the model wearing it is already on 50mm or bigger base.",
                 "glossary": [
                     {"val": "TOUGH", "id": "kw_tough"}
                 ]
