@@ -2225,7 +2225,7 @@
                 "required": [
                     {
                         "category": "id",
-                        "value": ["md_yeomen","md_lieutenant"]
+                        "value": ["md_yeoman","md_yeoman_survivor","md_lieutenant"]
                     }
                 ]
             }

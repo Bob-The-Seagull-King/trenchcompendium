@@ -2082,7 +2082,7 @@ export const BaseContextCallTable : CallEventTable = {
             if (context_func['required'] ) {
                 for (let i = 0; i < context_func['required'].length; i++) {
                     const curFilter = context_func['required'][i]
-                    if (curFilter["category"] == "id") {            
+                    if (curFilter["category"] == "id") {   
                         if (curFilter["value"].includes(trackVal.ID)) {
                             ValidUpgrade = true;
                         } else {
@@ -2120,7 +2120,7 @@ export const BaseContextCallTable : CallEventTable = {
             if (context_func['required'] ) {
                 for (let i = 0; i < context_func['required'].length; i++) {
                     const curFilter = context_func['required'][i]
-                    if (curFilter["category"] == "id") {            
+                    if (curFilter["category"] == "id") {              
                         if (curFilter["value"].includes(trackVal.CurModel.ID)) {
                             ValidUpgrade = true;
                         } else {
