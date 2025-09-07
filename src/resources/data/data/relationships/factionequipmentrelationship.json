@@ -1706,7 +1706,7 @@
         "name": "Heavy Shotgun",
         "contextdata": {  
         },
-        "faction_id": ["fc_newantioch","fc_newantioch_fv_redbrigade","fc_newantioch_fv_expeditionaryforcedofabyssinia","fc_newantioch_fv_kingdomofalbaassaultdetatchment","fc_newantioch_fc_stortruppenofthefreestateofprussia","fc_newantioch_fc_eirerangers","fc_newantioch_fv_papalstatesinterventionforce"],
+        "faction_id": ["fc_newantioch","fc_newantioch_fv_redbrigade","fc_newantioch_fv_expeditionaryforcedofabyssinia","fc_newantioch_fv_kingdomofalbaassaultdetatchment","fc_newantioch_fc_stortruppenofthefreestateofprussia","fc_newantioch_fv_papalstatesinterventionforce"],
         "equipment_id": "eq_heavyshotgun",
         "cost": 20,
         "costtype": 0,
@@ -2190,7 +2190,7 @@
         "tags": {},
         "name": "Heavy Flamethrower",
         "contextdata": {},
-        "faction_id": ["fc_newantioch","fc_newantioch_fv_redbrigade","fc_newantioch_fv_expeditionaryforcedofabyssinia","fc_newantioch_fv_kingdomofalbaassaultdetatchment","fc_newantioch_fc_stortruppenofthefreestateofprussia","fc_newantioch_fc_eirerangers","fc_newantioch_fv_papalstatesinterventionforce"],
+        "faction_id": ["fc_newantioch","fc_newantioch_fv_redbrigade","fc_newantioch_fv_expeditionaryforcedofabyssinia","fc_newantioch_fv_kingdomofalbaassaultdetatchment","fc_newantioch_fc_stortruppenofthefreestateofprussia","fc_newantioch_fv_papalstatesinterventionforce"],
         "equipment_id": "eq_heavyflamethrower",
         "cost": 55,
         "costtype": 0,

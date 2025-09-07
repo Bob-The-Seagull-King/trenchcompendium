@@ -1019,7 +1019,15 @@
                        "value": "shield"
                    }
                ]
-           }
+           },
+            "validate_final_unit_equipment": {
+                "requirements": [
+                    {
+                        "tag": "armour",
+                        "value": false
+                    }
+                ]
+            } 
         },
         "description": [           
             {
