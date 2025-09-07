@@ -358,6 +358,39 @@
         "limit": 0
     },
     {
+        "id": "rel_fc_eq_grenades_brigadedog",
+        "source": "core",
+        "tags": {},
+        "name": "Grenades",
+        "contextdata": {        
+            "faction_eq_restriction": {
+                "permitted": [
+                    {
+                        "res_type": "id",
+                        "value": "md_trenchdog"
+                    },
+                    {
+                        "res_type": "id",
+                        "value": "md_trenchdog_guarddog"
+                    },
+                    {
+                        "res_type": "id",
+                        "value": "md_trenchdog_mercydog"
+                    },
+                    {
+                        "res_type": "id",
+                        "value": "md_trenchdog_attackdog"
+                    }
+                ]
+            } 
+        },
+        "faction_id": ["fc_newantioch_fv_redbrigade"],
+        "equipment_id": "eq_grenades",
+        "cost": 5,
+        "costtype": 0,
+        "limit": 0
+    },
+    {
         "id": "rel_fc_eq_incendiarygrenades",
         "source": "core",
         "tags": {   },

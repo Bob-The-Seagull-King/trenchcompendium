@@ -543,7 +543,7 @@
         "description": [
             {
                 "tags": {"desc_type" : "default"},
-                "content": "Dogs do not suffer penalties for fighting unarmed. In battle they are treated as non-ELITE Troops. War Dogs cannot become ELITE. At an additional cost of +1 Glory Point the any dog gains an ability to form a FIRETEAM with any 1 model in your Warband.",
+                "content": "Dogs do not suffer penalties for fighting unarmed. In battle they are treated as non-ELITE Troops. War Dogs cannot become ELITE. At an additional cost the dog gains an ability to form a FIRETEAM with any 1 model in your Warband.",
                 "glossary": [{"val": "ELITE", "id": "kw_elite"},{"val": "FIRETEAM", "id": "kw_fireteam"}]
             }
         ],

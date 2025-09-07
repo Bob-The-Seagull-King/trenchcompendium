@@ -4306,7 +4306,6 @@ export const BaseContextCallTable : CallEventTable = {
             }
         },
         async getCostOfEquipment(this: EventRunner, eventSource : any, relayVar: number, trackVal: UserWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, coreitem : FactionEquipmentRelationship) {
-            
             let HoldVar = relayVar;
             if (context_func["mod"]) {
                 for (let k = 0; k < context_func["mod"].length; k++) {
