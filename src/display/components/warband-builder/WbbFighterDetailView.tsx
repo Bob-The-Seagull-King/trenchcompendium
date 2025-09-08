@@ -989,7 +989,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                                         {item == "upgrades" ? (
                                             <h3>{'Upgrades'}</h3>
                                         ) :(
-                                            <h3>{'Goetic'}</h3>
+                                            <h3>{makestringpresentable(item)}</h3>
                                         )}
 
                                         {complexstate.upgrades[item].upgrades.filter((item) => ((edit_mode) || item.purchase != null)).map((subitem, index) => (

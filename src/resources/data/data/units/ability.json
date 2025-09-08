@@ -1269,6 +1269,25 @@
         "options": []
     },
     {
+        "id": "ab_conventconditioning",
+        "name": "Convent Conditioning",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": { 
+            "keyword_ignore": {"value": "kw_fear"}
+        },
+        "description": [           
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The medic is immune to FEAR.",
+                "glossary": [
+                    {"val": "FEAR", "id": "kw_fear"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
         "id": "ab_divinejudgement",
         "name": "Divine Judgement",
         "source": "core",
