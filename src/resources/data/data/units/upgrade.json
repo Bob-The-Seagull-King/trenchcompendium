@@ -649,6 +649,7 @@
                 "option_context" : {"basic_option_default":{}},
                 "dyna_only": true,
                 "parent_level": 1,
+                "hide": true,
                 "question_name": "getMemberOptionsFromWarbandModel"
             }]
     },
