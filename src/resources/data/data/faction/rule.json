@@ -3119,6 +3119,10 @@
                 "model_key": "rl_trenchdogs",
                 "models_id": ["md_trenchdog","md_trenchdog_guarddog","md_trenchdog_mercydog","md_trenchdog_attackdog"]}]
             },
+            "remove_from_model": {
+                "id": ["md_trenchdog_mercydog"],
+                "abilities": ["ab_mercydog"]
+            },
             "true_add_to_model": {  
                 "list": [
                     {
@@ -3127,6 +3131,15 @@
                             {
                                 "category": "id",
                                 "value": ["md_trenchdog","md_trenchdog_guarddog","md_trenchdog_mercydog","md_trenchdog_attackdog"]
+                            }
+                        ] 
+                    },
+                    {
+                        "id": "ab_mercydogbrigade",                            
+                        "required": [
+                            {
+                                "category": "id",
+                                "value": ["md_trenchdog_mercydog"]
                             }
                         ] 
                     }
