@@ -1418,6 +1418,9 @@ class UserWarband extends DynamicContextObject {
             if ((this.Models[i].HeldObject as WarbandMember).IsMercenary()) {
                 continue;
             }    
+            if ((this.Models[i].HeldObject as WarbandMember).State == "dead" || (this.Models[i].HeldObject as WarbandMember).State == "lost") {
+                continue;
+            }    
             let finalsource = [] 
             const CheckList = (this.Models[i].HeldObject as WarbandMember).GeneralCache.validation_check
             if (CheckList != null) {
