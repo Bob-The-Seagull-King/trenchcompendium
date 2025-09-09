@@ -358,6 +358,39 @@
         "limit": 0
     },
     {
+        "id": "rel_fc_eq_grenades_brigadedog",
+        "source": "core",
+        "tags": {},
+        "name": "Grenades",
+        "contextdata": {        
+            "faction_eq_restriction": {
+                "permitted": [
+                    {
+                        "res_type": "id",
+                        "value": "md_trenchdog"
+                    },
+                    {
+                        "res_type": "id",
+                        "value": "md_trenchdog_guarddog"
+                    },
+                    {
+                        "res_type": "id",
+                        "value": "md_trenchdog_mercydog"
+                    },
+                    {
+                        "res_type": "id",
+                        "value": "md_trenchdog_attackdog"
+                    }
+                ]
+            } 
+        },
+        "faction_id": ["fc_newantioch_fv_redbrigade"],
+        "equipment_id": "eq_grenades",
+        "cost": 5,
+        "costtype": 0,
+        "limit": 0
+    },
+    {
         "id": "rel_fc_eq_incendiarygrenades",
         "source": "core",
         "tags": {   },
@@ -1051,7 +1084,7 @@
         "name": "Combat Helmet",
         "contextdata": {   
         },
-        "faction_id": ["fc_courtofthesevenheadedserpent","fc_cultoftheblackgrail","fc_cultoftheblackgrail_fv_dirgeofthegreathegemon","fc_newantioch","fc_newantioch_fv_redbrigade","fc_newantioch_fv_expeditionaryforcedofabyssinia","fc_newantioch_fv_kingdomofalbaassaultdetatchment","fc_newantioch_fc_stortruppenofthefreestateofprussia","fc_newantioch_fc_eirerangers","fc_newantioch_fv_papalstatesinterventionforce","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut","fc_trenchpilgrim","fc_trenchpilgrim_fv_cavalcadeofthetenthplague","fc_trenchpilgrim_fv_processionofthesacredaffliction","fc_trenchpilgrim_fv_warpilgimageofsaintmethodius"],
+        "faction_id": ["fc_courtofthesevenheadedserpent","fc_cultoftheblackgrail","fc_cultoftheblackgrail_fv_dirgeofthegreathegemon","fc_newantioch","fc_newantioch_fv_redbrigade","fc_newantioch_fv_expeditionaryforcedofabyssinia","fc_newantioch_fv_kingdomofalbaassaultdetatchment","fc_newantioch_fc_stortruppenofthefreestateofprussia","fc_newantioch_fc_eirerangers","fc_newantioch_fv_papalstatesinterventionforce","fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_fidaiofalamut"],
         "equipment_id": "eq_combathelmet",
         "cost": 5,
         "costtype": 0,
@@ -1706,7 +1739,7 @@
         "name": "Heavy Shotgun",
         "contextdata": {  
         },
-        "faction_id": ["fc_newantioch","fc_newantioch_fv_redbrigade","fc_newantioch_fv_expeditionaryforcedofabyssinia","fc_newantioch_fv_kingdomofalbaassaultdetatchment","fc_newantioch_fc_stortruppenofthefreestateofprussia","fc_newantioch_fc_eirerangers","fc_newantioch_fv_papalstatesinterventionforce"],
+        "faction_id": ["fc_newantioch","fc_newantioch_fv_redbrigade","fc_newantioch_fv_expeditionaryforcedofabyssinia","fc_newantioch_fv_kingdomofalbaassaultdetatchment","fc_newantioch_fc_stortruppenofthefreestateofprussia","fc_newantioch_fv_papalstatesinterventionforce"],
         "equipment_id": "eq_heavyshotgun",
         "cost": 20,
         "costtype": 0,
@@ -2190,7 +2223,7 @@
         "tags": {},
         "name": "Heavy Flamethrower",
         "contextdata": {},
-        "faction_id": ["fc_newantioch","fc_newantioch_fv_redbrigade","fc_newantioch_fv_expeditionaryforcedofabyssinia","fc_newantioch_fv_kingdomofalbaassaultdetatchment","fc_newantioch_fc_stortruppenofthefreestateofprussia","fc_newantioch_fc_eirerangers","fc_newantioch_fv_papalstatesinterventionforce"],
+        "faction_id": ["fc_newantioch","fc_newantioch_fv_redbrigade","fc_newantioch_fv_expeditionaryforcedofabyssinia","fc_newantioch_fv_kingdomofalbaassaultdetatchment","fc_newantioch_fc_stortruppenofthefreestateofprussia","fc_newantioch_fv_papalstatesinterventionforce"],
         "equipment_id": "eq_heavyflamethrower",
         "cost": 55,
         "costtype": 0,
@@ -3036,7 +3069,7 @@
     {
         "id": "rel_fc_eq_holygrenade",
         "source": "core",
-        "tags": {},
+        "tags": {"exploration_only": true},
         "name": "Holy Grenade",
         "contextdata": {   },
         "faction_id": ["fc_trenchpilgrim","fc_trenchpilgrim_fv_warpilgimageofsaintmethodius","fc_trenchpilgrim_fv_cavalcadeofthetenthplague","fc_trenchpilgrim_fv_processionofthesacredaffliction"],

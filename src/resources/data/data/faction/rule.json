@@ -2013,7 +2013,13 @@
         "tags": { },
         "contextdata": {
             "add_to_model": {
-                "id": "rl_highlandmachinearmour"
+                "id": "rl_highlandmachinearmour",
+                "required": [
+                    {
+                        "category": "id",
+                        "value": ["md_mechanisedheavyinfantry_alba","md_lieutenant"]
+                    }
+                ]
             } ,
             "faction_add_upgrades": {
                 "list": [{
@@ -2219,7 +2225,7 @@
                 "required": [
                     {
                         "category": "id",
-                        "value": ["md_yeomen","md_lieutenant"]
+                        "value": ["md_yeoman","md_yeoman_survivor","md_lieutenant"]
                     }
                 ]
             }
@@ -3113,6 +3119,10 @@
                 "model_key": "rl_trenchdogs",
                 "models_id": ["md_trenchdog","md_trenchdog_guarddog","md_trenchdog_mercydog","md_trenchdog_attackdog"]}]
             },
+            "remove_from_model": {
+                "id": ["md_trenchdog_mercydog"],
+                "abilities": ["ab_mercydog"]
+            },
             "true_add_to_model": {  
                 "list": [
                     {
@@ -3121,6 +3131,15 @@
                             {
                                 "category": "id",
                                 "value": ["md_trenchdog","md_trenchdog_guarddog","md_trenchdog_mercydog","md_trenchdog_attackdog"]
+                            }
+                        ] 
+                    },
+                    {
+                        "id": "ab_mercydogbrigade",                            
+                        "required": [
+                            {
+                                "category": "id",
+                                "value": ["md_trenchdog_mercydog"]
                             }
                         ] 
                     }

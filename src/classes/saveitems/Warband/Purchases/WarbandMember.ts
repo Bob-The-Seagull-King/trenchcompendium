@@ -308,7 +308,6 @@ class WarbandMember extends DynamicContextObject {
                 this.SubProperties.push(NewRuleProperty);
             }
         }
-
         return this.SubProperties;
     }
     

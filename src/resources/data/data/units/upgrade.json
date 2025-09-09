@@ -889,7 +889,19 @@
                        "value": "shield"
                    }
                ]
-           }
+           },
+            "validate_final_unit_equipment": {
+                "requirements": [
+                    {
+                        "tag": "armour",
+                        "value": false
+                    },
+                    {
+                        "category": "ranged",
+                        "value": false
+                    }
+                ]
+            } 
         },
         "description": [           
             {
@@ -957,7 +969,7 @@
                 "rel_md_eq_mechanisedheavyinfantry_base"
                ],
                "added": [
-                "rel_md_eq_mechanisedheavyinfantry_advanced"
+                "rel_md_eq_mechanisedheavyinfantry_highland"
                ]
            },
             "remove_stat_option": {
@@ -1019,7 +1031,15 @@
                        "value": "shield"
                    }
                ]
-           }
+           },
+            "validate_final_unit_equipment": {
+                "requirements": [
+                    {
+                        "tag": "armour",
+                        "value": false
+                    }
+                ]
+            } 
         },
         "description": [           
             {

@@ -30,6 +30,7 @@ const ProfileSettingsPage: React.FC = () => {
     const [initialNickname, setInitialNickname] = useState('');
     const [initialEmail, setInitialEmail] = useState('');
     const [loading, setLoading] = useState(true);
+    const [showPWEdit, setShowPWEdit] = useState(false);
     const [message, setMessage] = useState('');
     const [error, setError] = useState('');
 
@@ -86,7 +87,7 @@ const ProfileSettingsPage: React.FC = () => {
             const payload: any = {};
             if (nickname !== initialNickname) payload.nickname = nickname;
             if (email !== initialEmail) payload.email = email;
-            if (password.trim()) payload.password = password;
+            if (password.trim() && showPWEdit) payload.password = password;
 
             await axios.post(
                 SYNOD.URL + '/wp-json/wp/v2/users/me',
@@ -169,15 +170,7 @@ const ProfileSettingsPage: React.FC = () => {
                                 />
                             </Form.Group>
 
-                            <Form.Group controlId="user-settings-password" className="mb-3">
-                                <Form.Label>New Password</Form.Label>
-                                <Form.Control
-                                    type="password"
-                                    placeholder="Enter a new password"
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                />
-                            </Form.Group>
+
 
                             <Form.Group controlId="user-settings-email" className="mb-3">
                                 <Form.Label>Email Address</Form.Label>
@@ -188,6 +181,29 @@ const ProfileSettingsPage: React.FC = () => {
                                     onChange={(e) => setEmail(e.target.value)}
                                 />
                             </Form.Group>
+
+                            <Form.Group controlId="user-settings-showpwedit" className="mb-3">
+                                <Form.Check
+                                    type="checkbox"
+                                    label="Show password Settings"
+                                    checked={showPWEdit}
+                                    onChange={(e) => setShowPWEdit(e.target.checked)}
+                                />
+                            </Form.Group>
+
+                            {showPWEdit ? (
+                                <Form.Group controlId="user-settings-password" className="mb-3">
+                                    <Form.Label>New Password</Form.Label>
+                                    <Form.Control
+                                        type="password"
+                                        placeholder="Enter a new password"
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
+                                    />
+                                </Form.Group>
+                            ) : (
+                                <></>
+                            )}
 
                             {hasChanges && (
                                 <button className="btn btn-primary btn-save-setting"
