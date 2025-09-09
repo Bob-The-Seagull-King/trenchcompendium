@@ -915,8 +915,8 @@
             }
         ],
         "stats" : {
-            "ranged": 0,
-            "melee": 1
+            "ranged": 1,
+            "melee": 0
         },
         "cut_abilities" : [],
         "new_abilities" : []
