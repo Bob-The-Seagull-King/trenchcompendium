@@ -2985,7 +2985,6 @@
         "source": "core",
         "tags": {},
         "contextdata": {
-            "set_arms": {"ranged": 2, "melee": 1, "special": 0},
             "model_equipment_restriction": {
                 "removed": [
                     {

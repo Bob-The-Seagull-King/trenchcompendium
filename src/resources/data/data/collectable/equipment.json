@@ -4831,6 +4831,7 @@
         "distance": 24,
         "stats": {
             "hands_ranged": 1,
+            "hands_melee": 1,
             "ranged": true
         },
         "contextdata": {
