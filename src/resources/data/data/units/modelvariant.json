@@ -1026,6 +1026,13 @@
         "base_id": "md_grailthrall",
         "variant_name": "Dirge_of_the_Great_Hegemon",
         "team": "hell",
+        "description": [
+
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Thralls can be equipped with ranged weapons, troop flags, or instruments, but nothing else. They do not suffer penalties for fighting unarmed."
+            }
+        ],
         "cut_keywords" : [],
         "keywords" : [],
         "stats" : {
