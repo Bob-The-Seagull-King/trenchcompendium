@@ -1,9 +1,5 @@
-/* modelupgraderelationship */
-
 import { IStaticOptionContextObject, StaticOptionContextObject } from '../../options/StaticOptionContextObject';
-import { ContextObject, IContextObject } from '../../contextevent/contextobject';
-import { Model } from '../../feature/model/Model';
-import { ModelFactory } from '../../../factories/features/ModelFactory';
+import { ContextObject } from '../../contextevent/contextobject';
 import { Equipment } from '../../feature/equipment/Equipment';
 import { EquipmentFactory } from '../../../factories/features/EquipmentFactory';
 
@@ -38,6 +34,7 @@ class ModelEquipmentRelationship extends StaticOptionContextObject {
         }
     }
 
+    // Build the equipment item
     public async BuildEquipment(equipment : string[], skipcheck = true) {
         for (let i = 0; i < equipment.length; i++) {
             const EquipObj = await  EquipmentFactory.CreateNewEquipment(equipment[i], this, skipcheck);
@@ -45,6 +42,7 @@ class ModelEquipmentRelationship extends StaticOptionContextObject {
         }
     }
 
+    // Build the ModelEquipment objects that can be selected from
     public async BuildOptionEquipment() {
         for (let i = 0; i < this.MyOptions.length; i++) {
             for (let j = 0; j < this.MyOptions[i].Selections.length; j++) {
@@ -55,7 +53,7 @@ class ModelEquipmentRelationship extends StaticOptionContextObject {
         }
     }
 
-
+    // Get a collection of equipment held by this object with no duplicates
     public getUniqueEquipment() {
         const UniqueEquipment : Equipment[] = []
         const IDList : string[] = []

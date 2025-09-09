@@ -1,12 +1,8 @@
 /**
  * skill
  */
-import { IStaticOptionContextObject, StaticOptionContextObject } from '../../options/StaticOptionContextObject';
-import { DescriptionFactory } from '../../../utility/functions';
-import { ContextObject, IContextObject } from '../../contextevent/contextobject';
-import { StaticContextObject } from '../../contextevent/staticcontextobject';
+import { ContextObject } from '../../contextevent/contextobject';
 import { BaseAddon, IBaseAddon } from './BaseAddon';
-import { EventRunner } from '../../contextevent/contexteventhandler';
 
 interface ISkill extends IBaseAddon {
     table_val? : number,
@@ -18,9 +14,9 @@ class Skill extends BaseAddon {
     public SkillGroups : string[];
 
     /**
-     * Assigns parameters and creates a series of description
-     * objects with DescriptionFactory
-     * @param data Object data in IAbility format
+     * Assigns parameters and creates a series of
+     * objects
+     * @param data Object data in ISkill format
      */
     public constructor(data: ISkill, parent : ContextObject | null)
     {

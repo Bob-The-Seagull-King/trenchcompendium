@@ -473,6 +473,24 @@
         "options": []
     },
     {
+        "id": "ab_mercydogbrigade",
+        "name": "Mercy Dog",
+        "source": "core",
+        "tags": {"action": true, "heal": true},
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Mercy dogs carry a Medi-Kit which can be used by any friendly model on themselves within 3\" of the dog with +1 DICE. Mercy dogs can also drag any model (unless it has a base size of 40mm or greater) within 1\" that is Down at with them, both with normal movement or when dashing -if this takes the model out of melee combat, this does not trigger a free melee attack ACTION.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "ACTION", "id": "kw_action"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
         "id": "ab_brigadedog",
         "name": "Brigade Dog",
         "source": "westfalia",
@@ -1263,6 +1281,25 @@
                 "content": "The Medic adds +1 DICE whenever they use their Medi-Kit to aid friendly models.",
                 "glossary": [
                     {"val": "+1 DICE", "id": "kw_plusdice"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_conventconditioning",
+        "name": "Convent Conditioning",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": { 
+            "keyword_ignore": {"value": "kw_fear"}
+        },
+        "description": [           
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The medic is immune to FEAR.",
+                "glossary": [
+                    {"val": "FEAR", "id": "kw_fear"}
                 ]
             }
         ],

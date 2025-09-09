@@ -41,6 +41,10 @@ class BookRule extends StaticContextObject {
         this.Sections = this.BuildSections(data.sections)
     }
     
+    /**
+     * Converts sections of a rule into
+     * their object form.
+     */
     public BuildSections(sections : IRuleSection[]) {
         const NewSections : RuleSection[] = [];
         for (let i = 0; i < sections.length; i++) {
@@ -69,7 +73,6 @@ class BookRule extends StaticContextObject {
             delete this.Description[i];
         }
     }
-
 
     /**
      * Gets the content of the first description item of an object

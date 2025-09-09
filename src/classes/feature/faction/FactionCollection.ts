@@ -6,8 +6,8 @@
  */
 import { IStaticOptionContextObject } from '../../options/StaticOptionContextObject';
 import { Requester } from '../../../factories/Requester';
-import { DescriptionFactory, MergeLists } from '../../../utility/functions';
-import { ContextObject, IContextObject } from '../../contextevent/contextobject';
+import { MergeLists } from '../../../utility/functions';
+import { ContextObject } from '../../contextevent/contextobject';
 import { StaticContextObject } from '../../contextevent/staticcontextobject';
 import { IFaction, Faction } from './Faction';
 import { FactionFactory } from '../../../factories/features/FactionFactory';
@@ -34,7 +34,7 @@ class FactionCollection extends StaticContextObject {
     /**
      * Assigns parameters and creates a series of description
      * objects with DescriptionFactory
-     * @param data Object data in IModelCollection format
+     * @param data Object data in IFaction format
      */
     public constructor(data: IFaction, parent : ContextObject | null)
     {
@@ -44,6 +44,7 @@ class FactionCollection extends StaticContextObject {
         this.GatherLists(data);
     }
 
+    // Gets all variants of a faction, using the base faction as a reference
     public GatherLists(data : IFaction) {
         this.FactionDataList.push(data) // Base Model
         const FactionVariantList = Requester.MakeRequest(
@@ -73,6 +74,8 @@ class FactionCollection extends StaticContextObject {
         }
     }
 
+    // Takes the faction variant data and combines it with
+    // the fact faction to create an IFaction data for this variant.
     public static MergeFactions(base: IFaction, variant : IVariantFaction) {
         const rules_final : string[] = MergeLists([base.rules, variant.rules], [variant.cut_rules])
         
@@ -92,6 +95,7 @@ class FactionCollection extends StaticContextObject {
         return NewFaction;
     }
 
+    // Builds the collection's factions into proper objects
     public async ConstructFactions() {
         for (let i = 0; i < this.FactionDataList.length; i++) {
             const FactionObject : Faction = await FactionFactory.CreateFaction(this.FactionDataList[i], this.MyContext)
@@ -99,6 +103,7 @@ class FactionCollection extends StaticContextObject {
         }
     }
 
+    // Get the base faction in this collection
     public GetBaseFac() {
         for (let i = 0; i < this.SubModelsList.length; i++) {
             if (this.SubModelsList[i].var_name == 'base') {
@@ -107,7 +112,6 @@ class FactionCollection extends StaticContextObject {
         }
         return this.SubModelsList[0].faction;
     }
-
 
     /**
      * Returns the base name for this faction collection
@@ -120,7 +124,6 @@ class FactionCollection extends StaticContextObject {
         }
         return ""
     }
-
 
     /**
      * Returns the Display name for this faction collection

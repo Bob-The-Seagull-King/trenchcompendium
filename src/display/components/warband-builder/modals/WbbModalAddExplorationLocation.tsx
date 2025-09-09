@@ -15,7 +15,7 @@ import {returnDescription} from "../../../../utility/util";
 interface WbbModalAddExplorationLocationProps {
     show: boolean;
     onClose: () => void;
-    onSubmit: (location: ExplorationLocation, options : ISelectedOption[] ) => void;
+    onSubmit: (location: ExplorationLocation, options : FilteredLocation ) => void;
 }
 
 const WbbModalAddExplorationLocation: React.FC<WbbModalAddExplorationLocationProps> = ({ show, onClose, onSubmit }) => {
@@ -31,27 +31,14 @@ const WbbModalAddExplorationLocation: React.FC<WbbModalAddExplorationLocationPro
     // handlesubmit in this callback for delayed submission with loading state
     const { handleSubmit, isSubmitting } = useModalSubmitWithLoading(() => {
         if (selectedLocation) {
-            onSubmit(selectedLocation.location, selectedOptionIds);
+            const expl : ExplorationTableSuite = availableoptions.filter((item) => item.valid_locs.filter((sub) => sub.location.ID == selectedLocation.location.ID).length > 0)[0]
+            const filteredop : FilteredLocation = expl.valid_locs.filter((item) => item.location.ID == selectedLocation.location.ID)[0]
+            onSubmit(selectedLocation.location, filteredop);
             setSelectedLocation(null);
             setSelectedOptionIds([]);
             onClose();
         }
     });
-
-    function UpdateSelectedOptionIDs(newoption : ISelectedOption) {
-        let found = false
-        for (let i = 0; i < selectedOptionIds.length; i++) {
-            if (selectedOptionIds[i].option_refID == newoption.option_refID) {
-                found = true;
-                selectedOptionIds[i].selection_ID = newoption.selection_ID;
-            }
-        }
-        if (found == false) {
-            selectedOptionIds.push(newoption);
-        }
-        RedoSubmitDisabled()
-        setkeyvar(keyvar + 1)
-    }
 
     useEffect(() => {
         async function RunGetLocations() {
@@ -75,7 +62,7 @@ const WbbModalAddExplorationLocation: React.FC<WbbModalAddExplorationLocationPro
     }, [updateKey, selectedOptionIds, selectedLocation]);
 
     function RedoSubmitDisabled() {
-        setisubmitdisabled(!selectedLocation?.location.GetID() || (!(containsTag(selectedLocation.location.Tags, 'unforced')) && selectedLocation?.options && selectedLocation.options.length > 0 && (selectedLocation.options.length != selectedOptionIds.length )));
+        setisubmitdisabled(!selectedLocation?.location.GetID());
     }
 
     // will select and deselect a location on click
@@ -154,41 +141,12 @@ const WbbModalAddExplorationLocation: React.FC<WbbModalAddExplorationLocationPro
                                                                     {/* @TODO: Show all option (even unavailable ones) here */}
                                                                     <li className={'exploration-description-option'}>
                                                                         <span className={'option-name'}>
-                                                                            {'Surplus:'}
+                                                                            {choice.display_str}
                                                                         </span>
                                                                         <span className={'option-description'}>
-                                                                            {'Choose one HEAVY weapon in your Warband’s Armoury. Add one of those weapons to your Warband’s roster for free. You cannot exceed the LIMIT on a weapon in this way'}
+                                                                            {returnDescription(choice.value, choice.value.Description)}
                                                                         </span>
                                                                     </li>
-
-                                                                    {/* @TODO: remove - this is for reference */}
-                                                                    {/*/!* option select *!/*/}
-                                                                    {/*<div*/}
-                                                                    {/*    key={opt.baseopt.RefID + choice.id}*/}
-                                                                    {/*    className={`select-item */}
-                                                                    {/*    ${(selectedOptionIds.find((k) => k.option_refID == opt.baseopt.RefID && k.selection_ID == choice.id)*/}
-                                                                    {/*    ) ? 'selected' : ''}*/}
-                                                                    {/*    ${(selectedOptionIds.find((k) => k.option_refID == opt.baseopt.RefID && k.selection_ID == choice.id) && (choice.value.Description != null)*/}
-                                                                    {/*    ) ? 'details-open' : ''}*/}
-                                                                    {/*    `}*/}
-                                                                    {/*    onClick={() => UpdateSelectedOptionIDs({*/}
-                                                                    {/*        option_refID: opt.baseopt.RefID,*/}
-                                                                    {/*        selection_ID: choice.id*/}
-                                                                    {/*    })}*/}
-                                                                    {/*>*/}
-                                                                    {/*    {choice.display_str}*/}
-                                                                    {/*</div>*/}
-
-                                                                    {/*/!* option details *!/*/}
-                                                                    {/*{(*/}
-                                                                    {/*        selectedOptionIds.find((k) => k.option_refID == opt.baseopt.RefID && k.selection_ID == choice.id) && (choice.value.Description != null)*/}
-                                                                    {/*    ) &&*/}
-                                                                    {/*    <div className={'select-item-details'}>*/}
-                                                                    {/*        {*/}
-                                                                    {/*            returnDescription(choice.value, choice.value.Description)*/}
-                                                                    {/*        }*/}
-                                                                    {/*    </div>*/}
-                                                                    {/*}*/}
                                                                 </>
                                                             ))}
                                                         </>)}

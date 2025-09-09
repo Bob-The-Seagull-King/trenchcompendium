@@ -1,11 +1,7 @@
-/**
- * explorationtable
- */
 import { byPropertiesOf, DescriptionFactory } from '../../../utility/functions';
 import { ContextObject, IContextObject } from '../../contextevent/contextobject';
 import { StaticContextObject } from '../../contextevent/staticcontextobject';
 import { Requester } from '../../../factories/Requester';
-import { ExplorationFactory } from '../../../factories/features/ExplorationFactory';
 import { ISkill, Skill } from '../ability/Skill';
 import { SkillFactory } from '../../../factories/features/SkillFactory';
 import { Faction } from '../faction/Faction';
@@ -37,7 +33,6 @@ class Patron extends StaticContextObject {
         this.Description = DescriptionFactory(data.description, this);
     }
 
-    
     /**
      * Grabs any additional packages unique to
      * class implementation.
@@ -54,8 +49,8 @@ class Patron extends StaticContextObject {
         return static_packages;
     }
 
-    
-    public async BuildFactionEquipment(id : string) {
+    // Build the skills a patron can give
+    public async BuildPatronSkills(id : string) {
         const LocationList = Requester.MakeRequest(
             {
                 searchtype: "complex", 
@@ -85,6 +80,7 @@ class Patron extends StaticContextObject {
         this.Skills.sort(byPropertiesOf<Skill>(["Name"]))
     }
 
+    // Build the factions/variants that can select this patron
     public async BuildFactionList(id : string) {
         const FactionList = Requester.MakeRequest(
             {
@@ -106,7 +102,6 @@ class Patron extends StaticContextObject {
                 }
             }
         ) as IPatronRelationship[]
-
 
         for (let i = 0; i < FactionList.length; i++) {
             for (let j = 0; j < FactionList[i].faction_id.length; j++) {
@@ -131,7 +126,6 @@ class Patron extends StaticContextObject {
     public GetDescription () {
         return this.Description;
     }
-
 
     /**
      * Return the description as string

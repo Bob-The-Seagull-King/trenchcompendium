@@ -915,8 +915,8 @@
             }
         ],
         "stats" : {
-            "ranged": 0,
-            "melee": 1
+            "ranged": 1,
+            "melee": 0
         },
         "cut_abilities" : [],
         "new_abilities" : []
@@ -1026,6 +1026,13 @@
         "base_id": "md_grailthrall",
         "variant_name": "Dirge_of_the_Great_Hegemon",
         "team": "hell",
+        "description": [
+
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Thralls can be equipped with ranged weapons, troop flags, or instruments, but nothing else. They do not suffer penalties for fighting unarmed."
+            }
+        ],
         "cut_keywords" : [],
         "keywords" : [],
         "stats" : {
@@ -1162,6 +1169,29 @@
         "keywords" : ["kw_golem"],
         "stats" : {
         },
+        "cut_abilities" : ["ab_artificialbody"],
+        "new_abilities" : []
+    },
+    {
+        "id": "md_heretictrooper_mine",
+        "name": "Sarcophagus Mine",
+        "source": "core",
+        "tags": {},
+        "contextdata": { 
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_heretictrooper"
+                    }
+                ]
+            }},
+        "base_id": "md_heretictrooper",
+        "variant_name": "Sarcophagus_Mine",
+        "team": "hell",
+        "stats" : {},
+        "cut_keywords" : [],
+        "keywords" : [],
         "cut_abilities" : [],
         "new_abilities" : []
     }

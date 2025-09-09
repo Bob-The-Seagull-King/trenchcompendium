@@ -49,6 +49,7 @@ class ModelCollection extends StaticContextObject {
         this.GatherLists(data);
     }
 
+    // Get all model variants from the base model's data
     public GatherLists(data : IModel) {
         this.ModelDataList.push(data) // Base Model
         const ModelVariantList = Requester.MakeRequest(
@@ -78,6 +79,8 @@ class ModelCollection extends StaticContextObject {
         }
     }
 
+    // Take a variant model and combine it with the base to produce a usable
+    // IModel data object
     public static MergeModels(base: IModel, variant : IVariantModel) {
 
         const keywords_final : string[] = MergeLists([base.keywords, variant.keywords], [variant.cut_keywords])
@@ -101,6 +104,7 @@ class ModelCollection extends StaticContextObject {
         return NewModel;
     }
 
+    // Build the models in a collection
     public async ConstructModels() {
         for (let i = 0; i < this.ModelDataList.length; i++) {
             const ModelObject : Model = await ModelFactory.CreateModel(this.ModelDataList[i], this.MyContext)

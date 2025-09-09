@@ -624,7 +624,6 @@
         "source": "core",
         "tags": {"trait": true, "special_category": "secrets_of_the_house_of_wisdom"},
         "contextdata": {
-            "keyword_add": {"value": ["kw_fear"]},
             "model_attatch": {},
             "warband_general_hook": {},
             "warband_wide": {}, 
@@ -650,6 +649,7 @@
                 "option_context" : {"basic_option_default":{}},
                 "dyna_only": true,
                 "parent_level": 1,
+                "hide": true,
                 "question_name": "getMemberOptionsFromWarbandModel"
             }]
     },
@@ -776,6 +776,7 @@
         "tags": {"action": true },
         "contextdata": {
             "activated": {},
+            "replace_model": { "new_id" : "md_heretictrooper_mine"},
             "set_stat": { "upgrades" : [
                 {"stat": "armour", "value": -3}
                 ]},     
@@ -889,7 +890,19 @@
                        "value": "shield"
                    }
                ]
-           }
+           },
+            "validate_final_unit_equipment": {
+                "requirements": [
+                    {
+                        "tag": "armour",
+                        "value": false
+                    },
+                    {
+                        "category": "ranged",
+                        "value": false
+                    }
+                ]
+            } 
         },
         "description": [           
             {
@@ -920,7 +933,19 @@
                "added": [
                 "rel_md_eq_mechanisedheavyinfantry_advanced"
                ]
-           }
+           },
+            "remove_stat_option": {
+                "type": "base",
+                "direction": "increase",
+                "options": 
+                    [
+                        [
+                            {
+                                "base": [40]
+                            }
+                        ]
+                    ]
+            }
         },
         "description": [           
             {
@@ -945,9 +970,21 @@
                 "rel_md_eq_mechanisedheavyinfantry_base"
                ],
                "added": [
-                "rel_md_eq_mechanisedheavyinfantry_advanced"
+                "rel_md_eq_mechanisedheavyinfantry_highland"
                ]
-           }
+           },
+            "remove_stat_option": {
+                "type": "base",
+                "direction": "increase",
+                "options": 
+                    [
+                        [
+                            {
+                                "base": [40]
+                            }
+                        ]
+                    ]
+            }
         },
         "description": [           
             {
@@ -995,7 +1032,15 @@
                        "value": "shield"
                    }
                ]
-           }
+           },
+            "validate_final_unit_equipment": {
+                "requirements": [
+                    {
+                        "tag": "armour",
+                        "value": false
+                    }
+                ]
+            } 
         },
         "description": [           
             {

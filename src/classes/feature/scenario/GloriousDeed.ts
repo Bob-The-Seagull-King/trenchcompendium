@@ -11,7 +11,7 @@ class GloriousDeed extends StaticContextObject {
     /**
      * Assigns parameters and creates a series of description
      * objects with DescriptionFactory
-     * @param data Object data in IAbility format
+     * @param data Object data in IGloriousDeed format
      */
     public constructor(data: IGloriousDeed, parent : ContextObject | null)
     {

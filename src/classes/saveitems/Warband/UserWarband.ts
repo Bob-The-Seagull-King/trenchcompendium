@@ -960,7 +960,7 @@ class UserWarband extends DynamicContextObject {
                 ConsumableList.push(this.Consumables[i]);
             }
         }
-
+        /*
         for (let j = 0; j < this.Exploration.Locations.length; j++) {
             
             for (let i = 0; i < this.Exploration.Locations[j].Consumables.length; i++) {
@@ -969,7 +969,7 @@ class UserWarband extends DynamicContextObject {
                 }
             }
 
-        }
+        }*/
 
         return ConsumableList;
     }
@@ -1416,6 +1416,9 @@ class UserWarband extends DynamicContextObject {
         let CaptainFound = false
         for (let i = 0; i < this.Models.length; i++) {   
             if ((this.Models[i].HeldObject as WarbandMember).IsMercenary()) {
+                continue;
+            }    
+            if ((this.Models[i].HeldObject as WarbandMember).State == "dead" || (this.Models[i].HeldObject as WarbandMember).State == "lost") {
                 continue;
             }    
             let finalsource = [] 

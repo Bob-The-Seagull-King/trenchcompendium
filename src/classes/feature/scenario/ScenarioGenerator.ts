@@ -1,11 +1,8 @@
 import { ScenarioFactory } from '../../../factories/features/ScenarioFactory';
 import { Requester } from '../../../factories/Requester';
 import { GloriousDeedFactory } from '../../../factories/features/GloriousDeedFactory';
-import { RuleFactory } from '../../../factories/features/RuleFactory';
 import { DescriptionFactory } from '../../../utility/functions';
-import { ContextObject, IContextObject } from '../../contextevent/contextobject';
-import { StaticContextObject } from '../../contextevent/staticcontextobject';
-import { Rule } from '../faction/Rule';
+import { IContextObject } from '../../contextevent/contextobject';
 import { GloriousDeed, IGloriousDeed } from './GloriousDeed';
 import { ForcesData, BattlefieldData, InfiltratorData, DeploymentData, BattleLengthData, VictoryData, GloriousDeedData, Scenario, IScenario } from './Scenario';
 
@@ -66,12 +63,12 @@ class ScenarioGenerator {
 
     public CurrentScenario!: ScenarioSet;
 
-    
     public DeploymentDataDesc : any[] = []
     public ScenarioDataDesc : any[] = []
     public DeedDataDesc : any[] = []
     public RulesDataDesc : any[] = []
 
+    // Data used by all default scenarios
     private DeploymentData = [{
                     tags: {desc_type : "paragraph"},
                     content: "The player that did not roll for Missions rolls a D6 and consults the chart below to determine how the warbands deploy for the game."
@@ -433,10 +430,12 @@ class ScenarioGenerator {
         
     }
 
+    // Regenerates the scenario held by the generator
     public async ResetScenario() {
         this.CurrentScenario = await this.ConstructNewScenario();
     }
 
+    // Given a specific code, create the corresponding random scenario
     public async SetCodeScenario(code : string) {
 
         const code_split = code.split(/\D+/)
@@ -457,6 +456,7 @@ class ScenarioGenerator {
         }
     }
 
+    // Get all objectives that a scenario can have
     public GatherObjectives() {
         const AllObjectives : GenerateObjective[] = Requester.MakeRequest(
             {searchtype: "file", searchparam: {type: 'scenarioobjective'}}
@@ -465,6 +465,7 @@ class ScenarioGenerator {
         this.ListOfObjectives = AllObjectives;
     }
 
+    // Get all deployment options a scenario can have
     public GatherDeployments() {
         const AllDeployments : GenerateDeployment[] = Requester.MakeRequest(
             {searchtype: "file", searchparam: {type: 'scenariodeployment'}}
@@ -473,6 +474,7 @@ class ScenarioGenerator {
         this.ListOfDeployments = AllDeployments;
     }
     
+    // Build all glorious deeds for a scenario
     public BuildDeeds(group_id : number, group_list : GloriousDeed[]) {
         const AllDeedsGroup : IGloriousDeed[] = Requester.MakeRequest(
             {
@@ -503,6 +505,7 @@ class ScenarioGenerator {
         }
     }
 
+    // Build a new scenario, or a specific one if given a code-created preset
     public async ConstructNewScenario(code? : GenCode) : Promise<ScenarioSet> {
 
         let genstring = "Ob"
@@ -608,6 +611,7 @@ class ScenarioGenerator {
         
     }
 
+    // For any give list, return two random elements alongwith their codes for a gen code
     public getTwoRandomElements<T>(arr: any[], idstring : string): { elements: any[], modifiedId: string } {      
         const index1 = Math.floor(Math.random() * arr.length);
         let index2 = index1;

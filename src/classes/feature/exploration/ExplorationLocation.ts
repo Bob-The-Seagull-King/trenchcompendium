@@ -11,6 +11,7 @@ interface IExplorationLocation extends IStaticOptionContextObject {
     location_value : number
 }
 
+// Determines what warbands can actually select this location
 interface LocationRestriction {
     allowed?: RestrictionSingle[],
     removed?: RestrictionSingle[],
@@ -33,9 +34,8 @@ class ExplorationLocation extends StaticOptionContextObject {
     public RestrictedSelection : LocationRestriction[] | null = null;
 
     /**
-     * Assigns parameters and creates a series of description
-     * objects with DescriptionFactory
-     * @param data Object data in IAbility format
+     * Assigns parameters and creates a series of objects
+     * @param data Object data in IExplorationLocation format
      */
     public constructor(data: IExplorationLocation, parent : ContextObject | null)
     {
@@ -44,7 +44,8 @@ class ExplorationLocation extends StaticOptionContextObject {
         this.TableValue = data.location_value;
     }
     
-    
+    // Runs the restriction check on this instance of a location
+    // Only works when created with the context of a warband.
     public async RunRestrictions() {
         const EventProc : EventRunner = new EventRunner();
 
@@ -57,6 +58,8 @@ class ExplorationLocation extends StaticOptionContextObject {
         )
     }
 
+    // Converts the options a location might have
+    // from raw JSON data into the proper class
     public async RunOptionsParse() {
         
         const EventProc : EventRunner = new EventRunner();

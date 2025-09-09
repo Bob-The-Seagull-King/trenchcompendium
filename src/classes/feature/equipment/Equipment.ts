@@ -6,7 +6,7 @@
  */
 import { IStaticOptionContextObject, StaticOptionContextObject } from '../../options/StaticOptionContextObject';
 import { byPropertiesOf, DescriptionFactory } from '../../../utility/functions';
-import { ContextObject, IContextObject } from '../../contextevent/contextobject';
+import { ContextObject } from '../../contextevent/contextobject';
 import { Keyword } from '../glossary/Keyword';
 import { KeywordFactory } from '../../../factories/features/KeywordFactory';
 import { FactionEquipmentRelationship, IFactionEquipmentRelationship } from '../../relationship/faction/FactionEquipmentRelationship';
@@ -31,6 +31,8 @@ interface EquipmentStats {
     ranged?: boolean
 }
 
+// Used to handle if a model / faction / member can
+// be given a specific item.
 interface EquipmentRestriction {
     required?: RestrictionSingle[],
     removed?: RestrictionSingle[],
@@ -47,6 +49,10 @@ interface RestrictionSingle {
     param? : any
 }
 
+
+// Creates a proper copy of an equipment restriction,
+// used when an object needs to customise or overwrite
+// a restriction without changing the original.
 export function deepCopyEquipmentRestriction(original: EquipmentRestriction): EquipmentRestriction {
     return {
         required: original.required?.map(r => ({ ...r })),
@@ -57,6 +63,8 @@ export function deepCopyEquipmentRestriction(original: EquipmentRestriction): Eq
     };
 }
 
+// Used to determine the number of a give item
+// that a model / member / warband can have.
 interface EquipmentLimit {
     maximum?: LimitSingle[],
     minimum?: LimitSingle[]
@@ -84,9 +92,8 @@ class Equipment extends StaticOptionContextObject {
     public EquipmentItems : FactionEquipmentRelationship[] = []
 
     /**
-     * Assigns parameters and creates a series of description
-     * objects with DescriptionFactory
-     * @param data Object data in IAbility format
+     * Assigns parameters and creates a series of objects
+     * @param data Object data in IEquipment format
      */
     public constructor(data: IEquipment, parent : ContextObject | null)
     {
@@ -100,7 +107,7 @@ class Equipment extends StaticOptionContextObject {
         this.BuildKeywords(data.keywords);
     }
     
-
+    // Creates all keyword objects from their IDs
     public BuildKeywords(keywords : string[]) {
         for (let i = 0; i < keywords.length; i++) {
             const KeywordObj = KeywordFactory.CreateNewKeyword(keywords[i], this);
@@ -108,7 +115,7 @@ class Equipment extends StaticOptionContextObject {
         }
     }
 
-    
+    // Creates the factions this item is associated with
     public async BuildFactionEquipment(id : string) {
         const EquipmentList = Requester.MakeRequest(
             {
@@ -131,7 +138,6 @@ class Equipment extends StaticOptionContextObject {
             }
         ) as IFactionEquipmentRelationship[]
 
-        
         EquipmentList.sort(byPropertiesOf<IFactionEquipmentRelationship>(["name", "id"]))
 
         for (let i = 0; i < EquipmentList.length; i++) {

@@ -7,24 +7,20 @@
 import { IModelUpgradeRelationship, ModelUpgradeRelationship, UpgradesGrouped } from '../../relationship/model/ModelUpgradeRelationship';
 import { AbilityFactory } from '../../../factories/features/AbilityFactory';
 import { KeywordFactory } from '../../../factories/features/KeywordFactory';
-import {byPropertiesOf, DescriptionFactory, getCostType} from '../../../utility/functions';
+import {byPropertiesOf, DescriptionFactory} from '../../../utility/functions';
 import { ContextObject, IContextObject } from '../../contextevent/contextobject';
 import { StaticContextObject } from '../../contextevent/staticcontextobject';
 import { Ability } from '../ability/Ability';
-import { IKeyword, Keyword } from '../glossary/Keyword';
+import { Keyword } from '../glossary/Keyword';
 import { GetPresentationStatistic, MergeTwoStats, ModelStatistics, PresentModelStatistics } from './ModelStats';
 import { Requester } from '../../../factories/Requester';
 import { UpgradeFactory } from '../../../factories/features/UpgradeFactory';
 import { IModelEquipmentRelationship, ModelEquipmentRelationship } from '../../relationship/model/ModelEquipmentRelationship';
 import { EquipmentFactory } from '../../../factories/features/EquipmentFactory';
-import { ContextPackage } from '../../contextevent/contextpackage';
 import { EventRunner } from '../../contextevent/contexteventhandler';
 import { Equipment, EquipmentLimit, EquipmentRestriction } from '../equipment/Equipment';
 import { FactionModelRelationship, IFactionModelRelationship } from '../../relationship/faction/FactionModelRelationship';
 import { ModelFactory } from '../../../factories/features/ModelFactory';
-import { Faction } from '../faction/Faction';
-import { StaticDataCache } from '../../_high_level_controllers/StaticDataCache';
-import { IVariantModel } from './ModelCollection';
 
 interface IModel extends IContextObject {
     description: [];
@@ -76,6 +72,7 @@ class Model extends StaticContextObject {
         } else { this.Variant = "base" }
     }
     
+    // Build the faction model (and respective faction) a model is a part of
     public async BuildFactionModels(id : string) {
         const ModelList = Requester.MakeRequest(
             {
@@ -105,7 +102,7 @@ class Model extends StaticContextObject {
         }
     }
 
-
+    // Collec the stat profile options inherant to a model
     public async RunStatOptions() {
         const EventProc : EventRunner = new EventRunner();
 
@@ -120,6 +117,7 @@ class Model extends StaticContextObject {
         });
     }
 
+    // Get the inherant equipment restrictions a model has
     public async RunEquipmentRestriction() {
         const EventProc : EventRunner = new EventRunner();
 
@@ -134,6 +132,7 @@ class Model extends StaticContextObject {
         });
     }
 
+    // Get the equipment limits a model inherantly has
     public async RunEquipmentLimit() {
         const EventProc : EventRunner = new EventRunner();
 
@@ -148,6 +147,7 @@ class Model extends StaticContextObject {
         });
     }
 
+    // Return a model's statistics, including inherant equipment, in presentable form
     public async GetPresentableStatistics() {
         const BaseStats = await this.GetStatsInfluencedByEquipmentProvided();
 
@@ -168,6 +168,8 @@ class Model extends StaticContextObject {
         }
     }
 
+    // Take a model's base statistics and combine them with any
+    // equipment it comes with automcatically (like armour).
     public async GetStatsInfluencedByEquipmentProvided() {
         let InfluencedStats = MergeTwoStats(this.Stats, {})
         const EventProc : EventRunner = new EventRunner();
@@ -188,6 +190,7 @@ class Model extends StaticContextObject {
         return InfluencedStats;
     }
 
+    // Construct the keywords a model has
     public BuildKeywords(keywords : string[]) {
         for (let i = 0; i < keywords.length; i++) {
             const KeywordObj = KeywordFactory.CreateNewKeyword(keywords[i], this);
@@ -195,6 +198,7 @@ class Model extends StaticContextObject {
         }
     }
 
+    // Build a model's abilities
     public async BuildAbilities(abilities : string[]) {
         for (let i = 0; i < abilities.length; i++) {
             const AbilityObj = await AbilityFactory.CreateNewAbility(abilities[i], this);
@@ -202,6 +206,7 @@ class Model extends StaticContextObject {
         }
     }
     
+    // Build the upgrades a model has available to it
     public async BuildModelUpgrades(id : string) {
         const UpgradeList = Requester.MakeRequest(
             {
@@ -231,6 +236,7 @@ class Model extends StaticContextObject {
         }
     }
     
+    // Build the equipment a model comes with automatically
     public async BuildModelEquipment(id : string) {
         const EquipmentList = Requester.MakeRequest(
             {
@@ -260,8 +266,7 @@ class Model extends StaticContextObject {
         }
     }
     
-    
-    
+    // Return a model's upgrades split into any groups it might have
     public GetSplitUpgrades() : UpgradesGrouped {
 
         const groups : UpgradesGrouped = {}
@@ -296,6 +301,7 @@ class Model extends StaticContextObject {
         return this.Name;
     }
 
+    // Get a model's special equipment without duplicates
     public getUniqueEquipment() {
         const UniqueEquipment : ModelEquipmentRelationship[] = []
         const IDList : string[] = []
@@ -350,6 +356,7 @@ class Model extends StaticContextObject {
         return this.KeyWord;
     }
 
+    // Get the IDs of a model's keywords
     public getKeywordIDs() : string[] {
         const idlist : string[] = []
 
@@ -396,7 +403,6 @@ class Model extends StaticContextObject {
         return this.ID;
     }
 
-
     /**
      * Returns the base size (or options) for a model as a string
      */
@@ -417,7 +423,6 @@ class Model extends StaticContextObject {
         return basestats.join('/')
     }
 
-
     /**
      * Get the name of the Base variant of this model
      */
@@ -428,7 +433,6 @@ class Model extends StaticContextObject {
             return this.BaseModel.GetTrueName();
         }
     }
-
 
     /**
      * is this model a variant of a base model?

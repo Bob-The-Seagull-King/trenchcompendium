@@ -24,6 +24,7 @@ class DynamicOptionContextObject extends DynamicContextObject {
         this.OptionChoice = option_obj;
     }
 
+    // Reload options, and then reconstruct selections that have been made
     public async BuildSelections() {
         await this.ReloadOption();
         for (let i = 0; i < this.OptionChoice.MyOptions.length; i++) {
@@ -82,6 +83,7 @@ class DynamicOptionContextObject extends DynamicContextObject {
         return subpackages; 
     }
 
+    // Return dynamic context objects held by selections, if any
     public ReturnNestedOptions() {
         const nestedoptions : DynamicOptionContextObject[] = [];
 

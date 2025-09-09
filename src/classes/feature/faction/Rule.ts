@@ -1,18 +1,7 @@
-import { IModelUpgradeRelationship, ModelUpgradeRelationship } from '../../relationship/model/ModelUpgradeRelationship';
-import { AbilityFactory } from '../../../factories/features/AbilityFactory';
-import { KeywordFactory } from '../../../factories/features/KeywordFactory';
+import { ModelUpgradeRelationship } from '../../relationship/model/ModelUpgradeRelationship';
 import { DescriptionFactory } from '../../../utility/functions';
-import { ContextObject, IContextObject } from '../../contextevent/contextobject';
-import { StaticContextObject } from '../../contextevent/staticcontextobject';
-import { Ability } from '../ability/Ability';
-import { IKeyword, Keyword } from '../glossary/Keyword';
-import { Requester } from '../../../factories/Requester';
-import { UpgradeFactory } from '../../../factories/features/UpgradeFactory';
-import { IModelEquipmentRelationship, ModelEquipmentRelationship } from '../../relationship/model/ModelEquipmentRelationship';
-import { EquipmentFactory } from '../../../factories/features/EquipmentFactory';
-import { ContextPackage } from '../../contextevent/contextpackage';
+import { ContextObject } from '../../contextevent/contextobject';
 import { EventRunner } from '../../contextevent/contexteventhandler';
-import { EquipmentLimit, EquipmentRestriction } from '../equipment/Equipment';
 import { IStaticOptionContextObject, StaticOptionContextObject } from '../../options/StaticOptionContextObject';
 
 
@@ -29,7 +18,7 @@ class Rule extends StaticOptionContextObject {
     /**
      * Assigns parameters and creates a series of description
      * objects with DescriptionFactory
-     * @param data Object data in IModel format
+     * @param data Object data in IRule format
      */
     public constructor(data: IRule, parent : ContextObject | null)
     {
@@ -37,6 +26,8 @@ class Rule extends StaticOptionContextObject {
         this.Description = DescriptionFactory(data.description, this);
     }
 
+    // Converts the options a location might have
+    // from raw JSON data into the proper class
     public async RunOptionsParse() {
         
         const EventProc : EventRunner = new EventRunner();
@@ -59,7 +50,8 @@ class Rule extends StaticOptionContextObject {
         }
     }
     
-
+    // Gets the collection of upgrade options provided
+    // by a faction rule.
     public async RunUpgradeOptions() {
         const EventProc : EventRunner = new EventRunner();
 
