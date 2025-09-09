@@ -2910,6 +2910,15 @@
         "source": "core",
         "tags": {},
         "contextdata": {
+            "model_equipment_restriction": {
+                "removed": [ 
+                    {
+                        "category": "ranged",
+                        "res_type": "all",
+                        "value": ""
+                    }
+                ]
+            }
         },
         "description": [
             {
