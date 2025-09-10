@@ -4,12 +4,6 @@
         <loc>https://trench-companion.com/sitemap-static.xml</loc>
     </sitemap>
     <sitemap>
-        <loc>https://synod.trench-companion.com/sitemap-warbands.xml</loc>
-    </sitemap>
-    <sitemap>
-        <loc>https://synod.trench-companion.com/sitemap-users.xml</loc>
-    </sitemap>
-    <sitemap>
-        <loc>https://synod.trench-companion.com/sitemap-blog.xml</loc>
+        <loc>https://trench-companion.com/wp-content/uploads/sitemaps/sitemap-index.xml</loc>
     </sitemap>
 </sitemapindex>
