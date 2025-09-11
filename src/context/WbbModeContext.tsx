@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useMemo, useState } from 'react';
+import React, { createContext, useContext, useMemo, useState, useEffect } from 'react';
 
 type ModeType = 'view' | 'edit' | 'play' | 'print';
 
@@ -37,6 +37,20 @@ export const WbbModeProvider: React.FC<{
         print_mode: mode === 'print',
         isOwner
     }), [mode, isOwner]);
+
+    // Toggle body class depending on play_mode
+    useEffect(() => {
+        if (value.play_mode) {
+            document.body.classList.add('play-mode');
+        } else {
+            document.body.classList.remove('play-mode');
+        }
+
+        // Cleanup: always remove on unmount
+        return () => {
+            document.body.classList.remove('play-mode');
+        };
+    }, [value.play_mode]);
 
     return (
         <WbbModeContext.Provider value={value}>
