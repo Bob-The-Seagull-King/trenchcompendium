@@ -7,9 +7,12 @@ $header_height: 55
 $header_logo_height: 25
 $header_logo_padding: ($header_height - $header_logo_height) / 2
 
-.header-main-spacer
-    width: 100%
-    height: $header_height + px
+//.header-main-spacer
+//    width: 100%
+//    height: $header_height + px
+
+body
+    padding-top: $header_height + px !important
 
 .header-main
     position: fixed
@@ -17,6 +20,9 @@ $header_logo_padding: ($header_height - $header_logo_height) / 2
     left: 0
     right: 0
     z-index: 100
+    transform: translateY(0)
+    transition: transform 200ms ease
+    will-change: transform
 
     display: flex
     justify-content: space-between
@@ -25,13 +31,14 @@ $header_logo_padding: ($header_height - $header_logo_height) / 2
     background-color: $color-bg-1
 
     box-shadow: $box-shadow-1
-    transition: transform .2s ease
-    transform: translateY(0)
 
-    &.shy
+    &.is-hidden
         transform: translateY(-100%)
+    @media (prefers-reduced-motion: reduce)
+        transition: none
 
 
+    // Header content
     .open-offcanvas-nav-btn
         background-color: transparent
         color: currentColor
@@ -95,6 +102,8 @@ $header_logo_padding: ($header_height - $header_logo_height) / 2
             .logo
                 max-width: calc(100vw - 130px)
 
+// // // //
+// Popover for user options in header
 .header-user-popover
     position: relative
     padding: 0
