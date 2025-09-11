@@ -3,8 +3,4 @@ User-agent: *
 Disallow:
 
 Sitemap: https://trench-companion.com/sitemap-static.xml
-Sitemap: https://synod.trench-companion.com/sitemap-warbands.xml
-Sitemap: https://synod.trench-companion.com/sitemap-factions.xml
-Sitemap: https://synod.trench-companion.com/sitemap-blog.xml
-Sitemap: https://synod.trench-companion.com/sitemap-users.xml
-Sitemap: https://trench-companion.com/sitemap.xml
+Sitemap: https://trench-companion.com/wp-content/uploads/sitemaps/sitemap-index.xml
