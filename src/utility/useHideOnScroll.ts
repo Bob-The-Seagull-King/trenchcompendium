@@ -15,9 +15,10 @@ export function useHideOnScroll(headerRef?: React.RefObject<HTMLElement>) {
     }, [headerRef?.current])
 
     useEffect(() => {
-        const hideThreshold = 12
-        const revealThreshold = 12
+        const hideThreshold = 55
+        const revealThreshold = 55    // etwas höher, um Flackern zu vermeiden
         const topRevealOffset = 8
+        const minDelta = 5             // kleine Scroll-Deltas ignorieren (Rubberband)
 
         const onScroll = () => {
             if (ticking.current) return
@@ -26,6 +27,14 @@ export function useHideOnScroll(headerRef?: React.RefObject<HTMLElement>) {
                 const y = window.scrollY
                 const delta = y - lastY.current
 
+                // kleine Bewegungen (Bounce, Jitter) ignorieren
+                if (Math.abs(delta) < minDelta) {
+                    lastY.current = y
+                    ticking.current = false
+                    return
+                }
+
+                // wenn ganz oben → Header immer zeigen
                 if (y <= topRevealOffset) {
                     accUp.current = 0
                     accDn.current = 0
@@ -36,6 +45,7 @@ export function useHideOnScroll(headerRef?: React.RefObject<HTMLElement>) {
                 }
 
                 if (delta > 0) {
+                    // runter scrollen
                     accDn.current += delta
                     accUp.current = 0
                     if (!hidden && accDn.current >= hideThreshold) {
@@ -43,6 +53,7 @@ export function useHideOnScroll(headerRef?: React.RefObject<HTMLElement>) {
                         accDn.current = 0
                     }
                 } else if (delta < 0) {
+                    // hoch scrollen
                     accUp.current += -delta
                     accDn.current = 0
                     if (hidden && accUp.current >= revealThreshold) {
