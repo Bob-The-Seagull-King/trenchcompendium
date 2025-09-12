@@ -10,7 +10,18 @@ import {
     faArrowUp,
     faArrowLeft,
     faCoins,
-    faEdit, faPen, faFileExport, faDice, faSignature, faPrint, faArrowRotateLeft, faSackDollar, faXmark, faCheck, faExclamationTriangle
+    faEdit,
+    faPen,
+    faFileExport,
+    faDice,
+    faSignature,
+    faPrint,
+    faArrowRotateLeft,
+    faSackDollar,
+    faXmark,
+    faCheck,
+    faExclamationTriangle,
+    faChevronRight
 } from '@fortawesome/free-solid-svg-icons';
 import { usePopover } from '../../../context/PopoverContext';
 import { useWarband } from '../../../context/WarbandContext';
@@ -1264,29 +1275,12 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                             )}
                         </button>
 
-                        <div className={'export-wrap'}>
-                            {(item as SumWarband).warband_data &&
-                                <pre style={{
-                                    margin: 0,
-                                    padding: 0,
-                                    lineHeight: '1',
-                                    width: "100%",
-                                    whiteSpace: 'pre-wrap',
-                                    wordBreak: 'break-word'
-                                }}>
-                                    <div >
-                                        {exportText}
-                                    </div>
-                            </pre>
-                            }
-                        </div>
-
-                        <AlertCustom
-                            type={'info'}
-                            className={'mt-3'}
-                        >
-                            <>
-                                <div>
+                        {exportType === 'tts-json' &&
+                            <AlertCustom
+                                type={'info'}
+                                className={'mt-3 mb-3'}
+                            >
+                                <div className={'fw-bold mb-2'}>
                                     <strong>
                                         {'Tabletop simulator export'}
                                     </strong>
@@ -1297,11 +1291,47 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                                 <a
                                     href={'https://steamcommunity.com/sharedfiles/filedetails/?id=3491693177 '}
                                     rel="noopener noreferrer nofollow" target={'_blank'}
+                                    className={'btn btn-primary btn-sm'}
                                 >
-                                    {'Trench Crusade - Scriber >'}
+                                    {'Trench Crusade - Scriber'}
+                                    <FontAwesomeIcon icon={faChevronRight} className={'ms-2'}/>
                                 </a>
-                            </>
-                        </AlertCustom>
+
+                                <div className={'fw-bold mt-3 mb-2'}>{'Support and Feedback'}</div>
+                                <p>
+                                    {'The TTS Importer is a third party steam tool. If you have questions or would like to leave feedback for the importer, you can use '}
+                                    <a href={'https://steamcommunity.com/workshop/filedetails/discussion/3491693177/597411554294572558/'}
+                                       rel={"noreferrer noopener nofollow"} target={'_blank'}>
+                                        {'Steam'}
+                                    </a>
+                                    {' or '}
+                                    <a href={'https://discord.com/channels/1302770150336106576/1394658842775912519/1394658842775912519'}
+                                       rel={"noreferrer noopener nofollow"} target={'_blank'}>
+                                        {'Discord'}
+                                    </a>
+                                    {'.'}
+                                </p>
+                            </AlertCustom>
+                        }
+
+
+
+                        <div className={'export-wrap'}>
+                            {(item as SumWarband).warband_data &&
+                                <pre style={{
+                                    margin: 0,
+                                    padding: 0,
+                                    lineHeight: '1',
+                                    width: "100%",
+                                    whiteSpace: 'pre-wrap',
+                                    wordBreak: 'break-word'
+                                }}>
+                                    <div>
+                                        {exportText}
+                                    </div>
+                            </pre>
+                            }
+                        </div>
 
 
                     </div>
