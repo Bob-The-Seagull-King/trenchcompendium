@@ -44,10 +44,16 @@ export interface GeneralLocationCache {
     exploration_skills?: WarbandProperty[]
 }
 
+export interface StoredLocation {
+    true_obj? : WarbandProperty,
+    base_item : FilteredLocation
+}
+
 class WarbandExplorationSet extends DynamicContextObject {
     Skills : WarbandProperty[] = [];
     Locations : WarbandProperty[] = [];
-    GeneralCache : GeneralLocationCache = {}
+    GeneralCache : GeneralLocationCache = {};
+    CurLocation : StoredLocation | null = null;
 
     /**
      * Assigns parameters and creates a series of description

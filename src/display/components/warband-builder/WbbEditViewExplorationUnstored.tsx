@@ -32,15 +32,15 @@ import WbbExploration_Selection_MultiEquipment from "./Exploration/WbbExploratio
 import WbbExploration_Selection_DieRollResult from "./Exploration/WbbExploration_Selection_DieRollResult";
 import { ExplorationLocation } from '../../../classes/feature/exploration/ExplorationLocation';
 import { ToolsController } from '../../../classes/_high_level_controllers/ToolsController';
-import { LocationHold } from './Exploration/WbbLocationsList';
 import { containsTag } from '../../../utility/functions';
 import { EventRunner } from '../../../classes/contextevent/contexteventhandler';
 import { WarbandConsumable } from '../../../classes/saveitems/Warband/WarbandConsumable';
 import WbbConsumableSelect from './modals/warband/WbbConsumableSelect';
 import { ContextObject } from '../../../classes/contextevent/contextobject';
+import { StoredLocation } from '../../../classes/saveitems/Warband/CoreElements/WarbandExplorationSet';
 
 interface WbbEditViewExplorationProps {
-    location : LocationHold;
+    location : StoredLocation;
     initiallyOpen?: boolean;
     clear: () => void;
 }
@@ -55,7 +55,7 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
     const [updateState, setUpdateState] = useState(0);
     const [contextMessage, setContextMessage] = useState<string[]>([]);
     const [selectedOptions, setselectedOptions] = useState<ISelectedOption[]>([]);
-    const [cansave, setcansave] = useState<boolean>(!location.loc?.GetID() || (!(containsTag(location.suite.location.Tags, 'unforced')) && location.suite?.options && location.suite.options.length > 0 && (location.suite.options.length != selectedOptions.length )));
+    const [cansave, setcansave] = useState<boolean>(!location.base_item.location?.GetID() || (!(containsTag(location.base_item.location.Tags, 'unforced')) && location.base_item?.options && location.base_item.options.length > 0 && (location.base_item.options.length != selectedOptions.length )));
     
     useEffect(() => {
         async function GetMessage() {
@@ -102,7 +102,7 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
     // Handler to apply an exploration location
     const handleApply = () => {
         if (!warband) { return; }
-        warband.warband_data.Exploration.AddExplorationLocation(location.loc, selectedOptions).then(() => {
+        warband.warband_data.Exploration.AddExplorationLocation(location.base_item.location, selectedOptions).then(() => {
             const Manager : ToolsController = ToolsController.getInstance();
             Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(() => {clear(); reloadDisplay()})
         })
@@ -119,7 +119,7 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
         if (found == false) {
             selectedOptions.push(newoption);
         }
-        setcansave(!location.loc?.GetID() || (!(containsTag(location.suite.location.Tags, 'unforced')) && location.suite?.options && location.suite.options.length > 0 && (location.suite.options.length != selectedOptions.length )))
+        setcansave(!location.base_item.location?.GetID() || (!(containsTag(location.base_item.location.Tags, 'unforced')) && location.base_item?.options && location.base_item.options.length > 0 && (location.base_item.options.length != selectedOptions.length )))
         setUpdateState(updateState + 1);
     }
 
@@ -130,7 +130,7 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
                  onClick={() => setOpen(!open)}
             >
                 <div className={'exploration-name'}>
-                    {location.loc.GetName()}
+                    {location.base_item.location.GetName()}
                     <FontAwesomeIcon icon={faTriangleExclamation} className="icon-inline-right-l icon-wraning"/>
                 </div>
 
@@ -145,19 +145,19 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
                     <div className={'exploration-body'}>
                         {/* Main description text */}
                         <div className={'exploration-description'}>
-                            {(location.loc.Description != null) &&
+                            {(location.base_item.location.Description != null) &&
                                 <>
                                     {
-                                        returnDescription(location.loc, location.loc.Description)
+                                        returnDescription(location.base_item.location, location.base_item.location.Description)
                                     }
                                 </>
                             }
                         </div>
                         {/* Show option descriptions if any */}
-                        {(location.loc.MyOptions.length > 0 )  &&
+                        {(location.base_item.location.MyOptions.length > 0 )  &&
                             <ul className={'exploration-description-options'}>
-                                {location.loc.MyOptions.map((item) => 
-                                    <div key={location.loc.MyOptions.indexOf(item)}>
+                                {location.base_item.location.MyOptions.map((item) => 
+                                    <div key={location.base_item.location.MyOptions.indexOf(item)}>
                                         {item.Selections.map((choice) => 
                                         <li key={item.Selections.indexOf(choice)} className={'exploration-description-option'}>
                                             <span className={'option-name'}>
@@ -175,11 +175,11 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
                         }
 
                         {/* Show option Radio 1 */}
-                        { (location.suite.options.length > 0) &&
+                        { (location.base_item.options.length > 0) &&
                             <>
-                                {location.suite.options.map((item) =>
+                                {location.base_item.options.map((item) =>
                                     <WbbExploration_OptionSelect_Radio
-                                        key={location.suite.options.indexOf(item)}
+                                        key={location.base_item.options.indexOf(item)}
                                         options={item}
                                         onChange={UpdateSelectedOptionIDs}
                                     />
