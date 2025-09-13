@@ -717,6 +717,16 @@ class WarbandMember extends DynamicContextObject {
             }
         }
 
+        const SelectedEquipment = await this.GetOptionalEquipment()
+        
+        for (let i = 0; i < SelectedEquipment.length; i++) {
+            const static_packages : ContextPackage[] = await (SelectedEquipment[i].purchase.HeldObject as Equipment).GrabContextPackages(event_id, source_obj, arrs_extra);
+            for (let j = 0; j < static_packages.length; j++) {
+                static_packages[j].callpath.push("WarbandMember")
+                subpackages.push(static_packages[j])
+            }
+        }
+
         for (let i = 0; i < this.SubProperties.length; i++) {
             const static_packages : ContextPackage[] = await this.SubProperties[i].GrabContextPackages(event_id, source_obj, arrs_extra);
             for (let j = 0; j < static_packages.length; j++) {
@@ -2702,22 +2712,9 @@ class WarbandMember extends DynamicContextObject {
         )
     }
 
-    public async GetAllEquipForShow() {
+    public async GetOptionalEquipment() {
         
         const options : RealWarbandPurchaseEquipment[] = [ ];
-        let UnarmedFlag = true;
-
-        for (let i = 0; i < this.Equipment.length; i++) {
-            if ((this.Equipment[i].HeldObject as WarbandEquipment).GetEquipmentItem().Category == "melee") {
-                UnarmedFlag = false;
-            }
-            options.push(
-                {
-                    purchase: this.Equipment[i],
-                    equipment: this.Equipment[i].HeldObject as WarbandEquipment
-                }
-            )
-        }
 
         for (let i = 0; i < this.ModelEquipments.length; i++) {
             for (let j = 0; j < this.ModelEquipments[i].SelfDynamicProperty.Selections.length; j++) {
@@ -2748,14 +2745,39 @@ class WarbandMember extends DynamicContextObject {
                                     equipment: Model
                                 }
                             )
-
-                            if (Model.GetEquipmentItem().Category == "melee") {
-                                UnarmedFlag = false;
-                            }
                         }
 
                     }
                 } catch(e) { console.log(e)}
+            }
+        }
+
+        return options;
+    }
+
+    public async GetAllEquipForShow() {
+        
+        const options : RealWarbandPurchaseEquipment[] = [ ];
+        let UnarmedFlag = true;
+
+        for (let i = 0; i < this.Equipment.length; i++) {
+            if ((this.Equipment[i].HeldObject as WarbandEquipment).GetEquipmentItem().Category == "melee") {
+                UnarmedFlag = false;
+            }
+            options.push(
+                {
+                    purchase: this.Equipment[i],
+                    equipment: this.Equipment[i].HeldObject as WarbandEquipment
+                }
+            )
+        }
+
+        const optionaloptions = await this.GetOptionalEquipment()
+        for (let i = 0; i < optionaloptions.length; i++) {
+            options.push(optionaloptions[i])
+            
+            if (optionaloptions[i].equipment.GetEquipmentItem().Category == "melee") {
+                UnarmedFlag = false;
             }
         }
 
