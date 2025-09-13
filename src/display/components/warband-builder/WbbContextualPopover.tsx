@@ -77,6 +77,7 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
     // change export text based on type
     useEffect(() => {
 
+        setFighterName(type === 'fighter' && item?.model ? item.model.GetFighterName() : '')
         async function TTSExport() {
             const TTS_Export = await (item as SumWarband).warband_data.BuildExportJSON()
             setExportText(TTS_Export.join('\n'));
