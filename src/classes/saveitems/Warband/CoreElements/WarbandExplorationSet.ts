@@ -344,6 +344,49 @@ class WarbandExplorationSet extends DynamicContextObject {
 
     }
 
+    public async AssignTempLocation() {
+        
+        if (this.CurLocation == null) {
+            return;
+        }
+        if (this.CurLocation.true_obj == null) {
+            return;
+        }
+        this.Locations.push(this.CurLocation.true_obj);
+        const eventmon : EventRunner = new EventRunner();
+        await eventmon.runEvent(
+            "onGainLocation",
+            this,
+            [this.MyContext as UserWarband],
+            null,
+            this.CurLocation.true_obj
+        )
+    }
+    
+    public async AddTempExplorationLocation ( location: ExplorationLocation, option: ISelectedOption[]) {
+        if (this.CurLocation == null) {
+            return;
+        }
+        const Selections : IWarbandProperty = {
+            object_id: location.GetID(),
+            selections: option,
+            consumables: []
+        }
+
+        const NewRuleProperty = new WarbandProperty(location, this.MyContext? this.MyContext as UserWarband : null, null, Selections);
+        await NewRuleProperty.HandleDynamicProps(location, this.MyContext? this.MyContext as UserWarband : null, null, Selections);
+        this.CurLocation.true_obj = NewRuleProperty;
+        const eventmon : EventRunner = new EventRunner();
+        await eventmon.runEvent(
+            "onPickLocation",
+            NewRuleProperty,
+            [this.MyContext as UserWarband],
+            null,
+            NewRuleProperty
+        )
+
+    }
+
 }
 
 export {IWarbandExplorationSet, WarbandExplorationSet}

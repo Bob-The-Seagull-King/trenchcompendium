@@ -21,12 +21,12 @@ const WbbLocationsList = () => {
     const { play_mode, edit_mode, view_mode, print_mode, setMode } = useWbbMode(); // play mode v2
     const [keyvar, setkeyvar] = useState(0);
     const [locations, setlocations] = useState<WarbandProperty[]>([]);
-    const [templocation, settemplocation] = useState<StoredLocation | null>(null);
+    const [templocation, settemplocation] = useState<StoredLocation | null>(warband? warband.warband_data.Exploration.CurLocation : null);
 
     // Exploration Location Modal
     const [showAddExplorationModal, setShowAddExplorationModal] = useState(false);
 
-    const handleSaveExplorationLocation = (location: ExplorationLocation, optionsuite : FilteredLocation) => {
+    const handleSaveExplorationLocation = (optionsuite : FilteredLocation) => {
         if (!warband) { return; }
         warband.warband_data.Exploration.CurLocation = {
             base_item: optionsuite

@@ -3800,8 +3800,8 @@ export const BaseContextCallTable : CallEventTable = {
     },
     consumable: {
         event_priotity: 0,
-        async onGainLocation(this: EventRunner, eventSource : any, trackVal : WarbandProperty, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) {
-             
+        async onPickLocation(this: EventRunner, eventSource : any, trackVal : WarbandProperty, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) {
+             console.log("PICK LOCATION")
             const {WarbandConsumable} = await import("../../classes/saveitems/Warband/WarbandConsumable");
             let IsMe = false
             if (trackVal.SelfDynamicProperty.OptionChoice.ID == context_static.GetID()) {

@@ -15,7 +15,7 @@ import {returnDescription} from "../../../../utility/util";
 interface WbbModalAddExplorationLocationProps {
     show: boolean;
     onClose: () => void;
-    onSubmit: (location: ExplorationLocation, options : FilteredLocation ) => void;
+    onSubmit: (options : FilteredLocation ) => void;
 }
 
 const WbbModalAddExplorationLocation: React.FC<WbbModalAddExplorationLocationProps> = ({ show, onClose, onSubmit }) => {
@@ -33,7 +33,7 @@ const WbbModalAddExplorationLocation: React.FC<WbbModalAddExplorationLocationPro
         if (selectedLocation) {
             const expl : ExplorationTableSuite = availableoptions.filter((item) => item.valid_locs.filter((sub) => sub.location.ID == selectedLocation.location.ID).length > 0)[0]
             const filteredop : FilteredLocation = expl.valid_locs.filter((item) => item.location.ID == selectedLocation.location.ID)[0]
-            onSubmit(selectedLocation.location, filteredop);
+            onSubmit(filteredop);
             setSelectedLocation(null);
             setSelectedOptionIds([]);
             onClose();

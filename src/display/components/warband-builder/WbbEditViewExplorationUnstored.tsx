@@ -57,6 +57,18 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
     const [selectedOptions, setselectedOptions] = useState<ISelectedOption[]>([]);
     const [cansave, setcansave] = useState<boolean>(!location.base_item.location?.GetID() || (!(containsTag(location.base_item.location.Tags, 'unforced')) && location.base_item?.options && location.base_item.options.length > 0 && (location.base_item.options.length != selectedOptions.length )));
     
+    function createBaseItem() {
+        if (!warband) { return; }
+        warband.warband_data.Exploration.AddTempExplorationLocation(location.base_item.location, selectedOptions).then(() => {
+            onbaseItemCreate()
+        })
+    }
+
+    async function onbaseItemCreate() {
+        console.log(warband?.warband_data.Exploration.CurLocation)
+            setkeyvar(keyvar + 1);
+    }
+
     useEffect(() => {
         async function GetMessage() {
             /*
@@ -102,10 +114,16 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
     // Handler to apply an exploration location
     const handleApply = () => {
         if (!warband) { return; }
-        warband.warband_data.Exploration.AddExplorationLocation(location.base_item.location, selectedOptions).then(() => {
+        if (location.true_obj == undefined) {
+            warband.warband_data.Exploration.AddTempExplorationLocation(location.base_item.location, selectedOptions).then(() => {warband.warband_data.Exploration.AssignTempLocation().then(() => {
+            const Manager : ToolsController = ToolsController.getInstance();
+            Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(() => {clear(); reloadDisplay()})
+        })})} else {
+        warband.warband_data.Exploration.AssignTempLocation().then(() => {
             const Manager : ToolsController = ToolsController.getInstance();
             Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(() => {clear(); reloadDisplay()})
         })
+    }
     }
     
     function UpdateSelectedOptionIDs(newoption : ISelectedOption) {
@@ -121,6 +139,7 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
         }
         setcansave(!location.base_item.location?.GetID() || (!(containsTag(location.base_item.location.Tags, 'unforced')) && location.base_item?.options && location.base_item.options.length > 0 && (location.base_item.options.length != selectedOptions.length )))
         setUpdateState(updateState + 1);
+        createBaseItem()
     }
 
 
@@ -158,6 +177,8 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
                             <ul className={'exploration-description-options'}>
                                 {location.base_item.location.MyOptions.map((item) => 
                                     <div key={location.base_item.location.MyOptions.indexOf(item)}>
+                                        {item.Tags.base_loc != undefined &&
+                                            <>
                                         {item.Selections.map((choice) => 
                                         <li key={item.Selections.indexOf(choice)} className={'exploration-description-option'}>
                                             <span className={'option-name'}>
@@ -168,7 +189,7 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
                                             </span>
                                         </li>)
 
-                                        }
+                                        }</>}
                                     </div>   
                                 ) }
                             </ul>
@@ -188,83 +209,62 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
                             </>
                         }
 
-
-                        {/* Show additional Selection Options for the location */}
-
-                        {/* @TODO: show this conditionally */}
-                        {/* Show selection of sword or polearm */}
-                        {/*<WbbExploration_Selection_Fallen_Knight*/}
-                        {/*    onChange={() => {alert('option changed - fallen knight')}}*/}
-                        {/*/>*/}
-
-                        {/* @TODO: show this conditionally */}
-                        {/* Show selection for falles soldier*/}
-                        {/*<WbbExploration_Selection_FallenSoldier*/}
-                        {/*    onChange={() => {alert('option changed - fallen soldier')}}*/}
-                        {/*/>*/}
-
-                        {/* @TODO: show this conditionally */}
-                        {/* Select a single equipment from a list */}
-                        {/*<WbbExploration_Selection_SingleEquipment*/}
-                        {/*    onSubmit={() => {console.log('equipment selected')}}*/}
-                        {/*/>*/}
-
-                        {/* @TODO: show this conditionally */}
-                        {/*/!* Select 4 fighters to gain 1 XP *!/*/}
-                        {/*<WbbExploration_Selection_MoonshineStash_Destroy*/}
-                        {/*    // onChange={() => {alert('changed')}}*/}
-                        {/*/>*/}
-
-                        {/* @TODO: show this conditionally */}
-                        {/* Select one fighter with an instrument */}
-                        {/*<WbbExploration_Selection_AngelicInstrument*/}
-                        {/*    // onChange={() => {alert('changed')}}*/}
-                        {/*/>*/}
-
-                        {/* @TODO: show this conditionally */}
-                        {/* Select one fighter to gain Holy DNA*/}
-                        {/*<WbbExploration_Selection_HolyDNA*/}
-                        {/*    // onChange={() => {alert('changed')}}*/}
-                        {/*/>*/}
-
-                        {/* @TODO: show this conditionally */}
-                        {/* Select one armour to Upgrade*/}
-                        {/*<WbbExploration_Selection_GolgothaTektites*/}
-                        {/*    // onChange={() => {alert('changed')}}*/}
-                        {/*/>*/}
-
-                        {/* @TODO: show this conditionally */}
-                        {/* Select one skill for a fighter*/}
-                        {/*<WbbExploration_Selection_Fruit*/}
-                        {/*    // onSubmit={() => {alert('skill selected')}}*/}
-                        {/*/>*/}
-
-                        {/* @TODO: show this conditionally */}
-                        {/* Select two items costing 100D or less */}
-                        {/*<WbbExploration_Selection_BattlefieldOfCorpses*/}
-                        {/*    // onSubmit={() => {alert('skill selected')}}*/}
-                        {/*/>*/}
-
-                        {/* @TODO: show this conditionally */}
-                        {/* Select one items glory to purchase */}
-                        {/*<WbbExploration_Selection_GloryPurchase*/}
-                        {/*    onSubmit={() => {alert('glory item selected')}}*/}
-                        {/*/>*/}
-
-                        {/* @TODO: show this conditionally */}
-                        {/* Select multiple items from a list within a limit */}
-                        {/*<WbbExploration_Selection_MultiEquipment*/}
-                        {/*/>*/}
-
-                        {/* @TODO: show this conditionally */}
-                        {/* Select a die Roll value */}
-                        {/*<WbbExploration_Selection_DieRollResult*/}
-                        {/*    label={'6D6 roll result'}*/}
-                        {/*    onChange={(result) => {*/}
-                        {/*        /!* @TODO: ceck if entered number is withing range and disable submit if not*!/*/}
-                        {/*        alert('roll result = ' + result)*/}
-                        {/*    }}*/}
-                        {/*/>*/}
+                        {((location.true_obj != undefined) && (location.true_obj != null)) &&
+                            <div key={keyvar}>
+                                
+                                {(location.true_obj.SelfDynamicProperty.OptionChoice.MyOptions.length > 0 ) && 
+                                    <ul className={'exploration-description-options'}>
+                                        {location.true_obj.SelfDynamicProperty.OptionChoice.MyOptions.map((item) => 
+                                            <div key={location.true_obj!.SelfDynamicProperty.OptionChoice.MyOptions.indexOf(item)}>
+                                                {item.Tags.base_loc == undefined &&
+                                                    <>
+                                            {item.Selections.map((selectedchoice) => 
+                                                <div key={item.Selections.indexOf(selectedchoice)}>
+                                                <li  className={'exploration-description-option'}>
+                                                    <span className={'option-name'}>
+                                                        {selectedchoice.display_str}
+                                                    </span>
+                                                    <span className={'option-description'}>
+                                                        {returnDescription(selectedchoice.value, selectedchoice.value.Description)}
+                                                    </span>
+                                                </li></div>
+                                                )}</>
+                                                }
+                                            </div>   
+                                        ) }
+                                    </ul>
+                                }
+                                {location.true_obj.SelfDynamicProperty.Selections.length > 0 &&
+                                    <>
+                                    {location.true_obj.SelfDynamicProperty.Selections.map((item) =>
+                                        <div
+                                            key={location.true_obj!.SelfDynamicProperty.Selections.indexOf(item)}>
+                                                {item.Option.Tags.base_loc == undefined &&
+                                                    <>
+                                                <WbbOptionSelect
+                                                    property={location.true_obj!}
+                                                    hidedesc={true}
+                                                    choice={item}
+                                                /></>
+                                                }
+                                        </div>
+                                    )}
+                                </>
+                                }
+                                {location.true_obj.Consumables.length > 0 &&
+                                <div className="stash-items-wrap">
+                                    <div className={'stash-items-category'}>
+                                        {location.true_obj.Consumables.map((item: WarbandConsumable, index: number) => (
+                                            <WbbConsumableSelect
+                                                key={index}
+                                                property={item}
+                                            />
+                                        ))}
+                                    </div>
+                                </div>
+                                }
+                            </div>
+                        }
 
                         {contextMessage.length == 0 &&
                         <br/>
