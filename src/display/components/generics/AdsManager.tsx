@@ -1,53 +1,60 @@
-import React, { useEffect, useState } from 'react';
-import {useAuth} from "../../../utility/AuthContext";
+import { useEffect } from 'react';
+import { useAuth } from '../../../utility/AuthContext';
+
+const isProduction = window.location.hostname === 'trench-companion.com';
 
 declare global {
     interface Window {
-        ezstandalone?: {
-            cmd: Array<() => void>;
-            showAds: (id: number) => void;
-        };
+        adsbygoogle?: unknown[];
     }
 }
 
-//const isProduction = false;
-const isProduction = window.location.hostname === 'trench-companion.com';
-
 export const AdsManager: React.FC = () => {
-    const [consent, setConsent] = useState<boolean | null>(null);
-    const { isLoggedIn, userId, authToken,  loadingUser, SiteUser } = useAuth();
+    const { SiteUser } = useAuth();
 
-
-    // Show ads in placeholder - check if this is needed?
     useEffect(() => {
-        if (!isProduction ) return;
+        if (!isProduction || SiteUser?.Premium.IsPremium) return;
 
-        if (typeof window.ezstandalone !== 'undefined' && window.ezstandalone.cmd) {
-            window.ezstandalone?.cmd.push(() => {
-                window.ezstandalone?.showAds(118);
-            });
-        }
-    }, [consent]);
+        let attempts = 0;
+        const interval = setInterval(() => {
+            attempts++;
 
-    if (!isProduction || SiteUser?.Premium.IsPremium) return null;
+            if (window.adsbygoogle && Array.isArray(window.adsbygoogle)) {
+                try {
+                    window.adsbygoogle.push({});
+                    clearInterval(interval);
+                } catch (e) {
+                    console.error('Adsense error', e);
+                }
+            }
+
+            if (attempts > 20) {
+                clearInterval(interval);
+                console.warn('Adsense script not loaded in time');
+            }
+        }, 250);
+
+        return () => clearInterval(interval);
+    }, [SiteUser]);
+
+    if (SiteUser?.Premium.IsPremium) return null;
 
     return (
-        <>
-            <div className={'AdsManager'}>
-                <div className={'Ads-text-below'}>
-                    {'❤️ Support Trench Companion for an ad-free experience'}
-                </div>
-
-                <div
-                    id="ezoic-pub-ad-placeholder-118"
-                    className={'ads-placeholder'}
-                />
+        <div className="AdsManager">
+            <div className="Ads-text-below">
+                ❤️ Support Trench Companion for an ad-free experience
             </div>
 
-            <div className={'AdsManager-bottom-spacer'}>
-            </div>
-        </>
+            <ins
+                className="adsbygoogle"
+                style={{ display: 'block' }}
+                data-ad-client="ca-pub-3744837400491966"
+                data-ad-slot="7868779249"   // dein echtes Slot-ID von Google
+                data-ad-format="auto"
+                data-full-width-responsive="true"
+            />
 
-
+            <div className="AdsManager-bottom-spacer"></div>
+        </div>
     );
 };

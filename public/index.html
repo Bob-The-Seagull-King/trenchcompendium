@@ -18,26 +18,38 @@
          <meta property="og:description" content="The official resource for Trench Crusade" data-react-helmet="true">
          <meta property="og:title" content="Trench Companion | Trench Companion" data-react-helmet="true">
          <meta property="og:type" content="website" data-react-helmet="true">
-         <script src="https://cmp.gatekeeperconsent.com/min.js" data-cfasync="false" data-react-helmet="true"></script><script src="https://the.gatekeeperconsent.com/cmp.min.js" data-cfasync="false" data-react-helmet="true"></script><script async="true" src="https://www.ezojs.com/ezoic/sa.min.js" data-react-helmet="true"></script><script data-react-helmet="true">
-            window.ezstandalone = window.ezstandalone || {};
-            ezstandalone.cmd = ezstandalone.cmd || [];
-         </script><script defer="" src="https://www.ezojs.com/identity.js"></script>
 
-        <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('consent', 'default', {
-                ad_storage: 'denied',
-                analytics_storage: 'denied',
-                ad_user_data: 'denied',
-                ad_personalization: 'denied'
+
+        <link rel="stylesheet" href="%PUBLIC_URL%/klaro.css">
+        <link rel="stylesheet" href="%PUBLIC_URL%/klaro-overrides.css">
+        <script src="%PUBLIC_URL%/klaro-config.js"></script>
+        <script defer src="%PUBLIC_URL%/klaro-no-css.js"></script>
+        <script defer>
+            window.addEventListener('DOMContentLoaded', function () {
+                klaro.setup(klaroConfig);
             });
         </script>
-        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-                new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','GTM-NFVT7W7X');</script>
+        <script data-type="application/javascript" type="text/plain" data-name="google-tag-manager">
+            (function(w,d,s,l,i){
+              w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'});
+              var f=d.getElementsByTagName(s)[0],
+                  j=d.createElement(s), dl=l!='dataLayer'?'&l='+l:'';
+              j.async=true;
+              j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+              f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','GTM-NFVT7W7X');
+        </script>
+        <noscript>
+            <iframe data-name="google-tag-manager"
+                    data-src="https://www.googletagmanager.com/ns.html?id=GTM-NFVT7W7X"
+                    height="0" width="0" style="display:none;visibility:hidden"></iframe>
+        </noscript>
+
+        <script async data-type="application/javascript" type="text/plain"
+                data-name="google-ads"
+                src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3744837400491966"
+                crossOrigin="anonymous"></script>
+
     </head>
     <body class="trench-companion">
          <noscript>You need to enable JavaScript to run this app.</noscript>
