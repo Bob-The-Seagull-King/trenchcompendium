@@ -9,6 +9,7 @@ import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
 import LoadingOverlay from '../components/generics/Loading-Overlay';
 import { WarbandFactory } from '../../factories/warband/WarbandFactory';
 import {WbbModeProvider} from "../../context/WbbModeContext";
+import {toast} from "react-toastify";
 
 const WbbEditPage = (prop: any) => {
     const Manager : WarbandManager = prop.manager;
@@ -20,6 +21,7 @@ const WbbEditPage = (prop: any) => {
     const [keyval, setKeyVal] = useState(0);
 
     const [isWarbandOwner, setIsWarbandOwner] = useState(false);
+
 
 
     const navigate = useNavigate();
@@ -34,6 +36,13 @@ const WbbEditPage = (prop: any) => {
                 // @TODO: Lane: Is this the right place to set ownership?
                 setIsWarbandOwner(false)
 
+                // no warband can be loaded for this ID
+                if( ItemOther === null ){
+                    toast.error('This warband does not exist.')
+                    navigate("/warband"); // default url if warband cannot be loaded
+                    return null;
+                }
+
                 return ItemOther
             }
 
@@ -47,6 +56,7 @@ const WbbEditPage = (prop: any) => {
         }
 
     }
+
 
     useEffect(() => {
         async function SetWarband() {

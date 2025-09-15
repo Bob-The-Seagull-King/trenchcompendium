@@ -15,6 +15,7 @@ import MenuHeader from './MenuHeader'
 
 import { ControllerController } from '../../classes/_high_level_controllers/ControllerController';
 import OffcanvasMenu from './components/OffCanvasMenu';
+import {useHideOnScroll} from "../../utility/useHideOnScroll";
 
 interface IControllerProp {
     controller : ControllerController; // The controller being passed through
@@ -56,62 +57,12 @@ const SuperHeader: React.FC<IControllerProp> = (prop) => {
     const handleClosesettings = () => setShowsettings(false);
     const handleShowsettings = () => setShowsettings(true);
 
-
     /**
-     * Handles the hiding and showing of the header when scrolling
+     * Handles the hiding and showing of the header when scrolling v2
+     * - uses useHideOnScroll utility
      */
-    const [isShy, setIsShy] = useState(false)
-    const lastScrollY = useRef(window.scrollY)
-    const upScrollTotal = useRef(0)
-    const downScrollTotal = useRef(0)
-
-    useEffect(() => {
-        const handleScroll = () => {
-            const currentScroll = window.scrollY
-            const delta = currentScroll - lastScrollY.current
-
-            if (currentScroll === 0) { // is at top
-                setIsShy(false)
-                upScrollTotal.current = 0
-
-                downScrollTotal.current = 0
-                upScrollTotal.current = 0;
-            } else {
-                if (delta > 0) { // Scrolling down
-                    downScrollTotal.current += Math.abs(delta)
-
-                    upScrollTotal.current = 0
-
-                    if (downScrollTotal.current >= 55) {
-                        setIsShy(true)
-                        downScrollTotal.current = 0 // reset after hiding
-                    }
-
-                } else if (delta < 0) { // Scrolling up
-
-                    upScrollTotal.current += Math.abs(delta)
-                    downScrollTotal.current = 0
-
-                    if (upScrollTotal.current >= 55) {
-                        setIsShy(false)
-                        upScrollTotal.current = 0 // reset after reveal
-                    }
-                }
-            }
-
-            lastScrollY.current = currentScroll
-            if( lastScrollY.current < 0 ) {
-                lastScrollY.current = 0
-            }
-        }
-
-        window.addEventListener('scroll', handleScroll)
-        return () => {
-            window.removeEventListener('scroll', handleScroll)
-        }
-    }, [])
-
-
+    const headerRef = useRef<HTMLElement>(null)
+    const hidden = useHideOnScroll(headerRef)
 
     // Return result -----------------------------
     return (    
@@ -119,7 +70,7 @@ const SuperHeader: React.FC<IControllerProp> = (prop) => {
             <>
                 <div className={`header-main-spacer`}></div>
 
-                <div ref={ref} className={`header-main ${isShy ? 'shy' : ''}`}>
+                <div ref={ref} className={`header-main ${hidden ? "is-hidden" : ""}`}>
                     <Routes>
                         <Route element={
                             <BaseHeader  showstate={handleShow} controller={prop.controller} showsettings={handleShowsettings}/>

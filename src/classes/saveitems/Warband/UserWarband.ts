@@ -2529,7 +2529,14 @@ class UserWarband extends DynamicContextObject {
         const WbManager : WarbandManager = ToolsController.getInstance().UserWarbandManager;
         const WBUser : SumWarband | null = WbManager.GetItemByBaseID(this.ID);
 
-        if (WBUser == null) {return ["Something Went Wrong"]}
+        if (WBUser == null) {
+            const WBPublic : SumWarband | null = await WarbandFactory.GetWarbandPublicByID(this.PostID)
+            if (WBPublic == null) {
+                return ["Someth ing Went Wrong"] 
+            }
+            const EXPORT = await ConvertToTTSExport(WBPublic);
+            return [JSON.stringify(EXPORT, null, 2)];
+        }
 
         const EXPORT = await ConvertToTTSExport(WBUser);
         return [JSON.stringify(EXPORT, null, 2)];
