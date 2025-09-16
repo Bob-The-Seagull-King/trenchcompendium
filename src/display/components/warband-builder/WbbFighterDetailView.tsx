@@ -304,19 +304,26 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                             {'Keywords: '}
                         </span>                        
                         <span className="fighter-meta-value">
-                            {complexstate.keywordsList.map((item, index) => (
-                                <span
-                                    key={`model_keyword_${fighter.ID}_keyword_id_${item.ID}`}
-                                >
+                            {complexstate.keywordsList.length > 0 ? (
+                            <>
+                                {complexstate.keywordsList.map((item, index) => (
+                                    <span
+                                        key={`model_keyword_${fighter.ID}_keyword_id_${item.ID}`}
+                                    >
                                     <GenericHover
                                         titlename={item.Name}
                                         d_name={item.Name}
                                         d_type={""}
                                         d_method={() => <KeywordDisplay data={item} />}
                                     />
-                                    {index < complexstate.keywordsList.length - 1 && ", "}
+                                        {index < complexstate.keywordsList.length - 1 && ", "}
                                 </span>
-                            ))}
+                                ))}
+                            </>
+                            ):(
+                                <>-</>
+                            )}
+
                         </span>
                     </div>
 

@@ -129,7 +129,6 @@ const App: React.FC = () => {
                             <AdsManager />
                             <TrackingManager />
                             {/*<EmergencyAlert />*/}
-                            {/*<TrackingManagerv2 />*/}
 
                             <ToastContainer
                                 position="bottom-right"

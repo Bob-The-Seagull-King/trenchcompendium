@@ -1,3 +1,6 @@
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
 Disallow:
+
+Sitemap: https://trench-companion.com/sitemap-static.xml
+Sitemap: https://trench-companion.com/wp-content/uploads/sitemaps/sitemap-index.xml

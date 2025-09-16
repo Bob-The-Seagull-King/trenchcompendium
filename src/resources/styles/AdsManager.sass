@@ -18,22 +18,27 @@ $mobile-height: 70px
 
     .Ads-text-below
         position: absolute
-        z-index: 0
-        height: 100%
-        width: 100%
-        text-align: center
-        padding: 5px 15px
-
+        inset: 0
         display: flex
-        justify-content: center
         align-items: center
+        justify-content: center
+        padding: 5px 15px
+        text-align: center
+        pointer-events: none
+        z-index: 1
 
-    .ads-placeholder
+    .adsbygoogle
+        display: block
+        width: 100%
+        height: 100%
         position: relative
-        z-index: 5
+        z-index: 2
+
+    // Hide in all print views
     @media print
         display: none !important
-
+    &.has-ad .Ads-text-below
+        display: none
 .AdsManager-bottom-spacer
     height: $desktop-height
     @media (max-width: 768px)
