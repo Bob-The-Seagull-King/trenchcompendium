@@ -3,4 +3,4 @@ User-agent: *
 Disallow:
 
 Sitemap: https://trench-companion.com/sitemap-static.xml
-Sitemap: https://trench-companion.com/wp-content/uploads/sitemaps/sitemap-index.xml
+Sitemap: https://synod.trench-companion.com/wp-content/uploads/sitemaps/sitemap-index.xml
