@@ -18,16 +18,6 @@ export const EmergencyAlert: React.FC = () => {
     const { isLoggedIn, userId, authToken,  loadingUser, SiteUser } = useAuth();
 
 
-    // Show ads in placeholder - check if this is needed?
-    useEffect(() => {
-        if (!isProduction ) return;
-
-        if (typeof window.ezstandalone !== 'undefined' && window.ezstandalone.cmd) {
-            window.ezstandalone?.cmd.push(() => {
-                window.ezstandalone?.showAds(118);
-            });
-        }
-    }, [consent]);
 
     if (!(!isProduction || SiteUser?.Premium.IsPremium)) return null;
 
@@ -37,11 +27,6 @@ export const EmergencyAlert: React.FC = () => {
                 <div className={'Ads-text-below'}>
                     {'⚠️ Due to a high volume of warbands, we are migrating databases. During this time we expect difficulties with creating new warbands, please stand by!'}
                 </div>
-
-                <div
-                    id="ezoic-pub-ad-placeholder-118"
-                    className={'ads-placeholder'}
-                />
             </div>
 
             <div className={'AdsManager-bottom-spacer'}>
