@@ -10,10 +10,9 @@ import DevMetaBlock from "./DevMetaBlock";
  */
 export default function HeadScripts() {
     const isProduction = window.location.hostname === 'trench-companion.com';
-    const location = useLocation();
 
-    // Always point canonical to the live domain
-    const canonicalUrl = `https://trench-companion.com${location.pathname}${location.search}`;
+    const { pathname, search } = window.location;
+    const canonicalUrl = `https://trench-companion.com${pathname}${search}`;
 
     return (
         <Helmet>
