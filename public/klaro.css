@@ -749,12 +749,18 @@ to create a white background.
         width: calc(50% - 10px);
         margin-right: 0;
         padding: 10px 20px 13px;
-
+        order: 1
     }
 
+    .klaro .cm-footer-buttons .cm-btn-decline {
+        order: 1;           /* ans Ende setzen */
+    }
+    .klaro .cm-footer-buttons .cm-btn-accept {
+        order: 3;           /* ans Ende setzen */
+    }
     .klaro .cm-footer-buttons .cm-btn-accept-all {
-        width: 100%;
-        flex-basis: 100%;   /* volle Breite */
+        /*width: 100%;*/
+        /*flex-basis: 100%;   !* volle Breite *!*/
         order: 2;           /* ans Ende setzen */
     }
 }
