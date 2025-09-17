@@ -759,3 +759,7 @@ to create a white background.
     }
 }
 
+/* prevent mobile overscrolling */
+.klaro .cookie-modal {
+    overscroll-behavior: contain;
+}
