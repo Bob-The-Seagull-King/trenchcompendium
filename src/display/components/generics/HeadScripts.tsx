@@ -1,40 +1,25 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
+import { useLocation } from 'react-router-dom';
 import DevMetaBlock from "./DevMetaBlock";
 
 /**
- * This will load the ads scripts in the header only on production page
- *
- * @constructor
+ * Inserts SEO-relevant meta tags and canonical links.
+ * - Adds `noindex,nofollow` when NOT on production.
+ * - Always sets a canonical tag to the live domain.
  */
 export default function HeadScripts() {
-    // for debugging
-    // const isProduction = false
+    const isProduction = window.location.hostname === 'trench-companion.com';
 
-    // Check if is real production url
-    const isProduction= window.location.hostname === 'trench-companion.com';
-
-
-    if (!isProduction) return null
+    const { pathname, search } = window.location;
+    const canonicalUrl = `https://trench-companion.com${pathname}${search}`;
 
     return (
         <Helmet>
-            <script
-                src="https://cmp.gatekeeperconsent.com/min.js"
-                data-cfasync="false"
-            />
-            <script
-                src="https://the.gatekeeperconsent.com/cmp.min.js"
-                data-cfasync="false"
-            />
-            <script async src="https://www.ezojs.com/ezoic/sa.min.js" />
-
-            <script>
-                {`
-          window.ezstandalone = window.ezstandalone || {};
-          ezstandalone.cmd = ezstandalone.cmd || [];
-        `}
-            </script>
+            {!isProduction && (
+                <meta name="robots" content="noindex,nofollow" />
+            )}
+            <link rel="canonical" href={canonicalUrl} />
         </Helmet>
-    )
+    );
 }

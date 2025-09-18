@@ -708,7 +708,7 @@
         "description": [    
             {
                 "tags": {"desc_type" : "default"},
-                "content": "You can only buy two pieces of equipment made for Shrine Anchorites. Each Anchorite is equipped with a special suit of armour (reflected in the profile), a Combat Helmet, and a Bonebreaker Mace. These pieces of equipment are built into the integrity of its construction and cannot be removed or lost in any way. The shrine is also equipped with a Catherine Wheel, which you may swap out for another of its special Anchorite Weapons. The Anchorite may make one attack ACTION with each of these weapons in Melee Combat and may make no other attacks during its Activation (so it can make two attacks per Activation)."
+                "content": "You can only buy two pieces of equipment made for Shrine Anchorites. Each Anchorite is equipped with a special suit of armour (reflected in the profile), a Combat Helmet, and a Bonebreaker Mace. These pieces of equipment are built into the integrity of its construction and cannot be removed or lost in any way. The shrine is also equipped with a Catherine Wheel, which you may swap out for another of its special Anchorite Weapons. The Anchorite may make one attack ACTION with each of these weapons and may make no other attacks during its Activation (so if holding the Catherine Wheel it attack in melee with the Wheel and its Mace, at range it can attack with its sole ranged weapon if equipped)."
             }
         ],
         "base_id": "md_anchoriteshrine",
@@ -1144,6 +1144,9 @@
         "contextdata": {
             "upgrade_budget_free": {
                 "ducats": 60
+            },
+            "model_equipment_restriction": {
+                "removed": []
             },
             "validate_final_unit_upgrades": {
                 "requirements": [

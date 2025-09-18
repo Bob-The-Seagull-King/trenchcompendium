@@ -1754,7 +1754,7 @@
         ],
         "team": "faithful",
         "stats" : {            
-            "movement": 6,
+            "movement": 8,
             "melee": 2,
             "ranged": 1,
             "base": [32],
@@ -3118,5 +3118,56 @@
         },
         "keywords" : ["kw_thecourt","kw_demonic","kw_fear","kw_tough","kw_strong"],
         "abilities" : ["ab_demonicaura"]
+    },
+    {
+        "id": "md_combatbiologist",
+        "name": "Combat Biologist",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "keyword_ignore": {"value": ["kw_fear"]},
+            "modify_equipment_block": {}
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "A Combat Biologist always has Standard armour, a Gas Mask, and a Vivisector. You cannot alter the Biologist battlekit in any way."
+            }
+        ],
+        "lore": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "Combat Biologists are members of the Pontifical Office of Biological warfare, or in the case of the Sultanate, the Al-Bisţāmī School of Ninety-Nine Names, which trains some failed Alchemist apprentices in a similar fashion. These scholars specialise in battlefield vivisections and collecting samples of the most powerful servants of Hell so they can be studied, in the hopes of finding ways to develop weapons capable of driving the servants of the Pit back to the darkness."
+                    }
+                ]
+            },   
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "Due to their training, hypnotic conditioning and constant exposure to captured specimens, the Combat Biologist enters a battle trance when faced with creatures that normally induce fear in ordinary troopers. They wield vivisectors, polearm blade weapons that combine sophisticated biological warfare agents and the functional brutality of trench warfare."
+                    }
+                ]
+            }
+        ],
+        "team": "faithful",
+        "stats" : {            
+            "movement": 6,
+            "melee": 1,
+            "ranged": 0,
+            "base": [32],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 2,
+            "mercenary": true
+        },
+        "keywords" : [],
+        "abilities" : ["ab_prizespecimens","ab_battlefieldvivisection"]
     }
 ]

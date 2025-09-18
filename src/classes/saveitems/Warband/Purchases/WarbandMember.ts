@@ -1737,6 +1737,23 @@ class WarbandMember extends DynamicContextObject {
                 const Keyword = await KeywordFactory.CreateNewKeyword(result_fin[i], null)
                 KeywordsAvailable.push(Keyword);
             }
+            const result_full_fin = await Events.runEvent(
+                "getContextuallyRelevantKeywordsByObject",
+                this.MyContext,
+                [],
+                [],
+                this
+            )
+            const result_full = await Events.runEvent(
+                "getContextuallyRelevantKeywordsByObject",
+                this,
+                [],
+                result_full_fin,
+                this
+            )
+            for (let i = 0; i < result_full.length; i++) {
+                KeywordsAvailable.push(result_full[i]);
+            }
         }
         this.GeneralCache.keyword_list = KeywordsAvailable
         return (KeywordsAvailable);

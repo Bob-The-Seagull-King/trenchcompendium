@@ -340,6 +340,17 @@
         "removable": false
     },
     {
+        "id": "rel_md_eq_combatbiologist",
+        "source": "core",
+        "tags": {},
+        "name": "Combat Biologist Equipment",
+        "contextdata": {},
+        "options": [],
+        "model_id": ["md_combatbiologist"],
+        "mandatory_equipment": ["eq_standardarmour","eq_gasmask","eq_vivisector"],
+        "removable": false
+    },
+    {
         "id": "rel_md_eq_stigmaticnun_saintmethodius",
         "source": "core",
         "tags": {},
