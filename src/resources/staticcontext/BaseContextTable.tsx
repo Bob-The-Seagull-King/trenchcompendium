@@ -4754,6 +4754,42 @@ export const BaseContextCallTable : CallEventTable = {
             return relayVar;
         }
     },
+    keyword_ignore: {
+        event_priotity: 0,        
+        async getContextuallyRelevantKeywordsByObject(this: EventRunner, eventSource : any, relayVar : Keyword[], trackVal : Model, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            console.log(context_func)
+
+            const ValKey : Keyword = KeywordFactory.CreateNewKeyword("kw_negate", null)
+            for (let i = 0; i < context_func["value"].length; i++) {
+                const interfacenew = ValKey.SelfData;
+                const newkey : Keyword = KeywordFactory.CreateNewKeyword(context_func["value"][i], null)
+                interfacenew.id = "kw_negate_" + context_func["value"][i]
+                interfacenew.name = "NEGATE " + newkey.GetTrueName();
+                const Finalkey : Keyword = KeywordFactory.CreateKeyword(interfacenew, null)
+                relayVar.push(Finalkey)
+            }
+            
+            return relayVar;
+        }
+    },
+    ignore_element: {
+        event_priotity: 0,        
+        async getContextuallyRelevantKeywordsByObject(this: EventRunner, eventSource : any, relayVar : Keyword[], trackVal : Model, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            console.log(context_func)
+
+            const ValKey : Keyword = KeywordFactory.CreateNewKeyword("kw_negate", null)
+            for (let i = 0; i < context_func["element"].length; i++) {
+                const interfacenew = ValKey.SelfData;
+                const newkey : Keyword = KeywordFactory.CreateNewKeyword(context_func["element"][i], null)
+                interfacenew.id = "kw_negate_" + context_func["element"][i]
+                interfacenew.name = "NEGATE " + newkey.GetTrueName();
+                const Finalkey : Keyword = KeywordFactory.CreateKeyword(interfacenew, null)
+                relayVar.push(Finalkey)
+            }
+            
+            return relayVar;
+        }
+    },
     keyword_add: {
         event_priotity: 0,
         async getContextuallyRelevantKeywordsByID(this: EventRunner, eventSource : any, relayVar : string[], trackVal : Model, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {

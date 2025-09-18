@@ -224,7 +224,7 @@
         "source": "core",
         "tags": {"trait": true},
         "contextdata": {
-            "keyword_ignore": { "value": "kw_fear" },
+            "keyword_ignore": {"value": ["kw_fear"]},
             "injury_bonus_conditional" : { 
                 "condition" : [
                     {
@@ -1292,7 +1292,7 @@
         "source": "core",
         "tags": {"trait": true},
         "contextdata": { 
-            "keyword_ignore": {"value": "kw_fear"}
+            "keyword_ignore": {"value": ["kw_fear"]}
         },
         "description": [           
             {
@@ -1332,7 +1332,7 @@
         "source": "core",
         "tags": {"trait": true},
         "contextdata": {
-            "keyword_ignore": { "value": "kw_fear" }},
+            "keyword_ignore": {"value": ["kw_fear"]}},
         "description": [            
             {
                 "tags": {"desc_type" : "default"}, 
@@ -2773,5 +2773,47 @@
                 }   
             }
             }]
+    },
+    {
+        "id": "ab_prizespecimens",
+        "name": "Prize Specimens",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "When a Combat Biologist takes any enemy model with the Keyword DEMONIC or BLACK GRAIL Out of Action with a Melee attack, place 1 BLESSING MARKER beside the Combat Biologist.",
+                "glossary": [
+                    {"val": "DEMONIC", "id": "kw_demonic"},
+                    {"val": "BLACK GRAIL", "id": "kw_blackgrail"},
+                    {"val": "BLESSING MARKER", "id": "kw_blessingmarker"}]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_battlefieldvivisection",
+        "name": "Battlefield Vivisection",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Whenever a Combat Biologist is part of your Warband, you can add the following Glorious Deed in addition to those normally available in each Scenario you play"
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [
+                    {
+                        "tags": {"desc_type" : "glorious_deed"},
+                        "content": "gd_battlefieldvivisection"
+                    }
+                ]
+            }
+        ],
+        "options": []
     }
 ]

@@ -758,5 +758,18 @@
             ]
             }
         ]
+    },
+    {
+        "id": "gd_battlefieldvivisection",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "Battlefield Vivisection",
+        "description":  [
+            {
+            "tags": {},
+            "content": "If a total of 3 or more enemy models engaged in melee combat with the Combat Biologist are taken Out of Action during the Battle, add +1 Glory Point to your total earned at the end of the game."
+            }
+        ]
     }
 ]

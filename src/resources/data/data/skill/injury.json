@@ -414,7 +414,7 @@
         "contextdata": {
             "ignore_scar": {
             },
-            "keyword_ignore": {"value": "kw_fear"}
+            "keyword_ignore": {"value": ["kw_fear"]}
          },
         "description": [            
             {

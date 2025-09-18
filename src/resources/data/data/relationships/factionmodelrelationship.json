@@ -1186,6 +1186,23 @@
         "warband_maximum" : 1
     },
     {
+        "id": "rel_fc_md_combatbiologist",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {"option_search_viable": {}},
+        "options": [],
+        "faction_id" : ["fc_newantioch","fc_newantioch_fv_redbrigade","fc_newantioch_fv_expeditionaryforcedofabyssinia","fc_newantioch_fv_kingdomofalbaassaultdetatchment","fc_newantioch_fc_stortruppenofthefreestateofprussia","fc_newantioch_fc_eirerangers","fc_newantioch_fv_papalstatesinterventionforce","fc_ironsultanate","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate_fv_fidaiofalamut","fc_ironsultanate_fv_houseofwisdom"],
+        "model_id" : "md_combatbiologist",
+        "captain" : false,
+        "mercenary": true,
+        "cost" : 3,
+        "cost_type" : 1,
+        "restricted_models" : [],
+        "warband_minimum" : 0,
+        "warband_maximum" : 1
+    },
+    {
         "id": "rel_fc_md_lieutenant",
         "source": "core",
         "tags": {},
