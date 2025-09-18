@@ -1,7 +1,8 @@
+// increment storageName name to force new user consent
 var klaroConfig = {
     elementID: 'privacy-modal',
     storageMethod: 'localStorage',
-    storageName: 'trench_companion_consent',
+    storageName: 'trench_companion_consent_v2',
     mustConsent: true,
     acceptAll: true,
     hideDeclineAll: false,
@@ -41,13 +42,14 @@ var klaroConfig = {
                 gtag('set', 'ads_data_redaction', true);
             `,
             onAccept: `
-                for (let k of Object.keys(opts.consents)) {
-                  if (opts.consents[k]) {
-                    let eventName = 'klaro-' + k + '-accepted';
-                    dataLayer.push({ event: eventName });
-                  }
+                if (!window.gtmScriptLoaded) {
+                    var s = document.createElement('script');
+                    s.async = true;
+                    s.src = "https://www.googletagmanager.com/gtm.js?id=GTM-NFVT7W7X";
+                    document.head.appendChild(s);
+                    window.gtmScriptLoaded = true;
                 }
-            `,
+            `
         },
         {
             name: 'google-analytics',
@@ -84,8 +86,8 @@ var klaroConfig = {
             name: 'google-adsense',
             title: 'Google AdSense',
             purposes: ['advertising'],
-            required: true, // Script wird immer geladen, Consent Mode entscheidet über Personalisierung
-            onAccept: `
+            required: true, // immer laden!
+            onInit: `
                 if (!window.adsenseScriptLoaded) {
                     var s = document.createElement('script');
                     s.async = true;

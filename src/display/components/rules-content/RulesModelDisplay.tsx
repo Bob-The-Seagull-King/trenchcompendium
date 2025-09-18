@@ -217,8 +217,8 @@ const RulesModelDisplay = (props: any) => {
                 IDString.push(BaseKeywords[i].ID)
             }
 
+            const Events : EventRunner = new EventRunner();
             for (let i = 0; i < cur_abilities.length; i++) {
-                const Events : EventRunner = new EventRunner();
                 IDString = await Events.runEvent(
                     "getContextuallyRelevantKeywordsByID",
                     cur_abilities[i],
@@ -231,6 +231,18 @@ const RulesModelDisplay = (props: any) => {
             for (let i = 0; i < IDString.length; i++) {
                 const Keyword = await KeywordFactory.CreateNewKeyword(IDString[i], null)
                 KeywordsList.push(Keyword);
+            }
+            
+            const realkeywords = await Events.runEvent(
+                "getContextuallyRelevantKeywordsByObject",
+                modelcollectionObject,
+                [],
+                [],
+                modelcollectionObject
+            )
+
+            for (let i = 0; i < realkeywords.length; i++) {
+                KeywordsList.push(realkeywords[i]);
             }
 
             setkeywords(KeywordsList)

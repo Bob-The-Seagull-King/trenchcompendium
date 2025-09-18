@@ -11,10 +11,10 @@ class KeywordFactory {
      * @param _ability The data in IPlayerAbility format describing the ability
      * @returns A newly created ability
      */
-    static CreateKeyword(_rule: IKeyword, parent : ContextObject | null) {
+    static CreateKeyword(_rule: IKeyword, parent : ContextObject | null, skipcache = false) {
         const cache = StaticDataCache.getInstance();
         const isValid = (cache.CheckID('keyword', _rule.id))
-        if (isValid == false) {
+        if (isValid == false && !skipcache) {
             return cache.KeywordCache[_rule.id];
         }
         const rule = new Keyword(_rule, parent)
@@ -22,10 +22,10 @@ class KeywordFactory {
         return rule;
     }
 
-    static CreateNewKeyword(_val : string, parent : ContextObject | null) {
+    static CreateNewKeyword(_val : string, parent : ContextObject | null, skipcache = false) {
         const cache = StaticDataCache.getInstance();
         const isValid = (cache.CheckID('keyword', _val))
-        if (isValid == false) {
+        if (isValid == false && !skipcache) {
             return cache.KeywordCache[_val];
         }
         const ruledata = Requester.MakeRequest({searchtype: "id", searchparam: {type: "keyword", id: _val}}) as IKeyword

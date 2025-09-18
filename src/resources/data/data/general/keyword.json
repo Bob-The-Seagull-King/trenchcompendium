@@ -649,5 +649,39 @@
                 "glossary": [{"val": "+1 DICE", "id": "kw_plusdice"}]
             }
         ]
+    },
+    {
+        "id": "kw_block",
+        "source": "core",
+        "tags": {
+            "category": "equipment",
+            "positive": true
+        },
+        "name": "BLOCK",
+        "contextdata": {"option_search_viable" : {}},
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Add -1 DICE for Melee Attacks targeting that model if the attacker made a Charge ACTION before making the attack this round.",
+                "glossary": [{"val": "ACTION", "id": "kw_action"},{"val": "-1 DICE", "id": "kw_minusdice"}]
+            }   
+        ]
+    },
+    {
+        "id": "kw_negate",
+        "source": "core",
+        "tags": {
+            "category": "model",
+            "positive": true
+        },
+        "name": "NEGATE X",
+        "contextdata": {"option_search_viable" : {}},
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "When a model has the NEGATE [KEYWORD] Keyword, they are not affected by the specified Keyword’s Effect. For example, NEGATE FEAR means the model is unaffected by the FEAR keyword.",
+                "glossary": [{"val": "FEAR", "id": "kw_fear"}]
+            }   
+        ]
     }
 ]

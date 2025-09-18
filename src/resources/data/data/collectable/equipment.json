@@ -1876,7 +1876,7 @@
         },
         "contextdata": {
             "ignore_element": {"element": ["kw_shrapnel"]},
-            "keyword_ignore": {"value": "kw_fear"}
+            "keyword_ignore": {"value": ["kw_fear"]}
         },
         "description": [       
             {
@@ -3181,7 +3181,7 @@
         "stats": {
         },
         "contextdata": {
-            "keyword_ignore": {"value": "kw_fear"}
+            "keyword_ignore": {"value": ["kw_fear"]}
         },
         "description": [       
             {
@@ -4238,7 +4238,7 @@
         "stats": {
         },
         "contextdata": {
-            "keyword_ignore": {"value": "kw_fear"},
+            "keyword_ignore": {"value": ["kw_fear"]},
             
             "upgrade_stat": {"upgrades": [{"stat": "melee", "value": 1}]}
         },
@@ -6459,7 +6459,7 @@
         },
         "contextdata": {
             "ignore_element": {"element": ["kw_shrapnel","kw_gas"]},
-            "keyword_ignore": {"value": "kw_fear"}
+            "keyword_ignore":  {"value": ["kw_fear"]}
         },
         "description": [       
             {
@@ -6901,6 +6901,66 @@
         ],
         "options": [],
         "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_vivisector",
+        "name": "Vivisector",
+        "source": "core",
+        "tags": {"action": true, "weapon": true, "trait": true},
+        "category": "melee",
+        "distance": null,
+        "stats": {
+            "hands_melee": 2,
+            "melee": true
+        },
+        "contextdata": {
+            "get_weapon": {}
+        },
+        "description": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                    
+                    {
+                        "tags": {"desc_type" : "bold"},
+                        "content": "Pain Amplifier: "
+                    },                
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": "Lower the roll needed to achieve a Critical Success for a Melee Attack made by this weapon by 1 for each BLOOD MARKER next to the target by 1 (so an enemy with 1 BLOOD MARKER will suffer a Critical Success on a roll of 11+).",
+                        "glossary": [
+                            {"val": "BLOOD MARKER", "id": "kw_bloodmarker"}
+                        ]
+                    } 
+                ]
+            },    
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                    
+                    {
+                        "tags": {"desc_type" : "bold"},
+                        "content": "Inflict Pain: "
+                    },                
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": "If an attack made by this weapon against a target, without the ARTIFICIAL Keyword and mounted on a 40mm base or smaller is, a Critical Success, but the target is not taken Out of Action, then the target will move D3\" in a straight line directly away from the attacking model. It will stop if it moves into a friendly model, Impassable Terrain, a terrain piece it cannot cross without having to Climb, or immediately before it would move within 1\" of an enemy model other than the attacker. If the target model would finish the move more than 1\" from the attacking model, then the attacking model and any other models within 1\" of the target model can make an additional Melee Attack on it before it is moved, as if the target were carrying out a retreat move. If this causes the model to move a second time, add D3\" to the distance it is moved but do not attack it again.",
+                        "glossary": [
+                            {"val": "ARTIFICIAL", "id": "kw_artificial"}
+                        ]
+                    } 
+                ]
+            } 
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "This weapon offers both excellent protection by keeping the targets at bay, and its haft incorporates a trigger that injects a horrifying cocktail of holy ointments, chemical toxins, nerve agents and micro-shards of holy relics into any open wound, causing pain that is unbearable to even supernatural enemies. It can also be used to quickly dissect fallen enemies so their organs can be preserved by the Combat Biologist."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_cumbersome", "kw_block"],
         "modifiers": []
     }
 ]
