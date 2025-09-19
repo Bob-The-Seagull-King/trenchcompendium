@@ -1197,5 +1197,28 @@
         "keywords" : [],
         "cut_abilities" : [],
         "new_abilities" : []
+    },
+    {
+        "id": "md_trenchpilgrim_martyr",
+        "name": "Martyr-Penitent",
+        "source": "core",
+        "tags": {},
+        "contextdata": { 
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_trenchpilgrim"
+                    }
+                ]
+            }},
+        "base_id": "md_trenchpilgrim",
+        "variant_name": "Martyr_Penitent",
+        "team": "faithful",
+        "stats" : {},
+        "cut_keywords" : [],
+        "keywords" : [],
+        "cut_abilities" : [],
+        "new_abilities" : []
     }
 ]

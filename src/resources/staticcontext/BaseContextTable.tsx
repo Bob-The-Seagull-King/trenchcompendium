@@ -515,9 +515,27 @@ export const BaseContextCallTable : CallEventTable = {
 
             return relayVar.concat(StringCollection);
         },
-        getEquipmentRestriction(this: EventRunner, eventSource : any, relayVar : any, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) { 
+        async getEquipmentRestriction(this: EventRunner, eventSource : any, relayVar : any, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) { 
             
-            relayVar.push(context_func as EquipmentRestriction)
+            const WrbndMmbrModule = await import("../../classes/saveitems/Warband/Purchases/WarbandMember")
+
+            if (context_func["model_spec"]) {
+                if (eventSource instanceof WrbndMmbrModule.WarbandMember) {
+                    const md = eventSource as WarbandMember
+                    const specs = context_func["model_spec"]
+                    let is_valid = false
+                    if (specs["id"]) {
+                        if (specs["id"].includes(md.CurModel.ID )) {
+                            is_valid = true;
+                        }
+                    }
+                    if (is_valid) {
+                        relayVar.push(context_func as EquipmentRestriction)
+                    }
+                }
+            } else {
+                relayVar.push(context_func as EquipmentRestriction)
+            }
             return relayVar;
         },
         async canModelAddItem(this: EventRunner, eventSource : any, relayVar : boolean,  trackVal : MemberAndItem, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, restrictions : EquipmentRestriction[]) {            
@@ -2180,6 +2198,14 @@ export const BaseContextCallTable : CallEventTable = {
             if (context_func["new_id"]) {
                 const NewModel = await ModelFactory.CreateNewModel(context_func["new_id"], null);
                 trackVal.Tags["original_model_id"] = trackVal.CurModel.GetID();
+                if (context_func["mod_price"]) {
+                    if (trackVal.Tags["cost_mod_ducats"]) {
+                        trackVal.Tags["cost_mod_ducats"] += context_func["mod_price"]
+                    } else {
+                        trackVal.Tags["cost_mod_ducats"] = context_func["mod_price"]
+                    }
+                }
+                
                 trackVal.CurModel = NewModel;
             }
         },
@@ -2187,6 +2213,11 @@ export const BaseContextCallTable : CallEventTable = {
 
             const { ModelFactory } = await import("../../factories/features/ModelFactory");
             const oldval = trackVal.Tags["original_model_id"]
+            if (context_func["mod_price"]) {
+                if (trackVal.Tags["cost_mod_ducats"]) {
+                    trackVal.Tags["cost_mod_ducats"]  = (trackVal.Tags["cost_mod_ducats"] as number) -(context_func["mod_price"] as number)
+                }
+            }
             if (oldval != null) {
                 const NewModel = await ModelFactory.CreateNewModel(oldval as string, null);
                 trackVal.CurModel = NewModel;

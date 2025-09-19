@@ -600,14 +600,11 @@
         "tags": {},
         "name": "",
         "contextdata": {
-            "mod_self_cost": {
-                "mod": -30
-            }
         },
         "options": [],
         "model_id_set": ["md_trenchpilgrim"],
         "upgrade_id": "up_resurrection",
-        "cost": 15,
+        "cost": 45,
         "cost_type": 0,
         "restricted_upgrades": [
         ],
@@ -854,7 +851,7 @@
             "up_plagueknightrottencross",
             "up_plagueknightalmoner"
         ],
-        "warband_limit": 0,
+        "warband_limit": 1,
         "required_upgrades":[]
     },
     {
@@ -872,7 +869,7 @@
             "up_plagueknightcompanionofthefly_base",
             "up_plagueknightalmoner"
         ],
-        "warband_limit": 0,
+        "warband_limit": 1,
         "required_upgrades":[]
     },
     {
@@ -890,7 +887,7 @@
             "up_plagueknightcompanionofthefly_base",
             "up_plagueknightrottencross"
         ],
-        "warband_limit": 0,
+        "warband_limit": 1,
         "required_upgrades":[]
     },
     {

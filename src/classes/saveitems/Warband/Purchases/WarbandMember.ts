@@ -931,6 +931,9 @@ class WarbandMember extends DynamicContextObject {
 
     public GetSubCosts(type : number, overridecap = false, discount = false) {
         let countvar = this.GetUpgradeCosts(type, overridecap, discount);
+        if (type == 0 && this.Tags["cost_mod_ducats"]) {
+            countvar += this.Tags["cost_mod_ducats"] as number
+        }
         for (let i = 0; i < this.Equipment.length; i++) {
             if (this.Equipment[i].CountCap == false && !overridecap) {continue;}
             if (this.Equipment[i].CostType == type) {
