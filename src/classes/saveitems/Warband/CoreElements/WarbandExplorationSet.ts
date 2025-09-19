@@ -356,11 +356,12 @@ class WarbandExplorationSet extends DynamicContextObject {
         const eventmon : EventRunner = new EventRunner();
         await eventmon.runEvent(
             "onGainLocation",
-            this,
+            this.CurLocation.true_obj,
             [this.MyContext as UserWarband],
             null,
             this.CurLocation.true_obj
         )
+        this.CurLocation = null;
     }
     
     public async AddTempExplorationLocation ( location: ExplorationLocation, option: ISelectedOption[]) {

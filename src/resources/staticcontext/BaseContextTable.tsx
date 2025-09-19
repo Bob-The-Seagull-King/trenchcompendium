@@ -3640,11 +3640,9 @@ export const BaseContextCallTable : CallEventTable = {
     },
     gain_new_item: {
         event_priotity: 0,
-        async runConsumableSelect(this: EventRunner, eventSource : any, trackVal : WarbandConsumable, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : WarbandConsumable, origin : WarbandProperty | null) {
-            const ContWarband = await GetWarbandOrNull(sourceband);
-            if (ContWarband == null) { return }
-
-            await ContWarband.AddStash(trackVal.SelectItem as any, true);
+        async onGainLocation(this: EventRunner, eventSource : any, trackVal : WarbandProperty, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) {
+    
+            await warband.AddStash((context_static as any).SelectItem as any, true);
         },
         async getConsumableOptionsList(this: EventRunner, eventSource : any, relayVar : IChoice[], trackVal : WarbandConsumable, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : UserWarband, origin : WarbandProperty | null) {
 
@@ -3776,6 +3774,10 @@ export const BaseContextCallTable : CallEventTable = {
                 }
             }
         },
+        async onGainLocation(this: EventRunner, eventSource : any, trackVal : WarbandProperty, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) {
+    
+            await warband.AddStash((context_static as any).SelectItem as any, true);
+        },
         async getConsumableOptionsList(this: EventRunner, eventSource : any, relayVar : IChoice[], trackVal : WarbandConsumable, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : UserWarband, origin : WarbandProperty | null) {
             const EquipmentFactoryModule = await import("../../factories/features/EquipmentFactory")
             if (sourceband) {
@@ -3832,7 +3834,6 @@ export const BaseContextCallTable : CallEventTable = {
     consumable: {
         event_priotity: 0,
         async onPickLocation(this: EventRunner, eventSource : any, trackVal : WarbandProperty, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) {
-             console.log("PICK LOCATION")
             const {WarbandConsumable} = await import("../../classes/saveitems/Warband/WarbandConsumable");
             let IsMe = false
             if (trackVal.SelfDynamicProperty.OptionChoice.ID == context_static.GetID()) {
