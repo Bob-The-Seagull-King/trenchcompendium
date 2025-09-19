@@ -10,6 +10,8 @@ import { useWarband } from '../../../../../context/WarbandContext';
 import { CachedFactionEquipment } from '../../../../../classes/saveitems/Warband/UserWarband';
 import WbbEquipmentListItem from "../../WbbEquipmentListItem";
 import WbbEquipmentDetails from "../../micro-elements/WbbEquipmentDetails";
+import AlertCustom from "../../../generics/AlertCustom";
+import WbbSelectItemEquipment from "../../micro-elements/WbbSelectItem";
 
 interface EquipmentItem {
     id: string;
@@ -28,6 +30,7 @@ interface WbbModalAddEquipmentProps {
 
 const WbbModalAddEquipment: React.FC<WbbModalAddEquipmentProps> = ({ show, onClose, onSubmit, fighter, category }) => {
     const [selectedID, setSelectedID] = useState<string | null>(null);
+    const [openedID, setOpenedID] = useState<string | null>(null);
 
     const { warband } = useWarband();
     const [available, setAvailable] = useState<FactionEquipmentRelationship[]>([]);
@@ -35,8 +38,8 @@ const WbbModalAddEquipment: React.FC<WbbModalAddEquipmentProps> = ({ show, onClo
     const [keyvar, setkevvar] = useState(0);
 
     // handlesubmit in this callback for delayed submission with loading state
-    const { handleSubmit, isSubmitting } = useModalSubmitWithLoading(() => {
-        const selected = available.find(w => w.ID === selectedID);
+    const { handleSubmit, isSubmitting } = useModalSubmitWithLoading((id?: string) => {
+        const selected = available.find(w => w.ID === openedID); // use opened id
         if (selected) {
             onSubmit(selected);
             setSelectedID(null)
@@ -89,69 +92,24 @@ const WbbModalAddEquipment: React.FC<WbbModalAddEquipmentProps> = ({ show, onClo
 
             <Modal.Body>
                 {Object.keys(cache).map((item, index) => (
-                    <React.Fragment
-                        key={cache[item].facrel.ID}
-                    >
-                        <div
-                            className={`select-item ${selectedID === cache[item].facrel.ID ? 'selected' : ''} ${available.includes(cache[item].facrel) ? '' : 'disabled'}`}
-                            onClick={() => {
-                                if (available.includes(cache[item].facrel)) {
-                                    setSelectedID(prev => prev === cache[item].facrel.ID ? null : cache[item].facrel.ID)
-                                }
-                            }}
-                        >
-                            <span className={'item-left'}>
-                                <span className={'item-name'}>
-                                    {cache[item].facrel.EquipmentItem.GetTrueName()}
-                                </span>
-                            </span>
-                            <span className={'item-right'}>
-                                <span className={'item-cost'}>
-                                    {cache[item].facrel.Cost &&
-                                        <>
-                                            {cache[item].cost + " " + getCostType(cache[item].facrel.CostType)}
-                                        </>
-                                    }
-                                </span>
+                    <WbbSelectItemEquipment
+                        key={`select-item-${index}`}
 
-                                    {((cache[item].limit > 0)) &&
-                                        <span className={'item-limit'}>
-                                        Limit: {(cache[item].count_cur + "/" + cache[item].limit)}
-                                    </span>
-                                    }
-                                    {((cache[item].restrictions)).length > 0 &&
-                                        <span className={'item-limit'}>
-                                        Restrictions: {
-                                            ((cache[item].restrictions)).join(', ')
-                                        }
-                                    </span>
-                                    }
-                            </span>
-                        </div>
-
-                        {selectedID === cache[item].facrel.ID &&
-                            <div className={'details-wrap'}>
-                                <WbbEquipmentDetails
-                                    equipment={cache[item].facrel.EquipmentItem}
-                                    showType={false}
-                                />
-
-                                <div className={'details-quick-action'}>
-                                    <Button variant="primary"
-                                            onClick={handleSubmit} disabled={!selectedID || isSubmitting}
-                                            className={' mb-3 btn-sm w-100'}
-                                    >
-                                        {isSubmitting ? (
-                                            <FontAwesomeIcon icon={faCircleNotch} className={'icon-inline-left fa-spin '}/>
-                                        ) : (
-                                            <FontAwesomeIcon icon={faPlus} className={'icon-inline-left'}/>
-                                        )}
-                                        {'Add Equipment'}
-                                    </Button>
-                                </div>
-                            </div>
-                        }
-                    </React.Fragment>
+                        id={cache[item].facrel.ID}
+                        title={cache[item].facrel.EquipmentItem.GetTrueName()}
+                        opened={openedID === cache[item].facrel.ID}
+                        available={available.includes(cache[item].facrel)}
+                        onClick={() => {
+                            setOpenedID(prev => prev === cache[item].facrel.ID ? null : cache[item].facrel.ID)
+                        }}
+                        equipment={cache[item].facrel.EquipmentItem}
+                        isSubmitting={isSubmitting}
+                        onSubmit={handleSubmit}
+                        submitBtnString={'Add Equipment'}
+                        cost={cache[item].cost + " " + getCostType(cache[item].facrel.CostType)}
+                        limit={"Limit: " + (cache[item].count_cur + "/" + cache[item].limit)}
+                        restrictions={cache[item].restrictions}
+                    />
                 ))}
             </Modal.Body>
 

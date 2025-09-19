@@ -20,7 +20,9 @@ class ExplorationFactory {
             return cache.ExplorationTableCache[_rule.id];
         }
         const rule = new ExplorationTable(_rule, parent)
-        cache.AddToCache('explorationtable', rule);        
+        if (!skipcheck) {
+            cache.AddToCache('explorationtable', rule);    
+        }    
         await rule.BuildTableLocations(_rule.id, skipcheck);
         return rule;
     }
@@ -48,7 +50,9 @@ class ExplorationFactory {
             return cache.ExplorationLocationCache[_rule.id];
         }
         const rule = new ExplorationLocation(_rule, parent)
-        cache.AddToCache('explorationlocation', rule);
+        if (!skipcheck) {
+            cache.AddToCache('explorationlocation', rule);
+        }
         await rule.ReloadOptions();
         await rule.RunOptionsParse();
         await rule.RunRestrictions();
