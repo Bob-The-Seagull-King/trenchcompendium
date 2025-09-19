@@ -63,6 +63,7 @@ export const ROUTES = {
     PAGE_COLLABORATE: '/page/collaboration', // will show fluff and contact for B2B partners
 
     PAGE_PLAN_SELECTION : '/page/plan-selection', // will let users select and purchase membership plans
+    PAGE_CREATOR_APPLICATION : '/page/creator-application', // will let users apply as creator
 
     // Blog posts
     PAGE_BLOG_BASE: '/blog',

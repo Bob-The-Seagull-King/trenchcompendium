@@ -13,6 +13,7 @@ import ProfileSubscriptionView from "../components/Profile/ProfileSubscriptionVi
 import {SiteUser} from "../../classes/user_synod/site_user";
 import {UserFactory} from "../../factories/synod/UserFactory";
 import PageMetaInformation from "../components/generics/PageMetaInformation";
+import ProfileCreatorView from "../components/Profile/ProfileCreatorView";
 
 
 
@@ -235,6 +236,9 @@ const ProfileSettingsPage: React.FC = () => {
 
                     <div className={'col-12'}>
                         <ProfileSubscriptionView/>
+                    </div>
+                    <div className={'col-12'}>
+                        <ProfileCreatorView/>
                     </div>
                 </div>
             </div>
