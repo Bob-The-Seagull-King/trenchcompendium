@@ -29,7 +29,8 @@ const WbbLocationsList = () => {
     const handleSaveExplorationLocation = (optionsuite : FilteredLocation) => {
         if (!warband) { return; }
         warband.warband_data.Exploration.CurLocation = {
-            base_item: optionsuite
+            base_item: optionsuite,
+            selected_options: []
         }
         settemplocation(warband.warband_data.Exploration.CurLocation)
         reloadDisplay()

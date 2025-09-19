@@ -54,12 +54,11 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
     const [keyvar, setkeyvar] = useState(0);
     const [updateState, setUpdateState] = useState(0);
     const [contextMessage, setContextMessage] = useState<string[]>([]);
-    const [selectedOptions, setselectedOptions] = useState<ISelectedOption[]>([]);
-    const [cansave, setcansave] = useState<boolean>(!location.base_item.location?.GetID() || (!(containsTag(location.base_item.location.Tags, 'unforced')) && location.base_item?.options && location.base_item.options.length > 0 && (location.base_item.options.length != selectedOptions.length )));
+    const [cansave, setcansave] = useState<boolean>(!location.base_item.location?.GetID() || (!(containsTag(location.base_item.location.Tags, 'unforced')) && location.base_item?.options && location.base_item.options.length > 0 && (location.base_item.options.length != location.selected_options.length )));
     
     function createBaseItem() {
         if (!warband) { return; }
-        warband.warband_data.Exploration.AddTempExplorationLocation(location.base_item.location, selectedOptions).then(() => {
+        warband.warband_data.Exploration.AddTempExplorationLocation(location.base_item.location, location.selected_options).then(() => {
             onbaseItemCreate()
         })
     }
@@ -115,7 +114,7 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
     const handleApply = () => {
         if (!warband) { return; }
         if (location.true_obj == undefined) {
-            warband.warband_data.Exploration.AddTempExplorationLocation(location.base_item.location, selectedOptions).then(() => {warband.warband_data.Exploration.AssignTempLocation().then(() => {
+            warband.warband_data.Exploration.AddTempExplorationLocation(location.base_item.location, location.selected_options).then(() => {warband.warband_data.Exploration.AssignTempLocation().then(() => {
             const Manager : ToolsController = ToolsController.getInstance();
             Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(() => {clear(); reloadDisplay()})
         })})} else {
@@ -128,16 +127,16 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
     
     function UpdateSelectedOptionIDs(newoption : ISelectedOption) {
         let found = false
-        for (let i = 0; i < selectedOptions.length; i++) {
-            if (selectedOptions[i].option_refID == newoption.option_refID) {
+        for (let i = 0; i < location.selected_options.length; i++) {
+            if (location.selected_options[i].option_refID == newoption.option_refID) {
                 found = true;
-                selectedOptions[i].selection_ID = newoption.selection_ID;
+                location.selected_options[i].selection_ID = newoption.selection_ID;
             }
         }
         if (found == false) {
-            selectedOptions.push(newoption);
+            location.selected_options.push(newoption);
         }
-        setcansave(!location.base_item.location?.GetID() || (!(containsTag(location.base_item.location.Tags, 'unforced')) && location.base_item?.options && location.base_item.options.length > 0 && (location.base_item.options.length != selectedOptions.length )))
+        setcansave(!location.base_item.location?.GetID() || (!(containsTag(location.base_item.location.Tags, 'unforced')) && location.base_item?.options && location.base_item.options.length > 0 && (location.base_item.options.length != location.selected_options.length )))
         setUpdateState(updateState + 1);
         createBaseItem()
     }
@@ -198,10 +197,11 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
                         {/* Show option Radio 1 */}
                         { (location.base_item.options.length > 0) &&
                             <>
-                                {location.base_item.options.map((item) =>
+                                {location.base_item.options.map((item, index) =>
                                     <WbbExploration_OptionSelect_Radio
                                         key={location.base_item.options.indexOf(item)}
                                         options={item}
+                                        curSelection={location.selected_options[index]? location.selected_options[index] : null}
                                         onChange={UpdateSelectedOptionIDs}
                                     />
                                 )}

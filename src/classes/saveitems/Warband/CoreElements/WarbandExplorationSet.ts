@@ -46,7 +46,8 @@ export interface GeneralLocationCache {
 
 export interface StoredLocation {
     true_obj? : WarbandProperty,
-    base_item : FilteredLocation
+    base_item : FilteredLocation,
+    selected_options: ISelectedOption[]
 }
 
 class WarbandExplorationSet extends DynamicContextObject {

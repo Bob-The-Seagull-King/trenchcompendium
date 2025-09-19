@@ -13,11 +13,12 @@ interface Option {
 interface WbbExploration_OptionSelect_Radio_Props {
     onChange?: (newoption : ISelectedOption) => void;
     options : FilteredOptions;
+    curSelection: ISelectedOption | null;
 }
 
 const WbbExploration_OptionSelect_Radio: React.FC<
     WbbExploration_OptionSelect_Radio_Props
-> = ({ onChange, options }) => {
+> = ({ onChange, options, curSelection }) => {
     
     const combinedoptions: Option[] = GetFullListOfOptions();
 
@@ -42,7 +43,7 @@ const WbbExploration_OptionSelect_Radio: React.FC<
         return list;
     }
 
-    const [selected, setSelected] = useState<ISelectedOption | null>(null);
+    const [selected, setSelected] = useState<ISelectedOption | null>(curSelection);
     const [keyvar, setkeyvar] = useState(0);
 
     const handleSelect = (opt : ISelectedOption) => {

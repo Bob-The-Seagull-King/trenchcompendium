@@ -3744,7 +3744,6 @@ export const BaseContextCallTable : CallEventTable = {
             const ContWarband = await GetWarbandOrNull(sourceband);
             if (ContWarband == null) { return }
 
-            await ContWarband.AddStash(trackVal.SelectItem as any, true);
             if (context_func["count"]) {
                 let cost = context_func["count"]
                 cost -= (trackVal.SelectItem as any).Cost
