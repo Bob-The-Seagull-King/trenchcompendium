@@ -854,7 +854,7 @@
             "up_plagueknightrottencross",
             "up_plagueknightalmoner"
         ],
-        "warband_limit": 0,
+        "warband_limit": 1,
         "required_upgrades":[]
     },
     {
@@ -872,7 +872,7 @@
             "up_plagueknightcompanionofthefly_base",
             "up_plagueknightalmoner"
         ],
-        "warband_limit": 0,
+        "warband_limit": 1,
         "required_upgrades":[]
     },
     {
@@ -890,7 +890,7 @@
             "up_plagueknightcompanionofthefly_base",
             "up_plagueknightrottencross"
         ],
-        "warband_limit": 0,
+        "warband_limit": 1,
         "required_upgrades":[]
     },
     {
