@@ -600,14 +600,11 @@
         "tags": {},
         "name": "",
         "contextdata": {
-            "mod_self_cost": {
-                "mod": -30
-            }
         },
         "options": [],
         "model_id_set": ["md_trenchpilgrim"],
         "upgrade_id": "up_resurrection",
-        "cost": 15,
+        "cost": 45,
         "cost_type": 0,
         "restricted_upgrades": [
         ],

@@ -2180,6 +2180,14 @@ export const BaseContextCallTable : CallEventTable = {
             if (context_func["new_id"]) {
                 const NewModel = await ModelFactory.CreateNewModel(context_func["new_id"], null);
                 trackVal.Tags["original_model_id"] = trackVal.CurModel.GetID();
+                if (context_func["mod_price"]) {
+                    if (trackVal.Tags["cost_mod_ducats"]) {
+                        trackVal.Tags["cost_mod_ducats"] += context_func["mod_price"]
+                    } else {
+                        trackVal.Tags["cost_mod_ducats"] = context_func["mod_price"]
+                    }
+                }
+                
                 trackVal.CurModel = NewModel;
             }
         },
@@ -2187,6 +2195,11 @@ export const BaseContextCallTable : CallEventTable = {
 
             const { ModelFactory } = await import("../../factories/features/ModelFactory");
             const oldval = trackVal.Tags["original_model_id"]
+            if (context_func["mod_price"]) {
+                if (trackVal.Tags["cost_mod_ducats"]) {
+                    trackVal.Tags["cost_mod_ducats"]  = (trackVal.Tags["cost_mod_ducats"] as number) -(context_func["mod_price"] as number)
+                }
+            }
             if (oldval != null) {
                 const NewModel = await ModelFactory.CreateNewModel(oldval as string, null);
                 trackVal.CurModel = NewModel;
