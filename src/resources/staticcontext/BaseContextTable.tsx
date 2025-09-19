@@ -515,9 +515,27 @@ export const BaseContextCallTable : CallEventTable = {
 
             return relayVar.concat(StringCollection);
         },
-        getEquipmentRestriction(this: EventRunner, eventSource : any, relayVar : any, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) { 
+        async getEquipmentRestriction(this: EventRunner, eventSource : any, relayVar : any, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) { 
             
-            relayVar.push(context_func as EquipmentRestriction)
+            const WrbndMmbrModule = await import("../../classes/saveitems/Warband/Purchases/WarbandMember")
+
+            if (context_func["model_spec"]) {
+                if (eventSource instanceof WrbndMmbrModule.WarbandMember) {
+                    const md = eventSource as WarbandMember
+                    const specs = context_func["model_spec"]
+                    let is_valid = false
+                    if (specs["id"]) {
+                        if (specs["id"].includes(md.CurModel.ID )) {
+                            is_valid = true;
+                        }
+                    }
+                    if (is_valid) {
+                        relayVar.push(context_func as EquipmentRestriction)
+                    }
+                }
+            } else {
+                relayVar.push(context_func as EquipmentRestriction)
+            }
             return relayVar;
         },
         async canModelAddItem(this: EventRunner, eventSource : any, relayVar : boolean,  trackVal : MemberAndItem, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, restrictions : EquipmentRestriction[]) {            
