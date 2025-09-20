@@ -6,6 +6,7 @@ import { SumWarband } from "../WarbandManager"
 import { EventRunner } from "../../../contextevent/contexteventhandler";
 import { WarbandProperty } from "../WarbandProperty";
 import { Keyword } from "../../../feature/glossary/Keyword";
+import { Equipment } from '../../../feature/equipment/Equipment'
 
 export async function ConvertToTTSExport(wb_val : SumWarband) : Promise<TTSExport> {
     const Wb : UserWarband = wb_val.warband_data;
@@ -193,4 +194,300 @@ interface TTSKeywords {
 interface TTSCost {
     ducats : number,
     glory : number
+}
+
+/**
+ * Formats TTS Text bold
+ * @param text
+ */
+function TTSBold ( text : string ) {
+    return '[b]' + text + '[/b]';
+}
+
+/**
+ * Format TTS Text colored
+ * @param text
+ */
+function TTScMove ( text : string) {
+    const color = '#4b6584';
+    return '[4b6584]' + text + '[-]';
+}
+function TTScRanged ( text : string) {
+    const color = '#8854d0';
+    return '[8854d0]' + text + '[-]';
+}
+function TTScMelee ( text : string) {
+    const color = '#fa8231';
+    return '[fa8231]' + text + '[-]';
+}
+function TTScArmour ( text : string) {
+    const color = '#d1d8e0';
+    return '[d1d8e0]' + text + '[-]';
+}
+function TTScUpgrade ( text : string) {
+    const color = '#3867d6';
+    return '[3867d6]' + text + '[-]';
+}
+function TTScAbility ( text : string) {
+    const color = '#0fb9b1';
+    return '[0fb9b1]' + text + '[-]';
+}
+function TTScEquipment ( text : string) {
+    const color = '#f7b731';
+    return '[f7b731]' + text + '[-]';
+}
+function TTScSkill ( text : string) {
+    const color = '#20bf6b';
+    return '[20bf6b]' + text + '[-]';
+}
+function TTScInjury ( text : string) {
+    const color = '#eb3b5a';
+    return '[eb3b5a]' + text + '[-]';
+}
+
+
+export async function ConvertModelToTTSText(wb_model : RealWarbandPurchaseModel, type: "short" | "medium" | "full") : Promise<string> {
+
+    const ex: string[] = []; // export string
+
+    // collection of unicode chars
+    // verified:
+    // ⊕ ✝ ✦ ✧ ✪ ☠ ✜ ✢ ✠ ✹ ✞ ☩
+
+    const i_name    = '☩';
+    const i_ranged  = '⊕';
+    const i_melee   = '✢';
+    const i_arm     = '❖';
+    const i_equip   = '✜';
+    const i_ability = '✧';
+    const i_up      = '✹';
+    const i_skill   = '△';
+    const i_injury  = '▽';
+
+
+    const M_Purch : WarbandPurchase = wb_model.purchase;
+    const M_Model : WarbandMember = wb_model.model
+
+    if (!M_Model || !M_Purch) {
+        return "Data not loaded yet";
+    }
+
+    const Stats : ModelStatistics = await M_Model.GetStats(); // Get Model Stats
+
+    // construct stats strings
+    const stats_strings = [
+        TTSBold(TTScMove(getModelStatMove(Stats))),
+        TTSBold(TTScMelee('Mel. ' + getModelStatMelee(Stats) + 'D')),
+        TTSBold(TTScRanged('Ran. ' + getModelStatRanged(Stats) + 'D')),
+        TTSBold(TTScArmour('Arm. ' + getModelStatArmour(Stats)))
+    ]
+
+    /** Main fighter info */
+    ex.push(TTSBold(i_name+i_name+' ' + M_Model.GetFighterName() + ' '+i_name+i_name)); // name
+    ex.push('('+M_Model.GetModelName() + ')' ?? "Unknown" ); // type
+
+    ex.push(stats_strings.join(' | ')); // Fighter stats
+
+    // Fighter Keywords
+    const KeywordList: Keyword[] = await M_Model.GetKeywordsFull();
+    const Keywords: string[] = KeywordList.map(kw => kw.Name ?? "");
+    ex.push(Keywords.join(', '));
+
+    ex.push(''); // separator
+
+
+    /** Fighter Equipment */
+    const EquipList : RealWarbandPurchaseEquipment[] = await M_Model.GetAllEquipForShow();
+
+    // Set category order
+    const categoryOrder: Record<string, number> = {
+        melee: 1,
+        ranged: 2,
+        armour: 3,
+        equipment: 4,
+    };
+
+    // Sort equip by category
+    EquipList.sort((a, b) => {
+        const aCat = a.equipment.GetEquipmentItem().Category;
+        const bCat = b.equipment.GetEquipmentItem().Category;
+
+        const aRank = categoryOrder[aCat] ?? 99;
+        const bRank = categoryOrder[bCat] ?? 99;
+
+        return aRank - bRank;
+    });
+
+
+    for (const eq of EquipList) {
+        const abilityObject = (eq.equipment.MyEquipment.SelfDynamicProperty?.OptionChoice as Equipment | undefined);
+
+        console.log("Equipment:", eq.equipment.Name);
+
+        let eq_name = '';
+
+        // Equipment icon
+        if( eq.equipment.GetEquipmentItem().Category == 'ranged' ) {
+            eq_name += TTScRanged(i_ranged+' ' + eq.equipment.GetEquipmentItem().GetTrueName());
+        }
+        if (eq.equipment.GetEquipmentItem().Category == 'melee') {
+            eq_name += TTScMelee(i_melee+' ' + eq.equipment.GetEquipmentItem().GetTrueName());
+        }
+        if (eq.equipment.GetEquipmentItem().Category == 'armour') {
+            eq_name += TTScArmour(i_arm+' ' + eq.equipment.GetEquipmentItem().GetTrueName());
+        }
+        if (eq.equipment.GetEquipmentItem().Category == 'equipment') {
+            eq_name += TTScEquipment(i_equip+' ' + eq.equipment.GetEquipmentItem().GetTrueName());
+        }
+
+        eq_name = TTSBold(eq_name);
+
+
+        // Equipment range - for ranged and melee only
+        if( type === 'medium' || type === 'full') {
+            if( eq.equipment.GetEquipmentItem().Category == 'ranged'
+                || eq.equipment.GetEquipmentItem().Category == 'melee') {
+                eq_name += ' - ' + eq.equipment.GetEquipmentItem().GetRange();
+            }
+        }
+
+        ex.push(eq_name);
+
+        // Equipment Keywords
+        let kw_string = '';
+        if( type === 'medium' || type === 'full') {
+            const keywords: Keyword[] = await eq.equipment.GetKeywords();
+            if (keywords.length > 0) {
+                kw_string += keywords.map(kw => kw.Name).join(', ');
+            }
+        }
+
+        // Short description
+        let short_desc_string = '';
+        if( type === 'medium' ) {
+            if (abilityObject && abilityObject.Modifiers.length > 0) {
+                short_desc_string += abilityObject.Modifiers.join(', '); // @TODO: check if the modifiers can be used like this
+            }
+        }
+
+        // Long description
+        let long_desc_string = '';
+        if( type === 'full' ) {
+            if (abilityObject && abilityObject.Description.length > 0) {
+                for (const desc of abilityObject.Description) {
+                    long_desc_string += desc.Content + `\n`; // @TODO: check if the description can be used like this
+                }
+            }
+        }
+
+        // output details for medium
+        if (type === "medium") {
+            const parts = [kw_string, short_desc_string].filter(p => p && p.trim().length > 0);
+            if (parts.length > 0) {
+                ex.push(parts.join(" | "));
+            }
+        }
+
+        // output details for full
+        if( type === 'full') {
+            if( kw_string != '' ) {
+                ex.push(kw_string);
+            }
+
+            if(long_desc_string != '' ) {
+                ex.push(long_desc_string);
+            }
+        }
+
+        // line break
+        if( type === 'full') {
+            ex.push('');
+        }
+    }
+
+    ex.push(''); // separator
+
+    /** Fighter Abilities */
+    for (const ability of M_Model.SubProperties) { // @TODO: is this the right one?
+        const ab_name = i_ability+' ' + ability.SelfDynamicProperty.OptionChoice.GetTrueName();
+
+        ex.push(TTSBold(TTScAbility(ab_name)));
+
+        if( type == 'medium' ) {
+            // @TODO: add short text description here like ("+1D in Melee")
+            ex.push('lorem ability short');
+        }
+        if( type == 'full' ) {
+            // @TODO: add ability text description here
+            ex.push('lorem ipsum dolor sit amet');
+
+        }
+    }
+
+
+    /** Fighter Upgrades */
+    for (const upgrade of M_Model.Upgrades) { // @TODO: is this the right one?
+        let up_name = i_up+' ';
+
+        up_name += (upgrade.HeldObject as WarbandProperty).SelfDynamicProperty.OptionChoice.GetTrueName();
+
+        up_name += ''; // @TODO: add selection here (like heretic trooper upgrade)
+
+        ex.push(TTSBold(TTScUpgrade(up_name)));
+
+        if( type == 'medium' ) {
+            // @TODO: add short upgrade text description here like ("+1D in Melee")
+            ex.push('lorem choice short');
+        }
+        if( type == 'full' ) {
+            // @TODO: add full upgrade text description here
+            ex.push('lorem ipsum dolor sit amet');
+        }
+    }
+    /** Fighter Goetics */
+    // @TODO: currently goetics are part of the upgrades
+
+    ex.push(''); // separator
+
+    /** Fighter Skills */
+    for (const skill of M_Model.Skills) { // @TODO: is this the right one?
+        console.log('skill:');
+        console.log(skill);
+
+        const sk_name = i_skill+' ' + skill.SelfDynamicProperty.OptionChoice.GetTrueName();
+
+        ex.push(TTSBold(TTScSkill(sk_name)));
+
+        if( type == 'medium' ) {
+            // @TODO: add short text description here like ("+1D in Melee")
+            ex.push('lorem short desc');
+        }
+
+        if( type == 'full' ) {
+            // @TODO: add full text description here
+            ex.push('lorem ipsum dolor sit amet');
+
+        }
+    }
+
+    /** Fighter Injuries */
+    for (const injury of M_Model.Injuries) { // @TODO: is this the right one?
+        const in_name = i_injury+' ' + injury.SelfDynamicProperty.OptionChoice.GetTrueName();
+
+        ex.push(TTSBold(TTScInjury(in_name)));
+
+        if( type == 'medium' ) {
+            // @TODO: add short text description here like ("-1D in Melee")
+            ex.push('lorem short desc');
+        }
+
+        if( type == 'full' ) {
+            // @TODO: add injury text description here
+            ex.push('lorem ipsum dolor sit amet');
+
+        }
+    }
+
+
+    return ex.join("\n");
 }

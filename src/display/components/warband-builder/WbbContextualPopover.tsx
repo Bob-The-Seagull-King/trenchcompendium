@@ -35,6 +35,7 @@ import {SumWarband, WarbandManager} from "../../../classes/saveitems/Warband/War
 import { useNavigate } from 'react-router-dom';
 import {useWbbMode} from "../../../context/WbbModeContext";
 import AlertCustom from "../generics/AlertCustom";
+import { ConvertModelToTTSText } from '../../../classes/saveitems/Warband/Converter/TTSExporter'
 
 interface WbbContextualPopoverProps {
     id: string;
@@ -69,19 +70,25 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
     const [newname, setName] = useState("")
 
     // Export Type
-    const [exportType, setExportType] = useState<'full' | 'compact' | 'tts-json'>('full');
-    // Export Text
-    const [exportText, setExportText] = useState<string>('');
+    const [exportType, setExportType] = useState<'full' | 'compact' | 'tts-json' | 'tts-text'>('full');
+    // Export Copy var
     const [exportCopySuccess, setExportCopySuccess] = useState<boolean>(false); // export copied to clipboard
+    // Export Warband Text (full warband)
+    const [exportText, setExportText] = useState<string>('');
+
 
     // change export text based on type
     useEffect(() => {
 
         setFighterName(type === 'fighter' && item?.model ? item.model.GetFighterName() : '')
-        async function TTSExport() {
+
+        // create TTS JSON export string
+        async function TTSExportJSON() {
             const TTS_Export = await (item as SumWarband).warband_data.BuildExportJSON()
             setExportText(TTS_Export.join('\n'));
         }
+
+
         // Guard check -> Only do if item is SumWarband
         if (
             !item ||
@@ -97,7 +104,9 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
         } else if (exportType === 'compact') {
             setExportText((item as SumWarband).warband_data.BuildExport(false).join('\n'));
         } else if (exportType === 'tts-json') {
-            TTSExport();
+            TTSExportJSON();
+        } else if (exportType === 'tts-text') {
+            // no export text for now
         }
     }, [exportType, item]);
 
@@ -118,8 +127,21 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
     const [showConfirmDeleteFighterModal, setshowConfirmDeleteFighterModal] = useState(false);
     const [showConfirmRenameFighterModal, setshowConfirmRenameFighterModal] = useState(false);
     const [showConfirmRefundFighterModal, setshowConfirmRefundFighterModal] = useState(false);
+    const [showTTSExportTextFighterModal, setshowTTSExportTextFighterModal] = useState(false);
+    const [tTSExportTextFighterType, setTTSExportTextFighterType] = useState<"short" | "medium" | "full">("medium");
+
+    const [ttsModelText, setTtsModelText] = useState<string>("");
+
+    useEffect(() => {
+        ConvertModelToTTSText(item, tTSExportTextFighterType).then(setTtsModelText);
+    }, [item, tTSExportTextFighterType]);
+
+
     const showConfirmRenameFighter = () => {
         setshowConfirmRenameFighterModal(true);
+    }
+    const showTTSExportTextFighter = () => {
+        setshowTTSExportTextFighterModal(true);
     }
 
     const handleRenameFighter = () => {
@@ -459,6 +481,7 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
             showConfirmDeleteInjuryModal ||
             showConfirmRenameWarbandModal ||
             showConfirmDeleteWarbandModal ||
+            showTTSExportTextFighterModal ||
             showConfirmExportWarbandModal;
 
         if(isAnyModalOpen) {
@@ -487,6 +510,7 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
         showConfirmRenameWarbandModal,
         showConfirmDeleteWarbandModal,
         showConfirmExportWarbandModal,
+        showTTSExportTextFighterModal,
         isActive
     ]);
 
@@ -509,6 +533,11 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                                          onClick={withStopPropagation(showConfirmRenameFighter)}>
                                         <FontAwesomeIcon icon={faEdit} className="icon-inline-left-l"/>
                                         {'Rename Fighter'}
+                                    </div>
+                                    <div className="action action-export"
+                                         onClick={withStopPropagation(showTTSExportTextFighter)}>
+                                        <FontAwesomeIcon icon={faFileExport} className="icon-inline-left-l"/>
+                                        {'TTS Export'}
                                     </div>
                                     <div className="action action-copy"
                                          onClick={withStopPropagation(handleCopyFighter)}>
@@ -831,6 +860,113 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                     </Button>
                     <Button variant="primary" onClick={withStopPropagation(handleRenameFighter)}>
                         Rename
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+
+            {/** Export Fighter TTS Text Modal */}
+            <Modal show={showTTSExportTextFighterModal} onHide={() => setshowTTSExportTextFighterModal(false)} centered>
+                <Modal.Header closeButton={false}>
+                    <Modal.Title>{`Export Fighter`}</Modal.Title>
+
+                    <FontAwesomeIcon
+                        icon={faXmark}
+                        className="modal-close-icon"
+                        role="button"
+                        onClick={
+                            (e) => {
+                                e.stopPropagation();
+                                setshowTTSExportTextFighterModal(false);
+                            }
+                        }
+                    />
+                </Modal.Header>
+
+                <Modal.Body>
+                    <div className={'WbbExportWarband'}>
+                        <div className={'mb-1'}>
+                            <label>
+                                {'Export Style'}
+                            </label>
+                        </div>
+
+                        <div className="btn-group" role="group">
+                            <button
+                                type="button"
+                                className={`btn btn-secondary ${tTSExportTextFighterType == 'short' ? 'active' : ''}`}
+                                onClick={() => setTTSExportTextFighterType('short')}
+                            >
+                                Short
+                            </button>
+                            <button
+                                type="button"
+                                className={`btn btn-secondary ${tTSExportTextFighterType == 'medium' ? 'active' : ''}`}
+                                onClick={() => setTTSExportTextFighterType('medium')}
+                            >
+                                Medium
+                            </button>
+                            {/*<button*/}
+                            {/*    type="button"*/}
+                            {/*    className={`btn btn-secondary ${tTSExportTextFighterType == 'full' ? 'active' : ''}`}*/}
+                            {/*    onClick={() => setTTSExportTextFighterType('full')}*/}
+                            {/*>*/}
+                            {/*    Full*/}
+                            {/*</button>*/}
+                        </div>
+
+                        <hr/>
+
+                        <button
+                            className={`btn btn-primary btn-copy mb-3 w-100 ${exportCopySuccess ? 'copy-success' : ''}`}
+                            onClick={() => {
+                                if(ttsModelText) {
+                                    navigator.clipboard.writeText(ttsModelText);
+                                    setExportCopySuccess(true);
+                                    setTimeout(() => setExportCopySuccess(false), 4000);
+                                }
+                            }}
+                        >
+                            {exportCopySuccess ? (
+                                <>
+                                    <FontAwesomeIcon icon={faCheck} className={'icon-inline-left-l'}/>
+                                    {'Copied'}
+                                </>
+                            ): (
+                                <>
+                                    <FontAwesomeIcon icon={faCopy} className={'icon-inline-left-l'}/>
+                                    {'Copy to Clipboard'}
+                                </>
+                            )}
+                        </button>
+                        <div className="export-wrap">
+                            {(item as RealWarbandPurchaseModel).model != undefined &&
+                                <pre style={{
+                                    margin: 0,
+                                    padding: 0,
+                                    lineHeight: '1',
+                                    width: "100%",
+                                    whiteSpace: 'pre-wrap',
+                                    wordBreak: 'break-word'
+                                }}>
+                                {ttsModelText}
+
+                                    {/*{(item as RealWarbandPurchaseModel).model.GetTTSExportText('full')}*/}
+                            </pre>
+                            }
+                        </div>
+                    </div>
+
+                </Modal.Body>
+
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={
+                        (e) => {
+                            e.stopPropagation();
+                            setshowTTSExportTextFighterModal(false);
+                        }
+                    }>
+                        Close
                     </Button>
                 </Modal.Footer>
             </Modal>
@@ -1217,8 +1353,6 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
 
                 <Modal.Body>
                     <div className={'WbbExportWarband'}>
-
-
                         <div className={'mb-1'}>
                             <label>
                                 {'Export Style'}
@@ -1242,99 +1376,124 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                             </button>
                             <button
                                 type="button"
+                                className={`btn btn-secondary ${exportType == 'tts-text' ? 'active' : ''}`}
+                                onClick={() => setExportType('tts-text')}
+                            >
+                                TTS Text
+                            </button>
+                            <button
+                                type="button"
                                 className={`btn btn-secondary ${exportType == 'tts-json' ? 'active' : ''}`}
                                 onClick={() => setExportType('tts-json')}
                             >
-                                TTS
+                                TTS JSON
                             </button>
                         </div>
 
 
                         <hr/>
 
-                        <button
-                            className={`btn btn-primary btn-copy mb-3 w-100 ${exportCopySuccess ? 'copy-success' : ''}`}
-                            onClick={() => {
-                                if(exportText) {
-                                    navigator.clipboard.writeText(exportText);
-                                    setExportCopySuccess(true);
-                                    setTimeout(() => setExportCopySuccess(false), 4000);
+                        { exportType !== 'tts-text' ? (
+                            // Export complete warband style
+                            <>
+                                <button
+                                    className={`btn btn-primary btn-copy mb-3 w-100 ${exportCopySuccess ? 'copy-success' : ''}`}
+                                    onClick={() => {
+                                        if(exportText) {
+                                            navigator.clipboard.writeText(exportText);
+                                            setExportCopySuccess(true);
+                                            setTimeout(() => setExportCopySuccess(false), 4000);
+                                        }
+                                    }}
+                                >
+
+                                    {exportCopySuccess ? (
+                                        <>
+                                            <FontAwesomeIcon icon={faCheck} className={'icon-inline-left-l'}/>
+                                            {'Copied'}
+                                        </>
+                                    ): (
+                                        <>
+                                            <FontAwesomeIcon icon={faCopy} className={'icon-inline-left-l'}/>
+                                            {'Copy to Clipboard'}
+                                        </>
+                                    )}
+                                </button>
+
+                                {exportType === 'tts-json' &&
+                                    <AlertCustom
+                                        type={'info'}
+                                        className={'mt-3 mb-3'}
+                                    >
+                                        <div className={'fw-bold mb-2'}>
+                                            <strong>
+                                                {'Tabletop simulator JSON export'}
+                                            </strong>
+                                        </div>
+                                        <p>
+                                            {'You can use the following mod to import your warband into TTS. Follow the instructions in the mod for more details.'}
+                                        </p>
+                                        <a
+                                            href={'https://steamcommunity.com/sharedfiles/filedetails/?id=3491693177 '}
+                                            rel="noopener noreferrer nofollow" target={'_blank'}
+                                            className={'btn btn-primary btn-sm'}
+                                        >
+                                            {'Trench Crusade - Scriber'}
+                                            <FontAwesomeIcon icon={faChevronRight} className={'ms-2'}/>
+                                        </a>
+
+                                        <div className={'fw-bold mt-3 mb-2'}>{'Support and Feedback'}</div>
+                                        <p>
+                                            {'The TTS Importer is a third party steam tool. If you have questions or would like to leave feedback for the importer, you can use '}
+                                            <a href={'https://steamcommunity.com/workshop/filedetails/discussion/3491693177/597411554294572558/'}
+                                               rel={"noreferrer noopener nofollow"} target={'_blank'}>
+                                                {'Steam'}
+                                            </a>
+                                            {' or '}
+                                            <a href={'https://discord.com/channels/1302770150336106576/1394658842775912519/1394658842775912519'}
+                                               rel={"noreferrer noopener nofollow"} target={'_blank'}>
+                                                {'Discord'}
+                                            </a>
+                                            {'.'}
+                                        </p>
+                                    </AlertCustom>
                                 }
-                            }}
-                        >
 
-                            {exportCopySuccess ? (
-                                <>
-                                    <FontAwesomeIcon icon={faCheck} className={'icon-inline-left-l'}/>
-                                    {'Copied'}
-                                </>
-                            ): (
-                                <>
-                                    <FontAwesomeIcon icon={faCopy} className={'icon-inline-left-l'}/>
-                                    {'Copy to Clipboard'}
-                                </>
-                            )}
-                        </button>
+                                <div className={'export-wrap'}>
+                                    {(item as SumWarband).warband_data &&
+                                        <pre style={{
+                                            margin: 0,
+                                            padding: 0,
+                                            lineHeight: '1',
+                                            width: "100%",
+                                            whiteSpace: 'pre-wrap',
+                                            wordBreak: 'break-word'
+                                        }}>
+                                            <div>
+                                                {exportText}
+                                            </div>
+                                        </pre>
+                                    }
+                                </div>
+                            </>
 
-                        {exportType === 'tts-json' &&
+                        ):(
+                            // TTS Text export for each
                             <AlertCustom
                                 type={'info'}
                                 className={'mt-3 mb-3'}
                             >
-                                <div className={'fw-bold mb-2'}>
+                                <div className={'fw-bold'}>
                                     <strong>
-                                        {'Tabletop simulator export'}
+                                        {'Tabletop simulator Text export'}
                                     </strong>
                                 </div>
                                 <p>
-                                    {'You can use the following mod to import your warband into TTS. Follow the instructions in the mod for more details.'}
+                                    {'If you want to use the text export for your fighters, you need to copy paste the details for each fighter into the TTS models description.'}
                                 </p>
-                                <a
-                                    href={'https://steamcommunity.com/sharedfiles/filedetails/?id=3491693177 '}
-                                    rel="noopener noreferrer nofollow" target={'_blank'}
-                                    className={'btn btn-primary btn-sm'}
-                                >
-                                    {'Trench Crusade - Scriber'}
-                                    <FontAwesomeIcon icon={faChevronRight} className={'ms-2'}/>
-                                </a>
 
-                                <div className={'fw-bold mt-3 mb-2'}>{'Support and Feedback'}</div>
-                                <p>
-                                    {'The TTS Importer is a third party steam tool. If you have questions or would like to leave feedback for the importer, you can use '}
-                                    <a href={'https://steamcommunity.com/workshop/filedetails/discussion/3491693177/597411554294572558/'}
-                                       rel={"noreferrer noopener nofollow"} target={'_blank'}>
-                                        {'Steam'}
-                                    </a>
-                                    {' or '}
-                                    <a href={'https://discord.com/channels/1302770150336106576/1394658842775912519/1394658842775912519'}
-                                       rel={"noreferrer noopener nofollow"} target={'_blank'}>
-                                        {'Discord'}
-                                    </a>
-                                    {'.'}
-                                </p>
                             </AlertCustom>
-                        }
-
-
-
-                        <div className={'export-wrap'}>
-                            {(item as SumWarband).warband_data &&
-                                <pre style={{
-                                    margin: 0,
-                                    padding: 0,
-                                    lineHeight: '1',
-                                    width: "100%",
-                                    whiteSpace: 'pre-wrap',
-                                    wordBreak: 'break-word'
-                                }}>
-                                    <div>
-                                        {exportText}
-                                    </div>
-                            </pre>
-                            }
-                        </div>
-
-
+                        )}
                     </div>
                 </Modal.Body>
 
