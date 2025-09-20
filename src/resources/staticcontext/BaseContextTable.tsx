@@ -3561,8 +3561,20 @@ export const BaseContextCallTable : CallEventTable = {
         async runConsumableSelect(this: EventRunner, eventSource : any, trackVal : WarbandConsumable, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : WarbandConsumable, origin : WarbandProperty | null) {
             const ContWarband = await GetWarbandOrNull(sourceband);
             if (ContWarband == null) { return }
+            for (let i = 0; i < ContWarband.Exploration.Locations.length; i++) {
 
-            await ContWarband.AddStash(trackVal.SelectItem as any);
+                for (let j = 0; j < ContWarband.Exploration.Locations[i].Consumables.length; j++) {
+                    if (ContWarband.Exploration.Locations[i].Consumables[j].GetID() == eventSource.GetID()) {
+                        await ContWarband.AddStash((context_static as any).SelectItem as any);
+                        break;
+                    }
+                }
+            }
+        },
+        async onGainLocation(this: EventRunner, eventSource : any, trackVal : WarbandProperty, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) {
+    
+            if ((context_static as any).SelectItem == null || (context_static as any).SelectItem == undefined) {return;}
+            await warband.AddStash((context_static as any).SelectItem as any);
         },
         async getConsumableOptionsList(this: EventRunner, eventSource : any, relayVar : IChoice[], trackVal : WarbandConsumable, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : UserWarband, origin : WarbandProperty | null) {
 
@@ -3804,18 +3816,17 @@ export const BaseContextCallTable : CallEventTable = {
                 }
                 for (let i = 0; i < OptionList.length; i++) {
                     let canadd = true;
-                    
-                    if (context_func["type"]) {
-                        if (context_func["type"] != (OptionList[i].CostType)) {
+                    if (context_func["type"] != undefined) {
+                        if ((parseInt(context_func["type"]) != parseInt(OptionList[i].CostType)) == true) {
                             canadd = false;
                         }
                     }
-                    if (context_func["count"]) {
+                    if (context_func["count"] != undefined) {
                         if (context_func["count"] < (OptionList[i].Cost)) {
                             canadd = false;
                         }
                     }
-
+                    
                     if (canadd == true) {
                         relayVar.push(
                             {
@@ -3827,6 +3838,7 @@ export const BaseContextCallTable : CallEventTable = {
                     }
                 }
             }
+            
             return relayVar;
         }
     },

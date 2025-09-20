@@ -37,7 +37,7 @@ import { EventRunner } from '../../../classes/contextevent/contexteventhandler';
 import { WarbandConsumable } from '../../../classes/saveitems/Warband/WarbandConsumable';
 import WbbConsumableSelect from './modals/warband/WbbConsumableSelect';
 import { ContextObject } from '../../../classes/contextevent/contextobject';
-import { StoredLocation } from '../../../classes/saveitems/Warband/CoreElements/WarbandExplorationSet';
+import { CheckRelevantBaseOptions, CheckRelevantFullOptions, StoredLocation } from '../../../classes/saveitems/Warband/CoreElements/WarbandExplorationSet';
 
 interface WbbEditViewExplorationProps {
     location : StoredLocation;
@@ -54,7 +54,7 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
     const [keyvar, setkeyvar] = useState(0);
     const [updateState, setUpdateState] = useState(0);
     const [contextMessage, setContextMessage] = useState<string[]>([]);
-    const [cansave, setcansave] = useState<boolean>(!location.base_item.location?.GetID() || (!(containsTag(location.base_item.location.Tags, 'unforced')) && location.base_item?.options && location.base_item.options.length > 0 && (location.base_item.options.length != location.selected_options.length )));
+    const [cansave, setcansave] = useState<boolean>(!location.base_item.location?.GetID() || (!(containsTag(location.base_item.location.Tags, 'unforced')) && location.base_item?.options && CheckRelevantFullOptions(location.base_item).length > 0 && (location.base_item.options.length != CheckRelevantBaseOptions(location.base_item).length )));
     
     function createBaseItem() {
         if (!warband) { return; }
@@ -70,39 +70,9 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
 
     useEffect(() => {
         async function GetMessage() {
-            /*
-            const EventProc : EventRunner = new EventRunner();
-
-            let MessageList : string[]  = await EventProc.runEvent(
-                "getLocationMessage",
-                location.loc ,
-                [],
-                [],
-                null
-            )
-            
-            for (let i = 0; i < selectedOptions.length; i++) {
-                const value = location.loc.MyOptions.filter((item) => item.RefID == selectedOptions[i].option_refID)
-
-                if (value.length > 0) {
-                    const option = value[0].Selections.filter((item) => item.id == selectedOptions[i].selection_ID)
-                    if (option.length > 0) {
-                        if (option[0].value instanceof ContextObject) {
-                            MessageList = await EventProc.runEvent(
-                                "getLocationMessage",
-                                option[0].value,
-                                [],
-                                [],
-                                null
-                            )
-                        }
-                    }
-                }
-                selectedOptions[i].option_refID
+            if (CheckRelevantBaseOptions(location.base_item).length == 0 && location.true_obj == undefined) {
+                createBaseItem();
             }
-
-            setContextMessage(MessageList);
-            setkeyvar(keyvar + 1);*/
         }
 
         GetMessage();
@@ -136,7 +106,7 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
         if (found == false) {
             location.selected_options.push(newoption);
         }
-        setcansave(!location.base_item.location?.GetID() || (!(containsTag(location.base_item.location.Tags, 'unforced')) && location.base_item?.options && location.base_item.options.length > 0 && (location.base_item.options.length != location.selected_options.length )))
+        setcansave(!location.base_item.location?.GetID() || (!(containsTag(location.base_item.location.Tags, 'unforced')) && location.base_item?.options && CheckRelevantFullOptions(location.base_item).length > 0 && (location.base_item.options.length != CheckRelevantBaseOptions(location.base_item).length )))
         setUpdateState(updateState + 1);
         createBaseItem()
     }
@@ -172,14 +142,14 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
                             }
                         </div>
                         {/* Show option descriptions if any */}
-                        {(location.base_item.location.MyOptions.length > 0 )  &&
+                        {(CheckRelevantBaseOptions(location.base_item).length > 0 )  &&
                             <ul className={'exploration-description-options'}>
-                                {location.base_item.location.MyOptions.map((item) => 
-                                    <div key={location.base_item.location.MyOptions.indexOf(item)}>
-                                        {item.Tags.base_loc != undefined &&
+                                {CheckRelevantBaseOptions(location.base_item).map((item) => 
+                                    <div key={CheckRelevantBaseOptions(location.base_item).indexOf(item)}>
+                                        {item.baseopt.Tags.base_loc != undefined &&
                                             <>
-                                        {item.Selections.map((choice) => 
-                                        <li key={item.Selections.indexOf(choice)} className={'exploration-description-option'}>
+                                        {item.baseopt.Selections.map((choice) => 
+                                        <li key={item.baseopt.Selections.indexOf(choice)} className={'exploration-description-option'}>
                                             <span className={'option-name'}>
                                                 {choice.display_str}
                                             </span>
@@ -195,9 +165,9 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
                         }
 
                         {/* Show option Radio 1 */}
-                        { (location.base_item.options.length > 0) &&
+                        { (CheckRelevantBaseOptions(location.base_item).length > 0) &&
                             <>
-                                {location.base_item.options.map((item, index) =>
+                                {CheckRelevantBaseOptions(location.base_item).map((item, index) =>
                                     <WbbExploration_OptionSelect_Radio
                                         key={location.base_item.options.indexOf(item)}
                                         options={item}

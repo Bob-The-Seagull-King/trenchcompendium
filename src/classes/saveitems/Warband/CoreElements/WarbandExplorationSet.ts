@@ -13,6 +13,7 @@ import { ExplorationLocation } from "../../../feature/exploration/ExplorationLoc
 import { StaticOption } from "../../../options/StaticOption";
 import { IChoice } from "../../../options/StaticOption";
 import { EventRunner } from "../../../contextevent/contexteventhandler";
+import { containsTag } from "../../../../utility/functions";
 
 interface IWarbandExplorationSet extends IContextObject {
     explorationskills: IWarbandProperty[];
@@ -33,6 +34,30 @@ export interface ExplorationTableSuite {
 export interface FilteredLocation {
     location : ExplorationLocation,
     options : FilteredOptions[]
+}
+
+export function CheckRelevantFullOptions(loc : FilteredLocation) {
+    const list : StaticOption[] = []
+
+    for (let i = 0; i < loc.location.MyOptions.length; i++) {
+        if (!containsTag(loc.location.MyOptions[i].Tags, "unrequired_selection")) {
+            list.push(loc.location.MyOptions[i])
+        }
+    }
+
+    return list;
+}
+
+export function CheckRelevantBaseOptions(loc : FilteredLocation) {
+    const list : FilteredOptions[] = []
+
+    for (let i = 0; i < loc.options.length; i++) {
+        if (!containsTag(loc.options[i].baseopt.Tags, "unrequired_selection")) {
+            list.push(loc.options[i])
+        }
+    }
+
+    return list;
 }
 
 export interface FilteredOptions {

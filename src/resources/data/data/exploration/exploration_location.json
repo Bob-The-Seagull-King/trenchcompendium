@@ -312,18 +312,8 @@
             "location_option": "el_trenchshrine"
         },
         "contextdata": {
-            "validate_location": {
-                "removed": [
-                    {
-                        "type": "faction",
-                        "value": ["fc_cultoftheblackgrail"]
-                    }
-                ]
-            },
-            "gain_all_from_list": {
-                "obey_faction": true,
-                "obey_restriction": true,
-                "id": ["rel_fc_eq_troopflag"]
+            "gain_all_from_list_find": {
+                "id": ["eq_troopflag"]
             }
         },
         "description": [            
@@ -347,9 +337,7 @@
         "id": "el_trenchshrine_standard_grail",
         "name": "Standard",
         "source": "core",
-        "tags": {
-            "location_option": "el_trenchshrine"
-        },
+        "tags": {"defunct": true},
         "contextdata": {
             "validate_location": {
                 "allowed": [
@@ -2037,6 +2025,7 @@
         "options": [{
             "ref_id" : "ot_abandonedressurectionmachine_a",
             "name" : "",
+            "tags": {"unrequired_selection": true},
             "description" : [],
             "category" : "contextobject",
             "self_ask": true,
