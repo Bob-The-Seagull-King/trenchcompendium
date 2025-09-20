@@ -415,7 +415,7 @@ export async function ConvertModelToTTSText(wb_model : RealWarbandPurchaseModel,
 
         if( type == 'medium' ) {
             // @TODO: add short text description here like ("+1D in Melee")
-            ex.push('lorem ability short');
+            // ex.push('lorem ability short');
         }
         if( type == 'full' ) {
             // @TODO: add ability text description here
@@ -437,7 +437,7 @@ export async function ConvertModelToTTSText(wb_model : RealWarbandPurchaseModel,
 
         if( type == 'medium' ) {
             // @TODO: add short upgrade text description here like ("+1D in Melee")
-            ex.push('lorem choice short');
+            // ex.push('lorem choice short');
         }
         if( type == 'full' ) {
             // @TODO: add full upgrade text description here
@@ -460,13 +460,12 @@ export async function ConvertModelToTTSText(wb_model : RealWarbandPurchaseModel,
 
         if( type == 'medium' ) {
             // @TODO: add short text description here like ("+1D in Melee")
-            ex.push('lorem short desc');
+            // ex.push('lorem short desc');
         }
 
         if( type == 'full' ) {
             // @TODO: add full text description here
             ex.push('lorem ipsum dolor sit amet');
-
         }
     }
 
@@ -478,7 +477,7 @@ export async function ConvertModelToTTSText(wb_model : RealWarbandPurchaseModel,
 
         if( type == 'medium' ) {
             // @TODO: add short text description here like ("-1D in Melee")
-            ex.push('lorem short desc');
+            // ex.push('lorem short desc');
         }
 
         if( type == 'full' ) {
