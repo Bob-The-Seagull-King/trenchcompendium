@@ -2532,7 +2532,7 @@ class UserWarband extends DynamicContextObject {
         if (WBUser == null) {
             const WBPublic : SumWarband | null = await WarbandFactory.GetWarbandPublicByID(this.PostID)
             if (WBPublic == null) {
-                return ["Someth ing Went Wrong"] 
+                return ["Something Went Wrong"]
             }
             const EXPORT = await ConvertToTTSExport(WBPublic);
             return [JSON.stringify(EXPORT, null, 2)];
