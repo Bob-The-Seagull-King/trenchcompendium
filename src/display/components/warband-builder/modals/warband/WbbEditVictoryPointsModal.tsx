@@ -20,7 +20,7 @@ const WbbEditVictoryPointsModal: React.FC<WbbEditVictoryPointsProps> = ({
     const [selectedVP, setSelectedVP] = useState<number | undefined>(currentVP);
 
     const handleSubmit = () => {
-        if(selectedVP) {
+        if(selectedVP != undefined) {
             onSubmit(selectedVP);
             onClose();
         }
@@ -43,7 +43,7 @@ const WbbEditVictoryPointsModal: React.FC<WbbEditVictoryPointsProps> = ({
                 <div className={'mb-3'}>
                     {'Victory Points: ' + currentVP}
 
-                    {(selectedVP != undefined && selectedVP > 0 && selectedVP != currentVP) &&
+                    {(selectedVP != undefined && selectedVP >= 0 && selectedVP != currentVP) &&
                         <>
                             <FontAwesomeIcon icon={faArrowRight} className={`icon-inline-right mb-1`}/>
 

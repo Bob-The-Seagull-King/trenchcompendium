@@ -22,7 +22,9 @@ class UpgradeFactory {
             return cache.UpgradeCache[_rule.id];
         }
         const rule = new Upgrade(_rule, parent)
-        cache.AddToCache('upgrade', rule);
+        if (!skipcheck) {
+            cache.AddToCache('upgrade', rule);
+        }
         await rule.ReloadOptions();
         return rule;
     }
