@@ -40,21 +40,25 @@ export const AdsManager: React.FC = () => {
     if (SiteUser?.Premium.IsPremium) return null;
 
     return (
-        <div className="AdsManager">
-            <div className="Ads-text-below">
-                ❤️ Support Trench Companion for an ad-free experience
+        <>
+            <div className="AdsManager">
+                <div className="Ads-text-below">
+                    ❤️ Support Trench Companion for an ad-free experience
+                </div>
+
+                <ins
+                    className="adsbygoogle"
+                    style={{ display: 'block' }}
+                    data-ad-client="ca-pub-3744837400491966"
+                    data-ad-slot="7868779249"   // dein echtes Slot-ID von Google
+                    data-ad-format="auto"
+                    data-full-width-responsive="true"
+                />
+
+
             </div>
 
-            <ins
-                className="adsbygoogle"
-                style={{ display: 'block' }}
-                data-ad-client="ca-pub-3744837400491966"
-                data-ad-slot="7868779249"   // dein echtes Slot-ID von Google
-                data-ad-format="auto"
-                data-full-width-responsive="true"
-            />
-
             <div className="AdsManager-bottom-spacer"></div>
-        </div>
+        </>
     );
 };
