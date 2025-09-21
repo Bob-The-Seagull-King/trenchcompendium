@@ -906,13 +906,13 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                             >
                                 Medium
                             </button>
-                            {/*<button*/}
-                            {/*    type="button"*/}
-                            {/*    className={`btn btn-secondary ${tTSExportTextFighterType == 'full' ? 'active' : ''}`}*/}
-                            {/*    onClick={() => setTTSExportTextFighterType('full')}*/}
-                            {/*>*/}
-                            {/*    Full*/}
-                            {/*</button>*/}
+                            <button
+                                type="button"
+                                className={`btn btn-secondary ${tTSExportTextFighterType == 'full' ? 'active' : ''}`}
+                                onClick={() => setTTSExportTextFighterType('full')}
+                            >
+                                Full
+                            </button>
                         </div>
 
                         <hr/>
