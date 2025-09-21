@@ -2411,8 +2411,8 @@
         },
         "contextdata": {
             "location_rule_option": {},
-            "set_exploration_purchase_cap": {
-                "cost": 99
+            "add_location_modifier": {
+                "id": ["el_blacknetworkcontact_mod"]
             }
         },
         "description": [            
@@ -2422,6 +2422,26 @@
             }
         ],
         "location_value": 14,
+        "options": [  ]
+    },
+    {
+        "id": "el_blacknetworkcontact_mod",
+        "name": "Black Network Contact",
+        "source": "core",
+        "tags": {
+            "modifier": true
+        },
+        "contextdata": {
+            "set_exploration_purchase_cap": {
+                "cost": 99
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You may purchase Glory Items of any Glory Points cost that are allowed to your Warband during the Trade step."
+            }
+        ],
         "options": [  ]
     },
     {

@@ -15,16 +15,14 @@ import { InjuryFactory } from "../../../../factories/features/InjuryFactory";
 import { ModelUpgradeRelationship } from "../../../relationship/model/ModelUpgradeRelationship";
 import { UpgradeFactory } from "../../../../factories/features/UpgradeFactory";
 
+export const UPDATEVALUE = 1;
+export const UPDATETAGNAME = "UPDATE_VERSION_REFERENCE";
 
 class WarbandUpdater {
 
     
     private static instance: WarbandUpdater;
     UserWarbandManager : WarbandManager;
-
-    // USED TO HANDLE UPDATE
-    private readonly UPDATEVALUE : number = 1;
-    private readonly UPDATETAGNAME : string = "";
 
     /**
      * Initializes all controllers, this also means all initialization
@@ -43,14 +41,53 @@ class WarbandUpdater {
     }
 
     public CheckUpdate(wb : IUserWarband): boolean {
-        if (wb.tags[this.UPDATETAGNAME]) {
-            return wb.tags[this.UPDATETAGNAME] == this.UPDATEVALUE;
+        if (wb.tags[UPDATETAGNAME]) {
+            return wb.tags[UPDATETAGNAME] == UPDATEVALUE;
         } else {
             return false;
         }
     }
 
     public async RunUpdate(wb : IUserWarband) : Promise<IUserWarband> {
+        const TagVal = wb.tags[UPDATETAGNAME]
+        const CurrentVer = (typeof TagVal === "string") ? parseInt(TagVal) : 0
+        let ref_wb = wb;
+
+        if (CurrentVer < 1) {
+            ref_wb = await this.Update_Version1(ref_wb);
+        }
+        
+        return ref_wb;
+    }
+
+    public async Update_Version1(wb : IUserWarband) : Promise<IUserWarband> {
+        
+        wb.tags[UPDATETAGNAME] = 1;
+
+        const locations = wb.exploration.locations;
+        for (let i = 0; i < locations.length; i++) {
+            if (locations[i].object_id == "el_blacknetworkcontact") {
+                if (wb.exploration.location_mods) {
+                    wb.exploration.location_mods.push(
+                        {
+                            object_id: "el_blacknetworkcontact_mod",
+                            selections: [],
+                            consumables : []
+                        }
+                    )
+                } else {
+                    wb.exploration.location_mods =[
+                        {
+                            object_id: "el_blacknetworkcontact_mod",
+                            selections: [],
+                            consumables : []
+                        }
+                    ]
+                }
+                
+            }
+        }
+
         return wb;
     }
 

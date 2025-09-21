@@ -19,7 +19,6 @@ const WbbModifiersList = () => {
 
     useEffect(() => {
         async function RunUpdate() {
-            console.log("TEST")
             if (warband) {
                 const Modifiers = await warband?.warband_data.GetModifiersList();
                 const Fireteams = await warband?.warband_data.GetFireteams();

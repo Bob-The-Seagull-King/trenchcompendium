@@ -238,11 +238,9 @@ class WarbandExplorationSet extends DynamicContextObject {
     }
 
     public async GetWarbandModifiers() {
-        console.log("GET MODS")
         if (this.GeneralCache.exploration_skills != null) {
             return this.GeneralCache.exploration_skills
         }
-        console.log("MODS")
 
         const SkillList : WarbandProperty[] = [];
         const Events : EventRunner = new EventRunner();

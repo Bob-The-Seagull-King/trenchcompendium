@@ -3992,6 +3992,35 @@ export const BaseContextCallTable : CallEventTable = {
             }
         }
     },
+    add_location_modifier: {
+        event_priotity: 0,
+        async onGainLocation(this: EventRunner, eventSource : any, trackVal : WarbandProperty, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) {
+            const ExplorationLocModule = await import("../../factories/features/ExplorationFactory")
+            let IsMe = false
+            if (trackVal.SelfDynamicProperty.OptionChoice.ID == context_static.GetID()) {
+                IsMe = true
+            }
+            if (!IsMe) {
+                for (let i = 0; i < trackVal.SelfDynamicProperty.Selections.length; i++) {
+                    const CurSel = trackVal.SelfDynamicProperty.Selections[i]
+                    if (CurSel.SelectedChoice != null) {
+                        if (CurSel.SelectedChoice.value.ID == context_static.GetID()) {
+                            IsMe = true;
+                        }
+                        
+                    }
+                }
+            }
+            if (IsMe) {
+                if (context_func["id"]) {
+                    for (let i = 0; i < context_func["id"].length; i++) {
+                        const Loc = await ExplorationLocModule.ExplorationFactory.CreateNewExplorationLocation(context_func["id"][i], warband , true)
+                        await warband.AddExplorationMod(Loc, [])
+                    }
+                }
+            }
+        }
+    },
     gain_all_from_list: {
         event_priotity: 0,
         async onGainLocation(this: EventRunner, eventSource : any, trackVal : WarbandProperty, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) {

@@ -144,7 +144,7 @@ class WarbandFactory {
     static async CreateUserWarband(data: IUserWarband, postID : number) {
         const WbUpdate = WarbandUpdater.getInstance();
         let DataCheck = data;
-        if ((WbUpdate.CheckUpdate(data))) {
+        if ((WbUpdate.CheckUpdate(data)) == false) {
             DataCheck = await WbUpdate.RunUpdate(data);
         }
         const rule = new UserWarband(DataCheck, postID);
