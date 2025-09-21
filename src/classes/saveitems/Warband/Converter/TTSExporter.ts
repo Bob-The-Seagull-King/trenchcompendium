@@ -7,6 +7,11 @@ import { EventRunner } from "../../../contextevent/contexteventhandler";
 import { WarbandProperty } from "../WarbandProperty";
 import { Keyword } from "../../../feature/glossary/Keyword";
 import { Equipment } from '../../../feature/equipment/Equipment'
+import { PrintOutDesc } from "../../../AdvancedDescription";
+import { Ability } from "../../../feature/ability/Ability";
+import { Upgrade } from "../../../feature/ability/Upgrade";
+import { Skill } from "../../../feature/ability/Skill";
+import { Injury } from "../../../feature/ability/Injury";
 
 export async function ConvertToTTSExport(wb_val : SumWarband) : Promise<TTSExport> {
     const Wb : UserWarband = wb_val.warband_data;
@@ -284,7 +289,7 @@ export async function ConvertModelToTTSText(wb_model : RealWarbandPurchaseModel,
 
     /** Main fighter info */
     ex.push(TTSBold(i_name+i_name+' ' + M_Model.GetFighterName() + ' '+i_name+i_name)); // name
-    ex.push('('+M_Model.GetModelName() + ')' ?? "Unknown" ); // type
+    ex.push((M_Model.GetModelName() != undefined)? '('+ M_Model.GetModelName() + ')' : "Unknown" ); // type
 
     ex.push(stats_strings.join(' | ')); // Fighter stats
 
@@ -366,17 +371,18 @@ export async function ConvertModelToTTSText(wb_model : RealWarbandPurchaseModel,
         let short_desc_string = '';
         if( type === 'medium' ) {
             if (abilityObject && abilityObject.Modifiers.length > 0) {
-                short_desc_string += abilityObject.Modifiers.join(', '); // @TODO: check if the modifiers can be used like this
+                short_desc_string += abilityObject.Modifiers.join(', ');
             }
         }
 
         // Long description
         let long_desc_string = '';
         if( type === 'full' ) {
+            if (abilityObject && abilityObject.Modifiers.length > 0) {
+                short_desc_string += abilityObject.Modifiers.join(', ');
+            }
             if (abilityObject && abilityObject.Description.length > 0) {
-                for (const desc of abilityObject.Description) {
-                    long_desc_string += desc.Content + `\n`; // @TODO: check if the description can be used like this
-                }
+                long_desc_string += PrintOutDesc(abilityObject.Description)
             }
         }
 
@@ -408,49 +414,63 @@ export async function ConvertModelToTTSText(wb_model : RealWarbandPurchaseModel,
     ex.push(''); // separator
 
     /** Fighter Abilities */
-    for (const ability of M_Model.SubProperties) { // @TODO: is this the right one?
-        const ab_name = i_ability+' ' + ability.SelfDynamicProperty.OptionChoice.GetTrueName();
+    for (const ability of M_Model.SubProperties) {
+
+        let ab_name = i_ability+' ' + ability.SelfDynamicProperty.OptionChoice.GetTrueName();
+
+        const selections = (ability).SelfDynamicProperty.Selections
+        for (let i = 0; i < selections.length; i++) {
+            if (selections[i].SelectedChoice != null) {
+                ab_name += ' (' + selections[i].SelectedChoice?.display_str + ')'
+            }
+        }
 
         ex.push(TTSBold(TTScAbility(ab_name)));
 
-        if( type == 'medium' ) {
-            // @TODO: add short text description here like ("+1D in Melee")
-            // ex.push('lorem ability short');
-        }
+
         if( type == 'full' ) {
-            // @TODO: add ability text description here
-            ex.push('lorem ipsum dolor sit amet');
+            let long_desc_string = '';
+            if ((ability.SelfDynamicProperty.OptionChoice as Ability).Description.length > 0) {
+                long_desc_string += PrintOutDesc((ability.SelfDynamicProperty.OptionChoice as Ability).Description)
+            }
+            if(long_desc_string != '' ) {
+                ex.push(long_desc_string);
+            }
 
         }
     }
 
 
     /** Fighter Upgrades */
-    for (const upgrade of M_Model.Upgrades) { // @TODO: is this the right one?
+    for (const upgrade of M_Model.Upgrades) {
         let up_name = i_up+' ';
 
         up_name += (upgrade.HeldObject as WarbandProperty).SelfDynamicProperty.OptionChoice.GetTrueName();
 
-        up_name += ''; // @TODO: add selection here (like heretic trooper upgrade)
+        const selections = (upgrade.HeldObject as WarbandProperty).SelfDynamicProperty.Selections
+        for (let i = 0; i < selections.length; i++) {
+            if (selections[i].SelectedChoice != null) {
+                up_name += ' (' + selections[i].SelectedChoice?.display_str + ')'
+            }
+        }
 
         ex.push(TTSBold(TTScUpgrade(up_name)));
 
-        if( type == 'medium' ) {
-            // @TODO: add short upgrade text description here like ("+1D in Melee")
-            // ex.push('lorem choice short');
-        }
         if( type == 'full' ) {
-            // @TODO: add full upgrade text description here
-            ex.push('lorem ipsum dolor sit amet');
+            let long_desc_string = '';
+            if (((upgrade.HeldObject  as WarbandProperty).SelfDynamicProperty.OptionChoice as Upgrade).Description.length > 0) {
+                long_desc_string += PrintOutDesc(((upgrade.HeldObject  as WarbandProperty).SelfDynamicProperty.OptionChoice as Upgrade).Description)
+            }
+            if(long_desc_string != '' ) {
+                ex.push(long_desc_string);
+            }
         }
     }
-    /** Fighter Goetics */
-    // @TODO: currently goetics are part of the upgrades
 
     ex.push(''); // separator
 
     /** Fighter Skills */
-    for (const skill of M_Model.Skills) { // @TODO: is this the right one?
+    for (const skill of M_Model.Skills) {
         console.log('skill:');
         console.log(skill);
 
@@ -458,32 +478,32 @@ export async function ConvertModelToTTSText(wb_model : RealWarbandPurchaseModel,
 
         ex.push(TTSBold(TTScSkill(sk_name)));
 
-        if( type == 'medium' ) {
-            // @TODO: add short text description here like ("+1D in Melee")
-            // ex.push('lorem short desc');
-        }
 
         if( type == 'full' ) {
-            // @TODO: add full text description here
-            ex.push('lorem ipsum dolor sit amet');
+            let long_desc_string = '';
+            if (((skill).SelfDynamicProperty.OptionChoice as Skill).Description.length > 0) {
+                long_desc_string += PrintOutDesc(((skill).SelfDynamicProperty.OptionChoice as Skill).Description)
+            }
+            if(long_desc_string != '' ) {
+                ex.push(long_desc_string);
+            }
         }
     }
 
     /** Fighter Injuries */
-    for (const injury of M_Model.Injuries) { // @TODO: is this the right one?
+    for (const injury of M_Model.Injuries) {
         const in_name = i_injury+' ' + injury.SelfDynamicProperty.OptionChoice.GetTrueName();
 
         ex.push(TTSBold(TTScInjury(in_name)));
 
-        if( type == 'medium' ) {
-            // @TODO: add short text description here like ("-1D in Melee")
-            // ex.push('lorem short desc');
-        }
-
         if( type == 'full' ) {
-            // @TODO: add injury text description here
-            ex.push('lorem ipsum dolor sit amet');
-
+            let long_desc_string = '';
+            if (((injury).SelfDynamicProperty.OptionChoice as Injury).Description.length > 0) {
+                long_desc_string += PrintOutDesc(((injury).SelfDynamicProperty.OptionChoice as Injury).Description)
+            }
+            if(long_desc_string != '' ) {
+                ex.push(long_desc_string);
+            }
         }
     }
 

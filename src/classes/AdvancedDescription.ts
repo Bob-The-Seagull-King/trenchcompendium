@@ -12,6 +12,18 @@ interface IAdvancedDescription extends IDescriptionItemData {
     glossary?: [] // The glossary of a given description item
 }
 
+export function PrintOutDesc(description: AdvancedDescription[]) {
+    let string_return = ''
+    
+    for (const desc of description) {       
+        string_return += desc.Content + `\n`;
+        if (desc.SubContent != undefined) {
+            string_return += PrintOutDesc(desc.SubContent);
+        }
+    }
+    return string_return
+}
+
 class AdvancedDescription extends DescriptionItem {
     public readonly Glossary;
     public SubData;
