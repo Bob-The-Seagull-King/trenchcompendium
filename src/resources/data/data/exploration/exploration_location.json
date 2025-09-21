@@ -2732,7 +2732,7 @@
     },
     {
         "id": "el_golgothatektites_apply",
-        "name": "Apply",
+        "name": "Apply Golgotha Tektites",
         "source": "core",
         "tags": {
             "location_option": "el_golgothatektites"

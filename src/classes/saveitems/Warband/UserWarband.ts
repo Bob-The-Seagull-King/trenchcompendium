@@ -1149,6 +1149,9 @@ class UserWarband extends DynamicContextObject {
     public async AddExplorationLocation ( location: ExplorationLocation, option: ISelectedOption[]) {
         await this.Exploration.AddExplorationLocation(location, option);
     }
+    public async AddExplorationMod ( location: ExplorationLocation, option: ISelectedOption[]) {
+        await this.Exploration.AddExplorationMod(location, option);
+    }
 
 
     /**

@@ -82,6 +82,9 @@ class WarbandFactory {
         const rule = new WarbandExplorationSet(data, parent)
         await rule.BuildSkills(data.explorationskills);
         await rule.BuildLocations(data.locations);
+        if (data.location_mods) {
+            await rule.BuildLocationMods(data.location_mods);
+        }
         return rule;
     }
 
