@@ -65,26 +65,27 @@ class WarbandUpdater {
         wb.tags[UPDATETAGNAME] = 1;
 
         const locations = wb.exploration.locations;
+
+        // Update a warband's Locations to include new modifiers
         for (let i = 0; i < locations.length; i++) {
+            
+            // Black Network Contact
             if (locations[i].object_id == "el_blacknetworkcontact") {
+                if (wb.exploration.location_mods) { wb.exploration.location_mods.push( { object_id: "el_blacknetworkcontact_mod", selections: [], consumables : [] } )
+                } else { wb.exploration.location_mods =[ { object_id: "el_blacknetworkcontact_mod", selections: [], consumables : [] } ] }
+            }
+
+            // Trench Merchant - Trade Selection
+            if (locations[i].object_id == "el_trenchmerchant_trade") {
                 if (wb.exploration.location_mods) {
-                    wb.exploration.location_mods.push(
-                        {
-                            object_id: "el_blacknetworkcontact_mod",
-                            selections: [],
-                            consumables : []
-                        }
-                    )
-                } else {
-                    wb.exploration.location_mods =[
-                        {
-                            object_id: "el_blacknetworkcontact_mod",
-                            selections: [],
-                            consumables : []
-                        }
-                    ]
-                }
-                
+                    wb.exploration.location_mods.push( { object_id: "el_trenchmerchant_trade_mod", selections: [], consumables : [] } )
+                } else { wb.exploration.location_mods =[ { object_id: "el_trenchmerchant_trade_mod", selections: [], consumables : [] } ] }
+            }
+            
+            // Black Market
+            if (locations[i].object_id == "el_blackmarket") {
+                if (wb.exploration.location_mods) { wb.exploration.location_mods.push( { object_id: "el_blackmarket_mod", selections: [], consumables : [] } )
+                } else { wb.exploration.location_mods =[ { object_id: "el_blackmarket_mod", selections: [], consumables : [] } ] }
             }
         }
 

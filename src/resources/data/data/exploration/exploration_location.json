@@ -905,8 +905,8 @@
             "location_option": "el_trenchmerchant"
         },
         "contextdata": {
-            "set_exploration_purchase_cap": {
-                "cost": 5
+            "add_location_modifier": {
+                "id": ["el_trenchmerchant_trade_mod"]
             }
         },
         "description": [            
@@ -916,6 +916,26 @@
             }
         ],
         "options": []
+    },
+    {
+        "id": "el_trenchmerchant_trade_mod",
+        "name": "Black Network Contact",
+        "source": "core",
+        "tags": {
+            "modifier": true
+        },
+        "contextdata": {
+            "set_exploration_purchase_cap": {
+                "cost": 5
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You may purchase Glory Items that cost 5 Glory or less that are allowed to your Warband during the Trade step."
+            }
+        ],
+        "options": [  ]
     },
     {
         "id": "el_mapanddocumentbag",
@@ -1551,8 +1571,8 @@
         },
         "contextdata": {
             "location_rule_option": {},
-            "set_exploration_purchase_cap": {
-                "cost": 8
+            "add_location_modifier": {
+                "id": ["el_blackmarket_mod"]
             }
         },
         "description": [            
@@ -1562,6 +1582,26 @@
             }
         ],
         "location_value": 15,
+        "options": [  ]
+    },
+    {
+        "id": "el_blackmarket_mod",
+        "name": "Black Network Contact",
+        "source": "core",
+        "tags": {
+            "modifier": true
+        },
+        "contextdata": {
+            "set_exploration_purchase_cap": {
+                "cost": 8
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You may purchase Glory Items that cost 8 Glory or less that are allowed to your Warband during the Trade step."
+            }
+        ],
         "options": [  ]
     },
     {
