@@ -74,14 +74,16 @@ var klaroConfig = {
             onAccept: `
                 gtag('consent', 'update', {
                   ad_user_data: 'granted',
-                  ad_personalization: 'granted'
+                  ad_personalization: 'granted',
+                  ad_storage: 'granted'
                 });
                 gtag('set', 'ads_data_redaction', false);
             `,
             onDecline: `
                 gtag('consent', 'update', {
                   ad_user_data: 'denied',
-                  ad_personalization: 'denied'
+                  ad_personalization: 'denied',
+                  ad_storage: 'denied'
                 });
                 gtag('set', 'ads_data_redaction', true);
             `,
