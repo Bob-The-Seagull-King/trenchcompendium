@@ -43,12 +43,23 @@ var klaroConfig = {
             `,
             onAccept: `
                 if (!window.gtmScriptLoaded) {
-                    var s = document.createElement('script');
-                    s.async = true;
-                    s.src = "https://www.googletagmanager.com/gtm.js?id=GTM-NFVT7W7X";
-                    document.head.appendChild(s);
+                    // ensure dataLayer exists
+                    window.dataLayer = window.dataLayer || [];
+                    // push the bootstrap event (what the official snippet does before loading the script)
+                    window.dataLayer.push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
+            
+                    // inject the GTM script right before the first <script> tag (same as the official snippet)
+                    var f = document.getElementsByTagName('script')[0];
+                    var j = document.createElement('script');
+                    j.async = true;
+                    j.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-NFVT7W7X';
+                    f.parentNode.insertBefore(j, f);
+            
                     window.gtmScriptLoaded = true;
                 }
+            
+                // optional: custom event to hook other tags if needed
+                window.dataLayer.push({event: 'klaro-gtm-accepted'});
             `
         },
         {
