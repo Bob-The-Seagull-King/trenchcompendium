@@ -33,13 +33,6 @@ var klaroConfig = {
             onInit: `
                 window.dataLayer = window.dataLayer || [];
                 window.gtag = function(){ dataLayer.push(arguments); };
-                gtag('consent', 'default', {
-                  ad_storage: 'granted',
-                  analytics_storage: 'denied',
-                  ad_user_data: 'denied',
-                  ad_personalization: 'denied'
-                });
-                gtag('set', 'ads_data_redaction', true);
             `,
             onAccept: `
                 if (!window.gtmScriptLoaded) {
