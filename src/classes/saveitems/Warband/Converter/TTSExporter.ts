@@ -214,24 +214,24 @@ function TTSBold ( text : string ) {
  * @param text
  */
 function TTScMove ( text : string) {
-    const color = '#4b6584';
-    return '[4b6584]' + text + '[-]';
+    const color = '#89E1E3';
+    return '[89E1E3]' + text + '[-]';
 }
 function TTScRanged ( text : string) {
-    const color = '#8854d0';
-    return '[8854d0]' + text + '[-]';
+    const color = '#C966E5';
+    return '[C966E5]' + text + '[-]';
 }
 function TTScMelee ( text : string) {
     const color = '#fa8231';
     return '[fa8231]' + text + '[-]';
 }
 function TTScArmour ( text : string) {
-    const color = '#d1d8e0';
-    return '[d1d8e0]' + text + '[-]';
+    const color = '#b2b7be';
+    return '[b2b7be]' + text + '[-]';
 }
 function TTScUpgrade ( text : string) {
-    const color = '#3867d6';
-    return '[3867d6]' + text + '[-]';
+    const color = '#618DF4';
+    return '[618DF4]' + text + '[-]';
 }
 function TTScAbility ( text : string) {
     const color = '#0fb9b1';
@@ -347,16 +347,16 @@ export async function ConvertModelToTTSText(wb_model : RealWarbandPurchaseModel,
 
         eq_name = TTSBold(eq_name);
 
+        ex.push(eq_name);
 
         // Equipment range - for ranged and melee only
+        let range_string = '';
         if( type === 'medium' || type === 'full') {
             if( eq.equipment.GetEquipmentItem().Category == 'ranged'
                 || eq.equipment.GetEquipmentItem().Category == 'melee') {
-                eq_name += ' - ' + eq.equipment.GetEquipmentItem().GetRange();
+                range_string += eq.equipment.GetEquipmentItem().GetRange()
             }
         }
-
-        ex.push(eq_name);
 
         // Equipment Keywords
         let kw_string = '';
@@ -388,7 +388,7 @@ export async function ConvertModelToTTSText(wb_model : RealWarbandPurchaseModel,
 
         // output details for medium
         if (type === "medium") {
-            const parts = [kw_string, short_desc_string].filter(p => p && p.trim().length > 0);
+            const parts = [range_string, kw_string, short_desc_string].filter(p => p && p.trim().length > 0);
             if (parts.length > 0) {
                 ex.push(parts.join(" | "));
             }

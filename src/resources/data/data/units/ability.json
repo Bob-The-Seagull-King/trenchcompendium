@@ -2163,7 +2163,7 @@
         "description": [            
             {
                 "tags": {"desc_type" : "default"},
-                "content": "For each friendly BLACK GRAIL model within 3” of the Thrall, it gains +1 DICE to its Melee attack rolls, up to maximum +4 DICE.",
+                "content": "For each friendly BLACK GRAIL model within 3” of the model, it gains +1 DICE to its Melee attack rolls, up to maximum +4 DICE.",
                 "glossary": [
                     {"val": "BLACK GRAIL", "id": "kw_blackgrail"},
                     {"val": "+1 DICE", "id": "kw_plusdice"},
@@ -2812,6 +2812,181 @@
                         "content": "gd_battlefieldvivisection"
                     }
                 ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_ravenousinfection",
+        "name": "Revenous Infection",
+        "source": "creature_caster",
+        "tags": {"trait": true},
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"}, 
+                "content": "Some infected with The Great Hunger care only to proliferate their agonizing disease. A model with the Ravenous Infection ability may make a RISKY ACTION to spread the virus. On a success, the model may place an INFECTION MARKER on themselves or any other model within 1”, as the Great Hunger virus burns through the battlefield.",
+                "glossary": [
+                    {"val": "RISKY ACTION", "id": "kw_riskyaction"},
+                    {"val": "INFECTION MARKER", "id": "kw_infectionmarker"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_pestilent",
+        "name": "Pestilent",
+        "source": "creature_caster",
+        "tags": {"trait": true},
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"}, 
+                "content": "Melee Attacks made by the Matagot Hag inflict INFECTION MARKERS instead of BLOOD MARKERS. When a Matagot Hag inflicts an INFECTION MARKER from a Melee Attack, inflict an additional INFECTION MARKER on the target.",
+                "glossary": [
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"},
+                    {"val": "INFECTION MARKER", "id": "kw_infectionmarker"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_frenziedfollowers",
+        "name": "Frenzied Followers",
+        "source": "creature_caster",
+        "tags": {"trait": true},
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"}, 
+                "content": "All THRALLS within 12” of the MATAGOT HAG gain +1 DICE when attempting to dash. It requires all of the hag’s concentration to reign in the hungry fruit of her loins.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_cadreofflesh",
+        "name": "Cadre of Flesh",
+        "source": "creature_caster",
+        "tags": {"trait": true},
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"}, 
+                "content": "When a MATAGOT HAG is forced to roll on the Injury Table, any THRALL within 4” of her may have the result resolved against them instead. This includes any other effects being wounded may cause (such as FIRE, INFECTION, SHRAPNEL, etc)",
+                "glossary": [
+                    {"val": "FIRE", "id": "kw_fire"},
+                    {"val": "INFECTION", "id": "kw_infectionmarker"},
+                    {"val": "SHRAPNEL", "id": "kw_shrapnel"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_arcanaputrescere",
+        "name": "Arcana Putrescere",
+        "source": "creature_caster",
+        "tags": {"trait": true},
+        "contextdata": {                   
+            "special_category_upgrades": {
+                "upgrades": [
+                    {
+                        "category": "arcana_putrescere",
+                        "count": 3
+                    }
+                ]
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "A Matagot Hag may purchase up to three ARCANA PUTRESCERE Powers or Spells.",
+                "glossary": [
+                    {"val": "ARCANA PUTRESCERE", "id": "kw_putrescere"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_arcanaputrescere_one",
+        "name": "Arcana Putrescere",
+        "source": "creature_caster",
+        "tags": {"trait": true},
+        "contextdata": {                   
+            "special_category_upgrades": {
+                "upgrades": [
+                    {
+                        "category": "arcana_putrescere",
+                        "count": 1
+                    }
+                ]
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The model may purchase up to one ARCANA PUTRESCERE Power or Spell.",
+                "glossary": [
+                    {"val": "ARCANA PUTRESCERE", "id": "kw_putrescere"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_plagueriddenflesh",
+        "name": "Plague-Ridden Flesh",
+        "source": "creature_caster",
+        "tags": {"trait": true},
+        "contextdata": {      },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "All injury rolls against a Gregori Gula are made with -2 DICE, unless the attack has the Keyword FIRE, in which case works normally. The model does not suffer additional BLOOD MARKERS from attacks with Keyword GAS.",
+                "glossary": [
+                    {"val": "-2 DICE", "id": "kw_minusdice"},
+                    {"val": "FIRE", "id": "kw_fire"},
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"},
+                    {"val": "GAS", "id": "kw_gas"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_rend",
+        "name": "Rend",
+        "source": "creature_caster",
+        "tags": {"trait": true},
+        "contextdata": {      },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "A Gregori Gula that scores two hits against a target may attempt to pull and bite them apart. A third attack may be attempted, and if this attack is successful, it is rolled with +1 DICE on the Injury Chart.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_dormanthunger",
+        "name": "Dormant Hunger",
+        "source": "creature_caster",
+        "tags": {"trait": true},
+        "contextdata": {      },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The first time a Gregori Gula would be taken Out of Action in a round, it instead goes DORMANT. Remove all markers from the Gregori Gula and replace its model with a suitable 60mm Token to represent its dormant state, counting as dangerous terrain. If, at any point a friendly thrall is within 1” of the Token, you may remove the thrall and replace the Token with the Gregori Gula. The Gregori Gula may activate if it has not done so already this round. A Gregori Gula in a DORMANT state does not contest objectives, nor can it take actions or be activated. It counts as though it has been removed from play for Morale purposes. In campaign play, a Gregor Gula in a DORMANT state at the end of the game is considered Out of Action."
             }
         ],
         "options": []

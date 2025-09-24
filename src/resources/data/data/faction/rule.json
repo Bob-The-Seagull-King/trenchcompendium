@@ -3251,5 +3251,218 @@
             }
         ],
         "options": []
+    },
+    {
+        "id": "rl_butcherknights",
+        "source": "creature_caster",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Butcher Knights",
+        "description":  [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Plague Knights of the warband are called Butcher Knights. They have the Ravenous Infection rule and are mounted on 32mm or 40mm bases. They may be equipped with their own twisted Knightly Rank of Butchery, which grants them +1 MELEE for an additional +5 ducats."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_cradleoffilth",
+        "source": "creature_caster",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Cradle of Filth",
+        "description":  [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "In campaign play, after deployment, if you have thralls in reserve, you may deploy up to six (6) of those thralls onto the battlefield. These Thralls do not count against your Maximum Field Strength. These models must be counted for purposes of Morale. In addition to this, in campaign play, you may alternatively recruit Thralls to your Warband for 1 Glory (to a maximum of 6 Thralls) each instead of their ducat cost (the cost of further upgrades remain unchanged)."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_dessicatedhusks",
+        "source": "creature_caster",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Desiccated Husks",
+        "description":  [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The warband may only include a maximum of two Corpse Guard known as Dessicated Husks."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_greathunger_equipmentrestrictions",
+        "source": "creature_caster",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Equipment Restrictions",
+        "description":  [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The Great Hunger often forgoes weapons in order to rend and bite the foe with bare hands and teeth. They cannot be trusted with treasured relics that are Beelzebub’s pride. In addition to this, The Great Hunger functions more like a ravenous horde than a disciplined force, and they prioritize close range combat over long ranged weapons. They do not have access to the following:"
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [
+                    {
+                        "tags": {"desc_type" : "list"},
+                        "content": "",
+                        "subcontent": [
+                            
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Beelzebub’s Axe"
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Black Grail Shields"
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Troop Standards"
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Musical Instruments"
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Compound Eyes Helmets"
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Any Ranged Weapons except for Shotguns, and Putrid Shotguns."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_greathunger_grailthrallsandflythralls",
+        "source": "creature_caster",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Grail Thralls & Fly Thralls",
+        "description":  [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Thralls have the Ravenous Infection rule and are mounted on 25mm or 32mm bases."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_prowlers",
+        "source": "creature_caster",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Prowlers",
+        "description":  [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Hounds of the Black Grail of the warband are called Prowlers and may be equipped with a Grasping Maw."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_spawnofgluttony",
+        "source": "creature_caster",
+        "tags": { },
+        "contextdata": {   
+        },
+        "name": "Spawn of Gluttony",
+        "description":  [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "A Great Hunger Warband must inclde either One (1) Matagot Hag or One (1) Lord of Tumours. It may not include both in a warband. It may include 0-2 Plague Knights (known as Butcher Knights).",
+                "glossary": []
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_wastenoflesh",
+        "source": "creature_caster",
+        "tags": { },
+        "contextdata": {   
+        },
+        "name": "Waste No Flesh",
+        "description":  [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This warband may not take an Amalgam or Heralds of Beelzebub, as all flesh left on the battleground is consumed before it can manifest as these creatures.",
+                "glossary": []
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_arcanaputrescere",
+        "source": "creature_caster",
+        "tags": {
+         },
+        "contextdata": {
+            "faction_add_upgrades": {
+                "list": [{
+                "model_key": "rl_arcanaputrescere",
+                "models_id": ["md_lordoftumors"]}]
+            },
+            "true_add_to_model": {  
+                "list": [
+                    {
+                        "id": "ab_arcanaputrescere_one",                            
+                        "required": [
+                            {
+                                "category": "id",
+                                "value": ["md_lordoftumors"]
+                            }
+                        ] 
+                    }
+                ]
+            }},
+        "name": "Arcana Putrescere",
+        "description":  [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Many of the creatures within the Great Hunger have access to the Arcana Putrescere – Powers and Spells which are fueled by the very existence of the Black Grail Virus. Beelzebub’s hatred of all things living manifests itself in weird and horrible ways, and the half-dead hordes have been taught of its use. Speaking the words of power in Corrupt Enochian, they invoke the unholy powers of Ekron and warp reality to their will. As these powers require Beelzebub’s infernal essence to work, the leaders of the warband need to send their followers forth to spread the putrid disease."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Arcana Putrescere spells are marked with the Keyword PUTRESCERE (X) where the number in brackets indicates how many INFECTION MARKERS will have to be spent to trigger the effect of the Arcana. If multiple numbers or a range of numbers are listed in the brackets, any one of those numbers can be chosen.",
+                "glossary": [
+                    {"val": "INFECTION MARKERS", "id": "kw_infectionmarker"},
+                    {"val": "PUTRESCERE (X)", "id": "kw_putrescere"}
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Not all of Beelzebub’s favoured are blessed with the arcana, but those who carry rank are often proficient in its use. A MATAGOT HAG may take 0-3 Arcana, a LORD OF TUMOURS may take 0-1 Arcana, and GREGORI GULAS may take 0-1 Arcana."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "These INFECTION MARKERS can be taken from any model currently taking part in the battle, be they friendly or enemy models. INFECTION MARKERS used this way are removed from the game and the described effect of the Arcana Putrescere then takes effect as described – no ACTION roll is needed, unless outlined in the Arcana. Despite not requiring an ACTION roll, Arcana being cast through the Arcana Putrescere are ACTIONS and, as with other ACTIONS, spells can only be used by the model once per Activation. Some Arcana Putrescere Powers are not marked with the Keyword PUTRESCRE (X). These powers are typically passive abilities.",
+                "glossary": [
+                    {"val": "ACTIONS", "id": "kw_action"},
+                    {"val": "INFECTION MARKERS", "id": "kw_infectionmarker"},
+                    {"val": "PUTRESCERE (X)", "id": "kw_putrescere"}
+                ]
+            }
+        ],
+        "options": []
     }
 ]

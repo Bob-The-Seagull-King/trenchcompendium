@@ -3169,5 +3169,151 @@
         },
         "keywords" : [],
         "abilities" : ["ab_prizespecimens","ab_battlefieldvivisection"]
+    },
+    {
+        "id": "md_matagothag",
+        "name": "Matagot Hag",
+        "source": "creature_caster",
+        "tags": {},
+        "contextdata": {            
+            "unarmed_penalty_remove": {},
+            
+            "model_equipment_restriction": {
+                "removed": [
+                    {
+                        "category": "melee",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "ranged",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "armour",
+                        "res_type": "all",
+                        "value": ""
+                    }
+                ],
+                "required": [
+                    {
+                        "category": "equipment",
+                        "res_type": "id",
+                        "value": "eq_graspingmaw"
+                    },
+                    {
+                        "category": "equipment",
+                        "res_type": "id",
+                        "value": "eq_devouringjaws"
+                    },
+                    {
+                        "category": "equipment",
+                        "res_type": "id",
+                        "value": "eq_blightedclaws"
+                    }
+                ]
+            }
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "A Matagot Hag is carried into battle by a writhing swarm of thralls who shield her with fanatical devotion. The Hag and the thrall swarm can never be separated and are treated as one model with a single profile. The Matagot Hag suffers no penalties to their combat ability for being unarmed. A Matagot hag cannot take any equipment except for a Devouring Jaws, Grasping Maw and Blighted Claws.",
+                "glossary": [
+                    {"val": "Black Grail", "id": "kw_blackgrail"}
+                ]
+            }
+        ],
+        "lore": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "The Matagot Hag is an undying vessel of The Great Hunger and the favoured child of Beelzebub, for in his heart he hates all things in Creation and the natural circle of life. This creature is a wretched husk of a once-human mother cursed to endlessly birth monstrosities. Her bloated and distended body is locked in an obscene cycle of constant regeneration and decay - her flesh splitting open in great, festering ruptures only to stitch itself back together, swollen with the next abomination writhing in her womb. Her skin, stretched thin and sickly pale, is mottled with blackened veins and pulsing sores, her eyes long rotted away, leaving only hollow sockets weeping thick, infectious ichor. The Grail Thralls she births carry her aloft, treating her as a living effigy of gluttony and suffering. Though mindless hunger drives her, the Hag is not without purpose - her whispered, guttural croons are hymns of devotion to Beelzebub, calling forth ever more horrors to devour the world."
+                    }
+                ]
+            }
+        ],
+        "team": "hell",
+        "stats" : {            
+            "movement": 6,
+            "melee": 1,
+            "ranged": 1,
+            "armour": 0,
+            "movetype": 0,
+            "potential": 0,
+            "base": [60]
+        },
+        "keywords" : ["kw_blackgrail","kw_elite","kw_leader","kw_tough","kw_fear"],
+        "abilities" : ["ab_undeadfortitude","ab_overwhelminghorde","ab_pestilent","ab_frenziedfollowers","ab_cadreofflesh","ab_arcanaputrescere"]
+    },
+    {
+        "id": "md_gergorigula",
+        "name": "Gregori Gula",
+        "source": "creature_caster",
+        "tags": {},
+        "contextdata": {            
+            "unarmed_penalty_remove": {},
+            
+            "model_equipment_restriction": {
+                "removed": [
+                    {
+                        "category": "melee",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "ranged",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "armour",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "equipment",
+                        "res_type": "all",
+                        "value": ""
+                    }
+                ]
+            }
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "A Gregori Gula never carries any type of weapons, armour or equipment, as it has no need for them. A Gregori Gula can make two attacks at no penalty, and suffers no penalties to their combat ability for being unarmed.",
+                "glossary": [
+                    {"val": "Black Grail", "id": "kw_blackgrail"}
+                ]
+            }
+        ],
+        "lore": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "The Gregori Gula are rare, winged predators - gaunt, angelic abominations draped in rotting flesh and hiding a myriad of waiting mouths. Unlike the mindless thralls, they stalk prey with patience, each kill chosen with eerie precision. When struck down, they do not die, but collapse into a dormant cocoon of necrotic tissue, seeping toxins and viral remnants into the battlefield. If a thrall ventures too close, it is consumed, and the Gula rises again, unfurling its wings in a storm of infectious gas that cripples all nearby. The only solution is fire and absolute destruction, for so long as even a trace remains, the Gregori Gula will endure."
+                    }
+                ]
+            }
+        ],
+        "team": "hell",
+        "stats" : {            
+            "movement": 9,
+            "melee": 2,
+            "ranged": 0,
+            "armour": 0,
+            "movetype": 1,
+            "potential": 0,
+            "base": [60]
+        },
+        "keywords" : ["kw_blackgrail","kw_infiltrator","kw_fear"],
+        "abilities" : ["ab_arcanaputrescere_one","ab_plagueriddenflesh","ab_rend","ab_dormanthunger"]
     }
 ]
