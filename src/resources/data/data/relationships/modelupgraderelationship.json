@@ -843,13 +843,14 @@
         "name": "",
         "contextdata": {},
         "options": [],
-        "model_id_set": ["md_plagueknight","md_plagueknight_executor"],
+        "model_id_set": ["md_plagueknight","md_plagueknight_executor","md_plagueknight_butcherknight"],
         "upgrade_id": "up_plagueknightcompanionofthefly_base",
         "cost": 5,
         "cost_type": 0,
         "restricted_upgrades": [
             "up_plagueknightrottencross",
-            "up_plagueknightalmoner"
+            "up_plagueknightalmoner",
+            "rel_md_plagueknight_up_plagueknightrankofbutcher"
         ],
         "warband_limit": 1,
         "required_upgrades":[]
@@ -861,13 +862,14 @@
         "name": "",
         "contextdata": {},
         "options": [],
-        "model_id_set": ["md_plagueknight","md_plagueknight_executor"],
+        "model_id_set": ["md_plagueknight","md_plagueknight_executor","md_plagueknight_butcherknight"],
         "upgrade_id": "up_plagueknightrottencross",
         "cost": 5,
         "cost_type": 0,
         "restricted_upgrades": [
             "up_plagueknightcompanionofthefly_base",
-            "up_plagueknightalmoner"
+            "up_plagueknightalmoner",
+            "rel_md_plagueknight_up_plagueknightrankofbutcher"
         ],
         "warband_limit": 1,
         "required_upgrades":[]
@@ -879,13 +881,33 @@
         "name": "",
         "contextdata": {},
         "options": [],
-        "model_id_set": ["md_plagueknight","md_plagueknight_executor"],
+        "model_id_set": ["md_plagueknight","md_plagueknight_executor","md_plagueknight_butcherknight"],
         "upgrade_id": "up_plagueknightalmoner",
         "cost": 10,
         "cost_type": 0,
         "restricted_upgrades": [
             "up_plagueknightcompanionofthefly_base",
-            "up_plagueknightrottencross"
+            "up_plagueknightrottencross",
+            "rel_md_plagueknight_up_plagueknightrankofbutcher"
+        ],
+        "warband_limit": 1,
+        "required_upgrades":[]
+    },
+    {
+        "id": "rel_md_plagueknight_up_plagueknightrankofbutcher",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {},
+        "options": [],
+        "model_id_set": ["md_plagueknight_butcherknight"],
+        "upgrade_id": "up_plagueknightrankofbutcher",
+        "cost": 5,
+        "cost_type": 0,
+        "restricted_upgrades": [
+            "up_plagueknightcompanionofthefly_base",
+            "up_plagueknightrottencross",
+            "rel_md_plagueknight_up_plagueknightalmoner"
         ],
         "warband_limit": 1,
         "required_upgrades":[]
@@ -897,7 +919,7 @@
         "name": "",
         "contextdata": {},
         "options": [],
-        "model_id_set": ["md_houndsoftheblackgrail"],
+        "model_id_set": ["md_houndsoftheblackgrail","md_houndsoftheblackgrail_prowler"],
         "upgrade_id": "up_infectioushound",
         "cost": 5,
         "cost_type": 0,
@@ -1263,6 +1285,111 @@
         "cost_type": 0,
         "restricted_upgrades": [ ],
         "warband_limit": 1,
+        "required_upgrades":[]
+    },
+    {
+        "id": "rel_up_putrescere_hunger",
+        "source": "creature_caster",
+        "tags": {},
+        "name": "",
+        "contextdata": {},
+        "options": [],
+        "model_id_set": ["rl_arcanaputrescere","md_matagothag","md_gergorigula"],
+        "upgrade_id": "up_putrescere_hunger",
+        "cost": 20,
+        "cost_type": 0,
+        "restricted_upgrades": [],
+        "warband_limit": 3,
+        "required_upgrades":[]
+    },
+    {
+        "id": "rel_up_putrescere_miasmaofpestilence",
+        "source": "creature_caster",
+        "tags": {},
+        "name": "",
+        "contextdata": {},
+        "options": [],
+        "model_id_set": ["rl_arcanaputrescere","md_matagothag","md_gergorigula"],
+        "upgrade_id": "up_putrescere_miasmaofpestilence",
+        "cost": 20,
+        "cost_type": 0,
+        "restricted_upgrades": [],
+        "warband_limit": 1,
+        "required_upgrades":[]
+    },
+    {
+        "id": "rel_up_putrescere_motherscall",
+        "source": "creature_caster",
+        "tags": {},
+        "name": "",
+        "contextdata": {},
+        "options": [],
+        "model_id_set": ["md_matagothag"],
+        "upgrade_id": "up_putrescere_motherscall",
+        "cost": 10,
+        "cost_type": 0,
+        "restricted_upgrades": [],
+        "warband_limit": 0,
+        "required_upgrades":[]
+    },
+    {
+        "id": "rel_up_putrescere_rapturousfeast",
+        "source": "creature_caster",
+        "tags": {},
+        "name": "",
+        "contextdata": {},
+        "options": [],
+        "model_id_set": ["rl_arcanaputrescere","md_matagothag","md_gergorigula"],
+        "upgrade_id": "up_putrescere_rapturousfeast",
+        "cost": 15,
+        "cost_type": 0,
+        "restricted_upgrades": [],
+        "warband_limit": 1,
+        "required_upgrades":[]
+    },
+    {
+        "id": "rel_up_putrescere_virulentclot",
+        "source": "creature_caster",
+        "tags": {},
+        "name": "",
+        "contextdata": {},
+        "options": [],
+        "model_id_set": ["rl_arcanaputrescere","md_matagothag","md_gergorigula"],
+        "upgrade_id": "up_putrescere_virulentclot",
+        "cost": 25,
+        "cost_type": 0,
+        "restricted_upgrades": [],
+        "warband_limit": 2,
+        "required_upgrades":[]
+    },
+    {
+        "id": "rel_up_putrescere_vomitus",
+        "source": "creature_caster",
+        "tags": {},
+        "name": "",
+        "contextdata": {},
+        "options": [],
+        "model_id_set": ["rl_arcanaputrescere","md_matagothag","md_gergorigula"],
+        "upgrade_id": "up_putrescere_vomitus",
+        "cost": 15,
+        "cost_type": 0,
+        "restricted_upgrades": [],
+        "warband_limit": 2,
+        "required_upgrades":[]
+    },
+    {
+        "id": "rel_up_putrescere_weepingbuboes",
+        "source": "creature_caster",
+        "tags": {},
+        "name": "",
+        "contextdata": {},
+        "options": [],
+        "model_id_set": ["rl_arcanaputrescere","md_matagothag","md_gergorigula"],
+        "upgrade_id": "up_putrescere_weepingbuboes",
+        "cost": 25,
+        "cost_type": 0,
+        "restricted_upgrades": [],
+        "warband_limit": 2,
         "required_upgrades":[]
     }
 ]

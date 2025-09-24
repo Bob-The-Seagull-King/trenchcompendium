@@ -6962,5 +6962,172 @@
         "options": [],
         "keywords": ["kw_cumbersome", "kw_block"],
         "modifiers": []
+    },
+    {
+        "id": "eq_graspingmaw",
+        "name": "Grasping Maw",
+        "source": "creature_caster",
+        "tags": {"trait": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {},
+        "description": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "As a RISKY ACTION, a model can drag an enemy model within 6\" directly towards them that is within Line of Sight. Roll 1d6 and that is how many inches that model moves directly towards the model that executes this action. If this ability is used on a target in melee combat, it will be extricated from the combat and will not be subject to Free Strikes. A target cannot be dragged through difficult terrain, and will stop immediately if they come in contact with difficult terrain or enemy model while being dragged.",
+                "glossary": [
+                    {"val": "RISKY ACTION", "id": "kw_riskyaction"}
+                ]
+            } 
+        ],
+        "lore": [],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_devouringjaws",
+        "name": "Devouring Jaws",
+        "source": "creature_caster",
+        "tags": {"trait": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {},
+        "description": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "This relic grants the wearer an additional attack ACTION in melee combat without penalty. Each time the model is activated, it also receives 1 BLOOD MARKER.",
+                "glossary": [
+                    {"val": "ACTION", "id": "kw_action"},
+                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"}
+                ]
+            } 
+        ],
+        "lore": [],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_blightedclaws",
+        "name": "Blighted Claws",
+        "source": "creature_caster",
+        "tags": {"trait": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {
+            "upgrade_stat": {"upgrades": [{"stat": "melee", "value": 1}]}},
+        "description": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Add +1 DICE and the CRITICAL Keyword to Melee Attacks made by this model.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "CRITICAL", "id": "kw_critical"}
+                ]
+            } 
+        ],
+        "lore": [],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_blackspotrifle",
+        "name": "Black Spot Rifle",
+        "source": "core",
+        "tags": {"action": true, "weapon": true, "rifle": true},
+        "category": "ranged",
+        "distance": 36,
+        "stats": {
+            "hands_ranged": 2,
+            "ranged": true
+        },
+        "contextdata": {
+            "get_weapon": {}},
+        "description": [ 
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "An enormous bolt action rifle this weapon inflicts INFECTION MARKERS instead of BLOOD MARKERS. If the Black Spot Rifle successfully hits an enemy,the closest Thrall model within 12” of the target of the attack may immediately attempt a Charge action against the enemy after resolving injury. This is done outside of the Thrall’s activation.",
+                "glossary": [
+                    {"val": "INFECTION MARKERS", "id": "kw_infectionmarker"},
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"}
+                ]
+            }  
+        ],
+        "lore": [     ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_butcherbayonet",
+        "name": "Butcher Bayonet",
+        "source": "core",
+        "tags": {"action": true, "weapon": true, "bayonet_lug": true},
+        "category": "melee",
+        "distance": null,
+        "stats": {
+            "hands_melee": 0,
+            "melee": true
+        },
+        "contextdata": {
+            "get_weapon": {},
+            "ignore_count": {}
+        },
+        "description": [   
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Any weapon that has a bayonet lug can be fitted with a Butcher Bayonet - which is essentially a heavy glaive-like attachment. Bayonets can only be attached to weapons fitted with a ‘Bayonet lug’ (indicated in each Warband’s Armoury). They do not count towards the maximum melee weapons a model can carry. The weapon adds +1 DICE to rolls on the injury table.",
+                "glossary": [
+                    {"val": "-1 DICE", "id": "kw_minusdice"},
+                    {"val": "+1 DICE", "id": "kw_plusdice"}
+                ]
+            }  
+        ],
+        "lore": [        ],
+        "options": [],
+        "keywords": ["kw_cumbersome","kw_shieldcombo"],
+        "modifiers": ["+1D to Injuries"]
+    },
+    {
+        "id": "eq_pestilentfang",
+        "name": "Pestilent Fang",
+        "source": "core",
+        "tags": {"action": true, "weapon": true},
+        "category": "melee",
+        "distance": null,
+        "stats": {
+            "hands_melee": 2,
+            "melee": true
+        },
+        "contextdata": {
+            "get_weapon": {}
+        },
+        "description": [ 
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "This weapon ignores armour on a critical hit, and always inflicts an INFECTION MARKER in addition to any BLOOD MARKERS it may cause",
+                "glossary": [
+                    {"val": "INFECTION MARKER", "id": "kw_infectionmarker"},
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"}
+                ]
+            }   
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Mauls, clubs, maces… these are large, cumbersome weapons, often made from sturdy wood with a metal tip of steel, lead or Iron of Tartarus. It takes great strength to fight with it for any length of time. They are especially suited for attacking armoured targets."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_heavy"],
+        "modifiers": ["+1 to Injuries"]
     }
 ]

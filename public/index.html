@@ -19,6 +19,21 @@
          <meta property="og:title" content="Trench Companion | Trench Companion" data-react-helmet="true">
          <meta property="og:type" content="website" data-react-helmet="true">
 
+        <!-- GTM Init -->
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            window.gtag = function(){ dataLayer.push(arguments); };
+
+            // Initial default consent — nur einmal global
+            gtag('consent', 'default', {
+                ad_storage: 'denied',
+                analytics_storage: 'denied',
+                ad_user_data: 'denied',
+                ad_personalization: 'denied'
+            });
+
+            gtag('set', 'ads_data_redaction', true);
+        </script>
 
         <!-- Klaro styles -->
         <link rel="stylesheet" href="%PUBLIC_URL%/klaro.css">
