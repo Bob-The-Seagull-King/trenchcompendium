@@ -36,6 +36,7 @@ export const TrackingManager: React.FC = () => {
         const sendPageView = () => {
             if (typeof window.gtag === 'function') {
                 window.gtag('event', 'page_view', {
+                    page_location: window.location.href,
                     page_path: location.pathname + location.search,
                     page_title: document.title
                 });
