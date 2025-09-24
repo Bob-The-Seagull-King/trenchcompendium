@@ -1220,5 +1220,217 @@
         "keywords" : [],
         "cut_abilities" : [],
         "new_abilities" : []
+    },
+    {
+        "id": "md_plagueknight_butcherknight",
+        "name": "Butcher Knight",
+        "source": "creature_caster",
+        "tags": {},
+        "contextdata": {             
+            "stat_options": { 
+                "options": [
+                    [
+                        {
+                            "base": [32]
+                        },
+                        {
+                            "base": [40]
+                        }
+                    ]
+                ]
+            },
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_plagueknight"
+                    }
+                ]
+            }},
+        "base_id": "md_plagueknight",
+        "variant_name": "The_Great_Hunger",
+        "team": "hell",
+        "stats" : {},
+        "cut_keywords" : [],
+        "keywords" : [],
+        "cut_abilities" : [],
+        "new_abilities" : ["ab_ravenousinfection"]
+    },
+    {
+        "id": "md_grailthrall_flythrall_hunger",
+        "name": "Fly Thrall",
+        "source": "creature_caster",
+        "tags": {},
+        "contextdata": {     
+            
+            "model_equipment_restriction": {
+                "removed": [
+                    {
+                        "category": "melee",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "ranged",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "armour",
+                        "res_type": "all",
+                        "value": ""
+                    }
+                ],
+                "required": [
+                    {
+                        "category": "equipment",
+                        "res_type": "id",
+                        "value": "eq_blightedclaws"
+                    }
+                ]
+            },          
+            "stat_options": { 
+                "options": [
+                    [
+                        {
+                            "base": [32]
+                        },
+                        {
+                            "base": [25]
+                        }
+                    ]
+                ]
+            },
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_grailthrall"
+                    }
+                ]
+            }},
+        "base_id": "md_grailthrall",
+        "variant_name": "The_Great_Hunger",
+        "team": "hell",
+        "cut_keywords" : [],
+        "keywords" : [],
+        "stats" : {
+            "movement": 6,
+            "movetype": 1
+        },
+        "cut_abilities" : ["ab_undeadfortitude"],
+        "new_abilities" : ["ab_ravenousinfection"]
+    },
+    {
+        "id": "md_grailthrall_hunger",
+        "name": "Grail Thrall",
+        "source": "creature_caster",
+        "tags": {},
+        "contextdata": {        
+            
+            "model_equipment_restriction": {
+                "removed": [
+                    {
+                        "category": "melee",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "ranged",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "armour",
+                        "res_type": "all",
+                        "value": ""
+                    }
+                ],
+                "required": [
+                    {
+                        "category": "equipment",
+                        "res_type": "id",
+                        "value": "eq_blightedclaws"
+                    }
+                ]
+            },   
+            "stat_options": { 
+                "options": [
+                    [
+                        {
+                            "base": [32]
+                        },
+                        {
+                            "base": [25]
+                        }
+                    ]
+                ]
+            },
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_grailthrall"
+                    }
+                ]
+            }},
+        "base_id": "md_grailthrall",
+        "variant_name": "The_Great_Hunger",
+        "team": "hell",
+        "cut_keywords" : [],
+        "keywords" : [],
+        "stats" : {},
+        "cut_abilities" : [],
+        "new_abilities" : ["ab_ravenousinfection"]
+    },
+    {
+        "id": "md_houndsoftheblackgrail_prowler",
+        "name": "Prowler",
+        "source": "creature_caster",
+        "tags": {},
+        "contextdata": {      
+            
+            "model_equipment_restriction": {
+                "removed": [
+                    {
+                        "category": "melee",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "ranged",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "armour",
+                        "res_type": "all",
+                        "value": ""
+                    }
+                ],
+                "required": [
+                    {
+                        "category": "equipment",
+                        "res_type": "id",
+                        "value": "eq_graspingmaw"
+                    }
+                ]
+            },
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_houndsoftheblackgrail"
+                    }
+                ]
+            }},
+        "base_id": "md_houndsoftheblackgrail",
+        "variant_name": "The_Great_Hunger",
+        "team": "hell",
+        "stats" : {},
+        "cut_keywords" : [],
+        "keywords" : [],
+        "cut_abilities" : [],
+        "new_abilities" : []
     }
 ]
