@@ -3211,6 +3211,11 @@
                         "category": "equipment",
                         "res_type": "id",
                         "value": "eq_blightedclaws"
+                    },
+                    {
+                        "category": "equipment",
+                        "res_type": "id",
+                        "value": "eq_graildevotee"
                     }
                 ]
             }
@@ -3218,7 +3223,7 @@
         "description": [
             {
                 "tags": {"desc_type" : "paragraph"},
-                "content": "A Matagot Hag is carried into battle by a writhing swarm of thralls who shield her with fanatical devotion. The Hag and the thrall swarm can never be separated and are treated as one model with a single profile. The Matagot Hag suffers no penalties to their combat ability for being unarmed. A Matagot hag cannot take any equipment except for a Devouring Jaws, Grasping Maw and Blighted Claws.",
+                "content": "A Matagot Hag is carried into battle by a writhing swarm of thralls who shield her with fanatical devotion. The Hag and the thrall swarm can never be separated and are treated as one model with a single profile. The Matagot Hag suffers no penalties to their combat ability for being unarmed.  A Matagot hag cannot take any equipment except for Devouring Jaws, Grasping Maw, Grail Devotees, and Blighted Claws.",
                 "glossary": [
                     {"val": "Black Grail", "id": "kw_blackgrail"}
                 ]
@@ -3273,11 +3278,13 @@
                         "category": "armour",
                         "res_type": "all",
                         "value": ""
-                    },
+                    }
+                ],
+                "required": [
                     {
                         "category": "equipment",
-                        "res_type": "all",
-                        "value": ""
+                        "res_type": "id",
+                        "value": "eq_graspingmaw"
                     }
                 ]
             }
@@ -3285,7 +3292,7 @@
         "description": [
             {
                 "tags": {"desc_type" : "paragraph"},
-                "content": "A Gregori Gula never carries any type of weapons, armour or equipment, as it has no need for them. A Gregori Gula can make two attacks at no penalty, and suffers no penalties to their combat ability for being unarmed.",
+                "content": "A Gregori Gula never carries any type of weapons, armour or equipment, as it has no need for them. A Gregori Gula can make two attacks at no penalty, and suffers no penalties to their combat ability for being unarmed. A Gregori Gula can be equipped with a Grasping Maw.",
                 "glossary": [
                     {"val": "Black Grail", "id": "kw_blackgrail"}
                 ]

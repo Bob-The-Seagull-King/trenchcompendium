@@ -1702,7 +1702,7 @@
         "model_id" : "md_matagothag",
         "captain" : true,
         "mercenary": false,
-        "cost" : 120,
+        "cost" : 135,
         "cost_type" : 0,
         "restricted_models" : [
         ],
